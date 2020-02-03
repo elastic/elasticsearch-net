@@ -232,10 +232,10 @@ namespace DocGenerator.AsciiDoc
 			string XmlFile(string project)
 			{
 				if (configuration == null)
-					return Path.Combine(Program.InputDirPath, project, "netstandard2.0", $"{project}.XML");
+					return Path.Combine(Program.InputDirPath, project, "netstandard2.0", $"{project}.xml");
 
 				return Path.Combine(Program.InputDirPath, project, "bin", configuration, "netstandard2.0",
-					$"{project}.XML");
+					$"{project}.xml");
 			}
 
 			var value = attributeEntry.Value;
@@ -272,6 +272,7 @@ namespace DocGenerator.AsciiDoc
 			// build xml documentation file on the fly if it doesn't exist
 			if (!File.Exists(xmlDocsFile))
 			{
+				Console.WriteLine($"Can not find {xmlDocsFile} attempting to build");
 				var project = _projects[assemblyName];
 
 				var compilation = project.GetCompilationAsync().Result;
@@ -288,7 +289,7 @@ namespace DocGenerator.AsciiDoc
 							diagnostic.Severity == DiagnosticSeverity.Error);
 
 						var builder = new StringBuilder($"Unable to emit compilation for: {assemblyName}");
-						foreach (var diagnostic in failures) builder.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");
+						foreach (var diagnostic in failures.Take(50)) builder.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");
 
 						builder.AppendLine(new string('-', 30));
 

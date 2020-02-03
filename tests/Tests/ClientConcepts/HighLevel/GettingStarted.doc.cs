@@ -105,7 +105,7 @@ namespace Tests.ClientConcepts.HighLevel
 				LastName = "Laarman"
 			};
 
-			var ndexResponse = client.IndexDocument(person); //<1> synchronous method that returns an `IndexResponse`
+			var indexResponse = client.IndexDocument(person); //<1> synchronous method that returns an `IndexResponse`
 
 			var asyncIndexResponse = await client.IndexDocumentAsync(person); //<2> asynchronous method that returns a `Task<IndexResponse>` that can be awaited
 		}
