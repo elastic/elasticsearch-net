@@ -34,6 +34,10 @@ Api Key to send with all requests to Elasticsearch
 
 Api Key to send with all requests to Elasticsearch
 
+`ApiKeyAuthentication`::
+
+Api Key to send with all requests to Elasticsearch
+
 `BasicAuthentication`::
 
 Basic Authentication credentials to send with all requests to Elasticsearch
