@@ -33,7 +33,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasti
     <tr>
     	<td><code>5.x</code></td>
     	<td><code>5.x</code></td>
-    	<td>:white_check_mark:</td>
+    	<td>:x:</td>
       <td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/5.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=5.x&svg=true"></a></td>
     	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/5.x/tests"><img alt="5.x unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/5.x.svg?style=flat-square"></a></td>
     </tr>
@@ -59,6 +59,8 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasti
     	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/master/tests"><img alt="master unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/master.svg?style=flat-square"></a></td>
     </tr>
 </table>
+
+Please refer to the [end-of-life policy](https://www.elastic.co/support/eol) for complete information.
 
 ### Further Compatibility Clarifications
 
