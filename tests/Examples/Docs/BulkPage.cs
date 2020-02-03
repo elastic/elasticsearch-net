@@ -42,7 +42,7 @@ namespace Examples.Docs
 			{ ""doc"" : {""field2"" : ""value2""} }");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line405()
 		{
 			// tag::8cd00a3aba7c3c158277bc032aac2830[]
@@ -76,15 +76,13 @@ namespace Examples.Docs
 				.Update<object>(u => u
 					.Index("index1")
 					.Id("3")
-					// TODO: missing
-					//.Source(true)
+					.Source(true)
 					.Doc(new { field = "value" })
 				)
 				.Update<object>(u => u
 					.Index("index1")
 					.Id("4")
-					// TODO: missing
-					//.Source(true)
+					.Source(true)
 					.Doc(new { field = "value" })
 				)
 			);
