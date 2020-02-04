@@ -552,7 +552,6 @@ namespace Elasticsearch.Net
 					var objectArray = ar
 						.Select(a => TryParse(defaultValue, t, a, out var o) ? o : null)
 						.Where(a => a != null)
-						//.Select(a => Convert.ChangeType(a, t))
 						.ToArray();
 
 					var arr = Array.CreateInstance(t, objectArray.Length);

@@ -28,7 +28,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 		public static string Response()
 		{
-			return $@"{{
+			return @"{{
 			""boolean"" : true,
 			""string"" : ""v"",
 			""number"" : 29,
