@@ -11,13 +11,46 @@ namespace ApiGenerator.Configuration
 		/// <summary> These APIs are not implemented yet in the low and high level client</summary>
 		public static string[] IgnoredApis { get; } =
 		{
-			// APIs is no longer useful and will be removed
+			// Upgrade API no longer relevant, might make a reapearance
 			"indices.upgrade.json",
 			"indices.get_upgrade.json",
 
 			// these APIs are not ready for primetime yet
 			"indices.reload_search_analyzers.json",
 			"rank_eval.json",
+
+			// Internal API,
+			"monitoring.bulk.json",
+
+			// Already gone in our client
+			"indices.exists_type.json",
+
+			// Never exposed and now deprecated
+			"data_frame_transform_deprecated.delete_transform.json",
+			"data_frame_transform_deprecated.get_transform.json",
+			"data_frame_transform_deprecated.get_transform_stats.json",
+			"data_frame_transform_deprecated.preview_transform.json",
+			"data_frame_transform_deprecated.put_transform.json",
+			"data_frame_transform_deprecated.start_transform.json",
+			"data_frame_transform_deprecated.stop_transform.json",
+			"data_frame_transform_deprecated.update_transform.json",
+		};
+
+		public static string[] IgnoredApisHighLevel { get; } = new []
+		{
+			"get_script_context.json",
+			"scripts_painless_context.json",
+			"security.get_builtin_privileges.json",
+
+			// these APIs are new and need to be mapped
+			"transform.delete_transform.json",
+			"transform.get_transform.json",
+			"transform.get_transform_stats.json",
+			"transform.preview_transform.json",
+			"transform.put_transform.json",
+			"transform.start_transform.json",
+			"transform.stop_transform.json",
+			"transform.update_transform.json",
 
 			"data_frame.delete_data_frame_transform.json",
 			"data_frame.get_data_frame_transform.json",
@@ -28,6 +61,9 @@ namespace ApiGenerator.Configuration
 			"data_frame.stop_data_frame_transform.json",
 			"data_frame.update_data_frame_transform.json",
 
+			"ml.estimate_memory_usage.json",
+			"ml.set_upgrade_mode.json",
+			"ml.find_file_structure.json",
 			"ml.evaluate_data_frame.json",
 			"ml.delete_data_frame_analytics.json",
 			"ml.get_data_frame_analytics.json",
@@ -35,33 +71,8 @@ namespace ApiGenerator.Configuration
 			"ml.put_data_frame_analytics.json",
 			"ml.start_data_frame_analytics.json",
 			"ml.stop_data_frame_analytics.json",
-
-			"scripts_painless_context.json",
-			"security.get_builtin_privileges.json",
-
-			// these APIs are new and need to be mapped
-			"ml.set_upgrade_mode.json",
-			"ml.find_file_structure.json",
-			"monitoring.bulk.json",
-			"ml.estimate_memory_usage.json",
-
-			"data_frame_transform_deprecated.delete_transform.json",
-			"data_frame_transform_deprecated.get_transform.json",
-			"data_frame_transform_deprecated.get_transform_stats.json",
-			"data_frame_transform_deprecated.preview_transform.json",
-			"data_frame_transform_deprecated.put_transform.json",
-			"data_frame_transform_deprecated.start_transform.json",
-			"data_frame_transform_deprecated.stop_transform.json",
-			"data_frame_transform_deprecated.update_transform.json",
-			"transform.delete_transform.json",
-			"transform.get_transform.json",
-			"transform.get_transform_stats.json",
-			"transform.preview_transform.json",
-			"transform.put_transform.json",
-			"transform.start_transform.json",
-			"transform.stop_transform.json",
-			"transform.update_transform.json",
 		};
+
 
 		/// <summary>
 		/// Scan all nest source code files for Requests and look for the [MapsApi(filename)] attribute.

@@ -18,7 +18,7 @@ namespace ApiGenerator.Generator.Razor
 
 			var dependantView = ViewLocations.HighLevel("Requests", "Requests.cshtml");
 			string Target(string id) => GeneratorLocations.HighLevel($"Requests.{id}.cs");
-			var namespaced = spec.EndpointsPerNamespace.ToList();
+			var namespaced = spec.EndpointsPerNamespaceHighLevel.ToList();
 			await DoRazorDependantFiles(progressBar, namespaced, dependantView, kv => kv.Key, id => Target(id));
 		}
 	}
