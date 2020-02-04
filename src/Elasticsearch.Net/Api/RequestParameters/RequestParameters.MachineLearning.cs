@@ -72,6 +72,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => false;
 	}
 
+	///<summary>Request options for DeleteDataFrameAnalytics <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/delete-dfanalytics.html</para></summary>
+	public class DeleteDataFrameAnalyticsRequestParameters : RequestParameters<DeleteDataFrameAnalyticsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
+		///<summary>True if the job should be forcefully deleted</summary>
+		public bool? Force
+		{
+			get => Q<bool? >("force");
+			set => Q("force", value);
+		}
+	}
+
 	///<summary>Request options for DeleteDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</para></summary>
 	public class DeleteDatafeedRequestParameters : RequestParameters<DeleteDatafeedRequestParameters>
 	{
@@ -146,6 +159,138 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => false;
 	}
 
+	///<summary>Request options for DeleteTrainedModel <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-inference.html</para></summary>
+	public class DeleteTrainedModelRequestParameters : RequestParameters<DeleteTrainedModelRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
+	}
+
+	///<summary>Request options for EstimateMemoryUsage <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</para></summary>
+	public class EstimateMemoryUsageRequestParameters : RequestParameters<EstimateMemoryUsageRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+	}
+
+	///<summary>Request options for EvaluateDataFrame <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html</para></summary>
+	public class EvaluateDataFrameRequestParameters : RequestParameters<EvaluateDataFrameRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+	}
+
+	///<summary>Request options for ExplainDataFrameAnalytics <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html</para></summary>
+	public class ExplainDataFrameAnalyticsRequestParameters : RequestParameters<ExplainDataFrameAnalyticsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+	}
+
+	///<summary>Request options for FindFileStructure <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-find-file-structure.html</para></summary>
+	public class FindFileStructureRequestParameters : RequestParameters<FindFileStructureRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+		///<summary>Optional parameter to specify the character set of the file</summary>
+		public string Charset
+		{
+			get => Q<string>("charset");
+			set => Q("charset", value);
+		}
+
+		///<summary>Optional parameter containing a comma separated list of the column names for a delimited file</summary>
+		public string[] ColumnNames
+		{
+			get => Q<string[]>("column_names");
+			set => Q("column_names", value);
+		}
+
+		///<summary>Optional parameter to specify the delimiter character for a delimited file - must be a single character</summary>
+		public string Delimiter
+		{
+			get => Q<string>("delimiter");
+			set => Q("delimiter", value);
+		}
+
+		///<summary>Whether to include a commentary on how the structure was derived</summary>
+		public bool? Explain
+		{
+			get => Q<bool? >("explain");
+			set => Q("explain", value);
+		}
+
+		///<summary>Optional parameter to specify the high level file format</summary>
+		public Format? Format
+		{
+			get => Q<Format? >("format");
+			set => Q("format", value);
+		}
+
+		///<summary>Optional parameter to specify the Grok pattern that should be used to extract fields from messages in a semi-structured text file</summary>
+		public string GrokPattern
+		{
+			get => Q<string>("grok_pattern");
+			set => Q("grok_pattern", value);
+		}
+
+		///<summary>Optional parameter to specify whether a delimited file includes the column names in its first row</summary>
+		public bool? HasHeaderRow
+		{
+			get => Q<bool? >("has_header_row");
+			set => Q("has_header_row", value);
+		}
+
+		///<summary>Maximum number of characters permitted in a single message when lines are merged to create messages.</summary>
+		public int? LineMergeSizeLimit
+		{
+			get => Q<int? >("line_merge_size_limit");
+			set => Q("line_merge_size_limit", value);
+		}
+
+		///<summary>How many lines of the file should be included in the analysis</summary>
+		public int? LinesToSample
+		{
+			get => Q<int? >("lines_to_sample");
+			set => Q("lines_to_sample", value);
+		}
+
+		///<summary>Optional parameter to specify the quote character for a delimited file - must be a single character</summary>
+		public string Quote
+		{
+			get => Q<string>("quote");
+			set => Q("quote", value);
+		}
+
+		///<summary>Optional parameter to specify whether the values between delimiters in a delimited file should have whitespace trimmed from them</summary>
+		public bool? ShouldTrimFields
+		{
+			get => Q<bool? >("should_trim_fields");
+			set => Q("should_trim_fields", value);
+		}
+
+		///<summary>Timeout after which the analysis will be aborted</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
+
+		///<summary>Optional parameter to specify the timestamp field in the file</summary>
+		public string TimestampField
+		{
+			get => Q<string>("timestamp_field");
+			set => Q("timestamp_field", value);
+		}
+
+		///<summary>Optional parameter to specify the timestamp format in the file - may be either a Joda or Java time format</summary>
+		public string TimestampFormat
+		{
+			get => Q<string>("timestamp_format");
+			set => Q("timestamp_format", value);
+		}
+	}
+
 	///<summary>Request options for FlushJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</para></summary>
 	public class FlushJobRequestParameters : RequestParameters<FlushJobRequestParameters>
 	{
@@ -212,6 +357,66 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
+	}
+
+	///<summary>Request options for GetDataFrameAnalytics <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics.html</para></summary>
+	public class GetDataFrameAnalyticsRequestParameters : RequestParameters<GetDataFrameAnalyticsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+		///<summary>
+		/// Whether to ignore if a wildcard expression matches no data frame analytics. (This includes `_all` string or when no data frame analytics
+		/// have been specified)
+		///</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
+
+		///<summary>skips a number of analytics</summary>
+		public int? From
+		{
+			get => Q<int? >("from");
+			set => Q("from", value);
+		}
+
+		///<summary>specifies a max number of analytics to get</summary>
+		public int? Size
+		{
+			get => Q<int? >("size");
+			set => Q("size", value);
+		}
+	}
+
+	///<summary>Request options for GetDataFrameAnalyticsStats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html</para></summary>
+	public class GetDataFrameAnalyticsStatsRequestParameters : RequestParameters<GetDataFrameAnalyticsStatsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+		///<summary>
+		/// Whether to ignore if a wildcard expression matches no data frame analytics. (This includes `_all` string or when no data frame analytics
+		/// have been specified)
+		///</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
+
+		///<summary>skips a number of analytics</summary>
+		public int? From
+		{
+			get => Q<int? >("from");
+			set => Q("from", value);
+		}
+
+		///<summary>specifies a max number of analytics to get</summary>
+		public int? Size
+		{
+			get => Q<int? >("size");
+			set => Q("size", value);
+		}
 	}
 
 	///<summary>Request options for GetDatafeedStats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
@@ -314,6 +519,83 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => true;
 	}
 
+	///<summary>Request options for GetTrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-inference.html</para></summary>
+	public class GetTrainedModelsRequestParameters : RequestParameters<GetTrainedModelsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+		///<summary>
+		/// Whether to ignore if a wildcard expression matches no trained models. (This includes `_all` string or when no trained models have been
+		/// specified)
+		///</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
+
+		///<summary>Should the model definition be decompressed into valid JSON or returned in a custom compressed format. Defaults to true.</summary>
+		public bool? DecompressDefinition
+		{
+			get => Q<bool? >("decompress_definition");
+			set => Q("decompress_definition", value);
+		}
+
+		///<summary>skips a number of trained models</summary>
+		public int? From
+		{
+			get => Q<int? >("from");
+			set => Q("from", value);
+		}
+
+		///<summary>
+		/// Should the full model definition be included in the results. These definitions can be large. So be cautious when including them. Defaults
+		/// to false.
+		///</summary>
+		public bool? IncludeModelDefinition
+		{
+			get => Q<bool? >("include_model_definition");
+			set => Q("include_model_definition", value);
+		}
+
+		///<summary>specifies a max number of trained models to get</summary>
+		public int? Size
+		{
+			get => Q<int? >("size");
+			set => Q("size", value);
+		}
+	}
+
+	///<summary>Request options for GetTrainedModelsStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-inference-stats.html</para></summary>
+	public class GetTrainedModelsStatsRequestParameters : RequestParameters<GetTrainedModelsStatsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+		///<summary>
+		/// Whether to ignore if a wildcard expression matches no trained models. (This includes `_all` string or when no trained models have been
+		/// specified)
+		///</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
+
+		///<summary>skips a number of trained models</summary>
+		public int? From
+		{
+			get => Q<int? >("from");
+			set => Q("from", value);
+		}
+
+		///<summary>specifies a max number of trained models to get</summary>
+		public int? Size
+		{
+			get => Q<int? >("size");
+			set => Q("size", value);
+		}
+	}
+
 	///<summary>Request options for Info</summary>
 	public class MachineLearningInfoRequestParameters : RequestParameters<MachineLearningInfoRequestParameters>
 	{
@@ -376,6 +658,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => false;
 	}
 
+	///<summary>Request options for PutDataFrameAnalytics <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/put-dfanalytics.html</para></summary>
+	public class PutDataFrameAnalyticsRequestParameters : RequestParameters<PutDataFrameAnalyticsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
+	}
+
 	///<summary>Request options for PutDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</para></summary>
 	public class PutDatafeedRequestParameters : RequestParameters<PutDatafeedRequestParameters>
 	{
@@ -397,6 +686,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => true;
 	}
 
+	///<summary>Request options for PutTrainedModel <para>TODO</para></summary>
+	public class PutTrainedModelRequestParameters : RequestParameters<PutTrainedModelRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
+	}
+
 	///<summary>Request options for RevertModelSnapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</para></summary>
 	public class RevertModelSnapshotRequestParameters : RequestParameters<RevertModelSnapshotRequestParameters>
 	{
@@ -404,11 +700,74 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => true;
 	}
 
+	///<summary>Request options for SetUpgradeMode <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</para></summary>
+	public class SetUpgradeModeRequestParameters : RequestParameters<SetUpgradeModeRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
+		///<summary>Whether to enable upgrade_mode ML setting or not. Defaults to false.</summary>
+		public bool? Enabled
+		{
+			get => Q<bool? >("enabled");
+			set => Q("enabled", value);
+		}
+
+		///<summary>Controls the time to wait before action times out. Defaults to 30 seconds</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
+	}
+
+	///<summary>Request options for StartDataFrameAnalytics <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/start-dfanalytics.html</para></summary>
+	public class StartDataFrameAnalyticsRequestParameters : RequestParameters<StartDataFrameAnalyticsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+		///<summary>Controls the time to wait until the task has started. Defaults to 20 seconds</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
+	}
+
 	///<summary>Request options for StartDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</para></summary>
 	public class StartDatafeedRequestParameters : RequestParameters<StartDatafeedRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
+	}
+
+	///<summary>Request options for StopDataFrameAnalytics <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/stop-dfanalytics.html</para></summary>
+	public class StopDataFrameAnalyticsRequestParameters : RequestParameters<StopDataFrameAnalyticsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+		///<summary>
+		/// Whether to ignore if a wildcard expression matches no data frame analytics. (This includes `_all` string or when no data frame analytics
+		/// have been specified)
+		///</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
+
+		///<summary>True if the data frame analytics should be forcefully stopped</summary>
+		public bool? Force
+		{
+			get => Q<bool? >("force");
+			set => Q("force", value);
+		}
+
+		///<summary>Controls the time to wait until the task has stopped. Defaults to 20 seconds</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	///<summary>Request options for StopDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</para></summary>

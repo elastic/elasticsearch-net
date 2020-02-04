@@ -36,6 +36,13 @@ namespace Elasticsearch.Net.Specification.LicenseApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
+		///<summary>Supported for backwards compatibility with 7.x. If this param is used it must be set to true</summary>
+		public bool? AcceptEnterprise
+		{
+			get => Q<bool? >("accept_enterprise");
+			set => Q("accept_enterprise", value);
+		}
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local
 		{
