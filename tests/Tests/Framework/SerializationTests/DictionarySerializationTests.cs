@@ -174,11 +174,13 @@ namespace Tests.Framework.SerializationTests
 				{ "Key2", "value2" },
 			};
 
-			SerializationTestHelper.Object(dictionary).RoundTrips(new { Key2 = "value2" });
+			SerializationTestHelper.Object(dictionary)
+				.PreserveNull()
+				.RoundTrips(new { Key1 = (object)null, Key2 = "value2" });
 		}
 
 		[U]
-		public void DoesNotSerializeIDictionaryNullValues()
+		public void DoesSerializeIDictionaryNullValues()
 		{
 			IDictionary<string, string> dictionary = new Dictionary<string, string>
 			{
@@ -186,11 +188,13 @@ namespace Tests.Framework.SerializationTests
 				{ "Key2", "value2" },
 			};
 
-			SerializationTestHelper.Object(dictionary).RoundTrips(new { Key2 = "value2" });
+			SerializationTestHelper.Object(dictionary)
+				.PreserveNull()
+				.RoundTrips(new { Key1 = (object)null, Key2 = "value2" });
 		}
 
 		[U]
-		public void DoesNotSerializeReadOnlyDictionaryNullValues()
+		public void DoesSerializeReadOnlyDictionaryNullValues()
 		{
 			var dictionary = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>
 			{
@@ -198,11 +202,13 @@ namespace Tests.Framework.SerializationTests
 				{ "Key2", "value2" },
 			});
 
-			SerializationTestHelper.Object(dictionary).RoundTrips(new { Key2 = "value2" });
+			SerializationTestHelper.Object(dictionary)
+				.PreserveNull()
+				.RoundTrips(new { Key1 = (object)null, Key2 = "value2" });
 		}
 
 		[U]
-		public void DoesNotSerializeIReadOnlyDictionaryNullValues()
+		public void DoesSerializeIReadOnlyDictionaryNullValues()
 		{
 			IReadOnlyDictionary<string, string> dictionary = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>
 			{
@@ -210,7 +216,9 @@ namespace Tests.Framework.SerializationTests
 				{ "Key2", "value2" },
 			});
 
-			SerializationTestHelper.Object(dictionary).RoundTrips(new { Key2 = "value2" });
+			SerializationTestHelper.Object(dictionary)
+				.PreserveNull()
+				.RoundTrips(new { Key1 = (object)null, Key2 = "value2" });
 		}
 
 		private class MyDictionary : IDictionary
