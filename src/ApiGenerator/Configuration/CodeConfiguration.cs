@@ -18,6 +18,7 @@ namespace ApiGenerator.Configuration
 			// these APIs are not ready for primetime yet
 			"indices.reload_search_analyzers.json",
 			"rank_eval.json",
+			"eql.search.json",
 
 			// Internal API,
 			"monitoring.bulk.json",
@@ -39,6 +40,7 @@ namespace ApiGenerator.Configuration
 		public static string[] IgnoredApisHighLevel { get; } = new []
 		{
 			"get_script_context.json",
+			"get_script_languages.json",
 			"scripts_painless_context.json",
 			"security.get_builtin_privileges.json",
 
