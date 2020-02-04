@@ -109,13 +109,13 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		[MapsApi("security.create_api_key", "body")]
 		public Task<TResponse> CreateApiKeyAsync<TResponse>(PostData body, CreateApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, "_security/api_key", ctx, body, RequestParams(requestParameters));
-		///<summary>DELETE on /_security/privilege/{application}/{name} <para>TODO</para></summary>
+		///<summary>DELETE on /_security/privilege/{application}/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html</para></summary>
 		///<param name = "application">Application name</param>
 		///<param name = "name">Privilege name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse DeletePrivileges<TResponse>(string application, string name, DeletePrivilegesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_security/privilege/{application:application}/{name:name}"), null, RequestParams(requestParameters));
-		///<summary>DELETE on /_security/privilege/{application}/{name} <para>TODO</para></summary>
+		///<summary>DELETE on /_security/privilege/{application}/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html</para></summary>
 		///<param name = "application">Application name</param>
 		///<param name = "name">Privilege name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -186,6 +186,15 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		[MapsApi("security.get_api_key", "")]
 		public Task<TResponse> GetApiKeyAsync<TResponse>(GetApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_security/api_key", ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_security/privilege/_builtin <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetBuiltinPrivileges<TResponse>(GetBuiltinPrivilegesRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_security/privilege/_builtin", null, RequestParams(requestParameters));
+		///<summary>GET on /_security/privilege/_builtin <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("security.get_builtin_privileges", "")]
+		public Task<TResponse> GetBuiltinPrivilegesAsync<TResponse>(GetBuiltinPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_security/privilege/_builtin", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_security/privilege <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetPrivileges<TResponse>(GetPrivilegesRequestParameters requestParameters = null)
@@ -345,12 +354,12 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		[MapsApi("security.invalidate_token", "body")]
 		public Task<TResponse> InvalidateUserAccessTokenAsync<TResponse>(PostData body, InvalidateUserAccessTokenRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, "_security/oauth2/token", ctx, body, RequestParams(requestParameters));
-		///<summary>PUT on /_security/privilege/ <para>TODO</para></summary>
+		///<summary>PUT on /_security/privilege/ <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html</para></summary>
 		///<param name = "body">The privilege(s) to add</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse PutPrivileges<TResponse>(PostData body, PutPrivilegesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, "_security/privilege/", body, RequestParams(requestParameters));
-		///<summary>PUT on /_security/privilege/ <para>TODO</para></summary>
+		///<summary>PUT on /_security/privilege/ <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html</para></summary>
 		///<param name = "body">The privilege(s) to add</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("security.put_privileges", "body")]

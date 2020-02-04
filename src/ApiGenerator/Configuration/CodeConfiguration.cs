@@ -23,9 +23,6 @@ namespace ApiGenerator.Configuration
 			// Internal API,
 			"monitoring.bulk.json",
 
-			// Already gone in our client
-			"indices.exists_type.json",
-
 			// Never exposed and now deprecated
 			"data_frame_transform_deprecated.delete_transform.json",
 			"data_frame_transform_deprecated.get_transform.json",

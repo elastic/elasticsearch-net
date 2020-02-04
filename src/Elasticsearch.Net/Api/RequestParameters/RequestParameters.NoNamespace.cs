@@ -36,7 +36,7 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>
-		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
 		public Refresh? Refresh
@@ -291,7 +291,7 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>
-		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
 		public Refresh? Refresh
@@ -494,7 +494,7 @@ namespace Elasticsearch.Net
 			set => Q("size", value);
 		}
 
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices
 		{
 			get => Q<long? >("slices");
@@ -969,6 +969,18 @@ namespace Elasticsearch.Net
 		}
 	}
 
+	///<summary>Request options for GetScriptContext</summary>
+	public class GetScriptContextRequestParameters : RequestParameters<GetScriptContextRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+
+	///<summary>Request options for GetScriptLanguages</summary>
+	public class GetScriptLanguagesRequestParameters : RequestParameters<GetScriptLanguagesRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+
 	///<summary>Request options for Source <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
 	public class SourceRequestParameters : RequestParameters<SourceRequestParameters>
 	{
@@ -1418,7 +1430,7 @@ namespace Elasticsearch.Net
 	public class ReindexOnServerRequestParameters : RequestParameters<ReindexOnServerRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Should the effected indexes be refreshed?</summary>
+		///<summary>Should the affected indexes be refreshed?</summary>
 		public bool? Refresh
 		{
 			get => Q<bool? >("refresh");
@@ -1488,6 +1500,18 @@ namespace Elasticsearch.Net
 	public class RenderSearchTemplateRequestParameters : RequestParameters<RenderSearchTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+
+	///<summary>Request options for ScriptsPainlessContext</summary>
+	public class ScriptsPainlessContextRequestParameters : RequestParameters<ScriptsPainlessContextRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Select a specific context to retrieve API information about</summary>
+		public string Context
+		{
+			get => Q<string>("context");
+			set => Q("context", value);
+		}
 	}
 
 	///<summary>Request options for ExecutePainlessScript <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</para></summary>
@@ -2001,7 +2025,7 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>
-		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
 		public Refresh? Refresh
@@ -2148,7 +2172,7 @@ namespace Elasticsearch.Net
 			set => Q("q", value);
 		}
 
-		///<summary>Should the effected indexes be refreshed?</summary>
+		///<summary>Should the affected indexes be refreshed?</summary>
 		public bool? Refresh
 		{
 			get => Q<bool? >("refresh");

@@ -14,6 +14,11 @@
         "analyzer": {
           "type" : "string",
           "description" : "The analyzer to use for the query string"
+        },
+        "slices": {
+          "type": "number",
+          "default": 1,
+          "description": "The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks."
         }
       }
     }
