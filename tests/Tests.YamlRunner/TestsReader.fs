@@ -238,7 +238,7 @@ let private DefaultSetup : Operation list = [Actions("Setup", fun (client, suite
             yield client.Watcher.Delete<DynamicResponse>("my_watch")
             
             let deleteNonReserved (setup:_ -> DynamicResponse) (delete:(_ -> DynamicResponse)) = 
-                setup().Dictionary
+                setup().Dictionary.GetKeyValues()
                 |> Seq.map (fun kv ->
                     match kv.Value.Get<bool> "metadata._reserved" with
                     | false -> Some <| delete(kv.Key)
@@ -300,8 +300,12 @@ let private DefaultSetup : Operation list = [Actions("Setup", fun (client, suite
             let tasks =
                 let getJobs = client.Tasks.List<DynamicResponse> ()
                 let cancelJobs = 
-                    getJobs.Get<DynamicDictionary> "nodes"
-                    |> Seq.collect(fun kv -> kv.Value.Get<DynamicDictionary> "tasks")
+                    let dict = getJobs.Get<DynamicDictionary> "nodes"
+                    dict.GetKeyValues()
+                    |> Seq.collect(fun kv ->
+                        let dict = kv.Value.Get<DynamicDictionary> "tasks"
+                        dict.GetKeyValues()
+                    )
                     |> Seq.map (fun kv ->
                         match kv.Value.Get<bool> "cancellable" with
                         | true -> Some <| client.Tasks.Cancel<DynamicResponse>(kv.Key)
