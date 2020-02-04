@@ -5,7 +5,15 @@ open System.Collections.Generic
 open System.Text.RegularExpressions
 open System.Linq
 
+open System.Collections.Specialized
+open Elasticsearch.Net
+open Elasticsearch.Net
+open Elasticsearch.Net.Specification.CatApi
+open Elasticsearch.Net.Specification.ClusterApi
+open Elasticsearch.Net.Specification.MachineLearningApi
 open System.IO
+open Tests.YamlRunner
+open Tests.YamlRunner.Models
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.TestsLocator
 
@@ -50,9 +58,18 @@ let private mapSkip (operation:YamlMap) =
             | :? List<Object> -> tryPickList<string, Feature> operation "features" parseFeature
             | :? String as feature -> Some [parseFeature feature]
             | _ -> None
+    let versionRange =
+        match version with
+        | Some "all"
+        | Some "All" -> Some <| SemVer.Range("0.0.0 - 100.0.0")
+        | Some v ->
+            let range =
+                let range = Regex.Replace(v, @"^\s*?-", "0.0.0 -")
+                Regex.Replace(range, @"-\s*?$", "- 100.0.0")
+            Some <| SemVer.Range(range)
+        | None -> None
         
-        
-    Skip { Version=version; Reason=reason; Features=features }
+    Skip { Version=versionRange; Reason=reason; Features=features }
     
 let private mapNumericAssert (operation:YamlMap) =
     operation
@@ -100,13 +117,7 @@ let private mapNodeSelector (operation:YamlMap) =
     | _ -> None
             
     
-let private mapDo (operation:YamlMap) =
-    
-    let last = operation.Last()
-    //Todo should be map.First after picking the others
-    let lastKey = last.Key :?> string
-    let lastValue =
-        last.Value :?> YamlMap
+let private mapDo section (operation:YamlMap) =
     
     let catch =
         match tryPick<string> operation "catch" with
@@ -114,16 +125,39 @@ let private mapDo (operation:YamlMap) =
             match s with | IsDoCatch s -> Some s | _ -> None
         | _ -> None
         
+    let headers =
+        match tryPick<YamlMap> operation "headers" with
+        | Some map ->
+            Some <| (map
+                |> Seq.map (fun (kv) -> kv.Key :?> string, kv.Value :?> string)
+                |> Map.ofSeq
+                |> Map.fold
+                  (fun (nv:NameValueCollection) k v ->
+                    (nv.[k] <- v)
+                    nv
+                  )
+                  (NameValueCollection())
+           )
+        | None -> None
+    
     let warnings = tryPickList<string, string> operation "warnings" id
     let nodeSelector = mapNodeSelector operation
+    
+    let last = operation.Last()
+    let lastKey = last.Key :?> string
+    let lastValue =
+        last.Value :?> YamlMap
+    
     Do {
         ApiCall = (lastKey, lastValue)
         Catch = catch
         Warnings = warnings
         NodeSelector = nodeSelector
+        Headers = headers
+        AutoFail = match section with | "setup" | "teardown" -> false | _ -> false
     }
     
-let private mapOperation (operation:YamlMap) =
+let private mapOperation section (operation:YamlMap) =
     let kv = operation.First();
     let key = kv.Key :?> string
     let yamlValue : YamlValue =
@@ -138,7 +172,7 @@ let private mapOperation (operation:YamlMap) =
         | ("skip", YamlDictionary map) -> mapSkip map
         | ("set", YamlDictionary map) -> Set <| mapSet map
         | ("transform_and_set", YamlDictionary map) -> TransformAndSet <| mapTransformAndSet map
-        | ("do", YamlDictionary map) -> mapDo map
+        | ("do", YamlDictionary map) -> mapDo section map
         | ("match", YamlDictionary map) ->  Assert <| Match (mapMatch map)
         | ("is_false", YamlDictionary map) -> Assert <| IsFalse (firstValueAsPath map)
         | ("is_true", YamlDictionary map) -> Assert <| IsTrue (firstValueAsPath map)
@@ -148,8 +182,8 @@ let private mapOperation (operation:YamlMap) =
         | (k, v) -> failwithf "%s does not support %s" k (v.GetType().Name)
     | unknownOperation -> Unknown unknownOperation
     
-let private mapOperations (operations:YamlMap list) =
-    operations |> List.map mapOperation
+let private mapOperations section (operations:YamlMap list) =
+    operations |> List.map (mapOperation section)
     
 let private mapDocument (document:Dictionary<string, Object>) =
     
@@ -157,10 +191,10 @@ let private mapDocument (document:Dictionary<string, Object>) =
     let key = kv.Key
     let values = kv.Value :?> List<Object>
     
-    let operations = values |> Enumerable.Cast<YamlMap> |> Seq.toList |> mapOperations
+    let operations = values |> Enumerable.Cast<YamlMap> |> Seq.toList |> mapOperations key
     
     match key with
-    | "setup" -> Setup operations
+    | "setup" -> Setup operations 
     | "teardown" -> Teardown operations
     | name -> YamlTest { Name=name; Operations=operations }
 
@@ -171,10 +205,156 @@ type YamlTestDocument = {
     Tests: YamlTest list
 }
 
+let private DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
+    let firstFailure (responses:DynamicResponse seq) =
+            responses
+            |> Seq.filter (fun r -> not r.Success && r.HttpStatusCode <> Nullable.op_Implicit 404)
+            |> Seq.tryHead
+    
+    match suite with
+    | Oss ->
+        let deleteAll = client.Indices.Delete<DynamicResponse>("*")
+        let templates =
+            client.Cat.Templates<StringResponse>("*", CatTemplatesRequestParameters(Headers=["name"].ToArray()))
+                .Body.Split("\n")
+                |> Seq.filter(fun f -> not(String.IsNullOrWhiteSpace(f)) && not(f.StartsWith(".")) && f <> "security-audit-log")
+                //TODO template does not accept comma separated list but is documented as such
+                |> Seq.map(fun template -> client.Indices.DeleteTemplateForAll<DynamicResponse>(template))
+                |> Seq.toList
+        firstFailure <| [deleteAll] @ templates
+        
+    | XPack ->
+        firstFailure <| seq {
+            //delete all templates
+            let templates =
+                client.Cat.Templates<StringResponse>("*", CatTemplatesRequestParameters(Headers=["name"].ToArray()))
+                    .Body.Split("\n")
+                    |> Seq.filter(fun f -> not(String.IsNullOrWhiteSpace(f)) && not(f.StartsWith(".")) && f <> "security-audit-log")
+                    //TODO template does not accept comma separated list but is documented as such
+                    |> Seq.map(fun template -> client.Indices.DeleteTemplateForAll<DynamicResponse>(template))
+            
+            yield! templates
+            
+            yield client.Watcher.Delete<DynamicResponse>("my_watch")
+            
+            let deleteNonReserved (setup:_ -> DynamicResponse) (delete:(_ -> DynamicResponse)) = 
+                setup().Dictionary
+                |> Seq.map (fun kv ->
+                    match kv.Value.Get<bool> "metadata._reserved" with
+                    | false -> Some <| delete(kv.Key)
+                    | _ -> None
+                )
+                |> Seq.choose id
+                |> Seq.toList
+            
+            yield! //roles
+                deleteNonReserved
+                   (fun _ -> client.Security.GetRole<DynamicResponse>())
+                   (fun role -> client.Security.DeleteRole<DynamicResponse> role)
+                   
+            yield! //users
+                deleteNonReserved
+                   (fun _ -> client.Security.GetUser<DynamicResponse>())
+                   (fun user -> client.Security.DeleteUser<DynamicResponse> user)
+            
+            yield! //privileges
+                deleteNonReserved
+                   (fun _ -> client.Security.GetPrivileges<DynamicResponse>())
+                   (fun priv -> client.Security.DeletePrivileges<DynamicResponse>(priv, "_all"))
+                
+            // deleting feeds before jobs is important
+            let mlDataFeeds = 
+                let stopFeeds = client.MachineLearning.StopDatafeed<DynamicResponse>("_all")
+                let getFeeds = client.MachineLearning.GetDatafeeds<DynamicResponse> ()
+                let deleteFeeds =
+                    getFeeds.Get<string[]> "datafeeds.datafeed_id"
+                    |> Seq.map (fun jobId -> client.MachineLearning.DeleteDatafeed<DynamicResponse>(jobId))
+                    |> Seq.toList
+                [stopFeeds; getFeeds] @ deleteFeeds
+            yield! mlDataFeeds
+                
+            yield client.IndexLifecycleManagement.RemovePolicy<DynamicResponse>("_all")
+            
+            let mlJobs = 
+                let closeJobs = client.MachineLearning.CloseJob<DynamicResponse>("_all", PostData.Empty)
+                let getJobs = client.MachineLearning.GetJobs<DynamicResponse> "_all"
+                let deleteJobs =
+                    getJobs.Get<string[]> "jobs.job_id"
+                    |> Seq.map (fun jobId -> client.MachineLearning.DeleteJob<DynamicResponse>(jobId))
+                    |> Seq.toList
+                [closeJobs; getJobs] @ deleteJobs
+            yield! mlJobs
+                
+            let rollupJobs = 
+                let getJobs = client.Rollup.GetJob<DynamicResponse> "_all"
+                let deleteJobs =
+                    getJobs.Get<string[]> "jobs.config.id"
+                    |> Seq.collect (fun jobId -> [
+                         client.Rollup.StopJob<DynamicResponse>(jobId)
+                         client.Rollup.DeleteJob<DynamicResponse>(jobId)
+                    ])
+                    |> Seq.toList
+                [getJobs] @ deleteJobs
+            yield! rollupJobs
+                
+            let tasks =
+                let getJobs = client.Tasks.List<DynamicResponse> ()
+                let cancelJobs = 
+                    getJobs.Get<DynamicDictionary> "nodes"
+                    |> Seq.collect(fun kv -> kv.Value.Get<DynamicDictionary> "tasks")
+                    |> Seq.map (fun kv ->
+                        match kv.Value.Get<bool> "cancellable" with
+                        | true -> Some <| client.Tasks.Cancel<DynamicResponse>(kv.Key)
+                        | _ -> None
+                    )
+                    |> Seq.choose id
+                    |> Seq.toList
+                
+                [getJobs] @ cancelJobs
+            yield! tasks
+            
+            let transforms =
+                let transforms = client.Transform.Get<DynamicResponse> "_all"
+                let stopTransforms =
+                    transforms.Get<string[]> "transforms.id"
+                    |> Seq.collect (fun id -> [
+                         client.Transform.Stop<DynamicResponse> id
+                         client.Transform.Delete<DynamicResponse> id
+                    ])
+                    |> Seq.toList
+                [transforms] @ stopTransforms
+            yield! transforms
+                
+            let yellowStatus = Nullable.op_Implicit WaitForStatus.Yellow
+            yield client.Cluster.Health<DynamicResponse>(ClusterHealthRequestParameters(WaitForStatus=yellowStatus))
+            
+            //make sure we don't delete system indices
+            let indices =
+                client.Cat.Indices<StringResponse>("*", CatIndicesRequestParameters(Headers=["index"].ToArray()))
+                    .Body.Split("\n")
+                    |> Seq.filter(fun f -> not(String.IsNullOrWhiteSpace(f)))
+                    |> Seq.filter(fun f -> not(f.StartsWith(".")) || f.StartsWith(".ml-"))
+                    |> String.concat ","
+                    |> function
+                       | s when String.IsNullOrEmpty(s) -> None
+                       | s -> Some <| client.Indices.Delete<DynamicResponse>(s)
+            
+            match indices with Some r -> yield r | None -> ignore() 
+            
+            let data = PostData.String @"{""password"":""x-pack-test-password"", ""roles"":[""superuser""]}"
+            yield client.Security.PutUser<DynamicResponse>("x_pack_rest_user", data)
+            
+            yield client.Indices.Refresh<DynamicResponse> "_all"
+            
+            yield client.Cluster.Health<DynamicResponse>(ClusterHealthRequestParameters(WaitForStatus=yellowStatus))
+        }
+)]
+
 let private toDocument (yamlInfo:YamlFileInfo) (sections:YamlTestSection list) =
+    let setups = (sections |> List.tryPick (fun s -> match s with | Setup s -> Some s | _ -> None)) 
     {
         FileInfo = FileInfo yamlInfo.File
-        Setup = sections |> List.tryPick (fun s -> match s with | Setup s -> Some s | _ -> None)
+        Setup = Some <| (DefaultSetup @ (setups |> Option.defaultValue []))
         Teardown = sections |> List.tryPick (fun s -> match s with | Teardown s -> Some s | _ -> None)
         Tests = sections |> List.map (fun s -> match s with | YamlTest s -> Some s | _ -> None) |> List.choose id
     }
@@ -185,7 +365,7 @@ let ReadYamlFile (yamlInfo:YamlFileInfo) =
 
     let serializer = SharpYaml.Serialization.Serializer()
     let sections =
-        let r e message = raise <| new Exception(message, e)
+        let r e message = raise <| Exception(message, e)
         Regex.Split(yamlInfo.Yaml, @"---\s*?\r?\n")
         |> Seq.filter (fun s -> not <| String.IsNullOrWhiteSpace s)
         |> Seq.map (fun sectionString ->

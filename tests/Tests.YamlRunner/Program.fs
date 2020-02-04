@@ -1,6 +1,7 @@
 ﻿module Tests.YamlRunner.Main
 
 open System
+open System.Linq
 open System.Diagnostics
 open Argu
 open Tests.YamlRunner
@@ -29,21 +30,56 @@ type Arguments =
 
 let private runningMitmProxy = Process.GetProcessesByName("mitmproxy").Length > 0
 let private runningProxy = runningMitmProxy || Process.GetProcessesByName("fiddler").Length > 0
-let private defaultEndpoint = 
-    let defaultHost = if runningProxy then "ipv4.fiddler" else "localhost";
-    sprintf "http://%s:9200" defaultHost;
+let private defaultEndpoint namedSuite = 
+    let host = 
+        match (runningProxy, namedSuite) with
+        | (true, Oss) -> "ipv.fiddler"
+        | _ -> "localhost"
+    let https = match namedSuite with | XPack -> "s" | _ -> ""
+    sprintf "http%s://%s:9200" https host;
 
-let private createClient endpoint = 
-    let uri = new Uri(endpoint)
+let private createClient endpoint namedSuite = 
+    let uri, userInfo = 
+        let e = Uri(endpoint)
+        let sanitized = UriBuilder(e)
+        sanitized.UserName <- null
+        sanitized.Password <- null
+        let uri = sanitized.Uri
+        let tokens = e.UserInfo.Split(':') |> Seq.toList
+        match (tokens, namedSuite) with 
+        | ([username; password], _) -> uri, Some (username, password)
+        | (_, XPack) -> uri, Some ("elastic", "changeme")
+        | _ -> uri, None
     let settings = new ConnectionConfiguration(uri)
-    let settings =
-        match runningMitmProxy with
-        | true -> settings.Proxy(Uri("http://ipv4.fiddler:8080"), String(null), String(null))
+    // proxy 
+    let proxySettings =
+        match (runningMitmProxy, namedSuite) with
+        | (true, Oss) -> settings.Proxy(Uri("http://ipv4.fiddler:8080"), String(null), String(null))
         | _ -> settings
-    new ElasticLowLevelClient(settings)
+    // auth
+    let authSettings =
+        match userInfo with
+        | Some(username, password) -> proxySettings.BasicAuthentication(username, password)
+        | _ -> proxySettings
+    // certs
+    let certSettings =
+        match namedSuite with
+        | XPack -> 
+            authSettings.ServerCertificateValidationCallback(fun _ _ _ _ -> true)
+        | _ -> authSettings
+    new ElasticLowLevelClient(certSettings)
     
-let validateRevisionParams endpoint passedRevision =    
-    let client = createClient endpoint
+let validateRevisionParams endpoint passedRevision namedSuite =    
+    let client = createClient endpoint namedSuite
+    
+    let node = client.Settings.ConnectionPool.Nodes.First()
+    let auth =     
+        match client.Settings.BasicAuthenticationCredentials with 
+        | null -> ""
+        | s -> sprintf "%s:%s" s.Username (s.Password.CreateString())
+        
+    printfn "Running elasticsearch %O %s" (node.Uri) auth
+    
     let r =
         let config = new RequestConfiguration(DisableDirectStreaming=Nullable(true))
         let p = new RootNodeInfoRequestParameters(RequestConfiguration = config)
@@ -65,17 +101,17 @@ let validateRevisionParams endpoint passedRevision =
     
 let runMain (parsed:ParseResults<Arguments>) = async {
     
-    let namedSuite = parsed.TryGetResult NamedSuite |> Option.defaultValue OpenSource
+    let namedSuite = parsed.TryGetResult NamedSuite |> Option.defaultValue Oss
     let directory = parsed.TryGetResult Folder //|> Option.defaultValue "indices.create" |> Some
     let file = parsed.TryGetResult TestFile //|> Option.defaultValue "10_basic.yml" |> Some
-    let endpoint = parsed.TryGetResult Endpoint |> Option.defaultValue defaultEndpoint
+    let endpoint = parsed.TryGetResult Endpoint |> Option.defaultValue (defaultEndpoint namedSuite)
     let profile = parsed.TryGetResult Profile |> Option.defaultValue false
     let passedRevision = parsed.TryGetResult Revision
     let outputFile =
         parsed.TryGetResult JUnitOutputFile
         |> Option.defaultValue (System.IO.Path.GetTempFileName())
-    
-    let (client, revision, version) = validateRevisionParams endpoint passedRevision
+        
+    let (client, revision, version) = validateRevisionParams endpoint passedRevision namedSuite
     
     printfn "Found version %s downloading specs from: %s" version revision
     
@@ -85,7 +121,7 @@ let runMain (parsed:ParseResults<Arguments>) = async {
         printf "Waiting for profiler to attach to pid: %O" <| Process.GetCurrentProcess().Id
         Console.ReadKey() |> ignore
         
-    let! runResults = Commands.RunTests readResults client
+    let! runResults = Commands.RunTests readResults client version namedSuite
     let summary = Commands.ExportTests runResults outputFile
     
     Commands.PrettyPrintResults outputFile

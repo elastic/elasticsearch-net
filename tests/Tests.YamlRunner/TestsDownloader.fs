@@ -13,7 +13,7 @@ let private openSourceResourcePath = "rest-api-spec/src/main/resources"
 let private xpackResourcesPath = "x-pack/plugin/src/test/resources"
 
 let private path namedSuite revision =
-    let path = match namedSuite with | OpenSource -> openSourceResourcePath | XPack -> xpackResourcesPath
+    let path = match namedSuite with | Oss -> openSourceResourcePath | XPack -> xpackResourcesPath
     sprintf "%s/%s/rest-api-spec/test" revision  path
     
 let TestGithubRootUrl namedSuite revision = sprintf "%s/tree/%s" rootListingUrl <| path namedSuite revision
