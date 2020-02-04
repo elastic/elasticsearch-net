@@ -17,30 +17,30 @@ please modify the original csharp file found at the link and submit the PR with 
 
 [source,csharp]
 ----
-return @"{{
-""boolean"" : true,
-""string"" : ""v"",
-""number"" : 29,
-""array"" : [1, 2, 3, 4],
-""object"" : {{
-    ""first"" : ""value1"",
-    ""second"" : ""value2"",
-    ""nested"" : {{ ""x"" : ""value3"" }}
-}},
-""array_of_objects"" : [
-    {{
-        ""first"" : ""value11"",
-        ""second"" : ""value12"",
-        ""nested"" : {{ ""x"" : ""value4"", ""z"" : [{{""id"": 1}}] }}
-    }},
-    {{
-        ""first"" : ""value21"",
-        ""second"" : ""value22"",
-        ""nested"" : {{ ""x"" : ""value5"", ""z"" : [{{""id"": 3}}, {{""id"": 2}}] }},
-        ""complex.nested"" : {{ ""x"" : ""value6"" }}
-    }}
-]
-        }}";
+return @"{
+    ""boolean"" : true,
+    ""string"" : ""v"",
+    ""number"" : 29,
+    ""array"" : [1, 2, 3, 4],
+    ""object"" : {
+        ""first"" : ""value1"",
+        ""second"" : ""value2"",
+        ""nested"" : { ""x"" : ""value3"" }
+    },
+    ""array_of_objects"" : [
+        {
+            ""first"" : ""value11"",
+            ""second"" : ""value12"",
+            ""nested"" : { ""x"" : ""value4"", ""z"" : [{""id"": 1}] }
+        },
+        {
+            ""first"" : ""value21"",
+            ""second"" : ""value22"",
+            ""nested"" : { ""x"" : ""value5"", ""z"" : [{""id"": 3}, {""id"": 2}] },
+            ""complex.nested"" : { ""x"" : ""value6"" }
+        }
+    ]
+}";
 ----
 
 [float]
