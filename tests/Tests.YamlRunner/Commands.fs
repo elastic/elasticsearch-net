@@ -35,14 +35,14 @@ let ReadTests (tests:LocateResults list) =
     
     tests |> List.map (fun t -> { Folder= t.Folder; Files = readPaths t.Paths})
     
-let RunTests (tests:YamlTestFolder list) client = async {
+let RunTests (tests:YamlTestFolder list) client version namedSuite = async {
     do! Async.SwitchToNewThread()
-    
     
     let f = tests.Length
     let l = tests |> List.sumBy (fun t -> t.Files.Length)
     use progress = new ProgressBar(l, sprintf "Folders [0/%i]" l, barOptions)
-    let runner = TestRunner(client, progress, subBarOptions)
+    let runner = TestRunner(client, version, namedSuite, progress, subBarOptions)
+    runner.GlobalSetup() 
     let a (i, v) = async {
         let mainMessage = sprintf "[%i/%i] Folders : %s | " (i+1) f v.Folder
         let! op = runner.RunTestsInFolder mainMessage v
