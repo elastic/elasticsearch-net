@@ -103,7 +103,7 @@ namespace Tests.Search.SearchTemplate
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ServerError.Should().NotBeNull();
-			response.ServerError.Error.Reason.Should().Contain("no [query]");
+			response.ServerError.Error.Reason.Should().Contain("unknown query [atch]");
 		}
 	}
 }
