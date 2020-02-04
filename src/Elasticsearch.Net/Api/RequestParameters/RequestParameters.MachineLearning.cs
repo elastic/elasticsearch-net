@@ -205,9 +205,9 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 
 		///<summary>Optional parameter to specify the high level file format</summary>
-		public Format? Format
+		public MachineLearningFindFileStructureFormat? MachineLearningFindFileStructureFormat
 		{
-			get => Q<Format? >("format");
+			get => Q<MachineLearningFindFileStructureFormat? >("format");
 			set => Q("format", value);
 		}
 

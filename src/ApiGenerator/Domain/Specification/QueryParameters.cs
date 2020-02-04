@@ -11,7 +11,7 @@ namespace ApiGenerator.Domain.Specification
 		{
 			"fields", "_source_includes", "_source_excludes",
 		};
-		
+
 		public bool Skip { get; set; }
 
 		public string ClsArgumentName => ClsName.ToCamelCase();
