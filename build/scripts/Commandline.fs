@@ -111,7 +111,8 @@ Execution hints can be provided anywhere on the command line
         
     let private buildingOnAzurePipeline = Environment.environVarAsBool "TF_BUILD"
         
-    let runningOnCi = Environment.hasEnvironVar "TF_BUILD" || Environment.hasEnvironVar "APPVEYOR_BUILD_VERSION"
+    let runningOnAzureDevops = Environment.hasEnvironVar "TF_BUILD" 
+    let runningOnCi = runningOnAzureDevops || Environment.hasEnvironVar "APPVEYOR_BUILD_VERSION"
     
     let parse (args: string list) =
         
