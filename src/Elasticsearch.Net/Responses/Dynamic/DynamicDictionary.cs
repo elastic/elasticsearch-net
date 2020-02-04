@@ -263,6 +263,14 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
+		/// Backwards compatible access to all the KeyValue pairs, in the next release you will be able to foreach directly
+		/// </summary>
+		public IEnumerable<KeyValuePair<string, DynamicValue>> GetKeyValues()
+		{
+			return _backingDictionary;
+		}
+
+		/// <summary>
 		/// Returns the enumeration of all dynamic member names.
 		/// </summary>
 		/// <returns>A <see cref="IEnumerable{T}" /> that contains dynamic member names.</returns>
