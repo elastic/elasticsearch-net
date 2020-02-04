@@ -44,6 +44,7 @@ namespace ApiGenerator.Domain
 					if (
 						name.ToLowerInvariant().Contains("metric")
 						 ||(name.ToLowerInvariant() == "status")
+						 ||(name.ToLowerInvariant() == "format")
 					)
 					{
 						if (methodName.StartsWith(@namespace))
