@@ -287,13 +287,18 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                 return Failed <| Fail.Create op "%s" op.Section
         | Skip s ->
             let skip reason = Skipped (op, s.Reason |> Option.defaultValue reason)
-            let versionRangeCheck (v:SemVer.Range) =
+            let versionRangeCheck (versions:SemVer.Range list) =
                 let anchoredVersion =
                     let x = SemVer.Version(op.Version)
                     sprintf "%i.%i.%i" x.Major x.Minor x.Patch
-                match v.IsSatisfied(op.Version) || v.IsSatisfied(anchoredVersion) with
-                | true -> skip (sprintf "version:%s in range:%O" op.Version v)
-                | false -> NotSkipped op
+                
+                let versionInRange =
+                    versions
+                    |> List.tryFind (fun v -> v.IsSatisfied(op.Version) || v.IsSatisfied(anchoredVersion))
+                
+                match versionInRange with
+                | Some v -> skip (sprintf "version:%s in range:%O" op.Version v)
+                | None -> NotSkipped op
             let featureCheck (features:Feature list) =
                 let unsupportedFeatures =
                     features
