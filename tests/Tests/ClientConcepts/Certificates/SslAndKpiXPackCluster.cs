@@ -15,6 +15,6 @@ namespace Tests.ClientConcepts.Certificates
 
 		public SslAndKpiXPackCluster(SslAndKpiClusterConfiguration configuration) : base(configuration) { }
 
-		protected override void SeedCluster() { }
+		protected override void SeedNode() { }
 	}
 }

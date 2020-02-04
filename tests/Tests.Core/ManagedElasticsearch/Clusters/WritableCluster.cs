@@ -39,7 +39,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			};
 		}
 
-		protected override void SeedCluster()
+		protected override void SeedNode()
 		{
 			var seeder = new DefaultSeeder(Client);
 			seeder.SeedNode();

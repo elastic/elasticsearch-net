@@ -8,8 +8,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 {
 	public class TimeSeriesCluster : XPackCluster
 	{
-		protected override void SeedCluster() =>
-			new TimeSeriesSeeder(Client).SeedNode();
+		protected override void SeedNode() => new TimeSeriesSeeder(Client).SeedNode();
 	}
 
 	public class TimeSeriesSeeder
