@@ -1,21 +1,37 @@
 {
-  "cat.nodes":{
+  "cat.ml.jobs":{
     "documentation":{
-      "url":"https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html",
-      "description":"Returns basic statistics about performance of cluster nodes."
+      "url":"http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html"
     },
     "stability":"stable",
     "url":{
       "paths":[
         {
-          "path":"/_cat/nodes",
+          "path":"/_cat/ml/anomaly_detectors",
           "methods":[
             "GET"
           ]
+        },
+        {
+          "path":"/_cat/ml/anomaly_detectors/{job_id}",
+          "methods":[
+            "GET"
+          ],
+          "parts":{
+            "job_id":{
+              "type":"string",
+              "description":"The ID of the jobs stats to fetch"
+            }
+          }
         }
       ]
     },
     "params":{
+      "allow_no_jobs":{
+        "type":"boolean",
+        "required":false,
+        "description":"Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)"
+      },
       "bytes":{
         "type":"enum",
         "description":"The unit in which to display byte values",
@@ -36,22 +52,6 @@
       "format":{
         "type":"string",
         "description":"a short version of the Accept header, e.g. json, yaml"
-      },
-      "full_id":{
-        "type":"boolean",
-        "description":"Return the full node ID instead of the shortened version (default: false)"
-      },
-      "local":{
-        "type":"boolean",
-        "description":"Calculate the selected nodes using the local cluster state rather than the state from master node (default: false)",
-        "deprecated":{
-          "version":"7.6.0",
-          "description":"This parameter does not cause this API to act locally."
-        }
-      },
-      "master_timeout":{
-        "type":"time",
-        "description":"Explicit operation timeout for connection to master node"
       },
       "h":{
         "type":"list",
