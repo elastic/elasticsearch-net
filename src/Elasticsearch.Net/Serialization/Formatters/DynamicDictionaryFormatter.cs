@@ -9,6 +9,7 @@ namespace Elasticsearch.Net
 	{
 		protected static readonly DictionaryFormatter<string, object> DictionaryFormatter =
 			new DictionaryFormatter<string, object>();
+
 		protected static readonly ArrayFormatter<object> ArrayFormatter = new ArrayFormatter<object>();
 
 		public void Serialize(ref JsonWriter writer, DynamicDictionary value, IJsonFormatterResolver formatterResolver)
