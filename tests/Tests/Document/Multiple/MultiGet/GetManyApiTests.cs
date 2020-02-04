@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
@@ -40,6 +41,32 @@ namespace Tests.Document.Multiple.MultiGet
 				hit.Index.Should().NotBeNullOrWhiteSpace();
 				hit.Id.Should().NotBeNullOrWhiteSpace();
 				hit.Found.Should().BeTrue();
+			}
+		}
+
+		[I] public async Task ReturnsDocsMatchingIds()
+		{
+			var id = _ids.First();
+
+			var response = await _client.GetManyAsync<Developer>(new[] { id, id, id });
+			response.Count().Should().Be(3);
+			foreach (var hit in response)
+			{
+				hit.Index.Should().NotBeNullOrWhiteSpace();
+				hit.Id.Should().Be(id.ToString(CultureInfo.InvariantCulture));
+				hit.Found.Should().BeTrue();
+			}
+		}
+
+		[I] public async Task ReturnsSourceMatchingIds()
+		{
+			var id = _ids.First();
+
+			var sources = await _client.SourceManyAsync<Developer>(new[] { id, id, id });
+			sources.Count().Should().Be(3);
+			foreach (var hit in sources)
+			{
+				hit.Id.Should().Be(id);
 			}
 		}
 

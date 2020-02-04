@@ -30,9 +30,18 @@ namespace Nest
 		public IEnumerable<IMultiGetHit<T>> GetMany<T>(IEnumerable<string> ids) where T : class
 		{
 			var docs = Hits.OfType<IMultiGetHit<T>>();
-			return from d in docs
-				join id in ids on d.Id equals id
-				select d;
+
+			foreach (var id in ids)
+			{
+				foreach (var doc in docs)
+				{
+					if (string.Equals(doc.Id, id))
+					{
+						yield return doc;
+						break;
+					}
+				}
+			}
 		}
 
 		public IEnumerable<IMultiGetHit<T>> GetMany<T>(IEnumerable<long> ids) where T : class =>
@@ -49,10 +58,18 @@ namespace Nest
 		public IEnumerable<T> SourceMany<T>(IEnumerable<string> ids) where T : class
 		{
 			var docs = Hits.OfType<IMultiGetHit<T>>();
-			return from d in docs
-				join id in ids on d.Id equals id
-				where d.Found
-				select d.Source;
+
+			foreach (var id in ids)
+			{
+				foreach (var doc in docs)
+				{
+					if (string.Equals(doc.Id, id) && doc.Found)
+					{
+						yield return doc.Source;
+						break;
+					}
+				}
+			}
 		}
 
 		public IEnumerable<T> SourceMany<T>(IEnumerable<long> ids) where T : class =>
