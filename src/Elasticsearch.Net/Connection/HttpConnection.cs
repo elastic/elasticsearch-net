@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -229,6 +230,14 @@ namespace Elasticsearch.Net
 
 		protected virtual void SetAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
 		{
+			//If user manually specifies an Authorization Header give it preference
+			if (requestData.Headers.HasKeys() && requestData.Headers.AllKeys.Contains("Authorization"))
+			{
+				var header = AuthenticationHeaderValue.Parse(requestData.Headers["Authorization"]);
+				requestMessage.Headers.Authorization = header;
+				return;
+			};
+
 			// Api Key authentication takes precedence
 			var apiKeySet = SetApiKeyAuthenticationIfNeeded(requestMessage, requestData);
 
@@ -242,6 +251,7 @@ namespace Elasticsearch.Net
 			// ApiKey auth credentials take the following precedence (highest -> lowest):
 			// 1 - Specified on the request (highest precedence)
 			// 2 - Specified at the global IConnectionSettings level
+
 
 			string apiKey = null;
 			if (requestData.ApiKeyAuthenticationCredentials != null)
