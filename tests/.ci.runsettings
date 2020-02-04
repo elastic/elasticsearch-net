@@ -1,0 +1,15 @@
+<RunSettings>
+	<RunConfiguration>
+		<CollectSourceInformation>true</CollectSourceInformation>
+	</RunConfiguration>
+	<DataCollectionRunSettings>
+		<DataCollectors>
+			<DataCollector friendlyName="XPlat Code Coverage">
+				<Configuration>
+					<Format>cobertura</Format>
+					<UseSourceLink>true</UseSourceLink>
+				</Configuration>
+			</DataCollector>
+		</DataCollectors>
+	</DataCollectionRunSettings>
+</RunSettings>

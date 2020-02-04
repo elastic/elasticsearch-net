@@ -21,6 +21,7 @@ jobs:
   - script: ./build.sh test-one
     displayName: 'build and unit test'
   - task: PublishTestResults@2
+    condition: succeededOrFailed()
     inputs:
         testRunner: VSTest
         testResultsFiles: 'tests/**/*.trx'
@@ -52,6 +53,7 @@ jobs:
   - script: build.bat canary
     displayName: 'build and unit test'
   - task: PublishTestResults@2
+    condition: succeededOrFailed()
     inputs:
       testRunner: VSTest
       testResultsFiles: 'tests/**/*.trx'
