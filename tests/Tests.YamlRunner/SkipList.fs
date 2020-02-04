@@ -21,6 +21,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     
     // We can not handle nested namespace yet `cat.ml.jobs`
     SkipFile "ml/job_cat_apis.yml", All
+    SkipFile "ml/datafeed_cat_apis.yml", All
 
     // - Failed: Assert operation NumericAssert Length invalidated_api_keys "Long" Reason: Expected 2.000000 = 3.000000        
     SkipFile "api_key/11_invalidation.yml", Section "Test invalidate api key by realm name"
