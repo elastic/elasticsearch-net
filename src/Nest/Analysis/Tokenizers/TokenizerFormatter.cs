@@ -14,7 +14,6 @@ namespace Nest
 		private static readonly AutomataDictionary TokenizerTypes = new AutomataDictionary
 		{
 			{ "char_group", 0 },
-			{ "edgengram", 1 },
 			{ "edge_ngram", 1 },
 			{ "ngram", 2 },
 			{ "path_hierarchy", 3 },
