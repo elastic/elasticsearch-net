@@ -186,6 +186,15 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		[MapsApi("security.get_api_key", "")]
 		public Task<TResponse> GetApiKeyAsync<TResponse>(GetApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_security/api_key", ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_security/privilege/_builtin <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetBuiltinPrivileges<TResponse>(GetBuiltinPrivilegesRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_security/privilege/_builtin", null, RequestParams(requestParameters));
+		///<summary>GET on /_security/privilege/_builtin <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("security.get_builtin_privileges", "")]
+		public Task<TResponse> GetBuiltinPrivilegesAsync<TResponse>(GetBuiltinPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_security/privilege/_builtin", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_security/privilege <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetPrivileges<TResponse>(GetPrivilegesRequestParameters requestParameters = null)

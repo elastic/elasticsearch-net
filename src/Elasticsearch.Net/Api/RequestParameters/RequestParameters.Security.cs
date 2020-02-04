@@ -220,6 +220,13 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
+	///<summary>Request options for GetBuiltinPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html</para></summary>
+	public class GetBuiltinPrivilegesRequestParameters : RequestParameters<GetBuiltinPrivilegesRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+	}
+
 	///<summary>Request options for GetPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
 	public class GetPrivilegesRequestParameters : RequestParameters<GetPrivilegesRequestParameters>
 	{
