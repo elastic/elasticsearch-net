@@ -35,7 +35,7 @@ namespace Tests.Core.Serialization
 			}
 		}
 
-		protected bool PreserveNullInExpected { get; }
+		protected bool PreserveNullInExpected { get; set; }
 		protected SerializationTester Tester { get; }
 	}
 
@@ -50,9 +50,15 @@ namespace Tests.Core.Serialization
 		)
 			: base(settingsModifier, sourceSerializerFactory, propertyMappingProvider) => _object = @object;
 
+		public ObjectRoundTripper<T> PreserveNull()
+		{
+			PreserveNullInExpected = true;
+			return this;
+		}
+
 		public T RoundTrips() => Tester.AssertRoundTrip(_object);
 
-		public T RoundTrips(object expectedJson) => Tester.AssertRoundTrip(_object, expectedJson);
+		public T RoundTrips(object expectedJson) => Tester.AssertRoundTrip(_object, expectedJson, preserveNullInExpected: PreserveNullInExpected);
 	}
 
 	public class JsonRoundTripper : RoundTripperBase
