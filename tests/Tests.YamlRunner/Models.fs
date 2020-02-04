@@ -144,7 +144,7 @@ let (|ToFeature|) (s:string) =
     | "arbitrary_key" -> ArbitraryKey
     | s -> Unsupported s
 
-type Skip = { Version:SemVer.Range option; Reason:string option; Features: Feature list option }
+type Skip = { Version:SemVer.Range list option; Reason:string option; Features: Feature list option }
     with member this.Log = sprintf "Version %A Features:%A Reason: %A" this.Version this.Features this.Reason
 
 type NumericAssert = 
