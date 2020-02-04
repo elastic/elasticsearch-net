@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6C4A2627
 ProjectSection(SolutionItems) = preProject
 	tests\Directory.Build.props = tests\Directory.Build.props
 	tests\.runsettings = tests\.runsettings
+	tests\.ci.runsettings = tests\.ci.runsettings
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "tests\Tests\Tests.csproj", "{5B393962-7586-49BA-BD99-3B1E35F48E94}"
