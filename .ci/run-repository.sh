@@ -35,4 +35,4 @@ docker run \
   --volume ${repo}/build/output:/sln/build/output \
   --rm \
   elastic/elasticsearch-net \
-  ./build.sh rest-spec-tests -f count -e ${ELASTICSEARCH_URL} -o /sln/build/output/rest-spec-junit.xml
+  ./build.sh rest-spec-tests $TEST_SUITE -e ${ELASTICSEARCH_URL} -o /sln/build/output/rest-spec-junit.xml

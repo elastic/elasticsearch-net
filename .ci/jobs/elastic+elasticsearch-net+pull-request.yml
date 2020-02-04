@@ -3,6 +3,7 @@
     name: elastic+elasticsearch-net+pull-request
     display-name: 'elastic / elasticsearch-net # pull-request'
     description: Testing of elasticsearch-net pull requests.
+    junit_results: "*-junit.xml"
     scm:
     - git:
         branches:
