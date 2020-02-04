@@ -18,14 +18,13 @@ let SkipList = dict<SkipFile,SkipSection> [
     // 7.x only
     // We skip the generation of this API till one of the later minors
     SkipFile "indices.upgrade/10_basic.yml", All
-    // Sets a dictionary to null, we need to see if we can backport this from master
-    SkipFile "search.aggregation/240_max_buckets.yml", All
-    SkipFile "search.aggregation/180_percentiles_tdigest_metric.yml", Section "Invalid params test"
-    SkipFile "search.aggregation/190_percentiles_hdr_metric.yml", Section "Invalid params test"
+    
+    // We can not handle nested namespace yet `cat.ml.jobs`
+    SkipFile "ml/job_cat_apis.yml", All
 
     // - Failed: Assert operation NumericAssert Length invalidated_api_keys "Long" Reason: Expected 2.000000 = 3.000000        
     SkipFile "api_key/11_invalidation.yml", Section "Test invalidate api key by realm name"
-
+    
     // Test looks for "testnode.crt", but "ca.crt" is returned first
     SkipFile "ssl/10_basic.yml", Section "Test get SSL certificates"
     
