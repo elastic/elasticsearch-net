@@ -10,16 +10,13 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "ml/explain_data_frame_analytics.yml", Section "Test neither job id nor body"
     
     // funny looking dispatch /_security/privilege/app?name
-    SkipFile "privileges/10_basic.yml ", Sections [
+    SkipFile "privileges/10_basic.yml", Sections [
         "Test put and delete privileges"
         "Test put and get privileges"
     ]
     
     // - Failed: Assert operation NumericAssert Length invalidated_api_keys "Long" Reason: Expected 2.000000 = 3.000000        
     SkipFile "api_key/11_invalidation.yml", Section "Test invalidate api key by realm name"
-
-    // tries to change current users password, not something we keep track of with later tests
-    SkipFile "change_password/10_basic.yml", Section "Test user changing their own password"
 
     // Test looks for "testnode.crt", but "ca.crt" is returned first
     SkipFile "ssl/10_basic.yml", Section "Test get SSL certificates"
@@ -37,6 +34,9 @@ let SkipList = dict<SkipFile,SkipSection> [
     ])
 
     SkipFile "rollup/put_job.yml", Section "Test put job with templates"
+    
+    SkipFile "change_password/11_token.yml", Section "Test user changing their password authenticating with token not allowed"
+
     SkipFile "change_password/10_basic.yml", Sections [
         // Changing password locks out tests
         "Test user changing their own password"
@@ -53,7 +53,6 @@ let SkipList = dict<SkipFile,SkipSection> [
         "Verify start transform reuses destination index"
         "Test get multiple transform stats"
     ]
-    SkipFile "privileges/10_basic.yml", Section "Test put and delete privileges"
     
     SkipFile "transform/transforms_stats.yml", Sections [
         "Test get multiple transform stats"

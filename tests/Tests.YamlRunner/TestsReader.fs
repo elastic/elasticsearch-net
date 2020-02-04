@@ -212,7 +212,7 @@ let private DefaultSetup : Operation list = [Actions("Setup", fun (client, suite
             |> Seq.tryHead
     
     match suite with
-    | OpenSource ->
+    | Oss ->
         let deleteAll = client.Indices.Delete<DynamicResponse>("*")
         let templates =
             client.Cat.Templates<StringResponse>("*", CatTemplatesRequestParameters(Headers=["name"].ToArray()))

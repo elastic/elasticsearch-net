@@ -7,9 +7,6 @@ open Argu
 open Tests.YamlRunner
 open Tests.YamlRunner.Models
 open Elasticsearch.Net
-open Elasticsearch.Net
-open Elasticsearch.Net
-open Elasticsearch.Net
 
 type Arguments =
     | [<First; MainCommand; CliPrefix(CliPrefix.None)>] NamedSuite of TestSuite
@@ -36,7 +33,7 @@ let private runningProxy = runningMitmProxy || Process.GetProcessesByName("fiddl
 let private defaultEndpoint namedSuite = 
     let host = 
         match (runningProxy, namedSuite) with
-        | (true, OpenSource) -> "ipv.fiddler"
+        | (true, Oss) -> "ipv.fiddler"
         | _ -> "localhost"
     let https = match namedSuite with | XPack -> "s" | _ -> ""
     sprintf "http%s://%s:9200" https host;
@@ -57,7 +54,7 @@ let private createClient endpoint namedSuite =
     // proxy 
     let proxySettings =
         match (runningMitmProxy, namedSuite) with
-        | (true, OpenSource) -> settings.Proxy(Uri("http://ipv4.fiddler:8080"), String(null), String(null))
+        | (true, Oss) -> settings.Proxy(Uri("http://ipv4.fiddler:8080"), String(null), String(null))
         | _ -> settings
     // auth
     let authSettings =
@@ -65,12 +62,12 @@ let private createClient endpoint namedSuite =
         | Some(username, password) -> proxySettings.BasicAuthentication(username, password)
         | _ -> proxySettings
     // certs
-    let authSettings =
+    let certSettings =
         match namedSuite with
         | XPack -> 
-            proxySettings.ServerCertificateValidationCallback(fun _ _ _ _ -> true)
-        | _ -> proxySettings
-    new ElasticLowLevelClient(authSettings)
+            authSettings.ServerCertificateValidationCallback(fun _ _ _ _ -> true)
+        | _ -> authSettings
+    new ElasticLowLevelClient(certSettings)
     
 let validateRevisionParams endpoint passedRevision namedSuite =    
     let client = createClient endpoint namedSuite
@@ -104,7 +101,7 @@ let validateRevisionParams endpoint passedRevision namedSuite =
     
 let runMain (parsed:ParseResults<Arguments>) = async {
     
-    let namedSuite = parsed.TryGetResult NamedSuite |> Option.defaultValue OpenSource
+    let namedSuite = parsed.TryGetResult NamedSuite |> Option.defaultValue Oss
     let directory = parsed.TryGetResult Folder //|> Option.defaultValue "indices.create" |> Some
     let file = parsed.TryGetResult TestFile //|> Option.defaultValue "10_basic.yml" |> Some
     let endpoint = parsed.TryGetResult Endpoint |> Option.defaultValue (defaultEndpoint namedSuite)
