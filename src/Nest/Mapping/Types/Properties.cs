@@ -97,6 +97,9 @@ namespace Nest
 		TReturnType IpRange(Func<IpRangePropertyDescriptor<T>, IIpRangeProperty> selector);
 
 		TReturnType Join(Func<JoinPropertyDescriptor<T>, IJoinProperty> selector);
+
+		/// <inheritdoc cref="IHistogramProperty"/>
+		TReturnType Histogram(Func<HistogramPropertyDescriptor<T>, IHistogramProperty> selector);
 	}
 
 	public partial class PropertiesDescriptor<T> where T : class
@@ -173,6 +176,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IFlattenedProperty"/>
 		public PropertiesDescriptor<T> Flattened(Func<FlattenedPropertyDescriptor<T>, IFlattenedProperty> selector) => SetProperty(selector);
+
+		/// <inheritdoc cref="IHistogramProperty"/>
+		public PropertiesDescriptor<T> Histogram(Func<HistogramPropertyDescriptor<T>, IHistogramProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Custom(IProperty customType) => SetProperty(customType);
 

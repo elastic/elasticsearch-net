@@ -60,6 +60,8 @@ namespace Nest
 
 		public virtual void Visit(IFlattenedProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
+		public virtual void Visit(IHistogramProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+
 		public virtual IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => null;
 
 		public void Visit(IProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
@@ -143,6 +145,9 @@ namespace Nest
 					break;
 				case IRankFeaturesProperty rankFeatures:
 					Visit(rankFeatures, propertyInfo, attribute);
+					break;
+				case IHistogramProperty histogram:
+					Visit(histogram, propertyInfo, attribute);
 					break;
 			}
 		}

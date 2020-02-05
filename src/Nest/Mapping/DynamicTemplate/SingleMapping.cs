@@ -51,6 +51,10 @@ namespace Nest
 		public IProperty Join(Func<JoinPropertyDescriptor<T>, IJoinProperty> selector) =>
 			selector?.Invoke(new JoinPropertyDescriptor<T>());
 
+		/// <inheritdoc />
+		public IProperty Histogram(Func<HistogramPropertyDescriptor<T>, IHistogramProperty> selector) =>
+			selector?.Invoke(new HistogramPropertyDescriptor<T>());
+
 		public IProperty Keyword(Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector) =>
 			selector?.Invoke(new KeywordPropertyDescriptor<T>());
 
