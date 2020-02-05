@@ -28,7 +28,7 @@ namespace Tests.QueryDsl.BoolDsl
 			Option2
 		}
 
-		protected override void SeedCluster()
+		protected override void SeedNode()
 		{
 			var client = Client;
 			var index = client.Indices.Create(Index<A>(), i => i

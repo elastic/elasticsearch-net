@@ -3,6 +3,7 @@ using Elastic.Managed.Ephemeral;
 using Elastic.Managed.Ephemeral.Plugins;
 using Elastic.Stack.Artifacts.Products;
 using Elastic.Xunit;
+using Elasticsearch.Net;
 using Nest;
 using Tests.Configuration;
 using Tests.Core.Client;
@@ -23,6 +24,15 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 		public IElasticClient Client => this.GetOrAddClient(s => ConnectionSettings(s.ApplyDomainSettings()));
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s;
+
+		protected sealed override void SeedCluster()
+		{
+			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = WaitForStatus.Green });
+			SeedNode();
+			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = WaitForStatus.Green });
+		}
+
+		protected virtual void SeedNode() { }
 	}
 
 	public class ClientTestClusterConfiguration : XunitClusterConfiguration

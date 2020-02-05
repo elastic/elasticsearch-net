@@ -28,7 +28,7 @@ namespace Tests.XPack.MachineLearning
 			Timeout = TimeSpan.FromMinutes(10),
 		}) { }
 
-		protected override void SeedCluster() => new MachineLearningSeeder(Client, ClusterConfiguration.FileSystem).SeedNode();
+		protected override void SeedNode() => new MachineLearningSeeder(Client, ClusterConfiguration.FileSystem).SeedNode();
 	}
 
 	public class DownloadMachineLearningSampleDataDistribution : ClusterComposeTask
