@@ -8,13 +8,13 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface IFloatRangeProperty : IRangeProperty { }
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IFloatRangeProperty"/>
 	public class FloatRangeProperty : RangePropertyBase, IFloatRangeProperty
 	{
 		public FloatRangeProperty() : base(RangeType.FloatRange) { }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IFloatRangeProperty"/>
 	public class FloatRangePropertyDescriptor<T>
 		: RangePropertyDescriptorBase<FloatRangePropertyDescriptor<T>, IFloatRangeProperty, T>, IFloatRangeProperty
 		where T : class

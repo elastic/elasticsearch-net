@@ -5,6 +5,13 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// A field to index full-text values, such as the body of an email or the description of a product.
+	/// These fields are analyzed in Elasticsearch, by passing through an analyzer to convert the string
+	/// into a list of individual terms before being indexed.
+	/// <para />
+	/// Text fields are not used for sorting and seldom used for aggregations
+	/// </summary>
 	[InterfaceDataContract]
 	public interface ITextProperty : ICoreProperty
 	{
@@ -51,6 +58,7 @@ namespace Nest
 		TermVectorOption? TermVector { get; set; }
 	}
 
+	/// <inheritdoc cref="ITextProperty"/>
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class TextProperty : CorePropertyBase, ITextProperty
 	{
@@ -71,6 +79,7 @@ namespace Nest
 		public TermVectorOption? TermVector { get; set; }
 	}
 
+	/// <inheritdoc cref="ITextProperty"/>
 	public class TextPropertyDescriptor<T>
 		: CorePropertyDescriptorBase<TextPropertyDescriptor<T>, ITextProperty, T>, ITextProperty
 		where T : class

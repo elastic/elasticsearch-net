@@ -6,6 +6,9 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// A numeric mapping that defaults to <c>float</c>.
+	/// </summary>
 	[InterfaceDataContract]
 	public interface INumberProperty : IDocValuesProperty
 	{

@@ -5,6 +5,9 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// The date datatype maps a field as a date in Elasticsearch.
+	/// </summary>
 	[InterfaceDataContract]
 	public interface IDateProperty : IDocValuesProperty
 	{

@@ -8,13 +8,13 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface IDoubleRangeProperty : IRangeProperty { }
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IDoubleRangeProperty"/>
 	public class DoubleRangeProperty : RangePropertyBase, IDoubleRangeProperty
 	{
 		public DoubleRangeProperty() : base(RangeType.DoubleRange) { }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IDoubleRangeProperty"/>
 	public class DoubleRangePropertyDescriptor<T>
 		: RangePropertyDescriptorBase<DoubleRangePropertyDescriptor<T>, IDoubleRangeProperty, T>, IDoubleRangeProperty
 		where T : class
