@@ -4,7 +4,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 {
 	public class CrossCluster : ClientTestClusterBase
 	{
-		protected override void SeedCluster()
+		protected override void SeedNode()
 		{
 			new DefaultSeeder(Client).SeedNode();
 

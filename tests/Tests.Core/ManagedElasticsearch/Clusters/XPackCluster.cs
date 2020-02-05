@@ -27,7 +27,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			TrialMode = XPackTrialMode.Trial;
 			AdditionalBeforeNodeStartedTasks.Add(new EnsureWatcherActionConfigurationInElasticsearchYaml());
 			AdditionalBeforeNodeStartedTasks.Add(new EnsureWatcherActionConfigurationSecretsInKeystore());
-			AdditionalBeforeNodeStartedTasks.Add(new EnsureNativeSecurityRealmEnabledInElasticsearchYaml());		
+			AdditionalBeforeNodeStartedTasks.Add(new EnsureNativeSecurityRealmEnabledInElasticsearchYaml());
 			ShowElasticsearchOutputAfterStarted = true; //this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
 		}
 	}
@@ -46,6 +46,13 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 			.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 
-		protected override void SeedCluster() => new DefaultSeeder(Client).SeedNode();
+		protected sealed override void SeedCluster()
+		{
+			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = WaitForStatus.Green });
+			SeedNode();
+			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = WaitForStatus.Green });
+		}
+
+		protected virtual void SeedNode() => new DefaultSeeder(Client).SeedNode();
 	}
 }

@@ -14,12 +14,12 @@ namespace Tests.Document.Multiple.Reindex
 {
 	public class ReindexCluster : ClientTestClusterBase
 	{
-		protected override void SeedCluster() => new DefaultSeeder(Client).SeedNodeNoData();
+		protected override void SeedNode() => new DefaultSeeder(Client).SeedNodeNoData();
 	}
 
 	public class ManualReindexCluster : ClientTestClusterBase
 	{
-		protected override void SeedCluster() => new DefaultSeeder(Client).SeedNodeNoData();
+		protected override void SeedNode() => new DefaultSeeder(Client).SeedNodeNoData();
 	}
 
 	public class ReindexApiTests : IClusterFixture<ManualReindexCluster>
