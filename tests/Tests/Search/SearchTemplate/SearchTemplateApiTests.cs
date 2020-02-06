@@ -4,6 +4,7 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
@@ -103,7 +104,10 @@ namespace Tests.Search.SearchTemplate
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ServerError.Should().NotBeNull();
-			response.ServerError.Error.Reason.Should().Contain("unknown query [atch]");
+			if (TestConfiguration.Instance.ElasticsearchVersion <= "7.5.0")
+				response.ServerError.Error.Reason.Should().Contain("no [query]");
+			else
+				response.ServerError.Error.Reason.Should().Contain("unknown query [atch]");
 		}
 	}
 }

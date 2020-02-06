@@ -252,7 +252,10 @@ namespace Tests.XPack.Slm
 		{
 			r.IsValid.Should().BeTrue();
 			r.ApiCall.HttpStatusCode.Should().Be(200);
-			r.OperationMode.Should().Be(LifecycleOperationMode.Running);
+			var m = r.OperationMode;
+			var rightOperationMode =
+				m == LifecycleOperationMode.Running || m == LifecycleOperationMode.Stopped;
+			rightOperationMode.Should().BeTrue();
 		});
 
 		[I] public async Task StopSnapshotLifecycleResponse() => await Assert<StopSnapshotLifecycleManagementResponse>(StopSnapshotLifecycleStep, (v, r) =>
