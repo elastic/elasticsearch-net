@@ -78,6 +78,8 @@ namespace Nest
 
 		public StatsAggregate Stats(string key) => TryGet<StatsAggregate>(key);
 
+		public StringStatsAggregate StringStats(string key) => TryGet<StringStatsAggregate>(key);
+
 		public StatsAggregate StatsBucket(string key) => TryGet<StatsAggregate>(key);
 
 		public ExtendedStatsAggregate ExtendedStats(string key) => TryGet<ExtendedStatsAggregate>(key);

@@ -36,6 +36,7 @@ namespace Nest
 
 		private static readonly byte[] KeysField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.Keys);
 		private static readonly byte[] MetaField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.Meta);
+		private static readonly byte[] MinLengthField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.MinLength);
 
 		private static readonly AutomataDictionary RootFields = new AutomataDictionary
 		{
@@ -133,7 +134,7 @@ namespace Nest
 						aggregate = GetMultiBucketAggregate(ref reader, formatterResolver, ref propertyName, meta);
 						break;
 					case 5:
-						aggregate = GetStatsAggregate(ref reader, meta);
+						aggregate = GetStatsAggregate(ref reader, formatterResolver, meta);
 						break;
 					case 6:
 						aggregate = GetSingleBucketAggregate(ref reader, formatterResolver, meta);
@@ -397,7 +398,52 @@ namespace Nest
 			return new SingleBucketAggregate(subAggregates) { DocCount = docCount, Meta = meta };
 		}
 
-		private IAggregate GetStatsAggregate(ref JsonReader reader, IReadOnlyDictionary<string, object> meta)
+		private IAggregate GetStringStatsAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver,
+			IReadOnlyDictionary<string, object> meta, long count
+		)
+		{
+			// string stats aggregation
+			var minLength = reader.ReadInt32();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "max_length"
+			reader.ReadNext(); // :
+			var maxLength = reader.ReadInt32();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "avg_length"
+			reader.ReadNext(); // :
+			var avgLength = reader.ReadDouble();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "entropy"
+			reader.ReadNext(); // :
+			var entropy = reader.ReadDouble();
+
+			var aggregate = new StringStatsAggregate
+			{
+				Meta = meta,
+				Count = count,
+				MinLength = minLength,
+				MaxLength = maxLength,
+				AverageLength = avgLength,
+				Entropy = entropy
+			};
+
+			if (reader.ReadIsValueSeparator())
+			{
+				reader.ReadNext(); // "distribution"
+				reader.ReadNext(); // :
+				var distribution = formatterResolver
+					.GetFormatter<IReadOnlyDictionary<string, double>>()
+					.Deserialize(ref reader, formatterResolver);
+
+				// only set distribution if present, leaving empty dictionary when absent
+				aggregate.Distribution = distribution;
+			}
+
+			return aggregate;
+		}
+
+		private IAggregate GetStatsAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, IReadOnlyDictionary<string, object> meta
+		)
 		{
 			var count = reader.ReadNullableLong().GetValueOrDefault(0);
 
@@ -405,8 +451,14 @@ namespace Nest
 				return new GeoCentroidAggregate { Count = count, Meta = meta };
 
 			reader.ReadNext(); // ,
-			reader.ReadNext(); // "min"
-			reader.ReadNext(); // :
+
+			var property = reader.ReadPropertyNameSegmentRaw();
+
+			// string stats aggregation
+			if (property.EqualsBytes(MinLengthField))
+				return GetStringStatsAggregate(ref reader, formatterResolver, meta, count);
+
+			// stats or extended stats aggregation
 			var min = reader.ReadNullableDouble();
 			reader.ReadNext(); // ,
 			reader.ReadNext(); // "max"
@@ -930,6 +982,7 @@ namespace Nest
 			public const string Location = "location";
 			public const string MaxScore = "max_score";
 			public const string Meta = "meta";
+			public const string MinLength = "min_length";
 
 			public const string Score = "score";
 
