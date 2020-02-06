@@ -88,5 +88,8 @@ namespace Nest
 
 		[DataMember(Name = "searchable")]
 		public bool Searchable { get; internal set; }
+
+		[DataMember(Name = "meta")]
+		public IReadOnlyDictionary<string, string[]> Meta { get; internal set; } = EmptyReadOnly<string, string[]>.Dictionary;
 	}
 }

@@ -4,7 +4,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Mapping.Types.Core.Text;
 
-namespace Tests.Mapping.LocalMetadata {
+namespace Tests.Mapping.LocalMetadata
+{
 	public class LocalMetadataVisitorTests
 	{
 		[U]
@@ -17,7 +18,7 @@ namespace Tests.Mapping.LocalMetadata {
 					.AddTestLocalMetadata()
 				)) as ITypeMapping;
 
-			var visitor = new LocalMatadataVisitor();
+			var visitor = new LocalMetadataVisitor();
 			var walker = new MappingWalker(visitor);
 			walker.Accept(descriptor.Properties);
 
@@ -36,7 +37,7 @@ namespace Tests.Mapping.LocalMetadata {
 					)
 				)) as ITypeMapping;
 
-			var visitor = new LocalMatadataVisitor();
+			var visitor = new LocalMetadataVisitor();
 			var walker = new MappingWalker(visitor);
 			walker.Accept(descriptor.Properties);
 
@@ -63,7 +64,7 @@ namespace Tests.Mapping.LocalMetadata {
 		}
 	}
 
-	public class LocalMatadataVisitor : NoopMappingVisitor
+	public class LocalMetadataVisitor : NoopMappingVisitor
 	{
 		public int MetadataCount { get; set; }
 
