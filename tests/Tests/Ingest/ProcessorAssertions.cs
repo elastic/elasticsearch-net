@@ -70,6 +70,30 @@ namespace Tests.Ingest
 			public override string Key => "append";
 		}
 
+		[SkipVersion("<7.6.0", "Introduced in Elasticsearch 7.6.0+")]
+		public class Csv : ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Csv<Project>(c => c
+					.Field(p => p.Name)
+					.TargetFields(new[] { "targetField1", "targetField2" })
+				);
+
+			public override IProcessor Initializer => new CsvProcessor
+			{
+				Field = "name",
+				TargetFields = new[] { "targetField1", "targetField2" },
+			};
+
+			public override object Json => new
+			{
+				field = "name",
+				target_fields = new[] { "targetField1", "targetField2" },
+			};
+
+			public override string Key => "csv";
+		}
+
 		public class Convert : ProcessorAssertion
 		{
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
