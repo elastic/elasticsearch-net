@@ -34,6 +34,14 @@ namespace Nest
 		[DataMember(Name = "_primary_term")]
 		public long PrimaryTerm { get; internal set; }
 
+		[DataMember(Name = "get")]
+		internal LazyDocument Get { get; set; }
+
+		/// <summary>
+		/// Deserialize the <see cref="Get"/> property as a GetResponse<TDocument> type, where TDocument is the document type.
+		/// </summary>
+		public GetResponse<TDocument> GetResponse<TDocument>() where TDocument : class => Get?.AsUsingRequestResponseSerializer<GetResponse<TDocument>>();
+
 		/// <summary> The result of the bulk operation</summary>
 		[DataMember(Name = "result")]
 		public string Result { get; internal set; }
