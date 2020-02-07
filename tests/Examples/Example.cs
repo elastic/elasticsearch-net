@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
 using Newtonsoft.Json.Linq;
@@ -23,6 +25,15 @@ namespace Examples
 		public HttpMethod Method { get; set; }
 
 		public UriBuilder Uri { get; set; }
+
+		public void ApplyBodyLineChanges(Action<List<string>> lines)
+		{
+			var body = Body == null
+				? new List<string>()
+				: Body.Split(new [] { Environment.NewLine, "\r", "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+			lines(body);
+			Body = string.Join(Environment.NewLine, body);
+		}
 
 		public void ApplyBodyChanges(Action<JObject> action)
 		{
