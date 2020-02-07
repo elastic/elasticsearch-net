@@ -1,4 +1,5 @@
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using Nest;
 
 namespace Examples.Docs
@@ -98,7 +99,22 @@ namespace Examples.Docs
 			{ ""update"" : {""_id"" : ""3"", ""_index"" : ""index1"", ""_source"" : true} }
 			{ ""doc"" : {""field"" : ""value""} }
 			{ ""update"" : {""_id"" : ""4"", ""_index"" : ""index1""} }
-			{ ""doc"" : {""field"" : ""value""}, ""_source"": true}");
+			{ ""doc"" : {""field"" : ""value""}, ""_source"": true}",
+				e =>
+				{
+					// This is quite ugly, but seems reasonable given the patching that would need to occur.
+					return Example.Create(@"POST _bulk
+			{ ""update"" : {""_id"" : ""1"", ""_index"" : ""index1"", ""retry_on_conflict"" : 3} }
+			{ ""doc"" : {""field"" : ""value""} }
+			{ ""update"" : { ""_id"" : ""0"", ""_index"" : ""index1"", ""retry_on_conflict"" : 3} }
+			{ ""script"" : { ""source"": ""ctx._source.counter += params.param1"", ""lang"" : ""painless"", ""params"" : {""param1"" : 1}}, ""upsert"" : {""counter"" : 1}}
+			{ ""update"" : {""_id"" : ""2"", ""_index"" : ""index1"", ""retry_on_conflict"" : 3} }
+			{ ""doc_as_upsert"" : true, ""doc"" : {""field"" : ""value""} }
+			{ ""update"" : {""_id"" : ""3"", ""_index"" : ""index1"", ""_source"" : true } }
+			{  ""_source"": true, ""doc"" : {""field"" : ""value""} }
+			{ ""update"" : {""_id"" : ""4"", ""_index"" : ""index1"",  ""_source"": true } }
+			{ ""_source"": true, ""doc"" : {""field"" : ""value""} }");
+				});
 		}
 	}
 }
