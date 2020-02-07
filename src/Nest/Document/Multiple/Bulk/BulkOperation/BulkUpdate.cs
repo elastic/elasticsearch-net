@@ -52,7 +52,7 @@ namespace Nest
 		/// True or false to return the _source field or not, or a list of fields to return.
 		/// </summary>
 		[DataMember(Name = "_source")]
-		bool? Source { get; set; }
+		Union<bool, ISourceFilter> Source { get; set; }
 	}
 
 	[DataContract]
@@ -129,7 +129,7 @@ namespace Nest
 		/// <summary>
 		/// True or false to return the _source field or not, or a list of fields to return.
 		/// </summary>
-		public bool? Source { get; set; }
+		public Union<bool, ISourceFilter> Source { get; set; }
 
 		protected override Type ClrType => typeof(TDocument);
 
@@ -187,7 +187,7 @@ namespace Nest
 
 		long? IBulkUpdateOperation<TDocument, TPartialDocument>.IfPrimaryTerm { get; set; }
 
-		bool? IBulkUpdateOperation<TDocument, TPartialDocument>.Source { get; set; }
+		Union<bool, ISourceFilter> IBulkUpdateOperation<TDocument, TPartialDocument>.Source { get; set; }
 
 		protected override object GetBulkOperationBody() =>
 			new BulkUpdateBody<TDocument, TPartialDocument>
@@ -283,7 +283,7 @@ namespace Nest
 		/// <summary>
 		/// True or false to return the _source field or not, or a list of fields to return.
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialDocument> Source(bool? source = true) =>
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Source(Union<bool, ISourceFilter> source) =>
 			Assign(source, (a, v) => a.Source = v);
 	}
 }
