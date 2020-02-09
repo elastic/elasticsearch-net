@@ -17,7 +17,8 @@ namespace Nest
 			{ "missing", 4 },
 			{ "percents", 5 },
 			{ "meta", 6 },
-			{ "keyed", 7 }
+			{ "keyed", 7 },
+			{ "format", 8 },
 		};
 
 		public IPercentilesAggregation Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -66,6 +67,9 @@ namespace Nest
 							break;
 						case 7:
 							percentiles.Keyed = reader.ReadBoolean();
+							break;
+						case 8:
+							percentiles.Format = reader.ReadString();
 							break;
 					}
 				}
@@ -179,6 +183,16 @@ namespace Nest
 
 				writer.WritePropertyName("keyed");
 				writer.WriteBoolean(value.Keyed.Value);
+				propertyWritten = true;
+			}
+
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				if (propertyWritten)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("format");
+				writer.WriteString(value.Format);
 			}
 
 			writer.WriteEndObject();
