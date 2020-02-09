@@ -45,6 +45,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 
 		protected override int ExpectStatusCode => 200;
 
+#pragma warning disable 618
 		protected override Func<ReindexOnServerDescriptor, IReindexOnServerRequest> Fluent => d => d
 			.Source(s => s
 				.Index(CallIsolatedValue)
@@ -69,6 +70,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			)
 			.Conflicts(Conflicts.Proceed)
 			.Refresh();
+#pragma warning restore 618
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
@@ -78,7 +80,9 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			{
 				Index = CallIsolatedValue,
 				Query = new MatchAllQuery(),
+#pragma warning disable 618
 				Sort = new List<ISort> { new FieldSort { Field = "id", Order = SortOrder.Ascending } },
+#pragma warning restore 618
 				Size = 100,
 				Slice = new SlicedScroll { Field = "id", Id = 0, Max = 2 }
 			},
