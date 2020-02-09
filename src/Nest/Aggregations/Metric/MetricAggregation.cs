@@ -20,7 +20,7 @@ namespace Nest
 		/// <summary>
 		/// The value to use when the aggregation finds a missing value in a document
 		/// </summary>
-		/// TODO: This should be object in 8.x
+		// TODO: This should be object in 8.x
 		[DataMember(Name ="missing")]
 		double? Missing { get; set; }
 
