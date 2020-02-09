@@ -5,14 +5,14 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	[JsonFormatter(typeof(PercentileRanksAggregationFormatter))]
-	public interface IPercentileRanksAggregation : IMetricAggregation
+	public interface IPercentileRanksAggregation : IFormattableMetricAggregation
 	{
 		IPercentilesMethod Method { get; set; }
 		IEnumerable<double> Values { get; set; }
 		bool? Keyed { get; set; }
 	}
 
-	public class PercentileRanksAggregation : MetricAggregationBase, IPercentileRanksAggregation
+	public class PercentileRanksAggregation : FormattableMetricAggregationBase, IPercentileRanksAggregation
 	{
 		internal PercentileRanksAggregation() { }
 
@@ -26,7 +26,7 @@ namespace Nest
 	}
 
 	public class PercentileRanksAggregationDescriptor<T>
-		: MetricAggregationDescriptorBase<PercentileRanksAggregationDescriptor<T>, IPercentileRanksAggregation, T>, IPercentileRanksAggregation
+		: FormattableMetricAggregationDescriptorBase<PercentileRanksAggregationDescriptor<T>, IPercentileRanksAggregation, T>, IPercentileRanksAggregation
 		where T : class
 	{
 		IPercentilesMethod IPercentileRanksAggregation.Method { get; set; }

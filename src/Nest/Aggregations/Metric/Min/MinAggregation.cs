@@ -4,9 +4,9 @@ namespace Nest
 {
 	[InterfaceDataContract]
 	[ReadAs(typeof(MinAggregation))]
-	public interface IMinAggregation : IMetricAggregation { }
+	public interface IMinAggregation : IFormattableMetricAggregation { }
 
-	public class MinAggregation : MetricAggregationBase, IMinAggregation
+	public class MinAggregation : FormattableMetricAggregationBase, IMinAggregation
 	{
 		internal MinAggregation() { }
 
@@ -16,7 +16,7 @@ namespace Nest
 	}
 
 	public class MinAggregationDescriptor<T>
-		: MetricAggregationDescriptorBase<MinAggregationDescriptor<T>, IMinAggregation, T>
+		: FormattableMetricAggregationDescriptorBase<MinAggregationDescriptor<T>, IMinAggregation, T>
 			, IMinAggregation
 		where T : class { }
 }

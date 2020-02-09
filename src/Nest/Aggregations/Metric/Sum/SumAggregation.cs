@@ -4,9 +4,9 @@ namespace Nest
 {
 	[InterfaceDataContract]
 	[ReadAs(typeof(SumAggregation))]
-	public interface ISumAggregation : IMetricAggregation { }
+	public interface ISumAggregation : IFormattableMetricAggregation { }
 
-	public class SumAggregation : MetricAggregationBase, ISumAggregation
+	public class SumAggregation : FormattableMetricAggregationBase, ISumAggregation
 	{
 		internal SumAggregation() { }
 
@@ -16,7 +16,7 @@ namespace Nest
 	}
 
 	public class SumAggregationDescriptor<T>
-		: MetricAggregationDescriptorBase<SumAggregationDescriptor<T>, ISumAggregation, T>
+		: FormattableMetricAggregationDescriptorBase<SumAggregationDescriptor<T>, ISumAggregation, T>
 			, ISumAggregation
 		where T : class { }
 }
