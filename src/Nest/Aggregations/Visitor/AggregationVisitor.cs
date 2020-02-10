@@ -128,6 +128,16 @@
 
 		void Visit(IMedianAbsoluteDeviationAggregation aggregation);
 
+		void Visit(IAdjacencyMatrixAggregation aggregation);
+
+		void Visit(IAutoDateHistogramAggregation aggregation);
+
+		void Visit(IMatrixStatsAggregation aggregation);
+
+		void Visit(IWeightedAverageAggregation aggregation);
+
+		void Visit(IMovingFunctionAggregation aggregation);
+
 		void Visit(IStringStatsAggregation aggregation);
 	}
 
@@ -240,6 +250,16 @@
 		public virtual void Visit(ICompositeAggregation aggregation) { }
 
 		public virtual void Visit(IMedianAbsoluteDeviationAggregation aggregation) { }
+
+		public virtual void Visit(IAdjacencyMatrixAggregation aggregation) { }
+
+		public virtual void Visit(IAutoDateHistogramAggregation aggregation) { }
+
+		public virtual void Visit(IMatrixStatsAggregation aggregation) { }
+
+		public virtual void Visit(IWeightedAverageAggregation aggregation) { }
+
+		public virtual void Visit(IMovingFunctionAggregation aggregation) { }
 
 		public virtual void Visit(IStringStatsAggregation aggregation) { }
 
