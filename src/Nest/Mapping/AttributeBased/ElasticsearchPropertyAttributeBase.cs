@@ -23,6 +23,8 @@ namespace Nest
 
 		IDictionary<string, object> IProperty.LocalMetadata { get; set; }
 
+		IDictionary<string, string> IProperty.Meta { get; set; }
+
 		PropertyName IProperty.Name { get; set; }
 		private IProperty Self => this;
 		string IProperty.Type { get; set; }
