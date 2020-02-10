@@ -26,15 +26,6 @@ namespace Examples
 
 		public UriBuilder Uri { get; set; }
 
-		public void ApplyBodyLineChanges(Action<List<string>> lines)
-		{
-			var body = Body == null
-				? new List<string>()
-				: Body.Split(new [] { Environment.NewLine, "\r", "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
-			lines(body);
-			Body = string.Join(Environment.NewLine, body);
-		}
-
 		public void ApplyBulkBodyChanges(Action<List<JObject>> action)
 		{
 			var body = Body == null
