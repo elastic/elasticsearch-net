@@ -25,6 +25,7 @@ namespace Nest
 
 		IDictionary<string, object> IProperty.LocalMetadata { get; set; }
 		PropertyName IProperty.Name { get; set; }
+		IDictionary<string, string> IProperty.Meta { get; set; }
 
 		string IProperty.Type
 		{
@@ -41,5 +42,9 @@ namespace Nest
 		/// <inheritdoc cref="IProperty.LocalMetadata" />
 		public TDescriptor LocalMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
 			Assign(selector, (a, v) => a.LocalMetadata = v?.Invoke(new FluentDictionary<string, object>()));
+
+		/// <inheritdoc cref="IProperty.Meta" />
+		public TDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector) =>
+			Assign(selector, (a, v) => a.Meta = v?.Invoke(new FluentDictionary<string, string>()));
 	}
 }

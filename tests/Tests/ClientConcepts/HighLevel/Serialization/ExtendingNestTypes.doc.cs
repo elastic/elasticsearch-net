@@ -35,6 +35,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		public class MyPluginProperty : IProperty
 		{
 			IDictionary<string, object> IProperty.LocalMetadata { get; set; }
+			IDictionary<string, string> IProperty.Meta { get; set; }
 			public string Type { get; set; } = "my_plugin_property";
 			public PropertyName Name { get; set; }
 

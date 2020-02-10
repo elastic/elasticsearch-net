@@ -21,6 +21,18 @@ namespace Nest
 		IDictionary<string, object> LocalMetadata { get; set; }
 
 		/// <summary>
+		/// Metadata attached to the field. This metadata is stored in but opaque to Elasticsearch. It is
+		/// only useful for multiple applications that work on the same indices to share
+		/// meta information about fields such as units.
+		///<para></para>
+		/// Field metadata enforces at most 5 entries, that keys have a length that
+		/// is less than or equal to 20, and that values are strings whose length is less
+		///	than or equal to 50.
+		/// </summary>
+		[DataMember(Name = "meta")]
+		IDictionary<string, string> Meta { get; set; }
+
+		/// <summary>
 		/// The name of the property
 		/// </summary>
 		[IgnoreDataMember]
@@ -54,10 +66,13 @@ namespace Nest
 		public IDictionary<string, object> LocalMetadata { get; set; }
 
 		/// <inheritdoc />
+		public IDictionary<string, string> Meta { get; set; }
+
+		/// <inheritdoc />
 		public PropertyName Name { get; set; }
 
 		protected string DebugDisplay => $"Type: {((IProperty)this).Type ?? "<empty>"}, Name: {Name.DebugDisplay} ";
-		
+
 		public override string ToString() => DebugDisplay;
 
 		/// <summary>
