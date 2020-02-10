@@ -494,9 +494,9 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
-		public number |string Slices
+		public long? Slices
 		{
-			get => Q < number | string > ("slices");
+			get => Q<long? >("slices");
 			set => Q("slices", value);
 		}
 
@@ -1471,9 +1471,9 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
-		public number |string Slices
+		public long? Slices
 		{
-			get => Q < number | string > ("slices");
+			get => Q<long? >("slices");
 			set => Q("slices", value);
 		}
 
@@ -2259,9 +2259,9 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
-		public number |string Slices
+		public long? Slices
 		{
-			get => Q < number | string > ("slices");
+			get => Q<long? >("slices");
 			set => Q("slices", value);
 		}
 
