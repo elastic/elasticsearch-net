@@ -1451,7 +1451,7 @@ namespace Elasticsearch.Net
 			set => Q("scroll", value);
 		}
 
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
 		public long? Slices
 		{
 			get => Q<long? >("slices");
@@ -2235,7 +2235,7 @@ namespace Elasticsearch.Net
 			set => Q("size", value);
 		}
 
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
 		public long? Slices
 		{
 			get => Q<long? >("slices");

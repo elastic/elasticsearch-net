@@ -23,6 +23,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Specification.AutoscalingApi;
 using Elasticsearch.Net.Specification.CatApi;
 using Elasticsearch.Net.Specification.ClusterApi;
 using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
@@ -56,6 +57,12 @@ namespace Elasticsearch.Net
 	///</summary>
 	public partial class ElasticLowLevelClient : IElasticLowLevelClient
 	{
+		public LowLevelAutoscalingNamespace Autoscaling
+		{
+			get;
+			private set;
+		}
+
 		public LowLevelCatNamespace Cat
 		{
 			get;
@@ -190,6 +197,7 @@ namespace Elasticsearch.Net
 
 		partial void SetupNamespaces()
 		{
+			Autoscaling = new LowLevelAutoscalingNamespace(this);
 			Cat = new LowLevelCatNamespace(this);
 			Cluster = new LowLevelClusterNamespace(this);
 			CrossClusterReplication = new LowLevelCrossClusterReplicationNamespace(this);
