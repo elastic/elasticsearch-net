@@ -22,6 +22,11 @@ namespace Nest
 		public ProcessorsDescriptor Append<T>(Func<AppendProcessorDescriptor<T>, IAppendProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new AppendProcessorDescriptor<T>())));
 
+		/// <inheritdoc cref="ICsvProcessor"/>
+		public ProcessorsDescriptor Csv<T>(Func<CsvProcessorDescriptor<T>, ICsvProcessor> selector) where T : class =>
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new CsvProcessorDescriptor<T>())));
+
+
 		/// <inheritdoc cref="IConvertProcessor"/>
 		public ProcessorsDescriptor Convert<T>(Func<ConvertProcessorDescriptor<T>, IConvertProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new ConvertProcessorDescriptor<T>())));

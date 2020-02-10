@@ -41,6 +41,7 @@ namespace Nest
 			{ "drop", 29 },
 			{ "circle", 30 },
 			{ "enrich", 31 },
+			{ "csv", 32 },
 		};
 
 		public IProcessor Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -157,6 +158,9 @@ namespace Nest
 					case 31:
 						processor = Deserialize<EnrichProcessor>(ref reader, formatterResolver);
 						break;
+					case 32:
+						processor = Deserialize<CsvProcessor>(ref reader, formatterResolver);
+						break;
 				}
 			}
 			else
@@ -184,6 +188,9 @@ namespace Nest
 					break;
 				case "append":
 					Serialize<IAppendProcessor>(ref writer, value, formatterResolver);
+					break;
+				case "csv":
+					Serialize<ICsvProcessor>(ref writer, value, formatterResolver);
 					break;
 				case "convert":
 					Serialize<IConvertProcessor>(ref writer, value, formatterResolver);
