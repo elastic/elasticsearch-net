@@ -121,6 +121,9 @@ namespace Nest
 		/// <inheritdoc cref="IJoinProperty"/>
 		TReturnType Join(Func<JoinPropertyDescriptor<T>, IJoinProperty> selector);
 
+		/// <inheritdoc cref="IHistogramProperty"/>
+		TReturnType Histogram(Func<HistogramPropertyDescriptor<T>, IHistogramProperty> selector);
+
 		/// <inheritdoc cref="IFieldAliasProperty"/>
 		TReturnType FieldAlias(Func<FieldAliasPropertyDescriptor<T>, IFieldAliasProperty> selector);
 
@@ -211,6 +214,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IFlattenedProperty"/>
 		public PropertiesDescriptor<T> Flattened(Func<FlattenedPropertyDescriptor<T>, IFlattenedProperty> selector) => SetProperty(selector);
+
+		/// <inheritdoc cref="IHistogramProperty"/>
+		public PropertiesDescriptor<T> Histogram(Func<HistogramPropertyDescriptor<T>, IHistogramProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Custom(IProperty customType) => SetProperty(customType);
 

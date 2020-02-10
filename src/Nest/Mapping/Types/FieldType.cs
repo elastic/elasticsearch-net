@@ -138,6 +138,9 @@ namespace Nest
 		Flattened,
 
 		[EnumMember(Value = "shape")]
-		Shape
+		Shape,
+
+		[EnumMember(Value = "histogram")]
+		Histogram
 	}
 }

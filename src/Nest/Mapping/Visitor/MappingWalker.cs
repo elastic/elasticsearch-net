@@ -182,8 +182,6 @@ namespace Nest
 							Accept(t.Fields);
 						});
 						break;
-					case FieldType.None:
-						continue;
 					case FieldType.Percolator:
 						Visit<IPercolatorProperty>(field, t => { _visitor.Visit(t); });
 						break;
@@ -253,6 +251,14 @@ namespace Nest
 							_visitor.Visit(t);
 						});
 						break;
+					case FieldType.Histogram:
+						Visit<IHistogramProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+						});
+						break;
+					case FieldType.None:
+						continue;
 				}
 			}
 		}

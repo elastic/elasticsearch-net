@@ -67,6 +67,10 @@ namespace Nest
 			selector?.Invoke(new JoinPropertyDescriptor<T>());
 
 		/// <inheritdoc />
+		public IProperty Histogram(Func<HistogramPropertyDescriptor<T>, IHistogramProperty> selector) =>
+			selector?.Invoke(new HistogramPropertyDescriptor<T>());
+
+    /// <inheritdoc />
 		public IProperty FieldAlias(Func<FieldAliasPropertyDescriptor<T>, IFieldAliasProperty> selector) =>
 			selector?.Invoke(new FieldAliasPropertyDescriptor<T>());
 
