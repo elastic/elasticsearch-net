@@ -1,6 +1,7 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
+using Newtonsoft.Json.Linq;
 
 namespace Examples.Docs
 {
@@ -102,14 +103,11 @@ namespace Examples.Docs
 			{ ""doc"" : {""field"" : ""value""}, ""_source"": true}",
 				e =>
 				{
-					e.ApplyBodyLineChanges(lines =>
+					e.ApplyBulkBodyChanges(objects =>
 					{
-						lines[5] = @"{ ""doc_as_upsert"" : true, ""doc"" : {""field"" : ""value""} }";
-						lines[7] = @"{  ""_source"": true, ""doc"" : {""field"" : ""value""} }";
-						lines[8] = @"{ ""update"" : {""_id"" : ""4"", ""_index"" : ""index1"",  ""_source"": true } }";
-						lines[9] = @"{ ""_source"": true, ""doc"" : {""field"" : ""value""} }";
+						objects[7].Add("_source", true);
+						(objects[8]["update"] as JObject).Add("_source", true);
 					});
-
 					return e;
 				});
 		}

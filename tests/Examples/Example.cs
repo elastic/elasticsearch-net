@@ -35,6 +35,15 @@ namespace Examples
 			Body = string.Join(Environment.NewLine, body);
 		}
 
+		public void ApplyBulkBodyChanges(Action<List<JObject>> action)
+		{
+			var body = Body == null
+				? new List<JObject>()
+				: ResponseExtensions.ParseJObjects(Body);
+			action(body);
+			Body = string.Join(Environment.NewLine, body.Select(b => b.ToString()).ToArray());
+		}
+
 		public void ApplyBodyChanges(Action<JObject> action)
 		{
 			var body = Body == null
