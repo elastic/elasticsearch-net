@@ -5,7 +5,7 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	/// <summary>
-	/// Represents an aggregation on the request
+	/// An aggregation on the request
 	/// </summary>
 	[InterfaceDataContract]
 	public interface IAggregation

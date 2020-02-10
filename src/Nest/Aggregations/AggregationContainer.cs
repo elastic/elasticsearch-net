@@ -259,6 +259,9 @@ namespace Nest
 		[DataMember(Name = "median_absolute_deviation")]
 		IMedianAbsoluteDeviationAggregation MedianAbsoluteDeviation { get; set; }
 
+		[DataMember(Name = "string_stats")]
+		IStringStatsAggregation StringStats { get; set; }
+
 		void Accept(IAggregationVisitor visitor);
 	}
 
@@ -376,6 +379,8 @@ namespace Nest
 		public IWeightedAverageAggregation WeightedAverage { get; set; }
 
 		public IMedianAbsoluteDeviationAggregation MedianAbsoluteDeviation { get; set; }
+
+		public IStringStatsAggregation StringStats { get; set; }
 
 		public void Accept(IAggregationVisitor visitor)
 		{
@@ -525,6 +530,8 @@ namespace Nest
 		IWeightedAverageAggregation IAggregationContainer.WeightedAverage { get; set; }
 
 		IMedianAbsoluteDeviationAggregation IAggregationContainer.MedianAbsoluteDeviation { get; set; }
+
+		IStringStatsAggregation IAggregationContainer.StringStats { get; set; }
 
 		public void Accept(IAggregationVisitor visitor)
 		{
@@ -817,6 +824,12 @@ namespace Nest
 			Func<MedianAbsoluteDeviationAggregationDescriptor<T>, IMedianAbsoluteDeviationAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.MedianAbsoluteDeviation = d);
+
+		/// <inheritdoc cref="IStringStatsAggregation"/>
+		public AggregationContainerDescriptor<T> StringStats(string name,
+			Func<StringStatsAggregationDescriptor<T>, IStringStatsAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.StringStats = d);
 
 		/// <summary>
 		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside

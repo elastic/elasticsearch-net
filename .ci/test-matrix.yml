@@ -1,11 +1,11 @@
 ---
 
 ELASTICSEARCH_VERSION:
-  - 7.5.0-SNAPSHOT
+  - 7.x-SNAPSHOT
 
 TEST_SUITE:
   - oss
-# - xpack
+  - xpack
 
 DOTNET_VERSION:
     - 3.0.100

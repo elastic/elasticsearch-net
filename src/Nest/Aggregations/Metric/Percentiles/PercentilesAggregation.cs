@@ -5,14 +5,14 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	[JsonFormatter(typeof(PercentilesAggregationFormatter))]
-	public interface IPercentilesAggregation : IMetricAggregation
+	public interface IPercentilesAggregation : IFormattableMetricAggregation
 	{
 		IPercentilesMethod Method { get; set; }
 		IEnumerable<double> Percents { get; set; }
 		bool? Keyed { get; set; }
 	}
 
-	public class PercentilesAggregation : MetricAggregationBase, IPercentilesAggregation
+	public class PercentilesAggregation : FormattableMetricAggregationBase, IPercentilesAggregation
 	{
 		internal PercentilesAggregation() { }
 
@@ -26,7 +26,7 @@ namespace Nest
 	}
 
 	public class PercentilesAggregationDescriptor<T>
-		: MetricAggregationDescriptorBase<PercentilesAggregationDescriptor<T>, IPercentilesAggregation, T>
+		: FormattableMetricAggregationDescriptorBase<PercentilesAggregationDescriptor<T>, IPercentilesAggregation, T>
 			, IPercentilesAggregation
 		where T : class
 	{

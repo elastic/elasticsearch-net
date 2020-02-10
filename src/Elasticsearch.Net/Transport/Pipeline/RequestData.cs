@@ -48,11 +48,16 @@ namespace Elasticsearch.Net
 			if (global.Headers != null)
 				Headers = new NameValueCollection(global.Headers);
 
+			if (local?.Headers != null)
+			{
+				Headers ??= new NameValueCollection();
+				foreach (var key in local.Headers.AllKeys)
+					Headers[key] = local.Headers[key];
+			}
+
 			if (!string.IsNullOrEmpty(local?.OpaqueId))
 			{
-				if (Headers == null)
-					Headers = new NameValueCollection();
-
+				Headers ??= new NameValueCollection();
 				Headers.Add(OpaqueIdHeader, local.OpaqueId);
 			}
 
@@ -80,9 +85,9 @@ namespace Elasticsearch.Net
 			UserAgent = global.UserAgent;
 			TransferEncodingChunked = local?.TransferEncodingChunked ?? global.TransferEncodingChunked;
 		}
-		
+
 		private readonly string _path;
-		
+
 		public string Accept { get; }
 		public IReadOnlyCollection<int> AllowedStatusCodes { get; }
 

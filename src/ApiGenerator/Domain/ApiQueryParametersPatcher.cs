@@ -39,7 +39,7 @@ namespace ApiGenerator.Domain
 				}
 
 				if (!renameLookup.TryGetValue(queryStringKey, out var preferredName)) preferredName = kv.Key;
-				kv.Value.ClsName = CreateCSharpName(preferredName);
+				kv.Value.ClsName = CreateCSharpName(preferredName, endpointName);
 
 				if (skipList.Contains(queryStringKey)) kv.Value.Skip = true;
 
@@ -50,15 +50,19 @@ namespace ApiGenerator.Domain
 				//make sure source_enabled takes a boolean only
 				if (preferredName == "source_enabled") kv.Value.Type = "boolean";
 
+
 				patchedParams[preferredName] = kv.Value;
 			}
 
 			return patchedParams;
 		}
 
-		private static string CreateCSharpName(string queryStringKey)
+		private static string CreateCSharpName(string queryStringKey, string endpointName)
 		{
 			if (string.IsNullOrWhiteSpace(queryStringKey)) return "UNKNOWN";
+
+			if (queryStringKey == "format" && endpointName == "ml.find_file_structure")
+				return "MachineLearningFindFileStructureFormat";
 
 			var cased = queryStringKey.ToPascalCase();
 			switch (cased)

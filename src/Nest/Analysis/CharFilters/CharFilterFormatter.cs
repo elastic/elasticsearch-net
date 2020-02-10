@@ -73,7 +73,7 @@ namespace Nest
 					Serialize<IIcuNormalizationCharFilter>(ref writer, value, formatterResolver);
 					break;
 				default:
-					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ICharFilter>();
+					var formatter = formatterResolver.GetFormatter<object>();
 					formatter.Serialize(ref writer, value, formatterResolver);
 					break;
 			}

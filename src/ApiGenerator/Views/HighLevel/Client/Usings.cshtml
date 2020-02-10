@@ -3,7 +3,7 @@
 @using ApiGenerator.Domain
 @using ApiGenerator.Domain.Code
 @inherits ApiGenerator.CodeTemplatePage<RestApiSpec>
-@foreach(var kv in Model.EndpointsPerNamespace)
+@foreach(var kv in Model.EndpointsPerNamespaceHighLevel)
 {
 	if (kv.Key != CsharpNames.RootNamespace)
 	{

@@ -4,9 +4,9 @@ namespace Nest
 {
 	[InterfaceDataContract]
 	[ReadAs(typeof(MaxAggregation))]
-	public interface IMaxAggregation : IMetricAggregation { }
+	public interface IMaxAggregation : IFormattableMetricAggregation { }
 
-	public class MaxAggregation : MetricAggregationBase, IMaxAggregation
+	public class MaxAggregation : FormattableMetricAggregationBase, IMaxAggregation
 	{
 		internal MaxAggregation() { }
 
@@ -16,7 +16,7 @@ namespace Nest
 	}
 
 	public class MaxAggregationDescriptor<T>
-		: MetricAggregationDescriptorBase<MaxAggregationDescriptor<T>, IMaxAggregation, T>
+		: FormattableMetricAggregationDescriptorBase<MaxAggregationDescriptor<T>, IMaxAggregation, T>
 			, IMaxAggregation
 		where T : class { }
 }

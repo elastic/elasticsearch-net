@@ -2,6 +2,7 @@
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Linq;
+using ApiGenerator.Configuration;
 using ApiGenerator.Domain.Specification;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -25,6 +26,12 @@ namespace ApiGenerator.Domain
 			Endpoints.Values.GroupBy(e=>e.CsharpNames.Namespace)
 				.ToImmutableSortedDictionary(kv => kv.Key, kv => kv.ToList().AsReadOnly());
 
+		public ImmutableSortedDictionary<string, ReadOnlyCollection<ApiEndpoint>> EndpointsPerNamespaceHighLevel =>
+			Endpoints.Values
+				.Where(v => !CodeConfiguration.IgnoredApisHighLevel.Contains(v.Name))
+				.GroupBy(e => e.CsharpNames.Namespace)
+				.ToImmutableSortedDictionary(kv => kv.Key, kv => kv.ToList().AsReadOnly());
+
 		private IEnumerable<EnumDescription> _enumDescriptions;
 		public IEnumerable<EnumDescription> EnumsInTheSpec
 		{
@@ -37,6 +44,7 @@ namespace ApiGenerator.Domain
 					if (
 						name.ToLowerInvariant().Contains("metric")
 						 ||(name.ToLowerInvariant() == "status")
+						 ||(name.ToLowerInvariant() == "format")
 					)
 					{
 						if (methodName.StartsWith(@namespace))

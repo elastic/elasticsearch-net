@@ -19,7 +19,8 @@ namespace Tests.Aggregations.Metric.Min
 			{
 				min = new
 				{
-					field = "lastActivity"
+					field = "lastActivity",
+					format = "yyyy"
 				}
 			}
 		};
@@ -27,10 +28,11 @@ namespace Tests.Aggregations.Metric.Min
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.Min("min_last_activity", m => m
 				.Field(p => p.LastActivity)
+				.Format("yyyy")
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
-			new MinAggregation("min_last_activity", Field<Project>(p => p.LastActivity));
+			new MinAggregation("min_last_activity", Field<Project>(p => p.LastActivity)) { Format = "yyyy" };
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

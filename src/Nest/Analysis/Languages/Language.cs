@@ -21,6 +21,8 @@ namespace Nest
 		Danish,
 		Dutch,
 		English,
+		/// <summary>Available in Elasticsearch 7.6.0+</summary>
+		Estonian,
 		Finnish,
 		French,
 		Galician,

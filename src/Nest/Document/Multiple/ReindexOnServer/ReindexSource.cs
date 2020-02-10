@@ -50,6 +50,7 @@ namespace Nest
 		/// in conjunction with <see cref="Size" />
 		/// </summary>
 		[DataMember(Name ="sort")]
+		[Obsolete("Deprecated in 7.6.0. Instead consider using query filtering to find the desired subset of data.")]
 		IList<ISort> Sort { get; set; }
 
 		/// <summary>
@@ -78,6 +79,7 @@ namespace Nest
 		public ISlicedScroll Slice { get; set; }
 
 		/// <inheritdoc />
+		[Obsolete("Deprecated in 7.6.0. Instead consider using query filtering to find the desired subset of data.")]
 		public IList<ISort> Sort { get; set; }
 
 		/// <inheritdoc />
@@ -100,6 +102,7 @@ namespace Nest
 			Assign(querySelector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <inheritdoc cref="IReindexSource.Sort" />
+		[Obsolete("Deprecated in 7.6.0. Instead consider using query filtering to find the desired subset of data.")]
 		public ReindexSourceDescriptor Sort<T>(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) where T : class =>
 			Assign(selector, (a, v) => a.Sort = v?.Invoke(new SortDescriptor<T>())?.Value);
 

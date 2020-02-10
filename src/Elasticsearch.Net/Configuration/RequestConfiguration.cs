@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
-using System.Threading;
 
 namespace Elasticsearch.Net
 {
@@ -111,6 +111,11 @@ namespace Elasticsearch.Net
 		/// Whether the request should be sent with chunked Transfer-Encoding.
 		/// </summary>
 		bool? TransferEncodingChunked { get; set; }
+
+		/// <summary>
+		/// Try to send these headers for this single request
+		/// </summary>
+		NameValueCollection Headers { get; set; }
 	}
 
 	public class RequestConfiguration : IRequestConfiguration
@@ -151,6 +156,8 @@ namespace Elasticsearch.Net
 		public bool? ThrowExceptions { get; set; }
 		/// <inheritdoc />
 		public bool? TransferEncodingChunked { get; set; }
+		/// <inheritdoc />
+		public NameValueCollection Headers { get; set; }
 	}
 
 	public class RequestConfigurationDescriptor : IRequestConfiguration
@@ -175,6 +182,7 @@ namespace Elasticsearch.Net
 			Self.ThrowExceptions = config?.ThrowExceptions;
 			Self.OpaqueId = config?.OpaqueId;
 			Self.TransferEncodingChunked = config?.TransferEncodingChunked;
+			Self.Headers = config?.Headers;
 		}
 
 		string IRequestConfiguration.Accept { get; set; }
@@ -196,6 +204,7 @@ namespace Elasticsearch.Net
 		private IRequestConfiguration Self => this;
 		bool? IRequestConfiguration.ThrowExceptions { get; set; }
 		bool? IRequestConfiguration.TransferEncodingChunked { get; set; }
+		NameValueCollection IRequestConfiguration.Headers { get; set; }
 
 		/// <summary>
 		/// Submit the request on behalf in the context of a different shield user
@@ -358,5 +367,13 @@ namespace Elasticsearch.Net
 			Self.TransferEncodingChunked = transferEncodingChunked;
 			return this;
 		}
+
+		/// <inheritdoc cref="IRequestConfiguration.Headers" />
+		public RequestConfigurationDescriptor GlobalHeaders(NameValueCollection headers)
+		{
+			Self.Headers = headers;
+			return this;
+		}
+
 	}
 }

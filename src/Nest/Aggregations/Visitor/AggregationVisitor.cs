@@ -127,6 +127,8 @@
 		void Visit(ICompositeAggregation aggregation);
 
 		void Visit(IMedianAbsoluteDeviationAggregation aggregation);
+
+		void Visit(IStringStatsAggregation aggregation);
 	}
 
 	public class AggregationVisitor : IAggregationVisitor
@@ -238,6 +240,8 @@
 		public virtual void Visit(ICompositeAggregation aggregation) { }
 
 		public virtual void Visit(IMedianAbsoluteDeviationAggregation aggregation) { }
+
+		public virtual void Visit(IStringStatsAggregation aggregation) { }
 
 		public virtual void Visit(IAggregation aggregation) { }
 

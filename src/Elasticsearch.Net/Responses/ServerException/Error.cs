@@ -20,6 +20,10 @@ namespace Elasticsearch.Net
 
 		[DataMember(Name = "root_cause")]
 		public IReadOnlyCollection<ErrorCause> RootCause { get; set; }
+
+		public override string ToString() => CausedBy == null
+			? $"Type: {Type} Reason: \"{Reason}\""
+			: $"Type: {Type} Reason: \"{Reason}\" CausedBy: \"{CausedBy}\"";
 	}
 
 	internal class ErrorFormatter : ErrorCauseFormatter<Error>

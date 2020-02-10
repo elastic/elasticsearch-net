@@ -290,7 +290,8 @@ namespace Nest
 					Serialize<IPredicateTokenFilter>(ref writer, value, formatterResolver);
 					break;
 				default:
-					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ITokenFilter>();
+					// serialize user defined token filter
+					var formatter = formatterResolver.GetFormatter<object>();
 					formatter.Serialize(ref writer, value, formatterResolver);
 					break;
 			}

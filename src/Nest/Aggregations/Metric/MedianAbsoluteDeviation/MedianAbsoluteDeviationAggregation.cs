@@ -16,7 +16,7 @@ namespace Nest
 	/// </summary>
 	[InterfaceDataContract]
 	[ReadAs(typeof(MedianAbsoluteDeviationAggregation))]
-	public interface IMedianAbsoluteDeviationAggregation : IMetricAggregation
+	public interface IMedianAbsoluteDeviationAggregation : IFormattableMetricAggregation
 	{
 		/// <summary>
 		/// TDigest algorithm component that controls memory usage and approximation error.
@@ -30,7 +30,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="IMedianAbsoluteDeviationAggregation"/>
-	public class MedianAbsoluteDeviationAggregation : MetricAggregationBase, IMedianAbsoluteDeviationAggregation
+	public class MedianAbsoluteDeviationAggregation : FormattableMetricAggregationBase, IMedianAbsoluteDeviationAggregation
 	{
 		internal MedianAbsoluteDeviationAggregation() { }
 
@@ -44,7 +44,7 @@ namespace Nest
 
 	/// <inheritdoc cref="IMedianAbsoluteDeviationAggregation"/>
 	public class MedianAbsoluteDeviationAggregationDescriptor<T>
-		: MetricAggregationDescriptorBase<MedianAbsoluteDeviationAggregationDescriptor<T>, IMedianAbsoluteDeviationAggregation, T>
+		: FormattableMetricAggregationDescriptorBase<MedianAbsoluteDeviationAggregationDescriptor<T>, IMedianAbsoluteDeviationAggregation, T>
 			, IMedianAbsoluteDeviationAggregation
 		where T : class
 	{
