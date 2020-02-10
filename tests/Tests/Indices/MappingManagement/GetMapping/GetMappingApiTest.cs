@@ -211,6 +211,8 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		public void Visit(IFlattenedProperty property) => Increment("flattened");
 
+		public void Visit(IHistogramProperty property) => Increment("histogram");
+
 		private void Increment(string key)
 		{
 			if (!Counts.ContainsKey(key)) Counts.Add(key, 0);
