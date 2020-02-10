@@ -11,7 +11,11 @@ namespace Tests.Aggregations
 		[U] public void VisitMethodForEachTypeOfAggregation()
 		{
 			// exclude intermediate aggregations
-			var exclude = new[] { typeof(IMetricAggregation), typeof(IBucketAggregation), typeof(IPipelineAggregation), typeof(IMatrixAggregation) };
+			var exclude = new[]
+			{
+				typeof(IMetricAggregation), typeof(IBucketAggregation), typeof(IPipelineAggregation), typeof(IMatrixAggregation),
+				typeof(IFormattableMetricAggregation)
+			};
 
 			var aggregationTypes =
 				(from t in typeof(IAggregation).Assembly.Types()
