@@ -5,6 +5,11 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// The date nanos datatype is similar to <see cref="IDateProperty"/>, except that
+	/// internally, the date is stored with nanosecond resolution. This limits its range of
+	/// dates from roughly 1970 to 2262.
+	/// </summary>
 	[InterfaceDataContract]
 	public interface IDateNanosProperty : IDocValuesProperty
 	{

@@ -4,9 +4,9 @@ namespace Nest
 {
 	[InterfaceDataContract]
 	[ReadAs(typeof(ValueCountAggregation))]
-	public interface IValueCountAggregation : IMetricAggregation { }
+	public interface IValueCountAggregation : IFormattableMetricAggregation { }
 
-	public class ValueCountAggregation : MetricAggregationBase, IValueCountAggregation
+	public class ValueCountAggregation : FormattableMetricAggregationBase, IValueCountAggregation
 	{
 		internal ValueCountAggregation() { }
 
@@ -16,7 +16,7 @@ namespace Nest
 	}
 
 	public class ValueCountAggregationDescriptor<T>
-		: MetricAggregationDescriptorBase<ValueCountAggregationDescriptor<T>, IValueCountAggregation, T>
+		: FormattableMetricAggregationDescriptorBase<ValueCountAggregationDescriptor<T>, IValueCountAggregation, T>
 			, IValueCountAggregation
 		where T : class { }
 }

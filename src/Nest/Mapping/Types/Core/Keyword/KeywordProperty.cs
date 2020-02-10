@@ -4,6 +4,12 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// A field to index structured content such as IDs, email addresses, hostnames, status codes, zip codes or tags.
+	/// Used for filtering, sorting, and for aggregations.
+	/// <para />
+	/// Keyword fields are only searchable by their exact value.
+	/// </summary>
 	[InterfaceDataContract]
 	public interface IKeywordProperty : IDocValuesProperty
 	{
@@ -36,6 +42,7 @@ namespace Nest
 		bool? SplitQueriesOnWhitespace { get; set; }
 	}
 
+	/// <inheritdoc cref="IKeywordProperty"/>
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class KeywordProperty : DocValuesPropertyBase, IKeywordProperty
 	{
@@ -54,6 +61,7 @@ namespace Nest
 		public bool? SplitQueriesOnWhitespace { get; set; }
 	}
 
+	/// <inheritdoc cref="IKeywordProperty"/>
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class KeywordPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<KeywordPropertyDescriptor<T>, IKeywordProperty, T>, IKeywordProperty

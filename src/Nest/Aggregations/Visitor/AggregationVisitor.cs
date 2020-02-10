@@ -137,6 +137,8 @@
 		void Visit(IWeightedAverageAggregation aggregation);
 
 		void Visit(IMovingFunctionAggregation aggregation);
+
+		void Visit(IStringStatsAggregation aggregation);
 	}
 
 	public class AggregationVisitor : IAggregationVisitor
@@ -258,6 +260,8 @@
 		public virtual void Visit(IWeightedAverageAggregation aggregation) { }
 
 		public virtual void Visit(IMovingFunctionAggregation aggregation) { }
+
+		public virtual void Visit(IStringStatsAggregation aggregation) { }
 
 		public virtual void Visit(IAggregation aggregation) { }
 

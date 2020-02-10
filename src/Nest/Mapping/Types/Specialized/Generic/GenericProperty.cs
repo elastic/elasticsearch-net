@@ -46,10 +46,7 @@ namespace Nest
 		TermVectorOption? TermVector { get; set; }
 	}
 
-	/// <summary>
-	/// A generic property to map properties that may be of different types.
-	/// Not all methods are valid for all types.
-	/// </summary>
+	/// <inheritdoc cref="IGenericProperty"/>
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class GenericProperty : DocValuesPropertyBase, IGenericProperty
 	{
@@ -75,11 +72,7 @@ namespace Nest
 		}
 	}
 
-	/// <summary>
-	/// A generic property to map properties that may be of different types.
-	/// Not all methods are valid for all types.
-	/// </summary>
-	/// <typeparam name="T">the type on which the property is declared</typeparam>
+	/// <inheritdoc cref="IGenericProperty"/>
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class GenericPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<GenericPropertyDescriptor<T>, IGenericProperty, T>, IGenericProperty
