@@ -22,10 +22,10 @@ using System.Text;
 using System.Linq.Expressions;
 
 // ReSharper disable once CheckNamespace
-namespace Elasticsearch.Net.Specification.MigrationApi
+namespace Elasticsearch.Net.Specification.AutoscalingApi
 {
-	///<summary>Request options for DeprecationInfo <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</para></summary>
-	public class DeprecationInfoRequestParameters : RequestParameters<DeprecationInfoRequestParameters>
+	///<summary>Request options for GetDecision <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-get-autoscaling-decision.html</para></summary>
+	public class GetAutoscalingDecisionRequestParameters : RequestParameters<GetAutoscalingDecisionRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;

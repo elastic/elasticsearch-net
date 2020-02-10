@@ -23,11 +23,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Specification.AutoscalingApi;
 using Elasticsearch.Net.Specification.CatApi;
 using Elasticsearch.Net.Specification.ClusterApi;
 using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
 using Elasticsearch.Net.Specification.DataFrameApi;
 using Elasticsearch.Net.Specification.EnrichApi;
+using Elasticsearch.Net.Specification.EqlApi;
 using Elasticsearch.Net.Specification.GraphApi;
 using Elasticsearch.Net.Specification.IndexLifecycleManagementApi;
 using Elasticsearch.Net.Specification.IndicesApi;
@@ -53,6 +55,12 @@ namespace Elasticsearch.Net
 	///</summary>
 	public partial interface IElasticLowLevelClient
 	{
+		///<summary>Autoscaling APIs</summary>
+		LowLevelAutoscalingNamespace Autoscaling
+		{
+			get;
+		}
+
 		///<summary>Cat APIs</summary>
 		LowLevelCatNamespace Cat
 		{
@@ -79,6 +87,12 @@ namespace Elasticsearch.Net
 
 		///<summary>Enrich APIs</summary>
 		LowLevelEnrichNamespace Enrich
+		{
+			get;
+		}
+
+		///<summary>Eql APIs</summary>
+		LowLevelEqlNamespace Eql
 		{
 			get;
 		}

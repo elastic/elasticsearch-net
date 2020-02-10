@@ -37,7 +37,7 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>
-		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
 		public Refresh? Refresh
@@ -296,7 +296,7 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>
-		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
 		public Refresh? Refresh
@@ -437,7 +437,7 @@ namespace Elasticsearch.Net
 			set => Q("q", value);
 		}
 
-		///<summary>Should the effected indexes be refreshed?</summary>
+		///<summary>Should the affected indexes be refreshed?</summary>
 		public bool? Refresh
 		{
 			get => Q<bool? >("refresh");
@@ -493,10 +493,10 @@ namespace Elasticsearch.Net
 			set => Q("search_type", value);
 		}
 
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
-		public long? Slices
+		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
+		public number |string Slices
 		{
-			get => Q<long? >("slices");
+			get => Q < number | string > ("slices");
 			set => Q("slices", value);
 		}
 
@@ -1449,7 +1449,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
-		///<summary>Should the effected indexes be refreshed?</summary>
+		///<summary>Should the affected indexes be refreshed?</summary>
 		public bool? Refresh
 		{
 			get => Q<bool? >("refresh");
@@ -1470,10 +1470,10 @@ namespace Elasticsearch.Net
 			set => Q("scroll", value);
 		}
 
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
-		public long? Slices
+		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
+		public number |string Slices
 		{
-			get => Q<long? >("slices");
+			get => Q < number | string > ("slices");
 			set => Q("slices", value);
 		}
 
@@ -2054,7 +2054,7 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>
-		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
 		public Refresh? Refresh
@@ -2202,7 +2202,7 @@ namespace Elasticsearch.Net
 			set => Q("q", value);
 		}
 
-		///<summary>Should the effected indexes be refreshed?</summary>
+		///<summary>Should the affected indexes be refreshed?</summary>
 		public bool? Refresh
 		{
 			get => Q<bool? >("refresh");
@@ -2258,10 +2258,10 @@ namespace Elasticsearch.Net
 			set => Q("search_type", value);
 		}
 
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
-		public long? Slices
+		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
+		public number |string Slices
 		{
-			get => Q<long? >("slices");
+			get => Q < number | string > ("slices");
 			set => Q("slices", value);
 		}
 

@@ -23,11 +23,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Specification.AutoscalingApi;
 using Elasticsearch.Net.Specification.CatApi;
 using Elasticsearch.Net.Specification.ClusterApi;
 using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
 using Elasticsearch.Net.Specification.DataFrameApi;
 using Elasticsearch.Net.Specification.EnrichApi;
+using Elasticsearch.Net.Specification.EqlApi;
 using Elasticsearch.Net.Specification.GraphApi;
 using Elasticsearch.Net.Specification.IndexLifecycleManagementApi;
 using Elasticsearch.Net.Specification.IndicesApi;
@@ -56,6 +58,12 @@ namespace Elasticsearch.Net
 	///</summary>
 	public partial class ElasticLowLevelClient : IElasticLowLevelClient
 	{
+		public LowLevelAutoscalingNamespace Autoscaling
+		{
+			get;
+			private set;
+		}
+
 		public LowLevelCatNamespace Cat
 		{
 			get;
@@ -81,6 +89,12 @@ namespace Elasticsearch.Net
 		}
 
 		public LowLevelEnrichNamespace Enrich
+		{
+			get;
+			private set;
+		}
+
+		public LowLevelEqlNamespace Eql
 		{
 			get;
 			private set;
@@ -190,11 +204,13 @@ namespace Elasticsearch.Net
 
 		partial void SetupNamespaces()
 		{
+			Autoscaling = new LowLevelAutoscalingNamespace(this);
 			Cat = new LowLevelCatNamespace(this);
 			Cluster = new LowLevelClusterNamespace(this);
 			CrossClusterReplication = new LowLevelCrossClusterReplicationNamespace(this);
 			DataFrame = new LowLevelDataFrameNamespace(this);
 			Enrich = new LowLevelEnrichNamespace(this);
+			Eql = new LowLevelEqlNamespace(this);
 			Graph = new LowLevelGraphNamespace(this);
 			IndexLifecycleManagement = new LowLevelIndexLifecycleManagementNamespace(this);
 			Indices = new LowLevelIndicesNamespace(this);

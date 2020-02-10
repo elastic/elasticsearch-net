@@ -22,30 +22,10 @@ using System.Text;
 using System.Linq.Expressions;
 
 // ReSharper disable once CheckNamespace
-namespace Elasticsearch.Net.Specification.SqlApi
+namespace Elasticsearch.Net.Specification.EqlApi
 {
-	///<summary>Request options for ClearCursor <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html</para></summary>
-	public class ClearSqlCursorRequestParameters : RequestParameters<ClearSqlCursorRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
-	}
-
-	///<summary>Request options for Query <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</para></summary>
-	public class QuerySqlRequestParameters : RequestParameters<QuerySqlRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
-		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format
-		{
-			get => Q<string>("format");
-			set => Q("format", value);
-		}
-	}
-
-	///<summary>Request options for Translate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html</para></summary>
-	public class TranslateSqlRequestParameters : RequestParameters<TranslateSqlRequestParameters>
+	///<summary>Request options for Search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql.html</para></summary>
+	public class SearchRequestParameters : RequestParameters<SearchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
