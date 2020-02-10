@@ -25,6 +25,8 @@ namespace Nest
 		public IIntervalsAnyOf AnyOf { get; set; }
 		/// <inheritdoc cref="IIntervalsMatch"/>
 		public IIntervalsMatch Match { get; set; }
+		/// <inheritdoc cref="IIntervalsFuzzy"/>
+		public IIntervalsFuzzy Fuzzy { get; set; }
 
 		/// <inheritdoc cref="IIntervalsPrefix"/>
 		public IIntervalsPrefix Prefix { get; set; }
@@ -35,7 +37,8 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 
 		internal static bool IsConditionless(IIntervalsQuery q) =>
-			q.Field.IsConditionless() || q.Match == null && q.AllOf == null && q.AnyOf == null && q.Prefix == null && q.Wildcard == null;
+			q.Field.IsConditionless() || q.Match == null && q.AllOf == null && q.AnyOf == null && q.Prefix == null && q.Wildcard == null
+			&& q.Fuzzy == null;
 
 		internal override void InternalWrapInContainer(IQueryContainer container) => container.Intervals = this;
 	}
@@ -50,9 +53,14 @@ namespace Nest
 
 		IIntervalsAllOf IIntervalsContainer.AllOf { get; set; }
 		IIntervalsAnyOf IIntervalsContainer.AnyOf { get; set; }
+		IIntervalsFuzzy IIntervalsContainer.Fuzzy { get; set; }
 		IIntervalsMatch IIntervalsContainer.Match { get; set; }
 		IIntervalsPrefix IIntervalsContainer.Prefix { get; set; }
 		IIntervalsWildcard IIntervalsContainer.Wildcard { get; set; }
+
+		/// <inheritdoc cref="IntervalsQuery.Fuzzy" />
+		public IntervalsQueryDescriptor<T> Fuzzy(Func<IntervalsFuzzyDescriptor, IIntervalsFuzzy> selector) =>
+			Assign(selector, (a, v) => a.Fuzzy = v?.Invoke(new IntervalsFuzzyDescriptor()));
 
 		/// <inheritdoc cref="IntervalsQuery.Match" />
 		public IntervalsQueryDescriptor<T> Match(Func<IntervalsMatchDescriptor, IIntervalsMatch> selector) =>
@@ -88,6 +96,10 @@ namespace Nest
 		[DataMember(Name = "any_of")]
 		IIntervalsAnyOf AnyOf { get; set; }
 
+		/// <inheritdoc cref="IIntervalsFuzzy" />
+		[DataMember(Name = "fuzzy")]
+		IIntervalsFuzzy Fuzzy { get; set; }
+
 		/// <inheritdoc cref="IIntervalsMatch" />
 		[DataMember(Name = "match")]
 		IIntervalsMatch Match { get; set; }
@@ -120,6 +132,7 @@ namespace Nest
 
 		IIntervalsAllOf IIntervalsContainer.AllOf { get; set; }
 		IIntervalsAnyOf IIntervalsContainer.AnyOf { get; set; }
+		IIntervalsFuzzy IIntervalsContainer.Fuzzy { get; set; }
 		IIntervalsMatch IIntervalsContainer.Match { get; set; }
 		IIntervalsPrefix IIntervalsContainer.Prefix { get; set; }
 		IIntervalsWildcard IIntervalsContainer.Wildcard { get; set; }
@@ -140,6 +153,10 @@ namespace Nest
 	{
 		private IntervalsDescriptor Assign<TValue>(TValue value, Action<IIntervalsContainer, TValue> assigner) =>
 			Fluent.Assign(this, value, assigner);
+
+		/// <inheritdoc cref="IntervalsFuzzyDescriptor" />
+		public IntervalsDescriptor Fuzzy(Func<IntervalsFuzzyDescriptor, IIntervalsFuzzy> selector) =>
+			Assign(selector, (a, v) => a.Fuzzy = v?.Invoke(new IntervalsFuzzyDescriptor()));
 
 		/// <inheritdoc cref="IntervalsMatchDescriptor" />
 		public IntervalsDescriptor Match(Func<IntervalsMatchDescriptor, IIntervalsMatch> selector) =>
@@ -221,6 +238,10 @@ namespace Nest
 	public class IntervalsListDescriptor : DescriptorPromiseBase<IntervalsListDescriptor, List<IntervalsContainer>>
 	{
 		public IntervalsListDescriptor() : base(new List<IntervalsContainer>()) { }
+
+		/// <inheritdoc cref="IIntervalsFuzzy" />
+		public IntervalsListDescriptor Fuzzy(Func<IntervalsFuzzyDescriptor, IIntervalsFuzzy> selector) =>
+			Assign(selector, (a, v) => a.AddIfNotNull(new IntervalsDescriptor().Fuzzy(v)));
 
 		/// <inheritdoc cref="IIntervalsMatch" />
 		public IntervalsListDescriptor Match(Func<IntervalsMatchDescriptor, IIntervalsMatch> selector) =>
