@@ -1,0 +1,21 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line170 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/QueryDsl/MultiMatchQueryPage.cs#L172-L204.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+[source, csharp]
+----
+var searchResponse = client.Search<object>(s => s
+    .Index(Nest.Indices.AllIndices)
+    .Query(q =>
+        q.MultiMatch(c => c
+            .Query("Will Smith")
+            .Type(TextQueryType.BestFields)
+            .Fields("first_name, last_name")
+            .Operator(Operator.And)
+        )
+    )
+);
+----
