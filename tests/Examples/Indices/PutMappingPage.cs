@@ -1,5 +1,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
+using Examples.Models;
 using Nest;
 using Newtonsoft.Json.Linq;
 
@@ -11,10 +12,10 @@ namespace Examples.Indices
 		public void Line11()
 		{
 			// tag::5be23858b35043fcb7b50fe36b873e6e[]
-			var putMappingResponse = client.Map<object>(m => m
+			var putMappingResponse = client.Map<Tweet>(m => m
 					.Index("twitter")
 					.Properties(p =>
-						p.Keyword(k => k.Name("email"))
+						p.Keyword(k => k.Name(t => t.Email))
 					)
 				);
 			// end::5be23858b35043fcb7b50fe36b873e6e[]
@@ -67,10 +68,10 @@ namespace Examples.Indices
 
 			var createIndex2Response = client.Indices.Create("twitter-2");
 
-			var putMappingResponse = client.Map<object>(m => m
+			var putMappingResponse = client.Map<Tweet>(m => m
 				.Index("twitter-1,twitter-2")
 				.Properties(p =>
-					p.Text(k => k.Name("user_name"))
+					p.Text(k => k.Name(t => t.UserName))
 				)
 			);
 			// end::1da77e114459e0b77d78a3dcc8fae429[]
@@ -323,6 +324,7 @@ namespace Examples.Indices
 			var indexResponse1 = client.Index<object>(new { user_id = 12345 }, r => r.Index("users").Refresh(Refresh.WaitFor));
 
 			var indexResponse2 = client.Index<object>(new { user_id = 12346 }, r => r.Index("users").Refresh(Refresh.WaitFor));
+			// end::0989cc65d8924f666ce3eb0820d2d244[]
 
 			indexResponse1.MatchesExample(@"POST /users/_doc?refresh=wait_for
 			{
@@ -366,7 +368,10 @@ namespace Examples.Indices
 		public void Line471()
 		{
 			// tag::53d938c754f36a912fcbe6473abb463f[]
-			var reindexOnServerResponse = client.ReindexOnServer(r => r.Source(s => s.Index("users")).Destination(d => d.Index("new_users")));
+			var reindexOnServerResponse = client.ReindexOnServer(r => r
+				.Source(s => s.Index("users"))
+				.Destination(d => d.Index("new_users"))
+			);
 			// end::53d938c754f36a912fcbe6473abb463f[]
 
 			reindexOnServerResponse.MatchesExample(@"POST /_reindex

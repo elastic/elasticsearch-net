@@ -1,14 +1,14 @@
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line413 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Search/SearchPage.cs#L95-L110.
+This file is generated from method Line413 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Search/SearchPage.cs#L95-L111.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////
 [source, csharp]
 ----
 var searchResponse = client.Search<Tweet>(s => s
-    .Index("*")
+    .AllIndices()
     .QueryOnQueryString("user:kimchy")
 );
 ----

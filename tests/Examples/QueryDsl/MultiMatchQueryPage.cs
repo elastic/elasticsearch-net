@@ -12,11 +12,11 @@ namespace Examples.QueryDsl
 		{
 			// tag::53b908c3432118c5a6e460f74d32006b[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.MultiMatch(c => c
 						.Query("this is a test")
-						.Fields("subject, message")
+						.Fields(new[] { "subject", "message" })
 					)
 				)
 			);
@@ -42,7 +42,7 @@ namespace Examples.QueryDsl
 		{
 			// tag::6a1702dd50690cae833572e48a0ddf25[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.MultiMatch(c => c
 						.Query("Will Smith")
@@ -72,11 +72,11 @@ namespace Examples.QueryDsl
 		{
 			// tag::e30ea6e3823a139d7693d8cce1920a06[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.MultiMatch(c => c
 						.Query("this is a test")
-						.Fields("subject^3, message")
+						.Fields(new[] { "subject^3", "message" })
 					)
 				)
 			);
@@ -102,12 +102,12 @@ namespace Examples.QueryDsl
 		{
 			// tag::5da6efd5b038ada64c9e853c88c1ec47[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.MultiMatch(c => c
 						.Query("brown fox")
 						.Type(TextQueryType.BestFields)
-						.Fields("subject, message")
+						.Fields(new[] { "subject", "message" })
 						.TieBreaker(0.3)
 					)
 				)
@@ -136,7 +136,7 @@ namespace Examples.QueryDsl
 		{
 			// tag::b0eaf67e5cce24ef8889bf20951ccec1[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.DisMax(c => c
 						.Queries(
@@ -174,12 +174,12 @@ namespace Examples.QueryDsl
 		{
 			// tag::e270f3f721a5712cd11a5ca03554f5b0[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.MultiMatch(c => c
 						.Query("Will Smith")
 						.Type(TextQueryType.BestFields)
-						.Fields("first_name, last_name")
+						.Fields(new[] { "first_name", "last_name" })
 						.Operator(Operator.And)
 					)
 				)
@@ -208,12 +208,12 @@ namespace Examples.QueryDsl
 		{
 			// tag::7b908b1189f076942de8cd497ff1fa59[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.MultiMatch(c => c
 						.Query("quick brown fox")
 						.Type(TextQueryType.MostFields)
-						.Fields("title, title.original, title.shingles")
+						.Fields(new[] { "title", "title.original", "title.shingles" })
 					)
 				)
 			);
@@ -240,7 +240,7 @@ namespace Examples.QueryDsl
 		{
 			// tag::6bbc613bd4f9aec1bbdbabf5db021d28[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.Bool(c => c
 						.Should(
@@ -279,12 +279,12 @@ namespace Examples.QueryDsl
 		{
 			// tag::0e118857b815b62118a30c042f079db1[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.MultiMatch(c => c
 						.Query("quick brown f")
 						.Type(TextQueryType.PhrasePrefix)
-						.Fields("subject, message")
+						.Fields(new[] { "subject", "message" })
 					)
 				)
 			);
@@ -311,7 +311,7 @@ namespace Examples.QueryDsl
 		{
 			// tag::33f148e3d8676de6cc52f58749898a13[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.DisMax(c => c
 						.Queries(
@@ -347,12 +347,12 @@ namespace Examples.QueryDsl
 		{
 			// tag::047266b0d20fdb62ebc72d51952c8f6d[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.MultiMatch(c => c
 						.Query("Will Smith")
 						.Type(TextQueryType.CrossFields)
-						.Fields("first_name, last_name")
+						.Fields(new[] { "first_name", "last_name" })
 						.Operator(Operator.And)
 					)
 				)
@@ -381,12 +381,12 @@ namespace Examples.QueryDsl
 		{
 			// tag::ad0dcbc7fc619e952c8825b8f307b7b2[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.MultiMatch(c => c
 						.Query("Jon")
 						.Type(TextQueryType.CrossFields)
-						.Fields("first, first.edge, last, last.edge")
+						.Fields(new[] { "first", "first.edge", "last", "last.edge" })
 					)
 				)
 			);
@@ -416,14 +416,14 @@ namespace Examples.QueryDsl
 		{
 			// tag::3cd50a789b8e1f0ebbbc53a8d7ecf656[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.Bool(b =>
 						b.Should(
 							s => s.MultiMatch(c => c
 								.Query("Will Smith")
 								.Type(TextQueryType.CrossFields)
-								.Fields("first, last")
+								.Fields(new[] { "first", "last" })
 								.MinimumShouldMatch(MinimumShouldMatch.Percentage(50))
 							),
 							s => s.MultiMatch(c => c
@@ -472,13 +472,13 @@ namespace Examples.QueryDsl
 		{
 			// tag::179f0a3e84ff4bbac18787a018eabf89[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.MultiMatch(c => c
 						.Query("Jon")
 						.Type(TextQueryType.CrossFields)
 						.Analyzer("standard")
-						.Fields("first, last, *.edge")
+						.Fields(new[] { "first", "last", "*.edge" })
 					)
 				)
 			);
@@ -506,12 +506,12 @@ namespace Examples.QueryDsl
 		{
 			// tag::68721288dc9ad8aa1b55099b4d303051[]
 			var searchResponse = client.Search<object>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.Query(q =>
 					q.MultiMatch(c => c
 						.Query("quick brown f")
 						.Type(TextQueryType.BoolPrefix)
-						.Fields("subject, message")
+						.Fields(new[] { "subject", "message" })
 					)
 				)
 			);

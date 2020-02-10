@@ -8,12 +8,12 @@ and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 [source, csharp]
 ----
 var searchResponse = client.Search<object>(s => s
-    .Index(Nest.Indices.AllIndices)
+    .AllIndices()
     .Query(q =>
         q.MultiMatch(c => c
             .Query("quick brown f")
             .Type(TextQueryType.BoolPrefix)
-            .Fields("subject, message")
+            .Fields(new[] { "subject", "message" })
         )
     )
 );

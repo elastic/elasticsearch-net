@@ -8,14 +8,14 @@ and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 [source, csharp]
 ----
 var searchResponse = client.Search<object>(s => s
-    .Index(Nest.Indices.AllIndices)
+    .AllIndices()
     .Query(q =>
         q.Bool(b =>
             b.Should(
                 s => s.MultiMatch(c => c
                     .Query("Will Smith")
                     .Type(TextQueryType.CrossFields)
-                    .Fields("first, last")
+                    .Fields(new[] { "first", "last" })
                     .MinimumShouldMatch(MinimumShouldMatch.Percentage(50))
                 ),
                 s => s.MultiMatch(c => c

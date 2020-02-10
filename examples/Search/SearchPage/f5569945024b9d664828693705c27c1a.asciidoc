@@ -8,7 +8,7 @@ and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 [source, csharp]
 ----
 var searchResponse = client.Search<Tweet>(s => s
-    .Index("kimchy,elasticsearch")
+    .Index(new[] { "kimchy", "elasticsearch" })
     .QueryOnQueryString("user:kimchy")
 );
 ----

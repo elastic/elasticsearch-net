@@ -46,7 +46,7 @@ namespace Examples.Search
 		{
 			// tag::f5569945024b9d664828693705c27c1a[]
 			var searchResponse = client.Search<Tweet>(s => s
-				.Index("kimchy,elasticsearch")
+				.Index(new[] { "kimchy", "elasticsearch" })
 				.QueryOnQueryString("user:kimchy")
 			);
 			// end::f5569945024b9d664828693705c27c1a[]
@@ -63,7 +63,7 @@ namespace Examples.Search
 		{
 			// tag::168bfdde773570cfc6dd3ab3574e413b[]
 			var searchResponse = client.Search<Tweet>(s => s
-				.Index(Nest.Indices.AllIndices)
+				.AllIndices()
 				.QueryOnQueryString("user:kimchy")
 			);
 			// end::168bfdde773570cfc6dd3ab3574e413b[]
@@ -80,7 +80,7 @@ namespace Examples.Search
 		{
 			// tag::8022e6a690344035b6472a43a9d122e0[]
 			var searchResponse = client.Search<Tweet>(s => s
-				.Index(Nest.Indices.All)
+				.AllIndices()
 				.QueryOnQueryString("user:kimchy")
 			);
 			// end::8022e6a690344035b6472a43a9d122e0[]
@@ -97,13 +97,14 @@ namespace Examples.Search
 		{
 			// tag::43682666e1abcb14770c99f02eb26a0d[]
 			var searchResponse = client.Search<Tweet>(s => s
-				.Index("*")
+				.AllIndices()
 				.QueryOnQueryString("user:kimchy")
 			);
 			// end::43682666e1abcb14770c99f02eb26a0d[]
 
 			searchResponse.MatchesExample(@"GET /*/_search?q=user:kimchy", e =>
 			{
+				e.Uri.Path = "/_all/_search";
 				e.Method = HttpMethod.POST;
 				return e;
 			});
