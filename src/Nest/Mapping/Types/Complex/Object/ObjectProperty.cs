@@ -6,7 +6,7 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	/// <summary>
-	/// A object datatype mapping for an inner object
+	/// A mapping for an inner object
 	/// </summary>
 	[InterfaceDataContract]
 	public interface IObjectProperty : ICoreProperty

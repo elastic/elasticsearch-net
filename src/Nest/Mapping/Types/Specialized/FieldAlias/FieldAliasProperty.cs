@@ -18,7 +18,7 @@ namespace Nest
 		Field Path { get; set; }
 	}
 
-	/// <inheritdoc cref="IFieldAliasProperty.Path" />
+	/// <inheritdoc cref="IFieldAliasProperty" />
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class FieldAliasProperty : PropertyBase, IFieldAliasProperty
 	{
@@ -28,7 +28,7 @@ namespace Nest
 		public Field Path { get; set; }
 	}
 
-	/// <inheritdoc cref="IFieldAliasProperty.Path" />
+	/// <inheritdoc cref="IFieldAliasProperty" />
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class FieldAliasPropertyDescriptor<T>
 		: PropertyDescriptorBase<FieldAliasPropertyDescriptor<T>, IFieldAliasProperty, T>, IFieldAliasProperty

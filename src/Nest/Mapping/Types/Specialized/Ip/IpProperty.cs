@@ -4,6 +4,9 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// An ip field can index/store either IPv4 or IPv6 addresses.
+	/// </summary>
 	[InterfaceDataContract]
 	public interface IIpProperty : IDocValuesProperty
 	{
@@ -17,6 +20,7 @@ namespace Nest
 		string NullValue { get; set; }
 	}
 
+	/// <inheritdoc cref="IIpProperty"/>
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class IpProperty : DocValuesPropertyBase, IIpProperty
 	{
@@ -27,6 +31,7 @@ namespace Nest
 		public string NullValue { get; set; }
 	}
 
+	/// <inheritdoc cref="IIpProperty"/>
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class IpPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<IpPropertyDescriptor<T>, IIpProperty, T>, IIpProperty

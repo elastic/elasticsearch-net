@@ -17,7 +17,7 @@ namespace Nest
 		string Format { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IDateRangeProperty" />
 	public class DateRangeProperty : RangePropertyBase, IDateRangeProperty
 	{
 		public DateRangeProperty() : base(RangeType.DateRange) { }
@@ -26,7 +26,7 @@ namespace Nest
 		public string Format { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IDateRangeProperty" />
 	public class DateRangePropertyDescriptor<T>
 		: RangePropertyDescriptorBase<DateRangePropertyDescriptor<T>, IDateRangeProperty, T>, IDateRangeProperty
 		where T : class

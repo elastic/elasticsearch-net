@@ -4,6 +4,10 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// A field of type token_count is really an integer field which accepts string values,
+	/// analyzes them, then indexes the number of tokens in the string.
+	/// </summary>
 	[InterfaceDataContract]
 	public interface ITokenCountProperty : IDocValuesProperty
 	{
@@ -20,6 +24,7 @@ namespace Nest
 		double? NullValue { get; set; }
 	}
 
+	/// <inheritdoc cref="ITokenCountProperty"/>
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class TokenCountProperty : DocValuesPropertyBase, ITokenCountProperty
 	{
@@ -34,6 +39,7 @@ namespace Nest
 		public double? NullValue { get; set; }
 	}
 
+	/// <inheritdoc cref="ITokenCountProperty"/>
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class TokenCountPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<TokenCountPropertyDescriptor<T>, ITokenCountProperty, T>, ITokenCountProperty

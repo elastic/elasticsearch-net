@@ -5,6 +5,9 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// The boolean fields accepts true and false values
+	/// </summary>
 	[InterfaceDataContract]
 	public interface IBooleanProperty : IDocValuesProperty
 	{

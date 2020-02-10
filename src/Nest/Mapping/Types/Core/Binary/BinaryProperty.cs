@@ -3,6 +3,10 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// The binary type accepts a binary value as a Base64 encoded string.
+	/// The field is not stored by default and is not searchable
+	/// </summary>
 	[InterfaceDataContract]
 	public interface IBinaryProperty : IDocValuesProperty { }
 
