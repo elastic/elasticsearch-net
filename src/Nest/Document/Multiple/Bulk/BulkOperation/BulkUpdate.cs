@@ -47,6 +47,12 @@ namespace Nest
 		long? IfSequenceNumber { get; set; }
 
 		long? IfPrimaryTerm { get; set; }
+
+		/// <summary>
+		/// True or false to return the _source field or not, or a list of fields to return.
+		/// </summary>
+		[DataMember(Name = "_source")]
+		Union<bool, ISourceFilter> Source { get; set; }
 	}
 
 	[DataContract]
@@ -120,6 +126,11 @@ namespace Nest
 
 		public long? IfPrimaryTerm { get; set; }
 
+		/// <summary>
+		/// True or false to return the _source field or not, or a list of fields to return.
+		/// </summary>
+		public Union<bool, ISourceFilter> Source { get; set; }
+
 		protected override Type ClrType => typeof(TDocument);
 
 		protected override string Operation => "update";
@@ -150,7 +161,8 @@ namespace Nest
 				DocAsUpsert = DocAsUpsert,
 				ScriptedUpsert = ScriptedUpsert,
 				IfPrimaryTerm = IfPrimaryTerm,
-				IfSequenceNumber = IfSequenceNumber
+				IfSequenceNumber = IfSequenceNumber,
+				Source = Source
 			};
 	}
 
@@ -175,6 +187,8 @@ namespace Nest
 
 		long? IBulkUpdateOperation<TDocument, TPartialDocument>.IfPrimaryTerm { get; set; }
 
+		Union<bool, ISourceFilter> IBulkUpdateOperation<TDocument, TPartialDocument>.Source { get; set; }
+
 		protected override object GetBulkOperationBody() =>
 			new BulkUpdateBody<TDocument, TPartialDocument>
 			{
@@ -184,7 +198,8 @@ namespace Nest
 				DocAsUpsert = Self.DocAsUpsert,
 				ScriptedUpsert = Self.ScriptedUpsert,
 				IfPrimaryTerm = Self.IfPrimaryTerm,
-				IfSequenceNumber = Self.IfSequenceNumber
+				IfSequenceNumber = Self.IfSequenceNumber,
+				Source = Self.Source
 			};
 
 		protected override Id GetIdForOperation(Inferrer inferrer) =>
@@ -264,5 +279,11 @@ namespace Nest
 		/// </summary>
 		public BulkUpdateDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? primaryTerm) =>
 			Assign(primaryTerm, (a, v) => a.IfPrimaryTerm = v);
+
+		/// <summary>
+		/// True or false to return the _source field or not, or a list of fields to return.
+		/// </summary>
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Source(Union<bool, ISourceFilter> source) =>
+			Assign(source, (a, v) => a.Source = v);
 	}
 }
