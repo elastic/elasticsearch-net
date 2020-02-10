@@ -22,6 +22,7 @@ please modify the original csharp file found at the link and submit the PR with 
 a => a
 .Min("min_last_activity", m => m
     .Field(p => p.LastActivity)
+    .Format("yyyy")
 )
 ----
 
@@ -29,7 +30,7 @@ a => a
 
 [source,csharp]
 ----
-new MinAggregation("min_last_activity", Field<Project>(p => p.LastActivity))
+new MinAggregation("min_last_activity", Field<Project>(p => p.LastActivity)) { Format = "yyyy" }
 ----
 
 [source,javascript]
@@ -38,7 +39,8 @@ new MinAggregation("min_last_activity", Field<Project>(p => p.LastActivity))
 {
   "min_last_activity": {
     "min": {
-      "field": "lastActivity"
+      "field": "lastActivity",
+      "format": "yyyy"
     }
   }
 }

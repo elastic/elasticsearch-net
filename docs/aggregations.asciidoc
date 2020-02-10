@@ -58,6 +58,8 @@ The values are typically extracted from the fields of the document (using the fi
 
 * <<stats-aggregation-usage,Stats Aggregation Usage>>
 
+* <<string-stats-aggregation-usage,String Stats Aggregation Usage>>
+
 * <<sum-aggregation-usage,Sum Aggregation Usage>>
 
 * <<top-hits-aggregation-usage,Top Hits Aggregation Usage>>
@@ -93,6 +95,8 @@ include::aggregations/metric/percentiles/percentiles-aggregation-usage.asciidoc[
 include::aggregations/metric/scripted-metric/scripted-metric-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/stats/stats-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/string-stats/string-stats-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/sum/sum-aggregation-usage.asciidoc[]
 
