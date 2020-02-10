@@ -1,0 +1,50 @@
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line405 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/BulkPage.cs#L47-L113.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+[source, csharp]
+----
+var bulkResponse = client.Bulk(b => b
+    .Update<object>(u => u
+        .Index("index1")
+        .Id("1")
+        .RetriesOnConflict(3)
+        .Doc(new { field = "value" })
+    )
+    .Update<object>(u => u
+        .Index("index1")
+        .Id("0")
+        .RetriesOnConflict(3)
+        .Script(s => s
+            .Source("ctx._source.counter += params.param1")
+            .Lang("painless")
+            .Params(d => d
+                .Add("param1", 1)
+            )
+        )
+        .Upsert(new { counter = 1 })
+    )
+    .Update<object>(u => u
+        .Index("index1")
+        .Id("2")
+        .RetriesOnConflict(3)
+        .Doc(new { field = "value" })
+        .DocAsUpsert(true)
+    )
+    .Update<object>(u => u
+        .Index("index1")
+        .Id("3")
+        .Source(true)
+        .Doc(new { field = "value" })
+    )
+    .Update<object>(u => u
+        .Index("index1")
+        .Id("4")
+        .Source(true)
+        .Doc(new { field = "value" })
+    )
+);
+----

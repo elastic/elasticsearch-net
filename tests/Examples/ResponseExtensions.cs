@@ -106,7 +106,7 @@ namespace Examples
 		/// Parses a collection of JObjects from the JSON input. Provides support
 		/// for both regular JSON and newline delimited JSON
 		/// </summary>
-		private static List<JObject> ParseJObjects(string json)
+		public static List<JObject> ParseJObjects(string json)
 		{
 			var jObjects = new List<JObject>();
 			using (var stringReader = new StringReader(json))

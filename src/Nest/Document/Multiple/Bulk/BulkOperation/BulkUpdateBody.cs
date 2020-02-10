@@ -30,5 +30,8 @@ namespace Nest
 
 		[DataMember(Name = "if_primary_term")]
 		internal long? IfPrimaryTerm { get; set; }
+
+		[DataMember(Name = "_source")]
+		internal Union<bool, ISourceFilter> Source { get; set; }
 	}
 }
