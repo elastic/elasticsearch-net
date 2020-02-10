@@ -35,6 +35,7 @@ namespace Nest
 		GeoLocation NullValue { get; set; }
 	}
 
+	/// <inheritdoc cref="IGeoPointProperty"/>
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class GeoPointProperty : DocValuesPropertyBase, IGeoPointProperty
 	{
@@ -50,6 +51,7 @@ namespace Nest
 		public GeoLocation NullValue { get; set; }
 	}
 
+	/// <inheritdoc cref="IGeoPointProperty"/>
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class GeoPointPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<GeoPointPropertyDescriptor<T>, IGeoPointProperty, T>, IGeoPointProperty

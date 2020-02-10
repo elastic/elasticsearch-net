@@ -44,8 +44,10 @@ namespace Nest
 		where T : class
 		where TReturnType : class
 	{
+		/// <inheritdoc cref="ITextProperty"/>
 		TReturnType Text(Func<TextPropertyDescriptor<T>, ITextProperty> selector);
 
+		/// <inheritdoc cref="IKeywordProperty"/>
 		TReturnType Keyword(Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector);
 
 		/// <summary>
@@ -54,49 +56,85 @@ namespace Nest
 		/// </summary>
 		TReturnType Number(Func<NumberPropertyDescriptor<T>, INumberProperty> selector);
 
+		/// <inheritdoc cref="ITokenCountProperty"/>
 		TReturnType TokenCount(Func<TokenCountPropertyDescriptor<T>, ITokenCountProperty> selector);
 
+		/// <inheritdoc cref="IDateProperty"/>
 		TReturnType Date(Func<DatePropertyDescriptor<T>, IDateProperty> selector);
 
+		/// <inheritdoc cref="IDateNanosProperty"/>
 		TReturnType DateNanos(Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector);
 
+		/// <inheritdoc cref="IBooleanProperty"/>
 		TReturnType Boolean(Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector);
 
+		/// <inheritdoc cref="IBinaryProperty"/>
 		TReturnType Binary(Func<BinaryPropertyDescriptor<T>, IBinaryProperty> selector);
 
+		/// <inheritdoc cref="IObjectProperty"/>
 		TReturnType Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, IObjectProperty> selector)
 			where TChild : class;
 
+		/// <inheritdoc cref="INestedProperty"/>
 		TReturnType Nested<TChild>(Func<NestedPropertyDescriptor<T, TChild>, INestedProperty> selector)
 			where TChild : class;
 
+		/// <inheritdoc cref="IIpProperty"/>
 		TReturnType Ip(Func<IpPropertyDescriptor<T>, IIpProperty> selector);
 
+		/// <inheritdoc cref="IGeoPointProperty"/>
 		TReturnType GeoPoint(Func<GeoPointPropertyDescriptor<T>, IGeoPointProperty> selector);
 
+		/// <inheritdoc cref="IGeoShapeProperty"/>
 		TReturnType GeoShape(Func<GeoShapePropertyDescriptor<T>, IGeoShapeProperty> selector);
 
+		/// <inheritdoc cref="IShapeProperty"/>
 		TReturnType Shape(Func<ShapePropertyDescriptor<T>, IShapeProperty> selector);
 
+		/// <inheritdoc cref="ICompletionProperty"/>
 		TReturnType Completion(Func<CompletionPropertyDescriptor<T>, ICompletionProperty> selector);
 
+		/// <inheritdoc cref="IMurmur3HashProperty"/>
 		TReturnType Murmur3Hash(Func<Murmur3HashPropertyDescriptor<T>, IMurmur3HashProperty> selector);
 
+		/// <inheritdoc cref="IPercolatorProperty"/>
 		TReturnType Percolator(Func<PercolatorPropertyDescriptor<T>, IPercolatorProperty> selector);
 
+		/// <inheritdoc cref="IDateRangeProperty"/>
 		TReturnType DateRange(Func<DateRangePropertyDescriptor<T>, IDateRangeProperty> selector);
 
+		/// <inheritdoc cref="IDoubleRangeProperty"/>
 		TReturnType DoubleRange(Func<DoubleRangePropertyDescriptor<T>, IDoubleRangeProperty> selector);
 
+		/// <inheritdoc cref="IFloatRangeProperty"/>
 		TReturnType FloatRange(Func<FloatRangePropertyDescriptor<T>, IFloatRangeProperty> selector);
 
+		/// <inheritdoc cref="IIntegerRangeProperty"/>
 		TReturnType IntegerRange(Func<IntegerRangePropertyDescriptor<T>, IIntegerRangeProperty> selector);
 
+		/// <inheritdoc cref="ILongRangeProperty"/>
 		TReturnType LongRange(Func<LongRangePropertyDescriptor<T>, ILongRangeProperty> selector);
 
+		/// <inheritdoc cref="IIpRangeProperty"/>
 		TReturnType IpRange(Func<IpRangePropertyDescriptor<T>, IIpRangeProperty> selector);
 
+		/// <inheritdoc cref="IJoinProperty"/>
 		TReturnType Join(Func<JoinPropertyDescriptor<T>, IJoinProperty> selector);
+
+		/// <inheritdoc cref="IFieldAliasProperty"/>
+		TReturnType FieldAlias(Func<FieldAliasPropertyDescriptor<T>, IFieldAliasProperty> selector);
+
+		/// <inheritdoc cref="IRankFeatureProperty"/>
+		TReturnType RankFeature(Func<RankFeaturePropertyDescriptor<T>, IRankFeatureProperty> selector);
+
+		/// <inheritdoc cref="IRankFeaturesProperty"/>
+		TReturnType RankFeatures(Func<RankFeaturesPropertyDescriptor<T>, IRankFeaturesProperty> selector);
+
+		/// <inheritdoc cref="IFlattenedProperty"/>
+		TReturnType Flattened(Func<FlattenedPropertyDescriptor<T>, IFlattenedProperty> selector);
+
+		/// <inheritdoc cref="ISearchAsYouTypeProperty"/>
+		TReturnType SearchAsYouType(Func<SearchAsYouTypePropertyDescriptor<T>, ISearchAsYouTypeProperty> selector);
 	}
 
 	public partial class PropertiesDescriptor<T> where T : class
