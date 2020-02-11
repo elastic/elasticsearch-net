@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
@@ -120,8 +121,108 @@ namespace Nest
 		}
 	}
 
+	internal class ActionsInterfaceFormatter : IJsonFormatter<IActions>
+	{
+		private static readonly ActionsFormatter ActionsFormatter = new ActionsFormatter();
+
+		public void Serialize(ref JsonWriter writer, IActions value, IJsonFormatterResolver formatterResolver)
+		{
+			writer.WriteBeginObject();
+			if (value != null)
+			{
+				var count = 0;
+				foreach (var kvp in value.Where(kv => kv.Value != null))
+				{
+					if (count > 0)
+						writer.WriteValueSeparator();
+
+					var action = kvp.Value;
+					writer.WritePropertyName(kvp.Key);
+					writer.WriteBeginObject();
+					if (action.ThrottlePeriod != null)
+					{
+						writer.WritePropertyName("throttle_period");
+						var timeFormatter = formatterResolver.GetFormatter<Time>();
+						timeFormatter.Serialize(ref writer, action.ThrottlePeriod, formatterResolver);
+						writer.WriteValueSeparator();
+					}
+
+					if (!string.IsNullOrEmpty(action.Foreach))
+					{
+						writer.WritePropertyName("foreach");
+						writer.WriteString(action.Foreach);
+						writer.WriteValueSeparator();
+					}
+					if (action.MaxIterations.HasValue)
+					{
+						writer.WritePropertyName("max_iterations");
+						writer.WriteInt32(action.MaxIterations.Value);
+						writer.WriteValueSeparator();
+					}
+
+					if (action.Transform != null)
+					{
+						writer.WritePropertyName("transform");
+						formatterResolver.GetFormatter<TransformContainer>().Serialize(ref writer, action.Transform, formatterResolver);
+						writer.WriteValueSeparator();
+					}
+
+					if (action.Condition != null)
+					{
+						writer.WritePropertyName("condition");
+						formatterResolver.GetFormatter<ConditionContainer>().Serialize(ref writer, action.Condition, formatterResolver);
+						writer.WriteValueSeparator();
+					}
+
+					writer.WritePropertyName(kvp.Value.ActionType.GetStringValue());
+
+					switch (action.ActionType)
+					{
+						case ActionType.Email:
+							Serialize<IEmailAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.Webhook:
+							Serialize<IWebhookAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.Index:
+							Serialize<IIndexAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.Logging:
+							Serialize<ILoggingAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.Slack:
+							Serialize<ISlackAction>(ref writer, action, formatterResolver);
+							break;
+						case ActionType.PagerDuty:
+							Serialize<IPagerDutyAction>(ref writer, action, formatterResolver);
+							break;
+						default:
+							var actionFormatter = formatterResolver.GetFormatter<IAction>();
+							actionFormatter.Serialize(ref writer, action, formatterResolver);
+							break;
+					}
+
+					writer.WriteEndObject();
+					count++;
+				}
+			}
+			writer.WriteEndObject();
+		}
+
+		private static void Serialize<TAction>(ref JsonWriter writer, IAction value, IJsonFormatterResolver formatterResolver)
+			where TAction : class, IAction
+		{
+			var formatter = formatterResolver.GetFormatter<TAction>();
+			formatter.Serialize(ref writer, value as TAction, formatterResolver);
+		}
+		public IActions Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			ActionsFormatter.Deserialize(ref reader, formatterResolver);
+	}
+
 	internal class ActionsFormatter : IJsonFormatter<Actions>
 	{
+		private static readonly ActionsInterfaceFormatter ActionsInterfaceFormatter = new ActionsInterfaceFormatter();
+
 		private static readonly AutomataDictionary Fields = new AutomataDictionary
 		{
 			{ "throttle_period", 0 },
@@ -225,95 +326,7 @@ namespace Nest
 			return new Actions(dictionary);
 		}
 
-		public void Serialize(ref JsonWriter writer, Actions value, IJsonFormatterResolver formatterResolver)
-		{
-			writer.WriteBeginObject();
-			if (value != null)
-			{
-				var count = 0;
-				foreach (var kvp in value.Where(kv => kv.Value != null))
-				{
-					if (count > 0)
-						writer.WriteValueSeparator();
-
-					var action = kvp.Value;
-					writer.WritePropertyName(kvp.Key);
-					writer.WriteBeginObject();
-					if (action.ThrottlePeriod != null)
-					{
-						writer.WritePropertyName("throttle_period");
-						var timeFormatter = formatterResolver.GetFormatter<Time>();
-						timeFormatter.Serialize(ref writer, action.ThrottlePeriod, formatterResolver);
-						writer.WriteValueSeparator();
-					}
-
-					if (!string.IsNullOrEmpty(action.Foreach))
-					{
-						writer.WritePropertyName("foreach");
-						writer.WriteString(action.Foreach);
-						writer.WriteValueSeparator();
-					}
-					if (action.MaxIterations.HasValue)
-					{
-						writer.WritePropertyName("max_iterations");
-						writer.WriteInt32(action.MaxIterations.Value);
-						writer.WriteValueSeparator();
-					}
-
-					if (action.Transform != null)
-					{
-						writer.WritePropertyName("transform");
-						formatterResolver.GetFormatter<TransformContainer>().Serialize(ref writer, action.Transform, formatterResolver);
-						writer.WriteValueSeparator();
-					}
-
-					if (action.Condition != null)
-					{
-						writer.WritePropertyName("condition");
-						formatterResolver.GetFormatter<ConditionContainer>().Serialize(ref writer, action.Condition, formatterResolver);
-						writer.WriteValueSeparator();
-					}
-
-					writer.WritePropertyName(kvp.Value.ActionType.GetStringValue());
-
-					switch (action.ActionType)
-					{
-						case ActionType.Email:
-							Serialize<IEmailAction>(ref writer, action, formatterResolver);
-							break;
-						case ActionType.Webhook:
-							Serialize<IWebhookAction>(ref writer, action, formatterResolver);
-							break;
-						case ActionType.Index:
-							Serialize<IIndexAction>(ref writer, action, formatterResolver);
-							break;
-						case ActionType.Logging:
-							Serialize<ILoggingAction>(ref writer, action, formatterResolver);
-							break;
-						case ActionType.Slack:
-							Serialize<ISlackAction>(ref writer, action, formatterResolver);
-							break;
-						case ActionType.PagerDuty:
-							Serialize<IPagerDutyAction>(ref writer, action, formatterResolver);
-							break;
-						default:
-							var actionFormatter = formatterResolver.GetFormatter<IAction>();
-							actionFormatter.Serialize(ref writer, action, formatterResolver);
-							break;
-					}
-
-					writer.WriteEndObject();
-					count++;
-				}
-			}
-			writer.WriteEndObject();
-		}
-
-		private static void Serialize<TAction>(ref JsonWriter writer, IAction value, IJsonFormatterResolver formatterResolver)
-			where TAction : class, IAction
-		{
-			var formatter = formatterResolver.GetFormatter<TAction>();
-			formatter.Serialize(ref writer, value as TAction, formatterResolver);
-		}
+		public void Serialize(ref JsonWriter writer, Actions value, IJsonFormatterResolver formatterResolver) =>
+			ActionsInterfaceFormatter.Serialize(ref writer, value, formatterResolver);
 	}
 }
