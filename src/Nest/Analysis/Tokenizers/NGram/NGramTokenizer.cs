@@ -29,6 +29,18 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="token_chars")]
 		IEnumerable<TokenChar> TokenChars { get; set; }
+
+		/// <summary>
+		/// Custom characters that should be treated as part of a token. For example,
+		/// setting this to +-_ will make the tokenizer treat the plus, minus and
+		/// underscore sign as part of a token.
+		/// <para />
+		/// Requires setting <see cref="TokenChar.Custom"/> as part of <see cref="TokenChars"/>
+		/// <para />
+		/// Available in Elasticsearch 7.6.0+.
+		/// </summary>
+		[DataMember(Name = "custom_token_chars")]
+		string CustomTokenChars { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -44,6 +56,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IEnumerable<TokenChar> TokenChars { get; set; }
+
+		/// <inheritdoc />
+		public string CustomTokenChars { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -52,21 +67,26 @@ namespace Nest
 	{
 		protected override string Type => "ngram";
 		int? INGramTokenizer.MaxGram { get; set; }
-
 		int? INGramTokenizer.MinGram { get; set; }
 		IEnumerable<TokenChar> INGramTokenizer.TokenChars { get; set; }
 
-		/// <inheritdoc />
+		string INGramTokenizer.CustomTokenChars { get; set; }
+
+		/// <inheritdoc cref="INGramTokenizer.MinGram" />
 		public NGramTokenizerDescriptor MinGram(int? minGram) => Assign(minGram, (a, v) => a.MinGram = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="INGramTokenizer.MaxGram" />
 		public NGramTokenizerDescriptor MaxGram(int? minGram) => Assign(minGram, (a, v) => a.MaxGram = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="INGramTokenizer.TokenChars" />
 		public NGramTokenizerDescriptor TokenChars(IEnumerable<TokenChar> tokenChars) =>
 			Assign(tokenChars, (a, v) => a.TokenChars = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="INGramTokenizer.TokenChars" />
 		public NGramTokenizerDescriptor TokenChars(params TokenChar[] tokenChars) => Assign(tokenChars, (a, v) => a.TokenChars = v);
+
+		/// <inheritdoc cref="INGramTokenizer.CustomTokenChars" />
+		public NGramTokenizerDescriptor CustomTokenChars(string customTokenChars) =>
+			Assign(customTokenChars, (a, v) => a.CustomTokenChars = v);
 	}
 }
