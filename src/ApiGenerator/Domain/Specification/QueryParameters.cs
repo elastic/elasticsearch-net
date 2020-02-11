@@ -11,7 +11,8 @@ namespace ApiGenerator.Domain.Specification
 		{
 			"fields", "_source_includes", "_source_excludes",
 		};
-		
+
+
 		public bool Skip { get; set; }
 
 		public string ClsArgumentName => ClsName.ToCamelCase();
@@ -72,7 +73,15 @@ namespace ApiGenerator.Domain.Specification
 
 		public string SetterLowLevel => "value";
 
-		public string Type { get; set; }
+		private string _type;
+		public string Type
+		{
+			// TODO support unions
+			get => !_type.Contains("|")
+				? _type
+				: _type.Split('|', StringSplitOptions.RemoveEmptyEntries).First().Trim();
+			set => _type = value;
+		}
 
 		public string TypeHighLevel
 		{
@@ -126,7 +135,6 @@ namespace ApiGenerator.Domain.Specification
 				}
 			}
 		}
-
 
 		public string InitializerGenerator(string @namespace, string type, string name, string key, string setter, params string[] doc) =>
 			CodeGenerator.Property(@namespace, type, name, key, setter, Obsolete, doc);
