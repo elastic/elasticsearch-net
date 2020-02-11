@@ -68,6 +68,10 @@ namespace Examples
 			if (example.Body != null && example.Method == HttpMethod.GET)
 				example.Method = HttpMethod.POST;
 
+			// Searches are always POST
+			if (example.Uri.Path.Contains("_search") && example.Method == HttpMethod.GET)
+				example.Method = HttpMethod.POST;
+
 			return example;
 		}
 	}

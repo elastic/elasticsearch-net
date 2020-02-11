@@ -30,11 +30,7 @@ namespace Examples.QueryDsl
 			      ""fields"": [ ""subject"", ""message"" ] \<2>
 			    }
 			  }
-			}", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			}");
 		}
 
 		[U]
@@ -60,11 +56,7 @@ namespace Examples.QueryDsl
 			      ""fields"": [ ""title"", ""*_name"" ] \<1>
 			    }
 			  }
-			}", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			}");
 		}
 
 		[U]
@@ -90,11 +82,7 @@ namespace Examples.QueryDsl
 			      ""fields"" : [ ""subject^3"", ""message"" ] \<1>
 			    }
 			  }
-			}", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			}");
 		}
 
 		[U]
@@ -124,11 +112,7 @@ namespace Examples.QueryDsl
 			      ""tie_breaker"": 0.3
 			    }
 			  }
-			}", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			}");
 		}
 
 		[U]
@@ -162,8 +146,6 @@ namespace Examples.QueryDsl
 			  }
 			}", (e, body) =>
 			{
-				e.Method = HttpMethod.POST;
-
 				body["query"]["dis_max"]["queries"][0]["match"]["subject"].ToLongFormQuery();
 				body["query"]["dis_max"]["queries"][1]["match"]["message"].ToLongFormQuery();
 			});
@@ -196,11 +178,7 @@ namespace Examples.QueryDsl
 			      ""operator"":   ""and"" \<1>
 			    }
 			  }
-			}", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			}");
 		}
 
 		[U]
@@ -228,11 +206,7 @@ namespace Examples.QueryDsl
 			      ""fields"":     [ ""title"", ""title.original"", ""title.shingles"" ]
 			    }
 			  }
-			}", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			}");
 		}
 
 		[U]
@@ -266,8 +240,6 @@ namespace Examples.QueryDsl
 			  }
 			}", (e, body) =>
 			{
-				e.Method = HttpMethod.POST;
-
 				body["query"]["bool"]["should"][0]["match"]["title"].ToLongFormQuery();
 				body["query"]["bool"]["should"][1]["match"]["title.original"].ToLongFormQuery();
 				body["query"]["bool"]["should"][2]["match"]["title.shingles"].ToLongFormQuery();
@@ -299,11 +271,7 @@ namespace Examples.QueryDsl
 			      ""fields"":     [ ""subject"", ""message"" ]
 			    }
 			  }
-			}", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			}");
 		}
 
 		[U]
@@ -335,8 +303,6 @@ namespace Examples.QueryDsl
 			  }
 			}", (e, body) =>
 			{
-				e.Method = HttpMethod.POST;
-
 				body["query"]["dis_max"]["queries"][0]["match_phrase_prefix"]["subject"].ToLongFormQuery();
 				body["query"]["dis_max"]["queries"][1]["match_phrase_prefix"]["message"].ToLongFormQuery();
 			});
@@ -369,11 +335,7 @@ namespace Examples.QueryDsl
 			      ""operator"":   ""and""
 			    }
 			  }
-			}", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			}");
 		}
 
 		[U]
@@ -404,11 +366,7 @@ namespace Examples.QueryDsl
 			      ]
 			    }
 			  }
-			}", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			}");
 		}
 
 		[U]
@@ -460,11 +418,7 @@ namespace Examples.QueryDsl
 			      ]
 			    }
 			  }
-			}", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			}");
 		}
 
 		[U]
@@ -494,11 +448,7 @@ namespace Examples.QueryDsl
 			      ""fields"":     [ ""first"", ""last"", ""*.edge"" ]
 			    }
 			  }
-			}", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			}");
 		}
 
 		[U]
@@ -526,11 +476,7 @@ namespace Examples.QueryDsl
 			      ""fields"":     [ ""subject"", ""message"" ]
 			    }
 			  }
-			}", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			}");
 		}
 	}
 }

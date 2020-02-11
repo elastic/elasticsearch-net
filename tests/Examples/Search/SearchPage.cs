@@ -17,11 +17,7 @@ namespace Examples.Search
 			);
 			// end::9bdd3c0d47e60c8cfafc8109f9369922[]
 
-			searchResponse.MatchesExample(@"GET /twitter/_search?q=tag:wow", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			searchResponse.MatchesExample(@"GET /twitter/_search?q=tag:wow");
 		}
 
 		[U]
@@ -34,11 +30,7 @@ namespace Examples.Search
 			);
 			// end::be49260e1b3496c4feac38c56ebb0669[]
 
-			searchResponse.MatchesExample(@"GET /twitter/_search?q=user:kimchy", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			searchResponse.MatchesExample(@"GET /twitter/_search?q=user:kimchy");
 		}
 
 		[U]
@@ -51,11 +43,7 @@ namespace Examples.Search
 			);
 			// end::f5569945024b9d664828693705c27c1a[]
 
-			searchResponse.MatchesExample(@"GET /kimchy,elasticsearch/_search?q=user:kimchy", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			searchResponse.MatchesExample(@"GET /kimchy,elasticsearch/_search?q=user:kimchy");
 		}
 
 		[U]
@@ -68,11 +56,7 @@ namespace Examples.Search
 			);
 			// end::168bfdde773570cfc6dd3ab3574e413b[]
 
-			searchResponse.MatchesExample(@"GET /_search?q=user:kimchy", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			searchResponse.MatchesExample(@"GET /_search?q=user:kimchy");
 		}
 
 		[U]
@@ -85,11 +69,7 @@ namespace Examples.Search
 			);
 			// end::8022e6a690344035b6472a43a9d122e0[]
 
-			searchResponse.MatchesExample(@"GET /_all/_search?q=user:kimchy", e =>
-			{
-				e.Method = HttpMethod.POST;
-				return e;
-			});
+			searchResponse.MatchesExample(@"GET /_all/_search?q=user:kimchy");
 		}
 
 		[U]
@@ -105,7 +85,6 @@ namespace Examples.Search
 			searchResponse.MatchesExample(@"GET /*/_search?q=user:kimchy", e =>
 			{
 				e.Uri.Path = "/_all/_search";
-				e.Method = HttpMethod.POST;
 				return e;
 			});
 		}
