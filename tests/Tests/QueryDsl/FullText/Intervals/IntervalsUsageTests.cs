@@ -262,4 +262,62 @@ namespace Tests.QueryDsl.FullText.Intervals
 				)
 			);
 	}
+
+	/**[float]
+	 * === Fuzzy rules
+	 *
+	 * Fuzzy rules can be used to match terms that are similar to the provided term, within an edit distance defined by Fuzziness.
+	 * If the fuzzy expansion matches more than 128 terms, Elasticsearch returns an error.
+	 *
+	 * NOTE: Only available in Elasticsearch 7.6.0+
+	 */
+	[SkipVersion("<7.6.0", "fuzzy rules introduced in 7.6.0")]
+	public class IntervalsFuzzyUsageTests : QueryDslUsageTestsBase
+	{
+		public IntervalsFuzzyUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		private static readonly string IntervalsPrefix = Project.First.Description.Split(' ')[0];
+
+		private static readonly string IntervalsFuzzy = IntervalsPrefix.Substring(0, IntervalsPrefix.Length) + "z";
+
+		protected override QueryContainer QueryInitializer => new IntervalsQuery
+		{
+			Field = Field<Project>(p => p.Description),
+			Name = "named_query",
+			Boost = 1.1,
+			Fuzzy = new IntervalsFuzzy
+			{
+				Term = IntervalsFuzzy,
+				Fuzziness = Fuzziness.Auto
+			}
+		};
+
+		protected override object QueryJson => new
+		{
+			intervals = new
+			{
+				description = new
+				{
+					_name = "named_query",
+					boost = 1.1,
+					fuzzy = new
+					{
+						term = IntervalsFuzzy,
+						fuzziness = "AUTO"
+					}
+				}
+			}
+		};
+
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.Intervals(c => c
+				.Field(p => p.Description)
+				.Name("named_query")
+				.Boost(1.1)
+				.Fuzzy(m => m
+					.Term(IntervalsFuzzy)
+					.Fuzziness(Fuzziness.Auto)
+				)
+			);
+	}
 }
