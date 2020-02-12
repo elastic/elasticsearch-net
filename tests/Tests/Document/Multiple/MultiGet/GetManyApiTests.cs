@@ -13,12 +13,12 @@ using Tests.Domain;
 
 namespace Tests.Document.Multiple.MultiGet
 {
-	public class GetManyApiTests : IClusterFixture<ReadOnlyCluster>
+	public class GetManyApiTests : IClusterFixture<WritableCluster>
 	{
 		private readonly IElasticClient _client;
 		private readonly IEnumerable<long> _ids = Developer.Developers.Select(d => d.Id).Take(10);
 
-		public GetManyApiTests(ReadOnlyCluster cluster) => _client = cluster.Client;
+		public GetManyApiTests(WritableCluster cluster) => _client = cluster.Client;
 
 		[I] public void UsesDefaultIndexAndInferredType()
 		{
@@ -54,6 +54,51 @@ namespace Tests.Document.Multiple.MultiGet
 			{
 				hit.Index.Should().NotBeNullOrWhiteSpace();
 				hit.Id.Should().Be(id.ToString(CultureInfo.InvariantCulture));
+				hit.Found.Should().BeTrue();
+			}
+		}
+
+		[I] public void ReturnsDocsMatchingIdsFromDifferentIndices()
+		{
+			var developerIndex = Nest.Indices.Index<Developer>();
+			var indexName = developerIndex.GetString(_client.ConnectionSettings);
+
+			var reindexResponse = _client.ReindexOnServer(r => r
+				.Source(s => s
+					.Index(developerIndex)
+					.Query<Developer>(q => q
+						.Ids(ids => ids.Values(_ids))
+					)
+				)
+				.Destination(d => d
+					.Index($"{indexName}-reindex"))
+				.Refresh()
+			);
+
+			if (!reindexResponse.IsValid)
+				throw new Exception($"problem reindexing documents for integration test: {reindexResponse.DebugInformation}");
+
+			var id = _ids.First();
+
+			var multiGetResponse = _client.MultiGet(s => s
+				.RequestConfiguration(r => r.ThrowExceptions())
+				.Get<Developer>(m => m
+					.Id(id)
+					.Index(indexName)
+				)
+				.Get<Developer>(m => m
+					.Id(id)
+					.Index($"{indexName}-reindex")
+				)
+			);
+
+			var response = multiGetResponse.GetMany<Developer>(new [] { id, id });
+
+			response.Count().Should().Be(4);
+			foreach (var hit in response)
+			{
+				hit.Index.Should().NotBeNullOrWhiteSpace();
+				hit.Id.Should().NotBeNullOrWhiteSpace();
 				hit.Found.Should().BeTrue();
 			}
 		}

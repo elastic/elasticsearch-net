@@ -30,16 +30,15 @@ namespace Nest
 		public IEnumerable<IMultiGetHit<T>> GetMany<T>(IEnumerable<string> ids) where T : class
 		{
 			var docs = Hits.OfType<IMultiGetHit<T>>();
+			var seenIndices = new HashSet<string>();
 
 			foreach (var id in ids)
 			{
+				seenIndices.Clear();
 				foreach (var doc in docs)
 				{
-					if (string.Equals(doc.Id, id))
-					{
+					if (string.Equals(doc.Id, id) && seenIndices.Add(doc.Index))
 						yield return doc;
-						break;
-					}
 				}
 			}
 		}
@@ -58,16 +57,15 @@ namespace Nest
 		public IEnumerable<T> SourceMany<T>(IEnumerable<string> ids) where T : class
 		{
 			var docs = Hits.OfType<IMultiGetHit<T>>();
+			var seenIndices = new HashSet<string>();
 
 			foreach (var id in ids)
 			{
+				seenIndices.Clear();
 				foreach (var doc in docs)
 				{
-					if (string.Equals(doc.Id, id) && doc.Found)
-					{
+					if (string.Equals(doc.Id, id) && doc.Found && seenIndices.Add(doc.Index))
 						yield return doc.Source;
-						break;
-					}
 				}
 			}
 		}

@@ -41,11 +41,11 @@ namespace Nest
 				if (index > 0)
 					writer.WriteValueSeparator();
 
-				var id = docs[index];
+				var doc = docs[index];
 				if (flatten)
-					IdFormatter.Serialize(ref writer, id.Id, formatterResolver);
+					IdFormatter.Serialize(ref writer, doc.Id, formatterResolver);
 				else
-					formatter.Serialize(ref writer, id, formatterResolver);
+					formatter.Serialize(ref writer, doc, formatterResolver);
 			}
 			writer.WriteEndArray();
 			writer.WriteEndObject();
