@@ -1,41 +1,47 @@
 {
-  "cat.recovery":{
+  "cat.ml_trained_models":{
     "documentation":{
-      "url":"https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html",
-      "description":"Returns information about index shard recoveries, both on-going completed."
+      "url":"https://www.elastic.co/guide/en/elasticsearch/reference/current/get-inference-stats.html"
     },
     "stability":"stable",
     "url":{
       "paths":[
         {
-          "path":"/_cat/recovery",
+          "path":"/_cat/ml/trained_models",
           "methods":[
             "GET"
           ]
         },
         {
-          "path":"/_cat/recovery/{index}",
+          "path":"/_cat/ml/trained_models/{model_id}",
           "methods":[
             "GET"
           ],
           "parts":{
-            "index":{
-              "type":"list",
-              "description":"Comma-separated list or wildcard expression of index names to limit the returned information"
+            "model_id":{
+              "type":"string",
+              "description":"The ID of the trained models stats to fetch"
             }
           }
         }
       ]
     },
     "params":{
-      "format":{
-        "type":"string",
-        "description":"a short version of the Accept header, e.g. json, yaml"
-      },
-      "active_only":{
+      "allow_no_match":{
         "type":"boolean",
-        "description":"If `true`, the response only includes ongoing shard recoveries",
-        "default":false
+        "required":false,
+        "description":"Whether to ignore if a wildcard expression matches no trained models. (This includes `_all` string or when no trained models have been specified)",
+        "default":true
+      },
+      "from":{
+        "type":"int",
+        "description":"skips a number of trained models",
+        "default":0
+      },
+      "size":{
+        "type":"int",
+        "description":"specifies a max number of trained models to get",
+        "default":100
       },
       "bytes":{
         "type":"enum",
@@ -54,10 +60,9 @@
           "pb"
         ]
       },
-      "detailed":{
-        "type":"boolean",
-        "description":"If `true`, the response includes detailed information about shard recoveries",
-        "default":false
+      "format":{
+        "type":"string",
+        "description":"a short version of the Accept header, e.g. json, yaml"
       },
       "h":{
         "type":"list",
@@ -68,10 +73,6 @@
         "description":"Return help information",
         "default":false
       },
-      "index":{
-        "type":"list",
-        "description":"Comma-separated list or wildcard expression of index names to limit the returned information"
-      },
       "s":{
         "type":"list",
         "description":"Comma-separated list of column names or column aliases to sort by"
@@ -80,13 +81,13 @@
         "type":"enum",
         "description":"The unit in which to display time values",
         "options":[
-          "d",
-          "h",
-          "m",
-          "s",
-          "ms",
-          "micros",
-          "nanos"
+          "d (Days)",
+          "h (Hours)",
+          "m (Minutes)",
+          "s (Seconds)",
+          "ms (Milliseconds)",
+          "micros (Microseconds)",
+          "nanos (Nanoseconds)"
         ]
       },
       "v":{

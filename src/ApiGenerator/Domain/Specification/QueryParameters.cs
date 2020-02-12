@@ -7,10 +7,7 @@ namespace ApiGenerator.Domain.Specification
 {
 	public class QueryParameters
 	{
-		private static readonly string[] FieldsParams =
-		{
-			"fields", "_source_includes", "_source_excludes",
-		};
+		private static readonly string[] FieldsParams = { "fields", "_source_includes", "_source_excludes", };
 
 		public bool Skip { get; set; }
 
@@ -72,7 +69,16 @@ namespace ApiGenerator.Domain.Specification
 
 		public string SetterLowLevel => "value";
 
-		public string Type { get; set; }
+		private string _type;
+
+		public string Type
+		{
+			// TODO support unions
+			get => !_type.Contains("|")
+				? _type
+				: _type.Split('|', StringSplitOptions.RemoveEmptyEntries).First().Trim();
+			set => _type = value;
+		}
 
 		public string TypeHighLevel
 		{
