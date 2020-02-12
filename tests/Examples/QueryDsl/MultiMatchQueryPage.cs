@@ -1,18 +1,28 @@
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
+using Examples.Models;
 using Nest;
 
 namespace Examples.QueryDsl
 {
 	public class MultiMatchQueryPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line11()
 		{
 			// tag::53b908c3432118c5a6e460f74d32006b[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.MultiMatch(c => c
+						.Query("this is a test")
+						.Fields(new[] { "subject", "message" })
+					)
+				)
+			);
 			// end::53b908c3432118c5a6e460f74d32006b[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""multi_match"" : {
@@ -23,14 +33,22 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line33()
 		{
 			// tag::6a1702dd50690cae833572e48a0ddf25[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.MultiMatch(c => c
+						.Query("Will Smith")
+						.Fields("title, *_name")
+					)
+				)
+			);
 			// end::6a1702dd50690cae833572e48a0ddf25[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""multi_match"" : {
@@ -41,14 +59,22 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line50()
 		{
 			// tag::e30ea6e3823a139d7693d8cce1920a06[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.MultiMatch(c => c
+						.Query("this is a test")
+						.Fields(new[] { "subject^3", "message" })
+					)
+				)
+			);
 			// end::e30ea6e3823a139d7693d8cce1920a06[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""multi_match"" : {
@@ -59,14 +85,24 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line113()
 		{
 			// tag::5da6efd5b038ada64c9e853c88c1ec47[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.MultiMatch(c => c
+						.Query("brown fox")
+						.Type(TextQueryType.BestFields)
+						.Fields(new[] { "subject", "message" })
+						.TieBreaker(0.3)
+					)
+				)
+			);
 			// end::5da6efd5b038ada64c9e853c88c1ec47[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""multi_match"" : {
@@ -79,14 +115,25 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line130()
 		{
 			// tag::b0eaf67e5cce24ef8889bf20951ccec1[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.DisMax(c => c
+						.Queries(
+							qs => qs.Match(m => m.Field("subject").Query("brown fox")),
+							qs => qs.Match(m => m.Field("message").Query("brown fox"))
+						)
+						.TieBreaker(0.3)
+					)
+				)
+			);
 			// end::b0eaf67e5cce24ef8889bf20951ccec1[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""dis_max"": {
@@ -97,17 +144,31 @@ namespace Examples.QueryDsl
 			      ""tie_breaker"": 0.3
 			    }
 			  }
-			}");
+			}", (e, body) =>
+			{
+				body["query"]["dis_max"]["queries"][0]["match"]["subject"].ToLongFormQuery();
+				body["query"]["dis_max"]["queries"][1]["match"]["message"].ToLongFormQuery();
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line170()
 		{
 			// tag::e270f3f721a5712cd11a5ca03554f5b0[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.MultiMatch(c => c
+						.Query("Will Smith")
+						.Type(TextQueryType.BestFields)
+						.Fields(new[] { "first_name", "last_name" })
+						.Operator(Operator.And)
+					)
+				)
+			);
 			// end::e270f3f721a5712cd11a5ca03554f5b0[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""multi_match"" : {
@@ -120,14 +181,23 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line212()
 		{
 			// tag::7b908b1189f076942de8cd497ff1fa59[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.MultiMatch(c => c
+						.Query("quick brown fox")
+						.Type(TextQueryType.MostFields)
+						.Fields(new[] { "title", "title.original", "title.shingles" })
+					)
+				)
+			);
 			// end::7b908b1189f076942de8cd497ff1fa59[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""multi_match"" : {
@@ -139,14 +209,25 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line228()
 		{
 			// tag::6bbc613bd4f9aec1bbdbabf5db021d28[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.Bool(c => c
+						.Should(
+							qs => qs.Match(m => m.Field("title").Query("quick brown fox")),
+							qs => qs.Match(m => m.Field("title.original").Query("quick brown fox")),
+							qs => qs.Match(m => m.Field("title.shingles").Query("quick brown fox"))
+						)
+					)
+				)
+			);
 			// end::6bbc613bd4f9aec1bbdbabf5db021d28[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""bool"": {
@@ -157,17 +238,31 @@ namespace Examples.QueryDsl
 			      ]
 			    }
 			  }
-			}");
+			}", (e, body) =>
+			{
+				body["query"]["bool"]["should"][0]["match"]["title"].ToLongFormQuery();
+				body["query"]["bool"]["should"][1]["match"]["title.original"].ToLongFormQuery();
+				body["query"]["bool"]["should"][2]["match"]["title.shingles"].ToLongFormQuery();
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line259()
 		{
 			// tag::0e118857b815b62118a30c042f079db1[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.MultiMatch(c => c
+						.Query("quick brown f")
+						.Type(TextQueryType.PhrasePrefix)
+						.Fields(new[] { "subject", "message" })
+					)
+				)
+			);
 			// end::0e118857b815b62118a30c042f079db1[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""multi_match"" : {
@@ -179,14 +274,24 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line275()
 		{
 			// tag::33f148e3d8676de6cc52f58749898a13[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.DisMax(c => c
+						.Queries(
+							qs => qs.MatchPhrasePrefix(m => m.Field("subject").Query("quick brown f")),
+							qs => qs.MatchPhrasePrefix(m => m.Field("message").Query("quick brown f"))
+						)
+					)
+				)
+			);
 			// end::33f148e3d8676de6cc52f58749898a13[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""dis_max"": {
@@ -196,17 +301,31 @@ namespace Examples.QueryDsl
 			      ]
 			    }
 			  }
-			}");
+			}", (e, body) =>
+			{
+				body["query"]["dis_max"]["queries"][0]["match_phrase_prefix"]["subject"].ToLongFormQuery();
+				body["query"]["dis_max"]["queries"][1]["match_phrase_prefix"]["message"].ToLongFormQuery();
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line341()
 		{
 			// tag::047266b0d20fdb62ebc72d51952c8f6d[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.MultiMatch(c => c
+						.Query("Will Smith")
+						.Type(TextQueryType.CrossFields)
+						.Fields(new[] { "first_name", "last_name" })
+						.Operator(Operator.And)
+					)
+				)
+			);
 			// end::047266b0d20fdb62ebc72d51952c8f6d[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""multi_match"" : {
@@ -219,14 +338,23 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line400()
 		{
 			// tag::ad0dcbc7fc619e952c8825b8f307b7b2[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.MultiMatch(c => c
+						.Query("Jon")
+						.Type(TextQueryType.CrossFields)
+						.Fields(new[] { "first", "first.edge", "last", "last.edge" })
+					)
+				)
+			);
 			// end::ad0dcbc7fc619e952c8825b8f307b7b2[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""multi_match"" : {
@@ -241,14 +369,33 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line438()
 		{
 			// tag::3cd50a789b8e1f0ebbbc53a8d7ecf656[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.Bool(b =>
+						b.Should(
+							s => s.MultiMatch(c => c
+								.Query("Will Smith")
+								.Type(TextQueryType.CrossFields)
+								.Fields(new[] { "first", "last" })
+								.MinimumShouldMatch(MinimumShouldMatch.Percentage(50))
+							),
+							s => s.MultiMatch(c => c
+								.Query("Will Smith")
+								.Type(TextQueryType.CrossFields)
+								.Fields("*.edge")
+							)
+						)
+					)
+				)
+			);
 			// end::3cd50a789b8e1f0ebbbc53a8d7ecf656[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""bool"": {
@@ -274,14 +421,24 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line472()
 		{
 			// tag::179f0a3e84ff4bbac18787a018eabf89[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.MultiMatch(c => c
+						.Query("Jon")
+						.Type(TextQueryType.CrossFields)
+						.Analyzer("standard")
+						.Fields(new[] { "first", "last", "*.edge" })
+					)
+				)
+			);
 			// end::179f0a3e84ff4bbac18787a018eabf89[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			   ""multi_match"" : {
@@ -294,14 +451,23 @@ namespace Examples.QueryDsl
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line524()
 		{
 			// tag::68721288dc9ad8aa1b55099b4d303051[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q =>
+					q.MultiMatch(c => c
+						.Query("quick brown f")
+						.Type(TextQueryType.BoolPrefix)
+						.Fields(new[] { "subject", "message" })
+					)
+				)
+			);
 			// end::68721288dc9ad8aa1b55099b4d303051[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""query"": {
 			    ""multi_match"" : {
