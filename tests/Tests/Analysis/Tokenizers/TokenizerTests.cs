@@ -34,6 +34,36 @@ namespace Tests.Analysis.Tokenizers
 			public override string Name => "endgen";
 		}
 
+		[SkipVersion("<7.6.0", "CustomTokenChars introduced in 7.6.0")]
+		public class EdgeNGramCustomTokenCharsTests : TokenizerAssertionBase<EdgeNGramCustomTokenCharsTests>
+		{
+			public override FuncTokenizer Fluent => (n, t) => t.EdgeNGram(n, e => e
+				.MaxGram(2)
+				.MinGram(1)
+				.TokenChars(TokenChar.Custom)
+				.CustomTokenChars("+-_")
+			);
+
+			public override ITokenizer Initializer => new EdgeNGramTokenizer
+			{
+				MaxGram = 2,
+				MinGram = 1,
+				TokenChars = new[] { TokenChar.Custom },
+				CustomTokenChars = "+-_"
+			};
+
+			public override object Json => new
+			{
+				min_gram = 1,
+				max_gram = 2,
+				token_chars = new[] { "custom" },
+				custom_token_chars = "+-_",
+ 				type = "edge_ngram"
+			};
+
+			public override string Name => "endgen_custom";
+		}
+
 		public class NGramTests : TokenizerAssertionBase<NGramTests>
 		{
 			public override FuncTokenizer Fluent => (n, t) => t.NGram(n, e => e
@@ -58,6 +88,36 @@ namespace Tests.Analysis.Tokenizers
 			};
 
 			public override string Name => "ng";
+		}
+
+		[SkipVersion("<7.6.0", "CustomTokenChars introduced in 7.6.0")]
+		public class NGramCustomTokenCharsTests : TokenizerAssertionBase<NGramCustomTokenCharsTests>
+		{
+			public override FuncTokenizer Fluent => (n, t) => t.NGram(n, e => e
+				.MaxGram(2)
+				.MinGram(1)
+				.TokenChars(TokenChar.Custom)
+				.CustomTokenChars("+-_")
+			);
+
+			public override ITokenizer Initializer => new NGramTokenizer
+			{
+				MaxGram = 2,
+				MinGram = 1,
+				TokenChars = new[] { TokenChar.Custom },
+				CustomTokenChars = "+-_"
+			};
+
+			public override object Json => new
+			{
+				min_gram = 1,
+				max_gram = 2,
+				token_chars = new[] { "custom" },
+				custom_token_chars = "+-_",
+				type = "ngram"
+			};
+
+			public override string Name => "ngram_custom";
 		}
 
 		public class PathHierarchyTests : TokenizerAssertionBase<PathHierarchyTests>
