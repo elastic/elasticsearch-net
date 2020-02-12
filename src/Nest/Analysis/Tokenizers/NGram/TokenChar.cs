@@ -20,5 +20,13 @@ namespace Nest
 
 		[EnumMember(Value = "symbol")]
 		Symbol,
+
+		/// <summary>
+		/// Custom token characters.
+		/// <para></para>
+		/// Available in Elasticsearch 7.6.0+
+		/// </summary>
+		[EnumMember(Value = "custom")]
+		Custom,
 	}
 }
