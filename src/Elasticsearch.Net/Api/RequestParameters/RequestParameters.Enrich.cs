@@ -24,13 +24,13 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.EnrichApi
 {
-	///<summary>Request options for DeletePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-enrich-policy-api.html</para></summary>
+	///<summary>Request options for DeletePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-delete-policy.html</para></summary>
 	public class DeleteEnrichPolicyRequestParameters : RequestParameters<DeleteEnrichPolicyRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for ExecutePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/execute-enrich-policy-api.html</para></summary>
+	///<summary>Request options for ExecutePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-execute-policy.html</para></summary>
 	public class ExecuteEnrichPolicyRequestParameters : RequestParameters<ExecuteEnrichPolicyRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -48,13 +48,13 @@ namespace Elasticsearch.Net.Specification.EnrichApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for PutPolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-enrich-policy-api.html</para></summary>
+	///<summary>Request options for PutPolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-put-policy.html</para></summary>
 	public class PutEnrichPolicyRequestParameters : RequestParameters<PutEnrichPolicyRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats-api.html</para></summary>
+	///<summary>Request options for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats.html</para></summary>
 	public class EnrichStatsRequestParameters : RequestParameters<EnrichStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;

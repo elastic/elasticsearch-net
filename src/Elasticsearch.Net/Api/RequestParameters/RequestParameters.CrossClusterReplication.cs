@@ -57,7 +57,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for ForgetFollowerIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-forget-follower.html</para></summary>
+	///<summary>Request options for ForgetFollowerIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 	public class ForgetFollowerIndexRequestParameters : RequestParameters<ForgetFollowerIndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -105,7 +105,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for UnfollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-unfollow.html</para></summary>
+	///<summary>Request options for UnfollowIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 	public class UnfollowIndexRequestParameters : RequestParameters<UnfollowIndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
