@@ -5,7 +5,7 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(ActionsFormatter))]
+	[JsonFormatter(typeof(ActionsInterfaceFormatter))]
 	public interface IActions : IIsADictionary<string, IAction> { }
 
 	[JsonFormatter(typeof(ActionsFormatter))]

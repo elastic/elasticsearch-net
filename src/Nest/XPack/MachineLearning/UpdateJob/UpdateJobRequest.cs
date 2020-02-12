@@ -30,7 +30,7 @@ namespace Nest
 		/// Contains custom meta data about the job.
 		/// </summary>
 		[DataMember(Name ="custom_settings")]
-		[JsonFormatter(typeof(VerbatimDictionaryInterfaceKeysFormatter<string, object>))]
+		[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<string, object>))]
 		Dictionary<string, object> CustomSettings { get; set; }
 
 		/// <summary>
