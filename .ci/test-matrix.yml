@@ -1,7 +1,7 @@
 ---
 
 ELASTICSEARCH_VERSION:
-  - 7.x-SNAPSHOT
+  - 7.6-SNAPSHOT
 
 TEST_SUITE:
   - oss
