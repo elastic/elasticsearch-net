@@ -3,30 +3,32 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.Serialization;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Elasticsearch.Net
 {
 	internal class ExceptionFormatterResolver : IJsonFormatterResolver
 	{
-		public static ExceptionFormatterResolver Instance = new ExceptionFormatterResolver();
+		public static readonly ExceptionFormatterResolver Instance = new ExceptionFormatterResolver();
 
 		private ExceptionFormatterResolver() { }
-
-		private static readonly ExceptionFormatter ExceptionFormatter = new ExceptionFormatter();
 
 		public IJsonFormatter<T> GetFormatter<T>()
 		{
 			if (typeof(Exception).IsAssignableFrom(typeof(T)))
-				return (IJsonFormatter<T>)ExceptionFormatter;
+			{
+				var type = typeof(ExceptionFormatter<>).MakeGenericType(typeof(T));
+				return (IJsonFormatter<T>)type.CreateInstance();
+			}
 
 			return null;
 		}
 	}
 
-	internal class ExceptionFormatter : IJsonFormatter<Exception>
+	internal class ExceptionFormatter<TException> : IJsonFormatter<TException> where TException : Exception
 	{
-		private List<Dictionary<string, object>> FlattenExceptions(Exception e)
+		private static List<Dictionary<string, object>> FlattenExceptions(Exception e)
 		{
 			var maxExceptions = 20;
 			var exceptions = new List<Dictionary<string, object>>(maxExceptions);
@@ -100,7 +102,7 @@ namespace Elasticsearch.Net
 			o.Add("ExceptionMethod", exceptionMethod);
 		}
 
-		public void Serialize(ref JsonWriter writer, Exception value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, TException value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null)
 			{
@@ -134,7 +136,7 @@ namespace Elasticsearch.Net
 			writer.WriteEndArray();
 		}
 
-		public Exception Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+		public TException Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
 			throw new NotSupportedException();
 	}
 }
