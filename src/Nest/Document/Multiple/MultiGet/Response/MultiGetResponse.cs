@@ -63,28 +63,15 @@ namespace Nest
 		public T Source<T>(long id) where T : class => Source<T>(id.ToString(CultureInfo.InvariantCulture));
 
 		/// <summary>
-		/// Retrieves the source for each distinct id.
+		/// Retrieves the source, if available, for each distinct id.
 		/// </summary>
 		/// <param name="ids">The ids to retrieve source for</param>
 		/// <typeparam name="T">The document type for the hits to return</typeparam>
 		/// <returns>An IEnumerable{T} of sources</returns>
-		public IEnumerable<T> SourceMany<T>(IEnumerable<string> ids) where T : class
-		{
-			HashSet<string> seenIndices = null;
-			foreach (var id in ids.Distinct())
-			{
-				if (seenIndices == null)
-					seenIndices = new HashSet<string>();
-				else
-					seenIndices.Clear();
-
-				foreach (var doc in Hits.OfType<IMultiGetHit<T>>())
-				{
-					if (string.Equals(doc.Id, id) && doc.Found && seenIndices.Add(doc.Index))
-						yield return doc.Source;
-				}
-			}
-		}
+		public IEnumerable<T> SourceMany<T>(IEnumerable<string> ids) where T : class =>
+			from hit in GetMany<T>(ids)
+			where hit.Found
+			select hit.Source;
 
 		public IEnumerable<T> SourceMany<T>(IEnumerable<long> ids) where T : class =>
 			SourceMany<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)));
