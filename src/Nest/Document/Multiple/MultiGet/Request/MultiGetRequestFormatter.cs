@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net.Utf8Json;
 
@@ -20,12 +21,28 @@ namespace Nest
 				return;
 			}
 
-			var docs = value.Documents.Select(d =>
-				{
-					if (value.Index != null) d.Index = null;
-					return d;
-				})
-				.ToList();
+			List<IMultiGetOperation> docs;
+
+			// if an index is specified at the request level and all documents have the same index, remove the index
+			if (value.Index != null)
+			{
+				var settings = formatterResolver.GetConnectionSettings();
+				var resolvedIndex = value.Index.GetString(settings);
+				docs = value.Documents.Select(d =>
+					{
+						if (d.Index == null)
+							return d;
+
+						// TODO: not nice to resolve index for each doc here for comparison, only for it to be resolved later in serialization.
+						// Might be better to simply remove the flattening logic.
+						var docIndex = d.Index.GetString(settings);
+						if (string.Equals(resolvedIndex, docIndex)) d.Index = null;
+						return d;
+					})
+					.ToList();
+			}
+			else
+				docs = value.Documents.ToList();
 
 			var flatten = docs.All(p => p.CanBeFlattened);
 

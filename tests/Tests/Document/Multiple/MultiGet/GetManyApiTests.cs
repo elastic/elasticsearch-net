@@ -62,6 +62,7 @@ namespace Tests.Document.Multiple.MultiGet
 		{
 			var developerIndex = Nest.Indices.Index<Developer>();
 			var indexName = developerIndex.GetString(_client.ConnectionSettings);
+			var reindexName = $"{indexName}-getmany-distinctids";
 
 			var reindexResponse = _client.ReindexOnServer(r => r
 				.Source(s => s
@@ -71,7 +72,7 @@ namespace Tests.Document.Multiple.MultiGet
 					)
 				)
 				.Destination(d => d
-					.Index($"{indexName}-reindex"))
+					.Index(reindexName))
 				.Refresh()
 			);
 
@@ -88,7 +89,7 @@ namespace Tests.Document.Multiple.MultiGet
 				)
 				.Get<Developer>(m => m
 					.Id(id)
-					.Index($"{indexName}-reindex")
+					.Index(reindexName)
 				)
 			);
 
@@ -101,6 +102,57 @@ namespace Tests.Document.Multiple.MultiGet
 				hit.Id.Should().NotBeNullOrWhiteSpace();
 				hit.Found.Should().BeTrue();
 			}
+		}
+
+		[I] public void ReturnsDocsMatchingDistinctIdsFromDifferentIndicesWithRequestLevelIndex()
+		{
+			var developerIndex = Nest.Indices.Index<Developer>();
+			var indexName = developerIndex.GetString(_client.ConnectionSettings);
+			var reindexName = $"{indexName}-getmany-distinctidsindex";
+
+			var reindexResponse = _client.ReindexOnServer(r => r
+				.Source(s => s
+					.Index(developerIndex)
+					.Query<Developer>(q => q
+						.Ids(ids => ids.Values(_ids))
+					)
+				)
+				.Destination(d => d
+					.Index(reindexName))
+				.Refresh()
+			);
+
+			if (!reindexResponse.IsValid)
+				throw new Exception($"problem reindexing documents for integration test: {reindexResponse.DebugInformation}");
+
+			var id = _ids.First();
+
+			var multiGetResponse = _client.MultiGet(s => s
+				.Index(indexName)
+				.RequestConfiguration(r => r.ThrowExceptions())
+				.Get<Developer>(m => m
+					.Id(id)
+				)
+				.Get<Developer>(m => m
+					.Id(id)
+					.Index(reindexName)
+				)
+			);
+
+			var response = multiGetResponse.GetMany<Developer>(new [] { id, id });
+
+			response.Count().Should().Be(2);
+			var seenIndices = new HashSet<string>(2);
+
+			foreach (var hit in response)
+			{
+				hit.Index.Should().NotBeNullOrWhiteSpace();
+				seenIndices.Add(hit.Index);
+				hit.Id.Should().NotBeNullOrWhiteSpace();
+				hit.Found.Should().BeTrue();
+			}
+
+			seenIndices.Should().HaveCount(2).And.Contain(new [] { indexName, reindexName });
 		}
 
 		[I] public async Task ReturnsSourceMatchingDistinctIds()
