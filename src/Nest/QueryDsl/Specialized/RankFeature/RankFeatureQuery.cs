@@ -25,7 +25,7 @@ namespace Nest
 	{
 		protected override bool Conditionless => IsConditionless(this);
 
-		internal static bool IsConditionless(IRankFeatureQuery q) => q.Field.IsConditionless() || q.Function == null;
+		internal static bool IsConditionless(IRankFeatureQuery q) => q.Field.IsConditionless();
 
 		internal override void InternalWrapInContainer(IQueryContainer container) => container.RankFeature = this;
 
@@ -189,18 +189,22 @@ namespace Nest
 			writer.WritePropertyName("field");
 			var fieldFormatter = formatterResolver.GetFormatter<Field>();
 			fieldFormatter.Serialize(ref writer, value.Field, formatterResolver);
-			writer.WriteValueSeparator();
-			switch (value.Function)
+
+			if (value.Function != null)
 			{
-				case IRankFeatureSigmoidFunction sigmoid:
-					SerializeScoreFunction(ref writer, "sigmoid", sigmoid, formatterResolver);
-					break;
-				case IRankFeatureSaturationFunction saturation:
-					SerializeScoreFunction(ref writer, "saturation", saturation, formatterResolver);
-					break;
-				case IRankFeatureLogarithmFunction log:
-					SerializeScoreFunction(ref writer, "log", log, formatterResolver);
-					break;
+				writer.WriteValueSeparator();
+				switch (value.Function)
+				{
+					case IRankFeatureSigmoidFunction sigmoid:
+						SerializeScoreFunction(ref writer, "sigmoid", sigmoid, formatterResolver);
+						break;
+					case IRankFeatureSaturationFunction saturation:
+						SerializeScoreFunction(ref writer, "saturation", saturation, formatterResolver);
+						break;
+					case IRankFeatureLogarithmFunction log:
+						SerializeScoreFunction(ref writer, "log", log, formatterResolver);
+						break;
+				}
 			}
 
 			writer.WriteEndObject();
