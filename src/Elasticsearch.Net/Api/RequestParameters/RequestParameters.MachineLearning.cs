@@ -154,7 +154,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for EstimateMemoryUsage <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</para></summary>
+	///<summary>Request options for EstimateMemoryUsage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</para></summary>
 	public class EstimateMemoryUsageRequestParameters : RequestParameters<EstimateMemoryUsageRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -166,7 +166,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for ExplainDataFrameAnalytics <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html</para></summary>
+	///<summary>Request options for ExplainDataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html</para></summary>
 	public class ExplainDataFrameAnalyticsRequestParameters : RequestParameters<ExplainDataFrameAnalyticsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -529,13 +529,6 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		{
 			get => Q<int? >("size");
 			set => Q("size", value);
-		}
-
-		///<summary>A comma-separated list of tags that the model must have.</summary>
-		public string[] Tags
-		{
-			get => Q<string[]>("tags");
-			set => Q("tags", value);
 		}
 	}
 

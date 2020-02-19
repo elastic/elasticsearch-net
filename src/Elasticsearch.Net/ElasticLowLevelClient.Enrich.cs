@@ -43,23 +43,23 @@ namespace Elasticsearch.Net.Specification.EnrichApi
 		{
 		}
 
-		///<summary>DELETE on /_enrich/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-enrich-policy-api.html</para></summary>
+		///<summary>DELETE on /_enrich/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-delete-policy.html</para></summary>
 		///<param name = "name">The name of the enrich policy</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse DeletePolicy<TResponse>(string name, DeleteEnrichPolicyRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_enrich/policy/{name:name}"), null, RequestParams(requestParameters));
-		///<summary>DELETE on /_enrich/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-enrich-policy-api.html</para></summary>
+		///<summary>DELETE on /_enrich/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-delete-policy.html</para></summary>
 		///<param name = "name">The name of the enrich policy</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("enrich.delete_policy", "name")]
 		public Task<TResponse> DeletePolicyAsync<TResponse>(string name, DeleteEnrichPolicyRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_enrich/policy/{name:name}"), ctx, null, RequestParams(requestParameters));
-		///<summary>PUT on /_enrich/policy/{name}/_execute <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/execute-enrich-policy-api.html</para></summary>
+		///<summary>PUT on /_enrich/policy/{name}/_execute <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-execute-policy.html</para></summary>
 		///<param name = "name">The name of the enrich policy</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse ExecutePolicy<TResponse>(string name, ExecuteEnrichPolicyRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_enrich/policy/{name:name}/_execute"), null, RequestParams(requestParameters));
-		///<summary>PUT on /_enrich/policy/{name}/_execute <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/execute-enrich-policy-api.html</para></summary>
+		///<summary>PUT on /_enrich/policy/{name}/_execute <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-execute-policy.html</para></summary>
 		///<param name = "name">The name of the enrich policy</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("enrich.execute_policy", "name")]
@@ -85,24 +85,24 @@ namespace Elasticsearch.Net.Specification.EnrichApi
 		[MapsApi("enrich.get_policy", "")]
 		public Task<TResponse> GetPolicyAsync<TResponse>(GetEnrichPolicyRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_enrich/policy/", ctx, null, RequestParams(requestParameters));
-		///<summary>PUT on /_enrich/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-enrich-policy-api.html</para></summary>
+		///<summary>PUT on /_enrich/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-put-policy.html</para></summary>
 		///<param name = "name">The name of the enrich policy</param>
 		///<param name = "body">The enrich policy to register</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse PutPolicy<TResponse>(string name, PostData body, PutEnrichPolicyRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_enrich/policy/{name:name}"), body, RequestParams(requestParameters));
-		///<summary>PUT on /_enrich/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-enrich-policy-api.html</para></summary>
+		///<summary>PUT on /_enrich/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-put-policy.html</para></summary>
 		///<param name = "name">The name of the enrich policy</param>
 		///<param name = "body">The enrich policy to register</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("enrich.put_policy", "name, body")]
 		public Task<TResponse> PutPolicyAsync<TResponse>(string name, PostData body, PutEnrichPolicyRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_enrich/policy/{name:name}"), ctx, body, RequestParams(requestParameters));
-		///<summary>GET on /_enrich/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats-api.html</para></summary>
+		///<summary>GET on /_enrich/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Stats<TResponse>(EnrichStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_enrich/_stats", null, RequestParams(requestParameters));
-		///<summary>GET on /_enrich/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats-api.html</para></summary>
+		///<summary>GET on /_enrich/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("enrich.stats", "")]
 		public Task<TResponse> StatsAsync<TResponse>(EnrichStatsRequestParameters requestParameters = null, CancellationToken ctx = default)

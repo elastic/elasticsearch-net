@@ -187,13 +187,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.delete_trained_model", "model_id")]
 		public Task<TResponse> DeleteTrainedModelAsync<TResponse>(string modelId, DeleteTrainedModelRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ml/inference/{modelId:modelId}"), ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /_ml/data_frame/analytics/_estimate_memory_usage <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</para></summary>
+		///<summary>POST on /_ml/data_frame/analytics/_estimate_memory_usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</para></summary>
 		///<param name = "body">Memory usage estimation definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse EstimateMemoryUsage<TResponse>(PostData body, EstimateMemoryUsageRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ml/data_frame/analytics/_estimate_memory_usage", body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/data_frame/analytics/_estimate_memory_usage <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</para></summary>
+		///<summary>POST on /_ml/data_frame/analytics/_estimate_memory_usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</para></summary>
 		///<param name = "body">Memory usage estimation definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
@@ -213,27 +213,27 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.evaluate_data_frame", "body")]
 		public Task<TResponse> EvaluateDataFrameAsync<TResponse>(PostData body, EvaluateDataFrameRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ml/data_frame/_evaluate", ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/data_frame/analytics/_explain <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html</para></summary>
+		///<summary>POST on /_ml/data_frame/analytics/_explain <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html</para></summary>
 		///<param name = "body">The data frame analytics config to explain</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse ExplainDataFrameAnalytics<TResponse>(PostData body, ExplainDataFrameAnalyticsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ml/data_frame/analytics/_explain", body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/data_frame/analytics/_explain <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html</para></summary>
+		///<summary>POST on /_ml/data_frame/analytics/_explain <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html</para></summary>
 		///<param name = "body">The data frame analytics config to explain</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		[MapsApi("ml.explain_data_frame_analytics", "body")]
 		public Task<TResponse> ExplainDataFrameAnalyticsAsync<TResponse>(PostData body, ExplainDataFrameAnalyticsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ml/data_frame/analytics/_explain", ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/data_frame/analytics/{id}/_explain <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html</para></summary>
+		///<summary>POST on /_ml/data_frame/analytics/{id}/_explain <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html</para></summary>
 		///<param name = "id">The ID of the data frame analytics to explain</param>
 		///<param name = "body">The data frame analytics config to explain</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 		public TResponse ExplainDataFrameAnalytics<TResponse>(string id, PostData body, ExplainDataFrameAnalyticsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/data_frame/analytics/{id:id}/_explain"), body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/data_frame/analytics/{id}/_explain <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html</para></summary>
+		///<summary>POST on /_ml/data_frame/analytics/{id}/_explain <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html</para></summary>
 		///<param name = "id">The ID of the data frame analytics to explain</param>
 		///<param name = "body">The data frame analytics config to explain</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
