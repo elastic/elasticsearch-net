@@ -36,6 +36,9 @@ namespace Nest
 						responses.Add(reader.ReadNextBlockSegment());
 					break;
 				}
+
+				// skip any other properties that are not "docs"
+				reader.ReadNextBlock();
 			}
 
 			if (responses.Count == 0)
