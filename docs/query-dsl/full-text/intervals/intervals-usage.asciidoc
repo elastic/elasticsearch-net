@@ -249,3 +249,61 @@ new IntervalsQuery
 }
 ----
 
+[float]
+=== Fuzzy rules
+
+Fuzzy rules can be used to match terms that are similar to the provided term, within an edit distance defined by Fuzziness.
+If the fuzzy expansion matches more than 128 terms, Elasticsearch returns an error.
+
+NOTE: Only available in Elasticsearch 7.6.0+
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Intervals(c => c
+    .Field(p => p.Description)
+    .Name("named_query")
+    .Boost(1.1)
+    .Fuzzy(m => m
+        .Term(IntervalsFuzzy)
+        .Fuzziness(Fuzziness.Auto)
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new IntervalsQuery
+{
+    Field = Field<Project>(p => p.Description),
+    Name = "named_query",
+    Boost = 1.1,
+    Fuzzy = new IntervalsFuzzy
+    {
+        Term = IntervalsFuzzy,
+        Fuzziness = Fuzziness.Auto
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "intervals": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "fuzzy": {
+        "term": "lorem",
+        "fuzziness": "AUTO"
+      }
+    }
+  }
+}
+----
+
