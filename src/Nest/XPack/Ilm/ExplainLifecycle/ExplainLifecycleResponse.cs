@@ -25,10 +25,23 @@ namespace Nest
 		public DateTimeOffset ActionTime { get; internal set; }
 
 		/// <summary>
+		///	Indicates if retrying a failed step can overcome the error.
+		/// If this is true, the failed step will be retried automatically.
+		/// </summary>
+		[DataMember(Name = "is_auto_retryable_error")]
+		public bool? IsAutoRetryableError { get; internal set; }
+
+		/// <summary>
 		/// The step that caused the error, if applicable.
 		/// </summary>
 		[DataMember(Name = "failed_step")]
 		public string FailedStep { get; internal set; }
+
+		/// <summary>
+		/// Number of attempted automatic retries to execute the failed step, if applicable.
+		/// </summary>
+		[DataMember(Name = "failed_step_retry_count")]
+		public int? FailedStepRetryCount { get; internal set; }
 
 		[DataMember(Name = "index")]
 		public IndexName Index { get; internal set; }
