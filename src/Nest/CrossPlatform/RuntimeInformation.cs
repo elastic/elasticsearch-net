@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 #if NET461
 using System.Reflection;
 
@@ -16,7 +17,11 @@ namespace Nest
 				if (_frameworkDescription == null)
 				{
 					var assemblyFileVersionAttribute =
-						(AssemblyFileVersionAttribute)typeof(object).GetTypeInfo().Assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute));
+						((AssemblyFileVersionAttribute[])Attribute.GetCustomAttributes(
+							typeof(object).GetTypeInfo().Assembly,
+							typeof(AssemblyFileVersionAttribute)))
+						.OrderByDescending(a => a.Version)
+						.First();
 					_frameworkDescription = $".NET Framework {assemblyFileVersionAttribute.Version}";
 				}
 				return _frameworkDescription;
