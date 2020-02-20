@@ -127,6 +127,11 @@ Execution hints can be provided anywhere on the command line
                not (x.StartsWith("random:")) && 
                not (x.StartsWith("docs:")) &&
                not (x.StartsWith("ref:")))
+            |> List.map(fun (s:string) ->
+                let containsSpace = s.Contains(" ")
+                match s with | x when containsSpace -> sprintf "\"%s\"" x | s -> s
+            )
+            
         let target = 
             match (filteredArgs |> List.tryHead) with
             | Some t -> t.Replace("-one", "")
