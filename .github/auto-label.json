@@ -1,6 +1,6 @@
 {
   "rules": {
-    "infra": [".ci/**/*", ".github/**/*","build/**/*"],
+    "Infra": [".ci/**/*", ".github/**/*","build/**/*"],
     "v8.0.0-alpha1": "**/*"
   }
 }
