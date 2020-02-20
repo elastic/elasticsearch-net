@@ -21,8 +21,8 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
 		/// <param name="ids">IEnumerable of ids as string for the documents to fetch</param>
-		/// <param name="index">Optionally override the default inferred index name for T</param>
-		/// <param name="type">Optionally overiide the default inferred typename for T</param>
+		/// <param name="index">Set the request level index name</param>
+		/// <param name="type">Set the request level type name</param>
 		public static IEnumerable<IMultiGetHit<T>> GetMany<T>(this IElasticClient client, IEnumerable<string> ids, IndexName index = null,
 			TypeName type = null
 		)
@@ -47,8 +47,8 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
 		/// <param name="ids">IEnumerable of ids as ints for the documents to fetch</param>
-		/// <param name="index">Optionally override the default inferred index name for T</param>
-		/// <param name="type">Optionally overiide the default inferred typename for T</param>
+		/// <param name="index">Set the request level index name</param>
+		/// <param name="type">Set the request level type name</param>
 		public static IEnumerable<IMultiGetHit<T>> GetMany<T>(this IElasticClient client, IEnumerable<long> ids, IndexName index = null,
 			TypeName type = null
 		)
@@ -64,8 +64,8 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
 		/// <param name="ids">IEnumerable of ids as string for the documents to fetch</param>
-		/// <param name="index">Optionally override the default inferred index name for T</param>
-		/// <param name="type">Optionally overiide the default inferred typename for T</param>
+		/// <param name="index">Set the request level index name</param>
+		/// <param name="type">Set the request level type name</param>
 		public static async Task<IEnumerable<IMultiGetHit<T>>> GetManyAsync<T>(
 			this IElasticClient client, IEnumerable<string> ids, IndexName index = null, TypeName type = null,
 			CancellationToken cancellationToken = default(CancellationToken)
@@ -93,8 +93,8 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
 		/// <param name="ids">IEnumerable of ids as ints for the documents to fetch</param>
-		/// <param name="index">Optionally override the default inferred index name for T</param>
-		/// <param name="type">Optionally overiide the default inferred typename for T</param>
+		/// <param name="index">Set the request level index name</param>
+		/// <param name="type">Set the request level type name</param>
 		public static Task<IEnumerable<IMultiGetHit<T>>> GetManyAsync<T>(
 			this IElasticClient client, IEnumerable<long> ids, IndexName index = null, TypeName type = null,
 			CancellationToken cancellationToken = default(CancellationToken)
