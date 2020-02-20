@@ -26,6 +26,9 @@ See the Elasticsearch documentation on {ref_current}/search-suggesters.html[Sugg
 ----
 s => s
 .Query(q => ProjectFilter)
+.DocValueFields(d => d
+    .Field(f => f.State)
+)
 .Suggest(ss => ss
     .Term("my-term-suggest", t => t
         .MaxEdits(1)
@@ -89,6 +92,7 @@ s => s
 new SearchRequest<Project>
 {
     Query = ProjectFilter,
+    DocValueFields = Fields<Project>(f => f.State),
     Suggest = new SuggestContainer
     {
         {
@@ -185,6 +189,9 @@ new SearchRequest<Project>
       }
     }
   },
+  "docvalue_fields": [
+    "state"
+  ],
   "suggest": {
     "my-completion-suggest": {
       "completion": {
@@ -273,6 +280,8 @@ option.Source.Should().NotBeNull();
 option.Source.Name.Should().NotBeNullOrWhiteSpace();
 option.Source.ShouldAdhereToSourceSerializerWhenSet();
 option.Score.Should().BeGreaterThan(0);
+option.Fields.Should().NotBeNull().And.NotBeEmpty();
+option.Fields.Should().ContainKey("state");
 option.Contexts.Should().NotBeNull().And.NotBeEmpty();
 option.Contexts.Should().ContainKey("color");
 var colorContexts = option.Contexts["color"];

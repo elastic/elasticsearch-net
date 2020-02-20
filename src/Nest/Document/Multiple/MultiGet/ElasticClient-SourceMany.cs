@@ -24,17 +24,16 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
 		/// <param name="ids">A list of ids as string</param>
-		/// <param name="index">Optionally override the default inferred indexname for T</param>
-		/// <param name="type">Optionally override the default inferred indexname for T</param>
+		/// <param name="index">Set the request level index name</param>
+		/// <param name="type">Set the request level type name</param>
 		public static IEnumerable<T> SourceMany<T>(this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null)
 			where T : class
 		{
 			var result = client.MultiGet(s => s
+				.Index(index)
+				.Type(type)
 				.RequestConfiguration(r => r.ThrowExceptions())
-				.GetMany<T>(ids, (gs, i) => gs
-					.Index(index)
-					.Type(type)
-				)
+				.GetMany<T>(ids)
 			);
 			return result.SourceMany<T>(ids);
 		}
@@ -52,8 +51,8 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
 		/// <param name="ids">A list of ids as int</param>
-		/// <param name="index">Optionally override the default inferred indexname for T</param>
-		/// <param name="type">Optionally override the default inferred indexname for T</param>
+		/// <param name="index">Set the request level index name</param>
+		/// <param name="type">Set the request level type name</param>
 		public static IEnumerable<T> SourceMany<T>(this IElasticClient client, IEnumerable<long> ids, string index = null, string type = null)
 			where T : class => client.SourceMany<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, type);
 
@@ -70,8 +69,8 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
 		/// <param name="ids">A list of ids as string</param>
-		/// <param name="index">Optionally override the default inferred indexname for T</param>
-		/// <param name="type">Optionally override the default inferred indexname for T</param>
+		/// <param name="index">Set the request level index name</param>
+		/// <param name="type">Set the request level type name</param>
 		public static async Task<IEnumerable<T>> SourceManyAsync<T>(
 			this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null,
 			CancellationToken cancellationToken = default(CancellationToken)
@@ -79,11 +78,10 @@ namespace Nest
 			where T : class
 		{
 			var response = await client.MultiGetAsync(s => s
+					.Index(index)
+					.Type(type)
 					.RequestConfiguration(r => r.ThrowExceptions())
-					.GetMany<T>(ids, (gs, i) => gs
-						.Index(index)
-						.Type(type)
-					), cancellationToken)
+					.GetMany<T>(ids), cancellationToken)
 				.ConfigureAwait(false);
 			return response.SourceMany<T>(ids);
 		}
@@ -101,8 +99,8 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
 		/// <param name="ids">A list of ids as int</param>
-		/// <param name="index">Optionally override the default inferred indexname for T</param>
-		/// <param name="type">Optionally override the default inferred indexname for T</param>
+		/// <param name="index">Set the request level index name</param>
+		/// <param name="type">Set the request level type name</param>
 		public static Task<IEnumerable<T>> SourceManyAsync<T>(
 			this IElasticClient client, IEnumerable<long> ids, string index = null, string type = null,
 			CancellationToken cancellationToken = default(CancellationToken)
