@@ -93,6 +93,9 @@ namespace Tests.Cluster.ClusterStats
 			nodes.Process.OpenFileDescriptors.Min.Should().NotBe(0);
 
 			nodes.Versions.Should().NotBeEmpty();
+
+			if (Cluster.ClusterConfiguration.Version >= "7.6.0")
+				nodes.Ingest.Should().NotBeNull();
 		}
 
 		protected void Assert(ClusterIndicesStats indices)
