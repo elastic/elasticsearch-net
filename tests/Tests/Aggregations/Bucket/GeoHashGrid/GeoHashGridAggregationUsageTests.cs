@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
@@ -42,6 +43,64 @@ namespace Tests.Aggregations.Bucket.GeoHashGrid
 				Precision = GeoHashPrecision.Precision3,
 				Size = 1000,
 				ShardSize = 100
+			};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.ShouldBeValid();
+			var myGeoHashGrid = response.Aggregations.GeoHash("my_geohash_grid");
+			myGeoHashGrid.Should().NotBeNull();
+		}
+	}
+
+	[SkipVersion("<7.6.0", "bounds introduced in 7.6.0")]
+	// hide
+	public class GeoHashGridAggregationWithBoundsUsageTests : AggregationUsageTestBase
+	{
+		public GeoHashGridAggregationWithBoundsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override object AggregationJson => new
+		{
+			my_geohash_grid = new
+			{
+				geohash_grid = new
+				{
+					field = "locationPoint",
+					bounds = new
+					{
+						top_left = new
+						{
+							lat = 90.0,
+							lon = -180.0
+						},
+						bottom_right = new
+						{
+							lat = -90.0,
+							lon = 180.0
+						}
+					}
+				}
+			}
+		};
+
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.GeoHash("my_geohash_grid", g => g
+				.Field(p => p.LocationPoint)
+				.Bounds(b => b
+					.TopLeft(90,-180)
+					.BottomRight(-90, 180)
+				)
+			);
+
+		protected override AggregationDictionary InitializerAggs =>
+			new GeoHashGridAggregation("my_geohash_grid")
+			{
+				Field = Field<Project>(p => p.LocationPoint),
+				Bounds = new BoundingBox
+				{
+					TopLeft = new GeoLocation(90, -180),
+					BottomRight = new GeoLocation(-90, 180)
+				}
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
