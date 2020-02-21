@@ -12,6 +12,7 @@ type Arguments =
     | [<First; MainCommand; CliPrefix(CliPrefix.None)>] NamedSuite of TestSuite
     | [<AltCommandLine("-f")>]Folder of string
     | [<AltCommandLine("-t")>]TestFile of string
+    | [<AltCommandLine("-s")>]TestSection of string
     | [<AltCommandLine("-e")>]Endpoint of string
     | [<AltCommandLine("-r")>]Revision of string
     | [<AltCommandLine("-o")>]JUnitOutputFile of string
@@ -24,6 +25,7 @@ type Arguments =
             | Revision _ -> "The git revision to reference (commit/branch/tag). defaults to `master`"
             | Folder _ -> "Only run tests in this folder"
             | TestFile _ -> "Only run tests starting with this filename"
+            | TestSection _ -> "Only run test with this name (best used in conjuction with -t)"
             | Endpoint _ -> "The elasticsearch endpoint to run tests against"
             | JUnitOutputFile _ -> "The path and file name to use for the junit xml output, defaults to a random tmp filename"
             | Profile _ -> "Print out process id and wait for confirmation to kick off the tests"
@@ -33,7 +35,7 @@ let private runningProxy = runningMitmProxy || Process.GetProcessesByName("fiddl
 let private defaultEndpoint namedSuite = 
     let host = 
         match (runningProxy, namedSuite) with
-        | (true, Oss) -> "ipv.fiddler"
+        | (true, _) -> "ipv.fiddler"
         | _ -> "localhost"
     let https = match namedSuite with | XPack -> "s" | _ -> ""
     sprintf "http%s://%s:9200" https host;
@@ -54,7 +56,7 @@ let private createClient endpoint namedSuite =
     // proxy 
     let proxySettings =
         match (runningMitmProxy, namedSuite) with
-        | (true, Oss) -> settings.Proxy(Uri("http://ipv4.fiddler:8080"), String(null), String(null))
+        | (true, _) -> settings.Proxy(Uri("http://ipv4.fiddler:8080"), String(null), String(null))
         | _ -> settings
     // auth
     let authSettings =
@@ -104,6 +106,7 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     let namedSuite = parsed.TryGetResult NamedSuite |> Option.defaultValue Oss
     let directory = parsed.TryGetResult Folder //|> Option.defaultValue "indices.create" |> Some
     let file = parsed.TryGetResult TestFile //|> Option.defaultValue "10_basic.yml" |> Some
+    let section = parsed.TryGetResult TestSection //|> Option.defaultValue "10_basic.yml" |> Some
     let endpoint = parsed.TryGetResult Endpoint |> Option.defaultValue (defaultEndpoint namedSuite)
     let profile = parsed.TryGetResult Profile |> Option.defaultValue false
     let passedRevision = parsed.TryGetResult Revision
@@ -115,13 +118,13 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     
     printfn "Found version %s downloading specs from: %s" version revision
     
-    let! locateResults = Commands.LocateTests namedSuite revision directory file
-    let readResults = Commands.ReadTests locateResults
+    let! locateResults = Commands.LocateTests namedSuite revision directory file 
+    let readResults = Commands.ReadTests locateResults 
     if profile then
         printf "Waiting for profiler to attach to pid: %O" <| Process.GetCurrentProcess().Id
         Console.ReadKey() |> ignore
         
-    let! runResults = Commands.RunTests readResults client version namedSuite
+    let! runResults = Commands.RunTests readResults client version namedSuite section
     let summary = Commands.ExportTests runResults outputFile
     
     Commands.PrettyPrintResults outputFile
