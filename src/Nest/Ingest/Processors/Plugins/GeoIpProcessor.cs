@@ -35,6 +35,15 @@ namespace Nest
 
 		[DataMember(Name ="target_field")]
 		Field TargetField { get; set; }
+
+		/// <summary>
+		/// If <c>true</c>, only first found geoip data will be returned, even if field contains array.
+		/// Defaults to <c>true</c>
+		/// <para />
+		/// Available in Elasticsearch 7.6.0+
+		/// </summary>
+		[DataMember(Name = "first_only")]
+		bool? FirstOnly { get; set; }
 	}
 
 	/// <summary>
@@ -58,6 +67,10 @@ namespace Nest
 		public IEnumerable<string> Properties { get; set; }
 
 		public Field TargetField { get; set; }
+
+		/// <inheritdoc />
+		public bool? FirstOnly { get; set; }
+
 		protected override string Name => "geoip";
 	}
 
@@ -81,13 +94,14 @@ namespace Nest
 		bool? IGeoIpProcessor.IgnoreMissing { get; set; }
 		IEnumerable<string> IGeoIpProcessor.Properties { get; set; }
 		Field IGeoIpProcessor.TargetField { get; set; }
+		bool? IGeoIpProcessor.FirstOnly { get; set; }
 
 		public GeoIpProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		public GeoIpProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IGeoIpProcessor.IgnoreMissing"/>
 		public GeoIpProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
 
 		public GeoIpProcessorDescriptor<T> TargetField(Field field) => Assign(field, (a, v) => a.TargetField = v);
@@ -100,5 +114,8 @@ namespace Nest
 		public GeoIpProcessorDescriptor<T> Properties(IEnumerable<string> properties) => Assign(properties, (a, v) => a.Properties = v);
 
 		public GeoIpProcessorDescriptor<T> Properties(params string[] properties) => Assign(properties, (a, v) => a.Properties = v);
+
+		/// <inheritdoc cref="IGeoIpProcessor.FirstOnly"/>
+		public GeoIpProcessorDescriptor<T> FirstOnly(bool? firstOnly = true) => Assign(firstOnly, (a, v) => a.FirstOnly = v);
 	}
 }
