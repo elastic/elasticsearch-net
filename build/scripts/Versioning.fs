@@ -7,6 +7,7 @@ open System.IO
 
 open Commandline
 open Fake.Core
+open Fake.Core
 open Fake.IO
 open Fake.IO.Globbing.Operators
 open Newtonsoft.Json
@@ -25,6 +26,18 @@ module Versioning =
     let private globalJson () =
         let jsonString = File.ReadAllText "global.json"
         JsonConvert.DeserializeObject<GlobalJson>(jsonString)
+        
+    let writeVersionIntoAutoLabel oldVersion newVersion =
+        let path = Path.Join(".github","auto-label.json")
+        let text = File.ReadAllText(path)
+        let oldV = sprintf "v%s" oldVersion
+        let newV = sprintf "v%s" newVersion
+        if  not(text.Contains(oldV)) then
+            failwithf "auto-label.json does not contain %s" oldV
+        
+        let replaced = String.replace oldV newV text
+        File.WriteAllText(path, replaced)
+                                    
         
     let writeVersionIntoGlobalJson version =
         let globalJson = globalJson ()
@@ -77,6 +90,7 @@ module Versioning =
                 if (currentVersion > newVersion) then
                     failwithf "Can not release %O as it's lower than current %O" newVersion.Full currentVersion.Full
                 writeVersionIntoGlobalJson newVersion.Full
+                writeVersionIntoAutoLabel (currentVersion.Full.ToString()) (newVersion.Full.ToString())
         | _ -> ignore()
     
     let ArtifactsVersion buildVersions =
