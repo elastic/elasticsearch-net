@@ -39,6 +39,7 @@ namespace DocGenerator
 			{ "Project.First.Name", "\"Lesch Group\"" },
 			{ "Project.First.NumberOfCommits", "775" },
 			{ "IntervalsPrefix", "\"lorem\"" },
+			{ "IntervalsFuzzy", "\"lorem\"" },
 			{ "LastNameSearch", "\"Stokes\"" },
 			{ "_first.Language", "\"painless\"" },
 			{ "_first.Init", "\"state.map = [:]\"" },
