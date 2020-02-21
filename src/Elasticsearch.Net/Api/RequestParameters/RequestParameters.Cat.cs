@@ -505,7 +505,65 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for MlDatafeeds <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
+	///<summary>Request options for MlDataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html</para></summary>
+	public class MlDataFrameAnalyticsRequestParameters : RequestParameters<MlDataFrameAnalyticsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to ignore if a wildcard expression matches no configs. (This includes `_all` string or when no configs have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
+
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
+		}
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers
+		{
+			get => Q<string[]>("h");
+			set => Q("h", value);
+		}
+
+		///<summary>Return help information</summary>
+		public bool? Help
+		{
+			get => Q<bool? >("help");
+			set => Q("help", value);
+		}
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns
+		{
+			get => Q<string[]>("s");
+			set => Q("s", value);
+		}
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool? Verbose
+		{
+			get => Q<bool? >("v");
+			set => Q("v", value);
+		}
+	}
+
+	///<summary>Request options for MlDatafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
 	public class MlDatafeedsRequestParameters : RequestParameters<MlDatafeedsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -556,7 +614,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for MlJobs <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</para></summary>
+	///<summary>Request options for MlJobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</para></summary>
 	public class MlJobsRequestParameters : RequestParameters<MlJobsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -689,7 +747,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Datafeeds <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
+	///<summary>Request options for Datafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
 	public class DatafeedsRequestParameters : RequestParameters<DatafeedsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -740,7 +798,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for Jobs <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</para></summary>
+	///<summary>Request options for Jobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</para></summary>
 	public class JobsRequestParameters : RequestParameters<JobsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
