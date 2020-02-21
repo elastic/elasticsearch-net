@@ -54,7 +54,7 @@ type TestRunner(client:IElasticLowLevelClient, version: string, suite: TestSuite
             })
         (m, executedOperations)
         
-    member private this.RunTestFile subProgressbar (file:YamlTestDocument) = async {
+    member private this.RunTestFile subProgressbar (file:YamlTestDocument) sectionFilter = async {
         let m section ops = this.CreateOperations section file.FileInfo ops subProgressbar
         let bootstrap section operations =
             let ops = operations |> Option.map (m section) |> Option.toList |> List.collect (fun (s, ops) -> ops)
@@ -65,6 +65,10 @@ type TestRunner(client:IElasticLowLevelClient, version: string, suite: TestSuite
         let sections =
             file.Tests
             |> List.map (fun s -> s.Operations |> m s.Name)
+            |> List.filter(fun s ->
+                let (name, _) = s
+                match sectionFilter with | Some s when s <> name -> false | _ -> true
+            )
             |> List.collect (fun s ->
                 let (name, ops) = s
                 [(name, setup @ ops)]
@@ -88,7 +92,9 @@ type TestRunner(client:IElasticLowLevelClient, version: string, suite: TestSuite
                         match r with
                         | Succeeded context -> Some (r, tl)
                         | NotSkipped context -> Some (r, tl)
-                        | Skipped (context, reason) -> Some (r, [])
+                        | Skipped (context, reason) ->
+                            subProgressbar.WriteLine <| sprintf "%s: %s " r.Name (r.Context.Operation.Log())
+                            Some (r, [])
                         | Failed context -> Some (r, [])
                     | [] -> None
                 )
@@ -142,7 +148,7 @@ type TestRunner(client:IElasticLowLevelClient, version: string, suite: TestSuite
             client.Indices.Refresh<VoidResponse>("_all") |> ignore
             
 
-    member this.RunTestsInFolder mainMessage (folder:YamlTestFolder) = async {
+    member this.RunTestsInFolder mainMessage (folder:YamlTestFolder) sectionFilter = async {
         let l = folder.Files.Length
         let run (i, document) = async {
             let file = sprintf "%s/%s" document.FileInfo.Directory.Name document.FileInfo.Name
@@ -151,7 +157,7 @@ type TestRunner(client:IElasticLowLevelClient, version: string, suite: TestSuite
             let message = sprintf "Inspecting file for sections" 
             use p = progress.Spawn(0, message, barOptions)
             
-            let! result = this.RunTestFile p document
+            let! result = this.RunTestFile p document sectionFilter
             
             return document, result
         }
