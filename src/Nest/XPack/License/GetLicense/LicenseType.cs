@@ -29,6 +29,9 @@ namespace Nest
 		Gold,
 
 		[EnumMember(Value = "platinum")]
-		Platinum
+		Platinum,
+
+		[EnumMember(Value = "enterprise")]
+		Enterprise,
 	}
 }

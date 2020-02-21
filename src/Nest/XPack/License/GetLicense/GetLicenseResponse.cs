@@ -36,6 +36,9 @@ namespace Nest
 		[DataMember(Name ="max_nodes")]
 		public long MaxNodes { get; internal set; }
 
+		[DataMember(Name = "max_resource_units")]
+		public int? MaxResourceUnits { get; internal set; }
+
 		[DataMember(Name ="status")]
 		public LicenseStatus Status { get; internal set; }
 
