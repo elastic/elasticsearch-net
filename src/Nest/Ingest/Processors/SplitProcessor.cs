@@ -35,6 +35,14 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "target_field")]
 		Field TargetField { get; set; }
+
+		/// <summary>
+		/// Preserves empty trailing fields, if any.
+		/// <para />
+		/// Available in Elasticsearch 7.6.0+.
+		/// </summary>
+		[DataMember(Name = "preserve_trailing")]
+		bool? PreserveTrailing { get; set; }
 	}
 
 	/// <inheritdoc cref="SplitProcessor" />
@@ -51,6 +59,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Field TargetField { get; set; }
+
+		/// <inheritdoc />
+		public bool? PreserveTrailing { get; set; }
 		protected override string Name => "split";
 	}
 
@@ -65,6 +76,7 @@ namespace Nest
 		bool? ISplitProcessor.IgnoreMissing { get; set; }
 		string ISplitProcessor.Separator { get; set; }
 		Field ISplitProcessor.TargetField { get; set; }
+		bool? ISplitProcessor.PreserveTrailing { get; set; }
 
 		/// <inheritdoc cref="SplitProcessor.Field" />
 		public SplitProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
@@ -85,5 +97,8 @@ namespace Nest
 
 		/// <inheritdoc cref="SplitProcessor.IgnoreMissing" />
 		public SplitProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissing = v);
+
+		/// <inheritdoc cref="SplitProcessor.PreserveTrailing" />
+		public SplitProcessorDescriptor<T> PreserveTrailing(bool? preserveTrailing = true) => Assign(preserveTrailing, (a, v) => a.PreserveTrailing = v);
 	}
 }
