@@ -115,6 +115,9 @@ namespace Tests.XPack.Info
 #pragma warning disable 618
 					r.DataFrame.Should().NotBeNull();
 #pragma warning restore 618
+
+				if (TestConfiguration.Instance.InRange(">=7.6.0"))
+					r.Flattened.FieldCount.Should().HaveValue();
 			}
 
 			if (TestConfiguration.Instance.InRange(">=7.5.0"))
