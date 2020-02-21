@@ -52,7 +52,7 @@ namespace Nest
 		public XPackUsage DataFrame { get; internal set; }
 
 		[DataMember(Name = "flattened")]
-		public XPackUsage Flattened { get; internal set; }
+		public FlattenedUsage Flattened { get; internal set; }
 
 		[DataMember(Name = "data_science")]
 		public XPackUsage DataScience { get; internal set; }
@@ -146,6 +146,15 @@ namespace Nest
 
 		[DataMember(Name = "enabled")]
 		public bool Enabled { get; internal set; }
+	}
+
+	public class FlattenedUsage : XPackUsage
+	{
+		/// <summary>
+		/// Available in Elasticsearch 7.6.0+
+		/// </summary>
+		[DataMember(Name = "field_count")]
+		public int? FieldCount { get; internal set; }
 	}
 
 	public class VectorUsage : XPackUsage
