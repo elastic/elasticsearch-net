@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -35,6 +36,9 @@ namespace Nest
 
 		[DataMember(Name = "versions")]
 		public IReadOnlyCollection<string> Versions { get; internal set; }
+
+		[DataMember(Name = "ingest")]
+		public ClusterIngestStats Ingest { get; internal set; }
 	}
 
 	public class NodePackagingType
@@ -221,5 +225,31 @@ namespace Nest
 
 		[DataMember(Name = "voting_only")]
 		public int VotingOnly { get; internal set; }
+	}
+
+	[DataContract]
+	public class ClusterIngestStats
+	{
+		[DataMember(Name = "number_of_pipelines")]
+		public int NumberOfPipelines { get; internal set; }
+
+		[DataMember(Name = "processor_stats")]
+		public IReadOnlyDictionary<string, ClusterProcessorStats> ProcessorStats { get; internal set; }
+	}
+
+	[DataContract]
+	public class ClusterProcessorStats
+	{
+		[DataMember(Name ="count")]
+		public long Count { get; set; }
+
+		[DataMember(Name ="current")]
+		public long Current { get; set; }
+
+		[DataMember(Name ="failed")]
+		public long Failed { get; set; }
+
+		[DataMember(Name ="time_in_millis")]
+		public long TimeInMilliseconds { get; set; }
 	}
 }
