@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -33,6 +34,18 @@ namespace Nest
 
 		[DataMember(Name = "model_snapshot_retention_days")]
 		public int ModelSnapshotRetentionDays { get; internal set; }
+
+		[DataMember(Name = "categorization_analyzer")]
+		public CategorizationAnalyzer CategorizationAnalyzer { get; internal set; }
+	}
+
+	public class CategorizationAnalyzer
+	{
+		[DataMember(Name = "tokenizer")]
+		public string Tokenizer { get; internal set; }
+
+		[DataMember(Name = "filter")]
+		public IReadOnlyCollection<ITokenFilter> Filter { get; internal set; }
 	}
 
 	public class Datafeeds
