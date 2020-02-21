@@ -113,11 +113,19 @@ namespace Nest
 		string DefaultPipeline { get; set; }
 
 		/// <summary>
-		/// The required ingest node pipeline for this index. Index requests will fail if the required pipeline is set and the pipeline
+		/// The required ingest pipeline for this index. Index requests will fail if the required pipeline is set and the pipeline
 		/// does not exist. The required pipeline can not be overridden with the pipeline parameter. A default pipeline and a required pipeline
 		/// can not both be set. The special pipeline name _none indicates no ingest pipeline will run.
 		/// </summary>
+		[Obsolete("Use FinalPipeline")]
 		string RequiredPipeline { get; set; }
+
+		/// <summary>
+		/// The final ingest pipeline for this index. Index requests will fail if the final pipeline is set and the pipeline does not exist.
+		/// The final pipeline always runs after the request pipeline (if specified) and the default pipeline (if it exists). The special pipeline
+		/// name `_none` indicates no ingest pipeline will run.
+		/// </summary>
+		string FinalPipeline { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -195,7 +203,11 @@ namespace Nest
 		public string DefaultPipeline { get; set; }
 
 		/// <inheritdoc cref="IDynamicIndexSettings.RequiredPipeline" />
+		[Obsolete("Use FinalPipeline")]
 		public string RequiredPipeline { get; set; }
+
+		/// <inheritdoc cref="IDynamicIndexSettings.FinalPipeline" />
+		public string FinalPipeline { get; set; }
 
 		/// <summary> Add any setting to the index </summary>
 		public void Add(string setting, object value) => BackingDictionary[setting] = value;
@@ -232,7 +244,11 @@ namespace Nest
 		public TDescriptor DefaultPipeline(string defaultPipeline) => Assign(defaultPipeline, (a, v) => a.DefaultPipeline = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.RequiredPipeline" />
+		[Obsolete("Use FinalPipeline")]
 		public TDescriptor RequiredPipeline(string requiredPipeline) => Assign(requiredPipeline, (a, v) => a.RequiredPipeline = v);
+
+		/// <inheritdoc cref="IDynamicIndexSettings.RequiredPipeline" />
+		public TDescriptor FinalPipeline(string finalPipeline) => Assign(finalPipeline, (a, v) => a.FinalPipeline = v);
 
 		/// <inheritdoc cref="IDynamicIndexSettings.BlocksMetadata" />
 		public TDescriptor BlocksMetadata(bool? blocksMetadata = true) => Assign(blocksMetadata, (a, v) => a.BlocksMetadata = v);
