@@ -34,11 +34,20 @@ namespace Tests.XPack.MachineLearning.MachineLearningInfo
 		{
 			response.ShouldBeValid();
 
-			response.Defaults.AnomalyDetectors.ModelMemoryLimit.Should().Be("1gb");
-			response.Defaults.AnomalyDetectors.CategorizationExamplesLimit.Should().Be(4);
-			response.Defaults.AnomalyDetectors.ModelSnapshotRetentionDays.Should().Be(1);
+			var anomalyDetectors = response.Defaults.AnomalyDetectors;
+			anomalyDetectors.ModelMemoryLimit.Should().Be("1gb");
+			anomalyDetectors.CategorizationExamplesLimit.Should().Be(4);
+			anomalyDetectors.ModelSnapshotRetentionDays.Should().Be(1);
 
 			response.Defaults.Datafeeds.ScrollSize.Should().Be(1000);
+
+			if (Cluster.ClusterConfiguration.Version >= "7.6.0")
+			{
+				var analyzer = anomalyDetectors.CategorizationAnalyzer;
+				analyzer.Should().NotBeNull();
+				analyzer.Tokenizer.Should().Be("ml_classic");
+				analyzer.Filter.Should().NotBeNullOrEmpty();
+			}
 		}
 	}
 }
