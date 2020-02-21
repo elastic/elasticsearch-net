@@ -79,6 +79,10 @@ namespace Nest
 		public ProcessorsDescriptor Gsub<T>(Func<GsubProcessorDescriptor<T>, IGsubProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new GsubProcessorDescriptor<T>())));
 
+		/// <inheritdoc cref="IInferenceProcessor"/>
+		public ProcessorsDescriptor Inference<T>(Func<InferenceProcessorDescriptor<T>, IInferenceProcessor> selector) where T : class =>
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new InferenceProcessorDescriptor<T>())));
+
 		/// <inheritdoc cref="IJoinProcessor"/>
 		public ProcessorsDescriptor Join<T>(Func<JoinProcessorDescriptor<T>, IJoinProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new JoinProcessorDescriptor<T>())));

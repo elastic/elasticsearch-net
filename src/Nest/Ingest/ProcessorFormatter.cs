@@ -42,6 +42,7 @@ namespace Nest
 			{ "circle", 30 },
 			{ "enrich", 31 },
 			{ "csv", 32 },
+			{ "inference", 33 },
 		};
 
 		public IProcessor Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -161,6 +162,9 @@ namespace Nest
 					case 32:
 						processor = Deserialize<CsvProcessor>(ref reader, formatterResolver);
 						break;
+					case 33:
+						processor = Deserialize<InferenceProcessor>(ref reader, formatterResolver);
+						break;
 				}
 			}
 			else
@@ -229,6 +233,9 @@ namespace Nest
 					break;
 				case "gsub":
 					Serialize<IGsubProcessor>(ref writer, value, formatterResolver);
+					break;
+				case "inference":
+					Serialize<IInferenceProcessor>(ref writer, value, formatterResolver);
 					break;
 				case "join":
 					Serialize<IJoinProcessor>(ref writer, value, formatterResolver);
