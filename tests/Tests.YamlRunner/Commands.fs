@@ -35,7 +35,7 @@ let ReadTests (tests:LocateResults list) =
     
     tests |> List.map (fun t -> { Folder= t.Folder; Files = readPaths t.Paths})
     
-let RunTests (tests:YamlTestFolder list) client version namedSuite = async {
+let RunTests (tests:YamlTestFolder list) client version namedSuite sectionFilter = async {
     do! Async.SwitchToNewThread()
     
     let f = tests.Length
@@ -45,7 +45,7 @@ let RunTests (tests:YamlTestFolder list) client version namedSuite = async {
     runner.GlobalSetup() 
     let a (i, v) = async {
         let mainMessage = sprintf "[%i/%i] Folders : %s | " (i+1) f v.Folder
-        let! op = runner.RunTestsInFolder mainMessage v
+        let! op = runner.RunTestsInFolder mainMessage v sectionFilter
         return v, op |> Seq.toList
     }
     let x =
