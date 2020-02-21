@@ -123,7 +123,9 @@ namespace Nest
 				Set(RoutingPartitionSize, indexSettings.RoutingPartitionSize);
 				if (indexSettings.SoftDeletes != null)
 				{
+#pragma warning disable 618
 					Set(SoftDeletesEnabled, indexSettings.SoftDeletes.Enabled);
+#pragma warning restore 618
 					Set(SoftDeletesRetentionOperations, indexSettings.SoftDeletes.Retention?.Operations);
 				}
 
@@ -259,7 +261,9 @@ namespace Nest
 			Set<bool?>(s, settings, QueriesCacheEnabled, v => queriesCache.Enabled = v, formatterResolver);
 
 			var softDeletes = s.SoftDeletes = new SoftDeleteSettings();
+#pragma warning disable 618
 			Set<bool?>(s, settings, SoftDeletesEnabled, v => softDeletes.Enabled = v, formatterResolver);
+#pragma warning restore 618
 			var softDeletesRetention = s.SoftDeletes.Retention = new SoftDeleteRetentionSettings();
 			Set<long?>(s, settings, SoftDeletesEnabled, v => softDeletesRetention.Operations = v, formatterResolver);
 
