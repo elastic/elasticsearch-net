@@ -54,7 +54,6 @@ namespace Tests.XPack.CrossClusterReplication
 							NumberOfReplicas = 0,
 							SoftDeletes = new SoftDeleteSettings
 							{
-								Enabled = true,
 								Retention = new SoftDeleteRetentionSettings { Operations = 1024 }
 							}
 						}
@@ -63,7 +62,6 @@ namespace Tests.XPack.CrossClusterReplication
 						.NumberOfShards(1)
 						.NumberOfReplicas(0)
 						.SoftDeletes(sd => sd
-							.Enabled()
 							.Retention(r => r.Operations(1024))
 						)
 					),
