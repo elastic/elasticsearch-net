@@ -51,7 +51,10 @@ namespace Nest
 			Set(NumberOfReplicas, value.NumberOfReplicas);
 			Set(RefreshInterval, value.RefreshInterval);
 			Set(DefaultPipeline, value.DefaultPipeline);
+#pragma warning disable 618
 			Set(RequiredPipeline, value.RequiredPipeline);
+#pragma warning restore 618
+			Set(FinalPipeline, value.FinalPipeline);
 			Set(BlocksReadOnly, value.BlocksReadOnly);
 			Set(BlocksRead, value.BlocksRead);
 			Set(BlocksWrite, value.BlocksWrite);
@@ -182,7 +185,10 @@ namespace Nest
 			Set<bool?>(s, settings, BlocksReadOnlyAllowDelete, v => s.BlocksReadOnlyAllowDelete = v, formatterResolver);
 			Set<int?>(s, settings, Priority, v => s.Priority = v, formatterResolver);
 			Set<string>(s, settings, DefaultPipeline, v => s.DefaultPipeline = v, formatterResolver);
+#pragma warning disable 618
 			Set<string>(s, settings, RequiredPipeline, v => s.RequiredPipeline = v, formatterResolver);
+#pragma warning restore 618
+			Set<string>(s, settings, FinalPipeline, v => s.FinalPipeline = v, formatterResolver);
 
 			Set<Union<int, RecoveryInitialShards>>(s, settings, UpdatableIndexSettings.RecoveryInitialShards,
 				v => s.RecoveryInitialShards = v, formatterResolver);
