@@ -84,7 +84,6 @@ namespace Nest
 
 		IEnumerable<string> ICustomAnalyzer.CharFilter { get; set; }
 		IEnumerable<string> ICustomAnalyzer.Filter { get; set; }
-		[Obsolete("Deprecated, use PositionIncrementGap instead")]
 		int? ICustomAnalyzer.PositionOffsetGap { get; set; }
 		int? ICustomAnalyzer.PositionIncrementGap { get; set; }
 		string ICustomAnalyzer.Tokenizer { get; set; }
@@ -110,7 +109,7 @@ namespace Nest
 			Assign(positionOffsetGap, (a, v) => a.PositionOffsetGap = v);
 
 		/// <inheritdoc />
-		public CustomAnalyzerDescriptor PositionIncrementGap(int? positionOffsetGap) =>
-			Assign(positionOffsetGap, (a, v) => a.PositionIncrementGap = v);
+		public CustomAnalyzerDescriptor PositionIncrementGap(int? positionIncrementGap) =>
+			Assign(positionIncrementGap, (a, v) => a.PositionIncrementGap = v);
 	}
 }
