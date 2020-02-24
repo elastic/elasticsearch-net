@@ -6,6 +6,7 @@ open System.Linq
 open Elasticsearch.Net
 open Elasticsearch.Net.Specification.CatApi
 open Elasticsearch.Net.Specification.ClusterApi
+open Elasticsearch.Net.Specification.IndicesApi
 open Tests.YamlRunner.Models
 
 let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
@@ -135,23 +136,21 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
             let yellowStatus = Nullable.op_Implicit WaitForStatus.Yellow
             yield client.Cluster.Health<DynamicResponse>(ClusterHealthRequestParameters(WaitForStatus=yellowStatus))
             
-            //make sure we don't delete system indices
             let indices =
-                client.Cat.Indices<StringResponse>("*", CatIndicesRequestParameters(Headers=["index"].ToArray()))
-                    .Body.Split("\n")
-                    |> Seq.filter(fun f -> not(String.IsNullOrWhiteSpace(f)))
-                    //|> Seq.filter(fun f -> not(f.StartsWith(".")) && )
-                    |> String.concat ","
-                    |> function
-                       | s when String.IsNullOrEmpty(s) -> None
-                       | s -> Some <| client.Indices.Delete<DynamicResponse>(s)
-            
-            match indices with Some r -> yield r | None -> ignore() 
+                let dp = DeleteIndexRequestParameters()
+                dp.SetQueryString("expand_wildcards", "open,closed,hidden")
+                client.Indices.Delete<DynamicResponse>("*", dp)
+            yield indices
             
             let data = PostData.String @"{""password"":""x-pack-test-password"", ""roles"":[""superuser""]}"
             yield client.Security.PutUser<DynamicResponse>("x_pack_rest_user", data)
             
-            yield client.Indices.Refresh<DynamicResponse> "_all"
+            let refreshAll =
+                let rp = RefreshRequestParameters()
+                rp.SetQueryString("expand_wildcards", "open,closed,hidden")
+                client.Indices.Refresh<DynamicResponse>( "_all", rp)
+                
+            yield refreshAll
             
             yield client.Cluster.Health<DynamicResponse>(ClusterHealthRequestParameters(WaitForStatus=yellowStatus))
         }
