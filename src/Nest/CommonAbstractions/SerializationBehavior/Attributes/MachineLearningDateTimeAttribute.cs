@@ -11,7 +11,7 @@ namespace Nest
 	}
 
 	/// <summary>
-	/// Signals that this date time property is used in Machine learning API's some of which will always return the date as
+	/// Signals that this date time property is used in Machine learning APIs some of which will always return the date as
 	/// epoch.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Property)]
@@ -50,6 +50,8 @@ namespace Nest
 
 	internal class MachineLearningDateTimeFormatter : IJsonFormatter<DateTime>
 	{
+		public static readonly MachineLearningDateTimeFormatter Instance = new MachineLearningDateTimeFormatter();
+
 		public DateTime Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var token = reader.GetCurrentJsonToken();
