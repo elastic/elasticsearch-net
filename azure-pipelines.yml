@@ -3,6 +3,7 @@ trigger:
   branches:
     include:
     - master
+    - "*.x"
 
 pr:
   autoCancel: true
