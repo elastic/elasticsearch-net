@@ -187,28 +187,41 @@ namespace Elasticsearch.Net
 					break;
 
 				case PostType.EnumerableOfString:
-					if (!_enumerableOfStrings.HasAny()) return;
+				{
+					if (_enumerableOfStrings == null)
+						return;
+
+					using var enumerator = _enumerableOfStrings.GetEnumerator();
+					if (!enumerator.MoveNext())
+						return;
 
 					BufferIfNeeded(settings, ref buffer, ref stream);
-					foreach (var s in _enumerableOfStrings)
+					do
 					{
-						var bytes = s.Utf8Bytes();
+						var bytes = enumerator.Current.Utf8Bytes();
 						stream.Write(bytes, 0, bytes.Length);
 						stream.Write(NewLineByteArray, 0, 1);
-					}
+					} while (enumerator.MoveNext());
 					break;
-
+				}
 				case PostType.EnumerableOfObject:
-					if (!_enumerableOfObject.HasAny()) return;
+				{
+					if (_enumerableOfObject == null)
+						return;
+
+					using var enumerator = _enumerableOfObject.GetEnumerator();
+					if (!enumerator.MoveNext())
+						return;
 
 					BufferIfNeeded(settings, ref buffer, ref stream);
-					foreach (var o in _enumerableOfObject)
+					do
 					{
+						var o = enumerator.Current;
 						settings.RequestResponseSerializer.Serialize(o, stream, SerializationFormatting.None);
 						stream.Write(NewLineByteArray, 0, 1);
-					}
+					} while (enumerator.MoveNext());
 					break;
-
+				}
 				case PostType.StreamHandler:
 					var streamHandlerException = $"{nameof(PostData)} cannot handle {nameof(PostType.StreamHandler)} data. "
 						+ $"Use {typeof(StreamableData<>).FullName} through {nameof(PostData)}.{nameof(StreamHandler)}<T>() for streamable data";
@@ -267,29 +280,42 @@ namespace Elasticsearch.Net
 					break;
 
 				case PostType.EnumerableOfString:
-					if (!_enumerableOfStrings.HasAny()) return;
+				{
+					if (_enumerableOfStrings == null)
+						return;
+
+					using var enumerator = _enumerableOfStrings.GetEnumerator();
+					if (!enumerator.MoveNext())
+						return;
 
 					BufferIfNeeded(settings, ref buffer, ref stream);
-					foreach (var s in _enumerableOfStrings)
+					do
 					{
-						var bytes = s.Utf8Bytes();
+						var bytes = enumerator.Current.Utf8Bytes();
 						await stream.WriteAsync(bytes, 0, bytes.Length, cancellationToken).ConfigureAwait(false);
 						await stream.WriteAsync(NewLineByteArray, 0, 1, cancellationToken).ConfigureAwait(false);
-					}
+					} while (enumerator.MoveNext());
 					break;
-
+				}
 				case PostType.EnumerableOfObject:
-					if (!_enumerableOfObject.HasAny()) return;
+				{
+					if (_enumerableOfObject == null)
+						return;
+
+					using var enumerator = _enumerableOfObject.GetEnumerator();
+					if (!enumerator.MoveNext())
+						return;
 
 					BufferIfNeeded(settings, ref buffer, ref stream);
-					foreach (var o in _enumerableOfObject)
+					do
 					{
+						var o = enumerator.Current;
 						await settings.RequestResponseSerializer.SerializeAsync(o, stream, SerializationFormatting.None, cancellationToken)
 							.ConfigureAwait(false);
 						await stream.WriteAsync(NewLineByteArray, 0, 1, cancellationToken).ConfigureAwait(false);
-					}
+					} while (enumerator.MoveNext());
 					break;
-
+				}
 				case PostType.StreamHandler:
 					throw new Exception("PostData is not expected/capable to handle streamable data, use StreamableData instead");
 
