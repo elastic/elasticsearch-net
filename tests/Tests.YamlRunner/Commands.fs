@@ -5,7 +5,6 @@ open ShellProgressBar
 open Tests.YamlRunner.AsyncExtensions
 open Tests.YamlRunner.TestsLocator
 open Tests.YamlRunner.TestsReader
-open Elasticsearch.Net
 open Tests.YamlRunner
 
 let private barOptions = 
