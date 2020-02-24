@@ -12,9 +12,9 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.XPack.Watcher.GetWatch
 {
 	// TODO: there was already a bunch of commented code in this file which needs to be revalidated
-	public class GetWatchApiTests : ApiIntegrationTestBase<XPackCluster, GetWatchResponse, IGetWatchRequest, GetWatchDescriptor, GetWatchRequest>
+	public class GetWatchApiTests : ApiIntegrationTestBase<WatcherCluster, GetWatchResponse, IGetWatchRequest, GetWatchDescriptor, GetWatchRequest>
 	{
-		public GetWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetWatchApiTests(WatcherCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 
@@ -294,9 +294,9 @@ namespace Tests.XPack.Watcher.GetWatch
 	}
 
 	public class GetNonExistentWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, GetWatchResponse, IGetWatchRequest, GetWatchDescriptor, GetWatchRequest>
+		: ApiIntegrationTestBase<WatcherCluster, GetWatchResponse, IGetWatchRequest, GetWatchDescriptor, GetWatchRequest>
 	{
-		public GetNonExistentWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetNonExistentWatchApiTests(WatcherCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => false;
 
