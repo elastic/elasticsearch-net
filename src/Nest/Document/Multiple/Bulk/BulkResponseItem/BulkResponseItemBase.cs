@@ -143,7 +143,7 @@ namespace Nest
 		public long Version { get; internal set; }
 
 		/// <inheritdoc />
-		public LazyDocument Get { get; set; }
+		public LazyDocument Get { get; internal set; }
 
 		/// <inheritdoc />
 		public GetResponse<TDocument> GetResponse<TDocument>() where TDocument : class =>
