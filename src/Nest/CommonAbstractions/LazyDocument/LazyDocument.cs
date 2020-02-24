@@ -28,12 +28,14 @@ namespace Nest
 	/// <inheritdoc />
 	public class LazyDocument : ILazyDocument
 	{
-		private readonly IElasticsearchSerializer _serializer;
+		private readonly IElasticsearchSerializer _sourceSerializer;
+		private readonly IElasticsearchSerializer _requestResponseSerializer;
 
-		internal LazyDocument(JToken token, IElasticsearchSerializer serializer)
+		internal LazyDocument(JToken token, IElasticsearchSerializer sourceSerializer, IElasticsearchSerializer requestResponseSerializer)
 		{
 			Token = token;
-			_serializer = serializer;
+			_sourceSerializer = sourceSerializer;
+			_requestResponseSerializer = requestResponseSerializer;
 		}
 
 		internal JToken Token { get; }
@@ -43,7 +45,7 @@ namespace Nest
 		{
 			if (Token == null) return default(T);
 			using (var ms = Token.ToStream())
-				return _serializer.Deserialize<T>(ms);
+				return _sourceSerializer.Deserialize<T>(ms);
 		}
 
 		/// <inheritdoc />
@@ -51,7 +53,14 @@ namespace Nest
 		{
 			if (Token == null) return null;
 			using (var ms = Token.ToStream())
-				return _serializer.Deserialize(objectType, ms);
+				return _sourceSerializer.Deserialize(objectType, ms);
+		}
+
+		internal T AsUsingRequestResponseSerializer<T>()
+		{
+			if (Token == null) return default(T);
+			using (var ms = Token.ToStream())
+				return _requestResponseSerializer.Deserialize<T>(ms);
 		}
 	}
 }

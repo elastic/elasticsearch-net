@@ -72,6 +72,18 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("_version")]
 		long Version { get; }
+
+		/// <summary>
+		/// The <see cref="Nest.GetResponse{TDocument}"/> when <see cref="BulkUpdateOperation{TDocument,TPartialDocument}.Source"/>
+		/// is <c>true</c> or specifies fields with <see cref="ISourceFilter.Includes"/>
+		/// </summary>
+		[JsonProperty("get")]
+		LazyDocument Get { get; }
+
+		/// <summary>
+		/// Deserialize the <see cref="Get"/> property as a GetResponse<TDocument> type, where TDocument is the document type.
+		/// </summary>
+		GetResponse<TDocument> GetResponse<TDocument>() where TDocument : class;
 	}
 
 	/// <inheritdoc />
@@ -129,6 +141,13 @@ namespace Nest
 
 		/// <inheritdoc />
 		public long Version { get; internal set; }
+
+		/// <inheritdoc />
+		public LazyDocument Get { get; internal set; }
+
+		/// <inheritdoc />
+		public GetResponse<TDocument> GetResponse<TDocument>() where TDocument : class =>
+			Get?.AsUsingRequestResponseSerializer<GetResponse<TDocument>>();
 
 		public override string ToString() =>
 			$"{Operation} returned {Status} _index: {Index} _type: {Type} _id: {Id} _version: {Version} error: {Error}";

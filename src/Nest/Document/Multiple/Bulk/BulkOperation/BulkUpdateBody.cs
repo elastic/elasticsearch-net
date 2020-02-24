@@ -28,5 +28,8 @@ namespace Nest
 
 		[JsonProperty("if_primary_term")]
 		internal long? IfPrimaryTerm { get; set; }
+
+		[JsonProperty("_source")]
+		internal Union<bool, ISourceFilter> Source { get; set; }
 	}
 }

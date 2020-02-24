@@ -20,8 +20,9 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var sourceSerializer = serializer.GetConnectionSettings().SourceSerializer;
+			var requestResponseSerializer = serializer.GetConnectionSettings().RequestResponseSerializer;
 			var token = reader.ReadTokenWithDateParseHandlingNone();
-			return new LazyDocument(token, sourceSerializer);
+			return new LazyDocument(token, sourceSerializer, requestResponseSerializer);
 		}
 
 		public override bool CanConvert(Type objectType) => true;
