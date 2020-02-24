@@ -116,6 +116,8 @@ namespace Nest
 							break;
 					}
 				}
+				else if (member.GetCustomAttribute<MachineLearningDateTimeAttribute>() != null)
+					property.JsonFormatter = MachineLearningDateTimeFormatter.Instance;
 
 				return property;
 			}
