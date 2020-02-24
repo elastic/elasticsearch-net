@@ -22,10 +22,10 @@ namespace Tests.XPack.Enrich.Stats
 		protected override string UrlPath => $"/_enrich/_stats";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Enrich.Stats(f),
-			(client, f) => client.Enrich.StatsAsync(f),
-			(client, r) => client.Enrich.Stats(r),
-			(client, r) => client.Enrich.StatsAsync(r)
+			(client, f) => client.Enrich.Stats(),
+			(client, f) => client.Enrich.StatsAsync(),
+			(client, r) => client.Enrich.Stats(),
+			(client, r) => client.Enrich.StatsAsync()
 		);
 	}
 }
