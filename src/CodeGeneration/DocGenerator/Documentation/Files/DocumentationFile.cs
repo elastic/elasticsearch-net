@@ -27,7 +27,9 @@ namespace DocGenerator.Documentation.Files
 				case ".png":
 					return new ImageDocumentationFile(fileLocation);
 				case ".asciidoc":
-					return new RawDocumentationFile(fileLocation);
+					return new AsciiDocDocumentationFile(fileLocation);
+				case ".html":
+					return new HtmlDocumentationFile(fileLocation);
 				default:
 					throw new ArgumentOutOfRangeException(nameof(fileLocation),
 						$"The extension you specified is currently not supported: {extension}");

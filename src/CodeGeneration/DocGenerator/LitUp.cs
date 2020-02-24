@@ -44,6 +44,9 @@ namespace DocGenerator
 			// process asciidocs last as they may have generated
 			// includes to other output asciidocs
 			yield return InputFiles("*.asciidoc");
+
+			// deprecation notice for old version
+			yield return InputFiles("page_header.html");
 		}
 
 		public static async Task GoAsync(string[] args)

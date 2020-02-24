@@ -6,9 +6,9 @@ using DocGenerator.AsciiDoc;
 
 namespace DocGenerator.Documentation.Files
 {
-	public class RawDocumentationFile : DocumentationFile
+	public class AsciiDocDocumentationFile : DocumentationFile
 	{
-		public RawDocumentationFile(FileInfo fileLocation) : base(fileLocation) { }
+		public AsciiDocDocumentationFile(FileInfo fileLocation) : base(fileLocation) { }
 
 		public override Task SaveToDocumentationFolderAsync()
 		{
