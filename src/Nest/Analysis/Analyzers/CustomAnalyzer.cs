@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
 
@@ -31,10 +32,22 @@ namespace Nest
 		/// <summary>
 		/// An optional number of positions to increment between each field value of a
 		/// field using this analyzer.
+		/// <para />
+		/// Deprecated, use <see cref="PositionIncrementGap"/>
 		/// </summary>
+		[Obsolete("Deprecated, use PositionIncrementGap instead")]
 		[DataMember(Name ="position_offset_gap")]
 		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? PositionOffsetGap { get; set; }
+
+		/// <summary>
+		/// When indexing an array of text values, Elasticsearch inserts a fake "gap" between the last term of one value
+		/// and the first term of the next value to ensure that a phrase query doesn’t match two terms from different array elements.
+		/// Defaults to 100.
+		/// </summary>
+		[DataMember(Name ="position_increment_gap")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		int? PositionIncrementGap { get; set; }
 
 		/// <summary>
 		/// An optional list of logical / registered name of char filters.
@@ -54,7 +67,11 @@ namespace Nest
 		public IEnumerable<string> Filter { get; set; }
 
 		/// <inheritdoc />
+		[Obsolete("Deprecated, use PositionIncrementGap instead")]
 		public int? PositionOffsetGap { get; set; }
+
+		/// <inheritdoc />
+		public int? PositionIncrementGap { get; set; }
 
 		/// <inheritdoc />
 		public string Tokenizer { get; set; }
@@ -67,7 +84,9 @@ namespace Nest
 
 		IEnumerable<string> ICustomAnalyzer.CharFilter { get; set; }
 		IEnumerable<string> ICustomAnalyzer.Filter { get; set; }
+		[Obsolete("Deprecated, use PositionIncrementGap instead")]
 		int? ICustomAnalyzer.PositionOffsetGap { get; set; }
+		int? ICustomAnalyzer.PositionIncrementGap { get; set; }
 		string ICustomAnalyzer.Tokenizer { get; set; }
 
 		/// <inheritdoc />
@@ -86,7 +105,12 @@ namespace Nest
 		public CustomAnalyzerDescriptor Tokenizer(string tokenizer) => Assign(tokenizer, (a, v) => a.Tokenizer = v);
 
 		/// <inheritdoc />
+		[Obsolete("Deprecated, use PositionIncrementGap instead")]
 		public CustomAnalyzerDescriptor PositionOffsetGap(int? positionOffsetGap) =>
 			Assign(positionOffsetGap, (a, v) => a.PositionOffsetGap = v);
+
+		/// <inheritdoc />
+		public CustomAnalyzerDescriptor PositionIncrementGap(int? positionOffsetGap) =>
+			Assign(positionOffsetGap, (a, v) => a.PositionIncrementGap = v);
 	}
 }
