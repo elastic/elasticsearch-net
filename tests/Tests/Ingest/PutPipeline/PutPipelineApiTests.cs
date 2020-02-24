@@ -12,11 +12,11 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Ingest.PutPipeline
 {
 	public class PutPipelineApiTests
-		: ApiIntegrationTestBase<WritableCluster, PutPipelineResponse, IPutPipelineRequest, PutPipelineDescriptor, PutPipelineRequest>
+		: ApiIntegrationTestBase<XPackCluster, PutPipelineResponse, IPutPipelineRequest, PutPipelineDescriptor, PutPipelineRequest>
 	{
 		private static readonly string _id = "pipeline-1";
 
-		public PutPipelineApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutPipelineApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 
