@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Elastic.Managed.Ephemeral;
+using Elastic.Stack.Artifacts.Products;
 using Elastic.Xunit;
 using Elasticsearch.Net;
 using Nest;
@@ -15,7 +16,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 	{
 		public XPackClusterConfiguration() : this(ClusterFeatures.SSL | ClusterFeatures.Security) { }
 
-		public XPackClusterConfiguration(ClusterFeatures features) : base(ClusterFeatures.XPack | features)
+		public XPackClusterConfiguration(ClusterFeatures features) : base(ClusterFeatures.XPack | features, 1, ElasticsearchPlugin.IngestAttachment)
 		{
 			// Get license file path from environment variable
 			var licenseFilePath = Environment.GetEnvironmentVariable("ES_LICENSE_FILE");
