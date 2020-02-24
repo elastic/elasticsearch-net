@@ -12,9 +12,9 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Watcher.PutWatch
 {
-	public class PutWatchApiTests : ApiIntegrationTestBase<XPackCluster, PutWatchResponse, IPutWatchRequest, PutWatchDescriptor, PutWatchRequest>
+	public class PutWatchApiTests : ApiIntegrationTestBase<WatcherCluster, PutWatchResponse, IPutWatchRequest, PutWatchDescriptor, PutWatchRequest>
 	{
-		public PutWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutWatchApiTests(WatcherCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 
@@ -713,9 +713,9 @@ namespace Tests.XPack.Watcher.PutWatch
 	}
 
 	[SkipVersion("<7.4.0", "Foreach introduced in 7.3.0, max iterations in 7.4.0")]
-	public class PutWatchApiWithForeachTests : ApiIntegrationTestBase<XPackCluster, PutWatchResponse, IPutWatchRequest, PutWatchDescriptor, PutWatchRequest>
+	public class PutWatchApiWithForeachTests : ApiIntegrationTestBase<WatcherCluster, PutWatchResponse, IPutWatchRequest, PutWatchDescriptor, PutWatchRequest>
 	{
-		public PutWatchApiWithForeachTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutWatchApiWithForeachTests(WatcherCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 
