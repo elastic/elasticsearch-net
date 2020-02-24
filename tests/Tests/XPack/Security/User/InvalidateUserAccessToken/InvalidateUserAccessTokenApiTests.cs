@@ -13,12 +13,12 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 {
 	[SkipVersion("<5.5.0", "")]
 	public class InvalidateUserAccessTokenApiTests
-		: ApiIntegrationTestBase<XPackCluster, InvalidateUserAccessTokenResponse, IInvalidateUserAccessTokenRequest,
+		: ApiIntegrationTestBase<Security, InvalidateUserAccessTokenResponse, IInvalidateUserAccessTokenRequest,
 			InvalidateUserAccessTokenDescriptor, InvalidateUserAccessTokenRequest>
 	{
 		protected const string AccessTokenValueKey = "accesstoken";
 
-		public InvalidateUserAccessTokenApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public InvalidateUserAccessTokenApiTests(Security cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected virtual string CurrentAccessToken => RanIntegrationSetup ? ExtendedValue<string>(AccessTokenValueKey) : "foo";
 
@@ -61,7 +61,7 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 
 	public class InvalidateUserAccessTokenBadPasswordApiTests : InvalidateUserAccessTokenApiTests
 	{
-		public InvalidateUserAccessTokenBadPasswordApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public InvalidateUserAccessTokenBadPasswordApiTests(Security cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override string CurrentAccessToken => "bad_password";
 
