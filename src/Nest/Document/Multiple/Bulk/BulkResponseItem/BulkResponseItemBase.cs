@@ -78,7 +78,7 @@ namespace Nest
 		/// is <c>true</c> or specifies fields with <see cref="ISourceFilter.Includes"/>
 		/// </summary>
 		[JsonProperty("get")]
-		LazyDocument Get { get; set; }
+		LazyDocument Get { get; }
 
 		/// <summary>
 		/// Deserialize the <see cref="Get"/> property as a GetResponse<TDocument> type, where TDocument is the document type.
