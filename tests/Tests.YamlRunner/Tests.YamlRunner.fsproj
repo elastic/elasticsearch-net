@@ -21,6 +21,7 @@
     <Compile Include="TestsDownloader.fs" />
     <Compile Include="TestsLocator.fs" />
     <Compile Include="OperationExecutor.fs" />
+    <Compile Include="TestSuiteBootstrap.fs" />
     <Compile Include="TestsReader.fs" />
     <Compile Include="TestsRunner.fs" />
     <Compile Include="TestsExporter.fs" />
