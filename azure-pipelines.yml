@@ -78,7 +78,7 @@ jobs:
         esVersion: '7.4.0'
       es75:
         esVersion: '7.5.0'
-      es75:
+      es76:
         esVersion: '7.6.0'
       latest7:
         esVersion: 'latest-7'
