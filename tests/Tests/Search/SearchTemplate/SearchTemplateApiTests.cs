@@ -104,7 +104,7 @@ namespace Tests.Search.SearchTemplate
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ServerError.Should().NotBeNull();
-			if (TestConfiguration.Instance.ElasticsearchVersion <= "7.5.0")
+			if (TestConfiguration.Instance.ElasticsearchVersion <= "7.6.0")
 				response.ServerError.Error.Reason.Should().Contain("no [query]");
 			else
 				response.ServerError.Error.Reason.Should().Contain("unknown query [atch]");
