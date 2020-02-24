@@ -16,7 +16,7 @@ namespace Nest
 		public long Total { get; set; }
 
 		private IEnumerable<Hit<TDocument>> ConvertHits<TDocument>()
-			where TDocument : class => _hits.Select(h => h.As<Hit<TDocument>>());
+			where TDocument : class => _hits.Select(h => h.AsUsingRequestResponseSerializer<Hit<TDocument>>());
 
 		public IReadOnlyCollection<Hit<TDocument>> Hits<TDocument>()
 			where TDocument : class =>

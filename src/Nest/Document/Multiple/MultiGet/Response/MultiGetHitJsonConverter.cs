@@ -27,10 +27,11 @@ namespace Nest
 			var hit = tuple.Hit.ToObject<MultiGetHit<T>>(serializer);
 			var settings = serializer.GetConnectionSettings();
 			var s = serializer.GetConnectionSettings().SourceSerializer;
+			var r = serializer.GetConnectionSettings().RequestResponseSerializer;
 
 			if (tuple.Hit["fields"] is JObject fields)
 			{
-				var fieldsDictionary = fields.Properties().ToDictionary(p => p.Name, p => new LazyDocument(p.Value, s));
+				var fieldsDictionary = fields.Properties().ToDictionary(p => p.Name, p => new LazyDocument(p.Value, s, r));
 				hit.Fields = new FieldValues(settings.Inferrer, fieldsDictionary);
 			}
 

@@ -187,8 +187,9 @@ namespace Nest
 			var hits = o[Parser.Hits].Children().OfType<JObject>();
 			reader.Read();
 			//using request/response serializer here because doc is wrapped in NEST's Hit<T>
-			var s = serializer.GetConnectionSettings().RequestResponseSerializer;
-			var lazyHits = hits.Select(h => new LazyDocument(h, s)).ToList();
+			var s = serializer.GetConnectionSettings().SourceSerializer;
+			var r = serializer.GetConnectionSettings().RequestResponseSerializer;
+			var lazyHits = hits.Select(h => new LazyDocument(h, s, r)).ToList();
 			return new TopHitsAggregate(lazyHits)
 			{
 				Total = total,
@@ -573,7 +574,8 @@ namespace Nest
 			if (scriptedMetric != null)
 			{
 				var s = serializer.GetConnectionSettings().SourceSerializer;
-				return new ScriptedMetricAggregate(new LazyDocument(scriptedMetric, s));
+				var r = serializer.GetConnectionSettings().RequestResponseSerializer;
+				return new ScriptedMetricAggregate(new LazyDocument(scriptedMetric, s, r));
 			}
 			return valueMetric;
 		}

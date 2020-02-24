@@ -44,6 +44,11 @@ namespace Nest
 		long? IfSequenceNumber { get; set; }
 
 		long? IfPrimaryTerm { get; set; }
+
+		/// <summary>
+		/// True or false to return the _source field or not, or a list of fields to return.
+		/// </summary>
+		Union<bool, ISourceFilter> Source { get; set; }
 	}
 
 	public class BulkUpdateOperation<TDocument, TPartialDocument> : BulkOperationBase, IBulkUpdateOperation<TDocument, TPartialDocument>
@@ -116,6 +121,9 @@ namespace Nest
 
 		public long? IfPrimaryTerm { get; set; }
 
+		/// <inheritdoc />
+		public Union<bool, ISourceFilter> Source { get; set; }
+
 		protected override Type ClrType => typeof(TDocument);
 
 		protected override string Operation => "update";
@@ -135,7 +143,8 @@ namespace Nest
 				_DocAsUpsert = DocAsUpsert,
 				_ScriptedUpsert = ScriptedUpsert,
 				IfPrimaryTerm = IfPrimaryTerm,
-				IfSequenceNumber = IfSequenceNumber
+				IfSequenceNumber = IfSequenceNumber,
+				Source = Source,
 			};
 	}
 
@@ -155,6 +164,7 @@ namespace Nest
 		TDocument IBulkUpdateOperation<TDocument, TPartialDocument>.Upsert { get; set; }
 		long? IBulkUpdateOperation<TDocument, TPartialDocument>.IfSequenceNumber { get; set; }
 		long? IBulkUpdateOperation<TDocument, TPartialDocument>.IfPrimaryTerm { get; set; }
+		Union<bool, ISourceFilter> IBulkUpdateOperation<TDocument, TPartialDocument>.Source { get; set; }
 
 		protected override object GetBulkOperationBody() =>
 			new BulkUpdateBody<TDocument, TPartialDocument>
@@ -165,7 +175,8 @@ namespace Nest
 				_DocAsUpsert = Self.DocAsUpsert,
 				_ScriptedUpsert = Self.ScriptedUpsert,
 				IfPrimaryTerm = Self.IfPrimaryTerm,
-				IfSequenceNumber = Self.IfSequenceNumber
+				IfSequenceNumber = Self.IfSequenceNumber,
+				Source = Self.Source,
 			};
 
 		protected override Id GetIdForOperation(Inferrer inferrer) =>
@@ -234,5 +245,11 @@ namespace Nest
 		/// </summary>
 		public BulkUpdateDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? primaryTerm) =>
 			Assign(primaryTerm, (a, v) => a.IfPrimaryTerm = v);
+
+		/// <summary>
+		/// True or false to return the _source field or not, or a list of fields to return.
+		/// </summary>
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Source(Union<bool, ISourceFilter> source) =>
+			Assign(source, (a, v) => a.Source = v);
 	}
 }
