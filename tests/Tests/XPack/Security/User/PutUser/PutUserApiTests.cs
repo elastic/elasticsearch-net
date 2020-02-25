@@ -12,9 +12,9 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.XPack.Security.User.PutUser
 {
 	[SkipVersion("<2.3.0", "")]
-	public class PutUserApiTests : ApiIntegrationTestBase<XPackCluster, PutUserResponse, IPutUserRequest, PutUserDescriptor, PutUserRequest>
+	public class PutUserApiTests : ApiIntegrationTestBase<Security, PutUserResponse, IPutUserRequest, PutUserDescriptor, PutUserRequest>
 	{
-		public PutUserApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutUserApiTests(Security cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 
@@ -72,13 +72,13 @@ namespace Tests.XPack.Security.User.PutUser
 
 		protected override PutUserDescriptor NewDescriptor() => new PutUserDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(PutUserResponse response) => 
+		protected override void ExpectResponse(PutUserResponse response) =>
 			response.Created.Should().BeTrue("{0}", response.DebugInformation);
 	}
 
 	public class PutUserRunAsApiTests : PutUserApiTests
 	{
-		public PutUserRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public PutUserRunAsApiTests(Security cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 			// ReSharper disable VirtualMemberCallInConstructor
 			var x = Client.Security.GetUser(new GetUserRequest(ClusterAuthentication.User.Username));
