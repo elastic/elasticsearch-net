@@ -23,7 +23,7 @@ namespace Elasticsearch.Net
 	///</summary>
 	public partial interface IElasticLowLevelClient 
 	{
-		@foreach(var kv in Model.EndpointsPerNamespace)
+		@foreach(var kv in Model.EndpointsPerNamespaceLowLevel)
 		{
 		if (kv.Key != CsharpNames.RootNamespace)
 		{

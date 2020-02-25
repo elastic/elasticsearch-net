@@ -776,7 +776,7 @@ namespace Nest
 			set => Q("help", value);
 		}
 
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		///<summary>Calculate the selected nodes using the local cluster state rather than the state from master node (default: false)</summary>
 		public bool? Local
 		{
 			get => Q<bool? >("local");

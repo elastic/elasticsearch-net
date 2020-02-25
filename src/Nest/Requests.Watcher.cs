@@ -47,7 +47,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Acknowledge <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
+	///<summary>Request for Acknowledge <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
 	public partial class AcknowledgeWatchRequest : PlainRequestBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
 	{
 		protected IAcknowledgeWatchRequest Self => this;
@@ -155,7 +155,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Delete <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</para></summary>
+	///<summary>Request for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</para></summary>
 	public partial class DeleteWatchRequest : PlainRequestBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
 	{
 		protected IDeleteWatchRequest Self => this;
@@ -188,7 +188,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Execute <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</para></summary>
+	///<summary>Request for Execute <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</para></summary>
 	public partial class ExecuteWatchRequest : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
 		protected IExecuteWatchRequest Self => this;
@@ -226,7 +226,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Get <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</para></summary>
+	///<summary>Request for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</para></summary>
 	public partial class GetWatchRequest : PlainRequestBase<GetWatchRequestParameters>, IGetWatchRequest
 	{
 		protected IGetWatchRequest Self => this;
@@ -259,7 +259,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Put <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</para></summary>
+	///<summary>Request for Put <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</para></summary>
 	public partial class PutWatchRequest : PlainRequestBase<PutWatchRequestParameters>, IPutWatchRequest
 	{
 		protected IPutWatchRequest Self => this;
@@ -314,7 +314,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Start <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</para></summary>
+	///<summary>Request for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</para></summary>
 	public partial class StartWatcherRequest : PlainRequestBase<StartWatcherRequestParameters>, IStartWatcherRequest
 	{
 		protected IStartWatcherRequest Self => this;
@@ -333,7 +333,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</para></summary>
+	///<summary>Request for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</para></summary>
 	public partial class WatcherStatsRequest : PlainRequestBase<WatcherStatsRequestParameters>, IWatcherStatsRequest
 	{
 		protected IWatcherStatsRequest Self => this;
@@ -366,7 +366,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Stop <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</para></summary>
+	///<summary>Request for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</para></summary>
 	public partial class StopWatcherRequest : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
 	{
 		protected IStopWatcherRequest Self => this;

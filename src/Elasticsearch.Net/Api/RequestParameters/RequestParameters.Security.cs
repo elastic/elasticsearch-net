@@ -78,7 +78,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for DeletePrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html</para></summary>
+	///<summary>Request options for DeletePrivileges <para>TODO</para></summary>
 	public class DeletePrivilegesRequestParameters : RequestParameters<DeletePrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -268,7 +268,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for PutPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html</para></summary>
+	///<summary>Request options for PutPrivileges <para>TODO</para></summary>
 	public class PutPrivilegesRequestParameters : RequestParameters<PutPrivilegesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;

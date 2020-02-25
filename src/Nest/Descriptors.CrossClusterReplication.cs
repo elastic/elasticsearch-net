@@ -135,7 +135,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for ForgetFollowerIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+	///<summary>Descriptor for ForgetFollowerIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 	public partial class ForgetFollowerIndexDescriptor : RequestDescriptorBase<ForgetFollowerIndexDescriptor, ForgetFollowerIndexRequestParameters, IForgetFollowerIndexRequest>, IForgetFollowerIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationForgetFollowerIndex;
@@ -306,7 +306,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for UnfollowIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+	///<summary>Descriptor for UnfollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 	public partial class UnfollowIndexDescriptor : RequestDescriptorBase<UnfollowIndexDescriptor, UnfollowIndexRequestParameters, IUnfollowIndexRequest>, IUnfollowIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationUnfollowIndex;
