@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -25,9 +26,17 @@ namespace Tests.Core.VsTest
 		private readonly List<string> _disableSkipNamespaces = new List<string>();
 		public static Uri RootUri { get; } = new Uri(Environment.CurrentDirectory + Path.DirectorySeparatorChar, UriKind.Absolute);
 
+		private readonly ConcurrentQueue<TestResult> _failedTests = new ConcurrentQueue<TestResult>();
+
 		public void Initialize(TestLoggerEvents events, string testRunDirectory)
 		{
-			events.TestResult += TestResultHandler;
+			events.TestResult += (s, e) =>
+			{
+				if (e.Result.Outcome != TestOutcome.Failed) return;
+				_failedTests.Enqueue(e.Result);
+			};
+
+			//events.TestResult += TestResultHandler;
 			events.TestRunComplete += TestRunCompleteHandler;
 			events.TestRunStart += (sender, args) =>
 			{
@@ -49,7 +58,6 @@ namespace Tests.Core.VsTest
 							.Where(s => !string.IsNullOrWhiteSpace(s))
 						);
 				}
-				foreach (var a in StartUpActions) a();
 			};
 		}
 
@@ -77,33 +85,40 @@ namespace Tests.Core.VsTest
 
 					break;
 				default:
-					if (_writtenPassed > 0)
-					{
-						Console.WriteLine();
-						_writtenPassed = 0;
-					}
-					PrintTestOutcomeHeader(e.Result.Outcome, testCase.FullyQualifiedName);
-					switch (e.Result.Outcome)
-					{
-						case TestOutcome.NotFound: break;
-						case TestOutcome.None: break;
-						case TestOutcome.Passed:
-							PrintLocation(testCase);
-							PrintDuration(e.Result.Duration);
-							break;
-						case TestOutcome.Skipped:
-							foreach (var p in e.Result.Messages)
-								p.Text.WriteWordWrapped();
+					WriteTestResult(e.Result);
 
-							break;
-						case TestOutcome.Failed:
-							PrintLocation(testCase);
-							PrintDuration(e.Result.Duration);
-							e.Result.ErrorMessage.WriteWordWrapped(WordWrapper.WriteWithExceptionHighlighted);
-							PrintStackTrace(e.Result.ErrorStackTrace);
-							break;
-					}
+					break;
+			}
+		}
 
+		private void WriteTestResult(TestResult result, bool longForm = true)
+		{
+			if (_writtenPassed > 0)
+			{
+				Console.WriteLine();
+				_writtenPassed = 0;
+			}
+			var testCase = result.TestCase;
+			PrintTestOutcomeHeader(result.Outcome, result.TestCase.FullyQualifiedName);
+			switch (result.Outcome)
+			{
+				case TestOutcome.NotFound: break;
+				case TestOutcome.None: break;
+				case TestOutcome.Passed:
+					PrintLocation(testCase);
+					PrintDuration(result.Duration);
+					break;
+				case TestOutcome.Skipped:
+					foreach (var p in result.Messages)
+						p.Text.WriteWordWrapped();
+
+					break;
+				case TestOutcome.Failed:
+					PrintLocation(testCase);
+					PrintDuration(result.Duration);
+					result.ErrorMessage.WriteWordWrapped(WordWrapper.WriteWithExceptionHighlighted, longForm);
+					if (longForm)
+						PrintStackTrace(result.ErrorStackTrace);
 					break;
 			}
 		}
@@ -144,20 +159,19 @@ namespace Tests.Core.VsTest
 				var atIn = line.Split(new[] { ") in " }, StringSplitOptions.RemoveEmptyEntries);
 				var at = atIn[0] + ")";
 				Console.WriteLine(at);
-				if (atIn.Length > 1)
-				{
-					var @in = atIn[1].Split(':');
-					var file = @in[0];
-					var lineNumber = @in[1];
-					Console.ForegroundColor = ConsoleColor.Gray;
-					Console.Write("     in ");
-					Console.ForegroundColor = ConsoleColor.Blue;
-					Console.Write(lineNumber);
-					Console.Write(" ");
-					Console.ForegroundColor = ConsoleColor.DarkGray;
-					Console.WriteLine(file.CreateRelativePath());
-					Console.ResetColor();
-				}
+				if (atIn.Length <= 1) continue;
+
+				var @in = atIn[1].Split(':');
+				var file = @in[0];
+				var lineNumber = @in[1];
+				Console.ForegroundColor = ConsoleColor.Gray;
+				Console.Write("     in ");
+				Console.ForegroundColor = ConsoleColor.Blue;
+				Console.Write(lineNumber);
+				Console.Write(" ");
+				Console.ForegroundColor = ConsoleColor.DarkGray;
+				Console.WriteLine(file.CreateRelativePath());
+				Console.ResetColor();
 			}
 			Console.WriteLine();
 		}
@@ -172,9 +186,9 @@ namespace Tests.Core.VsTest
 			Console.ResetColor();
 		}
 
-		public void TestRunCompleteHandler(object sender, TestRunCompleteEventArgs e)
+		private void TestRunCompleteHandler(object sender, TestRunCompleteEventArgs e)
 		{
-			void WriteBox(string boxString, ConsoleColor boxColor, string metric)
+			static void WriteBox(string boxString, ConsoleColor boxColor, string metric)
 			{
 				boxString = " " + boxString.PadRight(5);
 				Console.ForegroundColor = ConsoleColor.White;
@@ -188,23 +202,17 @@ namespace Tests.Core.VsTest
 				Console.WriteLine();
 			}
 
-			Console.WriteLine();
-			Console.BackgroundColor = ConsoleColor.White;
-			Console.ForegroundColor = ConsoleColor.Black;
-			Console.Write("                         ");
-			Console.ResetColor();
-			Console.WriteLine();
-			Console.BackgroundColor = ConsoleColor.White;
-			Console.ForegroundColor = ConsoleColor.Black;
-			Console.Write("  🌈 SUMMARY RESULTS 🌈  ");
-			Console.ResetColor();
-			Console.WriteLine();
-			Console.BackgroundColor = ConsoleColor.White;
-			Console.ForegroundColor = ConsoleColor.Black;
-			Console.Write("                         ");
-			Console.ResetColor();
-			Console.WriteLine();
-			Console.WriteLine();
+
+			//Reprint first 20 test failures at the bottom for convenience
+			Announce($"SEEN {_failedTests.Count} FAILURE{(_failedTests.Count > 1 ? "S" : "")}");
+
+			for (var expanded = 0; _failedTests.TryDequeue(out var testResult); expanded++)
+			{
+				WriteTestResult(testResult, expanded <= 20);
+			}
+
+
+			Announce(" 🌈 SUMMARY RESULTS 🌈 ");
 
 			WriteBox("ALL", ConsoleColor.DarkGray, e.TestRunStatistics.ExecutedTests.ToString());
 
@@ -227,6 +235,27 @@ namespace Tests.Core.VsTest
 			WriteBox("TIME", ConsoleColor.Gray, ToStringFromMilliseconds(e.ElapsedTimeInRunningTests.TotalMilliseconds));
 
 			Console.WriteLine();
+			Console.WriteLine();
+		}
+
+		private static void Announce(string text)
+		{
+			Console.WriteLine();
+			var padding = new string(' ', text.Length + 4);
+			Console.BackgroundColor = ConsoleColor.White;
+			Console.ForegroundColor = ConsoleColor.Black;
+			Console.Write(padding);
+			Console.ResetColor();
+			Console.WriteLine();
+			Console.BackgroundColor = ConsoleColor.White;
+			Console.ForegroundColor = ConsoleColor.Black;
+			Console.Write($"  {text}  ");
+			Console.ResetColor();
+			Console.WriteLine();
+			Console.BackgroundColor = ConsoleColor.White;
+			Console.ForegroundColor = ConsoleColor.Black;
+			Console.Write(padding);
+			Console.ResetColor();
 			Console.WriteLine();
 			Console.WriteLine();
 		}
@@ -303,7 +332,5 @@ namespace Tests.Core.VsTest
 			return (milliseconds / 60_000d).ToString("N0", Provider) + " m";
 		}
 
-		public static void AddStartupAction(Action action) => StartUpActions.Add(action);
-		private static List<Action> StartUpActions { get; } = new List<Action>();
 	}
 }

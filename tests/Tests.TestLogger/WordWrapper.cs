@@ -1,15 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Tests.Core.VsTest
 {
 	internal static class WordWrapper
 	{
-		public static void WriteWordWrapped(this string paragraph, Action<string> write = null, int tabSize = 4, int indent = 7)
+		public static void WriteWordWrapped(this string paragraph, Action<string> write = null, bool printAll = true, int tabSize = 4, int indent = 7)
 		{
 			write ??= Console.WriteLine;
-			foreach (var line in paragraph.ToWordWrappedLines(tabSize, indent))
+			var lines = paragraph.ToWordWrappedLines(tabSize, indent);
+			if (!printAll)
+				lines = lines.Take(2).Concat(new[] { $"{new string(' ', indent)} ..abbreviated.." });
+			foreach (var line in lines)
 				write(line);
 		}
 

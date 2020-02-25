@@ -7,8 +7,6 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories.CleanupRepository
 {
-	// TODO NOT an integration tests, move SnapshotCrud tests over to a coordinatedtestbase so we can inject this in the request pipeline in order
-	// todo meaningful assertions
 	public class CleanupRepositoryApiTests
 		: ApiTestBase<ReadOnlyCluster, CleanupRepositoryResponse, ICleanupRepositoryRequest, CleanupRepositoryDescriptor, CleanupRepositoryRequest>
 	{

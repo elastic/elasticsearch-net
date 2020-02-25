@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.XPack.Slm
 {
 	[SkipVersion("<7.5.0", "All APIs exist in Elasticsearch 7.4.0, Retention, Status, Start and Stop added in 7.5.0")]
-	public class SlmApiTests : CoordinatedIntegrationTestBase<XPackCluster>
+	public class SlmApiTests : CoordinatedIntegrationTestBase<SlmCluster>
 	{
 		private const string CreateRepositoryStep = nameof(CreateRepositoryStep);
 		private const string DeleteSnapshotLifecycleStep = nameof(DeleteSnapshotLifecycleStep);
@@ -27,7 +27,7 @@ namespace Tests.XPack.Slm
 		private const string StopSnapshotLifecycleStep = nameof(StopSnapshotLifecycleStep);
 		private const string GetSnapshotLifecycleStats = nameof(GetSnapshotLifecycleStats);
 
-		public SlmApiTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
+		public SlmApiTests(SlmCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
 			{
 				CreateRepositoryStep, u =>
