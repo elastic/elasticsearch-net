@@ -13,11 +13,11 @@ using Xunit;
 namespace Tests.XPack.Watcher.ExecuteWatch
 {
 	public class ExecuteWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, ExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
+		: ApiIntegrationTestBase<WatcherCluster, ExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
 	{
 		private readonly DateTimeOffset _triggeredDateTime = new DateTimeOffset(2016, 11, 17, 13, 00, 00, TimeSpan.Zero);
 
-		public ExecuteWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ExecuteWatchApiTests(WatcherCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 
@@ -269,11 +269,11 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 	}
 
 	public class ExecuteInlineWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, ExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
+		: ApiIntegrationTestBase<WatcherCluster, ExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
 	{
 		private readonly DateTimeOffset _triggeredDateTime = new DateTimeOffset(2016, 11, 17, 13, 00, 00, TimeSpan.Zero);
 
-		public ExecuteInlineWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ExecuteInlineWatchApiTests(WatcherCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 

@@ -10,9 +10,9 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.XPack.Watcher.DeactivateWatch
 {
 	public class DeactivateWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, DeactivateWatchResponse, IDeactivateWatchRequest, DeactivateWatchDescriptor, DeactivateWatchRequest>
+		: ApiIntegrationTestBase<WatcherCluster, DeactivateWatchResponse, IDeactivateWatchRequest, DeactivateWatchDescriptor, DeactivateWatchRequest>
 	{
-		public DeactivateWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeactivateWatchApiTests(WatcherCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 

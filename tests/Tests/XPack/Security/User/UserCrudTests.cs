@@ -11,11 +11,11 @@ namespace Tests.XPack.Security.User
 {
 	[SkipVersion("<2.3.0", "")]
 	public class UserCrudTests
-		: CrudTestBase<XPackCluster, PutUserResponse, GetUserResponse, PutUserResponse, DeleteUserResponse>
+		: CrudTestBase<Security, PutUserResponse, GetUserResponse, PutUserResponse, DeleteUserResponse>
 	{
 		private readonly string[] _roles = { "user" };
 
-		public UserCrudTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public UserCrudTests(Security cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		//Since we basically take the first 8 characters of a guid we have no way
 		//to guarantee it starts with a-zA-Z which is mandatory since 5.1
