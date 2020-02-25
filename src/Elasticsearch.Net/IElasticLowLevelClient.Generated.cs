@@ -41,7 +41,6 @@ using Elasticsearch.Net.Specification.SnapshotApi;
 using Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi;
 using Elasticsearch.Net.Specification.SqlApi;
 using Elasticsearch.Net.Specification.TasksApi;
-using Elasticsearch.Net.Specification.TransformApi;
 using Elasticsearch.Net.Specification.WatcherApi;
 using Elasticsearch.Net.Specification.XPackApi;
 
@@ -475,26 +474,6 @@ namespace Elasticsearch.Net
 		///<param name = "id">Script ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> GetScriptAsync<TResponse>(string id, GetScriptRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_script_context</summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
-		TResponse GetScriptContext<TResponse>(GetScriptContextRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_script_context</summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
-		Task<TResponse> GetScriptContextAsync<TResponse>(GetScriptContextRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_script_language</summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
-		TResponse GetScriptLanguages<TResponse>(GetScriptLanguagesRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_script_language</summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
-		Task<TResponse> GetScriptLanguagesAsync<TResponse>(GetScriptLanguagesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>GET on /{index}/_source/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
 		///<param name = "index">The name of the index</param>
@@ -1112,12 +1091,6 @@ namespace Elasticsearch.Net
 
 		///<summary>Tasks APIs</summary>
 		LowLevelTasksNamespace Tasks
-		{
-			get;
-		}
-
-		///<summary>Transform APIs</summary>
-		LowLevelTransformNamespace Transform
 		{
 			get;
 		}

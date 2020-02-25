@@ -41,7 +41,6 @@ using Elasticsearch.Net.Specification.SnapshotApi;
 using Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi;
 using Elasticsearch.Net.Specification.SqlApi;
 using Elasticsearch.Net.Specification.TasksApi;
-using Elasticsearch.Net.Specification.TransformApi;
 using Elasticsearch.Net.Specification.WatcherApi;
 using Elasticsearch.Net.Specification.XPackApi;
 

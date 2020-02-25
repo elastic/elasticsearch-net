@@ -41,7 +41,6 @@ using Elasticsearch.Net.Specification.SnapshotApi;
 using Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi;
 using Elasticsearch.Net.Specification.SqlApi;
 using Elasticsearch.Net.Specification.TasksApi;
-using Elasticsearch.Net.Specification.TransformApi;
 using Elasticsearch.Net.Specification.WatcherApi;
 using Elasticsearch.Net.Specification.XPackApi;
 using static Elasticsearch.Net.HttpMethod;
@@ -163,12 +162,6 @@ namespace Elasticsearch.Net
 			private set;
 		}
 
-		public LowLevelTransformNamespace Transform
-		{
-			get;
-			private set;
-		}
-
 		public LowLevelWatcherNamespace Watcher
 		{
 			get;
@@ -201,7 +194,6 @@ namespace Elasticsearch.Net
 			SnapshotLifecycleManagement = new LowLevelSnapshotLifecycleManagementNamespace(this);
 			Sql = new LowLevelSqlNamespace(this);
 			Tasks = new LowLevelTasksNamespace(this);
-			Transform = new LowLevelTransformNamespace(this);
 			Watcher = new LowLevelWatcherNamespace(this);
 			XPack = new LowLevelXPackNamespace(this);
 		}
@@ -585,28 +577,6 @@ namespace Elasticsearch.Net
 		[MapsApi("get_script", "id")]
 		public Task<TResponse> GetScriptAsync<TResponse>(string id, GetScriptRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_scripts/{id:id}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_script_context</summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
-		public TResponse GetScriptContext<TResponse>(GetScriptContextRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_script_context", null, RequestParams(requestParameters));
-		///<summary>GET on /_script_context</summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
-		[MapsApi("get_script_context", "")]
-		public Task<TResponse> GetScriptContextAsync<TResponse>(GetScriptContextRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_script_context", ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_script_language</summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
-		public TResponse GetScriptLanguages<TResponse>(GetScriptLanguagesRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_script_language", null, RequestParams(requestParameters));
-		///<summary>GET on /_script_language</summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
-		[MapsApi("get_script_languages", "")]
-		public Task<TResponse> GetScriptLanguagesAsync<TResponse>(GetScriptLanguagesRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_script_language", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /{index}/_source/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "id">The document ID</param>

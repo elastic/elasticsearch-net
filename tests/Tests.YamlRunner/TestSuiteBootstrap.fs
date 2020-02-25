@@ -122,12 +122,12 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
             yield! tasks
             
             let transforms =
-                let transforms = client.Transform.Get<DynamicResponse> "_all"
+                let transforms = client.DoRequest<DynamicResponse>(HttpMethod.GET, "/_transform/_all")
                 let stopTransforms =
                     transforms.Get<string[]> "transforms.id"
                     |> Seq.collect (fun id -> [
-                         client.Transform.Stop<DynamicResponse> id
-                         client.Transform.Delete<DynamicResponse> id
+                         client.DoRequest<DynamicResponse>(HttpMethod.POST, (sprintf "/_transform/%s/_stop" id))
+                         client.DoRequest<DynamicResponse>(HttpMethod.DELETE, (sprintf "/_transform/%s" id))
                     ])
                     |> Seq.toList
                 [transforms] @ stopTransforms
