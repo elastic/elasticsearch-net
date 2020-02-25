@@ -25,6 +25,28 @@ namespace ApiGenerator.Configuration
 			"ml.put_trained_model.json",
 			"ml.explain_data_frame_analytics.json",
 
+			"transform.delete_transform.json",
+			"transform.get_transform.json",
+			"transform.get_transform_stats.json",
+			"transform.preview_transform.json",
+			"transform.put_transform.json",
+			"transform.start_transform.json",
+			"transform.stop_transform.json",
+			"transform.update_transform.json",
+
+			"ml.set_upgrade_mode.json",
+			"ml.find_file_structure.json",
+			"ml.evaluate_data_frame.json",
+			"ml.delete_data_frame_analytics.json",
+			"ml.get_data_frame_analytics.json",
+			"ml.get_data_frame_analytics_stats.json",
+			"ml.put_data_frame_analytics.json",
+			"ml.start_data_frame_analytics.json",
+			"ml.stop_data_frame_analytics.json",
+
+			"get_script_context.json",
+			"get_script_languages.json",
+
 			// Internal API,
 			"monitoring.bulk.json",
 
@@ -41,40 +63,10 @@ namespace ApiGenerator.Configuration
 
 		public static string[] IgnoredApisHighLevel { get; } = new []
 		{
-			"get_script_context.json",
-			"get_script_languages.json",
 			"scripts_painless_context.json",
 			"security.get_builtin_privileges.json",
 
-			// these APIs are new and need to be mapped
-			"transform.delete_transform.json",
-			"transform.get_transform.json",
-			"transform.get_transform_stats.json",
-			"transform.preview_transform.json",
-			"transform.put_transform.json",
-			"transform.start_transform.json",
-			"transform.stop_transform.json",
-			"transform.update_transform.json",
-
-			"data_frame.delete_data_frame_transform.json",
-			"data_frame.get_data_frame_transform.json",
-			"data_frame.get_data_frame_transform_stats.json",
-			"data_frame.preview_data_frame_transform.json",
-			"data_frame.put_data_frame_transform.json",
-			"data_frame.start_data_frame_transform.json",
-			"data_frame.stop_data_frame_transform.json",
-			"data_frame.update_data_frame_transform.json",
-
 			"ml.estimate_memory_usage.json",
-			"ml.set_upgrade_mode.json",
-			"ml.find_file_structure.json",
-			"ml.evaluate_data_frame.json",
-			"ml.delete_data_frame_analytics.json",
-			"ml.get_data_frame_analytics.json",
-			"ml.get_data_frame_analytics_stats.json",
-			"ml.put_data_frame_analytics.json",
-			"ml.start_data_frame_analytics.json",
-			"ml.stop_data_frame_analytics.json",
 		};
 
 
