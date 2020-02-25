@@ -14,7 +14,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="$(SolutionRoot)\src\Nest\Nest.csproj" />
-    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />

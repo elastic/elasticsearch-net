@@ -17,7 +17,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
-    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Elasticsearch.Net.CustomDynamicObjectResolver" />
