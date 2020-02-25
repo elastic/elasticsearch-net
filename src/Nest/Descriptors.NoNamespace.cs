@@ -54,7 +54,7 @@ namespace Nest
 		// Request parameters
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public BulkDescriptor Pipeline(string pipeline) => Qs("pipeline", pipeline);
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public BulkDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
@@ -251,7 +251,7 @@ namespace Nest
 		public DeleteDescriptor<TDocument> IfPrimaryTerm(long? ifprimaryterm) => Qs("if_primary_term", ifprimaryterm);
 		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
 		public DeleteDescriptor<TDocument> IfSequenceNumber(long? ifsequencenumber) => Qs("if_seq_no", ifsequencenumber);
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public DeleteDescriptor<TDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
@@ -344,7 +344,7 @@ namespace Nest
 		public DeleteByQueryDescriptor<TDocument> SearchType(SearchType? searchtype) => Qs("search_type", searchtype);
 		///<summary>Deprecated, please use `max_docs` instead</summary>
 		public DeleteByQueryDescriptor<TDocument> Size(long? size) => Qs("size", size);
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks.</summary>
 		public DeleteByQueryDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public DeleteByQueryDescriptor<TDocument> Sort(params string[] sort) => Qs("sort", sort);
@@ -1138,7 +1138,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindexOnServer;
 		// values part of the url path
 		// Request parameters
-		///<summary>Should the effected indexes be refreshed?</summary>
+		///<summary>Should the affected indexes be refreshed?</summary>
 		public ReindexOnServerDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
 		public ReindexOnServerDescriptor RequestsPerSecond(long? requestspersecond) => Qs("requests_per_second", requestspersecond);
@@ -1529,7 +1529,7 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> IfSequenceNumber(long? ifsequencenumber) => Qs("if_seq_no", ifsequencenumber);
 		///<summary>The script language (default: painless)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Lang(string lang) => Qs("lang", lang);
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> RetryOnConflict(long? retryonconflict) => Qs("retry_on_conflict", retryonconflict);
@@ -1600,7 +1600,7 @@ namespace Nest
 		public UpdateByQueryDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
 		public UpdateByQueryDescriptor<TDocument> QueryOnQueryString(string queryonquerystring) => Qs("q", queryonquerystring);
-		///<summary>Should the effected indexes be refreshed?</summary>
+		///<summary>Should the affected indexes be refreshed?</summary>
 		public UpdateByQueryDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public UpdateByQueryDescriptor<TDocument> RequestCache(bool? requestcache = true) => Qs("request_cache", requestcache);

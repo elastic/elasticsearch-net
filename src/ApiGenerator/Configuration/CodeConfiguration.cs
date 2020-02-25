@@ -19,6 +19,11 @@ namespace ApiGenerator.Configuration
 			"indices.reload_search_analyzers.json",
 			"rank_eval.json",
 			"eql.search.json",
+			"ml.delete_trained_model.json",
+			"ml.get_trained_models.json",
+			"ml.get_trained_models_stats.json",
+			"ml.put_trained_model.json",
+			"ml.explain_data_frame_analytics.json",
 
 			// Internal API,
 			"monitoring.bulk.json",

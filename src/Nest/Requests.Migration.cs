@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeprecationInfo <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</para></summary>
+	///<summary>Request for DeprecationInfo <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</para></summary>
 	public partial class DeprecationInfoRequest : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
 	{
 		protected IDeprecationInfoRequest Self => this;

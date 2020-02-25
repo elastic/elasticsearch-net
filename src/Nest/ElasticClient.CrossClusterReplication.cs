@@ -135,25 +135,25 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ccr.forget_follower</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current">https://www.elastic.co/guide/en/elasticsearch/reference/current</a>
 		/// </summary>
 		public ForgetFollowerIndexResponse ForgetFollowerIndex(IndexName index, Func<ForgetFollowerIndexDescriptor, IForgetFollowerIndexRequest> selector) => ForgetFollowerIndex(selector.InvokeOrDefault(new ForgetFollowerIndexDescriptor(index: index)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ccr.forget_follower</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current">https://www.elastic.co/guide/en/elasticsearch/reference/current</a>
 		/// </summary>
 		public Task<ForgetFollowerIndexResponse> ForgetFollowerIndexAsync(IndexName index, Func<ForgetFollowerIndexDescriptor, IForgetFollowerIndexRequest> selector, CancellationToken ct = default) => ForgetFollowerIndexAsync(selector.InvokeOrDefault(new ForgetFollowerIndexDescriptor(index: index)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ccr.forget_follower</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current">https://www.elastic.co/guide/en/elasticsearch/reference/current</a>
 		/// </summary>
 		public ForgetFollowerIndexResponse ForgetFollowerIndex(IForgetFollowerIndexRequest request) => DoRequest<IForgetFollowerIndexRequest, ForgetFollowerIndexResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ccr.forget_follower</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current">https://www.elastic.co/guide/en/elasticsearch/reference/current</a>
 		/// </summary>
 		public Task<ForgetFollowerIndexResponse> ForgetFollowerIndexAsync(IForgetFollowerIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IForgetFollowerIndexRequest, ForgetFollowerIndexResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -327,25 +327,25 @@ namespace Nest.Specification.CrossClusterReplicationApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ccr.unfollow</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current">https://www.elastic.co/guide/en/elasticsearch/reference/current</a>
 		/// </summary>
 		public UnfollowIndexResponse UnfollowIndex(IndexName index, Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null) => UnfollowIndex(selector.InvokeOrDefault(new UnfollowIndexDescriptor(index: index)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ccr.unfollow</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current">https://www.elastic.co/guide/en/elasticsearch/reference/current</a>
 		/// </summary>
 		public Task<UnfollowIndexResponse> UnfollowIndexAsync(IndexName index, Func<UnfollowIndexDescriptor, IUnfollowIndexRequest> selector = null, CancellationToken ct = default) => UnfollowIndexAsync(selector.InvokeOrDefault(new UnfollowIndexDescriptor(index: index)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ccr.unfollow</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current">https://www.elastic.co/guide/en/elasticsearch/reference/current</a>
 		/// </summary>
 		public UnfollowIndexResponse UnfollowIndex(IUnfollowIndexRequest request) => DoRequest<IUnfollowIndexRequest, UnfollowIndexResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ccr.unfollow</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current">http://www.elastic.co/guide/en/elasticsearch/reference/current</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current">https://www.elastic.co/guide/en/elasticsearch/reference/current</a>
 		/// </summary>
 		public Task<UnfollowIndexResponse> UnfollowIndexAsync(IUnfollowIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IUnfollowIndexRequest, UnfollowIndexResponse>(request, request.RequestParameters, ct);
 	}
