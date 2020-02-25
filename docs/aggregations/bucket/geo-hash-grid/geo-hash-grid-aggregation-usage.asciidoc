@@ -65,3 +65,63 @@ var myGeoHashGrid = response.Aggregations.GeoHash("my_geohash_grid");
 myGeoHashGrid.Should().NotBeNull();
 ----
 
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.GeoHash("my_geohash_grid", g => g
+    .Field(p => p.LocationPoint)
+    .Bounds(b => b
+        .TopLeft(90,-180)
+        .BottomRight(-90, 180)
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new GeoHashGridAggregation("my_geohash_grid")
+{
+    Field = Field<Project>(p => p.LocationPoint),
+    Bounds = new BoundingBox
+    {
+        TopLeft = new GeoLocation(90, -180),
+        BottomRight = new GeoLocation(-90, 180)
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "my_geohash_grid": {
+    "geohash_grid": {
+      "field": "locationPoint",
+      "bounds": {
+        "top_left": {
+          "lat": 90.0,
+          "lon": -180.0
+        },
+        "bottom_right": {
+          "lat": -90.0,
+          "lon": 180.0
+        }
+      }
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var myGeoHashGrid = response.Aggregations.GeoHash("my_geohash_grid");
+myGeoHashGrid.Should().NotBeNull();
+----
+
