@@ -14,13 +14,13 @@ namespace Tests.XPack.Enrich.PutPolicy
 {
 	[SkipVersion("<7.5.0", "Introduced in 7.5.0")]
 	public class PutPolicyApiTests
-		: ApiIntegrationTestBase<XPackCluster, PutEnrichPolicyResponse, IPutEnrichPolicyRequest, PutEnrichPolicyDescriptor<Project>, PutEnrichPolicyRequest>
+		: ApiTestBase<EnrichCluster, PutEnrichPolicyResponse, IPutEnrichPolicyRequest, PutEnrichPolicyDescriptor<Project>, PutEnrichPolicyRequest>
 	{
-		public PutPolicyApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutPolicyApiTests(EnrichCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => PUT;
+
+		protected override string UrlPath => $"/_enrich/policy/{CallIsolatedValue}";
 
 		protected override object ExpectJson => new
 		{
@@ -57,8 +57,6 @@ namespace Tests.XPack.Enrich.PutPolicy
 				)
 			);
 
-		protected override string UrlPath => $"/_enrich/policy/{CallIsolatedValue}";
-
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Enrich.PutPolicy(CallIsolatedValue, f),
 			(client, f) => client.Enrich.PutPolicyAsync(CallIsolatedValue, f),
@@ -66,7 +64,5 @@ namespace Tests.XPack.Enrich.PutPolicy
 			(client, r) => client.Enrich.PutPolicyAsync(r)
 		);
 
-		protected override void ExpectResponse(PutEnrichPolicyResponse response) =>
-			response.Acknowledged.Should().BeTrue();
 	}
 }
