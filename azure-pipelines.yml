@@ -1,3 +1,16 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+    - "*.x"
+
+pr:
+  autoCancel: true
+  branches:
+    exclude:
+    - "backport-*" 
+
 jobs:
 - job: StaleDocs
   pool:

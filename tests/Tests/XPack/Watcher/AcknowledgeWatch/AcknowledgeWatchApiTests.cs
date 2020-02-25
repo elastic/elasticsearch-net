@@ -10,10 +10,10 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.XPack.Watcher.AcknowledgeWatch
 {
 	public class AcknowledgeWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, AcknowledgeWatchResponse, IAcknowledgeWatchRequest, AcknowledgeWatchDescriptor,
+		: ApiIntegrationTestBase<WatcherCluster, AcknowledgeWatchResponse, IAcknowledgeWatchRequest, AcknowledgeWatchDescriptor,
 			AcknowledgeWatchRequest>
 	{
-		public AcknowledgeWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public AcknowledgeWatchApiTests(WatcherCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 

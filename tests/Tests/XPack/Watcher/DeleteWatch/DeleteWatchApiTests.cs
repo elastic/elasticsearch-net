@@ -9,9 +9,9 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.XPack.Watcher.DeleteWatch
 {
 	public class DeleteWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, DeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
+		: ApiIntegrationTestBase<WatcherCluster, DeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
 	{
-		public DeleteWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteWatchApiTests(WatcherCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 
@@ -74,9 +74,9 @@ namespace Tests.XPack.Watcher.DeleteWatch
 	}
 
 	public class DeleteNonExistentWatchApiTests
-		: ApiIntegrationTestBase<XPackCluster, DeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
+		: ApiIntegrationTestBase<WatcherCluster, DeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
 	{
-		public DeleteNonExistentWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteNonExistentWatchApiTests(WatcherCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => false;
 

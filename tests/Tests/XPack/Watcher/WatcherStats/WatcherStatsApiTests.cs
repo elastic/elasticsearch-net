@@ -10,9 +10,9 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.XPack.Watcher.WatcherStats
 {
 	public class WatcherStatsApiTests
-		: ApiIntegrationTestBase<XPackCluster, WatcherStatsResponse, IWatcherStatsRequest, WatcherStatsDescriptor, WatcherStatsRequest>
+		: ApiIntegrationTestBase<WatcherCluster, WatcherStatsResponse, IWatcherStatsRequest, WatcherStatsDescriptor, WatcherStatsRequest>
 	{
-		public WatcherStatsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public WatcherStatsApiTests(WatcherCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 

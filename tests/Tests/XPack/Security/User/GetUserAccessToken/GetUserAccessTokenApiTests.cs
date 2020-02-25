@@ -12,10 +12,10 @@ namespace Tests.XPack.Security.User.GetUserAccessToken
 {
 	[SkipVersion("<5.5.0", "")]
 	public class GetUserAccessTokenApiTests
-		: ApiIntegrationTestBase<XPackCluster, GetUserAccessTokenResponse, IGetUserAccessTokenRequest,
+		: ApiIntegrationTestBase<Security, GetUserAccessTokenResponse, IGetUserAccessTokenRequest,
 			GetUserAccessTokenDescriptor, GetUserAccessTokenRequest>
 	{
-		public GetUserAccessTokenApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetUserAccessTokenApiTests(Security cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 
@@ -66,7 +66,7 @@ namespace Tests.XPack.Security.User.GetUserAccessToken
 	[SkipVersion(">=8.0.0-SNAPSHOT", "TODO investigate")]
 	public class GetUserAccessTokenBadPasswordApiTests : GetUserAccessTokenApiTests
 	{
-		public GetUserAccessTokenBadPasswordApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetUserAccessTokenBadPasswordApiTests(Security cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 401;
