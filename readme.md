@@ -62,7 +62,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasti
 
 Please refer to the [end-of-life policy](https://www.elastic.co/support/eol) for complete information.
 
-### Further Compatibility Clarifications
+## Further Compatibility Clarifications
 
 #### Can I use a `7.0.0` client against a `5.6` server (new against old), or a `6.0` client against a `7.2` server (old against new)?
 
@@ -87,6 +87,14 @@ Any incompatibilities between minor versions are documented against the release.
 #### I have a `6.0` server, what client should I use?
 
 Always use the latest minor version of the client within that major version, so in this instance, at time of writing, this is version `6.8.0`. The reason being is that `6.8.0` will contain many bug fixes not present in the `6.0.0` version of the client.
+
+### Low Level Client Compatibility
+
+The Elasticsearch.Net low level client will expose functionality in REST APIs that are marked as either `experimental` or `beta`. This functionality is marked as such using the `<remarks/>` XML documentation comments, which contains the stability and a description of the compatibility guarantees. Examples below:
+
+> /// <remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
+
+> /// <remarks>Note: Beta within the Elasticsearch server, this functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.</remarks>
 
 #### Branch Compatibility
 
