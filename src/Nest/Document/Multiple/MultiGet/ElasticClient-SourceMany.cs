@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -11,6 +12,15 @@ namespace Nest
 	/// </summary>
 	public static class SourceManyExtensions
 	{
+
+		private static Func<MultiGetOperationDescriptor<T>, string, IMultiGetOperation> Lookup<T>(IndexName index)
+			where T : class
+		{
+			if (index == null) return null;
+
+			return (d, id) => d.Index(index);
+		}
+
 		/// <summary>
 		/// SourceMany allows you to get a list of T documents out of elasticsearch, internally it calls into MultiGet()
 		/// <para>
@@ -33,7 +43,7 @@ namespace Nest
 				.Index(index)
 				.Type(type)
 				.RequestConfiguration(r => r.ThrowExceptions())
-				.GetMany<T>(ids)
+				.GetMany<T>(ids, Lookup<T>(index))
 			);
 			return result.SourceMany<T>(ids);
 		}
@@ -81,7 +91,7 @@ namespace Nest
 					.Index(index)
 					.Type(type)
 					.RequestConfiguration(r => r.ThrowExceptions())
-					.GetMany<T>(ids), cancellationToken)
+					.GetMany<T>(ids, Lookup<T>(index)), cancellationToken)
 				.ConfigureAwait(false);
 			return response.SourceMany<T>(ids);
 		}
