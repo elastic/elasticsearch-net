@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -11,6 +12,14 @@ namespace Nest
 	/// </summary>
 	public static class GetManyExtensions
 	{
+		private static Func<MultiGetOperationDescriptor<T>, string, IMultiGetOperation> Lookup<T>(IndexName index)
+			where T : class
+		{
+			if (index == null) return null;
+
+			return (d, id) => d.Index(index);
+		}
+
 		/// <summary>
 		/// Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing).
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
@@ -29,7 +38,7 @@ namespace Nest
 			var result = client.MultiGet(s => s
 				.Index(index)
 				.RequestConfiguration(r => r.ThrowExceptions())
-				.GetMany<T>(ids)
+				.GetMany<T>(ids, Lookup<T>(index))
 			);
 			return result.GetMany<T>(ids);
 		}
@@ -68,7 +77,7 @@ namespace Nest
 			var response = await client.MultiGetAsync(s => s
 						.Index(index)
 						.RequestConfiguration(r => r.ThrowExceptions())
-						.GetMany<T>(ids),
+						.GetMany<T>(ids, Lookup<T>(index)),
 					cancellationToken
 				)
 				.ConfigureAwait(false);
