@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	/// <summary>
-	/// Provides GetMany extensions that make it easier to get many documents given a list of ids
+	/// Provides DeleteMany extensions that make it easier to get many documents given a list of ids
 	/// </summary>
 	public static class DeleteManyExtensions
 	{
