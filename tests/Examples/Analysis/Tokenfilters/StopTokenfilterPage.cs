@@ -6,7 +6,7 @@ namespace Examples.Analysis.Tokenfilters
 	public class StopTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line35()
+		public void Line38()
 		{
 			// tag::a4575521493d8d1fbdd450821035f821[]
 			var response0 = new SearchResponse<object>();
@@ -28,7 +28,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line54()
+		public void Line57()
 		{
 			// tag::ded95888c2d68c48426b013284eb896a[]
 			var response0 = new SearchResponse<object>();

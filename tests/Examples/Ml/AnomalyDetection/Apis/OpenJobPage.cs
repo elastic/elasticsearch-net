@@ -6,13 +6,13 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class OpenJobPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line56()
+		public void Line54()
 		{
-			// tag::72cb058a415b56a8964c05195114b5c0[]
+			// tag::a6204edaa0bcf7b82a89ab4f6bda0914[]
 			var response0 = new SearchResponse<object>();
-			// end::72cb058a415b56a8964c05195114b5c0[]
+			// end::a6204edaa0bcf7b82a89ab4f6bda0914[]
 
-			response0.MatchesExample(@"POST _ml/anomaly_detectors/total-requests/_open
+			response0.MatchesExample(@"POST _ml/anomaly_detectors/low_request_rate/_open
 			{
 			  ""timeout"": ""35m""
 			}");

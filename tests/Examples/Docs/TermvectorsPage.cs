@@ -72,11 +72,11 @@ namespace Examples.Docs
 		[U(Skip = "Example not implemented")]
 		public void Line212()
 		{
-			// tag::3dbccd70f0a20ff7a8a2a4ee7ec406ed[]
+			// tag::c75bd2b34c51aecf55ece4137612d4c7[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-			// end::3dbccd70f0a20ff7a8a2a4ee7ec406ed[]
+			// end::c75bd2b34c51aecf55ece4137612d4c7[]
 
 			response0.MatchesExample(@"PUT /twitter/_doc/1
 			{
@@ -84,7 +84,7 @@ namespace Examples.Docs
 			  ""text"" : ""twitter test test test ""
 			}");
 
-			response1.MatchesExample(@"PUT /twitter/_doc/2
+			response1.MatchesExample(@"PUT /twitter/_doc/2?refresh=wait_for
 			{
 			  ""fullname"" : ""Jane Doe"",
 			  ""text"" : ""Another twitter test ...""

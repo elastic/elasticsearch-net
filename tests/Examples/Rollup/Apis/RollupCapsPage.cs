@@ -6,7 +6,7 @@ namespace Examples.Rollup.Apis
 	public class RollupCapsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line55()
+		public void Line57()
 		{
 			// tag::2d20c42e9664febeccaff61581605cbe[]
 			var response0 = new SearchResponse<object>();
@@ -42,7 +42,7 @@ namespace Examples.Rollup.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line89()
+		public void Line92()
 		{
 			// tag::a00311843b5f8f3e9f7d511334a828b1[]
 			var response0 = new SearchResponse<object>();
@@ -52,7 +52,7 @@ namespace Examples.Rollup.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line157()
+		public void Line164()
 		{
 			// tag::944806221eb89f5af2298ccdf2902277[]
 			var response0 = new SearchResponse<object>();
@@ -62,7 +62,7 @@ namespace Examples.Rollup.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line165()
+		public void Line173()
 		{
 			// tag::f8cb1a04c2e487ff006b5ae0e1a7afbd[]
 			var response0 = new SearchResponse<object>();

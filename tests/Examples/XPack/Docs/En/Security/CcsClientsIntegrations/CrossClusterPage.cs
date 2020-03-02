@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.Security.CcsClientsIntegrations
 	public class CrossClusterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line49()
+		public void Line54()
 		{
 			// tag::b13d05599a1c186137f81cad94f3fcc1[]
 			var response0 = new SearchResponse<object>();
@@ -30,7 +30,7 @@ namespace Examples.XPack.Docs.En.Security.CcsClientsIntegrations
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line82()
+		public void Line85()
 		{
 			// tag::b06c2363c9071d9d5027a8562dd1b7ab[]
 			var response0 = new SearchResponse<object>();
@@ -45,7 +45,7 @@ namespace Examples.XPack.Docs.En.Security.CcsClientsIntegrations
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line97()
+		public void Line100()
 		{
 			// tag::f479f0f364da5ddd096eac93bb4dd207[]
 			var response0 = new SearchResponse<object>();
@@ -57,7 +57,7 @@ namespace Examples.XPack.Docs.En.Security.CcsClientsIntegrations
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line107()
+		public void Line110()
 		{
 			// tag::743c2583a226963fec7bd6a29e40205f[]
 			var response0 = new SearchResponse<object>();
@@ -81,7 +81,7 @@ namespace Examples.XPack.Docs.En.Security.CcsClientsIntegrations
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line128()
+		public void Line131()
 		{
 			// tag::b6f04e699bbf90f233bb0253f6844958[]
 			var response0 = new SearchResponse<object>();
@@ -98,7 +98,7 @@ namespace Examples.XPack.Docs.En.Security.CcsClientsIntegrations
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line143()
+		public void Line146()
 		{
 			// tag::efe3cb41fcafd981b8fb51fc7337d1d0[]
 			var response0 = new SearchResponse<object>();

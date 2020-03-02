@@ -8,7 +8,7 @@ namespace Examples.Mapping.Fields
 		[U(Skip = "Example not implemented")]
 		public void Line12()
 		{
-			// tag::3abdbdc99e203e87332d387cfbdeafaa[]
+			// tag::8d9a63d7c31f08bd27d92ece3de1649c[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Mapping.Fields
 			var response2 = new SearchResponse<object>();
 
 			var response3 = new SearchResponse<object>();
-			// end::3abdbdc99e203e87332d387cfbdeafaa[]
+			// end::8d9a63d7c31f08bd27d92ece3de1649c[]
 
 			response0.MatchesExample(@"# Example documents");
 
@@ -25,7 +25,7 @@ namespace Examples.Mapping.Fields
 			  ""text"": ""Document with ID 1""
 			}");
 
-			response2.MatchesExample(@"PUT my_index/_doc/2&refresh=true
+			response2.MatchesExample(@"PUT my_index/_doc/2?refresh=true
 			{
 			  ""text"": ""Document with ID 2""
 			}");
@@ -34,7 +34,7 @@ namespace Examples.Mapping.Fields
 			{
 			  ""query"": {
 			    ""terms"": {
-			      ""_id"": [ ""1"", ""2"" ] \<1>
+			      ""_id"": [ ""1"", ""2"" ] <1>
 			    }
 			  }
 			}");

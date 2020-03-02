@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 	public class ConfiguringPkiRealmPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line174()
+		public void Line158()
 		{
 			// tag::70bbe14bc4d5a5d58e81ab2b02408817[]
 			var response0 = new SearchResponse<object>();
@@ -23,7 +23,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line269()
+		public void Line251()
 		{
 			// tag::1f8a6d2cc57ed8997a52354aca371aac[]
 			var response0 = new SearchResponse<object>();

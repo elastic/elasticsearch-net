@@ -8,15 +8,11 @@ namespace Examples.Mapping.Fields
 		[U(Skip = "Example not implemented")]
 		public void Line14()
 		{
-			// tag::1e867a2d4e10e70350d458a473544022[]
+			// tag::cb639c02d28945379ba10dbfb982186f[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-
-			var response2 = new SearchResponse<object>();
-
-			var response3 = new SearchResponse<object>();
-			// end::1e867a2d4e10e70350d458a473544022[]
+			// end::cb639c02d28945379ba10dbfb982186f[]
 
 			response0.MatchesExample(@"# Example documents");
 
@@ -24,25 +20,33 @@ namespace Examples.Mapping.Fields
 			{
 			  ""text"": ""Document with type 'doc'""
 			}");
+		}
 
-			response2.MatchesExample(@"GET my_index/_search
+		[U(Skip = "Example not implemented")]
+		public void Line25()
+		{
+			// tag::0d7b0f40446e2001c63bef29f84530eb[]
+			var response0 = new SearchResponse<object>();
+			// end::0d7b0f40446e2001c63bef29f84530eb[]
+
+			response0.MatchesExample(@"GET my_index/_search
 			{
 			  ""query"": {
 			    ""term"": {
-			      ""_type"": ""_doc""  \<1>
+			      ""_type"": ""_doc""  <1>
 			    }
 			  },
 			  ""aggs"": {
 			    ""types"": {
 			      ""terms"": {
-			        ""field"": ""_type"", \<2>
+			        ""field"": ""_type"", <2>
 			        ""size"": 10
 			      }
 			    }
 			  },
 			  ""sort"": [
 			    {
-			      ""_type"": { \<3>
+			      ""_type"": { <3>
 			        ""order"": ""desc""
 			      }
 			    }
@@ -51,13 +55,11 @@ namespace Examples.Mapping.Fields
 			    ""type"": {
 			      ""script"": {
 			        ""lang"": ""painless"",
-			        ""source"": ""doc['_type']"" \<4>
+			        ""source"": ""doc['_type']"" <4>
 			      }
 			    }
 			  }
 			}");
-
-			response3.MatchesExample(@"");
 		}
 	}
 }

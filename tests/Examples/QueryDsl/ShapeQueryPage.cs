@@ -8,11 +8,11 @@ namespace Examples.QueryDsl
 		[U(Skip = "Example not implemented")]
 		public void Line28()
 		{
-			// tag::32afa78603025e0917a2bdd7e2e39ac8[]
+			// tag::9208f0823deacf3e3a2cc2b5d78f1e33[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-			// end::32afa78603025e0917a2bdd7e2e39ac8[]
+			// end::9208f0823deacf3e3a2cc2b5d78f1e33[]
 
 			response0.MatchesExample(@"PUT /example
 			{
@@ -25,10 +25,10 @@ namespace Examples.QueryDsl
 			    }
 			}");
 
-			response1.MatchesExample(@"POST /example/_doc?refresh
+			response1.MatchesExample(@"PUT /example/_doc/1?refresh=wait_for
 			{
 			    ""name"": ""Lucky Landing"",
-			    ""location"": {
+			    ""geometry"": {
 			        ""type"": ""point"",
 			        ""coordinates"": [1355.400544, 5255.530286]
 			    }
@@ -59,7 +59,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line92()
+		public void Line133()
 		{
 			// tag::86388922e307dd94c0f5f93890f13832[]
 			var response0 = new SearchResponse<object>();

@@ -6,18 +6,33 @@ namespace Examples.Analysis.Tokenfilters
 	public class AsciifoldingTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line10()
+		public void Line21()
 		{
-			// tag::0d4cb64eca426ac03110fdfd01367ee9[]
+			// tag::00d65f7b9daa1c6b18eedd8ace206bae[]
 			var response0 = new SearchResponse<object>();
-			// end::0d4cb64eca426ac03110fdfd01367ee9[]
+			// end::00d65f7b9daa1c6b18eedd8ace206bae[]
+
+			response0.MatchesExample(@"GET /_analyze
+			{
+			  ""tokenizer"" : ""standard"",
+			  ""filter"" : [""asciifolding""],
+			  ""text"" : ""açaí à la carte""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line83()
+		{
+			// tag::a976bdf566730e35c5277740c1e3a7f2[]
+			var response0 = new SearchResponse<object>();
+			// end::a976bdf566730e35c5277740c1e3a7f2[]
 
 			response0.MatchesExample(@"PUT /asciifold_example
 			{
 			    ""settings"" : {
 			        ""analysis"" : {
 			            ""analyzer"" : {
-			                ""default"" : {
+			                ""standard_asciifolding"" : {
 			                    ""tokenizer"" : ""standard"",
 			                    ""filter"" : [""asciifolding""]
 			                }
@@ -28,18 +43,18 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line31()
+		public void Line118()
 		{
-			// tag::f0609100be8e9eb4af6cbc75d0c40ebe[]
+			// tag::c5a0248213307f8e036a26e3294ad611[]
 			var response0 = new SearchResponse<object>();
-			// end::f0609100be8e9eb4af6cbc75d0c40ebe[]
+			// end::c5a0248213307f8e036a26e3294ad611[]
 
 			response0.MatchesExample(@"PUT /asciifold_example
 			{
 			    ""settings"" : {
 			        ""analysis"" : {
 			            ""analyzer"" : {
-			                ""default"" : {
+			                ""standard_asciifolding"" : {
 			                    ""tokenizer"" : ""standard"",
 			                    ""filter"" : [""my_ascii_folding""]
 			                }

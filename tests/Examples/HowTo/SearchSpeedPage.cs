@@ -118,7 +118,7 @@ namespace Examples.HowTo
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line187()
+		public void Line181()
 		{
 			// tag::102c7de25d13c87cf28839ada9f63c95[]
 			var response0 = new SearchResponse<object>();
@@ -149,7 +149,7 @@ namespace Examples.HowTo
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line213()
+		public void Line207()
 		{
 			// tag::17dd67a66c49f7eb618dd17430e48dfa[]
 			var response0 = new SearchResponse<object>();
@@ -173,7 +173,7 @@ namespace Examples.HowTo
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line246()
+		public void Line240()
 		{
 			// tag::abc7a670a47516b58b6b07d7497b140c[]
 			var response0 = new SearchResponse<object>();
@@ -219,7 +219,7 @@ namespace Examples.HowTo
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line318()
+		public void Line312()
 		{
 			// tag::971c7a36ee79f2b3aa82c64ea338de70[]
 			var response0 = new SearchResponse<object>();

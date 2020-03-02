@@ -6,7 +6,7 @@ namespace Examples.Sql.Endpoints
 	public class RestPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line21()
+		public void Line22()
 		{
 			// tag::4870ece3455f2b5c34eccaa9492f3894[]
 			var response0 = new SearchResponse<object>();
@@ -19,7 +19,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line110()
+		public void Line114()
 		{
 			// tag::b649c4dc7d187a27d2112f59e62cecea[]
 			var response0 = new SearchResponse<object>();
@@ -33,7 +33,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line135()
+		public void Line139()
 		{
 			// tag::8b8c48b5fcfaaec794875537d3be2e62[]
 			var response0 = new SearchResponse<object>();
@@ -47,7 +47,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line170()
+		public void Line174()
 		{
 			// tag::92d82b9d1bda5a8ae1117d03413f4e67[]
 			var response0 = new SearchResponse<object>();
@@ -61,7 +61,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line196()
+		public void Line200()
 		{
 			// tag::a972c38ee41dc899708825790a113cb8[]
 			var response0 = new SearchResponse<object>();
@@ -75,7 +75,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line223()
+		public void Line227()
 		{
 			// tag::d38b8ef18ca89eafb1e175ec9a393259[]
 			var response0 = new SearchResponse<object>();
@@ -89,7 +89,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line277()
+		public void Line282()
 		{
 			// tag::212042898296f208dbf957f33c07e3b2[]
 			var response0 = new SearchResponse<object>();
@@ -102,7 +102,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line314()
+		public void Line319()
 		{
 			// tag::cc5dfc9aa125e3fd03f523fc2c356f63[]
 			var response0 = new SearchResponse<object>();
@@ -115,7 +115,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line341()
+		public void Line346()
 		{
 			// tag::683da0a8624bc03c79a3db8ffab43f0b[]
 			var response0 = new SearchResponse<object>();
@@ -137,7 +137,25 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line379()
+		public void Line380()
+		{
+			// tag::acc0bf5e777f8fc833b7928fdd17ea3e[]
+			var response0 = new SearchResponse<object>();
+			// end::acc0bf5e777f8fc833b7928fdd17ea3e[]
+
+			response0.MatchesExample(@"POST /_sql?format=txt
+			{
+			    ""query"": ""SELECT * FROM library"",
+			    ""filter"": {
+			        ""terms"": {
+			            ""_routing"": [""abc""]
+			        }
+			    }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line404()
 		{
 			// tag::c11dc94839b861235b4943f046e15997[]
 			var response0 = new SearchResponse<object>();
@@ -152,7 +170,7 @@ namespace Examples.Sql.Endpoints
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line415()
+		public void Line440()
 		{
 			// tag::15089efd5a5a72234fdb91c111adb3c1[]
 			var response0 = new SearchResponse<object>();
@@ -162,6 +180,33 @@ namespace Examples.Sql.Endpoints
 			{
 			    ""cursor"": ""sDXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAAEWWWdrRlVfSS1TbDYtcW9lc1FJNmlYdw==:BAFmBmF1dGhvcgFmBG5hbWUBZgpwYWdlX2NvdW50AWYMcmVsZWFzZV9kYXRl+v///w8="",
 			    ""columnar"": true
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line473()
+		{
+			// tag::172d150e56a225155a62c7b18bf8da67[]
+			var response0 = new SearchResponse<object>();
+			// end::172d150e56a225155a62c7b18bf8da67[]
+
+			response0.MatchesExample(@"POST /_sql?format=txt
+			{
+				""query"": ""SELECT YEAR(release_date) AS year FROM library WHERE page_count > 300 AND author = 'Frank Herbert' GROUP BY year HAVING COUNT(*) > 0""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line484()
+		{
+			// tag::d9e0cba8e150681d861f5fd1545514e2[]
+			var response0 = new SearchResponse<object>();
+			// end::d9e0cba8e150681d861f5fd1545514e2[]
+
+			response0.MatchesExample(@"POST /_sql?format=txt
+			{
+				""query"": ""SELECT YEAR(release_date) AS year FROM library WHERE page_count > ? AND author = ? GROUP BY year HAVING COUNT(*) > ?"",
+				""params"": [300, ""Frank Herbert"", 0]
 			}");
 		}
 	}

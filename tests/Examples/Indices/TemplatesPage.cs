@@ -36,7 +36,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line131()
+		public void Line138()
 		{
 			// tag::1b8caf0a6741126c6d0ad83b56fce290[]
 			var response0 = new SearchResponse<object>();
@@ -62,7 +62,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line166()
+		public void Line172()
 		{
 			// tag::b5f95bc097a201b29c7200fc8d3d31c1[]
 			var response0 = new SearchResponse<object>();
@@ -96,7 +96,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line218()
+		public void Line223()
 		{
 			// tag::9166cf38427d5cde5d2ec12a2012b669[]
 			var response0 = new SearchResponse<object>();
@@ -114,7 +114,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line236()
+		public void Line241()
 		{
 			// tag::46658f00edc4865dfe472a392374cd0f[]
 			var response0 = new SearchResponse<object>();

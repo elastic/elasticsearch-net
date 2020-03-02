@@ -6,7 +6,7 @@ namespace Examples.Analysis.Tokenfilters
 	public class HunspellTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line44()
+		public void Line47()
 		{
 			// tag::0af002734dd884f9385da6c3a4ca87a1[]
 			var response0 = new SearchResponse<object>();

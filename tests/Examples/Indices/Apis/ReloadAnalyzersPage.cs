@@ -6,7 +6,7 @@ namespace Examples.Indices.Apis
 	public class ReloadAnalyzersPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line14()
+		public void Line12()
 		{
 			// tag::b0015e63323171f38995b8e4aa2b52d5[]
 			var response0 = new SearchResponse<object>();

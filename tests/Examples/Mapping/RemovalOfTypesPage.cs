@@ -8,14 +8,14 @@ namespace Examples.Mapping
 		[U(Skip = "Example not implemented")]
 		public void Line458()
 		{
-			// tag::9ee37bb017ab2f08dc870d9b2f937819[]
+			// tag::cfb7654fa2e29c83807da58f77b27599[]
 			var response0 = new SearchResponse<object>();
-			// end::9ee37bb017ab2f08dc870d9b2f937819[]
+			// end::cfb7654fa2e29c83807da58f77b27599[]
 
-			response0.MatchesExample(@"PUT index?include_type_name=false
+			response0.MatchesExample(@"PUT index
 			{
 			  ""mappings"": {
-			    ""properties"": { \<1>
+			    ""properties"": { <1>
 			      ""foo"": {
 			        ""type"": ""keyword""
 			      }
@@ -27,13 +27,13 @@ namespace Examples.Mapping
 		[U(Skip = "Example not implemented")]
 		public void Line474()
 		{
-			// tag::21aedb3425f773979be01722661b6a89[]
+			// tag::11c9b5d511fd839f4affeb018d17200d[]
 			var response0 = new SearchResponse<object>();
-			// end::21aedb3425f773979be01722661b6a89[]
+			// end::11c9b5d511fd839f4affeb018d17200d[]
 
-			response0.MatchesExample(@"PUT index/_mappings?include_type_name=false
+			response0.MatchesExample(@"PUT index/_mappings
 			{
-			  ""properties"": { \<1>
+			  ""properties"": { <1>
 			    ""bar"": {
 			      ""type"": ""text""
 			    }
@@ -44,11 +44,11 @@ namespace Examples.Mapping
 		[U(Skip = "Example not implemented")]
 		public void Line489()
 		{
-			// tag::c81959a312a5715c52cacfe01cb0576e[]
+			// tag::0afeb69cc1474ac6d35223e615dc8c91[]
 			var response0 = new SearchResponse<object>();
-			// end::c81959a312a5715c52cacfe01cb0576e[]
+			// end::0afeb69cc1474ac6d35223e615dc8c91[]
 
-			response0.MatchesExample(@"GET index/_mappings?include_type_name=false");
+			response0.MatchesExample(@"GET index/_mappings");
 		}
 
 		[U(Skip = "Example not implemented")]
@@ -110,15 +110,13 @@ namespace Examples.Mapping
 		[U(Skip = "Example not implemented")]
 		public void Line612()
 		{
-			// tag::c6f5467904b8182d9203d98414a1bb76[]
+			// tag::a1114fcb15a01180db9918231e495bbc[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
 
 			var response2 = new SearchResponse<object>();
-
-			var response3 = new SearchResponse<object>();
-			// end::c6f5467904b8182d9203d98414a1bb76[]
+			// end::a1114fcb15a01180db9918231e495bbc[]
 
 			response0.MatchesExample(@"PUT _template/template1
 			{
@@ -132,34 +130,18 @@ namespace Examples.Mapping
 			  }
 			}");
 
-			response1.MatchesExample(@"PUT _template/template2?include_type_name=true
+			response1.MatchesExample(@"PUT index-1-01
 			{
-			  ""index_patterns"":[ ""index-2-*"" ],
 			  ""mappings"": {
-			    ""type"": {
-			      ""properties"": {
-			        ""foo"": {
-			          ""type"": ""keyword""
-			        }
+			    ""properties"": {
+			      ""bar"": {
+			        ""type"": ""long""
 			      }
 			    }
 			  }
 			}");
 
-			response2.MatchesExample(@"PUT index-1-01?include_type_name=true
-			{
-			  ""mappings"": {
-			    ""type"": {
-			      ""properties"": {
-			        ""bar"": {
-			          ""type"": ""long""
-			        }
-			      }
-			    }
-			  }
-			}");
-
-			response3.MatchesExample(@"PUT index-2-01
+			response2.MatchesExample(@"PUT index-2-01
 			{
 			  ""mappings"": {
 			    ""properties"": {

@@ -6,7 +6,7 @@ namespace Examples.Ingest.Apis.Enrich
 	public class GetEnrichPolicyPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line37()
+		public void Line44()
 		{
 			// tag::af18f5c5fb2364ae23c6a14431820aba[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Ingest.Apis.Enrich
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line116()
+		public void Line123()
 		{
 			// tag::8684589e31d96ab229e8c4feb4d704bb[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +26,7 @@ namespace Examples.Ingest.Apis.Enrich
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line168()
+		public void Line175()
 		{
 			// tag::c97fd95ebdcf56cc973582e37f732ed2[]
 			var response0 = new SearchResponse<object>();

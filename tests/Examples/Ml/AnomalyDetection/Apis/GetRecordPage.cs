@@ -6,13 +6,13 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class GetRecordPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line76()
+		public void Line202()
 		{
-			// tag::16337a7169486ffea5bfe185b6426b9c[]
+			// tag::20e3b181114e00c943a27a9bbcf85f15[]
 			var response0 = new SearchResponse<object>();
-			// end::16337a7169486ffea5bfe185b6426b9c[]
+			// end::20e3b181114e00c943a27a9bbcf85f15[]
 
-			response0.MatchesExample(@"GET _ml/anomaly_detectors/it-ops-kpi/results/records
+			response0.MatchesExample(@"GET _ml/anomaly_detectors/low_request_rate/results/records
 			{
 			  ""sort"": ""record_score"",
 			  ""desc"": true,

@@ -63,7 +63,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line118()
+		public void Line128()
 		{
 			// tag::75097f73665235b20df09739c820ad35[]
 			var response0 = new SearchResponse<object>();
@@ -106,7 +106,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line161()
+		public void Line171()
 		{
 			// tag::3feab5c602192b8dc58435654b17d3fe[]
 			var response0 = new SearchResponse<object>();
@@ -142,7 +142,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line203()
+		public void Line213()
 		{
 			// tag::ec195297eb804cba1cb19c9926773059[]
 			var response0 = new SearchResponse<object>();
@@ -159,13 +159,13 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line245()
+		public void Line255()
 		{
-			// tag::39bbb602c95c606725eefea252437514[]
+			// tag::8d39a0f0116702e981545d13371cd0eb[]
 			var response0 = new SearchResponse<object>();
-			// end::39bbb602c95c606725eefea252437514[]
+			// end::8d39a0f0116702e981545d13371cd0eb[]
 
-			response0.MatchesExample(@"PUT _ilm/policy/sample_policy
+			response0.MatchesExample(@"PUT _ilm/policy/mylogs_condensed_policy
 			{
 			  ""policy"": {
 			    ""phases"": {
@@ -183,7 +183,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line268()
+		public void Line278()
 		{
 			// tag::bce0d86353e212cee466ccbc90bdc6e7[]
 			var response0 = new SearchResponse<object>();
@@ -218,7 +218,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line307()
+		public void Line317()
 		{
 			// tag::89115f8d40d9a13b0b01dc7c33ffd1cc[]
 			var response0 = new SearchResponse<object>();
@@ -235,7 +235,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line336()
+		public void Line356()
 		{
 			// tag::5df1ed33b5fcf3b9d85c20d100780d43[]
 			var response0 = new SearchResponse<object>();
@@ -250,7 +250,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line363()
+		public void Line387()
 		{
 			// tag::41f211cc838f1bee7eac264784f905e2[]
 			var response0 = new SearchResponse<object>();
@@ -270,7 +270,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line393()
+		public void Line417()
 		{
 			// tag::227e19aecb349f31e74898384322ae01[]
 			var response0 = new SearchResponse<object>();

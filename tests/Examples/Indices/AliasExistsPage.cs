@@ -16,7 +16,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line64()
+		public void Line62()
 		{
 			// tag::666785827827be4b5252ec859c354d30[]
 			var response0 = new SearchResponse<object>();

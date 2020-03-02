@@ -39,7 +39,7 @@ namespace Examples.Ccr
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line164()
+		public void Line165()
 		{
 			// tag::74ed3197e0e77750f5255c6df0cc0fe5[]
 			var response0 = new SearchResponse<object>();
@@ -82,7 +82,7 @@ namespace Examples.Ccr
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line213()
+		public void Line214()
 		{
 			// tag::278da0495c9008e6d9f25a5d5f0339b7[]
 			var response0 = new SearchResponse<object>();
@@ -96,7 +96,7 @@ namespace Examples.Ccr
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line275()
+		public void Line276()
 		{
 			// tag::6b104a66ab47fc1e1f24a5738f82feb4[]
 			var response0 = new SearchResponse<object>();

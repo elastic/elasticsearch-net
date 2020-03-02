@@ -7,7 +7,7 @@ namespace Examples.Mapping.Dynamic
 	public class TemplatesPage : ExampleBase
 	{
 		[U]
-		public void Line71()
+		public void Line84()
 		{
 			// tag::bb33e638fdeded7d721d9bbac2305fda[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c
@@ -82,7 +82,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		public void Line125()
+		public void Line138()
 		{
 			// tag::4f54b88e05c7a62901062e9e0ed13e5a[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c
@@ -134,7 +134,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		public void Line179()
+		public void Line192()
 		{
 			// tag::0b91c082258ce623cc716b679aace653[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c
@@ -204,7 +204,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		public void Line214()
+		public void Line227()
 		{
 			// tag::be51ed37c8425d281a8153abe56b04cb[]
 			var indexResponse = client.Index<object>(new
@@ -236,7 +236,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line239()
+		public void Line252()
 		{
 			// tag::6873971eb4e4577d76d0a5bd7cd15ef9[]
 			var response0 = new SearchResponse<object>();
@@ -279,7 +279,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line291()
+		public void Line304()
 		{
 			// tag::87f85bb49d18f73d0eed0b704e05eb90[]
 			var response0 = new SearchResponse<object>();
@@ -303,7 +303,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line319()
+		public void Line332()
 		{
 			// tag::1a59fa2708ccb3a24c71e8306b81f17f[]
 			var response0 = new SearchResponse<object>();
@@ -327,7 +327,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line344()
+		public void Line357()
 		{
 			// tag::3e60c0b29bd3931927e6f2ee7d2ed0ef[]
 			var response0 = new SearchResponse<object>();
@@ -358,7 +358,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line382()
+		public void Line395()
 		{
 			// tag::9a91f7d0bf52d6c582c62daef5c9d040[]
 			var response0 = new SearchResponse<object>();

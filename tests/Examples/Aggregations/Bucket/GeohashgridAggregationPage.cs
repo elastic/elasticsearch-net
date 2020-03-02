@@ -117,5 +117,29 @@ namespace Examples.Aggregations.Bucket
 			    }
 			}");
 		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line206()
+		{
+			// tag::850c30e63e2237776a7ed299f0262316[]
+			var response0 = new SearchResponse<object>();
+			// end::850c30e63e2237776a7ed299f0262316[]
+
+			response0.MatchesExample(@"POST /museums/_search?size=0
+			{
+			    ""aggregations"" : {
+			        ""tiles-in-bounds"" : {
+			            ""geohash_grid"" : {
+			                ""field"" : ""location"",
+			                ""precision"" : 8,
+			                ""bounds"": {
+			                  ""top_left"" : ""53.4375, 4.21875"",
+			                  ""bottom_right"" : ""52.03125, 5.625""
+			                }
+			            }
+			        }
+			    }
+			}");
+		}
 	}
 }

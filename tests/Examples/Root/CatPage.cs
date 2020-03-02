@@ -6,7 +6,7 @@ namespace Examples.Root
 	public class CatPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line28()
+		public void Line36()
 		{
 			// tag::45bde49f35ffae3f3dabc77a592241b4[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line49()
+		public void Line57()
 		{
 			// tag::179dabbc531ede7a1813d1a11ce5b5fd[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +26,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line77()
+		public void Line85()
 		{
 			// tag::d940059e16675a40e3d278073331eeed[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +36,17 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line192()
+		public void Line121()
+		{
+			// tag::53b027c2d3ac80e93d398762c55894eb[]
+			var response0 = new SearchResponse<object>();
+			// end::53b027c2d3ac80e93d398762c55894eb[]
+
+			response0.MatchesExample(@"GET /_cat/indices?bytes=b&s=store.size:desc&v");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line211()
 		{
 			// tag::794fa23d07c42900b5e97fb9bf323941[]
 			var response0 = new SearchResponse<object>();

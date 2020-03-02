@@ -6,11 +6,48 @@ namespace Examples.Analysis.Tokenfilters
 	public class CjkBigramTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line18()
+		public void Line22()
 		{
-			// tag::4a40ccf6b1a0090da8d8033b435b5b7d[]
+			// tag::b8c03bbd917d0cf5474a3e46ebdd7aad[]
 			var response0 = new SearchResponse<object>();
-			// end::4a40ccf6b1a0090da8d8033b435b5b7d[]
+			// end::b8c03bbd917d0cf5474a3e46ebdd7aad[]
+
+			response0.MatchesExample(@"GET /_analyze
+			{
+			  ""tokenizer"" : ""standard"",
+			  ""filter"" : [""cjk_bigram""],
+			  ""text"" : ""東京都は、日本の首都であり""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line126()
+		{
+			// tag::7230edf3a8cdb5e4091fad668b4049dc[]
+			var response0 = new SearchResponse<object>();
+			// end::7230edf3a8cdb5e4091fad668b4049dc[]
+
+			response0.MatchesExample(@"PUT /cjk_bigram_example
+			{
+			    ""settings"" : {
+			        ""analysis"" : {
+			            ""analyzer"" : {
+			                ""standard_cjk_bigram"" : {
+			                    ""tokenizer"" : ""standard"",
+			                    ""filter"" : [""cjk_bigram""]
+			                }
+			            }
+			        }
+			    }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line176()
+		{
+			// tag::6b328ac5a63ac7f26b011a6905083934[]
+			var response0 = new SearchResponse<object>();
+			// end::6b328ac5a63ac7f26b011a6905083934[]
 
 			response0.MatchesExample(@"PUT /cjk_bigram_example
 			{
@@ -26,9 +63,9 @@ namespace Examples.Analysis.Tokenfilters
 			                ""han_bigrams_filter"" : {
 			                    ""type"" : ""cjk_bigram"",
 			                    ""ignored_scripts"": [
+			                        ""hangul"",
 			                        ""hiragana"",
-			                        ""katakana"",
-			                        ""hangul""
+			                        ""katakana""
 			                    ],
 			                    ""output_unigrams"" : true
 			                }

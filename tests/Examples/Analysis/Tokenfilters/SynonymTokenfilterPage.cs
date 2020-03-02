@@ -6,7 +6,7 @@ namespace Examples.Analysis.Tokenfilters
 	public class SynonymTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line9()
+		public void Line12()
 		{
 			// tag::09f74df1d07d84ee133ce90f7832e712[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +36,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line48()
+		public void Line51()
 		{
 			// tag::bcc57126b24c408b5d944928b6f08c94[]
 			var response0 = new SearchResponse<object>();
@@ -71,7 +71,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line109()
+		public void Line112()
 		{
 			// tag::9fb5e28535f396ab2eb8bc710eebc1e6[]
 			var response0 = new SearchResponse<object>();
@@ -98,7 +98,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line140()
+		public void Line143()
 		{
 			// tag::0c0f37e409459dcd40d29ea684db4706[]
 			var response0 = new SearchResponse<object>();

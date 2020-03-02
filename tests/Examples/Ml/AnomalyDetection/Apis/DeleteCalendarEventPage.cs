@@ -6,7 +6,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class DeleteCalendarEventPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line47()
+		public void Line45()
 		{
 			// tag::f6982ff80b9a64cd5fcac5b20908c906[]
 			var response0 = new SearchResponse<object>();

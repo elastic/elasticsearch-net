@@ -6,7 +6,7 @@ namespace Examples.Transform.Apis
 	public class DeleteTransformPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line48()
+		public void Line47()
 		{
 			// tag::70c736ecb3746dbe839af0e468712805[]
 			var response0 = new SearchResponse<object>();
