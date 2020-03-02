@@ -74,7 +74,7 @@ namespace ExamplesGenerator
 	[Verb("csharp", HelpText = "Generate C# Examples classes from the asciidoc master reference")]
 	public class CSharpOptions
 	{
-		[Option('p', "path", Required = true, HelpText = "Path to the master reference file")]
+		[Option('p', "path", Required = true, HelpText = "Path to the master reference file, for example: https://raw.githubusercontent.com/elastic/built-docs/master/raw/en/elasticsearch/reference/master/alternatives_report.json")]
 		public string Path { get; set; }
 	}
 }
