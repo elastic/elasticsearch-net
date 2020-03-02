@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -46,6 +47,7 @@ namespace Nest
 		/// affect index files that are already compressed by default. Defaults to <c>false</c>.
 		/// </summary>
 		[DataMember(Name ="compress")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? Compress { get; set; }
 
 		/// <summary>
