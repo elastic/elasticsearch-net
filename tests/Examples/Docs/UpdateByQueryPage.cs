@@ -288,14 +288,21 @@ namespace Examples.Docs
 			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line586()
 		{
 			// tag::ea02de2dbe05091fcb0dac72c8ba5f83[]
-			var response0 = new SearchResponse<object>();
+			var updateByQueryResponse = client.UpdateByQuery<Tweet>(u => u
+				.Index("twitter")
+				.Slices(5)
+				.Script(s => s
+					.Source("ctx._source['extra'] = 'test'")
+				)
+				.Refresh()
+			);
 			// end::ea02de2dbe05091fcb0dac72c8ba5f83[]
 
-			response0.MatchesExample(@"POST twitter/_update_by_query?refresh&slices=5
+			updateByQueryResponse.MatchesExample(@"POST twitter/_update_by_query?refresh&slices=5
 			{
 			  ""script"": {
 			    ""source"": ""ctx._source['extra'] = 'test'""
@@ -303,30 +310,64 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line599()
 		{
 			// tag::025b54db0edc50c24ea48a2bd94366ad[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Tweet>(s => s
+				.Index("twitter")
+				.Size(0)
+				.QueryOnQueryString("extra:test")
+				.FilterPath(new[] { "hits.total" })
+			);
 			// end::025b54db0edc50c24ea48a2bd94366ad[]
 
-			response0.MatchesExample(@"POST twitter/_search?size=0&q=extra:test&filter_path=hits.total");
+			searchResponse.MatchesExample(@"POST twitter/_search?size=0&q=extra:test&filter_path=hits.total", e =>
+			{
+				e.MoveQueryStringToBody("size", 0);
+				return e;
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line655()
 		{
 			// tag::2fe28d9a91b3081a9ec4601af8fb7b1c[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("test", c => c
+				.Map(m => m
+					.Dynamic(false)
+					.Properties(p => p.Text(t => t.Name("text")))
+				)
+			);
 
-			var response1 = new SearchResponse<object>();
+			var indexResponse1 = client.Index(new
+				{
+					Text = "words words",
+					Flag = "bar"
+				},
+				i => i
+					.Index("test")
+			);
 
-			var response2 = new SearchResponse<object>();
+			var indexResponse2 = client.Index(new
+				{
+					Text = "words words",
+					Flag = "foo"
+				},
+				i => i
+					.Index("test")
+			);
 
-			var response3 = new SearchResponse<object>();
+			var putMappingResponse = client.Map<object>(c =>
+				c.Index("test")
+					.Properties(p =>
+						p.Text(t => t.Name("text"))
+						 .Text(t => t.Name("flag").Analyzer("keyword"))
+					)
+			);
 			// end::2fe28d9a91b3081a9ec4601af8fb7b1c[]
 
-			response0.MatchesExample(@"PUT test
+			createIndexResponse.MatchesExample(@"PUT test
 			{
 			  ""mappings"": {
 			    ""dynamic"": false,   \<1>
@@ -336,19 +377,19 @@ namespace Examples.Docs
 			  }
 			}");
 
-			response1.MatchesExample(@"POST test/_doc?refresh
+			indexResponse1.MatchesExample(@"POST test/_doc?refresh
 			{
 			  ""text"": ""words words"",
 			  ""flag"": ""bar""
 			}");
 
-			response2.MatchesExample(@"POST test/_doc?refresh
+			indexResponse2.MatchesExample(@"POST test/_doc?refresh
 			{
 			  ""text"": ""words words"",
 			  ""flag"": ""foo""
 			}");
 
-			response3.MatchesExample(@"PUT test/_mapping   \<2>
+			putMappingResponse.MatchesExample(@"PUT test/_mapping   \<2>
 			{
 			  ""properties"": {
 			    ""text"": {""type"": ""text""},
@@ -357,42 +398,78 @@ namespace Examples.Docs
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line693()
 		{
 			// tag::abd4fc3ce7784413a56fe2dcfe2809b5[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("test")
+				.Query(q => q
+					.Match(m => m
+						.Field("flag")
+						.Query("foo")
+					)
+				)
+				.FilterPath(new[] { "hits.total" })
+			);
 			// end::abd4fc3ce7784413a56fe2dcfe2809b5[]
 
-			response0.MatchesExample(@"POST test/_search?filter_path=hits.total
+			searchResponse.MatchesExample(@"POST test/_search?filter_path=hits.total
 			{
 			  ""query"": {
 			    ""match"": {
 			      ""flag"": ""foo""
 			    }
 			  }
-			}");
+			}", e =>
+			{
+				e.ApplyBodyChanges(b =>
+				{
+					b["query"]["match"]["flag"].ToLongFormQuery();
+				});
+				return e;
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line720()
 		{
 			// tag::97babc8d19ef0866774576716eb6d19e[]
-			var response0 = new SearchResponse<object>();
+			var updateByQueryResponse = client.UpdateByQuery<Tweet>(u => u
+				.Index("test")
+				.Conflicts(Conflicts.Proceed)
+				.Refresh()
+			);
 
-			var response1 = new SearchResponse<object>();
+			var searchResponse = client.Search<Tweet>(s => s
+				.Index("test")
+				.Query(q => q
+					.Match(m => m
+						.Field("flag")
+						.Query("foo")
+					)
+				)
+				.FilterPath(new[] { "hits.total" })
+			);
 			// end::97babc8d19ef0866774576716eb6d19e[]
 
-			response0.MatchesExample(@"POST test/_update_by_query?refresh&conflicts=proceed");
+			updateByQueryResponse.MatchesExample(@"POST test/_update_by_query?refresh&conflicts=proceed");
 
-			response1.MatchesExample(@"POST test/_search?filter_path=hits.total
+			searchResponse.MatchesExample(@"POST test/_search?filter_path=hits.total
 			{
 			  ""query"": {
 			    ""match"": {
 			      ""flag"": ""foo""
 			    }
 			  }
-			}");
+			}", e =>
+			{
+				e.ApplyBodyChanges(b =>
+				{
+					b["query"]["match"]["flag"].ToLongFormQuery();
+				});
+				return e;
+			});
 		}
 	}
 }
