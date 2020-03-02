@@ -21,7 +21,7 @@ namespace Examples.Setup
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line30()
+		public void Line30_1() // Manually changed due to: https://github.com/elastic/docs/issues/1760
 		{
 			// tag::f27c28ddbf4c266b5f42d14da837b8de[]
 			var response0 = new SearchResponse<object>();

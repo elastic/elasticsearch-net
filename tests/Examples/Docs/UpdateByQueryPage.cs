@@ -341,19 +341,19 @@ namespace Examples.Docs
 			);
 
 			var indexResponse1 = client.Index(new
-				{
-					Text = "words words",
-					Flag = "bar"
-				},
+			{
+				Text = "words words",
+				Flag = "bar"
+			},
 				i => i
 					.Index("test")
 			);
 
 			var indexResponse2 = client.Index(new
-				{
-					Text = "words words",
-					Flag = "foo"
-				},
+			{
+				Text = "words words",
+				Flag = "foo"
+			},
 				i => i
 					.Index("test")
 			);
