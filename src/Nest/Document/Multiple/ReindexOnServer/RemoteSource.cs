@@ -13,6 +13,12 @@ namespace Nest
 
 		[DataMember(Name ="username")]
 		string Username { get; set; }
+
+		[DataMember(Name ="socket_timeout")]
+		Time SocketTimeout { get; set; }
+
+		[DataMember(Name ="connect_timeout")]
+		Time ConnectTimeout { get; set; }
 	}
 
 	public class RemoteSource : IRemoteSource
@@ -22,6 +28,10 @@ namespace Nest
 		public string Password { get; set; }
 
 		public string Username { get; set; }
+
+		public Time SocketTimeout { get; set; }
+
+		public Time ConnectTimeout { get; set; }
 	}
 
 	public class RemoteSourceDescriptor : DescriptorBase<RemoteSourceDescriptor, IRemoteSource>, IRemoteSource
@@ -30,10 +40,18 @@ namespace Nest
 		string IRemoteSource.Password { get; set; }
 		string IRemoteSource.Username { get; set; }
 
+		Time IRemoteSource.SocketTimeout { get; set; }
+
+		Time IRemoteSource.ConnectTimeout { get; set; }
+
 		public RemoteSourceDescriptor Host(Uri host) => Assign(host, (a, v) => a.Host = v);
 
 		public RemoteSourceDescriptor Username(string username) => Assign(username, (a, v) => a.Username = v);
 
 		public RemoteSourceDescriptor Password(string password) => Assign(password, (a, v) => a.Password = v);
+
+		public RemoteSourceDescriptor SocketTimeout(Time socketTimeout) => Assign(socketTimeout, (a, v) => a.SocketTimeout = v);
+
+		public RemoteSourceDescriptor ConnectTimeout(Time connectTimeout) => Assign(connectTimeout, (a, v) => a.ConnectTimeout = v);
 	}
 }
