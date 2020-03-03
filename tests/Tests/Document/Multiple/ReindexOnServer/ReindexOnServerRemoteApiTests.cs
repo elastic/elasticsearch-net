@@ -29,7 +29,9 @@ namespace Tests.Document.Multiple.ReindexOnServer
 					{
 						host = "http://myremoteserver.example:9200",
 						username = "user",
-						password = "changeme"
+						password = "changeme",
+						socket_timeout = "1m",
+						connect_timeout = "10s"
 					},
 					index = CallIsolatedValue,
 					size = 100
@@ -38,7 +40,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 
 		protected override Func<ReindexOnServerDescriptor, IReindexOnServerRequest> Fluent => d => d
 			.Source(s => s
-				.Remote(r => r.Host(_host).Username("user").Password("changeme"))
+				.Remote(r => r.Host(_host).Username("user").Password("changeme").SocketTimeout("1m").ConnectTimeout("10s"))
 				.Index(CallIsolatedValue)
 				.Size(100)
 			)
@@ -56,7 +58,9 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				{
 					Host = _host,
 					Username = "user",
-					Password = "changeme"
+					Password = "changeme",
+					SocketTimeout = "1m",
+					ConnectTimeout = "10s"
 				},
 				Index = CallIsolatedValue,
 				Size = 100
