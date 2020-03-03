@@ -85,14 +85,14 @@ namespace Examples.Upgrade
 			response0.MatchesExample(@"GET _cat/recovery");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line175()
 		{
 			// tag::f8cc4b331a19ff4df8e4a490f906ee69[]
-			var response0 = new SearchResponse<object>();
+			var catResponse = client.Cat.Health(h => h.Verbose());
 			// end::f8cc4b331a19ff4df8e4a490f906ee69[]
 
-			response0.MatchesExample(@"GET /_cat/health?v");
+			catResponse.MatchesExample(@"GET /_cat/health?v");
 		}
 
 		[U(Skip = "Example not implemented")]
