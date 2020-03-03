@@ -1,6 +1,4 @@
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
-using Nest;
 using Newtonsoft.Json.Linq;
 
 namespace Examples.Docs

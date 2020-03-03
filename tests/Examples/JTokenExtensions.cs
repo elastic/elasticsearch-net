@@ -45,6 +45,21 @@ namespace Examples
 			o.Replace(a);
 			return a;
 		}
+
+		/// <summary>
+		/// Flattens an array into a comma-seperated representation of that array.
+		/// <code>"index": ["twitter", "blog"]</code>
+		/// Will be converted to
+		/// <code>"index": "twitter, blog"</code>
+		/// </summary>
+		public static JToken Flatten<T>(this JToken o)
+		{
+			var array = (JArray)o;
+			var values = array.Values<T>();
+			var flat = string.Join(",", values);
+			return JToken.FromObject(flat);
+		}
+
 		/// <summary>
 		/// Docs document bool query without the clauses as arrays, NEST only every sends them as arrays
 		/// This fixes the examples
