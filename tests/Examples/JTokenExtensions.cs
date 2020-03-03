@@ -46,6 +46,15 @@ namespace Examples
 			return a;
 		}
 
+		public static void AdjustIndexSettings(this Example e) =>
+			e.ApplyBodyChanges(o =>
+			{
+				var settings = ((JObject)o["settings"]);
+				var existing = settings["number_of_shards"].Value<int>();
+				settings.Remove("number_of_shards");
+				settings.Add("index.number_of_shards", existing);
+			});
+
 		/// <summary>
 		/// Flattens an array into a comma-seperated representation of that array.
 		/// <code>"index": ["twitter", "blog"]</code>

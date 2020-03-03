@@ -1,18 +1,32 @@
 using Elastic.Xunit.XunitPlumbing;
+using Examples.Models;
 using Nest;
+using Newtonsoft.Json.Linq;
 
 namespace Examples.Indices
 {
 	public class TemplatesPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line10()
 		{
 			// tag::e5f50b31f165462d883ecbff45f74985[]
-			var response0 = new SearchResponse<object>();
+			var putIndexTemplateResponse = client.Indices.PutTemplate("template_1", t => t
+				.IndexPatterns("te*", "bar*")
+				.Settings(s => s
+					.NumberOfShards(1)
+				)
+				.Map(m => m
+					.SourceField(s => s.Enabled(false))
+					.Properties(p => p
+						.Keyword(k => k.Name("host_name"))
+						.Date(d => d.Name("created_at").Format("EEE MMM dd HH:mm:ss Z yyyy"))
+					)
+				)
+			);
 			// end::e5f50b31f165462d883ecbff45f74985[]
 
-			response0.MatchesExample(@"PUT _template/template_1
+			putIndexTemplateResponse.MatchesExample(@"PUT _template/template_1
 			{
 			  ""index_patterns"": [""te*"", ""bar*""],
 			  ""settings"": {
@@ -32,17 +46,36 @@ namespace Examples.Indices
 			      }
 			    }
 			  }
-			}");
+			}", e =>
+			{
+				e.AdjustIndexSettings();
+				return e;
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line138()
 		{
 			// tag::1b8caf0a6741126c6d0ad83b56fce290[]
-			var response0 = new SearchResponse<object>();
+			var putIndexTemplateResponse = client.Indices.PutTemplate("template_1", t => t
+				.IndexPatterns("te*")
+				.Settings(s => s
+					.NumberOfShards(1)
+				)
+				.Aliases(a => a
+					.Alias("alias1")
+					.Alias("alias2", aa => aa
+						.Filter<Tweet>(f => f
+							.Term(t => t.User, "kimchy")
+						)
+						.Routing("kimchy")
+					)
+					.Alias("{index}-alias")
+				)
+			);
 			// end::1b8caf0a6741126c6d0ad83b56fce290[]
 
-			response0.MatchesExample(@"PUT _template/template_1
+			putIndexTemplateResponse.MatchesExample(@"PUT _template/template_1
 			{
 			    ""index_patterns"" : [""te*""],
 			    ""settings"" : {
@@ -58,19 +91,42 @@ namespace Examples.Indices
 			        },
 			        ""{index}-alias"" : {} \<1>
 			    }
-			}");
+			}", e =>
+			{
+				e.AdjustIndexSettings();
+				e.ApplyBodyChanges(o => o["aliases"]["alias2"]["filter"]["term"]["user"].ToLongFormTermQuery());
+				return e;
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line172()
 		{
 			// tag::b5f95bc097a201b29c7200fc8d3d31c1[]
-			var response0 = new SearchResponse<object>();
+			var putIndexTemplateResponse1 = client.Indices.PutTemplate("template_1", t => t
+				.IndexPatterns("*")
+				.Order(0)
+				.Settings(s => s
+					.NumberOfShards(1)
+				)
+				.Map(m => m
+					.SourceField(s => s.Enabled(false))
+				)
+			);
 
-			var response1 = new SearchResponse<object>();
+			var putIndexTemplateResponse2 = client.Indices.PutTemplate("template_2", t => t
+				.IndexPatterns("te*")
+				.Order(1)
+				.Settings(s => s
+					.NumberOfShards(1)
+				)
+				.Map(m => m
+					.SourceField(s => s.Enabled(true))
+				)
+			);
 			// end::b5f95bc097a201b29c7200fc8d3d31c1[]
 
-			response0.MatchesExample(@"PUT /_template/template_1
+			putIndexTemplateResponse1.MatchesExample(@"PUT /_template/template_1
 			{
 			    ""index_patterns"" : [""*""],
 			    ""order"" : 0,
@@ -80,9 +136,13 @@ namespace Examples.Indices
 			    ""mappings"" : {
 			        ""_source"" : { ""enabled"" : false }
 			    }
-			}");
+			}", e =>
+			{
+				e.AdjustIndexSettings();
+				return e;
+			});
 
-			response1.MatchesExample(@"PUT /_template/template_2
+			putIndexTemplateResponse2.MatchesExample(@"PUT /_template/template_2
 			{
 			    ""index_patterns"" : [""te*""],
 			    ""order"" : 1,
@@ -92,17 +152,28 @@ namespace Examples.Indices
 			    ""mappings"" : {
 			        ""_source"" : { ""enabled"" : true }
 			    }
-			}");
+			}", e =>
+			{
+				e.AdjustIndexSettings();
+				return e;
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line223()
 		{
 			// tag::9166cf38427d5cde5d2ec12a2012b669[]
-			var response0 = new SearchResponse<object>();
+			var putIndexTemplateResponse1 = client.Indices.PutTemplate("template_1", t => t
+				.IndexPatterns("*")
+				.Order(0)
+				.Settings(s => s
+					.NumberOfShards(1)
+				)
+				.Version(123)
+			);
 			// end::9166cf38427d5cde5d2ec12a2012b669[]
 
-			response0.MatchesExample(@"PUT /_template/template_1
+			putIndexTemplateResponse1.MatchesExample(@"PUT /_template/template_1
 			{
 			    ""index_patterns"" : [""*""],
 			    ""order"" : 0,
@@ -110,17 +181,21 @@ namespace Examples.Indices
 			        ""number_of_shards"" : 1
 			    },
 			    ""version"": 123
-			}");
+			}", e =>
+			{
+				e.AdjustIndexSettings();
+				return e;
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line241()
 		{
 			// tag::46658f00edc4865dfe472a392374cd0f[]
-			var response0 = new SearchResponse<object>();
+			var getIndexTemplateResponse = client.Indices.GetTemplate("template_1", t => t.FilterPath(new[] { "*.version" }));
 			// end::46658f00edc4865dfe472a392374cd0f[]
 
-			response0.MatchesExample(@"GET /_template/template_1?filter_path=*.version");
+			getIndexTemplateResponse.MatchesExample(@"GET /_template/template_1?filter_path=*.version");
 		}
 	}
 }
