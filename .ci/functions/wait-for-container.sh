@@ -4,10 +4,12 @@
 #
 # Please source .ci/functions/imports.sh as a whole not just this file
 #
-# Version 1.0.0
+# Version 1.0.1
 # - Initial version after refactor
+# - Make sure wait_for_contiainer is silent
 
 function wait_for_container {
+  set +x
   until ! container_running "$1" || (container_running "$1" && [[ "$(docker inspect -f "{{.State.Health.Status}}" ${1})" != "starting" ]]); do
     echo ""
     docker inspect -f "{{range .State.Health.Log}}{{.Output}}{{end}}" ${1}
