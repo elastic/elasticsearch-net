@@ -584,7 +584,7 @@ namespace Examples.Docs
 			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		public void Line986()
 		{
 			// tag::7f697eb436dfa3c30dfe610d8c32d132[]
@@ -593,9 +593,8 @@ namespace Examples.Docs
 						.Index("source")
 						.Remote(r => r
 							.Host(new Uri("http://otherhost:9200"))
-							//.SocketTimeout("1m")
-							//.ConnectTimeout("10s")
-							.Password("pass"))
+							.SocketTimeout("1m")
+							.ConnectTimeout("10s"))
 						.Query<object>(q => q.Match(m => m.Field("test").Query("data"))))
 					.Destination(d => d.Index("dest"))
 			);
