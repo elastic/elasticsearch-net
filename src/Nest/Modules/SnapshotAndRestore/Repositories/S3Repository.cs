@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -77,6 +78,7 @@ namespace Nest
 		/// Defaults to false.
 		/// </summary>
 		[DataMember(Name ="compress")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? Compress { get; set; }
 
 		/// <summary>
@@ -84,6 +86,7 @@ namespace Nest
 		/// Defaults to false.
 		/// </summary>
 		[DataMember(Name ="server_side_encryption")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? ServerSideEncryption { get; set; }
 
 		/// <summary>
@@ -99,6 +102,7 @@ namespace Nest
 		// be automatically determined by the AWS Java SDK used internally by Elasticsearch
 		/// </summary>
 		[DataMember(Name = "path_style_access")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? PathStyleAccess { get; set; }
 
 		/// <summary>
@@ -108,6 +112,7 @@ namespace Nest
 		/// encoding. Defaults to false.
 		/// </summary>
 		[DataMember(Name = "disable_chunked_encoding")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? DisableChunkedEncoding { get; set; }
 	}
 
