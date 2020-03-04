@@ -57,7 +57,7 @@ namespace ExamplesGenerator
 						pages.Add(name, page);
 					}
 
-					var example = new ReferenceExample(hash, lineNumber, content);
+					var example = new ReferenceExample(file, hash, lineNumber, content);
 					example.Languages.AddRange(languages);
 
 					if (!page.Examples.Contains(example))

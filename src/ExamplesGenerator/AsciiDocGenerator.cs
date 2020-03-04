@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using CommandLine.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Formatting;
 using Microsoft.CodeAnalysis.Formatting;
@@ -28,8 +30,17 @@ namespace ExamplesGenerator
 				.WithChangedOption(TabSize, CSharp, 4);
 		}
 
-		public static void GenerateExampleAsciiDoc(IEnumerable<ImplementedExample> examples, string branchName)
+		public static void GenerateExampleAsciiDoc(IEnumerable<ImplementedExample> examples, string branchName, string path)
 		{
+			var referencePages = AsciiDocParser.ParsePages(path);
+
+			string GetReferencePage(ImplementedExample e)
+			{
+				return referencePages.Select(p => new { Hashes = p.Examples.Select(e => e.Hash), File = p.Name })
+					.Where(o => o.Hashes.Contains(e.Hash))
+					.Select(h => h.File).FirstOrDefault();
+			}
+
 			foreach (var file in ExamplesAsciiDocDir.EnumerateFiles())
 				file.Delete();
 			foreach (var dir in ExamplesAsciiDocDir.EnumerateDirectories())
@@ -65,6 +76,9 @@ namespace ExamplesGenerator
 					.AppendLine("If you wish to submit a PR to change this example, please change the source method above")
 					.AppendLine("and run dotnet run -- asciidoc in the ExamplesGenerator project directory.")
 					.AppendLine("////")
+					.AppendLine()
+					.AppendLine($"// {GetReferencePage(example)}.asciidoc:{example.StartLineNumber}")
+					.AppendLine()
 					.AppendLine("[source, csharp]")
 					.AppendLine("----")
 					.AppendLine(source)
