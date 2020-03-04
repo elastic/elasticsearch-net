@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -39,12 +40,14 @@ namespace Nest
 		/// affect index files that are already compressed by default. Defaults to <c>false</c>.
 		/// </summary>
 		[DataMember(Name ="compress")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? Compress { get; set; }
 
 		/// <summary>
 		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
 		[DataMember(Name ="concurrent_streams")]
+		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? ConcurrentStreams { get; set; }
 
 		/// <summary>
@@ -63,6 +66,7 @@ namespace Nest
 		/// Whether to load the default Hadoop configuration (default) or not
 		/// </summary>
 		[DataMember(Name ="load_defaults")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? LoadDefaults { get; set; }
 
 		/// <summary>
