@@ -1,3 +1,4 @@
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ApiGenerator.Configuration;
@@ -12,6 +13,10 @@ namespace ApiGenerator.Generator.Razor
 
 		public override async Task Generate(RestApiSpec spec, ProgressBar progressBar)
 		{
+			// Delete existing files
+			foreach (var file in Directory.GetFiles(GeneratorLocations.NestFolder, "Requests.*.cs"))
+				File.Delete(file);
+
 			var view = ViewLocations.HighLevel("Requests", "PlainRequestBase.cshtml");
 			var target = GeneratorLocations.HighLevel("Requests.cs");
 			await DoRazor(spec, view, target);
