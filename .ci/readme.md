@@ -23,12 +23,12 @@ The `rest-api-spec` runner expects Elasticsearch to be started before invocation
 If you want to run the tests the same that the Jenkins instance on elastic.co does you can call 
 
 ```bash
-$ ELASTICSEARCH_VERSION=8.0.0-SNAPSHOT ./.ci/run-tests 
+$ STACK_VERSION=8.0.0-SNAPSHOT ./.ci/run-tests 
 ```
 
 | Variable Name           | Default     | Description |
 |-------------------------|-------------|-------------|
-| `ELASTICSEARCH_VERSION` | `N/A`       | The elasticsearch version to target
+| `STACK_VERSION` | `N/A`       | The elasticsearch version to target
 | `TEST_SUITE`            | `oss`       | `oss` or `xpack` sets which test suite to run and which container to run against. |
 | `DOTNET_VERSION`        | `3.0.100`   | The .NET sdk version used to grab the proper container |
 
@@ -36,15 +36,13 @@ $ ELASTICSEARCH_VERSION=8.0.0-SNAPSHOT ./.ci/run-tests
 If you want to manually spin up elasticsearch for this tests and call the runner afterwards you can use
 
 ```bash
-$ ELASTICSEARCH_VERSION=elasticsearch-oss:8.0.0-SNAPSHOT DETACH=true bash .ci/run-elasticsearch.sh
+$ STACK_VERSION=8.0.0-SNAPSHOT DETACH=true bash .ci/run-elasticsearch.sh
 ```
-
-Note that `ELASTICSEARCH_VERSION` here is the full docker reference, `.ci/run-tests` is smart enough to compose this based on `TEST_SUITE`
 
 Spinning down the cluster can be done by passing `CLEANUP=true` using the same args
 
 ```bash
-$ ELASTICSEARCH_VERSION=elasticsearch-oss:8.0.0-SNAPSHOT CLEANUP=true bash .ci/run-elasticsearch.sh
+$ STACK_VERSION=8.0.0-SNAPSHOT CLEANUP=true bash .ci/run-elasticsearch.sh
 ```
 
 To kick off the `rest-api-spec` tests manually after starting the cluster manually:
@@ -62,6 +60,6 @@ $ ./build.sh rest-spec-tests -f --help
 Against in most cases running through `./ci/run-tests` is all you need:
 
 ```bash
-$ ELASTICSEARCH_VERSION=8.0.0-SNAPSHOT ./.ci/run-tests 
+$ STACK_VERSION=8.0.0-SNAPSHOT ./.ci/run-tests 
 ```
 
