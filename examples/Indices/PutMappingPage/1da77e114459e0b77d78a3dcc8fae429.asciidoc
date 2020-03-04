@@ -4,7 +4,9 @@ IMPORTANT NOTE
 This file is generated from method Line115 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Indices/PutMappingPage.cs#L63-L91.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
-////
+
+// indices/put-mapping.asciidoc:63
+
 [source, csharp]
 ----
 var createIndex1Response = client.Indices.Create("twitter-1");
