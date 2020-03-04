@@ -34,11 +34,10 @@ namespace ExamplesGenerator
 		{
 			var referencePages = AsciiDocParser.ParsePages(path);
 
-			string GetReferencePage(ImplementedExample e)
+			ReferenceExample GetReferencePage(ImplementedExample e)
 			{
-				return referencePages.Select(p => new { Hashes = p.Examples.Select(e => e.Hash), File = p.Name })
-					.Where(o => o.Hashes.Contains(e.Hash))
-					.Select(h => h.File).FirstOrDefault();
+				return referencePages.SelectMany(p => p.Examples)
+					.Single(o => o.Hash == e.Hash);
 			}
 
 			foreach (var file in ExamplesAsciiDocDir.EnumerateFiles())
@@ -68,7 +67,11 @@ namespace ExamplesGenerator
 					.RemoveClosingBraceAndNewLines()
 					.ExtractCallouts(out var callouts);
 
+				var referenceExample = GetReferencePage(example);
+
 				var builder = new StringBuilder()
+					.AppendLine($"// {referenceExample.File}.asciidoc:{referenceExample.LineNumber}")
+					.AppendLine()
 					.AppendLine("////")
 					.AppendLine("IMPORTANT NOTE")
 					.AppendLine("==============")
@@ -76,8 +79,6 @@ namespace ExamplesGenerator
 					.AppendLine("If you wish to submit a PR to change this example, please change the source method above")
 					.AppendLine("and run dotnet run -- asciidoc in the ExamplesGenerator project directory.")
 					.AppendLine("////")
-					.AppendLine()
-					.AppendLine($"// {GetReferencePage(example)}.asciidoc:{example.StartLineNumber}")
 					.AppendLine()
 					.AppendLine("[source, csharp]")
 					.AppendLine("----")
