@@ -1,0 +1,21 @@
+// docs/reindex.asciidoc:955
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line955 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/ReindexPage.cs#L573-L609.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var reindexResponse = client.ReindexOnServer(d =>
+    d.Source(s => s
+            .Remote(r => r.Host(new Uri("http://otherhost:9200")))
+            .Index("source")
+            .Size(10)
+            .Query<object>(q => q.Match(m => m.Field("test").Query("data"))))
+        .Destination(d => d.Index("dest"))
+);
+----

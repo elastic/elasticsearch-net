@@ -1,6 +1,6 @@
 using Elastic.Xunit.XunitPlumbing;
-using System.ComponentModel;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Cat
 {

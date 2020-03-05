@@ -1,0 +1,38 @@
+// mapping/dynamic/templates.asciidoc:252
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line252 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Mapping/Dynamic/TemplatesPage.cs#L243-L307.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var createIndexResponse = client.Indices.Create("my_index", c => c
+    .Map(m => m
+        .DynamicTemplates(dt => dt
+            .DynamicTemplate("named_analyzers", d => d
+                .MatchMappingType("string")
+                .Match("*")
+                .Mapping(mm => mm
+                    .Text(n => n.Analyzer("{name}"))
+                )
+            )
+            .DynamicTemplate("no_doc_values", d => d
+                .MatchMappingType("*")
+                .Mapping(mm => mm
+                    .Generic(n => n.Type("{dynamic_type}").DocValues(false))
+                )
+            )
+        )
+    )
+);
+
+var indexResponse = client.Index<object>(new
+{
+    english = "Some English text",
+    count = 5
+}, i => i.Index("my_index").Id(1));
+----

@@ -1,6 +1,6 @@
 using Elastic.Xunit.XunitPlumbing;
-using System.ComponentModel;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Setup
 {
@@ -24,7 +24,7 @@ namespace Examples.Setup
 
 		[U(Skip = "Example not implemented")]
 		[Description("setup/restart-cluster.asciidoc:30")]
-		public void Line30()
+		public void Line30() // Manually changed due to: https://github.com/elastic/docs/issues/1760
 		{
 			// tag::f27c28ddbf4c266b5f42d14da837b8de[]
 			var response0 = new SearchResponse<object>();
