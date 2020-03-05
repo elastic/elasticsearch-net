@@ -6,7 +6,7 @@ namespace Examples.Cluster
 	public class ReroutePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line177()
+		public void Line180()
 		{
 			// tag::c5488b3888749d3d5b9808ab28d384eb[]
 			var response0 = new SearchResponse<object>();

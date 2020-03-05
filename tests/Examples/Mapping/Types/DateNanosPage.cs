@@ -8,7 +8,7 @@ namespace Examples.Mapping.Types
 		[U(Skip = "Example not implemented")]
 		public void Line32()
 		{
-			// tag::14dc06a4c28ffdc1f9dde97dc6838c1e[]
+			// tag::46dd5948cfc34adf1dfe024fc960bb01[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
@@ -22,33 +22,31 @@ namespace Examples.Mapping.Types
 			var response5 = new SearchResponse<object>();
 
 			var response6 = new SearchResponse<object>();
-			// end::14dc06a4c28ffdc1f9dde97dc6838c1e[]
+			// end::46dd5948cfc34adf1dfe024fc960bb01[]
 
-			response0.MatchesExample(@"PUT my_index?include_type_name=true
+			response0.MatchesExample(@"PUT my_index
 			{
 			  ""mappings"": {
-			    ""_doc"": {
-			      ""properties"": {
-			        ""date"": {
-			          ""type"": ""date_nanos"" \<1>
-			        }
+			    ""properties"": {
+			      ""date"": {
+			        ""type"": ""date_nanos"" <1>
 			      }
 			    }
 			  }
 			}");
 
 			response1.MatchesExample(@"PUT my_index/_doc/1
-			{ ""date"": ""2015-01-01"" } \<2>");
+			{ ""date"": ""2015-01-01"" } <2>");
 
 			response2.MatchesExample(@"PUT my_index/_doc/2
-			{ ""date"": ""2015-01-01T12:10:30.123456789Z"" } \<3>");
+			{ ""date"": ""2015-01-01T12:10:30.123456789Z"" } <3>");
 
 			response3.MatchesExample(@"PUT my_index/_doc/3
-			{ ""date"": 1420070400 } \<4>");
+			{ ""date"": 1420070400 } <4>");
 
 			response4.MatchesExample(@"GET my_index/_search
 			{
-			  ""sort"": { ""date"": ""asc""} \<5>
+			  ""sort"": { ""date"": ""asc""} <5>
 			}");
 
 			response5.MatchesExample(@"GET my_index/_search
@@ -57,7 +55,7 @@ namespace Examples.Mapping.Types
 			    ""my_field"" : {
 			      ""script"" : {
 			        ""lang"" : ""painless"",
-			        ""source"" : ""doc['date'].date.nanos"" \<6>
+			        ""source"" : ""doc['date'].value.nano"" <6>
 			      }
 			    }
 			  }
@@ -68,7 +66,7 @@ namespace Examples.Mapping.Types
 			  ""docvalue_fields"" : [
 			    {
 			      ""field"" : ""my_ip_field"",
-			      ""format"": ""strict_date_time"" \<7>
+			      ""format"": ""strict_date_time"" <7>
 			    }
 			  ]
 			}");

@@ -6,7 +6,7 @@ namespace Examples.Indices.Apis
 	public class FreezePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line43()
+		public void Line44()
 		{
 			// tag::ffea06f77c9df5720412aa06be964118[]
 			var response0 = new SearchResponse<object>();

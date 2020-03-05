@@ -6,7 +6,55 @@ namespace Examples.Ml.DfAnalytics.Apis
 	public class PutDfanalyticsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line164()
+		public void Line291()
+		{
+			// tag::8c6f3bb8abae9ff1d21e776f16ad1c86[]
+			var response0 = new SearchResponse<object>();
+			// end::8c6f3bb8abae9ff1d21e776f16ad1c86[]
+
+			response0.MatchesExample(@"PUT _ml/data_frame/analytics/model-flight-delays-pre
+			{
+			  ""source"": {
+			    ""index"": [
+			      ""kibana_sample_data_flights"" <1>
+			    ],
+			    ""query"": { <2>
+			      ""range"": {
+			        ""DistanceKilometers"": {
+			          ""gt"": 0
+			        }
+			      }
+			    },
+			    ""_source"": { <3>
+			      ""includes"": [],
+			      ""excludes"": [
+			        ""FlightDelay"",
+			        ""FlightDelayType""
+			      ]
+			    }
+			  },
+			  ""dest"": { <4>
+			    ""index"": ""df-flight-delays"",
+			    ""results_field"": ""ml-results""
+			  },
+			  ""analysis"": {
+			  ""regression"": {
+			    ""dependent_variable"": ""FlightDelayMin"",
+			    ""training_percent"": 90
+			    }
+			  },
+			  ""analyzed_fields"": { <5>
+			    ""includes"": [],
+			    ""excludes"": [
+			      ""FlightNum""
+			    ]
+			  },
+			  ""model_memory_limit"": ""100mb""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line363()
 		{
 			// tag::ce3c391c2b1915cfc44a2917bca71d19[]
 			var response0 = new SearchResponse<object>();
@@ -32,7 +80,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line227()
+		public void Line426()
 		{
 			// tag::e8211247c280a3fbbbdd32850b743b7b[]
 			var response0 = new SearchResponse<object>();
@@ -56,11 +104,11 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line284()
+		public void Line483()
 		{
-			// tag::c04ad5bba1b5df4cfaf663052ab4f009[]
+			// tag::ae82eb17c23cb8e5761cb6240a5ed0a6[]
 			var response0 = new SearchResponse<object>();
-			// end::c04ad5bba1b5df4cfaf663052ab4f009[]
+			// end::ae82eb17c23cb8e5761cb6240a5ed0a6[]
 
 			response0.MatchesExample(@"PUT _ml/data_frame/analytics/student_performance_mathematics_0.3
 			{
@@ -74,9 +122,35 @@ namespace Examples.Ml.DfAnalytics.Apis
 			   {
 			     ""regression"": {
 			       ""dependent_variable"": ""G3"",
-			       ""training_percent"": 70  <1>
+			       ""training_percent"": 70,  <1>
+			       ""randomize_seed"": 19673948271  <2>
 			     }
 			   }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line517()
+		{
+			// tag::4fb0629146ca78b85e823edd405497bb[]
+			var response0 = new SearchResponse<object>();
+			// end::4fb0629146ca78b85e823edd405497bb[]
+
+			response0.MatchesExample(@"PUT _ml/data_frame/analytics/loan_classification
+			{
+			  ""source"" : {
+			    ""index"": ""loan-applicants""
+			  },
+			  ""dest"" : {
+			    ""index"": ""loan-applicants-classified""
+			  },
+			  ""analysis"" : {
+			    ""classification"": {
+			      ""dependent_variable"": ""label"",
+			      ""training_percent"": 75,
+			      ""num_top_classes"": 2
+			    }
+			  }
 			}");
 		}
 	}

@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class SamlAuthenticateApiPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line73()
+		public void Line79()
 		{
 			// tag::8e208098a0156c4c92afe0a06960b230[]
 			var response0 = new SearchResponse<object>();

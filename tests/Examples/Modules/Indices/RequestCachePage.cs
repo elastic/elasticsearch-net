@@ -6,7 +6,7 @@ namespace Examples.Modules.Indices
 	public class RequestCachePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line44()
+		public void Line47()
 		{
 			// tag::00629ea43db6ee1704183170df085495[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Modules.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line56()
+		public void Line59()
 		{
 			// tag::adebfecf7485326e9f7fae9de9169abc[]
 			var response0 = new SearchResponse<object>();
@@ -31,7 +31,7 @@ namespace Examples.Modules.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line69()
+		public void Line72()
 		{
 			// tag::f22e069bc0c6f9dae57e084c662a86fd[]
 			var response0 = new SearchResponse<object>();
@@ -42,7 +42,7 @@ namespace Examples.Modules.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line83()
+		public void Line86()
 		{
 			// tag::13e9c7cdd43161f1336c94fd70a0db0c[]
 			var response0 = new SearchResponse<object>();
@@ -62,7 +62,7 @@ namespace Examples.Modules.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line140()
+		public void Line139()
 		{
 			// tag::36da9668fef56910370f16bfb772cc40[]
 			var response0 = new SearchResponse<object>();
@@ -72,7 +72,7 @@ namespace Examples.Modules.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line147()
+		public void Line146()
 		{
 			// tag::90631797c7fbda43902abf2cc0ea8304[]
 			var response0 = new SearchResponse<object>();

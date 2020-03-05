@@ -34,7 +34,8 @@ namespace Examples.Search
 			});
 		}
 
-		[U] public void Line156()
+		[U]
+		public void Line156()
 		{
 			// tag::bfcd65ab85d684d36a8550080032958d[]
 			var searchResponse = client.Search<object>(s => s

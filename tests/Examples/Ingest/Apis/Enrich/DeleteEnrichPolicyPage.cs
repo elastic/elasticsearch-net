@@ -6,7 +6,7 @@ namespace Examples.Ingest.Apis.Enrich
 	public class DeleteEnrichPolicyPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line29()
+		public void Line37()
 		{
 			// tag::cdd29b01e730b3996de68a2788050021[]
 			var response0 = new SearchResponse<object>();

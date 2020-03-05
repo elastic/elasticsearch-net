@@ -7,7 +7,7 @@ namespace Examples.Cluster
 	{
 
 		[U(Skip = "Example not implemented")]
-		public void Line74()
+		public void Line77()
 		{
 			// tag::2663038cfc46b106edaef607d553c99c[]
 			var response0 = new SearchResponse<object>();
@@ -22,7 +22,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line87()
+		public void Line90()
 		{
 			// tag::75fb2de2b47c564833ab14049c295384[]
 			var response0 = new SearchResponse<object>();
@@ -38,20 +38,20 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line104()
+		public void Line114()
 		{
-			// tag::a21f2014288a2d2c82585be4eb85708c[]
+			// tag::9db57741b46cc9f088cebd6a34ba147d[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-			// end::a21f2014288a2d2c82585be4eb85708c[]
+			// end::9db57741b46cc9f088cebd6a34ba147d[]
 
-			response0.MatchesExample(@"PUT /idx?master_timeout=1s&timeout=1s
+			response0.MatchesExample(@"PUT /my_index?master_timeout=1s&timeout=1s
 			{""settings"": {""index.routing.allocation.include._name"": ""non_existent_node""} }");
 
 			response1.MatchesExample(@"GET /_cluster/allocation/explain
 			{
-			  ""index"": ""idx"",
+			  ""index"": ""my_index"",
 			  ""shard"": 0,
 			  ""primary"": true
 			}");

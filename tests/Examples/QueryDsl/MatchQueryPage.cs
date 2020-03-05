@@ -56,7 +56,8 @@ namespace Examples.QueryDsl
 			    }
 			}", e =>
 			{
-				e.ApplyBodyChanges(b => {
+				e.ApplyBodyChanges(b =>
+				{
 					b["query"]["match"]["message"].ToLongFormQuery();
 				});
 				return e;

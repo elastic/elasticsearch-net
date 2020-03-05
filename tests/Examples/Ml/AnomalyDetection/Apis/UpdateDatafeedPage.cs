@@ -6,7 +6,7 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class UpdateDatafeedPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line123()
+		public void Line112()
 		{
 			// tag::df6d5b5f8e1c8785503269ccb7b34763[]
 			var response0 = new SearchResponse<object>();

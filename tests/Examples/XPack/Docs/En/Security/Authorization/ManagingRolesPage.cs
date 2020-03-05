@@ -6,7 +6,7 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 	public class ManagingRolesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line149()
+		public void Line158()
 		{
 			// tag::d3e5edac5b461020017fd9d8ec7a91fa[]
 			var response0 = new SearchResponse<object>();

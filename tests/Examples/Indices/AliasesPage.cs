@@ -21,7 +21,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line156()
+		public void Line155()
 		{
 			// tag::b4392116f2cc57ce8064ccbad30318d5[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +36,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line172()
+		public void Line171()
 		{
 			// tag::3653567181f43a5f64c74f934aa821c2[]
 			var response0 = new SearchResponse<object>();
@@ -51,7 +51,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line190()
+		public void Line189()
 		{
 			// tag::af3fb9fa5691a7b37a6dc2a69ff66e64[]
 			var response0 = new SearchResponse<object>();
@@ -67,7 +67,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line208()
+		public void Line207()
 		{
 			// tag::f0e21e03a07c8fa0209b0aafdb3791e6[]
 			var response0 = new SearchResponse<object>();
@@ -83,7 +83,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line222()
+		public void Line221()
 		{
 			// tag::5f210f74725ea0c9265190346edfa246[]
 			var response0 = new SearchResponse<object>();
@@ -98,7 +98,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line239()
+		public void Line238()
 		{
 			// tag::6799d132c1c7ca3970763acde2337ef9[]
 			var response0 = new SearchResponse<object>();
@@ -113,7 +113,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line258()
+		public void Line257()
 		{
 			// tag::de176bc4788ea286fff9e92418a43ea8[]
 			var response0 = new SearchResponse<object>();
@@ -137,7 +137,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line286()
+		public void Line285()
 		{
 			// tag::23ab0f1023b1b2cd5cdf2a8f9ccfd57b[]
 			var response0 = new SearchResponse<object>();
@@ -156,7 +156,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line302()
+		public void Line301()
 		{
 			// tag::7cf71671859be7c1ecf673396db377cd[]
 			var response0 = new SearchResponse<object>();
@@ -177,7 +177,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line330()
+		public void Line329()
 		{
 			// tag::bc1ad5cc6d3eab98e3ce01f209ba7094[]
 			var response0 = new SearchResponse<object>();
@@ -198,7 +198,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line350()
+		public void Line349()
 		{
 			// tag::fa0f4485cd48f986b7ae8cbb24e331c4[]
 			var response0 = new SearchResponse<object>();
@@ -220,7 +220,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line376()
+		public void Line375()
 		{
 			// tag::427f6b5c5376cbf0f71f242a60ca3d9e[]
 			var response0 = new SearchResponse<object>();
@@ -230,7 +230,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line397()
+		public void Line396()
 		{
 			// tag::f6d6889667f56b8f49d2858070571a6b[]
 			var response0 = new SearchResponse<object>();
@@ -257,7 +257,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line423()
+		public void Line422()
 		{
 			// tag::b0ec418bf416c62bed602b0a32a6d5f5[]
 			var response0 = new SearchResponse<object>();
@@ -270,7 +270,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line435()
+		public void Line434()
 		{
 			// tag::67bba546d835bca8f31df13e3587c348[]
 			var response0 = new SearchResponse<object>();
@@ -280,7 +280,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line444()
+		public void Line443()
 		{
 			// tag::ad79228630684d950fe9792a768d24c5[]
 			var response0 = new SearchResponse<object>();

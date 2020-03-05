@@ -85,5 +85,29 @@ namespace Examples.Aggregations.Bucket
 			    }
 			}");
 		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line177()
+		{
+			// tag::473bc08acc95689e256c7160fec07c0c[]
+			var response0 = new SearchResponse<object>();
+			// end::473bc08acc95689e256c7160fec07c0c[]
+
+			response0.MatchesExample(@"POST /museums/_search?size=0
+			{
+			    ""aggregations"" : {
+			        ""tiles-in-bounds"" : {
+			            ""geotile_grid"" : {
+			                ""field"" : ""location"",
+			                ""precision"" : 22,
+			                ""bounds"": {
+			                  ""top_left"" : ""52.4, 4.9"",
+			                  ""bottom_right"" : ""52.3, 5.0""
+			                }
+			            }
+			        }
+			    }
+			}");
+		}
 	}
 }

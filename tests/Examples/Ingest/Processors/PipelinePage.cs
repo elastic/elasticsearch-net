@@ -6,7 +6,7 @@ namespace Examples.Ingest.Processors
 	public class PipelinePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line29()
+		public void Line31()
 		{
 			// tag::8494d09c39e109a012094eb9d6ec52ac[]
 			var response0 = new SearchResponse<object>();
@@ -27,7 +27,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line47()
+		public void Line49()
 		{
 			// tag::02c48d461536709c3fc8a0e8147c3787[]
 			var response0 = new SearchResponse<object>();
@@ -53,7 +53,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line72()
+		public void Line74()
 		{
 			// tag::88647e818ffcbe39e5cf627f5b9a676c[]
 			var response0 = new SearchResponse<object>();

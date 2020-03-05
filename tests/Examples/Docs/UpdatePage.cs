@@ -292,7 +292,7 @@ namespace Examples.Docs
 						})
 					)
 				)
-				.Upsert(new {})
+				.Upsert(new { })
 			);
 			// end::f9636d7ef1a45be4f36418c875cf6bef[]
 

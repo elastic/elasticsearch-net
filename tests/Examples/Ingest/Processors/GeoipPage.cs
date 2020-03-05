@@ -6,7 +6,7 @@ namespace Examples.Ingest.Processors
 	public class GeoipPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line45()
+		public void Line46()
 		{
 			// tag::0b6aa8f2d6916951959d6186b25d2b54[]
 			var response0 = new SearchResponse<object>();
@@ -37,7 +37,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line92()
+		public void Line93()
 		{
 			// tag::573a466d7a3a8e31194666e2ecc1d92a[]
 			var response0 = new SearchResponse<object>();
@@ -70,7 +70,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line143()
+		public void Line144()
 		{
 			// tag::c5681f52305e065ef13c3e0ad5393263[]
 			var response0 = new SearchResponse<object>();
@@ -101,7 +101,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line192()
+		public void Line193()
 		{
 			// tag::0737ebaea33631f001fb3f4226948492[]
 			var response0 = new SearchResponse<object>();

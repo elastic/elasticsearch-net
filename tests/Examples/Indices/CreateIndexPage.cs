@@ -17,7 +17,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line82()
+		public void Line81()
 		{
 			// tag::e5d2172b524332196cac0f031c043659[]
 			var createIndexResponse = client.Indices.Create("twitter", c => c
@@ -52,7 +52,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line100()
+		public void Line99()
 		{
 			// tag::b9c5d7ca6ca9c6f747201f45337a4abf[]
 			var createIndexResponse = client.Indices.Create("twitter", c => c
@@ -85,7 +85,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line124()
+		public void Line123()
 		{
 			// tag::dfef545b1e2c247bafd1347e8e807ac1[]
 			var createIndexResponse = client.Indices.Create("test", c => c
@@ -127,7 +127,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line148()
+		public void Line143()
 		{
 			// tag::4d56b179242fed59e3d6476f817b6055[]
 			var createIndexResponse = client.Indices.Create("test", c => c
@@ -162,7 +162,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line195()
+		public void Line190()
 		{
 			// tag::4d46dbb96125b27f46299547de9d8709[]
 			var createIndexResponse = client.Indices.Create("test", c => c
@@ -181,7 +181,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line208()
+		public void Line203()
 		{
 			// tag::fabe14480624a99e8ee42c7338672058[]
 			var createIndexResponse = client.Indices.Create("test", c => c

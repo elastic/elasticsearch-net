@@ -6,20 +6,20 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class FlushJobPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line72()
+		public void Line71()
 		{
-			// tag::6a9931992ce1b0c2c2c82635d32f32cd[]
+			// tag::02520ac7816b2c4cf8fb413fd16122f2[]
 			var response0 = new SearchResponse<object>();
-			// end::6a9931992ce1b0c2c2c82635d32f32cd[]
+			// end::02520ac7816b2c4cf8fb413fd16122f2[]
 
-			response0.MatchesExample(@"POST _ml/anomaly_detectors/total-requests/_flush
+			response0.MatchesExample(@"POST _ml/anomaly_detectors/low_request_rate/_flush
 			{
 			  ""calc_interim"": true
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line99()
+		public void Line98()
 		{
 			// tag::3033133e8675524fd8f969db0625b62e[]
 			var response0 = new SearchResponse<object>();

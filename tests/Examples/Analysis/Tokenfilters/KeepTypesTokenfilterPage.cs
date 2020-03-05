@@ -6,87 +6,71 @@ namespace Examples.Analysis.Tokenfilters
 	public class KeepTypesTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line21()
+		public void Line38()
 		{
-			// tag::928923befcb84cdcace229b027fd281f[]
+			// tag::83cd4eb89818b4c32f654d370eafa920[]
 			var response0 = new SearchResponse<object>();
-			// end::928923befcb84cdcace229b027fd281f[]
+			// end::83cd4eb89818b4c32f654d370eafa920[]
 
-			response0.MatchesExample(@"PUT /keep_types_example
+			response0.MatchesExample(@"GET _analyze
 			{
-			    ""settings"" : {
-			        ""analysis"" : {
-			            ""analyzer"" : {
-			                ""my_analyzer"" : {
-			                    ""tokenizer"" : ""standard"",
-			                    ""filter"" : [""lowercase"", ""extract_numbers""]
-			                }
-			            },
-			            ""filter"" : {
-			                ""extract_numbers"" : {
-			                    ""type"" : ""keep_types"",
-			                    ""types"" : [ ""<NUM>"" ]
-			                }
-			            }
-			        }
+			  ""tokenizer"": ""standard"",
+			  ""filter"": [
+			    {
+			      ""type"": ""keep_types"",
+			      ""types"": [ ""<NUM>"" ]
 			    }
+			  ],
+			  ""text"": ""1 quick fox 2 lazy dogs""
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line46()
+		public void Line91()
 		{
-			// tag::b425b2194294437ac21df0b5606fb3d2[]
+			// tag::d94f666616dea141dcb7aaf08a35bc10[]
 			var response0 = new SearchResponse<object>();
-			// end::b425b2194294437ac21df0b5606fb3d2[]
+			// end::d94f666616dea141dcb7aaf08a35bc10[]
 
-			response0.MatchesExample(@"POST /keep_types_example/_analyze
+			response0.MatchesExample(@"GET _analyze
 			{
-			  ""analyzer"" : ""my_analyzer"",
-			  ""text"" : ""this is just 1 a test""
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line80()
-		{
-			// tag::1658d704f26a06e8f37c6430361c3f26[]
-			var response0 = new SearchResponse<object>();
-			// end::1658d704f26a06e8f37c6430361c3f26[]
-
-			response0.MatchesExample(@"PUT /keep_types_exclude_example
-			{
-			    ""settings"" : {
-			        ""analysis"" : {
-			            ""analyzer"" : {
-			                ""my_analyzer"" : {
-			                    ""tokenizer"" : ""standard"",
-			                    ""filter"" : [""lowercase"", ""remove_numbers""]
-			                }
-			            },
-			            ""filter"" : {
-			                ""remove_numbers"" : {
-			                    ""type"" : ""keep_types"",
-			                    ""mode"" : ""exclude"",
-			                    ""types"" : [ ""<NUM>"" ]
-			                }
-			            }
-			        }
+			  ""tokenizer"": ""standard"",
+			  ""filter"": [
+			    {
+			      ""type"": ""keep_types"",
+			      ""types"": [ ""<NUM>"" ],
+			      ""mode"": ""exclude""
 			    }
+			  ],
+			  ""text"": ""1 quick fox 2 lazy dogs""
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line106()
+		public void Line182()
 		{
-			// tag::4d5ded2eede9a987df094dc4a91893d7[]
+			// tag::13b02da42d3afe7f0b649e1c98ac9549[]
 			var response0 = new SearchResponse<object>();
-			// end::4d5ded2eede9a987df094dc4a91893d7[]
+			// end::13b02da42d3afe7f0b649e1c98ac9549[]
 
-			response0.MatchesExample(@"POST /keep_types_exclude_example/_analyze
+			response0.MatchesExample(@"PUT keep_types_example
 			{
-			  ""analyzer"" : ""my_analyzer"",
-			  ""text"" : ""hello 101 world""
+			  ""settings"": {
+			    ""analysis"": {
+			      ""analyzer"": {
+			        ""my_analyzer"": {
+			          ""tokenizer"": ""standard"",
+			          ""filter"": [ ""extract_alpha"" ]
+			        }
+			      },
+			      ""filter"": {
+			        ""extract_alpha"": {
+			          ""type"": ""keep_types"",
+			          ""types"": [ ""<ALPHANUM>"" ]
+			        }
+			      }
+			    }
+			  }
 			}");
 		}
 	}

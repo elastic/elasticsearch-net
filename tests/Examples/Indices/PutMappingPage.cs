@@ -31,7 +31,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line90()
+		public void Line84()
 		{
 			// tag::12433d2b637d002e8d5c9a1adce69d3b[]
 			var putMappingResponse = client.Indices.Create("publications");
@@ -41,7 +41,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line98()
+		public void Line92()
 		{
 			// tag::e4be53736bcc02b03068fd72fdbfe271[]
 			var putMappingResponse = client.Map<object>(m => m
@@ -61,7 +61,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line115()
+		public void Line109()
 		{
 			// tag::1da77e114459e0b77d78a3dcc8fae429[]
 			var createIndex1Response = client.Indices.Create("twitter-1");
@@ -91,7 +91,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line150()
+		public void Line144()
 		{
 			// tag::d9474f66970c6955e24b17c7447e7b5f[]
 			var createIndexResponse = client.Indices.Create("my_index", m => m
@@ -131,7 +131,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line172()
+		public void Line166()
 		{
 			// tag::0bbd30b9be3e54ff3028b9f4459634d2[]
 			var putMappingResponse = client.Map<object>(m => m
@@ -168,7 +168,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line192()
+		public void Line186()
 		{
 			// tag::210cf5c76bff517f48e80fa1c2d63907[]
 			var getMappingResponse = client.Indices.GetMapping<object>(r => r.Index("my_index"));
@@ -178,7 +178,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line240()
+		public void Line234()
 		{
 			// tag::c849c6c8f8659dbb93e1c14356f74e37[]
 			var createIndexResponse = client.Indices.Create("my_index", m => m
@@ -203,7 +203,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line263()
+		public void Line257()
 		{
 			// tag::5f3a3eefeefe6fa85ec49d499212d245[]
 			var putMappingResponse = client.Map<object>(m => m
@@ -235,7 +235,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line333()
+		public void Line327()
 		{
 			// tag::1f6fe6833686e38c3711c6f2aa00a078[]
 			var createIndexResponse = client.Indices.Create("my_index", m => m
@@ -264,7 +264,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line352()
+		public void Line346()
 		{
 			// tag::17de0020b228df961ad3c6b06233c948[]
 			var putMappingResponse = client.Map<object>(m => m
@@ -290,7 +290,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line415()
+		public void Line409()
 		{
 			// tag::bd5918ab903c0889bb1f09c8c2466e43[]
 			var createIndexResponse = client.Indices.Create("users", m => m
@@ -318,7 +318,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line433()
+		public void Line427()
 		{
 			// tag::0989cc65d8924f666ce3eb0820d2d244[]
 			var indexResponse1 = client.Index<object>(new { user_id = 12345 }, r => r.Index("users").Refresh(Refresh.WaitFor));
@@ -338,7 +338,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line452()
+		public void Line446()
 		{
 			// tag::734c2e2a1e45b84f1e4e65b51356fcd7[]
 			var createIndexResponse = client.Indices.Create("new_users", m => m
@@ -365,7 +365,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line471()
+		public void Line465()
 		{
 			// tag::53d938c754f36a912fcbe6473abb463f[]
 			var reindexOnServerResponse = client.ReindexOnServer(r => r
@@ -386,7 +386,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line525()
+		public void Line519()
 		{
 			// tag::6bf63f2ec6ba55fcaf1092f48212bf25[]
 			var createIndexResponse = client.Indices.Create("my_index", m => m
@@ -413,7 +413,7 @@ namespace Examples.Indices
 		}
 
 		[U]
-		public void Line542()
+		public void Line536()
 		{
 			// tag::afc29b61c532cf683f749baf013e7bfe[]
 			var putMappingResponse = client.Map<object>(m => m

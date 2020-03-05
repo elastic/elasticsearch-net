@@ -6,7 +6,7 @@ namespace Examples.Analysis.Tokenfilters
 	public class SnowballTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line14()
+		public void Line17()
 		{
 			// tag::e776311ef67c972f322b669dc4ab9926[]
 			var response0 = new SearchResponse<object>();

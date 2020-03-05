@@ -521,11 +521,11 @@ namespace Examples.Aggregations.Bucket
 				.Aggregations(a => a
 					.Terms("JapaneseCars", t => t
 						.Field("make")
-						.Include(new [] { "mazda", "honda" })
+						.Include(new[] { "mazda", "honda" })
 					)
 					.Terms("ActiveCarManufacturers", t => t
 						.Field("make")
-						.Exclude(new [] { "rover", "jensen" })
+						.Exclude(new[] { "rover", "jensen" })
 					)
 				)
 			);

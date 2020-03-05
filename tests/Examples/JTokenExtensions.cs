@@ -45,6 +45,30 @@ namespace Examples
 			o.Replace(a);
 			return a;
 		}
+
+		public static void AdjustIndexSettings(this Example e) =>
+			e.ApplyBodyChanges(o =>
+			{
+				var settings = ((JObject)o["settings"]);
+				var existing = settings["number_of_shards"].Value<int>();
+				settings.Remove("number_of_shards");
+				settings.Add("index.number_of_shards", existing);
+			});
+
+		/// <summary>
+		/// Flattens an array into a comma-seperated representation of that array.
+		/// <code>"index": ["twitter", "blog"]</code>
+		/// Will be converted to
+		/// <code>"index": "twitter, blog"</code>
+		/// </summary>
+		public static JToken Flatten<T>(this JToken o)
+		{
+			var array = (JArray)o;
+			var values = array.Values<T>();
+			var flat = string.Join(",", values);
+			return JToken.FromObject(flat);
+		}
+
 		/// <summary>
 		/// Docs document bool query without the clauses as arrays, NEST only every sends them as arrays
 		/// This fixes the examples

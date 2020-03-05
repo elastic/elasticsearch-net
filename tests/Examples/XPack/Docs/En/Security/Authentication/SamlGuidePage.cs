@@ -6,15 +6,15 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 	public class SamlGuidePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line644()
+		public void Line646()
 		{
-			// tag::d08f4dfec37979c1442564e64bd74617[]
+			// tag::862907653d1c18d2e80eff7f421200e2[]
 			var response0 = new SearchResponse<object>();
-			// end::d08f4dfec37979c1442564e64bd74617[]
+			// end::862907653d1c18d2e80eff7f421200e2[]
 
-			response0.MatchesExample(@"PUT /_security/role_mapping/saml-kibana
+			response0.MatchesExample(@"PUT /_security/role_mapping/saml-example
 			{
-			  ""roles"": [ ""kibana_user"" ],
+			  ""roles"": [ ""example_role"" ], <1>
 			  ""enabled"": true,
 			  ""rules"": {
 			    ""field"": { ""realm.name"": ""saml1"" }
@@ -23,7 +23,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line679()
+		public void Line685()
 		{
 			// tag::3806cae804fe77bf38b85561592c745b[]
 			var response0 = new SearchResponse<object>();
@@ -41,7 +41,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line897()
+		public void Line903()
 		{
 			// tag::49cb3f48a0097bfc597c52fa51c6d379[]
 			var response0 = new SearchResponse<object>();
@@ -54,7 +54,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line905()
+		public void Line911()
 		{
 			// tag::b2b26f8568c5dba7649e79f09b859272[]
 			var response0 = new SearchResponse<object>();
@@ -68,7 +68,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line925()
+		public void Line931()
 		{
 			// tag::a5dfcfd1cfb3558e7912456669c92eee[]
 			var response0 = new SearchResponse<object>();
@@ -81,7 +81,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line948()
+		public void Line954()
 		{
 			// tag::8e208098a0156c4c92afe0a06960b230[]
 			var response0 = new SearchResponse<object>();
@@ -95,7 +95,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line977()
+		public void Line983()
 		{
 			// tag::9eda9c39428b0c2c53cbd8ee7ae0f888[]
 			var response0 = new SearchResponse<object>();
@@ -109,7 +109,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line992()
+		public void Line998()
 		{
 			// tag::553904c175a76d5ba83bc5d46fff7373[]
 			var response0 = new SearchResponse<object>();
@@ -123,7 +123,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line1010()
+		public void Line1016()
 		{
 			// tag::a71154ea11a5214f409ecfd118e9b5e3[]
 			var response0 = new SearchResponse<object>();

@@ -14,7 +14,7 @@ namespace Examples.Root
 			var createIndexResponse = client.Indices.Create("my-index", c => c
 				.Map<Employee>(m => m
 					.Properties(props => props
-						.Number(n => n.Name(p=>p.Age).Type(NumberType.Integer))
+						.Number(n => n.Name(p => p.Age).Type(NumberType.Integer))
 						.Keyword(k => k.Name(p => p.Email))
 						.Text(k => k.Name(p => p.Name))
 					)
@@ -75,7 +75,7 @@ namespace Examples.Root
 		{
 			// tag::99a52be903945b17e734a1d02a57e958[]
 			var getMappingResponse = client.Indices.GetFieldMapping<Employee>(
-				Field<Employee>(p=>p.EmployeeId),
+				Field<Employee>(p => p.EmployeeId),
 				m => m.Index("my-index")
 			);
 			// end::99a52be903945b17e734a1d02a57e958[]

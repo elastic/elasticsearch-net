@@ -28,7 +28,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line338()
+		public void Line345()
 		{
 			// tag::e5240a59149072e8bc7532603fa813bd[]
 			var response0 = new SearchResponse<object>();

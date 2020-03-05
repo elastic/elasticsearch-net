@@ -82,7 +82,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		public void Line75()
+		public void Line88()
 		{
 			// tag::f70a54cd9a9f4811bf962e469f2ca2ea[]
 			var searchResponse = client.Search<Blog>(s => s
@@ -114,7 +114,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		public void Line94()
+		public void Line107()
 		{
 			// tag::fa88f6f5a7d728ec4f1d05244228cb09[]
 			var searchResponse = client.Search<Blog>(s => s
@@ -150,14 +150,14 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		public void Line117()
+		public void Line130()
 		{
 			// tag::162b5b693b713f0bfab1209d59443c46[]
 			var searchResponse = client.Search<Blog>(s => s
 				.AllIndices()
 				.Query(q =>
-					q.ConstantScore(cs=>cs
-						.Filter(f=>f
+					q.ConstantScore(cs => cs
+						.Filter(f => f
 							.Term(p => p.Status, PublishStatus.Active)
 						)
 					)

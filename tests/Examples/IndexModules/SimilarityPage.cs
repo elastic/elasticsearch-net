@@ -8,25 +8,25 @@ namespace Examples.IndexModules
 		[U(Skip = "Example not implemented")]
 		public void Line22()
 		{
-			// tag::ce12fedff96537d4a5169724225f4287[]
+			// tag::2342a56279106ea643026df657bf7f88[]
 			var response0 = new SearchResponse<object>();
-			// end::ce12fedff96537d4a5169724225f4287[]
+			// end::2342a56279106ea643026df657bf7f88[]
 
 			response0.MatchesExample(@"PUT /index
 			{
-			    ""settings"" : {
-			        ""index"" : {
-			            ""similarity"" : {
-			              ""my_similarity"" : {
-			                ""type"" : ""DFR"",
-			                ""basic_model"" : ""g"",
-			                ""after_effect"" : ""l"",
-			                ""normalization"" : ""h2"",
-			                ""normalization.h2.c"" : ""3.0""
-			              }
-			            }
+			  ""settings"": {
+			    ""index"": {
+			      ""similarity"": {
+			        ""my_similarity"": {
+			          ""type"": ""DFR"",
+			          ""basic_model"": ""g"",
+			          ""after_effect"": ""l"",
+			          ""normalization"": ""h2"",
+			          ""normalization.h2.c"": ""3.0""
 			        }
+			      }
 			    }
+			  }
 			}");
 		}
 

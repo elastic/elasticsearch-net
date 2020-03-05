@@ -6,7 +6,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 	public class EvaluateDfanalyticsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line81()
+		public void Line197()
 		{
 			// tag::eae68412d998bc0f65b09711f007a4b7[]
 			var response0 = new SearchResponse<object>();
@@ -25,7 +25,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line142()
+		public void Line259()
 		{
 			// tag::e6e7586a81068773d18cca848346b69f[]
 			var response0 = new SearchResponse<object>();
@@ -55,7 +55,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line179()
+		public void Line296()
 		{
 			// tag::862efc8d548a9202597c72c7e98a599d[]
 			var response0 = new SearchResponse<object>();
@@ -85,7 +85,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line218()
+		public void Line335()
 		{
 			// tag::051b2682d386d49616b18a5db591afdf[]
 			var response0 = new SearchResponse<object>();
@@ -111,6 +111,28 @@ namespace Examples.Ml.DfAnalytics.Apis
 			      }
 			    }
 			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		public void Line374()
+		{
+			// tag::388d3eda4f792d3fce044777739217e6[]
+			var response0 = new SearchResponse<object>();
+			// end::388d3eda4f792d3fce044777739217e6[]
+
+			response0.MatchesExample(@"POST _ml/data_frame/_evaluate
+			{
+			   ""index"": ""animal_classification"",
+			   ""evaluation"": {
+			      ""classification"": { <1>
+			         ""actual_field"": ""animal_class"", <2>
+			         ""predicted_field"": ""ml.animal_class_prediction"", <3>
+			         ""metrics"": {
+			           ""multiclass_confusion_matrix"" : {} <4>
+			         }
+			      }
+			   }
 			}");
 		}
 	}

@@ -16,7 +16,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line90()
+		public void Line92()
 		{
 			// tag::8f0511f8a5cb176ff2afdd4311799a33[]
 			var response0 = new SearchResponse<object>();

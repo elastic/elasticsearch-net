@@ -6,7 +6,7 @@ namespace Examples.Ilm.Apis
 	public class ExplainPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line91()
+		public void Line97()
 		{
 			// tag::0f6fa3a706a7c17858d3dbe329839ea6[]
 			var response0 = new SearchResponse<object>();

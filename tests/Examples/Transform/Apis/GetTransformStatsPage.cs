@@ -6,7 +6,7 @@ namespace Examples.Transform.Apis
 	public class GetTransformStatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line104()
+		public void Line191()
 		{
 			// tag::53c6256295111524d5ff2885bdcb99a9[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +16,7 @@ namespace Examples.Transform.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line113()
+		public void Line200()
 		{
 			// tag::5db14291fd57c9cd780c969ae26dfaba[]
 			var response0 = new SearchResponse<object>();

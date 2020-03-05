@@ -16,7 +16,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line91()
+		public void Line93()
 		{
 			// tag::0e98949e80e665795bc6cfc997165241[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +26,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line101()
+		public void Line103()
 		{
 			// tag::d7898526d239d2aea83727fb982f8f77[]
 			var response0 = new SearchResponse<object>();
