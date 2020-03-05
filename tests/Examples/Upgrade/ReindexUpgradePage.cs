@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Upgrade
 {
 	public class ReindexUpgradePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("upgrade/reindex_upgrade.asciidoc:160")]
 		public void Line160()
 		{
 			// tag::acd65c045139fef38ef5cd20c8c1cfc1[]

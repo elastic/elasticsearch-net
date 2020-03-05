@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search
 {
 	public class RankEvalPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/rank-eval.asciidoc:223")]
 		public void Line223()
 		{
 			// tag::2a989679e4b71569e17e02db8865b685[]
@@ -31,7 +33,33 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line267()
+		[Description("search/rank-eval.asciidoc:278")]
+		public void Line278()
+		{
+			// tag::b0b86fd5ac0d4814fc70cb0642cee258[]
+			var response0 = new SearchResponse<object>();
+			// end::b0b86fd5ac0d4814fc70cb0642cee258[]
+
+			response0.MatchesExample(@"GET /twitter/_rank_eval
+			{
+			    ""requests"": [
+			    {
+			        ""id"": ""JFK query"",
+			        ""request"": { ""query"": { ""match_all"": {}}},
+			        ""ratings"": []
+			    }],
+			    ""metric"": {
+			      ""recall"": {
+			        ""k"" : 20,
+			        ""relevant_rating_threshold"": 1
+			      }
+			   }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("search/rank-eval.asciidoc:319")]
+		public void Line319()
 		{
 			// tag::351775a1f73e47025463bd937948f7b4[]
 			var response0 = new SearchResponse<object>();
@@ -55,7 +83,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line311()
+		[Description("search/rank-eval.asciidoc:363")]
+		public void Line363()
 		{
 			// tag::c4f013ff1a8b80c87c0265a91ed12648[]
 			var response0 = new SearchResponse<object>();
@@ -79,7 +108,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line367()
+		[Description("search/rank-eval.asciidoc:419")]
+		public void Line419()
 		{
 			// tag::12c4a9be9ffc26cdc0e9343d53c1fd5d[]
 			var response0 = new SearchResponse<object>();

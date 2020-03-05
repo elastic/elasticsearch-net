@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class GetApiKeysPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:65")]
 		public void Line65()
 		{
 			// tag::8d3be5482270921111754772479f8676[]
@@ -20,6 +22,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:90")]
 		public void Line90()
 		{
 			// tag::701f1fffc65e9e51c96aa60261e2eae3[]
@@ -30,6 +33,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:99")]
 		public void Line99()
 		{
 			// tag::7b864d61767ab283cfd5f9b9ba784b1f[]
@@ -40,6 +44,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:107")]
 		public void Line107()
 		{
 			// tag::10d9da8a3b7061479be908c8c5c76cfb[]
@@ -50,6 +55,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:115")]
 		public void Line115()
 		{
 			// tag::62eafc5b3ab75cc67314d5a8567d6077[]
@@ -60,6 +66,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:123")]
 		public void Line123()
 		{
 			// tag::9608820dbeac261ba53fb89bb9400560[]
@@ -70,6 +77,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:130")]
 		public void Line130()
 		{
 			// tag::ca5ae0eb7709f3807bc6239cd4bd9141[]
@@ -80,6 +88,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:138")]
 		public void Line138()
 		{
 			// tag::fffaa7ecef94e1404ebec2f9069448e3[]
@@ -93,6 +102,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:149")]
 		public void Line149()
 		{
 			// tag::dffbbdc4025e5777c647d8818847b960[]
@@ -103,6 +113,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:159")]
 		public void Line159()
 		{
 			// tag::30abc76a39e551f4b52c65002bb6405d[]

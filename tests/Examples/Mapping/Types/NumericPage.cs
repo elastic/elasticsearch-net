@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class NumericPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/numeric.asciidoc:22")]
 		public void Line22()
 		{
 			// tag::a71c438cc4df1cafe3109ccff475afdb[]

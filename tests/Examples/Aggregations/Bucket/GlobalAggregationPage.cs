@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class GlobalAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/global-aggregation.asciidoc:15")]
 		public void Line15()
 		{
 			// tag::d209f2447584a37e7f1480912b40a52d[]

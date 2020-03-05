@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Matrix
 {
 	public class StatsAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/matrix/stats-aggregation.asciidoc:39")]
 		public void Line39()
 		{
 			// tag::8ab89e635fcbc485d1728c13dfeeb1ae[]
@@ -25,6 +27,7 @@ namespace Examples.Aggregations.Matrix
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/matrix/stats-aggregation.asciidoc:122")]
 		public void Line122()
 		{
 			// tag::7ee2877f8f031b9a4e56a40b371421fb[]

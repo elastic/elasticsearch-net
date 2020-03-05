@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class TokenCountPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/token-count.asciidoc:14")]
 		public void Line14()
 		{
 			// tag::98c3d643f71c1fd71238ebb748e846e7[]

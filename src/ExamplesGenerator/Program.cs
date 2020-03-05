@@ -20,7 +20,7 @@ namespace ExamplesGenerator
 				: GetBranchNameFromGit();
 
 			var examples = CSharpParser.ParseImplementedExamples();
-			AsciiDocGenerator.GenerateExampleAsciiDoc(examples, branchName, opts.Path);
+			AsciiDocGenerator.GenerateExampleAsciiDoc(examples, branchName);
 			return 0;
 		}
 
@@ -67,9 +67,6 @@ namespace ExamplesGenerator
 	[Verb("asciidoc", HelpText = "Generate asciidoc client example files from the C# Examples classes")]
 	public class AsciiDocOptions
 	{
-		[Option('p', "path", Required = true, HelpText = "Path to the master reference file")]
-		public string Path { get; set; }
-
 		[Option('b', "branch", Required = false, HelpText = "The version that appears in generated from source link")]
 		public string BranchName { get; set; }
 	}

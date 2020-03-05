@@ -1,11 +1,12 @@
+// docs/bulk.asciidoc:11
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line11 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/BulkPage.cs#L10-L45.
+This file is generated from method Line11 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/BulkPage.cs#L11-L47.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
-
-// docs/bulk.asciidoc:10
+////
 
 [source, csharp]
 ----

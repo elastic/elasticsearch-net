@@ -1,11 +1,12 @@
+// indices/delete-index.asciidoc:10
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line10 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Indices/DeleteIndexPage.cs#L8-L16.
+This file is generated from method Line10 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Indices/DeleteIndexPage.cs#L9-L18.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
-
-// indices/delete-index.asciidoc:8
+////
 
 [source, csharp]
 ----

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Root
 {
 	public class FrozenIndicesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("frozen-indices.asciidoc:66")]
 		public void Line66()
 		{
 			// tag::f9018c483fb6b810d8a921668addfc71[]
@@ -16,6 +18,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("frozen-indices.asciidoc:83")]
 		public void Line83()
 		{
 			// tag::0652fc9f77639fce67a87dc2e33cef51[]
@@ -26,6 +29,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("frozen-indices.asciidoc:106")]
 		public void Line106()
 		{
 			// tag::9ff10591660890ba9d00eb14168c3b67[]

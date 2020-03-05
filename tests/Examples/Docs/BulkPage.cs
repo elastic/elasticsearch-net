@@ -2,12 +2,14 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.Docs
 {
 	public class BulkPage : ExampleBase
 	{
 		[U]
+		[Description("docs/bulk.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::ae9ccfaa146731ab9176df90670db1c2[]
@@ -45,6 +47,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/bulk.asciidoc:405")]
 		public void Line405()
 		{
 			// tag::8cd00a3aba7c3c158277bc032aac2830[]

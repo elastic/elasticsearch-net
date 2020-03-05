@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class DeleteDatafeedPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line46()
+		[Description("ml/anomaly-detection/apis/delete-datafeed.asciidoc:45")]
+		public void Line45()
 		{
 			// tag::8a12cd824404d74f098d854716a26899[]
 			var response0 = new SearchResponse<object>();

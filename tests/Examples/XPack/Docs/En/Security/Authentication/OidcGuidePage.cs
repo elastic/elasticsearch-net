@@ -1,20 +1,22 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Security.Authentication
 {
 	public class OidcGuidePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authentication/oidc-guide.asciidoc:427")]
 		public void Line427()
 		{
-			// tag::66555cd727c474abae640ebb6c4d0a75[]
+			// tag::10de9fd4a38755020a07c4ec964d44c9[]
 			var response0 = new SearchResponse<object>();
-			// end::66555cd727c474abae640ebb6c4d0a75[]
+			// end::10de9fd4a38755020a07c4ec964d44c9[]
 
-			response0.MatchesExample(@"PUT /_security/role_mapping/oidc-kibana
+			response0.MatchesExample(@"PUT /_security/role_mapping/oidc-example
 			{
-			  ""roles"": [ ""kibana_user"" ],
+			  ""roles"": [ ""example_role"" ], <1>
 			  ""enabled"": true,
 			  ""rules"": {
 			    ""field"": { ""realm.name"": ""oidc1"" }
@@ -23,7 +25,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line462()
+		[Description("../../x-pack/docs/en/security/authentication/oidc-guide.asciidoc:466")]
+		public void Line466()
 		{
 			// tag::f3ab820e1f2f54ea718017aeae865742[]
 			var response0 = new SearchResponse<object>();
@@ -41,7 +44,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line600()
+		[Description("../../x-pack/docs/en/security/authentication/oidc-guide.asciidoc:604")]
+		public void Line604()
 		{
 			// tag::a325f31e94fb1e8739258910593504a8[]
 			var response0 = new SearchResponse<object>();
@@ -54,7 +58,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line609()
+		[Description("../../x-pack/docs/en/security/authentication/oidc-guide.asciidoc:613")]
+		public void Line613()
 		{
 			// tag::53e4ac5a4009fd21024f4b31e54aa83f[]
 			var response0 = new SearchResponse<object>();
@@ -68,7 +73,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line629()
+		[Description("../../x-pack/docs/en/security/authentication/oidc-guide.asciidoc:633")]
+		public void Line633()
 		{
 			// tag::e3019fd5f23458ae49ad9854c97d321c[]
 			var response0 = new SearchResponse<object>();
@@ -81,7 +87,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line652()
+		[Description("../../x-pack/docs/en/security/authentication/oidc-guide.asciidoc:656")]
+		public void Line656()
 		{
 			// tag::9e5d5a6c9adcba75b906e81c1496bd01[]
 			var response0 = new SearchResponse<object>();
@@ -97,7 +104,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line670()
+		[Description("../../x-pack/docs/en/security/authentication/oidc-guide.asciidoc:674")]
+		public void Line674()
 		{
 			// tag::2a1eece9a59ac1773edcf0a932c26de0[]
 			var response0 = new SearchResponse<object>();

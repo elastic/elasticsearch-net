@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Watcher
 {
 	public class PutWatchPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/watcher/put-watch.asciidoc:117")]
 		public void Line117()
 		{
 			// tag::3a12feb0de224bfaaf518d95b9f516ff[]

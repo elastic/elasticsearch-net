@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class SpanFirstQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/span-first-query.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::020655381882d0721472a1581e06384a[]

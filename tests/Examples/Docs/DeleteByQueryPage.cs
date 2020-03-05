@@ -4,12 +4,14 @@ using Elasticsearch.Net;
 using Examples.Models;
 using Nest;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.Docs
 {
 	public class DeleteByQueryPage : ExampleBase
 	{
 		[U]
+		[Description("docs/delete-by-query.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::ebb6b59fbc9325c17e45f524602d6be2[]
@@ -44,7 +46,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line347()
+		[Description("docs/delete-by-query.asciidoc:349")]
+		public void Line349()
 		{
 			// tag::e21e1c26dc8687e7bf7bd2bf019a6698[]
 			var deleteByQueryResponse = client.DeleteByQuery<Tweet>(d => d
@@ -63,7 +66,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line360()
+		[Description("docs/delete-by-query.asciidoc:362")]
+		public void Line362()
 		{
 			// tag::c22b72c4a52ee098331b3f252c22860d[]
 			var deleteByQueryResponse = client.DeleteByQuery<object>(d => d
@@ -81,7 +85,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line374()
+		[Description("docs/delete-by-query.asciidoc:376")]
+		public void Line376()
 		{
 			// tag::c32a3f8071d87f0a3f5a78e07fe7a669[]
 			var deleteByQueryResponse = client.DeleteByQuery<Tweet>(d => d
@@ -117,7 +122,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line392()
+		[Description("docs/delete-by-query.asciidoc:394")]
+		public void Line394()
 		{
 			// tag::dfb1fe96d806a644214d06f9b4b87878[]
 			var deleteByQueryResponse = client.DeleteByQuery<Tweet>(d => d
@@ -151,7 +157,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line412()
+		[Description("docs/delete-by-query.asciidoc:414")]
+		public void Line414()
 		{
 			// tag::1e49eba5b9042c1900a608fe5105ba43[]
 			var deleteByQueryResponse = client.DeleteByQuery<Tweet>(d => d
@@ -231,7 +238,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line447()
+		[Description("docs/delete-by-query.asciidoc:449")]
+		public void Line449()
 		{
 			// tag::3e573bfabe00f8bfb8bb69aa5820768e[]
 			var refreshResponse = client.Indices.Refresh();
@@ -280,7 +288,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line485()
+		[Description("docs/delete-by-query.asciidoc:487")]
+		public void Line487()
 		{
 			// tag::a5a7050fb9dcb9574e081957ade28617[]
 			var deleteByQueryResponse = client.DeleteByQuery<Tweet>(d => d
@@ -319,7 +328,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line502()
+		[Description("docs/delete-by-query.asciidoc:504")]
+		public void Line504()
 		{
 			// tag::14701dcc0cca9665fce2aace0cb62af7[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -358,7 +368,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line570()
+		[Description("docs/delete-by-query.asciidoc:572")]
+		public void Line572()
 		{
 			// tag::52c7e4172a446c394210a07c464c57d2[]
 			var rethrottleResponse = client.DeleteByQueryRethrottle("r1A2WoRbTwKZ516z6NEs5A:36619",
@@ -371,7 +382,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line584()
+		[Description("docs/delete-by-query.asciidoc:586")]
+		public void Line586()
 		{
 			// tag::216848930c2d344fe0bed0daa70c35b9[]
 			var listTasksResponse = client.Tasks.List(t => t
@@ -384,7 +396,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line638()
+		[Description("docs/delete-by-query.asciidoc:640")]
+		public void Line640()
 		{
 			// tag::be3a6431d01846950dc1a39a7a6a1faa[]
 			var getTaskResponse = client.Tasks.GetTask("r1A2WoRbTwKZ516z6NEs5A:36619");
@@ -394,7 +407,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		public void Line658()
+		[Description("docs/delete-by-query.asciidoc:660")]
+		public void Line660()
 		{
 			// tag::18ddb7e7a4bcafd449df956e828ed7a8[]
 			var cancelTaskResponse = client.Tasks.Cancel(t => t

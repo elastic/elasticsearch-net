@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class FindFileStructurePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line226()
+		[Description("ml/anomaly-detection/apis/find-file-structure.asciidoc:247")]
+		public void Line247()
 		{
 			// tag::7a145f2c4ad1c3c9fea24afeadb847ef[]
 			var response0 = new SearchResponse<object>();

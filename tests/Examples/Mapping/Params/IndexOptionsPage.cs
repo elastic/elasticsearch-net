@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class IndexOptionsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line37()
+		[Description("mapping/params/index-options.asciidoc:34")]
+		public void Line34()
 		{
 			// tag::3a24ebb542f657420fcd8fdf3f757ce6[]
 			var response0 = new SearchResponse<object>();

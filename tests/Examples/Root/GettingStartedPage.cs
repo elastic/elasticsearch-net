@@ -5,13 +5,15 @@ using Examples.Models;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.Root
 {
 	public class GettingStartedPage : ExampleBase
 	{
 		[U]
-		public void Line169()
+		[Description("getting-started.asciidoc:167")]
+		public void Line167()
 		{
 			// tag::f8cc4b331a19ff4df8e4a490f906ee69[]
 			var catResponse = client.Cat.Health(h => h.Verbose());
@@ -21,7 +23,8 @@ namespace Examples.Root
 		}
 
 		[U]
-		public void Line214()
+		[Description("getting-started.asciidoc:251")]
+		public void Line251()
 		{
 			// tag::311c4b632a29b9ead63b02d01f10096b[]
 			var indexResponse = client.Index(new Customer
@@ -40,7 +43,8 @@ namespace Examples.Root
 		}
 
 		[U]
-		public void Line253()
+		[Description("getting-started.asciidoc:290")]
+		public void Line290()
 		{
 			// tag::3f3b3e207f79303ce6f86e03e928e062[]
 			var getResponse = client.Get<Customer>(1, g => g
@@ -52,7 +56,8 @@ namespace Examples.Root
 		}
 
 		[U]
-		public void Line355()
+		[Description("getting-started.asciidoc:392")]
+		public void Line392()
 		{
 			// tag::506844befdc5691d835771bcbb1c1a60[]
 			var searchResponse = client.Search<Account>(s => s
@@ -81,7 +86,8 @@ namespace Examples.Root
 		}
 
 		[U]
-		public void Line424()
+		[Description("getting-started.asciidoc:461")]
+		public void Line461()
 		{
 			// tag::4b90feb9d5d3dbfce424dac0341320b7[]
 			var response0 = client.Search<Account>(s => s
@@ -116,7 +122,8 @@ namespace Examples.Root
 		}
 
 		[U]
-		public void Line445()
+		[Description("getting-started.asciidoc:482")]
+		public void Line482()
 		{
 			// tag::cd247f267968aa0927bfdad56852f8f5[]
 			var searchResponse = client.Search<Account>(s => s
@@ -145,7 +152,8 @@ namespace Examples.Root
 		}
 
 		[U]
-		public void Line458()
+		[Description("getting-started.asciidoc:495")]
+		public void Line495()
 		{
 			// tag::231aa0bb39c35fe199d28fe0e4a62b2e[]
 			var searchResponse = client.Search<Account>(s => s
@@ -174,7 +182,8 @@ namespace Examples.Root
 		}
 
 		[U]
-		public void Line475()
+		[Description("getting-started.asciidoc:512")]
+		public void Line512()
 		{
 			// tag::47bb632c6091ad0cd94bc660bdd309a5[]
 			var searchResponse = client.Search<Account>(s => s
@@ -223,7 +232,8 @@ namespace Examples.Root
 		}
 
 		[U]
-		public void Line507()
+		[Description("getting-started.asciidoc:544")]
+		public void Line544()
 		{
 			// tag::251ea12c1248385ab409906ac64d9ee9[]
 			var searchResponse = client.Search<Account>(s => s
@@ -277,7 +287,8 @@ namespace Examples.Root
 		}
 
 		[U]
-		public void Line541()
+		[Description("getting-started.asciidoc:578")]
+		public void Line578()
 		{
 			// tag::feefeb68144002fd1fff57b77b95b85e[]
 			var searchResponse = client.Search<Account>(s => s
@@ -305,7 +316,8 @@ namespace Examples.Root
 		}
 
 		[U]
-		public void Line628()
+		[Description("getting-started.asciidoc:665")]
+		public void Line665()
 		{
 			// tag::cfbaea6f0df045c5d940bbb6a9c69cd8[]
 			var searchResponse = client.Search<Account>(s => s
@@ -345,7 +357,8 @@ namespace Examples.Root
 		}
 
 		[U]
-		public void Line654()
+		[Description("getting-started.asciidoc:691")]
+		public void Line691()
 		{
 			// tag::645796e8047967ca4a7635a22a876f4c[]
 			var searchResponse = client.Search<Account>(s => s

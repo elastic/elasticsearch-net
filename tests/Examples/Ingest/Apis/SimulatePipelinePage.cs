@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ingest.Apis
 {
 	public class SimulatePipelinePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/apis/simulate-pipeline.asciidoc:31")]
 		public void Line31()
 		{
 			// tag::67ffa135c50c43d6788636c88078c7d1[]
@@ -34,6 +36,7 @@ namespace Examples.Ingest.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/apis/simulate-pipeline.asciidoc:212")]
 		public void Line212()
 		{
 			// tag::17c2b0a6b0305804ff3b7fd3b4a68df3[]
@@ -74,6 +77,7 @@ namespace Examples.Ingest.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/apis/simulate-pipeline.asciidoc:296")]
 		public void Line296()
 		{
 			// tag::463de55bb164cde9ac51acd4a7384901[]

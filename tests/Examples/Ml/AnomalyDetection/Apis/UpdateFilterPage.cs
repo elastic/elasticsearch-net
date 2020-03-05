@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class UpdateFilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line48()
+		[Description("ml/anomaly-detection/apis/update-filter.asciidoc:46")]
+		public void Line46()
 		{
 			// tag::4d21725453955582ff12b4a1104aa7b6[]
 			var response0 = new SearchResponse<object>();

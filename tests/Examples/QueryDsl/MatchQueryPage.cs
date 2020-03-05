@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class MatchQueryPage : ExampleBase
 	{
 		[U]
+		[Description("query-dsl/match-query.asciidoc:18")]
 		public void Line18()
 		{
 			// tag::e0d6e02b998bdea99c9c08dcc3630c5e[]
@@ -33,6 +35,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/match-query.asciidoc:150")]
 		public void Line150()
 		{
 			// tag::fa2fe60f570bd930d2891778c6efbfe6[]
@@ -56,7 +59,8 @@ namespace Examples.QueryDsl
 			    }
 			}", e =>
 			{
-				e.ApplyBodyChanges(b => {
+				e.ApplyBodyChanges(b =>
+				{
 					b["query"]["match"]["message"].ToLongFormQuery();
 				});
 				return e;
@@ -64,6 +68,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/match-query.asciidoc:175")]
 		public void Line175()
 		{
 			// tag::6138d6919f3cbaaf61e1092f817d295c[]
@@ -93,6 +98,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/match-query.asciidoc:219")]
 		public void Line219()
 		{
 			// tag::5043b83a89091fa00edb341ddf7ba370[]
@@ -122,6 +128,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/match-query.asciidoc:241")]
 		public void Line241()
 		{
 			// tag::0ac9916f47a2483b89c1416684af322a[]
@@ -153,6 +160,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/match-query.asciidoc:268")]
 		public void Line268()
 		{
 			// tag::7f56755fb6c42f7e6203339a6d0cb6e6[]

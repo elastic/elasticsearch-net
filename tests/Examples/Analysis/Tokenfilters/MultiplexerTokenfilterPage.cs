@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class MultiplexerTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line33()
+		[Description("analysis/tokenfilters/multiplexer-tokenfilter.asciidoc:36")]
+		public void Line36()
 		{
 			// tag::c306212babadc14fa124b88fd8c43a6b[]
 			var response0 = new SearchResponse<object>();
@@ -34,7 +36,8 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line58()
+		[Description("analysis/tokenfilters/multiplexer-tokenfilter.asciidoc:61")]
+		public void Line61()
 		{
 			// tag::fa9a3ef94470f3d9bd6500b65bf993d1[]
 			var response0 = new SearchResponse<object>();

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Security.Authorization
 {
 	public class FieldLevelSecurityPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/field-level-security.asciidoc:18")]
 		public void Line18()
 		{
 			// tag::976e5f9baf81bd6ca0e9f80916a0a4f9[]
@@ -27,6 +29,7 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/field-level-security.asciidoc:43")]
 		public void Line43()
 		{
 			// tag::7c9076f3e93a8f61189783c736bf6082[]
@@ -48,6 +51,7 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/field-level-security.asciidoc:77")]
 		public void Line77()
 		{
 			// tag::d7d92816cac64b7c70d72b0000eeeeea[]
@@ -69,6 +73,7 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/field-level-security.asciidoc:96")]
 		public void Line96()
 		{
 			// tag::bb28d1f7f3f09f5061d7f4351aee89fc[]
@@ -90,6 +95,7 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/field-level-security.asciidoc:114")]
 		public void Line114()
 		{
 			// tag::7a987cd13383bdc990155d7bd5fb221e[]
@@ -112,6 +118,7 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/field-level-security.asciidoc:142")]
 		public void Line142()
 		{
 			// tag::962e6187bbd71c5749376efed04b65ba[]
@@ -134,6 +141,7 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/field-level-security.asciidoc:169")]
 		public void Line169()
 		{
 			// tag::a1acf454bd6477183ce27ace872deb46[]

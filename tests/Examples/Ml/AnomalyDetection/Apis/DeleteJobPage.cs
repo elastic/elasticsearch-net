@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class DeleteJobPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line62()
+		[Description("ml/anomaly-detection/apis/delete-job.asciidoc:60")]
+		public void Line60()
 		{
 			// tag::3ac8b5234e9d53859245cf8ab0094ca5[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +18,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line79()
+		[Description("ml/anomaly-detection/apis/delete-job.asciidoc:77")]
+		public void Line77()
 		{
 			// tag::ccec66fb20d5ede6c691e0890cfe402a[]
 			var response0 = new SearchResponse<object>();

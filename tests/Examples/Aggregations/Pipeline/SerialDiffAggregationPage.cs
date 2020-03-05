@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Pipeline
 {
 	public class SerialDiffAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/serial-diff-aggregation.asciidoc:64")]
 		public void Line64()
 		{
 			// tag::b4da132cb934c33d61e2b60988c6d4a3[]

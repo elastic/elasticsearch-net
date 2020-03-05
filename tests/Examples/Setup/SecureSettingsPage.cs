@@ -1,18 +1,23 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Setup
 {
 	public class SecureSettingsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line125()
+		[Description("setup/secure-settings.asciidoc:35")]
+		public void Line35()
 		{
-			// tag::6e87271a5a10dbb8d27b25c7dbfa868a[]
+			// tag::32732207b66d0fd661e8e7638aef5176[]
 			var response0 = new SearchResponse<object>();
-			// end::6e87271a5a10dbb8d27b25c7dbfa868a[]
+			// end::32732207b66d0fd661e8e7638aef5176[]
 
-			response0.MatchesExample(@"POST _nodes/reload_secure_settings");
+			response0.MatchesExample(@"POST _nodes/reload_secure_settings
+			{
+			  ""reload_secure_settings"": ""s3cr3t"" <1>
+			}");
 		}
 	}
 }

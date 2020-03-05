@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Transform
 {
 	public class EcommerceTutorialPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line87()
+		[Description("transform/ecommerce-tutorial.asciidoc:88")]
+		public void Line88()
 		{
 			// tag::8345d2615f43a934fe1871a5120eca1d[]
 			var response0 = new SearchResponse<object>();
@@ -59,7 +61,8 @@ namespace Examples.Transform
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line163()
+		[Description("transform/ecommerce-tutorial.asciidoc:164")]
+		public void Line164()
 		{
 			// tag::c68404749f090ab191c0fd5f651635cf[]
 			var response0 = new SearchResponse<object>();
@@ -119,7 +122,8 @@ namespace Examples.Transform
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line239()
+		[Description("transform/ecommerce-tutorial.asciidoc:243")]
+		public void Line243()
 		{
 			// tag::4ded8ad815ac0e83b1c21a6c18fd0763[]
 			var response0 = new SearchResponse<object>();

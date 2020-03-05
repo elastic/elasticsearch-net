@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class ShardStoresPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("indices/shard-stores.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::45a023986499436a9153eef87788ab82[]
@@ -16,7 +18,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line99()
+		[Description("indices/shard-stores.asciidoc:101")]
+		public void Line101()
 		{
 			// tag::cd93919e13f656ad2e6629f45c579b93[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +29,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line109()
+		[Description("indices/shard-stores.asciidoc:111")]
+		public void Line111()
 		{
 			// tag::af970eb8b93cdea52209e1256eba9d8c[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +40,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line119()
+		[Description("indices/shard-stores.asciidoc:121")]
+		public void Line121()
 		{
 			// tag::00b3b6d76a368ae71277ea24af318693[]
 			var response0 = new SearchResponse<object>();
@@ -46,7 +51,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line135()
+		[Description("indices/shard-stores.asciidoc:137")]
+		public void Line137()
 		{
 			// tag::3545261682af72f4bee57f2bac0a9590[]
 			var response0 = new SearchResponse<object>();

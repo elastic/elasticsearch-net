@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class DelegatePkiAuthenticationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/delegate-pki-authentication.asciidoc:77")]
 		public void Line77()
 		{
 			// tag::964f522091306634794ff544c867f002[]

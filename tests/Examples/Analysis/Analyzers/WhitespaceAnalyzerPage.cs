@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Analyzers
 {
 	public class WhitespaceAnalyzerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/analyzers/whitespace-analyzer.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::262a778d754add491fbc9c721ac25bf0[]
@@ -20,6 +22,7 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/analyzers/whitespace-analyzer.asciidoc:128")]
 		public void Line128()
 		{
 			// tag::31aed390c30bd4f42a5c56253695e53f[]

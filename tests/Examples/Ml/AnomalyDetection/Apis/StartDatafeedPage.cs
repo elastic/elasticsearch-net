@@ -1,20 +1,22 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class StartDatafeedPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line100()
+		[Description("ml/anomaly-detection/apis/start-datafeed.asciidoc:99")]
+		public void Line99()
 		{
-			// tag::c85f09d9a0622d32788bd56b0a008592[]
+			// tag::d7ae456f119246e95f2f4c37e7544b8c[]
 			var response0 = new SearchResponse<object>();
-			// end::c85f09d9a0622d32788bd56b0a008592[]
+			// end::d7ae456f119246e95f2f4c37e7544b8c[]
 
-			response0.MatchesExample(@"POST _ml/datafeeds/datafeed-total-requests/_start
+			response0.MatchesExample(@"POST _ml/datafeeds/datafeed-low_request_rate/_start
 			{
-			  ""start"": ""2017-04-07T18:22:16Z""
+			  ""start"": ""2019-04-07T18:22:16Z""
 			}");
 		}
 	}

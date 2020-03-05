@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations
 {
 	public class MiscPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/misc.asciidoc:19")]
 		public void Line19()
 		{
 			// tag::0827fcf75228b6d0206a1ffe6bf7d263[]
@@ -26,6 +28,7 @@ namespace Examples.Aggregations
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/misc.asciidoc:45")]
 		public void Line45()
 		{
 			// tag::2d39331333f64fcc31fa298ac59b161f[]
@@ -49,6 +52,7 @@ namespace Examples.Aggregations
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/misc.asciidoc:96")]
 		public void Line96()
 		{
 			// tag::ea447f43ebd5f72c65de699904474d0d[]

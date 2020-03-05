@@ -1,5 +1,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search
 {
@@ -7,6 +8,7 @@ namespace Examples.Search
 	{
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/validate.asciidoc:7")]
 		public void Line7()
 		{
 			// tag::6bdf94c025faf346013a70e3473d5f87[]
@@ -16,7 +18,8 @@ namespace Examples.Search
 			response0.MatchesExample(@"GET twitter/_validate/query?q=user:foo");
 		}
 		[U(Skip = "Example not implemented")]
-		public void Line73()
+		[Description("search/validate.asciidoc:75")]
+		public void Line75()
 		{
 			// tag::a0a6e4abbf0a5d064d06d06ddc585f4c[]
 			var response0 = new SearchResponse<object>();
@@ -30,7 +33,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line102()
+		[Description("search/validate.asciidoc:104")]
+		public void Line104()
 		{
 			// tag::1a0ce57a5e6d73765601de98a5d60d80[]
 			var response0 = new SearchResponse<object>();
@@ -54,7 +58,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line129()
+		[Description("search/validate.asciidoc:131")]
+		public void Line131()
 		{
 			// tag::9989c7860423519c7357936a73c2a5ce[]
 			var response0 = new SearchResponse<object>();
@@ -72,7 +77,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line153()
+		[Description("search/validate.asciidoc:155")]
+		public void Line155()
 		{
 			// tag::b5cd0cc45db5f2fba30ac310630ad172[]
 			var response0 = new SearchResponse<object>();
@@ -90,7 +96,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line194()
+		[Description("search/validate.asciidoc:196")]
+		public void Line196()
 		{
 			// tag::fd74d7518bab5f1dbc1fed588b9bc2a6[]
 			var response0 = new SearchResponse<object>();
@@ -110,7 +117,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line252()
+		[Description("search/validate.asciidoc:254")]
+		public void Line254()
 		{
 			// tag::d253135ac0a4b3b04531b1a5d2a19279[]
 			var response0 = new SearchResponse<object>();

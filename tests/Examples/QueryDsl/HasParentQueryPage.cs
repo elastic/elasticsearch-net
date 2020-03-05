@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class HasParentQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/has-parent-query.asciidoc:27")]
 		public void Line27()
 		{
 			// tag::6515e74b150bbdae570e0fd3ef5ac2e5[]
@@ -35,6 +37,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/has-parent-query.asciidoc:52")]
 		public void Line52()
 		{
 			// tag::e539bfb5c73771c73acdf22fe77dde04[]
@@ -59,6 +62,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/has-parent-query.asciidoc:122")]
 		public void Line122()
 		{
 			// tag::85d88b08243afbef45d4dcea72c9a41c[]

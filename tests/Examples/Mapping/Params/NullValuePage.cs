@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class NullValuePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/null-value.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::463e64093c0dfba910eb5b248085584f[]

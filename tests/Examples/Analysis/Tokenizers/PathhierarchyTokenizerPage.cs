@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenizers
 {
 	public class PathhierarchyTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/pathhierarchy-tokenizer.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::dc4dcfeae8a5f248639335c2c9809549[]
@@ -20,6 +22,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/pathhierarchy-tokenizer.asciidoc:93")]
 		public void Line93()
 		{
 			// tag::fcc35d56dff0291bcf3663830ce99254[]

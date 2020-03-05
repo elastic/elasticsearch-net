@@ -1,11 +1,12 @@
+// query-dsl/query-string-query.asciidoc:408
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line408 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs#L208-L234.
+This file is generated from method Line408 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs#L216-L243.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
-
-// query-dsl/query-string-query.asciidoc:208
+////
 
 [source, csharp]
 ----

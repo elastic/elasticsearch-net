@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class InvalidateTokensPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-tokens.asciidoc:72")]
 		public void Line72()
 		{
 			// tag::cee591c1fc70d4f180c623a3a6d07755[]
@@ -19,6 +21,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-tokens.asciidoc:95")]
 		public void Line95()
 		{
 			// tag::dbf9abc37899352751dab0ede62af2fd[]
@@ -32,6 +35,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-tokens.asciidoc:108")]
 		public void Line108()
 		{
 			// tag::e1337c6b76defd5a46d05220f9d9c9fc[]
@@ -47,6 +51,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-tokens.asciidoc:135")]
 		public void Line135()
 		{
 			// tag::0c6f9c9da75293fae69659ac1d6329de[]
@@ -60,6 +65,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-tokens.asciidoc:148")]
 		public void Line148()
 		{
 			// tag::4bc4db44b8c74610b73f21a421099a13[]
@@ -73,6 +79,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-tokens.asciidoc:159")]
 		public void Line159()
 		{
 			// tag::0280247e0cf2e561c548f22c9fb31163[]
@@ -86,6 +93,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-tokens.asciidoc:170")]
 		public void Line170()
 		{
 			// tag::6dd2a107bc64fd6f058fb17c21640649[]

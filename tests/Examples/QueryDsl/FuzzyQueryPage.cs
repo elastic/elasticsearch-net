@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class FuzzyQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/fuzzy-query.asciidoc:29")]
 		public void Line29()
 		{
 			// tag::10dd8b5da64f1f6af031706dd50bc9b5[]
@@ -25,6 +27,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/fuzzy-query.asciidoc:46")]
 		public void Line46()
 		{
 			// tag::8baebb670ca5624d7920ccac4afdff06[]

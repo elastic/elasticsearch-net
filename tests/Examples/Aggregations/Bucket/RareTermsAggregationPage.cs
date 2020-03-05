@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class RareTermsAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/rare-terms-aggregation.asciidoc:89")]
 		public void Line89()
 		{
 			// tag::91bbb85bc6add315fc9a044d8bcfec8a[]
@@ -25,6 +27,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/rare-terms-aggregation.asciidoc:127")]
 		public void Line127()
 		{
 			// tag::0fa84243cd275a885298602aa8b4415f[]
@@ -45,6 +48,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/rare-terms-aggregation.asciidoc:277")]
 		public void Line277()
 		{
 			// tag::b7207f557d5481db52d5df1aa0dae982[]
@@ -66,6 +70,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/rare-terms-aggregation.asciidoc:305")]
 		public void Line305()
 		{
 			// tag::dea7ef16acd6d148a20876630a010522[]
@@ -87,6 +92,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/rare-terms-aggregation.asciidoc:328")]
 		public void Line328()
 		{
 			// tag::2eea6157a9fbc54a8987e5c1a4f14bbe[]

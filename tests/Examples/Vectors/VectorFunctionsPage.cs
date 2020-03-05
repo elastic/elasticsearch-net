@@ -1,14 +1,16 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Vectors
 {
 	public class VectorFunctionsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line21()
+		[Description("vectors/vector-functions.asciidoc:15")]
+		public void Line15()
 		{
-			// tag::0f621a396f26e1a8d1a724329260af07[]
+			// tag::f4bdad6ecd4a53cabee95883731e1bc7[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
@@ -16,7 +18,7 @@ namespace Examples.Vectors
 			var response2 = new SearchResponse<object>();
 
 			var response3 = new SearchResponse<object>();
-			// end::0f621a396f26e1a8d1a724329260af07[]
+			// end::f4bdad6ecd4a53cabee95883731e1bc7[]
 
 			response0.MatchesExample(@"PUT my_index
 			{
@@ -25,9 +27,6 @@ namespace Examples.Vectors
 			      ""my_dense_vector"": {
 			        ""type"": ""dense_vector"",
 			        ""dims"": 3
-			      },
-			      ""my_sparse_vector"" : {
-			        ""type"" : ""sparse_vector""
 			      },
 			      ""status"" : {
 			        ""type"" : ""keyword""
@@ -39,26 +38,25 @@ namespace Examples.Vectors
 			response1.MatchesExample(@"PUT my_index/_doc/1
 			{
 			  ""my_dense_vector"": [0.5, 10, 6],
-			  ""my_sparse_vector"": {""2"": 1.5, ""15"" : 2, ""50"": -1.1, ""4545"": 1.1},
 			  ""status"" : ""published""
 			}");
 
 			response2.MatchesExample(@"PUT my_index/_doc/2
 			{
 			  ""my_dense_vector"": [-0.5, 10, 10],
-			  ""my_sparse_vector"": {""2"": 2.5, ""10"" : 1.3, ""55"": -2.3, ""113"": 1.6},
 			  ""status"" : ""published""
 			}");
 
-			response3.MatchesExample(@"");
+			response3.MatchesExample(@"POST my_index/_refresh");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line61()
+		[Description("vectors/vector-functions.asciidoc:52")]
+		public void Line52()
 		{
-			// tag::e077e86607f272568cff9cd950c21bb6[]
+			// tag::fb7eaa05e4b418cb3da04e56d3eefa71[]
 			var response0 = new SearchResponse<object>();
-			// end::e077e86607f272568cff9cd950c21bb6[]
+			// end::fb7eaa05e4b418cb3da04e56d3eefa71[]
 
 			response0.MatchesExample(@"GET my_index/_search
 			{
@@ -68,15 +66,15 @@ namespace Examples.Vectors
 			        ""bool"" : {
 			          ""filter"" : {
 			            ""term"" : {
-			              ""status"" : ""published"" \<1>
+			              ""status"" : ""published"" <1>
 			            }
 			          }
 			        }
 			      },
 			      ""script"": {
-			        ""source"": ""cosineSimilarity(params.query_vector, doc['my_dense_vector']) + 1.0"", \<2>
+			        ""source"": ""cosineSimilarity(params.query_vector, 'my_dense_vector') + 1.0"", <2>
 			        ""params"": {
-			          ""query_vector"": [4, 3.4, -0.2]  \<3>
+			          ""query_vector"": [4, 3.4, -0.2]  <3>
 			        }
 			      }
 			    }
@@ -85,42 +83,12 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line97()
+		[Description("vectors/vector-functions.asciidoc:88")]
+		public void Line88()
 		{
-			// tag::d6b15235dd3238e8b94caa42d0c0c32e[]
+			// tag::5f3793dbe5223db53fc67861388ecb10[]
 			var response0 = new SearchResponse<object>();
-			// end::d6b15235dd3238e8b94caa42d0c0c32e[]
-
-			response0.MatchesExample(@"GET my_index/_search
-			{
-			  ""query"": {
-			    ""script_score"": {
-			      ""query"" : {
-			        ""bool"" : {
-			          ""filter"" : {
-			            ""term"" : {
-			              ""status"" : ""published""
-			            }
-			          }
-			        }
-			      },
-			      ""script"": {
-			        ""source"": ""cosineSimilaritySparse(params.query_vector, doc['my_sparse_vector']) + 1.0"",
-			        ""params"": {
-			          ""query_vector"": {""2"": 0.5, ""10"" : 111.3, ""50"": -1.3, ""113"": 14.8, ""4545"": 156.0}
-			        }
-			      }
-			    }
-			  }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line126()
-		{
-			// tag::3ab88f9b42d28940835c6a6cd91f50fd[]
-			var response0 = new SearchResponse<object>();
-			// end::3ab88f9b42d28940835c6a6cd91f50fd[]
+			// end::5f3793dbe5223db53fc67861388ecb10[]
 
 			response0.MatchesExample(@"GET my_index/_search
 			{
@@ -137,8 +105,8 @@ namespace Examples.Vectors
 			      },
 			      ""script"": {
 			        ""source"": """"""
-			          double value = dotProduct(params.query_vector, doc['my_dense_vector']);
-			          return sigmoid(1, Math.E, -value); \<1>
+			          double value = dotProduct(params.query_vector, 'my_dense_vector');
+			          return sigmoid(1, Math.E, -value); <1>
 			        """""",
 			        ""params"": {
 			          ""query_vector"": [4, 3.4, -0.2]
@@ -150,11 +118,12 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line160()
+		[Description("vectors/vector-functions.asciidoc:123")]
+		public void Line123()
 		{
-			// tag::a7ac82b206e859c187678c62681ba380[]
+			// tag::7453c76da9d525b8c5fb5b86f1207667[]
 			var response0 = new SearchResponse<object>();
-			// end::a7ac82b206e859c187678c62681ba380[]
+			// end::7453c76da9d525b8c5fb5b86f1207667[]
 
 			response0.MatchesExample(@"GET my_index/_search
 			{
@@ -170,41 +139,7 @@ namespace Examples.Vectors
 			        }
 			      },
 			      ""script"": {
-			        ""source"": """"""
-			          double value = dotProductSparse(params.query_vector, doc['my_sparse_vector']);
-			          return sigmoid(1, Math.E, -value);
-			        """""",
-			         ""params"": {
-			          ""query_vector"": {""2"": 0.5, ""10"" : 111.3, ""50"": -1.3, ""113"": 14.8, ""4545"": 156.0}
-			        }
-			      }
-			    }
-			  }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line193()
-		{
-			// tag::36fc6170ce7ff17b719f988ae03a50c9[]
-			var response0 = new SearchResponse<object>();
-			// end::36fc6170ce7ff17b719f988ae03a50c9[]
-
-			response0.MatchesExample(@"GET my_index/_search
-			{
-			  ""query"": {
-			    ""script_score"": {
-			      ""query"" : {
-			        ""bool"" : {
-			          ""filter"" : {
-			            ""term"" : {
-			              ""status"" : ""published""
-			            }
-			          }
-			        }
-			      },
-			      ""script"": {
-			        ""source"": ""1 / (1 + l1norm(params.queryVector, doc['my_dense_vector']))"", \<1>
+			        ""source"": ""1 / (1 + l1norm(params.queryVector, 'my_dense_vector'))"", <1>
 			        ""params"": {
 			          ""queryVector"": [4, 3.4, -0.2]
 			        }
@@ -215,11 +150,12 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line231()
+		[Description("vectors/vector-functions.asciidoc:162")]
+		public void Line162()
 		{
-			// tag::ab123056145692c7e7e0d7a95aa7ea72[]
+			// tag::98e4bd19706e57405b6e810de72ea4df[]
 			var response0 = new SearchResponse<object>();
-			// end::ab123056145692c7e7e0d7a95aa7ea72[]
+			// end::98e4bd19706e57405b6e810de72ea4df[]
 
 			response0.MatchesExample(@"GET my_index/_search
 			{
@@ -235,71 +171,9 @@ namespace Examples.Vectors
 			        }
 			      },
 			      ""script"": {
-			        ""source"": ""1 / (1 + l1normSparse(params.queryVector, doc['my_sparse_vector']))"",
-			        ""params"": {
-			          ""queryVector"": {""2"": 0.5, ""10"" : 111.3, ""50"": -1.3, ""113"": 14.8, ""4545"": 156.0}
-			        }
-			      }
-			    }
-			  }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line261()
-		{
-			// tag::b0e60ffce9edecba49a8b0cce869a85d[]
-			var response0 = new SearchResponse<object>();
-			// end::b0e60ffce9edecba49a8b0cce869a85d[]
-
-			response0.MatchesExample(@"GET my_index/_search
-			{
-			  ""query"": {
-			    ""script_score"": {
-			      ""query"" : {
-			        ""bool"" : {
-			          ""filter"" : {
-			            ""term"" : {
-			              ""status"" : ""published""
-			            }
-			          }
-			        }
-			      },
-			      ""script"": {
-			        ""source"": ""1 / (1 + l2norm(params.queryVector, doc['my_dense_vector']))"",
+			        ""source"": ""1 / (1 + l2norm(params.queryVector, 'my_dense_vector'))"",
 			        ""params"": {
 			          ""queryVector"": [4, 3.4, -0.2]
-			        }
-			      }
-			    }
-			  }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line290()
-		{
-			// tag::20a6db9d4b71d551d6864e95d5b93c4f[]
-			var response0 = new SearchResponse<object>();
-			// end::20a6db9d4b71d551d6864e95d5b93c4f[]
-
-			response0.MatchesExample(@"GET my_index/_search
-			{
-			  ""query"": {
-			    ""script_score"": {
-			      ""query"" : {
-			        ""bool"" : {
-			          ""filter"" : {
-			            ""term"" : {
-			              ""status"" : ""published""
-			            }
-			          }
-			        }
-			      },
-			      ""script"": {
-			        ""source"": ""1 / (1 + l2normSparse(params.queryVector, doc['my_sparse_vector']))"",
-			        ""params"": {
-			          ""queryVector"": {""2"": 0.5, ""10"" : 111.3, ""50"": -1.3, ""113"": 14.8, ""4545"": 156.0}
 			        }
 			      }
 			    }

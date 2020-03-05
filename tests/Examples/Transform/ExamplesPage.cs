@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Transform
 {
 	public class ExamplesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line31()
+		[Description("transform/examples.asciidoc:29")]
+		public void Line29()
 		{
 			// tag::88341b4eba71ec722f3e38fa1696fe87[]
 			var response0 = new SearchResponse<object>();
@@ -37,7 +39,8 @@ namespace Examples.Transform
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line117()
+		[Description("transform/examples.asciidoc:115")]
+		public void Line115()
 		{
 			// tag::be9376b1e354ad9c6bdad83f6a0ce5ad[]
 			var response0 = new SearchResponse<object>();
@@ -81,26 +84,26 @@ namespace Examples.Transform
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line209()
+		[Description("transform/examples.asciidoc:207")]
+		public void Line207()
 		{
-			// tag::18beab68b15a44fc9bcbc5c00700376d[]
+			// tag::0bad2211181281b6cc5df8e364bcc111[]
 			var response0 = new SearchResponse<object>();
-			// end::18beab68b15a44fc9bcbc5c00700376d[]
+			// end::0bad2211181281b6cc5df8e364bcc111[]
 
-			response0.MatchesExample(@"POST _transform/_preview
+			response0.MatchesExample(@"PUT _transform/suspicious_client_ips
 			{
 			  ""source"": {
-			    ""index"": ""kibana_sample_data_logs"",
-			    ""query"": { <1>
-			      ""range"" : {
-			        ""timestamp"" : {
-			          ""gte"" : ""now-30d/d""
-			        }
-			      }
-			    }
+			    ""index"": ""kibana_sample_data_logs""
 			  },
-			  ""dest"" : { <2>
+			  ""dest"" : { <1>
 			    ""index"" : ""sample_weblogs_by_clientip""
+			  },
+			  ""sync"" : { <2>
+			    ""time"": {
+			      ""field"": ""timestamp"",
+			      ""delay"": ""60s""
+			    }
 			  },
 			  ""pivot"": {
 			    ""group_by"": {  <3>
@@ -152,6 +155,28 @@ namespace Examples.Transform
 			    }
 			  }
 			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("transform/examples.asciidoc:288")]
+		public void Line288()
+		{
+			// tag::4bd42e31ac4a5cf237777f1a0e97aba8[]
+			var response0 = new SearchResponse<object>();
+			// end::4bd42e31ac4a5cf237777f1a0e97aba8[]
+
+			response0.MatchesExample(@"POST _transform/suspicious_client_ips/_start");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("transform/examples.asciidoc:297")]
+		public void Line297()
+		{
+			// tag::14f2dab0583c5a9fcc39931d33194872[]
+			var response0 = new SearchResponse<object>();
+			// end::14f2dab0583c5a9fcc39931d33194872[]
+
+			response0.MatchesExample(@"GET sample_weblogs_by_clientip/_search");
 		}
 	}
 }

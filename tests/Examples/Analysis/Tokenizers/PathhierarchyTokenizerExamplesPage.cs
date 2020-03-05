@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenizers
 {
 	public class PathhierarchyTokenizerExamplesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/pathhierarchy-tokenizer-examples.asciidoc:18")]
 		public void Line18()
 		{
 			// tag::840b6c5c3d9c56aed854cfab8da04486[]
@@ -93,6 +95,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/pathhierarchy-tokenizer-examples.asciidoc:97")]
 		public void Line97()
 		{
 			// tag::bd767ea03171fe71c73f58f16d5da92f[]
@@ -110,6 +113,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/pathhierarchy-tokenizer-examples.asciidoc:112")]
 		public void Line112()
 		{
 			// tag::b724f547c5d67e95bbc0a9920e47033c[]
@@ -127,6 +131,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/pathhierarchy-tokenizer-examples.asciidoc:131")]
 		public void Line131()
 		{
 			// tag::f1dc6f69453867ffafe86e998dd464d9[]
@@ -146,6 +151,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/pathhierarchy-tokenizer-examples.asciidoc:149")]
 		public void Line149()
 		{
 			// tag::acc52da725a996ae696b00d9f818dfde[]
@@ -168,6 +174,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/pathhierarchy-tokenizer-examples.asciidoc:169")]
 		public void Line169()
 		{
 			// tag::4bba59cf745ac7b996bf90308bc26957[]

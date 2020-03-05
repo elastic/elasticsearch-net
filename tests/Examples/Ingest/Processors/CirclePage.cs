@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ingest.Processors
 {
 	public class CirclePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/processors/circle.asciidoc:24")]
 		public void Line24()
 		{
 			// tag::92223bd2873546d7efb557de81b9f75d[]
@@ -41,6 +43,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/processors/circle.asciidoc:61")]
 		public void Line61()
 		{
 			// tag::b0b1ae9582599f501f3b3ed8a42ea2af[]
@@ -58,6 +61,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/processors/circle.asciidoc:94")]
 		public void Line94()
 		{
 			// tag::415b46bc2b7a7b4dcf9a73ac67ea20e9[]

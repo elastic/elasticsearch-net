@@ -1,16 +1,18 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Watcher
 {
 	public class ActionsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/actions.asciidoc:49")]
 		public void Line49()
 		{
-			// tag::ec4e4462b5394f991a4384425feee8a4[]
+			// tag::85d2e33791f1a74a69dfb04a60e69306[]
 			var response0 = new SearchResponse<object>();
-			// end::ec4e4462b5394f991a4384425feee8a4[]
+			// end::85d2e33791f1a74a69dfb04a60e69306[]
 
 			response0.MatchesExample(@"PUT _watcher/watch/error_logs_alert
 			{
@@ -34,14 +36,14 @@ namespace Examples.XPack.Docs.En.Watcher
 			    }
 			  },
 			  ""condition"" : {
-			    ""compare"" : { ""ctx.payload.hits.total.value"" : { ""gt"" : 5 }}
+			    ""compare"" : { ""ctx.payload.hits.total"" : { ""gt"" : 5 }}
 			  },
 			  ""actions"" : {
 			    ""email_administrator"" : {
 			      ""throttle_period"": ""15m"", <1>
 			      ""email"" : { <2>
 			        ""to"" : ""sys.admino@host.domain"",
-			        ""subject"" : ""Encountered {{ctx.payload.hits.total.value}} errors"",
+			        ""subject"" : ""Encountered {{ctx.payload.hits.total}} errors"",
 			        ""body"" : ""Too many error in the system, see attached data"",
 			        ""attachments"" : {
 			          ""attached_data"" : {
@@ -58,11 +60,12 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/actions.asciidoc:104")]
 		public void Line104()
 		{
-			// tag::a8e923739fdc7c9118b7b4a0ba791195[]
+			// tag::406a0f1c1aac947bcee58f86b6d036c1[]
 			var response0 = new SearchResponse<object>();
-			// end::a8e923739fdc7c9118b7b4a0ba791195[]
+			// end::406a0f1c1aac947bcee58f86b6d036c1[]
 
 			response0.MatchesExample(@"PUT _watcher/watch/log_event_watch
 			{
@@ -81,14 +84,14 @@ namespace Examples.XPack.Docs.En.Watcher
 			    }
 			  },
 			  ""condition"" : {
-			    ""compare"" : { ""ctx.payload.hits.total.value"" : { ""gt"" : 5 }}
+			    ""compare"" : { ""ctx.payload.hits.total"" : { ""gt"" : 5 }}
 			  },
 			  ""throttle_period"" : ""15m"", <1>
 			  ""actions"" : {
 			    ""email_administrator"" : {
 			      ""email"" : {
 			        ""to"" : ""sys.admino@host.domain"",
-			        ""subject"" : ""Encountered {{ctx.payload.hits.total.value}} errors"",
+			        ""subject"" : ""Encountered {{ctx.payload.hits.total}} errors"",
 			        ""body"" : ""Too many error in the system, see attached data"",
 			        ""attachments"" : {
 			          ""attached_data"" : {
@@ -106,7 +109,7 @@ namespace Examples.XPack.Docs.En.Watcher
 			        ""host"" : ""pager.service.domain"",
 			        ""port"" : 1234,
 			        ""path"" : ""/{{watch_id}}"",
-			        ""body"" : ""Encountered {{ctx.payload.hits.total.value}} errors""
+			        ""body"" : ""Encountered {{ctx.payload.hits.total}} errors""
 			      }
 			    }
 			  }
@@ -114,6 +117,7 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/actions.asciidoc:178")]
 		public void Line178()
 		{
 			// tag::3d48d1ba49f680aac32177d653944623[]
@@ -124,6 +128,7 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/actions.asciidoc:205")]
 		public void Line205()
 		{
 			// tag::9eef31d85ebaf6c27054d7375715dbe0[]
@@ -161,11 +166,12 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/actions.asciidoc:250")]
 		public void Line250()
 		{
-			// tag::ece81947e2669ce5921723be11e995a5[]
+			// tag::f67d8aab9106ad24b1d2c771d3840ed1[]
 			var response0 = new SearchResponse<object>();
-			// end::ece81947e2669ce5921723be11e995a5[]
+			// end::f67d8aab9106ad24b1d2c771d3840ed1[]
 
 			response0.MatchesExample(@"PUT _watcher/watch/log_event_watch
 			{
@@ -184,13 +190,13 @@ namespace Examples.XPack.Docs.En.Watcher
 			    }
 			  },
 			  ""condition"" : {
-			    ""compare"" : { ""ctx.payload.hits.total.value"" : { ""gt"" : 0 } }
+			    ""compare"" : { ""ctx.payload.hits.total"" : { ""gt"" : 0 } }
 			  },
 			  ""actions"" : {
 			    ""email_administrator"" : {
 			      ""email"" : {
 			        ""to"" : ""sys.admino@host.domain"",
-			        ""subject"" : ""Encountered {{ctx.payload.hits.total.value}} errors"",
+			        ""subject"" : ""Encountered {{ctx.payload.hits.total}} errors"",
 			        ""body"" : ""Too many error in the system, see attached data"",
 			        ""attachments"" : {
 			          ""attached_data"" : {
@@ -204,14 +210,14 @@ namespace Examples.XPack.Docs.En.Watcher
 			    },
 			    ""notify_pager"" : {
 			      ""condition"": { <1>
-			        ""compare"" : { ""ctx.payload.hits.total.value"" : { ""gt"" : 5 } }
+			        ""compare"" : { ""ctx.payload.hits.total"" : { ""gt"" : 5 } }
 			      },
 			      ""webhook"" : {
 			        ""method"" : ""POST"",
 			        ""host"" : ""pager.service.domain"",
 			        ""port"" : 1234,
 			        ""path"" : ""/{{watch_id}}"",
-			        ""body"" : ""Encountered {{ctx.payload.hits.total.value}} errors""
+			        ""body"" : ""Encountered {{ctx.payload.hits.total}} errors""
 			      }
 			    }
 			  }

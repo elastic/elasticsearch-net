@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Modules
 {
 	public class TransportPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("modules/transport.asciidoc:157")]
 		public void Line157()
 		{
 			// tag::939e79dee613238f9512fb9cbf0be816[]
@@ -21,6 +23,7 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("modules/transport.asciidoc:170")]
 		public void Line170()
 		{
 			// tag::cecbbd7b4ec1bf82fd84ae96099febcc[]

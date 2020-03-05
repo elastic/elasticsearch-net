@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Security.Authentication
 {
 	public class ConfiguringPkiRealmPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line174()
+		[Description("../../x-pack/docs/en/security/authentication/configuring-pki-realm.asciidoc:163")]
+		public void Line163()
 		{
 			// tag::70bbe14bc4d5a5d58e81ab2b02408817[]
 			var response0 = new SearchResponse<object>();
@@ -23,7 +25,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line269()
+		[Description("../../x-pack/docs/en/security/authentication/configuring-pki-realm.asciidoc:271")]
+		public void Line271()
 		{
 			// tag::1f8a6d2cc57ed8997a52354aca371aac[]
 			var response0 = new SearchResponse<object>();

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Request
 {
 	public class SeqNoPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/seq-no.asciidoc:8")]
 		public void Line8()
 		{
 			// tag::63965d439716ed6d18d30baef09001a5[]

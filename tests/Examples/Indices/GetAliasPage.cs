@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class GetAliasPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("indices/get-alias.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::265ba62e416d27b3408fb8a2f698627d[]
@@ -16,7 +18,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line74()
+		[Description("indices/get-alias.asciidoc:76")]
+		public void Line76()
 		{
 			// tag::8118bad980d7afd31677b5060361ecd2[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +39,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line92()
+		[Description("indices/get-alias.asciidoc:94")]
+		public void Line94()
 		{
 			// tag::e85f2b38878f745a16edc575e78d7cde[]
 			var response0 = new SearchResponse<object>();
@@ -46,7 +50,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line125()
+		[Description("indices/get-alias.asciidoc:127")]
+		public void Line127()
 		{
 			// tag::a71c929ed2e322f91092d5dc625b6440[]
 			var response0 = new SearchResponse<object>();
@@ -56,7 +61,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line156()
+		[Description("indices/get-alias.asciidoc:158")]
+		public void Line158()
 		{
 			// tag::56aa1bff647d1db49dabf175c1e56919[]
 			var response0 = new SearchResponse<object>();

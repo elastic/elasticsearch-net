@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class TemplateExistsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("indices/template-exists.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::a6be6c1cb4a556866fdccb0dee2f1dea[]

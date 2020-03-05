@@ -1,11 +1,12 @@
+// docs/get.asciidoc:275
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line275 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/GetPage.cs#L98-L110.
+This file is generated from method Line275 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/GetPage.cs#L106-L119.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
-
-// docs/get.asciidoc:98
+////
 
 [source, csharp]
 ----

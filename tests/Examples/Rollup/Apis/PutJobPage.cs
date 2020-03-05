@@ -1,16 +1,18 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Rollup.Apis
 {
 	public class PutJobPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line74()
+		[Description("rollup/apis/put-job.asciidoc:223")]
+		public void Line223()
 		{
-			// tag::2d20c42e9664febeccaff61581605cbe[]
+			// tag::2025834fab7efbb0542275c30d9d0bfe[]
 			var response0 = new SearchResponse<object>();
-			// end::2d20c42e9664febeccaff61581605cbe[]
+			// end::2025834fab7efbb0542275c30d9d0bfe[]
 
 			response0.MatchesExample(@"PUT _rollup/job/sensor
 			{
@@ -18,7 +20,7 @@ namespace Examples.Rollup.Apis
 			    ""rollup_index"": ""sensor_rollup"",
 			    ""cron"": ""*/30 * * * * ?"",
 			    ""page_size"" :1000,
-			    ""groups"" : {
+			    ""groups"" : { <1>
 			      ""date_histogram"": {
 			        ""field"": ""timestamp"",
 			        ""fixed_interval"": ""1h"",
@@ -28,7 +30,7 @@ namespace Examples.Rollup.Apis
 			        ""fields"": [""node""]
 			      }
 			    },
-			    ""metrics"": [
+			    ""metrics"": [ <2>
 			        {
 			            ""field"": ""temperature"",
 			            ""metrics"": [""min"", ""max"", ""sum""]

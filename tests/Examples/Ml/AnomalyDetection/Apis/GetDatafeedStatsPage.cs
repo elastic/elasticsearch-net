@@ -1,18 +1,20 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class GetDatafeedStatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line93()
+		[Description("ml/anomaly-detection/apis/get-datafeed-stats.asciidoc:135")]
+		public void Line135()
 		{
-			// tag::62ef8873988dc63f37ed93114072e4a8[]
+			// tag::f44d287c6937785eb09b91353c1deb1e[]
 			var response0 = new SearchResponse<object>();
-			// end::62ef8873988dc63f37ed93114072e4a8[]
+			// end::f44d287c6937785eb09b91353c1deb1e[]
 
-			response0.MatchesExample(@"GET _ml/datafeeds/datafeed-total-requests/_stats");
+			response0.MatchesExample(@"GET _ml/datafeeds/datafeed-high_sum_total_sales/_stats");
 		}
 	}
 }

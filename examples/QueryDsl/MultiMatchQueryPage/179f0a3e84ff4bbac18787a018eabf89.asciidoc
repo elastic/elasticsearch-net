@@ -1,11 +1,12 @@
+// query-dsl/multi-match-query.asciidoc:472
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line472 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/QueryDsl/MultiMatchQueryPage.cs#L424-L452.
+This file is generated from method Line472 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/QueryDsl/MultiMatchQueryPage.cs#L438-L467.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
-
-// query-dsl/multi-match-query.asciidoc:424
+////
 
 [source, csharp]
 ----

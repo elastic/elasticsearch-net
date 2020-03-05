@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Docs
 {
 	public class ReindexPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("docs/reindex.asciidoc:20")]
 		public void Line20()
 		{
 			// tag::0cc991e3f7f8511a34730e154b3c5edc[]
@@ -24,6 +26,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/reindex.asciidoc:161")]
 		public void Line161()
 		{
 			// tag::68738b4fd0dda177022be45be95b4c84[]
@@ -34,6 +37,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/reindex.asciidoc:191")]
 		public void Line191()
 		{
 			// tag::1b8655e6ba99fe39933c6eafe78728b7[]
@@ -72,6 +76,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/reindex.asciidoc:224")]
 		public void Line224()
 		{
 			// tag::3ae03ba3b56e5e287953094050766738[]
@@ -86,6 +91,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/reindex.asciidoc:251")]
 		public void Line251()
 		{
 			// tag::cb01106bf524df5e0501d4c655c1aa7b[]
@@ -104,6 +110,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/reindex.asciidoc:267")]
 		public void Line267()
 		{
 			// tag::e567e6dbf86300142573c73789c8fce4[]
@@ -114,6 +121,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/reindex.asciidoc:359")]
 		public void Line359()
 		{
 			// tag::78c96113ae4ed0054e581b17542528a7[]
@@ -138,6 +146,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/reindex.asciidoc:384")]
 		public void Line384()
 		{
 			// tag::400e89eb46ead8e9c9e40f123fd5e590[]
@@ -158,6 +167,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/reindex.asciidoc:403")]
 		public void Line403()
 		{
 			// tag::b1efa1c51a34dd5ab5511b71a399f5b1[]
@@ -177,7 +187,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line587()
+		[Description("docs/reindex.asciidoc:592")]
+		public void Line592()
 		{
 			// tag::764f9884b370cbdc82a1c5c42ed40ff3[]
 			var response0 = new SearchResponse<object>();
@@ -200,7 +211,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line613()
+		[Description("docs/reindex.asciidoc:618")]
+		public void Line618()
 		{
 			// tag::52b2bfbdd78f8283b6f4891c48013237[]
 			var response0 = new SearchResponse<object>();
@@ -219,27 +231,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line634()
-		{
-			// tag::96064cf450ccd198ac03cd0c33d3be3d[]
-			var response0 = new SearchResponse<object>();
-			// end::96064cf450ccd198ac03cd0c33d3be3d[]
-
-			response0.MatchesExample(@"POST _reindex
-			{
-			  ""max_docs"": 10000,
-			  ""source"": {
-			    ""index"": ""twitter"",
-			    ""sort"": { ""date"": ""desc"" }
-			  },
-			  ""dest"": {
-			    ""index"": ""new_twitter""
-			  }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		public void Line657()
+		[Description("docs/reindex.asciidoc:640")]
+		public void Line640()
 		{
 			// tag::6f097c298a7abf4c032c4314920c49c8[]
 			var response0 = new SearchResponse<object>();
@@ -257,7 +250,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line683()
+		[Description("docs/reindex.asciidoc:666")]
+		public void Line666()
 		{
 			// tag::e9c2e15b36372d5281c879d336322b6c[]
 			var response0 = new SearchResponse<object>();
@@ -276,7 +270,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line704()
+		[Description("docs/reindex.asciidoc:687")]
+		public void Line687()
 		{
 			// tag::1577e6e806b3283c9e99f1596d310754[]
 			var response0 = new SearchResponse<object>();
@@ -290,7 +285,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line716()
+		[Description("docs/reindex.asciidoc:699")]
+		public void Line699()
 		{
 			// tag::1216f8f7367df3aa823012cef310c08a[]
 			var response0 = new SearchResponse<object>();
@@ -311,7 +307,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line735()
+		[Description("docs/reindex.asciidoc:718")]
+		public void Line718()
 		{
 			// tag::cfc37446bd892d1ac42a3c8e8b204e6c[]
 			var response0 = new SearchResponse<object>();
@@ -321,7 +318,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line768()
+		[Description("docs/reindex.asciidoc:751")]
+		public void Line751()
 		{
 			// tag::9a4d5e41c52c20635d1fd9c6e13f6c7a[]
 			var response0 = new SearchResponse<object>();
@@ -337,7 +335,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line784()
+		[Description("docs/reindex.asciidoc:767")]
+		public void Line767()
 		{
 			// tag::973a3ff47fc4ce036ecd9bd363fef9f7[]
 			var response0 = new SearchResponse<object>();
@@ -359,7 +358,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line804()
+		[Description("docs/reindex.asciidoc:787")]
+		public void Line787()
 		{
 			// tag::3b04cc894e6a47d57983484010feac0c[]
 			var response0 = new SearchResponse<object>();
@@ -373,11 +373,12 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line819()
+		[Description("docs/reindex.asciidoc:802")]
+		public void Line802()
 		{
-			// tag::8b33c9257041fabad8cea43fa049f98f[]
+			// tag::1bc731a4df952228af6dfa6b48627332[]
 			var response0 = new SearchResponse<object>();
-			// end::8b33c9257041fabad8cea43fa049f98f[]
+			// end::1bc731a4df952228af6dfa6b48627332[]
 
 			response0.MatchesExample(@"POST _reindex
 			{
@@ -386,11 +387,10 @@ namespace Examples.Docs
 			    ""index"": ""twitter"",
 			    ""query"": {
 			      ""function_score"" : {
-			        ""query"" : { ""match_all"": {} },
-			        ""random_score"" : {}
+			        ""random_score"" : {},
+			        ""min_score"" : 0.9    <1>
 			      }
-			    },
-			    ""sort"": ""_score""    \<1>
+			    }
 			  },
 			  ""dest"": {
 			    ""index"": ""random_twitter""
@@ -399,7 +399,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line851()
+		[Description("docs/reindex.asciidoc:833")]
+		public void Line833()
 		{
 			// tag::8871b8fcb6de4f0c7dff22798fb10fb7[]
 			var response0 = new SearchResponse<object>();
@@ -422,7 +423,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line906()
+		[Description("docs/reindex.asciidoc:888")]
+		public void Line888()
 		{
 			// tag::36b2778f23d0955255f52c075c4d213d[]
 			var response0 = new SearchResponse<object>();
@@ -450,7 +452,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line973()
+		[Description("docs/reindex.asciidoc:955")]
+		public void Line955()
 		{
 			// tag::64b9baa6d7556b960b29698f3383aa31[]
 			var response0 = new SearchResponse<object>();
@@ -477,7 +480,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line1004()
+		[Description("docs/reindex.asciidoc:986")]
+		public void Line986()
 		{
 			// tag::7f697eb436dfa3c30dfe610d8c32d132[]
 			var response0 = new SearchResponse<object>();

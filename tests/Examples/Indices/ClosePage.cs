@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class ClosePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("indices/close.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::34107944bca50a003cda9fca934b2011[]
@@ -16,7 +18,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line64()
+		[Description("indices/close.asciidoc:66")]
+		public void Line66()
 		{
 			// tag::3a6b9143f3de6258d44ff7e0eb38d953[]
 			var response0 = new SearchResponse<object>();

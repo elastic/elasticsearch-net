@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class UpdateSettingsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("indices/update-settings.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::8653e76676de5d327201b77512afa3a0[]
@@ -21,7 +23,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line71()
+		[Description("indices/update-settings.asciidoc:73")]
+		public void Line73()
 		{
 			// tag::42744a175125df5be0ef77413bf8f608[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +39,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line95()
+		[Description("indices/update-settings.asciidoc:97")]
+		public void Line97()
 		{
 			// tag::dfac8d098b50aa0181161bcd17b38ef4[]
 			var response0 = new SearchResponse<object>();
@@ -51,7 +55,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line112()
+		[Description("indices/update-settings.asciidoc:114")]
+		public void Line114()
 		{
 			// tag::0be2c28ee65384774b1e479b47dc3d92[]
 			var response0 = new SearchResponse<object>();
@@ -66,7 +71,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line125()
+		[Description("indices/update-settings.asciidoc:127")]
+		public void Line127()
 		{
 			// tag::fe5763d32955e8b65eb3048e97b1580c[]
 			var response0 = new SearchResponse<object>();
@@ -76,7 +82,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line143()
+		[Description("indices/update-settings.asciidoc:145")]
+		public void Line145()
 		{
 			// tag::ba0b4081c98f3387f76b77847c52ee9a[]
 			var response0 = new SearchResponse<object>();

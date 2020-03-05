@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class GetUsersPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-users.asciidoc:56")]
 		public void Line56()
 		{
 			// tag::3924ee252581ebb96ac0e60046125ae8[]
@@ -16,6 +18,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-users.asciidoc:80")]
 		public void Line80()
 		{
 			// tag::abdbc81e799e28c833556b1c29f03ba6[]

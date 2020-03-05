@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class RangeAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/range-aggregation.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::e84a496049274a0fed24e319da7a864c[]
@@ -30,6 +32,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/range-aggregation.asciidoc:67")]
 		public void Line67()
 		{
 			// tag::d637c754aec195a1df39cafca49cbe7e[]
@@ -55,6 +58,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/range-aggregation.asciidoc:120")]
 		public void Line120()
 		{
 			// tag::4d147b4a4dabef9b0a8a13cbe8174e09[]
@@ -80,6 +84,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/range-aggregation.asciidoc:178")]
 		public void Line178()
 		{
 			// tag::bdf31f63d0941a4183ceae1cc2342c39[]
@@ -107,6 +112,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/range-aggregation.asciidoc:202")]
 		public void Line202()
 		{
 			// tag::4c9c453c92431a05b413bfc0163104b4[]
@@ -123,6 +129,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/range-aggregation.asciidoc:216")]
 		public void Line216()
 		{
 			// tag::7a6d758654eecbc3a1a76744b4de0a23[]
@@ -152,6 +159,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/range-aggregation.asciidoc:275")]
 		public void Line275()
 		{
 			// tag::022956b81fa70e72b56c66be16d0e982[]
@@ -182,6 +190,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/range-aggregation.asciidoc:305")]
 		public void Line305()
 		{
 			// tag::3b52f4f7ea4abfa6db6bf54199b15f53[]
@@ -211,6 +220,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/range-aggregation.asciidoc:386")]
 		public void Line386()
 		{
 			// tag::4547c455375eeda5ad9f74b40d4fa61b[]

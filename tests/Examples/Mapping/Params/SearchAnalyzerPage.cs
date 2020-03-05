@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class SearchAnalyzerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/search-analyzer.asciidoc:16")]
 		public void Line16()
 		{
 			// tag::60677e5144fed659e8417b7fa9964285[]

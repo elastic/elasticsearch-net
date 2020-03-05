@@ -1,18 +1,20 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class GetJobStatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line86()
+		[Description("ml/anomaly-detection/apis/get-job-stats.asciidoc:328")]
+		public void Line328()
 		{
-			// tag::e3d706e32f9bd1496072beb46e4c488e[]
+			// tag::9298aaf8232a819e79b3bf8471245e98[]
 			var response0 = new SearchResponse<object>();
-			// end::e3d706e32f9bd1496072beb46e4c488e[]
+			// end::9298aaf8232a819e79b3bf8471245e98[]
 
-			response0.MatchesExample(@"GET _ml/anomaly_detectors/farequote/_stats");
+			response0.MatchesExample(@"GET _ml/anomaly_detectors/low_request_rate/_stats");
 		}
 	}
 }

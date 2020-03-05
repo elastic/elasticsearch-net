@@ -1,18 +1,20 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Licensing
 {
 	public class UpdateLicensePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line59()
+		[Description("licensing/update-license.asciidoc:61")]
+		public void Line61()
 		{
-			// tag::4fb399ee372ae8837cbb9aa66be30f62[]
+			// tag::85f2839beeb71edb66988e5c82188be0[]
 			var response0 = new SearchResponse<object>();
-			// end::4fb399ee372ae8837cbb9aa66be30f62[]
+			// end::85f2839beeb71edb66988e5c82188be0[]
 
-			response0.MatchesExample(@"POST /_license
+			response0.MatchesExample(@"PUT _license
 			{
 			  ""licenses"": [
 			    {
@@ -30,13 +32,14 @@ namespace Examples.Licensing
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line135()
+		[Description("licensing/update-license.asciidoc:137")]
+		public void Line137()
 		{
-			// tag::efe30c2a1611afdc85ae522e4f5a457b[]
+			// tag::46b1c1f6e0c86528be84c373eeb8d425[]
 			var response0 = new SearchResponse<object>();
-			// end::efe30c2a1611afdc85ae522e4f5a457b[]
+			// end::46b1c1f6e0c86528be84c373eeb8d425[]
 
-			response0.MatchesExample(@"POST /_license?acknowledge=true
+			response0.MatchesExample(@"PUT _license?acknowledge=true
 			{
 			  ""licenses"": [
 			    {

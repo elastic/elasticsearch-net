@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class PinnedQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/pinned-query.asciidoc:14")]
 		public void Line14()
 		{
 			// tag::f36a6f32ef72b326f13317bd34c6353f[]

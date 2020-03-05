@@ -1,52 +1,64 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class ConditionTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/condition-tokenfilter.asciidoc:22")]
 		public void Line22()
 		{
-			// tag::59fd7082698a6b12d028105456016a66[]
+			// tag::09944369863fd8666d5301d717317276[]
 			var response0 = new SearchResponse<object>();
-			// end::59fd7082698a6b12d028105456016a66[]
+			// end::09944369863fd8666d5301d717317276[]
 
-			response0.MatchesExample(@"PUT /condition_example
+			response0.MatchesExample(@"GET /_analyze
 			{
-			    ""settings"" : {
-			        ""analysis"" : {
-			            ""analyzer"" : {
-			                ""my_analyzer"" : {
-			                    ""tokenizer"" : ""standard"",
-			                    ""filter"" : [ ""my_condition"" ]
-			                }
-			            },
-			            ""filter"" : {
-			                ""my_condition"" : {
-			                    ""type"" : ""condition"",
-			                    ""filter"" : [ ""lowercase"" ],
-			                    ""script"" : {
-			                        ""source"" : ""token.getTerm().length() < 5""  \<1>
-			                    }
-			                }
-			            }
-			        }
+			  ""tokenizer"": ""standard"",
+			  ""filter"": [
+			    {
+			      ""type"": ""condition"",
+			      ""filter"": [ ""lowercase"" ],
+			      ""script"": {
+			        ""source"": ""token.getTerm().length() < 5""
+			      }
 			    }
+			  ],
+			  ""text"": ""THE QUICK BROWN FOX""
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line53()
+		[Description("analysis/tokenfilters/condition-tokenfilter.asciidoc:125")]
+		public void Line125()
 		{
-			// tag::e20493a20d3992a97238b87c6930f08d[]
+			// tag::a197076e0e74951ea88f20309ec257e2[]
 			var response0 = new SearchResponse<object>();
-			// end::e20493a20d3992a97238b87c6930f08d[]
+			// end::a197076e0e74951ea88f20309ec257e2[]
 
-			response0.MatchesExample(@"POST /condition_example/_analyze
+			response0.MatchesExample(@"PUT /palindrome_list
 			{
-			  ""analyzer"" : ""my_analyzer"",
-			  ""text"" : ""What Flapdoodle""
+			  ""settings"": {
+			    ""analysis"": {
+			      ""analyzer"": {
+			        ""whitespace_reverse_first_token"": {
+			          ""tokenizer"": ""whitespace"",
+			          ""filter"": [ ""reverse_first_token"" ]
+			        }
+			      },
+			      ""filter"": {
+			        ""reverse_first_token"": {
+			          ""type"": ""condition"",
+			          ""filter"": [ ""reverse"" ],
+			          ""script"": {
+			            ""source"": ""token.getPosition() === 0""
+			          }
+			        }
+			      }
+			    }
+			  }
 			}");
 		}
 	}

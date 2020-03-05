@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Indices.Apis
 {
 	public class UnfreezePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("indices/apis/unfreeze.asciidoc:42")]
 		public void Line42()
 		{
 			// tag::ffea06f77c9df5720412aa06be964118[]

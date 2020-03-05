@@ -2,19 +2,21 @@ using Elastic.Xunit.XunitPlumbing;
 using Examples.Models;
 using Nest;
 using static Nest.Infer;
+using System.ComponentModel;
 
 namespace Examples.Root
 {
 	public class MappingPage : ExampleBase
 	{
 		[U]
+		[Description("mapping.asciidoc:144")]
 		public void Line144()
 		{
 			// tag::d8b2a88b5eca99d3691ad3cd40266736[]
 			var createIndexResponse = client.Indices.Create("my-index", c => c
 				.Map<Employee>(m => m
 					.Properties(props => props
-						.Number(n => n.Name(p=>p.Age).Type(NumberType.Integer))
+						.Number(n => n.Name(p => p.Age).Type(NumberType.Integer))
 						.Keyword(k => k.Name(p => p.Email))
 						.Text(k => k.Name(p => p.Name))
 					)
@@ -35,6 +37,7 @@ namespace Examples.Root
 		}
 
 		[U]
+		[Description("mapping.asciidoc:173")]
 		public void Line173()
 		{
 			// tag::71ba9033107882f61cdc3b32fc73568d[]
@@ -61,6 +64,7 @@ namespace Examples.Root
 		}
 
 		[U]
+		[Description("mapping.asciidoc:211")]
 		public void Line211()
 		{
 			// tag::609260ad1d5998be2ca09ff1fe237efa[]
@@ -71,11 +75,12 @@ namespace Examples.Root
 		}
 
 		[U]
+		[Description("mapping.asciidoc:257")]
 		public void Line257()
 		{
 			// tag::99a52be903945b17e734a1d02a57e958[]
 			var getMappingResponse = client.Indices.GetFieldMapping<Employee>(
-				Field<Employee>(p=>p.EmployeeId),
+				Field<Employee>(p => p.EmployeeId),
 				m => m.Index("my-index")
 			);
 			// end::99a52be903945b17e734a1d02a57e958[]

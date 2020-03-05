@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Request
 {
 	public class RescorePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/rescore.asciidoc:43")]
 		public void Line43()
 		{
 			// tag::829a40d484c778a8c58340c7bf09e1d8[]
@@ -41,6 +43,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/rescore.asciidoc:90")]
 		public void Line90()
 		{
 			// tag::7d7855afd9882a665bbabda810f94f61[]

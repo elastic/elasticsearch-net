@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Cluster
 {
 	public class VotingExclusionsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/voting-exclusions.asciidoc:73")]
 		public void Line73()
 		{
 			// tag::59681840e544bb5b3bd858c194972f23[]
@@ -16,6 +18,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/voting-exclusions.asciidoc:82")]
 		public void Line82()
 		{
 			// tag::25cb9e1da00dfd971065ce182467434d[]

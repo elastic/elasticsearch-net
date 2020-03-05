@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class TermVectorPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/term-vector.asciidoc:35")]
 		public void Line35()
 		{
 			// tag::325ce39f81c442a5447ce0ede550c44a[]

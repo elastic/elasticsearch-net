@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class ScriptScoreQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/script-score-query.asciidoc:18")]
 		public void Line18()
 		{
 			// tag::eb35bef392e0957d609f1a26481e048d[]
@@ -28,7 +30,8 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line338()
+		[Description("query-dsl/script-score-query.asciidoc:345")]
+		public void Line345()
 		{
 			// tag::e5240a59149072e8bc7532603fa813bd[]
 			var response0 = new SearchResponse<object>();

@@ -1,33 +1,35 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ilm
 {
 	public class GettingStartedIlmPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line29()
+		[Description("ilm/getting-started-ilm.asciidoc:46")]
+		public void Line46()
 		{
-			// tag::993a81c69d26d94810172bee4043f0fd[]
+			// tag::f2dc1a1a2a6ba3c7c4273ce41ada4207[]
 			var response0 = new SearchResponse<object>();
-			// end::993a81c69d26d94810172bee4043f0fd[]
+			// end::f2dc1a1a2a6ba3c7c4273ce41ada4207[]
 
-			response0.MatchesExample(@"PUT _ilm/policy/datastream_policy   \<1>
+			response0.MatchesExample(@"PUT _ilm/policy/datastream_policy
 			{
-			  ""policy"": {                       \<2>
+			  ""policy"": {
 			    ""phases"": {
-			      ""hot"": {                      \<3>
+			      ""hot"": {                      <1>
 			        ""actions"": {
-			          ""rollover"": {             \<4>
-			            ""max_size"": ""50GB"",
+			          ""rollover"": {
+			            ""max_size"": ""50GB"",     <2>
 			            ""max_age"": ""30d""
 			          }
 			        }
 			      },
 			      ""delete"": {
-			        ""min_age"": ""90d"",           \<5>
+			        ""min_age"": ""90d"",           <3>
 			        ""actions"": {
-			          ""delete"": {}              \<6>
+			          ""delete"": {}              <4>
 			        }
 			      }
 			    }
@@ -36,7 +38,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line79()
+		[Description("ilm/getting-started-ilm.asciidoc:93")]
+		public void Line93()
 		{
 			// tag::e3d7b19f993382750719cdfaad2fdd90[]
 			var response0 = new SearchResponse<object>();
@@ -55,7 +58,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line112()
+		[Description("ilm/getting-started-ilm.asciidoc:135")]
+		public void Line135()
 		{
 			// tag::55ee835d7c28e933ad8fcb9e45af2bf2[]
 			var response0 = new SearchResponse<object>();
@@ -72,7 +76,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line155()
+		[Description("ilm/getting-started-ilm.asciidoc:173")]
+		public void Line173()
 		{
 			// tag::a1dbaff15cf8166f74c443ca58258d7e[]
 			var response0 = new SearchResponse<object>();

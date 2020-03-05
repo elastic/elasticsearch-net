@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class GetOverallBucketsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line110()
+		[Description("ml/anomaly-detection/apis/get-overall-buckets.asciidoc:124")]
+		public void Line124()
 		{
 			// tag::e48e7da65c2b32d724fd7e3bfa175c6f[]
 			var response0 = new SearchResponse<object>();
@@ -20,7 +22,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line155()
+		[Description("ml/anomaly-detection/apis/get-overall-buckets.asciidoc:169")]
+		public void Line169()
 		{
 			// tag::405db6f3a01eceacfaa8b0ed3e4b3ac2[]
 			var response0 = new SearchResponse<object>();

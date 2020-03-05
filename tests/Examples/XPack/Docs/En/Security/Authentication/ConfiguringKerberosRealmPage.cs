@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Security.Authentication
 {
 	public class ConfiguringKerberosRealmPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line155()
+		[Description("../../x-pack/docs/en/security/authentication/configuring-kerberos-realm.asciidoc:151")]
+		public void Line151()
 		{
 			// tag::9584b042223982e0bfde8d12d42c9705[]
 			var response0 = new SearchResponse<object>();

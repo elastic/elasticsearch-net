@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Request
 {
 	public class SearchAfterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/search-after.asciidoc:14")]
 		public void Line14()
 		{
 			// tag::402ee4bf8e2e386d5f9100fdaf13a6d6[]
@@ -28,6 +30,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/search-after.asciidoc:57")]
 		public void Line57()
 		{
 			// tag::525ec32997125d401f9c128ca450cefa[]

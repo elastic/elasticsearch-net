@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ilm
 {
 	public class StartStopIlmPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/start-stop-ilm.asciidoc:56")]
 		public void Line56()
 		{
 			// tag::182df084f028479ecbe8d7648ddad892[]
@@ -16,6 +18,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/start-stop-ilm.asciidoc:88")]
 		public void Line88()
 		{
 			// tag::585a34ad79aee16678b37da785933ac8[]
@@ -26,6 +29,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/start-stop-ilm.asciidoc:141")]
 		public void Line141()
 		{
 			// tag::72ae3851160fcf02b8e2cdfd4e57d238[]

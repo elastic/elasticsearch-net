@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ilm.Apis
 {
 	public class PutLifecyclePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line46()
+		[Description("ilm/apis/put-lifecycle.asciidoc:52")]
+		public void Line52()
 		{
 			// tag::daa2d4811bec05ac4546b66bd5a615c7[]
 			var response0 = new SearchResponse<object>();

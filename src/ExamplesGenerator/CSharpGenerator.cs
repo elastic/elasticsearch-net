@@ -67,6 +67,9 @@ namespace ExamplesGenerator
 			if (existingCompilationUnit == null)
 				throw new ArgumentNullException(nameof(existingCompilationUnit));
 
+			if (existingCompilationUnit.Usings.All(u => u.Name.ToString() != "System.ComponentModel"))
+				existingCompilationUnit = existingCompilationUnit.AddUsings(UsingDirective(Name("System.ComponentModel")));
+
 			var classDeclaration = existingCompilationUnit
 				.Members.OfType<NamespaceDeclarationSyntax>()
 				.Single()
@@ -89,6 +92,9 @@ namespace ExamplesGenerator
 				}
 				else
 				{
+					if (!methodDeclaration.AttributeLists.Any(a => a.ToString().Contains("Description")))
+						methodDeclaration = methodDeclaration.AddAttributeLists(AttributeList(GetReferencePageAttribute(example)));
+
 					// ensure that the method name is the same i.e. same line number
 					if (methodDeclaration.Identifier.Text != example.Name)
 						newClassDeclaration = newClassDeclaration.AddMembers(methodDeclaration.WithIdentifier(Identifier(example.Name)));
@@ -106,6 +112,7 @@ namespace ExamplesGenerator
 			var compilationUnit = CompilationUnit()
 				.AddUsings(
 					UsingDirective(Name("Elastic.Xunit.XunitPlumbing")),
+					UsingDirective(Name("System.ComponentModel")),
 					UsingDirective(Name("Nest"))
 				);
 
@@ -169,17 +176,25 @@ namespace ExamplesGenerator
 				statements.Add(statement);
 			}
 
+			// mark as skipped unit test
+			var unitTestSkip = SingletonSeparatedList(
+				Attribute(Name("U"),
+					AttributeArgumentList(SingletonSeparatedList(
+						AttributeArgument(ParseExpression("Skip = \"Example not implemented\""))))));
+
 			var methodDeclaration = MethodDeclaration(PredefinedType(Token(VoidKeyword)), referenceExample.Name)
-				.AddAttributeLists(
-					// mark as skipped unit test
-					AttributeList(SingletonSeparatedList(
-						Attribute(Name("U"),
-							AttributeArgumentList(SingletonSeparatedList(
-								AttributeArgument(ParseExpression("Skip = \"Example not implemented\""))))))))
+				.AddAttributeLists(AttributeList(unitTestSkip))
+				.AddAttributeLists(AttributeList(GetReferencePageAttribute(referenceExample)))
 				.AddModifiers(Token(PublicKeyword))
 				.WithBody(Block(statements));
 
 			return methodDeclaration;
 		}
+
+		private static SeparatedSyntaxList<AttributeSyntax> GetReferencePageAttribute(ReferenceExample referenceExample) =>
+			SingletonSeparatedList(
+				Attribute(Name("Description"),
+					AttributeArgumentList(SingletonSeparatedList(
+						AttributeArgument(ParseExpression($"\"{referenceExample.File}:{referenceExample.LineNumber}\""))))));
 	}
 }

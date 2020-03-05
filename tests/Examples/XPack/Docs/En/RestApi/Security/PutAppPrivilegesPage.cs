@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class PutAppPrivilegesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/put-app-privileges.asciidoc:88")]
 		public void Line88()
 		{
 			// tag::4ee31fd4ea6d18f32ec28b7fa433441d[]
@@ -28,6 +30,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/put-app-privileges.asciidoc:130")]
 		public void Line130()
 		{
 			// tag::ee90d1fb22b59d30da339d825303b912[]

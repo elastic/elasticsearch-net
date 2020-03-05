@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Request
 {
 	public class FromSizePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/from-size.asciidoc:14")]
 		public void Line14()
 		{
 			// tag::9a26759ccbd338224ecaacf7c49ab08e[]

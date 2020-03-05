@@ -1,11 +1,12 @@
+// docs/update-by-query.asciidoc:348
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line350 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/UpdateByQueryPage.cs#L94-L130.
+This file is generated from method Line348 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/UpdateByQueryPage.cs#L100-L137.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
-
-// docs/update-by-query.asciidoc:94
+////
 
 [source, csharp]
 ----

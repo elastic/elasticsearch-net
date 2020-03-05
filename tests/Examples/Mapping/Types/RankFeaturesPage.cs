@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class RankFeaturesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/rank-features.asciidoc:16")]
 		public void Line16()
 		{
 			// tag::17867d05695ddeaee5d5aea2263ac589[]

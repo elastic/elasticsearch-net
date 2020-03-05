@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Cluster
 {
 	public class TasksPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/tasks.asciidoc:64")]
 		public void Line64()
 		{
 			// tag::166bcfc6d5d39defec7ad6aa44d0914b[]
@@ -24,6 +26,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/tasks.asciidoc:118")]
 		public void Line118()
 		{
 			// tag::33610800d9de3c3e6d6b3c611ace7330[]
@@ -34,6 +37,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/tasks.asciidoc:128")]
 		public void Line128()
 		{
 			// tag::29824032d7d64512d17458fdd687b1f6[]
@@ -44,6 +48,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/tasks.asciidoc:143")]
 		public void Line143()
 		{
 			// tag::8f4a7f68f2ca3698abdf20026a2d8c5f[]
@@ -54,6 +59,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/tasks.asciidoc:206")]
 		public void Line206()
 		{
 			// tag::93fb59d3204f37af952198b331fb6bb7[]
@@ -64,6 +70,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/tasks.asciidoc:215")]
 		public void Line215()
 		{
 			// tag::77447e2966708e92f5e219d43ac3f00d[]
@@ -74,6 +81,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/tasks.asciidoc:226")]
 		public void Line226()
 		{
 			// tag::d89d36741d906a71eca6c144e8d83889[]
@@ -84,6 +92,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/tasks.asciidoc:236")]
 		public void Line236()
 		{
 			// tag::612c2e975f833de9815651135735eae5[]
@@ -94,6 +103,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/tasks.asciidoc:247")]
 		public void Line247()
 		{
 			// tag::bd3d710ec50a151453e141691163af72[]
@@ -104,6 +114,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/tasks.asciidoc:254")]
 		public void Line254()
 		{
 			// tag::a3ce0cfe2176f3d8a36959a5916995f0[]

@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Modules
 {
 	public class RemoteClustersPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line103()
+		[Description("modules/remote-clusters.asciidoc:109")]
+		public void Line109()
 		{
 			// tag::d4ce5a9672f85094e6d833d08debc018[]
 			var response0 = new SearchResponse<object>();
@@ -42,7 +44,8 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line139()
+		[Description("modules/remote-clusters.asciidoc:145")]
+		public void Line145()
 		{
 			// tag::328b7b4d0de6fac3a91205251de6e9b5[]
 			var response0 = new SearchResponse<object>();
@@ -72,7 +75,8 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line171()
+		[Description("modules/remote-clusters.asciidoc:177")]
+		public void Line177()
 		{
 			// tag::2a0d451f9e13aca39467883b16270cc2[]
 			var response0 = new SearchResponse<object>();

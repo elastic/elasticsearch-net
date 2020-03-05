@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class PercolatorPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:20")]
 		public void Line20()
 		{
 			// tag::05c14dd0bda732cfa36f7fb88138d98e[]
@@ -28,6 +30,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:40")]
 		public void Line40()
 		{
 			// tag::dc1f917924b43416a9ec7f8c9505f885[]
@@ -45,6 +48,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:70")]
 		public void Line70()
 		{
 			// tag::3eb4cdd4a799a117ac1ff5f02b18a512[]
@@ -92,6 +96,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:115")]
 		public void Line115()
 		{
 			// tag::f09817fd13ff3dce52eb79d0722409c3[]
@@ -146,6 +151,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:165")]
 		public void Line165()
 		{
 			// tag::60cab62af1540db2ad3b696b0ee1d7a8[]
@@ -166,6 +172,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:262")]
 		public void Line262()
 		{
 			// tag::360c4f373e72ba861584ee85bd218124[]
@@ -199,6 +206,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:295")]
 		public void Line295()
 		{
 			// tag::3e13c8a81f40a537eddc0b57633b45f8[]
@@ -213,6 +221,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:331")]
 		public void Line331()
 		{
 			// tag::7a2b9a7b2b6553a48bd4db60a939c0fc[]
@@ -233,6 +242,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:355")]
 		public void Line355()
 		{
 			// tag::45813d971bfa890ffa2f51f3f480cce5[]
@@ -253,6 +263,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:427")]
 		public void Line427()
 		{
 			// tag::a04a8d90f8245ff5f30a9983909faa1d[]
@@ -303,6 +314,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:495")]
 		public void Line495()
 		{
 			// tag::ed688d86eeaa4d7969acb0f574eb917f[]
@@ -320,6 +332,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:513")]
 		public void Line513()
 		{
 			// tag::d2f6040c058a9555dfa62bb42d896a8f[]
@@ -340,6 +353,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:574")]
 		public void Line574()
 		{
 			// tag::343dd09a8c76987e586858be3bdc51eb[]
@@ -399,6 +413,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:649")]
 		public void Line649()
 		{
 			// tag::bd7330af2609bdd8aa10958f5e640b93[]
@@ -416,6 +431,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/percolator.asciidoc:668")]
 		public void Line668()
 		{
 			// tag::4aa81a694266fb634904224d14cd9a87[]

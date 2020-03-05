@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ccr.Apis.Follow
 {
 	public class PutFollowPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/apis/follow/put-follow.asciidoc:25")]
 		public void Line25()
 		{
 			// tag::73646c12ad33a813ab2280f1dc83500e[]
@@ -20,6 +22,7 @@ namespace Examples.Ccr.Apis.Follow
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/apis/follow/put-follow.asciidoc:88")]
 		public void Line88()
 		{
 			// tag::c1f565c68d7bfce4a4251c7919444977[]

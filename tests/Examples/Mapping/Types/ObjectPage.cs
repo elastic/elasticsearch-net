@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class ObjectPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/object.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::9bb2dc0500011e0774f4bdfebf57a7a0[]
@@ -26,6 +28,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/object.asciidoc:46")]
 		public void Line46()
 		{
 			// tag::8e907d7533581efadf7831b05dd9f794[]

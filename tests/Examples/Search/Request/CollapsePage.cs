@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Request
 {
 	public class CollapsePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/collapse.asciidoc:9")]
 		public void Line9()
 		{
 			// tag::032f67ced3e7d106f8722432ebbd94d3[]
@@ -28,6 +30,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/collapse.asciidoc:43")]
 		public void Line43()
 		{
 			// tag::63d36a10d9475be2e2fa73d2415e20e6[]
@@ -55,6 +58,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/collapse.asciidoc:77")]
 		public void Line77()
 		{
 			// tag::4f20ca49fbaac83620d4cb23fd355f3b[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Pipeline
 {
 	public class CumulativeSumAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/cumulative-sum-aggregation.asciidoc:35")]
 		public void Line35()
 		{
 			// tag::1ae73d3fcc39bef9ddc654bb82d5d239[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ccr.Apis.Follow
 {
 	public class PostPauseFollowPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/apis/follow/post-pause-follow.asciidoc:30")]
 		public void Line30()
 		{
 			// tag::483d669ec0768bc4e275a568c6164704[]
@@ -16,6 +18,7 @@ namespace Examples.Ccr.Apis.Follow
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/apis/follow/post-pause-follow.asciidoc:63")]
 		public void Line63()
 		{
 			// tag::d3263afc69b6f969b9bbd8738cd07b97[]

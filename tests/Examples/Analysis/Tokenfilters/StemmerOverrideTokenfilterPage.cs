@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class StemmerOverrideTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line22()
+		[Description("analysis/tokenfilters/stemmer-override-tokenfilter.asciidoc:25")]
+		public void Line25()
 		{
 			// tag::8995e7cf49c4d870aea334645b70ed13[]
 			var response0 = new SearchResponse<object>();
@@ -34,7 +36,8 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line54()
+		[Description("analysis/tokenfilters/stemmer-override-tokenfilter.asciidoc:57")]
+		public void Line57()
 		{
 			// tag::35e24a98b35cadd0b1b370ada79249e1[]
 			var response0 = new SearchResponse<object>();

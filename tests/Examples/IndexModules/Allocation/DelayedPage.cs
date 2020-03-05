@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.IndexModules.Allocation
 {
 	public class DelayedPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/allocation/delayed.asciidoc:40")]
 		public void Line40()
 		{
 			// tag::17e6f3fac556f08a78f7a876e71acb89[]
@@ -21,6 +23,7 @@ namespace Examples.IndexModules.Allocation
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/allocation/delayed.asciidoc:82")]
 		public void Line82()
 		{
 			// tag::a38f29375eabd0103f8d7c00b17bb0ab[]
@@ -31,6 +34,7 @@ namespace Examples.IndexModules.Allocation
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/allocation/delayed.asciidoc:95")]
 		public void Line95()
 		{
 			// tag::25d40d3049e57e2bb70c2c5b88bd7b87[]

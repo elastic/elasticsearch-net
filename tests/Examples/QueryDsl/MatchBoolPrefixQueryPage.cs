@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class MatchBoolPrefixQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/match-bool-prefix-query.asciidoc:13")]
 		public void Line13()
 		{
 			// tag::79c7e8a98c47fad3e96c654d34aa049a[]
@@ -23,6 +25,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/match-bool-prefix-query.asciidoc:28")]
 		public void Line28()
 		{
 			// tag::effc6b4784aca12691de5d5782c0384b[]
@@ -44,6 +47,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/match-bool-prefix-query.asciidoc:59")]
 		public void Line59()
 		{
 			// tag::953aab6cbd12a4f034cf02bf34d62a72[]

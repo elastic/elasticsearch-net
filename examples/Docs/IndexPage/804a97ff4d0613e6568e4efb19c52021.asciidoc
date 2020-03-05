@@ -1,11 +1,12 @@
+// docs/index_.asciidoc:146
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line145 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/IndexPage.cs#L12-L55.
+This file is generated from method Line146 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/IndexPage.cs#L13-L57.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
-
-// docs/index_.asciidoc:12
+////
 
 [source, csharp]
 ----

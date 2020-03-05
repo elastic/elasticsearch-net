@@ -2,12 +2,14 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Examples.Models;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search
 {
 	public class SearchPage : ExampleBase
 	{
 		[U]
+		[Description("search/search.asciidoc:7")]
 		public void Line7()
 		{
 			// tag::9bdd3c0d47e60c8cfafc8109f9369922[]
@@ -21,7 +23,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		public void Line340()
+		[Description("search/search.asciidoc:342")]
+		public void Line342()
 		{
 			// tag::be49260e1b3496c4feac38c56ebb0669[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -34,7 +37,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		public void Line386()
+		[Description("search/search.asciidoc:388")]
+		public void Line388()
 		{
 			// tag::f5569945024b9d664828693705c27c1a[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -47,7 +51,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		public void Line398()
+		[Description("search/search.asciidoc:400")]
+		public void Line400()
 		{
 			// tag::168bfdde773570cfc6dd3ab3574e413b[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -60,7 +65,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		public void Line407()
+		[Description("search/search.asciidoc:409")]
+		public void Line409()
 		{
 			// tag::8022e6a690344035b6472a43a9d122e0[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -73,7 +79,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		public void Line413()
+		[Description("search/search.asciidoc:415")]
+		public void Line415()
 		{
 			// tag::43682666e1abcb14770c99f02eb26a0d[]
 			var searchResponse = client.Search<Tweet>(s => s

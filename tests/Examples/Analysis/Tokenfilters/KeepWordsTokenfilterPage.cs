@@ -1,43 +1,66 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class KeepWordsTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line22()
+		[Description("analysis/tokenfilters/keep-words-tokenfilter.asciidoc:26")]
+		public void Line26()
 		{
-			// tag::44cb20732770bb9a5f114a7517db774f[]
+			// tag::9a036a792be1d39af9fd0d1adb5f3402[]
 			var response0 = new SearchResponse<object>();
-			// end::44cb20732770bb9a5f114a7517db774f[]
+			// end::9a036a792be1d39af9fd0d1adb5f3402[]
 
-			response0.MatchesExample(@"PUT /keep_words_example
+			response0.MatchesExample(@"GET _analyze
 			{
-			    ""settings"" : {
-			        ""analysis"" : {
-			            ""analyzer"" : {
-			                ""example_1"" : {
-			                    ""tokenizer"" : ""standard"",
-			                    ""filter"" : [""lowercase"", ""words_till_three""]
-			                },
-			                ""example_2"" : {
-			                    ""tokenizer"" : ""standard"",
-			                    ""filter"" : [""lowercase"", ""words_in_file""]
-			                }
-			            },
-			            ""filter"" : {
-			                ""words_till_three"" : {
-			                    ""type"" : ""keep"",
-			                    ""keep_words"" : [ ""one"", ""two"", ""three""]
-			                },
-			                ""words_in_file"" : {
-			                    ""type"" : ""keep"",
-			                    ""keep_words_path"" : ""analysis/example_word_list.txt""
-			                }
-			            }
-			        }
+			  ""tokenizer"": ""whitespace"",
+			  ""filter"": [
+			    {
+			      ""type"": ""keep"",
+			      ""keep_words"": [ ""dog"", ""elephant"", ""fox"" ]
 			    }
+			  ],
+			  ""text"": ""the quick fox jumps over the lazy dog""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/keep-words-tokenfilter.asciidoc:118")]
+		public void Line118()
+		{
+			// tag::642c0c1c76e9bf226cd216ebae9ab958[]
+			var response0 = new SearchResponse<object>();
+			// end::642c0c1c76e9bf226cd216ebae9ab958[]
+
+			response0.MatchesExample(@"PUT keep_words_example
+			{
+			  ""settings"": {
+			    ""analysis"": {
+			      ""analyzer"": {
+			        ""standard_keep_word_array"": {
+			          ""tokenizer"": ""standard"",
+			          ""filter"": [ ""keep_word_array"" ]
+			        },
+			        ""standard_keep_word_file"": {
+			          ""tokenizer"": ""standard"",
+			          ""filter"": [ ""keep_word_file"" ]
+			        }
+			      },
+			      ""filter"": {
+			        ""keep_word_array"": {
+			          ""type"": ""keep"",
+			          ""keep_words"": [ ""one"", ""two"", ""three"" ]
+			        },
+			        ""keep_word_file"": {
+			          ""type"": ""keep"",
+			          ""keep_words_path"": ""analysis/example_word_list.txt""
+			        }
+			      }
+			    }
+			  }
 			}");
 		}
 	}

@@ -1,26 +1,35 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis
 {
 	public class TestingPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/testing.asciidoc:9")]
 		public void Line9()
 		{
-			// tag::f0d3b58abf6f2b499a38237a0e6d3498[]
+			// tag::035a7a919eb6513b4769a3727b7d6447[]
 			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
-			// end::f0d3b58abf6f2b499a38237a0e6d3498[]
+			// end::035a7a919eb6513b4769a3727b7d6447[]
 
 			response0.MatchesExample(@"POST _analyze
 			{
 			  ""analyzer"": ""whitespace"",
 			  ""text"":     ""The quick brown fox.""
 			}");
+		}
 
-			response1.MatchesExample(@"POST _analyze
+		[U(Skip = "Example not implemented")]
+		[Description("analysis/testing.asciidoc:62")]
+		public void Line62()
+		{
+			// tag::f7ec9062b3a7578fed55f119d7c22b74[]
+			var response0 = new SearchResponse<object>();
+			// end::f7ec9062b3a7578fed55f119d7c22b74[]
+
+			response0.MatchesExample(@"POST _analyze
 			{
 			  ""tokenizer"": ""standard"",
 			  ""filter"":  [ ""lowercase"", ""asciifolding"" ],
@@ -29,7 +38,8 @@ namespace Examples.Analysis
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line42()
+		[Description("analysis/testing.asciidoc:125")]
+		public void Line125()
 		{
 			// tag::acebf0b821acfbd6089f71e0359a56d3[]
 			var response0 = new SearchResponse<object>();

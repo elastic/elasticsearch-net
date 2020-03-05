@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ccr.Apis.Follow
 {
 	public class GetFollowStatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/apis/follow/get-follow-stats.asciidoc:36")]
 		public void Line36()
 		{
 			// tag::020c95db88ef356093f03be84893ddf9[]
@@ -16,6 +18,7 @@ namespace Examples.Ccr.Apis.Follow
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/apis/follow/get-follow-stats.asciidoc:206")]
 		public void Line206()
 		{
 			// tag::8e43bb5b7946143e69d397bb81d87df0[]

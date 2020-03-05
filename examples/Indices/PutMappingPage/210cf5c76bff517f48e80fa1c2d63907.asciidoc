@@ -1,11 +1,12 @@
+// indices/put-mapping.asciidoc:186
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line192 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Indices/PutMappingPage.cs#L170-L178.
+This file is generated from method Line186 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Indices/PutMappingPage.cs#L177-L186.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
-
-// indices/put-mapping.asciidoc:170
+////
 
 [source, csharp]
 ----

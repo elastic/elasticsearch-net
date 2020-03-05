@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Graph
 {
 	public class ExplorePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("graph/explore.asciidoc:185")]
 		public void Line185()
 		{
 			// tag::8bf5ac11eb42e652023a685af4a45ae2[]
@@ -35,6 +37,7 @@ namespace Examples.Graph
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("graph/explore.asciidoc:290")]
 		public void Line290()
 		{
 			// tag::6a1a238984d74771420d150dec47fd91[]
@@ -92,6 +95,7 @@ namespace Examples.Graph
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("graph/explore.asciidoc:377")]
 		public void Line377()
 		{
 			// tag::fa82d86a046d67366cfe9ce65535e433[]

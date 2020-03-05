@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class SynonymGraphTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line23()
+		[Description("analysis/tokenfilters/synonym-graph-tokenfilter.asciidoc:26")]
+		public void Line26()
 		{
 			// tag::2f071d36aa4aff5a2fafb3dadaa38b82[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +38,8 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line58()
+		[Description("analysis/tokenfilters/synonym-graph-tokenfilter.asciidoc:61")]
+		public void Line61()
 		{
 			// tag::3d253e5a0029bc96cce484302319b772[]
 			var response0 = new SearchResponse<object>();
@@ -71,7 +74,8 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line118()
+		[Description("analysis/tokenfilters/synonym-graph-tokenfilter.asciidoc:121")]
+		public void Line121()
 		{
 			// tag::1a14fd905941ecbdbc943b05875afc6f[]
 			var response0 = new SearchResponse<object>();
@@ -98,7 +102,8 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line149()
+		[Description("analysis/tokenfilters/synonym-graph-tokenfilter.asciidoc:152")]
+		public void Line152()
 		{
 			// tag::f0d7d6d5c878211704d4a5f1b2f6a247[]
 			var response0 = new SearchResponse<object>();

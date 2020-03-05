@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Cat
 {
 	public class FielddataPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("cat/fielddata.asciidoc:90")]
 		public void Line90()
 		{
 			// tag::973f2d7fbff9f310b21108b31d7ad413[]
@@ -16,6 +18,7 @@ namespace Examples.Cat
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cat/fielddata.asciidoc:114")]
 		public void Line114()
 		{
 			// tag::62daf8e41b9e984d18d6cc51f247c7ad[]
@@ -26,6 +29,7 @@ namespace Examples.Cat
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cat/fielddata.asciidoc:140")]
 		public void Line140()
 		{
 			// tag::b26ff669b3c88fb0872fa0a923972f54[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Security
 {
 	public class UsingIpFilteringPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/using-ip-filtering.asciidoc:118")]
 		public void Line118()
 		{
 			// tag::d453198d420e84e4200f8f4f0ed6b83c[]
@@ -21,6 +23,7 @@ namespace Examples.XPack.Docs.En.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/using-ip-filtering.asciidoc:130")]
 		public void Line130()
 		{
 			// tag::da9ffa564574978ea2b1e2bdb36bfd93[]

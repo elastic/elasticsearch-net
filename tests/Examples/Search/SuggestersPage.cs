@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search
 {
 	public class SuggestersPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters.asciidoc:8")]
 		public void Line8()
 		{
 			// tag::626f8c4b3e2cd3d9beaa63a7f5799d7a[]
@@ -31,6 +33,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters.asciidoc:51")]
 		public void Line51()
 		{
 			// tag::2533e4b36ae837eaecda08407ecb6383[]
@@ -57,6 +60,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters.asciidoc:127")]
 		public void Line127()
 		{
 			// tag::5275842787967b6db876025f4a1c6942[]

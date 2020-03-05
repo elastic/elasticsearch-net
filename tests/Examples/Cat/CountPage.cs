@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Cat
 {
 	public class CountPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("cat/count.asciidoc:52")]
 		public void Line52()
 		{
 			// tag::e7553d4bb4fd82d8f80a4d7af2624afb[]
@@ -16,6 +18,7 @@ namespace Examples.Cat
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cat/count.asciidoc:74")]
 		public void Line74()
 		{
 			// tag::0a1f8ad54b1d8c9feeaceaeed16c8490[]

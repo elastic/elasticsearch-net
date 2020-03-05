@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Suggesters
 {
 	public class ContextSuggestPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/context-suggest.asciidoc:25")]
 		public void Line25()
 		{
 			// tag::46b3154afd9a05f1aadd726efdd9cf98[]
@@ -65,6 +67,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/context-suggest.asciidoc:100")]
 		public void Line100()
 		{
 			// tag::2e59a0f8721e27dd537566f4af7a568f[]
@@ -83,6 +86,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/context-suggest.asciidoc:118")]
 		public void Line118()
 		{
 			// tag::d2a53c6c16ff2305830f64a3efd5f61d[]
@@ -97,6 +101,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/context-suggest.asciidoc:140")]
 		public void Line140()
 		{
 			// tag::8c3e9da5f412261477c032b33f36a3e9[]
@@ -121,6 +126,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/context-suggest.asciidoc:168")]
 		public void Line168()
 		{
 			// tag::8ac73762800c9db1ae418bfc0bcfa65a[]
@@ -148,6 +154,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/context-suggest.asciidoc:253")]
 		public void Line253()
 		{
 			// tag::182162241e42f16f5860ea26fdc52c7e[]
@@ -175,6 +182,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/context-suggest.asciidoc:282")]
 		public void Line282()
 		{
 			// tag::bc79a8936474faf7de6d3c9872678176[]
@@ -202,6 +210,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/context-suggest.asciidoc:315")]
 		public void Line315()
 		{
 			// tag::837c765a38fa0fd5f01b1559138469be[]

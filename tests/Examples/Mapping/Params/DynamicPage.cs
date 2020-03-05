@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class DynamicPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/dynamic.asciidoc:9")]
 		public void Line9()
 		{
 			// tag::e65e9805b8b17f72616f099e11a5c337[]
@@ -44,6 +46,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/dynamic.asciidoc:60")]
 		public void Line60()
 		{
 			// tag::4b478d9b1231513362d2fa8c766cd0a5[]

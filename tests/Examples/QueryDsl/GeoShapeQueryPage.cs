@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class GeoShapeQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/geo-shape-query.asciidoc:29")]
 		public void Line29()
 		{
 			// tag::183be708fc91109008109b5ed44c8b08[]
@@ -36,6 +38,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/geo-shape-query.asciidoc:56")]
 		public void Line56()
 		{
 			// tag::129975da094b6b93cc8fcc4042d47913[]
@@ -66,6 +69,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/geo-shape-query.asciidoc:100")]
 		public void Line100()
 		{
 			// tag::0e941a8309c3743972b8f5a8d9d9ada6[]

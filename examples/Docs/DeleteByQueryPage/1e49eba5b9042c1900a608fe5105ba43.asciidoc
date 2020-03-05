@@ -1,11 +1,12 @@
+// docs/delete-by-query.asciidoc:414
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line412 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/DeleteByQueryPage.cs#L153-L231.
+This file is generated from method Line414 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/DeleteByQueryPage.cs#L159-L238.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
-
-// docs/delete-by-query.asciidoc:153
+////
 
 [source, csharp]
 ----

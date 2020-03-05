@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class FlattenedPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/flattened.asciidoc:38")]
 		public void Line38()
 		{
 			// tag::8aa74aee3dcf4b34028e4c5e1c1ed27b[]
@@ -43,6 +45,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/flattened.asciidoc:76")]
 		public void Line76()
 		{
 			// tag::169b39bb889ecd47541bed3e48725488[]
@@ -58,6 +61,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/flattened.asciidoc:88")]
 		public void Line88()
 		{
 			// tag::2f4a55dfeba8851b306ef9c1b216ef54[]

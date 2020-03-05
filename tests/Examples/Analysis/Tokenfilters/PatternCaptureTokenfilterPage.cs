@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class PatternCaptureTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line48()
+		[Description("analysis/tokenfilters/pattern-capture-tokenfilter.asciidoc:51")]
+		public void Line51()
 		{
 			// tag::f733b25cd4c448b226bb76862974eef2[]
 			var response0 = new SearchResponse<object>();
@@ -38,7 +40,8 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line88()
+		[Description("analysis/tokenfilters/pattern-capture-tokenfilter.asciidoc:91")]
+		public void Line91()
 		{
 			// tag::080c34d8151d02b760571e3a2899fa97[]
 			var response0 = new SearchResponse<object>();

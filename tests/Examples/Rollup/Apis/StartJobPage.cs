@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Rollup.Apis
 {
 	public class StartJobPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("rollup/apis/start-job.asciidoc:51")]
 		public void Line51()
 		{
 			// tag::618c9d42284c067891fb57034a4fd834[]

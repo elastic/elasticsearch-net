@@ -2,12 +2,14 @@ using Elastic.Xunit.XunitPlumbing;
 using Examples.Models;
 using Nest;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class QueryFilterContextPage : ExampleBase
 	{
 		[U]
+		[Description("query-dsl/query_filter_context.asciidoc:62")]
 		public void Line62()
 		{
 			// tag::f29a28fffa7ec604a33a838f48f7ea79[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ilm
 {
 	public class UpdateLifecyclePolicyPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/update-lifecycle-policy.asciidoc:29")]
 		public void Line29()
 		{
 			// tag::0c44088f251488432966131135f1bd1c[]
@@ -35,6 +37,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/update-lifecycle-policy.asciidoc:60")]
 		public void Line60()
 		{
 			// tag::2c37ed0b33658d73a712e7942ea7433a[]
@@ -64,6 +67,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/update-lifecycle-policy.asciidoc:142")]
 		public void Line142()
 		{
 			// tag::fc541f5741c1fe052439ededa84ffe8a[]
@@ -93,6 +97,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/update-lifecycle-policy.asciidoc:182")]
 		public void Line182()
 		{
 			// tag::0f6fa3a706a7c17858d3dbe329839ea6[]
@@ -103,6 +108,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/update-lifecycle-policy.asciidoc:225")]
 		public void Line225()
 		{
 			// tag::f94601bc9cd640adb939af67116a40c8[]
@@ -133,6 +139,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/update-lifecycle-policy.asciidoc:304")]
 		public void Line304()
 		{
 			// tag::416c65c55a53d0161426cc09ae999c72[]
@@ -163,6 +170,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/update-lifecycle-policy.asciidoc:494")]
 		public void Line494()
 		{
 			// tag::552b6761ef052efa1e83f8a3c30d6f78[]

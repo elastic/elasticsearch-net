@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.IndexModules
 {
 	public class IndexSortingPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/index-sorting.asciidoc:16")]
 		public void Line16()
 		{
 			// tag::fea339c85b60ccefa6a163a70b86ca82[]
@@ -31,6 +33,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/index-sorting.asciidoc:41")]
 		public void Line41()
 		{
 			// tag::a69f1a67cdc141e8dde5abb437c76959[]
@@ -60,6 +63,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/index-sorting.asciidoc:114")]
 		public void Line114()
 		{
 			// tag::e01a82a0a809a4770ddc84c2cfc1ec85[]
@@ -85,6 +89,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/index-sorting.asciidoc:138")]
 		public void Line138()
 		{
 			// tag::46a3694ee4a7bbd4973565e5886782bb[]
@@ -101,6 +106,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/index-sorting.asciidoc:159")]
 		public void Line159()
 		{
 			// tag::2e8ba1e0b2a18dd276bbbe64f2b86338[]

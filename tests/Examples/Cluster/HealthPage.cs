@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Cluster
 {
 	public class HealthPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line32()
+		[Description("cluster/health.asciidoc:35")]
+		public void Line35()
 		{
 			// tag::04f5dd677c777bcb15d7d5fa63275fc8[]
 			var response0 = new SearchResponse<object>();
@@ -16,7 +18,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line140()
+		[Description("cluster/health.asciidoc:143")]
+		public void Line143()
 		{
 			// tag::b02e4907c9936c1adc16ccce9d49900d[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +29,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line176()
+		[Description("cluster/health.asciidoc:179")]
+		public void Line179()
 		{
 			// tag::c48264ec5d9b9679fddd72e5c44425b9[]
 			var response0 = new SearchResponse<object>();

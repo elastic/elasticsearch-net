@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Modules.Discovery
 {
 	public class AddingRemovingNodesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("modules/discovery/adding-removing-nodes.asciidoc:64")]
 		public void Line64()
 		{
 			// tag::abcc9f98c6bbaf70aa0b1abf8011d2a4[]
@@ -31,6 +33,7 @@ namespace Examples.Modules.Discovery
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("modules/discovery/adding-removing-nodes.asciidoc:107")]
 		public void Line107()
 		{
 			// tag::92f073762634a4b2274f71002494192e[]
@@ -41,6 +44,7 @@ namespace Examples.Modules.Discovery
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("modules/discovery/adding-removing-nodes.asciidoc:125")]
 		public void Line125()
 		{
 			// tag::ead4d875877d618594d0cdbdd9b7998b[]

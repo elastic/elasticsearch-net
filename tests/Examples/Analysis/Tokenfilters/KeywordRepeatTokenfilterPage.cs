@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class KeywordRepeatTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line16()
+		[Description("analysis/tokenfilters/keyword-repeat-tokenfilter.asciidoc:19")]
+		public void Line19()
 		{
 			// tag::9da83c9a2149bfc6fe215a612ae0a9aa[]
 			var response0 = new SearchResponse<object>();
@@ -35,7 +37,8 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line42()
+		[Description("analysis/tokenfilters/keyword-repeat-tokenfilter.asciidoc:45")]
+		public void Line45()
 		{
 			// tag::757622a424b8445fee49746862a11b02[]
 			var response0 = new SearchResponse<object>();

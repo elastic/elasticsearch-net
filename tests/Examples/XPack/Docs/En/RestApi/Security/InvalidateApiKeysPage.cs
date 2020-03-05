@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class InvalidateApiKeysPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-api-keys.asciidoc:72")]
 		public void Line72()
 		{
 			// tag::0aff04881be21eea45375ec4f4f50e66[]
@@ -19,6 +21,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-api-keys.asciidoc:97")]
 		public void Line97()
 		{
 			// tag::01cc9dac719f2612a48cc1b23db7cd54[]
@@ -32,6 +35,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-api-keys.asciidoc:110")]
 		public void Line110()
 		{
 			// tag::f388e571224dd6850f8c9f9f08fca3da[]
@@ -45,6 +49,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-api-keys.asciidoc:121")]
 		public void Line121()
 		{
 			// tag::dde283eab92608e7bfbfa09c6482a12e[]
@@ -58,6 +63,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-api-keys.asciidoc:132")]
 		public void Line132()
 		{
 			// tag::e7d819634d765cde269e2669e2dc677f[]
@@ -71,6 +77,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-api-keys.asciidoc:143")]
 		public void Line143()
 		{
 			// tag::0ad8aa0d684b09500aa30b4c4d6f29c8[]
@@ -85,6 +92,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-api-keys.asciidoc:155")]
 		public void Line155()
 		{
 			// tag::cfad3631be0634ee49c424f9ccec62d9[]
@@ -98,6 +106,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/invalidate-api-keys.asciidoc:166")]
 		public void Line166()
 		{
 			// tag::6c927313867647e0ef3cd3a37cb410cc[]

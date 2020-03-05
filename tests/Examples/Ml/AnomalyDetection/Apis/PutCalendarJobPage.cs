@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class PutCalendarJobPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line37()
+		[Description("ml/anomaly-detection/apis/put-calendar-job.asciidoc:38")]
+		public void Line38()
 		{
 			// tag::1b2ab75d3c8064fac6ecc63104396c02[]
 			var response0 = new SearchResponse<object>();

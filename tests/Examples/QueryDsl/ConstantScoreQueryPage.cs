@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class ConstantScoreQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/constant-score-query.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::d59a084640acf2f5c51d3068d38b5fc0[]

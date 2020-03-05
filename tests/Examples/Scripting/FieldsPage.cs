@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Scripting
 {
 	public class FieldsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("scripting/fields.asciidoc:46")]
 		public void Line46()
 		{
 			// tag::729f4abc0b4edaf6b58bd9e7b3fd5a8b[]
@@ -49,6 +51,7 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("scripting/fields.asciidoc:90")]
 		public void Line90()
 		{
 			// tag::0dfe9d6724c7bd11094bb4a0796e7ac7[]
@@ -79,6 +82,7 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("scripting/fields.asciidoc:172")]
 		public void Line172()
 		{
 			// tag::2a9c29afe23e30a68dd6e30ea22f5d42[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class GeohashgridAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/geohashgrid-aggregation.asciidoc:21")]
 		public void Line21()
 		{
 			// tag::71af0fec59d37477c850d47730d3f286[]
@@ -55,6 +57,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/geohashgrid-aggregation.asciidoc:93")]
 		public void Line93()
 		{
 			// tag::9f0c6a8c6381bb0cb81a3070dd2bf2f2[]
@@ -87,6 +90,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/geohashgrid-aggregation.asciidoc:124")]
 		public void Line124()
 		{
 			// tag::36f61e038014f92466cd83d7b007e16b[]
@@ -111,6 +115,31 @@ namespace Examples.Aggregations.Bucket
 			                        ""field"": ""location"",
 			                        ""precision"": 8
 			                    }
+			                }
+			            }
+			        }
+			    }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/geohashgrid-aggregation.asciidoc:206")]
+		public void Line206()
+		{
+			// tag::850c30e63e2237776a7ed299f0262316[]
+			var response0 = new SearchResponse<object>();
+			// end::850c30e63e2237776a7ed299f0262316[]
+
+			response0.MatchesExample(@"POST /museums/_search?size=0
+			{
+			    ""aggregations"" : {
+			        ""tiles-in-bounds"" : {
+			            ""geohash_grid"" : {
+			                ""field"" : ""location"",
+			                ""precision"" : 8,
+			                ""bounds"": {
+			                  ""top_left"" : ""53.4375, 4.21875"",
+			                  ""bottom_right"" : ""52.03125, 5.625""
 			                }
 			            }
 			        }

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class NestedAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/nested-aggregation.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::60917d97013c4516c621c6c24c29748f[]
@@ -29,6 +31,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/nested-aggregation.asciidoc:31")]
 		public void Line31()
 		{
 			// tag::a1849d3cb44fc24b58323ec97c5e9c5c[]
@@ -52,6 +55,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/nested-aggregation.asciidoc:55")]
 		public void Line55()
 		{
 			// tag::be91aeed1af812064943dd5192425ab2[]

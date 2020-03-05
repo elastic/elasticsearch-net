@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Sql
 {
 	public class GettingStartedPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("sql/getting-started.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::0a46ac2968a574ce145f197f10d30152[]
@@ -22,6 +24,7 @@ namespace Examples.Sql
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("sql/getting-started.asciidoc:23")]
 		public void Line23()
 		{
 			// tag::53b14d640c4c48a5e7ea86ddc26bee64[]

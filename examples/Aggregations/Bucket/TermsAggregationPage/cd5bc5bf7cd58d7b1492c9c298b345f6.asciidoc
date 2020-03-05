@@ -1,11 +1,12 @@
+// aggregations/bucket/terms-aggregation.asciidoc:806
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line806 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Aggregations/Bucket/TermsAggregationPage.cs#L652-L694.
+This file is generated from method Line806 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Aggregations/Bucket/TermsAggregationPage.cs#L670-L713.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
-
-// aggregations/bucket/terms-aggregation.asciidoc:652
+////
 
 [source, csharp]
 ----

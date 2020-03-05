@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Monitoring
 {
 	public class ConfiguringMetricbeatPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("monitoring/configuring-metricbeat.asciidoc:29")]
 		public void Line29()
 		{
 			// tag::fb2b8d642e16132eebcff4f8b6d592d1[]
@@ -25,6 +27,7 @@ namespace Examples.Monitoring
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("monitoring/configuring-metricbeat.asciidoc:194")]
 		public void Line194()
 		{
 			// tag::519603821dc5b883fc2cf50e3d164084[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Metrics
 {
 	public class MaxAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/max-aggregation.asciidoc:16")]
 		public void Line16()
 		{
 			// tag::9498a707be49e14dad801db6b6824e34[]
@@ -21,6 +23,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/max-aggregation.asciidoc:51")]
 		public void Line51()
 		{
 			// tag::736fc5448b66962ceef1e6d5948ef691[]
@@ -42,6 +45,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/max-aggregation.asciidoc:71")]
 		public void Line71()
 		{
 			// tag::b5e782e309a2a10db272414e8483d8dc[]
@@ -66,6 +70,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/max-aggregation.asciidoc:98")]
 		public void Line98()
 		{
 			// tag::23fdba37454d6d7abf6bfbb4fd01692f[]
@@ -91,6 +96,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/max-aggregation.asciidoc:125")]
 		public void Line125()
 		{
 			// tag::41518c094db4a5b03cca3b21497f79cf[]

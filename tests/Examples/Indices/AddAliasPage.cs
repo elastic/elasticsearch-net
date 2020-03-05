@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class AddAliasPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("indices/add-alias.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::394aabe7029e4d0741ae6965c6fae5ac[]
@@ -16,6 +18,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/add-alias.asciidoc:71")]
 		public void Line71()
 		{
 			// tag::7fe8339ce3911382a7c473f6f0c03f89[]
@@ -26,6 +29,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/add-alias.asciidoc:83")]
 		public void Line83()
 		{
 			// tag::890f659cfc10ff8171420809bdcf7c67[]
@@ -43,6 +47,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/add-alias.asciidoc:97")]
 		public void Line97()
 		{
 			// tag::83b2785e63357ab3ade51d8ec0c11917[]
@@ -61,6 +66,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/add-alias.asciidoc:117")]
 		public void Line117()
 		{
 			// tag::3e1e00a08a6fbfdc3d55d69880373cd6[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class EnabledPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/enabled.asciidoc:17")]
 		public void Line17()
 		{
 			// tag::b0b00ab5b673d747d36deabbc4359859[]
@@ -54,6 +56,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/enabled.asciidoc:64")]
 		public void Line64()
 		{
 			// tag::d31274ad53af4baa23ec3e5000783cbd[]
@@ -90,6 +93,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/enabled.asciidoc:99")]
 		public void Line99()
 		{
 			// tag::e93514654ea0c7c9f15cda0eed61a292[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class ShrinkIndexPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("indices/shrink-index.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::36897f18b6b4631a03ba37f3baa00907[]
@@ -16,6 +18,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/shrink-index.asciidoc:37")]
 		public void Line37()
 		{
 			// tag::5e93f806cfd459149222b443b7992a51[]
@@ -32,6 +35,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/shrink-index.asciidoc:98")]
 		public void Line98()
 		{
 			// tag::f3594de7ef39ab09b0bb12c1e76bfe6b[]
@@ -48,6 +52,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/shrink-index.asciidoc:141")]
 		public void Line141()
 		{
 			// tag::76c167d8ab305cb43b594f140c902dfe[]

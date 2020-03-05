@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Request
 {
 	public class ScriptFieldsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/script-fields.asciidoc:8")]
 		public void Line8()
 		{
 			// tag::68358f94e77b5dce7eb01679516bae69[]
@@ -38,6 +40,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/script-fields.asciidoc:44")]
 		public void Line44()
 		{
 			// tag::34dd16c077e81b3744963b19a3dc9e49[]

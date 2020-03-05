@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ilm
 {
 	public class IlmWithExistingIndicesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:23")]
 		public void Line23()
 		{
 			// tag::4e2027438393cf93b9c9402b8511eab5[]
@@ -35,6 +37,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:49")]
 		public void Line49()
 		{
 			// tag::8502a9281f5393a7160e4e46988da672[]
@@ -49,6 +52,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:59")]
 		public void Line59()
 		{
 			// tag::7d51f0436e87dec4274133856866b07d[]
@@ -63,7 +67,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line118()
+		[Description("ilm/ilm-with-existing-indices.asciidoc:128")]
+		public void Line128()
 		{
 			// tag::75097f73665235b20df09739c820ad35[]
 			var response0 = new SearchResponse<object>();
@@ -106,7 +111,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line161()
+		[Description("ilm/ilm-with-existing-indices.asciidoc:171")]
+		public void Line171()
 		{
 			// tag::3feab5c602192b8dc58435654b17d3fe[]
 			var response0 = new SearchResponse<object>();
@@ -142,7 +148,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line203()
+		[Description("ilm/ilm-with-existing-indices.asciidoc:213")]
+		public void Line213()
 		{
 			// tag::ec195297eb804cba1cb19c9926773059[]
 			var response0 = new SearchResponse<object>();
@@ -159,13 +166,14 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line245()
+		[Description("ilm/ilm-with-existing-indices.asciidoc:255")]
+		public void Line255()
 		{
-			// tag::39bbb602c95c606725eefea252437514[]
+			// tag::8d39a0f0116702e981545d13371cd0eb[]
 			var response0 = new SearchResponse<object>();
-			// end::39bbb602c95c606725eefea252437514[]
+			// end::8d39a0f0116702e981545d13371cd0eb[]
 
-			response0.MatchesExample(@"PUT _ilm/policy/sample_policy
+			response0.MatchesExample(@"PUT _ilm/policy/mylogs_condensed_policy
 			{
 			  ""policy"": {
 			    ""phases"": {
@@ -183,7 +191,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line268()
+		[Description("ilm/ilm-with-existing-indices.asciidoc:278")]
+		public void Line278()
 		{
 			// tag::bce0d86353e212cee466ccbc90bdc6e7[]
 			var response0 = new SearchResponse<object>();
@@ -218,7 +227,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line307()
+		[Description("ilm/ilm-with-existing-indices.asciidoc:317")]
+		public void Line317()
 		{
 			// tag::89115f8d40d9a13b0b01dc7c33ffd1cc[]
 			var response0 = new SearchResponse<object>();
@@ -235,7 +245,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line336()
+		[Description("ilm/ilm-with-existing-indices.asciidoc:356")]
+		public void Line356()
 		{
 			// tag::5df1ed33b5fcf3b9d85c20d100780d43[]
 			var response0 = new SearchResponse<object>();
@@ -250,7 +261,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line363()
+		[Description("ilm/ilm-with-existing-indices.asciidoc:387")]
+		public void Line387()
 		{
 			// tag::41f211cc838f1bee7eac264784f905e2[]
 			var response0 = new SearchResponse<object>();
@@ -270,7 +282,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line393()
+		[Description("ilm/ilm-with-existing-indices.asciidoc:417")]
+		public void Line417()
 		{
 			// tag::227e19aecb349f31e74898384322ae01[]
 			var response0 = new SearchResponse<object>();

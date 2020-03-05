@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class RangeFieldNotePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/range-field-note.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::dbcd8892dd01c43d5a60c94173574faf[]
@@ -46,6 +48,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/range-field-note.asciidoc:49")]
 		public void Line49()
 		{
 			// tag::cf1872035b9acf6a214310badae345f7[]
@@ -66,6 +69,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/range-field-note.asciidoc:105")]
 		public void Line105()
 		{
 			// tag::620ffff06483f13e5143dfddaa8b7b30[]

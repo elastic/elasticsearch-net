@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class GetRoleMappingsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-role-mappings.asciidoc:64")]
 		public void Line64()
 		{
 			// tag::8b3a94495127efd9d56b2cd7f3eecdca[]

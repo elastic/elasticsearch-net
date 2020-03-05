@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Modules.Cluster
 {
 	public class DiskAllocatorPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("modules/cluster/disk_allocator.asciidoc:55")]
 		public void Line55()
 		{
 			// tag::aaaa9a186db96077879ddfcfbd625fdb[]
@@ -19,6 +21,7 @@ namespace Examples.Modules.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("modules/cluster/disk_allocator.asciidoc:79")]
 		public void Line79()
 		{
 			// tag::4fe5a9e99dc9400d67a5a2f6f6752c07[]

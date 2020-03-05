@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Pipeline
 {
 	public class StatsBucketAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/stats-bucket-aggregation.asciidoc:36")]
 		public void Line36()
 		{
 			// tag::8a187c87964774530ef99f8962d83da5[]

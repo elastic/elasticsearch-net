@@ -3,12 +3,14 @@ using Elasticsearch.Net;
 using Examples.Models;
 using Nest;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.Search
 {
 	public class RequestBodyPage : ExampleBase
 	{
 		[U]
+		[Description("search/request-body.asciidoc:7")]
 		public void Line7()
 		{
 			// tag::0ce3606f1dba490eef83c4317b315b62[]
@@ -34,7 +36,9 @@ namespace Examples.Search
 			});
 		}
 
-		[U] public void Line156()
+		[U]
+		[Description("search/request-body.asciidoc:156")]
+		public void Line156()
 		{
 			// tag::bfcd65ab85d684d36a8550080032958d[]
 			var searchResponse = client.Search<object>(s => s

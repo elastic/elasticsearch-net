@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class CreateApiKeysPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/create-api-keys.asciidoc:70")]
 		public void Line70()
 		{
 			// tag::0c8f24166d0ce7b8792781b268b544a9[]

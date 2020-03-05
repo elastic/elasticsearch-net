@@ -30,16 +30,8 @@ namespace ExamplesGenerator
 				.WithChangedOption(TabSize, CSharp, 4);
 		}
 
-		public static void GenerateExampleAsciiDoc(IEnumerable<ImplementedExample> examples, string branchName, string path)
+		public static void GenerateExampleAsciiDoc(IEnumerable<ImplementedExample> examples, string branchName)
 		{
-			var referencePages = AsciiDocParser.ParsePages(path);
-
-			ReferenceExample GetReferencePage(ImplementedExample e)
-			{
-				return referencePages.SelectMany(p => p.Examples)
-					.Single(o => o.Hash == e.Hash);
-			}
-
 			foreach (var file in ExamplesAsciiDocDir.EnumerateFiles())
 				file.Delete();
 			foreach (var dir in ExamplesAsciiDocDir.EnumerateDirectories())
@@ -67,10 +59,8 @@ namespace ExamplesGenerator
 					.RemoveClosingBraceAndNewLines()
 					.ExtractCallouts(out var callouts);
 
-				var referenceExample = GetReferencePage(example);
-
 				var builder = new StringBuilder()
-					.AppendLine($"// {referenceExample.File}.asciidoc:{referenceExample.LineNumber}")
+					.AppendLine($"// {example.ReferenceFileAndLineNumber}")
 					.AppendLine()
 					.AppendLine("////")
 					.AppendLine("IMPORTANT NOTE")

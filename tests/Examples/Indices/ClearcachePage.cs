@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class ClearcachePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("indices/clearcache.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::486eee2c8e75520f825fec08c1fbd67e[]
@@ -16,7 +18,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line99()
+		[Description("indices/clearcache.asciidoc:101")]
+		public void Line101()
 		{
 			// tag::e97b14be2c4030bfc92e5d09a27e9fc9[]
 			var response0 = new SearchResponse<object>();
@@ -34,7 +37,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line119()
+		[Description("indices/clearcache.asciidoc:121")]
+		public void Line121()
 		{
 			// tag::62069c4118d79daf9612b29659b16627[]
 			var response0 = new SearchResponse<object>();
@@ -44,7 +48,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line131()
+		[Description("indices/clearcache.asciidoc:133")]
+		public void Line133()
 		{
 			// tag::2f43c5e976713a5c5cd8eb4b08cfffca[]
 			var response0 = new SearchResponse<object>();
@@ -54,7 +59,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line141()
+		[Description("indices/clearcache.asciidoc:143")]
+		public void Line143()
 		{
 			// tag::c4a1d03dcfb82913d0724a42b0a89f20[]
 			var response0 = new SearchResponse<object>();

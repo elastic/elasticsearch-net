@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class NormalizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/normalizer.asciidoc:14")]
 		public void Line14()
 		{
 			// tag::4cd40113e0fc90c37976f28d7e4a2327[]
@@ -84,6 +86,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/normalizer.asciidoc:121")]
 		public void Line121()
 		{
 			// tag::6f842819c50e8490080dd085e0c6aca3[]

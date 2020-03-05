@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class RangePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/range.asciidoc:21")]
 		public void Line21()
 		{
 			// tag::2b371fbf0654d76436d49f5703d6c137[]
@@ -46,6 +48,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/range.asciidoc:62")]
 		public void Line62()
 		{
 			// tag::84edb44c5b74426f448b2baa101092d6[]
@@ -65,6 +68,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/range.asciidoc:117")]
 		public void Line117()
 		{
 			// tag::1572696b97822d3332be51700e09672f[]
@@ -86,6 +90,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/range.asciidoc:182")]
 		public void Line182()
 		{
 			// tag::f894f680943a8af8328aab4741e6ab93[]

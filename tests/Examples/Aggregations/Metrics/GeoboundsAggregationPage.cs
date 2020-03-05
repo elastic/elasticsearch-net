@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Metrics
 {
 	public class GeoboundsAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/geobounds-aggregation.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::34cabdecfe9c2cb8dd929853882564eb[]

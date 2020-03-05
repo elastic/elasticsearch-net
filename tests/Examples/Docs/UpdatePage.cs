@@ -3,12 +3,14 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.Docs
 {
 	public class UpdatePage : ExampleBase
 	{
 		[U]
+		[Description("docs/update.asciidoc:84")]
 		public void Line84()
 		{
 			// tag::381fced1882ca8337143e6bb180a5715[]
@@ -30,6 +32,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update.asciidoc:96")]
 		public void Line96()
 		{
 			// tag::96de5703ba0bd43fd4ac239ec5408542[]
@@ -58,6 +61,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update.asciidoc:114")]
 		public void Line114()
 		{
 			// tag::4cd246e5c4c035a2cd4081ae9a3d54e5[]
@@ -86,6 +90,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update.asciidoc:135")]
 		public void Line135()
 		{
 			// tag::ac544eb247a29ca42aab13826ca88561[]
@@ -114,6 +119,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update.asciidoc:153")]
 		public void Line153()
 		{
 			// tag::eb30ba547e4a7b8f54f33ab259aca523[]
@@ -141,6 +147,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update.asciidoc:164")]
 		public void Line164()
 		{
 			// tag::58df61acbfb15b8ef0aaa18b81ae98a6[]
@@ -168,6 +175,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update.asciidoc:177")]
 		public void Line177()
 		{
 			// tag::98aeb275f829b5f7b8eb2147701565ff[]
@@ -196,6 +204,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update.asciidoc:198")]
 		public void Line198()
 		{
 			// tag::38c1d0f6668e9563c0827f839f9fa505[]
@@ -217,6 +226,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update.asciidoc:251")]
 		public void Line251()
 		{
 			// tag::015294a400986295039e52ebc62033be[]
@@ -240,6 +250,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update.asciidoc:271")]
 		public void Line271()
 		{
 			// tag::0a958e486ede3f519d48431ab689eded[]
@@ -275,6 +286,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update.asciidoc:296")]
 		public void Line296()
 		{
 			// tag::f9636d7ef1a45be4f36418c875cf6bef[]
@@ -292,7 +304,7 @@ namespace Examples.Docs
 						})
 					)
 				)
-				.Upsert(new {})
+				.Upsert(new { })
 			);
 			// end::f9636d7ef1a45be4f36418c875cf6bef[]
 
@@ -314,6 +326,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update.asciidoc:325")]
 		public void Line325()
 		{
 			// tag::7cac05cb589f1614fd5b8589153bef06[]

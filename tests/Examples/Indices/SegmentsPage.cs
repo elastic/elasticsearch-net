@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class SegmentsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("indices/segments.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::3f176d802b3e2964686ecd91748fab89[]
@@ -16,7 +18,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line106()
+		[Description("indices/segments.asciidoc:108")]
+		public void Line108()
 		{
 			// tag::940e8c2c7ff92d71f489bdb7183c1ce6[]
 			var response0 = new SearchResponse<object>();
@@ -26,7 +29,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line115()
+		[Description("indices/segments.asciidoc:117")]
+		public void Line117()
 		{
 			// tag::975b4b92464d52068516aa2f0f955cc1[]
 			var response0 = new SearchResponse<object>();
@@ -36,7 +40,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line124()
+		[Description("indices/segments.asciidoc:126")]
+		public void Line126()
 		{
 			// tag::6414b9276ba1c63898c3ff5cbe03c54e[]
 			var response0 = new SearchResponse<object>();
@@ -46,7 +51,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line184()
+		[Description("indices/segments.asciidoc:186")]
+		public void Line186()
 		{
 			// tag::1b21d886f6e9619c73079d14581ccbe4[]
 			var response0 = new SearchResponse<object>();
