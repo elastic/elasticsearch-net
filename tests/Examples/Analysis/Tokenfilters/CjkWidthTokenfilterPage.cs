@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class CjkWidthTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/cjk-width-tokenfilter.asciidoc:28")]
 		public void Line28()
 		{
 			// tag::76b279835936ee4b546a171c671c3cd7[]
@@ -21,6 +23,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/cjk-width-tokenfilter.asciidoc:69")]
 		public void Line69()
 		{
 			// tag::3df1aa197f7498a534b0536f49aea28b[]

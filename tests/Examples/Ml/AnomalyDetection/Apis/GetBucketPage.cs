@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class GetBucketPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ml/anomaly-detection/apis/get-bucket.asciidoc:174")]
 		public void Line174()
 		{
 			// tag::f96d4614f2fc294339fef325b794355f[]

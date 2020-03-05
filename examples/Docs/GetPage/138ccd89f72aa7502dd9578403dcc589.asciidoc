@@ -1,10 +1,13 @@
+// docs/get.asciidoc:53
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line53 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/GetPage.cs#L20-L31.
+This file is generated from method Line53 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/GetPage.cs#L22-L34.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////
+
 [source, csharp]
 ----
 var getResponse = client.Get<Tweet>(0, g => g

@@ -8,8 +8,9 @@ namespace ExamplesGenerator
 	/// </summary>
 	internal class ImplementedExample
 	{
-		public ImplementedExample(string method, int startLineNumber, int endLineNumber, string path, string hash, BlockSyntax body)
+		public ImplementedExample(string referenceFileAndLineNumber, string method, int startLineNumber, int endLineNumber, string path, string hash, BlockSyntax body)
 		{
+			ReferenceFileAndLineNumber = referenceFileAndLineNumber;
 			Method = method;
 			StartLineNumber = startLineNumber;
 			EndLineNumber = endLineNumber;
@@ -37,6 +38,11 @@ namespace ExamplesGenerator
 		/// The path to the source C# file
 		/// </summary>
 		public string Path { get; }
+
+		/// <summary>
+		/// The original reference file and line number (from the DescriptionAttribute on the C# method)
+		/// </summary>
+		public string ReferenceFileAndLineNumber { get; }
 
 		/// <summary>
 		/// The method name in the C# file

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Metrics
 {
 	public class WeightedAvgAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/weighted-avg-aggregation.asciidoc:55")]
 		public void Line55()
 		{
 			// tag::c15dead46d351f62cfc066f1ca1a24eb[]
@@ -31,6 +33,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/weighted-avg-aggregation.asciidoc:101")]
 		public void Line101()
 		{
 			// tag::4c15a4b054c7d0aaaa17deaff853bb28[]
@@ -64,6 +67,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/weighted-avg-aggregation.asciidoc:151")]
 		public void Line151()
 		{
 			// tag::e88e8c78ed50936c8b7436c90b988ddf[]
@@ -89,6 +93,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/weighted-avg-aggregation.asciidoc:183")]
 		public void Line183()
 		{
 			// tag::cebfe0fed62091eb38b6348c89643f89[]

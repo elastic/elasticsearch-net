@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Fields
 {
 	public class IndexFieldPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/fields/index-field.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::3c04f75bcbb07125d51b21b9b2c9f6f0[]

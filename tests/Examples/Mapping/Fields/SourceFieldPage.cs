@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Fields
 {
 	public class SourceFieldPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/fields/source-field.asciidoc:16")]
 		public void Line16()
 		{
 			// tag::50246e04b49dab320409b95526e6e34c[]
@@ -23,6 +25,7 @@ namespace Examples.Mapping.Fields
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/fields/source-field.asciidoc:85")]
 		public void Line85()
 		{
 			// tag::b557f114e21dbc6f531d4e7621a08e8f[]

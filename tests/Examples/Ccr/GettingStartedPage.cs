@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ccr
 {
 	public class GettingStartedPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/getting-started.asciidoc:94")]
 		public void Line94()
 		{
 			// tag::9ad38ab4d9c3983e97e8c38fec611f10[]
@@ -29,6 +31,7 @@ namespace Examples.Ccr
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/getting-started.asciidoc:119")]
 		public void Line119()
 		{
 			// tag::cc0cca5556ec6224c7134c233734beed[]
@@ -39,6 +42,7 @@ namespace Examples.Ccr
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/getting-started.asciidoc:165")]
 		public void Line165()
 		{
 			// tag::74ed3197e0e77750f5255c6df0cc0fe5[]
@@ -82,6 +86,7 @@ namespace Examples.Ccr
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/getting-started.asciidoc:214")]
 		public void Line214()
 		{
 			// tag::278da0495c9008e6d9f25a5d5f0339b7[]
@@ -96,6 +101,7 @@ namespace Examples.Ccr
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/getting-started.asciidoc:276")]
 		public void Line276()
 		{
 			// tag::6b104a66ab47fc1e1f24a5738f82feb4[]

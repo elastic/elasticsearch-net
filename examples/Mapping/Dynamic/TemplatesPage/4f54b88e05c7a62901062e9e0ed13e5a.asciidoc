@@ -1,10 +1,13 @@
+// mapping/dynamic/templates.asciidoc:138
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line125 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Mapping/Dynamic/TemplatesPage.cs#L84-L134.
+This file is generated from method Line138 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Mapping/Dynamic/TemplatesPage.cs#L86-L137.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////
+
 [source, csharp]
 ----
 var createIndexResponse = client.Indices.Create("my_index", c => c

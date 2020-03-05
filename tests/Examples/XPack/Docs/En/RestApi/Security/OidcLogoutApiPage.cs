@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class OidcLogoutApiPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/oidc-logout-api.asciidoc:44")]
 		public void Line44()
 		{
 			// tag::2a1eece9a59ac1773edcf0a932c26de0[]

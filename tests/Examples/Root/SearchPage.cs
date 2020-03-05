@@ -2,12 +2,14 @@ using System;
 using Elastic.Xunit.XunitPlumbing;
 using Examples.Models;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.Root
 {
 	public class SearchPage : ExampleBase
 	{
 		[U]
+		[Description("search.asciidoc:18")]
 		public void Line18()
 		{
 			// tag::5d32279dcd52b22d9e1178a02a3ad957[]
@@ -31,6 +33,7 @@ namespace Examples.Root
 		}
 
 		[U]
+		[Description("search.asciidoc:32")]
 		public void Line32()
 		{
 			// tag::8acc1d67b152e7027e0f0e1a8b4b2431[]
@@ -78,6 +81,7 @@ namespace Examples.Root
 		}
 
 		[U]
+		[Description("search.asciidoc:72")]
 		public void Line72()
 		{
 			// tag::014b788c879e4aaa1020672e45e25473[]
@@ -97,6 +101,7 @@ namespace Examples.Root
 		}
 
 		[U]
+		[Description("search.asciidoc:96")]
 		public void Line96()
 		{
 			// tag::189a921df2f5b1fe580937210ce9c1c2[]

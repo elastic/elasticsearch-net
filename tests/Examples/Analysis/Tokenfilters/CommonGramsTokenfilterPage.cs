@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class CommonGramsTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/common-grams-tokenfilter.asciidoc:28")]
 		public void Line28()
 		{
 			// tag::2fd0b3c132b46aa34cc9d92dd2d4bc85[]
@@ -26,6 +28,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/common-grams-tokenfilter.asciidoc:126")]
 		public void Line126()
 		{
 			// tag::63de16d533d65708cf794eb50da02fbd[]
@@ -54,6 +57,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/common-grams-tokenfilter.asciidoc:206")]
 		public void Line206()
 		{
 			// tag::d2d5a5fa4ab40787db87c85e1dd2bd06[]

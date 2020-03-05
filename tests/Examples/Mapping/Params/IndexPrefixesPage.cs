@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class IndexPrefixesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/index-prefixes.asciidoc:21")]
 		public void Line21()
 		{
 			// tag::ff5d15a265855b1c11cb20ceef6a1b58[]
@@ -26,6 +28,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/index-prefixes.asciidoc:41")]
 		public void Line41()
 		{
 			// tag::b19ec4a20c19082e5c40e3b1f28bfbcb[]

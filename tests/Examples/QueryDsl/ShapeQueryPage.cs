@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class ShapeQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/shape-query.asciidoc:28")]
 		public void Line28()
 		{
 			// tag::9208f0823deacf3e3a2cc2b5d78f1e33[]
@@ -36,6 +38,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/shape-query.asciidoc:55")]
 		public void Line55()
 		{
 			// tag::f7bbcd762afef5a562768a46fe192b56[]
@@ -59,6 +62,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/shape-query.asciidoc:133")]
 		public void Line133()
 		{
 			// tag::86388922e307dd94c0f5f93890f13832[]

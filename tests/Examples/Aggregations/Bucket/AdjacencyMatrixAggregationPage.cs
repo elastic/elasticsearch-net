@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class AdjacencyMatrixAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/adjacency-matrix-aggregation.asciidoc:32")]
 		public void Line32()
 		{
 			// tag::f88cdb3a962bb6f305f4a7ccc07bc0b0[]

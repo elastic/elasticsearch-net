@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 {
 	public class ExampleWatchMeetupdataPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-meetupdata.asciidoc:198")]
 		public void Line198()
 		{
 			// tag::4912f2140d10dbf15596c60319835e36[]
@@ -108,6 +110,7 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-meetupdata.asciidoc:303")]
 		public void Line303()
 		{
 			// tag::4be6ee22c2cddc72c21a76cda23705ed[]

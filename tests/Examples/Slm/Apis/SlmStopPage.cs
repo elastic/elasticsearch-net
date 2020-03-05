@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Slm.Apis
 {
 	public class SlmStopPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("slm/apis/slm-stop.asciidoc:48")]
 		public void Line48()
 		{
 			// tag::41195ef13af0465cdee1ae18f6c00fde[]

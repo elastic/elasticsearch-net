@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Modules
 {
 	public class CrossClusterSearchPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("modules/cross-cluster-search.asciidoc:36")]
 		public void Line36()
 		{
 			// tag::a8d39396d741e768083808bb11443e9b[]
@@ -39,6 +41,7 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("modules/cross-cluster-search.asciidoc:73")]
 		public void Line73()
 		{
 			// tag::972c0c1b6c0b8327fadd77cc1c71b532[]
@@ -56,6 +59,7 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("modules/cross-cluster-search.asciidoc:144")]
 		public void Line144()
 		{
 			// tag::6a570214755e38fd587e406d5b19b371[]
@@ -73,6 +77,7 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("modules/cross-cluster-search.asciidoc:243")]
 		public void Line243()
 		{
 			// tag::9949bcc64c9cd6f4041819546d7fce78[]

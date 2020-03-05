@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Docs
 {
 	public class TermvectorsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("docs/termvectors.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::4c9b1db368186091c1a660bcd52890b8[]
@@ -16,6 +18,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/termvectors.asciidoc:30")]
 		public void Line30()
 		{
 			// tag::a15ca7faa8ba282679396de3c7b90485[]
@@ -26,6 +29,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/termvectors.asciidoc:171")]
 		public void Line171()
 		{
 			// tag::587dd0c1aebbc1d93190bf117959cb73[]
@@ -70,6 +74,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/termvectors.asciidoc:212")]
 		public void Line212()
 		{
 			// tag::c75bd2b34c51aecf55ece4137612d4c7[]
@@ -92,6 +97,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/termvectors.asciidoc:231")]
 		public void Line231()
 		{
 			// tag::8dfecbb38a81fb5b42f63d6fe9bf9278[]
@@ -110,6 +116,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/termvectors.asciidoc:317")]
 		public void Line317()
 		{
 			// tag::487d12bb3e3036c4493dcbe43191b6f0[]
@@ -127,6 +134,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/termvectors.asciidoc:340")]
 		public void Line340()
 		{
 			// tag::1f580df38ae517800d0c62d9648ebcb9[]
@@ -143,6 +151,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/termvectors.asciidoc:361")]
 		public void Line361()
 		{
 			// tag::8304a9c1ae8d0329b66ba57fb8263485[]
@@ -163,6 +172,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/termvectors.asciidoc:425")]
 		public void Line425()
 		{
 			// tag::ef3b210782fe58df252d0e805b8ef644[]

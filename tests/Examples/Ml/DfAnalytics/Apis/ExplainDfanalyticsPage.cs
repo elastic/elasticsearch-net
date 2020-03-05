@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.DfAnalytics.Apis
 {
 	public class ExplainDfanalyticsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ml/df-analytics/apis/explain-dfanalytics.asciidoc:88")]
 		public void Line88()
 		{
 			// tag::1e75b0e71294527b43015cc333f9d9f7[]

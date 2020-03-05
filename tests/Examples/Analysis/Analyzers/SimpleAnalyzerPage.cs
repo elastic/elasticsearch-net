@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Analyzers
 {
 	public class SimpleAnalyzerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/analyzers/simple-analyzer.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::1ea24f67fbbb6293d53caf2fe0c4b984[]
@@ -20,6 +22,7 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/analyzers/simple-analyzer.asciidoc:135")]
 		public void Line135()
 		{
 			// tag::432ab6ff7cfe06988dda436907218cc5[]

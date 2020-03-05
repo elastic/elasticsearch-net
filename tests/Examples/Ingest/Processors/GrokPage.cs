@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ingest.Processors
 {
 	public class GrokPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/processors/grok.asciidoc:72")]
 		public void Line72()
 		{
 			// tag::5024c524a7db0d6bb44c1820007cc5f4[]
@@ -36,6 +38,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/processors/grok.asciidoc:164")]
 		public void Line164()
 		{
 			// tag::77828fcaecc3f058c48b955928198ff6[]
@@ -70,6 +73,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/processors/grok.asciidoc:288")]
 		public void Line288()
 		{
 			// tag::98574a419b6be603a0af8f7f22a92d23[]

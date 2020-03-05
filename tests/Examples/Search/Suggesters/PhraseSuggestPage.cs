@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Suggesters
 {
 	public class PhraseSuggestPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/phrase-suggest.asciidoc:25")]
 		public void Line25()
 		{
 			// tag::5566cff431570f522e1fc5475b2ed875[]
@@ -71,6 +73,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/phrase-suggest.asciidoc:83")]
 		public void Line83()
 		{
 			// tag::3b162509ed14eda44a9681cd1108fa39[]
@@ -101,6 +104,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/phrase-suggest.asciidoc:224")]
 		public void Line224()
 		{
 			// tag::89a6b24618cafd60de1702a5b9f28a8d[]
@@ -138,6 +142,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/phrase-suggest.asciidoc:293")]
 		public void Line293()
 		{
 			// tag::203c3bb334384bdfb11ff1101ccfba25[]
@@ -164,6 +169,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/phrase-suggest.asciidoc:413")]
 		public void Line413()
 		{
 			// tag::eb6d62f1d855a8e8fe9eab2656d47504[]

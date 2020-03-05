@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Pipeline
 {
 	public class MinBucketAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/min-bucket-aggregation.asciidoc:37")]
 		public void Line37()
 		{
 			// tag::e668549ff72fd0b9568667d1a817fc6e[]

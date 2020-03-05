@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class IgnoreMalformedPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/ignore-malformed.asciidoc:16")]
 		public void Line16()
 		{
 			// tag::56af112ba65955f3ca5ef61a199c0daa[]
@@ -45,6 +47,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/ignore-malformed.asciidoc:69")]
 		public void Line69()
 		{
 			// tag::835faff0d2e8874b7b9693376fa7fc57[]

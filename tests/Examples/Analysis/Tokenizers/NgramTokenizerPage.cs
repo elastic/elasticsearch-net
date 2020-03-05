@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenizers
 {
 	public class NgramTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/ngram-tokenizer.asciidoc:21")]
 		public void Line21()
 		{
 			// tag::39963032d423e2f20f53c4621b6ca3c6[]
@@ -20,6 +22,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/ngram-tokenizer.asciidoc:217")]
 		public void Line217()
 		{
 			// tag::9efcafd1f28490fd658d88df7d93c66c[]

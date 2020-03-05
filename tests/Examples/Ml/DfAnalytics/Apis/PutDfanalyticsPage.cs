@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.DfAnalytics.Apis
 {
 	public class PutDfanalyticsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:291")]
 		public void Line291()
 		{
 			// tag::8c6f3bb8abae9ff1d21e776f16ad1c86[]
@@ -54,6 +56,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:363")]
 		public void Line363()
 		{
 			// tag::ce3c391c2b1915cfc44a2917bca71d19[]
@@ -80,6 +83,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:426")]
 		public void Line426()
 		{
 			// tag::e8211247c280a3fbbbdd32850b743b7b[]
@@ -104,6 +108,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:483")]
 		public void Line483()
 		{
 			// tag::ae82eb17c23cb8e5761cb6240a5ed0a6[]
@@ -130,6 +135,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:517")]
 		public void Line517()
 		{
 			// tag::4fb0629146ca78b85e823edd405497bb[]

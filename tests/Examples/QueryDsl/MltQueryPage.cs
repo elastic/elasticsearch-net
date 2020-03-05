@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class MltQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/mlt-query.asciidoc:19")]
 		public void Line19()
 		{
 			// tag::32db70e5e08349aa254788ab4a2c4a51[]
@@ -26,6 +28,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/mlt-query.asciidoc:38")]
 		public void Line38()
 		{
 			// tag::cba099b82792fa5ba7741d00483c2b47[]
@@ -56,6 +59,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/mlt-query.asciidoc:67")]
 		public void Line67()
 		{
 			// tag::33f77a3b80f33323faa091538220de2a[]
@@ -91,6 +95,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/mlt-query.asciidoc:121")]
 		public void Line121()
 		{
 			// tag::084b3e3ff6f22c1c9a56b79760f50b36[]

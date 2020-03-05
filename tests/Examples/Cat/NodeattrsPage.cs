@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Cat
 {
 	public class NodeattrsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("cat/nodeattrs.asciidoc:69")]
 		public void Line69()
 		{
 			// tag::e20e2e6f949ac660a77840a9263fadef[]
@@ -16,6 +18,7 @@ namespace Examples.Cat
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cat/nodeattrs.asciidoc:100")]
 		public void Line100()
 		{
 			// tag::0c69c638073cc8518187b678dd33443c[]

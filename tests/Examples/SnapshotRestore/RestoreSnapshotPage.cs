@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.SnapshotRestore
 {
 	public class RestoreSnapshotPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("snapshot-restore/restore-snapshot.asciidoc:28")]
 		public void Line28()
 		{
 			// tag::853ca73db9b596cc4ddda66b3ec8faa2[]
@@ -16,6 +18,7 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("snapshot-restore/restore-snapshot.asciidoc:45")]
 		public void Line45()
 		{
 			// tag::47dcf95e3d398b9bdcb0a483f705bb4b[]
@@ -33,6 +36,7 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("snapshot-restore/restore-snapshot.asciidoc:83")]
 		public void Line83()
 		{
 			// tag::922df55507c66533fcadc850eecabcff[]
@@ -53,6 +57,7 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("snapshot-restore/restore-snapshot.asciidoc:128")]
 		public void Line128()
 		{
 			// tag::1ae301364751c376b3d26581a36d8975[]
@@ -63,6 +68,7 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("snapshot-restore/restore-snapshot.asciidoc:137")]
 		public void Line137()
 		{
 			// tag::db1913b97109b86cfc5efc7cfcd65d93[]
@@ -73,6 +79,7 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("snapshot-restore/restore-snapshot.asciidoc:146")]
 		public void Line146()
 		{
 			// tag::e566ca0098be82a2847c17069711a822[]
@@ -83,6 +90,7 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("snapshot-restore/restore-snapshot.asciidoc:202")]
 		public void Line202()
 		{
 			// tag::2432f86346177533cabdabbd4eb41b30[]

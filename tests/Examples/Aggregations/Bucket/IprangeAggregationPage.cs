@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class IprangeAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/iprange-aggregation.asciidoc:9")]
 		public void Line9()
 		{
 			// tag::01cc705f6074ab637cfbb9f92cf44e44[]
@@ -30,6 +32,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/iprange-aggregation.asciidoc:58")]
 		public void Line58()
 		{
 			// tag::9f4ba6565d80e0964e177eaac9fb0614[]
@@ -54,6 +57,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/iprange-aggregation.asciidoc:111")]
 		public void Line111()
 		{
 			// tag::c4db73a276175d57c6a9a0387e728028[]
@@ -79,6 +83,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/iprange-aggregation.asciidoc:159")]
 		public void Line159()
 		{
 			// tag::fa8ee2094af36e7ec02233a4c7b008bc[]

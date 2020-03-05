@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Modules.Indices
 {
 	public class RequestCachePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("modules/indices/request_cache.asciidoc:47")]
 		public void Line47()
 		{
 			// tag::00629ea43db6ee1704183170df085495[]
@@ -16,6 +18,7 @@ namespace Examples.Modules.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("modules/indices/request_cache.asciidoc:59")]
 		public void Line59()
 		{
 			// tag::adebfecf7485326e9f7fae9de9169abc[]
@@ -31,6 +34,7 @@ namespace Examples.Modules.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("modules/indices/request_cache.asciidoc:72")]
 		public void Line72()
 		{
 			// tag::f22e069bc0c6f9dae57e084c662a86fd[]
@@ -42,6 +46,7 @@ namespace Examples.Modules.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("modules/indices/request_cache.asciidoc:86")]
 		public void Line86()
 		{
 			// tag::13e9c7cdd43161f1336c94fd70a0db0c[]
@@ -62,6 +67,7 @@ namespace Examples.Modules.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("modules/indices/request_cache.asciidoc:139")]
 		public void Line139()
 		{
 			// tag::36da9668fef56910370f16bfb772cc40[]
@@ -72,6 +78,7 @@ namespace Examples.Modules.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("modules/indices/request_cache.asciidoc:146")]
 		public void Line146()
 		{
 			// tag::90631797c7fbda43902abf2cc0ea8304[]

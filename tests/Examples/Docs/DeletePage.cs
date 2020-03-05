@@ -1,6 +1,7 @@
 using Elastic.Xunit.XunitPlumbing;
 using Examples.Models;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Docs
 {
@@ -8,6 +9,7 @@ namespace Examples.Docs
 	{
 
 		[U]
+		[Description("docs/delete.asciidoc:71")]
 		public void Line71()
 		{
 			// tag::47b5ff897f26e9c943cee5c06034181d[]
@@ -21,6 +23,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/delete.asciidoc:127")]
 		public void Line127()
 		{
 			// tag::d90a84a24a407731dfc1929ac8327746[]
@@ -33,6 +36,7 @@ namespace Examples.Docs
 			deleteResponse.MatchesExample(@"DELETE /twitter/_doc/1?timeout=5m");
 		}
 		[U]
+		[Description("docs/delete.asciidoc:168")]
 		public void Line168()
 		{
 			// tag::c5e5873783246c7b1c01d8464fed72c4[]

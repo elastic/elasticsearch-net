@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Pipeline
 {
 	public class SumBucketAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/sum-bucket-aggregation.asciidoc:36")]
 		public void Line36()
 		{
 			// tag::612a9f6a05186fc89ed1a75139d3a8b7[]

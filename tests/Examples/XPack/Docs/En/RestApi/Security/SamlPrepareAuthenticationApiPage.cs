@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class SamlPrepareAuthenticationApiPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/saml-prepare-authentication-api.asciidoc:70")]
 		public void Line70()
 		{
 			// tag::a5dfcfd1cfb3558e7912456669c92eee[]
@@ -19,6 +21,7 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/saml-prepare-authentication-api.asciidoc:81")]
 		public void Line81()
 		{
 			// tag::da3f280bc65b581fb3097be768061bee[]

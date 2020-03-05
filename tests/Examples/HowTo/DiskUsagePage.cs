@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.HowTo
 {
 	public class DiskUsagePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("how-to/disk-usage.asciidoc:14")]
 		public void Line14()
 		{
 			// tag::e273060a675c959fd5f3cde27c8aff07[]
@@ -26,6 +28,7 @@ namespace Examples.HowTo
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("how-to/disk-usage.asciidoc:34")]
 		public void Line34()
 		{
 			// tag::c8568f4f02f75db9afd669880db98a16[]
@@ -46,6 +49,7 @@ namespace Examples.HowTo
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("how-to/disk-usage.asciidoc:54")]
 		public void Line54()
 		{
 			// tag::1a5cd30017368fe4888454a13c6e8561[]
@@ -66,6 +70,7 @@ namespace Examples.HowTo
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("how-to/disk-usage.asciidoc:74")]
 		public void Line74()
 		{
 			// tag::ae3ae58724c413734b67a90a6ddb319f[]
@@ -87,6 +92,7 @@ namespace Examples.HowTo
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("how-to/disk-usage.asciidoc:106")]
 		public void Line106()
 		{
 			// tag::597d456edfcb3d410954a3e9b5babf9a[]

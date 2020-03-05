@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class SynonymGraphTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/synonym-graph-tokenfilter.asciidoc:26")]
 		public void Line26()
 		{
 			// tag::2f071d36aa4aff5a2fafb3dadaa38b82[]
@@ -36,6 +38,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/synonym-graph-tokenfilter.asciidoc:61")]
 		public void Line61()
 		{
 			// tag::3d253e5a0029bc96cce484302319b772[]
@@ -71,6 +74,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/synonym-graph-tokenfilter.asciidoc:121")]
 		public void Line121()
 		{
 			// tag::1a14fd905941ecbdbc943b05875afc6f[]
@@ -98,6 +102,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/synonym-graph-tokenfilter.asciidoc:152")]
 		public void Line152()
 		{
 			// tag::f0d7d6d5c878211704d4a5f1b2f6a247[]

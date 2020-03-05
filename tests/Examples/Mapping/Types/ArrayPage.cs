@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class ArrayPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/array.asciidoc:42")]
 		public void Line42()
 		{
 			// tag::4d6997c70a1851f9151443c0d38b532e[]

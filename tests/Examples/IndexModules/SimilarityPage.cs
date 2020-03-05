@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.IndexModules
 {
 	public class SimilarityPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/similarity.asciidoc:22")]
 		public void Line22()
 		{
 			// tag::2342a56279106ea643026df657bf7f88[]
@@ -31,6 +33,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/similarity.asciidoc:45")]
 		public void Line45()
 		{
 			// tag::528e5f1c345c3769248cc6889e8cf552[]
@@ -46,6 +49,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/similarity.asciidoc:192")]
 		public void Line192()
 		{
 			// tag::dfa16b7300d225e013f23625f44c087b[]
@@ -107,6 +111,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/similarity.asciidoc:357")]
 		public void Line357()
 		{
 			// tag::5f8fb5513d4f725434db2f517ad4298f[]
@@ -141,6 +146,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/similarity.asciidoc:520")]
 		public void Line520()
 		{
 			// tag::553d79817bb1333970e99507c37a159a[]
@@ -162,6 +168,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/similarity.asciidoc:540")]
 		public void Line540()
 		{
 			// tag::48de51de87a8ad9fd8b8db1ca25b85c1[]

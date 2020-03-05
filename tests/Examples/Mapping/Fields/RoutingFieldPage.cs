@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Fields
 {
 	public class RoutingFieldPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/fields/routing-field.asciidoc:15")]
 		public void Line15()
 		{
 			// tag::b684073ea8d34359c290c663d2a5e798[]
@@ -23,6 +25,7 @@ namespace Examples.Mapping.Fields
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/fields/routing-field.asciidoc:33")]
 		public void Line33()
 		{
 			// tag::6817609dd2fcb73b9920327c5cf5ec77[]
@@ -40,6 +43,7 @@ namespace Examples.Mapping.Fields
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/fields/routing-field.asciidoc:53")]
 		public void Line53()
 		{
 			// tag::134bdbfb50c81dd3c487514faabc81d3[]
@@ -57,6 +61,7 @@ namespace Examples.Mapping.Fields
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/fields/routing-field.asciidoc:78")]
 		public void Line78()
 		{
 			// tag::4f3089b403945e391f03280ae2f360a4[]

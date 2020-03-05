@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class PositionIncrementGapPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/position-increment-gap.asciidoc:15")]
 		public void Line15()
 		{
 			// tag::5e17abef396d757d65edf81dff5701b6[]
@@ -46,6 +48,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/position-increment-gap.asciidoc:53")]
 		public void Line53()
 		{
 			// tag::a37ed1648f68b69e2ea467b38ce21ffc[]

@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Dynamic
 {
 	public class TemplatesPage : ExampleBase
 	{
 		[U]
+		[Description("mapping/dynamic/templates.asciidoc:84")]
 		public void Line84()
 		{
 			// tag::bb33e638fdeded7d721d9bbac2305fda[]
@@ -82,6 +84,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
+		[Description("mapping/dynamic/templates.asciidoc:138")]
 		public void Line138()
 		{
 			// tag::4f54b88e05c7a62901062e9e0ed13e5a[]
@@ -134,6 +137,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
+		[Description("mapping/dynamic/templates.asciidoc:192")]
 		public void Line192()
 		{
 			// tag::0b91c082258ce623cc716b679aace653[]
@@ -204,6 +208,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
+		[Description("mapping/dynamic/templates.asciidoc:227")]
 		public void Line227()
 		{
 			// tag::be51ed37c8425d281a8153abe56b04cb[]
@@ -236,6 +241,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
+		[Description("mapping/dynamic/templates.asciidoc:252")]
 		public void Line252()
 		{
 			// tag::6873971eb4e4577d76d0a5bd7cd15ef9[]
@@ -301,6 +307,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
+		[Description("mapping/dynamic/templates.asciidoc:304")]
 		public void Line304()
 		{
 			// tag::87f85bb49d18f73d0eed0b704e05eb90[]
@@ -336,6 +343,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
+		[Description("mapping/dynamic/templates.asciidoc:332")]
 		public void Line332()
 		{
 			// tag::1a59fa2708ccb3a24c71e8306b81f17f[]
@@ -371,6 +379,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
+		[Description("mapping/dynamic/templates.asciidoc:357")]
 		public void Line357()
 		{
 			// tag::3e60c0b29bd3931927e6f2ee7d2ed0ef[]
@@ -413,6 +422,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
+		[Description("mapping/dynamic/templates.asciidoc:395")]
 		public void Line395()
 		{
 			// tag::9a91f7d0bf52d6c582c62daef5c9d040[]

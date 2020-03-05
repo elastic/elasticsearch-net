@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ilm
 {
 	public class SetUpLifecyclePolicyPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/set-up-lifecycle-policy.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::7ecf197610e30c20f7206513ce393822[]
@@ -35,6 +37,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/set-up-lifecycle-policy.asciidoc:54")]
 		public void Line54()
 		{
 			// tag::3c9d99215a7020ab478bdf5c8287a14f[]
@@ -54,6 +57,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/set-up-lifecycle-policy.asciidoc:85")]
 		public void Line85()
 		{
 			// tag::25737fd456fd317cc4cc2db76b6cf28e[]
@@ -71,6 +75,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/set-up-lifecycle-policy.asciidoc:108")]
 		public void Line108()
 		{
 			// tag::160d259243d0800900b065c4b9d2b187[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Watcher
 {
 	public class ActionsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/actions.asciidoc:49")]
 		public void Line49()
 		{
 			// tag::85d2e33791f1a74a69dfb04a60e69306[]
@@ -58,6 +60,7 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/actions.asciidoc:104")]
 		public void Line104()
 		{
 			// tag::406a0f1c1aac947bcee58f86b6d036c1[]
@@ -114,6 +117,7 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/actions.asciidoc:178")]
 		public void Line178()
 		{
 			// tag::3d48d1ba49f680aac32177d653944623[]
@@ -124,6 +128,7 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/actions.asciidoc:205")]
 		public void Line205()
 		{
 			// tag::9eef31d85ebaf6c27054d7375715dbe0[]
@@ -161,6 +166,7 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/actions.asciidoc:250")]
 		public void Line250()
 		{
 			// tag::f67d8aab9106ad24b1d2c771d3840ed1[]

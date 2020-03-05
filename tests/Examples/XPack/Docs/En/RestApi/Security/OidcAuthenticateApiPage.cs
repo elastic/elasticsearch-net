@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class OidcAuthenticateApiPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/oidc-authenticate-api.asciidoc:65")]
 		public void Line65()
 		{
 			// tag::9e5d5a6c9adcba75b906e81c1496bd01[]

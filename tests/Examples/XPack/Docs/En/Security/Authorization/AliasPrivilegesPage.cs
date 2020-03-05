@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Security.Authorization
 {
 	public class AliasPrivilegesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/alias-privileges.asciidoc:30")]
 		public void Line30()
 		{
 			// tag::195fe9fadf952ddd7a69c8aaf98d47a1[]
@@ -16,6 +18,7 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/alias-privileges.asciidoc:56")]
 		public void Line56()
 		{
 			// tag::c4d60fd70ef1be46616a0d4e7578d8b9[]
@@ -31,6 +34,7 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/alias-privileges.asciidoc:68")]
 		public void Line68()
 		{
 			// tag::06f6cb6e20d2faf6599cfe1f39c6c56b[]

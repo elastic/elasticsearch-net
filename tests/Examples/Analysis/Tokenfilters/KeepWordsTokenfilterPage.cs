@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class KeepWordsTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/keep-words-tokenfilter.asciidoc:26")]
 		public void Line26()
 		{
 			// tag::9a036a792be1d39af9fd0d1adb5f3402[]
@@ -26,6 +28,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/keep-words-tokenfilter.asciidoc:118")]
 		public void Line118()
 		{
 			// tag::642c0c1c76e9bf226cd216ebae9ab958[]

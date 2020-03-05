@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Pipeline
 {
 	public class CumulativeCardinalityAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/cumulative-cardinality-aggregation.asciidoc:42")]
 		public void Line42()
 		{
 			// tag::4d8d2c66e4f3ccd760bfe3008c5a4b65[]
@@ -39,6 +41,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/cumulative-cardinality-aggregation.asciidoc:141")]
 		public void Line141()
 		{
 			// tag::dd5d84526ecb6a33e96ff2c047b8066d[]

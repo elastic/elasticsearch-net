@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Pipeline
 {
 	public class PercentilesBucketAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/percentiles-bucket-aggregation.asciidoc:38")]
 		public void Line38()
 		{
 			// tag::cff65c0f9fbc53c26c60abe9fb7e4044[]

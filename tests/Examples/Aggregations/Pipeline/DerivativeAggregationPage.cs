@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Pipeline
 {
 	public class DerivativeAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/derivative-aggregation.asciidoc:38")]
 		public void Line38()
 		{
 			// tag::469bc2e7b9e65b3b1e38a547f63bd2f9[]
@@ -39,6 +41,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/derivative-aggregation.asciidoc:131")]
 		public void Line131()
 		{
 			// tag::d683ed8c4a72f82200bbad0c3921e427[]
@@ -77,6 +80,7 @@ namespace Examples.Aggregations.Pipeline
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/derivative-aggregation.asciidoc:230")]
 		public void Line230()
 		{
 			// tag::8553b0c396e9de7d841fcc6373e017e2[]

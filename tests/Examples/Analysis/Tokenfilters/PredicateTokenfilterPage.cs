@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class PredicateTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/predicate-tokenfilter.asciidoc:22")]
 		public void Line22()
 		{
 			// tag::10338787b66a7f93270c3b88dd6197f8[]
@@ -36,6 +38,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/predicate-tokenfilter.asciidoc:51")]
 		public void Line51()
 		{
 			// tag::e20493a20d3992a97238b87c6930f08d[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class HasPrivilegesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/has-privileges.asciidoc:68")]
 		public void Line68()
 		{
 			// tag::9684e5fa8c22a07a372feb6fc1f5f7c0[]

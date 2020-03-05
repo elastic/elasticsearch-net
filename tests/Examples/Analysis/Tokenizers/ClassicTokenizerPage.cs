@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenizers
 {
 	public class ClassicTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/classic-tokenizer.asciidoc:22")]
 		public void Line22()
 		{
 			// tag::c6d39d22188dc7bbfdad811a94cbcc2b[]
@@ -20,6 +22,7 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/classic-tokenizer.asciidoc:145")]
 		public void Line145()
 		{
 			// tag::326f5bc3013c80c2ee005c676a877ecf[]

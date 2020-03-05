@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class IntervalsQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/intervals-query.asciidoc:28")]
 		public void Line28()
 		{
 			// tag::807c0c9763f8c1114b3c8278c2a0cb56[]
@@ -44,6 +46,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/intervals-query.asciidoc:312")]
 		public void Line312()
 		{
 			// tag::7471e97aaaf21c3a200abdd89f15c3cc[]
@@ -73,6 +76,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/intervals-query.asciidoc:343")]
 		public void Line343()
 		{
 			// tag::2de6885bacb8769b8f22dce253c96b0c[]
@@ -99,6 +103,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/intervals-query.asciidoc:374")]
 		public void Line374()
 		{
 			// tag::e2a22c6fd58cc0becf4c383134a08f8b[]
@@ -127,6 +132,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/intervals-query.asciidoc:409")]
 		public void Line409()
 		{
 			// tag::5f79c42b0f74fdf71359cef82843fad3[]
@@ -158,6 +164,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/intervals-query.asciidoc:442")]
 		public void Line442()
 		{
 			// tag::e7811867397b305efbbe8925d8a01c1a[]

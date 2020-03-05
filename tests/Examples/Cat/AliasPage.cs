@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Cat
 {
 	public class AliasPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("cat/alias.asciidoc:73")]
 		public void Line73()
 		{
 			// tag::a003467caeafcb2a935522efb83080cb[]

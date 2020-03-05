@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class CoercePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/coerce.asciidoc:19")]
 		public void Line19()
 		{
 			// tag::5c734d4a7252cc155f8dc90c4785f491[]
@@ -43,6 +45,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/coerce.asciidoc:60")]
 		public void Line60()
 		{
 			// tag::dad2db81c728827a782a3fefd3399849[]

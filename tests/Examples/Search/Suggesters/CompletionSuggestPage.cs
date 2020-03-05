@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Suggesters
 {
 	public class CompletionSuggestPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/completion-suggest.asciidoc:28")]
 		public void Line28()
 		{
 			// tag::b8718ca915bbb848925a5fb593a03e70[]
@@ -28,6 +30,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/completion-suggest.asciidoc:84")]
 		public void Line84()
 		{
 			// tag::223787a2b80e132a22548768ccf7052d[]
@@ -44,6 +47,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/completion-suggest.asciidoc:120")]
 		public void Line120()
 		{
 			// tag::5e9f3b7246f4549624fa5b9dd3719d75[]
@@ -66,6 +70,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/completion-suggest.asciidoc:141")]
 		public void Line141()
 		{
 			// tag::7c3414279d47e9c29105d061ed316ef8[]
@@ -79,6 +84,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/completion-suggest.asciidoc:158")]
 		public void Line158()
 		{
 			// tag::7f951981bd8ed09e56aebeb13adb96ce[]
@@ -99,6 +105,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/completion-suggest.asciidoc:226")]
 		public void Line226()
 		{
 			// tag::565ef4aad0c7765879325cc5d2e3c530[]
@@ -121,6 +128,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/completion-suggest.asciidoc:316")]
 		public void Line316()
 		{
 			// tag::b2a6fb1a94dd10bf594dafe727647e1d[]
@@ -142,6 +150,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/completion-suggest.asciidoc:341")]
 		public void Line341()
 		{
 			// tag::a4eac3c0bac550247e8c7d3f9bcaac1c[]
@@ -165,6 +174,7 @@ namespace Examples.Search.Suggesters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/suggesters/completion-suggest.asciidoc:399")]
 		public void Line399()
 		{
 			// tag::62280b8a1ec0c214b3110a2c42a55fce[]

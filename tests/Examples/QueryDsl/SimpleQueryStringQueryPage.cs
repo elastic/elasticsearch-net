@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class SimpleQueryStringQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/simple-query-string-query.asciidoc:24")]
 		public void Line24()
 		{
 			// tag::0d49474511b236bc89e768c8ee91adf1[]
@@ -25,6 +27,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/simple-query-string-query.asciidoc:156")]
 		public void Line156()
 		{
 			// tag::521aa59ae56681fd59ac5840cba6b6c5[]
@@ -43,6 +46,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/simple-query-string-query.asciidoc:184")]
 		public void Line184()
 		{
 			// tag::f686f52decb1d57356d42920f46d4d85[]
@@ -61,6 +65,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/simple-query-string-query.asciidoc:248")]
 		public void Line248()
 		{
 			// tag::e8ea65153d7775f25b08dfdfe6954498[]
@@ -79,6 +84,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/simple-query-string-query.asciidoc:265")]
 		public void Line265()
 		{
 			// tag::da8db0769dff7305f178c12b1111bc99[]
@@ -97,6 +103,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/simple-query-string-query.asciidoc:291")]
 		public void Line291()
 		{
 			// tag::2e602d7fbad46132358f921dff7d1a26[]

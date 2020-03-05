@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class FlushPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("indices/flush.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::bf7b04e79b861d76d1922a588d57f817[]
@@ -16,6 +18,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/flush.asciidoc:117")]
 		public void Line117()
 		{
 			// tag::cefde3553fdbd516813e73a603c72c24[]
@@ -26,6 +29,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/flush.asciidoc:127")]
 		public void Line127()
 		{
 			// tag::66db9f5108a3936115f1fb64c844934a[]
@@ -36,6 +40,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/flush.asciidoc:137")]
 		public void Line137()
 		{
 			// tag::f27c28ddbf4c266b5f42d14da837b8de[]

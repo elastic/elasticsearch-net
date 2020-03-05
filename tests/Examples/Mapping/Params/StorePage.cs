@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class StorePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/store.asciidoc:20")]
 		public void Line20()
 		{
 			// tag::ff26214b3981f7418688e4c8905d5068[]

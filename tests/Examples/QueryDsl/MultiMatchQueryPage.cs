@@ -2,12 +2,14 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Examples.Models;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class MultiMatchQueryPage : ExampleBase
 	{
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::53b908c3432118c5a6e460f74d32006b[]
@@ -34,6 +36,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:33")]
 		public void Line33()
 		{
 			// tag::6a1702dd50690cae833572e48a0ddf25[]
@@ -60,6 +63,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:50")]
 		public void Line50()
 		{
 			// tag::e30ea6e3823a139d7693d8cce1920a06[]
@@ -86,6 +90,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:113")]
 		public void Line113()
 		{
 			// tag::5da6efd5b038ada64c9e853c88c1ec47[]
@@ -116,6 +121,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:130")]
 		public void Line130()
 		{
 			// tag::b0eaf67e5cce24ef8889bf20951ccec1[]
@@ -152,6 +158,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:170")]
 		public void Line170()
 		{
 			// tag::e270f3f721a5712cd11a5ca03554f5b0[]
@@ -182,6 +189,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:212")]
 		public void Line212()
 		{
 			// tag::7b908b1189f076942de8cd497ff1fa59[]
@@ -210,6 +218,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:228")]
 		public void Line228()
 		{
 			// tag::6bbc613bd4f9aec1bbdbabf5db021d28[]
@@ -247,6 +256,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:259")]
 		public void Line259()
 		{
 			// tag::0e118857b815b62118a30c042f079db1[]
@@ -275,6 +285,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:275")]
 		public void Line275()
 		{
 			// tag::33f148e3d8676de6cc52f58749898a13[]
@@ -309,6 +320,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:341")]
 		public void Line341()
 		{
 			// tag::047266b0d20fdb62ebc72d51952c8f6d[]
@@ -339,6 +351,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:400")]
 		public void Line400()
 		{
 			// tag::ad0dcbc7fc619e952c8825b8f307b7b2[]
@@ -370,6 +383,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:438")]
 		public void Line438()
 		{
 			// tag::3cd50a789b8e1f0ebbbc53a8d7ecf656[]
@@ -422,6 +436,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:472")]
 		public void Line472()
 		{
 			// tag::179f0a3e84ff4bbac18787a018eabf89[]
@@ -452,6 +467,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/multi-match-query.asciidoc:524")]
 		public void Line524()
 		{
 			// tag::68721288dc9ad8aa1b55099b4d303051[]

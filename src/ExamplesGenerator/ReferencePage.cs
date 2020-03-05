@@ -21,31 +21,31 @@ namespace ExamplesGenerator
 		/// </summary>
 		public string ClassName => PascalNameParts.Last() + "Page";
 
-		public string Directory => _directory ?? (_directory = PascalNameParts.Length == 1
+		public string Directory => _directory ??= PascalNameParts.Length == 1
 			? Root
-			: string.Join(Path.DirectorySeparatorChar, PascalNameParts.SkipLast(1)));
+			: string.Join(Path.DirectorySeparatorChar, PascalNameParts.SkipLast(1));
 
 		public HashSet<ReferenceExample> Examples { get; } = new HashSet<ReferenceExample>(ReferenceExampleComparer.Instance);
 
-		public string FileName => _fileName ?? (_fileName = ClassName + ".cs");
+		public string FileName => _fileName ??= ClassName + ".cs";
 
 		/// <summary>
 		/// The name of the reference page
 		/// </summary>
 		public string Name { get; }
 
-		public string Namespace => _namespace ?? (_namespace = "Examples." + (PascalNameParts.Length == 1
+		public string Namespace => _namespace ??= "Examples." + (PascalNameParts.Length == 1
 			? Root
-			: string.Join(".", PascalNameParts.SkipLast(1))));
+			: string.Join(".", PascalNameParts.SkipLast(1)));
 
-		private string[] NameParts => _nameParts ?? (_nameParts = Name.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)
+		private string[] NameParts => _nameParts ??= Name.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)
 			// remove leading relative paths. This has the possibility of generating clashing file names in future
 			.Where(n => n != "..")
-			.ToArray());
+			.ToArray();
 
-		private string[] PascalNameParts => _pascalNameParts ?? (_pascalNameParts = NameParts
+		private string[] PascalNameParts => _pascalNameParts ??= NameParts
 			.Select(p => p.Trim().LowercaseHyphenUnderscoreToPascal())
-			.ToArray());
+			.ToArray();
 
 		public string FullPath(DirectoryInfo root) => Path.GetFullPath(Path.Combine(root.FullName, Directory, FileName));
 	}

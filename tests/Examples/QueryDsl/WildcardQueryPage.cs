@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class WildcardQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/wildcard-query.asciidoc:21")]
 		public void Line21()
 		{
 			// tag::d31062ff8c015387889fed4ad86fd914[]

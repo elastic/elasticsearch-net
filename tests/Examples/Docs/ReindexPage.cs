@@ -4,12 +4,14 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Examples.Models;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.Docs
 {
 	public class ReindexPage : ExampleBase
 	{
 		[U]
+		[Description("docs/reindex.asciidoc:20")]
 		public void Line20()
 		{
 			// tag::0cc991e3f7f8511a34730e154b3c5edc[]
@@ -31,6 +33,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:161")]
 		public void Line161()
 		{
 			// tag::68738b4fd0dda177022be45be95b4c84[]
@@ -43,6 +46,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:191")]
 		public void Line191()
 		{
 			// tag::1b8655e6ba99fe39933c6eafe78728b7[]
@@ -87,6 +91,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:224")]
 		public void Line224()
 		{
 			// tag::3ae03ba3b56e5e287953094050766738[]
@@ -109,6 +114,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:251")]
 		public void Line251()
 		{
 			// tag::cb01106bf524df5e0501d4c655c1aa7b[]
@@ -132,6 +138,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:267")]
 		public void Line267()
 		{
 			// tag::e567e6dbf86300142573c73789c8fce4[]
@@ -146,6 +153,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:359")]
 		public void Line359()
 		{
 			// tag::78c96113ae4ed0054e581b17542528a7[]
@@ -178,6 +186,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:384")]
 		public void Line384()
 		{
 			// tag::400e89eb46ead8e9c9e40f123fd5e590[]
@@ -201,6 +210,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:403")]
 		public void Line403()
 		{
 			// tag::b1efa1c51a34dd5ab5511b71a399f5b1[]
@@ -223,6 +233,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:592")]
 		public void Line592()
 		{
 			// tag::764f9884b370cbdc82a1c5c42ed40ff3[]
@@ -252,6 +263,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:618")]
 		public void Line618()
 		{
 			// tag::52b2bfbdd78f8283b6f4891c48013237[]
@@ -275,11 +287,12 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:640")]
 		public void Line640()
 		{
 			// tag::6f097c298a7abf4c032c4314920c49c8[]
 			var reindexResponse = client.ReindexOnServer(d =>
-				d.Source(s => s.Index(new [] { "twitter", "blog" }))
+				d.Source(s => s.Index(new[] { "twitter", "blog" }))
 				 .Destination(d => d.Index("all_together"))
 			);
 			// end::6f097c298a7abf4c032c4314920c49c8[]
@@ -300,6 +313,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:666")]
 		public void Line666()
 		{
 			// tag::e9c2e15b36372d5281c879d336322b6c[]
@@ -322,11 +336,12 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:687")]
 		public void Line687()
 		{
 			// tag::1577e6e806b3283c9e99f1596d310754[]
 			var indexResponse = client.Index(new { text = "words words", flag = "foo" },
-				i =>  i.Index("test").Id(1).Refresh(Refresh.True));
+				i => i.Index("test").Id(1).Refresh(Refresh.True));
 			// end::1577e6e806b3283c9e99f1596d310754[]
 
 			indexResponse.MatchesExample(@"POST test/_doc/1?refresh
@@ -341,6 +356,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:699")]
 		public void Line699()
 		{
 			// tag::1216f8f7367df3aa823012cef310c08a[]
@@ -366,6 +382,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:718")]
 		public void Line718()
 		{
 			// tag::cfc37446bd892d1ac42a3c8e8b204e6c[]
@@ -376,14 +393,15 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:751")]
 		public void Line751()
 		{
 			// tag::9a4d5e41c52c20635d1fd9c6e13f6c7a[]
 			var indexResponse1 = client.Index(new Dictionary<string, double> { { "system.cpu.idle.pct", 0.908 } },
-				i =>  i.Index("metricbeat-2016.05.30").Id(1).Refresh(Refresh.True));
+				i => i.Index("metricbeat-2016.05.30").Id(1).Refresh(Refresh.True));
 
 			var indexResponse2 = client.Index(new Dictionary<string, double> { { "system.cpu.idle.pct", 0.105 } },
-				i =>  i.Index("metricbeat-2016.05.31").Id(1).Refresh(Refresh.True));
+				i => i.Index("metricbeat-2016.05.31").Id(1).Refresh(Refresh.True));
 			// end::9a4d5e41c52c20635d1fd9c6e13f6c7a[]
 
 			indexResponse1.MatchesExample(@"PUT metricbeat-2016.05.30/_doc/1?refresh
@@ -394,6 +412,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:767")]
 		public void Line767()
 		{
 			// tag::973a3ff47fc4ce036ecd9bd363fef9f7[]
@@ -424,6 +443,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:787")]
 		public void Line787()
 		{
 			// tag::3b04cc894e6a47d57983484010feac0c[]
@@ -438,6 +458,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:802")]
 		public void Line802()
 		{
 			// tag::1bc731a4df952228af6dfa6b48627332[]
@@ -470,13 +491,14 @@ namespace Examples.Docs
 					((JObject)o["source"]["query"]["function_score"]).Remove("random_score");
 					var array = new JArray { JToken.FromObject(new { random_score = new object() }) };
 					((JObject)o["source"]["query"]["function_score"]).Add("functions", array);
-				});;
+				}); ;
 
 				return e;
 			});
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:833")]
 		public void Line833()
 		{
 			// tag::8871b8fcb6de4f0c7dff22798fb10fb7[]
@@ -508,6 +530,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:888")]
 		public void Line888()
 		{
 			// tag::36b2778f23d0955255f52c075c4d213d[]
@@ -548,6 +571,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:955")]
 		public void Line955()
 		{
 			// tag::64b9baa6d7556b960b29698f3383aa31[]
@@ -585,6 +609,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/reindex.asciidoc:986")]
 		public void Line986()
 		{
 			// tag::7f697eb436dfa3c30dfe610d8c32d132[]

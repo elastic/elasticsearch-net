@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Security.SecuringCommunications
 {
 	public class TutorialTlsAddnodesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/securing-communications/tutorial-tls-addnodes.asciidoc:156")]
 		public void Line156()
 		{
 			// tag::b02e4907c9936c1adc16ccce9d49900d[]
@@ -16,6 +18,7 @@ namespace Examples.XPack.Docs.En.Security.SecuringCommunications
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/securing-communications/tutorial-tls-addnodes.asciidoc:166")]
 		public void Line166()
 		{
 			// tag::9296d687ad779f8c57896edff2791c0d[]

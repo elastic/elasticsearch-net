@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class SignificanttextAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/significanttext-aggregation.asciidoc:36")]
 		public void Line36()
 		{
 			// tag::68f0c7c77b65bfdded348bbd397831b7[]
@@ -33,6 +35,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/significanttext-aggregation.asciidoc:150")]
 		public void Line150()
 		{
 			// tag::d44ecc69090c0b2bc08a6cbc2e3467c5[]
@@ -59,6 +62,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/significanttext-aggregation.asciidoc:218")]
 		public void Line218()
 		{
 			// tag::805f5550b90e75aa5cc82b90d8c6c242[]
@@ -91,6 +95,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/significanttext-aggregation.asciidoc:420")]
 		public void Line420()
 		{
 			// tag::5f4cab20671ebac9233812f9e35d9c8b[]
@@ -118,6 +123,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/significanttext-aggregation.asciidoc:458")]
 		public void Line458()
 		{
 			// tag::b3e6d6f7f6d65d1efb60ca7503a20b16[]

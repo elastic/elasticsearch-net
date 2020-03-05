@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Metrics
 {
 	public class GeocentroidAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/geocentroid-aggregation.asciidoc:9")]
 		public void Line9()
 		{
 			// tag::d0cf6057bc87042819a7ac961d1b2273[]
@@ -54,6 +56,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/geocentroid-aggregation.asciidoc:75")]
 		public void Line75()
 		{
 			// tag::6dec421bf327ecaf189109d9aaa35919[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.IndexModules
 {
 	public class StorePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/store.asciidoc:30")]
 		public void Line30()
 		{
 			// tag::fba99da14d4323c91794703438979912[]
@@ -21,6 +23,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/store.asciidoc:120")]
 		public void Line120()
 		{
 			// tag::9ba2e779fe3e9d12ed5fca1ba3f8be97[]

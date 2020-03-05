@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class RevertSnapshotPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ml/anomaly-detection/apis/revert-snapshot.asciidoc:62")]
 		public void Line62()
 		{
 			// tag::b173b1b5bab610668ab74d5b2ab03f78[]

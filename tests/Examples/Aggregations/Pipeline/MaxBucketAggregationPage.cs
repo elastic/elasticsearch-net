@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Pipeline
 {
 	public class MaxBucketAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/max-bucket-aggregation.asciidoc:37")]
 		public void Line37()
 		{
 			// tag::ce5d556d90d0fb077ab078e055005f3a[]

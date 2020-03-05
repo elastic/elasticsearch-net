@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class SnowballTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/snowball-tokenfilter.asciidoc:17")]
 		public void Line17()
 		{
 			// tag::e776311ef67c972f322b669dc4ab9926[]

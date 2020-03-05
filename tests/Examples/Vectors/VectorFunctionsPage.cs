@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Vectors
 {
 	public class VectorFunctionsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("vectors/vector-functions.asciidoc:15")]
 		public void Line15()
 		{
 			// tag::f4bdad6ecd4a53cabee95883731e1bc7[]
@@ -49,6 +51,7 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("vectors/vector-functions.asciidoc:52")]
 		public void Line52()
 		{
 			// tag::fb7eaa05e4b418cb3da04e56d3eefa71[]
@@ -80,6 +83,7 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("vectors/vector-functions.asciidoc:88")]
 		public void Line88()
 		{
 			// tag::5f3793dbe5223db53fc67861388ecb10[]
@@ -114,6 +118,7 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("vectors/vector-functions.asciidoc:123")]
 		public void Line123()
 		{
 			// tag::7453c76da9d525b8c5fb5b86f1207667[]
@@ -145,6 +150,7 @@ namespace Examples.Vectors
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("vectors/vector-functions.asciidoc:162")]
 		public void Line162()
 		{
 			// tag::98e4bd19706e57405b6e810de72ea4df[]

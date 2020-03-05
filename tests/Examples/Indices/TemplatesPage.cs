@@ -2,12 +2,14 @@ using Elastic.Xunit.XunitPlumbing;
 using Examples.Models;
 using Nest;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class TemplatesPage : ExampleBase
 	{
 		[U]
+		[Description("indices/templates.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::e5f50b31f165462d883ecbff45f74985[]
@@ -54,6 +56,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/templates.asciidoc:138")]
 		public void Line138()
 		{
 			// tag::1b8caf0a6741126c6d0ad83b56fce290[]
@@ -100,6 +103,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/templates.asciidoc:172")]
 		public void Line172()
 		{
 			// tag::b5f95bc097a201b29c7200fc8d3d31c1[]
@@ -160,6 +164,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/templates.asciidoc:223")]
 		public void Line223()
 		{
 			// tag::9166cf38427d5cde5d2ec12a2012b669[]
@@ -189,6 +194,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/templates.asciidoc:241")]
 		public void Line241()
 		{
 			// tag::46658f00edc4865dfe472a392374cd0f[]

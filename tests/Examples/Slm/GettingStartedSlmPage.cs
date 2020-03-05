@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Slm
 {
 	public class GettingStartedSlmPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("slm/getting-started-slm.asciidoc:23")]
 		public void Line23()
 		{
 			// tag::89b72dd7f747f6297c2b089e8bc807be[]
@@ -22,6 +24,7 @@ namespace Examples.Slm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("slm/getting-started-slm.asciidoc:48")]
 		public void Line48()
 		{
 			// tag::0da01289c561448254d521504d5122dd[]
@@ -45,6 +48,7 @@ namespace Examples.Slm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("slm/getting-started-slm.asciidoc:105")]
 		public void Line105()
 		{
 			// tag::af5ff39759d3af0525d941634a6cdb82[]
@@ -55,6 +59,7 @@ namespace Examples.Slm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("slm/getting-started-slm.asciidoc:117")]
 		public void Line117()
 		{
 			// tag::f1b545d3c3eeedf8ae09c56070c26053[]

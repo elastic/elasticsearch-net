@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Root
 {
 	public class ClusterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("cluster.asciidoc:56")]
 		public void Line56()
 		{
 			// tag::2c602b4ee8f22cda2cdf19bad31da0af[]

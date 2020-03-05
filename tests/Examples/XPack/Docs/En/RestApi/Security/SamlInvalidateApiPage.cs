@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.RestApi.Security
 {
 	public class SamlInvalidateApiPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/saml-invalidate-api.asciidoc:74")]
 		public void Line74()
 		{
 			// tag::49718ad4ff0ae0468c44a7aa35aeee69[]

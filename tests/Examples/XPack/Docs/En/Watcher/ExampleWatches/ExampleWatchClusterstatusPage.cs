@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 {
 	public class ExampleWatchClusterstatusPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-clusterstatus.asciidoc:27")]
 		public void Line27()
 		{
 			// tag::dd0b196a099e1cca08c5ce4dd74e935a[]
@@ -21,6 +23,7 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-clusterstatus.asciidoc:45")]
 		public void Line45()
 		{
 			// tag::1e9cab0b2727624e22e8cf4e7ca498ac[]
@@ -31,6 +34,7 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-clusterstatus.asciidoc:54")]
 		public void Line54()
 		{
 			// tag::221e9b14567f950008459af77757750e[]
@@ -55,6 +59,7 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-clusterstatus.asciidoc:76")]
 		public void Line76()
 		{
 			// tag::239f615e0009c5cb1dc4e82ec4c0dab5[]
@@ -85,6 +90,7 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-clusterstatus.asciidoc:115")]
 		public void Line115()
 		{
 			// tag::dfb20907cfc5ac520ea3b1dba5f00811[]
@@ -100,6 +106,7 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-clusterstatus.asciidoc:137")]
 		public void Line137()
 		{
 			// tag::90f1f5304922fb6d097846dd1444c075[]
@@ -129,6 +136,7 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-clusterstatus.asciidoc:169")]
 		public void Line169()
 		{
 			// tag::95c03bdef4faf6bef039c986f4cb3aba[]
@@ -144,6 +152,7 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-clusterstatus.asciidoc:193")]
 		public void Line193()
 		{
 			// tag::007179b5e241da650562a5f0a5007823[]
@@ -182,6 +191,7 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-clusterstatus.asciidoc:280")]
 		public void Line280()
 		{
 			// tag::60b0fc1b6ae418621ff1b31591fa1fce[]

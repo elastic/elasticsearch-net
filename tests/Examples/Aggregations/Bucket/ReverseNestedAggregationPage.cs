@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class ReverseNestedAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/reverse-nested-aggregation.asciidoc:19")]
 		public void Line19()
 		{
 			// tag::817891bd13da04e5981a797247601145[]
@@ -30,6 +32,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/reverse-nested-aggregation.asciidoc:54")]
 		public void Line54()
 		{
 			// tag::aee26dd62fbb6d614a0798f3344c0598[]

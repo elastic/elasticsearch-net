@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class EdgengramTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/edgengram-tokenfilter.asciidoc:34")]
 		public void Line34()
 		{
 			// tag::6dbfe5565a95508e65d304131847f9fc[]
@@ -26,6 +28,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/edgengram-tokenfilter.asciidoc:143")]
 		public void Line143()
 		{
 			// tag::16351d99d0608789d04a0bb11a537098[]
@@ -48,6 +51,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/edgengram-tokenfilter.asciidoc:199")]
 		public void Line199()
 		{
 			// tag::6f07152055e99416deb10e95b428b847[]

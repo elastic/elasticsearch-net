@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenizers
 {
 	public class ThaiTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/thai-tokenizer.asciidoc:17")]
 		public void Line17()
 		{
 			// tag::a1e5f3956f9a697e79478fc9a6e30e1f[]

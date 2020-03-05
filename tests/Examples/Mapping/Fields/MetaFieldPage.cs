@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Fields
 {
 	public class MetaFieldPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/fields/meta-field.asciidoc:9")]
 		public void Line9()
 		{
 			// tag::e10d7f411744eb1d5ddaa2f70a368490[]
@@ -27,6 +29,7 @@ namespace Examples.Mapping.Fields
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/fields/meta-field.asciidoc:31")]
 		public void Line31()
 		{
 			// tag::019eab381444c3d77ad3bb4e39edfac6[]

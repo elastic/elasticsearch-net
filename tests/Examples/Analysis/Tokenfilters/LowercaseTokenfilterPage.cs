@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class LowercaseTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/lowercase-tokenfilter.asciidoc:20")]
 		public void Line20()
 		{
 			// tag::aa3284717241ed79d3d1d3bdbbdce598[]
@@ -21,6 +23,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/lowercase-tokenfilter.asciidoc:82")]
 		public void Line82()
 		{
 			// tag::bf173db2ec48059c47eb8a7268545add[]
@@ -43,6 +46,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/lowercase-tokenfilter.asciidoc:131")]
 		public void Line131()
 		{
 			// tag::f268416813befd13c604642c6fe6eda9[]

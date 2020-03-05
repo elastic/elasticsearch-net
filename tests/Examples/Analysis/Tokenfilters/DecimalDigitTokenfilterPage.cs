@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class DecimalDigitTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/decimal-digit-tokenfilter.asciidoc:20")]
 		public void Line20()
 		{
 			// tag::a21319c9eff1ac47d7fe7490f1ef2efa[]
@@ -21,6 +23,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/decimal-digit-tokenfilter.asciidoc:75")]
 		public void Line75()
 		{
 			// tag::121b8bc28620095dfa570a989bcdb04e[]

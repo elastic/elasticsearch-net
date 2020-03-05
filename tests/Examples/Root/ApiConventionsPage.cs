@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Root
 {
 	public class ApiConventionsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line74()
+		[Description("api-conventions.asciidoc:78")]
+		public void Line78()
 		{
 			// tag::978088f989d45dd09339582e9cbc60e0[]
 			var response0 = new SearchResponse<object>();
@@ -27,7 +29,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line128()
+		[Description("api-conventions.asciidoc:132")]
+		public void Line132()
 		{
 			// tag::a34d70d7022eb4ba48909d440c80390f[]
 			var response0 = new SearchResponse<object>();
@@ -48,7 +51,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line215()
+		[Description("api-conventions.asciidoc:219")]
+		public void Line219()
 		{
 			// tag::09dbd90c5e22ea4a17b4cf9aa72e08ae[]
 			var response0 = new SearchResponse<object>();
@@ -58,7 +62,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line243()
+		[Description("api-conventions.asciidoc:247")]
+		public void Line247()
 		{
 			// tag::1dbb8cf17fbc45c87c7d2f75f15f9778[]
 			var response0 = new SearchResponse<object>();
@@ -68,7 +73,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line266()
+		[Description("api-conventions.asciidoc:270")]
+		public void Line270()
 		{
 			// tag::1252fa45847edba5ec2b2f33da70ec5b[]
 			var response0 = new SearchResponse<object>();
@@ -78,7 +84,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line291()
+		[Description("api-conventions.asciidoc:295")]
+		public void Line295()
 		{
 			// tag::621665fdbd7fc103c09bfeed28b67b1a[]
 			var response0 = new SearchResponse<object>();
@@ -88,7 +95,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line310()
+		[Description("api-conventions.asciidoc:314")]
+		public void Line314()
 		{
 			// tag::1e18a67caf8f06ff2710ec4a8b30f625[]
 			var response0 = new SearchResponse<object>();
@@ -98,7 +106,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line337()
+		[Description("api-conventions.asciidoc:341")]
+		public void Line341()
 		{
 			// tag::6464124d1677f4552ddddd95a340ca3a[]
 			var response0 = new SearchResponse<object>();
@@ -123,7 +132,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line370()
+		[Description("api-conventions.asciidoc:374")]
+		public void Line374()
 		{
 			// tag::b9a153725b28fdd0a5aabd7f17a8c2d7[]
 			var response0 = new SearchResponse<object>();
@@ -133,7 +143,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line400()
+		[Description("api-conventions.asciidoc:404")]
+		public void Line404()
 		{
 			// tag::5925c23a173a63bdb30b458248d1df76[]
 			var response0 = new SearchResponse<object>();
@@ -143,7 +154,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line564()
+		[Description("api-conventions.asciidoc:568")]
+		public void Line568()
 		{
 			// tag::a6f8636b03cc5f677b7d89e750328612[]
 			var response0 = new SearchResponse<object>();
@@ -153,7 +165,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line596()
+		[Description("api-conventions.asciidoc:600")]
+		public void Line600()
 		{
 			// tag::6d1e75312a28a5ba23837abf768f2510[]
 			var response0 = new SearchResponse<object>();

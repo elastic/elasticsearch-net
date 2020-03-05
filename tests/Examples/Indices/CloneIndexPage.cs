@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class CloneIndexPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("indices/clone-index.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::085df89b76dd980934d1dc2e59f5db1f[]
@@ -16,6 +18,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/clone-index.asciidoc:37")]
 		public void Line37()
 		{
 			// tag::1c5a5a8c0bdc3c577f560157bd4e2313[]
@@ -31,6 +34,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/clone-index.asciidoc:78")]
 		public void Line78()
 		{
 			// tag::190a21e32db2125ddaea0f634e126a84[]
@@ -41,6 +45,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/clone-index.asciidoc:104")]
 		public void Line104()
 		{
 			// tag::81612c2537386e031b7eb604f6756a71[]

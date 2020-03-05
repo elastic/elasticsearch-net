@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class GeoDistanceQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/geo-distance-query.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::b4ef55e48f137e8f67f82b42a047c8f6[]
@@ -41,6 +43,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/geo-distance-query.asciidoc:45")]
 		public void Line45()
 		{
 			// tag::4639a1bbd12710d5f01f1aaadce09a3e[]
@@ -69,6 +72,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/geo-distance-query.asciidoc:77")]
 		public void Line77()
 		{
 			// tag::6fc37ccf570ff7e35b7b0bd4bacb8abd[]
@@ -97,6 +101,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/geo-distance-query.asciidoc:106")]
 		public void Line106()
 		{
 			// tag::926fff8330fc3008f62b9de34f385a57[]
@@ -122,6 +127,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/geo-distance-query.asciidoc:132")]
 		public void Line132()
 		{
 			// tag::f878546633c6bcc30edcdcf520a20eba[]
@@ -147,6 +153,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/geo-distance-query.asciidoc:155")]
 		public void Line155()
 		{
 			// tag::48a40f20b752a8120cf020bda041adca[]

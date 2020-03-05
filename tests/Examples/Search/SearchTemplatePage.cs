@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search
 {
 	public class SearchTemplatePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:7")]
 		public void Line7()
 		{
 			// tag::e068d93555351b9afbdb9dd2aff6368d[]
@@ -27,6 +29,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:112")]
 		public void Line112()
 		{
 			// tag::b19dc078255bfa1237206913ae94012f[]
@@ -49,6 +52,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:147")]
 		public void Line147()
 		{
 			// tag::e51c88800679913981757542bc639816[]
@@ -59,6 +63,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:173")]
 		public void Line173()
 		{
 			// tag::ed639528456671b302ecc887f5a60987[]
@@ -69,6 +74,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:185")]
 		public void Line185()
 		{
 			// tag::de5b9f1211876f6ba7a4c93e87c27d3a[]
@@ -85,6 +91,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:205")]
 		public void Line205()
 		{
 			// tag::4b13f649aa2eca6f7ee4221f708430c1[]
@@ -103,6 +110,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:258")]
 		public void Line258()
 		{
 			// tag::99e29a569f37ea83b02687e6e2793529[]
@@ -120,6 +128,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:277")]
 		public void Line277()
 		{
 			// tag::3462452c6fdba8dc1efe2cca101246e8[]
@@ -137,6 +146,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:294")]
 		public void Line294()
 		{
 			// tag::4697b9aa952ac1613ee1a6ec7b3223c1[]
@@ -159,6 +169,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:318")]
 		public void Line318()
 		{
 			// tag::eb1f3134f28a9ba8406b0f10199cf5be[]
@@ -177,6 +188,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:350")]
 		public void Line350()
 		{
 			// tag::6be45fa02e779a727ddf48f871610aa8[]
@@ -196,6 +208,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:395")]
 		public void Line395()
 		{
 			// tag::33bb4a6ec63a709a14dfa15a5e2cca88[]
@@ -218,6 +231,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:428")]
 		public void Line428()
 		{
 			// tag::02f0012ca77fdc409592e524e5647fb8[]
@@ -248,6 +262,7 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/search-template.asciidoc:612")]
 		public void Line612()
 		{
 			// tag::a5cc9a86f0f9525cd86564421c721d2f[]

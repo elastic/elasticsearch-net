@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Slm
 {
 	public class SlmRetentionPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("slm/slm-retention.asciidoc:31")]
 		public void Line31()
 		{
 			// tag::1527fe79aa1ae25a155a060bac788e7f[]
@@ -26,6 +28,7 @@ namespace Examples.Slm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("slm/slm-retention.asciidoc:80")]
 		public void Line80()
 		{
 			// tag::55e8ddf643726dec51531ada0bec7143[]

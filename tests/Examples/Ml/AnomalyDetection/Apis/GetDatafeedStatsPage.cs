@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class GetDatafeedStatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ml/anomaly-detection/apis/get-datafeed-stats.asciidoc:135")]
 		public void Line135()
 		{
 			// tag::f44d287c6937785eb09b91353c1deb1e[]

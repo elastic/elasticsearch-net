@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class MatchPhrasePrefixQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/match-phrase-prefix-query.asciidoc:22")]
 		public void Line22()
 		{
 			// tag::ca0da81281347e33116710efd36697c8[]

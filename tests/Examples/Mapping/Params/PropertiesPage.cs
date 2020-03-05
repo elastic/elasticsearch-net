@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class PropertiesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/properties.asciidoc:17")]
 		public void Line17()
 		{
 			// tag::241df3bb0c16b4bd53ee569a45539184[]
@@ -56,6 +58,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/properties.asciidoc:74")]
 		public void Line74()
 		{
 			// tag::7f21b09b9306a03491ddcf0355f33860[]

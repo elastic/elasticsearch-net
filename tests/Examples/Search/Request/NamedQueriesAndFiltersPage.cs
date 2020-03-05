@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Request
 {
 	public class NamedQueriesAndFiltersPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/named-queries-and-filters.asciidoc:7")]
 		public void Line7()
 		{
 			// tag::0aad4321e968effc6e6ef2b98c6c71a5[]

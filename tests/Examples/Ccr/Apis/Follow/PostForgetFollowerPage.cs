@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ccr.Apis.Follow
 {
 	public class PostForgetFollowerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/apis/follow/post-forget-follower.asciidoc:36")]
 		public void Line36()
 		{
 			// tag::f4fdfe52ecba65eec6beb30d8deb8bbf[]
@@ -22,6 +24,7 @@ namespace Examples.Ccr.Apis.Follow
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/apis/follow/post-forget-follower.asciidoc:128")]
 		public void Line128()
 		{
 			// tag::07c07f6d497b1a3012aa4320f830e09e[]

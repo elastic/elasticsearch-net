@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class PostCalendarEventPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ml/anomaly-detection/apis/post-calendar-event.asciidoc:63")]
 		public void Line63()
 		{
 			// tag::c067182d385f59ce5952fb9a716fbf05[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class StemmerTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/stemmer-tokenfilter.asciidoc:17")]
 		public void Line17()
 		{
 			// tag::1ca618e7d72ec73c1064fa6eae3086d1[]

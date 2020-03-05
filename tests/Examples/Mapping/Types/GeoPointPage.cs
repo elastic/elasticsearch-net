@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class GeoPointPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-point.asciidoc:20")]
 		public void Line20()
 		{
 			// tag::f1b512400f2f7ca0b0f2e4bb45a8b2fe[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ingest.Processors
 {
 	public class DateIndexNamePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/processors/date-index-name.asciidoc:20")]
 		public void Line20()
 		{
 			// tag::83c8cce0372677857609a2e80e8eb1c4[]
@@ -28,6 +30,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/processors/date-index-name.asciidoc:40")]
 		public void Line40()
 		{
 			// tag::9f3f1b6bd431f6fa40fc17ce9a5a89b8[]
@@ -41,6 +44,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/processors/date-index-name.asciidoc:75")]
 		public void Line75()
 		{
 			// tag::44f672df54c28327070b4ca09999718c[]

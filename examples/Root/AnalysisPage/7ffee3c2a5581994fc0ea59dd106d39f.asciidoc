@@ -1,3 +1,5 @@
+// 
+
 ////
 IMPORTANT NOTE
 ==============
@@ -5,6 +7,7 @@ This file is generated from method Line42 in https://github.com/elastic/elastics
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////
+
 [source, csharp]
 ----
 var createIndexResponse = client.Indices.Create("my_index", c => c

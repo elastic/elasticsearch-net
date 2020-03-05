@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.HighAvailability
 {
 	public class BackupAndRestoreSecurityConfigPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("high-availability/backup-and-restore-security-config.asciidoc:79")]
 		public void Line79()
 		{
 			// tag::92b3749a473cf2e7ff4055316662a4fe[]
@@ -22,6 +24,7 @@ namespace Examples.HighAvailability
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("high-availability/backup-and-restore-security-config.asciidoc:102")]
 		public void Line102()
 		{
 			// tag::43a7b43711eab81ad093e67ecc221327[]
@@ -36,6 +39,7 @@ namespace Examples.HighAvailability
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("high-availability/backup-and-restore-security-config.asciidoc:120")]
 		public void Line120()
 		{
 			// tag::7acf1099282366553cb8b093ed4fcd00[]
@@ -50,6 +54,7 @@ namespace Examples.HighAvailability
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("high-availability/backup-and-restore-security-config.asciidoc:190")]
 		public void Line190()
 		{
 			// tag::ff930e6409b6a923ef1c9e7fc99f24cc[]
@@ -60,6 +65,7 @@ namespace Examples.HighAvailability
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("high-availability/backup-and-restore-security-config.asciidoc:196")]
 		public void Line196()
 		{
 			// tag::020c56e520ff6556ebfaf98efaef56aa[]

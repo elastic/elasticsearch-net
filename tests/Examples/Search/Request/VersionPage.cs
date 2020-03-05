@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Request
 {
 	public class VersionPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/version.asciidoc:7")]
 		public void Line7()
 		{
 			// tag::9535be36eac8a589bd6bf7b7228eefd7[]

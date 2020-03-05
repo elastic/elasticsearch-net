@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class ParentJoinPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/parent-join.asciidoc:14")]
 		public void Line14()
 		{
 			// tag::adbb85423739e45e6d072fd6bebb140e[]
@@ -31,6 +33,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/parent-join.asciidoc:41")]
 		public void Line41()
 		{
 			// tag::ce09baf41be8157b688e19e36b6050c9[]
@@ -59,6 +62,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/parent-join.asciidoc:68")]
 		public void Line68()
 		{
 			// tag::34a90fc67bf423c562cfbc91ca1016cf[]
@@ -83,6 +87,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/parent-join.asciidoc:96")]
 		public void Line96()
 		{
 			// tag::f2b074b37e37cc12abf1b5c795965912[]
@@ -113,6 +118,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/parent-join.asciidoc:165")]
 		public void Line165()
 		{
 			// tag::275353b0245fde574d0b11f2aba2836e[]
@@ -129,6 +135,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/parent-join.asciidoc:272")]
 		public void Line272()
 		{
 			// tag::26fe7b3c9aeab972725b6d708cc6df22[]
@@ -162,6 +169,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/parent-join.asciidoc:325")]
 		public void Line325()
 		{
 			// tag::e0b414b45460d424ab838b5136492fa1[]
@@ -185,6 +193,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/parent-join.asciidoc:346")]
 		public void Line346()
 		{
 			// tag::2c090fe7ec7b66b3f5c178d71c46323b[]
@@ -207,6 +216,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/parent-join.asciidoc:360")]
 		public void Line360()
 		{
 			// tag::bc358cfd219faf9353cb65820981a0df[]
@@ -229,6 +239,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/parent-join.asciidoc:387")]
 		public void Line387()
 		{
 			// tag::1cc03b9715d9a3f876f7b7bb7fe66394[]
@@ -252,6 +263,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/parent-join.asciidoc:422")]
 		public void Line422()
 		{
 			// tag::6eecf0fbf95d132beb0f49b3181da419[]

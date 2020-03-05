@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class SimilarityPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/similarity.asciidoc:33")]
 		public void Line33()
 		{
 			// tag::e6e31dcdd1ca214c17e375c54069d513[]

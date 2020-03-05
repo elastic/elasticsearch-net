@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Watcher
 {
 	public class TroubleshootingPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/troubleshooting.asciidoc:18")]
 		public void Line18()
 		{
 			// tag::2856a5ceff1861aa9a78099f1c517fe7[]
@@ -16,6 +18,7 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/troubleshooting.asciidoc:33")]
 		public void Line33()
 		{
 			// tag::e905543b281e9c41395304da76ed2ea3[]

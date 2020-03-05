@@ -5,12 +5,14 @@ using Elasticsearch.Net;
 using Examples.Models;
 using Nest;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class SearchAsYouTypePage : ExampleBase
 	{
 		[U]
+		[Description("mapping/types/search-as-you-type.asciidoc:18")]
 		public void Line18()
 		{
 			// tag::6f31f9cfe0dd741ccad4af62ba8f815e[]
@@ -38,6 +40,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U]
+		[Description("mapping/types/search-as-you-type.asciidoc:71")]
 		public void Line71()
 		{
 			// tag::867e5fad9c57055712fe2b69fa69a97c[]
@@ -63,6 +66,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U]
+		[Description("mapping/types/search-as-you-type.asciidoc:87")]
 		public void Line87()
 		{
 			// tag::9bd25962f177e86dbc5a8030a420cc31[]
@@ -99,6 +103,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U]
+		[Description("mapping/types/search-as-you-type.asciidoc:147")]
 		public void Line147()
 		{
 			// tag::0ced86822f8c0a479af5e1fe28dfc2ec[]

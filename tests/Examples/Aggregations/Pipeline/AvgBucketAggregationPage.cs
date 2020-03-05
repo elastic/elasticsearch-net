@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Pipeline
 {
 	public class AvgBucketAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/avg-bucket-aggregation.asciidoc:37")]
 		public void Line37()
 		{
 			// tag::b3e8697874ed65ed6cb62f2568bcc55e[]

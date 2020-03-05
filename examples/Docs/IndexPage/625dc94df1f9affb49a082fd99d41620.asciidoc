@@ -1,10 +1,13 @@
+// docs/index_.asciidoc:244
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line243 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/IndexPage.cs#L80-L102.
+This file is generated from method Line244 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/IndexPage.cs#L83-L106.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////
+
 [source, csharp]
 ----
 var indexResponse = client.Index(new Tweet

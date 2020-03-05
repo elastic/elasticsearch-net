@@ -2,12 +2,14 @@ using Elastic.Xunit.XunitPlumbing;
 using Examples.Models;
 using Nest;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class QueryStringQueryPage : ExampleBase
 	{
 		[U]
+		[Description("query-dsl/query-string-query.asciidoc:42")]
 		public void Line42()
 		{
 			// tag::ad6ea0c1e46712aa1fd6d3bfa0ec979e[]
@@ -34,6 +36,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/query-string-query.asciidoc:255")]
 		public void Line255()
 		{
 			// tag::f2d68493abd3ca430bd03a7f7f8d18f9[]
@@ -63,6 +66,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/query-string-query.asciidoc:271")]
 		public void Line271()
 		{
 			// tag::e17e8852ec3f31781e1364f4dffeb6d0[]
@@ -87,6 +91,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/query-string-query.asciidoc:287")]
 		public void Line287()
 		{
 			// tag::a2a25aad1fea9a541b52ac613c78fb64[]
@@ -125,6 +130,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/query-string-query.asciidoc:306")]
 		public void Line306()
 		{
 			// tag::28aad2c5942bfb221c2bf1bbdc01658e[]
@@ -153,6 +159,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/query-string-query.asciidoc:323")]
 		public void Line323()
 		{
 			// tag::db6cba451ba562abe953d09ad80cc15c[]
@@ -177,6 +184,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/query-string-query.asciidoc:342")]
 		public void Line342()
 		{
 			// tag::58b5003c0a53a39bf509aa3797aad471[]
@@ -206,6 +214,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/query-string-query.asciidoc:408")]
 		public void Line408()
 		{
 			// tag::f32f0c19b42de3b87dd764fe4ca17e7c[]
@@ -234,6 +243,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/query-string-query.asciidoc:436")]
 		public void Line436()
 		{
 			// tag::60ee33f3acfdd0fe6f288ac77312c780[]
@@ -266,6 +276,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/query-string-query.asciidoc:462")]
 		public void Line462()
 		{
 			// tag::be1bd47393646ac6bbee177d1cdb7738[]
@@ -300,6 +311,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/query-string-query.asciidoc:486")]
 		public void Line486()
 		{
 			// tag::fdd38f0d248385a444c777e7acd97846[]
@@ -334,6 +346,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
+		[Description("query-dsl/query-string-query.asciidoc:518")]
 		public void Line518()
 		{
 			// tag::6f21a878fee3b43c5332b81aaddbeac7[]

@@ -1,10 +1,13 @@
+// indices/put-mapping.asciidoc:234
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line240 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Indices/PutMappingPage.cs#L180-L203.
+This file is generated from method Line234 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Indices/PutMappingPage.cs#L188-L212.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////
+
 [source, csharp]
 ----
 var createIndexResponse = client.Indices.Create("my_index", m => m

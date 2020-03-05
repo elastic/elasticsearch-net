@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class GeotilegridAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/geotilegrid-aggregation.asciidoc:34")]
 		public void Line34()
 		{
 			// tag::86f1e66bc101b3f22dc84d2aa172fd75[]
@@ -55,6 +57,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/geotilegrid-aggregation.asciidoc:109")]
 		public void Line109()
 		{
 			// tag::57705815ad6bd50d91e58153ae75d3ca[]
@@ -87,6 +90,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/geotilegrid-aggregation.asciidoc:177")]
 		public void Line177()
 		{
 			// tag::473bc08acc95689e256c7160fec07c0c[]

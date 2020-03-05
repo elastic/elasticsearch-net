@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class RegexpQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/regexp-query.asciidoc:23")]
 		public void Line23()
 		{
 			// tag::618d5f3d35921d8cb7e9ccfbe9a4c3e3[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Request
 {
 	public class StoredFieldsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/stored-fields.asciidoc:13")]
 		public void Line13()
 		{
 			// tag::2eeb3e55a7d3955e084bb369f1539009[]
@@ -22,6 +24,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/stored-fields.asciidoc:29")]
 		public void Line29()
 		{
 			// tag::2af86a6ebbb834fbcf6fa7268f87a3a5[]
@@ -38,6 +41,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/stored-fields.asciidoc:60")]
 		public void Line60()
 		{
 			// tag::ccec437aed7a10d9111724ffd929fe00[]

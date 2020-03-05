@@ -2,12 +2,14 @@ using System;
 using Elastic.Xunit.XunitPlumbing;
 using Examples.Models;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Docs
 {
 	public class GetPage : ExampleBase
 	{
 		[U]
+		[Description("docs/get.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::fbcf5078a6a9e09790553804054c36b3[]
@@ -18,6 +20,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/get.asciidoc:53")]
 		public void Line53()
 		{
 			// tag::138ccd89f72aa7502dd9578403dcc589[]
@@ -31,6 +34,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/get.asciidoc:65")]
 		public void Line65()
 		{
 			// tag::8fdf2344c4fb3de6902ad7c5735270df[]
@@ -45,6 +49,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/get.asciidoc:73")]
 		public void Line73()
 		{
 			// tag::745f9b8cdb8e91073f6e520e1d9f8c05[]
@@ -63,6 +68,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/get.asciidoc:86")]
 		public void Line86()
 		{
 			// tag::1d65cb6d055c46a1bde809687d835b71[]
@@ -76,6 +82,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/get.asciidoc:250")]
 		public void Line250()
 		{
 			// tag::98234499cfec70487cec5d013e976a84[]
@@ -86,6 +93,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/get.asciidoc:266")]
 		public void Line266()
 		{
 			// tag::89a8ac1509936acc272fc2d72907bc45[]
@@ -96,6 +104,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/get.asciidoc:275")]
 		public void Line275()
 		{
 			// tag::d222c6a6ec7a3beca6c97011b0874512[]
@@ -110,6 +119,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/get.asciidoc:285")]
 		public void Line285()
 		{
 			// tag::2468ab381257d759d8a88af1141f6f9c[]
@@ -120,6 +130,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/get.asciidoc:299")]
 		public void Line299()
 		{
 			// tag::913770050ebbf3b9b549a899bc11060a[]
@@ -158,6 +169,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/get.asciidoc:320")]
 		public void Line320()
 		{
 			// tag::5eabcdbf61bfcb484dc694f25c2bba36[]
@@ -176,6 +188,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/get.asciidoc:332")]
 		public void Line332()
 		{
 			// tag::710c7871f20f176d51209b1574b0d61b[]
@@ -191,6 +204,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/get.asciidoc:363")]
 		public void Line363()
 		{
 			// tag::0ba0b2db24852abccb7c0fc1098d566e[]
@@ -213,6 +227,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/get.asciidoc:373")]
 		public void Line373()
 		{
 			// tag::69a7be47f85138b10437113ab2f0d72d[]

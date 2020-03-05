@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ccr.Apis.AutoFollow
 {
 	public class GetAutoFollowPatternPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/apis/auto-follow/get-auto-follow-pattern.asciidoc:41")]
 		public void Line41()
 		{
 			// tag::5e124875d97c27362ae858160ae1c6d5[]
@@ -16,6 +18,7 @@ namespace Examples.Ccr.Apis.AutoFollow
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/apis/auto-follow/get-auto-follow-pattern.asciidoc:46")]
 		public void Line46()
 		{
 			// tag::d56a9d89282df56adbbc34b91390ac17[]
@@ -26,6 +29,7 @@ namespace Examples.Ccr.Apis.AutoFollow
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/apis/auto-follow/get-auto-follow-pattern.asciidoc:79")]
 		public void Line79()
 		{
 			// tag::79f33e05b203eb46eef7958fbc95ef77[]

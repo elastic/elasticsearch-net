@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenizers
 {
 	public class LowercaseTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/lowercase-tokenizer.asciidoc:18")]
 		public void Line18()
 		{
 			// tag::a99bc141066ef673e35f306157750ec9[]

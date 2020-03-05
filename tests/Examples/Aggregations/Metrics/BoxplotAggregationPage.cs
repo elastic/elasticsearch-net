@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Metrics
 {
 	public class BoxplotAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/boxplot-aggregation.asciidoc:30")]
 		public void Line30()
 		{
 			// tag::2203588f4793e0e99ccd9240b5afdff7[]
@@ -26,6 +28,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/boxplot-aggregation.asciidoc:73")]
 		public void Line73()
 		{
 			// tag::c2d1756ceca8fdc40a2b97ea275de676[]
@@ -52,6 +55,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/boxplot-aggregation.asciidoc:102")]
 		public void Line102()
 		{
 			// tag::ae2331b7e35af4bbc4df7b98f2527c7f[]
@@ -77,6 +81,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/boxplot-aggregation.asciidoc:143")]
 		public void Line143()
 		{
 			// tag::195af3fda6cb2811d40e22fc54cd3286[]
@@ -98,6 +103,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/boxplot-aggregation.asciidoc:170")]
 		public void Line170()
 		{
 			// tag::71387a61dd965479b767c8dcea1478a9[]

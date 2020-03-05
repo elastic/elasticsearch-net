@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Watcher
 {
 	public class GettingStartedPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/getting-started.asciidoc:32")]
 		public void Line32()
 		{
 			// tag::a45eb0cdd138d9c894ca2de9352549a1[]
@@ -33,6 +35,7 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/getting-started.asciidoc:66")]
 		public void Line66()
 		{
 			// tag::69d9b8fd364596aa37eae6864d8a6d89[]
@@ -48,6 +51,7 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/getting-started.asciidoc:89")]
 		public void Line89()
 		{
 			// tag::c42ee13e461422d242c94332d3c38f87[]
@@ -76,6 +80,7 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/getting-started.asciidoc:119")]
 		public void Line119()
 		{
 			// tag::1414d40bb1e9d7644b72245bbb5ec834[]
@@ -92,6 +97,7 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/getting-started.asciidoc:136")]
 		public void Line136()
 		{
 			// tag::9aa2327ae315c39f2bce2bd22e0deb1b[]
@@ -112,6 +118,7 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/getting-started.asciidoc:166")]
 		public void Line166()
 		{
 			// tag::6a832c7eb7db40b21ab9848d3af19536[]
@@ -147,6 +154,7 @@ namespace Examples.XPack.Docs.En.Watcher
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/watcher/getting-started.asciidoc:207")]
 		public void Line207()
 		{
 			// tag::67a490d749a0c3bb16a266663423893d[]

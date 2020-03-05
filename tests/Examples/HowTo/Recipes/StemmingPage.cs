@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.HowTo.Recipes
 {
 	public class StemmingPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("how-to/recipes/stemming.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::397bdb40d0146102f1f4c6a35675e16a[]
@@ -62,6 +64,7 @@ namespace Examples.HowTo.Recipes
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("how-to/recipes/stemming.asciidoc:58")]
 		public void Line58()
 		{
 			// tag::bf2e6ea2bae621b9b2fee7003e891f86[]
@@ -80,6 +83,7 @@ namespace Examples.HowTo.Recipes
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("how-to/recipes/stemming.asciidoc:116")]
 		public void Line116()
 		{
 			// tag::3f94ed945ae6416a0eb372c2db14d7e0[]
@@ -98,6 +102,7 @@ namespace Examples.HowTo.Recipes
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("how-to/recipes/stemming.asciidoc:173")]
 		public void Line173()
 		{
 			// tag::26abfc49c238c2b5d259983ac38dbcee[]

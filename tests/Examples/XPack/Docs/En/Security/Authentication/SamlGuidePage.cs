@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Security.Authentication
 {
 	public class SamlGuidePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:646")]
 		public void Line646()
 		{
 			// tag::862907653d1c18d2e80eff7f421200e2[]
@@ -23,6 +25,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:685")]
 		public void Line685()
 		{
 			// tag::3806cae804fe77bf38b85561592c745b[]
@@ -41,6 +44,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:903")]
 		public void Line903()
 		{
 			// tag::49cb3f48a0097bfc597c52fa51c6d379[]
@@ -54,6 +58,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:911")]
 		public void Line911()
 		{
 			// tag::b2b26f8568c5dba7649e79f09b859272[]
@@ -68,6 +73,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:931")]
 		public void Line931()
 		{
 			// tag::a5dfcfd1cfb3558e7912456669c92eee[]
@@ -81,6 +87,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:954")]
 		public void Line954()
 		{
 			// tag::8e208098a0156c4c92afe0a06960b230[]
@@ -95,6 +102,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:983")]
 		public void Line983()
 		{
 			// tag::9eda9c39428b0c2c53cbd8ee7ae0f888[]
@@ -109,6 +117,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:998")]
 		public void Line998()
 		{
 			// tag::553904c175a76d5ba83bc5d46fff7373[]
@@ -123,6 +132,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:1016")]
 		public void Line1016()
 		{
 			// tag::a71154ea11a5214f409ecfd118e9b5e3[]

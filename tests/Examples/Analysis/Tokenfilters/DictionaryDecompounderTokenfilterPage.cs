@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class DictionaryDecompounderTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/dictionary-decompounder-tokenfilter.asciidoc:32")]
 		public void Line32()
 		{
 			// tag::3fecd5c6d0c172566da4a54320e1cff3[]
@@ -26,6 +28,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/dictionary-decompounder-tokenfilter.asciidoc:152")]
 		public void Line152()
 		{
 			// tag::a5a5fb129de2f492e8fd33043a73439c[]

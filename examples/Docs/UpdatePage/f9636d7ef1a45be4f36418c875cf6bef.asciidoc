@@ -1,10 +1,13 @@
+// docs/update.asciidoc:296
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line296 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/UpdatePage.cs#L277-L314.
+This file is generated from method Line296 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/UpdatePage.cs#L288-L326.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////
+
 [source, csharp]
 ----
 var updateResponse = client.Update<object>("dh3sgudg8gsrgl", u => u

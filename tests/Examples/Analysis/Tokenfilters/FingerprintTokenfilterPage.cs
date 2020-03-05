@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class FingerprintTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/fingerprint-tokenfilter.asciidoc:35")]
 		public void Line35()
 		{
 			// tag::df82a9cb21a7557f3ddba2509f76f608[]
@@ -21,6 +23,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/fingerprint-tokenfilter.asciidoc:76")]
 		public void Line76()
 		{
 			// tag::8e09caccab0c7c0f82f06cea45424396[]
@@ -43,6 +46,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/fingerprint-tokenfilter.asciidoc:117")]
 		public void Line117()
 		{
 			// tag::1b0f40959a7a4d124372f2bd3f7eac85[]

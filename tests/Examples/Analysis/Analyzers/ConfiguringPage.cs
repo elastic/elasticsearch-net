@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Analyzers
 {
 	public class ConfiguringPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/analyzers/configuring.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::98fa08f638178692476abcae1ac8ce5a[]

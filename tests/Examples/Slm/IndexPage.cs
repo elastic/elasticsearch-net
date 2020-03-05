@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Slm
 {
 	public class IndexPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("slm/index.asciidoc:38")]
 		public void Line38()
 		{
 			// tag::1d7abeea98f6ed64cc8371794c90a921[]
@@ -25,6 +27,7 @@ namespace Examples.Slm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("slm/index.asciidoc:56")]
 		public void Line56()
 		{
 			// tag::ef76d0e4cdc2881c161a5557a98a3446[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Transform.Apis
 {
 	public class UpdateTransformPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("transform/apis/update-transform.asciidoc:132")]
 		public void Line132()
 		{
 			// tag::27384266370152add76471dd0332a2f1[]

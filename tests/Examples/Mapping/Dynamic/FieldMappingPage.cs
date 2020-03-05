@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Dynamic
 {
 	public class FieldMappingPage : ExampleBase
 	{
 		[U]
+		[Description("mapping/dynamic/field-mapping.asciidoc:50")]
 		public void Line50()
 		{
 			// tag::4909bf2f9e86b4bdd6af1d0b13c0015d[]
@@ -27,6 +29,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
+		[Description("mapping/dynamic/field-mapping.asciidoc:68")]
 		public void Line68()
 		{
 			// tag::95fa846e5d0a75210f9ad1fa1acfa8f3[]
@@ -55,6 +58,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
+		[Description("mapping/dynamic/field-mapping.asciidoc:90")]
 		public void Line90()
 		{
 			// tag::4eae628c9aaa259f80711c6e9cc6fd25[]
@@ -83,6 +87,7 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
+		[Description("mapping/dynamic/field-mapping.asciidoc:115")]
 		public void Line115()
 		{
 			// tag::fa3cd4ffaec8273656a328ae29f32c65[]

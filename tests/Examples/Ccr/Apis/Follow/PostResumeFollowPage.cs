@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ccr.Apis.Follow
 {
 	public class PostResumeFollowPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/apis/follow/post-resume-follow.asciidoc:38")]
 		public void Line38()
 		{
 			// tag::109db8ff7b715aca98de8ef1ab7e44ab[]
@@ -18,6 +20,7 @@ namespace Examples.Ccr.Apis.Follow
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/apis/follow/post-resume-follow.asciidoc:80")]
 		public void Line80()
 		{
 			// tag::824fded1f9db28906ae7e85ae8de9bd0[]

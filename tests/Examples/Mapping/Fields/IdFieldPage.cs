@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Fields
 {
 	public class IdFieldPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/fields/id-field.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::8d9a63d7c31f08bd27d92ece3de1649c[]

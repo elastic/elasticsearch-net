@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class DelimitedPayloadTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/delimited-payload-tokenfilter.asciidoc:47")]
 		public void Line47()
 		{
 			// tag::7dc82f7d36686fd57a47e34cbda39a4e[]
@@ -21,6 +23,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/delimited-payload-tokenfilter.asciidoc:120")]
 		public void Line120()
 		{
 			// tag::d443db2755fde3b49ca3a9d296c4a96f[]
@@ -43,6 +46,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/delimited-payload-tokenfilter.asciidoc:173")]
 		public void Line173()
 		{
 			// tag::27f9f604e7a48799fa30529cbc0ff619[]
@@ -72,6 +76,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/delimited-payload-tokenfilter.asciidoc:206")]
 		public void Line206()
 		{
 			// tag::50c2cea2adbe9523458c2686ab11df54[]
@@ -103,6 +108,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/delimited-payload-tokenfilter.asciidoc:234")]
 		public void Line234()
 		{
 			// tag::d2f6fb271e97fde8685d7744e6718cc7[]
@@ -116,6 +122,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/delimited-payload-tokenfilter.asciidoc:246")]
 		public void Line246()
 		{
 			// tag::b24a374c0ad264abbcacb5686f5ed61c[]

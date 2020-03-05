@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Transform.Apis
 {
 	public class PutTransformPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("transform/apis/put-transform.asciidoc:153")]
 		public void Line153()
 		{
 			// tag::23994a14e6b0681cd279b427324945db[]

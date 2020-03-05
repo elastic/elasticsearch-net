@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class CreateIndexPage : ExampleBase
 	{
 		[U]
+		[Description("indices/create-index.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::1c23507edd7a3c18538b68223378e4ab[]
@@ -17,6 +19,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/create-index.asciidoc:81")]
 		public void Line81()
 		{
 			// tag::e5d2172b524332196cac0f031c043659[]
@@ -52,6 +55,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/create-index.asciidoc:99")]
 		public void Line99()
 		{
 			// tag::b9c5d7ca6ca9c6f747201f45337a4abf[]
@@ -85,6 +89,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/create-index.asciidoc:123")]
 		public void Line123()
 		{
 			// tag::dfef545b1e2c247bafd1347e8e807ac1[]
@@ -127,6 +132,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/create-index.asciidoc:143")]
 		public void Line143()
 		{
 			// tag::4d56b179242fed59e3d6476f817b6055[]
@@ -162,6 +168,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/create-index.asciidoc:190")]
 		public void Line190()
 		{
 			// tag::4d46dbb96125b27f46299547de9d8709[]
@@ -181,6 +188,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/create-index.asciidoc:203")]
 		public void Line203()
 		{
 			// tag::fabe14480624a99e8ee42c7338672058[]

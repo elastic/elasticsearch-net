@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Modules.Cluster
 {
 	public class AllocationFilteringPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("modules/cluster/allocation_filtering.asciidoc:22")]
 		public void Line22()
 		{
 			// tag::281ae12918af10b6377ec760eaa844ce[]
@@ -21,6 +23,7 @@ namespace Examples.Modules.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("modules/cluster/allocation_filtering.asciidoc:65")]
 		public void Line65()
 		{
 			// tag::07474768b8f9d532b524c15e512736f4[]

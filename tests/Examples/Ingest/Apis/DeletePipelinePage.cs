@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ingest.Apis
 {
 	public class DeletePipelinePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/apis/delete-pipeline.asciidoc:28")]
 		public void Line28()
 		{
 			// tag::dff61a76d5ef9ca8cbe59a416269a84b[]
@@ -16,6 +18,7 @@ namespace Examples.Ingest.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/apis/delete-pipeline.asciidoc:67")]
 		public void Line67()
 		{
 			// tag::a7cf31f4b907e4c00132aca75f55790c[]
@@ -26,6 +29,7 @@ namespace Examples.Ingest.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/apis/delete-pipeline.asciidoc:76")]
 		public void Line76()
 		{
 			// tag::c6b5c695a9b757b5e7325345b206bde5[]
@@ -36,6 +40,7 @@ namespace Examples.Ingest.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/apis/delete-pipeline.asciidoc:85")]
 		public void Line85()
 		{
 			// tag::11e772ff5dbb73408ae30a1a367a0d9b[]

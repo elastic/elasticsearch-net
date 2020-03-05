@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class LengthTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/length-tokenfilter.asciidoc:27")]
 		public void Line27()
 		{
 			// tag::1659420311d907d9fc024b96f4150216[]
@@ -27,6 +29,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/length-tokenfilter.asciidoc:109")]
 		public void Line109()
 		{
 			// tag::ea690283f301c6ce957efad93d7d5c5d[]
@@ -49,6 +52,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/length-tokenfilter.asciidoc:149")]
 		public void Line149()
 		{
 			// tag::d88f883ed2fb8be35cd3e72ddffcf4ef[]

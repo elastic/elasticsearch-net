@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class EagerGlobalOrdinalsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/eager-global-ordinals.asciidoc:53")]
 		public void Line53()
 		{
 			// tag::f7682345a4e36a4c6e553902039a9410[]
@@ -24,6 +26,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/eager-global-ordinals.asciidoc:76")]
 		public void Line76()
 		{
 			// tag::9c9221059c06dd26041a95b93ec9b6df[]

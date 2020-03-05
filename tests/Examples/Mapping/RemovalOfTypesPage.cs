@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping
 {
 	public class RemovalOfTypesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/removal_of_types.asciidoc:458")]
 		public void Line458()
 		{
 			// tag::cfb7654fa2e29c83807da58f77b27599[]
@@ -25,6 +27,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/removal_of_types.asciidoc:474")]
 		public void Line474()
 		{
 			// tag::11c9b5d511fd839f4affeb018d17200d[]
@@ -42,6 +45,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/removal_of_types.asciidoc:489")]
 		public void Line489()
 		{
 			// tag::0afeb69cc1474ac6d35223e615dc8c91[]
@@ -52,6 +56,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/removal_of_types.asciidoc:523")]
 		public void Line523()
 		{
 			// tag::ab1b1bdda7528003a08d6d5911081483[]
@@ -65,6 +70,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/removal_of_types.asciidoc:550")]
 		public void Line550()
 		{
 			// tag::de8d7db07c3008039c7691955a553e4c[]
@@ -75,6 +81,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/removal_of_types.asciidoc:563")]
 		public void Line563()
 		{
 			// tag::f85d1cf4a5b9145632f585cd8c99e49d[]
@@ -94,6 +101,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/removal_of_types.asciidoc:580")]
 		public void Line580()
 		{
 			// tag::6dce46ae7f4da2467ea1e68cc9b67b31[]
@@ -108,6 +116,7 @@ namespace Examples.Mapping
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/removal_of_types.asciidoc:612")]
 		public void Line612()
 		{
 			// tag::a1114fcb15a01180db9918231e495bbc[]

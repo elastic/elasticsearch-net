@@ -1,12 +1,14 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.DfAnalytics.Apis
 {
 	public class GetInferenceTrainedModelPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		public void Line100()
+		[Description("ml/df-analytics/apis/get-inference-trained-model.asciidoc:108")]
+		public void Line108()
 		{
 			// tag::f97c7791a0dd23aad5f96fd38ec7d12e[]
 			var response0 = new SearchResponse<object>();

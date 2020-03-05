@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class HyphenationDecompounderTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/hyphenation-decompounder-tokenfilter.asciidoc:25")]
 		public void Line25()
 		{
 			// tag::f34c02351662481dd61a5c2a3e206c60[]
@@ -27,6 +29,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/hyphenation-decompounder-tokenfilter.asciidoc:132")]
 		public void Line132()
 		{
 			// tag::5f8acd1e367b048b5542dbc6079bcc88[]

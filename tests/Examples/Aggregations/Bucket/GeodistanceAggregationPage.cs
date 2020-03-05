@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class GeodistanceAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/geodistance-aggregation.asciidoc:7")]
 		public void Line7()
 		{
 			// tag::9bf956f9d3f27bb7b4e5a03af84d5da5[]
@@ -60,6 +62,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/geodistance-aggregation.asciidoc:93")]
 		public void Line93()
 		{
 			// tag::c78b80d080a58090583228421ac1553d[]
@@ -86,6 +89,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/geodistance-aggregation.asciidoc:119")]
 		public void Line119()
 		{
 			// tag::a5736ad3638c238e3b15c9fdaa1f29f7[]
@@ -113,6 +117,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/geodistance-aggregation.asciidoc:146")]
 		public void Line146()
 		{
 			// tag::6b31f435607617d96b1dff3bf10c9d8c[]
@@ -139,6 +144,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/geodistance-aggregation.asciidoc:200")]
 		public void Line200()
 		{
 			// tag::c5afc3d716fdf8c0eefa4732e8a4b3ee[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Monitoring
 {
 	public class ProductionPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("monitoring/production.asciidoc:50")]
 		public void Line50()
 		{
 			// tag::a941fd568f2e20e13df909ab24506073[]
@@ -25,6 +27,7 @@ namespace Examples.Monitoring
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("monitoring/production.asciidoc:88")]
 		public void Line88()
 		{
 			// tag::0b47b0bef81b9b5eecfb3775695bd6ad[]

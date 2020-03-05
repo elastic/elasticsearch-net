@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Licensing
 {
 	public class UpdateLicensePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("licensing/update-license.asciidoc:61")]
 		public void Line61()
 		{
 			// tag::85f2839beeb71edb66988e5c82188be0[]
@@ -30,6 +32,7 @@ namespace Examples.Licensing
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("licensing/update-license.asciidoc:137")]
 		public void Line137()
 		{
 			// tag::46b1c1f6e0c86528be84c373eeb8d425[]

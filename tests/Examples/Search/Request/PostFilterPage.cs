@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Request
 {
 	public class PostFilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/post-filter.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::35390274db3acad03eb77b2376c57e40[]
@@ -34,6 +36,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/post-filter.asciidoc:40")]
 		public void Line40()
 		{
 			// tag::f83eb6605c7c56e297a494b318400ef0[]
@@ -54,6 +57,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/post-filter.asciidoc:63")]
 		public void Line63()
 		{
 			// tag::81f1b1e1d5c81683b6bf471c469e6046[]
@@ -79,6 +83,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/post-filter.asciidoc:94")]
 		public void Line94()
 		{
 			// tag::48313f620c2871b6f4019b66be730109[]

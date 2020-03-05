@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class BinaryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/binary.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::9296dd085f411739f5b0ec80eb9b9e27[]

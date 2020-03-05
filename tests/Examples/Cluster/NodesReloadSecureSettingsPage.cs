@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Cluster
 {
 	public class NodesReloadSecureSettingsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/nodes-reload-secure-settings.asciidoc:54")]
 		public void Line54()
 		{
 			// tag::72f20e645e118715b6197c2087b4db86[]

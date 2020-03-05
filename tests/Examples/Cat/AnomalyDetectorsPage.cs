@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Cat
 {
 	public class AnomalyDetectorsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("cat/anomaly-detectors.asciidoc:267")]
 		public void Line267()
 		{
 			// tag::bb03aeaba69c110f86505fa0e4e5035d[]

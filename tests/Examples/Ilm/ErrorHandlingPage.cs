@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ilm
 {
 	public class ErrorHandlingPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/error-handling.asciidoc:16")]
 		public void Line16()
 		{
 			// tag::9d211c6226d0b4434f01cceb76ab6ffa[]
@@ -30,6 +32,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/error-handling.asciidoc:42")]
 		public void Line42()
 		{
 			// tag::3d0b9acdacc7ecec380c57e814256472[]
@@ -46,6 +49,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/error-handling.asciidoc:60")]
 		public void Line60()
 		{
 			// tag::943f92e1d3fa566ef23659be2d96f222[]
@@ -56,6 +60,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/error-handling.asciidoc:124")]
 		public void Line124()
 		{
 			// tag::7bee02e8962e355a23559b6eaa6678f2[]
@@ -80,6 +85,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/error-handling.asciidoc:151")]
 		public void Line151()
 		{
 			// tag::235513edcb5ce3fe2e38a781eeefa6a0[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Root
 {
 	public class IngestPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ingest.asciidoc:32")]
 		public void Line32()
 		{
 			// tag::55704b69b03239fe13293fc7622d27da[]
@@ -27,6 +29,7 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest.asciidoc:50")]
 		public void Line50()
 		{
 			// tag::6f3a4b4a01b6fae193897f00cb4855d0[]

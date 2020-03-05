@@ -1,0 +1,29 @@
+// indices/templates.asciidoc:138
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line138 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Indices/TemplatesPage.cs#L58-L103.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var putIndexTemplateResponse = client.Indices.PutTemplate("template_1", t => t
+    .IndexPatterns("te*")
+    .Settings(s => s
+        .NumberOfShards(1)
+    )
+    .Aliases(a => a
+        .Alias("alias1")
+        .Alias("alias2", aa => aa
+            .Filter<Tweet>(f => f
+                .Term(t => t.User, "kimchy")
+            )
+            .Routing("kimchy")
+        )
+        .Alias("{index}-alias")
+    )
+);
+----

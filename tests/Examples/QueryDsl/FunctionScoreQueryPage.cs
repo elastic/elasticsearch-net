@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class FunctionScoreQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/function-score-query.asciidoc:19")]
 		public void Line19()
 		{
 			// tag::a42f33e15b0995bb4b6058659bfdea85[]
@@ -26,6 +28,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/function-score-query.asciidoc:41")]
 		public void Line41()
 		{
 			// tag::b4a0d0ed512dffc10ee53bca2feca49b[]
@@ -59,6 +62,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/function-score-query.asciidoc:137")]
 		public void Line137()
 		{
 			// tag::ec473de07fe89bcbac1f8e278617fe46[]
@@ -83,6 +87,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/function-score-query.asciidoc:175")]
 		public void Line175()
 		{
 			// tag::b68c85fe1b0d2f264dc0d1cbf530f319[]
@@ -111,6 +116,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/function-score-query.asciidoc:241")]
 		public void Line241()
 		{
 			// tag::645c4c6e209719d3a4d25b1a629cb23b[]
@@ -131,6 +137,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/function-score-query.asciidoc:269")]
 		public void Line269()
 		{
 			// tag::8eaf4d5dd4ab1335deefa7749fdbbcc3[]
@@ -153,6 +160,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/function-score-query.asciidoc:380")]
 		public void Line380()
 		{
 			// tag::ec27afee074001b0e4e393611010842b[]
@@ -177,6 +185,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/function-score-query.asciidoc:578")]
 		public void Line578()
 		{
 			// tag::df17f920b0deab3529b98df88b781f55[]

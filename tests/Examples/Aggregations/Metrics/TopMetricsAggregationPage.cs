@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Metrics
 {
 	public class TopMetricsAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::8fa80d369028e9ac0432f5c2d64ac574[]
@@ -36,6 +38,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:82")]
 		public void Line82()
 		{
 			// tag::2c45781caccfc50c0656802fb613a6ea[]
@@ -67,6 +70,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:130")]
 		public void Line130()
 		{
 			// tag::b63ce79ce4fa1bb9b99a789f4dcfef4e[]
@@ -80,6 +84,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:150")]
 		public void Line150()
 		{
 			// tag::a4f89e46f108ddab069bd4b3f798f2c6[]
@@ -129,6 +134,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:221")]
 		public void Line221()
 		{
 			// tag::1ba79a9bfab9275c2095e720f5664fab[]
@@ -157,6 +163,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:282")]
 		public void Line282()
 		{
 			// tag::b160996a6ab06abeed6899e63c2d192b[]
@@ -187,6 +194,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:322")]
 		public void Line322()
 		{
 			// tag::efc492b00b90206ae795f9afda4a1307[]

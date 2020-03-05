@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class ConditionTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/condition-tokenfilter.asciidoc:22")]
 		public void Line22()
 		{
 			// tag::09944369863fd8666d5301d717317276[]
@@ -29,6 +31,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/condition-tokenfilter.asciidoc:125")]
 		public void Line125()
 		{
 			// tag::a197076e0e74951ea88f20309ec257e2[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ccr
 {
 	public class OverviewPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ccr/overview.asciidoc:205")]
 		public void Line205()
 		{
 			// tag::7c5e41a7c0075d87b8f8348a6efa990c[]

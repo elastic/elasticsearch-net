@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class MultiFieldsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/multi-fields.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::5271f4ff29bb48838396e5a674664ee0[]
@@ -65,6 +67,7 @@ namespace Examples.Mapping.Params
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/multi-fields.asciidoc:75")]
 		public void Line75()
 		{
 			// tag::fc8097bdfb6f3a4017bf4186ccca8a84[]

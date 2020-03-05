@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Rollup.Apis
 {
 	public class RollupIndexCapsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("rollup/apis/rollup-index-caps.asciidoc:53")]
 		public void Line53()
 		{
 			// tag::2d20c42e9664febeccaff61581605cbe[]
@@ -42,6 +44,7 @@ namespace Examples.Rollup.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("rollup/apis/rollup-index-caps.asciidoc:88")]
 		public void Line88()
 		{
 			// tag::73d1a6c5ef90b7e35d43a0bfdc1e158d[]
@@ -52,6 +55,7 @@ namespace Examples.Rollup.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("rollup/apis/rollup-index-caps.asciidoc:163")]
 		public void Line163()
 		{
 			// tag::642161d70dacf7d153767d37d3726838[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ingest.Processors
 {
 	public class ScriptPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/processors/script.asciidoc:50")]
 		public void Line50()
 		{
 			// tag::197d87fdb4aeccf3d9a08ae485c12306[]
@@ -28,6 +30,7 @@ namespace Examples.Ingest.Processors
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/processors/script.asciidoc:69")]
 		public void Line69()
 		{
 			// tag::cdc55ad88de55999fe2d79fd4781918b[]

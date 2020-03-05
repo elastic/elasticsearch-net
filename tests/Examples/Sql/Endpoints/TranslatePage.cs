@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Sql.Endpoints
 {
 	public class TranslatePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("sql/endpoints/translate.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::8097472be12fcbe8652f03e398e49972[]

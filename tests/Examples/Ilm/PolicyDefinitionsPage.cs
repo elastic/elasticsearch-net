@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ilm
 {
 	public class PolicyDefinitionsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:34")]
 		public void Line34()
 		{
 			// tag::b53e3314eb39b667a9ba87fb3a286e6b[]
@@ -36,6 +38,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:166")]
 		public void Line166()
 		{
 			// tag::1116c769f39f0c7fe86ec2a4871efcd5[]
@@ -59,6 +62,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:188")]
 		public void Line188()
 		{
 			// tag::0518c673094fb18ecb491a3b78af4695[]
@@ -84,6 +88,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:213")]
 		public void Line213()
 		{
 			// tag::9d461ae140ddc018efd2650559800cd1[]
@@ -110,6 +115,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:250")]
 		public void Line250()
 		{
 			// tag::83062a543163370328cf2e21a68c1bd3[]
@@ -133,6 +139,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:277")]
 		public void Line277()
 		{
 			// tag::053497b6960f80fd7b005b7c6d54358f[]
@@ -154,6 +161,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:324")]
 		public void Line324()
 		{
 			// tag::eb5486d2fe4283475bf9e0e09280be16[]
@@ -177,6 +185,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:350")]
 		public void Line350()
 		{
 			// tag::0345fbd95c4516a89ac5ad261a16be8f[]
@@ -198,6 +207,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:384")]
 		public void Line384()
 		{
 			// tag::fc9a1b1173690a911725cff3912e9755[]
@@ -219,6 +229,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:422")]
 		public void Line422()
 		{
 			// tag::d7e7489b7d176aa854dfc785a12feab3[]
@@ -240,6 +251,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:466")]
 		public void Line466()
 		{
 			// tag::19211ccf772f1dee7b500c21f4a9a805[]
@@ -263,6 +275,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:489")]
 		public void Line489()
 		{
 			// tag::cfd4b34f35e531a20739a3b308d57134[]
@@ -286,6 +299,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:512")]
 		public void Line512()
 		{
 			// tag::d4a41fb74b41b41a0ee114a2311f2815[]
@@ -309,6 +323,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:536")]
 		public void Line536()
 		{
 			// tag::8940f2b911220acc9afef6360b6c13c4[]
@@ -333,6 +348,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:561")]
 		public void Line561()
 		{
 			// tag::f6c79fa1c01bb4539d0cba0bd62c1ce0[]
@@ -362,6 +378,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:612")]
 		public void Line612()
 		{
 			// tag::149a0eea54cdf6ea3052af6dba2d2a63[]
@@ -385,6 +402,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:664")]
 		public void Line664()
 		{
 			// tag::f3b4ddce8ff21fc1a76a7c0d9c36650e[]
@@ -408,6 +426,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:721")]
 		public void Line721()
 		{
 			// tag::a5a58e8ad66afe831bc295500e3e8739[]
@@ -429,6 +448,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:746")]
 		public void Line746()
 		{
 			// tag::d14a2a6c2a8b084495b8a64708226650[]

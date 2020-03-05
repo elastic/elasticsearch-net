@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ingest.Apis.Enrich
 {
 	public class PutEnrichPolicyPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/apis/enrich/put-enrich-policy.asciidoc:26")]
 		public void Line26()
 		{
 			// tag::e15a5bb869d24668207b9b4629744be4[]

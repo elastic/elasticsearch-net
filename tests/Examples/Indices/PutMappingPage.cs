@@ -3,12 +3,14 @@ using Elasticsearch.Net;
 using Examples.Models;
 using Nest;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class PutMappingPage : ExampleBase
 	{
 		[U]
+		[Description("indices/put-mapping.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::5be23858b35043fcb7b50fe36b873e6e[]
@@ -31,6 +33,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:84")]
 		public void Line84()
 		{
 			// tag::12433d2b637d002e8d5c9a1adce69d3b[]
@@ -41,6 +44,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:92")]
 		public void Line92()
 		{
 			// tag::e4be53736bcc02b03068fd72fdbfe271[]
@@ -61,6 +65,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:109")]
 		public void Line109()
 		{
 			// tag::1da77e114459e0b77d78a3dcc8fae429[]
@@ -91,6 +96,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:144")]
 		public void Line144()
 		{
 			// tag::d9474f66970c6955e24b17c7447e7b5f[]
@@ -131,6 +137,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:166")]
 		public void Line166()
 		{
 			// tag::0bbd30b9be3e54ff3028b9f4459634d2[]
@@ -168,6 +175,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:186")]
 		public void Line186()
 		{
 			// tag::210cf5c76bff517f48e80fa1c2d63907[]
@@ -178,6 +186,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:234")]
 		public void Line234()
 		{
 			// tag::c849c6c8f8659dbb93e1c14356f74e37[]
@@ -203,6 +212,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:257")]
 		public void Line257()
 		{
 			// tag::5f3a3eefeefe6fa85ec49d499212d245[]
@@ -235,6 +245,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:327")]
 		public void Line327()
 		{
 			// tag::1f6fe6833686e38c3711c6f2aa00a078[]
@@ -264,6 +275,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:346")]
 		public void Line346()
 		{
 			// tag::17de0020b228df961ad3c6b06233c948[]
@@ -290,6 +302,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:409")]
 		public void Line409()
 		{
 			// tag::bd5918ab903c0889bb1f09c8c2466e43[]
@@ -318,6 +331,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:427")]
 		public void Line427()
 		{
 			// tag::0989cc65d8924f666ce3eb0820d2d244[]
@@ -338,6 +352,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:446")]
 		public void Line446()
 		{
 			// tag::734c2e2a1e45b84f1e4e65b51356fcd7[]
@@ -365,6 +380,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:465")]
 		public void Line465()
 		{
 			// tag::53d938c754f36a912fcbe6473abb463f[]
@@ -386,6 +402,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:519")]
 		public void Line519()
 		{
 			// tag::6bf63f2ec6ba55fcaf1092f48212bf25[]
@@ -413,6 +430,7 @@ namespace Examples.Indices
 		}
 
 		[U]
+		[Description("indices/put-mapping.asciidoc:536")]
 		public void Line536()
 		{
 			// tag::afc29b61c532cf683f749baf013e7bfe[]

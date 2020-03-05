@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class HistogramPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/histogram.asciidoc:74")]
 		public void Line74()
 		{
 			// tag::7d6b1797b1178e96d287831a94bb9658[]
@@ -28,6 +30,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/histogram.asciidoc:94")]
 		public void Line94()
 		{
 			// tag::09774dd1a8613672844caadb2bc8dc1e[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class DateNanosPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/date_nanos.asciidoc:32")]
 		public void Line32()
 		{
 			// tag::46dd5948cfc34adf1dfe024fc960bb01[]

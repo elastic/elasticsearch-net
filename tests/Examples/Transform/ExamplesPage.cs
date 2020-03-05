@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Transform
 {
 	public class ExamplesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("transform/examples.asciidoc:29")]
 		public void Line29()
 		{
 			// tag::88341b4eba71ec722f3e38fa1696fe87[]
@@ -37,6 +39,7 @@ namespace Examples.Transform
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("transform/examples.asciidoc:115")]
 		public void Line115()
 		{
 			// tag::be9376b1e354ad9c6bdad83f6a0ce5ad[]
@@ -81,6 +84,7 @@ namespace Examples.Transform
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("transform/examples.asciidoc:207")]
 		public void Line207()
 		{
 			// tag::0bad2211181281b6cc5df8e364bcc111[]
@@ -154,6 +158,7 @@ namespace Examples.Transform
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("transform/examples.asciidoc:288")]
 		public void Line288()
 		{
 			// tag::4bd42e31ac4a5cf237777f1a0e97aba8[]
@@ -164,6 +169,7 @@ namespace Examples.Transform
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("transform/examples.asciidoc:297")]
 		public void Line297()
 		{
 			// tag::14f2dab0583c5a9fcc39931d33194872[]

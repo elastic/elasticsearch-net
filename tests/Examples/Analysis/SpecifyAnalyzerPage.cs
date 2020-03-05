@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis
 {
 	public class SpecifyAnalyzerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/specify-analyzer.asciidoc:50")]
 		public void Line50()
 		{
 			// tag::311c6e60a020df4e301c6db9bcaf9e0a[]
@@ -26,6 +28,7 @@ namespace Examples.Analysis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/specify-analyzer.asciidoc:74")]
 		public void Line74()
 		{
 			// tag::7b2c75b4f6150485593c49f96f05fb2f[]
@@ -47,6 +50,7 @@ namespace Examples.Analysis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/specify-analyzer.asciidoc:130")]
 		public void Line130()
 		{
 			// tag::040e4b4d0119e4cc94eafb9db91baae5[]
@@ -67,6 +71,7 @@ namespace Examples.Analysis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/specify-analyzer.asciidoc:158")]
 		public void Line158()
 		{
 			// tag::8870b188fd9471b853f03cbc2a312261[]
@@ -88,6 +93,7 @@ namespace Examples.Analysis
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/specify-analyzer.asciidoc:186")]
 		public void Line186()
 		{
 			// tag::77c1e9a95f91229bc3f4ede13af97d34[]

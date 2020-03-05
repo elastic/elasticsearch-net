@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Pipeline
 {
 	public class BucketScriptAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline/bucket-script-aggregation.asciidoc:45")]
 		public void Line45()
 		{
 			// tag::c2d90e1c88ff5b1857ed4a5b169c9689[]

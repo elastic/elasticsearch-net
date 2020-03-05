@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class PercolateQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/percolate-query.asciidoc:18")]
 		public void Line18()
 		{
 			// tag::e79bff3fe9fe9d8732e0b034f17a03c5[]
@@ -28,6 +30,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/percolate-query.asciidoc:46")]
 		public void Line46()
 		{
 			// tag::25843127c07257bf09154920779d3055[]
@@ -45,6 +48,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/percolate-query.asciidoc:61")]
 		public void Line61()
 		{
 			// tag::4ef2837148b6b23e2eb0a11d14ccae80[]
@@ -65,6 +69,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/percolate-query.asciidoc:158")]
 		public void Line158()
 		{
 			// tag::4e4e6a2e173cc20c00cca1a06166a687[]
@@ -89,6 +94,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/percolate-query.asciidoc:198")]
 		public void Line198()
 		{
 			// tag::2d417d4eea299b45f384af7303252611[]
@@ -120,6 +126,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/percolate-query.asciidoc:283")]
 		public void Line283()
 		{
 			// tag::fe0b180951e143d4c624d9fbf677b884[]
@@ -133,6 +140,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/percolate-query.asciidoc:312")]
 		public void Line312()
 		{
 			// tag::6736f6e4e04379918a21e7c223c08cf9[]
@@ -153,6 +161,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/percolate-query.asciidoc:348")]
 		public void Line348()
 		{
 			// tag::f33cfd0350f5f474362aa6f2e03f734f[]
@@ -170,6 +179,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/percolate-query.asciidoc:363")]
 		public void Line363()
 		{
 			// tag::1ae1587dfc299b9f3f57d3da0dbc9a3b[]
@@ -187,6 +197,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/percolate-query.asciidoc:378")]
 		public void Line378()
 		{
 			// tag::a8852f083978b748b93b87ff7fa7b15b[]
@@ -212,6 +223,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/percolate-query.asciidoc:472")]
 		public void Line472()
 		{
 			// tag::3bbf150f4ae5c8e53beb6d6ae6f07775[]
@@ -248,6 +260,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/percolate-query.asciidoc:564")]
 		public void Line564()
 		{
 			// tag::6163e92fa93136a1907f820e8d57db45[]
@@ -284,6 +297,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/percolate-query.asciidoc:668")]
 		public void Line668()
 		{
 			// tag::9501e6c8e95c21838653ea15b9b7ed5f[]

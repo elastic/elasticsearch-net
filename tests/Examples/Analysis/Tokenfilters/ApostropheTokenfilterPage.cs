@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class ApostropheTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/apostrophe-tokenfilter.asciidoc:22")]
 		public void Line22()
 		{
 			// tag::3343a4cf559060c422d86c786a95e535[]
@@ -21,6 +23,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/apostrophe-tokenfilter.asciidoc:77")]
 		public void Line77()
 		{
 			// tag::da19e4ecfabcbabdc894687106eaccdc[]

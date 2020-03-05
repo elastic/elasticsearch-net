@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class OpenJobPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ml/anomaly-detection/apis/open-job.asciidoc:54")]
 		public void Line54()
 		{
 			// tag::a6204edaa0bcf7b82a89ab4f6bda0914[]

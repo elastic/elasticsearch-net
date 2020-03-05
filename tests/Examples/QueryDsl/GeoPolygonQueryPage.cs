@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class GeoPolygonQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/geo-polygon-query.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::383c5a0771484086dcfd8d990830eeb7[]
@@ -36,6 +38,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/geo-polygon-query.asciidoc:60")]
 		public void Line60()
 		{
 			// tag::ecf966a20c54eb4e60a2670f51a99bdc[]
@@ -66,6 +69,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/geo-polygon-query.asciidoc:90")]
 		public void Line90()
 		{
 			// tag::e532955a897ac1844e7c5727916bf32c[]
@@ -96,6 +100,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/geo-polygon-query.asciidoc:118")]
 		public void Line118()
 		{
 			// tag::5b809a128ee33be706e2097dde6e7719[]

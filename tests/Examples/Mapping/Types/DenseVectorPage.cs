@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class DenseVectorPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/dense-vector.asciidoc:20")]
 		public void Line20()
 		{
 			// tag::7c7b74084cc9f18b085c25a208bd1306[]

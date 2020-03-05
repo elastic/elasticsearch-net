@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenizers
 {
 	public class WhitespaceTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/whitespace-tokenizer.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::7b9dfe5857bde1bd8483ea3241656714[]

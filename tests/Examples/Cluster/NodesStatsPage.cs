@@ -1,5 +1,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Cluster
 {
@@ -7,6 +8,7 @@ namespace Examples.Cluster
 	{
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/nodes-stats.asciidoc:1363")]
 		public void Line1363()
 		{
 			// tag::5457c94f0039c6b95c7f9f305d0c6b58[]
@@ -37,6 +39,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/nodes-stats.asciidoc:1381")]
 		public void Line1381()
 		{
 			// tag::150b5fee5678bf8cdf0932da73eada80[]
@@ -75,6 +78,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/nodes-stats.asciidoc:1399")]
 		public void Line1399()
 		{
 			// tag::bd68666ca2e0be12f7624016317a62bc[]
@@ -97,6 +101,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/nodes-stats.asciidoc:1415")]
 		public void Line1415()
 		{
 			// tag::09769561f082b50558fb7d8707719963[]
@@ -107,6 +112,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/nodes-stats.asciidoc:1423")]
 		public void Line1423()
 		{
 			// tag::ef9c29759459904fef162acd223462c4[]
@@ -117,6 +123,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/nodes-stats.asciidoc:1431")]
 		public void Line1431()
 		{
 			// tag::f160561efab38e40c2feebf5a2542ab5[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Docs
 {
 	public class MultiGetPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("docs/multi-get.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::ccfaeef928ba7dd4b5de0c518151fd7c[]
@@ -28,6 +30,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/multi-get.asciidoc:128")]
 		public void Line128()
 		{
 			// tag::53cf7d3731f50620b3277b80e2fbfd56[]
@@ -48,6 +51,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/multi-get.asciidoc:146")]
 		public void Line146()
 		{
 			// tag::81095ba46e4d8c5da3623f5ea8c54a34[]
@@ -61,6 +65,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/multi-get.asciidoc:168")]
 		public void Line168()
 		{
 			// tag::6b1ab3f273c6e425067cd5889b0c258f[]
@@ -93,6 +98,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/multi-get.asciidoc:206")]
 		public void Line206()
 		{
 			// tag::c4272ba35b81125a805fb1a7292f3d25[]
@@ -117,6 +123,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/multi-get.asciidoc:229")]
 		public void Line229()
 		{
 			// tag::27fac828d28ab065524dd1ce148840c0[]
@@ -138,6 +145,7 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("docs/multi-get.asciidoc:252")]
 		public void Line252()
 		{
 			// tag::1b37488d0a79d3c950029851b7cd623e[]

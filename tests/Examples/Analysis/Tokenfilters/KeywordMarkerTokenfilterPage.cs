@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class KeywordMarkerTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/keyword-marker-tokenfilter.asciidoc:28")]
 		public void Line28()
 		{
 			// tag::863c221b28ae5e58d39bd8f138291949[]
@@ -40,6 +42,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/keyword-marker-tokenfilter.asciidoc:59")]
 		public void Line59()
 		{
 			// tag::abcbf3c246c0d88831b875a601686e35[]
@@ -54,6 +57,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/keyword-marker-tokenfilter.asciidoc:102")]
 		public void Line102()
 		{
 			// tag::4ab8f55a8a45d53fb1676112379c212e[]

@@ -1,10 +1,13 @@
+// mapping/dynamic/field-mapping.asciidoc:115
+
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line115 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Mapping/Dynamic/FieldMappingPage.cs#L85-L112.
+This file is generated from method Line115 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Mapping/Dynamic/FieldMappingPage.cs#L89-L117.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////
+
 [source, csharp]
 ----
 var createIndexResponse = client.Indices.Create("my_index", c => c

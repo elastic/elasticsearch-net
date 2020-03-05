@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class LimitTokenCountTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/limit-token-count-tokenfilter.asciidoc:43")]
 		public void Line43()
 		{
 			// tag::5a3855f1b3e37d89ab7cbcc4f7ae1dd3[]
@@ -26,6 +28,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/limit-token-count-tokenfilter.asciidoc:96")]
 		public void Line96()
 		{
 			// tag::b96f465abb658fe32889c3d183f159a3[]
@@ -48,6 +51,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/limit-token-count-tokenfilter.asciidoc:123")]
 		public void Line123()
 		{
 			// tag::63521e0089c631d6668c44a0a9d7fdcc[]

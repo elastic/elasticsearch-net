@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations
 {
 	public class PipelinePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline.asciidoc:54")]
 		public void Line54()
 		{
 			// tag::ec20b1c236955a545476eeeea747d9de[]
@@ -34,6 +36,7 @@ namespace Examples.Aggregations
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline.asciidoc:84")]
 		public void Line84()
 		{
 			// tag::11be7655fdafcf4c1454a0e9ad8ddf63[]
@@ -66,6 +69,7 @@ namespace Examples.Aggregations
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline.asciidoc:119")]
 		public void Line119()
 		{
 			// tag::88a6b6f721b91f0919127a34ee2fbe0e[]
@@ -109,6 +113,7 @@ namespace Examples.Aggregations
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline.asciidoc:168")]
 		public void Line168()
 		{
 			// tag::f3dd309ab027e86048b476b54f0d4ca1[]
@@ -134,6 +139,7 @@ namespace Examples.Aggregations
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/pipeline.asciidoc:194")]
 		public void Line194()
 		{
 			// tag::2afc1231679898bd864d06679d9e951b[]

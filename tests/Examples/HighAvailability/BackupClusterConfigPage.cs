@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.HighAvailability
 {
 	public class BackupClusterConfigPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("high-availability/backup-cluster-config.asciidoc:41")]
 		public void Line41()
 		{
 			// tag::ee79edafcbc80dfda496e3a26506dcbc[]

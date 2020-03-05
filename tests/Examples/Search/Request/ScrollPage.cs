@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Search.Request
 {
 	public class ScrollPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/scroll.asciidoc:40")]
 		public void Line40()
 		{
 			// tag::7e52bec09624cf6c0de5d13f2bfad5a5[]
@@ -24,6 +26,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/scroll.asciidoc:58")]
 		public void Line58()
 		{
 			// tag::b41dce56b0e640d32b1cf452f87cec17[]
@@ -38,6 +41,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/scroll.asciidoc:90")]
 		public void Line90()
 		{
 			// tag::d5dcddc6398b473b6ad9bce5c6adf986[]
@@ -53,6 +57,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/scroll.asciidoc:143")]
 		public void Line143()
 		{
 			// tag::72beebe779a258c225dee7b023e60c52[]
@@ -63,6 +68,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/scroll.asciidoc:156")]
 		public void Line156()
 		{
 			// tag::b0d64d0a554549e5b2808002a0725493[]
@@ -76,6 +82,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/scroll.asciidoc:167")]
 		public void Line167()
 		{
 			// tag::3a700f836d8d5da1b656a876554028aa[]
@@ -92,6 +99,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/scroll.asciidoc:181")]
 		public void Line181()
 		{
 			// tag::c2c21e2824fbf6b7198ede30419da82b[]
@@ -102,6 +110,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/scroll.asciidoc:189")]
 		public void Line189()
 		{
 			// tag::b94cee0f74f57742b3948f9b784dfdd4[]
@@ -112,6 +121,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/scroll.asciidoc:201")]
 		public void Line201()
 		{
 			// tag::1027ab1ca767ac1428176ef4f84bfbcf[]
@@ -148,6 +158,7 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("search/request/scroll.asciidoc:263")]
 		public void Line263()
 		{
 			// tag::fdcaba9547180439ff4b6275034a5170[]

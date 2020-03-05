@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class PrefixQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/prefix-query.asciidoc:16")]
 		public void Line16()
 		{
 			// tag::81514791349e0e79ac565160e42889c0[]
@@ -25,6 +27,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/prefix-query.asciidoc:53")]
 		public void Line53()
 		{
 			// tag::32ea547cefa2976c8c3c2eb45a2a4ff4[]

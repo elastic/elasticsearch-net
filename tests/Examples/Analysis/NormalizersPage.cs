@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis
 {
 	public class NormalizersPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/normalizers.asciidoc:25")]
 		public void Line25()
 		{
 			// tag::966ff3a4c5b61ed1a36d44c17ce06157[]

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using CommandLine.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Formatting;
 using Microsoft.CodeAnalysis.Formatting;
@@ -58,6 +60,8 @@ namespace ExamplesGenerator
 					.ExtractCallouts(out var callouts);
 
 				var builder = new StringBuilder()
+					.AppendLine($"// {example.ReferenceFileAndLineNumber}")
+					.AppendLine()
 					.AppendLine("////")
 					.AppendLine("IMPORTANT NOTE")
 					.AppendLine("==============")
@@ -65,6 +69,7 @@ namespace ExamplesGenerator
 					.AppendLine("If you wish to submit a PR to change this example, please change the source method above")
 					.AppendLine("and run dotnet run -- asciidoc in the ExamplesGenerator project directory.")
 					.AppendLine("////")
+					.AppendLine()
 					.AppendLine("[source, csharp]")
 					.AppendLine("----")
 					.AppendLine(source)

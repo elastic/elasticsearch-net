@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenizers
 {
 	public class ChargroupTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/chargroup-tokenizer.asciidoc:26")]
 		public void Line26()
 		{
 			// tag::f8cafb1a08bc9b2dd5239f99d4e93f4c[]

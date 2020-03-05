@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Charfilters
 {
 	public class MappingCharfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/charfilters/mapping-charfilter.asciidoc:35")]
 		public void Line35()
 		{
 			// tag::f9518803f0368e326ce2f46bd213bde9[]
@@ -55,6 +57,7 @@ namespace Examples.Analysis.Charfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/charfilters/mapping-charfilter.asciidoc:107")]
 		public void Line107()
 		{
 			// tag::8d5c32d86f00cf27d3f52a5fc493ea30[]

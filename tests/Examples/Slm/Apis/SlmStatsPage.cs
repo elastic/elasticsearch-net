@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Slm.Apis
 {
 	public class SlmStatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("slm/apis/slm-stats.asciidoc:27")]
 		public void Line27()
 		{
 			// tag::55e8ddf643726dec51531ada0bec7143[]

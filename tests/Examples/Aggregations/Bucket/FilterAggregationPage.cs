@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class FilterAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/filter-aggregation.asciidoc:9")]
 		public void Line9()
 		{
 			// tag::b93ed4ef309819734f0eeea82e8b0f1f[]

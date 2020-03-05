@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class AutodatehistogramAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/autodatehistogram-aggregation.asciidoc:14")]
 		public void Line14()
 		{
 			// tag::9f9123f67baff22429bca73f7cf48622[]
@@ -26,6 +28,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/autodatehistogram-aggregation.asciidoc:40")]
 		public void Line40()
 		{
 			// tag::941466b290eaa9a2685bbe32c73e887a[]
@@ -47,6 +50,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/autodatehistogram-aggregation.asciidoc:121")]
 		public void Line121()
 		{
 			// tag::06cd928a050b75f2bb207a548ac43d40[]
@@ -88,6 +92,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/autodatehistogram-aggregation.asciidoc:187")]
 		public void Line187()
 		{
 			// tag::e16449c0f4eadb394761e9c2aff50fe6[]
@@ -109,6 +114,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/autodatehistogram-aggregation.asciidoc:273")]
 		public void Line273()
 		{
 			// tag::00abcf63bffec42e5d2c15011e989b37[]
@@ -130,6 +136,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/autodatehistogram-aggregation.asciidoc:296")]
 		public void Line296()
 		{
 			// tag::89fe7b404791770a2075f2870fd65c3e[]

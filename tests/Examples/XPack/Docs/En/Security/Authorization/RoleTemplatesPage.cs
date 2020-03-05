@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Security.Authorization
 {
 	public class RoleTemplatesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/role-templates.asciidoc:16")]
 		public void Line16()
 		{
 			// tag::fa154ca3d40df55e3f40d6636fe805de[]
@@ -31,6 +33,7 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/role-templates.asciidoc:52")]
 		public void Line52()
 		{
 			// tag::91b0ce11b58f1d3d8bdfe11d38b820fa[]

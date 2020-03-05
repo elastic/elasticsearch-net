@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class SpanNearQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/span-near-query.asciidoc:13")]
 		public void Line13()
 		{
 			// tag::35ee06bbcc1291446187f1eeaf7eed90[]

@@ -39,11 +39,17 @@ namespace ExamplesGenerator
 
 				foreach (var methodDeclaration in methodDeclarations)
 				{
-					var uAttribute = methodDeclaration.AttributeLists.Single().Attributes.Single();
+					var uAttribute = methodDeclaration.AttributeLists.Single(a => a.Attributes.Any(aa => aa.Name.ToString() == "U")).Attributes.Single();
 
 					// No Skip property present on [U] attribute
 					if (uAttribute.ArgumentList == null)
 					{
+						var descriptionAttributeSyntax = methodDeclaration.AttributeLists.SingleOrDefault(a => a.Attributes.Any(aa => aa.Name.ToString() == "Description"));
+
+						var referenceFileAndLineNumber = "";
+						if (descriptionAttributeSyntax != null)
+							referenceFileAndLineNumber =  descriptionAttributeSyntax.Attributes.Single().ArgumentList.Arguments.First().ToString().Trim('"');
+
 						// opening tag comment is leading trivia on the first statement
 						var openTagComment = methodDeclaration.Body.Statements.First()
 							.GetLeadingTrivia().Single(SingleLineTriviaMatches(StartTag));
@@ -77,7 +83,7 @@ namespace ExamplesGenerator
 						var startLineNumber = methodDeclaration.SyntaxTree.GetLineSpan(methodDeclaration.Span).StartLinePosition.Line + 1;
 						var endLineNumber = methodDeclaration.SyntaxTree.GetLineSpan(methodDeclaration.Span).EndLinePosition.Line + 1;
 
-						yield return new ImplementedExample(method, startLineNumber, endLineNumber, path, hash, body);
+						yield return new ImplementedExample(referenceFileAndLineNumber, method, startLineNumber, endLineNumber, path, hash, body);
 					}
 				}
 			}

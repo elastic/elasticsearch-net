@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Fields
 {
 	public class TypeFieldPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/fields/type-field.asciidoc:14")]
 		public void Line14()
 		{
 			// tag::cb639c02d28945379ba10dbfb982186f[]
@@ -23,6 +25,7 @@ namespace Examples.Mapping.Fields
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/fields/type-field.asciidoc:25")]
 		public void Line25()
 		{
 			// tag::0d7b0f40446e2001c63bef29f84530eb[]

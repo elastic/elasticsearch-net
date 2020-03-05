@@ -1,12 +1,14 @@
 using System;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class RangeQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/range-query.asciidoc:16")]
 		public void Line16()
 		{
 			// tag::a116949e446f34dc25ae57d4b703d0c1[]
@@ -28,6 +30,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/range-query.asciidoc:157")]
 		public void Line157()
 		{
 			// tag::67ceac4bf2d9ac7cc500390544cdcb41[]
@@ -48,6 +51,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/range-query.asciidoc:219")]
 		public void Line219()
 		{
 			// tag::5c2f486c27bd5346e512265f93375d16[]

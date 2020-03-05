@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Indices
 {
 	public class AnalyzePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("indices/analyze.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::fa42ae3bf6a300420cd0f77ba006458a[]
@@ -20,6 +22,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/analyze.asciidoc:140")]
 		public void Line140()
 		{
 			// tag::76dbdd0b2bd48c3c6b1a8d81e23bafd6[]
@@ -34,6 +37,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/analyze.asciidoc:154")]
 		public void Line154()
 		{
 			// tag::fd9b668eeb1f117950bd4991c7c03fb1[]
@@ -48,6 +52,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/analyze.asciidoc:170")]
 		public void Line170()
 		{
 			// tag::ef33b3b373f7040b874146599db5d557[]
@@ -63,6 +68,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/analyze.asciidoc:180")]
 		public void Line180()
 		{
 			// tag::dc8c94c9bef1f879282caea5c406f36e[]
@@ -79,6 +85,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/analyze.asciidoc:195")]
 		public void Line195()
 		{
 			// tag::22dde5fe7ac5d85d52115641a68b3c55[]
@@ -94,6 +101,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/analyze.asciidoc:210")]
 		public void Line210()
 		{
 			// tag::3951d7fcd7f849fa278daf342872125a[]
@@ -107,6 +115,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/analyze.asciidoc:223")]
 		public void Line223()
 		{
 			// tag::71fa652ddea811eb3c8bf8c5db21e549[]
@@ -121,6 +130,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/analyze.asciidoc:238")]
 		public void Line238()
 		{
 			// tag::de2f59887737de3a27716177b60393a2[]
@@ -135,6 +145,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/analyze.asciidoc:256")]
 		public void Line256()
 		{
 			// tag::49d87c2eb7314ed34221c5fb4f21dfcc[]
@@ -149,6 +160,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/analyze.asciidoc:268")]
 		public void Line268()
 		{
 			// tag::15a34bfe0ef8ef6333c8c7b55c011e5d[]
@@ -163,6 +175,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/analyze.asciidoc:285")]
 		public void Line285()
 		{
 			// tag::89f8eac24f3ec6a7668d580aaf0eeefa[]
@@ -180,6 +193,7 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("indices/analyze.asciidoc:360")]
 		public void Line360()
 		{
 			// tag::0957bbd535f58c97b12ffba90813d64c[]

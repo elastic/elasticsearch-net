@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ml.AnomalyDetection.Apis
 {
 	public class UpdateSnapshotPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ml/anomaly-detection/apis/update-snapshot.asciidoc:52")]
 		public void Line52()
 		{
 			// tag::3b9c54604535d97e8368d47148aecc6f[]

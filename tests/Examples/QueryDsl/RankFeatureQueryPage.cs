@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.QueryDsl
 {
 	public class RankFeatureQueryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/rank-feature-query.asciidoc:57")]
 		public void Line57()
 		{
 			// tag::e2750d69bcb6d4c7e16e704cd0fb3530[]
@@ -32,6 +34,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/rank-feature-query.asciidoc:82")]
 		public void Line82()
 		{
 			// tag::c786505cf972dd41bd0cbb6ebcf939e9[]
@@ -81,6 +84,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/rank-feature-query.asciidoc:128")]
 		public void Line128()
 		{
 			// tag::fd0cd8ecd03468726b59a605eea06d75[]
@@ -123,6 +127,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/rank-feature-query.asciidoc:233")]
 		public void Line233()
 		{
 			// tag::309f0721145b5c656338a02459c3ff1e[]
@@ -143,6 +148,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/rank-feature-query.asciidoc:253")]
 		public void Line253()
 		{
 			// tag::0c05c66cfe3a2169b1ec1aba77e26db2[]
@@ -161,6 +167,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/rank-feature-query.asciidoc:274")]
 		public void Line274()
 		{
 			// tag::e89bf0d893b7bf43c2d9b44db6cfe21b[]
@@ -181,6 +188,7 @@ namespace Examples.QueryDsl
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("query-dsl/rank-feature-query.asciidoc:300")]
 		public void Line300()
 		{
 			// tag::9e3c28d5820c38ea117eb2e9a5061089[]

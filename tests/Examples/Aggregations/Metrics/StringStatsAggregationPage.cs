@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Metrics
 {
 	public class StringStatsAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/string-stats-aggregation.asciidoc:22")]
 		public void Line22()
 		{
 			// tag::5507b01f713674781996a07718785444[]
@@ -21,6 +23,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/string-stats-aggregation.asciidoc:63")]
 		public void Line63()
 		{
 			// tag::a1d02ab1549dbd3f1874f6a2fd48ec48[]
@@ -41,6 +44,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/string-stats-aggregation.asciidoc:130")]
 		public void Line130()
 		{
 			// tag::24b22f8b83e9b199964036a170e4299e[]
@@ -63,6 +67,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/string-stats-aggregation.asciidoc:151")]
 		public void Line151()
 		{
 			// tag::a89a22d4f41ee3538bbfec8ac9e7ac74[]
@@ -87,6 +92,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/string-stats-aggregation.asciidoc:175")]
 		public void Line175()
 		{
 			// tag::46078bde3789b5e7e83ab458857bc9c9[]
@@ -113,6 +119,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/string-stats-aggregation.asciidoc:202")]
 		public void Line202()
 		{
 			// tag::437f4009a93d46b6b76e7db366b34ce6[]

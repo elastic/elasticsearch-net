@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.IndexModules
 {
 	public class SlowlogPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/slowlog.asciidoc:33")]
 		public void Line33()
 		{
 			// tag::fa0b341d790a4da480b47bf501835359[]
@@ -27,6 +29,7 @@ namespace Examples.IndexModules
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("index-modules/slowlog.asciidoc:143")]
 		public void Line143()
 		{
 			// tag::44a16db65121edaf099d944819356e2c[]

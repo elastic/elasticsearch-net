@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class CompositeAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:117")]
 		public void Line117()
 		{
 			// tag::b0d7068cff901f2b91f8387628e3c2c0[]
@@ -28,6 +30,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:136")]
 		public void Line136()
 		{
 			// tag::47f1e01d131fd50304dd35f1c459d222[]
@@ -59,6 +62,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:172")]
 		public void Line172()
 		{
 			// tag::426eb07a1fc499df8ea30d8593a0d989[]
@@ -81,6 +85,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:191")]
 		public void Line191()
 		{
 			// tag::d4c5e4123e53daa39775def537365376[]
@@ -113,6 +118,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:224")]
 		public void Line224()
 		{
 			// tag::4997db4f41283835e5a6250c454bec92[]
@@ -135,6 +141,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:254")]
 		public void Line254()
 		{
 			// tag::1c42bc684745178a587494809ab6ae57[]
@@ -165,6 +172,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:295")]
 		public void Line295()
 		{
 			// tag::038bef10c90916a9addab866fc73dcca[]
@@ -209,6 +217,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:363")]
 		public void Line363()
 		{
 			// tag::7df600a962ddb9e75462cab1017ab710[]
@@ -232,6 +241,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:386")]
 		public void Line386()
 		{
 			// tag::1559d896ef715c8997e773e8f26ded49[]
@@ -256,6 +266,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:416")]
 		public void Line416()
 		{
 			// tag::1111d70f0ae3044b0a86c82b2ded5f74[]
@@ -279,6 +290,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:443")]
 		public void Line443()
 		{
 			// tag::441e1052c59a3d9182fd608c08e11169[]
@@ -301,6 +313,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:483")]
 		public void Line483()
 		{
 			// tag::a84493b3b31741c9e1f998b59b40db82[]
@@ -325,6 +338,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:541")]
 		public void Line541()
 		{
 			// tag::eac8d98e2bd0eb75e8428212e9f4e4a7[]
@@ -350,6 +364,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:573")]
 		public void Line573()
 		{
 			// tag::1d1186dc28cb5b11c19a8341ec1c0558[]
@@ -379,6 +394,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:602")]
 		public void Line602()
 		{
 			// tag::ca3c86d8bb26a8a9422b4b628de03dc4[]
@@ -401,6 +417,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:621")]
 		public void Line621()
 		{
 			// tag::c98edce2074791ebad716b9a5b03215f[]
@@ -424,6 +441,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:646")]
 		public void Line646()
 		{
 			// tag::b2d0d2f519a37b93b93889be7979ee5d[]
@@ -448,6 +466,7 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:685")]
 		public void Line685()
 		{
 			// tag::4a37d7d228d9cba63ebe7b9870dce531[]

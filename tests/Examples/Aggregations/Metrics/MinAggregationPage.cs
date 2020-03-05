@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Metrics
 {
 	public class MinAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/min-aggregation.asciidoc:16")]
 		public void Line16()
 		{
 			// tag::bbd52c02b078e650f1a871f7fe7ff343[]
@@ -21,6 +23,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/min-aggregation.asciidoc:52")]
 		public void Line52()
 		{
 			// tag::27cf2556b606f91d1fe3db3d7b6fd21a[]
@@ -42,6 +45,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/min-aggregation.asciidoc:72")]
 		public void Line72()
 		{
 			// tag::f76eb7821cb7855339ffcaab3460d934[]
@@ -66,6 +70,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/min-aggregation.asciidoc:99")]
 		public void Line99()
 		{
 			// tag::57ec3af2f4b3ce90722de51efc9d2cf1[]
@@ -91,6 +96,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/min-aggregation.asciidoc:126")]
 		public void Line126()
 		{
 			// tag::05161bf816a98dd2a57b8cd2a3d39db4[]

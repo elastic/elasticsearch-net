@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Security.Authentication
 {
 	public class ConfiguringActiveDirectoryRealmPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authentication/configuring-active-directory-realm.asciidoc:178")]
 		public void Line178()
 		{
 			// tag::21e95d29bc37deb5689a654aa323b4ba[]
@@ -23,6 +25,7 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authentication/configuring-active-directory-realm.asciidoc:192")]
 		public void Line192()
 		{
 			// tag::bd0d30a7683037e1ebadd163514765d4[]

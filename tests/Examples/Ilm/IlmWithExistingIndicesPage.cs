@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ilm
 {
 	public class IlmWithExistingIndicesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:23")]
 		public void Line23()
 		{
 			// tag::4e2027438393cf93b9c9402b8511eab5[]
@@ -35,6 +37,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:49")]
 		public void Line49()
 		{
 			// tag::8502a9281f5393a7160e4e46988da672[]
@@ -49,6 +52,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:59")]
 		public void Line59()
 		{
 			// tag::7d51f0436e87dec4274133856866b07d[]
@@ -63,6 +67,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:128")]
 		public void Line128()
 		{
 			// tag::75097f73665235b20df09739c820ad35[]
@@ -106,6 +111,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:171")]
 		public void Line171()
 		{
 			// tag::3feab5c602192b8dc58435654b17d3fe[]
@@ -142,6 +148,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:213")]
 		public void Line213()
 		{
 			// tag::ec195297eb804cba1cb19c9926773059[]
@@ -159,6 +166,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:255")]
 		public void Line255()
 		{
 			// tag::8d39a0f0116702e981545d13371cd0eb[]
@@ -183,6 +191,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:278")]
 		public void Line278()
 		{
 			// tag::bce0d86353e212cee466ccbc90bdc6e7[]
@@ -218,6 +227,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:317")]
 		public void Line317()
 		{
 			// tag::89115f8d40d9a13b0b01dc7c33ffd1cc[]
@@ -235,6 +245,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:356")]
 		public void Line356()
 		{
 			// tag::5df1ed33b5fcf3b9d85c20d100780d43[]
@@ -250,6 +261,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:387")]
 		public void Line387()
 		{
 			// tag::41f211cc838f1bee7eac264784f905e2[]
@@ -270,6 +282,7 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ilm/ilm-with-existing-indices.asciidoc:417")]
 		public void Line417()
 		{
 			// tag::227e19aecb349f31e74898384322ae01[]

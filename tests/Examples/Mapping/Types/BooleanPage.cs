@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class BooleanPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/boolean.asciidoc:22")]
 		public void Line22()
 		{
 			// tag::1c1be1df747c9f8ecc9f82e980387d8f[]
@@ -43,6 +45,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/boolean.asciidoc:58")]
 		public void Line58()
 		{
 			// tag::636ec3c018ac15ec11caf6f3d835a08c[]

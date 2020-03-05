@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Types
 {
 	public class GeoShapePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:212")]
 		public void Line212()
 		{
 			// tag::3fef996cf6795e881918ffedc273c642[]
@@ -25,6 +27,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:304")]
 		public void Line304()
 		{
 			// tag::f851d1be5d5e5fe5455ba81344d01133[]
@@ -41,6 +44,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:317")]
 		public void Line317()
 		{
 			// tag::d673a2c008015ac6f754661ae336131c[]
@@ -54,6 +58,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:334")]
 		public void Line334()
 		{
 			// tag::21a9348800406e09b8bdaab192245096[]
@@ -70,6 +75,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:347")]
 		public void Line347()
 		{
 			// tag::48625e23b05d33977451cde7b98b634a[]
@@ -83,6 +89,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:366")]
 		public void Line366()
 		{
 			// tag::1d6ee162260a21f6e4597eadbea88650[]
@@ -101,6 +108,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:381")]
 		public void Line381()
 		{
 			// tag::18c34a2c5820e330a125dfddf2624c69[]
@@ -114,6 +122,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:393")]
 		public void Line393()
 		{
 			// tag::f83e3ea198f6e87046aab2c5dea60d61[]
@@ -133,6 +142,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:409")]
 		public void Line409()
 		{
 			// tag::00eb71b03b73e605da6368041a64a8ad[]
@@ -146,6 +156,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:436")]
 		public void Line436()
 		{
 			// tag::4c42c8835876a2271e7ba63d6bd3149f[]
@@ -165,6 +176,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:455")]
 		public void Line455()
 		{
 			// tag::60294ea29c96c432047d4fffcb3cc8b4[]
@@ -184,6 +196,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:475")]
 		public void Line475()
 		{
 			// tag::2eca42af76c6ddc657fca3948f3865bd[]
@@ -202,6 +215,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:490")]
 		public void Line490()
 		{
 			// tag::f1e1f4f37194a899e7056d0782804790[]
@@ -215,6 +229,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:504")]
 		public void Line504()
 		{
 			// tag::c4ba19b62e87ed837dc6f1f9fe184244[]
@@ -235,6 +250,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:521")]
 		public void Line521()
 		{
 			// tag::117096e1830e7acedf38bd6a92a9c8b4[]
@@ -248,6 +264,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:535")]
 		public void Line535()
 		{
 			// tag::4be91bb5ac3a1b83b767a060c58e0b12[]
@@ -268,6 +285,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:552")]
 		public void Line552()
 		{
 			// tag::9290410340f0e66e67fa96aacc83bbdc[]
@@ -281,6 +299,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:566")]
 		public void Line566()
 		{
 			// tag::a99750fb5d296fa8df97ee71a34c698c[]
@@ -306,6 +325,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:588")]
 		public void Line588()
 		{
 			// tag::71bb89f56d847b636a050c553c0cd0a7[]
@@ -319,6 +339,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:604")]
 		public void Line604()
 		{
 			// tag::f893fffd649507119d0a9afd98a0cf87[]
@@ -335,6 +356,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:619")]
 		public void Line619()
 		{
 			// tag::65208190e9640cb4ca67271f1694814d[]
@@ -348,6 +370,7 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/types/geo-shape.asciidoc:636")]
 		public void Line636()
 		{
 			// tag::76039c2fd422a6bb6340848cc0a78bbd[]

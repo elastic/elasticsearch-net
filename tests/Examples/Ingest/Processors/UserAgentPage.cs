@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ingest.Processors
 {
 	public class UserAgentPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/processors/user-agent.asciidoc:27")]
 		public void Line27()
 		{
 			// tag::9c504b5c486d9df689a22b11412e61a3[]

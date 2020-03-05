@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.HowTo.Recipes
 {
 	public class ScoringPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("how-to/recipes/scoring.asciidoc:123")]
 		public void Line123()
 		{
 			// tag::a0f15dd7fcb07bc8543fe04c2907d4b9[]
@@ -28,6 +30,7 @@ namespace Examples.HowTo.Recipes
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("how-to/recipes/scoring.asciidoc:168")]
 		public void Line168()
 		{
 			// tag::0dfa66a019712e413652c5eddd057ba8[]

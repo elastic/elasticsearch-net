@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.XPack.Docs.En.Security.Authorization
 {
 	public class MappingRolesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/mapping-roles.asciidoc:119")]
 		public void Line119()
 		{
 			// tag::f2359acfb6eaa919125463cc1d3a7cd1[]
@@ -21,6 +23,7 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/mapping-roles.asciidoc:129")]
 		public void Line129()
 		{
 			// tag::3ea33023474e77d73ac0540e3a02b0b2[]
@@ -39,6 +42,7 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/mapping-roles.asciidoc:161")]
 		public void Line161()
 		{
 			// tag::81ee2ad368208c4c78098292547b0577[]
@@ -54,6 +58,7 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/mapping-roles.asciidoc:171")]
 		public void Line171()
 		{
 			// tag::87846c3ddacab1da4af626ae8099e4be[]

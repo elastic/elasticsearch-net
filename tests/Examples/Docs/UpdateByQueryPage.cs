@@ -4,12 +4,14 @@ using Elasticsearch.Net;
 using Examples.Models;
 using Nest;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Examples.Docs
 {
 	public class UpdateByQueryPage : ExampleBase
 	{
 		[U]
+		[Description("docs/update-by-query.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::a4a396cd07657b3977713fb3a742c41b[]
@@ -23,6 +25,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:300")]
 		public void Line300()
 		{
 			// tag::52a87b81e4e0b6b11e23e85db1602a63[]
@@ -54,6 +57,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:319")]
 		public void Line319()
 		{
 			// tag::cde4dddae5c06e7f1d38c9d933dbc7ac[]
@@ -66,6 +70,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:327")]
 		public void Line327()
 		{
 			// tag::d8b115341da772a628a024e7d1644e73[]
@@ -79,6 +84,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:336")]
 		public void Line336()
 		{
 			// tag::54a770f053f3225ea0d1e34334232411[]
@@ -92,6 +98,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:348")]
 		public void Line348()
 		{
 			// tag::2fd69fb0538e4f36ac69a8b8f8bf5ae8[]
@@ -130,6 +137,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:389")]
 		public void Line389()
 		{
 			// tag::c4b278ba293abd0d02a0b5ad1a99f84a[]
@@ -164,6 +172,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:413")]
 		public void Line413()
 		{
 			// tag::7df191cc7f814e410a4ac7261065e6ef[]
@@ -177,6 +186,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:471")]
 		public void Line471()
 		{
 			// tag::be3a6431d01846950dc1a39a7a6a1faa[]
@@ -187,6 +197,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:491")]
 		public void Line491()
 		{
 			// tag::18ddb7e7a4bcafd449df956e828ed7a8[]
@@ -199,6 +210,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:510")]
 		public void Line510()
 		{
 			// tag::bdb30dd52d32f50994008f4f9c0da5f0[]
@@ -212,6 +224,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:530")]
 		public void Line530()
 		{
 			// tag::0d664883151008b1051ef2c9ab2d0373[]
@@ -262,6 +275,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:557")]
 		public void Line557()
 		{
 			// tag::4acf902c2598b2558f34f20c1744c433[]
@@ -289,6 +303,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:586")]
 		public void Line586()
 		{
 			// tag::ea02de2dbe05091fcb0dac72c8ba5f83[]
@@ -311,6 +326,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:599")]
 		public void Line599()
 		{
 			// tag::025b54db0edc50c24ea48a2bd94366ad[]
@@ -330,6 +346,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:655")]
 		public void Line655()
 		{
 			// tag::2fe28d9a91b3081a9ec4601af8fb7b1c[]
@@ -399,6 +416,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:693")]
 		public void Line693()
 		{
 			// tag::abd4fc3ce7784413a56fe2dcfe2809b5[]
@@ -432,6 +450,7 @@ namespace Examples.Docs
 		}
 
 		[U]
+		[Description("docs/update-by-query.asciidoc:720")]
 		public void Line720()
 		{
 			// tag::97babc8d19ef0866774576716eb6d19e[]

@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Analysis.Tokenfilters
 {
 	public class CjkBigramTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/cjk-bigram-tokenfilter.asciidoc:22")]
 		public void Line22()
 		{
 			// tag::b8c03bbd917d0cf5474a3e46ebdd7aad[]
@@ -21,6 +23,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/cjk-bigram-tokenfilter.asciidoc:126")]
 		public void Line126()
 		{
 			// tag::7230edf3a8cdb5e4091fad668b4049dc[]
@@ -43,6 +46,7 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/cjk-bigram-tokenfilter.asciidoc:176")]
 		public void Line176()
 		{
 			// tag::6b328ac5a63ac7f26b011a6905083934[]

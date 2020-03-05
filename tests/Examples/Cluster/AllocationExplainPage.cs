@@ -1,5 +1,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Cluster
 {
@@ -7,6 +8,7 @@ namespace Examples.Cluster
 	{
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/allocation-explain.asciidoc:77")]
 		public void Line77()
 		{
 			// tag::2663038cfc46b106edaef607d553c99c[]
@@ -22,6 +24,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/allocation-explain.asciidoc:90")]
 		public void Line90()
 		{
 			// tag::75fb2de2b47c564833ab14049c295384[]
@@ -38,6 +41,7 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cluster/allocation-explain.asciidoc:114")]
 		public void Line114()
 		{
 			// tag::9db57741b46cc9f088cebd6a34ba147d[]

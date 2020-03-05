@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Ingest
 {
 	public class IngestNodePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:171")]
 		public void Line171()
 		{
 			// tag::841306ff1ac69cceb5bf1c28e2f26dd3[]
@@ -25,6 +27,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:187")]
 		public void Line187()
 		{
 			// tag::027ee5302d967b530123886906c42a90[]
@@ -38,6 +41,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:227")]
 		public void Line227()
 		{
 			// tag::9a5f1f590791012d32d29605daf82135[]
@@ -57,6 +61,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:243")]
 		public void Line243()
 		{
 			// tag::f8a8b78caaf69d44c71c476ea2a178aa[]
@@ -72,6 +77,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:258")]
 		public void Line258()
 		{
 			// tag::3eb75cee4c802d99bb526386349ee36b[]
@@ -85,6 +91,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:318")]
 		public void Line318()
 		{
 			// tag::089ca88d7fd064a474e156d773211bc5[]
@@ -109,6 +116,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:339")]
 		public void Line339()
 		{
 			// tag::8f6cec77f890027ad2e01f06e1290e25[]
@@ -122,6 +130,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:386")]
 		public void Line386()
 		{
 			// tag::3b54be0a1a020edb8943f063f05b5cd7[]
@@ -141,6 +150,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:431")]
 		public void Line431()
 		{
 			// tag::da19607976c3740945300c18e692bc49[]
@@ -154,6 +164,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:446")]
 		public void Line446()
 		{
 			// tag::784dcf96b4970ce6c90d999cdfc2ef0b[]
@@ -167,6 +178,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:498")]
 		public void Line498()
 		{
 			// tag::7cc6435cb7508e532df1e761934f1683[]
@@ -201,6 +213,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:545")]
 		public void Line545()
 		{
 			// tag::fe2d94eba550076cc27ee21a711fdb5c[]
@@ -222,6 +235,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:561")]
 		public void Line561()
 		{
 			// tag::bfc92c930234ada7a3f394263b0deb1e[]
@@ -237,6 +251,7 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:609")]
 		public void Line609()
 		{
 			// tag::2ad6189aef1ecbb52bf0ddbd4e7a80cb[]

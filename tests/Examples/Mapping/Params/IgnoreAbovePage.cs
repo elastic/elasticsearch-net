@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Mapping.Params
 {
 	public class IgnoreAbovePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("mapping/params/ignore-above.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::17a77b9c39526c865d7bd6b72cf4a79f[]

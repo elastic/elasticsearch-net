@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Cat
 {
 	public class ShardsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("cat/shards.asciidoc:286")]
 		public void Line286()
 		{
 			// tag::7e126e2751311db60cfcbb22c9c41caa[]
@@ -16,6 +18,7 @@ namespace Examples.Cat
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cat/shards.asciidoc:312")]
 		public void Line312()
 		{
 			// tag::e42e92050dd1c20262ce9e38f4b42ba0[]
@@ -26,6 +29,7 @@ namespace Examples.Cat
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("cat/shards.asciidoc:377")]
 		public void Line377()
 		{
 			// tag::25c0e66a433a0cd596e0641b752ff6d7[]

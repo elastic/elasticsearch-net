@@ -1,11 +1,13 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using System.ComponentModel;
 
 namespace Examples.Aggregations.Metrics
 {
 	public class ScriptedMetricAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/scripted-metric-aggregation.asciidoc:9")]
 		public void Line9()
 		{
 			// tag::20600097aa51aa3386536bdc681e92b6[]
@@ -31,6 +33,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/scripted-metric-aggregation.asciidoc:53")]
 		public void Line53()
 		{
 			// tag::129ce418d8dd1f71087678725a0df19f[]
@@ -64,6 +67,7 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/scripted-metric-aggregation.asciidoc:147")]
 		public void Line147()
 		{
 			// tag::75e360d03fb416f0a65ca37c662c2e9c[]
