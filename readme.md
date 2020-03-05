@@ -33,7 +33,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasti
     <tr>
     	<td><code>5.x</code></td>
     	<td><code>5.x</code></td>
-    	<td>:white_check_mark:</td>
+    	<td>:x:</td>
       <td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/5.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=5.x&svg=true"></a></td>
     	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/5.x/tests"><img alt="5.x unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/5.x.svg?style=flat-square"></a></td>
     </tr>
@@ -60,7 +60,9 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasti
     </tr>
 </table>
 
-### Further Compatibility Clarifications
+Please refer to the [end-of-life policy](https://www.elastic.co/support/eol) for complete information.
+
+## Further Compatibility Clarifications
 
 #### Can I use a `7.0.0` client against a `5.6` server (new against old), or a `6.0` client against a `7.2` server (old against new)?
 
@@ -85,6 +87,16 @@ Any incompatibilities between minor versions are documented against the release.
 #### I have a `6.0` server, what client should I use?
 
 Always use the latest minor version of the client within that major version, so in this instance, at time of writing, this is version `6.8.0`. The reason being is that `6.8.0` will contain many bug fixes not present in the `6.0.0` version of the client.
+
+### Low Level Client Compatibility
+
+The Elasticsearch.Net low level client will expose functionality in REST APIs that are marked as either `experimental` or `beta`. This functionality is marked as such using the `<remarks/>` XML documentation comments, which contains the stability and a description of the compatibility guarantees. Examples below:
+
+> /// <remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+
+> /// <remarks>Note: Beta within the Elasticsearch server, this functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+
+If you use this `experimental` or `beta` functionality, by taking a dependency on it within your code, you are exposing yourself to the potential for binary breaking changes within that major version.
 
 #### Branch Compatibility
 
