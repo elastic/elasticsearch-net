@@ -13,6 +13,9 @@ namespace ExamplesGenerator
 	{
 		private static readonly Regex NameRegex =
 			new Regex(@"(?<name>.*?)\.a(?:scii)?doc$");
+		
+		private static readonly Regex ReferencePageNameRegex =
+			new Regex(@"^(?<prefix>Line\d+_)(?<increment>\d+)$");
 
 		public static List<ReferencePage> ParsePages(string path)
 		{
@@ -57,7 +60,21 @@ namespace ExamplesGenerator
 						pages.Add(name, page);
 					}
 
-					var example = new ReferenceExample(file, hash, lineNumber, content);
+					var methodName = $"Line{lineNumber}";
+
+					while (page.Examples.Any(e => e.Name == methodName))
+					{
+						match = ReferencePageNameRegex.Match(methodName);
+						if (match.Success)
+						{
+							var increment = int.Parse(match.Groups["increment"].Value);
+							methodName = match.Groups["prefix"].Value + (increment + 1);
+						}
+						else
+							methodName += "_2";
+					}
+					
+					var example = new ReferenceExample(file, hash, lineNumber, methodName, content);
 					example.Languages.AddRange(languages);
 
 					if (!page.Examples.Contains(example))

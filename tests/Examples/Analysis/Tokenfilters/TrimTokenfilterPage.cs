@@ -8,7 +8,7 @@ namespace Examples.Analysis.Tokenfilters
 	{
 		[U(Skip = "Example not implemented")]
 		[Description("analysis/tokenfilters/trim-tokenfilter.asciidoc:32")]
-		public void Line32()
+		public void Line34()
 		{
 			// tag::c318fde926842722825a51e5c9c326a9[]
 			var response0 = new SearchResponse<object>();
@@ -23,7 +23,7 @@ namespace Examples.Analysis.Tokenfilters
 
 		[U(Skip = "Example not implemented")]
 		[Description("analysis/tokenfilters/trim-tokenfilter.asciidoc:62")]
-		public void Line62()
+		public void Line65()
 		{
 			// tag::a3a14f7f0e80725f695a901a7e1d579d[]
 			var response0 = new SearchResponse<object>();
@@ -39,7 +39,7 @@ namespace Examples.Analysis.Tokenfilters
 
 		[U(Skip = "Example not implemented")]
 		[Description("analysis/tokenfilters/trim-tokenfilter.asciidoc:96")]
-		public void Line96()
+		public void Line99()
 		{
 			// tag::fd26bfdbe95b2d2db374385d12849f77[]
 			var response0 = new SearchResponse<object>();
