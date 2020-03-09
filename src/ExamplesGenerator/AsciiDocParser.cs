@@ -14,6 +14,9 @@ namespace ExamplesGenerator
 		private static readonly Regex NameRegex =
 			new Regex(@"(?<name>.*?)\.a(?:scii)?doc$");
 
+		private static readonly Regex ReferencePageNameRegex =
+			new Regex(@"^(?<prefix>Line\d+_)(?<increment>\d+)$");
+
 		public static List<ReferencePage> ParsePages(string path)
 		{
 			var pages = new Dictionary<string, ReferencePage>();
@@ -57,7 +60,29 @@ namespace ExamplesGenerator
 						pages.Add(name, page);
 					}
 
-					var example = new ReferenceExample(file, hash, lineNumber, content);
+					var methodName = $"Line{lineNumber}";
+					var foundDuplicate = false;
+
+					// do we have duplicate line numbers with different examples?
+					while (page.Examples.Any(e => e.Name == methodName && e.Hash != hash))
+					{
+						if (!foundDuplicate)
+						{
+							foundDuplicate = true;
+							Console.WriteLine($"Found duplicate line {lineNumber} in {name}");
+						}
+
+						match = ReferencePageNameRegex.Match(methodName);
+						if (match.Success)
+						{
+							var increment = int.Parse(match.Groups["increment"].Value);
+							methodName = match.Groups["prefix"].Value + (increment + 1);
+						}
+						else
+							methodName += "_2";
+					}
+
+					var example = new ReferenceExample(file, hash, lineNumber, methodName, content);
 					example.Languages.AddRange(languages);
 
 					if (!page.Examples.Contains(example))

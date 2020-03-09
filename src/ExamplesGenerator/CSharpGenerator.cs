@@ -92,8 +92,13 @@ namespace ExamplesGenerator
 				}
 				else
 				{
-					if (!methodDeclaration.AttributeLists.Any(a => a.ToString().Contains("Description")))
+					// add or update the Description attribute
+					var descriptionAttribute = methodDeclaration.AttributeLists.SingleOrDefault(a => a.ToString().Contains("Description"));
+					if (descriptionAttribute == null)
 						methodDeclaration = methodDeclaration.AddAttributeLists(AttributeList(GetReferencePageAttribute(example)));
+					else
+						methodDeclaration = methodDeclaration
+							.ReplaceNode(descriptionAttribute, AttributeList(GetReferencePageAttribute(example)));
 
 					// ensure that the method name is the same i.e. same line number
 					if (methodDeclaration.Identifier.Text != example.Name)

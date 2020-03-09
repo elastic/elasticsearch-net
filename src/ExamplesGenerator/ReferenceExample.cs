@@ -20,14 +20,14 @@ namespace ExamplesGenerator
 	/// </summary>
 	public class ReferenceExample
 	{
-		public ReferenceExample(string file, string hash, int lineNumber, string content)
+		public ReferenceExample(string file, string hash, int lineNumber, string name, string content)
 		{
 			File = file;
 			Hash = hash ?? throw new ArgumentNullException(nameof(hash));
 			LineNumber = lineNumber;
 			Content = content ?? throw new ArgumentNullException(nameof(content));
 
-			Name = $"Line{LineNumber}";
+			Name = name;
 			StartTag = $"// tag::{Hash}[]";
 			EndTag = $"// end::{Hash}[]";
 		}
