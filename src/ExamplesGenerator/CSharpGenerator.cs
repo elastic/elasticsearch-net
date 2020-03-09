@@ -102,9 +102,7 @@ namespace ExamplesGenerator
 
 					// ensure that the method name is the same i.e. same line number
 					if (methodDeclaration.Identifier.Text != example.Name)
-					{
 						newClassDeclaration = newClassDeclaration.AddMembers(methodDeclaration.WithIdentifier(Identifier(example.Name)));
-					}
 					else
 						newClassDeclaration = newClassDeclaration.AddMembers(methodDeclaration);
 				}

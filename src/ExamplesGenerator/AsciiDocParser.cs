@@ -13,7 +13,7 @@ namespace ExamplesGenerator
 	{
 		private static readonly Regex NameRegex =
 			new Regex(@"(?<name>.*?)\.a(?:scii)?doc$");
-		
+
 		private static readonly Regex ReferencePageNameRegex =
 			new Regex(@"^(?<prefix>Line\d+_)(?<increment>\d+)$");
 
@@ -61,9 +61,17 @@ namespace ExamplesGenerator
 					}
 
 					var methodName = $"Line{lineNumber}";
+					var foundDuplicate = false;
 
-					while (page.Examples.Any(e => e.Name == methodName))
+					// do we have duplicate line numbers with different examples?
+					while (page.Examples.Any(e => e.Name == methodName && e.Hash != hash))
 					{
+						if (!foundDuplicate)
+						{
+							foundDuplicate = true;
+							Console.WriteLine($"Found duplicate line {lineNumber} in {name}");
+						}
+
 						match = ReferencePageNameRegex.Match(methodName);
 						if (match.Success)
 						{
@@ -73,7 +81,7 @@ namespace ExamplesGenerator
 						else
 							methodName += "_2";
 					}
-					
+
 					var example = new ReferenceExample(file, hash, lineNumber, methodName, content);
 					example.Languages.AddRange(languages);
 
