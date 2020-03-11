@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.5
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.6
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -79,9 +79,13 @@ audit = await audit.TraceCalls(
 );
 ----
 <1> When the call fails on 9201, the following sniff succeeds and returns a new cluster state of healthy nodes. This cluster only has 3 nodes and the known masters are 9200 and 9202. A search on 9201 is setup to still fail once
+
 <2> After this second failure on 9201, another sniff will happen which returns a cluster state that no longer fails but looks completely different; It's now three nodes on ports 9210 - 9212, with 9210 and 9212 being master eligible.
+
 <3> We assert we do a sniff on our first known master node 9202 after the failed call on 9201
+
 <4> Our pool should now have three nodes
+
 <5> We assert we do a sniff on the first master node in our updated cluster
 
 ==== Sniffing after ping failure
@@ -147,8 +151,11 @@ audit = await audit.TraceCalls(
 );
 ----
 <1> We assert we do a sniff on our first known master node 9202
+
 <2> Our pool should now have three nodes
+
 <3> We assert we do a sniff on the first master node in our updated cluster
+
 <4> 9210 was already pinged after the sniff returned the new nodes
 
 ==== Client uses publish address
