@@ -86,6 +86,7 @@ namespace Tests.QueryDsl.Specialized.DistanceFeature
 
 		protected override QueryContainer QueryInitializer => new DistanceFeatureQuery()
 		{
+			Name = "name",
 			Boost = 1.1,
 			Field = Infer.Field<Project>(f => f.LeadDeveloper.Location),
 			Origin = new GeoCoordinate(70, -70),
@@ -97,6 +98,7 @@ namespace Tests.QueryDsl.Specialized.DistanceFeature
 			{
 				distance_feature = new
 				{
+					_name = "name",
 					boost = 1.1,
 					field = "leadDeveloper.location",
 					origin = new [] { -70.0, 70.0 },
@@ -106,6 +108,7 @@ namespace Tests.QueryDsl.Specialized.DistanceFeature
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.DistanceFeature(rf => rf
+				.Name("name")
 				.Boost(1.1)
 				.Field(f => f.LeadDeveloper.Location)
 				.Origin(new GeoCoordinate(70, -70))
