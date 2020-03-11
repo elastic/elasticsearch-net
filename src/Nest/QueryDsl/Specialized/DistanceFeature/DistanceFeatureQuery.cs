@@ -90,6 +90,20 @@ namespace Nest
 
 			writer.WriteBeginObject();
 
+			if (!string.IsNullOrEmpty(value.Name))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteString(value.Name);
+				writer.WriteValueSeparator();
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteDouble(value.Boost.Value);
+				writer.WriteValueSeparator();
+			}
+
 			writer.WritePropertyName("field");
 			var fieldFormatter = formatterResolver.GetFormatter<Field>();
 			fieldFormatter.Serialize(ref writer, value.Field, formatterResolver);
@@ -101,13 +115,6 @@ namespace Nest
 
 			writer.WritePropertyName("pivot");
 			PivotUnionFormatter.Serialize(ref writer, value.Pivot, formatterResolver);
-			writer.WriteValueSeparator();
-
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteDouble(value.Boost.Value);
-			}
 
 			writer.WriteEndObject();
 		}
@@ -117,7 +124,8 @@ namespace Nest
 			{ "field", 0 },
 			{ "origin", 1 },
 			{ "pivot", 2 },
-			{ "boost", 3 }
+			{ "boost", 3 },
+			{ "_name", 4 }
 		};
 
 		public IDistanceFeatureQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -144,6 +152,9 @@ namespace Nest
 							break;
 						case 3:
 							query.Boost = reader.ReadDouble();
+							break;
+						case 4:
+							query.Name = reader.ReadString();
 							break;
 					}
 				}
