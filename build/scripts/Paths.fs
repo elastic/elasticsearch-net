@@ -6,7 +6,7 @@ module Paths =
 
     let OwnerName = "elastic"
     let RepositoryName = "elasticsearch-net"
-    let Repository = sprintf "https://github.com/%s/%s" OwnerName RepositoryName
+    let Repository = sprintf "https://github.com/%s/%s/" OwnerName RepositoryName
 
     let BuildFolder = "build"
     let TargetsFolder = "build/scripts"
