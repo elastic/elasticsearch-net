@@ -173,6 +173,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => true;
 	}
 
+	///<summary>Request options for EstimateModelMemory</summary>
+	public class EstimateModelMemoryRequestParameters : RequestParameters<EstimateModelMemoryRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+	}
+
 	///<summary>Request options for EvaluateDataFrame <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html</para></summary>
 	public class EvaluateDataFrameRequestParameters : RequestParameters<EvaluateDataFrameRequestParameters>
 	{
@@ -677,6 +684,33 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		public override bool SupportsBody => true;
+		///<summary>Ignore if the source indices expressions resolves to no concrete indices (default: true)</summary>
+		public bool? AllowNoIndices
+		{
+			get => Q<bool? >("allow_no_indices");
+			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Whether source index expressions should get expanded to open or closed indices (default: open)</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Ignore indices that are marked as throttled (default: true)</summary>
+		public bool? IgnoreThrottled
+		{
+			get => Q<bool? >("ignore_throttled");
+			set => Q("ignore_throttled", value);
+		}
+
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
 	}
 
 	///<summary>Request options for PutFilter</summary>
@@ -795,6 +829,33 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
+		///<summary>Ignore if the source indices expressions resolves to no concrete indices (default: true)</summary>
+		public bool? AllowNoIndices
+		{
+			get => Q<bool? >("allow_no_indices");
+			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Whether source index expressions should get expanded to open or closed indices (default: open)</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Ignore indices that are marked as throttled (default: true)</summary>
+		public bool? IgnoreThrottled
+		{
+			get => Q<bool? >("ignore_throttled");
+			set => Q("ignore_throttled", value);
+		}
+
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
 	}
 
 	///<summary>Request options for UpdateFilter</summary>

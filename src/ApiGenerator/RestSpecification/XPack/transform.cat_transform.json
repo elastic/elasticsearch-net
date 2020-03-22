@@ -1,53 +1,46 @@
 {
-  "cat.ml_data_frame_analytics":{
+  "transform.cat_transform":{
     "documentation":{
-      "url":"http://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html"
+      "url":"https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html"
     },
     "stability":"stable",
     "url":{
       "paths":[
         {
-          "path":"/_cat/ml/data_frame/analytics",
+          "path":"/_cat/transforms",
           "methods":[
             "GET"
           ]
         },
         {
-          "path":"/_cat/ml/data_frame/analytics/{id}",
+          "path":"/_cat/transforms/{transform_id}",
           "methods":[
             "GET"
           ],
           "parts":{
-            "id":{
+            "transform_id":{
               "type":"string",
-              "description":"The ID of the data frame analytics to fetch"
+              "description":"The id of the transform for which to get stats. '_all' or '*' implies all transforms"
             }
           }
         }
       ]
     },
     "params":{
+      "from":{
+        "type":"int",
+        "required":false,
+        "description":"skips a number of transform configs, defaults to 0"
+      },
+      "size":{
+        "type":"int",
+        "required":false,
+        "description":"specifies a max number of transforms to get, defaults to 100"
+      },
       "allow_no_match":{
         "type":"boolean",
         "required":false,
-        "description":"Whether to ignore if a wildcard expression matches no configs. (This includes `_all` string or when no configs have been specified)"
-      },
-      "bytes":{
-        "type":"enum",
-        "description":"The unit in which to display byte values",
-        "options":[
-          "b",
-          "k",
-          "kb",
-          "m",
-          "mb",
-          "g",
-          "gb",
-          "t",
-          "tb",
-          "p",
-          "pb"
-        ]
+        "description":"Whether to ignore if a wildcard expression matches no transforms. (This includes `_all` string or when no transforms have been specified)"
       },
       "format":{
         "type":"string",

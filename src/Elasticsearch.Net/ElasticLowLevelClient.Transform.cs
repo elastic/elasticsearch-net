@@ -43,6 +43,26 @@ namespace Elasticsearch.Net.Specification.TransformApi
 		{
 		}
 
+		///<summary>GET on /_cat/transforms <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse Cat<TResponse>(CatTransformRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_cat/transforms", null, RequestParams(requestParameters));
+		///<summary>GET on /_cat/transforms <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("transform.cat_transform", "")]
+		public Task<TResponse> CatAsync<TResponse>(CatTransformRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_cat/transforms", ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_cat/transforms/{transform_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</para></summary>
+		///<param name = "transformId">The id of the transform for which to get stats. &#x27;_all&#x27; or &#x27;*&#x27; implies all transforms</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse Cat<TResponse>(string transformId, CatTransformRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_cat/transforms/{transformId:transformId}"), null, RequestParams(requestParameters));
+		///<summary>GET on /_cat/transforms/{transform_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</para></summary>
+		///<param name = "transformId">The id of the transform for which to get stats. &#x27;_all&#x27; or &#x27;*&#x27; implies all transforms</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("transform.cat_transform", "transform_id")]
+		public Task<TResponse> CatAsync<TResponse>(string transformId, CatTransformRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_cat/transforms/{transformId:transformId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>DELETE on /_transform/{transform_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html</para></summary>
 		///<param name = "transformId">The id of the transform to delete</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

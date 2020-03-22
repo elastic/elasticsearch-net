@@ -52,11 +52,11 @@ namespace Elasticsearch.Net.Specification.XPackApi
 		[MapsApi("xpack.info", "")]
 		public Task<TResponse> InfoAsync<TResponse>(XPackInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_xpack", ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_xpack/usage <para>Retrieve information about xpack features usage</para></summary>
+		///<summary>GET on /_xpack/usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Usage<TResponse>(XPackUsageRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_xpack/usage", null, RequestParams(requestParameters));
-		///<summary>GET on /_xpack/usage <para>Retrieve information about xpack features usage</para></summary>
+		///<summary>GET on /_xpack/usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("xpack.usage", "")]
 		public Task<TResponse> UsageAsync<TResponse>(XPackUsageRequestParameters requestParameters = null, CancellationToken ctx = default)
