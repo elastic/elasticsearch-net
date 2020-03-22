@@ -36,7 +36,7 @@ namespace Elasticsearch.Net.Specification.XPackApi
 		}
 	}
 
-	///<summary>Request options for Usage <para>Retrieve information about xpack features usage</para></summary>
+	///<summary>Request options for Usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html</para></summary>
 	public class XPackUsageRequestParameters : RequestParameters<XPackUsageRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;

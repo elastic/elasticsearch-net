@@ -1084,13 +1084,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			set => Q("create", value);
 		}
 
-		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings
-		{
-			get => Q<bool? >("flat_settings");
-			set => Q("flat_settings", value);
-		}
-
 		///<summary>Whether a type should be returned in the body of the mappings.</summary>
 		public bool? IncludeTypeName
 		{
@@ -1103,13 +1096,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		{
 			get => Q<TimeSpan>("master_timeout");
 			set => Q("master_timeout", value);
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout
-		{
-			get => Q<TimeSpan>("timeout");
-			set => Q("timeout", value);
 		}
 	}
 
