@@ -21,6 +21,7 @@ let ListFolders namedSuite revision directory = async {
     return
         doc.CssSelect("td.content a.js-navigation-open")
         |> List.map (fun a -> a.InnerText())
+        // TODO why are these two filtered?
         |> List.filter (fun f -> not <| f.StartsWith("cluster"))
         |> List.filter (fun f -> not <| f.StartsWith("cat"))
         |> List.filter (fun f -> match directory with | Some s -> f = s | None -> true)
@@ -79,7 +80,7 @@ let DownloadTestsInFolder folder fileFilter namedSuite revision (progress: IProg
     let! localFiles = async {
        match yamlFiles.Length with
        | 0 ->
-           //progress.WriteLine(sprintf "%s folder yielded no tests" folder)
+           progress.WriteLine(sprintf "%s folder yielded no tests (fileFilter: %O)" folder fileFilter)
            return List.empty
        | x ->
            let! result = downloadTestsInFolder yamlFiles folder revision progress subBarOptions
