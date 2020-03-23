@@ -22,7 +22,7 @@ namespace ApiGenerator.Generator
 		{
 			var components = new List<string>();
 			foreach (var d in RenderDocumentation(doc)) A(d);
-			if (!string.IsNullOrWhiteSpace(obsolete)) A($"[Obsolete(\"Scheduled to be removed in 7.0, {obsolete}\")]");
+			if (!string.IsNullOrWhiteSpace(obsolete)) A($"[Obsolete(\"Scheduled to be removed in 8.0, {obsolete}\")]");
 
 			var generated = @namespace != null && @namespace == "Cat" && name == "Format"
 				? CatFormatPropertyGenerator(type, name, key, setter)
