@@ -68,6 +68,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public TimeSpan MasterTimeout
 		{
 			get => Q<TimeSpan>("master_timeout");
@@ -184,6 +185,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public bool? Local
 		{
 			get => Q<bool? >("local");
@@ -191,6 +193,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public TimeSpan MasterTimeout
 		{
 			get => Q<TimeSpan>("master_timeout");
@@ -256,6 +259,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public bool? Local
 		{
 			get => Q<bool? >("local");
@@ -263,6 +267,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public TimeSpan MasterTimeout
 		{
 			get => Q<TimeSpan>("master_timeout");
@@ -321,6 +326,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public bool? Local
 		{
 			get => Q<bool? >("local");
@@ -328,6 +334,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public TimeSpan MasterTimeout
 		{
 			get => Q<TimeSpan>("master_timeout");
@@ -972,6 +979,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 
 		///<summary>Calculate the selected nodes using the local cluster state rather than the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.6.0, reason: This parameter does not cause this API to act locally.")]
 		public bool? Local
 		{
 			get => Q<bool? >("local");
@@ -1174,6 +1182,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public TimeSpan MasterTimeout
 		{
 			get => Q<TimeSpan>("master_timeout");
