@@ -25,7 +25,7 @@ namespace Tests.Benchmarking
 			new ElasticClient(new ConnectionSettings(new InMemoryConnection(Response, 200, null, null))
 				.DefaultIndex("index")
 				.EnableHttpCompression(false)
-				.MemoryStreamFactory(MemoryStreamFactory.Default)
+				.MemoryStreamFactory(RecyclableMemoryStreamFactory.Default)
 			);
 
 		private static readonly Nest7.IElasticClient ClientV7 =
