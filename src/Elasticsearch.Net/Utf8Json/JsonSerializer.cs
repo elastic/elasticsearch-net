@@ -368,7 +368,7 @@ namespace Elasticsearch.Net.Utf8Json
                 {
                     length += read;
                     if (length == buf.Length)
-						BinaryUtil.FastResize(ref buf, length * 2);
+						MemoryPool.Resize(ref buf, length * 2);
                 }
 
 				if (length == 0)
@@ -551,24 +551,11 @@ namespace Elasticsearch.Net.Utf8Json
                 length += read;
                 if (length == buffer.Length)
                 {
-                    BinaryUtil.FastResize(ref buffer, length * 2);
+                    MemoryPool.Resize(ref buffer, length * 2);
                 }
             }
 
             return length;
         }
-
-		internal static class MemoryPool
-		{
-			public static byte[] Rent(int minLength = 65535)
-			{
-				return System.Buffers.ArrayPool<byte>.Shared.Rent(minLength);
-			}
-
-			public static void Return(byte[] bytes)
-			{
-				System.Buffers.ArrayPool<byte>.Shared.Return(bytes);
-			}
-		}
     }
 }

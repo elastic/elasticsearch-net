@@ -36,7 +36,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal
         {
             var newLength = offset + appendLength;
 
-            // If null(most case fisrt time) fill byte.
+            // If null (most case first time) fill byte.
             if (bytes == null)
             {
                 bytes = new byte[newLength];
@@ -86,13 +86,13 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             byte[] array2 = array;
             if (array2 == null)
 			{
-				array = JsonSerializer.MemoryPool.Rent(newSize);
+				array = new byte[newSize];
                 return;
             }
 
             if (array2.Length != newSize)
             {
-                byte[] array3 = JsonSerializer.MemoryPool.Rent(newSize);
+                byte[] array3 = new byte[newSize];
                 Buffer.BlockCopy(array2, 0, array3, 0, (array2.Length > newSize) ? newSize : array2.Length);
                 array = array3;
             }
