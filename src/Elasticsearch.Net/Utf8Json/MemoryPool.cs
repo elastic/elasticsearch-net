@@ -5,12 +5,12 @@ namespace Elasticsearch.Net.Utf8Json
 	internal static class MemoryPool
 	{
 		// Method to Resize an already rented array
-		public static void Resize(ref byte[] array, int newSize)
+		public static byte[] Resize(byte[] array, int newSize)
 		{
 			byte[] newRented = Rent(newSize);
-			Buffer.BlockCopy(array, 0, newRented, 0, array.Length);
+			Buffer.BlockCopy(array, 0, newRented, 0, array.Length > newSize ? newSize : array.Length);
 			Return(array);
-			array = newRented;
+			return newRented;
 		}
 
 		public static byte[] Rent(int minLength = 65535)

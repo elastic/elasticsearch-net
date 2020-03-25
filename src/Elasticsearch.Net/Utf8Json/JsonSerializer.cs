@@ -349,7 +349,7 @@ namespace Elasticsearch.Net.Utf8Json
                 {
                     length += read;
                     if (length == buf.Length)
-						MemoryPool.Resize(ref buf, length * 2);
+						buf = MemoryPool.Resize(buf, length * 2);
                 }
 
 				if (length == 0)
@@ -379,7 +379,7 @@ namespace Elasticsearch.Net.Utf8Json
                 length += read;
                 if (length == buffer.Length)
                 {
-                    MemoryPool.Resize(ref buffer, length * 2);
+                    buffer = MemoryPool.Resize(buffer, length * 2);
                 }
             }
 
