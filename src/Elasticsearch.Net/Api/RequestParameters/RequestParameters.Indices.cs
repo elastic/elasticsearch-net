@@ -1085,6 +1085,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 
 		///<summary>Return settings in flat format (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.7.0, reason: Removed from the server as it was never a valid option")]
 		public bool? FlatSettings
 		{
 			get => Q<bool? >("flat_settings");
@@ -1106,6 +1107,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 
 		///<summary>Explicit operation timeout</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.7.0, reason: Removed from the server as it was never a valid option")]
 		public TimeSpan Timeout
 		{
 			get => Q<TimeSpan>("timeout");

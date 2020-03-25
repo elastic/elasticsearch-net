@@ -59,7 +59,27 @@ namespace ApiGenerator.Domain.Specification
 
 		public bool IsFieldsParam => TypeHighLevel == "Fields";
 
-		public string Obsolete { get; set; }
+		public string Obsolete
+		{
+			get
+			{
+				if (!string.IsNullOrEmpty(_obsolete)) return _obsolete;
+
+				return Deprecated != null
+					? $"Deprecated as of: {Deprecated.Version}, reason: {Deprecated.Description}"
+					: null;
+			}
+			set => _obsolete = value;
+		}
+
+		public class QueryParameterDeprecation
+		{
+			public string Version { get; set; }
+
+			public string Description { get; set; }
+		}
+
+		public QueryParameterDeprecation Deprecated { get; set; }
 
 		public IEnumerable<string> Options { get; set; }
 		public string QueryStringKey { get; set; }
@@ -70,6 +90,7 @@ namespace ApiGenerator.Domain.Specification
 		public string SetterLowLevel => "value";
 
 		private string _type;
+		private string _obsolete;
 
 		public string Type
 		{
