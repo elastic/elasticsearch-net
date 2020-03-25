@@ -207,6 +207,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
+	///<summary>Request options for CreateDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class CreateDataStreamRequestParameters : RequestParameters<CreateDataStreamRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
+	}
+
 	///<summary>Request options for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</para></summary>
 	public class DeleteIndexRequestParameters : RequestParameters<DeleteIndexRequestParameters>
 	{
@@ -266,6 +273,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			get => Q<TimeSpan>("timeout");
 			set => Q("timeout", value);
 		}
+	}
+
+	///<summary>Request options for DeleteDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class DeleteDataStreamRequestParameters : RequestParameters<DeleteDataStreamRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for DeleteTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
@@ -674,6 +688,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
+	///<summary>Request options for GetDataStreams <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class GetDataStreamsRequestParameters : RequestParameters<GetDataStreamsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+	}
+
 	///<summary>Request options for GetFieldMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
 	public class GetFieldMappingRequestParameters : RequestParameters<GetFieldMappingRequestParameters>
 	{
@@ -1032,25 +1053,11 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			set => Q("create", value);
 		}
 
-		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings
-		{
-			get => Q<bool? >("flat_settings");
-			set => Q("flat_settings", value);
-		}
-
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
 			get => Q<TimeSpan>("master_timeout");
 			set => Q("master_timeout", value);
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout
-		{
-			get => Q<TimeSpan>("timeout");
-			set => Q("timeout", value);
 		}
 	}
 

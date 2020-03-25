@@ -13,6 +13,21 @@ set -euo pipefail
 DOTNET_VERSION=${DOTNET_VERSION-3.0.100}
 ELASTICSEARCH_URL=${ELASTICSEARCH_URL-"$elasticsearch_url"}
 elasticsearch_container=${elasticsearch_container-}
+
+TEST_FOLDER=${TEST_FOLDER-}
+TEST_FILE=${TEST_FILE-}
+TEST_SECTION=${TEST_SECTION-}
+
+run_script_args=""
+if [[ "$TEST_FOLDER" != "" ]]; then
+  run_script_args="-f ${TEST_FOLDER}"
+fi
+if [[ "$TEST_FILE" != "" ]]; then
+  run_script_args="${run_script_args} -t ${TEST_FILE}"
+fi
+if [[ "$TEST_SECTION" != "" ]]; then
+  run_script_args="${run_script_args} -s ${TEST_SECTION}"
+fi
  
 echo -e "\033[34;1mINFO:\033[0m VERSION ${STACK_VERSION}\033[0m"
 echo -e "\033[34;1mINFO:\033[0m TEST_SUITE ${TEST_SUITE}\033[0m"
@@ -37,4 +52,4 @@ docker run \
   --volume ${repo}/build/output:/sln/build/output \
   --rm \
   elastic/elasticsearch-net \
-  ./build.sh rest-spec-tests $TEST_SUITE -e ${ELASTICSEARCH_URL} -o /sln/build/output/rest-spec-junit.xml
+  ./build.sh rest-spec-tests $TEST_SUITE -e ${ELASTICSEARCH_URL} -o /sln/build/output/rest-spec-junit.xml ${run_script_args}

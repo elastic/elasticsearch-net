@@ -126,6 +126,21 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.create", "index, body")]
 		public Task<TResponse> CreateAsync<TResponse>(string index, PostData body, CreateIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}"), ctx, body, RequestParams(requestParameters));
+		///<summary>PUT on /_data_stream/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+		///<param name = "name">The name of the data stream</param>
+		///<param name = "body">The data stream definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse CreateDataStreamForAll<TResponse>(string name, PostData body, CreateDataStreamRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_data_stream/{name:name}"), body, RequestParams(requestParameters));
+		///<summary>PUT on /_data_stream/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+		///<param name = "name">The name of the data stream</param>
+		///<param name = "body">The data stream definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("indices.create_data_stream", "name, body")]
+		public Task<TResponse> CreateDataStreamForAllAsync<TResponse>(string name, PostData body, CreateDataStreamRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_data_stream/{name:name}"), ctx, body, RequestParams(requestParameters));
 		///<summary>DELETE on /{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</para></summary>
 		///<param name = "index">A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -150,6 +165,19 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.delete_alias", "index, name")]
 		public Task<TResponse> DeleteAliasAsync<TResponse>(string index, string name, DeleteAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"{index:index}/_alias/{name:name}"), ctx, null, RequestParams(requestParameters));
+		///<summary>DELETE on /_data_stream/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+		///<param name = "name">The name of the data stream</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse DeleteDataStreamForAll<TResponse>(string name, DeleteDataStreamRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_data_stream/{name:name}"), null, RequestParams(requestParameters));
+		///<summary>DELETE on /_data_stream/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+		///<param name = "name">The name of the data stream</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("indices.delete_data_stream", "name")]
+		public Task<TResponse> DeleteDataStreamForAllAsync<TResponse>(string name, DeleteDataStreamRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_data_stream/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>DELETE on /_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -333,6 +361,30 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.get_alias", "index")]
 		public Task<TResponse> GetAliasAsync<TResponse>(string index, GetAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_alias"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_data_streams <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse GetDataStreamsForAll<TResponse>(GetDataStreamsRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_data_streams", null, RequestParams(requestParameters));
+		///<summary>GET on /_data_streams <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("indices.get_data_streams", "")]
+		public Task<TResponse> GetDataStreamsForAllAsync<TResponse>(GetDataStreamsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_data_streams", ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_data_streams/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+		///<param name = "name">The comma separated names of data streams</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse GetDataStreamsForAll<TResponse>(string name, GetDataStreamsRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_data_streams/{name:name}"), null, RequestParams(requestParameters));
+		///<summary>GET on /_data_streams/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+		///<param name = "name">The comma separated names of data streams</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("indices.get_data_streams", "name")]
+		public Task<TResponse> GetDataStreamsForAllAsync<TResponse>(string name, GetDataStreamsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_data_streams/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_mapping/field/{fields} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
 		///<param name = "fields">A comma-separated list of fields</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
