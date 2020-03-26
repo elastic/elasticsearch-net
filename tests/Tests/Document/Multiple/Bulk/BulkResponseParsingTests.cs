@@ -9,7 +9,7 @@ using Tests.Framework.DocumentationTests;
 
 namespace Tests.Document.Multiple.Bulk
 {
-	public class BulkResponseParstingTests : DocumentationTestBase
+	public class BulkResponseParsingTests : DocumentationTestBase
 	{
 		[U] public void CanDeserialize()
 		{
