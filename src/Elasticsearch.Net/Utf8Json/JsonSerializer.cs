@@ -37,6 +37,8 @@ namespace Elasticsearch.Net.Utf8Json
     /// </summary>
 	internal static partial class JsonSerializer
     {
+		public const int DefaultBufferLength = 1024;
+
         static IJsonFormatterResolver defaultResolver;
 
         /// <summary>
@@ -70,18 +72,11 @@ namespace Elasticsearch.Net.Utf8Json
         public static byte[] Serialize<T>(T value, IJsonFormatterResolver resolver)
         {
             if (resolver == null) resolver = DefaultResolver;
-			var buffer = ArrayPoolProxy.Rent();
-			try
-			{
-				var writer = new JsonWriter(buffer);
-				var formatter = resolver.GetFormatterWithVerify<T>();
-				formatter.Serialize(ref writer, value, resolver);
-				return writer.ToUtf8ByteArray();
-			}
-			finally
-			{
-				ArrayPoolProxy.Return(buffer);
-			}
+			var buffer = new byte[DefaultBufferLength];
+			var writer = new JsonWriter(buffer);
+			var formatter = resolver.GetFormatterWithVerify<T>();
+			formatter.Serialize(ref writer, value, resolver);
+			return writer.ToUtf8ByteArray();
         }
 
         public static void Serialize<T>(ref JsonWriter writer, T value)
@@ -127,23 +122,16 @@ namespace Elasticsearch.Net.Utf8Json
         /// <summary>
         /// Serialize to stream(write async) with specified resolver.
         /// </summary>
-        public static async System.Threading.Tasks.Task SerializeAsync<T>(Stream stream, T value, IJsonFormatterResolver resolver)
+        public static async Task SerializeAsync<T>(Stream stream, T value, IJsonFormatterResolver resolver)
         {
             if (resolver == null) resolver = DefaultResolver;
 
-            var buf = ArrayPoolProxy.Rent();
-            try
-            {
-                var writer = new JsonWriter(buf);
-                var formatter = resolver.GetFormatterWithVerify<T>();
-                formatter.Serialize(ref writer, value, resolver);
-                var buffer = writer.GetBuffer();
-                await stream.WriteAsync(buffer.Array, buffer.Offset, buffer.Count).ConfigureAwait(false);
-            }
-            finally
-            {
-                ArrayPoolProxy.Return(buf);
-            }
+            var buf = new byte[DefaultBufferLength];
+            var writer = new JsonWriter(buf);
+            var formatter = resolver.GetFormatterWithVerify<T>();
+            formatter.Serialize(ref writer, value, resolver);
+            var buffer = writer.GetBuffer();
+            await stream.WriteAsync(buffer.Array, buffer.Offset, buffer.Count).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -161,19 +149,12 @@ namespace Elasticsearch.Net.Utf8Json
         {
             if (resolver == null) resolver = DefaultResolver;
 
-			var buffer = ArrayPoolProxy.Rent();
-			try
-			{
-				var writer = new JsonWriter(buffer);
-				var formatter = resolver.GetFormatterWithVerify<T>();
-				formatter.Serialize(ref writer, value, resolver);
-				var arraySegment = writer.GetBuffer();
-				return new ArraySegment<byte>(BinaryUtil.ToArray(ref arraySegment));
-			}
-			finally
-			{
-				ArrayPoolProxy.Return(buffer);
-			}
+			var buffer = new byte[DefaultBufferLength];
+			var writer = new JsonWriter(buffer);
+			var formatter = resolver.GetFormatterWithVerify<T>();
+			formatter.Serialize(ref writer, value, resolver);
+			var arraySegment = writer.GetBuffer();
+			return new ArraySegment<byte>(BinaryUtil.ToArray(ref arraySegment));
         }
 
         /// <summary>
@@ -191,18 +172,11 @@ namespace Elasticsearch.Net.Utf8Json
         {
             if (resolver == null) resolver = DefaultResolver;
 
-			var buffer = ArrayPoolProxy.Rent();
-			try
-			{
-				var writer = new JsonWriter(buffer);
-				var formatter = resolver.GetFormatterWithVerify<T>();
-				formatter.Serialize(ref writer, value, resolver);
-				return writer.ToString();
-			}
-			finally
-			{
-				ArrayPoolProxy.Return(buffer);
-			}
+			var buffer = new byte[DefaultBufferLength];
+			var writer = new JsonWriter(buffer);
+			var formatter = resolver.GetFormatterWithVerify<T>();
+			formatter.Serialize(ref writer, value, resolver);
+			return writer.ToString();
         }
 
         public static T Deserialize<T>(string json)
@@ -285,28 +259,18 @@ namespace Elasticsearch.Net.Utf8Json
                     return Deserialize<T>(buf2.Array, buf2.Offset, resolver);
                 }
             }
-            var buf = ArrayPoolProxy.Rent();
-			var poolBuf = buf;
-			try
+            var buf = new byte[DefaultBufferLength];
+			var length = FillFromStream(stream, ref buf);
+
+			if (length == 0)
+				return default;
+
+			var token2 = new JsonReader(buf).GetCurrentJsonToken();
+			if (token2 == JsonToken.Number)
 			{
-				var length = FillFromStream(stream, ref buf);
-
-				if (length == 0)
-					return default;
-
-				// when token is number, can not use from pool(can not find end line).
-				var token = new JsonReader(buf).GetCurrentJsonToken();
-				if (token == JsonToken.Number)
-				{
-					buf = BinaryUtil.FastCloneWithResize(buf, length);
-				}
-
-				return Deserialize<T>(buf, resolver);
+				buf = BinaryUtil.FastCloneWithResize(buf, length);
 			}
-			finally
-			{
-				ArrayPoolProxy.Return(poolBuf);
-			}
+			return Deserialize<T>(buf, resolver);
         }
 
         public static Task<T> DeserializeAsync<T>(Stream stream)
@@ -339,35 +303,26 @@ namespace Elasticsearch.Net.Utf8Json
                 }
             }
 
-            var buffer = ArrayPoolProxy.Rent();
-            var buf = buffer;
-            try
+            var buffer = new byte[DefaultBufferLength];
+            int length = 0;
+            int read;
+            while ((read = await stream.ReadAsync(buffer, length, buffer.Length - length).ConfigureAwait(false)) > 0)
             {
-                int length = 0;
-                int read;
-                while ((read = await stream.ReadAsync(buf, length, buf.Length - length).ConfigureAwait(false)) > 0)
-                {
-                    length += read;
-                    if (length == buf.Length)
-						buf = ArrayPoolProxy.Resize(buf, length * 2);
-                }
-
-				if (length == 0)
-					return default;
-
-                // when token is number, can not use from pool(can not find end line).
-                var token = new JsonReader(buf).GetCurrentJsonToken();
-                if (token == JsonToken.Number)
-                {
-                    buf = BinaryUtil.FastCloneWithResize(buf, length);
-                }
-
-                return Deserialize<T>(buf, resolver);
+                length += read;
+                if (length == buffer.Length)
+					BinaryUtil.FastResize(ref buffer, length * 2);
             }
-            finally
+
+			if (length == 0)
+				return default;
+
+            var token2 = new JsonReader(buffer).GetCurrentJsonToken();
+            if (token2 == JsonToken.Number)
             {
-                ArrayPoolProxy.Return(buffer);
+                BinaryUtil.FastCloneWithResize(buffer, length);
             }
+
+            return Deserialize<T>(buffer, resolver);
         }
 
         static int FillFromStream(Stream input, ref byte[] buffer)
@@ -379,7 +334,7 @@ namespace Elasticsearch.Net.Utf8Json
                 length += read;
                 if (length == buffer.Length)
                 {
-                    buffer = ArrayPoolProxy.Resize(buffer, length * 2);
+                    BinaryUtil.FastResize(ref buffer, length * 2);
                 }
             }
 
