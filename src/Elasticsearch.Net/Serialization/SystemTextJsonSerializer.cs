@@ -29,13 +29,23 @@ namespace Elasticsearch.Net
 		public void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = None)
 		{
 			using var writer = new Utf8JsonWriter(stream);
-			JsonSerializer.Serialize<T>(writer, data, GetFormatting(formatting));
+			if (data == null)
+				JsonSerializer.Serialize(writer, null, typeof(object), GetFormatting(formatting));
+			//TODO validate if we can avoid boxing by checking if data is typeof(object)
+			else
+				JsonSerializer.Serialize(writer, data, data.GetType(), GetFormatting(formatting));
 		}
 
 		public async Task SerializeAsync<T>(
 			T data, Stream stream, SerializationFormatting formatting = None, CancellationToken cancellationToken = default
-		) =>
-			await JsonSerializer.SerializeAsync<T>(stream, data, GetFormatting(formatting), cancellationToken).ConfigureAwait(false);
+		)
+		{
+			if (data == null)
+				await JsonSerializer.SerializeAsync(stream, null, typeof(object), GetFormatting(formatting)).ConfigureAwait(false);
+			else
+				await JsonSerializer.SerializeAsync(stream, data, data.GetType(), GetFormatting(formatting), cancellationToken).ConfigureAwait(false);
+		}
+
 
 		private JsonSerializerOptions GetFormatting(SerializationFormatting formatting) => formatting == None ? _none : _indented;
 
