@@ -35,7 +35,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				.ClientCalls(r => r.SucceedAlways())
 				.ClientCalls(r => r.OnPort(9201).FailAlways(new Exception("boom!"))) // <2> where node 2 on port 9201 always throws an exception
 				.StaticConnectionPool()
-				.Settings(s => s.DisablePing())
+				.Settings(s => s.DisablePing().EnableDebugMode())
 			);
 
 			audit = await audit.TraceCall(
