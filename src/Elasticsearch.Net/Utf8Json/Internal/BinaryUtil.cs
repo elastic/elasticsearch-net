@@ -85,8 +85,8 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
             byte[] array2 = array;
             if (array2 == null)
-			{
-				array = new byte[newSize];
+            {
+            	array = new byte[newSize];
                 return;
             }
 

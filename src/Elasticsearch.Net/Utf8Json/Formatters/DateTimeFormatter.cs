@@ -929,7 +929,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             var day = 0;
             if (hasDay)
             {
-				const int maxDayLength = 8 + 1; // {Day}.
+                const int maxDayLength = 8 + 1; // {Day}.
                 var dayCharacters = new byte[maxDayLength];
                 for (; array[i] != '.'; i++)
                 {

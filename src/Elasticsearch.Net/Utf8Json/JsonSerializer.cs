@@ -70,7 +70,7 @@ namespace Elasticsearch.Net.Utf8Json
         public static byte[] Serialize<T>(T value, IJsonFormatterResolver resolver)
         {
             if (resolver == null) resolver = DefaultResolver;
-			var buffer = MemoryPool.Rent();
+			var buffer = ArrayPoolProxy.Rent();
 			try
 			{
 				var writer = new JsonWriter(buffer);
@@ -80,7 +80,7 @@ namespace Elasticsearch.Net.Utf8Json
 			}
 			finally
 			{
-				MemoryPool.Return(buffer);
+				ArrayPoolProxy.Return(buffer);
 			}
         }
 
@@ -131,7 +131,7 @@ namespace Elasticsearch.Net.Utf8Json
         {
             if (resolver == null) resolver = DefaultResolver;
 
-            var buf = MemoryPool.Rent();
+            var buf = ArrayPoolProxy.Rent();
             try
             {
                 var writer = new JsonWriter(buf);
@@ -142,7 +142,7 @@ namespace Elasticsearch.Net.Utf8Json
             }
             finally
             {
-                MemoryPool.Return(buf);
+                ArrayPoolProxy.Return(buf);
             }
         }
 
@@ -161,7 +161,7 @@ namespace Elasticsearch.Net.Utf8Json
         {
             if (resolver == null) resolver = DefaultResolver;
 
-			var buffer = MemoryPool.Rent();
+			var buffer = ArrayPoolProxy.Rent();
 			try
 			{
 				var writer = new JsonWriter(buffer);
@@ -172,7 +172,7 @@ namespace Elasticsearch.Net.Utf8Json
 			}
 			finally
 			{
-				MemoryPool.Return(buffer);
+				ArrayPoolProxy.Return(buffer);
 			}
         }
 
@@ -191,7 +191,7 @@ namespace Elasticsearch.Net.Utf8Json
         {
             if (resolver == null) resolver = DefaultResolver;
 
-			var buffer = MemoryPool.Rent();
+			var buffer = ArrayPoolProxy.Rent();
 			try
 			{
 				var writer = new JsonWriter(buffer);
@@ -201,7 +201,7 @@ namespace Elasticsearch.Net.Utf8Json
 			}
 			finally
 			{
-				MemoryPool.Return(buffer);
+				ArrayPoolProxy.Return(buffer);
 			}
         }
 
@@ -285,7 +285,7 @@ namespace Elasticsearch.Net.Utf8Json
                     return Deserialize<T>(buf2.Array, buf2.Offset, resolver);
                 }
             }
-            var buf = MemoryPool.Rent();
+            var buf = ArrayPoolProxy.Rent();
 			var poolBuf = buf;
 			try
 			{
@@ -305,7 +305,7 @@ namespace Elasticsearch.Net.Utf8Json
 			}
 			finally
 			{
-				MemoryPool.Return(poolBuf);
+				ArrayPoolProxy.Return(poolBuf);
 			}
         }
 
@@ -339,7 +339,7 @@ namespace Elasticsearch.Net.Utf8Json
                 }
             }
 
-            var buffer = MemoryPool.Rent();
+            var buffer = ArrayPoolProxy.Rent();
             var buf = buffer;
             try
             {
@@ -349,7 +349,7 @@ namespace Elasticsearch.Net.Utf8Json
                 {
                     length += read;
                     if (length == buf.Length)
-						buf = MemoryPool.Resize(buf, length * 2);
+						buf = ArrayPoolProxy.Resize(buf, length * 2);
                 }
 
 				if (length == 0)
@@ -366,7 +366,7 @@ namespace Elasticsearch.Net.Utf8Json
             }
             finally
             {
-                MemoryPool.Return(buffer);
+                ArrayPoolProxy.Return(buffer);
             }
         }
 
@@ -379,7 +379,7 @@ namespace Elasticsearch.Net.Utf8Json
                 length += read;
                 if (length == buffer.Length)
                 {
-                    buffer = MemoryPool.Resize(buffer, length * 2);
+                    buffer = ArrayPoolProxy.Resize(buffer, length * 2);
                 }
             }
 

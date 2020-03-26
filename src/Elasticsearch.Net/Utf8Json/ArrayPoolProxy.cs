@@ -2,9 +2,11 @@ using System;
 
 namespace Elasticsearch.Net.Utf8Json
 {
-	internal static class MemoryPool
+	internal static class ArrayPoolProxy
 	{
-		// Method to Resize an already rented array
+		/// <summary>
+		/// Method to Resize an already rented array
+		/// </summary>
 		public static byte[] Resize(byte[] array, int newSize)
 		{
 			byte[] newRented = Rent(newSize);
