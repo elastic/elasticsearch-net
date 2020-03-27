@@ -526,6 +526,248 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
+	///<summary>Request options for MlDataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html</para></summary>
+	public class MlDataFrameAnalyticsRequestParameters : RequestParameters<MlDataFrameAnalyticsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to ignore if a wildcard expression matches no configs. (This includes `_all` string or when no configs have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
+
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
+		}
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers
+		{
+			get => Q<string[]>("h");
+			set => Q("h", value);
+		}
+
+		///<summary>Return help information</summary>
+		public bool? Help
+		{
+			get => Q<bool? >("help");
+			set => Q("help", value);
+		}
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns
+		{
+			get => Q<string[]>("s");
+			set => Q("s", value);
+		}
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool? Verbose
+		{
+			get => Q<bool? >("v");
+			set => Q("v", value);
+		}
+	}
+
+	///<summary>Request options for MlDatafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
+	public class MlDatafeedsRequestParameters : RequestParameters<MlDatafeedsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds
+		{
+			get => Q<bool? >("allow_no_datafeeds");
+			set => Q("allow_no_datafeeds", value);
+		}
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
+		}
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers
+		{
+			get => Q<string[]>("h");
+			set => Q("h", value);
+		}
+
+		///<summary>Return help information</summary>
+		public bool? Help
+		{
+			get => Q<bool? >("help");
+			set => Q("help", value);
+		}
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns
+		{
+			get => Q<string[]>("s");
+			set => Q("s", value);
+		}
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool? Verbose
+		{
+			get => Q<bool? >("v");
+			set => Q("v", value);
+		}
+	}
+
+	///<summary>Request options for MlJobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
+	public class MlJobsRequestParameters : RequestParameters<MlJobsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs
+		{
+			get => Q<bool? >("allow_no_jobs");
+			set => Q("allow_no_jobs", value);
+		}
+
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
+		}
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers
+		{
+			get => Q<string[]>("h");
+			set => Q("h", value);
+		}
+
+		///<summary>Return help information</summary>
+		public bool? Help
+		{
+			get => Q<bool? >("help");
+			set => Q("help", value);
+		}
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns
+		{
+			get => Q<string[]>("s");
+			set => Q("s", value);
+		}
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool? Verbose
+		{
+			get => Q<bool? >("v");
+			set => Q("v", value);
+		}
+	}
+
+	///<summary>Request options for MlTrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
+	public class MlTrainedModelsRequestParameters : RequestParameters<MlTrainedModelsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>
+		/// Whether to ignore if a wildcard expression matches no trained models. (This includes `_all` string or when no trained models have been
+		/// specified)
+		///</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
+
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
+		}
+
+		///<summary>skips a number of trained models</summary>
+		public int? From
+		{
+			get => Q<int? >("from");
+			set => Q("from", value);
+		}
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers
+		{
+			get => Q<string[]>("h");
+			set => Q("h", value);
+		}
+
+		///<summary>Return help information</summary>
+		public bool? Help
+		{
+			get => Q<bool? >("help");
+			set => Q("help", value);
+		}
+
+		///<summary>specifies a max number of trained models to get</summary>
+		public int? Size
+		{
+			get => Q<int? >("size");
+			set => Q("size", value);
+		}
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns
+		{
+			get => Q<string[]>("s");
+			set => Q("s", value);
+		}
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool? Verbose
+		{
+			get => Q<bool? >("v");
+			set => Q("v", value);
+		}
+	}
+
 	///<summary>Request options for NodeAttributes <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</para></summary>
 	public class CatNodeAttributesRequestParameters : RequestParameters<CatNodeAttributesRequestParameters>
 	{
@@ -1265,6 +1507,71 @@ namespace Elasticsearch.Net.Specification.CatApi
 		public Size? Size
 		{
 			get => Q<Size? >("size");
+			set => Q("size", value);
+		}
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns
+		{
+			get => Q<string[]>("s");
+			set => Q("s", value);
+		}
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool? Verbose
+		{
+			get => Q<bool? >("v");
+			set => Q("v", value);
+		}
+	}
+
+	///<summary>Request options for Transform <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</para></summary>
+	public class TransformRequestParameters : RequestParameters<TransformRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to ignore if a wildcard expression matches no transforms. (This includes `_all` string or when no transforms have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
+		}
+
+		///<summary>skips a number of transform configs, defaults to 0</summary>
+		public int? From
+		{
+			get => Q<int? >("from");
+			set => Q("from", value);
+		}
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers
+		{
+			get => Q<string[]>("h");
+			set => Q("h", value);
+		}
+
+		///<summary>Return help information</summary>
+		public bool? Help
+		{
+			get => Q<bool? >("help");
+			set => Q("help", value);
+		}
+
+		///<summary>specifies a max number of transforms to get, defaults to 100</summary>
+		public int? Size
+		{
+			get => Q<int? >("size");
 			set => Q("size", value);
 		}
 

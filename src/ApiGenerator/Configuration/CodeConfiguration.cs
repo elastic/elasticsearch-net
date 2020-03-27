@@ -11,16 +11,7 @@ namespace ApiGenerator.Configuration
 		/// <summary> These APIs are not implemented yet in the low and high level client</summary>
 		public static string[] IgnoredApis { get; } =
 		{
-			// Upgrade API no longer relevant, might make a re-appearance
-			"indices.upgrade.json",
-			"indices.get_upgrade.json",
-
-			// these APIs are not ready for primetime yet
-			"indices.reload_search_analyzers.json",
-			"rank_eval.json",
-			"eql.search.json",
-
-			// Internal API,
+			// Internal only,
 			"monitoring.bulk.json",
 
 			// Never exposed and now deprecated
@@ -33,45 +24,25 @@ namespace ApiGenerator.Configuration
 			"data_frame_transform_deprecated.stop_transform.json",
 			"data_frame_transform_deprecated.update_transform.json",
 
-			// New as of 7.7. branch
-			"autoscaling.get_autoscaling_decision.json",
-			"indices.create_data_stream.json",
-			"indices.delete_data_stream.json",
-			"indices.get_data_streams.json",
-			"cat.transform.json",
-			"cat.ml_jobs.json",
-			"cat.ml_data_frame_analytics.json",
-			"cat.ml_datafeeds.json",
-			"cat.ml_trained_models.json",
-			"async_search.delete.json",
-			"async_search.submit.json",
-			"async_search.get.json",
-			"cluster.delete_component_template.json",
-			"cluster.get_component_template.json",
-			"cluster.put_component_template.json",
-			"ml.delete_trained_model.json",
-			"ml.explain_data_frame_analytics.json",
-			"ml.get_trained_models.json",
-			"ml.get_trained_models_stats.json",
-			"ml.put_trained_model.json",
+			// To be removed
+			"indices.upgrade.json",
+			"indices.get_upgrade.json",
 		};
 
 		public static string[] IgnoredApisHighLevel { get; } =
 		{
-			"get_script_context.json",
-			"get_script_languages.json",
-			"scripts_painless_context.json",
-			"security.get_builtin_privileges.json",
-
-			"transform.delete_transform.json",
-			"transform.get_transform.json",
-			"transform.get_transform_stats.json",
-			"transform.preview_transform.json",
-			"transform.put_transform.json",
-			"transform.start_transform.json",
-			"transform.stop_transform.json",
-			"transform.update_transform.json",
-
+			"async_search.delete.json",
+			"async_search.get.json",
+			"async_search.submit.json",
+			"autoscaling.get_autoscaling_decision.json",
+			"cat.ml_data_frame_analytics.json",
+			"cat.ml_datafeeds.json",
+			"cat.ml_jobs.json",
+			"cat.ml_trained_models.json",
+			"cat.transform.json",
+			"cluster.delete_component_template.json",
+			"cluster.get_component_template.json",
+			"cluster.put_component_template.json",
 			"data_frame.delete_data_frame_transform.json",
 			"data_frame.get_data_frame_transform.json",
 			"data_frame.get_data_frame_transform_stats.json",
@@ -80,17 +51,39 @@ namespace ApiGenerator.Configuration
 			"data_frame.start_data_frame_transform.json",
 			"data_frame.stop_data_frame_transform.json",
 			"data_frame.update_data_frame_transform.json",
-
-			"ml.estimate_model_memory.json",
-			"ml.set_upgrade_mode.json",
-			"ml.find_file_structure.json",
-			"ml.evaluate_data_frame.json",
+			"eql.search.json",
+			"get_script_context.json",
+			"get_script_languages.json",
+			"indices.create_data_stream.json",
+			"indices.delete_data_stream.json",
+			"indices.get_data_streams.json",
+			"indices.reload_search_analyzers.json",
 			"ml.delete_data_frame_analytics.json",
+			"ml.delete_trained_model.json",
+			"ml.estimate_model_memory.json",
+			"ml.evaluate_data_frame.json",
+			"ml.explain_data_frame_analytics.json",
+			"ml.find_file_structure.json",
 			"ml.get_data_frame_analytics.json",
 			"ml.get_data_frame_analytics_stats.json",
+			"ml.get_trained_models.json",
+			"ml.get_trained_models_stats.json",
 			"ml.put_data_frame_analytics.json",
+			"ml.put_trained_model.json",
+			"ml.set_upgrade_mode.json",
 			"ml.start_data_frame_analytics.json",
 			"ml.stop_data_frame_analytics.json",
+			"rank_eval.json",
+			"scripts_painless_context.json",
+			"security.get_builtin_privileges.json",
+			"transform.delete_transform.json",
+			"transform.get_transform.json",
+			"transform.get_transform_stats.json",
+			"transform.preview_transform.json",
+			"transform.put_transform.json",
+			"transform.start_transform.json",
+			"transform.stop_transform.json",
+			"transform.update_transform.json",
 		};
 
 
