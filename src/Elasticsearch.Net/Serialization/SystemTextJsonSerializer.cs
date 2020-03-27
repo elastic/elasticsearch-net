@@ -33,6 +33,7 @@ namespace Elasticsearch.Net
 		private static ReadOnlySpan<byte> ToReadOnlySpan(Stream stream)
 		{
 			using var m = ToMemoryStream(stream);
+
 			if (m.TryGetBuffer(out var segment))
 				return segment;
 

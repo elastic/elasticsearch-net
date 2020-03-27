@@ -20,7 +20,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.MockResponses
 				cluster_name = ClusterName,
 				nodes = SniffResponseNodes(nodes, elasticsearchVersion, publishAddressOverride, randomFqdn)
 			};
-			using (var ms = MemoryStreamFactory.Default.Create())
+			using (var ms = ConnectionConfiguration.DefaultMemoryStreamFactory.Create())
 			{
 				LowLevelRequestResponseSerializer.Instance.Serialize(response, ms);
 				return ms.ToArray();

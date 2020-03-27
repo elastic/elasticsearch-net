@@ -29,7 +29,7 @@ namespace Elasticsearch.Net
 			this IElasticsearchSerializer serializer,
 			T data,
 			SerializationFormatting formatting = SerializationFormatting.None) =>
-			SerializeToBytes(serializer, data, RecyclableMemoryStreamFactory.Default, formatting);
+			SerializeToBytes(serializer, data, ConnectionConfiguration.DefaultMemoryStreamFactory, formatting);
 
 		/// <summary>
 		/// Extension method that serializes an instance of <typeparamref name="T"/> to a byte array.
@@ -45,7 +45,7 @@ namespace Elasticsearch.Net
 			SerializationFormatting formatting = SerializationFormatting.None
 		)
 		{
-			memoryStreamFactory ??= RecyclableMemoryStreamFactory.Default;
+			memoryStreamFactory ??= ConnectionConfiguration.DefaultMemoryStreamFactory;
 			using (var ms = memoryStreamFactory.Create())
 			{
 				serializer.Serialize(data, ms, formatting);
@@ -60,7 +60,7 @@ namespace Elasticsearch.Net
 			this IElasticsearchSerializer serializer,
 			T data,
 			SerializationFormatting formatting = SerializationFormatting.None) =>
-			SerializeToString(serializer, data, RecyclableMemoryStreamFactory.Default, formatting);
+			SerializeToString(serializer, data, ConnectionConfiguration.DefaultMemoryStreamFactory, formatting);
 
 		/// <summary>
 		/// Extension method that serializes an instance of <typeparamref name="T"/> to a string.
@@ -76,7 +76,7 @@ namespace Elasticsearch.Net
 			SerializationFormatting formatting = SerializationFormatting.None
 		)
 		{
-			memoryStreamFactory ??= RecyclableMemoryStreamFactory.Default;
+			memoryStreamFactory ??= ConnectionConfiguration.DefaultMemoryStreamFactory;
 			using (var ms = memoryStreamFactory.Create())
 			{
 				serializer.Serialize(data, ms, formatting);

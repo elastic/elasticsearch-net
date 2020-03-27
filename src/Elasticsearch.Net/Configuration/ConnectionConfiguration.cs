@@ -200,9 +200,10 @@ namespace Elasticsearch.Net
 		private bool _sniffOnStartup;
 		private bool _throwExceptions;
 		private bool _transferEncodingChunked;
-		//private IMemoryStreamFactory _memoryStreamFactory = RecyclableMemoryStreamFactory.Default;
-		private IMemoryStreamFactory _memoryStreamFactory = Elasticsearch.Net.MemoryStreamFactory.Default;
+		private IMemoryStreamFactory _memoryStreamFactory = DefaultMemoryStreamFactory;
 		private bool _enableTcpStats;
+		//public static IMemoryStreamFactory Default { get; } = RecyclableMemoryStreamFactory.Default;
+		public static IMemoryStreamFactory DefaultMemoryStreamFactory { get; } = Elasticsearch.Net.MemoryStreamFactory.Default;
 		private bool _enableThreadPoolStats;
 
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
