@@ -84,7 +84,7 @@ namespace Tests.ClientConcepts.Connection
 
 			var requestData = new RequestData(HttpMethod.POST, "/_search", "{ \"query\": { \"match_all\" : { } } }", connectionSettings,
 				new SearchRequestParameters(),
-				new MemoryStreamFactory()) { Node = node };
+				new RecyclableMemoryStreamFactory()) { Node = node };
 
 			return requestData;
 		}
