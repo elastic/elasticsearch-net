@@ -10,6 +10,27 @@ namespace Tests.Reproduce
 	public class TimeSpanSerialization
 	{
 		[U]
+		public void SerializeMaxTimeSpansAsTicksAndStrings()
+		{
+			var timeSpans = new TimeSpans(TimeSpan.MaxValue);
+			var client = new ElasticClient();
+
+			var json = client.RequestResponseSerializer.SerializeToString(timeSpans);
+
+			json.Should()
+				.Be("{\"default\":9223372036854775807,\"defaultNullable\":9223372036854775807,\"string\":\"10675199.02:48:05.4775807\",\"stringNullable\":\"10675199.02:48:05.4775807\"}");
+
+			TimeSpans deserialized;
+			using (var stream = client.ConnectionSettings.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(json)))
+				deserialized = client.RequestResponseSerializer.Deserialize<TimeSpans>(stream);
+
+			timeSpans.Default.Should().Be(deserialized.Default);
+			timeSpans.DefaultNullable.Should().Be(deserialized.DefaultNullable);
+			timeSpans.String.Should().Be(deserialized.String);
+			timeSpans.StringNullable.Should().Be(deserialized.StringNullable);
+		}
+
+		[U]
 		public void SerializeTimeSpansAsTicksAndStrings()
 		{
 			var timeSpans = new TimeSpans(TimeSpan.FromSeconds(902312));
