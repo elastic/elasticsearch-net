@@ -22,13 +22,13 @@ namespace ApiGenerator.Domain
 
 		public IDictionary<string, ApiEndpoint> Endpoints { get; set; }
 
-		public ImmutableSortedDictionary<string, ReadOnlyCollection<ApiEndpoint>> EndpointsPerNamespace =>
+		public ImmutableSortedDictionary<string, ReadOnlyCollection<ApiEndpoint>> EndpointsPerNamespaceLowLevel =>
 			Endpoints.Values.GroupBy(e=>e.CsharpNames.Namespace)
 				.ToImmutableSortedDictionary(kv => kv.Key, kv => kv.ToList().AsReadOnly());
 
 		public ImmutableSortedDictionary<string, ReadOnlyCollection<ApiEndpoint>> EndpointsPerNamespaceHighLevel =>
 			Endpoints.Values
-				.Where(v => !CodeConfiguration.IgnoredApisHighLevel.Contains(v.Name))
+				.Where(v => !CodeConfiguration.IgnoredApisHighLevel.Contains(v.FileName))
 				.GroupBy(e => e.CsharpNames.Namespace)
 				.ToImmutableSortedDictionary(kv => kv.Key, kv => kv.ToList().AsReadOnly());
 
