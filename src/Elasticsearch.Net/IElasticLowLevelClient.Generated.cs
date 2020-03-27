@@ -23,12 +23,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Specification.AsyncSearchApi;
-using Elasticsearch.Net.Specification.AutoscalingApi;
 using Elasticsearch.Net.Specification.CatApi;
 using Elasticsearch.Net.Specification.ClusterApi;
 using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
-using Elasticsearch.Net.Specification.DataFrameApi;
 using Elasticsearch.Net.Specification.EnrichApi;
 using Elasticsearch.Net.Specification.GraphApi;
 using Elasticsearch.Net.Specification.IndexLifecycleManagementApi;
@@ -55,18 +52,6 @@ namespace Elasticsearch.Net
 	///</summary>
 	public partial interface IElasticLowLevelClient
 	{
-		///<summary>Async Search APIs</summary>
-		LowLevelAsyncSearchNamespace AsyncSearch
-		{
-			get;
-		}
-
-		///<summary>Autoscaling APIs</summary>
-		LowLevelAutoscalingNamespace Autoscaling
-		{
-			get;
-		}
-
 		///<summary>Cat APIs</summary>
 		LowLevelCatNamespace Cat
 		{
@@ -81,12 +66,6 @@ namespace Elasticsearch.Net
 
 		///<summary>Cross Cluster Replication APIs</summary>
 		LowLevelCrossClusterReplicationNamespace CrossClusterReplication
-		{
-			get;
-		}
-
-		///<summary>Data Frame APIs</summary>
-		LowLevelDataFrameNamespace DataFrame
 		{
 			get;
 		}
@@ -840,16 +819,6 @@ namespace Elasticsearch.Net
 		///<param name = "body">The search definition template and its params</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> RenderSearchTemplateAsync<TResponse>(string id, PostData body, RenderSearchTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_scripts/painless/_context</summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		TResponse ScriptsPainlessContext<TResponse>(ScriptsPainlessContextRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_scripts/painless/_context</summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		Task<TResponse> ScriptsPainlessContextAsync<TResponse>(ScriptsPainlessContextRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_scripts/painless/_execute <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</para></summary>
 		///<param name = "body">The script to execute</param>

@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.MachineLearningApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>Descriptor for CloseJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</para></summary>
+	///<summary>Descriptor for CloseJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</para></summary>
 	public partial class CloseJobDescriptor : RequestDescriptorBase<CloseJobDescriptor, CloseJobRequestParameters, ICloseJobRequest>, ICloseJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningCloseJob;
@@ -124,7 +124,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for DeleteDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</para></summary>
+	///<summary>Descriptor for DeleteDatafeed <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</para></summary>
 	public partial class DeleteDatafeedDescriptor : RequestDescriptorBase<DeleteDatafeedDescriptor, DeleteDatafeedRequestParameters, IDeleteDatafeedRequest>, IDeleteDatafeedRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteDatafeed;
@@ -176,7 +176,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for DeleteForecast <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</para></summary>
+	///<summary>Descriptor for DeleteForecast <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</para></summary>
 	public partial class DeleteForecastDescriptor : RequestDescriptorBase<DeleteForecastDescriptor, DeleteForecastRequestParameters, IDeleteForecastRequest>, IDeleteForecastRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteForecast;
@@ -203,7 +203,7 @@ namespace Nest
 		public DeleteForecastDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>Descriptor for DeleteJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</para></summary>
+	///<summary>Descriptor for DeleteJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</para></summary>
 	public partial class DeleteJobDescriptor : RequestDescriptorBase<DeleteJobDescriptor, DeleteJobRequestParameters, IDeleteJobRequest>, IDeleteJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteJob;
@@ -228,7 +228,7 @@ namespace Nest
 		public DeleteJobDescriptor WaitForCompletion(bool? waitforcompletion = true) => Qs("wait_for_completion", waitforcompletion);
 	}
 
-	///<summary>Descriptor for DeleteModelSnapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</para></summary>
+	///<summary>Descriptor for DeleteModelSnapshot <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</para></summary>
 	public partial class DeleteModelSnapshotDescriptor : RequestDescriptorBase<DeleteModelSnapshotDescriptor, DeleteModelSnapshotRequestParameters, IDeleteModelSnapshotRequest>, IDeleteModelSnapshotRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteModelSnapshot;
@@ -251,7 +251,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for FlushJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</para></summary>
+	///<summary>Descriptor for FlushJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</para></summary>
 	public partial class FlushJobDescriptor : RequestDescriptorBase<FlushJobDescriptor, FlushJobRequestParameters, IFlushJobRequest>, IFlushJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningFlushJob;
@@ -295,7 +295,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetBuckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>
+	///<summary>Descriptor for GetBuckets <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>
 	public partial class GetBucketsDescriptor : RequestDescriptorBase<GetBucketsDescriptor, GetBucketsRequestParameters, IGetBucketsRequest>, IGetBucketsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetBuckets;
@@ -375,7 +375,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetCategories <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</para></summary>
+	///<summary>Descriptor for GetCategories <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</para></summary>
 	public partial class GetCategoriesDescriptor : RequestDescriptorBase<GetCategoriesDescriptor, GetCategoriesRequestParameters, IGetCategoriesRequest>, IGetCategoriesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetCategories;
@@ -406,7 +406,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetDatafeedStats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
+	///<summary>Descriptor for GetDatafeedStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>
 	public partial class GetDatafeedStatsDescriptor : RequestDescriptorBase<GetDatafeedStatsDescriptor, GetDatafeedStatsRequestParameters, IGetDatafeedStatsRequest>, IGetDatafeedStatsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetDatafeedStats;
@@ -430,7 +430,7 @@ namespace Nest
 		public GetDatafeedStatsDescriptor AllowNoDatafeeds(bool? allownodatafeeds = true) => Qs("allow_no_datafeeds", allownodatafeeds);
 	}
 
-	///<summary>Descriptor for GetDatafeeds <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</para></summary>
+	///<summary>Descriptor for GetDatafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</para></summary>
 	public partial class GetDatafeedsDescriptor : RequestDescriptorBase<GetDatafeedsDescriptor, GetDatafeedsRequestParameters, IGetDatafeedsRequest>, IGetDatafeedsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetDatafeeds;
@@ -480,7 +480,7 @@ namespace Nest
 		public GetFiltersDescriptor Size(int? size) => Qs("size", size);
 	}
 
-	///<summary>Descriptor for GetInfluencers <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</para></summary>
+	///<summary>Descriptor for GetInfluencers <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</para></summary>
 	public partial class GetInfluencersDescriptor : RequestDescriptorBase<GetInfluencersDescriptor, GetInfluencersRequestParameters, IGetInfluencersRequest>, IGetInfluencersRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetInfluencers;
@@ -501,7 +501,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetJobStats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</para></summary>
+	///<summary>Descriptor for GetJobStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</para></summary>
 	public partial class GetJobStatsDescriptor : RequestDescriptorBase<GetJobStatsDescriptor, GetJobStatsRequestParameters, IGetJobStatsRequest>, IGetJobStatsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetJobStats;
@@ -525,7 +525,7 @@ namespace Nest
 		public GetJobStatsDescriptor AllowNoJobs(bool? allownojobs = true) => Qs("allow_no_jobs", allownojobs);
 	}
 
-	///<summary>Descriptor for GetJobs <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
+	///<summary>Descriptor for GetJobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
 	public partial class GetJobsDescriptor : RequestDescriptorBase<GetJobsDescriptor, GetJobsRequestParameters, IGetJobsRequest>, IGetJobsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetJobs;
@@ -549,7 +549,7 @@ namespace Nest
 		public GetJobsDescriptor AllowNoJobs(bool? allownojobs = true) => Qs("allow_no_jobs", allownojobs);
 	}
 
-	///<summary>Descriptor for GetModelSnapshots <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</para></summary>
+	///<summary>Descriptor for GetModelSnapshots <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</para></summary>
 	public partial class GetModelSnapshotsDescriptor : RequestDescriptorBase<GetModelSnapshotsDescriptor, GetModelSnapshotsRequestParameters, IGetModelSnapshotsRequest>, IGetModelSnapshotsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetModelSnapshots;
@@ -580,7 +580,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetOverallBuckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
+	///<summary>Descriptor for GetOverallBuckets <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
 	public partial class GetOverallBucketsDescriptor : RequestDescriptorBase<GetOverallBucketsDescriptor, GetOverallBucketsRequestParameters, IGetOverallBucketsRequest>, IGetOverallBucketsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetOverallBuckets;
@@ -601,7 +601,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetAnomalyRecords <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</para></summary>
+	///<summary>Descriptor for GetAnomalyRecords <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</para></summary>
 	public partial class GetAnomalyRecordsDescriptor : RequestDescriptorBase<GetAnomalyRecordsDescriptor, GetAnomalyRecordsRequestParameters, IGetAnomalyRecordsRequest>, IGetAnomalyRecordsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetAnomalyRecords;
@@ -630,7 +630,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for OpenJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</para></summary>
+	///<summary>Descriptor for OpenJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</para></summary>
 	public partial class OpenJobDescriptor : RequestDescriptorBase<OpenJobDescriptor, OpenJobRequestParameters, IOpenJobRequest>, IOpenJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningOpenJob;
@@ -672,7 +672,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for PostJobData <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</para></summary>
+	///<summary>Descriptor for PostJobData <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</para></summary>
 	public partial class PostJobDataDescriptor : RequestDescriptorBase<PostJobDataDescriptor, PostJobDataRequestParameters, IPostJobDataRequest>, IPostJobDataRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPostJobData;
@@ -697,7 +697,7 @@ namespace Nest
 		public PostJobDataDescriptor ResetStart(DateTimeOffset? resetstart) => Qs("reset_start", resetstart);
 	}
 
-	///<summary>Descriptor for PreviewDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
+	///<summary>Descriptor for PreviewDatafeed <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
 	public partial class PreviewDatafeedDescriptor : RequestDescriptorBase<PreviewDatafeedDescriptor, PreviewDatafeedRequestParameters, IPreviewDatafeedRequest>, IPreviewDatafeedRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPreviewDatafeed;
@@ -762,7 +762,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for PutDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</para></summary>
+	///<summary>Descriptor for PutDatafeed <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</para></summary>
 	public partial class PutDatafeedDescriptor<TDocument> : RequestDescriptorBase<PutDatafeedDescriptor<TDocument>, PutDatafeedRequestParameters, IPutDatafeedRequest>, IPutDatafeedRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPutDatafeed;
@@ -780,7 +780,15 @@ namespace Nest
 
 		// values part of the url path
 		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-	// Request parameters
+		// Request parameters
+		///<summary>Ignore if the source indices expressions resolves to no concrete indices (default: true)</summary>
+		public PutDatafeedDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
+		///<summary>Whether source index expressions should get expanded to open or closed indices (default: open)</summary>
+		public PutDatafeedDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
+		///<summary>Ignore indices that are marked as throttled (default: true)</summary>
+		public PutDatafeedDescriptor<TDocument> IgnoreThrottled(bool? ignorethrottled = true) => Qs("ignore_throttled", ignorethrottled);
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public PutDatafeedDescriptor<TDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 	}
 
 	///<summary>Descriptor for PutFilter</summary>
@@ -804,7 +812,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for PutJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</para></summary>
+	///<summary>Descriptor for PutJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</para></summary>
 	public partial class PutJobDescriptor<TDocument> : RequestDescriptorBase<PutJobDescriptor<TDocument>, PutJobRequestParameters, IPutJobRequest>, IPutJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPutJob;
@@ -825,7 +833,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for RevertModelSnapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</para></summary>
+	///<summary>Descriptor for RevertModelSnapshot <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</para></summary>
 	public partial class RevertModelSnapshotDescriptor : RequestDescriptorBase<RevertModelSnapshotDescriptor, RevertModelSnapshotRequestParameters, IRevertModelSnapshotRequest>, IRevertModelSnapshotRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningRevertModelSnapshot;
@@ -848,7 +856,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for StartDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</para></summary>
+	///<summary>Descriptor for StartDatafeed <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</para></summary>
 	public partial class StartDatafeedDescriptor : RequestDescriptorBase<StartDatafeedDescriptor, StartDatafeedRequestParameters, IStartDatafeedRequest>, IStartDatafeedRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningStartDatafeed;
@@ -869,7 +877,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for StopDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</para></summary>
+	///<summary>Descriptor for StopDatafeed <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</para></summary>
 	public partial class StopDatafeedDescriptor : RequestDescriptorBase<StopDatafeedDescriptor, StopDatafeedRequestParameters, IStopDatafeedRequest>, IStopDatafeedRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningStopDatafeed;
@@ -892,7 +900,7 @@ namespace Nest
 		public StopDatafeedDescriptor AllowNoDatafeeds(bool? allownodatafeeds = true) => Qs("allow_no_datafeeds", allownodatafeeds);
 	}
 
-	///<summary>Descriptor for UpdateDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</para></summary>
+	///<summary>Descriptor for UpdateDatafeed <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</para></summary>
 	public partial class UpdateDatafeedDescriptor<TDocument> : RequestDescriptorBase<UpdateDatafeedDescriptor<TDocument>, UpdateDatafeedRequestParameters, IUpdateDatafeedRequest>, IUpdateDatafeedRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningUpdateDatafeed;
@@ -910,7 +918,15 @@ namespace Nest
 
 		// values part of the url path
 		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-	// Request parameters
+		// Request parameters
+		///<summary>Ignore if the source indices expressions resolves to no concrete indices (default: true)</summary>
+		public UpdateDatafeedDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
+		///<summary>Whether source index expressions should get expanded to open or closed indices (default: open)</summary>
+		public UpdateDatafeedDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
+		///<summary>Ignore indices that are marked as throttled (default: true)</summary>
+		public UpdateDatafeedDescriptor<TDocument> IgnoreThrottled(bool? ignorethrottled = true) => Qs("ignore_throttled", ignorethrottled);
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public UpdateDatafeedDescriptor<TDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 	}
 
 	///<summary>Descriptor for UpdateFilter</summary>
@@ -934,7 +950,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for UpdateJob <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</para></summary>
+	///<summary>Descriptor for UpdateJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</para></summary>
 	public partial class UpdateJobDescriptor<TDocument> : RequestDescriptorBase<UpdateJobDescriptor<TDocument>, UpdateJobRequestParameters, IUpdateJobRequest>, IUpdateJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningUpdateJob;
@@ -955,7 +971,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for UpdateModelSnapshot <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</para></summary>
+	///<summary>Descriptor for UpdateModelSnapshot <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</para></summary>
 	public partial class UpdateModelSnapshotDescriptor : RequestDescriptorBase<UpdateModelSnapshotDescriptor, UpdateModelSnapshotRequestParameters, IUpdateModelSnapshotRequest>, IUpdateModelSnapshotRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningUpdateModelSnapshot;

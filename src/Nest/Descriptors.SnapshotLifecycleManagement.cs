@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>Descriptor for DeleteSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete.html</para></summary>
+	///<summary>Descriptor for DeleteSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html</para></summary>
 	public partial class DeleteSnapshotLifecycleDescriptor : RequestDescriptorBase<DeleteSnapshotLifecycleDescriptor, DeleteSnapshotLifecycleRequestParameters, IDeleteSnapshotLifecycleRequest>, IDeleteSnapshotLifecycleRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementDeleteSnapshotLifecycle;
@@ -51,7 +51,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for ExecuteSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html</para></summary>
+	///<summary>Descriptor for ExecuteSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html</para></summary>
 	public partial class ExecuteSnapshotLifecycleDescriptor : RequestDescriptorBase<ExecuteSnapshotLifecycleDescriptor, ExecuteSnapshotLifecycleRequestParameters, IExecuteSnapshotLifecycleRequest>, IExecuteSnapshotLifecycleRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementExecuteSnapshotLifecycle;
@@ -80,7 +80,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get.html</para></summary>
+	///<summary>Descriptor for GetSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html</para></summary>
 	public partial class GetSnapshotLifecycleDescriptor : RequestDescriptorBase<GetSnapshotLifecycleDescriptor, GetSnapshotLifecycleRequestParameters, IGetSnapshotLifecycleRequest>, IGetSnapshotLifecycleRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetSnapshotLifecycle;
@@ -102,7 +102,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetSnapshotLifecycleStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-get-stats.html</para></summary>
+	///<summary>Descriptor for GetSnapshotLifecycleStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html</para></summary>
 	public partial class GetSnapshotLifecycleStatsDescriptor : RequestDescriptorBase<GetSnapshotLifecycleStatsDescriptor, GetSnapshotLifecycleStatsRequestParameters, IGetSnapshotLifecycleStatsRequest>, IGetSnapshotLifecycleStatsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetSnapshotLifecycleStats;
@@ -110,7 +110,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</para></summary>
+	///<summary>Descriptor for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html</para></summary>
 	public partial class GetSnapshotLifecycleManagementStatusDescriptor : RequestDescriptorBase<GetSnapshotLifecycleManagementStatusDescriptor, GetSnapshotLifecycleManagementStatusRequestParameters, IGetSnapshotLifecycleManagementStatusRequest>, IGetSnapshotLifecycleManagementStatusRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetStatus;
@@ -118,7 +118,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for PutSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html</para></summary>
+	///<summary>Descriptor for PutSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html</para></summary>
 	public partial class PutSnapshotLifecycleDescriptor : RequestDescriptorBase<PutSnapshotLifecycleDescriptor, PutSnapshotLifecycleRequestParameters, IPutSnapshotLifecycleRequest>, IPutSnapshotLifecycleRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementPutSnapshotLifecycle;
@@ -139,7 +139,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</para></summary>
+	///<summary>Descriptor for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html</para></summary>
 	public partial class StartSnapshotLifecycleManagementDescriptor : RequestDescriptorBase<StartSnapshotLifecycleManagementDescriptor, StartSnapshotLifecycleManagementRequestParameters, IStartSnapshotLifecycleManagementRequest>, IStartSnapshotLifecycleManagementRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStart;
@@ -147,7 +147,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</para></summary>
+	///<summary>Descriptor for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html</para></summary>
 	public partial class StopSnapshotLifecycleManagementDescriptor : RequestDescriptorBase<StopSnapshotLifecycleManagementDescriptor, StopSnapshotLifecycleManagementRequestParameters, IStopSnapshotLifecycleManagementRequest>, IStopSnapshotLifecycleManagementRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStop;

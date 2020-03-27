@@ -43,44 +43,6 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for DeleteComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
-	public class DeleteComponentTemplateRequestParameters : RequestParameters<DeleteComponentTemplateRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout
-		{
-			get => Q<TimeSpan>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout
-		{
-			get => Q<TimeSpan>("timeout");
-			set => Q("timeout", value);
-		}
-	}
-
-	///<summary>Request options for GetComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
-	public class GetComponentTemplateRequestParameters : RequestParameters<GetComponentTemplateRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
-		}
-
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout
-		{
-			get => Q<TimeSpan>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-	}
-
 	///<summary>Request options for GetSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 	public class ClusterGetSettingsRequestParameters : RequestParameters<ClusterGetSettingsRequestParameters>
 	{
@@ -212,32 +174,6 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		{
 			get => Q<TimeSpan>("master_timeout");
 			set => Q("master_timeout", value);
-		}
-	}
-
-	///<summary>Request options for PutComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
-	public class PutComponentTemplateRequestParameters : RequestParameters<PutComponentTemplateRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
-		public bool? Create
-		{
-			get => Q<bool? >("create");
-			set => Q("create", value);
-		}
-
-		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout
-		{
-			get => Q<TimeSpan>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout
-		{
-			get => Q<TimeSpan>("timeout");
-			set => Q("timeout", value);
 		}
 	}
 

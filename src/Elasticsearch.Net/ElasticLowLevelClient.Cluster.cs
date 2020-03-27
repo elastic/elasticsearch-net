@@ -54,37 +54,6 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		[MapsApi("cluster.allocation_explain", "body")]
 		public Task<TResponse> AllocationExplainAsync<TResponse>(PostData body, ClusterAllocationExplainRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_cluster/allocation/explain", ctx, body, RequestParams(requestParameters));
-		///<summary>DELETE on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
-		///<param name = "name">The name of the template</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse DeleteComponentTemplate<TResponse>(string name, DeleteComponentTemplateRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_component_template/{name:name}"), null, RequestParams(requestParameters));
-		///<summary>DELETE on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
-		///<param name = "name">The name of the template</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("cluster.delete_component_template", "name")]
-		public Task<TResponse> DeleteComponentTemplateAsync<TResponse>(string name, DeleteComponentTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_component_template/{name:name}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_component_template <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse GetComponentTemplate<TResponse>(GetComponentTemplateRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_component_template", null, RequestParams(requestParameters));
-		///<summary>GET on /_component_template <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("cluster.get_component_template", "")]
-		public Task<TResponse> GetComponentTemplateAsync<TResponse>(GetComponentTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_component_template", ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
-		///<param name = "name">The comma separated names of the component templates</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse GetComponentTemplate<TResponse>(string name, GetComponentTemplateRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_component_template/{name:name}"), null, RequestParams(requestParameters));
-		///<summary>GET on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
-		///<param name = "name">The comma separated names of the component templates</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("cluster.get_component_template", "name")]
-		public Task<TResponse> GetComponentTemplateAsync<TResponse>(string name, GetComponentTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_component_template/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cluster/settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetSettings<TResponse>(ClusterGetSettingsRequestParameters requestParameters = null)
@@ -123,19 +92,6 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		[MapsApi("cluster.pending_tasks", "")]
 		public Task<TResponse> PendingTasksAsync<TResponse>(ClusterPendingTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_cluster/pending_tasks", ctx, null, RequestParams(requestParameters));
-		///<summary>PUT on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
-		///<param name = "name">The name of the template</param>
-		///<param name = "body">The template definition</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse PutComponentTemplate<TResponse>(string name, PostData body, PutComponentTemplateRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_component_template/{name:name}"), body, RequestParams(requestParameters));
-		///<summary>PUT on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
-		///<param name = "name">The name of the template</param>
-		///<param name = "body">The template definition</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("cluster.put_component_template", "name, body")]
-		public Task<TResponse> PutComponentTemplateAsync<TResponse>(string name, PostData body, PutComponentTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_component_template/{name:name}"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_cluster/settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 		///<param name = "body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

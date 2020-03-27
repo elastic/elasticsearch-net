@@ -57,6 +57,13 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseGet;
 		// values part of the url path
 		// Request parameters
+		///<summary>If the active license is an enterprise license, return type as 'enterprise' (default: false)</summary>
+		public bool? AcceptEnterprise
+		{
+			get => Q<bool? >("accept_enterprise");
+			set => Q("accept_enterprise", value);
+		}
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local
 		{
