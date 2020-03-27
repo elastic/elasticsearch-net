@@ -929,20 +929,14 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             var day = 0;
             if (hasDay)
             {
-                var poolArray = JsonSerializer.MemoryPool.Rent();
-                try
+				const int maxDayLength = 8 + 1; // {Day}.
+                var dayCharacters = new byte[maxDayLength];
+                for (; array[i] != '.'; i++)
                 {
-                    for (; array[i] != '.'; i++)
-                    {
-                        poolArray[day++] = array[i];
-                    }
-                    day = new JsonReader(poolArray).ReadInt32();
-                    i++; // skip '.'
+                    dayCharacters[day++] = array[i];
                 }
-                finally
-                {
-					JsonSerializer.MemoryPool.Return(poolArray);
-                }
+                day = new JsonReader(dayCharacters).ReadInt32();
+                i++; // skip '.'
             }
 
             var hour = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
