@@ -14,7 +14,7 @@ namespace Tests.Reproduce
 		{
 			DateMath dateMath = new DateTime(2019, 5, 7, 12, 0, 0, 20);
 
-			var json = TestClient.Default.RequestResponseSerializer.SerializeToString(dateMath, MemoryStreamFactory.Default);
+			var json = TestClient.Default.RequestResponseSerializer.SerializeToString(dateMath, ConnectionConfiguration.DefaultMemoryStreamFactory);
 			json.Should().Be("\"2019-05-07T12:00:00.020\"");
 		}
 
@@ -23,7 +23,7 @@ namespace Tests.Reproduce
 		{
 			DateMath dateMath = new DateTime(2019, 5, 7, 12, 0, 0, 200);
 
-			var json = TestClient.Default.RequestResponseSerializer.SerializeToString(dateMath, MemoryStreamFactory.Default);
+			var json = TestClient.Default.RequestResponseSerializer.SerializeToString(dateMath, ConnectionConfiguration.DefaultMemoryStreamFactory);
 			json.Should().Be("\"2019-05-07T12:00:00.200\"");
 		}
 	}

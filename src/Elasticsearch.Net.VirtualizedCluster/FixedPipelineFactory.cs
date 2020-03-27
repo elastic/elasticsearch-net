@@ -5,7 +5,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		public FixedPipelineFactory(IConnectionConfigurationValues connectionSettings, IDateTimeProvider dateTimeProvider)
 		{
 			DateTimeProvider = dateTimeProvider;
-			MemoryStreamFactory = Elasticsearch.Net.MemoryStreamFactory.Default;
+			MemoryStreamFactory = ConnectionConfiguration.DefaultMemoryStreamFactory;
 
 			Settings = connectionSettings;
 			Pipeline = Create(Settings, DateTimeProvider, MemoryStreamFactory, new SearchRequestParameters());
