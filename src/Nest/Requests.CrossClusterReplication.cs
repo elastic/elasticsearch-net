@@ -182,7 +182,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ForgetFollowerIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+	///<summary>Request for ForgetFollowerIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-forget-follower.html</para></summary>
 	public partial class ForgetFollowerIndexRequest : PlainRequestBase<ForgetFollowerIndexRequestParameters>, IForgetFollowerIndexRequest
 	{
 		protected IForgetFollowerIndexRequest Self => this;
@@ -426,7 +426,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for UnfollowIndex <para>http://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
+	///<summary>Request for UnfollowIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ccr-post-unfollow.html</para></summary>
 	public partial class UnfollowIndexRequest : PlainRequestBase<UnfollowIndexRequestParameters>, IUnfollowIndexRequest
 	{
 		protected IUnfollowIndexRequest Self => this;

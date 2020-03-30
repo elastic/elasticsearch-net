@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete.html</para></summary>
+	///<summary>Request for DeleteSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html</para></summary>
 	public partial class DeleteSnapshotLifecycleRequest : PlainRequestBase<DeleteSnapshotLifecycleRequestParameters>, IDeleteSnapshotLifecycleRequest
 	{
 		protected IDeleteSnapshotLifecycleRequest Self => this;
@@ -74,7 +74,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ExecuteSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute.html</para></summary>
+	///<summary>Request for ExecuteSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html</para></summary>
 	public partial class ExecuteSnapshotLifecycleRequest : PlainRequestBase<ExecuteSnapshotLifecycleRequestParameters>, IExecuteSnapshotLifecycleRequest
 	{
 		protected IExecuteSnapshotLifecycleRequest Self => this;
@@ -121,7 +121,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get.html</para></summary>
+	///<summary>Request for GetSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html</para></summary>
 	public partial class GetSnapshotLifecycleRequest : PlainRequestBase<GetSnapshotLifecycleRequestParameters>, IGetSnapshotLifecycleRequest
 	{
 		protected IGetSnapshotLifecycleRequest Self => this;
@@ -148,7 +148,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetSnapshotLifecycleStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-get-stats.html</para></summary>
+	///<summary>Request for GetSnapshotLifecycleStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html</para></summary>
 	public partial class GetSnapshotLifecycleStatsRequest : PlainRequestBase<GetSnapshotLifecycleStatsRequestParameters>, IGetSnapshotLifecycleStatsRequest
 	{
 		protected IGetSnapshotLifecycleStatsRequest Self => this;
@@ -162,7 +162,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-get-status.html</para></summary>
+	///<summary>Request for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html</para></summary>
 	public partial class GetSnapshotLifecycleManagementStatusRequest : PlainRequestBase<GetSnapshotLifecycleManagementStatusRequestParameters>, IGetSnapshotLifecycleManagementStatusRequest
 	{
 		protected IGetSnapshotLifecycleManagementStatusRequest Self => this;
@@ -181,7 +181,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put.html</para></summary>
+	///<summary>Request for PutSnapshotLifecycle <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html</para></summary>
 	public partial class PutSnapshotLifecycleRequest : PlainRequestBase<PutSnapshotLifecycleRequestParameters>, IPutSnapshotLifecycleRequest
 	{
 		protected IPutSnapshotLifecycleRequest Self => this;
@@ -209,7 +209,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-start.html</para></summary>
+	///<summary>Request for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html</para></summary>
 	public partial class StartSnapshotLifecycleManagementRequest : PlainRequestBase<StartSnapshotLifecycleManagementRequestParameters>, IStartSnapshotLifecycleManagementRequest
 	{
 		protected IStartSnapshotLifecycleManagementRequest Self => this;
@@ -223,7 +223,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-stop.html</para></summary>
+	///<summary>Request for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html</para></summary>
 	public partial class StopSnapshotLifecycleManagementRequest : PlainRequestBase<StopSnapshotLifecycleManagementRequestParameters>, IStopSnapshotLifecycleManagementRequest
 	{
 		protected IStopSnapshotLifecycleManagementRequest Self => this;

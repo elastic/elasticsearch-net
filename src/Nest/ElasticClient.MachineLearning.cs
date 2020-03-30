@@ -39,25 +39,25 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.close_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</a>
 		/// </summary>
 		public CloseJobResponse CloseJob(Id jobId, Func<CloseJobDescriptor, ICloseJobRequest> selector = null) => CloseJob(selector.InvokeOrDefault(new CloseJobDescriptor(jobId: jobId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.close_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</a>
 		/// </summary>
 		public Task<CloseJobResponse> CloseJobAsync(Id jobId, Func<CloseJobDescriptor, ICloseJobRequest> selector = null, CancellationToken ct = default) => CloseJobAsync(selector.InvokeOrDefault(new CloseJobDescriptor(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.close_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</a>
 		/// </summary>
 		public CloseJobResponse CloseJob(ICloseJobRequest request) => DoRequest<ICloseJobRequest, CloseJobResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.close_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</a>
 		/// </summary>
 		public Task<CloseJobResponse> CloseJobAsync(ICloseJobRequest request, CancellationToken ct = default) => DoRequestAsync<ICloseJobRequest, CloseJobResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -135,25 +135,25 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</a>
 		/// </summary>
 		public DeleteDatafeedResponse DeleteDatafeed(Id datafeedId, Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null) => DeleteDatafeed(selector.InvokeOrDefault(new DeleteDatafeedDescriptor(datafeedId: datafeedId)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</a>
 		/// </summary>
 		public Task<DeleteDatafeedResponse> DeleteDatafeedAsync(Id datafeedId, Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null, CancellationToken ct = default) => DeleteDatafeedAsync(selector.InvokeOrDefault(new DeleteDatafeedDescriptor(datafeedId: datafeedId)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</a>
 		/// </summary>
 		public DeleteDatafeedResponse DeleteDatafeed(IDeleteDatafeedRequest request) => DoRequest<IDeleteDatafeedRequest, DeleteDatafeedResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</a>
 		/// </summary>
 		public Task<DeleteDatafeedResponse> DeleteDatafeedAsync(IDeleteDatafeedRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteDatafeedRequest, DeleteDatafeedResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -207,97 +207,97 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_forecast</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</a>
 		/// </summary>
 		public DeleteForecastResponse DeleteForecast(Id jobId, Ids forecastId, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null) => DeleteForecast(selector.InvokeOrDefault(new DeleteForecastDescriptor(jobId: jobId, forecastId: forecastId)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_forecast</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</a>
 		/// </summary>
 		public Task<DeleteForecastResponse> DeleteForecastAsync(Id jobId, Ids forecastId, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null, CancellationToken ct = default) => DeleteForecastAsync(selector.InvokeOrDefault(new DeleteForecastDescriptor(jobId: jobId, forecastId: forecastId)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_forecast</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</a>
 		/// </summary>
 		public DeleteForecastResponse DeleteForecast(IDeleteForecastRequest request) => DoRequest<IDeleteForecastRequest, DeleteForecastResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_forecast</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html</a>
 		/// </summary>
 		public Task<DeleteForecastResponse> DeleteForecastAsync(IDeleteForecastRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteForecastRequest, DeleteForecastResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</a>
 		/// </summary>
 		public DeleteJobResponse DeleteJob(Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null) => DeleteJob(selector.InvokeOrDefault(new DeleteJobDescriptor(jobId: jobId)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</a>
 		/// </summary>
 		public Task<DeleteJobResponse> DeleteJobAsync(Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null, CancellationToken ct = default) => DeleteJobAsync(selector.InvokeOrDefault(new DeleteJobDescriptor(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</a>
 		/// </summary>
 		public DeleteJobResponse DeleteJob(IDeleteJobRequest request) => DoRequest<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</a>
 		/// </summary>
 		public Task<DeleteJobResponse> DeleteJobAsync(IDeleteJobRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_model_snapshot</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</a>
 		/// </summary>
 		public DeleteModelSnapshotResponse DeleteModelSnapshot(Id jobId, Id snapshotId, Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> selector = null) => DeleteModelSnapshot(selector.InvokeOrDefault(new DeleteModelSnapshotDescriptor(jobId: jobId, snapshotId: snapshotId)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_model_snapshot</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</a>
 		/// </summary>
 		public Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(Id jobId, Id snapshotId, Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> selector = null, CancellationToken ct = default) => DeleteModelSnapshotAsync(selector.InvokeOrDefault(new DeleteModelSnapshotDescriptor(jobId: jobId, snapshotId: snapshotId)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_model_snapshot</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</a>
 		/// </summary>
 		public DeleteModelSnapshotResponse DeleteModelSnapshot(IDeleteModelSnapshotRequest request) => DoRequest<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_model_snapshot</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</a>
 		/// </summary>
 		public Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(IDeleteModelSnapshotRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.flush_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</a>
 		/// </summary>
 		public FlushJobResponse FlushJob(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector = null) => FlushJob(selector.InvokeOrDefault(new FlushJobDescriptor(jobId: jobId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.flush_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</a>
 		/// </summary>
 		public Task<FlushJobResponse> FlushJobAsync(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector = null, CancellationToken ct = default) => FlushJobAsync(selector.InvokeOrDefault(new FlushJobDescriptor(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.flush_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</a>
 		/// </summary>
 		public FlushJobResponse FlushJob(IFlushJobRequest request) => DoRequest<IFlushJobRequest, FlushJobResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.flush_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</a>
 		/// </summary>
 		public Task<FlushJobResponse> FlushJobAsync(IFlushJobRequest request, CancellationToken ct = default) => DoRequestAsync<IFlushJobRequest, FlushJobResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -327,25 +327,25 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_buckets</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</a>
 		/// </summary>
 		public GetBucketsResponse GetBuckets(Id jobId, Func<GetBucketsDescriptor, IGetBucketsRequest> selector = null) => GetBuckets(selector.InvokeOrDefault(new GetBucketsDescriptor(jobId: jobId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_buckets</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</a>
 		/// </summary>
 		public Task<GetBucketsResponse> GetBucketsAsync(Id jobId, Func<GetBucketsDescriptor, IGetBucketsRequest> selector = null, CancellationToken ct = default) => GetBucketsAsync(selector.InvokeOrDefault(new GetBucketsDescriptor(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_buckets</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</a>
 		/// </summary>
 		public GetBucketsResponse GetBuckets(IGetBucketsRequest request) => DoRequest<IGetBucketsRequest, GetBucketsResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_buckets</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</a>
 		/// </summary>
 		public Task<GetBucketsResponse> GetBucketsAsync(IGetBucketsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetBucketsRequest, GetBucketsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -399,73 +399,73 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_categories</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</a>
 		/// </summary>
 		public GetCategoriesResponse GetCategories(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null) => GetCategories(selector.InvokeOrDefault(new GetCategoriesDescriptor(jobId: jobId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_categories</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</a>
 		/// </summary>
 		public Task<GetCategoriesResponse> GetCategoriesAsync(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null, CancellationToken ct = default) => GetCategoriesAsync(selector.InvokeOrDefault(new GetCategoriesDescriptor(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_categories</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</a>
 		/// </summary>
 		public GetCategoriesResponse GetCategories(IGetCategoriesRequest request) => DoRequest<IGetCategoriesRequest, GetCategoriesResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_categories</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</a>
 		/// </summary>
 		public Task<GetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request, CancellationToken ct = default) => DoRequestAsync<IGetCategoriesRequest, GetCategoriesResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_datafeed_stats</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</a>
 		/// </summary>
 		public GetDatafeedStatsResponse GetDatafeedStats(Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> selector = null) => GetDatafeedStats(selector.InvokeOrDefault(new GetDatafeedStatsDescriptor()));
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_datafeed_stats</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</a>
 		/// </summary>
 		public Task<GetDatafeedStatsResponse> GetDatafeedStatsAsync(Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> selector = null, CancellationToken ct = default) => GetDatafeedStatsAsync(selector.InvokeOrDefault(new GetDatafeedStatsDescriptor()), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_datafeed_stats</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</a>
 		/// </summary>
 		public GetDatafeedStatsResponse GetDatafeedStats(IGetDatafeedStatsRequest request) => DoRequest<IGetDatafeedStatsRequest, GetDatafeedStatsResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_datafeed_stats</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</a>
 		/// </summary>
 		public Task<GetDatafeedStatsResponse> GetDatafeedStatsAsync(IGetDatafeedStatsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetDatafeedStatsRequest, GetDatafeedStatsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_datafeeds</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</a>
 		/// </summary>
 		public GetDatafeedsResponse GetDatafeeds(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null) => GetDatafeeds(selector.InvokeOrDefault(new GetDatafeedsDescriptor()));
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_datafeeds</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</a>
 		/// </summary>
 		public Task<GetDatafeedsResponse> GetDatafeedsAsync(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null, CancellationToken ct = default) => GetDatafeedsAsync(selector.InvokeOrDefault(new GetDatafeedsDescriptor()), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_datafeeds</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</a>
 		/// </summary>
 		public GetDatafeedsResponse GetDatafeeds(IGetDatafeedsRequest request) => DoRequest<IGetDatafeedsRequest, GetDatafeedsResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_datafeeds</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</a>
 		/// </summary>
 		public Task<GetDatafeedsResponse> GetDatafeedsAsync(IGetDatafeedsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetDatafeedsRequest, GetDatafeedsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -495,145 +495,145 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_influencers</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</a>
 		/// </summary>
 		public GetInfluencersResponse GetInfluencers(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null) => GetInfluencers(selector.InvokeOrDefault(new GetInfluencersDescriptor(jobId: jobId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_influencers</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</a>
 		/// </summary>
 		public Task<GetInfluencersResponse> GetInfluencersAsync(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null, CancellationToken ct = default) => GetInfluencersAsync(selector.InvokeOrDefault(new GetInfluencersDescriptor(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_influencers</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</a>
 		/// </summary>
 		public GetInfluencersResponse GetInfluencers(IGetInfluencersRequest request) => DoRequest<IGetInfluencersRequest, GetInfluencersResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_influencers</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</a>
 		/// </summary>
 		public Task<GetInfluencersResponse> GetInfluencersAsync(IGetInfluencersRequest request, CancellationToken ct = default) => DoRequestAsync<IGetInfluencersRequest, GetInfluencersResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_job_stats</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</a>
 		/// </summary>
 		public GetJobStatsResponse GetJobStats(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null) => GetJobStats(selector.InvokeOrDefault(new GetJobStatsDescriptor()));
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_job_stats</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</a>
 		/// </summary>
 		public Task<GetJobStatsResponse> GetJobStatsAsync(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null, CancellationToken ct = default) => GetJobStatsAsync(selector.InvokeOrDefault(new GetJobStatsDescriptor()), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_job_stats</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</a>
 		/// </summary>
 		public GetJobStatsResponse GetJobStats(IGetJobStatsRequest request) => DoRequest<IGetJobStatsRequest, GetJobStatsResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_job_stats</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</a>
 		/// </summary>
 		public Task<GetJobStatsResponse> GetJobStatsAsync(IGetJobStatsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetJobStatsRequest, GetJobStatsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_jobs</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</a>
 		/// </summary>
 		public GetJobsResponse GetJobs(Func<GetJobsDescriptor, IGetJobsRequest> selector = null) => GetJobs(selector.InvokeOrDefault(new GetJobsDescriptor()));
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_jobs</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</a>
 		/// </summary>
 		public Task<GetJobsResponse> GetJobsAsync(Func<GetJobsDescriptor, IGetJobsRequest> selector = null, CancellationToken ct = default) => GetJobsAsync(selector.InvokeOrDefault(new GetJobsDescriptor()), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_jobs</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</a>
 		/// </summary>
 		public GetJobsResponse GetJobs(IGetJobsRequest request) => DoRequest<IGetJobsRequest, GetJobsResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_jobs</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</a>
 		/// </summary>
 		public Task<GetJobsResponse> GetJobsAsync(IGetJobsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetJobsRequest, GetJobsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_model_snapshots</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</a>
 		/// </summary>
 		public GetModelSnapshotsResponse GetModelSnapshots(Id jobId, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null) => GetModelSnapshots(selector.InvokeOrDefault(new GetModelSnapshotsDescriptor(jobId: jobId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_model_snapshots</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</a>
 		/// </summary>
 		public Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(Id jobId, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null, CancellationToken ct = default) => GetModelSnapshotsAsync(selector.InvokeOrDefault(new GetModelSnapshotsDescriptor(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_model_snapshots</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</a>
 		/// </summary>
 		public GetModelSnapshotsResponse GetModelSnapshots(IGetModelSnapshotsRequest request) => DoRequest<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_model_snapshots</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</a>
 		/// </summary>
 		public Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(IGetModelSnapshotsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_overall_buckets</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</a>
 		/// </summary>
 		public GetOverallBucketsResponse GetOverallBuckets(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null) => GetOverallBuckets(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(jobId: jobId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_overall_buckets</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</a>
 		/// </summary>
 		public Task<GetOverallBucketsResponse> GetOverallBucketsAsync(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null, CancellationToken ct = default) => GetOverallBucketsAsync(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_overall_buckets</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</a>
 		/// </summary>
 		public GetOverallBucketsResponse GetOverallBuckets(IGetOverallBucketsRequest request) => DoRequest<IGetOverallBucketsRequest, GetOverallBucketsResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_overall_buckets</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</a>
 		/// </summary>
 		public Task<GetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetOverallBucketsRequest, GetOverallBucketsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_records</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</a>
 		/// </summary>
 		public GetAnomalyRecordsResponse GetAnomalyRecords(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null) => GetAnomalyRecords(selector.InvokeOrDefault(new GetAnomalyRecordsDescriptor(jobId: jobId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_records</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</a>
 		/// </summary>
 		public Task<GetAnomalyRecordsResponse> GetAnomalyRecordsAsync(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null, CancellationToken ct = default) => GetAnomalyRecordsAsync(selector.InvokeOrDefault(new GetAnomalyRecordsDescriptor(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_records</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</a>
 		/// </summary>
 		public GetAnomalyRecordsResponse GetAnomalyRecords(IGetAnomalyRecordsRequest request) => DoRequest<IGetAnomalyRecordsRequest, GetAnomalyRecordsResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_records</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</a>
 		/// </summary>
 		public Task<GetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetAnomalyRecordsRequest, GetAnomalyRecordsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -663,25 +663,25 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.open_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</a>
 		/// </summary>
 		public OpenJobResponse OpenJob(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null) => OpenJob(selector.InvokeOrDefault(new OpenJobDescriptor(jobId: jobId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.open_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</a>
 		/// </summary>
 		public Task<OpenJobResponse> OpenJobAsync(Id jobId, Func<OpenJobDescriptor, IOpenJobRequest> selector = null, CancellationToken ct = default) => OpenJobAsync(selector.InvokeOrDefault(new OpenJobDescriptor(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.open_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</a>
 		/// </summary>
 		public OpenJobResponse OpenJob(IOpenJobRequest request) => DoRequest<IOpenJobRequest, OpenJobResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.open_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</a>
 		/// </summary>
 		public Task<OpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken ct = default) => DoRequestAsync<IOpenJobRequest, OpenJobResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -711,52 +711,52 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.post_data</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</a>
 		/// </summary>
 		public PostJobDataResponse PostJobData(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector) => PostJobData(selector.InvokeOrDefault(new PostJobDataDescriptor(jobId: jobId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.post_data</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</a>
 		/// </summary>
 		public Task<PostJobDataResponse> PostJobDataAsync(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector, CancellationToken ct = default) => PostJobDataAsync(selector.InvokeOrDefault(new PostJobDataDescriptor(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.post_data</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</a>
 		/// </summary>
 		public PostJobDataResponse PostJobData(IPostJobDataRequest request) => DoRequest<IPostJobDataRequest, PostJobDataResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.post_data</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</a>
 		/// </summary>
 		public Task<PostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request, CancellationToken ct = default) => DoRequestAsync<IPostJobDataRequest, PostJobDataResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.preview_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
 		/// </summary>
 		public PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(Id datafeedId, Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null)
 			where TDocument : class => PreviewDatafeed<TDocument>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor(datafeedId: datafeedId)));
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.preview_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
 		/// </summary>
 		public Task<PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(Id datafeedId, Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => PreviewDatafeedAsync<TDocument>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor(datafeedId: datafeedId)), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.preview_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
 		/// </summary>
 		public PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(IPreviewDatafeedRequest request)
 			where TDocument : class => DoRequest<IPreviewDatafeedRequest, PreviewDatafeedResponse<TDocument>>(request, ResponseBuilder(request.RequestParameters, PreviewDatafeedResponseBuilder<TDocument>.Instance));
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.preview_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
 		/// </summary>
 		public Task<PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(IPreviewDatafeedRequest request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<IPreviewDatafeedRequest, PreviewDatafeedResponse<TDocument>>(request, ResponseBuilder(request.RequestParameters, PreviewDatafeedResponseBuilder<TDocument>.Instance), ct);
@@ -811,27 +811,27 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</a>
 		/// </summary>
 		public PutDatafeedResponse PutDatafeed<TDocument>(Id datafeedId, Func<PutDatafeedDescriptor<TDocument>, IPutDatafeedRequest> selector)
 			where TDocument : class => PutDatafeed(selector.InvokeOrDefault(new PutDatafeedDescriptor<TDocument>(datafeedId: datafeedId)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</a>
 		/// </summary>
 		public Task<PutDatafeedResponse> PutDatafeedAsync<TDocument>(Id datafeedId, Func<PutDatafeedDescriptor<TDocument>, IPutDatafeedRequest> selector, CancellationToken ct = default)
 			where TDocument : class => PutDatafeedAsync(selector.InvokeOrDefault(new PutDatafeedDescriptor<TDocument>(datafeedId: datafeedId)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</a>
 		/// </summary>
 		public PutDatafeedResponse PutDatafeed(IPutDatafeedRequest request) => DoRequest<IPutDatafeedRequest, PutDatafeedResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</a>
 		/// </summary>
 		public Task<PutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request, CancellationToken ct = default) => DoRequestAsync<IPutDatafeedRequest, PutDatafeedResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -861,125 +861,125 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</a>
 		/// </summary>
 		public PutJobResponse PutJob<TDocument>(Id jobId, Func<PutJobDescriptor<TDocument>, IPutJobRequest> selector)
 			where TDocument : class => PutJob(selector.InvokeOrDefault(new PutJobDescriptor<TDocument>(jobId: jobId)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</a>
 		/// </summary>
 		public Task<PutJobResponse> PutJobAsync<TDocument>(Id jobId, Func<PutJobDescriptor<TDocument>, IPutJobRequest> selector, CancellationToken ct = default)
 			where TDocument : class => PutJobAsync(selector.InvokeOrDefault(new PutJobDescriptor<TDocument>(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</a>
 		/// </summary>
 		public PutJobResponse PutJob(IPutJobRequest request) => DoRequest<IPutJobRequest, PutJobResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</a>
 		/// </summary>
 		public Task<PutJobResponse> PutJobAsync(IPutJobRequest request, CancellationToken ct = default) => DoRequestAsync<IPutJobRequest, PutJobResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.revert_model_snapshot</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</a>
 		/// </summary>
 		public RevertModelSnapshotResponse RevertModelSnapshot(Id jobId, Id snapshotId, Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null) => RevertModelSnapshot(selector.InvokeOrDefault(new RevertModelSnapshotDescriptor(jobId: jobId, snapshotId: snapshotId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.revert_model_snapshot</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</a>
 		/// </summary>
 		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(Id jobId, Id snapshotId, Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null, CancellationToken ct = default) => RevertModelSnapshotAsync(selector.InvokeOrDefault(new RevertModelSnapshotDescriptor(jobId: jobId, snapshotId: snapshotId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.revert_model_snapshot</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</a>
 		/// </summary>
 		public RevertModelSnapshotResponse RevertModelSnapshot(IRevertModelSnapshotRequest request) => DoRequest<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.revert_model_snapshot</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</a>
 		/// </summary>
 		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request, CancellationToken ct = default) => DoRequestAsync<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.start_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</a>
 		/// </summary>
 		public StartDatafeedResponse StartDatafeed(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null) => StartDatafeed(selector.InvokeOrDefault(new StartDatafeedDescriptor(datafeedId: datafeedId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.start_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</a>
 		/// </summary>
 		public Task<StartDatafeedResponse> StartDatafeedAsync(Id datafeedId, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null, CancellationToken ct = default) => StartDatafeedAsync(selector.InvokeOrDefault(new StartDatafeedDescriptor(datafeedId: datafeedId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.start_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</a>
 		/// </summary>
 		public StartDatafeedResponse StartDatafeed(IStartDatafeedRequest request) => DoRequest<IStartDatafeedRequest, StartDatafeedResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.start_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</a>
 		/// </summary>
 		public Task<StartDatafeedResponse> StartDatafeedAsync(IStartDatafeedRequest request, CancellationToken ct = default) => DoRequestAsync<IStartDatafeedRequest, StartDatafeedResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.stop_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</a>
 		/// </summary>
 		public StopDatafeedResponse StopDatafeed(Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null) => StopDatafeed(selector.InvokeOrDefault(new StopDatafeedDescriptor(datafeedId: datafeedId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.stop_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</a>
 		/// </summary>
 		public Task<StopDatafeedResponse> StopDatafeedAsync(Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null, CancellationToken ct = default) => StopDatafeedAsync(selector.InvokeOrDefault(new StopDatafeedDescriptor(datafeedId: datafeedId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.stop_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</a>
 		/// </summary>
 		public StopDatafeedResponse StopDatafeed(IStopDatafeedRequest request) => DoRequest<IStopDatafeedRequest, StopDatafeedResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.stop_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</a>
 		/// </summary>
 		public Task<StopDatafeedResponse> StopDatafeedAsync(IStopDatafeedRequest request, CancellationToken ct = default) => DoRequestAsync<IStopDatafeedRequest, StopDatafeedResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</a>
 		/// </summary>
 		public UpdateDatafeedResponse UpdateDatafeed<TDocument>(Id datafeedId, Func<UpdateDatafeedDescriptor<TDocument>, IUpdateDatafeedRequest> selector)
 			where TDocument : class => UpdateDatafeed(selector.InvokeOrDefault(new UpdateDatafeedDescriptor<TDocument>(datafeedId: datafeedId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</a>
 		/// </summary>
 		public Task<UpdateDatafeedResponse> UpdateDatafeedAsync<TDocument>(Id datafeedId, Func<UpdateDatafeedDescriptor<TDocument>, IUpdateDatafeedRequest> selector, CancellationToken ct = default)
 			where TDocument : class => UpdateDatafeedAsync(selector.InvokeOrDefault(new UpdateDatafeedDescriptor<TDocument>(datafeedId: datafeedId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</a>
 		/// </summary>
 		public UpdateDatafeedResponse UpdateDatafeed(IUpdateDatafeedRequest request) => DoRequest<IUpdateDatafeedRequest, UpdateDatafeedResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_datafeed</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</a>
 		/// </summary>
 		public Task<UpdateDatafeedResponse> UpdateDatafeedAsync(IUpdateDatafeedRequest request, CancellationToken ct = default) => DoRequestAsync<IUpdateDatafeedRequest, UpdateDatafeedResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -1009,51 +1009,51 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</a>
 		/// </summary>
 		public UpdateJobResponse UpdateJob<TDocument>(Id jobId, Func<UpdateJobDescriptor<TDocument>, IUpdateJobRequest> selector)
 			where TDocument : class => UpdateJob(selector.InvokeOrDefault(new UpdateJobDescriptor<TDocument>(jobId: jobId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</a>
 		/// </summary>
 		public Task<UpdateJobResponse> UpdateJobAsync<TDocument>(Id jobId, Func<UpdateJobDescriptor<TDocument>, IUpdateJobRequest> selector, CancellationToken ct = default)
 			where TDocument : class => UpdateJobAsync(selector.InvokeOrDefault(new UpdateJobDescriptor<TDocument>(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</a>
 		/// </summary>
 		public UpdateJobResponse UpdateJob(IUpdateJobRequest request) => DoRequest<IUpdateJobRequest, UpdateJobResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</a>
 		/// </summary>
 		public Task<UpdateJobResponse> UpdateJobAsync(IUpdateJobRequest request, CancellationToken ct = default) => DoRequestAsync<IUpdateJobRequest, UpdateJobResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_model_snapshot</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</a>
 		/// </summary>
 		public UpdateModelSnapshotResponse UpdateModelSnapshot(Id jobId, Id snapshotId, Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector) => UpdateModelSnapshot(selector.InvokeOrDefault(new UpdateModelSnapshotDescriptor(jobId: jobId, snapshotId: snapshotId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_model_snapshot</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</a>
 		/// </summary>
 		public Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(Id jobId, Id snapshotId, Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector, CancellationToken ct = default) => UpdateModelSnapshotAsync(selector.InvokeOrDefault(new UpdateModelSnapshotDescriptor(jobId: jobId, snapshotId: snapshotId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_model_snapshot</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</a>
 		/// </summary>
 		public UpdateModelSnapshotResponse UpdateModelSnapshot(IUpdateModelSnapshotRequest request) => DoRequest<IUpdateModelSnapshotRequest, UpdateModelSnapshotResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_model_snapshot</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</a>
 		/// </summary>
 		public Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(IUpdateModelSnapshotRequest request, CancellationToken ct = default) => DoRequestAsync<IUpdateModelSnapshotRequest, UpdateModelSnapshotResponse>(request, request.RequestParameters, ct);
 		/// <summary>

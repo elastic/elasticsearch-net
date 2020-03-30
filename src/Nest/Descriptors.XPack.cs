@@ -40,7 +40,7 @@ namespace Nest
 		public XPackInfoDescriptor Categories(params string[] categories) => Qs("categories", categories);
 	}
 
-	///<summary>Descriptor for Usage <para>Retrieve information about xpack features usage</para></summary>
+	///<summary>Descriptor for Usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html</para></summary>
 	public partial class XPackUsageDescriptor : RequestDescriptorBase<XPackUsageDescriptor, XPackUsageRequestParameters, IXPackUsageRequest>, IXPackUsageRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.XPackUsage;
