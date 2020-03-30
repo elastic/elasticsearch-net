@@ -36,7 +36,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ClearCursor <para>Clear SQL cursor</para></summary>
+	///<summary>Request for ClearCursor <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html</para></summary>
 	public partial class ClearSqlCursorRequest : PlainRequestBase<ClearSqlCursorRequestParameters>, IClearSqlCursorRequest
 	{
 		protected IClearSqlCursorRequest Self => this;
@@ -50,7 +50,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Query <para>Execute SQL</para></summary>
+	///<summary>Request for Query <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</para></summary>
 	public partial class QuerySqlRequest : PlainRequestBase<QuerySqlRequestParameters>, IQuerySqlRequest
 	{
 		protected IQuerySqlRequest Self => this;
@@ -70,7 +70,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Translate <para>Translate SQL into Elasticsearch queries</para></summary>
+	///<summary>Request for Translate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html</para></summary>
 	public partial class TranslateSqlRequest : PlainRequestBase<TranslateSqlRequestParameters>, ITranslateSqlRequest
 	{
 		protected ITranslateSqlRequest Self => this;

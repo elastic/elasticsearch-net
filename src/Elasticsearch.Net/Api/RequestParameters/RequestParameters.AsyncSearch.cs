@@ -49,10 +49,10 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 		}
 
 		///<summary>Specify the time that the request should block waiting for the final response</summary>
-		public TimeSpan WaitForCompletion
+		public TimeSpan WaitForCompletionTimeout
 		{
-			get => Q<TimeSpan>("wait_for_completion");
-			set => Q("wait_for_completion", value);
+			get => Q<TimeSpan>("wait_for_completion_timeout");
+			set => Q("wait_for_completion_timeout", value);
 		}
 	}
 
@@ -99,16 +99,6 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 		{
 			get => Q<long? >("batched_reduce_size");
 			set => Q("batched_reduce_size", value);
-		}
-
-		///<summary>
-		/// Control whether the response should not be stored in the cluster if it completed within the provided [wait_for_completion] time (default:
-		/// true)
-		///</summary>
-		public bool? CleanOnCompletion
-		{
-			get => Q<bool? >("clean_on_completion");
-			set => Q("clean_on_completion", value);
 		}
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
@@ -172,6 +162,16 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 		{
 			get => Q<TimeSpan>("keep_alive");
 			set => Q("keep_alive", value);
+		}
+
+		///<summary>
+		/// Control whether the response should be stored in the cluster if it completed within the provided [wait_for_completion] time (default:
+		/// true)
+		///</summary>
+		public bool? KeepOnCompletion
+		{
+			get => Q<bool? >("keep_on_completion");
+			set => Q("keep_on_completion", value);
 		}
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
@@ -353,10 +353,10 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 		}
 
 		///<summary>Specify the time that the request should block waiting for the final response</summary>
-		public TimeSpan WaitForCompletion
+		public TimeSpan WaitForCompletionTimeout
 		{
-			get => Q<TimeSpan>("wait_for_completion");
-			set => Q("wait_for_completion", value);
+			get => Q<TimeSpan>("wait_for_completion_timeout");
+			set => Q("wait_for_completion_timeout", value);
 		}
 	}
 }

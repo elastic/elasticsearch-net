@@ -154,12 +154,6 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for EstimateMemoryUsage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</para></summary>
-	public class EstimateMemoryUsageRequestParameters : RequestParameters<EstimateMemoryUsageRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-
 	///<summary>Request options for EstimateModelMemory</summary>
 	public class EstimateModelMemoryRequestParameters : RequestParameters<EstimateModelMemoryRequestParameters>
 	{
