@@ -516,5 +516,29 @@ namespace Nest.Specification.CatApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</a>
 		/// </summary>
 		public Task<CatResponse<CatThreadPoolRecord>> ThreadPoolAsync(ICatThreadPoolRequest request, CancellationToken ct = default) => DoCatAsync<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request, ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.transform</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</a>
+		/// </summary>
+		public CatResponse<CatTransformRecord> Transform(Func<CatTransformDescriptor, ICatTransformRequest> selector = null) => Transform(selector.InvokeOrDefault(new CatTransformDescriptor()));
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.transform</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</a>
+		/// </summary>
+		public Task<CatResponse<CatTransformRecord>> TransformAsync(Func<CatTransformDescriptor, ICatTransformRequest> selector = null, CancellationToken ct = default) => TransformAsync(selector.InvokeOrDefault(new CatTransformDescriptor()), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.transform</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</a>
+		/// </summary>
+		public CatResponse<CatTransformRecord> Transform(ICatTransformRequest request) => DoCat<ICatTransformRequest, CatTransformRequestParameters, CatTransformRecord>(request);
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.transform</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</a>
+		/// </summary>
+		public Task<CatResponse<CatTransformRecord>> TransformAsync(ICatTransformRequest request, CancellationToken ct = default) => DoCatAsync<ICatTransformRequest, CatTransformRequestParameters, CatTransformRecord>(request, ct);
 	}
 }
