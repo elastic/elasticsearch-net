@@ -31,10 +31,33 @@ namespace ApiGenerator.Configuration
 
 		public static string[] IgnoredApisHighLevel { get; } =
 		{
+			"autoscaling.get_autoscaling_decision.json", // 7.7 experimental
+			"eql.search.json", // 7.7 beta
+			"get_script_context.json", // 7.7 experimental
+			"get_script_languages.json", // 7.7 experimental
+			"indices.create_data_stream.json", // 7.7 experimental
+			"indices.delete_data_stream.json", // 7.7 experimental
+			"indices.get_data_streams.json", // 7.7 experimental
+			"ml.delete_data_frame_analytics.json", // 7.7 experimental
+			"ml.delete_trained_model.json", // 7.7 experimental
+			"ml.evaluate_data_frame.json", // 7.7 experimental
+			"ml.explain_data_frame_analytics.json", // 7.7 experimental
+			"ml.find_file_structure.json", // 7.7 experimental
+			"ml.get_data_frame_analytics.json", // 7.7 experimental
+			"ml.get_data_frame_analytics_stats.json", // 7.7 experimental
+			"ml.get_trained_models.json", // 7.7 experimental
+			"ml.get_trained_models_stats.json", // 7.7 experimental
+			"ml.put_data_frame_analytics.json", // 7.7 experimental
+			"ml.put_trained_model.json", // 7.7 experimental
+			"ml.start_data_frame_analytics.json", // 7.7 experimental
+			"ml.stop_data_frame_analytics.json", // 7.7 experimental
+			"rank_eval.json", // 7.7 experimental
+			"scripts_painless_context.json", // 7.7 experimental
+
+			// 7.7 - to be implemented
 			"async_search.delete.json",
 			"async_search.get.json",
 			"async_search.submit.json",
-			"autoscaling.get_autoscaling_decision.json",
 			"cat.ml_data_frame_analytics.json",
 			"cat.ml_datafeeds.json",
 			"cat.ml_jobs.json",
@@ -43,38 +66,9 @@ namespace ApiGenerator.Configuration
 			"cluster.delete_component_template.json",
 			"cluster.get_component_template.json",
 			"cluster.put_component_template.json",
-			"data_frame.delete_data_frame_transform.json",
-			"data_frame.get_data_frame_transform.json",
-			"data_frame.get_data_frame_transform_stats.json",
-			"data_frame.preview_data_frame_transform.json",
-			"data_frame.put_data_frame_transform.json",
-			"data_frame.start_data_frame_transform.json",
-			"data_frame.stop_data_frame_transform.json",
-			"data_frame.update_data_frame_transform.json",
-			"eql.search.json",
-			"get_script_context.json",
-			"get_script_languages.json",
-			"indices.create_data_stream.json",
-			"indices.delete_data_stream.json",
-			"indices.get_data_streams.json",
 			"indices.reload_search_analyzers.json",
-			"ml.delete_data_frame_analytics.json",
-			"ml.delete_trained_model.json",
 			"ml.estimate_model_memory.json",
-			"ml.evaluate_data_frame.json",
-			"ml.explain_data_frame_analytics.json",
-			"ml.find_file_structure.json",
-			"ml.get_data_frame_analytics.json",
-			"ml.get_data_frame_analytics_stats.json",
-			"ml.get_trained_models.json",
-			"ml.get_trained_models_stats.json",
-			"ml.put_data_frame_analytics.json",
-			"ml.put_trained_model.json",
 			"ml.set_upgrade_mode.json",
-			"ml.start_data_frame_analytics.json",
-			"ml.stop_data_frame_analytics.json",
-			"rank_eval.json",
-			"scripts_painless_context.json",
 			"security.get_builtin_privileges.json",
 			"transform.delete_transform.json",
 			"transform.get_transform.json",
