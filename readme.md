@@ -1,6 +1,8 @@
 Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasticsearch](https://github.com/elastic/elasticsearch) .NET clients.
 
 ## Compatibility Matrix
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Felastic%2Felasticsearch-net.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Felastic%2Felasticsearch-net?ref=badge_shield)
+
 <table>
     <tr>
         <th><b>.NET Clients<b></th>
@@ -377,3 +379,6 @@ A small HTTP server will be spun up locally on port 8000 through which you can v
 This software is Copyright (c) 2014-2019 by Elasticsearch BV.
 
 This is free software, licensed under: [The Apache License Version 2.0](https://github.com/elastic/elasticsearch-net/blob/master/license.txt).
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Felastic%2Felasticsearch-net.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Felastic%2Felasticsearch-net?ref=badge_large)
