@@ -251,6 +251,14 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>Descriptor for EstimateModelMemory</summary>
+	public partial class EstimateModelMemoryDescriptor<TDocument> : RequestDescriptorBase<EstimateModelMemoryDescriptor<TDocument>, EstimateModelMemoryRequestParameters, IEstimateModelMemoryRequest>, IEstimateModelMemoryRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningEstimateModelMemory;
+	// values part of the url path
+	// Request parameters
+	}
+
 	///<summary>Descriptor for FlushJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</para></summary>
 	public partial class FlushJobDescriptor : RequestDescriptorBase<FlushJobDescriptor, FlushJobRequestParameters, IFlushJobRequest>, IFlushJobRequest
 	{
