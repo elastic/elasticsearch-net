@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Domain;
@@ -7,6 +8,7 @@ using static Nest.Infer;
 
 namespace Tests.XPack.MachineLearning.EstimateModelMemory
 {
+	[SkipVersion("<7.7.0", "Introduced in 7.7.0")]
 	public class EstimateModelMemoryApiTests : MachineLearningIntegrationTestBase<EstimateModelMemoryResponse, IEstimateModelMemoryRequest, EstimateModelMemoryDescriptor<Metric>, EstimateModelMemoryRequest>
 	{
 		public EstimateModelMemoryApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
