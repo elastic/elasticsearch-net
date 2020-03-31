@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -7,6 +8,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.ReloadSearchAnalyzers
 {
+	[SkipVersion("<7.7.0", "Introduced in 7.7.0")]
 	public class ReloadSearchAnalyzersApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, ReloadSearchAnalyzersResponse, IReloadSearchAnalyzersRequest, ReloadSearchAnalyzersDescriptor, ReloadSearchAnalyzersRequest>
 	{
