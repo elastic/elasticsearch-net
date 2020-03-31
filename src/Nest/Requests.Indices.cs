@@ -2056,6 +2056,62 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IReloadSearchAnalyzersRequest : IRequest<ReloadSearchAnalyzersRequestParameters>
+	{
+		[IgnoreDataMember]
+		Indices Index
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for ReloadSearchAnalyzers <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html</para></summary>
+	public partial class ReloadSearchAnalyzersRequest : PlainRequestBase<ReloadSearchAnalyzersRequestParameters>, IReloadSearchAnalyzersRequest
+	{
+		protected IReloadSearchAnalyzersRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesReloadSearchAnalyzers;
+		///<summary>/{index}/_reload_search_analyzers</summary>
+		///<param name = "index">this parameter is required</param>
+		public ReloadSearchAnalyzersRequest(Indices index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ReloadSearchAnalyzersRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices IReloadSearchAnalyzersRequest.Index => Self.RouteValues.Get<Indices>("index");
+		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices
+		{
+			get => Q<bool? >("allow_no_indices");
+			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface IRolloverIndexRequest : IRequest<RolloverIndexRequestParameters>
 	{
 		[IgnoreDataMember]
