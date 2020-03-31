@@ -1,5 +1,6 @@
 ﻿using System;
 using Elastic.Managed.Ephemeral;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -10,6 +11,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cat.CatTransform
 {
+	[SkipVersion("<7.7.0", "Introduced in 7.7.0")]
 	public class CatTransformApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatTransformRecord>, ICatTransformRequest, CatTransformDescriptor, CatTransformRequest>
 	{
