@@ -37,7 +37,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var pipeline = new RequestPipeline(
 				settings,
 				DateTimeProvider.Default,
-				new MemoryStreamFactory(),
+				new RecyclableMemoryStreamFactory(),
 				new SearchRequestParameters());
 
 			pipeline.GetType().Should().Implement<IDisposable>();
@@ -49,7 +49,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var requestPipeline = requestPipelineFactory.Create(
 				settings,
 				DateTimeProvider.Default, //<1> An <<date-time-providers,`IDateTimeProvider`>> implementation
-				new MemoryStreamFactory(),
+				new RecyclableMemoryStreamFactory(),
 				new SearchRequestParameters());
 
 			requestPipeline.Should().BeOfType<RequestPipeline>();
@@ -63,7 +63,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				settings,
 				requestPipelineFactory,
 				DateTimeProvider.Default,
-				new MemoryStreamFactory());
+				new RecyclableMemoryStreamFactory());
 
 			var client = new ElasticClient(transport);
 		}
