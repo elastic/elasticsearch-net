@@ -68,7 +68,6 @@ namespace ApiGenerator.Configuration
 			"cluster.put_component_template.json",
 			"indices.reload_search_analyzers.json",
 			"ml.estimate_model_memory.json",
-			"ml.set_upgrade_mode.json",
 			"security.get_builtin_privileges.json",
 			"transform.delete_transform.json",
 			"transform.get_transform.json",
