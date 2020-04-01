@@ -18,6 +18,10 @@ namespace Nest
 {
 	internal static class ApiUrlsLookups
 	{
+		internal static ApiUrls AsyncSearchDelete = new ApiUrls(new[]{"_async_search/{id}"});
+		internal static ApiUrls AsyncSearchGet = new ApiUrls(new[]{"_async_search/{id}"});
+		internal static ApiUrls AsyncSearchSubmit = new ApiUrls(new[]{"_async_search", "{index}/_async_search"});
+		internal static ApiUrls AutoscalingGetDecision = new ApiUrls(new[]{"_autoscaling/decision"});
 		internal static ApiUrls NoNamespaceBulk = new ApiUrls(new[]{"_bulk", "{index}/_bulk"});
 		internal static ApiUrls CatAliases = new ApiUrls(new[]{"_cat/aliases", "_cat/aliases/{name}"});
 		internal static ApiUrls CatAllocation = new ApiUrls(new[]{"_cat/allocation", "_cat/allocation/{node_id}"});
@@ -27,6 +31,10 @@ namespace Nest
 		internal static ApiUrls CatHelp = new ApiUrls(new[]{"_cat"});
 		internal static ApiUrls CatIndices = new ApiUrls(new[]{"_cat/indices", "_cat/indices/{index}"});
 		internal static ApiUrls CatMaster = new ApiUrls(new[]{"_cat/master"});
+		internal static ApiUrls CatMlDataFrameAnalytics = new ApiUrls(new[]{"_cat/ml/data_frame/analytics", "_cat/ml/data_frame/analytics/{id}"});
+		internal static ApiUrls CatMlDatafeeds = new ApiUrls(new[]{"_cat/ml/datafeeds", "_cat/ml/datafeeds/{datafeed_id}"});
+		internal static ApiUrls CatMlJobs = new ApiUrls(new[]{"_cat/ml/anomaly_detectors", "_cat/ml/anomaly_detectors/{job_id}"});
+		internal static ApiUrls CatMlTrainedModels = new ApiUrls(new[]{"_cat/ml/trained_models", "_cat/ml/trained_models/{model_id}"});
 		internal static ApiUrls CatNodeAttributes = new ApiUrls(new[]{"_cat/nodeattrs"});
 		internal static ApiUrls CatNodes = new ApiUrls(new[]{"_cat/nodes"});
 		internal static ApiUrls CatPendingTasks = new ApiUrls(new[]{"_cat/pending_tasks"});
@@ -39,6 +47,7 @@ namespace Nest
 		internal static ApiUrls CatTasks = new ApiUrls(new[]{"_cat/tasks"});
 		internal static ApiUrls CatTemplates = new ApiUrls(new[]{"_cat/templates", "_cat/templates/{name}"});
 		internal static ApiUrls CatThreadPool = new ApiUrls(new[]{"_cat/thread_pool", "_cat/thread_pool/{thread_pool_patterns}"});
+		internal static ApiUrls CatTransform = new ApiUrls(new[]{"_cat/transforms", "_cat/transforms/{transform_id}"});
 		internal static ApiUrls CrossClusterReplicationDeleteAutoFollowPattern = new ApiUrls(new[]{"_ccr/auto_follow/{name}"});
 		internal static ApiUrls CrossClusterReplicationCreateFollowIndex = new ApiUrls(new[]{"{index}/_ccr/follow"});
 		internal static ApiUrls CrossClusterReplicationFollowInfo = new ApiUrls(new[]{"{index}/_ccr/info"});
@@ -54,9 +63,12 @@ namespace Nest
 		internal static ApiUrls CrossClusterReplicationUnfollowIndex = new ApiUrls(new[]{"{index}/_ccr/unfollow"});
 		internal static ApiUrls NoNamespaceClearScroll = new ApiUrls(new[]{"_search/scroll"});
 		internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[]{"_cluster/allocation/explain"});
+		internal static ApiUrls ClusterDeleteComponentTemplate = new ApiUrls(new[]{"_component_template/{name}"});
+		internal static ApiUrls ClusterGetComponentTemplate = new ApiUrls(new[]{"_component_template", "_component_template/{name}"});
 		internal static ApiUrls ClusterGetSettings = new ApiUrls(new[]{"_cluster/settings"});
 		internal static ApiUrls ClusterHealth = new ApiUrls(new[]{"_cluster/health", "_cluster/health/{index}"});
 		internal static ApiUrls ClusterPendingTasks = new ApiUrls(new[]{"_cluster/pending_tasks"});
+		internal static ApiUrls ClusterPutComponentTemplate = new ApiUrls(new[]{"_component_template/{name}"});
 		internal static ApiUrls ClusterPutSettings = new ApiUrls(new[]{"_cluster/settings"});
 		internal static ApiUrls ClusterRemoteInfo = new ApiUrls(new[]{"_remote/info"});
 		internal static ApiUrls ClusterReroute = new ApiUrls(new[]{"_cluster/reroute"});
@@ -73,12 +85,15 @@ namespace Nest
 		internal static ApiUrls EnrichGetPolicy = new ApiUrls(new[]{"_enrich/policy/{name}", "_enrich/policy/"});
 		internal static ApiUrls EnrichPutPolicy = new ApiUrls(new[]{"_enrich/policy/{name}"});
 		internal static ApiUrls EnrichStats = new ApiUrls(new[]{"_enrich/_stats"});
+		internal static ApiUrls EqlSearch = new ApiUrls(new[]{"{index}/_eql/search"});
 		internal static ApiUrls NoNamespaceDocumentExists = new ApiUrls(new[]{"{index}/_doc/{id}"});
 		internal static ApiUrls NoNamespaceSourceExists = new ApiUrls(new[]{"{index}/_source/{id}"});
 		internal static ApiUrls NoNamespaceExplain = new ApiUrls(new[]{"{index}/_explain/{id}"});
 		internal static ApiUrls NoNamespaceFieldCapabilities = new ApiUrls(new[]{"_field_caps", "{index}/_field_caps"});
 		internal static ApiUrls NoNamespaceGet = new ApiUrls(new[]{"{index}/_doc/{id}"});
 		internal static ApiUrls NoNamespaceGetScript = new ApiUrls(new[]{"_scripts/{id}"});
+		internal static ApiUrls NoNamespaceGetScriptContext = new ApiUrls(new[]{"_script_context"});
+		internal static ApiUrls NoNamespaceGetScriptLanguages = new ApiUrls(new[]{"_script_language"});
 		internal static ApiUrls NoNamespaceSource = new ApiUrls(new[]{"{index}/_source/{id}"});
 		internal static ApiUrls GraphExplore = new ApiUrls(new[]{"{index}/_graph/explore"});
 		internal static ApiUrls IndexLifecycleManagementDeleteLifecycle = new ApiUrls(new[]{"_ilm/policy/{policy_id}"});
@@ -97,8 +112,10 @@ namespace Nest
 		internal static ApiUrls IndicesClone = new ApiUrls(new[]{"{index}/_clone/{target}"});
 		internal static ApiUrls IndicesClose = new ApiUrls(new[]{"{index}/_close"});
 		internal static ApiUrls IndicesCreate = new ApiUrls(new[]{"{index}"});
+		internal static ApiUrls IndicesCreateDataStream = new ApiUrls(new[]{"_data_stream/{name}"});
 		internal static ApiUrls IndicesDelete = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesDeleteAlias = new ApiUrls(new[]{"{index}/_alias/{name}"});
+		internal static ApiUrls IndicesDeleteDataStream = new ApiUrls(new[]{"_data_stream/{name}"});
 		internal static ApiUrls IndicesDeleteTemplate = new ApiUrls(new[]{"_template/{name}"});
 		internal static ApiUrls IndicesExists = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesAliasExists = new ApiUrls(new[]{"_alias/{name}", "{index}/_alias/{name}"});
@@ -110,6 +127,7 @@ namespace Nest
 		internal static ApiUrls IndicesFreeze = new ApiUrls(new[]{"{index}/_freeze"});
 		internal static ApiUrls IndicesGet = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesGetAlias = new ApiUrls(new[]{"_alias", "_alias/{name}", "{index}/_alias/{name}", "{index}/_alias"});
+		internal static ApiUrls IndicesGetDataStreams = new ApiUrls(new[]{"_data_streams", "_data_streams/{name}"});
 		internal static ApiUrls IndicesGetFieldMapping = new ApiUrls(new[]{"_mapping/field/{fields}", "{index}/_mapping/field/{fields}"});
 		internal static ApiUrls IndicesGetMapping = new ApiUrls(new[]{"_mapping", "{index}/_mapping"});
 		internal static ApiUrls IndicesGetSettings = new ApiUrls(new[]{"_settings", "{index}/_settings", "{index}/_settings/{name}", "_settings/{name}"});
@@ -121,6 +139,7 @@ namespace Nest
 		internal static ApiUrls IndicesPutTemplate = new ApiUrls(new[]{"_template/{name}"});
 		internal static ApiUrls IndicesRecoveryStatus = new ApiUrls(new[]{"_recovery", "{index}/_recovery"});
 		internal static ApiUrls IndicesRefresh = new ApiUrls(new[]{"_refresh", "{index}/_refresh"});
+		internal static ApiUrls IndicesReloadSearchAnalyzers = new ApiUrls(new[]{"{index}/_reload_search_analyzers"});
 		internal static ApiUrls IndicesRollover = new ApiUrls(new[]{"{alias}/_rollover", "{alias}/_rollover/{new_index}"});
 		internal static ApiUrls IndicesSegments = new ApiUrls(new[]{"_segments", "{index}/_segments"});
 		internal static ApiUrls IndicesShardStores = new ApiUrls(new[]{"_shard_stores", "{index}/_shard_stores"});
@@ -149,18 +168,26 @@ namespace Nest
 		internal static ApiUrls MachineLearningDeleteCalendar = new ApiUrls(new[]{"_ml/calendars/{calendar_id}"});
 		internal static ApiUrls MachineLearningDeleteCalendarEvent = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/events/{event_id}"});
 		internal static ApiUrls MachineLearningDeleteCalendarJob = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/jobs/{job_id}"});
+		internal static ApiUrls MachineLearningDeleteDataFrameAnalytics = new ApiUrls(new[]{"_ml/data_frame/analytics/{id}"});
 		internal static ApiUrls MachineLearningDeleteDatafeed = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}"});
 		internal static ApiUrls MachineLearningDeleteExpiredData = new ApiUrls(new[]{"_ml/_delete_expired_data"});
 		internal static ApiUrls MachineLearningDeleteFilter = new ApiUrls(new[]{"_ml/filters/{filter_id}"});
 		internal static ApiUrls MachineLearningDeleteForecast = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}"});
 		internal static ApiUrls MachineLearningDeleteJob = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}"});
 		internal static ApiUrls MachineLearningDeleteModelSnapshot = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}"});
+		internal static ApiUrls MachineLearningDeleteTrainedModel = new ApiUrls(new[]{"_ml/inference/{model_id}"});
+		internal static ApiUrls MachineLearningEstimateModelMemory = new ApiUrls(new[]{"_ml/anomaly_detectors/_estimate_model_memory"});
+		internal static ApiUrls MachineLearningEvaluateDataFrame = new ApiUrls(new[]{"_ml/data_frame/_evaluate"});
+		internal static ApiUrls MachineLearningExplainDataFrameAnalytics = new ApiUrls(new[]{"_ml/data_frame/analytics/_explain", "_ml/data_frame/analytics/{id}/_explain"});
+		internal static ApiUrls MachineLearningFindFileStructure = new ApiUrls(new[]{"_ml/find_file_structure"});
 		internal static ApiUrls MachineLearningFlushJob = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_flush"});
 		internal static ApiUrls MachineLearningForecastJob = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_forecast"});
 		internal static ApiUrls MachineLearningGetBuckets = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}", "_ml/anomaly_detectors/{job_id}/results/buckets"});
 		internal static ApiUrls MachineLearningGetCalendarEvents = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/events"});
 		internal static ApiUrls MachineLearningGetCalendars = new ApiUrls(new[]{"_ml/calendars", "_ml/calendars/{calendar_id}"});
 		internal static ApiUrls MachineLearningGetCategories = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "_ml/anomaly_detectors/{job_id}/results/categories/"});
+		internal static ApiUrls MachineLearningGetDataFrameAnalytics = new ApiUrls(new[]{"_ml/data_frame/analytics/{id}", "_ml/data_frame/analytics"});
+		internal static ApiUrls MachineLearningGetDataFrameAnalyticsStats = new ApiUrls(new[]{"_ml/data_frame/analytics/_stats", "_ml/data_frame/analytics/{id}/_stats"});
 		internal static ApiUrls MachineLearningGetDatafeedStats = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_stats", "_ml/datafeeds/_stats"});
 		internal static ApiUrls MachineLearningGetDatafeeds = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}", "_ml/datafeeds"});
 		internal static ApiUrls MachineLearningGetFilters = new ApiUrls(new[]{"_ml/filters", "_ml/filters/{filter_id}"});
@@ -170,6 +197,8 @@ namespace Nest
 		internal static ApiUrls MachineLearningGetModelSnapshots = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "_ml/anomaly_detectors/{job_id}/model_snapshots"});
 		internal static ApiUrls MachineLearningGetOverallBuckets = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/overall_buckets"});
 		internal static ApiUrls MachineLearningGetAnomalyRecords = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/records"});
+		internal static ApiUrls MachineLearningGetTrainedModels = new ApiUrls(new[]{"_ml/inference/{model_id}", "_ml/inference"});
+		internal static ApiUrls MachineLearningGetTrainedModelsStats = new ApiUrls(new[]{"_ml/inference/{model_id}/_stats", "_ml/inference/_stats"});
 		internal static ApiUrls MachineLearningInfo = new ApiUrls(new[]{"_ml/info"});
 		internal static ApiUrls MachineLearningOpenJob = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_open"});
 		internal static ApiUrls MachineLearningPostCalendarEvents = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/events"});
@@ -177,11 +206,16 @@ namespace Nest
 		internal static ApiUrls MachineLearningPreviewDatafeed = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_preview"});
 		internal static ApiUrls MachineLearningPutCalendar = new ApiUrls(new[]{"_ml/calendars/{calendar_id}"});
 		internal static ApiUrls MachineLearningPutCalendarJob = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/jobs/{job_id}"});
+		internal static ApiUrls MachineLearningPutDataFrameAnalytics = new ApiUrls(new[]{"_ml/data_frame/analytics/{id}"});
 		internal static ApiUrls MachineLearningPutDatafeed = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}"});
 		internal static ApiUrls MachineLearningPutFilter = new ApiUrls(new[]{"_ml/filters/{filter_id}"});
 		internal static ApiUrls MachineLearningPutJob = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}"});
+		internal static ApiUrls MachineLearningPutTrainedModel = new ApiUrls(new[]{"_ml/inference/{model_id}"});
 		internal static ApiUrls MachineLearningRevertModelSnapshot = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert"});
+		internal static ApiUrls MachineLearningSetUpgradeMode = new ApiUrls(new[]{"_ml/set_upgrade_mode"});
+		internal static ApiUrls MachineLearningStartDataFrameAnalytics = new ApiUrls(new[]{"_ml/data_frame/analytics/{id}/_start"});
 		internal static ApiUrls MachineLearningStartDatafeed = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_start"});
+		internal static ApiUrls MachineLearningStopDataFrameAnalytics = new ApiUrls(new[]{"_ml/data_frame/analytics/{id}/_stop"});
 		internal static ApiUrls MachineLearningStopDatafeed = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_stop"});
 		internal static ApiUrls MachineLearningUpdateDatafeed = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_update"});
 		internal static ApiUrls MachineLearningUpdateFilter = new ApiUrls(new[]{"_ml/filters/{filter_id}/_update"});
@@ -199,6 +233,7 @@ namespace Nest
 		internal static ApiUrls NodesUsage = new ApiUrls(new[]{"_nodes/usage", "_nodes/{node_id}/usage", "_nodes/usage/{metric}", "_nodes/{node_id}/usage/{metric}"});
 		internal static ApiUrls NoNamespacePing = new ApiUrls(new[]{""});
 		internal static ApiUrls NoNamespacePutScript = new ApiUrls(new[]{"_scripts/{id}", "_scripts/{id}/{context}"});
+		internal static ApiUrls NoNamespaceRankEval = new ApiUrls(new[]{"_rank_eval", "{index}/_rank_eval"});
 		internal static ApiUrls NoNamespaceReindexOnServer = new ApiUrls(new[]{"_reindex"});
 		internal static ApiUrls NoNamespaceReindexRethrottle = new ApiUrls(new[]{"_reindex/{task_id}/_rethrottle"});
 		internal static ApiUrls NoNamespaceRenderSearchTemplate = new ApiUrls(new[]{"_render/template", "_render/template/{id}"});
@@ -227,6 +262,7 @@ namespace Nest
 		internal static ApiUrls SecurityDisableUser = new ApiUrls(new[]{"_security/user/{username}/_disable"});
 		internal static ApiUrls SecurityEnableUser = new ApiUrls(new[]{"_security/user/{username}/_enable"});
 		internal static ApiUrls SecurityGetApiKey = new ApiUrls(new[]{"_security/api_key"});
+		internal static ApiUrls SecurityGetBuiltinPrivileges = new ApiUrls(new[]{"_security/privilege/_builtin"});
 		internal static ApiUrls SecurityGetPrivileges = new ApiUrls(new[]{"_security/privilege", "_security/privilege/{application}", "_security/privilege/{application}/{name}"});
 		internal static ApiUrls SecurityGetRole = new ApiUrls(new[]{"_security/role/{name}", "_security/role"});
 		internal static ApiUrls SecurityGetRoleMapping = new ApiUrls(new[]{"_security/role_mapping/{name}", "_security/role_mapping"});
@@ -267,6 +303,14 @@ namespace Nest
 		internal static ApiUrls TasksGetTask = new ApiUrls(new[]{"_tasks/{task_id}"});
 		internal static ApiUrls TasksList = new ApiUrls(new[]{"_tasks"});
 		internal static ApiUrls NoNamespaceTermVectors = new ApiUrls(new[]{"{index}/_termvectors/{id}", "{index}/_termvectors"});
+		internal static ApiUrls TransformDelete = new ApiUrls(new[]{"_transform/{transform_id}"});
+		internal static ApiUrls TransformGet = new ApiUrls(new[]{"_transform/{transform_id}", "_transform"});
+		internal static ApiUrls TransformGetStats = new ApiUrls(new[]{"_transform/{transform_id}/_stats"});
+		internal static ApiUrls TransformPreview = new ApiUrls(new[]{"_transform/_preview"});
+		internal static ApiUrls TransformPut = new ApiUrls(new[]{"_transform/{transform_id}"});
+		internal static ApiUrls TransformStart = new ApiUrls(new[]{"_transform/{transform_id}/_start"});
+		internal static ApiUrls TransformStop = new ApiUrls(new[]{"_transform/{transform_id}/_stop"});
+		internal static ApiUrls TransformUpdate = new ApiUrls(new[]{"_transform/{transform_id}/_update"});
 		internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[]{"{index}/_update/{id}"});
 		internal static ApiUrls NoNamespaceUpdateByQuery = new ApiUrls(new[]{"{index}/_update_by_query"});
 		internal static ApiUrls NoNamespaceUpdateByQueryRethrottle = new ApiUrls(new[]{"_update_by_query/{task_id}/_rethrottle"});
