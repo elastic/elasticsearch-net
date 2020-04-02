@@ -166,7 +166,7 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 
 		///<summary>
 		/// Control whether the response should be stored in the cluster if it completed within the provided [wait_for_completion] time (default:
-		/// true)
+		/// false)
 		///</summary>
 		public bool? KeepOnCompletion
 		{
