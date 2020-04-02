@@ -562,7 +562,7 @@ namespace Nest
 		public ForceMergeDescriptor OnlyExpungeDeletes(bool? onlyexpungedeletes = true) => Qs("only_expunge_deletes", onlyexpungedeletes);
 	}
 
-	///<summary>Descriptor for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Descriptor for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
 	public partial class FreezeIndexDescriptor : RequestDescriptorBase<FreezeIndexDescriptor, FreezeIndexRequestParameters, IFreezeIndexRequest>, IFreezeIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFreeze;
@@ -1367,7 +1367,7 @@ namespace Nest
 		public IndicesStatsDescriptor Level(Level? level) => Qs("level", level);
 	}
 
-	///<summary>Descriptor for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Descriptor for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</para></summary>
 	public partial class UnfreezeIndexDescriptor : RequestDescriptorBase<UnfreezeIndexDescriptor, UnfreezeIndexRequestParameters, IUnfreezeIndexRequest>, IUnfreezeIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUnfreeze;
