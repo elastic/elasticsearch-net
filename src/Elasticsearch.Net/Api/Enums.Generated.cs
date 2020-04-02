@@ -212,6 +212,8 @@ namespace Elasticsearch.Net
 		Open,
 		[EnumMember(Value = "closed")]
 		Closed,
+		[EnumMember(Value = "hidden")]
+		Hidden,
 		[EnumMember(Value = "none")]
 		None,
 		[EnumMember(Value = "all")]
@@ -687,6 +689,8 @@ namespace Elasticsearch.Net
 					return "open";
 				case ExpandWildcards.Closed:
 					return "closed";
+				case ExpandWildcards.Hidden:
+					return "hidden";
 				case ExpandWildcards.None:
 					return "none";
 				case ExpandWildcards.All:
