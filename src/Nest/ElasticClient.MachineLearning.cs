@@ -63,73 +63,73 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_calendar</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar.html</a>
 		/// </summary>
 		public DeleteCalendarResponse DeleteCalendar(Id calendarId, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null) => DeleteCalendar(selector.InvokeOrDefault(new DeleteCalendarDescriptor(calendarId: calendarId)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_calendar</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar.html</a>
 		/// </summary>
 		public Task<DeleteCalendarResponse> DeleteCalendarAsync(Id calendarId, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null, CancellationToken ct = default) => DeleteCalendarAsync(selector.InvokeOrDefault(new DeleteCalendarDescriptor(calendarId: calendarId)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_calendar</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar.html</a>
 		/// </summary>
 		public DeleteCalendarResponse DeleteCalendar(IDeleteCalendarRequest request) => DoRequest<IDeleteCalendarRequest, DeleteCalendarResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_calendar</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar.html</a>
 		/// </summary>
 		public Task<DeleteCalendarResponse> DeleteCalendarAsync(IDeleteCalendarRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteCalendarRequest, DeleteCalendarResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_calendar_event</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-event.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-event.html</a>
 		/// </summary>
 		public DeleteCalendarEventResponse DeleteCalendarEvent(Id calendarId, Id eventId, Func<DeleteCalendarEventDescriptor, IDeleteCalendarEventRequest> selector = null) => DeleteCalendarEvent(selector.InvokeOrDefault(new DeleteCalendarEventDescriptor(calendarId: calendarId, eventId: eventId)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_calendar_event</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-event.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-event.html</a>
 		/// </summary>
 		public Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(Id calendarId, Id eventId, Func<DeleteCalendarEventDescriptor, IDeleteCalendarEventRequest> selector = null, CancellationToken ct = default) => DeleteCalendarEventAsync(selector.InvokeOrDefault(new DeleteCalendarEventDescriptor(calendarId: calendarId, eventId: eventId)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_calendar_event</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-event.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-event.html</a>
 		/// </summary>
 		public DeleteCalendarEventResponse DeleteCalendarEvent(IDeleteCalendarEventRequest request) => DoRequest<IDeleteCalendarEventRequest, DeleteCalendarEventResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_calendar_event</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-event.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-event.html</a>
 		/// </summary>
 		public Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(IDeleteCalendarEventRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteCalendarEventRequest, DeleteCalendarEventResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_calendar_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-job.html</a>
 		/// </summary>
 		public DeleteCalendarJobResponse DeleteCalendarJob(Id calendarId, Id jobId, Func<DeleteCalendarJobDescriptor, IDeleteCalendarJobRequest> selector = null) => DeleteCalendarJob(selector.InvokeOrDefault(new DeleteCalendarJobDescriptor(calendarId: calendarId, jobId: jobId)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_calendar_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-job.html</a>
 		/// </summary>
 		public Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(Id calendarId, Id jobId, Func<DeleteCalendarJobDescriptor, IDeleteCalendarJobRequest> selector = null, CancellationToken ct = default) => DeleteCalendarJobAsync(selector.InvokeOrDefault(new DeleteCalendarJobDescriptor(calendarId: calendarId, jobId: jobId)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_calendar_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-job.html</a>
 		/// </summary>
 		public DeleteCalendarJobResponse DeleteCalendarJob(IDeleteCalendarJobRequest request) => DoRequest<IDeleteCalendarJobRequest, DeleteCalendarJobResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_calendar_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-job.html</a>
 		/// </summary>
 		public Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(IDeleteCalendarJobRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteCalendarJobRequest, DeleteCalendarJobResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -159,49 +159,49 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_expired_data</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</a>
 		/// </summary>
 		public DeleteExpiredDataResponse DeleteExpiredData(Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> selector = null) => DeleteExpiredData(selector.InvokeOrDefault(new DeleteExpiredDataDescriptor()));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_expired_data</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</a>
 		/// </summary>
 		public Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> selector = null, CancellationToken ct = default) => DeleteExpiredDataAsync(selector.InvokeOrDefault(new DeleteExpiredDataDescriptor()), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_expired_data</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</a>
 		/// </summary>
 		public DeleteExpiredDataResponse DeleteExpiredData(IDeleteExpiredDataRequest request) => DoRequest<IDeleteExpiredDataRequest, DeleteExpiredDataResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_expired_data</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</a>
 		/// </summary>
 		public Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(IDeleteExpiredDataRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteExpiredDataRequest, DeleteExpiredDataResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_filter</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html</a>
 		/// </summary>
 		public DeleteFilterResponse DeleteFilter(Id filterId, Func<DeleteFilterDescriptor, IDeleteFilterRequest> selector = null) => DeleteFilter(selector.InvokeOrDefault(new DeleteFilterDescriptor(filterId: filterId)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_filter</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html</a>
 		/// </summary>
 		public Task<DeleteFilterResponse> DeleteFilterAsync(Id filterId, Func<DeleteFilterDescriptor, IDeleteFilterRequest> selector = null, CancellationToken ct = default) => DeleteFilterAsync(selector.InvokeOrDefault(new DeleteFilterDescriptor(filterId: filterId)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_filter</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html</a>
 		/// </summary>
 		public DeleteFilterResponse DeleteFilter(IDeleteFilterRequest request) => DoRequest<IDeleteFilterRequest, DeleteFilterResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>ml.delete_filter</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html</a>
 		/// </summary>
 		public Task<DeleteFilterResponse> DeleteFilterAsync(IDeleteFilterRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteFilterRequest, DeleteFilterResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -303,25 +303,25 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.forecast</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html</a>
 		/// </summary>
 		public ForecastJobResponse ForecastJob(Id jobId, Func<ForecastJobDescriptor, IForecastJobRequest> selector = null) => ForecastJob(selector.InvokeOrDefault(new ForecastJobDescriptor(jobId: jobId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.forecast</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html</a>
 		/// </summary>
 		public Task<ForecastJobResponse> ForecastJobAsync(Id jobId, Func<ForecastJobDescriptor, IForecastJobRequest> selector = null, CancellationToken ct = default) => ForecastJobAsync(selector.InvokeOrDefault(new ForecastJobDescriptor(jobId: jobId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.forecast</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html</a>
 		/// </summary>
 		public ForecastJobResponse ForecastJob(IForecastJobRequest request) => DoRequest<IForecastJobRequest, ForecastJobResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.forecast</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html</a>
 		/// </summary>
 		public Task<ForecastJobResponse> ForecastJobAsync(IForecastJobRequest request, CancellationToken ct = default) => DoRequestAsync<IForecastJobRequest, ForecastJobResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -351,49 +351,49 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_calendar_events</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html</a>
 		/// </summary>
 		public GetCalendarEventsResponse GetCalendarEvents(Id calendarId, Func<GetCalendarEventsDescriptor, IGetCalendarEventsRequest> selector = null) => GetCalendarEvents(selector.InvokeOrDefault(new GetCalendarEventsDescriptor(calendarId: calendarId)));
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_calendar_events</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html</a>
 		/// </summary>
 		public Task<GetCalendarEventsResponse> GetCalendarEventsAsync(Id calendarId, Func<GetCalendarEventsDescriptor, IGetCalendarEventsRequest> selector = null, CancellationToken ct = default) => GetCalendarEventsAsync(selector.InvokeOrDefault(new GetCalendarEventsDescriptor(calendarId: calendarId)), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_calendar_events</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html</a>
 		/// </summary>
 		public GetCalendarEventsResponse GetCalendarEvents(IGetCalendarEventsRequest request) => DoRequest<IGetCalendarEventsRequest, GetCalendarEventsResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_calendar_events</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html</a>
 		/// </summary>
 		public Task<GetCalendarEventsResponse> GetCalendarEventsAsync(IGetCalendarEventsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetCalendarEventsRequest, GetCalendarEventsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_calendars</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html</a>
 		/// </summary>
 		public GetCalendarsResponse GetCalendars(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null) => GetCalendars(selector.InvokeOrDefault(new GetCalendarsDescriptor()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_calendars</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html</a>
 		/// </summary>
 		public Task<GetCalendarsResponse> GetCalendarsAsync(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null, CancellationToken ct = default) => GetCalendarsAsync(selector.InvokeOrDefault(new GetCalendarsDescriptor()), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_calendars</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html</a>
 		/// </summary>
 		public GetCalendarsResponse GetCalendars(IGetCalendarsRequest request) => DoRequest<IGetCalendarsRequest, GetCalendarsResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.get_calendars</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html</a>
 		/// </summary>
 		public Task<GetCalendarsResponse> GetCalendarsAsync(IGetCalendarsRequest request, CancellationToken ct = default) => DoRequestAsync<IGetCalendarsRequest, GetCalendarsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -471,25 +471,25 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_filters</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html</a>
 		/// </summary>
 		public GetFiltersResponse GetFilters(Func<GetFiltersDescriptor, IGetFiltersRequest> selector = null) => GetFilters(selector.InvokeOrDefault(new GetFiltersDescriptor()));
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_filters</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html</a>
 		/// </summary>
 		public Task<GetFiltersResponse> GetFiltersAsync(Func<GetFiltersDescriptor, IGetFiltersRequest> selector = null, CancellationToken ct = default) => GetFiltersAsync(selector.InvokeOrDefault(new GetFiltersDescriptor()), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_filters</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html</a>
 		/// </summary>
 		public GetFiltersResponse GetFilters(IGetFiltersRequest request) => DoRequest<IGetFiltersRequest, GetFiltersResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.get_filters</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html</a>
 		/// </summary>
 		public Task<GetFiltersResponse> GetFiltersAsync(IGetFiltersRequest request, CancellationToken ct = default) => DoRequestAsync<IGetFiltersRequest, GetFiltersResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -639,25 +639,25 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.info</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html</a>
 		/// </summary>
 		public MachineLearningInfoResponse Info(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null) => Info(selector.InvokeOrDefault(new MachineLearningInfoDescriptor()));
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.info</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html</a>
 		/// </summary>
 		public Task<MachineLearningInfoResponse> InfoAsync(Func<MachineLearningInfoDescriptor, IMachineLearningInfoRequest> selector = null, CancellationToken ct = default) => InfoAsync(selector.InvokeOrDefault(new MachineLearningInfoDescriptor()), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.info</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html</a>
 		/// </summary>
 		public MachineLearningInfoResponse Info(IMachineLearningInfoRequest request) => DoRequest<IMachineLearningInfoRequest, MachineLearningInfoResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>GET</c> request to the <c>ml.info</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html</a>
 		/// </summary>
 		public Task<MachineLearningInfoResponse> InfoAsync(IMachineLearningInfoRequest request, CancellationToken ct = default) => DoRequestAsync<IMachineLearningInfoRequest, MachineLearningInfoResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -687,25 +687,25 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.post_calendar_events</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html</a>
 		/// </summary>
 		public PostCalendarEventsResponse PostCalendarEvents(Id calendarId, Func<PostCalendarEventsDescriptor, IPostCalendarEventsRequest> selector) => PostCalendarEvents(selector.InvokeOrDefault(new PostCalendarEventsDescriptor(calendarId: calendarId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.post_calendar_events</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html</a>
 		/// </summary>
 		public Task<PostCalendarEventsResponse> PostCalendarEventsAsync(Id calendarId, Func<PostCalendarEventsDescriptor, IPostCalendarEventsRequest> selector, CancellationToken ct = default) => PostCalendarEventsAsync(selector.InvokeOrDefault(new PostCalendarEventsDescriptor(calendarId: calendarId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.post_calendar_events</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html</a>
 		/// </summary>
 		public PostCalendarEventsResponse PostCalendarEvents(IPostCalendarEventsRequest request) => DoRequest<IPostCalendarEventsRequest, PostCalendarEventsResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.post_calendar_events</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html</a>
 		/// </summary>
 		public Task<PostCalendarEventsResponse> PostCalendarEventsAsync(IPostCalendarEventsRequest request, CancellationToken ct = default) => DoRequestAsync<IPostCalendarEventsRequest, PostCalendarEventsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -763,49 +763,49 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_calendar</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html</a>
 		/// </summary>
 		public PutCalendarResponse PutCalendar(Id calendarId, Func<PutCalendarDescriptor, IPutCalendarRequest> selector = null) => PutCalendar(selector.InvokeOrDefault(new PutCalendarDescriptor(calendarId: calendarId)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_calendar</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html</a>
 		/// </summary>
 		public Task<PutCalendarResponse> PutCalendarAsync(Id calendarId, Func<PutCalendarDescriptor, IPutCalendarRequest> selector = null, CancellationToken ct = default) => PutCalendarAsync(selector.InvokeOrDefault(new PutCalendarDescriptor(calendarId: calendarId)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_calendar</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html</a>
 		/// </summary>
 		public PutCalendarResponse PutCalendar(IPutCalendarRequest request) => DoRequest<IPutCalendarRequest, PutCalendarResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_calendar</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html</a>
 		/// </summary>
 		public Task<PutCalendarResponse> PutCalendarAsync(IPutCalendarRequest request, CancellationToken ct = default) => DoRequestAsync<IPutCalendarRequest, PutCalendarResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_calendar_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html</a>
 		/// </summary>
 		public PutCalendarJobResponse PutCalendarJob(Id calendarId, Id jobId, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null) => PutCalendarJob(selector.InvokeOrDefault(new PutCalendarJobDescriptor(calendarId: calendarId, jobId: jobId)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_calendar_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html</a>
 		/// </summary>
 		public Task<PutCalendarJobResponse> PutCalendarJobAsync(Id calendarId, Id jobId, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null, CancellationToken ct = default) => PutCalendarJobAsync(selector.InvokeOrDefault(new PutCalendarJobDescriptor(calendarId: calendarId, jobId: jobId)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_calendar_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html</a>
 		/// </summary>
 		public PutCalendarJobResponse PutCalendarJob(IPutCalendarJobRequest request) => DoRequest<IPutCalendarJobRequest, PutCalendarJobResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_calendar_job</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html</a>
 		/// </summary>
 		public Task<PutCalendarJobResponse> PutCalendarJobAsync(IPutCalendarJobRequest request, CancellationToken ct = default) => DoRequestAsync<IPutCalendarJobRequest, PutCalendarJobResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -837,25 +837,25 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_filter</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html</a>
 		/// </summary>
 		public PutFilterResponse PutFilter(Id filterId, Func<PutFilterDescriptor, IPutFilterRequest> selector) => PutFilter(selector.InvokeOrDefault(new PutFilterDescriptor(filterId: filterId)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_filter</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html</a>
 		/// </summary>
 		public Task<PutFilterResponse> PutFilterAsync(Id filterId, Func<PutFilterDescriptor, IPutFilterRequest> selector, CancellationToken ct = default) => PutFilterAsync(selector.InvokeOrDefault(new PutFilterDescriptor(filterId: filterId)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_filter</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html</a>
 		/// </summary>
 		public PutFilterResponse PutFilter(IPutFilterRequest request) => DoRequest<IPutFilterRequest, PutFilterResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>ml.put_filter</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html</a>
 		/// </summary>
 		public Task<PutFilterResponse> PutFilterAsync(IPutFilterRequest request, CancellationToken ct = default) => DoRequestAsync<IPutFilterRequest, PutFilterResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -985,25 +985,25 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_filter</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html</a>
 		/// </summary>
 		public UpdateFilterResponse UpdateFilter(Id filterId, Func<UpdateFilterDescriptor, IUpdateFilterRequest> selector) => UpdateFilter(selector.InvokeOrDefault(new UpdateFilterDescriptor(filterId: filterId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_filter</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html</a>
 		/// </summary>
 		public Task<UpdateFilterResponse> UpdateFilterAsync(Id filterId, Func<UpdateFilterDescriptor, IUpdateFilterRequest> selector, CancellationToken ct = default) => UpdateFilterAsync(selector.InvokeOrDefault(new UpdateFilterDescriptor(filterId: filterId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_filter</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html</a>
 		/// </summary>
 		public UpdateFilterResponse UpdateFilter(IUpdateFilterRequest request) => DoRequest<IUpdateFilterRequest, UpdateFilterResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.update_filter</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html</a>
 		/// </summary>
 		public Task<UpdateFilterResponse> UpdateFilterAsync(IUpdateFilterRequest request, CancellationToken ct = default) => DoRequestAsync<IUpdateFilterRequest, UpdateFilterResponse>(request, request.RequestParameters, ct);
 		/// <summary>

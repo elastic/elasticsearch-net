@@ -1006,7 +1006,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Request for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
 	public partial class FreezeIndexRequest : PlainRequestBase<FreezeIndexRequestParameters>, IFreezeIndexRequest
 	{
 		protected IFreezeIndexRequest Self => this;
@@ -2510,7 +2510,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Request for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</para></summary>
 	public partial class UnfreezeIndexRequest : PlainRequestBase<UnfreezeIndexRequestParameters>, IUnfreezeIndexRequest
 	{
 		protected IUnfreezeIndexRequest Self => this;
