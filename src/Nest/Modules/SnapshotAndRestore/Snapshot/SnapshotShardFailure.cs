@@ -15,7 +15,7 @@ namespace Nest
 		public string Reason { get; set; }
 
 		[DataMember(Name ="shard_id")]
-		public string ShardId { get; set; }
+		public int ShardId { get; set; }
 
 		[DataMember(Name ="status")]
 		public string Status { get; set; }
