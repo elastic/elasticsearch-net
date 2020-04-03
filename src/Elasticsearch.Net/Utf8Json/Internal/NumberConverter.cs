@@ -168,22 +168,32 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             return StringToDoubleConverter.ToDouble(bytes, offset, out readCount);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteByte(ref byte[] buffer, int offset, byte value)
+        public static int WriteByte(ref byte[] buffer, bool pooledBuffer, int offset, byte value)
         {
-            return WriteUInt64(ref buffer, offset, (ulong)value);
+            return WriteUInt64(ref buffer, pooledBuffer, offset, (ulong)value);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteUInt16(ref byte[] buffer, int offset, ushort value)
+        public static int WriteUInt16(ref byte[] buffer, bool pooledBuffer, int offset, ushort value)
         {
-            return WriteUInt64(ref buffer, offset, (ulong)value);
+            return WriteUInt64(ref buffer, pooledBuffer, offset, (ulong)value);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteUInt32(ref byte[] buffer, int offset, uint value)
+        public static int WriteUInt32(ref byte[] buffer, bool pooledBuffer, int offset, uint value)
         {
-            return WriteUInt64(ref buffer, offset, (ulong)value);
+            return WriteUInt64(ref buffer, pooledBuffer, offset, (ulong)value);
         }
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void EnsureCapacity(ref byte[] bytes, bool pooledBuffer, int offset, int appendLength)
+		{
+			if (pooledBuffer)
+				ByteArrayPool.EnsureCapacity(ref bytes, offset, appendLength);
+			else
+				BinaryUtil.EnsureCapacity(ref bytes, offset, appendLength);
+		}
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteUInt64(ref byte[] buffer, int offset, ulong value)
+        public static int WriteUInt64(ref byte[] buffer, bool pooledBuffer, int offset, ulong value)
         {
             var startOffset = offset;
 
@@ -191,10 +201,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
             if (num1 < 10000)
             {
-                if (num1 < 10) { BinaryUtil.EnsureCapacity(ref buffer, offset, 1); goto L1; }
-                if (num1 < 100) { BinaryUtil.EnsureCapacity(ref buffer, offset, 2); goto L2; }
-                if (num1 < 1000) { BinaryUtil.EnsureCapacity(ref buffer, offset, 3); goto L3; }
-                BinaryUtil.EnsureCapacity(ref buffer, offset, 4); goto L4;
+                if (num1 < 10) { EnsureCapacity(ref buffer, pooledBuffer, offset, 1); goto L1; }
+                if (num1 < 100) { EnsureCapacity(ref buffer, pooledBuffer, offset, 2); goto L2; }
+                if (num1 < 1000) { EnsureCapacity(ref buffer, pooledBuffer, offset, 3); goto L3; }
+                EnsureCapacity(ref buffer, pooledBuffer, offset, 4); goto L4;
             }
             else
             {
@@ -202,10 +212,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                 num1 -= num2 * 10000;
                 if (num2 < 10000)
                 {
-                    if (num2 < 10) { BinaryUtil.EnsureCapacity(ref buffer, offset, 5); goto L5; }
-                    if (num2 < 100) { BinaryUtil.EnsureCapacity(ref buffer, offset, 6); goto L6; }
-                    if (num2 < 1000) { BinaryUtil.EnsureCapacity(ref buffer, offset, 7); goto L7; }
-                    BinaryUtil.EnsureCapacity(ref buffer, offset, 8); goto L8;
+                    if (num2 < 10) { EnsureCapacity(ref buffer, pooledBuffer, offset, 5); goto L5; }
+                    if (num2 < 100) { EnsureCapacity(ref buffer, pooledBuffer, offset, 6); goto L6; }
+                    if (num2 < 1000) { EnsureCapacity(ref buffer, pooledBuffer, offset, 7); goto L7; }
+                    EnsureCapacity(ref buffer, pooledBuffer, offset, 8); goto L8;
                 }
                 else
                 {
@@ -213,10 +223,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                     num2 -= num3 * 10000;
                     if (num3 < 10000)
                     {
-                        if (num3 < 10) { BinaryUtil.EnsureCapacity(ref buffer, offset, 9); goto L9; }
-                        if (num3 < 100) { BinaryUtil.EnsureCapacity(ref buffer, offset, 10); goto L10; }
-                        if (num3 < 1000) { BinaryUtil.EnsureCapacity(ref buffer, offset, 11); goto L11; }
-                        BinaryUtil.EnsureCapacity(ref buffer, offset, 12); goto L12;
+                        if (num3 < 10) { EnsureCapacity(ref buffer, pooledBuffer, offset, 9); goto L9; }
+                        if (num3 < 100) { EnsureCapacity(ref buffer, pooledBuffer, offset, 10); goto L10; }
+                        if (num3 < 1000) { EnsureCapacity(ref buffer, pooledBuffer, offset, 11); goto L11; }
+                        EnsureCapacity(ref buffer, pooledBuffer, offset, 12); goto L12;
                     }
                     else
                     {
@@ -224,10 +234,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                         num3 -= num4 * 10000;
                         if (num4 < 10000)
                         {
-                            if (num4 < 10) { BinaryUtil.EnsureCapacity(ref buffer, offset, 13); goto L13; }
-                            if (num4 < 100) { BinaryUtil.EnsureCapacity(ref buffer, offset, 14); goto L14; }
-                            if (num4 < 1000) { BinaryUtil.EnsureCapacity(ref buffer, offset, 15); goto L15; }
-                            BinaryUtil.EnsureCapacity(ref buffer, offset, 16); goto L16;
+                            if (num4 < 10) { EnsureCapacity(ref buffer, pooledBuffer, offset, 13); goto L13; }
+                            if (num4 < 100) { EnsureCapacity(ref buffer, pooledBuffer, offset, 14); goto L14; }
+                            if (num4 < 1000) { EnsureCapacity(ref buffer, pooledBuffer, offset, 15); goto L15; }
+                            EnsureCapacity(ref buffer, pooledBuffer, offset, 16); goto L16;
                         }
                         else
                         {
@@ -235,10 +245,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                             num4 -= num5 * 10000;
                             if (num5 < 10000)
                             {
-                                if (num5 < 10) { BinaryUtil.EnsureCapacity(ref buffer, offset, 17); goto L17; }
-                                if (num5 < 100) { BinaryUtil.EnsureCapacity(ref buffer, offset, 18); goto L18; }
-                                if (num5 < 1000) { BinaryUtil.EnsureCapacity(ref buffer, offset, 19); goto L19; }
-                                BinaryUtil.EnsureCapacity(ref buffer, offset, 20); goto L20;
+                                if (num5 < 10) { EnsureCapacity(ref buffer, pooledBuffer, offset, 17); goto L17; }
+                                if (num5 < 100) { EnsureCapacity(ref buffer, pooledBuffer, offset, 18); goto L18; }
+                                if (num5 < 1000) { EnsureCapacity(ref buffer, pooledBuffer, offset, 19); goto L19; }
+                                EnsureCapacity(ref buffer, pooledBuffer, offset, 20); goto L20;
                             }
                             L20:
                             buffer[offset++] = (byte)('0' + (div = (num5 * 8389UL) >> 23));
@@ -303,22 +313,22 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             return offset - startOffset;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteSByte(ref byte[] buffer, int offset, sbyte value)
+        public static int WriteSByte(ref byte[] buffer, bool pooledBuffer, int offset, sbyte value)
         {
-            return WriteInt64(ref buffer, offset, (long)value);
+            return WriteInt64(ref buffer, pooledBuffer, offset, (long)value);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteInt16(ref byte[] buffer, int offset, short value)
+        public static int WriteInt16(ref byte[] buffer, bool pooledBuffer, int offset, short value)
         {
-            return WriteInt64(ref buffer, offset, (long)value);
+            return WriteInt64(ref buffer, pooledBuffer, offset, (long)value);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteInt32(ref byte[] buffer, int offset, int value)
+        public static int WriteInt32(ref byte[] buffer, bool pooledBuffer, int offset, int value)
         {
-            return WriteInt64(ref buffer, offset, (long)value);
+            return WriteInt64(ref buffer, pooledBuffer, offset, (long)value);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteInt64(ref byte[] buffer, int offset, long value)
+        public static int WriteInt64(ref byte[] buffer, bool pooledBuffer, int offset, long value)
         {
             var startOffset = offset;
 
@@ -328,7 +338,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             {
                 if (value == long.MinValue) // -9223372036854775808
                 {
-                    BinaryUtil.EnsureCapacity(ref buffer, offset, 20);
+                    EnsureCapacity(ref buffer, pooledBuffer, offset, 20);
                     buffer[offset++] = (byte)'-';
                     buffer[offset++] = (byte)'9';
                     buffer[offset++] = (byte)'2';
@@ -352,7 +362,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                     return offset - startOffset;
                 }
 
-                BinaryUtil.EnsureCapacity(ref buffer, offset, 1);
+                EnsureCapacity(ref buffer, pooledBuffer, offset, 1);
                 buffer[offset++] = (byte)'-';
                 num1 = unchecked(-value);
             }
@@ -361,10 +371,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
             if (num1 < 10000)
             {
-                if (num1 < 10) { BinaryUtil.EnsureCapacity(ref buffer, offset, 1); goto L1; }
-                if (num1 < 100) { BinaryUtil.EnsureCapacity(ref buffer, offset, 2); goto L2; }
-                if (num1 < 1000) { BinaryUtil.EnsureCapacity(ref buffer, offset, 3); goto L3; }
-                BinaryUtil.EnsureCapacity(ref buffer, offset, 4); goto L4;
+                if (num1 < 10) { EnsureCapacity(ref buffer, pooledBuffer, offset, 1); goto L1; }
+                if (num1 < 100) { EnsureCapacity(ref buffer, pooledBuffer, offset, 2); goto L2; }
+                if (num1 < 1000) { EnsureCapacity(ref buffer, pooledBuffer, offset, 3); goto L3; }
+                EnsureCapacity(ref buffer, pooledBuffer, offset, 4); goto L4;
             }
             else
             {
@@ -372,10 +382,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                 num1 -= num2 * 10000;
                 if (num2 < 10000)
                 {
-                    if (num2 < 10) { BinaryUtil.EnsureCapacity(ref buffer, offset, 5); goto L5; }
-                    if (num2 < 100) { BinaryUtil.EnsureCapacity(ref buffer, offset, 6); goto L6; }
-                    if (num2 < 1000) { BinaryUtil.EnsureCapacity(ref buffer, offset, 7); goto L7; }
-                    BinaryUtil.EnsureCapacity(ref buffer, offset, 8); goto L8;
+                    if (num2 < 10) { EnsureCapacity(ref buffer, pooledBuffer, offset, 5); goto L5; }
+                    if (num2 < 100) { EnsureCapacity(ref buffer, pooledBuffer, offset, 6); goto L6; }
+                    if (num2 < 1000) { EnsureCapacity(ref buffer, pooledBuffer, offset, 7); goto L7; }
+                    EnsureCapacity(ref buffer, pooledBuffer, offset, 8); goto L8;
                 }
                 else
                 {
@@ -383,10 +393,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                     num2 -= num3 * 10000;
                     if (num3 < 10000)
                     {
-                        if (num3 < 10) { BinaryUtil.EnsureCapacity(ref buffer, offset, 9); goto L9; }
-                        if (num3 < 100) { BinaryUtil.EnsureCapacity(ref buffer, offset, 10); goto L10; }
-                        if (num3 < 1000) { BinaryUtil.EnsureCapacity(ref buffer, offset, 11); goto L11; }
-                        BinaryUtil.EnsureCapacity(ref buffer, offset, 12); goto L12;
+                        if (num3 < 10) { EnsureCapacity(ref buffer, pooledBuffer, offset, 9); goto L9; }
+                        if (num3 < 100) { EnsureCapacity(ref buffer, pooledBuffer, offset, 10); goto L10; }
+                        if (num3 < 1000) { EnsureCapacity(ref buffer, pooledBuffer, offset, 11); goto L11; }
+                        EnsureCapacity(ref buffer, pooledBuffer, offset, 12); goto L12;
                     }
                     else
                     {
@@ -394,10 +404,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                         num3 -= num4 * 10000;
                         if (num4 < 10000)
                         {
-                            if (num4 < 10) { BinaryUtil.EnsureCapacity(ref buffer, offset, 13); goto L13; }
-                            if (num4 < 100) { BinaryUtil.EnsureCapacity(ref buffer, offset, 14); goto L14; }
-                            if (num4 < 1000) { BinaryUtil.EnsureCapacity(ref buffer, offset, 15); goto L15; }
-                            BinaryUtil.EnsureCapacity(ref buffer, offset, 16); goto L16;
+                            if (num4 < 10) { EnsureCapacity(ref buffer, pooledBuffer, offset, 13); goto L13; }
+                            if (num4 < 100) { EnsureCapacity(ref buffer, pooledBuffer, offset, 14); goto L14; }
+                            if (num4 < 1000) { EnsureCapacity(ref buffer, pooledBuffer, offset, 15); goto L15; }
+                            EnsureCapacity(ref buffer, pooledBuffer, offset, 16); goto L16;
                         }
                         else
                         {
@@ -405,10 +415,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                             num4 -= num5 * 10000;
                             if (num5 < 10000)
                             {
-                                if (num5 < 10) { BinaryUtil.EnsureCapacity(ref buffer, offset, 17); goto L17; }
-                                if (num5 < 100) { BinaryUtil.EnsureCapacity(ref buffer, offset, 18); goto L18; }
-                                if (num5 < 1000) { BinaryUtil.EnsureCapacity(ref buffer, offset, 19); goto L19; }
-                                BinaryUtil.EnsureCapacity(ref buffer, offset, 20); goto L20;
+                                if (num5 < 10) { EnsureCapacity(ref buffer, pooledBuffer, offset, 17); goto L17; }
+                                if (num5 < 100) { EnsureCapacity(ref buffer, pooledBuffer, offset, 18); goto L18; }
+                                if (num5 < 1000) { EnsureCapacity(ref buffer, pooledBuffer, offset, 19); goto L19; }
+                                EnsureCapacity(ref buffer, pooledBuffer, offset, 20); goto L20;
                             }
                             L20:
                             buffer[offset++] = (byte)('0' + (div = (num5 * 8389L) >> 23));
@@ -473,14 +483,14 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             return offset - startOffset;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteSingle(ref byte[] bytes, int offset, float value)
+        public static int WriteSingle(ref byte[] bytes, bool pooledBuffer, int offset, float value)
         {
-            return DoubleToStringConverter.GetBytes(ref bytes, offset, value);
+            return DoubleToStringConverter.GetBytes(ref bytes, pooledBuffer, offset, value);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteDouble(ref byte[] bytes, int offset, double value)
+        public static int WriteDouble(ref byte[] bytes, bool pooledBuffer, int offset, double value)
         {
-            return DoubleToStringConverter.GetBytes(ref bytes, offset, value);
+            return DoubleToStringConverter.GetBytes(ref bytes, pooledBuffer, offset, value);
         }
 
         // boolean is not number:)

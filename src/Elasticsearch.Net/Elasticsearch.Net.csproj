@@ -70,7 +70,7 @@
     </None>
     <None Update="Utf8Json\Internal\UnsafeMemory.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Utf8Json\UnsafeMemory.cs</LastGenOutput>
+      <LastGenOutput>UnsafeMemory.cs</LastGenOutput>
     </None>
     <Compile Update="Utf8Json\Formatters\PrimitiveFormatter.cs">
       <DesignTime>True</DesignTime>
@@ -90,7 +90,7 @@
     <Compile Update="Utf8Json\Internal\UnsafeMemory.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Utf8Json\UnsafeMemory.tt</DependentUpon>
+      <DependentUpon>UnsafeMemory.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

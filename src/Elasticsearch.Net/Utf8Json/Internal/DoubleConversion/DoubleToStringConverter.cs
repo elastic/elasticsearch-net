@@ -33,23 +33,33 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
 	internal struct InternalStringBuilder
     {
         public byte[] buffer;
+		private bool pooledBuffer;
         public int offset;
 
-        public InternalStringBuilder(byte[] buffer, int position)
+		private void EnsureCapacity(ref byte[] bytes, int offset, int appendLength)
+		{
+			if (this.pooledBuffer)
+				ByteArrayPool.EnsureCapacity(ref bytes, offset, appendLength);
+			else
+				BinaryUtil.EnsureCapacity(ref buffer, offset, appendLength);
+		}
+
+        public InternalStringBuilder(byte[] buffer, bool pooledBuffer, int position)
         {
             this.buffer = buffer;
+			this.pooledBuffer = pooledBuffer;
             this.offset = position;
         }
 
         public void AddCharacter(byte str)
         {
-            BinaryUtil.EnsureCapacity(ref buffer, offset, 1);
+            EnsureCapacity(ref buffer, offset, 1);
             buffer[offset++] = str;
         }
 
         public void AddString(byte[] str)
         {
-            BinaryUtil.EnsureCapacity(ref buffer, offset, str.Length);
+            EnsureCapacity(ref buffer, offset, str.Length);
             for (int i = 0; i < str.Length; i++)
             {
                 buffer[offset + i] = str[i];
@@ -59,7 +69,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
 
         public void AddSubstring(byte[] str, int length)
         {
-            BinaryUtil.EnsureCapacity(ref buffer, offset, length);
+            EnsureCapacity(ref buffer, offset, length);
             for (int i = 0; i < length; i++)
             {
                 buffer[offset + i] = str[i];
@@ -69,7 +79,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
 
         public void AddSubstring(byte[] str, int start, int length)
         {
-            BinaryUtil.EnsureCapacity(ref buffer, offset, length);
+            EnsureCapacity(ref buffer, offset, length);
             for (int i = 0; i < length; i++)
             {
                 buffer[offset + i] = str[start + i];
@@ -79,7 +89,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
 
         public void AddPadding(byte c, int count)
         {
-            BinaryUtil.EnsureCapacity(ref buffer, offset, count);
+            EnsureCapacity(ref buffer, offset, count);
             for (int i = 0; i < count; i++)
             {
                 buffer[offset + i] = c;
@@ -89,7 +99,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
 
         public void AddStringSlow(string str)
         {
-            BinaryUtil.EnsureCapacity(ref buffer, offset, StringEncoding.UTF8.GetMaxByteCount(str.Length));
+            EnsureCapacity(ref buffer, offset, StringEncoding.UTF8.GetMaxByteCount(str.Length));
             offset += StringEncoding.UTF8.GetBytes(str, 0, str.Length, buffer, offset);
         }
     }
@@ -133,9 +143,9 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             return toStringBuffer;
         }
 
-        public static int GetBytes(ref byte[] buffer, int offset, float value)
+        public static int GetBytes(ref byte[] buffer, bool pooledBuffer, int offset, float value)
         {
-            var sb = new InternalStringBuilder(buffer, offset);
+            var sb = new InternalStringBuilder(buffer, pooledBuffer, offset);
             if (!ToShortestIeeeNumber(value, ref sb, DtoaMode.SHORTEST_SINGLE))
             {
                 throw new InvalidOperationException("not support float value:" + value);
@@ -145,9 +155,9 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             return sb.offset - offset;
         }
 
-        public static int GetBytes(ref byte[] buffer, int offset, double value)
+        public static int GetBytes(ref byte[] buffer, bool pooledBuffer, int offset, double value)
         {
-            var sb = new InternalStringBuilder(buffer, offset);
+            var sb = new InternalStringBuilder(buffer, pooledBuffer, offset);
             if (!ToShortestIeeeNumber(value, ref sb, DtoaMode.SHORTEST))
             {
                 throw new InvalidOperationException("not support double value:" + value);
