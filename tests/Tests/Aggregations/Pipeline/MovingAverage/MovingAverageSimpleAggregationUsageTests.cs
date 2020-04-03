@@ -40,7 +40,8 @@ nBuilder with name [moving_avg]: parser not found",
 				date_histogram = new
 				{
 					field = "startedOn",
-					interval = "month"
+					interval = "month",
+					min_doc_count = 0
 				},
 				aggs = new
 				{
@@ -72,6 +73,7 @@ nBuilder with name [moving_avg]: parser not found",
 			.DateHistogram("projects_started_per_month", dh => dh
 				.Field(p => p.StartedOn)
 				.Interval(DateInterval.Month)
+				.MinimumDocumentCount(0)
 				.Aggregations(aa => aa
 					.Sum("commits", sm => sm
 						.Field(p => p.NumberOfCommits)
@@ -93,6 +95,7 @@ nBuilder with name [moving_avg]: parser not found",
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
+				MinimumDocumentCount = 0,
 				Aggregations =
 					new SumAggregation("commits", "numberOfCommits")
 					&& new MovingAverageAggregation("commits_moving_avg", "commits")

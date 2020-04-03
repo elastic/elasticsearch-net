@@ -100,10 +100,6 @@ namespace Tests.Search.SearchTemplate
 			(c, r) => c.SearchTemplateAsync<Project>(r)
 		);
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.ServerError.Should().NotBeNull();
-			response.ServerError.Error.Reason.Should().Contain("unknown query [atch]");
-		}
+		protected override void ExpectResponse(ISearchResponse<Project> response) => response.ServerError.Should().NotBeNull();
 	}
 }
