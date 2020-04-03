@@ -62,7 +62,7 @@ namespace ApiGenerator.Configuration
 			"cat.ml_datafeeds.json",
 			"cat.ml_jobs.json",
 			"cat.ml_trained_models.json",
-			"cat.transform.json",
+			"cat.transforms.json",
 			"cluster.delete_component_template.json",
 			"cluster.get_component_template.json",
 			"cluster.put_component_template.json",
