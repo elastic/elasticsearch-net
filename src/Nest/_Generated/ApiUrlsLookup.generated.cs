@@ -47,7 +47,7 @@ namespace Nest
 		internal static ApiUrls CatTasks = new ApiUrls(new[]{"_cat/tasks"});
 		internal static ApiUrls CatTemplates = new ApiUrls(new[]{"_cat/templates", "_cat/templates/{name}"});
 		internal static ApiUrls CatThreadPool = new ApiUrls(new[]{"_cat/thread_pool", "_cat/thread_pool/{thread_pool_patterns}"});
-		internal static ApiUrls CatTransform = new ApiUrls(new[]{"_cat/transforms", "_cat/transforms/{transform_id}"});
+		internal static ApiUrls CatTransforms = new ApiUrls(new[]{"_cat/transforms", "_cat/transforms/{transform_id}"});
 		internal static ApiUrls CrossClusterReplicationDeleteAutoFollowPattern = new ApiUrls(new[]{"_ccr/auto_follow/{name}"});
 		internal static ApiUrls CrossClusterReplicationCreateFollowIndex = new ApiUrls(new[]{"{index}/_ccr/follow"});
 		internal static ApiUrls CrossClusterReplicationFollowInfo = new ApiUrls(new[]{"{index}/_ccr/info"});
