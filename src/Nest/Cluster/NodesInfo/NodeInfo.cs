@@ -33,7 +33,7 @@ namespace Nest
 		public string BuildHash { get; internal set; }
 
 		[DataMember(Name = "total_indexing_buffer")]
-		public long TotalIndexingBuffer { get; internal set; }
+		public long? TotalIndexingBuffer { get; internal set; }
 
 		/// <summary>
 		/// All of the different roles that the node fulfills. An empty
