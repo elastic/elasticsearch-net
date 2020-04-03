@@ -138,6 +138,13 @@ let SkipList = dict<SkipFile,SkipSection> [
     // Test tries to match on "tagline", which requires "human=false", which doesn't work in the Go API.
     // Also test does too much within a single test, so has to be disabled as whole, unfortunately.
     SkipFile "xpack/15_basic.yml", All
+    
+    // Snapshot testing requires local filesystem access
+    SkipFile "snapshot.create/10_basic.yml", All
+    SkipFile "snapshot.get/10_basic.yml", All
+    SkipFile "snapshot.get_repository/10_basic.yml", All
+    SkipFile "snapshot.restore/10_basic.yml", All
+    SkipFile "snapshot.status/10_basic.yml", All
 ]
 
 
