@@ -38,7 +38,6 @@ namespace Elasticsearch.Net.Utf8Json
 	internal static partial class JsonSerializer
     {
 		public const int DefaultBufferLength = 1024;
-
         static IJsonFormatterResolver defaultResolver;
 
         /// <summary>

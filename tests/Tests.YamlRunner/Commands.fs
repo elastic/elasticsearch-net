@@ -21,6 +21,7 @@ let LocateTests namedSuite revision directoryFilter fileFilter = async {
     let! folders = TestsLocator.ListFolders namedSuite revision directoryFilter 
     let l = folders.Length
     use progress = new ProgressBar(l, sprintf "Listing %i folders" l, barOptions)
+    progress.WriteLine <| sprintf "Listing %i folders" l
     let folderDownloads =
         folders
         |> Seq.map(fun folder -> TestsLocator.DownloadTestsInFolder folder fileFilter namedSuite revision progress subBarOptions)

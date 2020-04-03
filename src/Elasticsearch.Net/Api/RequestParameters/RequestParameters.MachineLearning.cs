@@ -50,19 +50,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for DeleteCalendar</summary>
+	///<summary>Request options for DeleteCalendar <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar.html</para></summary>
 	public class DeleteCalendarRequestParameters : RequestParameters<DeleteCalendarRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for DeleteCalendarEvent</summary>
+	///<summary>Request options for DeleteCalendarEvent <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-event.html</para></summary>
 	public class DeleteCalendarEventRequestParameters : RequestParameters<DeleteCalendarEventRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for DeleteCalendarJob</summary>
+	///<summary>Request options for DeleteCalendarJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-job.html</para></summary>
 	public class DeleteCalendarJobRequestParameters : RequestParameters<DeleteCalendarJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -92,13 +92,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for DeleteExpiredData</summary>
+	///<summary>Request options for DeleteExpiredData <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</para></summary>
 	public class DeleteExpiredDataRequestParameters : RequestParameters<DeleteExpiredDataRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for DeleteFilter</summary>
+	///<summary>Request options for DeleteFilter <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html</para></summary>
 	public class DeleteFilterRequestParameters : RequestParameters<DeleteFilterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -154,8 +154,8 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for EstimateMemoryUsage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</para></summary>
-	public class EstimateMemoryUsageRequestParameters : RequestParameters<EstimateMemoryUsageRequestParameters>
+	///<summary>Request options for EstimateModelMemory <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</para></summary>
+	public class EstimateModelMemoryRequestParameters : RequestParameters<EstimateModelMemoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
@@ -287,7 +287,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for ForecastJob</summary>
+	///<summary>Request options for ForecastJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html</para></summary>
 	public class ForecastJobRequestParameters : RequestParameters<ForecastJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -299,7 +299,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for GetCalendarEvents</summary>
+	///<summary>Request options for GetCalendarEvents <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html</para></summary>
 	public class GetCalendarEventsRequestParameters : RequestParameters<GetCalendarEventsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -325,7 +325,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for GetCalendars</summary>
+	///<summary>Request options for GetCalendars <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html</para></summary>
 	public class GetCalendarsRequestParameters : RequestParameters<GetCalendarsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -419,7 +419,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for GetFilters</summary>
+	///<summary>Request options for GetFilters <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html</para></summary>
 	public class GetFiltersRequestParameters : RequestParameters<GetFiltersRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -568,7 +568,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for Info</summary>
+	///<summary>Request options for Info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html</para></summary>
 	public class MachineLearningInfoRequestParameters : RequestParameters<MachineLearningInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -580,7 +580,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 
-	///<summary>Request options for PostCalendarEvents</summary>
+	///<summary>Request options for PostCalendarEvents <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html</para></summary>
 	public class PostCalendarEventsRequestParameters : RequestParameters<PostCalendarEventsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -611,13 +611,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for PutCalendar</summary>
+	///<summary>Request options for PutCalendar <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html</para></summary>
 	public class PutCalendarRequestParameters : RequestParameters<PutCalendarRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for PutCalendarJob</summary>
+	///<summary>Request options for PutCalendarJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html</para></summary>
 	public class PutCalendarJobRequestParameters : RequestParameters<PutCalendarJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -633,9 +633,36 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	public class PutDatafeedRequestParameters : RequestParameters<PutDatafeedRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>Ignore if the source indices expressions resolves to no concrete indices (default: true)</summary>
+		public bool? AllowNoIndices
+		{
+			get => Q<bool? >("allow_no_indices");
+			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Whether source index expressions should get expanded to open or closed indices (default: open)</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Ignore indices that are marked as throttled (default: true)</summary>
+		public bool? IgnoreThrottled
+		{
+			get => Q<bool? >("ignore_throttled");
+			set => Q("ignore_throttled", value);
+		}
+
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
 	}
 
-	///<summary>Request options for PutFilter</summary>
+	///<summary>Request options for PutFilter <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html</para></summary>
 	public class PutFilterRequestParameters : RequestParameters<PutFilterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -647,7 +674,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 
-	///<summary>Request options for PutTrainedModel <para>TODO</para></summary>
+	///<summary>Request options for PutTrainedModel <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-inference.html</para></summary>
 	public class PutTrainedModelRequestParameters : RequestParameters<PutTrainedModelRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -741,9 +768,36 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	public class UpdateDatafeedRequestParameters : RequestParameters<UpdateDatafeedRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Ignore if the source indices expressions resolves to no concrete indices (default: true)</summary>
+		public bool? AllowNoIndices
+		{
+			get => Q<bool? >("allow_no_indices");
+			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Whether source index expressions should get expanded to open or closed indices (default: open)</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Ignore indices that are marked as throttled (default: true)</summary>
+		public bool? IgnoreThrottled
+		{
+			get => Q<bool? >("ignore_throttled");
+			set => Q("ignore_throttled", value);
+		}
+
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
 	}
 
-	///<summary>Request options for UpdateFilter</summary>
+	///<summary>Request options for UpdateFilter <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html</para></summary>
 	public class UpdateFilterRequestParameters : RequestParameters<UpdateFilterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

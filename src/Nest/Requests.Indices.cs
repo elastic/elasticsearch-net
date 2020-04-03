@@ -1006,7 +1006,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Request for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
 	public partial class FreezeIndexRequest : PlainRequestBase<FreezeIndexRequestParameters>, IFreezeIndexRequest
 	{
 		protected IFreezeIndexRequest Self => this;
@@ -1925,6 +1925,7 @@ namespace Nest
 		}
 
 		///<summary>Return settings in flat format (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.7.0, reason: Removed from the server as it was never a valid option")]
 		public bool? FlatSettings
 		{
 			get => Q<bool? >("flat_settings");
@@ -1946,6 +1947,7 @@ namespace Nest
 		}
 
 		///<summary>Explicit operation timeout</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.7.0, reason: Removed from the server as it was never a valid option")]
 		public Time Timeout
 		{
 			get => Q<Time>("timeout");
@@ -2508,7 +2510,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Request for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</para></summary>
 	public partial class UnfreezeIndexRequest : PlainRequestBase<UnfreezeIndexRequestParameters>, IUnfreezeIndexRequest
 	{
 		protected IUnfreezeIndexRequest Self => this;

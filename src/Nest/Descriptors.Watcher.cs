@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.WatcherApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>Descriptor for Acknowledge <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
+	///<summary>Descriptor for Acknowledge <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
 	public partial class AcknowledgeWatchDescriptor : RequestDescriptorBase<AcknowledgeWatchDescriptor, AcknowledgeWatchRequestParameters, IAcknowledgeWatchRequest>, IAcknowledgeWatchRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherAcknowledge;
@@ -103,7 +103,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for Delete <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</para></summary>
+	///<summary>Descriptor for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</para></summary>
 	public partial class DeleteWatchDescriptor : RequestDescriptorBase<DeleteWatchDescriptor, DeleteWatchRequestParameters, IDeleteWatchRequest>, IDeleteWatchRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherDelete;
@@ -124,7 +124,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for Execute <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</para></summary>
+	///<summary>Descriptor for Execute <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</para></summary>
 	public partial class ExecuteWatchDescriptor : RequestDescriptorBase<ExecuteWatchDescriptor, ExecuteWatchRequestParameters, IExecuteWatchRequest>, IExecuteWatchRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherExecute;
@@ -148,7 +148,7 @@ namespace Nest
 		public ExecuteWatchDescriptor Debug(bool? debug = true) => Qs("debug", debug);
 	}
 
-	///<summary>Descriptor for Get <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</para></summary>
+	///<summary>Descriptor for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</para></summary>
 	public partial class GetWatchDescriptor : RequestDescriptorBase<GetWatchDescriptor, GetWatchRequestParameters, IGetWatchRequest>, IGetWatchRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherGet;
@@ -169,7 +169,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for Put <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</para></summary>
+	///<summary>Descriptor for Put <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</para></summary>
 	public partial class PutWatchDescriptor : RequestDescriptorBase<PutWatchDescriptor, PutWatchRequestParameters, IPutWatchRequest>, IPutWatchRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherPut;
@@ -198,7 +198,7 @@ namespace Nest
 		public PutWatchDescriptor Version(long? version) => Qs("version", version);
 	}
 
-	///<summary>Descriptor for Start <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</para></summary>
+	///<summary>Descriptor for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</para></summary>
 	public partial class StartWatcherDescriptor : RequestDescriptorBase<StartWatcherDescriptor, StartWatcherRequestParameters, IStartWatcherRequest>, IStartWatcherRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherStart;
@@ -206,7 +206,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for Stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</para></summary>
+	///<summary>Descriptor for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</para></summary>
 	public partial class WatcherStatsDescriptor : RequestDescriptorBase<WatcherStatsDescriptor, WatcherStatsRequestParameters, IWatcherStatsRequest>, IWatcherStatsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherStats;
@@ -230,7 +230,7 @@ namespace Nest
 		public WatcherStatsDescriptor EmitStacktraces(bool? emitstacktraces = true) => Qs("emit_stacktraces", emitstacktraces);
 	}
 
-	///<summary>Descriptor for Stop <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</para></summary>
+	///<summary>Descriptor for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</para></summary>
 	public partial class StopWatcherDescriptor : RequestDescriptorBase<StopWatcherDescriptor, StopWatcherRequestParameters, IStopWatcherRequest>, IStopWatcherRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherStop;

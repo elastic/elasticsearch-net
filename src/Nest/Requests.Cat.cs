@@ -61,6 +61,13 @@ namespace Nest
 		[IgnoreDataMember]
 		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
 		// Request parameters
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -94,6 +101,7 @@ namespace Nest
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public Time MasterTimeout
 		{
 			get => Q<Time>("master_timeout");
@@ -262,6 +270,7 @@ namespace Nest
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public bool? Local
 		{
 			get => Q<bool? >("local");
@@ -269,6 +278,7 @@ namespace Nest
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public Time MasterTimeout
 		{
 			get => Q<Time>("master_timeout");
@@ -353,6 +363,7 @@ namespace Nest
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public bool? Local
 		{
 			get => Q<bool? >("local");
@@ -360,6 +371,7 @@ namespace Nest
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public Time MasterTimeout
 		{
 			get => Q<Time>("master_timeout");
@@ -426,6 +438,7 @@ namespace Nest
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public bool? Local
 		{
 			get => Q<bool? >("local");
@@ -433,6 +446,7 @@ namespace Nest
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public Time MasterTimeout
 		{
 			get => Q<Time>("master_timeout");
@@ -516,6 +530,13 @@ namespace Nest
 		{
 			get => Q<Bytes? >("bytes");
 			set => Q("bytes", value);
+		}
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
 		}
 
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -776,7 +797,8 @@ namespace Nest
 			set => Q("help", value);
 		}
 
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		///<summary>Calculate the selected nodes using the local cluster state rather than the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.6.0, reason: This parameter does not cause this API to act locally.")]
 		public bool? Local
 		{
 			get => Q<bool? >("local");
@@ -1014,6 +1036,7 @@ namespace Nest
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public Time MasterTimeout
 		{
 			get => Q<Time>("master_timeout");

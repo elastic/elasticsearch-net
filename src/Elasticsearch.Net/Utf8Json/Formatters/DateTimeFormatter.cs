@@ -931,13 +931,13 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             {
                 const int maxDayLength = 8 + 1; // {Day}.
                 var dayCharacters = new byte[maxDayLength];
-                for (; array[i] != '.'; i++)
-                {
-                    dayCharacters[day++] = array[i];
+                    for (; array[i] != '.'; i++)
+                    {
+						dayCharacters[day++] = array[i];
+                    }
+					day = new JsonReader(dayCharacters).ReadInt32();
+                    i++; // skip '.'
                 }
-                day = new JsonReader(dayCharacters).ReadInt32();
-                i++; // skip '.'
-            }
 
             var hour = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
             if (array[i++] != (byte)':') goto ERROR;

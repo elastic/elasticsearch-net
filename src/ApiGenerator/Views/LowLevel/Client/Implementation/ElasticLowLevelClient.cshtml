@@ -24,7 +24,7 @@ using static Elasticsearch.Net.HttpMethod;
 
 @{
 	RestApiSpec model = Model;
-	var namespaces = model.EndpointsPerNamespace.Keys.Where(k => k != CsharpNames.RootNamespace);
+	var namespaces = model.EndpointsPerNamespaceLowLevel.Keys.Where(k => k != CsharpNames.RootNamespace);
 <text>
 // ReSharper disable InterpolatedStringExpressionIsNotIFormattable
 // ReSharper disable RedundantExtendsListEntry
@@ -55,7 +55,7 @@ namespace Elasticsearch.Net
 </text>
 	
 
-	foreach (var kv in model.EndpointsPerNamespace)
+	foreach (var kv in model.EndpointsPerNamespaceLowLevel)
 	{
 		if (kv.Key != CsharpNames.RootNamespace)
 		{

@@ -209,6 +209,12 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
+	///<summary>Request options for CreateDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class CreateDataStreamRequestParameters : RequestParameters<CreateDataStreamRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+
 	///<summary>Request options for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</para></summary>
 	public class DeleteIndexRequestParameters : RequestParameters<DeleteIndexRequestParameters>
 	{
@@ -266,6 +272,12 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			get => Q<TimeSpan>("timeout");
 			set => Q("timeout", value);
 		}
+	}
+
+	///<summary>Request options for DeleteDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class DeleteDataStreamRequestParameters : RequestParameters<DeleteDataStreamRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
 	///<summary>Request options for DeleteTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
@@ -560,7 +572,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
-	///<summary>Request options for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Request options for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
 	public class FreezeIndexRequestParameters : RequestParameters<FreezeIndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -705,6 +717,12 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			get => Q<bool? >("local");
 			set => Q("local", value);
 		}
+	}
+
+	///<summary>Request options for GetDataStreams <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class GetDataStreamsRequestParameters : RequestParameters<GetDataStreamsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
 	///<summary>Request options for GetFieldMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
@@ -1085,6 +1103,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 
 		///<summary>Return settings in flat format (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.7.0, reason: Removed from the server as it was never a valid option")]
 		public bool? FlatSettings
 		{
 			get => Q<bool? >("flat_settings");
@@ -1106,6 +1125,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 
 		///<summary>Explicit operation timeout</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.7.0, reason: Removed from the server as it was never a valid option")]
 		public TimeSpan Timeout
 		{
 			get => Q<TimeSpan>("timeout");
@@ -1134,6 +1154,35 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 
 	///<summary>Request options for Refresh <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</para></summary>
 	public class RefreshRequestParameters : RequestParameters<RefreshRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices
+		{
+			get => Q<bool? >("allow_no_indices");
+			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
+	}
+
+	///<summary>Request options for ReloadSearchAnalyzers <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html</para></summary>
+	public class ReloadSearchAnalyzersRequestParameters : RequestParameters<ReloadSearchAnalyzersRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
@@ -1393,7 +1442,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
-	///<summary>Request options for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Request options for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</para></summary>
 	public class UnfreezeIndexRequestParameters : RequestParameters<UnfreezeIndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

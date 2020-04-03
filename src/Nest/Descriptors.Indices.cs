@@ -562,7 +562,7 @@ namespace Nest
 		public ForceMergeDescriptor OnlyExpungeDeletes(bool? onlyexpungedeletes = true) => Qs("only_expunge_deletes", onlyexpungedeletes);
 	}
 
-	///<summary>Descriptor for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Descriptor for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
 	public partial class FreezeIndexDescriptor : RequestDescriptorBase<FreezeIndexDescriptor, FreezeIndexRequestParameters, IFreezeIndexRequest>, IFreezeIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFreeze;
@@ -1044,13 +1044,13 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public PutIndexTemplateDescriptor Create(bool? create = true) => Qs("create", create);
-		///<summary>Return settings in flat format (default: false)</summary>
+		///<summary>Return settings in flat format (default: false)</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.7.0, reason: Removed from the server as it was never a valid option")]
 		public PutIndexTemplateDescriptor FlatSettings(bool? flatsettings = true) => Qs("flat_settings", flatsettings);
 		///<summary>Whether a type should be returned in the body of the mappings.</summary>
 		public PutIndexTemplateDescriptor IncludeTypeName(bool? includetypename = true) => Qs("include_type_name", includetypename);
 		///<summary>Specify timeout for connection to master</summary>
 		public PutIndexTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
-		///<summary>Explicit operation timeout</summary>
+		///<summary>Explicit operation timeout</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.7.0, reason: Removed from the server as it was never a valid option")]
 		public PutIndexTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
@@ -1367,7 +1367,7 @@ namespace Nest
 		public IndicesStatsDescriptor Level(Level? level) => Qs("level", level);
 	}
 
-	///<summary>Descriptor for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Descriptor for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</para></summary>
 	public partial class UnfreezeIndexDescriptor : RequestDescriptorBase<UnfreezeIndexDescriptor, UnfreezeIndexRequestParameters, IUnfreezeIndexRequest>, IUnfreezeIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUnfreeze;

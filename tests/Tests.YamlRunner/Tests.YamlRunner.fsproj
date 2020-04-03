@@ -37,7 +37,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="SemanticVersioning" Version="1.2.2" />
     <PackageReference Include="SharpYaml" Version="1.6.5" />
-    <PackageReference Include="ShellProgressBar" Version="4.3.0" />
+    <PackageReference Include="ShellProgressBar" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

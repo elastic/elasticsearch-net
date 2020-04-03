@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.RollupApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>Descriptor for DeleteJob</summary>
+	///<summary>Descriptor for DeleteJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html</para></summary>
 	public partial class DeleteRollupJobDescriptor : RequestDescriptorBase<DeleteRollupJobDescriptor, DeleteRollupJobRequestParameters, IDeleteRollupJobRequest>, IDeleteRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupDeleteJob;
@@ -51,7 +51,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetJob</summary>
+	///<summary>Descriptor for GetJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html</para></summary>
 	public partial class GetRollupJobDescriptor : RequestDescriptorBase<GetRollupJobDescriptor, GetRollupJobRequestParameters, IGetRollupJobRequest>, IGetRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupGetJob;
@@ -73,7 +73,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetCapabilities</summary>
+	///<summary>Descriptor for GetCapabilities <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html</para></summary>
 	public partial class GetRollupCapabilitiesDescriptor : RequestDescriptorBase<GetRollupCapabilitiesDescriptor, GetRollupCapabilitiesRequestParameters, IGetRollupCapabilitiesRequest>, IGetRollupCapabilitiesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupGetCapabilities;
@@ -95,7 +95,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetIndexCapabilities</summary>
+	///<summary>Descriptor for GetIndexCapabilities <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html</para></summary>
 	public partial class GetRollupIndexCapabilitiesDescriptor : RequestDescriptorBase<GetRollupIndexCapabilitiesDescriptor, GetRollupIndexCapabilitiesRequestParameters, IGetRollupIndexCapabilitiesRequest>, IGetRollupIndexCapabilitiesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupGetIndexCapabilities;
@@ -121,7 +121,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for CreateJob</summary>
+	///<summary>Descriptor for CreateJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html</para></summary>
 	public partial class CreateRollupJobDescriptor<TDocument> : RequestDescriptorBase<CreateRollupJobDescriptor<TDocument>, CreateRollupJobRequestParameters, ICreateRollupJobRequest>, ICreateRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupCreateJob;
@@ -142,7 +142,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for Search</summary>
+	///<summary>Descriptor for Search <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html</para></summary>
 	public partial class RollupSearchDescriptor<TDocument> : RequestDescriptorBase<RollupSearchDescriptor<TDocument>, RollupSearchRequestParameters, IRollupSearchRequest>, IRollupSearchRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupSearch;
@@ -173,7 +173,7 @@ namespace Nest
 		public RollupSearchDescriptor<TDocument> TypedKeys(bool? typedkeys = true) => Qs("typed_keys", typedkeys);
 	}
 
-	///<summary>Descriptor for StartJob</summary>
+	///<summary>Descriptor for StartJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html</para></summary>
 	public partial class StartRollupJobDescriptor : RequestDescriptorBase<StartRollupJobDescriptor, StartRollupJobRequestParameters, IStartRollupJobRequest>, IStartRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupStartJob;
@@ -194,7 +194,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for StopJob</summary>
+	///<summary>Descriptor for StopJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html</para></summary>
 	public partial class StopRollupJobDescriptor : RequestDescriptorBase<StopRollupJobDescriptor, StopRollupJobRequestParameters, IStopRollupJobRequest>, IStopRollupJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupStopJob;
