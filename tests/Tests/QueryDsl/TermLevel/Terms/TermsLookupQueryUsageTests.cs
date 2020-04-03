@@ -26,7 +26,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			Field = "description",
 			TermsLookup = new FieldLookup
 			{
-				Id = 12,
+				Id = "12",
 				Index = Index<Developer>(),
 				Path = Field<Developer>(p => p.LastName),
 				Routing = "myroutingvalue"
@@ -41,7 +41,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				boost = 1.1,
 				description = new
 				{
-					id = 12,
+					id = "12",
 					index = "devs",
 					path = "lastName",
 					routing = "myroutingvalue"
@@ -56,7 +56,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.Field(p => p.Description)
 				.TermsLookup<Developer>(e => e
 					.Path(p => p.LastName)
-					.Id(12)
+					.Id("12")
 					.Routing("myroutingvalue")
 				)
 			);
