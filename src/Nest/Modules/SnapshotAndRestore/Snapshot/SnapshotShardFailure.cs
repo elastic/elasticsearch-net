@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -15,6 +16,7 @@ namespace Nest
 		public string Reason { get; set; }
 
 		[DataMember(Name ="shard_id")]
+		[JsonFormatter(typeof(IntStringFormatter))]
 		public string ShardId { get; set; }
 
 		[DataMember(Name ="status")]
