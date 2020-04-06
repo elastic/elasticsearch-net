@@ -238,23 +238,23 @@ namespace Elasticsearch.Net.Specification.CatApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_cat/ml/anomaly_detectors/{jobId:jobId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/trained_models <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse MlTrainedModels<TResponse>(MlTrainedModelsRequestParameters requestParameters = null)
+		public TResponse TrainedModels<TResponse>(CatTrainedModelsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_cat/ml/trained_models", null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/trained_models <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("cat.ml_trained_models", "")]
-		public Task<TResponse> MlTrainedModelsAsync<TResponse>(MlTrainedModelsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> TrainedModelsAsync<TResponse>(CatTrainedModelsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_cat/ml/trained_models", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/trained_models/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
 		///<param name = "modelId">The ID of the trained models stats to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse MlTrainedModels<TResponse>(string modelId, MlTrainedModelsRequestParameters requestParameters = null)
+		public TResponse TrainedModels<TResponse>(string modelId, CatTrainedModelsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_cat/ml/trained_models/{modelId:modelId}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/trained_models/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
 		///<param name = "modelId">The ID of the trained models stats to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("cat.ml_trained_models", "model_id")]
-		public Task<TResponse> MlTrainedModelsAsync<TResponse>(string modelId, MlTrainedModelsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> TrainedModelsAsync<TResponse>(string modelId, CatTrainedModelsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_cat/ml/trained_models/{modelId:modelId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/nodeattrs <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
