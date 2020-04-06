@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.5
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.7
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -23,7 +23,7 @@ a => a
 .DateHistogram("projects_started_per_month", dh => dh
     .Field(p => p.StartedOn)
     .Interval(DateInterval.Month)
-    .MinimumDocumentCount(1)
+    .MinimumDocumentCount(0)
     .Aggregations(aa => aa
         .Sum("commits", sm => sm
             .Field(p => p.NumberOfCommits)
@@ -43,7 +43,7 @@ new DateHistogramAggregation("projects_started_per_month")
 {
     Field = "startedOn",
     Interval = DateInterval.Month,
-    MinimumDocumentCount = 1,
+    MinimumDocumentCount = 0,
     Aggregations =
         new SumAggregation("commits", "numberOfCommits") &&
         new DerivativeAggregation("commits_derivative", "commits")
@@ -58,7 +58,7 @@ new DateHistogramAggregation("projects_started_per_month")
     "date_histogram": {
       "field": "startedOn",
       "interval": "month",
-      "min_doc_count": 1
+      "min_doc_count": 0
     },
     "aggs": {
       "commits": {
