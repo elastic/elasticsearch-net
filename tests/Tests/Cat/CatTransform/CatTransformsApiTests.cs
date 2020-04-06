@@ -1,7 +1,5 @@
 ﻿using System;
-using Elastic.Managed.Ephemeral;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -28,6 +26,8 @@ namespace Tests.Cat.CatTransforms
 			(client, r) => client.Cat.Transforms(r),
 			(client, r) => client.Cat.TransformsAsync(r)
 		);
+
+		protected override void ExpectResponse(CatResponse<CatTransformsRecord> response) => response.ShouldBeValid();
 	}
 
     [SkipVersion("<7.5.0", "Introduced in 7.5.0")]
