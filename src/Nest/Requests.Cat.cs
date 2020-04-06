@@ -681,6 +681,90 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface ICatJobsRequest : IRequest<CatJobsRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id JobId
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Jobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
+	public partial class CatJobsRequest : PlainRequestBase<CatJobsRequestParameters>, ICatJobsRequest
+	{
+		protected ICatJobsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatJobs;
+		///<summary>/_cat/ml/anomaly_detectors</summary>
+		public CatJobsRequest(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/anomaly_detectors/{job_id}</summary>
+		///<param name = "jobId">Optional, accepts null</param>
+		public CatJobsRequest(Id jobId): base(r => r.Optional("job_id", jobId))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id ICatJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs
+		{
+			get => Q<bool? >("allow_no_jobs");
+			set => Q("allow_no_jobs", value);
+		}
+
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
+		}
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers
+		{
+			get => Q<string[]>("h");
+			set => Q("h", value);
+		}
+
+		///<summary>Return help information</summary>
+		public bool? Help
+		{
+			get => Q<bool? >("help");
+			set => Q("help", value);
+		}
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns
+		{
+			get => Q<string[]>("s");
+			set => Q("s", value);
+		}
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool? Verbose
+		{
+			get => Q<bool? >("v");
+			set => Q("v", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface ICatNodeAttributesRequest : IRequest<CatNodeAttributesRequestParameters>
 	{
 	}

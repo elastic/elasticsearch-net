@@ -218,23 +218,23 @@ namespace Elasticsearch.Net.Specification.CatApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_cat/ml/datafeeds/{datafeedId:datafeedId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/anomaly_detectors <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse MlJobs<TResponse>(MlJobsRequestParameters requestParameters = null)
+		public TResponse Jobs<TResponse>(CatJobsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_cat/ml/anomaly_detectors", null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/anomaly_detectors <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("cat.ml_jobs", "")]
-		public Task<TResponse> MlJobsAsync<TResponse>(MlJobsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> JobsAsync<TResponse>(CatJobsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_cat/ml/anomaly_detectors", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/anomaly_detectors/{job_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
 		///<param name = "jobId">The ID of the jobs stats to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse MlJobs<TResponse>(string jobId, MlJobsRequestParameters requestParameters = null)
+		public TResponse Jobs<TResponse>(string jobId, CatJobsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_cat/ml/anomaly_detectors/{jobId:jobId}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/anomaly_detectors/{job_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
 		///<param name = "jobId">The ID of the jobs stats to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("cat.ml_jobs", "job_id")]
-		public Task<TResponse> MlJobsAsync<TResponse>(string jobId, MlJobsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> JobsAsync<TResponse>(string jobId, CatJobsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_cat/ml/anomaly_detectors/{jobId:jobId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/trained_models <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

@@ -229,6 +229,30 @@ namespace Nest.Specification.CatApi
 		/// </summary>
 		public Task<CatResponse<CatMasterRecord>> MasterAsync(ICatMasterRequest request, CancellationToken ct = default) => DoCatAsync<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request, ct);
 		/// <summary>
+		/// <c>GET</c> request to the <c>cat.ml_jobs</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</a>
+		/// </summary>
+		public CatResponse<CatJobsRecord> Jobs(Func<CatJobsDescriptor, ICatJobsRequest> selector = null) => Jobs(selector.InvokeOrDefault(new CatJobsDescriptor()));
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.ml_jobs</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</a>
+		/// </summary>
+		public Task<CatResponse<CatJobsRecord>> JobsAsync(Func<CatJobsDescriptor, ICatJobsRequest> selector = null, CancellationToken ct = default) => JobsAsync(selector.InvokeOrDefault(new CatJobsDescriptor()), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.ml_jobs</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</a>
+		/// </summary>
+		public CatResponse<CatJobsRecord> Jobs(ICatJobsRequest request) => DoCat<ICatJobsRequest, CatJobsRequestParameters, CatJobsRecord>(request);
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.ml_jobs</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</a>
+		/// </summary>
+		public Task<CatResponse<CatJobsRecord>> JobsAsync(ICatJobsRequest request, CancellationToken ct = default) => DoCatAsync<ICatJobsRequest, CatJobsRequestParameters, CatJobsRecord>(request, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>cat.nodeattrs</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</a>
