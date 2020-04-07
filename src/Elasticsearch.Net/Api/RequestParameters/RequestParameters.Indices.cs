@@ -299,6 +299,25 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
+	///<summary>Request options for DeleteTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public class DeleteIndexTemplateRequestParameters : RequestParameters<DeleteIndexTemplateRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>Specify timeout for connection to master</summary>
+		public TimeSpan MasterTimeout
+		{
+			get => Q<TimeSpan>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+
+		///<summary>Explicit operation timeout</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
+	}
+
 	///<summary>Request options for Exists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</para></summary>
 	public class IndexExistsRequestParameters : RequestParameters<IndexExistsRequestParameters>
 	{
@@ -775,6 +794,32 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
+	///<summary>Request options for GetTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public class GetIndexTemplateRequestParameters : RequestParameters<GetIndexTemplateRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Return settings in flat format (default: false)</summary>
+		public bool? FlatSettings
+		{
+			get => Q<bool? >("flat_settings");
+			set => Q("flat_settings", value);
+		}
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local
+		{
+			get => Q<bool? >("local");
+			set => Q("local", value);
+		}
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public TimeSpan MasterTimeout
+		{
+			get => Q<TimeSpan>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+	}
+
 	///<summary>Request options for GetMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 	public class GetMappingRequestParameters : RequestParameters<GetMappingRequestParameters>
 	{
@@ -981,6 +1026,32 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		{
 			get => Q<TimeSpan>("timeout");
 			set => Q("timeout", value);
+		}
+	}
+
+	///<summary>Request options for PutTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public class PutIndexTemplateRequestParameters : RequestParameters<PutIndexTemplateRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		public bool? Create
+		{
+			get => Q<bool? >("create");
+			set => Q("create", value);
+		}
+
+		///<summary>Specify timeout for connection to master</summary>
+		public TimeSpan MasterTimeout
+		{
+			get => Q<TimeSpan>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+
+		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
+		public long? Order
+		{
+			get => Q<long? >("order");
+			set => Q("order", value);
 		}
 	}
 
