@@ -24,42 +24,42 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.RollupApi
 {
-	///<summary>Request options for DeleteJob</summary>
+	///<summary>Request options for DeleteJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html</para></summary>
 	public class DeleteRollupJobRequestParameters : RequestParameters<DeleteRollupJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for GetJob</summary>
+	///<summary>Request options for GetJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html</para></summary>
 	public class GetRollupJobRequestParameters : RequestParameters<GetRollupJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for GetCapabilities</summary>
+	///<summary>Request options for GetCapabilities <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html</para></summary>
 	public class GetRollupCapabilitiesRequestParameters : RequestParameters<GetRollupCapabilitiesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for GetIndexCapabilities</summary>
+	///<summary>Request options for GetIndexCapabilities <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html</para></summary>
 	public class GetRollupIndexCapabilitiesRequestParameters : RequestParameters<GetRollupIndexCapabilitiesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for CreateJob</summary>
+	///<summary>Request options for CreateJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html</para></summary>
 	public class CreateRollupJobRequestParameters : RequestParameters<CreateRollupJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for Search</summary>
+	///<summary>Request options for Search <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html</para></summary>
 	public class RollupSearchRequestParameters : RequestParameters<RollupSearchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
@@ -79,14 +79,14 @@ namespace Elasticsearch.Net.Specification.RollupApi
 		}
 	}
 
-	///<summary>Request options for StartJob</summary>
+	///<summary>Request options for StartJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html</para></summary>
 	public class StartRollupJobRequestParameters : RequestParameters<StartRollupJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for StopJob</summary>
+	///<summary>Request options for StopJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html</para></summary>
 	public class StopRollupJobRequestParameters : RequestParameters<StopRollupJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

@@ -976,14 +976,14 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for GetScriptContext</summary>
+	///<summary>Request options for GetScriptContext <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html</para></summary>
 	public class GetScriptContextRequestParameters : RequestParameters<GetScriptContextRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for GetScriptLanguages</summary>
+	///<summary>Request options for GetScriptLanguages <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 	public class GetScriptLanguagesRequestParameters : RequestParameters<GetScriptLanguagesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -1246,7 +1246,7 @@ namespace Elasticsearch.Net
 		///<summary>
 		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
-		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
+		/// not match any documents based on its rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.
 		///</summary>
 		public long? PreFilterShardSize
@@ -1671,7 +1671,7 @@ namespace Elasticsearch.Net
 		///<summary>
 		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
-		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
+		/// not match any documents based on its rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.
 		///</summary>
 		public long? PreFilterShardSize
