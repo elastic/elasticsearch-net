@@ -18,7 +18,7 @@
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
     <PackageReference Include="coverlet.collector" Version="1.1.0" />
-    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20200224T155731" />
+    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20200306T203119" />
     <PackageReference Include="FluentAssertions" Version="5.7.0" />
     
     <PackageReference Include="DiffPlex" Version="1.4.1" />
