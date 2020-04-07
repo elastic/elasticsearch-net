@@ -178,23 +178,23 @@ namespace Elasticsearch.Net.Specification.CatApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_cat/master", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/data_frame/analytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse MlDataFrameAnalytics<TResponse>(MlDataFrameAnalyticsRequestParameters requestParameters = null)
+		public TResponse DataFrameAnalytics<TResponse>(CatDataFrameAnalyticsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_cat/ml/data_frame/analytics", null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/data_frame/analytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("cat.ml_data_frame_analytics", "")]
-		public Task<TResponse> MlDataFrameAnalyticsAsync<TResponse>(MlDataFrameAnalyticsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> DataFrameAnalyticsAsync<TResponse>(CatDataFrameAnalyticsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_cat/ml/data_frame/analytics", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/data_frame/analytics/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html</para></summary>
 		///<param name = "id">The ID of the data frame analytics to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse MlDataFrameAnalytics<TResponse>(string id, MlDataFrameAnalyticsRequestParameters requestParameters = null)
+		public TResponse DataFrameAnalytics<TResponse>(string id, CatDataFrameAnalyticsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_cat/ml/data_frame/analytics/{id:id}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/data_frame/analytics/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html</para></summary>
 		///<param name = "id">The ID of the data frame analytics to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("cat.ml_data_frame_analytics", "id")]
-		public Task<TResponse> MlDataFrameAnalyticsAsync<TResponse>(string id, MlDataFrameAnalyticsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> DataFrameAnalyticsAsync<TResponse>(string id, CatDataFrameAnalyticsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_cat/ml/data_frame/analytics/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/datafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
