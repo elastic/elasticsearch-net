@@ -145,6 +145,9 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "snapshot.get_repository/10_basic.yml", All
     SkipFile "snapshot.restore/10_basic.yml", All
     SkipFile "snapshot.status/10_basic.yml", All
+    
+    // Datastreams are currently experimental
+    SkipFile "indices.data_stream/10_basic.yml", All
 ]
 
 
