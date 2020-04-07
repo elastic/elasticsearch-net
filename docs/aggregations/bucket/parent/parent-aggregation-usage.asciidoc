@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.5
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.7
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -47,7 +47,6 @@ new ParentAggregation("name_of_parent_agg", typeof(CommitActivity)) <1>
 }
 ----
 <1> `join` field is determined from the _child_ type. In this example, it is `CommitActivity`
-
 <2> sub-aggregations are on the type determined from the `join` field. In this example, a `Project` is a parent of `CommitActivity`
 
 [source,javascript]
