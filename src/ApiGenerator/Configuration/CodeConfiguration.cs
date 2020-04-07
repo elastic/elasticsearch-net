@@ -59,7 +59,6 @@ namespace ApiGenerator.Configuration
 			"async_search.get.json",
 			"async_search.submit.json",
 			"cat.ml_data_frame_analytics.json",
-			"cat.ml_datafeeds.json",
 			"cat.ml_jobs.json",
 			"cat.ml_trained_models.json",
 			"cat.transforms.json",
