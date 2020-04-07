@@ -280,8 +280,8 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 
-	///<summary>Request options for DeleteTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
-	public class DeleteIndexTemplateRequestParameters : RequestParameters<DeleteIndexTemplateRequestParameters>
+	///<summary>Request options for DeleteTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public class DeleteIndexTemplateV2RequestParameters : RequestParameters<DeleteIndexTemplateV2RequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Specify timeout for connection to master</summary>
@@ -794,8 +794,8 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
-	///<summary>Request options for GetTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
-	public class GetIndexTemplateRequestParameters : RequestParameters<GetIndexTemplateRequestParameters>
+	///<summary>Request options for GetTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public class GetIndexTemplateV2RequestParameters : RequestParameters<GetIndexTemplateV2RequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -1029,8 +1029,8 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
-	///<summary>Request options for PutTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
-	public class PutIndexTemplateRequestParameters : RequestParameters<PutIndexTemplateRequestParameters>
+	///<summary>Request options for PutTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public class PutIndexTemplateV2RequestParameters : RequestParameters<PutIndexTemplateV2RequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
