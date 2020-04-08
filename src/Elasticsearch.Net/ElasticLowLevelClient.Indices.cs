@@ -178,6 +178,17 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.delete_data_stream", "name")]
 		public Task<TResponse> DeleteDataStreamForAllAsync<TResponse>(string name, DeleteDataStreamRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_data_stream/{name:name}"), ctx, null, RequestParams(requestParameters));
+		///<summary>DELETE on /_index_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+		///<param name = "name">The name of the template</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse DeleteTemplateV2ForAll<TResponse>(string name, DeleteIndexTemplateV2RequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_index_template/{name:name}"), null, RequestParams(requestParameters));
+		///<summary>DELETE on /_index_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+		///<param name = "name">The name of the template</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("indices.delete_index_template", "name")]
+		public Task<TResponse> DeleteTemplateV2ForAllAsync<TResponse>(string name, DeleteIndexTemplateV2RequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_index_template/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>DELETE on /_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -386,13 +397,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		public Task<TResponse> GetDataStreamsForAllAsync<TResponse>(GetDataStreamsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_data_streams", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_data_streams/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
-		///<param name = "name">The comma separated names of data streams</param>
+		///<param name = "name">The name or wildcard expression of the requested data streams</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetDataStreamsForAll<TResponse>(string name, GetDataStreamsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_data_streams/{name:name}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_data_streams/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
-		///<param name = "name">The comma separated names of data streams</param>
+		///<param name = "name">The name or wildcard expression of the requested data streams</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("indices.get_data_streams", "name")]
@@ -454,6 +465,26 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.get_field_mapping", "index, type, fields")]
 		public Task<TResponse> GetFieldMappingUsingTypeAsync<TResponse>(string index, string type, string fields, GetFieldMappingRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_mapping/{type:type}/field/{fields:fields}"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_index_template <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetTemplateV2ForAll<TResponse>(GetIndexTemplateV2RequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_index_template", null, RequestParams(requestParameters));
+		///<summary>GET on /_index_template <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("indices.get_index_template", "")]
+		public Task<TResponse> GetTemplateV2ForAllAsync<TResponse>(GetIndexTemplateV2RequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_index_template", ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_index_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+		///<param name = "name">The comma separated names of the index templates</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetTemplateV2ForAll<TResponse>(string name, GetIndexTemplateV2RequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_index_template/{name:name}"), null, RequestParams(requestParameters));
+		///<summary>GET on /_index_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+		///<param name = "name">The comma separated names of the index templates</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("indices.get_index_template", "name")]
+		public Task<TResponse> GetTemplateV2ForAllAsync<TResponse>(string name, GetIndexTemplateV2RequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_index_template/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_mapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetMappingForAll<TResponse>(GetMappingRequestParameters requestParameters = null)
@@ -592,6 +623,19 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.put_alias", "index, name, body")]
 		public Task<TResponse> PutAliasAsync<TResponse>(string index, string name, PostData body, PutAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_alias/{name:name}"), ctx, body, RequestParams(requestParameters));
+		///<summary>PUT on /_index_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+		///<param name = "name">The name of the template</param>
+		///<param name = "body">The template definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PutTemplateV2ForAll<TResponse>(string name, PostData body, PutIndexTemplateV2RequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_index_template/{name:name}"), body, RequestParams(requestParameters));
+		///<summary>PUT on /_index_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+		///<param name = "name">The name of the template</param>
+		///<param name = "body">The template definition</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("indices.put_index_template", "name, body")]
+		public Task<TResponse> PutTemplateV2ForAllAsync<TResponse>(string name, PostData body, PutIndexTemplateV2RequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_index_template/{name:name}"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /{index}/_mapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
 		///<param name = "index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
 		///<param name = "body">The mapping definition</param>
