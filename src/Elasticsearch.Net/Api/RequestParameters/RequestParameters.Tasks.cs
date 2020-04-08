@@ -52,6 +52,13 @@ namespace Elasticsearch.Net.Specification.TasksApi
 			get => Q<string>("parent_task_id");
 			set => Q("parent_task_id", value);
 		}
+
+		///<summary>Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false</summary>
+		public bool? WaitForCompletion
+		{
+			get => Q<bool? >("wait_for_completion");
+			set => Q("wait_for_completion", value);
+		}
 	}
 
 	///<summary>Request options for GetTask <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>

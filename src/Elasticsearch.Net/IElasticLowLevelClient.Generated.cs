@@ -40,6 +40,7 @@ using Elasticsearch.Net.Specification.MachineLearningApi;
 using Elasticsearch.Net.Specification.MigrationApi;
 using Elasticsearch.Net.Specification.NodesApi;
 using Elasticsearch.Net.Specification.RollupApi;
+using Elasticsearch.Net.Specification.SearchableSnapshotsApi;
 using Elasticsearch.Net.Specification.SecurityApi;
 using Elasticsearch.Net.Specification.SnapshotApi;
 using Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi;
@@ -420,22 +421,22 @@ namespace Elasticsearch.Net
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> GetScriptAsync<TResponse>(string id, GetScriptRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_script_context</summary>
+		///<summary>GET on /_script_context <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		TResponse GetScriptContext<TResponse>(GetScriptContextRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_script_context</summary>
+		///<summary>GET on /_script_context <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		Task<TResponse> GetScriptContextAsync<TResponse>(GetScriptContextRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_script_language</summary>
+		///<summary>GET on /_script_language <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		TResponse GetScriptLanguages<TResponse>(GetScriptLanguagesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>GET on /_script_language</summary>
+		///<summary>GET on /_script_language <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		Task<TResponse> GetScriptLanguagesAsync<TResponse>(GetScriptLanguagesRequestParameters requestParameters = null, CancellationToken ctx = default)
@@ -840,6 +841,12 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>Rollup APIs</summary>
 		LowLevelRollupNamespace Rollup
+		{
+			get;
+		}
+
+		///<summary>Searchable Snapshots APIs</summary>
+		LowLevelSearchableSnapshotsNamespace SearchableSnapshots
 		{
 			get;
 		}
