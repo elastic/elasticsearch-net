@@ -6,7 +6,7 @@ namespace Nest
 	[ReadAs(typeof(PercentageScoreHeuristic))]
 	public interface IPercentageScoreHeuristic { }
 
-	public class PercentageScoreHeuristic { }
+	public class PercentageScoreHeuristic : IPercentageScoreHeuristic { }
 
 	public class PercentageScoreHeuristicDescriptor
 		: DescriptorBase<PercentageScoreHeuristicDescriptor, IPercentageScoreHeuristic>, IPercentageScoreHeuristic { }
