@@ -5,7 +5,7 @@
     <AssemblyOriginatorKeyFile>$(SolutionRoot)\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="$(IsPackable) == True">
-
+    <OutDir>bin/$(Configuration)/$(TargetFramework)/</OutDir>
     <NoWarn>1591,1572,1571,1573,1587,1570,NU5048,</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
     <DebugSymbols>true</DebugSymbols>
@@ -23,8 +23,7 @@
   >
     <PropertyGroup>
       <ExposedAssembly>%(InternalsVisibleTo.Identity)</ExposedAssembly>
-      <VersionNamespaced>$(ExposedAssembly.Replace("Nest","Nest$(MajorVersion)").Replace("Elasticsearch.Net","Elasticsearch.Net$(MajorVersion
-        )"))</VersionNamespaced>
+      <VersionNamespaced>$(ExposedAssembly.Replace("Nest", "Nest$(MajorVersion)").Replace("Elasticsearch.Net","Elasticsearch.Net$(MajorVersion)"))</VersionNamespaced>
     </PropertyGroup>
     <ItemGroup>
       <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
