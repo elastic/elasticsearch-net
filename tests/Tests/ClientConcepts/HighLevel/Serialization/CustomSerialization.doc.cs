@@ -120,8 +120,10 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 *
 		 * We ship a separate {nuget}/NEST.JsonNetSerializer[NEST.JsonNetSerializer] package that helps in composing a custom `SourceSerializer`
 		 * using `Json.NET`, that is smart enough to delegate the serialization of known NEST types back to the built-in
-		 * `RequestResponseSerializer`. This package is also useful if you want to control how your documents and values are stored
-		 * and retrieved from Elasticsearch using `Json.NET`, without interfering with the way NEST uses `Json.NET` internally.
+		 * `RequestResponseSerializer`. This package is also useful if
+		 *
+		 * . You want to control how your documents and values are stored and retrieved from Elasticsearch using `Json.NET`
+		 * . You want to use `Newtonsoft.Json.Linq` types such as `JObject` within your documents
 		 *
 		 * The easiest way to hook this custom source serializer up is as follows
 		 */
