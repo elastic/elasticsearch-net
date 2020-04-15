@@ -377,6 +377,15 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 					.Enabled(false)
 				);
 
+			if (TestConfiguration.Instance.InRange(">=7.7.0"))
+				props.ConstantKeyword(f => f
+					.Name(p => p.VersionControl)
+				);
+			else
+				props.Keyword(f => f
+					.Name(p => p.VersionControl)
+				);
+
 			return props;
 		}
 

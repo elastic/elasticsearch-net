@@ -213,6 +213,8 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		public void Visit(IHistogramProperty property) => Increment("histogram");
 
+		public void Visit(IConstantKeywordProperty property) => Increment("constant_keyword");
+
 		private void Increment(string key)
 		{
 			if (!Counts.ContainsKey(key)) Counts.Add(key, 0);
