@@ -53,13 +53,6 @@ namespace Nest
 		/// </remarks>
 		[DataMember(Name = "user_dictionary_rules")]
 		IEnumerable<string> UserDictionaryRules { get; set; }
-
-		/// <summary>
-		/// Filters to apply to this tokenizer.
-		/// For example:  "nori_number" - token filter normalizes Korean numbers to regular Arabic decimal numbers in half-width characters.
-		/// </summary>
-		[DataMember(Name = "filter")]
-		IEnumerable<string> Filters { get; set; }
 	}
 
 	/// <inheritdoc cref="INoriTokenizer" />
@@ -78,9 +71,6 @@ namespace Nest
 
 		/// <inheritdoc cref="INoriTokenizer.UserDictionaryRules" />
 		public IEnumerable<string> UserDictionaryRules { get; set; }
-
-		/// <inheritdoc cref="INoriTokenizer.Filters" />
-		public IEnumerable<string> Filters { get; set; }
 	}
 
 	/// <inheritdoc cref="INoriTokenizer" />
@@ -93,7 +83,6 @@ namespace Nest
 		string INoriTokenizer.UserDictionary { get; set; }
 		IEnumerable<string> INoriTokenizer.UserDictionaryRules { get; set; }
 		bool? INoriTokenizer.DiscardPunctuation { get; set; }
-		IEnumerable<string> INoriTokenizer.Filters { get; set; }
 
 		/// <inheritdoc cref="INoriTokenizer.DecompoundMode" />
 		public NoriTokenizerDescriptor DecompoundMode(NoriDecompoundMode? mode) => Assign(mode, (a, v) => a.DecompoundMode = v);
@@ -109,8 +98,5 @@ namespace Nest
 
 		/// <inheritdoc cref="INoriTokenizer.DiscardPunctuation" />
 		public NoriTokenizerDescriptor DiscardPunctuation(bool? discard = true) => Assign(discard, (a, v) => a.DiscardPunctuation = v);
-
-		/// <inheritdoc cref="INoriTokenizer.Filters" />
-		public NoriTokenizerDescriptor Filters(IEnumerable<string> filters) => Assign(filters, (a, v) => a.Filters = v);
 	}
 }

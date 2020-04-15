@@ -348,21 +348,5 @@ namespace Tests.Analysis.Tokenizers
 			public override object Json => new { type = "nori_tokenizer", discard_punctuation = true };
 			public override string Name => "nori";
 		}
-
-		[SkipVersion("<7.7.0", "filter introduced in 7.7.0")]
-		public class FilterTests : TokenizerAssertionBase<FilterTests>
-		{
-			public override FuncTokenizer Fluent => (n, t) => t.Nori(n, e => e
-				.Filters(new [] { "nori_number" })
-			);
-
-			public override ITokenizer Initializer => new NoriTokenizer
-			{
-				Filters = new [] { "nori_number" }
-			};
-
-			public override object Json => new { type = "nori_tokenizer", filter = new[] { "nori_number" } };
-			public override string Name => "nori";
-		}
 	}
 }
