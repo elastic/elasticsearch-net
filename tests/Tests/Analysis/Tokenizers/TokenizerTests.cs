@@ -332,5 +332,21 @@ namespace Tests.Analysis.Tokenizers
 
 			public override string Name => "char_group";
 		}
+
+		[SkipVersion("<7.7.0", "discard_punctuation introduced in 7.7.0")]
+		public class DiscardPunctuationTests : TokenizerAssertionBase<DiscardPunctuationTests>
+		{
+			public override FuncTokenizer Fluent => (n, t) => t.Nori(n, e => e
+				.DiscardPunctuation()
+			);
+
+			public override ITokenizer Initializer => new NoriTokenizer
+			{
+				DiscardPunctuation = true
+			};
+
+			public override object Json => new { type = "nori_tokenizer", discard_punctuation = true };
+			public override string Name => "nori";
+		}
 	}
 }
