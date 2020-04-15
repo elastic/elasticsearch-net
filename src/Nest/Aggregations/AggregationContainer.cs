@@ -92,6 +92,9 @@ namespace Nest
 		[DataMember(Name = "avg_bucket")]
 		IAverageBucketAggregation AverageBucket { get; set; }
 
+		[DataMember(Name = "boxplot")]
+		IBoxplotAggregation Boxplot { get; set; }
+
 		[DataMember(Name = "bucket_script")]
 		IBucketScriptAggregation BucketScript { get; set; }
 
@@ -274,6 +277,9 @@ namespace Nest
 
 		public IAverageBucketAggregation AverageBucket { get; set; }
 
+		/// <inheritdoc cref="IBoxplotAggregation"/>
+		public IBoxplotAggregation Boxplot { get; set; }
+
 		public IBucketScriptAggregation BucketScript { get; set; }
 
 		public IBucketSelectorAggregation BucketSelector { get; set; }
@@ -421,6 +427,8 @@ namespace Nest
 		IAverageAggregation IAggregationContainer.Average { get; set; }
 
 		IAverageBucketAggregation IAggregationContainer.AverageBucket { get; set; }
+
+		IBoxplotAggregation IAggregationContainer.Boxplot { get; set; }
 
 		IBucketScriptAggregation IAggregationContainer.BucketScript { get; set; }
 
@@ -830,6 +838,12 @@ namespace Nest
 			Func<StringStatsAggregationDescriptor<T>, IStringStatsAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.StringStats = d);
+
+		/// <inheritdoc cref="IBoxplotAggregation"/>
+		public AggregationContainerDescriptor<T> Boxplot(string name,
+			Func<BoxplotAggregationDescriptor<T>, IBoxplotAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Boxplot = d);
 
 		/// <summary>
 		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside

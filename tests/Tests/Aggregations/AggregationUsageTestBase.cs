@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
@@ -13,10 +14,15 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations
 {
-	public abstract class AggregationUsageTestBase
-		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
-	{
+	public abstract class AggregationUsageTestBase : AggregationUsageTestBase<ReadOnlyCluster> {
 		protected AggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	}
+
+	public abstract class AggregationUsageTestBase<TCluster>
+		: ApiIntegrationTestBase<TCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
+	{
+		protected AggregationUsageTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected virtual Nest.Indices AgainstIndex { get; } = Index<Project>();
 
