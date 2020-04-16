@@ -74,12 +74,21 @@ namespace ApiGenerator.Configuration
 			"transform.update_transform.json",
 		};
 
+		/// <summary>
+		/// Map API default names for API's we are only supporting on the low level client first
+		/// </summary>
+		private static readonly Dictionary<string, string> LowLevelApiNameMapping = new Dictionary<string, string>
+		{
+			{ "indices.delete_index_template", "DeleteIndexTemplateV2" },
+			{ "indices.get_index_template", "GetIndexTemplateV2" },
+			{ "indices.put_index_template", "PutIndexTemplateV2" }
+		};
 
 		/// <summary>
 		/// Scan all nest source code files for Requests and look for the [MapsApi(filename)] attribute.
 		/// The class name minus Request is used as the canonical .NET name for the API.
 		/// </summary>
-		public static readonly Dictionary<string, string> ApiNameMapping =
+		public static readonly Dictionary<string, string> HighLevelApiNameMapping =
 			(from f in new DirectoryInfo(GeneratorLocations.NestFolder).GetFiles("*.cs", SearchOption.AllDirectories)
 				let contents = File.ReadAllText(f.FullName)
 				let c = Regex.Replace(contents, @"^.+\[MapsApi\(""([^ \r\n]+)""\)\].*$", "$1", RegexOptions.Singleline)
@@ -87,6 +96,26 @@ namespace ApiGenerator.Configuration
 				select new { Value = f.Name.Replace("Request", ""), Key = c.Replace(".json", "") })
 			.DistinctBy(v => v.Key)
 			.ToDictionary(k => k.Key, v => v.Value.Replace(".cs", ""));
+
+		private static Dictionary<string, string> _apiNameMapping;
+
+		public static Dictionary<string, string> ApiNameMapping
+		{
+			get
+			{
+				if (_apiNameMapping != null) return _apiNameMapping;
+				lock (LowLevelApiNameMapping)
+				{
+					if (_apiNameMapping != null) return _apiNameMapping;
+
+					var mapping = HighLevelApiNameMapping;
+					foreach (var (k, v) in LowLevelApiNameMapping)
+						mapping[k] = v;
+					_apiNameMapping = mapping;
+					return _apiNameMapping;
+				}
+			}
+		}
 
 		private static readonly string ResponseBuilderAttributeRegex = @"^.+\[ResponseBuilderWithGeneric\(""([^ \r\n]+)""\)\].*$";
 		/// <summary>

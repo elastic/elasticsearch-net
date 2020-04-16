@@ -43,6 +43,7 @@ namespace Nest
 		internal static ApiUrls CatTasks = new ApiUrls(new[]{"_cat/tasks"});
 		internal static ApiUrls CatTemplates = new ApiUrls(new[]{"_cat/templates", "_cat/templates/{name}"});
 		internal static ApiUrls CatThreadPool = new ApiUrls(new[]{"_cat/thread_pool", "_cat/thread_pool/{thread_pool_patterns}"});
+		internal static ApiUrls CatTransforms = new ApiUrls(new[]{"_cat/transforms", "_cat/transforms/{transform_id}"});
 		internal static ApiUrls CrossClusterReplicationDeleteAutoFollowPattern = new ApiUrls(new[]{"_ccr/auto_follow/{name}"});
 		internal static ApiUrls CrossClusterReplicationCreateFollowIndex = new ApiUrls(new[]{"{index}/_ccr/follow"});
 		internal static ApiUrls CrossClusterReplicationFollowInfo = new ApiUrls(new[]{"{index}/_ccr/info"});
@@ -124,6 +125,7 @@ namespace Nest
 		internal static ApiUrls IndicesPutTemplate = new ApiUrls(new[]{"_template/{name}"});
 		internal static ApiUrls IndicesRecoveryStatus = new ApiUrls(new[]{"_recovery", "{index}/_recovery"});
 		internal static ApiUrls IndicesRefresh = new ApiUrls(new[]{"_refresh", "{index}/_refresh"});
+		internal static ApiUrls IndicesReloadSearchAnalyzers = new ApiUrls(new[]{"{index}/_reload_search_analyzers"});
 		internal static ApiUrls IndicesRollover = new ApiUrls(new[]{"{alias}/_rollover", "{alias}/_rollover/{new_index}"});
 		internal static ApiUrls IndicesSegments = new ApiUrls(new[]{"_segments", "{index}/_segments"});
 		internal static ApiUrls IndicesShardStores = new ApiUrls(new[]{"_shard_stores", "{index}/_shard_stores"});
@@ -158,6 +160,8 @@ namespace Nest
 		internal static ApiUrls MachineLearningDeleteForecast = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}"});
 		internal static ApiUrls MachineLearningDeleteJob = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}"});
 		internal static ApiUrls MachineLearningDeleteModelSnapshot = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}"});
+		internal static ApiUrls MachineLearningEstimateMemoryUsage = new ApiUrls(new[]{"_ml/data_frame/analytics/_estimate_memory_usage"});
+		internal static ApiUrls MachineLearningEstimateModelMemory = new ApiUrls(new[]{"_ml/anomaly_detectors/_estimate_model_memory"});
 		internal static ApiUrls MachineLearningFlushJob = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_flush"});
 		internal static ApiUrls MachineLearningForecastJob = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_forecast"});
 		internal static ApiUrls MachineLearningGetBuckets = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}", "_ml/anomaly_detectors/{job_id}/results/buckets"});
@@ -184,6 +188,7 @@ namespace Nest
 		internal static ApiUrls MachineLearningPutFilter = new ApiUrls(new[]{"_ml/filters/{filter_id}"});
 		internal static ApiUrls MachineLearningPutJob = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}"});
 		internal static ApiUrls MachineLearningRevertModelSnapshot = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert"});
+		internal static ApiUrls MachineLearningSetUpgradeMode = new ApiUrls(new[]{"_ml/set_upgrade_mode"});
 		internal static ApiUrls MachineLearningStartDatafeed = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_start"});
 		internal static ApiUrls MachineLearningStopDatafeed = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_stop"});
 		internal static ApiUrls MachineLearningUpdateDatafeed = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_update"});
@@ -230,6 +235,7 @@ namespace Nest
 		internal static ApiUrls SecurityDisableUser = new ApiUrls(new[]{"_security/user/{username}/_disable"});
 		internal static ApiUrls SecurityEnableUser = new ApiUrls(new[]{"_security/user/{username}/_enable"});
 		internal static ApiUrls SecurityGetApiKey = new ApiUrls(new[]{"_security/api_key"});
+		internal static ApiUrls SecurityGetBuiltinPrivileges = new ApiUrls(new[]{"_security/privilege/_builtin"});
 		internal static ApiUrls SecurityGetPrivileges = new ApiUrls(new[]{"_security/privilege", "_security/privilege/{application}", "_security/privilege/{application}/{name}"});
 		internal static ApiUrls SecurityGetRole = new ApiUrls(new[]{"_security/role/{name}", "_security/role"});
 		internal static ApiUrls SecurityGetRoleMapping = new ApiUrls(new[]{"_security/role_mapping/{name}", "_security/role_mapping"});
