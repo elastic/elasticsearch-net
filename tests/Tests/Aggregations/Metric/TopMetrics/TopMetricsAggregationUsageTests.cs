@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
@@ -60,6 +61,14 @@ namespace Tests.Aggregations.Metric.TopMetrics
 			response.ShouldBeValid();
 			var topMetrics = response.Aggregations.TopMetrics("tm");
 			topMetrics.Should().NotBeNull();
+			topMetrics.Top.Should().NotBeNull();
+			topMetrics.Top.Count.Should().BeGreaterThan(0);
+
+			var tipTop = topMetrics.Top.First();
+			tipTop.Sort.Should().Should().NotBeNull();
+			tipTop.Sort.Count.Should().BeGreaterThan(0);
+			tipTop.Metrics.Should().NotBeNull();
+			tipTop.Metrics.Count.Should().BeGreaterThan(0);
 		}
 	}
 }
