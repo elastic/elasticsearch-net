@@ -2,6 +2,7 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
@@ -31,5 +32,7 @@ namespace Tests.Indices.ReloadSearchAnalyzers
 			(client, r) => client.Indices.ReloadSearchAnalyzers(r),
 			(client, r) => client.Indices.ReloadSearchAnalyzersAsync(r)
 		);
+
+		protected override void ExpectResponse(ReloadSearchAnalyzersResponse response) => response.ShouldBeValid();
 	}
 }
