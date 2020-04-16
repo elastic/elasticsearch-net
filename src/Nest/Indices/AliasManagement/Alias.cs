@@ -34,6 +34,8 @@ namespace Nest
 		/// If true, the alias will be excluded from wildcard expressions by default, unless overriden in the request using
 		/// the expand_wildcards parameter, similar to hidden indices.
 		/// This property must be set to the same value on all indices that share an alias. Defaults to false.
+		/// <para />
+		/// Available in Elasticsearch 7.7.0+
 		/// </summary>
 		[DataMember(Name = "is_hidden")]
 		bool? IsHidden { get; set; }
