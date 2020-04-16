@@ -399,25 +399,25 @@ namespace Nest.Specification.IndicesApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.freeze</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</a>
 		/// </summary>
 		public FreezeIndexResponse Freeze(IndexName index, Func<FreezeIndexDescriptor, IFreezeIndexRequest> selector = null) => Freeze(selector.InvokeOrDefault(new FreezeIndexDescriptor(index: index)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.freeze</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</a>
 		/// </summary>
 		public Task<FreezeIndexResponse> FreezeAsync(IndexName index, Func<FreezeIndexDescriptor, IFreezeIndexRequest> selector = null, CancellationToken ct = default) => FreezeAsync(selector.InvokeOrDefault(new FreezeIndexDescriptor(index: index)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.freeze</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</a>
 		/// </summary>
 		public FreezeIndexResponse Freeze(IFreezeIndexRequest request) => DoRequest<IFreezeIndexRequest, FreezeIndexResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.freeze</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</a>
 		/// </summary>
 		public Task<FreezeIndexResponse> FreezeAsync(IFreezeIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IFreezeIndexRequest, FreezeIndexResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -739,6 +739,30 @@ namespace Nest.Specification.IndicesApi
 		/// </summary>
 		public Task<RefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken ct = default) => DoRequestAsync<IRefreshRequest, RefreshResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>indices.reload_search_analyzers</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html</a>
+		/// </summary>
+		public ReloadSearchAnalyzersResponse ReloadSearchAnalyzers(Indices index, Func<ReloadSearchAnalyzersDescriptor, IReloadSearchAnalyzersRequest> selector = null) => ReloadSearchAnalyzers(selector.InvokeOrDefault(new ReloadSearchAnalyzersDescriptor(index: index)));
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.reload_search_analyzers</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html</a>
+		/// </summary>
+		public Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(Indices index, Func<ReloadSearchAnalyzersDescriptor, IReloadSearchAnalyzersRequest> selector = null, CancellationToken ct = default) => ReloadSearchAnalyzersAsync(selector.InvokeOrDefault(new ReloadSearchAnalyzersDescriptor(index: index)), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.reload_search_analyzers</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html</a>
+		/// </summary>
+		public ReloadSearchAnalyzersResponse ReloadSearchAnalyzers(IReloadSearchAnalyzersRequest request) => DoRequest<IReloadSearchAnalyzersRequest, ReloadSearchAnalyzersResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.reload_search_analyzers</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html</a>
+		/// </summary>
+		public Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(IReloadSearchAnalyzersRequest request, CancellationToken ct = default) => DoRequestAsync<IReloadSearchAnalyzersRequest, ReloadSearchAnalyzersResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>indices.rollover</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</a>
@@ -885,25 +909,25 @@ namespace Nest.Specification.IndicesApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.unfreeze</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</a>
 		/// </summary>
 		public UnfreezeIndexResponse Unfreeze(IndexName index, Func<UnfreezeIndexDescriptor, IUnfreezeIndexRequest> selector = null) => Unfreeze(selector.InvokeOrDefault(new UnfreezeIndexDescriptor(index: index)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.unfreeze</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</a>
 		/// </summary>
 		public Task<UnfreezeIndexResponse> UnfreezeAsync(IndexName index, Func<UnfreezeIndexDescriptor, IUnfreezeIndexRequest> selector = null, CancellationToken ct = default) => UnfreezeAsync(selector.InvokeOrDefault(new UnfreezeIndexDescriptor(index: index)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.unfreeze</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</a>
 		/// </summary>
 		public UnfreezeIndexResponse Unfreeze(IUnfreezeIndexRequest request) => DoRequest<IUnfreezeIndexRequest, UnfreezeIndexResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>indices.unfreeze</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</a>
 		/// </summary>
 		public Task<UnfreezeIndexResponse> UnfreezeAsync(IUnfreezeIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IUnfreezeIndexRequest, UnfreezeIndexResponse>(request, request.RequestParameters, ct);
 		/// <summary>

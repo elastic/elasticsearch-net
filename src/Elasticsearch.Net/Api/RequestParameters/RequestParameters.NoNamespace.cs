@@ -969,13 +969,13 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for GetScriptContext</summary>
+	///<summary>Request options for GetScriptContext <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html</para></summary>
 	public class GetScriptContextRequestParameters : RequestParameters<GetScriptContextRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 
-	///<summary>Request options for GetScriptLanguages</summary>
+	///<summary>Request options for GetScriptLanguages <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 	public class GetScriptLanguagesRequestParameters : RequestParameters<GetScriptLanguagesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
