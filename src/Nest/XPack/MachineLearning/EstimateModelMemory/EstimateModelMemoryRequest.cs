@@ -78,8 +78,6 @@ namespace Nest
 
 		public OverallCardinality(IDictionary<Field, long> container) : base(container) { }
 
-		public OverallCardinality(Dictionary<Field, long> container) : base(container) { }
-
 		public void Add(Field field, long cardinality) => BackingDictionary.Add(field, cardinality);
 	}
 

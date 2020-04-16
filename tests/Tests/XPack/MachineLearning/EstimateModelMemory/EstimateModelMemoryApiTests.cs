@@ -2,6 +2,7 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Core.Extensions;
 using Tests.Domain;
 using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
@@ -95,5 +96,7 @@ namespace Tests.XPack.MachineLearning.EstimateModelMemory
 		);
 
 		protected override EstimateModelMemoryDescriptor<Metric> NewDescriptor() => new EstimateModelMemoryDescriptor<Metric>();
+
+		protected override void ExpectResponse(EstimateModelMemoryResponse response) => response.ShouldBeValid();
 	}
 }
