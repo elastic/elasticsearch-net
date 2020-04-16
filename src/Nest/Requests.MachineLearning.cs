@@ -431,6 +431,20 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IEstimateModelMemoryRequest : IRequest<EstimateModelMemoryRequestParameters>
+	{
+	}
+
+	///<summary>Request for EstimateModelMemory</summary>
+	public partial class EstimateModelMemoryRequest : PlainRequestBase<EstimateModelMemoryRequestParameters>, IEstimateModelMemoryRequest
+	{
+		protected IEstimateModelMemoryRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningEstimateModelMemory;
+	// values part of the url path
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IFlushJobRequest : IRequest<FlushJobRequestParameters>
 	{
 		[IgnoreDataMember]

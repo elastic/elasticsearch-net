@@ -277,6 +277,32 @@ namespace Nest.Specification.MachineLearningApi
 		/// </summary>
 		public Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(IDeleteModelSnapshotRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>ml.estimate_model_memory</c> API, read more about this API online:
+		/// <para></para>
+		/// <a></a>
+		/// </summary>
+		public EstimateModelMemoryResponse EstimateModelMemory<TDocument>(Func<EstimateModelMemoryDescriptor<TDocument>, IEstimateModelMemoryRequest> selector)
+			where TDocument : class => EstimateModelMemory(selector.InvokeOrDefault(new EstimateModelMemoryDescriptor<TDocument>()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>ml.estimate_model_memory</c> API, read more about this API online:
+		/// <para></para>
+		/// <a></a>
+		/// </summary>
+		public Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync<TDocument>(Func<EstimateModelMemoryDescriptor<TDocument>, IEstimateModelMemoryRequest> selector, CancellationToken ct = default)
+			where TDocument : class => EstimateModelMemoryAsync(selector.InvokeOrDefault(new EstimateModelMemoryDescriptor<TDocument>()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ml.estimate_model_memory</c> API, read more about this API online:
+		/// <para></para>
+		/// <a></a>
+		/// </summary>
+		public EstimateModelMemoryResponse EstimateModelMemory(IEstimateModelMemoryRequest request) => DoRequest<IEstimateModelMemoryRequest, EstimateModelMemoryResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ml.estimate_model_memory</c> API, read more about this API online:
+		/// <para></para>
+		/// <a></a>
+		/// </summary>
+		public Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync(IEstimateModelMemoryRequest request, CancellationToken ct = default) => DoRequestAsync<IEstimateModelMemoryRequest, EstimateModelMemoryResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>ml.flush_job</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</a>
