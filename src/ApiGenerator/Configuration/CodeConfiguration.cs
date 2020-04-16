@@ -66,7 +66,6 @@ namespace ApiGenerator.Configuration
 			"cluster.delete_component_template.json",
 			"cluster.get_component_template.json",
 			"cluster.put_component_template.json",
-			"ml.estimate_model_memory.json",
 			"ml.set_upgrade_mode.json",
 			"security.get_builtin_privileges.json",
 			"transform.delete_transform.json",
