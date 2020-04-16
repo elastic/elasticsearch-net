@@ -296,6 +296,46 @@ namespace Nest
 		public CatMasterDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
+	///<summary>Descriptor for TrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
+	public partial class CatTrainedModelsDescriptor : RequestDescriptorBase<CatTrainedModelsDescriptor, CatTrainedModelsRequestParameters, ICatTrainedModelsRequest>, ICatTrainedModelsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatTrainedModels;
+		///<summary>/_cat/ml/trained_models</summary>
+		public CatTrainedModelsDescriptor(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/trained_models/{model_id}</summary>
+		///<param name = "modelId">Optional, accepts null</param>
+		public CatTrainedModelsDescriptor(Id modelId): base(r => r.Optional("model_id", modelId))
+		{
+		}
+
+		// values part of the url path
+		Id ICatTrainedModelsRequest.ModelId => Self.RouteValues.Get<Id>("model_id");
+		///<summary>The ID of the trained models stats to fetch</summary>
+		public CatTrainedModelsDescriptor ModelId(Id modelId) => Assign(modelId, (a, v) => a.RouteValues.Optional("model_id", v));
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no trained models. (This includes `_all` string or when no trained models have been specified)</summary>
+		public CatTrainedModelsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
+		///<summary>The unit in which to display byte values</summary>
+		public CatTrainedModelsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatTrainedModelsDescriptor Format(string format) => Qs("format", format);
+		///<summary>skips a number of trained models</summary>
+		public CatTrainedModelsDescriptor From(int? from) => Qs("from", from);
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatTrainedModelsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		///<summary>Return help information</summary>
+		public CatTrainedModelsDescriptor Help(bool? help = true) => Qs("help", help);
+		///<summary>specifies a max number of trained models to get</summary>
+		public CatTrainedModelsDescriptor Size(int? size) => Qs("size", size);
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatTrainedModelsDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatTrainedModelsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
+	}
+
 	///<summary>Descriptor for NodeAttributes <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</para></summary>
 	public partial class CatNodeAttributesDescriptor : RequestDescriptorBase<CatNodeAttributesDescriptor, CatNodeAttributesRequestParameters, ICatNodeAttributesRequest>, ICatNodeAttributesRequest
 	{
