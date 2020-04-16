@@ -856,7 +856,19 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for StartDatafeed <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</para></summary>
+	///<summary>Descriptor for SetUpgradeMode <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</para></summary>
+	public partial class SetUpgradeModeDescriptor : RequestDescriptorBase<SetUpgradeModeDescriptor, SetUpgradeModeRequestParameters, ISetUpgradeModeRequest>, ISetUpgradeModeRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningSetUpgradeMode;
+		// values part of the url path
+		// Request parameters
+		///<summary>Whether to enable upgrade_mode ML setting or not. Defaults to false.</summary>
+		public SetUpgradeModeDescriptor Enabled(bool? enabled = true) => Qs("enabled", enabled);
+		///<summary>Controls the time to wait before action times out. Defaults to 30 seconds</summary>
+		public SetUpgradeModeDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+
+	///<summary>Descriptor for StartDatafeed <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</para></summary>
 	public partial class StartDatafeedDescriptor : RequestDescriptorBase<StartDatafeedDescriptor, StartDatafeedRequestParameters, IStartDatafeedRequest>, IStartDatafeedRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningStartDatafeed;
