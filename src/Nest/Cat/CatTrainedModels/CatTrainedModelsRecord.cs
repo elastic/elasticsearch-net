@@ -64,7 +64,7 @@ namespace Nest
 		/// (Default) The total number of ingest pipelines that are referencing the trained model.
 		/// </summary>
 		[DataMember(Name = "ingest.pipelines")]
-		public long? IngestPipelines { get; set; }
+		public string IngestPipelines { get; set; }
 
 		/// <summary>
 		/// The total time that is spent processing documents with the trained model.
@@ -83,7 +83,7 @@ namespace Nest
 		/// complexity of the model.
 		/// </summary>
 		[DataMember(Name = "operations")]
-		public long? Operations { get; set; }
+		public string Operations { get; set; }
 
 		/// <summary>
 		/// The Elasticsearch version number in which the trained model was created.
