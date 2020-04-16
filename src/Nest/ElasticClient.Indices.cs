@@ -715,6 +715,30 @@ namespace Nest.Specification.IndicesApi
 		/// </summary>
 		public Task<RefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken ct = default) => DoRequestAsync<IRefreshRequest, RefreshResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>indices.reload_search_analyzers</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html</a>
+		/// </summary>
+		public ReloadSearchAnalyzersResponse ReloadSearchAnalyzers(Indices index, Func<ReloadSearchAnalyzersDescriptor, IReloadSearchAnalyzersRequest> selector = null) => ReloadSearchAnalyzers(selector.InvokeOrDefault(new ReloadSearchAnalyzersDescriptor(index: index)));
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.reload_search_analyzers</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html</a>
+		/// </summary>
+		public Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(Indices index, Func<ReloadSearchAnalyzersDescriptor, IReloadSearchAnalyzersRequest> selector = null, CancellationToken ct = default) => ReloadSearchAnalyzersAsync(selector.InvokeOrDefault(new ReloadSearchAnalyzersDescriptor(index: index)), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.reload_search_analyzers</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html</a>
+		/// </summary>
+		public ReloadSearchAnalyzersResponse ReloadSearchAnalyzers(IReloadSearchAnalyzersRequest request) => DoRequest<IReloadSearchAnalyzersRequest, ReloadSearchAnalyzersResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.reload_search_analyzers</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html</a>
+		/// </summary>
+		public Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(IReloadSearchAnalyzersRequest request, CancellationToken ct = default) => DoRequestAsync<IReloadSearchAnalyzersRequest, ReloadSearchAnalyzersResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>indices.rollover</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</a>
