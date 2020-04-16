@@ -11,6 +11,12 @@ namespace Nest
 		public const string RoutingPartitionSize = "index.routing_partition_size";
 
 		/// <summary>
+		/// Indicates whether the index should be hidden by default.
+		/// Hidden indices are not returned by default when using a wildcard expression.
+		/// </summary>
+		public const string Hidden = "index.hidden";
+
+		/// <summary>
 		/// If a field referred to in a percolator query does not exist,
 		/// it will be handled as a default text field so that adding the percolator query doesn't fail.
 		/// Defaults to <c>false</c>

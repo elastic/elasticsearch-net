@@ -23,9 +23,20 @@ namespace Nest
 		[DataMember(Name = "index_routing")]
 		Routing IndexRouting { get; set; }
 
-		/// <inheritdoc cref="AliasAddOperation.IsWriteIndex" />
+		/// <summary>
+		/// If an alias points to multiple indices, Elasticsearch will reject the write operations
+		/// unless one is explicitly marked as the write alias using this property.
+		/// </summary>
 		[DataMember(Name = "is_write_index")]
 		bool? IsWriteIndex { get; set; }
+
+		/// <summary>
+		/// If true, the alias will be excluded from wildcard expressions by default, unless overriden in the request using
+		/// the expand_wildcards parameter, similar to hidden indices.
+		/// This property must be set to the same value on all indices that share an alias. Defaults to false.
+		/// </summary>
+		[DataMember(Name = "is_hidden")]
+		bool? IsHidden { get; set; }
 
 		/// <summary>
 		/// Associates routing values with aliases for both index and search operations. This feature can be used together
@@ -52,6 +63,9 @@ namespace Nest
 		/// <inheritdoc />
 		public bool? IsWriteIndex { get; set; }
 		/// <inheritdoc />
+		public bool? IsHidden { get; set; }
+
+		/// <inheritdoc />
 		public Routing Routing { get; set; }
 		/// <inheritdoc />
 		public Routing SearchRouting { get; set; }
@@ -65,6 +79,7 @@ namespace Nest
 		bool? IAlias.IsWriteIndex { get; set; }
 		Routing IAlias.Routing { get; set; }
 		Routing IAlias.SearchRouting { get; set; }
+		bool? IAlias.IsHidden { get; set; }
 
 		/// <inheritdoc cref="IAlias.Filter" />
 		public AliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) where T : class =>
@@ -75,6 +90,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IAlias.IsWriteIndex" />
 		public AliasDescriptor IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndex = v);
+
+		/// <inheritdoc cref="IAlias.IsHidden" />
+		public AliasDescriptor IsHidden(bool? isHidden = true) => Assign(isHidden, (a, v) => a.IsHidden = v);
 
 		/// <inheritdoc cref="IAlias.Routing" />
 		public AliasDescriptor Routing(Routing routing) => Assign(routing, (a, v) => a.Routing = v);
