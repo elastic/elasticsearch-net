@@ -2,6 +2,7 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
@@ -35,5 +36,7 @@ namespace Tests.XPack.Security.GetBuiltinPrivileges
 		);
 
 		protected override GetBuiltinPrivilegesDescriptor NewDescriptor() => new GetBuiltinPrivilegesDescriptor();
+
+		protected override void ExpectResponse(GetBuiltinPrivilegesResponse response) => response.ShouldBeValid();
 	}
 }
