@@ -94,7 +94,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteCalendar</summary>
+	///<summary>Request for DeleteCalendar <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar.html</para></summary>
 	public partial class DeleteCalendarRequest : PlainRequestBase<DeleteCalendarRequestParameters>, IDeleteCalendarRequest
 	{
 		protected IDeleteCalendarRequest Self => this;
@@ -133,7 +133,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteCalendarEvent</summary>
+	///<summary>Request for DeleteCalendarEvent <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-event.html</para></summary>
 	public partial class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
 	{
 		protected IDeleteCalendarEventRequest Self => this;
@@ -175,7 +175,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteCalendarJob</summary>
+	///<summary>Request for DeleteCalendarJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-job.html</para></summary>
 	public partial class DeleteCalendarJobRequest : PlainRequestBase<DeleteCalendarJobRequestParameters>, IDeleteCalendarJobRequest
 	{
 		protected IDeleteCalendarJobRequest Self => this;
@@ -245,7 +245,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for DeleteExpiredData</summary>
+	///<summary>Request for DeleteExpiredData <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</para></summary>
 	public partial class DeleteExpiredDataRequest : PlainRequestBase<DeleteExpiredDataRequestParameters>, IDeleteExpiredDataRequest
 	{
 		protected IDeleteExpiredDataRequest Self => this;
@@ -264,7 +264,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeleteFilter</summary>
+	///<summary>Request for DeleteFilter <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html</para></summary>
 	public partial class DeleteFilterRequest : PlainRequestBase<DeleteFilterRequestParameters>, IDeleteFilterRequest
 	{
 		protected IDeleteFilterRequest Self => this;
@@ -493,7 +493,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ForecastJob</summary>
+	///<summary>Request for ForecastJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html</para></summary>
 	public partial class ForecastJobRequest : PlainRequestBase<ForecastJobRequestParameters>, IForecastJobRequest
 	{
 		protected IForecastJobRequest Self => this;
@@ -574,7 +574,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetCalendarEvents</summary>
+	///<summary>Request for GetCalendarEvents <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html</para></summary>
 	public partial class GetCalendarEventsRequest : PlainRequestBase<GetCalendarEventsRequestParameters>, IGetCalendarEventsRequest
 	{
 		protected IGetCalendarEventsRequest Self => this;
@@ -627,7 +627,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetCalendars</summary>
+	///<summary>Request for GetCalendars <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html</para></summary>
 	public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
 	{
 		protected IGetCalendarsRequest Self => this;
@@ -783,7 +783,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetFilters</summary>
+	///<summary>Request for GetFilters <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html</para></summary>
 	public partial class GetFiltersRequest : PlainRequestBase<GetFiltersRequestParameters>, IGetFiltersRequest
 	{
 		protected IGetFiltersRequest Self => this;
@@ -1046,7 +1046,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Info</summary>
+	///<summary>Request for Info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html</para></summary>
 	public partial class MachineLearningInfoRequest : PlainRequestBase<MachineLearningInfoRequestParameters>, IMachineLearningInfoRequest
 	{
 		protected IMachineLearningInfoRequest Self => this;
@@ -1098,7 +1098,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PostCalendarEvents</summary>
+	///<summary>Request for PostCalendarEvents <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html</para></summary>
 	public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
 	{
 		protected IPostCalendarEventsRequest Self => this;
@@ -1210,7 +1210,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutCalendar</summary>
+	///<summary>Request for PutCalendar <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html</para></summary>
 	public partial class PutCalendarRequest : PlainRequestBase<PutCalendarRequestParameters>, IPutCalendarRequest
 	{
 		protected IPutCalendarRequest Self => this;
@@ -1249,7 +1249,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutCalendarJob</summary>
+	///<summary>Request for PutCalendarJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html</para></summary>
 	public partial class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
 	{
 		protected IPutCalendarJobRequest Self => this;
@@ -1345,7 +1345,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutFilter</summary>
+	///<summary>Request for PutFilter <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html</para></summary>
 	public partial class PutFilterRequest : PlainRequestBase<PutFilterRequestParameters>, IPutFilterRequest
 	{
 		protected IPutFilterRequest Self => this;
@@ -1585,7 +1585,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for UpdateFilter</summary>
+	///<summary>Request for UpdateFilter <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html</para></summary>
 	public partial class UpdateFilterRequest : PlainRequestBase<UpdateFilterRequestParameters>, IUpdateFilterRequest
 	{
 		protected IUpdateFilterRequest Self => this;

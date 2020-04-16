@@ -3,6 +3,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	// TODO: Make a string in 8.0
 	[StringEnum]
 	public enum NodeRole
 	{
@@ -23,5 +24,14 @@ namespace Nest
 
 		[EnumMember(Value = "voting_only")]
 		VotingOnly,
+
+		[EnumMember(Value = "transform")]
+		Transform,
+
+		[EnumMember(Value = "remote_cluster_client")]
+		RemoteClusterClient,
+
+		[EnumMember(Value = "coordinating_only")]
+		CoordinatingOnly,
 	}
 }

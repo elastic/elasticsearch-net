@@ -308,12 +308,12 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.forcemerge", "index")]
 		public Task<TResponse> ForceMergeAsync<TResponse>(string index, ForceMergeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_forcemerge"), ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+		///<summary>POST on /{index}/_freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
 		///<param name = "index">The name of the index to freeze</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Freeze<TResponse>(string index, FreezeIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_freeze"), null, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+		///<summary>POST on /{index}/_freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
 		///<param name = "index">The name of the index to freeze</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("indices.freeze", "index")]
@@ -867,12 +867,12 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.stats", "index, metric")]
 		public Task<TResponse> StatsAsync<TResponse>(string index, string metric, IndicesStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_stats/{metric:metric}"), ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+		///<summary>POST on /{index}/_unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</para></summary>
 		///<param name = "index">The name of the index to unfreeze</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Unfreeze<TResponse>(string index, UnfreezeIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_unfreeze"), null, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+		///<summary>POST on /{index}/_unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</para></summary>
 		///<param name = "index">The name of the index to unfreeze</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("indices.unfreeze", "index")]

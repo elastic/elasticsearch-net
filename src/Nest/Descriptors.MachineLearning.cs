@@ -57,7 +57,7 @@ namespace Nest
 		public CloseJobDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>Descriptor for DeleteCalendar</summary>
+	///<summary>Descriptor for DeleteCalendar <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar.html</para></summary>
 	public partial class DeleteCalendarDescriptor : RequestDescriptorBase<DeleteCalendarDescriptor, DeleteCalendarRequestParameters, IDeleteCalendarRequest>, IDeleteCalendarRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteCalendar;
@@ -78,7 +78,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for DeleteCalendarEvent</summary>
+	///<summary>Descriptor for DeleteCalendarEvent <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-event.html</para></summary>
 	public partial class DeleteCalendarEventDescriptor : RequestDescriptorBase<DeleteCalendarEventDescriptor, DeleteCalendarEventRequestParameters, IDeleteCalendarEventRequest>, IDeleteCalendarEventRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteCalendarEvent;
@@ -101,7 +101,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for DeleteCalendarJob</summary>
+	///<summary>Descriptor for DeleteCalendarJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-job.html</para></summary>
 	public partial class DeleteCalendarJobDescriptor : RequestDescriptorBase<DeleteCalendarJobDescriptor, DeleteCalendarJobRequestParameters, IDeleteCalendarJobRequest>, IDeleteCalendarJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteCalendarJob;
@@ -147,7 +147,7 @@ namespace Nest
 		public DeleteDatafeedDescriptor Force(bool? force = true) => Qs("force", force);
 	}
 
-	///<summary>Descriptor for DeleteExpiredData</summary>
+	///<summary>Descriptor for DeleteExpiredData <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</para></summary>
 	public partial class DeleteExpiredDataDescriptor : RequestDescriptorBase<DeleteExpiredDataDescriptor, DeleteExpiredDataRequestParameters, IDeleteExpiredDataRequest>, IDeleteExpiredDataRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteExpiredData;
@@ -155,7 +155,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for DeleteFilter</summary>
+	///<summary>Descriptor for DeleteFilter <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html</para></summary>
 	public partial class DeleteFilterDescriptor : RequestDescriptorBase<DeleteFilterDescriptor, DeleteFilterRequestParameters, IDeleteFilterRequest>, IDeleteFilterRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteFilter;
@@ -282,7 +282,7 @@ namespace Nest
 		public FlushJobDescriptor SkipTime(string skiptime) => Qs("skip_time", skiptime);
 	}
 
-	///<summary>Descriptor for ForecastJob</summary>
+	///<summary>Descriptor for ForecastJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html</para></summary>
 	public partial class ForecastJobDescriptor : RequestDescriptorBase<ForecastJobDescriptor, ForecastJobRequestParameters, IForecastJobRequest>, IForecastJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningForecastJob;
@@ -334,7 +334,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetCalendarEvents</summary>
+	///<summary>Descriptor for GetCalendarEvents <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html</para></summary>
 	public partial class GetCalendarEventsDescriptor : RequestDescriptorBase<GetCalendarEventsDescriptor, GetCalendarEventsRequestParameters, IGetCalendarEventsRequest>, IGetCalendarEventsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetCalendarEvents;
@@ -361,7 +361,7 @@ namespace Nest
 		public GetCalendarEventsDescriptor Start(string start) => Qs("start", start);
 	}
 
-	///<summary>Descriptor for GetCalendars</summary>
+	///<summary>Descriptor for GetCalendars <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html</para></summary>
 	public partial class GetCalendarsDescriptor : RequestDescriptorBase<GetCalendarsDescriptor, GetCalendarsRequestParameters, IGetCalendarsRequest>, IGetCalendarsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetCalendars;
@@ -462,7 +462,7 @@ namespace Nest
 		public GetDatafeedsDescriptor AllowNoDatafeeds(bool? allownodatafeeds = true) => Qs("allow_no_datafeeds", allownodatafeeds);
 	}
 
-	///<summary>Descriptor for GetFilters</summary>
+	///<summary>Descriptor for GetFilters <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html</para></summary>
 	public partial class GetFiltersDescriptor : RequestDescriptorBase<GetFiltersDescriptor, GetFiltersRequestParameters, IGetFiltersRequest>, IGetFiltersRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetFilters;
@@ -630,7 +630,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for Info</summary>
+	///<summary>Descriptor for Info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html</para></summary>
 	public partial class MachineLearningInfoDescriptor : RequestDescriptorBase<MachineLearningInfoDescriptor, MachineLearningInfoRequestParameters, IMachineLearningInfoRequest>, IMachineLearningInfoRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningInfo;
@@ -659,7 +659,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for PostCalendarEvents</summary>
+	///<summary>Descriptor for PostCalendarEvents <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html</para></summary>
 	public partial class PostCalendarEventsDescriptor : RequestDescriptorBase<PostCalendarEventsDescriptor, PostCalendarEventsRequestParameters, IPostCalendarEventsRequest>, IPostCalendarEventsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPostCalendarEvents;
@@ -726,7 +726,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for PutCalendar</summary>
+	///<summary>Descriptor for PutCalendar <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html</para></summary>
 	public partial class PutCalendarDescriptor : RequestDescriptorBase<PutCalendarDescriptor, PutCalendarRequestParameters, IPutCalendarRequest>, IPutCalendarRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPutCalendar;
@@ -747,7 +747,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for PutCalendarJob</summary>
+	///<summary>Descriptor for PutCalendarJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html</para></summary>
 	public partial class PutCalendarJobDescriptor : RequestDescriptorBase<PutCalendarJobDescriptor, PutCalendarJobRequestParameters, IPutCalendarJobRequest>, IPutCalendarJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPutCalendarJob;
@@ -799,7 +799,7 @@ namespace Nest
 		public PutDatafeedDescriptor<TDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 	}
 
-	///<summary>Descriptor for PutFilter</summary>
+	///<summary>Descriptor for PutFilter <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html</para></summary>
 	public partial class PutFilterDescriptor : RequestDescriptorBase<PutFilterDescriptor, PutFilterRequestParameters, IPutFilterRequest>, IPutFilterRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPutFilter;
@@ -937,7 +937,7 @@ namespace Nest
 		public UpdateDatafeedDescriptor<TDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 	}
 
-	///<summary>Descriptor for UpdateFilter</summary>
+	///<summary>Descriptor for UpdateFilter <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html</para></summary>
 	public partial class UpdateFilterDescriptor : RequestDescriptorBase<UpdateFilterDescriptor, UpdateFilterRequestParameters, IUpdateFilterRequest>, IUpdateFilterRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningUpdateFilter;

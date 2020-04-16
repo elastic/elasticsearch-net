@@ -20,7 +20,7 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 				{
 					field = "startedOn",
 					interval = "month",
-					min_doc_count = 1
+					min_doc_count = 0
 				},
 				aggs = new
 				{
@@ -48,7 +48,7 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 			.DateHistogram("projects_started_per_month", dh => dh
 				.Field(p => p.StartedOn)
 				.Interval(DateInterval.Month)
-				.MinimumDocumentCount(1)
+				.MinimumDocumentCount(0)
 				.Aggregations(aa => aa
 					.Sum("commits", sm => sm
 						.Field(p => p.NumberOfCommits)
@@ -65,7 +65,7 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
-				MinimumDocumentCount = 1,
+				MinimumDocumentCount = 0,
 				Aggregations =
 					new SumAggregation("commits", "numberOfCommits")
 					&& new SerialDifferencingAggregation("second_difference", "commits")
