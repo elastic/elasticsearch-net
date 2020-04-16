@@ -609,23 +609,23 @@ namespace Elasticsearch.Net
 		[MapsApi("get_script", "id")]
 		public Task<TResponse> GetScriptAsync<TResponse>(string id, GetScriptRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_scripts/{id:id}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_script_context</summary>
+		///<summary>GET on /_script_context <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetScriptContext<TResponse>(GetScriptContextRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_script_context", null, RequestParams(requestParameters));
-		///<summary>GET on /_script_context</summary>
+		///<summary>GET on /_script_context <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("get_script_context", "")]
 		public Task<TResponse> GetScriptContextAsync<TResponse>(GetScriptContextRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_script_context", ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_script_language</summary>
+		///<summary>GET on /_script_language <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetScriptLanguages<TResponse>(GetScriptLanguagesRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_script_language", null, RequestParams(requestParameters));
-		///<summary>GET on /_script_language</summary>
+		///<summary>GET on /_script_language <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("get_script_languages", "")]
