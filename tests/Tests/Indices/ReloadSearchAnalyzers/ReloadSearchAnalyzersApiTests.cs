@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
@@ -17,6 +18,18 @@ namespace Tests.Indices.ReloadSearchAnalyzers
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
+
+		protected override void OnBeforeCall(IElasticClient client)
+		{
+			var create = client.Indices.Create(CallIsolatedValue, c => c
+				.Settings(s => s
+					.NumberOfShards(4)
+					.NumberOfRoutingShards(8)
+					.NumberOfReplicas(0)
+				)
+			);
+			create.ShouldBeValid();
+		}
 
 		protected override ReloadSearchAnalyzersDescriptor NewDescriptor() => new ReloadSearchAnalyzersDescriptor(CallIsolatedValue);
 
