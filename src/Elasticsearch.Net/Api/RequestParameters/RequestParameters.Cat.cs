@@ -693,8 +693,8 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for MlTrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
-	public class MlTrainedModelsRequestParameters : RequestParameters<MlTrainedModelsRequestParameters>
+	///<summary>Request options for TrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
+	public class CatTrainedModelsRequestParameters : RequestParameters<CatTrainedModelsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>
