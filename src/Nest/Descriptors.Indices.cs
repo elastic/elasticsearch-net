@@ -1118,6 +1118,40 @@ namespace Nest
 		public RefreshDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 	}
 
+	///<summary>Descriptor for ReloadSearchAnalyzers <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html</para></summary>
+	public partial class ReloadSearchAnalyzersDescriptor : RequestDescriptorBase<ReloadSearchAnalyzersDescriptor, ReloadSearchAnalyzersRequestParameters, IReloadSearchAnalyzersRequest>, IReloadSearchAnalyzersRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesReloadSearchAnalyzers;
+		///<summary>/{index}/_reload_search_analyzers</summary>
+		///<param name = "index">this parameter is required</param>
+		public ReloadSearchAnalyzersDescriptor(Indices index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ReloadSearchAnalyzersDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Indices IReloadSearchAnalyzersRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names to reload analyzers for</summary>
+		public ReloadSearchAnalyzersDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public ReloadSearchAnalyzersDescriptor Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public ReloadSearchAnalyzersDescriptor AllIndices() => Index(Indices.All);
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public ReloadSearchAnalyzersDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ReloadSearchAnalyzersDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public ReloadSearchAnalyzersDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
+	}
+
 	///<summary>Descriptor for Rollover <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</para></summary>
 	public partial class RolloverIndexDescriptor : RequestDescriptorBase<RolloverIndexDescriptor, RolloverIndexRequestParameters, IRolloverIndexRequest>, IRolloverIndexRequest
 	{

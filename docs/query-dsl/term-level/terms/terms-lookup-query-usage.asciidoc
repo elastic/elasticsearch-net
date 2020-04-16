@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.5
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.7
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -26,7 +26,7 @@ q
     .Field(p => p.Description)
     .TermsLookup<Developer>(e => e
         .Path(p => p.LastName)
-        .Id(12)
+        .Id("12")
         .Routing("myroutingvalue")
     )
 )
@@ -43,7 +43,7 @@ new TermsQuery
     Field = "description",
     TermsLookup = new FieldLookup
     {
-        Id = 12,
+        Id = "12",
         Index = Index<Developer>(),
         Path = Field<Developer>(p => p.LastName),
         Routing = "myroutingvalue"
@@ -59,7 +59,7 @@ new TermsQuery
     "_name": "named_query",
     "boost": 1.1,
     "description": {
-      "id": 12,
+      "id": "12",
       "index": "devs",
       "path": "lastName",
       "routing": "myroutingvalue"

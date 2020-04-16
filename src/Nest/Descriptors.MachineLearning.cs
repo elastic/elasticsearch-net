@@ -251,6 +251,14 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>Descriptor for EstimateModelMemory</summary>
+	public partial class EstimateModelMemoryDescriptor<TDocument> : RequestDescriptorBase<EstimateModelMemoryDescriptor<TDocument>, EstimateModelMemoryRequestParameters, IEstimateModelMemoryRequest>, IEstimateModelMemoryRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningEstimateModelMemory;
+	// values part of the url path
+	// Request parameters
+	}
+
 	///<summary>Descriptor for FlushJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</para></summary>
 	public partial class FlushJobDescriptor : RequestDescriptorBase<FlushJobDescriptor, FlushJobRequestParameters, IFlushJobRequest>, IFlushJobRequest
 	{
@@ -854,6 +862,18 @@ namespace Nest
 		Id IRevertModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IRevertModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 	// Request parameters
+	}
+
+	///<summary>Descriptor for SetUpgradeMode <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</para></summary>
+	public partial class SetUpgradeModeDescriptor : RequestDescriptorBase<SetUpgradeModeDescriptor, SetUpgradeModeRequestParameters, ISetUpgradeModeRequest>, ISetUpgradeModeRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningSetUpgradeMode;
+		// values part of the url path
+		// Request parameters
+		///<summary>Whether to enable upgrade_mode ML setting or not. Defaults to false.</summary>
+		public SetUpgradeModeDescriptor Enabled(bool? enabled = true) => Qs("enabled", enabled);
+		///<summary>Controls the time to wait before action times out. Defaults to 30 seconds</summary>
+		public SetUpgradeModeDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
 	///<summary>Descriptor for StartDatafeed <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</para></summary>

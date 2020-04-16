@@ -84,3 +84,4 @@ project.lock.json
 /src/.vs/restore.dg
 # temporary location for doc generation
 docs-temp
+*.binlog
