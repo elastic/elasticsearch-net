@@ -935,6 +935,30 @@ namespace Nest.Specification.MachineLearningApi
 		/// </summary>
 		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request, CancellationToken ct = default) => DoRequestAsync<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>ml.set_upgrade_mode</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</a>
+		/// </summary>
+		public SetUpgradeModeResponse SetUpgradeMode(Func<SetUpgradeModeDescriptor, ISetUpgradeModeRequest> selector = null) => SetUpgradeMode(selector.InvokeOrDefault(new SetUpgradeModeDescriptor()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>ml.set_upgrade_mode</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</a>
+		/// </summary>
+		public Task<SetUpgradeModeResponse> SetUpgradeModeAsync(Func<SetUpgradeModeDescriptor, ISetUpgradeModeRequest> selector = null, CancellationToken ct = default) => SetUpgradeModeAsync(selector.InvokeOrDefault(new SetUpgradeModeDescriptor()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ml.set_upgrade_mode</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</a>
+		/// </summary>
+		public SetUpgradeModeResponse SetUpgradeMode(ISetUpgradeModeRequest request) => DoRequest<ISetUpgradeModeRequest, SetUpgradeModeResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ml.set_upgrade_mode</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</a>
+		/// </summary>
+		public Task<SetUpgradeModeResponse> SetUpgradeModeAsync(ISetUpgradeModeRequest request, CancellationToken ct = default) => DoRequestAsync<ISetUpgradeModeRequest, SetUpgradeModeResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>ml.start_datafeed</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</a>
