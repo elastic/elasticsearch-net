@@ -325,6 +325,30 @@ namespace Nest.Specification.SecurityApi
 		/// </summary>
 		public Task<GetApiKeyResponse> GetApiKeyAsync(IGetApiKeyRequest request, CancellationToken ct = default) => DoRequestAsync<IGetApiKeyRequest, GetApiKeyResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>GET</c> request to the <c>security.get_builtin_privileges</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html</a>
+		/// </summary>
+		public GetBuiltinPrivilegesResponse GetBuiltinPrivileges(Func<GetBuiltinPrivilegesDescriptor, IGetBuiltinPrivilegesRequest> selector = null) => GetBuiltinPrivileges(selector.InvokeOrDefault(new GetBuiltinPrivilegesDescriptor()));
+		/// <summary>
+		/// <c>GET</c> request to the <c>security.get_builtin_privileges</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html</a>
+		/// </summary>
+		public Task<GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(Func<GetBuiltinPrivilegesDescriptor, IGetBuiltinPrivilegesRequest> selector = null, CancellationToken ct = default) => GetBuiltinPrivilegesAsync(selector.InvokeOrDefault(new GetBuiltinPrivilegesDescriptor()), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>security.get_builtin_privileges</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html</a>
+		/// </summary>
+		public GetBuiltinPrivilegesResponse GetBuiltinPrivileges(IGetBuiltinPrivilegesRequest request) => DoRequest<IGetBuiltinPrivilegesRequest, GetBuiltinPrivilegesResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>security.get_builtin_privileges</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html</a>
+		/// </summary>
+		public Task<GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(IGetBuiltinPrivilegesRequest request, CancellationToken ct = default) => DoRequestAsync<IGetBuiltinPrivilegesRequest, GetBuiltinPrivilegesResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_privileges</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</a>

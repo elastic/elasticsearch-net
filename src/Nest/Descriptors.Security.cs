@@ -274,6 +274,14 @@ namespace Nest
 		public GetApiKeyDescriptor Username(string username) => Qs("username", username);
 	}
 
+	///<summary>Descriptor for GetBuiltinPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html</para></summary>
+	public partial class GetBuiltinPrivilegesDescriptor : RequestDescriptorBase<GetBuiltinPrivilegesDescriptor, GetBuiltinPrivilegesRequestParameters, IGetBuiltinPrivilegesRequest>, IGetBuiltinPrivilegesRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetBuiltinPrivileges;
+	// values part of the url path
+	// Request parameters
+	}
+
 	///<summary>Descriptor for GetPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
 	public partial class GetPrivilegesDescriptor : RequestDescriptorBase<GetPrivilegesDescriptor, GetPrivilegesRequestParameters, IGetPrivilegesRequest>, IGetPrivilegesRequest
 	{
