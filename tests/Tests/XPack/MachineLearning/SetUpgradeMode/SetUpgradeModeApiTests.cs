@@ -3,6 +3,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Extensions;
 using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.SetUpgradeMode
@@ -28,5 +29,11 @@ namespace Tests.XPack.MachineLearning.SetUpgradeMode
 		);
 
 		protected override SetUpgradeModeDescriptor NewDescriptor() => new SetUpgradeModeDescriptor();
+
+		protected override void ExpectResponse(SetUpgradeModeResponse response)
+		{
+			response.ShouldBeValid();
+			response.Acknowledged.Should().BeTrue();
+		}
 	}
 }
