@@ -257,6 +257,12 @@ namespace Nest
 							_visitor.Visit(t);
 						});
 						break;
+					case FieldType.ConstantKeyword:
+						Visit<IConstantKeywordProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+						});
+						break;
 					case FieldType.None:
 						continue;
 				}

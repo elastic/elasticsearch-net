@@ -62,6 +62,8 @@ namespace Nest
 
 		public virtual void Visit(IHistogramProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
+		public virtual void Visit(IConstantKeywordProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+
 		public virtual IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => null;
 
 		public void Visit(IProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
@@ -148,6 +150,9 @@ namespace Nest
 					break;
 				case IHistogramProperty histogram:
 					Visit(histogram, propertyInfo, attribute);
+					break;
+				case IConstantKeywordProperty constantKeyword:
+					Visit(constantKeyword, propertyInfo, attribute);
 					break;
 			}
 		}
