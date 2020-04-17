@@ -252,6 +252,31 @@ namespace Nest.Specification.CatApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</a>
 		/// </summary>
 		public Task<CatResponse<CatJobsRecord>> JobsAsync(ICatJobsRequest request, CancellationToken ct = default) => DoCatAsync<ICatJobsRequest, CatJobsRequestParameters, CatJobsRecord>(request, ct);
+
+		/// <c>GET</c> request to the <c>cat.ml_trained_models</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</a>
+		/// </summary>
+		public CatResponse<CatTrainedModelsRecord> TrainedModels(Func<CatTrainedModelsDescriptor, ICatTrainedModelsRequest> selector = null) => TrainedModels(selector.InvokeOrDefault(new CatTrainedModelsDescriptor()));
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.ml_trained_models</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</a>
+		/// </summary>
+		public Task<CatResponse<CatTrainedModelsRecord>> TrainedModelsAsync(Func<CatTrainedModelsDescriptor, ICatTrainedModelsRequest> selector = null, CancellationToken ct = default) => TrainedModelsAsync(selector.InvokeOrDefault(new CatTrainedModelsDescriptor()), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.ml_trained_models</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</a>
+		/// </summary>
+		public CatResponse<CatTrainedModelsRecord> TrainedModels(ICatTrainedModelsRequest request) => DoCat<ICatTrainedModelsRequest, CatTrainedModelsRequestParameters, CatTrainedModelsRecord>(request);
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.ml_trained_models</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</a>
+		/// </summary>
+		public Task<CatResponse<CatTrainedModelsRecord>> TrainedModelsAsync(ICatTrainedModelsRequest request, CancellationToken ct = default) => DoCatAsync<ICatTrainedModelsRequest, CatTrainedModelsRequestParameters, CatTrainedModelsRecord>(request, ct);
+
 		/// <summary>
 		/// <c>GET</c> request to the <c>cat.nodeattrs</c> API, read more about this API online:
 		/// <para></para>
@@ -540,5 +565,29 @@ namespace Nest.Specification.CatApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</a>
 		/// </summary>
 		public Task<CatResponse<CatThreadPoolRecord>> ThreadPoolAsync(ICatThreadPoolRequest request, CancellationToken ct = default) => DoCatAsync<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request, ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.transforms</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</a>
+		/// </summary>
+		public CatResponse<CatTransformsRecord> Transforms(Func<CatTransformsDescriptor, ICatTransformsRequest> selector = null) => Transforms(selector.InvokeOrDefault(new CatTransformsDescriptor()));
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.transforms</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</a>
+		/// </summary>
+		public Task<CatResponse<CatTransformsRecord>> TransformsAsync(Func<CatTransformsDescriptor, ICatTransformsRequest> selector = null, CancellationToken ct = default) => TransformsAsync(selector.InvokeOrDefault(new CatTransformsDescriptor()), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.transforms</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</a>
+		/// </summary>
+		public CatResponse<CatTransformsRecord> Transforms(ICatTransformsRequest request) => DoCat<ICatTransformsRequest, CatTransformsRequestParameters, CatTransformsRecord>(request);
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.transforms</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</a>
+		/// </summary>
+		public Task<CatResponse<CatTransformsRecord>> TransformsAsync(ICatTransformsRequest request, CancellationToken ct = default) => DoCatAsync<ICatTransformsRequest, CatTransformsRequestParameters, CatTransformsRecord>(request, ct);
 	}
 }

@@ -164,8 +164,6 @@ module Versioning =
         | true -> validate dll name 
         | _ -> failwithf "Attempted to verify signature of %s but it was not found!" dll
 
-    let private assemblyRewriter = "assembly-rewriter"
-    
     let BuiltArtifacts (version: AnchoredVersion) = 
         let packages =
             let allPackages = !! "build/output/_packages/*.nupkg" |> Seq.toList
