@@ -16,7 +16,7 @@ namespace Nest
 		/// (Default) The number of buckets processed.
 		/// </summary>
 		[DataMember(Name="buckets.count")]
-		public long? BucketsCount { get; internal set; }
+		public string BucketsCount { get; internal set; }
 
 		/// <summary>
 		/// (Default) A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase alphanumeric
@@ -53,19 +53,19 @@ namespace Nest
 		/// The average search time per bucket, in milliseconds.
 		/// </summary>
 		[DataMember(Name="search.bucket_avg")]
-		public long? SearchBucketAvg { get; internal set; }
+		public string SearchBucketAvg { get; internal set; }
 
 		/// <summary>
 		/// (Default) The number of searches run by the datafeed.
 		/// </summary>
 		[DataMember(Name="search.count")]
-		public long? SearchCount { get; internal set; }
+		public string SearchCount { get; internal set; }
 
 		/// <summary>
 		/// The exponential average search time per hour, in milliseconds.
 		/// </summary>
 		[DataMember(Name="search.exp_avg_hour")]
-		public long? SearchExpAvgHour { get; internal set; }
+		public string SearchExpAvgHour { get; internal set; }
 
 		/// <summary>
 		/// The total time the datafeed spent searching, in milliseconds.

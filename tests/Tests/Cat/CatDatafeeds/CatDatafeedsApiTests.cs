@@ -1,21 +1,28 @@
-﻿using System;
-using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
+using Tests.XPack.MachineLearning;
 
 namespace Tests.Cat.CatDatafeeds
 {
 	[SkipVersion("<7.7.0", "Introduced in 7.7.0")]
 	public class CatDatafeedsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatDatafeedsRecord>, ICatDatafeedsRequest, CatDatafeedsDescriptor,
+		: MachineLearningIntegrationTestBase<CatResponse<CatDatafeedsRecord>, ICatDatafeedsRequest, CatDatafeedsDescriptor,
 			CatDatafeedsRequest>
 	{
-		public CatDatafeedsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CatDatafeedsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values)
+			{
+				PutJob(client, callUniqueValue.Value);
+				OpenJob(client, callUniqueValue.Value);
+				PutDatafeed(client, callUniqueValue.Value);
+			}
+		}
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
