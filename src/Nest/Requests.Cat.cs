@@ -689,16 +689,7 @@ namespace Nest
 			get;
 		}
 	}
-    
-	[InterfaceDataContract]
-	public partial interface ICatTrainedModelsRequest : IRequest<CatTrainedModelsRequestParameters>
-	{
-		[IgnoreDataMember]
-		Id ModelId
-		{
-			get;
-		}
-	}
+
 	///<summary>Request for Jobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
 	public partial class CatJobsRequest : PlainRequestBase<CatJobsRequestParameters>, ICatJobsRequest
 	{
@@ -772,7 +763,16 @@ namespace Nest
 			set => Q("v", value);
 		}
 	}
-  
+
+	[InterfaceDataContract]
+	public partial interface ICatTrainedModelsRequest : IRequest<CatTrainedModelsRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id ModelId
+		{
+			get;
+		}
+	}
 
 	///<summary>Request for TrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
 	public partial class CatTrainedModelsRequest : PlainRequestBase<CatTrainedModelsRequestParameters>, ICatTrainedModelsRequest

@@ -252,7 +252,7 @@ namespace Nest.Specification.CatApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</a>
 		/// </summary>
 		public Task<CatResponse<CatJobsRecord>> JobsAsync(ICatJobsRequest request, CancellationToken ct = default) => DoCatAsync<ICatJobsRequest, CatJobsRequestParameters, CatJobsRecord>(request, ct);
-
+		/// <summary>
 		/// <c>GET</c> request to the <c>cat.ml_trained_models</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</a>
@@ -276,7 +276,6 @@ namespace Nest.Specification.CatApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</a>
 		/// </summary>
 		public Task<CatResponse<CatTrainedModelsRecord>> TrainedModelsAsync(ICatTrainedModelsRequest request, CancellationToken ct = default) => DoCatAsync<ICatTrainedModelsRequest, CatTrainedModelsRequestParameters, CatTrainedModelsRecord>(request, ct);
-
 		/// <summary>
 		/// <c>GET</c> request to the <c>cat.nodeattrs</c> API, read more about this API online:
 		/// <para></para>
