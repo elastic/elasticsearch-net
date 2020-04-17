@@ -38,6 +38,7 @@ namespace Nest
 			visitor.Visit(aggregation);
 			AcceptAggregation(aggregation.Average, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.AverageBucket, visitor, (v, d) => v.Visit(d));
+			AcceptAggregation(aggregation.Boxplot, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.BucketScript, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.BucketSort, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.BucketSelector, visitor, (v, d) => v.Visit(d));

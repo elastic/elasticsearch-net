@@ -238,6 +238,8 @@ namespace Nest
 
 		public ValueAggregate MedianAbsoluteDeviation(string key) => TryGet<ValueAggregate>(key);
 
+		public BoxplotAggregate Boxplot(string key) => TryGet<BoxplotAggregate>(key);
+
 		private TAggregate TryGet<TAggregate>(string key) where TAggregate : class, IAggregate =>
 			BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;
 

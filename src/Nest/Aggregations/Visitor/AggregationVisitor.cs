@@ -140,6 +140,8 @@
 
 		void Visit(IStringStatsAggregation aggregation);
 
+		void Visit(IBoxplotAggregation aggregation);
+
 		void Visit(ITopMetricsAggregation aggregation);
 	}
 
@@ -264,6 +266,8 @@
 		public virtual void Visit(IMovingFunctionAggregation aggregation) { }
 
 		public virtual void Visit(IStringStatsAggregation aggregation) { }
+
+		public virtual void Visit(IBoxplotAggregation aggregation) { }
 
 		public virtual void Visit(ITopMetricsAggregation aggregation) { }
 
