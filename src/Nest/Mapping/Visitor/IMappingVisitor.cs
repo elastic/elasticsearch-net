@@ -63,6 +63,8 @@
 		void Visit(IFlattenedProperty property);
 
 		void Visit(IHistogramProperty property);
+
+		void Visit(IConstantKeywordProperty property);
 	}
 
 	public class NoopMappingVisitor : IMappingVisitor
@@ -128,5 +130,7 @@
 		public virtual void Visit(IFlattenedProperty property) { }
 
 		public virtual void Visit(IHistogramProperty property) { }
+
+		public virtual void Visit(IConstantKeywordProperty property) { }
 	}
 }

@@ -132,6 +132,10 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				{
 					type = "flattened",
 					depth_limit = 4
+				},
+				versionControl = new
+				{
+					type = "keyword"
 				}
 			}
 		};
@@ -195,6 +199,9 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				.Flattened(f => f
 					.Name(p => p.Labels)
 					.DepthLimit(4)
+				)
+				.Keyword(k => k
+					.Name(n => n.VersionControl)
 				)
 			);
 
@@ -314,6 +321,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				{
 					DepthLimit = 4
 				} },
+				{ p => p.VersionControl, new KeywordProperty() }
 			}
 		};
 

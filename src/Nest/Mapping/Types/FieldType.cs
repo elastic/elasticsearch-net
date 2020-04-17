@@ -141,6 +141,9 @@ namespace Nest
 		Shape,
 
 		[EnumMember(Value = "histogram")]
-		Histogram
+		Histogram,
+
+		[EnumMember(Value = "constant_keyword")]
+		ConstantKeyword
 	}
 }

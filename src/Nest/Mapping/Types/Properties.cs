@@ -138,6 +138,9 @@ namespace Nest
 
 		/// <inheritdoc cref="ISearchAsYouTypeProperty"/>
 		TReturnType SearchAsYouType(Func<SearchAsYouTypePropertyDescriptor<T>, ISearchAsYouTypeProperty> selector);
+
+		/// <inheritdoc cref="IConstantKeywordProperty"/>
+		TReturnType ConstantKeyword(Func<ConstantKeywordPropertyDescriptor<T>, IConstantKeywordProperty> selector);
 	}
 
 	public partial class PropertiesDescriptor<T> where T : class
@@ -217,6 +220,10 @@ namespace Nest
 
 		/// <inheritdoc cref="IHistogramProperty"/>
 		public PropertiesDescriptor<T> Histogram(Func<HistogramPropertyDescriptor<T>, IHistogramProperty> selector) => SetProperty(selector);
+
+		/// <inheritdoc cref="IConstantKeywordProperty"/>
+		public PropertiesDescriptor<T> ConstantKeyword(Func<ConstantKeywordPropertyDescriptor<T>, IConstantKeywordProperty> selector) =>
+			SetProperty(selector);
 
 		public PropertiesDescriptor<T> Custom(IProperty customType) => SetProperty(customType);
 
