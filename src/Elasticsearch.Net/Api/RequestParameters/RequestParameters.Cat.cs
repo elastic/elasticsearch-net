@@ -526,8 +526,8 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for MlDataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html</para></summary>
-	public class MlDataFrameAnalyticsRequestParameters : RequestParameters<MlDataFrameAnalyticsRequestParameters>
+	///<summary>Request options for DataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html</para></summary>
+	public class CatDataFrameAnalyticsRequestParameters : RequestParameters<CatDataFrameAnalyticsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether to ignore if a wildcard expression matches no configs. (This includes `_all` string or when no configs have been specified)</summary>
