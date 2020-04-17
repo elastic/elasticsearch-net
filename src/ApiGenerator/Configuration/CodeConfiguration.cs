@@ -60,7 +60,6 @@ namespace ApiGenerator.Configuration
 			"async_search.submit.json",
 			"cat.ml_data_frame_analytics.json",
 			"cat.ml_datafeeds.json",
-			"cat.ml_jobs.json",
 			"cluster.delete_component_template.json",
 			"cluster.get_component_template.json",
 			"cluster.put_component_template.json",

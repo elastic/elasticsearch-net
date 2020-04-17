@@ -251,7 +251,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for EstimateModelMemory</summary>
+	///<summary>Descriptor for EstimateModelMemory <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</para></summary>
 	public partial class EstimateModelMemoryDescriptor<TDocument> : RequestDescriptorBase<EstimateModelMemoryDescriptor<TDocument>, EstimateModelMemoryRequestParameters, IEstimateModelMemoryRequest>, IEstimateModelMemoryRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningEstimateModelMemory;
