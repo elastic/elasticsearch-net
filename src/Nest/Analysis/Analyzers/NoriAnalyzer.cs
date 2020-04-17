@@ -8,6 +8,7 @@ namespace Nest
 	/// <para> - nori_tokenizer</para>
 	/// <para> - nori_part_of_speech token filter</para>
 	/// <para> - nori_readingform token filter</para>
+	/// <para> - nori_number token filter</para>
 	/// <para> - lowercase token filter</para>
 	/// </summary>
 	public interface INoriAnalyzer : IAnalyzer
