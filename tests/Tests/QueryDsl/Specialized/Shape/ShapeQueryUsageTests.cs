@@ -156,6 +156,64 @@ namespace Tests.QueryDsl.Specialized.Shape
 
 	/**
 	 * [float]
+	 * [[shape-query-multipoint]]
+	 * == Querying with MultiPoint
+	 *
+	 * NOTE: Elasticsearch 7.7.0+ required when MultiPoint is indexed using BKD trees (the default).
+	 */
+	[SkipVersion("<7.7.0", "Multipoint shape queries supported in 7.7.0+")]
+	public class ShapeMultiPointQueryUsageTests : ShapeQueryUsageTestsBase
+	{
+		public ShapeMultiPointQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IShapeQuery>(a => a.Shape)
+		{
+			q => q.Field = null,
+			q => q.Shape = null,
+			q => ((IMultiPointGeoShape)q.Shape).Coordinates = null,
+		};
+
+		protected override QueryContainer QueryInitializer => new ShapeQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = Infer.Field<Project>(p => p.ArbitraryShape),
+			Shape = new MultiPointGeoShape(MultiPointCoordinates),
+			Relation = ShapeRelation.Intersects,
+		};
+
+		protected override object QueryJson => new
+		{
+			shape = new
+			{
+				_name = "named_query",
+				boost = 1.1,
+				arbitraryShape = new
+				{
+					relation = "intersects",
+					shape = new
+					{
+						type = "multipoint",
+						coordinates = MultiPointCoordinates
+					}
+				}
+			}
+		};
+
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.Shape(c => c
+				.Name("named_query")
+				.Boost(1.1)
+				.Field(p => p.ArbitraryShape)
+				.Shape(s => s
+					.MultiPoint(MultiPointCoordinates)
+				)
+				.Relation(ShapeRelation.Intersects)
+			);
+	}
+
+	/**
+	 * [float]
 	 * [[shape-query-linestring]]
 	 * == Querying with LineString
 	 *
@@ -541,6 +599,65 @@ namespace Tests.QueryDsl.Specialized.Shape
 				.Field(p => p.ArbitraryShape)
 				.Shape(s => s
 					.Envelope(EnvelopeCoordinates)
+				)
+				.Relation(ShapeRelation.Intersects)
+			);
+	}
+
+	/**
+     * [float]
+     * [[shape-query-circle]]
+     * == Querying with Circle
+     *
+	 * NOTE: Available in Elasticsearch 7.7.0+
+     */
+	[SkipVersion("<7.7.0", "Circle shape queries are supported in 7.7.0+")]
+	public class ShapeCircleQueryUsageTests : ShapeQueryUsageTestsBase
+	{
+		public ShapeCircleQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IShapeQuery>(a => a.Shape)
+		{
+			q => q.Field = null,
+			q => q.Shape = null,
+			q => ((ICircleGeoShape)q.Shape).Coordinates = null,
+		};
+
+		protected override QueryContainer QueryInitializer => new ShapeQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = Infer.Field<Project>(p => p.ArbitraryShape),
+			Shape = new CircleGeoShape(CircleCoordinates, "100m"),
+			Relation = ShapeRelation.Intersects,
+		};
+
+		protected override object QueryJson => new
+		{
+			shape = new
+			{
+				_name = "named_query",
+				boost = 1.1,
+				arbitraryShape = new
+				{
+					relation = "intersects",
+					shape = new
+					{
+						type = "circle",
+						radius = "100m",
+						coordinates = CircleCoordinates
+					}
+				}
+			}
+		};
+
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.Shape(c => c
+				.Name("named_query")
+				.Boost(1.1)
+				.Field(p => p.ArbitraryShape)
+				.Shape(s => s
+					.Circle(CircleCoordinates, "100m")
 				)
 				.Relation(ShapeRelation.Intersects)
 			);

@@ -155,8 +155,14 @@ namespace Tests.QueryDsl.Geo.GeoShape
 			);
 	}
 
-	// hide
-	[SkipVersion(">=7.0.0", "multipoint queries are not supported")]
+	/**
+	 * [float]
+	 * [[geo-shape-query-multipoint]]
+	 * == Querying with MultiPoint
+	 *
+	 * NOTE: Elasticsearch 7.7.0+ required when MultiPoint is indexed using BKD trees (the default).
+	 */
+	[SkipVersion("<7.7.0", "multipoint queries are supported from 7.7.0 onwards")]
 	public class GeoShapeMultiPointQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoShapeMultiPointQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -593,8 +599,14 @@ namespace Tests.QueryDsl.Geo.GeoShape
 			);
 	}
 
-	// hide
-	[SkipVersion(">=7.0.0", "CIRCLE geometry is not supported. See https://github.com/elastic/elasticsearch/issues/39237")]
+	/**
+     * [float]
+     * [[geo-shape-query-circle]]
+     * == Querying with Circle
+     *
+	 * NOTE: Available in Elasticsearch 7.7.0+
+	 */
+	[SkipVersion("<7.7.0", "CIRCLE geometry is supported from 7.7.0+. See https://github.com/elastic/elasticsearch/issues/39237")]
 	public class GeoShapeCircleQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoShapeCircleQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

@@ -76,6 +76,69 @@ new ShapeQuery
 }
 ----
 
+[[shape-query-multipoint]]
+[float]
+== Querying with MultiPoint
+
+NOTE: Elasticsearch 7.7.0+ required when MultiPoint is indexed using BKD trees (the default).
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Shape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.ArbitraryShape)
+    .Shape(s => s
+        .MultiPoint(MultiPointCoordinates)
+    )
+    .Relation(ShapeRelation.Intersects)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new ShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
+    Shape = new MultiPointGeoShape(MultiPointCoordinates),
+    Relation = ShapeRelation.Intersects,
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "shape": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "arbitraryShape": {
+      "relation": "intersects",
+      "shape": {
+        "type": "multipoint",
+        "coordinates": [
+          [
+            38.897676,
+            -77.03653
+          ],
+          [
+            38.889939,
+            -77.009051
+          ]
+        ]
+      }
+    }
+  }
+}
+----
+
 [[shape-query-linestring]]
 [float]
 == Querying with LineString
@@ -813,6 +876,64 @@ new ShapeQuery
             45.0,
             -45.0
           ]
+        ]
+      }
+    }
+  }
+}
+----
+
+[[shape-query-circle]]
+[float]
+== Querying with Circle
+
+NOTE: Available in Elasticsearch 7.7.0+
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Shape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.ArbitraryShape)
+    .Shape(s => s
+        .Circle(CircleCoordinates, "100m")
+    )
+    .Relation(ShapeRelation.Intersects)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new ShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.ArbitraryShape),
+    Shape = new CircleGeoShape(CircleCoordinates, "100m"),
+    Relation = ShapeRelation.Intersects,
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "shape": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "arbitraryShape": {
+      "relation": "intersects",
+      "shape": {
+        "type": "circle",
+        "radius": "100m",
+        "coordinates": [
+          45.0,
+          -45.0
         ]
       }
     }
