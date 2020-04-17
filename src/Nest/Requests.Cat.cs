@@ -611,6 +611,83 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface ICatDatafeedsRequest : IRequest<CatDatafeedsRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id DatafeedId
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Datafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
+	public partial class CatDatafeedsRequest : PlainRequestBase<CatDatafeedsRequestParameters>, ICatDatafeedsRequest
+	{
+		protected ICatDatafeedsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatDatafeeds;
+		///<summary>/_cat/ml/datafeeds</summary>
+		public CatDatafeedsRequest(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/datafeeds/{datafeed_id}</summary>
+		///<param name = "datafeedId">Optional, accepts null</param>
+		public CatDatafeedsRequest(Id datafeedId): base(r => r.Optional("datafeed_id", datafeedId))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id ICatDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds
+		{
+			get => Q<bool? >("allow_no_datafeeds");
+			set => Q("allow_no_datafeeds", value);
+		}
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
+		}
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers
+		{
+			get => Q<string[]>("h");
+			set => Q("h", value);
+		}
+
+		///<summary>Return help information</summary>
+		public bool? Help
+		{
+			get => Q<bool? >("help");
+			set => Q("help", value);
+		}
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns
+		{
+			get => Q<string[]>("s");
+			set => Q("s", value);
+		}
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool? Verbose
+		{
+			get => Q<bool? >("v");
+			set => Q("v", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface ICatJobsRequest : IRequest<CatJobsRequestParameters>
 	{
 		[IgnoreDataMember]
