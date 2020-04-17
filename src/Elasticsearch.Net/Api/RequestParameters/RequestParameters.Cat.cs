@@ -537,8 +537,8 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for MlDatafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
-	public class MlDatafeedsRequestParameters : RequestParameters<MlDatafeedsRequestParameters>
+	///<summary>Request options for Datafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
+	public class CatDatafeedsRequestParameters : RequestParameters<CatDatafeedsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
