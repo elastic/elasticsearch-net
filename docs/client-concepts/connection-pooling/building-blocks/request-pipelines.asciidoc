@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.5
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.7
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -26,7 +26,7 @@ the whole coordination of the request is deferred to a new instance in a `using`
 var pipeline = new RequestPipeline(
     settings,
     DateTimeProvider.Default,
-    new MemoryStreamFactory(),
+    new RecyclableMemoryStreamFactory(),
     new SearchRequestParameters());
 
 pipeline.GetType().Should().Implement<IDisposable>();
@@ -41,7 +41,7 @@ var requestPipelineFactory = new RequestPipelineFactory();
 var requestPipeline = requestPipelineFactory.Create(
     settings,
     DateTimeProvider.Default, <1>
-    new MemoryStreamFactory(),
+    new RecyclableMemoryStreamFactory(),
     new SearchRequestParameters());
 
 requestPipeline.Should().BeOfType<RequestPipeline>();
@@ -58,7 +58,7 @@ var transport = new Transport<IConnectionSettingsValues>(
     settings,
     requestPipelineFactory,
     DateTimeProvider.Default,
-    new MemoryStreamFactory());
+    new RecyclableMemoryStreamFactory());
 
 var client = new ElasticClient(transport);
 ----

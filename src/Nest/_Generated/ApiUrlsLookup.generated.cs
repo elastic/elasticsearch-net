@@ -32,9 +32,9 @@ namespace Nest
 		internal static ApiUrls CatIndices = new ApiUrls(new[]{"_cat/indices", "_cat/indices/{index}"});
 		internal static ApiUrls CatMaster = new ApiUrls(new[]{"_cat/master"});
 		internal static ApiUrls CatDataFrameAnalytics = new ApiUrls(new[]{"_cat/ml/data_frame/analytics", "_cat/ml/data_frame/analytics/{id}"});
-		internal static ApiUrls CatMlDatafeeds = new ApiUrls(new[]{"_cat/ml/datafeeds", "_cat/ml/datafeeds/{datafeed_id}"});
-		internal static ApiUrls CatMlJobs = new ApiUrls(new[]{"_cat/ml/anomaly_detectors", "_cat/ml/anomaly_detectors/{job_id}"});
-		internal static ApiUrls CatMlTrainedModels = new ApiUrls(new[]{"_cat/ml/trained_models", "_cat/ml/trained_models/{model_id}"});
+		internal static ApiUrls CatDatafeeds = new ApiUrls(new[]{"_cat/ml/datafeeds", "_cat/ml/datafeeds/{datafeed_id}"});
+		internal static ApiUrls CatJobs = new ApiUrls(new[]{"_cat/ml/anomaly_detectors", "_cat/ml/anomaly_detectors/{job_id}"});
+		internal static ApiUrls CatTrainedModels = new ApiUrls(new[]{"_cat/ml/trained_models", "_cat/ml/trained_models/{model_id}"});
 		internal static ApiUrls CatNodeAttributes = new ApiUrls(new[]{"_cat/nodeattrs"});
 		internal static ApiUrls CatNodes = new ApiUrls(new[]{"_cat/nodes"});
 		internal static ApiUrls CatPendingTasks = new ApiUrls(new[]{"_cat/pending_tasks"});

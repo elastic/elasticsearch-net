@@ -708,4 +708,42 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatThreadPoolDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
+
+	///<summary>Descriptor for Transforms <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</para></summary>
+	public partial class CatTransformsDescriptor : RequestDescriptorBase<CatTransformsDescriptor, CatTransformsRequestParameters, ICatTransformsRequest>, ICatTransformsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatTransforms;
+		///<summary>/_cat/transforms</summary>
+		public CatTransformsDescriptor(): base()
+		{
+		}
+
+		///<summary>/_cat/transforms/{transform_id}</summary>
+		///<param name = "transformId">Optional, accepts null</param>
+		public CatTransformsDescriptor(Id transformId): base(r => r.Optional("transform_id", transformId))
+		{
+		}
+
+		// values part of the url path
+		Id ICatTransformsRequest.TransformId => Self.RouteValues.Get<Id>("transform_id");
+		///<summary>The id of the transform for which to get stats. '_all' or '*' implies all transforms</summary>
+		public CatTransformsDescriptor TransformId(Id transformId) => Assign(transformId, (a, v) => a.RouteValues.Optional("transform_id", v));
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no transforms. (This includes `_all` string or when no transforms have been specified)</summary>
+		public CatTransformsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatTransformsDescriptor Format(string format) => Qs("format", format);
+		///<summary>skips a number of transform configs, defaults to 0</summary>
+		public CatTransformsDescriptor From(int? from) => Qs("from", from);
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatTransformsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		///<summary>Return help information</summary>
+		public CatTransformsDescriptor Help(bool? help = true) => Qs("help", help);
+		///<summary>specifies a max number of transforms to get, defaults to 100</summary>
+		public CatTransformsDescriptor Size(int? size) => Qs("size", size);
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatTransformsDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatTransformsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
+	}
 }
