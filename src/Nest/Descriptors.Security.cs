@@ -116,7 +116,7 @@ namespace Nest
 		public CreateApiKeyDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
-	///<summary>Descriptor for DeletePrivileges <para>TODO</para></summary>
+	///<summary>Descriptor for DeletePrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html</para></summary>
 	public partial class DeletePrivilegesDescriptor : RequestDescriptorBase<DeletePrivilegesDescriptor, DeletePrivilegesRequestParameters, IDeletePrivilegesRequest>, IDeletePrivilegesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDeletePrivileges;
@@ -434,7 +434,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for PutPrivileges <para>TODO</para></summary>
+	///<summary>Descriptor for PutPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html</para></summary>
 	public partial class PutPrivilegesDescriptor : RequestDescriptorBase<PutPrivilegesDescriptor, PutPrivilegesRequestParameters, IPutPrivilegesRequest>, IPutPrivilegesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutPrivileges;

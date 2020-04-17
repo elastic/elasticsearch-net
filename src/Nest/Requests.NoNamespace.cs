@@ -83,7 +83,7 @@ namespace Nest
 		}
 
 		///<summary>
-		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
 		public Refresh? Refresh
@@ -491,7 +491,7 @@ namespace Nest
 		}
 
 		///<summary>
-		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
 		public Refresh? Refresh
@@ -696,7 +696,7 @@ namespace Nest
 			set => Q("q", value);
 		}
 
-		///<summary>Should the effected indexes be refreshed?</summary>
+		///<summary>Should the affected indexes be refreshed?</summary>
 		public bool? Refresh
 		{
 			get => Q<bool? >("refresh");
@@ -759,7 +759,7 @@ namespace Nest
 			set => Q("search_type", value);
 		}
 
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
 		public long? Slices
 		{
 			get => Q<long? >("slices");
@@ -2102,7 +2102,7 @@ namespace Nest
 		///<summary>
 		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
-		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
+		/// not match any documents based on its rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.
 		///</summary>
 		public long? PreFilterShardSize
@@ -2410,7 +2410,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindexOnServer;
 		// values part of the url path
 		// Request parameters
-		///<summary>Should the effected indexes be refreshed?</summary>
+		///<summary>Should the affected indexes be refreshed?</summary>
 		public bool? Refresh
 		{
 			get => Q<bool? >("refresh");
@@ -2431,7 +2431,7 @@ namespace Nest
 			set => Q("scroll", value);
 		}
 
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
 		public long? Slices
 		{
 			get => Q<long? >("slices");
@@ -2728,7 +2728,7 @@ namespace Nest
 		///<summary>
 		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
-		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
+		/// not match any documents based on its rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.
 		///</summary>
 		public long? PreFilterShardSize
@@ -3304,7 +3304,7 @@ namespace Nest
 		}
 
 		///<summary>
-		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
 		public Refresh? Refresh
@@ -3489,7 +3489,7 @@ namespace Nest
 			set => Q("q", value);
 		}
 
-		///<summary>Should the effected indexes be refreshed?</summary>
+		///<summary>Should the affected indexes be refreshed?</summary>
 		public bool? Refresh
 		{
 			get => Q<bool? >("refresh");
@@ -3552,7 +3552,7 @@ namespace Nest
 			set => Q("search_type", value);
 		}
 
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
 		public long? Slices
 		{
 			get => Q<long? >("slices");

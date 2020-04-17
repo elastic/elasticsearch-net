@@ -56,6 +56,8 @@ namespace Nest
 		public CancelTasksDescriptor Nodes(params string[] nodes) => Qs("nodes", nodes);
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public CancelTasksDescriptor ParentTaskId(string parenttaskid) => Qs("parent_task_id", parenttaskid);
+		///<summary>Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false</summary>
+		public CancelTasksDescriptor WaitForCompletion(bool? waitforcompletion = true) => Qs("wait_for_completion", waitforcompletion);
 	}
 
 	///<summary>Descriptor for GetTask <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>

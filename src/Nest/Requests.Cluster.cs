@@ -59,6 +59,56 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IExistsComponentTemplateRequest : IRequest<ExistsComponentTemplateRequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for ExistsComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+	public partial class ExistsComponentTemplateRequest : PlainRequestBase<ExistsComponentTemplateRequestParameters>, IExistsComponentTemplateRequest
+	{
+		protected IExistsComponentTemplateRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterExistsComponentTemplate;
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public ExistsComponentTemplateRequest(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ExistsComponentTemplateRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IExistsComponentTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local
+		{
+			get => Q<bool? >("local");
+			set => Q("local", value);
+		}
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+
+		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement ExistsComponentTemplateDescriptor and ExistsComponentTemplateRequest in a file called ExistsComponentTemplateRequest.cs in NEST's codebase", true)]
+		public bool IsUnmapped => true;
+		public bool UseIsUnmapped => IsUnmapped;
+	}
+
+	[InterfaceDataContract]
 	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters>
 	{
 	}

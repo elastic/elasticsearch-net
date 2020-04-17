@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.EnrichApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>Descriptor for DeletePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-delete-policy.html</para></summary>
+	///<summary>Descriptor for DeletePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-enrich-policy-api.html</para></summary>
 	public partial class DeleteEnrichPolicyDescriptor : RequestDescriptorBase<DeleteEnrichPolicyDescriptor, DeleteEnrichPolicyRequestParameters, IDeleteEnrichPolicyRequest>, IDeleteEnrichPolicyRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EnrichDeletePolicy;
@@ -51,7 +51,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for ExecutePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-execute-policy.html</para></summary>
+	///<summary>Descriptor for ExecutePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/execute-enrich-policy-api.html</para></summary>
 	public partial class ExecuteEnrichPolicyDescriptor : RequestDescriptorBase<ExecuteEnrichPolicyDescriptor, ExecuteEnrichPolicyRequestParameters, IExecuteEnrichPolicyRequest>, IExecuteEnrichPolicyRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EnrichExecutePolicy;
@@ -96,7 +96,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for PutPolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-put-policy.html</para></summary>
+	///<summary>Descriptor for PutPolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-enrich-policy-api.html</para></summary>
 	public partial class PutEnrichPolicyDescriptor<TDocument> : RequestDescriptorBase<PutEnrichPolicyDescriptor<TDocument>, PutEnrichPolicyRequestParameters, IPutEnrichPolicyRequest>, IPutEnrichPolicyRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EnrichPutPolicy;
@@ -117,7 +117,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats.html</para></summary>
+	///<summary>Descriptor for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats-api.html</para></summary>
 	public partial class EnrichStatsDescriptor : RequestDescriptorBase<EnrichStatsDescriptor, EnrichStatsRequestParameters, IEnrichStatsRequest>, IEnrichStatsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EnrichStats;

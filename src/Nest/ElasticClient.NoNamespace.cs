@@ -19,9 +19,11 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Nest;
+using Nest.Specification.AutoscalingApi;
 using Nest.Specification.CatApi;
 using Nest.Specification.ClusterApi;
 using Nest.Specification.CrossClusterReplicationApi;
+using Nest.Specification.DataFrameApi;
 using Nest.Specification.EnrichApi;
 using Nest.Specification.GraphApi;
 using Nest.Specification.IndexLifecycleManagementApi;
@@ -32,11 +34,13 @@ using Nest.Specification.MachineLearningApi;
 using Nest.Specification.MigrationApi;
 using Nest.Specification.NodesApi;
 using Nest.Specification.RollupApi;
+using Nest.Specification.SearchableSnapshotsApi;
 using Nest.Specification.SecurityApi;
 using Nest.Specification.SnapshotApi;
 using Nest.Specification.SnapshotLifecycleManagementApi;
 using Nest.Specification.SqlApi;
 using Nest.Specification.TasksApi;
+using Nest.Specification.TransformApi;
 using Nest.Specification.WatcherApi;
 using Nest.Specification.XPackApi;
 
@@ -48,6 +52,13 @@ namespace Nest
 	///</summary>
 	public partial class ElasticClient : IElasticClient
 	{
+		///<summary>Autoscaling APIs</summary>
+		public AutoscalingNamespace Autoscaling
+		{
+			get;
+			private set;
+		}
+
 		///<summary>Cat APIs</summary>
 		public CatNamespace Cat
 		{
@@ -64,6 +75,13 @@ namespace Nest
 
 		///<summary>Cross Cluster Replication APIs</summary>
 		public CrossClusterReplicationNamespace CrossClusterReplication
+		{
+			get;
+			private set;
+		}
+
+		///<summary>Data Frame APIs</summary>
+		public DataFrameNamespace DataFrame
 		{
 			get;
 			private set;
@@ -139,6 +157,13 @@ namespace Nest
 			private set;
 		}
 
+		///<summary>Searchable Snapshots APIs</summary>
+		public SearchableSnapshotsNamespace SearchableSnapshots
+		{
+			get;
+			private set;
+		}
+
 		///<summary>Security APIs</summary>
 		public SecurityNamespace Security
 		{
@@ -174,6 +199,13 @@ namespace Nest
 			private set;
 		}
 
+		///<summary>Transform APIs</summary>
+		public TransformNamespace Transform
+		{
+			get;
+			private set;
+		}
+
 		///<summary>Watcher APIs</summary>
 		public WatcherNamespace Watcher
 		{
@@ -190,9 +222,11 @@ namespace Nest
 
 		partial void SetupNamespaces()
 		{
+			Autoscaling = new AutoscalingNamespace(this);
 			Cat = new CatNamespace(this);
 			Cluster = new ClusterNamespace(this);
 			CrossClusterReplication = new CrossClusterReplicationNamespace(this);
+			DataFrame = new DataFrameNamespace(this);
 			Enrich = new EnrichNamespace(this);
 			Graph = new GraphNamespace(this);
 			IndexLifecycleManagement = new IndexLifecycleManagementNamespace(this);
@@ -203,11 +237,13 @@ namespace Nest
 			Migration = new MigrationNamespace(this);
 			Nodes = new NodesNamespace(this);
 			Rollup = new RollupNamespace(this);
+			SearchableSnapshots = new SearchableSnapshotsNamespace(this);
 			Security = new SecurityNamespace(this);
 			Snapshot = new SnapshotNamespace(this);
 			SnapshotLifecycleManagement = new SnapshotLifecycleManagementNamespace(this);
 			Sql = new SqlNamespace(this);
 			Tasks = new TasksNamespace(this);
+			Transform = new TransformNamespace(this);
 			Watcher = new WatcherNamespace(this);
 			XPack = new XPackNamespace(this);
 		}

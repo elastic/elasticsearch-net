@@ -57,6 +57,14 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseGet;
 		// values part of the url path
 		// Request parameters
+		///<summary>Supported for backwards compatibility with 7.x. If this param is used it must be set to true</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 8.0.0, reason: Supported for backwards compatibility with 7.x. If this param is used it must be set to true")]
+		public bool? AcceptEnterprise
+		{
+			get => Q<bool? >("accept_enterprise");
+			set => Q("accept_enterprise", value);
+		}
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local
 		{

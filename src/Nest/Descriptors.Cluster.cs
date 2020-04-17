@@ -42,6 +42,34 @@ namespace Nest
 		public ClusterAllocationExplainDescriptor IncludeYesDecisions(bool? includeyesdecisions = true) => Qs("include_yes_decisions", includeyesdecisions);
 	}
 
+	///<summary>Descriptor for ExistsComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+	public partial class ExistsComponentTemplateDescriptor : RequestDescriptorBase<ExistsComponentTemplateDescriptor, ExistsComponentTemplateRequestParameters, IExistsComponentTemplateRequest>, IExistsComponentTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterExistsComponentTemplate;
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public ExistsComponentTemplateDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ExistsComponentTemplateDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IExistsComponentTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public ExistsComponentTemplateDescriptor Local(bool? local = true) => Qs("local", local);
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public ExistsComponentTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement ExistsComponentTemplateDescriptor and ExistsComponentTemplateRequest in a file called ExistsComponentTemplateRequest.cs in NEST's codebase", true)]
+		public bool IsUnmapped => true;
+		public bool UseIsUnmapped => IsUnmapped;
+	}
+
 	///<summary>Descriptor for GetSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 	public partial class ClusterGetSettingsDescriptor : RequestDescriptorBase<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
 	{

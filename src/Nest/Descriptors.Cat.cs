@@ -50,6 +50,8 @@ namespace Nest
 		///<summary>A comma-separated list of alias names to return</summary>
 		public CatAliasesDescriptor Name(Names name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
 		// Request parameters
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public CatAliasesDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatAliasesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
@@ -234,6 +236,8 @@ namespace Nest
 		// Request parameters
 		///<summary>The unit in which to display byte values</summary>
 		public CatIndicesDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public CatIndicesDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatIndicesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
@@ -395,14 +399,14 @@ namespace Nest
 
 		///<summary>/_cat/ml/trained_models/{model_id}</summary>
 		///<param name = "modelId">Optional, accepts null</param>
-		public CatTrainedModelsDescriptor(Id modelId): base(r => r.Optional("model_id", modelId))
+		public CatTrainedModelsDescriptor(string_ modelId): base(r => r.Optional("model_id", modelId))
 		{
 		}
 
 		// values part of the url path
-		Id ICatTrainedModelsRequest.ModelId => Self.RouteValues.Get<Id>("model_id");
+		string_ ICatTrainedModelsRequest.ModelId => Self.RouteValues.Get<string_>("model_id");
 		///<summary>The ID of the trained models stats to fetch</summary>
-		public CatTrainedModelsDescriptor ModelId(Id modelId) => Assign(modelId, (a, v) => a.RouteValues.Optional("model_id", v));
+		public CatTrainedModelsDescriptor ModelId(string_ modelId) => Assign(modelId, (a, v) => a.RouteValues.Optional("model_id", v));
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard expression matches no trained models. (This includes `_all` string or when no trained models have been specified)</summary>
 		public CatTrainedModelsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
@@ -462,8 +466,6 @@ namespace Nest
 		public CatNodesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatNodesDescriptor Help(bool? help = true) => Qs("help", help);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatNodesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatNodesDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
@@ -810,14 +812,14 @@ namespace Nest
 
 		///<summary>/_cat/transforms/{transform_id}</summary>
 		///<param name = "transformId">Optional, accepts null</param>
-		public CatTransformsDescriptor(Id transformId): base(r => r.Optional("transform_id", transformId))
+		public CatTransformsDescriptor(string_ transformId): base(r => r.Optional("transform_id", transformId))
 		{
 		}
 
 		// values part of the url path
-		Id ICatTransformsRequest.TransformId => Self.RouteValues.Get<Id>("transform_id");
+		string_ ICatTransformsRequest.TransformId => Self.RouteValues.Get<string_>("transform_id");
 		///<summary>The id of the transform for which to get stats. '_all' or '*' implies all transforms</summary>
-		public CatTransformsDescriptor TransformId(Id transformId) => Assign(transformId, (a, v) => a.RouteValues.Optional("transform_id", v));
+		public CatTransformsDescriptor TransformId(string_ transformId) => Assign(transformId, (a, v) => a.RouteValues.Optional("transform_id", v));
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard expression matches no transforms. (This includes `_all` string or when no transforms have been specified)</summary>
 		public CatTransformsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);

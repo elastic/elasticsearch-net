@@ -56,7 +56,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Usage <para>Retrieve information about xpack features usage</para></summary>
+	///<summary>Request for Usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html</para></summary>
 	public partial class XPackUsageRequest : PlainRequestBase<XPackUsageRequestParameters>, IXPackUsageRequest
 	{
 		protected IXPackUsageRequest Self => this;

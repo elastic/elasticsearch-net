@@ -61,6 +61,13 @@ namespace Nest
 		[IgnoreDataMember]
 		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
 		// Request parameters
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -469,6 +476,13 @@ namespace Nest
 			set => Q("bytes", value);
 		}
 
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -859,7 +873,7 @@ namespace Nest
 	public partial interface ICatTrainedModelsRequest : IRequest<CatTrainedModelsRequestParameters>
 	{
 		[IgnoreDataMember]
-		Id ModelId
+		string_ ModelId
 		{
 			get;
 		}
@@ -877,13 +891,13 @@ namespace Nest
 
 		///<summary>/_cat/ml/trained_models/{model_id}</summary>
 		///<param name = "modelId">Optional, accepts null</param>
-		public CatTrainedModelsRequest(Id modelId): base(r => r.Optional("model_id", modelId))
+		public CatTrainedModelsRequest(string_ modelId): base(r => r.Optional("model_id", modelId))
 		{
 		}
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Id ICatTrainedModelsRequest.ModelId => Self.RouteValues.Get<Id>("model_id");
+		string_ ICatTrainedModelsRequest.ModelId => Self.RouteValues.Get<string_>("model_id");
 		// Request parameters
 		///<summary>
 		/// Whether to ignore if a wildcard expression matches no trained models. (This includes `_all` string or when no trained models have been
@@ -1071,13 +1085,6 @@ namespace Nest
 		{
 			get => Q<bool? >("help");
 			set => Q("help", value);
-		}
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -1905,7 +1912,7 @@ namespace Nest
 	public partial interface ICatTransformsRequest : IRequest<CatTransformsRequestParameters>
 	{
 		[IgnoreDataMember]
-		Id TransformId
+		string_ TransformId
 		{
 			get;
 		}
@@ -1923,13 +1930,13 @@ namespace Nest
 
 		///<summary>/_cat/transforms/{transform_id}</summary>
 		///<param name = "transformId">Optional, accepts null</param>
-		public CatTransformsRequest(Id transformId): base(r => r.Optional("transform_id", transformId))
+		public CatTransformsRequest(string_ transformId): base(r => r.Optional("transform_id", transformId))
 		{
 		}
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Id ICatTransformsRequest.TransformId => Self.RouteValues.Get<Id>("transform_id");
+		string_ ICatTransformsRequest.TransformId => Self.RouteValues.Get<string_>("transform_id");
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard expression matches no transforms. (This includes `_all` string or when no transforms have been specified)</summary>
 		public bool? AllowNoMatch

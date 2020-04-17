@@ -159,25 +159,25 @@ namespace Nest.Specification.SecurityApi
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>security.delete_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "TODO">TODO</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html</a>
 		/// </summary>
 		public DeletePrivilegesResponse DeletePrivileges(Name application, Name name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null) => DeletePrivileges(selector.InvokeOrDefault(new DeletePrivilegesDescriptor(application: application, name: name)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>security.delete_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "TODO">TODO</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html</a>
 		/// </summary>
 		public Task<DeletePrivilegesResponse> DeletePrivilegesAsync(Name application, Name name, Func<DeletePrivilegesDescriptor, IDeletePrivilegesRequest> selector = null, CancellationToken ct = default) => DeletePrivilegesAsync(selector.InvokeOrDefault(new DeletePrivilegesDescriptor(application: application, name: name)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>security.delete_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "TODO">TODO</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html</a>
 		/// </summary>
 		public DeletePrivilegesResponse DeletePrivileges(IDeletePrivilegesRequest request) => DoRequest<IDeletePrivilegesRequest, DeletePrivilegesResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>security.delete_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "TODO">TODO</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html</a>
 		/// </summary>
 		public Task<DeletePrivilegesResponse> DeletePrivilegesAsync(IDeletePrivilegesRequest request, CancellationToken ct = default) => DoRequestAsync<IDeletePrivilegesRequest, DeletePrivilegesResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -567,25 +567,25 @@ namespace Nest.Specification.SecurityApi
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.put_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "TODO">TODO</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html</a>
 		/// </summary>
 		public PutPrivilegesResponse PutPrivileges(Func<PutPrivilegesDescriptor, IPutPrivilegesRequest> selector) => PutPrivileges(selector.InvokeOrDefault(new PutPrivilegesDescriptor()));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.put_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "TODO">TODO</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html</a>
 		/// </summary>
 		public Task<PutPrivilegesResponse> PutPrivilegesAsync(Func<PutPrivilegesDescriptor, IPutPrivilegesRequest> selector, CancellationToken ct = default) => PutPrivilegesAsync(selector.InvokeOrDefault(new PutPrivilegesDescriptor()), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.put_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "TODO">TODO</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html</a>
 		/// </summary>
 		public PutPrivilegesResponse PutPrivileges(IPutPrivilegesRequest request) => DoRequest<IPutPrivilegesRequest, PutPrivilegesResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>security.put_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "TODO">TODO</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html</a>
 		/// </summary>
 		public Task<PutPrivilegesResponse> PutPrivilegesAsync(IPutPrivilegesRequest request, CancellationToken ct = default) => DoRequestAsync<IPutPrivilegesRequest, PutPrivilegesResponse>(request, request.RequestParameters, ct);
 		/// <summary>

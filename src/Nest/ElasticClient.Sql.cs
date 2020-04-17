@@ -39,73 +39,73 @@ namespace Nest.Specification.SqlApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>sql.clear_cursor</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Clear SQL cursor">Clear SQL cursor</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html</a>
 		/// </summary>
 		public ClearSqlCursorResponse ClearCursor(Func<ClearSqlCursorDescriptor, IClearSqlCursorRequest> selector) => ClearCursor(selector.InvokeOrDefault(new ClearSqlCursorDescriptor()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>sql.clear_cursor</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Clear SQL cursor">Clear SQL cursor</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html</a>
 		/// </summary>
 		public Task<ClearSqlCursorResponse> ClearCursorAsync(Func<ClearSqlCursorDescriptor, IClearSqlCursorRequest> selector, CancellationToken ct = default) => ClearCursorAsync(selector.InvokeOrDefault(new ClearSqlCursorDescriptor()), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>sql.clear_cursor</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Clear SQL cursor">Clear SQL cursor</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html</a>
 		/// </summary>
 		public ClearSqlCursorResponse ClearCursor(IClearSqlCursorRequest request) => DoRequest<IClearSqlCursorRequest, ClearSqlCursorResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>sql.clear_cursor</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Clear SQL cursor">Clear SQL cursor</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html</a>
 		/// </summary>
 		public Task<ClearSqlCursorResponse> ClearCursorAsync(IClearSqlCursorRequest request, CancellationToken ct = default) => DoRequestAsync<IClearSqlCursorRequest, ClearSqlCursorResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>sql.query</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Execute SQL">Execute SQL</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</a>
 		/// </summary>
 		public QuerySqlResponse Query(Func<QuerySqlDescriptor, IQuerySqlRequest> selector = null) => Query(selector.InvokeOrDefault(new QuerySqlDescriptor()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>sql.query</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Execute SQL">Execute SQL</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</a>
 		/// </summary>
 		public Task<QuerySqlResponse> QueryAsync(Func<QuerySqlDescriptor, IQuerySqlRequest> selector = null, CancellationToken ct = default) => QueryAsync(selector.InvokeOrDefault(new QuerySqlDescriptor()), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>sql.query</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Execute SQL">Execute SQL</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</a>
 		/// </summary>
 		public QuerySqlResponse Query(IQuerySqlRequest request) => DoRequest<IQuerySqlRequest, QuerySqlResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>sql.query</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Execute SQL">Execute SQL</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</a>
 		/// </summary>
 		public Task<QuerySqlResponse> QueryAsync(IQuerySqlRequest request, CancellationToken ct = default) => DoRequestAsync<IQuerySqlRequest, QuerySqlResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>sql.translate</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Translate SQL into Elasticsearch queries">Translate SQL into Elasticsearch queries</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html</a>
 		/// </summary>
 		public TranslateSqlResponse Translate(Func<TranslateSqlDescriptor, ITranslateSqlRequest> selector = null) => Translate(selector.InvokeOrDefault(new TranslateSqlDescriptor()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>sql.translate</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Translate SQL into Elasticsearch queries">Translate SQL into Elasticsearch queries</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html</a>
 		/// </summary>
 		public Task<TranslateSqlResponse> TranslateAsync(Func<TranslateSqlDescriptor, ITranslateSqlRequest> selector = null, CancellationToken ct = default) => TranslateAsync(selector.InvokeOrDefault(new TranslateSqlDescriptor()), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>sql.translate</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Translate SQL into Elasticsearch queries">Translate SQL into Elasticsearch queries</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html</a>
 		/// </summary>
 		public TranslateSqlResponse Translate(ITranslateSqlRequest request) => DoRequest<ITranslateSqlRequest, TranslateSqlResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>sql.translate</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Translate SQL into Elasticsearch queries">Translate SQL into Elasticsearch queries</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html</a>
 		/// </summary>
 		public Task<TranslateSqlResponse> TranslateAsync(ITranslateSqlRequest request, CancellationToken ct = default) => DoRequestAsync<ITranslateSqlRequest, TranslateSqlResponse>(request, request.RequestParameters, ct);
 	}
