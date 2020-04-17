@@ -519,39 +519,6 @@ namespace Nest
 		public FlushDescriptor WaitIfOngoing(bool? waitifongoing = true) => Qs("wait_if_ongoing", waitifongoing);
 	}
 
-	///<summary>Descriptor for SyncedFlush <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush-api.html</para></summary>
-	public partial class SyncedFlushDescriptor : RequestDescriptorBase<SyncedFlushDescriptor, SyncedFlushRequestParameters, ISyncedFlushRequest>, ISyncedFlushRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesSyncedFlush;
-		///<summary>/_flush/synced</summary>
-		public SyncedFlushDescriptor(): base()
-		{
-		}
-
-		///<summary>/{index}/_flush/synced</summary>
-		///<param name = "index">Optional, accepts null</param>
-		public SyncedFlushDescriptor(Indices index): base(r => r.Optional("index", index))
-		{
-		}
-
-		// values part of the url path
-		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
-		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
-		public SyncedFlushDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SyncedFlushDescriptor Index<TOther>()
-			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
-		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public SyncedFlushDescriptor AllIndices() => Index(Indices.All);
-		// Request parameters
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SyncedFlushDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SyncedFlushDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SyncedFlushDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
-	}
-
 	///<summary>Descriptor for ForceMerge <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</para></summary>
 	public partial class ForceMergeDescriptor : RequestDescriptorBase<ForceMergeDescriptor, ForceMergeRequestParameters, IForceMergeRequest>, IForceMergeRequest
 	{

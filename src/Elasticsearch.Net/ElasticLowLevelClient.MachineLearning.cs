@@ -187,19 +187,6 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.delete_trained_model", "model_id")]
 		public Task<TResponse> DeleteTrainedModelAsync<TResponse>(string modelId, DeleteTrainedModelRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ml/inference/{modelId:modelId}"), ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /_ml/data_frame/analytics/_estimate_memory_usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</para></summary>
-		///<param name = "body">Memory usage estimation definition</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		public TResponse EstimateMemoryUsage<TResponse>(PostData body, EstimateMemoryUsageRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ml/data_frame/analytics/_estimate_memory_usage", body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/data_frame/analytics/_estimate_memory_usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</para></summary>
-		///<param name = "body">Memory usage estimation definition</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		[MapsApi("ml.estimate_memory_usage", "body")]
-		public Task<TResponse> EstimateMemoryUsageAsync<TResponse>(PostData body, EstimateMemoryUsageRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ml/data_frame/analytics/_estimate_memory_usage", ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/_estimate_model_memory <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</para></summary>
 		///<param name = "body">The analysis config, plus cardinality estimates for fields it references</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

@@ -277,30 +277,6 @@ namespace Nest.Specification.MachineLearningApi
 		/// </summary>
 		public Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(IDeleteModelSnapshotRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse>(request, request.RequestParameters, ct);
 		/// <summary>
-		/// <c>POST</c> request to the <c>ml.estimate_memory_usage</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</a>
-		/// </summary>
-		public EstimateMemoryUsageResponse EstimateMemoryUsage(Func<EstimateMemoryUsageDescriptor, IEstimateMemoryUsageRequest> selector) => EstimateMemoryUsage(selector.InvokeOrDefault(new EstimateMemoryUsageDescriptor()));
-		/// <summary>
-		/// <c>POST</c> request to the <c>ml.estimate_memory_usage</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</a>
-		/// </summary>
-		public Task<EstimateMemoryUsageResponse> EstimateMemoryUsageAsync(Func<EstimateMemoryUsageDescriptor, IEstimateMemoryUsageRequest> selector, CancellationToken ct = default) => EstimateMemoryUsageAsync(selector.InvokeOrDefault(new EstimateMemoryUsageDescriptor()), ct);
-		/// <summary>
-		/// <c>POST</c> request to the <c>ml.estimate_memory_usage</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</a>
-		/// </summary>
-		public EstimateMemoryUsageResponse EstimateMemoryUsage(IEstimateMemoryUsageRequest request) => DoRequest<IEstimateMemoryUsageRequest, EstimateMemoryUsageResponse>(request, request.RequestParameters);
-		/// <summary>
-		/// <c>POST</c> request to the <c>ml.estimate_memory_usage</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</a>
-		/// </summary>
-		public Task<EstimateMemoryUsageResponse> EstimateMemoryUsageAsync(IEstimateMemoryUsageRequest request, CancellationToken ct = default) => DoRequestAsync<IEstimateMemoryUsageRequest, EstimateMemoryUsageResponse>(request, request.RequestParameters, ct);
-		/// <summary>
 		/// <c>POST</c> request to the <c>ml.estimate_model_memory</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</a>

@@ -431,24 +431,6 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
-	public partial interface IEstimateMemoryUsageRequest : IRequest<EstimateMemoryUsageRequestParameters>
-	{
-	}
-
-	///<summary>Request for EstimateMemoryUsage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</para></summary>
-	///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
-	public partial class EstimateMemoryUsageRequest : PlainRequestBase<EstimateMemoryUsageRequestParameters>, IEstimateMemoryUsageRequest
-	{
-		protected IEstimateMemoryUsageRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningEstimateMemoryUsage;
-		// values part of the url path
-		// Request parameters
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement EstimateMemoryUsageDescriptor and EstimateMemoryUsageRequest in a file called EstimateMemoryUsageRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
-	}
-
-	[InterfaceDataContract]
 	public partial interface IEstimateModelMemoryRequest : IRequest<EstimateModelMemoryRequestParameters>
 	{
 	}

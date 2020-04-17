@@ -31,6 +31,15 @@ namespace ApiGenerator.Configuration
 
 		public static string[] IgnoredApisHighLevel { get; } =
 		{
+			"searchable_snapshots.stats.json",
+			"searchable_snapshots.clear_cache.json",
+			"searchable_snapshots.mount.json",
+			"searchable_snapshots.repository_stats.json",
+			"indices.exists_index_template.json",
+			"autoscaling.delete_autoscaling_decision.json",
+			"autoscaling.get_autoscaling_policy.json",
+			"autoscaling.put_autoscaling_policy.json",
+
 			"autoscaling.get_autoscaling_decision.json", // 7.7 experimental
 			"eql.search.json", // 7.7 beta
 			"get_script_context.json", // 7.7 experimental
@@ -55,9 +64,6 @@ namespace ApiGenerator.Configuration
 			"scripts_painless_context.json", // 7.7 experimental
 
 			// 7.7 - to be implemented
-			"async_search.delete.json",
-			"async_search.get.json",
-			"async_search.submit.json",
 			"cluster.delete_component_template.json",
 			"cluster.get_component_template.json",
 			"cluster.put_component_template.json",

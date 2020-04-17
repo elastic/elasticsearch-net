@@ -21,11 +21,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Nest;
+using Nest.Specification.AsyncSearchApi;
 using Nest.Specification.AutoscalingApi;
 using Nest.Specification.CatApi;
 using Nest.Specification.ClusterApi;
 using Nest.Specification.CrossClusterReplicationApi;
-using Nest.Specification.DataFrameApi;
 using Nest.Specification.EnrichApi;
 using Nest.Specification.GraphApi;
 using Nest.Specification.IndexLifecycleManagementApi;
@@ -36,13 +36,11 @@ using Nest.Specification.MachineLearningApi;
 using Nest.Specification.MigrationApi;
 using Nest.Specification.NodesApi;
 using Nest.Specification.RollupApi;
-using Nest.Specification.SearchableSnapshotsApi;
 using Nest.Specification.SecurityApi;
 using Nest.Specification.SnapshotApi;
 using Nest.Specification.SnapshotLifecycleManagementApi;
 using Nest.Specification.SqlApi;
 using Nest.Specification.TasksApi;
-using Nest.Specification.TransformApi;
 using Nest.Specification.WatcherApi;
 using Nest.Specification.XPackApi;
 
@@ -53,6 +51,12 @@ namespace Nest
 	///</summary>
 	public partial interface IElasticClient
 	{
+		///<summary>Async Search APIs</summary>
+		AsyncSearchNamespace AsyncSearch
+		{
+			get;
+		}
+
 		///<summary>Autoscaling APIs</summary>
 		AutoscalingNamespace Autoscaling
 		{
@@ -73,12 +77,6 @@ namespace Nest
 
 		///<summary>Cross Cluster Replication APIs</summary>
 		CrossClusterReplicationNamespace CrossClusterReplication
-		{
-			get;
-		}
-
-		///<summary>Data Frame APIs</summary>
-		DataFrameNamespace DataFrame
 		{
 			get;
 		}
@@ -1079,12 +1077,6 @@ namespace Nest
 			get;
 		}
 
-		///<summary>Searchable Snapshots APIs</summary>
-		SearchableSnapshotsNamespace SearchableSnapshots
-		{
-			get;
-		}
-
 		///<summary>Security APIs</summary>
 		SecurityNamespace Security
 		{
@@ -1111,12 +1103,6 @@ namespace Nest
 
 		///<summary>Tasks APIs</summary>
 		TasksNamespace Tasks
-		{
-			get;
-		}
-
-		///<summary>Transform APIs</summary>
-		TransformNamespace Transform
 		{
 			get;
 		}

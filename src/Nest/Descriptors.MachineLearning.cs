@@ -251,17 +251,6 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for EstimateMemoryUsage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/estimate-memory-usage-dfanalytics.html</para></summary>
-	public partial class EstimateMemoryUsageDescriptor : RequestDescriptorBase<EstimateMemoryUsageDescriptor, EstimateMemoryUsageRequestParameters, IEstimateMemoryUsageRequest>, IEstimateMemoryUsageRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningEstimateMemoryUsage;
-		// values part of the url path
-		// Request parameters
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement EstimateMemoryUsageDescriptor and EstimateMemoryUsageRequest in a file called EstimateMemoryUsageRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
-	}
-
 	///<summary>Descriptor for EstimateModelMemory <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</para></summary>
 	public partial class EstimateModelMemoryDescriptor<TDocument> : RequestDescriptorBase<EstimateModelMemoryDescriptor<TDocument>, EstimateModelMemoryRequestParameters, IEstimateModelMemoryRequest>, IEstimateModelMemoryRequest
 	{

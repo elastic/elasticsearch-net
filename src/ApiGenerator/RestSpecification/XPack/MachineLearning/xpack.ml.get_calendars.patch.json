@@ -1,7 +1,0 @@
-{
-  "xpack.ml.get_calendars": {
-    "body": {
-      "description" : "Calendar selection details if not provided in URI"
-    }
-  }
-}

@@ -20,26 +20,85 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Specification.AsyncSearchApi;
 
-// ReSharper disable once CheckNamespace
-namespace Elasticsearch.Net.Specification.AsyncSearchApi
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
+namespace Nest
 {
-	///<summary>Request options for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
-	public class AsyncSearchDeleteRequestParameters : RequestParameters<AsyncSearchDeleteRequestParameters>
+	[InterfaceDataContract]
+	public partial interface IAsyncSearchDeleteRequest : IRequest<AsyncSearchDeleteRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		public override bool SupportsBody => false;
+		[IgnoreDataMember]
+		Id Id
+		{
+			get;
+		}
 	}
 
-	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
-	public class AsyncSearchGetRequestParameters : RequestParameters<AsyncSearchGetRequestParameters>
+	///<summary>Request for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
+	public partial class AsyncSearchDeleteRequest : PlainRequestBase<AsyncSearchDeleteRequestParameters>, IAsyncSearchDeleteRequest
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
-		///<summary>Specify the time interval in which the results (partial or final) for this search will be available</summary>
-		public TimeSpan KeepAlive
+		protected IAsyncSearchDeleteRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchDelete;
+		///<summary>/_async_search/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public AsyncSearchDeleteRequest(Id id): base(r => r.Required("id", id))
 		{
-			get => Q<TimeSpan>("keep_alive");
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected AsyncSearchDeleteRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IAsyncSearchDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IAsyncSearchGetRequest : IRequest<AsyncSearchGetRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id Id
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
+	public partial class AsyncSearchGetRequest : PlainRequestBase<AsyncSearchGetRequestParameters>, IAsyncSearchGetRequest
+	{
+		protected IAsyncSearchGetRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchGet;
+		///<summary>/_async_search/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public AsyncSearchGetRequest(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected AsyncSearchGetRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IAsyncSearchGetRequest.Id => Self.RouteValues.Get<Id>("id");
+		// Request parameters
+		///<summary>Specify the time interval in which the results (partial or final) for this search will be available</summary>
+		public Time KeepAlive
+		{
+			get => Q<Time>("keep_alive");
 			set => Q("keep_alive", value);
 		}
 
@@ -51,18 +110,68 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 		}
 
 		///<summary>Specify the time that the request should block waiting for the final response</summary>
-		public TimeSpan WaitForCompletionTimeout
+		public Time WaitForCompletionTimeout
 		{
-			get => Q<TimeSpan>("wait_for_completion_timeout");
+			get => Q<Time>("wait_for_completion_timeout");
 			set => Q("wait_for_completion_timeout", value);
 		}
 	}
 
-	///<summary>Request options for Submit <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
-	public class AsyncSearchSubmitRequestParameters : RequestParameters<AsyncSearchSubmitRequestParameters>
+	[InterfaceDataContract]
+	public partial interface IAsyncSearchSubmitRequest : IRequest<AsyncSearchSubmitRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
+		[IgnoreDataMember]
+		Indices Index
+		{
+			get;
+		}
+
+		[DataMember(Name = "docvalue_fields")]
+		Fields DocValueFields
+		{
+			get;
+			set;
+		}
+
+		[DataMember(Name = "stored_fields")]
+		Fields StoredFields
+		{
+			get;
+			set;
+		}
+
+		[DataMember(Name = "track_total_hits")]
+		bool? TrackTotalHits
+		{
+			get;
+			set;
+		}
+	}
+
+	public partial interface IAsyncSearchSubmitRequest<TInferDocument> : IAsyncSearchSubmitRequest
+	{
+	}
+
+	///<summary>Request for Submit <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
+	public partial class AsyncSearchSubmitRequest : PlainRequestBase<AsyncSearchSubmitRequestParameters>, IAsyncSearchSubmitRequest
+	{
+		protected IAsyncSearchSubmitRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchSubmit;
+		///<summary>/_async_search</summary>
+		public AsyncSearchSubmitRequest(): base()
+		{
+		}
+
+		///<summary>/{index}/_async_search</summary>
+		///<param name = "index">Optional, accepts null</param>
+		public AsyncSearchSubmitRequest(Indices index): base(r => r.Optional("index", index))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices IAsyncSearchSubmitRequest.Index => Self.RouteValues.Get<Indices>("index");
+		// Request parameters
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -118,13 +227,6 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 			set => Q("df", value);
 		}
 
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public string[] DocValueFields
-		{
-			get => Q<string[]>("docvalue_fields");
-			set => Q("docvalue_fields", value);
-		}
-
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards
 		{
@@ -147,9 +249,9 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 		}
 
 		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
-		public TimeSpan KeepAlive
+		public Time KeepAlive
 		{
-			get => Q<TimeSpan>("keep_alive");
+			get => Q<Time>("keep_alive");
 			set => Q("keep_alive", value);
 		}
 
@@ -201,10 +303,17 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 			set => Q("request_cache", value);
 		}
 
-		///<summary>A comma-separated list of specific routing values</summary>
-		public string[] Routing
+		///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"
+		////></para>
+		///</summary>
+		public Routing Routing
 		{
-			get => Q<string[]>("routing");
+			get => Q<Routing>("routing");
 			set => Q("routing", value);
 		}
 
@@ -229,17 +338,10 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 			set => Q("stats", value);
 		}
 
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public string[] StoredFields
-		{
-			get => Q<string[]>("stored_fields");
-			set => Q("stored_fields", value);
-		}
-
 		///<summary>Specify which field to use for suggestions</summary>
-		public string SuggestField
+		public Field SuggestField
 		{
-			get => Q<string>("suggest_field");
+			get => Q<Field>("suggest_field");
 			set => Q("suggest_field", value);
 		}
 
@@ -264,13 +366,6 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 			set => Q("suggest_text", value);
 		}
 
-		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
-		public bool? TrackTotalHits
-		{
-			get => Q<bool? >("track_total_hits");
-			set => Q("track_total_hits", value);
-		}
-
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys
 		{
@@ -279,10 +374,25 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 		}
 
 		///<summary>Specify the time that the request should block waiting for the final response</summary>
-		public TimeSpan WaitForCompletionTimeout
+		public Time WaitForCompletionTimeout
 		{
-			get => Q<TimeSpan>("wait_for_completion_timeout");
+			get => Q<Time>("wait_for_completion_timeout");
 			set => Q("wait_for_completion_timeout", value);
+		}
+	}
+
+	public partial class AsyncSearchSubmitRequest<TInferDocument> : AsyncSearchSubmitRequest, IAsyncSearchSubmitRequest<TInferDocument>
+	{
+		protected IAsyncSearchSubmitRequest<TInferDocument> TypedSelf => this;
+		///<summary>/{index}/_async_search</summary>
+		public AsyncSearchSubmitRequest(): base(typeof(TInferDocument))
+		{
+		}
+
+		///<summary>/{index}/_async_search</summary>
+		///<param name = "index">Optional, accepts null</param>
+		public AsyncSearchSubmitRequest(Indices index): base(index)
+		{
 		}
 	}
 }

@@ -1560,19 +1560,6 @@ namespace Elasticsearch.Net
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for ScriptsPainlessContext</summary>
-	public class ScriptsPainlessContextRequestParameters : RequestParameters<ScriptsPainlessContextRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
-		///<summary>Select a specific context to retrieve API information about</summary>
-		public string Context
-		{
-			get => Q<string>("context");
-			set => Q("context", value);
-		}
-	}
-
 	///<summary>Request options for ExecutePainlessScript <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</para></summary>
 	public class ExecutePainlessScriptRequestParameters : RequestParameters<ExecutePainlessScriptRequestParameters>
 	{
