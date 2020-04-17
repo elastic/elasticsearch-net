@@ -279,27 +279,27 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.estimate_model_memory</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</a>
 		/// </summary>
 		public EstimateModelMemoryResponse EstimateModelMemory<TDocument>(Func<EstimateModelMemoryDescriptor<TDocument>, IEstimateModelMemoryRequest> selector)
 			where TDocument : class => EstimateModelMemory(selector.InvokeOrDefault(new EstimateModelMemoryDescriptor<TDocument>()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.estimate_model_memory</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</a>
 		/// </summary>
 		public Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync<TDocument>(Func<EstimateModelMemoryDescriptor<TDocument>, IEstimateModelMemoryRequest> selector, CancellationToken ct = default)
 			where TDocument : class => EstimateModelMemoryAsync(selector.InvokeOrDefault(new EstimateModelMemoryDescriptor<TDocument>()), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.estimate_model_memory</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</a>
 		/// </summary>
 		public EstimateModelMemoryResponse EstimateModelMemory(IEstimateModelMemoryRequest request) => DoRequest<IEstimateModelMemoryRequest, EstimateModelMemoryResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.estimate_model_memory</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</a>
 		/// </summary>
 		public Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync(IEstimateModelMemoryRequest request, CancellationToken ct = default) => DoRequestAsync<IEstimateModelMemoryRequest, EstimateModelMemoryResponse>(request, request.RequestParameters, ct);
 		/// <summary>

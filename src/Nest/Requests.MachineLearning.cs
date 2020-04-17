@@ -435,7 +435,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for EstimateModelMemory</summary>
+	///<summary>Request for EstimateModelMemory <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</para></summary>
 	public partial class EstimateModelMemoryRequest : PlainRequestBase<EstimateModelMemoryRequestParameters>, IEstimateModelMemoryRequest
 	{
 		protected IEstimateModelMemoryRequest Self => this;
