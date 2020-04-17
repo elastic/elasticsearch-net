@@ -35,8 +35,10 @@ s => s
         .MissingLast()
         .UnmappedType(FieldType.Date)
         .Mode(SortMode.Average)
-        .NestedPath(p => p.Tags)
-        .NestedFilter(q => q.MatchAll())
+        .Nested(n => n
+            .Path(p => p.Tags)
+            .Filter(q => q.MatchAll())
+        )
     )
     .Field(f => f
         .Field(p => p.NumberOfCommits)
@@ -49,6 +51,10 @@ s => s
         .Order(SortOrder.Ascending)
         .Unit(DistanceUnit.Centimeters)
         .Mode(SortMode.Min)
+        .Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
+    )
+    .GeoDistance(g => g
+        .Field(p => p.LocationPoint)
         .Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
     )
     .Script(sc => sc
@@ -82,8 +88,11 @@ new SearchRequest<Project>
             Missing = "_last",
             UnmappedType = FieldType.Date,
             Mode = SortMode.Average,
-            NestedPath = Field<Project>(p => p.Tags),
-            NestedFilter = new MatchAllQuery(),
+            Nested = new NestedSort
+            {
+                Path = Field<Project>(p => p.Tags),
+                Filter = new MatchAllQuery()
+            }
         },
         new SortField
         {
@@ -98,6 +107,11 @@ new SearchRequest<Project>
             DistanceType = GeoDistanceType.Arc,
             GeoUnit = DistanceUnit.Centimeters,
             Mode = SortMode.Min,
+            Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
+        },
+        new GeoDistanceSort
+        {
+            Field = "locationPoint",
             Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
         },
         new ScriptSort
@@ -146,9 +160,11 @@ new SearchRequest<Project>
         "missing": "_last",
         "order": "desc",
         "mode": "avg",
-        "nested_path": "tags",
-        "nested_filter": {
-          "match_all": {}
+        "nested": {
+          "path": "tags",
+          "filter": {
+            "match_all": {}
+          }
         },
         "unmapped_type": "date"
       }
@@ -175,6 +191,20 @@ new SearchRequest<Project>
         "mode": "min",
         "distance_type": "arc",
         "unit": "cm"
+      }
+    },
+    {
+      "_geo_distance": {
+        "locationPoint": [
+          {
+            "lat": 70.0,
+            "lon": -70.0
+          },
+          {
+            "lat": -12.0,
+            "lon": 12.0
+          }
+        ]
       }
     },
     {
@@ -214,6 +244,7 @@ s => s
             .Filter(ff => ff
                 .MatchAll()
             )
+            .MaxChildren(50)
         )
     )
 )
@@ -238,7 +269,8 @@ new SearchRequest<Project>
             Nested = new NestedSort
             {
                 Path = Field<Project>(p => p.Tags),
-                Filter = new MatchAllQuery()
+                Filter = new MatchAllQuery(),
+                MaxChildren = 50
             }
         }
     }
@@ -259,7 +291,8 @@ new SearchRequest<Project>
           "path": "tags",
           "filter": {
             "match_all": {}
-          }
+          },
+          "max_children": 50
         },
         "unmapped_type": "date"
       }

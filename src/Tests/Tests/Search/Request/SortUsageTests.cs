@@ -35,10 +35,13 @@ namespace Tests.Search.Request
 								missing = "_last",
 								order = "desc",
 								mode = "avg",
-								nested_path = "tags",
-								nested_filter = new
+								nested = new
 								{
-									match_all = new { }
+									path = "tags",
+									filter = new
+									{
+										match_all = new { }
+									}
 								},
 								unmapped_type = "date"
 							}
@@ -77,6 +80,25 @@ namespace Tests.Search.Request
 					},
 					new
 					{
+						_geo_distance = new
+						{
+							locationPoint = new[]
+							{
+								new
+								{
+									lat = 70.0,
+									lon = -70.0
+								},
+								new
+								{
+									lat = -12.0,
+									lon = 12.0
+								}
+							}
+						}
+					},
+					new
+					{
 						_script = new
 						{
 							order = "asc",
@@ -106,8 +128,10 @@ namespace Tests.Search.Request
 					.MissingLast()
 					.UnmappedType(FieldType.Date)
 					.Mode(SortMode.Average)
-					.NestedPath(p => p.Tags)
-					.NestedFilter(q => q.MatchAll())
+					.Nested(n => n
+						.Path(p => p.Tags)
+						.Filter(q => q.MatchAll())
+					)
 				)
 				.Field(f => f
 					.Field(p => p.NumberOfCommits)
@@ -120,6 +144,10 @@ namespace Tests.Search.Request
 					.Order(SortOrder.Ascending)
 					.Unit(DistanceUnit.Centimeters)
 					.Mode(SortMode.Min)
+					.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
+				)
+				.GeoDistance(g => g
+					.Field(p => p.LocationPoint)
 					.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
 				)
 				.Script(sc => sc
@@ -149,10 +177,11 @@ namespace Tests.Search.Request
 						Missing = "_last",
 						UnmappedType = FieldType.Date,
 						Mode = SortMode.Average,
-#pragma warning disable 618
-						NestedPath = Field<Project>(p => p.Tags),
-						NestedFilter = new MatchAllQuery(),
-#pragma warning restore 618
+						Nested = new NestedSort
+						{
+							Path = Field<Project>(p => p.Tags),
+							Filter = new MatchAllQuery()
+						}
 					},
 					new SortField
 					{
@@ -167,6 +196,11 @@ namespace Tests.Search.Request
 						DistanceType = GeoDistanceType.Arc,
 						GeoUnit = DistanceUnit.Centimeters,
 						Mode = SortMode.Min,
+						Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
+					},
+					new GeoDistanceSort
+					{
+						Field = "locationPoint",
 						Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
 					},
 					new ScriptSort
@@ -192,7 +226,7 @@ namespace Tests.Search.Request
 	 * In Elasticsearch 6.1.0+, using `nested_path` and `nested_filter` for sorting on fields mapped as
 	 * `nested` types is deprecated. Instead, you should use the `nested` sort instead.
 	 */
-	[SkipVersion("<6.1.0", "Only available in Elasticsearch 6.1.0+")]
+	[SkipVersion("<6.5.0", "max_children added in Elasticsearch 6.5.0+")]
 	public class NestedSortUsageTests : SearchUsageTestBase
 	{
 		public NestedSortUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -216,7 +250,8 @@ namespace Tests.Search.Request
 									filter = new
 									{
 										match_all = new { }
-									}
+									},
+									max_children = 50
 								},
 								unmapped_type = "date"
 							}
@@ -238,6 +273,7 @@ namespace Tests.Search.Request
 						.Filter(ff => ff
 							.MatchAll()
 						)
+						.MaxChildren(50)
 					)
 				)
 			);
@@ -257,7 +293,8 @@ namespace Tests.Search.Request
 						Nested = new NestedSort
 						{
 							Path = Field<Project>(p => p.Tags),
-							Filter = new MatchAllQuery()
+							Filter = new MatchAllQuery(),
+							MaxChildren = 50
 						}
 					}
 				}
