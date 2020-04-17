@@ -262,6 +262,9 @@ namespace Nest
 		[DataMember(Name = "string_stats")]
 		IStringStatsAggregation StringStats { get; set; }
 
+		[DataMember(Name = "top_metrics")]
+		ITopMetricsAggregation TopMetrics { get; set; }
+
 		void Accept(IAggregationVisitor visitor);
 	}
 
@@ -381,6 +384,8 @@ namespace Nest
 		public IMedianAbsoluteDeviationAggregation MedianAbsoluteDeviation { get; set; }
 
 		public IStringStatsAggregation StringStats { get; set; }
+
+		public ITopMetricsAggregation TopMetrics { get; set; }
 
 		public void Accept(IAggregationVisitor visitor)
 		{
@@ -532,6 +537,8 @@ namespace Nest
 		IMedianAbsoluteDeviationAggregation IAggregationContainer.MedianAbsoluteDeviation { get; set; }
 
 		IStringStatsAggregation IAggregationContainer.StringStats { get; set; }
+
+		ITopMetricsAggregation IAggregationContainer.TopMetrics { get; set; }
 
 		public void Accept(IAggregationVisitor visitor)
 		{
@@ -830,6 +837,12 @@ namespace Nest
 			Func<StringStatsAggregationDescriptor<T>, IStringStatsAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.StringStats = d);
+
+		/// <inheritdoc cref="ITopMetricsAggregation"/>
+		public AggregationContainerDescriptor<T> TopMetrics(string name,
+			Func<TopMetricsAggregationDescriptor<T>, ITopMetricsAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.TopMetrics = d);
 
 		/// <summary>
 		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside
