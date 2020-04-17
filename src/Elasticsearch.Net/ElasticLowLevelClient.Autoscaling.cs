@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.AutoscalingApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelAutoscalingNamespace : NamespacedClientProxy
+	public partial class LowLevelAutoscalingNamespace : NamespacedClientProxy
 	{
 		internal LowLevelAutoscalingNamespace(ElasticLowLevelClient client): base(client)
 		{

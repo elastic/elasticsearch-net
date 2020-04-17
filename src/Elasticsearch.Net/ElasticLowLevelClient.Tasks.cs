@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.TasksApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelTasksNamespace : NamespacedClientProxy
+	public partial class LowLevelTasksNamespace : NamespacedClientProxy
 	{
 		internal LowLevelTasksNamespace(ElasticLowLevelClient client): base(client)
 		{

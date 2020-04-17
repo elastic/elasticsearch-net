@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.LicenseApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelLicenseNamespace : NamespacedClientProxy
+	public partial class LowLevelLicenseNamespace : NamespacedClientProxy
 	{
 		internal LowLevelLicenseNamespace(ElasticLowLevelClient client): base(client)
 		{

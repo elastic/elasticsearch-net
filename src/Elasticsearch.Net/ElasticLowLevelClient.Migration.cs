@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.MigrationApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelMigrationNamespace : NamespacedClientProxy
+	public partial class LowLevelMigrationNamespace : NamespacedClientProxy
 	{
 		internal LowLevelMigrationNamespace(ElasticLowLevelClient client): base(client)
 		{

@@ -40,7 +40,7 @@ namespace Elasticsearch.Net.@(CsharpNames.ApiNamespace).@(ns)@(CsharpNames.ApiNa
 	/// on <see cref="IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class @(CsharpNames.LowLevelClientNamespacePrefix)@(model.Key)@(CsharpNames.ClientNamespaceSuffix) : NamespacedClientProxy
+	public partial class @(CsharpNames.LowLevelClientNamespacePrefix)@(model.Key)@(CsharpNames.ClientNamespaceSuffix) : NamespacedClientProxy
 	{
 		internal @(CsharpNames.LowLevelClientNamespacePrefix)@(model.Key)@(CsharpNames.ClientNamespaceSuffix)(ElasticLowLevelClient client) : base(client) {}
 @if (ns == "Cat")
