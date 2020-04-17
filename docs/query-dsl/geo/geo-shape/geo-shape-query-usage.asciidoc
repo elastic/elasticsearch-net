@@ -79,6 +79,69 @@ new GeoShapeQuery
 }
 ----
 
+[[geo-shape-query-multipoint]]
+[float]
+== Querying with MultiPoint
+
+NOTE: Elasticsearch 7.7.0+ required when MultiPoint is indexed using BKD trees (the default).
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.GeoShape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.LocationShape)
+    .Shape(s => s
+        .MultiPoint(MultiPointCoordinates)
+    )
+    .Relation(GeoShapeRelation.Intersects)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new GeoShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.LocationShape),
+    Shape = new MultiPointGeoShape(MultiPointCoordinates),
+    Relation = GeoShapeRelation.Intersects,
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "geo_shape": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "locationShape": {
+      "relation": "intersects",
+      "shape": {
+        "type": "multipoint",
+        "coordinates": [
+          [
+            38.897676,
+            -77.03653
+          ],
+          [
+            38.889939,
+            -77.009051
+          ]
+        ]
+      }
+    }
+  }
+}
+----
+
 [[geo-shape-query-linestring]]
 [float]
 == Querying with LineString
@@ -816,6 +879,64 @@ new GeoShapeQuery
             45.0,
             -45.0
           ]
+        ]
+      }
+    }
+  }
+}
+----
+
+[[geo-shape-query-circle]]
+[float]
+== Querying with Circle
+
+NOTE: Available in Elasticsearch 7.7.0+
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.GeoShape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.LocationShape)
+    .Shape(s => s
+        .Circle(CircleCoordinates, "100m")
+    )
+    .Relation(GeoShapeRelation.Intersects)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new GeoShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.LocationShape),
+    Shape = new CircleGeoShape(CircleCoordinates, "100m"),
+    Relation = GeoShapeRelation.Intersects,
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "geo_shape": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "locationShape": {
+      "relation": "intersects",
+      "shape": {
+        "type": "circle",
+        "radius": "100m",
+        "coordinates": [
+          45.0,
+          -45.0
         ]
       }
     }
