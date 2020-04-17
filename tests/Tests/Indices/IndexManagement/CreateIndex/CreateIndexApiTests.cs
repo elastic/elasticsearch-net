@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -315,6 +316,92 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			var aliases = indexResponse.Indices[CallIsolatedValue].Aliases;
 			aliases.Count.Should().Be(1);
 			aliases[CallIsolatedValue + "-alias"].IsWriteIndex.Should().BeTrue();
+		}
+	}
+
+
+	[SkipVersion("<7.7.0", "hidden indices and aliases introduced in 7.7.0")]
+	public class CreateHiddenIndexApiTests
+		: ApiIntegrationTestBase<WritableCluster, CreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
+	{
+		public CreateHiddenIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson => new
+		{
+			settings = new Dictionary<string, object>
+			{
+				{ "index.number_of_replicas", 0 },
+				{ "index.number_of_shards", 1 },
+				{ "index.hidden", true }
+			},
+			aliases = new Dictionary<string, object>
+			{
+				{ CallIsolatedValue + "-alias", new { is_write_index = true, is_hidden = true } }
+			}
+		};
+
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<CreateIndexDescriptor, ICreateIndexRequest> Fluent => d => d
+			.Settings(s => s
+				.NumberOfReplicas(0)
+				.NumberOfShards(1)
+				.Hidden()
+			)
+			.Aliases(a => a
+				.Alias(CallIsolatedValue + "-alias", aa => aa
+					.IsWriteIndex()
+					.IsHidden()
+				)
+			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+		protected override CreateIndexRequest Initializer => new CreateIndexRequest(CallIsolatedValue)
+		{
+			Settings = new Nest.IndexSettings
+			{
+				NumberOfReplicas = 0,
+				NumberOfShards = 1,
+				Hidden = true
+			},
+			Aliases = new Aliases
+			{
+				{ CallIsolatedValue + "-alias", new Alias { IsWriteIndex = true, IsHidden = true} }
+			}
+		};
+
+		protected override string UrlPath => $"/{CallIsolatedValue}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Indices.Create(CallIsolatedValue, f),
+			(client, f) => client.Indices.CreateAsync(CallIsolatedValue, f),
+			(client, r) => client.Indices.Create(r),
+			(client, r) => client.Indices.CreateAsync(r)
+		);
+
+		protected override CreateIndexDescriptor NewDescriptor() => new CreateIndexDescriptor(CallIsolatedValue);
+
+		protected override void ExpectResponse(CreateIndexResponse response)
+		{
+			response.ShouldBeValid();
+			response.Acknowledged.Should().BeTrue();
+			response.ShardsAcknowledged.Should().BeTrue();
+
+			var indexResponse = Client.Indices.Get(CallIsolatedValue);
+
+			indexResponse.ShouldBeValid();
+			indexResponse.Indices.Should().NotBeEmpty().And.ContainKey(CallIsolatedValue);
+			var index = indexResponse.Indices[CallIsolatedValue];
+
+			index.Settings.Hidden.Should().BeTrue();
+
+			var aliases = indexResponse.Indices[CallIsolatedValue].Aliases;
+			aliases.Count.Should().Be(1);
+			aliases[CallIsolatedValue + "-alias"].IsWriteIndex.Should().BeTrue();
+			aliases[CallIsolatedValue + "-alias"].IsHidden.Should().BeTrue();
 		}
 	}
 }
