@@ -296,6 +296,42 @@ namespace Nest
 		public CatMasterDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
+	///<summary>Descriptor for Jobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
+	public partial class CatJobsDescriptor : RequestDescriptorBase<CatJobsDescriptor, CatJobsRequestParameters, ICatJobsRequest>, ICatJobsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatJobs;
+		///<summary>/_cat/ml/anomaly_detectors</summary>
+		public CatJobsDescriptor(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/anomaly_detectors/{job_id}</summary>
+		///<param name = "jobId">Optional, accepts null</param>
+		public CatJobsDescriptor(Id jobId): base(r => r.Optional("job_id", jobId))
+		{
+		}
+
+		// values part of the url path
+		Id ICatJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		///<summary>The ID of the jobs stats to fetch</summary>
+		public CatJobsDescriptor JobId(Id jobId) => Assign(jobId, (a, v) => a.RouteValues.Optional("job_id", v));
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public CatJobsDescriptor AllowNoJobs(bool? allownojobs = true) => Qs("allow_no_jobs", allownojobs);
+		///<summary>The unit in which to display byte values</summary>
+		public CatJobsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatJobsDescriptor Format(string format) => Qs("format", format);
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatJobsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		///<summary>Return help information</summary>
+		public CatJobsDescriptor Help(bool? help = true) => Qs("help", help);
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatJobsDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatJobsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
+	}
+
 	///<summary>Descriptor for TrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
 	public partial class CatTrainedModelsDescriptor : RequestDescriptorBase<CatTrainedModelsDescriptor, CatTrainedModelsRequestParameters, ICatTrainedModelsRequest>, ICatTrainedModelsRequest
 	{
