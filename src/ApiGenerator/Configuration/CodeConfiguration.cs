@@ -58,7 +58,6 @@ namespace ApiGenerator.Configuration
 			"async_search.delete.json",
 			"async_search.get.json",
 			"async_search.submit.json",
-			"cat.ml_data_frame_analytics.json",
 			"cluster.delete_component_template.json",
 			"cluster.get_component_template.json",
 			"cluster.put_component_template.json",
