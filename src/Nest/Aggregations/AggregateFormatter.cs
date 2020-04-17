@@ -51,6 +51,7 @@ namespace Nest
 			{ Parser.Hits, 8 },
 			{ Parser.Location, 9 },
 			{ Parser.Fields, 10 },
+			{ Parser.Min, 11 },
 			{ Parser.Top, 12 },
 		};
 
@@ -152,6 +153,9 @@ namespace Nest
 					case 10:
 						aggregate = GetMatrixStatsAggregate(ref reader, formatterResolver, meta);
 						break;
+					case 11:
+						aggregate = GetBoxplotAggregate(ref reader, formatterResolver, meta);
+            break;
 					case 12:
 						aggregate = GetTopMetricsAggregate(ref reader, formatterResolver, meta);
 						break;
@@ -216,6 +220,32 @@ namespace Nest
 			return matrixStats;
 		}
 
+		private IAggregate GetBoxplotAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, IReadOnlyDictionary<string, object> meta)
+		{
+			var boxplot = new BoxplotAggregate
+			{
+				Min = reader.ReadDouble(),
+				Meta = meta
+			};
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "max"
+			reader.ReadNext(); // :
+			boxplot.Max = reader.ReadDouble();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "q1"
+			reader.ReadNext(); // :
+			boxplot.Q1 = reader.ReadDouble();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "q2"
+			reader.ReadNext(); // :
+			boxplot.Q2 = reader.ReadDouble();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "q3"
+			reader.ReadNext(); // :
+			boxplot.Q3 = reader.ReadDouble();
+			return boxplot;
+    }
+    
 		private IAggregate GetTopMetricsAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, IReadOnlyDictionary<string, object> meta)
 		{
 			var topMetrics = new TopMetricsAggregate { Meta = meta };
@@ -995,6 +1025,7 @@ namespace Nest
 			public const string Location = "location";
 			public const string MaxScore = "max_score";
 			public const string Meta = "meta";
+			public const string Min = "min";
 			public const string MinLength = "min_length";
 
 			public const string Score = "score";
