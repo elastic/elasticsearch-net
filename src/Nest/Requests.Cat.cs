@@ -611,6 +611,352 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface ICatDataFrameAnalyticsRequest : IRequest<CatDataFrameAnalyticsRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id Id
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for DataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html</para></summary>
+	public partial class CatDataFrameAnalyticsRequest : PlainRequestBase<CatDataFrameAnalyticsRequestParameters>, ICatDataFrameAnalyticsRequest
+	{
+		protected ICatDataFrameAnalyticsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatDataFrameAnalytics;
+		///<summary>/_cat/ml/data_frame/analytics</summary>
+		public CatDataFrameAnalyticsRequest(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/data_frame/analytics/{id}</summary>
+		///<param name = "id">Optional, accepts null</param>
+		public CatDataFrameAnalyticsRequest(Id id): base(r => r.Optional("id", id))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id ICatDataFrameAnalyticsRequest.Id => Self.RouteValues.Get<Id>("id");
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no configs. (This includes `_all` string or when no configs have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
+
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
+		}
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers
+		{
+			get => Q<string[]>("h");
+			set => Q("h", value);
+		}
+
+		///<summary>Return help information</summary>
+		public bool? Help
+		{
+			get => Q<bool? >("help");
+			set => Q("help", value);
+		}
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns
+		{
+			get => Q<string[]>("s");
+			set => Q("s", value);
+		}
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool? Verbose
+		{
+			get => Q<bool? >("v");
+			set => Q("v", value);
+		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface ICatDatafeedsRequest : IRequest<CatDatafeedsRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id DatafeedId
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Datafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
+	public partial class CatDatafeedsRequest : PlainRequestBase<CatDatafeedsRequestParameters>, ICatDatafeedsRequest
+	{
+		protected ICatDatafeedsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatDatafeeds;
+		///<summary>/_cat/ml/datafeeds</summary>
+		public CatDatafeedsRequest(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/datafeeds/{datafeed_id}</summary>
+		///<param name = "datafeedId">Optional, accepts null</param>
+		public CatDatafeedsRequest(Id datafeedId): base(r => r.Optional("datafeed_id", datafeedId))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id ICatDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds
+		{
+			get => Q<bool? >("allow_no_datafeeds");
+			set => Q("allow_no_datafeeds", value);
+		}
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
+		}
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers
+		{
+			get => Q<string[]>("h");
+			set => Q("h", value);
+		}
+
+		///<summary>Return help information</summary>
+		public bool? Help
+		{
+			get => Q<bool? >("help");
+			set => Q("help", value);
+		}
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns
+		{
+			get => Q<string[]>("s");
+			set => Q("s", value);
+		}
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool? Verbose
+		{
+			get => Q<bool? >("v");
+			set => Q("v", value);
+		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface ICatJobsRequest : IRequest<CatJobsRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id JobId
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Jobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
+	public partial class CatJobsRequest : PlainRequestBase<CatJobsRequestParameters>, ICatJobsRequest
+	{
+		protected ICatJobsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatJobs;
+		///<summary>/_cat/ml/anomaly_detectors</summary>
+		public CatJobsRequest(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/anomaly_detectors/{job_id}</summary>
+		///<param name = "jobId">Optional, accepts null</param>
+		public CatJobsRequest(Id jobId): base(r => r.Optional("job_id", jobId))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id ICatJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs
+		{
+			get => Q<bool? >("allow_no_jobs");
+			set => Q("allow_no_jobs", value);
+		}
+
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
+		}
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers
+		{
+			get => Q<string[]>("h");
+			set => Q("h", value);
+		}
+
+		///<summary>Return help information</summary>
+		public bool? Help
+		{
+			get => Q<bool? >("help");
+			set => Q("help", value);
+		}
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns
+		{
+			get => Q<string[]>("s");
+			set => Q("s", value);
+		}
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool? Verbose
+		{
+			get => Q<bool? >("v");
+			set => Q("v", value);
+		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface ICatTrainedModelsRequest : IRequest<CatTrainedModelsRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id ModelId
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for TrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
+	public partial class CatTrainedModelsRequest : PlainRequestBase<CatTrainedModelsRequestParameters>, ICatTrainedModelsRequest
+	{
+		protected ICatTrainedModelsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatTrainedModels;
+		///<summary>/_cat/ml/trained_models</summary>
+		public CatTrainedModelsRequest(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/trained_models/{model_id}</summary>
+		///<param name = "modelId">Optional, accepts null</param>
+		public CatTrainedModelsRequest(Id modelId): base(r => r.Optional("model_id", modelId))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id ICatTrainedModelsRequest.ModelId => Self.RouteValues.Get<Id>("model_id");
+		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard expression matches no trained models. (This includes `_all` string or when no trained models have been
+		/// specified)
+		///</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
+
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes? Bytes
+		{
+			get => Q<Bytes? >("bytes");
+			set => Q("bytes", value);
+		}
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
+		}
+
+		///<summary>skips a number of trained models</summary>
+		public int? From
+		{
+			get => Q<int? >("from");
+			set => Q("from", value);
+		}
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers
+		{
+			get => Q<string[]>("h");
+			set => Q("h", value);
+		}
+
+		///<summary>Return help information</summary>
+		public bool? Help
+		{
+			get => Q<bool? >("help");
+			set => Q("help", value);
+		}
+
+		///<summary>specifies a max number of trained models to get</summary>
+		public int? Size
+		{
+			get => Q<int? >("size");
+			set => Q("size", value);
+		}
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns
+		{
+			get => Q<string[]>("s");
+			set => Q("s", value);
+		}
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool? Verbose
+		{
+			get => Q<bool? >("v");
+			set => Q("v", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface ICatNodeAttributesRequest : IRequest<CatNodeAttributesRequestParameters>
 	{
 	}
@@ -1537,6 +1883,97 @@ namespace Nest
 		public Size? Size
 		{
 			get => Q<Size? >("size");
+			set => Q("size", value);
+		}
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public string[] SortByColumns
+		{
+			get => Q<string[]>("s");
+			set => Q("s", value);
+		}
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool? Verbose
+		{
+			get => Q<bool? >("v");
+			set => Q("v", value);
+		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface ICatTransformsRequest : IRequest<CatTransformsRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id TransformId
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Transforms <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</para></summary>
+	public partial class CatTransformsRequest : PlainRequestBase<CatTransformsRequestParameters>, ICatTransformsRequest
+	{
+		protected ICatTransformsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatTransforms;
+		///<summary>/_cat/transforms</summary>
+		public CatTransformsRequest(): base()
+		{
+		}
+
+		///<summary>/_cat/transforms/{transform_id}</summary>
+		///<param name = "transformId">Optional, accepts null</param>
+		public CatTransformsRequest(Id transformId): base(r => r.Optional("transform_id", transformId))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id ICatTransformsRequest.TransformId => Self.RouteValues.Get<Id>("transform_id");
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no transforms. (This includes `_all` string or when no transforms have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set
+			{
+				Q("format", value);
+				SetAcceptHeader(value);
+			}
+		}
+
+		///<summary>skips a number of transform configs, defaults to 0</summary>
+		public int? From
+		{
+			get => Q<int? >("from");
+			set => Q("from", value);
+		}
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public string[] Headers
+		{
+			get => Q<string[]>("h");
+			set => Q("h", value);
+		}
+
+		///<summary>Return help information</summary>
+		public bool? Help
+		{
+			get => Q<bool? >("help");
+			set => Q("help", value);
+		}
+
+		///<summary>specifies a max number of transforms to get, defaults to 100</summary>
+		public int? Size
+		{
+			get => Q<int? >("size");
 			set => Q("size", value);
 		}
 

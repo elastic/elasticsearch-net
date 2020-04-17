@@ -38,7 +38,7 @@ namespace Tests.Search.Search
 			}
 		};
 
-		protected override int ExpectStatusCode => 400;
+		protected override int ExpectStatusCode => 500;
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.From(10)
@@ -67,9 +67,9 @@ namespace Tests.Search.Search
 			response.ShouldNotBeValid();
 			var serverError = response.ServerError;
 			serverError.Should().NotBeNull();
-			serverError.Status.Should().Be(400);
+			serverError.Status.Should().Be(ExpectStatusCode);
 			serverError.Error.Reason.Should().Be("all shards failed");
-			serverError.Error.RootCause.First().Reason.Should().Contain("[-1m]");
+			serverError.Error.RootCause.First().Reason.Should().Contain("value source config is invalid");
 		}
 	}
 }

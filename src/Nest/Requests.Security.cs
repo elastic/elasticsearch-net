@@ -491,6 +491,20 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IGetBuiltinPrivilegesRequest : IRequest<GetBuiltinPrivilegesRequestParameters>
+	{
+	}
+
+	///<summary>Request for GetBuiltinPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html</para></summary>
+	public partial class GetBuiltinPrivilegesRequest : PlainRequestBase<GetBuiltinPrivilegesRequestParameters>, IGetBuiltinPrivilegesRequest
+	{
+		protected IGetBuiltinPrivilegesRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetBuiltinPrivileges;
+	// values part of the url path
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IGetPrivilegesRequest : IRequest<GetPrivilegesRequestParameters>
 	{
 		[IgnoreDataMember]

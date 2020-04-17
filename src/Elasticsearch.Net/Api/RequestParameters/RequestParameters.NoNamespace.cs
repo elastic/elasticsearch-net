@@ -1444,6 +1444,43 @@ namespace Elasticsearch.Net
 		}
 	}
 
+	///<summary>Request options for RankEval <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</para></summary>
+	public class RankEvalRequestParameters : RequestParameters<RankEvalRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices
+		{
+			get => Q<bool? >("allow_no_indices");
+			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
+
+		///<summary>Search operation type</summary>
+		public SearchType? SearchType
+		{
+			get => Q<SearchType? >("search_type");
+			set => Q("search_type", value);
+		}
+	}
+
 	///<summary>Request options for ReindexOnServer <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</para></summary>
 	public class ReindexOnServerRequestParameters : RequestParameters<ReindexOnServerRequestParameters>
 	{

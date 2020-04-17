@@ -277,6 +277,32 @@ namespace Nest.Specification.MachineLearningApi
 		/// </summary>
 		public Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(IDeleteModelSnapshotRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>ml.estimate_model_memory</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</a>
+		/// </summary>
+		public EstimateModelMemoryResponse EstimateModelMemory<TDocument>(Func<EstimateModelMemoryDescriptor<TDocument>, IEstimateModelMemoryRequest> selector)
+			where TDocument : class => EstimateModelMemory(selector.InvokeOrDefault(new EstimateModelMemoryDescriptor<TDocument>()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>ml.estimate_model_memory</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</a>
+		/// </summary>
+		public Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync<TDocument>(Func<EstimateModelMemoryDescriptor<TDocument>, IEstimateModelMemoryRequest> selector, CancellationToken ct = default)
+			where TDocument : class => EstimateModelMemoryAsync(selector.InvokeOrDefault(new EstimateModelMemoryDescriptor<TDocument>()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ml.estimate_model_memory</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</a>
+		/// </summary>
+		public EstimateModelMemoryResponse EstimateModelMemory(IEstimateModelMemoryRequest request) => DoRequest<IEstimateModelMemoryRequest, EstimateModelMemoryResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ml.estimate_model_memory</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</a>
+		/// </summary>
+		public Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync(IEstimateModelMemoryRequest request, CancellationToken ct = default) => DoRequestAsync<IEstimateModelMemoryRequest, EstimateModelMemoryResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>ml.flush_job</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</a>
@@ -908,6 +934,30 @@ namespace Nest.Specification.MachineLearningApi
 		/// <a href = "http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</a>
 		/// </summary>
 		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request, CancellationToken ct = default) => DoRequestAsync<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters, ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ml.set_upgrade_mode</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</a>
+		/// </summary>
+		public SetUpgradeModeResponse SetUpgradeMode(Func<SetUpgradeModeDescriptor, ISetUpgradeModeRequest> selector = null) => SetUpgradeMode(selector.InvokeOrDefault(new SetUpgradeModeDescriptor()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>ml.set_upgrade_mode</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</a>
+		/// </summary>
+		public Task<SetUpgradeModeResponse> SetUpgradeModeAsync(Func<SetUpgradeModeDescriptor, ISetUpgradeModeRequest> selector = null, CancellationToken ct = default) => SetUpgradeModeAsync(selector.InvokeOrDefault(new SetUpgradeModeDescriptor()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ml.set_upgrade_mode</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</a>
+		/// </summary>
+		public SetUpgradeModeResponse SetUpgradeMode(ISetUpgradeModeRequest request) => DoRequest<ISetUpgradeModeRequest, SetUpgradeModeResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ml.set_upgrade_mode</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</a>
+		/// </summary>
+		public Task<SetUpgradeModeResponse> SetUpgradeModeAsync(ISetUpgradeModeRequest request, CancellationToken ct = default) => DoRequestAsync<ISetUpgradeModeRequest, SetUpgradeModeResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.start_datafeed</c> API, read more about this API online:
 		/// <para></para>

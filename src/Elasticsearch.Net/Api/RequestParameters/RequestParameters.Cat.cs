@@ -478,8 +478,8 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for MlDataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html</para></summary>
-	public class MlDataFrameAnalyticsRequestParameters : RequestParameters<MlDataFrameAnalyticsRequestParameters>
+	///<summary>Request options for DataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html</para></summary>
+	public class CatDataFrameAnalyticsRequestParameters : RequestParameters<CatDataFrameAnalyticsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
@@ -537,8 +537,8 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for MlDatafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
-	public class MlDatafeedsRequestParameters : RequestParameters<MlDatafeedsRequestParameters>
+	///<summary>Request options for Datafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
+	public class CatDatafeedsRequestParameters : RequestParameters<CatDatafeedsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
@@ -589,8 +589,8 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for MlJobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
-	public class MlJobsRequestParameters : RequestParameters<MlJobsRequestParameters>
+	///<summary>Request options for Jobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
+	public class CatJobsRequestParameters : RequestParameters<CatJobsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
@@ -648,8 +648,8 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for MlTrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
-	public class MlTrainedModelsRequestParameters : RequestParameters<MlTrainedModelsRequestParameters>
+	///<summary>Request options for TrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
+	public class CatTrainedModelsRequestParameters : RequestParameters<CatTrainedModelsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
@@ -1478,7 +1478,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	}
 
 	///<summary>Request options for Transforms <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</para></summary>
-	public class TransformsRequestParameters : RequestParameters<TransformsRequestParameters>
+	public class CatTransformsRequestParameters : RequestParameters<CatTransformsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;

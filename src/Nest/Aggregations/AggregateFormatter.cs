@@ -51,7 +51,8 @@ namespace Nest
 			{ Parser.Hits, 8 },
 			{ Parser.Location, 9 },
 			{ Parser.Fields, 10 },
-			{ Parser.Min, 11 }
+			{ Parser.Min, 11 },
+			{ Parser.Top, 12 },
 		};
 
 		private static readonly byte[] SumOtherDocCount = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.SumOtherDocCount);
@@ -154,6 +155,9 @@ namespace Nest
 						break;
 					case 11:
 						aggregate = GetBoxplotAggregate(ref reader, formatterResolver, meta);
+            break;
+					case 12:
+						aggregate = GetTopMetricsAggregate(ref reader, formatterResolver, meta);
 						break;
 				}
 			}
@@ -240,6 +244,14 @@ namespace Nest
 			reader.ReadNext(); // :
 			boxplot.Q3 = reader.ReadDouble();
 			return boxplot;
+    }
+    
+		private IAggregate GetTopMetricsAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, IReadOnlyDictionary<string, object> meta)
+		{
+			var topMetrics = new TopMetricsAggregate { Meta = meta };
+			var formatter = formatterResolver.GetFormatter<List<TopMetric>>();
+			topMetrics.Top = formatter.Deserialize(ref reader, formatterResolver);
+			return topMetrics;
 		}
 
 		private IAggregate GetTopHitsAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, IReadOnlyDictionary<string, object> meta)
@@ -1002,6 +1014,7 @@ namespace Nest
 			public const string DocCountErrorUpperBound = "doc_count_error_upper_bound";
 			public const string Fields = "fields";
 			public const string From = "from";
+			public const string Top = "top";
 
 			public const string FromAsString = "from_as_string";
 			public const string Hits = "hits";

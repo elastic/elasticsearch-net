@@ -278,6 +278,152 @@ namespace Nest
 		public CatMasterDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
+	///<summary>Descriptor for DataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html</para></summary>
+	public partial class CatDataFrameAnalyticsDescriptor : RequestDescriptorBase<CatDataFrameAnalyticsDescriptor, CatDataFrameAnalyticsRequestParameters, ICatDataFrameAnalyticsRequest>, ICatDataFrameAnalyticsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatDataFrameAnalytics;
+		///<summary>/_cat/ml/data_frame/analytics</summary>
+		public CatDataFrameAnalyticsDescriptor(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/data_frame/analytics/{id}</summary>
+		///<param name = "id">Optional, accepts null</param>
+		public CatDataFrameAnalyticsDescriptor(Id id): base(r => r.Optional("id", id))
+		{
+		}
+
+		// values part of the url path
+		Id ICatDataFrameAnalyticsRequest.Id => Self.RouteValues.Get<Id>("id");
+		///<summary>The ID of the data frame analytics to fetch</summary>
+		public CatDataFrameAnalyticsDescriptor Id(Id id) => Assign(id, (a, v) => a.RouteValues.Optional("id", v));
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no configs. (This includes `_all` string or when no configs have been specified)</summary>
+		public CatDataFrameAnalyticsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
+		///<summary>The unit in which to display byte values</summary>
+		public CatDataFrameAnalyticsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatDataFrameAnalyticsDescriptor Format(string format) => Qs("format", format);
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatDataFrameAnalyticsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		///<summary>Return help information</summary>
+		public CatDataFrameAnalyticsDescriptor Help(bool? help = true) => Qs("help", help);
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatDataFrameAnalyticsDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatDataFrameAnalyticsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
+	}
+
+	///<summary>Descriptor for Datafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
+	public partial class CatDatafeedsDescriptor : RequestDescriptorBase<CatDatafeedsDescriptor, CatDatafeedsRequestParameters, ICatDatafeedsRequest>, ICatDatafeedsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatDatafeeds;
+		///<summary>/_cat/ml/datafeeds</summary>
+		public CatDatafeedsDescriptor(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/datafeeds/{datafeed_id}</summary>
+		///<param name = "datafeedId">Optional, accepts null</param>
+		public CatDatafeedsDescriptor(Id datafeedId): base(r => r.Optional("datafeed_id", datafeedId))
+		{
+		}
+
+		// values part of the url path
+		Id ICatDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		///<summary>The ID of the datafeeds stats to fetch</summary>
+		public CatDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(datafeedId, (a, v) => a.RouteValues.Optional("datafeed_id", v));
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public CatDatafeedsDescriptor AllowNoDatafeeds(bool? allownodatafeeds = true) => Qs("allow_no_datafeeds", allownodatafeeds);
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatDatafeedsDescriptor Format(string format) => Qs("format", format);
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatDatafeedsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		///<summary>Return help information</summary>
+		public CatDatafeedsDescriptor Help(bool? help = true) => Qs("help", help);
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatDatafeedsDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatDatafeedsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
+	}
+
+	///<summary>Descriptor for Jobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
+	public partial class CatJobsDescriptor : RequestDescriptorBase<CatJobsDescriptor, CatJobsRequestParameters, ICatJobsRequest>, ICatJobsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatJobs;
+		///<summary>/_cat/ml/anomaly_detectors</summary>
+		public CatJobsDescriptor(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/anomaly_detectors/{job_id}</summary>
+		///<param name = "jobId">Optional, accepts null</param>
+		public CatJobsDescriptor(Id jobId): base(r => r.Optional("job_id", jobId))
+		{
+		}
+
+		// values part of the url path
+		Id ICatJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		///<summary>The ID of the jobs stats to fetch</summary>
+		public CatJobsDescriptor JobId(Id jobId) => Assign(jobId, (a, v) => a.RouteValues.Optional("job_id", v));
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public CatJobsDescriptor AllowNoJobs(bool? allownojobs = true) => Qs("allow_no_jobs", allownojobs);
+		///<summary>The unit in which to display byte values</summary>
+		public CatJobsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatJobsDescriptor Format(string format) => Qs("format", format);
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatJobsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		///<summary>Return help information</summary>
+		public CatJobsDescriptor Help(bool? help = true) => Qs("help", help);
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatJobsDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatJobsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
+	}
+
+	///<summary>Descriptor for TrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
+	public partial class CatTrainedModelsDescriptor : RequestDescriptorBase<CatTrainedModelsDescriptor, CatTrainedModelsRequestParameters, ICatTrainedModelsRequest>, ICatTrainedModelsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatTrainedModels;
+		///<summary>/_cat/ml/trained_models</summary>
+		public CatTrainedModelsDescriptor(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/trained_models/{model_id}</summary>
+		///<param name = "modelId">Optional, accepts null</param>
+		public CatTrainedModelsDescriptor(Id modelId): base(r => r.Optional("model_id", modelId))
+		{
+		}
+
+		// values part of the url path
+		Id ICatTrainedModelsRequest.ModelId => Self.RouteValues.Get<Id>("model_id");
+		///<summary>The ID of the trained models stats to fetch</summary>
+		public CatTrainedModelsDescriptor ModelId(Id modelId) => Assign(modelId, (a, v) => a.RouteValues.Optional("model_id", v));
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no trained models. (This includes `_all` string or when no trained models have been specified)</summary>
+		public CatTrainedModelsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
+		///<summary>The unit in which to display byte values</summary>
+		public CatTrainedModelsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatTrainedModelsDescriptor Format(string format) => Qs("format", format);
+		///<summary>skips a number of trained models</summary>
+		public CatTrainedModelsDescriptor From(int? from) => Qs("from", from);
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatTrainedModelsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		///<summary>Return help information</summary>
+		public CatTrainedModelsDescriptor Help(bool? help = true) => Qs("help", help);
+		///<summary>specifies a max number of trained models to get</summary>
+		public CatTrainedModelsDescriptor Size(int? size) => Qs("size", size);
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatTrainedModelsDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatTrainedModelsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
+	}
+
 	///<summary>Descriptor for NodeAttributes <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</para></summary>
 	public partial class CatNodeAttributesDescriptor : RequestDescriptorBase<CatNodeAttributesDescriptor, CatNodeAttributesRequestParameters, ICatNodeAttributesRequest>, ICatNodeAttributesRequest
 	{
@@ -651,5 +797,43 @@ namespace Nest
 		public CatThreadPoolDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatThreadPoolDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
+	}
+
+	///<summary>Descriptor for Transforms <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</para></summary>
+	public partial class CatTransformsDescriptor : RequestDescriptorBase<CatTransformsDescriptor, CatTransformsRequestParameters, ICatTransformsRequest>, ICatTransformsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatTransforms;
+		///<summary>/_cat/transforms</summary>
+		public CatTransformsDescriptor(): base()
+		{
+		}
+
+		///<summary>/_cat/transforms/{transform_id}</summary>
+		///<param name = "transformId">Optional, accepts null</param>
+		public CatTransformsDescriptor(Id transformId): base(r => r.Optional("transform_id", transformId))
+		{
+		}
+
+		// values part of the url path
+		Id ICatTransformsRequest.TransformId => Self.RouteValues.Get<Id>("transform_id");
+		///<summary>The id of the transform for which to get stats. '_all' or '*' implies all transforms</summary>
+		public CatTransformsDescriptor TransformId(Id transformId) => Assign(transformId, (a, v) => a.RouteValues.Optional("transform_id", v));
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no transforms. (This includes `_all` string or when no transforms have been specified)</summary>
+		public CatTransformsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatTransformsDescriptor Format(string format) => Qs("format", format);
+		///<summary>skips a number of transform configs, defaults to 0</summary>
+		public CatTransformsDescriptor From(int? from) => Qs("from", from);
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatTransformsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		///<summary>Return help information</summary>
+		public CatTransformsDescriptor Help(bool? help = true) => Qs("help", help);
+		///<summary>specifies a max number of transforms to get, defaults to 100</summary>
+		public CatTransformsDescriptor Size(int? size) => Qs("size", size);
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatTransformsDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatTransformsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 }
