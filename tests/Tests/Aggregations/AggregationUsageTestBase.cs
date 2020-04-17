@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;

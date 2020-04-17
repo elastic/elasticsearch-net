@@ -155,7 +155,7 @@ namespace Nest
 						break;
 					case 11:
 						aggregate = GetBoxplotAggregate(ref reader, formatterResolver, meta);
-            break;
+						break;
 					case 12:
 						aggregate = GetTopMetricsAggregate(ref reader, formatterResolver, meta);
 						break;
@@ -245,7 +245,7 @@ namespace Nest
 			boxplot.Q3 = reader.ReadDouble();
 			return boxplot;
     }
-    
+
 		private IAggregate GetTopMetricsAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, IReadOnlyDictionary<string, object> meta)
 		{
 			var topMetrics = new TopMetricsAggregate { Meta = meta };
