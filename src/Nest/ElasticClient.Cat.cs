@@ -252,6 +252,7 @@ namespace Nest.Specification.CatApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html</a>
 		/// </summary>
 		public Task<CatResponse<CatDataFrameAnalyticsRecord>> DataFrameAnalyticsAsync(ICatDataFrameAnalyticsRequest request, CancellationToken ct = default) => DoCatAsync<ICatDataFrameAnalyticsRequest, CatDataFrameAnalyticsRequestParameters, CatDataFrameAnalyticsRecord>(request, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>cat.ml_datafeeds</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</a>
