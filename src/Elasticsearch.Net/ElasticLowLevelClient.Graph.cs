@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.GraphApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelGraphNamespace : NamespacedClientProxy
+	public partial class LowLevelGraphNamespace : NamespacedClientProxy
 	{
 		internal LowLevelGraphNamespace(ElasticLowLevelClient client): base(client)
 		{

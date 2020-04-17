@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelSecurityNamespace : NamespacedClientProxy
+	public partial class LowLevelSecurityNamespace : NamespacedClientProxy
 	{
 		internal LowLevelSecurityNamespace(ElasticLowLevelClient client): base(client)
 		{

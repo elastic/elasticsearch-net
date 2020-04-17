@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelCatNamespace : NamespacedClientProxy
+	public partial class LowLevelCatNamespace : NamespacedClientProxy
 	{
 		internal LowLevelCatNamespace(ElasticLowLevelClient client): base(client)
 		{

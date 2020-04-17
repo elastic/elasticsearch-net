@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelIndicesNamespace : NamespacedClientProxy
+	public partial class LowLevelIndicesNamespace : NamespacedClientProxy
 	{
 		internal LowLevelIndicesNamespace(ElasticLowLevelClient client): base(client)
 		{
