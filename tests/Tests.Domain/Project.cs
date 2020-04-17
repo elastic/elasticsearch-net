@@ -28,6 +28,8 @@ namespace Tests.Domain
 	{
 		public static string TypeName = "project";
 
+		public static string VersionControlConstant = "git";
+
 		public IEnumerable<string> Branches { get; set; }
 		public IList<Tag> CuratedTags { get; set; }
 		public string DateString { get; set; }
@@ -65,6 +67,8 @@ namespace Tests.Domain
 
 		//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer
 		public Visibility Visibility { get; set; }
+
+		public string VersionControl { get; set; }
 
 		// @formatter:off — enable formatter after this line
 		public static Faker<Project> Generator { get; } =
@@ -112,7 +116,8 @@ namespace Tests.Domain
 									Closed = closedDate.ToUnixTime()
 								}
 						};
-					});
+					})
+				.RuleFor(p => p.VersionControl, VersionControlConstant);
 
 		public static IList<Project> Projects { get; } = Generator.Clone().Generate(100);
 

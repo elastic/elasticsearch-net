@@ -62,6 +62,8 @@ namespace Nest
 
 		void Visit(IHistogramProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);
 
+		void Visit(IConstantKeywordProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);
+
 		IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);
 
 		bool SkipProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);

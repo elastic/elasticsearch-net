@@ -133,6 +133,10 @@ namespace Nest
 		public IProperty SearchAsYouType(Func<SearchAsYouTypePropertyDescriptor<T>, ISearchAsYouTypeProperty> selector) =>
 			selector?.Invoke(new SearchAsYouTypePropertyDescriptor<T>());
 
+		/// <inheritdoc />
+		public IProperty ConstantKeyword(Func<ConstantKeywordPropertyDescriptor<T>, IConstantKeywordProperty> selector) =>
+			selector?.Invoke(new ConstantKeywordPropertyDescriptor<T>());
+
 #pragma warning disable CS3001 // Argument type is not CLS-compliant
 		public IProperty Scalar(Expression<Func<T, int>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector = null) =>
 			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Integer));
