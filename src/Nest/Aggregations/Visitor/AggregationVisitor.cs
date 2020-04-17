@@ -139,6 +139,8 @@
 		void Visit(IMovingFunctionAggregation aggregation);
 
 		void Visit(IStringStatsAggregation aggregation);
+
+		void Visit(ITopMetricsAggregation aggregation);
 	}
 
 	public class AggregationVisitor : IAggregationVisitor
@@ -262,6 +264,8 @@
 		public virtual void Visit(IMovingFunctionAggregation aggregation) { }
 
 		public virtual void Visit(IStringStatsAggregation aggregation) { }
+
+		public virtual void Visit(ITopMetricsAggregation aggregation) { }
 
 		public virtual void Visit(IAggregation aggregation) { }
 
