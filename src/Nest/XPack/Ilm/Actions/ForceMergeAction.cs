@@ -6,7 +6,10 @@ namespace Nest
 	/// The Force Merge Action force merges the index into at most a specific number of segments.
 	/// </summary>
 	/// <remarks>
-	/// Phases allowed: warm.
+	/// Phases allowed: hot, warm.
+	///
+	/// NOTE: If the action is used in the `hot` phase, the `rollover` action *must* be present.
+	/// ILM validates this predicate and will refuse a policy with a forcemerge in the hot phase without a rollover action.
 	/// </remarks>
 	public interface IForceMergeLifecycleAction : ILifecycleAction
 	{
