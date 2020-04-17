@@ -431,6 +431,20 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IEstimateModelMemoryRequest : IRequest<EstimateModelMemoryRequestParameters>
+	{
+	}
+
+	///<summary>Request for EstimateModelMemory <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</para></summary>
+	public partial class EstimateModelMemoryRequest : PlainRequestBase<EstimateModelMemoryRequestParameters>, IEstimateModelMemoryRequest
+	{
+		protected IEstimateModelMemoryRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningEstimateModelMemory;
+	// values part of the url path
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IFlushJobRequest : IRequest<FlushJobRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -1427,6 +1441,33 @@ namespace Nest
 		[IgnoreDataMember]
 		Id IRevertModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface ISetUpgradeModeRequest : IRequest<SetUpgradeModeRequestParameters>
+	{
+	}
+
+	///<summary>Request for SetUpgradeMode <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html</para></summary>
+	public partial class SetUpgradeModeRequest : PlainRequestBase<SetUpgradeModeRequestParameters>, ISetUpgradeModeRequest
+	{
+		protected ISetUpgradeModeRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningSetUpgradeMode;
+		// values part of the url path
+		// Request parameters
+		///<summary>Whether to enable upgrade_mode ML setting or not. Defaults to false.</summary>
+		public bool? Enabled
+		{
+			get => Q<bool? >("enabled");
+			set => Q("enabled", value);
+		}
+
+		///<summary>Controls the time to wait before action times out. Defaults to 30 seconds</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	[InterfaceDataContract]

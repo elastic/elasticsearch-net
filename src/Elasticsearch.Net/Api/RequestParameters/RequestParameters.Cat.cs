@@ -635,8 +635,8 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for MlJobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
-	public class MlJobsRequestParameters : RequestParameters<MlJobsRequestParameters>
+	///<summary>Request options for Jobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
+	public class CatJobsRequestParameters : RequestParameters<CatJobsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
@@ -693,8 +693,8 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 	}
 
-	///<summary>Request options for MlTrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
-	public class MlTrainedModelsRequestParameters : RequestParameters<MlTrainedModelsRequestParameters>
+	///<summary>Request options for TrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html</para></summary>
+	public class CatTrainedModelsRequestParameters : RequestParameters<CatTrainedModelsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>
@@ -1526,7 +1526,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 	}
 
 	///<summary>Request options for Transforms <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html</para></summary>
-	public class TransformsRequestParameters : RequestParameters<TransformsRequestParameters>
+	public class CatTransformsRequestParameters : RequestParameters<CatTransformsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether to ignore if a wildcard expression matches no transforms. (This includes `_all` string or when no transforms have been specified)</summary>
