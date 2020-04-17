@@ -1,21 +1,18 @@
-﻿using System;
-using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
+using Tests.XPack.MachineLearning;
 
 namespace Tests.Cat.CatDataFrameAnalytics
 {
 	[SkipVersion("<7.7.0", "Introduced in 7.7.0")]
 	public class CatDataFrameAnalyticsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatDataFrameAnalyticsRecord>, ICatDataFrameAnalyticsRequest, CatDataFrameAnalyticsDescriptor,
+		: MachineLearningIntegrationTestBase<CatResponse<CatDataFrameAnalyticsRecord>, ICatDataFrameAnalyticsRequest, CatDataFrameAnalyticsDescriptor,
 			CatDataFrameAnalyticsRequest>
 	{
-		public CatDataFrameAnalyticsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CatDataFrameAnalyticsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
