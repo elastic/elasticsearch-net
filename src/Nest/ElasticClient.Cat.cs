@@ -229,6 +229,30 @@ namespace Nest.Specification.CatApi
 		/// </summary>
 		public Task<CatResponse<CatMasterRecord>> MasterAsync(ICatMasterRequest request, CancellationToken ct = default) => DoCatAsync<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request, ct);
 		/// <summary>
+		/// <c>GET</c> request to the <c>cat.ml_datafeeds</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</a>
+		/// </summary>
+		public CatResponse<CatDatafeedsRecord> Datafeeds(Func<CatDatafeedsDescriptor, ICatDatafeedsRequest> selector = null) => Datafeeds(selector.InvokeOrDefault(new CatDatafeedsDescriptor()));
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.ml_datafeeds</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</a>
+		/// </summary>
+		public Task<CatResponse<CatDatafeedsRecord>> DatafeedsAsync(Func<CatDatafeedsDescriptor, ICatDatafeedsRequest> selector = null, CancellationToken ct = default) => DatafeedsAsync(selector.InvokeOrDefault(new CatDatafeedsDescriptor()), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.ml_datafeeds</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</a>
+		/// </summary>
+		public CatResponse<CatDatafeedsRecord> Datafeeds(ICatDatafeedsRequest request) => DoCat<ICatDatafeedsRequest, CatDatafeedsRequestParameters, CatDatafeedsRecord>(request);
+		/// <summary>
+		/// <c>GET</c> request to the <c>cat.ml_datafeeds</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</a>
+		/// </summary>
+		public Task<CatResponse<CatDatafeedsRecord>> DatafeedsAsync(ICatDatafeedsRequest request, CancellationToken ct = default) => DoCatAsync<ICatDatafeedsRequest, CatDatafeedsRequestParameters, CatDatafeedsRecord>(request, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>cat.ml_jobs</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</a>
