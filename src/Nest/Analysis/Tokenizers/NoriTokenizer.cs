@@ -31,6 +31,12 @@ namespace Nest
 		NoriDecompoundMode? DecompoundMode { get; set; }
 
 		/// <summary>
+		/// Whether punctuation should be discarded from the output. Defaults to `true`.
+		/// </summary>
+		[DataMember(Name = "discard_punctuation")]
+		bool? DiscardPunctuation { get; set; }
+
+		/// <summary>
 		/// The Nori tokenizer uses the mecab-ko-dic dictionary by default. A user_dictionary with custom nouns (NNG) may be
 		/// appended to
 		/// the default dictionary. This property allows you to specify this file on disk
@@ -57,6 +63,9 @@ namespace Nest
 		/// <inheritdoc cref="INoriTokenizer.DecompoundMode" />
 		public NoriDecompoundMode? DecompoundMode { get; set; }
 
+		/// <inheritdoc cref="INoriTokenizer.DiscardPunctuation" />
+		public bool? DiscardPunctuation { get; set; }
+
 		/// <inheritdoc cref="INoriTokenizer.UserDictionary" />
 		public string UserDictionary { get; set; }
 
@@ -73,6 +82,7 @@ namespace Nest
 		NoriDecompoundMode? INoriTokenizer.DecompoundMode { get; set; }
 		string INoriTokenizer.UserDictionary { get; set; }
 		IEnumerable<string> INoriTokenizer.UserDictionaryRules { get; set; }
+		bool? INoriTokenizer.DiscardPunctuation { get; set; }
 
 		/// <inheritdoc cref="INoriTokenizer.DecompoundMode" />
 		public NoriTokenizerDescriptor DecompoundMode(NoriDecompoundMode? mode) => Assign(mode, (a, v) => a.DecompoundMode = v);
@@ -85,5 +95,8 @@ namespace Nest
 
 		/// <inheritdoc cref="INoriTokenizer.UserDictionaryRules" />
 		public NoriTokenizerDescriptor UserDictionaryRules(IEnumerable<string> rules) => Assign(rules, (a, v) => a.UserDictionaryRules = v);
+
+		/// <inheritdoc cref="INoriTokenizer.DiscardPunctuation" />
+		public NoriTokenizerDescriptor DiscardPunctuation(bool? discard = true) => Assign(discard, (a, v) => a.DiscardPunctuation = v);
 	}
 }
