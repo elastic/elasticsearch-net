@@ -198,23 +198,23 @@ namespace Elasticsearch.Net.Specification.CatApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_cat/ml/data_frame/analytics/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/datafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse MlDatafeeds<TResponse>(MlDatafeedsRequestParameters requestParameters = null)
+		public TResponse Datafeeds<TResponse>(CatDatafeedsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_cat/ml/datafeeds", null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/datafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("cat.ml_datafeeds", "")]
-		public Task<TResponse> MlDatafeedsAsync<TResponse>(MlDatafeedsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> DatafeedsAsync<TResponse>(CatDatafeedsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_cat/ml/datafeeds", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/datafeeds/{datafeed_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
 		///<param name = "datafeedId">The ID of the datafeeds stats to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse MlDatafeeds<TResponse>(string datafeedId, MlDatafeedsRequestParameters requestParameters = null)
+		public TResponse Datafeeds<TResponse>(string datafeedId, CatDatafeedsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_cat/ml/datafeeds/{datafeedId:datafeedId}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/datafeeds/{datafeed_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
 		///<param name = "datafeedId">The ID of the datafeeds stats to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("cat.ml_datafeeds", "datafeed_id")]
-		public Task<TResponse> MlDatafeedsAsync<TResponse>(string datafeedId, MlDatafeedsRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> DatafeedsAsync<TResponse>(string datafeedId, CatDatafeedsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_cat/ml/datafeeds/{datafeedId:datafeedId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_cat/ml/anomaly_detectors <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
