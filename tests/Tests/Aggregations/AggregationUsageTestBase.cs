@@ -14,15 +14,10 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations
 {
-	public abstract class AggregationUsageTestBase : AggregationUsageTestBase<ReadOnlyCluster> {
-		protected AggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-	}
-
-	public abstract class AggregationUsageTestBase<TCluster>
-		: ApiIntegrationTestBase<TCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
-		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
+	public abstract class AggregationUsageTestBase
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected AggregationUsageTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected AggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected virtual Nest.Indices AgainstIndex { get; } = Index<Project>();
 
