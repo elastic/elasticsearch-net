@@ -9,9 +9,9 @@ namespace Nest
 		public int DocumentCount { get; internal set; }
 
 		[DataMember(Name ="sum_doc_freq")]
-		public int SumOfDocumentFrequencies { get; internal set; }
+		public long SumOfDocumentFrequencies { get; internal set; }
 
 		[DataMember(Name ="sum_ttf")]
-		public int SumOfTotalTermFrequencies { get; internal set; }
+		public long SumOfTotalTermFrequencies { get; internal set; }
 	}
 }
