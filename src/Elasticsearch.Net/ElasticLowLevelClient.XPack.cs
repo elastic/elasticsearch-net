@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.XPackApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelXPackNamespace : NamespacedClientProxy
+	public partial class LowLevelXPackNamespace : NamespacedClientProxy
 	{
 		internal LowLevelXPackNamespace(ElasticLowLevelClient client): base(client)
 		{

@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.IngestApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelIngestNamespace : NamespacedClientProxy
+	public partial class LowLevelIngestNamespace : NamespacedClientProxy
 	{
 		internal LowLevelIngestNamespace(ElasticLowLevelClient client): base(client)
 		{

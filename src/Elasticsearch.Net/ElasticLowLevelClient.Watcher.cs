@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelWatcherNamespace : NamespacedClientProxy
+	public partial class LowLevelWatcherNamespace : NamespacedClientProxy
 	{
 		internal LowLevelWatcherNamespace(ElasticLowLevelClient client): base(client)
 		{

@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelSnapshotNamespace : NamespacedClientProxy
+	public partial class LowLevelSnapshotNamespace : NamespacedClientProxy
 	{
 		internal LowLevelSnapshotNamespace(ElasticLowLevelClient client): base(client)
 		{

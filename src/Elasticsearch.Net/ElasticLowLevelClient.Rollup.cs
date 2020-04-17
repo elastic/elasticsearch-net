@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.RollupApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelRollupNamespace : NamespacedClientProxy
+	public partial class LowLevelRollupNamespace : NamespacedClientProxy
 	{
 		internal LowLevelRollupNamespace(ElasticLowLevelClient client): base(client)
 		{

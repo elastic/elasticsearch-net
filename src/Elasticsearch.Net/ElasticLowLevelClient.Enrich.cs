@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.EnrichApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelEnrichNamespace : NamespacedClientProxy
+	public partial class LowLevelEnrichNamespace : NamespacedClientProxy
 	{
 		internal LowLevelEnrichNamespace(ElasticLowLevelClient client): base(client)
 		{

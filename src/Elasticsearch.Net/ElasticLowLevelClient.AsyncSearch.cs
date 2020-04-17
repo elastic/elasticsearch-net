@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelAsyncSearchNamespace : NamespacedClientProxy
+	public partial class LowLevelAsyncSearchNamespace : NamespacedClientProxy
 	{
 		internal LowLevelAsyncSearchNamespace(ElasticLowLevelClient client): base(client)
 		{

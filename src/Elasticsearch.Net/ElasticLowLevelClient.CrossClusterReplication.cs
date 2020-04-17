@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.CrossClusterReplicationApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelCrossClusterReplicationNamespace : NamespacedClientProxy
+	public partial class LowLevelCrossClusterReplicationNamespace : NamespacedClientProxy
 	{
 		internal LowLevelCrossClusterReplicationNamespace(ElasticLowLevelClient client): base(client)
 		{

@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelMachineLearningNamespace : NamespacedClientProxy
+	public partial class LowLevelMachineLearningNamespace : NamespacedClientProxy
 	{
 		internal LowLevelMachineLearningNamespace(ElasticLowLevelClient client): base(client)
 		{

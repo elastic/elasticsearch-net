@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Specification.TransformApi
 	/// on <see cref = "IElasticLowLevelClient"/>.
 	///</para>
 	///</summary>
-	public class LowLevelTransformNamespace : NamespacedClientProxy
+	public partial class LowLevelTransformNamespace : NamespacedClientProxy
 	{
 		internal LowLevelTransformNamespace(ElasticLowLevelClient client): base(client)
 		{
