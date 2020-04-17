@@ -250,7 +250,8 @@ namespace Tests.Search.Request
 									filter = new
 									{
 										match_all = new { }
-									}
+									},
+									max_children = 50
 								},
 								unmapped_type = "date"
 							}
@@ -272,6 +273,7 @@ namespace Tests.Search.Request
 						.Filter(ff => ff
 							.MatchAll()
 						)
+						.MaxChildren(50)
 					)
 				)
 			);
@@ -291,7 +293,8 @@ namespace Tests.Search.Request
 						Nested = new NestedSort
 						{
 							Path = Field<Project>(p => p.Tags),
-							Filter = new MatchAllQuery()
+							Filter = new MatchAllQuery(),
+							MaxChildren = 50
 						}
 					}
 				}

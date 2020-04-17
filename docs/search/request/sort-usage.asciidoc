@@ -244,6 +244,7 @@ s => s
             .Filter(ff => ff
                 .MatchAll()
             )
+            .MaxChildren(50)
         )
     )
 )
@@ -268,7 +269,8 @@ new SearchRequest<Project>
             Nested = new NestedSort
             {
                 Path = Field<Project>(p => p.Tags),
-                Filter = new MatchAllQuery()
+                Filter = new MatchAllQuery(),
+                MaxChildren = 50
             }
         }
     }
@@ -289,7 +291,8 @@ new SearchRequest<Project>
           "path": "tags",
           "filter": {
             "match_all": {}
-          }
+          },
+          "max_children": 50
         },
         "unmapped_type": "date"
       }
