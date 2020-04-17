@@ -296,6 +296,42 @@ namespace Nest
 		public CatMasterDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	}
 
+	///<summary>Descriptor for DataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html</para></summary>
+	public partial class CatDataFrameAnalyticsDescriptor : RequestDescriptorBase<CatDataFrameAnalyticsDescriptor, CatDataFrameAnalyticsRequestParameters, ICatDataFrameAnalyticsRequest>, ICatDataFrameAnalyticsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatDataFrameAnalytics;
+		///<summary>/_cat/ml/data_frame/analytics</summary>
+		public CatDataFrameAnalyticsDescriptor(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/data_frame/analytics/{id}</summary>
+		///<param name = "id">Optional, accepts null</param>
+		public CatDataFrameAnalyticsDescriptor(Id id): base(r => r.Optional("id", id))
+		{
+		}
+
+		// values part of the url path
+		Id ICatDataFrameAnalyticsRequest.Id => Self.RouteValues.Get<Id>("id");
+		///<summary>The ID of the data frame analytics to fetch</summary>
+		public CatDataFrameAnalyticsDescriptor Id(Id id) => Assign(id, (a, v) => a.RouteValues.Optional("id", v));
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no configs. (This includes `_all` string or when no configs have been specified)</summary>
+		public CatDataFrameAnalyticsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
+		///<summary>The unit in which to display byte values</summary>
+		public CatDataFrameAnalyticsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatDataFrameAnalyticsDescriptor Format(string format) => Qs("format", format);
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatDataFrameAnalyticsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		///<summary>Return help information</summary>
+		public CatDataFrameAnalyticsDescriptor Help(bool? help = true) => Qs("help", help);
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatDataFrameAnalyticsDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatDataFrameAnalyticsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
+	}
+
 	///<summary>Descriptor for Datafeeds <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</para></summary>
 	public partial class CatDatafeedsDescriptor : RequestDescriptorBase<CatDatafeedsDescriptor, CatDatafeedsRequestParameters, ICatDatafeedsRequest>, ICatDatafeedsRequest
 	{
