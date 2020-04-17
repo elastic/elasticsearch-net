@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
-
 
 namespace Nest
 {
@@ -52,6 +50,13 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "trim")]
 		bool? Trim { get; set; }
+
+		/// <summary>
+		/// Value used to fill empty fields, empty fields will be skipped if this is not provided.
+		/// Empty field is one with no value (2 consecutive separators) or empty quotes (`""`)
+		/// </summary>
+		[DataMember(Name = "empty_value")]
+		object EmptyValue  { get; set; }
 	}
 
 	/// <inheritdoc cref="ICsvProcessor"/>
@@ -70,6 +75,8 @@ namespace Nest
 		/// <inheritdoc />
 		public bool? Trim { get; set; }
 		/// <inheritdoc />
+		public object EmptyValue { get; set; }
+		/// <inheritdoc />
 		protected override string Name => "csv";
 	}
 
@@ -84,6 +91,7 @@ namespace Nest
 		string ICsvProcessor.Quote { get; set; }
 		string ICsvProcessor.Separator { get; set; }
 		bool? ICsvProcessor.Trim { get; set; }
+		object ICsvProcessor.EmptyValue { get; set; }
 
 		/// <inheritdoc cref="ICsvProcessor.Field" />
 		public CsvProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
@@ -110,5 +118,8 @@ namespace Nest
 
 		/// <inheritdoc cref="ICsvProcessor.Separator" />
 		public CsvProcessorDescriptor<T> Separator(string separator) => Assign(separator, (a, v) => a.Separator = v);
+
+		/// <inheritdoc cref="ICsvProcessor.EmptyValue" />
+		public CsvProcessorDescriptor<T> EmptyValue(object value) => Assign(value, (a, v) => a.EmptyValue = v);
 	}
 }

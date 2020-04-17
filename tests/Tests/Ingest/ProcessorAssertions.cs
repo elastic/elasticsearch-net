@@ -77,18 +77,24 @@ namespace Tests.Ingest
 				.Csv<Project>(c => c
 					.Field(p => p.Name)
 					.TargetFields(new[] { "targetField1", "targetField2" })
+					.EmptyValue("empty")
+					.Trim()
 				);
 
 			public override IProcessor Initializer => new CsvProcessor
 			{
 				Field = "name",
 				TargetFields = new[] { "targetField1", "targetField2" },
+				EmptyValue = "empty",
+				Trim = true
 			};
 
 			public override object Json => new
 			{
 				field = "name",
 				target_fields = new[] { "targetField1", "targetField2" },
+				empty_value = "empty",
+				trim = true
 			};
 
 			public override string Key => "csv";
