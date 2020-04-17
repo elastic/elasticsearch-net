@@ -1,4 +1,5 @@
-namespace Nest {
+namespace Nest
+{
 	public class BoxplotAggregate : MetricAggregateBase
 	{
 		public double Min { get; set; }
