@@ -229,7 +229,6 @@ namespace Nest.Specification.CatApi
 		/// </summary>
 		public Task<CatResponse<CatMasterRecord>> MasterAsync(ICatMasterRequest request, CancellationToken ct = default) => DoCatAsync<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request, ct);
 		/// <summary>
-
 		/// <c>GET</c> request to the <c>cat.ml_datafeeds</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</a>
@@ -253,6 +252,7 @@ namespace Nest.Specification.CatApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html</a>
 		/// </summary>
 		public Task<CatResponse<CatDatafeedsRecord>> DatafeedsAsync(ICatDatafeedsRequest request, CancellationToken ct = default) => DoCatAsync<ICatDatafeedsRequest, CatDatafeedsRequestParameters, CatDatafeedsRecord>(request, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>cat.ml_jobs</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</a>

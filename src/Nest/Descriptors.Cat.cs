@@ -312,6 +312,40 @@ namespace Nest
 		}
 
 		// values part of the url path
+		Id ICatDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		///<summary>The ID of the datafeeds stats to fetch</summary>
+		public CatDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(datafeedId, (a, v) => a.RouteValues.Optional("datafeed_id", v));
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public CatDatafeedsDescriptor AllowNoDatafeeds(bool? allownodatafeeds = true) => Qs("allow_no_datafeeds", allownodatafeeds);
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatDatafeedsDescriptor Format(string format) => Qs("format", format);
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatDatafeedsDescriptor Headers(params string[] headers) => Qs("h", headers);
+		///<summary>Return help information</summary>
+		public CatDatafeedsDescriptor Help(bool? help = true) => Qs("help", help);
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatDatafeedsDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatDatafeedsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
+	}
+
+	///<summary>Descriptor for Jobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
+	public partial class CatJobsDescriptor : RequestDescriptorBase<CatJobsDescriptor, CatJobsRequestParameters, ICatJobsRequest>, ICatJobsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CatJobs;
+		///<summary>/_cat/ml/anomaly_detectors</summary>
+		public CatJobsDescriptor(): base()
+		{
+		}
+
+		///<summary>/_cat/ml/anomaly_detectors/{job_id}</summary>
+		///<param name = "jobId">Optional, accepts null</param>
+		public CatJobsDescriptor(Id jobId): base(r => r.Optional("job_id", jobId))
+		{
+		}
+
+		// values part of the url path
 		Id ICatJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		///<summary>The ID of the jobs stats to fetch</summary>
 		public CatJobsDescriptor JobId(Id jobId) => Assign(jobId, (a, v) => a.RouteValues.Optional("job_id", v));
