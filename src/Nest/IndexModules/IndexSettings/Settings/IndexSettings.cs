@@ -40,6 +40,12 @@ namespace Nest
 		int? RoutingPartitionSize { get; set; }
 
 		/// <summary>
+		/// Indicates whether the index should be hidden by default.
+		/// Hidden indices are not returned by default when using a wildcard expression.
+		/// </summary>
+		bool? Hidden { get; set; }
+
+		/// <summary>
 		///  Settings associated with index sorting.
 		/// https://www.elastic.co/guide/en/elasticsearch/reference/6.0/index-modules-index-sorting.html
 		/// </summary>
@@ -71,6 +77,9 @@ namespace Nest
 		/// <inheritdoc cref="IIndexSettings.RoutingPartitionSize" />
 		public int? RoutingPartitionSize { get; set; }
 
+		/// <inheritdoc cref="IIndexSettings.Hidden" />
+		public bool? Hidden { get; set; }
+
 		/// <inheritdoc cref="IIndexSettings.Sorting" />
 		public ISortingSettings Sorting { get; set; }
 
@@ -94,6 +103,10 @@ namespace Nest
 		/// <inheritdoc cref="IIndexSettings.RoutingPartitionSize" />
 		public IndexSettingsDescriptor RoutingPartitionSize(int? routingPartitionSize) =>
 			Assign(routingPartitionSize, (a, v) => a.RoutingPartitionSize = v);
+
+		/// <inheritdoc cref="IIndexSettings.Hidden" />
+		public IndexSettingsDescriptor Hidden(bool? hidden = true) =>
+			Assign(hidden, (a, v) => a.Hidden = v);
 
 		/// <inheritdoc cref="IIndexSettings.FileSystemStorageImplementation" />
 		public IndexSettingsDescriptor FileSystemStorageImplementation(FileSystemStorageImplementation? fs) =>

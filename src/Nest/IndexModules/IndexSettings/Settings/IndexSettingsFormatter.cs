@@ -124,6 +124,7 @@ namespace Nest
 				Set(NumberOfShards, indexSettings.NumberOfShards);
 				Set(NumberOfRoutingShards, indexSettings.NumberOfRoutingShards);
 				Set(RoutingPartitionSize, indexSettings.RoutingPartitionSize);
+				Set(Hidden, indexSettings.Hidden);
 				if (indexSettings.SoftDeletes != null)
 				{
 #pragma warning disable 618
@@ -159,7 +160,7 @@ namespace Nest
 			Dictionary<string, object> current = null
 		)
 		{
-			current = current ?? new Dictionary<string, object>();
+			current ??= new Dictionary<string, object>();
 			foreach (var property in original)
 			{
 				if (property.Value is Dictionary<string, object> objects &&
@@ -251,6 +252,7 @@ namespace Nest
 			Set<int?>(s, settings, NumberOfShards, v => s.NumberOfShards = v, formatterResolver);
 			Set<int?>(s, settings, NumberOfRoutingShards, v => s.NumberOfRoutingShards = v, formatterResolver);
 			Set<int?>(s, settings, RoutingPartitionSize, v => s.RoutingPartitionSize = v, formatterResolver);
+			Set<bool?>(s, settings, Hidden, v => s.Hidden = v, formatterResolver);
 			Set<FileSystemStorageImplementation?>(s, settings, StoreType, v => s.FileSystemStorageImplementation = v, formatterResolver);
 
 			var sorting = s.Sorting = new SortingSettings();
