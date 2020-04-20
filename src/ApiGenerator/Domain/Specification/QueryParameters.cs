@@ -55,8 +55,14 @@ namespace ApiGenerator.Domain.Specification
 			}
 		}
 
-		public string DescriptorArgumentType =>
-			Type == "list" && TypeHighLevel.EndsWith("[]") ? "params " + TypeHighLevel : TypeHighLevel;
+		public bool IsArray => Type == "list" && TypeHighLevel.EndsWith("[]");
+
+		public string DescriptorArgumentType => IsArray ? "params " + TypeHighLevel : TypeHighLevel;
+
+		public string DescriptorEnumerableArgumentType =>
+			IsArray
+				? $"IEnumerable<{TypeHighLevel.TrimEnd('[', ']')}>"
+				: throw new InvalidOperationException("Only array arguments have IEnumerable overload");
 
 		public Func<string, string, string, string, string> FluentGenerator { get; set; }
 		public bool IsFieldParam => TypeHighLevel == "Field";
