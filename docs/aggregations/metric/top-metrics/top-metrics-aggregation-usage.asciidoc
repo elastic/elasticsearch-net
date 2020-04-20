@@ -1,0 +1,93 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.7
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Metric/TopMetrics/TopMetricsAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[top-metrics-aggregation-usage]]
+=== Top Metrics Aggregation Usage
+
+The top metrics aggregation selects metrics from the document with the largest or smallest "sort" value.
+
+Top metrics is fairly similar to "top hits" in spirit but because it is more limited it is able to do its job using less memory and is often faster.
+
+Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-top-metrics.html[Top Metrics Aggregation]
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.TopMetrics("tm", st => st
+    .Metrics(m => m.Field(p => p.NumberOfContributors))
+    .Size(10)
+    .Sort(sort => sort
+        .Ascending("numberOfContributors")
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new TopMetricsAggregation("tm")
+{
+    Metrics = new List<ITopMetricsValue>
+    {
+        new TopMetricsValue(Field<Project>(p => p.NumberOfContributors))
+    },
+    Size = 10,
+    Sort = new List<ISort> { new FieldSort { Field = "numberOfContributors", Order = SortOrder.Ascending } }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "tm": {
+    "top_metrics": {
+      "metrics": [
+        {
+          "field": "numberOfContributors"
+        }
+      ],
+      "size": 10,
+      "sort": [
+        {
+          "numberOfContributors": {
+            "order": "asc"
+          }
+        }
+      ]
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var topMetrics = response.Aggregations.TopMetrics("tm");
+topMetrics.Should().NotBeNull();
+topMetrics.Top.Should().NotBeNull();
+topMetrics.Top.Count.Should().BeGreaterThan(0);
+
+var tipTop = topMetrics.Top.First();
+tipTop.Sort.Should().Should().NotBeNull();
+tipTop.Sort.Count.Should().BeGreaterThan(0);
+tipTop.Metrics.Should().NotBeNull();
+tipTop.Metrics.Count.Should().BeGreaterThan(0);
+----
+

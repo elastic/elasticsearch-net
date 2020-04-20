@@ -92,12 +92,19 @@ var person = new Person
 var indexResponse = client.Index(person, p => p.Index("people").Pipeline("person-pipeline")); <8>
 ----
 <1> automatically create the mapping from the type
+
 <2> create an additional field to store the initials
+
 <3> map field as IP Address type
+
 <4> map GeoIp as object
+
 <5> uppercase the lastname
+
 <6> use a painless script to populate the new field
+
 <7> use ingest-geoip plugin to enrich the GeoIp object from the supplied IP Address
+
 <8> index the document using the created pipeline
 
 ==== Increasing timeouts
@@ -122,5 +129,6 @@ client.Bulk(b => b
 );
 ----
 <1> increases the server-side bulk timeout
+
 <2> increases the HTTP request timeout
 
