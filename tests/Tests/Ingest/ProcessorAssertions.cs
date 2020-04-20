@@ -70,7 +70,7 @@ namespace Tests.Ingest
 			public override string Key => "append";
 		}
 
-		[SkipVersion("<7.6.0", "Introduced in Elasticsearch 7.6.0+")]
+		[SkipVersion("<7.7.0", "Empty Value introduced in Elasticsearch 7.7.0+, CSV introduced in 7.6.0+")]
 		public class Csv : ProcessorAssertion
 		{
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
