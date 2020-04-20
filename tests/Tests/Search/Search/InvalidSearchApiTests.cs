@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -12,6 +13,8 @@ namespace Tests.Search.Search
 {
 	public class InvalidSearchApiTests : SearchApiTests
 	{
+		private bool isAtLeast78 = TestConfiguration.Instance.InRange(">=7.8.0");
+
 		public InvalidSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		/// <summary> This is rather noisy on the console out, we only need to test 1 of our overloads randomly really. </summary>
@@ -38,7 +41,7 @@ namespace Tests.Search.Search
 			}
 		};
 
-		protected override int ExpectStatusCode => 400;
+		protected override int ExpectStatusCode => isAtLeast78 ? 500 : 400;
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.From(10)
@@ -67,9 +70,21 @@ namespace Tests.Search.Search
 			response.ShouldNotBeValid();
 			var serverError = response.ServerError;
 			serverError.Should().NotBeNull();
-			serverError.Status.Should().Be(400);
-			serverError.Error.Reason.Should().Be("all shards failed");
-			serverError.Error.RootCause.First().Reason.Should().Contain("[-1m]");
+
+			if (isAtLeast78)
+			{
+				serverError.Status.Should().Be(500 );
+				serverError.Error.Reason.Should().Be("all shards failed");
+				serverError.Error.RootCause.First().Reason.Should().Contain("value source config is invalid");
+			}
+			else
+			{
+				serverError.Status.Should().Be(400);
+				serverError.Error.Reason.Should().Be("all shards failed");
+				serverError.Error.RootCause.First().Reason.Should().Contain("[-1m]");
+			}
+
+
 		}
 	}
 }
