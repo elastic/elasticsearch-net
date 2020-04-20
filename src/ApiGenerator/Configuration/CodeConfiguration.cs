@@ -27,18 +27,23 @@ namespace ApiGenerator.Configuration
 			// To be removed
 			"indices.upgrade.json",
 			"indices.get_upgrade.json",
+			"indices.exists_type.json",
 		};
 
 		public static string[] IgnoredApisHighLevel { get; } =
 		{
+			"autoscaling.delete_autoscaling_decision.json",
+			"autoscaling.get_autoscaling_policy.json",
+			"autoscaling.put_autoscaling_policy.json",
+			"autoscaling.delete_autoscaling_policy.json",
+			"indices.delete_index_template.json",
+			"indices.exists_index_template.json",
+			"indices.get_index_template.json",
+			"indices.put_index_template.json",
 			"searchable_snapshots.stats.json",
 			"searchable_snapshots.clear_cache.json",
 			"searchable_snapshots.mount.json",
 			"searchable_snapshots.repository_stats.json",
-			"indices.exists_index_template.json",
-			"autoscaling.delete_autoscaling_decision.json",
-			"autoscaling.get_autoscaling_policy.json",
-			"autoscaling.put_autoscaling_policy.json",
 
 			"autoscaling.get_autoscaling_decision.json", // 7.7 experimental
 			"eql.search.json", // 7.7 beta
@@ -67,6 +72,7 @@ namespace ApiGenerator.Configuration
 			"cluster.delete_component_template.json",
 			"cluster.get_component_template.json",
 			"cluster.put_component_template.json",
+			"cluster.exists_component_template.json",
 			"transform.delete_transform.json",
 			"transform.get_transform.json",
 			"transform.get_transform_stats.json",
@@ -111,7 +117,7 @@ namespace ApiGenerator.Configuration
 				{
 					if (_apiNameMapping != null) return _apiNameMapping;
 
-					var mapping = HighLevelApiNameMapping;
+					var mapping = new Dictionary<string,string>(HighLevelApiNameMapping);
 					foreach (var (k, v) in LowLevelApiNameMapping)
 						mapping[k] = v;
 					_apiNameMapping = mapping;

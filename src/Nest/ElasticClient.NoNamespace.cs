@@ -20,7 +20,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Nest;
 using Nest.Specification.AsyncSearchApi;
-using Nest.Specification.AutoscalingApi;
 using Nest.Specification.CatApi;
 using Nest.Specification.ClusterApi;
 using Nest.Specification.CrossClusterReplicationApi;
@@ -52,13 +51,6 @@ namespace Nest
 	{
 		///<summary>Async Search APIs</summary>
 		public AsyncSearchNamespace AsyncSearch
-		{
-			get;
-			private set;
-		}
-
-		///<summary>Autoscaling APIs</summary>
-		public AutoscalingNamespace Autoscaling
 		{
 			get;
 			private set;
@@ -207,7 +199,6 @@ namespace Nest
 		partial void SetupNamespaces()
 		{
 			AsyncSearch = new AsyncSearchNamespace(this);
-			Autoscaling = new AutoscalingNamespace(this);
 			Cat = new CatNamespace(this);
 			Cluster = new ClusterNamespace(this);
 			CrossClusterReplication = new CrossClusterReplicationNamespace(this);

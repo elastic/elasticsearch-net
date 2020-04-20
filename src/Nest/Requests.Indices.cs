@@ -461,56 +461,6 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
-	public partial interface IDeleteIndexTemplateV2Request : IRequest<DeleteIndexTemplateV2RequestParameters>
-	{
-		[IgnoreDataMember]
-		Name Name
-		{
-			get;
-		}
-	}
-
-	///<summary>Request for DeleteTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
-	public partial class DeleteIndexTemplateV2Request : PlainRequestBase<DeleteIndexTemplateV2RequestParameters>, IDeleteIndexTemplateV2Request
-	{
-		protected IDeleteIndexTemplateV2Request Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteTemplateV2;
-		///<summary>/_index_template/{name}</summary>
-		///<param name = "name">this parameter is required</param>
-		public DeleteIndexTemplateV2Request(Name name): base(r => r.Required("name", name))
-		{
-		}
-
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected DeleteIndexTemplateV2Request(): base()
-		{
-		}
-
-		// values part of the url path
-		[IgnoreDataMember]
-		Name IDeleteIndexTemplateV2Request.Name => Self.RouteValues.Get<Name>("name");
-		// Request parameters
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout
-		{
-			get => Q<Time>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout
-		{
-			get => Q<Time>("timeout");
-			set => Q("timeout", value);
-		}
-
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement DeleteIndexTemplateV2Descriptor and DeleteIndexTemplateV2Request in a file called DeleteIndexTemplateV2Request.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
-	}
-
-	[InterfaceDataContract]
 	public partial interface IDeleteIndexTemplateRequest : IRequest<DeleteIndexTemplateRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -759,82 +709,6 @@ namespace Nest
 			get => Q<Time>("master_timeout");
 			set => Q("master_timeout", value);
 		}
-	}
-
-	[InterfaceDataContract]
-	public partial interface IExistsTypeRequest : IRequest<ExistsTypeRequestParameters>
-	{
-		[IgnoreDataMember]
-		Indices Index
-		{
-			get;
-		}
-
-		[IgnoreDataMember]
-		Names Type
-		{
-			get;
-		}
-	}
-
-	///<summary>Request for ExistsType <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</para></summary>
-	public partial class ExistsTypeRequest : PlainRequestBase<ExistsTypeRequestParameters>, IExistsTypeRequest
-	{
-		protected IExistsTypeRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExistsType;
-		///<summary>/{index}/_mapping/{type}</summary>
-		///<param name = "index">this parameter is required</param>
-		///<param name = "type">this parameter is required</param>
-		public ExistsTypeRequest(Indices index, Names type): base(r => r.Required("index", index).Required("type", type))
-		{
-		}
-
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected ExistsTypeRequest(): base()
-		{
-		}
-
-		// values part of the url path
-		[IgnoreDataMember]
-		Indices IExistsTypeRequest.Index => Self.RouteValues.Get<Indices>("index");
-		[IgnoreDataMember]
-		Names IExistsTypeRequest.Type => Self.RouteValues.Get<Names>("type");
-		// Request parameters
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices
-		{
-			get => Q<bool? >("allow_no_indices");
-			set => Q("allow_no_indices", value);
-		}
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards
-		{
-			get => Q<ExpandWildcards? >("expand_wildcards");
-			set => Q("expand_wildcards", value);
-		}
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable
-		{
-			get => Q<bool? >("ignore_unavailable");
-			set => Q("ignore_unavailable", value);
-		}
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
-		}
-
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement ExistsTypeDescriptor and ExistsTypeRequest in a file called ExistsTypeRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
 	}
 
 	[InterfaceDataContract]
@@ -1315,62 +1189,6 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
-	public partial interface IGetIndexTemplateV2Request : IRequest<GetIndexTemplateV2RequestParameters>
-	{
-		[IgnoreDataMember]
-		Names Name
-		{
-			get;
-		}
-	}
-
-	///<summary>Request for GetTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
-	public partial class GetIndexTemplateV2Request : PlainRequestBase<GetIndexTemplateV2RequestParameters>, IGetIndexTemplateV2Request
-	{
-		protected IGetIndexTemplateV2Request Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetTemplateV2;
-		///<summary>/_index_template</summary>
-		public GetIndexTemplateV2Request(): base()
-		{
-		}
-
-		///<summary>/_index_template/{name}</summary>
-		///<param name = "name">Optional, accepts null</param>
-		public GetIndexTemplateV2Request(Names name): base(r => r.Optional("name", name))
-		{
-		}
-
-		// values part of the url path
-		[IgnoreDataMember]
-		Names IGetIndexTemplateV2Request.Name => Self.RouteValues.Get<Names>("name");
-		// Request parameters
-		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings
-		{
-			get => Q<bool? >("flat_settings");
-			set => Q("flat_settings", value);
-		}
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
-		}
-
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout
-		{
-			get => Q<Time>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement GetIndexTemplateV2Descriptor and GetIndexTemplateV2Request in a file called GetIndexTemplateV2Request.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
-	}
-
-	[InterfaceDataContract]
 	public partial interface IGetMappingRequest : IRequest<GetMappingRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -1725,63 +1543,6 @@ namespace Nest
 			get => Q<Time>("timeout");
 			set => Q("timeout", value);
 		}
-	}
-
-	[InterfaceDataContract]
-	public partial interface IPutIndexTemplateV2Request : IRequest<PutIndexTemplateV2RequestParameters>
-	{
-		[IgnoreDataMember]
-		Name Name
-		{
-			get;
-		}
-	}
-
-	///<summary>Request for PutTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
-	public partial class PutIndexTemplateV2Request : PlainRequestBase<PutIndexTemplateV2RequestParameters>, IPutIndexTemplateV2Request
-	{
-		protected IPutIndexTemplateV2Request Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutTemplateV2;
-		///<summary>/_index_template/{name}</summary>
-		///<param name = "name">this parameter is required</param>
-		public PutIndexTemplateV2Request(Name name): base(r => r.Required("name", name))
-		{
-		}
-
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected PutIndexTemplateV2Request(): base()
-		{
-		}
-
-		// values part of the url path
-		[IgnoreDataMember]
-		Name IPutIndexTemplateV2Request.Name => Self.RouteValues.Get<Name>("name");
-		// Request parameters
-		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
-		public bool? Create
-		{
-			get => Q<bool? >("create");
-			set => Q("create", value);
-		}
-
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout
-		{
-			get => Q<Time>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-
-		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
-		public long? Order
-		{
-			get => Q<long? >("order");
-			set => Q("order", value);
-		}
-
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement PutIndexTemplateV2Descriptor and PutIndexTemplateV2Request in a file called PutIndexTemplateV2Request.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
 	}
 
 	[InterfaceDataContract]

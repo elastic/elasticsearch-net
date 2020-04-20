@@ -61,30 +61,6 @@ namespace Nest.Specification.ClusterApi
 		/// </summary>
 		public Task<ClusterAllocationExplainResponse> AllocationExplainAsync(IClusterAllocationExplainRequest request, CancellationToken ct = default) => DoRequestAsync<IClusterAllocationExplainRequest, ClusterAllocationExplainResponse>(request, request.RequestParameters, ct);
 		/// <summary>
-		/// <c>HEAD</c> request to the <c>cluster.exists_component_template</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</a>
-		/// </summary>
-		public ExistsComponentTemplateResponse ExistsComponentTemplate(Name name, Func<ExistsComponentTemplateDescriptor, IExistsComponentTemplateRequest> selector = null) => ExistsComponentTemplate(selector.InvokeOrDefault(new ExistsComponentTemplateDescriptor(name: name)));
-		/// <summary>
-		/// <c>HEAD</c> request to the <c>cluster.exists_component_template</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</a>
-		/// </summary>
-		public Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Name name, Func<ExistsComponentTemplateDescriptor, IExistsComponentTemplateRequest> selector = null, CancellationToken ct = default) => ExistsComponentTemplateAsync(selector.InvokeOrDefault(new ExistsComponentTemplateDescriptor(name: name)), ct);
-		/// <summary>
-		/// <c>HEAD</c> request to the <c>cluster.exists_component_template</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</a>
-		/// </summary>
-		public ExistsComponentTemplateResponse ExistsComponentTemplate(IExistsComponentTemplateRequest request) => DoRequest<IExistsComponentTemplateRequest, ExistsComponentTemplateResponse>(request, request.RequestParameters);
-		/// <summary>
-		/// <c>HEAD</c> request to the <c>cluster.exists_component_template</c> API, read more about this API online:
-		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</a>
-		/// </summary>
-		public Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(IExistsComponentTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IExistsComponentTemplateRequest, ExistsComponentTemplateResponse>(request, request.RequestParameters, ct);
-		/// <summary>
 		/// <c>GET</c> request to the <c>cluster.get_settings</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</a>

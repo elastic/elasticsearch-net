@@ -22,7 +22,6 @@ using System.Threading.Tasks;
 using System.Linq;
 using Nest;
 using Nest.Specification.AsyncSearchApi;
-using Nest.Specification.AutoscalingApi;
 using Nest.Specification.CatApi;
 using Nest.Specification.ClusterApi;
 using Nest.Specification.CrossClusterReplicationApi;
@@ -53,12 +52,6 @@ namespace Nest
 	{
 		///<summary>Async Search APIs</summary>
 		AsyncSearchNamespace AsyncSearch
-		{
-			get;
-		}
-
-		///<summary>Autoscaling APIs</summary>
-		AutoscalingNamespace Autoscaling
 		{
 			get;
 		}

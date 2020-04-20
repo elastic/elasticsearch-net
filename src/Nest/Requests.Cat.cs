@@ -873,7 +873,7 @@ namespace Nest
 	public partial interface ICatTrainedModelsRequest : IRequest<CatTrainedModelsRequestParameters>
 	{
 		[IgnoreDataMember]
-		string_ ModelId
+		Id ModelId
 		{
 			get;
 		}
@@ -891,13 +891,13 @@ namespace Nest
 
 		///<summary>/_cat/ml/trained_models/{model_id}</summary>
 		///<param name = "modelId">Optional, accepts null</param>
-		public CatTrainedModelsRequest(string_ modelId): base(r => r.Optional("model_id", modelId))
+		public CatTrainedModelsRequest(Id modelId): base(r => r.Optional("model_id", modelId))
 		{
 		}
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string_ ICatTrainedModelsRequest.ModelId => Self.RouteValues.Get<string_>("model_id");
+		Id ICatTrainedModelsRequest.ModelId => Self.RouteValues.Get<Id>("model_id");
 		// Request parameters
 		///<summary>
 		/// Whether to ignore if a wildcard expression matches no trained models. (This includes `_all` string or when no trained models have been
@@ -1912,7 +1912,7 @@ namespace Nest
 	public partial interface ICatTransformsRequest : IRequest<CatTransformsRequestParameters>
 	{
 		[IgnoreDataMember]
-		string_ TransformId
+		Id TransformId
 		{
 			get;
 		}
@@ -1930,13 +1930,13 @@ namespace Nest
 
 		///<summary>/_cat/transforms/{transform_id}</summary>
 		///<param name = "transformId">Optional, accepts null</param>
-		public CatTransformsRequest(string_ transformId): base(r => r.Optional("transform_id", transformId))
+		public CatTransformsRequest(Id transformId): base(r => r.Optional("transform_id", transformId))
 		{
 		}
 
 		// values part of the url path
 		[IgnoreDataMember]
-		string_ ICatTransformsRequest.TransformId => Self.RouteValues.Get<string_>("transform_id");
+		Id ICatTransformsRequest.TransformId => Self.RouteValues.Get<Id>("transform_id");
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard expression matches no transforms. (This includes `_all` string or when no transforms have been specified)</summary>
 		public bool? AllowNoMatch

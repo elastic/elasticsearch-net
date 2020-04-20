@@ -277,34 +277,6 @@ namespace Nest
 		public DeleteAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
-	///<summary>Descriptor for DeleteTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
-	public partial class DeleteIndexTemplateV2Descriptor : RequestDescriptorBase<DeleteIndexTemplateV2Descriptor, DeleteIndexTemplateV2RequestParameters, IDeleteIndexTemplateV2Request>, IDeleteIndexTemplateV2Request
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteTemplateV2;
-		///<summary>/_index_template/{name}</summary>
-		///<param name = "name">this parameter is required</param>
-		public DeleteIndexTemplateV2Descriptor(Name name): base(r => r.Required("name", name))
-		{
-		}
-
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected DeleteIndexTemplateV2Descriptor(): base()
-		{
-		}
-
-		// values part of the url path
-		Name IDeleteIndexTemplateV2Request.Name => Self.RouteValues.Get<Name>("name");
-		// Request parameters
-		///<summary>Specify timeout for connection to master</summary>
-		public DeleteIndexTemplateV2Descriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
-		///<summary>Explicit operation timeout</summary>
-		public DeleteIndexTemplateV2Descriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement DeleteIndexTemplateV2Descriptor and DeleteIndexTemplateV2Request in a file called DeleteIndexTemplateV2Request.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
-	}
-
 	///<summary>Descriptor for DeleteTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public partial class DeleteIndexTemplateDescriptor : RequestDescriptorBase<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequestParameters, IDeleteIndexTemplateRequest>, IDeleteIndexTemplateRequest
 	{
@@ -439,47 +411,6 @@ namespace Nest
 		public IndexTemplateExistsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public IndexTemplateExistsDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
-	}
-
-	///<summary>Descriptor for ExistsType <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</para></summary>
-	public partial class ExistsTypeDescriptor : RequestDescriptorBase<ExistsTypeDescriptor, ExistsTypeRequestParameters, IExistsTypeRequest>, IExistsTypeRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExistsType;
-		///<summary>/{index}/_mapping/{type}</summary>
-		///<param name = "index">this parameter is required</param>
-		///<param name = "type">this parameter is required</param>
-		public ExistsTypeDescriptor(Indices index, Names type): base(r => r.Required("index", index).Required("type", type))
-		{
-		}
-
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected ExistsTypeDescriptor(): base()
-		{
-		}
-
-		// values part of the url path
-		Indices IExistsTypeRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Names IExistsTypeRequest.Type => Self.RouteValues.Get<Names>("type");
-		///<summary>A comma-separated list of index names; use `_all` to check the types across all indices</summary>
-		public ExistsTypeDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ExistsTypeDescriptor Index<TOther>()
-			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
-		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public ExistsTypeDescriptor AllIndices() => Index(Indices.All);
-		// Request parameters
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public ExistsTypeDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExistsTypeDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public ExistsTypeDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public ExistsTypeDescriptor Local(bool? local = true) => Qs("local", local);
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement ExistsTypeDescriptor and ExistsTypeRequest in a file called ExistsTypeRequest.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
 	}
 
 	///<summary>Descriptor for Flush <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</para></summary>
@@ -735,37 +666,6 @@ namespace Nest
 		public GetFieldMappingDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 	}
 
-	///<summary>Descriptor for GetTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
-	public partial class GetIndexTemplateV2Descriptor : RequestDescriptorBase<GetIndexTemplateV2Descriptor, GetIndexTemplateV2RequestParameters, IGetIndexTemplateV2Request>, IGetIndexTemplateV2Request
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetTemplateV2;
-		///<summary>/_index_template</summary>
-		public GetIndexTemplateV2Descriptor(): base()
-		{
-		}
-
-		///<summary>/_index_template/{name}</summary>
-		///<param name = "name">Optional, accepts null</param>
-		public GetIndexTemplateV2Descriptor(Names name): base(r => r.Optional("name", name))
-		{
-		}
-
-		// values part of the url path
-		Names IGetIndexTemplateV2Request.Name => Self.RouteValues.Get<Names>("name");
-		///<summary>The comma separated names of the index templates</summary>
-		public GetIndexTemplateV2Descriptor Name(Names name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
-		// Request parameters
-		///<summary>Return settings in flat format (default: false)</summary>
-		public GetIndexTemplateV2Descriptor FlatSettings(bool? flatsettings = true) => Qs("flat_settings", flatsettings);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetIndexTemplateV2Descriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetIndexTemplateV2Descriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement GetIndexTemplateV2Descriptor and GetIndexTemplateV2Request in a file called GetIndexTemplateV2Request.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
-	}
-
 	///<summary>Descriptor for GetMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 	public partial class GetMappingDescriptor<TDocument> : RequestDescriptorBase<GetMappingDescriptor<TDocument>, GetMappingRequestParameters, IGetMappingRequest>, IGetMappingRequest
 	{
@@ -960,36 +860,6 @@ namespace Nest
 		public PutAliasDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Explicit timestamp for the document</summary>
 		public PutAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-	}
-
-	///<summary>Descriptor for PutTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
-	public partial class PutIndexTemplateV2Descriptor : RequestDescriptorBase<PutIndexTemplateV2Descriptor, PutIndexTemplateV2RequestParameters, IPutIndexTemplateV2Request>, IPutIndexTemplateV2Request
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutTemplateV2;
-		///<summary>/_index_template/{name}</summary>
-		///<param name = "name">this parameter is required</param>
-		public PutIndexTemplateV2Descriptor(Name name): base(r => r.Required("name", name))
-		{
-		}
-
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected PutIndexTemplateV2Descriptor(): base()
-		{
-		}
-
-		// values part of the url path
-		Name IPutIndexTemplateV2Request.Name => Self.RouteValues.Get<Name>("name");
-		// Request parameters
-		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
-		public PutIndexTemplateV2Descriptor Create(bool? create = true) => Qs("create", create);
-		///<summary>Specify timeout for connection to master</summary>
-		public PutIndexTemplateV2Descriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
-		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
-		public PutIndexTemplateV2Descriptor Order(long? order) => Qs("order", order);
-		[Obsolete("Unmapped, blacklist this API in CodeConfiguration.cs or implement PutIndexTemplateV2Descriptor and PutIndexTemplateV2Request in a file called PutIndexTemplateV2Request.cs in NEST's codebase", true)]
-		public bool IsUnmapped => true;
-		public bool UseIsUnmapped => IsUnmapped;
 	}
 
 	///<summary>Descriptor for PutMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
