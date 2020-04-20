@@ -19,28 +19,27 @@ namespace Tests.XPack.AsyncSearch.Get
 		public AsyncSearchGetApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override HttpMethod HttpMethod => GET;
-		protected override string UrlPath => $"/_async_search/{SearchId}";
+		protected override string UrlPath => $"/_async_search/{U(SearchId)}";
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 
-		private Id SearchId => RanIntegrationSetup ? ExtendedValue<string>("searchId") : CallIsolatedValue;
+		private string SearchId => RanIntegrationSetup ? ExtendedValue<string>("searchId") : CallIsolatedValue;
 
 		protected override AsyncSearchGetRequest Initializer => new AsyncSearchGetRequest(SearchId);
 
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		protected override void OnBeforeCall(IElasticClient client)
 		{
-			foreach (var callValue in values.Value)
-			{
-				var response = client.AsyncSearch.Submit<Project>(s => s
-					.MatchAll()
-				);
+			var response = client.AsyncSearch.Submit<Project>(s => s
+				.MatchAll()
+				.KeepOnCompletion()
+				.WaitForCompletionTimeout(-1)
+			);
 
-				if (!response.IsValid)
-					throw new Exception($"Error setting up async search for test: {response.DebugInformation}");
+			if (!response.IsValid)
+				throw new Exception($"Error setting up async search for test: {response.DebugInformation}");
 
-				values.ExtendedValue("searchId", response.Id);
-			}
+			ExtendedValue("searchId", response.Id);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -53,9 +52,9 @@ namespace Tests.XPack.AsyncSearch.Get
 		protected override void ExpectResponse(AsyncSearchGetResponse<Project> response)
 		{
 			response.ShouldBeValid();
+			response.Id.Should().NotBeNullOrEmpty();
 			response.StartTime.Should().BeOnOrBefore(DateTimeOffset.Now);
 			response.Response.Should().NotBeNull();
-			response.Response.Hits.Count.Should().Be(10);
 		}
 	}
 }

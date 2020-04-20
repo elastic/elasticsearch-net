@@ -19,28 +19,29 @@ namespace Tests.XPack.AsyncSearch.Delete
 		public AsyncSearchDeleteApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override HttpMethod HttpMethod => DELETE;
-		protected override string UrlPath => $"/_async_search/{SearchId}";
+		protected override string UrlPath => $"/_async_search/{U(SearchId)}";
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 
-		private Id SearchId => RanIntegrationSetup ? ExtendedValue<string>("searchId") : CallIsolatedValue;
+		private string SearchId => RanIntegrationSetup ? ExtendedValue<string>("searchId") : CallIsolatedValue;
 
 		protected override AsyncSearchDeleteRequest Initializer => new AsyncSearchDeleteRequest(SearchId);
 
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		protected override AsyncSearchDeleteDescriptor NewDescriptor() =>  new AsyncSearchDeleteDescriptor(SearchId);
+
+		protected override void OnBeforeCall(IElasticClient client)
 		{
-			foreach (var callValue in values.Value)
-			{
-				var response = client.AsyncSearch.Submit<Project>(s => s
-					.MatchAll()
-				);
+			var response = client.AsyncSearch.Submit<Project>(s => s
+				.MatchAll()
+				.KeepOnCompletion()
+				.WaitForCompletionTimeout(-1)
+			);
 
-				if (!response.IsValid)
-					throw new Exception($"Error setting up async search for test: {response.DebugInformation}");
+			if (!response.IsValid)
+				throw new Exception($"Error setting up async search for test: {response.DebugInformation}");
 
-				values.ExtendedValue("searchId", response.Id);
-			}
+			ExtendedValue("searchId", response.Id);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
