@@ -209,7 +209,7 @@ namespace Nest
 			Assign(aggregations, (a, v) => a.Aggregations = v);
 
 		/// <inheritdoc cref="IAsyncSearchSubmitRequest.Source" />
-		public AsyncSearchSubmitDescriptor<TInferDocument> Source(bool enabled = true) => Assign(enabled, (a, v) => a.Source = v);
+		public AsyncSearchSubmitDescriptor<TInferDocument> Source(bool? enabled = true) => Assign(enabled, (a, v) => a.Source = v);
 
 		/// <inheritdoc cref="IAsyncSearchSubmitRequest.Source" />
 		public AsyncSearchSubmitDescriptor<TInferDocument> Source(Func<SourceFilterDescriptor<TInferDocument>, ISourceFilter> selector) =>
