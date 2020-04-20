@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -34,6 +35,7 @@ namespace Nest
 		/// Whether punctuation should be discarded from the output. Defaults to `true`.
 		/// </summary>
 		[DataMember(Name = "discard_punctuation")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? DiscardPunctuation { get; set; }
 
 		/// <summary>
