@@ -85,6 +85,7 @@ var client = new ElasticClient(settings);
 var projectSearchResponse = client.Search<Project>();
 ----
 <1> a default index to use, when no other index can be inferred
+
 <2> a index to use when `Project` is the target POCO type
 
 will send a search request to the API endpoint
