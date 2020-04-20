@@ -87,11 +87,16 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			var b = TestClient.Configuration.Random.SourceSerializer;
 
 			var supportsFlattenedType = TestConfiguration.Instance.InRange(">=7.3.0");
+			var supportsConstantKeyword = TestConfiguration.Instance.InRange(">=7.7.0");
+
+			var keywordCount = b ? 19 : 18;
+			if (!supportsConstantKeyword)
+				keywordCount++;
 
 			response.Accept(visitor);
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
 			visitor.CountsShouldContainKeyAndCountBe("text", b ? 18 : 17);
-			visitor.CountsShouldContainKeyAndCountBe("keyword", b ? 20 : 19);
+			visitor.CountsShouldContainKeyAndCountBe("keyword", keywordCount);
 			visitor.CountsShouldContainKeyAndCountBe("object", supportsFlattenedType? 8 : 9);
 			visitor.CountsShouldContainKeyAndCountBe("number", 9);
 			visitor.CountsShouldContainKeyAndCountBe("ip", 2);
@@ -110,6 +115,9 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 			if (supportsFlattenedType)
 				visitor.CountsShouldContainKeyAndCountBe("flattened", 1);
+
+			if (supportsConstantKeyword)
+				visitor.CountsShouldContainKeyAndCountBe("constant_keyword", 1);
 		}
 	}
 
