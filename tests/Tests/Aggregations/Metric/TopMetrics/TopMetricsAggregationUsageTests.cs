@@ -12,6 +12,13 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.TopMetrics
 {
+	/**
+	 * The top metrics aggregation selects metrics from the document with the largest or smallest "sort" value.
+	 *
+	 * Top metrics is fairly similar to "top hits" in spirit but because it is more limited it is able to do its job using less memory and is often faster.
+	 *
+	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-top-metrics.html[Top Metrics Aggregation]
+	 */
 	[SkipVersion("<7.7.0", "Available in 7.7.0")]
 	public class TopMetricsAggregationUsageTests : AggregationUsageTestBase
 	{
