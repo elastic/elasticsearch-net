@@ -345,7 +345,7 @@ namespace Tests.Analysis.Tokenizers
 				DiscardPunctuation = true
 			};
 
-			public override object Json => new { type = "nori_tokenizer", discard_punctuation = "true" };
+			public override object Json => new { type = "nori_tokenizer", discard_punctuation = true };
 			public override string Name => "nori-discard";
 		}
 	}
