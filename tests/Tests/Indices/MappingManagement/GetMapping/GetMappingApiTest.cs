@@ -91,7 +91,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			response.Accept(visitor);
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
 			visitor.CountsShouldContainKeyAndCountBe("text", b ? 18 : 17);
-			visitor.CountsShouldContainKeyAndCountBe("keyword", b ? 19 : 18);
+			visitor.CountsShouldContainKeyAndCountBe("keyword", b ? 20 : 19);
 			visitor.CountsShouldContainKeyAndCountBe("object", supportsFlattenedType? 8 : 9);
 			visitor.CountsShouldContainKeyAndCountBe("number", 9);
 			visitor.CountsShouldContainKeyAndCountBe("ip", 2);
