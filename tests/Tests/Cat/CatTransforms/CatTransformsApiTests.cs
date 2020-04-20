@@ -9,7 +9,7 @@ using Elastic.Xunit.XunitPlumbing;
 
 namespace Tests.Cat.CatTransforms
 {
-    [SkipVersion("<7.5.0", "Introduced in 7.5.0")]
+    [SkipVersion("<7.7.0", "Introduced in 7.7.0")]
 	public class CatTransformsApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatTransformsRecord>, ICatTransformsRequest, CatTransformsDescriptor, CatTransformsRequest>
 	{
@@ -30,7 +30,7 @@ namespace Tests.Cat.CatTransforms
 		protected override void ExpectResponse(CatResponse<CatTransformsRecord> response) => response.ShouldBeValid();
 	}
 
-    [SkipVersion("<7.5.0", "Introduced in 7.5.0")]
+    [SkipVersion("<7.7.0", "Introduced in 7.7.0")]
 	public class CatTransformsFullApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, CatResponse<CatTransformsRecord>, ICatTransformsRequest, CatTransformsDescriptor,
 			CatTransformsRequest>
