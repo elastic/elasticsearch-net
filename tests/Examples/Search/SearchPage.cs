@@ -92,7 +92,6 @@ namespace Examples.Search
 			searchResponse.MatchesExample(@"GET /*/_search?q=user:kimchy", e =>
 			{
 				e.Uri.Path = "/_all/_search";
-				return e;
 			});
 		}
 	}

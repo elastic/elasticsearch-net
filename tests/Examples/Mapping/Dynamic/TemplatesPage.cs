@@ -194,7 +194,6 @@ namespace Examples.Mapping.Dynamic
 				{
 					body["mappings"]["dynamic_templates"][0]["full_name"]["mapping"]["copy_to"] = new JArray("full_name");
 				});
-				return e;
 			});
 
 			indexResponse.MatchesExample(@"PUT my_index/_doc/1

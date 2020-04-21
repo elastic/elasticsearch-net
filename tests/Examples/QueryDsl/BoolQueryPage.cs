@@ -79,7 +79,6 @@ namespace Examples.QueryDsl
 					ageQuery["gte"] = 10.0;
 					ageQuery["lte"] = 20.0;
 				});
-				return e;
 			});
 		}
 
@@ -112,7 +111,6 @@ namespace Examples.QueryDsl
 					var filter = b["query"]["bool"]["filter"].ToJArray();
 					filter[0]["term"]["status"].ToLongFormTermQuery();
 				});
-				return e;
 			});
 		}
 

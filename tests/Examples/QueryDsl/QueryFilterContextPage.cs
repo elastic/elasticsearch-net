@@ -51,7 +51,6 @@ namespace Examples.QueryDsl
 					must[1]["match"]["content"].ToLongFormQuery();
 					filter[0]["term"]["status"].ToLongFormTermQuery();
 				});
-				return e;
 			});
 		}
 	}

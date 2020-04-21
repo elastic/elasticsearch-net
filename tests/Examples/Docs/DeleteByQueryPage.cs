@@ -41,7 +41,6 @@ namespace Examples.Docs
 					var query = body["query"]["match"]["message"].Value<string>();
 					body["query"]["match"]["message"] = new JObject { { "query", query } };
 				});
-				return e;
 			});
 		}
 
@@ -117,7 +116,6 @@ namespace Examples.Docs
 				{
 					body["query"]["range"]["age"]["gte"] = 10d;
 				});
-				return e;
 			});
 		}
 
@@ -152,7 +150,6 @@ namespace Examples.Docs
 					var value = body["query"]["term"]["user"].Value<string>();
 					body["query"]["term"]["user"] = new JObject { { "value", value } };
 				});
-				return e;
 			});
 		}
 
@@ -210,7 +207,6 @@ namespace Examples.Docs
 				{
 					body["query"]["range"]["likes"]["lt"] = 10d;
 				});
-				return e;
 			});
 
 			deleteByQueryResponse2.MatchesExample(@"POST twitter/_delete_by_query
@@ -233,7 +229,6 @@ namespace Examples.Docs
 					// numeric ranges always use doubles
 					body["query"]["range"]["likes"]["lt"] = 10d;
 				});
-				return e;
 			});
 		}
 
@@ -261,7 +256,6 @@ namespace Examples.Docs
 			{
 				// refresh is always a POST with the client
 				e.Method = HttpMethod.POST;
-				return e;
 			});
 
 			searchResponse.MatchesExample(@"POST twitter/_search?size=0&filter_path=hits.total
@@ -283,7 +277,6 @@ namespace Examples.Docs
 					// numeric ranges always use doubles
 					body["query"]["range"]["likes"]["lt"] = 10d;
 				});
-				return e;
 			});
 		}
 
@@ -323,7 +316,6 @@ namespace Examples.Docs
 					// slices is defined in body
 					body["query"]["range"]["likes"]["lt"] = 10d;
 				});
-				return e;
 			});
 		}
 
@@ -363,7 +355,6 @@ namespace Examples.Docs
 					body["size"] = 0;
 					body["query"]["range"]["likes"]["lt"] = 10d;
 				});
-				return e;
 			});
 		}
 

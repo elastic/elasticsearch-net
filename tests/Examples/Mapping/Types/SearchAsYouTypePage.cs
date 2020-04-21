@@ -61,7 +61,6 @@ namespace Examples.Mapping.Types
 			{
 				// query string params always need a value
 				e.Uri.Query = e.Uri.Query.Replace("refresh", "refresh=true");
-				return e;
 			});
 		}
 
@@ -133,7 +132,6 @@ namespace Examples.Mapping.Types
 					var value = body["query"]["match_phrase_prefix"]["my_field"];
 					body["query"]["match_phrase_prefix"]["my_field"] = new JObject { { "query", value } };
 				});
-				return e;
 			});
 		}
 	}

@@ -51,7 +51,6 @@ namespace Examples.Indices
 			}", e =>
 			{
 				e.AdjustIndexSettings();
-				return e;
 			});
 		}
 
@@ -98,7 +97,6 @@ namespace Examples.Indices
 			{
 				e.AdjustIndexSettings();
 				e.ApplyBodyChanges(o => o["aliases"]["alias2"]["filter"]["term"]["user"].ToLongFormTermQuery());
-				return e;
 			});
 		}
 
@@ -143,7 +141,6 @@ namespace Examples.Indices
 			}", e =>
 			{
 				e.AdjustIndexSettings();
-				return e;
 			});
 
 			putIndexTemplateResponse2.MatchesExample(@"PUT /_template/template_2
@@ -159,7 +156,6 @@ namespace Examples.Indices
 			}", e =>
 			{
 				e.AdjustIndexSettings();
-				return e;
 			});
 		}
 
@@ -189,7 +185,6 @@ namespace Examples.Indices
 			}", e =>
 			{
 				e.AdjustIndexSettings();
-				return e;
 			});
 		}
 

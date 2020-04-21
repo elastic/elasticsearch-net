@@ -63,7 +63,6 @@ namespace Examples.QueryDsl
 				{
 					b["query"]["match"]["message"].ToLongFormQuery();
 				});
-				return e;
 			});
 		}
 
