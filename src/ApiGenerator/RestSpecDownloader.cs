@@ -38,6 +38,12 @@ namespace ApiGenerator
 			{
 				foreach (var spec in specifications)
 				{
+					var specFolderOnDisk = Path.Combine(GeneratorLocations.RestSpecificationFolder, spec.FolderOnDisk);
+					if (Directory.Exists(specFolderOnDisk))
+					{
+						Directory.Delete(specFolderOnDisk, true);
+						pbar.WriteLine($"Deleted target spec folder, before downloading new copy: {specFolderOnDisk}");
+					}
 					pbar.Message = $"Downloading rest-api-spec to {spec.FolderOnDisk} for branch {branch}";
 					DownloadJsonDefinitions(spec, pbar);
 					pbar.Tick($"Downloaded rest-api-spec to {spec.FolderOnDisk} for branch {branch}");
