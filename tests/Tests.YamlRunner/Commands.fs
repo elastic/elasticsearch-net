@@ -12,10 +12,16 @@ let private barOptions =
        ForegroundColor = ConsoleColor.Cyan,
        ForegroundColorDone = Nullable ConsoleColor.DarkGreen,
        BackgroundColor = Nullable ConsoleColor.DarkGray,
-       ProgressCharacter = '─'
+       ProgressCharacter = '─',
+       CollapseWhenFinished = true
     )
 let private subBarOptions = 
-    ProgressBarOptions(ForegroundColor = ConsoleColor.Yellow, ForegroundColorDone = Nullable ConsoleColor.DarkGreen, ProgressCharacter = '─')
+    ProgressBarOptions(
+        ForegroundColor = ConsoleColor.Yellow,
+        ForegroundColorDone = Nullable ConsoleColor.DarkGreen,
+        ProgressCharacter = '─',
+        CollapseWhenFinished = true
+    )
 
 let LocateTests namedSuite revision directoryFilter fileFilter = async {
     let! folders = TestsLocator.ListFolders namedSuite revision directoryFilter 
