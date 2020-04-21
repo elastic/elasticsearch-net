@@ -7,8 +7,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class GetBucketPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/get-bucket.asciidoc:174")]
-		public void Line174()
+		[Description("ml/anomaly-detection/apis/get-bucket.asciidoc:178")]
+		public void Line178()
 		{
 			// tag::f96d4614f2fc294339fef325b794355f[]
 			var response0 = new SearchResponse<object>();

@@ -24,13 +24,13 @@ namespace Examples.Ml.AnomalyDetection.Apis
 		[Description("ml/anomaly-detection/apis/flush-job.asciidoc:98")]
 		public void Line98()
 		{
-			// tag::3033133e8675524fd8f969db0625b62e[]
+			// tag::7ebfb30b3ece855c1b783d9210939469[]
 			var response0 = new SearchResponse<object>();
-			// end::3033133e8675524fd8f969db0625b62e[]
+			// end::7ebfb30b3ece855c1b783d9210939469[]
 
 			response0.MatchesExample(@"POST _ml/anomaly_detectors/total-requests/_flush
 			{
-			  ""advance_time"": ""1514804400""
+			  ""advance_time"": ""1514804400000""
 			}");
 		}
 	}

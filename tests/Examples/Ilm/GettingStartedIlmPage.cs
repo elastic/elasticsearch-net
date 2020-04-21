@@ -10,11 +10,11 @@ namespace Examples.Ilm
 		[Description("ilm/getting-started-ilm.asciidoc:46")]
 		public void Line46()
 		{
-			// tag::f2dc1a1a2a6ba3c7c4273ce41ada4207[]
+			// tag::080b3362db1fa14e1ca4e290d6e6447d[]
 			var response0 = new SearchResponse<object>();
-			// end::f2dc1a1a2a6ba3c7c4273ce41ada4207[]
+			// end::080b3362db1fa14e1ca4e290d6e6447d[]
 
-			response0.MatchesExample(@"PUT _ilm/policy/datastream_policy
+			response0.MatchesExample(@"PUT _ilm/policy/timeseries_policy
 			{
 			  ""policy"": {
 			    ""phases"": {
@@ -41,18 +41,18 @@ namespace Examples.Ilm
 		[Description("ilm/getting-started-ilm.asciidoc:93")]
 		public void Line93()
 		{
-			// tag::e3d7b19f993382750719cdfaad2fdd90[]
+			// tag::4d01c243f7406c98546311ec1ff6b7e6[]
 			var response0 = new SearchResponse<object>();
-			// end::e3d7b19f993382750719cdfaad2fdd90[]
+			// end::4d01c243f7406c98546311ec1ff6b7e6[]
 
-			response0.MatchesExample(@"PUT _template/datastream_template
+			response0.MatchesExample(@"PUT _template/timeseries_template
 			{
-			  ""index_patterns"": [""datastream-*""],                 \<1>
+			  ""index_patterns"": [""timeseries-*""],                 <1>
 			  ""settings"": {
 			    ""number_of_shards"": 1,
 			    ""number_of_replicas"": 1,
-			    ""index.lifecycle.name"": ""datastream_policy"",      \<2>
-			    ""index.lifecycle.rollover_alias"": ""datastream""    \<3>
+			    ""index.lifecycle.name"": ""timeseries_policy"",      <2>
+			    ""index.lifecycle.rollover_alias"": ""timeseries""    <3>
 			  }
 			}");
 		}
@@ -61,14 +61,14 @@ namespace Examples.Ilm
 		[Description("ilm/getting-started-ilm.asciidoc:135")]
 		public void Line135()
 		{
-			// tag::55ee835d7c28e933ad8fcb9e45af2bf2[]
+			// tag::7148c8512079d378af70302e65502dd2[]
 			var response0 = new SearchResponse<object>();
-			// end::55ee835d7c28e933ad8fcb9e45af2bf2[]
+			// end::7148c8512079d378af70302e65502dd2[]
 
-			response0.MatchesExample(@"PUT datastream-000001
+			response0.MatchesExample(@"PUT timeseries-000001
 			{
 			  ""aliases"": {
-			    ""datastream"": {
+			    ""timeseries"": {
 			      ""is_write_index"": true
 			    }
 			  }
@@ -79,11 +79,11 @@ namespace Examples.Ilm
 		[Description("ilm/getting-started-ilm.asciidoc:173")]
 		public void Line173()
 		{
-			// tag::a1dbaff15cf8166f74c443ca58258d7e[]
+			// tag::2ffa953b29ed0156c9e610daf66b8e48[]
 			var response0 = new SearchResponse<object>();
-			// end::a1dbaff15cf8166f74c443ca58258d7e[]
+			// end::2ffa953b29ed0156c9e610daf66b8e48[]
 
-			response0.MatchesExample(@"GET datastream-*/_ilm/explain");
+			response0.MatchesExample(@"GET timeseries-*/_ilm/explain");
 		}
 	}
 }

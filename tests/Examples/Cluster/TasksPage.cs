@@ -92,8 +92,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/tasks.asciidoc:236")]
-		public void Line236()
+		[Description("cluster/tasks.asciidoc:241")]
+		public void Line241()
 		{
 			// tag::612c2e975f833de9815651135735eae5[]
 			var response0 = new SearchResponse<object>();
@@ -103,8 +103,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/tasks.asciidoc:247")]
-		public void Line247()
+		[Description("cluster/tasks.asciidoc:252")]
+		public void Line252()
 		{
 			// tag::bd3d710ec50a151453e141691163af72[]
 			var response0 = new SearchResponse<object>();
@@ -114,8 +114,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/tasks.asciidoc:254")]
-		public void Line254()
+		[Description("cluster/tasks.asciidoc:259")]
+		public void Line259()
 		{
 			// tag::a3ce0cfe2176f3d8a36959a5916995f0[]
 			var response0 = new SearchResponse<object>();

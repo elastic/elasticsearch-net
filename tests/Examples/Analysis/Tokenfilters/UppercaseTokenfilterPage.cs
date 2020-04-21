@@ -7,8 +7,8 @@ namespace Examples.Analysis.Tokenfilters
 	public class UppercaseTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenfilters/uppercase-tokenfilter.asciidoc:29")]
-		public void Line29()
+		[Description("analysis/tokenfilters/uppercase-tokenfilter.asciidoc:30")]
+		public void Line30()
 		{
 			// tag::9f7671119236423e0e40801ef6485af1[]
 			var response0 = new SearchResponse<object>();
@@ -23,8 +23,8 @@ namespace Examples.Analysis.Tokenfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenfilters/uppercase-tokenfilter.asciidoc:91")]
-		public void Line91()
+		[Description("analysis/tokenfilters/uppercase-tokenfilter.asciidoc:92")]
+		public void Line92()
 		{
 			// tag::9db72fe811ee61ee3f7baa45916d20e0[]
 			var response0 = new SearchResponse<object>();

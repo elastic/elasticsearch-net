@@ -84,12 +84,12 @@ namespace Examples.Transform
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("transform/examples.asciidoc:207")]
-		public void Line207()
+		[Description("transform/examples.asciidoc:202")]
+		public void Line202()
 		{
-			// tag::0bad2211181281b6cc5df8e364bcc111[]
+			// tag::7bc36ea4a24937de6c009397861baf05[]
 			var response0 = new SearchResponse<object>();
-			// end::0bad2211181281b6cc5df8e364bcc111[]
+			// end::7bc36ea4a24937de6c009397861baf05[]
 
 			response0.MatchesExample(@"PUT _transform/suspicious_client_ips
 			{
@@ -116,30 +116,17 @@ namespace Examples.Transform
 			      ""agent_dc"": { ""cardinality"": { ""field"": ""agent.keyword"" }},
 			      ""geo.dest_dc"": { ""cardinality"": { ""field"": ""geo.dest"" }},
 			      ""responses.total"": { ""value_count"": { ""field"": ""timestamp"" }},
-			      ""responses.counts"": { <4>
-			        ""scripted_metric"": {
-			          ""init_script"": ""state.responses = ['error':0L,'success':0L,'other':0L]"",
-			          ""map_script"": """"""
-			            def code = doc['response.keyword'].value;
-			            if (code.startsWith('5') || code.startsWith('4')) {
-			              state.responses.error += 1 ;
-			            } else if(code.startsWith('2')) {
-			              state.responses.success += 1;
-			            } else {
-			              state.responses.other += 1;
-			            }
-			            """""",
-			          ""combine_script"": ""state.responses"",
-			          ""reduce_script"": """"""
-			            def counts = ['error': 0L, 'success': 0L, 'other': 0L];
-			            for (responses in states) {
-			              counts.error += responses['error'];
-			              counts.success += responses['success'];
-			              counts.other += responses['other'];
-			            }
-			            return counts;
-			            """"""
-			          }
+			      ""success"" : { <4>
+			         ""filter"": {
+			            ""term"": { ""response"" : ""200""}}
+			        },
+			      ""error404"" : {
+			         ""filter"": {
+			            ""term"": { ""response"" : ""404""}}
+			        },
+			      ""error503"" : {
+			         ""filter"": {
+			            ""term"": { ""response"" : ""503""}}
 			        },
 			      ""timestamp.min"": { ""min"": { ""field"": ""timestamp"" }},
 			      ""timestamp.max"": { ""max"": { ""field"": ""timestamp"" }},
@@ -158,8 +145,8 @@ namespace Examples.Transform
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("transform/examples.asciidoc:288")]
-		public void Line288()
+		[Description("transform/examples.asciidoc:272")]
+		public void Line272()
 		{
 			// tag::4bd42e31ac4a5cf237777f1a0e97aba8[]
 			var response0 = new SearchResponse<object>();
@@ -169,8 +156,8 @@ namespace Examples.Transform
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("transform/examples.asciidoc:297")]
-		public void Line297()
+		[Description("transform/examples.asciidoc:282")]
+		public void Line282()
 		{
 			// tag::14f2dab0583c5a9fcc39931d33194872[]
 			var response0 = new SearchResponse<object>();

@@ -30,8 +30,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("docs/multi-get.asciidoc:128")]
-		public void Line128()
+		[Description("docs/multi-get.asciidoc:130")]
+		public void Line130()
 		{
 			// tag::53cf7d3731f50620b3277b80e2fbfd56[]
 			var response0 = new SearchResponse<object>();
@@ -51,8 +51,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("docs/multi-get.asciidoc:146")]
-		public void Line146()
+		[Description("docs/multi-get.asciidoc:148")]
+		public void Line148()
 		{
 			// tag::81095ba46e4d8c5da3623f5ea8c54a34[]
 			var response0 = new SearchResponse<object>();
@@ -65,8 +65,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("docs/multi-get.asciidoc:168")]
-		public void Line168()
+		[Description("docs/multi-get.asciidoc:170")]
+		public void Line170()
 		{
 			// tag::6b1ab3f273c6e425067cd5889b0c258f[]
 			var response0 = new SearchResponse<object>();
@@ -98,8 +98,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("docs/multi-get.asciidoc:206")]
-		public void Line206()
+		[Description("docs/multi-get.asciidoc:208")]
+		public void Line208()
 		{
 			// tag::c4272ba35b81125a805fb1a7292f3d25[]
 			var response0 = new SearchResponse<object>();
@@ -123,8 +123,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("docs/multi-get.asciidoc:229")]
-		public void Line229()
+		[Description("docs/multi-get.asciidoc:231")]
+		public void Line231()
 		{
 			// tag::27fac828d28ab065524dd1ce148840c0[]
 			var response0 = new SearchResponse<object>();
@@ -145,8 +145,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("docs/multi-get.asciidoc:252")]
-		public void Line252()
+		[Description("docs/multi-get.asciidoc:254")]
+		public void Line254()
 		{
 			// tag::1b37488d0a79d3c950029851b7cd623e[]
 			var response0 = new SearchResponse<object>();

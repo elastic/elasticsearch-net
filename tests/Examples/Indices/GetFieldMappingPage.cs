@@ -18,8 +18,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/get-field-mapping.asciidoc:65")]
-		public void Line65()
+		[Description("indices/get-field-mapping.asciidoc:63")]
+		public void Line63()
 		{
 			// tag::f0f0f778e19134fbe3e4be98fc47bd34[]
 			var response0 = new SearchResponse<object>();
@@ -44,8 +44,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/get-field-mapping.asciidoc:87")]
-		public void Line87()
+		[Description("indices/get-field-mapping.asciidoc:85")]
+		public void Line85()
 		{
 			// tag::299900fb08da80fe455cf3f1bb7d62ee[]
 			var response0 = new SearchResponse<object>();
@@ -55,8 +55,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/get-field-mapping.asciidoc:120")]
-		public void Line120()
+		[Description("indices/get-field-mapping.asciidoc:118")]
+		public void Line118()
 		{
 			// tag::ed3bdf4d6799b43526851e92b6a60c55[]
 			var response0 = new SearchResponse<object>();
@@ -66,8 +66,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/get-field-mapping.asciidoc:156")]
-		public void Line156()
+		[Description("indices/get-field-mapping.asciidoc:154")]
+		public void Line154()
 		{
 			// tag::b61afb7ca29a11243232ffcc8b5a43cf[]
 			var response0 = new SearchResponse<object>();
@@ -77,8 +77,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/get-field-mapping.asciidoc:208")]
-		public void Line208()
+		[Description("indices/get-field-mapping.asciidoc:206")]
+		public void Line206()
 		{
 			// tag::9af393bb38bf098d65d00e7637824f44[]
 			var response0 = new SearchResponse<object>();

@@ -10,16 +10,16 @@ namespace Examples.Search.Request
 		[Description("search/request/index-boost.asciidoc:11")]
 		public void Line11()
 		{
-			// tag::393c6b7a2e8c3381530c41ff2f7c4991[]
+			// tag::69dce2801f824f61e4f3ea9ee9371e31[]
 			var response0 = new SearchResponse<object>();
-			// end::393c6b7a2e8c3381530c41ff2f7c4991[]
+			// end::69dce2801f824f61e4f3ea9ee9371e31[]
 
 			response0.MatchesExample(@"GET /_search
 			{
-			    ""indices_boost"" : {
-			        ""index1"" : 1.4,
-			        ""index2"" : 1.3
-			    }
+			    ""indices_boost"" : [
+			        { ""index1"" : 1.4 },
+			        { ""index2"" : 1.3 }
+			    ]
 			}");
 		}
 

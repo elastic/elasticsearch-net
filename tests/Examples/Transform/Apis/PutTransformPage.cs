@@ -7,8 +7,8 @@ namespace Examples.Transform.Apis
 	public class PutTransformPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("transform/apis/put-transform.asciidoc:153")]
-		public void Line153()
+		[Description("transform/apis/put-transform.asciidoc:195")]
+		public void Line195()
 		{
 			// tag::23994a14e6b0681cd279b427324945db[]
 			var response0 = new SearchResponse<object>();

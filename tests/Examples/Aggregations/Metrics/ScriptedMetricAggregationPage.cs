@@ -67,8 +67,8 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/scripted-metric-aggregation.asciidoc:147")]
-		public void Line147()
+		[Description("aggregations/metrics/scripted-metric-aggregation.asciidoc:150")]
+		public void Line150()
 		{
 			// tag::75e360d03fb416f0a65ca37c662c2e9c[]
 			var response0 = new SearchResponse<object>();

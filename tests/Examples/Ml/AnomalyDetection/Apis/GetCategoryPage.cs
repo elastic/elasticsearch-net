@@ -7,8 +7,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class GetCategoryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/get-category.asciidoc:100")]
-		public void Line100()
+		[Description("ml/anomaly-detection/apis/get-category.asciidoc:110")]
+		public void Line110()
 		{
 			// tag::e8f1c9ee003d115ec8f55e57990df6e4[]
 			var response0 = new SearchResponse<object>();

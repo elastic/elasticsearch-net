@@ -7,8 +7,8 @@ namespace Examples.Rollup.Apis
 	public class PutJobPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("rollup/apis/put-job.asciidoc:223")]
-		public void Line223()
+		[Description("rollup/apis/put-job.asciidoc:247")]
+		public void Line247()
 		{
 			// tag::2025834fab7efbb0542275c30d9d0bfe[]
 			var response0 = new SearchResponse<object>();

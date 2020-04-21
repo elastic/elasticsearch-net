@@ -10,7 +10,7 @@ namespace Examples.Mapping.Types
 		[Description("mapping/types/date_nanos.asciidoc:32")]
 		public void Line32()
 		{
-			// tag::46dd5948cfc34adf1dfe024fc960bb01[]
+			// tag::5e11eb4d328005434b19bbb9b11a3685[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
@@ -24,7 +24,7 @@ namespace Examples.Mapping.Types
 			var response5 = new SearchResponse<object>();
 
 			var response6 = new SearchResponse<object>();
-			// end::46dd5948cfc34adf1dfe024fc960bb01[]
+			// end::5e11eb4d328005434b19bbb9b11a3685[]
 
 			response0.MatchesExample(@"PUT my_index
 			{
@@ -67,7 +67,7 @@ namespace Examples.Mapping.Types
 			{
 			  ""docvalue_fields"" : [
 			    {
-			      ""field"" : ""my_ip_field"",
+			      ""field"" : ""date"",
 			      ""format"": ""strict_date_time"" <7>
 			    }
 			  ]
