@@ -36,7 +36,11 @@ namespace ApiGenerator
 			var lowLevelOnly = generateCode && Ask("Generate low level client only?", false);
 
 			if (redownloadCoreSpecification)
+			{
+				Directory.Delete(Path.Combine(GeneratorLocations.RestSpecificationFolder, "Core"), true);
+				Directory.Delete(Path.Combine(GeneratorLocations.RestSpecificationFolder, "XPack"), true);
 				RestSpecDownloader.Download(downloadBranch);
+			}
 
 			if (generateCode)
 				await Generator.ApiGenerator.Generate(downloadBranch, lowLevelOnly, "Core", "XPack");
