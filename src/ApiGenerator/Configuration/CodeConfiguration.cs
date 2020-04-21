@@ -111,7 +111,11 @@ namespace ApiGenerator.Configuration
 
 		public static readonly HashSet<string> EnableHighLevelCodeGen = new HashSet<string>();
 
-		public static bool IsNewHighLevelApi(string apiFileName) => !HighLevelApiNameMapping.ContainsKey(apiFileName.Replace(".json", ""));
+		public static bool IsNewHighLevelApi(string apiFileName) =>
+			// if its explicitly ignored we know about it.
+			!IgnoredApis.Contains(apiFileName)
+			// no requests with [MapsApi("filename.json")] found
+			&& !HighLevelApiNameMapping.ContainsKey(apiFileName.Replace(".json", ""));
 
 		public static bool IgnoreHighLevelApi(string apiFileName)
 		{
