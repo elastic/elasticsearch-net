@@ -8,7 +8,8 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
-	public partial interface IUpdateRequest<TDocument, TPartialDocument> 
+	[MapsApi("update.json")]
+	public partial interface IUpdateRequest<TDocument, TPartialDocument>
 		where TDocument : class
 		where TPartialDocument : class
 	{

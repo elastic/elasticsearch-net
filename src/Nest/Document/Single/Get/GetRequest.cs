@@ -4,6 +4,7 @@
 
 namespace Nest
 {
+	[MapsApi("get.json")]
 	public partial interface IGetRequest { }
 
 	// ReSharper disable once UnusedTypeParameter

@@ -10,6 +10,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[ReadAs(typeof(SearchTemplateRequest))]
+	[MapsApi("search_template.json")]
 	public partial interface ISearchTemplateRequest : ITypedSearchRequest
 	{
 		[DataMember(Name ="id")]

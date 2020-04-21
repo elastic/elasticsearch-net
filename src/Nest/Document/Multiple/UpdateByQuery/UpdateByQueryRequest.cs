@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
+	[MapsApi("update_by_query.json")]
 	public partial interface IUpdateByQueryRequest
 	{
 		/// <summary>
