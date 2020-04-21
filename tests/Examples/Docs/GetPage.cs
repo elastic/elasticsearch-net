@@ -63,7 +63,6 @@ namespace Examples.Docs
 			{
 				// client does not support short hand _source for _source_includes
 				e.Uri.Query = e.Uri.Query.Replace("_source", "_source_includes");
-				return e;
 			});
 		}
 

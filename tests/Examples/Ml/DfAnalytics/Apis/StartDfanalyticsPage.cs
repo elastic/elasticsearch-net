@@ -7,8 +7,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 	public class StartDfanalyticsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/start-dfanalytics.asciidoc:57")]
-		public void Line57()
+		[Description("ml/df-analytics/apis/start-dfanalytics.asciidoc:73")]
+		public void Line73()
 		{
 			// tag::1a3a4b8a4bfee4ab84ddd13d8835f560[]
 			var response0 = new SearchResponse<object>();

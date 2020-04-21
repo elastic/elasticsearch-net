@@ -37,8 +37,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/set-up-lifecycle-policy.asciidoc:54")]
-		public void Line54()
+		[Description("ilm/set-up-lifecycle-policy.asciidoc:59")]
+		public void Line59()
 		{
 			// tag::3c9d99215a7020ab478bdf5c8287a14f[]
 			var response0 = new SearchResponse<object>();
@@ -57,8 +57,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/set-up-lifecycle-policy.asciidoc:85")]
-		public void Line85()
+		[Description("ilm/set-up-lifecycle-policy.asciidoc:90")]
+		public void Line90()
 		{
 			// tag::25737fd456fd317cc4cc2db76b6cf28e[]
 			var response0 = new SearchResponse<object>();
@@ -75,8 +75,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/set-up-lifecycle-policy.asciidoc:108")]
-		public void Line108()
+		[Description("ilm/set-up-lifecycle-policy.asciidoc:113")]
+		public void Line113()
 		{
 			// tag::160d259243d0800900b065c4b9d2b187[]
 			var response0 = new SearchResponse<object>();

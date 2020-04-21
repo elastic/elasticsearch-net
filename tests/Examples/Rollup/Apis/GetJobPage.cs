@@ -7,8 +7,8 @@ namespace Examples.Rollup.Apis
 	public class GetJobPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("rollup/apis/get-job.asciidoc:83")]
-		public void Line83()
+		[Description("rollup/apis/get-job.asciidoc:89")]
+		public void Line89()
 		{
 			// tag::d095b422d9803c02b62c01adffc85376[]
 			var response0 = new SearchResponse<object>();
@@ -18,8 +18,8 @@ namespace Examples.Rollup.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("rollup/apis/get-job.asciidoc:156")]
-		public void Line156()
+		[Description("rollup/apis/get-job.asciidoc:164")]
+		public void Line164()
 		{
 			// tag::6d13e0721a7aac00adcdc5fe77198300[]
 			var response0 = new SearchResponse<object>();

@@ -41,8 +41,8 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/request/stored-fields.asciidoc:60")]
-		public void Line60()
+		[Description("search/request/stored-fields.asciidoc:55")]
+		public void Line55()
 		{
 			// tag::ccec437aed7a10d9111724ffd929fe00[]
 			var response0 = new SearchResponse<object>();

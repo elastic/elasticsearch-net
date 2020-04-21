@@ -7,8 +7,8 @@ namespace Examples.Analysis.Tokenizers
 	public class SimplepatternTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenizers/simplepattern-tokenizer.asciidoc:38")]
-		public void Line38()
+		[Description("analysis/tokenizers/simplepattern-tokenizer.asciidoc:36")]
+		public void Line36()
 		{
 			// tag::9ffc049d5c5a570b90d913e92f910ee4[]
 			var response0 = new SearchResponse<object>();

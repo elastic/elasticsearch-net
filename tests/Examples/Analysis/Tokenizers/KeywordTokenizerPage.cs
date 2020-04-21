@@ -20,5 +20,21 @@ namespace Examples.Analysis.Tokenizers
 			  ""text"": ""New York""
 			}");
 		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenizers/keyword-tokenizer.asciidoc:58")]
+		public void Line58()
+		{
+			// tag::c95d5317525c2ff625e6971c277247af[]
+			var response0 = new SearchResponse<object>();
+			// end::c95d5317525c2ff625e6971c277247af[]
+
+			response0.MatchesExample(@"POST _analyze
+			{
+			  ""tokenizer"": ""keyword"",
+			  ""filter"": [ ""lowercase"" ],
+			  ""text"": ""john.SMITH@example.COM""
+			}");
+		}
 	}
 }

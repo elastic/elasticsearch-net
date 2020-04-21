@@ -1,0 +1,23 @@
+// mapping/params/format.asciidoc:13
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line13 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Mapping/Params/FormatPage.cs#L9-L37.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var createIndexResponse = client.Indices.Create("my_index", c => c
+    .Map<object>(m => m
+        .Properties(p => p
+            .Date(d => d
+                .Name("date")
+                .Format("yyyy-MM-dd")
+            )
+        )
+    )
+);
+----

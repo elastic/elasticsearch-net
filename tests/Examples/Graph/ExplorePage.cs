@@ -7,8 +7,8 @@ namespace Examples.Graph
 	public class ExplorePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("graph/explore.asciidoc:185")]
-		public void Line185()
+		[Description("graph/explore.asciidoc:201")]
+		public void Line201()
 		{
 			// tag::8bf5ac11eb42e652023a685af4a45ae2[]
 			var response0 = new SearchResponse<object>();
@@ -37,8 +37,8 @@ namespace Examples.Graph
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("graph/explore.asciidoc:290")]
-		public void Line290()
+		[Description("graph/explore.asciidoc:306")]
+		public void Line306()
 		{
 			// tag::6a1a238984d74771420d150dec47fd91[]
 			var response0 = new SearchResponse<object>();
@@ -95,8 +95,8 @@ namespace Examples.Graph
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("graph/explore.asciidoc:377")]
-		public void Line377()
+		[Description("graph/explore.asciidoc:393")]
+		public void Line393()
 		{
 			// tag::fa82d86a046d67366cfe9ce65535e433[]
 			var response0 = new SearchResponse<object>();

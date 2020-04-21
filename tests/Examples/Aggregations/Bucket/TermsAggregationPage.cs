@@ -122,7 +122,6 @@ namespace Examples.Aggregations.Bucket
 			}", e =>
 			{
 				e.ApplyBodyChanges(b => { b["aggs"]["genres"]["terms"]["order"].ToJArray(); });
-				return e;
 			});
 		}
 
@@ -157,7 +156,6 @@ namespace Examples.Aggregations.Bucket
 			}", e =>
 			{
 				e.ApplyBodyChanges(b => { b["aggs"]["genres"]["terms"]["order"].ToJArray(); });
-				return e;
 			});
 		}
 
@@ -200,7 +198,6 @@ namespace Examples.Aggregations.Bucket
 			}", e =>
 			{
 				e.ApplyBodyChanges(b => { b["aggs"]["genres"]["terms"]["order"].ToJArray(); });
-				return e;
 			});
 		}
 
@@ -243,7 +240,6 @@ namespace Examples.Aggregations.Bucket
 			}", e =>
 			{
 				e.ApplyBodyChanges(b => { b["aggs"]["genres"]["terms"]["order"].ToJArray(); });
-				return e;
 			});
 		}
 
@@ -302,7 +298,6 @@ namespace Examples.Aggregations.Bucket
 					b["aggs"]["countries"]["terms"]["order"].ToJArray();
 					b["aggs"]["countries"]["aggs"]["rock"]["filter"]["term"]["genre"].ToLongFormTermQuery();
 				});
-				return e;
 			});
 		}
 
@@ -358,7 +353,6 @@ namespace Examples.Aggregations.Bucket
 			}", e =>
 			{
 				e.ApplyBodyChanges(b => { b["aggs"]["countries"]["aggs"]["rock"]["filter"]["term"]["genre"].ToLongFormTermQuery(); });
-				return e;
 			});
 		}
 
@@ -620,7 +614,6 @@ namespace Examples.Aggregations.Bucket
 			}", e =>
 			{
 				e.ApplyBodyChanges(b => { b["aggs"]["expired_sessions"]["terms"]["order"].ToJArray(); });
-				return e;
 			});
 		}
 

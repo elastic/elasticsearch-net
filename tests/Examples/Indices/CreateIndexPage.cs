@@ -49,8 +49,6 @@ namespace Examples.Indices
 						{ "index.number_of_replicas", 2 }
 					};
 				});
-
-				return e;
 			});
 		}
 
@@ -83,8 +81,6 @@ namespace Examples.Indices
 						{ "index.number_of_replicas", 2 },
 					};
 				});
-
-				return e;
 			});
 		}
 
@@ -126,8 +122,6 @@ namespace Examples.Indices
 						{ "index.number_of_shards", 1 },
 					};
 				});
-
-				return e;
 			});
 		}
 
@@ -163,7 +157,6 @@ namespace Examples.Indices
 			}", e =>
 			{
 				e.ApplyBodyChanges(b => { b["aliases"]["alias_2"]["filter"]["term"]["user"].ToLongFormTermQuery(); });
-				return e;
 			});
 		}
 
@@ -203,7 +196,6 @@ namespace Examples.Indices
 			{
 				e.Uri.Query = null;
 				e.ApplyBodyChanges(b => { b["settings"] = new JObject { { "index.write.wait_for_active_shards", "2" } }; });
-				return e;
 			});
 		}
 	}

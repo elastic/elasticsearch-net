@@ -142,7 +142,6 @@ namespace Examples.Docs
 					var script = body["script"].Value<string>();
 					body["script"] = new JObject { { "source", script } };
 				});
-				return e;
 			});
 		}
 
@@ -170,7 +169,6 @@ namespace Examples.Docs
 					var script = body["script"].Value<string>();
 					body["script"] = new JObject { { "source", script } };
 				});
-				return e;
 			});
 		}
 

@@ -103,13 +103,11 @@ namespace Examples.Docs
 			refreshResponse.MatchesExample(@"GET _refresh", e =>
 			{
 				e.Method = HttpMethod.POST;
-				return e;
 			});
 
 			searchResponse.MatchesExample(@"POST new_twitter/_search?size=0&filter_path=hits.total", e =>
 			{
 				e.MoveQueryStringToBody("size", 0);
-				return e;
 			});
 		}
 
@@ -148,7 +146,6 @@ namespace Examples.Docs
 			searchResponse.MatchesExample(@"POST new_twitter/_search?size=0&filter_path=hits.total", e =>
 			{
 				e.MoveQueryStringToBody("size", 0);
-				return e;
 			});
 		}
 
@@ -308,7 +305,6 @@ namespace Examples.Docs
 			}", e =>
 			{
 				e.ApplyBodyChanges(b => { b["source"]["index"] = b["source"]["index"].Flatten<string>(); });
-				return e;
 			});
 		}
 
@@ -351,7 +347,6 @@ namespace Examples.Docs
 			}", e =>
 			{
 				e.Method = HttpMethod.PUT;
-				return e;
 			});
 		}
 
@@ -438,7 +433,6 @@ namespace Examples.Docs
 			}", e =>
 			{
 				e.ApplyBodyChanges(o => ((JObject)o["script"]).Remove("lang"));
-				return e;
 			});
 		}
 
@@ -491,9 +485,7 @@ namespace Examples.Docs
 					((JObject)o["source"]["query"]["function_score"]).Remove("random_score");
 					var array = new JArray { JToken.FromObject(new { random_score = new object() }) };
 					((JObject)o["source"]["query"]["function_score"]).Add("functions", array);
-				}); ;
-
-				return e;
+				});
 			});
 		}
 
@@ -525,7 +517,6 @@ namespace Examples.Docs
 			}", e =>
 			{
 				e.ApplyBodyChanges(o => ((JObject)o["script"]).Remove("lang"));
-				return e;
 			});
 		}
 

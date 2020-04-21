@@ -125,7 +125,6 @@ namespace Examples.QueryDsl
 				{
 					body["query"]["query_string"]["tie_breaker"] = 0d;
 				});
-				return e;
 			});
 		}
 

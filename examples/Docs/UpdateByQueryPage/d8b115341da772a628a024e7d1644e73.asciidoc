@@ -3,7 +3,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line327 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/UpdateByQueryPage.cs#L72-L84.
+This file is generated from method Line327 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/UpdateByQueryPage.cs#L71-L83.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////

@@ -1,9 +1,9 @@
-// upgrade/rolling_upgrade.asciidoc:175
+// upgrade/rolling_upgrade.asciidoc:194
 
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line175 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Upgrade/RollingUpgradePage.cs#L96-L105.
+This file is generated from method Line194 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Upgrade/RollingUpgradePage.cs#L96-L105.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////

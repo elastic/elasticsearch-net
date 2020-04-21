@@ -109,7 +109,6 @@ namespace Examples.Docs
 						objects[7].Add("_source", true);
 						(objects[8]["update"] as JObject).Add("_source", true);
 					});
-					return e;
 				});
 		}
 	}

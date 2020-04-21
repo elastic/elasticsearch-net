@@ -29,8 +29,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("frozen-indices.asciidoc:106")]
-		public void Line106()
+		[Description("frozen-indices.asciidoc:97")]
+		public void Line97()
 		{
 			// tag::9ff10591660890ba9d00eb14168c3b67[]
 			var response0 = new SearchResponse<object>();

@@ -44,8 +44,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:903")]
-		public void Line903()
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:898")]
+		public void Line898()
 		{
 			// tag::49cb3f48a0097bfc597c52fa51c6d379[]
 			var response0 = new SearchResponse<object>();
@@ -58,8 +58,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:911")]
-		public void Line911()
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:906")]
+		public void Line906()
 		{
 			// tag::b2b26f8568c5dba7649e79f09b859272[]
 			var response0 = new SearchResponse<object>();
@@ -73,8 +73,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:931")]
-		public void Line931()
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:926")]
+		public void Line926()
 		{
 			// tag::a5dfcfd1cfb3558e7912456669c92eee[]
 			var response0 = new SearchResponse<object>();
@@ -87,8 +87,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:954")]
-		public void Line954()
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:949")]
+		public void Line949()
 		{
 			// tag::8e208098a0156c4c92afe0a06960b230[]
 			var response0 = new SearchResponse<object>();
@@ -102,8 +102,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:983")]
-		public void Line983()
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:978")]
+		public void Line978()
 		{
 			// tag::9eda9c39428b0c2c53cbd8ee7ae0f888[]
 			var response0 = new SearchResponse<object>();
@@ -117,8 +117,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:998")]
-		public void Line998()
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:993")]
+		public void Line993()
 		{
 			// tag::553904c175a76d5ba83bc5d46fff7373[]
 			var response0 = new SearchResponse<object>();
@@ -132,8 +132,8 @@ namespace Examples.XPack.Docs.En.Security.Authentication
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:1016")]
-		public void Line1016()
+		[Description("../../x-pack/docs/en/security/authentication/saml-guide.asciidoc:1011")]
+		public void Line1011()
 		{
 			// tag::a71154ea11a5214f409ecfd118e9b5e3[]
 			var response0 = new SearchResponse<object>();

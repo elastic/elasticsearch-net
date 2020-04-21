@@ -18,8 +18,8 @@ namespace Examples.Ccr.Apis.Follow
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ccr/apis/follow/get-follow-stats.asciidoc:206")]
-		public void Line206()
+		[Description("ccr/apis/follow/get-follow-stats.asciidoc:211")]
+		public void Line211()
 		{
 			// tag::8e43bb5b7946143e69d397bb81d87df0[]
 			var response0 = new SearchResponse<object>();

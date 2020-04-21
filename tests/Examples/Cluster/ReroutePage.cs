@@ -7,8 +7,8 @@ namespace Examples.Cluster
 	public class ReroutePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/reroute.asciidoc:180")]
-		public void Line180()
+		[Description("cluster/reroute.asciidoc:185")]
+		public void Line185()
 		{
 			// tag::c5488b3888749d3d5b9808ab28d384eb[]
 			var response0 = new SearchResponse<object>();

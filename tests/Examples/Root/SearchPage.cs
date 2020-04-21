@@ -126,7 +126,6 @@ namespace Examples.Root
 				{
 					body.Remove("stats");
 				});
-				return e;
 			});
 		}
 	}

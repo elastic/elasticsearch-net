@@ -7,8 +7,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class UpdateDatafeedPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/update-datafeed.asciidoc:112")]
-		public void Line112()
+		[Description("ml/anomaly-detection/apis/update-datafeed.asciidoc:119")]
+		public void Line119()
 		{
 			// tag::df6d5b5f8e1c8785503269ccb7b34763[]
 			var response0 = new SearchResponse<object>();

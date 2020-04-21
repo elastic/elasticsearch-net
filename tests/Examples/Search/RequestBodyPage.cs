@@ -32,7 +32,6 @@ namespace Examples.Search
 					var value = b["query"]["term"]["user"];
 					b["query"]["term"]["user"] = new JObject { ["value"] = value };
 				});
-				return e;
 			});
 		}
 
@@ -55,7 +54,6 @@ namespace Examples.Search
 				e.Uri.Path = "/_all/_search";
 				e.MoveQueryStringToBody("size", 0);
 				e.MoveQueryStringToBody("terminate_after", 1);
-				return e;
 			});
 		}
 	}
