@@ -31,7 +31,10 @@ namespace ApiGenerator.Configuration
 			// To be removed
 			"indices.upgrade.json",
 			"indices.get_upgrade.json",
-			"indices.exists_type.json",
+
+			// already removed in the client.
+			"indices.exists_type.json"
+
 		};
 
 		private static string[] IgnoredApisHighLevel { get; } =
@@ -114,13 +117,14 @@ namespace ApiGenerator.Configuration
 		public static bool IsNewHighLevelApi(string apiFileName) =>
 			// if its explicitly ignored we know about it.
 			!IgnoredApis.Contains(apiFileName)
+			&& !IgnoredApisHighLevel.Contains(apiFileName)
 			// no requests with [MapsApi("filename.json")] found
 			&& !HighLevelApiNameMapping.ContainsKey(apiFileName.Replace(".json", ""));
 
 		public static bool IgnoreHighLevelApi(string apiFileName)
 		{
 			//explicitly ignored
-			if (IgnoredApisHighLevel.Contains(apiFileName)) return true;
+			if (IgnoredApis.Contains(apiFileName) || IgnoredApisHighLevel.Contains(apiFileName)) return true;
 
 			//always generate already mapped requests
 			if (!IsNewHighLevelApi(apiFileName)) return false;
