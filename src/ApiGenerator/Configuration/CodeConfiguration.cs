@@ -127,7 +127,8 @@ namespace ApiGenerator.Configuration
 			if (IgnoredApis.Contains(apiFileName) || IgnoredApisHighLevel.Contains(apiFileName)) return true;
 
 			//always generate already mapped requests
-			if (!IsNewHighLevelApi(apiFileName)) return false;
+
+			if (HighLevelApiNameMapping.ContainsKey(apiFileName.Replace(".json", ""))) return false;
 
 			return !EnableHighLevelCodeGen.Contains(apiFileName);
 		}
