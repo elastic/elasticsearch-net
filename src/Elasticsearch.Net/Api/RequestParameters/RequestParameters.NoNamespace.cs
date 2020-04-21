@@ -36,6 +36,13 @@ namespace Elasticsearch.Net
 			set => Q("pipeline", value);
 		}
 
+		///<summary>favor V2 templates instead of V1 templates during automatic index creation</summary>
+		public bool? PreferV2Templates
+		{
+			get => Q<bool? >("prefer_v2_templates");
+			set => Q("prefer_v2_templates", value);
+		}
+
 		///<summary>
 		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -224,6 +231,13 @@ namespace Elasticsearch.Net
 		{
 			get => Q<string>("pipeline");
 			set => Q("pipeline", value);
+		}
+
+		///<summary>favor V2 templates instead of V1 templates during automatic index creation</summary>
+		public bool? PreferV2Templates
+		{
+			get => Q<bool? >("prefer_v2_templates");
+			set => Q("prefer_v2_templates", value);
 		}
 
 		///<summary>
@@ -1095,6 +1109,13 @@ namespace Elasticsearch.Net
 			set => Q("pipeline", value);
 		}
 
+		///<summary>favor V2 templates instead of V1 templates during automatic index creation</summary>
+		public bool? PreferV2Templates
+		{
+			get => Q<bool? >("prefer_v2_templates");
+			set => Q("prefer_v2_templates", value);
+		}
+
 		///<summary>
 		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -1558,19 +1579,6 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
-	}
-
-	///<summary>Request options for ScriptsPainlessContext</summary>
-	public class ScriptsPainlessContextRequestParameters : RequestParameters<ScriptsPainlessContextRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
-		///<summary>Select a specific context to retrieve API information about</summary>
-		public string Context
-		{
-			get => Q<string>("context");
-			set => Q("context", value);
-		}
 	}
 
 	///<summary>Request options for ExecutePainlessScript <para>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</para></summary>
@@ -2088,6 +2096,13 @@ namespace Elasticsearch.Net
 		{
 			get => Q<string>("lang");
 			set => Q("lang", value);
+		}
+
+		///<summary>favor V2 templates instead of V1 templates during automatic index creation</summary>
+		public bool? PreferV2Templates
+		{
+			get => Q<bool? >("prefer_v2_templates");
+			set => Q("prefer_v2_templates", value);
 		}
 
 		///<summary>

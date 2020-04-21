@@ -96,7 +96,7 @@ namespace Elasticsearch.Net.Specification.NodesApi
 	public class ReloadSecureSettingsRequestParameters : RequestParameters<ReloadSecureSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
+		public override bool SupportsBody => true;
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout
 		{

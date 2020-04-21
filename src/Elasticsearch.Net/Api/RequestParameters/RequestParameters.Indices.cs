@@ -192,6 +192,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			set => Q("master_timeout", value);
 		}
 
+		///<summary>favor V2 templates instead of V1 templates during index creation</summary>
+		public bool? PreferV2Templates
+		{
+			get => Q<bool? >("prefer_v2_templates");
+			set => Q("prefer_v2_templates", value);
+		}
+
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout
 		{
@@ -407,6 +414,33 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
+	///<summary>Request options for ExistsTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public class ExistsIndexTemplateRequestParameters : RequestParameters<ExistsIndexTemplateRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
+		public override bool SupportsBody => false;
+		///<summary>Return settings in flat format (default: false)</summary>
+		public bool? FlatSettings
+		{
+			get => Q<bool? >("flat_settings");
+			set => Q("flat_settings", value);
+		}
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local
+		{
+			get => Q<bool? >("local");
+			set => Q("local", value);
+		}
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public TimeSpan MasterTimeout
+		{
+			get => Q<TimeSpan>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+	}
+
 	///<summary>Request options for TemplateExists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public class IndexTemplateExistsRequestParameters : RequestParameters<IndexTemplateExistsRequestParameters>
 	{
@@ -518,36 +552,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		{
 			get => Q<bool? >("wait_if_ongoing");
 			set => Q("wait_if_ongoing", value);
-		}
-	}
-
-	///<summary>Request options for SyncedFlush <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush-api.html</para></summary>
-	public class SyncedFlushRequestParameters : RequestParameters<SyncedFlushRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices
-		{
-			get => Q<bool? >("allow_no_indices");
-			set => Q("allow_no_indices", value);
-		}
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards
-		{
-			get => Q<ExpandWildcards? >("expand_wildcards");
-			set => Q("expand_wildcards", value);
-		}
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable
-		{
-			get => Q<bool? >("ignore_unavailable");
-			set => Q("ignore_unavailable", value);
 		}
 	}
 
@@ -1269,6 +1273,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		{
 			get => Q<TimeSpan>("master_timeout");
 			set => Q("master_timeout", value);
+		}
+
+		///<summary>favor V2 templates instead of V1 templates during automatic index creation</summary>
+		public bool? PreferV2Templates
+		{
+			get => Q<bool? >("prefer_v2_templates");
+			set => Q("prefer_v2_templates", value);
 		}
 
 		///<summary>Explicit operation timeout</summary>
