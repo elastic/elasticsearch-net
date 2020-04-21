@@ -18,9 +18,10 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 		public XPackClusterConfiguration(ClusterFeatures features) : base(ClusterFeatures.XPack | features, 1, ElasticsearchPlugin.IngestAttachment)
 		{
+			var isSnapshot = !string.IsNullOrEmpty(Version.PreRelease) && Version.PreRelease.ToLower().Contains("snapshot");
 			// Get license file path from environment variable
 			var licenseFilePath = Environment.GetEnvironmentVariable("ES_LICENSE_FILE");
-			if (!string.IsNullOrEmpty(licenseFilePath) && File.Exists(licenseFilePath))
+			if (!isSnapshot && !string.IsNullOrEmpty(licenseFilePath) && File.Exists(licenseFilePath))
 			{
 				var licenseContents = File.ReadAllText(licenseFilePath);
 				XPackLicenseJson = licenseContents;
