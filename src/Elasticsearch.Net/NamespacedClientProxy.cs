@@ -20,9 +20,13 @@ namespace Elasticsearch.Net
 
 		protected string Url(FormattableString formattable) => _client.Url(formattable);
 
-		protected TRequestParams RequestParams<TRequestParams>(TRequestParams requestParams, string contentType = null)
+		protected TRequestParams RequestParams<TRequestParams>(TRequestParams requestParams, string contentType)
 			where TRequestParams : class, IRequestParameters, new()
 			=> _client.RequestParams(requestParams, contentType ?? ContentType, contentType ?? ContentType);
+
+		protected TRequestParams RequestParams<TRequestParams>(TRequestParams requestParams)
+			where TRequestParams : class, IRequestParameters, new()
+			=> _client.RequestParams(requestParams, ContentType, ContentType);
 
 		// ReSharper disable once UnassignedGetOnlyAutoProperty intended to be overridden
 		protected virtual string ContentType { get; }
