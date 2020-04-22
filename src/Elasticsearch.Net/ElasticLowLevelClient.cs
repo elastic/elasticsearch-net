@@ -75,10 +75,10 @@ namespace Elasticsearch.Net
 		protected internal TRequestParams RequestParams<TRequestParams>(TRequestParams requestParams, string contentType = null, string accept = null)
 			where TRequestParams : class, IRequestParameters, new()
 		{
-			if (contentType.IsNullOrEmpty()) return requestParams;
+			if (contentType.IsNullOrEmpty() && accept.IsNullOrEmpty()) return requestParams;
 
 			requestParams ??= new TRequestParams();
-			if (requestParams.RequestConfiguration == null) requestParams.RequestConfiguration = new RequestConfiguration();
+			requestParams.RequestConfiguration ??= new RequestConfiguration();
 			if (!contentType.IsNullOrEmpty() && requestParams.RequestConfiguration.ContentType.IsNullOrEmpty())
 				requestParams.RequestConfiguration.ContentType = contentType;
 			if (!accept.IsNullOrEmpty() && requestParams.RequestConfiguration.Accept.IsNullOrEmpty())
