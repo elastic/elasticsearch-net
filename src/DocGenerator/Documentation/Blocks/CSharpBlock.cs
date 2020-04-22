@@ -54,7 +54,7 @@ namespace DocGenerator.Documentation.Blocks
 			var matches = Callout.Matches(value);
 			var callouts = new List<string>();
 
-			foreach (Match match in matches) callouts.Add($"{match.Groups["callout"].Value} {match.Groups["text"].Value}");
+			foreach (Match match in matches) callouts.Add($"{match.Groups["callout"].Value} {match.Groups["text"].Value.TrimEnd()}");
 
 			if (callouts.Any())
 			{
