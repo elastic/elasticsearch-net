@@ -28,6 +28,9 @@ namespace Nest
 
 		public FiltersAggregate(IReadOnlyDictionary<string, IAggregate> aggregations) : base(aggregations) { }
 
+		// Don't sanitize the keys as these are the keys for named buckets
+		protected override string Sanitize(string key) => key;
+
 		public IReadOnlyCollection<FiltersBucketItem> Buckets { get; set; } = EmptyReadOnly<FiltersBucketItem>.Collection;
 
 		public SingleBucketAggregate NamedBucket(string key) => Global(key);
