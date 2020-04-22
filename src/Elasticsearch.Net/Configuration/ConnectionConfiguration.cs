@@ -5,7 +5,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Net;
 #if DOTNETCORE
 using System.Net.Http;
 using System.Runtime.InteropServices;
