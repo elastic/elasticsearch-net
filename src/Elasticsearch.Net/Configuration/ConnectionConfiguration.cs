@@ -23,11 +23,42 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
-#if DOTNETCORE
-		private static bool IsCurlHandler { get; } = typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.CurlHandler") != null;
+		/// <summary>
+		/// Detects whether we are running on .NET Core with CurlHandler.
+		/// If this is true, we will set a very restrictive <see cref="DefaultConnectionLimit"/>
+		/// As the old curl based handler is known to bleed TCP connections:
+		/// <para>https://github.com/dotnet/runtime/issues/22366</para>
+		/// </summary>
+        private static bool UsingCurlHandler
+		{
+			get
+			{
+#if !DOTNETCORE
+				return false;
 #else
-		private static bool IsCurlHandler { get; } = false;
+				var curlHandlerExists = typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.CurlHandler") != null;
+				if (!curlHandlerExists) return false;
+
+				var socketsHandlerExists = typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.SocketsHttpHandler") != null;
+				// running on a .NET core version with CurlHandler, before the existence of SocketsHttpHandler.
+				// Must be using CurlHandler.
+				if (!socketsHandlerExists) return true;
+
+				if (AppContext.TryGetSwitch("System.Net.Http.UseSocketsHttpHandler", out var isEnabled))
+					return !isEnabled;
+
+				var environmentVariable =
+					Environment.GetEnvironmentVariable("DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER");
+
+				// SocketsHandler exists and no environment variable exists to disable it.
+				// Must be using SocketsHandler and not CurlHandler
+				if (environmentVariable == null) return false;
+
+				return environmentVariable.Equals("false", StringComparison.OrdinalIgnoreCase) ||
+					environmentVariable.Equals("0");
 #endif
+			}
+		}
 
 		/// <summary>
 		/// The default ping timeout. Defaults to 2 seconds
@@ -52,7 +83,7 @@ namespace Elasticsearch.Net
 		/// <para>Except for <see cref="HttpClientHandler"/> implementations based on curl, which defaults to <see cref="Environment.ProcessorCount"/></para>
 #endif
 		/// </summary>
-		public static readonly int DefaultConnectionLimit = IsCurlHandler ? Environment.ProcessorCount : 80;
+		public static readonly int DefaultConnectionLimit = UsingCurlHandler ? Environment.ProcessorCount : 80;
 
 		/// <summary>
 		/// The default user agent for Elasticsearch.Net
