@@ -5,7 +5,7 @@ using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.Client;
-using Tests.Core.Extensions;
+using Tests.Core.Xunit;
 using Tests.Domain;
 
 namespace Tests.Ingest
@@ -35,7 +35,7 @@ namespace Tests.Ingest
 			from t in typeof(ProcessorAssertions).GetNestedTypes()
 			where typeof(IProcessorAssertion).IsAssignableFrom(t) && t.IsClass
 			let a = t.GetCustomAttributes(typeof(SkipVersionAttribute)).FirstOrDefault() as SkipVersionAttribute
-			where a == null || !a.Ranges.Any(r => TestClient.Configuration.InRange(r.ToString()))
+			where a == null || !a.Ranges.Any(r => r.IsSatisfied(TestClient.Configuration.ElasticsearchVersion))
 			select (IProcessorAssertion)Activator.CreateInstance(t);
 
 		public static IProcessor[] Initializers => All.Select(a => a.Initializer).ToArray();
@@ -71,7 +71,7 @@ namespace Tests.Ingest
 			public override string Key => "append";
 		}
 
-		[SkipVersion("<7.7.0,>=7.8.0", "Empty Value introduced in Elasticsearch 7.7.0+, CSV introduced in 7.6.0+")]
+		[BlockedByIssue("https://github.com/elastic/elasticsearch/issues/55643")]
 		public class Csv : ProcessorAssertion
 		{
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
