@@ -5,7 +5,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Reproduce
 {
@@ -13,10 +13,7 @@ namespace Tests.Reproduce
 	{
 		private readonly WritableCluster _cluster;
 
-		public GithubIssue3286(WritableCluster cluster)
-		{
-			_cluster = cluster;
-		}
+		public GithubIssue3286(WritableCluster cluster) => _cluster = cluster;
 
 		[I]
 		public void AggregationsShouldNotBeNullOnNestedAggregation()

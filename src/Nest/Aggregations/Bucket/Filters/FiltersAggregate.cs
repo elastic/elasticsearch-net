@@ -10,7 +10,7 @@ namespace Nest
 		public long DocCount { get; set; }
 	}
 
-	//TODO this is mapped rather odly we always deserialize as if this is
+	//TODO this is mapped rather oddly we always deserialize as if this is
 	// {
 	//    "agg1" : { ...},
 	//	  "agg2" : { ... }
@@ -26,6 +26,9 @@ namespace Nest
 		public FiltersAggregate() : base(EmptyReadOnly<string, IAggregate>.Dictionary) { }
 
 		public FiltersAggregate(IReadOnlyDictionary<string, IAggregate> aggregations) : base(aggregations) { }
+
+		// Don't sanitize the keys as these are the keys for named buckets
+        protected override string Sanitize(string key) => key;
 
 		public IReadOnlyCollection<FiltersBucketItem> Buckets { get; set; } = EmptyReadOnly<FiltersBucketItem>.Collection;
 
