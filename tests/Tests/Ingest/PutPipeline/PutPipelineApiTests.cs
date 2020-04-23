@@ -5,12 +5,14 @@ using Nest;
 using Tests.Configuration;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Ingest.PutPipeline
 {
+	[BlockedByIssue("https://github.com/elastic/elasticsearch/issues/55643")]
 	public class PutPipelineApiTests
 		: ApiIntegrationTestBase<XPackCluster, PutPipelineResponse, IPutPipelineRequest, PutPipelineDescriptor, PutPipelineRequest>
 	{
