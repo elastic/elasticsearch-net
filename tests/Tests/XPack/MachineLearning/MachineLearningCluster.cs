@@ -19,7 +19,9 @@ namespace Tests.XPack.MachineLearning
 			{
 				{ "xpack.ml.node_concurrent_job_allocations", "4", ">=5.4.0" },
 				{ "node.attr.ml.max_open_jobs", "30", ">=5.4.0 <6.0.0" },
-				{ "xpack.ml.max_open_jobs", "30", ">=6.0.0" }
+				{ "xpack.ml.max_open_jobs", "30", ">=6.0.0" },
+				// increase machine memory available for ML
+				{ "xpack.ml.max_machine_memory_percent", "50" }
 			},
 			AdditionalBeforeNodeStartedTasks =
 			{
