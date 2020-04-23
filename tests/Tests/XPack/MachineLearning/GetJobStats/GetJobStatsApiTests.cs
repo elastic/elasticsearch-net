@@ -45,42 +45,42 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 			response.Count.Should().BeGreaterOrEqualTo(1);
 			response.Jobs.Count.Should().BeGreaterOrEqualTo(1);
 
-			var firstJob = response.Jobs.First();
-			firstJob.State.Should().Be(JobState.Closed);
-			firstJob.AssignmentExplanation.Should().BeNull();
+			var job = response.Jobs.Single(j => j.JobId == CallIsolatedValue);
+			job.State.Should().Be(JobState.Closed);
+			job.AssignmentExplanation.Should().BeNull();
 
-			firstJob.DataCounts.Should().NotBeNull();
-			firstJob.DataCounts.BucketCount.Should().Be(0);
-			firstJob.DataCounts.EmptyBucketCount.Should().Be(0);
-			firstJob.DataCounts.InputBytes.Should().Be(0);
-			firstJob.DataCounts.InputFieldCount.Should().Be(0);
-			firstJob.DataCounts.InputRecordCount.Should().Be(0);
-			firstJob.DataCounts.InvalidDateCount.Should().Be(0);
-			firstJob.DataCounts.MissingFieldCount.Should().Be(0);
-			firstJob.DataCounts.OutOfOrderTimestampCount.Should().Be(0);
-			firstJob.DataCounts.ProcessedFieldCount.Should().Be(0);
-			firstJob.DataCounts.ProcessedRecordCount.Should().Be(0);
-			firstJob.DataCounts.SparseBucketCount.Should().Be(0);
+			job.DataCounts.Should().NotBeNull();
+			job.DataCounts.BucketCount.Should().Be(0);
+			job.DataCounts.EmptyBucketCount.Should().Be(0);
+			job.DataCounts.InputBytes.Should().Be(0);
+			job.DataCounts.InputFieldCount.Should().Be(0);
+			job.DataCounts.InputRecordCount.Should().Be(0);
+			job.DataCounts.InvalidDateCount.Should().Be(0);
+			job.DataCounts.MissingFieldCount.Should().Be(0);
+			job.DataCounts.OutOfOrderTimestampCount.Should().Be(0);
+			job.DataCounts.ProcessedFieldCount.Should().Be(0);
+			job.DataCounts.ProcessedRecordCount.Should().Be(0);
+			job.DataCounts.SparseBucketCount.Should().Be(0);
 
-			firstJob.ModelSizeStats.Should().NotBeNull();
-			firstJob.ModelSizeStats.BucketAllocationFailuresCount.Should().Be(0);
-			firstJob.ModelSizeStats.LogTime.Should().BeAfter(new DateTime(2017, 9, 1));
-			firstJob.ModelSizeStats.MemoryStatus.Should().Be(MemoryStatus.Ok);
-			firstJob.ModelSizeStats.ModelBytes.Should().BeGreaterOrEqualTo(0);
-			firstJob.ModelSizeStats.ResultType.Should().Be("model_size_stats");
-			firstJob.ModelSizeStats.TotalByFieldCount.Should().Be(0);
-			firstJob.ModelSizeStats.TotalOverFieldCount.Should().Be(0);
-			firstJob.ModelSizeStats.TotalPartitionFieldCount.Should().Be(0);
+			job.ModelSizeStats.Should().NotBeNull();
+			job.ModelSizeStats.BucketAllocationFailuresCount.Should().Be(0);
+			job.ModelSizeStats.LogTime.Should().BeAfter(new DateTime(2017, 9, 1));
+			job.ModelSizeStats.MemoryStatus.Should().Be(MemoryStatus.Ok);
+			job.ModelSizeStats.ModelBytes.Should().BeGreaterOrEqualTo(0);
+			job.ModelSizeStats.ResultType.Should().Be("model_size_stats");
+			job.ModelSizeStats.TotalByFieldCount.Should().Be(0);
+			job.ModelSizeStats.TotalOverFieldCount.Should().Be(0);
+			job.ModelSizeStats.TotalPartitionFieldCount.Should().Be(0);
 
 			if (TestConfiguration.Instance.InRange(">=7.3.0"))
 			{
-				firstJob.TimingStats.Should().NotBeNull();
-				firstJob.TimingStats.JobId.Should().Be(firstJob.JobId);
-				firstJob.TimingStats.BucketCount.Should().Be(0);
-				firstJob.TimingStats.MinimumBucketProcessingTimeMilliseconds.Should().Be(0);
-				firstJob.TimingStats.MaximumBucketProcessingTimeMilliseconds.Should().Be(0);
-				firstJob.TimingStats.AverageBucketProcessingTimeMilliseconds.Should().Be(0);
-				firstJob.TimingStats.ExponentialAverageBucketProcessingTimeMilliseconds.Should().Be(0);
+				job.TimingStats.Should().NotBeNull();
+				job.TimingStats.JobId.Should().Be(job.JobId);
+				job.TimingStats.BucketCount.Should().Be(0);
+				job.TimingStats.MinimumBucketProcessingTimeMilliseconds.Should().Be(0);
+				job.TimingStats.MaximumBucketProcessingTimeMilliseconds.Should().Be(0);
+				job.TimingStats.AverageBucketProcessingTimeMilliseconds.Should().Be(0);
+				job.TimingStats.ExponentialAverageBucketProcessingTimeMilliseconds.Should().Be(0);
 			}
 		}
 	}
