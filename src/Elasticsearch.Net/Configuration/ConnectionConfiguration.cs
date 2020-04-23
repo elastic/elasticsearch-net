@@ -24,8 +24,8 @@ namespace Elasticsearch.Net
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
 		/// <summary>
-		/// Detects whether we are running on .NET Core without SocketsHttpHandler existing or being enabled
-		/// If this is true we will set a very restrictive <see cref="DefaultConnectionLimit"/>
+		/// Detects whether we are running on .NET Core with CurlHandler.
+		/// If this is true, we will set a very restrictive <see cref="DefaultConnectionLimit"/>
 		/// As the old curl based handler is known to bleed TCP connections:
 		/// <para>https://github.com/dotnet/runtime/issues/22366</para>
 		/// </summary>
