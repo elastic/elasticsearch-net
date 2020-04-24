@@ -42,8 +42,13 @@ namespace Elasticsearch.Net
 			+ $" please set {nameof(ConnectionConfiguration.ConnectionLimit)} to -1 on your connection configuration/settings."
 			+ $" this will cause the {nameof(HttpClientHandler.MaxConnectionsPerServer)} not to be set on {nameof(HttpClientHandler)}";
 
-		protected readonly ConcurrentDictionary<int, HttpClient> Clients = new ConcurrentDictionary<int, HttpClient>();
 		private readonly object _lock = new object();
+		private RequestDataHttpClientFactory HttpClientFactory { get; }
+
+		public int InUseHandlers => HttpClientFactory.InUseHandlers;
+		public int RemovedHandlers => HttpClientFactory.RemovedHandlers;
+
+		public HttpConnection() => HttpClientFactory = new RequestDataHttpClientFactory(r => CreateHttpClientHandler(r));
 
 		public virtual TResponse Request<TResponse>(RequestData requestData)
 			where TResponse : class, IElasticsearchResponse, new()
@@ -154,25 +159,7 @@ namespace Elasticsearch.Net
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
-		private HttpClient GetClient(RequestData requestData)
-		{
-			var key = GetClientKey(requestData);
-			if (Clients.TryGetValue(key, out var client)) return client;
-
-			lock (_lock)
-			{
-				client = Clients.GetOrAdd(key, h =>
-				{
-					var handler = CreateHttpClientHandler(requestData);
-					var httpClient = new HttpClient(handler, false) { Timeout = requestData.RequestTimeout };
-
-					httpClient.DefaultRequestHeaders.ExpectContinue = false;
-					return httpClient;
-				});
-			}
-
-			return client;
-		}
+		private HttpClient GetClient(RequestData requestData) => HttpClientFactory.CreateClient(requestData);
 
 		protected virtual HttpMessageHandler CreateHttpClientHandler(RequestData requestData)
 		{
@@ -393,7 +380,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private static int GetClientKey(RequestData requestData)
+		internal static int GetClientKey(RequestData requestData)
 		{
 			unchecked
 			{
@@ -407,11 +394,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		protected virtual void DisposeManagedResources()
-		{
-			foreach (var c in Clients)
-				c.Value.Dispose();
-		}
+		protected virtual void DisposeManagedResources() => HttpClientFactory.Dispose();
 	}
 }
 #endif

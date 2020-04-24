@@ -25,12 +25,12 @@ namespace Tests.ClientConcepts.Connection
 			connection.Request<StringResponse>(requestData);
 
 			connection.CallCount.Should().Be(1);
-			connection.ClientCount.Should().Be(1);
+			connection.InUseHandlers.Should().Be(1);
 
 			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 
 			connection.CallCount.Should().Be(2);
-			connection.ClientCount.Should().Be(1);
+			connection.InUseHandlers.Should().Be(1);
 		}
 
 		[I] public async Task MultipleInstancesOfHttpClientWhenRequestTimeoutChanges() =>
@@ -53,13 +53,13 @@ namespace Tests.ClientConcepts.Connection
 			connection.Request<StringResponse>(requestData);
 
 			connection.CallCount.Should().Be(1);
-			connection.ClientCount.Should().Be(1);
+			connection.InUseHandlers.Should().Be(1);
 
 			requestData = differentRequestData();
 			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 
 			connection.CallCount.Should().Be(2);
-			connection.ClientCount.Should().Be(2);
+			connection.InUseHandlers.Should().Be(2);
 		}
 
 		private RequestData CreateRequestData(
@@ -157,7 +157,6 @@ namespace Tests.ClientConcepts.Connection
 			private readonly Action<HttpResponseMessage> _response;
 			private TestableClientHandler _handler;
 			public int CallCount { get; private set; }
-			public int ClientCount => Clients.Count;
 			public HttpClientHandler LastHttpClientHandler => (HttpClientHandler)_handler.InnerHandler;
 
 			public TestableHttpConnection(Action<HttpResponseMessage> response) => _response = response;
