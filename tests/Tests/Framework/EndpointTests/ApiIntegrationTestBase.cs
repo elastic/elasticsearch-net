@@ -48,11 +48,8 @@ namespace Tests.Framework.EndpointTests
 
 		[I] public virtual async Task ReturnsExpectedResponse() => await AssertOnAllResponses(ExpectResponse);
 
-		protected override Task AssertOnAllResponses(Action<TResponse> assert)
-		{
-			if (!ExpectIsValid) return base.AssertOnAllResponses(assert);
-
-			return base.AssertOnAllResponses((r) =>
+		protected override Task AssertOnAllResponses(Action<TResponse> assert) =>
+			base.AssertOnAllResponses((r) =>
 			{
 				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
 					&& !(r.ApiCall.OriginalException is ElasticsearchClientException))
@@ -71,7 +68,6 @@ namespace Tests.Framework.EndpointTests
 					throw new ResponseAssertionException(ex.SourceException, r).Demystify();
 				}
 			});
-		}
 	}
 
 	public class ResponseAssertionException : Exception
