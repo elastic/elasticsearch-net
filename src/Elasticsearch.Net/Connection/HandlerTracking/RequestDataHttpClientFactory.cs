@@ -49,7 +49,7 @@ namespace Elasticsearch.Net
 
 		public int InUseHandlers => _activeHandlers.Count;
 		private int _removedHandlers = 0;
-		public int RemovedHandlers => _activeHandlers.Count;
+		public int RemovedHandlers => _removedHandlers;
 
 		// Collection of 'expired' but not yet disposed handlers.
 		//
@@ -105,7 +105,7 @@ namespace Elasticsearch.Net
 		private ActiveHandlerTrackingEntry CreateHandlerEntry(int key, RequestData requestData)
 		{
 			// Wrap the handler so we can ensure the inner handler outlives the outer handler.
-			var handler = new LifetimeTrackingHttpMessageHandler(CreateHandler(key, requestData));
+			var handler = new LifetimeTrackingHttpMessageHandler(_createHttpClientHandler(requestData));
 
 			// Note that we can't start the timer here. That would introduce a very very subtle race condition
 			// with very short expiry times. We need to wait until we've actually handed out the handler once
@@ -114,7 +114,7 @@ namespace Elasticsearch.Net
 			// Otherwise it would be possible that we start the timer here, immediately expire it (very short
 			// timer) and then dispose it without ever creating a client. That would be bad. It's unlikely
 			// this would happen, but we want to be sure.
-			return new ActiveHandlerTrackingEntry(key, handler, TimeSpan.FromMinutes(1));
+			return new ActiveHandlerTrackingEntry(key, handler, requestData.DnsRefreshTimeout);
 		}
 
 		private void ExpiryTimer_Tick(object state)
@@ -124,7 +124,8 @@ namespace Elasticsearch.Net
 			// The timer callback should be the only one removing from the active collection. If we can't find
 			// our entry in the collection, then this is a bug.
 			var removed = _activeHandlers.TryRemove(active.Key, out var found);
-			if (removed) Interlocked.Increment(ref _removedHandlers);
+			if (removed)
+				Interlocked.Increment(ref _removedHandlers);
 			Debug.Assert(removed, "Entry not found. We should always be able to remove the entry");
 			Debug.Assert(object.ReferenceEquals(active, found.Value), "Different entry found. The entry should not have been replaced");
 
