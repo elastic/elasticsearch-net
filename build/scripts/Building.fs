@@ -7,7 +7,6 @@ open Tooling
 open Versioning
 open Fake.Core
 open Fake.IO
-open Fake.IO
 open Fake.IO.Globbing.Operators
 open System.Xml
 open System.Xml.Linq
@@ -18,7 +17,7 @@ module Build =
 
     let Restore() = DotNet.Exec ["restore"; Solution; ] |> ignore
         
-    let Compile args version = 
+    let Compile _ version = 
         let props = 
             [ 
                 "CurrentVersion", (version.Full.ToString());
@@ -66,7 +65,7 @@ module Build =
             let xName n = XName.op_Implicit n
             use stream = File.OpenRead <| nuspec 
             let doc = XDocument.Load(stream) 
-            let nsManager = new XmlNamespaceManager(doc.CreateNavigator().NameTable);
+            let nsManager = XmlNamespaceManager(doc.CreateNavigator().NameTable);
             nsManager.AddNamespace("x", "http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd")
             
             doc.XPathSelectElement("/x:package/x:metadata/x:id", nsManager).Value <- newId nugetId
@@ -89,7 +88,7 @@ module Build =
             doc.XPathSelectElements("/x:package//x:dependency", nsManager)
             |> Seq.map (fun e -> (e, e.Attribute(xName "id").Value))
             // filter packages that exist in the build output folder `tmp`
-            |> Seq.filter (fun (e, id) -> packages |> Seq.exists (fun p -> p.NugetId = id))
+            |> Seq.filter (fun (_, id) -> packages |> Seq.exists (fun p -> p.NugetId = id))
             |> Seq.iter (fun (e, id) -> e.Attribute(xName "id").Value <- newId id)
             
             doc.Save(nuspec |> replaceId nugetId)

@@ -8,16 +8,13 @@ open Commandline
 open Bullseye
 open ProcNet
 open Fake.Core
-open Fake.Core
-open Fake.Core
-open Octokit
 
 module Main =
 
-    let private target name action = Targets.Target(name, new Action(action)) 
+    let private target name action = Targets.Target(name, Action(action)) 
     let private skip name = printfn "SKIPPED target '%s' evaluated not to run" name |> ignore
     let private conditional name optional action = target name (if optional then action else (fun _ -> skip name)) 
-    let private command name dependencies action = Targets.Target(name, dependencies, new Action(action))
+    let private command name dependencies action = Targets.Target(name, dependencies, Action(action))
     let private conditionalCommand name dependencies optional action = command name dependencies (if optional then action else (fun _ -> skip name)) 
     
     /// <summary>Sets command line environments indicating we are building from the command line</summary>
@@ -40,7 +37,6 @@ module Main =
         
         let parsed = Commandline.parse (args |> Array.toList)
         
-        let seed = parsed.Seed;
         let buildVersions = Versioning.BuildVersioning parsed
         let artifactsVersion = Versioning.ArtifactsVersion buildVersions
         Versioning.Validate parsed.Target buildVersions
