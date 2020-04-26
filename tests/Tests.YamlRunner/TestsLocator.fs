@@ -1,8 +1,6 @@
 module Tests.YamlRunner.TestsLocator
 
 open System
-open System.Globalization
-open System.IO
 open System.Threading
 open FSharp.Data
 open Tests.YamlRunner.AsyncExtensions
@@ -82,7 +80,7 @@ let DownloadTestsInFolder folder fileFilter namedSuite revision (progress: IProg
        | 0 ->
            progress.WriteLine(sprintf "%s folder yielded no tests (fileFilter: %O)" folder fileFilter)
            return List.empty
-       | x ->
+       | _ ->
            let! result = downloadTestsInFolder yamlFiles folder revision progress subBarOptions
            return result
     }

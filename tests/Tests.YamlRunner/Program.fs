@@ -69,9 +69,9 @@ let private createClient endpoint namedSuite =
         | XPack -> 
             authSettings.ServerCertificateValidationCallback(fun _ _ _ _ -> true)
         | _ -> authSettings
-    new ElasticLowLevelClient(certSettings)
+    ElasticLowLevelClient(certSettings)
     
-let validateRevisionParams endpoint passedRevision namedSuite =    
+let validateRevisionParams endpoint _passedRevision namedSuite =    
     let client = createClient endpoint namedSuite
     
     let node = client.Settings.ConnectionPool.Nodes.First()
@@ -83,8 +83,8 @@ let validateRevisionParams endpoint passedRevision namedSuite =
     printfn "Running elasticsearch %O %s" (node.Uri) auth
     
     let r =
-        let config = new RequestConfiguration(DisableDirectStreaming=Nullable(true))
-        let p = new RootNodeInfoRequestParameters(RequestConfiguration = config)
+        let config = RequestConfiguration(DisableDirectStreaming=Nullable(true))
+        let p = RootNodeInfoRequestParameters(RequestConfiguration = config)
         client.RootNodeInfo<DynamicResponse>(p)
         
     printfn "%s" r.DebugInformation

@@ -31,7 +31,7 @@ let private randomTime = Random()
 let TemporaryPath revision = lazy(Path.Combine(Path.GetTempPath(), "elastic", sprintf "tests-%s" revision))
 
 let private download url = async {
-    let! x = Async.Sleep <| randomTime.Next(500, 900)
+    let! _wait = Async.Sleep <| randomTime.Next(500, 900)
     let! yaml = Http.AsyncRequestString url
     return yaml
 }
