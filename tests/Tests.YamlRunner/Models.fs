@@ -85,7 +85,7 @@ type AssertValue =
         | :? String as regex when regex.StartsWith "/" ->
             let expression = Regex.Replace(regex, @"(^[\s\r\n]*?\/|\/[\s\r\n]*?$)", ""); 
             let opts = RegexOptions.IgnorePatternWhitespace 
-            RegexAssertion { Regex = new Regex(expression, opts) }
+            RegexAssertion { Regex = Regex(expression, opts) }
         | s -> Value s
         
 type NumericValue = NumericId of StashedId | Long of int64  | Double of double with
@@ -218,7 +218,7 @@ let (|IsOperation|_|) (s:string) =
     | "match" 
     | "is_false" 
     | "is_true" -> Some s
-    | IsNumericAssert n -> Some s
+    | IsNumericAssert _ -> Some s
     | _ -> None
     
 type Operations = Operation list
