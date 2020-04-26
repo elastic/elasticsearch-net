@@ -4,7 +4,7 @@ using Nest;
 using Tests.Framework.EndpointTests;
 using static Tests.Framework.EndpointTests.UrlTester;
 
-namespace Tests.XPack.Enrich.GetEnrichPolicy
+namespace Tests.XPack.Enrich.GetPolicy
 {
 	public class GetEnrichPolicyUrlTests : UrlTestsBase
 	{

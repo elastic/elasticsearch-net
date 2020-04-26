@@ -4,7 +4,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Mapping.Types.Core.Date
+namespace Tests.Mapping.Types.Core.DateNanos
 {
 	public class DateNanosPropertyTests : PropertyTestsBase
 	{

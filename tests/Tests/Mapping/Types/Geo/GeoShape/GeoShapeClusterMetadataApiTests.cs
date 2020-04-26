@@ -9,7 +9,7 @@ using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Mapping.Types.Core.GeoShape
+namespace Tests.Mapping.Types.Geo.GeoShape
 {
 	public class GeoShapeClusterMetadataApiTests : ApiIntegrationTestBase<WritableCluster, PutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>,
 		PutMappingRequest<Project>>

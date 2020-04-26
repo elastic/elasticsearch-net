@@ -4,7 +4,7 @@ using Nest;
 using Tests.Framework.EndpointTests;
 using static Tests.Framework.EndpointTests.UrlTester;
 
-namespace Tests.XPack.Slm.StartLifecycle
+namespace Tests.XPack.Slm.GetLifecycleStats
 {
 	public class GetLifecycleStatsUrlTests : UrlTestsBase
 	{

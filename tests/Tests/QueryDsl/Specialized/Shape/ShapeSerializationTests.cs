@@ -12,7 +12,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.QueryDsl.Geo.Shape
+namespace Tests.QueryDsl.Specialized.Shape
 {
 	public abstract class ShapeSerializationTestsBase
 		: ApiIntegrationTestBase<IntrusiveOperationCluster,

@@ -1,7 +1,7 @@
 ﻿using Elastic.Xunit.XunitPlumbing;
 using Nest;
 
-namespace Tests.Mapping.Types.Shape
+namespace Tests.Mapping.Types.Specialized.Shape
 {
 	public class ShapeTest
 	{
