@@ -1,5 +1,4 @@
 using Elastic.Xunit.XunitPlumbing;
-using Nest;
 
 namespace Examples.Root
 {

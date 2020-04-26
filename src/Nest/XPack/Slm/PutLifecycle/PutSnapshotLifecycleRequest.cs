@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.Serialization;
-using Nest.Specification.SnapshotApi;
 
 namespace Nest
 {

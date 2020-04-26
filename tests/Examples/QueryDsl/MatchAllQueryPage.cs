@@ -1,5 +1,4 @@
 using Elastic.Xunit.XunitPlumbing;
-using Nest;
 using System.ComponentModel;
 
 namespace Examples.QueryDsl

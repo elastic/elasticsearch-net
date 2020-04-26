@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;

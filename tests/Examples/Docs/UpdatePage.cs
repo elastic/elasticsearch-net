@@ -1,7 +1,4 @@
-using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
-using FluentAssertions;
-using Nest;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;

@@ -58,7 +58,7 @@
   <ItemGroup>
     <None Update="Utf8Json\Formatters\PrimitiveFormatter.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Utf8Json\PrimitiveFormatter.cs</LastGenOutput>
+      <LastGenOutput>PrimitiveFormatter.cs</LastGenOutput>
     </None>
     <None Update="Utf8Json\Formatters\ValueTupleFormatter.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -75,7 +75,7 @@
     <Compile Update="Utf8Json\Formatters\PrimitiveFormatter.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Utf8Json\PrimitiveFormatter.tt</DependentUpon>
+      <DependentUpon>PrimitiveFormatter.tt</DependentUpon>
     </Compile>
     <Compile Update="Utf8Json\Formatters\TupleFormatter.cs">
       <DesignTime>True</DesignTime>

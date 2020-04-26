@@ -6,7 +6,6 @@ using Nest;
 using Tests.Configuration;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Framework.Extensions;
 
 namespace Tests.Framework.EndpointTests.TestState
 {

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -8,7 +7,6 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
-using static Nest.Infer;
 
 namespace Tests.Document.Multiple.ReindexOnServer
 {

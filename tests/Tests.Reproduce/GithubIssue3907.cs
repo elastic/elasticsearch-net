@@ -1,10 +1,7 @@
 using System;
-using System.Net;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
-using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Domain;
 
 namespace Tests.Reproduce
 {

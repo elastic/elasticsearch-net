@@ -2,7 +2,6 @@
 using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Utf8Json.Internal;
-using Elasticsearch.Net.Utf8Json.Resolvers;
 
 
 namespace Nest

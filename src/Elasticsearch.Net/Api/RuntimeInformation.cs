@@ -1,6 +1,6 @@
+#if NET461
 using System;
 using System.Linq;
-#if NET461
 using System.Reflection;
 
 namespace Elasticsearch.Net

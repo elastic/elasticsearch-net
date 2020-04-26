@@ -1,8 +1,6 @@
-using System;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Examples.Models;
-using Nest;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 

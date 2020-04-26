@@ -1,6 +1,5 @@
 using Elastic.Xunit.XunitPlumbing;
 using Examples.Models;
-using Nest;
 using System.ComponentModel;
 
 namespace Examples.Docs

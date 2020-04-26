@@ -1,6 +1,4 @@
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
-using Examples.Models;
 using Nest;
 using System.ComponentModel;
 

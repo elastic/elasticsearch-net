@@ -6,7 +6,6 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Core.Client;
 using Tests.Core.Serialization;
 
 namespace Tests.Framework.SerializationTests

@@ -1,6 +1,4 @@
-﻿using Elastic.Managed.Configuration;
-using Elastic.Stack.Artifacts;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using Tests.Configuration;
 
 namespace Tests.Core.Extensions

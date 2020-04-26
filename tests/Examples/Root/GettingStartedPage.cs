@@ -1,9 +1,6 @@
-using System;
-using System.Globalization;
 using Elastic.Xunit.XunitPlumbing;
 using Examples.Models;
 using Nest;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 

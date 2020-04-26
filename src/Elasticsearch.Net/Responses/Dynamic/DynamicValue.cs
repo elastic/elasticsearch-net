@@ -2,13 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.SqlTypes;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using Elasticsearch.Net.Extensions;
 using Microsoft.CSharp.RuntimeBinder;
 
 // ReSharper disable ArrangeConstructorOrDestructorBody

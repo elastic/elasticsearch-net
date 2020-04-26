@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Elastic.Managed.ConsoleWriters;
 using Elastic.Managed.Ephemeral;
 using Elastic.Managed.Ephemeral.Tasks;
-using ProcNet;
-using ProcNet.Std;
 
 namespace Tests.Core.ManagedElasticsearch.Tasks
 {

@@ -1,5 +1,4 @@
 using Elastic.Xunit.XunitPlumbing;
-using Nest;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 

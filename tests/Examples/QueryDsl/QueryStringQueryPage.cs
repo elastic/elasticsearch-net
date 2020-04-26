@@ -1,7 +1,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using Examples.Models;
 using Nest;
-using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 
 namespace Examples.QueryDsl

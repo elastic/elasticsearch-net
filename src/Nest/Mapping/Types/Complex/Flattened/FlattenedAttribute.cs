@@ -1,6 +1,4 @@
-﻿using System.Xml.Schema;
-
-namespace Nest
+﻿namespace Nest
 {
 	/// <inheritdoc cref="IFlattenedProperty" />
 	public class FlattenedAttribute : ElasticsearchPropertyAttributeBase, IFlattenedProperty

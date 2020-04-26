@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Diagnostics;
 using Nest;
 using Tests.Core.Client;
 using Tests.Domain;
-using Xunit.Sdk;
 
 namespace Tests.ScratchPad
 {

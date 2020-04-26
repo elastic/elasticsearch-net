@@ -22,8 +22,6 @@
 // SOFTWARE.
 #endregion
 
-using System;
-
 namespace Elasticsearch.Net.Utf8Json
 {
 	internal interface IJsonProperty

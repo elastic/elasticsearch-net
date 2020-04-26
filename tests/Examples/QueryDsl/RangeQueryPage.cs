@@ -1,4 +1,3 @@
-using System;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;

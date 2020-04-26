@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using Elastic.Managed.Configuration;
-using Elastic.Managed.Ephemeral.Plugins;
-using Elastic.Stack.Artifacts;
 using Elastic.Stack.Artifacts.Products;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
