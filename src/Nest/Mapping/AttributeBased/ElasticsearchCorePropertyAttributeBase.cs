@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
 
 namespace Nest

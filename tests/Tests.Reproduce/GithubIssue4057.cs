@@ -1,8 +1,6 @@
 ﻿using System;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
-using Nest;
-using Tests.Core.Extensions;
 using Tests.Core.Serialization;
 
 namespace Tests.Reproduce

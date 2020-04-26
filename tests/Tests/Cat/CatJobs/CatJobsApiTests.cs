@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
-using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Domain;
 using Tests.Framework.EndpointTests.TestState;
 using Tests.XPack.MachineLearning;
 

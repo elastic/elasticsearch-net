@@ -1,14 +1,9 @@
-using System;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Specification.CatApi;
 using FluentAssertions;
-using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Domain;
 
 namespace Tests.Reproduce
 {

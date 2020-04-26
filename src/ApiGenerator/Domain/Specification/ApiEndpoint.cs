@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using ApiGenerator.Configuration.Overrides;
@@ -8,7 +7,6 @@ using ApiGenerator.Domain.Code.HighLevel.Requests;
 using ApiGenerator.Domain.Code.LowLevel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
 
 namespace ApiGenerator.Domain.Specification
 {

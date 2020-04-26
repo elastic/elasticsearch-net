@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using ApiGenerator.Configuration;
 using ApiGenerator.Domain.Specification;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ApiGenerator.Domain
 {

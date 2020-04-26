@@ -1,4 +1,3 @@
-using Elastic.Managed.Ephemeral.Plugins;
 using static Elastic.Stack.Artifacts.Products.ElasticsearchPlugin;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters

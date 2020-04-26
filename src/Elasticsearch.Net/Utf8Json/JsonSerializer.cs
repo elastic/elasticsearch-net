@@ -24,8 +24,6 @@
 
 using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Utf8Json.Internal;
 using Elasticsearch.Net.Utf8Json.Resolvers;

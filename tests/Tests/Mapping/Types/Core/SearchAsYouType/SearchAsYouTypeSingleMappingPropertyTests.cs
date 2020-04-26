@@ -2,7 +2,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Domain;
 using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Mapping.Types.Core.SearchAsYouType

@@ -1,6 +1,4 @@
-﻿using Elasticsearch.Net.Extensions;
-
-namespace Elasticsearch.Net
+﻿namespace Elasticsearch.Net
 {
 	public class BytesResponse : ElasticsearchResponse<byte[]>
 	{

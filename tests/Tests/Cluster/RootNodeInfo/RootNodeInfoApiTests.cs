@@ -1,5 +1,4 @@
-﻿using System;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Configuration;

@@ -10,8 +10,6 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Core.Serialization;
-using Tests.XPack.MachineLearning;
 
 namespace Tests.CodeStandards.Serialization
 {

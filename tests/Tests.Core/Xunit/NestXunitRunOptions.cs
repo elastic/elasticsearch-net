@@ -3,11 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using Elastic.Xunit;
 using Tests.Configuration;
-using Tests.Core.VsTest;
 
 namespace Tests.Core.Xunit
 {

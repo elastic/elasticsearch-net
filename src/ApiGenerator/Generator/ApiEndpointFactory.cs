@@ -7,7 +7,6 @@ using ApiGenerator.Configuration.Overrides;
 using ApiGenerator.Domain;
 using ApiGenerator.Domain.Code;
 using ApiGenerator.Domain.Specification;
-using Microsoft.Extensions.DependencyModel;
 using Newtonsoft.Json.Linq;
 
 namespace ApiGenerator.Generator

@@ -1,9 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Data.Common;
 using System.Linq;
-using System.Reflection;
-using CsQuery.Engine;
-using CsQuery.Engine.PseudoClassSelectors;
 using Newtonsoft.Json;
 
 namespace ApiGenerator.Domain.Specification

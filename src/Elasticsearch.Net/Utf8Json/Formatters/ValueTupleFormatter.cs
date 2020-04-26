@@ -22,8 +22,8 @@
 // SOFTWARE.
 #endregion
 
-using Elasticsearch.Net.Utf8Json.Internal;
 using System;
+using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Elasticsearch.Net.Utf8Json.Formatters
 {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using static Tests.Core.Serialization.SerializationTestHelper;

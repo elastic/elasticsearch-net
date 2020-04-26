@@ -4,7 +4,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
-using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.FreezeIndex
 {
