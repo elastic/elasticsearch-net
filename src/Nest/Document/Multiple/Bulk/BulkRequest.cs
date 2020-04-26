@@ -10,17 +10,23 @@ namespace Nest
 	public partial interface IBulkRequest
 	{
 		[IgnoreDataMember]
-		BulkOperationsCollection<IBulkOperation> Operations { get; set; }
+		IList<IBulkOperation> Operations { get; set; }
 	}
 
 	public partial class BulkRequest
 	{
-		public BulkOperationsCollection<IBulkOperation> Operations { get; set; }
+		public IList<IBulkOperation> Operations { get; set; }
 	}
 
 	public partial class BulkDescriptor
 	{
-		BulkOperationsCollection<IBulkOperation> IBulkRequest.Operations { get; set; } = new BulkOperationsCollection<IBulkOperation>();
+		private readonly BulkOperationsCollection<IBulkOperation> _operations = new BulkOperationsCollection<IBulkOperation>();
+
+		IList<IBulkOperation> IBulkRequest.Operations
+		{
+			get => _operations;
+			set { }
+		}
 
 		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, IBulkCreateOperation<T>> bulkCreateSelector)
 			where T : class =>
@@ -148,7 +154,8 @@ namespace Nest
 				var op = bulkIndexSelector.InvokeOrDefault(defaultSelector(o), o);
 				if (op != null) operations.Add(op);
 			}
-			return Assign(operations, (a, v) => a.Operations.AddRange(v));
+			_operations.AddRange(operations);
+			return this;
 		}
 
 	}
