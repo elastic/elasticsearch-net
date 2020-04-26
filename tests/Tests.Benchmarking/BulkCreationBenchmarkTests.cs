@@ -10,7 +10,7 @@ using Tests.Domain;
 namespace Tests.Benchmarking
 {
 	[BenchmarkConfig(10)]
-	public class BulkSerializationBenchmarkTests
+	public class BulkCreationBenchmarkTests
 	{
 		private static readonly IList<Project> Projects = Project.Generator.Clone().Generate(10000);
 		private static readonly byte[] Response = TestClient.DefaultInMemoryClient.ConnectionSettings.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(Projects));
@@ -23,6 +23,9 @@ namespace Tests.Benchmarking
 
 		[GlobalSetup]
 		public void Setup() { }
+
+		[Benchmark(Description = "Descriptors.V8")]
+		public Nest8.BulkDescriptor CreateUsingDecriptorsV8() => new Nest8.BulkDescriptor().IndexMany(Projects);
 
 		[Benchmark(Description = "Descriptors")]
 		public BulkDescriptor CreateUsingDecriptors() => new BulkDescriptor().IndexMany(Projects);
