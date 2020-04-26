@@ -12,7 +12,6 @@ open Elasticsearch.Net
 open Newtonsoft.Json
 open Newtonsoft.Json.Linq
 open System.Collections.Generic
-open System.Runtime.ExceptionServices
 
 type ExecutionContext = {
     Version: string
@@ -60,14 +59,14 @@ type OperationExecutor(client:IElasticLowLevelClient) =
             let stashes = op.Stashes
             let (ResponseProperty prop) = prop
             match stashes.ResponseOption with
-            | Some r ->
+            | Some _ ->
                 let v = stashes.GetResponseValue progress prop
                 stashes.[id] <- v
                 Succeeded op
             | None ->
                 Failed <| Fail.Create op "Attempted to look up %s but no response was set prior" prop
         
-        let responses = s |> Map.map v 
+        s |> Map.map v |> ignore 
         Succeeded op
 
     static member Do op d (lookup:YamlMap -> FastApiInvoke) progress = async {
@@ -161,12 +160,12 @@ type OperationExecutor(client:IElasticLowLevelClient) =
     
     static member ToJToken (t:Object) =
         match t with
-        | null -> new JValue(t) :> JToken
+        | null -> JValue(t) :> JToken
         | :? JToken as j -> j 
         // yaml test framework often compares ints with doubles, does not validate
         // actual numeric types returned
         | :? int 
-        | :? int64 -> new JValue(Convert.ToDouble(t)) :> JToken
+        | :? int64 -> JValue(Convert.ToDouble(t)) :> JToken
         | :? Dictionary<Object, Object> as d -> JObject.FromObject(d) :> JToken
         | :? IDictionary<String, Object> as d -> JObject.FromObject(d) :> JToken
         | _ -> JToken.FromObject t
@@ -235,7 +234,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
             m
             |> Map.toList
             |> Seq.map (fun (k, v) -> doMatch k v)
-            |> Seq.sortBy (fun ex -> match ex with | Succeeded o -> 4 | Skipped (o, s) -> 3 | NotSkipped s -> 2 | Failed o -> 1)
+            |> Seq.sortBy (fun ex -> match ex with | Succeeded _ -> 4 | Skipped _ -> 3 | NotSkipped _ -> 2 | Failed _ -> 1)
             |> Seq.toList
             
         asserts |> Seq.head
@@ -271,7 +270,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
             matchOp
             |> Map.toList
             |> Seq.map (fun (k, v) -> doMatch k v)
-            |> Seq.sortBy (fun ex -> match ex with | Succeeded o -> 4 | Skipped (o, s) -> 3 | NotSkipped s -> 2 | Failed o -> 1)
+            |> Seq.sortBy (fun ex -> match ex with | Succeeded _ -> 4 | Skipped _ -> 3 | NotSkipped _ -> 2 | Failed _ -> 1)
             |> Seq.toList
             
         asserts |> Seq.head
@@ -279,7 +278,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
     member this.Execute (op:ExecutionContext) (progress:IProgressBar) = async {
         match op.Operation with
         | Unknown u -> return Skipped (op, sprintf "Unknown operation: %s" u)
-        | Actions (s, a) ->
+        | Actions (_, a) ->
             match a (client, op.Suite) with
             | None -> return Succeeded op
             | r ->
@@ -332,7 +331,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
             else 
                 return Failed <| Fail.Create op "Api: %s not found on client" name 
         | Set s -> return OperationExecutor.Set op s progress
-        | TransformAndSet ts -> return Skipped (op, "TODO transform_and_set")
+        | TransformAndSet _ -> return Skipped (op, "TODO transform_and_set")
         | Assert a ->
             return
                 match a with

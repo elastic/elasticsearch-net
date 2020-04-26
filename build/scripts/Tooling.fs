@@ -12,8 +12,8 @@ module Tooling =
     
     type NoopWriter () =
         interface IConsoleOutWriter with
-            member self.Write (e: Exception) = ignore()
-            member self.Write (out: ConsoleOut) = ignore()
+            member self.Write (_: Exception) = ignore()
+            member self.Write (_: ConsoleOut) = ignore()
     
     let private defaultConsoleWriter = Some <| (ConsoleOutColorWriter() :> IConsoleOutWriter)
     

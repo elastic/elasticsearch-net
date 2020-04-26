@@ -5,7 +5,6 @@ open System.Reflection
 open System.Collections.Generic
 open System.Collections.ObjectModel
 open System.Globalization
-open System.IO
 open System.Linq
 open System.Linq.Expressions
 open System.Threading.Tasks
@@ -35,7 +34,7 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
     member private this.Delegate =
         let instanceExpression = Expression.Parameter(typeof<Object>, "instance");
         let argumentsExpression = Expression.Parameter(typeof<Object[]>, "arguments");
-        let argumentExpressions = new List<Expression>();
+        let argumentExpressions = List<Expression>();
         methodInfo.GetParameters()
             |> Array.indexed
             |> Array.iter (fun (i, p) ->
@@ -79,11 +78,11 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
         let operationKeys =
             o
             |> this.toMap
-            |> Map.filter (fun k v -> this.PathParameters.Contains(k))
+            |> Map.filter (fun k _ -> this.PathParameters.Contains(k))
             // Some tests explicitly set "" as means to not send a parameter
             // Our client uses overloads and these error when passing null or empty string
             // So we need to consider these when doing a subset of this api
-            |> Map.filter (fun k v -> not <| String.IsNullOrWhiteSpace(this.ArgString v))
+            |> Map.filter (fun _ v -> not <| String.IsNullOrWhiteSpace(this.ArgString v))
             |> Seq.map (fun k -> k.Key)
             |> Set.ofSeq
         
@@ -96,8 +95,8 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
         
         let arguments =
             o
-            |> Map.filter (fun k v -> this.PathParameters.Contains(k))
-            |> Map.filter (fun k v -> not <| String.IsNullOrWhiteSpace(this.ArgString v))
+            |> Map.filter (fun k _ -> this.PathParameters.Contains(k))
+            |> Map.filter (fun _ v -> not <| String.IsNullOrWhiteSpace(this.ArgString v))
             |> Map.toSeq
             |> Seq.map (fun (k, v) ->
                 match k with
@@ -111,8 +110,8 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
                     | _ -> (k, v)
                 | _ -> (k, this.ArgString v :> Object)
             ) 
-            |> Seq.sortBy (fun (k, v) -> this.IndexOfParam k)
-            |> Seq.map (fun (k, v) -> v)
+            |> Seq.sortBy (fun (k, _) -> this.IndexOfParam k)
+            |> Seq.map (fun (_, v) -> v)
             |> Seq.toArray
         
         let requestParameters = this.CreateRequestParameters.Invoke()
@@ -127,9 +126,9 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
         
         o
         |> Map.toSeq
-        |> Seq.filter (fun (k, v) -> not <| this.PathParameters.Contains(k))
-        |> Seq.filter (fun (k, v) -> k <> "body")
-        |> Seq.filter (fun (k, v) -> k <> "ignore")
+        |> Seq.filter (fun (k, _) -> not <| this.PathParameters.Contains(k))
+        |> Seq.filter (fun (k, _) -> k <> "body")
+        |> Seq.filter (fun (k, _) -> k <> "ignore")
         |> Seq.iter (fun (k, v) -> requestParameters.SetQueryString(k, v))
         
         let post =
@@ -187,7 +186,7 @@ let private createApiLookup (invokers: FastApiInvoke list) : (YamlMap -> FastApi
         match invokers with
         | [] ->
             raise <| ParamException(sprintf "%s matched no method on %s: %O " name clientMethod o)
-        | invoker::tail ->
+        | invoker::_ ->
            invoker 
     lookup
     
@@ -208,7 +207,7 @@ let createDoMap (client:IElasticLowLevelClient) =
     |> List.ofArray
     |> List.groupBy (fun n -> n.ApiName)
     |> Map.ofList<String, FastApiInvoke list>
-    |> Map.map<String, FastApiInvoke list, (YamlMap -> FastApiInvoke)>(fun k v -> createApiLookup v)
+    |> Map.map<String, FastApiInvoke list, (YamlMap -> FastApiInvoke)>(fun _ v -> createApiLookup v)
 
     
         
