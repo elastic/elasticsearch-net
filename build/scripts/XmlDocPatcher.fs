@@ -6,7 +6,6 @@ open System.Text.RegularExpressions
 open System.Xml
 open System.Xml.Linq
 open System.Xml.XPath
-open System.IO
 
 module InheritDoc =
     

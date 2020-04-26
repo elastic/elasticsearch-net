@@ -6,7 +6,6 @@ open System.Diagnostics
 open System.IO
 open Commandline
 open Fake.Core
-open Fake.Core
 open Fake.IO
 open Fake.IO.Globbing.Operators
 open Newtonsoft.Json

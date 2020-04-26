@@ -1,8 +1,6 @@
 namespace Tests.YamlRunner
 
-open System
 open System.Diagnostics
-open System.Runtime.ExceptionServices
 open ShellProgressBar
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.TestsReader
@@ -57,7 +55,7 @@ type TestRunner(client:IElasticLowLevelClient, version: string, suite: TestSuite
     member private this.RunTestFile subProgressbar (file:YamlTestDocument) sectionFilter = async {
         let m section ops = this.CreateOperations section file.FileInfo ops subProgressbar
         let bootstrap section operations =
-            let ops = operations |> Option.map (m section) |> Option.toList |> List.collect (fun (s, ops) -> ops)
+            let ops = operations |> Option.map (m section) |> Option.toList |> List.collect (fun (_, ops) -> ops)
             ops
         
         let setup =  bootstrap "Setup" file.Setup 
@@ -90,12 +88,12 @@ type TestRunner(client:IElasticLowLevelClient, version: string, suite: TestSuite
                         subProgressbar.Tick(operations)
                         let r = Async.RunSynchronously op
                         match r with
-                        | Succeeded context -> Some (r, tl)
-                        | NotSkipped context -> Some (r, tl)
-                        | Skipped (context, reason) ->
+                        | Succeeded _context -> Some (r, tl)
+                        | NotSkipped _context -> Some (r, tl)
+                        | Skipped (_context, _reason) ->
                             subProgressbar.WriteLine <| sprintf "%s: %s " r.Name (r.Context.Operation.Log())
                             Some (r, [])
-                        | Failed context -> Some (r, [])
+                        | Failed _context -> Some (r, [])
                     | [] -> None
                 )
                 |> List.ofSeq
