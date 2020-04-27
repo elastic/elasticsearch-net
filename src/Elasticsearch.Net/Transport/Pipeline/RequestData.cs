@@ -59,6 +59,7 @@ namespace Elasticsearch.Net
 
 			KeepAliveInterval = (int)(global.KeepAliveInterval?.TotalMilliseconds ?? 2000);
 			KeepAliveTime = (int)(global.KeepAliveTime?.TotalMilliseconds ?? 2000);
+			DnsRefreshTimeout = global.DnsRefreshTimeout;
 
 			ProxyAddress = global.ProxyAddress;
 			ProxyUsername = global.ProxyUsername;
@@ -108,6 +109,7 @@ namespace Elasticsearch.Net
 		public string UserAgent { get; }
 
 		public Uri Uri => Node != null ? new Uri(Node.Uri, PathAndQuery) : null;
+		public TimeSpan DnsRefreshTimeout { get; }
 
 		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request)
 		{
