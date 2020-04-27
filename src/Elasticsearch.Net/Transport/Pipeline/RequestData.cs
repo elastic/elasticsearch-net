@@ -73,6 +73,7 @@ namespace Elasticsearch.Net
 
 			KeepAliveInterval = (int)(global.KeepAliveInterval?.TotalMilliseconds ?? 2000);
 			KeepAliveTime = (int)(global.KeepAliveTime?.TotalMilliseconds ?? 2000);
+			DnsRefreshTimeout = global.DnsRefreshTimeout;
 
 			ProxyAddress = global.ProxyAddress;
 			ProxyUsername = global.ProxyUsername;
@@ -130,6 +131,7 @@ namespace Elasticsearch.Net
 		public bool TransferEncodingChunked { get; }
 
 		public Uri Uri => Node != null ? new Uri(Node.Uri, PathAndQuery) : null;
+		public TimeSpan DnsRefreshTimeout { get; }
 
 		public override string ToString() => $"{Method.GetStringValue()} {_path}";
 
