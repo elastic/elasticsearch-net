@@ -40,6 +40,7 @@ using Nest.Specification.SnapshotApi;
 using Nest.Specification.SnapshotLifecycleManagementApi;
 using Nest.Specification.SqlApi;
 using Nest.Specification.TasksApi;
+using Nest.Specification.TransformApi;
 using Nest.Specification.WatcherApi;
 using Nest.Specification.XPackApi;
 
@@ -1096,6 +1097,12 @@ namespace Nest
 
 		///<summary>Tasks APIs</summary>
 		TasksNamespace Tasks
+		{
+			get;
+		}
+
+		///<summary>Transform APIs</summary>
+		TransformNamespace Transform
 		{
 			get;
 		}

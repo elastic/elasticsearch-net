@@ -38,6 +38,7 @@ using Nest.Specification.SnapshotApi;
 using Nest.Specification.SnapshotLifecycleManagementApi;
 using Nest.Specification.SqlApi;
 using Nest.Specification.TasksApi;
+using Nest.Specification.TransformApi;
 using Nest.Specification.WatcherApi;
 using Nest.Specification.XPackApi;
 
@@ -182,6 +183,13 @@ namespace Nest
 			private set;
 		}
 
+		///<summary>Transform APIs</summary>
+		public TransformNamespace Transform
+		{
+			get;
+			private set;
+		}
+
 		///<summary>Watcher APIs</summary>
 		public WatcherNamespace Watcher
 		{
@@ -217,6 +225,7 @@ namespace Nest
 			SnapshotLifecycleManagement = new SnapshotLifecycleManagementNamespace(this);
 			Sql = new SqlNamespace(this);
 			Tasks = new TasksNamespace(this);
+			Transform = new TransformNamespace(this);
 			Watcher = new WatcherNamespace(this);
 			XPack = new XPackNamespace(this);
 		}
