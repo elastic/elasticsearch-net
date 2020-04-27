@@ -25,7 +25,7 @@ namespace Nest
 		IList<IBulkOperation> IBulkRequest.Operations
 		{
 			get => _operations;
-			set { }
+			set => throw new NotImplementedException($"{nameof(BulkDescriptor)} does not allow {nameof(IBulkRequest)}.{nameof(IBulkRequest.Operations)} to be set directly");
 		}
 
 		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, IBulkCreateOperation<T>> bulkCreateSelector)
