@@ -16,7 +16,7 @@ using Elasticsearch.Net;
 namespace Elasticsearch.Net
 {
 	/// <summary>
-	/// Heavily modified version of DefaultHttpClientFactory, repurposed for RequestData
+	/// Heavily modified version of DefaultHttpClientFactory, re-purposed for RequestData
 	/// </summary>
 	internal class RequestDataHttpClientFactory : IDisposable
 	{
@@ -48,7 +48,7 @@ namespace Elasticsearch.Net
 		private readonly ConcurrentDictionary<int, Lazy<ActiveHandlerTrackingEntry>> _activeHandlers;
 
 		public int InUseHandlers => _activeHandlers.Count;
-		private int _removedHandlers = 0;
+		private int _removedHandlers;
 		public int RemovedHandlers => _removedHandlers;
 
 		// Collection of 'expired' but not yet disposed handlers.
