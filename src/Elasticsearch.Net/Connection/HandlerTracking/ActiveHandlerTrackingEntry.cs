@@ -9,8 +9,11 @@ using System.Threading;
 
 namespace Elasticsearch.Net
 {
-    // Thread-safety: We treat this class as immutable except for the timer. Creating a new object
-    // for the 'expiry' pool simplifies the threading requirements significantly.
+	/// <summary>
+    /// Thread-safety: We treat this class as immutable except for the timer. Creating a new object
+	/// for the 'expiry' pool simplifies the threading requirements significantly.
+	/// <para>https://github.com/dotnet/runtime/blob/master/src/libraries/Microsoft.Extensions.Http/src/ActiveHandlerTrackingEntry.cs</para>
+	/// </summary>
     internal class ActiveHandlerTrackingEntry
     {
         private static readonly TimerCallback TimerCallback = (s) => ((ActiveHandlerTrackingEntry)s).Timer_Tick();

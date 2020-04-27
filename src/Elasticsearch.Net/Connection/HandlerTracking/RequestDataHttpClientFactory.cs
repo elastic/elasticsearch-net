@@ -17,6 +17,7 @@ namespace Elasticsearch.Net
 {
 	/// <summary>
 	/// Heavily modified version of DefaultHttpClientFactory, re-purposed for RequestData
+	/// <para>https://github.com/dotnet/runtime/blob/master/src/libraries/Microsoft.Extensions.Http/src/DefaultHttpClientFactory.cs</para>
 	/// </summary>
 	internal class RequestDataHttpClientFactory : IDisposable
 	{

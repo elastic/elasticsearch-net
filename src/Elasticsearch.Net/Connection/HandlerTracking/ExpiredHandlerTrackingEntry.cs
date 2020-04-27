@@ -8,7 +8,10 @@ using System.Net.Http;
 
 namespace Elasticsearch.Net
 {
-	// Thread-safety: This class is immutable
+	/// <summary>
+	/// Thread-safety: This class is immutable
+	/// <para>https://github.com/dotnet/runtime/blob/master/src/libraries/Microsoft.Extensions.Http/src/ExpiredHandlerTrackingEntry.cs</para>
+	/// </summary>
 	internal class ExpiredHandlerTrackingEntry
 	{
 		private readonly WeakReference _livenessTracker;
