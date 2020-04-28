@@ -68,17 +68,17 @@ namespace Nest
 			if (!dict.HasAny()) return null;
 
 			IScriptCondition scriptCondition = null;
-			if (dict.TryGetValue("inline", out JToken inlineToken))
+			if (dict.TryGetValue("inline", out var inlineToken))
 			{
 				var inline = inlineToken.ToString();
 				scriptCondition = new InlineScriptCondition(inline);
 			}
-			if (dict.TryGetValue("source", out JToken sourceToken))
+			if (dict.TryGetValue("source", out var sourceToken))
 			{
 				var inline = sourceToken.ToString();
 				scriptCondition = new InlineScriptCondition(inline);
 			}
-			if (dict.TryGetValue("id", out JToken idToken))
+			if (dict.TryGetValue("id", out var idToken))
 			{
 				var id = idToken.ToString();
 				scriptCondition = new IndexedScriptCondition(id);
@@ -86,9 +86,9 @@ namespace Nest
 
 			if (scriptCondition == null) return null;
 
-			if (dict.TryGetValue("lang", out JToken langToken))
+			if (dict.TryGetValue("lang", out var langToken))
 				scriptCondition.Lang = langToken.ToString();
-			if (dict.TryGetValue("params", out JToken paramsToken))
+			if (dict.TryGetValue("params", out var paramsToken))
 				scriptCondition.Params = paramsToken.ToObject<Dictionary<string, object>>();
 
 			return scriptCondition;

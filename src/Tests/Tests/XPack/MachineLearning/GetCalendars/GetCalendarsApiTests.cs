@@ -78,7 +78,7 @@ namespace Tests.XPack.MachineLearning.GetCalendars
 			{
 				PutJob(client, callUniqueValue.Value + "_job");
 				PutCalendar(client, callUniqueValue.Value);
-				for (int i = 0; i < 20; i++)
+				for (var i = 0; i < 20; i++)
 				{
 					PutCalendar(client, callUniqueValue.Value + "_" + i);
 				}

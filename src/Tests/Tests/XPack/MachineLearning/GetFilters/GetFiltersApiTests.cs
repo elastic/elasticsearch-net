@@ -77,7 +77,7 @@ namespace Tests.XPack.MachineLearning.GetFilters
 		{
 			foreach (var callUniqueValue in values)
 			{
-				for (int i = 0; i < 3; i++)
+				for (var i = 0; i < 3; i++)
 					PutFilter(client, callUniqueValue.Value + "_" + (i + 1));
 			}
 		}

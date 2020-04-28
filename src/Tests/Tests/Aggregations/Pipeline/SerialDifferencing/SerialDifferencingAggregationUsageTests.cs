@@ -81,7 +81,7 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 
 			var differenceCount = 0;
 
-			bool atleastOneSecondDifference = false;
+			var atleastOneSecondDifference = false;
 			foreach (var item in projectsPerMonth.Buckets)
 			{
 				differenceCount++;

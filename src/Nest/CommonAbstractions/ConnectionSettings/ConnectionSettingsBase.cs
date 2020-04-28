@@ -182,7 +182,7 @@ namespace Nest
 			var memberInfo = new MemberInfoResolver(objectPath);
 			var fieldName = memberInfo.Members.Single().Name;
 
-			if (_idProperties.TryGetValue(typeof(TDocument), out string idPropertyFieldName))
+			if (_idProperties.TryGetValue(typeof(TDocument), out var idPropertyFieldName))
 			{
 				if (idPropertyFieldName.Equals(fieldName)) return;
 
@@ -201,7 +201,7 @@ namespace Nest
 			var memberInfo = new MemberInfoResolver(objectPath);
 			var fieldName = memberInfo.Members.Single().Name;
 
-			if (_routeProperties.TryGetValue(typeof(TDocument), out string routePropertyFieldName))
+			if (_routeProperties.TryGetValue(typeof(TDocument), out var routePropertyFieldName))
 			{
 				if (routePropertyFieldName.Equals(fieldName)) return;
 
@@ -226,7 +226,7 @@ namespace Nest
 					throw new ArgumentException($"Expression {e} does contain any member access");
 
 				var memberInfo = memberInfoResolver.Members.Last();
-				if (_propertyMappings.TryGetValue(memberInfo, out IPropertyMapping propertyMapping))
+				if (_propertyMappings.TryGetValue(memberInfo, out var propertyMapping))
 				{
 					var newName = mapping.NewName;
 					var mappedAs = propertyMapping.Name;

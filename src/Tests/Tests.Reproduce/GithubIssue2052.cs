@@ -121,7 +121,7 @@ namespace Tests.Reproduce
 
 			if (args.Length != 5) return null;
 
-			var memberType = Int32.Parse(args[0], CultureInfo.InvariantCulture);
+			var memberType = int.Parse(args[0], CultureInfo.InvariantCulture);
 			var name = args[1];
 			var assemblyName = args[2];
 			var className = args[3];

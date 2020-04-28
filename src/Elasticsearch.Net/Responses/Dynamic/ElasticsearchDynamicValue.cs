@@ -514,7 +514,7 @@ namespace Elasticsearch.Net
 			if (value == null) return true;
 
 			var binderType = binder.Type;
-			if (binderType == typeof(String))
+			if (binderType == typeof(string))
 			{
 				result = Convert.ToString(value);
 				return true;

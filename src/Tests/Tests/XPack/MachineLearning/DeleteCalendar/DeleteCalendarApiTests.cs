@@ -47,9 +47,6 @@ namespace Tests.XPack.MachineLearning.DeleteCalendar
 
 		protected override DeleteCalendarDescriptor NewDescriptor() => new DeleteCalendarDescriptor(CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteCalendarResponse response)
-		{
-			response.ShouldBeValid();
-		}
+		protected override void ExpectResponse(IDeleteCalendarResponse response) => response.ShouldBeValid();
 	}
 }

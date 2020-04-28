@@ -1,6 +1,14 @@
 @using RazorLight
 @inherits TemplatePage<RestApiSpec>
+@functions {
+	public override Task ExecuteAsync()
+	{
+		this.Execute();
+		return Task.CompletedTask;
+	}
+}
 @using System.Collections.Generic
+@using System.Threading.Tasks
 @using ApiGenerator.Domain
 @using ApiGenerator
 

@@ -67,17 +67,17 @@ namespace Nest
 			if (!dict.HasAny()) return null;
 
 			IScriptTransform scriptTransform = null;
-			if (dict.TryGetValue("inline", out JToken inlineToken))
+			if (dict.TryGetValue("inline", out var inlineToken))
 			{
 				var inline = inlineToken.ToString();
 				scriptTransform = new InlineScriptTransform(inline);
 			}
-			if (dict.TryGetValue("source", out JToken sourceToken))
+			if (dict.TryGetValue("source", out var sourceToken))
 			{
 				var inline = sourceToken.ToString();
 				scriptTransform = new InlineScriptTransform(inline);
 			}
-			if (dict.TryGetValue("id", out JToken idToken))
+			if (dict.TryGetValue("id", out var idToken))
 			{
 				var id = idToken.ToString();
 				scriptTransform = new IndexedScriptTransform(id);
@@ -85,9 +85,9 @@ namespace Nest
 
 			if (scriptTransform == null) return null;
 
-			if (dict.TryGetValue("lang", out JToken langToken))
+			if (dict.TryGetValue("lang", out var langToken))
 				scriptTransform.Lang = langToken.ToString();
-			if (dict.TryGetValue("params", out JToken paramsToken))
+			if (dict.TryGetValue("params", out var paramsToken))
 				scriptTransform.Params = paramsToken.ToObject<Dictionary<string, object>>();
 
 			return scriptTransform;

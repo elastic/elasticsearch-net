@@ -17,7 +17,7 @@ namespace Nest
 			var percentileRanks = new PercentileRanksAggregation();
 			ReadMetricProperties(percentileRanks, properties);
 			percentileRanks.Method = ReadMethodProperty(properties);
-			if (properties.TryGetValue("values", out JToken valuesToken))
+			if (properties.TryGetValue("values", out var valuesToken))
 				percentileRanks.Values = valuesToken.ToObject<List<double>>();
 			return percentileRanks;
 

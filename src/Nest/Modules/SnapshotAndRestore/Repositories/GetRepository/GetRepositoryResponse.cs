@@ -40,7 +40,7 @@ namespace Nest
 			where TRepository : class, ISnapshotRepository
 		{
 			if (Repositories == null) return null;
-			if (!Repositories.TryGetValue(name, out ISnapshotRepository repository)) return null;
+			if (!Repositories.TryGetValue(name, out var repository)) return null;
 
 			return repository as TRepository;
 		}

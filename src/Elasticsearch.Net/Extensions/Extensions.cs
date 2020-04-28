@@ -21,7 +21,7 @@ namespace Elasticsearch.Net
 			if (ms is null)
 				return null;
 
-			if (!ms.TryGetBuffer(out ArraySegment<byte> buffer) || buffer.Array is null)
+			if (!ms.TryGetBuffer(out var buffer) || buffer.Array is null)
 				return Encoding.UTF8.GetString(ms.ToArray());
 
 			return Encoding.UTF8.GetString(buffer.Array, buffer.Offset, buffer.Count);
@@ -32,7 +32,7 @@ namespace Elasticsearch.Net
 			if (ms is null)
 				return null;
 
-			if (!ms.TryGetBuffer(out ArraySegment<byte> buffer) || buffer.Array is null)
+			if (!ms.TryGetBuffer(out var buffer) || buffer.Array is null)
 				return Encoding.UTF8.GetChars(ms.ToArray());
 
 			return Encoding.UTF8.GetChars(buffer.Array, buffer.Offset, buffer.Count);

@@ -58,7 +58,7 @@ namespace Elasticsearch.Net
 	/// </remarks>
 	internal class RecyclableMemoryStream : MemoryStream
 	{
-		private const long MaxStreamLength = Int32.MaxValue;
+		private const long MaxStreamLength = int.MaxValue;
 
 		private static readonly byte[] EmptyArray = new byte[0];
 

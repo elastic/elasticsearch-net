@@ -10,7 +10,7 @@ namespace System.Collections.Generic
 		public SynchronizedCollection()
 		{
 			Items = new List<T>();
-			SyncRoot = new Object();
+			SyncRoot = new object();
 		}
 
 		public SynchronizedCollection(object syncRoot)

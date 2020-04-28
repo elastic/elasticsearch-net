@@ -32,7 +32,7 @@ namespace Nest
 			IDictionaryResponse<string, AutoFollowPattern> dictResponse = response;
 			var dict = new Dictionary<string, AutoFollowPattern>();
 			dictResponse.BackingDictionary = dict;
-			bool checkedError = false;
+			var checkedError = false;
 
 			if (reader.TokenType != JsonToken.StartObject)
 				return response;

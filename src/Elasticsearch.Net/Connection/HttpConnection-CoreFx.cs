@@ -18,7 +18,7 @@ namespace Elasticsearch.Net
 	{
 		private readonly Uri _uri;
 
-		public WebProxy(Uri uri) { _uri = uri; }
+		public WebProxy(Uri uri) => _uri = uri;
 
 		public ICredentials Credentials { get; set; }
 

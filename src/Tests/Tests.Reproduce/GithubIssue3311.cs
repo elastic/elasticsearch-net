@@ -17,7 +17,7 @@ namespace Tests.Reproduce
 		{
 			var indexName = "max-bucket-reproduce";
 
-			var ec = this._cluster.Client;
+			var ec = _cluster.Client;
 			var now = DateTime.Now;
 			var testdata = new DateTime[] { }
 				.Concat(Enumerable.Repeat(now.AddMinutes(1), 3))

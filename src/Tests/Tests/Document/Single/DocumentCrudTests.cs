@@ -78,7 +78,7 @@ namespace Tests.Document.Single
 		{
 			r.Source.Should().NotBeNull();
 			r.Version.Should().BeGreaterThan(1);
-			if (base.Cluster.ClusterConfiguration.Version >= "6.8.0")
+			if (Cluster.ClusterConfiguration.Version >= "6.8.0")
 			{
 				r.SequenceNumber.Should().BeGreaterOrEqualTo(1);
 				r.PrimaryTerm.Should().BeGreaterThan(0);

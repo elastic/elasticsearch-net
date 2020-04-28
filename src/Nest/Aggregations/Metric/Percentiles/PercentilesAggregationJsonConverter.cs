@@ -17,7 +17,7 @@ namespace Nest
 			var percentiles = new PercentilesAggregation();
 			ReadMetricProperties(percentiles, properties);
 			percentiles.Method = ReadMethodProperty(properties);
-			if (properties.TryGetValue("percents", out JToken percentsToken))
+			if (properties.TryGetValue("percents", out var percentsToken))
 				percentiles.Percents = percentsToken.ToObject<List<double>>();
 			return percentiles;
 		}
@@ -25,28 +25,28 @@ namespace Nest
 		protected IPercentilesMethod ReadMethodProperty(Dictionary<string, JToken> properties)
 		{
 			IPercentilesMethod method = null;
-			if (properties.TryGetValue("hdr", out JToken hdrToken))
+			if (properties.TryGetValue("hdr", out var hdrToken))
 				method = hdrToken.ToObject<HDRHistogramMethod>();
-			else if (properties.TryGetValue("tdigest", out JToken tdigestToken))
+			else if (properties.TryGetValue("tdigest", out var tdigestToken))
 				method = tdigestToken.ToObject<TDigestMethod>();
 			return method;
 		}
 
 		protected void ReadMetricProperties(IMetricAggregation metric, Dictionary<string, JToken> properties)
 		{
-			if (properties.TryGetValue("field", out JToken fieldToken))
+			if (properties.TryGetValue("field", out var fieldToken))
 				metric.Field = fieldToken.ToString();
 
-			if (properties.TryGetValue("script", out JToken scriptToken))
+			if (properties.TryGetValue("script", out var scriptToken))
 			{
 				var scriptProps = JObject.FromObject(scriptToken).Properties().ToDictionary(p => p.Name, p => p.Value);
 				if (scriptProps.ContainsKey("source") || scriptProps.ContainsKey("inline"))
 					metric.Script = scriptToken.ToObject<InlineScript>();
-				else if (scriptProps.TryGetValue("id", out JToken idToken))
+				else if (scriptProps.TryGetValue("id", out var idToken))
 					metric.Script = idToken.ToObject<IndexedScript>();
 			}
 
-			if (properties.TryGetValue("missing", out JToken missingToken))
+			if (properties.TryGetValue("missing", out var missingToken))
 				metric.Missing = double.Parse(missingToken.ToString());
 		}
 
