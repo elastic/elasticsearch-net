@@ -139,11 +139,6 @@ When passing a collection of `object`, the client assumes that it's a collection
 that needs to be serialized individually to json and joined with newline feeds. As with the collection of strings, the client ensures that
 there is a trailing linefeed.
 
-[source,csharp]
-----
-await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: false, settings: settings);
-----
-
 In all other cases, Post data is serialized as is and `WrittenBytes` is not assigned 
 
 [source,csharp]
@@ -172,7 +167,7 @@ In doing so, the serialized bytes are first written to a private `MemoryStream` 
 ----
 settings = new ConnectionConfiguration().DisableDirectStreaming();
 
-await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: true, settings: settings);
+//await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: true, settings: settings);
 
 await Post(() => PostData.MultiJson(collectionOfStrings), writes: utf8BytesOfListOfStrings, writtenBytesIsSet: true, settings: settings);
 
