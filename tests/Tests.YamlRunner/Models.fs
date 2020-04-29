@@ -123,7 +123,7 @@ type Feature =
     | Contains // "contains", //NOT seen in master
     | TransformAndSet // "transform_and_set", //TODO support
     | ArbitraryKey // "arbitrary_key"
-    | NoXPack // "arbitrary_key"
+    | NoXPack // "no_xpack"
     | Unsupported of string
 
 let SupportedFeatures = [EmbeddedStashKey; StashInPath; Yaml; ArbitraryKey; Warnings; Headers

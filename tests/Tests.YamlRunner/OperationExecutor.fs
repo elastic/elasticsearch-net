@@ -367,9 +367,12 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                     |> Seq.filter (fun feature -> not (SupportedFeatures |> List.contains feature))
                     |> Seq.toList
                 
-                match unsupportedFeatures with
-                | [] -> NotSkipped op
-                | _ -> skip (sprintf "feature %O not supported" features)
+                let noXPackButXPack = features.Contains(NoXPack) && op.Suite = XPack
+                match (unsupportedFeatures, noXPackButXPack) with
+                | ([], false) -> NotSkipped op
+                | ([], true) ->
+                   skip (sprintf "no_xpack was specified but we are running against an xpack node")
+                | (l,_) -> skip (sprintf "feature %O not supported" l)
             
             let result =
                 match (s.Version, s.Features) with
