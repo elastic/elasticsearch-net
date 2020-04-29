@@ -172,6 +172,7 @@ let private mapOperation section (operation:YamlMap) =
         | ("transform_and_set", YamlDictionary map) -> TransformAndSet <| mapTransformAndSet map
         | ("do", YamlDictionary map) -> mapDo section map
         | ("match", YamlDictionary map) ->  Assert <| Match (mapMatch map)
+        | ("contains", YamlDictionary map) ->  Assert <| Contains (mapMatch map)
         | ("is_false", YamlDictionary map) -> Assert <| IsFalse (firstValueAsPath map)
         | ("is_true", YamlDictionary map) -> Assert <| IsTrue (firstValueAsPath map)
         | ("is_false", YamlString str) -> Assert <| IsFalse (AssertOn.Create str)

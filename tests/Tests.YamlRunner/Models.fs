@@ -123,9 +123,11 @@ type Feature =
     | Contains // "contains", //NOT seen in master
     | TransformAndSet // "transform_and_set", //TODO support
     | ArbitraryKey // "arbitrary_key"
+    | NoXPack // "arbitrary_key"
     | Unsupported of string
 
-let SupportedFeatures = [EmbeddedStashKey; StashInPath; Yaml; ArbitraryKey; Warnings; Headers]
+let SupportedFeatures = [EmbeddedStashKey; StashInPath; Yaml; ArbitraryKey; Warnings; Headers
+                         Contains; DefaultShards; CatchUnauthorized; NoXPack; TransformAndSet ]
     
 let (|ToFeature|) (s:string) =
     match s with
@@ -142,6 +144,7 @@ let (|ToFeature|) (s:string) =
     | "contains" -> Contains
     | "transform_and_set" -> TransformAndSet
     | "arbitrary_key" -> ArbitraryKey
+    | "no_xpack" -> NoXPack
     | s -> Unsupported s
 
 type Skip = { Version:SemVer.Range list option; Reason:string option; Features: Feature list option }
@@ -170,6 +173,7 @@ type Assert =
     | IsTrue of AssertOn
     | IsFalse of AssertOn
     | Match of Match
+    | Contains of Match 
     | NumericAssert of NumericAssert * NumericMatch
     with
         member this.Name = getName this
@@ -177,6 +181,7 @@ type Assert =
             match this with
             | IsTrue s -> sprintf "%s %s" this.Name s.Log
             | IsFalse s -> sprintf "%s %s" this.Name s.Log
+            | Contains s
             | Match s -> 
                 sprintf "%s %s" this.Name (s |> Seq.map (fun k -> sprintf "%s %20A" k.Key.Log k.Value) |> String.concat " ")
             | NumericAssert (a, m) ->
@@ -215,6 +220,7 @@ let (|IsOperation|_|) (s:string) =
     | "transform_and_set" 
     | "headers" 
     | "do" 
+    | "contains" 
     | "match" 
     | "is_false" 
     | "is_true" -> Some s

@@ -179,6 +179,41 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                 let e = expected.ToString(Formatting.None)
                 Failed <| Fail.Create op "expected: %s actual: %s" e a
             | _ -> Succeeded op
+            
+    // inspects `actual` is a list of objects and contains an object with the keys and value of `expected`
+    static member JTokenContainsSubSet op expected actual =
+            let expected = OperationExecutor.ToJToken expected
+            let actual = OperationExecutor.ToJToken actual
+            match actual.Type with
+            | JTokenType.Array ->
+                let array = actual :?> JArray
+                let setOfKeys (o:JObject) = o.Properties() |> Seq.map(fun p -> p.Name) |> Set.ofSeq
+                let expectedObj = expected :?> JObject
+                let expectedKeys = setOfKeys expectedObj
+                let misMatchedValues (o:JObject) = 
+                    expectedObj.Properties()
+                    |> Seq.map(fun prop -> (prop, JToken.DeepEquals (prop.Value, o.Property(prop.Name).Value)))
+                    // filter all values that differ
+                    |> Seq.filter (fun (_, equals) -> not equals)
+                    |> Seq.map (fun (prop, _) -> (prop.Name, prop.Value))
+                    |> Seq.toList
+                let actualValues =
+                    array
+                    |> Seq.map(fun v -> v :?> JObject)
+                    |> Seq.filter(fun o -> o <> null)
+                    |> Seq.filter(fun o -> (setOfKeys o).IsSupersetOf(expectedKeys))
+                    |> Seq.map(fun o -> misMatchedValues o)
+                    |> List.ofSeq
+                    
+                match actualValues |> List.tryFind(fun (l) -> l.Length = 0) with
+                | None ->
+                    let a = actual.ToString(Formatting.None) 
+                    let e = expected.ToString(Formatting.None)
+                    Failed <| Fail.Create op "No object in actual: %s has proper subset of keys and values from expected: %s" a e
+                | Some o ->
+                    Succeeded op
+            | _ -> 
+                Failed <| Fail.Create op "Can not assert contains when actual is not an array: %s" (actual.ToString(Formatting.None))
         
     static member IsNumericMatch op (assertion:NumericAssert) (m:NumericMatch) progress =
         let stashes = op.Stashes
@@ -274,6 +309,34 @@ type OperationExecutor(client:IElasticLowLevelClient) =
             |> Seq.toList
             
         asserts |> Seq.head
+        
+    static member IsContains op (matchOp:Match) progress =
+        let stashes = op.Stashes
+        let doMatch assertOn assertValue = 
+            let value =
+                match (assertOn, assertValue) with
+                | (ResponsePath "$body", Value _) -> stashes.Response().Dictionary.ToDictionary() :> Object
+                | (ResponsePath path, _) -> stashes.GetResponseValue progress path :> Object
+                | (WholeResponse, _) -> stashes.Response().Dictionary.ToDictionary() :> Object
+            
+            match assertValue with
+            | Value o -> OperationExecutor.JTokenContainsSubSet op o value
+            | Id id ->
+                let found, expected = stashes.TryGetValue id
+                match found with
+                | true -> OperationExecutor.JTokenContainsSubSet op expected value
+                | false -> Failed <| Fail.Create op "%A not stashed at this point" id 
+            | RegexAssertion _ ->
+                Failed <| Fail.Create op "regex assertion not supported in `contains`"
+                
+        let asserts =
+            matchOp
+            |> Map.toList
+            |> Seq.map (fun (k, v) -> doMatch k v)
+            |> Seq.sortBy (fun ex -> match ex with | Succeeded _ -> 4 | Skipped _ -> 3 | NotSkipped _ -> 2 | Failed _ -> 1)
+            |> Seq.toList
+            
+        asserts |> Seq.head
 
     member this.Execute (op:ExecutionContext) (progress:IProgressBar) = async {
         match op.Operation with
@@ -306,7 +369,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                 
                 match unsupportedFeatures with
                 | [] -> NotSkipped op
-                | _ -> skip (sprintf "feature %O not support" features)
+                | _ -> skip (sprintf "feature %O not supported" features)
             
             let result =
                 match (s.Version, s.Features) with
@@ -337,6 +400,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                 match a with
                 | IsTrue t -> OperationExecutor.IsTrue op t progress
                 | IsFalse t -> OperationExecutor.IsFalse op t progress
+                | Contains m -> OperationExecutor.IsContains op m progress
                 | Match m -> OperationExecutor.IsMatch op m progress
                 | NumericAssert (a, m) -> OperationExecutor.IsNumericMatch op a m progress
               
