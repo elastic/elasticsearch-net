@@ -1,8 +1,13 @@
 module Tests.YamlRunner.OperationExecutor
 
 open System
+open System.Buffers.Text
+open System.Collections.Specialized
 open System.Linq
 open System.IO
+open System.Text
+open System.Text.RegularExpressions
+open System.Text.Unicode
 open Microsoft.FSharp.Reflection
 open Tests.YamlRunner.DoMapper
 open Tests.YamlRunner.Models
@@ -75,7 +80,27 @@ type OperationExecutor(client:IElasticLowLevelClient) =
         try
             let invoke = lookup data
             let resolvedData = stashes.Resolve progress data
-            let! r = Async.AwaitTask <| invoke.Invoke resolvedData d.Headers
+            let headers =
+                let head (h:string) =
+                    match h.Contains("$") with
+                    | false -> h
+                    | true ->
+                        Regex.Replace(h, "\$\{?\w+\}?", fun r -> (stashes.ResolveToken progress r.Value).ToString())
+                match d.Headers with
+                | Some h ->
+                    (h.AllKeys |> Seq.map(fun key -> key, head h.[key]))
+                    |> Map.ofSeq
+                    |> Map.fold
+                      (fun (nv:NameValueCollection) k v ->
+                        (nv.[k] <- v)
+                        nv
+                      )
+                      (NameValueCollection())
+                    |> Option.Some
+                | None -> None
+                    
+            
+            let! r = Async.AwaitTask <| invoke.Invoke resolvedData headers
             
             let responseMimeType = r.ApiCall.ResponseMimeType
             match responseMimeType with
@@ -126,6 +151,32 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                 return Failed <| Fail.Create op "%s %O" e d.Catch
                 
     }
+    
+    static member TransformAndSet op (t:TransformAndSet) (progress:IProgressBar) =
+        let call (prop:StashedId) (transform:Transformation) =
+            let stashes = op.Stashes
+            match transform.Function with
+            | "base64EncodeCredentials" ->
+                let encoded =
+                    transform.Values
+                    |> List.map (fun v ->
+                        match v with
+                        | ResponsePath p -> stashes.GetResponseValue<string> progress p 
+                        | _ -> null
+                    )
+                    |> String.concat ":"
+                    |> Encoding.UTF8.GetBytes
+                    |> Convert.ToBase64String
+                
+                stashes.[prop] <- encoded
+                
+                Succeeded op
+            | func ->
+                Failed <| Fail.Create op "TransformAndSet unknown function: %s" func
+            
+        
+        t |> Map.map (fun k v -> call k v.Transform) |> ignore 
+        Succeeded op
 
     ///<summary>The specified key exists and has a true value (ie not 0, false, undefined, null or the empty string)</summary>
     static member IsTrue op (t:AssertOn) progress =
@@ -397,7 +448,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
             else 
                 return Failed <| Fail.Create op "Api: %s not found on client" name 
         | Set s -> return OperationExecutor.Set op s progress
-        | TransformAndSet _ -> return Skipped (op, "TODO transform_and_set")
+        | TransformAndSet t -> return OperationExecutor.TransformAndSet op t progress
         | Assert a ->
             return
                 match a with
