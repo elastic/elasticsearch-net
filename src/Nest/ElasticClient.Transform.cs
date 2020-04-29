@@ -113,37 +113,41 @@ namespace Nest.Specification.TransformApi
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html</a>
 		/// </summary>
-		public PreviewTransformResponse Preview(Func<PreviewTransformDescriptor, IPreviewTransformRequest> selector) => Preview(selector.InvokeOrDefault(new PreviewTransformDescriptor()));
+		public PreviewTransformResponse<TTransform> Preview<TDocument, TTransform>(Func<PreviewTransformDescriptor<TDocument>, IPreviewTransformRequest> selector)
+			where TDocument : class => Preview<TTransform>(selector.InvokeOrDefault(new PreviewTransformDescriptor<TDocument>()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>transform.preview_transform</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html</a>
 		/// </summary>
-		public Task<PreviewTransformResponse> PreviewAsync(Func<PreviewTransformDescriptor, IPreviewTransformRequest> selector, CancellationToken ct = default) => PreviewAsync(selector.InvokeOrDefault(new PreviewTransformDescriptor()), ct);
+		public Task<PreviewTransformResponse<TTransform>> PreviewAsync<TDocument, TTransform>(Func<PreviewTransformDescriptor<TDocument>, IPreviewTransformRequest> selector, CancellationToken ct = default)
+			where TDocument : class => PreviewAsync<TTransform>(selector.InvokeOrDefault(new PreviewTransformDescriptor<TDocument>()), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>transform.preview_transform</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html</a>
 		/// </summary>
-		public PreviewTransformResponse Preview(IPreviewTransformRequest request) => DoRequest<IPreviewTransformRequest, PreviewTransformResponse>(request, request.RequestParameters);
+		public PreviewTransformResponse<TTransform> Preview<TTransform>(IPreviewTransformRequest request) => DoRequest<IPreviewTransformRequest, PreviewTransformResponse<TTransform>>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>transform.preview_transform</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html</a>
 		/// </summary>
-		public Task<PreviewTransformResponse> PreviewAsync(IPreviewTransformRequest request, CancellationToken ct = default) => DoRequestAsync<IPreviewTransformRequest, PreviewTransformResponse>(request, request.RequestParameters, ct);
+		public Task<PreviewTransformResponse<TTransform>> PreviewAsync<TTransform>(IPreviewTransformRequest request, CancellationToken ct = default) => DoRequestAsync<IPreviewTransformRequest, PreviewTransformResponse<TTransform>>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>transform.put_transform</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html</a>
 		/// </summary>
-		public PutTransformResponse Put(Id transformId, Func<PutTransformDescriptor, IPutTransformRequest> selector) => Put(selector.InvokeOrDefault(new PutTransformDescriptor(transformId: transformId)));
+		public PutTransformResponse Put<TDocument>(Id transformId, Func<PutTransformDescriptor<TDocument>, IPutTransformRequest> selector)
+			where TDocument : class => Put(selector.InvokeOrDefault(new PutTransformDescriptor<TDocument>(transformId: transformId)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>transform.put_transform</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html</a>
 		/// </summary>
-		public Task<PutTransformResponse> PutAsync(Id transformId, Func<PutTransformDescriptor, IPutTransformRequest> selector, CancellationToken ct = default) => PutAsync(selector.InvokeOrDefault(new PutTransformDescriptor(transformId: transformId)), ct);
+		public Task<PutTransformResponse> PutAsync<TDocument>(Id transformId, Func<PutTransformDescriptor<TDocument>, IPutTransformRequest> selector, CancellationToken ct = default)
+			where TDocument : class => PutAsync(selector.InvokeOrDefault(new PutTransformDescriptor<TDocument>(transformId: transformId)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>transform.put_transform</c> API, read more about this API online:
 		/// <para></para>
@@ -209,13 +213,15 @@ namespace Nest.Specification.TransformApi
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html</a>
 		/// </summary>
-		public UpdateTransformResponse Update(Id transformId, Func<UpdateTransformDescriptor, IUpdateTransformRequest> selector) => Update(selector.InvokeOrDefault(new UpdateTransformDescriptor(transformId: transformId)));
+		public UpdateTransformResponse Update<TDocument>(Id transformId, Func<UpdateTransformDescriptor<TDocument>, IUpdateTransformRequest> selector)
+			where TDocument : class => Update(selector.InvokeOrDefault(new UpdateTransformDescriptor<TDocument>(transformId: transformId)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>transform.update_transform</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html</a>
 		/// </summary>
-		public Task<UpdateTransformResponse> UpdateAsync(Id transformId, Func<UpdateTransformDescriptor, IUpdateTransformRequest> selector, CancellationToken ct = default) => UpdateAsync(selector.InvokeOrDefault(new UpdateTransformDescriptor(transformId: transformId)), ct);
+		public Task<UpdateTransformResponse> UpdateAsync<TDocument>(Id transformId, Func<UpdateTransformDescriptor<TDocument>, IUpdateTransformRequest> selector, CancellationToken ct = default)
+			where TDocument : class => UpdateAsync(selector.InvokeOrDefault(new UpdateTransformDescriptor<TDocument>(transformId: transformId)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>transform.update_transform</c> API, read more about this API online:
 		/// <para></para>

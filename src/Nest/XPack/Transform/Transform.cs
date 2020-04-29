@@ -1,29 +1,31 @@
-﻿using System;
 using System.Runtime.Serialization;
 
 namespace Nest
 {
-	public class UpdateTransformResponse : ResponseBase
+	/// <summary>
+	/// A transform.
+	/// </summary>
+	public class Transform
 	{
 		/// <summary>
 		/// The identifier for the transform
 		/// </summary>
 		[DataMember(Name = "id")]
-		public string Id { get; internal set; }
+		public string Id { get; set; }
 
 		/// <summary>
 		/// Free text description of the transform.
 		/// </summary>
 		[DataMember(Name = "description")]
-		public string Description { get; internal set; }
+		public string Description { get; set; }
 
 		/// <inheritdoc cref="TransformSource"/>
 		[DataMember(Name = "source")]
-		public ITransformSource Source { get; internal set; }
+		public ITransformSource Source { get; set; }
 
 		/// <inheritdoc cref="TransformDestination"/>
 		[DataMember(Name = "dest")]
-		public ITransformDestination Destination { get; internal set; }
+		public ITransformDestination Destination { get; set; }
 
 		/// <summary>
 		/// The interval between checks for changes in the source indices when the transform is running continuously.
@@ -31,31 +33,13 @@ namespace Nest
 		/// The minimum value is 1s and the maximum is 1h. The default value is 1m.
 		/// </summary>
 		[DataMember(Name = "frequency")]
-		public Time Frequency { get; internal set; }
+		public Time Frequency { get; set; }
 
 		/// <inheritdoc cref="TransformPivot"/>
 		[DataMember(Name = "pivot")]
-		public ITransformPivot Pivot { get; internal set; }
+		public ITransformPivot Pivot { get; set; }
 
 		[DataMember(Name = "sync")]
-		public ITransformSync Sync { get; internal set; }
-
-		/// <summary>
-		/// The version
-		/// </summary>
-		[DataMember(Name = "version")]
-		public string Version { get; internal set; }
-
-		/// <summary>
-		/// The creation time in milliseconds since epoch
-		/// </summary>
-		[DataMember(Name = "create_time")]
-		public long CreateTime { get; internal set; }
-
-		/// <summary>
-		/// The creation time
-		/// </summary>
-		[IgnoreDataMember]
-		public DateTimeOffset CreateTimeDateTime => DateTimeUtil.Epoch.AddMilliseconds(CreateTime);
+		public ITransformSync Sync { get; set; }
 	}
 }

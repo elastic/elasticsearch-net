@@ -109,7 +109,7 @@ namespace Nest
 	}
 
 	///<summary>Descriptor for Preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html</para></summary>
-	public partial class PreviewTransformDescriptor : RequestDescriptorBase<PreviewTransformDescriptor, PreviewTransformRequestParameters, IPreviewTransformRequest>, IPreviewTransformRequest
+	public partial class PreviewTransformDescriptor<TDocument> : RequestDescriptorBase<PreviewTransformDescriptor<TDocument>, PreviewTransformRequestParameters, IPreviewTransformRequest>, IPreviewTransformRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformPreview;
 	// values part of the url path
@@ -117,7 +117,7 @@ namespace Nest
 	}
 
 	///<summary>Descriptor for Put <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html</para></summary>
-	public partial class PutTransformDescriptor : RequestDescriptorBase<PutTransformDescriptor, PutTransformRequestParameters, IPutTransformRequest>, IPutTransformRequest
+	public partial class PutTransformDescriptor<TDocument> : RequestDescriptorBase<PutTransformDescriptor<TDocument>, PutTransformRequestParameters, IPutTransformRequest>, IPutTransformRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformPut;
 		///<summary>/_transform/{transform_id}</summary>
@@ -136,7 +136,7 @@ namespace Nest
 		Id IPutTransformRequest.TransformId => Self.RouteValues.Get<Id>("transform_id");
 		// Request parameters
 		///<summary>If validations should be deferred until transform starts, defaults to false.</summary>
-		public PutTransformDescriptor DeferValidation(bool? defervalidation = true) => Qs("defer_validation", defervalidation);
+		public PutTransformDescriptor<TDocument> DeferValidation(bool? defervalidation = true) => Qs("defer_validation", defervalidation);
 	}
 
 	///<summary>Descriptor for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html</para></summary>
@@ -194,7 +194,7 @@ namespace Nest
 	}
 
 	///<summary>Descriptor for Update <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html</para></summary>
-	public partial class UpdateTransformDescriptor : RequestDescriptorBase<UpdateTransformDescriptor, UpdateTransformRequestParameters, IUpdateTransformRequest>, IUpdateTransformRequest
+	public partial class UpdateTransformDescriptor<TDocument> : RequestDescriptorBase<UpdateTransformDescriptor<TDocument>, UpdateTransformRequestParameters, IUpdateTransformRequest>, IUpdateTransformRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformUpdate;
 		///<summary>/_transform/{transform_id}/_update</summary>
@@ -213,6 +213,6 @@ namespace Nest
 		Id IUpdateTransformRequest.TransformId => Self.RouteValues.Get<Id>("transform_id");
 		// Request parameters
 		///<summary>If validations should be deferred until transform starts, defaults to false.</summary>
-		public UpdateTransformDescriptor DeferValidation(bool? defervalidation = true) => Qs("defer_validation", defervalidation);
+		public UpdateTransformDescriptor<TDocument> DeferValidation(bool? defervalidation = true) => Qs("defer_validation", defervalidation);
 	}
 }
