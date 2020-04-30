@@ -1,8 +1,13 @@
 module Tests.YamlRunner.OperationExecutor
 
 open System
+open System.Buffers.Text
+open System.Collections.Specialized
 open System.Linq
 open System.IO
+open System.Text
+open System.Text.RegularExpressions
+open System.Text.Unicode
 open Microsoft.FSharp.Reflection
 open Tests.YamlRunner.DoMapper
 open Tests.YamlRunner.Models
@@ -75,7 +80,27 @@ type OperationExecutor(client:IElasticLowLevelClient) =
         try
             let invoke = lookup data
             let resolvedData = stashes.Resolve progress data
-            let! r = Async.AwaitTask <| invoke.Invoke resolvedData d.Headers
+            let headers =
+                let head (h:string) =
+                    match h.Contains("$") with
+                    | false -> h
+                    | true ->
+                        Regex.Replace(h, "\$\{?\w+\}?", fun r -> (stashes.ResolveToken progress r.Value).ToString())
+                match d.Headers with
+                | Some h ->
+                    (h.AllKeys |> Seq.map(fun key -> key, head h.[key]))
+                    |> Map.ofSeq
+                    |> Map.fold
+                      (fun (nv:NameValueCollection) k v ->
+                        (nv.[k] <- v)
+                        nv
+                      )
+                      (NameValueCollection())
+                    |> Option.Some
+                | None -> None
+                    
+            
+            let! r = Async.AwaitTask <| invoke.Invoke resolvedData headers
             
             let responseMimeType = r.ApiCall.ResponseMimeType
             match responseMimeType with
@@ -126,6 +151,32 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                 return Failed <| Fail.Create op "%s %O" e d.Catch
                 
     }
+    
+    static member TransformAndSet op (t:TransformAndSet) (progress:IProgressBar) =
+        let call (prop:StashedId) (transform:Transformation) =
+            let stashes = op.Stashes
+            match transform.Function with
+            | "base64EncodeCredentials" ->
+                let encoded =
+                    transform.Values
+                    |> List.map (fun v ->
+                        match v with
+                        | ResponsePath p -> stashes.GetResponseValue<string> progress p 
+                        | _ -> null
+                    )
+                    |> String.concat ":"
+                    |> Encoding.UTF8.GetBytes
+                    |> Convert.ToBase64String
+                
+                stashes.[prop] <- encoded
+                
+                Succeeded op
+            | func ->
+                Failed <| Fail.Create op "TransformAndSet unknown function: %s" func
+            
+        
+        t |> Map.map (fun k v -> call k v.Transform) |> ignore 
+        Succeeded op
 
     ///<summary>The specified key exists and has a true value (ie not 0, false, undefined, null or the empty string)</summary>
     static member IsTrue op (t:AssertOn) progress =
@@ -179,6 +230,41 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                 let e = expected.ToString(Formatting.None)
                 Failed <| Fail.Create op "expected: %s actual: %s" e a
             | _ -> Succeeded op
+            
+    // inspects `actual` is a list of objects and contains an object with the keys and value of `expected`
+    static member JTokenContainsSubSet op expected actual =
+            let expected = OperationExecutor.ToJToken expected
+            let actual = OperationExecutor.ToJToken actual
+            match actual.Type with
+            | JTokenType.Array ->
+                let array = actual :?> JArray
+                let setOfKeys (o:JObject) = o.Properties() |> Seq.map(fun p -> p.Name) |> Set.ofSeq
+                let expectedObj = expected :?> JObject
+                let expectedKeys = setOfKeys expectedObj
+                let misMatchedValues (o:JObject) = 
+                    expectedObj.Properties()
+                    |> Seq.map(fun prop -> (prop, JToken.DeepEquals (prop.Value, o.Property(prop.Name).Value)))
+                    // filter all values that differ
+                    |> Seq.filter (fun (_, equals) -> not equals)
+                    |> Seq.map (fun (prop, _) -> (prop.Name, prop.Value))
+                    |> Seq.toList
+                let actualValues =
+                    array
+                    |> Seq.map(fun v -> v :?> JObject)
+                    |> Seq.filter(fun o -> o <> null)
+                    |> Seq.filter(fun o -> (setOfKeys o).IsSupersetOf(expectedKeys))
+                    |> Seq.map(fun o -> misMatchedValues o)
+                    |> List.ofSeq
+                    
+                match actualValues |> List.tryFind(fun (l) -> l.Length = 0) with
+                | None ->
+                    let a = actual.ToString(Formatting.None) 
+                    let e = expected.ToString(Formatting.None)
+                    Failed <| Fail.Create op "No object in actual: %s has proper subset of keys and values from expected: %s" a e
+                | Some o ->
+                    Succeeded op
+            | _ -> 
+                Failed <| Fail.Create op "Can not assert contains when actual is not an array: %s" (actual.ToString(Formatting.None))
         
     static member IsNumericMatch op (assertion:NumericAssert) (m:NumericMatch) progress =
         let stashes = op.Stashes
@@ -274,6 +360,34 @@ type OperationExecutor(client:IElasticLowLevelClient) =
             |> Seq.toList
             
         asserts |> Seq.head
+        
+    static member IsContains op (matchOp:Match) progress =
+        let stashes = op.Stashes
+        let doMatch assertOn assertValue = 
+            let value =
+                match (assertOn, assertValue) with
+                | (ResponsePath "$body", Value _) -> stashes.Response().Dictionary.ToDictionary() :> Object
+                | (ResponsePath path, _) -> stashes.GetResponseValue progress path :> Object
+                | (WholeResponse, _) -> stashes.Response().Dictionary.ToDictionary() :> Object
+            
+            match assertValue with
+            | Value o -> OperationExecutor.JTokenContainsSubSet op o value
+            | Id id ->
+                let found, expected = stashes.TryGetValue id
+                match found with
+                | true -> OperationExecutor.JTokenContainsSubSet op expected value
+                | false -> Failed <| Fail.Create op "%A not stashed at this point" id 
+            | RegexAssertion _ ->
+                Failed <| Fail.Create op "regex assertion not supported in `contains`"
+                
+        let asserts =
+            matchOp
+            |> Map.toList
+            |> Seq.map (fun (k, v) -> doMatch k v)
+            |> Seq.sortBy (fun ex -> match ex with | Succeeded _ -> 4 | Skipped _ -> 3 | NotSkipped _ -> 2 | Failed _ -> 1)
+            |> Seq.toList
+            
+        asserts |> Seq.head
 
     member this.Execute (op:ExecutionContext) (progress:IProgressBar) = async {
         match op.Operation with
@@ -304,9 +418,12 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                     |> Seq.filter (fun feature -> not (SupportedFeatures |> List.contains feature))
                     |> Seq.toList
                 
-                match unsupportedFeatures with
-                | [] -> NotSkipped op
-                | _ -> skip (sprintf "feature %O not support" features)
+                let noXPackButXPack = features.Contains(NoXPack) && op.Suite = XPack
+                match (unsupportedFeatures, noXPackButXPack) with
+                | ([], false) -> NotSkipped op
+                | ([], true) ->
+                   skip (sprintf "no_xpack was specified but we are running against an xpack node")
+                | (l,_) -> skip (sprintf "feature %O not supported" l)
             
             let result =
                 match (s.Version, s.Features) with
@@ -331,12 +448,13 @@ type OperationExecutor(client:IElasticLowLevelClient) =
             else 
                 return Failed <| Fail.Create op "Api: %s not found on client" name 
         | Set s -> return OperationExecutor.Set op s progress
-        | TransformAndSet _ -> return Skipped (op, "TODO transform_and_set")
+        | TransformAndSet t -> return OperationExecutor.TransformAndSet op t progress
         | Assert a ->
             return
                 match a with
                 | IsTrue t -> OperationExecutor.IsTrue op t progress
                 | IsFalse t -> OperationExecutor.IsFalse op t progress
+                | Contains m -> OperationExecutor.IsContains op m progress
                 | Match m -> OperationExecutor.IsMatch op m progress
                 | NumericAssert (a, m) -> OperationExecutor.IsNumericMatch op a m progress
               

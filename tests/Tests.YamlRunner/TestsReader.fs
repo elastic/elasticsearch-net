@@ -40,15 +40,19 @@ let private pick<'a> (map:YamlMap) key =
 let private mapSkip (operation:YamlMap) =
     let version = tryPick<string> operation "version" 
     let reason = tryPick<string> operation "reason"
-    let parseFeature s = match s with | ToFeature s -> s
+    let parseFeature (s:string) = s.Split(",") |> Seq.map(fun f -> match f.Trim() with | ToFeature s -> s) |> Seq.toList
     let features =
         let found, value= operation.TryGetValue "features"
         match (found, value) with
         | (false, _) -> None
         | (_, x) ->
             match x with 
-            | :? List<Object> -> tryPickList<string, Feature> operation "features" parseFeature
-            | :? String as feature -> Some [parseFeature feature]
+            | :? List<Object> ->
+                let features = tryPickList<string, string> operation "features" (fun s -> s)
+                match features with
+                | None -> None
+                | Some f -> Some <| (f |> List.collect(fun ff -> parseFeature ff))
+            | :? String as feature -> Some (parseFeature feature)
             | _ -> None
     let versionRange =
         match version with
@@ -172,6 +176,7 @@ let private mapOperation section (operation:YamlMap) =
         | ("transform_and_set", YamlDictionary map) -> TransformAndSet <| mapTransformAndSet map
         | ("do", YamlDictionary map) -> mapDo section map
         | ("match", YamlDictionary map) ->  Assert <| Match (mapMatch map)
+        | ("contains", YamlDictionary map) ->  Assert <| Contains (mapMatch map)
         | ("is_false", YamlDictionary map) -> Assert <| IsFalse (firstValueAsPath map)
         | ("is_true", YamlDictionary map) -> Assert <| IsTrue (firstValueAsPath map)
         | ("is_false", YamlString str) -> Assert <| IsFalse (AssertOn.Create str)
