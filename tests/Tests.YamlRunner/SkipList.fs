@@ -153,6 +153,15 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "cluster.reroute/11_explain.yml", Sections [
         "Explain API for non-existent node & shard"
     ]
+    
+    //These are ignored because they were flagged on a big PR.
+    
+    //additional enters in regex
+    SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates" ]
+    
+    //new API TODO remove when we regenerate
+    SkipFile "cluster.voting_config_exclusions/10_basic.yml", All
+
 ]
 
 
