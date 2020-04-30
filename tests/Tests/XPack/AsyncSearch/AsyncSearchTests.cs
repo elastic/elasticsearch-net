@@ -13,17 +13,14 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.AsyncSearch
 {
-	[SkipVersion("<7.7.0", "Introduced in 7.7.0")]
+	[SkipVersion("<7.7.0", "Introduced in 7.7.0 ")]
 	public class AsyncSearchTests : CoordinatedIntegrationTestBase<ReadOnlyCluster>
 	{
 		private const string SubmitStep = nameof(SubmitStep);
 		private const string GetStep = nameof(GetStep);
 		private const string DeleteStep = nameof(DeleteStep);
 
-		// store the ids returned from submit step to use in subsequent steps
-		private static readonly ConcurrentDictionary<string, string> SearchIds = new ConcurrentDictionary<string, string>();
-
-		public AsyncSearchTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
+		public AsyncSearchTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, testOnlyOne: false)
 		{
 			{SubmitStep, u =>
 				u.Calls<AsyncSearchSubmitDescriptor<Project>, AsyncSearchSubmitRequest<Project>, IAsyncSearchSubmitRequest, AsyncSearchSubmitResponse<Project>>(
@@ -67,45 +64,33 @@ namespace Tests.XPack.AsyncSearch
 								)
 							)
 						),
-						(v, c, f) => c.AsyncSearch.Submit(f),
-						(v, c, f) => c.AsyncSearch.SubmitAsync(f),
-						(v, c, r) => c.AsyncSearch.Submit<Project>(r),
-						(v, c, r) => c.AsyncSearch.SubmitAsync<Project>(r)
-					)
+					(v, c, f) => c.AsyncSearch.Submit(f),
+					(v, c, f) => c.AsyncSearch.SubmitAsync(f),
+					(v, c, r) => c.AsyncSearch.Submit<Project>(r),
+					(v, c, r) => c.AsyncSearch.SubmitAsync<Project>(r),
+					onResponse: (r, values) => values.ExtendedValue("id", r.Id)
+				)
 			},
 			{GetStep, u =>
 				u.Calls<AsyncSearchGetDescriptor, AsyncSearchGetRequest, IAsyncSearchGetRequest, AsyncSearchGetResponse<Project>>(
-					v =>
-					{
-						var p = u[SubmitStep].GetAwaiter().GetResult();
-						var id = ((AsyncSearchSubmitResponse<Project>)p[ClientMethod.Initializer]).Id;
-						return new AsyncSearchGetRequest(id);
-					},
+					v => new AsyncSearchGetRequest(v),
 					(v, d) => d,
-					(v, c, f) =>
-					{
-						var p = u[SubmitStep].GetAwaiter().GetResult();
-						var id = ((AsyncSearchSubmitResponse<Project>)p[ClientMethod.Fluent]).Id;
-						return c.AsyncSearch.Get<Project>(id, f);
-					},
-					(v, c, f) =>
-					{
-						var p = u[SubmitStep].GetAwaiter().GetResult();
-						var id = ((AsyncSearchSubmitResponse<Project>)p[ClientMethod.FluentAsync]).Id;
-						return c.AsyncSearch.GetAsync<Project>(id, f);
-					},
+					(v, c, f) => c.AsyncSearch.Get<Project>(v, f),
+					(v, c, f) => c.AsyncSearch.GetAsync<Project>(v, f),
 					(v, c, r) => c.AsyncSearch.Get<Project>(r),
-					(v, c, r) => c.AsyncSearch.GetAsync<Project>(r)
+					(v, c, r) => c.AsyncSearch.GetAsync<Project>(r),
+					uniqueValueSelector: values => values.ExtendedValue<string>("id")
 				)
 			},
 			{DeleteStep, u =>
 				u.Calls<AsyncSearchDeleteDescriptor, AsyncSearchDeleteRequest, IAsyncSearchDeleteRequest, AsyncSearchDeleteResponse>(
-					v => new AsyncSearchDeleteRequest(SearchIds[v]),
+					v => new AsyncSearchDeleteRequest(v),
 					(v, d) => d,
-					(v, c, f) => c.AsyncSearch.Delete(SearchIds[v], f),
-					(v, c, f) => c.AsyncSearch.DeleteAsync(SearchIds[v], f),
+					(v, c, f) => c.AsyncSearch.Delete(v, f),
+					(v, c, f) => c.AsyncSearch.DeleteAsync(v, f),
 					(v, c, r) => c.AsyncSearch.Delete(r),
-					(v, c, r) => c.AsyncSearch.DeleteAsync(r)
+					(v, c, r) => c.AsyncSearch.DeleteAsync(r),
+					uniqueValueSelector: values => values.ExtendedValue<string>("id")
 				)
 			},
 		}) { }
