@@ -35,7 +35,7 @@ let private runningProxy = runningMitmProxy || Process.GetProcessesByName("fiddl
 let private defaultEndpoint namedSuite = 
     let host = 
         match (runningProxy, namedSuite) with
-        | (true, _) -> "ipv.fiddler"
+        | (true, _) -> "ipv4.fiddler"
         | _ -> "localhost"
     let https = match namedSuite with | XPack -> "s" | _ -> ""
     sprintf "http%s://%s:9200" https host;
