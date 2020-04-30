@@ -148,6 +148,27 @@ let SkipList = dict<SkipFile,SkipSection> [
     
     // Datastreams are currently experimental
     SkipFile "indices.data_stream/10_basic.yml", All
+    
+    // uses $stashed id in match with object
+    SkipFile "cluster.reroute/11_explain.yml", Sections [
+        "Explain API for non-existent node & shard"
+    ]
+    
+    //These are ignored because they were flagged on a big PR.
+    
+    //additional enters in regex
+    SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates" ]
+    
+    //Replace stashed value in body that is passed as string json
+    SkipFile "api_key/10_basic.yml", Section "Test invalidate api key"
+    
+    //additional enters in regex
+    SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates" ]
+    
+    
+    //new API TODO remove when we regenerate
+    SkipFile "cluster.voting_config_exclusions/10_basic.yml", All
+
 ]
 
 

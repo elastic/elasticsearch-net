@@ -55,17 +55,31 @@ type StashedId = private StashedId of string with
     static member Body = StashedId.Create "body"
     member this.Log = match this with | StashedId s -> s
     
-type SetTransformation = private SetTransformation of string with
-    static member Create s = SetTransformation <| sprintf "$%s" s
-    member this.Log = match this with | SetTransformation s -> s
-    
 type AssertOn = private ResponsePath of string | WholeResponse with
     static member Create s =
         match s with
         | null | "" -> WholeResponse
-        | s -> ResponsePath s
+        | s -> ResponsePath (s.Trim())
     member this.Name = getName this
     member this.Log = match this with | ResponsePath p -> p | WholeResponse -> "WholeResponse"
+    
+type Transformation = {
+    Function: string;
+    Values: AssertOn list;
+}
+type SetTransformation = private SetTransformation of Transformation with
+    static member Create (s:string) =
+        let tokens = s.Split([| '#'; '('; ')'; ','|], StringSplitOptions.RemoveEmptyEntries) |> List.ofSeq
+        match tokens with
+        | f::tail ->
+            let values = tail |> List.map AssertOn.Create
+            SetTransformation <| { Function = f; Values = values }
+        | [] ->
+            raise <| Exception(sprintf "Can not create SetTransformation for: %s" s)
+            
+    member this.Log = match this with | SetTransformation s -> sprintf "#%s(%O)" s.Function (s.Values |> List.map (fun i -> i.Log))
+    member this.Transform = match this with | SetTransformation s -> s
+    
         
 let (|ResponsePath|WholeResponse|) input = 
     match input with
@@ -114,18 +128,20 @@ type Feature =
     | DefaultShards // "default_shards", //NOT seen in master
     | EmbeddedStashKey // "embedded_stash_key", //NOT seen in master
     | Headers // "headers", 
-    | NodeSelector // "node_selector", //TODO support
+    | NodeSelector // "node_selector", // not needed in the client yaml runner always runs single node mode.
     | StashInKey // "stash_in_key", //NOT seen in master
     | StashInPath // "stash_in_path",
     | StashPathReplace // "stash_path_replace", //NOT seen in master
     | Warnings // "warnings", 
     | Yaml // "yaml", 
     | Contains // "contains", //NOT seen in master
-    | TransformAndSet // "transform_and_set", //TODO support
+    | TransformAndSet // "transform_and_set", 
     | ArbitraryKey // "arbitrary_key"
+    | NoXPack // "no_xpack"
     | Unsupported of string
 
-let SupportedFeatures = [EmbeddedStashKey; StashInPath; Yaml; ArbitraryKey; Warnings; Headers]
+let SupportedFeatures = [EmbeddedStashKey; StashInPath; ArbitraryKey; Warnings; Headers
+                         Contains; DefaultShards; CatchUnauthorized; NoXPack; TransformAndSet ]
     
 let (|ToFeature|) (s:string) =
     match s with
@@ -142,6 +158,7 @@ let (|ToFeature|) (s:string) =
     | "contains" -> Contains
     | "transform_and_set" -> TransformAndSet
     | "arbitrary_key" -> ArbitraryKey
+    | "no_xpack" -> NoXPack
     | s -> Unsupported s
 
 type Skip = { Version:SemVer.Range list option; Reason:string option; Features: Feature list option }
@@ -170,6 +187,7 @@ type Assert =
     | IsTrue of AssertOn
     | IsFalse of AssertOn
     | Match of Match
+    | Contains of Match 
     | NumericAssert of NumericAssert * NumericMatch
     with
         member this.Name = getName this
@@ -177,6 +195,7 @@ type Assert =
             match this with
             | IsTrue s -> sprintf "%s %s" this.Name s.Log
             | IsFalse s -> sprintf "%s %s" this.Name s.Log
+            | Contains s
             | Match s -> 
                 sprintf "%s %s" this.Name (s |> Seq.map (fun k -> sprintf "%s %20A" k.Key.Log k.Value) |> String.concat " ")
             | NumericAssert (a, m) ->
@@ -215,6 +234,7 @@ let (|IsOperation|_|) (s:string) =
     | "transform_and_set" 
     | "headers" 
     | "do" 
+    | "contains" 
     | "match" 
     | "is_false" 
     | "is_true" -> Some s
