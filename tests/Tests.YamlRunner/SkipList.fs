@@ -148,6 +148,11 @@ let SkipList = dict<SkipFile,SkipSection> [
     
     // Datastreams are currently experimental
     SkipFile "indices.data_stream/10_basic.yml", All
+    
+    // uses $stashed id in match with object
+    SkipFile "cluster.reroute/11_explain.yml", Sections [
+        "Explain API for non-existent node & shard"
+    ]
 ]
 
 
