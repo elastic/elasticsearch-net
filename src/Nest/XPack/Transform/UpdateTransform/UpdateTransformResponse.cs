@@ -38,7 +38,7 @@ namespace Nest
 		public ITransformPivot Pivot { get; internal set; }
 
 		[DataMember(Name = "sync")]
-		public ITransformSync Sync { get; internal set; }
+		public ITransformSyncContainer Sync { get; internal set; }
 
 		/// <summary>
 		/// The version

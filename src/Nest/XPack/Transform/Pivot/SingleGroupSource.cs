@@ -21,32 +21,20 @@ namespace Nest
 		Field Field { get; set; }
 
 		/// <summary>
-		/// The name of the group by
+		/// A script to calculate grouping
 		/// </summary>
-		[IgnoreDataMember]
-		string Name { get; set; }
-
-		/// <summary>
-		/// The type of the group by
-		/// </summary>
-		[IgnoreDataMember]
-		string Type { get; }
+		[DataMember(Name = "script")]
+		IScript Script { get; set; }
 	}
 
 	/// <inheritdoc cref="ISingleGroupSource" />
 	public abstract class SingleGroupSourceBase : ISingleGroupSource
 	{
-		protected SingleGroupSourceBase(string name) => ((ISingleGroupSource)this).Name = name;
-
-		/// <inheritdoc cref="ISingleGroupSource.Type" />
-		protected abstract string Type { get; }
-
 		/// <inheritdoc />
 		public Field Field { get; set; }
 
-		string ISingleGroupSource.Name { get; set; }
-
-		string ISingleGroupSource.Type => Type;
+		/// <inheritdoc />
+		public IScript Script { get; set; }
 	}
 
 	/// <inheritdoc cref="ISingleGroupSource" />
@@ -55,17 +43,8 @@ namespace Nest
 		where TDescriptor : SingleGroupSourceDescriptorBase<TDescriptor, TInterface, T>, TInterface
 		where TInterface : class, ISingleGroupSource
 	{
-		private readonly string _type;
-
-		protected SingleGroupSourceDescriptorBase(string name, string type)
-		{
-			_type = type;
-			Self.Name = name;
-		}
-
 		Field ISingleGroupSource.Field { get; set; }
-		string ISingleGroupSource.Name { get; set; }
-		string ISingleGroupSource.Type => _type;
+		IScript ISingleGroupSource.Script { get; set; }
 
 		/// <inheritdoc cref="ISingleGroupSource.Field" />
 		public TDescriptor Field(Field field) => Assign(field, (a, v) => a.Field = v);
@@ -73,34 +52,40 @@ namespace Nest
 		/// <inheritdoc cref="ISingleGroupSource.Field" />
 		public TDescriptor Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.Field = v);
 
+		/// <inheritdoc cref="ISingleGroupSource.Script" />
+		public TDescriptor Script(string script) => Assign((InlineScript)script, (a, v) => a.Script = v);
+
+		/// <inheritdoc cref="ISingleGroupSource.Script" />
+		public TDescriptor Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
+			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
 	}
 
 	/// <summary>
 	/// Builds a collection of <see cref="ISingleGroupSource"/>
 	/// </summary>
 	public class SingleGroupSourcesDescriptor<T>
-		: DescriptorPromiseBase<SingleGroupSourcesDescriptor<T>, IList<ISingleGroupSource>>
+		: DescriptorPromiseBase<SingleGroupSourcesDescriptor<T>, IDictionary<string, ISingleGroupSource>>
 		where T : class
 	{
-		public SingleGroupSourcesDescriptor() : base (new List<ISingleGroupSource>()) { }
+		public SingleGroupSourcesDescriptor() : base (new Dictionary<string, ISingleGroupSource>()) { }
 
 		/// <inheritdoc cref="ITermsGroupSource" />
 		public SingleGroupSourcesDescriptor<T> Terms(string name,
 			Func<TermsGroupSourceDescriptor<T>, ITermsGroupSource> selector
 		) =>
-			Assign(selector?.Invoke(new TermsGroupSourceDescriptor<T>(name)), (a, v) => a.Add(v));
+			Assign(new Tuple<string, ITermsGroupSource>(name, selector?.Invoke(new TermsGroupSourceDescriptor<T>())), (a, v) => a.Add(v.Item1, v.Item2));
 
 		/// <inheritdoc cref="IHistogramGroupSource" />
 		public SingleGroupSourcesDescriptor<T> Histogram(string name,
 			Func<HistogramGroupSourceDescriptor<T>, IHistogramGroupSource> selector
 		) =>
-			Assign(selector?.Invoke(new HistogramGroupSourceDescriptor<T>(name)), (a, v) => a.Add(v));
+			Assign(new Tuple<string, IHistogramGroupSource>(name, selector?.Invoke(new HistogramGroupSourceDescriptor<T>())), (a, v) => a.Add(v.Item1, v.Item2));
 
 		/// <inheritdoc cref="IDateHistogramGroupSource" />
 		public SingleGroupSourcesDescriptor<T> DateHistogram(string name,
 			Func<DateHistogramGroupSourceDescriptor<T>, IDateHistogramGroupSource> selector
 		) =>
-			Assign(selector?.Invoke(new DateHistogramGroupSourceDescriptor<T>(name)), (a, v) => a.Add(v));
+			Assign(new Tuple<string, IDateHistogramGroupSource>(name, selector?.Invoke(new DateHistogramGroupSourceDescriptor<T>())), (a, v) => a.Add(v.Item1, v.Item2));
 	}
 
 	internal class SingleGroupSourceFormatter : IJsonFormatter<ISingleGroupSource>
@@ -121,26 +106,25 @@ namespace Nest
 			}
 
 			writer.WriteBeginObject();
-			writer.WritePropertyName(value.Name);
-			writer.WriteBeginObject();
-			writer.WritePropertyName(value.Type);
 
 			switch (value)
 			{
 				case ITermsGroupSource termsGroupSource:
+					writer.WritePropertyName("terms");
 					Serialize(ref writer, termsGroupSource, formatterResolver);
 					break;
 				case IDateHistogramGroupSource dateHistogramGroupSource:
+					writer.WritePropertyName("date_histogram");
 					Serialize(ref writer, dateHistogramGroupSource, formatterResolver);
 					break;
 				case IHistogramGroupSource histogramGroupSource:
+					writer.WritePropertyName("histogram");
 					Serialize(ref writer, histogramGroupSource, formatterResolver);
 					break;
 				default:
 					throw new JsonParsingException($"Unknown {nameof(ISingleGroupSource)}: {value.GetType().Name}");
 			}
 
-			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 
@@ -155,16 +139,15 @@ namespace Nest
 		public ISingleGroupSource Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
+			{
+				reader.ReadNextBlock();
 				return null;
+			}
 
 			reader.ReadIsBeginObjectWithVerify();
-			var name = reader.ReadPropertyName();
-			reader.ReadIsBeginObjectWithVerify(); // into source
-
 			var sourcePropertyName = reader.ReadPropertyNameSegmentRaw();
 
 			ISingleGroupSource groupSource = null;
-
 			if (GroupSource.TryGetValue(sourcePropertyName, out var value))
 			{
 				switch (value)
@@ -187,9 +170,6 @@ namespace Nest
 				throw new JsonParsingException($"Unknown {nameof(ISingleGroupSource)}: {sourcePropertyName.Utf8String()}");
 
 			reader.ReadIsEndObjectWithVerify();
-			reader.ReadIsEndObjectWithVerify();
-
-			groupSource.Name = name;
 			return groupSource;
 		}
 	}

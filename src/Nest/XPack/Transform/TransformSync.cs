@@ -18,7 +18,7 @@ namespace Nest
 	/// </summary>
 	public class TransformSyncContainer : ITransformSyncContainer
 	{
-		internal TransformSyncContainer() { }
+		public TransformSyncContainer() { }
 
 		public TransformSyncContainer(TransformSyncBase transform)
 		{
@@ -33,10 +33,18 @@ namespace Nest
 			: new TransformSyncContainer(transform);
 	}
 
+	public class TransformSyncContainerDescriptor<T> : DescriptorBase<TransformSyncContainerDescriptor<T>, ITransformSyncContainer>, ITransformSyncContainer
+	{
+		ITransformTimeSync ITransformSyncContainer.Time { get; set; }
+
+		/// <inheritdoc cref="ITransformTimeSync"/>
+		public TransformSyncContainerDescriptor<T> Time(Func<TransformTimeSyncDescriptor<T>, ITransformTimeSync> selector) =>
+			Assign(selector?.Invoke(new TransformTimeSyncDescriptor<T>()), (a, v) => a.Time = v);
+	}
+
 	/// <summary>
 	/// Defines the properties transforms require to run continuously.
 	/// </summary>
-	[InterfaceDataContract]
 	public interface ITransformSync { }
 
 	/// <inheritdoc />
@@ -78,19 +86,19 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="ITransformTimeSync" />
-	public class TransformSyncDescriptor<T> : DescriptorBase<TransformSyncDescriptor<T>, ITransformTimeSync>, ITransformTimeSync
+	public class TransformTimeSyncDescriptor<T> : DescriptorBase<TransformTimeSyncDescriptor<T>, ITransformTimeSync>, ITransformTimeSync
 	{
 		Field ITransformTimeSync.Field { get; set; }
 		Time ITransformTimeSync.Delay { get; set; }
 
 		/// <inheritdoc cref="ITransformTimeSync.Field" />
-		public TransformSyncDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
+		public TransformTimeSyncDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ITransformTimeSync.Field" />
-		public TransformSyncDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
+		public TransformTimeSyncDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
 			Assign(objectPath, (a, v) => a.Field = v);
 
 		/// <inheritdoc cref="ITransformTimeSync.Delay" />
-		public TransformSyncDescriptor<T> Delay(Time delay) => Assign(delay, (a, v) => a.Delay = v);
+		public TransformTimeSyncDescriptor<T> Delay(Time delay) => Assign(delay, (a, v) => a.Delay = v);
 	}
 }

@@ -26,9 +26,9 @@ namespace Nest
 		[DataMember(Name = "pivot")]
 		public ITransformPivot Pivot { get; set; }
 
-		/// <inheritdoc cref="ITransformSync"/>
+		/// <inheritdoc cref="ITransformSyncContainer"/>
 		[DataMember(Name = "sync")]
-		public ITransformSync Sync { get; set; }
+		public ITransformSyncContainer Sync { get; set; }
 	}
 
 	/// <inheritdoc cref="IPutTransformRequest"/>
@@ -50,7 +50,7 @@ namespace Nest
 		public ITransformPivot Pivot { get; set; }
 
 		/// <inheritdoc cref="IPutTransformRequest.Sync"/>
-		public ITransformSync Sync { get; set; }
+		public ITransformSyncContainer Sync { get; set; }
 	}
 
 	public partial class PutTransformDescriptor<TDocument> : IPutTransformRequest where TDocument : class
@@ -60,7 +60,7 @@ namespace Nest
 		ITransformDestination IPutTransformRequest.Destination { get; set; }
 		Time IPutTransformRequest.Frequency { get; set; }
 		ITransformPivot IPutTransformRequest.Pivot { get; set; }
-		ITransformSync IPutTransformRequest.Sync { get; set; }
+		ITransformSyncContainer IPutTransformRequest.Sync { get; set; }
 
 		/// <inheritdoc cref="IPutTransformRequest.Description"/>
 		public PutTransformDescriptor<TDocument> Description(string description) =>
@@ -82,7 +82,7 @@ namespace Nest
 			Assign(selector.InvokeOrDefault(new TransformPivotDescriptor<TDocument>()), (a, v) => a.Pivot = v);
 
 		/// <inheritdoc cref="IPutTransformRequest.Sync"/>
-		public PutTransformDescriptor<TDocument> Sync(Func<TransformSyncDescriptor<TDocument>, ITransformSync> selector) =>
-			Assign(selector.InvokeOrDefault(new TransformSyncDescriptor<TDocument>()), (a, v) => a.Sync = v);
+		public PutTransformDescriptor<TDocument> Sync(Func<TransformSyncContainerDescriptor<TDocument>, ITransformSyncContainer> selector) =>
+			Assign(selector?.Invoke(new TransformSyncContainerDescriptor<TDocument>()), (a, v) => a.Sync = v);
 	}
 }

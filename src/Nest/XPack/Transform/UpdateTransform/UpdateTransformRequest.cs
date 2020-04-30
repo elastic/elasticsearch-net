@@ -22,9 +22,9 @@ namespace Nest
 		[DataMember(Name = "frequency")]
 		public Time Frequency { get; set; }
 
-		/// <inheritdoc cref="ITransformSync"/>
+		/// <inheritdoc cref="ITransformSyncContainer"/>
 		[DataMember(Name = "sync")]
-		public ITransformSync Sync { get; set; }
+		public ITransformSyncContainer Sync { get; set; }
 	}
 
 	public partial class UpdateTransformRequest
@@ -42,7 +42,7 @@ namespace Nest
 		public Time Frequency { get; set; }
 
 		/// <inheritdoc cref="IPutTransformRequest.Sync"/>
-		public ITransformSync Sync { get; set; }
+		public ITransformSyncContainer Sync { get; set; }
 	}
 
 	public partial class UpdateTransformDescriptor<TDocument> : IUpdateTransformRequest where TDocument : class
@@ -51,7 +51,7 @@ namespace Nest
 		ITransformSource IUpdateTransformRequest.Source { get; set; }
 		ITransformDestination IUpdateTransformRequest.Destination { get; set; }
 		Time IUpdateTransformRequest.Frequency { get; set; }
-		ITransformSync IUpdateTransformRequest.Sync { get; set; }
+		ITransformSyncContainer IUpdateTransformRequest.Sync { get; set; }
 
 		/// <inheritdoc cref="IUpdateTransformRequest.Description"/>
 		public UpdateTransformDescriptor<TDocument> Description(string description) =>
@@ -69,7 +69,7 @@ namespace Nest
 		public UpdateTransformDescriptor<TDocument> Frequency(Time frequency) => Assign(frequency, (a, v) => a.Frequency = v);
 
 		/// <inheritdoc cref="IUpdateTransformRequest.Sync"/>
-		public UpdateTransformDescriptor<TDocument> Sync(Func<TransformSyncDescriptor<TDocument>, ITransformSync> selector) =>
-			Assign(selector.InvokeOrDefault(new TransformSyncDescriptor<TDocument>()), (a, v) => a.Sync = v);
+		public UpdateTransformDescriptor<TDocument> Sync(Func<TransformSyncContainerDescriptor<TDocument>, ITransformSyncContainer> selector) =>
+			Assign(selector?.Invoke(new TransformSyncContainerDescriptor<TDocument>()), (a, v) => a.Sync = v);
 	}
 }

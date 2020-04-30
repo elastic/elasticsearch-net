@@ -24,14 +24,14 @@ namespace Nest
 		/// <para />
 		/// Only a subset of aggregations are supported.
 		/// </summary>
-		[DataMember(Name = "aggs")]
+		[DataMember(Name = "aggregations")]
 		AggregationDictionary Aggregations { get; set; }
 
 		/// <summary>
 		/// Defines how to group the data. More than one grouping can be defined per pivot.
 		/// </summary>
 		[DataMember(Name ="group_by")]
-		IEnumerable<ISingleGroupSource> GroupBy { get; set; }
+		IDictionary<string, ISingleGroupSource> GroupBy { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -44,36 +44,35 @@ namespace Nest
 		public AggregationDictionary Aggregations { get; set; }
 
 		/// <inheritdoc />
-		public IEnumerable<ISingleGroupSource> GroupBy { get; set; }
+		public IDictionary<string, ISingleGroupSource> GroupBy { get; set; }
 	}
 
 	/// <inheritdoc cref="ITransformPivot"/>
-	public class TransformPivotDescriptor<TInferDocument> : DescriptorBase<TransformPivotDescriptor<TInferDocument>, ITransformPivot>, ITransformPivot
-		where TInferDocument : class
+	public class TransformPivotDescriptor<TDocument> : DescriptorBase<TransformPivotDescriptor<TDocument>, ITransformPivot>, ITransformPivot
+		where TDocument : class
 	{
 		int? ITransformPivot.MaxPageSearchSize { get; set; }
 		AggregationDictionary ITransformPivot.Aggregations { get; set; }
-		IEnumerable<ISingleGroupSource> ITransformPivot.GroupBy { get; set; }
+		IDictionary<string, ISingleGroupSource> ITransformPivot.GroupBy { get; set; }
 
 		/// <inheritdoc cref="ITransformPivot.MaxPageSearchSize" />
-		public TransformPivotDescriptor<TInferDocument> MaxPageSearchSize(int? maxPageSearchSize) =>
+		public TransformPivotDescriptor<TDocument> MaxPageSearchSize(int? maxPageSearchSize) =>
 			Assign(maxPageSearchSize, (a, v) => a.MaxPageSearchSize = v);
 
 		/// <inheritdoc cref="ITransformPivot.Aggregations" />
-		public TransformPivotDescriptor<TInferDocument> Aggregations(
-			Func<AggregationContainerDescriptor<TInferDocument>, IAggregationContainer> aggregationsSelector
+		public TransformPivotDescriptor<TDocument> Aggregations(
+			Func<AggregationContainerDescriptor<TDocument>, IAggregationContainer> aggregationsSelector
 		) =>
-			Assign(aggregationsSelector(new AggregationContainerDescriptor<TInferDocument>())?.Aggregations, (a, v) => a.Aggregations = v);
+			Assign(aggregationsSelector(new AggregationContainerDescriptor<TDocument>())?.Aggregations, (a, v) => a.Aggregations = v);
 
 		/// <inheritdoc cref="ITransformPivot.Aggregations" />
-		public TransformPivotDescriptor<TInferDocument> Aggregations(AggregationDictionary aggregations) =>
+		public TransformPivotDescriptor<TDocument> Aggregations(AggregationDictionary aggregations) =>
 			Assign(aggregations, (a, v) => a.Aggregations = v);
 
 		/// <inheritdoc cref="ITransformPivot.GroupBy" />
-		public TransformPivotDescriptor<TInferDocument> GroupBy(
-			Func<SingleGroupSourcesDescriptor<TInferDocument>, IPromise<IList<ISingleGroupSource>>> selector
-		) =>
-			Assign(selector, (a, v) => a.GroupBy = v?.Invoke(new SingleGroupSourcesDescriptor<TInferDocument>())?.Value);
-
+		public TransformPivotDescriptor<TDocument> GroupBy(
+			Func<SingleGroupSourcesDescriptor<TDocument>, IPromise<IDictionary<string, ISingleGroupSource>>> selector
+		) => Assign(selector, (a, v) =>
+			a.GroupBy = v?.Invoke(new SingleGroupSourcesDescriptor<TDocument>())?.Value);
 	}
 }

@@ -39,7 +39,8 @@ namespace Nest
 		[DataMember(Name = "pivot")]
 		public ITransformPivot Pivot { get; set; }
 
+		/// <inheritdoc cref="ITransformSyncContainer"/>
 		[DataMember(Name = "sync")]
-		public ITransformSync Sync { get; set; }
+		public ITransformSyncContainer Sync { get; set; }
 	}
 }
