@@ -20,7 +20,8 @@ let ListFolders namedSuite revision directory = async {
         doc.CssSelect("td.content a.js-navigation-open")
         |> List.map (fun a -> a.InnerText())
         // TODO why are these two filtered?
-        |> List.filter (fun f -> match directory with | Some s -> f = s | None -> true)
+        |> List.filter (fun f -> not <| f.StartsWith("cluster"))
+        |> List.filter (fun f -> match directory with | Some s -> f.StartsWith(s, StringComparison.OrdinalIgnoreCase) | None -> true)
         |> List.filter (fun f -> not <| f.EndsWith(".asciidoc"))
 }
     
