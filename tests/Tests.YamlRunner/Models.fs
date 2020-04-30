@@ -140,7 +140,7 @@ type Feature =
     | NoXPack // "no_xpack"
     | Unsupported of string
 
-let SupportedFeatures = [EmbeddedStashKey; StashInPath; Yaml; ArbitraryKey; Warnings; Headers
+let SupportedFeatures = [EmbeddedStashKey; StashInPath; ArbitraryKey; Warnings; Headers
                          Contains; DefaultShards; CatchUnauthorized; NoXPack; TransformAndSet ]
     
 let (|ToFeature|) (s:string) =
