@@ -8,12 +8,6 @@
         "assembly-rewriter"
       ]
     },
-    "dotnet-assembly-differ": {
-      "version": "1.0.0-ci20190926135713",
-      "commands": [
-        "assembly-differ"
-      ]
-    },
     "assembly-differ": {
       "version": "0.9.0",
       "commands": [

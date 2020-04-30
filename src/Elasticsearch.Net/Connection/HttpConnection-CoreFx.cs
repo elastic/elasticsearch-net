@@ -35,32 +35,20 @@ namespace Elasticsearch.Net
 
 		protected readonly ConcurrentDictionary<int, HttpClient> Clients = new ConcurrentDictionary<int, HttpClient>();
 
-		private HttpClient GetClient(RequestData requestData)
-		{
-			var key = GetClientKey(requestData);
-			if (this.Clients.TryGetValue(key, out var client)) return client;
-			lock (_lock)
-			{
-				client = this.Clients.GetOrAdd(key, h =>
-				{
-					var handler = CreateHttpClientHandler(requestData);
-					var httpClient = new HttpClient(handler, false)
-					{
-						Timeout = requestData.RequestTimeout
-					};
+		private RequestDataHttpClientFactory HttpClientFactory { get; }
 
-					httpClient.DefaultRequestHeaders.ExpectContinue = false;
-					return httpClient;
-				});
-			}
+		public int InUseHandlers => HttpClientFactory.InUseHandlers;
 
-			return client;
-		}
+		public int RemovedHandlers => HttpClientFactory.RemovedHandlers;
+
+		public HttpConnection() => HttpClientFactory = new RequestDataHttpClientFactory(r => CreateHttpClientHandler(r));
+
+		private HttpClient GetClient(RequestData requestData) => HttpClientFactory.CreateClient(requestData);
 
 		public virtual TResponse Request<TResponse>(RequestData requestData)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			var client = this.GetClient(requestData);
+			var client = GetClient(requestData);
 			HttpResponseMessage responseMessage = null;
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
@@ -104,7 +92,7 @@ namespace Elasticsearch.Net
 		public virtual async Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			var client = this.GetClient(requestData);
+			var client = GetClient(requestData);
 			HttpResponseMessage responseMessage = null;
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
@@ -151,10 +139,7 @@ namespace Elasticsearch.Net
 
 		protected virtual HttpClientHandler CreateHttpClientHandler(RequestData requestData)
 		{
-			var handler = new HttpClientHandler
-			{
-				AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None,
-			};
+			var handler = new HttpClientHandler { AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None, };
 
 			// same limit as desktop clr
 			if (requestData.ConnectionSettings.ConnectionLimit > 0)
@@ -184,10 +169,7 @@ namespace Elasticsearch.Net
 				}
 				handler.Proxy = proxy;
 			}
-			else if (requestData.DisableAutomaticProxyDetection)
-			{
-				handler.UseProxy = false;
-			}
+			else if (requestData.DisableAutomaticProxyDetection) handler.UseProxy = false;
 
 			var callback = requestData?.ConnectionSettings?.ServerCertificateValidationCallback;
 			if (callback != null && handler.ServerCertificateCustomValidationCallback == null)
@@ -204,7 +186,7 @@ namespace Elasticsearch.Net
 
 		protected virtual HttpRequestMessage CreateHttpRequestMessage(RequestData requestData)
 		{
-			var request = this.CreateRequestMessage(requestData);
+			var request = CreateRequestMessage(requestData);
 			SetBasicAuthenticationIfNeeded(request, requestData);
 			return request;
 		}
@@ -214,10 +196,10 @@ namespace Elasticsearch.Net
 			var method = ConvertHttpMethod(requestData.Method);
 			var requestMessage = new HttpRequestMessage(method, requestData.Uri);
 
-			foreach (string key in requestData.Headers)
-			{
-				requestMessage.Headers.TryAddWithoutValidation(key, requestData.Headers.GetValues(key));
-			}
+			if (requestData.Headers != null)
+				foreach (string key in requestData.Headers)
+					requestMessage.Headers.TryAddWithoutValidation(key, requestData.Headers.GetValues(key));
+
 			requestMessage.Headers.Connection.Clear();
 			requestMessage.Headers.ConnectionClose = false;
 			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.Accept));
@@ -282,7 +264,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private static int GetClientKey(RequestData requestData)
+		internal static int GetClientKey(RequestData requestData)
 		{
 			unchecked
 			{
@@ -296,13 +278,9 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		void IDisposable.Dispose() => this.DisposeManagedResources();
+		void IDisposable.Dispose() => DisposeManagedResources();
 
-		protected virtual void DisposeManagedResources()
-		{
-			foreach (var c in Clients)
-				c.Value.Dispose();
-		}
+		protected virtual void DisposeManagedResources() => HttpClientFactory.Dispose();
 	}
 }
 #endif

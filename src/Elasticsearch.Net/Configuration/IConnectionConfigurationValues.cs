@@ -219,5 +219,15 @@ namespace Elasticsearch.Net
 		/// versions that initiate requests to Elasticsearch
 		/// </summary>
 		string UserAgent { get; }
+
+		/// <summary>
+		/// DnsRefreshTimeout for the connections. Defaults to 5 minutes.
+		#if DOTNETCORE
+		/// <para>Will create new instances of <see cref="System.Net.Http.HttpClient"/> after this timeout to force DNS updates</para>
+		#else
+		/// <para>Will set <see cref="System.Net.ServicePointManager.ConnectionLeaseTimeout "/>
+		#endif
+		/// </summary>
+		TimeSpan DnsRefreshTimeout { get; }
 	}
 }
