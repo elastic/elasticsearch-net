@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using Elastic.Managed.Configuration;
-using Elastic.Managed.Ephemeral.Plugins;
-using Elastic.Stack.Artifacts;
-using Elastic.Stack.Artifacts.Products;
+using Elastic.Stack.ArtifactsApi;
+using Elastic.Stack.ArtifactsApi.Products;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
-using static Elastic.Stack.Artifacts.Products.ElasticsearchPlugin;
+using static Elastic.Stack.ArtifactsApi.Products.ElasticsearchPlugin;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {

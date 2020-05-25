@@ -1,8 +1,8 @@
 using System.IO;
-using Elastic.Managed.Ephemeral;
-using Elastic.Managed.Ephemeral.Plugins;
-using Elastic.Stack.Artifacts.Products;
-using Elastic.Xunit;
+using Elastic.Elasticsearch.Ephemeral;
+using Elastic.Elasticsearch.Ephemeral.Plugins;
+using Elastic.Stack.ArtifactsApi.Products;
+using Elastic.Elasticsearch.Xunit;
 using Nest;
 using Tests.Configuration;
 using Tests.Core.Client;

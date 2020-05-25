@@ -1,5 +1,5 @@
 ﻿using System;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -7,7 +7,7 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using static Elastic.Managed.Ephemeral.ClusterAuthentication;
+using static Elastic.Elasticsearch.Ephemeral.ClusterAuthentication;
 
 namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using Elastic.Managed.Ephemeral;
-using Elastic.Xunit;
+using Elastic.Elasticsearch.Ephemeral;
+using Elastic.Elasticsearch.Xunit;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Extensions;

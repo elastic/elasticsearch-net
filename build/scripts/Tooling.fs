@@ -2,7 +2,7 @@
 
 open System
 open System.IO
-open Elastic.Managed.ConsoleWriters
+open Elastic.Elasticsearch.Managed.ConsoleWriters
 open ProcNet
 open ProcNet.Std
 

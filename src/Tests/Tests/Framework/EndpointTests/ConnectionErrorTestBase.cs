@@ -2,7 +2,7 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Elastic.Managed.Ephemeral;
+using Elastic.Elasticsearch.Ephemeral;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;

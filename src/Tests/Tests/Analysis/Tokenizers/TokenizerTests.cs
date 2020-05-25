@@ -1,5 +1,5 @@
 using System;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 
 namespace Tests.Analysis.Tokenizers

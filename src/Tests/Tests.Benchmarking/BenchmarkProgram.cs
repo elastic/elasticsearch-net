@@ -10,7 +10,7 @@ using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Exporters;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
-using Elastic.BenchmarkDotNetExporter;
+using Elastic.CommonSchema.BenchmarkDotNetExporter;
 using LibGit2Sharp;
 using Tests.Benchmarking.Framework;
 using RunMode = BenchmarkDotNet.Jobs.RunMode;
@@ -65,9 +65,7 @@ namespace Tests.Benchmarking
 		{
 			var jobs = new[]
 			{
-				Job.ShortRun.With(Runtime.Core).With(Jit.RyuJit),
-				Job.ShortRun.With(Runtime.Clr).With(Jit.RyuJit),
-				Job.ShortRun.With(Runtime.Clr).With(Jit.LegacyJit),
+				Job.Default.With(CoreRuntime.Core30).With(Jit.RyuJit),
 			};
 			var config = DefaultConfig.Instance
 				.With(jobs)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Elastic.Xunit;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;

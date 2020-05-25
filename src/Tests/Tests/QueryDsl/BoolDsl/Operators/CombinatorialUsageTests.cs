@@ -1,4 +1,4 @@
-﻿using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 
 namespace Tests.QueryDsl.BoolDsl.Operators
