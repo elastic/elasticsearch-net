@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Elastic.Managed.ConsoleWriters;
-using Elastic.Managed.Ephemeral;
-using Elastic.Managed.Ephemeral.Tasks;
+using Elastic.Elasticsearch.Ephemeral;
+using Elastic.Elasticsearch.Ephemeral.Tasks;
+using Elastic.Elasticsearch.Managed.ConsoleWriters;
 
 namespace Tests.Core.ManagedElasticsearch.Tasks
 {

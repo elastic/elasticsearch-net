@@ -1,5 +1,5 @@
 ﻿using Tests.Core.ManagedElasticsearch.NodeSeeders;
-using static Elastic.Stack.Artifacts.Products.ElasticsearchPlugin;
+using static Elastic.Stack.ArtifactsApi.Products.ElasticsearchPlugin;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {

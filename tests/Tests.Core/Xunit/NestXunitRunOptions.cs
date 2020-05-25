@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using Elastic.Xunit;
+using Elastic.Elasticsearch.Xunit;
 using Tests.Configuration;
 using Tests.Core.VsTest;
 
