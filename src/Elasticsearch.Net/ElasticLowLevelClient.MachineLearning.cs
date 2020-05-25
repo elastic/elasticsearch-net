@@ -118,14 +118,16 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public Task<TResponse> DeleteDatafeedAsync<TResponse>(string datafeedId, DeleteDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ml/datafeeds/{datafeedId:datafeedId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>DELETE on /_ml/_delete_expired_data <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</para></summary>
+		///<param name = "body">deleting expired data parameters</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse DeleteExpiredData<TResponse>(DeleteExpiredDataRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, "_ml/_delete_expired_data", null, RequestParams(requestParameters));
+		public TResponse DeleteExpiredData<TResponse>(PostData body, DeleteExpiredDataRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, "_ml/_delete_expired_data", body, RequestParams(requestParameters));
 		///<summary>DELETE on /_ml/_delete_expired_data <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</para></summary>
+		///<param name = "body">deleting expired data parameters</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("ml.delete_expired_data", "")]
-		public Task<TResponse> DeleteExpiredDataAsync<TResponse>(DeleteExpiredDataRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, "_ml/_delete_expired_data", ctx, null, RequestParams(requestParameters));
+		[MapsApi("ml.delete_expired_data", "body")]
+		public Task<TResponse> DeleteExpiredDataAsync<TResponse>(PostData body, DeleteExpiredDataRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, "_ml/_delete_expired_data", ctx, body, RequestParams(requestParameters));
 		///<summary>DELETE on /_ml/filters/{filter_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html</para></summary>
 		///<param name = "filterId">The ID of the filter to delete</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -914,23 +916,23 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.update_model_snapshot", "job_id, snapshot_id, body")]
 		public Task<TResponse> UpdateModelSnapshotAsync<TResponse>(string jobId, string snapshotId, PostData body, UpdateModelSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/model_snapshots/{snapshotId:snapshotId}/_update"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/_validate</summary>
+		///<summary>POST on /_ml/anomaly_detectors/_validate <para>https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</para></summary>
 		///<param name = "body">The job config</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse ValidateJob<TResponse>(PostData body, ValidateJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ml/anomaly_detectors/_validate", body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/_validate</summary>
+		///<summary>POST on /_ml/anomaly_detectors/_validate <para>https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</para></summary>
 		///<param name = "body">The job config</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("ml.validate", "body")]
 		public Task<TResponse> ValidateJobAsync<TResponse>(PostData body, ValidateJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ml/anomaly_detectors/_validate", ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/_validate/detector</summary>
+		///<summary>POST on /_ml/anomaly_detectors/_validate/detector <para>https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</para></summary>
 		///<param name = "body">The detector</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse ValidateDetector<TResponse>(PostData body, ValidateDetectorRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ml/anomaly_detectors/_validate/detector", body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/anomaly_detectors/_validate/detector</summary>
+		///<summary>POST on /_ml/anomaly_detectors/_validate/detector <para>https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</para></summary>
 		///<param name = "body">The detector</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("ml.validate_detector", "body")]

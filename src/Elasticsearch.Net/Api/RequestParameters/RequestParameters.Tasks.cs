@@ -52,7 +52,7 @@ namespace Elasticsearch.Net.Specification.TasksApi
 			set => Q("parent_task_id", value);
 		}
 
-		///<summary>Should the request block until the cancellation of the task and its child tasks is completed. Defaults to false</summary>
+		///<summary>Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false</summary>
 		public bool? WaitForCompletion
 		{
 			get => Q<bool? >("wait_for_completion");

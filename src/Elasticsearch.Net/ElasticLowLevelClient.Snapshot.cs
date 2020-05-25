@@ -43,13 +43,13 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		{
 		}
 
-		///<summary>POST on /_snapshot/{repository}/_cleanup <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+		///<summary>POST on /_snapshot/{repository}/_cleanup <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "body"></param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse CleanupRepository<TResponse>(string repository, PostData body, CleanupRepositoryRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_snapshot/{repository:repository}/_cleanup"), body, RequestParams(requestParameters));
-		///<summary>POST on /_snapshot/{repository}/_cleanup <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+		///<summary>POST on /_snapshot/{repository}/_cleanup <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "body"></param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -98,12 +98,12 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		public Task<TResponse> DeleteAsync<TResponse>(string repository, string snapshot, DeleteSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_snapshot/{repository:repository}/{snapshot:snapshot}"), ctx, null, RequestParams(requestParameters));
 		///<summary>DELETE on /_snapshot/{repository} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
-		///<param name = "repository">A comma-separated list of repository names</param>
+		///<param name = "repository">Name of the snapshot repository to unregister. Wildcard (`*`) patterns are supported.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse DeleteRepository<TResponse>(string repository, DeleteRepositoryRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_snapshot/{repository:repository}"), null, RequestParams(requestParameters));
 		///<summary>DELETE on /_snapshot/{repository} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
-		///<param name = "repository">A comma-separated list of repository names</param>
+		///<param name = "repository">Name of the snapshot repository to unregister. Wildcard (`*`) patterns are supported.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("snapshot.delete_repository", "repository")]
 		public Task<TResponse> DeleteRepositoryAsync<TResponse>(string repository, DeleteRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)

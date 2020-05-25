@@ -54,48 +54,59 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		[MapsApi("cluster.allocation_explain", "body")]
 		public Task<TResponse> AllocationExplainAsync<TResponse>(PostData body, ClusterAllocationExplainRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_cluster/allocation/explain", ctx, body, RequestParams(requestParameters));
-		///<summary>DELETE on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+		///<summary>DELETE on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse DeleteComponentTemplate<TResponse>(string name, DeleteComponentTemplateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_component_template/{name:name}"), null, RequestParams(requestParameters));
-		///<summary>DELETE on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+		///<summary>DELETE on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("cluster.delete_component_template", "name")]
 		public Task<TResponse> DeleteComponentTemplateAsync<TResponse>(string name, DeleteComponentTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_component_template/{name:name}"), ctx, null, RequestParams(requestParameters));
-		///<summary>HEAD on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+		///<summary>DELETE on /_cluster/voting_config_exclusions <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse DeleteVotingConfigExclusions<TResponse>(DeleteVotingConfigExclusionsRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, "_cluster/voting_config_exclusions", null, RequestParams(requestParameters));
+		///<summary>DELETE on /_cluster/voting_config_exclusions <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("cluster.delete_voting_config_exclusions", "")]
+		public Task<TResponse> DeleteVotingConfigExclusionsAsync<TResponse>(DeleteVotingConfigExclusionsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, "_cluster/voting_config_exclusions", ctx, null, RequestParams(requestParameters));
+		///<summary>HEAD on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse ExistsComponentTemplate<TResponse>(string name, ExistsComponentTemplateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(HEAD, Url($"_component_template/{name:name}"), null, RequestParams(requestParameters));
-		///<summary>HEAD on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+		///<summary>HEAD on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("cluster.exists_component_template", "name")]
 		public Task<TResponse> ExistsComponentTemplateAsync<TResponse>(string name, ExistsComponentTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(HEAD, Url($"_component_template/{name:name}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_component_template <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+		///<summary>GET on /_component_template <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetComponentTemplate<TResponse>(GetComponentTemplateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_component_template", null, RequestParams(requestParameters));
-		///<summary>GET on /_component_template <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+		///<summary>GET on /_component_template <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("cluster.get_component_template", "")]
 		public Task<TResponse> GetComponentTemplateAsync<TResponse>(GetComponentTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_component_template", ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+		///<summary>GET on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 		///<param name = "name">The comma separated names of the component templates</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetComponentTemplate<TResponse>(string name, GetComponentTemplateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_component_template/{name:name}"), null, RequestParams(requestParameters));
-		///<summary>GET on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+		///<summary>GET on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 		///<param name = "name">The comma separated names of the component templates</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
@@ -140,14 +151,23 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		[MapsApi("cluster.pending_tasks", "")]
 		public Task<TResponse> PendingTasksAsync<TResponse>(ClusterPendingTasksRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_cluster/pending_tasks", ctx, null, RequestParams(requestParameters));
-		///<summary>PUT on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+		///<summary>POST on /_cluster/voting_config_exclusions <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PostVotingConfigExclusions<TResponse>(PostVotingConfigExclusionsRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_cluster/voting_config_exclusions", null, RequestParams(requestParameters));
+		///<summary>POST on /_cluster/voting_config_exclusions <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("cluster.post_voting_config_exclusions", "")]
+		public Task<TResponse> PostVotingConfigExclusionsAsync<TResponse>(PostVotingConfigExclusionsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_cluster/voting_config_exclusions", ctx, null, RequestParams(requestParameters));
+		///<summary>PUT on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "body">The template definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse PutComponentTemplate<TResponse>(string name, PostData body, PutComponentTemplateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_component_template/{name:name}"), body, RequestParams(requestParameters));
-		///<summary>PUT on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+		///<summary>PUT on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "body">The template definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
