@@ -1,5 +1,5 @@
 ﻿using System;
-using Elastic.Managed.Ephemeral;
+using Elastic.Elasticsearch.Ephemeral;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;

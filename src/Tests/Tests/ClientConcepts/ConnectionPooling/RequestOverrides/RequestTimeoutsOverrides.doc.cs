@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using static Elasticsearch.Net.AuditEvent;
 using Tests.Framework;
 

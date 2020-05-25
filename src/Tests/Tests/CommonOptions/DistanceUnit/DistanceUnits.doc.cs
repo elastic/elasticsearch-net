@@ -1,4 +1,4 @@
-﻿using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Elastic.Managed;
-using Elastic.Managed.Ephemeral;
+using Elastic.Elasticsearch.Managed;
+using Elastic.Elasticsearch.Ephemeral;
 using FluentAssertions.Common;
 using Tests.Configuration;
 using Tests.Core.ManagedElasticsearch.Clusters;

@@ -1,7 +1,7 @@
 using System.IO;
-using Elastic.Managed.ConsoleWriters;
-using Elastic.Managed.Ephemeral;
-using Elastic.Managed.Ephemeral.Tasks;
+using Elastic.Elasticsearch.Managed.ConsoleWriters;
+using Elastic.Elasticsearch.Ephemeral;
+using Elastic.Elasticsearch.Ephemeral.Tasks;
 using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Core.ManagedElasticsearch.Tasks

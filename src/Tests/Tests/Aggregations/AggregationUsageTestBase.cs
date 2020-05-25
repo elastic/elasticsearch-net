@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Client;

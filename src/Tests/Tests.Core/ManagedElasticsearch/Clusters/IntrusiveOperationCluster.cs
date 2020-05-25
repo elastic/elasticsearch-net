@@ -1,5 +1,5 @@
-using Elastic.Managed.Ephemeral.Plugins;
-using static Elastic.Stack.Artifacts.Products.ElasticsearchPlugin;
+using Elastic.Elasticsearch.Ephemeral.Plugins;
+using static Elastic.Stack.ArtifactsApi.Products.ElasticsearchPlugin;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {

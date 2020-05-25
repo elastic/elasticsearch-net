@@ -1,5 +1,4 @@
-﻿using Elastic.Managed.Configuration;
-using Elastic.Stack.Artifacts;
+﻿using Elastic.Stack.ArtifactsApi;
 using Elasticsearch.Net;
 using Tests.Configuration;
 

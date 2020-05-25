@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Elastic.Managed.Ephemeral;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Ephemeral;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;

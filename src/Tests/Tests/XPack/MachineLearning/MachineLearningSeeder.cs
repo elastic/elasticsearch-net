@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Elastic.Managed.FileSystem;
+using Elastic.Elasticsearch.Managed.FileSystem;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Client;

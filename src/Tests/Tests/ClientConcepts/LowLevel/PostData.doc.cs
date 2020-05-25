@@ -9,7 +9,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using System.Threading;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 
 namespace Tests.ClientConcepts.LowLevel
 {
