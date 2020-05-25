@@ -9,7 +9,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
-using static Elastic.Managed.Ephemeral.ClusterAuthentication;
+using static Elastic.Elasticsearch.Ephemeral.ClusterAuthentication;
 
 namespace Tests.XPack.Security.User.GetUserAccessToken
 {
