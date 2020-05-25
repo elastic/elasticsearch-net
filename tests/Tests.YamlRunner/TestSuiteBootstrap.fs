@@ -19,20 +19,25 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
             |> Seq.filter (fun r -> not r.Success && r.HttpStatusCode <> Nullable.op_Implicit 404)
             |> Seq.tryHead
     
+    let deleteAll () =
+        let dp = DeleteIndexRequestParameters()
+        dp.SetQueryString("expand_wildcards", "open,closed,hidden")
+        client.Indices.Delete<DynamicResponse>("*", dp)
+    let templates () =
+        client.Cat.Templates<StringResponse>("*", CatTemplatesRequestParameters(Headers=["name"].ToArray()))
+            .Body.Split("\n")
+            |> Seq.filter(fun f -> not(String.IsNullOrWhiteSpace(f)) && not(f.StartsWith(".")) && f <> "security-audit-log")
+            //TODO template does not accept comma separated list but is documented as such
+            |> Seq.map(fun template ->
+                let result = client.Indices.DeleteTemplateForAll<DynamicResponse>(template)
+                match result.Success with
+                | true -> result
+                | false -> client.Indices.DeleteTemplateV2ForAll<DynamicResponse>(template)
+            )
+            |> Seq.toList
+                
     match suite with
     | Oss ->
-        let deleteAll =
-            let dp = DeleteIndexRequestParameters()
-            dp.SetQueryString("expand_wildcards", "open,closed,hidden")
-            client.Indices.Delete<DynamicResponse>("*", dp)
-        let templates =
-            client.Cat.Templates<StringResponse>("*", CatTemplatesRequestParameters(Headers=["name"].ToArray()))
-                .Body.Split("\n")
-                |> Seq.filter(fun f -> not(String.IsNullOrWhiteSpace(f)) && not(f.StartsWith(".")) && f <> "security-audit-log")
-                //TODO template does not accept comma separated list but is documented as such
-                |> Seq.map(fun template -> client.Indices.DeleteTemplateForAll<DynamicResponse>(template))
-                |> Seq.toList
-                
         let snapshots =
             client.Cat.Snapshots<StringResponse>(CatSnapshotsRequestParameters(Headers=["id,repository"].ToArray()))
                 .Body.Split("\n")
@@ -45,19 +50,13 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
                 |> Seq.toList
                 
         let deleteRepositories = client.Snapshot.DeleteRepository<DynamicResponse>("*")
-        firstFailure <| [deleteAll] @ templates @ snapshots @ [deleteRepositories]
+        firstFailure <| [deleteAll()] @ templates() @ snapshots @ [deleteRepositories]
         
     | XPack ->
         firstFailure <| seq {
             //delete all templates
-            let templates =
-                client.Cat.Templates<StringResponse>("*", CatTemplatesRequestParameters(Headers=["name"].ToArray()))
-                    .Body.Split("\n")
-                    |> Seq.filter(fun f -> not(String.IsNullOrWhiteSpace(f)) && not(f.StartsWith(".")) && f <> "security-audit-log")
-                    //TODO template does not accept comma separated list but is documented as such
-                    |> Seq.map(fun template -> client.Indices.DeleteTemplateForAll<DynamicResponse>(template))
             
-            yield! templates
+            yield! templates()
             
             yield client.Watcher.Delete<DynamicResponse>("my_watch")
             
