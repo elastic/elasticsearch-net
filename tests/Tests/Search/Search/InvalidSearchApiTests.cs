@@ -74,7 +74,7 @@ namespace Tests.Search.Search
 			serverError.Should().NotBeNull();
 
 			serverError.Status.Should().Be(ExpectStatusCode);
-			serverError.Error.Reason.Should().Be("all shards failed");
+			serverError.Error.Reason.Should().NotBeNullOrWhiteSpace();
 			serverError.Error.RootCause.First().Reason.Should()
 				.NotBeNullOrWhiteSpace();
 
