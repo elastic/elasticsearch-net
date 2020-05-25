@@ -1,5 +1,5 @@
 ﻿using System;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -16,7 +16,7 @@ namespace Tests.XPack.Security.ApiKey
 	 *
 	 *  - [1] BadResponse: Node: https://localhost:9200/ Took: 00:00:00.9531746
 # OriginalException: Elasticsearch.Net.ElasticsearchClientException: The remote server returned an error: (503) Server Unavailable.. Call: Status code 503 from: PUT /_security/api_key?pretty=true&error_trace=true. ServerError: Type: search_phase_execution_exception Reason: "all shards failed" ---> System.Net.WebException: The remote server returned an error: (503) Server Unavailable.
-   at System.Net.HttpWebRequest.GetResponse() 
+   at System.Net.HttpWebRequest.GetResponse()
    at Elasticsearch.Net.HttpWebRequestConnection.Request[TResponse](RequestData requestData) in D:\a\1\s\src\Elasticsearch.Net\Connection\HttpWebRequestConnection.cs:line 59
    --- End of inner exception stack trace ---
 # Request:
@@ -35,9 +35,9 @@ namespace Tests.XPack.Security.ApiKey
   "status" : 503
 }
 
-	 * 
+	 *
 	 */
-	
+
 	[SkipVersion("<7.0.0", "Implemented in version 7.0.0")]
 	[SkipOnCi] //TODO flakey: investigate see above for more information
 	public class SecurityApiKeyUsageTests

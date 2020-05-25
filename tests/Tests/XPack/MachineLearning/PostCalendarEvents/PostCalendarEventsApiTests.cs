@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -19,7 +19,7 @@ namespace Tests.XPack.MachineLearning.PostCalendarEvents
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values) 
+			foreach (var callUniqueValue in values)
 				PutCalendar(client, callUniqueValue.Value);
 		}
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;

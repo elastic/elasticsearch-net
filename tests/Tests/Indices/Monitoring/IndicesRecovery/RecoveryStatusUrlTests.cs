@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework.EndpointTests;
 using static Nest.Indices;
@@ -14,7 +14,7 @@ namespace Tests.Indices.Monitoring.IndicesRecovery
 					.Request(c => c.Indices.RecoveryStatus(new RecoveryStatusRequest()))
 					.RequestAsync(c => c.Indices.RecoveryStatusAsync(new RecoveryStatusRequest()))
 				;
-			
+
 			await UrlTester.GET($"/_all/_recovery")
 					.Fluent(c => c.Indices.RecoveryStatus(All))
 					.Request(c => c.Indices.RecoveryStatus(new RecoveryStatusRequest(All)))

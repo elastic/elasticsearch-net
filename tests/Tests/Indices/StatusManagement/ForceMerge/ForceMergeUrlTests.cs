@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework.EndpointTests;
 using static Tests.Framework.EndpointTests.UrlTester;
@@ -17,7 +17,7 @@ namespace Tests.Indices.StatusManagement.ForceMerge
 					.FluentAsync(c => c.Indices.ForceMergeAsync(All))
 					.RequestAsync(c => c.Indices.ForceMergeAsync(new ForceMergeRequest(All)))
 				;
-			
+
 			await POST($"/_forcemerge")
 					.Request(c => c.Indices.ForceMerge(new ForceMergeRequest()))
 					.RequestAsync(c => c.Indices.ForceMergeAsync(new ForceMergeRequest()))

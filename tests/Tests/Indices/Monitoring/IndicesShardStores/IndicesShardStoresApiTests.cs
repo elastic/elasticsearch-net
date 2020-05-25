@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -39,7 +39,7 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 				Refresh = Refresh.True
 			});
 		}
-		
+
 		protected override IndicesShardStoresRequest Initializer =>
 			new IndicesShardStoresRequest(IndexWithUnassignedShards)
 			{

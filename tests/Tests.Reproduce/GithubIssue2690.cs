@@ -1,4 +1,4 @@
-﻿using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 

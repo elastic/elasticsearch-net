@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.EndpointTests;
@@ -16,7 +16,7 @@ namespace Tests.Cluster.ClusterState
 					.Request(c => c.Cluster.State(new ClusterStateRequest()))
 					.FluentAsync(c => c.Cluster.StateAsync())
 					.RequestAsync(c => c.Cluster.StateAsync(new ClusterStateRequest()))
-				
+
 				;
 
 			var metrics = ClusterStateMetric.MasterNode | ClusterStateMetric.Metadata;

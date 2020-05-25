@@ -1,6 +1,6 @@
 using System;
 using System.Runtime.Serialization;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.Serialization;
 
