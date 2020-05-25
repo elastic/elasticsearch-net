@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information
 
 ﻿using System;
-using Elastic.Xunit.Sdk;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.Sdk;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
