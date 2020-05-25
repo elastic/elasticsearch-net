@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information
 
 using System.Collections.Generic;
-using Elastic.Stack.Artifacts.Products;
+using Elastic.Stack.ArtifactsApi.Products;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
-using static Elastic.Stack.Artifacts.Products.ElasticsearchPlugin;
+using static Elastic.Stack.ArtifactsApi.Products.ElasticsearchPlugin;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {
