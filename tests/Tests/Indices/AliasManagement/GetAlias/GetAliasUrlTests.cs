@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework.EndpointTests;
 using static Nest.Infer;
@@ -24,7 +24,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 				.Request(c => c.Indices.GetAlias(new GetAliasRequest(AllIndices, name)))
 				.FluentAsync(c => c.Indices.GetAliasAsync(AllIndices, b => b.Name(name)))
 				.RequestAsync(c => c.Indices.GetAliasAsync(new GetAliasRequest(AllIndices, name)));
-				
+
 			await GET($"/_alias/hardcoded")
 					.Request(c => c.Indices.GetAlias(new GetAliasRequest(name)))
 					.RequestAsync(c => c.Indices.GetAliasAsync(new GetAliasRequest(name)))

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
@@ -20,7 +20,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		[U] public void DefaultNowBehaviour()
 		{
 			var dateTimeProvider = DateTimeProvider.Default;
-			
+
 			dateTimeProvider.Now().Should().BeCloseTo(DateTime.UtcNow);
 		}
 

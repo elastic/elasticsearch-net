@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework.EndpointTests;
 using static Tests.Framework.EndpointTests.UrlTester;
@@ -15,7 +15,7 @@ namespace Tests.Indices.StatusManagement.Refresh
 					.Request(c => c.Indices.Refresh(new RefreshRequest()))
 					.RequestAsync(c => c.Indices.RefreshAsync(new RefreshRequest()))
 				;
-			
+
 			await POST($"/_all/_refresh")
 					.Fluent(c => c.Indices.Refresh(All))
 					.Request(c => c.Indices.Refresh(new RefreshRequest(All)))

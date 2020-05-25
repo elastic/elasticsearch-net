@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework.EndpointTests;
 using static Tests.Framework.EndpointTests.UrlTester;
@@ -17,7 +17,7 @@ namespace Tests.Indices.StatusManagement.Flush
 					.FluentAsync(c => c.Indices.FlushAsync(All))
 					.RequestAsync(c => c.Indices.FlushAsync(new FlushRequest(All)))
 				;
-			
+
 			await POST($"/_flush")
 					.Request(c => c.Indices.Flush(new FlushRequest()))
 					.RequestAsync(c => c.Indices.FlushAsync(new FlushRequest()))

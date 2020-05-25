@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Specification.CatApi;
 using FluentAssertions;

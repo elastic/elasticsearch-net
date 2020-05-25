@@ -1,4 +1,4 @@
-﻿using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 
 namespace Tests.Mapping.Types.Core.Range.IntegerRange

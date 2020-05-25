@@ -1,4 +1,4 @@
-﻿using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Tests.Core.Extensions;
 using Tests.Domain;
