@@ -1,3 +1,7 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -249,5 +253,15 @@ namespace Elasticsearch.Net
 		/// Whether the request should be sent with chunked Transfer-Encoding.
 		/// </summary>
 		bool TransferEncodingChunked { get; }
+
+		/// <summary>
+		/// DnsRefreshTimeout for the connections. Defaults to 5 minutes.
+		#if DOTNETCORE
+		/// <para>Will create new instances of <see cref="System.Net.Http.HttpClient"/> after this timeout to force DNS updates</para>
+		#else
+		/// <para>Will set <see cref="System.Net.ServicePointManager.ConnectionLeaseTimeout "/>
+		#endif
+		/// </summary>
+		TimeSpan DnsRefreshTimeout { get; }
 	}
 }

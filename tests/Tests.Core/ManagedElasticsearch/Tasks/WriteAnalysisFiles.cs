@@ -1,8 +1,12 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 using System;
 using System.IO;
-using Elastic.Managed.ConsoleWriters;
-using Elastic.Managed.Ephemeral;
-using Elastic.Managed.Ephemeral.Tasks;
+using Elastic.Elasticsearch.Ephemeral;
+using Elastic.Elasticsearch.Ephemeral.Tasks;
+using Elastic.Elasticsearch.Managed.ConsoleWriters;
 using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Core.ManagedElasticsearch.Tasks

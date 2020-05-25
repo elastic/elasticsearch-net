@@ -1,5 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
-using Nest;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 
@@ -49,8 +52,6 @@ namespace Examples.Indices
 						{ "index.number_of_replicas", 2 }
 					};
 				});
-
-				return e;
 			});
 		}
 
@@ -83,8 +84,6 @@ namespace Examples.Indices
 						{ "index.number_of_replicas", 2 },
 					};
 				});
-
-				return e;
 			});
 		}
 
@@ -126,8 +125,6 @@ namespace Examples.Indices
 						{ "index.number_of_shards", 1 },
 					};
 				});
-
-				return e;
 			});
 		}
 
@@ -163,7 +160,6 @@ namespace Examples.Indices
 			}", e =>
 			{
 				e.ApplyBodyChanges(b => { b["aliases"]["alias_2"]["filter"]["term"]["user"].ToLongFormTermQuery(); });
-				return e;
 			});
 		}
 
@@ -203,7 +199,6 @@ namespace Examples.Indices
 			{
 				e.Uri.Query = null;
 				e.ApplyBodyChanges(b => { b["settings"] = new JObject { { "index.write.wait_for_active_shards", "2" } }; });
-				return e;
 			});
 		}
 	}

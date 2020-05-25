@@ -1,4 +1,8 @@
-﻿using System;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -23,11 +27,42 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
-#if DOTNETCORE
-		private static bool IsCurlHandler { get; } = typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.CurlHandler") != null;
+		/// <summary>
+		/// Detects whether we are running on .NET Core with CurlHandler.
+		/// If this is true, we will set a very restrictive <see cref="DefaultConnectionLimit"/>
+		/// As the old curl based handler is known to bleed TCP connections:
+		/// <para>https://github.com/dotnet/runtime/issues/22366</para>
+		/// </summary>
+        private static bool UsingCurlHandler
+		{
+			get
+			{
+#if !DOTNETCORE
+				return false;
 #else
-		private static bool IsCurlHandler { get; } = false;
+				var curlHandlerExists = typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.CurlHandler") != null;
+				if (!curlHandlerExists) return false;
+
+				var socketsHandlerExists = typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.SocketsHttpHandler") != null;
+				// running on a .NET core version with CurlHandler, before the existence of SocketsHttpHandler.
+				// Must be using CurlHandler.
+				if (!socketsHandlerExists) return true;
+
+				if (AppContext.TryGetSwitch("System.Net.Http.UseSocketsHttpHandler", out var isEnabled))
+					return !isEnabled;
+
+				var environmentVariable =
+					Environment.GetEnvironmentVariable("DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER");
+
+				// SocketsHandler exists and no environment variable exists to disable it.
+				// Must be using SocketsHandler and not CurlHandler
+				if (environmentVariable == null) return false;
+
+				return environmentVariable.Equals("false", StringComparison.OrdinalIgnoreCase) ||
+					environmentVariable.Equals("0");
 #endif
+			}
+		}
 
 		/// <summary>
 		/// The default ping timeout. Defaults to 2 seconds
@@ -47,12 +82,18 @@ namespace Elasticsearch.Net
 		public static readonly TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
 
 		/// <summary>
+		/// The default timeout before a TCP connection is forcefully recycled so that DNS updates come through
+		/// Defaults to 5 minutes.
+		/// </summary>
+		public static readonly TimeSpan DefaultDnsRefreshTimeout = TimeSpan.FromMinutes(5);
+
+		/// <summary>
 		/// The default connection limit for both Elasticsearch.Net and Nest. Defaults to <c>80</c>
 #if DOTNETCORE
 		/// <para>Except for <see cref="HttpClientHandler"/> implementations based on curl, which defaults to <see cref="Environment.ProcessorCount"/></para>
 #endif
 		/// </summary>
-		public static readonly int DefaultConnectionLimit = IsCurlHandler ? Environment.ProcessorCount : 80;
+		public static readonly int DefaultConnectionLimit = UsingCurlHandler ? Environment.ProcessorCount : 80;
 
 		/// <summary>
 		/// The default user agent for Elasticsearch.Net
@@ -151,6 +192,7 @@ namespace Elasticsearch.Net
 		private SecureString _proxyPassword;
 		private string _proxyUsername;
 		private TimeSpan _requestTimeout;
+		private TimeSpan _dnsRefreshTimeout;
 		private Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> _serverCertificateValidationCallback;
 		private IReadOnlyCollection<int> _skipDeserializationForStatusCodes = new ReadOnlyCollection<int>(new int[] { });
 		private TimeSpan? _sniffLifeSpan;
@@ -172,6 +214,7 @@ namespace Elasticsearch.Net
 
 			_connectionLimit = ConnectionConfiguration.DefaultConnectionLimit;
 			_requestTimeout = ConnectionConfiguration.DefaultTimeout;
+			_dnsRefreshTimeout = ConnectionConfiguration.DefaultDnsRefreshTimeout;
 			_sniffOnConnectionFault = true;
 			_sniffOnStartup = true;
 			_sniffLifeSpan = TimeSpan.FromHours(1);
@@ -223,6 +266,7 @@ namespace Elasticsearch.Net
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
 		IElasticsearchSerializer IConnectionConfigurationValues.RequestResponseSerializer => UseThisRequestResponseSerializer;
 		TimeSpan IConnectionConfigurationValues.RequestTimeout => _requestTimeout;
+		TimeSpan IConnectionConfigurationValues.DnsRefreshTimeout => _dnsRefreshTimeout;
 
 		Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> IConnectionConfigurationValues.ServerCertificateValidationCallback =>
 			_serverCertificateValidationCallback;
@@ -379,6 +423,16 @@ namespace Elasticsearch.Net
 		/// </para>
 		/// </summary>
 		public T MaxRetryTimeout(TimeSpan maxRetryTimeout) => Assign(maxRetryTimeout, (a, v) => a._maxRetryTimeout = v);
+
+		/// <summary>
+		/// DnsRefreshTimeout for the connections. Defaults to 5 minutes.
+		#if DOTNETCORE
+		/// <para>Will create new instances of <see cref="System.Net.Http.HttpClient"/> after this timeout to force DNS updates</para>
+		#else
+		/// <para>Will set both <see cref="System.Net.ServicePointManager.DnsRefreshTimeout"/> and <see cref="System.Net.ServicePointManager.ConnectionLeaseTimeout "/>
+		#endif
+		/// </summary>
+		public T DnsRefreshTimeout(TimeSpan timeout) => Assign(timeout, (a, v) => a._dnsRefreshTimeout = v);
 
 		/// <summary>
 		/// If your connection has to go through proxy, use this method to specify the proxy url

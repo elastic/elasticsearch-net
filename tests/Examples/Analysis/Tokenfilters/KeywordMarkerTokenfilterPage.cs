@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -7,67 +11,97 @@ namespace Examples.Analysis.Tokenfilters
 	public class KeywordMarkerTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenfilters/keyword-marker-tokenfilter.asciidoc:28")]
-		public void Line28()
+		[Description("analysis/tokenfilters/keyword-marker-tokenfilter.asciidoc:35")]
+		public void Line35()
 		{
-			// tag::863c221b28ae5e58d39bd8f138291949[]
+			// tag::26f237f9bf14e8b972cc33ff6aebefa2[]
 			var response0 = new SearchResponse<object>();
-			// end::863c221b28ae5e58d39bd8f138291949[]
+			// end::26f237f9bf14e8b972cc33ff6aebefa2[]
 
-			response0.MatchesExample(@"PUT /keyword_marker_example
+			response0.MatchesExample(@"GET /_analyze
+			{
+			  ""tokenizer"": ""whitespace"",
+			  ""filter"": [ ""stemmer"" ],
+			  ""text"": ""fox running and jumping""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/keyword-marker-tokenfilter.asciidoc:95")]
+		public void Line95()
+		{
+			// tag::5302f4f2bcc0f400ff71c791e6f68d7b[]
+			var response0 = new SearchResponse<object>();
+			// end::5302f4f2bcc0f400ff71c791e6f68d7b[]
+
+			response0.MatchesExample(@"GET /_analyze
+			{
+			  ""tokenizer"": ""whitespace"",
+			  ""filter"": [
+			    {
+			      ""type"": ""keyword_marker"",
+			      ""keywords"": [ ""jumping"" ]
+			    },
+			    ""stemmer""
+			  ],
+			  ""text"": ""fox running and jumping""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/keyword-marker-tokenfilter.asciidoc:163")]
+		public void Line163()
+		{
+			// tag::059e04aaf093379401f665c33ac796dc[]
+			var response0 = new SearchResponse<object>();
+			// end::059e04aaf093379401f665c33ac796dc[]
+
+			response0.MatchesExample(@"GET /_analyze
+			{
+			  ""tokenizer"": ""whitespace"",
+			  ""filter"": [
+			    {
+			      ""type"": ""keyword_marker"",
+			      ""keywords"": [ ""jumping"" ]
+			    },
+			    ""stemmer""
+			  ],
+			  ""text"": ""fox running and jumping"",
+			  ""explain"": true,
+			  ""attributes"": ""keyword""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("analysis/tokenfilters/keyword-marker-tokenfilter.asciidoc:365")]
+		public void Line365()
+		{
+			// tag::f8c1fa91443573fcc0a5f2e22b7b4582[]
+			var response0 = new SearchResponse<object>();
+			// end::f8c1fa91443573fcc0a5f2e22b7b4582[]
+
+			response0.MatchesExample(@"PUT /my_index
 			{
 			  ""settings"": {
 			    ""analysis"": {
 			      ""analyzer"": {
-			        ""protect_cats"": {
+			        ""my_custom_analyzer"": {
 			          ""type"": ""custom"",
 			          ""tokenizer"": ""standard"",
-			          ""filter"": [""lowercase"", ""protect_cats"", ""porter_stem""]
-			        },
-			        ""normal"": {
-			          ""type"": ""custom"",
-			          ""tokenizer"": ""standard"",
-			          ""filter"": [""lowercase"", ""porter_stem""]
+			          ""filter"": [
+			            ""my_custom_keyword_marker_filter"",
+			            ""porter_stem""
+			          ]
 			        }
 			      },
 			      ""filter"": {
-			        ""protect_cats"": {
+			        ""my_custom_keyword_marker_filter"": {
 			          ""type"": ""keyword_marker"",
-			          ""keywords"": [""cats""]
+			          ""keywords"": ""analysis/example_word_list.txt""
 			        }
 			      }
 			    }
 			  }
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenfilters/keyword-marker-tokenfilter.asciidoc:59")]
-		public void Line59()
-		{
-			// tag::abcbf3c246c0d88831b875a601686e35[]
-			var response0 = new SearchResponse<object>();
-			// end::abcbf3c246c0d88831b875a601686e35[]
-
-			response0.MatchesExample(@"POST /keyword_marker_example/_analyze
-			{
-			  ""analyzer"" : ""protect_cats"",
-			  ""text"" : ""I like cats""
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenfilters/keyword-marker-tokenfilter.asciidoc:102")]
-		public void Line102()
-		{
-			// tag::4ab8f55a8a45d53fb1676112379c212e[]
-			var response0 = new SearchResponse<object>();
-			// end::4ab8f55a8a45d53fb1676112379c212e[]
-
-			response0.MatchesExample(@"POST /keyword_marker_example/_analyze
-			{
-			  ""analyzer"" : ""normal"",
-			  ""text"" : ""I like cats""
 			}");
 		}
 	}

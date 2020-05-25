@@ -1,7 +1,10 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Examples.Models;
-using Nest;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 
@@ -32,7 +35,6 @@ namespace Examples.Search
 					var value = b["query"]["term"]["user"];
 					b["query"]["term"]["user"] = new JObject { ["value"] = value };
 				});
-				return e;
 			});
 		}
 
@@ -55,7 +57,6 @@ namespace Examples.Search
 				e.Uri.Path = "/_all/_search";
 				e.MoveQueryStringToBody("size", 0);
 				e.MoveQueryStringToBody("terminate_after", 1);
-				return e;
 			});
 		}
 	}

@@ -1,3 +1,7 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,13 +10,10 @@ using System.Net;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Core.Serialization;
-using Tests.QueryDsl.Geo.Shape;
-using Tests.XPack.MachineLearning;
 
 namespace Tests.CodeStandards.Serialization
 {

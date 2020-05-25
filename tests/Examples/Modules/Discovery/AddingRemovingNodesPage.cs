@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -10,7 +14,7 @@ namespace Examples.Modules.Discovery
 		[Description("modules/discovery/adding-removing-nodes.asciidoc:64")]
 		public void Line64()
 		{
-			// tag::abcc9f98c6bbaf70aa0b1abf8011d2a4[]
+			// tag::4e1f02928ef243bf07fd425754b7642b[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
@@ -18,18 +22,18 @@ namespace Examples.Modules.Discovery
 			var response2 = new SearchResponse<object>();
 
 			var response3 = new SearchResponse<object>();
-			// end::abcc9f98c6bbaf70aa0b1abf8011d2a4[]
+			// end::4e1f02928ef243bf07fd425754b7642b[]
 
 			response0.MatchesExample(@"# Add node to voting configuration exclusions list and wait for the system
 			# to auto-reconfigure the node out of the voting configuration up to the
 			# default timeout of 30 seconds");
 
-			response1.MatchesExample(@"POST /_cluster/voting_config_exclusions/node_name");
+			response1.MatchesExample(@"POST /_cluster/voting_config_exclusions?node_names=node_name");
 
 			response2.MatchesExample(@"# Add node to voting configuration exclusions list and wait for
 			# auto-reconfiguration up to one minute");
 
-			response3.MatchesExample(@"POST /_cluster/voting_config_exclusions/node_name?timeout=1m");
+			response3.MatchesExample(@"POST /_cluster/voting_config_exclusions?node_names=node_name&timeout=1m");
 		}
 
 		[U(Skip = "Example not implemented")]

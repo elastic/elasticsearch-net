@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -143,8 +147,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:404")]
-		public void Line404()
+		[Description("api-conventions.asciidoc:405")]
+		public void Line405()
 		{
 			// tag::5925c23a173a63bdb30b458248d1df76[]
 			var response0 = new SearchResponse<object>();
@@ -154,8 +158,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:568")]
-		public void Line568()
+		[Description("api-conventions.asciidoc:570")]
+		public void Line570()
 		{
 			// tag::a6f8636b03cc5f677b7d89e750328612[]
 			var response0 = new SearchResponse<object>();
@@ -165,8 +169,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:600")]
-		public void Line600()
+		[Description("api-conventions.asciidoc:602")]
+		public void Line602()
 		{
 			// tag::6d1e75312a28a5ba23837abf768f2510[]
 			var response0 = new SearchResponse<object>();

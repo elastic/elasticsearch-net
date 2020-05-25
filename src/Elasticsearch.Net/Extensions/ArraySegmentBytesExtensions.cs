@@ -1,4 +1,9 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 using System;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Utf8Json.Formatters;
@@ -29,9 +34,9 @@ namespace Elasticsearch.Net.Extensions
 			return false;
 		}
 
-		private static readonly byte[] LongMaxValue = StringEncoding.UTF8.GetBytes(long.MaxValue.ToString());
+		private static readonly byte[] LongMaxValue = StringEncoding.UTF8.GetBytes(long.MaxValue.ToString(CultureInfo.InvariantCulture));
 
-		private static readonly byte[] LongMinValue = StringEncoding.UTF8.GetBytes(long.MinValue.ToString());
+		private static readonly byte[] LongMinValue = StringEncoding.UTF8.GetBytes(long.MinValue.ToString(CultureInfo.InvariantCulture));
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsLong(this ref ArraySegment<byte> arraySegment)
@@ -45,8 +50,11 @@ namespace Elasticsearch.Net.Extensions
 				return false;
 
 			var longBytes = isNegative ? LongMinValue : LongMaxValue;
-			var i = isNegative ? 1 : 0;
 
+			// this doesn't handle positive values that are prefixed with + symbol.
+			// Elasticsearch does not return values with this prefix.
+			var i = isNegative ? 1 : 0;
+			var check = arraySegment.Count == longBytes.Length;
 			while (i < arraySegment.Count)
 			{
 				var b = arraySegment.Array[arraySegment.Offset + i];
@@ -54,13 +62,15 @@ namespace Elasticsearch.Net.Extensions
 					return false;
 
 				// only compare to long.MinValue or long.MaxValue if we're dealing with same number of bytes
-				if (arraySegment.Count == longBytes.Length)
+				if (check)
 				{
+					// larger than long.MinValue or long.MaxValue, bail early.
 					if (b > longBytes[i])
 						return false;
 
+					// only continue to check bytes if current byte is equal to longBytes[i]
 					if (b < longBytes[i])
-						return true;
+						check = false;
 				}
 
 				i++;

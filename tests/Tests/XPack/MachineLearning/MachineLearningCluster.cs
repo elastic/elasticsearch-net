@@ -1,9 +1,13 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 ﻿using System;
 using System.IO;
 using System.Linq;
-using Elastic.Managed.ConsoleWriters;
-using Elastic.Managed.Ephemeral;
-using Elastic.Managed.Ephemeral.Tasks;
+using Elastic.Elasticsearch.Ephemeral;
+using Elastic.Elasticsearch.Ephemeral.Tasks;
+using Elastic.Elasticsearch.Managed.ConsoleWriters;
 using ICSharpCode.SharpZipLib.GZip;
 using ICSharpCode.SharpZipLib.Tar;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -19,7 +23,9 @@ namespace Tests.XPack.MachineLearning
 			{
 				{ "xpack.ml.node_concurrent_job_allocations", "4", ">=5.4.0" },
 				{ "node.attr.ml.max_open_jobs", "30", ">=5.4.0 <6.0.0" },
-				{ "xpack.ml.max_open_jobs", "30", ">=6.0.0" }
+				{ "xpack.ml.max_open_jobs", "30", ">=6.0.0" },
+				// increase machine memory available for ML
+				{ "xpack.ml.max_machine_memory_percent", "50" }
 			},
 			AdditionalBeforeNodeStartedTasks =
 			{

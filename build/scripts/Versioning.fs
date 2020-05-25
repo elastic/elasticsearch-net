@@ -1,11 +1,14 @@
-﻿namespace Scripts
+﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+namespace Scripts
 
 open System
 open System.Reflection
 open System.Diagnostics
 open System.IO
 open Commandline
-open Fake.Core
 open Fake.Core
 open Fake.IO
 open Fake.IO.Globbing.Operators
@@ -196,7 +199,8 @@ module Versioning =
                 let fullPath = Path.GetFullPath d
                 
                 let command = [ sprintf "previous-nuget|%s|%s|%s" nugetId (version.Full.ToString()) tfm;
-                                sprintf "directory|%s" fullPath ]
+                                sprintf "directory|%s" fullPath
+                                "-a"; "-f"; "github-comment";]
                 
                 ReposTooling.Differ command
             )

@@ -1,3 +1,7 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 module Tests.YamlRunner.TestsDownloader
 
 open System
@@ -28,15 +32,16 @@ let TestRawUrl namedSuite revision folder file =
         
 let private randomTime = Random()
 
-let TemporaryPath revision = lazy(Path.Combine(Path.GetTempPath(), "elastic", sprintf "tests-%s" revision))
+let TemporaryPath revision suite = lazy(Path.Combine(Path.GetTempPath(), "elastic", sprintf "tests-%s-%s" suite revision))
 
 let private download url = async {
-    let! x = Async.Sleep <| randomTime.Next(500, 900)
+    let! _wait = Async.Sleep <| randomTime.Next(500, 900)
     let! yaml = Http.AsyncRequestString url
     return yaml
 }
-let CachedOrDownload revision folder file url = async {
-    let parent = (TemporaryPath revision).Force()
+let CachedOrDownload namedSuite revision folder file url = async {
+    let suite = match namedSuite with | Oss -> "oss" | XPack -> "xpack"
+    let parent = (TemporaryPath revision suite).Force()
     let directory = Path.Combine(parent, folder)
     let file = Path.Combine(directory, file)
     let fileExists = File.Exists file

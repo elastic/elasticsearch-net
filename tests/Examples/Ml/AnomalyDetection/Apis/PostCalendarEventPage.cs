@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -7,8 +11,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class PostCalendarEventPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/post-calendar-event.asciidoc:63")]
-		public void Line63()
+		[Description("ml/anomaly-detection/apis/post-calendar-event.asciidoc:64")]
+		public void Line64()
 		{
 			// tag::c067182d385f59ce5952fb9a716fbf05[]
 			var response0 = new SearchResponse<object>();

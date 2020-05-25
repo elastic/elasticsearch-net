@@ -1,3 +1,7 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,23 +22,21 @@ namespace Examples
 		private static readonly JsonSerializer Serializer = new JsonSerializer();
 
 		public static void MatchesExample(this IResponse response, string content, Action<Example, JObject> clientChanges) =>
-			response.MatchesExample(content, c =>
+			response.MatchesExample(content, e =>
 			{
-				c.ApplyBodyChanges(b=> clientChanges(c, b));
-				return c;
+				e.ApplyBodyChanges(b=> clientChanges(e, b));
 			});
 
 		/// <summary>
 		/// Asserts that the client generated request matches the example from the docs
 		/// </summary>
-		public static void MatchesExample(this IResponse response, string content, Func<Example, Example> clientChanges = null)
+		public static void MatchesExample(this IResponse response, string content, Action<Example> clientChanges = null)
 		{
 			var example = Example.Create(content);
 
 			// a specific example might use notation that is not supported by the client, because it only
 			// supports the long form. Allow a function to be passed to make modifications to suit.
-			if (clientChanges != null)
-				example = clientChanges(example);
+			clientChanges?.Invoke(example);
 
 			// apply global changes after local ones
 			example = Example.ApplyGlobalChanges(example);

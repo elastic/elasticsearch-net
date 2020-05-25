@@ -1,8 +1,10 @@
-using System;
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Examples.Models;
-using Nest;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 
@@ -52,7 +54,6 @@ namespace Examples.Docs
 					var value = body["query"]["term"]["user"];
 					body["query"]["term"]["user"] = new JObject { ["value"] = value };
 				});
-				return e;
 			});
 		}
 
@@ -132,7 +133,6 @@ namespace Examples.Docs
 					var value = body["query"]["term"]["user"];
 					body["query"]["term"]["user"] = new JObject { ["value"] = value };
 				});
-				return e;
 			});
 		}
 
@@ -292,13 +292,11 @@ namespace Examples.Docs
 			refreshResponse.MatchesExample(@"GET _refresh", e =>
 			{
 				e.Method = HttpMethod.POST;
-				return e;
 			});
 
 			searchResponse.MatchesExample(@"POST twitter/_search?size=0&q=extra:test&filter_path=hits.total", e =>
 			{
 				e.MoveQueryStringToBody("size", 0);
-				return e;
 			});
 		}
 
@@ -341,7 +339,6 @@ namespace Examples.Docs
 			searchResponse.MatchesExample(@"POST twitter/_search?size=0&q=extra:test&filter_path=hits.total", e =>
 			{
 				e.MoveQueryStringToBody("size", 0);
-				return e;
 			});
 		}
 
@@ -445,7 +442,6 @@ namespace Examples.Docs
 				{
 					b["query"]["match"]["flag"].ToLongFormQuery();
 				});
-				return e;
 			});
 		}
 
@@ -487,7 +483,6 @@ namespace Examples.Docs
 				{
 					b["query"]["match"]["flag"].ToLongFormQuery();
 				});
-				return e;
 			});
 		}
 	}

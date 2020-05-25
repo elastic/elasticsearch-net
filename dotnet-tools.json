@@ -2,14 +2,14 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "dotnet-assembly-rewriter": {
-      "version": "1.0.0-ci20200102095458",
+    "assembly-rewriter": {
+      "version": "0.10.0",
       "commands": [
         "assembly-rewriter"
       ]
     },
-    "dotnet-assembly-differ": {
-      "version": "1.0.0-ci20191218193732",
+    "assembly-differ": {
+      "version": "0.12.0",
       "commands": [
         "assembly-differ"
       ]

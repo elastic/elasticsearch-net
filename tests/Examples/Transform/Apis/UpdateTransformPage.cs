@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -7,8 +11,8 @@ namespace Examples.Transform.Apis
 	public class UpdateTransformPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("transform/apis/update-transform.asciidoc:132")]
-		public void Line132()
+		[Description("transform/apis/update-transform.asciidoc:166")]
+		public void Line166()
 		{
 			// tag::27384266370152add76471dd0332a2f1[]
 			var response0 = new SearchResponse<object>();

@@ -1,16 +1,18 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Diagnostics;
 using Nest;
 using Tests.Core.Client;
 using Tests.Domain;
-using Xunit.Sdk;
 
 namespace Tests.ScratchPad
 {
@@ -24,6 +26,14 @@ namespace Tests.ScratchPad
 
 			public void OnNext(DiagnosticListener value)
 			{
+
+				var client = new ElasticClient();
+
+				client.Search<Project>();
+
+				client.LowLevel.Search<SearchResponse<Project>>(PostData.Serializable(new SearchRequest()));
+
+
 				void WriteToConsole<T>(string eventName, T data)
 				{
 					var a = Activity.Current;

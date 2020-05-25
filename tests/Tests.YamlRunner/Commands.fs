@@ -1,3 +1,7 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 module Tests.YamlRunner.Commands
 
 open System
@@ -12,10 +16,16 @@ let private barOptions =
        ForegroundColor = ConsoleColor.Cyan,
        ForegroundColorDone = Nullable ConsoleColor.DarkGreen,
        BackgroundColor = Nullable ConsoleColor.DarkGray,
-       ProgressCharacter = '─'
+       ProgressCharacter = '─',
+       CollapseWhenFinished = true
     )
 let private subBarOptions = 
-    ProgressBarOptions(ForegroundColor = ConsoleColor.Yellow, ForegroundColorDone = Nullable ConsoleColor.DarkGreen, ProgressCharacter = '─')
+    ProgressBarOptions(
+        ForegroundColor = ConsoleColor.Yellow,
+        ForegroundColorDone = Nullable ConsoleColor.DarkGreen,
+        ProgressCharacter = '─',
+        CollapseWhenFinished = true
+    )
 
 let LocateTests namedSuite revision directoryFilter fileFilter = async {
     let! folders = TestsLocator.ListFolders namedSuite revision directoryFilter 

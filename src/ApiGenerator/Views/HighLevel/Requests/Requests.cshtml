@@ -1,15 +1,8 @@
-@using System
-@using RazorLight
 @using System.Collections.Generic
 @using System.Collections.ObjectModel
-@using System.Linq
-@using System.Net.Cache
 @using ApiGenerator
 @using ApiGenerator.Domain.Specification
 @using ApiGenerator.Domain.Code
-@using ApiGenerator.Domain
-@using CsQuery.ExtensionMethods.Internal
-@using Microsoft.CodeAnalysis.CSharp
 @inherits CodeTemplatePage<KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>>>
 @{
 	KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>> model = Model;

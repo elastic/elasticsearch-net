@@ -1,11 +1,12 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 module Tests.YamlRunner.Stashes
 
 open Elasticsearch.Net
 open System
 open System.Collections.Generic
-open System.Drawing
-open System.IO
-open System.Text
 open Tests.YamlRunner.Models
 open ShellProgressBar
 
@@ -35,7 +36,7 @@ type Stashes() =
         let rec resolve (o:Object) : Object =
             match o with
             | :? List<Object> as list ->
-                let resolved = new List<Object>();
+                let resolved = List<Object>();
                 list |> Seq.iter(fun i -> resolved.Add <| resolve i)
                 resolved :> Object
             | :? YamlMap as map ->

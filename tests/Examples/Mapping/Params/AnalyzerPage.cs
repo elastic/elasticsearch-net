@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -6,51 +10,10 @@ namespace Examples.Mapping.Params
 {
 	public class AnalyzerPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
-		[Description("mapping/params/analyzer.asciidoc:43")]
-		public void Line43()
-		{
-			// tag::0ae23713026515ec5047c7bbcf9842f7[]
-			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
-
-			var response2 = new SearchResponse<object>();
-			// end::0ae23713026515ec5047c7bbcf9842f7[]
-
-			response0.MatchesExample(@"PUT /my_index
-			{
-			  ""mappings"": {
-			    ""properties"": {
-			      ""text"": { \<1>
-			        ""type"": ""text"",
-			        ""fields"": {
-			          ""english"": { \<2>
-			            ""type"":     ""text"",
-			            ""analyzer"": ""english""
-			          }
-			        }
-			      }
-			    }
-			  }
-			}");
-
-			response1.MatchesExample(@"GET my_index/_analyze \<3>
-			{
-			  ""field"": ""text"",
-			  ""text"": ""The quick Brown Foxes.""
-			}");
-
-			response2.MatchesExample(@"GET my_index/_analyze \<4>
-			{
-			  ""field"": ""text.english"",
-			  ""text"": ""The quick Brown Foxes.""
-			}");
-		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("mapping/params/analyzer.asciidoc:93")]
-		public void Line93()
+		[Description("mapping/params/analyzer.asciidoc:35")]
+		public void Line35()
 		{
 			// tag::5bf1e4194dce1e15eb7f48fd72b1fc6b[]
 			var response0 = new SearchResponse<object>();

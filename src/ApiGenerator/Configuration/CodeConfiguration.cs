@@ -1,3 +1,7 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,6 +53,8 @@ namespace ApiGenerator.Configuration
 			"eql.search.json", // 7.7 beta
 			"get_script_context.json", // 7.7 experimental
 			"get_script_languages.json", // 7.7 experimental
+			// already removed on client
+			"indices.exist_type.json",
 			"indices.create_data_stream.json", // 7.7 experimental
 			"indices.delete_data_stream.json", // 7.7 experimental
 			"indices.get_data_streams.json", // 7.7 experimental

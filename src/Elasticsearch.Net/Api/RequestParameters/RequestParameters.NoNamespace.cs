@@ -36,6 +36,13 @@ namespace Elasticsearch.Net
 			set => Q("pipeline", value);
 		}
 
+		///<summary>favor V2 templates instead of V1 templates during automatic index creation</summary>
+		public bool? PreferV2Templates
+		{
+			get => Q<bool? >("prefer_v2_templates");
+			set => Q("prefer_v2_templates", value);
+		}
+
 		///<summary>
 		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
@@ -224,6 +231,13 @@ namespace Elasticsearch.Net
 		{
 			get => Q<string>("pipeline");
 			set => Q("pipeline", value);
+		}
+
+		///<summary>favor V2 templates instead of V1 templates during automatic index creation</summary>
+		public bool? PreferV2Templates
+		{
+			get => Q<bool? >("prefer_v2_templates");
+			set => Q("prefer_v2_templates", value);
 		}
 
 		///<summary>
@@ -1093,6 +1107,13 @@ namespace Elasticsearch.Net
 		{
 			get => Q<string>("pipeline");
 			set => Q("pipeline", value);
+		}
+
+		///<summary>favor V2 templates instead of V1 templates during automatic index creation</summary>
+		public bool? PreferV2Templates
+		{
+			get => Q<bool? >("prefer_v2_templates");
+			set => Q("prefer_v2_templates", value);
 		}
 
 		///<summary>
@@ -2075,6 +2096,13 @@ namespace Elasticsearch.Net
 		{
 			get => Q<string>("lang");
 			set => Q("lang", value);
+		}
+
+		///<summary>favor V2 templates instead of V1 templates during automatic index creation</summary>
+		public bool? PreferV2Templates
+		{
+			get => Q<bool? >("prefer_v2_templates");
+			set => Q("prefer_v2_templates", value);
 		}
 
 		///<summary>

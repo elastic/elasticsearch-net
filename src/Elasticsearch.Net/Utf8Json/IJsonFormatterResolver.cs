@@ -23,7 +23,6 @@
 #endregion
 
 using System;
-using System.Collections.Concurrent;
 using System.Reflection;
 
 namespace Elasticsearch.Net.Utf8Json

@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -7,8 +11,8 @@ namespace Examples.Ingest
 	public class EnrichPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/enrich.asciidoc:305")]
-		public void Line305()
+		[Description("ingest/enrich.asciidoc:321")]
+		public void Line321()
 		{
 			// tag::0c8bce944c1189a8551e8dbd99c365f2[]
 			var response0 = new SearchResponse<object>();
@@ -30,8 +34,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/enrich.asciidoc:324")]
-		public void Line324()
+		[Description("ingest/enrich.asciidoc:340")]
+		public void Line340()
 		{
 			// tag::497a51622ef123efc44e54ba2106385e[]
 			var response0 = new SearchResponse<object>();
@@ -48,8 +52,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/enrich.asciidoc:346")]
-		public void Line346()
+		[Description("ingest/enrich.asciidoc:362")]
+		public void Line362()
 		{
 			// tag::99da25a3d63f98c16df47f21acbf37e7[]
 			var response0 = new SearchResponse<object>();
@@ -66,8 +70,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/enrich.asciidoc:362")]
-		public void Line362()
+		[Description("ingest/enrich.asciidoc:378")]
+		public void Line378()
 		{
 			// tag::207c04ccbdce0e8a289070a3b0a79ecb[]
 			var response0 = new SearchResponse<object>();
@@ -77,8 +81,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/enrich.asciidoc:381")]
-		public void Line381()
+		[Description("ingest/enrich.asciidoc:397")]
+		public void Line397()
 		{
 			// tag::83b4a737514a047d31f12f110bed0b5e[]
 			var response0 = new SearchResponse<object>();
@@ -101,8 +105,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/enrich.asciidoc:403")]
-		public void Line403()
+		[Description("ingest/enrich.asciidoc:419")]
+		public void Line419()
 		{
 			// tag::ad3b9d676187bebdb62e0f1de9a202e0[]
 			var response0 = new SearchResponse<object>();
@@ -117,8 +121,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/enrich.asciidoc:417")]
-		public void Line417()
+		[Description("ingest/enrich.asciidoc:433")]
+		public void Line433()
 		{
 			// tag::a3f3c1f3f31dbd225da5fd14633bc4a0[]
 			var response0 = new SearchResponse<object>();
@@ -128,8 +132,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/enrich.asciidoc:478")]
-		public void Line478()
+		[Description("ingest/enrich.asciidoc:494")]
+		public void Line494()
 		{
 			// tag::927dd38daa489175a5008799452e870a[]
 			var response0 = new SearchResponse<object>();
@@ -149,8 +153,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/enrich.asciidoc:502")]
-		public void Line502()
+		[Description("ingest/enrich.asciidoc:518")]
+		public void Line518()
 		{
 			// tag::9ab4e8a564e13475cb3a0376be56bb8e[]
 			var response0 = new SearchResponse<object>();
@@ -167,8 +171,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/enrich.asciidoc:518")]
-		public void Line518()
+		[Description("ingest/enrich.asciidoc:534")]
+		public void Line534()
 		{
 			// tag::af4f82ce86672a9bafd834f334c8e1c9[]
 			var response0 = new SearchResponse<object>();
@@ -178,8 +182,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/enrich.asciidoc:535")]
-		public void Line535()
+		[Description("ingest/enrich.asciidoc:551")]
+		public void Line551()
 		{
 			// tag::958b661d89b2beeb0cfefe8edbe3e408[]
 			var response0 = new SearchResponse<object>();
@@ -202,8 +206,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/enrich.asciidoc:557")]
-		public void Line557()
+		[Description("ingest/enrich.asciidoc:573")]
+		public void Line573()
 		{
 			// tag::7495d7e8d99e4f5ac8034988b706e09d[]
 			var response0 = new SearchResponse<object>();
@@ -216,8 +220,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/enrich.asciidoc:569")]
-		public void Line569()
+		[Description("ingest/enrich.asciidoc:585")]
+		public void Line585()
 		{
 			// tag::ce20ab8067b6e4ad68e8ad7a5a0b73fd[]
 			var response0 = new SearchResponse<object>();

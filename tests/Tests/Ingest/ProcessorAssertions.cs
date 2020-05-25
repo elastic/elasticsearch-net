@@ -1,10 +1,15 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.Client;
+using Tests.Core.Xunit;
 using Tests.Domain;
 
 namespace Tests.Ingest
@@ -70,7 +75,7 @@ namespace Tests.Ingest
 			public override string Key => "append";
 		}
 
-		[SkipVersion("<7.7.0", "Empty Value introduced in Elasticsearch 7.7.0+, CSV introduced in 7.6.0+")]
+		[BlockedByIssue("https://github.com/elastic/elasticsearch/issues/55643")]
 		public class Csv : ProcessorAssertion
 		{
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d

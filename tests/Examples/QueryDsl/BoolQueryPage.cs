@@ -1,8 +1,9 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Examples.Models;
-using FluentAssertions;
-using Nest;
-using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 
 namespace Examples.QueryDsl
@@ -79,7 +80,6 @@ namespace Examples.QueryDsl
 					ageQuery["gte"] = 10.0;
 					ageQuery["lte"] = 20.0;
 				});
-				return e;
 			});
 		}
 
@@ -112,7 +112,6 @@ namespace Examples.QueryDsl
 					var filter = b["query"]["bool"]["filter"].ToJArray();
 					filter[0]["term"]["status"].ToLongFormTermQuery();
 				});
-				return e;
 			});
 		}
 

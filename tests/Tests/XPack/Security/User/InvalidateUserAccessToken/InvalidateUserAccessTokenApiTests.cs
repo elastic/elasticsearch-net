@@ -1,13 +1,16 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 ﻿using System;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
-using static Elastic.Managed.Ephemeral.ClusterAuthentication;
+using static Elastic.Elasticsearch.Ephemeral.ClusterAuthentication;
 
 namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 {

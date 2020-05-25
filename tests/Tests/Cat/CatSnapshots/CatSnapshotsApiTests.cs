@@ -1,6 +1,10 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 ﻿using System;
 using System.IO;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -47,7 +51,7 @@ namespace Tests.Cat.CatSnapshots
 			Client.Cluster.Health(SnapshotIndexName, g => g.WaitForStatus(WaitForStatus.Yellow));
 			client.Snapshot.Snapshot(RepositoryName, SnapshotName, s => s.WaitForCompletion().Index(SnapshotIndexName));
 		}
-		
+
 		protected override CatSnapshotsRequest Initializer => new CatSnapshotsRequest(RepositoryName);
 		protected override Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> Fluent => f => f.RepositoryName(RepositoryName);
 

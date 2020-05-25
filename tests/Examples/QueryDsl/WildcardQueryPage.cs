@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -6,15 +10,25 @@ namespace Examples.QueryDsl
 {
 	public class WildcardQueryPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("query-dsl/wildcard-query.asciidoc:21")]
 		public void Line21()
 		{
 			// tag::d31062ff8c015387889fed4ad86fd914[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q => q
+					.Wildcard(w => w
+						.Field("user")
+						.Value("ki*y")
+						.Boost(1)
+						.Rewrite(MultiTermQueryRewrite.ConstantScore)
+					)
+				)
+			);
 			// end::d31062ff8c015387889fed4ad86fd914[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""query"": {
 			        ""wildcard"": {

@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -67,8 +71,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/update-lifecycle-policy.asciidoc:142")]
-		public void Line142()
+		[Description("ilm/update-lifecycle-policy.asciidoc:144")]
+		public void Line144()
 		{
 			// tag::fc541f5741c1fe052439ededa84ffe8a[]
 			var response0 = new SearchResponse<object>();
@@ -97,8 +101,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/update-lifecycle-policy.asciidoc:182")]
-		public void Line182()
+		[Description("ilm/update-lifecycle-policy.asciidoc:184")]
+		public void Line184()
 		{
 			// tag::0f6fa3a706a7c17858d3dbe329839ea6[]
 			var response0 = new SearchResponse<object>();
@@ -108,8 +112,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/update-lifecycle-policy.asciidoc:225")]
-		public void Line225()
+		[Description("ilm/update-lifecycle-policy.asciidoc:227")]
+		public void Line227()
 		{
 			// tag::f94601bc9cd640adb939af67116a40c8[]
 			var response0 = new SearchResponse<object>();
@@ -139,8 +143,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/update-lifecycle-policy.asciidoc:304")]
-		public void Line304()
+		[Description("ilm/update-lifecycle-policy.asciidoc:306")]
+		public void Line306()
 		{
 			// tag::416c65c55a53d0161426cc09ae999c72[]
 			var response0 = new SearchResponse<object>();
@@ -170,8 +174,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/update-lifecycle-policy.asciidoc:494")]
-		public void Line494()
+		[Description("ilm/update-lifecycle-policy.asciidoc:496")]
+		public void Line496()
 		{
 			// tag::552b6761ef052efa1e83f8a3c30d6f78[]
 			var response0 = new SearchResponse<object>();

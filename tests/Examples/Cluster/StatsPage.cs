@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -7,8 +11,8 @@ namespace Examples.Cluster
 	public class StatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/stats.asciidoc:347")]
-		public void Line347()
+		[Description("cluster/stats.asciidoc:1089")]
+		public void Line1089()
 		{
 			// tag::861f5f61409dc87f3671293b87839ff7[]
 			var response0 = new SearchResponse<object>();
@@ -18,8 +22,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/stats.asciidoc:591")]
-		public void Line591()
+		[Description("cluster/stats.asciidoc:1333")]
+		public void Line1333()
 		{
 			// tag::71c629c44bf3c542a0daacbfc253c4b0[]
 			var response0 = new SearchResponse<object>();

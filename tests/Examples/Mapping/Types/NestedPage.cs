@@ -1,20 +1,36 @@
-using Elastic.Xunit.XunitPlumbing;
-using Nest;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using System.Collections.Generic;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using System.ComponentModel;
+using Examples.Models;
 
 namespace Examples.Mapping.Types
 {
 	public class NestedPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("mapping/types/nested.asciidoc:19")]
 		public void Line19()
 		{
 			// tag::8baccd8688a6bad1749b8935f9601ea4[]
-			var response0 = new SearchResponse<object>();
+			var indexResponse = client.Index(new GroupDoc
+			{
+				Group = "fans",
+				User = new List<User>
+					{
+						new User { First = "John", Last = "Smith" },
+						new User { First = "Alice", Last = "White" }
+					}
+			}, i => i
+			.Index("my_index")
+			.Id(1)
+			);
 			// end::8baccd8688a6bad1749b8935f9601ea4[]
 
-			response0.MatchesExample(@"PUT my_index/_doc/1
+			indexResponse.MatchesExample(@"PUT my_index/_doc/1
 			{
 			  ""group"" : ""fans"",
 			  ""user"" : [ \<1>
@@ -30,15 +46,27 @@ namespace Examples.Mapping.Types
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("mapping/types/nested.asciidoc:55")]
 		public void Line55()
 		{
 			// tag::b214942b938e47f2c486e523546cb574[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<GroupDoc>(s => s
+				.Index("my_index")
+				.Query(q => q
+					.Match(m => m
+						.Field(f => f.User[0].First) // <1> An expression to build a path to the field `user.first` from the `GroupDoc` type.
+						.Query("Alice")
+					) && q
+					.Match(m => m
+						.Field(f => f.User[0].Last) // <2> An expression to build a path to the field `user.last` from the `GroupDoc` type.
+						.Query("Smith")
+					)
+				)
+			);
 			// end::b214942b938e47f2c486e523546cb574[]
 
-			response0.MatchesExample(@"GET my_index/_search
+			searchResponse.MatchesExample(@"GET my_index/_search
 			{
 			  ""query"": {
 			    ""bool"": {
@@ -48,24 +76,88 @@ namespace Examples.Mapping.Types
 			      ]
 			    }
 			  }
-			}");
+			}", (example, body) =>
+			{
+				body["query"]["bool"]["must"][0]["match"]["user.first"].ToLongFormQuery();
+				body["query"]["bool"]["must"][1]["match"]["user.last"].ToLongFormQuery();
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("mapping/types/nested.asciidoc:80")]
 		public void Line80()
 		{
 			// tag::b919f88e6f47a40d5793479440a90ba6[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("my_index", c => c
+				.Map<GroupDoc>(m => m
+					.Properties(p => p
+						.Nested<User>(n => n
+							.Name(nn => nn.User)
+						)
+					)
+				)
+			);
 
-			var response1 = new SearchResponse<object>();
+			var indexResponse = client.Index(new GroupDoc
+			{
+				Group = "fans",
+				User = new List<User>
+					{
+						new User { First = "John", Last = "Smith" },
+						new User { First = "Alice", Last = "White" }
+					}
+			}, i => i
+				.Index("my_index")
+				.Id(1)
+			);
 
-			var response2 = new SearchResponse<object>();
+			var searchResponse = client.Search<GroupDoc>(s => s
+				.Index("my_index")
+				.Query(q => q
+					.Nested(n => n
+						.Path(p => p.User)
+						.Query(nq => nq
+							.Match(m => m
+								.Field(f => f.User[0].First)
+								.Query("Alice")
+							) && nq
+							.Match(m => m
+								.Field(f => f.User[0].Last)
+								.Query("Smith")
+							)
+						)
+					)
+				)
+			);
 
-			var response3 = new SearchResponse<object>();
+			var searchResponse2 = client.Search<GroupDoc>(s => s
+				.Index("my_index")
+				.Query(q => q
+					.Nested(n => n
+						.Path(p => p.User)
+						.Query(nq => nq
+							.Match(m => m
+								.Field(f => f.User[0].First)
+								.Query("Alice")
+							) && nq
+							.Match(m => m
+								.Field(f => f.User[0].Last)
+								.Query("White")
+							)
+						)
+						.InnerHits(i => i
+							.Highlight(h => h
+								.Fields(hf => hf
+									.Field(f => f.User[0].First)
+								)
+							)
+						)
+					)
+				)
+			);
 			// end::b919f88e6f47a40d5793479440a90ba6[]
 
-			response0.MatchesExample(@"PUT my_index
+			createIndexResponse.MatchesExample(@"PUT my_index
 			{
 			  ""mappings"": {
 			    ""properties"": {
@@ -76,7 +168,7 @@ namespace Examples.Mapping.Types
 			  }
 			}");
 
-			response1.MatchesExample(@"PUT my_index/_doc/1
+			indexResponse.MatchesExample(@"PUT my_index/_doc/1
 			{
 			  ""group"" : ""fans"",
 			  ""user"" : [
@@ -91,7 +183,7 @@ namespace Examples.Mapping.Types
 			  ]
 			}");
 
-			response2.MatchesExample(@"GET my_index/_search
+			searchResponse.MatchesExample(@"GET my_index/_search
 			{
 			  ""query"": {
 			    ""nested"": {
@@ -106,9 +198,13 @@ namespace Examples.Mapping.Types
 			      }
 			    }
 			  }
-			}");
+			}", (example, body) =>
+			{
+				body["query"]["nested"]["query"]["bool"]["must"][0]["match"]["user.first"].ToLongFormQuery();
+				body["query"]["nested"]["query"]["bool"]["must"][1]["match"]["user.last"].ToLongFormQuery();
+			});
 
-			response3.MatchesExample(@"GET my_index/_search
+			searchResponse2.MatchesExample(@"GET my_index/_search
 			{
 			  ""query"": {
 			    ""nested"": {
@@ -130,7 +226,11 @@ namespace Examples.Mapping.Types
 			      }
 			    }
 			  }
-			}");
+			}", (example, body) =>
+			{
+				body["query"]["nested"]["query"]["bool"]["must"][0]["match"]["user.first"].ToLongFormQuery();
+				body["query"]["nested"]["query"]["bool"]["must"][1]["match"]["user.last"].ToLongFormQuery();
+			});
 		}
 	}
 }

@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -38,8 +42,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:166")]
-		public void Line166()
+		[Description("ilm/policy-definitions.asciidoc:167")]
+		public void Line167()
 		{
 			// tag::1116c769f39f0c7fe86ec2a4871efcd5[]
 			var response0 = new SearchResponse<object>();
@@ -62,8 +66,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:188")]
-		public void Line188()
+		[Description("ilm/policy-definitions.asciidoc:189")]
+		public void Line189()
 		{
 			// tag::0518c673094fb18ecb491a3b78af4695[]
 			var response0 = new SearchResponse<object>();
@@ -88,8 +92,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:213")]
-		public void Line213()
+		[Description("ilm/policy-definitions.asciidoc:216")]
+		public void Line216()
 		{
 			// tag::9d461ae140ddc018efd2650559800cd1[]
 			var response0 = new SearchResponse<object>();
@@ -115,8 +119,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:250")]
-		public void Line250()
+		[Description("ilm/policy-definitions.asciidoc:253")]
+		public void Line253()
 		{
 			// tag::83062a543163370328cf2e21a68c1bd3[]
 			var response0 = new SearchResponse<object>();
@@ -139,8 +143,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:277")]
-		public void Line277()
+		[Description("ilm/policy-definitions.asciidoc:288")]
+		public void Line288()
 		{
 			// tag::053497b6960f80fd7b005b7c6d54358f[]
 			var response0 = new SearchResponse<object>();
@@ -161,8 +165,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:324")]
-		public void Line324()
+		[Description("ilm/policy-definitions.asciidoc:338")]
+		public void Line338()
 		{
 			// tag::eb5486d2fe4283475bf9e0e09280be16[]
 			var response0 = new SearchResponse<object>();
@@ -185,8 +189,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:350")]
-		public void Line350()
+		[Description("ilm/policy-definitions.asciidoc:364")]
+		public void Line364()
 		{
 			// tag::0345fbd95c4516a89ac5ad261a16be8f[]
 			var response0 = new SearchResponse<object>();
@@ -207,8 +211,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:384")]
-		public void Line384()
+		[Description("ilm/policy-definitions.asciidoc:398")]
+		public void Line398()
 		{
 			// tag::fc9a1b1173690a911725cff3912e9755[]
 			var response0 = new SearchResponse<object>();
@@ -229,8 +233,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:422")]
-		public void Line422()
+		[Description("ilm/policy-definitions.asciidoc:436")]
+		public void Line436()
 		{
 			// tag::d7e7489b7d176aa854dfc785a12feab3[]
 			var response0 = new SearchResponse<object>();
@@ -251,8 +255,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:466")]
-		public void Line466()
+		[Description("ilm/policy-definitions.asciidoc:480")]
+		public void Line480()
 		{
 			// tag::19211ccf772f1dee7b500c21f4a9a805[]
 			var response0 = new SearchResponse<object>();
@@ -275,8 +279,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:489")]
-		public void Line489()
+		[Description("ilm/policy-definitions.asciidoc:503")]
+		public void Line503()
 		{
 			// tag::cfd4b34f35e531a20739a3b308d57134[]
 			var response0 = new SearchResponse<object>();
@@ -299,8 +303,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:512")]
-		public void Line512()
+		[Description("ilm/policy-definitions.asciidoc:526")]
+		public void Line526()
 		{
 			// tag::d4a41fb74b41b41a0ee114a2311f2815[]
 			var response0 = new SearchResponse<object>();
@@ -323,8 +327,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:536")]
-		public void Line536()
+		[Description("ilm/policy-definitions.asciidoc:550")]
+		public void Line550()
 		{
 			// tag::8940f2b911220acc9afef6360b6c13c4[]
 			var response0 = new SearchResponse<object>();
@@ -348,8 +352,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:561")]
-		public void Line561()
+		[Description("ilm/policy-definitions.asciidoc:575")]
+		public void Line575()
 		{
 			// tag::f6c79fa1c01bb4539d0cba0bd62c1ce0[]
 			var response0 = new SearchResponse<object>();
@@ -378,8 +382,32 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:612")]
-		public void Line612()
+		[Description("ilm/policy-definitions.asciidoc:623")]
+		public void Line623()
+		{
+			// tag::3f2e5132e35b9e8b3203a4a0541cf0d4[]
+			var response0 = new SearchResponse<object>();
+			// end::3f2e5132e35b9e8b3203a4a0541cf0d4[]
+
+			response0.MatchesExample(@"PUT _ilm/policy/my_policy
+			{
+			  ""policy"": {
+			    ""phases"": {
+			      ""cold"": {
+			        ""actions"": {
+			          ""searchable_snapshot"" : {
+			            ""snapshot_repository"" : ""backing_repo""
+			          }
+			        }
+			      }
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("ilm/policy-definitions.asciidoc:663")]
+		public void Line663()
 		{
 			// tag::149a0eea54cdf6ea3052af6dba2d2a63[]
 			var response0 = new SearchResponse<object>();
@@ -402,8 +430,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:664")]
-		public void Line664()
+		[Description("ilm/policy-definitions.asciidoc:715")]
+		public void Line715()
 		{
 			// tag::f3b4ddce8ff21fc1a76a7c0d9c36650e[]
 			var response0 = new SearchResponse<object>();
@@ -426,8 +454,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:721")]
-		public void Line721()
+		[Description("ilm/policy-definitions.asciidoc:772")]
+		public void Line772()
 		{
 			// tag::a5a58e8ad66afe831bc295500e3e8739[]
 			var response0 = new SearchResponse<object>();
@@ -448,8 +476,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/policy-definitions.asciidoc:746")]
-		public void Line746()
+		[Description("ilm/policy-definitions.asciidoc:797")]
+		public void Line797()
 		{
 			// tag::d14a2a6c2a8b084495b8a64708226650[]
 			var response0 = new SearchResponse<object>();

@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -7,8 +11,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 	public class PutDfanalyticsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:291")]
-		public void Line291()
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:414")]
+		public void Line414()
 		{
 			// tag::8c6f3bb8abae9ff1d21e776f16ad1c86[]
 			var response0 = new SearchResponse<object>();
@@ -56,8 +60,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:363")]
-		public void Line363()
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:486")]
+		public void Line486()
 		{
 			// tag::ce3c391c2b1915cfc44a2917bca71d19[]
 			var response0 = new SearchResponse<object>();
@@ -83,8 +87,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:426")]
-		public void Line426()
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:549")]
+		public void Line549()
 		{
 			// tag::e8211247c280a3fbbbdd32850b743b7b[]
 			var response0 = new SearchResponse<object>();
@@ -108,8 +112,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:483")]
-		public void Line483()
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:606")]
+		public void Line606()
 		{
 			// tag::ae82eb17c23cb8e5761cb6240a5ed0a6[]
 			var response0 = new SearchResponse<object>();
@@ -135,8 +139,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:517")]
-		public void Line517()
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:640")]
+		public void Line640()
 		{
 			// tag::4fb0629146ca78b85e823edd405497bb[]
 			var response0 = new SearchResponse<object>();

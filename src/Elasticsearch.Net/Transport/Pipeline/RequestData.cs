@@ -1,3 +1,7 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -73,6 +77,7 @@ namespace Elasticsearch.Net
 
 			KeepAliveInterval = (int)(global.KeepAliveInterval?.TotalMilliseconds ?? 2000);
 			KeepAliveTime = (int)(global.KeepAliveTime?.TotalMilliseconds ?? 2000);
+			DnsRefreshTimeout = global.DnsRefreshTimeout;
 
 			ProxyAddress = global.ProxyAddress;
 			ProxyUsername = global.ProxyUsername;
@@ -130,6 +135,7 @@ namespace Elasticsearch.Net
 		public bool TransferEncodingChunked { get; }
 
 		public Uri Uri => Node != null ? new Uri(Node.Uri, PathAndQuery) : null;
+		public TimeSpan DnsRefreshTimeout { get; }
 
 		public override string ToString() => $"{Method.GetStringValue()} {_path}";
 

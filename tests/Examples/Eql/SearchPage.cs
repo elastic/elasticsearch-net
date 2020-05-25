@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -28,8 +32,8 @@ namespace Examples.Eql
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("eql/search.asciidoc:39")]
-		public void Line39()
+		[Description("eql/search.asciidoc:48")]
+		public void Line48()
 		{
 			// tag::39e711af23a7eee61a1e13cf2ef7c360[]
 			var response0 = new SearchResponse<object>();
@@ -44,8 +48,8 @@ namespace Examples.Eql
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("eql/search.asciidoc:127")]
-		public void Line127()
+		[Description("eql/search.asciidoc:136")]
+		public void Line136()
 		{
 			// tag::6f915983b4c12bcd1a8ca1c9cf8feed1[]
 			var response0 = new SearchResponse<object>();
@@ -61,8 +65,8 @@ namespace Examples.Eql
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("eql/search.asciidoc:149")]
-		public void Line149()
+		[Description("eql/search.asciidoc:158")]
+		public void Line158()
 		{
 			// tag::382f6056cfbc3a113f675c0fbc59aaf3[]
 			var response0 = new SearchResponse<object>();
@@ -78,8 +82,8 @@ namespace Examples.Eql
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("eql/search.asciidoc:173")]
-		public void Line173()
+		[Description("eql/search.asciidoc:182")]
+		public void Line182()
 		{
 			// tag::bfdf5997fe6e1fc4e938a28fcd6c8683[]
 			var response0 = new SearchResponse<object>();

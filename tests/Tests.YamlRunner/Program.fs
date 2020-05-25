@@ -1,4 +1,8 @@
-﻿module Tests.YamlRunner.Main
+﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+module Tests.YamlRunner.Main
 
 open System
 open System.Linq
@@ -35,7 +39,7 @@ let private runningProxy = runningMitmProxy || Process.GetProcessesByName("fiddl
 let private defaultEndpoint namedSuite = 
     let host = 
         match (runningProxy, namedSuite) with
-        | (true, _) -> "ipv.fiddler"
+        | (true, _) -> "ipv4.fiddler"
         | _ -> "localhost"
     let https = match namedSuite with | XPack -> "s" | _ -> ""
     sprintf "http%s://%s:9200" https host;
@@ -69,9 +73,9 @@ let private createClient endpoint namedSuite =
         | XPack -> 
             authSettings.ServerCertificateValidationCallback(fun _ _ _ _ -> true)
         | _ -> authSettings
-    new ElasticLowLevelClient(certSettings)
+    ElasticLowLevelClient(certSettings)
     
-let validateRevisionParams endpoint passedRevision namedSuite =    
+let validateRevisionParams endpoint _passedRevision namedSuite =    
     let client = createClient endpoint namedSuite
     
     let node = client.Settings.ConnectionPool.Nodes.First()
@@ -83,8 +87,8 @@ let validateRevisionParams endpoint passedRevision namedSuite =
     printfn "Running elasticsearch %O %s" (node.Uri) auth
     
     let r =
-        let config = new RequestConfiguration(DisableDirectStreaming=Nullable(true))
-        let p = new RootNodeInfoRequestParameters(RequestConfiguration = config)
+        let config = RequestConfiguration(DisableDirectStreaming=Nullable(true))
+        let p = RootNodeInfoRequestParameters(RequestConfiguration = config)
         client.RootNodeInfo<DynamicResponse>(p)
         
     printfn "%s" r.DebugInformation

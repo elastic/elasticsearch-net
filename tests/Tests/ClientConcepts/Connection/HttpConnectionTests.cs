@@ -1,10 +1,14 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 ﻿#if DOTNETCORE
 using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch;
@@ -25,13 +29,35 @@ namespace Tests.ClientConcepts.Connection
 			connection.Request<StringResponse>(requestData);
 
 			connection.CallCount.Should().Be(1);
-			connection.ClientCount.Should().Be(1);
+			connection.InUseHandlers.Should().Be(1);
+			connection.RemovedHandlers.Should().Be(0);
 
 			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 
 			connection.CallCount.Should().Be(2);
-			connection.ClientCount.Should().Be(1);
+			connection.InUseHandlers.Should().Be(1);
 		}
+
+		[I] public async Task RespectsDnsRefreshTimeout()
+		{
+			var connection = new TestableHttpConnection();
+			connection.RemovedHandlers.Should().Be(0);
+			var requestData = CreateRequestData(dnsRefreshTimeout: TimeSpan.FromSeconds(1));
+			connection.Request<StringResponse>(requestData);
+			await Task.Delay(TimeSpan.FromSeconds(2));
+			connection.Request<StringResponse>(requestData);
+
+			connection.CallCount.Should().Be(2);
+			connection.InUseHandlers.Should().Be(1);
+			connection.RemovedHandlers.Should().Be(1);
+
+			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+
+			connection.CallCount.Should().Be(3);
+			connection.InUseHandlers.Should().Be(1);
+			connection.RemovedHandlers.Should().Be(1);
+		}
+
 
 		[I] public async Task MultipleInstancesOfHttpClientWhenRequestTimeoutChanges() =>
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(TimeSpan.FromSeconds(30)));
@@ -53,17 +79,20 @@ namespace Tests.ClientConcepts.Connection
 			connection.Request<StringResponse>(requestData);
 
 			connection.CallCount.Should().Be(1);
-			connection.ClientCount.Should().Be(1);
+			connection.InUseHandlers.Should().Be(1);
+			connection.RemovedHandlers.Should().Be(0);
 
 			requestData = differentRequestData();
 			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 
 			connection.CallCount.Should().Be(2);
-			connection.ClientCount.Should().Be(2);
+			connection.InUseHandlers.Should().Be(2);
+			connection.RemovedHandlers.Should().Be(0);
 		}
 
 		private RequestData CreateRequestData(
 			TimeSpan requestTimeout = default,
+			TimeSpan? dnsRefreshTimeout = default,
 			Uri proxyAddress = null,
 			bool disableAutomaticProxyDetection = false,
 			bool httpCompression = false,
@@ -75,6 +104,7 @@ namespace Tests.ClientConcepts.Connection
 			var node = Client.ConnectionSettings.ConnectionPool.Nodes.First();
 			var connectionSettings = new ConnectionSettings(node.Uri)
 				.RequestTimeout(requestTimeout)
+				.DnsRefreshTimeout(dnsRefreshTimeout ?? ConnectionConfiguration.DefaultDnsRefreshTimeout)
 				.DisableAutomaticProxyDetection(disableAutomaticProxyDetection)
 				.TransferEncodingChunked(transferEncodingChunked)
 				.EnableHttpCompression(httpCompression);
@@ -157,7 +187,6 @@ namespace Tests.ClientConcepts.Connection
 			private readonly Action<HttpResponseMessage> _response;
 			private TestableClientHandler _handler;
 			public int CallCount { get; private set; }
-			public int ClientCount => Clients.Count;
 			public HttpClientHandler LastHttpClientHandler => (HttpClientHandler)_handler.InnerHandler;
 
 			public TestableHttpConnection(Action<HttpResponseMessage> response) => _response = response;

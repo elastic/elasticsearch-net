@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -7,8 +11,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class CreateRoleMappingsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:112")]
-		public void Line112()
+		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:113")]
+		public void Line113()
 		{
 			// tag::23b062c157235246d7c347b9047b2435[]
 			var response0 = new SearchResponse<object>();
@@ -28,8 +32,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:146")]
-		public void Line146()
+		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:147")]
+		public void Line147()
 		{
 			// tag::b176e0d428726705298184ef39ad5cb2[]
 			var response0 = new SearchResponse<object>();
@@ -46,8 +50,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:159")]
-		public void Line159()
+		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:160")]
+		public void Line160()
 		{
 			// tag::e60b7f75ca806f2c74927c3d9409a986[]
 			var response0 = new SearchResponse<object>();
@@ -64,8 +68,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:174")]
-		public void Line174()
+		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:175")]
+		public void Line175()
 		{
 			// tag::7a23a385a63c87cab58fd494870450fd[]
 			var response0 = new SearchResponse<object>();
@@ -93,8 +97,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:216")]
-		public void Line216()
+		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:217")]
+		public void Line217()
 		{
 			// tag::5ad365ed9e1a3c26093a0f09666c133a[]
 			var response0 = new SearchResponse<object>();
@@ -116,8 +120,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:239")]
-		public void Line239()
+		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:240")]
+		public void Line240()
 		{
 			// tag::7e5faa551f2c95ffd627da352563d450[]
 			var response0 = new SearchResponse<object>();
@@ -134,8 +138,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:254")]
-		public void Line254()
+		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:255")]
+		public void Line255()
 		{
 			// tag::b80e1f5b26bae4f3c2f8a604b7caaf17[]
 			var response0 = new SearchResponse<object>();
@@ -155,8 +159,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:278")]
-		public void Line278()
+		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:279")]
+		public void Line279()
 		{
 			// tag::0d94d76b7f00d0459d1f8c962c144dcd[]
 			var response0 = new SearchResponse<object>();
@@ -200,8 +204,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:328")]
-		public void Line328()
+		[Description("../../x-pack/docs/en/rest-api/security/create-role-mappings.asciidoc:329")]
+		public void Line329()
 		{
 			// tag::50dc35d3d8705bd62aed20a15209476c[]
 			var response0 = new SearchResponse<object>();

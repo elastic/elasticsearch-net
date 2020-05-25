@@ -90,7 +90,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
             if (t.IsEnum)
             {
-                writer.WriteString(t.ToString()); // enum as stringq
+                writer.WriteString(t.ToString()); // enum as string
                 return;
             }
 
@@ -158,9 +158,9 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 case JsonToken.Number:
 					var numberSegment = reader.ReadNumberSegment();
 					// conditional operator here would cast both to double, so don't use.
+					// Check for IsLong first, avoid floating point rounding
 					if (numberSegment.IsLong())
 						return NumberConverter.ReadInt64(numberSegment.Array, numberSegment.Offset, out _);
-
 
 					return NumberConverter.ReadDouble(numberSegment.Array, numberSegment.Offset, out _);
 				case JsonToken.String:

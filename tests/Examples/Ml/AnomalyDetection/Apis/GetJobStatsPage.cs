@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -7,8 +11,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class GetJobStatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/get-job-stats.asciidoc:333")]
-		public void Line333()
+		[Description("ml/anomaly-detection/apis/get-job-stats.asciidoc:361")]
+		public void Line361()
 		{
 			// tag::9298aaf8232a819e79b3bf8471245e98[]
 			var response0 = new SearchResponse<object>();

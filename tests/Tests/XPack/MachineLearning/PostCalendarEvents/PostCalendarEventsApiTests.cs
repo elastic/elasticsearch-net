@@ -1,7 +1,11 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -19,7 +23,7 @@ namespace Tests.XPack.MachineLearning.PostCalendarEvents
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values) 
+			foreach (var callUniqueValue in values)
 				PutCalendar(client, callUniqueValue.Value);
 		}
 

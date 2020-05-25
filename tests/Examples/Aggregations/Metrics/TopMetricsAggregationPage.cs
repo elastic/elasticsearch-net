@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -7,29 +11,29 @@ namespace Examples.Aggregations.Metrics
 	public class TopMetricsAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:12")]
-		public void Line12()
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:10")]
+		public void Line10()
 		{
-			// tag::d0321ef6bc9aae91b7fcfb76af085404[]
+			// tag::9d1fb129ac783355a20097effded1845[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-			// end::d0321ef6bc9aae91b7fcfb76af085404[]
+			// end::9d1fb129ac783355a20097effded1845[]
 
 			response0.MatchesExample(@"POST /test/_bulk?refresh
 			{""index"": {}}
-			{""s"": 1, ""v"": 3.1415}
+			{""s"": 1, ""m"": 3.1415}
 			{""index"": {}}
-			{""s"": 2, ""v"": 1.0}
+			{""s"": 2, ""m"": 1.0}
 			{""index"": {}}
-			{""s"": 3, ""v"": 2.71828}");
+			{""s"": 3, ""m"": 2.71828}");
 
 			response1.MatchesExample(@"POST /test/_search?filter_path=aggregations
 			{
 			  ""aggs"": {
 			    ""tm"": {
 			      ""top_metrics"": {
-			        ""metrics"": {""field"": ""v""},
+			        ""metrics"": {""field"": ""m""},
 			        ""sort"": {""s"": ""desc""}
 			      }
 			    }
@@ -38,31 +42,43 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:82")]
-		public void Line82()
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:74")]
+		public void Line74()
 		{
-			// tag::ba2af8de92d3d197d809e2b9a9580ea5[]
+			// tag::73882fb729426f186221b5ebbd8f571f[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-			// end::ba2af8de92d3d197d809e2b9a9580ea5[]
 
-			response0.MatchesExample(@"POST /test/_bulk?refresh
-			{""index"": {}}
-			{""s"": 1, ""v"": 3.1415, ""m"": 1.9}
-			{""index"": {}}
-			{""s"": 2, ""v"": 1.0, ""m"": 6.7}
-			{""index"": {}}
-			{""s"": 3, ""v"": 2.71828, ""m"": -12.2}");
+			var response2 = new SearchResponse<object>();
+			// end::73882fb729426f186221b5ebbd8f571f[]
 
-			response1.MatchesExample(@"POST /test/_search?filter_path=aggregations
+			response0.MatchesExample(@"PUT /test
+			{
+			  ""mappings"": {
+			    ""properties"": {
+			      ""d"": {""type"": ""date""}
+			    }
+			  }
+			}");
+
+			response1.MatchesExample(@"POST /test/_bulk?refresh
+			{""index"": {}}
+			{""s"": 1, ""m"": 3.1415, ""i"": 1, ""d"": ""2020-01-01T00:12:12Z""}
+			{""index"": {}}
+			{""s"": 2, ""m"": 1.0, ""i"": 6, ""d"": ""2020-01-02T00:12:12Z""}
+			{""index"": {}}
+			{""s"": 3, ""m"": 2.71828, ""i"": -12, ""d"": ""2019-12-31T00:12:12Z""}");
+
+			response2.MatchesExample(@"POST /test/_search?filter_path=aggregations
 			{
 			  ""aggs"": {
 			    ""tm"": {
 			      ""top_metrics"": {
 			        ""metrics"": [
-			          {""field"": ""v""},
-			          {""field"": ""m""}
+			          {""field"": ""m""},
+			          {""field"": ""i""},
+			          {""field"": ""d""}
 			        ],
 			        ""sort"": {""s"": ""desc""}
 			      }
@@ -72,31 +88,31 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:132")]
-		public void Line132()
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:133")]
+		public void Line133()
 		{
-			// tag::c4f657319298f90db11c954bb09403da[]
+			// tag::6013ed65d2058da5ce704b47a504b60a[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-			// end::c4f657319298f90db11c954bb09403da[]
+			// end::6013ed65d2058da5ce704b47a504b60a[]
 
 			response0.MatchesExample(@"POST /test/_bulk?refresh
 			{""index"": {}}
-			{""s"": 1, ""v"": 3.1415}
+			{""s"": 1, ""m"": 3.1415}
 			{""index"": {}}
-			{""s"": 2, ""v"": 1.0}
+			{""s"": 2, ""m"": 1.0}
 			{""index"": {}}
-			{""s"": 3, ""v"": 2.71828}");
+			{""s"": 3, ""m"": 2.71828}");
 
 			response1.MatchesExample(@"POST /test/_search?filter_path=aggregations
 			{
 			  ""aggs"": {
 			    ""tm"": {
 			      ""top_metrics"": {
-			        ""metrics"": {""field"": ""v""},
+			        ""metrics"": {""field"": ""m""},
 			        ""sort"": {""s"": ""desc""},
-			        ""size"": 2
+			        ""size"": 3
 			      }
 			    }
 			  }
@@ -104,8 +120,8 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:180")]
-		public void Line180()
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:183")]
+		public void Line183()
 		{
 			// tag::b63ce79ce4fa1bb9b99a789f4dcfef4e[]
 			var response0 = new SearchResponse<object>();
@@ -118,16 +134,16 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:200")]
-		public void Line200()
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:202")]
+		public void Line202()
 		{
-			// tag::ed8c8e5006923f771aa4db0936184ac7[]
+			// tag::5b3384992c398ea8a3064d2e08725e2b[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
 
 			var response2 = new SearchResponse<object>();
-			// end::ed8c8e5006923f771aa4db0936184ac7[]
+			// end::5b3384992c398ea8a3064d2e08725e2b[]
 
 			response0.MatchesExample(@"PUT /node
 			{
@@ -141,11 +157,11 @@ namespace Examples.Aggregations.Metrics
 
 			response1.MatchesExample(@"POST /node/_bulk?refresh
 			{""index"": {}}
-			{""ip"": ""192.168.0.1"", ""date"": ""2020-01-01T01:01:01"", ""v"": 1}
+			{""ip"": ""192.168.0.1"", ""date"": ""2020-01-01T01:01:01"", ""m"": 1}
 			{""index"": {}}
-			{""ip"": ""192.168.0.1"", ""date"": ""2020-01-01T02:01:01"", ""v"": 2}
+			{""ip"": ""192.168.0.1"", ""date"": ""2020-01-01T02:01:01"", ""m"": 2}
 			{""index"": {}}
-			{""ip"": ""192.168.0.2"", ""date"": ""2020-01-01T02:01:01"", ""v"": 3}");
+			{""ip"": ""192.168.0.2"", ""date"": ""2020-01-01T02:01:01"", ""m"": 3}");
 
 			response2.MatchesExample(@"POST /node/_search?filter_path=aggregations
 			{
@@ -157,7 +173,7 @@ namespace Examples.Aggregations.Metrics
 			      ""aggs"": {
 			        ""tm"": {
 			          ""top_metrics"": {
-			            ""metrics"": {""field"": ""v""},
+			            ""metrics"": {""field"": ""m""},
 			            ""sort"": {""date"": ""desc""}
 			          }
 			        }
@@ -168,12 +184,12 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:271")]
-		public void Line271()
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:273")]
+		public void Line273()
 		{
-			// tag::8b1cc4f69975d3fcdaf8ef6d7d71cc81[]
+			// tag::4af15c4f26ddefb9c350e7a246a66a15[]
 			var response0 = new SearchResponse<object>();
-			// end::8b1cc4f69975d3fcdaf8ef6d7d71cc81[]
+			// end::4af15c4f26ddefb9c350e7a246a66a15[]
 
 			response0.MatchesExample(@"POST /node/_search?filter_path=aggregations
 			{
@@ -181,12 +197,12 @@ namespace Examples.Aggregations.Metrics
 			    ""ip"": {
 			      ""terms"": {
 			        ""field"": ""ip"",
-			        ""order"": {""tm.v"": ""desc""}
+			        ""order"": {""tm.m"": ""desc""}
 			      },
 			      ""aggs"": {
 			        ""tm"": {
 			          ""top_metrics"": {
-			            ""metrics"": {""field"": ""v""},
+			            ""metrics"": {""field"": ""m""},
 			            ""sort"": {""date"": ""desc""}
 			          }
 			        }
@@ -197,29 +213,29 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:332")]
-		public void Line332()
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:334")]
+		public void Line334()
 		{
-			// tag::315cae9fbbb552bcdf84ae3af6689489[]
+			// tag::2d2f5ec97aa34ff7822a6a1ed08ef335[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-			// end::315cae9fbbb552bcdf84ae3af6689489[]
+			// end::2d2f5ec97aa34ff7822a6a1ed08ef335[]
 
 			response0.MatchesExample(@"POST /test/_bulk?refresh
 			{""index"": {""_index"": ""test1""}}
-			{""s"": 1, ""v"": 3.1415}
+			{""s"": 1, ""m"": 3.1415}
 			{""index"": {""_index"": ""test1""}}
-			{""s"": 2, ""v"": 1}
+			{""s"": 2, ""m"": 1}
 			{""index"": {""_index"": ""test2""}}
-			{""s"": 3.1, ""v"": 2.71828}");
+			{""s"": 3.1, ""m"": 2.71828}");
 
 			response1.MatchesExample(@"POST /test*/_search?filter_path=aggregations
 			{
 			  ""aggs"": {
 			    ""tm"": {
 			      ""top_metrics"": {
-			        ""metrics"": {""field"": ""v""},
+			        ""metrics"": {""field"": ""m""},
 			        ""sort"": {""s"": ""asc""}
 			      }
 			    }
@@ -228,19 +244,19 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:372")]
-		public void Line372()
+		[Description("aggregations/metrics/top-metrics-aggregation.asciidoc:374")]
+		public void Line374()
 		{
-			// tag::035805d6f35a2ef517b9cd9ae037da05[]
+			// tag::56da9c55774f4c2e8eadde0579bdc60c[]
 			var response0 = new SearchResponse<object>();
-			// end::035805d6f35a2ef517b9cd9ae037da05[]
+			// end::56da9c55774f4c2e8eadde0579bdc60c[]
 
 			response0.MatchesExample(@"POST /test*/_search?filter_path=aggregations
 			{
 			  ""aggs"": {
 			    ""tm"": {
 			      ""top_metrics"": {
-			        ""metrics"": {""field"": ""v""},
+			        ""metrics"": {""field"": ""m""},
 			        ""sort"": {""s"": {""order"": ""asc"", ""numeric_type"": ""double""}}
 			      }
 			    }

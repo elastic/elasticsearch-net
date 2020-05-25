@@ -1,8 +1,12 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 ﻿using System;
 using System.IO;
-using Elastic.Managed.Ephemeral;
-using Elastic.Stack.Artifacts.Products;
-using Elastic.Xunit;
+using Elastic.Elasticsearch.Ephemeral;
+using Elastic.Elasticsearch.Xunit;
+using Elastic.Stack.ArtifactsApi.Products;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Extensions;
@@ -18,9 +22,10 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 		public XPackClusterConfiguration(ClusterFeatures features) : base(ClusterFeatures.XPack | features, 1, ElasticsearchPlugin.IngestAttachment)
 		{
+			var isSnapshot = !string.IsNullOrEmpty(Version.PreRelease) && Version.PreRelease.ToLower().Contains("snapshot");
 			// Get license file path from environment variable
 			var licenseFilePath = Environment.GetEnvironmentVariable("ES_LICENSE_FILE");
-			if (!string.IsNullOrEmpty(licenseFilePath) && File.Exists(licenseFilePath))
+			if (!isSnapshot && !string.IsNullOrEmpty(licenseFilePath) && File.Exists(licenseFilePath))
 			{
 				var licenseContents = File.ReadAllText(licenseFilePath);
 				XPackLicenseJson = licenseContents;

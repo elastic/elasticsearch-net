@@ -1,9 +1,10 @@
-using System;
-using System.Globalization;
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Examples.Models;
 using Nest;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 
@@ -81,7 +82,6 @@ namespace Examples.Root
 					var asc = body["sort"][0]["account_number"];
 					body["sort"][0]["account_number"] = new JObject { { "order", asc } };
 				});
-				return e;
 			});
 		}
 
@@ -117,7 +117,6 @@ namespace Examples.Root
 					var sort = body["sort"][0]["account_number"].Value<string>();
 					body["sort"][0]["account_number"] = new JObject { { "order", sort } };
 				});
-				return e;
 			});
 		}
 
@@ -147,7 +146,6 @@ namespace Examples.Root
 				{
 					body["query"]["match"]["address"] = new JObject { { "query", "mill lane" } };
 				});
-				return e;
 			});
 		}
 
@@ -177,7 +175,6 @@ namespace Examples.Root
 				{
 					body["query"]["match_phrase"]["address"] = new JObject { { "query", "mill lane" } };
 				});
-				return e;
 			});
 		}
 
@@ -227,7 +224,6 @@ namespace Examples.Root
 					body["query"]["bool"]["must"][0]["match"]["age"] = new JObject { { "query", "40" } };
 					body["query"]["bool"]["must_not"][0]["match"]["state"] = new JObject { { "query", "ID" } };
 				});
-				return e;
 			});
 		}
 
@@ -282,7 +278,6 @@ namespace Examples.Root
 					filter["range"]["balance"]["lte"] = 30000d;
 					body["query"]["bool"]["filter"] = new JArray(filter);
 				});
-				return e;
 			});
 		}
 
@@ -408,7 +403,6 @@ namespace Examples.Root
 					var order = body["aggs"]["group_by_state"]["terms"]["order"];
 					body["aggs"]["group_by_state"]["terms"]["order"] = new JArray(order);
 				});
-				return e;
 			});
 		}
 	}

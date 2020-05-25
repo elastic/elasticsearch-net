@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -7,8 +11,8 @@ namespace Examples.Mapping.Types
 	public class HistogramPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("mapping/types/histogram.asciidoc:74")]
-		public void Line74()
+		[Description("mapping/types/histogram.asciidoc:73")]
+		public void Line73()
 		{
 			// tag::7d6b1797b1178e96d287831a94bb9658[]
 			var response0 = new SearchResponse<object>();
@@ -30,8 +34,8 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("mapping/types/histogram.asciidoc:94")]
-		public void Line94()
+		[Description("mapping/types/histogram.asciidoc:93")]
+		public void Line93()
 		{
 			// tag::09774dd1a8613672844caadb2bc8dc1e[]
 			var response0 = new SearchResponse<object>();

@@ -1,3 +1,7 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 module Tests.YamlRunner.TestsExporter
 
 open System
@@ -12,30 +16,30 @@ type FileResults = SectionResults list
 type FolderResults = (YamlTestDocument * FileResults) list
 type RunResults = (YamlTestFolder * FolderResults) list
 
-let XElement(name, content: 'a list) = new XElement(XName.Get name, Seq.toArray content)
-let XAttribute(name, value) = new XAttribute(XName.Get name, value)
+let XElement(name, content: 'a list) = XElement(XName.Get name, Seq.toArray content)
+let XAttribute(name, value) = XAttribute(XName.Get name, value)
 
 let mapExecutionResult result =
     match result with
-    | ExecutionResult.NotSkipped c 
-    | ExecutionResult.Succeeded c -> None
+    | ExecutionResult.NotSkipped _ 
+    | ExecutionResult.Succeeded _ -> None
     | ExecutionResult.Failed f ->
         let c = f.Context
         let message =
             let m = sprintf "%s: %s %s" result.Name (c.Operation.Log()) (f.Log())
             XAttribute("message", m)
         match f with
-        | SeenException (c, e) -> 
+        | SeenException (_, e) -> 
             let error = XElement("error", [message])
             error.Value <- e.ToString()
             Some error
-        | ValidationFailure (c, f) -> 
+        | ValidationFailure (c, _) -> 
             let failure = XElement("failure", [message])
             match c.Stashes.ResponseOption with
             | Some r -> failure.Value <- r.DebugInformation
             | None -> failure.Value <- "Could not access response!"
             Some failure
-    | ExecutionResult.Skipped (c, reason) ->
+    | ExecutionResult.Skipped (_, reason) ->
         Some <| XElement("skipped", [XAttribute("message", reason)])
         
 let private timeOf result =
@@ -43,7 +47,7 @@ let private timeOf result =
     | ExecutionResult.Succeeded c -> !c.Elapsed
     | ExecutionResult.NotSkipped c -> !c.Elapsed
     | ExecutionResult.Failed f -> !f.Context.Elapsed
-    | ExecutionResult.Skipped (c, reason) -> !c.Elapsed
+    | ExecutionResult.Skipped (c, _reason) -> !c.Elapsed
 
 let testCasesSection document (results: FileResults) =
     results
@@ -107,7 +111,7 @@ let testSuites (results: RunResults) =
         let testCases = testCases documents
         let suite = XElement("testsuite", [name])
         suite.Add(testCases)
-        let summary = countTests suite
+        let _summary = countTests suite
         suite
     )
 

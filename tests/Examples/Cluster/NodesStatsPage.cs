@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -8,8 +12,8 @@ namespace Examples.Cluster
 	{
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/nodes-stats.asciidoc:1363")]
-		public void Line1363()
+		[Description("cluster/nodes-stats.asciidoc:2140")]
+		public void Line2140()
 		{
 			// tag::5457c94f0039c6b95c7f9f305d0c6b58[]
 			var response0 = new SearchResponse<object>();
@@ -39,8 +43,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/nodes-stats.asciidoc:1381")]
-		public void Line1381()
+		[Description("cluster/nodes-stats.asciidoc:2158")]
+		public void Line2158()
 		{
 			// tag::150b5fee5678bf8cdf0932da73eada80[]
 			var response0 = new SearchResponse<object>();
@@ -78,8 +82,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/nodes-stats.asciidoc:1399")]
-		public void Line1399()
+		[Description("cluster/nodes-stats.asciidoc:2176")]
+		public void Line2176()
 		{
 			// tag::bd68666ca2e0be12f7624016317a62bc[]
 			var response0 = new SearchResponse<object>();
@@ -101,8 +105,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/nodes-stats.asciidoc:1415")]
-		public void Line1415()
+		[Description("cluster/nodes-stats.asciidoc:2192")]
+		public void Line2192()
 		{
 			// tag::09769561f082b50558fb7d8707719963[]
 			var response0 = new SearchResponse<object>();
@@ -112,8 +116,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/nodes-stats.asciidoc:1423")]
-		public void Line1423()
+		[Description("cluster/nodes-stats.asciidoc:2200")]
+		public void Line2200()
 		{
 			// tag::ef9c29759459904fef162acd223462c4[]
 			var response0 = new SearchResponse<object>();
@@ -123,8 +127,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/nodes-stats.asciidoc:1431")]
-		public void Line1431()
+		[Description("cluster/nodes-stats.asciidoc:2208")]
+		public void Line2208()
 		{
 			// tag::f160561efab38e40c2feebf5a2542ab5[]
 			var response0 = new SearchResponse<object>();

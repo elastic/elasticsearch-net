@@ -1,3 +1,7 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 module Tests.YamlRunner.TestSuiteBootstrap
 
 open System
@@ -17,7 +21,10 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
     
     match suite with
     | Oss ->
-        let deleteAll = client.Indices.Delete<DynamicResponse>("*")
+        let deleteAll =
+            let dp = DeleteIndexRequestParameters()
+            dp.SetQueryString("expand_wildcards", "open,closed,hidden")
+            client.Indices.Delete<DynamicResponse>("*", dp)
         let templates =
             client.Cat.Templates<StringResponse>("*", CatTemplatesRequestParameters(Headers=["name"].ToArray()))
                 .Body.Split("\n")
@@ -25,7 +32,20 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
                 //TODO template does not accept comma separated list but is documented as such
                 |> Seq.map(fun template -> client.Indices.DeleteTemplateForAll<DynamicResponse>(template))
                 |> Seq.toList
-        firstFailure <| [deleteAll] @ templates
+                
+        let snapshots =
+            client.Cat.Snapshots<StringResponse>(CatSnapshotsRequestParameters(Headers=["id,repository"].ToArray()))
+                .Body.Split("\n")
+                |> Seq.map(fun line -> line.Split " ")
+                |> Seq.filter(fun tokens -> tokens.Length = 2)
+                |> Seq.map(fun tokens -> (tokens.[0].Trim(), tokens.[1].Trim()))
+                |> Seq.filter(fun (id, repos) -> not(String.IsNullOrWhiteSpace(id)) && not(String.IsNullOrWhiteSpace(repos)))
+                //TODO template does not accept comma separated list but is documented as such
+                |> Seq.map(fun (id, repos) -> client.Snapshot.Delete<DynamicResponse>(repos, id))
+                |> Seq.toList
+                
+        let deleteRepositories = client.Snapshot.DeleteRepository<DynamicResponse>("*")
+        firstFailure <| [deleteAll] @ templates @ snapshots @ [deleteRepositories]
         
     | XPack ->
         firstFailure <| seq {

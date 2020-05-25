@@ -1,4 +1,8 @@
-﻿namespace Scripts
+﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+namespace Scripts
 
 open System
 open ProcNet
@@ -12,8 +16,8 @@ module Tooling =
     
     type NoopWriter () =
         interface IConsoleOutWriter with
-            member self.Write (e: Exception) = ignore()
-            member self.Write (out: ConsoleOut) = ignore()
+            member self.Write (_: Exception) = ignore()
+            member self.Write (_: ConsoleOut) = ignore()
     
     let private defaultConsoleWriter = Some <| (ConsoleOutColorWriter() :> IConsoleOutWriter)
     

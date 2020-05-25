@@ -1,6 +1,8 @@
-using System;
-using System.Collections.Generic;
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Examples.Models;
 using Nest;
@@ -61,7 +63,6 @@ namespace Examples.Mapping.Types
 			{
 				// query string params always need a value
 				e.Uri.Query = e.Uri.Query.Replace("refresh", "refresh=true");
-				return e;
 			});
 		}
 
@@ -133,7 +134,6 @@ namespace Examples.Mapping.Types
 					var value = body["query"]["match_phrase_prefix"]["my_field"];
 					body["query"]["match_phrase_prefix"]["my_field"] = new JObject { { "query", value } };
 				});
-				return e;
 			});
 		}
 	}

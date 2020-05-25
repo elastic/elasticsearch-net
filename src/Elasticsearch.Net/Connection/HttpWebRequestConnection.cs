@@ -1,3 +1,7 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -219,6 +223,7 @@ namespace Elasticsearch.Net
 		{
 			requestServicePoint.UseNagleAlgorithm = false;
 			requestServicePoint.Expect100Continue = false;
+			requestServicePoint.ConnectionLeaseTimeout = (int)requestData.DnsRefreshTimeout.TotalMilliseconds;
 			if (requestData.ConnectionSettings.ConnectionLimit > 0)
 				requestServicePoint.ConnectionLimit = requestData.ConnectionSettings.ConnectionLimit;
 			//looking at http://referencesource.microsoft.com/#System/net/System/Net/ServicePoint.cs

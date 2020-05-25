@@ -1,4 +1,8 @@
-using Elastic.Xunit.XunitPlumbing;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 
@@ -7,12 +11,12 @@ namespace Examples.Modules
 	public class RemoteClustersPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("modules/remote-clusters.asciidoc:109")]
-		public void Line109()
+		[Description("modules/remote-clusters.asciidoc:133")]
+		public void Line133()
 		{
-			// tag::d4ce5a9672f85094e6d833d08debc018[]
+			// tag::318d8096ad47c1c939776c2ce12758f9[]
 			var response0 = new SearchResponse<object>();
-			// end::d4ce5a9672f85094e6d833d08debc018[]
+			// end::318d8096ad47c1c939776c2ce12758f9[]
 
 			response0.MatchesExample(@"PUT _cluster/settings
 			{
@@ -26,6 +30,7 @@ namespace Examples.Modules
 			          ""transport.ping_schedule"": ""30s""
 			        },
 			        ""cluster_two"": {
+			          ""mode"": ""sniff"",
 			          ""seeds"": [
 			            ""127.0.0.1:9301""
 			          ],
@@ -33,9 +38,8 @@ namespace Examples.Modules
 			          ""skip_unavailable"": true
 			        },
 			        ""cluster_three"": {
-			          ""seeds"": [
-			            ""127.0.0.1:9302""
-			          ]
+			          ""mode"": ""proxy"",
+			          ""proxy_address"": ""127.0.0.1:9302""
 			        }
 			      }
 			    }
@@ -44,12 +48,12 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("modules/remote-clusters.asciidoc:145")]
-		public void Line145()
+		[Description("modules/remote-clusters.asciidoc:170")]
+		public void Line170()
 		{
-			// tag::328b7b4d0de6fac3a91205251de6e9b5[]
+			// tag::0b1aad9e990ae831f392f816dfbd4528[]
 			var response0 = new SearchResponse<object>();
-			// end::328b7b4d0de6fac3a91205251de6e9b5[]
+			// end::0b1aad9e990ae831f392f816dfbd4528[]
 
 			response0.MatchesExample(@"PUT _cluster/settings
 			{
@@ -63,10 +67,16 @@ namespace Examples.Modules
 			          ""transport.ping_schedule"": ""60s""
 			        },
 			        ""cluster_two"": {
+			          ""mode"": ""sniff"",
 			          ""seeds"": [
 			            ""127.0.0.1:9301""
 			          ],
 			          ""transport.compress"": false
+			        },
+			        ""cluster_three"": {
+			          ""mode"": ""proxy"",
+			          ""proxy_address"": ""127.0.0.1:9302"",
+			          ""transport.compress"": true
 			        }
 			      }
 			    }
@@ -75,19 +85,20 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("modules/remote-clusters.asciidoc:177")]
-		public void Line177()
+		[Description("modules/remote-clusters.asciidoc:208")]
+		public void Line208()
 		{
-			// tag::2a0d451f9e13aca39467883b16270cc2[]
+			// tag::466bb2bc027f33a611e32fd7a9540eef[]
 			var response0 = new SearchResponse<object>();
-			// end::2a0d451f9e13aca39467883b16270cc2[]
+			// end::466bb2bc027f33a611e32fd7a9540eef[]
 
 			response0.MatchesExample(@"PUT _cluster/settings
 			{
 			  ""persistent"": {
 			    ""cluster"": {
 			      ""remote"": {
-			        ""cluster_two"": { \<1>
+			        ""cluster_two"": { <1>
+			          ""mode"": null,
 			          ""seeds"": null,
 			          ""skip_unavailable"": null,
 			          ""transport"": {
