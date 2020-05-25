@@ -1,27 +1,21 @@
 {
-  "indices.get_index_template":{
+  "indices.exists_index_template":{
     "documentation":{
       "url":"https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html",
-      "description":"Returns an index template."
+      "description":"Returns information about whether a particular index template exists."
     },
     "stability":"experimental",
     "url":{
       "paths":[
         {
-          "path":"/_index_template",
-          "methods":[
-            "GET"
-          ]
-        },
-        {
           "path":"/_index_template/{name}",
           "methods":[
-            "GET"
+            "HEAD"
           ],
           "parts":{
             "name":{
-              "type":"list",
-              "description":"The comma separated names of the index templates"
+              "type":"string",
+              "description":"The name of the template"
             }
           }
         }

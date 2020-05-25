@@ -1504,6 +1504,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 
 		///<summary>The multiplier in which to display values</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.8.0, reason: Setting this value has no effect and will be removed from the specification.")]
 		public Size? Size
 		{
 			get => Q<Size? >("size");

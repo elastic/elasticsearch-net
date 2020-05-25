@@ -43,7 +43,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for DeleteComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+	///<summary>Request options for DeleteComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 	public class DeleteComponentTemplateRequestParameters : RequestParameters<DeleteComponentTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -62,7 +62,19 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for ExistsComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+	///<summary>Request options for DeleteVotingConfigExclusions <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</para></summary>
+	public class DeleteVotingConfigExclusionsRequestParameters : RequestParameters<DeleteVotingConfigExclusionsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>Specifies whether to wait for all excluded nodes to be removed from the cluster before clearing the voting configuration exclusions list.</summary>
+		public bool? WaitForRemoval
+		{
+			get => Q<bool? >("wait_for_removal");
+			set => Q("wait_for_removal", value);
+		}
+	}
+
+	///<summary>Request options for ExistsComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 	public class ExistsComponentTemplateRequestParameters : RequestParameters<ExistsComponentTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
@@ -81,7 +93,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for GetComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+	///<summary>Request options for GetComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 	public class GetComponentTemplateRequestParameters : RequestParameters<GetComponentTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -234,7 +246,39 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for PutComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-templates.html</para></summary>
+	///<summary>Request options for PostVotingConfigExclusions <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</para></summary>
+	public class PostVotingConfigExclusionsRequestParameters : RequestParameters<PostVotingConfigExclusionsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>
+		/// A comma-separated list of the persistent ids of the nodes to exclude from the voting configuration. If specified, you may not also specify
+		/// ?node_names.
+		///</summary>
+		public string NodeIds
+		{
+			get => Q<string>("node_ids");
+			set => Q("node_ids", value);
+		}
+
+		///<summary>
+		/// A comma-separated list of the names of the nodes to exclude from the voting configuration. If specified, you may not also specify
+		/// ?node_ids.
+		///</summary>
+		public string NodeNames
+		{
+			get => Q<string>("node_names");
+			set => Q("node_names", value);
+		}
+
+		///<summary>Explicit operation timeout</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
+	}
+
+	///<summary>Request options for PutComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 	public class PutComponentTemplateRequestParameters : RequestParameters<PutComponentTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;

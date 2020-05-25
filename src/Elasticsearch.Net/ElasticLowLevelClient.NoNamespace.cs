@@ -39,6 +39,7 @@ using Elasticsearch.Net.Specification.MachineLearningApi;
 using Elasticsearch.Net.Specification.MigrationApi;
 using Elasticsearch.Net.Specification.NodesApi;
 using Elasticsearch.Net.Specification.RollupApi;
+using Elasticsearch.Net.Specification.SearchableSnapshotsApi;
 using Elasticsearch.Net.Specification.SecurityApi;
 using Elasticsearch.Net.Specification.SnapshotApi;
 using Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi;
@@ -154,6 +155,12 @@ namespace Elasticsearch.Net
 			private set;
 		}
 
+		public LowLevelSearchableSnapshotsNamespace SearchableSnapshots
+		{
+			get;
+			private set;
+		}
+
 		public LowLevelSecurityNamespace Security
 		{
 			get;
@@ -220,6 +227,7 @@ namespace Elasticsearch.Net
 			Migration = new LowLevelMigrationNamespace(this);
 			Nodes = new LowLevelNodesNamespace(this);
 			Rollup = new LowLevelRollupNamespace(this);
+			SearchableSnapshots = new LowLevelSearchableSnapshotsNamespace(this);
 			Security = new LowLevelSecurityNamespace(this);
 			Snapshot = new LowLevelSnapshotNamespace(this);
 			SnapshotLifecycleManagement = new LowLevelSnapshotLifecycleManagementNamespace(this);
