@@ -10,7 +10,7 @@ using Nest;
 using Tests.Framework;
 using System.Collections.Generic;
 using System.Reflection;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Tests.CodeStandards.Serialization

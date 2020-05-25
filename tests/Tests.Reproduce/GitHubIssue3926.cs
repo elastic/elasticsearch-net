@@ -4,7 +4,7 @@
 
 using System;
 using System.Text;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Newtonsoft.Json;
 using Tests.Core.Client;

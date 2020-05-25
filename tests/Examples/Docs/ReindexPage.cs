@@ -4,7 +4,7 @@
 
 using System;
 using System.Collections.Generic;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Examples.Models;
 using Newtonsoft.Json.Linq;
