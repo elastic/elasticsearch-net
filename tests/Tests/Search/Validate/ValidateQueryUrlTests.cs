@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 ﻿using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
@@ -58,7 +58,7 @@ namespace Tests.Search.Validate
 					.FluentAsync(c => c.Indices.ValidateQueryAsync<Project>(s => s.AllIndices()))
 					.RequestAsync(c => c.Indices.ValidateQueryAsync(new ValidateQueryRequest<Project>(Nest.Indices.All)))
 				;
-			
+
 			await POST("/_validate/query")
 					.Request(c => c.Indices.ValidateQuery(new ValidateQueryRequest()))
 					.RequestAsync(c => c.Indices.ValidateQueryAsync(new ValidateQueryRequest()))

@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 ﻿using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework.EndpointTests;
 using static Tests.Framework.EndpointTests.UrlTester;
@@ -19,7 +19,7 @@ namespace Tests.Indices.StatusManagement.SyncedFlush
 					.Request(c => c.Indices.SyncedFlush(new SyncedFlushRequest()))
 					.RequestAsync(c => c.Indices.SyncedFlushAsync(new SyncedFlushRequest()))
 				;
-			
+
 			await POST($"/_all/_flush/synced")
 					.Fluent(c => c.Indices.SyncedFlush(All))
 					.Request(c => c.Indices.SyncedFlush(new SyncedFlushRequest(All)))
