@@ -24,7 +24,7 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.SnapshotApi
 {
-	///<summary>Request options for CleanupRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request options for CleanupRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html</para></summary>
 	public class CleanupRepositoryRequestParameters : RequestParameters<CleanupRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;

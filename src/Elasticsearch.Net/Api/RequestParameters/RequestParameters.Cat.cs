@@ -1455,13 +1455,6 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set => Q("master_timeout", value);
 		}
 
-		///<summary>The multiplier in which to display values</summary>
-		public Size? Size
-		{
-			get => Q<Size? >("size");
-			set => Q("size", value);
-		}
-
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns
 		{

@@ -192,13 +192,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			set => Q("master_timeout", value);
 		}
 
-		///<summary>favor V2 templates instead of V1 templates during index creation</summary>
-		public bool? PreferV2Templates
-		{
-			get => Q<bool? >("prefer_v2_templates");
-			set => Q("prefer_v2_templates", value);
-		}
-
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout
 		{
@@ -749,8 +742,8 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
-	///<summary>Request options for GetDataStreams <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
-	public class GetDataStreamsRequestParameters : RequestParameters<GetDataStreamsRequestParameters>
+	///<summary>Request options for GetDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class GetDataStreamRequestParameters : RequestParameters<GetDataStreamRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
@@ -1032,6 +1025,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		public override bool SupportsBody => true;
+		///<summary>User defined reason for creating/updating the index template</summary>
+		public string Cause
+		{
+			get => Q<string>("cause");
+			set => Q("cause", value);
+		}
+
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool? Create
 		{
@@ -1044,13 +1044,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		{
 			get => Q<TimeSpan>("master_timeout");
 			set => Q("master_timeout", value);
-		}
-
-		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
-		public long? Order
-		{
-			get => Q<long? >("order");
-			set => Q("order", value);
 		}
 	}
 
@@ -1275,13 +1268,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			set => Q("master_timeout", value);
 		}
 
-		///<summary>favor V2 templates instead of V1 templates during automatic index creation</summary>
-		public bool? PreferV2Templates
-		{
-			get => Q<bool? >("prefer_v2_templates");
-			set => Q("prefer_v2_templates", value);
-		}
-
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout
 		{
@@ -1395,6 +1381,60 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		{
 			get => Q<string>("wait_for_active_shards");
 			set => Q("wait_for_active_shards", value);
+		}
+	}
+
+	///<summary>Request options for SimulateTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public class SimulateIndexTemplateRequestParameters : RequestParameters<SimulateIndexTemplateRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+		///<summary>User defined reason for dry-run creating the new template for simulation purposes</summary>
+		public string Cause
+		{
+			get => Q<string>("cause");
+			set => Q("cause", value);
+		}
+
+		///<summary>Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one</summary>
+		public bool? Create
+		{
+			get => Q<bool? >("create");
+			set => Q("create", value);
+		}
+
+		///<summary>Specify timeout for connection to master</summary>
+		public TimeSpan MasterTimeout
+		{
+			get => Q<TimeSpan>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+	}
+
+	///<summary>Request options for SimulateTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public class SimulateTemplateRequestParameters : RequestParameters<SimulateTemplateRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+		///<summary>User defined reason for dry-run creating the new template for simulation purposes</summary>
+		public string Cause
+		{
+			get => Q<string>("cause");
+			set => Q("cause", value);
+		}
+
+		///<summary>Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one</summary>
+		public bool? Create
+		{
+			get => Q<bool? >("create");
+			set => Q("create", value);
+		}
+
+		///<summary>Specify timeout for connection to master</summary>
+		public TimeSpan MasterTimeout
+		{
+			get => Q<TimeSpan>("master_timeout");
+			set => Q("master_timeout", value);
 		}
 	}
 

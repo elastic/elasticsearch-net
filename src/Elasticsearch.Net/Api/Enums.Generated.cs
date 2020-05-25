@@ -290,23 +290,6 @@ namespace Elasticsearch.Net
 	}
 
 	[StringEnum]
-	public enum Size
-	{
-		[EnumMember(Value = "")]
-		Raw,
-		[EnumMember(Value = "k")]
-		K,
-		[EnumMember(Value = "m")]
-		M,
-		[EnumMember(Value = "g")]
-		G,
-		[EnumMember(Value = "t")]
-		T,
-		[EnumMember(Value = "p")]
-		P
-	}
-
-	[StringEnum]
 	public enum Level
 	{
 		[EnumMember(Value = "cluster")]
@@ -460,7 +443,6 @@ namespace Elasticsearch.Net
 			EnumStringResolvers.TryAdd(typeof(Refresh), (e) => GetStringValue((Refresh)e));
 			EnumStringResolvers.TryAdd(typeof(Bytes), (e) => GetStringValue((Bytes)e));
 			EnumStringResolvers.TryAdd(typeof(Health), (e) => GetStringValue((Health)e));
-			EnumStringResolvers.TryAdd(typeof(Size), (e) => GetStringValue((Size)e));
 			EnumStringResolvers.TryAdd(typeof(Level), (e) => GetStringValue((Level)e));
 			EnumStringResolvers.TryAdd(typeof(WaitForEvents), (e) => GetStringValue((WaitForEvents)e));
 			EnumStringResolvers.TryAdd(typeof(WaitForStatus), (e) => GetStringValue((WaitForStatus)e));
@@ -784,27 +766,6 @@ namespace Elasticsearch.Net
 			}
 
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Health'");
-		}
-
-		public static string GetStringValue(this Size enumValue)
-		{
-			switch (enumValue)
-			{
-				case Size.Raw:
-					return "";
-				case Size.K:
-					return "k";
-				case Size.M:
-					return "m";
-				case Size.G:
-					return "g";
-				case Size.T:
-					return "t";
-				case Size.P:
-					return "p";
-			}
-
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Size'");
 		}
 
 		public static string GetStringValue(this Level enumValue)
