@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 ﻿using System.Threading.Tasks;
-using Elastic.Managed.Ephemeral;
+using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework.EndpointTests;
