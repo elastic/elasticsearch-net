@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
@@ -20,7 +20,7 @@ namespace Tests.XPack.AsyncSearch
 		private const string GetStep = nameof(GetStep);
 		private const string DeleteStep = nameof(DeleteStep);
 
-		public AsyncSearchTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, testOnlyOne: false)
+		public AsyncSearchTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, testOnlyOne: true)
 		{
 			{SubmitStep, u =>
 				u.Calls<AsyncSearchSubmitDescriptor<Project>, AsyncSearchSubmitRequest<Project>, IAsyncSearchSubmitRequest, AsyncSearchSubmitResponse<Project>>(
