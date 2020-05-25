@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 ﻿using System;
-using Elastic.Managed.Configuration;
+ using Elastic.Elasticsearch.Managed.Configuration;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {

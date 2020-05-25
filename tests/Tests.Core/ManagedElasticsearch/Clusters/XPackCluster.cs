@@ -4,9 +4,9 @@
 
 ﻿using System;
 using System.IO;
-using Elastic.Managed.Ephemeral;
-using Elastic.Stack.Artifacts.Products;
-using Elastic.Xunit;
+using Elastic.Elasticsearch.Ephemeral;
+using Elastic.Elasticsearch.Xunit;
+using Elastic.Stack.ArtifactsApi.Products;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Extensions;
