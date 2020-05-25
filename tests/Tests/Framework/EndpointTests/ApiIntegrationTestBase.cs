@@ -1,9 +1,13 @@
-﻿using System;
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+ using System;
 using System.Diagnostics;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
-using Elastic.Managed.Ephemeral;
-using Elastic.Xunit.XunitPlumbing;
+ using Elastic.Elasticsearch.Ephemeral;
+ using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -48,11 +52,8 @@ namespace Tests.Framework.EndpointTests
 
 		[I] public virtual async Task ReturnsExpectedResponse() => await AssertOnAllResponses(ExpectResponse);
 
-		protected override Task AssertOnAllResponses(Action<TResponse> assert)
-		{
-			if (!ExpectIsValid) return base.AssertOnAllResponses(assert);
-
-			return base.AssertOnAllResponses((r) =>
+		protected override Task AssertOnAllResponses(Action<TResponse> assert) =>
+			base.AssertOnAllResponses((r) =>
 			{
 				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
 					&& !(r.ApiCall.OriginalException is ElasticsearchClientException))
@@ -71,7 +72,6 @@ namespace Tests.Framework.EndpointTests
 					throw new ResponseAssertionException(ex.SourceException, r).Demystify();
 				}
 			});
-		}
 	}
 
 	public class ResponseAssertionException : Exception
