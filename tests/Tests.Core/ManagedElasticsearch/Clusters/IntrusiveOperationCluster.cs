@@ -2,7 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using static Elastic.Stack.Artifacts.Products.ElasticsearchPlugin;
+using static Elastic.Stack.ArtifactsApi.Products.ElasticsearchPlugin;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {
