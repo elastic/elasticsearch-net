@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
-using Elastic.Managed.Ephemeral;
-using Elastic.Xunit;
-using Elasticsearch.Net;
+ using Elastic.Elasticsearch.Ephemeral;
+ using Elastic.Elasticsearch.Xunit;
+ using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Client.Settings;
 

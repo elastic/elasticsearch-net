@@ -1,5 +1,5 @@
 ﻿using System;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Tests.Core.Client;
 
 namespace Tests.Core.Xunit

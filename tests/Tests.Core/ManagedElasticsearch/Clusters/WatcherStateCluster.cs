@@ -1,5 +1,5 @@
 ﻿using System;
-using Elastic.Managed.Configuration;
+ using Elastic.Elasticsearch.Managed.Configuration;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {
