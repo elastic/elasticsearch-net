@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Elastic.Managed.Ephemeral;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Ephemeral;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework.EndpointTests;
 using static Tests.Framework.EndpointTests.UrlTester;
