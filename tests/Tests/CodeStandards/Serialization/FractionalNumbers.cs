@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -21,7 +21,7 @@ namespace Tests.CodeStandards.Serialization
 			var client = new ElasticClient(settings);
 			_serializer = client.RequestResponseSerializer;
 		}
-		
+
 		[U]
 		public void SerializeDouble()
 		{

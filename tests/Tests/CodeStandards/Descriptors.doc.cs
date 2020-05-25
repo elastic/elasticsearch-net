@@ -9,7 +9,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using System.Reflection;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 
 namespace Tests.CodeStandards
 {

@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 ﻿using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework.EndpointTests;
 using static Nest.Indices;
@@ -18,7 +18,7 @@ namespace Tests.Indices.Monitoring.IndicesSegments
 					.Request(c => c.Indices.Segments(new SegmentsRequest()))
 					.RequestAsync(c => c.Indices.SegmentsAsync(new SegmentsRequest()))
 				;
-			
+
 			await UrlTester.GET($"/_all/_segments")
 					.Fluent(c => c.Indices.Segments(All))
 					.Request(c => c.Indices.Segments(new SegmentsRequest(All)))

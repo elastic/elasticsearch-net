@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 ﻿using System;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Extensions;
@@ -18,7 +18,7 @@ namespace Tests.XPack.MachineLearning.DeleteCalendar
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values) 
+			foreach (var callUniqueValue in values)
 				PutCalendar(client, callUniqueValue.Value);
 		}
 

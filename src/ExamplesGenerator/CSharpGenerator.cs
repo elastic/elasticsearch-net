@@ -120,7 +120,7 @@ namespace ExamplesGenerator
 		{
 			var compilationUnit = CompilationUnit()
 				.AddUsings(
-					UsingDirective(Name("Elastic.Xunit.XunitPlumbing")),
+					UsingDirective(Name("Elastic.Elasticsearch.Xunit.XunitPlumbing")),
 					UsingDirective(Name("System.ComponentModel")),
 					UsingDirective(Name("Nest"))
 				);
