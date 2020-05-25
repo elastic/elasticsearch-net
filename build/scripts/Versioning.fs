@@ -196,7 +196,8 @@ module Versioning =
                 let fullPath = Path.GetFullPath d
                 
                 let command = [ sprintf "previous-nuget|%s|%s|%s" nugetId (version.Full.ToString()) tfm;
-                                sprintf "directory|%s" fullPath ]
+                                sprintf "directory|%s" fullPath
+                                "-a"; "-f"; "github-comment";]
                 
                 ReposTooling.Differ command
             )
