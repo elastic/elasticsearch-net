@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using Elastic.Xunit;
+using Elastic.Elasticsearch.Xunit;
 using Tests.Configuration;
 
 namespace Tests.Core.Xunit

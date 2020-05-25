@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 ﻿using System;
-using Elastic.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 
 namespace Tests.Core.Xunit
 {

@@ -14,7 +14,7 @@ using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Exporters;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
-using Elastic.BenchmarkDotNetExporter;
+using Elastic.CommonSchema.BenchmarkDotNetExporter;
 
 namespace Tests.Benchmarking
 {
