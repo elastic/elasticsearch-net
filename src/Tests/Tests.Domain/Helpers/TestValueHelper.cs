@@ -1,5 +1,5 @@
 ﻿using System;
-using Elastic.Stack.Artifacts;
+using Elastic.Stack.ArtifactsApi;
 using Tests.Configuration;
 
 namespace Tests.Domain.Helpers
