@@ -96,7 +96,7 @@ jobs:
       es77:
         esVersion: '7.7.0'
       es78:
-        esVersion: '7.8-SNAPSHOT'
+        esVersion: '7.8.0-SNAPSHOT'
       latest7:
         esVersion: 'latest-7'
   steps:
@@ -136,7 +136,7 @@ jobs:
         es77:
           esVersion: '7.7.0'
         es78:
-          esVersion: '7.8-SNAPSHOT'
+          esVersion: '7.8.0-SNAPSHOT'
         latest7:
           esVersion: 'latest-7'
   steps:
