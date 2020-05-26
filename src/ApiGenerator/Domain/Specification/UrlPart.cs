@@ -7,7 +7,7 @@
 namespace ApiGenerator.Domain.Specification
 {
 
-	//TODO once https://github.com/elastic/elasticsearch/pull/42346 lands 
+	//TODO once https://github.com/elastic/elasticsearch/pull/42346 lands
 	// Rename this type to Deprecation and remove Path duplication
 	public class DeprecatedPath
 	{
@@ -15,8 +15,8 @@ namespace ApiGenerator.Domain.Specification
 		public string Path { get; set; }
 		public string Description { get; set; }
 	}
-	
-	
+
+
 	public class UrlPart
 	{
 		private string _description;
@@ -83,6 +83,8 @@ namespace ApiGenerator.Domain.Specification
 					case "datafeed_id":
 					case "snapshot_id":
 					case "filter_id":
+					case "transform_id":
+					case "model_id":
 					case "id":
 						return "Id";
 

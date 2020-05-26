@@ -316,13 +316,6 @@ namespace Nest
 		[IgnoreDataMember]
 		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		// Request parameters
-		///<summary>Whether a type should be expected in the body of the mappings.</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
-		}
-
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout
 		{
@@ -879,7 +872,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Request for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
 	public partial class FreezeIndexRequest : PlainRequestBase<FreezeIndexRequestParameters>, IFreezeIndexRequest
 	{
 		protected IFreezeIndexRequest Self => this;
@@ -1010,13 +1003,6 @@ namespace Nest
 		{
 			get => Q<bool? >("include_defaults");
 			set => Q("include_defaults", value);
-		}
-
-		///<summary>Whether to add the type name to the response (default: false)</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1192,13 +1178,6 @@ namespace Nest
 		{
 			get => Q<bool? >("include_defaults");
 			set => Q("include_defaults", value);
-		}
-
-		///<summary>Whether a type should be returned in the body of the mappings.</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1417,13 +1396,6 @@ namespace Nest
 		{
 			get => Q<bool? >("flat_settings");
 			set => Q("flat_settings", value);
-		}
-
-		///<summary>Whether a type should be returned in the body of the mappings.</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1783,32 +1755,11 @@ namespace Nest
 			set => Q("create", value);
 		}
 
-		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings
-		{
-			get => Q<bool? >("flat_settings");
-			set => Q("flat_settings", value);
-		}
-
-		///<summary>Whether a type should be returned in the body of the mappings.</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
-		}
-
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout
 		{
 			get => Q<Time>("master_timeout");
 			set => Q("master_timeout", value);
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout
-		{
-			get => Q<Time>("timeout");
-			set => Q("timeout", value);
 		}
 	}
 
@@ -2019,13 +1970,6 @@ namespace Nest
 		{
 			get => Q<bool? >("dry_run");
 			set => Q("dry_run", value);
-		}
-
-		///<summary>Whether a type should be included in the body of the mappings.</summary>
-		public bool? IncludeTypeName
-		{
-			get => Q<bool? >("include_type_name");
-			set => Q("include_type_name", value);
 		}
 
 		///<summary>Specify timeout for connection to master</summary>
@@ -2423,7 +2367,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Request for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</para></summary>
 	public partial class UnfreezeIndexRequest : PlainRequestBase<UnfreezeIndexRequestParameters>, IUnfreezeIndexRequest
 	{
 		protected IUnfreezeIndexRequest Self => this;

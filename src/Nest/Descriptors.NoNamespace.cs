@@ -64,7 +64,7 @@ namespace Nest
 		// Request parameters
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public BulkDescriptor Pipeline(string pipeline) => Qs("pipeline", pipeline);
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public BulkDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
@@ -259,7 +259,7 @@ namespace Nest
 		public DeleteDescriptor<TDocument> IfPrimaryTerm(long? ifprimaryterm) => Qs("if_primary_term", ifprimaryterm);
 		///<summary>only perform the delete operation if the last operation that has changed the document has the specified sequence number</summary>
 		public DeleteDescriptor<TDocument> IfSequenceNumber(long? ifsequencenumber) => Qs("if_seq_no", ifsequencenumber);
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public DeleteDescriptor<TDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
@@ -328,7 +328,7 @@ namespace Nest
 		public DeleteByQueryDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
 		public DeleteByQueryDescriptor<TDocument> QueryOnQueryString(string queryonquerystring) => Qs("q", queryonquerystring);
-		///<summary>Should the effected indexes be refreshed?</summary>
+		///<summary>Should the affected indexes be refreshed?</summary>
 		public DeleteByQueryDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public DeleteByQueryDescriptor<TDocument> RequestCache(bool? requestcache = true) => Qs("request_cache", requestcache);
@@ -350,7 +350,7 @@ namespace Nest
 		public DeleteByQueryDescriptor<TDocument> SearchTimeout(Time searchtimeout) => Qs("search_timeout", searchtimeout);
 		///<summary>Search operation type</summary>
 		public DeleteByQueryDescriptor<TDocument> SearchType(SearchType? searchtype) => Qs("search_type", searchtype);
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
 		public DeleteByQueryDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public DeleteByQueryDescriptor<TDocument> Sort(params string[] sort) => Qs("sort", sort);
@@ -992,7 +992,7 @@ namespace Nest
 		public MultiSearchDescriptor MaxConcurrentSearches(long? maxconcurrentsearches) => Qs("max_concurrent_searches", maxconcurrentsearches);
 		///<summary>The number of concurrent shard requests each sub search executes concurrently per node. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
 		public MultiSearchDescriptor MaxConcurrentShardRequests(long? maxconcurrentshardrequests) => Qs("max_concurrent_shard_requests", maxconcurrentshardrequests);
-		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public MultiSearchDescriptor PreFilterShardSize(long? prefiltershardsize) => Qs("pre_filter_shard_size", prefiltershardsize);
 		///<summary>Search operation type</summary>
 		public MultiSearchDescriptor SearchType(SearchType? searchtype) => Qs("search_type", searchtype);
@@ -1144,13 +1144,13 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindexOnServer;
 		// values part of the url path
 		// Request parameters
-		///<summary>Should the effected indexes be refreshed?</summary>
+		///<summary>Should the affected indexes be refreshed?</summary>
 		public ReindexOnServerDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
 		public ReindexOnServerDescriptor RequestsPerSecond(long? requestspersecond) => Qs("requests_per_second", requestspersecond);
 		///<summary>Control how long to keep the search context alive</summary>
 		public ReindexOnServerDescriptor Scroll(Time scroll) => Qs("scroll", scroll);
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
 		public ReindexOnServerDescriptor Slices(long? slices) => Qs("slices", slices);
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public ReindexOnServerDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
@@ -1274,7 +1274,7 @@ namespace Nest
 		public SearchDescriptor<TInferDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
 		public SearchDescriptor<TInferDocument> MaxConcurrentShardRequests(long? maxconcurrentshardrequests) => Qs("max_concurrent_shard_requests", maxconcurrentshardrequests);
-		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public SearchDescriptor<TInferDocument> PreFilterShardSize(long? prefiltershardsize) => Qs("pre_filter_shard_size", prefiltershardsize);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchDescriptor<TInferDocument> Preference(string preference) => Qs("preference", preference);
@@ -1535,7 +1535,7 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> IfSequenceNumber(long? ifsequencenumber) => Qs("if_seq_no", ifsequencenumber);
 		///<summary>The script language (default: painless)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Lang(string lang) => Qs("lang", lang);
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> RetryOnConflict(long? retryonconflict) => Qs("retry_on_conflict", retryonconflict);
@@ -1606,7 +1606,7 @@ namespace Nest
 		public UpdateByQueryDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
 		public UpdateByQueryDescriptor<TDocument> QueryOnQueryString(string queryonquerystring) => Qs("q", queryonquerystring);
-		///<summary>Should the effected indexes be refreshed?</summary>
+		///<summary>Should the affected indexes be refreshed?</summary>
 		public UpdateByQueryDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public UpdateByQueryDescriptor<TDocument> RequestCache(bool? requestcache = true) => Qs("request_cache", requestcache);
@@ -1628,7 +1628,7 @@ namespace Nest
 		public UpdateByQueryDescriptor<TDocument> SearchTimeout(Time searchtimeout) => Qs("search_timeout", searchtimeout);
 		///<summary>Search operation type</summary>
 		public UpdateByQueryDescriptor<TDocument> SearchType(SearchType? searchtype) => Qs("search_type", searchtype);
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</summary>
 		public UpdateByQueryDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public UpdateByQueryDescriptor<TDocument> Sort(params string[] sort) => Qs("sort", sort);

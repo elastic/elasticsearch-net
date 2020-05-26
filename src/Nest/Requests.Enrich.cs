@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeletePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-delete-policy.html</para></summary>
+	///<summary>Request for DeletePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-enrich-policy-api.html</para></summary>
 	public partial class DeleteEnrichPolicyRequest : PlainRequestBase<DeleteEnrichPolicyRequestParameters>, IDeleteEnrichPolicyRequest
 	{
 		protected IDeleteEnrichPolicyRequest Self => this;
@@ -74,7 +74,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for ExecutePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-execute-policy.html</para></summary>
+	///<summary>Request for ExecutePolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/execute-enrich-policy-api.html</para></summary>
 	public partial class ExecuteEnrichPolicyRequest : PlainRequestBase<ExecuteEnrichPolicyRequestParameters>, IExecuteEnrichPolicyRequest
 	{
 		protected IExecuteEnrichPolicyRequest Self => this;
@@ -145,7 +145,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for PutPolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-put-policy.html</para></summary>
+	///<summary>Request for PutPolicy <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-enrich-policy-api.html</para></summary>
 	public partial class PutEnrichPolicyRequest : PlainRequestBase<PutEnrichPolicyRequestParameters>, IPutEnrichPolicyRequest
 	{
 		protected IPutEnrichPolicyRequest Self => this;
@@ -173,7 +173,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats.html</para></summary>
+	///<summary>Request for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats-api.html</para></summary>
 	public partial class EnrichStatsRequest : PlainRequestBase<EnrichStatsRequestParameters>, IEnrichStatsRequest
 	{
 		protected IEnrichStatsRequest Self => this;

@@ -61,6 +61,13 @@ namespace Nest
 		[IgnoreDataMember]
 		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
 		// Request parameters
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format
 		{
@@ -467,6 +474,13 @@ namespace Nest
 		{
 			get => Q<Bytes? >("bytes");
 			set => Q("bytes", value);
+		}
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
 		}
 
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -1071,13 +1085,6 @@ namespace Nest
 		{
 			get => Q<bool? >("help");
 			set => Q("help", value);
-		}
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>

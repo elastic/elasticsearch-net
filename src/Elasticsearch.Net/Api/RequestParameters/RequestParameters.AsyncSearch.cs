@@ -25,14 +25,14 @@ using System.Linq.Expressions;
 namespace Elasticsearch.Net.Specification.AsyncSearchApi
 {
 	///<summary>Request options for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
-	public class DeleteRequestParameters : RequestParameters<DeleteRequestParameters>
+	public class AsyncSearchDeleteRequestParameters : RequestParameters<AsyncSearchDeleteRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
-	public class GetRequestParameters : RequestParameters<GetRequestParameters>
+	public class AsyncSearchGetRequestParameters : RequestParameters<AsyncSearchGetRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
@@ -59,7 +59,7 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 	}
 
 	///<summary>Request options for Submit <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
-	public class SubmitRequestParameters : RequestParameters<SubmitRequestParameters>
+	public class AsyncSearchSubmitRequestParameters : RequestParameters<AsyncSearchSubmitRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
@@ -130,20 +130,6 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 		{
 			get => Q<ExpandWildcards? >("expand_wildcards");
 			set => Q("expand_wildcards", value);
-		}
-
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public bool? Explain
-		{
-			get => Q<bool? >("explain");
-			set => Q("explain", value);
-		}
-
-		///<summary>Starting offset (default: 0)</summary>
-		public long? From
-		{
-			get => Q<long? >("from");
-			set => Q("from", value);
 		}
 
 		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
@@ -236,41 +222,6 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 			set => Q("seq_no_primary_term", value);
 		}
 
-		///<summary>Number of hits to return (default: 10)</summary>
-		public long? Size
-		{
-			get => Q<long? >("size");
-			set => Q("size", value);
-		}
-
-		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
-		public string[] Sort
-		{
-			get => Q<string[]>("sort");
-			set => Q("sort", value);
-		}
-
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool? SourceEnabled
-		{
-			get => Q<bool? >("_source");
-			set => Q("_source", value);
-		}
-
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public string[] SourceExcludes
-		{
-			get => Q<string[]>("_source_excludes");
-			set => Q("_source_excludes", value);
-		}
-
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public string[] SourceIncludes
-		{
-			get => Q<string[]>("_source_includes");
-			set => Q("_source_includes", value);
-		}
-
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public string[] Stats
 		{
@@ -313,27 +264,6 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 			set => Q("suggest_text", value);
 		}
 
-		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public long? TerminateAfter
-		{
-			get => Q<long? >("terminate_after");
-			set => Q("terminate_after", value);
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout
-		{
-			get => Q<TimeSpan>("timeout");
-			set => Q("timeout", value);
-		}
-
-		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
-		public bool? TrackScores
-		{
-			get => Q<bool? >("track_scores");
-			set => Q("track_scores", value);
-		}
-
 		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
 		public bool? TrackTotalHits
 		{
@@ -346,13 +276,6 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 		{
 			get => Q<bool? >("typed_keys");
 			set => Q("typed_keys", value);
-		}
-
-		///<summary>Specify whether to return document version as part of a hit</summary>
-		public bool? Version
-		{
-			get => Q<bool? >("version");
-			set => Q("version", value);
 		}
 
 		///<summary>Specify the time that the request should block waiting for the final response</summary>

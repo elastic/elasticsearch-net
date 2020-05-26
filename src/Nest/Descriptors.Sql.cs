@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.SqlApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>Descriptor for ClearCursor <para>Clear SQL cursor</para></summary>
+	///<summary>Descriptor for ClearCursor <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html</para></summary>
 	public partial class ClearSqlCursorDescriptor : RequestDescriptorBase<ClearSqlCursorDescriptor, ClearSqlCursorRequestParameters, IClearSqlCursorRequest>, IClearSqlCursorRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
@@ -38,7 +38,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for Query <para>Execute SQL</para></summary>
+	///<summary>Descriptor for Query <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</para></summary>
 	public partial class QuerySqlDescriptor : RequestDescriptorBase<QuerySqlDescriptor, QuerySqlRequestParameters, IQuerySqlRequest>, IQuerySqlRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
@@ -48,7 +48,7 @@ namespace Nest
 		public QuerySqlDescriptor Format(string format) => Qs("format", format);
 	}
 
-	///<summary>Descriptor for Translate <para>Translate SQL into Elasticsearch queries</para></summary>
+	///<summary>Descriptor for Translate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html</para></summary>
 	public partial class TranslateSqlDescriptor : RequestDescriptorBase<TranslateSqlDescriptor, TranslateSqlRequestParameters, ITranslateSqlRequest>, ITranslateSqlRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlTranslate;

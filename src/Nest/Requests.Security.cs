@@ -197,7 +197,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for DeletePrivileges <para>TODO</para></summary>
+	///<summary>Request for DeletePrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html</para></summary>
 	public partial class DeletePrivilegesRequest : PlainRequestBase<DeletePrivilegesRequestParameters>, IDeletePrivilegesRequest
 	{
 		protected IDeletePrivilegesRequest Self => this;
@@ -740,7 +740,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for PutPrivileges <para>TODO</para></summary>
+	///<summary>Request for PutPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html</para></summary>
 	public partial class PutPrivilegesRequest : PlainRequestBase<PutPrivilegesRequestParameters>, IPutPrivilegesRequest
 	{
 		protected IPutPrivilegesRequest Self => this;

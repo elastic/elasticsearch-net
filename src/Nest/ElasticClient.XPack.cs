@@ -63,25 +63,25 @@ namespace Nest.Specification.XPackApi
 		/// <summary>
 		/// <c>GET</c> request to the <c>xpack.usage</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Retrieve information about xpack features usage">Retrieve information about xpack features usage</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html</a>
 		/// </summary>
 		public XPackUsageResponse Usage(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null) => Usage(selector.InvokeOrDefault(new XPackUsageDescriptor()));
 		/// <summary>
 		/// <c>GET</c> request to the <c>xpack.usage</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Retrieve information about xpack features usage">Retrieve information about xpack features usage</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html</a>
 		/// </summary>
 		public Task<XPackUsageResponse> UsageAsync(Func<XPackUsageDescriptor, IXPackUsageRequest> selector = null, CancellationToken ct = default) => UsageAsync(selector.InvokeOrDefault(new XPackUsageDescriptor()), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>xpack.usage</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Retrieve information about xpack features usage">Retrieve information about xpack features usage</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html</a>
 		/// </summary>
 		public XPackUsageResponse Usage(IXPackUsageRequest request) => DoRequest<IXPackUsageRequest, XPackUsageResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>GET</c> request to the <c>xpack.usage</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "Retrieve information about xpack features usage">Retrieve information about xpack features usage</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html</a>
 		/// </summary>
 		public Task<XPackUsageResponse> UsageAsync(IXPackUsageRequest request, CancellationToken ct = default) => DoRequestAsync<IXPackUsageRequest, XPackUsageResponse>(request, request.RequestParameters, ct);
 	}

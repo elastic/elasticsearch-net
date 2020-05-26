@@ -50,6 +50,8 @@ namespace Nest
 		///<summary>A comma-separated list of alias names to return</summary>
 		public CatAliasesDescriptor Name(Names name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
 		// Request parameters
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public CatAliasesDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatAliasesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
@@ -234,6 +236,8 @@ namespace Nest
 		// Request parameters
 		///<summary>The unit in which to display byte values</summary>
 		public CatIndicesDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public CatIndicesDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatIndicesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
@@ -462,8 +466,6 @@ namespace Nest
 		public CatNodesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatNodesDescriptor Help(bool? help = true) => Qs("help", help);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatNodesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatNodesDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>

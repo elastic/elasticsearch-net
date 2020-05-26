@@ -21,6 +21,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Nest;
+using Nest.Specification.AsyncSearchApi;
 using Nest.Specification.CatApi;
 using Nest.Specification.ClusterApi;
 using Nest.Specification.CrossClusterReplicationApi;
@@ -49,6 +50,12 @@ namespace Nest
 	///</summary>
 	public partial interface IElasticClient
 	{
+		///<summary>Async Search APIs</summary>
+		AsyncSearchNamespace AsyncSearch
+		{
+			get;
+		}
+
 		///<summary>Cat APIs</summary>
 		CatNamespace Cat
 		{

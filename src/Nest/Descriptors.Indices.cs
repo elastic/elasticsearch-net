@@ -197,8 +197,6 @@ namespace Nest
 		public CreateIndexDescriptor Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
 		// Request parameters
-		///<summary>Whether a type should be expected in the body of the mappings.</summary>
-		public CreateIndexDescriptor IncludeTypeName(bool? includetypename = true) => Qs("include_type_name", includetypename);
 		///<summary>Specify timeout for connection to master</summary>
 		public CreateIndexDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Explicit operation timeout</summary>
@@ -491,7 +489,7 @@ namespace Nest
 		public ForceMergeDescriptor OnlyExpungeDeletes(bool? onlyexpungedeletes = true) => Qs("only_expunge_deletes", onlyexpungedeletes);
 	}
 
-	///<summary>Descriptor for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Descriptor for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
 	public partial class FreezeIndexDescriptor : RequestDescriptorBase<FreezeIndexDescriptor, FreezeIndexRequestParameters, IFreezeIndexRequest>, IFreezeIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFreeze;
@@ -565,8 +563,6 @@ namespace Nest
 		public GetIndexDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public GetIndexDescriptor IncludeDefaults(bool? includedefaults = true) => Qs("include_defaults", includedefaults);
-		///<summary>Whether to add the type name to the response (default: false)</summary>
-		public GetIndexDescriptor IncludeTypeName(bool? includetypename = true) => Qs("include_type_name", includetypename);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Specify timeout for connection to master</summary>
@@ -666,8 +662,6 @@ namespace Nest
 		public GetFieldMappingDescriptor<TDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 		///<summary>Whether the default mapping values should be returned as well</summary>
 		public GetFieldMappingDescriptor<TDocument> IncludeDefaults(bool? includedefaults = true) => Qs("include_defaults", includedefaults);
-		///<summary>Whether a type should be returned in the body of the mappings.</summary>
-		public GetFieldMappingDescriptor<TDocument> IncludeTypeName(bool? includetypename = true) => Qs("include_type_name", includetypename);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetFieldMappingDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 	}
@@ -788,8 +782,6 @@ namespace Nest
 		// Request parameters
 		///<summary>Return settings in flat format (default: false)</summary>
 		public GetIndexTemplateDescriptor FlatSettings(bool? flatsettings = true) => Qs("flat_settings", flatsettings);
-		///<summary>Whether a type should be returned in the body of the mappings.</summary>
-		public GetIndexTemplateDescriptor IncludeTypeName(bool? includetypename = true) => Qs("include_type_name", includetypename);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexTemplateDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -969,14 +961,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public PutIndexTemplateDescriptor Create(bool? create = true) => Qs("create", create);
-		///<summary>Return settings in flat format (default: false)</summary>
-		public PutIndexTemplateDescriptor FlatSettings(bool? flatsettings = true) => Qs("flat_settings", flatsettings);
-		///<summary>Whether a type should be returned in the body of the mappings.</summary>
-		public PutIndexTemplateDescriptor IncludeTypeName(bool? includetypename = true) => Qs("include_type_name", includetypename);
 		///<summary>Specify timeout for connection to master</summary>
 		public PutIndexTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
-		///<summary>Explicit operation timeout</summary>
-		public PutIndexTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
 	///<summary>Descriptor for RecoveryStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para></summary>
@@ -1108,8 +1094,6 @@ namespace Nest
 		// Request parameters
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
 		public RolloverIndexDescriptor DryRun(bool? dryrun = true) => Qs("dry_run", dryrun);
-		///<summary>Whether a type should be included in the body of the mappings.</summary>
-		public RolloverIndexDescriptor IncludeTypeName(bool? includetypename = true) => Qs("include_type_name", includetypename);
 		///<summary>Specify timeout for connection to master</summary>
 		public RolloverIndexDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Explicit operation timeout</summary>
@@ -1326,7 +1310,7 @@ namespace Nest
 		public IndicesStatsDescriptor Level(Level? level) => Qs("level", level);
 	}
 
-	///<summary>Descriptor for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen.html</para></summary>
+	///<summary>Descriptor for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</para></summary>
 	public partial class UnfreezeIndexDescriptor : RequestDescriptorBase<UnfreezeIndexDescriptor, UnfreezeIndexRequestParameters, IUnfreezeIndexRequest>, IUnfreezeIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUnfreeze;
