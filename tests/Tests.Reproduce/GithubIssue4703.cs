@@ -27,7 +27,7 @@ namespace Tests.Reproduce
 			var response = a.Subject;
 
 			var json = Encoding.UTF8.GetString(response.ApiCall.RequestBodyInBytes);
-			json.Should().Be(@"{""tupleNullable"":{""item1"":""somestring"",""item2"":42}}");
+			json.Should().Be(@"{""tupleNullable"":{""Item1"":""somestring"",""Item2"":42}}");
 		}
 	}
 
