@@ -14,13 +14,13 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.XPack.AsyncSearch
 {
 	[SkipVersion("<7.7.0", "Introduced in 7.7.0 ")]
-	public class AsyncSearchTests : CoordinatedIntegrationTestBase<ReadOnlyCluster>
+	public class AsyncSearchApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluster>
 	{
 		private const string SubmitStep = nameof(SubmitStep);
 		private const string GetStep = nameof(GetStep);
 		private const string DeleteStep = nameof(DeleteStep);
 
-		public AsyncSearchTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, testOnlyOne: true)
+		public AsyncSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, testOnlyOne: true)
 		{
 			{SubmitStep, u =>
 				u.Calls<AsyncSearchSubmitDescriptor<Project>, AsyncSearchSubmitRequest<Project>, IAsyncSearchSubmitRequest, AsyncSearchSubmitResponse<Project>>(
@@ -99,6 +99,7 @@ namespace Tests.XPack.AsyncSearch
 		{
 			r.ShouldBeValid();
 			r.Response.Should().NotBeNull();
+			r.Response.Took.Should().BeGreaterOrEqualTo(0);
 		});
 
 		[I] public async Task AsyncSearchGetResponse() => await Assert<AsyncSearchGetResponse<Project>>(GetStep, (v, r) =>
@@ -107,6 +108,10 @@ namespace Tests.XPack.AsyncSearch
 			r.Id.Should().NotBeNullOrEmpty();
 			r.StartTime.Should().BeOnOrBefore(DateTimeOffset.Now);
 			r.Response.Should().NotBeNull();
+			r.Response.Took.Should().BeGreaterOrEqualTo(0);
+			r.Response.Hits.Should().HaveCount(10);
+			var terms = r.Response.Aggregations.Terms("states");
+			terms.Should().NotBeNull();
 		});
 
 		[I] public async Task AsyncSearchDeleteResponse() => await Assert<AsyncSearchDeleteResponse>(DeleteStep, (v, r) =>

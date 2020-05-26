@@ -7,7 +7,7 @@ using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.XPack.AsyncSearch.Get
 {
-	public class AsyncSearchGetTests : UrlTestsBase
+	public class AsyncSearchGetUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await GET("/_async_search/search_id")
 			.Fluent(c => c.AsyncSearch.Get<Project>("search_id", f => f))

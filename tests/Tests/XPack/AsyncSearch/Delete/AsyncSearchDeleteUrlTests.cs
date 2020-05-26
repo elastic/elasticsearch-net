@@ -6,7 +6,7 @@ using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.XPack.AsyncSearch.Delete
 {
-	public class AsyncSearchDeleteTests : UrlTestsBase
+	public class AsyncSearchDeleteUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await DELETE("/_async_search/search_id")
 			.Fluent(c => c.AsyncSearch.Delete("search_id", f => f))

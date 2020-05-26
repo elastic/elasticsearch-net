@@ -7,7 +7,7 @@ using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.XPack.AsyncSearch.Submit
 {
-	public class AsyncAsyncSearchSubmitSubmitTests : UrlTestsBase
+	public class AsyncSearchSubmitUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls()
 		{
