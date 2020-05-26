@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CleanupRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request for CleanupRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html</para></summary>
 	public partial class CleanupRepositoryRequest : PlainRequestBase<CleanupRepositoryRequestParameters>, ICleanupRepositoryRequest
 	{
 		protected ICleanupRepositoryRequest Self => this;
