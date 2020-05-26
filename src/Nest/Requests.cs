@@ -39,6 +39,7 @@ using Elasticsearch.Net.Specification.MachineLearningApi;
 using Elasticsearch.Net.Specification.MigrationApi;
 using Elasticsearch.Net.Specification.NodesApi;
 using Elasticsearch.Net.Specification.RollupApi;
+using Elasticsearch.Net.Specification.SearchableSnapshotsApi;
 using Elasticsearch.Net.Specification.SecurityApi;
 using Elasticsearch.Net.Specification.SnapshotApi;
 using Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi;

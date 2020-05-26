@@ -1109,53 +1109,53 @@ namespace Nest.Specification.MachineLearningApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.validate</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</a>
 		/// </summary>
 		public ValidateJobResponse ValidateJob<TDocument>(Func<ValidateJobDescriptor<TDocument>, IValidateJobRequest> selector)
 			where TDocument : class => ValidateJob(selector.InvokeOrDefault(new ValidateJobDescriptor<TDocument>()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.validate</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</a>
 		/// </summary>
 		public Task<ValidateJobResponse> ValidateJobAsync<TDocument>(Func<ValidateJobDescriptor<TDocument>, IValidateJobRequest> selector, CancellationToken ct = default)
 			where TDocument : class => ValidateJobAsync(selector.InvokeOrDefault(new ValidateJobDescriptor<TDocument>()), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.validate</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</a>
 		/// </summary>
 		public ValidateJobResponse ValidateJob(IValidateJobRequest request) => DoRequest<IValidateJobRequest, ValidateJobResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.validate</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</a>
 		/// </summary>
 		public Task<ValidateJobResponse> ValidateJobAsync(IValidateJobRequest request, CancellationToken ct = default) => DoRequestAsync<IValidateJobRequest, ValidateJobResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.validate_detector</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</a>
 		/// </summary>
 		public ValidateDetectorResponse ValidateDetector<TDocument>(Func<ValidateDetectorDescriptor<TDocument>, IValidateDetectorRequest> selector)
 			where TDocument : class => ValidateDetector(selector.InvokeOrDefault(new ValidateDetectorDescriptor<TDocument>()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.validate_detector</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</a>
 		/// </summary>
 		public Task<ValidateDetectorResponse> ValidateDetectorAsync<TDocument>(Func<ValidateDetectorDescriptor<TDocument>, IValidateDetectorRequest> selector, CancellationToken ct = default)
 			where TDocument : class => ValidateDetectorAsync(selector.InvokeOrDefault(new ValidateDetectorDescriptor<TDocument>()), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.validate_detector</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</a>
 		/// </summary>
 		public ValidateDetectorResponse ValidateDetector(IValidateDetectorRequest request) => DoRequest<IValidateDetectorRequest, ValidateDetectorResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>ml.validate_detector</c> API, read more about this API online:
 		/// <para></para>
-		/// <a></a>
+		/// <a href = "https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</a>
 		/// </summary>
 		public Task<ValidateDetectorResponse> ValidateDetectorAsync(IValidateDetectorRequest request, CancellationToken ct = default) => DoRequestAsync<IValidateDetectorRequest, ValidateDetectorResponse>(request, request.RequestParameters, ct);
 	}

@@ -1014,7 +1014,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for ValidateJob</summary>
+	///<summary>Descriptor for ValidateJob <para>https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</para></summary>
 	public partial class ValidateJobDescriptor<TDocument> : RequestDescriptorBase<ValidateJobDescriptor<TDocument>, ValidateJobRequestParameters, IValidateJobRequest>, IValidateJobRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningValidateJob;
@@ -1022,7 +1022,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for ValidateDetector</summary>
+	///<summary>Descriptor for ValidateDetector <para>https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</para></summary>
 	public partial class ValidateDetectorDescriptor<TDocument> : RequestDescriptorBase<ValidateDetectorDescriptor<TDocument>, ValidateDetectorRequestParameters, IValidateDetectorRequest>, IValidateDetectorRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningValidateDetector;

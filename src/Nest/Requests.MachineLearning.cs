@@ -1715,7 +1715,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ValidateJob</summary>
+	///<summary>Request for ValidateJob <para>https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</para></summary>
 	public partial class ValidateJobRequest : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
 	{
 		protected IValidateJobRequest Self => this;
@@ -1729,7 +1729,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ValidateDetector</summary>
+	///<summary>Request for ValidateDetector <para>https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</para></summary>
 	public partial class ValidateDetectorRequest : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
 	{
 		protected IValidateDetectorRequest Self => this;
