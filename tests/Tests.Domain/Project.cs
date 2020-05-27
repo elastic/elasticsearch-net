@@ -189,9 +189,12 @@ namespace Tests.Domain
 		public DateTime Created { get; set; }
 	}
 
-	public class ProjectPayload
+	public class ProjectTransform
 	{
-		public string Name { get; set; }
-		public StateOfBeing? State { get; set; }
+		public double AverageCommits { get; set; }
+
+		public long WeekStartedOn { get; set; }
+
+		public long SumIntoMaster { get; set; }
 	}
 }

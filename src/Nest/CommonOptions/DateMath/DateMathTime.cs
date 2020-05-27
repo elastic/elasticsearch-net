@@ -1,12 +1,14 @@
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// A time representation for use within <see cref="DateMath" /> expressions.
 	/// </summary>
+	[JsonFormatter(typeof(DateMathTimeFormatter))]
 	public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
 	{
 		private const double MillisecondsInADay = MillisecondsInAnHour * 24;
@@ -300,7 +302,7 @@ namespace Nest
 		public static bool operator >=(DateMathTime left, DateMathTime right) => left.CompareTo(right) > 0 || left.Equals(right);
 
 		public static bool operator ==(DateMathTime left, DateMathTime right) =>
-			ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.Equals(right);
+			left?.Equals(right) ?? ReferenceEquals(right, null);
 
 		public static bool operator !=(DateMathTime left, DateMathTime right) => !(left == right);
 
@@ -317,5 +319,16 @@ namespace Nest
 
 		// ReSharper disable once NonReadonlyMemberInGetHashCode
 		public override int GetHashCode() => _approximateSeconds.GetHashCode();
+	}
+
+	internal class DateMathTimeFormatter: IJsonFormatter<DateMathTime>
+	{
+		public void Serialize(ref JsonWriter writer, DateMathTime value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value is null) writer.WriteNull();
+			else writer.WriteString(value.ToString());
+		}
+
+		public DateMathTime Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) => reader.ReadString();
 	}
 }

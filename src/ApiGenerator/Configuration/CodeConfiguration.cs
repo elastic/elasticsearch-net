@@ -80,14 +80,6 @@ namespace ApiGenerator.Configuration
 			"cluster.get_component_template.json",
 			"cluster.put_component_template.json",
 			"cluster.exists_component_template.json",
-			"transform.delete_transform.json",
-			"transform.get_transform.json",
-			"transform.get_transform_stats.json",
-			"transform.preview_transform.json",
-			"transform.put_transform.json",
-			"transform.start_transform.json",
-			"transform.stop_transform.json",
-			"transform.update_transform.json",
 		};
 
 

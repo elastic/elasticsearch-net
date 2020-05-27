@@ -7,20 +7,28 @@ namespace Nest
 	{
 		public Indices Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.GetCurrentJsonToken() != JsonToken.BeginArray)
+			switch (reader.GetCurrentJsonToken())
 			{
-				reader.ReadNextBlock();
-				return null;
+				case JsonToken.BeginArray:
+				{
+					var indices = new List<IndexName>();
+					var count = 0;
+					while (reader.ReadIsInArray(ref count))
+					{
+						var index = reader.ReadString();
+						indices.Add(index);
+					}
+					return new Indices(indices);
+				}
+				case JsonToken.String:
+				{
+					Indices indices = reader.ReadString();
+					return indices;
+				}
+				default:
+					reader.ReadNextBlock();
+					return null;
 			}
-
-			var indices = new List<IndexName>();
-			var count = 0;
-			while (reader.ReadIsInArray(ref count))
-			{
-				var index = reader.ReadString();
-				indices.Add(index);
-			}
-			return new Indices(indices);
 		}
 
 		public void Serialize(ref JsonWriter writer, Indices value, IJsonFormatterResolver formatterResolver)
