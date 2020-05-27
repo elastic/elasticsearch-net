@@ -5,6 +5,7 @@
 using System;
 using System.Text;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
@@ -16,8 +17,11 @@ namespace Tests.Reproduce
 		[U]
 		public void NullableValueTupleDoesNotThrow()
 		{
+			var connectionSettings = new ConnectionSettings(new InMemoryConnection()).DisableDirectStreaming();
+			var client = new ElasticClient(connectionSettings);
+
 			Func<IndexResponse> action = () =>
-				TestClient.DefaultInMemoryClient.Index(
+				client.Index(
 					new ExampleDoc
 					{
 						tupleNullable = ("somestring", 42),
