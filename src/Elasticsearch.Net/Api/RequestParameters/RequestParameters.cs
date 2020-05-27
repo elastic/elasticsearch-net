@@ -16,6 +16,7 @@ namespace Elasticsearch.Net
 	public abstract class RequestParameters<T> : IRequestParameters where T : RequestParameters<T>
 	{
 		public abstract HttpMethod DefaultHttpMethod { get; }
+		public abstract bool SupportsBody { get; }
 
 		public CustomResponseBuilderBase CustomResponseBuilder { get; set; }
 		public Dictionary<string, object> QueryString { get; set; } = new Dictionary<string, object>();

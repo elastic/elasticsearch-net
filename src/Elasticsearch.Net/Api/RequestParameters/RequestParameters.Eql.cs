@@ -28,5 +28,6 @@ namespace Elasticsearch.Net.Specification.EqlApi
 	public class SearchRequestParameters : RequestParameters<SearchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 	}
 }

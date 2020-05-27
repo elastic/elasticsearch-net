@@ -28,6 +28,7 @@ namespace Elasticsearch.Net.Specification.SearchableSnapshotsApi
 	public class ClearCacheRequestParameters : RequestParameters<ClearCacheRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -64,6 +65,7 @@ namespace Elasticsearch.Net.Specification.SearchableSnapshotsApi
 	public class MountRequestParameters : RequestParameters<MountRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -83,11 +85,13 @@ namespace Elasticsearch.Net.Specification.SearchableSnapshotsApi
 	public class RepositoryStatsRequestParameters : RequestParameters<RepositoryStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/searchable-snapshots-api-stats.html</para></summary>
 	public class StatsRequestParameters : RequestParameters<StatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 }

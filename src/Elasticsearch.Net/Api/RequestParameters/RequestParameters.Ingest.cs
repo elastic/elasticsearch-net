@@ -28,6 +28,7 @@ namespace Elasticsearch.Net.Specification.IngestApi
 	public class DeletePipelineRequestParameters : RequestParameters<DeletePipelineRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -47,6 +48,7 @@ namespace Elasticsearch.Net.Specification.IngestApi
 	public class GetPipelineRequestParameters : RequestParameters<GetPipelineRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -59,12 +61,14 @@ namespace Elasticsearch.Net.Specification.IngestApi
 	public class GrokProcessorPatternsRequestParameters : RequestParameters<GrokProcessorPatternsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for PutPipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html</para></summary>
 	public class PutPipelineRequestParameters : RequestParameters<PutPipelineRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -84,6 +88,7 @@ namespace Elasticsearch.Net.Specification.IngestApi
 	public class SimulatePipelineRequestParameters : RequestParameters<SimulatePipelineRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public bool? Verbose
 		{

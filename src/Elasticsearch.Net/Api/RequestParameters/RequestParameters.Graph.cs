@@ -28,6 +28,7 @@ namespace Elasticsearch.Net.Specification.GraphApi
 	public class GraphExploreRequestParameters : RequestParameters<GraphExploreRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>Specific routing value</summary>
 		public string Routing
 		{
