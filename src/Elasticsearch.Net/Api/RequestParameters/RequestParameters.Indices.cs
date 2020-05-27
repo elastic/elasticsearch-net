@@ -1347,7 +1347,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
-	///<summary>Request options for SimulateTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	///<summary>Request options for SimulateIndexTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public class SimulateIndexTemplateRequestParameters : RequestParameters<SimulateIndexTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
