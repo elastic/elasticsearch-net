@@ -279,6 +279,14 @@ namespace Nest
 		internal static ApiUrls TasksGetTask = new ApiUrls(new[]{"_tasks/{task_id}"});
 		internal static ApiUrls TasksList = new ApiUrls(new[]{"_tasks"});
 		internal static ApiUrls NoNamespaceTermVectors = new ApiUrls(new[]{"{index}/_termvectors/{id}", "{index}/_termvectors"});
+		internal static ApiUrls TransformDelete = new ApiUrls(new[]{"_transform/{transform_id}"});
+		internal static ApiUrls TransformGet = new ApiUrls(new[]{"_transform/{transform_id}", "_transform"});
+		internal static ApiUrls TransformGetStats = new ApiUrls(new[]{"_transform/{transform_id}/_stats"});
+		internal static ApiUrls TransformPreview = new ApiUrls(new[]{"_transform/_preview"});
+		internal static ApiUrls TransformPut = new ApiUrls(new[]{"_transform/{transform_id}"});
+		internal static ApiUrls TransformStart = new ApiUrls(new[]{"_transform/{transform_id}/_start"});
+		internal static ApiUrls TransformStop = new ApiUrls(new[]{"_transform/{transform_id}/_stop"});
+		internal static ApiUrls TransformUpdate = new ApiUrls(new[]{"_transform/{transform_id}/_update"});
 		internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[]{"{index}/_update/{id}"});
 		internal static ApiUrls NoNamespaceUpdateByQuery = new ApiUrls(new[]{"{index}/_update_by_query"});
 		internal static ApiUrls NoNamespaceUpdateByQueryRethrottle = new ApiUrls(new[]{"_update_by_query/{task_id}/_rethrottle"});
