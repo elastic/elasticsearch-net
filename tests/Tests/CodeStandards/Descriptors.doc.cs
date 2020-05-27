@@ -221,6 +221,8 @@ namespace Tests.CodeStandards
 				where !(m.Name == nameof(RankFeatureLogarithmFunctionDescriptor.ScalingFactor) && dt == typeof(RankFeatureLogarithmFunctionDescriptor))
 				where !(m.Name == nameof(RankFeatureSigmoidFunctionDescriptor.Exponent) && dt == typeof(RankFeatureSigmoidFunctionDescriptor))
 				where !(m.Name == nameof(RankFeatureSigmoidFunctionDescriptor.Pivot) && dt == typeof(RankFeatureSigmoidFunctionDescriptor))
+				where !(m.Name == nameof(DateHistogramGroupSourceDescriptor<object>.CalendarInterval) && dt == typeof(DateHistogramGroupSourceDescriptor<>))
+				where !(m.Name == nameof(DateHistogramGroupSourceDescriptor<object>.FixedInterval) && dt == typeof(DateHistogramGroupSourceDescriptor<>))
 
 				select new {m, d, p};
 
