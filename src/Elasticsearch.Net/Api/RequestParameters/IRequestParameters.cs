@@ -9,6 +9,8 @@ namespace Elasticsearch.Net
 	{
 		HttpMethod DefaultHttpMethod { get; }
 
+		bool SupportsBody { get; }
+
 		/// <summary> Allows you to completely circumvent the serializer to build the final response.</summary>
 		CustomResponseBuilderBase CustomResponseBuilder { get; set; }
 

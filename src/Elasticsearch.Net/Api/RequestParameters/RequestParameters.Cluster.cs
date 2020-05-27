@@ -28,6 +28,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 	public class ClusterAllocationExplainRequestParameters : RequestParameters<ClusterAllocationExplainRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
 		public bool? IncludeDiskInfo
 		{
@@ -47,6 +48,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 	public class DeleteComponentTemplateRequestParameters : RequestParameters<DeleteComponentTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -66,6 +68,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 	public class GetComponentTemplateRequestParameters : RequestParameters<GetComponentTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local
 		{
@@ -85,6 +88,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 	public class ClusterGetSettingsRequestParameters : RequestParameters<ClusterGetSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings
 		{
@@ -118,6 +122,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 	public class ClusterHealthRequestParameters : RequestParameters<ClusterHealthRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards
 		{
@@ -200,6 +205,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 	public class ClusterPendingTasksRequestParameters : RequestParameters<ClusterPendingTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local
 		{
@@ -219,6 +225,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 	public class PutComponentTemplateRequestParameters : RequestParameters<PutComponentTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool? Create
 		{
@@ -245,6 +252,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 	public class ClusterPutSettingsRequestParameters : RequestParameters<ClusterPutSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings
 		{
@@ -271,12 +279,14 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 	public class RemoteInfoRequestParameters : RequestParameters<RemoteInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Reroute <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</para></summary>
 	public class ClusterRerouteRequestParameters : RequestParameters<ClusterRerouteRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>Simulate the operation only and return the resulting state</summary>
 		public bool? DryRun
 		{
@@ -324,6 +334,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 	public class ClusterStateRequestParameters : RequestParameters<ClusterStateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -388,6 +399,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 	public class ClusterStatsRequestParameters : RequestParameters<ClusterStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings
 		{

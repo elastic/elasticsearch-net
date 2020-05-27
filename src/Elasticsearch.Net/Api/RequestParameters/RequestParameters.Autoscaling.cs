@@ -28,5 +28,6 @@ namespace Elasticsearch.Net.Specification.AutoscalingApi
 	public class GetAutoscalingDecisionRequestParameters : RequestParameters<GetAutoscalingDecisionRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 }

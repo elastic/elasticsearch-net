@@ -28,6 +28,7 @@ namespace Elasticsearch.Net.Specification.TransformApi
 	public class DeleteTransformRequestParameters : RequestParameters<DeleteTransformRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
 		///<summary>
 		/// When `true`, the transform is deleted regardless of its current state. The default value is `false`, meaning that the transform must be
 		/// `stopped` before it can be deleted.
@@ -43,6 +44,7 @@ namespace Elasticsearch.Net.Specification.TransformApi
 	public class GetTransformRequestParameters : RequestParameters<GetTransformRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Whether to ignore if a wildcard expression matches no transforms. (This includes `_all` string or when no transforms have been specified)</summary>
 		public bool? AllowNoMatch
 		{
@@ -69,6 +71,7 @@ namespace Elasticsearch.Net.Specification.TransformApi
 	public class GetTransformStatsRequestParameters : RequestParameters<GetTransformStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 		///<summary>Whether to ignore if a wildcard expression matches no transforms. (This includes `_all` string or when no transforms have been specified)</summary>
 		public bool? AllowNoMatch
 		{
@@ -95,12 +98,14 @@ namespace Elasticsearch.Net.Specification.TransformApi
 	public class PreviewTransformRequestParameters : RequestParameters<PreviewTransformRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for Put <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html</para></summary>
 	public class PutTransformRequestParameters : RequestParameters<PutTransformRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => true;
 		///<summary>If validations should be deferred until transform starts, defaults to false.</summary>
 		public bool? DeferValidation
 		{
@@ -113,6 +118,7 @@ namespace Elasticsearch.Net.Specification.TransformApi
 	public class StartTransformRequestParameters : RequestParameters<StartTransformRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 		///<summary>Controls the time to wait for the transform to start</summary>
 		public TimeSpan Timeout
 		{
@@ -125,6 +131,7 @@ namespace Elasticsearch.Net.Specification.TransformApi
 	public class StopTransformRequestParameters : RequestParameters<StopTransformRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 		///<summary>Whether to ignore if a wildcard expression matches no transforms. (This includes `_all` string or when no transforms have been specified)</summary>
 		public bool? AllowNoMatch
 		{
@@ -165,6 +172,7 @@ namespace Elasticsearch.Net.Specification.TransformApi
 	public class UpdateTransformRequestParameters : RequestParameters<UpdateTransformRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 		///<summary>If validations should be deferred until transform starts, defaults to false.</summary>
 		public bool? DeferValidation
 		{

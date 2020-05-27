@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -74,7 +78,7 @@ namespace Nest
 		public ElasticClient() : this(new ConnectionSettings(new Uri("http://localhost:9200"))) { }
 
 		public ElasticClient(Uri uri) : this(new ConnectionSettings(uri)) { }
-		
+
 		/// <summary>
 		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
 		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
@@ -126,7 +130,7 @@ namespace Nest
 			if (p.ContentType != null) ForceContentType(p, p.ContentType);
 
 			var url = p.GetUrl(ConnectionSettings);
-			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
+			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !parameters.SupportsBody) ? null : new SerializableData<TRequest>(p);
 
 			return LowLevel.DoRequest<TResponse>(p.HttpMethod, url, b, parameters);
 		}
@@ -144,7 +148,7 @@ namespace Nest
 			if (p.ContentType != null) ForceContentType(p, p.ContentType);
 
 			var url = p.GetUrl(ConnectionSettings);
-			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD) ? null : new SerializableData<TRequest>(p);
+			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !parameters.SupportsBody) ? null : new SerializableData<TRequest>(p);
 
 			return LowLevel.DoRequestAsync<TResponse>(p.HttpMethod, url, ct, b, parameters);
 		}
@@ -152,7 +156,7 @@ namespace Nest
 		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
 		{
 			if (forceConfiguration == null) return;
-			
+
 			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 			forceConfiguration(configuration);
 			request.RequestParameters.RequestConfiguration = configuration;
