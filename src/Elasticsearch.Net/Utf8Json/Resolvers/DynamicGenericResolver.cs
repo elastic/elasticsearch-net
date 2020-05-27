@@ -229,6 +229,45 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 					return CreateInstance(tupleFormatterType, ti.GenericTypeArguments);
 				}
+
+				// Nullable ValueTuple
+				else if (isNullable && nullableElementType.GetTypeInfo().IsConstructedGenericType() &&
+					nullableElementType.GetTypeInfo().FullName.StartsWith("System.ValueTuple"))
+				{
+					Type tupleFormatterType = null;
+					switch (nullableElementType.GenericTypeArguments.Length)
+					{
+						case 1:
+							tupleFormatterType = typeof(ValueTupleFormatter<>);
+							break;
+						case 2:
+							tupleFormatterType = typeof(ValueTupleFormatter<,>);
+							break;
+						case 3:
+							tupleFormatterType = typeof(ValueTupleFormatter<,,>);
+							break;
+						case 4:
+							tupleFormatterType = typeof(ValueTupleFormatter<,,,>);
+							break;
+						case 5:
+							tupleFormatterType = typeof(ValueTupleFormatter<,,,,>);
+							break;
+						case 6:
+							tupleFormatterType = typeof(ValueTupleFormatter<,,,,,>);
+							break;
+						case 7:
+							tupleFormatterType = typeof(ValueTupleFormatter<,,,,,,>);
+							break;
+						case 8:
+							tupleFormatterType = typeof(ValueTupleFormatter<,,,,,,,>);
+							break;
+						default:
+							break;
+					}
+
+					var tupleFormatter = CreateInstance(tupleFormatterType, nullableElementType.GenericTypeArguments);
+					return CreateInstance(typeof(StaticNullableFormatter<>), new [] { nullableElementType }, tupleFormatter);
+				}
 #endif
 
 				// ArraySegement
