@@ -102,7 +102,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	public class DeleteExpiredDataRequestParameters : RequestParameters<DeleteExpiredDataRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		public override bool SupportsBody => false;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for DeleteFilter <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html</para></summary>
@@ -872,14 +872,14 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for ValidateJob</summary>
+	///<summary>Request options for ValidateJob <para>https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</para></summary>
 	public class ValidateJobRequestParameters : RequestParameters<ValidateJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for ValidateDetector</summary>
+	///<summary>Request options for ValidateDetector <para>https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</para></summary>
 	public class ValidateDetectorRequestParameters : RequestParameters<ValidateDetectorRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
