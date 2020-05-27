@@ -22,9 +22,10 @@ namespace ApiGenerator.Domain.Code
 			else ApiName = endpointMethodName.ToPascalCase();
 
 			//if the api name starts with the namespace do not repeat it in the method name
-			string Replace(string original, string ns, string find, string replace)
+			string Replace(string original, string ns, string find, string replace, string[] exceptions)
 			{
 				if (ns != null && Namespace != ns) return original;
+				if (exceptions.Contains(original)) return original;
 
 				var replaced = original.Replace(find, replace);
 				if (string.IsNullOrEmpty(replaced)) return original;
@@ -32,18 +33,18 @@ namespace ApiGenerator.Domain.Code
 				return replaced;
 			}
 
-			MethodName = Replace(ApiName, null, Namespace, "");
+			MethodName = Replace(ApiName, null, Namespace, "", new string[0]);
 
-			var namespaceRenames = new Dictionary<string, (string find, string replace)>
+			var namespaceRenames = new Dictionary<string, (string find, string replace, string[] exceptions)>
 			{
-				{ "Watcher", (find: "Watch", replace: "") },
-				{ "Indices", (find: "Index", replace: "") },
-				{ "CrossClusterReplication", (find: "Ccr", replace: "") },
-				{ "IndexLifecycleManagement", (find: "Ilm", replace: "") },
-				{ "SnapshotLifecycleManagement", (find: "Slm", replace: "") },
+				{ "Watcher", (find: "Watch", replace: "", exceptions: new string[0]) },
+				{ "Indices", (find: "Index", replace: "", exceptions: new string[] { "SimulateIndexTemplate" }) },
+				{ "CrossClusterReplication", (find: "Ccr", replace: "", exceptions: new string[0]) },
+				{ "IndexLifecycleManagement", (find: "Ilm", replace: "", exceptions: new string[0]) },
+				{ "SnapshotLifecycleManagement", (find: "Slm", replace: "", exceptions: new string[0]) },
 			};
-			foreach (var (ns, (find, replace)) in namespaceRenames)
-				MethodName = Replace(MethodName, ns, find, replace);
+			foreach (var (ns, (find, replace, exceptions)) in namespaceRenames)
+				MethodName = Replace(MethodName, ns, find, replace, exceptions);
 		}
 
 		/// <summary> Pascal cased version of the namespace from the specification </summary>
