@@ -47,13 +47,9 @@ namespace Examples.SnapshotRestore
 		{
 			// tag::7eb0303e39243fbb9bf51a99270cd022[]
 			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
 			// end::7eb0303e39243fbb9bf51a99270cd022[]
 
-			response0.MatchesExample(@"# PUT /_snapshot/my_backup/<snapshot-{now/d}>");
-
-			response1.MatchesExample(@"PUT /_snapshot/my_backup/%3Csnapshot-%7Bnow%2Fd%7D%3E");
+			response0.MatchesExample(@"PUT /_snapshot/my_backup/%3Csnapshot-%7Bnow%2Fd%7D%3E");
 		}
 
 		[U(Skip = "Example not implemented")]
@@ -134,11 +130,15 @@ namespace Examples.SnapshotRestore
 		[Description("snapshot-restore/take-snapshot.asciidoc:199")]
 		public void Line199()
 		{
-			// tag::2b8d2065be3002b0be26598d6ad803a6[]
+			// tag::88151217a2f66fc25ccdc26805e75be1[]
 			var response0 = new SearchResponse<object>();
-			// end::2b8d2065be3002b0be26598d6ad803a6[]
 
-			response0.MatchesExample(@"DELETE /_snapshot/my_backup");
+			var response1 = new SearchResponse<object>();
+			// end::88151217a2f66fc25ccdc26805e75be1[]
+
+			response0.MatchesExample(@"DELETE /_snapshot/my_backup/my_backup,my_fs_backup");
+
+			response1.MatchesExample(@"DELETE /_snapshot/my_backup/snap*");
 		}
 	}
 }

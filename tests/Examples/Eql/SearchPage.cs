@@ -11,14 +11,14 @@ namespace Examples.Eql
 	public class SearchPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("eql/search.asciidoc:17")]
-		public void Line17()
+		[Description("eql/search.asciidoc:22")]
+		public void Line22()
 		{
-			// tag::423f422b18fea34486a77579b2b12d72[]
+			// tag::21ee0b7d61d96fd3a72bad4c329979e5[]
 			var response0 = new SearchResponse<object>();
-			// end::423f422b18fea34486a77579b2b12d72[]
+			// end::21ee0b7d61d96fd3a72bad4c329979e5[]
 
-			response0.MatchesExample(@"PUT sec_logs/_bulk?refresh
+			response0.MatchesExample(@"PUT /sec_logs/_bulk?refresh
 			{""index"":{""_index"" : ""sec_logs"", ""_id"" : ""1""}}
 			{ ""@timestamp"": ""2020-12-06T11:04:05.000Z"", ""agent"": { ""id"": ""8a4f500d"" }, ""event"": { ""category"": ""process"" }, ""process"": { ""name"": ""cmd.exe"", ""path"": ""C:\\Windows\\System32\\cmd.exe"" } }
 			{""index"":{""_index"" : ""sec_logs"", ""_id"" : ""2""}}
@@ -32,14 +32,14 @@ namespace Examples.Eql
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("eql/search.asciidoc:48")]
-		public void Line48()
+		[Description("eql/search.asciidoc:53")]
+		public void Line53()
 		{
-			// tag::39e711af23a7eee61a1e13cf2ef7c360[]
+			// tag::975c71db4a64e43901e11e580b685ad8[]
 			var response0 = new SearchResponse<object>();
-			// end::39e711af23a7eee61a1e13cf2ef7c360[]
+			// end::975c71db4a64e43901e11e580b685ad8[]
 
-			response0.MatchesExample(@"GET sec_logs/_eql/search
+			response0.MatchesExample(@"GET /sec_logs/_eql/search
 			{
 			  ""query"": """"""
 			    process where process.name == ""cmd.exe""
@@ -48,16 +48,70 @@ namespace Examples.Eql
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("eql/search.asciidoc:136")]
-		public void Line136()
+		[Description("eql/search.asciidoc:156")]
+		public void Line156()
 		{
-			// tag::6f915983b4c12bcd1a8ca1c9cf8feed1[]
+			// tag::faccdd71120690698f663e794a85aa71[]
 			var response0 = new SearchResponse<object>();
-			// end::6f915983b4c12bcd1a8ca1c9cf8feed1[]
+			// end::faccdd71120690698f663e794a85aa71[]
 
-			response0.MatchesExample(@"GET sec_logs/_eql/search
+			response0.MatchesExample(@"GET /sec_logs/_eql/search
 			{
-			   ""event_category_field"": ""file.type"",
+			  ""query"": """"""
+			    sequence
+			      [ file where file.name == ""cmd.exe"" ]
+			      [ process where stringContains(process.name, ""regsvr32"") ]
+			  """"""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("eql/search.asciidoc:258")]
+		public void Line258()
+		{
+			// tag::412109709c109c228935f2217b04650b[]
+			var response0 = new SearchResponse<object>();
+			// end::412109709c109c228935f2217b04650b[]
+
+			response0.MatchesExample(@"GET /sec_logs/_eql/search
+			{
+			  ""query"": """"""
+			    sequence
+			      [ file where file.name == ""cmd.exe"" ] by agent.id
+			      [ process where stringContains(process.name, ""regsvr32"") ] by agent.id
+			  """"""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("eql/search.asciidoc:274")]
+		public void Line274()
+		{
+			// tag::890cdad507a87fd175a12b9f0b683f46[]
+			var response0 = new SearchResponse<object>();
+			// end::890cdad507a87fd175a12b9f0b683f46[]
+
+			response0.MatchesExample(@"GET /sec_logs/_eql/search
+			{
+			  ""query"": """"""
+			    sequence by agent.id
+			      [ file where file.name == ""cmd.exe"" ]
+			      [ process where stringContains(process.name, ""regsvr32"") ]
+			  """"""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("eql/search.asciidoc:387")]
+		public void Line387()
+		{
+			// tag::54b76e8d2063652b2cc85aa9b554704e[]
+			var response0 = new SearchResponse<object>();
+			// end::54b76e8d2063652b2cc85aa9b554704e[]
+
+			response0.MatchesExample(@"GET /sec_logs/_eql/search
+			{
+			  ""event_category_field"": ""file.type"",
 			  ""query"": """"""
 			    file where agent.id == ""8a4f500d""
 			  """"""
@@ -65,14 +119,14 @@ namespace Examples.Eql
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("eql/search.asciidoc:158")]
-		public void Line158()
+		[Description("eql/search.asciidoc:413")]
+		public void Line413()
 		{
-			// tag::382f6056cfbc3a113f675c0fbc59aaf3[]
+			// tag::0ccf234774b8263b26cb8a6149ef8855[]
 			var response0 = new SearchResponse<object>();
-			// end::382f6056cfbc3a113f675c0fbc59aaf3[]
+			// end::0ccf234774b8263b26cb8a6149ef8855[]
 
-			response0.MatchesExample(@"GET sec_logs/_eql/search
+			response0.MatchesExample(@"GET /sec_logs/_eql/search
 			{
 			  ""timestamp_field"": ""file.accessed"",
 			  ""query"": """"""
@@ -82,14 +136,14 @@ namespace Examples.Eql
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("eql/search.asciidoc:182")]
-		public void Line182()
+		[Description("eql/search.asciidoc:441")]
+		public void Line441()
 		{
-			// tag::bfdf5997fe6e1fc4e938a28fcd6c8683[]
+			// tag::578e5759595f0322170ea0a12dbf2e77[]
 			var response0 = new SearchResponse<object>();
-			// end::bfdf5997fe6e1fc4e938a28fcd6c8683[]
+			// end::578e5759595f0322170ea0a12dbf2e77[]
 
-			response0.MatchesExample(@"GET sec_logs/_eql/search
+			response0.MatchesExample(@"GET /sec_logs/_eql/search
 			{
 			  ""filter"": {
 			    ""range"" : {
@@ -101,6 +155,23 @@ namespace Examples.Eql
 			  },
 			  ""query"": """"""
 			    file where (file.type == ""file"" and file.name == ""cmd.exe"")
+			  """"""
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("eql/search.asciidoc:478")]
+		public void Line478()
+		{
+			// tag::84c67d48beab6eaa209982314a6ed0be[]
+			var response0 = new SearchResponse<object>();
+			// end::84c67d48beab6eaa209982314a6ed0be[]
+
+			response0.MatchesExample(@"GET /sec_logs/_eql/search
+			{
+			  ""case_sensitive"": true,
+			  ""query"": """"""
+			    process where stringContains(process.path, ""System32"")
 			  """"""
 			}");
 		}

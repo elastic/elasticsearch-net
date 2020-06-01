@@ -11,8 +11,8 @@ namespace Examples.Modules
 	public class HttpPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("modules/http.asciidoc:119")]
-		public void Line119()
+		[Description("modules/http.asciidoc:123")]
+		public void Line123()
 		{
 			// tag::45df8177c5f8a3cc4e36867742e8250c[]
 			var response0 = new SearchResponse<object>();
@@ -27,8 +27,8 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("modules/http.asciidoc:132")]
-		public void Line132()
+		[Description("modules/http.asciidoc:136")]
+		public void Line136()
 		{
 			// tag::fa4e5b5cd144dd03cd507ffa9dec5b7e[]
 			var response0 = new SearchResponse<object>();

@@ -182,20 +182,6 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		public void Line416()
-		{
-			// tag::7eb0303e39243fbb9bf51a99270cd022[]
-			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
-			// end::7eb0303e39243fbb9bf51a99270cd022[]
-
-			response0.MatchesExample(@"# PUT /_snapshot/my_backup/<snapshot-{now/d}>");
-
-			response1.MatchesExample(@"PUT /_snapshot/my_backup/%3Csnapshot-%7Bnow%2Fd%7D%3E");
-		}
-
-		[U(Skip = "Example not implemented")]
 		public void Line446()
 		{
 			// tag::020c56e520ff6556ebfaf98efaef56aa[]

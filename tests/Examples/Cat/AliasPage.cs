@@ -11,8 +11,8 @@ namespace Examples.Cat
 	public class AliasPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("cat/alias.asciidoc:73")]
-		public void Line73()
+		[Description("cat/alias.asciidoc:75")]
+		public void Line75()
 		{
 			// tag::a003467caeafcb2a935522efb83080cb[]
 			var response0 = new SearchResponse<object>();

@@ -11,8 +11,8 @@ namespace Examples.Ilm
 	public class UsingPoliciesRolloverPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/using-policies-rollover.asciidoc:59")]
-		public void Line59()
+		[Description("ilm/using-policies-rollover.asciidoc:38")]
+		public void Line38()
 		{
 			// tag::aed01ec7b6368fa2c8f86434e176c907[]
 			var response0 = new SearchResponse<object>();
@@ -41,8 +41,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/using-policies-rollover.asciidoc:87")]
-		public void Line87()
+		[Description("ilm/using-policies-rollover.asciidoc:66")]
+		public void Line66()
 		{
 			// tag::f29c02d259065033bd557519d1b21481[]
 			var response0 = new SearchResponse<object>();
@@ -61,8 +61,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/using-policies-rollover.asciidoc:118")]
-		public void Line118()
+		[Description("ilm/using-policies-rollover.asciidoc:97")]
+		public void Line97()
 		{
 			// tag::454e0e11e2bbb4718109a53662f8c45d[]
 			var response0 = new SearchResponse<object>();

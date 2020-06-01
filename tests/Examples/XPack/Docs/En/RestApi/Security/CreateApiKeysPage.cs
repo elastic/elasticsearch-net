@@ -11,8 +11,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 	public class CreateApiKeysPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/create-api-keys.asciidoc:70")]
-		public void Line70()
+		[Description("../../x-pack/docs/en/rest-api/security/create-api-keys.asciidoc:71")]
+		public void Line71()
 		{
 			// tag::0c8f24166d0ce7b8792781b268b544a9[]
 			var response0 = new SearchResponse<object>();

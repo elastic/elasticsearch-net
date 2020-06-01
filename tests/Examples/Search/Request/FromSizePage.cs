@@ -11,19 +11,20 @@ namespace Examples.Search.Request
 	public class FromSizePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("search/request/from-size.asciidoc:14")]
-		public void Line14()
+		[Description("search/request/from-size.asciidoc:22")]
+		public void Line22()
 		{
-			// tag::9a26759ccbd338224ecaacf7c49ab08e[]
+			// tag::e7d74af44b92196d7d55351d0a40eb81[]
 			var response0 = new SearchResponse<object>();
-			// end::9a26759ccbd338224ecaacf7c49ab08e[]
+			// end::e7d74af44b92196d7d55351d0a40eb81[]
 
 			response0.MatchesExample(@"GET /_search
 			{
-			    ""from"" : 0, ""size"" : 10,
-			    ""query"" : {
-			        ""term"" : { ""user"" : ""kimchy"" }
-			    }
+			  ""from"": 5,
+			  ""size"": 20,
+			  ""query"": {
+			    ""term"": { ""user"": ""kimchy"" }
+			  }
 			}");
 		}
 	}

@@ -11,8 +11,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class FindFileStructurePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/find-file-structure.asciidoc:247")]
-		public void Line247()
+		[Description("ml/anomaly-detection/apis/find-file-structure.asciidoc:253")]
+		public void Line253()
 		{
 			// tag::7a145f2c4ad1c3c9fea24afeadb847ef[]
 			var response0 = new SearchResponse<object>();

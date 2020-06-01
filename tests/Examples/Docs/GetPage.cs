@@ -84,8 +84,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/get.asciidoc:250")]
-		public void Line250()
+		[Description("docs/get.asciidoc:253")]
+		public void Line253()
 		{
 			// tag::98234499cfec70487cec5d013e976a84[]
 			var existsResponse = client.DocumentExists<Tweet>(0, g => g.Index("twitter"));
@@ -95,8 +95,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/get.asciidoc:266")]
-		public void Line266()
+		[Description("docs/get.asciidoc:269")]
+		public void Line269()
 		{
 			// tag::89a8ac1509936acc272fc2d72907bc45[]
 			var sourceResponse = client.Source<Tweet>(1, s => s.Index("twitter"));
@@ -106,8 +106,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/get.asciidoc:275")]
-		public void Line275()
+		[Description("docs/get.asciidoc:278")]
+		public void Line278()
 		{
 			// tag::d222c6a6ec7a3beca6c97011b0874512[]
 			var sourceFilteringResponse = client.Source<Tweet>(1, s => s
@@ -121,8 +121,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/get.asciidoc:285")]
-		public void Line285()
+		[Description("docs/get.asciidoc:288")]
+		public void Line288()
 		{
 			// tag::2468ab381257d759d8a88af1141f6f9c[]
 			var sourceExistsResponse = client.SourceExists<Tweet>(1, s => s.Index("twitter"));
@@ -132,8 +132,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/get.asciidoc:299")]
-		public void Line299()
+		[Description("docs/get.asciidoc:302")]
+		public void Line302()
 		{
 			// tag::913770050ebbf3b9b549a899bc11060a[]
 			var createIndexResponse = client.Indices.Create("twitter", c => c
@@ -171,8 +171,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/get.asciidoc:320")]
-		public void Line320()
+		[Description("docs/get.asciidoc:323")]
+		public void Line323()
 		{
 			// tag::5eabcdbf61bfcb484dc694f25c2bba36[]
 			var indexResponse = client.Index(new Tweet
@@ -190,8 +190,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/get.asciidoc:332")]
-		public void Line332()
+		[Description("docs/get.asciidoc:335")]
+		public void Line335()
 		{
 			// tag::710c7871f20f176d51209b1574b0d61b[]
 			var getResponse = client.Get<Tweet>(1, g => g
@@ -206,8 +206,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/get.asciidoc:363")]
-		public void Line363()
+		[Description("docs/get.asciidoc:366")]
+		public void Line366()
 		{
 			// tag::0ba0b2db24852abccb7c0fc1098d566e[]
 			var indexResponse = client.Index(new Tweet
@@ -229,8 +229,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/get.asciidoc:373")]
-		public void Line373()
+		[Description("docs/get.asciidoc:376")]
+		public void Line376()
 		{
 			// tag::69a7be47f85138b10437113ab2f0d72d[]
 			var getResponse = client.Get<Tweet>(2, g => g

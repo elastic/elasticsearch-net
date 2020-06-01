@@ -11,8 +11,8 @@ namespace Examples.Transform.Apis
 	public class PreviewTransformPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("transform/apis/preview-transform.asciidoc:183")]
-		public void Line183()
+		[Description("transform/apis/preview-transform.asciidoc:196")]
+		public void Line196()
 		{
 			// tag::a5ee3f40c34bd913a12e0069b6e42611[]
 			var response0 = new SearchResponse<object>();

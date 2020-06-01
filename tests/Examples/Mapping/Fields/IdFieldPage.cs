@@ -20,23 +20,19 @@ namespace Examples.Mapping.Fields
 			var response1 = new SearchResponse<object>();
 
 			var response2 = new SearchResponse<object>();
-
-			var response3 = new SearchResponse<object>();
 			// end::8d9a63d7c31f08bd27d92ece3de1649c[]
 
-			response0.MatchesExample(@"# Example documents");
-
-			response1.MatchesExample(@"PUT my_index/_doc/1
+			response0.MatchesExample(@"PUT my_index/_doc/1
 			{
 			  ""text"": ""Document with ID 1""
 			}");
 
-			response2.MatchesExample(@"PUT my_index/_doc/2?refresh=true
+			response1.MatchesExample(@"PUT my_index/_doc/2?refresh=true
 			{
 			  ""text"": ""Document with ID 2""
 			}");
 
-			response3.MatchesExample(@"GET my_index/_search
+			response2.MatchesExample(@"GET my_index/_search
 			{
 			  ""query"": {
 			    ""terms"": {

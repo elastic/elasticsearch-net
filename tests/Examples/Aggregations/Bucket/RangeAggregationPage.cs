@@ -222,35 +222,5 @@ namespace Examples.Aggregations.Bucket
 			    }
 			}");
 		}
-
-		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/range-aggregation.asciidoc:386")]
-		public void Line386()
-		{
-			// tag::4547c455375eeda5ad9f74b40d4fa61b[]
-			var response0 = new SearchResponse<object>();
-			// end::4547c455375eeda5ad9f74b40d4fa61b[]
-
-			response0.MatchesExample(@"GET /_search
-			{
-			    ""aggs"" : {
-			        ""price_ranges"" : {
-			            ""range"" : {
-			                ""field"" : ""price"",
-			                ""ranges"" : [
-			                    { ""to"" : 100 },
-			                    { ""from"" : 100, ""to"" : 200 },
-			                    { ""from"" : 200 }
-			                ]
-			            },
-			            ""aggs"" : {
-			                ""price_stats"" : {
-			                    ""stats"" : {} \<1>
-			                }
-			            }
-			        }
-			    }
-			}");
-		}
 	}
 }

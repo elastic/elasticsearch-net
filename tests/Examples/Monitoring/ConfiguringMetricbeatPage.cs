@@ -31,8 +31,8 @@ namespace Examples.Monitoring
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("monitoring/configuring-metricbeat.asciidoc:194")]
-		public void Line194()
+		[Description("monitoring/configuring-metricbeat.asciidoc:195")]
+		public void Line195()
 		{
 			// tag::519603821dc5b883fc2cf50e3d164084[]
 			var response0 = new SearchResponse<object>();

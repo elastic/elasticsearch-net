@@ -11,8 +11,8 @@ namespace Examples.Aggregations.Bucket
 	public class DatehistogramAggregationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:110")]
-		public void Line110()
+		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:119")]
+		public void Line119()
 		{
 			// tag::b789292f9cf63ce912e058c46d90ce20[]
 			var response0 = new SearchResponse<object>();
@@ -32,8 +32,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:129")]
-		public void Line129()
+		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:138")]
+		public void Line138()
 		{
 			// tag::73e5c88ad1488b213fb278ee1cb42289[]
 			var response0 = new SearchResponse<object>();
@@ -53,8 +53,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:206")]
-		public void Line206()
+		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:214")]
+		public void Line214()
 		{
 			// tag::09ecba5814d71e4c44468575eada9878[]
 			var response0 = new SearchResponse<object>();
@@ -74,8 +74,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:224")]
-		public void Line224()
+		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:232")]
+		public void Line232()
 		{
 			// tag::2bb2339ac055337abf753bddb7771659[]
 			var response0 = new SearchResponse<object>();
@@ -95,8 +95,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:295")]
-		public void Line295()
+		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:303")]
+		public void Line303()
 		{
 			// tag::8a355eb25d2a01ba62dc1a22dd46f46f[]
 			var response0 = new SearchResponse<object>();
@@ -117,8 +117,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:357")]
-		public void Line357()
+		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:380")]
+		public void Line380()
 		{
 			// tag::70f0aa5853697e265ef3b1df72940951[]
 			var response0 = new SearchResponse<object>();
@@ -152,8 +152,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:408")]
-		public void Line408()
+		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:431")]
+		public void Line431()
 		{
 			// tag::8de3206f80e18185a5ad6481f4c2ee07[]
 			var response0 = new SearchResponse<object>();
@@ -174,8 +174,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:479")]
-		public void Line479()
+		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:502")]
+		public void Line502()
 		{
 			// tag::aa6bfe54e2436eb668091fe31c2fbf4d[]
 			var response0 = new SearchResponse<object>();
@@ -210,8 +210,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:544")]
-		public void Line544()
+		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:567")]
+		public void Line567()
 		{
 			// tag::9524a9b7373fa4eb2905183b0e806962[]
 			var response0 = new SearchResponse<object>();
@@ -233,8 +233,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:613")]
-		public void Line613()
+		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:636")]
+		public void Line636()
 		{
 			// tag::39a6a038c4b551022afe83de0523634e[]
 			var response0 = new SearchResponse<object>();
@@ -255,8 +255,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:646")]
-		public void Line646()
+		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:669")]
+		public void Line669()
 		{
 			// tag::6faf10a73f7d5fffbcb037bdb2cbaff8[]
 			var response0 = new SearchResponse<object>();

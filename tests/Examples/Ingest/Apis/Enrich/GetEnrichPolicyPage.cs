@@ -22,8 +22,8 @@ namespace Examples.Ingest.Apis.Enrich
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/apis/enrich/get-enrich-policy.asciidoc:123")]
-		public void Line123()
+		[Description("ingest/apis/enrich/get-enrich-policy.asciidoc:125")]
+		public void Line125()
 		{
 			// tag::8684589e31d96ab229e8c4feb4d704bb[]
 			var response0 = new SearchResponse<object>();
@@ -33,8 +33,8 @@ namespace Examples.Ingest.Apis.Enrich
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/apis/enrich/get-enrich-policy.asciidoc:175")]
-		public void Line175()
+		[Description("ingest/apis/enrich/get-enrich-policy.asciidoc:177")]
+		public void Line177()
 		{
 			// tag::c97fd95ebdcf56cc973582e37f732ed2[]
 			var response0 = new SearchResponse<object>();

@@ -11,8 +11,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class GetDatafeedStatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/get-datafeed-stats.asciidoc:145")]
-		public void Line145()
+		[Description("ml/anomaly-detection/apis/get-datafeed-stats.asciidoc:153")]
+		public void Line153()
 		{
 			// tag::f44d287c6937785eb09b91353c1deb1e[]
 			var response0 = new SearchResponse<object>();

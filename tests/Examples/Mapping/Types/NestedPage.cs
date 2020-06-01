@@ -12,8 +12,8 @@ namespace Examples.Mapping.Types
 	public class NestedPage : ExampleBase
 	{
 		[U]
-		[Description("mapping/types/nested.asciidoc:19")]
-		public void Line19()
+		[Description("mapping/types/nested.asciidoc:22")]
+		public void Line22()
 		{
 			// tag::8baccd8688a6bad1749b8935f9601ea4[]
 			var indexResponse = client.Index(new GroupDoc
@@ -47,8 +47,8 @@ namespace Examples.Mapping.Types
 		}
 
 		[U]
-		[Description("mapping/types/nested.asciidoc:55")]
-		public void Line55()
+		[Description("mapping/types/nested.asciidoc:58")]
+		public void Line58()
 		{
 			// tag::b214942b938e47f2c486e523546cb574[]
 			var searchResponse = client.Search<GroupDoc>(s => s
@@ -84,8 +84,8 @@ namespace Examples.Mapping.Types
 		}
 
 		[U]
-		[Description("mapping/types/nested.asciidoc:80")]
-		public void Line80()
+		[Description("mapping/types/nested.asciidoc:85")]
+		public void Line85()
 		{
 			// tag::b919f88e6f47a40d5793479440a90ba6[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c

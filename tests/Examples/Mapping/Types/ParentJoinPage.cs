@@ -204,19 +204,11 @@ namespace Examples.Mapping.Types
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-
-			var response2 = new SearchResponse<object>();
-
-			var response3 = new SearchResponse<object>();
 			// end::2c090fe7ec7b66b3f5c178d71c46323b[]
 
-			response0.MatchesExample(@"# Per-index");
+			response0.MatchesExample(@"GET _stats/fielddata?human&fields=my_join_field#question");
 
-			response1.MatchesExample(@"GET _stats/fielddata?human&fields=my_join_field#question");
-
-			response2.MatchesExample(@"# Per-node per-index");
-
-			response3.MatchesExample(@"GET _nodes/stats/indices/fielddata?human&fields=my_join_field#question");
+			response1.MatchesExample(@"GET _nodes/stats/indices/fielddata?human&fields=my_join_field#question");
 		}
 
 		[U(Skip = "Example not implemented")]

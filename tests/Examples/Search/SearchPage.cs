@@ -10,23 +10,20 @@ namespace Examples.Search
 {
 	public class SearchPage : ExampleBase
 	{
-		[U]
-		[Description("search/search.asciidoc:7")]
-		public void Line7()
+		[U(Skip = "Example not implemented")]
+		[Description("search/search.asciidoc:10")]
+		public void Line10()
 		{
-			// tag::9bdd3c0d47e60c8cfafc8109f9369922[]
-			var searchResponse = client.Search<Tweet>(s => s
-				.Index("twitter")
-				.QueryOnQueryString("tag:wow")
-			);
-			// end::9bdd3c0d47e60c8cfafc8109f9369922[]
+			// tag::d2153f3100bf12c2de98f14eb86ab061[]
+			var response0 = new SearchResponse<object>();
+			// end::d2153f3100bf12c2de98f14eb86ab061[]
 
-			searchResponse.MatchesExample(@"GET /twitter/_search?q=tag:wow");
+			response0.MatchesExample(@"GET /twitter/_search");
 		}
 
 		[U]
-		[Description("search/search.asciidoc:346")]
-		public void Line346()
+		[Description("search/search.asciidoc:555")]
+		public void Line555()
 		{
 			// tag::be49260e1b3496c4feac38c56ebb0669[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -39,8 +36,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		[Description("search/search.asciidoc:392")]
-		public void Line392()
+		[Description("search/search.asciidoc:601")]
+		public void Line601()
 		{
 			// tag::f5569945024b9d664828693705c27c1a[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -53,8 +50,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		[Description("search/search.asciidoc:404")]
-		public void Line404()
+		[Description("search/search.asciidoc:613")]
+		public void Line613()
 		{
 			// tag::168bfdde773570cfc6dd3ab3574e413b[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -67,8 +64,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		[Description("search/search.asciidoc:413")]
-		public void Line413()
+		[Description("search/search.asciidoc:622")]
+		public void Line622()
 		{
 			// tag::8022e6a690344035b6472a43a9d122e0[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -81,8 +78,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		[Description("search/search.asciidoc:419")]
-		public void Line419()
+		[Description("search/search.asciidoc:628")]
+		public void Line628()
 		{
 			// tag::43682666e1abcb14770c99f02eb26a0d[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -95,6 +92,22 @@ namespace Examples.Search
 			{
 				e.Uri.Path = "/_all/_search";
 			});
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("search/search.asciidoc:637")]
+		public void Line637()
+		{
+			// tag::0ce3606f1dba490eef83c4317b315b62[]
+			var response0 = new SearchResponse<object>();
+			// end::0ce3606f1dba490eef83c4317b315b62[]
+
+			response0.MatchesExample(@"GET /twitter/_search
+			{
+			    ""query"" : {
+			        ""term"" : { ""user"" : ""kimchy"" }
+			    }
+			}");
 		}
 	}
 }

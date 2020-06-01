@@ -16,13 +16,9 @@ namespace Examples.Mapping.Fields
 		{
 			// tag::cb639c02d28945379ba10dbfb982186f[]
 			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
 			// end::cb639c02d28945379ba10dbfb982186f[]
 
-			response0.MatchesExample(@"# Example documents");
-
-			response1.MatchesExample(@"PUT my_index/_doc/1?refresh=true
+			response0.MatchesExample(@"PUT my_index/_doc/1?refresh=true
 			{
 			  ""text"": ""Document with type 'doc'""
 			}");

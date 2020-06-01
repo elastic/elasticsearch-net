@@ -11,8 +11,8 @@ namespace Examples.Cat
 	public class IndicesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("cat/indices.asciidoc:92")]
-		public void Line92()
+		[Description("cat/indices.asciidoc:94")]
+		public void Line94()
 		{
 			// tag::073539a7e38be3cdf13008330b6a536a[]
 			var response0 = new SearchResponse<object>();
