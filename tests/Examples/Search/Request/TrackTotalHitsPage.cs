@@ -38,7 +38,7 @@ namespace Examples.Search.Request
 			}", e => e.ApplyBodyChanges(json => json["query"]["match"]["message"].ToLongFormQuery()));
 		}
 
-		[U(Skip = "Track Total hits needs to support number")]
+		[U(Skip = "Track Total hits needs to support number: https://github.com/elastic/elasticsearch-net/issues/4241")]
 		[Description("search/request/track-total-hits.asciidoc:68")]
 		public void Line68()
 		{

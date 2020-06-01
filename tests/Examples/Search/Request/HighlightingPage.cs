@@ -580,7 +580,7 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U(Skip = "Client only supports Field dictionary")]
+		[U(Skip = "Waiting on PR to support Fields array: https://github.com/elastic/elasticsearch-net/issues/4724")]
 		[Description("search/request/highlighting.asciidoc:648")]
 		public void Line648()
 		{

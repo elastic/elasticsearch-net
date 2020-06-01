@@ -125,7 +125,7 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Waiting on client PR")]
+		[U(Skip = "Waiting on PR to implement: https://github.com/elastic/elasticsearch-net/issues/4721")]
 		[Description("indices/aliases.asciidoc:228")]
 		public void Line228()
 		{

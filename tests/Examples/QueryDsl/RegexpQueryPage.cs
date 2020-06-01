@@ -10,7 +10,7 @@ namespace Examples.QueryDsl
 {
 	public class RegexpQueryPage : ExampleBase
 	{
-		[U(Skip = "Waiting on PR to implement Rewrite")]
+		[U(Skip = "Waiting on PR to implement Rewrite: https://github.com/elastic/elasticsearch-net/issues/4722")]
 		[Description("query-dsl/regexp-query.asciidoc:23")]
 		public void Line23()
 		{

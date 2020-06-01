@@ -115,7 +115,7 @@ namespace Examples.Search.Request
 			}));
 		}
 
-		[U(Skip = "Needs client PR to support multiple inner hits")]
+		[U(Skip = "Waiting on PR to support multiple inner hits: https://github.com/elastic/elasticsearch-net/issues/4723")]
 		[Description("search/request/collapse.asciidoc:77")]
 		public void Line77()
 		{
