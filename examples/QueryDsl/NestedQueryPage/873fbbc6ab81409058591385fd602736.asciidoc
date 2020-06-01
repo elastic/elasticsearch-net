@@ -1,0 +1,54 @@
+// query-dsl/nested-query.asciidoc:165
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line165 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/QueryDsl/NestedQueryPage.cs#L152-L233.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var indexResponse = client.Index(new DriverDocument
+{
+    Driver = new Driver
+    {
+        LastName = "McQueen",
+        Vehicle = new[]
+        {
+                        new Vehicle
+                        {
+                            Make = "Powell Motors",
+                            Model = "Canyonero"
+                        },
+                        new Vehicle
+                        {
+                            Make = "Miller-Meteor",
+                            Model = "Ecto-1"
+                        }
+                    }
+    }
+}, i => i.Id(1).Index("drivers"));
+
+var indexResponse2 = client.Index(new DriverDocument
+{
+    Driver = new Driver
+    {
+        LastName = "Hudson",
+        Vehicle = new[]
+        {
+                        new Vehicle
+                        {
+                            Make = "Mifune",
+                            Model = "Mach Five"
+                        },
+                        new Vehicle
+                        {
+                            Make = "Miller-Meteor",
+                            Model = "Ecto-1"
+                        }
+                    }
+    }
+}, i => i.Id(2).Index("drivers"));
+----

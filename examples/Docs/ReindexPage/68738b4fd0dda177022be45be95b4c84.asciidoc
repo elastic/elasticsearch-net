@@ -3,7 +3,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line161 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/ReindexPage.cs#L35-L46.
+This file is generated from method Line161 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/ReindexPage.cs#L39-L50.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////

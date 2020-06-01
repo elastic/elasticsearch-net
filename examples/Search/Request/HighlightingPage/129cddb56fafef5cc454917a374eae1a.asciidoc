@@ -1,0 +1,65 @@
+// search/request/highlighting.asciidoc:309
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line309 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Search/Request/HighlightingPage.cs#L101-L221.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var searchResponse = client.Search<object>(s => s
+    .AllIndices()
+    .StoredFields("_id")
+    .Query(q => q
+        .Match(m => m
+            .Field("comment")
+            .Query("foo bar")
+        )
+    )
+    .Rescore(r => r
+        .Rescore(rr => rr
+            .WindowSize(50)
+            .RescoreQuery(rq => rq
+                .Query(rqq => rqq
+                    .MatchPhrase(mp => mp
+                        .Field("comment")
+                        .Query("foo bar")
+                        .Slop(1)
+                    )
+                )
+                .RescoreQueryWeight(10)
+            )
+        )
+    )
+    .Highlight(h => h
+        .Order(HighlighterOrder.Score)
+        .Fields(f => f
+            .Field("comment")
+            .FragmentSize(150)
+            .NumberOfFragments(3)
+            .HighlightQuery(hq => hq
+                .Bool(b => b
+                    .Must(mu => mu
+                        .Match(m => m
+                            .Field("comment")
+                            .Query("foo bar")
+                        )
+                    )
+                    .Should(sh => sh
+                        .MatchPhrase(mp => mp
+                            .Field("comment")
+                            .Query("foo bar")
+                            .Slop(1)
+                            .Boost(10)
+                        )
+                    )
+                    .MinimumShouldMatch(0)
+                )
+            )
+        )
+    )
+);
+----

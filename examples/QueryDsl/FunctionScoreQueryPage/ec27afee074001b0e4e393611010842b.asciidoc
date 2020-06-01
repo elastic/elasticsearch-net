@@ -1,0 +1,29 @@
+// query-dsl/function-score-query.asciidoc:380
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line380 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/QueryDsl/FunctionScoreQueryPage.cs#L322-L365.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var searchResponse = client.Search<object>(s => s
+    .AllIndices()
+    .Query(q => q
+        .FunctionScore(fs => fs
+            .Functions(fun => fun
+                .GaussDate(g => g
+                    .Field("date")
+                    .Origin("2013-09-17")
+                    .Scale("10d")
+                    .Offset("5d")
+                    .Decay(0.5)
+                )
+            )
+        )
+    )
+);
+----

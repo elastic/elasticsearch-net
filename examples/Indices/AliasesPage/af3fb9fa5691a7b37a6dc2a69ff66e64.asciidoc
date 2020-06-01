@@ -1,0 +1,23 @@
+// indices/aliases.asciidoc:196
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line196 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Indices/AliasesPage.cs#L76-L100.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var aliasResponse = client.Indices.BulkAlias(a => a
+    .Remove(al => al
+        .Index("test1")
+        .Alias("alias1")
+    )
+    .Add(al => al
+        .Index("test1")
+        .Alias("alias2")
+    )
+);
+----

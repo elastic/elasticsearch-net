@@ -1,0 +1,22 @@
+// mapping/types/keyword.asciidoc:20
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line20 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Mapping/Types/KeywordPage.cs#L13-L39.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var createIndexResponse = client.Indices.Create("my_index", c => c
+    .Map(m => m
+        .Properties(p => p
+            .Keyword(k => k
+                .Name("tags")
+            )
+        )
+    )
+);
+----

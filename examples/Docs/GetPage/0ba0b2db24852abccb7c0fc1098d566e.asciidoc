@@ -1,9 +1,9 @@
-// docs/get.asciidoc:363
+// docs/get.asciidoc:366
 
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line363 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/GetPage.cs#L205-L226.
+This file is generated from method Line366 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Docs/GetPage.cs#L208-L229.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////

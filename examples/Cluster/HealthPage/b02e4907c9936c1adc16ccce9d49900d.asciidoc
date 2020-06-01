@@ -1,0 +1,14 @@
+// cluster/health.asciidoc:143
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line143 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Cluster/HealthPage.cs#L28-L37.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var healthResponse = client.Cluster.Health();
+----

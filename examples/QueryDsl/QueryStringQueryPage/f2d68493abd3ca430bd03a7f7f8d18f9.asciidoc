@@ -1,9 +1,9 @@
-// query-dsl/query-string-query.asciidoc:255
+// query-dsl/query-string-query.asciidoc:265
 
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line255 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs#L38-L66.
+This file is generated from method Line265 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/QueryDsl/QueryStringQueryPage.cs#L41-L69.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////

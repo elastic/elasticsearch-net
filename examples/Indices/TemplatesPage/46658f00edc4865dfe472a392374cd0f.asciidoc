@@ -1,9 +1,9 @@
-// indices/templates.asciidoc:239
+// indices/templates.asciidoc:249
 
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line239 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Indices/TemplatesPage.cs#L191-L200.
+This file is generated from method Line249 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Indices/TemplatesPage.cs#L193-L202.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////

@@ -1,0 +1,30 @@
+// search/request/highlighting.asciidoc:696
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line696 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Search/Request/HighlightingPage.cs#L646-L682.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var searchResponse = client.Search<object>(s => s
+    .AllIndices()
+    .Query(q => q
+        .Match(mp => mp
+            .Field("user")
+            .Query("kimchy")
+        )
+    )
+    .Highlight(h => h
+        .Order(HighlighterOrder.Score)
+        .Fields(hf => hf
+                .Field("comment")
+                .FragmentSize(150)
+                .NumberOfFragments(3)
+        )
+    )
+);
+----
