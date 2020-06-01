@@ -10,15 +10,24 @@ namespace Examples.Search.Request
 {
 	public class TrackTotalHitsPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/track-total-hits.asciidoc:23")]
 		public void Line23()
 		{
 			// tag::32789ba30a73d8813b61c39619ad7d71[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("twitter")
+				.TrackTotalHits()
+				.Query(q => q
+					.Match(m => m
+						.Field("message")
+						.Query("Elasticsearch")
+					)
+				)
+			);
 			// end::32789ba30a73d8813b61c39619ad7d71[]
 
-			response0.MatchesExample(@"GET twitter/_search
+			searchResponse.MatchesExample(@"GET twitter/_search
 			{
 			    ""track_total_hits"": true,
 			     ""query"": {
@@ -26,18 +35,26 @@ namespace Examples.Search.Request
 			            ""message"" : ""Elasticsearch""
 			        }
 			     }
-			}");
+			}", e => e.ApplyBodyChanges(json => json["query"]["match"]["message"].ToLongFormQuery()));
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U(Skip = "Track Total hits needs to support number")]
 		[Description("search/request/track-total-hits.asciidoc:68")]
 		public void Line68()
 		{
 			// tag::e45cb729ed4a694b2d6cabaa55c9b5be[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				//.TrackTotalHits(100)
+				.Query(q => q
+					.Match(m => m
+						.Field("message")
+						.Query("Elasticsearch")
+					)
+				)
+			);
 			// end::e45cb729ed4a694b2d6cabaa55c9b5be[]
 
-			response0.MatchesExample(@"GET twitter/_search
+			searchResponse.MatchesExample(@"GET twitter/_search
 			{
 			    ""track_total_hits"": 100,
 			     ""query"": {
@@ -45,18 +62,27 @@ namespace Examples.Search.Request
 			            ""message"" : ""Elasticsearch""
 			        }
 			     }
-			}");
+			}", e => e.ApplyBodyChanges(json => json["query"]["match"]["message"].ToLongFormQuery()));
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/track-total-hits.asciidoc:142")]
 		public void Line142()
 		{
 			// tag::d9e08bca979c7ba3a9581f69470bf914[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("twitter")
+				.TrackTotalHits(false)
+				.Query(q => q
+					.Match(m => m
+						.Field("message")
+						.Query("Elasticsearch")
+					)
+				)
+			);
 			// end::d9e08bca979c7ba3a9581f69470bf914[]
 
-			response0.MatchesExample(@"GET twitter/_search
+			searchResponse.MatchesExample(@"GET twitter/_search
 			{
 			    ""track_total_hits"": false,
 			     ""query"": {
@@ -64,7 +90,7 @@ namespace Examples.Search.Request
 			            ""message"" : ""Elasticsearch""
 			        }
 			     }
-			}");
+			}", e => e.ApplyBodyChanges(json => json["query"]["match"]["message"].ToLongFormQuery()));
 		}
 	}
 }

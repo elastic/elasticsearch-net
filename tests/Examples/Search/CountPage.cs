@@ -5,47 +5,66 @@
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
+using Elasticsearch.Net;
+using Examples.Models;
 
 namespace Examples.Search
 {
 	public class CountPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/count.asciidoc:7")]
 		public void Line7()
 		{
 			// tag::1b542e3ea87a742f95641d64dcfb1bdb[]
-			var response0 = new SearchResponse<object>();
+			var countResponse = client.Count<Tweet>(c => c
+				.Index("twitter")
+				.QueryOnQueryString("user:kimchy")
+			);
 			// end::1b542e3ea87a742f95641d64dcfb1bdb[]
 
-			response0.MatchesExample(@"GET /twitter/_count?q=user:kimchy");
+			countResponse.MatchesExample(@"GET /twitter/_count?q=user:kimchy");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/count.asciidoc:92")]
 		public void Line92()
 		{
 			// tag::8f0511f8a5cb176ff2afdd4311799a33[]
-			var response0 = new SearchResponse<object>();
+			var indexResponse = client.Index(new Tweet
+			{
+				User = "kimchy"
+			}, i => i.Id(1).Index("twitter").Refresh(Refresh.True));
 
-			var response1 = new SearchResponse<object>();
+			var countResponse1 = client.Count<Tweet>(c => c
+				.Index("twitter")
+				.QueryOnQueryString("user:kimchy")
+			);
 
-			var response2 = new SearchResponse<object>();
+			var countResponse2 = client.Count<Tweet>(c => c
+				.Index("twitter")
+				.Query(q => q
+					.Term("user", "kimchy")
+				)
+			);
 			// end::8f0511f8a5cb176ff2afdd4311799a33[]
 
-			response0.MatchesExample(@"PUT /twitter/_doc/1?refresh
+			indexResponse.MatchesExample(@"PUT /twitter/_doc/1?refresh
 			{
 			    ""user"": ""kimchy""
-			}");
+			}", e =>
+			{
+				e.Uri.Query = "refresh=true";
+			});
 
-			response1.MatchesExample(@"GET /twitter/_count?q=user:kimchy");
+			countResponse1.MatchesExample(@"GET /twitter/_count?q=user:kimchy");
 
-			response2.MatchesExample(@"GET /twitter/_count
+			countResponse2.MatchesExample(@"GET /twitter/_count
 			{
 			    ""query"" : {
 			        ""term"" : { ""user"" : ""kimchy"" }
 			    }
-			}");
+			}", e => e.ApplyBodyChanges(json => json["query"]["term"]["user"].ToLongFormTermQuery()));
 		}
 	}
 }

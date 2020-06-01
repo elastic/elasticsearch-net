@@ -10,15 +10,20 @@ namespace Examples.Indices
 {
 	public class AliasesPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::d3016e4e8025362ad9a05ee86bb2061f[]
-			var response0 = new SearchResponse<object>();
+			var aliasResponse = client.Indices.BulkAlias(a => a
+				.Add(al => al
+					.Index("twitter")
+					.Alias("alias1")
+				)
+			);
 			// end::d3016e4e8025362ad9a05ee86bb2061f[]
 
-			response0.MatchesExample(@"POST /_aliases
+			aliasResponse.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        { ""add"" : { ""index"" : ""twitter"", ""alias"" : ""alias1"" } }
@@ -26,15 +31,20 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:162")]
 		public void Line162()
 		{
 			// tag::b4392116f2cc57ce8064ccbad30318d5[]
-			var response0 = new SearchResponse<object>();
+			var aliasResponse = client.Indices.BulkAlias(a => a
+				.Add(al => al
+					.Index("test1")
+					.Alias("alias1")
+				)
+			);
 			// end::b4392116f2cc57ce8064ccbad30318d5[]
 
-			response0.MatchesExample(@"POST /_aliases
+			aliasResponse.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        { ""add"" : { ""index"" : ""test1"", ""alias"" : ""alias1"" } }
@@ -42,15 +52,20 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:178")]
 		public void Line178()
 		{
 			// tag::3653567181f43a5f64c74f934aa821c2[]
-			var response0 = new SearchResponse<object>();
+			var aliasResponse = client.Indices.BulkAlias(a => a
+				.Remove(al => al
+					.Index("test1")
+					.Alias("alias1")
+				)
+			);
 			// end::3653567181f43a5f64c74f934aa821c2[]
 
-			response0.MatchesExample(@"POST /_aliases
+			aliasResponse.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        { ""remove"" : { ""index"" : ""test1"", ""alias"" : ""alias1"" } }
@@ -58,15 +73,24 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:196")]
 		public void Line196()
 		{
 			// tag::af3fb9fa5691a7b37a6dc2a69ff66e64[]
-			var response0 = new SearchResponse<object>();
+			var aliasResponse = client.Indices.BulkAlias(a => a
+				.Remove(al => al
+					.Index("test1")
+					.Alias("alias1")
+				)
+				.Add(al => al
+					.Index("test1")
+					.Alias("alias2")
+				)
+			);
 			// end::af3fb9fa5691a7b37a6dc2a69ff66e64[]
 
-			response0.MatchesExample(@"POST /_aliases
+			aliasResponse.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        { ""remove"" : { ""index"" : ""test1"", ""alias"" : ""alias1"" } },
@@ -75,15 +99,24 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:214")]
 		public void Line214()
 		{
 			// tag::f0e21e03a07c8fa0209b0aafdb3791e6[]
-			var response0 = new SearchResponse<object>();
+			var aliasResponse = client.Indices.BulkAlias(a => a
+				.Add(al => al
+					.Index("test1")
+					.Alias("alias1")
+				)
+				.Add(al => al
+					.Index("test2")
+					.Alias("alias1")
+				)
+			);
 			// end::f0e21e03a07c8fa0209b0aafdb3791e6[]
 
-			response0.MatchesExample(@"POST /_aliases
+			aliasResponse.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        { ""add"" : { ""index"" : ""test1"", ""alias"" : ""alias1"" } },
@@ -92,15 +125,19 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U(Skip = "Waiting on client PR")]
 		[Description("indices/aliases.asciidoc:228")]
 		public void Line228()
 		{
 			// tag::5f210f74725ea0c9265190346edfa246[]
-			var response0 = new SearchResponse<object>();
+			var aliasResponse = client.Indices.BulkAlias(a => a
+				.Add(al => al
+					.Alias("alias1")
+				)
+			);
 			// end::5f210f74725ea0c9265190346edfa246[]
 
-			response0.MatchesExample(@"POST /_aliases
+			aliasResponse.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        { ""add"" : { ""indices"" : [""test1"", ""test2""], ""alias"" : ""alias1"" } }
@@ -108,15 +145,20 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:245")]
 		public void Line245()
 		{
 			// tag::6799d132c1c7ca3970763acde2337ef9[]
-			var response0 = new SearchResponse<object>();
+			var aliasResponse = client.Indices.BulkAlias(a => a
+				.Add(al => al
+					.Index("test*")
+					.Alias("all_test_indices")
+				)
+			);
 			// end::6799d132c1c7ca3970763acde2337ef9[]
 
-			response0.MatchesExample(@"POST /_aliases
+			aliasResponse.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        { ""add"" : { ""index"" : ""test*"", ""alias"" : ""all_test_indices"" } }
@@ -124,23 +166,31 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:266")]
 		public void Line266()
 		{
 			// tag::de176bc4788ea286fff9e92418a43ea8[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("test");
 
-			var response1 = new SearchResponse<object>();
+			var createIndexResponse2 = client.Indices.Create("test_2");
 
-			var response2 = new SearchResponse<object>();
+			var aliasResponse = client.Indices.BulkAlias(a => a
+				.Add(al => al
+					.Index("test_2")
+					.Alias("test")
+				)
+				.RemoveIndex(al => al
+					.Index("test")
+				)
+			);
 			// end::de176bc4788ea286fff9e92418a43ea8[]
 
-			response0.MatchesExample(@"PUT test     \<1>");
+			createIndexResponse.MatchesExample(@"PUT test     \<1>");
 
-			response1.MatchesExample(@"PUT test_2   \<2>");
+			createIndexResponse2.MatchesExample(@"PUT test_2   \<2>");
 
-			response2.MatchesExample(@"POST /_aliases
+			aliasResponse.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        { ""add"":  { ""index"": ""test_2"", ""alias"": ""test"" } },
@@ -149,15 +199,23 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:294")]
 		public void Line294()
 		{
 			// tag::23ab0f1023b1b2cd5cdf2a8f9ccfd57b[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("test1", c => c
+				.Map(m => m
+					.Properties(p => p
+						.Keyword(k => k
+							.Name("user")
+						)
+					)
+				)
+			);
 			// end::23ab0f1023b1b2cd5cdf2a8f9ccfd57b[]
 
-			response0.MatchesExample(@"PUT /test1
+			createIndexResponse.MatchesExample(@"PUT /test1
 			{
 			  ""mappings"": {
 			    ""properties"": {
@@ -169,15 +227,23 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:310")]
 		public void Line310()
 		{
 			// tag::7cf71671859be7c1ecf673396db377cd[]
-			var response0 = new SearchResponse<object>();
+			var aliasResponse = client.Indices.BulkAlias(b => b
+				.Add(al => al
+					.Index("test1")
+					.Alias("alias2")
+					.Filter<object>(f => f
+						.Term("user", "kimchy")
+					)
+				)
+			);
 			// end::7cf71671859be7c1ecf673396db377cd[]
 
-			response0.MatchesExample(@"POST /_aliases
+			aliasResponse.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        {
@@ -188,18 +254,24 @@ namespace Examples.Indices
 			            }
 			        }
 			    ]
-			}");
+			}", e => e.ApplyBodyChanges(json => json["actions"][0]["add"]["filter"]["term"]["user"].ToLongFormTermQuery()));
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:338")]
 		public void Line338()
 		{
 			// tag::bc1ad5cc6d3eab98e3ce01f209ba7094[]
-			var response0 = new SearchResponse<object>();
+			var aliasResponse = client.Indices.BulkAlias(b => b
+				.Add(al => al
+					.Index("test")
+					.Alias("alias1")
+					.Routing("1")
+				)
+			);
 			// end::bc1ad5cc6d3eab98e3ce01f209ba7094[]
 
-			response0.MatchesExample(@"POST /_aliases
+			aliasResponse.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        {
@@ -213,15 +285,22 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:358")]
 		public void Line358()
 		{
 			// tag::fa0f4485cd48f986b7ae8cbb24e331c4[]
-			var response0 = new SearchResponse<object>();
+			var aliasResponse = client.Indices.BulkAlias(b => b
+				.Add(al => al
+					.Index("test")
+					.Alias("alias2")
+					.SearchRouting("1,2")
+					.IndexRouting("2")
+				)
+			);
 			// end::fa0f4485cd48f986b7ae8cbb24e331c4[]
 
-			response0.MatchesExample(@"POST /_aliases
+			aliasResponse.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        {
@@ -236,26 +315,40 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:384")]
 		public void Line384()
 		{
 			// tag::427f6b5c5376cbf0f71f242a60ca3d9e[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("alias2")
+				.QueryOnQueryString("user:kimchy")
+				.Routing("2,3")
+			);
 			// end::427f6b5c5376cbf0f71f242a60ca3d9e[]
 
-			response0.MatchesExample(@"GET /alias2/_search?q=user:kimchy&routing=2,3");
+			searchResponse.MatchesExample(@"GET /alias2/_search?q=user:kimchy&routing=2,3");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:405")]
 		public void Line405()
 		{
 			// tag::f6d6889667f56b8f49d2858070571a6b[]
-			var response0 = new SearchResponse<object>();
+			var aliasResponse = client.Indices.BulkAlias(b => b
+				.Add(al => al
+					.Index("test")
+					.Alias("alias1")
+					.IsWriteIndex()
+				)
+				.Add(al => al
+					.Index("test2")
+					.Alias("alias1")
+				)
+			);
 			// end::f6d6889667f56b8f49d2858070571a6b[]
 
-			response0.MatchesExample(@"POST /_aliases
+			aliasResponse.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        {
@@ -275,40 +368,53 @@ namespace Examples.Indices
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:431")]
 		public void Line431()
 		{
 			// tag::b0ec418bf416c62bed602b0a32a6d5f5[]
-			var response0 = new SearchResponse<object>();
+			var indexResponse = client.Index(
+				new { foo = "bar" },
+				i => i.Id(1).Index("alias1"));
 			// end::b0ec418bf416c62bed602b0a32a6d5f5[]
 
-			response0.MatchesExample(@"PUT /alias1/_doc/1
+			indexResponse.MatchesExample(@"PUT /alias1/_doc/1
 			{
 			    ""foo"": ""bar""
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:443")]
 		public void Line443()
 		{
 			// tag::67bba546d835bca8f31df13e3587c348[]
-			var response0 = new SearchResponse<object>();
+			var getResponse = client.Get<object>(1, g => g.Index("test"));
 			// end::67bba546d835bca8f31df13e3587c348[]
 
-			response0.MatchesExample(@"GET /test/_doc/1");
+			getResponse.MatchesExample(@"GET /test/_doc/1");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/aliases.asciidoc:452")]
 		public void Line452()
 		{
 			// tag::ad79228630684d950fe9792a768d24c5[]
-			var response0 = new SearchResponse<object>();
+			var aliasResponse = client.Indices.BulkAlias(b => b
+				.Add(al => al
+					.Index("test")
+					.Alias("alias1")
+					.IsWriteIndex(false)
+				)
+				.Add(al => al
+					.Index("test2")
+					.Alias("alias1")
+					.IsWriteIndex()
+				)
+			);
 			// end::ad79228630684d950fe9792a768d24c5[]
 
-			response0.MatchesExample(@"POST /_aliases
+			aliasResponse.MatchesExample(@"POST /_aliases
 			{
 			    ""actions"" : [
 			        {

@@ -10,15 +10,21 @@ namespace Examples.Search.Request
 {
 	public class IndexBoostPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/index-boost.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::69dce2801f824f61e4f3ea9ee9371e31[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.IndicesBoost(ib => ib
+					.Add("index1", 1.4)
+					.Add("index2", 1.3)
+				)
+			);
 			// end::69dce2801f824f61e4f3ea9ee9371e31[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""indices_boost"" : [
 			        { ""index1"" : 1.4 },
@@ -32,10 +38,16 @@ namespace Examples.Search.Request
 		public void Line25()
 		{
 			// tag::fb8a4322825d26c4e7b41bd763b3d392[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.IndicesBoost(ib => ib
+					.Add("alias1", 1.4)
+					.Add("index*", 1.3)
+				)
+			);
 			// end::fb8a4322825d26c4e7b41bd763b3d392[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""indices_boost"" : [
 			        { ""alias1"" : 1.4 },

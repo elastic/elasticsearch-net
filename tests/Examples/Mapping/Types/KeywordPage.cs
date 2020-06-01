@@ -10,15 +10,23 @@ namespace Examples.Mapping.Types
 {
 	public class KeywordPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("mapping/types/keyword.asciidoc:20")]
 		public void Line20()
 		{
 			// tag::46c4b0dfb674825f9579203d41e7f404[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("my_index", c => c
+				.Map(m => m
+					.Properties(p => p
+						.Keyword(k => k
+							.Name("tags")
+						)
+					)
+				)
+			);
 			// end::46c4b0dfb674825f9579203d41e7f404[]
 
-			response0.MatchesExample(@"PUT my_index
+			createIndexResponse.MatchesExample(@"PUT my_index
 			{
 			  ""mappings"": {
 			    ""properties"": {

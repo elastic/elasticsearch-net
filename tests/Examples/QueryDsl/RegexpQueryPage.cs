@@ -10,15 +10,25 @@ namespace Examples.QueryDsl
 {
 	public class RegexpQueryPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U(Skip = "Waiting on PR to implement Rewrite")]
 		[Description("query-dsl/regexp-query.asciidoc:23")]
 		public void Line23()
 		{
 			// tag::618d5f3d35921d8cb7e9ccfbe9a4c3e3[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q => q
+					.Regexp(r => r
+						.Field("user")
+						.Value("k.*y")
+						.Flags("ALL")
+						.MaximumDeterminizedStates(10_000)
+					)
+				)
+			);
 			// end::618d5f3d35921d8cb7e9ccfbe9a4c3e3[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""query"": {
 			        ""regexp"": {

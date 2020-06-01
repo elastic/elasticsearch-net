@@ -121,10 +121,26 @@ namespace Examples.Docs
 		public void Line555()
 		{
 			// tag::1aa91d3d48140d6367b6cabca8737b8f[]
-			var response0 = new SearchResponse<object>();
+			var bulkResponse = client.Bulk(b => b
+				.Update<object>(u => u
+					.Index("index1")
+					.Id("5")
+					.Doc(new { my_field = "foo" })
+				)
+				.Update<object>(u => u
+					.Index("index1")
+					.Id("6")
+					.Doc(new { my_field = "foo" })
+				)
+				.Create<object>(c => c
+					.Id("7")
+					.Index("index1")
+					.Document(new { my_field = "foo" })
+				)
+			);
 			// end::1aa91d3d48140d6367b6cabca8737b8f[]
 
-			response0.MatchesExample(@"POST /_bulk
+			bulkResponse.MatchesExample(@"POST /_bulk
 			{ ""update"": {""_id"": ""5"", ""_index"": ""index1""} }
 			{ ""doc"": {""my_field"": ""foo""} }
 			{ ""update"": {""_id"": ""6"", ""_index"": ""index1""} }
@@ -138,10 +154,27 @@ namespace Examples.Docs
 		public void Line634()
 		{
 			// tag::bfdad8a928ea30d7cf60d0a0a6bc6e2e[]
-			var response0 = new SearchResponse<object>();
+			var bulkResponse = client.Bulk(b => b
+				.FilterPath("items.*.error")
+				.Update<object>(u => u
+					.Index("index1")
+					.Id("5")
+					.Doc(new { my_field = "baz" })
+				)
+				.Update<object>(u => u
+					.Index("index1")
+					.Id("6")
+					.Doc(new { my_field = "baz" })
+				)
+				.Update<object>(c => c
+					.Id("7")
+					.Index("index1")
+					.Doc(new { my_field = "baz" })
+				)
+			);
 			// end::bfdad8a928ea30d7cf60d0a0a6bc6e2e[]
 
-			response0.MatchesExample(@"POST /_bulk?filter_path=items.*.error
+			bulkResponse.MatchesExample(@"POST /_bulk?filter_path=items.*.error
 			{ ""update"": {""_id"": ""5"", ""_index"": ""index1""} }
 			{ ""doc"": {""my_field"": ""baz""} }
 			{ ""update"": {""_id"": ""6"", ""_index"": ""index1""} }

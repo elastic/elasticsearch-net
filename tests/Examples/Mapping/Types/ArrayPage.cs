@@ -10,19 +10,45 @@ namespace Examples.Mapping.Types
 {
 	public class ArrayPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("mapping/types/array.asciidoc:42")]
 		public void Line42()
 		{
 			// tag::4d6997c70a1851f9151443c0d38b532e[]
-			var response0 = new SearchResponse<object>();
+			var indexResponse =
+				client.Index(
+					new
+					{
+						message = "some arrays in this document...",
+						tags = new[] { "elasticsearch", "wow" },
+						lists = new[]
+						{
+							new { name = "prog_list", description = "programming list" },
+							new { name = "cool_list", description = "cool stuff list" },
+						}
+					}, i => i.Id(1).Index("my_index"));
 
-			var response1 = new SearchResponse<object>();
+			var indexResponse2 =
+				client.Index(
+					new
+					{
+						message = "no arrays in this document...",
+						tags = "elasticsearch",
+						lists =new { name = "prog_list", description = "programming list" }
+					}, i => i.Id(2).Index("my_index"));
 
-			var response2 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("my_index")
+				.Query(q => q
+					.Match(m => m
+						.Field("tags")
+						.Query("elasticsearch")
+					)
+				)
+			);
 			// end::4d6997c70a1851f9151443c0d38b532e[]
 
-			response0.MatchesExample(@"PUT my_index/_doc/1
+			indexResponse.MatchesExample(@"PUT my_index/_doc/1
 			{
 			  ""message"": ""some arrays in this document..."",
 			  ""tags"":  [ ""elasticsearch"", ""wow"" ], \<1>
@@ -38,7 +64,7 @@ namespace Examples.Mapping.Types
 			  ]
 			}");
 
-			response1.MatchesExample(@"PUT my_index/_doc/2 \<3>
+			indexResponse2.MatchesExample(@"PUT my_index/_doc/2 \<3>
 			{
 			  ""message"": ""no arrays in this document..."",
 			  ""tags"":  ""elasticsearch"",
@@ -48,14 +74,14 @@ namespace Examples.Mapping.Types
 			  }
 			}");
 
-			response2.MatchesExample(@"GET my_index/_search
+			searchResponse.MatchesExample(@"GET my_index/_search
 			{
 			  ""query"": {
 			    ""match"": {
 			      ""tags"": ""elasticsearch"" \<4>
 			    }
 			  }
-			}");
+			}", e => e.ApplyBodyChanges(json => json["query"]["match"]["tags"].ToLongFormQuery()));
 		}
 	}
 }

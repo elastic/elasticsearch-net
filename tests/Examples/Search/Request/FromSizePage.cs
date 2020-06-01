@@ -10,22 +10,32 @@ namespace Examples.Search.Request
 {
 	public class FromSizePage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/from-size.asciidoc:22")]
 		public void Line22()
 		{
 			// tag::e7d74af44b92196d7d55351d0a40eb81[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.From(5)
+				.Size(20)
+				.Query(q => q
+					.Term("user", "kimchy")
+				)
+			);
 			// end::e7d74af44b92196d7d55351d0a40eb81[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			  ""from"": 5,
 			  ""size"": 20,
 			  ""query"": {
 			    ""term"": { ""user"": ""kimchy"" }
 			  }
-			}");
+			}", e =>
+			{
+				e.ApplyBodyChanges(json => json["query"]["term"]["user"].ToLongFormTermQuery());
+			});
 		}
 	}
 }

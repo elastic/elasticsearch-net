@@ -10,15 +10,25 @@ namespace Examples.Search.Request
 {
 	public class DocvalueFieldsPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/docvalue-fields.asciidoc:8")]
 		public void Line8()
 		{
 			// tag::097a6bc1d76c3fc92fb299001d27896e[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q => q
+					.MatchAll()
+				)
+				.DocValueFields(d => d
+					.Field("my_ip_field")
+					.Field("my_keyword_field")
+					.Field("my_date_field", format: DateFormat.epoch_millis)
+				)
+			);
 			// end::097a6bc1d76c3fc92fb299001d27896e[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""query"" : {
 			        ""match_all"": {}
@@ -33,18 +43,29 @@ namespace Examples.Search.Request
 			            ""format"": ""epoch_millis"" \<3>
 			        }
 			    ]
-			}");
+			}", e => e.ApplyBodyChanges(json =>
+			{
+				json["docvalue_fields"][1] = "my_keyword_field";
+			}));
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/docvalue-fields.asciidoc:36")]
 		public void Line36()
 		{
 			// tag::1518ad2c540fd55f9df84bbe75c81606[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q => q
+					.MatchAll()
+				)
+				.DocValueFields(d => d
+					.Field("*_date_field", format: DateFormat.epoch_millis)
+				)
+			);
 			// end::1518ad2c540fd55f9df84bbe75c81606[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""query"" : {
 			        ""match_all"": {}

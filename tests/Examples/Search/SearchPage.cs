@@ -5,20 +5,23 @@
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Examples.Models;
 using System.ComponentModel;
+using Nest;
 
 namespace Examples.Search
 {
 	public class SearchPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/search.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::d2153f3100bf12c2de98f14eb86ab061[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Tweet>(s => s
+				.Index("twitter")
+			);
 			// end::d2153f3100bf12c2de98f14eb86ab061[]
 
-			response0.MatchesExample(@"GET /twitter/_search");
+			searchResponse.MatchesExample(@"GET /twitter/_search");
 		}
 
 		[U]
@@ -94,20 +97,31 @@ namespace Examples.Search
 			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/search.asciidoc:637")]
 		public void Line637()
 		{
 			// tag::0ce3606f1dba490eef83c4317b315b62[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Tweet>(s => s
+				.Index("twitter")
+				.Query(q => q
+					.Term("user", "kimchy")
+				)
+			);
 			// end::0ce3606f1dba490eef83c4317b315b62[]
 
-			response0.MatchesExample(@"GET /twitter/_search
+			searchResponse.MatchesExample(@"GET /twitter/_search
 			{
 			    ""query"" : {
 			        ""term"" : { ""user"" : ""kimchy"" }
 			    }
-			}");
+			}", e =>
+			{
+				e.ApplyBodyChanges(json =>
+				{
+					json["query"]["term"]["user"].ToLongFormTermQuery();
+				});
+			});
 		}
 	}
 }
