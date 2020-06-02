@@ -6,6 +6,6 @@
 {
 	public class AutoDateHistogramAggregate : MultiBucketAggregate<DateHistogramBucket>
 	{
-		public Time Interval { get; internal set; }
+		public DateMathTime Interval { get; internal set; }
 	}
 }
