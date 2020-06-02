@@ -786,8 +786,8 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
-	///<summary>Request options for GetDataStreams <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
-	public class GetDataStreamsRequestParameters : RequestParameters<GetDataStreamsRequestParameters>
+	///<summary>Request options for GetDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class GetDataStreamRequestParameters : RequestParameters<GetDataStreamRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
