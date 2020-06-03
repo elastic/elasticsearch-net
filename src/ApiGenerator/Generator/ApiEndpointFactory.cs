@@ -88,6 +88,18 @@ namespace ApiGenerator.Generator
 
 			var patchedJson = JObject.Parse(File.ReadAllText(patchFile));
 
+			var originalApiName = original.Properties().First().Name;
+			var patchedApiName = patchedJson.Properties().First().Name;
+
+			// the patched json might define a different API name. In this case, the patched json name should replace the original
+			if (patchedApiName != originalApiName)
+			{
+				var originalValue = original[originalApiName];
+				original.Remove(originalApiName);
+				original[patchedApiName] = originalValue;
+				return;
+			}
+
 			var pathsOverride = patchedJson.SelectToken("*.url.paths");
 
 			original.Merge(patchedJson, new JsonMergeSettings

@@ -1,0 +1,6 @@
+{
+  "indices.get_data_stream":{
+    "path": "/_data_stream",
+    "paths": [ "/_data_stream", "/_data_stream/{name}" ]
+  }
+}

@@ -1513,33 +1513,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
-	///<summary>Request options for SimulateTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
-	public class SimulateTemplateRequestParameters : RequestParameters<SimulateTemplateRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
-		///<summary>User defined reason for dry-run creating the new template for simulation purposes</summary>
-		public string Cause
-		{
-			get => Q<string>("cause");
-			set => Q("cause", value);
-		}
-
-		///<summary>Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one</summary>
-		public bool? Create
-		{
-			get => Q<bool? >("create");
-			set => Q("create", value);
-		}
-
-		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout
-		{
-			get => Q<TimeSpan>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-	}
-
 	///<summary>Request options for Split <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
 	public class SplitIndexRequestParameters : RequestParameters<SplitIndexRequestParameters>
 	{

@@ -811,7 +811,7 @@ namespace Nest
 		public CatThreadPoolDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatThreadPoolDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
-		///<summary>The multiplier in which to display values</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.8.0, reason: Setting this value has no effect and will be removed from the specification.")]
+		///<summary>The multiplier in which to display values</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.7.0, reason: Setting this value has no effect and will be removed from the specification.")]
 		public CatThreadPoolDescriptor Size(Size? size) => Qs("size", size);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatThreadPoolDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
