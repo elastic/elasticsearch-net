@@ -176,7 +176,8 @@ var searchResponse = lowlevelClient.Search<StringResponse>("people", PostData.Se
     {
         match = new
         {
-            firstName = new {
+            firstName = new
+            {
             	query = "Martijn"
 			}
         }
@@ -275,4 +276,3 @@ var settings = new ConnectionConfiguration(new Uri("http://example.com:9200"))
 
 var lowlevelClient = new ElasticLowLevelClient(settings);
 ----
-
