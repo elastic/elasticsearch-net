@@ -95,6 +95,9 @@ namespace Nest
 		/// <inheritdoc cref="IShapeProperty"/>
 		TReturnType Shape(Func<ShapePropertyDescriptor<T>, IShapeProperty> selector);
 
+		/// <inheritdoc cref="IPointProperty"/>
+		TReturnType Point(Func<PointPropertyDescriptor<T>, IPointProperty> selector);
+
 		/// <inheritdoc cref="ICompletionProperty"/>
 		TReturnType Completion(Func<CompletionPropertyDescriptor<T>, ICompletionProperty> selector);
 
@@ -156,42 +159,64 @@ namespace Nest
 
 		public PropertiesDescriptor(IProperties properties) : base(properties ?? new Properties<T>()) { }
 
+		/// <inheritdoc cref="IBinaryProperty"/>
 		public PropertiesDescriptor<T> Binary(Func<BinaryPropertyDescriptor<T>, IBinaryProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IBooleanProperty"/>
 		public PropertiesDescriptor<T> Boolean(Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="ICompletionProperty"/>
 		public PropertiesDescriptor<T> Completion(Func<CompletionPropertyDescriptor<T>, ICompletionProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IDateProperty"/>
 		public PropertiesDescriptor<T> Date(Func<DatePropertyDescriptor<T>, IDateProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IDateNanosProperty"/>
 		public PropertiesDescriptor<T> DateNanos(Func<DateNanosPropertyDescriptor<T>, IDateNanosProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IDateRangeProperty"/>
 		public PropertiesDescriptor<T> DateRange(Func<DateRangePropertyDescriptor<T>, IDateRangeProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IDoubleRangeProperty"/>
 		public PropertiesDescriptor<T> DoubleRange(Func<DoubleRangePropertyDescriptor<T>, IDoubleRangeProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IFloatRangeProperty"/>
 		public PropertiesDescriptor<T> FloatRange(Func<FloatRangePropertyDescriptor<T>, IFloatRangeProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IGeoPointProperty"/>
 		public PropertiesDescriptor<T> GeoPoint(Func<GeoPointPropertyDescriptor<T>, IGeoPointProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IGeoShapeProperty"/>
 		public PropertiesDescriptor<T> GeoShape(Func<GeoShapePropertyDescriptor<T>, IGeoShapeProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IShapeProperty"/>
 		public PropertiesDescriptor<T> Shape(Func<ShapePropertyDescriptor<T>, IShapeProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IPointProperty"/>
+		public PropertiesDescriptor<T> Point(Func<PointPropertyDescriptor<T>, IPointProperty> selector) => SetProperty(selector);
+
+		/// <inheritdoc cref="IIntegerRangeProperty"/>
 		public PropertiesDescriptor<T> IntegerRange(Func<IntegerRangePropertyDescriptor<T>, IIntegerRangeProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IIpProperty"/>
 		public PropertiesDescriptor<T> Ip(Func<IpPropertyDescriptor<T>, IIpProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IIpRangeProperty"/>
 		public PropertiesDescriptor<T> IpRange(Func<IpRangePropertyDescriptor<T>, IIpRangeProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IJoinProperty"/>
 		public PropertiesDescriptor<T> Join(Func<JoinPropertyDescriptor<T>, IJoinProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IKeywordProperty"/>
 		public PropertiesDescriptor<T> Keyword(Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="ILongRangeProperty"/>
 		public PropertiesDescriptor<T> LongRange(Func<LongRangePropertyDescriptor<T>, ILongRangeProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IMurmur3HashProperty"/>
 		public PropertiesDescriptor<T> Murmur3Hash(Func<Murmur3HashPropertyDescriptor<T>, IMurmur3HashProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="INestedProperty"/>
 		public PropertiesDescriptor<T> Nested<TChild>(Func<NestedPropertyDescriptor<T, TChild>, INestedProperty> selector)
 			where TChild : class => SetProperty(selector);
 
@@ -202,18 +227,23 @@ namespace Nest
 		/// </summary>
 		public PropertiesDescriptor<T> Number(Func<NumberPropertyDescriptor<T>, INumberProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IObjectProperty"/>
 		public PropertiesDescriptor<T> Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, IObjectProperty> selector)
 			where TChild : class => SetProperty(selector);
 
+		/// <inheritdoc cref="IPercolatorProperty"/>
 		public PropertiesDescriptor<T> Percolator(Func<PercolatorPropertyDescriptor<T>, IPercolatorProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="ITextProperty"/>
 		public PropertiesDescriptor<T> Text(Func<TextPropertyDescriptor<T>, ITextProperty> selector) => SetProperty(selector);
 
 		/// <inheritdoc cref="ISearchAsYouTypeProperty"/>
 		public PropertiesDescriptor<T> SearchAsYouType(Func<SearchAsYouTypePropertyDescriptor<T>, ISearchAsYouTypeProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="ITokenCountProperty"/>
 		public PropertiesDescriptor<T> TokenCount(Func<TokenCountPropertyDescriptor<T>, ITokenCountProperty> selector) => SetProperty(selector);
 
+		/// <inheritdoc cref="IFieldAliasProperty"/>
 		public PropertiesDescriptor<T> FieldAlias(Func<FieldAliasPropertyDescriptor<T>, IFieldAliasProperty> selector) => SetProperty(selector);
 
 		/// <inheritdoc cref="IRankFeatureProperty"/>
@@ -236,6 +266,9 @@ namespace Nest
 		public PropertiesDescriptor<T> Wildcard(Func<WildcardPropertyDescriptor<T>, IWildcardProperty> selector) =>
 			SetProperty(selector);
 
+		/// <summary>
+		/// Map a custom property.
+		/// </summary>
 		public PropertiesDescriptor<T> Custom(IProperty customType) => SetProperty(customType);
 
 		private PropertiesDescriptor<T> SetProperty<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector)

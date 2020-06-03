@@ -32,6 +32,8 @@ namespace Nest
 
 		void Visit(IShapeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);
 
+		void Visit(IPointProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);
+
 		void Visit(ICompletionProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);
 
 		void Visit(IIpProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);

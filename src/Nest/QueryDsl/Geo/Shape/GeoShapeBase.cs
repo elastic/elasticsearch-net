@@ -24,9 +24,11 @@ namespace Nest
 	internal enum GeoFormat
 	{
 		GeoJson,
-		WellKnownText
+		WellKnownText,
+		String,
 	}
 
+	// TODO: Rename to ShapeType in 8.x
 	internal static class GeoShapeType
 	{
 		// WKT uses BBOX for envelope geo shape

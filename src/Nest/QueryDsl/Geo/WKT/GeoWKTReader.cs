@@ -279,7 +279,7 @@ namespace Nest
 				$"Expected number but found: {tokenizer.TokenString()}", tokenizer.LineNumber, tokenizer.Position);
 		}
 
-		private static bool IsNumberNext(WellKnownTextTokenizer tokenizer)
+		internal static bool IsNumberNext(WellKnownTextTokenizer tokenizer)
 		{
 			var token = tokenizer.PeekToken();
 			return token == TokenType.Word;

@@ -34,6 +34,8 @@ namespace Nest
 
 		void Visit(IShapeProperty property);
 
+		void Visit(IPointProperty property);
+
 		void Visit(INumberProperty property);
 
 		void Visit(ICompletionProperty property);
@@ -88,6 +90,8 @@ namespace Nest
 		public virtual void Visit(IBooleanProperty property) { }
 
 		public virtual void Visit(IBinaryProperty property) { }
+
+		public virtual void Visit(IPointProperty property) { }
 
 		public virtual void Visit(INumberProperty property) { }
 

@@ -152,5 +152,8 @@ namespace Nest
 
 		[EnumMember(Value = "wildcard")]
 		Wildcard,
+
+		[EnumMember(Value = "point")]
+		Point,
 	}
 }

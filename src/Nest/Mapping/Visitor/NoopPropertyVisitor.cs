@@ -21,6 +21,8 @@ namespace Nest
 
 		public virtual void Visit(IShapeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
+		public virtual void Visit(IPointProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+
 		public virtual void Visit(ICompletionProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
 		public virtual void Visit(IMurmur3HashProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }

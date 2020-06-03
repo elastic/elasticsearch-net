@@ -6,8 +6,9 @@ using System;
 
 namespace Nest
 {
+	// TODO: Change to WKTException in 8.x
 	/// <summary>
-	/// An exception when handling <see cref="IGeoShape" /> in Well-Known Text format
+	/// An exception when handling shapes in Well-Known Text (WKT) format
 	/// </summary>
 	public class GeoWKTException : Exception
 	{
