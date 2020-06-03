@@ -192,7 +192,8 @@ namespace Tests.ClientConcepts.LowLevel
 				{
 					match = new
 					{
-						firstName = new {
+						firstName = new
+						{
 						    query = "Martijn"
 						}
 					}
