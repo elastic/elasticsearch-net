@@ -192,8 +192,9 @@ namespace Tests.ClientConcepts.LowLevel
 				{
 					match = new
 					{
-						field = "firstName",
-						query = "Martijn"
+						firstName = new {
+						    query = "Martijn"
+						}
 					}
 				}
 			}));
@@ -217,8 +218,9 @@ namespace Tests.ClientConcepts.LowLevel
 				""size"": 10,
 				""query"": {
 					""match"": {
-						""field"": ""firstName"",
-						""query"": ""Martijn""
+						""firstName"": {
+						    ""query"": ""Martijn""
+					    }
 					}
 				}
 			}");
