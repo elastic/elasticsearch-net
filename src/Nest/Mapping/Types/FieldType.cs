@@ -5,7 +5,6 @@
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
 
-
 namespace Nest
 {
 	/// <summary>

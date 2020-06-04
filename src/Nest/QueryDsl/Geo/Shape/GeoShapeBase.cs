@@ -24,8 +24,7 @@ namespace Nest
 	internal enum GeoFormat
 	{
 		GeoJson,
-		WellKnownText,
-		String,
+		WellKnownText
 	}
 
 	// TODO: Rename to ShapeType in 8.x
