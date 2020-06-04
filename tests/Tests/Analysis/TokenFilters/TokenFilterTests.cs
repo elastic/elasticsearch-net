@@ -477,6 +477,18 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "ngram";
 		}
 
+		[SkipVersion("<7.8.0", "PreserveOriginal introduced in 7.8.0")]
+		public class NGramPreserveOriginalTests : TokenFilterAssertionBase<NGramPreserveOriginalTests>
+		{
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.NGram(n, t => t.MinGram(3).MaxGram(4).PreserveOriginal());
+
+			public override ITokenFilter Initializer => new NGramTokenFilter { MinGram = 3, MaxGram = 4, PreserveOriginal = true };
+
+			public override object Json => new { type = "ngram", min_gram = 3, max_gram = 4, preserve_original = true };
+			public override string Name => "ngrampo";
+		}
+
 		public class PatternCaptureTests : TokenFilterAssertionBase<PatternCaptureTests>
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf
