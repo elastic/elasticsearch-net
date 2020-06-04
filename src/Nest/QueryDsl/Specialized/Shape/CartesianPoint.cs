@@ -173,12 +173,12 @@ namespace Nest
 				case ShapeFormat.WellKnownText:
 					writer.WriteQuotation();
 					writer.WriteRaw(Encoding.UTF8.GetBytes(GeoShapeType.Point));
-					writer.WriteByte((byte)' ');
-					writer.WriteByte((byte)'(');
+					writer.WriteRaw((byte)' ');
+					writer.WriteRaw((byte)'(');
 					writer.WriteSingle(value.X);
-					writer.WriteByte((byte)' ');
+					writer.WriteRaw((byte)' ');
 					writer.WriteSingle(value.Y);
-					writer.WriteByte((byte)')');
+					writer.WriteRaw((byte)')');
 					writer.WriteQuotation();
 					break;
 				case ShapeFormat.String:
