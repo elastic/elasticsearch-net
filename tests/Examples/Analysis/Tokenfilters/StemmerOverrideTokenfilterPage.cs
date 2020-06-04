@@ -43,9 +43,9 @@ namespace Examples.Analysis.Tokenfilters
 		[Description("analysis/tokenfilters/stemmer-override-tokenfilter.asciidoc:57")]
 		public void Line57()
 		{
-			// tag::35e24a98b35cadd0b1b370ada79249e1[]
+			// tag::41a91d7f732c300c0e2f75c81ed0f4b5[]
 			var response0 = new SearchResponse<object>();
-			// end::35e24a98b35cadd0b1b370ada79249e1[]
+			// end::41a91d7f732c300c0e2f75c81ed0f4b5[]
 
 			response0.MatchesExample(@"PUT /my_index
 			{
@@ -61,7 +61,7 @@ namespace Examples.Analysis.Tokenfilters
 			                ""custom_stems"" : {
 			                    ""type"" : ""stemmer_override"",
 			                    ""rules"" : [
-			                        ""running => run"",
+			                        ""running, runs => run"",
 			                        ""stemmer => stemmer""
 			                    ]
 			                }

@@ -1,9 +1,9 @@
-// mapping.asciidoc:250
+// mapping.asciidoc:260
 
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line250 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Root/MappingPage.cs#L77-L89.
+This file is generated from method Line260 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Root/MappingPage.cs#L81-L93.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////

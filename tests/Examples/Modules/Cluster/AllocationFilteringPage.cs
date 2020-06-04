@@ -27,8 +27,8 @@ namespace Examples.Modules.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("modules/cluster/allocation_filtering.asciidoc:65")]
-		public void Line65()
+		[Description("modules/cluster/allocation_filtering.asciidoc:64")]
+		public void Line64()
 		{
 			// tag::07474768b8f9d532b524c15e512736f4[]
 			var response0 = new SearchResponse<object>();

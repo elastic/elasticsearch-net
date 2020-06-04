@@ -146,8 +146,8 @@ namespace ExamplesGenerator
 
 		private static MethodDeclarationSyntax CreateMethodDeclaration(ReferenceExample referenceExample)
 		{
-			// split content by blank lines and lines that start with HTTP verbs
-			var content = Content.Split(referenceExample.Content);
+			// split content by blank lines and lines that start with HTTP verbs. Remove comments starting with #
+			var content = GetContent(referenceExample.Content);
 			var statements = new List<StatementSyntax>();
 
 			for (var i = 0; i < content.Length; i++)
@@ -198,6 +198,13 @@ namespace ExamplesGenerator
 				.WithBody(Block(statements));
 
 			return methodDeclaration;
+		}
+
+		private static string[] GetContent(string content)
+		{
+			var c = Content.Split(content).ToList();
+			c.RemoveAll(l => l.StartsWith("#"));
+			return c.ToArray();
 		}
 
 		private static SeparatedSyntaxList<AttributeSyntax> GetReferencePageAttribute(ReferenceExample referenceExample) =>

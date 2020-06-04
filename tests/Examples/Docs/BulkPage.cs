@@ -49,8 +49,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/bulk.asciidoc:405")]
-		public void Line405()
+		[Description("docs/bulk.asciidoc:533")]
+		public void Line533()
 		{
 			// tag::8cd00a3aba7c3c158277bc032aac2830[]
 			var bulkResponse = client.Bulk(b => b
@@ -114,6 +114,73 @@ namespace Examples.Docs
 						(objects[8]["update"] as JObject).Add("_source", true);
 					});
 				});
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("docs/bulk.asciidoc:555")]
+		public void Line555()
+		{
+			// tag::1aa91d3d48140d6367b6cabca8737b8f[]
+			var bulkResponse = client.Bulk(b => b
+				.Update<object>(u => u
+					.Index("index1")
+					.Id("5")
+					.Doc(new { my_field = "foo" })
+				)
+				.Update<object>(u => u
+					.Index("index1")
+					.Id("6")
+					.Doc(new { my_field = "foo" })
+				)
+				.Create<object>(c => c
+					.Id("7")
+					.Index("index1")
+					.Document(new { my_field = "foo" })
+				)
+			);
+			// end::1aa91d3d48140d6367b6cabca8737b8f[]
+
+			bulkResponse.MatchesExample(@"POST /_bulk
+			{ ""update"": {""_id"": ""5"", ""_index"": ""index1""} }
+			{ ""doc"": {""my_field"": ""foo""} }
+			{ ""update"": {""_id"": ""6"", ""_index"": ""index1""} }
+			{ ""doc"": {""my_field"": ""foo""} }
+			{ ""create"": {""_id"": ""7"", ""_index"": ""index1""} }
+			{ ""my_field"": ""foo"" }");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("docs/bulk.asciidoc:634")]
+		public void Line634()
+		{
+			// tag::bfdad8a928ea30d7cf60d0a0a6bc6e2e[]
+			var bulkResponse = client.Bulk(b => b
+				.FilterPath("items.*.error")
+				.Update<object>(u => u
+					.Index("index1")
+					.Id("5")
+					.Doc(new { my_field = "baz" })
+				)
+				.Update<object>(u => u
+					.Index("index1")
+					.Id("6")
+					.Doc(new { my_field = "baz" })
+				)
+				.Update<object>(c => c
+					.Id("7")
+					.Index("index1")
+					.Doc(new { my_field = "baz" })
+				)
+			);
+			// end::bfdad8a928ea30d7cf60d0a0a6bc6e2e[]
+
+			bulkResponse.MatchesExample(@"POST /_bulk?filter_path=items.*.error
+			{ ""update"": {""_id"": ""5"", ""_index"": ""index1""} }
+			{ ""doc"": {""my_field"": ""baz""} }
+			{ ""update"": {""_id"": ""6"", ""_index"": ""index1""} }
+			{ ""doc"": {""my_field"": ""baz""} }
+			{ ""update"": {""_id"": ""7"", ""_index"": ""index1""} }
+			{ ""doc"": {""my_field"": ""baz""} }");
 		}
 	}
 }

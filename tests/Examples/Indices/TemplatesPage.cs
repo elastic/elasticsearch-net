@@ -11,8 +11,8 @@ namespace Examples.Indices
 	public class TemplatesPage : ExampleBase
 	{
 		[U]
-		[Description("indices/templates.asciidoc:10")]
-		public void Line10()
+		[Description("indices/templates.asciidoc:20")]
+		public void Line20()
 		{
 			// tag::e5f50b31f165462d883ecbff45f74985[]
 			var putIndexTemplateResponse = client.Indices.PutTemplate("template_1", t => t
@@ -57,8 +57,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/templates.asciidoc:136")]
-		public void Line136()
+		[Description("indices/templates.asciidoc:146")]
+		public void Line146()
 		{
 			// tag::1b8caf0a6741126c6d0ad83b56fce290[]
 			var putIndexTemplateResponse = client.Indices.PutTemplate("template_1", t => t
@@ -103,8 +103,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/templates.asciidoc:170")]
-		public void Line170()
+		[Description("indices/templates.asciidoc:180")]
+		public void Line180()
 		{
 			// tag::b5f95bc097a201b29c7200fc8d3d31c1[]
 			var putIndexTemplateResponse1 = client.Indices.PutTemplate("template_1", t => t
@@ -162,8 +162,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/templates.asciidoc:221")]
-		public void Line221()
+		[Description("indices/templates.asciidoc:231")]
+		public void Line231()
 		{
 			// tag::9166cf38427d5cde5d2ec12a2012b669[]
 			var putIndexTemplateResponse1 = client.Indices.PutTemplate("template_1", t => t
@@ -191,8 +191,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/templates.asciidoc:239")]
-		public void Line239()
+		[Description("indices/templates.asciidoc:249")]
+		public void Line249()
 		{
 			// tag::46658f00edc4865dfe472a392374cd0f[]
 			var getIndexTemplateResponse = client.Indices.GetTemplate("template_1", t => t.FilterPath(new[] { "*.version" }));

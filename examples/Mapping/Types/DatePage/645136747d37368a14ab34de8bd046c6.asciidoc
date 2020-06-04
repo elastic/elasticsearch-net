@@ -1,0 +1,41 @@
+// mapping/types/date.asciidoc:35
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line35 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Mapping/Types/DatePage.cs#L14-L79.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var createIndexResponse = client.Indices.Create("my_index", c => c
+    .Map(m => m
+        .Properties(p => p
+            .Date(d => d
+                .Name("date")
+            )
+        )
+    )
+);
+
+var indexResponse = client.Index(
+    new { date = "2015-01-01" },
+    i => i.Id(1).Index("my_index"));
+
+var indexResponse2 = client.Index(
+    new { date = "2015-01-01T12:10:30Z" },
+    i => i.Id(2).Index("my_index"));
+
+var indexResponse3 = client.Index(
+    new { date = 1420070400001 },
+    i => i.Id(3).Index("my_index"));
+
+var searchResponse = client.Search<object>(s => s
+    .Index("my_index")
+    .Sort(so => so
+        .Ascending("date")
+    )
+);
+----

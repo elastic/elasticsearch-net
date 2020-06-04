@@ -11,18 +11,18 @@ namespace Examples.Mapping.Types
 	public class HistogramPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("mapping/types/histogram.asciidoc:73")]
-		public void Line73()
+		[Description("mapping/types/histogram.asciidoc:76")]
+		public void Line76()
 		{
-			// tag::7d6b1797b1178e96d287831a94bb9658[]
+			// tag::fc3f5f40fa283559ca615cd0eb0a1755[]
 			var response0 = new SearchResponse<object>();
-			// end::7d6b1797b1178e96d287831a94bb9658[]
+			// end::fc3f5f40fa283559ca615cd0eb0a1755[]
 
 			response0.MatchesExample(@"PUT my_index
 			{
-			  ""mappings"": {
-			    ""properties"": {
-			      ""my_histogram"": {
+			  ""mappings"" : {
+			    ""properties"" : {
+			      ""my_histogram"" : {
 			        ""type"" : ""histogram""
 			      },
 			      ""my_text"" : {
@@ -34,8 +34,8 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("mapping/types/histogram.asciidoc:93")]
-		public void Line93()
+		[Description("mapping/types/histogram.asciidoc:96")]
+		public void Line96()
 		{
 			// tag::09774dd1a8613672844caadb2bc8dc1e[]
 			var response0 = new SearchResponse<object>();

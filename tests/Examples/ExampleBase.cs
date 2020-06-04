@@ -9,16 +9,13 @@ namespace Examples
 {
 	public abstract class ExampleBase
 	{
+		private static readonly IElasticClient StaticClient = new ElasticClient(new ConnectionSettings(new InMemoryConnection())
+			.DisableDirectStreaming());
+
 		// ReSharper disable once FieldCanBeMadeReadOnly.Global
 		// ReSharper disable once InconsistentNaming
 		protected IElasticClient client;
 
-		protected ExampleBase()
-		{
-			var settings = new ConnectionSettings(new InMemoryConnection())
-				.DisableDirectStreaming();
-
-			client = new ElasticClient(settings);
-		}
+		protected ExampleBase() => client = StaticClient;
 	}
 }

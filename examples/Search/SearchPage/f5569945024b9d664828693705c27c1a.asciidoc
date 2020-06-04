@@ -1,9 +1,9 @@
-// search/search.asciidoc:392
+// search/search.asciidoc:601
 
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line392 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Search/SearchPage.cs#L39-L51.
+This file is generated from method Line601 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Search/SearchPage.cs#L41-L53.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////

@@ -1,0 +1,36 @@
+// search/request/collapse.asciidoc:43
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line43 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Search/Request/CollapsePage.cs#L60-L116.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var searchResponse = client.Search<Tweet>(s => s
+    .Index("twitter")
+    .Query(q => q
+        .Match(m => m
+            .Field(f => f.Message)
+            .Query("elasticsearch")
+        )
+    )
+    .Collapse(c => c
+        .Field(f => f.User)
+        .InnerHits(ih => ih
+            .Name("last_tweets")
+            .Size(5)
+            .Sort(so => so
+                .Ascending("date")
+            )
+        )
+        .MaxConcurrentGroupSearches(4)
+    )
+    .Sort(so => so
+        .Field(f => f.Likes, SortOrder.Descending)
+    )
+);
+----

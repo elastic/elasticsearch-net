@@ -35,8 +35,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/async-search.asciidoc:133")]
-		public void Line133()
+		[Description("search/async-search.asciidoc:146")]
+		public void Line146()
 		{
 			// tag::14b81f96297952970b78a3216e059596[]
 			var response0 = new SearchResponse<object>();
@@ -46,8 +46,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/async-search.asciidoc:218")]
-		public void Line218()
+		[Description("search/async-search.asciidoc:233")]
+		public void Line233()
 		{
 			// tag::7a3a7fbd81e5050b42e8c1eca26c7c1d[]
 			var response0 = new SearchResponse<object>();

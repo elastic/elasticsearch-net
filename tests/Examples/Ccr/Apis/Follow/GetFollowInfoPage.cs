@@ -11,8 +11,8 @@ namespace Examples.Ccr.Apis.Follow
 	public class GetFollowInfoPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ccr/apis/follow/get-follow-info.asciidoc:36")]
-		public void Line36()
+		[Description("ccr/apis/follow/get-follow-info.asciidoc:29")]
+		public void Line29()
 		{
 			// tag::b2440b492149b705ef107137fdccb0c2[]
 			var response0 = new SearchResponse<object>();
@@ -22,8 +22,8 @@ namespace Examples.Ccr.Apis.Follow
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ccr/apis/follow/get-follow-info.asciidoc:145")]
-		public void Line145()
+		[Description("ccr/apis/follow/get-follow-info.asciidoc:139")]
+		public void Line139()
 		{
 			// tag::a520168c1c8b454a8f102d6a13027c73[]
 			var response0 = new SearchResponse<object>();

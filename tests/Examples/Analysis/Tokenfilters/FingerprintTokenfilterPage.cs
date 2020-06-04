@@ -30,9 +30,9 @@ namespace Examples.Analysis.Tokenfilters
 		[Description("analysis/tokenfilters/fingerprint-tokenfilter.asciidoc:76")]
 		public void Line76()
 		{
-			// tag::8e09caccab0c7c0f82f06cea45424396[]
+			// tag::0eb2c1284a9829224913a860190580d8[]
 			var response0 = new SearchResponse<object>();
-			// end::8e09caccab0c7c0f82f06cea45424396[]
+			// end::0eb2c1284a9829224913a860190580d8[]
 
 			response0.MatchesExample(@"PUT fingerprint_example
 			{
@@ -41,7 +41,7 @@ namespace Examples.Analysis.Tokenfilters
 			      ""analyzer"": {
 			        ""whitespace_fingerprint"": {
 			          ""tokenizer"": ""whitespace"",
-			          ""filter"": [ ""elision"" ]
+			          ""filter"": [ ""fingerprint"" ]
 			        }
 			      }
 			    }

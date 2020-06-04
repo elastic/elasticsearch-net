@@ -72,5 +72,45 @@ namespace Examples.Aggregations.Metrics
 			    }
 			}");
 		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/valuecount-aggregation.asciidoc:96")]
+		public void Line96()
+		{
+			// tag::e9fe608f105d7e3268a15e409e2cb9ab[]
+			var response0 = new SearchResponse<object>();
+
+			var response1 = new SearchResponse<object>();
+
+			var response2 = new SearchResponse<object>();
+			// end::e9fe608f105d7e3268a15e409e2cb9ab[]
+
+			response0.MatchesExample(@"PUT metrics_index/_doc/1
+			{
+			  ""network.name"" : ""net-1"",
+			  ""latency_histo"" : {
+			      ""values"" : [0.1, 0.2, 0.3, 0.4, 0.5],
+			      ""counts"" : [3, 7, 23, 12, 6] <1>
+			   }
+			}");
+
+			response1.MatchesExample(@"PUT metrics_index/_doc/2
+			{
+			  ""network.name"" : ""net-2"",
+			  ""latency_histo"" : {
+			      ""values"" :  [0.1, 0.2, 0.3, 0.4, 0.5],
+			      ""counts"" : [8, 17, 8, 7, 6] <1>
+			   }
+			}");
+
+			response2.MatchesExample(@"POST /metrics_index/_search?size=0
+			{
+			    ""aggs"" : {
+			        ""total_requests"" : {
+			            ""value_count"" : { ""field"" : ""latency_histo"" }
+			        }
+			    }
+			}");
+		}
 	}
 }

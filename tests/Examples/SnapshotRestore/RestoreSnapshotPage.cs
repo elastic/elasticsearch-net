@@ -25,23 +25,24 @@ namespace Examples.SnapshotRestore
 		[Description("snapshot-restore/restore-snapshot.asciidoc:45")]
 		public void Line45()
 		{
-			// tag::47dcf95e3d398b9bdcb0a483f705bb4b[]
+			// tag::cc42a6a42101025923c206b4249fea9e[]
 			var response0 = new SearchResponse<object>();
-			// end::47dcf95e3d398b9bdcb0a483f705bb4b[]
+			// end::cc42a6a42101025923c206b4249fea9e[]
 
 			response0.MatchesExample(@"POST /_snapshot/my_backup/snapshot_1/_restore
 			{
 			  ""indices"": ""index_1,index_2"",
 			  ""ignore_unavailable"": true,
-			  ""include_global_state"": true,
+			  ""include_global_state"": false,              <1>
 			  ""rename_pattern"": ""index_(.+)"",
-			  ""rename_replacement"": ""restored_index_$1""
+			  ""rename_replacement"": ""restored_index_$1"",
+			  ""include_aliases"": false
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/restore-snapshot.asciidoc:83")]
-		public void Line83()
+		[Description("snapshot-restore/restore-snapshot.asciidoc:88")]
+		public void Line88()
 		{
 			// tag::922df55507c66533fcadc850eecabcff[]
 			var response0 = new SearchResponse<object>();
@@ -61,8 +62,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/restore-snapshot.asciidoc:128")]
-		public void Line128()
+		[Description("snapshot-restore/restore-snapshot.asciidoc:133")]
+		public void Line133()
 		{
 			// tag::1ae301364751c376b3d26581a36d8975[]
 			var response0 = new SearchResponse<object>();
@@ -72,8 +73,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/restore-snapshot.asciidoc:137")]
-		public void Line137()
+		[Description("snapshot-restore/restore-snapshot.asciidoc:142")]
+		public void Line142()
 		{
 			// tag::db1913b97109b86cfc5efc7cfcd65d93[]
 			var response0 = new SearchResponse<object>();
@@ -83,8 +84,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/restore-snapshot.asciidoc:146")]
-		public void Line146()
+		[Description("snapshot-restore/restore-snapshot.asciidoc:151")]
+		public void Line151()
 		{
 			// tag::e566ca0098be82a2847c17069711a822[]
 			var response0 = new SearchResponse<object>();
@@ -94,8 +95,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/restore-snapshot.asciidoc:202")]
-		public void Line202()
+		[Description("snapshot-restore/restore-snapshot.asciidoc:207")]
+		public void Line207()
 		{
 			// tag::2432f86346177533cabdabbd4eb41b30[]
 			var response0 = new SearchResponse<object>();

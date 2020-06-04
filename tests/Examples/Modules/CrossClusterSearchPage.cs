@@ -11,8 +11,8 @@ namespace Examples.Modules
 	public class CrossClusterSearchPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("modules/cross-cluster-search.asciidoc:36")]
-		public void Line36()
+		[Description("modules/cross-cluster-search.asciidoc:35")]
+		public void Line35()
 		{
 			// tag::a8d39396d741e768083808bb11443e9b[]
 			var response0 = new SearchResponse<object>();
@@ -45,8 +45,8 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("modules/cross-cluster-search.asciidoc:73")]
-		public void Line73()
+		[Description("modules/cross-cluster-search.asciidoc:72")]
+		public void Line72()
 		{
 			// tag::972c0c1b6c0b8327fadd77cc1c71b532[]
 			var response0 = new SearchResponse<object>();
@@ -63,8 +63,8 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("modules/cross-cluster-search.asciidoc:144")]
-		public void Line144()
+		[Description("modules/cross-cluster-search.asciidoc:143")]
+		public void Line143()
 		{
 			// tag::6a570214755e38fd587e406d5b19b371[]
 			var response0 = new SearchResponse<object>();
@@ -81,8 +81,8 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("modules/cross-cluster-search.asciidoc:243")]
-		public void Line243()
+		[Description("modules/cross-cluster-search.asciidoc:242")]
+		public void Line242()
 		{
 			// tag::9949bcc64c9cd6f4041819546d7fce78[]
 			var response0 = new SearchResponse<object>();

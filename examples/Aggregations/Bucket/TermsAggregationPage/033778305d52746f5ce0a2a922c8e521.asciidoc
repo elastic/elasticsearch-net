@@ -1,9 +1,9 @@
-// aggregations/bucket/terms-aggregation.asciidoc:544
+// aggregations/bucket/terms-aggregation.asciidoc:410
 
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line544 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Aggregations/Bucket/TermsAggregationPage.cs#L388-L419.
+This file is generated from method Line410 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Aggregations/Bucket/TermsAggregationPage.cs#L363-L394.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////

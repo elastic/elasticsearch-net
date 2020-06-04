@@ -11,8 +11,8 @@ namespace Examples.Slm
 	public class GettingStartedSlmPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("slm/getting-started-slm.asciidoc:23")]
-		public void Line23()
+		[Description("slm/getting-started-slm.asciidoc:34")]
+		public void Line34()
 		{
 			// tag::89b72dd7f747f6297c2b089e8bc807be[]
 			var response0 = new SearchResponse<object>();
@@ -28,8 +28,8 @@ namespace Examples.Slm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("slm/getting-started-slm.asciidoc:48")]
-		public void Line48()
+		[Description("slm/getting-started-slm.asciidoc:66")]
+		public void Line66()
 		{
 			// tag::0da01289c561448254d521504d5122dd[]
 			var response0 = new SearchResponse<object>();
@@ -52,8 +52,8 @@ namespace Examples.Slm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("slm/getting-started-slm.asciidoc:105")]
-		public void Line105()
+		[Description("slm/getting-started-slm.asciidoc:119")]
+		public void Line119()
 		{
 			// tag::af5ff39759d3af0525d941634a6cdb82[]
 			var response0 = new SearchResponse<object>();
@@ -63,8 +63,8 @@ namespace Examples.Slm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("slm/getting-started-slm.asciidoc:117")]
-		public void Line117()
+		[Description("slm/getting-started-slm.asciidoc:129")]
+		public void Line129()
 		{
 			// tag::f1b545d3c3eeedf8ae09c56070c26053[]
 			var response0 = new SearchResponse<object>();

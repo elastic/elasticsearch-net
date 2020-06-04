@@ -120,5 +120,45 @@ namespace Examples.Aggregations.Metrics
 			    }
 			}");
 		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/avg-aggregation.asciidoc:139")]
+		public void Line139()
+		{
+			// tag::da2382a59a4200333accd75be74c6136[]
+			var response0 = new SearchResponse<object>();
+
+			var response1 = new SearchResponse<object>();
+
+			var response2 = new SearchResponse<object>();
+			// end::da2382a59a4200333accd75be74c6136[]
+
+			response0.MatchesExample(@"PUT metrics_index/_doc/1
+			{
+			  ""network.name"" : ""net-1"",
+			  ""latency_histo"" : {
+			      ""values"" : [0.1, 0.2, 0.3, 0.4, 0.5], <1>
+			      ""counts"" : [3, 7, 23, 12, 6] <2>
+			   }
+			}");
+
+			response1.MatchesExample(@"PUT metrics_index/_doc/2
+			{
+			  ""network.name"" : ""net-2"",
+			  ""latency_histo"" : {
+			      ""values"" :  [0.1, 0.2, 0.3, 0.4, 0.5], <1>
+			      ""counts"" : [8, 17, 8, 7, 6] <2>
+			   }
+			}");
+
+			response2.MatchesExample(@"POST /metrics_index/_search?size=0
+			{
+			    ""aggs"" : {
+			        ""avg_latency"" :
+			            { ""avg"" : { ""field"" : ""latency_histo"" }
+			        }
+			    }
+			}");
+		}
 	}
 }

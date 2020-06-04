@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj"/>
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1"/>
-    <PackageReference Include="xunit.extensibility.execution" Version="2.3.1"/>
+    <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />
   </ItemGroup>
 </Project>

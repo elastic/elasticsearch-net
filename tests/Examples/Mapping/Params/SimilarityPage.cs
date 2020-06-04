@@ -11,8 +11,8 @@ namespace Examples.Mapping.Params
 	public class SimilarityPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("mapping/params/similarity.asciidoc:33")]
-		public void Line33()
+		[Description("mapping/params/similarity.asciidoc:32")]
+		public void Line32()
 		{
 			// tag::e6e31dcdd1ca214c17e375c54069d513[]
 			var response0 = new SearchResponse<object>();

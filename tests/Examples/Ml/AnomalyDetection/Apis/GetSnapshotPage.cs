@@ -11,8 +11,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class GetSnapshotPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/get-snapshot.asciidoc:200")]
-		public void Line200()
+		[Description("ml/anomaly-detection/apis/get-snapshot.asciidoc:204")]
+		public void Line204()
 		{
 			// tag::c873f9cd093e26515148f052e28c7805[]
 			var response0 = new SearchResponse<object>();

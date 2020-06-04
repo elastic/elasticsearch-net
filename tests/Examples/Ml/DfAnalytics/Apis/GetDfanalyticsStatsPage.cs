@@ -11,14 +11,14 @@ namespace Examples.Ml.DfAnalytics.Apis
 	public class GetDfanalyticsStatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/get-dfanalytics-stats.asciidoc:84")]
-		public void Line84()
+		[Description("ml/df-analytics/apis/get-dfanalytics-stats.asciidoc:520")]
+		public void Line520()
 		{
-			// tag::cfc52956b005d57111c49dfe1735634e[]
+			// tag::dbd2834971fedbe36911933d451ae65d[]
 			var response0 = new SearchResponse<object>();
-			// end::cfc52956b005d57111c49dfe1735634e[]
+			// end::dbd2834971fedbe36911933d451ae65d[]
 
-			response0.MatchesExample(@"GET _ml/data_frame/analytics/loganalytics/_stats");
+			response0.MatchesExample(@"GET _ml/data_frame/analytics/ecommerce/_stats");
 		}
 	}
 }

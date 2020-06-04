@@ -26,8 +26,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/analyze.asciidoc:140")]
-		public void Line140()
+		[Description("indices/analyze.asciidoc:138")]
+		public void Line138()
 		{
 			// tag::76dbdd0b2bd48c3c6b1a8d81e23bafd6[]
 			var response0 = new SearchResponse<object>();
@@ -41,8 +41,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/analyze.asciidoc:154")]
-		public void Line154()
+		[Description("indices/analyze.asciidoc:152")]
+		public void Line152()
 		{
 			// tag::fd9b668eeb1f117950bd4991c7c03fb1[]
 			var response0 = new SearchResponse<object>();
@@ -56,8 +56,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/analyze.asciidoc:170")]
-		public void Line170()
+		[Description("indices/analyze.asciidoc:168")]
+		public void Line168()
 		{
 			// tag::ef33b3b373f7040b874146599db5d557[]
 			var response0 = new SearchResponse<object>();
@@ -72,8 +72,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/analyze.asciidoc:180")]
-		public void Line180()
+		[Description("indices/analyze.asciidoc:178")]
+		public void Line178()
 		{
 			// tag::dc8c94c9bef1f879282caea5c406f36e[]
 			var response0 = new SearchResponse<object>();
@@ -89,8 +89,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/analyze.asciidoc:195")]
-		public void Line195()
+		[Description("indices/analyze.asciidoc:191")]
+		public void Line191()
 		{
 			// tag::22dde5fe7ac5d85d52115641a68b3c55[]
 			var response0 = new SearchResponse<object>();
@@ -105,8 +105,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/analyze.asciidoc:210")]
-		public void Line210()
+		[Description("indices/analyze.asciidoc:206")]
+		public void Line206()
 		{
 			// tag::3951d7fcd7f849fa278daf342872125a[]
 			var response0 = new SearchResponse<object>();
@@ -119,8 +119,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/analyze.asciidoc:223")]
-		public void Line223()
+		[Description("indices/analyze.asciidoc:219")]
+		public void Line219()
 		{
 			// tag::71fa652ddea811eb3c8bf8c5db21e549[]
 			var response0 = new SearchResponse<object>();
@@ -134,8 +134,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/analyze.asciidoc:238")]
-		public void Line238()
+		[Description("indices/analyze.asciidoc:234")]
+		public void Line234()
 		{
 			// tag::de2f59887737de3a27716177b60393a2[]
 			var response0 = new SearchResponse<object>();
@@ -149,8 +149,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/analyze.asciidoc:256")]
-		public void Line256()
+		[Description("indices/analyze.asciidoc:252")]
+		public void Line252()
 		{
 			// tag::49d87c2eb7314ed34221c5fb4f21dfcc[]
 			var response0 = new SearchResponse<object>();
@@ -164,8 +164,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/analyze.asciidoc:268")]
-		public void Line268()
+		[Description("indices/analyze.asciidoc:264")]
+		public void Line264()
 		{
 			// tag::15a34bfe0ef8ef6333c8c7b55c011e5d[]
 			var response0 = new SearchResponse<object>();
@@ -179,8 +179,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/analyze.asciidoc:285")]
-		public void Line285()
+		[Description("indices/analyze.asciidoc:281")]
+		public void Line281()
 		{
 			// tag::89f8eac24f3ec6a7668d580aaf0eeefa[]
 			var response0 = new SearchResponse<object>();
@@ -197,8 +197,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/analyze.asciidoc:360")]
-		public void Line360()
+		[Description("indices/analyze.asciidoc:356")]
+		public void Line356()
 		{
 			// tag::0957bbd535f58c97b12ffba90813d64c[]
 			var response0 = new SearchResponse<object>();

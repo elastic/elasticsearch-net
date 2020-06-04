@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ExamplesGenerator
 {
@@ -30,7 +31,6 @@ namespace ExamplesGenerator
 			Hash = hash ?? throw new ArgumentNullException(nameof(hash));
 			LineNumber = lineNumber;
 			Content = content ?? throw new ArgumentNullException(nameof(content));
-
 			Name = name;
 			StartTag = $"// tag::{Hash}[]";
 			EndTag = $"// end::{Hash}[]";

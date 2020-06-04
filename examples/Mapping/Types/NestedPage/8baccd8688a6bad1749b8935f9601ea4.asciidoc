@@ -1,9 +1,9 @@
-// mapping/types/nested.asciidoc:19
+// mapping/types/nested.asciidoc:22
 
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line19 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Mapping/Types/NestedPage.cs#L10-L43.
+This file is generated from method Line22 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Mapping/Types/NestedPage.cs#L14-L47.
 If you wish to submit a PR to change this example, please change the source method above
 and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
 ////

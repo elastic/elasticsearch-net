@@ -1,0 +1,26 @@
+// query-dsl/function-score-query.asciidoc:241
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line241 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/QueryDsl/FunctionScoreQueryPage.cs#L241-L277.
+If you wish to submit a PR to change this example, please change the source method above
+and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+////
+
+[source, csharp]
+----
+var searchResponse = client.Search<object>(s => s
+    .AllIndices()
+    .Query(q => q
+        .FunctionScore(fs => fs
+            .Functions(fun => fun
+                .RandomScore(rs => rs
+                    .Seed(10)
+                    .Field("_seq_no")
+                )
+            )
+        )
+    )
+);
+----

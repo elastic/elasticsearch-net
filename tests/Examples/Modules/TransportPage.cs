@@ -11,8 +11,8 @@ namespace Examples.Modules
 	public class TransportPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("modules/transport.asciidoc:157")]
-		public void Line157()
+		[Description("modules/transport.asciidoc:155")]
+		public void Line155()
 		{
 			// tag::939e79dee613238f9512fb9cbf0be816[]
 			var response0 = new SearchResponse<object>();
@@ -27,8 +27,8 @@ namespace Examples.Modules
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("modules/transport.asciidoc:170")]
-		public void Line170()
+		[Description("modules/transport.asciidoc:168")]
+		public void Line168()
 		{
 			// tag::cecbbd7b4ec1bf82fd84ae96099febcc[]
 			var response0 = new SearchResponse<object>();

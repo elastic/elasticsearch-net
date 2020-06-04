@@ -39,8 +39,8 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		[Description("query-dsl/query-string-query.asciidoc:255")]
-		public void Line255()
+		[Description("query-dsl/query-string-query.asciidoc:265")]
+		public void Line265()
 		{
 			// tag::f2d68493abd3ca430bd03a7f7f8d18f9[]
 			var searchResponse = client.Search<object>(s => s
@@ -69,8 +69,8 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		[Description("query-dsl/query-string-query.asciidoc:271")]
-		public void Line271()
+		[Description("query-dsl/query-string-query.asciidoc:281")]
+		public void Line281()
 		{
 			// tag::e17e8852ec3f31781e1364f4dffeb6d0[]
 			var searchResponse = client.Search<object>(s => s
@@ -94,8 +94,8 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		[Description("query-dsl/query-string-query.asciidoc:287")]
-		public void Line287()
+		[Description("query-dsl/query-string-query.asciidoc:297")]
+		public void Line297()
 		{
 			// tag::a2a25aad1fea9a541b52ac613c78fb64[]
 			var searchResponse = client.Search<object>(s => s
@@ -132,8 +132,8 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		[Description("query-dsl/query-string-query.asciidoc:306")]
-		public void Line306()
+		[Description("query-dsl/query-string-query.asciidoc:316")]
+		public void Line316()
 		{
 			// tag::28aad2c5942bfb221c2bf1bbdc01658e[]
 			var searchResponse = client.Search<object>(s => s
@@ -161,8 +161,8 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		[Description("query-dsl/query-string-query.asciidoc:323")]
-		public void Line323()
+		[Description("query-dsl/query-string-query.asciidoc:333")]
+		public void Line333()
 		{
 			// tag::db6cba451ba562abe953d09ad80cc15c[]
 			var searchResponse = client.Search<object>(s => s
@@ -186,8 +186,8 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		[Description("query-dsl/query-string-query.asciidoc:342")]
-		public void Line342()
+		[Description("query-dsl/query-string-query.asciidoc:352")]
+		public void Line352()
 		{
 			// tag::58b5003c0a53a39bf509aa3797aad471[]
 			var searchResponse = client.Search<object>(s => s
@@ -216,8 +216,8 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		[Description("query-dsl/query-string-query.asciidoc:408")]
-		public void Line408()
+		[Description("query-dsl/query-string-query.asciidoc:418")]
+		public void Line418()
 		{
 			// tag::f32f0c19b42de3b87dd764fe4ca17e7c[]
 			var searchResponse = client.Search<object>(s => s
@@ -245,8 +245,8 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		[Description("query-dsl/query-string-query.asciidoc:436")]
-		public void Line436()
+		[Description("query-dsl/query-string-query.asciidoc:446")]
+		public void Line446()
 		{
 			// tag::60ee33f3acfdd0fe6f288ac77312c780[]
 			var searchResponse = client.Search<object>(s => s
@@ -278,8 +278,8 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		[Description("query-dsl/query-string-query.asciidoc:462")]
-		public void Line462()
+		[Description("query-dsl/query-string-query.asciidoc:472")]
+		public void Line472()
 		{
 			// tag::be1bd47393646ac6bbee177d1cdb7738[]
 			var searchResponse = client.Search<object>(s => s
@@ -313,8 +313,8 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		[Description("query-dsl/query-string-query.asciidoc:486")]
-		public void Line486()
+		[Description("query-dsl/query-string-query.asciidoc:496")]
+		public void Line496()
 		{
 			// tag::fdd38f0d248385a444c777e7acd97846[]
 			var searchResponse = client.Search<object>(s => s
@@ -348,8 +348,8 @@ namespace Examples.QueryDsl
 		}
 
 		[U]
-		[Description("query-dsl/query-string-query.asciidoc:518")]
-		public void Line518()
+		[Description("query-dsl/query-string-query.asciidoc:528")]
+		public void Line528()
 		{
 			// tag::6f21a878fee3b43c5332b81aaddbeac7[]
 			var searchResponse = client.Search<object>(s => s

@@ -11,8 +11,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class ForecastPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/forecast.asciidoc:61")]
-		public void Line61()
+		[Description("ml/anomaly-detection/apis/forecast.asciidoc:76")]
+		public void Line76()
 		{
 			// tag::591c7fb7451069829a14bba593136f1f[]
 			var response0 = new SearchResponse<object>();

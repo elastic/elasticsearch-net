@@ -36,37 +36,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:135")]
-		public void Line135()
-		{
-			// tag::d50a3835bf5795ac73e58906a3413544[]
-			var searchResponse = client.Search<object>(s => s
-				.AllIndices()
-				.Aggregations(a => a
-					.Terms("products", t => t
-						.Field("product")
-						.Size(5)
-					)
-				)
-			);
-			// end::d50a3835bf5795ac73e58906a3413544[]
-
-			searchResponse.MatchesExample(@"GET /_search
-			{
-			    ""aggs"" : {
-			        ""products"" : {
-			            ""terms"" : {
-			                ""field"" : ""product"",
-			                ""size"" : 5
-			            }
-			        }
-			    }
-			}");
-		}
-
-		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:264")]
-		public void Line264()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:162")]
+		public void Line162()
 		{
 			// tag::35e8da9410b8432cf4095f2541ad7b1d[]
 			var searchResponse = client.Search<object>(s => s
@@ -96,8 +67,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:341")]
-		public void Line341()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:207")]
+		public void Line207()
 		{
 			// tag::6a4679531e64c492fce16dc12de6dcb0[]
 			var searchResponse = client.Search<object>(s => s
@@ -130,8 +101,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:358")]
-		public void Line358()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:224")]
+		public void Line224()
 		{
 			// tag::93f1bdd72e79827dcf9a34efa02fd977[]
 			var searchResponse = client.Search<object>(s => s
@@ -164,8 +135,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:377")]
-		public void Line377()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:243")]
+		public void Line243()
 		{
 			// tag::71b5b2ba9557d0f296ff2de91727d2f6[]
 			var searchResponse = client.Search<object>(s => s
@@ -206,8 +177,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:397")]
-		public void Line397()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:263")]
+		public void Line263()
 		{
 			// tag::34efeade38445b2834749ced59782e25[]
 			var searchResponse = client.Search<object>(s => s
@@ -248,8 +219,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:443")]
-		public void Line443()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:309")]
+		public void Line309()
 		{
 			// tag::dc15e2373e5ecbe09b4ea0858eb63d47[]
 			var searchResponse = client.Search<object>(s => s
@@ -306,8 +277,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:470")]
-		public void Line470()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:336")]
+		public void Line336()
 		{
 			// tag::028f6d6ac2594e20b78b8a8f8cbad49d[]
 			var searchResponse = client.Search<object>(s => s
@@ -361,8 +332,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:503")]
-		public void Line503()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:369")]
+		public void Line369()
 		{
 			// tag::527324766814561b75aaee853ede49a7[]
 			var searchResponse = client.Search<object>(s => s
@@ -390,8 +361,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:544")]
-		public void Line544()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:410")]
+		public void Line410()
 		{
 			// tag::033778305d52746f5ce0a2a922c8e521[]
 			var searchResponse = client.Search<object>(s => s
@@ -423,8 +394,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:578")]
-		public void Line578()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:444")]
+		public void Line444()
 		{
 			// tag::4646764bf09911fee7d58630c72d3137[]
 			var searchResponse = client.Search<object>(s => s
@@ -460,8 +431,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:600")]
-		public void Line600()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:466")]
+		public void Line466()
 		{
 			// tag::a49169b4622918992411fab4ec48191b[]
 			var searchResponse = client.Search<object>(s => s
@@ -495,8 +466,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:626")]
-		public void Line626()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:492")]
+		public void Line492()
 		{
 			// tag::0afaf1cad692e6201aa574c8feb6e622[]
 			var searchResponse = client.Search<object>(s => s
@@ -526,8 +497,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:654")]
-		public void Line654()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:520")]
+		public void Line520()
 		{
 			// tag::98b121bf47cebd85671a2cb519688d28[]
 			var searchResponse = client.Search<object>(s => s
@@ -565,8 +536,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:683")]
-		public void Line683()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:549")]
+		public void Line549()
 		{
 			// tag::5d9d7b84e2fec7ecd832145cbb951cf1[]
 			var searchResponse = client.Search<object>(s => s
@@ -622,8 +593,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:775")]
-		public void Line775()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:641")]
+		public void Line641()
 		{
 			// tag::7f28f8ae8fcdbd807dadde0b5b007a6d[]
 			var searchResponse = client.Search<object>(s => s
@@ -665,8 +636,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:806")]
-		public void Line806()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:672")]
+		public void Line672()
 		{
 			// tag::cd5bc5bf7cd58d7b1492c9c298b345f6[]
 			var searchResponse = client.Search<object>(s => s
@@ -710,8 +681,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:857")]
-		public void Line857()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:723")]
+		public void Line723()
 		{
 			// tag::774d715155cd13713e6e327adf6ce328[]
 			var searchResponse = client.Search<object>(s => s
@@ -739,8 +710,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U]
-		[Description("aggregations/bucket/terms-aggregation.asciidoc:882")]
-		public void Line882()
+		[Description("aggregations/bucket/terms-aggregation.asciidoc:748")]
+		public void Line748()
 		{
 			// tag::f085fb032dae56a3b104ab874eaea2ad[]
 			var searchResponse = client.Search<object>(s => s

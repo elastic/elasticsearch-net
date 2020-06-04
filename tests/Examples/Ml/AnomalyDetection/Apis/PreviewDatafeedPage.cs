@@ -11,8 +11,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class PreviewDatafeedPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/preview-datafeed.asciidoc:57")]
-		public void Line57()
+		[Description("ml/anomaly-detection/apis/preview-datafeed.asciidoc:53")]
+		public void Line53()
 		{
 			// tag::38eed000de433b540116928681c520d3[]
 			var response0 = new SearchResponse<object>();

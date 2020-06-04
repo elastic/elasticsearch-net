@@ -689,7 +689,7 @@ namespace Examples.Search.Request
 			});
 		}
 
-		[U(Skip = "No representable with the client")]
+		[U(Skip = "No representable with the client, which does not support geohashes")]
 		[Description("search/request/sort.asciidoc:492")]
 		public void Line492()
 		{

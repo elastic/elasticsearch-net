@@ -11,12 +11,12 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 	public class ExampleWatchMeetupdataPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-meetupdata.asciidoc:198")]
-		public void Line198()
+		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-meetupdata.asciidoc:203")]
+		public void Line203()
 		{
-			// tag::4912f2140d10dbf15596c60319835e36[]
+			// tag::a54bebda65a6d11a6823e04f02b5db20[]
 			var response0 = new SearchResponse<object>();
-			// end::4912f2140d10dbf15596c60319835e36[]
+			// end::a54bebda65a6d11a6823e04f02b5db20[]
 
 			response0.MatchesExample(@"PUT _watcher/watch/meetup
 			{
@@ -29,8 +29,7 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 			    ""search"": {
 			      ""request"": {
 			        ""indices"": [
-			          ""<logstash-{now-1h}>"",
-			          ""<logstash-{now}>""
+			          ""logstash""
 			        ],
 			        ""body"": {
 			          ""size"": 0,
@@ -55,13 +54,13 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 			          ""aggs"": {
 			            ""group_by_city"": {
 			              ""terms"": {
-			                ""field"": ""group.group_city.raw"",
+			                ""field"": ""group.group_city.keyword"",
 			                ""size"": 5
 			              },
 			              ""aggs"": {
 			                ""group_by_event"": {
 			                  ""terms"": {
-			                    ""field"": ""event.event_url.raw"",
+			                    ""field"": ""event.event_url.keyword"",
 			                    ""size"": 5
 			                  },
 			                  ""aggs"": {
@@ -76,7 +75,7 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 			                      ""aggs"": {
 			                        ""group_by_event_name"": {
 			                          ""terms"": {
-			                            ""field"": ""event.event_name.raw""
+			                            ""field"": ""event.event_name.keyword""
 			                          }
 			                        }
 			                      }
@@ -92,7 +91,7 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 			  },
 			  ""condition"": {
 			    ""compare"": {
-			      ""ctx.payload.hits.total.value"": {
+			      ""ctx.payload.hits.total"": {
 			        ""gt"": 0
 			      }
 			    }
@@ -114,8 +113,8 @@ namespace Examples.XPack.Docs.En.Watcher.ExampleWatches
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-meetupdata.asciidoc:303")]
-		public void Line303()
+		[Description("../../x-pack/docs/en/watcher/example-watches/example-watch-meetupdata.asciidoc:307")]
+		public void Line307()
 		{
 			// tag::4be6ee22c2cddc72c21a76cda23705ed[]
 			var response0 = new SearchResponse<object>();

@@ -11,8 +11,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class OpenJobPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/open-job.asciidoc:54")]
-		public void Line54()
+		[Description("ml/anomaly-detection/apis/open-job.asciidoc:65")]
+		public void Line65()
 		{
 			// tag::a6204edaa0bcf7b82a89ab4f6bda0914[]
 			var response0 = new SearchResponse<object>();

@@ -12,8 +12,8 @@ namespace Examples.Cluster
 	{
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/update-settings.asciidoc:65")]
-		public void Line65()
+		[Description("cluster/update-settings.asciidoc:62")]
+		public void Line62()
 		{
 			// tag::37f4bd6dd220db648998fc340b3dfa69[]
 			var response0 = new SearchResponse<object>();
@@ -28,8 +28,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/update-settings.asciidoc:78")]
-		public void Line78()
+		[Description("cluster/update-settings.asciidoc:75")]
+		public void Line75()
 		{
 			// tag::8c05281b724106e703c05df661188c4f[]
 			var response0 = new SearchResponse<object>();
@@ -44,8 +44,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/update-settings.asciidoc:107")]
-		public void Line107()
+		[Description("cluster/update-settings.asciidoc:104")]
+		public void Line104()
 		{
 			// tag::1f25c9ef11f574f1ba0ad974bf653cd4[]
 			var response0 = new SearchResponse<object>();
@@ -60,8 +60,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/update-settings.asciidoc:134")]
-		public void Line134()
+		[Description("cluster/update-settings.asciidoc:131")]
+		public void Line131()
 		{
 			// tag::32496570a397852bece96f4da5d17a7e[]
 			var response0 = new SearchResponse<object>();
