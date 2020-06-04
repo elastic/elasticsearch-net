@@ -34,6 +34,8 @@ namespace Nest
 
 		/// <summary>
 		/// Emits original token when set to <c>true</c>. Defaults to <c>false</c>.
+		/// <para />
+		/// Available in Elasticsearch 7.8.0+
 		/// </summary>
 		[DataMember(Name = "preserve_original")]
 		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
