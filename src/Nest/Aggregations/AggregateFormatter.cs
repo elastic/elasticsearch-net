@@ -665,7 +665,7 @@ namespace Nest
 				reader.ReadNext();
 				propertyName = reader.ReadPropertyNameSegmentRaw();
 				if (propertyName.EqualsBytes(JsonWriter.GetEncodedPropertyNameWithoutQuotation("interval")))
-					bucket.Interval = formatterResolver.GetFormatter<Time>().Deserialize(ref reader, formatterResolver);
+					bucket.AutoInterval = formatterResolver.GetFormatter<DateMathTime>().Deserialize(ref reader, formatterResolver);
 				else
 					// skip for now
 					reader.ReadNextBlock();

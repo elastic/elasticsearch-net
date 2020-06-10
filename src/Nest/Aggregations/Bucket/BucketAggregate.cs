@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
 
@@ -68,6 +69,10 @@ namespace Nest
 		public IReadOnlyCollection<IBucket> Items { get; set; } = EmptyReadOnly<IBucket>.Collection;
 		public IReadOnlyDictionary<string, object> Meta { get; set; } = EmptyReadOnly<string, object>.Dictionary;
 		public long? SumOtherDocCount { get; set; }
+
+		[Obsolete("Use AutoInterval. This property is incorrectly mapped to the wrong type")]
 		public Time Interval { get; set; }
+
+		public DateMathTime AutoInterval { get; set; }
 	}
 }
