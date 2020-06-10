@@ -129,6 +129,12 @@ namespace Tests.XPack.Info
 			{
 				r.Enrich.Should().NotBeNull();
 			}
+
+			if (TestConfiguration.Instance.InRange(">=7.8.0"))
+			{
+				r.Analytics.Should().NotBeNull();
+				r.Analytics.Stats.Should().NotBeNull().And.NotBeEmpty();
+			}
 		});
 	}
 }
