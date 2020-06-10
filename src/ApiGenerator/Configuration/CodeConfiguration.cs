@@ -52,9 +52,6 @@ namespace ApiGenerator.Configuration
 			"searchable_snapshots.mount.json",
 			"searchable_snapshots.repository_stats.json",
 
-			"cluster.delete_voting_config_exclusions.json",
-			"cluster.post_voting_config_exclusions.json",
-
 			"autoscaling.get_autoscaling_decision.json", // 7.7 experimental
 			"eql.search.json", // 7.7 beta
 			"get_script_context.json", // 7.7 experimental
@@ -78,12 +75,10 @@ namespace ApiGenerator.Configuration
 			"ml.stop_data_frame_analytics.json", // 7.7 experimental
 			"rank_eval.json", // 7.7 experimental
 			"scripts_painless_context.json", // 7.7 experimental
-
-			// 7.7 - to be implemented
-			"cluster.delete_component_template.json",
-			"cluster.get_component_template.json",
-			"cluster.put_component_template.json",
-			"cluster.exists_component_template.json",
+			"cluster.delete_component_template.json", // 7.8 experimental
+			"cluster.get_component_template.json", // 7.8 experimental
+			"cluster.put_component_template.json", // 7.8 experimental
+			"cluster.exists_component_template.json", // 7.8 experimental
 		};
 
 		/// <summary>
