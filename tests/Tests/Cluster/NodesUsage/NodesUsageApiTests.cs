@@ -7,8 +7,10 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 
@@ -23,6 +25,21 @@ namespace Tests.Cluster.NodesUsage
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_nodes/usage";
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			var searchResponse = client.Search<Project>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.Average("avg_commits", avg => avg
+						.Field(f => f.NumberOfCommits)
+					)
+				)
+			);
+
+			if (!searchResponse.IsValid)
+				throw new Exception($"Exception when setting up {nameof(NodesUsageApiTests)}: {searchResponse.DebugInformation}");
+		}
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Nodes.Usage(),
@@ -43,9 +60,15 @@ namespace Tests.Cluster.NodesUsage
 			response.Nodes.Should().NotBeNull();
 			response.Nodes.Should().HaveCount(1);
 
-			response.Nodes.First().Value.Timestamp.Should().BeBefore(DateTimeOffset.UtcNow);
-			response.Nodes.First().Value.Since.Should().BeBefore(DateTimeOffset.UtcNow);
-			response.Nodes.First().Value.RestActions.Should().NotBeNull();
+			var firstNode = response.Nodes.First();
+			firstNode.Value.Timestamp.Should().BeBefore(DateTimeOffset.UtcNow);
+			firstNode.Value.Since.Should().BeBefore(DateTimeOffset.UtcNow);
+			firstNode.Value.RestActions.Should().NotBeNull();
+
+			if (TestClient.Configuration.InRange(">=7.8.0"))
+			{
+				firstNode.Value.Aggregations.Should().NotBeNull().And.ContainKey("avg");
+			}
 		}
 	}
 }
