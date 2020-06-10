@@ -98,6 +98,18 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "etf";
 		}
 
+		[SkipVersion("<7.8.0", "PreserveOriginal introduced in 7.8.0")]
+		public class EdgeNgramPreserveOriginalTests : TokenFilterAssertionBase<EdgeNgramPreserveOriginalTests>
+		{
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.EdgeNGram(n, t => t.MaxGram(2).MinGram(1).PreserveOriginal());
+
+			public override ITokenFilter Initializer => new EdgeNGramTokenFilter { MaxGram = 2, MinGram = 1, PreserveOriginal = true };
+
+			public override object Json => new { type = "edge_ngram", min_gram = 1, max_gram = 2, preserve_original = true };
+			public override string Name => "etfpo";
+		}
+
 		public class ElisionTests : TokenFilterAssertionBase<ElisionTests>
 		{
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Elision(n, t => t.Articles("a", "b", "c").ArticlesCase());
