@@ -31,6 +31,15 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="side")]
 		EdgeNGramSide? Side { get; set; }
+
+		/// <summary>
+		/// Emits original token when set to <c>true</c>. Defaults to <c>false</c>.
+		/// <para />
+		/// Available in Elasticsearch 7.8.0+
+		/// </summary>
+		[DataMember(Name = "preserve_original")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
+		bool? PreserveOriginal { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -46,6 +55,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public EdgeNGramSide? Side { get; set; }
+
+		/// <inheritdoc />
+		public bool? PreserveOriginal { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -54,17 +66,21 @@ namespace Nest
 	{
 		protected override string Type => "edge_ngram";
 		int? IEdgeNGramTokenFilter.MaxGram { get; set; }
-
 		int? IEdgeNGramTokenFilter.MinGram { get; set; }
 		EdgeNGramSide? IEdgeNGramTokenFilter.Side { get; set; }
+		bool? IEdgeNGramTokenFilter.PreserveOriginal { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IEdgeNGramTokenFilter.MinGram" />
 		public EdgeNGramTokenFilterDescriptor MinGram(int? minGram) => Assign(minGram, (a, v) => a.MinGram = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IEdgeNGramTokenFilter.MaxGram" />
 		public EdgeNGramTokenFilterDescriptor MaxGram(int? maxGram) => Assign(maxGram, (a, v) => a.MaxGram = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IEdgeNGramTokenFilter.Side" />
 		public EdgeNGramTokenFilterDescriptor Side(EdgeNGramSide? side) => Assign(side, (a, v) => a.Side = v);
+
+		/// <inheritdoc cref="IEdgeNGramTokenFilter.PreserveOriginal" />
+		public EdgeNGramTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true) =>
+			Assign(preserveOriginal, (a, v) => a.PreserveOriginal = v);
 	}
 }
