@@ -25,24 +25,31 @@ namespace Nest
 		/// <inheritdoc cref="ITransformSyncContainer"/>
 		[DataMember(Name = "sync")]
 		public ITransformSyncContainer Sync { get; set; }
+
+		/// <inheritdoc cref="ITransformSettings"/>
+		[DataMember(Name = "settings")]
+		public ITransformSettings Settings { get; set; }
 	}
 
 	public partial class UpdateTransformRequest
 	{
-		/// <inheritdoc cref="IPutTransformRequest.Description"/>
+		/// <inheritdoc cref="IUpdateTransformRequest.Description"/>
 		public string Description { get; set; }
 
-		/// <inheritdoc cref="IPutTransformRequest.Source"/>
+		/// <inheritdoc cref="IUpdateTransformRequest.Source"/>
 		public ITransformSource Source { get; set; }
 
-		/// <inheritdoc cref="IPutTransformRequest.Destination"/>
+		/// <inheritdoc cref="IUpdateTransformRequest.Destination"/>
 		public ITransformDestination Destination { get; set; }
 
-		/// <inheritdoc cref="IPutTransformRequest.Frequency"/>
+		/// <inheritdoc cref="IUpdateTransformRequest.Frequency"/>
 		public Time Frequency { get; set; }
 
-		/// <inheritdoc cref="IPutTransformRequest.Sync"/>
+		/// <inheritdoc cref="IUpdateTransformRequest.Sync"/>
 		public ITransformSyncContainer Sync { get; set; }
+
+		/// <inheritdoc cref="IUpdateTransformRequest.Settings"/>
+		public ITransformSettings Settings { get; set; }
 	}
 
 	public partial class UpdateTransformDescriptor<TDocument> : IUpdateTransformRequest where TDocument : class
@@ -52,6 +59,7 @@ namespace Nest
 		ITransformDestination IUpdateTransformRequest.Destination { get; set; }
 		Time IUpdateTransformRequest.Frequency { get; set; }
 		ITransformSyncContainer IUpdateTransformRequest.Sync { get; set; }
+		ITransformSettings IUpdateTransformRequest.Settings { get; set; }
 
 		/// <inheritdoc cref="IUpdateTransformRequest.Description"/>
 		public UpdateTransformDescriptor<TDocument> Description(string description) =>
@@ -71,5 +79,9 @@ namespace Nest
 		/// <inheritdoc cref="IUpdateTransformRequest.Sync"/>
 		public UpdateTransformDescriptor<TDocument> Sync(Func<TransformSyncContainerDescriptor<TDocument>, ITransformSyncContainer> selector) =>
 			Assign(selector?.Invoke(new TransformSyncContainerDescriptor<TDocument>()), (a, v) => a.Sync = v);
+
+		/// <inheritdoc cref="IUpdateTransformRequest.Settings"/>
+		public UpdateTransformDescriptor<TDocument> Settings(Func<TransformSettingsDescriptor, ITransformSettings> selector) =>
+			Assign(selector?.Invoke(new TransformSettingsDescriptor()), (a, v) => a.Settings = v);
 	}
 }
