@@ -11,6 +11,14 @@ namespace Nest
 {
 	public class NodeUsageInformation
 	{
+		/// <summary>
+		/// Aggregation usage.
+		/// <para />
+		/// Available in Elasticsearch 7.8.0+
+		/// </summary>
+		[DataMember(Name ="aggregations")]
+		public IReadOnlyDictionary<string, IReadOnlyDictionary<string, long>> Aggregations { get; internal set; }
+
 		[DataMember(Name ="rest_actions")]
 		public IReadOnlyDictionary<string, int> RestActions { get; internal set; }
 
