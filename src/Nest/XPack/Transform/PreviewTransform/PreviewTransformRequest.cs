@@ -29,6 +29,10 @@ namespace Nest
 		/// <inheritdoc cref="ITransformSyncContainer"/>
 		[DataMember(Name = "sync")]
 		public ITransformSyncContainer Sync { get; set; }
+
+		/// <inheritdoc cref="IPutTransformRequest.Settings"/>
+		[DataMember(Name = "settings")]
+		public ITransformSettings Settings { get; set; }
 	}
 
 	public partial class PreviewTransformRequest
@@ -50,6 +54,10 @@ namespace Nest
 
 		/// <inheritdoc cref="IPreviewTransformRequest.Sync"/>
 		public ITransformSyncContainer Sync { get; set; }
+
+		/// <inheritdoc cref="IPutTransformRequest.Settings"/>
+		[DataMember(Name = "settings")]
+		public ITransformSettings Settings { get; set; }
 	}
 
 	public partial class PreviewTransformDescriptor<TDocument> : IPreviewTransformRequest where TDocument : class
@@ -60,6 +68,7 @@ namespace Nest
 		Time IPreviewTransformRequest.Frequency { get; set; }
 		ITransformPivot IPreviewTransformRequest.Pivot { get; set; }
 		ITransformSyncContainer IPreviewTransformRequest.Sync { get; set; }
+		ITransformSettings IPreviewTransformRequest.Settings { get; set; }
 
 		/// <inheritdoc cref="IPreviewTransformRequest.Description"/>
 		public PreviewTransformDescriptor<TDocument> Description(string description) =>
@@ -83,5 +92,9 @@ namespace Nest
 		/// <inheritdoc cref="IPreviewTransformRequest.Sync"/>
 		public PreviewTransformDescriptor<TDocument> Sync(Func<TransformSyncContainerDescriptor<TDocument>, ITransformSyncContainer> selector) =>
 			Assign(selector.InvokeOrDefault(new TransformSyncContainerDescriptor<TDocument>()), (a, v) => a.Sync = v);
+
+		/// <inheritdoc cref="IPreviewTransformRequest.Settings"/>
+		public PreviewTransformDescriptor<TDocument> Settings(Func<TransformSettingsDescriptor, ITransformSettings> selector) =>
+			Assign(selector?.Invoke(new TransformSettingsDescriptor()), (a, v) => a.Settings = v);
 	}
 }
