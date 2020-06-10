@@ -104,7 +104,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 
 			var dateHistogram = response.Aggregations.AutoDateHistogram("projects_started_per_month");
 			dateHistogram.Should().NotBeNull();
-			dateHistogram.Interval.Should().NotBeNull();
+			dateHistogram.AutoInterval.Should().NotBeNull();
 			dateHistogram.Buckets.Should().NotBeNull();
 			dateHistogram.Buckets.Count.Should().BeGreaterThan(1);
 			foreach (var item in dateHistogram.Buckets)

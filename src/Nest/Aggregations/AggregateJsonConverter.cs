@@ -504,7 +504,7 @@ namespace Nest
 			if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == Parser.Interval)
 			{
 				var interval = reader.ReadAsString();
-				bucket.Interval = new Time(interval);
+				bucket.AutoInterval = new DateMathTime(interval);
 			}
 
 			return bucket;

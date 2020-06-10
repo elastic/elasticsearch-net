@@ -188,7 +188,7 @@ namespace Nest
 			{
 				Buckets = bucket.Items.OfType<DateHistogramBucket>().ToList(),
 				Meta = bucket.Meta,
-				Interval = bucket.Interval
+				AutoInterval = bucket.AutoInterval
 			};
 		}
 
