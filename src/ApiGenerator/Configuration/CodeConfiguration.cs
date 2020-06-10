@@ -48,6 +48,10 @@ namespace ApiGenerator.Configuration
 			"searchable_snapshots.clear_cache.json",
 			"searchable_snapshots.mount.json",
 			"searchable_snapshots.repository_stats.json",
+			"cluster.post_voting_config_exclusions.json",
+			"cluster.delete_voting_config_exclusions.json",
+			"indices.simulate_template.json",
+			"indices.simulate_index_template.json",
 
 			"autoscaling.get_autoscaling_decision.json", // 7.7 experimental
 			"eql.search.json", // 7.7 beta
@@ -58,6 +62,7 @@ namespace ApiGenerator.Configuration
 			"indices.create_data_stream.json", // 7.7 experimental
 			"indices.delete_data_stream.json", // 7.7 experimental
 			"indices.get_data_streams.json", // 7.7 experimental
+			"indices.get_data_stream.json", // 7.7 experimental
 			"ml.delete_data_frame_analytics.json", // 7.7 experimental
 			"ml.delete_trained_model.json", // 7.7 experimental
 			"ml.evaluate_data_frame.json", // 7.7 experimental
@@ -73,12 +78,6 @@ namespace ApiGenerator.Configuration
 			"ml.stop_data_frame_analytics.json", // 7.7 experimental
 			"rank_eval.json", // 7.7 experimental
 			"scripts_painless_context.json", // 7.7 experimental
-
-			// 7.7 - to be implemented
-			"cluster.delete_component_template.json",
-			"cluster.get_component_template.json",
-			"cluster.put_component_template.json",
-			"cluster.exists_component_template.json",
 		};
 
 		/// <summary>

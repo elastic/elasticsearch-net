@@ -59,6 +59,143 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IDeleteComponentTemplateRequest : IRequest<DeleteComponentTemplateRequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for DeleteComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
+	public partial class DeleteComponentTemplateRequest : PlainRequestBase<DeleteComponentTemplateRequestParameters>, IDeleteComponentTemplateRequest
+	{
+		protected IDeleteComponentTemplateRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteComponentTemplate;
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public DeleteComponentTemplateRequest(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected DeleteComponentTemplateRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IDeleteComponentTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
+		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface IComponentTemplateExistsRequest : IRequest<ComponentTemplateExistsRequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for ComponentTemplateExists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
+	public partial class ComponentTemplateExistsRequest : PlainRequestBase<ComponentTemplateExistsRequestParameters>, IComponentTemplateExistsRequest
+	{
+		protected IComponentTemplateExistsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterComponentTemplateExists;
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public ComponentTemplateExistsRequest(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ComponentTemplateExistsRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IComponentTemplateExistsRequest.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local
+		{
+			get => Q<bool? >("local");
+			set => Q("local", value);
+		}
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface IGetComponentTemplateRequest : IRequest<GetComponentTemplateRequestParameters>
+	{
+		[IgnoreDataMember]
+		Names Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for GetComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
+	public partial class GetComponentTemplateRequest : PlainRequestBase<GetComponentTemplateRequestParameters>, IGetComponentTemplateRequest
+	{
+		protected IGetComponentTemplateRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetComponentTemplate;
+		///<summary>/_component_template</summary>
+		public GetComponentTemplateRequest(): base()
+		{
+		}
+
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">Optional, accepts null</param>
+		public GetComponentTemplateRequest(Names name): base(r => r.Optional("name", name))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Names IGetComponentTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local
+		{
+			get => Q<bool? >("local");
+			set => Q("local", value);
+		}
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters>
 	{
 	}
@@ -231,6 +368,59 @@ namespace Nest
 		{
 			get => Q<Time>("master_timeout");
 			set => Q("master_timeout", value);
+		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface IPutComponentTemplateRequest : IRequest<PutComponentTemplateRequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for PutComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
+	public partial class PutComponentTemplateRequest : PlainRequestBase<PutComponentTemplateRequestParameters>, IPutComponentTemplateRequest
+	{
+		protected IPutComponentTemplateRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutComponentTemplate;
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public PutComponentTemplateRequest(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected PutComponentTemplateRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IPutComponentTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		public bool? Create
+		{
+			get => Q<bool? >("create");
+			set => Q("create", value);
+		}
+
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
 		}
 	}
 

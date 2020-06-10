@@ -42,6 +42,82 @@ namespace Nest
 		public ClusterAllocationExplainDescriptor IncludeYesDecisions(bool? includeyesdecisions = true) => Qs("include_yes_decisions", includeyesdecisions);
 	}
 
+	///<summary>Descriptor for DeleteComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
+	public partial class DeleteComponentTemplateDescriptor : RequestDescriptorBase<DeleteComponentTemplateDescriptor, DeleteComponentTemplateRequestParameters, IDeleteComponentTemplateRequest>, IDeleteComponentTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteComponentTemplate;
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public DeleteComponentTemplateDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected DeleteComponentTemplateDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IDeleteComponentTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Specify timeout for connection to master</summary>
+		public DeleteComponentTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+		///<summary>Explicit operation timeout</summary>
+		public DeleteComponentTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+
+	///<summary>Descriptor for ComponentTemplateExists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
+	public partial class ComponentTemplateExistsDescriptor : RequestDescriptorBase<ComponentTemplateExistsDescriptor, ComponentTemplateExistsRequestParameters, IComponentTemplateExistsRequest>, IComponentTemplateExistsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterComponentTemplateExists;
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public ComponentTemplateExistsDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ComponentTemplateExistsDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IComponentTemplateExistsRequest.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public ComponentTemplateExistsDescriptor Local(bool? local = true) => Qs("local", local);
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public ComponentTemplateExistsDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+	}
+
+	///<summary>Descriptor for GetComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
+	public partial class GetComponentTemplateDescriptor : RequestDescriptorBase<GetComponentTemplateDescriptor, GetComponentTemplateRequestParameters, IGetComponentTemplateRequest>, IGetComponentTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetComponentTemplate;
+		///<summary>/_component_template</summary>
+		public GetComponentTemplateDescriptor(): base()
+		{
+		}
+
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">Optional, accepts null</param>
+		public GetComponentTemplateDescriptor(Names name): base(r => r.Optional("name", name))
+		{
+		}
+
+		// values part of the url path
+		Names IGetComponentTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
+		///<summary>The comma separated names of the component templates</summary>
+		public GetComponentTemplateDescriptor Name(Names name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetComponentTemplateDescriptor Local(bool? local = true) => Qs("local", local);
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public GetComponentTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+	}
+
 	///<summary>Descriptor for GetSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
 	public partial class ClusterGetSettingsDescriptor : RequestDescriptorBase<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
 	{
@@ -117,6 +193,33 @@ namespace Nest
 		public ClusterPendingTasksDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Specify timeout for connection to master</summary>
 		public ClusterPendingTasksDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+	}
+
+	///<summary>Descriptor for PutComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
+	public partial class PutComponentTemplateDescriptor : RequestDescriptorBase<PutComponentTemplateDescriptor, PutComponentTemplateRequestParameters, IPutComponentTemplateRequest>, IPutComponentTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutComponentTemplate;
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public PutComponentTemplateDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected PutComponentTemplateDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IPutComponentTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		public PutComponentTemplateDescriptor Create(bool? create = true) => Qs("create", create);
+		///<summary>Specify timeout for connection to master</summary>
+		public PutComponentTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+		///<summary>Explicit operation timeout</summary>
+		public PutComponentTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
 	///<summary>Descriptor for PutSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>

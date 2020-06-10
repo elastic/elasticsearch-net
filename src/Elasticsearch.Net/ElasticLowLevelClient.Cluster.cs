@@ -77,13 +77,13 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		///<summary>HEAD on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse ExistsComponentTemplate<TResponse>(string name, ExistsComponentTemplateRequestParameters requestParameters = null)
+		public TResponse ComponentTemplateExists<TResponse>(string name, ComponentTemplateExistsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(HEAD, Url($"_component_template/{name:name}"), null, RequestParams(requestParameters));
 		///<summary>HEAD on /_component_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("cluster.exists_component_template", "name")]
-		public Task<TResponse> ExistsComponentTemplateAsync<TResponse>(string name, ExistsComponentTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> ComponentTemplateExistsAsync<TResponse>(string name, ComponentTemplateExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(HEAD, Url($"_component_template/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_component_template <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

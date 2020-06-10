@@ -2,7 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System;
+ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -130,7 +130,8 @@ namespace Tests.CodeStandards
 				typeof(MultiSearchTemplateRequest),
 				typeof(CreateRequest<>),
 				typeof(DeleteByQueryRethrottleRequest), // uses ListTasksResponse
-				typeof(UpdateByQueryRethrottleRequest) // uses ListTasksResponse
+				typeof(UpdateByQueryRethrottleRequest), // uses ListTasksResponse
+				typeof(ComponentTemplateExistsRequest),
 			};
 
 			var types = typeof(IRequest).Assembly.GetTypes();

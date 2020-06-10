@@ -77,8 +77,8 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for ExistsComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
-	public class ExistsComponentTemplateRequestParameters : RequestParameters<ExistsComponentTemplateRequestParameters>
+	///<summary>Request options for ComponentTemplateExists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
+	public class ComponentTemplateExistsRequestParameters : RequestParameters<ComponentTemplateExistsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		public override bool SupportsBody => false;
