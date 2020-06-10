@@ -61,6 +61,30 @@ namespace Nest.Specification.ClusterApi
 		/// </summary>
 		public Task<ClusterAllocationExplainResponse> AllocationExplainAsync(IClusterAllocationExplainRequest request, CancellationToken ct = default) => DoRequestAsync<IClusterAllocationExplainRequest, ClusterAllocationExplainResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>DELETE</c> request to the <c>cluster.delete_voting_config_exclusions</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</a>
+		/// </summary>
+		public DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(Func<DeleteVotingConfigExclusionsDescriptor, IDeleteVotingConfigExclusionsRequest> selector = null) => DeleteVotingConfigExclusions(selector.InvokeOrDefault(new DeleteVotingConfigExclusionsDescriptor()));
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>cluster.delete_voting_config_exclusions</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</a>
+		/// </summary>
+		public Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(Func<DeleteVotingConfigExclusionsDescriptor, IDeleteVotingConfigExclusionsRequest> selector = null, CancellationToken ct = default) => DeleteVotingConfigExclusionsAsync(selector.InvokeOrDefault(new DeleteVotingConfigExclusionsDescriptor()), ct);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>cluster.delete_voting_config_exclusions</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</a>
+		/// </summary>
+		public DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(IDeleteVotingConfigExclusionsRequest request) => DoRequest<IDeleteVotingConfigExclusionsRequest, DeleteVotingConfigExclusionsResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>cluster.delete_voting_config_exclusions</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</a>
+		/// </summary>
+		public Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(IDeleteVotingConfigExclusionsRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteVotingConfigExclusionsRequest, DeleteVotingConfigExclusionsResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>cluster.get_settings</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</a>
@@ -132,6 +156,30 @@ namespace Nest.Specification.ClusterApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</a>
 		/// </summary>
 		public Task<ClusterPendingTasksResponse> PendingTasksAsync(IClusterPendingTasksRequest request, CancellationToken ct = default) => DoRequestAsync<IClusterPendingTasksRequest, ClusterPendingTasksResponse>(request, request.RequestParameters, ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>cluster.post_voting_config_exclusions</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</a>
+		/// </summary>
+		public PostVotingConfigExclusionsResponse PostVotingConfigExclusions(Func<PostVotingConfigExclusionsDescriptor, IPostVotingConfigExclusionsRequest> selector = null) => PostVotingConfigExclusions(selector.InvokeOrDefault(new PostVotingConfigExclusionsDescriptor()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>cluster.post_voting_config_exclusions</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</a>
+		/// </summary>
+		public Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(Func<PostVotingConfigExclusionsDescriptor, IPostVotingConfigExclusionsRequest> selector = null, CancellationToken ct = default) => PostVotingConfigExclusionsAsync(selector.InvokeOrDefault(new PostVotingConfigExclusionsDescriptor()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>cluster.post_voting_config_exclusions</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</a>
+		/// </summary>
+		public PostVotingConfigExclusionsResponse PostVotingConfigExclusions(IPostVotingConfigExclusionsRequest request) => DoRequest<IPostVotingConfigExclusionsRequest, PostVotingConfigExclusionsResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>cluster.post_voting_config_exclusions</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</a>
+		/// </summary>
+		public Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(IPostVotingConfigExclusionsRequest request, CancellationToken ct = default) => DoRequestAsync<IPostVotingConfigExclusionsRequest, PostVotingConfigExclusionsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>cluster.put_settings</c> API, read more about this API online:
 		/// <para></para>
