@@ -62,6 +62,13 @@ namespace Nest
 		[DataMember(Name = "script")]
 		public ScriptStats Script { get; internal set; }
 
+		/// <summary>
+		/// Available in Elasticsearch 7.8.0+
+		/// </summary>
+		[DataMember(Name = "script_cache")]
+		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, ScriptStats>))]
+		public IReadOnlyDictionary<string, ScriptStats> ScriptCache { get; internal set; }
+
 		[DataMember(Name = "thread_pool")]
 		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, ThreadCountStats>))]
 		public IReadOnlyDictionary<string, ThreadCountStats> ThreadPool { get; internal set; }
@@ -85,6 +92,9 @@ namespace Nest
 
 		[DataMember(Name = "compilations")]
 		public long Compilations { get; internal set; }
+
+		[DataMember(Name = "compilation_limit_triggered")]
+		public long CompilationLimitTriggered { get; internal set; }
 	}
 
 	[DataContract]

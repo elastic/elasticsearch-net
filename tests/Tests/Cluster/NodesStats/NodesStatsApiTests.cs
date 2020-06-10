@@ -73,6 +73,11 @@ namespace Tests.Cluster.NodesStats
 			Assert(node.Jvm);
 			Assert(node.AdaptiveSelection);
 			Assert(node.Ingest);
+
+			if (TestClient.Configuration.InRange(">=7.8.0"))
+			{
+				Assert(node.ScriptCache);
+			}
 		}
 
 		protected void Assert(NodeIngestStats nodeIngestStats)
@@ -94,9 +99,6 @@ namespace Tests.Cluster.NodesStats
 
 			processorStats.Type.Should().Be("set");
 			processorStats.Statistics.Should().NotBeNull();
-
-
-
 		}
 
 		protected void Assert(IReadOnlyDictionary<string, AdaptiveSelectionStats> adaptiveSelectionStats) =>
@@ -186,6 +188,9 @@ namespace Tests.Cluster.NodesStats
 		}
 
 		protected void Assert(ScriptStats script) => script.Should().NotBeNull();
+
+		protected void Assert(IReadOnlyDictionary<string, ScriptStats> scriptCache) =>
+			scriptCache.Should().NotBeNull();
 
 		protected void Assert(TransportStats transport) => transport.Should().NotBeNull();
 
