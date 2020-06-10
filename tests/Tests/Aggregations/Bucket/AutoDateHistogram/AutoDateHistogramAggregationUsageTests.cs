@@ -107,7 +107,7 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 
 			var dateHistogram = response.Aggregations.AutoDateHistogram("projects_started_per_month");
 			dateHistogram.Should().NotBeNull();
-			dateHistogram.Interval.Should().NotBeNull();
+			dateHistogram.AutoInterval.Should().NotBeNull();
 			dateHistogram.Buckets.Should().NotBeNull();
 			dateHistogram.Buckets.Count.Should().BeGreaterThan(1);
 			foreach (var item in dateHistogram.Buckets)
@@ -202,13 +202,13 @@ namespace Tests.Aggregations.Bucket.AutoDateHistogram
 			/** ==== Handling responses
 			* The `AggregateDictionary found on `.Aggregations` on `SearchResponse<T>` has several helper methods
 			* so we can fetch our aggregation results easily in the correct type.
-			 * <<handling-aggregate-response, Be sure to read more about these helper methods>>
+			* <<handling-aggregate-response, Be sure to read more about these helper methods>>
 			*/
 			response.ShouldBeValid();
 
 			var dateHistogram = response.Aggregations.AutoDateHistogram("projects_started_per_month");
 			dateHistogram.Should().NotBeNull();
-			dateHistogram.Interval.Should().NotBeNull();
+			dateHistogram.AutoInterval.Should().NotBeNull();
 			dateHistogram.Buckets.Should().NotBeNull();
 			dateHistogram.Buckets.Count.Should().BeGreaterThan(1);
 			foreach (var item in dateHistogram.Buckets)
