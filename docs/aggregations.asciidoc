@@ -68,6 +68,8 @@ The values are typically extracted from the fields of the document (using the fi
 
 * <<top-metrics-aggregation-usage,Top Metrics Aggregation Usage>>
 
+* <<t-test-aggregation-usage,T Test Aggregation Usage>>
+
 * <<value-count-aggregation-usage,Value Count Aggregation Usage>>
 
 * <<weighted-average-aggregation-usage,Weighted Average Aggregation Usage>>
@@ -109,6 +111,8 @@ include::aggregations/metric/sum/sum-aggregation-usage.asciidoc[]
 include::aggregations/metric/top-hits/top-hits-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/top-metrics/top-metrics-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/t-test/t-test-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/value-count/value-count-aggregation-usage.asciidoc[]
 

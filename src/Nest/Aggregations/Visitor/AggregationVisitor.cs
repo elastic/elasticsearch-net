@@ -147,6 +147,8 @@
 		void Visit(IBoxplotAggregation aggregation);
 
 		void Visit(ITopMetricsAggregation aggregation);
+
+		void Visit(ITTestAggregation aggregation);
 	}
 
 	public class AggregationVisitor : IAggregationVisitor
@@ -274,6 +276,8 @@
 		public virtual void Visit(IBoxplotAggregation aggregation) { }
 
 		public virtual void Visit(ITopMetricsAggregation aggregation) { }
+
+		public virtual void Visit(ITTestAggregation aggregation) { }
 
 		public virtual void Visit(IAggregation aggregation) { }
 
