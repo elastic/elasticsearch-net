@@ -59,6 +59,26 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IDeleteVotingConfigExclusionsRequest : IRequest<DeleteVotingConfigExclusionsRequestParameters>
+	{
+	}
+
+	///<summary>Request for DeleteVotingConfigExclusions <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</para></summary>
+	public partial class DeleteVotingConfigExclusionsRequest : PlainRequestBase<DeleteVotingConfigExclusionsRequestParameters>, IDeleteVotingConfigExclusionsRequest
+	{
+		protected IDeleteVotingConfigExclusionsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteVotingConfigExclusions;
+		// values part of the url path
+		// Request parameters
+		///<summary>Specifies whether to wait for all excluded nodes to be removed from the cluster before clearing the voting configuration exclusions list.</summary>
+		public bool? WaitForRemoval
+		{
+			get => Q<bool? >("wait_for_removal");
+			set => Q("wait_for_removal", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters>
 	{
 	}
@@ -231,6 +251,46 @@ namespace Nest
 		{
 			get => Q<Time>("master_timeout");
 			set => Q("master_timeout", value);
+		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface IPostVotingConfigExclusionsRequest : IRequest<PostVotingConfigExclusionsRequestParameters>
+	{
+	}
+
+	///<summary>Request for PostVotingConfigExclusions <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</para></summary>
+	public partial class PostVotingConfigExclusionsRequest : PlainRequestBase<PostVotingConfigExclusionsRequestParameters>, IPostVotingConfigExclusionsRequest
+	{
+		protected IPostVotingConfigExclusionsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPostVotingConfigExclusions;
+		// values part of the url path
+		// Request parameters
+		///<summary>
+		/// A comma-separated list of the persistent ids of the nodes to exclude from the voting configuration. If specified, you may not also specify
+		/// ?node_names.
+		///</summary>
+		public string NodeIds
+		{
+			get => Q<string>("node_ids");
+			set => Q("node_ids", value);
+		}
+
+		///<summary>
+		/// A comma-separated list of the names of the nodes to exclude from the voting configuration. If specified, you may not also specify
+		/// ?node_ids.
+		///</summary>
+		public string NodeNames
+		{
+			get => Q<string>("node_names");
+			set => Q("node_names", value);
+		}
+
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
 		}
 	}
 
