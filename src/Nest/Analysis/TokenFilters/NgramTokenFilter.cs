@@ -25,6 +25,15 @@ namespace Nest
 		[DataMember(Name ="min_gram")]
 		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? MinGram { get; set; }
+
+		/// <summary>
+		/// Emits original token when set to `true`. Defaults to `false`.
+		/// <para />
+		/// Available in Elasticsearch 7.8.0+
+		/// </summary>
+		[DataMember(Name = "preserve_original")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
+		bool? PreserveOriginal { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -37,6 +46,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public int? MinGram { get; set; }
+
+		/// <inheritdoc />
+		public bool? PreserveOriginal { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -48,10 +60,16 @@ namespace Nest
 
 		int? INGramTokenFilter.MinGram { get; set; }
 
-		/// <inheritdoc />
+		bool? INGramTokenFilter.PreserveOriginal { get; set; }
+
+		/// <inheritdoc cref="INGramTokenFilter.MinGram" />
 		public NGramTokenFilterDescriptor MinGram(int? minGram) => Assign(minGram, (a, v) => a.MinGram = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="INGramTokenFilter.MaxGram" />
 		public NGramTokenFilterDescriptor MaxGram(int? maxGram) => Assign(maxGram, (a, v) => a.MaxGram = v);
+
+		/// <inheritdoc cref="INGramTokenFilter.PreserveOriginal" />
+		public NGramTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true) =>
+			Assign(preserveOriginal, (a, v) => a.PreserveOriginal = v);
 	}
 }
