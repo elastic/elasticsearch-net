@@ -27,7 +27,8 @@ namespace Tests.QueryDsl.TermLevel.Regexp
 			Field = "description",
 			Value = "s.*y",
 			Flags = "INTERSECTION|COMPLEMENT|EMPTY",
-			MaximumDeterminizedStates = 20000
+			MaximumDeterminizedStates = 20000,
+			Rewrite = MultiTermQueryRewrite.TopTerms(10)
 		};
 
 		protected override object QueryJson => new
@@ -40,7 +41,8 @@ namespace Tests.QueryDsl.TermLevel.Regexp
 					boost = 1.1,
 					flags = "INTERSECTION|COMPLEMENT|EMPTY",
 					max_determinized_states = 20000,
-					value = "s.*y"
+					value = "s.*y",
+					rewrite = "top_terms_10"
 				}
 			}
 		};
@@ -53,6 +55,7 @@ namespace Tests.QueryDsl.TermLevel.Regexp
 				.Value("s.*y")
 				.Flags("INTERSECTION|COMPLEMENT|EMPTY")
 				.MaximumDeterminizedStates(20000)
+				.Rewrite(MultiTermQueryRewrite.TopTerms(10))
 			);
 	}
 }
