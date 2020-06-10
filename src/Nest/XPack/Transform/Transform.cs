@@ -42,5 +42,9 @@ namespace Nest
 		/// <inheritdoc cref="ITransformSyncContainer"/>
 		[DataMember(Name = "sync")]
 		public ITransformSyncContainer Sync { get; set; }
+
+		/// <inheritdoc cref="ITransformSettings"/>
+		[DataMember(Name = "settings")]
+		public ITransformSettings Settings { get; set; }
 	}
 }
