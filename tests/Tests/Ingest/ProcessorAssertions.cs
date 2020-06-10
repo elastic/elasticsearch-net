@@ -75,7 +75,7 @@ namespace Tests.Ingest
 			public override string Key => "append";
 		}
 
-		[BlockedByIssue("https://github.com/elastic/elasticsearch/issues/55643")]
+		[SkipVersion("<7.8.0", "Empty Value bug in versions less than Elasticsearch 7.8.0")]
 		public class Csv : ProcessorAssertion
 		{
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
