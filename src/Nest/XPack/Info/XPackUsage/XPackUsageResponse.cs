@@ -98,6 +98,18 @@ namespace Nest
 
 		[DataMember(Name = "enrich")]
 		public XPackUsage Enrich { get; set; }
+
+		[DataMember(Name = "spatial")]
+		public XPackUsage Spatial { get; internal set; }
+
+		[DataMember(Name = "analytics")]
+		public AnalyticsUsage Analytics { get; internal set; }
+	}
+
+	public class AnalyticsUsage : XPackUsage
+	{
+		[DataMember(Name = "stats")]
+		public IReadOnlyDictionary<string, long> Stats { get; internal set; } = EmptyReadOnly<string, long>.Dictionary;
 	}
 
 	public class SlmUsage : XPackUsage
