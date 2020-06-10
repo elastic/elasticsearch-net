@@ -244,6 +244,8 @@ namespace Nest
 
 		public BoxplotAggregate Boxplot(string key) => TryGet<BoxplotAggregate>(key);
 
+		public ValueAggregate TTest(string key) => TryGet<ValueAggregate>(key);
+
 		private TAggregate TryGet<TAggregate>(string key) where TAggregate : class, IAggregate =>
 			BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;
 
