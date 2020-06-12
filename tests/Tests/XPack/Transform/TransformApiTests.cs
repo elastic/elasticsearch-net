@@ -233,8 +233,8 @@ namespace Tests.XPack.Transform
 			{
 				StopTransformStep, u =>
 					u.Calls<StopTransformDescriptor, StopTransformRequest, IStopTransformRequest, StopTransformResponse>(
-						v => new StopTransformRequest(v),
-						(v, d) => d,
+						v => new StopTransformRequest(v) { Force = true, WaitForCompletion = true },
+						(v, d) => d.Force().WaitForCompletion(),
 						(v, c, f) => c.Transform.Stop(v, f),
 						(v, c, f) => c.Transform.StopAsync(v, f),
 						(v, c, r) => c.Transform.Stop(r),
