@@ -195,7 +195,7 @@ namespace Tests.Domain
 
 	public class ProjectTransform
 	{
-		public double AverageCommits { get; set; }
+		public double? AverageCommits { get; set; }
 
 		public long WeekStartedOn { get; set; }
 
