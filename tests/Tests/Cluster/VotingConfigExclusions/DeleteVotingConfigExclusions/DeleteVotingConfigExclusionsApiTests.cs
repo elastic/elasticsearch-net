@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -17,6 +18,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Cluster.VotingConfigExclusions.DeleteVotingConfigExclusions
 {
+	[SkipVersion("<7.8.0", "Introduced in 7.8.0")]
 	public class DeleteVotingConfigExclusionsApiTests : ApiIntegrationTestBase<WritableCluster, DeleteVotingConfigExclusionsResponse, IDeleteVotingConfigExclusionsRequest, DeleteVotingConfigExclusionsDescriptor, DeleteVotingConfigExclusionsRequest>
 	{
 		public DeleteVotingConfigExclusionsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
