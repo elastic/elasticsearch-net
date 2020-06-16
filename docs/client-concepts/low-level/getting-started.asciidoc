@@ -178,8 +178,8 @@ var searchResponse = lowlevelClient.Search<StringResponse>("people", PostData.Se
         {
             firstName = new
             {
-            	query = "Martijn"
-			}
+                query = "Martijn"
+            }
         }
     }
 }));
@@ -204,7 +204,7 @@ var searchResponse = lowlevelClient.Search<BytesResponse>("people", @"
         ""match"": {
             ""firstName"": {
                 ""query"": ""Martijn""
-			}
+            }
         }
     }
 }");
@@ -276,3 +276,4 @@ var settings = new ConnectionConfiguration(new Uri("http://example.com:9200"))
 
 var lowlevelClient = new ElasticLowLevelClient(settings);
 ----
+
