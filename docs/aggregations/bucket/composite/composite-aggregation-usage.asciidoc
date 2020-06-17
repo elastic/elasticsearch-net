@@ -41,7 +41,7 @@ a => a
         )
         .DateHistogram("started", d => d
             .Field(f => f.StartedOn)
-            .Interval(DateInterval.Month)
+            .CalendarInterval(DateInterval.Month)
         )
         .Histogram("branch_count", h => h
             .Field(f => f.RequiredBranches)
@@ -78,7 +78,7 @@ new CompositeAggregation("my_buckets")
         new DateHistogramCompositeAggregationSource("started")
         {
             Field = Field<Project>(f => f.StartedOn),
-            Interval = DateInterval.Month
+            CalendarInterval = DateInterval.Month
         },
         new HistogramCompositeAggregationSource("branch_count")
         {
@@ -120,7 +120,7 @@ new CompositeAggregation("my_buckets")
           "started": {
             "date_histogram": {
               "field": "startedOn",
-              "interval": "month"
+              "calendar_interval": "month"
             }
           }
         },
