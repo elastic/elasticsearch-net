@@ -119,12 +119,10 @@ namespace Elasticsearch.Net
 			{
 				var c = chain.ChainElements[i].Certificate.Thumbprint;
 				var cPrivate = privateChain.ChainElements[i].Certificate.Thumbprint;
-				if (c == ca.Thumbprint) found = true;
+				if (!found && c == ca.Thumbprint) found = true;
 
 				//mis aligned certificate chain, return false so we do not accept this certificate
 				if (c != cPrivate) return false;
-
-				i++;
 			}
 			return found;
 		}
