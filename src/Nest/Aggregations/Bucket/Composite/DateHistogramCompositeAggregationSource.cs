@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.Runtime.Serialization;
 
 namespace Nest
@@ -21,10 +22,23 @@ namespace Nest
 		string Format { get; set; }
 
 		/// <summary>
-		/// 	The interval to use when bucketing documents
+		/// The interval to use when bucketing documents
 		/// </summary>
 		[DataMember(Name ="interval")]
+		[Obsolete("Use FixedInterval or CalendarInterval")]
 		Union<DateInterval?, Time> Interval { get; set; }
+
+		/// <summary>
+		/// The calendar interval to use when bucketing documents
+		/// </summary>
+		[DataMember(Name ="calendar_interval")]
+		public Union<DateInterval?, DateMathTime> CalendarInterval { get; set; }
+
+		/// <summary>
+		/// The fixed interval to use when bucketing documents
+		/// </summary>
+		[DataMember(Name ="fixed_interval")]
+		public Time FixedInterval { get; set; }
 
 		/// <summary>
 		/// Used to indicate that bucketing should use a different time zone.
@@ -44,7 +58,14 @@ namespace Nest
 		public string Format { get; set; }
 
 		/// <inheritdoc />
+		[Obsolete("Use FixedInterval or CalendarInterval")]
 		public Union<DateInterval?, Time> Interval { get; set; }
+
+		/// <inheritdoc />
+		public Union<DateInterval?, DateMathTime> CalendarInterval { get; set; }
+
+		/// <inheritdoc />
+		public Time FixedInterval { get; set; }
 
 		/// <inheritdoc />
 		public string TimeZone { get; set; }
@@ -62,15 +83,31 @@ namespace Nest
 
 		string IDateHistogramCompositeAggregationSource.Format { get; set; }
 		Union<DateInterval?, Time> IDateHistogramCompositeAggregationSource.Interval { get; set; }
+		Union<DateInterval?, DateMathTime> IDateHistogramCompositeAggregationSource.CalendarInterval { get; set; }
+		Time IDateHistogramCompositeAggregationSource.FixedInterval { get; set; }
 		string IDateHistogramCompositeAggregationSource.TimeZone { get; set; }
 
 		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Interval" />
+		[Obsolete("Use FixedInterval or CalendarInterval")]
 		public DateHistogramCompositeAggregationSourceDescriptor<T> Interval(DateInterval? interval) =>
 			Assign(interval, (a, v) => a.Interval = v);
 
 		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Interval" />
+		[Obsolete("Use FixedInterval or CalendarInterval")]
 		public DateHistogramCompositeAggregationSourceDescriptor<T> Interval(Time interval) =>
 			Assign(interval, (a, v) => a.Interval = v);
+
+		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.CalendarInterval" />
+		public DateHistogramCompositeAggregationSourceDescriptor<T> CalendarInterval(DateInterval? interval) =>
+			Assign(interval, (a, v) => a.CalendarInterval = v);
+
+		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.CalendarInterval" />
+		public DateHistogramCompositeAggregationSourceDescriptor<T> CalendarInterval(DateMathTime interval) =>
+			Assign(interval, (a, v) => a.CalendarInterval = v);
+
+		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.FixedInterval" />
+		public DateHistogramCompositeAggregationSourceDescriptor<T> FixedInterval(Time interval) =>
+			Assign(interval, (a, v) => a.FixedInterval = v);
 
 		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.TimeZone" />
 		public DateHistogramCompositeAggregationSourceDescriptor<T> TimeZone(string timezone) => Assign(timezone, (a, v) => a.TimeZone = v);
