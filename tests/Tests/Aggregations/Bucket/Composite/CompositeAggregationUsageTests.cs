@@ -62,7 +62,7 @@ namespace Tests.Aggregations.Bucket.Composite
 								date_histogram = new
 								{
 									field = "startedOn",
-									interval = "month"
+									calendar_interval = "month"
 								}
 							}
 						},
@@ -118,7 +118,7 @@ namespace Tests.Aggregations.Bucket.Composite
 					)
 					.DateHistogram("started", d => d
 						.Field(f => f.StartedOn)
-						.Interval(DateInterval.Month)
+						.CalendarInterval(DateInterval.Month)
 					)
 					.Histogram("branch_count", h => h
 						.Field(f => f.RequiredBranches)
@@ -151,7 +151,7 @@ namespace Tests.Aggregations.Bucket.Composite
 					new DateHistogramCompositeAggregationSource("started")
 					{
 						Field = Field<Project>(f => f.StartedOn),
-						Interval = DateInterval.Month
+						CalendarInterval = DateInterval.Month
 					},
 					new HistogramCompositeAggregationSource("branch_count")
 					{
@@ -344,7 +344,7 @@ namespace Tests.Aggregations.Bucket.Composite
 	}
 
 	//hide
-	[SkipVersion("<6.3.0", "Date histogram source only supports format starting from Elasticsearch 6.3.0+")]
+	[SkipVersion("<7.2.0", "Date histogram source only supports fixed_interval starting from Elasticsearch 7.2.0+")]
 	public class DateFormatCompositeAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		public DateFormatCompositeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -364,7 +364,7 @@ namespace Tests.Aggregations.Bucket.Composite
 								date_histogram = new
 								{
 									field = "startedOn",
-									interval = "month",
+									fixed_interval = "30d",
 									format = "yyyy-MM-dd"
 								}
 							}
@@ -396,7 +396,7 @@ namespace Tests.Aggregations.Bucket.Composite
 				.Sources(s => s
 					.DateHistogram("started", d => d
 						.Field(f => f.StartedOn)
-						.Interval(DateInterval.Month)
+						.FixedInterval("30d")
 						.Format("yyyy-MM-dd")
 					)
 				)
@@ -418,7 +418,7 @@ namespace Tests.Aggregations.Bucket.Composite
 					new DateHistogramCompositeAggregationSource("started")
 					{
 						Field = Field<Project>(f => f.StartedOn),
-						Interval = DateInterval.Month,
+						FixedInterval = new Time(30, TimeUnit.Day),
 						Format = "yyyy-MM-dd"
 					},
 				},
