@@ -68,6 +68,13 @@ namespace Nest
 			{ Parser.Hits, 2 },
 		};
 
+		private static readonly AutomataDictionary ExtendedStatsFields = new AutomataDictionary
+		{
+			{ "variance", 0 },
+			{ "std_deviation", 1 },
+			{ "std_deviation_bounds", 2 }
+		};
+
 		private static readonly byte[] ValueAsStringField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.ValueAsString);
 
 		static AggregateFormatter()
@@ -547,10 +554,10 @@ namespace Nest
 			if (reader.GetCurrentJsonToken() == JsonToken.EndObject)
 				return statsMetric;
 
-			return GetExtendedStatsAggregate(ref reader, statsMetric, meta);
+			return GetExtendedStatsAggregate(ref reader, formatterResolver, statsMetric, meta);
 		}
 
-		private IAggregate GetExtendedStatsAggregate(ref JsonReader reader, StatsAggregate statsMetric, IReadOnlyDictionary<string, object> meta)
+		private IAggregate GetExtendedStatsAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, StatsAggregate statsMetric, IReadOnlyDictionary<string, object> meta)
 		{
 			var extendedStatsMetric = new ExtendedStatsAggregate
 			{
@@ -564,35 +571,31 @@ namespace Nest
 
 			extendedStatsMetric.SumOfSquares = reader.ReadNullableDouble();
 			reader.ReadNext(); // ,
-			reader.ReadNext(); // "variance"
-			reader.ReadNext(); // :
-			extendedStatsMetric.Variance = reader.ReadNullableDouble();
-			reader.ReadNext(); // ,
-			reader.ReadNext(); // "std_deviation"
-			reader.ReadNext(); // :
-			extendedStatsMetric.StdDeviation = reader.ReadNullableDouble();
 
-			if (reader.GetCurrentJsonToken() != JsonToken.EndObject)
-			{
-				var bounds = new StandardDeviationBounds();
-				reader.ReadNext(); // ,
-				reader.ReadNext(); // "std_deviation_bounds"
-				reader.ReadNext(); // :
-				reader.ReadNext(); // {
-				reader.ReadNext(); // "upper"
-				reader.ReadNext(); // :
-				bounds.Upper = reader.ReadNullableDouble();
-				reader.ReadNext(); // ,
-				reader.ReadNext(); // "lower"
-				reader.ReadNext(); // :
-				bounds.Lower = reader.ReadNullableDouble();
-				reader.ReadNext(); // }
-				extendedStatsMetric.StdDeviationBounds = bounds;
-			}
-
-			// read any remaining _as_string fields
 			while (reader.GetCurrentJsonToken() != JsonToken.EndObject)
-				reader.ReadNextBlock();
+			{
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (ExtendedStatsFields.TryGetValue(propertyName, out var value))
+				{
+					switch (value)
+					{
+						case 0:
+							extendedStatsMetric.Variance = reader.ReadNullableDouble();
+							break;
+						case 1:
+							extendedStatsMetric.StdDeviation = reader.ReadNullableDouble();
+							break;
+						case 2:
+							extendedStatsMetric.StdDeviationBounds =
+								formatterResolver.GetFormatter<StandardDeviationBounds>().Deserialize(ref reader, formatterResolver);
+							break;
+					}
+				}
+				else
+					reader.ReadNextBlock();
+
+				reader.ReadIsValueSeparator();
+			}
 
 			return extendedStatsMetric;
 		}
