@@ -2,11 +2,12 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System;
+using System;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Framework.EndpointTests.TestState;
 
@@ -65,7 +66,9 @@ namespace Tests.XPack.MachineLearning.GetJobs
 			response.Jobs.First().DataDescription.TimeField.Name.Should().Be("@timestamp");
 			response.Jobs.First().DataDescription.TimeFormat.Should().Be("epoch_ms");
 
-			response.Jobs.First().ModelSnapshotRetentionDays.Should().Be(1);
+			response.Jobs.First().ModelSnapshotRetentionDays.Should().Be(TestClient.Configuration.InRange(">=7.8.0")
+				? 10
+				: 1);
 			response.Jobs.First().ResultsIndexName.Should().Be("shared");
 		}
 	}
@@ -123,7 +126,9 @@ namespace Tests.XPack.MachineLearning.GetJobs
 			response.Jobs.First().DataDescription.TimeField.Name.Should().Be("@timestamp");
 			response.Jobs.First().DataDescription.TimeFormat.Should().Be("epoch_ms");
 
-			response.Jobs.First().ModelSnapshotRetentionDays.Should().Be(1);
+			response.Jobs.First().ModelSnapshotRetentionDays.Should().Be(TestClient.Configuration.InRange(">=7.8.0")
+				? 10
+				: 1);
 			response.Jobs.First().ResultsIndexName.Should().Be("shared");
 		}
 	}

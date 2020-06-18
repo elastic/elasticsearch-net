@@ -2,13 +2,14 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Domain;
 using Tests.Framework.EndpointTests.TestState;
@@ -122,7 +123,9 @@ namespace Tests.XPack.MachineLearning.PutJob
 			response.DataDescription.TimeField.Name.Should().Be("@timestamp");
 			response.DataDescription.TimeFormat.Should().Be("epoch_ms");
 
-			response.ModelSnapshotRetentionDays.Should().Be(1);
+			response.ModelSnapshotRetentionDays.Should().Be(TestClient.Configuration.InRange(">=7.8.0")
+				? 10
+				: 1);
 
 			// User-defined names are prepended with "custom-" by X-Pack ML
 			response.ResultsIndexName.Should().Be("custom-server-metrics");
@@ -205,6 +208,7 @@ namespace Tests.XPack.MachineLearning.PutJob
 		protected override Func<PutJobDescriptor<Metric>, IPutJobRequest> Fluent => f => f
 			.Description("Lab 1 - Simple example")
 			.ResultsIndexName("server-metrics")
+			.ModelSnapshotRetentionDays(1)
 			.AnalysisConfig(a => a
 				.BucketSpan("30m")
 				.Latency("0s")
@@ -247,6 +251,7 @@ namespace Tests.XPack.MachineLearning.PutJob
 			{
 				Description = "Lab 1 - Simple example",
 				ResultsIndexName = "server-metrics",
+				ModelSnapshotRetentionDays = 1,
 				AnalysisConfig = new AnalysisConfig
 				{
 					BucketSpan = "30m",

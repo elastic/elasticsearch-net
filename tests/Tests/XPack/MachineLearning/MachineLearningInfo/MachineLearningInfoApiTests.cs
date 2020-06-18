@@ -2,10 +2,11 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System;
+using System;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Framework.EndpointTests.TestState;
 
@@ -41,7 +42,10 @@ namespace Tests.XPack.MachineLearning.MachineLearningInfo
 			var anomalyDetectors = response.Defaults.AnomalyDetectors;
 			anomalyDetectors.ModelMemoryLimit.Should().Be("1gb");
 			anomalyDetectors.CategorizationExamplesLimit.Should().Be(4);
-			anomalyDetectors.ModelSnapshotRetentionDays.Should().Be(1);
+
+			anomalyDetectors.ModelSnapshotRetentionDays.Should().Be(TestClient.Configuration.InRange(">=7.8.0")
+				? 10
+				: 1);
 
 			response.Defaults.Datafeeds.ScrollSize.Should().Be(1000);
 
