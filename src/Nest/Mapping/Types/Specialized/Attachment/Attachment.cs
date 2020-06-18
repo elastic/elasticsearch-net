@@ -29,6 +29,7 @@ namespace Nest
 		/// attachment.
 		/// </summary>
 		[IgnoreDataMember]
+		[Ignore]
 		public bool ContainsMetadata =>
 			!Author.IsNullOrEmpty() ||
 			ContentLength.HasValue ||
