@@ -6,6 +6,7 @@
 
 namespace Nest
 {
+	// TODO: Make all methods virtual
 	public class NoopPropertyVisitor : IPropertyVisitor
 	{
 		public virtual bool SkipProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => false;
