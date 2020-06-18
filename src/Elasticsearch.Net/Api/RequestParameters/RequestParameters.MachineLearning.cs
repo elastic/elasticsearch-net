@@ -83,6 +83,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			get => Q<bool? >("force");
 			set => Q("force", value);
 		}
+
+		///<summary>Controls the time to wait until a job is deleted. Defaults to 1 minute</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	///<summary>Request options for DeleteDatafeed <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</para></summary>

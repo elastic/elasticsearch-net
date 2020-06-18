@@ -877,12 +877,14 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<param name = "name">The name of the index (it must be a concrete index name)</param>
 		///<param name = "body">New index template definition, which will be included in the simulation, as if it already exists in the system</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse SimulateIndexTemplateForAll<TResponse>(string name, PostData body, SimulateIndexTemplateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_index_template/_simulate_index/{name:name}"), body, RequestParams(requestParameters));
 		///<summary>POST on /_index_template/_simulate_index/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The name of the index (it must be a concrete index name)</param>
 		///<param name = "body">New index template definition, which will be included in the simulation, as if it already exists in the system</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("indices.simulate_index_template", "name, body")]
 		public Task<TResponse> SimulateIndexTemplateForAllAsync<TResponse>(string name, PostData body, SimulateIndexTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_index_template/_simulate_index/{name:name}"), ctx, body, RequestParams(requestParameters));
