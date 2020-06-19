@@ -200,7 +200,8 @@ namespace Tests.XPack.MachineLearning.PutJob
 				time_field = "@timestamp"
 			},
 			description = "Lab 1 - Simple example",
-			results_index_name = "server-metrics"
+			results_index_name = "server-metrics",
+			model_snapshot_retention_days = 1
 		};
 
 		protected override int ExpectStatusCode => 200;
