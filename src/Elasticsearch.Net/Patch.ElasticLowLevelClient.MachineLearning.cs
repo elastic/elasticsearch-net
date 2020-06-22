@@ -17,7 +17,6 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, "_ml/_delete_expired_data", null, RequestParams(requestParameters));
 		///<summary>DELETE on /_ml/_delete_expired_data <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("ml.delete_expired_data")]
 		public Task<TResponse> DeleteExpiredDataAsync<TResponse>(DeleteExpiredDataRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, "_ml/_delete_expired_data", ctx, null, RequestParams(requestParameters));
 	}
