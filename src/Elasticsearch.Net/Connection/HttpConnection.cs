@@ -46,8 +46,11 @@ namespace Elasticsearch.Net
 			+ $" please set {nameof(ConnectionConfiguration.ConnectionLimit)} to -1 on your connection configuration/settings."
 			+ $" this will cause the {nameof(HttpClientHandler.MaxConnectionsPerServer)} not to be set on {nameof(HttpClientHandler)}";
 
-		private readonly object _lock = new object();
 		private RequestDataHttpClientFactory HttpClientFactory { get; }
+
+		[Obsolete("HttpConnection now uses a HttpClientFactory implementation to manage HttpClient and HttpMessageHandler instances. "
+			+ "This property is no longer used and will be removed in the next major release")]
+		protected readonly ConcurrentDictionary<int, HttpClient> Clients = new ConcurrentDictionary<int, HttpClient>();
 
 		public int InUseHandlers => HttpClientFactory.InUseHandlers;
 		public int RemovedHandlers => HttpClientFactory.RemovedHandlers;
