@@ -2,7 +2,8 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
 
@@ -47,10 +48,31 @@ namespace Nest
 			return this;
 		}
 
+		/// <inheritdoc cref="AliasAddOperation.Indices"/>
+		public AliasAddDescriptor Indices(Indices indices)
+		{
+			Self.Add.Indices = indices;
+			return this;
+		}
+
 		/// <inheritdoc cref="AliasAddOperation.Alias"/>
 		public AliasAddDescriptor Alias(string alias)
 		{
 			Self.Add.Alias = alias;
+			return this;
+		}
+
+		/// <inheritdoc cref="AliasAddOperation.Aliases"/>
+		public AliasAddDescriptor Aliases(IEnumerable<string> aliases)
+		{
+			Self.Add.Aliases = aliases;
+			return this;
+		}
+
+		/// <inheritdoc cref="AliasAddOperation.Aliases"/>
+		public AliasAddDescriptor Aliases(params string[] aliases)
+		{
+			Self.Add.Aliases = aliases;
 			return this;
 		}
 
