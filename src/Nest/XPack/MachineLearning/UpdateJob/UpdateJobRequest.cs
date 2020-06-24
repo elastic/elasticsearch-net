@@ -52,10 +52,26 @@ namespace Nest
 
 		/// <summary>
 		/// The time in days that model snapshots are retained for the job.
-		/// Older snapshots are deleted. The default value is 1 day.
+		/// Older snapshots are deleted. The default value is 10 days in Elasticsearch 7.8.0+
+		/// and 1 day in older versions.
 		/// </summary>
 		[DataMember(Name ="model_snapshot_retention_days")]
 		long? ModelSnapshotRetentionDays { get; set; }
+
+		/// <summary>
+		/// Specifies a number of days between 0 and the value of <see cref="ModelSnapshotRetentionDays"/>.
+		/// After this period of time, only the first model snapshot per day is retained for this job.
+		/// Age is calculated relative to the timestamp of the newest model snapshot. For new jobs, the default
+		/// value is <c>1</c>, which means that all snapshots are retained for one day. Older snapshots
+		/// are thinned out such that only one per day is retained. For jobs that were
+		/// created before this setting was available, the default value matches the
+		/// <see cref="ModelSnapshotRetentionDays"/> value, which preserves the original behavior
+		/// and no thinning out of model snapshots occurs.
+		/// <para />
+		/// Available in Elasticsearch 7.8.0+
+		/// </summary>
+		[DataMember(Name ="daily_model_snapshot_retention_after_days")]
+		long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
 		/// <summary>
 		/// The period over which adjustments to the score are applied, as new data is seen.
@@ -105,6 +121,9 @@ namespace Nest
 		public long? ModelSnapshotRetentionDays { get; set; }
 
 		/// <inheritdoc />
+		public long? DailyModelSnapshotRetentionAfterDays { get; set; }
+
+		/// <inheritdoc />
 		public long? RenormalizationWindowDays { get; set; }
 
 		/// <inheritdoc />
@@ -123,43 +142,47 @@ namespace Nest
 		string IUpdateJobRequest.Description { get; set; }
 		IModelPlotConfigEnabled IUpdateJobRequest.ModelPlotConfig { get; set; }
 		long? IUpdateJobRequest.ModelSnapshotRetentionDays { get; set; }
+		long? IUpdateJobRequest.DailyModelSnapshotRetentionAfterDays { get; set; }
 		long? IUpdateJobRequest.RenormalizationWindowDays { get; set; }
 		long? IUpdateJobRequest.ResultsRetentionDays { get; set; }
-
 		bool? IUpdateJobRequest.AllowLazyOpen { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IUpdateJobRequest.AnalysisLimits" />
 		public UpdateJobDescriptor<TDocument> AnalysisLimits(Func<AnalysisMemoryLimitDescriptor, IAnalysisMemoryLimit> selector) =>
 			Assign(selector, (a, v) => a.AnalysisLimits = v?.Invoke(new AnalysisMemoryLimitDescriptor()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IUpdateJobRequest.BackgroundPersistInterval" />
 		public UpdateJobDescriptor<TDocument> BackgroundPersistInterval(Time backgroundPersistInterval) =>
 			Assign(backgroundPersistInterval, (a, v) => a.BackgroundPersistInterval = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IUpdateJobRequest.CustomSettings" />
 		public UpdateJobDescriptor<TDocument> CustomSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> customSettingsDictionary
 		) =>
 			Assign(customSettingsDictionary(new FluentDictionary<string, object>()), (a, v) => a.CustomSettings = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IUpdateJobRequest.Description" />
 		public UpdateJobDescriptor<TDocument> Description(string description) => Assign(description, (a, v) => a.Description = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IUpdateJobRequest.ModelPlotConfig" />
 		public UpdateJobDescriptor<TDocument> ModelPlot(Func<ModelPlotConfigEnabledDescriptor<TDocument>, IModelPlotConfigEnabled> selector) =>
 			Assign(selector, (a, v) => a.ModelPlotConfig = v?.Invoke(new ModelPlotConfigEnabledDescriptor<TDocument>()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IUpdateJobRequest.ModelSnapshotRetentionDays" />
 		public UpdateJobDescriptor<TDocument> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) =>
 			Assign(modelSnapshotRetentionDays, (a, v) => a.ModelSnapshotRetentionDays = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IUpdateJobRequest.DailyModelSnapshotRetentionAfterDays" />
+		public UpdateJobDescriptor<TDocument> DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays) =>
+			Assign(dailyModelSnapshotRetentionAfterDays, (a, v) => a.DailyModelSnapshotRetentionAfterDays = v);
+
+		/// <inheritdoc cref="IUpdateJobRequest.RenormalizationWindowDays" />
 		public UpdateJobDescriptor<TDocument> RenormalizationWindowDays(long? renormalizationWindowDays) =>
 			Assign(renormalizationWindowDays, (a, v) => a.RenormalizationWindowDays = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IUpdateJobRequest.ResultsRetentionDays" />
 		public UpdateJobDescriptor<TDocument> ResultsRetentionDays(long? resultsRetentionDays) => Assign(resultsRetentionDays, (a, v) => a.ResultsRetentionDays = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IUpdateJobRequest.AllowLazyOpen" />
 		public UpdateJobDescriptor<TDocument> AllowLazyOpen(bool? allowLazyOpen = true) =>
 			Assign(allowLazyOpen, (a, v) => a.AllowLazyOpen = v);
 	}

@@ -47,6 +47,9 @@ namespace Tests.XPack.MachineLearning.MachineLearningInfo
 				? 10
 				: 1);
 
+			if (TestClient.Configuration.InRange(">=7.8.0"))
+				anomalyDetectors.DailyModelSnapshotRetentionAfterDays.Should().Be(1);
+
 			response.Defaults.Datafeeds.ScrollSize.Should().Be(1000);
 
 			if (Cluster.ClusterConfiguration.Version >= "7.6.0")
