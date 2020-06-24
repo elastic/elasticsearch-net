@@ -16,7 +16,7 @@ namespace Tests.Mapping.Types.Core.Date
 			Index = false,
 			Boost = 1.2,
 			IgnoreMalformed = true,
-			Format = "MM/dd/yyyy")]
+			Format = "yyyy-MM-dd'T'HH:mm[:ss][.S]")]
 		public DateTime Full { get; set; }
 
 		public DateTime Inferred { get; set; }
@@ -42,7 +42,7 @@ namespace Tests.Mapping.Types.Core.Date
 					index = false,
 					boost = 1.2,
 					ignore_malformed = true,
-					format = "MM/dd/yyyy"
+					format = "yyyy-MM-dd'T'HH:mm[:ss][.S]"
 				},
 				minimal = new
 				{
