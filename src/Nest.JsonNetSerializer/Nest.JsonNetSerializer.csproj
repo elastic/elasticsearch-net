@@ -5,7 +5,15 @@
     <Title>NEST.JsonNetSerializer - Elasticsearch .NET custom Json.NET serializer</Title>
     <PackageTags>elasticsearch,elastic,search,lucene,nest,serializer,json</PackageTags>
     <Description>NEST uses an internal serializer. This package enables serialization for your documents using your own custom Json.NET serializer</Description>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 
   <PropertyGroup>
     <IsPackable>true</IsPackable>
