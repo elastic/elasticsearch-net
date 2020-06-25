@@ -8,7 +8,15 @@
       Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and 
       responses. Uses and exposes Elasticsearch.Net.
     </Description>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
   
   <PropertyGroup>
     <IsPackable>true</IsPackable>
