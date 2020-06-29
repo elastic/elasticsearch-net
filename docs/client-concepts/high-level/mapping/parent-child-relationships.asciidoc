@@ -263,8 +263,8 @@ to `Routing` which can infer the correct routing key based on the JoinField prop
 
 [source,csharp]
 ----
-var ndexResponse = client.Index(parent, i => i.Routing(Routing.From(parent)));
-ndexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+var indexResponse = client.Index(parent, i => i.Routing(Routing.From(parent)));
+indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
 ----
 
 The same goes for when we index a child, we can pass the instance directly to `Routing` and NEST will use the parent id
@@ -273,23 +273,23 @@ create an instance of `Routing`
 
 [source,csharp]
 ----
-ndexResponse = client.Index(child, i => i.Routing(Route(child)));
-ndexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+indexResponse = client.Index(child, i => i.Routing(Route(child)));
+indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
 ----
 
 You can always override the default inferred routing though 
 
 [source,csharp]
 ----
-ndexResponse = client.Index(child, i => i.Routing("explicit"));
-ndexResponse.ApiCall.Uri.Query.Should().Contain("routing=explicit");
+indexResponse = client.Index(child, i => i.Routing("explicit"));
+indexResponse.ApiCall.Uri.Query.Should().Contain("routing=explicit");
 
-ndexResponse = client.Index(child, i => i.Routing(null));
-ndexResponse.ApiCall.Uri.Query.Should().NotContain("routing");
+indexResponse = client.Index(child, i => i.Routing(null));
+indexResponse.ApiCall.Uri.Query.Should().NotContain("routing");
 
 var indexRequest = new IndexRequest<MyChild>(child) { Routing = Route(child) } ;
-ndexResponse = client.Index(indexRequest);
-ndexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+indexResponse = client.Index(indexRequest);
+indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
 ----
 
 Its important to note that the routing is resolved at request time, not instantiation time
@@ -298,8 +298,8 @@ here we update the `child`'s `JoinField` after already creating the index reques
 [source,csharp]
 ----
 child.MyJoinField = JoinField.Link<MyChild>(parentId: "something-else");
-ndexResponse = client.Index(indexRequest);
-ndexResponse.ApiCall.Uri.Query.Should().Contain("routing=something-else");
+indexResponse = client.Index(indexRequest);
+indexResponse.ApiCall.Uri.Query.Should().Contain("routing=something-else");
 ----
 
 [NOTE]
