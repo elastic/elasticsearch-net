@@ -27,6 +27,13 @@ namespace Nest
 		public DataCounts DataCounts { get; internal set; }
 
 		/// <summary>
+		/// Indicates that the process of deleting the job is in progress but not yet completed.
+		/// It is only reported when true.
+		/// </summary>
+		[DataMember(Name = "deleting")]
+		public bool? Deleting { get; internal set; }
+
+		/// <summary>
 		///  Contains job statistics if job contains a forecast.
 		/// </summary>
 		[DataMember(Name = "forecasts_stats")]
@@ -109,10 +116,23 @@ namespace Nest
 		/// <remarks>Valid in Elasticsearch 7.4.0+</remarks>
 		[DataMember(Name = "exponential_average_bucket_processing_time_per_hour_ms")]
 		public double ExponentialAverageBucketProcessingTimePerHourMilliseconds { get; internal set; }
+
+		/// <summary>
+		/// Sum of all bucket processing times, in milliseconds.
+		/// </summary>
+		[DataMember(Name = "total_bucket_processing_time_ms")]
+		public double TotalBucketProcessingTimeMilliseconds { get; internal set; }
 	}
 
 	public class JobForecastStatistics
 	{
+		/// <summary>
+		/// A value of 0 indicates that forecasts do not exist for this job.
+		/// A value of 1 indicates that at least one forecast exists.
+		/// </summary>
+		[DataMember(Name = "forecasted_jobs")]
+		public long ForecastedJobs { get; internal set; }
+
 		/// <summary>
 		/// Statistics about the memory usage: minimum, maximum, average and total.
 		/// </summary>
