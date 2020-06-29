@@ -31,7 +31,7 @@ namespace Tests.Indices.AliasManagement.Alias
 				new Dictionary<string, object>
 					{ { "add", new { aliases = new [] { "alias1", "alias2" }, indices = new [] { CallIsolatedValue } } } },
 				new Dictionary<string, object> { { "remove", new { alias = "alias", index = CallIsolatedValue } } },
-				new Dictionary<string, object> { { "remove", new { aliases = new [] { "alias1", "alias2" }, indices = CallIsolatedValue } } },
+				new Dictionary<string, object> { { "remove", new { aliases = new [] { "alias1", "alias2" }, indices = new[] { CallIsolatedValue } } } },
 			}
 		};
 
