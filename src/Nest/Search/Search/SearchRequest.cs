@@ -298,7 +298,9 @@ namespace Nest
 
 		/// <inheritdoc cref="ISearchRequest.Source" />
 		public SearchDescriptor<TInferDocument> Source(Func<SourceFilterDescriptor<TInferDocument>, ISourceFilter> selector) =>
-			Assign(selector, (a, v) => a.Source = new Union<bool, ISourceFilter>(v?.Invoke(new SourceFilterDescriptor<TInferDocument>())));
+			Assign(selector?.Invoke(new SourceFilterDescriptor<TInferDocument>()), (a, v) => a.Source = v is null
+				? null
+				: new Union<bool,ISourceFilter>(v));
 
 		/// <inheritdoc cref="ISearchRequest.Size" />
 		public SearchDescriptor<TInferDocument> Size(int? size) => Assign(size, (a, v) => a.Size = v);
