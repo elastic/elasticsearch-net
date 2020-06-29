@@ -62,5 +62,11 @@ namespace Nest
 	{
 		[DataMember(Name = "max_model_memory_limit")]
 		public string MaxModelMemoryLimit { get; internal set; }
+
+		/// <summary>
+		/// Available in Elasticsearch 7.8.0+
+		/// </summary>
+		[DataMember(Name = "effective_max_model_memory_limit")]
+		public string EffectiveMaxModelMemoryLimit { get; internal set; }
 	}
 }

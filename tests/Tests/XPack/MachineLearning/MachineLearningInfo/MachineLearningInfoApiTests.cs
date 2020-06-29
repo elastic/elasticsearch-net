@@ -56,6 +56,9 @@ namespace Tests.XPack.MachineLearning.MachineLearningInfo
 				analyzer.Tokenizer.Should().Be("ml_classic");
 				analyzer.Filter.Should().NotBeNullOrEmpty();
 			}
+
+			if (TestClient.Configuration.InRange(">=7.8.0"))
+				response.Limits.EffectiveMaxModelMemoryLimit.Should().NotBeNullOrEmpty();
 		}
 	}
 }
