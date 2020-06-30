@@ -48,10 +48,26 @@ namespace Nest
 
 		/// <summary>
 		/// The time in days that model snapshots are retained for the job.
-		/// Older snapshots are deleted. The default value is 1 day.
+		/// Older snapshots are deleted. The default value is 10 days in Elasticsearch 7.8.0+
+		/// and 1 day in older versions.
 		/// </summary>
 		[DataMember(Name ="model_snapshot_retention_days")]
 		long? ModelSnapshotRetentionDays { get; set; }
+
+		/// <summary>
+		/// Specifies a number of days between 0 and the value of <see cref="ModelSnapshotRetentionDays"/>.
+		/// After this period of time, only the first model snapshot per day is retained for this job.
+		/// Age is calculated relative to the timestamp of the newest model snapshot. For new jobs, the default
+		/// value is <c>1</c>, which means that all snapshots are retained for one day. Older snapshots
+		/// are thinned out such that only one per day is retained. For jobs that were
+		/// created before this setting was available, the default value matches the
+		/// <see cref="ModelSnapshotRetentionDays"/> value, which preserves the original behavior
+		/// and no thinning out of model snapshots occurs.
+		/// <para />
+		/// Available in Elasticsearch 7.8.0+
+		/// </summary>
+		[DataMember(Name ="daily_model_snapshot_retention_after_days")]
+		long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
 		/// <summary>
 		/// The name of the index in which to store the machine learning results.
@@ -94,6 +110,9 @@ namespace Nest
 		public long? ModelSnapshotRetentionDays { get; set; }
 
 		/// <inheritdoc />
+		public long? DailyModelSnapshotRetentionAfterDays { get; set; }
+
+		/// <inheritdoc />
 		public IndexName ResultsIndexName { get; set; }
 
 		/// <inheritdoc />
@@ -109,41 +128,46 @@ namespace Nest
 		string IPutJobRequest.Description { get; set; }
 		IModelPlotConfig IPutJobRequest.ModelPlotConfig { get; set; }
 		long? IPutJobRequest.ModelSnapshotRetentionDays { get; set; }
+		long? IPutJobRequest.DailyModelSnapshotRetentionAfterDays { get; set; }
 		IndexName IPutJobRequest.ResultsIndexName { get; set; }
 		bool? IPutJobRequest.AllowLazyOpen { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IPutJobRequest.AnalysisConfig"/>
 		public PutJobDescriptor<TDocument> AnalysisConfig(Func<AnalysisConfigDescriptor<TDocument>, IAnalysisConfig> selector) =>
 			Assign(selector, (a, v) => a.AnalysisConfig = v?.Invoke(new AnalysisConfigDescriptor<TDocument>()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IPutJobRequest.AnalysisLimits"/>
 		public PutJobDescriptor<TDocument> AnalysisLimits(Func<AnalysisLimitsDescriptor, IAnalysisLimits> selector) =>
 			Assign(selector, (a, v) => a.AnalysisLimits = v?.Invoke(new AnalysisLimitsDescriptor()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IPutJobRequest.DataDescription"/>
 		public PutJobDescriptor<TDocument> DataDescription(Func<DataDescriptionDescriptor<TDocument>, IDataDescription> selector) =>
 			Assign(selector.InvokeOrDefault(new DataDescriptionDescriptor<TDocument>()), (a, v) => a.DataDescription = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IPutJobRequest.Description"/>
 		public PutJobDescriptor<TDocument> Description(string description) => Assign(description, (a, v) => a.Description = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IPutJobRequest.ModelPlotConfig"/>
 		public PutJobDescriptor<TDocument> ModelPlot(Func<ModelPlotConfigDescriptor<TDocument>, IModelPlotConfig> selector) =>
 			Assign(selector, (a, v) => a.ModelPlotConfig = v?.Invoke(new ModelPlotConfigDescriptor<TDocument>()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IPutJobRequest.ModelSnapshotRetentionDays"/>
 		public PutJobDescriptor<TDocument> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) =>
 			Assign(modelSnapshotRetentionDays, (a, v) => a.ModelSnapshotRetentionDays = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IPutJobRequest.DailyModelSnapshotRetentionAfterDays"/>
+		public PutJobDescriptor<TDocument> DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays) =>
+			Assign(dailyModelSnapshotRetentionAfterDays, (a, v) => a.DailyModelSnapshotRetentionAfterDays = v);
+
+		/// <inheritdoc cref="IPutJobRequest.ResultsIndexName"/>
 		public PutJobDescriptor<TDocument> ResultsIndexName(IndexName indexName) =>
 			Assign(indexName, (a, v) => a.ResultsIndexName = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IPutJobRequest.ResultsIndexName"/>
 		public PutJobDescriptor<TDocument> ResultsIndexName<TIndex>() =>
 			Assign(typeof(TIndex), (a, v) => a.ResultsIndexName = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IPutJobRequest.AllowLazyOpen"/>
 		public PutJobDescriptor<TDocument> AllowLazyOpen(bool? allowLazyOpen = true) =>
 			Assign(allowLazyOpen, (a, v) => a.AllowLazyOpen = v);
 	}
