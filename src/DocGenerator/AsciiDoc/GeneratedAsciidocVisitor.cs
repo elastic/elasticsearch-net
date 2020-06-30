@@ -310,7 +310,11 @@ namespace DocGenerator.AsciiDoc
 			if (visitor.LabeledListItems.Any())
 			{
 				var labeledList = new LabeledList();
-				foreach (var item in visitor.LabeledListItems.OrderBy(l => l.Label)) labeledList.Items.Add(item);
+				foreach (var item in visitor.LabeledListItems
+					.OrderBy(l => l.Label)
+					.GroupBy(l => l.Label)
+					.Select(x => x.First()))
+					labeledList.Items.Add(item);
 
 				_newDocument.Insert(_newDocument.IndexOf(attributeEntry), labeledList);
 			}
