@@ -39,6 +39,12 @@ namespace Nest
 		[DataMember(Name = "model_snapshot_retention_days")]
 		public int ModelSnapshotRetentionDays { get; internal set; }
 
+		/// <summary>
+		/// Available in Elasticsearch 7.8.0+
+		/// </summary>
+		[DataMember(Name = "daily_model_snapshot_retention_after_days")]
+		public long DailyModelSnapshotRetentionAfterDays { get; internal set; }
+
 		[DataMember(Name = "categorization_analyzer")]
 		public CategorizationAnalyzer CategorizationAnalyzer { get; internal set; }
 	}
