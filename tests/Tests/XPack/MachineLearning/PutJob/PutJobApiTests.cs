@@ -46,6 +46,16 @@ namespace Tests.XPack.MachineLearning.PutJob
 			results_index_name = "server-metrics"
 		};
 
+		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var value in values)
+			{
+				var response = DeleteJob(client, value.Value);
+				if (!response.IsValid)
+					throw new Exception($"Problem in integration teardown {response.DebugInformation}");
+			}
+		}
+
 		protected override int ExpectStatusCode => 200;
 
 		protected override Func<PutJobDescriptor<Metric>, IPutJobRequest> Fluent => f => f
@@ -205,6 +215,16 @@ namespace Tests.XPack.MachineLearning.PutJob
 		};
 
 		protected override int ExpectStatusCode => 200;
+
+		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var value in values)
+			{
+				var response = DeleteJob(client, value.Value);
+				if (!response.IsValid)
+					throw new Exception($"Problem in integration teardown {response.DebugInformation}");
+			}
+		}
 
 		protected override Func<PutJobDescriptor<Metric>, IPutJobRequest> Fluent => f => f
 			.Description("Lab 1 - Simple example")
