@@ -30,18 +30,6 @@ the low level and high level client:
 
 Api Key to send with all requests to Elasticsearch
 
-`ApiKeyAuthentication`::
-
-Api Key to send with all requests to Elasticsearch
-
-`ApiKeyAuthentication`::
-
-Api Key to send with all requests to Elasticsearch
-
-`BasicAuthentication`::
-
-Basic Authentication credentials to send with all requests to Elasticsearch
-
 `BasicAuthentication`::
 
 Basic Authentication credentials to send with all requests to Elasticsearch
@@ -49,10 +37,6 @@ Basic Authentication credentials to send with all requests to Elasticsearch
 `ClientCertificate`::
 
 Use a `X509Certificate` to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
-
-`ClientCertificate`::
-
-Use a file path to a certificate to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
 
 `ClientCertificates`::
 
@@ -158,10 +142,6 @@ Forces all requests to have ?pretty=true querystring parameter appended, causing
 
 If your connection has to go through proxy, use this method to specify the proxy url
 
-`Proxy`::
-
-If your connection has to go through proxy, use this method to specify the proxy url
-
 `RequestTimeout`::
 
 Sets the default timeout in milliseconds for each request to Elasticsearch. Defaults to `60` seconds.
@@ -243,10 +223,6 @@ The default index to use for a request when no index has been explicitly specifi
 `DefaultMappingFor`::
 
 Specify how the mapping is inferred for a given CLR type. The mapping can infer the index, id and relation name for a given CLR type, as well as control serialization behaviour for CLR properties.
-
-`DefaultMappingFor`::
-
-Specify how the mapping is inferred for a given CLR type. The mapping can infer the index and relation name for a given CLR type.
 
 :xml-docs: Nest:ConnectionSettingsBase`1
 
