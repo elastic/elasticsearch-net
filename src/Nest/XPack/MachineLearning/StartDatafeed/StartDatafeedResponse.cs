@@ -10,5 +10,13 @@ namespace Nest
 	{
 		[DataMember(Name ="started")]
 		public bool Started { get; internal set; }
+
+		/// <summary>
+		/// The node that the job was assigned to
+		/// <para />
+		/// Available in Elasticsearch 7.8.0+
+		/// </summary>
+		[DataMember(Name = "node")]
+		public string Node { get; internal set; }
 	}
 }

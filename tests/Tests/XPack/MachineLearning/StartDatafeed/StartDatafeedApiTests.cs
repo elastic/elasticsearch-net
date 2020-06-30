@@ -2,10 +2,12 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System;
+using System;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
+using Tests.Core.Extensions;
 using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.MachineLearning.StartDatafeed
@@ -51,6 +53,12 @@ namespace Tests.XPack.MachineLearning.StartDatafeed
 
 		protected override StartDatafeedDescriptor NewDescriptor() => new StartDatafeedDescriptor(CallIsolatedValue + "-datafeed");
 
-		protected override void ExpectResponse(StartDatafeedResponse response) => response.Started.Should().BeTrue();
+		protected override void ExpectResponse(StartDatafeedResponse response)
+		{
+			response.Started.Should().BeTrue();
+
+			if (TestClient.Configuration.InRange(">=7.8.0"))
+				response.Node.Should().NotBeNullOrEmpty();
+		}
 	}
 }
