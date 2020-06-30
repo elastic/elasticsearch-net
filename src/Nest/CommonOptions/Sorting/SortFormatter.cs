@@ -22,55 +22,82 @@ namespace Nest
 		{
 			ISort sort = null;
 
-			var count = 0;
-			while (reader.ReadIsInObject(ref count))
+			switch (reader.GetCurrentJsonToken())
 			{
-				var sortProperty = reader.ReadPropertyNameSegmentRaw();
-				if (SortFields.TryGetValue(sortProperty, out var value))
+				case JsonToken.String:
 				{
-					switch (value)
+					var sortProperty = reader.ReadString();
+					sort = new FieldSort { Field = sortProperty };
+					break;
+				}
+				case JsonToken.BeginObject:
+				{
+					var count = 0;
+					while (reader.ReadIsInObject(ref count))
 					{
-						case 0:
-							var propCount = 0;
-							string field = null;
-							var geoDistanceSegment = reader.ReadNextBlockSegment();
-							var geoDistanceReader = new JsonReader(geoDistanceSegment.Array, geoDistanceSegment.Offset);
-							IEnumerable<GeoLocation> points = null;
-							while (geoDistanceReader.ReadIsInObject(ref propCount))
+						var sortProperty = reader.ReadPropertyNameSegmentRaw();
+						if (SortFields.TryGetValue(sortProperty, out var value))
+						{
+							switch (value)
 							{
-								var nameSegment = geoDistanceReader.ReadPropertyNameSegmentRaw();
-								if (geoDistanceReader.GetCurrentJsonToken() == JsonToken.BeginArray)
-								{
-									field = nameSegment.Utf8String();
-									points = formatterResolver.GetFormatter<IEnumerable<GeoLocation>>()
-										.Deserialize(ref geoDistanceReader, formatterResolver);
-									break;
-								}
+								case 0:
+									var propCount = 0;
+									string field = null;
+									var geoDistanceSegment = reader.ReadNextBlockSegment();
+									var geoDistanceReader = new JsonReader(geoDistanceSegment.Array, geoDistanceSegment.Offset);
+									IEnumerable<GeoLocation> points = null;
+									while (geoDistanceReader.ReadIsInObject(ref propCount))
+									{
+										var nameSegment = geoDistanceReader.ReadPropertyNameSegmentRaw();
+										if (geoDistanceReader.GetCurrentJsonToken() == JsonToken.BeginArray)
+										{
+											field = nameSegment.Utf8String();
+											points = formatterResolver.GetFormatter<IEnumerable<GeoLocation>>()
+												.Deserialize(ref geoDistanceReader, formatterResolver);
+											break;
+										}
 
-								// skip value if not array
-								geoDistanceReader.ReadNextBlock();
+										// skip value if not array
+										geoDistanceReader.ReadNextBlock();
+									}
+									geoDistanceReader = new JsonReader(geoDistanceSegment.Array, geoDistanceSegment.Offset);
+									var geoDistanceSort = formatterResolver.GetFormatter<GeoDistanceSort>()
+										.Deserialize(ref geoDistanceReader, formatterResolver);
+									geoDistanceSort.Field = field;
+									geoDistanceSort.Points = points;
+									sort = geoDistanceSort;
+									break;
+								case 1:
+									sort = formatterResolver.GetFormatter<ScriptSort>()
+										.Deserialize(ref reader, formatterResolver);
+									break;
 							}
-							geoDistanceReader = new JsonReader(geoDistanceSegment.Array, geoDistanceSegment.Offset);
-							var geoDistanceSort = formatterResolver.GetFormatter<GeoDistanceSort>()
-								.Deserialize(ref geoDistanceReader, formatterResolver);
-							geoDistanceSort.Field = field;
-							geoDistanceSort.Points = points;
-							sort = geoDistanceSort;
-							break;
-						case 1:
-							sort = formatterResolver.GetFormatter<ScriptSort>()
-								.Deserialize(ref reader, formatterResolver);
-							break;
+						}
+						else
+						{
+							var field = sortProperty.Utf8String();
+							FieldSort sortField;
+							if (reader.GetCurrentJsonToken() == JsonToken.String)
+							{
+								var sortOrder = formatterResolver.GetFormatter<SortOrder>()
+									.Deserialize(ref reader, formatterResolver);
+								sortField = new FieldSort { Field = field, Order = sortOrder };
+							}
+							else
+							{
+								sortField = formatterResolver.GetFormatter<FieldSort>()
+									.Deserialize(ref reader, formatterResolver);
+								sortField.Field = field;
+							}
+
+							sort = sortField;
+						}
 					}
+
+					break;
 				}
-				else
-				{
-					var field = sortProperty.Utf8String();
-					var sortField = formatterResolver.GetFormatter<FieldSort>()
-						.Deserialize(ref reader, formatterResolver);
-					sortField.Field = field;
-					sort = sortField;
-				}
+				default:
+					throw new JsonParsingException($"Cannot deserialize {nameof(ISort)} from {reader.GetCurrentJsonToken()}");
 			}
 
 			return sort;
