@@ -142,7 +142,7 @@ namespace Tests.ClientConcepts.HighLevel.Indexing
 				.IndexMany(people)); //<2> asynchronous method that returns a Task<IBulkResponse> that can be awaited
 		}
 
-		/**
+		/**[[bulkall-observable]]
 		* ==== Multiple documents with `BulkAllObservable` helper
 		*
 		* Using the `BulkAllObservable` helper allows you to focus on the overall objective of indexing, without having to
