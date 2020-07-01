@@ -7,6 +7,7 @@ namespace Scripts
 open System
 open System.Runtime.InteropServices
 open Fake.Core
+open Fake.IO
 
 //this is ugly but a direct port of what used to be duplicated in our DOS and bash scripts
 module Commandline =
@@ -80,7 +81,7 @@ Execution hints can be provided anywhere on the command line
 
     type MultiTarget = All | One
 
-    type VersionArguments = { Version: string; }
+    type VersionArguments = { Version: string; OutputLocation: string option }
     type TestArguments = { TrxExport: bool; CodeCoverage: bool; TestFilter: string option; }
     type IntegrationArguments = { TrxExport: bool; TestFilter: string option; ClusterFilter: string option; ElasticsearchVersions: string list; }
 
@@ -197,7 +198,10 @@ Execution hints can be provided anywhere on the command line
         | ["profile"] -> parsed
         | "rest-spec-tests" :: tail -> { parsed with RemainingArguments = tail }
         
-        | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version }; }
+        | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version; OutputLocation = None }; }
+        | ["release"; version; path] ->
+            if (not <| System.IO.Directory.Exists path) then failwithf "'%s' is not an existing directory" (Path.getFullName path)
+            { parsed with CommandArguments = SetVersion { Version = version; OutputLocation = Some path }; }
         | ["canary"] ->
             {
                 parsed with CommandArguments = Test {

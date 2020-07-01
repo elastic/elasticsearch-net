@@ -57,4 +57,9 @@ module ReposTooling =
     let Rewriter args =
         restoreOnce.Force()
         Tooling.DotNet.ExecIn "." (List.append [assemblyRewriter] (List.ofSeq args)) |> ignore
+        
+    let private packageValidator = "nupkg-validator"
+    let PackageValidator args =
+        restoreOnce.Force()
+        Tooling.DotNet.ExecIn "." (List.append [packageValidator] (List.ofSeq args)) |> ignore
          

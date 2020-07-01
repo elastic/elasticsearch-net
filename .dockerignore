@@ -1,8 +1,4 @@
 scripts/output
-.git
-
-
-.git
 
 **/Obj/
 **/obj/
@@ -35,8 +31,6 @@ PublishProfiles/
 *.vspx
 /.symbols
 nuget.exe
-*net45.csproj
-*k10.csproj
 App_Data/
 bower_components
 node_modules
@@ -48,3 +42,5 @@ node_modules
 launchSettings.json
 bin
 obj
+ 
+.git/objects/*

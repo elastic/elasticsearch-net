@@ -44,6 +44,7 @@
     <PackageReference Include="Fake.Core.SemVer" Version="5.15.0" />
     <PackageReference Include="Fake.IO.FileSystem" Version="5.15.0" />
     <PackageReference Include="Fake.IO.Zip" Version="5.15.0" />
+    <PackageReference Include="Fake.Tools.Git" Version="5.15.0" />
     
     <PackageReference Include="ILRepack" Version="2.1.0-beta1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />

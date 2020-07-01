@@ -57,6 +57,8 @@ build/tools/*
 !build/*.targets
 !build/scripts
 
+.ci/output
+
 
 /dep/Newtonsoft.Json.4.0.2
 !docs/build
