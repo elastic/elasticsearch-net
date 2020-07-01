@@ -154,7 +154,7 @@ namespace Elasticsearch.Net
 		{
 			lock (_cleanupTimerLock)
 			{
-				_cleanupTimer.Dispose();
+				_cleanupTimer?.Dispose();
 				_cleanupTimer = null;
 			}
 		}
