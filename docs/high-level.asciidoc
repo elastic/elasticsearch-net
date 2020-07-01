@@ -199,6 +199,8 @@ with some smarts to make working with Elasticsearch from a strongly typed langua
 
 * <<returned-fields, Returning only certain fields>>
 
+* <<scrolling-documents, Scrolling documents>>
+
 * <<covariant-search-results, Covariant search results>>
 
 include::search/writing-queries.asciidoc[]
@@ -206,6 +208,8 @@ include::search/writing-queries.asciidoc[]
 include::query-dsl/bool-dsl/bool-dsl.asciidoc[]
 
 include::search/returned-fields.asciidoc[]
+
+include::search/scrolling-documents.asciidoc[]
 
 include::{output-dir}/covariant-hits/covariant-search-results.asciidoc[]
 
