@@ -138,6 +138,7 @@ var asyncBulkIndexResponse = await client.BulkAsync(b => b
 <1> synchronous method that returns an IBulkResponse, the same as IndexMany and can be inspected in the same way for errors
 <2> asynchronous method that returns a Task<IBulkResponse> that can be awaited
 
+[[bulkall-observable]]
 ==== Multiple documents with `BulkAllObservable` helper
 
 Using the `BulkAllObservable` helper allows you to focus on the overall objective of indexing, without having to
