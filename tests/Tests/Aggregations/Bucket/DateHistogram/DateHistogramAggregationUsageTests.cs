@@ -37,7 +37,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				date_histogram = new
 				{
 					field = "startedOn",
-					interval = "month",
+					calendar_interval = "month",
 					min_doc_count = 2,
 					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", //<1> Note the inclusion of `date_optional_time` to `format`
 					order = new { _count = "asc" },
@@ -72,7 +72,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.DateHistogram("projects_started_per_month", date => date
 				.Field(p => p.StartedOn)
-				.Interval(DateInterval.Month)
+				.CalendarInterval(DateInterval.Month)
 				.MinimumDocumentCount(2)
 				.Format("yyyy-MM-dd'T'HH:mm:ss")
 				.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
@@ -92,7 +92,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			new DateHistogramAggregation("projects_started_per_month")
 			{
 				Field = Field<Project>(p => p.StartedOn),
-				Interval = DateInterval.Month,
+				CalendarInterval = DateInterval.Month,
 				MinimumDocumentCount = 2,
 				Format = "yyyy-MM-dd'T'HH:mm:ss",
 				ExtendedBounds = new ExtendedBounds<DateMath>
@@ -147,12 +147,12 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 
 		protected override object AggregationJson => new
 		{
-			projects_started_per_month = new
+			projects_started_per_four_weeks = new
 			{
 				date_histogram = new
 				{
 					field = "startedOn",
-					interval = "month",
+					fixed_interval = "28d",
 					min_doc_count = 2,
 					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
 					order = new { _count = "asc" },
@@ -168,9 +168,9 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 
 #pragma warning disable 618, 612
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
-			.DateHistogram("projects_started_per_month", date => date
+			.DateHistogram("projects_started_per_four_weeks", date => date
 				.Field(p => p.StartedOn)
-				.Interval(DateInterval.Month)
+				.FixedInterval(new Time(28, TimeUnit.Day))
 				.MinimumDocumentCount(2)
 				.Format("yyyy-MM-dd'T'HH:mm:ss")
 				.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
@@ -179,10 +179,10 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
-			new DateHistogramAggregation("projects_started_per_month")
+			new DateHistogramAggregation("projects_started_per_four_weeks")
 			{
 				Field = Field<Project>(p => p.StartedOn),
-				Interval = DateInterval.Month,
+				FixedInterval = new Time(28, TimeUnit.Day),
 				MinimumDocumentCount = 2,
 				Format = "yyyy-MM-dd'T'HH:mm:ss",
 				ExtendedBounds = new ExtendedBounds<DateMath>
@@ -198,7 +198,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var dateHistogram = response.Aggregations.DateHistogram("projects_started_per_month");
+			var dateHistogram = response.Aggregations.DateHistogram("projects_started_per_four_weeks");
 			dateHistogram.Should().NotBeNull();
 			dateHistogram.Buckets.Should().NotBeNull();
 			dateHistogram.Buckets.Count.Should().BeGreaterThan(10);
