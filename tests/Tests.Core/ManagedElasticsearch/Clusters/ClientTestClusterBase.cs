@@ -60,7 +60,8 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			Add("node.remote_cluster_client", "true", ">=8.0.0-SNAPSHOT");
 
 			Add($"script.max_compilations_per_minute", "10000", "<6.0.0-rc1");
-			Add($"script.max_compilations_rate", "10000/1m", ">=6.0.0-rc1");
+			Add($"script.max_compilations_rate", "10000/1m", ">=6.0.0-rc1 <7.9.0-SNAPSHOT");
+			Add($"script.disable_max_compilations_rate", "true", ">=7.9.0-SNAPSHOT");
 
 			Add($"script.inline", "true", "<5.5.0");
 			Add($"script.stored", "true", ">5.0.0-alpha1 <5.5.0");
