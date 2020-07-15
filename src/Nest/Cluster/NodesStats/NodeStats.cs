@@ -66,8 +66,7 @@ namespace Nest
 		/// Available in Elasticsearch 7.8.0+
 		/// </summary>
 		[DataMember(Name = "script_cache")]
-		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, ScriptStats>))]
-		public IReadOnlyDictionary<string, ScriptStats> ScriptCache { get; internal set; }
+		public ScriptCacheStats ScriptCache { get; internal set; }
 
 		[DataMember(Name = "thread_pool")]
 		[JsonFormatter(typeof(VerbatimInterfaceReadOnlyDictionaryKeysFormatter<string, ThreadCountStats>))]
@@ -83,6 +82,22 @@ namespace Nest
 		public string TransportAddress { get; internal set; }
 	}
 
+	[DataContract]
+	public class ScriptCacheStats
+	{
+		[DataMember(Name = "sum")]
+		public ScriptStats Sum { get; internal set; }
+
+		[DataMember(Name = "contexts")]
+		public IReadOnlyCollection<ContextScriptStats> Contexts { get; internal set; }
+	}
+
+	[DataContract]
+	public class ContextScriptStats : ScriptStats
+	{
+		[DataMember(Name = "context")]
+		public string Context { get; internal set; }
+	}
 
 	[DataContract]
 	public class ScriptStats
