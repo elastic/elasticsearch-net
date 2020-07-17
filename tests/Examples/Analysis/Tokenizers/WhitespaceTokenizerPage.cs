@@ -11,8 +11,8 @@ namespace Examples.Analysis.Tokenizers
 	public class WhitespaceTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenizers/whitespace-tokenizer.asciidoc:11")]
-		public void Line11()
+		[Description("analysis/tokenizers/whitespace-tokenizer.asciidoc:14")]
+		public void Line14()
 		{
 			// tag::7b9dfe5857bde1bd8483ea3241656714[]
 			var response0 = new SearchResponse<object>();

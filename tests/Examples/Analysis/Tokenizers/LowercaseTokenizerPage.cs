@@ -11,8 +11,8 @@ namespace Examples.Analysis.Tokenizers
 	public class LowercaseTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenizers/lowercase-tokenizer.asciidoc:18")]
-		public void Line18()
+		[Description("analysis/tokenizers/lowercase-tokenizer.asciidoc:20")]
+		public void Line20()
 		{
 			// tag::a99bc141066ef673e35f306157750ec9[]
 			var response0 = new SearchResponse<object>();

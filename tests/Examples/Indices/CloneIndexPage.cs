@@ -38,8 +38,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/clone-index.asciidoc:78")]
-		public void Line78()
+		[Description("indices/clone-index.asciidoc:82")]
+		public void Line82()
 		{
 			// tag::190a21e32db2125ddaea0f634e126a84[]
 			var response0 = new SearchResponse<object>();
@@ -49,8 +49,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/clone-index.asciidoc:104")]
-		public void Line104()
+		[Description("indices/clone-index.asciidoc:108")]
+		public void Line108()
 		{
 			// tag::81612c2537386e031b7eb604f6756a71[]
 			var response0 = new SearchResponse<object>();

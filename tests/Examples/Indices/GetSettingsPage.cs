@@ -11,8 +11,8 @@ namespace Examples.Indices
 	public class GetSettingsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("indices/get-settings.asciidoc:10")]
-		public void Line10()
+		[Description("indices/get-settings.asciidoc:11")]
+		public void Line11()
 		{
 			// tag::20bdfd960e8d76c4329269e237792eb7[]
 			var response0 = new SearchResponse<object>();
@@ -22,8 +22,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/get-settings.asciidoc:68")]
-		public void Line68()
+		[Description("indices/get-settings.asciidoc:73")]
+		public void Line73()
 		{
 			// tag::c538fc182f433e7141aee9d75c3e42d2[]
 			var response0 = new SearchResponse<object>();
@@ -41,8 +41,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/get-settings.asciidoc:84")]
-		public void Line84()
+		[Description("indices/get-settings.asciidoc:89")]
+		public void Line89()
 		{
 			// tag::9748682dcfb24b7d4893f534f7040370[]
 			var response0 = new SearchResponse<object>();

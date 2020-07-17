@@ -11,8 +11,8 @@ namespace Examples.Licensing
 	public class StartTrialPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("licensing/start-trial.asciidoc:47")]
-		public void Line47()
+		[Description("licensing/start-trial.asciidoc:45")]
+		public void Line45()
 		{
 			// tag::37f1f2e75ed95308ae436bbbb8d5645e[]
 			var response0 = new SearchResponse<object>();

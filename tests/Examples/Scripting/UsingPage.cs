@@ -42,8 +42,8 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("scripting/using.asciidoc:149")]
-		public void Line149()
+		[Description("scripting/using.asciidoc:157")]
+		public void Line157()
 		{
 			// tag::40a2bbc35a887d6c7dda3cca1fe7aa58[]
 			var response0 = new SearchResponse<object>();
@@ -59,8 +59,8 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("scripting/using.asciidoc:165")]
-		public void Line165()
+		[Description("scripting/using.asciidoc:173")]
+		public void Line173()
 		{
 			// tag::548a09b4630ae38cf8af33581ae614e6[]
 			var response0 = new SearchResponse<object>();
@@ -76,8 +76,8 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("scripting/using.asciidoc:179")]
-		public void Line179()
+		[Description("scripting/using.asciidoc:187")]
+		public void Line187()
 		{
 			// tag::08e08feb514b24006e13f258d617d873[]
 			var response0 = new SearchResponse<object>();
@@ -87,8 +87,8 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("scripting/using.asciidoc:187")]
-		public void Line187()
+		[Description("scripting/using.asciidoc:195")]
+		public void Line195()
 		{
 			// tag::b3423b00c6336ee0a1720b4ed7031cd7[]
 			var response0 = new SearchResponse<object>();
@@ -115,8 +115,8 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("scripting/using.asciidoc:212")]
-		public void Line212()
+		[Description("scripting/using.asciidoc:220")]
+		public void Line220()
 		{
 			// tag::4061fd5ba7221ca85805ed14d59a6bc5[]
 			var response0 = new SearchResponse<object>();

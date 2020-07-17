@@ -11,8 +11,8 @@ namespace Examples.Slm.Apis
 	public class SlmPutPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("slm/apis/slm-put.asciidoc:120")]
-		public void Line120()
+		[Description("slm/apis/slm-put.asciidoc:121")]
+		public void Line121()
 		{
 			// tag::aa7cf5df36b867aee5e3314ac4b4fa68[]
 			var response0 = new SearchResponse<object>();

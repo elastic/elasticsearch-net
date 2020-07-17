@@ -10,11 +10,11 @@ namespace Examples.Indices
 		[Description("indices/delete-data-stream.asciidoc:26")]
 		public void Line26()
 		{
-			// tag::2b59b014349d45bf894aca90b2b1fbe0[]
+			// tag::f823e4b87ed181b27f73ebc51351f0ee[]
 			var response0 = new SearchResponse<object>();
-			// end::2b59b014349d45bf894aca90b2b1fbe0[]
+			// end::f823e4b87ed181b27f73ebc51351f0ee[]
 
-			response0.MatchesExample(@"DELETE _data_stream/my-data-stream");
+			response0.MatchesExample(@"DELETE /_data_stream/my-data-stream");
 		}
 	}
 }

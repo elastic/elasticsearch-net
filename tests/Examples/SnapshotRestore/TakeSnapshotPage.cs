@@ -11,8 +11,8 @@ namespace Examples.SnapshotRestore
 	public class TakeSnapshotPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/take-snapshot.asciidoc:27")]
-		public void Line27()
+		[Description("snapshot-restore/take-snapshot.asciidoc:23")]
+		public void Line23()
 		{
 			// tag::2ab78817eacb5030a447e7fac6b91591[]
 			var response0 = new SearchResponse<object>();
@@ -22,16 +22,16 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/take-snapshot.asciidoc:40")]
-		public void Line40()
+		[Description("snapshot-restore/take-snapshot.asciidoc:36")]
+		public void Line36()
 		{
-			// tag::4a0353692bb14c5fccdc97903af0aa13[]
+			// tag::6a4f30129fb3f02296ab98fd8e180f07[]
 			var response0 = new SearchResponse<object>();
-			// end::4a0353692bb14c5fccdc97903af0aa13[]
+			// end::6a4f30129fb3f02296ab98fd8e180f07[]
 
 			response0.MatchesExample(@"PUT /_snapshot/my_backup/snapshot_2?wait_for_completion=true
 			{
-			  ""indices"": ""index_1,index_2"",
+			  ""indices"": ""data_stream_1,index_1,index_2"",
 			  ""ignore_unavailable"": true,
 			  ""include_global_state"": false,
 			  ""metadata"": {
@@ -42,8 +42,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/take-snapshot.asciidoc:72")]
-		public void Line72()
+		[Description("snapshot-restore/take-snapshot.asciidoc:88")]
+		public void Line88()
 		{
 			// tag::7eb0303e39243fbb9bf51a99270cd022[]
 			var response0 = new SearchResponse<object>();
@@ -53,8 +53,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/take-snapshot.asciidoc:102")]
-		public void Line102()
+		[Description("snapshot-restore/take-snapshot.asciidoc:118")]
+		public void Line118()
 		{
 			// tag::020c56e520ff6556ebfaf98efaef56aa[]
 			var response0 = new SearchResponse<object>();
@@ -64,8 +64,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/take-snapshot.asciidoc:139")]
-		public void Line139()
+		[Description("snapshot-restore/take-snapshot.asciidoc:149")]
+		public void Line149()
 		{
 			// tag::0b77ebfb06c63ccbad857b39bb4ff851[]
 			var response0 = new SearchResponse<object>();
@@ -75,8 +75,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/take-snapshot.asciidoc:147")]
-		public void Line147()
+		[Description("snapshot-restore/take-snapshot.asciidoc:157")]
+		public void Line157()
 		{
 			// tag::fb224f0ae2a03567b6d9b165e7dd24b6[]
 			var response0 = new SearchResponse<object>();
@@ -86,8 +86,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/take-snapshot.asciidoc:167")]
-		public void Line167()
+		[Description("snapshot-restore/take-snapshot.asciidoc:177")]
+		public void Line177()
 		{
 			// tag::677fdf84ac97bb107207b6966143144b[]
 			var response0 = new SearchResponse<object>();
@@ -105,8 +105,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/take-snapshot.asciidoc:177")]
-		public void Line177()
+		[Description("snapshot-restore/take-snapshot.asciidoc:187")]
+		public void Line187()
 		{
 			// tag::155c438e215890cdcb4879eaaadf4046[]
 			var response0 = new SearchResponse<object>();
@@ -116,8 +116,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/take-snapshot.asciidoc:185")]
-		public void Line185()
+		[Description("snapshot-restore/take-snapshot.asciidoc:195")]
+		public void Line195()
 		{
 			// tag::0784fbe88299be4f02eaa86368e93203[]
 			var response0 = new SearchResponse<object>();
@@ -127,8 +127,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/take-snapshot.asciidoc:199")]
-		public void Line199()
+		[Description("snapshot-restore/take-snapshot.asciidoc:209")]
+		public void Line209()
 		{
 			// tag::88151217a2f66fc25ccdc26805e75be1[]
 			var response0 = new SearchResponse<object>();

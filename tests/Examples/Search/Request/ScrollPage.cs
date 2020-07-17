@@ -11,8 +11,8 @@ namespace Examples.Search.Request
 	public class ScrollPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("search/request/scroll.asciidoc:44")]
-		public void Line44()
+		[Description("search/request/scroll.asciidoc:45")]
+		public void Line45()
 		{
 			// tag::7e52bec09624cf6c0de5d13f2bfad5a5[]
 			var response0 = new SearchResponse<object>();
@@ -30,8 +30,8 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/request/scroll.asciidoc:62")]
-		public void Line62()
+		[Description("search/request/scroll.asciidoc:63")]
+		public void Line63()
 		{
 			// tag::b41dce56b0e640d32b1cf452f87cec17[]
 			var response0 = new SearchResponse<object>();
@@ -45,8 +45,8 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/request/scroll.asciidoc:94")]
-		public void Line94()
+		[Description("search/request/scroll.asciidoc:95")]
+		public void Line95()
 		{
 			// tag::d5dcddc6398b473b6ad9bce5c6adf986[]
 			var response0 = new SearchResponse<object>();
@@ -61,8 +61,8 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/request/scroll.asciidoc:147")]
-		public void Line147()
+		[Description("search/request/scroll.asciidoc:148")]
+		public void Line148()
 		{
 			// tag::72beebe779a258c225dee7b023e60c52[]
 			var response0 = new SearchResponse<object>();
@@ -72,8 +72,8 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/request/scroll.asciidoc:160")]
-		public void Line160()
+		[Description("search/request/scroll.asciidoc:161")]
+		public void Line161()
 		{
 			// tag::b0d64d0a554549e5b2808002a0725493[]
 			var response0 = new SearchResponse<object>();
@@ -86,8 +86,8 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/request/scroll.asciidoc:171")]
-		public void Line171()
+		[Description("search/request/scroll.asciidoc:172")]
+		public void Line172()
 		{
 			// tag::3a700f836d8d5da1b656a876554028aa[]
 			var response0 = new SearchResponse<object>();
@@ -103,8 +103,8 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/request/scroll.asciidoc:185")]
-		public void Line185()
+		[Description("search/request/scroll.asciidoc:186")]
+		public void Line186()
 		{
 			// tag::c2c21e2824fbf6b7198ede30419da82b[]
 			var response0 = new SearchResponse<object>();
@@ -114,8 +114,8 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/request/scroll.asciidoc:193")]
-		public void Line193()
+		[Description("search/request/scroll.asciidoc:194")]
+		public void Line194()
 		{
 			// tag::b94cee0f74f57742b3948f9b784dfdd4[]
 			var response0 = new SearchResponse<object>();
@@ -125,8 +125,8 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/request/scroll.asciidoc:205")]
-		public void Line205()
+		[Description("search/request/scroll.asciidoc:206")]
+		public void Line206()
 		{
 			// tag::1027ab1ca767ac1428176ef4f84bfbcf[]
 			var response0 = new SearchResponse<object>();
@@ -162,8 +162,8 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/request/scroll.asciidoc:267")]
-		public void Line267()
+		[Description("search/request/scroll.asciidoc:268")]
+		public void Line268()
 		{
 			// tag::fdcaba9547180439ff4b6275034a5170[]
 			var response0 = new SearchResponse<object>();

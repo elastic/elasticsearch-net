@@ -11,8 +11,8 @@ namespace Examples.Analysis.Analyzers
 	public class FingerprintAnalyzerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/fingerprint-analyzer.asciidoc:16")]
-		public void Line16()
+		[Description("analysis/analyzers/fingerprint-analyzer.asciidoc:19")]
+		public void Line19()
 		{
 			// tag::6490d89a4e43cac5e6b9bc19840d5478[]
 			var response0 = new SearchResponse<object>();
@@ -26,8 +26,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/fingerprint-analyzer.asciidoc:86")]
-		public void Line86()
+		[Description("analysis/analyzers/fingerprint-analyzer.asciidoc:89")]
+		public void Line89()
 		{
 			// tag::2659ccd414867f3a5ee262c9b7cd3f1d[]
 			var response0 = new SearchResponse<object>();
@@ -57,8 +57,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/fingerprint-analyzer.asciidoc:156")]
-		public void Line156()
+		[Description("analysis/analyzers/fingerprint-analyzer.asciidoc:159")]
+		public void Line159()
 		{
 			// tag::ce725697f93b3eebb3a266314568565a[]
 			var response0 = new SearchResponse<object>();

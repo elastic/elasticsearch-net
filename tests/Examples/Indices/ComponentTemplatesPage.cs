@@ -39,41 +39,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/component-templates.asciidoc:88")]
-		public void Line88()
-		{
-			// tag::827b7e9308ea288f18aea00a5accc38e[]
-			var response0 = new SearchResponse<object>();
-			// end::827b7e9308ea288f18aea00a5accc38e[]
-
-			response0.MatchesExample(@"GET /_component_template/template_1");
-		}
-
-		[U(Skip = "Example not implemented")]
-		[Description("indices/component-templates.asciidoc:124")]
-		public void Line124()
-		{
-			// tag::6c72460570307f23478100db04a84c8e[]
-			var response0 = new SearchResponse<object>();
-			// end::6c72460570307f23478100db04a84c8e[]
-
-			response0.MatchesExample(@"GET /_component_template/temp*");
-		}
-
-		[U(Skip = "Example not implemented")]
-		[Description("indices/component-templates.asciidoc:133")]
-		public void Line133()
-		{
-			// tag::dd4f051ab62f0507e3b6e3d6f333e85f[]
-			var response0 = new SearchResponse<object>();
-			// end::dd4f051ab62f0507e3b6e3d6f333e85f[]
-
-			response0.MatchesExample(@"GET /_component_template");
-		}
-
-		[U(Skip = "Example not implemented")]
-		[Description("indices/component-templates.asciidoc:187")]
-		public void Line187()
+		[Description("indices/component-templates.asciidoc:131")]
+		public void Line131()
 		{
 			// tag::07694ab6343fcb4fea2859d17ae5ae7e[]
 			var response0 = new SearchResponse<object>();
@@ -100,8 +67,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/component-templates.asciidoc:228")]
-		public void Line228()
+		[Description("indices/component-templates.asciidoc:172")]
+		public void Line172()
 		{
 			// tag::c6339d09f85000a6432304b0ec63b8f6[]
 			var response0 = new SearchResponse<object>();
@@ -119,8 +86,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/component-templates.asciidoc:254")]
-		public void Line254()
+		[Description("indices/component-templates.asciidoc:198")]
+		public void Line198()
 		{
 			// tag::5b2a13366bd4e1ab4b25d04d360570dc[]
 			var response0 = new SearchResponse<object>();
@@ -141,6 +108,39 @@ namespace Examples.Indices
 			    }
 			  }
 			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("indices/component-templates.asciidoc:227")]
+		public void Line227()
+		{
+			// tag::827b7e9308ea288f18aea00a5accc38e[]
+			var response0 = new SearchResponse<object>();
+			// end::827b7e9308ea288f18aea00a5accc38e[]
+
+			response0.MatchesExample(@"GET /_component_template/template_1");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("indices/component-templates.asciidoc:264")]
+		public void Line264()
+		{
+			// tag::6c72460570307f23478100db04a84c8e[]
+			var response0 = new SearchResponse<object>();
+			// end::6c72460570307f23478100db04a84c8e[]
+
+			response0.MatchesExample(@"GET /_component_template/temp*");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("indices/component-templates.asciidoc:273")]
+		public void Line273()
+		{
+			// tag::dd4f051ab62f0507e3b6e3d6f333e85f[]
+			var response0 = new SearchResponse<object>();
+			// end::dd4f051ab62f0507e3b6e3d6f333e85f[]
+
+			response0.MatchesExample(@"GET /_component_template");
 		}
 	}
 }

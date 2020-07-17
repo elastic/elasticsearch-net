@@ -14,8 +14,8 @@ namespace Examples.Docs
 	{
 
 		[U]
-		[Description("docs/index_.asciidoc:146")]
-		public void Line146()
+		[Description("docs/index_.asciidoc:188")]
+		public void Line188()
 		{
 			// tag::804a97ff4d0613e6568e4efb19c52021[]
 			var putSettingsResponse = client.Cluster.PutSettings(s => s
@@ -60,8 +60,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/index_.asciidoc:195")]
-		public void Line195()
+		[Description("docs/index_.asciidoc:237")]
+		public void Line237()
 		{
 			// tag::36818c6d9f434d387819c30bd9addb14[]
 			var indexResponse = client.Index(new Tweet
@@ -84,8 +84,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/index_.asciidoc:244")]
-		public void Line244()
+		[Description("docs/index_.asciidoc:286")]
+		public void Line286()
 		{
 			// tag::625dc94df1f9affb49a082fd99d41620[]
 			var indexResponse = client.Index(new Tweet
@@ -109,8 +109,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/index_.asciidoc:366")]
-		public void Line366()
+		[Description("docs/index_.asciidoc:411")]
+		public void Line411()
 		{
 			// tag::b918d6b798da673a33e49b94f61dcdc0[]
 			var indexResponse = client.Index(new Tweet
@@ -135,8 +135,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/index_.asciidoc:395")]
-		public void Line395()
+		[Description("docs/index_.asciidoc:440")]
+		public void Line440()
 		{
 			// tag::1f336ecc62480c1d56351cc2f82d0d08[]
 			var indexResponse = client.Index(new Tweet
@@ -157,8 +157,8 @@ namespace Examples.Docs
 			}");
 		}
 		[U]
-		[Description("docs/index_.asciidoc:453")]
-		public void Line453()
+		[Description("docs/index_.asciidoc:498")]
+		public void Line498()
 		{
 			// tag::bb143628fd04070683eeeadc9406d9cc[]
 			var indexResponse = client.Index(new Tweet
@@ -179,8 +179,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/index_.asciidoc:486")]
-		public void Line486()
+		[Description("docs/index_.asciidoc:531")]
+		public void Line531()
 		{
 			// tag::048d8abd42d094bbdcf4452a58ccb35b[]
 			var createResponse = client.Create(new Tweet
@@ -204,8 +204,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/index_.asciidoc:499")]
-		public void Line499()
+		[Description("docs/index_.asciidoc:544")]
+		public void Line544()
 		{
 			// tag::d718b63cf1b6591a1d59a0cf4fd995eb[]
 			var indexResponse = client.Index(new Tweet

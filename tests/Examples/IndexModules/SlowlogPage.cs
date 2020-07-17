@@ -11,12 +11,12 @@ namespace Examples.IndexModules
 	public class SlowlogPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("index-modules/slowlog.asciidoc:33")]
-		public void Line33()
+		[Description("index-modules/slowlog.asciidoc:31")]
+		public void Line31()
 		{
-			// tag::fa0b341d790a4da480b47bf501835359[]
+			// tag::45c83ca223d15f758faa61fc42788362[]
 			var response0 = new SearchResponse<object>();
-			// end::fa0b341d790a4da480b47bf501835359[]
+			// end::45c83ca223d15f758faa61fc42788362[]
 
 			response0.MatchesExample(@"PUT /twitter/_settings
 			{
@@ -27,18 +27,17 @@ namespace Examples.IndexModules
 			    ""index.search.slowlog.threshold.fetch.warn"": ""1s"",
 			    ""index.search.slowlog.threshold.fetch.info"": ""800ms"",
 			    ""index.search.slowlog.threshold.fetch.debug"": ""500ms"",
-			    ""index.search.slowlog.threshold.fetch.trace"": ""200ms"",
-			    ""index.search.slowlog.level"": ""info""
+			    ""index.search.slowlog.threshold.fetch.trace"": ""200ms""
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("index-modules/slowlog.asciidoc:143")]
-		public void Line143()
+		[Description("index-modules/slowlog.asciidoc:110")]
+		public void Line110()
 		{
-			// tag::44a16db65121edaf099d944819356e2c[]
+			// tag::c6226c544951d210c37659e9457d8887[]
 			var response0 = new SearchResponse<object>();
-			// end::44a16db65121edaf099d944819356e2c[]
+			// end::c6226c544951d210c37659e9457d8887[]
 
 			response0.MatchesExample(@"PUT /twitter/_settings
 			{
@@ -46,7 +45,6 @@ namespace Examples.IndexModules
 			    ""index.indexing.slowlog.threshold.index.info"": ""5s"",
 			    ""index.indexing.slowlog.threshold.index.debug"": ""2s"",
 			    ""index.indexing.slowlog.threshold.index.trace"": ""500ms"",
-			    ""index.indexing.slowlog.level"": ""info"",
 			    ""index.indexing.slowlog.source"": ""1000""
 			}");
 		}

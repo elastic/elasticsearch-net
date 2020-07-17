@@ -68,8 +68,8 @@ namespace Examples.Root
 		}
 
 		[U]
-		[Description("mapping.asciidoc:214")]
-		public void Line214()
+		[Description("mapping.asciidoc:217")]
+		public void Line217()
 		{
 			// tag::609260ad1d5998be2ca09ff1fe237efa[]
 			var getMappingResponse = client.Indices.GetMapping<Employee>(m => m.Index("my-index"));
@@ -79,8 +79,8 @@ namespace Examples.Root
 		}
 
 		[U]
-		[Description("mapping.asciidoc:260")]
-		public void Line260()
+		[Description("mapping.asciidoc:263")]
+		public void Line263()
 		{
 			// tag::99a52be903945b17e734a1d02a57e958[]
 			var getMappingResponse = client.Indices.GetFieldMapping<Employee>(

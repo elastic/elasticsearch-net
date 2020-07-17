@@ -102,37 +102,19 @@ namespace Examples.Indices
 			});
 		}
 
-		[U]
+		[U(Skip = "Example not implemented")]
 		[Description("indices/templates.asciidoc:180")]
 		public void Line180()
 		{
-			// tag::b5f95bc097a201b29c7200fc8d3d31c1[]
-			var putIndexTemplateResponse1 = client.Indices.PutTemplate("template_1", t => t
-				.IndexPatterns("*")
-				.Order(0)
-				.Settings(s => s
-					.NumberOfShards(1)
-				)
-				.Map(m => m
-					.SourceField(s => s.Enabled(false))
-				)
-			);
+			// tag::9efac5b23bf23de8d81a7455905e2979[]
+			var response0 = new SearchResponse<object>();
 
-			var putIndexTemplateResponse2 = client.Indices.PutTemplate("template_2", t => t
-				.IndexPatterns("te*")
-				.Order(1)
-				.Settings(s => s
-					.NumberOfShards(1)
-				)
-				.Map(m => m
-					.SourceField(s => s.Enabled(true))
-				)
-			);
-			// end::b5f95bc097a201b29c7200fc8d3d31c1[]
+			var response1 = new SearchResponse<object>();
+			// end::9efac5b23bf23de8d81a7455905e2979[]
 
-			putIndexTemplateResponse1.MatchesExample(@"PUT /_template/template_1
+			response0.MatchesExample(@"PUT /_template/template_1
 			{
-			    ""index_patterns"" : [""*""],
+			    ""index_patterns"" : [""te*""],
 			    ""order"" : 0,
 			    ""settings"" : {
 			        ""number_of_shards"" : 1
@@ -140,14 +122,11 @@ namespace Examples.Indices
 			    ""mappings"" : {
 			        ""_source"" : { ""enabled"" : false }
 			    }
-			}", e =>
-			{
-				e.AdjustIndexSettings();
-			});
+			}");
 
-			putIndexTemplateResponse2.MatchesExample(@"PUT /_template/template_2
+			response1.MatchesExample(@"PUT /_template/template_2
 			{
-			    ""index_patterns"" : [""te*""],
+			    ""index_patterns"" : [""tes*""],
 			    ""order"" : 1,
 			    ""settings"" : {
 			        ""number_of_shards"" : 1
@@ -155,39 +134,26 @@ namespace Examples.Indices
 			    ""mappings"" : {
 			        ""_source"" : { ""enabled"" : true }
 			    }
-			}", e =>
-			{
-				e.AdjustIndexSettings();
-			});
+			}");
 		}
 
-		[U]
+		[U(Skip = "Example not implemented")]
 		[Description("indices/templates.asciidoc:231")]
 		public void Line231()
 		{
-			// tag::9166cf38427d5cde5d2ec12a2012b669[]
-			var putIndexTemplateResponse1 = client.Indices.PutTemplate("template_1", t => t
-				.IndexPatterns("*")
-				.Order(0)
-				.Settings(s => s
-					.NumberOfShards(1)
-				)
-				.Version(123)
-			);
-			// end::9166cf38427d5cde5d2ec12a2012b669[]
+			// tag::8dcc74dc01f26e853e3b3dfa458b1ad7[]
+			var response0 = new SearchResponse<object>();
+			// end::8dcc74dc01f26e853e3b3dfa458b1ad7[]
 
-			putIndexTemplateResponse1.MatchesExample(@"PUT /_template/template_1
+			response0.MatchesExample(@"PUT /_template/template_1
 			{
-			    ""index_patterns"" : [""*""],
+			    ""index_patterns"" : [""myindex-*""],
 			    ""order"" : 0,
 			    ""settings"" : {
 			        ""number_of_shards"" : 1
 			    },
 			    ""version"": 123
-			}", e =>
-			{
-				e.AdjustIndexSettings();
-			});
+			}");
 		}
 
 		[U]

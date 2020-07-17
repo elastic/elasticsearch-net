@@ -38,8 +38,8 @@ namespace Examples.Setup
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("setup/restart-cluster.asciidoc:50")]
-		public void Line50()
+		[Description("setup/restart-cluster.asciidoc:49")]
+		public void Line49()
 		{
 			// tag::a21a7bf052b41f5b996dc58f7b69770f[]
 			var response0 = new SearchResponse<object>();
@@ -49,8 +49,8 @@ namespace Examples.Setup
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("setup/restart-cluster.asciidoc:89")]
-		public void Line89()
+		[Description("setup/restart-cluster.asciidoc:88")]
+		public void Line88()
 		{
 			// tag::c0a4b0c1c6eff14da8b152ceb19c1c31[]
 			var response0 = new SearchResponse<object>();
@@ -64,8 +64,8 @@ namespace Examples.Setup
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("setup/restart-cluster.asciidoc:123")]
-		public void Line123()
+		[Description("setup/restart-cluster.asciidoc:122")]
+		public void Line122()
 		{
 			// tag::45ef5156dbd2d3fd4fd22b8d99f7aad4[]
 			var response0 = new SearchResponse<object>();
@@ -80,8 +80,8 @@ namespace Examples.Setup
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("setup/restart-cluster.asciidoc:143")]
-		public void Line143()
+		[Description("setup/restart-cluster.asciidoc:142")]
+		public void Line142()
 		{
 			// tag::2d9b30acd6b5683f39d53494c0dd779c[]
 			var response0 = new SearchResponse<object>();
@@ -95,8 +95,8 @@ namespace Examples.Setup
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("setup/restart-cluster.asciidoc:158")]
-		public void Line158()
+		[Description("setup/restart-cluster.asciidoc:157")]
+		public void Line157()
 		{
 			// tag::3c5d5a5c34a62724942329658c688f5e[]
 			var response0 = new SearchResponse<object>();
@@ -106,8 +106,8 @@ namespace Examples.Setup
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("setup/restart-cluster.asciidoc:204")]
-		public void Line204()
+		[Description("setup/restart-cluster.asciidoc:203")]
+		public void Line203()
 		{
 			// tag::7e49705769c42895fb7b1e2ca028ff47[]
 			var response0 = new SearchResponse<object>();

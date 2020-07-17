@@ -33,8 +33,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/monitor-snapshot-restore.asciidoc:72")]
-		public void Line72()
+		[Description("snapshot-restore/monitor-snapshot-restore.asciidoc:73")]
+		public void Line73()
 		{
 			// tag::86c723fc6212d34166661e7dac223491[]
 			var response0 = new SearchResponse<object>();

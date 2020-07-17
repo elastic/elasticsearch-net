@@ -11,8 +11,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class DeleteExpiredDataPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/delete-expired-data.asciidoc:47")]
-		public void Line47()
+		[Description("ml/anomaly-detection/apis/delete-expired-data.asciidoc:62")]
+		public void Line62()
 		{
 			// tag::f2f09bc4723805c7aaabdc83c55100fa[]
 			var response0 = new SearchResponse<object>();

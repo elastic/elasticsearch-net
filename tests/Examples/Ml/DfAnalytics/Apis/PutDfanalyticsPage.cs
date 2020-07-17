@@ -11,8 +11,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 	public class PutDfanalyticsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:391")]
-		public void Line391()
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:399")]
+		public void Line399()
 		{
 			// tag::8c6f3bb8abae9ff1d21e776f16ad1c86[]
 			var response0 = new SearchResponse<object>();
@@ -60,8 +60,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:461")]
-		public void Line461()
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:469")]
+		public void Line469()
 		{
 			// tag::ce3c391c2b1915cfc44a2917bca71d19[]
 			var response0 = new SearchResponse<object>();
@@ -87,8 +87,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:524")]
-		public void Line524()
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:533")]
+		public void Line533()
 		{
 			// tag::e8211247c280a3fbbbdd32850b743b7b[]
 			var response0 = new SearchResponse<object>();
@@ -112,8 +112,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:581")]
-		public void Line581()
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:590")]
+		public void Line590()
 		{
 			// tag::ae82eb17c23cb8e5761cb6240a5ed0a6[]
 			var response0 = new SearchResponse<object>();
@@ -139,8 +139,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:613")]
-		public void Line613()
+		[Description("ml/df-analytics/apis/put-dfanalytics.asciidoc:622")]
+		public void Line622()
 		{
 			// tag::4fb0629146ca78b85e823edd405497bb[]
 			var response0 = new SearchResponse<object>();

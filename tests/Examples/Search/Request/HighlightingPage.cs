@@ -98,68 +98,16 @@ namespace Examples.Search.Request
 			}", e => e.ApplyBodyChanges(json => json["query"]["match"]["user"].ToLongFormQuery()));
 		}
 
-		[U]
+		[U(Skip = "Example not implemented")]
 		[Description("search/request/highlighting.asciidoc:309")]
 		public void Line309()
 		{
-			// tag::129cddb56fafef5cc454917a374eae1a[]
-			var searchResponse = client.Search<object>(s => s
-				.AllIndices()
-				.StoredFields("_id")
-				.Query(q => q
-					.Match(m => m
-						.Field("comment")
-						.Query("foo bar")
-					)
-				)
-				.Rescore(r => r
-					.Rescore(rr => rr
-						.WindowSize(50)
-						.RescoreQuery(rq => rq
-							.Query(rqq => rqq
-								.MatchPhrase(mp => mp
-									.Field("comment")
-									.Query("foo bar")
-									.Slop(1)
-								)
-							)
-							.RescoreQueryWeight(10)
-						)
-					)
-				)
-				.Highlight(h => h
-					.Order(HighlighterOrder.Score)
-					.Fields(f => f
-						.Field("comment")
-						.FragmentSize(150)
-						.NumberOfFragments(3)
-						.HighlightQuery(hq => hq
-							.Bool(b => b
-								.Must(mu => mu
-									.Match(m => m
-										.Field("comment")
-										.Query("foo bar")
-									)
-								)
-								.Should(sh => sh
-									.MatchPhrase(mp => mp
-										.Field("comment")
-										.Query("foo bar")
-										.Slop(1)
-										.Boost(10)
-									)
-								)
-								.MinimumShouldMatch(0)
-							)
-						)
-					)
-				)
-			);
-			// end::129cddb56fafef5cc454917a374eae1a[]
+			// tag::977882872876edd3a37c6769ab75b90b[]
+			var response0 = new SearchResponse<object>();
+			// end::977882872876edd3a37c6769ab75b90b[]
 
-			searchResponse.MatchesExample(@"GET /_search
+			response0.MatchesExample(@"GET /_search
 			{
-			    ""stored_fields"": [ ""_id"" ],
 			    ""query"" : {
 			        ""match"": {
 			            ""comment"": {
@@ -181,6 +129,7 @@ namespace Examples.Search.Request
 			            ""rescore_query_weight"" : 10
 			        }
 			    },
+			    ""_source"": false,
 			    ""highlight"" : {
 			        ""order"" : ""score"",
 			        ""fields"" : {
@@ -211,13 +160,7 @@ namespace Examples.Search.Request
 			            }
 			        }
 			    }
-			}", e => e.ApplyBodyChanges(json =>
-			{
-				json["highlight"]["fields"]["comment"]["highlight_query"]["bool"].ToLongFormBoolQuery();
-				json["rescore"]["query"]["rescore_query_weight"] = 10.0;
-				var rescore = json["rescore"];
-				json["rescore"] = new JArray(rescore);
-			}));
+			}");
 		}
 
 		[U]
@@ -497,7 +440,7 @@ namespace Examples.Search.Request
 				.Query(q => q
 					.QueryString(qs => qs
 						.Query("running scissors")
-						.Fields(new [] { "comment", "comment.plain^10" })
+						.Fields(new[] { "comment", "comment.plain^10" })
 					)
 				)
 				.Highlight(h => h
@@ -544,7 +487,7 @@ namespace Examples.Search.Request
 				.Query(q => q
 					.QueryString(qs => qs
 						.Query("running scissors")
-						.Fields(new [] { "comment", "comment.plain^10" })
+						.Fields(new[] { "comment", "comment.plain^10" })
 					)
 				)
 				.Highlight(h => h

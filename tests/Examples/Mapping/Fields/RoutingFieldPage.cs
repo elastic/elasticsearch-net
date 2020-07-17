@@ -47,8 +47,8 @@ namespace Examples.Mapping.Fields
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("mapping/fields/routing-field.asciidoc:53")]
-		public void Line53()
+		[Description("mapping/fields/routing-field.asciidoc:56")]
+		public void Line56()
 		{
 			// tag::134bdbfb50c81dd3c487514faabc81d3[]
 			var response0 = new SearchResponse<object>();
@@ -65,8 +65,8 @@ namespace Examples.Mapping.Fields
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("mapping/fields/routing-field.asciidoc:78")]
-		public void Line78()
+		[Description("mapping/fields/routing-field.asciidoc:81")]
+		public void Line81()
 		{
 			// tag::4f3089b403945e391f03280ae2f360a4[]
 			var response0 = new SearchResponse<object>();

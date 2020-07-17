@@ -11,8 +11,8 @@ namespace Examples.Indices
 	public class StatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("indices/stats.asciidoc:10")]
-		public void Line10()
+		[Description("indices/stats.asciidoc:11")]
+		public void Line11()
 		{
 			// tag::fce5d68a9ac1b34b59d5308b65688e59[]
 			var response0 = new SearchResponse<object>();
@@ -22,8 +22,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/stats.asciidoc:97")]
-		public void Line97()
+		[Description("indices/stats.asciidoc:102")]
+		public void Line102()
 		{
 			// tag::e0b2f56c34e33ff52f8f9658be2f7ca1[]
 			var response0 = new SearchResponse<object>();
@@ -32,8 +32,8 @@ namespace Examples.Indices
 			response0.MatchesExample(@"GET /index1,index2/_stats");
 		}
 		[U(Skip = "Example not implemented")]
-		[Description("indices/stats.asciidoc:107")]
-		public void Line107()
+		[Description("indices/stats.asciidoc:112")]
+		public void Line112()
 		{
 			// tag::78c4035e4fbf6851140660f6ed2a1fa5[]
 			var response0 = new SearchResponse<object>();
@@ -43,8 +43,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/stats.asciidoc:121")]
-		public void Line121()
+		[Description("indices/stats.asciidoc:126")]
+		public void Line126()
 		{
 			// tag::a861a89f52008610e813b9f073951c58[]
 			var response0 = new SearchResponse<object>();
@@ -54,8 +54,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/stats.asciidoc:135")]
-		public void Line135()
+		[Description("indices/stats.asciidoc:140")]
+		public void Line140()
 		{
 			// tag::7a8de5606f283f4ef171b015eef6befa[]
 			var response0 = new SearchResponse<object>();

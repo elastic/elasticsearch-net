@@ -97,16 +97,16 @@ namespace Examples.Mapping.Types
 		[Description("mapping/types/range.asciidoc:182")]
 		public void Line182()
 		{
-			// tag::f894f680943a8af8328aab4741e6ab93[]
+			// tag::7f514e9e785e4323d16396359cb184f2[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-			// end::f894f680943a8af8328aab4741e6ab93[]
+			// end::7f514e9e785e4323d16396359cb184f2[]
 
 			response0.MatchesExample(@"PUT range_index/_mapping
 			{
 			  ""properties"": {
-			    ""ip_whitelist"": {
+			    ""ip_allowlist"": {
 			      ""type"": ""ip_range""
 			    }
 			  }
@@ -114,7 +114,7 @@ namespace Examples.Mapping.Types
 
 			response1.MatchesExample(@"PUT range_index/_doc/2
 			{
-			  ""ip_whitelist"" : ""192.168.0.0/16""
+			  ""ip_allowlist"" : ""192.168.0.0/16""
 			}");
 		}
 	}

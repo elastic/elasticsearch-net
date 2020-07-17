@@ -11,8 +11,8 @@ namespace Examples.Licensing
 	public class GetTrialStatusPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("licensing/get-trial-status.asciidoc:43")]
-		public void Line43()
+		[Description("licensing/get-trial-status.asciidoc:41")]
+		public void Line41()
 		{
 			// tag::88cf60d3310a56d8ae12704abc05b565[]
 			var response0 = new SearchResponse<object>();

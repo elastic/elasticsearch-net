@@ -11,8 +11,8 @@ namespace Examples.Analysis.Analyzers
 	public class WhitespaceAnalyzerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/whitespace-analyzer.asciidoc:11")]
-		public void Line11()
+		[Description("analysis/analyzers/whitespace-analyzer.asciidoc:14")]
+		public void Line14()
 		{
 			// tag::262a778d754add491fbc9c721ac25bf0[]
 			var response0 = new SearchResponse<object>();
@@ -26,8 +26,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/whitespace-analyzer.asciidoc:128")]
-		public void Line128()
+		[Description("analysis/analyzers/whitespace-analyzer.asciidoc:131")]
+		public void Line131()
 		{
 			// tag::31aed390c30bd4f42a5c56253695e53f[]
 			var response0 = new SearchResponse<object>();

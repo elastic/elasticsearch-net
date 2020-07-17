@@ -7,8 +7,8 @@ namespace Examples.Indices
 	public class IndexTemplatesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("indices/index-templates.asciidoc:33")]
-		public void Line33()
+		[Description("indices/index-templates.asciidoc:36")]
+		public void Line36()
 		{
 			// tag::45266650464f16bc156b9057b733a522[]
 			var response0 = new SearchResponse<object>();
@@ -79,78 +79,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/index-templates.asciidoc:143")]
-		public void Line143()
-		{
-			// tag::3759ca688c4bd3c838780a9aad63258b[]
-			var response0 = new SearchResponse<object>();
-			// end::3759ca688c4bd3c838780a9aad63258b[]
-
-			response0.MatchesExample(@"GET /_index_template/template_1");
-		}
-
-		[U(Skip = "Example not implemented")]
-		[Description("indices/index-templates.asciidoc:180")]
-		public void Line180()
-		{
-			// tag::275ec358d5d1e4b9ff06cb4ae7e47650[]
-			var response0 = new SearchResponse<object>();
-			// end::275ec358d5d1e4b9ff06cb4ae7e47650[]
-
-			response0.MatchesExample(@"GET /_index_template/temp*");
-		}
-
-		[U(Skip = "Example not implemented")]
-		[Description("indices/index-templates.asciidoc:189")]
-		public void Line189()
-		{
-			// tag::3b40db1c5c6b36f087d7a09a4ce285c6[]
-			var response0 = new SearchResponse<object>();
-			// end::3b40db1c5c6b36f087d7a09a4ce285c6[]
-
-			response0.MatchesExample(@"GET /_index_template");
-		}
-
-		[U(Skip = "Example not implemented")]
-		[Description("indices/index-templates.asciidoc:265")]
-		public void Line265()
-		{
-			// tag::cd38c601ab293a6ec0e2df71d0c96b58[]
-			var response0 = new SearchResponse<object>();
-
-			var response1 = new SearchResponse<object>();
-
-			var response2 = new SearchResponse<object>();
-			// end::cd38c601ab293a6ec0e2df71d0c96b58[]
-
-			response0.MatchesExample(@"PUT /_component_template/template_with_2_shards
-			{
-			  ""template"": {
-			    ""settings"": {
-			      ""index.number_of_shards"": 2
-			    }
-			  }
-			}");
-
-			response1.MatchesExample(@"PUT /_component_template/template_with_3_shards
-			{
-			  ""template"": {
-			    ""settings"": {
-			      ""index.number_of_shards"": 3
-			    }
-			  }
-			}");
-
-			response2.MatchesExample(@"PUT /_index_template/template_1
-			{
-			  ""index_patterns"": [""t*""],
-			  ""composed_of"": [""template_with_2_shards"", ""template_with_3_shards""]
-			}");
-		}
-
-		[U(Skip = "Example not implemented")]
-		[Description("indices/index-templates.asciidoc:305")]
-		public void Line305()
+		[Description("indices/index-templates.asciidoc:119")]
+		public void Line119()
 		{
 			// tag::0ac2b0c0cbc8e7799c031b019378bfa9[]
 			var response0 = new SearchResponse<object>();
@@ -160,8 +90,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/index-templates.asciidoc:312")]
-		public void Line312()
+		[Description("indices/index-templates.asciidoc:126")]
+		public void Line126()
 		{
 			// tag::58581b5088a9cf842241b6c6a561b5cf[]
 			var response0 = new SearchResponse<object>();
@@ -183,8 +113,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/index-templates.asciidoc:330")]
-		public void Line330()
+		[Description("indices/index-templates.asciidoc:144")]
+		public void Line144()
 		{
 			// tag::7d12d490a817493a06146081adee1a18[]
 			var response0 = new SearchResponse<object>();
@@ -250,8 +180,28 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/index-templates.asciidoc:428")]
-		public void Line428()
+		[Description("indices/index-templates.asciidoc:246")]
+		public void Line246()
+		{
+			// tag::73ecdaeca5885a88f9a4273a462196d0[]
+			var response0 = new SearchResponse<object>();
+			// end::73ecdaeca5885a88f9a4273a462196d0[]
+
+			response0.MatchesExample(@"PUT /_index_template/template_1
+			{
+			  ""index_patterns"" : [""te*""],
+			  ""priority"" : 1,
+			  ""template"": {
+			    ""settings"" : {
+			      ""number_of_shards"" : 2
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("indices/index-templates.asciidoc:366")]
+		public void Line366()
 		{
 			// tag::ed8ad81604137f4cc8757bb74636b8b4[]
 			var response0 = new SearchResponse<object>();
@@ -279,8 +229,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/index-templates.asciidoc:460")]
-		public void Line460()
+		[Description("indices/index-templates.asciidoc:398")]
+		public void Line398()
 		{
 			// tag::62083da06c2cd4b4b62290eda1ec93e0[]
 			var response0 = new SearchResponse<object>();
@@ -319,8 +269,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/index-templates.asciidoc:510")]
-		public void Line510()
+		[Description("indices/index-templates.asciidoc:448")]
+		public void Line448()
 		{
 			// tag::9138550002cb26ab64918cce427963b8[]
 			var response0 = new SearchResponse<object>();
@@ -340,8 +290,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/index-templates.asciidoc:538")]
-		public void Line538()
+		[Description("indices/index-templates.asciidoc:476")]
+		public void Line476()
 		{
 			// tag::0d8063b484a18f8672fb5ed8712c5c97[]
 			var response0 = new SearchResponse<object>();
@@ -366,29 +316,88 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/index-templates.asciidoc:566")]
-		public void Line566()
+		[Description("indices/index-templates.asciidoc:504")]
+		public void Line504()
 		{
-			// tag::fe3bea89426ee4a9f856c8d9eb44cbb3[]
+			// tag::196aed02b11def364bab84e455c1a073[]
 			var response0 = new SearchResponse<object>();
-			// end::fe3bea89426ee4a9f856c8d9eb44cbb3[]
+			// end::196aed02b11def364bab84e455c1a073[]
 
 			response0.MatchesExample(@"PUT /_index_template/template_1
 			{
 			  ""index_patterns"": [""logs-*""],
+			  ""data_stream"": { }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("indices/index-templates.asciidoc:524")]
+		public void Line524()
+		{
+			// tag::cd38c601ab293a6ec0e2df71d0c96b58[]
+			var response0 = new SearchResponse<object>();
+
+			var response1 = new SearchResponse<object>();
+
+			var response2 = new SearchResponse<object>();
+			// end::cd38c601ab293a6ec0e2df71d0c96b58[]
+
+			response0.MatchesExample(@"PUT /_component_template/template_with_2_shards
+			{
 			  ""template"": {
-			    ""mappings"": {
-			      ""properties"": {
-			        ""@timestamp"": {
-			          ""type"": ""date""
-			        }
-			      }
+			    ""settings"": {
+			      ""index.number_of_shards"": 2
 			    }
-			  },
-			  ""data_stream"": {
-			    ""timestamp_field"": ""@timestamp""
 			  }
 			}");
+
+			response1.MatchesExample(@"PUT /_component_template/template_with_3_shards
+			{
+			  ""template"": {
+			    ""settings"": {
+			      ""index.number_of_shards"": 3
+			    }
+			  }
+			}");
+
+			response2.MatchesExample(@"PUT /_index_template/template_1
+			{
+			  ""index_patterns"": [""t*""],
+			  ""composed_of"": [""template_with_2_shards"", ""template_with_3_shards""]
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("indices/index-templates.asciidoc:572")]
+		public void Line572()
+		{
+			// tag::3759ca688c4bd3c838780a9aad63258b[]
+			var response0 = new SearchResponse<object>();
+			// end::3759ca688c4bd3c838780a9aad63258b[]
+
+			response0.MatchesExample(@"GET /_index_template/template_1");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("indices/index-templates.asciidoc:608")]
+		public void Line608()
+		{
+			// tag::275ec358d5d1e4b9ff06cb4ae7e47650[]
+			var response0 = new SearchResponse<object>();
+			// end::275ec358d5d1e4b9ff06cb4ae7e47650[]
+
+			response0.MatchesExample(@"GET /_index_template/temp*");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("indices/index-templates.asciidoc:617")]
+		public void Line617()
+		{
+			// tag::3b40db1c5c6b36f087d7a09a4ce285c6[]
+			var response0 = new SearchResponse<object>();
+			// end::3b40db1c5c6b36f087d7a09a4ce285c6[]
+
+			response0.MatchesExample(@"GET /_index_template");
 		}
 	}
 }

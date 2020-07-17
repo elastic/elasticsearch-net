@@ -11,8 +11,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 	public class GetDfanalyticsStatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/get-dfanalytics-stats.asciidoc:520")]
-		public void Line520()
+		[Description("ml/df-analytics/apis/get-dfanalytics-stats.asciidoc:538")]
+		public void Line538()
 		{
 			// tag::dbd2834971fedbe36911933d451ae65d[]
 			var response0 = new SearchResponse<object>();

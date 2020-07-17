@@ -11,8 +11,8 @@ namespace Examples.Mapping.Types
 	public class HistogramPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("mapping/types/histogram.asciidoc:76")]
-		public void Line76()
+		[Description("mapping/types/histogram.asciidoc:77")]
+		public void Line77()
 		{
 			// tag::fc3f5f40fa283559ca615cd0eb0a1755[]
 			var response0 = new SearchResponse<object>();
@@ -34,8 +34,8 @@ namespace Examples.Mapping.Types
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("mapping/types/histogram.asciidoc:96")]
-		public void Line96()
+		[Description("mapping/types/histogram.asciidoc:97")]
+		public void Line97()
 		{
 			// tag::09774dd1a8613672844caadb2bc8dc1e[]
 			var response0 = new SearchResponse<object>();

@@ -11,8 +11,8 @@ namespace Examples.Analysis.Tokenizers
 	public class KeywordTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenizers/keyword-tokenizer.asciidoc:12")]
-		public void Line12()
+		[Description("analysis/tokenizers/keyword-tokenizer.asciidoc:15")]
+		public void Line15()
 		{
 			// tag::09a44b619a99f6bf3f01bd5e258fd22d[]
 			var response0 = new SearchResponse<object>();
@@ -26,8 +26,8 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenizers/keyword-tokenizer.asciidoc:58")]
-		public void Line58()
+		[Description("analysis/tokenizers/keyword-tokenizer.asciidoc:61")]
+		public void Line61()
 		{
 			// tag::c95d5317525c2ff625e6971c277247af[]
 			var response0 = new SearchResponse<object>();

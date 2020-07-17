@@ -157,8 +157,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:123")]
-		public void Line123()
+		[Description("search/request/sort.asciidoc:122")]
+		public void Line122()
 		{
 			// tag::abf329ebefaf58acd4ee30e685731499[]
 			var createIndexResponse = client.Indices.Create("index_double", c => c
@@ -184,8 +184,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:135")]
-		public void Line135()
+		[Description("search/request/sort.asciidoc:134")]
+		public void Line134()
 		{
 			// tag::f6b5032bf27c2445d28845be0d413970[]
 			var createIndexResponse = client.Indices.Create("index_long", c => c
@@ -211,8 +211,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:154")]
-		public void Line154()
+		[Description("search/request/sort.asciidoc:153")]
+		public void Line153()
 		{
 			// tag::2891aa10ee9d474780adf94d5607f2db[]
 			var searchResponse = client.Search<object>(s => s
@@ -239,8 +239,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:181")]
-		public void Line181()
+		[Description("search/request/sort.asciidoc:180")]
+		public void Line180()
 		{
 			// tag::f4a1008b3f9baa67bb03ce9ef5ab4cb4[]
 			var createIndexResponse = client.Indices.Create("index_double", c => c
@@ -265,8 +265,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:193")]
-		public void Line193()
+		[Description("search/request/sort.asciidoc:192")]
+		public void Line192()
 		{
 			// tag::7477671958734843dd67cf0b8e6c7515[]
 			var createIndexResponse = client.Indices.Create("index_long", c => c
@@ -291,8 +291,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:212")]
-		public void Line212()
+		[Description("search/request/sort.asciidoc:211")]
+		public void Line211()
 		{
 			// tag::5f3549ac7fee94682ca0d7439eebdd2a[]
 			var searchResponse = client.Search<object>(s => s
@@ -319,8 +319,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:263")]
-		public void Line263()
+		[Description("search/request/sort.asciidoc:262")]
+		public void Line262()
 		{
 			// tag::de139866a220124360e5e27d1a736ea4[]
 			var searchResponse = client.Search<object>(s => s
@@ -377,8 +377,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:290")]
-		public void Line290()
+		[Description("search/request/sort.asciidoc:289")]
+		public void Line289()
 		{
 			// tag::22334f4b24bb8977d3e1bf2ffdc29d3f[]
 			var searchResponse = client.Search<object>(s => s
@@ -480,8 +480,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:346")]
-		public void Line346()
+		[Description("search/request/sort.asciidoc:345")]
+		public void Line345()
 		{
 			// tag::ef0f4fa4272c47ff62fb7b422cf975e7[]
 			var response0 = client.Search<object>(s => s
@@ -516,8 +516,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:370")]
-		public void Line370()
+		[Description("search/request/sort.asciidoc:369")]
+		public void Line369()
 		{
 			// tag::899eef71a67a1b2aa11a2166ec7f48f1[]
 			var searchResponse = client.Search<object>(s => s
@@ -549,8 +549,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:392")]
-		public void Line392()
+		[Description("search/request/sort.asciidoc:391")]
+		public void Line391()
 		{
 			// tag::d17269bb80fb63ec0bf37d219e003dcb[]
 			var searchResponse = client.Search<object>(s => s
@@ -601,8 +601,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:445")]
-		public void Line445()
+		[Description("search/request/sort.asciidoc:444")]
+		public void Line444()
 		{
 			// tag::979d25dff2d8987119410291ad47b0d1[]
 			var searchResponse = client.Search<object>(s => s
@@ -648,8 +648,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:471")]
-		public void Line471()
+		[Description("search/request/sort.asciidoc:470")]
+		public void Line470()
 		{
 			// tag::d50a3c64890f88af32c6d4ef4899d82a[]
 			var searchResponse = client.Search<object>(s => s
@@ -690,8 +690,8 @@ namespace Examples.Search.Request
 		}
 
 		[U(Skip = "No representable with the client, which does not support geohashes")]
-		[Description("search/request/sort.asciidoc:492")]
-		public void Line492()
+		[Description("search/request/sort.asciidoc:491")]
+		public void Line491()
 		{
 			// tag::a1db5c822745fe167e9ef854dca3d129[]
 			var searchResponse = client.Search<object>(s => s
@@ -732,8 +732,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:516")]
-		public void Line516()
+		[Description("search/request/sort.asciidoc:515")]
+		public void Line515()
 		{
 			// tag::15dad5338065baaaa7d475abe85f4c22[]
 			var searchResponse = client.Search<object>(s => s
@@ -774,8 +774,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:540")]
-		public void Line540()
+		[Description("search/request/sort.asciidoc:539")]
+		public void Line539()
 		{
 			// tag::77243bbf92f2a55e0fca6c2a349a1c15[]
 			var searchResponse = client.Search<object>(s => s
@@ -822,8 +822,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:569")]
-		public void Line569()
+		[Description("search/request/sort.asciidoc:568")]
+		public void Line568()
 		{
 			// tag::04fe1e3a0047b0cdb10987b79fc3f3f3[]
 			var searchResponse = client.Search<object>(s => s
@@ -873,8 +873,8 @@ namespace Examples.Search.Request
 		}
 
 		[U]
-		[Description("search/request/sort.asciidoc:598")]
-		public void Line598()
+		[Description("search/request/sort.asciidoc:597")]
+		public void Line597()
 		{
 			// tag::e8e451bc8c45bcf16df43804c4fc8329[]
 			var searchResponse = client.Search<object>(s => s

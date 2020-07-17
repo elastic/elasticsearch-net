@@ -25,8 +25,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		[Description("search/search.asciidoc:555")]
-		public void Line555()
+		[Description("search/search.asciidoc:596")]
+		public void Line596()
 		{
 			// tag::be49260e1b3496c4feac38c56ebb0669[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -39,8 +39,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		[Description("search/search.asciidoc:601")]
-		public void Line601()
+		[Description("search/search.asciidoc:642")]
+		public void Line642()
 		{
 			// tag::f5569945024b9d664828693705c27c1a[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -53,8 +53,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		[Description("search/search.asciidoc:613")]
-		public void Line613()
+		[Description("search/search.asciidoc:654")]
+		public void Line654()
 		{
 			// tag::168bfdde773570cfc6dd3ab3574e413b[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -67,8 +67,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		[Description("search/search.asciidoc:622")]
-		public void Line622()
+		[Description("search/search.asciidoc:663")]
+		public void Line663()
 		{
 			// tag::8022e6a690344035b6472a43a9d122e0[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -81,8 +81,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		[Description("search/search.asciidoc:628")]
-		public void Line628()
+		[Description("search/search.asciidoc:669")]
+		public void Line669()
 		{
 			// tag::43682666e1abcb14770c99f02eb26a0d[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -97,31 +97,22 @@ namespace Examples.Search
 			});
 		}
 
-		[U]
-		[Description("search/search.asciidoc:637")]
-		public void Line637()
+		[U(Skip = "Example not implemented")]
+		[Description("search/search.asciidoc:678")]
+		public void Line678()
 		{
-			// tag::0ce3606f1dba490eef83c4317b315b62[]
-			var searchResponse = client.Search<Tweet>(s => s
-				.Index("twitter")
-				.Query(q => q
-					.Term("user", "kimchy")
-				)
-			);
-			// end::0ce3606f1dba490eef83c4317b315b62[]
+			// tag::84d6a777a51963629272b1be5698b091[]
+			var response0 = new SearchResponse<object>();
+			// end::84d6a777a51963629272b1be5698b091[]
 
-			searchResponse.MatchesExample(@"GET /twitter/_search
+			response0.MatchesExample(@"GET /twitter/_search
 			{
-			    ""query"" : {
-			        ""term"" : { ""user"" : ""kimchy"" }
+			  ""query"": {
+			    ""term"": {
+			      ""user"": ""kimchy""
 			    }
-			}", e =>
-			{
-				e.ApplyBodyChanges(json =>
-				{
-					json["query"]["term"]["user"].ToLongFormTermQuery();
-				});
-			});
+			  }
+			}");
 		}
 	}
 }

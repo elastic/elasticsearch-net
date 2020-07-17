@@ -11,8 +11,8 @@ namespace Examples.Analysis.Analyzers
 	public class KeywordAnalyzerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/keyword-analyzer.asciidoc:11")]
-		public void Line11()
+		[Description("analysis/analyzers/keyword-analyzer.asciidoc:14")]
+		public void Line14()
 		{
 			// tag::19ee488226d357d1576e7d3ae7a4693f[]
 			var response0 = new SearchResponse<object>();
@@ -26,8 +26,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/keyword-analyzer.asciidoc:68")]
-		public void Line68()
+		[Description("analysis/analyzers/keyword-analyzer.asciidoc:71")]
+		public void Line71()
 		{
 			// tag::c1efc5cfcb3c29711bfe118f1baa28b0[]
 			var response0 = new SearchResponse<object>();

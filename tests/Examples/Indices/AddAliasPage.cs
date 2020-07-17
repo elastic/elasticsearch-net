@@ -22,8 +22,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/add-alias.asciidoc:71")]
-		public void Line71()
+		[Description("indices/add-alias.asciidoc:73")]
+		public void Line73()
 		{
 			// tag::7fe8339ce3911382a7c473f6f0c03f89[]
 			var response0 = new SearchResponse<object>();
@@ -33,8 +33,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/add-alias.asciidoc:83")]
-		public void Line83()
+		[Description("indices/add-alias.asciidoc:85")]
+		public void Line85()
 		{
 			// tag::890f659cfc10ff8171420809bdcf7c67[]
 			var response0 = new SearchResponse<object>();
@@ -51,8 +51,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/add-alias.asciidoc:97")]
-		public void Line97()
+		[Description("indices/add-alias.asciidoc:99")]
+		public void Line99()
 		{
 			// tag::83b2785e63357ab3ade51d8ec0c11917[]
 			var response0 = new SearchResponse<object>();
@@ -70,8 +70,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/add-alias.asciidoc:117")]
-		public void Line117()
+		[Description("indices/add-alias.asciidoc:119")]
+		public void Line119()
 		{
 			// tag::3e1e00a08a6fbfdc3d55d69880373cd6[]
 			var response0 = new SearchResponse<object>();

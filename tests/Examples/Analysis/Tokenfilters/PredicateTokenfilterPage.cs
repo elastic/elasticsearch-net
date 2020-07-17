@@ -11,48 +11,62 @@ namespace Examples.Analysis.Tokenfilters
 	public class PredicateTokenfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenfilters/predicate-tokenfilter.asciidoc:22")]
-		public void Line22()
+		[Description("analysis/tokenfilters/predicate-tokenfilter.asciidoc:20")]
+		public void Line20()
 		{
-			// tag::10338787b66a7f93270c3b88dd6197f8[]
+			// tag::a159143bb578403bb9c7ff37d635d7ad[]
 			var response0 = new SearchResponse<object>();
-			// end::10338787b66a7f93270c3b88dd6197f8[]
+			// end::a159143bb578403bb9c7ff37d635d7ad[]
 
-			response0.MatchesExample(@"PUT /condition_example
+			response0.MatchesExample(@"GET /_analyze
 			{
-			    ""settings"" : {
-			        ""analysis"" : {
-			            ""analyzer"" : {
-			                ""my_analyzer"" : {
-			                    ""tokenizer"" : ""standard"",
-			                    ""filter"" : [ ""my_script_filter"" ]
-			                }
-			            },
-			            ""filter"" : {
-			                ""my_script_filter"" : {
-			                    ""type"" : ""predicate_token_filter"",
-			                    ""script"" : {
-			                        ""source"" : ""token.getTerm().length() > 5""  \<1>
-			                    }
-			                }
-			            }
-			        }
+			  ""tokenizer"": ""whitespace"",
+			  ""filter"": [
+			    {
+			      ""type"": ""predicate_token_filter"",
+			      ""script"": {
+			        ""source"": """"""
+			          token.term.length() > 3
+			        """"""
+			      }
 			    }
+			  ],
+			  ""text"": ""the fox jumps the lazy dog""
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenfilters/predicate-tokenfilter.asciidoc:51")]
-		public void Line51()
+		[Description("analysis/tokenfilters/predicate-tokenfilter.asciidoc:102")]
+		public void Line102()
 		{
-			// tag::e20493a20d3992a97238b87c6930f08d[]
+			// tag::a2861e628545fd2b8ee2c747b19ac628[]
 			var response0 = new SearchResponse<object>();
-			// end::e20493a20d3992a97238b87c6930f08d[]
+			// end::a2861e628545fd2b8ee2c747b19ac628[]
 
-			response0.MatchesExample(@"POST /condition_example/_analyze
+			response0.MatchesExample(@"PUT /my_index
 			{
-			  ""analyzer"" : ""my_analyzer"",
-			  ""text"" : ""What Flapdoodle""
+			  ""settings"": {
+			    ""analysis"": {
+			      ""analyzer"": {
+			        ""my_analyzer"": {
+			          ""tokenizer"": ""standard"",
+			          ""filter"": [
+			            ""my_script_filter""
+			          ]
+			        }
+			      },
+			      ""filter"": {
+			        ""my_script_filter"": {
+			          ""type"": ""predicate_token_filter"",
+			          ""script"": {
+			            ""source"": """"""
+			              token.type.contains(""ALPHANUM"")
+			            """"""
+			          }
+			        }
+			      }
+			    }
+			  }
 			}");
 		}
 	}

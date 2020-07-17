@@ -11,8 +11,8 @@ namespace Examples.Analysis.Tokenizers
 	public class UaxurlemailTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenizers/uaxurlemail-tokenizer.asciidoc:11")]
-		public void Line11()
+		[Description("analysis/tokenizers/uaxurlemail-tokenizer.asciidoc:14")]
+		public void Line14()
 		{
 			// tag::d12df43ffcdcd937bae9b26fb475e239[]
 			var response0 = new SearchResponse<object>();
@@ -26,8 +26,8 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenizers/uaxurlemail-tokenizer.asciidoc:92")]
-		public void Line92()
+		[Description("analysis/tokenizers/uaxurlemail-tokenizer.asciidoc:95")]
+		public void Line95()
 		{
 			// tag::1125986e8e55028ff4c10b5e6c7bbebb[]
 			var response0 = new SearchResponse<object>();

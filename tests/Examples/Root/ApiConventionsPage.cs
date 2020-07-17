@@ -11,8 +11,8 @@ namespace Examples.Root
 	public class ApiConventionsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:79")]
-		public void Line79()
+		[Description("api-conventions.asciidoc:88")]
+		public void Line88()
 		{
 			// tag::978088f989d45dd09339582e9cbc60e0[]
 			var response0 = new SearchResponse<object>();
@@ -29,8 +29,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:133")]
-		public void Line133()
+		[Description("api-conventions.asciidoc:142")]
+		public void Line142()
 		{
 			// tag::a34d70d7022eb4ba48909d440c80390f[]
 			var response0 = new SearchResponse<object>();
@@ -47,8 +47,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:222")]
-		public void Line222()
+		[Description("api-conventions.asciidoc:231")]
+		public void Line231()
 		{
 			// tag::09dbd90c5e22ea4a17b4cf9aa72e08ae[]
 			var response0 = new SearchResponse<object>();
@@ -58,8 +58,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:250")]
-		public void Line250()
+		[Description("api-conventions.asciidoc:259")]
+		public void Line259()
 		{
 			// tag::1dbb8cf17fbc45c87c7d2f75f15f9778[]
 			var response0 = new SearchResponse<object>();
@@ -69,8 +69,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:273")]
-		public void Line273()
+		[Description("api-conventions.asciidoc:282")]
+		public void Line282()
 		{
 			// tag::1252fa45847edba5ec2b2f33da70ec5b[]
 			var response0 = new SearchResponse<object>();
@@ -80,8 +80,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:298")]
-		public void Line298()
+		[Description("api-conventions.asciidoc:307")]
+		public void Line307()
 		{
 			// tag::621665fdbd7fc103c09bfeed28b67b1a[]
 			var response0 = new SearchResponse<object>();
@@ -91,8 +91,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:317")]
-		public void Line317()
+		[Description("api-conventions.asciidoc:326")]
+		public void Line326()
 		{
 			// tag::1e18a67caf8f06ff2710ec4a8b30f625[]
 			var response0 = new SearchResponse<object>();
@@ -102,8 +102,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:344")]
-		public void Line344()
+		[Description("api-conventions.asciidoc:353")]
+		public void Line353()
 		{
 			// tag::6464124d1677f4552ddddd95a340ca3a[]
 			var response0 = new SearchResponse<object>();
@@ -128,8 +128,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:377")]
-		public void Line377()
+		[Description("api-conventions.asciidoc:386")]
+		public void Line386()
 		{
 			// tag::b9a153725b28fdd0a5aabd7f17a8c2d7[]
 			var response0 = new SearchResponse<object>();
@@ -139,8 +139,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:407")]
-		public void Line407()
+		[Description("api-conventions.asciidoc:416")]
+		public void Line416()
 		{
 			// tag::5925c23a173a63bdb30b458248d1df76[]
 			var response0 = new SearchResponse<object>();
@@ -150,8 +150,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:571")]
-		public void Line571()
+		[Description("api-conventions.asciidoc:580")]
+		public void Line580()
 		{
 			// tag::a6f8636b03cc5f677b7d89e750328612[]
 			var response0 = new SearchResponse<object>();
@@ -161,8 +161,8 @@ namespace Examples.Root
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("api-conventions.asciidoc:603")]
-		public void Line603()
+		[Description("api-conventions.asciidoc:612")]
+		public void Line612()
 		{
 			// tag::6d1e75312a28a5ba23837abf768f2510[]
 			var response0 = new SearchResponse<object>();

@@ -11,8 +11,30 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 	public class AliasPrivilegesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/security/authorization/alias-privileges.asciidoc:30")]
-		public void Line30()
+		[Description("../../x-pack/docs/en/security/authorization/alias-privileges.asciidoc:61")]
+		public void Line61()
+		{
+			// tag::474700a60cce2a786b7fd5bedf7df687[]
+			var response0 = new SearchResponse<object>();
+			// end::474700a60cce2a786b7fd5bedf7df687[]
+
+			response0.MatchesExample(@"GET /.ds-logs-000002/_doc/2");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/alias-privileges.asciidoc:85")]
+		public void Line85()
+		{
+			// tag::65c86eb274d4ef4fb0a1649ac35c1305[]
+			var response0 = new SearchResponse<object>();
+			// end::65c86eb274d4ef4fb0a1649ac35c1305[]
+
+			response0.MatchesExample(@"GET /.ds-logs-000003/_doc/2");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/security/authorization/alias-privileges.asciidoc:127")]
+		public void Line127()
 		{
 			// tag::195fe9fadf952ddd7a69c8aaf98d47a1[]
 			var response0 = new SearchResponse<object>();
@@ -22,8 +44,8 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/security/authorization/alias-privileges.asciidoc:56")]
-		public void Line56()
+		[Description("../../x-pack/docs/en/security/authorization/alias-privileges.asciidoc:153")]
+		public void Line153()
 		{
 			// tag::c4d60fd70ef1be46616a0d4e7578d8b9[]
 			var response0 = new SearchResponse<object>();
@@ -38,8 +60,8 @@ namespace Examples.XPack.Docs.En.Security.Authorization
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/security/authorization/alias-privileges.asciidoc:68")]
-		public void Line68()
+		[Description("../../x-pack/docs/en/security/authorization/alias-privileges.asciidoc:165")]
+		public void Line165()
 		{
 			// tag::06f6cb6e20d2faf6599cfe1f39c6c56b[]
 			var response0 = new SearchResponse<object>();

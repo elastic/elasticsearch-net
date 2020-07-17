@@ -14,11 +14,11 @@ namespace Examples.Ilm
 		[Description("ilm/error-handling.asciidoc:16")]
 		public void Line16()
 		{
-			// tag::9d211c6226d0b4434f01cceb76ab6ffa[]
+			// tag::1b37e2237c9e3aaf84d56cc5c0bdb9ec[]
 			var response0 = new SearchResponse<object>();
-			// end::9d211c6226d0b4434f01cceb76ab6ffa[]
+			// end::1b37e2237c9e3aaf84d56cc5c0bdb9ec[]
 
-			response0.MatchesExample(@"PUT _ilm/policy/shrink-the-index
+			response0.MatchesExample(@"PUT _ilm/policy/shrink-index
 			{
 			  ""policy"": {
 			    ""phases"": {
@@ -36,25 +36,25 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/error-handling.asciidoc:42")]
-		public void Line42()
+		[Description("ilm/error-handling.asciidoc:39")]
+		public void Line39()
 		{
-			// tag::3d0b9acdacc7ecec380c57e814256472[]
+			// tag::9b196e961ef4b8c7e07b4e3c8f94c647[]
 			var response0 = new SearchResponse<object>();
-			// end::3d0b9acdacc7ecec380c57e814256472[]
+			// end::9b196e961ef4b8c7e07b4e3c8f94c647[]
 
 			response0.MatchesExample(@"PUT /myindex
 			{
 			  ""settings"": {
 			    ""index.number_of_shards"": 2,
-			    ""index.lifecycle.name"": ""shrink-the-index""
+			    ""index.lifecycle.name"": ""shrink-index""
 			  }
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/error-handling.asciidoc:60")]
-		public void Line60()
+		[Description("ilm/error-handling.asciidoc:58")]
+		public void Line58()
 		{
 			// tag::943f92e1d3fa566ef23659be2d96f222[]
 			var response0 = new SearchResponse<object>();
@@ -64,14 +64,14 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/error-handling.asciidoc:124")]
-		public void Line124()
+		[Description("ilm/error-handling.asciidoc:117")]
+		public void Line117()
 		{
-			// tag::7bee02e8962e355a23559b6eaa6678f2[]
+			// tag::bd5bd5d8b3d81241335fe1e5747080ac[]
 			var response0 = new SearchResponse<object>();
-			// end::7bee02e8962e355a23559b6eaa6678f2[]
+			// end::bd5bd5d8b3d81241335fe1e5747080ac[]
 
-			response0.MatchesExample(@"PUT _ilm/policy/shrink-the-index
+			response0.MatchesExample(@"PUT _ilm/policy/shrink-index
 			{
 			  ""policy"": {
 			    ""phases"": {
@@ -89,8 +89,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/error-handling.asciidoc:151")]
-		public void Line151()
+		[Description("ilm/error-handling.asciidoc:143")]
+		public void Line143()
 		{
 			// tag::235513edcb5ce3fe2e38a781eeefa6a0[]
 			var response0 = new SearchResponse<object>();

@@ -51,6 +51,17 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:107")]
 		public void Line107()
 		{
+			// tag::d1e0fee64389e7c8d4c092030626b61f[]
+			var response0 = new SearchResponse<object>();
+			// end::d1e0fee64389e7c8d4c092030626b61f[]
+
+			response0.MatchesExample(@"GET /_security/api_key?name=my-*");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:115")]
+		public void Line115()
+		{
 			// tag::10d9da8a3b7061479be908c8c5c76cfb[]
 			var response0 = new SearchResponse<object>();
 			// end::10d9da8a3b7061479be908c8c5c76cfb[]
@@ -59,8 +70,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:115")]
-		public void Line115()
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:123")]
+		public void Line123()
 		{
 			// tag::62eafc5b3ab75cc67314d5a8567d6077[]
 			var response0 = new SearchResponse<object>();
@@ -70,8 +81,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:123")]
-		public void Line123()
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:131")]
+		public void Line131()
 		{
 			// tag::9608820dbeac261ba53fb89bb9400560[]
 			var response0 = new SearchResponse<object>();
@@ -81,8 +92,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:130")]
-		public void Line130()
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:138")]
+		public void Line138()
 		{
 			// tag::ca5ae0eb7709f3807bc6239cd4bd9141[]
 			var response0 = new SearchResponse<object>();
@@ -92,8 +103,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:138")]
-		public void Line138()
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:146")]
+		public void Line146()
 		{
 			// tag::fffaa7ecef94e1404ebec2f9069448e3[]
 			var response0 = new SearchResponse<object>();
@@ -106,8 +117,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:149")]
-		public void Line149()
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:157")]
+		public void Line157()
 		{
 			// tag::dffbbdc4025e5777c647d8818847b960[]
 			var response0 = new SearchResponse<object>();
@@ -117,8 +128,8 @@ namespace Examples.XPack.Docs.En.RestApi.Security
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:159")]
-		public void Line159()
+		[Description("../../x-pack/docs/en/rest-api/security/get-api-keys.asciidoc:167")]
+		public void Line167()
 		{
 			// tag::30abc76a39e551f4b52c65002bb6405d[]
 			var response0 = new SearchResponse<object>();

@@ -22,8 +22,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/flush.asciidoc:117")]
-		public void Line117()
+		[Description("indices/flush.asciidoc:119")]
+		public void Line119()
 		{
 			// tag::cefde3553fdbd516813e73a603c72c24[]
 			var response0 = new SearchResponse<object>();
@@ -33,8 +33,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/flush.asciidoc:127")]
-		public void Line127()
+		[Description("indices/flush.asciidoc:129")]
+		public void Line129()
 		{
 			// tag::66db9f5108a3936115f1fb64c844934a[]
 			var response0 = new SearchResponse<object>();
@@ -44,8 +44,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/flush.asciidoc:137")]
-		public void Line137()
+		[Description("indices/flush.asciidoc:139")]
+		public void Line139()
 		{
 			// tag::f27c28ddbf4c266b5f42d14da837b8de[]
 			var response0 = new SearchResponse<object>();

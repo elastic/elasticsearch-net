@@ -11,8 +11,8 @@ namespace Examples.Transform
 	public class PainlessExamplesPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("transform/painless-examples.asciidoc:160")]
-		public void Line160()
+		[Description("transform/painless-examples.asciidoc:163")]
+		public void Line163()
 		{
 			// tag::8ce484cceef334f0a8ad3a40570b3425[]
 			var response0 = new SearchResponse<object>();
@@ -74,14 +74,14 @@ namespace Examples.Transform
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("transform/painless-examples.asciidoc:298")]
-		public void Line298()
+		[Description("transform/painless-examples.asciidoc:301")]
+		public void Line301()
 		{
-			// tag::d6e0be8357b50f7d5b9dd8dadf1567b1[]
+			// tag::e4b64b8277af259a52c8d3940157b5fa[]
 			var response0 = new SearchResponse<object>();
-			// end::d6e0be8357b50f7d5b9dd8dadf1567b1[]
+			// end::e4b64b8277af259a52c8d3940157b5fa[]
 
-			response0.MatchesExample(@"PUT _data_frame/transforms/data_log
+			response0.MatchesExample(@"PUT _transform/data_log
 			{
 			  ""source"": {
 			    ""index"": ""kibana_sample_data_logs""
@@ -120,8 +120,8 @@ namespace Examples.Transform
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("transform/painless-examples.asciidoc:414")]
-		public void Line414()
+		[Description("transform/painless-examples.asciidoc:417")]
+		public void Line417()
 		{
 			// tag::22908e2f01460917d3145a53e3fb7546[]
 			var response0 = new SearchResponse<object>();

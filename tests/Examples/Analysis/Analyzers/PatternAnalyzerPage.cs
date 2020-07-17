@@ -11,8 +11,8 @@ namespace Examples.Analysis.Analyzers
 	public class PatternAnalyzerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/pattern-analyzer.asciidoc:26")]
-		public void Line26()
+		[Description("analysis/analyzers/pattern-analyzer.asciidoc:29")]
+		public void Line29()
 		{
 			// tag::467833bd44b35a89a7fe0d7df5f253f1[]
 			var response0 = new SearchResponse<object>();
@@ -26,8 +26,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/pattern-analyzer.asciidoc:177")]
-		public void Line177()
+		[Description("analysis/analyzers/pattern-analyzer.asciidoc:180")]
+		public void Line180()
 		{
 			// tag::314851d590d195015a76866b92cf6b32[]
 			var response0 = new SearchResponse<object>();
@@ -58,8 +58,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/pattern-analyzer.asciidoc:264")]
-		public void Line264()
+		[Description("analysis/analyzers/pattern-analyzer.asciidoc:267")]
+		public void Line267()
 		{
 			// tag::9e2f7b134ac7c5e7c0119866b7a96700[]
 			var response0 = new SearchResponse<object>();
@@ -89,8 +89,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/pattern-analyzer.asciidoc:382")]
-		public void Line382()
+		[Description("analysis/analyzers/pattern-analyzer.asciidoc:385")]
+		public void Line385()
 		{
 			// tag::f453e14bcf30853e57618bf12f83e148[]
 			var response0 = new SearchResponse<object>();

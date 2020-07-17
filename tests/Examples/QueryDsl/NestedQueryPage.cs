@@ -159,7 +159,7 @@ namespace Examples.QueryDsl
 				Driver = new Driver
 				{
 					LastName = "McQueen",
-					Vehicle = new []
+					Vehicle = new[]
 					{
 						new Vehicle
 						{
@@ -180,7 +180,7 @@ namespace Examples.QueryDsl
 				Driver = new Driver
 				{
 					LastName = "Hudson",
-					Vehicle = new []
+					Vehicle = new[]
 					{
 						new Vehicle
 						{

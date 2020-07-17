@@ -49,8 +49,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/bulk.asciidoc:533")]
-		public void Line533()
+		[Description("docs/bulk.asciidoc:545")]
+		public void Line545()
 		{
 			// tag::8cd00a3aba7c3c158277bc032aac2830[]
 			var bulkResponse = client.Bulk(b => b
@@ -117,8 +117,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("docs/bulk.asciidoc:555")]
-		public void Line555()
+		[Description("docs/bulk.asciidoc:567")]
+		public void Line567()
 		{
 			// tag::1aa91d3d48140d6367b6cabca8737b8f[]
 			var bulkResponse = client.Bulk(b => b
@@ -150,8 +150,8 @@ namespace Examples.Docs
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("docs/bulk.asciidoc:634")]
-		public void Line634()
+		[Description("docs/bulk.asciidoc:646")]
+		public void Line646()
 		{
 			// tag::bfdad8a928ea30d7cf60d0a0a6bc6e2e[]
 			var bulkResponse = client.Bulk(b => b

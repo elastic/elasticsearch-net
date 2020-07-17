@@ -11,8 +11,8 @@ namespace Examples.Analysis.Analyzers
 	public class StandardAnalyzerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/standard-analyzer.asciidoc:14")]
-		public void Line14()
+		[Description("analysis/analyzers/standard-analyzer.asciidoc:17")]
+		public void Line17()
 		{
 			// tag::6884454f57c3a41059037ea762f48d77[]
 			var response0 = new SearchResponse<object>();
@@ -26,8 +26,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/standard-analyzer.asciidoc:151")]
-		public void Line151()
+		[Description("analysis/analyzers/standard-analyzer.asciidoc:154")]
+		public void Line154()
 		{
 			// tag::5af5d2999833b6b1fdcd84404751a7e3[]
 			var response0 = new SearchResponse<object>();
@@ -58,8 +58,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/standard-analyzer.asciidoc:281")]
-		public void Line281()
+		[Description("analysis/analyzers/standard-analyzer.asciidoc:284")]
+		public void Line284()
 		{
 			// tag::ccf84c1e5e5602a9e841cb8f7e3bb29f[]
 			var response0 = new SearchResponse<object>();

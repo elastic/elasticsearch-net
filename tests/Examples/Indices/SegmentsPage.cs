@@ -11,8 +11,8 @@ namespace Examples.Indices
 	public class SegmentsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("indices/segments.asciidoc:11")]
-		public void Line11()
+		[Description("indices/segments.asciidoc:12")]
+		public void Line12()
 		{
 			// tag::3f176d802b3e2964686ecd91748fab89[]
 			var response0 = new SearchResponse<object>();
@@ -22,8 +22,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/segments.asciidoc:108")]
-		public void Line108()
+		[Description("indices/segments.asciidoc:115")]
+		public void Line115()
 		{
 			// tag::940e8c2c7ff92d71f489bdb7183c1ce6[]
 			var response0 = new SearchResponse<object>();
@@ -33,8 +33,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/segments.asciidoc:117")]
-		public void Line117()
+		[Description("indices/segments.asciidoc:124")]
+		public void Line124()
 		{
 			// tag::975b4b92464d52068516aa2f0f955cc1[]
 			var response0 = new SearchResponse<object>();
@@ -44,8 +44,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/segments.asciidoc:126")]
-		public void Line126()
+		[Description("indices/segments.asciidoc:133")]
+		public void Line133()
 		{
 			// tag::6414b9276ba1c63898c3ff5cbe03c54e[]
 			var response0 = new SearchResponse<object>();
@@ -55,8 +55,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/segments.asciidoc:186")]
-		public void Line186()
+		[Description("indices/segments.asciidoc:193")]
+		public void Line193()
 		{
 			// tag::1b21d886f6e9619c73079d14581ccbe4[]
 			var response0 = new SearchResponse<object>();

@@ -11,8 +11,8 @@ namespace Examples.Modules.Cluster
 	public class DiskAllocatorPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("modules/cluster/disk_allocator.asciidoc:61")]
-		public void Line61()
+		[Description("modules/cluster/disk_allocator.asciidoc:57")]
+		public void Line57()
 		{
 			// tag::aaaa9a186db96077879ddfcfbd625fdb[]
 			var response0 = new SearchResponse<object>();
@@ -25,8 +25,8 @@ namespace Examples.Modules.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("modules/cluster/disk_allocator.asciidoc:85")]
-		public void Line85()
+		[Description("modules/cluster/disk_allocator.asciidoc:82")]
+		public void Line82()
 		{
 			// tag::4fe5a9e99dc9400d67a5a2f6f6752c07[]
 			var response0 = new SearchResponse<object>();

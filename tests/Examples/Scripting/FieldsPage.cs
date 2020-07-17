@@ -11,8 +11,8 @@ namespace Examples.Scripting
 	public class FieldsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("scripting/fields.asciidoc:46")]
-		public void Line46()
+		[Description("scripting/fields.asciidoc:48")]
+		public void Line48()
 		{
 			// tag::729f4abc0b4edaf6b58bd9e7b3fd5a8b[]
 			var response0 = new SearchResponse<object>();
@@ -55,8 +55,8 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("scripting/fields.asciidoc:90")]
-		public void Line90()
+		[Description("scripting/fields.asciidoc:92")]
+		public void Line92()
 		{
 			// tag::0dfe9d6724c7bd11094bb4a0796e7ac7[]
 			var response0 = new SearchResponse<object>();
@@ -86,29 +86,71 @@ namespace Examples.Scripting
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("scripting/fields.asciidoc:172")]
-		public void Line172()
+		[Description("scripting/fields.asciidoc:169")]
+		public void Line169()
 		{
-			// tag::2a9c29afe23e30a68dd6e30ea22f5d42[]
+			// tag::9790a85b52fa851c8abe20d00ba03bc1[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
 
 			var response2 = new SearchResponse<object>();
-			// end::2a9c29afe23e30a68dd6e30ea22f5d42[]
+			// end::9790a85b52fa851c8abe20d00ba03bc1[]
 
 			response0.MatchesExample(@"PUT my_index
 			{
 			  ""mappings"": {
 			    ""properties"": {
-			      ""title"": { \<1>
+			      ""first_name"": {
 			        ""type"": ""text""
 			      },
-			      ""first_name"": {
+			      ""last_name"": {
+			        ""type"": ""text""
+			      }
+			    }
+			  }
+			}");
+
+			response1.MatchesExample(@"PUT my_index/_doc/1?refresh
+			{
+			  ""first_name"": ""Barry"",
+			  ""last_name"": ""White""
+			}");
+
+			response2.MatchesExample(@"GET my_index/_search
+			{
+			  ""script_fields"": {
+			    ""full_name"": {
+			      ""script"": {
+			        ""lang"": ""painless"",
+			        ""source"": ""params._source.first_name + ' ' + params._source.last_name""
+			      }
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("scripting/fields.asciidoc:212")]
+		public void Line212()
+		{
+			// tag::2548b8591b3e0d7ac95cafebac63a2a9[]
+			var response0 = new SearchResponse<object>();
+
+			var response1 = new SearchResponse<object>();
+
+			var response2 = new SearchResponse<object>();
+			// end::2548b8591b3e0d7ac95cafebac63a2a9[]
+
+			response0.MatchesExample(@"PUT my_index
+			{
+			  ""mappings"": {
+			    ""properties"": {
+			      ""full_name"": {
 			        ""type"": ""text"",
 			        ""store"": true
 			      },
-			      ""last_name"": {
+			      ""title"": {
 			        ""type"": ""text"",
 			        ""store"": true
 			      }
@@ -118,24 +160,17 @@ namespace Examples.Scripting
 
 			response1.MatchesExample(@"PUT my_index/_doc/1?refresh
 			{
-			  ""title"": ""Mr"",
-			  ""first_name"": ""Barry"",
-			  ""last_name"": ""White""
+			  ""full_name"": ""Alice Ball"",
+			  ""title"": ""Professor""
 			}");
 
 			response2.MatchesExample(@"GET my_index/_search
 			{
 			  ""script_fields"": {
-			    ""source"": {
+			    ""name_with_title"": {
 			      ""script"": {
 			        ""lang"": ""painless"",
-			        ""source"": ""params._source.title + ' ' + params._source.first_name + ' ' + params._source.last_name"" \<2>
-			      }
-			    },
-			    ""stored_fields"": {
-			      ""script"": {
-			        ""lang"": ""painless"",
-			        ""source"": ""params._fields['first_name'].value + ' ' + params._fields['last_name'].value""
+			        ""source"": ""params._fields['title'].value + ' ' + params._fields['full_name'].value""
 			      }
 			    }
 			  }

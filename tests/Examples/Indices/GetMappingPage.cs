@@ -11,8 +11,8 @@ namespace Examples.Indices
 	public class GetMappingPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("indices/get-mapping.asciidoc:10")]
-		public void Line10()
+		[Description("indices/get-mapping.asciidoc:11")]
+		public void Line11()
 		{
 			// tag::a8fba09a46b2c3524428aa3259b7124f[]
 			var response0 = new SearchResponse<object>();
@@ -22,8 +22,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/get-mapping.asciidoc:60")]
-		public void Line60()
+		[Description("indices/get-mapping.asciidoc:68")]
+		public void Line68()
 		{
 			// tag::cf02e3d8b371bd59f0224967c36330da[]
 			var response0 = new SearchResponse<object>();
@@ -33,18 +33,22 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/get-mapping.asciidoc:70")]
-		public void Line70()
+		[Description("indices/get-mapping.asciidoc:78")]
+		public void Line78()
 		{
-			// tag::09cdd5ae8114c49886026fef8d00a19c[]
+			// tag::5b7d6f1db88ca6f42c48fa3dbb4341e8[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-			// end::09cdd5ae8114c49886026fef8d00a19c[]
 
-			response0.MatchesExample(@"GET /_all/_mapping");
+			var response2 = new SearchResponse<object>();
+			// end::5b7d6f1db88ca6f42c48fa3dbb4341e8[]
 
-			response1.MatchesExample(@"GET /_mapping");
+			response0.MatchesExample(@"GET /*/_mapping");
+
+			response1.MatchesExample(@"GET /_all/_mapping");
+
+			response2.MatchesExample(@"GET /_mapping");
 		}
 	}
 }

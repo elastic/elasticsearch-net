@@ -221,8 +221,65 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/composite-aggregation.asciidoc:363")]
-		public void Line363()
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:367")]
+		public void Line367()
+		{
+			// tag::488f4a4da2d2d8e0b35cba9c0a11ffef[]
+			var response0 = new SearchResponse<object>();
+			// end::488f4a4da2d2d8e0b35cba9c0a11ffef[]
+
+			response0.MatchesExample(@"GET /_search
+			{
+			    ""size"": 0,
+			    ""aggs"" : {
+			        ""my_buckets"": {
+			            ""composite"" : {
+			                ""sources"" : [
+			                    { ""tile"": { ""geotile_grid"" : { ""field"": ""location"", ""precision"": 8 } } }
+			                ]
+			            }
+			        }
+			    }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:400")]
+		public void Line400()
+		{
+			// tag::5bc48d211cc95cb8962250f894da34a4[]
+			var response0 = new SearchResponse<object>();
+			// end::5bc48d211cc95cb8962250f894da34a4[]
+
+			response0.MatchesExample(@"GET /_search
+			{
+			    ""size"": 0,
+			    ""aggs"" : {
+			        ""my_buckets"": {
+			            ""composite"" : {
+			                ""sources"" : [
+			                    {
+			                        ""tile"": {
+			                            ""geotile_grid"" : {
+			                                ""field"" : ""location"",
+			                                ""precision"" : 22,
+			                                ""bounds"": {
+			                                    ""top_left"" : ""52.4, 4.9"",
+			                                    ""bottom_right"" : ""52.3, 5.0""
+			                                }
+			                            }
+			                        }
+			                    }
+			                ]
+			            }
+			        }
+			    }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:434")]
+		public void Line434()
 		{
 			// tag::7df600a962ddb9e75462cab1017ab710[]
 			var response0 = new SearchResponse<object>();
@@ -245,8 +302,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/composite-aggregation.asciidoc:386")]
-		public void Line386()
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:457")]
+		public void Line457()
 		{
 			// tag::1559d896ef715c8997e773e8f26ded49[]
 			var response0 = new SearchResponse<object>();
@@ -270,8 +327,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/composite-aggregation.asciidoc:416")]
-		public void Line416()
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:487")]
+		public void Line487()
 		{
 			// tag::1111d70f0ae3044b0a86c82b2ded5f74[]
 			var response0 = new SearchResponse<object>();
@@ -294,8 +351,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/composite-aggregation.asciidoc:443")]
-		public void Line443()
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:514")]
+		public void Line514()
 		{
 			// tag::441e1052c59a3d9182fd608c08e11169[]
 			var response0 = new SearchResponse<object>();
@@ -317,8 +374,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/composite-aggregation.asciidoc:483")]
-		public void Line483()
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:554")]
+		public void Line554()
 		{
 			// tag::a84493b3b31741c9e1f998b59b40db82[]
 			var response0 = new SearchResponse<object>();
@@ -342,8 +399,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/composite-aggregation.asciidoc:541")]
-		public void Line541()
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:612")]
+		public void Line612()
 		{
 			// tag::eac8d98e2bd0eb75e8428212e9f4e4a7[]
 			var response0 = new SearchResponse<object>();
@@ -368,8 +425,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/composite-aggregation.asciidoc:573")]
-		public void Line573()
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:644")]
+		public void Line644()
 		{
 			// tag::1d1186dc28cb5b11c19a8341ec1c0558[]
 			var response0 = new SearchResponse<object>();
@@ -398,8 +455,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/composite-aggregation.asciidoc:602")]
-		public void Line602()
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:673")]
+		public void Line673()
 		{
 			// tag::ca3c86d8bb26a8a9422b4b628de03dc4[]
 			var response0 = new SearchResponse<object>();
@@ -421,8 +478,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/composite-aggregation.asciidoc:621")]
-		public void Line621()
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:692")]
+		public void Line692()
 		{
 			// tag::c98edce2074791ebad716b9a5b03215f[]
 			var response0 = new SearchResponse<object>();
@@ -445,8 +502,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/composite-aggregation.asciidoc:646")]
-		public void Line646()
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:717")]
+		public void Line717()
 		{
 			// tag::b2d0d2f519a37b93b93889be7979ee5d[]
 			var response0 = new SearchResponse<object>();
@@ -470,8 +527,8 @@ namespace Examples.Aggregations.Bucket
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/bucket/composite-aggregation.asciidoc:685")]
-		public void Line685()
+		[Description("aggregations/bucket/composite-aggregation.asciidoc:756")]
+		public void Line756()
 		{
 			// tag::4a37d7d228d9cba63ebe7b9870dce531[]
 			var response0 = new SearchResponse<object>();

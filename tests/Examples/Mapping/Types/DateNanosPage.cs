@@ -11,8 +11,8 @@ namespace Examples.Mapping.Types
 	public class DateNanosPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("mapping/types/date_nanos.asciidoc:32")]
-		public void Line32()
+		[Description("mapping/types/date_nanos.asciidoc:34")]
+		public void Line34()
 		{
 			// tag::5e11eb4d328005434b19bbb9b11a3685[]
 			var response0 = new SearchResponse<object>();

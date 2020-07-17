@@ -11,8 +11,8 @@ namespace Examples.Cat
 	public class SegmentsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("cat/segments.asciidoc:108")]
-		public void Line108()
+		[Description("cat/segments.asciidoc:116")]
+		public void Line116()
 		{
 			// tag::6f507269ad5b31d2bb0885c1b18aac1a[]
 			var response0 = new SearchResponse<object>();

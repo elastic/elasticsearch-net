@@ -43,8 +43,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/split-index.asciidoc:147")]
-		public void Line147()
+		[Description("indices/split-index.asciidoc:151")]
+		public void Line151()
 		{
 			// tag::2e796e5ca59768d4426abbf9a049db3e[]
 			var response0 = new SearchResponse<object>();
@@ -59,8 +59,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/split-index.asciidoc:181")]
-		public void Line181()
+		[Description("indices/split-index.asciidoc:185")]
+		public void Line185()
 		{
 			// tag::f2f1cae094855a45fd8f73478bec8e70[]
 			var response0 = new SearchResponse<object>();

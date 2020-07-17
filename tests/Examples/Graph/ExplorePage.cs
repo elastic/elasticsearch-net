@@ -11,8 +11,8 @@ namespace Examples.Graph
 	public class ExplorePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("graph/explore.asciidoc:201")]
-		public void Line201()
+		[Description("graph/explore.asciidoc:204")]
+		public void Line204()
 		{
 			// tag::8bf5ac11eb42e652023a685af4a45ae2[]
 			var response0 = new SearchResponse<object>();
@@ -41,8 +41,8 @@ namespace Examples.Graph
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("graph/explore.asciidoc:306")]
-		public void Line306()
+		[Description("graph/explore.asciidoc:309")]
+		public void Line309()
 		{
 			// tag::6a1a238984d74771420d150dec47fd91[]
 			var response0 = new SearchResponse<object>();
@@ -99,8 +99,8 @@ namespace Examples.Graph
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("graph/explore.asciidoc:393")]
-		public void Line393()
+		[Description("graph/explore.asciidoc:396")]
+		public void Line396()
 		{
 			// tag::fa82d86a046d67366cfe9ce65535e433[]
 			var response0 = new SearchResponse<object>();

@@ -27,8 +27,8 @@ namespace Examples.Modules.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("modules/cluster/misc.asciidoc:118")]
-		public void Line118()
+		[Description("modules/cluster/misc.asciidoc:122")]
+		public void Line122()
 		{
 			// tag::c3fa14da3d0b0f93fb59bb5386b7e776[]
 			var response0 = new SearchResponse<object>();

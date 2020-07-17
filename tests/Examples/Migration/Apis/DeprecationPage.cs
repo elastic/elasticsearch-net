@@ -11,8 +11,8 @@ namespace Examples.Migration.Apis
 	public class DeprecationPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("migration/apis/deprecation.asciidoc:40")]
-		public void Line40()
+		[Description("migration/apis/deprecation.asciidoc:43")]
+		public void Line43()
 		{
 			// tag::135819da3a4bde684357c57a49ad8e85[]
 			var response0 = new SearchResponse<object>();
@@ -22,8 +22,8 @@ namespace Examples.Migration.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("migration/apis/deprecation.asciidoc:118")]
-		public void Line118()
+		[Description("migration/apis/deprecation.asciidoc:122")]
+		public void Line122()
 		{
 			// tag::69f8b0f2a9ba47e11f363d788cee9d6d[]
 			var response0 = new SearchResponse<object>();
