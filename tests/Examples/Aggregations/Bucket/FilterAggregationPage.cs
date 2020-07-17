@@ -10,15 +10,30 @@ namespace Examples.Aggregations.Bucket
 {
 	public class FilterAggregationPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/filter-aggregation.asciidoc:9")]
 		public void Line9()
 		{
 			// tag::b93ed4ef309819734f0eeea82e8b0f1f[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("sales")
+				.Size(0)
+				.Aggregations(a => a
+					.Filter("t_shirts", f => f
+						.Filter(q => q
+							.Term("type", "t-shirt")
+						)
+						.Aggregations(aa => aa
+							.Average("avg_price", av => av
+								.Field("price")
+							)
+						)
+					)
+				)
+			);
 			// end::b93ed4ef309819734f0eeea82e8b0f1f[]
 
-			response0.MatchesExample(@"POST /sales/_search?size=0
+			searchResponse.MatchesExample(@"POST /sales/_search?size=0
 			{
 			    ""aggs"" : {
 			        ""t_shirts"" : {
@@ -28,7 +43,12 @@ namespace Examples.Aggregations.Bucket
 			            }
 			        }
 			    }
-			}");
+			}", (e, b) =>
+			{
+				e.Uri.Query = e.Uri.Query.Replace("size=0", string.Empty);
+				b["size"] = 0;
+				b["aggs"]["t_shirts"]["filter"]["term"]["type"].ToLongFormTermQuery();
+			});
 		}
 	}
 }

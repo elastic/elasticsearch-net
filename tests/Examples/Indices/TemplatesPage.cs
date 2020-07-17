@@ -5,6 +5,7 @@
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Examples.Models;
 using System.ComponentModel;
+using Nest;
 
 namespace Examples.Indices
 {
@@ -102,17 +103,39 @@ namespace Examples.Indices
 			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/templates.asciidoc:180")]
 		public void Line180()
 		{
 			// tag::9efac5b23bf23de8d81a7455905e2979[]
-			var response0 = new SearchResponse<object>();
+			var templateResponse1 = client.Indices.PutTemplate("template_1", t => t
+				.IndexPatterns("te*")
+				.Order(0)
+				.Settings(s => s
+					.NumberOfShards(1)
+				)
+				.Map(m => m
+					.SourceField(so => so
+						.Enabled(false)
+					)
+				)
+			);
 
-			var response1 = new SearchResponse<object>();
+			var templateResponse2 = client.Indices.PutTemplate("template_2", t => t
+				.IndexPatterns("tes*")
+				.Order(1)
+				.Settings(s => s
+					.NumberOfShards(1)
+				)
+				.Map(m => m
+					.SourceField(so => so
+						.Enabled()
+					)
+				)
+			);
 			// end::9efac5b23bf23de8d81a7455905e2979[]
 
-			response0.MatchesExample(@"PUT /_template/template_1
+			templateResponse1.MatchesExample(@"PUT /_template/template_1
 			{
 			    ""index_patterns"" : [""te*""],
 			    ""order"" : 0,
@@ -122,9 +145,9 @@ namespace Examples.Indices
 			    ""mappings"" : {
 			        ""_source"" : { ""enabled"" : false }
 			    }
-			}");
+			}", e => e.AdjustIndexSettings());
 
-			response1.MatchesExample(@"PUT /_template/template_2
+			templateResponse2.MatchesExample(@"PUT /_template/template_2
 			{
 			    ""index_patterns"" : [""tes*""],
 			    ""order"" : 1,
@@ -134,18 +157,25 @@ namespace Examples.Indices
 			    ""mappings"" : {
 			        ""_source"" : { ""enabled"" : true }
 			    }
-			}");
+			}", e => e.AdjustIndexSettings());
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/templates.asciidoc:231")]
 		public void Line231()
 		{
 			// tag::8dcc74dc01f26e853e3b3dfa458b1ad7[]
-			var response0 = new SearchResponse<object>();
+			var templateResponse = client.Indices.PutTemplate("template_1", t => t
+				.IndexPatterns("myindex-*")
+				.Order(0)
+				.Settings(s => s
+					.NumberOfShards(1)
+				)
+				.Version(123)
+			);
 			// end::8dcc74dc01f26e853e3b3dfa458b1ad7[]
 
-			response0.MatchesExample(@"PUT /_template/template_1
+			templateResponse.MatchesExample(@"PUT /_template/template_1
 			{
 			    ""index_patterns"" : [""myindex-*""],
 			    ""order"" : 0,
@@ -153,7 +183,7 @@ namespace Examples.Indices
 			        ""number_of_shards"" : 1
 			    },
 			    ""version"": 123
-			}");
+			}", e => e.AdjustIndexSettings());
 		}
 
 		[U]

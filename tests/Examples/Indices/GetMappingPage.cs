@@ -10,45 +10,55 @@ namespace Examples.Indices
 {
 	public class GetMappingPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/get-mapping.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::a8fba09a46b2c3524428aa3259b7124f[]
-			var response0 = new SearchResponse<object>();
+			var getMappingResponse = client.Indices.GetMapping<object>(m => m
+				.Index("twitter")
+			);
 			// end::a8fba09a46b2c3524428aa3259b7124f[]
 
-			response0.MatchesExample(@"GET /twitter/_mapping");
+			getMappingResponse.MatchesExample(@"GET /twitter/_mapping");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/get-mapping.asciidoc:68")]
 		public void Line68()
 		{
 			// tag::cf02e3d8b371bd59f0224967c36330da[]
-			var response0 = new SearchResponse<object>();
+			var getMappingResponse = client.Indices.GetMapping<object>(m => m
+				.Index("twitter,kimchy")
+			);
 			// end::cf02e3d8b371bd59f0224967c36330da[]
 
-			response0.MatchesExample(@"GET /twitter,kimchy/_mapping");
+			getMappingResponse.MatchesExample(@"GET /twitter,kimchy/_mapping");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("indices/get-mapping.asciidoc:78")]
 		public void Line78()
 		{
 			// tag::5b7d6f1db88ca6f42c48fa3dbb4341e8[]
-			var response0 = new SearchResponse<object>();
+			var getMappingResponse1 = client.Indices.GetMapping<object>(m => m
+				.Index("*")
+			);
 
-			var response1 = new SearchResponse<object>();
+			var getMappingResponse2 = client.Indices.GetMapping<object>(m => m
+				.AllIndices()
+			);
 
-			var response2 = new SearchResponse<object>();
+			var getMappingResponse3 = client.Indices.GetMapping<object>(m => m
+				.Index("")
+			);
 			// end::5b7d6f1db88ca6f42c48fa3dbb4341e8[]
 
-			response0.MatchesExample(@"GET /*/_mapping");
+			getMappingResponse1.MatchesExample(@"GET /*/_mapping");
 
-			response1.MatchesExample(@"GET /_all/_mapping");
+			getMappingResponse2.MatchesExample(@"GET /_all/_mapping");
 
-			response2.MatchesExample(@"GET /_mapping");
+			getMappingResponse3.MatchesExample(@"GET /_mapping");
 		}
 	}
 }

@@ -5,34 +5,49 @@
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
+using Elasticsearch.Net;
 
 namespace Examples.Mapping.Fields
 {
 	public class IdFieldPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("mapping/fields/id-field.asciidoc:12")]
 		public void Line12()
 		{
 			// tag::8d9a63d7c31f08bd27d92ece3de1649c[]
-			var response0 = new SearchResponse<object>();
+			var indexResponse1 = client.Index(new
+			{
+				text = "Document with ID 1"
+			}, i => i.Index("my_index").Id(1));
 
-			var response1 = new SearchResponse<object>();
+			var indexResponse2 = client.Index(new
+			{
+				text = "Document with ID 2"
+			}, i => i.Index("my_index").Id(2).Refresh(Refresh.True));
 
-			var response2 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("my_index")
+				.Query(q => q
+					.Terms(t => t
+						.Field("_id")
+						.Terms("1", "2")
+					)
+				)
+			);
 			// end::8d9a63d7c31f08bd27d92ece3de1649c[]
 
-			response0.MatchesExample(@"PUT my_index/_doc/1
+			indexResponse1.MatchesExample(@"PUT my_index/_doc/1
 			{
 			  ""text"": ""Document with ID 1""
 			}");
 
-			response1.MatchesExample(@"PUT my_index/_doc/2?refresh=true
+			indexResponse2.MatchesExample(@"PUT my_index/_doc/2?refresh=true
 			{
 			  ""text"": ""Document with ID 2""
 			}");
 
-			response2.MatchesExample(@"GET my_index/_search
+			searchResponse.MatchesExample(@"GET my_index/_search
 			{
 			  ""query"": {
 			    ""terms"": {

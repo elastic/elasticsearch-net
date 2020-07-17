@@ -5,20 +5,36 @@
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
+using Examples.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Examples.Search
 {
 	public class SuggestersPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/suggesters.asciidoc:8")]
 		public void Line8()
 		{
 			// tag::626f8c4b3e2cd3d9beaa63a7f5799d7a[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Tweet>(s => s
+				.Index("twitter")
+				.Query(q => q
+					.Match(m => m
+						.Field(f => f.Message)
+						.Query("tring out Elasticsearch")
+					)
+				)
+				.Suggest(su => su
+					.Term("my-suggestion", t => t
+						.Text("tring out Elasticsearch")
+						.Field(f => f.Message)
+					)
+				)
+			);
 			// end::626f8c4b3e2cd3d9beaa63a7f5799d7a[]
 
-			response0.MatchesExample(@"POST twitter/_search
+			searchResponse.MatchesExample(@"POST twitter/_search
 			{
 			  ""query"" : {
 			    ""match"": {
@@ -33,18 +49,30 @@ namespace Examples.Search
 			      }
 			    }
 			  }
-			}");
+			}", (e, b) => b["query"]["match"]["message"].ToLongFormQuery());
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/suggesters.asciidoc:51")]
 		public void Line51()
 		{
 			// tag::2533e4b36ae837eaecda08407ecb6383[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Tweet>(s => s
+				.AllIndices()
+				.Suggest(su => su
+					.Term("my-suggest-1", t => t
+						.Text("tring out Elasticsearch")
+						.Field(f => f.Message)
+					)
+					.Term("my-suggest-2", t => t
+						.Text("kmichy")
+						.Field(f => f.User)
+					)
+				)
+			);
 			// end::2533e4b36ae837eaecda08407ecb6383[]
 
-			response0.MatchesExample(@"POST _search
+			searchResponse.MatchesExample(@"POST _search
 			{
 			  ""suggest"": {
 			    ""my-suggest-1"" : {
@@ -63,15 +91,27 @@ namespace Examples.Search
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/suggesters.asciidoc:127")]
 		public void Line127()
 		{
 			// tag::5275842787967b6db876025f4a1c6942[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Tweet>(s => s
+				.AllIndices()
+				.Suggest(su => su
+					.Term("my-suggest-1", t => t
+						.Text("tring out Elasticsearch")
+						.Field(f => f.Message)
+					)
+					.Term("my-suggest-2", t => t
+						.Text("tring out Elasticsearch")
+						.Field(f => f.User)
+					)
+				)
+			);
 			// end::5275842787967b6db876025f4a1c6942[]
 
-			response0.MatchesExample(@"POST _search
+			searchResponse.MatchesExample(@"POST _search
 			{
 			  ""suggest"": {
 			    ""text"" : ""tring out Elasticsearch"",
@@ -86,7 +126,13 @@ namespace Examples.Search
 			       }
 			    }
 			  }
-			}");
+			}", (e, b) =>
+			{
+				// client does not support global suggest text
+				((JObject)b["suggest"]).Remove("text");
+				((JObject)b["suggest"]["my-suggest-1"]).Add("text", "tring out Elasticsearch");
+				((JObject)b["suggest"]["my-suggest-2"]).Add("text", "tring out Elasticsearch");
+			});
 		}
 	}
 }

@@ -110,7 +110,7 @@ namespace Examples.Root
 		{
 			// tag::189a921df2f5b1fe580937210ce9c1c2[]
 			var searchResponse = client.Search<object>(s => s
-				.Index("")
+				.AllIndices()
 				.Query(q => q.MatchAll())
 				.Stats("group1", "group2")
 			);
