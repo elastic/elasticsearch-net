@@ -73,6 +73,12 @@ namespace Nest
 		[DataMember(Name ="fragment_size")]
 		int? FragmentSize { get; set; }
 
+		/// <summary>
+		/// The query to use for highlighting
+		/// </summary>
+		[DataMember(Name = "highlight_query")]
+		QueryContainer HighlightQuery { get; set; }
+
 		[DataMember(Name ="max_fragment_length")]
 		int? MaxFragmentLength { get; set; }
 
@@ -170,6 +176,9 @@ namespace Nest
 		public int? FragmentSize { get; set; }
 
 		/// <inheritdoc/>
+		public QueryContainer HighlightQuery { get; set; }
+
+		/// <inheritdoc/>
 		public int? MaxFragmentLength { get; set; }
 
 		/// <inheritdoc/>
@@ -214,6 +223,7 @@ namespace Nest
 		HighlighterFragmenter? IHighlight.Fragmenter { get; set; }
 		int? IHighlight.FragmentOffset { get; set; }
 		int? IHighlight.FragmentSize { get; set; }
+		QueryContainer IHighlight.HighlightQuery { get; set; }
 		int? IHighlight.MaxFragmentLength { get; set; }
 		int? IHighlight.NoMatchSize { get; set; }
 		int? IHighlight.NumberOfFragments { get; set; }
@@ -252,6 +262,10 @@ namespace Nest
 
 		/// <inheritdoc cref="IHighlight.FragmentSize" />
 		public HighlightDescriptor<T> FragmentSize(int? fragmentSize) => Assign(fragmentSize, (a, v) => a.FragmentSize = v);
+
+		/// <inheritdoc cref="IHighlight.HighlightQuery" />
+		public HighlightDescriptor<T> HighlightQuery(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
+			Assign(query, (a, v) => a.HighlightQuery = v?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <inheritdoc cref="IHighlight.NumberOfFragments" />
 		public HighlightDescriptor<T> NumberOfFragments(int? numberOfFragments) => Assign(numberOfFragments, (a, v) => a.NumberOfFragments = v);

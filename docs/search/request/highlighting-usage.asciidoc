@@ -36,6 +36,12 @@ s => s
     .PreTags("<tag1>")
     .PostTags("</tag1>")
     .Encoder(HighlighterEncoder.Html)
+    .HighlightQuery(q => q
+        .Match(m => m
+            .Field(f => f.Name.Suffix("standard"))
+            .Query("Upton Sons Shield Rice Rowe Roberts")
+        )
+    )
     .Fields(
         fs => fs
             .Field(p => p.Name.Suffix("standard"))
@@ -90,6 +96,11 @@ new SearchRequest<Project>
         PreTags = new[] { "<tag1>" },
         PostTags = new[] { "</tag1>" },
         Encoder = HighlighterEncoder.Html,
+        HighlightQuery = new MatchQuery
+        {
+            Query = "Upton Sons Shield Rice Rowe Roberts",
+            Field = "name.standard"
+        },
         Fields = new Dictionary<Field, IHighlightField>
         {
             {
@@ -155,6 +166,13 @@ new SearchRequest<Project>
       "</tag1>"
     ],
     "encoder": "html",
+    "highlight_query": {
+      "match": {
+        "name.standard": {
+          "query": "Upton Sons Shield Rice Rowe Roberts"
+        }
+      }
+    },
     "fields": {
       "name.standard": {
         "type": "plain",
