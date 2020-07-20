@@ -424,7 +424,10 @@ namespace Examples.Aggregations.Bucket
 			            }
 			        }
 			    }
-			}");
+			}", e =>
+			{
+				e.MoveQueryStringToBody("size", 0);
+			});
 		}
 	}
 }

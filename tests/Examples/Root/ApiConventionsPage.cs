@@ -36,7 +36,7 @@ namespace Examples.Root
 			      ""test"": ""data""
 			    }
 			  }
-			}");
+			}", (e, b) => b["query"]["match"]["test"].ToLongFormQuery());
 		}
 
 		[U]
@@ -62,7 +62,7 @@ namespace Examples.Root
 			      ""test"": ""data""
 			    }
 			  }
-			}");
+			}", (e, b) => b["query"]["match"]["test"].ToLongFormQuery());
 		}
 
 		[U]
@@ -117,7 +117,10 @@ namespace Examples.Root
 			);
 			// end::621665fdbd7fc103c09bfeed28b67b1a[]
 
-			countResponse.MatchesExample(@"GET /_count?filter_path=-_shards");
+			countResponse.MatchesExample(@"GET /_count?filter_path=-_shards", e =>
+			{
+				e.Uri.Path = "/_all" + e.Uri.Path;
+			});
 		}
 
 		[U]
@@ -159,7 +162,9 @@ namespace Examples.Root
 			var searchResponse = client.Search<object>(s => s
 				.AllIndices()
 				.FilterPath("hits.hits._source") // <1> Using filter path can result in a response that cannot be parsed by the client's serializer. In these cases, using the low level client and parsing the JSON response may be preferred.
-				.SourceQueryString("title")
+				.Source(so => so
+					.Includes(f => f.Field("title"))
+				)
 				.Sort(so => so
 					.Field("rating", SortOrder.Descending)
 				)
@@ -179,7 +184,21 @@ namespace Examples.Root
 			{
 				e.Method = HttpMethod.POST;
 				e.Uri.Query = e.Uri.Query.Replace("&sort=rating:desc", string.Empty);
-				e.ApplyBodyChanges(b => b["sort"] = new JObject { { "sort", new JObject {{ "order", "desc" }} } });
+				e.Uri.Query = e.Uri.Query.Replace("&_source=title", string.Empty);
+				e.ApplyBodyChanges(b =>
+				{
+					b["_source"] = new JObject
+					{
+						["includes"] = new JArray("title")
+					};
+					b["sort"] = new JArray(new JObject
+					{
+						["rating"] = new JObject
+						{
+							["order"] = "desc"
+						}
+					});
+				});
 			});
 		}
 
