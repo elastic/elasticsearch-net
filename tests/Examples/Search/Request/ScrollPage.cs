@@ -5,20 +5,33 @@
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
+using Elasticsearch.Net;
+using Examples.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Examples.Search.Request
 {
 	public class ScrollPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/scroll.asciidoc:45")]
 		public void Line45()
 		{
 			// tag::7e52bec09624cf6c0de5d13f2bfad5a5[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Tweet>(s => s
+				.Index("twitter")
+				.Size(100)
+				.Scroll("1m")
+				.Query(q => q
+					.Match(m => m
+						.Field(f => f.Title)
+						.Query("elasticsearch")
+					)
+				)
+			);
 			// end::7e52bec09624cf6c0de5d13f2bfad5a5[]
 
-			response0.MatchesExample(@"POST /twitter/_search?scroll=1m
+			searchResponse.MatchesExample(@"POST /twitter/_search?scroll=1m
 			{
 			    ""size"": 100,
 			    ""query"": {
@@ -26,74 +39,107 @@ namespace Examples.Search.Request
 			            ""title"" : ""elasticsearch""
 			        }
 			    }
-			}");
+			}", (e, b) =>
+			{
+				b["query"]["match"]["title"].ToLongFormQuery();
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/scroll.asciidoc:63")]
 		public void Line63()
 		{
 			// tag::b41dce56b0e640d32b1cf452f87cec17[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Scroll<Tweet>(
+				"1m",
+				"DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==");
 			// end::b41dce56b0e640d32b1cf452f87cec17[]
 
-			response0.MatchesExample(@"POST /_search/scroll \<1>
+			searchResponse.MatchesExample(@"POST /_search/scroll \<1>
 			{
 			    ""scroll"" : ""1m"", \<2>
 			    ""scroll_id"" : ""DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ=="" \<3>
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/scroll.asciidoc:95")]
 		public void Line95()
 		{
 			// tag::d5dcddc6398b473b6ad9bce5c6adf986[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Tweet>(s => s
+				.AllIndices()
+				.Scroll("1m")
+				.Sort(so => so
+					.Descending(SortSpecialField.DocumentIndexOrder)
+				)
+			);
 			// end::d5dcddc6398b473b6ad9bce5c6adf986[]
 
-			response0.MatchesExample(@"GET /_search?scroll=1m
+			searchResponse.MatchesExample(@"GET /_search?scroll=1m
 			{
 			  ""sort"": [
 			    ""_doc""
 			  ]
-			}");
+			}", (e, b) =>
+			{
+				b["sort"][0] = new JObject
+				{
+					["_doc"] = new JObject
+					{
+						["order"] = "desc"
+					}
+				};
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/scroll.asciidoc:148")]
 		public void Line148()
 		{
 			// tag::72beebe779a258c225dee7b023e60c52[]
-			var response0 = new SearchResponse<object>();
+			var nodesStatsResponse = client.Nodes.Stats(s => s
+				.Metric(NodesStatsMetric.Indices)
+				.IndexMetric(NodesStatsIndexMetric.Search)
+			);
 			// end::72beebe779a258c225dee7b023e60c52[]
 
-			response0.MatchesExample(@"GET /_nodes/stats/indices/search");
+			nodesStatsResponse.MatchesExample(@"GET /_nodes/stats/indices/search");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/scroll.asciidoc:161")]
 		public void Line161()
 		{
 			// tag::b0d64d0a554549e5b2808002a0725493[]
-			var response0 = new SearchResponse<object>();
+			var clearScrollResponse = client.ClearScroll(c => c
+				.ScrollId("DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==")
+			);
 			// end::b0d64d0a554549e5b2808002a0725493[]
 
-			response0.MatchesExample(@"DELETE /_search/scroll
+			clearScrollResponse.MatchesExample(@"DELETE /_search/scroll
 			{
 			    ""scroll_id"" : ""DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==""
-			}");
+			}", (e, b) =>
+			{
+				var scroll_id = b["scroll_id"];
+				b["scroll_id"] = new JArray(scroll_id);
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/scroll.asciidoc:172")]
 		public void Line172()
 		{
 			// tag::3a700f836d8d5da1b656a876554028aa[]
-			var response0 = new SearchResponse<object>();
+			var clearScrollResponse = client.ClearScroll(c => c
+				.ScrollId(
+					"DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==",
+					"DnF1ZXJ5VGhlbkZldGNoBQAAAAAAAAABFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAAAxZrUllkUVlCa1NqNmRMaUhiQlZkMWFBAAAAAAAAAAIWa1JZZFFZQmtTajZkTGlIYkJWZDFhQQAAAAAAAAAFFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAABBZrUllkUVlCa1NqNmRMaUhiQlZkMWFB")
+			);
 			// end::3a700f836d8d5da1b656a876554028aa[]
 
-			response0.MatchesExample(@"DELETE /_search/scroll
+			clearScrollResponse.MatchesExample(@"DELETE /_search/scroll
 			{
 			    ""scroll_id"" : [
 			      ""DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ=="",
@@ -102,39 +148,84 @@ namespace Examples.Search.Request
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/scroll.asciidoc:186")]
 		public void Line186()
 		{
 			// tag::c2c21e2824fbf6b7198ede30419da82b[]
-			var response0 = new SearchResponse<object>();
+			var clearScrollResponse = client.ClearScroll(c => c
+				.ScrollId("_all") // <1> The client always sends `scroll_id` in the request body
+			);
 			// end::c2c21e2824fbf6b7198ede30419da82b[]
 
-			response0.MatchesExample(@"DELETE /_search/scroll/_all");
+			clearScrollResponse.MatchesExample(@"DELETE /_search/scroll/_all", (e, b) =>
+			{
+				var index = e.Uri.Path.IndexOf("_all");
+				var scroll_id = e.Uri.Path.Substring(index);
+				e.Uri.Path = e.Uri.Path.Substring(0, index);
+				b["scroll_id"] = new JArray(scroll_id);
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/scroll.asciidoc:194")]
 		public void Line194()
 		{
 			// tag::b94cee0f74f57742b3948f9b784dfdd4[]
-			var response0 = new SearchResponse<object>();
+			var clearScrollResponse = client.ClearScroll(c => c
+				.ScrollId(
+					"DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==", // <1> The client always sends `scroll_id` in the request body
+					"DnF1ZXJ5VGhlbkZldGNoBQAAAAAAAAABFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAAAxZrUllkUVlCa1NqNmRMaUhiQlZkMWFBAAAAAAAAAAIWa1JZZFFZQmtTajZkTGlIYkJWZDFhQQAAAAAAAAAFFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAABBZrUllkUVlCa1NqNmRMaUhiQlZkMWFB")
+			);
 			// end::b94cee0f74f57742b3948f9b784dfdd4[]
 
-			response0.MatchesExample(@"DELETE /_search/scroll/DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==,DnF1ZXJ5VGhlbkZldGNoBQAAAAAAAAABFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAAAxZrUllkUVlCa1NqNmRMaUhiQlZkMWFBAAAAAAAAAAIWa1JZZFFZQmtTajZkTGlIYkJWZDFhQQAAAAAAAAAFFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAABBZrUllkUVlCa1NqNmRMaUhiQlZkMWFB");
+			clearScrollResponse.MatchesExample(@"DELETE /_search/scroll/DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==,DnF1ZXJ5VGhlbkZldGNoBQAAAAAAAAABFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAAAxZrUllkUVlCa1NqNmRMaUhiQlZkMWFBAAAAAAAAAAIWa1JZZFFZQmtTajZkTGlIYkJWZDFhQQAAAAAAAAAFFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAABBZrUllkUVlCa1NqNmRMaUhiQlZkMWFB",
+				(e, b) =>
+				{
+					var index = e.Uri.Path.IndexOf("DX");
+					var scroll_id = e.Uri.Path.Substring(index).Split(",");
+					e.Uri.Path = e.Uri.Path.Substring(0, index);
+					b["scroll_id"] = new JArray(scroll_id);
+				});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/scroll.asciidoc:206")]
 		public void Line206()
 		{
 			// tag::1027ab1ca767ac1428176ef4f84bfbcf[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse1 = client.Search<Tweet>(s => s
+				.Index("twitter")
+				.Scroll("1m")
+				.Slice(sl => sl
+					.Id(0)
+					.Max(2)
+				)
+				.Query(q => q
+					.Match(m => m
+						.Field(f => f.Title)
+						.Query("elasticsearch")
+					)
+				)
+			);
 
-			var response1 = new SearchResponse<object>();
+			var searchResponse2 = client.Search<Tweet>(s => s
+				.Index("twitter")
+				.Scroll("1m")
+				.Slice(sl => sl
+					.Id(1)
+					.Max(2)
+				)
+				.Query(q => q
+					.Match(m => m
+						.Field(f => f.Title)
+						.Query("elasticsearch")
+					)
+				)
+			);
 			// end::1027ab1ca767ac1428176ef4f84bfbcf[]
 
-			response0.MatchesExample(@"GET /twitter/_search?scroll=1m
+			searchResponse1.MatchesExample(@"GET /twitter/_search?scroll=1m
 			{
 			    ""slice"": {
 			        ""id"": 0, \<1>
@@ -145,9 +236,12 @@ namespace Examples.Search.Request
 			            ""title"" : ""elasticsearch""
 			        }
 			    }
-			}");
+			}", (e, b) =>
+			{
+				b["query"]["match"]["title"].ToLongFormQuery();
+			});
 
-			response1.MatchesExample(@"GET /twitter/_search?scroll=1m
+			searchResponse2.MatchesExample(@"GET /twitter/_search?scroll=1m
 			{
 			    ""slice"": {
 			        ""id"": 1,
@@ -158,18 +252,35 @@ namespace Examples.Search.Request
 			            ""title"" : ""elasticsearch""
 			        }
 			    }
-			}");
+			}", (e, b) =>
+			{
+				b["query"]["match"]["title"].ToLongFormQuery();
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("search/request/scroll.asciidoc:268")]
 		public void Line268()
 		{
 			// tag::fdcaba9547180439ff4b6275034a5170[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<Tweet>(s => s
+				.Index("twitter")
+				.Scroll("1m")
+				.Slice(sl => sl
+					.Field(f => f.Date)
+					.Id(0)
+					.Max(10)
+				)
+				.Query(q => q
+					.Match(m => m
+						.Field(f => f.Title)
+						.Query("elasticsearch")
+					)
+				)
+			);
 			// end::fdcaba9547180439ff4b6275034a5170[]
 
-			response0.MatchesExample(@"GET /twitter/_search?scroll=1m
+			searchResponse.MatchesExample(@"GET /twitter/_search?scroll=1m
 			{
 			    ""slice"": {
 			        ""field"": ""date"",
@@ -181,7 +292,10 @@ namespace Examples.Search.Request
 			            ""title"" : ""elasticsearch""
 			        }
 			    }
-			}");
+			}", (e, b) =>
+			{
+				b["query"]["match"]["title"].ToLongFormQuery();
+			});
 		}
 	}
 }
