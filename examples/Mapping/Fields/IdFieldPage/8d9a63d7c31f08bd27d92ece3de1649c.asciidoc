@@ -1,0 +1,36 @@
+// mapping/fields/id-field.asciidoc:12
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line12 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Mapping/Fields/IdFieldPage.cs#L14-L58.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
+////
+
+[source, csharp]
+----
+var indexResponse1 = client.Index(new
+{
+    text = "Document with ID 1"
+}, i => i.Index("my_index").Id(1));
+
+var indexResponse2 = client.Index(new
+{
+    text = "Document with ID 2"
+}, i => i.Index("my_index").Id(2).Refresh(Refresh.True));
+
+var searchResponse = client.Search<object>(s => s
+    .Index("my_index")
+    .Query(q => q
+        .Terms(t => t
+            .Field("_id")
+            .Terms("1", "2")
+        )
+    )
+);
+----

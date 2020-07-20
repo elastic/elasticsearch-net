@@ -1,0 +1,53 @@
+// mapping/params/multi-fields.asciidoc:75
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line75 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Mapping/Params/MultiFieldsPage.cs#L120-L199.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
+////
+
+[source, csharp]
+----
+var createIndexResponse = client.Indices.Create("my_index", c => c
+    .Map(m => m
+        .Properties(p => p
+            .Text(t => t
+                .Name("text")
+                .Fields(f => f
+                    .Text(k => k
+                        .Name("english")
+                        .Analyzer("english")
+                    )
+                )
+            )
+        )
+    )
+);
+
+var indexResponse1 = client.Index(new
+{
+    text = "quick brown fox"
+}, i => i.Index("my_index").Id(1));
+
+var indexResponse2 = client.Index(new
+{
+    text = "quick brown foxes"
+}, i => i.Index("my_index").Id(2));
+
+var searchResponse = client.Search<object>(s => s
+    .Index("my_index")
+    .Query(q => q
+        .MultiMatch(m => m
+            .Fields(new[] { "text", "text.english" })
+            .Query("quick brown foxes")
+            .Type(TextQueryType.MostFields)
+        )
+    )
+);
+----

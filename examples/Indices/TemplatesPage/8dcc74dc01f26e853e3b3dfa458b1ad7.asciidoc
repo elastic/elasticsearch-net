@@ -1,0 +1,25 @@
+// indices/templates.asciidoc:231
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line231 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Indices/TemplatesPage.cs#L163-L187.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
+////
+
+[source, csharp]
+----
+var templateResponse = client.Indices.PutTemplate("template_1", t => t
+    .IndexPatterns("myindex-*")
+    .Order(0)
+    .Settings(s => s
+        .NumberOfShards(1)
+    )
+    .Version(123)
+);
+----

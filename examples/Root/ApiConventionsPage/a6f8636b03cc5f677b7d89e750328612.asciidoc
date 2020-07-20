@@ -1,0 +1,24 @@
+// api-conventions.asciidoc:580
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line580 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Root/ApiConventionsPage.cs#L231-L245.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
+////
+
+[source, csharp]
+----
+var searchResponse = client.Search<object>(s =>
+{
+IRequest request = s;
+request.RequestParameters.SetQueryString("size", "surprise_me"); //<1>
+            return s.Index("twitter");
+});
+----
+<1> The high level client provides a strongly typed method to set "size" which does not allow a string value to be set. This can be circumvented by accessing the underlying request interface

@@ -1,0 +1,30 @@
+// search/suggesters.asciidoc:51
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line51 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Search/SuggestersPage.cs#L55-L92.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
+////
+
+[source, csharp]
+----
+var searchResponse = client.Search<Tweet>(s => s
+    .AllIndices()
+    .Suggest(su => su
+        .Term("my-suggest-1", t => t
+            .Text("tring out Elasticsearch")
+            .Field(f => f.Message)
+        )
+        .Term("my-suggest-2", t => t
+            .Text("kmichy")
+            .Field(f => f.User)
+        )
+    )
+);
+----

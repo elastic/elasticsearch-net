@@ -1,0 +1,59 @@
+// mapping/params/multi-fields.asciidoc:10
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line10 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Mapping/Params/MultiFieldsPage.cs#L14-L118.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
+////
+
+[source, csharp]
+----
+var createIndexResponse = client.Indices.Create("my_index", c => c
+    .Map(m => m
+        .Properties(p => p
+            .Text(t => t
+                .Name("city")
+                .Fields(f => f
+                    .Keyword(k => k
+                        .Name("raw")
+                    )
+                )
+            )
+        )
+    )
+);
+
+var indexResponse1 = client.Index(new
+{
+    city = "New York"
+}, i => i.Index("my_index").Id(1));
+
+var indexResponse2 = client.Index(new
+{
+    city = "York"
+}, i => i.Index("my_index").Id(2));
+
+var searchResponse = client.Search<object>(s => s
+    .Index("my_index")
+    .Query(q => q
+        .Match(m => m
+            .Field("city")
+            .Query("york")
+        )
+    )
+    .Sort(so => so
+        .Field("city.raw", SortOrder.Ascending)
+    )
+    .Aggregations(a => a
+        .Terms("Cities", t => t
+            .Field("city.raw")
+        )
+    )
+);
+----

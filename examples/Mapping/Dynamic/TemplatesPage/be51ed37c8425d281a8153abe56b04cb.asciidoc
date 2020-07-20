@@ -1,11 +1,15 @@
-// mapping/dynamic/templates.asciidoc:227
+// mapping/dynamic/templates.asciidoc:228
 
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line227 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Mapping/Dynamic/TemplatesPage.cs#L213-L244.
-If you wish to submit a PR to change this example, please change the source method above
-and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+This file is generated from method Line228 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Mapping/Dynamic/TemplatesPage.cs#L213-L244.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
 ////
 
 [source, csharp]

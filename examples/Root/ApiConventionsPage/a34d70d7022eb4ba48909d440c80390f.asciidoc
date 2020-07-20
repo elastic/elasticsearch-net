@@ -1,0 +1,26 @@
+// api-conventions.asciidoc:142
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line142 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Root/ApiConventionsPage.cs#L42-L66.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
+////
+
+[source, csharp]
+----
+var searchResponse = client.Search<object>(s => s
+    .Index("<logstash-{now/d-2d}>,<logstash-{now/d-1d}>,<logstash-{now/d}>")
+    .Query(q => q
+        .Match(m => m
+            .Field("test")
+            .Query("data")
+        )
+    )
+);
+----

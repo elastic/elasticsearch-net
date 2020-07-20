@@ -1,0 +1,46 @@
+// aggregations/metrics/valuecount-aggregation.asciidoc:96
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line96 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Aggregations/Metrics/ValuecountAggregationPage.cs#L117-L182.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
+////
+
+[source, csharp]
+----
+var indexResponse1 = client.Index(new Dictionary<string, object>
+{
+    ["network.name"] = "net-1",
+    ["latency_histo"] = new
+    {
+        values = new[] { 0.1, 0.2, 0.3, 0.4, 0.5 },
+        counts = new[] { 3, 7, 23, 12, 6 }
+    }
+}, i => i.Index("metrics_index").Id(1));
+
+var indexResponse2 = client.Index(new Dictionary<string, object>
+{
+    ["network.name"] = "net-2",
+    ["latency_histo"] = new
+    {
+        values = new[] { 0.1, 0.2, 0.3, 0.4, 0.5 },
+        counts = new[] { 8, 17, 8, 7, 6 }
+    }
+}, i => i.Index("metrics_index").Id(2));
+
+var searchResponse = client.Search<object>(s => s
+    .Index("metrics_index")
+    .Size(0)
+    .Aggregations(a => a
+        .ValueCount("total_requests", vc => vc
+            .Field("latency_histo")
+        )
+    )
+);
+----

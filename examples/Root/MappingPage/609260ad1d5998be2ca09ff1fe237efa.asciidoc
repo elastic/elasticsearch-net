@@ -1,11 +1,15 @@
-// mapping.asciidoc:214
+// mapping.asciidoc:217
 
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line214 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Root/MappingPage.cs#L70-L79.
-If you wish to submit a PR to change this example, please change the source method above
-and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+This file is generated from method Line217 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Root/MappingPage.cs#L70-L79.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
 ////
 
 [source, csharp]
