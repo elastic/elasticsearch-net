@@ -244,8 +244,8 @@ namespace Tests.XPack.Transform
 			{
 				DeleteTransformStep, u =>
 					u.Calls<DeleteTransformDescriptor, DeleteTransformRequest, IDeleteTransformRequest, DeleteTransformResponse>(
-						v => new DeleteTransformRequest(v),
-						(v, d) => d,
+						v => new DeleteTransformRequest(v) { Force = true },
+						(v, d) => d.Force(),
 						(v, c, f) => c.Transform.Delete(v, f),
 						(v, c, f) => c.Transform.DeleteAsync(v, f),
 						(v, c, r) => c.Transform.Delete(r),
