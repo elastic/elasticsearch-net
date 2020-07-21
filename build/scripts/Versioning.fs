@@ -135,7 +135,11 @@ module Versioning =
         packages
         |> Seq.iter(fun p ->
             let v = sprintf "%O+%s" version.Full (Information.getCurrentSHA1("."))
-            ReposTooling.PackageValidator [p.Package; "-v"; v; "-a"; p.AssemblyName; "-k"; officialToken] |> ignore 
+            // loading dlls is locked down on APPVEYOR so we can not assert release mode
+            let appVeyorArgs = if Environment.hasEnvironVar "APPVEYOR" then ["-r"; "true"] else []
+            ReposTooling.PackageValidator
+                <| [p.Package; "-v"; v; "-a"; p.AssemblyName; "-k"; officialToken] @ appVeyorArgs
+                |> ignore 
             
             Zip.unzip tmp p.Package
             let nugetId = p.NugetId
