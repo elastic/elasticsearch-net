@@ -24,10 +24,60 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.EqlApi
 {
+	///<summary>Request options for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public class DeleteRequestParameters : RequestParameters<DeleteRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
+	}
+
+	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public class GetRequestParameters : RequestParameters<GetRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
+		public TimeSpan KeepAlive
+		{
+			get => Q<TimeSpan>("keep_alive");
+			set => Q("keep_alive", value);
+		}
+
+		///<summary>Specify the time that the request should block waiting for the final response</summary>
+		public TimeSpan WaitForCompletionTimeout
+		{
+			get => Q<TimeSpan>("wait_for_completion_timeout");
+			set => Q("wait_for_completion_timeout", value);
+		}
+	}
+
 	///<summary>Request options for Search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
 	public class SearchRequestParameters : RequestParameters<SearchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
+		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
+		public TimeSpan KeepAlive
+		{
+			get => Q<TimeSpan>("keep_alive");
+			set => Q("keep_alive", value);
+		}
+
+		///<summary>
+		/// Control whether the response should be stored in the cluster if it completed within the provided [wait_for_completion] time (default:
+		/// false)
+		///</summary>
+		public bool? KeepOnCompletion
+		{
+			get => Q<bool? >("keep_on_completion");
+			set => Q("keep_on_completion", value);
+		}
+
+		///<summary>Specify the time that the request should block waiting for the final response</summary>
+		public TimeSpan WaitForCompletionTimeout
+		{
+			get => Q<TimeSpan>("wait_for_completion_timeout");
+			set => Q("wait_for_completion_timeout", value);
+		}
 	}
 }

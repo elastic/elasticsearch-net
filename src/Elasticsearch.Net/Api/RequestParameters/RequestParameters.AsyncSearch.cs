@@ -264,7 +264,10 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 			set => Q("suggest_text", value);
 		}
 
-		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
+		///<summary>
+		/// Indicate if the number of documents that match the query should be tracked. A number can also be specified, to accurately track the total
+		/// hit count up to the number.
+		///</summary>
 		public bool? TrackTotalHits
 		{
 			get => Q<bool? >("track_total_hits");

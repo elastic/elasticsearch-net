@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.SnapshotApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>Descriptor for CleanupRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Descriptor for CleanupRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html</para></summary>
 	public partial class CleanupRepositoryDescriptor : RequestDescriptorBase<CleanupRepositoryDescriptor, CleanupRepositoryRequestParameters, ICleanupRepositoryRequest>, ICleanupRepositoryRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotCleanupRepository;
@@ -116,7 +116,7 @@ namespace Nest
 		///<summary>/_snapshot/{repository}/{snapshot}</summary>
 		///<param name = "repository">this parameter is required</param>
 		///<param name = "snapshot">this parameter is required</param>
-		public DeleteSnapshotDescriptor(Name repository, Name snapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot))
+		public DeleteSnapshotDescriptor(Name repository, Names snapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
 		}
 
@@ -128,7 +128,7 @@ namespace Nest
 
 		// values part of the url path
 		Name IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
-		Name IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+		Names IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteSnapshotDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);

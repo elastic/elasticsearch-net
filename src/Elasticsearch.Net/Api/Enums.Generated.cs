@@ -131,8 +131,10 @@ namespace Elasticsearch.Net
 		Transport = 1 << 8,
 		[EnumMember(Value = "discovery")]
 		Discovery = 1 << 9,
+		[EnumMember(Value = "indexing_pressure")]
+		IndexingPressure = 1 << 10,
 		[EnumMember(Value = "_all")]
-		All = 1 << 10
+		All = 1 << 11
 	}
 
 	[Flags, StringEnum]
@@ -580,6 +582,8 @@ namespace Elasticsearch.Net
 				list.Add("transport");
 			if ((enumValue & NodesStatsMetric.Discovery) != 0)
 				list.Add("discovery");
+			if ((enumValue & NodesStatsMetric.IndexingPressure) != 0)
+				list.Add("indexing_pressure");
 			return string.Join(",", list);
 		}
 

@@ -46,6 +46,13 @@ namespace Elasticsearch.Net
 			set => Q("refresh", value);
 		}
 
+		///<summary>Sets require_alias for all incoming documents. Defaults to unset (false)</summary>
+		public bool? RequireAlias
+		{
+			get => Q<bool? >("require_alias");
+			set => Q("require_alias", value);
+		}
+
 		///<summary>Specific routing value</summary>
 		public string Routing
 		{
@@ -847,7 +854,7 @@ namespace Elasticsearch.Net
 	public class FieldCapabilitiesRequestParameters : RequestParameters<FieldCapabilitiesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1103,6 +1110,13 @@ namespace Elasticsearch.Net
 		{
 			get => Q<Refresh? >("refresh");
 			set => Q("refresh", value);
+		}
+
+		///<summary>When true, requires destination to be an alias. Default is false</summary>
+		public bool? RequireAlias
+		{
+			get => Q<bool? >("require_alias");
+			set => Q("require_alias", value);
 		}
 
 		///<summary>Specific routing value</summary>
@@ -1802,7 +1816,10 @@ namespace Elasticsearch.Net
 			set => Q("rest_total_hits_as_int", value);
 		}
 
-		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
+		///<summary>
+		/// Indicate if the number of documents that match the query should be tracked. A number can also be specified, to accurately track the total
+		/// hit count up to the number.
+		///</summary>
 		public bool? TrackTotalHits
 		{
 			get => Q<bool? >("track_total_hits");
@@ -2085,6 +2102,13 @@ namespace Elasticsearch.Net
 		{
 			get => Q<Refresh? >("refresh");
 			set => Q("refresh", value);
+		}
+
+		///<summary>When true, requires destination is an alias. Default is false</summary>
+		public bool? RequireAlias
+		{
+			get => Q<bool? >("require_alias");
+			set => Q("require_alias", value);
 		}
 
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
