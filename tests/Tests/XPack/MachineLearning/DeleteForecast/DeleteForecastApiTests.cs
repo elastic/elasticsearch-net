@@ -52,6 +52,15 @@ namespace Tests.XPack.MachineLearning.DeleteForecast
 			}
 		}
 
+		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values)
+			{
+				CloseJob(client, callUniqueValue.Value + "-job");
+				DeleteJob(client, callUniqueValue.Value + "-job");
+			}
+		}
+
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.MachineLearning.DeleteForecast(CallIsolatedValue + "-job", CallIsolatedValue),
 			(client, f) => client.MachineLearning.DeleteForecastAsync(CallIsolatedValue + "-job", CallIsolatedValue),
