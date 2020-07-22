@@ -189,11 +189,7 @@ namespace Tests.Cluster.NodesStats
 
 		protected void Assert(ScriptStats script) => script.Should().NotBeNull();
 
-		protected void Assert(ScriptCacheStats scriptCache)
-		{
-			scriptCache.Should().NotBeNull();
-			scriptCache.Sum.Should().NotBeNull();
-		}
+		protected void Assert(ScriptCacheStats scriptCache) => scriptCache?.Sum.Should().NotBeNull();
 
 		protected void Assert(TransportStats transport) => transport.Should().NotBeNull();
 

@@ -233,8 +233,8 @@ namespace Tests.XPack.Transform
 			{
 				StopTransformStep, u =>
 					u.Calls<StopTransformDescriptor, StopTransformRequest, IStopTransformRequest, StopTransformResponse>(
-						v => new StopTransformRequest(v) { Force = true, WaitForCompletion = true },
-						(v, d) => d.Force().WaitForCompletion(),
+						v => new StopTransformRequest(v) { Force = true, WaitForCompletion = true, Timeout = "2m"},
+						(v, d) => d.Force().WaitForCompletion().Timeout("2m"),
 						(v, c, f) => c.Transform.Stop(v, f),
 						(v, c, f) => c.Transform.StopAsync(v, f),
 						(v, c, r) => c.Transform.Stop(r),
@@ -244,8 +244,8 @@ namespace Tests.XPack.Transform
 			{
 				DeleteTransformStep, u =>
 					u.Calls<DeleteTransformDescriptor, DeleteTransformRequest, IDeleteTransformRequest, DeleteTransformResponse>(
-						v => new DeleteTransformRequest(v),
-						(v, d) => d,
+						v => new DeleteTransformRequest(v) { Force = true },
+						(v, d) => d.Force(),
 						(v, c, f) => c.Transform.Delete(v, f),
 						(v, c, f) => c.Transform.DeleteAsync(v, f),
 						(v, c, r) => c.Transform.Delete(r),
