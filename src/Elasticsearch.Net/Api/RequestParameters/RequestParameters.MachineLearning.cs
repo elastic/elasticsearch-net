@@ -83,6 +83,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			get => Q<bool? >("force");
 			set => Q("force", value);
 		}
+
+		///<summary>Controls the time to wait until a job is deleted. Defaults to 1 minute</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	///<summary>Request options for DeleteDatafeed <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</para></summary>
@@ -103,6 +110,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		public override bool SupportsBody => true;
+		///<summary>The desired requests per second for the deletion processes.</summary>
+		public long? RequestsPerSecond
+		{
+			get => Q<long? >("requests_per_second");
+			set => Q("requests_per_second", value);
+		}
+
+		///<summary>How long can the underlying delete processes run until they are canceled</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	///<summary>Request options for DeleteFilter <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html</para></summary>
@@ -309,6 +329,12 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => false;
+		///<summary>The max memory able to be used by the forecast. Default is 20mb.</summary>
+		public string MaxModelMemory
+		{
+			get => Q<string>("max_model_memory");
+			set => Q("max_model_memory", value);
+		}
 	}
 
 	///<summary>Request options for GetBuckets <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>
@@ -357,6 +383,15 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
+		///<summary>
+		/// Specifies the partition to retrieve categories for. This is optional, and should never be used for jobs where per-partition categorization
+		/// is disabled.
+		///</summary>
+		public string PartitionFieldValue
+		{
+			get => Q<string>("partition_field_value");
+			set => Q("partition_field_value", value);
+		}
 	}
 
 	///<summary>Request options for GetDataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics.html</para></summary>
@@ -539,6 +574,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		{
 			get => Q<bool? >("decompress_definition");
 			set => Q("decompress_definition", value);
+		}
+
+		///<summary>Omits fields that are illegal to set on model PUT</summary>
+		public bool? ForExport
+		{
+			get => Q<bool? >("for_export");
+			set => Q("for_export", value);
 		}
 
 		///<summary>skips a number of trained models</summary>
@@ -815,6 +857,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			get => Q<bool? >("allow_no_datafeeds");
 			set => Q("allow_no_datafeeds", value);
 		}
+	}
+
+	///<summary>Request options for UpdateDataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html</para></summary>
+	public class UpdateDataFrameAnalyticsRequestParameters : RequestParameters<UpdateDataFrameAnalyticsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for UpdateDatafeed <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</para></summary>

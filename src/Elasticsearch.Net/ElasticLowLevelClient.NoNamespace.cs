@@ -28,6 +28,7 @@ using Elasticsearch.Net.Specification.AutoscalingApi;
 using Elasticsearch.Net.Specification.CatApi;
 using Elasticsearch.Net.Specification.ClusterApi;
 using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
+using Elasticsearch.Net.Specification.DanglingIndicesApi;
 using Elasticsearch.Net.Specification.EnrichApi;
 using Elasticsearch.Net.Specification.EqlApi;
 using Elasticsearch.Net.Specification.GraphApi;
@@ -84,6 +85,12 @@ namespace Elasticsearch.Net
 		}
 
 		public LowLevelCrossClusterReplicationNamespace CrossClusterReplication
+		{
+			get;
+			private set;
+		}
+
+		public LowLevelDanglingIndicesNamespace DanglingIndices
 		{
 			get;
 			private set;
@@ -216,6 +223,7 @@ namespace Elasticsearch.Net
 			Cat = new LowLevelCatNamespace(this);
 			Cluster = new LowLevelClusterNamespace(this);
 			CrossClusterReplication = new LowLevelCrossClusterReplicationNamespace(this);
+			DanglingIndices = new LowLevelDanglingIndicesNamespace(this);
 			Enrich = new LowLevelEnrichNamespace(this);
 			Eql = new LowLevelEqlNamespace(this);
 			Graph = new LowLevelGraphNamespace(this);
@@ -557,25 +565,29 @@ namespace Elasticsearch.Net
 		public Task<TResponse> ExplainUsingTypeAsync<TResponse>(string index, string type, string id, PostData body, ExplainRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/{type:type}/{id:id}/_explain"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_field_caps <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</para></summary>
+		///<param name = "body">An index filter specified with the Query DSL</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse FieldCapabilities<TResponse>(FieldCapabilitiesRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_field_caps", null, RequestParams(requestParameters));
+		public TResponse FieldCapabilities<TResponse>(PostData body, FieldCapabilitiesRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_field_caps", body, RequestParams(requestParameters));
 		///<summary>POST on /_field_caps <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</para></summary>
+		///<param name = "body">An index filter specified with the Query DSL</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("field_caps", "")]
-		public Task<TResponse> FieldCapabilitiesAsync<TResponse>(FieldCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_field_caps", ctx, null, RequestParams(requestParameters));
+		[MapsApi("field_caps", "body")]
+		public Task<TResponse> FieldCapabilitiesAsync<TResponse>(PostData body, FieldCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_field_caps", ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_field_caps <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name = "body">An index filter specified with the Query DSL</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse FieldCapabilities<TResponse>(string index, FieldCapabilitiesRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_field_caps"), null, RequestParams(requestParameters));
+		public TResponse FieldCapabilities<TResponse>(string index, PostData body, FieldCapabilitiesRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_field_caps"), body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_field_caps <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name = "body">An index filter specified with the Query DSL</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("field_caps", "index")]
-		public Task<TResponse> FieldCapabilitiesAsync<TResponse>(string index, FieldCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_field_caps"), ctx, null, RequestParams(requestParameters));
+		[MapsApi("field_caps", "index, body")]
+		public Task<TResponse> FieldCapabilitiesAsync<TResponse>(string index, PostData body, FieldCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_field_caps"), ctx, body, RequestParams(requestParameters));
 		///<summary>GET on /{index}/_doc/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "id">The document ID</param>

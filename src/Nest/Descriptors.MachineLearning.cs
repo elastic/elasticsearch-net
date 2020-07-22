@@ -151,8 +151,26 @@ namespace Nest
 	public partial class DeleteExpiredDataDescriptor : RequestDescriptorBase<DeleteExpiredDataDescriptor, DeleteExpiredDataRequestParameters, IDeleteExpiredDataRequest>, IDeleteExpiredDataRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteExpiredData;
-	// values part of the url path
-	// Request parameters
+		///<summary>/_ml/_delete_expired_data/{job_id}</summary>
+		///<param name = "jobId">Optional, accepts null</param>
+		public DeleteExpiredDataDescriptor(Id jobId): base(r => r.Optional("job_id", jobId))
+		{
+		}
+
+		///<summary>/_ml/_delete_expired_data</summary>
+		public DeleteExpiredDataDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Id IDeleteExpiredDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		///<summary>The ID of the job(s) to perform expired data hygiene for</summary>
+		public DeleteExpiredDataDescriptor JobId(Id jobId) => Assign(jobId, (a, v) => a.RouteValues.Optional("job_id", v));
+		// Request parameters
+		///<summary>The desired requests per second for the deletion processes.</summary>
+		public DeleteExpiredDataDescriptor RequestsPerSecond(long? requestspersecond) => Qs("requests_per_second", requestspersecond);
+		///<summary>How long can the underlying delete processes run until they are canceled</summary>
+		public DeleteExpiredDataDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
 	///<summary>Descriptor for DeleteFilter <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html</para></summary>
@@ -300,7 +318,9 @@ namespace Nest
 
 		// values part of the url path
 		Id IForecastJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-	// Request parameters
+		// Request parameters
+		///<summary>The max memory able to be used by the forecast. Default is 20mb.</summary>
+		public ForecastJobDescriptor MaxModelMemory(string maxmodelmemory) => Qs("max_model_memory", maxmodelmemory);
 	}
 
 	///<summary>Descriptor for GetBuckets <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>
@@ -411,7 +431,12 @@ namespace Nest
 		LongId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<LongId>("category_id");
 		///<summary>The identifier of the category definition of interest</summary>
 		public GetCategoriesDescriptor CategoryId(LongId categoryId) => Assign(categoryId, (a, v) => a.RouteValues.Optional("category_id", v));
-	// Request parameters
+		// Request parameters
+		///<summary>Specifies the partition to retrieve categories for. This is optional, and should never be used for jobs where per-partition categorization is disabled.</summary>
+		public GetCategoriesDescriptor PartitionFieldValue(Field partitionfieldvalue) => Qs("partition_field_value", partitionfieldvalue);
+		///<summary>Specifies the partition to retrieve categories for. This is optional, and should never be used for jobs where per-partition categorization is disabled.</summary>
+		public GetCategoriesDescriptor PartitionFieldValue<T>(Expression<Func<T, object>> field)
+			where T : class => Qs("partition_field_value", (Field)field);
 	}
 
 	///<summary>Descriptor for GetDatafeedStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</para></summary>

@@ -43,6 +43,13 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.XPackInfo;
 		// values part of the url path
 		// Request parameters
+		///<summary>If an enterprise license is installed, return the type and mode as 'enterprise' (default: false)</summary>
+		public bool? AcceptEnterprise
+		{
+			get => Q<bool? >("accept_enterprise");
+			set => Q("accept_enterprise", value);
+		}
+
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories
 		{

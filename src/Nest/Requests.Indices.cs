@@ -1398,6 +1398,7 @@ namespace Nest
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.8.0, reason: This parameter is a no-op and field mappings are always retrieved locally.")]
 		public bool? Local
 		{
 			get => Q<bool? >("local");
@@ -1785,6 +1786,13 @@ namespace Nest
 		{
 			get => Q<Time>("timeout");
 			set => Q("timeout", value);
+		}
+
+		///<summary>When true, applies mappings only to the write index of an alias or data stream</summary>
+		public bool? WriteIndexOnly
+		{
+			get => Q<bool? >("write_index_only");
+			set => Q("write_index_only", value);
 		}
 	}
 

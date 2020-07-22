@@ -854,7 +854,7 @@ namespace Elasticsearch.Net
 	public class FieldCapabilitiesRequestParameters : RequestParameters<FieldCapabilitiesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
+		public override bool SupportsBody => true;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)

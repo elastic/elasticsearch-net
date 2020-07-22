@@ -161,7 +161,7 @@ namespace Nest
 		internal static ApiUrls MachineLearningDeleteCalendarEvent = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/events/{event_id}"});
 		internal static ApiUrls MachineLearningDeleteCalendarJob = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/jobs/{job_id}"});
 		internal static ApiUrls MachineLearningDeleteDatafeed = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}"});
-		internal static ApiUrls MachineLearningDeleteExpiredData = new ApiUrls(new[]{"_ml/_delete_expired_data"});
+		internal static ApiUrls MachineLearningDeleteExpiredData = new ApiUrls(new[]{"_ml/_delete_expired_data/{job_id}", "_ml/_delete_expired_data"});
 		internal static ApiUrls MachineLearningDeleteFilter = new ApiUrls(new[]{"_ml/filters/{filter_id}"});
 		internal static ApiUrls MachineLearningDeleteForecast = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}"});
 		internal static ApiUrls MachineLearningDeleteJob = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}"});

@@ -1,38 +1,38 @@
 {
-  "field_caps":{
+  "indices.add_block":{
     "documentation":{
-      "url":"https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html",
-      "description":"Returns the information about the capabilities of fields among multiple indices."
+      "url":"https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html",
+      "description":"Adds a block to an index."
     },
     "stability":"stable",
     "url":{
       "paths":[
         {
-          "path":"/_field_caps",
+          "path":"/{index}/_block/{block}",
           "methods":[
-            "GET",
-            "POST"
-          ]
-        },
-        {
-          "path":"/{index}/_field_caps",
-          "methods":[
-            "GET",
-            "POST"
+            "PUT"
           ],
           "parts":{
             "index":{
               "type":"list",
-              "description":"A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices"
+              "description":"A comma separated list of indices to add a block to"
+            },
+            "block":{
+              "type":"string",
+              "description":"The block to add (one of read, write, read_only or metadata)"
             }
           }
         }
       ]
     },
     "params":{
-      "fields":{
-        "type":"list",
-        "description":"A comma-separated list of field names"
+      "timeout":{
+        "type":"time",
+        "description":"Explicit operation timeout"
+      },
+      "master_timeout":{
+        "type":"time",
+        "description":"Specify timeout for connection to master"
       },
       "ignore_unavailable":{
         "type":"boolean",
@@ -53,15 +53,7 @@
         ],
         "default":"open",
         "description":"Whether to expand wildcard expression to concrete indices that are open, closed or both."
-      },
-      "include_unmapped":{
-        "type":"boolean",
-        "default":false,
-        "description":"Indicates whether unmapped fields should be included in the response."
       }
-    },
-    "body":{
-      "description":"An index filter specified with the Query DSL"
     }
   }
 }
