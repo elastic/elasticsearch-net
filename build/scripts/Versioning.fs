@@ -133,12 +133,17 @@ module Versioning =
         printf "%O" packages
         
         packages
+        // do not validate versioned packages for now
+        |> Seq.filter(fun f -> not <| f.NugetId.EndsWith(sprintf ".v%i" version.Assembly.Major))
         |> Seq.iter(fun p ->
             let v = sprintf "%O+%s" version.Full (Information.getCurrentSHA1("."))
             // loading dlls is locked down on APPVEYOR so we can not assert release mode
-            let appVeyorArgs = if Environment.hasEnvironVar "APPVEYOR" then ["-r"; "true"] else []
+            let ciArgs =
+                let appVeyor = Environment.hasEnvironVar "APPVEYOR"
+                let azDevops = Environment.hasEnvironVar "TF_BUILD"
+                if  appVeyor || azDevops then ["-r"; "true"] else []
             ReposTooling.PackageValidator
-                <| [p.Package; "-v"; v; "-a"; p.AssemblyName; "-k"; officialToken] @ appVeyorArgs
+                <| [p.Package; "-v"; v; "-a"; p.AssemblyName; "-k"; officialToken] @ ciArgs
                 |> ignore 
             
             Zip.unzip tmp p.Package
