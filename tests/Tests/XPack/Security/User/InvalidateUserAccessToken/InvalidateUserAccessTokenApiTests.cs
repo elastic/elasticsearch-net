@@ -7,6 +7,7 @@ using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
@@ -69,8 +70,18 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 		protected override string CurrentAccessToken => "bad_password";
 
 		protected override bool ExpectIsValid => false;
-		protected override int ExpectStatusCode => 401;
+		protected override int ExpectStatusCode => TestClient.Configuration.InRange("<7.8.0") ? 401 : 404;
 
-		protected override void ExpectResponse(InvalidateUserAccessTokenResponse response) => response.ServerError.Should().NotBeNull();
+		protected override void ExpectResponse(InvalidateUserAccessTokenResponse response)
+		{
+			if (TestClient.Configuration.InRange("<7.8.0"))
+				response.ServerError.Should().NotBeNull();
+			else
+			{
+				response.InvalidatedTokens.Should().BeGreaterOrEqualTo(0);
+				response.PreviouslyInvalidatedTokens.Should().BeGreaterOrEqualTo(0);
+				response.ErrorCount.Should().BeGreaterOrEqualTo(0);
+			}
+		}
 	}
 }
