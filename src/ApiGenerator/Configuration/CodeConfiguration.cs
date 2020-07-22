@@ -36,49 +36,66 @@ namespace ApiGenerator.Configuration
 
 		public static string[] IgnoredApisHighLevel { get; } =
 		{
-			"autoscaling.delete_autoscaling_decision.json",
-			"autoscaling.get_autoscaling_policy.json",
-			"autoscaling.put_autoscaling_policy.json",
-			"autoscaling.delete_autoscaling_policy.json",
+			"dangling_indices.list_dangling_indices.json", // TODO: implement
+			"dangling_indices.import_dangling_index.json", // TODO: implement
+			"dangling_indices.delete_dangling_index.json", // TODO: implement
+			"indices.add_block.json", // TODO: implement
+			"indices.resolve_index.json", // TODO: implement
+			"security.clear_cached_privileges.json", // TODO: implement
+
+			"autoscaling.get_autoscaling_decision.json", // 7.7 experimental
+			"autoscaling.delete_autoscaling_decision.json", // experimental
+			"autoscaling.get_autoscaling_policy.json", // experimental
+			"autoscaling.put_autoscaling_policy.json", // experimental
+			"autoscaling.delete_autoscaling_policy.json", // experimental
+
 			"indices.delete_index_template.json",
 			"indices.exists_index_template.json",
 			"indices.get_index_template.json",
 			"indices.put_index_template.json",
+			"indices.simulate_index_template.json",
+			"indices.simulate_template.json",
+
 			"searchable_snapshots.stats.json",
 			"searchable_snapshots.clear_cache.json",
 			"searchable_snapshots.mount.json",
 			"searchable_snapshots.repository_stats.json",
 
-			"autoscaling.get_autoscaling_decision.json", // 7.7 experimental
-			"eql.search.json", // 7.7 beta
 			"get_script_context.json", // 7.7 experimental
 			"get_script_languages.json", // 7.7 experimental
-			// already removed on client
-			"indices.exist_type.json",
+
+			"indices.exist_type.json", // already removed on client
 			"indices.create_data_stream.json", // 7.7 experimental
 			"indices.delete_data_stream.json", // 7.7 experimental
+			"indices.get_data_stream.json", // 7.7 experimental
 			"indices.get_data_streams.json", // 7.7 experimental
-			"ml.delete_data_frame_analytics.json", // 7.7 experimental
+			"indices.data_streams_stats.json", // 7.7 experimental
+
 			"ml.delete_trained_model.json", // 7.7 experimental
 			"ml.evaluate_data_frame.json", // 7.7 experimental
 			"ml.explain_data_frame_analytics.json", // 7.7 experimental
 			"ml.find_file_structure.json", // 7.7 experimental
 			"ml.get_data_frame_analytics.json", // 7.7 experimental
 			"ml.get_data_frame_analytics_stats.json", // 7.7 experimental
+			"ml.delete_data_frame_analytics.json", // 7.7 experimental
 			"ml.get_trained_models.json", // 7.7 experimental
 			"ml.get_trained_models_stats.json", // 7.7 experimental
 			"ml.put_data_frame_analytics.json", // 7.7 experimental
 			"ml.put_trained_model.json", // 7.7 experimental
 			"ml.start_data_frame_analytics.json", // 7.7 experimental
 			"ml.stop_data_frame_analytics.json", // 7.7 experimental
+			"ml.update_data_frame_analytics.json", // 7.7 experimental
+
 			"rank_eval.json", // 7.7 experimental
 			"scripts_painless_context.json", // 7.7 experimental
+			"cluster.delete_component_template.json", // 7.8 experimental
+			"cluster.get_component_template.json", // 7.8 experimental
+			"cluster.put_component_template.json", // 7.8 experimental
+			"cluster.exists_component_template.json", // 7.8 experimental
 
-			// 7.7 - to be implemented
-			"cluster.delete_component_template.json",
-			"cluster.get_component_template.json",
-			"cluster.put_component_template.json",
-			"cluster.exists_component_template.json",
+			"eql.search.json", // 7.9 beta
+			"eql.get.json", // 7.9 beta
+			"eql.delete.json", // 7.9 beta
 		};
 
 		/// <summary>
