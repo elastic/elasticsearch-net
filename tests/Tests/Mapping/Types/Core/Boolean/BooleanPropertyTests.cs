@@ -23,7 +23,6 @@ namespace Tests.Mapping.Types.Core.Boolean
 					type = "boolean",
 					boost = 1.3,
 					doc_values = false,
-					similarity = "BM25",
 					store = true,
 					index = false,
 					null_value = false,
@@ -36,7 +35,6 @@ namespace Tests.Mapping.Types.Core.Boolean
 				.Name(p => p.Name)
 				.Boost(1.3)
 				.DocValues(false)
-				.Similarity("BM25")
 				.Store()
 				.Index(false)
 				.NullValue(false)
@@ -49,7 +47,6 @@ namespace Tests.Mapping.Types.Core.Boolean
 				{
 					DocValues = false,
 					Boost = 1.3,
-					Similarity = "BM25",
 					Store = true,
 					Index = false,
 					NullValue = false
