@@ -66,6 +66,8 @@ namespace Nest
 		public BulkDescriptor Pipeline(string pipeline) => Qs("pipeline", pipeline);
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public BulkDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		///<summary>Sets require_alias for all incoming documents. Defaults to unset (false)</summary>
+		public BulkDescriptor RequireAlias(bool? requirealias = true) => Qs("require_alias", requirealias);
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -884,6 +886,8 @@ namespace Nest
 		public IndexDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public IndexDescriptor<TDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		///<summary>When true, requires destination to be an alias. Default is false</summary>
+		public IndexDescriptor<TDocument> RequireAlias(bool? requirealias = true) => Qs("require_alias", requirealias);
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -1537,6 +1541,8 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> Lang(string lang) => Qs("lang", lang);
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		///<summary>When true, requires destination is an alias. Default is false</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> RequireAlias(bool? requirealias = true) => Qs("require_alias", requirealias);
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> RetryOnConflict(long? retryonconflict) => Qs("retry_on_conflict", retryonconflict);
 		///<summary>

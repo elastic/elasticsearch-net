@@ -555,7 +555,7 @@ namespace Nest
 	public partial interface IGetRoleRequest : IRequest<GetRoleRequestParameters>
 	{
 		[IgnoreDataMember]
-		Name Name
+		Names Name
 		{
 			get;
 		}
@@ -568,7 +568,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetRole;
 		///<summary>/_security/role/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
-		public GetRoleRequest(Name name): base(r => r.Optional("name", name))
+		public GetRoleRequest(Names name): base(r => r.Optional("name", name))
 		{
 		}
 
@@ -579,7 +579,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+		Names IGetRoleRequest.Name => Self.RouteValues.Get<Names>("name");
 	// Request parameters
 	}
 
@@ -587,7 +587,7 @@ namespace Nest
 	public partial interface IGetRoleMappingRequest : IRequest<GetRoleMappingRequestParameters>
 	{
 		[IgnoreDataMember]
-		Name Name
+		Names Name
 		{
 			get;
 		}
@@ -600,7 +600,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetRoleMapping;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
-		public GetRoleMappingRequest(Name name): base(r => r.Optional("name", name))
+		public GetRoleMappingRequest(Names name): base(r => r.Optional("name", name))
 		{
 		}
 
@@ -611,7 +611,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+		Names IGetRoleMappingRequest.Name => Self.RouteValues.Get<Names>("name");
 	// Request parameters
 	}
 

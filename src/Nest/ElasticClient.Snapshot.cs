@@ -39,25 +39,25 @@ namespace Nest.Specification.SnapshotApi
 		/// <summary>
 		/// <c>POST</c> request to the <c>snapshot.cleanup_repository</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html</a>
 		/// </summary>
 		public CleanupRepositoryResponse CleanupRepository(Name repository, Func<CleanupRepositoryDescriptor, ICleanupRepositoryRequest> selector = null) => CleanupRepository(selector.InvokeOrDefault(new CleanupRepositoryDescriptor(repository: repository)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>snapshot.cleanup_repository</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html</a>
 		/// </summary>
 		public Task<CleanupRepositoryResponse> CleanupRepositoryAsync(Name repository, Func<CleanupRepositoryDescriptor, ICleanupRepositoryRequest> selector = null, CancellationToken ct = default) => CleanupRepositoryAsync(selector.InvokeOrDefault(new CleanupRepositoryDescriptor(repository: repository)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>snapshot.cleanup_repository</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html</a>
 		/// </summary>
 		public CleanupRepositoryResponse CleanupRepository(ICleanupRepositoryRequest request) => DoRequest<ICleanupRepositoryRequest, CleanupRepositoryResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>snapshot.cleanup_repository</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html</a>
 		/// </summary>
 		public Task<CleanupRepositoryResponse> CleanupRepositoryAsync(ICleanupRepositoryRequest request, CancellationToken ct = default) => DoRequestAsync<ICleanupRepositoryRequest, CleanupRepositoryResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -113,13 +113,13 @@ namespace Nest.Specification.SnapshotApi
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public DeleteSnapshotResponse Delete(Name repository, Name snapshot, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null) => Delete(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository: repository, snapshot: snapshot)));
+		public DeleteSnapshotResponse Delete(Name repository, Names snapshot, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null) => Delete(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository: repository, snapshot: snapshot)));
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>snapshot.delete</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
 		/// </summary>
-		public Task<DeleteSnapshotResponse> DeleteAsync(Name repository, Name snapshot, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null, CancellationToken ct = default) => DeleteAsync(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository: repository, snapshot: snapshot)), ct);
+		public Task<DeleteSnapshotResponse> DeleteAsync(Name repository, Names snapshot, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null, CancellationToken ct = default) => DeleteAsync(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository: repository, snapshot: snapshot)), ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>snapshot.delete</c> API, read more about this API online:
 		/// <para></para>

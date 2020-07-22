@@ -41,7 +41,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for CleanupRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	///<summary>Request for CleanupRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html</para></summary>
 	public partial class CleanupRepositoryRequest : PlainRequestBase<CleanupRepositoryRequestParameters>, ICleanupRepositoryRequest
 	{
 		protected ICleanupRepositoryRequest Self => this;
@@ -195,7 +195,7 @@ namespace Nest
 		}
 
 		[IgnoreDataMember]
-		Name Snapshot
+		Names Snapshot
 		{
 			get;
 		}
@@ -209,7 +209,7 @@ namespace Nest
 		///<summary>/_snapshot/{repository}/{snapshot}</summary>
 		///<param name = "repository">this parameter is required</param>
 		///<param name = "snapshot">this parameter is required</param>
-		public DeleteSnapshotRequest(Name repository, Name snapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot))
+		public DeleteSnapshotRequest(Name repository, Names snapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
 		}
 
@@ -223,7 +223,7 @@ namespace Nest
 		[IgnoreDataMember]
 		Name IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		[IgnoreDataMember]
-		Name IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+		Names IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout

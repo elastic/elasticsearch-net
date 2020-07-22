@@ -117,6 +117,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.delete_datafeed", "datafeed_id")]
 		public Task<TResponse> DeleteDatafeedAsync<TResponse>(string datafeedId, DeleteDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ml/datafeeds/{datafeedId:datafeedId}"), ctx, null, RequestParams(requestParameters));
+		///<summary>DELETE on /_ml/_delete_expired_data/{job_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</para></summary>
+		///<param name = "jobId">The ID of the job(s) to perform expired data hygiene for</param>
+		///<param name = "body">deleting expired data parameters</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse DeleteExpiredData<TResponse>(string jobId, PostData body, DeleteExpiredDataRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_ml/_delete_expired_data/{jobId:jobId}"), body, RequestParams(requestParameters));
+		///<summary>DELETE on /_ml/_delete_expired_data/{job_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</para></summary>
+		///<param name = "jobId">The ID of the job(s) to perform expired data hygiene for</param>
+		///<param name = "body">deleting expired data parameters</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ml.delete_expired_data", "job_id, body")]
+		public Task<TResponse> DeleteExpiredDataAsync<TResponse>(string jobId, PostData body, DeleteExpiredDataRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ml/_delete_expired_data/{jobId:jobId}"), ctx, body, RequestParams(requestParameters));
 		///<summary>DELETE on /_ml/_delete_expired_data <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</para></summary>
 		///<param name = "body">deleting expired data parameters</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -862,6 +875,21 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.stop_datafeed", "datafeed_id")]
 		public Task<TResponse> StopDatafeedAsync<TResponse>(string datafeedId, StopDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_stop"), ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /_ml/data_frame/analytics/{id}/_update <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html</para></summary>
+		///<param name = "id">The ID of the data frame analytics to update</param>
+		///<param name = "body">The data frame analytics settings to update</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse UpdateDataFrameAnalytics<TResponse>(string id, PostData body, UpdateDataFrameAnalyticsRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/data_frame/analytics/{id:id}/_update"), body, RequestParams(requestParameters));
+		///<summary>POST on /_ml/data_frame/analytics/{id}/_update <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html</para></summary>
+		///<param name = "id">The ID of the data frame analytics to update</param>
+		///<param name = "body">The data frame analytics settings to update</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("ml.update_data_frame_analytics", "id, body")]
+		public Task<TResponse> UpdateDataFrameAnalyticsAsync<TResponse>(string id, PostData body, UpdateDataFrameAnalyticsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/data_frame/analytics/{id:id}/_update"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/datafeeds/{datafeed_id}/_update <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</para></summary>
 		///<param name = "datafeedId">The ID of the datafeed to update</param>
 		///<param name = "body">The datafeed update settings</param>

@@ -84,13 +84,13 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_snapshot/{repository:repository}"), ctx, body, RequestParams(requestParameters));
 		///<summary>DELETE on /_snapshot/{repository}/{snapshot} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
-		///<param name = "snapshot">A snapshot name</param>
+		///<param name = "snapshot">A comma-separated list of snapshot names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Delete<TResponse>(string repository, string snapshot, DeleteSnapshotRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_snapshot/{repository:repository}/{snapshot:snapshot}"), null, RequestParams(requestParameters));
 		///<summary>DELETE on /_snapshot/{repository}/{snapshot} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
-		///<param name = "snapshot">A snapshot name</param>
+		///<param name = "snapshot">A comma-separated list of snapshot names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("snapshot.delete", "repository, snapshot")]
 		public Task<TResponse> DeleteAsync<TResponse>(string repository, string snapshot, DeleteSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)

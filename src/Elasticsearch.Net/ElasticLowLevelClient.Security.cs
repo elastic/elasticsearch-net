@@ -76,6 +76,17 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		[MapsApi("security.change_password", "body")]
 		public Task<TResponse> ChangePasswordAsync<TResponse>(PostData body, ChangePasswordRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, "_security/user/_password", ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_security/privilege/{application}/_clear_cache <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html</para></summary>
+		///<param name = "application">A comma-separated list of application names</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse ClearCachedPrivileges<TResponse>(string application, ClearCachedPrivilegesRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_security/privilege/{application:application}/_clear_cache"), null, RequestParams(requestParameters));
+		///<summary>POST on /_security/privilege/{application}/_clear_cache <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html</para></summary>
+		///<param name = "application">A comma-separated list of application names</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("security.clear_cached_privileges", "application")]
+		public Task<TResponse> ClearCachedPrivilegesAsync<TResponse>(string application, ClearCachedPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_security/privilege/{application:application}/_clear_cache"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_security/realm/{realms}/_clear_cache <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</para></summary>
 		///<param name = "realms">Comma-separated list of realms to clear</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -229,12 +240,12 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		public Task<TResponse> GetPrivilegesAsync<TResponse>(string application, string name, GetPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_security/privilege/{application:application}/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_security/role/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</para></summary>
-		///<param name = "name">Role name</param>
+		///<param name = "name">A comma-separated list of role names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetRole<TResponse>(string name, GetRoleRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_security/role/{name:name}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_security/role/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</para></summary>
-		///<param name = "name">Role name</param>
+		///<param name = "name">A comma-separated list of role names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("security.get_role", "name")]
 		public Task<TResponse> GetRoleAsync<TResponse>(string name, GetRoleRequestParameters requestParameters = null, CancellationToken ctx = default)
@@ -249,12 +260,12 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		public Task<TResponse> GetRoleAsync<TResponse>(GetRoleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_security/role", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_security/role_mapping/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</para></summary>
-		///<param name = "name">Role-Mapping name</param>
+		///<param name = "name">A comma-separated list of role-mapping names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetRoleMapping<TResponse>(string name, GetRoleMappingRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_security/role_mapping/{name:name}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_security/role_mapping/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</para></summary>
-		///<param name = "name">Role-Mapping name</param>
+		///<param name = "name">A comma-separated list of role-mapping names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("security.get_role_mapping", "name")]
 		public Task<TResponse> GetRoleMappingAsync<TResponse>(string name, GetRoleMappingRequestParameters requestParameters = null, CancellationToken ctx = default)

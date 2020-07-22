@@ -92,6 +92,13 @@ namespace Nest
 			set => Q("refresh", value);
 		}
 
+		///<summary>Sets require_alias for all incoming documents. Defaults to unset (false)</summary>
+		public bool? RequireAlias
+		{
+			get => Q<bool? >("require_alias");
+			set => Q("require_alias", value);
+		}
+
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -1890,6 +1897,13 @@ namespace Nest
 			set => Q("refresh", value);
 		}
 
+		///<summary>When true, requires destination to be an alias. Default is false</summary>
+		public bool? RequireAlias
+		{
+			get => Q<bool? >("require_alias");
+			set => Q("require_alias", value);
+		}
+
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -3311,6 +3325,13 @@ namespace Nest
 		{
 			get => Q<Refresh? >("refresh");
 			set => Q("refresh", value);
+		}
+
+		///<summary>When true, requires destination is an alias. Default is false</summary>
+		public bool? RequireAlias
+		{
+			get => Q<bool? >("require_alias");
+			set => Q("require_alias", value);
 		}
 
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
