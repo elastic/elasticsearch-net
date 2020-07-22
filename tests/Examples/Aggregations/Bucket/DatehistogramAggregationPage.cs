@@ -2,23 +2,34 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
+using Elasticsearch.Net;
 
 namespace Examples.Aggregations.Bucket
 {
 	public class DatehistogramAggregationPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:119")]
 		public void Line119()
 		{
 			// tag::b789292f9cf63ce912e058c46d90ce20[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("sales")
+				.Size(0)
+				.Aggregations(a => a
+					.DateHistogram("sales_over_time", d => d
+						.Field("date")
+						.CalendarInterval(DateInterval.Month)
+					)
+				)
+			);
 			// end::b789292f9cf63ce912e058c46d90ce20[]
 
-			response0.MatchesExample(@"POST /sales/_search?size=0
+			searchResponse.MatchesExample(@"POST /sales/_search?size=0
 			{
 			    ""aggs"" : {
 			        ""sales_over_time"" : {
@@ -28,18 +39,30 @@ namespace Examples.Aggregations.Bucket
 			            }
 			        }
 			    }
-			}");
+			}", e =>
+			{
+				e.MoveQueryStringToBody("size", 0);
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:138")]
 		public void Line138()
 		{
 			// tag::73e5c88ad1488b213fb278ee1cb42289[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("sales")
+				.Size(0)
+				.Aggregations(a => a
+					.DateHistogram("sales_over_time", d => d
+						.Field("date")
+						.CalendarInterval("2d")
+					)
+				)
+			);
 			// end::73e5c88ad1488b213fb278ee1cb42289[]
 
-			response0.MatchesExample(@"POST /sales/_search?size=0
+			searchResponse.MatchesExample(@"POST /sales/_search?size=0
 			{
 			    ""aggs"" : {
 			        ""sales_over_time"" : {
@@ -49,18 +72,30 @@ namespace Examples.Aggregations.Bucket
 			            }
 			        }
 			    }
-			}");
+			}", e =>
+			{
+				e.MoveQueryStringToBody("size", 0);
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:214")]
 		public void Line214()
 		{
 			// tag::09ecba5814d71e4c44468575eada9878[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("sales")
+				.Size(0)
+				.Aggregations(a => a
+					.DateHistogram("sales_over_time", d => d
+						.Field("date")
+						.FixedInterval("30d")
+					)
+				)
+			);
 			// end::09ecba5814d71e4c44468575eada9878[]
 
-			response0.MatchesExample(@"POST /sales/_search?size=0
+			searchResponse.MatchesExample(@"POST /sales/_search?size=0
 			{
 			    ""aggs"" : {
 			        ""sales_over_time"" : {
@@ -70,18 +105,30 @@ namespace Examples.Aggregations.Bucket
 			            }
 			        }
 			    }
-			}");
+			}", e =>
+			{
+				e.MoveQueryStringToBody("size", 0);
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U(Skip="w units are not valid for fixed interval")]
 		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:232")]
 		public void Line232()
 		{
 			// tag::2bb2339ac055337abf753bddb7771659[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("sales")
+				.Size(0)
+				.Aggregations(a => a
+					.DateHistogram("sales_over_time", d => d
+						.Field("date")
+						.FixedInterval("2w")
+					)
+				)
+			);
 			// end::2bb2339ac055337abf753bddb7771659[]
 
-			response0.MatchesExample(@"POST /sales/_search?size=0
+			searchResponse.MatchesExample(@"POST /sales/_search?size=0
 			{
 			    ""aggs"" : {
 			        ""sales_over_time"" : {
@@ -94,15 +141,25 @@ namespace Examples.Aggregations.Bucket
 			}");
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:303")]
 		public void Line303()
 		{
 			// tag::8a355eb25d2a01ba62dc1a22dd46f46f[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("sales")
+				.Size(0)
+				.Aggregations(a => a
+					.DateHistogram("sales_over_time", d => d
+						.Field("date")
+						.CalendarInterval("1M")
+						.Format("yyyy-MM-dd")
+					)
+				)
+			);
 			// end::8a355eb25d2a01ba62dc1a22dd46f46f[]
 
-			response0.MatchesExample(@"POST /sales/_search?size=0
+			searchResponse.MatchesExample(@"POST /sales/_search?size=0
 			{
 			    ""aggs"" : {
 			        ""sales_over_time"" : {
@@ -113,32 +170,50 @@ namespace Examples.Aggregations.Bucket
 			            }
 			        }
 			    }
-			}");
+			}", e =>
+			{
+				e.MoveQueryStringToBody("size", 0);
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:380")]
 		public void Line380()
 		{
 			// tag::70f0aa5853697e265ef3b1df72940951[]
-			var response0 = new SearchResponse<object>();
+			var indexResponse1 = client.Index(new
+			{
+				date = "2015-10-01T00:30:00Z"
+			}, i => i.Index("my_index").Id(1).Refresh(Refresh.True));
 
-			var response1 = new SearchResponse<object>();
+			var indexResponse2 = client.Index(new
+			{
+				date = "2015-10-01T01:30:00Z"
+			}, i => i.Index("my_index").Id(2).Refresh(Refresh.True));
 
-			var response2 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("my_index")
+				.Size(0)
+				.Aggregations(a => a
+					.DateHistogram("by_day", d => d
+						.Field("date")
+						.CalendarInterval(DateInterval.Day)
+					)
+				)
+			);
 			// end::70f0aa5853697e265ef3b1df72940951[]
 
-			response0.MatchesExample(@"PUT my_index/_doc/1?refresh
+			indexResponse1.MatchesExample(@"PUT my_index/_doc/1?refresh
 			{
 			  ""date"": ""2015-10-01T00:30:00Z""
-			}");
+			}", e => e.Uri.Query = e.Uri.Query.Replace("refresh", "refresh=true"));
 
-			response1.MatchesExample(@"PUT my_index/_doc/2?refresh
+			indexResponse2.MatchesExample(@"PUT my_index/_doc/2?refresh
 			{
 			  ""date"": ""2015-10-01T01:30:00Z""
-			}");
+			}", e => e.Uri.Query = e.Uri.Query.Replace("refresh", "refresh=true"));
 
-			response2.MatchesExample(@"GET my_index/_search?size=0
+			searchResponse.MatchesExample(@"GET my_index/_search?size=0
 			{
 			  ""aggs"": {
 			    ""by_day"": {
@@ -148,18 +223,31 @@ namespace Examples.Aggregations.Bucket
 			      }
 			    }
 			  }
-			}");
+			}", e =>
+			{
+				e.MoveQueryStringToBody("size", 0);
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:431")]
 		public void Line431()
 		{
 			// tag::8de3206f80e18185a5ad6481f4c2ee07[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("my_index")
+				.Size(0)
+				.Aggregations(a => a
+					.DateHistogram("by_day", d => d
+						.Field("date")
+						.CalendarInterval(DateInterval.Day)
+						.TimeZone("-01:00")
+					)
+				)
+			);
 			// end::8de3206f80e18185a5ad6481f4c2ee07[]
 
-			response0.MatchesExample(@"GET my_index/_search?size=0
+			searchResponse.MatchesExample(@"GET my_index/_search?size=0
 			{
 			  ""aggs"": {
 			    ""by_day"": {
@@ -170,32 +258,51 @@ namespace Examples.Aggregations.Bucket
 			      }
 			    }
 			  }
-			}");
+			}", e =>
+			{
+				e.MoveQueryStringToBody("size", 0);
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:502")]
 		public void Line502()
 		{
 			// tag::aa6bfe54e2436eb668091fe31c2fbf4d[]
-			var response0 = new SearchResponse<object>();
+			var indexResponse1 = client.Index(new
+			{
+				date = "2015-10-01T05:30:00Z"
+			}, i => i.Index("my_index").Id(1).Refresh(Refresh.True));
 
-			var response1 = new SearchResponse<object>();
+			var indexResponse2 = client.Index(new
+			{
+				date = "2015-10-01T06:30:00Z"
+			}, i => i.Index("my_index").Id(2).Refresh(Refresh.True));
 
-			var response2 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("my_index")
+				.Size(0)
+				.Aggregations(a => a
+					.DateHistogram("by_day", d => d
+						.Field("date")
+						.CalendarInterval(DateInterval.Day)
+						.Offset("+6h")
+					)
+				)
+			);
 			// end::aa6bfe54e2436eb668091fe31c2fbf4d[]
 
-			response0.MatchesExample(@"PUT my_index/_doc/1?refresh
+			indexResponse1.MatchesExample(@"PUT my_index/_doc/1?refresh
 			{
 			  ""date"": ""2015-10-01T05:30:00Z""
-			}");
+			}", e => e.Uri.Query = e.Uri.Query.Replace("refresh", "refresh=true"));
 
-			response1.MatchesExample(@"PUT my_index/_doc/2?refresh
+			indexResponse2.MatchesExample(@"PUT my_index/_doc/2?refresh
 			{
 			  ""date"": ""2015-10-01T06:30:00Z""
-			}");
+			}", e => e.Uri.Query = e.Uri.Query.Replace("refresh", "refresh=true"));
 
-			response2.MatchesExample(@"GET my_index/_search?size=0
+			searchResponse.MatchesExample(@"GET my_index/_search?size=0
 			{
 			  ""aggs"": {
 			    ""by_day"": {
@@ -206,18 +313,32 @@ namespace Examples.Aggregations.Bucket
 			      }
 			    }
 			  }
-			}");
+			}", e =>
+			{
+				e.MoveQueryStringToBody("size", 0);
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U(Skip = "Keyed is not supported by the client as deserialization of buckets does not support the keyed format")]
 		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:567")]
 		public void Line567()
 		{
 			// tag::9524a9b7373fa4eb2905183b0e806962[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("my_index")
+				.Size(0)
+				.Aggregations(a => a
+					.DateHistogram("by_day", d => d
+						.Field("date")
+						.CalendarInterval(new DateMathTime(1, DateMathTimeUnit.Month))
+						.TimeZone("yyyy-MM-dd")
+						//.Keyed()
+					)
+				)
+			);
 			// end::9524a9b7373fa4eb2905183b0e806962[]
 
-			response0.MatchesExample(@"POST /sales/_search?size=0
+			searchResponse.MatchesExample(@"POST /sales/_search?size=0
 			{
 			    ""aggs"" : {
 			        ""sales_over_time"" : {
@@ -229,18 +350,31 @@ namespace Examples.Aggregations.Bucket
 			            }
 			        }
 			    }
-			}");
+			}", (e, b) =>
+			{
+				e.MoveQueryStringToBody("size", 0);
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:636")]
 		public void Line636()
 		{
 			// tag::39a6a038c4b551022afe83de0523634e[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("sales")
+				.Size(0)
+				.Aggregations(a => a
+					.DateHistogram("sale_date", d => d
+						.Field("date")
+						.CalendarInterval(DateInterval.Year)
+						.Missing(new DateTime(2000, 1, 1))
+					)
+				)
+			);
 			// end::39a6a038c4b551022afe83de0523634e[]
 
-			response0.MatchesExample(@"POST /sales/_search?size=0
+			searchResponse.MatchesExample(@"POST /sales/_search?size=0
 			{
 			    ""aggs"" : {
 			        ""sale_date"" : {
@@ -251,18 +385,34 @@ namespace Examples.Aggregations.Bucket
 			             }
 			         }
 			    }
-			}");
+			}", (e, b) =>
+			{
+				e.Uri.Query = e.Uri.Query.Replace("size=0", string.Empty);
+				b["size"] = 0;
+				b["aggs"]["sale_date"]["date_histogram"]["missing"] = "2000-01-01T00:00:00";
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/datehistogram-aggregation.asciidoc:669")]
 		public void Line669()
 		{
 			// tag::6faf10a73f7d5fffbcb037bdb2cbaff8[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("sales")
+				.Size(0)
+				.Aggregations(a => a
+					.Terms("dayOfWeek", d => d
+						.Script(sc => sc
+							.Source("doc['date'].value.dayOfWeekEnum.value")
+							.Lang("painless")
+						)
+					)
+				)
+			);
 			// end::6faf10a73f7d5fffbcb037bdb2cbaff8[]
 
-			response0.MatchesExample(@"POST /sales/_search?size=0
+			searchResponse.MatchesExample(@"POST /sales/_search?size=0
 			{
 			    ""aggs"": {
 			        ""dayOfWeek"": {
@@ -274,7 +424,10 @@ namespace Examples.Aggregations.Bucket
 			            }
 			        }
 			    }
-			}");
+			}", e =>
+			{
+				e.MoveQueryStringToBody("size", 0);
+			});
 		}
 	}
 }

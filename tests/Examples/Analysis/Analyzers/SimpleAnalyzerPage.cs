@@ -11,8 +11,8 @@ namespace Examples.Analysis.Analyzers
 	public class SimpleAnalyzerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/simple-analyzer.asciidoc:11")]
-		public void Line11()
+		[Description("analysis/analyzers/simple-analyzer.asciidoc:15")]
+		public void Line15()
 		{
 			// tag::1ea24f67fbbb6293d53caf2fe0c4b984[]
 			var response0 = new SearchResponse<object>();
@@ -26,21 +26,21 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/simple-analyzer.asciidoc:135")]
-		public void Line135()
+		[Description("analysis/analyzers/simple-analyzer.asciidoc:134")]
+		public void Line134()
 		{
-			// tag::432ab6ff7cfe06988dda436907218cc5[]
+			// tag::27bb04d77cbaab09d25fed6dec70835e[]
 			var response0 = new SearchResponse<object>();
-			// end::432ab6ff7cfe06988dda436907218cc5[]
+			// end::27bb04d77cbaab09d25fed6dec70835e[]
 
-			response0.MatchesExample(@"PUT /simple_example
+			response0.MatchesExample(@"PUT /my_index
 			{
 			  ""settings"": {
 			    ""analysis"": {
 			      ""analyzer"": {
-			        ""rebuilt_simple"": {
+			        ""my_custom_simple_analyzer"": {
 			          ""tokenizer"": ""lowercase"",
-			          ""filter"": [         \<1>
+			          ""filter"": [                          <1>
 			          ]
 			        }
 			      }

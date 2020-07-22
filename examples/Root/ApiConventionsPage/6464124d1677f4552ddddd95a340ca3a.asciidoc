@@ -1,0 +1,46 @@
+// api-conventions.asciidoc:353
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line353 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Root/ApiConventionsPage.cs#L139-L203.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
+////
+
+[source, csharp]
+----
+var indexResponse1 = client.Index(new
+{
+    title = "Book #1",
+    rating = 200.1
+}, i => i.Index("library").Refresh(Refresh.True));
+
+var indexResponse2 = client.Index(new
+{
+    title = "Book #2",
+    rating = 1.7
+}, i => i.Index("library").Refresh(Refresh.True));
+
+var indexResponse3 = client.Index(new
+{
+    title = "Book #3",
+    rating = 0.1
+}, i => i.Index("library").Refresh(Refresh.True));
+
+var searchResponse = client.Search<object>(s => s
+    .AllIndices()
+    .FilterPath("hits.hits._source") //<1>
+    .Source(so => so
+        .Includes(f => f.Field("title"))
+    )
+    .Sort(so => so
+        .Field("rating", SortOrder.Descending)
+    )
+);
+----
+<1> Using filter path can result in a response that cannot be parsed by the client's serializer. In these cases, using the low level client and parsing the JSON response may be preferred.

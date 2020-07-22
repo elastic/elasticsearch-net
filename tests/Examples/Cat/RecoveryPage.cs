@@ -11,8 +11,8 @@ namespace Examples.Cat
 	public class RecoveryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("cat/recovery.asciidoc:67")]
-		public void Line67()
+		[Description("cat/recovery.asciidoc:75")]
+		public void Line75()
 		{
 			// tag::0497361415e63295f2151b34818ad1ab[]
 			var response0 = new SearchResponse<object>();
@@ -22,8 +22,8 @@ namespace Examples.Cat
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cat/recovery.asciidoc:96")]
-		public void Line96()
+		[Description("cat/recovery.asciidoc:104")]
+		public void Line104()
 		{
 			// tag::be9390dd19d724364b72bf081b3593d7[]
 			var response0 = new SearchResponse<object>();
@@ -33,8 +33,8 @@ namespace Examples.Cat
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cat/recovery.asciidoc:126")]
-		public void Line126()
+		[Description("cat/recovery.asciidoc:134")]
+		public void Line134()
 		{
 			// tag::a213728fa704ca23c5983809332d3fb3[]
 			var response0 = new SearchResponse<object>();

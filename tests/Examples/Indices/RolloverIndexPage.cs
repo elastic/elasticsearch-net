@@ -59,44 +59,42 @@ namespace Examples.Indices
 		[Description("indices/rollover-index.asciidoc:229")]
 		public void Line229()
 		{
-			// tag::e526bfa0fd5ee08891a1d0320e4a8040[]
+			// tag::af1000ebe7d479c20b3062b184f02870[]
 			var response0 = new SearchResponse<object>();
-			// end::e526bfa0fd5ee08891a1d0320e4a8040[]
+			// end::af1000ebe7d479c20b3062b184f02870[]
 
 			response0.MatchesExample(@"PUT _index_template/template
 			{
 			  ""index_patterns"": [""my-data-stream*""],
-			  ""data_stream"": {
-			    ""timestamp_field"": ""@timestamp""
-			  }
+			  ""data_stream"": { }
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/rollover-index.asciidoc:241")]
-		public void Line241()
+		[Description("indices/rollover-index.asciidoc:239")]
+		public void Line239()
 		{
-			// tag::3ed90a5c0913c6e6b55622e3e9cbc9d6[]
+			// tag::87cb62fe881c8d50bcb229e8e1ab2c08[]
 			var response0 = new SearchResponse<object>();
 
 			var response1 = new SearchResponse<object>();
-			// end::3ed90a5c0913c6e6b55622e3e9cbc9d6[]
+			// end::87cb62fe881c8d50bcb229e8e1ab2c08[]
 
 			response0.MatchesExample(@"PUT /_data_stream/my-data-stream <1>");
 
 			response1.MatchesExample(@"POST /my-data-stream/_rollover <2>
 			{
 			  ""conditions"" : {
-			  ""max_age"": ""7d"",
-			  ""max_docs"": 1000,
-			  ""max_size"": ""5gb""
+			    ""max_age"": ""7d"",
+			    ""max_docs"": 1000,
+			    ""max_size"": ""5gb""
 			  }
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/rollover-index.asciidoc:315")]
-		public void Line315()
+		[Description("indices/rollover-index.asciidoc:313")]
+		public void Line313()
 		{
 			// tag::75f887596c4972bc679929ca996698f2[]
 			var response0 = new SearchResponse<object>();
@@ -125,8 +123,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/rollover-index.asciidoc:352")]
-		public void Line352()
+		[Description("indices/rollover-index.asciidoc:350")]
+		public void Line350()
 		{
 			// tag::659247d91f61ceb17cbcc60801fd3456[]
 			var response0 = new SearchResponse<object>();
@@ -143,8 +141,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/rollover-index.asciidoc:375")]
-		public void Line375()
+		[Description("indices/rollover-index.asciidoc:373")]
+		public void Line373()
 		{
 			// tag::8f6ef669c09e0c8bfc2731f422471770[]
 			var response0 = new SearchResponse<object>();
@@ -179,8 +177,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/rollover-index.asciidoc:434")]
-		public void Line434()
+		[Description("indices/rollover-index.asciidoc:432")]
+		public void Line432()
 		{
 			// tag::03584e88046614ec7727db506d866f48[]
 			var response0 = new SearchResponse<object>();
@@ -190,8 +188,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/rollover-index.asciidoc:449")]
-		public void Line449()
+		[Description("indices/rollover-index.asciidoc:447")]
+		public void Line447()
 		{
 			// tag::896eb7487a512fc43a2af7e16717f40d[]
 			var response0 = new SearchResponse<object>();
@@ -208,8 +206,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/rollover-index.asciidoc:477")]
-		public void Line477()
+		[Description("indices/rollover-index.asciidoc:475")]
+		public void Line475()
 		{
 			// tag::9e9a3ad495e6305563a88dd4c74a5fda[]
 			var response0 = new SearchResponse<object>();

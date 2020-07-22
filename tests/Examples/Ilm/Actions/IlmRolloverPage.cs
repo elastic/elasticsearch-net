@@ -7,8 +7,8 @@ namespace Examples.Ilm.Actions
 	public class IlmRolloverPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/actions/ilm-rollover.asciidoc:25")]
-		public void Line25()
+		[Description("ilm/actions/ilm-rollover.asciidoc:30")]
+		public void Line30()
 		{
 			// tag::d7e7489b7d176aa854dfc785a12feab3[]
 			var response0 = new SearchResponse<object>();
@@ -29,8 +29,8 @@ namespace Examples.Ilm.Actions
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/actions/ilm-rollover.asciidoc:74")]
-		public void Line74()
+		[Description("ilm/actions/ilm-rollover.asciidoc:79")]
+		public void Line79()
 		{
 			// tag::19211ccf772f1dee7b500c21f4a9a805[]
 			var response0 = new SearchResponse<object>();
@@ -53,8 +53,8 @@ namespace Examples.Ilm.Actions
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/actions/ilm-rollover.asciidoc:97")]
-		public void Line97()
+		[Description("ilm/actions/ilm-rollover.asciidoc:102")]
+		public void Line102()
 		{
 			// tag::cfd4b34f35e531a20739a3b308d57134[]
 			var response0 = new SearchResponse<object>();
@@ -77,8 +77,8 @@ namespace Examples.Ilm.Actions
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/actions/ilm-rollover.asciidoc:120")]
-		public void Line120()
+		[Description("ilm/actions/ilm-rollover.asciidoc:125")]
+		public void Line125()
 		{
 			// tag::d4a41fb74b41b41a0ee114a2311f2815[]
 			var response0 = new SearchResponse<object>();
@@ -101,8 +101,8 @@ namespace Examples.Ilm.Actions
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/actions/ilm-rollover.asciidoc:145")]
-		public void Line145()
+		[Description("ilm/actions/ilm-rollover.asciidoc:150")]
+		public void Line150()
 		{
 			// tag::8940f2b911220acc9afef6360b6c13c4[]
 			var response0 = new SearchResponse<object>();
@@ -126,8 +126,8 @@ namespace Examples.Ilm.Actions
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/actions/ilm-rollover.asciidoc:173")]
-		public void Line173()
+		[Description("ilm/actions/ilm-rollover.asciidoc:178")]
+		public void Line178()
 		{
 			// tag::f6c79fa1c01bb4539d0cba0bd62c1ce0[]
 			var response0 = new SearchResponse<object>();

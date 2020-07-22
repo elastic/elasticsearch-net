@@ -11,8 +11,8 @@ namespace Examples.Analysis.Analyzers
 	public class LangAnalyzerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:82")]
-		public void Line82()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:85")]
+		public void Line85()
 		{
 			// tag::137c62a4443bdd7d5b95a15022a9dc30[]
 			var response0 = new SearchResponse<object>();
@@ -55,8 +55,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:132")]
-		public void Line132()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:135")]
+		public void Line135()
 		{
 			// tag::f7dc2fed08e57abda2c3e8a14f8eb098[]
 			var response0 = new SearchResponse<object>();
@@ -97,8 +97,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:180")]
-		public void Line180()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:183")]
+		public void Line183()
 		{
 			// tag::01f50acf7998b24969f451e922d145eb[]
 			var response0 = new SearchResponse<object>();
@@ -139,8 +139,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:228")]
-		public void Line228()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:231")]
+		public void Line231()
 		{
 			// tag::496d35c89dc991a1509f7e8fb93ade45[]
 			var response0 = new SearchResponse<object>();
@@ -184,8 +184,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:279")]
-		public void Line279()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:282")]
+		public void Line282()
 		{
 			// tag::13670d1534125831c2059eebd86d840c[]
 			var response0 = new SearchResponse<object>();
@@ -226,8 +226,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:327")]
-		public void Line327()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:330")]
+		public void Line330()
 		{
 			// tag::d0378fe5e3aad05a2fd2e6e81213374f[]
 			var response0 = new SearchResponse<object>();
@@ -268,8 +268,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:375")]
-		public void Line375()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:378")]
+		public void Line378()
 		{
 			// tag::7ab968a61bb0783f563dd6d29b253901[]
 			var response0 = new SearchResponse<object>();
@@ -316,8 +316,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:432")]
-		public void Line432()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:435")]
+		public void Line435()
 		{
 			// tag::d305110a8cabfbebd1e38d85559d1023[]
 			var response0 = new SearchResponse<object>();
@@ -356,8 +356,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:478")]
-		public void Line478()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:481")]
+		public void Line481()
 		{
 			// tag::a28111cdd9b5aaea96c779cbfbf38780[]
 			var response0 = new SearchResponse<object>();
@@ -398,8 +398,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:526")]
-		public void Line526()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:529")]
+		public void Line529()
 		{
 			// tag::ed85ed833bec7286a0dfbe64077c5715[]
 			var response0 = new SearchResponse<object>();
@@ -440,8 +440,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:574")]
-		public void Line574()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:577")]
+		public void Line577()
 		{
 			// tag::10d8b17e73d31dcd907de67327ed78a2[]
 			var response0 = new SearchResponse<object>();
@@ -492,8 +492,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:632")]
-		public void Line632()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:635")]
+		public void Line635()
 		{
 			// tag::81c7a392efd505b686eed978fb7d9d17[]
 			var response0 = new SearchResponse<object>();
@@ -539,8 +539,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:685")]
-		public void Line685()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:688")]
+		public void Line688()
 		{
 			// tag::2f4e28c81db47547ad39d0926babab12[]
 			var response0 = new SearchResponse<object>();
@@ -581,8 +581,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:733")]
-		public void Line733()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:736")]
+		public void Line736()
 		{
 			// tag::85f0e5e8ab91ceab63c21dbedd9f4037[]
 			var response0 = new SearchResponse<object>();
@@ -623,8 +623,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:781")]
-		public void Line781()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:784")]
+		public void Line784()
 		{
 			// tag::f545bb95214769aca993c1632a71ad2c[]
 			var response0 = new SearchResponse<object>();
@@ -675,8 +675,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:839")]
-		public void Line839()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:842")]
+		public void Line842()
 		{
 			// tag::9606c271921cb800d5ea395b16d6ceaf[]
 			var response0 = new SearchResponse<object>();
@@ -717,8 +717,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:887")]
-		public void Line887()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:890")]
+		public void Line890()
 		{
 			// tag::187e8786e0a90f1f6278cf89b670de0a[]
 			var response0 = new SearchResponse<object>();
@@ -760,8 +760,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:936")]
-		public void Line936()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:939")]
+		public void Line939()
 		{
 			// tag::1f00e73c144603e97f6c14ab15fa1913[]
 			var response0 = new SearchResponse<object>();
@@ -806,8 +806,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:988")]
-		public void Line988()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:991")]
+		public void Line991()
 		{
 			// tag::af00a58d9171d32f6efe52d94e51e526[]
 			var response0 = new SearchResponse<object>();
@@ -851,8 +851,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1039")]
-		public void Line1039()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1042")]
+		public void Line1042()
 		{
 			// tag::84108653e9e03b4edacd878ec870df77[]
 			var response0 = new SearchResponse<object>();
@@ -893,8 +893,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1088")]
-		public void Line1088()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1091")]
+		public void Line1091()
 		{
 			// tag::eb5987b58dae90c3a8a1609410be0570[]
 			var response0 = new SearchResponse<object>();
@@ -935,8 +935,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1136")]
-		public void Line1136()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1139")]
+		public void Line1139()
 		{
 			// tag::160f39a50847bad0be4be1529a95e4ce[]
 			var response0 = new SearchResponse<object>();
@@ -993,8 +993,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1200")]
-		public void Line1200()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1203")]
+		public void Line1203()
 		{
 			// tag::00e0c964c79fcc1876ab957da2ffce82[]
 			var response0 = new SearchResponse<object>();
@@ -1046,8 +1046,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1259")]
-		public void Line1259()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1262")]
+		public void Line1262()
 		{
 			// tag::d983c1ea730eeabac9e914656d7c9be2[]
 			var response0 = new SearchResponse<object>();
@@ -1088,8 +1088,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1307")]
-		public void Line1307()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1310")]
+		public void Line1310()
 		{
 			// tag::bb067c049331cc850a77b18bdfff81b5[]
 			var response0 = new SearchResponse<object>();
@@ -1130,8 +1130,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1355")]
-		public void Line1355()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1358")]
+		public void Line1358()
 		{
 			// tag::2731a8577ad734a732d784c5dcb1225d[]
 			var response0 = new SearchResponse<object>();
@@ -1172,8 +1172,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1403")]
-		public void Line1403()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1406")]
+		public void Line1406()
 		{
 			// tag::d1a285aa244ec461d68f13e7078a33c0[]
 			var response0 = new SearchResponse<object>();
@@ -1214,8 +1214,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1449")]
-		public void Line1449()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1452")]
+		public void Line1452()
 		{
 			// tag::584f502cf840134f2db5f39e2483ced1[]
 			var response0 = new SearchResponse<object>();
@@ -1256,8 +1256,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1497")]
-		public void Line1497()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1500")]
+		public void Line1500()
 		{
 			// tag::1ba7afe23a26fe9ac7856d8c5bc1059d[]
 			var response0 = new SearchResponse<object>();
@@ -1298,8 +1298,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1546")]
-		public void Line1546()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1549")]
+		public void Line1549()
 		{
 			// tag::d260225cf97e068ead2a8a6bb5aefd90[]
 			var response0 = new SearchResponse<object>();
@@ -1340,8 +1340,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1594")]
-		public void Line1594()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1597")]
+		public void Line1597()
 		{
 			// tag::320645d771e952af2a67bb7445c3688d[]
 			var response0 = new SearchResponse<object>();
@@ -1384,8 +1384,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1644")]
-		public void Line1644()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1647")]
+		public void Line1647()
 		{
 			// tag::327466380bcd55361973b4a96c6dccb2[]
 			var response0 = new SearchResponse<object>();
@@ -1426,8 +1426,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1692")]
-		public void Line1692()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1695")]
+		public void Line1695()
 		{
 			// tag::f097c02541056f3c0fc855e7bbeef8a8[]
 			var response0 = new SearchResponse<object>();
@@ -1468,8 +1468,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1740")]
-		public void Line1740()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1743")]
+		public void Line1743()
 		{
 			// tag::103296e16b4233926ad1f07360385606[]
 			var response0 = new SearchResponse<object>();
@@ -1515,8 +1515,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/lang-analyzer.asciidoc:1793")]
-		public void Line1793()
+		[Description("analysis/analyzers/lang-analyzer.asciidoc:1796")]
+		public void Line1796()
 		{
 			// tag::346f28d82acb5427c304aa574fea0008[]
 			var response0 = new SearchResponse<object>();

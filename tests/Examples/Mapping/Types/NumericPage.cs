@@ -10,15 +10,33 @@ namespace Examples.Mapping.Types
 {
 	public class NumericPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("mapping/types/numeric.asciidoc:22")]
 		public void Line22()
 		{
 			// tag::a71c438cc4df1cafe3109ccff475afdb[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("my_index", c => c
+				.Map(m => m
+					.Properties(p => p
+						.Number(n => n
+							.Name("number_of_bytes")
+							.Type(NumberType.Integer)
+						)
+						.Number(n => n
+							.Name("time_in_seconds")
+							.Type(NumberType.Float)
+						)
+						.Number(n => n
+							.Name("price")
+							.Type(NumberType.ScaledFloat)
+							.ScalingFactor(100)
+						)
+					)
+				)
+			);
 			// end::a71c438cc4df1cafe3109ccff475afdb[]
 
-			response0.MatchesExample(@"PUT my_index
+			createIndexResponse.MatchesExample(@"PUT my_index
 			{
 			  ""mappings"": {
 			    ""properties"": {
@@ -34,7 +52,10 @@ namespace Examples.Mapping.Types
 			      }
 			    }
 			  }
-			}");
+			}", (e, b) =>
+			{
+				b["mappings"]["properties"]["price"]["scaling_factor"] = 100d;
+			});
 		}
 	}
 }

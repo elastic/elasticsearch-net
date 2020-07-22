@@ -11,8 +11,8 @@ namespace Examples.SnapshotRestore
 	public class RegisterRepositoryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/register-repository.asciidoc:24")]
-		public void Line24()
+		[Description("snapshot-restore/register-repository.asciidoc:25")]
+		public void Line25()
 		{
 			// tag::92b3749a473cf2e7ff4055316662a4fe[]
 			var response0 = new SearchResponse<object>();
@@ -28,8 +28,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/register-repository.asciidoc:38")]
-		public void Line38()
+		[Description("snapshot-restore/register-repository.asciidoc:39")]
+		public void Line39()
 		{
 			// tag::ff930e6409b6a923ef1c9e7fc99f24cc[]
 			var response0 = new SearchResponse<object>();
@@ -39,8 +39,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/register-repository.asciidoc:63")]
-		public void Line63()
+		[Description("snapshot-restore/register-repository.asciidoc:64")]
+		public void Line64()
 		{
 			// tag::b9e4f7a80d21c85f88f578219df8e192[]
 			var response0 = new SearchResponse<object>();
@@ -50,8 +50,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/register-repository.asciidoc:71")]
-		public void Line71()
+		[Description("snapshot-restore/register-repository.asciidoc:72")]
+		public void Line72()
 		{
 			// tag::0d754b0d8d13c6d39ea353978dfe5992[]
 			var response0 = new SearchResponse<object>();
@@ -61,8 +61,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/register-repository.asciidoc:78")]
-		public void Line78()
+		[Description("snapshot-restore/register-repository.asciidoc:79")]
+		public void Line79()
 		{
 			// tag::37432cda12eb63ce59d186b55233c6e1[]
 			var response0 = new SearchResponse<object>();
@@ -72,8 +72,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/register-repository.asciidoc:86")]
-		public void Line86()
+		[Description("snapshot-restore/register-repository.asciidoc:87")]
+		public void Line87()
 		{
 			// tag::2b8d2065be3002b0be26598d6ad803a6[]
 			var response0 = new SearchResponse<object>();
@@ -83,8 +83,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/register-repository.asciidoc:123")]
-		public void Line123()
+		[Description("snapshot-restore/register-repository.asciidoc:124")]
+		public void Line124()
 		{
 			// tag::44b410249d477c640c127bfc7320e365[]
 			var response0 = new SearchResponse<object>();
@@ -101,8 +101,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/register-repository.asciidoc:139")]
-		public void Line139()
+		[Description("snapshot-restore/register-repository.asciidoc:140")]
+		public void Line140()
 		{
 			// tag::8988215f3a4fc4b7a7ef4a9c5be3391e[]
 			var response0 = new SearchResponse<object>();
@@ -119,8 +119,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/register-repository.asciidoc:180")]
-		public void Line180()
+		[Description("snapshot-restore/register-repository.asciidoc:181")]
+		public void Line181()
 		{
 			// tag::955ddfaf872af3aff420e6a80bc40bac[]
 			var response0 = new SearchResponse<object>();
@@ -136,8 +136,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/register-repository.asciidoc:248")]
-		public void Line248()
+		[Description("snapshot-restore/register-repository.asciidoc:249")]
+		public void Line249()
 		{
 			// tag::98ee9bfa32b64ca22e4338544b36c370[]
 			var response0 = new SearchResponse<object>();
@@ -154,8 +154,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/register-repository.asciidoc:279")]
-		public void Line279()
+		[Description("snapshot-restore/register-repository.asciidoc:280")]
+		public void Line280()
 		{
 			// tag::f1a7cf532da3a8f9a52a401a90e3a998[]
 			var response0 = new SearchResponse<object>();
@@ -171,8 +171,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/register-repository.asciidoc:293")]
-		public void Line293()
+		[Description("snapshot-restore/register-repository.asciidoc:294")]
+		public void Line294()
 		{
 			// tag::337cd2c3f9e11665f00786705037f86c[]
 			var response0 = new SearchResponse<object>();
@@ -182,8 +182,8 @@ namespace Examples.SnapshotRestore
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("snapshot-restore/register-repository.asciidoc:310")]
-		public void Line310()
+		[Description("snapshot-restore/register-repository.asciidoc:311")]
+		public void Line311()
 		{
 			// tag::6aca241c0361d26f134712821e2d09a9[]
 			var response0 = new SearchResponse<object>();

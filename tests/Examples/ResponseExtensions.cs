@@ -47,7 +47,9 @@ namespace Examples
 			var decodedAbsolutePath = HttpUtility.UrlDecode(response.ApiCall.Uri.AbsolutePath);
 
 			var expectedUri = example.Uri.Uri;
-			var expectedPath = expectedUri.AbsolutePath.Length > 1 ? expectedUri.AbsolutePath.TrimEnd('/') : expectedUri.AbsolutePath;
+			var expectedPath = HttpUtility.UrlDecode(expectedUri.AbsolutePath.Length > 1
+				? expectedUri.AbsolutePath.TrimEnd('/')
+				: expectedUri.AbsolutePath);
 
 			// A lot of the examples are not constrained to an index which is not necessarily what users typically do.
 			// in NEST you have to be explicit and call AllIndices() which explicitly puts _all on the path

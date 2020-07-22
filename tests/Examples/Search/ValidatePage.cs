@@ -22,8 +22,8 @@ namespace Examples.Search
 			response0.MatchesExample(@"GET twitter/_validate/query?q=user:foo");
 		}
 		[U(Skip = "Example not implemented")]
-		[Description("search/validate.asciidoc:75")]
-		public void Line75()
+		[Description("search/validate.asciidoc:81")]
+		public void Line81()
 		{
 			// tag::a0a6e4abbf0a5d064d06d06ddc585f4c[]
 			var response0 = new SearchResponse<object>();
@@ -37,8 +37,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/validate.asciidoc:104")]
-		public void Line104()
+		[Description("search/validate.asciidoc:110")]
+		public void Line110()
 		{
 			// tag::1a0ce57a5e6d73765601de98a5d60d80[]
 			var response0 = new SearchResponse<object>();
@@ -62,8 +62,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/validate.asciidoc:131")]
-		public void Line131()
+		[Description("search/validate.asciidoc:137")]
+		public void Line137()
 		{
 			// tag::9989c7860423519c7357936a73c2a5ce[]
 			var response0 = new SearchResponse<object>();
@@ -81,8 +81,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/validate.asciidoc:155")]
-		public void Line155()
+		[Description("search/validate.asciidoc:161")]
+		public void Line161()
 		{
 			// tag::b5cd0cc45db5f2fba30ac310630ad172[]
 			var response0 = new SearchResponse<object>();
@@ -100,8 +100,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/validate.asciidoc:196")]
-		public void Line196()
+		[Description("search/validate.asciidoc:202")]
+		public void Line202()
 		{
 			// tag::fd74d7518bab5f1dbc1fed588b9bc2a6[]
 			var response0 = new SearchResponse<object>();
@@ -121,8 +121,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/validate.asciidoc:254")]
-		public void Line254()
+		[Description("search/validate.asciidoc:260")]
+		public void Line260()
 		{
 			// tag::d253135ac0a4b3b04531b1a5d2a19279[]
 			var response0 = new SearchResponse<object>();

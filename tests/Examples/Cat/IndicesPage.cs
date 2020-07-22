@@ -10,15 +10,19 @@ namespace Examples.Cat
 {
 	public class IndicesPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
-		[Description("cat/indices.asciidoc:94")]
-		public void Line94()
+		[U]
+		[Description("cat/indices.asciidoc:100")]
+		public void Line100()
 		{
 			// tag::073539a7e38be3cdf13008330b6a536a[]
-			var response0 = new SearchResponse<object>();
+			var catResponse = client.Cat.Indices(c => c
+				.Index("twi*")
+				.Verbose()
+				.SortByColumns("index")
+			);
 			// end::073539a7e38be3cdf13008330b6a536a[]
 
-			response0.MatchesExample(@"GET /_cat/indices/twi*?v&s=index");
+			catResponse.MatchesExample(@"GET /_cat/indices/twi*?v&s=index");
 		}
 	}
 }

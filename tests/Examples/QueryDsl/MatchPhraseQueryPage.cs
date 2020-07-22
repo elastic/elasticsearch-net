@@ -10,33 +10,50 @@ namespace Examples.QueryDsl
 {
 	public class MatchPhraseQueryPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("query-dsl/match-phrase-query.asciidoc:11")]
 		public void Line11()
 		{
 			// tag::83f95657beca9bf5d8264c80c7fb463f[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q => q
+					.MatchPhrase(mp => mp
+						.Field("message")
+						.Query("this is a test")
+					)
+				)
+			);
 			// end::83f95657beca9bf5d8264c80c7fb463f[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""query"": {
 			        ""match_phrase"" : {
 			            ""message"" : ""this is a test""
 			        }
 			    }
-			}");
+			}", (e, b) => b["query"]["match_phrase"]["message"].ToLongFormQuery());
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("query-dsl/match-phrase-query.asciidoc:30")]
 		public void Line30()
 		{
 			// tag::72231b7debac60c95b9869a97dafda3a[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.AllIndices()
+				.Query(q => q
+					.MatchPhrase(mp => mp
+						.Field("message")
+						.Query("this is a test")
+						.Analyzer("my_analyzer")
+					)
+				)
+			);
 			// end::72231b7debac60c95b9869a97dafda3a[]
 
-			response0.MatchesExample(@"GET /_search
+			searchResponse.MatchesExample(@"GET /_search
 			{
 			    ""query"": {
 			        ""match_phrase"" : {

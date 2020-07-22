@@ -1,0 +1,42 @@
+// indices/templates.asciidoc:180
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line180 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Indices/TemplatesPage.cs#L106-L161.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
+////
+
+[source, csharp]
+----
+var templateResponse1 = client.Indices.PutTemplate("template_1", t => t
+    .IndexPatterns("te*")
+    .Order(0)
+    .Settings(s => s
+        .NumberOfShards(1)
+    )
+    .Map(m => m
+        .SourceField(so => so
+            .Enabled(false)
+        )
+    )
+);
+
+var templateResponse2 = client.Indices.PutTemplate("template_2", t => t
+    .IndexPatterns("tes*")
+    .Order(1)
+    .Settings(s => s
+        .NumberOfShards(1)
+    )
+    .Map(m => m
+        .SourceField(so => so
+            .Enabled()
+        )
+    )
+);
+----

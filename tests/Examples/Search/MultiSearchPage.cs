@@ -11,8 +11,8 @@ namespace Examples.Search
 	public class MultiSearchPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("search/multi-search.asciidoc:7")]
-		public void Line7()
+		[Description("search/multi-search.asciidoc:10")]
+		public void Line10()
 		{
 			// tag::58a2a71be35e770b50914753740ec91e[]
 			var response0 = new SearchResponse<object>();
@@ -26,8 +26,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/multi-search.asciidoc:288")]
-		public void Line288()
+		[Description("search/multi-search.asciidoc:301")]
+		public void Line301()
 		{
 			// tag::05af5eab63bf98d0078dfe661cd81124[]
 			var response0 = new SearchResponse<object>();
@@ -43,8 +43,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/multi-search.asciidoc:321")]
-		public void Line321()
+		[Description("search/multi-search.asciidoc:334")]
+		public void Line334()
 		{
 			// tag::a914be2ff7dd0cbdec0257f0ad50b625[]
 			var response0 = new SearchResponse<object>();
@@ -58,8 +58,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/multi-search.asciidoc:334")]
-		public void Line334()
+		[Description("search/multi-search.asciidoc:347")]
+		public void Line347()
 		{
 			// tag::28e66ff0ecdd71cb1426880115eab5dd[]
 			var response0 = new SearchResponse<object>();
@@ -81,8 +81,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/multi-search.asciidoc:353")]
-		public void Line353()
+		[Description("search/multi-search.asciidoc:366")]
+		public void Line366()
 		{
 			// tag::72e72cb3aa1b10b903d8cadcaddf7d10[]
 			var response0 = new SearchResponse<object>();
@@ -104,8 +104,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/multi-search.asciidoc:373")]
-		public void Line373()
+		[Description("search/multi-search.asciidoc:386")]
+		public void Line386()
 		{
 			// tag::8b4c8f395c0a6f952a42051a0d357154[]
 			var response0 = new SearchResponse<object>();

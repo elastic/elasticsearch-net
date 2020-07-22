@@ -1,0 +1,21 @@
+// search/request/scroll.asciidoc:186
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line186 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Search/Request/ScrollPage.cs#L151-L168.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
+////
+
+[source, csharp]
+----
+var clearScrollResponse = client.ClearScroll(c => c
+    .ScrollId("_all") //<1>
+);
+----
+<1> The client always sends `scroll_id` in the request body

@@ -81,5 +81,46 @@ namespace Examples.Aggregations.Metrics
 			    }
 			}");
 		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("aggregations/metrics/geocentroid-aggregation.asciidoc:179")]
+		public void Line179()
+		{
+			// tag::b65debaad33edbdd024fad3d72c626b6[]
+			var response0 = new SearchResponse<object>();
+
+			var response1 = new SearchResponse<object>();
+
+			var response2 = new SearchResponse<object>();
+			// end::b65debaad33edbdd024fad3d72c626b6[]
+
+			response0.MatchesExample(@"PUT /places
+			{
+			    ""mappings"": {
+			        ""properties"": {
+			            ""geometry"": {
+			                ""type"": ""geo_shape""
+			            }
+			        }
+			    }
+			}");
+
+			response1.MatchesExample(@"POST /places/_bulk?refresh
+			{""index"":{""_id"":1}}
+			{""name"": ""NEMO Science Museum"", ""geometry"": ""POINT(4.912350 52.374081)"" }
+			{""index"":{""_id"":2}}
+			{""name"": ""Sportpark De Weeren"", ""geometry"": { ""type"": ""Polygon"", ""coordinates"": [ [ [ 4.965305328369141, 52.39347642069457 ], [ 4.966979026794433, 52.391721758934835 ], [ 4.969425201416015, 52.39238958618537 ], [ 4.967944622039794, 52.39420969150824 ], [ 4.965305328369141, 52.39347642069457 ] ] ] } }");
+
+			response2.MatchesExample(@"POST /places/_search?size=0
+			{
+			    ""aggs"" : {
+			        ""centroid"" : {
+			            ""geo_centroid"" : {
+			                ""field"" : ""geometry""
+			            }
+			        }
+			    }
+			}");
+		}
 	}
 }

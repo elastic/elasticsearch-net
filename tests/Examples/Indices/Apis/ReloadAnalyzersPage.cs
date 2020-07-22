@@ -11,8 +11,8 @@ namespace Examples.Indices.Apis
 	public class ReloadAnalyzersPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("indices/apis/reload-analyzers.asciidoc:12")]
-		public void Line12()
+		[Description("indices/apis/reload-analyzers.asciidoc:14")]
+		public void Line14()
 		{
 			// tag::b0015e63323171f38995b8e4aa2b52d5[]
 			var response0 = new SearchResponse<object>();
@@ -22,8 +22,8 @@ namespace Examples.Indices.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/apis/reload-analyzers.asciidoc:98")]
-		public void Line98()
+		[Description("indices/apis/reload-analyzers.asciidoc:102")]
+		public void Line102()
 		{
 			// tag::db8cbfa2afece5d21b3ca69ffee8f5c0[]
 			var response0 = new SearchResponse<object>();
@@ -63,8 +63,8 @@ namespace Examples.Indices.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/apis/reload-analyzers.asciidoc:142")]
-		public void Line142()
+		[Description("indices/apis/reload-analyzers.asciidoc:146")]
+		public void Line146()
 		{
 			// tag::7554da505cc27f6bd0d028b66e85f4a5[]
 			var response0 = new SearchResponse<object>();

@@ -32,8 +32,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:162")]
-		public void Line162()
+		[Description("indices/aliases.asciidoc:170")]
+		public void Line170()
 		{
 			// tag::b4392116f2cc57ce8064ccbad30318d5[]
 			var aliasResponse = client.Indices.BulkAlias(a => a
@@ -53,8 +53,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:178")]
-		public void Line178()
+		[Description("indices/aliases.asciidoc:186")]
+		public void Line186()
 		{
 			// tag::3653567181f43a5f64c74f934aa821c2[]
 			var aliasResponse = client.Indices.BulkAlias(a => a
@@ -74,8 +74,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:196")]
-		public void Line196()
+		[Description("indices/aliases.asciidoc:204")]
+		public void Line204()
 		{
 			// tag::af3fb9fa5691a7b37a6dc2a69ff66e64[]
 			var aliasResponse = client.Indices.BulkAlias(a => a
@@ -100,8 +100,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:214")]
-		public void Line214()
+		[Description("indices/aliases.asciidoc:222")]
+		public void Line222()
 		{
 			// tag::f0e21e03a07c8fa0209b0aafdb3791e6[]
 			var aliasResponse = client.Indices.BulkAlias(a => a
@@ -126,8 +126,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Waiting on PR to implement: https://github.com/elastic/elasticsearch-net/issues/4721")]
-		[Description("indices/aliases.asciidoc:228")]
-		public void Line228()
+		[Description("indices/aliases.asciidoc:236")]
+		public void Line236()
 		{
 			// tag::5f210f74725ea0c9265190346edfa246[]
 			var aliasResponse = client.Indices.BulkAlias(a => a
@@ -146,8 +146,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:245")]
-		public void Line245()
+		[Description("indices/aliases.asciidoc:253")]
+		public void Line253()
 		{
 			// tag::6799d132c1c7ca3970763acde2337ef9[]
 			var aliasResponse = client.Indices.BulkAlias(a => a
@@ -167,8 +167,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:266")]
-		public void Line266()
+		[Description("indices/aliases.asciidoc:276")]
+		public void Line276()
 		{
 			// tag::de176bc4788ea286fff9e92418a43ea8[]
 			var createIndexResponse = client.Indices.Create("test");
@@ -200,8 +200,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:294")]
-		public void Line294()
+		[Description("indices/aliases.asciidoc:304")]
+		public void Line304()
 		{
 			// tag::23ab0f1023b1b2cd5cdf2a8f9ccfd57b[]
 			var createIndexResponse = client.Indices.Create("test1", c => c
@@ -228,8 +228,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:310")]
-		public void Line310()
+		[Description("indices/aliases.asciidoc:320")]
+		public void Line320()
 		{
 			// tag::7cf71671859be7c1ecf673396db377cd[]
 			var aliasResponse = client.Indices.BulkAlias(b => b
@@ -258,8 +258,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:338")]
-		public void Line338()
+		[Description("indices/aliases.asciidoc:348")]
+		public void Line348()
 		{
 			// tag::bc1ad5cc6d3eab98e3ce01f209ba7094[]
 			var aliasResponse = client.Indices.BulkAlias(b => b
@@ -286,8 +286,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:358")]
-		public void Line358()
+		[Description("indices/aliases.asciidoc:368")]
+		public void Line368()
 		{
 			// tag::fa0f4485cd48f986b7ae8cbb24e331c4[]
 			var aliasResponse = client.Indices.BulkAlias(b => b
@@ -316,8 +316,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:384")]
-		public void Line384()
+		[Description("indices/aliases.asciidoc:394")]
+		public void Line394()
 		{
 			// tag::427f6b5c5376cbf0f71f242a60ca3d9e[]
 			var searchResponse = client.Search<object>(s => s
@@ -331,8 +331,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:405")]
-		public void Line405()
+		[Description("indices/aliases.asciidoc:415")]
+		public void Line415()
 		{
 			// tag::f6d6889667f56b8f49d2858070571a6b[]
 			var aliasResponse = client.Indices.BulkAlias(b => b
@@ -369,8 +369,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:431")]
-		public void Line431()
+		[Description("indices/aliases.asciidoc:441")]
+		public void Line441()
 		{
 			// tag::b0ec418bf416c62bed602b0a32a6d5f5[]
 			var indexResponse = client.Index(
@@ -385,8 +385,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:443")]
-		public void Line443()
+		[Description("indices/aliases.asciidoc:453")]
+		public void Line453()
 		{
 			// tag::67bba546d835bca8f31df13e3587c348[]
 			var getResponse = client.Get<object>(1, g => g.Index("test"));
@@ -396,8 +396,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/aliases.asciidoc:452")]
-		public void Line452()
+		[Description("indices/aliases.asciidoc:462")]
+		public void Line462()
 		{
 			// tag::ad79228630684d950fe9792a768d24c5[]
 			var aliasResponse = client.Indices.BulkAlias(b => b

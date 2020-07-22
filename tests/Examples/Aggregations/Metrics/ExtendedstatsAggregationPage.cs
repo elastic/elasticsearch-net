@@ -28,8 +28,8 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/extendedstats-aggregation.asciidoc:58")]
-		public void Line58()
+		[Description("aggregations/metrics/extendedstats-aggregation.asciidoc:67")]
+		public void Line67()
 		{
 			// tag::eb8df98231df40c61f5feef4946b1a92[]
 			var response0 = new SearchResponse<object>();
@@ -50,8 +50,8 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/extendedstats-aggregation.asciidoc:91")]
-		public void Line91()
+		[Description("aggregations/metrics/extendedstats-aggregation.asciidoc:103")]
+		public void Line103()
 		{
 			// tag::83476d04b393850da0697e1bfae58b4a[]
 			var response0 = new SearchResponse<object>();
@@ -74,8 +74,8 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/extendedstats-aggregation.asciidoc:112")]
-		public void Line112()
+		[Description("aggregations/metrics/extendedstats-aggregation.asciidoc:124")]
+		public void Line124()
 		{
 			// tag::2cf036d054901b5d7b4a84780c320f2d[]
 			var response0 = new SearchResponse<object>();
@@ -100,8 +100,8 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/extendedstats-aggregation.asciidoc:137")]
-		public void Line137()
+		[Description("aggregations/metrics/extendedstats-aggregation.asciidoc:149")]
+		public void Line149()
 		{
 			// tag::533b447e1ca8c575e38ecd9b1917c17c[]
 			var response0 = new SearchResponse<object>();
@@ -128,8 +128,8 @@ namespace Examples.Aggregations.Metrics
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("aggregations/metrics/extendedstats-aggregation.asciidoc:166")]
-		public void Line166()
+		[Description("aggregations/metrics/extendedstats-aggregation.asciidoc:178")]
+		public void Line178()
 		{
 			// tag::44a7cf8482bdc3d1c11f4b3b35683b99[]
 			var response0 = new SearchResponse<object>();

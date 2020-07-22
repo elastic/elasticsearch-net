@@ -12,8 +12,8 @@ namespace Examples.Cluster
 	public class HealthPage : ExampleBase
 	{
 		[U]
-		[Description("cluster/health.asciidoc:35")]
-		public void Line35()
+		[Description("cluster/health.asciidoc:36")]
+		public void Line36()
 		{
 			// tag::04f5dd677c777bcb15d7d5fa63275fc8[]
 			var healthResponse = client.Cluster.Health(selector: h => h
@@ -26,8 +26,8 @@ namespace Examples.Cluster
 		}
 
 		[U]
-		[Description("cluster/health.asciidoc:143")]
-		public void Line143()
+		[Description("cluster/health.asciidoc:150")]
+		public void Line150()
 		{
 			// tag::b02e4907c9936c1adc16ccce9d49900d[]
 			var healthResponse = client.Cluster.Health();
@@ -37,8 +37,8 @@ namespace Examples.Cluster
 		}
 
 		[U]
-		[Description("cluster/health.asciidoc:179")]
-		public void Line179()
+		[Description("cluster/health.asciidoc:186")]
+		public void Line186()
 		{
 			// tag::c48264ec5d9b9679fddd72e5c44425b9[]
 			var healthResponse = client.Cluster.Health("twitter", h => h

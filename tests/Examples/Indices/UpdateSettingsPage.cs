@@ -12,8 +12,8 @@ namespace Examples.Indices
 	public class UpdateSettingsPage : ExampleBase
 	{
 		[U]
-		[Description("indices/update-settings.asciidoc:10")]
-		public void Line10()
+		[Description("indices/update-settings.asciidoc:13")]
+		public void Line13()
 		{
 			// tag::8653e76676de5d327201b77512afa3a0[]
 			var settingsResponse = client.Indices.UpdateSettings("twitter", u => u
@@ -36,8 +36,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/update-settings.asciidoc:73")]
-		public void Line73()
+		[Description("indices/update-settings.asciidoc:79")]
+		public void Line79()
 		{
 			// tag::42744a175125df5be0ef77413bf8f608[]
 			var settingsResponse = client.Indices.UpdateSettings("twitter", u => u
@@ -60,8 +60,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/update-settings.asciidoc:97")]
-		public void Line97()
+		[Description("indices/update-settings.asciidoc:103")]
+		public void Line103()
 		{
 			// tag::dfac8d098b50aa0181161bcd17b38ef4[]
 			var settingsResponse = client.Indices.UpdateSettings("twitter", u => u
@@ -84,8 +84,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/update-settings.asciidoc:114")]
-		public void Line114()
+		[Description("indices/update-settings.asciidoc:120")]
+		public void Line120()
 		{
 			// tag::0be2c28ee65384774b1e479b47dc3d92[]
 			var settingsResponse = client.Indices.UpdateSettings("twitter", u => u
@@ -108,8 +108,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/update-settings.asciidoc:127")]
-		public void Line127()
+		[Description("indices/update-settings.asciidoc:133")]
+		public void Line133()
 		{
 			// tag::fe5763d32955e8b65eb3048e97b1580c[]
 			var mergeResponse = client.Indices.ForceMerge("twitter", f => f
@@ -121,8 +121,8 @@ namespace Examples.Indices
 		}
 
 		[U]
-		[Description("indices/update-settings.asciidoc:145")]
-		public void Line145()
+		[Description("indices/update-settings.asciidoc:169")]
+		public void Line169()
 		{
 			// tag::ba0b4081c98f3387f76b77847c52ee9a[]
 			var closeIndexResponse = client.Indices.Close("twitter");

@@ -11,8 +11,8 @@ namespace Examples.Indices.Apis
 	public class FreezePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("indices/apis/freeze.asciidoc:44")]
-		public void Line44()
+		[Description("indices/apis/freeze.asciidoc:49")]
+		public void Line49()
 		{
 			// tag::ffea06f77c9df5720412aa06be964118[]
 			var response0 = new SearchResponse<object>();

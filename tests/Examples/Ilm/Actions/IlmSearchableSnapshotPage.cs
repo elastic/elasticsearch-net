@@ -7,8 +7,8 @@ namespace Examples.Ilm.Actions
 	public class IlmSearchableSnapshotPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/actions/ilm-searchable-snapshot.asciidoc:24")]
-		public void Line24()
+		[Description("ilm/actions/ilm-searchable-snapshot.asciidoc:36")]
+		public void Line36()
 		{
 			// tag::3f2e5132e35b9e8b3203a4a0541cf0d4[]
 			var response0 = new SearchResponse<object>();

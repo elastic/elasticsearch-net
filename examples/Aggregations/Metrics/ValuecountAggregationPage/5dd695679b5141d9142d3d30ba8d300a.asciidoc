@@ -1,0 +1,26 @@
+// aggregations/metrics/valuecount-aggregation.asciidoc:13
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line13 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Aggregations/Metrics/ValuecountAggregationPage.cs#L14-L39.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
+////
+
+[source, csharp]
+----
+var searchResponse = client.Search<object>(s => s
+    .Index("sales")
+    .Size(0)
+    .Aggregations(a => a
+        .ValueCount("types_count", vc => vc
+            .Field("type")
+        )
+    )
+);
+----

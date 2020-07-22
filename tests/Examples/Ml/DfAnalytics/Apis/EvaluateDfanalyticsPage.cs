@@ -11,8 +11,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 	public class EvaluateDfanalyticsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/evaluate-dfanalytics.asciidoc:197")]
-		public void Line197()
+		[Description("ml/df-analytics/apis/evaluate-dfanalytics.asciidoc:205")]
+		public void Line205()
 		{
 			// tag::eae68412d998bc0f65b09711f007a4b7[]
 			var response0 = new SearchResponse<object>();
@@ -31,12 +31,12 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/evaluate-dfanalytics.asciidoc:259")]
-		public void Line259()
+		[Description("ml/df-analytics/apis/evaluate-dfanalytics.asciidoc:267")]
+		public void Line267()
 		{
-			// tag::e6e7586a81068773d18cca848346b69f[]
+			// tag::2ecdc5393ac2a240e8287b50dde9dbd9[]
 			var response0 = new SearchResponse<object>();
-			// end::e6e7586a81068773d18cca848346b69f[]
+			// end::2ecdc5393ac2a240e8287b50dde9dbd9[]
 
 			response0.MatchesExample(@"POST _ml/data_frame/_evaluate
 			{
@@ -54,7 +54,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 			      ""predicted_field"": ""ml.price_prediction"", <4>
 			      ""metrics"": {
 			        ""r_squared"": {},
-			        ""mean_squared_error"": {}
+			        ""mse"": {}
 			      }
 			    }
 			  }
@@ -62,12 +62,12 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/evaluate-dfanalytics.asciidoc:296")]
-		public void Line296()
+		[Description("ml/df-analytics/apis/evaluate-dfanalytics.asciidoc:304")]
+		public void Line304()
 		{
-			// tag::862efc8d548a9202597c72c7e98a599d[]
+			// tag::19c9b45dbd9d289997fc41a296fc28c5[]
 			var response0 = new SearchResponse<object>();
-			// end::862efc8d548a9202597c72c7e98a599d[]
+			// end::19c9b45dbd9d289997fc41a296fc28c5[]
 
 			response0.MatchesExample(@"POST _ml/data_frame/_evaluate
 			{
@@ -85,7 +85,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 			      ""predicted_field"": ""ml.G3_prediction"", <3>
 			      ""metrics"": {
 			        ""r_squared"": {},
-			        ""mean_squared_error"": {}
+			        ""mse"": {}
 			      }
 			    }
 			  }
@@ -93,12 +93,12 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/evaluate-dfanalytics.asciidoc:335")]
-		public void Line335()
+		[Description("ml/df-analytics/apis/evaluate-dfanalytics.asciidoc:343")]
+		public void Line343()
 		{
-			// tag::051b2682d386d49616b18a5db591afdf[]
+			// tag::ca677dce1c1bf08fc1bee1de6ac54502[]
 			var response0 = new SearchResponse<object>();
-			// end::051b2682d386d49616b18a5db591afdf[]
+			// end::ca677dce1c1bf08fc1bee1de6ac54502[]
 
 			response0.MatchesExample(@"POST _ml/data_frame/_evaluate
 			{
@@ -116,7 +116,7 @@ namespace Examples.Ml.DfAnalytics.Apis
 			      ""predicted_field"": ""ml.G3_prediction"", <3>
 			      ""metrics"": {
 			        ""r_squared"": {},
-			        ""mean_squared_error"": {}
+			        ""mse"": {}
 			      }
 			    }
 			  }
@@ -124,8 +124,8 @@ namespace Examples.Ml.DfAnalytics.Apis
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ml/df-analytics/apis/evaluate-dfanalytics.asciidoc:374")]
-		public void Line374()
+		[Description("ml/df-analytics/apis/evaluate-dfanalytics.asciidoc:382")]
+		public void Line382()
 		{
 			// tag::388d3eda4f792d3fce044777739217e6[]
 			var response0 = new SearchResponse<object>();

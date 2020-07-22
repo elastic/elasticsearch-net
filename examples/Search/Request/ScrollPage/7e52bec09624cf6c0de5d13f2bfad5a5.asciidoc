@@ -1,0 +1,28 @@
+// search/request/scroll.asciidoc:45
+
+////
+IMPORTANT NOTE
+==============
+This file is generated from method Line45 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Search/Request/ScrollPage.cs#L16-L46.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
+////
+
+[source, csharp]
+----
+var searchResponse = client.Search<Tweet>(s => s
+    .Index("twitter")
+    .Size(100)
+    .Scroll("1m")
+    .Query(q => q
+        .Match(m => m
+            .Field(f => f.Title)
+            .Query("elasticsearch")
+        )
+    )
+);
+----

@@ -11,8 +11,8 @@ namespace Examples.Analysis.Analyzers
 	public class StopAnalyzerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/stop-analyzer.asciidoc:12")]
-		public void Line12()
+		[Description("analysis/analyzers/stop-analyzer.asciidoc:15")]
+		public void Line15()
 		{
 			// tag::42d02087f1c8ab0452ef373079a76843[]
 			var response0 = new SearchResponse<object>();
@@ -26,8 +26,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/stop-analyzer.asciidoc:130")]
-		public void Line130()
+		[Description("analysis/analyzers/stop-analyzer.asciidoc:133")]
+		public void Line133()
 		{
 			// tag::5a676e5f09ba584408ce6ecacda13d1d[]
 			var response0 = new SearchResponse<object>();
@@ -57,8 +57,8 @@ namespace Examples.Analysis.Analyzers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/analyzers/stop-analyzer.asciidoc:246")]
-		public void Line246()
+		[Description("analysis/analyzers/stop-analyzer.asciidoc:249")]
+		public void Line249()
 		{
 			// tag::42deb4fe32afbe0f94185e256a79c447[]
 			var response0 = new SearchResponse<object>();

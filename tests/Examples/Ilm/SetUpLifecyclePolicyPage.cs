@@ -11,8 +11,8 @@ namespace Examples.Ilm
 	public class SetUpLifecyclePolicyPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/set-up-lifecycle-policy.asciidoc:32")]
-		public void Line32()
+		[Description("ilm/set-up-lifecycle-policy.asciidoc:44")]
+		public void Line44()
 		{
 			// tag::7ecf197610e30c20f7206513ce393822[]
 			var response0 = new SearchResponse<object>();
@@ -41,8 +41,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/set-up-lifecycle-policy.asciidoc:75")]
-		public void Line75()
+		[Description("ilm/set-up-lifecycle-policy.asciidoc:91")]
+		public void Line91()
 		{
 			// tag::f29c02d259065033bd557519d1b21481[]
 			var response0 = new SearchResponse<object>();
@@ -61,8 +61,8 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/set-up-lifecycle-policy.asciidoc:116")]
-		public void Line116()
+		[Description("ilm/set-up-lifecycle-policy.asciidoc:138")]
+		public void Line138()
 		{
 			// tag::25737fd456fd317cc4cc2db76b6cf28e[]
 			var response0 = new SearchResponse<object>();
@@ -79,19 +79,37 @@ namespace Examples.Ilm
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/set-up-lifecycle-policy.asciidoc:143")]
-		public void Line143()
+		[Description("ilm/set-up-lifecycle-policy.asciidoc:175")]
+		public void Line175()
 		{
-			// tag::160d259243d0800900b065c4b9d2b187[]
+			// tag::d690a6af462c70a783625a323e11c72c[]
 			var response0 = new SearchResponse<object>();
-			// end::160d259243d0800900b065c4b9d2b187[]
+			// end::d690a6af462c70a783625a323e11c72c[]
 
 			response0.MatchesExample(@"PUT test-index
 			{
 			  ""settings"": {
 			    ""number_of_shards"": 1,
 			    ""number_of_replicas"": 1,
-			    ""index.lifecycle.name"": ""my_policy""
+			    ""index.lifecycle.name"": ""my_policy"" <1>
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("ilm/set-up-lifecycle-policy.asciidoc:251")]
+		public void Line251()
+		{
+			// tag::ec195297eb804cba1cb19c9926773059[]
+			var response0 = new SearchResponse<object>();
+			// end::ec195297eb804cba1cb19c9926773059[]
+
+			response0.MatchesExample(@"PUT mylogs-pre-ilm*/_settings <1>
+			{
+			  ""index"": {
+			    ""lifecycle"": {
+			      ""name"": ""mylogs_policy_existing""
+			    }
 			  }
 			}");
 		}

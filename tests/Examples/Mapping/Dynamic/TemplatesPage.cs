@@ -12,8 +12,8 @@ namespace Examples.Mapping.Dynamic
 	public class TemplatesPage : ExampleBase
 	{
 		[U]
-		[Description("mapping/dynamic/templates.asciidoc:84")]
-		public void Line84()
+		[Description("mapping/dynamic/templates.asciidoc:85")]
+		public void Line85()
 		{
 			// tag::bb33e638fdeded7d721d9bbac2305fda[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c
@@ -88,8 +88,8 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		[Description("mapping/dynamic/templates.asciidoc:138")]
-		public void Line138()
+		[Description("mapping/dynamic/templates.asciidoc:139")]
+		public void Line139()
 		{
 			// tag::4f54b88e05c7a62901062e9e0ed13e5a[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c
@@ -141,8 +141,8 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		[Description("mapping/dynamic/templates.asciidoc:192")]
-		public void Line192()
+		[Description("mapping/dynamic/templates.asciidoc:193")]
+		public void Line193()
 		{
 			// tag::0b91c082258ce623cc716b679aace653[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c
@@ -211,8 +211,8 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		[Description("mapping/dynamic/templates.asciidoc:227")]
-		public void Line227()
+		[Description("mapping/dynamic/templates.asciidoc:228")]
+		public void Line228()
 		{
 			// tag::be51ed37c8425d281a8153abe56b04cb[]
 			var indexResponse = client.Index<object>(new
@@ -244,8 +244,8 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		[Description("mapping/dynamic/templates.asciidoc:252")]
-		public void Line252()
+		[Description("mapping/dynamic/templates.asciidoc:253")]
+		public void Line253()
 		{
 			// tag::6873971eb4e4577d76d0a5bd7cd15ef9[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c
@@ -310,8 +310,8 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		[Description("mapping/dynamic/templates.asciidoc:304")]
-		public void Line304()
+		[Description("mapping/dynamic/templates.asciidoc:305")]
+		public void Line305()
 		{
 			// tag::87f85bb49d18f73d0eed0b704e05eb90[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c
@@ -346,8 +346,8 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		[Description("mapping/dynamic/templates.asciidoc:332")]
-		public void Line332()
+		[Description("mapping/dynamic/templates.asciidoc:333")]
+		public void Line333()
 		{
 			// tag::1a59fa2708ccb3a24c71e8306b81f17f[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c
@@ -382,8 +382,8 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		[Description("mapping/dynamic/templates.asciidoc:357")]
-		public void Line357()
+		[Description("mapping/dynamic/templates.asciidoc:358")]
+		public void Line358()
 		{
 			// tag::3e60c0b29bd3931927e6f2ee7d2ed0ef[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c
@@ -425,8 +425,8 @@ namespace Examples.Mapping.Dynamic
 		}
 
 		[U]
-		[Description("mapping/dynamic/templates.asciidoc:395")]
-		public void Line395()
+		[Description("mapping/dynamic/templates.asciidoc:396")]
+		public void Line396()
 		{
 			// tag::9a91f7d0bf52d6c582c62daef5c9d040[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c

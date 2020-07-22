@@ -12,8 +12,8 @@ namespace Examples.Docs
 	{
 
 		[U]
-		[Description("docs/delete.asciidoc:71")]
-		public void Line71()
+		[Description("docs/delete.asciidoc:75")]
+		public void Line75()
 		{
 			// tag::47b5ff897f26e9c943cee5c06034181d[]
 			var deleteResponse = client.Delete<Tweet>(1, d => d
@@ -26,8 +26,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/delete.asciidoc:127")]
-		public void Line127()
+		[Description("docs/delete.asciidoc:131")]
+		public void Line131()
 		{
 			// tag::d90a84a24a407731dfc1929ac8327746[]
 			var deleteResponse = client.Delete<Tweet>(1, d => d
@@ -39,8 +39,8 @@ namespace Examples.Docs
 			deleteResponse.MatchesExample(@"DELETE /twitter/_doc/1?timeout=5m");
 		}
 		[U]
-		[Description("docs/delete.asciidoc:168")]
-		public void Line168()
+		[Description("docs/delete.asciidoc:172")]
+		public void Line172()
 		{
 			// tag::c5e5873783246c7b1c01d8464fed72c4[]
 			var deleteResponse = client.Delete<Tweet>(1, d => d.Index("twitter"));

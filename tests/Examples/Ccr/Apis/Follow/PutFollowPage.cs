@@ -29,14 +29,17 @@ namespace Examples.Ccr.Apis.Follow
 		[Description("ccr/apis/follow/put-follow.asciidoc:88")]
 		public void Line88()
 		{
-			// tag::c1f565c68d7bfce4a4251c7919444977[]
+			// tag::1b3762712c14a19e8c2956b4f530d327[]
 			var response0 = new SearchResponse<object>();
-			// end::c1f565c68d7bfce4a4251c7919444977[]
+			// end::1b3762712c14a19e8c2956b4f530d327[]
 
 			response0.MatchesExample(@"PUT /follower_index/_ccr/follow?wait_for_active_shards=1
 			{
 			  ""remote_cluster"" : ""remote_cluster"",
 			  ""leader_index"" : ""leader_index"",
+			  ""settings"": {
+			    ""index.number_of_replicas"": 0
+			  },
 			  ""max_read_request_operation_count"" : 1024,
 			  ""max_outstanding_read_requests"" : 16,
 			  ""max_read_request_size"" : ""1024k"",

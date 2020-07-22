@@ -11,8 +11,8 @@ namespace Examples.Cluster
 	public class NodesStatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/nodes-stats.asciidoc:2140")]
-		public void Line2140()
+		[Description("cluster/nodes-stats.asciidoc:2152")]
+		public void Line2152()
 		{
 			// tag::5457c94f0039c6b95c7f9f305d0c6b58[]
 			var response0 = new SearchResponse<object>();
@@ -30,8 +30,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/nodes-stats.asciidoc:2158")]
-		public void Line2158()
+		[Description("cluster/nodes-stats.asciidoc:2170")]
+		public void Line2170()
 		{
 			// tag::150b5fee5678bf8cdf0932da73eada80[]
 			var response0 = new SearchResponse<object>();
@@ -53,8 +53,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/nodes-stats.asciidoc:2176")]
-		public void Line2176()
+		[Description("cluster/nodes-stats.asciidoc:2188")]
+		public void Line2188()
 		{
 			// tag::bd68666ca2e0be12f7624016317a62bc[]
 			var response0 = new SearchResponse<object>();
@@ -68,8 +68,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/nodes-stats.asciidoc:2192")]
-		public void Line2192()
+		[Description("cluster/nodes-stats.asciidoc:2204")]
+		public void Line2204()
 		{
 			// tag::09769561f082b50558fb7d8707719963[]
 			var response0 = new SearchResponse<object>();
@@ -79,8 +79,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/nodes-stats.asciidoc:2200")]
-		public void Line2200()
+		[Description("cluster/nodes-stats.asciidoc:2212")]
+		public void Line2212()
 		{
 			// tag::ef9c29759459904fef162acd223462c4[]
 			var response0 = new SearchResponse<object>();
@@ -90,8 +90,8 @@ namespace Examples.Cluster
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("cluster/nodes-stats.asciidoc:2208")]
-		public void Line2208()
+		[Description("cluster/nodes-stats.asciidoc:2220")]
+		public void Line2220()
 		{
 			// tag::f160561efab38e40c2feebf5a2542ab5[]
 			var response0 = new SearchResponse<object>();

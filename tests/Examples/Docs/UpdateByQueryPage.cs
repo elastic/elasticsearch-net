@@ -27,8 +27,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:300")]
-		public void Line300()
+		[Description("docs/update-by-query.asciidoc:307")]
+		public void Line307()
 		{
 			// tag::52a87b81e4e0b6b11e23e85db1602a63[]
 			var updateByQueryResponse = client.UpdateByQuery<Tweet>(u => u
@@ -58,8 +58,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:319")]
-		public void Line319()
+		[Description("docs/update-by-query.asciidoc:326")]
+		public void Line326()
 		{
 			// tag::cde4dddae5c06e7f1d38c9d933dbc7ac[]
 			var updateByQueryResponse = client.UpdateByQuery<object>(u => u
@@ -71,8 +71,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:327")]
-		public void Line327()
+		[Description("docs/update-by-query.asciidoc:334")]
+		public void Line334()
 		{
 			// tag::d8b115341da772a628a024e7d1644e73[]
 			var updateByQueryResponse = client.UpdateByQuery<object>(u => u
@@ -85,8 +85,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:336")]
-		public void Line336()
+		[Description("docs/update-by-query.asciidoc:343")]
+		public void Line343()
 		{
 			// tag::54a770f053f3225ea0d1e34334232411[]
 			var updateByQueryResponse = client.UpdateByQuery<object>(u => u
@@ -99,8 +99,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:348")]
-		public void Line348()
+		[Description("docs/update-by-query.asciidoc:355")]
+		public void Line355()
 		{
 			// tag::2fd69fb0538e4f36ac69a8b8f8bf5ae8[]
 			var updateByQueryResponse = client.UpdateByQuery<Tweet>(u => u
@@ -137,8 +137,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:389")]
-		public void Line389()
+		[Description("docs/update-by-query.asciidoc:396")]
+		public void Line396()
 		{
 			// tag::c4b278ba293abd0d02a0b5ad1a99f84a[]
 			var putPipelineResponse = client.Ingest.PutPipeline("set-foo", p => p
@@ -172,8 +172,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:413")]
-		public void Line413()
+		[Description("docs/update-by-query.asciidoc:420")]
+		public void Line420()
 		{
 			// tag::7df191cc7f814e410a4ac7261065e6ef[]
 			var listTasksResponse = client.Tasks.List(t => t
@@ -186,8 +186,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:471")]
-		public void Line471()
+		[Description("docs/update-by-query.asciidoc:478")]
+		public void Line478()
 		{
 			// tag::be3a6431d01846950dc1a39a7a6a1faa[]
 			var getTaskResponse = client.Tasks.GetTask("r1A2WoRbTwKZ516z6NEs5A:36619");
@@ -197,8 +197,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:491")]
-		public void Line491()
+		[Description("docs/update-by-query.asciidoc:498")]
+		public void Line498()
 		{
 			// tag::18ddb7e7a4bcafd449df956e828ed7a8[]
 			var cancelTasksResponse = client.Tasks.Cancel(c => c
@@ -210,8 +210,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:510")]
-		public void Line510()
+		[Description("docs/update-by-query.asciidoc:517")]
+		public void Line517()
 		{
 			// tag::bdb30dd52d32f50994008f4f9c0da5f0[]
 			var updateByQueryRethrottleResponse = client.UpdateByQueryRethrottle(
@@ -224,8 +224,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:530")]
-		public void Line530()
+		[Description("docs/update-by-query.asciidoc:537")]
+		public void Line537()
 		{
 			// tag::0d664883151008b1051ef2c9ab2d0373[]
 			var updateByQueryResponse = client.UpdateByQuery<Tweet>(u => u
@@ -275,8 +275,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:557")]
-		public void Line557()
+		[Description("docs/update-by-query.asciidoc:564")]
+		public void Line564()
 		{
 			// tag::4acf902c2598b2558f34f20c1744c433[]
 			var refreshResponse = client.Indices.Refresh();
@@ -301,8 +301,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:586")]
-		public void Line586()
+		[Description("docs/update-by-query.asciidoc:593")]
+		public void Line593()
 		{
 			// tag::ea02de2dbe05091fcb0dac72c8ba5f83[]
 			var updateByQueryResponse = client.UpdateByQuery<Tweet>(u => u
@@ -324,8 +324,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:599")]
-		public void Line599()
+		[Description("docs/update-by-query.asciidoc:606")]
+		public void Line606()
 		{
 			// tag::025b54db0edc50c24ea48a2bd94366ad[]
 			var searchResponse = client.Search<Tweet>(s => s
@@ -343,8 +343,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:655")]
-		public void Line655()
+		[Description("docs/update-by-query.asciidoc:662")]
+		public void Line662()
 		{
 			// tag::2fe28d9a91b3081a9ec4601af8fb7b1c[]
 			var createIndexResponse = client.Indices.Create("test", c => c
@@ -413,8 +413,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:693")]
-		public void Line693()
+		[Description("docs/update-by-query.asciidoc:700")]
+		public void Line700()
 		{
 			// tag::abd4fc3ce7784413a56fe2dcfe2809b5[]
 			var searchResponse = client.Search<object>(s => s
@@ -446,8 +446,8 @@ namespace Examples.Docs
 		}
 
 		[U]
-		[Description("docs/update-by-query.asciidoc:720")]
-		public void Line720()
+		[Description("docs/update-by-query.asciidoc:727")]
+		public void Line727()
 		{
 			// tag::97babc8d19ef0866774576716eb6d19e[]
 			var updateByQueryResponse = client.UpdateByQuery<Tweet>(u => u

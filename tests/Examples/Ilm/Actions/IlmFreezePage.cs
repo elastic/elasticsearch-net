@@ -7,8 +7,8 @@ namespace Examples.Ilm.Actions
 	public class IlmFreezePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/actions/ilm-freeze.asciidoc:26")]
-		public void Line26()
+		[Description("ilm/actions/ilm-freeze.asciidoc:23")]
+		public void Line23()
 		{
 			// tag::0345fbd95c4516a89ac5ad261a16be8f[]
 			var response0 = new SearchResponse<object>();

@@ -39,8 +39,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/shrink-index.asciidoc:98")]
-		public void Line98()
+		[Description("indices/shrink-index.asciidoc:103")]
+		public void Line103()
 		{
 			// tag::f3594de7ef39ab09b0bb12c1e76bfe6b[]
 			var response0 = new SearchResponse<object>();
@@ -56,8 +56,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/shrink-index.asciidoc:141")]
-		public void Line141()
+		[Description("indices/shrink-index.asciidoc:146")]
+		public void Line146()
 		{
 			// tag::76c167d8ab305cb43b594f140c902dfe[]
 			var response0 = new SearchResponse<object>();

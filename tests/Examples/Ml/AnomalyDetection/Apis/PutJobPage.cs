@@ -11,8 +11,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class PutJobPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/put-job.asciidoc:276")]
-		public void Line276()
+		[Description("ml/anomaly-detection/apis/put-job.asciidoc:298")]
+		public void Line298()
 		{
 			// tag::9c11e238772d67dbc9d273776de9916c[]
 			var response0 = new SearchResponse<object>();

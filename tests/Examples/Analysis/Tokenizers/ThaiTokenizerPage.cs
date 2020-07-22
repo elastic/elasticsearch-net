@@ -11,8 +11,8 @@ namespace Examples.Analysis.Tokenizers
 	public class ThaiTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenizers/thai-tokenizer.asciidoc:17")]
-		public void Line17()
+		[Description("analysis/tokenizers/thai-tokenizer.asciidoc:20")]
+		public void Line20()
 		{
 			// tag::a1e5f3956f9a697e79478fc9a6e30e1f[]
 			var response0 = new SearchResponse<object>();

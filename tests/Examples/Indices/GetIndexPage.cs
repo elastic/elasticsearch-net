@@ -10,15 +10,15 @@ namespace Examples.Indices
 {
 	public class GetIndexPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
-		[Description("indices/get-index.asciidoc:10")]
-		public void Line10()
+		[U]
+		[Description("indices/get-index.asciidoc:11")]
+		public void Line11()
 		{
 			// tag::be8f28f31207b173de61be032fcf239c[]
-			var response0 = new SearchResponse<object>();
+			var getIndexResponse = client.Indices.Get("twitter");
 			// end::be8f28f31207b173de61be032fcf239c[]
 
-			response0.MatchesExample(@"GET /twitter");
+			getIndexResponse.MatchesExample(@"GET /twitter");
 		}
 	}
 }

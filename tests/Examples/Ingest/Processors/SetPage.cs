@@ -11,8 +11,8 @@ namespace Examples.Ingest.Processors
 	public class SetPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/processors/set.asciidoc:32")]
-		public void Line32()
+		[Description("ingest/processors/set.asciidoc:33")]
+		public void Line33()
 		{
 			// tag::366b29ef910f12c7fbced35f39000953[]
 			var response0 = new SearchResponse<object>();

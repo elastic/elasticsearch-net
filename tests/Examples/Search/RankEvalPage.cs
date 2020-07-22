@@ -11,8 +11,8 @@ namespace Examples.Search
 	public class RankEvalPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("search/rank-eval.asciidoc:223")]
-		public void Line223()
+		[Description("search/rank-eval.asciidoc:232")]
+		public void Line232()
 		{
 			// tag::2a989679e4b71569e17e02db8865b685[]
 			var response0 = new SearchResponse<object>();
@@ -37,8 +37,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/rank-eval.asciidoc:278")]
-		public void Line278()
+		[Description("search/rank-eval.asciidoc:287")]
+		public void Line287()
 		{
 			// tag::b0b86fd5ac0d4814fc70cb0642cee258[]
 			var response0 = new SearchResponse<object>();
@@ -62,8 +62,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/rank-eval.asciidoc:319")]
-		public void Line319()
+		[Description("search/rank-eval.asciidoc:328")]
+		public void Line328()
 		{
 			// tag::351775a1f73e47025463bd937948f7b4[]
 			var response0 = new SearchResponse<object>();
@@ -87,8 +87,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/rank-eval.asciidoc:363")]
-		public void Line363()
+		[Description("search/rank-eval.asciidoc:372")]
+		public void Line372()
 		{
 			// tag::c4f013ff1a8b80c87c0265a91ed12648[]
 			var response0 = new SearchResponse<object>();
@@ -112,8 +112,8 @@ namespace Examples.Search
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("search/rank-eval.asciidoc:419")]
-		public void Line419()
+		[Description("search/rank-eval.asciidoc:428")]
+		public void Line428()
 		{
 			// tag::12c4a9be9ffc26cdc0e9343d53c1fd5d[]
 			var response0 = new SearchResponse<object>();

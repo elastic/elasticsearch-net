@@ -154,8 +154,78 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/ingest-node.asciidoc:431")]
-		public void Line431()
+		[Description("ingest/ingest-node.asciidoc:405")]
+		public void Line405()
+		{
+			// tag::0f3a2ec8a70c87e19582f1e923f79ab0[]
+			var response0 = new SearchResponse<object>();
+			// end::0f3a2ec8a70c87e19582f1e923f79ab0[]
+
+			response0.MatchesExample(@"PUT _ingest/pipeline/not_prod_dropper
+			{
+			  ""processors"": [
+			    {
+			      ""drop"": {
+			        ""if"": """"""
+			            Collection tags = ctx.tags;
+			            if(tags != null){
+			              for (String tag : tags) {
+			                  if (tag.toLowerCase().contains('prod')) {
+			                      return false;
+			                  }
+			              }
+			            }
+			            return true;
+			        """"""
+			      }
+			    }
+			  ]
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:432")]
+		public void Line432()
+		{
+			// tag::9dbd847c989bbc1a11e0a6d2fd04efe0[]
+			var response0 = new SearchResponse<object>();
+
+			var response1 = new SearchResponse<object>();
+			// end::9dbd847c989bbc1a11e0a6d2fd04efe0[]
+
+			response0.MatchesExample(@"PUT _scripts/not_prod
+			{
+			  ""script"": {
+			    ""lang"": ""painless"",
+			    ""source"": """"""
+			        Collection tags = ctx.tags;
+			        if(tags != null){
+			          for (String tag : tags) {
+			              if (tag.toLowerCase().contains('prod')) {
+			                  return false;
+			              }
+			          }
+			        }
+			        return true;
+			    """"""
+			  }
+			}");
+
+			response1.MatchesExample(@"PUT _ingest/pipeline/not_prod_dropper
+			{
+			  ""processors"": [
+			    {
+			      ""drop"": {
+			        ""if"": { ""id"": ""not_prod"" }
+			      }
+			    }
+			  ]
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("ingest/ingest-node.asciidoc:466")]
+		public void Line466()
 		{
 			// tag::da19607976c3740945300c18e692bc49[]
 			var response0 = new SearchResponse<object>();
@@ -168,8 +238,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/ingest-node.asciidoc:446")]
-		public void Line446()
+		[Description("ingest/ingest-node.asciidoc:481")]
+		public void Line481()
 		{
 			// tag::784dcf96b4970ce6c90d999cdfc2ef0b[]
 			var response0 = new SearchResponse<object>();
@@ -182,8 +252,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/ingest-node.asciidoc:498")]
-		public void Line498()
+		[Description("ingest/ingest-node.asciidoc:533")]
+		public void Line533()
 		{
 			// tag::7cc6435cb7508e532df1e761934f1683[]
 			var response0 = new SearchResponse<object>();
@@ -217,8 +287,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/ingest-node.asciidoc:545")]
-		public void Line545()
+		[Description("ingest/ingest-node.asciidoc:580")]
+		public void Line580()
 		{
 			// tag::fe2d94eba550076cc27ee21a711fdb5c[]
 			var response0 = new SearchResponse<object>();
@@ -239,8 +309,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/ingest-node.asciidoc:561")]
-		public void Line561()
+		[Description("ingest/ingest-node.asciidoc:596")]
+		public void Line596()
 		{
 			// tag::bfc92c930234ada7a3f394263b0deb1e[]
 			var response0 = new SearchResponse<object>();
@@ -255,8 +325,8 @@ namespace Examples.Ingest
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("ingest/ingest-node.asciidoc:609")]
-		public void Line609()
+		[Description("ingest/ingest-node.asciidoc:644")]
+		public void Line644()
 		{
 			// tag::2ad6189aef1ecbb52bf0ddbd4e7a80cb[]
 			var response0 = new SearchResponse<object>();

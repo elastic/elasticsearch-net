@@ -7,8 +7,8 @@ namespace Examples.Ilm.Actions
 	public class IlmShrinkPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ilm/actions/ilm-shrink.asciidoc:36")]
-		public void Line36()
+		[Description("ilm/actions/ilm-shrink.asciidoc:49")]
+		public void Line49()
 		{
 			// tag::f3b4ddce8ff21fc1a76a7c0d9c36650e[]
 			var response0 = new SearchResponse<object>();

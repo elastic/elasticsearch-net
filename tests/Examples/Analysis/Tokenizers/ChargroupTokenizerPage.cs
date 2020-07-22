@@ -11,8 +11,8 @@ namespace Examples.Analysis.Tokenizers
 	public class ChargroupTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenizers/chargroup-tokenizer.asciidoc:30")]
-		public void Line30()
+		[Description("analysis/tokenizers/chargroup-tokenizer.asciidoc:33")]
+		public void Line33()
 		{
 			// tag::f8cafb1a08bc9b2dd5239f99d4e93f4c[]
 			var response0 = new SearchResponse<object>();

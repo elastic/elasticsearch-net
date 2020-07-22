@@ -22,8 +22,8 @@ namespace Examples.RestApi
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("rest-api/info.asciidoc:159")]
-		public void Line159()
+		[Description("rest-api/info.asciidoc:167")]
+		public void Line167()
 		{
 			// tag::b11a0675e49df0709be693297ca73a2c[]
 			var response0 = new SearchResponse<object>();
@@ -33,8 +33,8 @@ namespace Examples.RestApi
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("rest-api/info.asciidoc:166")]
-		public void Line166()
+		[Description("rest-api/info.asciidoc:174")]
+		public void Line174()
 		{
 			// tag::4ed946065faa92f9950f04e402676a97[]
 			var response0 = new SearchResponse<object>();

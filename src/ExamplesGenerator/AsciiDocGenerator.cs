@@ -49,7 +49,7 @@ namespace ExamplesGenerator
 
 				var cSharpFile = new FileInfo(example.Path);
 				var originalFile = Regex.Replace(cSharpFile.FullName.Replace("\\", "/"), @"^(.*Examples/)",
-					$"https://github.com/elastic/elasticsearch-net/tree/{branchName}/src/Examples/Examples/");
+					$"https://github.com/elastic/elasticsearch-net/tree/{branchName}/tests/Examples/");
 
 				if (!exampleFile.Directory.Exists)
 					exampleFile.Directory.Create();
@@ -67,8 +67,12 @@ namespace ExamplesGenerator
 					.AppendLine("IMPORTANT NOTE")
 					.AppendLine("==============")
 					.AppendLine($"This file is generated from method {example.Method} in {originalFile}#L{example.StartLineNumber}-L{example.EndLineNumber}.")
-					.AppendLine("If you wish to submit a PR to change this example, please change the source method above")
-					.AppendLine("and run dotnet run -- asciidoc in the ExamplesGenerator project directory.")
+					.AppendLine("If you wish to submit a PR to change this example, please change the source method above and run")
+					.AppendLine()
+					.AppendLine("dotnet run -- asciidoc")
+					.AppendLine()
+					.AppendLine("from the ExamplesGenerator project directory, and submit a PR for the change at")
+					.AppendLine("https://github.com/elastic/elasticsearch-net/pulls")
 					.AppendLine("////")
 					.AppendLine()
 					.AppendLine("[source, csharp]")

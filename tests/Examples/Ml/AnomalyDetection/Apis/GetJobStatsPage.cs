@@ -11,8 +11,8 @@ namespace Examples.Ml.AnomalyDetection.Apis
 	public class GetJobStatsPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("ml/anomaly-detection/apis/get-job-stats.asciidoc:366")]
-		public void Line366()
+		[Description("ml/anomaly-detection/apis/get-job-stats.asciidoc:370")]
+		public void Line370()
 		{
 			// tag::9298aaf8232a819e79b3bf8471245e98[]
 			var response0 = new SearchResponse<object>();

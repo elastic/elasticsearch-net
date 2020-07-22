@@ -11,8 +11,8 @@ namespace Examples.Analysis.Tokenizers
 	public class StandardTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenizers/standard-tokenizer.asciidoc:13")]
-		public void Line13()
+		[Description("analysis/tokenizers/standard-tokenizer.asciidoc:16")]
+		public void Line16()
 		{
 			// tag::88a08d0b15ef41324f5c23db533d47d1[]
 			var response0 = new SearchResponse<object>();
@@ -26,8 +26,8 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenizers/standard-tokenizer.asciidoc:136")]
-		public void Line136()
+		[Description("analysis/tokenizers/standard-tokenizer.asciidoc:139")]
+		public void Line139()
 		{
 			// tag::7375d4fe72c848ee3b0a799fda8bb0f0[]
 			var response0 = new SearchResponse<object>();

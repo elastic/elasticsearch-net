@@ -27,8 +27,8 @@ namespace Examples.Search
 		}
 
 		[U]
-		[Description("search/count.asciidoc:92")]
-		public void Line92()
+		[Description("search/count.asciidoc:99")]
+		public void Line99()
 		{
 			// tag::8f0511f8a5cb176ff2afdd4311799a33[]
 			var indexResponse = client.Index(new Tweet

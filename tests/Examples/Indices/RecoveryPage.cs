@@ -11,8 +11,8 @@ namespace Examples.Indices
 	public class RecoveryPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("indices/recovery.asciidoc:11")]
-		public void Line11()
+		[Description("indices/recovery.asciidoc:13")]
+		public void Line13()
 		{
 			// tag::499e9bdf7848fd4de33b6f2bd8a6b1f2[]
 			var response0 = new SearchResponse<object>();
@@ -22,8 +22,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/recovery.asciidoc:171")]
-		public void Line171()
+		[Description("indices/recovery.asciidoc:177")]
+		public void Line177()
 		{
 			// tag::13ebcb01ebf1b5d2b5c52739db47e30c[]
 			var response0 = new SearchResponse<object>();
@@ -33,8 +33,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/recovery.asciidoc:226")]
-		public void Line226()
+		[Description("indices/recovery.asciidoc:232")]
+		public void Line232()
 		{
 			// tag::5dfb23f6e36ef484f1d3271bae76a8d1[]
 			var response0 = new SearchResponse<object>();
@@ -44,8 +44,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/recovery.asciidoc:326")]
-		public void Line326()
+		[Description("indices/recovery.asciidoc:332")]
+		public void Line332()
 		{
 			// tag::5619103306878d58a058bce87c5bd82b[]
 			var response0 = new SearchResponse<object>();

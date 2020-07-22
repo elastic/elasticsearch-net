@@ -29,5 +29,9 @@ namespace Examples.Models
 		public long? Likes { get; set; }
 		public int? Age { get; set; }
 		public string Email { get; set; }
+
+		public string Title { get; set; }
+
+		public DateTime? Date { get; set; }
 	}
 }

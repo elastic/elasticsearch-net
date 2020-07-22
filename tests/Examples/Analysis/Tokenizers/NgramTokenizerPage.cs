@@ -11,8 +11,8 @@ namespace Examples.Analysis.Tokenizers
 	public class NgramTokenizerPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenizers/ngram-tokenizer.asciidoc:21")]
-		public void Line21()
+		[Description("analysis/tokenizers/ngram-tokenizer.asciidoc:24")]
+		public void Line24()
 		{
 			// tag::39963032d423e2f20f53c4621b6ca3c6[]
 			var response0 = new SearchResponse<object>();
@@ -26,8 +26,8 @@ namespace Examples.Analysis.Tokenizers
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/tokenizers/ngram-tokenizer.asciidoc:217")]
-		public void Line217()
+		[Description("analysis/tokenizers/ngram-tokenizer.asciidoc:220")]
+		public void Line220()
 		{
 			// tag::9efcafd1f28490fd658d88df7d93c66c[]
 			var response0 = new SearchResponse<object>();

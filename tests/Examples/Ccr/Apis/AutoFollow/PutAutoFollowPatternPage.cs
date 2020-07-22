@@ -33,9 +33,9 @@ namespace Examples.Ccr.Apis.AutoFollow
 		[Description("ccr/apis/auto-follow/put-auto-follow-pattern.asciidoc:88")]
 		public void Line88()
 		{
-			// tag::754a082212929e02a9f71d5404d3301d[]
+			// tag::90c087560ea6c0b7405f710971c86ef0[]
 			var response0 = new SearchResponse<object>();
-			// end::754a082212929e02a9f71d5404d3301d[]
+			// end::90c087560ea6c0b7405f710971c86ef0[]
 
 			response0.MatchesExample(@"PUT /_ccr/auto_follow/my_auto_follow_pattern
 			{
@@ -45,6 +45,9 @@ namespace Examples.Ccr.Apis.AutoFollow
 			    ""leader_index*""
 			  ],
 			  ""follow_index_pattern"" : ""{{leader_index}}-follower"",
+			  ""settings"": {
+			    ""index.number_of_replicas"": 0
+			  },
 			  ""max_read_request_operation_count"" : 1024,
 			  ""max_outstanding_read_requests"" : 16,
 			  ""max_read_request_size"" : ""1024k"",

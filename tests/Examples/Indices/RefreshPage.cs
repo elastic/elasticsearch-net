@@ -11,8 +11,8 @@ namespace Examples.Indices
 	public class RefreshPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("indices/refresh.asciidoc:10")]
-		public void Line10()
+		[Description("indices/refresh.asciidoc:11")]
+		public void Line11()
 		{
 			// tag::c2ac42934e4b76197032b2fc429e317d[]
 			var response0 = new SearchResponse<object>();
@@ -22,8 +22,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/refresh.asciidoc:93")]
-		public void Line93()
+		[Description("indices/refresh.asciidoc:95")]
+		public void Line95()
 		{
 			// tag::0e98949e80e665795bc6cfc997165241[]
 			var response0 = new SearchResponse<object>();
@@ -33,8 +33,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/refresh.asciidoc:103")]
-		public void Line103()
+		[Description("indices/refresh.asciidoc:105")]
+		public void Line105()
 		{
 			// tag::d7898526d239d2aea83727fb982f8f77[]
 			var response0 = new SearchResponse<object>();

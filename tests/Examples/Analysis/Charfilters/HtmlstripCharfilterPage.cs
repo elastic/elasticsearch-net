@@ -11,30 +11,55 @@ namespace Examples.Analysis.Charfilters
 	public class HtmlstripCharfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/charfilters/htmlstrip-charfilter.asciidoc:12")]
-		public void Line12()
+		[Description("analysis/charfilters/htmlstrip-charfilter.asciidoc:21")]
+		public void Line21()
 		{
-			// tag::d6de3491f5787f739d5cd8c2ff3dddfa[]
+			// tag::affc7ff234dc3acccb2bf7dc51f54813[]
 			var response0 = new SearchResponse<object>();
-			// end::d6de3491f5787f739d5cd8c2ff3dddfa[]
+			// end::affc7ff234dc3acccb2bf7dc51f54813[]
 
-			response0.MatchesExample(@"POST _analyze
+			response0.MatchesExample(@"GET /_analyze
 			{
-			  ""tokenizer"":      ""keyword"", \<1>
-			  ""char_filter"":  [ ""html_strip"" ],
-			  ""text"": ""\<p>I&apos;m so \<b>happy</b>!</p>""
+			  ""tokenizer"": ""keyword"",
+			  ""char_filter"": [
+			    ""html_strip""
+			  ],
+			  ""text"": ""<p>I&apos;m so <b>happy</b>!</p>""
 			}");
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/charfilters/htmlstrip-charfilter.asciidoc:74")]
-		public void Line74()
+		[Description("analysis/charfilters/htmlstrip-charfilter.asciidoc:64")]
+		public void Line64()
 		{
-			// tag::426f95b13a5b6042b5273d74ad8ee708[]
+			// tag::1e1db5745eefa984b2cf2f693dbb9943[]
 			var response0 = new SearchResponse<object>();
+			// end::1e1db5745eefa984b2cf2f693dbb9943[]
 
-			var response1 = new SearchResponse<object>();
-			// end::426f95b13a5b6042b5273d74ad8ee708[]
+			response0.MatchesExample(@"PUT /my_index
+			{
+			  ""settings"": {
+			    ""analysis"": {
+			      ""analyzer"": {
+			        ""my_analyzer"": {
+			          ""tokenizer"": ""keyword"",
+			          ""char_filter"": [
+			            ""html_strip""
+			          ]
+			        }
+			      }
+			    }
+			  }
+			}");
+		}
+
+		[U(Skip = "Example not implemented")]
+		[Description("analysis/charfilters/htmlstrip-charfilter.asciidoc:106")]
+		public void Line106()
+		{
+			// tag::b7f42ed5e0469dd79f7f599e447a7e25[]
+			var response0 = new SearchResponse<object>();
+			// end::b7f42ed5e0469dd79f7f599e447a7e25[]
 
 			response0.MatchesExample(@"PUT my_index
 			{
@@ -43,23 +68,21 @@ namespace Examples.Analysis.Charfilters
 			      ""analyzer"": {
 			        ""my_analyzer"": {
 			          ""tokenizer"": ""keyword"",
-			          ""char_filter"": [""my_char_filter""]
+			          ""char_filter"": [
+			            ""my_custom_html_strip_char_filter""
+			          ]
 			        }
 			      },
 			      ""char_filter"": {
-			        ""my_char_filter"": {
+			        ""my_custom_html_strip_char_filter"": {
 			          ""type"": ""html_strip"",
-			          ""escaped_tags"": [""b""]
+			          ""escaped_tags"": [
+			            ""b""
+			          ]
 			        }
 			      }
 			    }
 			  }
-			}");
-
-			response1.MatchesExample(@"POST my_index/_analyze
-			{
-			  ""analyzer"": ""my_analyzer"",
-			  ""text"": ""\<p>I&apos;m so \<b>happy</b>!</p>""
 			}");
 		}
 	}

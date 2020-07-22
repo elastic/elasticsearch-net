@@ -11,8 +11,8 @@ namespace Examples.Indices
 	public class ClearcachePage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("indices/clearcache.asciidoc:10")]
-		public void Line10()
+		[Description("indices/clearcache.asciidoc:11")]
+		public void Line11()
 		{
 			// tag::486eee2c8e75520f825fec08c1fbd67e[]
 			var response0 = new SearchResponse<object>();
@@ -22,8 +22,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/clearcache.asciidoc:101")]
-		public void Line101()
+		[Description("indices/clearcache.asciidoc:108")]
+		public void Line108()
 		{
 			// tag::e97b14be2c4030bfc92e5d09a27e9fc9[]
 			var response0 = new SearchResponse<object>();
@@ -41,8 +41,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/clearcache.asciidoc:121")]
-		public void Line121()
+		[Description("indices/clearcache.asciidoc:128")]
+		public void Line128()
 		{
 			// tag::62069c4118d79daf9612b29659b16627[]
 			var response0 = new SearchResponse<object>();
@@ -52,8 +52,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/clearcache.asciidoc:133")]
-		public void Line133()
+		[Description("indices/clearcache.asciidoc:140")]
+		public void Line140()
 		{
 			// tag::2f43c5e976713a5c5cd8eb4b08cfffca[]
 			var response0 = new SearchResponse<object>();
@@ -63,8 +63,8 @@ namespace Examples.Indices
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("indices/clearcache.asciidoc:143")]
-		public void Line143()
+		[Description("indices/clearcache.asciidoc:150")]
+		public void Line150()
 		{
 			// tag::c4a1d03dcfb82913d0724a42b0a89f20[]
 			var response0 = new SearchResponse<object>();

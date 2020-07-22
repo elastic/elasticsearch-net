@@ -11,8 +11,8 @@ namespace Examples.Analysis.Charfilters
 	public class PatternReplaceCharfilterPage : ExampleBase
 	{
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/charfilters/pattern-replace-charfilter.asciidoc:51")]
-		public void Line51()
+		[Description("analysis/charfilters/pattern-replace-charfilter.asciidoc:54")]
+		public void Line54()
 		{
 			// tag::2b8ba109999fc87712433cea92c99ebe[]
 			var response0 = new SearchResponse<object>();
@@ -51,8 +51,8 @@ namespace Examples.Analysis.Charfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/charfilters/pattern-replace-charfilter.asciidoc:101")]
-		public void Line101()
+		[Description("analysis/charfilters/pattern-replace-charfilter.asciidoc:104")]
+		public void Line104()
 		{
 			// tag::1e1f0d83b1ca672396341af5dcfd2603[]
 			var response0 = new SearchResponse<object>();
@@ -102,8 +102,8 @@ namespace Examples.Analysis.Charfilters
 		}
 
 		[U(Skip = "Example not implemented")]
-		[Description("analysis/charfilters/pattern-replace-charfilter.asciidoc:202")]
-		public void Line202()
+		[Description("analysis/charfilters/pattern-replace-charfilter.asciidoc:205")]
+		public void Line205()
 		{
 			// tag::32afaee3f1326785b4009ff48576d42f[]
 			var response0 = new SearchResponse<object>();

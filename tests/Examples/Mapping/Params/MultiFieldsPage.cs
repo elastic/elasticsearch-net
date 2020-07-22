@@ -5,26 +5,62 @@
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
+using Newtonsoft.Json.Linq;
 
 namespace Examples.Mapping.Params
 {
 	public class MultiFieldsPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("mapping/params/multi-fields.asciidoc:10")]
 		public void Line10()
 		{
 			// tag::5271f4ff29bb48838396e5a674664ee0[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("my_index", c => c
+				.Map(m => m
+					.Properties(p => p
+						.Text(t => t
+							.Name("city")
+							.Fields(f => f
+								.Keyword(k => k
+									.Name("raw")
+								)
+							)
+						)
+					)
+				)
+			);
 
-			var response1 = new SearchResponse<object>();
+			var indexResponse1 = client.Index(new
+			{
+				city = "New York"
+			}, i => i.Index("my_index").Id(1));
 
-			var response2 = new SearchResponse<object>();
+			var indexResponse2 = client.Index(new
+			{
+				city = "York"
+			}, i => i.Index("my_index").Id(2));
 
-			var response3 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("my_index")
+				.Query(q => q
+					.Match(m => m
+						.Field("city")
+						.Query("york")
+					)
+				)
+				.Sort(so => so
+					.Field("city.raw", SortOrder.Ascending)
+				)
+				.Aggregations(a => a
+					.Terms("Cities", t => t
+						.Field("city.raw")
+					)
+				)
+			);
 			// end::5271f4ff29bb48838396e5a674664ee0[]
 
-			response0.MatchesExample(@"PUT my_index
+			createIndexResponse.MatchesExample(@"PUT my_index
 			{
 			  ""mappings"": {
 			    ""properties"": {
@@ -40,17 +76,17 @@ namespace Examples.Mapping.Params
 			  }
 			}");
 
-			response1.MatchesExample(@"PUT my_index/_doc/1
+			indexResponse1.MatchesExample(@"PUT my_index/_doc/1
 			{
 			  ""city"": ""New York""
 			}");
 
-			response2.MatchesExample(@"PUT my_index/_doc/2
+			indexResponse2.MatchesExample(@"PUT my_index/_doc/2
 			{
 			  ""city"": ""York""
 			}");
 
-			response3.MatchesExample(@"GET my_index/_search
+			searchResponse.MatchesExample(@"GET my_index/_search
 			{
 			  ""query"": {
 			    ""match"": {
@@ -67,24 +103,64 @@ namespace Examples.Mapping.Params
 			      }
 			    }
 			  }
-			}");
+			}", (e,b) =>
+			{
+
+				b["query"]["match"]["city"].ToLongFormQuery();
+				b["sort"] = new JArray(new JObject
+				{
+					["city.raw"] = new JObject
+					{
+						["order"] = "asc"
+					}
+				});
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("mapping/params/multi-fields.asciidoc:75")]
 		public void Line75()
 		{
 			// tag::fc8097bdfb6f3a4017bf4186ccca8a84[]
-			var response0 = new SearchResponse<object>();
+			var createIndexResponse = client.Indices.Create("my_index", c => c
+				.Map(m => m
+					.Properties(p => p
+						.Text(t => t
+							.Name("text")
+							.Fields(f => f
+								.Text(k => k
+									.Name("english")
+									.Analyzer("english")
+								)
+							)
+						)
+					)
+				)
+			);
 
-			var response1 = new SearchResponse<object>();
+			var indexResponse1 = client.Index(new
+			{
+				text = "quick brown fox"
+			}, i => i.Index("my_index").Id(1));
 
-			var response2 = new SearchResponse<object>();
+			var indexResponse2 = client.Index(new
+			{
+				text = "quick brown foxes"
+			}, i => i.Index("my_index").Id(2));
 
-			var response3 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("my_index")
+				.Query(q => q
+					.MultiMatch(m => m
+						.Fields(new [] { "text", "text.english" })
+						.Query("quick brown foxes")
+						.Type(TextQueryType.MostFields)
+					)
+				)
+			);
 			// end::fc8097bdfb6f3a4017bf4186ccca8a84[]
 
-			response0.MatchesExample(@"PUT my_index
+			createIndexResponse.MatchesExample(@"PUT my_index
 			{
 			  ""mappings"": {
 			    ""properties"": {
@@ -101,13 +177,13 @@ namespace Examples.Mapping.Params
 			  }
 			}");
 
-			response1.MatchesExample(@"PUT my_index/_doc/1
+			indexResponse1.MatchesExample(@"PUT my_index/_doc/1
 			{ ""text"": ""quick brown fox"" } \<3>");
 
-			response2.MatchesExample(@"PUT my_index/_doc/2
+			indexResponse2.MatchesExample(@"PUT my_index/_doc/2
 			{ ""text"": ""quick brown foxes"" } \<3>");
 
-			response3.MatchesExample(@"GET my_index/_search
+			searchResponse.MatchesExample(@"GET my_index/_search
 			{
 			  ""query"": {
 			    ""multi_match"": {

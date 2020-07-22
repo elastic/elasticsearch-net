@@ -34,7 +34,7 @@ namespace Examples.Mapping.Types
 					{
 						message = "no arrays in this document...",
 						tags = "elasticsearch",
-						lists =new { name = "prog_list", description = "programming list" }
+						lists = new { name = "prog_list", description = "programming list" }
 					}, i => i.Id(2).Index("my_index"));
 
 			var searchResponse = client.Search<object>(s => s

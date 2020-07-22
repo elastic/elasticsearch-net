@@ -3,9 +3,13 @@
 ////
 IMPORTANT NOTE
 ==============
-This file is generated from method Line401 in https://github.com/elastic/elasticsearch-net/tree/master/src/Examples/Examples/Search/Request/HighlightingPage.cs#L258-L294.
-If you wish to submit a PR to change this example, please change the source method above
-and run dotnet run -- asciidoc in the ExamplesGenerator project directory.
+This file is generated from method Line401 in https://github.com/elastic/elasticsearch-net/tree/master/tests/Examples/Search/Request/HighlightingPage.cs#L201-L237.
+If you wish to submit a PR to change this example, please change the source method above and run
+
+dotnet run -- asciidoc
+
+from the ExamplesGenerator project directory, and submit a PR for the change at
+https://github.com/elastic/elasticsearch-net/pulls
 ////
 
 [source, csharp]
