@@ -243,6 +243,11 @@ namespace Nest
 	[InterfaceDataContract]
 	public partial interface IDeleteExpiredDataRequest : IRequest<DeleteExpiredDataRequestParameters>
 	{
+		[IgnoreDataMember]
+		Id JobId
+		{
+			get;
+		}
 	}
 
 	///<summary>Request for DeleteExpiredData <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html</para></summary>
@@ -250,8 +255,34 @@ namespace Nest
 	{
 		protected IDeleteExpiredDataRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteExpiredData;
-	// values part of the url path
-	// Request parameters
+		///<summary>/_ml/_delete_expired_data/{job_id}</summary>
+		///<param name = "jobId">Optional, accepts null</param>
+		public DeleteExpiredDataRequest(Id jobId): base(r => r.Optional("job_id", jobId))
+		{
+		}
+
+		///<summary>/_ml/_delete_expired_data</summary>
+		public DeleteExpiredDataRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IDeleteExpiredDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		// Request parameters
+		///<summary>The desired requests per second for the deletion processes.</summary>
+		public long? RequestsPerSecond
+		{
+			get => Q<long? >("requests_per_second");
+			set => Q("requests_per_second", value);
+		}
+
+		///<summary>How long can the underlying delete processes run until they are canceled</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	[InterfaceDataContract]
@@ -513,7 +544,13 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Id IForecastJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-	// Request parameters
+		// Request parameters
+		///<summary>The max memory able to be used by the forecast. Default is 20mb.</summary>
+		public string MaxModelMemory
+		{
+			get => Q<string>("max_model_memory");
+			set => Q("max_model_memory", value);
+		}
 	}
 
 	[InterfaceDataContract]
@@ -694,7 +731,16 @@ namespace Nest
 		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		[IgnoreDataMember]
 		LongId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<LongId>("category_id");
-	// Request parameters
+		// Request parameters
+		///<summary>
+		/// Specifies the partition to retrieve categories for. This is optional, and should never be used for jobs where per-partition categorization
+		/// is disabled.
+		///</summary>
+		public Field PartitionFieldValue
+		{
+			get => Q<Field>("partition_field_value");
+			set => Q("partition_field_value", value);
+		}
 	}
 
 	[InterfaceDataContract]

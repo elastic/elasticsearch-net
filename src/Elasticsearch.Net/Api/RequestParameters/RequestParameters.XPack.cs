@@ -29,6 +29,13 @@ namespace Elasticsearch.Net.Specification.XPackApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
+		///<summary>If an enterprise license is installed, return the type and mode as 'enterprise' (default: false)</summary>
+		public bool? AcceptEnterprise
+		{
+			get => Q<bool? >("accept_enterprise");
+			set => Q("accept_enterprise", value);
+		}
+
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories
 		{
