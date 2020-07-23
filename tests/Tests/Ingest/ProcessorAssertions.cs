@@ -75,7 +75,7 @@ namespace Tests.Ingest
 			public override string Key => "append";
 		}
 
-		[SkipVersion("<7.8.0", "Empty Value bug in versions less than Elasticsearch 7.8.0")]
+		[SkipVersion("<7.9.0", "Description added in 7.9.0")]
 		public class Csv : ProcessorAssertion
 		{
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
@@ -84,6 +84,7 @@ namespace Tests.Ingest
 					.TargetFields(new[] { "targetField1", "targetField2" })
 					.EmptyValue("empty")
 					.Trim()
+					.Description("parses CSV")
 				);
 
 			public override IProcessor Initializer => new CsvProcessor
@@ -91,7 +92,8 @@ namespace Tests.Ingest
 				Field = "name",
 				TargetFields = new[] { "targetField1", "targetField2" },
 				EmptyValue = "empty",
-				Trim = true
+				Trim = true,
+				Description = "parses CSV"
 			};
 
 			public override object Json => new
@@ -99,7 +101,8 @@ namespace Tests.Ingest
 				field = "name",
 				target_fields = new[] { "targetField1", "targetField2" },
 				empty_value = "empty",
-				trim = true
+				trim = true,
+				description = "parses CSV"
 			};
 
 			public override string Key => "csv";

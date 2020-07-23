@@ -2,7 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
@@ -17,6 +17,14 @@ namespace Nest
 		/// <summary> The name of the processor, will be used as the key when persisting the processor on the pipeline </summary>
 		[IgnoreDataMember]
 		string Name { get; }
+
+		/// <summary>
+		/// A description to explain the purpose of the specific processor instance.
+		/// <para />
+		/// Valid in Elasticsearch 7.9.0+
+		/// </summary>
+		[DataMember(Name = "description")]
+		string Description { get; set; }
 
 		/// <summary>
 		/// If a processor fails, call these processors instead. Read more about handling failures here:
@@ -54,6 +62,9 @@ namespace Nest
 		/// <inheritdoc cref="IProcessor.OnFailure"/>
 		public IEnumerable<IProcessor> OnFailure { get; set; }
 		protected abstract string Name { get; }
+		/// <inheritdoc cref="IProcessor.Description"/>
+		public string Description { get; set; }
+
 		string IProcessor.Name => Name;
 	}
 
@@ -65,10 +76,14 @@ namespace Nest
 	{
 		protected abstract string Name { get; }
 		string IProcessor.Name => Name;
+		string IProcessor.Description { get; set; }
 		IEnumerable<IProcessor> IProcessor.OnFailure { get; set; }
 		string IProcessor.If { get; set; }
 		string IProcessor.Tag { get; set; }
 		bool? IProcessor.IgnoreFailure { get; set; }
+
+		/// <inheritdoc cref="IProcessor.Description"/>
+		public TProcessorDescriptor Description(string description) => Assign(description, (a, v) => a.Description = v);
 
 		/// <inheritdoc cref="IProcessor.OnFailure"/>
 		public TProcessorDescriptor OnFailure(IEnumerable<IProcessor> processors) => Assign(processors.ToListOrNullIfEmpty(), (a, v) => a.OnFailure = v);
