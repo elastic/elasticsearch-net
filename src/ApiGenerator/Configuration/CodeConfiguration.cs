@@ -40,7 +40,6 @@ namespace ApiGenerator.Configuration
 			"dangling_indices.import_dangling_index.json", // TODO: implement
 			"dangling_indices.delete_dangling_index.json", // TODO: implement
 			"indices.add_block.json", // TODO: implement
-			"indices.resolve_index.json", // TODO: implement
 			"security.clear_cached_privileges.json", // TODO: implement
 
 			"autoscaling.get_autoscaling_decision.json", // 7.7 experimental
