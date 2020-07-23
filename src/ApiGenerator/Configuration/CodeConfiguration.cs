@@ -36,9 +36,6 @@ namespace ApiGenerator.Configuration
 
 		public static string[] IgnoredApisHighLevel { get; } =
 		{
-			"dangling_indices.list_dangling_indices.json", // TODO: implement
-			"dangling_indices.import_dangling_index.json", // TODO: implement
-			"dangling_indices.delete_dangling_index.json", // TODO: implement
 			"indices.add_block.json", // TODO: implement
 			"indices.resolve_index.json", // TODO: implement
 			"security.clear_cached_privileges.json", // TODO: implement
