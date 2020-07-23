@@ -32,6 +32,85 @@ using Elasticsearch.Net.Specification.IndicesApi;
 namespace Nest
 {
 	[InterfaceDataContract]
+	public partial interface IAddIndexBlockRequest : IRequest<AddIndexBlockRequestParameters>
+	{
+		[IgnoreDataMember]
+		Indices Index
+		{
+			get;
+		}
+
+		[IgnoreDataMember]
+		IndexBlock Block
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for AddBlock <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</para></summary>
+	public partial class AddIndexBlockRequest : PlainRequestBase<AddIndexBlockRequestParameters>, IAddIndexBlockRequest
+	{
+		protected IAddIndexBlockRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesAddBlock;
+		///<summary>/{index}/_block/{block}</summary>
+		///<param name = "index">this parameter is required</param>
+		///<param name = "block">this parameter is required</param>
+		public AddIndexBlockRequest(Indices index, IndexBlock block): base(r => r.Required("index", index).Required("block", block))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected AddIndexBlockRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices IAddIndexBlockRequest.Index => Self.RouteValues.Get<Indices>("index");
+		[IgnoreDataMember]
+		IndexBlock IAddIndexBlockRequest.Block => Self.RouteValues.Get<IndexBlock>("block");
+		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices
+		{
+			get => Q<bool? >("allow_no_indices");
+			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
+
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters>
 	{
 		[IgnoreDataMember]

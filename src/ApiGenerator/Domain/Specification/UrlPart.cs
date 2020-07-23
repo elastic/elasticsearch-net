@@ -104,6 +104,8 @@ namespace ApiGenerator.Domain.Specification
 					case "type":
 						return Type == "string" ? "Name" : "Names";
 
+					case "block":
+						return "IndexBlock";
 
 					//This forces a compilation error post code generation as intended
 					default: return Type + "_";
