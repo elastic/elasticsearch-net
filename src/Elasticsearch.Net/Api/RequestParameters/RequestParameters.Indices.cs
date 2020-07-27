@@ -25,7 +25,7 @@ using System.Linq.Expressions;
 namespace Elasticsearch.Net.Specification.IndicesApi
 {
 	///<summary>Request options for AddBlock <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</para></summary>
-	public class AddBlockRequestParameters : RequestParameters<AddBlockRequestParameters>
+	public class AddIndexBlockRequestParameters : RequestParameters<AddIndexBlockRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		public override bool SupportsBody => false;

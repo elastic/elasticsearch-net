@@ -36,7 +36,6 @@ namespace ApiGenerator.Configuration
 
 		public static string[] IgnoredApisHighLevel { get; } =
 		{
-			"indices.add_block.json", // TODO: implement
 			"indices.resolve_index.json", // TODO: implement
 			"security.clear_cached_privileges.json", // TODO: implement
 
