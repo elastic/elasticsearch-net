@@ -104,6 +104,9 @@ namespace ApiGenerator.Domain.Specification
 					case "type":
 						return Type == "string" ? "Name" : "Names";
 
+					case "block":
+						return "IndexBlock";
+
 					case "index_uuid":
 						return "IndexUuid";
 
