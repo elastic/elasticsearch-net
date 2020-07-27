@@ -37,6 +37,30 @@ namespace Nest.Specification.IndicesApi
 		}
 
 		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.add_block</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</a>
+		/// </summary>
+		public AddIndexBlockResponse AddBlock(Indices index, IndexBlock block, Func<AddIndexBlockDescriptor, IAddIndexBlockRequest> selector = null) => AddBlock(selector.InvokeOrDefault(new AddIndexBlockDescriptor(index: index, block: block)));
+		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.add_block</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</a>
+		/// </summary>
+		public Task<AddIndexBlockResponse> AddBlockAsync(Indices index, IndexBlock block, Func<AddIndexBlockDescriptor, IAddIndexBlockRequest> selector = null, CancellationToken ct = default) => AddBlockAsync(selector.InvokeOrDefault(new AddIndexBlockDescriptor(index: index, block: block)), ct);
+		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.add_block</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</a>
+		/// </summary>
+		public AddIndexBlockResponse AddBlock(IAddIndexBlockRequest request) => DoRequest<IAddIndexBlockRequest, AddIndexBlockResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.add_block</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</a>
+		/// </summary>
+		public Task<AddIndexBlockResponse> AddBlockAsync(IAddIndexBlockRequest request, CancellationToken ct = default) => DoRequestAsync<IAddIndexBlockRequest, AddIndexBlockResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>indices.analyze</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</a>
