@@ -23,6 +23,7 @@ using Nest.Specification.AsyncSearchApi;
 using Nest.Specification.CatApi;
 using Nest.Specification.ClusterApi;
 using Nest.Specification.CrossClusterReplicationApi;
+using Nest.Specification.DanglingIndicesApi;
 using Nest.Specification.EnrichApi;
 using Nest.Specification.GraphApi;
 using Nest.Specification.IndexLifecycleManagementApi;
@@ -73,6 +74,13 @@ namespace Nest
 
 		///<summary>Cross Cluster Replication APIs</summary>
 		public CrossClusterReplicationNamespace CrossClusterReplication
+		{
+			get;
+			private set;
+		}
+
+		///<summary>Dangling Indices APIs</summary>
+		public DanglingIndicesNamespace DanglingIndices
 		{
 			get;
 			private set;
@@ -210,6 +218,7 @@ namespace Nest
 			Cat = new CatNamespace(this);
 			Cluster = new ClusterNamespace(this);
 			CrossClusterReplication = new CrossClusterReplicationNamespace(this);
+			DanglingIndices = new DanglingIndicesNamespace(this);
 			Enrich = new EnrichNamespace(this);
 			Graph = new GraphNamespace(this);
 			IndexLifecycleManagement = new IndexLifecycleManagementNamespace(this);

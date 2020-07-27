@@ -11,7 +11,6 @@ namespace Tests.Mapping.Types.Core.DateNanos
 	{
 		[DateNanos(
 			DocValues = true,
-			Similarity = "classic",
 			Store = true,
 			Index = false,
 			Boost = 1.2,
@@ -33,7 +32,6 @@ namespace Tests.Mapping.Types.Core.DateNanos
 				{
 					type = "date_nanos",
 					doc_values = true,
-					similarity = "classic",
 					store = true,
 					index = false,
 					boost = 1.2,
