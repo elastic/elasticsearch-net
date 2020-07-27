@@ -2,7 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System;
+using System;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -22,7 +22,6 @@ namespace Tests.Mapping.Types.Core.Date
 				{
 					type = "date",
 					doc_values = false,
-					similarity = "BM25",
 					store = true,
 					index = false,
 					boost = 1.2,
@@ -37,7 +36,6 @@ namespace Tests.Mapping.Types.Core.Date
 			.Date(b => b
 				.Name(p => p.LastActivity)
 				.DocValues(false)
-				.Similarity("BM25")
 				.Store()
 				.Index(false)
 				.Boost(1.2)
@@ -52,7 +50,6 @@ namespace Tests.Mapping.Types.Core.Date
 				"lastActivity", new DateProperty
 				{
 					DocValues = false,
-					Similarity = "BM25",
 					Store = true,
 					Index = false,
 					Boost = 1.2,
