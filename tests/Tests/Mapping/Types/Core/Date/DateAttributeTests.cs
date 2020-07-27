@@ -11,7 +11,6 @@ namespace Tests.Mapping.Types.Core.Date
 	{
 		[Date(
 			DocValues = true,
-			Similarity = "classic",
 			Store = true,
 			Index = false,
 			Boost = 1.2,
@@ -37,7 +36,6 @@ namespace Tests.Mapping.Types.Core.Date
 				{
 					type = "date",
 					doc_values = true,
-					similarity = "classic",
 					store = true,
 					index = false,
 					boost = 1.2,
