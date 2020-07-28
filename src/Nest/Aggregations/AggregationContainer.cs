@@ -199,6 +199,10 @@ namespace Nest
 		[DataMember(Name = "moving_fn")]
 		IMovingFunctionAggregation MovingFunction { get; set; }
 
+		/// <inheritdoc cref="IMovingPercentilesAggregation"/>
+		[DataMember(Name = "moving_percentiles")]
+		IMovingPercentilesAggregation MovingPercentiles { get; set; }
+
 		[DataMember(Name = "nested")]
 		INestedAggregation Nested { get; set; }
 
@@ -353,6 +357,9 @@ namespace Nest
 		public IMovingAverageAggregation MovingAverage { get; set; }
 
 		public IMovingFunctionAggregation MovingFunction { get; set; }
+
+		/// <inheritdoc cref="IMovingPercentilesAggregation"/>
+		public IMovingPercentilesAggregation MovingPercentiles { get; set; }
 
 		public INestedAggregation Nested { get; set; }
 
@@ -510,6 +517,8 @@ namespace Nest
 		IMovingAverageAggregation IAggregationContainer.MovingAverage { get; set; }
 
 		IMovingFunctionAggregation IAggregationContainer.MovingFunction { get; set; }
+
+		IMovingPercentilesAggregation IAggregationContainer.MovingPercentiles { get; set; }
 
 		INestedAggregation IAggregationContainer.Nested { get; set; }
 
@@ -793,6 +802,11 @@ namespace Nest
 			Func<MovingFunctionAggregationDescriptor, IMovingFunctionAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.MovingFunction = d);
+
+		public AggregationContainerDescriptor<T> MovingPercentiles(string name,
+			Func<MovingPercentilesAggregationDescriptor, IMovingPercentilesAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.MovingPercentiles = d);
 
 		public AggregationContainerDescriptor<T> CumulativeSum(string name,
 			Func<CumulativeSumAggregationDescriptor, ICumulativeSumAggregation> selector
