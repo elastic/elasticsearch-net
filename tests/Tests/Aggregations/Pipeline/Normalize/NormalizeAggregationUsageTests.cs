@@ -3,7 +3,8 @@
 // See the LICENSE file in the project root for more information
 
  using System;
-using FluentAssertions;
+ using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -18,6 +19,7 @@ namespace Tests.Aggregations.Pipeline.Normalize
 	 *
 	 * NOTE: Valid for Elasticsearch 7.9.0+ with at least basic license level
 	 */
+	[SkipVersion("<7.9.0", "Introduced in 7.9.0")]
 	public class NormalizeAggregationUsageTests : AggregationUsageTestBase
 	{
 		public NormalizeAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
