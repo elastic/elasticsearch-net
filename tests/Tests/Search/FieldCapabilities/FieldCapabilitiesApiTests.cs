@@ -2,8 +2,9 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System;
+using System;
 using System.Linq;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -68,5 +69,65 @@ namespace Tests.Search.FieldCapabilities
 			jobTitleCapabilities.Aggregatable.Should().BeTrue();
 			jobTitleCapabilities.Searchable.Should().BeTrue();
 		}
+	}
+
+	[SkipVersion("<7.9.0", "index filter introduced in 7.9.0")]
+	public class FieldCapabilitiesIndexFilterApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, FieldCapabilitiesResponse, IFieldCapabilitiesRequest, FieldCapabilitiesDescriptor,
+			FieldCapabilitiesRequest>
+	{
+		public FieldCapabilitiesIndexFilterApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			index_filter = new
+			{
+				term = new
+				{
+					versionControl = new
+					{
+						value = "git"
+					}
+				}
+			}
+		};
+
+		protected override bool SupportsDeserialization { get; } = false;
+
+		protected override bool ExpectIsValid => true;
+
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> Fluent => d => d
+			.Fields("*")
+			.IndexFilter<Project>(q => q
+				.Term(t => t
+					.Field(f => f.VersionControl)
+					.Value(Project.VersionControlConstant)
+				)
+			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override FieldCapabilitiesRequest Initializer => new FieldCapabilitiesRequest(Index<Project>().And<Developer>())
+		{
+			Fields = "*",
+			IndexFilter = new TermQuery
+			{
+				Field = Field<Project>(f => f.VersionControl),
+				Value = Project.VersionControlConstant
+			}
+		};
+
+		protected override string UrlPath => "/project%2Cdevs/_field_caps?fields=%2A";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.FieldCapabilities(Index<Project>().And<Developer>(), f),
+			(c, f) => c.FieldCapabilitiesAsync(Index<Project>().And<Developer>(), f),
+			(c, r) => c.FieldCapabilities(r),
+			(c, r) => c.FieldCapabilitiesAsync(r)
+		);
+
+		protected override void ExpectResponse(FieldCapabilitiesResponse response) => response.ShouldBeValid();
 	}
 }
