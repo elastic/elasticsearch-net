@@ -21,6 +21,12 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "ignore_above")]
 		int? IgnoreAbove { get; set; }
+
+		/// <summary>
+		/// Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.
+		/// </summary>
+		[DataMember(Name ="null_value")]
+		string NullValue { get; set; }
 	}
 
 	/// <inheritdoc cref="IWildcardProperty" />
@@ -31,6 +37,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IWildcardProperty.IgnoreAbove" />
 		public int? IgnoreAbove { get; set; }
+
+		/// <inheritdoc cref="IWildcardProperty.NullValue" />
+		public string NullValue { get; set; }
 	}
 
 	/// <inheritdoc cref="IWildcardProperty" />
@@ -42,8 +51,12 @@ namespace Nest
 		public WildcardPropertyDescriptor() : base(FieldType.Wildcard) { }
 
 		int? IWildcardProperty.IgnoreAbove { get; set; }
+		string IWildcardProperty.NullValue { get; set; }
 
 		/// <inheritdoc cref="IWildcardProperty.IgnoreAbove" />
 		public WildcardPropertyDescriptor<T> IgnoreAbove(int? ignoreAbove) => Assign(ignoreAbove, (a, v) => a.IgnoreAbove = v);
+
+		/// <inheritdoc cref="IWildcardProperty.NullValue" />
+		public WildcardPropertyDescriptor<T> NullValue(string nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);
 	}
 }

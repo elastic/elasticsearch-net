@@ -9,7 +9,7 @@ namespace Tests.Mapping.Types.Specialized.Wildcard
 {
 	public class WildcardTest
 	{
-		[Wildcard(IgnoreAbove = 512)]
+		[Wildcard(IgnoreAbove = 512, NullValue = "foo")]
 		public string Full { get; set; }
 
 		[Wildcard]
@@ -26,7 +26,8 @@ namespace Tests.Mapping.Types.Specialized.Wildcard
 				full = new
 				{
 					type = "wildcard",
-					ignore_above = 512
+					ignore_above = 512,
+					null_value = "foo"
 				},
 				simple = new
 				{

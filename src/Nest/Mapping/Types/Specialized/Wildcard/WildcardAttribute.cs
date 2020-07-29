@@ -19,5 +19,8 @@ namespace Nest
 			get => Self.IgnoreAbove.GetValueOrDefault(2147483647);
 			set => Self.IgnoreAbove = value;
 		}
+
+		/// <inheritdoc cref="IWildcardProperty.NullValue" />
+		public string NullValue { get; set; }
 	}
 }
