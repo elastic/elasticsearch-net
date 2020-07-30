@@ -24,11 +24,8 @@ namespace Nest
 
 		public BulkOperationsCollection() => Items = new List<TOperation>();
 
-		public BulkOperationsCollection(IEnumerable<TOperation> operations)
-		{
-			Items = new List<TOperation>();
-			Items.AddRange(operations);
-		}
+		public BulkOperationsCollection(IEnumerable<TOperation> operations) =>
+			Items = new List<TOperation>(operations);
 
 		public int Count
 		{
