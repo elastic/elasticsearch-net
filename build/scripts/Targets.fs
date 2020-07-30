@@ -10,6 +10,7 @@ open System.IO
 open Build
 open Commandline
 open Bullseye
+open Octokit
 open ProcNet
 open Fake.Core
 
@@ -90,7 +91,12 @@ module Main =
         
         //RELEASE
         command "release" releaseChain <| fun _ ->
-            printfn "Finished Release Build %O" artifactsVersion
+            let outputPath = match parsed.CommandArguments with | SetVersion c -> c.OutputLocation | _ -> None
+            match outputPath with
+            | None -> printfn "Finished Release Build %O, artifacts available at: %s" artifactsVersion Paths.BuildOutput
+            | Some path ->
+                Fake.IO.Shell.cp_r Paths.BuildOutput path
+                printfn "Finished Release Build %O, output copied to: %s" artifactsVersion path
 
         conditional "test-nuget-package" (not parsed.SkipTests && Environment.isWindows)  <| fun _ -> 
             // run release unit tests puts packages in the system cache prevent this from happening locally
