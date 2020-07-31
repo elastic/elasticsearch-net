@@ -123,6 +123,10 @@ namespace Nest
 				v.Visit(d);
 				Accept(v, d.Aggregations);
 			});
+			AcceptAggregation(aggregation.Normalize, visitor, (v, d) =>
+			{
+				v.Visit(d);
+			});
 			AcceptAggregation(aggregation.Parent, visitor, (v, d) =>
 			{
 				v.Visit(d);

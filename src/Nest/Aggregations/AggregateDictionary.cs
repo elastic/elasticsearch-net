@@ -124,6 +124,8 @@ namespace Nest
 
 		public SingleBucketAggregate Nested(string key) => TryGet<SingleBucketAggregate>(key);
 
+		public ValueAggregate Normalize(string key) => TryGet<ValueAggregate>(key);
+
 		public SingleBucketAggregate ReverseNested(string key) => TryGet<SingleBucketAggregate>(key);
 
 		public SingleBucketAggregate Children(string key) => TryGet<SingleBucketAggregate>(key);

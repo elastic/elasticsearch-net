@@ -3,7 +3,11 @@ FROM mcr.microsoft.com/dotnet/core/sdk:${DOTNET_VERSION} AS elasticsearch-net-bu
 
 WORKDIR /sln
 
+
 COPY ./*.sln ./nuget.config ./*.Build.props ./*.Build.targets ./
+
+COPY ./dotnet-tools.json ./
+RUN dotnet tool restore
 
 # todo standardize on Build.props as Directory.Build.props needs that form
 COPY ./src/*.Build.props  ./src/
@@ -21,13 +25,12 @@ RUN for file in $(find . -name "*.?sproj"); do mkdir -p $(dirname $file)/$(basen
 COPY build/scripts/scripts.fsproj ./build/scripts/
 COPY .ci/Jenkins.csproj ./.ci/
 
-RUN ls -al 
-RUN ls -al tests
-RUN ls -al src
-RUN ls -al src/Elasticsearch.Net
-
+# Install app dependencies
 RUN dotnet restore 
 
-# Install app dependencies
-
+# copy relevant files (see .dockerignore)
 COPY . .
+
+# making sure enough git info is available inside the container
+RUN git rev-parse HEAD .
+

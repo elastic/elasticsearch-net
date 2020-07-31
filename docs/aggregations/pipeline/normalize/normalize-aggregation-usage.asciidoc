@@ -1,0 +1,106 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Pipeline/Normalize/NormalizeAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[normalize-aggregation-usage]]
+=== Normalize Aggregation Usage
+
+A parent pipeline aggregation which calculates the specific normalized/rescaled value for a specific bucket value.
+Values that cannot be normalized, will be skipped using the skip gap policy.
+
+NOTE: Valid for Elasticsearch 7.9.0+ with at least basic license level
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.DateHistogram("projects_started_per_month", dh => dh
+    .Field(p => p.StartedOn)
+    .CalendarInterval(DateInterval.Month)
+    .Aggregations(aa => aa
+        .Sum("commits", sm => sm
+            .Field(p => p.NumberOfCommits)
+        )
+        .Normalize("percent_of_commits", aaa => aaa
+            .BucketsPath("commits")
+            .Method(NormalizeMethod.PercentOfSum)
+            .Format("00.00%")
+        )
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new DateHistogramAggregation("projects_started_per_month")
+{
+    Field = "startedOn",
+    CalendarInterval = DateInterval.Month,
+    Aggregations = new SumAggregation("commits", "numberOfCommits") &&
+        new NormalizeAggregation("percent_of_commits", "commits")
+        {
+            Method = NormalizeMethod.PercentOfSum,
+            Format = "00.00%"
+        }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_started_per_month": {
+    "date_histogram": {
+      "field": "startedOn",
+      "calendar_interval": "month"
+    },
+    "aggs": {
+      "commits": {
+        "sum": {
+          "field": "numberOfCommits"
+        }
+      },
+      "percent_of_commits": {
+        "normalize": {
+          "buckets_path": "commits",
+          "method": "percent_of_sum",
+          "format": "00.00%"
+        }
+      }
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+
+var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
+projectsPerMonth.Should().NotBeNull();
+projectsPerMonth.Buckets.Should().NotBeNull();
+projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+
+foreach (var bucket in projectsPerMonth.Buckets)
+{
+    var normalize = bucket.Normalize("percent_of_commits");
+    normalize.Value.Should().BeGreaterOrEqualTo(0);
+    normalize.ValueAsString.Should().NotBeNullOrEmpty();
+}
+----
+

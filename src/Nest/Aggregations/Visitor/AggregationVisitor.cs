@@ -72,6 +72,8 @@
 
 		void Visit(INestedAggregation aggregation);
 
+		void Visit(INormalizeAggregation aggregation);
+
 		void Visit(IParentAggregation aggregation);
 
 		void Visit(IReverseNestedAggregation aggregation);
@@ -236,6 +238,8 @@
 		public virtual void Visit(IRareTermsAggregation aggregation) { }
 
 		public virtual void Visit(INestedAggregation aggregation) { }
+
+		public virtual void Visit(INormalizeAggregation aggregation) { }
 
 		public virtual void Visit(IParentAggregation aggregation) { }
 

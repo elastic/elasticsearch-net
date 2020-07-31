@@ -206,6 +206,10 @@ namespace Nest
 		[DataMember(Name = "nested")]
 		INestedAggregation Nested { get; set; }
 
+		/// <inheritdoc cref="INormalizeAggregation"/>
+		[DataMember(Name = "normalize")]
+		INormalizeAggregation Normalize { get; set; }
+
 		/// <inheritdoc cref="IParentAggregation"/>
 		[DataMember(Name = "parent")]
 		IParentAggregation Parent { get; set; }
@@ -362,6 +366,9 @@ namespace Nest
 		public IMovingPercentilesAggregation MovingPercentiles { get; set; }
 
 		public INestedAggregation Nested { get; set; }
+
+		/// <inheritdoc cref="INormalizeAggregation"/>
+		public INormalizeAggregation Normalize { get; set; }
 
 		/// <inheritdoc cref="IParentAggregation"/>
 		public IParentAggregation Parent { get; set; }
@@ -522,6 +529,8 @@ namespace Nest
 
 		INestedAggregation IAggregationContainer.Nested { get; set; }
 
+		INormalizeAggregation IAggregationContainer.Normalize { get; set; }
+
 		IParentAggregation IAggregationContainer.Parent { get; set; }
 
 		IPercentileRanksAggregation IAggregationContainer.PercentileRanks { get; set; }
@@ -680,6 +689,12 @@ namespace Nest
 			Func<NestedAggregationDescriptor<T>, INestedAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Nested = d);
+
+		/// <inheritdoc cref="INormalizeAggregation"/>
+		public AggregationContainerDescriptor<T> Normalize(string name,
+			Func<NormalizeAggregationDescriptor, INormalizeAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Normalize = d);
 
 		/// <inheritdoc cref="IParentAggregation"/>
 		public AggregationContainerDescriptor<T> Parent<TParent>(string name,

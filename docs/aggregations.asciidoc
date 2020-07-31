@@ -279,6 +279,8 @@ There are many different types of pipeline aggregation, each computing different
 
 * <<moving-percentiles-aggregation-usage,Moving Percentiles Aggregation Usage>>
 
+* <<normalize-aggregation-usage,Normalize Aggregation Usage>>
+
 * <<percentiles-bucket-aggregation-usage,Percentiles Bucket Aggregation Usage>>
 
 * <<serial-differencing-aggregation-usage,Serial Differencing Aggregation Usage>>
@@ -324,6 +326,8 @@ include::aggregations/pipeline/moving-average/moving-average-simple-aggregation-
 include::aggregations/pipeline/moving-function/moving-function-aggregation-usage.asciidoc[]
 
 include::aggregations/pipeline/moving-percentiles/moving-percentiles-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/normalize/normalize-aggregation-usage.asciidoc[]
 
 include::aggregations/pipeline/percentiles-bucket/percentiles-bucket-aggregation-usage.asciidoc[]
 
