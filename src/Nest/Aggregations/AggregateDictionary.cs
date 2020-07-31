@@ -98,6 +98,8 @@ namespace Nest
 
 		public PercentilesAggregate PercentilesBucket(string key) => TryGet<PercentilesAggregate>(key);
 
+		public PercentilesAggregate MovingPercentiles(string key) => TryGet<PercentilesAggregate>(key);
+
 		public PercentilesAggregate PercentileRanks(string key) => TryGet<PercentilesAggregate>(key);
 
 		public TopHitsAggregate TopHits(string key) => TryGet<TopHitsAggregate>(key);
