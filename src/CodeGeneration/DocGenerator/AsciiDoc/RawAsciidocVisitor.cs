@@ -51,7 +51,7 @@ namespace DocGenerator.AsciiDoc
 
 				var counter = 1;
 
-				foreach (var directory in directories)
+				foreach (var directory in directories.OrderBy(s=>s))
 				{
 					foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.OutputDirPath, directory), "*.asciidoc",
 						SearchOption.AllDirectories))
@@ -77,7 +77,7 @@ namespace DocGenerator.AsciiDoc
 
 				var list = new UnorderedList();
 
-				foreach (var directory in directories)
+				foreach (var directory in directories.OrderBy(s=>s))
 				{
 					foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.OutputDirPath, directory), "*.asciidoc",
 						SearchOption.AllDirectories))
