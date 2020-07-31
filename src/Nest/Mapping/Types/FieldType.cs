@@ -148,6 +148,9 @@ namespace Nest
 		Histogram,
 
 		[EnumMember(Value = "constant_keyword")]
-		ConstantKeyword
+		ConstantKeyword,
+
+		[EnumMember(Value = "wildcard")]
+		Wildcard,
 	}
 }
