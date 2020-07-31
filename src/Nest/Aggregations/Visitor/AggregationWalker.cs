@@ -117,6 +117,7 @@ namespace Nest
 				Accept(v, d.Aggregations);
 			});
 			AcceptAggregation(aggregation.MovingAverage, visitor, (v, d) => v.Visit(d));
+			AcceptAggregation(aggregation.MovingPercentiles, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.Nested, visitor, (v, d) =>
 			{
 				v.Visit(d);
