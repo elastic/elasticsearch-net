@@ -114,6 +114,8 @@
 
 		void Visit(IMovingAverageAggregation aggregation);
 
+		void Visit(IMovingPercentilesAggregation aggregation);
+
 		void Visit(ICumulativeSumAggregation aggregation);
 
 		void Visit(ICumulativeCardinalityAggregation aggregation);
@@ -218,6 +220,8 @@
 		public virtual void Visit(ISerialDifferencingAggregation aggregation) { }
 
 		public virtual void Visit(IMovingAverageAggregation aggregation) { }
+
+		public virtual void Visit(IMovingPercentilesAggregation aggregation) { }
 
 		public virtual void Visit(IMinBucketAggregation aggregation) { }
 
