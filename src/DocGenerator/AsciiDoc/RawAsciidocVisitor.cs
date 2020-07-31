@@ -83,7 +83,7 @@ namespace DocGenerator.AsciiDoc
 
 				var list = new UnorderedList();
 
-				foreach (var directory in directories)
+				foreach (var directory in directories.OrderBy(s=>s))
 				{
 					var files = Directory.EnumerateFiles(
 						Path.Combine(Program.TmpOutputDirPath, directory), "*.asciidoc", SearchOption.AllDirectories);
