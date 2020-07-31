@@ -72,7 +72,11 @@ namespace Nest
 		{
 			{ "variance", 0 },
 			{ "std_deviation", 1 },
-			{ "std_deviation_bounds", 2 }
+			{ "std_deviation_bounds", 2 },
+			{ "variance_population", 3 },
+			{ "variance_sampling", 4 },
+			{ "std_deviation_population", 5 },
+			{ "std_deviation_sampling", 6 },
 		};
 
 		private static readonly byte[] ValueAsStringField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.ValueAsString);
@@ -588,6 +592,18 @@ namespace Nest
 						case 2:
 							extendedStatsMetric.StdDeviationBounds =
 								formatterResolver.GetFormatter<StandardDeviationBounds>().Deserialize(ref reader, formatterResolver);
+							break;
+						case 3:
+							extendedStatsMetric.VariancePopulation = reader.ReadNullableDouble();
+							break;
+						case 4:
+							extendedStatsMetric.VarianceSampling = reader.ReadNullableDouble();
+							break;
+						case 5:
+							extendedStatsMetric.StdDeviationPopulation = reader.ReadNullableDouble();
+							break;
+						case 6:
+							extendedStatsMetric.StdDeviationSampling = reader.ReadNullableDouble();
 							break;
 					}
 				}
