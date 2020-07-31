@@ -2,9 +2,10 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System;
+using System;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -56,6 +57,19 @@ namespace Tests.Aggregations.Metric.ExtendedStats
 			commitStats.StdDeviationBounds.Should().NotBeNull();
 			commitStats.StdDeviationBounds.Upper.Should().BeGreaterThan(0);
 			commitStats.StdDeviationBounds.Lower.Should().NotBe(0);
+
+			// hide
+			if (TestClient.Configuration.InRange(">=7.9.0"))
+			{
+				commitStats.VariancePopulation.Should().BeGreaterThan(0);
+				commitStats.VarianceSampling.Should().BeGreaterThan(0);
+				commitStats.StdDeviationPopulation.Should().BeGreaterThan(0);
+				commitStats.StdDeviationSampling.Should().BeGreaterThan(0);
+				commitStats.StdDeviationBounds.UpperPopulation.Should().BeGreaterThan(0);
+				commitStats.StdDeviationBounds.UpperSampling.Should().NotBe(0);
+				commitStats.StdDeviationBounds.LowerPopulation.Should().NotBe(0);
+				commitStats.StdDeviationBounds.LowerSampling.Should().NotBe(0);
+			}
 		}
 	}
 
