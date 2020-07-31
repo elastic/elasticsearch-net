@@ -227,6 +227,7 @@ namespace Tests.CodeStandards
 				where !(m.Name == nameof(RankFeatureSigmoidFunctionDescriptor.Pivot) && dt == typeof(RankFeatureSigmoidFunctionDescriptor))
 				where !(m.Name == nameof(DateHistogramGroupSourceDescriptor<object>.CalendarInterval) && dt == typeof(DateHistogramGroupSourceDescriptor<>))
 				where !(m.Name == nameof(DateHistogramGroupSourceDescriptor<object>.FixedInterval) && dt == typeof(DateHistogramGroupSourceDescriptor<>))
+				where !(m.Name == nameof(NormalizeAggregationDescriptor.Method) && dt == typeof(NormalizeAggregationDescriptor))
 
 				select new {m, d, p};
 
