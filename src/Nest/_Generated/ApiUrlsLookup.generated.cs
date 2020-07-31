@@ -74,6 +74,9 @@ namespace Nest
 		internal static ApiUrls ClusterStats = new ApiUrls(new[]{"_cluster/stats", "_cluster/stats/nodes/{node_id}"});
 		internal static ApiUrls NoNamespaceCount = new ApiUrls(new[]{"_count", "{index}/_count"});
 		internal static ApiUrls NoNamespaceCreate = new ApiUrls(new[]{"{index}/_create/{id}"});
+		internal static ApiUrls DanglingIndicesDeleteDanglingIndex = new ApiUrls(new[]{"_dangling/{index_uuid}"});
+		internal static ApiUrls DanglingIndicesImportDanglingIndex = new ApiUrls(new[]{"_dangling/{index_uuid}"});
+		internal static ApiUrls DanglingIndicesList = new ApiUrls(new[]{"_dangling"});
 		internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[]{"{index}/_doc/{id}"});
 		internal static ApiUrls NoNamespaceDeleteByQuery = new ApiUrls(new[]{"{index}/_delete_by_query"});
 		internal static ApiUrls NoNamespaceDeleteByQueryRethrottle = new ApiUrls(new[]{"_delete_by_query/{task_id}/_rethrottle"});
@@ -102,6 +105,7 @@ namespace Nest
 		internal static ApiUrls IndexLifecycleManagementStart = new ApiUrls(new[]{"_ilm/start"});
 		internal static ApiUrls IndexLifecycleManagementStop = new ApiUrls(new[]{"_ilm/stop"});
 		internal static ApiUrls NoNamespaceIndex = new ApiUrls(new[]{"{index}/_doc/{id}", "{index}/_doc"});
+		internal static ApiUrls IndicesAddBlock = new ApiUrls(new[]{"{index}/_block/{block}"});
 		internal static ApiUrls IndicesAnalyze = new ApiUrls(new[]{"_analyze", "{index}/_analyze"});
 		internal static ApiUrls IndicesClearCache = new ApiUrls(new[]{"_cache/clear", "{index}/_cache/clear"});
 		internal static ApiUrls IndicesClone = new ApiUrls(new[]{"{index}/_clone/{target}"});
