@@ -1105,6 +1105,29 @@ namespace Nest
 		public ReloadSearchAnalyzersDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 	}
 
+	///<summary>Descriptor for Resolve <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</para></summary>
+	public partial class ResolveIndexDescriptor : RequestDescriptorBase<ResolveIndexDescriptor, ResolveIndexRequestParameters, IResolveIndexRequest>, IResolveIndexRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesResolve;
+		///<summary>/_resolve/index/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public ResolveIndexDescriptor(Names name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ResolveIndexDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Names IResolveIndexRequest.Name => Self.RouteValues.Get<Names>("name");
+		// Request parameters
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		public ResolveIndexDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
+	}
+
 	///<summary>Descriptor for Rollover <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</para></summary>
 	public partial class RolloverIndexDescriptor : RequestDescriptorBase<RolloverIndexDescriptor, RolloverIndexRequestParameters, IRolloverIndexRequest>, IRolloverIndexRequest
 	{

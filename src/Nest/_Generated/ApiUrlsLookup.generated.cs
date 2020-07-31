@@ -134,6 +134,7 @@ namespace Nest
 		internal static ApiUrls IndicesRecoveryStatus = new ApiUrls(new[]{"_recovery", "{index}/_recovery"});
 		internal static ApiUrls IndicesRefresh = new ApiUrls(new[]{"_refresh", "{index}/_refresh"});
 		internal static ApiUrls IndicesReloadSearchAnalyzers = new ApiUrls(new[]{"{index}/_reload_search_analyzers"});
+		internal static ApiUrls IndicesResolve = new ApiUrls(new[]{"_resolve/index/{name}"});
 		internal static ApiUrls IndicesRollover = new ApiUrls(new[]{"{alias}/_rollover", "{alias}/_rollover/{new_index}"});
 		internal static ApiUrls IndicesSegments = new ApiUrls(new[]{"_segments", "{index}/_segments"});
 		internal static ApiUrls IndicesShardStores = new ApiUrls(new[]{"_shard_stores", "{index}/_shard_stores"});

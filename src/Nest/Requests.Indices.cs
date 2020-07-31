@@ -2007,6 +2007,46 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IResolveIndexRequest : IRequest<ResolveIndexRequestParameters>
+	{
+		[IgnoreDataMember]
+		Names Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Resolve <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</para></summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
+	public partial class ResolveIndexRequest : PlainRequestBase<ResolveIndexRequestParameters>, IResolveIndexRequest
+	{
+		protected IResolveIndexRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesResolve;
+		///<summary>/_resolve/index/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public ResolveIndexRequest(Names name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ResolveIndexRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Names IResolveIndexRequest.Name => Self.RouteValues.Get<Names>("name");
+		// Request parameters
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface IRolloverIndexRequest : IRequest<RolloverIndexRequestParameters>
 	{
 		[IgnoreDataMember]
