@@ -1,0 +1,110 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Pipeline/MovingPercentiles/MovingPercentilesAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[moving-percentiles-aggregation-usage]]
+=== Moving Percentiles Aggregation Usage
+
+Given an ordered series of percentiles, the Moving Percentile aggregation will slide a window across those
+percentiles and allow the user to compute the cumulative percentile.
+
+This is conceptually very similar to the Moving Function pipeline aggregation, except it works on the percentiles sketches instead of the actual buckets values.
+
+NOTE: Available in Elasticsearch 7.9.0+ with at least basic license level
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.DateHistogram("projects_started_per_month", dh => dh
+    .Field(p => p.StartedOn)
+    .CalendarInterval(DateInterval.Month)
+    .MinimumDocumentCount(0)
+    .Aggregations(aa => aa
+        .Percentiles("percentiles", sm => sm
+            .Field(p => p.NumberOfCommits)
+        )
+        .MovingPercentiles("moving_percentiles", mv => mv
+            .BucketsPath("percentiles")
+            .Window(10)
+        )
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new DateHistogramAggregation("projects_started_per_month")
+{
+    Field = "startedOn",
+    CalendarInterval = DateInterval.Month,
+    MinimumDocumentCount = 0,
+    Aggregations =
+        new PercentilesAggregation("percentiles", "numberOfCommits")
+        && new MovingPercentilesAggregation("moving_percentiles", "percentiles")
+        {
+            Window = 10
+        }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_started_per_month": {
+    "date_histogram": {
+      "field": "startedOn",
+      "calendar_interval": "month",
+      "min_doc_count": 0
+    },
+    "aggs": {
+      "percentiles": {
+        "percentiles": {
+          "field": "numberOfCommits"
+        }
+      },
+      "moving_percentiles": {
+        "moving_percentiles": {
+          "buckets_path": "percentiles",
+          "window": 10
+        }
+      }
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+
+var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
+projectsPerMonth.Should().NotBeNull();
+projectsPerMonth.Buckets.Should().NotBeNull();
+projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+
+// percentiles not calculated for the first bucket
+foreach (var item in projectsPerMonth.Buckets.Skip(1))
+{
+    var movingPercentiles = item.MovingPercentiles("moving_percentiles");
+    movingPercentiles.Should().NotBeNull();
+    movingPercentiles.Items.Should().NotBeNull();
+}
+----
+
