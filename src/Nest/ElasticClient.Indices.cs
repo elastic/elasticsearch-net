@@ -787,6 +787,30 @@ namespace Nest.Specification.IndicesApi
 		/// </summary>
 		public Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(IReloadSearchAnalyzersRequest request, CancellationToken ct = default) => DoRequestAsync<IReloadSearchAnalyzersRequest, ReloadSearchAnalyzersResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>GET</c> request to the <c>indices.resolve_index</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</a>
+		/// </summary>
+		public ResolveIndexResponse Resolve(Names name, Func<ResolveIndexDescriptor, IResolveIndexRequest> selector = null) => Resolve(selector.InvokeOrDefault(new ResolveIndexDescriptor(name: name)));
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.resolve_index</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</a>
+		/// </summary>
+		public Task<ResolveIndexResponse> ResolveAsync(Names name, Func<ResolveIndexDescriptor, IResolveIndexRequest> selector = null, CancellationToken ct = default) => ResolveAsync(selector.InvokeOrDefault(new ResolveIndexDescriptor(name: name)), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.resolve_index</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</a>
+		/// </summary>
+		public ResolveIndexResponse Resolve(IResolveIndexRequest request) => DoRequest<IResolveIndexRequest, ResolveIndexResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.resolve_index</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</a>
+		/// </summary>
+		public Task<ResolveIndexResponse> ResolveAsync(IResolveIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IResolveIndexRequest, ResolveIndexResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>indices.rollover</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</a>
