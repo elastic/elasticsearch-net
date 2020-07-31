@@ -24,6 +24,8 @@ namespace Nest
 		/// <summary>
 		/// Whether original compound tokens should be discarded from the output with
 		/// <see cref="KuromojiTokenizationMode.Search"/> <see cref="Mode"/>. Defaults to `false`.
+		/// <para />
+		/// Valid in Elasticsearch 7.9.0+
 		/// </summary>
 		[DataMember(Name ="discard_compound_token")]
 		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
