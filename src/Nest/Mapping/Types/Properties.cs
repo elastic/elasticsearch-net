@@ -145,6 +145,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IConstantKeywordProperty"/>
 		TReturnType ConstantKeyword(Func<ConstantKeywordPropertyDescriptor<T>, IConstantKeywordProperty> selector);
+
+		/// <inheritdoc cref="IWildcardProperty"/>
+		TReturnType Wildcard(Func<WildcardPropertyDescriptor<T>, IWildcardProperty> selector);
 	}
 
 	public partial class PropertiesDescriptor<T> where T : class
@@ -227,6 +230,10 @@ namespace Nest
 
 		/// <inheritdoc cref="IConstantKeywordProperty"/>
 		public PropertiesDescriptor<T> ConstantKeyword(Func<ConstantKeywordPropertyDescriptor<T>, IConstantKeywordProperty> selector) =>
+			SetProperty(selector);
+
+		/// <inheritdoc cref="IWildcardProperty"/>
+		public PropertiesDescriptor<T> Wildcard(Func<WildcardPropertyDescriptor<T>, IWildcardProperty> selector) =>
 			SetProperty(selector);
 
 		public PropertiesDescriptor<T> Custom(IProperty customType) => SetProperty(customType);

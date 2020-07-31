@@ -98,6 +98,7 @@ namespace Nest
 				case FieldType.Flattened: return Deserialize<FlattenedProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Histogram: return Deserialize<HistogramProperty>(ref segmentReader, formatterResolver);
 				case FieldType.ConstantKeyword: return Deserialize<ConstantKeywordProperty>(ref segmentReader, formatterResolver);
+				case FieldType.Wildcard: return Deserialize<WildcardProperty>(ref segmentReader, formatterResolver);
 				case FieldType.None:
 					// no "type" field in the property mapping, or FieldType enum could not be parsed from typeString
 					return Deserialize<ObjectProperty>(ref segmentReader, formatterResolver);
@@ -208,6 +209,9 @@ namespace Nest
 					break;
 				case IConstantKeywordProperty constantKeywordProperty:
 					Serialize(ref writer, constantKeywordProperty, formatterResolver);
+					break;
+				case IWildcardProperty wildcardProperty:
+					Serialize(ref writer, wildcardProperty, formatterResolver);
 					break;
 				case IGenericProperty genericProperty:
 					Serialize(ref writer, genericProperty, formatterResolver);
