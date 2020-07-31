@@ -22,6 +22,14 @@ namespace Nest
 		bool? DiscardPunctuation { get; set; }
 
 		/// <summary>
+		/// Whether original compound tokens should be discarded from the output with
+		/// <see cref="KuromojiTokenizationMode.Search"/> <see cref="Mode"/>. Defaults to `false`.
+		/// </summary>
+		[DataMember(Name ="discard_compound_token")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
+		bool? DiscardCompoundToken { get; set; }
+
+		/// <summary>
 		/// The tokenization mode determines how the tokenizer handles compound and unknown words.
 		/// </summary>
 		[DataMember(Name ="mode")]
@@ -65,6 +73,9 @@ namespace Nest
 		public bool? DiscardPunctuation { get; set; }
 
 		/// <inheritdoc />
+		public bool? DiscardCompoundToken { get; set; }
+
+		/// <inheritdoc />
 		public KuromojiTokenizationMode? Mode { get; set; }
 
 		/// <inheritdoc />
@@ -86,32 +97,35 @@ namespace Nest
 	{
 		protected override string Type => "kuromoji_tokenizer";
 		bool? IKuromojiTokenizer.DiscardPunctuation { get; set; }
-
+		bool? IKuromojiTokenizer.DiscardCompoundToken { get; set; }
 		KuromojiTokenizationMode? IKuromojiTokenizer.Mode { get; set; }
 		int? IKuromojiTokenizer.NBestCost { get; set; }
 		string IKuromojiTokenizer.NBestExamples { get; set; }
 		string IKuromojiTokenizer.UserDictionary { get; set; }
 		IEnumerable<string> IKuromojiTokenizer.UserDictionaryRules { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IKuromojiTokenizer.Mode" />
 		public KuromojiTokenizerDescriptor Mode(KuromojiTokenizationMode? mode) => Assign(mode, (a, v) => a.Mode = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IKuromojiTokenizer.DiscardPunctuation" />
 		public KuromojiTokenizerDescriptor DiscardPunctuation(bool? discard = true) => Assign(discard, (a, v) => a.DiscardPunctuation = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IKuromojiTokenizer.DiscardCompoundToken" />
+		public KuromojiTokenizerDescriptor DiscardCompoundToken(bool? discard = true) => Assign(discard, (a, v) => a.DiscardCompoundToken = v);
+
+		/// <inheritdoc cref="IKuromojiTokenizer.UserDictionary" />
 		public KuromojiTokenizerDescriptor UserDictionary(string userDictionary) => Assign(userDictionary, (a, v) => a.UserDictionary = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IKuromojiTokenizer.NBestExamples" />
 		public KuromojiTokenizerDescriptor NBestExamples(string examples) => Assign(examples, (a, v) => a.NBestExamples = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IKuromojiTokenizer.NBestCost" />
 		public KuromojiTokenizerDescriptor NBestCost(int? cost) => Assign(cost, (a, v) => a.NBestCost = v);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IKuromojiTokenizer.UserDictionaryRules" />
 		public KuromojiTokenizerDescriptor UserDictionaryRules(IEnumerable<string> rules) => Assign(rules, (a, v) => a.UserDictionaryRules = rules);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IKuromojiTokenizer.UserDictionaryRules" />
 		public KuromojiTokenizerDescriptor UserDictionaryRules(params string[] rules) => Assign(rules, (a, v) => a.UserDictionaryRules = rules);
 	}
 }
