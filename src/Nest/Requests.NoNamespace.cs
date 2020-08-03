@@ -158,7 +158,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for ClearScroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api</para></summary>
+	///<summary>Request for ClearScroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html</para></summary>
 	public partial class ClearScrollRequest : PlainRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		protected IClearScrollRequest Self => this;

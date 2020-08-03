@@ -163,25 +163,25 @@ namespace Nest
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>clear_scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api">https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html</a>
 		/// </summary>
 		ClearScrollResponse ClearScroll(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>clear_scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api">https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html</a>
 		/// </summary>
 		Task<ClearScrollResponse> ClearScrollAsync(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null, CancellationToken ct = default);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>clear_scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api">https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html</a>
 		/// </summary>
 		ClearScrollResponse ClearScroll(IClearScrollRequest request);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>clear_scroll</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api">https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html</a>
 		/// </summary>
 		Task<ClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken ct = default);
 		/// <summary>
