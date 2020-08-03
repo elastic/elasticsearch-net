@@ -247,6 +247,49 @@ namespace Nest
 		public CreateIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
+	///<summary>Descriptor for CreateDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class CreateDataStreamDescriptor : RequestDescriptorBase<CreateDataStreamDescriptor, CreateDataStreamRequestParameters, ICreateDataStreamRequest>, ICreateDataStreamRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesCreateDataStream;
+		///<summary>/_data_stream/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public CreateDataStreamDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected CreateDataStreamDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name ICreateDataStreamRequest.Name => Self.RouteValues.Get<Name>("name");
+	// Request parameters
+	}
+
+	///<summary>Descriptor for DataStreamsStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class DataStreamsStatsDescriptor : RequestDescriptorBase<DataStreamsStatsDescriptor, DataStreamsStatsRequestParameters, IDataStreamsStatsRequest>, IDataStreamsStatsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDataStreamsStats;
+		///<summary>/_data_stream/_stats</summary>
+		public DataStreamsStatsDescriptor(): base()
+		{
+		}
+
+		///<summary>/_data_stream/{name}/_stats</summary>
+		///<param name = "name">Optional, accepts null</param>
+		public DataStreamsStatsDescriptor(Names name): base(r => r.Optional("name", name))
+		{
+		}
+
+		// values part of the url path
+		Names IDataStreamsStatsRequest.Name => Self.RouteValues.Get<Names>("name");
+		///<summary>A comma-separated list of data stream names; use the special string `_all` or Indices.All to perform the operation on all data streams</summary>
+		public DataStreamsStatsDescriptor Name(Names name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
+	// Request parameters
+	}
+
 	///<summary>Descriptor for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</para></summary>
 	public partial class DeleteIndexDescriptor : RequestDescriptorBase<DeleteIndexDescriptor, DeleteIndexRequestParameters, IDeleteIndexRequest>, IDeleteIndexRequest
 	{
@@ -317,6 +360,27 @@ namespace Nest
 		public DeleteAliasDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Explicit timestamp for the document</summary>
 		public DeleteAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+
+	///<summary>Descriptor for DeleteDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class DeleteDataStreamDescriptor : RequestDescriptorBase<DeleteDataStreamDescriptor, DeleteDataStreamRequestParameters, IDeleteDataStreamRequest>, IDeleteDataStreamRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteDataStream;
+		///<summary>/_data_stream/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public DeleteDataStreamDescriptor(Names name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected DeleteDataStreamDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Names IDeleteDataStreamRequest.Name => Self.RouteValues.Get<Names>("name");
+	// Request parameters
 	}
 
 	///<summary>Descriptor for DeleteTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
@@ -733,6 +797,28 @@ namespace Nest
 		public GetAliasDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetAliasDescriptor Local(bool? local = true) => Qs("local", local);
+	}
+
+	///<summary>Descriptor for GetDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class GetDataStreamDescriptor : RequestDescriptorBase<GetDataStreamDescriptor, GetDataStreamRequestParameters, IGetDataStreamRequest>, IGetDataStreamRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetDataStream;
+		///<summary>/_data_stream</summary>
+		public GetDataStreamDescriptor(): base()
+		{
+		}
+
+		///<summary>/_data_stream/{name}</summary>
+		///<param name = "name">Optional, accepts null</param>
+		public GetDataStreamDescriptor(Names name): base(r => r.Optional("name", name))
+		{
+		}
+
+		// values part of the url path
+		Names IGetDataStreamRequest.Name => Self.RouteValues.Get<Names>("name");
+		///<summary>A comma-separated list of data streams to get; use `*` to get all data streams</summary>
+		public GetDataStreamDescriptor Name(Names name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
+	// Request parameters
 	}
 
 	///<summary>Descriptor for GetFieldMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
