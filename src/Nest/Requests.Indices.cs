@@ -418,6 +418,71 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface ICreateDataStreamRequest : IRequest<CreateDataStreamRequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for CreateDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class CreateDataStreamRequest : PlainRequestBase<CreateDataStreamRequestParameters>, ICreateDataStreamRequest
+	{
+		protected ICreateDataStreamRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesCreateDataStream;
+		///<summary>/_data_stream/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public CreateDataStreamRequest(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected CreateDataStreamRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name ICreateDataStreamRequest.Name => Self.RouteValues.Get<Name>("name");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IDataStreamsStatsRequest : IRequest<DataStreamsStatsRequestParameters>
+	{
+		[IgnoreDataMember]
+		Names Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for DataStreamsStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class DataStreamsStatsRequest : PlainRequestBase<DataStreamsStatsRequestParameters>, IDataStreamsStatsRequest
+	{
+		protected IDataStreamsStatsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDataStreamsStats;
+		///<summary>/_data_stream/_stats</summary>
+		public DataStreamsStatsRequest(): base()
+		{
+		}
+
+		///<summary>/_data_stream/{name}/_stats</summary>
+		///<param name = "name">Optional, accepts null</param>
+		public DataStreamsStatsRequest(Names name): base(r => r.Optional("name", name))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Names IDataStreamsStatsRequest.Name => Self.RouteValues.Get<Names>("name");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -537,6 +602,39 @@ namespace Nest
 			get => Q<Time>("timeout");
 			set => Q("timeout", value);
 		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface IDeleteDataStreamRequest : IRequest<DeleteDataStreamRequestParameters>
+	{
+		[IgnoreDataMember]
+		Names Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for DeleteDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class DeleteDataStreamRequest : PlainRequestBase<DeleteDataStreamRequestParameters>, IDeleteDataStreamRequest
+	{
+		protected IDeleteDataStreamRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteDataStream;
+		///<summary>/_data_stream/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public DeleteDataStreamRequest(Names name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected DeleteDataStreamRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Names IDeleteDataStreamRequest.Name => Self.RouteValues.Get<Names>("name");
+	// Request parameters
 	}
 
 	[InterfaceDataContract]
@@ -1180,6 +1278,38 @@ namespace Nest
 			get => Q<bool? >("local");
 			set => Q("local", value);
 		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface IGetDataStreamRequest : IRequest<GetDataStreamRequestParameters>
+	{
+		[IgnoreDataMember]
+		Names Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for GetDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class GetDataStreamRequest : PlainRequestBase<GetDataStreamRequestParameters>, IGetDataStreamRequest
+	{
+		protected IGetDataStreamRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetDataStream;
+		///<summary>/_data_stream</summary>
+		public GetDataStreamRequest(): base()
+		{
+		}
+
+		///<summary>/_data_stream/{name}</summary>
+		///<param name = "name">Optional, accepts null</param>
+		public GetDataStreamRequest(Names name): base(r => r.Optional("name", name))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Names IGetDataStreamRequest.Name => Self.RouteValues.Get<Names>("name");
+	// Request parameters
 	}
 
 	[InterfaceDataContract]

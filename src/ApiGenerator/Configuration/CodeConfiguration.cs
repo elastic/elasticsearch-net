@@ -58,11 +58,6 @@ namespace ApiGenerator.Configuration
 			"get_script_languages.json", // 7.7 experimental
 
 			"indices.exist_type.json", // already removed on client
-			"indices.create_data_stream.json", // 7.7 experimental
-			"indices.delete_data_stream.json", // 7.7 experimental
-			"indices.get_data_stream.json", // 7.7 experimental
-			"indices.get_data_streams.json", // 7.7 experimental
-			"indices.data_streams_stats.json", // 7.7 experimental
 
 			"ml.delete_trained_model.json", // 7.7 experimental
 			"ml.evaluate_data_frame.json", // 7.7 experimental
