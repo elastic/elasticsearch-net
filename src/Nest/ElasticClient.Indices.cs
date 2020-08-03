@@ -181,6 +181,54 @@ namespace Nest.Specification.IndicesApi
 		/// </summary>
 		public Task<CreateIndexResponse> CreateAsync(ICreateIndexRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateIndexRequest, CreateIndexResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.create_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public CreateDataStreamResponse CreateDataStream(Name name, Func<CreateDataStreamDescriptor, ICreateDataStreamRequest> selector = null) => CreateDataStream(selector.InvokeOrDefault(new CreateDataStreamDescriptor(name: name)));
+		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.create_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<CreateDataStreamResponse> CreateDataStreamAsync(Name name, Func<CreateDataStreamDescriptor, ICreateDataStreamRequest> selector = null, CancellationToken ct = default) => CreateDataStreamAsync(selector.InvokeOrDefault(new CreateDataStreamDescriptor(name: name)), ct);
+		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.create_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public CreateDataStreamResponse CreateDataStream(ICreateDataStreamRequest request) => DoRequest<ICreateDataStreamRequest, CreateDataStreamResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.create_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<CreateDataStreamResponse> CreateDataStreamAsync(ICreateDataStreamRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateDataStreamRequest, CreateDataStreamResponse>(request, request.RequestParameters, ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.data_streams_stats</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public DataStreamsStatsResponse DataStreamsStats(Names name = null, Func<DataStreamsStatsDescriptor, IDataStreamsStatsRequest> selector = null) => DataStreamsStats(selector.InvokeOrDefault(new DataStreamsStatsDescriptor().Name(name: name)));
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.data_streams_stats</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<DataStreamsStatsResponse> DataStreamsStatsAsync(Names name = null, Func<DataStreamsStatsDescriptor, IDataStreamsStatsRequest> selector = null, CancellationToken ct = default) => DataStreamsStatsAsync(selector.InvokeOrDefault(new DataStreamsStatsDescriptor().Name(name: name)), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.data_streams_stats</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public DataStreamsStatsResponse DataStreamsStats(IDataStreamsStatsRequest request) => DoRequest<IDataStreamsStatsRequest, DataStreamsStatsResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.data_streams_stats</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<DataStreamsStatsResponse> DataStreamsStatsAsync(IDataStreamsStatsRequest request, CancellationToken ct = default) => DoRequestAsync<IDataStreamsStatsRequest, DataStreamsStatsResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>DELETE</c> request to the <c>indices.delete</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</a>
@@ -228,6 +276,30 @@ namespace Nest.Specification.IndicesApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</a>
 		/// </summary>
 		public Task<DeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteAliasRequest, DeleteAliasResponse>(request, request.RequestParameters, ct);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>indices.delete_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public DeleteDataStreamResponse DeleteDataStream(Names name, Func<DeleteDataStreamDescriptor, IDeleteDataStreamRequest> selector = null) => DeleteDataStream(selector.InvokeOrDefault(new DeleteDataStreamDescriptor(name: name)));
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>indices.delete_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<DeleteDataStreamResponse> DeleteDataStreamAsync(Names name, Func<DeleteDataStreamDescriptor, IDeleteDataStreamRequest> selector = null, CancellationToken ct = default) => DeleteDataStreamAsync(selector.InvokeOrDefault(new DeleteDataStreamDescriptor(name: name)), ct);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>indices.delete_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public DeleteDataStreamResponse DeleteDataStream(IDeleteDataStreamRequest request) => DoRequest<IDeleteDataStreamRequest, DeleteDataStreamResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>indices.delete_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<DeleteDataStreamResponse> DeleteDataStreamAsync(IDeleteDataStreamRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteDataStreamRequest, DeleteDataStreamResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>DELETE</c> request to the <c>indices.delete_template</c> API, read more about this API online:
 		/// <para></para>
@@ -492,6 +564,30 @@ namespace Nest.Specification.IndicesApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</a>
 		/// </summary>
 		public Task<GetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken ct = default) => DoRequestAsync<IGetAliasRequest, GetAliasResponse>(request, request.RequestParameters, ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.get_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public GetDataStreamResponse GetDataStream(Names name = null, Func<GetDataStreamDescriptor, IGetDataStreamRequest> selector = null) => GetDataStream(selector.InvokeOrDefault(new GetDataStreamDescriptor().Name(name: name)));
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.get_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<GetDataStreamResponse> GetDataStreamAsync(Names name = null, Func<GetDataStreamDescriptor, IGetDataStreamRequest> selector = null, CancellationToken ct = default) => GetDataStreamAsync(selector.InvokeOrDefault(new GetDataStreamDescriptor().Name(name: name)), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.get_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public GetDataStreamResponse GetDataStream(IGetDataStreamRequest request) => DoRequest<IGetDataStreamRequest, GetDataStreamResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.get_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<GetDataStreamResponse> GetDataStreamAsync(IGetDataStreamRequest request, CancellationToken ct = default) => DoRequestAsync<IGetDataStreamRequest, GetDataStreamResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>indices.get_field_mapping</c> API, read more about this API online:
 		/// <para></para>
