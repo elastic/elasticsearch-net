@@ -111,8 +111,11 @@ namespace Nest
 		internal static ApiUrls IndicesClone = new ApiUrls(new[]{"{index}/_clone/{target}"});
 		internal static ApiUrls IndicesClose = new ApiUrls(new[]{"{index}/_close"});
 		internal static ApiUrls IndicesCreate = new ApiUrls(new[]{"{index}"});
+		internal static ApiUrls IndicesCreateDataStream = new ApiUrls(new[]{"_data_stream/{name}"});
+		internal static ApiUrls IndicesDataStreamsStats = new ApiUrls(new[]{"_data_stream/_stats", "_data_stream/{name}/_stats"});
 		internal static ApiUrls IndicesDelete = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesDeleteAlias = new ApiUrls(new[]{"{index}/_alias/{name}"});
+		internal static ApiUrls IndicesDeleteDataStream = new ApiUrls(new[]{"_data_stream/{name}"});
 		internal static ApiUrls IndicesDeleteTemplate = new ApiUrls(new[]{"_template/{name}"});
 		internal static ApiUrls IndicesExists = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesAliasExists = new ApiUrls(new[]{"_alias/{name}", "{index}/_alias/{name}"});
@@ -122,6 +125,7 @@ namespace Nest
 		internal static ApiUrls IndicesFreeze = new ApiUrls(new[]{"{index}/_freeze"});
 		internal static ApiUrls IndicesGet = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesGetAlias = new ApiUrls(new[]{"_alias", "_alias/{name}", "{index}/_alias/{name}", "{index}/_alias"});
+		internal static ApiUrls IndicesGetDataStream = new ApiUrls(new[]{"_data_stream", "_data_stream/{name}"});
 		internal static ApiUrls IndicesGetFieldMapping = new ApiUrls(new[]{"_mapping/field/{fields}", "{index}/_mapping/field/{fields}"});
 		internal static ApiUrls IndicesGetMapping = new ApiUrls(new[]{"_mapping", "{index}/_mapping"});
 		internal static ApiUrls IndicesGetSettings = new ApiUrls(new[]{"_settings", "{index}/_settings", "{index}/_settings/{name}", "_settings/{name}"});
