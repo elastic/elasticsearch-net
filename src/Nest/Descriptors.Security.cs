@@ -62,6 +62,27 @@ namespace Nest
 		public ChangePasswordDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
+	///<summary>Descriptor for ClearCachedPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html</para></summary>
+	public partial class ClearCachedPrivilegesDescriptor : RequestDescriptorBase<ClearCachedPrivilegesDescriptor, ClearCachedPrivilegesRequestParameters, IClearCachedPrivilegesRequest>, IClearCachedPrivilegesRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityClearCachedPrivileges;
+		///<summary>/_security/privilege/{application}/_clear_cache</summary>
+		///<param name = "application">this parameter is required</param>
+		public ClearCachedPrivilegesDescriptor(Names application): base(r => r.Required("application", application))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ClearCachedPrivilegesDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Names IClearCachedPrivilegesRequest.Application => Self.RouteValues.Get<Names>("application");
+	// Request parameters
+	}
+
 	///<summary>Descriptor for ClearCachedRealms <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</para></summary>
 	public partial class ClearCachedRealmsDescriptor : RequestDescriptorBase<ClearCachedRealmsDescriptor, ClearCachedRealmsRequestParameters, IClearCachedRealmsRequest>, IClearCachedRealmsRequest
 	{

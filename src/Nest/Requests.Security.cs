@@ -87,6 +87,39 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IClearCachedPrivilegesRequest : IRequest<ClearCachedPrivilegesRequestParameters>
+	{
+		[IgnoreDataMember]
+		Names Application
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for ClearCachedPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html</para></summary>
+	public partial class ClearCachedPrivilegesRequest : PlainRequestBase<ClearCachedPrivilegesRequestParameters>, IClearCachedPrivilegesRequest
+	{
+		protected IClearCachedPrivilegesRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityClearCachedPrivileges;
+		///<summary>/_security/privilege/{application}/_clear_cache</summary>
+		///<param name = "application">this parameter is required</param>
+		public ClearCachedPrivilegesRequest(Names application): base(r => r.Required("application", application))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ClearCachedPrivilegesRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Names IClearCachedPrivilegesRequest.Application => Self.RouteValues.Get<Names>("application");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IClearCachedRealmsRequest : IRequest<ClearCachedRealmsRequestParameters>
 	{
 		[IgnoreDataMember]
