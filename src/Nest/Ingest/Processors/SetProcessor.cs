@@ -36,6 +36,16 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "override")]
 		bool? Override { get; set; }
+
+		/// <summary>
+		/// If <c>true</c> and value is a template snippet that evaluates to null or the
+		/// empty string, the processor quietly exits without modifying the document.
+		/// Defaults to <c>false</c>.
+		/// <para />
+		/// Valid in Elasticsearch 7.9.0+
+		/// </summary>
+		[DataMember(Name = "ignore_empty_value")]
+		bool? IgnoreEmptyValue { get; set; }
 	}
 
 	/// <inheritdoc cref="ISetProcessor" />
@@ -47,6 +57,8 @@ namespace Nest
 		public object Value { get; set; }
 		/// <inheritdoc />
 		public bool? Override { get; set; }
+		/// <inheritdoc />
+		public bool? IgnoreEmptyValue { get; set; }
 		protected override string Name => "set";
 	}
 
@@ -58,6 +70,7 @@ namespace Nest
 		Field ISetProcessor.Field { get; set; }
 		object ISetProcessor.Value { get; set; }
 		bool? ISetProcessor.Override { get; set; }
+		bool? ISetProcessor.IgnoreEmptyValue { get; set; }
 
 		/// <inheritdoc cref="ISetProcessor.Field"/>
 		public SetProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
@@ -71,5 +84,9 @@ namespace Nest
 
 		/// <inheritdoc cref="ISetProcessor.Override"/>
 		public SetProcessorDescriptor<T> Override(bool? @override = true) => Assign(@override, (a, v) => a.Override = v);
+
+		/// <inheritdoc cref="ISetProcessor.IgnoreEmptyValue"/>
+		public SetProcessorDescriptor<T> IgnoreEmptyValue(bool? ignoreEmptyValue = true) =>
+			Assign(ignoreEmptyValue, (a, v) => a.IgnoreEmptyValue = v);
 	}
 }
