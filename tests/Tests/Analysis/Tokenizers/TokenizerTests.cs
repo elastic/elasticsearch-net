@@ -214,6 +214,34 @@ namespace Tests.Analysis.Tokenizers
 			public override string Name => "kuro";
 		}
 
+		[SkipVersion("<7.9.0", "discard_compound_token introduced in 7.9.0")]
+		public class KuromojiDiscardCompoundTokenTests : TokenizerAssertionBase<KuromojiDiscardCompoundTokenTests>
+		{
+			private const string Example = "/箱根山-箱根/成田空港-成田/";
+			private const string Inline = "東京スカイツリー,東京 スカイツリー,トウキョウ スカイツリー,カスタム名詞";
+
+			public override FuncTokenizer Fluent => (n, t) => t
+				.Kuromoji(n, e => e
+					.Mode(KuromojiTokenizationMode.Search)
+					.DiscardCompoundToken()
+				);
+
+			public override ITokenizer Initializer => new KuromojiTokenizer
+			{
+				Mode = KuromojiTokenizationMode.Search,
+				DiscardCompoundToken = true,
+			};
+
+			public override object Json => new
+			{
+				discard_compound_token = true,
+				mode = "search",
+				type = "kuromoji_tokenizer",
+			};
+
+			public override string Name => "kuro_discard_compound_token";
+		}
+
 		public class UaxTests : TokenizerAssertionBase<UaxTests>
 		{
 			public override FuncTokenizer Fluent => (n, t) => t.UaxEmailUrl(n, e => e
