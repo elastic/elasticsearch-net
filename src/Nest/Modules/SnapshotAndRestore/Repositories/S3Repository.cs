@@ -118,6 +118,25 @@ namespace Nest
 		[DataMember(Name = "disable_chunked_encoding")]
 		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? DisableChunkedEncoding { get; set; }
+
+		/// <summary>
+		/// Make the repository readonly. Defaults to false.
+		/// </summary>
+		[DataMember(Name = "readonly")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
+		bool? ReadOnly { get; set; }
+
+		/// <summary>
+		/// Throttles per node restore rate. Defaults to 40mb per second.
+		/// </summary>
+		[DataMember(Name = "max_restore_bytes_per_sec")]
+		string MaxRestoreBytesPerSecond { get; set; }
+
+		/// <summary>
+		/// Throttles per node snapshot rate. Defaults to 40mb per second.
+		/// </summary>
+		[DataMember(Name = "max_snapshot_bytes_per_sec")]
+		string MaxSnapshotBytesPerSecond { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -159,6 +178,15 @@ namespace Nest
 
 		/// <inheritdoc />
 		public bool? DisableChunkedEncoding { get; set; }
+
+		/// <inheritdoc />
+		public bool? ReadOnly { get; set; }
+
+		/// <inheritdoc />
+		public string MaxRestoreBytesPerSecond { get; set; }
+
+		/// <inheritdoc />
+		public string MaxSnapshotBytesPerSecond { get; set; }
 	}
 
 	/// <inheritdoc cref="IS3RepositorySettings"/>
@@ -178,6 +206,9 @@ namespace Nest
 		string IS3RepositorySettings.StorageClass { get; set; }
 		bool? IS3RepositorySettings.PathStyleAccess { get; set; }
 		bool? IS3RepositorySettings.DisableChunkedEncoding { get; set; }
+		bool? IS3RepositorySettings.ReadOnly { get; set; }
+		string IS3RepositorySettings.MaxRestoreBytesPerSecond { get; set; }
+		string IS3RepositorySettings.MaxSnapshotBytesPerSecond { get; set; }
 
 		/// <inheritdoc cref="IS3RepositorySettings.Bucket" />
 		public S3RepositorySettingsDescriptor Bucket(string bucket) => Assign(bucket, (a, v) => a.Bucket = v);
@@ -214,6 +245,18 @@ namespace Nest
 		/// <inheritdoc cref="IS3RepositorySettings.DisableChunkedEncoding" />
 		public S3RepositorySettingsDescriptor DisableChunkedEncoding(bool? disableChunkedEncoding = true) =>
 			Assign(disableChunkedEncoding, (a, v) => a.DisableChunkedEncoding = v);
+
+		/// <inheritdoc cref="IS3RepositorySettings.ReadOnly" />
+		public S3RepositorySettingsDescriptor ReadOnly(bool? readOnly = true) =>
+			Assign(readOnly, (a, v) => a.ReadOnly = v);
+
+		/// <inheritdoc cref="IS3RepositorySettings.MaxRestoreBytesPerSecond" />
+		public S3RepositorySettingsDescriptor MaxRestoreBytesPerSecond(string maxRestoreBytesPerSecond) =>
+			Assign(maxRestoreBytesPerSecond, (a, v) => a.MaxRestoreBytesPerSecond = v);
+
+		/// <inheritdoc cref="IS3RepositorySettings.MaxSnapshotBytesPerSecond" />
+		public S3RepositorySettingsDescriptor MaxSnapshotBytesPerSecond(string maxSnapshotBytesPerSecond) =>
+			Assign(maxSnapshotBytesPerSecond, (a, v) => a.MaxSnapshotBytesPerSecond = v);
 	}
 
 	/// <inheritdoc cref="IS3Repository"/>
