@@ -359,14 +359,22 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             }
             else if (i < to && array[i] == '-' || array[i] == '+')
             {
-                if (!(i + 5 < to)) goto ERROR;
+                if (len != 30 && len != 32 && len != 33) goto ERROR;
 
                 kind = DateTimeKind.Local;
                 var minus = array[i++] == '-';
 
                 var h = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
-                i++;
-                var m = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
+				var m = 0;
+				if (i < to)
+				{
+					if (len == 33)
+					{
+						if (array[i] != ':') goto ERROR;
+						i++;
+					}
+	                m = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
+				}
 
                 var offset = new TimeSpan(h, m, 0);
                 if (minus) offset = offset.Negate();
@@ -705,13 +713,22 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
             if (i < to && array[i] == '-' || array[i] == '+')
             {
-                if (!(i + 5 < to)) goto ERROR;
+                if (len != 30 && len != 32 && len != 33) goto ERROR;
 
                 var minus = array[i++] == '-';
 
                 var h = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
-                i++;
-                var m = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
+                var m = 0;
+				if (i < to)
+				{
+					if (len == 33)
+					{
+						if (array[i] != ':') goto ERROR;
+						i++;
+					}
+
+	                m = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
+				}
 
                 var offset = new TimeSpan(h, m, 0);
                 if (minus) offset = offset.Negate();
