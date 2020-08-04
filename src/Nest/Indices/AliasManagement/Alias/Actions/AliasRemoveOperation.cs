@@ -24,17 +24,25 @@ namespace Nest
 		public IEnumerable<string> Aliases { get; set; }
 
 		/// <summary>
-		/// The index to which to add the alias.
+		/// The index to which to remove the alias.
 		/// Multiple indices can be specified with <see cref="Indices"/>
 		/// </summary>
 		[DataMember(Name ="index")]
 		public IndexName Index { get; set; }
 
 		/// <summary>
-		/// The indices to which to add the alias
+		/// The indices to which to remove the alias
 		/// </summary>
 		[DataMember(Name = "indices")]
 		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices Indices { get; set; }
+
+		/// <summary>
+		/// If <c>true</c>, the alias to remove must exist. Defaults to <c>false</c>.
+		/// <para />
+		/// Valid in Elasticsearch 7.9.0+
+		/// </summary>
+		[DataMember(Name = "must_exist")]
+		public bool? MustExist { get; set; }
 	}
 }
