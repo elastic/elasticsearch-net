@@ -321,7 +321,9 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				server_side_encryption = true,
 				buffer_size = "100mb",
 				canned_acl = "authenticated-read",
-				storage_class = "standard"
+				storage_class = "standard",
+				max_restore_bytes_per_sec = "40mb",
+				max_snapshot_bytes_per_sec = "40mb",
 			}
 		};
 
@@ -336,6 +338,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 					.BufferSize("100mb")
 					.CannedAcl("authenticated-read")
 					.StorageClass("standard")
+					.MaxRestoreBytesPerSecond("40mb")
+					.MaxSnapshotBytesPerSecond("40mb")
 				)
 			);
 
@@ -352,7 +356,9 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				ServerSideEncryption = true,
 				BufferSize = "100mb",
 				CannedAcl = "authenticated-read",
-				StorageClass = "standard"
+				StorageClass = "standard",
+				MaxRestoreBytesPerSecond = "40mb",
+				MaxSnapshotBytesPerSecond = "40mb"
 			})
 		};
 
