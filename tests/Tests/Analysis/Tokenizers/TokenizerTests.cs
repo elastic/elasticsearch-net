@@ -337,6 +337,32 @@ namespace Tests.Analysis.Tokenizers
 			public override string Name => "char_group";
 		}
 
+		[SkipVersion("<7.9.0", "max_token_length introduced in 7.9.0")]
+		public class CharGroupMaxTokenLengthTests : TokenizerAssertionBase<CharGroupMaxTokenLengthTests>
+		{
+			private readonly string[] _chars = { "whitespace", "-", "\n" };
+
+			public override FuncTokenizer Fluent => (n, t) => t.CharGroup(n, e => e
+				.TokenizeOnCharacters(_chars)
+				.MaxTokenLength(255)
+			);
+
+			public override ITokenizer Initializer => new CharGroupTokenizer
+			{
+				TokenizeOnCharacters = _chars,
+				MaxTokenLength = 255
+			};
+
+			public override object Json => new
+			{
+				tokenize_on_chars = _chars,
+				type = "char_group",
+				max_token_length = 255
+			};
+
+			public override string Name => "char_group_max_token_length";
+		}
+
 		[SkipVersion("<7.7.0", "discard_punctuation introduced in 7.7.0")]
 		public class DiscardPunctuationTests : TokenizerAssertionBase<DiscardPunctuationTests>
 		{
