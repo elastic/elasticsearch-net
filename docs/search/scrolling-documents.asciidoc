@@ -73,7 +73,7 @@ scrollAllObservable.Wait(TimeSpan.FromMinutes(10), response => <3>
     ProcessResponse(response.SearchResponse); <4>
 });
 ----
-<1> See https://www.elastic.co/guide/en/elasticsearch/reference/current/paginate-search-results.html#sliced-scroll[sliced scroll] documentation for choosing an appropriate number of slices.
+<1> See https://www.elastic.co/guide/en/elasticsearch/reference/current/paginate-search-results.html[sliced scroll] documentation for choosing an appropriate number of slices.
 <2> Number of concurrent sliced scroll requests. Usually want to set this to the same value as the number of slices
 <3> Total overall time for scrolling **all** documents. Ensure this is a sufficient value to scroll all documents
 <4> do something with the response
