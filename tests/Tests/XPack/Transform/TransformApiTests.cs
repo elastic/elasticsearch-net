@@ -13,7 +13,7 @@ using static Nest.Infer;
 
 namespace Tests.XPack.Transform
 {
-	[SkipVersion("<7.7.0", "Introduced in 7.7.0")]
+	[SkipVersion("<7.9.0", "Geotile grid group by introduced in 7.9.0")]
 	public class TransformApiTests : CoordinatedIntegrationTestBase<WritableCluster>
 	{
 		private const string PutTransformStep = nameof(PutTransformStep);
@@ -61,6 +61,18 @@ namespace Tests.XPack.Transform
 											Field = Field<Project>(f => f.StartedOn),
 											CalendarInterval = DateInterval.Week
 										}
+									},
+									{
+										"geotile", new GeoTileGridGroupSource
+										{
+											Field = Field<Project>(f => f.LocationPoint),
+											Precision = GeoTilePrecision.Precision6,
+											Bounds = new BoundingBox
+											{
+												TopLeft = new GeoLocation(-90, 180),
+												BottomRight = new GeoLocation(90, -180)
+											}
+										}
 									}
 								}
 							}
@@ -91,6 +103,14 @@ namespace Tests.XPack.Transform
 									.DateHistogram("weekStartedOn", dh => dh
 										.Field(f => f.StartedOn)
 										.CalendarInterval(DateInterval.Week)
+									)
+									.GeoTileGrid("geotile", gtg => gtg
+										.Field(f => f.LocationPoint)
+										.Precision(GeoTilePrecision.Precision6)
+										.Bounds(b => b
+											.TopLeft(-90, 180)
+											.BottomRight(90, -180)
+										)
 									)
 								)
 							),

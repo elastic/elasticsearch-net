@@ -86,6 +86,12 @@ namespace Nest
 			Func<DateHistogramGroupSourceDescriptor<T>, IDateHistogramGroupSource> selector
 		) =>
 			Assign(new Tuple<string, IDateHistogramGroupSource>(name, selector?.Invoke(new DateHistogramGroupSourceDescriptor<T>())), (a, v) => a.Add(v.Item1, v.Item2));
+
+		/// <inheritdoc cref="IGeoTileGridGroupSource" />
+		public SingleGroupSourcesDescriptor<T> GeoTileGrid(string name,
+			Func<GeoTileGridGroupSourceDescriptor<T>, IGeoTileGridGroupSource> selector
+		) =>
+			Assign(new Tuple<string, IGeoTileGridGroupSource>(name, selector?.Invoke(new GeoTileGridGroupSourceDescriptor<T>())), (a, v) => a.Add(v.Item1, v.Item2));
 	}
 
 	internal class SingleGroupSourceFormatter : IJsonFormatter<ISingleGroupSource>
@@ -95,6 +101,7 @@ namespace Nest
 			{ "terms", 0 },
 			{ "date_histogram", 1 },
 			{ "histogram", 2 },
+			{ "geotile_grid", 3 },
 		};
 
 		public void Serialize(ref JsonWriter writer, ISingleGroupSource value, IJsonFormatterResolver formatterResolver)
@@ -120,6 +127,10 @@ namespace Nest
 				case IHistogramGroupSource histogramGroupSource:
 					writer.WritePropertyName("histogram");
 					Serialize(ref writer, histogramGroupSource, formatterResolver);
+					break;
+				case IGeoTileGridGroupSource geoTileGridGroupSource:
+					writer.WritePropertyName("geotile_grid");
+					Serialize(ref writer, geoTileGridGroupSource, formatterResolver);
 					break;
 				default:
 					throw new JsonParsingException($"Unknown {nameof(ISingleGroupSource)}: {value.GetType().Name}");
@@ -162,6 +173,10 @@ namespace Nest
 						break;
 					case 2:
 						groupSource = formatterResolver.GetFormatter<HistogramGroupSource>()
+							.Deserialize(ref reader, formatterResolver);
+						break;
+					case 3:
+						groupSource = formatterResolver.GetFormatter<GeoTileGridGroupSource>()
 							.Deserialize(ref reader, formatterResolver);
 						break;
 				}
