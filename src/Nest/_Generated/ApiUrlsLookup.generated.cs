@@ -235,6 +235,7 @@ namespace Nest
 		internal static ApiUrls NoNamespaceSearchTemplate = new ApiUrls(new[]{"_search/template", "{index}/_search/template"});
 		internal static ApiUrls SecurityAuthenticate = new ApiUrls(new[]{"_security/_authenticate"});
 		internal static ApiUrls SecurityChangePassword = new ApiUrls(new[]{"_security/user/{username}/_password", "_security/user/_password"});
+		internal static ApiUrls SecurityClearCachedPrivileges = new ApiUrls(new[]{"_security/privilege/{application}/_clear_cache"});
 		internal static ApiUrls SecurityClearCachedRealms = new ApiUrls(new[]{"_security/realm/{realms}/_clear_cache"});
 		internal static ApiUrls SecurityClearCachedRoles = new ApiUrls(new[]{"_security/role/{name}/_clear_cache"});
 		internal static ApiUrls SecurityCreateApiKey = new ApiUrls(new[]{"_security/api_key"});

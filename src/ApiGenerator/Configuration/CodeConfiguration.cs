@@ -35,8 +35,6 @@ namespace ApiGenerator.Configuration
 
 		public static string[] IgnoredApisHighLevel { get; } =
 		{
-			"security.clear_cached_privileges.json", // TODO: implement
-
 			"autoscaling.get_autoscaling_decision.json", // 7.7 experimental
 			"autoscaling.delete_autoscaling_decision.json", // experimental
 			"autoscaling.get_autoscaling_policy.json", // experimental
