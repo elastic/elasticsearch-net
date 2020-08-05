@@ -4,8 +4,8 @@
 
 ﻿using System;
 using System.Linq;
- using Elastic.Elasticsearch.Ephemeral;
- using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Ephemeral;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -35,7 +35,6 @@ namespace Tests.XPack.Security.ClearCachedRealms
 
 		protected override string UrlPath => $"/_security/realm/{U(Realm)}/_clear_cache";
 
-		//callisolated value can sometimes start with a digit which is not allowed for rolenames
 		private string Realm => SecurityRealms.FileRealm;
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -51,6 +50,7 @@ namespace Tests.XPack.Security.ClearCachedRealms
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 			response.Nodes.Should().NotBeEmpty().And.HaveCount(1);
+			response.NodeStatistics.Should().NotBeNull();
 			var node = response.Nodes.First().Value;
 			node.Should().NotBeNull();
 			node.Name.Should().NotBeNullOrEmpty();
