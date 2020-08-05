@@ -122,7 +122,10 @@ namespace Tests.Cluster.NodesStats
 			//index.Documents.Count.Should().BeGreaterThan(0);
 
 			index.Store.Should().NotBeNull();
-			//index.Store.SizeInBytes.Should().BeGreaterThan(0);
+			index.Store.SizeInBytes.Should().BeGreaterOrEqualTo(0);
+
+			if (TestClient.Configuration.InRange(">=7.9.0"))
+				index.Store.ReservedInBytes.Should().BeGreaterOrEqualTo(0);
 
 			index.Completion.Should().NotBeNull();
 			index.Fielddata.Should().NotBeNull();
