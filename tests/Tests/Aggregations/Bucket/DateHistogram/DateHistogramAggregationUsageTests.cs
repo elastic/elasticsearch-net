@@ -2,8 +2,9 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System;
+using System;
 using System.Linq;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
@@ -26,6 +27,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[Date Histogram Aggregation].
 	*/
+	[SkipVersion("<7.2.0", "Uses calendar_interval which was introduced in 7.2.0")]
 	public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		public DateHistogramAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -68,7 +70,6 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			}
 		};
 
-#pragma warning disable 618, 612
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.DateHistogram("projects_started_per_month", date => date
 				.Field(p => p.StartedOn)
@@ -111,7 +112,6 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					}
 				}
 			};
-#pragma warning restore 618, 612
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
@@ -141,6 +141,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	}
 
 	// hide
+	[SkipVersion("<7.2.0", "Uses fixed_interval which was introduced in 7.2.0")]
 	public class DateHistogramAggregationNoSubAggregationsUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		public DateHistogramAggregationNoSubAggregationsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -166,7 +167,6 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			}
 		};
 
-#pragma warning disable 618, 612
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.DateHistogram("projects_started_per_four_weeks", date => date
 				.Field(p => p.StartedOn)
@@ -193,7 +193,6 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				Order = HistogramOrder.CountAscending,
 				Missing = FixedDate
 			};
-#pragma warning restore 618, 612
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
