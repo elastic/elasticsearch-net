@@ -285,7 +285,7 @@ namespace Tests.Search.Search
 				new
 				{
 					field = "lastActivity",
-					format = "weekyear"
+					format = DateFormat.basic_date
 				},
 			}
 		};
@@ -306,7 +306,7 @@ namespace Tests.Search.Search
 			)
 			.DocValueFields(fs => fs
 				.Field(p => p.Name)
-				.Field(p => p.LastActivity, format: "weekyear")
+				.Field(p => p.LastActivity, format: DateFormat.basic_date)
 			);
 
 		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
@@ -324,7 +324,7 @@ namespace Tests.Search.Search
 				Value = "Stable"
 			}),
 			DocValueFields = Infer.Field<Project>(p => p.Name)
-				.And<Project>(p => p.LastActivity, format: "weekyear")
+				.And<Project>(p => p.LastActivity, format: DateFormat.basic_date)
 		};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
