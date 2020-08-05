@@ -359,16 +359,15 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             }
             else if (i < to && array[i] == '-' || array[i] == '+')
             {
-                if (len != 30 && len != 32 && len != 33) goto ERROR;
-
+				var offLen = to - i;
+                if (offLen != 3 && offLen != 5 && offLen != 6) goto ERROR;
                 kind = DateTimeKind.Local;
                 var minus = array[i++] == '-';
-
                 var h = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
 				var m = 0;
 				if (i < to)
 				{
-					if (len == 33)
+					if (offLen == 6)
 					{
 						if (array[i] != ':') goto ERROR;
 						i++;
@@ -713,15 +712,14 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
             if (i < to && array[i] == '-' || array[i] == '+')
             {
-                if (len != 30 && len != 32 && len != 33) goto ERROR;
-
+                var offLen = to - i;
+                if (offLen != 3 && offLen != 5 && offLen != 6) goto ERROR;
                 var minus = array[i++] == '-';
-
                 var h = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
                 var m = 0;
 				if (i < to)
 				{
-					if (len == 33)
+					if (offLen == 6)
 					{
 						if (array[i] != ':') goto ERROR;
 						i++;
