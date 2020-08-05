@@ -85,6 +85,30 @@ namespace Nest.Specification.SecurityApi
 		/// </summary>
 		public Task<ChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request, CancellationToken ct = default) => DoRequestAsync<IChangePasswordRequest, ChangePasswordResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>security.clear_cached_privileges</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html</a>
+		/// </summary>
+		public ClearCachedPrivilegesResponse ClearCachedPrivileges(Names application, Func<ClearCachedPrivilegesDescriptor, IClearCachedPrivilegesRequest> selector = null) => ClearCachedPrivileges(selector.InvokeOrDefault(new ClearCachedPrivilegesDescriptor(application: application)));
+		/// <summary>
+		/// <c>POST</c> request to the <c>security.clear_cached_privileges</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html</a>
+		/// </summary>
+		public Task<ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Names application, Func<ClearCachedPrivilegesDescriptor, IClearCachedPrivilegesRequest> selector = null, CancellationToken ct = default) => ClearCachedPrivilegesAsync(selector.InvokeOrDefault(new ClearCachedPrivilegesDescriptor(application: application)), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>security.clear_cached_privileges</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html</a>
+		/// </summary>
+		public ClearCachedPrivilegesResponse ClearCachedPrivileges(IClearCachedPrivilegesRequest request) => DoRequest<IClearCachedPrivilegesRequest, ClearCachedPrivilegesResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>security.clear_cached_privileges</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html</a>
+		/// </summary>
+		public Task<ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(IClearCachedPrivilegesRequest request, CancellationToken ct = default) => DoRequestAsync<IClearCachedPrivilegesRequest, ClearCachedPrivilegesResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>security.clear_cached_realms</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</a>
