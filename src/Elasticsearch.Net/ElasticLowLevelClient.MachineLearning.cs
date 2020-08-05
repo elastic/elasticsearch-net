@@ -866,15 +866,17 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/data_frame/analytics/{id:id}/_stop"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/datafeeds/{datafeed_id}/_stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</para></summary>
 		///<param name = "datafeedId">The ID of the datafeed to stop</param>
+		///<param name = "body">The URL params optionally sent in the body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse StopDatafeed<TResponse>(string datafeedId, StopDatafeedRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_stop"), null, RequestParams(requestParameters));
+		public TResponse StopDatafeed<TResponse>(string datafeedId, PostData body, StopDatafeedRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_stop"), body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/datafeeds/{datafeed_id}/_stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</para></summary>
 		///<param name = "datafeedId">The ID of the datafeed to stop</param>
+		///<param name = "body">The URL params optionally sent in the body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("ml.stop_datafeed", "datafeed_id")]
-		public Task<TResponse> StopDatafeedAsync<TResponse>(string datafeedId, StopDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_stop"), ctx, null, RequestParams(requestParameters));
+		[MapsApi("ml.stop_datafeed", "datafeed_id, body")]
+		public Task<TResponse> StopDatafeedAsync<TResponse>(string datafeedId, PostData body, StopDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_stop"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/data_frame/analytics/{id}/_update <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html</para></summary>
 		///<param name = "id">The ID of the data frame analytics to update</param>
 		///<param name = "body">The data frame analytics settings to update</param>

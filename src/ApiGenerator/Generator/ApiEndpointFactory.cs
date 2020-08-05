@@ -11,18 +11,22 @@ using ApiGenerator.Configuration.Overrides;
 using ApiGenerator.Domain;
 using ApiGenerator.Domain.Code;
 using ApiGenerator.Domain.Specification;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace ApiGenerator.Generator
 {
 	public static class ApiEndpointFactory
 	{
+		private static readonly JsonSerializer Serializer = JsonSerializer.Create(
+			new JsonSerializerSettings { Converters = new List<JsonConverter> { new QueryParameterDeprecationConverter() } });
+
 		public static ApiEndpoint FromFile(string jsonFile)
 		{
 			var officialJsonSpec = JObject.Parse(File.ReadAllText(jsonFile));
 			TransformNewSpecStructureToOld(officialJsonSpec);
 			PatchOfficialSpec(officialJsonSpec, jsonFile);
-			var (name, endpoint) = officialJsonSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
+			var (name, endpoint) = officialJsonSpec.ToObject<Dictionary<string, ApiEndpoint>>(Serializer).First();
 
 			endpoint.FileName = Path.GetFileName(jsonFile);
 			endpoint.Name = name;

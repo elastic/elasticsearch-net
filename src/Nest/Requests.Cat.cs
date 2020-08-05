@@ -739,10 +739,18 @@ namespace Nest
 		Id ICatDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public bool? AllowNoDatafeeds
 		{
 			get => Q<bool? >("allow_no_datafeeds");
 			set => Q("allow_no_datafeeds", value);
+		}
+
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
 		}
 
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -816,10 +824,18 @@ namespace Nest
 		Id ICatJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public bool? AllowNoJobs
 		{
 			get => Q<bool? >("allow_no_jobs");
 			set => Q("allow_no_jobs", value);
+		}
+
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
 		}
 
 		///<summary>The unit in which to display byte values</summary>

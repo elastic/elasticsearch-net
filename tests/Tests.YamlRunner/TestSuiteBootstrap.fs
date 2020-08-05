@@ -87,7 +87,7 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
                 
             // deleting feeds before jobs is important
             let mlDataFeeds = 
-                let stopFeeds = client.MachineLearning.StopDatafeed<DynamicResponse>("_all")
+                let stopFeeds = client.MachineLearning.StopDatafeed<DynamicResponse>("_all", null)
                 let getFeeds = client.MachineLearning.GetDatafeeds<DynamicResponse> ()
                 let deleteFeeds =
                     getFeeds.Get<string[]> "datafeeds.datafeed_id"

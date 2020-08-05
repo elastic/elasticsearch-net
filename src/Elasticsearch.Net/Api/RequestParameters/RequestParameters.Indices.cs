@@ -24,7 +24,7 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.IndicesApi
 {
-	///<summary>Request options for AddBlock <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</para></summary>
+	///<summary>Request options for AddBlock <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html</para></summary>
 	public class AddIndexBlockRequestParameters : RequestParameters<AddIndexBlockRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
@@ -255,7 +255,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	public class CreateDataStreamRequestParameters : RequestParameters<CreateDataStreamRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => true;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for DataStreamsStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
@@ -1271,7 +1271,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
-	///<summary>Request options for Resolve <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</para></summary>
+	///<summary>Request options for Resolve <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html</para></summary>
 	public class ResolveIndexRequestParameters : RequestParameters<ResolveIndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
