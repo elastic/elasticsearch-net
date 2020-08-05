@@ -43,13 +43,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		{
 		}
 
-		///<summary>PUT on /{index}/_block/{block} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</para></summary>
+		///<summary>PUT on /{index}/_block/{block} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html</para></summary>
 		///<param name = "index">A comma separated list of indices to add a block to</param>
 		///<param name = "block">The block to add (one of read, write, read_only or metadata)</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse AddBlock<TResponse>(string index, string block, AddIndexBlockRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"{index:index}/_block/{block:block}"), null, RequestParams(requestParameters));
-		///<summary>PUT on /{index}/_block/{block} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</para></summary>
+		///<summary>PUT on /{index}/_block/{block} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html</para></summary>
 		///<param name = "index">A comma separated list of indices to add a block to</param>
 		///<param name = "block">The block to add (one of read, write, read_only or metadata)</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -141,17 +141,15 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_data_stream/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
 		///<param name = "name">The name of the data stream</param>
-		///<param name = "body">The data stream definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse CreateDataStreamForAll<TResponse>(string name, PostData body, CreateDataStreamRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_data_stream/{name:name}"), body, RequestParams(requestParameters));
+		public TResponse CreateDataStreamForAll<TResponse>(string name, CreateDataStreamRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_data_stream/{name:name}"), null, RequestParams(requestParameters));
 		///<summary>PUT on /_data_stream/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
 		///<param name = "name">The name of the data stream</param>
-		///<param name = "body">The data stream definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("indices.create_data_stream", "name, body")]
-		public Task<TResponse> CreateDataStreamForAllAsync<TResponse>(string name, PostData body, CreateDataStreamRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_data_stream/{name:name}"), ctx, body, RequestParams(requestParameters));
+		[MapsApi("indices.create_data_stream", "name")]
+		public Task<TResponse> CreateDataStreamForAllAsync<TResponse>(string name, CreateDataStreamRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_data_stream/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_data_stream/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse DataStreamsStatsForAll<TResponse>(DataStreamsStatsRequestParameters requestParameters = null)
@@ -690,13 +688,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.reload_search_analyzers", "index")]
 		public Task<TResponse> ReloadSearchAnalyzersAsync<TResponse>(string index, ReloadSearchAnalyzersRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_reload_search_analyzers"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_resolve/index/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</para></summary>
+		///<summary>GET on /_resolve/index/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html</para></summary>
 		///<param name = "name">A comma-separated list of names or wildcard expressions</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse ResolveForAll<TResponse>(string name, ResolveIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_resolve/index/{name:name}"), null, RequestParams(requestParameters));
-		///<summary>GET on /_resolve/index/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</para></summary>
+		///<summary>GET on /_resolve/index/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html</para></summary>
 		///<param name = "name">A comma-separated list of names or wildcard expressions</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>

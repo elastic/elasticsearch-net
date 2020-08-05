@@ -29,8 +29,8 @@ namespace Elasticsearch.Net.Specification.XPackApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
-		///<summary>Supported for backwards compatibility with 7.x. If this param is used it must be set to true</summary>
-		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 8.0.0, reason: Supported for backwards compatibility with 7.x but not required for 8.x.")]
+		///<summary>If this param is used it must be set to true</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 8.0.0, reason: Supported for backwards compatibility with 7.x")]
 		public bool? AcceptEnterprise
 		{
 			get => Q<bool? >("accept_enterprise");

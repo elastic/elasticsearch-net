@@ -80,19 +80,21 @@ namespace ApiGenerator.Domain.Specification
 			get
 			{
 				if (!string.IsNullOrEmpty(_obsolete)) return _obsolete;
+				if (Deprecated != null)
+				{
+					if (!string.IsNullOrEmpty(Deprecated.Version) && !string.IsNullOrEmpty(Deprecated.Description))
+						return $"Deprecated as of: {Deprecated.Version}, reason: {Deprecated.Description}";
+					if (!string.IsNullOrEmpty(Deprecated.Version))
+						return $"Deprecated as of: {Deprecated.Version}";
+					if (!string.IsNullOrEmpty(Deprecated.Description))
+						return $"reason: {Deprecated.Description}";
 
-				return Deprecated != null
-					? $"Deprecated as of: {Deprecated.Version}, reason: {Deprecated.Description}"
-					: null;
+					return "deprecated";
+				}
+
+				return null;
 			}
 			set => _obsolete = value;
-		}
-
-		public class QueryParameterDeprecation
-		{
-			public string Version { get; set; }
-
-			public string Description { get; set; }
 		}
 
 		public QueryParameterDeprecation Deprecated { get; set; }
@@ -172,5 +174,28 @@ namespace ApiGenerator.Domain.Specification
 
 		public string InitializerGenerator(string @namespace, string type, string name, string key, string setter, params string[] doc) =>
 			CodeGenerator.Property(@namespace, type, name, key, setter, Obsolete, doc);
+	}
+
+	public class QueryParameterDeprecation
+	{
+		public string Version { get; set; }
+
+		public string Description { get; set; }
+	}
+
+	internal class QueryParameterDeprecationConverter : JsonConverter
+	{
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotImplementedException();
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			if (reader.TokenType == JsonToken.Boolean)
+				return new QueryParameterDeprecation();
+
+			var jObject = JObject.Load(reader);
+			return jObject.ToObject<QueryParameterDeprecation>(JsonSerializer.CreateDefault());
+		}
+
+		public override bool CanConvert(Type objectType) => typeof(QueryParameterDeprecation).IsAssignableFrom(objectType);
 	}
 }

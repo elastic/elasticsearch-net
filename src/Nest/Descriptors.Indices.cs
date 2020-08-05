@@ -30,7 +30,7 @@ using Elasticsearch.Net.Specification.IndicesApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>Descriptor for AddBlock <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</para></summary>
+	///<summary>Descriptor for AddBlock <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html</para></summary>
 	public partial class AddIndexBlockDescriptor : RequestDescriptorBase<AddIndexBlockDescriptor, AddIndexBlockRequestParameters, IAddIndexBlockRequest>, IAddIndexBlockRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesAddBlock;
@@ -1191,7 +1191,7 @@ namespace Nest
 		public ReloadSearchAnalyzersDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 	}
 
-	///<summary>Descriptor for Resolve <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</para></summary>
+	///<summary>Descriptor for Resolve <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html</para></summary>
 	public partial class ResolveIndexDescriptor : RequestDescriptorBase<ResolveIndexDescriptor, ResolveIndexRequestParameters, IResolveIndexRequest>, IResolveIndexRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesResolve;
