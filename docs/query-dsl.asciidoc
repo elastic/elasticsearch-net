@@ -49,13 +49,13 @@ NEST exposes all of the full text queries available in Elasticsearch
 
 * <<intervals-usage,Intervals Usage>>
 
-* <<match-usage,Match Usage>>
-
 * <<match-bool-prefix-usage,Match Bool Prefix Usage>>
+
+* <<match-phrase-prefix-usage,Match Phrase Prefix Usage>>
 
 * <<match-phrase-usage,Match Phrase Usage>>
 
-* <<match-phrase-prefix-usage,Match Phrase Prefix Usage>>
+* <<match-usage,Match Usage>>
 
 * <<multi-match-usage,Multi Match Usage>>
 
@@ -71,13 +71,13 @@ include::query-dsl/full-text/common-terms/common-terms-usage.asciidoc[]
 
 include::query-dsl/full-text/intervals/intervals-usage.asciidoc[]
 
-include::query-dsl/full-text/match/match-usage.asciidoc[]
-
 include::query-dsl/full-text/match-bool-prefix/match-bool-prefix-usage.asciidoc[]
+
+include::query-dsl/full-text/match-phrase-prefix/match-phrase-prefix-usage.asciidoc[]
 
 include::query-dsl/full-text/match-phrase/match-phrase-usage.asciidoc[]
 
-include::query-dsl/full-text/match-phrase-prefix/match-phrase-prefix-usage.asciidoc[]
+include::query-dsl/full-text/match/match-usage.asciidoc[]
 
 include::query-dsl/full-text/multi-match/multi-match-usage.asciidoc[]
 
@@ -122,13 +122,13 @@ NEST exposes all of the term queries available in Elasticsearch
 
 * <<term-query-usage,Term Query Usage>>
 
+* <<terms-set-query-usage,Terms Set Query Usage>>
+
 * <<terms-list-query-usage,Terms List Query Usage>>
 
 * <<terms-lookup-query-usage,Terms Lookup Query Usage>>
 
 * <<terms-query-usage,Terms Query Usage>>
-
-* <<terms-set-query-usage,Terms Set Query Usage>>
 
 * <<wildcard-query-usage,Wildcard Query Usage>>
 
@@ -160,13 +160,13 @@ include::query-dsl/term-level/regexp/regexp-query-usage.asciidoc[]
 
 include::query-dsl/term-level/term/term-query-usage.asciidoc[]
 
+include::query-dsl/term-level/terms-set/terms-set-query-usage.asciidoc[]
+
 include::query-dsl/term-level/terms/terms-list-query-usage.asciidoc[]
 
 include::query-dsl/term-level/terms/terms-lookup-query-usage.asciidoc[]
 
 include::query-dsl/term-level/terms/terms-query-usage.asciidoc[]
-
-include::query-dsl/term-level/terms-set/terms-set-query-usage.asciidoc[]
 
 include::query-dsl/term-level/wildcard/wildcard-query-usage.asciidoc[]
 
@@ -283,9 +283,9 @@ Specialized types of queries that do not fit into other groups
 
 * <<rank-feature-query-usage,Rank Feature Query Usage>>
 
-* <<script-query-usage,Script Query Usage>>
-
 * <<script-score-query-usage,Script Score Query Usage>>
+
+* <<script-query-usage,Script Query Usage>>
 
 * <<shape-query-usage,Shape Query Usage>>
 
@@ -305,9 +305,9 @@ include::query-dsl/specialized/pinned/pinned-query-usage.asciidoc[]
 
 include::query-dsl/specialized/rank-feature/rank-feature-query-usage.asciidoc[]
 
-include::query-dsl/specialized/script/script-query-usage.asciidoc[]
-
 include::query-dsl/specialized/script-score/script-score-query-usage.asciidoc[]
+
+include::query-dsl/specialized/script/script-query-usage.asciidoc[]
 
 include::query-dsl/specialized/shape/shape-query-usage.asciidoc[]
 
