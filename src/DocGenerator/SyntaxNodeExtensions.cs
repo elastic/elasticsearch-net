@@ -39,7 +39,7 @@ namespace DocGenerator
 		/// </summary>
 		public static bool ShouldBeConvertedToJson(this SyntaxNode node, SyntaxTriviaList leadingTrivia)
 		{
-			if (leadingTrivia == default(SyntaxTriviaList))
+			if (leadingTrivia == default)
 				return false;
 
 			var singleLineCommentIndex = leadingTrivia.IndexOf(SyntaxKind.SingleLineCommentTrivia);
@@ -77,7 +77,10 @@ namespace DocGenerator
 
 			// find the first anonymous object or new object expression
 			var syntax = node.DescendantNodes()
-				.FirstOrDefault(n => n is AnonymousObjectCreationExpressionSyntax || n is ObjectCreationExpressionSyntax || n is LiteralExpressionSyntax);
+				.FirstOrDefault(n =>
+					n is AnonymousObjectCreationExpressionSyntax ||
+					n is ObjectCreationExpressionSyntax ||
+					n is LiteralExpressionSyntax);
 
 			return syntax != null && syntax.ToFullString().TryGetJsonForExpressionSyntax(out json);
 		}
@@ -107,7 +110,7 @@ namespace DocGenerator
 		public static string ToFullStringWithoutPragmaWarningDirectiveTrivia(this SyntaxNode node)
 		{
 			var pragma = node.DescendantTrivia(s => true, true).Where(t => t.IsKind(SyntaxKind.PragmaWarningDirectiveTrivia));
-			return node.ReplaceTrivia(pragma, (s, r) => default(SyntaxTrivia)).ToFullString();
+			return node.ReplaceTrivia(pragma, (s, r) => default).ToFullString();
 		}
 	}
 }
