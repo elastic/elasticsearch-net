@@ -30,10 +30,18 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public bool? AllowNoJobs
 		{
 			get => Q<bool? >("allow_no_jobs");
 			set => Q("allow_no_jobs", value);
+		}
+
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
 		}
 
 		///<summary>True if the job should be forcefully closed</summary>
@@ -467,10 +475,18 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public bool? AllowNoDatafeeds
 		{
 			get => Q<bool? >("allow_no_datafeeds");
 			set => Q("allow_no_datafeeds", value);
+		}
+
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
 		}
 	}
 
@@ -480,10 +496,18 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public bool? AllowNoDatafeeds
 		{
 			get => Q<bool? >("allow_no_datafeeds");
 			set => Q("allow_no_datafeeds", value);
+		}
+
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
 		}
 	}
 
@@ -520,10 +544,18 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public bool? AllowNoJobs
 		{
 			get => Q<bool? >("allow_no_jobs");
 			set => Q("allow_no_jobs", value);
+		}
+
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
 		}
 	}
 
@@ -533,10 +565,18 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public bool? AllowNoJobs
 		{
 			get => Q<bool? >("allow_no_jobs");
 			set => Q("allow_no_jobs", value);
+		}
+
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
 		}
 	}
 
@@ -552,6 +592,12 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
 	}
 
 	///<summary>Request options for GetAnomalyRecords <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</para></summary>
@@ -857,12 +903,20 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	public class StopDatafeedRequestParameters : RequestParameters<StopDatafeedRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
+		public override bool SupportsBody => true;
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public bool? AllowNoDatafeeds
 		{
 			get => Q<bool? >("allow_no_datafeeds");
 			set => Q("allow_no_datafeeds", value);
+		}
+
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
 		}
 	}
 

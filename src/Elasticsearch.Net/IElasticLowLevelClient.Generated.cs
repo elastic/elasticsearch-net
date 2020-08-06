@@ -191,24 +191,24 @@ namespace Elasticsearch.Net
 		[Obsolete("Deprecated in version 7.0: Specifying types in urls has been deprecated")]
 		Task<TResponse> BulkUsingTypeAsync<TResponse>(string index, string type, PostData body, BulkRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>DELETE on /_search/scroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api</para></summary>
+		///<summary>DELETE on /_search/scroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html</para></summary>
 		///<param name = "body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		TResponse ClearScroll<TResponse>(PostData body, ClearScrollRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>DELETE on /_search/scroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api</para></summary>
+		///<summary>DELETE on /_search/scroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html</para></summary>
 		///<param name = "body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> ClearScrollAsync<TResponse>(PostData body, ClearScrollRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>DELETE on /_search/scroll/{scroll_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api</para></summary>
+		///<summary>DELETE on /_search/scroll/{scroll_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html</para></summary>
 		///<param name = "scrollId">A comma-separated list of scroll IDs to clear</param>
 		///<param name = "body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[Obsolete("Deprecated in version 7.0.0: A scroll id can be quite large and should be specified as part of the body")]
 		TResponse ClearScroll<TResponse>(string scrollId, PostData body, ClearScrollRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>DELETE on /_search/scroll/{scroll_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api</para></summary>
+		///<summary>DELETE on /_search/scroll/{scroll_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html</para></summary>
 		///<param name = "scrollId">A comma-separated list of scroll IDs to clear</param>
 		///<param name = "body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

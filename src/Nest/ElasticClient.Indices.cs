@@ -39,25 +39,25 @@ namespace Nest.Specification.IndicesApi
 		/// <summary>
 		/// <c>PUT</c> request to the <c>indices.add_block</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html</a>
 		/// </summary>
 		public AddIndexBlockResponse AddBlock(Indices index, IndexBlock block, Func<AddIndexBlockDescriptor, IAddIndexBlockRequest> selector = null) => AddBlock(selector.InvokeOrDefault(new AddIndexBlockDescriptor(index: index, block: block)));
 		/// <summary>
 		/// <c>PUT</c> request to the <c>indices.add_block</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html</a>
 		/// </summary>
 		public Task<AddIndexBlockResponse> AddBlockAsync(Indices index, IndexBlock block, Func<AddIndexBlockDescriptor, IAddIndexBlockRequest> selector = null, CancellationToken ct = default) => AddBlockAsync(selector.InvokeOrDefault(new AddIndexBlockDescriptor(index: index, block: block)), ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>indices.add_block</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html</a>
 		/// </summary>
 		public AddIndexBlockResponse AddBlock(IAddIndexBlockRequest request) => DoRequest<IAddIndexBlockRequest, AddIndexBlockResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>indices.add_block</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-blocks.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html</a>
 		/// </summary>
 		public Task<AddIndexBlockResponse> AddBlockAsync(IAddIndexBlockRequest request, CancellationToken ct = default) => DoRequestAsync<IAddIndexBlockRequest, AddIndexBlockResponse>(request, request.RequestParameters, ct);
 		/// <summary>
@@ -789,25 +789,25 @@ namespace Nest.Specification.IndicesApi
 		/// <summary>
 		/// <c>GET</c> request to the <c>indices.resolve_index</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html</a>
 		/// </summary>
 		public ResolveIndexResponse Resolve(Names name, Func<ResolveIndexDescriptor, IResolveIndexRequest> selector = null) => Resolve(selector.InvokeOrDefault(new ResolveIndexDescriptor(name: name)));
 		/// <summary>
 		/// <c>GET</c> request to the <c>indices.resolve_index</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html</a>
 		/// </summary>
 		public Task<ResolveIndexResponse> ResolveAsync(Names name, Func<ResolveIndexDescriptor, IResolveIndexRequest> selector = null, CancellationToken ct = default) => ResolveAsync(selector.InvokeOrDefault(new ResolveIndexDescriptor(name: name)), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>indices.resolve_index</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html</a>
 		/// </summary>
 		public ResolveIndexResponse Resolve(IResolveIndexRequest request) => DoRequest<IResolveIndexRequest, ResolveIndexResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>GET</c> request to the <c>indices.resolve_index</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html</a>
 		/// </summary>
 		public Task<ResolveIndexResponse> ResolveAsync(IResolveIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IResolveIndexRequest, ResolveIndexResponse>(request, request.RequestParameters, ct);
 		/// <summary>

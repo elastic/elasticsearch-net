@@ -352,8 +352,10 @@ namespace Nest
 		///<summary>The ID of the datafeeds stats to fetch</summary>
 		public CatDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(datafeedId, (a, v) => a.RouteValues.Optional("datafeed_id", v));
 		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>		[Obsolete("Scheduled to be removed in 7.0, deprecated")]
 		public CatDatafeedsDescriptor AllowNoDatafeeds(bool? allownodatafeeds = true) => Qs("allow_no_datafeeds", allownodatafeeds);
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public CatDatafeedsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatDatafeedsDescriptor Format(string format) => Qs("format", format);
 		///<summary>Comma-separated list of column names to display</summary>
@@ -386,8 +388,10 @@ namespace Nest
 		///<summary>The ID of the jobs stats to fetch</summary>
 		public CatJobsDescriptor JobId(Id jobId) => Assign(jobId, (a, v) => a.RouteValues.Optional("job_id", v));
 		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>		[Obsolete("Scheduled to be removed in 7.0, deprecated")]
 		public CatJobsDescriptor AllowNoJobs(bool? allownojobs = true) => Qs("allow_no_jobs", allownojobs);
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public CatJobsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
 		///<summary>The unit in which to display byte values</summary>
 		public CatJobsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>

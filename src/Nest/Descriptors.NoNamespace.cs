@@ -86,7 +86,7 @@ namespace Nest
 		public BulkDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
-	///<summary>Descriptor for ClearScroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api</para></summary>
+	///<summary>Descriptor for ClearScroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html</para></summary>
 	public partial class ClearScrollDescriptor : RequestDescriptorBase<ClearScrollDescriptor, ClearScrollRequestParameters, IClearScrollRequest>, IClearScrollRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClearScroll;
