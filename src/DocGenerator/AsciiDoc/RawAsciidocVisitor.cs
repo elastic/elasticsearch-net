@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -53,50 +54,38 @@ namespace DocGenerator.AsciiDoc
 			{
 				var thisFileUri = new Uri(_destination.FullName);
 				var directories = attributeEntry.Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
 				var counter = 1;
 
-				foreach (var directory in directories.OrderBy(s=>s))
+				foreach (var file in DirectoryFiles(directories))
 				{
-					var files = Directory.EnumerateFiles(
-						Path.Combine(Program.TmpOutputDirPath, directory), "*.asciidoc", SearchOption.AllDirectories);
-					 foreach (var file in files.OrderBy(s=>s))
-					{
-						var fileInfo = new FileInfo(file);
-						var referencedFileUri = new Uri(fileInfo.FullName);
-						var relativePath = thisFileUri.MakeRelativeUri(referencedFileUri);
-						var include = new Include(relativePath.OriginalString);
+					var fileInfo = new FileInfo(file);
+					var referencedFileUri = new Uri(fileInfo.FullName);
+					var relativePath = thisFileUri.MakeRelativeUri(referencedFileUri);
+					var include = new Include(relativePath.OriginalString);
 
-						if (attributeEntry.Parent != null)
-						{
-							attributeEntry.Parent.Insert(attributeEntry.Parent.IndexOf(attributeEntry) + counter, include);
-							++counter;
-						}
-						else
-							_document.Add(include);
+					if (attributeEntry.Parent != null)
+					{
+						attributeEntry.Parent.Insert(attributeEntry.Parent.IndexOf(attributeEntry) + counter, include);
+						++counter;
 					}
+					else
+						_document.Add(include);
 				}
 			}
 			else if (attributeEntry.Name == "anchor-list")
 			{
 				var directories = attributeEntry.Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
 				var list = new UnorderedList();
 
-				foreach (var directory in directories.OrderBy(s=>s))
+				foreach (var file in DirectoryFiles(directories))
 				{
-					var files = Directory.EnumerateFiles(
-						Path.Combine(Program.TmpOutputDirPath, directory), "*.asciidoc", SearchOption.AllDirectories);
-					 foreach (var file in files.OrderBy(s=>s))
-					{
-						var fileInfo = new FileInfo(file);
-						var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileInfo.Name);
+					var fileInfo = new FileInfo(file);
+					var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileInfo.Name);
 
-						list.Items.Add(new UnorderedListItem
-						{
-							new Paragraph(new InternalAnchor(fileNameWithoutExtension, fileNameWithoutExtension.LowercaseHyphenToPascal()))
-						});
-					}
+					list.Items.Add(new UnorderedListItem
+					{
+						new Paragraph(new InternalAnchor(fileNameWithoutExtension, fileNameWithoutExtension.LowercaseHyphenToPascal()))
+					});
 				}
 
 				if (attributeEntry.Parent != null)
@@ -107,5 +96,11 @@ namespace DocGenerator.AsciiDoc
 
 			base.VisitAttributeEntry(attributeEntry);
 		}
+
+		private static IEnumerable<string> DirectoryFiles(string[] directories) =>
+			directories
+				.SelectMany(directory =>
+					Directory.EnumerateFiles(Path.Combine(Program.TmpOutputDirPath, directory), "*.asciidoc", SearchOption.AllDirectories))
+				.OrderBy(f => f, StringComparer.Ordinal);
 	}
 }
