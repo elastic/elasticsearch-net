@@ -2,7 +2,8 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System.Runtime.Serialization;
+using System;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -21,6 +22,15 @@ namespace Nest
 		/// <summary> the name of the index in the leader cluster to follow </summary>
 		[DataMember(Name = "leader_index")]
 		IndexName LeaderIndex { get; set; }
+
+		/// <summary>
+		/// Settings to override from the leader index.
+		/// Note that certain settings can not be overrode e.g. index.number_of_shards.
+		/// <para />
+		/// Valid in Elasticsearch 7.9.0+
+		/// </summary>
+		[DataMember(Name ="settings")]
+		IIndexSettings Settings { get; set; }
 
 		/// <summary>the maximum number of operations to pull per read from the remote cluster </summary>
 		[DataMember(Name = "max_read_request_operation_count")]
@@ -85,6 +95,9 @@ namespace Nest
 		/// <inheritdoc cref="ICreateFollowIndexRequest.LeaderIndex"/>
 		public IndexName LeaderIndex { get; set; }
 
+		/// <inheritdoc cref="ICreateFollowIndexRequest.Settings"/>
+		public IIndexSettings Settings { get; set; }
+
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxReadRequestOperationCount"/>
 		public long? MaxReadRequestOperationCount { get; set; }
 
@@ -121,6 +134,7 @@ namespace Nest
 	{
 		string ICreateFollowIndexRequest.RemoteCluster { get; set; }
 		IndexName ICreateFollowIndexRequest.LeaderIndex { get; set; }
+		IIndexSettings ICreateFollowIndexRequest.Settings { get; set; }
 		long? ICreateFollowIndexRequest.MaxReadRequestOperationCount { get; set; }
 		long? ICreateFollowIndexRequest.MaxOutstandingReadRequests { get; set; }
 		string ICreateFollowIndexRequest.MaxRequestSize { get; set; }
@@ -137,6 +151,10 @@ namespace Nest
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.LeaderIndex"/>
 		public CreateFollowIndexDescriptor LeaderIndex(IndexName index) => Assign(index, (a, v) => a.LeaderIndex = v);
+
+		/// <inheritdoc cref="ICreateFollowIndexRequest.Settings"/>
+		public CreateFollowIndexDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> selector) =>
+			Assign(selector, (a, v) => a.Settings = v?.Invoke(new IndexSettingsDescriptor())?.Value);
 
 		/// <inheritdoc cref="ICreateFollowIndexRequest.MaxReadRequestOperationCount"/>
 		public CreateFollowIndexDescriptor MaxReadRequestOperationCount(long? max) => Assign(max, (a, v) => a.MaxReadRequestOperationCount = v);

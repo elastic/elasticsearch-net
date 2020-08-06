@@ -3,7 +3,8 @@
 // See the LICENSE file in the project root for more information
 
 ﻿using System;
-using Elasticsearch.Net;
+ using System.Collections.Generic;
+ using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
@@ -18,6 +19,10 @@ namespace Tests.XPack.CrossClusterReplication.Follow.CreateFollowIndex
 		protected override object ExpectJson { get; } = new
 		{
 			leader_index = "leader",
+			settings = new Dictionary<string, object>
+			{
+				["index.queries.cache.enabled"] = false
+			},
 			max_outstanding_read_requests = 100,
 			max_outstanding_write_requests = 101,
 			max_read_request_operation_count = 102,
@@ -46,6 +51,13 @@ namespace Tests.XPack.CrossClusterReplication.Follow.CreateFollowIndex
 			.MaxRequestSize("4mb")
 			.ReadPollTimeout("2m")
 			.LeaderIndex("leader")
+			.Settings(s => s
+				.Queries(q => q
+					.Cache(qc => qc
+						.Enabled(false)
+					)
+				)
+			)
 		;
 
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
@@ -64,6 +76,16 @@ namespace Tests.XPack.CrossClusterReplication.Follow.CreateFollowIndex
 			MaxRequestSize = "4mb",
 			ReadPollTimeout = "2m",
 			LeaderIndex = "leader",
+			Settings = new IndexSettings
+			{
+				Queries = new QueriesSettings
+				{
+					Cache = new QueriesCacheSettings
+					{
+						Enabled = false
+					}
+				}
+			},
 		};
 
 		protected override bool SupportsDeserialization => false;

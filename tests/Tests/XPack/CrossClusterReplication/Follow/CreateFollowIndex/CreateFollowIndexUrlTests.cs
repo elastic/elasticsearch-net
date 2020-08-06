@@ -6,6 +6,7 @@
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework.EndpointTests;
+using static Tests.Framework.EndpointTests.UrlTester;
 
 namespace Tests.XPack.CrossClusterReplication.Follow.CreateFollowIndex
 {
@@ -14,7 +15,7 @@ namespace Tests.XPack.CrossClusterReplication.Follow.CreateFollowIndex
 		[U] public override async Task Urls()
 		{
 			var name = "x";
-			await UrlTester.PUT($"/{name}/_ccr/follow")
+			await PUT($"/{name}/_ccr/follow")
 				.Fluent(c => c.CrossClusterReplication.CreateFollowIndex(name, d => d))
 				.Request(c => c.CrossClusterReplication.CreateFollowIndex(new CreateFollowIndexRequest(name)))
 				.FluentAsync(c => c.CrossClusterReplication.CreateFollowIndexAsync(name, d => d))
