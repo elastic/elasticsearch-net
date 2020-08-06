@@ -100,7 +100,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for ClearScroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#_clear_scroll_api</para></summary>
+	///<summary>Request options for ClearScroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html</para></summary>
 	public class ClearScrollRequestParameters : RequestParameters<ClearScrollRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
