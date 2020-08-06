@@ -224,7 +224,8 @@ namespace DocGenerator
 		{
 			json = null;
 
-			foreach (var substitution in Substitutions) anonymousTypeString = anonymousTypeString.Replace(substitution.Key, substitution.Value);
+			foreach (var substitution in Substitutions)
+				anonymousTypeString = anonymousTypeString.Replace(substitution.Key, substitution.Value);
 
 			var text =
 				$@"
