@@ -64,7 +64,7 @@ namespace Tests.Search
 		[I]
 		public void SimpleScrollAllObservable()
 		{
-			int numberOfSlices = Environment.ProcessorCount; // <1> See https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#sliced-scroll[sliced scroll] documentation for choosing an appropriate number of slices.
+			int numberOfSlices = Environment.ProcessorCount; // <1> See https://www.elastic.co/guide/en/elasticsearch/reference/current/paginate-search-results.html[sliced scroll] documentation for choosing an appropriate number of slices.
 
 			var scrollAllObservable = Client.ScrollAll<Project>("10s", numberOfSlices, sc => sc
 				.MaxDegreeOfParallelism(numberOfSlices) // <2> Number of concurrent sliced scroll requests. Usually want to set this to the same value as the number of slices
