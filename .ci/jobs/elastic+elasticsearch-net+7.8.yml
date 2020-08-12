@@ -12,4 +12,3 @@
     triggers:
       - github
       - timed: 'H */12 * * *'
-        
