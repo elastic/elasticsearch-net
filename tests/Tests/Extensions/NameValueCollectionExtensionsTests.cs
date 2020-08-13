@@ -31,7 +31,17 @@ namespace Tests.Extensions
 				new object[] { new NameValueCollection
 				{
 					{ "q", null },
-				}, "?q" }
+				}, "?q" },
+
+				new object[] { new NameValueCollection
+				{
+					{ "emoji", "😅"}
+				}, "?emoji=%F0%9F%98%85" },
+
+				new object[] { new NameValueCollection
+				{
+					{ "€", "€"}
+				}, "?%E2%82%AC=%E2%82%AC" }
 			};
 	}
 }

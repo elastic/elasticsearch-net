@@ -22,7 +22,9 @@ namespace Elasticsearch.Net.Extensions
 			var maxLength = 1 + nv.AllKeys.Length - 1; // account for '?', and any required '&' chars
 			foreach (var key in nv.AllKeys)
 			{
-				maxLength += 1 + (key.Length + nv[key]?.Length ?? 0) * 3; // '=' char + worst case assume all key/value chars are escaped
+				var bytes = Encoding.UTF8.GetByteCount(key) + Encoding.UTF8.GetByteCount(nv[key] ?? string.Empty);
+				var maxEncodedSize = bytes * 3; // worst case, assume all bytes are URL escaped to 3 chars
+				maxLength += 1 + maxEncodedSize; // '=' + encoded chars
 			}
 
 			// prefer stack allocated array for short lengths
@@ -30,7 +32,7 @@ namespace Elasticsearch.Net.Extensions
 			char[] rentedFromPool = null;
 			var buffer = maxLength > MaxCharsOnStack
 				? rentedFromPool = ArrayPool<char>.Shared.Rent(maxLength)
-				: stackalloc char[MaxCharsOnStack];
+				: stackalloc char[maxLength];
 
 			try
 			{
