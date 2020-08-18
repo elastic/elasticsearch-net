@@ -2,7 +2,8 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 
 namespace Nest
 {
@@ -22,6 +23,8 @@ namespace Nest
 		public string RemoteCluster { get; set; }
 		/// <inheritdoc cref="IAutoFollowPattern.LeaderIndexPatterns"/>
 		public IEnumerable<string> LeaderIndexPatterns { get; set; }
+		/// <inheritdoc cref="IAutoFollowPattern.Settings"/>
+		public IIndexSettings Settings { get; set; }
 		/// <inheritdoc cref="IAutoFollowPattern.FollowIndexPattern"/>
 		public string FollowIndexPattern { get; set; }
 		/// <inheritdoc cref="IAutoFollowPattern.MaxReadRequestOperationCount"/>
@@ -52,6 +55,7 @@ namespace Nest
 		string IAutoFollowPattern.RemoteCluster { get; set; }
 		IEnumerable<string> IAutoFollowPattern.LeaderIndexPatterns { get; set; }
 		string IAutoFollowPattern.FollowIndexPattern { get; set; }
+		IIndexSettings IAutoFollowPattern.Settings { get; set; }
 		int? IAutoFollowPattern.MaxReadRequestOperationCount { get; set; }
 		long? IAutoFollowPattern.MaxOutstandingReadRequests { get; set; }
 		string IAutoFollowPattern.MaxReadRequestSize { get; set; }
@@ -77,6 +81,10 @@ namespace Nest
 		/// <inheritdoc cref="IAutoFollowPattern.FollowIndexPattern"/>
 		public CreateAutoFollowPatternDescriptor FollowIndexPattern(string followIndexPattern) =>
 			Assign(followIndexPattern, (a, v) => a.FollowIndexPattern = v);
+
+		/// <inheritdoc cref="IAutoFollowPattern.Settings"/>
+		public CreateAutoFollowPatternDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> selector) =>
+			Assign(selector, (a, v) => a.Settings = v?.Invoke(new IndexSettingsDescriptor())?.Value);
 
 		/// <inheritdoc cref="IAutoFollowPattern.MaxReadRequestOperationCount"/>
 		public CreateAutoFollowPatternDescriptor MaxReadRequestOperationCount(int? maxReadRequestOperationCount) =>
