@@ -110,6 +110,15 @@ namespace Nest
 		IEnumerable<string> LeaderIndexPatterns { get; set; }
 
 		/// <summary>
+		/// Settings to override from the leader index.
+		/// Note that certain settings can not be overrode e.g. index.number_of_shards.
+		/// <para />
+		/// Valid in Elasticsearch 7.9.0+
+		/// </summary>
+		[DataMember(Name ="settings")]
+		IIndexSettings Settings { get; set; }
+
+		/// <summary>
 		/// the maximum number of outstanding reads requests from the remote cluster
 		/// </summary>
 		[DataMember(Name = "max_outstanding_read_requests")]
@@ -188,6 +197,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IAutoFollowPattern.LeaderIndexPatterns" />
 		public IEnumerable<string> LeaderIndexPatterns { get; set; }
+
+		/// <inheritdoc cref="IAutoFollowPattern.Settings" />
+		public IIndexSettings Settings { get; set; }
 
 		/// <inheritdoc cref="IAutoFollowPattern.MaxOutstandingReadRequests" />
 		public long? MaxOutstandingReadRequests { get; set; }
