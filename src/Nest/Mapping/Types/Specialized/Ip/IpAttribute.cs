@@ -2,17 +2,11 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿namespace Nest
+namespace Nest
 {
 	public class IpAttribute : ElasticsearchDocValuesPropertyAttributeBase, IIpProperty
 	{
 		public IpAttribute() : base(FieldType.Ip) { }
-
-		public double Boost
-		{
-			get => Self.Boost.GetValueOrDefault();
-			set => Self.Boost = value;
-		}
 
 		public bool Index
 		{
@@ -26,7 +20,6 @@
 			set => Self.NullValue = value;
 		}
 
-		double? IIpProperty.Boost { get; set; }
 		bool? IIpProperty.Index { get; set; }
 		string IIpProperty.NullValue { get; set; }
 		private IIpProperty Self => this;
