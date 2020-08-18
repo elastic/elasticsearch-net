@@ -25,9 +25,11 @@ namespace Nest
 			Visit(expression);
 			if (toLastToken) return _stack.Last();
 
+			var builder = new StringBuilder(_stack.Sum(s => s.Length) + (_stack.Count - 1));
+
 			return _stack
 				.Aggregate(
-					new StringBuilder(),
+					builder,
 					(sb, name) =>
 						(sb.Length > 0 ? sb.Append(".") : sb).Append(name))
 				.ToString();
