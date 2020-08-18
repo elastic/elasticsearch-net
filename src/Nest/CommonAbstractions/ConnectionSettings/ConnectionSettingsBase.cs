@@ -205,18 +205,10 @@ namespace Nest
 				if (memberInfoResolver.Members.Count > 1)
 					throw new ArgumentException($"{nameof(ApplyPropertyMappings)} can only map direct properties");
 
-				if (memberInfoResolver.Members.Count < 1)
+				if (memberInfoResolver.Members.Count == 0)
 					throw new ArgumentException($"Expression {e} does contain any member access");
 
-				var memberInfo = memberInfoResolver.Members.Last();
-
-				// memberInfo will be the declaringType, which may not be TDocument in the case of an inherited property.
-				// Get the correct memberinfo
-				if (typeof(TDocument) != memberInfo.DeclaringType)
-				{
-					var bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-					memberInfo = typeof(TDocument).GetMember(memberInfo.Name, bindingFlags).First();
-				}
+				var memberInfo = memberInfoResolver.Members[0];
 
 				if (_propertyMappings.TryGetValue(memberInfo, out var propertyMapping))
 				{
