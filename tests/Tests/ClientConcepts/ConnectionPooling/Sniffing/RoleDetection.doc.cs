@@ -137,11 +137,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			//
 			var audit = new Auditor(() => VirtualClusterWith
 				.MasterOnlyNodes(masterNodes.Length)
+				.ClientCalls(r => r.SucceedAlways())
 				.Sniff(s => s.SucceedAlways()
 					.Succeeds(Always, VirtualClusterWith
 						.Nodes(totalNodesInTheCluster)
 						.StoresNoData(masterNodes)
-						.MasterEligible(masterNodes))
+						.MasterEligible(masterNodes)
+						.ClientCalls(r => r.SucceedAlways())
+					)
 				)
 				.SniffingConnectionPool()
 				.Settings(s=>s.DisablePing())
@@ -210,11 +213,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(totalNodesInTheCluster)
-				//
+				.ClientCalls(r => r.SucceedAlways())
 				.Sniff(s => s.SucceedAlways()
 					.Succeeds(Always, VirtualClusterWith
 						.Nodes(totalNodesInTheCluster)
-						.HasSetting(setting, value, nodesInRackOne))
+						.HasSetting(setting, value, nodesInRackOne)
+						.ClientCalls(r => r.SucceedAlways())
+					)
 				)
 				.SniffingConnectionPool()
 				.Settings(s=>s

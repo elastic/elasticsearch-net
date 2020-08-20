@@ -2,7 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System;
+ using System;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -30,6 +30,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.SucceedAlways())
+				.Sniff(c=>c.SucceedAlways())
+				.Ping(c=>c.SucceedAlways())
 				.SniffingConnectionPool()
 				.Settings(s => s.SniffOnStartup()) // <1> sniff on startup
 			);
@@ -69,6 +71,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.ClientCalls(r => r.SucceedAlways())
+				.Sniff(c=>c.SucceedAlways())
 				.SniffingConnectionPool()
 				.Settings(s => s.SniffOnStartup())
 			);

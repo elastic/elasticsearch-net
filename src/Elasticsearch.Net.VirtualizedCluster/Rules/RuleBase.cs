@@ -2,7 +2,9 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿using System;
+ using System;
+ using System.Security.Cryptography;
+ using System.Threading;
 
 namespace Elasticsearch.Net.VirtualizedCluster.Rules
 {
@@ -22,11 +24,16 @@ namespace Elasticsearch.Net.VirtualizedCluster.Rules
 		bool Succeeds { get; set; }
 		TimeSpan? Takes { get; set; }
 		RuleOption<TimesHelper.AllTimes, int> Times { get; set; }
+
+		int Executed { get; }
+
+		void RecordExecuted();
 	}
 
 	public abstract class RuleBase<TRule> : IRule
 		where TRule : RuleBase<TRule>, IRule
 	{
+		private int _executed;
 		RuleOption<Exception, int> IRule.AfterSucceeds { get; set; }
 		int? IRule.OnPort { get; set; }
 		RuleOption<Exception, int> IRule.Return { get; set; }
@@ -36,6 +43,10 @@ namespace Elasticsearch.Net.VirtualizedCluster.Rules
 		bool IRule.Succeeds { get; set; }
 		TimeSpan? IRule.Takes { get; set; }
 		RuleOption<TimesHelper.AllTimes, int> IRule.Times { get; set; }
+
+		int IRule.Executed => _executed;
+
+		void IRule.RecordExecuted() => Interlocked.Increment(ref _executed);
 
 		public TRule OnPort(int port)
 		{

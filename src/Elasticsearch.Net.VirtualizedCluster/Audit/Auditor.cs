@@ -43,8 +43,8 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 
 		public void ChangeTime(Func<DateTime, DateTime> selector)
 		{
-			_cluster = _cluster ?? Cluster();
-			_clusterAsync = _clusterAsync ?? Cluster();
+			_cluster ??= Cluster();
+			_clusterAsync ??= Cluster();
 
 			_cluster.ChangeTime(selector);
 			_clusterAsync.ChangeTime(selector);
@@ -87,7 +87,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			_cluster.ClientThrows(true);
 			AssertPoolBeforeCall?.Invoke(_cluster.ConnectionPool);
 
-			Action call = () => _cluster.ClientCall(callTrace?.RequestOverrides);
+			Action call = () => Response = _cluster.ClientCall(callTrace?.RequestOverrides);
 			var exception = TryCall(call, assert);
 			assert(exception);
 
@@ -96,7 +96,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 
 			_clusterAsync = _clusterAsync ?? Cluster();
 			_clusterAsync.ClientThrows(true);
-			Func<Task> callAsync = () => _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
+			Func<Task> callAsync = async () => ResponseAsync = await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides).ConfigureAwait(false);
 			exception = await TryCallAsync(callAsync, assert).ConfigureAwait(false);
 			assert(exception);
 
@@ -160,7 +160,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			_cluster = _cluster ?? Cluster();
 			AssertPoolBeforeCall?.Invoke(_cluster.ConnectionPool);
 
-			Action call = () => _cluster.ClientCall(callTrace?.RequestOverrides);
+			Action call = () => Response = _cluster.ClientCall(callTrace?.RequestOverrides);
 			var exception = TryCall(call, assert);
 			assert(exception);
 
@@ -168,7 +168,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			AssertPoolAfterCall?.Invoke(_cluster.ConnectionPool);
 
 			_clusterAsync = _clusterAsync ?? Cluster();
-			Func<Task> callAsync = () => _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
+			Func<Task> callAsync = async () => ResponseAsync = await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides).ConfigureAwait(false);
 			exception = await TryCallAsync(callAsync, assert).ConfigureAwait(false);
 			assert(exception);
 
@@ -186,6 +186,9 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			AssertTrailOnResponse(callTrace, AuditTrail, true, nthCall);
 			AssertTrailOnResponse(callTrace, AuditTrail, false, nthCall);
 
+			callTrace.AssertResponse?.Invoke(Response);
+			callTrace.AssertResponse?.Invoke(ResponseAsync);
+
 			callTrace?.AssertPoolAfterCall?.Invoke(_cluster.ConnectionPool);
 			callTrace?.AssertPoolAfterCall?.Invoke(_clusterAsync.ConnectionPool);
 			return new Auditor(_cluster, _clusterAsync);
@@ -195,13 +198,13 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 		public void VisualizeCalls(int numberOfCalls)
 		{
 			var cluster = _cluster ?? Cluster();
-			var messages = new List<string>(numberOfCalls * 2);
-			for (var i = 0; i < numberOfCalls; i++)
+			var messages = new List<string>((numberOfCalls -1) * 2);
+			for (var i = 0; i <= numberOfCalls - 1; i++)
 			{
 				var call = cluster.ClientCall();
 				var d = call.ApiCall;
 				var actualAuditTrail = AuditTrailToString(d.AuditTrail);
-				messages.Add($"{d.HttpMethod.GetStringValue()} ({d.Uri.Port})");
+				messages.Add($"{d.HttpMethod.GetStringValue()} ({d.Uri.Port}) (status: {d.HttpStatusCode})");
 				messages.Add(actualAuditTrail);
 			}
 			throw new Exception(string.Join(Environment.NewLine, messages));
@@ -214,7 +217,6 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 				sb => sb.ToString());
 			return actualAuditTrail;
 		}
-
 
 		public async Task<Auditor> TraceCalls(params ClientCall[] audits)
 		{

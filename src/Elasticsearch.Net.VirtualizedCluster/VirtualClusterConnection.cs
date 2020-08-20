@@ -53,7 +53,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 				.StaticConnectionPool()
 				.AllDefaults()
 				.Connection;
-		
+
 		public static VirtualClusterConnection Error() =>
 			VirtualClusterWith
 				.Nodes(1)
@@ -104,7 +104,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		{
 			if (!_calls.ContainsKey(requestData.Uri.Port))
 				throw new Exception($"Expected a call to happen on port {requestData.Uri.Port} but received none");
-			
+
 			try
 			{
 				var state = _calls[requestData.Uri.Port];
@@ -113,6 +113,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 					var sniffed = Interlocked.Increment(ref state.Sniffed);
 					return HandleRules<TResponse, ISniffRule>(
 						requestData,
+						nameof(VirtualCluster.Sniff),
 						_cluster.SniffingRules,
 						requestData.RequestTimeout,
 						(r) => UpdateCluster(r.NewClusterState),
@@ -124,6 +125,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 					var pinged = Interlocked.Increment(ref state.Pinged);
 					return HandleRules<TResponse, IRule>(
 						requestData,
+						nameof(VirtualCluster.Ping),
 						_cluster.PingingRules,
 						requestData.PingTimeout,
 						(r) => { },
@@ -133,6 +135,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 				var called = Interlocked.Increment(ref state.Called);
 				return HandleRules<TResponse, IClientCallRule>(
 					requestData,
+					nameof(VirtualCluster.ClientCalls),
 					_cluster.ClientCallRules,
 					requestData.RequestTimeout,
 					(r) => { },
@@ -147,7 +150,8 @@ namespace Elasticsearch.Net.VirtualizedCluster
 
 		private TResponse HandleRules<TResponse, TRule>(
 			RequestData requestData,
-			IEnumerable<TRule> rules,
+			string origin,
+			IList<TRule> rules,
 			TimeSpan timeout,
 			Action<TRule> beforeReturn,
 			Func<TRule, byte[]> successResponse
@@ -156,16 +160,21 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			where TRule : IRule
 		{
 			requestData.MadeItToResponse = true;
+			if (rules.Count == 0)
+				throw new Exception($"No {origin} defined for the current VirtualCluster, so we do not know how to respond");
 
 			var state = _calls[requestData.Uri.Port];
 			foreach (var rule in rules.Where(s => s.OnPort.HasValue))
 			{
 				var always = rule.Times.Match(t => true, t => false);
 				var times = rule.Times.Match(t => -1, t => t);
+
 				if (rule.OnPort.Value == requestData.Uri.Port)
 				{
 					if (always)
 						return Always<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, rule);
+
+					if (rule.Executed > times) continue;
 
 					return Sometimes<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, state, rule, times);
 				}
@@ -177,9 +186,12 @@ namespace Elasticsearch.Net.VirtualizedCluster
 				if (always)
 					return Always<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, rule);
 
+				if (rule.Executed > times) continue;
+
 				return Sometimes<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, state, rule, times);
 			}
-			return ReturnConnectionStatus<TResponse>(requestData, successResponse(default(TRule)));
+			var count = _calls.Select(kv => kv.Value.Called).Sum();
+			throw new Exception($@"No global or port specific {origin} rule ({requestData.Uri.Port}) matches any longer after {count} calls in to the cluster");
 		}
 
 		private TResponse Always<TResponse, TRule>(RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn,
@@ -218,14 +230,19 @@ namespace Elasticsearch.Net.VirtualizedCluster
 						$"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 			}
 
-			if (rule.Succeeds && times >= state.Successes)
+			if (rule.Succeeds)
 				return Success<TResponse, TRule>(requestData, beforeReturn, successResponse, rule);
-			else if (rule.Succeeds) return Fail<TResponse, TRule>(requestData, rule);
 
-			if (!rule.Succeeds && times >= state.Failures)
-				return Fail<TResponse, TRule>(requestData, rule);
+			return Fail<TResponse, TRule>(requestData, rule);
 
-			return Success<TResponse, TRule>(requestData, beforeReturn, successResponse, rule);
+			// if (rule.Succeeds && times >= state.Successes)
+			// 	return Success<TResponse, TRule>(requestData, beforeReturn, successResponse, rule);
+			// else if (rule.Succeeds) return Fail<TResponse, TRule>(requestData, rule);
+			//
+			// if (!rule.Succeeds && times >= state.Failures)
+			// 	return Fail<TResponse, TRule>(requestData, rule);
+			//
+			// return Success<TResponse, TRule>(requestData, beforeReturn, successResponse, rule);
 		}
 
 		private TResponse Fail<TResponse, TRule>(RequestData requestData, TRule rule, RuleOption<Exception, int> returnOverride = null)
@@ -235,6 +252,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			var state = _calls[requestData.Uri.Port];
 			var failed = Interlocked.Increment(ref state.Failures);
 			var ret = returnOverride ?? rule.Return;
+			rule.RecordExecuted();
 
 			if (ret == null)
 				throw new TheException();
@@ -255,6 +273,8 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		{
 			var state = _calls[requestData.Uri.Port];
 			var succeeded = Interlocked.Increment(ref state.Successes);
+			rule.RecordExecuted();
+
 			beforeReturn?.Invoke(rule);
 			return ReturnConnectionStatus<TResponse>(requestData, successResponse(rule), contentType: rule.ReturnContentType);
 		}
