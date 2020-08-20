@@ -27,7 +27,7 @@ namespace Tests.ClientConcepts
 			var e = await Assert.ThrowsAsync<UnexpectedElasticsearchClientException>(
 				async () => await audit.TraceCalls(new ClientCall { }));
 
-			e.Message.Should().Contain("No ClientCalls() defined for the current VirtualCluster, so we do not know how to respond");
+			e.Message.Should().Contain("No ClientCalls defined for the current VirtualCluster, so we do not know how to respond");
 		}
 
 		[U] public async Task ThrowsExceptionAfterDepleedingRules()
@@ -52,7 +52,7 @@ namespace Tests.ClientConcepts
 			var e = await Assert.ThrowsAsync<UnexpectedElasticsearchClientException>(
 				async () => await audit.TraceCalls(new ClientCall { }));
 
-			e.Message.Should().Contain("No global or port specific rule (9200) matches any longer after 2 calls in to the cluster");
+			e.Message.Should().Contain("No global or port specific ClientCalls rule (9200) matches any longer after 2 calls in to the cluster");
 		}
 
 		[U] public async Task AGlobalRuleStaysValidForever()
