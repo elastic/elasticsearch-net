@@ -34,6 +34,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always))
+				.Ping(c=>c.SucceedAlways())
+				.ClientCalls(r => r.SucceedAlways())
 				.SniffingConnectionPool()
 				.AllDefaults()
 			);
@@ -72,6 +74,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always))
+				.ClientCalls(r => r.SucceedAlways())
+				.Ping(c=>c.SucceedAlways())
 				.SniffingConnectionPool()
 				.AllDefaults()
 			);
@@ -107,7 +111,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
-				.Sniff(s => s.OnPort(9202).Succeeds(Always, VirtualClusterWith.Nodes(8, startFrom: 9204))) // <1> Sniffing returns 8 nodes, starting from 9204
+				.Sniff(s => s.OnPort(9202).Succeeds(Always,
+					VirtualClusterWith.Nodes(8, startFrom: 9204)
+						.Ping(c=>c.SucceedAlways())
+						.ClientCalls(c=>c.SucceedAlways())
+
+					)) // <1> Sniffing returns 8 nodes, starting from 9204
+				.ClientCalls(r => r.SucceedAlways())
+				.Ping(c=>c.SucceedAlways())
 				.SniffingConnectionPool()
 				.AllDefaults()
 			);
@@ -130,6 +141,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9209).Succeeds(Always))
+				.Ping(c=>c.SucceedAlways())
+				.ClientCalls(r => r.SucceedAlways())
 				.SniffingConnectionPool()
 				.AllDefaults()
 			);
@@ -165,6 +178,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					new Node(new Uri("http://localhost:9202")) { MasterEligible = true },
 				})
 				.Sniff(s => s.Succeeds(Always))
+				.Ping(s => s.Succeeds(Always))
+				.ClientCalls(r => r.SucceedAlways())
 				.SniffingConnectionPool()
 				.AllDefaults()
 			);
@@ -191,6 +206,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				})
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always))
+				.Ping(c=>c.SucceedAlways())
+				.ClientCalls(r => r.SucceedAlways())
 				.SniffingConnectionPool()
 				.AllDefaults()
 			);

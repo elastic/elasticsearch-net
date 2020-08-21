@@ -34,6 +34,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 				.Nodes(2)
 				.Ping(p => p.Succeeds(Always))
 				.Ping(p => p.OnPort(9201).FailAlways())
+				.ClientCalls(c=>c.SucceedAlways())
 				.StaticConnectionPool()
 				.AllDefaults()
 			);
@@ -70,6 +71,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 				.Ping(p => p.SucceedAlways())
 				.Ping(p => p.OnPort(9201).FailAlways())
 				.Ping(p => p.OnPort(9202).FailAlways())
+				.ClientCalls(c=>c.SucceedAlways())
 				.StaticConnectionPool()
 				.AllDefaults()
 			);
@@ -103,6 +105,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(4)
 				.Ping(p => p.SucceedAlways()) // <1> Pings on nodes always succeed
+				.ClientCalls(c=>c.SucceedAlways())
 				.StaticConnectionPool()
 				.AllDefaults()
 			);
