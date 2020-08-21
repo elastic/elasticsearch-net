@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace ApiGenerator.Configuration.Overrides.Endpoints
 {

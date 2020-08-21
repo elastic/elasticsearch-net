@@ -1,4 +1,4 @@
-﻿namespace Nest
+namespace Nest
 {
 	public class StartTransformResponse : AcknowledgedResponseBase
 	{

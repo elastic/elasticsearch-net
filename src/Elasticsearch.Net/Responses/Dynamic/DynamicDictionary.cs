@@ -2,7 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿//This is nancyfx's dynamicdictionary
+//This is nancyfx's dynamicdictionary
 //it is slightly modified to add the ability to chain dynamic property access of arbitrary depth
 //without binding on null ref errors in between.
 
