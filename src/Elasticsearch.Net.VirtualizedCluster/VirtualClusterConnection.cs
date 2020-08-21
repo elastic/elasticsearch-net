@@ -98,7 +98,9 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		public bool IsSniffRequest(RequestData requestData) =>
 			requestData.PathAndQuery.StartsWith(RequestPipeline.SniffPath, StringComparison.Ordinal);
 
-		public bool IsPingRequest(RequestData requestData) => requestData.PathAndQuery == string.Empty && requestData.Method == HttpMethod.HEAD;
+		public bool IsPingRequest(RequestData requestData) =>
+			requestData.Method == HttpMethod.HEAD &&
+			(requestData.Uri.PathAndQuery == string.Empty || requestData.Uri.PathAndQuery.StartsWith("?"));
 
 		public override TResponse Request<TResponse>(RequestData requestData)
 		{
