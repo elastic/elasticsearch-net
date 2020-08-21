@@ -68,7 +68,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 			 */
 			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(Nodes(0))
-				.ClientCalls(p => p.OnPort(9202).Succeeds(Twice).ThrowsAfterSucceeds())
+				.ClientCalls(p => p.OnPort(9202).Succeeds(Twice))
 				.ClientCalls(p => p.FailAlways())
 				.Sniff(s=>s.SucceedAlways(VirtualClusterWith
 					.Nodes(Nodes(10))
