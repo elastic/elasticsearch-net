@@ -26,7 +26,8 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 
 		public ClientCall(Func<RequestConfigurationDescriptor, IRequestConfiguration> requestOverrides) => RequestOverrides = requestOverrides;
 
-		public Action<IConnectionPool> AssertPoolAfterCall { get; set; }
+		public Action<IConnectionPool> AssertPoolAfterCall { get; private set; }
+		public Action<IElasticsearchResponse> AssertResponse { get; private set; }
 		public Func<RequestConfigurationDescriptor, IRequestConfiguration> RequestOverrides { get; }
 
 		public void Add(AuditEvent key, Action<Elasticsearch.Net.Audit> value) => Add(new CallTraceState(key) { SimpleAssert = value });
@@ -36,5 +37,11 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 		public void Add(AuditEvent key) => Add(new CallTraceState(key));
 
 		public void Add(Action<IConnectionPool> pool) => AssertPoolAfterCall = pool;
+
+		public void Add(AuditEvent key, int port, Action<IElasticsearchResponse> assertResponse)
+		{
+			Add(new CallTraceState(key) { Port = port });
+			AssertResponse = assertResponse;
+		}
 	}
 }
