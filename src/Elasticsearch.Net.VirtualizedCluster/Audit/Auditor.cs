@@ -198,8 +198,8 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 		public void VisualizeCalls(int numberOfCalls)
 		{
 			var cluster = _cluster ?? Cluster();
-			var messages = new List<string>((numberOfCalls -1) * 2);
-			for (var i = 0; i <= numberOfCalls - 1; i++)
+			var messages = new List<string>(numberOfCalls * 2);
+			for (var i = 0; i < numberOfCalls; i++)
 			{
 				var call = cluster.ClientCall();
 				var d = call.ApiCall;

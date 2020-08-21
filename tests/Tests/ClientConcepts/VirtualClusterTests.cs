@@ -63,6 +63,7 @@ namespace Tests.ClientConcepts
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing())
 			);
+
 			audit = await audit.TraceCalls(
 				Enumerable.Range(0, 1000)
 					.Select(i => new ClientCall { { AuditEvent.HealthyResponse, 9200}, })

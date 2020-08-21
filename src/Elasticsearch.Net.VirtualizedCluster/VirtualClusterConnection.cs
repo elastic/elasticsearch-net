@@ -234,15 +234,6 @@ namespace Elasticsearch.Net.VirtualizedCluster
 				return Success<TResponse, TRule>(requestData, beforeReturn, successResponse, rule);
 
 			return Fail<TResponse, TRule>(requestData, rule);
-
-			// if (rule.Succeeds && times >= state.Successes)
-			// 	return Success<TResponse, TRule>(requestData, beforeReturn, successResponse, rule);
-			// else if (rule.Succeeds) return Fail<TResponse, TRule>(requestData, rule);
-			//
-			// if (!rule.Succeeds && times >= state.Failures)
-			// 	return Fail<TResponse, TRule>(requestData, rule);
-			//
-			// return Success<TResponse, TRule>(requestData, beforeReturn, successResponse, rule);
 		}
 
 		private TResponse Fail<TResponse, TRule>(RequestData requestData, TRule rule, RuleOption<Exception, int> returnOverride = null)
