@@ -100,7 +100,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 
 		public bool IsPingRequest(RequestData requestData) =>
 			requestData.Method == HttpMethod.HEAD &&
-			(requestData.Uri.PathAndQuery == string.Empty || requestData.Uri.PathAndQuery.StartsWith("?"));
+			(requestData.PathAndQuery == string.Empty || requestData.PathAndQuery.StartsWith("?"));
 
 		public override TResponse Request<TResponse>(RequestData requestData)
 		{
