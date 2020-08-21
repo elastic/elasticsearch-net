@@ -2,7 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿namespace Nest
+namespace Nest
 {
 	/// <summary>
 	/// A char filter of type html_strip stripping out HTML elements from an analyzed text.

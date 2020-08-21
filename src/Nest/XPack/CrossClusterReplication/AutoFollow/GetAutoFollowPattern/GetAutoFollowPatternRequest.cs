@@ -2,7 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-﻿namespace Nest
+namespace Nest
 {
 	/// <summary> Gets configured auto-follow patterns. This API will return the specified auto-follow pattern collection. </summary>
 	[MapsApi("ccr.get_auto_follow_pattern.json")]
