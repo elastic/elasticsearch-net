@@ -63,7 +63,16 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 				},
 				new FieldValueFactorFunction
 				{
-					Field = Field<Project>(p => p.NumberOfContributors), Factor = 1.1, Missing = 0.1, Modifier = FieldValueFactorModifier.Square
+					Field = Field<Project>(p => p.NumberOfContributors),
+					Factor = 1.1,
+					Missing = 0.1,
+					Modifier = FieldValueFactorModifier.Square,
+					Weight = 3,
+					Filter = new TermQuery
+					{
+						Field = Field<Project>(p => p.Branches),
+						Value = "dev"
+					}
 				},
 				new RandomScoreFunction { Seed = 1337, Field = "_seq_no" },
 				new RandomScoreFunction { Seed = "randomstring", Field = "_seq_no" },
@@ -134,13 +143,24 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					},
 					new
 					{
+						filter = new
+						{
+							term = new
+							{
+								branches = new
+								{
+									value = "dev"
+								}
+							}
+						},
 						field_value_factor = new
 						{
 							field = "numberOfContributors",
 							factor = 1.1,
 							missing = 0.1,
 							modifier = "square"
-						}
+						},
+						weight = 3.0
 					},
 					new { random_score = new { seed = 1337, field = "_seq_no" } },
 					new { random_score = new { seed = "randomstring", field = "_seq_no" } },
@@ -197,7 +217,19 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 						.Scale(Distance.Miles(1))
 						.MultiValueMode(MultiValueMode.Average)
 					)
-					.FieldValueFactor(b => b.Field(p => p.NumberOfContributors).Factor(1.1).Missing(0.1).Modifier(FieldValueFactorModifier.Square))
+					.FieldValueFactor(b => b
+						.Field(p => p.NumberOfContributors)
+						.Factor(1.1)
+						.Missing(0.1)
+						.Modifier(FieldValueFactorModifier.Square)
+						.Weight(3)
+						.Filter(fi => fi
+							.Term(t => t
+								.Field(p => p.Branches)
+								.Value("dev")
+							)
+						)
+					)
 					.RandomScore(r => r.Seed(1337).Field("_seq_no"))
 					.RandomScore(r => r.Seed("randomstring").Field("_seq_no"))
 					.Weight(1.0)
