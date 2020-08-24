@@ -6,6 +6,7 @@ using System.Linq;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework.DocumentationTests;
 
@@ -25,6 +26,18 @@ namespace Tests.Document.Single.Source
 			project.CuratedTags.Should().HaveCount(p.CuratedTags.Count());
 			project.LastActivity.Should().Be(p.LastActivity);
 			project.StartedOn.Should().Be(p.StartedOn);
+		}
+
+		[I]
+		[JsonNetSerializerOnly]
+		public void UseSourceSerializer()
+		{
+			var project = Client.Source<Project>(Project.Instance.Name, s => s.Routing(Project.Instance.Name)).Body;
+
+			var sourceOnly = project.SourceOnly;
+			sourceOnly.Should().NotBeNull();
+			sourceOnly.NotReadByDefaultSerializer.Should().Be("read");
+			sourceOnly.NotWrittenByDefaultSerializer.Should().Be("written");
 		}
 	}
 }
