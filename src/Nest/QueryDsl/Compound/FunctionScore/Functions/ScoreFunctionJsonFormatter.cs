@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Utf8Json.Internal;
 
@@ -195,8 +196,35 @@ namespace Nest
 		private static void WriteFieldValueFactor(ref JsonWriter writer, IFieldValueFactorFunction value, IJsonFormatterResolver formatterResolver)
 		{
 			writer.WritePropertyName("field_value_factor");
-			var formatter = formatterResolver.GetFormatter<IFieldValueFactorFunction>();
-			formatter.Serialize(ref writer, value, formatterResolver);
+
+			writer.WriteBeginObject();
+
+			writer.WritePropertyName("field");
+			writer.WriteString(formatterResolver.GetConnectionSettings().Inferrer.Field(value.Field));
+
+			if (value.Factor.HasValue)
+			{
+				writer.WriteValueSeparator();
+				writer.WritePropertyName("factor");
+				writer.WriteDouble(value.Factor.Value);
+			}
+
+			if (value.Modifier.HasValue)
+			{
+				writer.WriteValueSeparator();
+				writer.WritePropertyName("modifier");
+				formatterResolver.GetFormatter<FieldValueFactorModifier>()
+					.Serialize(ref writer, value.Modifier.Value, formatterResolver);
+			}
+
+			if (value.Missing.HasValue)
+			{
+				writer.WriteValueSeparator();
+				writer.WritePropertyName("missing");
+				writer.WriteDouble(value.Missing.Value);
+			}
+
+			writer.WriteEndObject();
 		}
 
 		private void WriteDecay(ref JsonWriter writer, IDecayFunction decay, IJsonFormatterResolver formatterResolver)
