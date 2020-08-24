@@ -132,7 +132,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 		public void MappingProperties()
 		{
 			var nested = new NestedProperty() { Name = "hello" };
-			var ip = new IpPropertyDescriptor<Project>().Name("field").Boost(2);
+			var ip = new IpPropertyDescriptor<Project>().Name("field");
 
 			DebugFor(nested).Should().StartWith("Type: nested");
 			DebugFor(ip).Should().StartWith("Type: ip");

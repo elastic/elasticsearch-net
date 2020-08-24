@@ -8,12 +8,6 @@ namespace Nest
 	{
 		public IpAttribute() : base(FieldType.Ip) { }
 
-		public double Boost
-		{
-			get => Self.Boost.GetValueOrDefault();
-			set => Self.Boost = value;
-		}
-
 		public bool Index
 		{
 			get => Self.Index.GetValueOrDefault();
@@ -26,7 +20,6 @@ namespace Nest
 			set => Self.NullValue = value;
 		}
 
-		double? IIpProperty.Boost { get; set; }
 		bool? IIpProperty.Index { get; set; }
 		string IIpProperty.NullValue { get; set; }
 		private IIpProperty Self => this;
