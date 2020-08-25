@@ -29,6 +29,8 @@ var audit = new Auditor(() => VirtualClusterWith
     .Nodes(10)
     .Sniff(s => s.Fails(Always))
     .Sniff(s => s.OnPort(9202).Succeeds(Always))
+    .Ping(c=>c.SucceedAlways())
+    .ClientCalls(r => r.SucceedAlways())
     .SniffingConnectionPool()
     .AllDefaults()
 );
@@ -71,6 +73,8 @@ var audit = new Auditor(() => VirtualClusterWith
     .Nodes(10)
     .Sniff(s => s.Fails(Always))
     .Sniff(s => s.OnPort(9202).Succeeds(Always))
+    .ClientCalls(r => r.SucceedAlways())
+    .Ping(c=>c.SucceedAlways())
     .SniffingConnectionPool()
     .AllDefaults()
 );
@@ -105,7 +109,14 @@ is used for subsequent client requests
 var audit = new Auditor(() => VirtualClusterWith
     .Nodes(10)
     .Sniff(s => s.Fails(Always))
-    .Sniff(s => s.OnPort(9202).Succeeds(Always, VirtualClusterWith.Nodes(8, startFrom: 9204))) <1>
+    .Sniff(s => s.OnPort(9202).Succeeds(Always,
+        VirtualClusterWith.Nodes(8, startFrom: 9204)
+            .Ping(c=>c.SucceedAlways())
+            .ClientCalls(c=>c.SucceedAlways())
+
+        )) <1>
+    .ClientCalls(r => r.SucceedAlways())
+    .Ping(c=>c.SucceedAlways())
     .SniffingConnectionPool()
     .AllDefaults()
 );
@@ -135,6 +146,8 @@ var audit = new Auditor(() => VirtualClusterWith
         new Node(new Uri("http://localhost:9202")) { MasterEligible = true },
     })
     .Sniff(s => s.Succeeds(Always))
+    .Ping(s => s.Succeeds(Always))
+    .ClientCalls(r => r.SucceedAlways())
     .SniffingConnectionPool()
     .AllDefaults()
 );
@@ -159,6 +172,8 @@ var audit = new Auditor(() => VirtualClusterWith
     })
     .Sniff(s => s.Fails(Always))
     .Sniff(s => s.OnPort(9202).Succeeds(Always))
+    .Ping(c=>c.SucceedAlways())
+    .ClientCalls(r => r.SucceedAlways())
     .SniffingConnectionPool()
     .AllDefaults()
 );

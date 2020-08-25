@@ -113,17 +113,19 @@ include::{output-dir}/mapping/multi-fields.asciidoc[]
 == Indexing
 
 _Indexing_ is the process of storing documents inside Elasticsearch into an index. These documents can then be searched
-on using the {ref_current}/search-search.html[Search API].
+using the {ref_current}/search-search.html[Search API].
 
-NEST exposes a number of important features for indexing documents into Elasticsearch.
+NEST exposes a number of features for indexing and reindexing documents into Elasticsearch
 
 - <<indexing-documents, Indexing Documents>>
 - <<ingest-nodes, Ingest Node>>
 - <<pipelines, Ingest Pipelines>>
+- <<reindexing-documents, Reindexing Documents>>
 
 include::{output-dir}/indexing/indexing-documents.asciidoc[]
 include::{output-dir}/indexing/ingest-nodes.asciidoc[]
 include::{output-dir}/indexing/pipelines.asciidoc[]
+include::{output-dir}/indexing/reindexing-documents.asciidoc[]
 
 [[analysis]]
 == Analysis
