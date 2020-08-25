@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
+	// TODO: Pass both request/response serializer and source serializer in 8.0
 	public abstract class CustomResponseBuilderBase
 	{
 		public abstract object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream);
