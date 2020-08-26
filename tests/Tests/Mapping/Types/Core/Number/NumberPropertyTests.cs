@@ -22,10 +22,8 @@ namespace Tests.Mapping.Types.Core.Number
 				{
 					type = "integer",
 					doc_values = true,
-					similarity = "BM25",
 					store = true,
 					index = false,
-					boost = 1.5,
 					null_value = 0.0,
 					ignore_malformed = true,
 					coerce = true
@@ -38,10 +36,8 @@ namespace Tests.Mapping.Types.Core.Number
 				.Name(p => p.NumberOfCommits)
 				.Type(NumberType.Integer)
 				.DocValues()
-				.Similarity("BM25")
 				.Store()
 				.Index(false)
-				.Boost(1.5)
 				.NullValue(0.0)
 				.IgnoreMalformed()
 				.Coerce()
@@ -54,10 +50,8 @@ namespace Tests.Mapping.Types.Core.Number
 				"numberOfCommits", new NumberProperty(NumberType.Integer)
 				{
 					DocValues = true,
-					Similarity = "BM25",
 					Store = true,
 					Index = false,
-					Boost = 1.5,
 					NullValue = 0.0,
 					IgnoreMalformed = true,
 					Coerce = true
@@ -79,10 +73,8 @@ namespace Tests.Mapping.Types.Core.Number
 					type = "scaled_float",
 					scaling_factor = 10.0,
 					doc_values = true,
-					similarity = "BM25",
 					store = true,
 					index = false,
-					boost = 1.5,
 					null_value = 0.0,
 					ignore_malformed = true,
 					coerce = true
@@ -96,10 +88,8 @@ namespace Tests.Mapping.Types.Core.Number
 				.Type(NumberType.ScaledFloat)
 				.ScalingFactor(10)
 				.DocValues()
-				.Similarity("BM25")
 				.Store()
 				.Index(false)
-				.Boost(1.5)
 				.NullValue(0.0)
 				.IgnoreMalformed()
 				.Coerce()
@@ -113,10 +103,8 @@ namespace Tests.Mapping.Types.Core.Number
 				{
 					ScalingFactor = 10,
 					DocValues = true,
-					Similarity = "BM25",
 					Store = true,
 					Index = false,
-					Boost = 1.5,
 					NullValue = 0.0,
 					IgnoreMalformed = true,
 					Coerce = true
