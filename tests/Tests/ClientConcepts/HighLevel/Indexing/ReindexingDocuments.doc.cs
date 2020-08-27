@@ -173,7 +173,7 @@ namespace Tests.ClientConcepts.HighLevel.Indexing
 		 */
 		public void ReindexWithIndexCreation()
 		{
-			var getIndexResponse = client.GetIndex("source_index"); // <1> Get the settings for the source index
+			var getIndexResponse = client.Indices.Get("source_index"); // <1> Get the settings for the source index
 			var indexSettings = getIndexResponse.Indices["source_index"];
 
 			var lastNameProperty = indexSettings.Mappings.Properties["lastName"]; // <2> Get the mapping for the `lastName` property
@@ -211,9 +211,9 @@ namespace Tests.ClientConcepts.HighLevel.Indexing
 		 * each successful bulk response, when an error occurs, and when the process has finished. The following example demonstrates these
 		 * features.
 		 *
-		 * IMPORTANT: An observer such should not throw exceptions from its interface implementations, such
+		 * IMPORTANT: An observer should not throw exceptions from its interface implementations, such
 		 * as `OnNext` and `OnError`. Any exceptions thrown should be expected to go unhandled. In light of this, any exception
-		 * that occurs during the redinex process should be captured and thrown outside of the observer, as demonstrated in the
+		 * that occurs during the reindex process should be captured and thrown outside of the observer, as demonstrated in the
 		 * example below. Take a look at the
 		 * https://docs.microsoft.com/en-us/dotnet/standard/events/observer-design-pattern-best-practices#handling-exceptions[Observer Design Pattern best practices]
 		 * on handling exceptions.
