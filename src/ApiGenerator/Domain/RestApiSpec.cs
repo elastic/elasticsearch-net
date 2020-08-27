@@ -31,9 +31,10 @@ namespace ApiGenerator.Domain
 
 		public ImmutableSortedDictionary<string, ReadOnlyCollection<ApiEndpoint>> EndpointsPerNamespaceHighLevel =>
 			Endpoints.Values
-				.Where(v => !CodeConfiguration.IgnoredApisHighLevel.Contains(v.FileName))
+				.Where(v => !CodeConfiguration.IgnoreHighLevelApi(v.FileName))
 				.GroupBy(e => e.CsharpNames.Namespace)
 				.ToImmutableSortedDictionary(kv => kv.Key, kv => kv.ToList().AsReadOnly());
+
 
 		private IEnumerable<EnumDescription> _enumDescriptions;
 		public IEnumerable<EnumDescription> EnumsInTheSpec
