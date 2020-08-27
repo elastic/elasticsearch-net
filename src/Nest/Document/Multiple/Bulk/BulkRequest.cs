@@ -11,6 +11,7 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	[JsonFormatter(typeof(BulkRequestFormatter))]
+	[MapsApi("bulk.json")]
 	public partial interface IBulkRequest
 	{
 		[IgnoreDataMember]

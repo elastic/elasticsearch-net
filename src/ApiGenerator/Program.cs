@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using ApiGenerator.Configuration;
 
@@ -16,7 +17,6 @@ namespace ApiGenerator
 		// ReSharper disable once UnusedParameter.Local
 		private static async Task Main(string[] args)
 		{
-
 			var redownloadCoreSpecification = Ask("Download online rest specifications?", false);
 
 			var downloadBranch = DownloadBranch;
@@ -43,7 +43,20 @@ namespace ApiGenerator
 				RestSpecDownloader.Download(downloadBranch);
 
 			if (generateCode)
-				await Generator.ApiGenerator.Generate(downloadBranch, lowLevelOnly, "Core", "XPack");
+			{
+				var spec = Generator.ApiGenerator.CreateRestApiSpecModel(downloadBranch, "Core", "XPack");
+				if (!lowLevelOnly)
+				{
+					foreach (var endpoint in spec.Endpoints.Select(e => e.Value.FileName))
+					{
+						if (CodeConfiguration.IsNewHighLevelApi(endpoint)
+							&& Ask($"Generate highlevel code for new api {endpoint}", false))
+							CodeConfiguration.EnableHighLevelCodeGen.Add(endpoint);
+
+					}
+				}
+				await Generator.ApiGenerator.Generate(downloadBranch, lowLevelOnly, spec);
+			}
 		}
 
 		private static bool Ask(string question, bool defaultAnswer = true)

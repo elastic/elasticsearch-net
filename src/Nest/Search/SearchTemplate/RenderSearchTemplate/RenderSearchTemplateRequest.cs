@@ -9,6 +9,7 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
+	[MapsApi("render_search_template.json")]
 	public partial interface IRenderSearchTemplateRequest
 	{
 		[DataMember(Name = "file")]

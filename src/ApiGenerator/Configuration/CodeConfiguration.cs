@@ -31,9 +31,13 @@ namespace ApiGenerator.Configuration
 			// To be removed
 			"indices.upgrade.json",
 			"indices.get_upgrade.json",
+
+			// already removed in the client.
+			"indices.exists_type.json"
+
 		};
 
-		public static string[] IgnoredApisHighLevel { get; } =
+		private static string[] IgnoredApisHighLevel { get; } =
 		{
 			"autoscaling.get_autoscaling_decision.json", // 7.7 experimental
 			"autoscaling.delete_autoscaling_decision.json", // experimental
@@ -108,6 +112,27 @@ namespace ApiGenerator.Configuration
 				select new { Value = f.Name.Replace("Request", ""), Key = c.Replace(".json", "") })
 			.DistinctBy(v => v.Key)
 			.ToDictionary(k => k.Key, v => v.Value.Replace(".cs", ""));
+
+		public static readonly HashSet<string> EnableHighLevelCodeGen = new HashSet<string>();
+
+		public static bool IsNewHighLevelApi(string apiFileName) =>
+			// if its explicitly ignored we know about it.
+			!IgnoredApis.Contains(apiFileName)
+			&& !IgnoredApisHighLevel.Contains(apiFileName)
+			// no requests with [MapsApi("filename.json")] found
+			&& !HighLevelApiNameMapping.ContainsKey(apiFileName.Replace(".json", ""));
+
+		public static bool IgnoreHighLevelApi(string apiFileName)
+		{
+			//explicitly ignored
+			if (IgnoredApis.Contains(apiFileName) || IgnoredApisHighLevel.Contains(apiFileName)) return true;
+
+			//always generate already mapped requests
+
+			if (HighLevelApiNameMapping.ContainsKey(apiFileName.Replace(".json", ""))) return false;
+
+			return !EnableHighLevelCodeGen.Contains(apiFileName);
+		}
 
 		private static Dictionary<string, string> _apiNameMapping;
 

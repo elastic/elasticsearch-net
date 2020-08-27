@@ -10,6 +10,7 @@ namespace Nest
 	/// <summary>
 	/// Delete documents that match a given query
 	/// </summary>
+	[MapsApi("delete_by_query.json")]
 	public partial interface IDeleteByQueryRequest
 	{
 		/// <summary>
