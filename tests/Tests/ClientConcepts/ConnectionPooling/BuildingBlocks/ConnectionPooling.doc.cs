@@ -167,6 +167,17 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 
 			//hide
 			{
+
+				//make sure we can deal with trailing dollar sign separators.
+				foreach (var dollars in Enumerable.Range(0, 5).Select(i => new string('$', i)))
+				{
+					Func<IElasticClient> doesNotThrowWhenEndsWithDollar = () =>
+						new ElasticClient($"my_cluster:{ToBase64($"hostname$guid{dollars}")}", credentials);
+
+					var validClient = doesNotThrowWhenEndsWithDollar.Should().NotThrow().Subject;
+					validClient.ConnectionSettings.ConnectionPool.Nodes.First().Uri.Should().Be("https://guid.hostname");
+				}
+
 				var badCloudIds = new[]
 				{
 					"",
