@@ -16,14 +16,24 @@ namespace Tests.XPack.MachineLearning.GetModelSnapshots
 		: MachineLearningIntegrationTestBase<GetModelSnapshotsResponse, IGetModelSnapshotsRequest, GetModelSnapshotsDescriptor,
 			GetModelSnapshotsRequest>
 	{
+		private static readonly DateTimeOffset Timestamp = new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero);
+
 		public GetModelSnapshotsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 		protected override object ExpectJson => null;
 		protected override int ExpectStatusCode => 200;
-		protected override Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> Fluent => f => f;
+		protected override Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> Fluent => f => f
+			.Start(Timestamp.AddHours(-1))
+			.End(Timestamp.AddHours(1));
+		
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override GetModelSnapshotsRequest Initializer => new GetModelSnapshotsRequest(CallIsolatedValue);
+		protected override GetModelSnapshotsRequest Initializer => new GetModelSnapshotsRequest(CallIsolatedValue)
+		{
+			Start = Timestamp.AddHours(-1),
+			End = Timestamp.AddHours(1)
+		};
+
 		protected override string UrlPath => $"/_ml/anomaly_detectors/{CallIsolatedValue}/model_snapshots";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
@@ -52,7 +62,7 @@ namespace Tests.XPack.MachineLearning.GetModelSnapshots
 
 			var modelSnapshot = response.ModelSnapshots.First();
 			modelSnapshot.JobId.Should().Be(CallIsolatedValue);
-			modelSnapshot.Timestamp.Should().Be(new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero));
+			modelSnapshot.Timestamp.Should().Be(Timestamp);
 			modelSnapshot.SnapshotId.Should().Be("1");
 			modelSnapshot.SnapshotDocCount.Should().Be(1);
 			modelSnapshot.Retain.Should().Be(false);

@@ -17,12 +17,23 @@ namespace Tests.XPack.MachineLearning.StartDatafeed
 	{
 		public StartDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		private DateTimeOffset Now => DateTimeOffset.Now;
+
 		protected override bool ExpectIsValid => true;
 		protected override object ExpectJson => null;
 		protected override int ExpectStatusCode => 200;
-		protected override Func<StartDatafeedDescriptor, IStartDatafeedRequest> Fluent => f => f;
+
+		protected override Func<StartDatafeedDescriptor, IStartDatafeedRequest> Fluent => f => f
+			.Start(Now)
+			.End(Now.AddSeconds(10));
+
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override StartDatafeedRequest Initializer => new StartDatafeedRequest(CallIsolatedValue + "-datafeed");
+		protected override StartDatafeedRequest Initializer => new StartDatafeedRequest(CallIsolatedValue + "-datafeed")
+		{
+			Start = Now,
+			End = Now.AddSeconds(10)
+		};
+
 		protected override string UrlPath => $"_ml/datafeeds/{CallIsolatedValue}-datafeed/_start";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
