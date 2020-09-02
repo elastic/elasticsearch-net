@@ -4,6 +4,7 @@
 
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Configuration;
@@ -14,10 +15,10 @@ using Tests.Core.Extensions;
 
 namespace Tests.XPack.Info
 {
-	[SkipVersion(">=8.0.0-SNAPSHOT", "TODO investigate")]
 	public class XPackInfoApiTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
 		private const string XPackInfoStep = nameof(XPackInfoStep);
+		private const string WaitForGreenSecurityIndex = nameof(WaitForGreenSecurityIndex);
 		private const string XPackUsageStep = nameof(XPackUsageStep);
 
 		public XPackInfoApiTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
@@ -30,6 +31,16 @@ namespace Tests.XPack.Info
 					(v, c, f) => c.XPack.InfoAsync(f),
 					(v, c, r) => c.XPack.Info(r),
 					(v, c, r) => c.XPack.InfoAsync(r)
+				)
+			},
+			{
+				WaitForGreenSecurityIndex, u => u.Calls<ClusterHealthDescriptor, ClusterHealthRequest, IClusterHealthRequest, ClusterHealthResponse>(
+					v => new ClusterHealthRequest(".security") { WaitForStatus = WaitForStatus.Green },
+					(v, d) => d.WaitForStatus(WaitForStatus.Green),
+					(v, c, f) => c.Cluster.Health(".security", f),
+					(v, c, f) => c.Cluster.HealthAsync(".security", f),
+					(v, c, r) => c.Cluster.Health(r),
+					(v, c, r) => c.Cluster.HealthAsync(r)
 				)
 			},
 			{

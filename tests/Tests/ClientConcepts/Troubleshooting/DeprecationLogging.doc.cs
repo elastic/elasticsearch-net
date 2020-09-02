@@ -30,7 +30,6 @@ namespace Tests.ClientConcepts.Troubleshooting
 	{
 		public DeprecationLogging(ReadOnlyCluster cluster) : base(cluster) { }
 
-		[SkipVersion(">=8.0.0-SNAPSHOT", "only returns one warning")]
 		[I] public void RequestWithMultipleWarning()
 		{
 			var request = new SearchRequest<Project>
@@ -57,7 +56,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			var response = this.Client.Search<Project>(request);
 
 			response.ApiCall.DeprecationWarnings.Should().NotBeNullOrEmpty();
-			response.ApiCall.DeprecationWarnings.Should().HaveCount(2);
+			response.ApiCall.DeprecationWarnings.Should().HaveCountGreaterOrEqualTo(1);
 			response.DebugInformation.Should().Contain("Deprecated aggregation order key"); // <1> `DebugInformation` also contains the deprecation warnings
 		}
 	}
