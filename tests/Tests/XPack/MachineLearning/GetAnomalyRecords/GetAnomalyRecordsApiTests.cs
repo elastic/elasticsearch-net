@@ -16,14 +16,24 @@ namespace Tests.XPack.MachineLearning.GetAnomalyRecords
 		: MachineLearningIntegrationTestBase<GetAnomalyRecordsResponse, IGetAnomalyRecordsRequest, GetAnomalyRecordsDescriptor,
 			GetAnomalyRecordsRequest>
 	{
+		private static readonly DateTimeOffset Timestamp = new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero);
+
 		public GetAnomalyRecordsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 		protected override object ExpectJson => null;
 		protected override int ExpectStatusCode => 200;
-		protected override Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> Fluent => f => f;
+		protected override Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> Fluent => f => f
+			.Start(Timestamp.AddHours(-1))
+			.End(Timestamp.AddHours(1));
+
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override GetAnomalyRecordsRequest Initializer => new GetAnomalyRecordsRequest(CallIsolatedValue);
+
+		protected override GetAnomalyRecordsRequest Initializer => new GetAnomalyRecordsRequest(CallIsolatedValue)
+		{
+			Start = Timestamp.AddHours(-1), End = Timestamp.AddHours(1)
+		};
+
 		protected override string UrlPath => $"/_ml/anomaly_detectors/{CallIsolatedValue}/results/records";
 
 		protected override GetAnomalyRecordsDescriptor NewDescriptor() => new GetAnomalyRecordsDescriptor(CallIsolatedValue);
@@ -33,7 +43,7 @@ namespace Tests.XPack.MachineLearning.GetAnomalyRecords
 			foreach (var callUniqueValue in values)
 			{
 				PutJob(client, callUniqueValue.Value);
-				IndexAnomalyRecord(client, callUniqueValue.Value, new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero));
+				IndexAnomalyRecord(client, callUniqueValue.Value, Timestamp);
 			}
 		}
 

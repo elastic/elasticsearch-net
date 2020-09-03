@@ -11,8 +11,9 @@ namespace Nest
 	{
 		public override void Serialize(ref JsonWriter writer, DateTimeOffset value, IJsonFormatterResolver formatterResolver)
 		{
-			var dateTimeOffsetDifference = (value - DateTimeUtil.Epoch).TotalMilliseconds;
-			writer.WriteInt64((long)dateTimeOffsetDifference);
+			writer.WriteQuotation();
+			writer.WriteInt64(value.ToUnixTimeMilliseconds());
+			writer.WriteQuotation();
 		}
 	}
 
@@ -53,8 +54,9 @@ namespace Nest
 				return;
 			}
 
-			var dateTimeOffsetDifference = (value.Value - DateTimeUtil.Epoch).TotalMilliseconds;
-			writer.WriteInt64((long)dateTimeOffsetDifference);
+			writer.WriteQuotation();
+			writer.WriteInt64(value.Value.ToUnixTimeMilliseconds());
+			writer.WriteQuotation();
 		}
 	}
 }
