@@ -57,18 +57,8 @@ namespace Nest
 		[DataMember(Name = "enrich")]
 		public XPackFeature Enrich { get; internal set; }
 
-		[Obsolete("Changed to Transform in 7.5.0")]
-		[DataMember(Name = "data_frame")]
-		public XPackFeature DataFrame { get; internal set; }
-
-		[DataMember(Name = "flattened")]
-		public XPackFeature Flattened { get; internal set; }
-
 		[DataMember(Name = "frozen_indices")]
 		public XPackFeature FrozenIndices { get; internal set; }
-
-		[DataMember(Name = "data_science")]
-		public XPackFeature DataScience { get; internal set; }
 
 		[DataMember(Name = "graph")]
 		public XPackFeature Graph { get; internal set; }
@@ -124,17 +114,5 @@ namespace Nest
 
 		[DataMember(Name ="enabled")]
 		public bool Enabled { get; internal set; }
-
-		[DataMember(Name ="native_code_info")]
-		public NativeCodeInformation NativeCodeInformation { get; internal set; }
-	}
-
-	public class NativeCodeInformation
-	{
-		[DataMember(Name ="build_hash")]
-		public string BuildHash { get; internal set; }
-
-		[DataMember(Name ="version")]
-		public string Version { get; internal set; }
 	}
 }

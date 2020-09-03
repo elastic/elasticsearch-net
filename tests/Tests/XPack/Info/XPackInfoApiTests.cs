@@ -35,10 +35,10 @@ namespace Tests.XPack.Info
 			},
 			{
 				WaitForGreenSecurityIndex, u => u.Calls<ClusterHealthDescriptor, ClusterHealthRequest, IClusterHealthRequest, ClusterHealthResponse>(
-					v => new ClusterHealthRequest(".security") { WaitForStatus = WaitForStatus.Green },
+					v => new ClusterHealthRequest() { WaitForStatus = WaitForStatus.Green },
 					(v, d) => d.WaitForStatus(WaitForStatus.Green),
-					(v, c, f) => c.Cluster.Health(".security", f),
-					(v, c, f) => c.Cluster.HealthAsync(".security", f),
+					(v, c, f) => c.Cluster.Health(selector: f),
+					(v, c, f) => c.Cluster.HealthAsync(selector: f),
 					(v, c, r) => c.Cluster.Health(r),
 					(v, c, r) => c.Cluster.HealthAsync(r)
 				)
@@ -67,7 +67,6 @@ namespace Tests.XPack.Info
 			r.Features.Ilm.Should().NotBeNull();
 			r.Features.Logstash.Should().NotBeNull();
 			r.Features.MachineLearning.Should().NotBeNull();
-			r.Features.MachineLearning.NativeCodeInformation.Should().NotBeNull();
 			r.Features.Monitoring.Should().NotBeNull();
 			r.Features.Rollup.Should().NotBeNull();
 			r.Features.Security.Should().NotBeNull();
@@ -76,15 +75,7 @@ namespace Tests.XPack.Info
 			r.License.Should().NotBeNull();
 
 			if (TestConfiguration.Instance.InRange(">=7.3.0"))
-			{
-				r.Features.Flattened.Should().NotBeNull();
 				r.Features.Vectors.Should().NotBeNull();
-
-				if (TestConfiguration.Instance.InRange("<7.5.0"))
-#pragma warning disable 618
-					r.Features.DataFrame.Should().NotBeNull();
-#pragma warning restore 618
-			}
 
 			if (TestConfiguration.Instance.InRange(">=7.5.0"))
 			{
@@ -121,22 +112,8 @@ namespace Tests.XPack.Info
 
 			if (TestConfiguration.Instance.InRange(">=7.3.0"))
 			{
-				r.Flattened.Should().NotBeNull();
 				r.Vectors.Should().NotBeNull();
 				r.VotingOnly.Should().NotBeNull();
-
-				if (TestConfiguration.Instance.InRange("<7.5.0"))
-#pragma warning disable 618
-					r.DataFrame.Should().NotBeNull();
-#pragma warning restore 618
-
-				if (TestConfiguration.Instance.InRange(">=7.6.0"))
-					r.Flattened.FieldCount.Should().HaveValue();
-			}
-
-			if (TestConfiguration.Instance.InRange(">=7.5.0"))
-			{
-				r.Enrich.Should().NotBeNull();
 			}
 
 			if (TestConfiguration.Instance.InRange(">=7.8.0"))
