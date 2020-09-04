@@ -48,6 +48,18 @@ namespace Tests.Mapping.Types.Specialized.Point
 			deserialized.Should().Be(point);
 		}
 
+		[U]
+		public void CanDeserializeCartesianPointFromObject()
+		{
+			var point = new CartesianPoint(90, -90);
+
+			CartesianPoint deserialized = null;
+			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes("{ \"x\": 90, \"y\": -90 }")))
+				deserialized = TestClient.DefaultInMemoryClient.SourceSerializer.Deserialize<CartesianPoint>(stream);
+
+			deserialized.Should().Be(point);
+		}
+
 		private class PointDocument
 		{
 			public CartesianPoint Point { get; set; }
