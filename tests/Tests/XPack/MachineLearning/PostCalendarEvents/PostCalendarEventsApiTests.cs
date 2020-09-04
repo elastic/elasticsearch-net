@@ -43,8 +43,12 @@ namespace Tests.XPack.MachineLearning.PostCalendarEvents
 			for (var i = 0; i < 10; i++)
 				yield return new
 				{
-					start_time = new DateTimeOffset(StartDate + i, 1, 1, 0, 0, 0, TimeSpan.Zero).ToUnixTimeMilliseconds(),
-					end_time = new DateTimeOffset(StartDate + 1 + i, 1, 1, 0, 0, 0, TimeSpan.Zero).ToUnixTimeMilliseconds(),
+					start_time = new DateTimeOffset(StartDate + i, 1, 1, 0, 0, 0, TimeSpan.Zero)
+						.ToUnixTimeMilliseconds()
+						.ToString(),
+					end_time = new DateTimeOffset(StartDate + 1 + i, 1, 1, 0, 0, 0, TimeSpan.Zero)
+						.ToUnixTimeMilliseconds()
+						.ToString(),
 					description = $"Event {i}",
 					calendar_id = CallIsolatedValue
 				};
