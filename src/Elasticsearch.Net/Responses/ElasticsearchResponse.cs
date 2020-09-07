@@ -4,6 +4,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Net.NetworkInformation;
 
 namespace Elasticsearch.Net
 {
@@ -15,6 +17,13 @@ namespace Elasticsearch.Net
 		/// <inheritdoc />
 		public IApiCallDetails ApiCall { get; set; }
 
+		/// <inheritdoc cref="IApiCallDetails.TcpStats"/>
+		public ReadOnlyDictionary<TcpState, int> TcpStats
+		{
+			get => ApiCall.TcpStats;
+			set => ApiCall.TcpStats = value;
+		}
+
 		/// <inheritdoc cref="IApiCallDetails.DebugInformation"/>
 		public string DebugInformation => ApiCall.DebugInformation;
 		/// <inheritdoc cref="IApiCallDetails.HttpMethod"/>
@@ -24,6 +33,13 @@ namespace Elasticsearch.Net
 		{
 			get => ApiCall.AuditTrail;
 			set => ApiCall.AuditTrail = value;
+		}
+
+		/// <inheritdoc cref="IApiCallDetails.ThreadPoolStats"/>
+		public ReadOnlyDictionary<string, ThreadPoolStatistics> ThreadPoolStats
+		{
+			get => ApiCall.ThreadPoolStats;
+			set => ApiCall.ThreadPoolStats = value;
 		}
 
 		/// <inheritdoc cref="IApiCallDetails.DeprecationWarnings"/>
@@ -52,7 +68,7 @@ namespace Elasticsearch.Net
 		public byte[] RequestBodyInBytes => ApiCall.RequestBodyInBytes;
 
 		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason) => TryGetServerErrorReason(out reason);
-		
+
 		public virtual bool TryGetServerError(out ServerError serverError)
 		{
 			serverError = null;
