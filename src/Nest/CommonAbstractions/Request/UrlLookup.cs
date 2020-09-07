@@ -41,6 +41,9 @@ namespace Nest
 
 		public string ToUrl(ResolvedRouteValues values)
 		{
+			if (values.Count == 0 && _tokenized.Length == 1 && _tokenized[0][0] != '@')
+				return _tokenized[0];
+
 			var sb = new StringBuilder(_length);
 			var i = 0;
 			for (var index = 0; index < _tokenized.Length; index++)
