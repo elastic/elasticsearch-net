@@ -120,6 +120,12 @@ namespace Elasticsearch.Net
 		/// Try to send these headers for this single request
 		/// </summary>
 		NameValueCollection Headers { get; set; }
+
+		/// <inheritdoc cref="IConnectionConfigurationValues.EnableTcpStats"/>
+		bool? EnableTcpStats { get; set; }
+
+		/// <inheritdoc cref="IConnectionConfigurationValues.EnableThreadPoolStats"/>
+		bool? EnableThreadPoolStats { get; set; }
 	}
 
 	public class RequestConfiguration : IRequestConfiguration
@@ -162,6 +168,10 @@ namespace Elasticsearch.Net
 		public bool? TransferEncodingChunked { get; set; }
 		/// <inheritdoc />
 		public NameValueCollection Headers { get; set; }
+		/// <inheritdoc />
+		public bool? EnableTcpStats { get; set; }
+		/// <inheritdoc />
+		public bool? EnableThreadPoolStats { get; set; }
 	}
 
 	public class RequestConfigurationDescriptor : IRequestConfiguration
@@ -209,6 +219,8 @@ namespace Elasticsearch.Net
 		bool? IRequestConfiguration.ThrowExceptions { get; set; }
 		bool? IRequestConfiguration.TransferEncodingChunked { get; set; }
 		NameValueCollection IRequestConfiguration.Headers { get; set; }
+		bool? IRequestConfiguration.EnableTcpStats { get; set; }
+		bool? IRequestConfiguration.EnableThreadPoolStats { get; set; }
 
 		/// <summary>
 		/// Submit the request on behalf in the context of a different shield user
@@ -379,5 +391,18 @@ namespace Elasticsearch.Net
 			return this;
 		}
 
+		/// <inheritdoc cref="IRequestConfiguration.EnableTcpStats" />
+		public RequestConfigurationDescriptor EnableTcpStats(bool? enableTcpStats = true)
+		{
+			Self.EnableTcpStats = enableTcpStats;
+			return this;
+		}
+
+		/// <inheritdoc cref="IRequestConfiguration.EnableThreadPoolStats" />
+		public RequestConfigurationDescriptor EnableThreadPoolStats(bool? enableThreadPoolStats = true)
+		{
+			Self.EnableThreadPoolStats = enableThreadPoolStats;
+			return this;
+		}
 	}
 }

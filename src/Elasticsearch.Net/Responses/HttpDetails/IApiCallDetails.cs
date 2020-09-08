@@ -4,7 +4,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Net.NetworkInformation;
+using Elasticsearch.Net.Diagnostics;
 
 namespace Elasticsearch.Net
 {
@@ -19,9 +22,20 @@ namespace Elasticsearch.Net
         /// </summary>
         List<Audit> AuditTrail { get; set; }
 
-        /// <summary>
-        /// A lazy human readable string representation of what happened during this request for both successful and
-        /// failed requests.
+		// TODO: Get rid of setter.
+		/// <summary>
+		/// Thread pool thread statistics collected when making a request
+		/// </summary>
+		ReadOnlyDictionary<string, ThreadPoolStatistics> ThreadPoolStats { get; set; }
+
+		// TODO: Get rid of setter
+		/// <summary>
+		/// Active TCP connection statistics collected when making a request
+		/// </summary>
+		ReadOnlyDictionary<TcpState, int> TcpStats { get; set; }
+
+		/// <summary>
+        /// A human readable string representation of what happened during this request for both successful and failed requests.
         /// </summary>
         string DebugInformation { get; }
 
@@ -68,6 +82,7 @@ namespace Elasticsearch.Net
 
 		/// <summary>The response MIME type </summary>
 		string ResponseMimeType { get; }
+
 		/// <summary>
 		/// The response status code is in the 200 range or is in the allowed list of status codes set on the request.
 		/// </summary>

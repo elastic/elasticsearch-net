@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
@@ -89,6 +90,8 @@ namespace Elasticsearch.Net
 			ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
 			UserAgent = global.UserAgent;
 			TransferEncodingChunked = local?.TransferEncodingChunked ?? global.TransferEncodingChunked;
+			TcpStats = local?.EnableTcpStats ?? global.EnableTcpStats;
+			ThreadPoolStats = local?.EnableThreadPoolStats ?? global.EnableThreadPoolStats;
 		}
 
 		private readonly string _path;
@@ -133,6 +136,8 @@ namespace Elasticsearch.Net
 		public bool ThrowExceptions { get; }
 		public string UserAgent { get; }
 		public bool TransferEncodingChunked { get; }
+		public bool TcpStats { get; }
+		public bool ThreadPoolStats { get; }
 
 		public Uri Uri => Node != null ? new Uri(Node.Uri, PathAndQuery) : null;
 		public TimeSpan DnsRefreshTimeout { get; }
@@ -142,7 +147,7 @@ namespace Elasticsearch.Net
 		// TODO This feels like its in the wrong place
 		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request)
 		{
-			path = path ?? string.Empty;
+			path ??= string.Empty;
 			if (path.Contains("?"))
 				throw new ArgumentException($"{nameof(path)} can not contain querystring parameters and needs to be already escaped");
 
