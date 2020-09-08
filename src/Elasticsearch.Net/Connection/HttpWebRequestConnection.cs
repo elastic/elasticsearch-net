@@ -4,14 +4,17 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Diagnostics;
 
 namespace Elasticsearch.Net
 {
@@ -24,8 +27,6 @@ namespace Elasticsearch.Net
 		{
 			//Not available under mono
 			if (!IsMono) HttpWebRequest.DefaultMaximumErrorResponseLength = -1;
-
-
 		}
 
 		internal static bool IsMono { get; } = Type.GetType("Mono.Runtime") != null;
@@ -38,6 +39,9 @@ namespace Elasticsearch.Net
 			Stream responseStream = null;
 			Exception ex = null;
 			string mimeType = null;
+			ReadOnlyDictionary<TcpState, int> tcpStats = null;
+			ReadOnlyDictionary<string, ThreadPoolStatistics> threadPoolStats = null;
+
 			try
 			{
 				var request = CreateHttpWebRequest(requestData);
@@ -56,25 +60,39 @@ namespace Elasticsearch.Net
 				}
 				requestData.MadeItToResponse = true;
 
+				if (requestData.TcpStats)
+					tcpStats = TcpStats.GetStates();
+
+				if (requestData.ThreadPoolStats)
+					threadPoolStats = ThreadPoolStats.GetStats();
+
 				//http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.getresponsestream.aspx
 				//Either the stream or the response object needs to be closed but not both although it won't
 				//throw any errors if both are closed atleast one of them has to be Closed.
 				//Since we expose the stream we let closing the stream determining when to close the connection
-				var response = (HttpWebResponse)request.GetResponse();
-				HandleResponse(response, out statusCode, out responseStream, out mimeType);
+				var httpWebResponse = (HttpWebResponse)request.GetResponse();
+				HandleResponse(httpWebResponse, out statusCode, out responseStream, out mimeType);
 
 				//response.Headers.HasKeys() can return false even if response.Headers.AllKeys has values.
-				if (response.SupportsHeaders && response.Headers.Count > 0 && response.Headers.AllKeys.Contains("Warning"))
-					warnings = response.Headers.GetValues("Warning");
+				if (httpWebResponse.SupportsHeaders && httpWebResponse.Headers.Count > 0 && httpWebResponse.Headers.AllKeys.Contains("Warning"))
+					warnings = httpWebResponse.Headers.GetValues("Warning");
 			}
 			catch (WebException e)
 			{
 				ex = e;
-				if (e.Response is HttpWebResponse response)
-					HandleResponse(response, out statusCode, out responseStream, out mimeType);
+				if (e.Response is HttpWebResponse httpWebResponse)
+					HandleResponse(httpWebResponse, out statusCode, out responseStream, out mimeType);
 			}
-			responseStream = responseStream ?? Stream.Null;
-			return ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType);
+
+			responseStream ??= Stream.Null;
+			var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType);
+
+			// set TCP and threadpool stats on the response here so that in the event the request fails after the point of
+			// gathering stats, they are still exposed on the call details. Ideally these would be set inside ResponseBuilder.ToResponse,
+			// but doing so would be a breaking change in 7.x
+			response.ApiCall.TcpStats = tcpStats;
+			response.ApiCall.ThreadPoolStats = threadPoolStats;
+			return response;
 		}
 
 		public virtual async Task<TResponse> RequestAsync<TResponse>(RequestData requestData,
@@ -88,6 +106,9 @@ namespace Elasticsearch.Net
 			Stream responseStream = null;
 			Exception ex = null;
 			string mimeType = null;
+			ReadOnlyDictionary<TcpState, int> tcpStats = null;
+			ReadOnlyDictionary<string, ThreadPoolStatistics> threadPoolStats = null;
+
 			try
 			{
 				var data = requestData.PostData;
@@ -116,29 +137,42 @@ namespace Elasticsearch.Net
 					//throw any errors if both are closed atleast one of them has to be Closed.
 					//Since we expose the stream we let closing the stream determining when to close the connection
 
-					var apmGetResponseTask = Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, r => request.EndGetResponse(r), null);
+					var apmGetResponseTask = Task.Factory.FromAsync(request.BeginGetResponse, r => request.EndGetResponse(r), null);
 					unregisterWaitHandle = RegisterApmTaskTimeout(apmGetResponseTask, request, requestData);
 
-					var response = (HttpWebResponse)await apmGetResponseTask.ConfigureAwait(false);
-					HandleResponse(response, out statusCode, out responseStream, out mimeType);
-					if (response.SupportsHeaders && response.Headers.HasKeys() && response.Headers.AllKeys.Contains("Warning"))
-						warnings = response.Headers.GetValues("Warning");
+					if (requestData.TcpStats)
+						tcpStats = TcpStats.GetStates();
+
+					if (requestData.ThreadPoolStats)
+						threadPoolStats = ThreadPoolStats.GetStats();
+
+					var httpWebResponse = (HttpWebResponse)await apmGetResponseTask.ConfigureAwait(false);
+					HandleResponse(httpWebResponse, out statusCode, out responseStream, out mimeType);
+					if (httpWebResponse.SupportsHeaders && httpWebResponse.Headers.HasKeys() && httpWebResponse.Headers.AllKeys.Contains("Warning"))
+						warnings = httpWebResponse.Headers.GetValues("Warning");
 				}
 			}
 			catch (WebException e)
 			{
 				ex = e;
-				if (e.Response is HttpWebResponse response)
-					HandleResponse(response, out statusCode, out responseStream, out mimeType);
+				if (e.Response is HttpWebResponse httpWebResponse)
+					HandleResponse(httpWebResponse, out statusCode, out responseStream, out mimeType);
 			}
 			finally
 			{
 				unregisterWaitHandle?.Invoke();
 			}
-			responseStream = responseStream ?? Stream.Null;
-			return await ResponseBuilder.ToResponseAsync<TResponse>
+			responseStream ??= Stream.Null;
+			var response = await ResponseBuilder.ToResponseAsync<TResponse>
 					(requestData, ex, statusCode, warnings, responseStream, mimeType, cancellationToken)
 				.ConfigureAwait(false);
+
+			// set TCP and threadpool stats on the response here so that in the event the request fails after the point of
+			// gathering stats, they are still exposed on the call details. Ideally these would be set inside ResponseBuilder.ToResponse,
+			// but doing so would be a breaking change in 7.x
+			response.ApiCall.TcpStats = tcpStats;
+			response.ApiCall.ThreadPoolStats = threadPoolStats;
+			return response;
 		}
 
 		void IDisposable.Dispose() => DisposeManagedResources();
