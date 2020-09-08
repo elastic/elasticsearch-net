@@ -30,35 +30,31 @@ namespace Tests.ClientConcepts.Troubleshooting
 	{
 		public DeprecationLogging(ReadOnlyCluster cluster) : base(cluster) { }
 
-		[SkipVersion(">=8.0.0-SNAPSHOT", "only returns one warning")]
 		[I] public void RequestWithMultipleWarning()
 		{
 			var request = new SearchRequest<Project>
 			{
 				Size = 0,
-				Routing = new [] { "ignoredefaultcompletedhandler" },
-				Aggregations = new TermsAggregation("states")
+				Aggregations = new CompositeAggregation("test")
 				{
-					Field = Field<Project>(p => p.State.Suffix("keyword")),
-					Order = new List<TermsOrder>
+					Sources = new []
 					{
-						new TermsOrder { Key = "_term", Order = SortOrder.Ascending },
-					}
-				},
-				Query = new FunctionScoreQuery()
-				{
-					Query = new MatchAllQuery { },
-					Functions = new List<IScoreFunction>
-					{
-						new RandomScoreFunction {Seed = 1337},
+						new DateHistogramCompositeAggregationSource("date")
+						{
+							Field = Field<Project>(f => f.LastActivity),
+#pragma warning disable 618
+							Interval = new Time("7d"),
+#pragma warning restore 618
+							Format = "yyyy-MM-dd"
+						}
 					}
 				}
 			};
 			var response = this.Client.Search<Project>(request);
 
 			response.ApiCall.DeprecationWarnings.Should().NotBeNullOrEmpty();
-			response.ApiCall.DeprecationWarnings.Should().HaveCount(2);
-			response.DebugInformation.Should().Contain("Deprecated aggregation order key"); // <1> `DebugInformation` also contains the deprecation warnings
+			response.ApiCall.DeprecationWarnings.Should().HaveCountGreaterOrEqualTo(1);
+			response.DebugInformation.Should().Contain("deprecated"); // <1> `DebugInformation` also contains the deprecation warnings
 		}
 	}
 }

@@ -4,6 +4,7 @@
 
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Configuration;
@@ -14,10 +15,10 @@ using Tests.Core.Extensions;
 
 namespace Tests.XPack.Info
 {
-	[SkipVersion(">=8.0.0-SNAPSHOT", "TODO investigate")]
 	public class XPackInfoApiTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
 		private const string XPackInfoStep = nameof(XPackInfoStep);
+		private const string WaitForSecurityIndices = nameof(WaitForSecurityIndices);
 		private const string XPackUsageStep = nameof(XPackUsageStep);
 
 		public XPackInfoApiTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
@@ -31,6 +32,9 @@ namespace Tests.XPack.Info
 					(v, c, r) => c.XPack.Info(r),
 					(v, c, r) => c.XPack.InfoAsync(r)
 				)
+			},
+			{
+				WaitForSecurityIndices, u => u.Call((v, c) => c.WaitForSecurityIndicesAsync())
 			},
 			{
 				XPackUsageStep, u => u.Calls<XPackUsageDescriptor, XPackUsageRequest, IXPackUsageRequest, XPackUsageResponse>(
@@ -56,7 +60,6 @@ namespace Tests.XPack.Info
 			r.Features.Ilm.Should().NotBeNull();
 			r.Features.Logstash.Should().NotBeNull();
 			r.Features.MachineLearning.Should().NotBeNull();
-			r.Features.MachineLearning.NativeCodeInformation.Should().NotBeNull();
 			r.Features.Monitoring.Should().NotBeNull();
 			r.Features.Rollup.Should().NotBeNull();
 			r.Features.Security.Should().NotBeNull();
@@ -65,15 +68,7 @@ namespace Tests.XPack.Info
 			r.License.Should().NotBeNull();
 
 			if (TestConfiguration.Instance.InRange(">=7.3.0"))
-			{
-				r.Features.Flattened.Should().NotBeNull();
 				r.Features.Vectors.Should().NotBeNull();
-
-				if (TestConfiguration.Instance.InRange("<7.5.0"))
-#pragma warning disable 618
-					r.Features.DataFrame.Should().NotBeNull();
-#pragma warning restore 618
-			}
 
 			if (TestConfiguration.Instance.InRange(">=7.5.0"))
 			{
@@ -110,22 +105,8 @@ namespace Tests.XPack.Info
 
 			if (TestConfiguration.Instance.InRange(">=7.3.0"))
 			{
-				r.Flattened.Should().NotBeNull();
 				r.Vectors.Should().NotBeNull();
 				r.VotingOnly.Should().NotBeNull();
-
-				if (TestConfiguration.Instance.InRange("<7.5.0"))
-#pragma warning disable 618
-					r.DataFrame.Should().NotBeNull();
-#pragma warning restore 618
-
-				if (TestConfiguration.Instance.InRange(">=7.6.0"))
-					r.Flattened.FieldCount.Should().HaveValue();
-			}
-
-			if (TestConfiguration.Instance.InRange(">=7.5.0"))
-			{
-				r.Enrich.Should().NotBeNull();
 			}
 
 			if (TestConfiguration.Instance.InRange(">=7.8.0"))

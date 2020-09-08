@@ -188,7 +188,7 @@ namespace Tests.Aggregations.Bucket.Filters
 	}
 
 	// hide
-	[SkipVersion(">=8.0.0-SNAPSHOT","Fixed in 7.2.0 server, FiltersAggregation NPE when filters is empty #41459 (issue: #41408)")]
+	[SkipVersion("<7.2.0","Fixed in 7.2.0 server, FiltersAggregation NPE when filters is empty #41459 (issue: #41408)")]
 	public class EmptyFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public EmptyFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -204,6 +204,10 @@ namespace Tests.Aggregations.Bucket.Filters
 			}
 		};
 
+		protected override bool ExpectIsValid => false;
+
+		protected override int ExpectStatusCode => 400;
+
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.Filters("empty_filters", agg => agg
 				.AnonymousFilters()
@@ -215,15 +219,12 @@ namespace Tests.Aggregations.Bucket.Filters
 				Filters = new List<QueryContainer>()
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.ShouldBeValid();
-			response.Aggregations.Filters("empty_filters").Buckets.Should().BeEmpty();
-		}
+		protected override void ExpectResponse(ISearchResponse<Project> response) =>
+			response.IsValid.Should().BeFalse();
 	}
 
 	// hide
-	[SkipVersion(">=8.0.0-SNAPSHOT", "Fixed in 7.2.0 server, FiltersAggregation NPE when filters is empty #41459 (issue: #41408)")]
+	[SkipVersion("<7.2.0", "Fixed in 7.2.0 server, FiltersAggregation NPE when filters is empty #41459 (issue: #41408)")]
 	public class ConditionlessFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public ConditionlessFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -238,6 +239,10 @@ namespace Tests.Aggregations.Bucket.Filters
 				}
 			}
 		};
+
+		protected override bool ExpectIsValid => false;
+
+		protected override int ExpectStatusCode => 400;
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.Filters("conditionless_filters", agg => agg
@@ -255,10 +260,7 @@ namespace Tests.Aggregations.Bucket.Filters
 				}
 			};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.ShouldBeValid();
-			response.Aggregations.Filters("conditionless_filters").Buckets.Should().BeEmpty();
-		}
+		protected override void ExpectResponse(ISearchResponse<Project> response) =>
+			response.IsValid.Should().BeFalse();
 	}
 }
