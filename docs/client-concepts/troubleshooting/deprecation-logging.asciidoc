@@ -25,29 +25,24 @@ Elasticsearch.NET and NEST report these back to you so you can log and watch out
 var request = new SearchRequest<Project>
 {
     Size = 0,
-    Routing = new [] { "ignoredefaultcompletedhandler" },
-    Aggregations = new TermsAggregation("states")
+    Aggregations = new CompositeAggregation("test")
     {
-        Field = Field<Project>(p => p.State.Suffix("keyword")),
-        Order = new List<TermsOrder>
+        Sources = new []
         {
-            new TermsOrder { Key = "_term", Order = SortOrder.Ascending },
-        }
-    },
-    Query = new FunctionScoreQuery()
-    {
-        Query = new MatchAllQuery { },
-        Functions = new List<IScoreFunction>
-        {
-            new RandomScoreFunction {Seed = 1337},
+            new DateHistogramCompositeAggregationSource("date")
+            {
+                Field = Field<Project>(f => f.LastActivity),
+                Interval = new Time("7d"),
+                Format = "yyyy-MM-dd"
+            }
         }
     }
 };
 var response = this.Client.Search<Project>(request);
 
 response.ApiCall.DeprecationWarnings.Should().NotBeNullOrEmpty();
-response.ApiCall.DeprecationWarnings.Should().HaveCount(2);
-response.DebugInformation.Should().Contain("Deprecated aggregation order key"); <1>
+response.ApiCall.DeprecationWarnings.Should().HaveCountGreaterOrEqualTo(1);
+response.DebugInformation.Should().Contain("deprecated"); <1>
 ----
 <1> `DebugInformation` also contains the deprecation warnings
 
