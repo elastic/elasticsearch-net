@@ -18,7 +18,7 @@ namespace Tests.XPack.Info
 	public class XPackInfoApiTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
 		private const string XPackInfoStep = nameof(XPackInfoStep);
-		private const string WaitForGreenSecurityIndex = nameof(WaitForGreenSecurityIndex);
+		private const string WaitForSecurityIndices = nameof(WaitForSecurityIndices);
 		private const string XPackUsageStep = nameof(XPackUsageStep);
 
 		public XPackInfoApiTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
@@ -34,14 +34,7 @@ namespace Tests.XPack.Info
 				)
 			},
 			{
-				WaitForGreenSecurityIndex, u => u.Calls<ClusterHealthDescriptor, ClusterHealthRequest, IClusterHealthRequest, ClusterHealthResponse>(
-					v => new ClusterHealthRequest() { WaitForStatus = WaitForStatus.Green },
-					(v, d) => d.WaitForStatus(WaitForStatus.Green),
-					(v, c, f) => c.Cluster.Health(selector: f),
-					(v, c, f) => c.Cluster.HealthAsync(selector: f),
-					(v, c, r) => c.Cluster.Health(r),
-					(v, c, r) => c.Cluster.HealthAsync(r)
-				)
+				WaitForSecurityIndices, u => u.Call((v, c) => c.WaitForSecurityIndicesAsync())
 			},
 			{
 				XPackUsageStep, u => u.Calls<XPackUsageDescriptor, XPackUsageRequest, IXPackUsageRequest, XPackUsageResponse>(
