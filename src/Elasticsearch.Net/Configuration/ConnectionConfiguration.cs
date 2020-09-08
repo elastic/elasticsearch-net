@@ -201,6 +201,8 @@ namespace Elasticsearch.Net
 		private bool _throwExceptions;
 		private bool _transferEncodingChunked;
 		private IMemoryStreamFactory _memoryStreamFactory = RecyclableMemoryStreamFactory.Default;
+		private bool _enableTcpStats;
+		private bool _enableThreadPoolStats;
 
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
 		private Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
@@ -280,6 +282,8 @@ namespace Elasticsearch.Net
 		string IConnectionConfigurationValues.UserAgent => _userAgent;
 		Func<HttpMethod, int, bool> IConnectionConfigurationValues.StatusCodeToResponseSuccess => _statusCodeToResponseSuccess;
 		bool IConnectionConfigurationValues.TransferEncodingChunked => _transferEncodingChunked;
+		bool IConnectionConfigurationValues.EnableTcpStats => _enableTcpStats;
+		bool IConnectionConfigurationValues.EnableThreadPoolStats => _enableThreadPoolStats;
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
@@ -453,7 +457,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Forces all requests to have ?pretty=true querystring parameter appended,
 		/// causing Elasticsearch to return formatted JSON.
-		/// Also forces the client to send out formatted JSON. Defaults to <c>false</c>
+		/// Defaults to <c>false</c>
 		/// </summary>
 		public T PrettyJson(bool b = true) => Assign(b, (a, v) =>
 		{
@@ -562,16 +566,10 @@ namespace Elasticsearch.Net
 			PrettyJson()
 				.IncludeServerStackTraceOnError()
 				.DisableDirectStreaming()
+				.EnableTcpStats()
+				.EnableThreadPoolStats()
 				.Assign(onRequestCompleted, (a, v) =>
-				{
-					var originalCompletedRequestHandler = _completedRequestHandler;
-					var debugCompletedRequestHandler = v ?? (d => Debug.WriteLine(d.DebugInformation));
-					_completedRequestHandler = d =>
-					{
-						originalCompletedRequestHandler?.Invoke(d);
-						debugCompletedRequestHandler.Invoke(d);
-					};
-				});
+					_completedRequestHandler += v ?? (d => Debug.WriteLine(d.DebugInformation)));
 
 		/// <summary>
 		/// Register a ServerCertificateValidationCallback, this is called per endpoint until it returns true.
@@ -622,6 +620,10 @@ namespace Elasticsearch.Net
 		/// The memory stream factory to use, defaults to <see cref="RecyclableMemoryStreamFactory.Default"/>
 		/// </summary>
 		public T MemoryStreamFactory(IMemoryStreamFactory memoryStreamFactory) => Assign(memoryStreamFactory, (a, v) => a._memoryStreamFactory = v);
+
+		public T EnableTcpStats(bool enableTcpStats = true) => Assign(enableTcpStats, (a, v) => a._enableTcpStats = v);
+
+		public T EnableThreadPoolStats(bool enableThreadPoolStats = true) => Assign(enableThreadPoolStats, (a, v) => a._enableThreadPoolStats = v);
 
 		protected virtual void DisposeManagedResources()
 		{

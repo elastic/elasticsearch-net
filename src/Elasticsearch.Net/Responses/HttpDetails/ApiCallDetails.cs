@@ -4,21 +4,33 @@
 
 using System;
 using System.Collections.Generic;
-using Elasticsearch.Net.Extensions;
+using System.Collections.ObjectModel;
+using System.Net.NetworkInformation;
+using System.Text;
+using Elasticsearch.Net.Diagnostics;
 
 namespace Elasticsearch.Net
 {
 	public class ApiCallDetails : IApiCallDetails
 	{
+		private string _debugInformation;
+
 		public List<Audit> AuditTrail { get; set; }
+		public ReadOnlyDictionary<string, ThreadPoolStatistics> ThreadPoolStats { get; set; }
+		public ReadOnlyDictionary<TcpState, int> TcpStats { get; set; }
 
 		public string DebugInformation
 		{
 			get
 			{
-				var sb = new System.Text.StringBuilder();
+				if (_debugInformation != null)
+					return _debugInformation;
+
+				var sb = new StringBuilder();
 				sb.AppendLine(ToString());
-				return ResponseStatics.DebugInformationBuilder(this, sb);
+				_debugInformation = ResponseStatics.DebugInformationBuilder(this, sb);
+
+				return _debugInformation;
 			}
 		}
 
@@ -42,6 +54,6 @@ namespace Elasticsearch.Net
 		public IConnectionConfigurationValues ConnectionConfiguration { get; set; }
 
 		public override string ToString() =>
-			$"{(Success ? "S" : "Uns")}uccessful ({HttpStatusCode}) low level call on {EnumExtensions.GetStringValue(HttpMethod)}: {Uri.PathAndQuery}";
+			$"{(Success ? "S" : "Uns")}uccessful ({HttpStatusCode}) low level call on {HttpMethod.GetStringValue()}: {Uri.PathAndQuery}";
 	}
 }

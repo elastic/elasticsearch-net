@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -13,6 +14,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -65,6 +67,9 @@ namespace Elasticsearch.Net
 			Exception ex = null;
 			string mimeType = null;
 			IDisposable receive = DiagnosticSources.SingletonDisposable;
+			ReadOnlyDictionary<TcpState, int> tcpStats = null;
+			ReadOnlyDictionary<string, ThreadPoolStatistics> threadPoolStats = null;
+
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
@@ -75,6 +80,12 @@ namespace Elasticsearch.Net
 				using(requestMessage?.Content ?? (IDisposable)Stream.Null)
 				using (var d = DiagnosticSource.Diagnose<RequestData, int?>(DiagnosticSources.HttpConnection.SendAndReceiveHeaders, requestData))
 				{
+					if (requestData.TcpStats)
+						tcpStats = TcpStats.GetStates();
+
+					if (requestData.ThreadPoolStats)
+						threadPoolStats = ThreadPoolStats.GetStats();
+
 					responseMessage = client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead).GetAwaiter().GetResult();
 					statusCode = (int)responseMessage.StatusCode;
 					d.EndState = statusCode;
@@ -99,13 +110,18 @@ namespace Elasticsearch.Net
 				ex = e;
 			}
 			using(receive)
-			using (responseStream = responseStream ?? Stream.Null)
+			using (responseStream ??= Stream.Null)
 			{
 				var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType);
+
+				// set TCP and threadpool stats on the response here so that in the event the request fails after the point of
+				// gathering stats, they are still exposed on the call details. Ideally these would be set inside ResponseBuilder.ToResponse,
+				// but doing so would be a breaking change in 7.x
+				response.ApiCall.TcpStats = tcpStats;
+				response.ApiCall.ThreadPoolStats = threadPoolStats;
 				return response;
 			}
 		}
-
 
 		public virtual async Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 			where TResponse : class, IElasticsearchResponse, new()
@@ -118,6 +134,9 @@ namespace Elasticsearch.Net
 			Exception ex = null;
 			string mimeType = null;
 			IDisposable receive = DiagnosticSources.SingletonDisposable;
+			ReadOnlyDictionary<TcpState, int> tcpStats = null;
+			ReadOnlyDictionary<string, ThreadPoolStatistics> threadPoolStats = null;
+
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
@@ -128,6 +147,12 @@ namespace Elasticsearch.Net
 				using(requestMessage?.Content ?? (IDisposable)Stream.Null)
 				using (var d = DiagnosticSource.Diagnose<RequestData, int?>(DiagnosticSources.HttpConnection.SendAndReceiveHeaders, requestData))
 				{
+					if (requestData.TcpStats)
+						tcpStats = TcpStats.GetStates();
+
+					if (requestData.ThreadPoolStats)
+						threadPoolStats = ThreadPoolStats.GetStats();
+
 					responseMessage = await client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
 					statusCode = (int)responseMessage.StatusCode;
 					d.EndState = statusCode;
@@ -157,6 +182,12 @@ namespace Elasticsearch.Net
 				var response = await ResponseBuilder.ToResponseAsync<TResponse>
 						(requestData, ex, statusCode, warnings, responseStream, mimeType, cancellationToken)
 					.ConfigureAwait(false);
+
+				// set TCP and threadpool stats on the response here so that in the event the request fails after the point of
+				// gathering stats, they are still exposed on the call details. Ideally these would be set inside ResponseBuilder.ToResponse,
+				// but doing so would be a breaking change in 7.x
+				response.ApiCall.TcpStats = tcpStats;
+				response.ApiCall.ThreadPoolStats = threadPoolStats;
 				return response;
 			}
 		}

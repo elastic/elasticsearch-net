@@ -18,11 +18,11 @@ namespace Tests.Framework.DocumentationTests
 
 	public abstract class IntegrationDocumentationTestBase
 	{
-		private readonly ClientTestClusterBase _cluster;
+		protected readonly ClientTestClusterBase Cluster;
 
-		protected IntegrationDocumentationTestBase(ClientTestClusterBase cluster) => _cluster = cluster;
+		protected IntegrationDocumentationTestBase(ClientTestClusterBase cluster) => Cluster = cluster;
 
-		protected IElasticClient Client => _cluster.Client;
+		protected IElasticClient Client => Cluster.Client;
 
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 	}

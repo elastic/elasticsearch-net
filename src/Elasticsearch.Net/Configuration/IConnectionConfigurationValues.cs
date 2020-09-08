@@ -263,5 +263,15 @@ namespace Elasticsearch.Net
 		#endif
 		/// </summary>
 		TimeSpan DnsRefreshTimeout { get; }
+
+		/// <summary>
+		/// Enable statistics about TCP connections to be collected when making a request
+		/// </summary>
+		bool EnableTcpStats { get; }
+
+		/// <summary>
+		/// Enable statistics about thread pools to be collected when making a request
+		/// </summary>
+		bool EnableThreadPoolStats { get; }
 	}
 }
