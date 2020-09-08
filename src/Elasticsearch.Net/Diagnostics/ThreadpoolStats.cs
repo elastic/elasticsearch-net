@@ -6,16 +6,19 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Diagnostics
 {
 	/// <summary>
-	/// Gets statistics about thread pools
+	/// Retrieves Statistics for thread pools
 	/// </summary>
 	public class ThreadPoolStats
 	{
 		private static readonly string WorkerThreads = "Worker";
 		private static readonly string CompletionPortThreads = "IOCP";
 
+		/// <summary>
+		/// Retrieve thread pool statistics
+		/// </summary>
 		public static ReadOnlyDictionary<string, ThreadPoolStatistics> GetStats()
 		{
 			var dictionary = new Dictionary<string, ThreadPoolStatistics>(2);
@@ -31,6 +34,9 @@ namespace Elasticsearch.Net
 		}
 	}
 
+	/// <summary>
+	/// Statistics for a thread pool
+	/// </summary>
 	public class ThreadPoolStatistics
 	{
 		public ThreadPoolStatistics(int min, int max, int busy, int free)

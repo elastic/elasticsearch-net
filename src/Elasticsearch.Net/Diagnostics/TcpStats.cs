@@ -5,13 +5,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net.NetworkInformation;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Diagnostics
 {
 	/// <summary>
-	/// Gets statistics about TCP connection
+	/// Gets statistics about TCP connections
 	/// </summary>
 	public static class TcpStats
 	{

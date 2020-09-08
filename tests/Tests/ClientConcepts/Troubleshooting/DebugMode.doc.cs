@@ -89,7 +89,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			var client = new ElasticClient(new ConnectionSettings(pool)
 				.EnableDebugMode(apiCallDetails =>
 				{
-					// do something with the call details
+					// do something with the call details e.g. send with logging framework
 				})
 			);
 		}

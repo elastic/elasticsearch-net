@@ -39,9 +39,10 @@ verbose debug information, configuring a number of settings like
 ----
 IConnectionPool pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 
-var client = new ElasticClient(new ConnectionSettings(pool)
-    .EnableDebugMode() <1>
-);
+var settings = new ConnectionSettings(pool)
+    .EnableDebugMode(); <1>
+
+var client = new ElasticClient(settings);
 
 var response = client.Search<Project>(s => s
     .Query(q => q
@@ -65,7 +66,7 @@ var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 var client = new ElasticClient(new ConnectionSettings(pool)
     .EnableDebugMode(apiCallDetails =>
     {
-        // do something with the call details
+        // do something with the call details e.g. send with logging framework
     })
 );
 ----

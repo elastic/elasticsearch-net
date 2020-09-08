@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.NetworkInformation;
+using Elasticsearch.Net.Diagnostics;
 
 namespace Elasticsearch.Net
 {
