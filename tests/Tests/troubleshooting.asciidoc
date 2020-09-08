@@ -46,6 +46,7 @@ help get you back on the happy path.
 
 include::client-concepts/troubleshooting/audit-trail.asciidoc[]
 include::client-concepts/troubleshooting/debug-information.asciidoc[]
+include::client-concepts/troubleshooting/debug-mode.asciidoc[]
 
 
 

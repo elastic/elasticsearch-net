@@ -136,7 +136,7 @@ Sets the default ping timeout in milliseconds for ping requests, which are used 
 
 `PrettyJson`::
 
-Forces all requests to have ?pretty=true querystring parameter appended, causing Elasticsearch to return formatted JSON. Also forces the client to send out formatted JSON. Defaults to `false`
+Forces all requests to have ?pretty=true querystring parameter appended, causing Elasticsearch to return formatted JSON. Defaults to `false`
 
 `Proxy`::
 

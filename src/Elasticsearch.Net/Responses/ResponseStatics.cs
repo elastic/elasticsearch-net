@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using Elasticsearch.Net.Extensions;
 
@@ -36,6 +37,39 @@ namespace Elasticsearch.Net
 			var request = r.RequestBodyInBytes?.Utf8String() ?? RequestAlreadyCaptured;
 			sb.AppendLine($"# Request:{Environment.NewLine}{request}");
 			sb.AppendLine($"# Response:{Environment.NewLine}{response}");
+
+			if (r.TcpStats != null)
+			{
+				sb.AppendLine("# TCP states:");
+				foreach (var stat in r.TcpStats)
+				{
+					sb.Append("  ");
+					sb.Append(stat.Key);
+					sb.Append(": ");
+					sb.AppendLine($"{stat.Value}");
+				}
+				sb.AppendLine();
+			}
+
+			if (r.ThreadPoolStats != null)
+			{
+				sb.AppendLine("# ThreadPool statistics:");
+				foreach (var stat in r.ThreadPoolStats)
+				{
+					sb.Append("  ");
+					sb.Append(stat.Key);
+					sb.AppendLine(": ");
+					sb.Append("    Busy: ");
+					sb.AppendLine($"{stat.Value.Busy}");
+					sb.Append("    Free: ");
+					sb.AppendLine($"{stat.Value.Free}");
+					sb.Append("    Min: ");
+					sb.AppendLine($"{stat.Value.Min}");
+					sb.Append("    Max: ");
+					sb.AppendLine($"{stat.Value.Max}");
+				}
+				sb.AppendLine();
+			}
 
 			return sb.ToString();
 		}
