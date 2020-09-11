@@ -126,7 +126,7 @@ namespace Nest
 			var propertiesByName = new Dictionary<string, PropertyInfo>();
 			do
 			{
-				foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+				foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
 				{
 					if (propertiesByName.ContainsKey(propertyInfo.Name))
 					{
