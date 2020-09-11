@@ -67,33 +67,108 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
         public static IEnumerable<PropertyInfo> GetAllProperties(this Type type)
         {
-            return GetAllPropertiesCore(type, new HashSet<string>());
+			var collectedProperties = new Dictionary<string, PropertyInfo>();
+            return GetAllPropertiesCore(type, collectedProperties);
         }
 
-        static IEnumerable<PropertyInfo> GetAllPropertiesCore(Type type, HashSet<string> nameCheck)
-        {
-            foreach (var item in type.GetRuntimeProperties())
-            {
-                if (nameCheck.Add(item.Name))
-                {
-                    yield return item;
-                }
-            }
-            if (type.BaseType != null)
-            {
-                foreach (var item in GetAllPropertiesCore(type.BaseType, nameCheck))
-                {
-                    yield return item;
-                }
-            }
-			foreach (var @interface in type.GetInterfaces())
+		public static bool IsVirtual(this PropertyInfo propertyInfo)
+		{
+			MethodInfo m = propertyInfo.GetGetMethod(true);
+			if (m != null && m.IsVirtual)
 			{
-				foreach (var item in GetAllPropertiesCore(@interface, nameCheck))
+				return true;
+			}
+
+			m = propertyInfo.GetSetMethod(true);
+			if (m != null && m.IsVirtual)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public static MethodInfo GetBaseDefinition(this PropertyInfo propertyInfo)
+		{
+			MethodInfo m = propertyInfo.GetGetMethod(true);
+			if (m != null)
+			{
+				return m.GetBaseDefinition();
+			}
+
+			return propertyInfo.GetSetMethod(true)?.GetBaseDefinition();
+		}
+
+		static IEnumerable<PropertyInfo> GetAllPropertiesCore(Type type, Dictionary<string, PropertyInfo> collectedProperties)
+		{
+			foreach (var item in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly))
+			{
+				if (collectedProperties.TryGetValue(item.Name, out var existingItem))
 				{
-					yield return item;
+					if (IsHidingMember(item))
+						collectedProperties[item.Name] = item;
+					else if (!type.IsInterface && item.IsVirtual())
+					{
+						Type subTypePropertyDeclaringType = item.GetBaseDefinition()?.DeclaringType ?? item.DeclaringType;
+
+						if (!(existingItem.IsVirtual() && (existingItem.GetBaseDefinition()?.DeclaringType ?? existingItem.DeclaringType).IsAssignableFrom(subTypePropertyDeclaringType)))
+						{
+							collectedProperties[item.Name] = item;
+						}
+					}
+				}
+				else
+				{
+					collectedProperties.Add(item.Name, item);
 				}
 			}
-        }
+			if (type.BaseType != null)
+			{
+				GetAllPropertiesCore(type.BaseType, collectedProperties);
+			}
+			foreach (var @interface in type.GetInterfaces())
+			{
+				GetAllPropertiesCore(@interface, collectedProperties);
+			}
+
+			return collectedProperties.Values;
+		}
+
+		private static bool IsHidingMember(PropertyInfo propertyInfo)
+		{
+			var baseType = propertyInfo.DeclaringType?.BaseType;
+			var baseProperty = baseType?.GetProperty(propertyInfo.Name);
+			if (baseProperty == null) return false;
+
+			var derivedGetMethod = propertyInfo.GetGetMethod().GetBaseDefinition();
+			return derivedGetMethod?.ReturnType != propertyInfo.PropertyType;
+		}
+
+
+   //      static IEnumerable<PropertyInfo> GetAllPropertiesCore(Type type, HashSet<string> nameCheck)
+   //      {
+   //          foreach (var item in type.GetRuntimeProperties())
+   //          {
+   //              if (nameCheck.Add(item.Name))
+   //              {
+   //                  yield return item;
+   //              }
+   //          }
+   //          if (type.BaseType != null)
+   //          {
+   //              foreach (var item in GetAllPropertiesCore(type.BaseType, nameCheck))
+   //              {
+   //                  yield return item;
+   //              }
+   //          }
+			// foreach (var @interface in type.GetInterfaces())
+			// {
+			// 	foreach (var item in GetAllPropertiesCore(@interface, nameCheck))
+			// 	{
+			// 		yield return item;
+			// 	}
+			// }
+   //      }
 
         public static IEnumerable<FieldInfo> GetAllFields(this Type type)
         {
