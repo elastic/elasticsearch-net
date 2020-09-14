@@ -23,6 +23,7 @@
 #endregion
 
 using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Elasticsearch.Net.Utf8Json.Internal
@@ -74,8 +75,8 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
         public GuidBits(ref Guid value)
         {
-            this = default(GuidBits);
-            this.Value = value;
+            this = default;
+            Value = value;
         }
 
         // 4-pattern, lower/upper and '-' or no
@@ -91,39 +92,39 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             {
                 if (BitConverter.IsLittleEndian)
                 {
-                    this.Byte0 = Parse(array, offset + 6);
-                    this.Byte1 = Parse(array, offset + 4);
-                    this.Byte2 = Parse(array, offset + 2);
-                    this.Byte3 = Parse(array, offset + 0);
+                    Byte0 = Parse(array, offset + 6);
+                    Byte1 = Parse(array, offset + 4);
+                    Byte2 = Parse(array, offset + 2);
+                    Byte3 = Parse(array, offset + 0);
 
-                    this.Byte4 = Parse(array, offset + 10);
-                    this.Byte5 = Parse(array, offset + 8);
+                    Byte4 = Parse(array, offset + 10);
+                    Byte5 = Parse(array, offset + 8);
 
-                    this.Byte6 = Parse(array, offset + 14);
-                    this.Byte7 = Parse(array, offset + 12);
+                    Byte6 = Parse(array, offset + 14);
+                    Byte7 = Parse(array, offset + 12);
                 }
                 else
                 {
-                    this.Byte0 = Parse(array, offset + 0);
-                    this.Byte1 = Parse(array, offset + 2);
-                    this.Byte2 = Parse(array, offset + 4);
-                    this.Byte3 = Parse(array, offset + 6);
+                    Byte0 = Parse(array, offset + 0);
+                    Byte1 = Parse(array, offset + 2);
+                    Byte2 = Parse(array, offset + 4);
+                    Byte3 = Parse(array, offset + 6);
 
-                    this.Byte4 = Parse(array, offset + 8);
-                    this.Byte5 = Parse(array, offset + 10);
+                    Byte4 = Parse(array, offset + 8);
+                    Byte5 = Parse(array, offset + 10);
 
-                    this.Byte6 = Parse(array, offset + 12);
-                    this.Byte7 = Parse(array, offset + 14);
+                    Byte6 = Parse(array, offset + 12);
+                    Byte7 = Parse(array, offset + 14);
                 }
-                this.Byte8 = Parse(array, offset + 16);
-                this.Byte9 = Parse(array, offset + 18);
+                Byte8 = Parse(array, offset + 16);
+                Byte9 = Parse(array, offset + 18);
 
-                this.Byte10 = Parse(array, offset + 20);
-                this.Byte11 = Parse(array, offset + 22);
-                this.Byte12 = Parse(array, offset + 24);
-                this.Byte13 = Parse(array, offset + 26);
-                this.Byte14 = Parse(array, offset + 28);
-                this.Byte15 = Parse(array, offset + 30);
+                Byte10 = Parse(array, offset + 20);
+                Byte11 = Parse(array, offset + 22);
+                Byte12 = Parse(array, offset + 24);
+                Byte13 = Parse(array, offset + 26);
+                Byte14 = Parse(array, offset + 28);
+                Byte15 = Parse(array, offset + 30);
                 return;
             }
             else if (utf8string.Count == 36)
@@ -131,52 +132,52 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                 // '-' => 45
                 if (BitConverter.IsLittleEndian)
                 {
-                    this.Byte0 = Parse(array, offset + 6);
-                    this.Byte1 = Parse(array, offset + 4);
-                    this.Byte2 = Parse(array, offset + 2);
-                    this.Byte3 = Parse(array, offset + 0);
+                    Byte0 = Parse(array, offset + 6);
+                    Byte1 = Parse(array, offset + 4);
+                    Byte2 = Parse(array, offset + 2);
+                    Byte3 = Parse(array, offset + 0);
 
                     if (array[offset + 8] != '-') goto ERROR;
 
-                    this.Byte4 = Parse(array, offset + 11);
-                    this.Byte5 = Parse(array, offset + 9);
+                    Byte4 = Parse(array, offset + 11);
+                    Byte5 = Parse(array, offset + 9);
 
                     if (array[offset + 13] != '-') goto ERROR;
 
-                    this.Byte6 = Parse(array, offset + 16);
-                    this.Byte7 = Parse(array, offset + 14);
+                    Byte6 = Parse(array, offset + 16);
+                    Byte7 = Parse(array, offset + 14);
                 }
                 else
                 {
-                    this.Byte0 = Parse(array, offset + 0);
-                    this.Byte1 = Parse(array, offset + 2);
-                    this.Byte2 = Parse(array, offset + 4);
-                    this.Byte3 = Parse(array, offset + 6);
+                    Byte0 = Parse(array, offset + 0);
+                    Byte1 = Parse(array, offset + 2);
+                    Byte2 = Parse(array, offset + 4);
+                    Byte3 = Parse(array, offset + 6);
 
                     if (array[offset + 8] != '-') goto ERROR;
 
-                    this.Byte4 = Parse(array, offset + 9);
-                    this.Byte5 = Parse(array, offset + 11);
+                    Byte4 = Parse(array, offset + 9);
+                    Byte5 = Parse(array, offset + 11);
 
                     if (array[offset + 13] != '-') goto ERROR;
 
-                    this.Byte6 = Parse(array, offset + 14);
-                    this.Byte7 = Parse(array, offset + 16);
+                    Byte6 = Parse(array, offset + 14);
+                    Byte7 = Parse(array, offset + 16);
                 }
 
                 if (array[offset + 18] != '-') goto ERROR;
 
-                this.Byte8 = Parse(array, offset + 19);
-                this.Byte9 = Parse(array, offset + 21);
+                Byte8 = Parse(array, offset + 19);
+                Byte9 = Parse(array, offset + 21);
 
                 if (array[offset + 23] != '-') goto ERROR;
 
-                this.Byte10 = Parse(array, offset + 24);
-                this.Byte11 = Parse(array, offset + 26);
-                this.Byte12 = Parse(array, offset + 28);
-                this.Byte13 = Parse(array, offset + 30);
-                this.Byte14 = Parse(array, offset + 32);
-                this.Byte15 = Parse(array, offset + 34);
+                Byte10 = Parse(array, offset + 24);
+                Byte11 = Parse(array, offset + 26);
+                Byte12 = Parse(array, offset + 28);
+                Byte13 = Parse(array, offset + 30);
+                Byte14 = Parse(array, offset + 32);
+                Byte15 = Parse(array, offset + 34);
                 return;
             }
 
@@ -184,14 +185,11 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             throw new ArgumentException("Invalid Guid Pattern.");
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        static byte Parse(byte[] bytes, int highOffset)
-        {
-            return unchecked((byte)(SwitchParse(bytes[highOffset]) * 16 + SwitchParse(bytes[highOffset + 1])));
-        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private static byte Parse(byte[] bytes, int highOffset) => unchecked((byte)(SwitchParse(bytes[highOffset]) * 16 + SwitchParse(bytes[highOffset + 1])));
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        static byte SwitchParse(byte b)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private static byte SwitchParse(byte b)
         {
             // '0'(48) ~ '9'(57) => -48
             // 'A'(65) ~ 'F'(70) => -55

@@ -33,8 +33,6 @@ namespace Nest
 	[JsonFormatter(typeof(CompositeKeyFormatter))]
 	public class CompositeKey : IsAReadOnlyDictionaryBase<string, object>
 	{
-		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
-
 		public CompositeKey(IReadOnlyDictionary<string, object> backingDictionary) : base(backingDictionary) { }
 
 		/// <summary>
@@ -90,7 +88,7 @@ namespace Nest
 				return false;
 			}
 
-			value = Epoch.AddMilliseconds(l);
+			value = DateTimeUtil.UnixEpoch.AddMilliseconds(l);
 			return true;
 		}
 

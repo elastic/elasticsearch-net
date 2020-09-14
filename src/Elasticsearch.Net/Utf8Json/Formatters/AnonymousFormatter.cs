@@ -28,25 +28,25 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 {
     internal sealed class AnonymousFormatter<T> : IJsonFormatter<T>
     {
-        readonly JsonSerializeAction<T> _serialize;
-        readonly JsonDeserializeFunc<T> _deserialize;
+        private readonly JsonSerializeAction<T> _serialize;
+        private readonly JsonDeserializeFunc<T> _deserialize;
 
         public AnonymousFormatter(JsonSerializeAction<T> serialize, JsonDeserializeFunc<T> deserialize)
         {
-            this._serialize = serialize;
-            this._deserialize = deserialize;
+            _serialize = serialize;
+            _deserialize = deserialize;
         }
 
         public void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
         {
-            if (this._serialize == null) throw new InvalidOperationException(this.GetType().Name + " does not support Serialize.");
-            this._serialize(ref writer, value, formatterResolver);
+            if (_serialize == null) throw new InvalidOperationException(GetType().Name + " does not support Serialize.");
+            _serialize(ref writer, value, formatterResolver);
         }
 
         public T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
         {
-            if (this._deserialize == null) throw new InvalidOperationException(this.GetType().Name + " does not support Deserialize.");
-            return this._deserialize(ref reader, formatterResolver);
+            if (_deserialize == null) throw new InvalidOperationException(GetType().Name + " does not support Deserialize.");
+            return _deserialize(ref reader, formatterResolver);
         }
     }
 }

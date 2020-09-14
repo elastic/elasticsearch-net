@@ -26,17 +26,15 @@ using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Elasticsearch.Net.Utf8Json.Formatters
 {
-    // multi dimentional array serialize to [[seq], [seq]]
+    // multi dimensional array serialize to [[seq], [seq]]
 
-	internal sealed class TwoDimentionalArrayFormatter<T> : IJsonFormatter<T[,]>
+	internal sealed class TwoDimensionalArrayFormatter<T> : IJsonFormatter<T[,]>
     {
         public void Serialize(ref JsonWriter writer, T[,] value, IJsonFormatterResolver formatterResolver)
         {
             if (value == null)
-            {
-                writer.WriteNull();
-            }
-            else
+				writer.WriteNull();
+			else
             {
                 var formatter = formatterResolver.GetFormatterWithVerify<T>();
 
@@ -44,11 +42,11 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 var jLength = value.GetLength(1);
 
                 writer.WriteBeginArray();
-                for (int i = 0; i < iLength; i++)
+                for (var i = 0; i < iLength; i++)
                 {
                     if (i != 0) writer.WriteValueSeparator();
                     writer.WriteBeginArray();
-                    for (int j = 0; j < jLength; j++)
+                    for (var j = 0; j < jLength; j++)
                     {
                         if (j != 0) writer.WriteValueSeparator();
                         formatter.Serialize(ref writer, value[i, j], formatterResolver);
@@ -75,36 +73,28 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 var innerCount = 0;
                 reader.ReadIsBeginArrayWithVerify();
                 while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref innerCount))
-                {
-                    innerArray.Add(formatter.Deserialize(ref reader, formatterResolver));
-                }
+					innerArray.Add(formatter.Deserialize(ref reader, formatterResolver));
 
-                guessInnerLength = innerArray.Size;
+				guessInnerLength = innerArray.Size;
                 buffer.Add(innerArray);
             }
 
             var t = new T[buffer.Size, guessInnerLength];
-            for (int i = 0; i < buffer.Size; i++)
-            {
-                for (int j = 0; j < guessInnerLength; j++)
-                {
-                    t[i, j] = buffer.Buffer[i].Buffer[j];
-                }
-            }
+            for (var i = 0; i < buffer.Size; i++)
+			for (var j = 0; j < guessInnerLength; j++)
+				t[i, j] = buffer.Buffer[i].Buffer[j];
 
-            return t;
+			return t;
         }
     }
 
-	internal sealed class ThreeDimentionalArrayFormatter<T> : IJsonFormatter<T[,,]>
+	internal sealed class ThreeDimensionalArrayFormatter<T> : IJsonFormatter<T[,,]>
     {
         public void Serialize(ref JsonWriter writer, T[,,] value, IJsonFormatterResolver formatterResolver)
         {
             if (value == null)
-            {
-                writer.WriteNull();
-            }
-            else
+				writer.WriteNull();
+			else
             {
                 var formatter = formatterResolver.GetFormatterWithVerify<T>();
 
@@ -113,15 +103,15 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 var kLength = value.GetLength(2);
 
                 writer.WriteBeginArray();
-                for (int i = 0; i < iLength; i++)
+                for (var i = 0; i < iLength; i++)
                 {
                     if (i != 0) writer.WriteValueSeparator();
                     writer.WriteBeginArray();
-                    for (int j = 0; j < jLength; j++)
+                    for (var j = 0; j < jLength; j++)
                     {
                         if (j != 0) writer.WriteValueSeparator();
                         writer.WriteBeginArray();
-                        for (int k = 0; k < kLength; k++)
+                        for (var k = 0; k < kLength; k++)
                         {
                             if (k != 0) writer.WriteValueSeparator();
                             formatter.Serialize(ref writer, value[i, j, k], formatterResolver);
@@ -156,11 +146,9 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                     var innerCount2 = 0;
                     reader.ReadIsBeginArrayWithVerify();
                     while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref innerCount2))
-                    {
-                        innerArray2.Add(formatter.Deserialize(ref reader, formatterResolver));
-                    }
+						innerArray2.Add(formatter.Deserialize(ref reader, formatterResolver));
 
-                    guessInnerLength2 = innerArray2.Size;
+					guessInnerLength2 = innerArray2.Size;
                     innerArray.Add(innerArray2);
                 }
 
@@ -169,30 +157,22 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             }
 
             var t = new T[buffer.Size, guessInnerLength, guessInnerLength2];
-            for (int i = 0; i < buffer.Size; i++)
-            {
-                for (int j = 0; j < guessInnerLength; j++)
-                {
-                    for (int k = 0; k < guessInnerLength2; k++)
-                    {
-                        t[i, j, k] = buffer.Buffer[i].Buffer[j].Buffer[k];
-                    }
-                }
-            }
+            for (var i = 0; i < buffer.Size; i++)
+			for (var j = 0; j < guessInnerLength; j++)
+			for (var k = 0; k < guessInnerLength2; k++)
+				t[i, j, k] = buffer.Buffer[i].Buffer[j].Buffer[k];
 
-            return t;
+			return t;
         }
     }
 
-	internal sealed class FourDimentionalArrayFormatter<T> : IJsonFormatter<T[,,,]>
+	internal sealed class FourDimensionalArrayFormatter<T> : IJsonFormatter<T[,,,]>
     {
         public void Serialize(ref JsonWriter writer, T[,,,] value, IJsonFormatterResolver formatterResolver)
         {
             if (value == null)
-            {
-                writer.WriteNull();
-            }
-            else
+				writer.WriteNull();
+			else
             {
                 var formatter = formatterResolver.GetFormatterWithVerify<T>();
 
@@ -202,19 +182,19 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 var lLength = value.GetLength(3);
 
                 writer.WriteBeginArray();
-                for (int i = 0; i < iLength; i++)
+                for (var i = 0; i < iLength; i++)
                 {
                     if (i != 0) writer.WriteValueSeparator();
                     writer.WriteBeginArray();
-                    for (int j = 0; j < jLength; j++)
+                    for (var j = 0; j < jLength; j++)
                     {
                         if (j != 0) writer.WriteValueSeparator();
                         writer.WriteBeginArray();
-                        for (int k = 0; k < kLength; k++)
+                        for (var k = 0; k < kLength; k++)
                         {
                             if (k != 0) writer.WriteValueSeparator();
                             writer.WriteBeginArray();
-                            for (int l = 0; l < lLength; l++)
+                            for (var l = 0; l < lLength; l++)
                             {
                                 if (l != 0) writer.WriteValueSeparator();
                                 formatter.Serialize(ref writer, value[i, j, k, l], formatterResolver);
@@ -257,10 +237,9 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                         var innerCount3 = 0;
                         reader.ReadIsBeginArrayWithVerify();
                         while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref innerCount3))
-                        {
-                            innerArray3.Add(formatter.Deserialize(ref reader, formatterResolver));
-                        }
-                        guessInnerLength3 = innerArray3.Size;
+							innerArray3.Add(formatter.Deserialize(ref reader, formatterResolver));
+
+						guessInnerLength3 = innerArray3.Size;
                         innerArray2.Add(innerArray3);
                     }
 
@@ -273,21 +252,13 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             }
 
             var t = new T[buffer.Size, guessInnerLength, guessInnerLength2, guessInnerLength3];
-            for (int i = 0; i < buffer.Size; i++)
-            {
-                for (int j = 0; j < guessInnerLength; j++)
-                {
-                    for (int k = 0; k < guessInnerLength2; k++)
-                    {
-                        for (int l = 0; l < guessInnerLength3; l++)
-                        {
-                            t[i, j, k, l] = buffer.Buffer[i].Buffer[j].Buffer[k].Buffer[l];
-                        }
-                    }
-                }
-            }
+            for (var i = 0; i < buffer.Size; i++)
+			for (var j = 0; j < guessInnerLength; j++)
+			for (var k = 0; k < guessInnerLength2; k++)
+			for (var l = 0; l < guessInnerLength3; l++)
+				t[i, j, k, l] = buffer.Buffer[i].Buffer[j].Buffer[k].Buffer[l];
 
-            return t;
+			return t;
         }
     }
 }

@@ -72,10 +72,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 			return collectedProperties.Values;
 		}
 
-		public static IEnumerable<FieldInfo> GetAllFields(this Type type)
-        {
-            return GetAllFieldsCore(type, new HashSet<string>());
-        }
+		public static IEnumerable<FieldInfo> GetAllFields(this Type type) => GetAllFieldsCore(type, new HashSet<string>());
 
 		private static IEnumerable<FieldInfo> GetAllFieldsCore(Type type, HashSet<string> nameCheck)
         {
@@ -100,15 +97,14 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
 		private static MethodInfo GetBaseDefinition(this PropertyInfo propertyInfo)
 		{
-			MethodInfo m = propertyInfo.GetMethod;
+			var m = propertyInfo.GetMethod;
 			return m != null
 				? m.GetBaseDefinition()
 				: propertyInfo.SetMethod?.GetBaseDefinition();
 		}
 
-		public static MethodInfo GetShouldSerializeMethod(this Type type)
-		{
-			return ShouldSerializeMethodInfo.GetOrAdd(type, t =>
+		public static MethodInfo GetShouldSerializeMethod(this Type type) =>
+			ShouldSerializeMethodInfo.GetOrAdd(type, t =>
 			{
 				return t.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
 					.FirstOrDefault(m => m.Name == "ShouldSerialize"
@@ -116,18 +112,15 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 						&& m.GetParameters().Length == 1
 						&& m.GetParameters()[0].ParameterType == typeof(IJsonFormatterResolver));
 			});
-		}
 
 		/// <summary>
 		/// Determines if a type is an anonymous type
 		/// </summary>
-		public static bool IsAnonymous(this Type type)
-		{
-			return type.GetCustomAttribute<CompilerGeneratedAttribute>() != null
-				&& type.Name.Contains("AnonymousType")
-				&& (type.Name.StartsWith("<>") || type.Name.StartsWith("VB$"))
-				&& (type.Attributes & TypeAttributes.NotPublic) == TypeAttributes.NotPublic;
-		}
+		public static bool IsAnonymous(this Type type) =>
+			type.GetCustomAttribute<CompilerGeneratedAttribute>() != null
+			&& type.Name.Contains("AnonymousType")
+			&& (type.Name.StartsWith("<>") || type.Name.StartsWith("VB$"))
+			&& (type.Attributes & TypeAttributes.NotPublic) == TypeAttributes.NotPublic;
 
 		/// <summary>
 		/// Determines if a <see cref="PropertyInfo"/> is hiding/shadowing a
@@ -170,7 +163,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 		public static IEnumerable<MethodInfo> GetDeclaredMethods(this Type type, string name)
 	    {
 			var methods = type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-			for (int index = 0; index < methods.Length; ++index)
+			for (var index = 0; index < methods.Length; ++index)
 			{
 				var method = methods[index];
 				if (method.Name == name)

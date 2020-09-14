@@ -45,25 +45,22 @@ namespace Elasticsearch.Net.Utf8Json
             {
                 Exception inner = ex;
                 while (inner.InnerException != null)
-                {
-                    inner = inner.InnerException;
-                }
+					inner = inner.InnerException;
 
-                throw inner;
+				throw inner;
             }
 
             if (formatter == null)
-            {
-                throw new FormatterNotRegisteredException(typeof(T).FullName + " is not registered in this resolver. resolver:" + resolver.GetType().Name);
-            }
+				throw new FormatterNotRegisteredException(typeof(T).FullName + " is not registered in this resolver. resolver:" + resolver.GetType().Name);
 
-            return formatter;
+			return formatter;
         }
 
-		private static readonly MethodInfo _getFormatterMethod = typeof(IJsonFormatterResolver).GetRuntimeMethod("GetFormatter", Type.EmptyTypes);
+		private static readonly MethodInfo GetFormatterMethod =
+			typeof(IJsonFormatterResolver).GetRuntimeMethod(nameof(IJsonFormatterResolver.GetFormatter), Type.EmptyTypes);
         public static object GetFormatterDynamic(this IJsonFormatterResolver resolver, Type type)
         {
-            var formatter = _getFormatterMethod.MakeGenericMethod(type).Invoke(resolver, null);
+            var formatter = GetFormatterMethod.MakeGenericMethod(type).Invoke(resolver, null);
             return formatter;
         }
     }

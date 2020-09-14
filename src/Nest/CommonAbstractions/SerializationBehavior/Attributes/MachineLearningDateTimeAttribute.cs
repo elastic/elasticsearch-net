@@ -11,7 +11,7 @@ namespace Nest
 {
 	internal static class DateTimeUtil
 	{
-		public static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
+		public static readonly DateTimeOffset UnixEpoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
 	}
 
 	/// <summary>
@@ -41,7 +41,7 @@ namespace Nest
 			if (token == JsonToken.Number)
 			{
 				var millisecondsSinceEpoch = reader.ReadDouble();
-				var dateTimeOffset = DateTimeUtil.Epoch.AddMilliseconds(millisecondsSinceEpoch);
+				var dateTimeOffset = DateTimeUtil.UnixEpoch.AddMilliseconds(millisecondsSinceEpoch);
 				return dateTimeOffset;
 			}
 
@@ -74,7 +74,7 @@ namespace Nest
 			if (token == JsonToken.Number)
 			{
 				var millisecondsSinceEpoch = reader.ReadDouble();
-				var dateTimeOffset = DateTimeUtil.Epoch.AddMilliseconds(millisecondsSinceEpoch);
+				var dateTimeOffset = DateTimeUtil.UnixEpoch.AddMilliseconds(millisecondsSinceEpoch);
 				return dateTimeOffset.DateTime;
 			}
 

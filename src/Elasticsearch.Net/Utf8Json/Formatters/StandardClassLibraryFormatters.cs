@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
 using System.Numerics;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Utf8Json.Internal;
@@ -69,7 +70,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
 		public ArraySegment<byte> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.ReadIsNull()) return default(ArraySegment<byte>);
+			if (reader.ReadIsNull()) return default;
 
 			var str = reader.ReadString();
 			var bytes = Convert.FromBase64String(str);
@@ -81,25 +82,13 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 	{
 		public static readonly IJsonFormatter<string> Default = new NullableStringFormatter();
 
-		public void Serialize(ref JsonWriter writer, string value, IJsonFormatterResolver formatterResolver)
-		{
-			writer.WriteString(value);
-		}
+		public void Serialize(ref JsonWriter writer, string value, IJsonFormatterResolver formatterResolver) => writer.WriteString(value);
 
-		public string Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-		{
-			return reader.ReadString();
-		}
+		public string Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) => reader.ReadString();
 
-		public void SerializeToPropertyName(ref JsonWriter writer, string value, IJsonFormatterResolver formatterResolver)
-		{
-			writer.WriteString(value);
-		}
+		public void SerializeToPropertyName(ref JsonWriter writer, string value, IJsonFormatterResolver formatterResolver) => writer.WriteString(value);
 
-		public string DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-		{
-			return reader.ReadString();
-		}
+		public string DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver) => reader.ReadString();
 	}
 
 	internal sealed class NullableStringArrayFormatter : IJsonFormatter<string[]>
@@ -109,18 +98,14 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		public void Serialize(ref JsonWriter writer, string[] value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null)
-			{
 				writer.WriteNull();
-			}
 			else
 			{
 				writer.WriteBeginArray();
 
 				if (value.Length != 0)
-				{
 					writer.WriteString(value[0]);
-				}
-				for (int i = 1; i < value.Length; i++)
+				for (var i = 1; i < value.Length; i++)
 				{
 					writer.WriteValueSeparator();
 					writer.WriteString(value[i]);
@@ -133,26 +118,20 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		public string[] Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.ReadIsNull())
-			{
 				return null;
-			}
-			else
-			{
-				reader.ReadIsBeginArrayWithVerify();
-				var array = new string[4];
-				var count = 0;
-				while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref count))
-				{
-					if (array.Length < count)
-					{
-						Array.Resize(ref array, count * 2);
-					}
-					array[count - 1] = reader.ReadString();
-				}
 
-				Array.Resize(ref array, count);
-				return array;
+			reader.ReadIsBeginArrayWithVerify();
+			var array = new string[4];
+			var count = 0;
+			while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref count))
+			{
+				if (array.Length < count)
+					Array.Resize(ref array, count * 2);
+				array[count - 1] = reader.ReadString();
 			}
+
+			Array.Resize(ref array, count);
+			return array;
 		}
 	}
 
@@ -161,43 +140,30 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		public static readonly CharFormatter Default = new CharFormatter();
 
 		// MEMO:can be improvement write directly
-		public void Serialize(ref JsonWriter writer, char value, IJsonFormatterResolver formatterResolver)
-		{
+		public void Serialize(ref JsonWriter writer, char value, IJsonFormatterResolver formatterResolver) =>
 			writer.WriteString(value.ToString(CultureInfo.InvariantCulture));
-		}
 
-		public char Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-		{
-			return reader.ReadString()[0];
-		}
+		public char Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) => reader.ReadString()[0];
 	}
 
-	internal sealed class NullableCharFormatter : IJsonFormatter<Char?>
+	internal sealed class NullableCharFormatter : IJsonFormatter<char?>
 	{
 		public static readonly NullableCharFormatter Default = new NullableCharFormatter();
 
-		public void Serialize(ref JsonWriter writer, Char? value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, char? value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null)
-			{
 				writer.WriteNull();
-			}
 			else
-			{
 				CharFormatter.Default.Serialize(ref writer, value.Value, formatterResolver);
-			}
 		}
 
-		public Char? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		public char? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.ReadIsNull())
-			{
 				return null;
-			}
-			else
-			{
-				return CharFormatter.Default.Deserialize(ref reader, formatterResolver);
-			}
+
+			return CharFormatter.Default.Deserialize(ref reader, formatterResolver);
 		}
 	}
 
@@ -208,18 +174,14 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		public void Serialize(ref JsonWriter writer, char[] value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null)
-			{
 				writer.WriteNull();
-			}
 			else
 			{
 				writer.WriteBeginArray();
 
 				if (value.Length != 0)
-				{
 					CharFormatter.Default.Serialize(ref writer, value[0], formatterResolver);
-				}
-				for (int i = 1; i < value.Length; i++)
+				for (var i = 1; i < value.Length; i++)
 				{
 					writer.WriteValueSeparator();
 					CharFormatter.Default.Serialize(ref writer, value[i], formatterResolver);
@@ -232,26 +194,20 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		public char[] Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.ReadIsNull())
-			{
 				return null;
-			}
-			else
-			{
-				reader.ReadIsBeginArrayWithVerify();
-				var array = new char[4];
-				var count = 0;
-				while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref count))
-				{
-					if (array.Length < count)
-					{
-						Array.Resize(ref array, count * 2);
-					}
-					array[count - 1] = CharFormatter.Default.Deserialize(ref reader, formatterResolver);
-				}
 
-				Array.Resize(ref array, count);
-				return array;
+			reader.ReadIsBeginArrayWithVerify();
+			var array = new char[4];
+			var count = 0;
+			while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref count))
+			{
+				if (array.Length < count)
+					Array.Resize(ref array, count * 2);
+				array[count - 1] = CharFormatter.Default.Deserialize(ref reader, formatterResolver);
 			}
+
+			Array.Resize(ref array, count);
+			return array;
 		}
 	}
 
@@ -278,47 +234,35 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			return new GuidBits(ref segment).Value;
 		}
 
-		public void SerializeToPropertyName(ref JsonWriter writer, Guid value, IJsonFormatterResolver formatterResolver)
-		{
+		public void SerializeToPropertyName(ref JsonWriter writer, Guid value, IJsonFormatterResolver formatterResolver) =>
 			Serialize(ref writer, value, formatterResolver);
-		}
 
-		public Guid DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-		{
-			return Deserialize(ref reader, formatterResolver);
-		}
+		public Guid DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			Deserialize(ref reader, formatterResolver);
 	}
 
 	internal sealed class DecimalFormatter : IJsonFormatter<decimal>
 	{
 		public static readonly IJsonFormatter<decimal> Default = new DecimalFormatter();
 
-		readonly bool serializeAsString;
+		private readonly bool _serializeAsString;
 
 		public DecimalFormatter()
 			: this(false)
 		{
-
 		}
 
-		public DecimalFormatter(bool serializeAsString)
-		{
-			this.serializeAsString = serializeAsString;
-		}
+		public DecimalFormatter(bool serializeAsString) => _serializeAsString = serializeAsString;
 
 		public void Serialize(ref JsonWriter writer, decimal value, IJsonFormatterResolver formatterResolver)
 		{
 			// always include decimal point and at least one decimal place
 			var s = value.ToString("0.0###########################", CultureInfo.InvariantCulture);
-			if (serializeAsString)
-			{
+			if (_serializeAsString)
 				writer.WriteString(s);
-			}
 			else
-			{
 				// write as number format.
 				writer.WriteRaw(StringEncoding.UTF8.GetBytes(s));
-			}
 		}
 
 		public decimal Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -327,16 +271,14 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			if (token == JsonToken.Number)
 			{
 				var number = reader.ReadNumberSegment();
+				// ReSharper disable once AssignNullToNotNullAttribute
 				return decimal.Parse(StringEncoding.UTF8.GetString(number.Array, number.Offset, number.Count), NumberStyles.Float, CultureInfo.InvariantCulture);
 			}
-			else if (token == JsonToken.String)
-			{
+
+			if (token == JsonToken.String)
 				return decimal.Parse(reader.ReadString(), NumberStyles.Float, CultureInfo.InvariantCulture);
-			}
-			else
-			{
-				throw new InvalidOperationException("Invalid Json Token for DecimalFormatter:" + token);
-			}
+
+			throw new InvalidOperationException("Invalid Json Token for DecimalFormatter:" + token);
 		}
 	}
 
@@ -347,25 +289,17 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		public void Serialize(ref JsonWriter writer, Uri value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null)
-			{
 				writer.WriteNull();
-			}
 			else
-			{
 				writer.WriteString(value.ToString());
-			}
 		}
 
 		public Uri Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.ReadIsNull())
-			{
 				return null;
-			}
-			else
-			{
-				return new Uri(reader.ReadString(), UriKind.RelativeOrAbsolute);
-			}
+
+			return new Uri(reader.ReadString(), UriKind.RelativeOrAbsolute);
 		}
 	}
 
@@ -376,25 +310,17 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		public void Serialize(ref JsonWriter writer, Version value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null)
-			{
 				writer.WriteNull();
-			}
 			else
-			{
 				writer.WriteString(value.ToString());
-			}
 		}
 
 		public Version Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.ReadIsNull())
-			{
 				return null;
-			}
-			else
-			{
-				return new Version(reader.ReadString());
-			}
+
+			return new Version(reader.ReadString());
 		}
 	}
 
@@ -414,8 +340,8 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		{
 			if (reader.ReadIsNull()) throw new InvalidOperationException("Data is Nil, KeyValuePair can not be null.");
 
-			TKey resultKey = default(TKey);
-			TValue resultValue = default(TValue);
+			TKey resultKey = default;
+			TValue resultValue = default;
 
 			reader.ReadIsBeginObjectWithVerify();
 
@@ -444,24 +370,23 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		}
 	}
 
-	internal sealed class StringBuilderFormatter : IJsonFormatter<System.Text.StringBuilder>
+	internal sealed class StringBuilderFormatter : IJsonFormatter<StringBuilder>
 	{
-		public static readonly IJsonFormatter<System.Text.StringBuilder> Default = new StringBuilderFormatter();
+		public static readonly IJsonFormatter<StringBuilder> Default = new StringBuilderFormatter();
 
-		public void Serialize(ref JsonWriter writer, System.Text.StringBuilder value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, StringBuilder value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null) { writer.WriteNull(); return; }
 			writer.WriteString(value.ToString());
 		}
 
-		public System.Text.StringBuilder Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-		{
-			if (reader.ReadIsNull()) return null;
-			return new System.Text.StringBuilder(reader.ReadString());
-		}
+		public StringBuilder Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			reader.ReadIsNull()
+				? null
+				: new StringBuilder(reader.ReadString());
 	}
 
-// BitArray can be represents other format...
+	// BitArray can be represents other format...
 	internal sealed class BitArrayFormatter : IJsonFormatter<BitArray>
 	{
 		public static readonly IJsonFormatter<BitArray> Default = new BitArrayFormatter();
@@ -471,7 +396,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			if (value == null) { writer.WriteNull(); return; }
 
 			writer.WriteBeginArray();
-			for (int i = 0; i < value.Length; i++)
+			for (var i = 0; i < value.Length; i++)
 			{
 				if (i != 0) writer.WriteValueSeparator();
 				writer.WriteBoolean(value[i]);
@@ -486,9 +411,8 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			var c = 0;
 			var buffer = new ArrayBuffer<bool>(4);
 			while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref c))
-			{
 				buffer.Add(reader.ReadBoolean());
-			}
+
 			return new BitArray(buffer.ToArray());
 		}
 	}
@@ -497,36 +421,28 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 	{
 		public static readonly TypeFormatter Default = new TypeFormatter();
 
-		static readonly Regex SubtractFullNameRegex = new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+", RegexOptions.Compiled);
+		private static readonly Regex SubtractFullNameRegex = new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+", RegexOptions.Compiled);
 
-		bool serializeAssemblyQualifiedName;
-		bool deserializeSubtractAssemblyQualifiedName;
-		bool throwOnError;
+		private readonly bool _serializeAssemblyQualifiedName;
+		private readonly bool _deserializeSubtractAssemblyQualifiedName;
+		private readonly bool _throwOnError;
 
 		public TypeFormatter()
 			: this(true, true, true)
 		{
-
 		}
 
 		public TypeFormatter(bool serializeAssemblyQualifiedName, bool deserializeSubtractAssemblyQualifiedName, bool throwOnError)
 		{
-			this.serializeAssemblyQualifiedName = serializeAssemblyQualifiedName;
-			this.deserializeSubtractAssemblyQualifiedName = deserializeSubtractAssemblyQualifiedName;
-			this.throwOnError = throwOnError;
+			_serializeAssemblyQualifiedName = serializeAssemblyQualifiedName;
+			_deserializeSubtractAssemblyQualifiedName = deserializeSubtractAssemblyQualifiedName;
+			_throwOnError = throwOnError;
 		}
 
 		public void Serialize(ref JsonWriter writer, Type value, IJsonFormatterResolver formatterResolver)
 		{
 			if (value == null) { writer.WriteNull(); return; }
-			if (serializeAssemblyQualifiedName)
-			{
-				writer.WriteString(value.AssemblyQualifiedName);
-			}
-			else
-			{
-				writer.WriteString(value.FullName);
-			}
+			writer.WriteString(_serializeAssemblyQualifiedName ? value.AssemblyQualifiedName : value.FullName);
 		}
 
 		public Type Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -534,25 +450,20 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 			if (reader.ReadIsNull()) return null;
 
 			var s = reader.ReadString();
-			if (deserializeSubtractAssemblyQualifiedName)
-			{
+			if (_deserializeSubtractAssemblyQualifiedName)
 				s = SubtractFullNameRegex.Replace(s, "");
-			}
 
-			return Type.GetType(s, throwOnError);
+			return Type.GetType(s, _throwOnError);
 		}
 	}
-
 
 	internal sealed class BigIntegerFormatter : IJsonFormatter<BigInteger>
 	{
 		public static readonly IJsonFormatter<BigInteger> Default = new BigIntegerFormatter();
 
-		public void Serialize(ref JsonWriter writer, BigInteger value, IJsonFormatterResolver formatterResolver)
-		{
+		public void Serialize(ref JsonWriter writer, BigInteger value, IJsonFormatterResolver formatterResolver) =>
 			// JSON.NET writes Integer format, not compatible.
 			writer.WriteString(value.ToString(CultureInfo.InvariantCulture));
-		}
 
 		public BigInteger Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
@@ -561,7 +472,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		}
 	}
 
-// Convert to [Real, Imaginary]
+	// Convert to [Real, Imaginary]
 	internal sealed class ComplexFormatter : IJsonFormatter<Complex>
 	{
 		public static readonly IJsonFormatter<Complex> Default = new ComplexFormatter();
@@ -594,7 +505,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		public void Serialize(ref JsonWriter writer, ExpandoObject value, IJsonFormatterResolver formatterResolver)
 		{
 			var formatter = formatterResolver.GetFormatterWithVerify<IDictionary<string, object>>();
-			formatter.Serialize(ref writer, (IDictionary<string, object>)value, formatterResolver);
+			formatter.Serialize(ref writer, value, formatterResolver);
 		}
 
 		public ExpandoObject Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -635,7 +546,6 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 	internal sealed class TaskUnitFormatter : IJsonFormatter<Task>
 	{
 		public static readonly IJsonFormatter<Task> Default = new TaskUnitFormatter();
-		static readonly Task CompletedTask = Task.FromResult<object>(null);
 
 		public void Serialize(ref JsonWriter writer, Task value, IJsonFormatterResolver formatterResolver)
 		{
@@ -649,7 +559,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		{
 			if (!reader.ReadIsNull()) throw new InvalidOperationException("Invalid input");
 
-			return CompletedTask;
+			return Task.CompletedTask;
 		}
 	}
 
@@ -675,11 +585,9 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 	#if NETSTANDARD2_1
 	internal sealed class ValueTaskFormatter<T> : IJsonFormatter<ValueTask<T>>
 	{
-		public void Serialize(ref JsonWriter writer, ValueTask<T> value, IJsonFormatterResolver formatterResolver)
-		{
+		public void Serialize(ref JsonWriter writer, ValueTask<T> value, IJsonFormatterResolver formatterResolver) =>
 			// value.Result -> wait...!
 			formatterResolver.GetFormatterWithVerify<T>().Serialize(ref writer, value.Result, formatterResolver);
-		}
 
 		public ValueTask<T> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
@@ -696,7 +604,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
 		static StandardClassLibraryFormatterHelper()
 		{
-			keyValuePairName = new byte[][]
+			keyValuePairName = new[]
 			{
 				JsonWriter.GetEncodedPropertyNameWithBeginObject("Key"),
 				JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator("Value"),

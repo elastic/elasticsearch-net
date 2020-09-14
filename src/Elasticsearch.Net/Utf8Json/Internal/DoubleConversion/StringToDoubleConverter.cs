@@ -1,18 +1,18 @@
 #region Utf8Json License https://github.com/neuecc/Utf8Json/blob/master/LICENSE
 // MIT License
-// 
+//
 // Copyright (c) 2017 Yoshifumi Kawai
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -33,89 +33,47 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
 
     internal struct Iterator
     {
-        byte[] buffer;
-        int offset;
+		private byte[] _buffer;
+		private int _offset;
 
         public Iterator(byte[] buffer, int offset)
         {
-            this.buffer = buffer;
-            this.offset = offset;
+            _buffer = buffer;
+            _offset = offset;
         }
 
-        public byte Value
-        {
-            get
-            {
-                return buffer[offset];
-            }
-        }
+        public byte Value => _buffer[_offset];
 
-        public static Iterator operator ++(Iterator self)
+		public static Iterator operator ++(Iterator self)
         {
-            self.offset++;
+            self._offset++;
             return self;
         }
 
-        public static Iterator operator +(Iterator self, int length)
-        {
-            return new Iterator { buffer = self.buffer, offset = self.offset + length };
-        }
+        public static Iterator operator +(Iterator self, int length) => new Iterator { _buffer = self._buffer, _offset = self._offset + length };
 
-        public static int operator -(Iterator lhs, Iterator rhs)
-        {
-            return lhs.offset - rhs.offset;
-        }
+		public static int operator -(Iterator lhs, Iterator rhs) => lhs._offset - rhs._offset;
 
-        public static bool operator ==(Iterator lhs, Iterator rhs)
-        {
-            return lhs.offset == rhs.offset;
-        }
+		public static bool operator ==(Iterator lhs, Iterator rhs) => lhs._offset == rhs._offset;
 
-        public static bool operator !=(Iterator lhs, Iterator rhs)
-        {
-            return lhs.offset != rhs.offset;
-        }
+		public static bool operator !=(Iterator lhs, Iterator rhs) => lhs._offset != rhs._offset;
 
-        public static bool operator ==(Iterator lhs, char rhs)
-        {
-            return lhs.buffer[lhs.offset] == (byte)rhs;
-        }
+		public static bool operator ==(Iterator lhs, char rhs) => lhs._buffer[lhs._offset] == (byte)rhs;
 
-        public static bool operator !=(Iterator lhs, char rhs)
-        {
-            return lhs.buffer[lhs.offset] != (byte)rhs;
-        }
+		public static bool operator !=(Iterator lhs, char rhs) => lhs._buffer[lhs._offset] != (byte)rhs;
 
-        public static bool operator ==(Iterator lhs, byte rhs)
-        {
-            return lhs.buffer[lhs.offset] == (byte)rhs;
-        }
+		public static bool operator ==(Iterator lhs, byte rhs) => lhs._buffer[lhs._offset] == (byte)rhs;
 
-        public static bool operator !=(Iterator lhs, byte rhs)
-        {
-            return lhs.buffer[lhs.offset] != (byte)rhs;
-        }
+		public static bool operator !=(Iterator lhs, byte rhs) => lhs._buffer[lhs._offset] != (byte)rhs;
 
-        public static bool operator >=(Iterator lhs, char rhs)
-        {
-            return lhs.buffer[lhs.offset] >= (byte)rhs;
-        }
+		public static bool operator >=(Iterator lhs, char rhs) => lhs._buffer[lhs._offset] >= (byte)rhs;
 
-        public static bool operator <=(Iterator lhs, char rhs)
-        {
-            return lhs.buffer[lhs.offset] <= (byte)rhs;
-        }
+		public static bool operator <=(Iterator lhs, char rhs) => lhs._buffer[lhs._offset] <= (byte)rhs;
 
-        public static bool operator >(Iterator lhs, char rhs)
-        {
-            return lhs.buffer[lhs.offset] > (byte)rhs;
-        }
+		public static bool operator >(Iterator lhs, char rhs) => lhs._buffer[lhs._offset] > (byte)rhs;
 
-        public static bool operator <(Iterator lhs, char rhs)
-        {
-            return lhs.buffer[lhs.offset] < (byte)rhs;
-        }
-    }
+		public static bool operator <(Iterator lhs, char rhs) => lhs._buffer[lhs._offset] < (byte)rhs;
+	}
 
 #pragma warning restore 661
 #pragma warning restore 660
@@ -123,46 +81,26 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
     // C# API
     internal static partial class StringToDoubleConverter
     {
-        [ThreadStatic]
-        static byte[] kBuffer;
+        [ThreadStatic] private static byte[] _kBuffer;
 
-        static byte[] GetBuffer()
-        {
-            if (kBuffer == null)
-            {
-                kBuffer = new byte[kBufferSize];
-            }
-            return kBuffer;
-        }
+		private static byte[] GetBuffer() => _kBuffer ??= new byte[kBufferSize];
 
-        [ThreadStatic]
-        static byte[] fallbackBuffer;
+		[ThreadStatic] private static byte[] _fallbackBuffer;
 
-        static byte[] GetFallbackBuffer()
-        {
-            if (fallbackBuffer == null)
-            {
-                fallbackBuffer = new byte[99];
-            }
-            return fallbackBuffer;
-        }
+		private static byte[] GetFallbackBuffer() => _fallbackBuffer ??= new byte[99];
 
-        public static double ToDouble(byte[] buffer, int offset, out int readCount)
-        {
-            return StringToIeee(new Iterator(buffer, offset), buffer.Length - offset, true, out readCount);
-        }
+		public static double ToDouble(byte[] buffer, int offset, out int readCount) =>
+			StringToIeee(new Iterator(buffer, offset), buffer.Length - offset, true, out readCount);
 
-        public static float ToSingle(byte[] buffer, int offset, out int readCount)
-        {
-            return unchecked((float)StringToIeee(new Iterator(buffer, offset), buffer.Length - offset, false, out readCount));
-        }
-    }
+		public static float ToSingle(byte[] buffer, int offset, out int readCount) =>
+			unchecked((float)StringToIeee(new Iterator(buffer, offset), buffer.Length - offset, false, out readCount));
+	}
 
     // port
     internal static partial class StringToDoubleConverter
     {
 		[Flags]
-        enum Flags
+		private enum Flags
         {
             NO_FLAGS = 0,
             ALLOW_HEX = 1, // defined but always disallow
@@ -182,27 +120,27 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
         static readonly byte[] infinity_symbol_ = StringEncoding.UTF8.GetBytes(double.PositiveInfinity.ToString());
         static readonly byte[] nan_symbol_ = StringEncoding.UTF8.GetBytes(double.NaN.ToString());
 
-        static readonly byte[] kWhitespaceTable7 = new byte[] { 32, 13, 10, 9, 11, 12 };
+        static readonly byte[] kWhitespaceTable7 = { 32, 13, 10, 9, 11, 12 };
         static readonly int kWhitespaceTable7Length = kWhitespaceTable7.Length;
 
-        static readonly UInt16[] kWhitespaceTable16 = new UInt16[]{
+        static readonly ushort[] kWhitespaceTable16 = {
               160, 8232, 8233, 5760, 6158, 8192, 8193, 8194, 8195,
               8196, 8197, 8198, 8199, 8200, 8201, 8202, 8239, 8287, 12288, 65279
         };
         static readonly int kWhitespaceTable16Length = kWhitespaceTable16.Length;
 
-        static bool isWhitespace(int x)
+		private static bool IsWhitespace(int x)
         {
             if (x < 128)
             {
-                for (int i = 0; i < kWhitespaceTable7Length; i++)
+                for (var i = 0; i < kWhitespaceTable7Length; i++)
                 {
                     if (kWhitespaceTable7[i] == x) return true;
                 }
             }
             else
             {
-                for (int i = 0; i < kWhitespaceTable16Length; i++)
+                for (var i = 0; i < kWhitespaceTable16Length; i++)
                 {
                     if (kWhitespaceTable16[i] == x) return true;
                 }
@@ -210,21 +148,21 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             return false;
         }
 
-        static bool AdvanceToNonspace(ref Iterator current, Iterator end)
+		private static bool AdvanceToNonspace(ref Iterator current, Iterator end)
         {
             while (current != end)
             {
-                if (!isWhitespace(current.Value)) return true;
+                if (!IsWhitespace(current.Value)) return true;
                 current++;
             }
             return false;
         }
 
-        static bool ConsumeSubString(ref Iterator current,
+		private static bool ConsumeSubString(ref Iterator current,
                                         Iterator end,
                                         byte[] substring)
         {
-            for (int i = 1; i < substring.Length; i++)
+            for (var i = 1; i < substring.Length; i++)
             {
                 ++current;
                 if (current == end || current != substring[i])
@@ -238,33 +176,25 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
 
 
         // Consumes first character of the str is equal to ch
-        static bool ConsumeFirstCharacter(ref Iterator iter,
-                                         byte[] str,
-                                         int offset)
-        {
-            return iter.Value == str[offset];
-        }
+		private static bool ConsumeFirstCharacter(ref Iterator iter, byte[] str, int offset) => iter.Value == str[offset];
 
-        static double SignedZero(bool sign)
-        {
-            return sign ? -0.0 : 0.0;
-        }
+		private static double SignedZero(bool sign) => sign ? -0.0 : 0.0;
 
-        static double StringToIeee(
+		private static double StringToIeee(
                     Iterator input,
                     int length,
                     bool read_as_double,
                     out int processed_characters_count)
         {
-            Iterator current = input;
-            Iterator end = input + length;
+            var current = input;
+            var end = input + length;
 
             processed_characters_count = 0;
 
-            bool allow_trailing_junk = (flags_ & Flags.ALLOW_TRAILING_JUNK) != 0;
-            bool allow_leading_spaces = (flags_ & Flags.ALLOW_LEADING_SPACES) != 0;
-            bool allow_trailing_spaces = (flags_ & Flags.ALLOW_TRAILING_SPACES) != 0;
-            bool allow_spaces_after_sign = (flags_ & Flags.ALLOW_SPACES_AFTER_SIGN) != 0;
+            var allow_trailing_junk = (flags_ & Flags.ALLOW_TRAILING_JUNK) != 0;
+            var allow_leading_spaces = (flags_ & Flags.ALLOW_LEADING_SPACES) != 0;
+            var allow_trailing_spaces = (flags_ & Flags.ALLOW_TRAILING_SPACES) != 0;
+            var allow_spaces_after_sign = (flags_ & Flags.ALLOW_SPACES_AFTER_SIGN) != 0;
             // bool allow_case_insensibility = (flags_ & Flags.ALLOW_CASE_INSENSIBILITY) != 0;
 
             // To make sure that iterator dereferencing is valid the following
@@ -292,23 +222,23 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             }
 
             // The longest form of simplified number is: "-<significant digits>.1eXXX\0".
-            byte[] buffer = GetBuffer();  // NOLINT: size is known at compile time.
-            int buffer_pos = 0;
+            var buffer = GetBuffer();  // NOLINT: size is known at compile time.
+            var buffer_pos = 0;
 
             // Exponent will be adjusted if insignificant digits of the integer part
             // or insignificant leading zeros of the fractional part are dropped.
-            int exponent = 0;
-            int significant_digits = 0;
-            int insignificant_digits = 0;
-            bool nonzero_digit_dropped = false;
+            var exponent = 0;
+            var significant_digits = 0;
+            var insignificant_digits = 0;
+            var nonzero_digit_dropped = false;
 
-            bool sign = false;
+            var sign = false;
 
             if (current == '+' || current == '-')
             {
                 sign = (current == '-');
                 current++;
-                Iterator next_non_space = current;
+                var next_non_space = current;
                 // Skip following spaces (if allowed).
                 if (!AdvanceToNonspace(ref next_non_space, end)) return junk_string_value_;
                 if (!allow_spaces_after_sign && (current != next_non_space))
@@ -364,7 +294,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
                 }
             }
 
-            bool leading_zero = false;
+            var leading_zero = false;
             if (current == '0')
             {
                 current++;
@@ -413,7 +343,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
                 }
             }
 
-            bool octal = leading_zero && (flags_ & Flags.ALLOW_OCTALS) != 0;
+            var octal = leading_zero && (flags_ & Flags.ALLOW_OCTALS) != 0;
 
             // Copy significant digits of the integer part (if any) to the buffer.
             while (current >= '0' && current <= '9')
@@ -520,7 +450,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
                         return junk_string_value_;
                     }
                 }
-                byte exponen_sign = (byte)'+';
+                var exponen_sign = (byte)'+';
                 if (current == '+' || current == '-')
                 {
                     exponen_sign = current.Value;
@@ -552,21 +482,18 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
 
                 const int max_exponent = int.MaxValue / 2;
 
-                int num = 0;
+                var num = 0;
                 do
                 {
                     // Check overflow.
-                    int digit = current.Value - (byte)'0';
+                    var digit = current.Value - (byte)'0';
                     if (num >= max_exponent / 10
                         && !(num == max_exponent / 10 && digit <= max_exponent % 10))
-                    {
-                        num = max_exponent;
-                    }
-                    else
-                    {
-                        num = num * 10 + digit;
-                    }
-                    ++current;
+						num = max_exponent;
+					else
+						num = num * 10 + digit;
+
+					++current;
                 } while (current != end && current >= '0' && current <= '9');
 
                 exponent += (exponen_sign == '-' ? -num : num);
@@ -629,7 +556,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
                 processed_characters_count = (current - input);
 
                 var fallbackbuffer = GetFallbackBuffer();
-                BinaryUtil.EnsureCapacity(ref fallbackBuffer, 0, processed_characters_count);
+                BinaryUtil.EnsureCapacity(ref _fallbackBuffer, 0, processed_characters_count);
                 var fallbackI = 0;
                 while (input != current)
                 {
