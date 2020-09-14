@@ -33,19 +33,15 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
     /// </summary>
 	internal sealed class AttributeFormatterResolver : IJsonFormatterResolver
     {
-        public static IJsonFormatterResolver Instance = new AttributeFormatterResolver();
+        public static readonly IJsonFormatterResolver Instance = new AttributeFormatterResolver();
 
-        AttributeFormatterResolver()
+		private AttributeFormatterResolver()
         {
+		}
 
-        }
+        public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
 
-        public IJsonFormatter<T> GetFormatter<T>()
-        {
-            return FormatterCache<T>.formatter;
-        }
-
-        static class FormatterCache<T>
+		private static class FormatterCache<T>
         {
             public static readonly IJsonFormatter<T> formatter;
 
@@ -53,11 +49,9 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
             {
                 var attr = typeof(T).GetCustomAttribute<JsonFormatterAttribute>(true);
                 if (attr == null)
-                {
-                    return;
-                }
+					return;
 
-                try
+				try
                 {
                     if (attr.FormatterType.IsGenericType && !attr.FormatterType.IsConstructedGenericType)
 					{
@@ -70,10 +64,8 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
                         formatter = (IJsonFormatter<T>)Activator.CreateInstance(t, attr.Arguments);
                     }
                     else
-                    {
-                        formatter = (IJsonFormatter<T>)Activator.CreateInstance(attr.FormatterType, attr.Arguments);
-                    }
-                }
+						formatter = (IJsonFormatter<T>)Activator.CreateInstance(attr.FormatterType, attr.Arguments);
+				}
                 catch (Exception ex)
                 {
                     throw new InvalidOperationException("Can not create formatter from JsonFormatterAttribute, check the target formatter is public and has constructor with right argument. FormatterType:" + attr.FormatterType.Name, ex);

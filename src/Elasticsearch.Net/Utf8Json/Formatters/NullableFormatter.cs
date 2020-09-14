@@ -33,43 +33,32 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
         public void Serialize(ref JsonWriter writer, T? value, IJsonFormatterResolver formatterResolver)
         {
             if (value == null)
-            {
-                writer.WriteNull();
-            }
-            else
-            {
-                formatterResolver.GetFormatterWithVerify<T>().Serialize(ref writer, value.Value, formatterResolver);
-            }
-        }
+				writer.WriteNull();
+			else
+				formatterResolver.GetFormatterWithVerify<T>().Serialize(ref writer, value.Value, formatterResolver);
+		}
 
         public T? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-        {
-            if (reader.ReadIsNull())
-            {
-                return null;
-            }
-            else
-            {
-                return formatterResolver.GetFormatterWithVerify<T>().Deserialize(ref reader, formatterResolver);
-            }
-        }
+		{
+			if (reader.ReadIsNull())
+				return null;
+
+			return formatterResolver.GetFormatterWithVerify<T>().Deserialize(ref reader, formatterResolver);
+		}
     }
 
 	internal sealed class StaticNullableFormatter<T> : IJsonFormatter<T?>
         where T : struct
     {
-        readonly IJsonFormatter<T> underlyingFormatter;
+		private readonly IJsonFormatter<T> _underlyingFormatter;
 
-        public StaticNullableFormatter(IJsonFormatter<T> underlyingFormatter)
-        {
-            this.underlyingFormatter = underlyingFormatter;
-        }
+        public StaticNullableFormatter(IJsonFormatter<T> underlyingFormatter) => _underlyingFormatter = underlyingFormatter;
 
-        public StaticNullableFormatter(Type formatterType, object[] formatterArguments)
+		public StaticNullableFormatter(Type formatterType, object[] formatterArguments)
         {
             try
             {
-                underlyingFormatter = (IJsonFormatter<T>)Activator.CreateInstance(formatterType, formatterArguments);
+                _underlyingFormatter = (IJsonFormatter<T>)Activator.CreateInstance(formatterType, formatterArguments);
             }
             catch (Exception ex)
             {
@@ -80,25 +69,17 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
         public void Serialize(ref JsonWriter writer, T? value, IJsonFormatterResolver formatterResolver)
         {
             if (value == null)
-            {
-                writer.WriteNull();
-            }
-            else
-            {
-                underlyingFormatter.Serialize(ref writer, value.Value, formatterResolver);
-            }
-        }
+				writer.WriteNull();
+			else
+				_underlyingFormatter.Serialize(ref writer, value.Value, formatterResolver);
+		}
 
         public T? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
         {
             if (reader.ReadIsNull())
-            {
-                return null;
-            }
-            else
-            {
-                return underlyingFormatter.Deserialize(ref reader, formatterResolver);
-            }
-        }
+				return null;
+			else
+				return _underlyingFormatter.Deserialize(ref reader, formatterResolver);
+		}
     }
 }

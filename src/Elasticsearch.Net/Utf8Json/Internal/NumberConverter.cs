@@ -37,21 +37,15 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 		/// e or E
 		/// </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool IsENotation(byte c)
-		{
-			return c == (byte)'E' || c == (byte)'e';
-		}
+		public static bool IsENotation(byte c) => c == (byte)'E' || c == (byte)'e';
 
-        /// <summary>
+		/// <summary>
         /// 0 ~ 9
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNumber(byte c)
-        {
-            return (byte)'0' <= c && c <= (byte)'9';
-        }
+        public static bool IsNumber(byte c) => (byte)'0' <= c && c <= (byte)'9';
 
-        /// <summary>
+		/// <summary>
         /// Is 0 ~ 9, '.', '+', '-'?
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -81,32 +75,24 @@ namespace Elasticsearch.Net.Utf8Json.Internal
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static sbyte ReadSByte(byte[] bytes, int offset, out int readCount)
-        {
-            return checked((sbyte)ReadInt64(bytes, offset, out readCount));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static short ReadInt16(byte[] bytes, int offset, out int readCount)
-        {
-            return checked((short)ReadInt64(bytes, offset, out readCount));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int ReadInt32(byte[] bytes, int offset, out int readCount)
-        {
-            return checked((int)ReadInt64(bytes, offset, out readCount));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static sbyte ReadSByte(byte[] bytes, int offset, out int readCount) => checked((sbyte)ReadInt64(bytes, offset, out readCount));
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static short ReadInt16(byte[] bytes, int offset, out int readCount) => checked((short)ReadInt64(bytes, offset, out readCount));
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int ReadInt32(byte[] bytes, int offset, out int readCount) => checked((int)ReadInt64(bytes, offset, out readCount));
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long ReadInt64(byte[] bytes, int offset, out int readCount)
         {
             var value = 0L;
             var sign = 1;
 
             if (bytes[offset] == '-')
-            {
-                sign = -1;
-            }
+				sign = -1;
 
-            for (int i = ((sign == -1) ? offset + 1 : offset); i < bytes.Length; i++)
+			for (var i = ((sign == -1) ? offset + 1 : offset); i < bytes.Length; i++)
             {
                 if (!IsNumber(bytes[i]))
                 {
@@ -122,27 +108,22 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             END:
             return unchecked(value * sign);
         }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static byte ReadByte(byte[] bytes, int offset, out int readCount)
-        {
-            return checked((byte)ReadUInt64(bytes, offset, out readCount));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ushort ReadUInt16(byte[] bytes, int offset, out int readCount)
-        {
-            return checked((ushort)ReadUInt64(bytes, offset, out readCount));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint ReadUInt32(byte[] bytes, int offset, out int readCount)
-        {
-            return checked((uint)ReadUInt64(bytes, offset, out readCount));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte ReadByte(byte[] bytes, int offset, out int readCount) => checked((byte)ReadUInt64(bytes, offset, out readCount));
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ushort ReadUInt16(byte[] bytes, int offset, out int readCount) => checked((ushort)ReadUInt64(bytes, offset, out readCount));
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint ReadUInt32(byte[] bytes, int offset, out int readCount) => checked((uint)ReadUInt64(bytes, offset, out readCount));
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ReadUInt64(byte[] bytes, int offset, out int readCount)
         {
             var value = 0UL;
 
-            for (int i = offset; i < bytes.Length; i++)
+            for (var i = offset; i < bytes.Length; i++)
             {
                 if (!IsNumber(bytes[i]))
                 {
@@ -157,32 +138,23 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             END:
             return value;
         }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float ReadSingle(byte[] bytes, int offset, out int readCount)
-        {
-            return StringToDoubleConverter.ToSingle(bytes, offset, out readCount);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double ReadDouble(byte[] bytes, int offset, out int readCount)
-        {
-            return StringToDoubleConverter.ToDouble(bytes, offset, out readCount);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteByte(ref byte[] buffer, int offset, byte value)
-        {
-            return WriteUInt64(ref buffer, offset, (ulong)value);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteUInt16(ref byte[] buffer, int offset, ushort value)
-        {
-            return WriteUInt64(ref buffer, offset, (ulong)value);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteUInt32(ref byte[] buffer, int offset, uint value)
-        {
-            return WriteUInt64(ref buffer, offset, (ulong)value);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float ReadSingle(byte[] bytes, int offset, out int readCount) => StringToDoubleConverter.ToSingle(bytes, offset, out readCount);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double ReadDouble(byte[] bytes, int offset, out int readCount) => StringToDoubleConverter.ToDouble(bytes, offset, out readCount);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int WriteByte(ref byte[] buffer, int offset, byte value) => WriteUInt64(ref buffer, offset, (ulong)value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int WriteUInt16(ref byte[] buffer, int offset, ushort value) => WriteUInt64(ref buffer, offset, (ulong)value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int WriteUInt32(ref byte[] buffer, int offset, uint value) => WriteUInt64(ref buffer, offset, (ulong)value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int WriteUInt64(ref byte[] buffer, int offset, ulong value)
         {
             var startOffset = offset;
@@ -302,22 +274,17 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
             return offset - startOffset;
         }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteSByte(ref byte[] buffer, int offset, sbyte value)
-        {
-            return WriteInt64(ref buffer, offset, (long)value);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteInt16(ref byte[] buffer, int offset, short value)
-        {
-            return WriteInt64(ref buffer, offset, (long)value);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteInt32(ref byte[] buffer, int offset, int value)
-        {
-            return WriteInt64(ref buffer, offset, (long)value);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int WriteSByte(ref byte[] buffer, int offset, sbyte value) => WriteInt64(ref buffer, offset, (long)value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int WriteInt16(ref byte[] buffer, int offset, short value) => WriteInt64(ref buffer, offset, (long)value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int WriteInt32(ref byte[] buffer, int offset, int value) => WriteInt64(ref buffer, offset, (long)value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int WriteInt64(ref byte[] buffer, int offset, long value)
         {
             var startOffset = offset;
@@ -473,17 +440,12 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             return offset - startOffset;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteSingle(ref byte[] bytes, int offset, float value)
-        {
-            return DoubleToStringConverter.GetBytes(ref bytes, offset, value);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteDouble(ref byte[] bytes, int offset, double value)
-        {
-            return DoubleToStringConverter.GetBytes(ref bytes, offset, value);
-        }
+        public static int WriteSingle(ref byte[] bytes, int offset, float value) => DoubleToStringConverter.GetBytes(ref bytes, offset, value);
 
-        // boolean is not number:)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int WriteDouble(ref byte[] bytes, int offset, double value) => DoubleToStringConverter.GetBytes(ref bytes, offset, value);
+
+		// boolean is not number:)
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool ReadBoolean(byte[] bytes, int offset, out int readCount)

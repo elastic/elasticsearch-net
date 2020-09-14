@@ -69,7 +69,7 @@ namespace Nest
 
 		/// <inheritdoc cref="ChangesLastDetectedAt"/>
 		[IgnoreDataMember]
-		public DateTimeOffset ChangesLastDetectedAtDateTime => DateTimeUtil.Epoch.AddMilliseconds(ChangesLastDetectedAt);
+		public DateTimeOffset ChangesLastDetectedAtDateTime => DateTimeUtil.UnixEpoch.AddMilliseconds(ChangesLastDetectedAt);
 
 		/// <summary>
 		/// Contains statistics about the last completed checkpoint.
@@ -114,7 +114,7 @@ namespace Nest
 
 		/// <inheritdoc cref="TimestampMilliseconds"/>
 		[IgnoreDataMember]
-		public DateTimeOffset Timestamp => DateTimeUtil.Epoch.AddMilliseconds(TimestampMilliseconds);
+		public DateTimeOffset Timestamp => DateTimeUtil.UnixEpoch.AddMilliseconds(TimestampMilliseconds);
 
 		/// <summary>
 		/// When using time-based synchronization, this timestamp indicates the upper bound of data that is included in the checkpoint.
@@ -124,7 +124,7 @@ namespace Nest
 
 		/// <inheritdoc cref="TimeUpperBoundMilliseconds"/>
 		[IgnoreDataMember]
-		public DateTimeOffset TimeUpperBound => DateTimeUtil.Epoch.AddMilliseconds(TimeUpperBoundMilliseconds);
+		public DateTimeOffset TimeUpperBound => DateTimeUtil.UnixEpoch.AddMilliseconds(TimeUpperBoundMilliseconds);
 	}
 
 	/// <summary>

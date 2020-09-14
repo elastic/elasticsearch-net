@@ -42,36 +42,14 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 	{
 		/// <summary>AllowPrivate:False, ExcludeNull:False, NameMutate:Original</summary>
 		public static readonly IJsonFormatterResolver Default = DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal.Instance;
-		/// <summary>AllowPrivate:False, ExcludeNull:False, NameMutate:CamelCase</summary>
-		public static readonly IJsonFormatterResolver CamelCase = DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase.Instance;
-		/// <summary>AllowPrivate:False, ExcludeNull:False, NameMutate:SnakeCase</summary>
-		public static readonly IJsonFormatterResolver SnakeCase = DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase.Instance;
-		/// <summary>AllowPrivate:False, ExcludeNull:True,  NameMutate:Original</summary>
-		public static readonly IJsonFormatterResolver ExcludeNull = DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal.Instance;
 		/// <summary>AllowPrivate:False, ExcludeNull:True,  NameMutate:CamelCase</summary>
 		public static readonly IJsonFormatterResolver ExcludeNullCamelCase = DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase.Instance;
-		/// <summary>AllowPrivate:False, ExcludeNull:True,  NameMutate:SnakeCase</summary>
-		public static readonly IJsonFormatterResolver ExcludeNullSnakeCase = DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase.Instance;
-
-		/// <summary>AllowPrivate:True,  ExcludeNull:False, NameMutate:Original</summary>
-		public static readonly IJsonFormatterResolver AllowPrivate = DynamicObjectResolverAllowPrivateTrueExcludeNullFalseNameMutateOriginal.Instance;
-		/// <summary>AllowPrivate:True,  ExcludeNull:False, NameMutate:CamelCase</summary>
-		public static readonly IJsonFormatterResolver AllowPrivateCamelCase = DynamicObjectResolverAllowPrivateTrueExcludeNullFalseNameMutateCamelCase.Instance;
-		/// <summary>AllowPrivate:True,  ExcludeNull:False, NameMutate:SnakeCase</summary>
-		public static readonly IJsonFormatterResolver AllowPrivateSnakeCase = DynamicObjectResolverAllowPrivateTrueExcludeNullFalseNameMutateSnakeCase.Instance;
-		/// <summary>AllowPrivate:True,  ExcludeNull:True,  NameMutate:Original</summary>
-		public static readonly IJsonFormatterResolver AllowPrivateExcludeNull = DynamicObjectResolverAllowPrivateTrueExcludeNullTrueNameMutateOriginal.Instance;
 		/// <summary>AllowPrivate:True,  ExcludeNull:True,  NameMutate:CamelCase</summary>
 		public static readonly IJsonFormatterResolver AllowPrivateExcludeNullCamelCase = DynamicObjectResolverAllowPrivateTrueExcludeNullTrueNameMutateCamelCase.Instance;
-		/// <summary>AllowPrivate:True,  ExcludeNull:True,  NameMutate:SnakeCase</summary>
-		public static readonly IJsonFormatterResolver AllowPrivateExcludeNullSnakeCase = DynamicObjectResolverAllowPrivateTrueExcludeNullTrueNameMutateSnakeCase.Instance;
 
-		public static IJsonFormatterResolver Create(Func<MemberInfo, JsonProperty> propertyMapper, Lazy<Func<string, string>> mutator, bool excludeNull)
-		{
-			return new CustomDynamicObjectResolver(propertyMapper, mutator, excludeNull);
-		}
+		public static IJsonFormatterResolver Create(Func<MemberInfo, JsonProperty> propertyMapper, Lazy<Func<string, string>> mutator, bool excludeNull) =>
+			new CustomDynamicObjectResolver(propertyMapper, mutator, excludeNull);
 	}
-
 
 	internal sealed class CustomDynamicObjectResolver : IJsonFormatterResolver
 	{
@@ -80,16 +58,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		private readonly bool _excludeNull;
 		private readonly ThreadsafeTypeKeyHashTable<object> _formatters = new ThreadsafeTypeKeyHashTable<object>();
 
-		// configuration
-		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.CustomDynamicObjectResolver";
-
-		static readonly DynamicAssembly assembly;
-
-		static CustomDynamicObjectResolver()
-		{
-			assembly = new DynamicAssembly(ModuleName);
-		}
-
 		public CustomDynamicObjectResolver(Func<MemberInfo, JsonProperty> propertyMapper, Lazy<Func<string, string>> mutator, bool excludeNull)
 		{
 			_propertyMapper = propertyMapper;
@@ -97,13 +65,10 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			_excludeNull = excludeNull;
 		}
 
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return (IJsonFormatter<T>)_formatters.GetOrAdd(typeof(T), type =>
+		public IJsonFormatter<T> GetFormatter<T>() =>
+			(IJsonFormatter<T>)_formatters.GetOrAdd(typeof(T), type =>
 				DynamicObjectTypeBuilder.BuildFormatterToDynamicMethod<T>(this, _mutator.Value, _propertyMapper, _excludeNull, false));
-		}
 	}
-
 
 	#region DynamicAssembly
 
@@ -111,139 +76,25 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 	{
 		// configuration
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal();
-		static readonly Func<string, string> nameMutator = StringMutator.Original;
-		static readonly bool excludeNull = false;
-		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal";
+		private static readonly Func<string, string> NameMutator = StringMutator.Original;
+		private static readonly bool ExcludeNull = false;
+		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.{nameof(DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal)}";
+		private static readonly DynamicAssembly Assembly;
 
-		static readonly DynamicAssembly assembly;
+		static DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal() => Assembly = new DynamicAssembly(ModuleName);
 
-		static DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal()
-		{
-			assembly = new DynamicAssembly(ModuleName);
-		}
-
-		DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal()
+		private DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal()
 		{
 		}
 
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
 
-		static class FormatterCache<T>
+		private static class FormatterCache<T>
 		{
 			public static readonly IJsonFormatter<T> formatter;
 
-			static FormatterCache()
-			{
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToAssembly<T>(assembly, Instance, nameMutator, null, excludeNull);
-			}
-		}
-	}
-
-	internal sealed class DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase : IJsonFormatterResolver
-	{
-		// configuration
-		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase();
-		static readonly Func<string, string> nameMutator = StringMutator.ToCamelCase;
-		static readonly bool excludeNull = false;
-		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase";
-
-		static readonly DynamicAssembly assembly;
-
-		static DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase()
-		{
-			assembly = new DynamicAssembly(ModuleName);
-		}
-
-		DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase()
-		{
-		}
-
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
-
-		static class FormatterCache<T>
-		{
-			public static readonly IJsonFormatter<T> formatter;
-
-			static FormatterCache()
-			{
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToAssembly<T>(assembly, Instance, nameMutator, null, excludeNull);
-			}
-		}
-	}
-
-	internal sealed class DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase : IJsonFormatterResolver
-	{
-		// configuration
-		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase();
-		static readonly Func<string, string> nameMutator = StringMutator.ToSnakeCase;
-		static readonly bool excludeNull = false;
-		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase";
-
-		static readonly DynamicAssembly assembly;
-
-		static DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase()
-		{
-			assembly = new DynamicAssembly(ModuleName);
-		}
-
-		DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase()
-		{
-		}
-
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
-
-		static class FormatterCache<T>
-		{
-			public static readonly IJsonFormatter<T> formatter;
-
-			static FormatterCache()
-			{
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToAssembly<T>(assembly, Instance, nameMutator, null,excludeNull);
-			}
-		}
-	}
-
-	internal sealed class DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal : IJsonFormatterResolver
-	{
-		// configuration
-		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal();
-		static readonly Func<string, string> nameMutator = StringMutator.Original;
-		static readonly bool excludeNull = true;
-		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal";
-
-		static readonly DynamicAssembly assembly;
-
-		static DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal()
-		{
-			assembly = new DynamicAssembly(ModuleName);
-		}
-
-		DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal()
-		{
-		}
-
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
-
-		static class FormatterCache<T>
-		{
-			public static readonly IJsonFormatter<T> formatter;
-
-			static FormatterCache()
-			{
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToAssembly<T>(assembly, Instance, nameMutator, null, excludeNull);
-			}
+			static FormatterCache() =>
+				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToAssembly<T>(Assembly, Instance, NameMutator, null, ExcludeNull);
 		}
 	}
 
@@ -251,69 +102,25 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 	{
 		// configuration
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase();
-		static readonly Func<string, string> nameMutator = StringMutator.ToCamelCase;
-		static readonly bool excludeNull = true;
-		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase";
+		private static readonly Func<string, string> NameMutator = StringMutator.ToCamelCase;
+		private static readonly bool ExcludeNull = true;
+		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.{nameof(DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase)}";
+		private static readonly DynamicAssembly Assembly;
 
-		static readonly DynamicAssembly assembly;
+		static DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase() => Assembly = new DynamicAssembly(ModuleName);
 
-		static DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase()
-		{
-			assembly = new DynamicAssembly(ModuleName);
-		}
-
-		DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase()
+		private DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase()
 		{
 		}
 
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
 
-		static class FormatterCache<T>
+		private static class FormatterCache<T>
 		{
 			public static readonly IJsonFormatter<T> formatter;
 
-			static FormatterCache()
-			{
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToAssembly<T>(assembly, Instance, nameMutator, null, excludeNull);
-			}
-		}
-	}
-
-	internal sealed class DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase : IJsonFormatterResolver
-	{
-		// configuration
-		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase();
-		static readonly Func<string, string> nameMutator = StringMutator.ToSnakeCase;
-		static readonly bool excludeNull = true;
-		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase";
-
-		static readonly DynamicAssembly assembly;
-
-		static DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase()
-		{
-			assembly = new DynamicAssembly(ModuleName);
-		}
-
-		DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase()
-		{
-		}
-
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
-
-		static class FormatterCache<T>
-		{
-			public static readonly IJsonFormatter<T> formatter;
-
-			static FormatterCache()
-			{
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToAssembly<T>(assembly, Instance, nameMutator, null, excludeNull);
-			}
+			static FormatterCache() =>
+				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToAssembly<T>(Assembly, Instance, NameMutator, null, ExcludeNull);
 		}
 	}
 
@@ -321,141 +128,21 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 	#region DynamicMethod
 
-	internal sealed class DynamicObjectResolverAllowPrivateTrueExcludeNullFalseNameMutateOriginal : IJsonFormatterResolver
-	{
-		// configuration
-		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateTrueExcludeNullFalseNameMutateOriginal();
-		static readonly Func<string, string> nameMutator = StringMutator.Original;
-		static readonly bool excludeNull = false;
-
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
-
-		static class FormatterCache<T>
-		{
-			public static readonly IJsonFormatter<T> formatter;
-
-			static FormatterCache()
-			{
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToDynamicMethod<T>(Instance, nameMutator, null, excludeNull, true);
-			}
-		}
-	}
-
-	internal sealed class DynamicObjectResolverAllowPrivateTrueExcludeNullFalseNameMutateCamelCase : IJsonFormatterResolver
-	{
-		// configuration
-		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateTrueExcludeNullFalseNameMutateCamelCase();
-		static readonly Func<string, string> nameMutator = StringMutator.ToCamelCase;
-		static readonly bool excludeNull = false;
-
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
-
-		static class FormatterCache<T>
-		{
-			public static readonly IJsonFormatter<T> formatter;
-
-			static FormatterCache()
-			{
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToDynamicMethod<T>(Instance, nameMutator, null, excludeNull, true);
-			}
-		}
-	}
-
-	internal sealed class DynamicObjectResolverAllowPrivateTrueExcludeNullFalseNameMutateSnakeCase : IJsonFormatterResolver
-	{
-		// configuration
-		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateTrueExcludeNullFalseNameMutateSnakeCase();
-		static readonly Func<string, string> nameMutator = StringMutator.ToSnakeCase;
-		static readonly bool excludeNull = false;
-
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
-
-		static class FormatterCache<T>
-		{
-			public static readonly IJsonFormatter<T> formatter;
-
-			static FormatterCache()
-			{
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToDynamicMethod<T>(Instance, nameMutator, null, excludeNull, true);
-			}
-		}
-	}
-
-	internal sealed class DynamicObjectResolverAllowPrivateTrueExcludeNullTrueNameMutateOriginal : IJsonFormatterResolver
-	{
-		// configuration
-		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateTrueExcludeNullTrueNameMutateOriginal();
-		static readonly Func<string, string> nameMutator = StringMutator.Original;
-		static readonly bool excludeNull = true;
-
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
-
-		static class FormatterCache<T>
-		{
-			public static readonly IJsonFormatter<T> formatter;
-
-			static FormatterCache()
-			{
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToDynamicMethod<T>(Instance, nameMutator, null, excludeNull, true);
-			}
-		}
-	}
-
 	internal sealed class DynamicObjectResolverAllowPrivateTrueExcludeNullTrueNameMutateCamelCase : IJsonFormatterResolver
 	{
 		// configuration
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateTrueExcludeNullTrueNameMutateCamelCase();
-		static readonly Func<string, string> nameMutator = StringMutator.ToCamelCase;
-		static readonly bool excludeNull = true;
+		private static readonly Func<string, string> NameMutator = StringMutator.ToCamelCase;
+		private static readonly bool ExcludeNull = true;
 
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
 
-		static class FormatterCache<T>
+		private static class FormatterCache<T>
 		{
 			public static readonly IJsonFormatter<T> formatter;
 
-			static FormatterCache()
-			{
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToDynamicMethod<T>(Instance, nameMutator, null, excludeNull, true);
-			}
-		}
-	}
-
-	internal sealed class DynamicObjectResolverAllowPrivateTrueExcludeNullTrueNameMutateSnakeCase : IJsonFormatterResolver
-	{
-		// configuration
-		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateTrueExcludeNullTrueNameMutateSnakeCase();
-		static readonly Func<string, string> nameMutator = StringMutator.ToSnakeCase;
-		static readonly bool excludeNull = true;
-
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
-
-		static class FormatterCache<T>
-		{
-			public static readonly IJsonFormatter<T> formatter;
-
-			static FormatterCache()
-			{
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToDynamicMethod<T>(Instance, nameMutator, null, excludeNull, true);
-			}
+			static FormatterCache() =>
+				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToDynamicMethod<T>(Instance, NameMutator, null, ExcludeNull, true);
 		}
 	}
 
@@ -463,47 +150,46 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 	internal static class DynamicObjectTypeBuilder
 	{
-		static readonly Regex SubtractFullNameRegex = new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+", RegexOptions.Compiled);
+		private static readonly Regex SubtractFullNameRegex = new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+", RegexOptions.Compiled);
+		private static int _nameSequence;
 
-		static int nameSequence;
-
-		static HashSet<Type> ignoreTypes = new HashSet<Type>
+		private static readonly HashSet<Type> IgnoreTypes = new HashSet<Type>
 		{
-			{typeof(object)},
-			{typeof(short)},
-			{typeof(int)},
-			{typeof(long)},
-			{typeof(ushort)},
-			{typeof(uint)},
-			{typeof(ulong)},
-			{typeof(float)},
-			{typeof(double)},
-			{typeof(bool)},
-			{typeof(byte)},
-			{typeof(sbyte)},
-			{typeof(decimal)},
-			{typeof(char)},
-			{typeof(string)},
-			{typeof(System.Guid)},
-			{typeof(System.TimeSpan)},
-			{typeof(System.DateTime)},
-			{typeof(System.DateTimeOffset)},
+			typeof(object),
+			typeof(short),
+			typeof(int),
+			typeof(long),
+			typeof(ushort),
+			typeof(uint),
+			typeof(ulong),
+			typeof(float),
+			typeof(double),
+			typeof(bool),
+			typeof(byte),
+			typeof(sbyte),
+			typeof(decimal),
+			typeof(char),
+			typeof(string),
+			typeof(Guid),
+			typeof(TimeSpan),
+			typeof(DateTime),
+			typeof(DateTimeOffset),
 		};
 
-		static HashSet<Type> jsonPrimitiveTypes = new HashSet<Type>
+		private static readonly HashSet<Type> JsonPrimitiveTypes = new HashSet<Type>
 		{
-			{typeof(short)},
-			{typeof(int)},
-			{typeof(long)},
-			{typeof(ushort)},
-			{typeof(uint)},
-			{typeof(ulong)},
-			{typeof(float)},
-			{typeof(double)},
-			{typeof(bool)},
-			{typeof(byte)},
-			{typeof(sbyte)},
-			{typeof(string)},
+			typeof(short),
+			typeof(int),
+			typeof(long),
+			typeof(ushort),
+			typeof(uint),
+			typeof(ulong),
+			typeof(float),
+			typeof(double),
+			typeof(bool),
+			typeof(byte),
+			typeof(sbyte),
+			typeof(string),
 		};
 
 		public static object BuildFormatterToAssembly<T>(DynamicAssembly assembly, IJsonFormatterResolver selfResolver, Func<string, string> mutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull)
@@ -516,23 +202,18 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 				var innerFormatter = selfResolver.GetFormatterDynamic(type);
 				if (innerFormatter == null)
-				{
 					return null;
-				}
+
 				return (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(type), innerFormatter);
 			}
 
-			Type elementType;
 			if (typeof(Exception).IsAssignableFrom(type))
-			{
 				return BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, false, true);
-			}
-			else if (type.IsAnonymous() || TryGetInterfaceEnumerableElementType(typeof(T), out elementType))
-			{
-				return BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, false, false);
-			}
 
-			var formatterTypeInfo = DynamicObjectTypeBuilder.BuildType(assembly, typeof(T), mutator, propertyMapper, excludeNull);
+			if (type.IsAnonymous() || TryGetInterfaceEnumerableElementType(typeof(T), out _))
+				return BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, false, false);
+
+			var formatterTypeInfo = BuildType(assembly, typeof(T), mutator, propertyMapper, excludeNull);
 			if (formatterTypeInfo == null) return null;
 
 			return (IJsonFormatter<T>)Activator.CreateInstance(formatterTypeInfo.AsType());
@@ -548,30 +229,25 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 				var innerFormatter = selfResolver.GetFormatterDynamic(type);
 				if (innerFormatter == null)
-				{
 					return null;
-				}
+
 				return (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(type), innerFormatter);
 			}
 			if (typeof(Exception).IsAssignableFrom(type))
-			{
 				return BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, false, true);
-			}
-			else
-			{
-				return BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, allowPrivate, false);
-			}
+
+			return BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, allowPrivate, false);
 		}
 
-		static TypeInfo BuildType(DynamicAssembly assembly, Type type, Func<string, string> mutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull)
+		private static TypeInfo BuildType(DynamicAssembly assembly, Type type, Func<string, string> mutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull)
 		{
-			if (ignoreTypes.Contains(type)) return null;
+			if (IgnoreTypes.Contains(type)) return null;
 
 			var serializationInfo = new MetaType(type, mutator, propertyMapper, false);
 			var hasShouldSerialize = serializationInfo.Members.Any(x => x.ShouldSerializeMethodInfo != null);
 
 			var formatterType = typeof(IJsonFormatter<>).MakeGenericType(type);
-			var typeBuilder = assembly.DefineType(ResolverConfig.Namespace + "." + SubtractFullNameRegex.Replace(type.FullName, "").Replace(".", "_") + "Formatter" + Interlocked.Increment(ref nameSequence), TypeAttributes.NotPublic | TypeAttributes.Sealed, null, new[] { formatterType });
+			var typeBuilder = assembly.DefineType(ResolverConfig.Namespace + "." + SubtractFullNameRegex.Replace(type.FullName, "").Replace(".", "_") + "Formatter" + Interlocked.Increment(ref _nameSequence), TypeAttributes.NotPublic | TypeAttributes.Sealed, null, new[] { formatterType });
 
 			FieldBuilder stringByteKeysField;
 			Dictionary<MetaMember, FieldInfo> customFormatterLookup;
@@ -588,7 +264,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			{
 				var method = typeBuilder.DefineMethod("Serialize", MethodAttributes.Public | MethodAttributes.Final | MethodAttributes.Virtual,
 					null,
-					new Type[] { typeof(JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) });
+					new[] { typeof(JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) });
 
 				var il = method.GetILGenerator();
 				BuildSerialize(type, serializationInfo, il, () =>
@@ -628,7 +304,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 		public static object BuildAnonymousFormatter(Type type, Func<string, string> nameMutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull, bool allowPrivate, bool isException)
 		{
-			if (ignoreTypes.Contains(type)) return false;
+			if (IgnoreTypes.Contains(type)) return false;
 
 			MetaType serializationInfo;
 			if (isException)
@@ -641,7 +317,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				// special case for exception, modify
 				serializationInfo = new MetaType(type, nameMutator, propertyMapper, false);
 
-				serializationInfo.BestmatchConstructor = null;
+				serializationInfo.BestMatchConstructor = null;
 				serializationInfo.ConstructorParameters = new MetaMember[0];
 				serializationInfo.Members = new[] { new StringConstantValueMetaMember(nameMutator("ClassName"), type.FullName) }
 					.Concat(serializationInfo.Members.Where(x => !ignoreSet.Contains(x.Name)))
@@ -655,7 +331,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			var hasShouldSerialize = serializationInfo.Members.Any(x => x.ShouldSerializeMethodInfo != null);
 
 			// build instance instead of emit constructor.
-			List<byte[]> stringByteKeysField = new List<byte[]>();
+			var stringByteKeysField = new List<byte[]>();
 			var i = 0;
 			foreach (var item in serializationInfo.Members.Where(x => x.IsReadable))
 			{
@@ -677,8 +353,8 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				i++;
 			}
 
-			List<object> serializeCustomFormatters = new List<object>();
-			List<object> deserializeCustomFormatters = new List<object>();
+			var serializeCustomFormatters = new List<object>();
+			var deserializeCustomFormatters = new List<object>();
 			foreach (var item in serializationInfo.Members.Where(x => x.IsReadable))
 			{
 				var attr = item.GetCustomAttribute<JsonFormatterAttribute>(true);
@@ -689,21 +365,15 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					if (attr.Attribute.FormatterType.IsGenericType &&
 						!attr.Attribute.FormatterType.IsConstructedGenericType &&
 						attr.Attribute.FormatterType.GetGenericArguments().Length == 1)
-					{
 						formatterType = attr.Attribute.FormatterType.MakeGenericType(item.PropertyInfo.PropertyType);
-					}
 
 					var formatter = Activator.CreateInstance(formatterType, attr.Attribute.Arguments);
 					serializeCustomFormatters.Add(formatter);
 				}
 				else if (item.JsonFormatter != null)
-				{
 					serializeCustomFormatters.Add(item.JsonFormatter);
-				}
 				else
-				{
 					serializeCustomFormatters.Add(null);
-				}
 			}
 			foreach (var item in serializationInfo.Members) // not only for writable because for use ctor.
 			{
@@ -715,21 +385,15 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					if (attr.Attribute.FormatterType.IsGenericType &&
 						!attr.Attribute.FormatterType.IsConstructedGenericType &&
 						attr.Attribute.FormatterType.GetGenericArguments().Length == 1)
-					{
 						formatterType = attr.Attribute.FormatterType.MakeGenericType(item.PropertyInfo.PropertyType);
-					}
 
 					var formatter = Activator.CreateInstance(formatterType, attr.Attribute.Arguments);
 					deserializeCustomFormatters.Add(formatter);
 				}
 				else if (item.JsonFormatter != null)
-				{
 					deserializeCustomFormatters.Add(item.JsonFormatter);
-				}
 				else
-				{
 					deserializeCustomFormatters.Add(null);
-				}
 			}
 
 			var serialize = new DynamicMethod("Serialize", null, new Type[] { typeof(byte[][]), typeof(object[]), typeof(JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) }, type.Module, true);
@@ -770,11 +434,10 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			object serializeDelegate = serialize.CreateDelegate(typeof(AnonymousJsonSerializeAction<>).MakeGenericType(type));
 			object deserializeDelegate = deserialize.CreateDelegate(typeof(AnonymousJsonDeserializeFunc<>).MakeGenericType(type));
 
-			return Activator.CreateInstance(typeof(DynamicMethodAnonymousFormatter<>).MakeGenericType(type),
-				new[] { stringByteKeysField.ToArray(), serializeCustomFormatters.ToArray(), deserializeCustomFormatters.ToArray(), serializeDelegate, deserializeDelegate });
+			return Activator.CreateInstance(typeof(DynamicMethodAnonymousFormatter<>).MakeGenericType(type), stringByteKeysField.ToArray(), serializeCustomFormatters.ToArray(), deserializeCustomFormatters.ToArray(), serializeDelegate, deserializeDelegate);
 		}
 
-		static Dictionary<MetaMember, FieldInfo> BuildConstructor(TypeBuilder builder, MetaType info, ConstructorInfo method, FieldBuilder stringByteKeysField, ILGenerator il, bool excludeNull, bool hasShouldSerialize)
+		private static Dictionary<MetaMember, FieldInfo> BuildConstructor(TypeBuilder builder, MetaType info, ConstructorInfo method, FieldBuilder stringByteKeysField, ILGenerator il, bool excludeNull, bool hasShouldSerialize)
 		{
 			il.EmitLdarg(0);
 			il.Emit(OpCodes.Call, EmitInfo.ObjectCtor);
@@ -797,13 +460,9 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				else
 				{
 					if (i == 0)
-					{
 						il.EmitCall(EmitInfo.JsonWriter.GetEncodedPropertyNameWithBeginObject);
-					}
 					else
-					{
 						il.EmitCall(EmitInfo.JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator);
-					}
 				}
 
 				il.Emit(OpCodes.Stelem_Ref);
@@ -817,9 +476,9 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			return customFormatterField;
 		}
 
-		static Dictionary<MetaMember, FieldInfo> BuildCustomFormatterField(TypeBuilder builder, MetaType info, ILGenerator il)
+		private static Dictionary<MetaMember, FieldInfo> BuildCustomFormatterField(TypeBuilder builder, MetaType info, ILGenerator il)
 		{
-			Dictionary<MetaMember, FieldInfo> dict = new Dictionary<MetaMember, FieldInfo>();
+			var dict = new Dictionary<MetaMember, FieldInfo>();
 			foreach (var item in info.Members.Where(x => x.IsReadable || x.IsWritable))
 			{
 				var attr = item.GetCustomAttribute<JsonFormatterAttribute>(true);
@@ -839,9 +498,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					else
 						formatterType = attr.Attribute.FormatterType;
 
-					// var attr = typeof(Foo).Get .GetCustomAttribute<T>(true);
-					// this.f = Activator.CreateInstance(attr.FormatterType, attr.Arguments);
-
 					var f = builder.DefineField(item.Name + "_formatter", formatterType, FieldAttributes.Private | FieldAttributes.InitOnly);
 
 					var bindingFlags = (int)(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -854,13 +510,9 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					il.Emit(OpCodes.Ldstr, item.MemberName);
 					il.EmitLdc_I4(bindingFlags);
 					if (item.IsProperty)
-					{
 						il.EmitCall(EmitInfo.TypeGetProperty);
-					}
 					else
-					{
 						il.EmitCall(EmitInfo.TypeGetField);
-					}
 
 					il.EmitTrue();
 					il.EmitCall(EmitInfo.GetCustomAttributeJsonFormatterAttribute);
@@ -922,28 +574,25 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			return dict;
 		}
 
-		static void BuildSerialize(Type type, MetaType info, ILGenerator il, Action emitStringByteKeys, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, bool excludeNull, bool hasShouldSerialize, int firstArgIndex)
+		private static void BuildSerialize(Type type, MetaType info, ILGenerator il, Action emitStringByteKeys, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, bool excludeNull, bool hasShouldSerialize, int firstArgIndex)
 		{
 			var argWriter = new ArgumentField(il, firstArgIndex);
 			var argValue = new ArgumentField(il, firstArgIndex + 1, type);
 			var argResolver = new ArgumentField(il, firstArgIndex + 2);
 
-			var typeInfo = type;
-
 			// special case for serialize exception...
 			var innerExceptionMetaMember = info.Members.OfType<InnerExceptionMetaMember>().FirstOrDefault();
 			if (innerExceptionMetaMember != null)
 			{
-				innerExceptionMetaMember.argWriter = argWriter;
-				innerExceptionMetaMember.argValue = argValue;
-				innerExceptionMetaMember.argResolver = argResolver;
+				innerExceptionMetaMember.ArgWriter = argWriter;
+				innerExceptionMetaMember.ArgValue = argValue;
+				innerExceptionMetaMember.ArgResolver = argResolver;
 			}
 
 			// Special case for serialize IEnumerable<>.
-			if (info.IsClass && info.BestmatchConstructor == null)
+			if (info.IsClass && info.BestMatchConstructor == null)
 			{
-				Type elementType;
-				if (TryGetInterfaceEnumerableElementType(type, out elementType))
+				if (TryGetInterfaceEnumerableElementType(type, out var elementType))
 				{
 					var t = typeof(IEnumerable<>).MakeGenericType(elementType);
 
@@ -1007,7 +656,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 			// for-loop WriteRaw -> WriteValue, EndObject
 			LocalBuilder wrote = null;
-			Label endObjectLabel = il.DefineLabel();
+			var endObjectLabel = il.DefineLabel();
 			Label[] labels = null;
 			if (excludeNull || hasShouldSerialize)
 			{
@@ -1097,18 +746,12 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				if (rawField.Length < 32)
 				{
 					if (UnsafeMemory.Is32Bit)
-					{
 						il.EmitCall(typeof(UnsafeMemory32).GetRuntimeMethod("WriteRaw" + rawField.Length, new[] { typeof(JsonWriter).MakeByRefType(), typeof(byte[]) }));
-					}
 					else
-					{
 						il.EmitCall(typeof(UnsafeMemory64).GetRuntimeMethod("WriteRaw" + rawField.Length, new[] { typeof(JsonWriter).MakeByRefType(), typeof(byte[]) }));
-					}
 				}
 				else
-				{
 					il.EmitCall(EmitInfo.UnsafeMemory_MemoryCopy);
-				}
 
 				// EmitValue
 				EmitSerializeValue(item, il, index, tryEmitLoadCustomFormatter, argWriter, argValue, argResolver);
@@ -1130,13 +773,11 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			il.Emit(OpCodes.Ret);
 		}
 
-		static void EmitSerializeValue(MetaMember member, ILGenerator il, int index, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, ArgumentField writer, ArgumentField argValue, ArgumentField argResolver)
+		private static void EmitSerializeValue(MetaMember member, ILGenerator il, int index, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, ArgumentField writer, ArgumentField argValue, ArgumentField argResolver)
 		{
 			var t = member.Type;
 			if (member is InnerExceptionMetaMember innerExceptionMetaMember)
-			{
 				innerExceptionMetaMember.EmitSerializeDirectly(il);
-			}
 			else if (tryEmitLoadCustomFormatter(index, member))
 			{
 				writer.EmitLoad();
@@ -1145,7 +786,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				argResolver.EmitLoad();
 				il.EmitCall(EmitInfo.Serialize(t));
 			}
-			else if (jsonPrimitiveTypes.Contains(t))
+			else if (JsonPrimitiveTypes.Contains(t))
 			{
 				writer.EmitLoad();
 				argValue.EmitLoad();
@@ -1164,9 +805,9 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			}
 		}
 
-		static void BuildDeserialize(Type type, MetaType info, ILGenerator il, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, bool useGetUninitializedObject, int firstArgIndex)
+		private static void BuildDeserialize(Type type, MetaType info, ILGenerator il, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, bool useGetUninitializedObject, int firstArgIndex)
 		{
-			if (info.IsClass && info.BestmatchConstructor == null && !(useGetUninitializedObject && info.IsConcreteClass))
+			if (info.IsClass && info.BestMatchConstructor == null && !(useGetUninitializedObject && info.IsConcreteClass))
 			{
 				il.Emit(OpCodes.Ldstr, "generated serializer for " + type.Name + " does not support deserialize.");
 				il.Emit(OpCodes.Newobj, EmitInfo.InvalidOperationExceptionConstructor);
@@ -1206,15 +847,13 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 			// check side-effect-free for optimize set member value(reduce is-exists-member on json check)
 			var isSideEffectFreeType = true;
-			if (info.BestmatchConstructor != null)
+			if (info.BestMatchConstructor != null)
 			{
-				isSideEffectFreeType = IsSideEffectFreeConstructorType(info.BestmatchConstructor);
+				isSideEffectFreeType = IsSideEffectFreeConstructorType(info.BestMatchConstructor);
 				// if set only property, it is not side-effect but same as has side-effect
 				var hasSetOnlyMember = info.Members.Any(x => !x.IsReadable && x.IsWritable);
 				if (hasSetOnlyMember)
-				{
 					isSideEffectFreeType = false;
-				}
 			}
 
 			// make local fields
@@ -1232,7 +871,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			// read member loop
 			{
 				var automata = new AutomataDictionary();
-				for (int i = 0; i < info.Members.Length; i++)
+				for (var i = 0; i < info.Members.Length; i++)
 				{
 					automata.Add(JsonWriter.GetEncodedPropertyNameWithoutQuotation(info.Members[i].Name), i);
 				}
@@ -1303,9 +942,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 						il.Emit(OpCodes.Br, continueWhile);
 					}
 					else
-					{
 						il.Emit(OpCodes.Br, readNext);
-					}
 				}, () =>
 				{
 					il.Emit(OpCodes.Br, readNext);
@@ -1329,14 +966,12 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			var localResult = EmitNewObject(il, type, info, infoList, isSideEffectFreeType);
 
 			if (localResult != null)
-			{
 				il.Emit(OpCodes.Ldloc, localResult);
-			}
 
 			il.Emit(OpCodes.Ret);
 		}
 
-		static void EmitDeserializeValue(ILGenerator il, DeserializeInfo info, int index, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, ArgumentField reader, ArgumentField argResolver)
+		private static void EmitDeserializeValue(ILGenerator il, DeserializeInfo info, int index, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, ArgumentField reader, ArgumentField argResolver)
 		{
 			var member = info.MemberInfo;
 			var t = member.Type;
@@ -1346,7 +981,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				argResolver.EmitLoad();
 				il.EmitCall(EmitInfo.Deserialize(t));
 			}
-			else if (jsonPrimitiveTypes.Contains(t))
+			else if (JsonPrimitiveTypes.Contains(t))
 			{
 				reader.EmitLoad();
 				il.EmitCall(typeof(JsonReader).GetDeclaredMethods("Read" + t.Name).OrderByDescending(x => x.GetParameters().Length).First());
@@ -1363,7 +998,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			il.EmitStloc(info.LocalField);
 		}
 
-		static LocalBuilder EmitNewObject(ILGenerator il, Type type, MetaType info, DeserializeInfo[] members, bool isSideEffectFreeType)
+		private static LocalBuilder EmitNewObject(ILGenerator il, Type type, MetaType info, DeserializeInfo[] members, bool isSideEffectFreeType)
 		{
 			if (info.IsClass)
 			{
@@ -1373,14 +1008,14 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					result = il.DeclareLocal(type);
 				}
 
-				if (info.BestmatchConstructor != null)
+				if (info.BestMatchConstructor != null)
 				{
 					foreach (var item in info.ConstructorParameters)
 					{
 						var local = members.First(x => x.MemberInfo == item);
 						il.EmitLdloc(local.LocalField);
 					}
-					il.Emit(OpCodes.Newobj, info.BestmatchConstructor);
+					il.Emit(OpCodes.Newobj, info.BestMatchConstructor);
 				}
 				else
 				{
@@ -1389,9 +1024,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					il.EmitCall(EmitInfo.GetUninitializedObject);
 				}
 				if (!isSideEffectFreeType)
-				{
 					il.EmitStloc(result);
-				}
 
 				foreach (var item in members.Where(x => x.MemberInfo != null && x.MemberInfo.IsWritable))
 				{
@@ -1440,7 +1073,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			else
 			{
 				var result = il.DeclareLocal(type);
-				if (info.BestmatchConstructor == null)
+				if (info.BestMatchConstructor == null)
 				{
 					il.Emit(OpCodes.Ldloca, result);
 					il.Emit(OpCodes.Initobj, type);
@@ -1452,7 +1085,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 						var local = members.First(x => x.MemberInfo == item);
 						il.EmitLdloc(local.LocalField);
 					}
-					il.Emit(OpCodes.Newobj, info.BestmatchConstructor);
+					il.Emit(OpCodes.Newobj, info.BestMatchConstructor);
 					il.Emit(OpCodes.Stloc, result);
 				}
 
@@ -1502,13 +1135,12 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			}
 		}
 
-		static bool IsSideEffectFreeConstructorType(ConstructorInfo ctorInfo)
+		private static bool IsSideEffectFreeConstructorType(ConstructorInfo ctorInfo)
 		{
 			var methodBody = ctorInfo.GetMethodBody();
-			if (methodBody == null) return false; // can't analysis
-
-			var array = methodBody.GetILAsByteArray();
-			if (array == null) return false;
+			var array = methodBody?.GetILAsByteArray();
+			if (array == null)
+				return false;
 
 			// (ldarg.0, call(empty ctor), ret) == side-effect free.
 			// Release build is 7, Debug build has nop(or nop like code) so should use ILStreamReader
@@ -1535,34 +1167,26 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			}
 
 			if (opCodes.Count == 3
-				&& opCodes[0] == System.Reflection.Emit.OpCodes.Ldarg_0
-				&& opCodes[1] == System.Reflection.Emit.OpCodes.Call
-				&& opCodes[2] == System.Reflection.Emit.OpCodes.Ret)
+				&& opCodes[0] == OpCodes.Ldarg_0
+				&& opCodes[1] == OpCodes.Call
+				&& opCodes[2] == OpCodes.Ret)
 			{
 				if (ctorInfo.DeclaringType.BaseType == typeof(object))
-				{
 					return true;
-				}
-				else
-				{
-					// use empty constuctor.
-					var bassCtorInfo = ctorInfo.DeclaringType.BaseType.GetConstructor(Type.EmptyTypes);
-					if (bassCtorInfo == null)
-					{
-						return false;
-					}
-					else
-					{
-						// check parent constructor
-						return IsSideEffectFreeConstructorType(bassCtorInfo);
-					}
-				}
+
+				// use empty constuctor.
+				var baseCtorInfo = ctorInfo.DeclaringType.BaseType.GetConstructor(Type.EmptyTypes);
+				if (baseCtorInfo == null)
+					return false;
+
+				// check parent constructor
+				return IsSideEffectFreeConstructorType(baseCtorInfo);
 			}
 
 			return false;
 		}
 
-		static bool TryGetInterfaceEnumerableElementType(Type type, out Type elementType)
+		private static bool TryGetInterfaceEnumerableElementType(Type type, out Type elementType)
 		{
 			foreach (var implInterface in type.GetInterfaces())
 			{
@@ -1582,7 +1206,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			return false;
 		}
 
-		struct DeserializeInfo
+		private struct DeserializeInfo
 		{
 			public MetaMember MemberInfo;
 			public LocalBuilder LocalField;
@@ -1614,20 +1238,14 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 			public static readonly MethodInfo NongenericSerialize = ExpressionUtility.GetMethodInfo<Utf8Json.JsonWriter>(writer => JsonSerializer.NonGeneric.Serialize(default(Type), ref writer, default(object), default(IJsonFormatterResolver)));
 
-			public static MethodInfo Serialize(Type type)
-			{
-				return typeof(IJsonFormatter<>).MakeGenericType(type).GetRuntimeMethod("Serialize", new[] { typeof(Utf8Json.JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) });
-			}
+			public static MethodInfo Serialize(Type type) =>
+				typeof(IJsonFormatter<>).MakeGenericType(type).GetRuntimeMethod(nameof(IJsonFormatter<object>.Serialize), new[] { typeof(Utf8Json.JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) });
 
-			public static MethodInfo Deserialize(Type type)
-			{
-				return typeof(IJsonFormatter<>).MakeGenericType(type).GetRuntimeMethod("Deserialize", new[] { typeof(Utf8Json.JsonReader).MakeByRefType(), typeof(IJsonFormatterResolver) });
-			}
+			public static MethodInfo Deserialize(Type type) =>
+				typeof(IJsonFormatter<>).MakeGenericType(type).GetRuntimeMethod(nameof(IJsonFormatter<object>.Deserialize), new[] { typeof(Utf8Json.JsonReader).MakeByRefType(), typeof(IJsonFormatterResolver) });
 
-			public static MethodInfo GetNullableHasValue(Type type)
-			{
-				return typeof(Nullable<>).MakeGenericType(type).GetRuntimeProperty("HasValue").GetMethod;
-			}
+			public static MethodInfo GetNullableHasValue(Type type) =>
+				typeof(Nullable<>).MakeGenericType(type).GetRuntimeProperty(nameof(Nullable<int>.HasValue)).GetMethod;
 
 			internal static class JsonWriter
 			{
@@ -1671,15 +1289,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				internal static readonly MethodInfo Arguments = ExpressionUtility.GetPropertyInfo((JsonFormatterAttribute attr) => attr.Arguments).GetGetMethod();
 			}
 		}
-
-		internal class Utf8JsonDynamicObjectResolverException : Exception
-		{
-			public Utf8JsonDynamicObjectResolverException(string message)
-				: base(message)
-			{
-
-			}
-		}
 	}
 
 	internal delegate void AnonymousJsonSerializeAction<T>(byte[][] stringByteKeysField, object[] customFormatters, ref JsonWriter writer, T value, IJsonFormatterResolver resolver);
@@ -1687,31 +1296,31 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 	internal class DynamicMethodAnonymousFormatter<T> : IJsonFormatter<T>
 	{
-		readonly byte[][] stringByteKeysField;
-		readonly object[] serializeCustomFormatters;
-		readonly object[] deserializeCustomFormatters;
-		readonly AnonymousJsonSerializeAction<T> serialize;
-		readonly AnonymousJsonDeserializeFunc<T> deserialize;
+		private readonly byte[][] _stringByteKeysField;
+		private readonly object[] _serializeCustomFormatters;
+		private readonly object[] _deserializeCustomFormatters;
+		private readonly AnonymousJsonSerializeAction<T> _serialize;
+		private readonly AnonymousJsonDeserializeFunc<T> _deserialize;
 
 		public DynamicMethodAnonymousFormatter(byte[][] stringByteKeysField, object[] serializeCustomFormatters, object[] deserializeCustomFormatters, AnonymousJsonSerializeAction<T> serialize, AnonymousJsonDeserializeFunc<T> deserialize)
 		{
-			this.stringByteKeysField = stringByteKeysField;
-			this.serializeCustomFormatters = serializeCustomFormatters;
-			this.deserializeCustomFormatters = deserializeCustomFormatters;
-			this.serialize = serialize;
-			this.deserialize = deserialize;
+			_stringByteKeysField = stringByteKeysField;
+			_serializeCustomFormatters = serializeCustomFormatters;
+			_deserializeCustomFormatters = deserializeCustomFormatters;
+			_serialize = serialize;
+			_deserialize = deserialize;
 		}
 
 		public void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{
-			if (serialize == null) throw new InvalidOperationException(this.GetType().Name + " does not support Serialize.");
-			serialize(stringByteKeysField, serializeCustomFormatters, ref writer, value, formatterResolver);
+			if (_serialize == null) throw new InvalidOperationException(GetType().Name + " does not support Serialize.");
+			_serialize(_stringByteKeysField, _serializeCustomFormatters, ref writer, value, formatterResolver);
 		}
 
 		public T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (deserialize == null) throw new InvalidOperationException(this.GetType().Name + " does not support Deserialize.");
-			return deserialize(deserializeCustomFormatters, ref reader, formatterResolver);
+			if (_deserialize == null) throw new InvalidOperationException(GetType().Name + " does not support Deserialize.");
+			return _deserialize(_deserializeCustomFormatters, ref reader, formatterResolver);
 		}
 	}
 }

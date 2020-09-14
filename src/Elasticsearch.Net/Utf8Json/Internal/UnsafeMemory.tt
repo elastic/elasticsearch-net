@@ -30,7 +30,7 @@
 
 using System.Runtime.CompilerServices;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Internal
 {
     internal static partial class UnsafeMemory32
     {
@@ -38,10 +38,10 @@ namespace Elasticsearch.Net
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe void WriteRaw<#= i #>(ref JsonWriter writer, byte[] src)
         {
-            BinaryUtil.EnsureCapacity(ref writer.buffer, writer.offset, src.Length);
+            BinaryUtil.EnsureCapacity(ref writer.Buffer, writer.Offset, src.Length);
 
             fixed (byte* pSrc = &src[0])
-            fixed (byte* pDst = &writer.buffer[writer.offset])
+            fixed (byte* pDst = &writer.Buffer[writer.Offset])
             {
 <# for(var j = 0; j < (i / 4); j++) { #>
                 *(int*)(pDst + <#= (4 * j) #>) = *(int*)(pSrc + <#= (4 * j) #>);
@@ -51,7 +51,7 @@ namespace Elasticsearch.Net
 <# } #>
             }
 
-            writer.offset += src.Length;
+            writer.Offset += src.Length;
         }
 
 <# } #>
@@ -63,10 +63,10 @@ namespace Elasticsearch.Net
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe void WriteRaw<#= i #>(ref JsonWriter writer, byte[] src)
         {
-            BinaryUtil.EnsureCapacity(ref writer.buffer, writer.offset, src.Length);
+            BinaryUtil.EnsureCapacity(ref writer.Buffer, writer.Offset, src.Length);
 
             fixed (byte* pSrc = &src[0])
-            fixed (byte* pDst = &writer.buffer[writer.offset])
+            fixed (byte* pDst = &writer.Buffer[writer.Offset])
             {
 <# for(var j = 0; j < (i / 8); j++) { #>
                 *(long*)(pDst + <#= (8 * j) #>) = *(long*)(pSrc + <#= (8 * j) #>);
@@ -76,7 +76,7 @@ namespace Elasticsearch.Net
 <# } #>
             }
 
-            writer.offset += src.Length;
+            writer.Offset += src.Length;
         }
 
 <# } #>

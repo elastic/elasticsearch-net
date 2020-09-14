@@ -32,7 +32,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 {
 	internal class MetaMethodInfoComparer : IEqualityComparer<MethodInfo>
 	{
-		public static MetaMethodInfoComparer Default = new MetaMethodInfoComparer();
+		public static readonly MetaMethodInfoComparer Default = new MetaMethodInfoComparer();
 
 		public bool Equals(MethodInfo x, MethodInfo y)
 		{
@@ -42,20 +42,16 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 			return x.Name == y.Name && x.DeclaringType == y.DeclaringType;
 		}
 
-		public int GetHashCode(MethodInfo obj)
-		{
-			return obj.GetHashCode();
-		}
+		public int GetHashCode(MethodInfo obj) => obj.GetHashCode();
 	}
 
 	internal class MetaType
     {
-        public Type Type { get; private set; }
-        public bool IsClass { get; private set; }
-        public bool IsStruct { get { return !IsClass; } }
-        public bool IsConcreteClass { get; private set; }
-
-        public ConstructorInfo BestmatchConstructor { get; internal set; }
+        public Type Type { get; }
+        public bool IsClass { get; }
+        public bool IsStruct => !IsClass;
+		public bool IsConcreteClass { get; }
+        public ConstructorInfo BestMatchConstructor { get; internal set; }
         public MetaMember[] ConstructorParameters { get; internal set; }
         public MetaMember[] Members { get; internal set; }
 
@@ -79,7 +75,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
             var dataContractPresent = type.GetCustomAttribute<DataContractAttribute>(true) != null ||
                                       type.GetCustomAttribute<InterfaceDataContractAttribute>(true) != null;
 
-            this.Type = type;
+            Type = type;
 
             var stringMembers = new Dictionary<string, MetaMember>();
 			{
@@ -102,8 +98,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 							var interfaceMap = interfaceMaps[i];
 							if (interfaceMap.TargetMethods.Contains(accessor, MetaMethodInfoComparer.Default))
 							{
-								if (interfaceProps == null)
-									interfaceProps = new List<PropertyInfo>();
+								interfaceProps ??= new List<PropertyInfo>();
 
 								var propertyName = item.Name.StartsWith(interfaceMap.InterfaceType.FullName + ".")
 									? item.Name.Substring(interfaceMap.InterfaceType.FullName.Length + 1)
@@ -124,34 +119,28 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 					if (dataContractPresent && dm == null)
 						continue;
 
-					var name = (dm != null && dm.Name != null)
-						? dm.Name
-						: nameMutator(item.Name);
-
+					var name = dm?.Name ?? nameMutator(item.Name);
 					var allowPrivateMember = allowPrivate;
 
 					object jsonFormatter = null;
 
-					if (propertyMapper != null)
+					var property = propertyMapper?.Invoke(item);
+					if (property != null)
 					{
-						var property = propertyMapper(item);
-						if (property != null)
-						{
-							if (property.Ignore)
-								continue;
+						if (property.Ignore)
+							continue;
 
-							if (!string.IsNullOrEmpty(property.Name))
-								name = property.Name;
+						if (!string.IsNullOrEmpty(property.Name))
+							name = property.Name;
 
-							if (property.AllowPrivate.HasValue)
-								allowPrivateMember = property.AllowPrivate.Value;
+						if (property.AllowPrivate.HasValue)
+							allowPrivateMember = property.AllowPrivate.Value;
 
-							if (property.JsonFormatter != null)
-								jsonFormatter = property.JsonFormatter;
-						}
+						if (property.JsonFormatter != null)
+							jsonFormatter = property.JsonFormatter;
 					}
 
-					var props = interfaceProps != null ? interfaceProps.ToArray() : null;
+					var props = interfaceProps?.ToArray();
 
                     var member = new MetaMember(item, name, props, jsonFormatter, allowPrivateMember || dm != null);
                     if (!member.IsReadable && !member.IsWritable) continue;
@@ -171,26 +160,24 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
                     var name = (dm != null && dm.Name != null) ? dm.Name : nameMutator(item.Name);
 					var allowPrivateMember = allowPrivate;
 					object jsonFormatter = null;
-					if (propertyMapper != null)
+
+					var field = propertyMapper?.Invoke(item);
+					if (field != null)
 					{
-						var field = propertyMapper(item);
-						if (field != null)
-						{
-							if (field.Ignore)
-								continue;
+						if (field.Ignore)
+							continue;
 
-							if (!string.IsNullOrEmpty(field.Name))
-								name = field.Name;
+						if (!string.IsNullOrEmpty(field.Name))
+							name = field.Name;
 
-							if (field.AllowPrivate.HasValue)
-								allowPrivateMember = field.AllowPrivate.Value;
+						if (field.AllowPrivate.HasValue)
+							allowPrivateMember = field.AllowPrivate.Value;
 
-							if (field.JsonFormatter != null)
-								jsonFormatter = field.JsonFormatter;
-						}
+						if (field.JsonFormatter != null)
+							jsonFormatter = field.JsonFormatter;
 					}
 
-                    var member = new MetaMember(item, name, jsonFormatter, allowPrivateMember || dm != null);
+					var member = new MetaMember(item, name, jsonFormatter, allowPrivateMember || dm != null);
                     if (!member.IsReadable && !member.IsWritable) continue;
 
                     if (!stringMembers.ContainsKey(member.Name))
@@ -211,10 +198,8 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 						.Where(x => x.IsPublic)
 						.OrderByDescending(x => x.GetParameters().Length).GetEnumerator();
                     if (ctorEnumerator.MoveNext())
-                    {
-                        ctor = ctorEnumerator.Current;
-                    }
-                }
+						ctor = ctorEnumerator.Current;
+				}
 
                 if (ctor != null)
                 {
@@ -225,31 +210,25 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
                         var ctorParamIndex = 0;
                         foreach (var item in ctor.GetParameters())
                         {
-                            MetaMember paramMember;
-
-                            var hasKey = constructorLookupDictionary[item.Name];
+							var hasKey = constructorLookupDictionary[item.Name];
                             var len = hasKey.Count();
                             if (len != 0)
                             {
                                 if (len != 1)
-                                {
-                                    if (ctorEnumerator != null)
+								{
+									if (ctorEnumerator != null)
                                     {
                                         ctor = null;
                                         continue;
                                     }
-                                    else
-                                    {
-                                        throw new InvalidOperationException("duplicate matched constructor parameter name:" + type.FullName + " parameterName:" + item.Name + " paramterType:" + item.ParameterType.Name);
-                                    }
-                                }
 
-                                paramMember = hasKey.First().Value;
+									throw new InvalidOperationException("duplicate matched constructor parameter name:" + type.FullName + " parameterName:" + item.Name + " paramterType:" + item.ParameterType.Name);
+								}
+
+                                var paramMember = hasKey.First().Value;
                                 if (item.ParameterType == paramMember.Type && paramMember.IsReadable)
-                                {
-                                    constructorParameters.Add(paramMember);
-                                }
-                                else
+									constructorParameters.Add(paramMember);
+								else
                                 {
                                     ctor = null;
                                     continue;
@@ -266,30 +245,26 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
                 }
             }
 
-            this.IsClass = isClass;
-            this.IsConcreteClass = isClass && !(type.IsAbstract || type.IsInterface);
-            this.BestmatchConstructor = ctor;
-            this.ConstructorParameters = constructorParameters.ToArray();
-            this.Members = stringMembers.Values.ToArray();
+            IsClass = isClass;
+            IsConcreteClass = isClass && !(type.IsAbstract || type.IsInterface);
+            BestMatchConstructor = ctor;
+            ConstructorParameters = constructorParameters.ToArray();
+            Members = stringMembers.Values.ToArray();
         }
 
-        static bool TryGetNextConstructor(IEnumerator<ConstructorInfo> ctorEnumerator, ref ConstructorInfo ctor)
+		private static bool TryGetNextConstructor(IEnumerator<ConstructorInfo> ctorEnumerator, ref ConstructorInfo ctor)
         {
             if (ctorEnumerator == null || ctor != null)
-            {
-                return false;
-            }
+				return false;
 
-            if (ctorEnumerator.MoveNext())
+			if (ctorEnumerator.MoveNext())
             {
                 ctor = ctorEnumerator.Current;
                 return true;
             }
-            else
-            {
-                ctor = null;
-                return false;
-            }
-        }
+
+			ctor = null;
+			return false;
+		}
     }
 }

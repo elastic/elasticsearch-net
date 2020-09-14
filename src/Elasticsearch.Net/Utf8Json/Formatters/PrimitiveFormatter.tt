@@ -5,15 +5,15 @@
     var types = new[]
     {
         typeof(sbyte),
-        typeof(Int16),
-        typeof(Int32),
-        typeof(Int64),
+        typeof(short),
+        typeof(int),
+        typeof(long),
         typeof(byte), 
-        typeof(UInt16),
-        typeof(UInt32),
-        typeof(UInt64),
-        typeof(Single),
-        typeof(Double),
+        typeof(ushort),
+        typeof(uint),
+        typeof(ulong),
+        typeof(float),
+        typeof(double),
         typeof(bool), 
     };
 #>
@@ -42,68 +42,54 @@
 #endregion
 
 using System;
+using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Formatters
 {
 <# foreach(var t in types) {  #>
-    internal sealed class <#= t.Name #>Formatter : IJsonFormatter<<#= t.Name #>>, IObjectPropertyNameFormatter<<#= t.Name #>>
+    internal sealed class <#= t.Name #>Formatter : IJsonFormatter<<#= GetCSharpType(t) #>>, IObjectPropertyNameFormatter<<#= GetCSharpType(t) #>>
     {
         public static readonly <#= t.Name #>Formatter Default = new <#= t.Name #>Formatter();
 
-        public void Serialize(ref JsonWriter writer, <#= t.Name #> value, IJsonFormatterResolver formatterResolver)
-        {
-            writer.Write<#= t.Name #>(value);
-        }
+        public void Serialize(ref JsonWriter writer, <#= GetCSharpType(t) #> value, IJsonFormatterResolver formatterResolver) => writer.Write<#= t.Name #>(value);
 
-        public <#= t.Name #> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-        {
-            return reader.Read<#= t.Name #>();
-        }
+        public <#= GetCSharpType(t) #> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) => reader.Read<#= t.Name #>();
 
-        public void SerializeToPropertyName(ref JsonWriter writer, <#= t.Name #> value, IJsonFormatterResolver formatterResolver)
+        public void SerializeToPropertyName(ref JsonWriter writer, <#= GetCSharpType(t) #> value, IJsonFormatterResolver formatterResolver)
         {
             writer.WriteQuotation();
             writer.Write<#= t.Name #>(value);
             writer.WriteQuotation();
         }
 
-        public <#= t.Name #> DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+        public <#= GetCSharpType(t) #> DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
         {
             var key = reader.ReadStringSegmentRaw();
-            int _;
             return NumberConverter.Read<#= t.Name #>(key.Array, key.Offset, out _);
         }
     }
 
-    internal sealed class Nullable<#= t.Name #>Formatter : IJsonFormatter<<#= t.Name #>?>, IObjectPropertyNameFormatter<<#= t.Name #>?>
+    internal sealed class Nullable<#= t.Name #>Formatter : IJsonFormatter<<#= GetCSharpType(t) #>?>, IObjectPropertyNameFormatter<<#= GetCSharpType(t) #>?>
     {
         public static readonly Nullable<#= t.Name #>Formatter Default = new Nullable<#= t.Name #>Formatter();
 
-        public void Serialize(ref JsonWriter writer, <#= t.Name #>? value, IJsonFormatterResolver formatterResolver)
+        public void Serialize(ref JsonWriter writer, <#= GetCSharpType(t) #>? value, IJsonFormatterResolver formatterResolver)
         {
             if (value == null)
-            {
                 writer.WriteNull();
-            }
             else
-            {
                 writer.Write<#= t.Name #>(value.Value);
-            }
         }
 
-        public <#= t.Name #>? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+        public <#= GetCSharpType(t) #>? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
         {
             if (reader.ReadIsNull())
-            {
                 return null;
-            }
-            else
-            {
-                return reader.Read<#= t.Name #>();
-            }
+
+            return reader.Read<#= t.Name #>();
         }
 
-        public void SerializeToPropertyName(ref JsonWriter writer, <#= t.Name #>? value, IJsonFormatterResolver formatterResolver)
+        public void SerializeToPropertyName(ref JsonWriter writer, <#= GetCSharpType(t) #>? value, IJsonFormatterResolver formatterResolver)
         {
             if (value == null) { writer.WriteNull(); return; }
 
@@ -112,36 +98,31 @@ namespace Elasticsearch.Net
             writer.WriteQuotation();
         }
 
-        public <#= t.Name #>? DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+        public <#= GetCSharpType(t) #>? DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
         {
             if (reader.ReadIsNull()) return null;
 
             var key = reader.ReadStringSegmentRaw();
-            int _;
             return NumberConverter.Read<#= t.Name #>(key.Array, key.Offset, out _);
         }
     }
 
 <# if(t.Name != "Byte") { #>
-    internal sealed class <#= t.Name #>ArrayFormatter : IJsonFormatter<<#= t.Name #>[]>
+    internal sealed class <#= t.Name #>ArrayFormatter : IJsonFormatter<<#= GetCSharpType(t) #>[]>
     {
         public static readonly <#= t.Name #>ArrayFormatter Default = new <#= t.Name #>ArrayFormatter();
 
-        public void Serialize(ref JsonWriter writer, <#= t.Name #>[] value, IJsonFormatterResolver formatterResolver)
+        public void Serialize(ref JsonWriter writer, <#= GetCSharpType(t) #>[] value, IJsonFormatterResolver formatterResolver)
         {
             if (value == null)
-            {
                 writer.WriteNull();
-            }
             else
             {
                 writer.WriteBeginArray();
 
                 if (value.Length != 0)
-                {
                     writer.Write<#= t.Name #>(value[0]);
-                }
-                for (int i = 1; i < value.Length; i++)
+                for (var i = 1; i < value.Length; i++)
                 {
                     writer.WriteValueSeparator();
                     writer.Write<#= t.Name #>(value[i]);
@@ -151,32 +132,47 @@ namespace Elasticsearch.Net
             }
         }
 
-        public <#= t.Name #>[] Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+        public <#= GetCSharpType(t) #>[] Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
         {
             if (reader.ReadIsNull())
-            {
                 return null;
-            }
-            else
-            {
-                reader.ReadIsBeginArrayWithVerify();
-                var array = new <#= t.Name #>[4];
-                var count = 0;
-                while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref count))
-                {
-                    if (array.Length < count)
-                    {
-                        Array.Resize(ref array, count * 2);
-                    }
-                    array[count - 1] = reader.Read<#= t.Name #>();
-                }
 
-                Array.Resize(ref array, count);
-                return array;
+            reader.ReadIsBeginArrayWithVerify();
+            var array = new <#= GetCSharpType(t) #>[4];
+            var count = 0;
+            while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref count))
+            {
+                if (array.Length < count)
+                    Array.Resize(ref array, count * 2);
+
+                array[count - 1] = reader.Read<#= t.Name #>();
             }
+
+            Array.Resize(ref array, count);
+            return array;
         }
     }
 <# } #>
 
 <# } #>
 }
+<#+
+	public static string GetCSharpType(Type type)
+	{
+		switch (type.Name)
+		{
+			case "SByte": return "sbyte";
+			case "Int16": return "short";
+			case "Int32": return "int";
+			case "Int64": return "long";
+			case "Byte": return "byte";
+			case "UInt16": return "ushort";
+			case "UInt32": return "uint";
+			case "UInt64": return "ulong";
+			case "Single": return "float";
+			case "Double": return "double";
+			case "Boolean": return "bool";
+			default: throw new Exception("Unknown type");
+		}
+    }
+#>

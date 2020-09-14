@@ -26,33 +26,28 @@ using System;
 
 namespace Elasticsearch.Net.Utf8Json
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Field | AttributeTargets.Property)]
 	internal class JsonFormatterAttribute : Attribute
     {
-        public Type FormatterType { get; private set; }
-        public object[] Arguments { get; private set; }
+        public Type FormatterType { get; }
+        public object[] Arguments { get; }
 
-        public JsonFormatterAttribute(Type formatterType)
-        {
-            this.FormatterType = formatterType;
-        }
+        public JsonFormatterAttribute(Type formatterType) => FormatterType = formatterType;
 
-        public JsonFormatterAttribute(Type formatterType, params object[] arguments)
+		public JsonFormatterAttribute(Type formatterType, params object[] arguments)
         {
-            this.FormatterType = formatterType;
-            this.Arguments = arguments;
+            FormatterType = formatterType;
+            Arguments = arguments;
         }
     }
 
-    [AttributeUsage(AttributeTargets.Constructor, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Constructor)]
 	internal class SerializationConstructorAttribute : Attribute
     {
-
     }
 
-    [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Interface)]
 	internal class InterfaceDataContractAttribute : Attribute
     {
-
     }
 }
