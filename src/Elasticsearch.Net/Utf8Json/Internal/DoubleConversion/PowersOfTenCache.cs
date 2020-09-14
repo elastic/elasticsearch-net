@@ -1,18 +1,18 @@
 #region Utf8Json License https://github.com/neuecc/Utf8Json/blob/master/LICENSE
 // MIT License
-// 
+//
 // Copyright (c) 2017 Yoshifumi Kawai
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,24 +32,23 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
     // https://github.com/google/double-conversion/blob/master/double-conversion/cached-powers.h
     // https://github.com/google/double-conversion/blob/master/double-conversion/cached-powers.cc
 
-    internal struct CachedPower
+    internal readonly struct CachedPower
     {
-        public readonly uint64_t significand;
-        public readonly int16_t binary_exponent;
-        public readonly int16_t decimal_exponent;
+        public readonly ulong Significand;
+        public readonly short BinaryExponent;
+        public readonly short DecimalExponent;
 
-        public CachedPower(ulong significand, short binary_exponent, short decimal_exponent)
+        public CachedPower(ulong significand, short binaryExponent, short decimalExponent)
         {
-            this.significand = significand;
-            this.binary_exponent = binary_exponent;
-            this.decimal_exponent = decimal_exponent;
+            Significand = significand;
+            BinaryExponent = binaryExponent;
+            DecimalExponent = decimalExponent;
         }
     };
 
     internal static class PowersOfTenCache
     {
-        static readonly CachedPower[] kCachedPowers = new CachedPower[]
-        {
+		private static readonly CachedPower[] KCachedPowers = {
             new CachedPower (0xfa8fd5a0081c0288, -1220, -348),
             new CachedPower (0xbaaee17fa23ebf76, -1193, -340),
             new CachedPower (0x8b16fb203055ac76, -1166, -332),
@@ -139,38 +138,36 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             new CachedPower (0xaf87023b9bf0ee6b, 1066, 340),
         };
 
-        public const int kCachedPowersOffset = 348;  // -1 * the first decimal_exponent.
-        public const double kD_1_LOG2_10 = 0.30102999566398114;  //  1 / lg(10)
+        public const int KCachedPowersOffset = 348;  // -1 * the first decimal_exponent.
+        public const double KD1Log210 = 0.30102999566398114;  //  1 / lg(10)
                                                                  // Difference between the decimal exponents in the table above.
-        public const int kDecimalExponentDistance = 8;
-        public const int kMinDecimalExponent = -348;
-        public const int kMaxDecimalExponent = 340;
+        public const int KDecimalExponentDistance = 8;
+        public const int KMinDecimalExponent = -348;
+        public const int KMaxDecimalExponent = 340;
 
         public static void GetCachedPowerForBinaryExponentRange(
-            int min_exponent,
-            int max_exponent,
+            int minExponent,
+            int maxExponent,
             out DiyFp power,
-            out int decimal_exponent)
+            out int decimalExponent)
         {
-            int kQ = DiyFp.kSignificandSize;
-            double k = Math.Ceiling((min_exponent + kQ - 1) * kD_1_LOG2_10);
-            int foo = kCachedPowersOffset;
-            int index = (foo + (int)(k) - 1) / kDecimalExponentDistance + 1;
+            var kQ = DiyFp.KSignificandSize;
+            var k = Math.Ceiling((minExponent + kQ - 1) * KD1Log210);
+            var foo = KCachedPowersOffset;
+            var index = (foo + (int)(k) - 1) / KDecimalExponentDistance + 1;
 
-            CachedPower cached_power = kCachedPowers[index];
+            var cachedPower = KCachedPowers[index];
             // (void)max_exponent;  // Mark variable as used.
-            decimal_exponent = cached_power.decimal_exponent;
-            power = new DiyFp(cached_power.significand, cached_power.binary_exponent);
+            decimalExponent = cachedPower.DecimalExponent;
+            power = new DiyFp(cachedPower.Significand, cachedPower.BinaryExponent);
         }
 
-        public static void GetCachedPowerForDecimalExponent(int requested_exponent,
-                                                        out DiyFp power,
-                                                        out int found_exponent)
+        public static void GetCachedPowerForDecimalExponent(int requestedExponent, out DiyFp power, out int foundExponent)
         {
-            int index = (requested_exponent + kCachedPowersOffset) / kDecimalExponentDistance;
-            CachedPower cached_power = kCachedPowers[index];
-            power = new DiyFp(cached_power.significand, cached_power.binary_exponent);
-            found_exponent = cached_power.decimal_exponent;
+            var index = (requestedExponent + KCachedPowersOffset) / KDecimalExponentDistance;
+            var cachedPower = KCachedPowers[index];
+            power = new DiyFp(cachedPower.Significand, cachedPower.BinaryExponent);
+            foundExponent = cachedPower.DecimalExponent;
         }
     }
 }

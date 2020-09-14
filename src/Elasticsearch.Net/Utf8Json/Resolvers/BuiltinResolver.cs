@@ -25,7 +25,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Numerics;
 using System.Text;
+using System.Threading.Tasks;
 using Elasticsearch.Net.Utf8Json.Formatters;
 
 namespace Elasticsearch.Net.Utf8Json.Resolvers
@@ -34,57 +37,51 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
     {
         public static readonly IJsonFormatterResolver Instance = new BuiltinResolver();
 
-        BuiltinResolver()
+		private BuiltinResolver()
         {
-
         }
 
-        public IJsonFormatter<T> GetFormatter<T>()
-        {
-            return FormatterCache<T>.formatter;
-        }
+        public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
 
-        static class FormatterCache<T>
+		private static class FormatterCache<T>
         {
             public static readonly IJsonFormatter<T> formatter;
 
-            static FormatterCache()
-            {
-                // Reduce IL2CPP code generate size(don't write long code in <T>)
-                formatter = (IJsonFormatter<T>)BuiltinResolverGetFormatterHelper.GetFormatter(typeof(T));
-            }
-        }
+            static FormatterCache() =>
+				// Reduce IL2CPP code generate size(don't write long code in <T>)
+				formatter = (IJsonFormatter<T>)BuiltinResolverGetFormatterHelper.GetFormatter(typeof(T));
+		}
 
         // used from PrimitiveObjectFormatter
         internal static class BuiltinResolverGetFormatterHelper
         {
-            static readonly Dictionary<Type, object> formatterMap = new Dictionary<Type, object>()
+			private static readonly Dictionary<Type, object> FormatterMap = new Dictionary<Type, object>()
             {
                 // Primitive
-                {typeof(Int16), Int16Formatter.Default},
-                {typeof(Int32), Int32Formatter.Default},
-                {typeof(Int64), Int64Formatter.Default},
-                {typeof(UInt16), UInt16Formatter.Default},
-                {typeof(UInt32), UInt32Formatter.Default},
-                {typeof(UInt64), UInt64Formatter.Default},
+                {typeof(short), Int16Formatter.Default},
+                {typeof(int), Int32Formatter.Default},
+                {typeof(long), Int64Formatter.Default},
+                {typeof(ushort), UInt16Formatter.Default},
+                {typeof(uint), UInt32Formatter.Default},
+                {typeof(ulong), UInt64Formatter.Default},
                 {typeof(float), SingleFormatter.Default},
                 {typeof(double), DoubleFormatter.Default},
                 {typeof(bool), BooleanFormatter.Default},
                 {typeof(byte), ByteFormatter.Default},
                 {typeof(sbyte), SByteFormatter.Default},
 
-                // Nulllable Primitive
-                {typeof(Nullable<Int16>), NullableInt16Formatter.Default},
-                {typeof(Nullable<Int32>), NullableInt32Formatter.Default},
-                {typeof(Nullable<Int64>), NullableInt64Formatter.Default},
-                {typeof(Nullable<UInt16>), NullableUInt16Formatter.Default},
-                {typeof(Nullable<UInt32>), NullableUInt32Formatter.Default},
-                {typeof(Nullable<UInt64>), NullableUInt64Formatter.Default},
-                {typeof(Nullable<float>), NullableSingleFormatter.Default},
-                {typeof(Nullable<double>), NullableDoubleFormatter.Default},
-                {typeof(Nullable<bool>), NullableBooleanFormatter.Default},
-                {typeof(Nullable<byte>), NullableByteFormatter.Default},
-                {typeof(Nullable<sbyte>), NullableSByteFormatter.Default},
+                // Nullable Primitive
+                {typeof(short?), NullableInt16Formatter.Default},
+                {typeof(int?), NullableInt32Formatter.Default},
+                {typeof(long?), NullableInt64Formatter.Default},
+                {typeof(ushort?), NullableUInt16Formatter.Default},
+                {typeof(uint?), NullableUInt32Formatter.Default},
+                {typeof(ulong?), NullableUInt64Formatter.Default},
+                {typeof(float?), NullableSingleFormatter.Default},
+                {typeof(double?), NullableDoubleFormatter.Default},
+                {typeof(bool?), NullableBooleanFormatter.Default},
+                {typeof(byte?), NullableByteFormatter.Default},
+                {typeof(sbyte?), NullableSByteFormatter.Default},
 
                 // StandardClassLibraryFormatter
 
@@ -113,12 +110,12 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
                 {typeof(byte[]), ByteArrayFormatter.Default},
 
                 // optimized primitive array formatter
-                {typeof(Int16[]), Int16ArrayFormatter.Default},
-                {typeof(Int32[]), Int32ArrayFormatter.Default},
-                {typeof(Int64[]), Int64ArrayFormatter.Default},
-                {typeof(UInt16[]), UInt16ArrayFormatter.Default},
-                {typeof(UInt32[]), UInt32ArrayFormatter.Default},
-                {typeof(UInt64[]), UInt64ArrayFormatter.Default},
+                {typeof(short[]), Int16ArrayFormatter.Default},
+                {typeof(int[]), Int32ArrayFormatter.Default},
+                {typeof(long[]), Int64ArrayFormatter.Default},
+                {typeof(ushort[]), UInt16ArrayFormatter.Default},
+                {typeof(uint[]), UInt32ArrayFormatter.Default},
+                {typeof(ulong[]), UInt64ArrayFormatter.Default},
                 {typeof(float[]), SingleArrayFormatter.Default},
                 {typeof(double[]), DoubleArrayFormatter.Default},
                 {typeof(bool[]), BooleanArrayFormatter.Default},
@@ -128,12 +125,12 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
                 {typeof(string[]), NullableStringArrayFormatter.Default},
 
                 // well known collections
-                {typeof(List<Int16>), new ListFormatter<Int16>()},
-                {typeof(List<Int32>), new ListFormatter<Int32>()},
-                {typeof(List<Int64>), new ListFormatter<Int64>()},
-                {typeof(List<UInt16>), new ListFormatter<UInt16>()},
-                {typeof(List<UInt32>), new ListFormatter<UInt32>()},
-                {typeof(List<UInt64>), new ListFormatter<UInt64>()},
+                {typeof(List<short>), new ListFormatter<short>()},
+                {typeof(List<int>), new ListFormatter<int>()},
+                {typeof(List<long>), new ListFormatter<long>()},
+                {typeof(List<ushort>), new ListFormatter<ushort>()},
+                {typeof(List<uint>), new ListFormatter<uint>()},
+                {typeof(List<ulong>), new ListFormatter<ulong>()},
                 {typeof(List<float>), new ListFormatter<float>()},
                 {typeof(List<double>), new ListFormatter<double>()},
                 {typeof(List<bool>), new ListFormatter<bool>()},
@@ -146,24 +143,15 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
                 { typeof(ArraySegment<byte>), ByteArraySegmentFormatter.Default },
                 { typeof(ArraySegment<byte>?),new StaticNullableFormatter<ArraySegment<byte>>(ByteArraySegmentFormatter.Default) },
 
-                {typeof(System.Numerics.BigInteger), BigIntegerFormatter.Default},
-                {typeof(System.Numerics.BigInteger?), new StaticNullableFormatter<System.Numerics.BigInteger>(BigIntegerFormatter.Default)},
-                {typeof(System.Numerics.Complex), ComplexFormatter.Default},
-                {typeof(System.Numerics.Complex?), new StaticNullableFormatter<System.Numerics.Complex>(ComplexFormatter.Default)},
-                {typeof(System.Dynamic.ExpandoObject), ExpandoObjectFormatter.Default },
-                {typeof(System.Threading.Tasks.Task), TaskUnitFormatter.Default},
+                {typeof(BigInteger), BigIntegerFormatter.Default},
+                {typeof(BigInteger?), new StaticNullableFormatter<BigInteger>(BigIntegerFormatter.Default)},
+                {typeof(Complex), ComplexFormatter.Default},
+                {typeof(Complex?), new StaticNullableFormatter<Complex>(ComplexFormatter.Default)},
+                {typeof(ExpandoObject), ExpandoObjectFormatter.Default },
+                {typeof(Task), TaskUnitFormatter.Default},
             };
 
-            internal static object GetFormatter(Type t)
-            {
-                object formatter;
-                if (formatterMap.TryGetValue(t, out formatter))
-                {
-                    return formatter;
-                }
-
-                return null;
-            }
-        }
+            internal static object GetFormatter(Type t) => FormatterMap.TryGetValue(t, out var formatter) ? formatter : null;
+		}
     }
 }

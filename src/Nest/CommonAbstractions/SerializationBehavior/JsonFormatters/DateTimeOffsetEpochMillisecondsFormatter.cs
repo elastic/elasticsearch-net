@@ -38,7 +38,7 @@ namespace Nest
 				case JsonToken.Number:
 				{
 					var millisecondsSinceEpoch = reader.ReadDouble();
-					var dateTimeOffset = DateTimeUtil.Epoch.AddMilliseconds(millisecondsSinceEpoch);
+					var dateTimeOffset = DateTimeUtil.UnixEpoch.AddMilliseconds(millisecondsSinceEpoch);
 					return dateTimeOffset;
 				}
 				default:

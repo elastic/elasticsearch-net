@@ -33,18 +33,16 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 {
     internal sealed class DynamicObjectTypeFallbackFormatter : IJsonFormatter<object>
     {
-        delegate void SerializeMethod(object dynamicFormatter, ref JsonWriter writer, object value, IJsonFormatterResolver formatterResolver);
+		private delegate void SerializeMethod(object dynamicFormatter, ref JsonWriter writer, object value, IJsonFormatterResolver formatterResolver);
 
-        readonly ThreadsafeTypeKeyHashTable<KeyValuePair<object, SerializeMethod>> serializers = new ThreadsafeTypeKeyHashTable<KeyValuePair<object, SerializeMethod>>();
+		private readonly ThreadsafeTypeKeyHashTable<KeyValuePair<object, SerializeMethod>> _serializers =
+			new ThreadsafeTypeKeyHashTable<KeyValuePair<object, SerializeMethod>>();
 
-        readonly IJsonFormatterResolver[] innerResolvers;
+		private readonly IJsonFormatterResolver[] _innerResolvers;
 
-        public DynamicObjectTypeFallbackFormatter(params IJsonFormatterResolver[] innerResolvers)
-        {
-            this.innerResolvers = innerResolvers;
-        }
+        public DynamicObjectTypeFallbackFormatter(params IJsonFormatterResolver[] innerResolvers) => _innerResolvers = innerResolvers;
 
-        public void Serialize(ref JsonWriter writer, object value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, object value, IJsonFormatterResolver formatterResolver)
         {
             if (value == null) { writer.WriteNull(); return; }
 
@@ -58,25 +56,22 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 return;
             }
 
-            KeyValuePair<object, SerializeMethod> formatterAndDelegate;
-            if (!serializers.TryGetValue(type, out formatterAndDelegate))
+			if (!_serializers.TryGetValue(type, out var formatterAndDelegate))
             {
-                lock (serializers)
+                lock (_serializers)
                 {
-                    if (!serializers.TryGetValue(type, out formatterAndDelegate))
+                    if (!_serializers.TryGetValue(type, out formatterAndDelegate))
                     {
                         object formatter = null;
-                        foreach (var innerResolver in innerResolvers)
+                        foreach (var innerResolver in _innerResolvers)
                         {
                             formatter = innerResolver.GetFormatterDynamic(type);
                             if (formatter != null) break;
                         }
                         if (formatter == null)
-                        {
-                            throw new FormatterNotRegisteredException(type.FullName + " is not registered in this resolver. resolvers:" + string.Join(", ", innerResolvers.Select(x => x.GetType().Name).ToArray()));
-                        }
+							throw new FormatterNotRegisteredException(type.FullName + " is not registered in this resolver. resolvers:" + string.Join(", ", _innerResolvers.Select(x => x.GetType().Name).ToArray()));
 
-                        var t = type;
+						var t = type;
                         {
                             var dm = new DynamicMethod("Serialize", null, new[] { typeof(object), typeof(JsonWriter).MakeByRefType(), typeof(object), typeof(IJsonFormatterResolver) }, type.Module, true);
                             var il = dm.GetILGenerator();
@@ -97,7 +92,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                             formatterAndDelegate = new KeyValuePair<object, SerializeMethod>(formatter, (SerializeMethod)dm.CreateDelegate(typeof(SerializeMethod)));
                         }
 
-                        serializers.TryAdd(t, formatterAndDelegate);
+                        _serializers.TryAdd(t, formatterAndDelegate);
                     }
                 }
             }
@@ -105,9 +100,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             formatterAndDelegate.Value(formatterAndDelegate.Key, ref writer, value, formatterResolver);
         }
 
-        public object Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-        {
-            return PrimitiveObjectFormatter.Default.Deserialize(ref reader, formatterResolver);
-        }
-    }
+        public object Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) =>
+			PrimitiveObjectFormatter.Default.Deserialize(ref reader, formatterResolver);
+	}
 }

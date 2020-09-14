@@ -37,117 +37,94 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
 	internal class AutomataDictionary : IEnumerable<KeyValuePair<string, int>>
     {
-        readonly AutomataNode root;
+        private readonly AutomataNode _root;
 
-        public AutomataDictionary()
-        {
-            root = new AutomataNode(0);
-        }
+        public AutomataDictionary() => _root = new AutomataNode(0);
 
-        public unsafe void Add(string str, int value)
-        {
-            Add(JsonWriter.GetEncodedPropertyNameWithoutQuotation(str), value);
-        }
+		public void Add(string str, int value) => Add(JsonWriter.GetEncodedPropertyNameWithoutQuotation(str), value);
 
-        public unsafe void Add(byte[] bytes, int value)
+		public unsafe void Add(byte[] bytes, int value)
         {
             fixed (byte* buffer = &bytes[0])
             {
-                var node = root;
+                var node = _root;
 
                 var p = buffer;
                 var rest = bytes.Length;
                 while (rest != 0)
-                {
-                    var key = AutomataKeyGen.GetKey(ref p, ref rest);
+				{
+					var key = AutomataKeyGen.GetKey(ref p, ref rest);
 
-                    if (rest == 0)
-                    {
-                        node = node.Add(key, value, Encoding.UTF8.GetString(bytes));
-                    }
-                    else
-                    {
-                        node = node.Add(key);
-                    }
-                }
+					node = rest == 0
+						? node.Add(key, value, Encoding.UTF8.GetString(bytes))
+						: node.Add(key);
+				}
             }
         }
 
-        public unsafe bool TryGetValue(ArraySegment<byte> bytes, out int value)
-        {
-            return TryGetValue(bytes.Array, bytes.Offset, bytes.Count, out value);
-        }
+        public bool TryGetValue(ArraySegment<byte> bytes, out int value) =>
+			TryGetValue(bytes.Array, bytes.Offset, bytes.Count, out value);
 
-        public unsafe bool TryGetValue(byte[] bytes, int offset, int count, out int value)
+		private unsafe bool TryGetValue(byte[] bytes, int offset, int count, out int value)
         {
             fixed (byte* p = &bytes[offset])
             {
                 var p1 = p;
-                var node = root;
+                var node = _root;
                 var rest = count;
 
                 while (rest != 0 && node != null)
-                {
-                    node = node.SearchNext(ref p1, ref rest);
-                }
+					node = node.SearchNext(ref p1, ref rest);
 
-                if (node == null)
+				if (node == null)
                 {
                     value = -1;
                     return false;
                 }
-                else
-                {
-                    value = node.Value;
-                    return true;
-                }
-            }
+
+				value = node.Value;
+				return true;
+			}
         }
 
         public bool TryGetValueSafe(ArraySegment<byte> key, out int value)
         {
-            var node = root;
+            var node = _root;
             var bytes = key.Array;
             var offset = key.Offset;
             var rest = key.Count;
 
             while (rest != 0 && node != null)
-            {
-                node = node.SearchNextSafe(bytes, ref offset, ref rest);
-            }
+				node = node.SearchNextSafe(bytes, ref offset, ref rest);
 
-            if (node == null)
+			if (node == null)
             {
                 value = -1;
                 return false;
             }
-            else
-            {
-                value = node.Value;
-                return true;
-            }
-        }
+
+			value = node.Value;
+			return true;
+		}
 
         // for debugging
         public override string ToString()
         {
             var sb = new StringBuilder();
-            ToStringCore(root.YieldChildren(), sb, 0);
+            ToStringCore(_root.YieldChildren(), sb, 0);
             return sb.ToString();
         }
 
-        static void ToStringCore(IEnumerable<AutomataNode> nexts, StringBuilder sb, int depth)
+		private static void ToStringCore(IEnumerable<AutomataNode> nexts, StringBuilder sb, int depth)
         {
             foreach (var item in nexts)
             {
                 if (depth != 0)
-                {
-                    sb.Append(' ', depth * 2);
-                }
-                sb.Append("[" + item.Key + "]");
+					sb.Append(' ', depth * 2);
+				sb.Append("[" + item.Key + "]");
                 if (item.Value != -1)
                 {
-                    sb.Append("(" + item.originalKey + ")");
+                    sb.Append("(" + item.OriginalKey + ")");
                     sb.Append(" = ");
                     sb.Append(item.Value);
                 }
@@ -156,111 +133,101 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public IEnumerator<KeyValuePair<string, int>> GetEnumerator()
-        {
-            return YieldCore(this.root.YieldChildren()).GetEnumerator();
-        }
+		public IEnumerator<KeyValuePair<string, int>> GetEnumerator() => YieldCore(_root.YieldChildren()).GetEnumerator();
 
-        static IEnumerable<KeyValuePair<string, int>> YieldCore(IEnumerable<AutomataNode> nexts)
+		private static IEnumerable<KeyValuePair<string, int>> YieldCore(IEnumerable<AutomataNode> nexts)
         {
             foreach (var item in nexts)
             {
-                if (item.Value != -1) yield return new KeyValuePair<string, int>(item.originalKey, item.Value);
+                if (item.Value != -1) yield return new KeyValuePair<string, int>(item.OriginalKey, item.Value);
                 foreach (var x in YieldCore(item.YieldChildren())) yield return x;
             }
         }
 
         // IL Emit
 
-        public void EmitMatch(ILGenerator il, LocalBuilder p, LocalBuilder rest, LocalBuilder key, Action<KeyValuePair<string, int>> onFound, Action onNotFound)
-        {
-            root.EmitSearchNext(il, p, rest, key, onFound, onNotFound);
-        }
+        public void EmitMatch(ILGenerator il, LocalBuilder p, LocalBuilder rest, LocalBuilder key, Action<KeyValuePair<string, int>> onFound, Action onNotFound) =>
+			_root.EmitSearchNext(il, p, rest, key, onFound, onNotFound);
 
-        class AutomataNode : IComparable<AutomataNode>
+		private class AutomataNode : IComparable<AutomataNode>
         {
-            static readonly AutomataNode[] emptyNodes = new AutomataNode[0];
-            static readonly ulong[] emptyKeys = new ulong[0];
+			private static readonly AutomataNode[] EmptyNodes = new AutomataNode[0];
+			private static readonly ulong[] EmptyKeys = new ulong[0];
 
-            public ulong Key;
+            public readonly ulong Key;
             public int Value;
-            public string originalKey;
+            public string OriginalKey;
 
-            AutomataNode[] nexts;
-            ulong[] nextKeys;
-            int count;
+			private AutomataNode[] _nexts;
+			private ulong[] _nextKeys;
+			private int _count;
 
-            public bool HasChildren { get { return count != 0; } }
+            public bool HasChildren => _count != 0;
 
-            public AutomataNode(ulong key)
+			public AutomataNode(ulong key)
             {
-                this.Key = key;
-                this.Value = -1;
-                this.nexts = emptyNodes;
-                this.nextKeys = emptyKeys;
-                this.count = 0;
-                this.originalKey = null;
+                Key = key;
+                Value = -1;
+                _nexts = EmptyNodes;
+                _nextKeys = EmptyKeys;
+                _count = 0;
+                OriginalKey = null;
             }
 
             public AutomataNode Add(ulong key)
             {
-                var index = Array.BinarySearch(nextKeys, 0, count, key);
+                var index = Array.BinarySearch(_nextKeys, 0, _count, key);
                 if (index < 0)
                 {
-                    if (nexts.Length == count)
+                    if (_nexts.Length == _count)
                     {
-                        Array.Resize<AutomataNode>(ref nexts, (count == 0) ? 4 : (count * 2));
-                        Array.Resize<ulong>(ref nextKeys, (count == 0) ? 4 : (count * 2));
+                        Array.Resize(ref _nexts, (_count == 0) ? 4 : (_count * 2));
+                        Array.Resize(ref _nextKeys, (_count == 0) ? 4 : (_count * 2));
                     }
-                    count++;
+                    _count++;
 
                     var nextNode = new AutomataNode(key);
-                    nexts[count - 1] = nextNode;
-                    nextKeys[count - 1] = key;
-                    Array.Sort(nexts, 0, count);
-                    Array.Sort(nextKeys, 0, count);
+                    _nexts[_count - 1] = nextNode;
+                    _nextKeys[_count - 1] = key;
+                    Array.Sort(_nexts, 0, _count);
+                    Array.Sort(_nextKeys, 0, _count);
                     return nextNode;
                 }
-                else
-                {
-                    return nexts[index];
-                }
-            }
+
+				return _nexts[index];
+			}
 
             public AutomataNode Add(ulong key, int value, string originalKey)
             {
                 var v = Add(key);
                 v.Value = value;
-                v.originalKey = originalKey;
+                v.OriginalKey = originalKey;
                 return v;
             }
 
             public unsafe AutomataNode SearchNext(ref byte* p, ref int rest)
             {
                 var key = AutomataKeyGen.GetKey(ref p, ref rest);
-                if (count < 4)
+                if (_count < 4)
                 {
                     // linear search
-                    for (int i = 0; i < count; i++)
+                    for (var i = 0; i < _count; i++)
                     {
-                        if (nextKeys[i] == key)
+                        if (_nextKeys[i] == key)
                         {
-                            return nexts[i];
+                            return _nexts[i];
                         }
                     }
                 }
                 else
                 {
                     // binary search
-                    var index = BinarySearch(nextKeys, 0, count, key);
+                    var index = BinarySearch(_nextKeys, 0, _count, key);
                     if (index >= 0)
                     {
-                        return nexts[index];
+                        return _nexts[index];
                     }
                 }
 
@@ -270,37 +237,37 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             public unsafe AutomataNode SearchNextSafe(byte[] p, ref int offset, ref int rest)
             {
                 var key = AutomataKeyGen.GetKeySafe(p, ref offset, ref rest);
-                if (count < 4)
+                if (_count < 4)
                 {
                     // linear search
-                    for (int i = 0; i < count; i++)
+                    for (var i = 0; i < _count; i++)
                     {
-                        if (nextKeys[i] == key)
+                        if (_nextKeys[i] == key)
                         {
-                            return nexts[i];
+                            return _nexts[i];
                         }
                     }
                 }
                 else
                 {
                     // binary search
-                    var index = BinarySearch(nextKeys, 0, count, key);
+                    var index = BinarySearch(_nextKeys, 0, _count, key);
                     if (index >= 0)
                     {
-                        return nexts[index];
+                        return _nexts[index];
                     }
                 }
 
                 return null;
             }
 
-            internal static int BinarySearch(ulong[] array, int index, int length, ulong value)
+			private static int BinarySearch(ulong[] array, int index, int length, ulong value)
             {
-                int lo = index;
-                int hi = index + length - 1;
+                var lo = index;
+                var hi = index + length - 1;
                 while (lo <= hi)
                 {
-                    int i = lo + ((hi - lo) >> 1);
+                    var i = lo + ((hi - lo) >> 1);
 
                     var arrayValue = array[i];
                     int order;
@@ -310,30 +277,21 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
                     if (order == 0) return i;
                     if (order < 0)
-                    {
-                        lo = i + 1;
-                    }
-                    else
-                    {
-                        hi = i - 1;
-                    }
-                }
+						lo = i + 1;
+					else
+						hi = i - 1;
+				}
 
                 return ~lo;
             }
 
-            public int CompareTo(AutomataNode other)
-            {
-                return this.Key.CompareTo(other.Key);
-            }
+            public int CompareTo(AutomataNode other) => Key.CompareTo(other.Key);
 
-            public IEnumerable<AutomataNode> YieldChildren()
+			public IEnumerable<AutomataNode> YieldChildren()
             {
-                for (int i = 0; i < count; i++)
-                {
-                    yield return nexts[i];
-                }
-            }
+                for (var i = 0; i < _count; i++)
+					yield return _nexts[i];
+			}
 
             // SearchNext(ref byte* p, ref int rest, ref ulong key)
             public void EmitSearchNext(ILGenerator il, LocalBuilder p, LocalBuilder rest, LocalBuilder key, Action<KeyValuePair<string, int>> onFound, Action onNotFound)
@@ -345,10 +303,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                 il.EmitStloc(key);
 
                 // match children.
-                EmitSearchNextCore(il, p, rest, key, onFound, onNotFound, nexts, count);
+                EmitSearchNextCore(il, p, rest, key, onFound, onNotFound, _nexts, _count);
             }
 
-            static void EmitSearchNextCore(ILGenerator il, LocalBuilder p, LocalBuilder rest, LocalBuilder key, Action<KeyValuePair<string, int>> onFound, Action onNotFound, AutomataNode[] nexts, int count)
+			private static void EmitSearchNextCore(ILGenerator il, LocalBuilder p, LocalBuilder rest, LocalBuilder key, Action<KeyValuePair<string, int>> onFound, Action onNotFound, AutomataNode[] nexts, int count)
             {
                 if (count < 4)
                 {
@@ -361,18 +319,13 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                     {
                         il.EmitLdloc(rest);
                         if (childrenExists.Length != 0 && valueExists.Length == 0)
-                        {
-
-                            il.Emit(OpCodes.Brfalse, gotoNotFound); // if(rest == 0)
-                        }
-                        else
-                        {
-                            il.Emit(OpCodes.Brtrue, gotoSearchNext); // if(rest != 0)
-                        }
-                    }
+							il.Emit(OpCodes.Brfalse, gotoNotFound); // if(rest == 0)
+						else
+							il.Emit(OpCodes.Brtrue, gotoSearchNext); // if(rest != 0)
+					}
                     {
                         var ifValueNexts = Enumerable.Range(0, Math.Max(valueExists.Length - 1, 0)).Select(_ => il.DefineLabel()).ToArray();
-                        for (int i = 0; i < valueExists.Length; i++)
+                        for (var i = 0; i < valueExists.Length; i++)
                         {
                             var notFoundLabel = il.DefineLabel();
                             if (i != 0)
@@ -384,32 +337,26 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                             il.EmitULong(valueExists[i].Key);
                             il.Emit(OpCodes.Bne_Un, notFoundLabel);
                             // found
-                            onFound(new KeyValuePair<string, int>(valueExists[i].originalKey, valueExists[i].Value));
+                            onFound(new KeyValuePair<string, int>(valueExists[i].OriginalKey, valueExists[i].Value));
 
                             // notfound
                             il.MarkLabel(notFoundLabel);
                             if (i != valueExists.Length - 1)
-                            {
-                                il.Emit(OpCodes.Br, ifValueNexts[i]);
-                            }
-                            else
-                            {
-                                onNotFound();
-                            }
-                        }
+								il.Emit(OpCodes.Br, ifValueNexts[i]);
+							else
+								onNotFound();
+						}
                     }
 
                     il.MarkLabel(gotoSearchNext);
                     var ifRecNext = Enumerable.Range(0, Math.Max(childrenExists.Length - 1, 0)).Select(_ => il.DefineLabel()).ToArray();
-                    for (int i = 0; i < childrenExists.Length; i++)
+                    for (var i = 0; i < childrenExists.Length; i++)
                     {
                         var notFoundLabel = il.DefineLabel();
                         if (i != 0)
-                        {
-                            il.MarkLabel(ifRecNext[i - 1]);
-                        }
+							il.MarkLabel(ifRecNext[i - 1]);
 
-                        il.EmitLdloc(key);
+						il.EmitLdloc(key);
                         il.EmitULong(childrenExists[i].Key);
                         il.Emit(OpCodes.Bne_Un, notFoundLabel);
                         // found
@@ -417,14 +364,10 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                         // notfound
                         il.MarkLabel(notFoundLabel);
                         if (i != childrenExists.Length - 1)
-                        {
-                            il.Emit(OpCodes.Br, ifRecNext[i]);
-                        }
-                        else
-                        {
-                            onNotFound();
-                        }
-                    }
+							il.Emit(OpCodes.Br, ifRecNext[i]);
+						else
+							onNotFound();
+					}
 
                     il.MarkLabel(gotoNotFound);
                     onNotFound();
@@ -455,10 +398,8 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
 	internal static class AutomataKeyGen
     {
-        public static readonly MethodInfo GetKeyMethod = typeof(AutomataKeyGen).GetRuntimeMethod("GetKey", new[] { typeof(byte*).MakeByRefType(), typeof(int).MakeByRefType() });
-        // public static readonly MethodInfo GetKeySafeMethod = typeof(AutomataKeyGen).GetRuntimeMethod("GetKeySafe", new[] { typeof(byte[]), typeof(int).MakeByRefType(), typeof(int).MakeByRefType() });
-
-        public static unsafe ulong GetKey(ref byte* p, ref int rest)
+        public static readonly MethodInfo GetKeyMethod = typeof(AutomataKeyGen).GetRuntimeMethod(nameof(GetKey), new[] { typeof(byte*).MakeByRefType(), typeof(int).MakeByRefType() });
+		public static unsafe ulong GetKey(ref byte* p, ref int rest)
         {
             int readSize;
             ulong key;
@@ -610,75 +551,73 @@ namespace Elasticsearch.Net.Utf8Json.Internal
                     return key;
                 }
             }
-            else
-            {
-                unchecked
-                {
-                    if (rest >= 8)
-                    {
-                        key = (ulong)bytes[offset] << 56 | (ulong)bytes[offset + 1] << 48 | (ulong)bytes[offset + 2] << 40 | (ulong)bytes[offset + 3] << 32
-                            | (ulong)bytes[offset + 4] << 24 | (ulong)bytes[offset + 5] << 16 | (ulong)bytes[offset + 6] << 8 | (ulong)bytes[offset + 7];
-                        readSize = 8;
-                    }
-                    else
-                    {
-                        switch (rest)
-                        {
-                            case 1:
-                                {
-                                    key = bytes[offset];
-                                    readSize = 1;
-                                    break;
-                                }
-                            case 2:
-                                {
-                                    key = (ulong)bytes[offset] << 8 | (ulong)bytes[offset + 1] << 0;
-                                    readSize = 2;
-                                    break;
-                                }
-                            case 3:
-                                {
-                                    key = (ulong)bytes[offset] << 16 | (ulong)bytes[offset + 1] << 8 | (ulong)bytes[offset + 2] << 0;
-                                    readSize = 3;
-                                    break;
-                                }
-                            case 4:
-                                {
-                                    key = (ulong)bytes[offset] << 24 | (ulong)bytes[offset + 1] << 16 | (ulong)bytes[offset + 2] << 8 | (ulong)bytes[offset + 3] << 0;
-                                    readSize = 4;
-                                    break;
-                                }
-                            case 5:
-                                {
-                                    key = (ulong)bytes[offset] << 32 | (ulong)bytes[offset + 1] << 24 | (ulong)bytes[offset + 2] << 16 | (ulong)bytes[offset + 3] << 8
-                                        | (ulong)bytes[offset + 4] << 0;
-                                    readSize = 5;
-                                    break;
-                                }
-                            case 6:
-                                {
-                                    key = (ulong)bytes[offset] << 40 | (ulong)bytes[offset + 1] << 32 | (ulong)bytes[offset + 2] << 24 | (ulong)bytes[offset + 3] << 16
-                                        | (ulong)bytes[offset + 4] << 8 | (ulong)bytes[offset + 5] << 0;
-                                    readSize = 6;
-                                    break;
-                                }
-                            case 7:
-                                {
-                                    key = (ulong)bytes[offset] << 48 | (ulong)bytes[offset + 1] << 40 | (ulong)bytes[offset + 2] << 32 | (ulong)bytes[offset + 3] << 24
-                                        | (ulong)bytes[offset + 4] << 16 | (ulong)bytes[offset + 5] << 8 | (ulong)bytes[offset + 6] << 0;
-                                    readSize = 7;
-                                    break;
-                                }
-                            default:
-                                throw new InvalidOperationException("Not Supported Length");
-                        }
-                    }
 
-                    offset += readSize;
-                    rest -= readSize;
-                    return key;
-                }
-            }
-        }
+			unchecked
+			{
+				if (rest >= 8)
+				{
+					key = (ulong)bytes[offset] << 56 | (ulong)bytes[offset + 1] << 48 | (ulong)bytes[offset + 2] << 40 | (ulong)bytes[offset + 3] << 32
+						| (ulong)bytes[offset + 4] << 24 | (ulong)bytes[offset + 5] << 16 | (ulong)bytes[offset + 6] << 8 | (ulong)bytes[offset + 7];
+					readSize = 8;
+				}
+				else
+				{
+					switch (rest)
+					{
+						case 1:
+						{
+							key = bytes[offset];
+							readSize = 1;
+							break;
+						}
+						case 2:
+						{
+							key = (ulong)bytes[offset] << 8 | (ulong)bytes[offset + 1] << 0;
+							readSize = 2;
+							break;
+						}
+						case 3:
+						{
+							key = (ulong)bytes[offset] << 16 | (ulong)bytes[offset + 1] << 8 | (ulong)bytes[offset + 2] << 0;
+							readSize = 3;
+							break;
+						}
+						case 4:
+						{
+							key = (ulong)bytes[offset] << 24 | (ulong)bytes[offset + 1] << 16 | (ulong)bytes[offset + 2] << 8 | (ulong)bytes[offset + 3] << 0;
+							readSize = 4;
+							break;
+						}
+						case 5:
+						{
+							key = (ulong)bytes[offset] << 32 | (ulong)bytes[offset + 1] << 24 | (ulong)bytes[offset + 2] << 16 | (ulong)bytes[offset + 3] << 8
+								| (ulong)bytes[offset + 4] << 0;
+							readSize = 5;
+							break;
+						}
+						case 6:
+						{
+							key = (ulong)bytes[offset] << 40 | (ulong)bytes[offset + 1] << 32 | (ulong)bytes[offset + 2] << 24 | (ulong)bytes[offset + 3] << 16
+								| (ulong)bytes[offset + 4] << 8 | (ulong)bytes[offset + 5] << 0;
+							readSize = 6;
+							break;
+						}
+						case 7:
+						{
+							key = (ulong)bytes[offset] << 48 | (ulong)bytes[offset + 1] << 40 | (ulong)bytes[offset + 2] << 32 | (ulong)bytes[offset + 3] << 24
+								| (ulong)bytes[offset + 4] << 16 | (ulong)bytes[offset + 5] << 8 | (ulong)bytes[offset + 6] << 0;
+							readSize = 7;
+							break;
+						}
+						default:
+							throw new InvalidOperationException("Not Supported Length");
+					}
+				}
+
+				offset += readSize;
+				rest -= readSize;
+				return key;
+			}
+		}
     }
 }

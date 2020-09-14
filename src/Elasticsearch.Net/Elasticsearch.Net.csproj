@@ -64,15 +64,15 @@
     </None>
     <None Update="Utf8Json\Formatters\ValueTupleFormatter.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Utf8Json\ValueTupleFormatter.cs</LastGenOutput>
+      <LastGenOutput>ValueTupleFormatter.cs</LastGenOutput>
     </None>
     <None Update="Utf8Json\Formatters\TupleFormatter.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Utf8Json\TupleFormatter.cs</LastGenOutput>
+      <LastGenOutput>TupleFormatter.cs</LastGenOutput>
     </None>
     <None Update="Utf8Json\Internal\UnsafeMemory.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Utf8Json\UnsafeMemory.cs</LastGenOutput>
+      <LastGenOutput>UnsafeMemory.cs</LastGenOutput>
     </None>
     <Compile Update="Utf8Json\Formatters\PrimitiveFormatter.cs">
       <DesignTime>True</DesignTime>
@@ -82,17 +82,17 @@
     <Compile Update="Utf8Json\Formatters\TupleFormatter.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Utf8Json\TupleFormatter.tt</DependentUpon>
+      <DependentUpon>TupleFormatter.tt</DependentUpon>
     </Compile>
     <Compile Update="Utf8Json\Formatters\ValueTupleFormatter.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Utf8Json\ValueTupleFormatter.tt</DependentUpon>
+      <DependentUpon>ValueTupleFormatter.tt</DependentUpon>
     </Compile>
     <Compile Update="Utf8Json\Internal\UnsafeMemory.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Utf8Json\UnsafeMemory.tt</DependentUpon>
+      <DependentUpon>UnsafeMemory.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

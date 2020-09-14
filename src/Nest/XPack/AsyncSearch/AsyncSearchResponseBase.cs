@@ -46,7 +46,7 @@ namespace Nest
 		public long StartTimeInMilliseconds { get; internal set; }
 
 		[IgnoreDataMember]
-		public DateTimeOffset StartTime => DateTimeUtil.Epoch.AddMilliseconds(StartTimeInMilliseconds);
+		public DateTimeOffset StartTime => DateTimeUtil.UnixEpoch.AddMilliseconds(StartTimeInMilliseconds);
 
 		[DataMember(Name = "is_running")]
 		public bool IsRunning { get; internal set; }
@@ -55,7 +55,7 @@ namespace Nest
 		public long ExpirationTimeInMilliseconds { get; internal set; }
 
 		[IgnoreDataMember]
-		public DateTimeOffset ExpirationTime => DateTimeUtil.Epoch.AddMilliseconds(ExpirationTimeInMilliseconds);
+		public DateTimeOffset ExpirationTime => DateTimeUtil.UnixEpoch.AddMilliseconds(ExpirationTimeInMilliseconds);
 
 		[DataMember(Name = "response")]
 		public AsyncSearch<TDocument> Response { get; internal set; }

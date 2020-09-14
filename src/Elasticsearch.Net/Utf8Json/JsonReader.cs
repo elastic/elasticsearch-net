@@ -34,13 +34,12 @@ namespace Elasticsearch.Net.Utf8Json
 
 	internal struct JsonReader
     {
-        static readonly ArraySegment<byte> nullTokenSegment = new ArraySegment<byte>(new byte[] { 110, 117, 108, 108 }, 0, 4);
-        static readonly byte[] bom = Encoding.UTF8.GetPreamble();
+		private static readonly ArraySegment<byte> NullTokenSegment = new ArraySegment<byte>(new byte[] { 110, 117, 108, 108 }, 0, 4);
+		private static readonly byte[] Bom = Encoding.UTF8.GetPreamble();
 
-
-        readonly byte[] bytes;
-        int offset;
-		int initialOffset;
+		private readonly byte[] _bytes;
+		private int _offset;
+		private readonly int _initialOffset;
 
         public JsonReader(byte[] bytes)
             : this(bytes, 0)
@@ -50,25 +49,23 @@ namespace Elasticsearch.Net.Utf8Json
 
         public JsonReader(byte[] bytes, int offset)
         {
-            this.bytes = bytes;
-            this.offset = offset;
+            _bytes = bytes;
+            _offset = offset;
 
             // skip bom
             if (bytes.Length >= 3)
             {
-                if (bytes[offset] == bom[0] && bytes[offset + 1] == bom[1] && bytes[offset + 2] == bom[2])
-                {
-                    this.offset = offset += 3;
-                }
-            }
+                if (bytes[offset] == Bom[0] && bytes[offset + 1] == Bom[1] && bytes[offset + 2] == Bom[2])
+					_offset = offset += 3;
+			}
 
-			this.initialOffset = offset;
+			_initialOffset = offset;
         }
 
-        JsonParsingException CreateParsingException(string expected)
+		private JsonParsingException CreateParsingException(string expected)
         {
-            var actual = ((char)bytes[offset]).ToString();
-            var pos = offset;
+            var actual = ((char)_bytes[_offset]).ToString();
+            var pos = _offset;
 
             try
             {
@@ -97,58 +94,40 @@ namespace Elasticsearch.Net.Utf8Json
             }
             catch { }
 
-            return new JsonParsingException("expected:'" + expected + "', actual:'" + actual + "', at offset:" + pos, bytes, pos, offset, actual);
+            return new JsonParsingException("expected:'" + expected + "', actual:'" + actual + "', at offset:" + pos, _bytes, pos, _offset, actual);
         }
 
-        JsonParsingException CreateParsingExceptionMessage(string message)
+		private JsonParsingException CreateParsingExceptionMessage(string message)
         {
-            var actual = ((char)bytes[offset]).ToString();
-            var pos = offset;
+            var actual = ((char)_bytes[_offset]).ToString();
+            var pos = _offset;
 
-            return new JsonParsingException(message, bytes, pos, pos, actual);
+            return new JsonParsingException(message, _bytes, pos, pos, actual);
         }
 
-        bool IsInRange
-        {
-            get
-            {
-                return offset < bytes.Length;
-            }
-        }
+		private bool IsInRange => _offset < _bytes.Length;
 
 		/// <summary>
 		/// Advances the offset by a specified amount
 		/// </summary>
 		/// <param name="offset">The amount to offset by</param>
-        public void AdvanceOffset(int offset)
-        {
-            this.offset += offset;
-        }
+        public void AdvanceOffset(int offset) => _offset += offset;
 
 		/// <summary>
 		/// Resets the offset of the reader back to the original offset
 		/// </summary>
-		public void ResetOffset()
-        {
-            this.offset = this.initialOffset;
-        }
+		public void ResetOffset() => _offset = _initialOffset;
 
-        public byte[] GetBufferUnsafe()
-        {
-            return bytes;
-        }
+		public byte[] GetBufferUnsafe() => _bytes;
 
-        public int GetCurrentOffsetUnsafe()
-        {
-            return offset;
-        }
+		public int GetCurrentOffsetUnsafe() => _offset;
 
-        public JsonToken GetCurrentJsonToken()
+		public JsonToken GetCurrentJsonToken()
         {
             SkipWhiteSpace();
-            if (offset < bytes.Length)
+            if (_offset < _bytes.Length)
             {
-                var c = bytes[offset];
+                var c = _bytes[_offset];
                 switch (c)
                 {
                     case (byte)'{': return JsonToken.BeginObject;
@@ -280,19 +259,17 @@ namespace Elasticsearch.Net.Utf8Json
                         return JsonToken.None;
                 }
             }
-            else
-            {
-                return JsonToken.None;
-            }
-        }
+
+			return JsonToken.None;
+		}
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SkipWhiteSpace()
         {
             // eliminate array bound check
-            for (int i = offset; i < bytes.Length; i++)
+            for (var i = _offset; i < _bytes.Length; i++)
             {
-                switch (bytes[i])
+                switch (_bytes[i])
                 {
                     case 0x20: // Space
                     case 0x09: // Horizontal tab
@@ -300,7 +277,7 @@ namespace Elasticsearch.Net.Utf8Json
                     case 0x0D: // Carriage return
                         continue;
                     case (byte)'/': // BeginComment
-                        i = ReadComment(bytes, i);
+                        i = ReadComment(_bytes, i);
                         continue;
                     // optimize skip jumptable
                     case 0:
@@ -347,47 +324,43 @@ namespace Elasticsearch.Net.Utf8Json
                     case 45:
                     case 46:
                     default:
-                        offset = i;
+                        _offset = i;
                         return; // end
                 }
             }
 
-            offset = bytes.Length;
+            _offset = _bytes.Length;
         }
 
         public bool ReadIsNull()
         {
             SkipWhiteSpace();
-            if (IsInRange && bytes[offset] == 'n')
+            if (IsInRange && _bytes[_offset] == 'n')
             {
-                if (bytes[offset + 1] != 'u') goto ERROR;
-                if (bytes[offset + 2] != 'l') goto ERROR;
-                if (bytes[offset + 3] != 'l') goto ERROR;
-                offset += 4;
+                if (_bytes[_offset + 1] != 'u') goto ERROR;
+                if (_bytes[_offset + 2] != 'l') goto ERROR;
+                if (_bytes[_offset + 3] != 'l') goto ERROR;
+                _offset += 4;
                 return true;
             }
-            else
-            {
-                return false;
-            }
 
-            ERROR:
+			return false;
+
+			ERROR:
             throw CreateParsingException("null");
         }
 
         public bool ReadIsBeginArray()
         {
             SkipWhiteSpace();
-            if (IsInRange && bytes[offset] == '[')
+            if (IsInRange && _bytes[_offset] == '[')
             {
-                offset += 1;
+                _offset += 1;
                 return true;
             }
-            else
-            {
-                return false;
-            }
-        }
+
+			return false;
+		}
 
         public void ReadIsBeginArrayWithVerify()
         {
@@ -397,16 +370,14 @@ namespace Elasticsearch.Net.Utf8Json
         public bool ReadIsEndArray()
         {
             SkipWhiteSpace();
-            if (IsInRange && bytes[offset] == ']')
+            if (IsInRange && _bytes[_offset] == ']')
             {
-                offset += 1;
+                _offset += 1;
                 return true;
             }
-            else
-            {
-                return false;
-            }
-        }
+
+			return false;
+		}
 
         public void ReadIsEndArrayWithVerify()
         {
@@ -416,20 +387,17 @@ namespace Elasticsearch.Net.Utf8Json
         public bool ReadIsEndArrayWithSkipValueSeparator(ref int count)
         {
             SkipWhiteSpace();
-            if (IsInRange && bytes[offset] == ']')
+            if (IsInRange && _bytes[_offset] == ']')
             {
-                offset += 1;
+                _offset += 1;
                 return true;
             }
-            else
-            {
-                if (count++ != 0)
-                {
-                    ReadIsValueSeparatorWithVerify();
-                }
-                return false;
-            }
-        }
+
+			if (count++ != 0)
+				ReadIsValueSeparatorWithVerify();
+
+			return false;
+		}
 
         /// <summary>
         /// Convinient pattern of ReadIsBeginArrayWithVerify + while(!ReadIsEndArrayWithSkipValueSeparator)
@@ -440,21 +408,15 @@ namespace Elasticsearch.Net.Utf8Json
             {
                 ReadIsBeginArrayWithVerify();
                 if (ReadIsEndArray())
-                {
-                    return false;
-                }
-            }
+					return false;
+			}
             else
-            {
-                if (ReadIsEndArray())
-                {
-                    return false;
-                }
-                else
-                {
-                    ReadIsValueSeparatorWithVerify();
-                }
-            }
+			{
+				if (ReadIsEndArray())
+					return false;
+
+				ReadIsValueSeparatorWithVerify();
+			}
 
             count++;
             return true;
@@ -463,16 +425,14 @@ namespace Elasticsearch.Net.Utf8Json
         public bool ReadIsBeginObject()
         {
             SkipWhiteSpace();
-            if (IsInRange && bytes[offset] == '{')
+            if (IsInRange && _bytes[_offset] == '{')
             {
-                offset += 1;
+                _offset += 1;
                 return true;
             }
-            else
-            {
-                return false;
-            }
-        }
+
+			return false;
+		}
 
         public void ReadIsBeginObjectWithVerify()
         {
@@ -482,16 +442,14 @@ namespace Elasticsearch.Net.Utf8Json
         public bool ReadIsEndObject()
         {
             SkipWhiteSpace();
-            if (IsInRange && bytes[offset] == '}')
+            if (IsInRange && _bytes[_offset] == '}')
             {
-                offset += 1;
+                _offset += 1;
                 return true;
             }
-            else
-            {
-                return false;
-            }
-        }
+
+			return false;
+		}
         public void ReadIsEndObjectWithVerify()
         {
             if (!ReadIsEndObject()) throw CreateParsingException("}");
@@ -500,20 +458,17 @@ namespace Elasticsearch.Net.Utf8Json
         public bool ReadIsEndObjectWithSkipValueSeparator(ref int count)
         {
             SkipWhiteSpace();
-            if (IsInRange && bytes[offset] == '}')
+            if (IsInRange && _bytes[_offset] == '}')
             {
-                offset += 1;
+                _offset += 1;
                 return true;
             }
-            else
-            {
-                if (count++ != 0)
-                {
-                    ReadIsValueSeparatorWithVerify();
-                }
-                return false;
-            }
-        }
+
+			if (count++ != 0)
+				ReadIsValueSeparatorWithVerify();
+
+			return false;
+		}
 
         /// <summary>
         /// Convinient pattern of ReadIsBeginObjectWithVerify + while(!ReadIsEndObjectWithSkipValueSeparator)
@@ -524,21 +479,15 @@ namespace Elasticsearch.Net.Utf8Json
             {
                 ReadIsBeginObjectWithVerify();
                 if (ReadIsEndObject())
-                {
-                    return false;
-                }
-            }
+					return false;
+			}
             else
-            {
-                if (ReadIsEndObject())
-                {
-                    return false;
-                }
-                else
-                {
-                    ReadIsValueSeparatorWithVerify();
-                }
-            }
+			{
+				if (ReadIsEndObject())
+					return false;
+
+				ReadIsValueSeparatorWithVerify();
+			}
 
             count++;
             return true;
@@ -547,16 +496,14 @@ namespace Elasticsearch.Net.Utf8Json
         public bool ReadIsValueSeparator()
         {
             SkipWhiteSpace();
-            if (IsInRange && bytes[offset] == ',')
+            if (IsInRange && _bytes[_offset] == ',')
             {
-                offset += 1;
+                _offset += 1;
                 return true;
             }
-            else
-            {
-                return false;
-            }
-        }
+
+			return false;
+		}
 
         public void ReadIsValueSeparatorWithVerify()
         {
@@ -566,23 +513,21 @@ namespace Elasticsearch.Net.Utf8Json
         public bool ReadIsNameSeparator()
         {
             SkipWhiteSpace();
-            if (IsInRange && bytes[offset] == ':')
+            if (IsInRange && _bytes[_offset] == ':')
             {
-                offset += 1;
+                _offset += 1;
                 return true;
             }
-            else
-            {
-                return false;
-            }
-        }
+
+			return false;
+		}
 
         public void ReadIsNameSeparatorWithVerify()
         {
             if (!ReadIsNameSeparator()) throw CreateParsingException(":");
         }
 
-        void ReadStringSegmentCore(out byte[] resultBytes, out int resultOffset, out int resultLength)
+		private void ReadStringSegmentCore(out byte[] resultBytes, out int resultOffset, out int resultLength)
         {
             // SkipWhiteSpace is already called from IsNull
 
@@ -591,24 +536,24 @@ namespace Elasticsearch.Net.Utf8Json
             char[] codePointStringBuffer = null;
             var codePointStringOffet = 0;
 
-            if (bytes[offset] != '\"') throw CreateParsingException("String Begin Token");
-            offset++;
+            if (_bytes[_offset] != '\"') throw CreateParsingException("String Begin Token");
+            _offset++;
 
-            var from = offset;
+            var from = _offset;
 
             // eliminate array-bound check
-            for (int i = offset; i < bytes.Length; i++)
+            for (var i = _offset; i < _bytes.Length; i++)
             {
                 byte escapeCharacter = 0;
-                switch (bytes[i])
+                switch (_bytes[i])
                 {
                     case (byte)'\\': // escape character
-                        switch ((char)bytes[i + 1])
+                        switch ((char)_bytes[i + 1])
                         {
                             case '"':
                             case '\\':
                             case '/':
-                                escapeCharacter = bytes[i + 1];
+                                escapeCharacter = _bytes[i + 1];
                                 goto COPY;
                             case 'b':
                                 escapeCharacter = (byte)'\b';
@@ -626,38 +571,36 @@ namespace Elasticsearch.Net.Utf8Json
                                 escapeCharacter = (byte)'\t';
                                 goto COPY;
                             case 'u':
-                                if (codePointStringBuffer == null) codePointStringBuffer = StringBuilderCache.GetCodePointStringBuffer();
+                                codePointStringBuffer ??= StringBuilderCache.GetCodePointStringBuffer();
 
                                 if (codePointStringOffet == 0)
                                 {
-                                    if (builder == null) builder = StringBuilderCache.GetBuffer();
+                                    builder ??= StringBuilderCache.GetBuffer();
 
                                     var copyCount = i - from;
                                     BinaryUtil.EnsureCapacity(ref builder, builderOffset, copyCount + 1); // require + 1
-                                    Buffer.BlockCopy(bytes, from, builder, builderOffset, copyCount);
+                                    Buffer.BlockCopy(_bytes, from, builder, builderOffset, copyCount);
                                     builderOffset += copyCount;
                                 }
 
                                 if (codePointStringBuffer.Length == codePointStringOffet)
-                                {
-                                    Array.Resize(ref codePointStringBuffer, codePointStringBuffer.Length * 2);
-                                }
+									Array.Resize(ref codePointStringBuffer, codePointStringBuffer.Length * 2);
 
-                                var a = (char)bytes[i + 2];
-                                var b = (char)bytes[i + 3];
-                                var c = (char)bytes[i + 4];
-                                var d = (char)bytes[i + 5];
+								var a = (char)_bytes[i + 2];
+                                var b = (char)_bytes[i + 3];
+                                var c = (char)_bytes[i + 4];
+                                var d = (char)_bytes[i + 5];
                                 var codepoint = GetCodePoint(a, b, c, d);
                                 codePointStringBuffer[codePointStringOffet++] = (char)codepoint;
                                 i += 5;
-                                offset += 6;
-                                from = offset;
+                                _offset += 6;
+                                from = _offset;
                                 continue;
                             default:
                                 throw CreateParsingExceptionMessage("Bad JSON escape.");
                         }
                     case (byte)'"': // endtoken
-                        offset++;
+                        _offset++;
                         goto END;
                     default: // string
                         if (codePointStringOffet != 0)
@@ -667,7 +610,7 @@ namespace Elasticsearch.Net.Utf8Json
                             builderOffset += StringEncoding.UTF8.GetBytes(codePointStringBuffer, 0, codePointStringOffet, builder, builderOffset);
                             codePointStringOffet = 0;
                         }
-                        offset++;
+                        _offset++;
                         continue;
                 }
 
@@ -683,12 +626,12 @@ namespace Elasticsearch.Net.Utf8Json
 
                     var copyCount = i - from;
                     BinaryUtil.EnsureCapacity(ref builder, builderOffset, copyCount + 1); // require + 1!
-                    Buffer.BlockCopy(bytes, from, builder, builderOffset, copyCount);
+                    Buffer.BlockCopy(_bytes, from, builder, builderOffset, copyCount);
                     builderOffset += copyCount;
                     builder[builderOffset++] = escapeCharacter;
                     i += 1;
-                    offset += 2;
-                    from = offset;
+                    _offset += 2;
+                    from = _offset;
                 }
             }
 
@@ -700,9 +643,9 @@ namespace Elasticsearch.Net.Utf8Json
             END:
             if (builderOffset == 0 && codePointStringOffet == 0) // no escape
             {
-                resultBytes = bytes;
+                resultBytes = _bytes;
                 resultOffset = from;
-                resultLength = offset - 1 - from; // skip last quote
+                resultLength = _offset - 1 - from; // skip last quote
             }
             else
             {
@@ -714,9 +657,9 @@ namespace Elasticsearch.Net.Utf8Json
                     codePointStringOffet = 0;
                 }
 
-                var copyCount = offset - from - 1;
+                var copyCount = _offset - from - 1;
                 BinaryUtil.EnsureCapacity(ref builder, builderOffset, copyCount);
-                Buffer.BlockCopy(bytes, from, builder, builderOffset, copyCount);
+                Buffer.BlockCopy(_bytes, from, builder, builderOffset, copyCount);
                 builderOffset += copyCount;
 
                 resultBytes = builder;
@@ -726,37 +669,29 @@ namespace Elasticsearch.Net.Utf8Json
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static int GetCodePoint(char a, char b, char c, char d)
-        {
-            return (((((ToNumber(a) * 16) + ToNumber(b)) * 16) + ToNumber(c)) * 16) + ToNumber(d);
-        }
+		private static int GetCodePoint(char a, char b, char c, char d) =>
+			(((((ToNumber(a) * 16) + ToNumber(b)) * 16) + ToNumber(c)) * 16) + ToNumber(d);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static int ToNumber(char x)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private static int ToNumber(char x)
         {
             if ('0' <= x && x <= '9')
-            {
-                return x - '0';
-            }
-            else if ('a' <= x && x <= 'f')
-            {
-                return x - 'a' + 10;
-            }
-            else if ('A' <= x && x <= 'F')
-            {
-                return x - 'A' + 10;
-            }
-            throw new JsonParsingException("Invalid Character" + x);
+				return x - '0';
+
+			if ('a' <= x && x <= 'f')
+				return x - 'a' + 10;
+
+			if ('A' <= x && x <= 'F')
+				return x - 'A' + 10;
+
+			throw new JsonParsingException("Invalid Character" + x);
         }
 
         public ArraySegment<byte> ReadStringSegmentUnsafe()
         {
-            if (ReadIsNull()) return nullTokenSegment;
+            if (ReadIsNull()) return NullTokenSegment;
 
-            byte[] bytes;
-            int offset;
-            int length;
-            ReadStringSegmentCore(out bytes, out offset, out length);
+			ReadStringSegmentCore(out var bytes, out var offset, out var length);
             return new ArraySegment<byte>(bytes, offset, length);
         }
 
@@ -764,12 +699,8 @@ namespace Elasticsearch.Net.Utf8Json
         {
             if (ReadIsNull()) return null;
 
-            byte[] bytes;
-            int offset;
-            int length;
-            ReadStringSegmentCore(out bytes, out offset, out length);
-
-            return Encoding.UTF8.GetString(bytes, offset, length);
+			ReadStringSegmentCore(out var bytes, out var offset, out var length);
+			return Encoding.UTF8.GetString(bytes, offset, length);
         }
 
         /// <summary>ReadString + ReadIsNameSeparatorWithVerify</summary>
@@ -783,38 +714,32 @@ namespace Elasticsearch.Net.Utf8Json
         /// <summary>Get raw string-span(do not unescape)</summary>
         public ArraySegment<byte> ReadStringSegmentRaw()
         {
-            ArraySegment<byte> key = default(ArraySegment<byte>);
+            ArraySegment<byte> key;
             if (ReadIsNull())
-            {
-                key = nullTokenSegment;
-            }
-            else
+				key = NullTokenSegment;
+			else
             {
                 // SkipWhiteSpace is already called from IsNull
-                if (bytes[offset++] != '\"') throw CreateParsingException("\"");
+                if (_bytes[_offset++] != '\"') throw CreateParsingException("\"");
 
-                var from = offset;
+                var from = _offset;
 
-                for (int i = offset; i < bytes.Length; i++)
+                for (var i = _offset; i < _bytes.Length; i++)
                 {
-                    if (bytes[i] == (char)'\"')
-                    {
-                        // is escape?
-                        if (bytes[i - 1] == (char)'\\')
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            offset = i + 1;
-                            goto OK;
-                        }
-                    }
+                    if (_bytes[i] == '\"')
+					{
+						// is escape?
+                        if (_bytes[i - 1] == '\\')
+							continue;
+
+						_offset = i + 1;
+						goto OK;
+					}
                 }
                 throw CreateParsingExceptionMessage("not found end string.");
 
                 OK:
-                key = new ArraySegment<byte>(bytes, from, offset - from - 1); // remove \"
+                key = new ArraySegment<byte>(_bytes, from, _offset - from - 1); // remove \"
             }
 
             return key;
@@ -831,35 +756,34 @@ namespace Elasticsearch.Net.Utf8Json
         public bool ReadBoolean()
         {
             SkipWhiteSpace();
-            if (bytes[offset] == 't')
+            if (_bytes[_offset] == 't')
             {
-                if (bytes[offset + 1] != 'r') goto ERROR_TRUE;
-                if (bytes[offset + 2] != 'u') goto ERROR_TRUE;
-                if (bytes[offset + 3] != 'e') goto ERROR_TRUE;
-                offset += 4;
+                if (_bytes[_offset + 1] != 'r') goto ERROR_TRUE;
+                if (_bytes[_offset + 2] != 'u') goto ERROR_TRUE;
+                if (_bytes[_offset + 3] != 'e') goto ERROR_TRUE;
+                _offset += 4;
                 return true;
             }
-            else if (bytes[offset] == 'f')
-            {
-                if (bytes[offset + 1] != 'a') goto ERROR_FALSE;
-                if (bytes[offset + 2] != 'l') goto ERROR_FALSE;
-                if (bytes[offset + 3] != 's') goto ERROR_FALSE;
-                if (bytes[offset + 4] != 'e') goto ERROR_FALSE;
-                offset += 5;
-                return false;
-            }
-            else
-            {
-                throw CreateParsingException("true | false");
-            }
 
-            ERROR_TRUE:
+			if (_bytes[_offset] == 'f')
+			{
+				if (_bytes[_offset + 1] != 'a') goto ERROR_FALSE;
+				if (_bytes[_offset + 2] != 'l') goto ERROR_FALSE;
+				if (_bytes[_offset + 3] != 's') goto ERROR_FALSE;
+				if (_bytes[_offset + 4] != 'e') goto ERROR_FALSE;
+				_offset += 5;
+				return false;
+			}
+
+			throw CreateParsingException("true | false");
+
+			ERROR_TRUE:
             throw CreateParsingException("true");
             ERROR_FALSE:
             throw CreateParsingException("false");
         }
 
-        static bool IsWordBreak(byte c)
+		private static bool IsWordBreak(byte c)
         {
             switch (c)
             {
@@ -1001,7 +925,7 @@ namespace Elasticsearch.Net.Utf8Json
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        void ReadNextCore(JsonToken token)
+		private void ReadNextCore(JsonToken token)
         {
             switch (token)
             {
@@ -1011,26 +935,26 @@ namespace Elasticsearch.Net.Utf8Json
                 case JsonToken.NameSeparator:
                 case JsonToken.EndObject:
                 case JsonToken.EndArray:
-                    offset += 1;
+                    _offset += 1;
                     break;
                 case JsonToken.True:
                 case JsonToken.Null:
-                    offset += 4;
+                    _offset += 4;
                     break;
                 case JsonToken.False:
-                    offset += 5;
+                    _offset += 5;
                     break;
                 case JsonToken.String:
-                    offset += 1; // position is "\"";
-                    for (int i = offset; i < bytes.Length; i++)
+                    _offset += 1; // position is "\"";
+                    for (var i = _offset; i < _bytes.Length; i++)
                     {
-                        if (bytes[i] == '\"')
+                        if (_bytes[i] == '\"')
                         {
 							// backtrack and count escape characters
 							var count = 0;
-							for (var j = i - 1; j >= offset; j--)
+							for (var j = i - 1; j >= _offset; j--)
 							{
-								if (bytes[j] != '\\')
+								if (_bytes[j] != '\\')
 									break;
 
 								count++;
@@ -1039,22 +963,22 @@ namespace Elasticsearch.Net.Utf8Json
 							// even number of escape characters means this " is not escaped.
 							if (count % 2 == 0)
 							{
-								offset = i + 1;
+								_offset = i + 1;
 								return; // end
 							}
                         }
                     }
                     throw CreateParsingExceptionMessage("not found end string.");
                 case JsonToken.Number:
-                    for (int i = offset; i < bytes.Length; i++)
+                    for (var i = _offset; i < _bytes.Length; i++)
                     {
-                        if (IsWordBreak(bytes[i]))
+                        if (IsWordBreak(_bytes[i]))
                         {
-                            offset = i;
+                            _offset = i;
                             return;
                         }
                     }
-                    offset = bytes.Length;
+                    _offset = _bytes.Length;
                     break;
                 case JsonToken.None:
                 default:
@@ -1072,18 +996,17 @@ namespace Elasticsearch.Net.Utf8Json
             {
                 case JsonToken.BeginObject:
                 case JsonToken.BeginArray:
-                    offset++;
+                    _offset++;
                     stack++;
                     goto AGAIN;
                 case JsonToken.EndObject:
                 case JsonToken.EndArray:
-                    offset++;
+                    _offset++;
                     stack--;
                     if (stack != 0)
-                    {
-                        goto AGAIN;
-                    }
-                    break;
+						goto AGAIN;
+
+					break;
                 case JsonToken.True:
                 case JsonToken.False:
                 case JsonToken.Null:
@@ -1098,10 +1021,9 @@ namespace Elasticsearch.Net.Utf8Json
                     } while (stack != 0 && !((int)token < 5)); // !(None, Begin/EndObject, Begin/EndArray)
 
                     if (stack != 0)
-                    {
-                        goto AGAIN;
-                    }
-                    break;
+						goto AGAIN;
+
+					break;
                 case JsonToken.None:
                 default:
                     break;
@@ -1110,224 +1032,172 @@ namespace Elasticsearch.Net.Utf8Json
 
         public ArraySegment<byte> ReadNextBlockSegment()
         {
-            var startOffset = offset;
+            var startOffset = _offset;
             ReadNextBlock();
-            return new ArraySegment<byte>(bytes, startOffset, offset - startOffset);
+            return new ArraySegment<byte>(_bytes, startOffset, _offset - startOffset);
         }
 
-        public sbyte ReadSByte()
-        {
-            return checked((sbyte)ReadInt64());
-        }
+        public sbyte ReadSByte() => checked((sbyte)ReadInt64());
 
-        public short ReadInt16()
-        {
-            return checked((short)ReadInt64());
-        }
+		public short ReadInt16() => checked((short)ReadInt64());
 
-        public int ReadInt32()
-        {
-            return checked((int)ReadInt64());
-        }
+		public int ReadInt32() => checked((int)ReadInt64());
 
-        public long ReadInt64()
+		public long ReadInt64()
         {
             SkipWhiteSpace();
 
-            int readCount;
-            var v = NumberConverter.ReadInt64(bytes, offset, out readCount);
+			var v = NumberConverter.ReadInt64(_bytes, _offset, out var readCount);
             if (readCount == 0)
-            {
-                throw CreateParsingException("Number Token");
-            }
+				throw CreateParsingException("Number Token");
 
-            offset += readCount;
+			_offset += readCount;
             return v;
         }
 
-        public byte ReadByte()
-        {
-            return checked((byte)ReadUInt64());
-        }
+        public byte ReadByte() => checked((byte)ReadUInt64());
 
-        public ushort ReadUInt16()
-        {
-            return checked((ushort)ReadUInt64());
-        }
+		public ushort ReadUInt16() => checked((ushort)ReadUInt64());
 
-        public uint ReadUInt32()
-        {
-            return checked((uint)ReadUInt64());
-        }
+		public uint ReadUInt32() => checked((uint)ReadUInt64());
 
-        public ulong ReadUInt64()
+		public ulong ReadUInt64()
         {
             SkipWhiteSpace();
 
-            int readCount;
-            var v = NumberConverter.ReadUInt64(bytes, offset, out readCount);
+			var v = NumberConverter.ReadUInt64(_bytes, _offset, out var readCount);
             if (readCount == 0)
-            {
-                throw CreateParsingException("Number Token");
-            }
-            offset += readCount;
+				throw CreateParsingException("Number Token");
+
+			_offset += readCount;
             return v;
         }
 
         public float ReadSingle()
         {
             SkipWhiteSpace();
-            int readCount;
-            var v = StringToDoubleConverter.ToSingle(bytes, offset, out readCount);
+			var v = StringToDoubleConverter.ToSingle(_bytes, _offset, out var readCount);
             if (readCount == 0)
-            {
-                throw CreateParsingException("Number Token");
-            }
-            offset += readCount;
+				throw CreateParsingException("Number Token");
+
+			_offset += readCount;
             return v;
         }
 
-        public System.Double ReadDouble()
+        public double ReadDouble()
         {
             SkipWhiteSpace();
-            int readCount;
-            var v = StringToDoubleConverter.ToDouble(bytes, offset, out readCount);
+			var v = StringToDoubleConverter.ToDouble(_bytes, _offset, out var readCount);
             if (readCount == 0)
-            {
-                throw CreateParsingException("Number Token");
-            }
-            offset += readCount;
+				throw CreateParsingException("Number Token");
+
+			_offset += readCount;
             return v;
         }
 
         public ArraySegment<byte> ReadNumberSegment()
         {
 			SkipWhiteSpace();
-			var initialOffset = offset;
-			for (int i = offset; i < bytes.Length; i++)
+			var initialOffset = _offset;
+			for (var i = _offset; i < _bytes.Length; i++)
 			{
-				if (!NumberConverter.IsNumberRepresentation(bytes[i]))
+				if (!NumberConverter.IsNumberRepresentation(_bytes[i]))
 				{
-					if (NumberConverter.IsENotation(bytes[i]) && (i + 1) < bytes.Length && NumberConverter.IsNumberRepresentation(bytes[i + 1]))
+					if (NumberConverter.IsENotation(_bytes[i]) && (i + 1) < _bytes.Length && NumberConverter.IsNumberRepresentation(_bytes[i + 1]))
 					{
 						i++;
 						continue;
 					}
 
-					offset = i;
+					_offset = i;
 					goto END;
 				}
 			}
-			offset = bytes.Length;
+			_offset = _bytes.Length;
 
 			END:
-			return new ArraySegment<byte>(bytes, initialOffset, offset - initialOffset);
+			return new ArraySegment<byte>(_bytes, initialOffset, _offset - initialOffset);
         }
 
         // return last offset.
-        static int ReadComment(byte[] bytes, int offset)
+		private static int ReadComment(byte[] bytes, int offset)
         {
             // current token is '/'
             if (bytes[offset + 1] == '/')
             {
                 // single line
                 offset += 2;
-                for (int i = offset; i < bytes.Length; i++)
+                for (var i = offset; i < bytes.Length; i++)
                 {
                     if (bytes[i] == '\r' || bytes[i] == '\n')
-                    {
-                        return i;
-                    }
-                }
+						return i;
+				}
 
                 throw new JsonParsingException("Can not find end token of single line comment(\r or \n).");
             }
-            else if (bytes[offset + 1] == '*')
-            {
 
-                offset += 2; // '/' + '*';
-                for (int i = offset; i < bytes.Length; i++)
-                {
-                    if (bytes[i] == '*' && bytes[i + 1] == '/')
-                    {
-                        return i + 1;
-                    }
-                }
-                throw new JsonParsingException("Can not find end token of multi line comment(*/).");
-            }
+			if (bytes[offset + 1] == '*')
+			{
 
-            return offset;
+				offset += 2; // '/' + '*';
+				for (var i = offset; i < bytes.Length; i++)
+				{
+					if (bytes[i] == '*' && bytes[i + 1] == '/')
+						return i + 1;
+				}
+				throw new JsonParsingException("Can not find end token of multi line comment(*/).");
+			}
+
+			return offset;
         }
 
-        internal static class StringBuilderCache
+		private static class StringBuilderCache
         {
-            [ThreadStatic]
-            static byte[] buffer;
+            [ThreadStatic] private static byte[] _buffer;
 
-            [ThreadStatic]
-            static char[] codePointStringBuffer;
+            [ThreadStatic] private static char[] _codePointStringBuffer;
 
-            public static byte[] GetBuffer()
-            {
-                if (buffer == null)
-                {
-                    buffer = new byte[65535];
-                }
-                return buffer;
-            }
+            public static byte[] GetBuffer() => _buffer ??= new byte[65535];
 
-            public static char[] GetCodePointStringBuffer()
-            {
-                if (codePointStringBuffer == null)
-                {
-                    codePointStringBuffer = new char[65535];
-                }
-                return codePointStringBuffer;
-            }
-        }
+			public static char[] GetCodePointStringBuffer() => _codePointStringBuffer ??= new char[65535];
+		}
     }
 
     public class JsonParsingException : Exception
     {
-        WeakReference underyingBytes;
-        int limit;
-        public int Offset { get; private set; }
-        public string ActualChar { get; set; }
+		private readonly WeakReference _underlyingBytes;
+		private readonly int _limit;
+        public int Offset { get; }
+        public string ActualChar { get; }
 
         public JsonParsingException(string message)
             : base(message)
         {
-
-        }
+		}
 
         public JsonParsingException(string message, byte[] underlyingBytes, int offset, int limit, string actualChar)
             : base(message)
         {
-            this.underyingBytes = new WeakReference(underlyingBytes);
-            this.Offset = offset;
-            this.ActualChar = actualChar;
-            this.limit = limit;
+            _underlyingBytes = new WeakReference(underlyingBytes);
+            Offset = offset;
+            ActualChar = actualChar;
+            _limit = limit;
         }
 
         /// <summary>
         /// Underlying bytes is may be a pooling buffer, be careful to use it. If lost reference or can not handled byte[], return null.
         /// </summary>
-        public byte[] GetUnderlyingByteArrayUnsafe()
-        {
-            return underyingBytes.Target as byte[];
-        }
+        public byte[] GetUnderlyingByteArrayUnsafe() => _underlyingBytes.Target as byte[];
 
-        /// <summary>
+		/// <summary>
         /// Underlying bytes is may be a pooling buffer, be careful to use it. If lost reference or can not handled byte[], return null.
         /// </summary>
         public string GetUnderlyingStringUnsafe()
         {
-            var bytes = underyingBytes.Target as byte[];
-            if (bytes != null)
-            {
-                return StringEncoding.UTF8.GetString(bytes, 0, limit) + "...";
-            }
-            return null;
+			if (_underlyingBytes.Target is byte[] bytes)
+				return StringEncoding.UTF8.GetString(bytes, 0, _limit) + "...";
+
+			return null;
         }
     }
 }

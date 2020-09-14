@@ -87,6 +87,6 @@ namespace Nest
 		/// <summary>
 		/// The data stream's highest timestamp value, converted to a <see cref="DateTimeOffset"/>
 		/// </summary>
-		public DateTimeOffset MaximumTimestampDateTimeOffset => DateTimeUtil.Epoch.AddMilliseconds(MaximumTimestamp);
+		public DateTimeOffset MaximumTimestampDateTimeOffset => DateTimeUtil.UnixEpoch.AddMilliseconds(MaximumTimestamp);
 	}
 }
