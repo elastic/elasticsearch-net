@@ -22,7 +22,7 @@ namespace Elasticsearch.Net
 				{
 					var assemblyFileVersionAttribute =
 						((AssemblyFileVersionAttribute[])Attribute.GetCustomAttributes(
-							typeof(object).GetTypeInfo().Assembly,
+							typeof(object).Assembly,
 							typeof(AssemblyFileVersionAttribute)))
 						.OrderByDescending(a => a.Version)
 						.First();

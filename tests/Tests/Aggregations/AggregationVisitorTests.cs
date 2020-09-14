@@ -28,7 +28,7 @@ namespace Tests.Aggregations
 				select t).ToList();
 
 			var visitorMethodParameters =
-				(from m in typeof(IAggregationVisitor).GetTypeInfo().DeclaredMethods
+				(from m in typeof(IAggregationVisitor).GetMethods()
 				where m.Name == "Visit"
 				let aggregationInterface = m.GetParameters().First().ParameterType
 				where aggregationInterface != typeof(IAggregationContainer)

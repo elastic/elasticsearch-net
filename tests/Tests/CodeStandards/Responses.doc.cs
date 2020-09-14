@@ -76,7 +76,7 @@ namespace Tests.CodeStandards
 					else
 					{
 						var generic = sameNamedInterface.GetGenericTypeDefinition();
-						var genericArg = generic.GetTypeInfo().GenericTypeParameters
+						var genericArg = generic.GetGenericArguments()
 							.FirstOrDefault(a => a.GenericParameterAttributes.HasFlag(GenericParameterAttributes.Covariant));
 						if (genericArg == null)
 							offenders.Add(sameNamedInterface.Name + " is generic but not of its type arguments are covariant");

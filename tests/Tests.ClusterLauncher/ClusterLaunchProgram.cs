@@ -109,7 +109,7 @@ namespace Tests.ClusterLauncher
 
 			try
 			{
-				types = typeof(INestTestCluster).GetTypeInfo().Assembly.GetTypes();
+				types = typeof(INestTestCluster).Assembly.GetTypes();
 			}
 			catch (ReflectionTypeLoadException e)
 			{

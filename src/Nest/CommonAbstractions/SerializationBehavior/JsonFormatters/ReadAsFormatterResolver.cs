@@ -24,7 +24,7 @@ namespace Nest
 
 			static FormatterCache()
 			{
-				var readAsAttribute = typeof(T).GetTypeInfo().GetCustomAttribute<ReadAsAttribute>();
+				var readAsAttribute = typeof(T).GetCustomAttribute<ReadAsAttribute>();
 				if (readAsAttribute == null)
 					return;
 

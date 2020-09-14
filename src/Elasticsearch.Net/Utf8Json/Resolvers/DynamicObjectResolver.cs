@@ -508,28 +508,28 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 		public static object BuildFormatterToAssembly<T>(DynamicAssembly assembly, IJsonFormatterResolver selfResolver, Func<string, string> mutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull)
 		{
-			var ti = typeof(T).GetTypeInfo();
+			var type = typeof(T);
 
-			if (ti.IsNullable())
+			if (type.IsNullable())
 			{
-				ti = ti.GenericTypeArguments[0].GetTypeInfo();
+				type = type.GenericTypeArguments[0];
 
-				var innerFormatter = selfResolver.GetFormatterDynamic(ti.AsType());
+				var innerFormatter = selfResolver.GetFormatterDynamic(type);
 				if (innerFormatter == null)
 				{
 					return null;
 				}
-				return (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(ti.AsType()), new object[] { innerFormatter });
+				return (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(type), innerFormatter);
 			}
 
 			Type elementType;
-			if (typeof(Exception).GetTypeInfo().IsAssignableFrom(ti))
+			if (typeof(Exception).IsAssignableFrom(type))
 			{
-				return DynamicObjectTypeBuilder.BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, false, true);
+				return BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, false, true);
 			}
-			else if (ti.IsAnonymous() || TryGetInterfaceEnumerableElementType(typeof(T), out elementType))
+			else if (type.IsAnonymous() || TryGetInterfaceEnumerableElementType(typeof(T), out elementType))
 			{
-				return DynamicObjectTypeBuilder.BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, false, false);
+				return BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, false, false);
 			}
 
 			var formatterTypeInfo = DynamicObjectTypeBuilder.BuildType(assembly, typeof(T), mutator, propertyMapper, excludeNull);
@@ -540,26 +540,26 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 		public static object BuildFormatterToDynamicMethod<T>(IJsonFormatterResolver selfResolver, Func<string,string> mutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull, bool allowPrivate)
 		{
-			var ti = typeof(T).GetTypeInfo();
+			var type = typeof(T);
 
-			if (ti.IsNullable())
+			if (type.IsNullable())
 			{
-				ti = ti.GenericTypeArguments[0].GetTypeInfo();
+				type = type.GenericTypeArguments[0];
 
-				var innerFormatter = selfResolver.GetFormatterDynamic(ti.AsType());
+				var innerFormatter = selfResolver.GetFormatterDynamic(type);
 				if (innerFormatter == null)
 				{
 					return null;
 				}
-				return (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(ti.AsType()), new object[] { innerFormatter });
+				return (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(type), innerFormatter);
 			}
-			if (typeof(Exception).GetTypeInfo().IsAssignableFrom(ti))
+			if (typeof(Exception).IsAssignableFrom(type))
 			{
-				return DynamicObjectTypeBuilder.BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, false, true);
+				return BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, false, true);
 			}
 			else
 			{
-				return DynamicObjectTypeBuilder.BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, allowPrivate, false);
+				return BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, allowPrivate, false);
 			}
 		}
 
@@ -688,7 +688,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 					if (attr.Attribute.FormatterType.IsGenericType &&
 						!attr.Attribute.FormatterType.IsConstructedGenericType &&
-						attr.Attribute.FormatterType.GetTypeInfo().GenericTypeParameters.Length == 1)
+						attr.Attribute.FormatterType.GetGenericArguments().Length == 1)
 					{
 						formatterType = attr.Attribute.FormatterType.MakeGenericType(item.PropertyInfo.PropertyType);
 					}
@@ -714,7 +714,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 					if (attr.Attribute.FormatterType.IsGenericType &&
 						!attr.Attribute.FormatterType.IsConstructedGenericType &&
-						attr.Attribute.FormatterType.GetTypeInfo().GenericTypeParameters.Length == 1)
+						attr.Attribute.FormatterType.GetGenericArguments().Length == 1)
 					{
 						formatterType = attr.Attribute.FormatterType.MakeGenericType(item.PropertyInfo.PropertyType);
 					}
@@ -827,7 +827,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				{
 					Type formatterType;
 					if (attr.Attribute.FormatterType.IsGenericType
-						&& !attr.Attribute.FormatterType.GetTypeInfo().IsConstructedGenericType())
+						&& !attr.Attribute.FormatterType.IsConstructedGenericType)
 					{
 						// generic types need to be deconstructed
 						var types = item.Type.IsGenericType
@@ -873,7 +873,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					il.EmitStloc(formatterVar);
 
 					// see if formatter is open generic type
-					if (attr.Attribute.FormatterType.IsGenericType && !attr.Attribute.FormatterType.GetTypeInfo().IsConstructedGenericType())
+					if (attr.Attribute.FormatterType.IsGenericType && !attr.Attribute.FormatterType.IsConstructedGenericType)
 					{
 						var typesVar = il.DeclareLocal(typeof(Type[]));
 
@@ -928,7 +928,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			var argValue = new ArgumentField(il, firstArgIndex + 1, type);
 			var argResolver = new ArgumentField(il, firstArgIndex + 2);
 
-			var typeInfo = type.GetTypeInfo();
+			var typeInfo = type;
 
 			// special case for serialize exception...
 			var innerExceptionMetaMember = info.Members.OfType<InnerExceptionMetaMember>().FirstOrDefault();
@@ -1028,7 +1028,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					// if(value.X != null)
 					if (excludeNull)
 					{
-						if (item.Type.GetTypeInfo().IsNullable())
+						if (item.Type.IsNullable())
 						{
 							var local = il.DeclareLocal(item.Type);
 
@@ -1111,7 +1111,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				}
 
 				// EmitValue
-				EmitSerializeValue(typeInfo, item, il, index, tryEmitLoadCustomFormatter, argWriter, argValue, argResolver);
+				EmitSerializeValue(item, il, index, tryEmitLoadCustomFormatter, argWriter, argValue, argResolver);
 
 				index++;
 			}
@@ -1130,12 +1130,12 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			il.Emit(OpCodes.Ret);
 		}
 
-		static void EmitSerializeValue(TypeInfo type, MetaMember member, ILGenerator il, int index, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, ArgumentField writer, ArgumentField argValue, ArgumentField argResolver)
+		static void EmitSerializeValue(MetaMember member, ILGenerator il, int index, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, ArgumentField writer, ArgumentField argValue, ArgumentField argResolver)
 		{
 			var t = member.Type;
-			if (member is InnerExceptionMetaMember)
+			if (member is InnerExceptionMetaMember innerExceptionMetaMember)
 			{
-				(member as InnerExceptionMetaMember).EmitSerializeDirectly(il);
+				innerExceptionMetaMember.EmitSerializeDirectly(il);
 			}
 			else if (tryEmitLoadCustomFormatter(index, member))
 			{
@@ -1150,7 +1150,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				writer.EmitLoad();
 				argValue.EmitLoad();
 				member.EmitLoadValue(il);
-				il.EmitCall(typeof(JsonWriter).GetTypeInfo().GetDeclaredMethods("Write" + t.Name).OrderByDescending(x => x.GetParameters().Length).First());
+				il.EmitCall(typeof(JsonWriter).GetDeclaredMethods("Write" + t.Name).OrderByDescending(x => x.GetParameters().Length).First());
 			}
 			else
 			{
@@ -1349,7 +1349,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			else if (jsonPrimitiveTypes.Contains(t))
 			{
 				reader.EmitLoad();
-				il.EmitCall(typeof(JsonReader).GetTypeInfo().GetDeclaredMethods("Read" + t.Name).OrderByDescending(x => x.GetParameters().Length).First());
+				il.EmitCall(typeof(JsonReader).GetDeclaredMethods("Read" + t.Name).OrderByDescending(x => x.GetParameters().Length).First());
 			}
 			else
 			{
@@ -1591,11 +1591,11 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 		internal static class EmitInfo
 		{
-			public static readonly ConstructorInfo ObjectCtor = typeof(object).GetTypeInfo().DeclaredConstructors.First(x => x.GetParameters().Length == 0);
+			public static readonly ConstructorInfo ObjectCtor = typeof(object).GetDeclaredConstructors().First(x => x.GetParameters().Length == 0);
 
 			public static readonly MethodInfo GetFormatterWithVerify = typeof(JsonFormatterResolverExtensions).GetRuntimeMethod("GetFormatterWithVerify", new[] { typeof(IJsonFormatterResolver) });
 			public static readonly MethodInfo UnsafeMemory_MemoryCopy = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer, byte[] src) => UnsafeMemory.MemoryCopy(ref writer, src));
-			public static readonly ConstructorInfo InvalidOperationExceptionConstructor = typeof(System.InvalidOperationException).GetTypeInfo().DeclaredConstructors.First(x => { var p = x.GetParameters(); return p.Length == 1 && p[0].ParameterType == typeof(string); });
+			public static readonly ConstructorInfo InvalidOperationExceptionConstructor = typeof(InvalidOperationException).GetDeclaredConstructors().First(x => { var p = x.GetParameters(); return p.Length == 1 && p[0].ParameterType == typeof(string); });
 			public static readonly MethodInfo GetTypeFromHandle = ExpressionUtility.GetMethodInfo(() => Type.GetTypeFromHandle(default(RuntimeTypeHandle)));
 
 			public static readonly MethodInfo TypeGetProperty = ExpressionUtility.GetMethodInfo((Type t) => t.GetProperty(default(string), default(BindingFlags)));
@@ -1626,7 +1626,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 			public static MethodInfo GetNullableHasValue(Type type)
 			{
-				return typeof(Nullable<>).MakeGenericType(type).GetRuntimeProperty("HasValue").GetGetMethod();
+				return typeof(Nullable<>).MakeGenericType(type).GetRuntimeProperty("HasValue").GetMethod;
 			}
 
 			internal static class JsonWriter

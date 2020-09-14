@@ -32,150 +32,52 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 {
     internal static class ReflectionExtensions
     {
-        public static bool IsNullable(this TypeInfo type)
-        {
-            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
-        }
-
-        public static bool IsPublic(this TypeInfo type)
-        {
-            return type.IsPublic;
-        }
-
-        public static bool IsAnonymous(this TypeInfo type)
-        {
-            return type.GetCustomAttribute<CompilerGeneratedAttribute>() != null
-                && type.Name.Contains("AnonymousType")
-                && (type.Name.StartsWith("<>") || type.Name.StartsWith("VB$"))
-                && (type.Attributes & TypeAttributes.NotPublic) == TypeAttributes.NotPublic;
-        }
-
-        private static readonly ThreadsafeTypeKeyHashTable<MethodInfo> ShouldSerializeMethodInfo =
+		private static readonly ThreadsafeTypeKeyHashTable<MethodInfo> ShouldSerializeMethodInfo =
 			new ThreadsafeTypeKeyHashTable<MethodInfo>();
 
-		public static MethodInfo GetShouldSerializeMethod(this TypeInfo type)
+		/// <summary>
+		/// Gets all the properties for a type, including base type and interface properties
+		/// </summary>
+		public static IEnumerable<PropertyInfo> GetAllProperties(this Type type) =>
+			GetAllPropertiesCore(type, new Dictionary<string, PropertyInfo>());
+
+		private static IEnumerable<PropertyInfo> GetAllPropertiesCore(Type type, Dictionary<string, PropertyInfo> collectedProperties)
 		{
-			return ShouldSerializeMethodInfo.GetOrAdd(type, t =>
+			foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly))
 			{
-				return t.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
-					.FirstOrDefault(m => m.Name == "ShouldSerialize"
-						&& m.ReturnType == typeof(bool)
-						&& m.GetParameters().Length == 1
-						&& m.GetParameters()[0].ParameterType == typeof(IJsonFormatterResolver));
-			});
-		}
-
-        public static IEnumerable<PropertyInfo> GetAllProperties(this Type type)
-        {
-			var collectedProperties = new Dictionary<string, PropertyInfo>();
-            return GetAllPropertiesCore(type, collectedProperties);
-        }
-
-		public static bool IsVirtual(this PropertyInfo propertyInfo)
-		{
-			MethodInfo m = propertyInfo.GetGetMethod(true);
-			if (m != null && m.IsVirtual)
-			{
-				return true;
-			}
-
-			m = propertyInfo.GetSetMethod(true);
-			if (m != null && m.IsVirtual)
-			{
-				return true;
-			}
-
-			return false;
-		}
-
-		public static MethodInfo GetBaseDefinition(this PropertyInfo propertyInfo)
-		{
-			MethodInfo m = propertyInfo.GetGetMethod(true);
-			if (m != null)
-			{
-				return m.GetBaseDefinition();
-			}
-
-			return propertyInfo.GetSetMethod(true)?.GetBaseDefinition();
-		}
-
-		static IEnumerable<PropertyInfo> GetAllPropertiesCore(Type type, Dictionary<string, PropertyInfo> collectedProperties)
-		{
-			foreach (var item in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly))
-			{
-				if (collectedProperties.TryGetValue(item.Name, out var existingItem))
+				if (collectedProperties.TryGetValue(property.Name, out var existingProperty))
 				{
-					if (IsHidingMember(item))
-						collectedProperties[item.Name] = item;
-					else if (!type.IsInterface && item.IsVirtual())
+					if (IsHidingMember(property))
+						collectedProperties[property.Name] = property;
+					else if (!type.IsInterface && property.IsVirtual())
 					{
-						Type subTypePropertyDeclaringType = item.GetBaseDefinition()?.DeclaringType ?? item.DeclaringType;
+						var propertyDeclaringType = property.GetDeclaringType();
 
-						if (!(existingItem.IsVirtual() && (existingItem.GetBaseDefinition()?.DeclaringType ?? existingItem.DeclaringType).IsAssignableFrom(subTypePropertyDeclaringType)))
+						if (!(existingProperty.IsVirtual() && existingProperty.GetDeclaringType().IsAssignableFrom(propertyDeclaringType)))
 						{
-							collectedProperties[item.Name] = item;
+							collectedProperties[property.Name] = property;
 						}
 					}
 				}
 				else
-				{
-					collectedProperties.Add(item.Name, item);
-				}
+					collectedProperties.Add(property.Name, property);
 			}
+
 			if (type.BaseType != null)
-			{
 				GetAllPropertiesCore(type.BaseType, collectedProperties);
-			}
+
 			foreach (var @interface in type.GetInterfaces())
-			{
 				GetAllPropertiesCore(@interface, collectedProperties);
-			}
 
 			return collectedProperties.Values;
 		}
 
-		private static bool IsHidingMember(PropertyInfo propertyInfo)
-		{
-			var baseType = propertyInfo.DeclaringType?.BaseType;
-			var baseProperty = baseType?.GetProperty(propertyInfo.Name);
-			if (baseProperty == null) return false;
-
-			var derivedGetMethod = propertyInfo.GetGetMethod().GetBaseDefinition();
-			return derivedGetMethod?.ReturnType != propertyInfo.PropertyType;
-		}
-
-
-   //      static IEnumerable<PropertyInfo> GetAllPropertiesCore(Type type, HashSet<string> nameCheck)
-   //      {
-   //          foreach (var item in type.GetRuntimeProperties())
-   //          {
-   //              if (nameCheck.Add(item.Name))
-   //              {
-   //                  yield return item;
-   //              }
-   //          }
-   //          if (type.BaseType != null)
-   //          {
-   //              foreach (var item in GetAllPropertiesCore(type.BaseType, nameCheck))
-   //              {
-   //                  yield return item;
-   //              }
-   //          }
-			// foreach (var @interface in type.GetInterfaces())
-			// {
-			// 	foreach (var item in GetAllPropertiesCore(@interface, nameCheck))
-			// 	{
-			// 		yield return item;
-			// 	}
-			// }
-   //      }
-
-        public static IEnumerable<FieldInfo> GetAllFields(this Type type)
+		public static IEnumerable<FieldInfo> GetAllFields(this Type type)
         {
             return GetAllFieldsCore(type, new HashSet<string>());
         }
 
-        static IEnumerable<FieldInfo> GetAllFieldsCore(Type type, HashSet<string> nameCheck)
+		private static IEnumerable<FieldInfo> GetAllFieldsCore(Type type, HashSet<string> nameCheck)
         {
             foreach (var item in type.GetRuntimeFields())
             {
@@ -193,19 +95,94 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             }
         }
 
-        public static bool IsConstructedGenericType(this TypeInfo type)
-        {
-            return type.AsType().IsConstructedGenericType;
-        }
+		private static Type GetDeclaringType(this PropertyInfo propertyInfo) =>
+			propertyInfo.GetBaseDefinition()?.DeclaringType ?? propertyInfo.DeclaringType;
 
-        public static MethodInfo GetGetMethod(this PropertyInfo propInfo)
-        {
-            return propInfo.GetMethod;
-        }
+		private static MethodInfo GetBaseDefinition(this PropertyInfo propertyInfo)
+		{
+			MethodInfo m = propertyInfo.GetMethod;
+			return m != null
+				? m.GetBaseDefinition()
+				: propertyInfo.SetMethod?.GetBaseDefinition();
+		}
 
-        public static MethodInfo GetSetMethod(this PropertyInfo propInfo)
-        {
-            return propInfo.SetMethod;
-        }
-    }
+		public static MethodInfo GetShouldSerializeMethod(this Type type)
+		{
+			return ShouldSerializeMethodInfo.GetOrAdd(type, t =>
+			{
+				return t.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
+					.FirstOrDefault(m => m.Name == "ShouldSerialize"
+						&& m.ReturnType == typeof(bool)
+						&& m.GetParameters().Length == 1
+						&& m.GetParameters()[0].ParameterType == typeof(IJsonFormatterResolver));
+			});
+		}
+
+		/// <summary>
+		/// Determines if a type is an anonymous type
+		/// </summary>
+		public static bool IsAnonymous(this Type type)
+		{
+			return type.GetCustomAttribute<CompilerGeneratedAttribute>() != null
+				&& type.Name.Contains("AnonymousType")
+				&& (type.Name.StartsWith("<>") || type.Name.StartsWith("VB$"))
+				&& (type.Attributes & TypeAttributes.NotPublic) == TypeAttributes.NotPublic;
+		}
+
+		/// <summary>
+		/// Determines if a <see cref="PropertyInfo"/> is hiding/shadowing a
+		/// <see cref="PropertyInfo"/> from a base type
+		/// </summary>
+		private static bool IsHidingMember(PropertyInfo propertyInfo)
+		{
+			var baseType = propertyInfo.DeclaringType?.BaseType;
+			var baseProperty = baseType?.GetProperty(propertyInfo.Name);
+			if (baseProperty == null)
+				return false;
+
+			var derivedGetMethod = propertyInfo.GetBaseDefinition();
+			return derivedGetMethod?.ReturnType != propertyInfo.PropertyType;
+		}
+
+		/// <summary>
+		/// Determines if the type is a nullable type
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsNullable(this Type type) =>
+			type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+
+		/// <summary>
+		/// Determines if a <see cref="PropertyInfo"/> is virtual
+		/// </summary>
+		private static bool IsVirtual(this PropertyInfo propertyInfo)
+		{
+			var methodInfo = propertyInfo.GetMethod;
+			if (methodInfo != null && methodInfo.IsVirtual)
+				return true;
+
+			methodInfo = propertyInfo.SetMethod;
+			return methodInfo != null && methodInfo.IsVirtual;
+		}
+
+		/// <summary>
+		/// Gets the methods for a type matching the given name
+		/// </summary>
+		public static IEnumerable<MethodInfo> GetDeclaredMethods(this Type type, string name)
+	    {
+			var methods = type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+			for (int index = 0; index < methods.Length; ++index)
+			{
+				var method = methods[index];
+				if (method.Name == name)
+					yield return method;
+			}
+	    }
+
+		/// <summary>
+		/// Gets all the constructors for a type
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static ConstructorInfo[] GetDeclaredConstructors(this Type type) =>
+			type.GetConstructors(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+	}
 }

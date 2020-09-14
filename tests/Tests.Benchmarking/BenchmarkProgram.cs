@@ -115,7 +115,7 @@ namespace Tests.Benchmarking
 
 			try
 			{
-				types = typeof(Program).GetTypeInfo().Assembly.GetTypes();
+				types = typeof(Program).Assembly.GetTypes();
 			}
 			catch (ReflectionTypeLoadException e)
 			{
