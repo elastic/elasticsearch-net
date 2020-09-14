@@ -27,7 +27,7 @@ namespace Tests.Mapping.Types.Core.DateNanos
 					boost = 1.2,
 					ignore_malformed = true,
 					format = "yyyy-MM-dd'T'HH:mm[:ss][.S]",
-					null_value = DateTime.MinValue
+					null_value = DateTimeOffset.UnixEpoch.DateTime
 				}
 			}
 		};
@@ -41,7 +41,7 @@ namespace Tests.Mapping.Types.Core.DateNanos
 				.Boost(1.2)
 				.IgnoreMalformed()
 				.Format("yyyy-MM-dd'T'HH:mm[:ss][.S]")
-				.NullValue(DateTime.MinValue)
+				.NullValue(DateTimeOffset.UnixEpoch.DateTime)
 			);
 
 		protected override IProperties InitializerProperties => new Properties
@@ -55,7 +55,7 @@ namespace Tests.Mapping.Types.Core.DateNanos
 					Boost = 1.2,
 					IgnoreMalformed = true,
 					Format = "yyyy-MM-dd'T'HH:mm[:ss][.S]",
-					NullValue = DateTime.MinValue
+					NullValue = DateTimeOffset.UnixEpoch.DateTime
 				}
 			}
 		};
