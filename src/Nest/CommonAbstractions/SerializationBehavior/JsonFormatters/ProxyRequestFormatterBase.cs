@@ -20,7 +20,7 @@ namespace Nest
 			using (var ms = settings.MemoryStreamFactory.Create(segment.Array, segment.Offset, segment.Count))
 			{
 				//not optimized but deserializing create requests is far from common practice
-				var genericType = typeof(TRequest).GetTypeInfo().GenericTypeArguments[0];
+				var genericType = typeof(TRequest).GenericTypeArguments[0];
 				var o = settings.SourceSerializer.Deserialize(genericType, ms);
 
 				// TRequest might be an open or closed generic type

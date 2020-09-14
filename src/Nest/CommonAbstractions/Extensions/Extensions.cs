@@ -99,7 +99,7 @@ namespace Nest
 
 		internal static bool IsNullOrEmpty(this IndexName value) => value == null || value.GetHashCode() == 0;
 
-		internal static bool IsNullable(this TypeInfo type) =>
+		internal static bool IsNullable(this Type type) =>
 			type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
 
 		internal static void ThrowIfNullOrEmpty(this string @object, string parameterName, string when = null)

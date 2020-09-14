@@ -9,7 +9,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Elasticsearch.Net.CrossPlatform;
 
 namespace Nest
 {
@@ -27,8 +26,8 @@ namespace Nest
 		private static readonly ConcurrentDictionary<string, Type> CachedGenericClosedTypes =
 			new ConcurrentDictionary<string, Type>();
 
-		private static readonly ConcurrentDictionary<Type, IList<PropertyInfo>> CachedTypePropertyInfos =
-			new ConcurrentDictionary<Type, IList<PropertyInfo>>();
+		private static readonly ConcurrentDictionary<Type, List<PropertyInfo>> CachedTypePropertyInfos =
+			new ConcurrentDictionary<Type, List<PropertyInfo>>();
 
 		internal static object CreateGenericInstance(this Type t, Type closeOver, params object[] args) =>
 			t.CreateGenericInstance(new[] { closeOver }, args);
@@ -108,20 +107,20 @@ namespace Nest
 			return compiled;
 		}
 
-		internal static IList<PropertyInfo> AllPropertiesCached(this Type t)
+		internal static List<PropertyInfo> GetAllProperties(this Type type)
 		{
-			if (CachedTypePropertyInfos.TryGetValue(t, out var propertyInfos))
+			if (CachedTypePropertyInfos.TryGetValue(type, out var propertyInfos))
 				return propertyInfos;
 
-			propertyInfos = t.AllPropertiesNotCached().ToList();
-			CachedTypePropertyInfos.TryAdd(t, propertyInfos);
+			propertyInfos = type.GetAllPropertiesCore();
+			CachedTypePropertyInfos.TryAdd(type, propertyInfos);
 			return propertyInfos;
 		}
 
 		/// <summary>
 		/// Returns inherited properties with reflectedType set to base type
 		/// </summary>
-		private static IEnumerable<PropertyInfo> AllPropertiesNotCached(this Type type)
+		private static List<PropertyInfo> GetAllPropertiesCore(this Type type)
 		{
 			var propertiesByName = new Dictionary<string, PropertyInfo>();
 			do
@@ -138,7 +137,7 @@ namespace Nest
 				type = type.BaseType;
 			} while (type?.BaseType != null);
 
-			return propertiesByName.Values;
+			return propertiesByName.Values.ToList();
 		}
 
 		/// <summary>
@@ -156,8 +155,8 @@ namespace Nest
 
 		internal delegate T ObjectActivator<out T>(params object[] args);
 
-		private static readonly Assembly NestAssembly = typeof(TypeExtensions).Assembly();
+		private static readonly Assembly NestAssembly = typeof(TypeExtensions).Assembly;
 
-		public static bool IsNestType(this Type type) => type.Assembly() == NestAssembly;
+		public static bool IsNestType(this Type type) => type.Assembly == NestAssembly;
 	}
 }
