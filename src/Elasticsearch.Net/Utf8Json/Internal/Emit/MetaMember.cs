@@ -31,23 +31,23 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 {
     internal class MetaMember
     {
-        public string Name { get; private set; }
-        public string MemberName { get; private set; }
+		private readonly MethodInfo getMethod;
+		private readonly MethodInfo setMethod;
 
-        public bool IsProperty { get { return PropertyInfo != null; } }
-        public bool IsField { get { return FieldInfo != null; } }
-        public bool IsWritable { get; private set; }
-        public bool IsReadable { get; private set; }
-        public Type Type { get; private set; }
-        public FieldInfo FieldInfo { get; private set; }
-        public PropertyInfo PropertyInfo { get; private set; }
-        public PropertyInfo[] InterfacePropertyInfos { get; private set; }
-        public MethodInfo ShouldSerializeMethodInfo { get; private set; }
-        public MethodInfo ShouldSerializeTypeMethodInfo { get; private set; }
-		public object JsonFormatter {get; private set; }
+        public string Name { get; }
+        public string MemberName { get; }
 
-        MethodInfo getMethod;
-        MethodInfo setMethod;
+        public bool IsProperty { get => PropertyInfo != null; }
+        public bool IsField { get => FieldInfo != null; }
+        public bool IsWritable { get; }
+        public bool IsReadable { get; }
+        public Type Type { get; }
+        public FieldInfo FieldInfo { get; }
+        public PropertyInfo PropertyInfo { get; }
+        public PropertyInfo[] InterfacePropertyInfos { get; }
+        public MethodInfo ShouldSerializeMethodInfo { get; }
+        public MethodInfo ShouldSerializeTypeMethodInfo { get; }
+		public object JsonFormatter { get; }
 
         protected MetaMember(Type type, string name, string memberName, bool isWritable, bool isReadable)
         {
@@ -67,14 +67,14 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
             this.IsReadable = allowPrivate || info.IsPublic;
             this.IsWritable = allowPrivate || (info.IsPublic && !info.IsInitOnly);
             this.ShouldSerializeMethodInfo = GetShouldSerialize(info);
-			this.ShouldSerializeTypeMethodInfo = info.FieldType.GetTypeInfo().GetShouldSerializeMethod();
+			this.ShouldSerializeTypeMethodInfo = info.FieldType.GetShouldSerializeMethod();
 			this.JsonFormatter = jsonFormatter;
 		}
 
         public MetaMember(PropertyInfo info, string name, PropertyInfo[] interfaceInfos, object jsonFormatter, bool allowPrivate)
         {
-            this.getMethod = info.GetGetMethod(true);
-            this.setMethod = info.GetSetMethod(true);
+            this.getMethod = info.GetMethod;
+            this.setMethod = info.SetMethod;
 
             this.Name = name;
             this.MemberName = info.Name;
@@ -84,7 +84,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
             this.IsReadable = (getMethod != null) && (allowPrivate || getMethod.IsPublic) && !getMethod.IsStatic;
             this.IsWritable = (setMethod != null) && (allowPrivate || setMethod.IsPublic) && !setMethod.IsStatic;
             this.ShouldSerializeMethodInfo = GetShouldSerialize(info);
-			this.ShouldSerializeTypeMethodInfo = info.PropertyType.GetTypeInfo().GetShouldSerializeMethod();
+			this.ShouldSerializeTypeMethodInfo = info.PropertyType.GetShouldSerializeMethod();
 			this.JsonFormatter = jsonFormatter;
         }
 
@@ -106,13 +106,13 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 				DeclaringType = declaringType;
 			}
 
-			public T Attribute { get; private set; }
-			public Type DeclaringType { get; private set; }
+			public T Attribute { get; }
+			public Type DeclaringType { get; }
 		}
 
         public AttributeDeclaringType<T> GetCustomAttribute<T>(bool inherit) where T : Attribute
-        {
-            if (IsProperty)
+		{
+			if (IsProperty)
             {
                 var attribute = PropertyInfo.GetCustomAttribute<T>(inherit);
 				if (attribute != null)
@@ -128,22 +128,16 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 					if (attribute != null)
 						return new AttributeDeclaringType<T>(attribute, info.DeclaringType);
 				}
-
-				return null;
 			}
-            else if (FieldInfo != null)
-            {
-                var attribute = FieldInfo.GetCustomAttribute<T>(inherit);
-                if (attribute != null)
-					return new AttributeDeclaringType<T>(attribute, FieldInfo.DeclaringType);
-
-				return null;
+			else if (IsField)
+			{
+				var attribute = this.FieldInfo.GetCustomAttribute<T>(inherit);
+				if (attribute != null)
+					return new AttributeDeclaringType<T>(attribute, this.FieldInfo.DeclaringType);
 			}
-            else
-            {
-                return null;
-            }
-        }
+
+			return null;
+		}
 
         public virtual void EmitLoadValue(ILGenerator il)
         {
@@ -197,7 +191,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
     internal class InnerExceptionMetaMember : MetaMember
     {
         static readonly MethodInfo getInnerException = ExpressionUtility.GetPropertyInfo((Exception ex) => ex.InnerException).GetGetMethod();
-        static readonly MethodInfo nongenericSerialize = ExpressionUtility.GetMethodInfo<JsonWriter>(writer => JsonSerializer.NonGeneric.Serialize(ref writer, default(object), default(IJsonFormatterResolver)));
+        static readonly MethodInfo nongenericSerialize = ExpressionUtility.GetMethodInfo<JsonWriter>(writer => JsonSerializer.NonGeneric.Serialize(ref writer, default, default));
 
         // set after...
         internal ArgumentField argWriter;

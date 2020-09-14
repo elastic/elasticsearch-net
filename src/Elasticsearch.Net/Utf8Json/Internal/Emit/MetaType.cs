@@ -75,8 +75,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 
         public MetaType(Type type, Func<string, string> nameMutator, Func<MemberInfo, JsonProperty> propertyMapper, bool allowPrivate)
         {
-            var ti = type.GetTypeInfo();
-            var isClass = ti.IsClass || ti.IsInterface || ti.IsAbstract;
+			var isClass = type.IsClass || type.IsInterface || type.IsAbstract;
             var dataContractPresent = type.GetCustomAttribute<DataContractAttribute>(true) != null ||
                                       type.GetCustomAttribute<InterfaceDataContractAttribute>(true) != null;
 
@@ -84,7 +83,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 
             var stringMembers = new Dictionary<string, MetaMember>();
 			{
-				var interfaceMaps = ti.IsClass
+				var interfaceMaps = type.IsClass
 					? type.GetInterfaces().Select(type.GetInterfaceMap).ToArray()
 					: null;
 
@@ -200,7 +199,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
             }
 
             // GetConstructor
-            var ctor = ti.DeclaredConstructors
+            var ctor = type.GetDeclaredConstructors()
                 .SingleOrDefault(x => x.GetCustomAttribute<SerializationConstructorAttribute>(false) != null);
             var constructorParameters = new List<MetaMember>();
             {
@@ -208,7 +207,9 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
                 if (ctor == null)
                 {
                     // descending.
-                    ctorEnumerator = ti.DeclaredConstructors.Where(x => x.IsPublic).OrderByDescending(x => x.GetParameters().Length).GetEnumerator();
+                    ctorEnumerator = type.GetDeclaredConstructors()
+						.Where(x => x.IsPublic)
+						.OrderByDescending(x => x.GetParameters().Length).GetEnumerator();
                     if (ctorEnumerator.MoveNext())
                     {
                         ctor = ctorEnumerator.Current;
@@ -266,7 +267,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
             }
 
             this.IsClass = isClass;
-            this.IsConcreteClass = isClass && !(ti.IsAbstract || ti.IsInterface);
+            this.IsConcreteClass = isClass && !(type.IsAbstract || type.IsInterface);
             this.BestmatchConstructor = ctor;
             this.ConstructorParameters = constructorParameters.ToArray();
             this.Members = stringMembers.Values.ToArray();

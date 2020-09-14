@@ -25,7 +25,7 @@ namespace Tests.Domain.JsonConverters
 		{
 			if (reader.TokenType == JsonToken.Null)
 			{
-				if (!objectType.GetTypeInfo().IsGenericType || objectType.GetGenericTypeDefinition() != typeof(Nullable<>))
+				if (!objectType.IsGenericType || objectType.GetGenericTypeDefinition() != typeof(Nullable<>))
 					throw new JsonSerializationException($"Cannot convert null value to {objectType}.");
 
 				return null;

@@ -325,7 +325,7 @@ namespace Nest
 
 			if (setting is IConvertible)
 			{
-				var type = typeof(T).GetTypeInfo().IsNullable()
+				var type = typeof(T).IsNullable()
 					? Nullable.GetUnderlyingType(typeof(T))
 					: typeof(T);
 

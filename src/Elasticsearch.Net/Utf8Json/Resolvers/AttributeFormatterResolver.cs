@@ -51,7 +51,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
             static FormatterCache()
             {
-                var attr = typeof(T).GetTypeInfo().GetCustomAttribute<JsonFormatterAttribute>(true);
+                var attr = typeof(T).GetCustomAttribute<JsonFormatterAttribute>(true);
                 if (attr == null)
                 {
                     return;
@@ -59,7 +59,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
                 try
                 {
-                    if (attr.FormatterType.IsGenericType && !attr.FormatterType.GetTypeInfo().IsConstructedGenericType())
+                    if (attr.FormatterType.IsGenericType && !attr.FormatterType.IsConstructedGenericType)
 					{
 						// generic types need to be deconstructed
 						var types = typeof(T).IsGenericType

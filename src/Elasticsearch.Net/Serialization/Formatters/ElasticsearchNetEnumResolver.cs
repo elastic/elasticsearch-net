@@ -24,21 +24,20 @@ namespace Elasticsearch.Net
 
 			static FormatterCache()
 			{
-				var ti = typeof(T).GetTypeInfo();
+				var type = typeof(T);
 
-				if (ti.IsNullable())
+				if (type.IsNullable())
 				{
 					// build underlying type and use wrapped formatter.
-					ti = ti.GenericTypeArguments[0].GetTypeInfo();
-					if (!ti.IsEnum) return;
+					type = type.GenericTypeArguments[0];
+					if (!type.IsEnum) return;
 
-					var innerFormatter = Instance.GetFormatterDynamic(ti.AsType());
+					var innerFormatter = Instance.GetFormatterDynamic(type);
 					if (innerFormatter == null) return;
 
-					Formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(ti.AsType()),
-						new object[] { innerFormatter });
+					Formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(type), innerFormatter);
 				}
-				else if (typeof(T).IsEnum)
+				else if (type.IsEnum)
 				{
 					var stringEnumAttribute = typeof(T).GetCustomAttribute<StringEnumAttribute>();
 					Formatter = stringEnumAttribute != null

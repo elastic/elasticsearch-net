@@ -25,7 +25,7 @@ namespace Tests.ClientConcepts.Connection
 	{
 		public ConnectionReuseAndBalancing(ConnectionReuseCluster cluster) : base(cluster) { }
 
-		private static bool IsCurlHandler { get; } = typeof(HttpClientHandler).GetTypeInfo().Assembly.GetType("System.Net.Http.CurlHandler") != null;
+		private static bool IsCurlHandler { get; } = typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.CurlHandler") != null;
 
 		public IEnumerable<Project> MockDataGenerator(int numDocuments)
 		{
