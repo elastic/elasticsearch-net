@@ -194,7 +194,6 @@ var typesNotIElasticsearchNetNamespace = types
     .Where(t => !t.Namespace.StartsWith("Elasticsearch.Net.Utf8Json"))
     .Where(t => !t.Namespace.StartsWith("Elasticsearch.Net.Extensions"))
     .Where(t => !t.Namespace.StartsWith("Elasticsearch.Net.Diagnostics"))
-    .Where(t => !t.Namespace.StartsWith("Elasticsearch.Net.CrossPlatform"))
     .Where(t => !t.Name.StartsWith("<"))
     .Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
     .ToList();
