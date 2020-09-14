@@ -35,34 +35,25 @@ namespace Elasticsearch.Net.Utf8Json
     /// </summary>
 	internal static partial class JsonSerializer
     {
-        static IJsonFormatterResolver defaultResolver;
+        private static IJsonFormatterResolver _defaultResolver;
 
         /// <summary>
         /// FormatterResolver that used resolver less overloads. If does not set it, used StandardResolver.Default.
         /// </summary>
-        public static IJsonFormatterResolver DefaultResolver
-        {
-            get { return defaultResolver ??= StandardResolver.Default; }
-        }
+        public static IJsonFormatterResolver DefaultResolver => _defaultResolver ??= StandardResolver.Default;
 
-        /// <summary>
+		/// <summary>
         /// Set default resolver of Utf8Json APIs.
         /// </summary>
         /// <param name="resolver"></param>
-        public static void SetDefaultResolver(IJsonFormatterResolver resolver)
-        {
-            defaultResolver = resolver;
-        }
+        public static void SetDefaultResolver(IJsonFormatterResolver resolver) => _defaultResolver = resolver;
 
-        /// <summary>
+		/// <summary>
         /// Serialize to binary with default resolver.
         /// </summary>
-        public static byte[] Serialize<T>(T obj)
-        {
-            return Serialize(obj, defaultResolver);
-        }
+        public static byte[] Serialize<T>(T obj) => Serialize(obj, _defaultResolver);
 
-        /// <summary>
+		/// <summary>
         /// Serialize to binary with specified resolver.
         /// </summary>
         public static byte[] Serialize<T>(T value, IJsonFormatterResolver resolver)
@@ -82,12 +73,9 @@ namespace Elasticsearch.Net.Utf8Json
 			}
         }
 
-        public static void Serialize<T>(ref JsonWriter writer, T value)
-        {
-            Serialize<T>(ref writer, value, defaultResolver);
-        }
+        public static void Serialize<T>(ref JsonWriter writer, T value) => Serialize<T>(ref writer, value, _defaultResolver);
 
-        public static void Serialize<T>(ref JsonWriter writer, T value, IJsonFormatterResolver resolver)
+		public static void Serialize<T>(ref JsonWriter writer, T value, IJsonFormatterResolver resolver)
         {
             if (resolver == null) resolver = DefaultResolver;
 
@@ -98,12 +86,9 @@ namespace Elasticsearch.Net.Utf8Json
         /// <summary>
         /// Serialize to stream.
         /// </summary>
-        public static void Serialize<T>(Stream stream, T value)
-        {
-            Serialize(stream, value, defaultResolver);
-        }
+        public static void Serialize<T>(Stream stream, T value) => Serialize(stream, value, _defaultResolver);
 
-        /// <summary>
+		/// <summary>
         /// Serialize to stream with specified resolver.
         /// </summary>
         public static void Serialize<T>(Stream stream, T value, IJsonFormatterResolver resolver)
@@ -117,15 +102,12 @@ namespace Elasticsearch.Net.Utf8Json
         /// <summary>
         /// Serialize to stream(write async).
         /// </summary>
-        public static System.Threading.Tasks.Task SerializeAsync<T>(Stream stream, T value)
-        {
-            return SerializeAsync<T>(stream, value, defaultResolver);
-        }
+        public static Task SerializeAsync<T>(Stream stream, T value) => SerializeAsync<T>(stream, value, _defaultResolver);
 
-        /// <summary>
+		/// <summary>
         /// Serialize to stream(write async) with specified resolver.
         /// </summary>
-        public static async System.Threading.Tasks.Task SerializeAsync<T>(Stream stream, T value, IJsonFormatterResolver resolver)
+        public static async Task SerializeAsync<T>(Stream stream, T value, IJsonFormatterResolver resolver)
         {
             if (resolver == null) resolver = DefaultResolver;
 
@@ -147,12 +129,9 @@ namespace Elasticsearch.Net.Utf8Json
         /// <summary>
         /// Serialize to binary. Get the raw memory pool byte[]. The result can not share across thread and can not hold, so use quickly.
         /// </summary>
-        public static ArraySegment<byte> SerializeUnsafe<T>(T obj)
-        {
-            return SerializeUnsafe(obj, defaultResolver);
-        }
+        public static ArraySegment<byte> SerializeUnsafe<T>(T obj) => SerializeUnsafe(obj, _defaultResolver);
 
-        /// <summary>
+		/// <summary>
         /// Serialize to binary with specified resolver. Get the raw memory pool byte[]. The result can not share across thread and can not hold, so use quickly.
         /// </summary>
         public static ArraySegment<byte> SerializeUnsafe<T>(T value, IJsonFormatterResolver resolver)
@@ -177,12 +156,9 @@ namespace Elasticsearch.Net.Utf8Json
         /// <summary>
         /// Serialize to JsonString.
         /// </summary>
-        public static string ToJsonString<T>(T value)
-        {
-            return ToJsonString(value, defaultResolver);
-        }
+        public static string ToJsonString<T>(T value) => ToJsonString(value, _defaultResolver);
 
-        /// <summary>
+		/// <summary>
         /// Serialize to JsonString with specified resolver.
         /// </summary>
         public static string ToJsonString<T>(T value, IJsonFormatterResolver resolver)
@@ -203,32 +179,17 @@ namespace Elasticsearch.Net.Utf8Json
 			}
         }
 
-        public static T Deserialize<T>(string json)
-        {
-            return Deserialize<T>(json, defaultResolver);
-        }
+        public static T Deserialize<T>(string json) => Deserialize<T>(json, _defaultResolver);
 
-        public static T Deserialize<T>(string json, IJsonFormatterResolver resolver)
-        {
-            return Deserialize<T>(StringEncoding.UTF8.GetBytes(json), resolver);
-        }
+		public static T Deserialize<T>(string json, IJsonFormatterResolver resolver) => Deserialize<T>(StringEncoding.UTF8.GetBytes(json), resolver);
 
-        public static T Deserialize<T>(byte[] bytes)
-        {
-            return Deserialize<T>(bytes, defaultResolver);
-        }
+		public static T Deserialize<T>(byte[] bytes) => Deserialize<T>(bytes, _defaultResolver);
 
-        public static T Deserialize<T>(byte[] bytes, IJsonFormatterResolver resolver)
-        {
-            return Deserialize<T>(bytes, 0, resolver);
-        }
+		public static T Deserialize<T>(byte[] bytes, IJsonFormatterResolver resolver) => Deserialize<T>(bytes, 0, resolver);
 
-        public static T Deserialize<T>(byte[] bytes, int offset)
-        {
-            return Deserialize<T>(bytes, offset, defaultResolver);
-        }
+		public static T Deserialize<T>(byte[] bytes, int offset) => Deserialize<T>(bytes, offset, _defaultResolver);
 
-        public static T Deserialize<T>(byte[] bytes, int offset, IJsonFormatterResolver resolver)
+		public static T Deserialize<T>(byte[] bytes, int offset, IJsonFormatterResolver resolver)
         {
 			if (bytes == null || bytes.Length == 0)
 				return default;
@@ -241,12 +202,9 @@ namespace Elasticsearch.Net.Utf8Json
             return formatter.Deserialize(ref reader, resolver);
         }
 
-        public static T Deserialize<T>(ref JsonReader reader)
-        {
-            return Deserialize<T>(ref reader, defaultResolver);
-        }
+        public static T Deserialize<T>(ref JsonReader reader) => Deserialize<T>(ref reader, _defaultResolver);
 
-        public static T Deserialize<T>(ref JsonReader reader, IJsonFormatterResolver resolver)
+		public static T Deserialize<T>(ref JsonReader reader, IJsonFormatterResolver resolver)
         {
             if (resolver == null) resolver = DefaultResolver;
 
@@ -254,12 +212,9 @@ namespace Elasticsearch.Net.Utf8Json
             return formatter.Deserialize(ref reader, resolver);
         }
 
-        public static T Deserialize<T>(Stream stream)
-        {
-            return Deserialize<T>(stream, defaultResolver);
-        }
+        public static T Deserialize<T>(Stream stream) => Deserialize<T>(stream, _defaultResolver);
 
-        public static T Deserialize<T>(Stream stream, IJsonFormatterResolver resolver)
+		public static T Deserialize<T>(Stream stream, IJsonFormatterResolver resolver)
         {
 			if (stream == null || stream.CanSeek && stream.Length == 0)
 				return default;
@@ -307,12 +262,9 @@ namespace Elasticsearch.Net.Utf8Json
 			}
         }
 
-        public static Task<T> DeserializeAsync<T>(Stream stream)
-        {
-            return DeserializeAsync<T>(stream, defaultResolver);
-        }
+        public static Task<T> DeserializeAsync<T>(Stream stream) => DeserializeAsync<T>(stream, _defaultResolver);
 
-        public static async Task<T> DeserializeAsync<T>(Stream stream, IJsonFormatterResolver resolver)
+		public static async Task<T> DeserializeAsync<T>(Stream stream, IJsonFormatterResolver resolver)
         {
 			if (stream == null || stream.CanSeek && stream.Length == 0)
 				return default;
@@ -341,7 +293,7 @@ namespace Elasticsearch.Net.Utf8Json
             var buf = buffer;
             try
             {
-                int length = 0;
+                var length = 0;
                 int read;
                 while ((read = await stream.ReadAsync(buf, length, buf.Length - length).ConfigureAwait(false)) > 0)
                 {
@@ -368,33 +320,25 @@ namespace Elasticsearch.Net.Utf8Json
             }
         }
 
-        static int FillFromStream(Stream input, ref byte[] buffer)
+		private static int FillFromStream(Stream input, ref byte[] buffer)
         {
-            int length = 0;
+            var length = 0;
             int read;
             while ((read = input.Read(buffer, length, buffer.Length - length)) > 0)
             {
                 length += read;
                 if (length == buffer.Length)
-                {
-                    BinaryUtil.FastResize(ref buffer, length * 2);
-                }
-            }
+					BinaryUtil.FastResize(ref buffer, length * 2);
+			}
 
             return length;
         }
 
 		internal static class MemoryPool
 		{
-			public static byte[] Rent(int minLength = 65535)
-			{
-				return System.Buffers.ArrayPool<byte>.Shared.Rent(minLength);
-			}
+			public static byte[] Rent(int minLength = 65535) => System.Buffers.ArrayPool<byte>.Shared.Rent(minLength);
 
-			public static void Return(byte[] bytes)
-			{
-				System.Buffers.ArrayPool<byte>.Shared.Return(bytes);
-			}
+			public static void Return(byte[] bytes) => System.Buffers.ArrayPool<byte>.Shared.Return(bytes);
 		}
     }
 }

@@ -1,5 +1,6 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
 <#@ output extension=".cs" #>
 #region Utf8Json License https://github.com/neuecc/Utf8Json/blob/master/LICENSE
 // MIT License
@@ -26,8 +27,9 @@
 #endregion
 
 using System;
+using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Formatters
 {
     // reduce static constructor generate size on generics(especially IL2CPP on Unity)
     internal static class TupleFormatterHelper
@@ -40,7 +42,7 @@ namespace Elasticsearch.Net
         static TupleFormatterHelper()
         {
 <# for(var i = 1; i <= 8; i++) { Func<int, string> toItem = x => ((x == 8) ? "Rest" : "Item" + x); #>
-            nameCache<#= i #> = new byte[][]
+            nameCache<#= i #> = new []
             {
 <# for (var j = 1; j <= i; j++) { if (j == 1) { #>
                 JsonWriter.GetEncodedPropertyNameWithBeginObject("<#= toItem(j) #>"),
@@ -61,7 +63,7 @@ namespace Elasticsearch.Net
     }
 }
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Utf8Json.Formatters
 {
 <# for(var i = 1; i <= 8; i++) { 
     Func<int, string> toT = x => "T" + ((x == 8) ? "Rest" : x.ToString());
@@ -72,15 +74,17 @@ namespace Elasticsearch.Net
 
     internal sealed class TupleFormatter<<#= ts #>> : IJsonFormatter<<#= t #>>
     {
-        static readonly byte[][] cache = TupleFormatterHelper.nameCache<#= i #>;
-        static readonly AutomataDictionary dictionary = TupleFormatterHelper.dictionary<#= i #>;
+        // ReSharper disable once StaticMemberInGenericType
+        private static readonly byte[][] Cache = TupleFormatterHelper.nameCache<#= i #>;
+        // ReSharper disable once StaticMemberInGenericType
+        private static readonly AutomataDictionary Dictionary = TupleFormatterHelper.dictionary<#= i #>;
 
         public void Serialize(ref JsonWriter writer, <#= t #> value, IJsonFormatterResolver formatterResolver)
         {
             if (value == null) { writer.WriteNull(); return; }
             
 <# for(var j = 1; j <= i; j++) { #>
-            writer.WriteRaw(cache[<#= j - 1 #>]);
+            writer.WriteRaw(Cache[<#= j - 1 #>]);
             formatterResolver.GetFormatterWithVerify<<#= toT(j) #>>().Serialize(ref writer, value.<#= toItem(j) #>, formatterResolver);
 <# } #>
             writer.WriteEndObject();
@@ -91,7 +95,7 @@ namespace Elasticsearch.Net
             if (reader.ReadIsNull()) return null;
 
 <# for(var j = 1; j <= i; j++) { #>
-            <#= toT(j) #> item<#= j #> = default(<#= toT(j) #>);
+            <#= toT(j) #> item<#= j #> = default;
 <# } #>
             
             var count = 0;
@@ -99,8 +103,7 @@ namespace Elasticsearch.Net
             while (!reader.ReadIsEndObjectWithSkipValueSeparator(ref count))
             {
                 var keyString = reader.ReadPropertyNameSegmentRaw();
-                int key;
-                dictionary.TryGetValue(keyString, out key);
+                Dictionary.TryGetValue(keyString, out var key);
 
                 switch (key)
                 {

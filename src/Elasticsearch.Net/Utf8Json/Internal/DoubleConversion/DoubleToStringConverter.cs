@@ -27,134 +27,99 @@ using System.Globalization;
 
 namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
 {
-    using uint64_t = UInt64;
-    using uint32_t = UInt32;
-
 	internal struct InternalStringBuilder
     {
-        public byte[] buffer;
-        public int offset;
+        public byte[] Buffer;
+        public int Offset;
 
         public InternalStringBuilder(byte[] buffer, int position)
         {
-            this.buffer = buffer;
-            this.offset = position;
+            Buffer = buffer;
+            Offset = position;
         }
 
         public void AddCharacter(byte str)
         {
-            BinaryUtil.EnsureCapacity(ref buffer, offset, 1);
-            buffer[offset++] = str;
+            BinaryUtil.EnsureCapacity(ref Buffer, Offset, 1);
+            Buffer[Offset++] = str;
         }
 
         public void AddString(byte[] str)
         {
-            BinaryUtil.EnsureCapacity(ref buffer, offset, str.Length);
-            for (int i = 0; i < str.Length; i++)
-            {
-                buffer[offset + i] = str[i];
-            }
-            offset += str.Length;
+            BinaryUtil.EnsureCapacity(ref Buffer, Offset, str.Length);
+            for (var i = 0; i < str.Length; i++)
+				Buffer[Offset + i] = str[i];
+
+			Offset += str.Length;
         }
 
         public void AddSubstring(byte[] str, int length)
         {
-            BinaryUtil.EnsureCapacity(ref buffer, offset, length);
-            for (int i = 0; i < length; i++)
-            {
-                buffer[offset + i] = str[i];
-            }
-            offset += length;
+            BinaryUtil.EnsureCapacity(ref Buffer, Offset, length);
+            for (var i = 0; i < length; i++)
+				Buffer[Offset + i] = str[i];
+
+			Offset += length;
         }
 
         public void AddSubstring(byte[] str, int start, int length)
         {
-            BinaryUtil.EnsureCapacity(ref buffer, offset, length);
-            for (int i = 0; i < length; i++)
-            {
-                buffer[offset + i] = str[start + i];
-            }
-            offset += length;
+            BinaryUtil.EnsureCapacity(ref Buffer, Offset, length);
+            for (var i = 0; i < length; i++)
+				Buffer[Offset + i] = str[start + i];
+
+			Offset += length;
         }
 
         public void AddPadding(byte c, int count)
         {
-            BinaryUtil.EnsureCapacity(ref buffer, offset, count);
-            for (int i = 0; i < count; i++)
-            {
-                buffer[offset + i] = c;
-            }
-            offset += count;
+            BinaryUtil.EnsureCapacity(ref Buffer, Offset, count);
+            for (var i = 0; i < count; i++)
+				Buffer[Offset + i] = c;
+
+			Offset += count;
         }
 
         public void AddStringSlow(string str)
         {
-            BinaryUtil.EnsureCapacity(ref buffer, offset, StringEncoding.UTF8.GetMaxByteCount(str.Length));
-            offset += StringEncoding.UTF8.GetBytes(str, 0, str.Length, buffer, offset);
+            BinaryUtil.EnsureCapacity(ref Buffer, Offset, StringEncoding.UTF8.GetMaxByteCount(str.Length));
+            Offset += StringEncoding.UTF8.GetBytes(str, 0, str.Length, Buffer, Offset);
         }
     }
 
     // C# API
     internal static partial class DoubleToStringConverter
     {
-        [ThreadStatic]
-        static byte[] decimalRepBuffer;
+        [ThreadStatic] private static byte[] _decimalRepBuffer;
 
-        [ThreadStatic]
-        static byte[] exponentialRepBuffer;
+        [ThreadStatic] private static byte[] _exponentialRepBuffer;
 
-        [ThreadStatic]
-        static byte[] toStringBuffer;
+        [ThreadStatic] private static byte[] _toStringBuffer;
 
-        static byte[] GetDecimalRepBuffer(int size)
-        {
-            if (decimalRepBuffer == null)
-            {
-                decimalRepBuffer = new byte[size];
-            }
-            return decimalRepBuffer;
-        }
+		private static byte[] GetDecimalRepBuffer(int size) => _decimalRepBuffer ??= new byte[size];
 
-        static byte[] GetExponentialRepBuffer(int size)
-        {
-            if (exponentialRepBuffer == null)
-            {
-                exponentialRepBuffer = new byte[size];
-            }
-            return exponentialRepBuffer;
-        }
+		private static byte[] GetExponentialRepBuffer(int size) => _exponentialRepBuffer ??= new byte[size];
 
-        static byte[] GetToStringBuffer()
-        {
-            if (toStringBuffer == null)
-            {
-                toStringBuffer = new byte[24];
-            }
-            return toStringBuffer;
-        }
+		private static byte[] GetToStringBuffer() => _toStringBuffer ??= new byte[24];
 
-        public static int GetBytes(ref byte[] buffer, int offset, float value)
+		public static int GetBytes(ref byte[] buffer, int offset, float value)
         {
             var sb = new InternalStringBuilder(buffer, offset);
             if (!ToShortestIeeeNumber(value, ref sb, DtoaMode.SHORTEST_SINGLE))
-            {
-                throw new InvalidOperationException("not support float value:" + value);
-            }
+				throw new InvalidOperationException("not support float value:" + value);
 
-            buffer = sb.buffer;
-            return sb.offset - offset;
+			buffer = sb.Buffer;
+            return sb.Offset - offset;
         }
 
         public static int GetBytes(ref byte[] buffer, int offset, double value)
         {
             var sb = new InternalStringBuilder(buffer, offset);
             if (!ToShortestIeeeNumber(value, ref sb, DtoaMode.SHORTEST))
-            {
-                throw new InvalidOperationException("not support double value:" + value);
-            }
+				throw new InvalidOperationException("not support double value:" + value);
 
-            buffer = sb.buffer;
-            return sb.offset - offset;
+			buffer = sb.Buffer;
+            return sb.Offset - offset;
         }
     }
 
@@ -164,7 +129,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
 
     internal static partial class DoubleToStringConverter
     {
-        enum FastDtoaMode
+		private enum FastDtoaMode
         {
             // Computes the shortest representation of the given input. The returned
             // result will be the most accurate number of this length. Longer
@@ -177,7 +142,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             // FAST_DTOA_PRECISION
         };
 
-        enum DtoaMode
+		private enum DtoaMode
         {
             SHORTEST,
             SHORTEST_SINGLE,
@@ -186,7 +151,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
         }
 
         [Flags]
-        enum Flags
+		private enum Flags
         {
             NO_FLAGS = 0,
             EMIT_POSITIVE_EXPONENT_SIGN = 1,
@@ -196,8 +161,8 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
         };
 
         // C# constants
-        static readonly byte[] infinity_symbol_ = StringEncoding.UTF8.GetBytes(double.PositiveInfinity.ToString());
-        static readonly byte[] nan_symbol_ = StringEncoding.UTF8.GetBytes(double.NaN.ToString());
+		private static readonly byte[] InfinitySymbol = StringEncoding.UTF8.GetBytes(double.PositiveInfinity.ToString(CultureInfo.InvariantCulture));
+		private static readonly byte[] NanSymbol = StringEncoding.UTF8.GetBytes(double.NaN.ToString(CultureInfo.InvariantCulture));
 
         // constructor parameter, same as EcmaScriptConverter
         //DoubleToStringConverter(int flags,
@@ -215,16 +180,16 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
         //const int max_leading_padding_zeroes_in_precision_mode_;
         //const int max_trailing_padding_zeroes_in_precision_mode_;
 
-        static readonly Flags flags_ = Flags.UNIQUE_ZERO | Flags.EMIT_POSITIVE_EXPONENT_SIGN | Flags.EMIT_TRAILING_DECIMAL_POINT | Flags.EMIT_TRAILING_ZERO_AFTER_POINT;
-        static readonly char exponent_character_ = 'E';
-        static readonly int decimal_in_shortest_low_ = -4; // C# ToString("G")
-        static readonly int decimal_in_shortest_high_ = 15;// C# ToString("G")
+		private static readonly Flags flags_ = Flags.UNIQUE_ZERO | Flags.EMIT_POSITIVE_EXPONENT_SIGN | Flags.EMIT_TRAILING_DECIMAL_POINT | Flags.EMIT_TRAILING_ZERO_AFTER_POINT;
+		private static readonly char ExponentCharacter = 'E';
+		private static readonly int DecimalInShortestLow = -4; // C# ToString("G")
+		private static readonly int DecimalInShortestHigh = 15;// C# ToString("G")
 
-        const int kBase10MaximalLength = 17;
+		private const int KBase10MaximalLength = 17;
 
-        const int kFastDtoaMaximalLength = 17;
+		private const int KFastDtoaMaximalLength = 17;
         // Same for single-precision numbers.
-        const int kFastDtoaMaximalSingleLength = 9;
+		private const int KFastDtoaMaximalSingleLength = 9;
 
         // The minimal and maximal target exponent define the range of w's binary
         // exponent, where 'w' is the result of multiplying the input by a cached power
@@ -232,8 +197,8 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
         //
         // A different range might be chosen on a different platform, to optimize digit
         // generation, but a smaller range requires more powers of ten to be cached.
-        const int kMinimalTargetExponent = -60;
-        const int kMaximalTargetExponent = -32;
+		private const int KMinimalTargetExponent = -60;
+		private const int KMaximalTargetExponent = -32;
 
         // Adjusts the last digit of the generated number, and screens out generated
         // solutions that may be inaccurate. A solution may be inaccurate if it is
@@ -250,16 +215,16 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
         // Output: returns true if the buffer is guaranteed to contain the closest
         //    representable number to the input.
         //  Modifies the generated digits in the buffer to approach (round towards) w.
-        static bool RoundWeed(byte[] buffer,
+		private static bool RoundWeed(byte[] buffer,
                               int length,
-                              uint64_t distance_too_high_w,
-                              uint64_t unsafe_interval,
-                              uint64_t rest,
-                              uint64_t ten_kappa,
-                              uint64_t unit)
+                              ulong distance_too_high_w,
+                              ulong unsafe_interval,
+                              ulong rest,
+                              ulong ten_kappa,
+                              ulong unit)
         {
-            uint64_t small_distance = distance_too_high_w - unit;
-            uint64_t big_distance = distance_too_high_w + unit;
+            var small_distance = distance_too_high_w - unit;
+            var big_distance = distance_too_high_w + unit;
             // Let w_low  = too_high - big_distance, and
             //     w_high = too_high - small_distance.
             // Note: w_low < w < w_high
@@ -347,11 +312,9 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
                 unsafe_interval - rest >= ten_kappa &&
                 (rest + ten_kappa < big_distance ||
                  big_distance - rest > rest + ten_kappa - big_distance))
-            {
-                return false;
-            }
+				return false;
 
-            // Weeding test.
+			// Weeding test.
             //   The safe interval is [too_low + 2 ulp; too_high - 2 ulp]
             //   Since too_low = too_high - unsafe_interval this is equivalent to
             //      [too_high - unsafe_interval + 4 ulp; too_high - 2 ulp]
@@ -370,24 +333,23 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
 
         // Inspired by the method for finding an integer log base 10 from here:
         // http://graphics.stanford.edu/~seander/bithacks.html#IntegerLog10
-        static readonly uint[] kSmallPowersOfTen = new uint[] { 0, 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000 };
+		private static readonly uint[] KSmallPowersOfTen = { 0, 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000 };
 
-        static void BiggestPowerTen(uint32_t number,
+		private static void BiggestPowerTen(uint number,
                                     int number_bits,
-                                    out uint32_t power,
+                                    out uint power,
                                     out int exponent_plus_one)
         {
             // 1233/4096 is approximately 1/lg(10).
-            int exponent_plus_one_guess = ((number_bits + 1) * 1233 >> 12);
+            var exponent_plus_one_guess = ((number_bits + 1) * 1233 >> 12);
             // We increment to skip over the first entry in the kPowersOf10 table.
             // Note: kPowersOf10[i] == 10^(i-1).
             exponent_plus_one_guess++;
             // We don't have any guarantees that 2^number_bits <= number.
-            if (number < kSmallPowersOfTen[exponent_plus_one_guess])
-            {
-                exponent_plus_one_guess--;
-            }
-            power = kSmallPowersOfTen[exponent_plus_one_guess];
+            if (number < KSmallPowersOfTen[exponent_plus_one_guess])
+				exponent_plus_one_guess--;
+
+			power = KSmallPowersOfTen[exponent_plus_one_guess];
             exponent_plus_one = exponent_plus_one_guess;
         }
 
@@ -433,7 +395,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
         // represent 'w' we can stop. Everything inside the interval low - high
         // represents w. However we have to pay attention to low, high and w's
         // imprecision.
-        static bool DigitGen(DiyFp low,
+		private static bool DigitGen(DiyFp low,
                              DiyFp w,
                              DiyFp high,
                              byte[] buffer,
@@ -451,12 +413,12 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             // We will now start by generating the digits within the uncertain
             // interval. Later we will weed out representations that lie outside the safe
             // interval and thus _might_ lie outside the correct interval.
-            uint64_t unit = 1;
-            DiyFp too_low = new DiyFp(low.f - unit, low.e);
-            DiyFp too_high = new DiyFp(high.f + unit, high.e);
+            ulong unit = 1;
+            var too_low = new DiyFp(low.F - unit, low.E);
+            var too_high = new DiyFp(high.F + unit, high.E);
             // too_low and too_high are guaranteed to lie outside the interval we want the
             // generated number in.
-            DiyFp unsafe_interval = DiyFp.Minus(ref too_high, ref too_low);
+            var unsafe_interval = DiyFp.Minus(ref too_high, ref too_low);
             // We now cut the input number into two parts: the integral digits and the
             // fractionals. We will not write any decimal separator though, but adapt
             // kappa instead.
@@ -464,16 +426,14 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             // such that:   too_low < buffer * 10^kappa < too_high
             // We use too_high for the digit_generation and stop as soon as possible.
             // If we stop early we effectively round down.
-            DiyFp one = new DiyFp((uint64_t)(1) << -w.e, w.e);
+            var one = new DiyFp((ulong)(1) << -w.E, w.E);
             // Division by one is a shift.
-            uint32_t integrals = (uint32_t)(too_high.f >> -one.e);
+            var integrals = (uint)(too_high.F >> -one.E);
             // Modulo by one is an and.
-            uint64_t fractionals = too_high.f & (one.f - 1);
-            uint32_t divisor;
-            int divisor_exponent_plus_one;
-            BiggestPowerTen(integrals, DiyFp.kSignificandSize - (-one.e),
-                            out divisor, out divisor_exponent_plus_one);
-            kappa = divisor_exponent_plus_one;
+            var fractionals = too_high.F & (one.F - 1);
+			BiggestPowerTen(integrals, DiyFp.KSignificandSize - (-one.E),
+                            out var divisor, out var divisorExponentPlusOne);
+            kappa = divisorExponentPlusOne;
             length = 0;
             // Loop invariant: buffer = too_high / 10^kappa  (integer division)
             // The invariant holds for the first iteration: kappa has been initialized
@@ -481,24 +441,24 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             // that is smaller than integrals.
             while (kappa > 0)
             {
-                int digit = unchecked((int)(integrals / divisor));
+                var digit = unchecked((int)(integrals / divisor));
                 buffer[length] = (byte)((byte)'0' + digit);
                 (length)++;
                 integrals %= divisor;
                 (kappa)--;
                 // Note that kappa now equals the exponent of the divisor and that the
                 // invariant thus holds again.
-                uint64_t rest =
-                    ((uint64_t)(integrals) << -one.e) + fractionals;
+                var rest =
+                    ((ulong)(integrals) << -one.E) + fractionals;
                 // Invariant: too_high = buffer * 10^kappa + DiyFp(rest, one.e())
                 // Reminder: unsafe_interval.e() == one.e()
-                if (rest < unsafe_interval.f)
+                if (rest < unsafe_interval.F)
                 {
                     // Rounding down (by not emitting the remaining digits) yields a number
                     // that lies within the unsafe interval.
-                    return RoundWeed(buffer, length, DiyFp.Minus(ref too_high, ref w).f,
-                                     unsafe_interval.f, rest,
-                                     (uint64_t)(divisor) << -one.e, unit);
+                    return RoundWeed(buffer, length, DiyFp.Minus(ref too_high, ref w).F,
+                                     unsafe_interval.F, rest,
+                                     (ulong)(divisor) << -one.E, unit);
                 }
                 divisor /= 10;
             }
@@ -513,17 +473,17 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             {
                 fractionals *= 10;
                 unit *= 10;
-                unsafe_interval.f = (unsafe_interval.f * 10);
+                unsafe_interval.F = (unsafe_interval.F * 10);
                 // Integer division by one.
-                int digit = (int)(fractionals >> -one.e);
+                var digit = (int)(fractionals >> -one.E);
                 buffer[length] = (byte)((byte)'0' + digit);
                 (length)++;
-                fractionals &= one.f - 1;  // Modulo by one.
+                fractionals &= one.F - 1;  // Modulo by one.
                 (kappa)--;
-                if (fractionals < unsafe_interval.f)
+                if (fractionals < unsafe_interval.F)
                 {
-                    return RoundWeed(buffer, length, DiyFp.Minus(ref too_high, ref w).f * unit,
-                                     unsafe_interval.f, fractionals, one.f, unit);
+                    return RoundWeed(buffer, length, DiyFp.Minus(ref too_high, ref w).F * unit,
+                                     unsafe_interval.F, fractionals, one.F, unit);
                 }
             }
         }
@@ -539,38 +499,34 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
         // The last digit will be closest to the actual v. That is, even if several
         // digits might correctly yield 'v' when read again, the closest will be
         // computed.
-        static bool Grisu3(double v,
+		private static bool Grisu3(double v,
                            FastDtoaMode mode,
                            byte[] buffer,
                            out int length,
                            out int decimal_exponent)
         {
-            DiyFp w = new Double(v).AsNormalizedDiyFp();
+            var w = new Double(v).AsNormalizedDiyFp();
             // boundary_minus and boundary_plus are the boundaries between v and its
             // closest floating-point neighbors. Any number strictly between
             // boundary_minus and boundary_plus will round to v when convert to a double.
             // Grisu3 will never output representations that lie exactly on a boundary.
             DiyFp boundary_minus, boundary_plus;
             if (mode == FastDtoaMode.FAST_DTOA_SHORTEST)
+				new Double(v).NormalizedBoundaries(out boundary_minus, out boundary_plus);
+			else if (mode == FastDtoaMode.FAST_DTOA_SHORTEST_SINGLE)
             {
-                new Double(v).NormalizedBoundaries(out boundary_minus, out boundary_plus);
-            }
-            else if (mode == FastDtoaMode.FAST_DTOA_SHORTEST_SINGLE)
-            {
-                float single_v = (float)(v);
+                var single_v = (float)(v);
                 new Single(single_v).NormalizedBoundaries(out boundary_minus, out boundary_plus);
             }
             else
-            {
-                throw new Exception("Invalid Mode.");
-            }
+				throw new Exception("Invalid Mode.");
 
-            DiyFp ten_mk;  // Cached power of ten: 10^-k
+			DiyFp ten_mk;  // Cached power of ten: 10^-k
             int mk;        // -k
-            int ten_mk_minimal_binary_exponent =
-               kMinimalTargetExponent - (w.e + DiyFp.kSignificandSize);
-            int ten_mk_maximal_binary_exponent =
-               kMaximalTargetExponent - (w.e + DiyFp.kSignificandSize);
+            var ten_mk_minimal_binary_exponent =
+               KMinimalTargetExponent - (w.E + DiyFp.KSignificandSize);
+            var ten_mk_maximal_binary_exponent =
+               KMaximalTargetExponent - (w.E + DiyFp.KSignificandSize);
             PowersOfTenCache.GetCachedPowerForBinaryExponentRange(
                 ten_mk_minimal_binary_exponent,
                 ten_mk_maximal_binary_exponent,
@@ -585,15 +541,15 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             // In fact: scaled_w - w*10^k < 1ulp (unit in the last place) of scaled_w.
             // In other words: let f = scaled_w.f() and e = scaled_w.e(), then
             //           (f-1) * 2^e < w*10^k < (f+1) * 2^e
-            DiyFp scaled_w = DiyFp.Times(ref w, ref ten_mk);
+            var scaled_w = DiyFp.Times(ref w, ref ten_mk);
 
             // In theory it would be possible to avoid some recomputations by computing
             // the difference between w and boundary_minus/plus (a power of 2) and to
             // compute scaled_boundary_minus/plus by subtracting/adding from
             // scaled_w. However the code becomes much less readable and the speed
             // enhancements are not terriffic.
-            DiyFp scaled_boundary_minus = DiyFp.Times(ref boundary_minus, ref ten_mk);
-            DiyFp scaled_boundary_plus = DiyFp.Times(ref boundary_plus, ref ten_mk);
+            var scaled_boundary_minus = DiyFp.Times(ref boundary_minus, ref ten_mk);
+            var scaled_boundary_plus = DiyFp.Times(ref boundary_plus, ref ten_mk);
 
             // DigitGen will generate the digits of scaled_w. Therefore we have
             // v == (double) (scaled_w * 10^-mk).
@@ -601,22 +557,21 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             // integer than it will be updated. For instance if scaled_w == 1.23 then
             // the buffer will be filled with "123" und the decimal_exponent will be
             // decreased by 2.
-            int kappa;
-            bool result = DigitGen(scaled_boundary_minus, scaled_w, scaled_boundary_plus,
-                                   buffer, out length, out kappa);
+			var result = DigitGen(scaled_boundary_minus, scaled_w, scaled_boundary_plus,
+                                   buffer, out length, out var kappa);
             decimal_exponent = -mk + kappa;
             return result;
         }
 
-        static bool FastDtoa(double v,
+		private static bool FastDtoa(double v,
               FastDtoaMode mode,
               // int requested_digits,
               byte[] buffer,
               out int length,
               out int decimal_point)
         {
-            bool result = false;
-            int decimal_exponent = 0;
+            bool result;
+            int decimal_exponent;
             switch (mode)
             {
                 case FastDtoaMode.FAST_DTOA_SHORTEST:
@@ -629,55 +584,49 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
                     throw new Exception("unreachable code.");
             }
             if (result)
-            {
-                decimal_point = length + decimal_exponent;
-            }
-            else
-            {
-                decimal_point = -1;
-            }
-            return result;
+				decimal_point = length + decimal_exponent;
+			else
+				decimal_point = -1;
+
+			return result;
         }
 
         // https://github.com/google/double-conversion/blob/master/double-conversion/double-conversion.cc
 
-        static bool HandleSpecialValues(
+		private static bool HandleSpecialValues(
             double value,
             ref InternalStringBuilder result_builder)
         {
-            Double double_inspect = new Double(value);
+            var double_inspect = new Double(value);
             if (double_inspect.IsInfinite())
             {
-                if (infinity_symbol_ == null) return false;
+                if (InfinitySymbol == null) return false;
                 if (value < 0)
-                {
-                    result_builder.AddCharacter((byte)'-');
-                }
-                result_builder.AddString(infinity_symbol_);
+					result_builder.AddCharacter((byte)'-');
+
+				result_builder.AddString(InfinitySymbol);
                 return true;
             }
             if (double_inspect.IsNan())
             {
-                if (nan_symbol_ == null) return false;
-                result_builder.AddString(nan_symbol_);
+                if (NanSymbol == null) return false;
+                result_builder.AddString(NanSymbol);
                 return true;
             }
             return false;
         }
 
-        static bool ToShortestIeeeNumber(
+		private static bool ToShortestIeeeNumber(
             double value,
             ref InternalStringBuilder result_builder,
             DtoaMode mode)
         {
             if (new Double(value).IsSpecial())
-            {
-                return HandleSpecialValues(value, ref result_builder);
-            }
+				return HandleSpecialValues(value, ref result_builder);
 
-            int decimal_point;
+			int decimal_point;
             bool sign;
-            const int kDecimalRepCapacity = kBase10MaximalLength + 1;
+            const int kDecimalRepCapacity = KBase10MaximalLength + 1;
             var decimal_rep = GetDecimalRepBuffer(kDecimalRepCapacity); // byte[] decimal_rep = new byte[kDecimalRepCapacity];
             int decimal_rep_length;
 
@@ -692,15 +641,15 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
                 return true;
             }
 
-            bool unique_zero = (flags_ & Flags.UNIQUE_ZERO) != 0;
+            var unique_zero = (flags_ & Flags.UNIQUE_ZERO) != 0;
             if (sign && (value != 0.0 || !unique_zero))
             {
                 result_builder.AddCharacter((byte)'-');
             }
 
-            int exponent = decimal_point - 1;
-            if ((decimal_in_shortest_low_ <= exponent) &&
-                (exponent < decimal_in_shortest_high_))
+            var exponent = decimal_point - 1;
+            if ((DecimalInShortestLow <= exponent) &&
+                (exponent < DecimalInShortestHigh))
             {
                 CreateDecimalRepresentation(decimal_rep, decimal_rep_length,
                                             decimal_point,
@@ -716,7 +665,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             return true;
         }
 
-        static void CreateDecimalRepresentation(
+		private static void CreateDecimalRepresentation(
             byte[] decimal_digits,
             int length,
             int decimal_point,
@@ -733,7 +682,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
                     result_builder.AddCharacter((byte)'.');
                     result_builder.AddPadding((byte)'0', -decimal_point);
                     result_builder.AddSubstring(decimal_digits, length);
-                    int remaining_digits = digits_after_point - (-decimal_point) - length;
+                    var remaining_digits = digits_after_point - (-decimal_point) - length;
                     result_builder.AddPadding((byte)'0', remaining_digits);
                 }
             }
@@ -754,23 +703,19 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
                 result_builder.AddSubstring(decimal_digits, decimal_point);
                 result_builder.AddCharacter((byte)'.');
                 result_builder.AddSubstring(decimal_digits, decimal_point, length - decimal_point);
-                int remaining_digits = digits_after_point - (length - decimal_point);
+                var remaining_digits = digits_after_point - (length - decimal_point);
                 result_builder.AddPadding((byte)'0', remaining_digits);
             }
             if (digits_after_point == 0)
             {
                 if ((flags_ & Flags.EMIT_TRAILING_DECIMAL_POINT) != 0)
-                {
-                    result_builder.AddCharacter((byte)'.');
-                }
-                if ((flags_ & Flags.EMIT_TRAILING_ZERO_AFTER_POINT) != 0)
-                {
-                    result_builder.AddCharacter((byte)'0');
-                }
-            }
+					result_builder.AddCharacter((byte)'.');
+				if ((flags_ & Flags.EMIT_TRAILING_ZERO_AFTER_POINT) != 0)
+					result_builder.AddCharacter((byte)'0');
+			}
         }
 
-        static void CreateExponentialRepresentation(
+		private static void CreateExponentialRepresentation(
             byte[] decimal_digits,
             int length,
             int exponent,
@@ -782,7 +727,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
                 result_builder.AddCharacter((byte)'.');
                 result_builder.AddSubstring(decimal_digits, 1, length - 1);
             }
-            result_builder.AddCharacter((byte)exponent_character_);
+            result_builder.AddCharacter((byte)ExponentCharacter);
             if (exponent < 0)
             {
                 result_builder.AddCharacter((byte)'-');
@@ -791,19 +736,17 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
             else
             {
                 if ((flags_ & Flags.EMIT_POSITIVE_EXPONENT_SIGN) != 0)
-                {
-                    result_builder.AddCharacter((byte)'+');
-                }
-            }
+					result_builder.AddCharacter((byte)'+');
+			}
             if (exponent == 0)
             {
                 result_builder.AddCharacter((byte)'0');
                 return;
             }
             const int kMaxExponentLength = 5;
-            byte[] buffer = GetExponentialRepBuffer(kMaxExponentLength + 1);
+            var buffer = GetExponentialRepBuffer(kMaxExponentLength + 1);
             buffer[kMaxExponentLength] = (byte)'\0';
-            int first_char_pos = kMaxExponentLength;
+            var first_char_pos = kMaxExponentLength;
             while (exponent > 0)
             {
                 buffer[--first_char_pos] = (byte)((byte)'0' + (exponent % 10));
@@ -813,7 +756,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
         }
 
         // modified, return fast_worked.
-        static bool DoubleToAscii(double v,
+		private static bool DoubleToAscii(double v,
             DtoaMode mode,
             int requested_digits,
             //byte[] buffer,

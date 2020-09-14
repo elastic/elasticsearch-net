@@ -65,11 +65,11 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 	// can inherit for set optimize manual serialize/deserialize func.
 	internal class EnumFormatter<T> : IJsonFormatter<T>, IObjectPropertyNameFormatter<T>
 	{
-		private static readonly ByteArrayStringHashTable<T> nameValueMapping;
-		private static readonly Dictionary<T, string> valueNameMapping;
+		private static readonly ByteArrayStringHashTable<T> NameValueMapping;
+		private static readonly Dictionary<T, string> ValueNameMapping;
 
-		private static readonly JsonSerializeAction<T> defaultSerializeByUnderlyingValue;
-		private static readonly JsonDeserializeFunc<T> defaultDeserializeByUnderlyingValue;
+		private static readonly JsonSerializeAction<T> DefaultSerializeByUnderlyingValue;
+		private static readonly JsonDeserializeFunc<T> DefaultDeserializeByUnderlyingValue;
 
 		static EnumFormatter()
 		{
@@ -95,54 +95,48 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 					: name);
 			}
 
-			nameValueMapping = new ByteArrayStringHashTable<T>(names.Count);
-			valueNameMapping = new Dictionary<T, string>(names.Count);
+			NameValueMapping = new ByteArrayStringHashTable<T>(names.Count);
+			ValueNameMapping = new Dictionary<T, string>(names.Count);
 
-			for (int i = 0; i < names.Count; i++)
+			for (var i = 0; i < names.Count; i++)
 			{
-				nameValueMapping.Add(JsonWriter.GetEncodedPropertyNameWithoutQuotation(names[i]), (T)values[i]);
-				valueNameMapping[(T)values[i]] = names[i];
+				NameValueMapping.Add(JsonWriter.GetEncodedPropertyNameWithoutQuotation(names[i]), (T)values[i]);
+				ValueNameMapping[(T)values[i]] = names[i];
 			}
 
 			// boxed... or generate...
 			{
-				bool isBoxed;
-				var serialize = EnumFormatterHelper.GetSerializeDelegate(typeof(T), out isBoxed);
+				var serialize = EnumFormatterHelper.GetSerializeDelegate(typeof(T), out var isBoxed);
 				if (isBoxed)
 				{
 					var boxSerialize = (JsonSerializeAction<object>)serialize;
-					defaultSerializeByUnderlyingValue = (ref JsonWriter writer, T value, IJsonFormatterResolver _) => boxSerialize.Invoke(ref writer, (object)value, _);
+					DefaultSerializeByUnderlyingValue = (ref JsonWriter writer, T value, IJsonFormatterResolver _) => boxSerialize.Invoke(ref writer, value, _);
 				}
 				else
-				{
-					defaultSerializeByUnderlyingValue = (JsonSerializeAction<T>)serialize;
-				}
+					DefaultSerializeByUnderlyingValue = (JsonSerializeAction<T>)serialize;
 			}
 
 			{
-				bool isBoxed;
-				var deserialize = EnumFormatterHelper.GetDeserializeDelegate(typeof(T), out isBoxed);
+				var deserialize = EnumFormatterHelper.GetDeserializeDelegate(typeof(T), out var isBoxed);
 				if (isBoxed)
 				{
 					var boxDeserialize = (JsonDeserializeFunc<object>)deserialize;
-					defaultDeserializeByUnderlyingValue = (ref JsonReader reader, IJsonFormatterResolver _) => (T)boxDeserialize.Invoke(ref reader, _);
+					DefaultDeserializeByUnderlyingValue = (ref JsonReader reader, IJsonFormatterResolver _) => (T)boxDeserialize.Invoke(ref reader, _);
 				}
 				else
-				{
-					defaultDeserializeByUnderlyingValue = (JsonDeserializeFunc<T>)deserialize;
-				}
+					DefaultDeserializeByUnderlyingValue = (JsonDeserializeFunc<T>)deserialize;
 			}
 		}
 
-		readonly bool serializeByName;
-		readonly JsonSerializeAction<T> serializeByUnderlyingValue;
-		readonly JsonDeserializeFunc<T> deserializeByUnderlyingValue;
+		private readonly bool _serializeByName;
+		private readonly JsonSerializeAction<T> _serializeByUnderlyingValue;
+		private readonly JsonDeserializeFunc<T> _deserializeByUnderlyingValue;
 
 		public EnumFormatter(bool serializeByName)
 		{
-			this.serializeByName = serializeByName;
-			this.serializeByUnderlyingValue = defaultSerializeByUnderlyingValue;
-			this.deserializeByUnderlyingValue = defaultDeserializeByUnderlyingValue;
+			_serializeByName = serializeByName;
+			_serializeByUnderlyingValue = DefaultSerializeByUnderlyingValue;
+			_deserializeByUnderlyingValue = DefaultDeserializeByUnderlyingValue;
 		}
 
 		/// <summary>
@@ -150,26 +144,21 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		/// </summary>
 		public EnumFormatter(JsonSerializeAction<T> valueSerializeAction, JsonDeserializeFunc<T> valueDeserializeAction)
 		{
-			this.serializeByName = false;
-			this.serializeByUnderlyingValue = valueSerializeAction;
-			this.deserializeByUnderlyingValue = valueDeserializeAction;
+			_serializeByName = false;
+			_serializeByUnderlyingValue = valueSerializeAction;
+			_deserializeByUnderlyingValue = valueDeserializeAction;
 		}
 
 		public void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{
-			if (serializeByName)
+			if (_serializeByName)
 			{
-				string name;
-				if (!valueNameMapping.TryGetValue(value, out name))
-				{
+				if (!ValueNameMapping.TryGetValue(value, out var name))
 					name = value.ToString(); // fallback for flags etc. But Enum.ToString is slow...
-				}
 				writer.WriteString(name);
 			}
 			else
-			{
-				serializeByUnderlyingValue(ref writer, value, formatterResolver);
-			}
+				_serializeByUnderlyingValue(ref writer, value, formatterResolver);
 		}
 
 		public T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -181,28 +170,24 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 				// avoid string decoding if possible.
 				var key = reader.ReadStringSegmentUnsafe();
 
-				T value;
-				if (!nameValueMapping.TryGetValue(key, out value))
+				if (!NameValueMapping.TryGetValue(key, out var value))
 				{
 					var str = StringEncoding.UTF8.GetString(key.Array, key.Offset, key.Count);
 					value = (T)Enum.Parse(typeof(T), str, true); // Enum.Parse is slow
 				}
 				return value;
 			}
-			else if (token == JsonToken.Number)
-			{
-				return deserializeByUnderlyingValue(ref reader, formatterResolver);
-			}
+
+			if (token == JsonToken.Number)
+				return _deserializeByUnderlyingValue(ref reader, formatterResolver);
 
 			throw new InvalidOperationException("Can't parse JSON to Enum format.");
 		}
 
 		public void SerializeToPropertyName(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{
-			if (serializeByName)
-			{
+			if (_serializeByName)
 				Serialize(ref writer, value, formatterResolver);
-			}
 			else
 			{
 				writer.WriteQuotation();
@@ -213,20 +198,16 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
 		public T DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (serializeByName)
-			{
+			if (_serializeByName)
 				return Deserialize(ref reader, formatterResolver);
-			}
-			else
-			{
-				var token = reader.GetCurrentJsonToken();
-				if (token != JsonToken.String) throw new InvalidOperationException("Can't parse JSON to Enum format.");
-				reader.AdvanceOffset(1); // skip \""
-				var t = Deserialize(ref reader, formatterResolver); // token is Number
-				reader.SkipWhiteSpace();
-				reader.AdvanceOffset(1); // skip \""
-				return t;
-			}
+
+			var token = reader.GetCurrentJsonToken();
+			if (token != JsonToken.String) throw new InvalidOperationException("Can't parse JSON to Enum format.");
+			reader.AdvanceOffset(1); // skip \""
+			var t = Deserialize(ref reader, formatterResolver); // token is Number
+			reader.SkipWhiteSpace();
+			reader.AdvanceOffset(1); // skip \""
+			return t;
 		}
 	}
 }

@@ -34,18 +34,18 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
     {
         public static readonly IJsonFormatter<object> Default = new PrimitiveObjectFormatter();
 
-        static readonly Dictionary<Type, int> typeToJumpCode = new Dictionary<Type, int>()
+		private static readonly Dictionary<Type, int> TypeToJumpCode = new Dictionary<Type, int>()
         {
             { typeof(bool), 0 },
-            { typeof(Char), 1 },
-            { typeof(SByte), 2 },
-            { typeof(Byte), 3 },
-            { typeof(Int16), 4 },
-            { typeof(UInt16), 5 },
-            { typeof(Int32), 6 },
-            { typeof(UInt32), 7 },
-            { typeof(Int64), 8 },
-            { typeof(UInt64),9  },
+            { typeof(char), 1 },
+            { typeof(sbyte), 2 },
+            { typeof(byte), 3 },
+            { typeof(short), 4 },
+            { typeof(ushort), 5 },
+            { typeof(int), 6 },
+            { typeof(uint), 7 },
+            { typeof(long), 8 },
+            { typeof(ulong),9  },
             { typeof(float), 10 },
             { typeof(double), 11 },
             { typeof(DateTime), 12 },
@@ -63,8 +63,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
             var t = value.GetType();
 
-            int key;
-            if (typeToJumpCode.TryGetValue(t, out key))
+			if (TypeToJumpCode.TryGetValue(t, out var key))
             {
                 switch (key)
                 {
@@ -72,12 +71,12 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                     case 1: CharFormatter.Default.Serialize(ref writer, (char)value, formatterResolver); return;
                     case 2: writer.WriteSByte((sbyte)value); return;
                     case 3: writer.WriteByte((byte)value); return;
-                    case 4: writer.WriteInt16((Int16)value); return;
-                    case 5: writer.WriteUInt16((UInt16)value); return;
+                    case 4: writer.WriteInt16((short)value); return;
+                    case 5: writer.WriteUInt16((ushort)value); return;
                     case 6: writer.WriteInt32((int)value); return;
-                    case 7: writer.WriteUInt32((UInt32)value); return;
+                    case 7: writer.WriteUInt32((uint)value); return;
                     case 8: writer.WriteInt64((long)value); return;
-                    case 9: writer.WriteUInt64((UInt64)value); return;
+                    case 9: writer.WriteUInt64((ulong)value); return;
                     case 10: writer.WriteSingle((float)value); return;
                     case 11: writer.WriteDouble((double)value); return;
                     case 12: ISO8601DateTimeFormatter.Default.Serialize(ref writer, (DateTime)value, formatterResolver); return;
@@ -94,8 +93,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 return;
             }
 
-            var dict = value as IDictionary; // check dictionary first
-            if (dict != null)
+			if (value is IDictionary dict)
             {
                 var count = 0;
                 writer.WriteBeginObject();
@@ -109,8 +107,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 return;
             }
 
-            var collection = value as ICollection;
-            if (collection != null)
+			if (value is ICollection collection)
             {
                 var count = 0;
                 writer.WriteBeginArray();

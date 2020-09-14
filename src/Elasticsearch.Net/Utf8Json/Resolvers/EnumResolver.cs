@@ -41,16 +41,13 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 	{
 		public static readonly IJsonFormatterResolver Instance = new EnumDefaultResolver();
 
-		EnumDefaultResolver()
+		private EnumDefaultResolver()
 		{
 		}
 
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
 
-		static class FormatterCache<T>
+		private static class FormatterCache<T>
 		{
 			public static readonly IJsonFormatter<T> formatter;
 
@@ -63,22 +60,18 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					// build underlying type and use wrapped formatter.
 					type = type.GenericTypeArguments[0];
 					if (!type.IsEnum)
-					{
 						return;
-					}
 
 					var innerFormatter = Instance.GetFormatterDynamic(type);
 					if (innerFormatter == null)
-					{
 						return;
-					}
+
 					formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(type), innerFormatter);
 					return;
 				}
-				else if (typeof(T).IsEnum)
-				{
-					formatter = (IJsonFormatter<T>)(object)new EnumFormatter<T>(true);
-				}
+
+				if (typeof(T).IsEnum)
+					formatter = new EnumFormatter<T>(true);
 			}
 		}
 	}
@@ -87,16 +80,13 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 	{
 		public static readonly IJsonFormatterResolver Instance = new EnumUnderlyingValueResolver();
 
-		EnumUnderlyingValueResolver()
+		private EnumUnderlyingValueResolver()
 		{
 		}
 
-		public IJsonFormatter<T> GetFormatter<T>()
-		{
-			return FormatterCache<T>.formatter;
-		}
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
 
-		static class FormatterCache<T>
+		private static class FormatterCache<T>
 		{
 			public static readonly IJsonFormatter<T> formatter;
 
@@ -108,23 +98,18 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				{
 					// build underlying type and use wrapped formatter.
 					type = type.GenericTypeArguments[0];
-					if (!type.IsEnum)
-					{
-						return;
-					}
+					if (!type.IsEnum) return;
 
 					var innerFormatter = Instance.GetFormatterDynamic(type);
 					if (innerFormatter == null)
-					{
 						return;
-					}
+
 					formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(type), innerFormatter);
 					return;
 				}
-				else if (typeof(T).IsEnum)
-				{
-					formatter = (IJsonFormatter<T>)(object)new EnumFormatter<T>(false);
-				}
+
+				if (typeof(T).IsEnum)
+					formatter = new EnumFormatter<T>(false);
 			}
 		}
 	}

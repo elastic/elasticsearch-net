@@ -24,69 +24,55 @@
 
 using System;
 using System.Globalization;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Elasticsearch.Net.Utf8Json.Formatters
 {
 	internal sealed class DateTimeFormatter : IJsonFormatter<DateTime>
     {
-        readonly string formatString;
+        private readonly string _formatString;
 
-        public DateTimeFormatter()
-        {
-            this.formatString = null;
-        }
+        public DateTimeFormatter() => _formatString = null;
 
-        public DateTimeFormatter(string formatString)
-        {
-            this.formatString = formatString;
-        }
+		public DateTimeFormatter(string formatString) => _formatString = formatString;
 
-        public void Serialize(ref JsonWriter writer, DateTime value, IJsonFormatterResolver formatterResolver)
-        {
-            writer.WriteString(value.ToString(formatString));
-        }
+		public void Serialize(ref JsonWriter writer, DateTime value, IJsonFormatterResolver formatterResolver) =>
+			writer.WriteString(value.ToString(_formatString));
 
-        public DateTime Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-        {
-            var str = reader.ReadString();
-            if (formatString == null)
-            {
-                return DateTime.Parse(str, CultureInfo.InvariantCulture);
-            }
-            else
-            {
-                return DateTime.ParseExact(str, formatString, CultureInfo.InvariantCulture);
-            }
-        }
+		public DateTime Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var str = reader.ReadString();
+			return _formatString == null
+				? DateTime.Parse(str, CultureInfo.InvariantCulture)
+				: DateTime.ParseExact(str, _formatString, CultureInfo.InvariantCulture);
+		}
     }
 
 	internal sealed class NullableDateTimeFormatter : IJsonFormatter<DateTime?>
     {
-        readonly DateTimeFormatter innerFormatter;
+        private readonly DateTimeFormatter _innerFormatter;
 
-        public NullableDateTimeFormatter()
+        public NullableDateTimeFormatter() => _innerFormatter = new DateTimeFormatter();
+
+		public NullableDateTimeFormatter(string formatString) => _innerFormatter = new DateTimeFormatter(formatString);
+
+		public void Serialize(ref JsonWriter writer, DateTime? value, IJsonFormatterResolver formatterResolver)
         {
-            this.innerFormatter = new DateTimeFormatter();
-        }
+            if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 
-        public NullableDateTimeFormatter(string formatString)
-        {
-            this.innerFormatter = new DateTimeFormatter(formatString);
-        }
-
-        public void Serialize(ref JsonWriter writer, DateTime? value, IJsonFormatterResolver formatterResolver)
-        {
-            if (value == null) { writer.WriteNull(); return; }
-
-            innerFormatter.Serialize(ref writer, value.Value, formatterResolver);
+            _innerFormatter.Serialize(ref writer, value.Value, formatterResolver);
         }
 
         public DateTime? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
         {
             if (reader.ReadIsNull()) return null;
 
-            return innerFormatter.Deserialize(ref reader, formatterResolver);
+            return _innerFormatter.Deserialize(ref reader, formatterResolver);
         }
     }
 
@@ -137,46 +123,40 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 writer.WriteRawUnsafe((byte)'0');
             }
             else if (year < 1000)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(year);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(year);
             writer.WriteRawUnsafe((byte)'-');
 
             if (month < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(month);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(month);
             writer.WriteRawUnsafe((byte)'-');
 
             if (day < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(day);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(day);
 
             writer.WriteRawUnsafe((byte)'T');
 
             if (hour < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(hour);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(hour);
             writer.WriteRawUnsafe((byte)':');
 
             if (minute < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(minute);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(minute);
             writer.WriteRawUnsafe((byte)':');
 
             if (second < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(second);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(second);
 
             if (nanosec != 0)
             {
@@ -218,11 +198,9 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                     writer.WriteRawUnsafe((byte)'0');
                 }
                 else if (nanosec < 1000000)
-                {
-                    writer.WriteRawUnsafe((byte)'0');
-                }
+					writer.WriteRawUnsafe((byte)'0');
 
-                writer.WriteInt64(nanosec);
+				writer.WriteInt64(nanosec);
             }
 
             switch (value.Kind)
@@ -236,16 +214,14 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                     var m = localOffset.Minutes;
                     writer.WriteRawUnsafe(minus ? (byte)'-' : (byte)'+');
                     if (h < 10)
-                    {
-                        writer.WriteRawUnsafe((byte)'0');
-                    }
-                    writer.WriteInt32(h);
+						writer.WriteRawUnsafe((byte)'0');
+
+					writer.WriteInt32(h);
                     writer.WriteRawUnsafe((byte)':');
                     if (m < 10)
-                    {
-                        writer.WriteRawUnsafe((byte)'0');
-                    }
-                    writer.WriteInt32(m);
+						writer.WriteRawUnsafe((byte)'0');
+
+					writer.WriteInt32(m);
                     break;
                 case DateTimeKind.Utc:
                     writer.WriteRawUnsafe((byte)'Z');
@@ -310,7 +286,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             if (array[i++] != (byte)':') goto ERROR;
             var second = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
 
-            int ticks = 0;
+            var ticks = 0;
             if (i < to && array[i] == '.')
             {
                 i++;
@@ -346,23 +322,18 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
                 // others, lack of precision
                 while (i < to && NumberConverter.IsNumber(array[i]))
-                {
-                    i++;
-                }
-            }
+					i++;
+			}
 
             END_TICKS:
             var kind = DateTimeKind.Unspecified;
             if (i < to && array[i] == 'Z')
-            {
-                kind = DateTimeKind.Utc;
-            }
-            else if (i < to && array[i] == '-' || array[i] == '+')
+				kind = DateTimeKind.Utc;
+			else if (i < to && array[i] == '-' || array[i] == '+')
             {
 				var offLen = to - i;
                 if (offLen != 3 && offLen != 5 && offLen != 6) goto ERROR;
-                kind = DateTimeKind.Local;
-                var minus = array[i++] == '-';
+				var minus = array[i++] == '-';
                 var h = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
 				var m = 0;
 				if (i < to)
@@ -390,11 +361,9 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
 	internal sealed class UnixTimestampDateTimeFormatter : IJsonFormatter<DateTime>
     {
-        static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
-        public void Serialize(ref JsonWriter writer, DateTime value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, DateTime value, IJsonFormatterResolver formatterResolver)
         {
-            var ticks = (long)(value.ToUniversalTime() - UnixEpoch).TotalSeconds;
+            var ticks = (long)(value.ToUniversalTime() - DateTimeUtil.UnixEpoch.DateTime).TotalSeconds;
             writer.WriteQuotation();
             writer.WriteInt64(ticks);
             writer.WriteQuotation();
@@ -403,72 +372,52 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
         public DateTime Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
         {
             var str = reader.ReadStringSegmentUnsafe();
-            int readCount;
-            var ticks = NumberConverter.ReadUInt64(str.Array, str.Offset, out readCount);
+			var ticks = NumberConverter.ReadUInt64(str.Array, str.Offset, out _);
 
-            return UnixEpoch.AddSeconds(ticks);
+            return DateTimeUtil.UnixEpoch.DateTime.AddSeconds(ticks);
         }
     }
 
 	internal sealed class DateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset>
     {
-        readonly string formatString;
+        private readonly string _formatString;
 
-        public DateTimeOffsetFormatter()
-        {
-            this.formatString = null;
-        }
+        public DateTimeOffsetFormatter() => _formatString = null;
 
-        public DateTimeOffsetFormatter(string formatString)
-        {
-            this.formatString = formatString;
-        }
+		public DateTimeOffsetFormatter(string formatString) => _formatString = formatString;
 
-        public void Serialize(ref JsonWriter writer, DateTimeOffset value, IJsonFormatterResolver formatterResolver)
-        {
-            writer.WriteString(value.ToString(formatString));
-        }
+		public void Serialize(ref JsonWriter writer, DateTimeOffset value, IJsonFormatterResolver formatterResolver) =>
+			writer.WriteString(value.ToString(_formatString));
 
-        public DateTimeOffset Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-        {
-            var str = reader.ReadString();
-            if (formatString == null)
-            {
-                return DateTimeOffset.Parse(str, CultureInfo.InvariantCulture);
-            }
-            else
-            {
-                return DateTimeOffset.ParseExact(str, formatString, CultureInfo.InvariantCulture);
-            }
-        }
+		public DateTimeOffset Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var str = reader.ReadString();
+			return _formatString == null
+				? DateTimeOffset.Parse(str, CultureInfo.InvariantCulture)
+				: DateTimeOffset.ParseExact(str, _formatString, CultureInfo.InvariantCulture);
+		}
     }
 
 	internal sealed class NullableDateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset?>
     {
-        readonly DateTimeOffsetFormatter innerFormatter;
+		private readonly DateTimeOffsetFormatter _innerFormatter;
 
-        public NullableDateTimeOffsetFormatter()
-        {
-            this.innerFormatter = new DateTimeOffsetFormatter();
-        }
+        public NullableDateTimeOffsetFormatter() => _innerFormatter = new DateTimeOffsetFormatter();
 
-        public NullableDateTimeOffsetFormatter(string formatString)
-        {
-            this.innerFormatter = new DateTimeOffsetFormatter(formatString);
-        }
+		public NullableDateTimeOffsetFormatter(string formatString) => _innerFormatter = new DateTimeOffsetFormatter(formatString);
 
-        public void Serialize(ref JsonWriter writer, DateTimeOffset? value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, DateTimeOffset? value, IJsonFormatterResolver formatterResolver)
         {
             if (value == null) { writer.WriteNull(); return; }
 
-            innerFormatter.Serialize(ref writer, value.Value, formatterResolver);
+            _innerFormatter.Serialize(ref writer, value.Value, formatterResolver);
         }
 
         public DateTimeOffset? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
         {
             if (reader.ReadIsNull()) return null;
 
-            return innerFormatter.Deserialize(ref reader, formatterResolver);
+            return _innerFormatter.Deserialize(ref reader, formatterResolver);
         }
     }
 
@@ -506,46 +455,40 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 writer.WriteRawUnsafe((byte)'0');
             }
             else if (year < 1000)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(year);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(year);
             writer.WriteRawUnsafe((byte)'-');
 
             if (month < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(month);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(month);
             writer.WriteRawUnsafe((byte)'-');
 
             if (day < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(day);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(day);
 
             writer.WriteRawUnsafe((byte)'T');
 
             if (hour < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(hour);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(hour);
             writer.WriteRawUnsafe((byte)':');
 
             if (minute < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(minute);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(minute);
             writer.WriteRawUnsafe((byte)':');
 
             if (second < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(second);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(second);
 
             if (nanosec != 0)
             {
@@ -587,30 +530,26 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                     writer.WriteRawUnsafe((byte)'0');
                 }
                 else if (nanosec < 1000000)
-                {
-                    writer.WriteRawUnsafe((byte)'0');
-                }
+					writer.WriteRawUnsafe((byte)'0');
 
-                writer.WriteInt64(nanosec);
+				writer.WriteInt64(nanosec);
             }
 
             var localOffset = value.Offset;
-            var minus = (localOffset < TimeSpan.Zero);
+            var minus = localOffset < TimeSpan.Zero;
             if (minus) localOffset = localOffset.Negate();
             var h = localOffset.Hours;
             var m = localOffset.Minutes;
             writer.WriteRawUnsafe(minus ? (byte)'-' : (byte)'+');
             if (h < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(h);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(h);
             writer.WriteRawUnsafe((byte)':');
             if (m < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(m);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(m);
 
             writer.WriteRawUnsafe((byte)'\"');
         }
@@ -667,7 +606,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             if (array[i++] != (byte)':') goto ERROR;
             var second = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
 
-            int ticks = 0;
+            var ticks = 0;
             if (i < to && array[i] == '.')
             {
                 i++;
@@ -703,10 +642,8 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
                 // others, lack of precision
                 while (i < to && NumberConverter.IsNumber(array[i]))
-                {
-                    i++;
-                }
-            }
+					i++;
+			}
 
             END_TICKS:
 
@@ -743,63 +680,44 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
 	internal sealed class TimeSpanFormatter : IJsonFormatter<TimeSpan>
     {
-        readonly string formatString;
+		private readonly string _formatString;
 
-        public TimeSpanFormatter()
-        {
-            this.formatString = null;
-        }
+        public TimeSpanFormatter() => _formatString = null;
 
-        public TimeSpanFormatter(string formatString)
-        {
-            this.formatString = formatString;
-        }
+		public TimeSpanFormatter(string formatString) => _formatString = formatString;
 
-        public void Serialize(ref JsonWriter writer, TimeSpan value, IJsonFormatterResolver formatterResolver)
-        {
-            writer.WriteString(value.ToString(formatString));
-        }
+		public void Serialize(ref JsonWriter writer, TimeSpan value, IJsonFormatterResolver formatterResolver) =>
+			writer.WriteString(value.ToString(_formatString));
 
-        public TimeSpan Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-        {
-            var str = reader.ReadString();
-            if (formatString == null)
-            {
-                return TimeSpan.Parse(str, CultureInfo.InvariantCulture);
-            }
-            else
-            {
-                return TimeSpan.ParseExact(str, formatString, CultureInfo.InvariantCulture);
-            }
-        }
+		public TimeSpan Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var str = reader.ReadString();
+			return _formatString == null
+				? TimeSpan.Parse(str, CultureInfo.InvariantCulture)
+				: TimeSpan.ParseExact(str, _formatString, CultureInfo.InvariantCulture);
+		}
     }
 
 	internal sealed class NullableTimeSpanFormatter : IJsonFormatter<TimeSpan?>
     {
-        readonly TimeSpanFormatter innerFormatter;
+		private readonly TimeSpanFormatter _innerFormatter;
 
-        public NullableTimeSpanFormatter()
-        {
-            this.innerFormatter = new TimeSpanFormatter();
-        }
+        public NullableTimeSpanFormatter() => _innerFormatter = new TimeSpanFormatter();
 
-        public NullableTimeSpanFormatter(string formatString)
-        {
-            this.innerFormatter = new TimeSpanFormatter(formatString);
-        }
+		public NullableTimeSpanFormatter(string formatString) => _innerFormatter = new TimeSpanFormatter(formatString);
 
-        public void Serialize(ref JsonWriter writer, TimeSpan? value, IJsonFormatterResolver formatterResolver)
+		public void Serialize(ref JsonWriter writer, TimeSpan? value, IJsonFormatterResolver formatterResolver)
         {
             if (value == null) { writer.WriteNull(); return; }
 
-            innerFormatter.Serialize(ref writer, value.Value, formatterResolver);
+            _innerFormatter.Serialize(ref writer, value.Value, formatterResolver);
         }
 
         public TimeSpan? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
         {
             if (reader.ReadIsNull()) return null;
 
-            return innerFormatter.Deserialize(ref reader, formatterResolver);
+            return _innerFormatter.Deserialize(ref reader, formatterResolver);
         }
     }
 
@@ -807,14 +725,14 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
     {
         public static readonly IJsonFormatter<TimeSpan> Default = new ISO8601TimeSpanFormatter();
 
-        static byte[] minValue = StringEncoding.UTF8.GetBytes("\"" + TimeSpan.MinValue.ToString() + "\"");
+		private static readonly byte[] MinValue = StringEncoding.UTF8.GetBytes("\"" + TimeSpan.MinValue + "\"");
 
         public void Serialize(ref JsonWriter writer, TimeSpan value, IJsonFormatterResolver formatterResolver)
         {
             // can not negate, use cache
             if (value == TimeSpan.MinValue)
             {
-                writer.WriteRaw(minValue);
+                writer.WriteRaw(MinValue);
                 return;
             }
 
@@ -830,40 +748,35 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             const int baseLength = 8 + 2; // {Hour}:{Minute}:{Second} + quotation
             const int nanosecLength = 8; // .{nanoseconds}
 
-            writer.EnsureCapacity(baseLength + ((maxDayLength == 0) ? 0 : maxDayLength) + ((nanosecond == 0) ? 0 : nanosecLength) + 6);
+            writer.EnsureCapacity(baseLength + maxDayLength + (nanosecond == 0 ? 0 : nanosecLength) + 6);
 
             writer.WriteRawUnsafe((byte)'\"');
 
             if (minus)
-            {
-                writer.WriteRawUnsafe((byte)'-');
-            }
+				writer.WriteRawUnsafe((byte)'-');
 
-            if (day != 0)
+			if (day != 0)
             {
                 writer.WriteInt32(day);
                 writer.WriteRawUnsafe((byte)'.');
             }
 
             if (hour < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(hour);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(hour);
             writer.WriteRawUnsafe((byte)':');
 
             if (minute < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(minute);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(minute);
             writer.WriteRawUnsafe((byte)':');
 
             if (second < 10)
-            {
-                writer.WriteRawUnsafe((byte)'0');
-            }
-            writer.WriteInt32(second);
+				writer.WriteRawUnsafe((byte)'0');
+
+			writer.WriteInt32(second);
 
 			if (nanosecond != 0)
             {
@@ -884,10 +797,8 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                                 {
                                     writer.WriteRawUnsafe((byte) '0');
                                     if (nanosecond < 10)
-                                    {
-                                        writer.WriteRawUnsafe((byte) '0');
-                                    }
-                                }
+										writer.WriteRawUnsafe((byte) '0');
+								}
                             }
                         }
                     }
@@ -908,27 +819,25 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             var to = str.Offset + len;
 
             // check day exists
-            bool hasDay = false;
+            var hasDay = false;
             {
-                bool foundDot = false;
-                bool foundColon = false;
-                for (int j = i; j < to; j++)
+                var foundDot = false;
+                var foundColon = false;
+                for (var j = i; j < to; j++)
                 {
                     if (array[j] == '.')
                     {
                         if (foundColon)
-                        {
-                            break;
-                        }
-                        foundDot = true;
+							break;
+
+						foundDot = true;
                     }
                     else if (array[j] == ':')
                     {
                         if (foundDot)
-                        {
-                            hasDay = true;
-                        }
-                        foundColon = true;
+							hasDay = true;
+
+						foundColon = true;
                     }
                 }
             }
@@ -947,10 +856,9 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 				const int maxDayLength = 8 + 1; // {Day}.
                 var dayCharacters = new byte[maxDayLength];
                 for (; array[i] != '.'; i++)
-                {
-                    dayCharacters[day++] = array[i];
-                }
-                day = new JsonReader(dayCharacters).ReadInt32();
+					dayCharacters[day++] = array[i];
+
+				day = new JsonReader(dayCharacters).ReadInt32();
                 i++; // skip '.'
             }
 
@@ -960,7 +868,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             if (array[i++] != (byte)':') goto ERROR;
             var second = (array[i++] - (byte)'0') * 10 + (array[i++] - (byte)'0');
 
-            int ticks = 0;
+            var ticks = 0;
             if (i < to && array[i] == '.')
             {
                 i++;
@@ -996,17 +904,15 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
                 // others, lack of precision
                 while (i < to && NumberConverter.IsNumber(array[i]))
-                {
-                    i++;
-                }
-            }
+					i++;
+			}
 
             END_TICKS:
 
             // be careful to overflow
             var ts = new TimeSpan(day, hour, minute, second);
             var tk = TimeSpan.FromTicks(ticks);
-            return (minus)
+            return minus
                 ? ts.Negate().Subtract(tk)
                 : ts.Add(tk);
 
