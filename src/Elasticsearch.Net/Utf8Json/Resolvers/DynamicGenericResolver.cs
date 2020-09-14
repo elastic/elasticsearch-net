@@ -96,8 +96,6 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		// Reduce IL2CPP code generate size(don't write long code in <T>)
 		internal static object GetFormatter(Type t)
 		{
-			var ti = t.GetTypeInfo();
-
 			if (t.IsArray)
 			{
 				var rank = t.GetArrayRank();
@@ -127,18 +125,17 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					return null; // not supported built-in
 				}
 			}
-			else if (ti.IsGenericType)
+			else if (t.IsGenericType)
 			{
-				var genericType = ti.GetGenericTypeDefinition();
-				var genericTypeInfo = genericType.GetTypeInfo();
-				var isNullable = genericTypeInfo.IsNullable();
-				var nullableElementType = isNullable ? ti.GenericTypeArguments[0] : null;
+				var genericType = t.GetGenericTypeDefinition();
+				var isNullable = genericType.IsNullable();
+				var nullableElementType = isNullable ? t.GenericTypeArguments[0] : null;
 
 				if (genericType == typeof(KeyValuePair<,>))
 				{
-					return CreateInstance(typeof(KeyValuePairFormatter<,>), ti.GenericTypeArguments);
+					return CreateInstance(typeof(KeyValuePairFormatter<,>), t.GenericTypeArguments);
 				}
-				else if (isNullable && nullableElementType.GetTypeInfo().IsConstructedGenericType() && nullableElementType.GetGenericTypeDefinition() == typeof(KeyValuePair<,>))
+				else if (isNullable && nullableElementType.IsConstructedGenericType && nullableElementType.GetGenericTypeDefinition() == typeof(KeyValuePair<,>))
 				{
 					return CreateInstance(typeof(NullableFormatter<>), new[] { nullableElementType });
 				}
@@ -147,7 +144,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				// ValueTask
 				else if (genericType == typeof(ValueTask<>))
 				{
-					return CreateInstance(typeof(ValueTaskFormatter<>), ti.GenericTypeArguments);
+					return CreateInstance(typeof(ValueTaskFormatter<>), t.GenericTypeArguments);
 				}
 				else if (isNullable && nullableElementType.IsConstructedGenericType && nullableElementType.GetGenericTypeDefinition() == typeof(ValueTask<>))
 				{
@@ -156,10 +153,10 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 #endif
 
 				// Tuple
-				else if (ti.FullName.StartsWith("System.Tuple"))
+				else if (t.FullName.StartsWith("System.Tuple"))
 				{
 					Type tupleFormatterType = null;
-					switch (ti.GenericTypeArguments.Length)
+					switch (t.GenericTypeArguments.Length)
 					{
 						case 1:
 							tupleFormatterType = typeof(TupleFormatter<>);
@@ -189,15 +186,15 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 							break;
 					}
 
-					return CreateInstance(tupleFormatterType, ti.GenericTypeArguments);
+					return CreateInstance(tupleFormatterType, t.GenericTypeArguments);
 				}
 
 #if NETSTANDARD
 				// ValueTuple
-				else if (ti.FullName.StartsWith("System.ValueTuple"))
+				else if (t.FullName.StartsWith("System.ValueTuple"))
 				{
 					Type tupleFormatterType = null;
-					switch (ti.GenericTypeArguments.Length)
+					switch (t.GenericTypeArguments.Length)
 					{
 						case 1:
 							tupleFormatterType = typeof(ValueTupleFormatter<>);
@@ -227,12 +224,12 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 							break;
 					}
 
-					return CreateInstance(tupleFormatterType, ti.GenericTypeArguments);
+					return CreateInstance(tupleFormatterType, t.GenericTypeArguments);
 				}
 
 				// Nullable ValueTuple
-				else if (isNullable && nullableElementType.GetTypeInfo().IsConstructedGenericType() &&
-					nullableElementType.GetTypeInfo().FullName.StartsWith("System.ValueTuple"))
+				else if (isNullable && nullableElementType.IsConstructedGenericType &&
+					nullableElementType.FullName.StartsWith("System.ValueTuple"))
 				{
 					Type tupleFormatterType = null;
 					switch (nullableElementType.GenericTypeArguments.Length)
@@ -273,16 +270,16 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				// ArraySegement
 				else if (genericType == typeof(ArraySegment<>))
 				{
-					if (ti.GenericTypeArguments[0] == typeof(byte))
+					if (t.GenericTypeArguments[0] == typeof(byte))
 					{
 						return ByteArraySegmentFormatter.Default;
 					}
 					else
 					{
-						return CreateInstance(typeof(ArraySegmentFormatter<>), ti.GenericTypeArguments);
+						return CreateInstance(typeof(ArraySegmentFormatter<>), t.GenericTypeArguments);
 					}
 				}
-				else if (isNullable && nullableElementType.GetTypeInfo().IsConstructedGenericType() && nullableElementType.GetGenericTypeDefinition() == typeof(ArraySegment<>))
+				else if (isNullable && nullableElementType.IsConstructedGenericType && nullableElementType.GetGenericTypeDefinition() == typeof(ArraySegment<>))
 				{
 					if (nullableElementType == typeof(ArraySegment<byte>))
 					{
@@ -300,24 +297,24 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					Type formatterType;
 					if (formatterMap.TryGetValue(genericType, out formatterType))
 					{
-						return CreateInstance(formatterType, ti.GenericTypeArguments);
+						return CreateInstance(formatterType, t.GenericTypeArguments);
 					}
 
 					// generic collection
-					else if (ti.GenericTypeArguments.Length == 1
-						&& ti.ImplementedInterfaces.Any(x => x.GetTypeInfo().IsConstructedGenericType() && x.GetGenericTypeDefinition() == typeof(ICollection<>))
-						&& ti.DeclaredConstructors.Any(x => x.GetParameters().Length == 0))
+					else if (t.GenericTypeArguments.Length == 1
+						&& t.GetInterfaces().Any(x => x.IsConstructedGenericType && x.GetGenericTypeDefinition() == typeof(ICollection<>))
+						&& t.GetDeclaredConstructors().Any(x => x.GetParameters().Length == 0))
 					{
-						var elemType = ti.GenericTypeArguments[0];
+						var elemType = t.GenericTypeArguments[0];
 						return CreateInstance(typeof(GenericCollectionFormatter<,>), new[] { elemType, t });
 					}
 					// generic dictionary
-					else if (ti.GenericTypeArguments.Length == 2
-						&& ti.ImplementedInterfaces.Any(x => x.GetTypeInfo().IsConstructedGenericType() && x.GetGenericTypeDefinition() == typeof(IDictionary<,>))
-						&& ti.DeclaredConstructors.Any(x => x.GetParameters().Length == 0))
+					else if (t.GenericTypeArguments.Length == 2
+						&& t.GetInterfaces().Any(x => x.IsConstructedGenericType && x.GetGenericTypeDefinition() == typeof(IDictionary<,>))
+						&& t.GetDeclaredConstructors().Any(x => x.GetParameters().Length == 0))
 					{
-						var keyType = ti.GenericTypeArguments[0];
-						var valueType = ti.GenericTypeArguments[1];
+						var keyType = t.GenericTypeArguments[0];
+						var valueType = t.GenericTypeArguments[1];
 						return CreateInstance(typeof(GenericDictionaryFormatter<,,>), new[] { keyType, valueType, t });
 					}
 				}
@@ -341,11 +338,11 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				{
 					return NonGenericInterfaceDictionaryFormatter.Default;
 				}
-				if (typeof(IList).GetTypeInfo().IsAssignableFrom(ti) && ti.DeclaredConstructors.Any(x => x.GetParameters().Length == 0))
+				if (typeof(IList).IsAssignableFrom(t) && t.GetDeclaredConstructors().Any(x => x.GetParameters().Length == 0))
 				{
 					return Activator.CreateInstance(typeof(NonGenericListFormatter<>).MakeGenericType(t));
 				}
-				else if (typeof(IDictionary).GetTypeInfo().IsAssignableFrom(ti) && ti.DeclaredConstructors.Any(x => x.GetParameters().Length == 0))
+				else if (typeof(IDictionary).IsAssignableFrom(t) && t.GetDeclaredConstructors().Any(x => x.GetParameters().Length == 0))
 				{
 					return Activator.CreateInstance(typeof(NonGenericDictionaryFormatter<>).MakeGenericType(t));
 				}

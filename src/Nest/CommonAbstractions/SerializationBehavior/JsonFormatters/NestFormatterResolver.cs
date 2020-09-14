@@ -130,7 +130,7 @@ namespace Nest
 			{
 				if (type.IsEnum)
 					property.JsonFormatter = typeof(EnumFormatter<>).MakeGenericType(type).CreateInstance(true);
-				else if (type.GetTypeInfo().IsNullable())
+				else if (type.IsNullable())
 				{
 					var underlyingType = Nullable.GetUnderlyingType(type);
 					if (underlyingType.IsEnum)

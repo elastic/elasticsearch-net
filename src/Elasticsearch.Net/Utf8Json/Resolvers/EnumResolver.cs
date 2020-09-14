@@ -56,23 +56,23 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 			static FormatterCache()
 			{
-				var ti = typeof(T).GetTypeInfo();
+				var type = typeof(T);
 
-				if (ti.IsNullable())
+				if (type.IsNullable())
 				{
 					// build underlying type and use wrapped formatter.
-					ti = ti.GenericTypeArguments[0].GetTypeInfo();
-					if (!ti.IsEnum)
+					type = type.GenericTypeArguments[0];
+					if (!type.IsEnum)
 					{
 						return;
 					}
 
-					var innerFormatter = Instance.GetFormatterDynamic(ti.AsType());
+					var innerFormatter = Instance.GetFormatterDynamic(type);
 					if (innerFormatter == null)
 					{
 						return;
 					}
-					formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(ti.AsType()), new object[] { innerFormatter });
+					formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(type), innerFormatter);
 					return;
 				}
 				else if (typeof(T).IsEnum)
@@ -102,23 +102,23 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 			static FormatterCache()
 			{
-				var ti = typeof(T).GetTypeInfo();
+				var type = typeof(T);
 
-				if (ti.IsNullable())
+				if (type.IsNullable())
 				{
 					// build underlying type and use wrapped formatter.
-					ti = ti.GenericTypeArguments[0].GetTypeInfo();
-					if (!ti.IsEnum)
+					type = type.GenericTypeArguments[0];
+					if (!type.IsEnum)
 					{
 						return;
 					}
 
-					var innerFormatter = Instance.GetFormatterDynamic(ti.AsType());
+					var innerFormatter = Instance.GetFormatterDynamic(type);
 					if (innerFormatter == null)
 					{
 						return;
 					}
-					formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(ti.AsType()), new object[] { innerFormatter });
+					formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(type), innerFormatter);
 					return;
 				}
 				else if (typeof(T).IsEnum)

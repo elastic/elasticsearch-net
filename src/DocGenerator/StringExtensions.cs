@@ -253,10 +253,10 @@ namespace DocGenerator
 			var assemblyName = Path.GetRandomFileName();
 			var references = new List<MetadataReference>
 			{
-				MetadataReference.CreateFromFile(typeof(object).GetTypeInfo().Assembly.Location),
-				MetadataReference.CreateFromFile(typeof(Enumerable).GetTypeInfo().Assembly.Location),
-				MetadataReference.CreateFromFile(typeof(JsonConvert).GetTypeInfo().Assembly.Location),
-				MetadataReference.CreateFromFile(typeof(ITypedList).GetTypeInfo().Assembly.Location),
+				MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+				MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location),
+				MetadataReference.CreateFromFile(typeof(JsonConvert).Assembly.Location),
+				MetadataReference.CreateFromFile(typeof(ITypedList).Assembly.Location),
 			};
 			var systemReferences = new[]
 			{

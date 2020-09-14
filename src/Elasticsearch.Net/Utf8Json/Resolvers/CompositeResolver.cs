@@ -129,10 +129,9 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
                 foreach (var item in formatters)
                 {
-                    foreach (var implInterface in item.GetType().GetTypeInfo().ImplementedInterfaces)
+                    foreach (var implInterface in item.GetType().GetInterfaces())
                     {
-                        var ti = implInterface.GetTypeInfo();
-                        if (ti.IsGenericType && ti.GenericTypeArguments[0] == typeof(T))
+						if (implInterface.IsGenericType && implInterface.GenericTypeArguments[0] == typeof(T))
                         {
                             formatter = (IJsonFormatter<T>)item;
                             return;
@@ -224,12 +223,11 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
         public IJsonFormatter<T> GetFormatterLoop<T>()
         {
-            foreach (var item in formatters)
+            foreach (var item in this.formatters)
             {
-                foreach (var implInterface in item.GetType().GetTypeInfo().ImplementedInterfaces)
+                foreach (var implInterface in item.GetType().GetInterfaces())
                 {
-                    var ti = implInterface.GetTypeInfo();
-                    if (ti.IsGenericType && ti.GenericTypeArguments[0] == typeof(T))
+					if (implInterface.IsGenericType && implInterface.GenericTypeArguments[0] == typeof(T))
                     {
                         return (IJsonFormatter<T>)(object)item;
                     }

@@ -16,7 +16,7 @@ namespace Tests.Mapping
 		[U] public void IPropertiesDescriptorImplementsAllPropertyMethodsOfPropertiesDescriptor()
 		{
 			var concreteMethodNames =
-				from m in typeof(PropertiesDescriptor<>).GetTypeInfo().DeclaredMethods
+				from m in typeof(PropertiesDescriptor<>).GetMethods()
 				where m.Name != "Scalar"
 				where m.ReturnType == typeof(PropertiesDescriptor<>)
 				where m.IsGenericMethod == false
@@ -28,7 +28,7 @@ namespace Tests.Mapping
 				select m.Name;
 
 			var interfaceMethodNames =
-				from m in typeof(IPropertiesDescriptor<,>).GetTypeInfo().DeclaredMethods
+				from m in typeof(IPropertiesDescriptor<,>).GetMethods()
 				where m.Name != "Scalar"
 				where m.ReturnType == typeof(IPropertiesDescriptor<,>).GetGenericArguments()[1]
 				where m.IsGenericMethod == false
@@ -45,7 +45,7 @@ namespace Tests.Mapping
 		[U] public void IPropertiesDescriptorImplementsAPropertyMethodsForAllIPropertyTypes()
 		{
 			var selectorInterfaces =
-				from m in typeof(PropertiesDescriptor<>).GetTypeInfo().DeclaredMethods
+				from m in typeof(PropertiesDescriptor<>).GetMethods()
 				where m.Name != "Scalar"
 				where m.ReturnType == typeof(PropertiesDescriptor<>)
 				where m.IsGenericMethod == false

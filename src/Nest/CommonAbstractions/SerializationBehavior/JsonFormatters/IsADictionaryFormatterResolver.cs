@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Elasticsearch.Net.CrossPlatform;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
@@ -18,7 +17,7 @@ namespace Nest
 		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.Formatter;
 
 		internal static bool IsIsADictionary(Type type) => type.GetInterfaces()
-			.Any(t => t.IsGeneric() && t.GetGenericTypeDefinition() == typeof(IIsADictionary<,>));
+			.Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IIsADictionary<,>));
 
 		private static class FormatterCache<T>
 		{
