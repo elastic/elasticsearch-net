@@ -96,11 +96,15 @@ own serializer, or by modifying how NEST's serializer behaves.
 
 * <<extending-nest-types,Extending Nest Types>>
 
+* <<modelling-documents-with-types,Modelling Documents With Types>>
+
 :includes-from-dirs: client-concepts/high-level/serialization
 
 include::client-concepts/high-level/serialization/custom-serialization.asciidoc[]
 
 include::client-concepts/high-level/serialization/extending-nest-types.asciidoc[]
+
+include::client-concepts/high-level/serialization/modelling-documents-with-types.asciidoc[]
 
 [[mapping]]
 == Mapping
