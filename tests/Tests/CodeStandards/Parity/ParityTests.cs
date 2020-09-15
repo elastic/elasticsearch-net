@@ -3,6 +3,9 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
@@ -17,6 +20,30 @@ namespace Tests.CodeStandards.Parity
 			var fieldTypes = Enum.GetNames(typeof(FieldType));
 
 			fieldTypes.Should().Contain(numberTypes);
+		}
+
+		[U] public void PropertyVisitorHasVisitMethodForAllPropertyTypes()
+		{
+			var interfaceType = typeof(IProperty);
+
+			var excludeInterfaceTypes = new HashSet<Type>
+			{
+				interfaceType,
+				typeof(IDocValuesProperty),
+				typeof(ICoreProperty),
+				typeof(IRangeProperty),
+				typeof(IGenericProperty)
+			};
+
+			var propertyTypes = interfaceType.Assembly
+				.GetTypes()
+				.Where(t => interfaceType.IsAssignableFrom(t) && t.IsInterface && !excludeInterfaceTypes.Contains(t));
+
+			var visitMethodTypes = typeof(IPropertyVisitor).GetMethods()
+				.Where(m => m.ReturnType == typeof(void))
+				.Select(m => m.GetParameters()[0].ParameterType);
+
+			propertyTypes.Except(visitMethodTypes).Should().BeEmpty();
 		}
 	}
 }
