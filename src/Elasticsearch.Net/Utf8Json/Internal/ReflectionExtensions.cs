@@ -38,10 +38,14 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 		/// <summary>
 		/// Gets all the properties for a type, including base type and interface properties
 		/// </summary>
-		public static IEnumerable<PropertyInfo> GetAllProperties(this Type type) =>
-			GetAllPropertiesCore(type, new Dictionary<string, PropertyInfo>());
+		public static IEnumerable<PropertyInfo> GetAllProperties(this Type type)
+		{
+			var properties = new Dictionary<string, PropertyInfo>();
+			GetAllPropertiesCore(type, properties);
+			return properties.Values;
+		}
 
-		private static IEnumerable<PropertyInfo> GetAllPropertiesCore(Type type, Dictionary<string, PropertyInfo> collectedProperties)
+		private static void GetAllPropertiesCore(Type type, Dictionary<string, PropertyInfo> collectedProperties)
 		{
 			foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly))
 			{
@@ -68,8 +72,6 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 
 			foreach (var @interface in type.GetInterfaces())
 				GetAllPropertiesCore(@interface, collectedProperties);
-
-			return collectedProperties.Values;
 		}
 
 		public static IEnumerable<FieldInfo> GetAllFields(this Type type) => GetAllFieldsCore(type, new HashSet<string>());

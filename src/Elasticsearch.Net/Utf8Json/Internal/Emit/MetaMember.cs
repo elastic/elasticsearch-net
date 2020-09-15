@@ -157,7 +157,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
             : base(typeof(string), name, name, false, true) =>
 			_constant = constant;
 
-		public override void EmitLoadValue(ILGenerator il)
+        public override void EmitLoadValue(ILGenerator il)
         {
             il.Emit(OpCodes.Pop); // pop load instance
             il.Emit(OpCodes.Ldstr, _constant);
@@ -170,7 +170,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
     internal class InnerExceptionMetaMember : MetaMember
     {
 		private static readonly MethodInfo GetInnerException =
-			ExpressionUtility.GetPropertyInfo((Exception ex) => ex.InnerException).GetGetMethod();
+			ExpressionUtility.GetPropertyInfo((Exception ex) => ex.InnerException).GetMethod;
 		private static readonly MethodInfo NonGenericSerialize =
 			ExpressionUtility.GetMethodInfo<JsonWriter>(writer => JsonSerializer.NonGeneric.Serialize(ref writer, default, default));
 
