@@ -37,7 +37,7 @@ namespace Tests.CodeStandards.Parity
 
 			var propertyTypes = interfaceType.Assembly
 				.GetTypes()
-				.Where(t => interfaceType.IsAssignableFrom(t) && t.IsInterface && !excludeInterfaceTypes.Contains(t));
+				.Where(t => t.IsInterface && interfaceType.IsAssignableFrom(t) && !excludeInterfaceTypes.Contains(t));
 
 			var visitMethodTypes = typeof(IPropertyVisitor).GetMethods()
 				.Where(m => m.ReturnType == typeof(void))
