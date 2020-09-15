@@ -914,13 +914,13 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 				il.EmitLdloc(buffer);
 				il.Emit(OpCodes.Conv_I);
 				il.EmitLdloca(keyArraySegment);
-				il.EmitCall(typeof(ArraySegment<byte>).GetRuntimeProperty("Offset").GetGetMethod());
+				il.EmitCall(typeof(ArraySegment<byte>).GetRuntimeProperty("Offset").GetMethod);
 				il.Emit(OpCodes.Add);
 				il.EmitStloc(p);
 
 				// rest = arraySegment.Count
 				il.EmitLdloca(keyArraySegment);
-				il.EmitCall(typeof(ArraySegment<byte>).GetRuntimeProperty("Count").GetGetMethod());
+				il.EmitCall(typeof(ArraySegment<byte>).GetRuntimeProperty("Count").GetMethod);
 				il.EmitStloc(rest);
 
 				// if(rest == 0) goto End
@@ -1231,7 +1231,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			public static readonly MethodInfo GetUninitializedObject = ExpressionUtility.GetMethodInfo(() => System.Runtime.Serialization.FormatterServices.GetUninitializedObject(default(Type)));
 
 			public static readonly MethodInfo GetTypeMethod = ExpressionUtility.GetMethodInfo((object o) => o.GetType());
-			public static readonly MethodInfo TypeGetGenericArguments = ExpressionUtility.GetPropertyInfo((Type t) => t.GenericTypeArguments).GetGetMethod();
+			public static readonly MethodInfo TypeGetGenericArguments = ExpressionUtility.GetPropertyInfo((Type t) => t.GenericTypeArguments).GetMethod;
 			public static readonly MethodInfo TypeEquals = ExpressionUtility.GetMethodInfo((Type t) => t.Equals(default(Type)));
 
 			public static readonly MethodInfo MakeGenericType = ExpressionUtility.GetMethodInfo((Type t) => t.MakeGenericType(default(Type[])));
@@ -1285,8 +1285,8 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 
 			internal static class JsonFormatterAttr
 			{
-				internal static readonly MethodInfo FormatterType = ExpressionUtility.GetPropertyInfo((JsonFormatterAttribute attr) => attr.FormatterType).GetGetMethod();
-				internal static readonly MethodInfo Arguments = ExpressionUtility.GetPropertyInfo((JsonFormatterAttribute attr) => attr.Arguments).GetGetMethod();
+				internal static readonly MethodInfo FormatterType = ExpressionUtility.GetPropertyInfo((JsonFormatterAttribute attr) => attr.FormatterType).GetMethod;
+				internal static readonly MethodInfo Arguments = ExpressionUtility.GetPropertyInfo((JsonFormatterAttribute attr) => attr.Arguments).GetMethod;
 			}
 		}
 	}

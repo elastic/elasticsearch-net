@@ -91,7 +91,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 					List<PropertyInfo> interfaceProps = null;
 					if (interfaceMaps != null)
 					{
-						var accessor = item.GetGetMethod(true) ?? item.GetSetMethod(true);
+						var accessor = item.GetMethod ?? item.SetMethod;
 
 						for (var i = 0; i < interfaceMaps.Length; i++)
 						{

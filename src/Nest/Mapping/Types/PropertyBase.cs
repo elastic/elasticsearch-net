@@ -75,7 +75,7 @@ namespace Nest
 		/// <inheritdoc />
 		public PropertyName Name { get; set; }
 
-		protected string DebugDisplay => $"Type: {((IProperty)this).Type ?? "<empty>"}, Name: {Name.DebugDisplay} ";
+		protected string DebugDisplay => $"Type: {((IProperty)this).Type ?? "<empty>"}, Name: {Name?.DebugDisplay ?? "<empty>"} ";
 
 		public override string ToString() => DebugDisplay;
 
