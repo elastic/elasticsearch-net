@@ -20,9 +20,6 @@ namespace Nest
 		private static readonly ConcurrentDictionary<string, ObjectActivator<object>> CachedActivators =
 			new ConcurrentDictionary<string, ObjectActivator<object>>();
 
-		private static readonly ConcurrentDictionary<Type, Func<object>> CachedDefaultValues =
-			new ConcurrentDictionary<Type, Func<object>>();
-
 		private static readonly ConcurrentDictionary<string, Type> CachedGenericClosedTypes =
 			new ConcurrentDictionary<string, Type>();
 
@@ -112,7 +109,9 @@ namespace Nest
 			if (CachedTypePropertyInfos.TryGetValue(type, out var propertyInfos))
 				return propertyInfos;
 
-			propertyInfos = type.GetAllPropertiesCore();
+			var properties = new Dictionary<string, PropertyInfo>();
+			GetAllPropertiesCore(type, properties);
+			propertyInfos = properties.Values.ToList();
 			CachedTypePropertyInfos.TryAdd(type, propertyInfos);
 			return propertyInfos;
 		}
@@ -120,37 +119,69 @@ namespace Nest
 		/// <summary>
 		/// Returns inherited properties with reflectedType set to base type
 		/// </summary>
-		private static List<PropertyInfo> GetAllPropertiesCore(this Type type)
+		private static void GetAllPropertiesCore(Type type, Dictionary<string, PropertyInfo> collectedProperties)
 		{
-			var propertiesByName = new Dictionary<string, PropertyInfo>();
-			do
+			foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
 			{
-				foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+				if (collectedProperties.TryGetValue(property.Name, out var existingProperty))
 				{
-					if (propertiesByName.ContainsKey(propertyInfo.Name))
+					if (IsHidingMember(property))
+						collectedProperties[property.Name] = property;
+					else if (!type.IsInterface && property.IsVirtual())
 					{
-						if (IsHidingMember(propertyInfo)) propertiesByName[propertyInfo.Name] = propertyInfo;
-					}
-					else
-						propertiesByName.Add(propertyInfo.Name, propertyInfo);
-				}
-				type = type.BaseType;
-			} while (type?.BaseType != null);
+						var propertyDeclaringType = property.GetDeclaringType();
 
-			return propertiesByName.Values.ToList();
+						if (!(existingProperty.IsVirtual() && existingProperty.GetDeclaringType().IsAssignableFrom(propertyDeclaringType)))
+						{
+							collectedProperties[property.Name] = property;
+						}
+					}
+				}
+				else
+					collectedProperties.Add(property.Name, property);
+			}
+
+			if (type.BaseType != null)
+				GetAllPropertiesCore(type.BaseType, collectedProperties);
 		}
 
 		/// <summary>
-		/// Determines if a property is overriding an inherited property of its base class
+		/// Determines if a <see cref="PropertyInfo"/> is hiding/shadowing a
+		/// <see cref="PropertyInfo"/> from a base type
 		/// </summary>
 		private static bool IsHidingMember(PropertyInfo propertyInfo)
 		{
 			var baseType = propertyInfo.DeclaringType?.BaseType;
 			var baseProperty = baseType?.GetProperty(propertyInfo.Name);
-			if (baseProperty == null) return false;
+			if (baseProperty == null)
+				return false;
 
-			var derivedGetMethod = propertyInfo.GetGetMethod().GetBaseDefinition();
+			var derivedGetMethod = propertyInfo.GetBaseDefinition();
 			return derivedGetMethod?.ReturnType != propertyInfo.PropertyType;
+		}
+
+		private static Type GetDeclaringType(this PropertyInfo propertyInfo) =>
+			propertyInfo.GetBaseDefinition()?.DeclaringType ?? propertyInfo.DeclaringType;
+
+		private static MethodInfo GetBaseDefinition(this PropertyInfo propertyInfo)
+		{
+			var m = propertyInfo.GetMethod;
+			return m != null
+				? m.GetBaseDefinition()
+				: propertyInfo.SetMethod?.GetBaseDefinition();
+		}
+
+		/// <summary>
+		/// Determines if a <see cref="PropertyInfo"/> is virtual
+		/// </summary>
+		private static bool IsVirtual(this PropertyInfo propertyInfo)
+		{
+			var methodInfo = propertyInfo.GetMethod;
+			if (methodInfo != null && methodInfo.IsVirtual)
+				return true;
+
+			methodInfo = propertyInfo.SetMethod;
+			return methodInfo != null && methodInfo.IsVirtual;
 		}
 
 		internal delegate T ObjectActivator<out T>(params object[] args);

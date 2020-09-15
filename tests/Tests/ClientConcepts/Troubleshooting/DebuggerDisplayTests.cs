@@ -20,7 +20,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 		private string DebugFor<T>(T o)
 		{
 			var property = o.GetType().GetProperty("DebugDisplay", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
-			var getter = property.GetGetMethod(true);
+			var getter = property.GetMethod;
 			var get = (Func<T, string>)getter.CreateDelegate(typeof(Func<T, string>));
 			return get(o);
 		}

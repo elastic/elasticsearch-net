@@ -61,7 +61,7 @@ namespace Nest
 			var property = _visitor.Visit(propertyInfo, attribute);
 			if (property != null) return property;
 
-			if (propertyInfo.GetGetMethod().IsStatic)
+			if (propertyInfo.GetMethod.IsStatic)
 				return null;
 
 			property = attribute ?? InferProperty(propertyInfo);
