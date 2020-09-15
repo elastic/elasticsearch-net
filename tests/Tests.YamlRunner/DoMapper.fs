@@ -159,7 +159,7 @@ type FastApiInvoke(instance: Object, restName:string, pathParams:KeyedCollection
         this.Delegate.Invoke(instance, args)
 
 
-let getProp (t:Type) prop = t.GetProperty(prop).GetGetMethod()
+let getProp (t:Type) prop = t.GetProperty(prop).GetMethod
 let getRestName (t:Type) a = (getProp t "RestSpecName").Invoke(a, null) :?> String
 let getParameters (t:Type) a = (getProp t "Parameters").Invoke(a, null) :?> KeyedCollection<string, string>
 
@@ -203,7 +203,7 @@ let createDoMap (client:IElasticLowLevelClient) =
     let namespaces =
         t.GetProperties()
         |> Array.filter (fun p -> typeof<NamespacedClientProxy>.IsAssignableFrom(p.PropertyType))
-        |> Array.map (fun p -> methodsWithAttribute (p.GetGetMethod().Invoke(client, null)) mapsApiAttribute)
+        |> Array.map (fun p -> methodsWithAttribute (p.GetMethod.Invoke(client, null)) mapsApiAttribute)
         |> Array.concat
         |> Array.append rootMethods
     
