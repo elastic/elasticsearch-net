@@ -3,10 +3,21 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Runtime.Serialization;
 
-namespace Elasticsearch.Net.Extensions
+// ReSharper disable InconsistentNaming
+
+namespace Elasticsearch.Net
 {
-	internal static class EnumExtensions
+	public enum HttpMethod
+	{
+		[EnumMember(Value = "GET")] GET,
+		[EnumMember(Value = "POST")] POST,
+		[EnumMember(Value = "PUT")] PUT,
+		[EnumMember(Value = "DELETE")] DELETE,
+		[EnumMember(Value = "HEAD")] HEAD
+	}
+	public static class HttpMethodExtensions
 	{
 		internal static string GetStringValue(this HttpMethod enumValue)
 		{

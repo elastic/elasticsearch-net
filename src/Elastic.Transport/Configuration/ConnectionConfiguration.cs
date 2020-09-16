@@ -11,8 +11,8 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 #if DOTNETCORE
 using System.Net.Http;
-using System.Runtime.InteropServices;
 #endif
+using System.Runtime.InteropServices;
 using System.Net.Security;
 using System.Reflection;
 using System.Security;
@@ -23,7 +23,7 @@ using Elasticsearch.Net.Extensions;
 namespace Elasticsearch.Net
 {
 	/// <summary>
-	/// Allows you to control how <see cref="ElasticLowLevelClient"/> behaves and where/how it connects to Elasticsearch
+	/// Allows you to control how the client behaves and where/how it connects to Elasticsearch
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{

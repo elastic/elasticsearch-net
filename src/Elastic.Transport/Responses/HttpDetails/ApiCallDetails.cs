@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Net.NetworkInformation;
 using System.Text;
 using Elasticsearch.Net.Diagnostics;
+using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {

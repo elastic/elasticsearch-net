@@ -20,12 +20,7 @@
     
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
-    <PackageReference Include="System.Buffers" Version="4.5.0" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.5.1" />
-
-    <PackageReference Condition="'$(TargetFramework)' != 'netstandard2.1'" Include="System.Memory" Version="4.5.0" />
-      
+    <ProjectReference Include="../Elastic.Transport/Elastic.Transport.csproj" />
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit" Version="4.3.0" />
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
   </ItemGroup>
@@ -53,6 +48,11 @@
     <Compile Update="Api\RequestParameters\RequestParameters.*.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Api\RequestParameters\RequestParameters.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Elastic.Extensions\*.cs">
+      <Link>Extensions\*.cs</Link>
     </Compile>
   </ItemGroup>
 
@@ -94,5 +94,24 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UnsafeMemory.tt</DependentUpon>
     </Compile>
+    <None Update="Utf8Json\Formatters\PrimitiveFormatter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PrimitiveFormatter.cs</LastGenOutput>
+    </None>
+    <None Update="Utf8Json\Formatters\TupleFormatter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Utf8Json/TupleFormatter.cs</LastGenOutput>
+    </None>
+    <None Update="Utf8Json\Formatters\ValueTupleFormatter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Utf8Json/ValueTupleFormatter.cs</LastGenOutput>
+    </None>
+    <None Update="Utf8Json\Internal\UnsafeMemory.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Utf8Json/UnsafeMemory.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions" />
   </ItemGroup>
 </Project>
