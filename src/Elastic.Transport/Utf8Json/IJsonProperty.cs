@@ -24,7 +24,7 @@
 
 namespace Elasticsearch.Net.Utf8Json
 {
-	internal interface IJsonProperty
+	public interface IJsonProperty
 	{
 		string Name { get; set; }
 
@@ -35,7 +35,7 @@ namespace Elasticsearch.Net.Utf8Json
 		bool? AllowPrivate { get; set; }
 	}
 
-	internal class JsonProperty : IJsonProperty
+	public class JsonProperty : IJsonProperty
 	{
 		public JsonProperty(string name) => Name = name;
 

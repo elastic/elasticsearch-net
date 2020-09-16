@@ -41,26 +41,20 @@ namespace Nest
 			private static readonly IJsonFormatterResolver[] Resolvers =
 			{
 				// IL emit a resolver that registers formatters
-				DynamicCompositeResolver.Create(new IJsonFormatter[]
-				{
-					new QueryContainerCollectionFormatter(),
-					new SimpleQueryStringFlagsFormatter(),
-					new TimeSpanTicksFormatter(),
-					new NullableTimeSpanTicksFormatter(),
-					new JsonNetCompatibleUriFormatter(),
-					new GeoOrientationFormatter(),
-					new NullableGeoOrientationFormatter(),
-					new ShapeOrientationFormatter(),
-					new NullableShapeOrientationFormatter(),
-				}, new IJsonFormatterResolver[0]),
+				DynamicCompositeResolver.Create(
+					new IJsonFormatter[]
+					{
+						new QueryContainerCollectionFormatter(), new SimpleQueryStringFlagsFormatter(), new TimeSpanTicksFormatter(),
+						new NullableTimeSpanTicksFormatter(), new JsonNetCompatibleUriFormatter(), new GeoOrientationFormatter(),
+						new NullableGeoOrientationFormatter(), new ShapeOrientationFormatter(), new NullableShapeOrientationFormatter(),
+					}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin primitives
 				ElasticsearchNetEnumResolver.Instance, // Specialized Enum handling
 				AttributeFormatterResolver.Instance, // [JsonFormatter]
 				ReadAsFormatterResolver.Instance, // [ReadAs]
 				IsADictionaryFormatterResolver.Instance, // IsADictionaryBase<TKey, TValue>
 				DynamicGenericResolver.Instance, // T[], List<T>, etc...
-				InterfaceGenericDictionaryResolver.Instance,
-				InterfaceGenericReadOnlyDictionaryResolver.Instance
+				InterfaceGenericDictionaryResolver.Instance, InterfaceGenericReadOnlyDictionaryResolver.Instance
 			};
 
 			private readonly IJsonFormatterResolver _finalFormatter;

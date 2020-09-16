@@ -6,6 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+<<<<<<< HEAD
+=======
+using Elasticsearch.Net.Extensions;
+>>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
 using Elasticsearch.Net.Utf8Json;
 
 namespace Nest

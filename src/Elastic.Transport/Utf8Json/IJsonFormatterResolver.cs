@@ -27,12 +27,12 @@ using System.Reflection;
 
 namespace Elasticsearch.Net.Utf8Json
 {
-	internal interface IJsonFormatterResolver
+	public interface IJsonFormatterResolver
     {
         IJsonFormatter<T> GetFormatter<T>();
     }
 
-	internal static class JsonFormatterResolverExtensions
+	public static class JsonFormatterResolverExtensions
     {
         public static IJsonFormatter<T> GetFormatterWithVerify<T>(this IJsonFormatterResolver resolver)
         {

@@ -9,7 +9,7 @@ namespace Elasticsearch.Net
 {
 	public static class ElasticsearchSerializerExtensions
 	{
-		internal static void SerializeUsingWriter<T>(this IElasticsearchSerializer serializer, ref JsonWriter writer, T body, IConnectionConfigurationValues settings, SerializationFormatting formatting)
+		public static void SerializeUsingWriter<T>(this IElasticsearchSerializer serializer, ref JsonWriter writer, T body, IConnectionConfigurationValues settings, SerializationFormatting formatting)
 		{
 			if (serializer is IInternalSerializer s && s.TryGetJsonFormatter(out var formatterResolver))
 			{

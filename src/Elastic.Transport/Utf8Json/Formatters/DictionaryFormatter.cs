@@ -31,7 +31,7 @@ using System.Collections.ObjectModel;
 namespace Elasticsearch.Net.Utf8Json.Formatters
 {
     // unfortunately, can't use IDictionary<KVP> because supports IReadOnlyDictionary.
-	internal abstract class DictionaryFormatterBase<TKey, TValue, TIntermediate, TEnumerator, TDictionary> : IJsonFormatter<TDictionary>
+	public abstract class DictionaryFormatterBase<TKey, TValue, TIntermediate, TEnumerator, TDictionary> : IJsonFormatter<TDictionary>
         where TDictionary : class, IEnumerable<KeyValuePair<TKey, TValue>>
         where TEnumerator : IEnumerator<KeyValuePair<TKey, TValue>>
     {
@@ -161,7 +161,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
         protected abstract TDictionary Complete(ref TIntermediate intermediateCollection);
     }
 
-	internal abstract class DictionaryFormatterBase<TKey, TValue, TIntermediate, TDictionary> : DictionaryFormatterBase<TKey, TValue, TIntermediate, IEnumerator<KeyValuePair<TKey, TValue>>, TDictionary>
+	public abstract class DictionaryFormatterBase<TKey, TValue, TIntermediate, TDictionary> : DictionaryFormatterBase<TKey, TValue, TIntermediate, IEnumerator<KeyValuePair<TKey, TValue>>, TDictionary>
         where TDictionary : class, IEnumerable<KeyValuePair<TKey, TValue>>
     {
         protected override IEnumerator<KeyValuePair<TKey, TValue>> GetSourceEnumerator(TDictionary source) => source.GetEnumerator();
@@ -192,7 +192,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		protected override TDictionary Create() => new TDictionary();
 	}
 
-	internal sealed class InterfaceDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, IDictionary<TKey, TValue>>
+	public sealed class InterfaceDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, IDictionary<TKey, TValue>>
     {
         protected override void Add(ref Dictionary<TKey, TValue> collection, int index, TKey key, TValue value) => collection.Add(key, value);
 

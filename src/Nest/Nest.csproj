@@ -29,6 +29,11 @@
     <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Elastic.Extensions\*.cs">
+      <Link>Extensions\*.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Requests.*.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Requests.cs</DependentUpon>

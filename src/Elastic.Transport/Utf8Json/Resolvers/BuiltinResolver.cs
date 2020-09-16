@@ -33,7 +33,7 @@ using Elasticsearch.Net.Utf8Json.Formatters;
 
 namespace Elasticsearch.Net.Utf8Json.Resolvers
 {
-	internal sealed class BuiltinResolver : IJsonFormatterResolver
+	public sealed class BuiltinResolver : IJsonFormatterResolver
     {
         public static readonly IJsonFormatterResolver Instance = new BuiltinResolver();
 
@@ -53,7 +53,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		}
 
         // used from PrimitiveObjectFormatter
-        internal static class BuiltinResolverGetFormatterHelper
+		public static class BuiltinResolverGetFormatterHelper
         {
 			private static readonly Dictionary<Type, object> FormatterMap = new Dictionary<Type, object>()
             {
@@ -151,7 +151,21 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
                 {typeof(Task), TaskUnitFormatter.Default},
             };
 
+<<<<<<< HEAD
             internal static object GetFormatter(Type t) => FormatterMap.TryGetValue(t, out var formatter) ? formatter : null;
 		}
+=======
+			public static object GetFormatter(Type t)
+            {
+                object formatter;
+                if (formatterMap.TryGetValue(t, out formatter))
+                {
+                    return formatter;
+                }
+
+                return null;
+            }
+        }
+>>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
     }
 }

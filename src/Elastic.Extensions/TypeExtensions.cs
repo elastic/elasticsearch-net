@@ -20,6 +20,12 @@ namespace Elasticsearch.Net.Extensions
 		private static readonly ConcurrentDictionary<string, ObjectActivator<object>> CachedActivators =
 			new ConcurrentDictionary<string, ObjectActivator<object>>();
 
+		//TODO REMOVE
+		internal static bool IsGeneric(this Type type) => type.GetTypeInfo().IsGenericType;
+
+		//TODO REMOVE
+		internal static Assembly Assembly(this Type type) => type.GetTypeInfo().Assembly;
+
 		internal static object CreateInstance(this Type t, params object[] args)
 		{
 			var argKey = args.Length;

@@ -35,7 +35,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal
 {
     // Key = long, Value = int for UTF8String Dictionary
 
-	internal class AutomataDictionary : IEnumerable<KeyValuePair<string, int>>
+	public class AutomataDictionary : IEnumerable<KeyValuePair<string, int>>
     {
         private readonly AutomataNode _root;
 

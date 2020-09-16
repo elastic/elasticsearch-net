@@ -76,7 +76,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
         }
     }
 
-	internal sealed class ISO8601DateTimeFormatter : IJsonFormatter<DateTime>
+	public sealed class ISO8601DateTimeFormatter : IJsonFormatter<DateTime>
     {
         public static readonly IJsonFormatter<DateTime> Default = new ISO8601DateTimeFormatter();
 
@@ -421,7 +421,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
         }
     }
 
-	internal sealed class ISO8601DateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset>
+	public sealed class ISO8601DateTimeOffsetFormatter : IJsonFormatter<DateTimeOffset>
     {
         public static readonly IJsonFormatter<DateTimeOffset> Default = new ISO8601DateTimeOffsetFormatter();
 

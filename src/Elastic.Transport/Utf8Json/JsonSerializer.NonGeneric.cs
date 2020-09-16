@@ -34,7 +34,7 @@ using Elasticsearch.Net.Utf8Json.Internal.Emit;
 namespace Elasticsearch.Net.Utf8Json
 {
     // NonGeneric API
-    internal static partial class JsonSerializer
+    public static partial class JsonSerializer
     {
         public static class NonGeneric
         {

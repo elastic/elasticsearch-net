@@ -75,7 +75,7 @@ namespace Nest
 							{
 								case 0:
 									if (reader.GetCurrentJsonToken() == JsonToken.String)
-										response.Error = new Error { Reason = reader.ReadString() };
+										response.Error = new Error(reader.ReadString());
 									else
 									{
 										var formatter = formatterResolver.GetFormatter<Error>();

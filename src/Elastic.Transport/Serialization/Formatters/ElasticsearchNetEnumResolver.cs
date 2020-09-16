@@ -10,7 +10,7 @@ using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Elasticsearch.Net
 {
-	internal sealed class ElasticsearchNetEnumResolver : IJsonFormatterResolver
+	public sealed class ElasticsearchNetEnumResolver : IJsonFormatterResolver
 	{
 		public static readonly IJsonFormatterResolver Instance = new ElasticsearchNetEnumResolver();
 

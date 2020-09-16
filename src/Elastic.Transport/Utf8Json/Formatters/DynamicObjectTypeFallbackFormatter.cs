@@ -31,7 +31,7 @@ using Elasticsearch.Net.Utf8Json.Resolvers;
 
 namespace Elasticsearch.Net.Utf8Json.Formatters
 {
-    internal sealed class DynamicObjectTypeFallbackFormatter : IJsonFormatter<object>
+    public sealed class DynamicObjectTypeFallbackFormatter : IJsonFormatter<object>
     {
 		private delegate void SerializeMethod(object dynamicFormatter, ref JsonWriter writer, object value, IJsonFormatterResolver formatterResolver);
 

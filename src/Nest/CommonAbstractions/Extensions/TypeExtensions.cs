@@ -9,6 +9,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+<<<<<<< HEAD
+=======
+using Elasticsearch.Net.Extensions;
+>>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
 
 namespace Nest
 {
@@ -186,7 +190,11 @@ namespace Nest
 
 		internal delegate T ObjectActivator<out T>(params object[] args);
 
+<<<<<<< HEAD
 		private static readonly Assembly NestAssembly = typeof(TypeExtensions).Assembly;
+=======
+		private static readonly Assembly NestAssembly = typeof(ElasticClient).Assembly();
+>>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
 
 		public static bool IsNestType(this Type type) => type.Assembly == NestAssembly;
 	}

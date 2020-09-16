@@ -34,7 +34,7 @@ using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Elasticsearch.Net.Utf8Json.Resolvers
 {
-	internal sealed class DynamicGenericResolver : IJsonFormatterResolver
+	public sealed class DynamicGenericResolver : IJsonFormatterResolver
 	{
 		public static readonly IJsonFormatterResolver Instance = new DynamicGenericResolver();
 

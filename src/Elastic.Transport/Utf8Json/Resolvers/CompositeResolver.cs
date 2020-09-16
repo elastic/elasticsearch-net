@@ -141,7 +141,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
         }
     }
 
-	internal abstract class DynamicCompositeResolver : IJsonFormatterResolver
+	public abstract class DynamicCompositeResolver : IJsonFormatterResolver
     {
 		private static readonly string ModuleName =  $"{ResolverConfig.Namespace}.DynamicCompositeResolver";
 

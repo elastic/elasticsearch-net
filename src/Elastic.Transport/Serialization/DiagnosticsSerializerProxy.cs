@@ -39,7 +39,7 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// Wraps configured serializer so that we can emit diagnostics per configured serializer.
 	/// </summary>
-	internal class DiagnosticsSerializerProxy : IElasticsearchSerializer, IInternalSerializer
+	public class DiagnosticsSerializerProxy : IElasticsearchSerializer, IInternalSerializer
 	{
 		private readonly IElasticsearchSerializer _serializer;
 		private readonly bool _wrapsUtf8JsonSerializer;

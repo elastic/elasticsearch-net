@@ -25,7 +25,6 @@
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="Nest" />
     <InternalsVisibleTo Include="Elasticsearch.Net.CustomDynamicObjectResolver" />
     <InternalsVisibleTo Include="Elasticsearch.Net.DynamicCompositeResolver" />
     <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />

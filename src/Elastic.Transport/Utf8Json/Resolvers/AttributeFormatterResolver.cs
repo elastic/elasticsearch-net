@@ -31,7 +31,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
     /// <summary>
     /// Get formatter from [JsonFormatter] attribute.
     /// </summary>
-	internal sealed class AttributeFormatterResolver : IJsonFormatterResolver
+	public sealed class AttributeFormatterResolver : IJsonFormatterResolver
     {
         public static readonly IJsonFormatterResolver Instance = new AttributeFormatterResolver();
 

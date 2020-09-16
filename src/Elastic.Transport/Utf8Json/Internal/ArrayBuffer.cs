@@ -26,7 +26,7 @@ using System;
 
 namespace Elasticsearch.Net.Utf8Json.Internal
 {
-	internal struct ArrayBuffer<T>
+	public struct ArrayBuffer<T>
     {
         public T[] Buffer;
         public int Size;

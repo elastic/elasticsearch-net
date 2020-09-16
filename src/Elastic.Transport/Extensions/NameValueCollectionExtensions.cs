@@ -11,11 +11,11 @@ using System.Text;
 
 namespace Elasticsearch.Net.Extensions
 {
-	internal static class NameValueCollectionExtensions
+	public static class NameValueCollectionExtensions
 	{
 		private const int MaxCharsOnStack = 256; // 512 bytes
 
-		internal static string ToQueryString(this NameValueCollection nv)
+		public static string ToQueryString(this NameValueCollection nv)
 		{
 			if (nv == null || nv.AllKeys.Length == 0) return string.Empty;
 

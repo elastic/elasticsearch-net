@@ -33,7 +33,7 @@ namespace Elasticsearch.Net.Utf8Json
     /// <summary>
     /// High-Level API of Utf8Json.
     /// </summary>
-	internal static partial class JsonSerializer
+	public static partial class JsonSerializer
     {
         private static IJsonFormatterResolver _defaultResolver;
 

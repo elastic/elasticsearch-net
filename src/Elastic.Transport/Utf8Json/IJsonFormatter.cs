@@ -24,20 +24,25 @@
 
 namespace Elasticsearch.Net.Utf8Json
 {
+<<<<<<< HEAD
 	internal delegate void JsonSerializeAction<in T>(ref JsonWriter writer, T value, IJsonFormatterResolver resolver);
 	internal delegate T JsonDeserializeFunc<out T>(ref JsonReader reader, IJsonFormatterResolver resolver);
+=======
+	public delegate void JsonSerializeAction<T>(ref JsonWriter writer, T value, IJsonFormatterResolver resolver);
+	public delegate T JsonDeserializeFunc<T>(ref JsonReader reader, IJsonFormatterResolver resolver);
+>>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
 
-	internal interface IJsonFormatter
+	public interface IJsonFormatter
     {
     }
 
-	internal interface IJsonFormatter<T> : IJsonFormatter
+	public interface IJsonFormatter<T> : IJsonFormatter
     {
         void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver);
         T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver);
     }
 
-	internal interface IObjectPropertyNameFormatter<T>
+	public interface IObjectPropertyNameFormatter<T>
     {
         void SerializeToPropertyName(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver);
         T DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver);

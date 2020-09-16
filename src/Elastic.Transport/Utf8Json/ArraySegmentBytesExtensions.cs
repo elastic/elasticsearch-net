@@ -11,7 +11,7 @@ using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Elasticsearch.Net.Extensions
 {
-	internal static class ArraySegmentBytesExtensions
+	public static class ArraySegmentBytesExtensions
 	{
 		private const byte DateMathSeparator = (byte)'|';
 		private const byte DecimalPoint = (byte)'.';

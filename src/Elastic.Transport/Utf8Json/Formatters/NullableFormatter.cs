@@ -47,7 +47,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		}
     }
 
-	internal sealed class StaticNullableFormatter<T> : IJsonFormatter<T?>
+	public sealed class StaticNullableFormatter<T> : IJsonFormatter<T?>
         where T : struct
     {
 		private readonly IJsonFormatter<T> _underlyingFormatter;

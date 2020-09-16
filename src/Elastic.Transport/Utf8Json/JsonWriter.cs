@@ -34,7 +34,7 @@ namespace Elasticsearch.Net.Utf8Json
 {
     // JSON RFC: https://www.ietf.org/rfc/rfc4627.txt
 
-    internal struct JsonWriter
+    public struct JsonWriter
     {
 		// write direct from UnsafeMemory
         internal byte[] Buffer;

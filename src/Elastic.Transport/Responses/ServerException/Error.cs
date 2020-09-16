@@ -16,6 +16,10 @@ namespace Elasticsearch.Net
 	[JsonFormatter(typeof(ErrorFormatter))]
 	public class Error : ErrorCause
 	{
+		public Error() {}
+
+		public Error(string errorReason) => Reason = errorReason;
+
 		private static readonly IReadOnlyDictionary<string, string> DefaultHeaders =
 			new ReadOnlyDictionary<string, string>(new Dictionary<string, string>(0));
 

@@ -32,7 +32,7 @@ using Elasticsearch.Net.Utf8Json.Internal;
 
 namespace Elasticsearch.Net.Utf8Json.Formatters
 {
-	internal class ArrayFormatter<T> : IJsonFormatter<T[]>
+	public class ArrayFormatter<T> : IJsonFormatter<T[]>
 	{
 		private static readonly ArrayPool<T> ArrayPool = new ArrayPool<T>(99);
 
@@ -177,7 +177,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		}
 	}
 
-	internal abstract class CollectionFormatterBase<TElement, TIntermediate, TEnumerator, TCollection> : IJsonFormatter<TCollection>
+	public abstract class CollectionFormatterBase<TElement, TIntermediate, TEnumerator, TCollection> : IJsonFormatter<TCollection>
 		where TCollection : class, IEnumerable<TElement>
 		where TEnumerator : IEnumerator<TElement>
 	{
@@ -238,7 +238,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		protected abstract TCollection Complete(ref TIntermediate intermediateCollection);
 	}
 
-	internal abstract class CollectionFormatterBase<TElement, TIntermediate, TCollection> : CollectionFormatterBase<TElement, TIntermediate, IEnumerator<TElement>, TCollection>
+	public abstract class CollectionFormatterBase<TElement, TIntermediate, TCollection> : CollectionFormatterBase<TElement, TIntermediate, IEnumerator<TElement>, TCollection>
 		where TCollection : class, IEnumerable<TElement>
 	{
 		protected override IEnumerator<TElement> GetSourceEnumerator(TCollection source) => source.GetEnumerator();
@@ -312,7 +312,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		protected override HashSet<T>.Enumerator GetSourceEnumerator(HashSet<T> source) => source.GetEnumerator();
 	}
 
-	internal sealed class ReadOnlyCollectionFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, ReadOnlyCollection<T>>
+	public sealed class ReadOnlyCollectionFormatter<T> : CollectionFormatterBase<T, ArrayBuffer<T>, ReadOnlyCollection<T>>
 	{
 		protected override void Add(ref ArrayBuffer<T> collection, int index, T value) => collection.Add(value);
 
@@ -322,7 +322,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 		protected override ArrayBuffer<T> Create() => new ArrayBuffer<T>(4);
 	}
 
-	internal sealed class InterfaceListFormatter<T> : CollectionFormatterBase<T, List<T>, IList<T>>
+	public sealed class InterfaceListFormatter<T> : CollectionFormatterBase<T, List<T>, IList<T>>
 	{
 		protected override void Add(ref List<T> collection, int index, T value) => collection.Add(value);
 
