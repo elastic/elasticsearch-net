@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elastic.SharedExtensions;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -19,6 +20,8 @@ namespace Nest
 
 	public class AuthenticateResponse : ResponseBase
 	{
+		private IReadOnlyDictionary<string, object> _metadata = EmptyReadOnly<string, object>.Dictionary;
+
 		[DataMember(Name = "email")]
 		public string Email { get; internal set; }
 
@@ -26,8 +29,11 @@ namespace Nest
 		public string FullName { get; internal set; }
 
 		[DataMember(Name = "metadata")]
-		public IReadOnlyDictionary<string, object> Metadata { get; internal set; }
-			= EmptyReadOnly<string, object>.Dictionary;
+		public IReadOnlyDictionary<string, object> Metadata
+		{
+			get => _metadata;
+			internal set => _metadata = value;
+		}
 
 		[DataMember(Name = "roles")]
 		public IReadOnlyCollection<string> Roles { get; internal set; }

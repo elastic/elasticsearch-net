@@ -8,6 +8,7 @@ using System.Collections.Specialized;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Elastic.SharedExtensions;
 using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System.Diagnostics;
+using Elastic.SharedExtensions;
 using Elasticsearch.Net.Extensions;
 using static Elasticsearch.Net.AuditEvent;
 

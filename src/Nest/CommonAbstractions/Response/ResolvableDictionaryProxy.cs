@@ -5,6 +5,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Elastic.SharedExtensions;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 

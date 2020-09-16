@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.Serialization;
-using Elasticsearch.Net.Extensions;
+using Elastic.SharedExtensions;
 using Elasticsearch.Net.Utf8Json;
 
 namespace Elasticsearch.Net

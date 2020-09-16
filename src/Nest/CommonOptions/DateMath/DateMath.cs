@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
+using Elastic.SharedExtensions;
 using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json;
 

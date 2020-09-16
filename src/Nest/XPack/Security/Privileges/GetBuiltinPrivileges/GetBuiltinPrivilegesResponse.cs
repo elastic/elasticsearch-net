@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elastic.SharedExtensions;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -11,8 +12,14 @@ namespace Nest
 	[DataContract]
 	public class GetBuiltinPrivilegesResponse : ResponseBase
 	{
+		private IReadOnlyCollection<string> _cluster = EmptyReadOnly<string>.Collection;
+
 		[DataMember(Name = "cluster")]
-		public IReadOnlyCollection<string> Cluster { get; internal set; } = EmptyReadOnly<string>.Collection;
+		public IReadOnlyCollection<string> Cluster
+		{
+			get => _cluster;
+			internal set => _cluster = value;
+		}
 
 		[DataMember(Name = "index")]
 		public IReadOnlyCollection<string> Index { get; internal set; } = EmptyReadOnly<string>.Collection;

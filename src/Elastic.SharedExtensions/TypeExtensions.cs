@@ -8,7 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Elasticsearch.Net.Extensions
+namespace Elastic.SharedExtensions
 {
 	internal static class TypeExtensions
 	{

@@ -19,7 +19,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Diagnostics;
-using Elasticsearch.Net.Extensions;
+using Elastic.SharedExtensions;
 using static System.Net.DecompressionMethods;
 
 namespace Elasticsearch.Net

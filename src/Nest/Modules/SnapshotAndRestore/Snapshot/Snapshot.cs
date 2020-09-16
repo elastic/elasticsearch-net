@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elastic.SharedExtensions;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -40,7 +41,7 @@ namespace Nest
 
 		[DataMember(Name ="state")]
 		public string State { get; internal set; }
-		
+
 		[DataMember(Name ="metadata")]
 		public IReadOnlyDictionary<string, object> Metadata { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
 	}

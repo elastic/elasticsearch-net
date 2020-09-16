@@ -83,7 +83,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.TestLogger", "tests\T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elastic.Transport", "src\Elastic.Transport\Elastic.Transport.csproj", "{B5D57009-286A-4BA1-91BE-669713E7AB23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elastic.Extensions", "src\Elastic.Extensions\Elastic.Extensions.csproj", "{A9F39D63-95B8-47BE-AEAD-DB89C7CEC3A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elastic.SharedExtensions", "src\Elastic.SharedExtensions\Elastic.SharedExtensions.csproj", "{A9F39D63-95B8-47BE-AEAD-DB89C7CEC3A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

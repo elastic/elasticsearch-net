@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Elasticsearch.Net.Extensions
+namespace Elastic.SharedExtensions
 {
 	internal static class UtilExtensions
 	{

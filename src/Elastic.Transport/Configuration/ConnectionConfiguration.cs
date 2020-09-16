@@ -18,7 +18,7 @@ using System.Reflection;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-using Elasticsearch.Net.Extensions;
+using Elastic.SharedExtensions;
 
 namespace Elasticsearch.Net
 {

@@ -30,6 +30,30 @@
     <Compile Include="..\Elastic.Extensions\*.cs">
       <Link>Extensions\*.cs</Link>
     </Compile>
+    <Compile Include="..\Elastic.SharedExtensions\CharUtils.cs">
+      <Link>Extensions\CharUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\Elastic.SharedExtensions\EmptyReadonly.cs">
+      <Link>Extensions\EmptyReadonly.cs</Link>
+    </Compile>
+    <Compile Include="..\Elastic.SharedExtensions\EnumExtensions.cs">
+      <Link>Extensions\EnumExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Elastic.SharedExtensions\Fluent.cs">
+      <Link>Extensions\Fluent.cs</Link>
+    </Compile>
+    <Compile Include="..\Elastic.SharedExtensions\StringBuilderCache.cs">
+      <Link>Extensions\StringBuilderCache.cs</Link>
+    </Compile>
+    <Compile Include="..\Elastic.SharedExtensions\TypeExtensions.cs">
+      <Link>Extensions\TypeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Elastic.SharedExtensions\UtilExtensions.cs">
+      <Link>Extensions\UtilExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Elastic.SharedExtensions\X509CertificateExtensions.cs">
+      <Link>Extensions\X509CertificateExtensions.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Update="Utf8Json\Formatters\PrimitiveFormatter.tt">

@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using Elastic.SharedExtensions;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json;

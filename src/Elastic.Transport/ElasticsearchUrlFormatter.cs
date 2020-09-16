@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elastic.SharedExtensions;
 using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net

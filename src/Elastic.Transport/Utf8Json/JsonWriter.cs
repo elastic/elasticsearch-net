@@ -26,6 +26,7 @@ using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Elastic.SharedExtensions;
 using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json.Internal;
 using Elasticsearch.Net.Utf8Json.Internal.DoubleConversion;
