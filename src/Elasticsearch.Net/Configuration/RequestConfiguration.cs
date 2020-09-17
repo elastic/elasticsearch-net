@@ -197,6 +197,8 @@ namespace Elasticsearch.Net
 			Self.OpaqueId = config?.OpaqueId;
 			Self.TransferEncodingChunked = config?.TransferEncodingChunked;
 			Self.Headers = config?.Headers;
+			Self.EnableTcpStats = config?.EnableTcpStats;
+			Self.EnableThreadPoolStats = config?.EnableThreadPoolStats;
 		}
 
 		string IRequestConfiguration.Accept { get; set; }
