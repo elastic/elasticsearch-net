@@ -69,6 +69,12 @@ namespace Nest
 
 		public virtual void Visit(IConstantKeywordProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
+		public virtual void Visit(ISearchAsYouTypeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+
+		public virtual void Visit(IFieldAliasProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+
+		public virtual void Visit(IWildcardProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+
 		public virtual IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => null;
 
 		public void Visit(IProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
