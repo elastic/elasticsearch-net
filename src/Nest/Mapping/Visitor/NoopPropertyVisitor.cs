@@ -169,6 +169,15 @@ namespace Nest
 					break;
 				case IPointProperty point:
 					Visit(point, propertyInfo, attribute);
+          break;
+				case ISearchAsYouTypeProperty searchAsYouType:
+					Visit(searchAsYouType, propertyInfo, attribute);
+					break;
+				case IWildcardProperty wildcard:
+					Visit(wildcard, propertyInfo, attribute);
+					break;
+				case IFieldAliasProperty fieldAlias:
+					Visit(fieldAlias, propertyInfo, attribute);
 					break;
 			}
 		}
