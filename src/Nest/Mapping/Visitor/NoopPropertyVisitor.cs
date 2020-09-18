@@ -167,6 +167,9 @@ namespace Nest
 				case IConstantKeywordProperty constantKeyword:
 					Visit(constantKeyword, propertyInfo, attribute);
 					break;
+				case IPointProperty point:
+					Visit(point, propertyInfo, attribute);
+					break;
 			}
 		}
 	}
