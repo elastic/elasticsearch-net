@@ -165,6 +165,15 @@ namespace Nest
 				case IConstantKeywordProperty constantKeyword:
 					Visit(constantKeyword, propertyInfo, attribute);
 					break;
+				case ISearchAsYouTypeProperty searchAsYouType:
+					Visit(searchAsYouType, propertyInfo, attribute);
+					break;
+				case IWildcardProperty wildcard:
+					Visit(wildcard, propertyInfo, attribute);
+					break;
+				case IFieldAliasProperty fieldAlias:
+					Visit(fieldAlias, propertyInfo, attribute);
+					break;
 			}
 		}
 	}
