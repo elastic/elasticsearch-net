@@ -6,7 +6,6 @@ using System.Reflection;
 
 namespace Nest
 {
-	// TODO: Make all methods virtual
 	public class NoopPropertyVisitor : IPropertyVisitor
 	{
 		public virtual bool SkipProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => false;
@@ -27,21 +26,21 @@ namespace Nest
 
 		public virtual void Visit(ITokenCountProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
-		public void Visit(IPercolatorProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+		public virtual void Visit(IPercolatorProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
-		public void Visit(IIntegerRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+		public virtual void Visit(IIntegerRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
-		public void Visit(IFloatRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+		public virtual void Visit(IFloatRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
-		public void Visit(ILongRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+		public virtual void Visit(ILongRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
-		public void Visit(IDoubleRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+		public virtual void Visit(IDoubleRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
-		public void Visit(IDateRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+		public virtual void Visit(IDateRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
-		public void Visit(IIpRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+		public virtual void Visit(IIpRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
-		public void Visit(IJoinProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+		public virtual void Visit(IJoinProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
 		public virtual void Visit(IRankFeatureProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
@@ -77,7 +76,7 @@ namespace Nest
 
 		public virtual IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => null;
 
-		public void Visit(IProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
+		public virtual void Visit(IProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 		{
 			switch (type)
 			{
