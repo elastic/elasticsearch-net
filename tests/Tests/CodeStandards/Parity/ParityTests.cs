@@ -40,10 +40,18 @@ namespace Tests.CodeStandards.Parity
 				.Where(t => t.IsInterface && interfaceType.IsAssignableFrom(t) && !excludeInterfaceTypes.Contains(t));
 
 			var visitMethodTypes = typeof(IPropertyVisitor).GetMethods()
-				.Where(m => m.ReturnType == typeof(void))
+				.Where(m => m.Name == nameof(IPropertyVisitor.Visit) && m.ReturnType == typeof(void))
 				.Select(m => m.GetParameters()[0].ParameterType);
 
 			propertyTypes.Except(visitMethodTypes).Should().BeEmpty();
+		}
+
+		[U]
+		public void NoopPropertyVisitorVisitMethodsAreAllVirtual()
+		{
+			var methods = typeof(NoopPropertyVisitor).GetMethods()
+				.Where(m => m.Name == nameof(NoopPropertyVisitor.Visit));
+			methods.Should().OnlyContain(m => m.IsVirtual);
 		}
 	}
 }
