@@ -203,6 +203,8 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		public void Visit(IShapeProperty mapping) => Increment("shape");
 
+		public void Visit(IPointProperty mapping) => Increment("point");
+
 		public void Visit(IIpProperty mapping) => Increment("ip");
 
 		public void Visit(IObjectProperty mapping) => Increment("object");
