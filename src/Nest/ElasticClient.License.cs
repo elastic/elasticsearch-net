@@ -18,6 +18,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Transport;
 using Elasticsearch.Net.Specification.LicenseApi;
 
 // ReSharper disable once CheckNamespace

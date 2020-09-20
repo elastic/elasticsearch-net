@@ -12,9 +12,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using Elastic.Transport;
 @{ await IncludeAsync("LowLevel/Client/Usings.cshtml", Model);}
-using static Elasticsearch.Net.HttpMethod;
+using static Elastic.Transport.HttpMethod;
 
 @{
 	RestApiSpec model = Model;
