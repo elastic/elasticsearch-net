@@ -25,7 +25,7 @@ namespace Nest
 			Action<IRequestConfiguration> forceConfiguration = null
 		)
 			where TRequest : class, IRequest
-			where TResponse : class, Elastic.Transport.ITransportResponse, new() =>
+			where TResponse : class, ITransportResponse, new() =>
 			_client.DoRequest<TRequest, TResponse>(p, parameters, forceConfiguration);
 
 		internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
@@ -35,7 +35,7 @@ namespace Nest
 			Action<IRequestConfiguration> forceConfiguration = null
 		)
 			where TRequest : class, IRequest
-			where TResponse : class, Elastic.Transport.ITransportResponse, new() =>
+			where TResponse : class, ITransportResponse, new() =>
 			_client.DoRequestAsync<TRequest, TResponse>(p, parameters, ct, forceConfiguration);
 
 		protected CatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(TRequest request)
@@ -126,7 +126,7 @@ namespace Nest
 
 		internal TResponse DoRequest<TRequest, TResponse>(TRequest p, IRequestParameters parameters, Action<IRequestConfiguration> forceConfiguration = null)
 			where TRequest : class, IRequest
-			where TResponse : class, Elastic.Transport.ITransportResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
 			if (p.ContentType != null) ForceContentType(p, p.ContentType);
@@ -144,7 +144,7 @@ namespace Nest
 			Action<IRequestConfiguration> forceConfiguration = null
 		)
 			where TRequest : class, IRequest
-			where TResponse : class, Elastic.Transport.ITransportResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
 			if (p.ContentType != null) ForceContentType(p, p.ContentType);

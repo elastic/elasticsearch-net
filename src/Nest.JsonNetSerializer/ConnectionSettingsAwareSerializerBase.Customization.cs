@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport.Serialization;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest.JsonNetSerializer

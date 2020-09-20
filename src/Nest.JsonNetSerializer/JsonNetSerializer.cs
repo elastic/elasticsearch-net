@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using Elastic.Transport.Serialization;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest.JsonNetSerializer
