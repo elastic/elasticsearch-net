@@ -25,7 +25,7 @@
 using System;
 using System.Reflection;
 
-namespace Elastic.Transport.Utf8Json.Resolvers
+namespace Elastic.Transport.Utf8Json
 {
     /// <summary>
     /// Get formatter from [JsonFormatter] attribute.

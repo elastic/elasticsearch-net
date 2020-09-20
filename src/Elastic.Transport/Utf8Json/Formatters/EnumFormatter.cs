@@ -28,9 +28,8 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.Serialization;
-using Elastic.Transport.Utf8Json.Internal;
 
-namespace Elastic.Transport.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json
 {
 	public static class EnumFormatterHelper
 	{

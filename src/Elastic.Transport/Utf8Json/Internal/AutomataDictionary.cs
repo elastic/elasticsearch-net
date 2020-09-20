@@ -29,9 +29,8 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
-using Elastic.Transport.Utf8Json.Internal.Emit;
 
-namespace Elastic.Transport.Utf8Json.Internal
+namespace Elastic.Transport.Utf8Json
 {
     // Key = long, Value = int for UTF8String Dictionary
 

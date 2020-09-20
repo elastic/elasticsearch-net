@@ -25,16 +25,17 @@
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="Elasticsearch.Net.CustomDynamicObjectResolver" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicCompositeResolver" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" />
+<!--    <InternalsVisibleTo Include="Nest" />-->
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.CustomDynamicObjectResolver" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicCompositeResolver" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" />
     
-    <InternalsVisibleTo Include="Tests" />
+<!--    <InternalsVisibleTo Include="Tests" />-->
 
   </ItemGroup>
   <ItemGroup>
@@ -42,40 +43,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ElasticLowLevelClient.cs</DependentUpon>
     </Compile>
-    <Compile Include="..\Elastic.SharedExtensions\CharUtils.cs">
-      <Link>Extensions\CharUtils.cs</Link>
-    </Compile>
-    <Compile Include="..\Elastic.SharedExtensions\EmptyReadonly.cs">
-      <Link>Extensions\EmptyReadonly.cs</Link>
-    </Compile>
-    <Compile Include="..\Elastic.SharedExtensions\EnumExtensions.cs">
-      <Link>Extensions\EnumExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Elastic.SharedExtensions\Fluent.cs">
-      <Link>Extensions\Fluent.cs</Link>
-    </Compile>
-    <Compile Include="..\Elastic.SharedExtensions\StringBuilderCache.cs">
-      <Link>Extensions\StringBuilderCache.cs</Link>
-    </Compile>
-    <Compile Include="..\Elastic.SharedExtensions\TypeExtensions.cs">
-      <Link>Extensions\TypeExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Elastic.SharedExtensions\UtilExtensions.cs">
-      <Link>Extensions\UtilExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Elastic.SharedExtensions\X509CertificateExtensions.cs">
-      <Link>Extensions\X509CertificateExtensions.cs</Link>
+    <!-- TODO uncomment this when we do not need to use InternalsVisibleTo for UTF8 anymore -->
+    <Compile Include="..\Elastic.SharedExtensions\*.cs">
+      <Link>Extensions\*.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Api\RequestParameters\RequestParameters.*.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Api\RequestParameters\RequestParameters.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\Elastic.Extensions\*.cs">
-      <Link>Extensions\*.cs</Link>
     </Compile>
   </ItemGroup>
 

@@ -28,7 +28,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace Elastic.Transport.Utf8Json.Internal
+namespace Elastic.Transport.Utf8Json
 {
     internal static class ReflectionExtensions
     {

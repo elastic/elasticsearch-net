@@ -23,9 +23,8 @@
 #endregion
 
 using System.Linq;
-using Elastic.Transport.Utf8Json.Formatters;
 
-namespace Elastic.Transport.Utf8Json.Resolvers
+namespace Elastic.Transport.Utf8Json
 {
 	internal static class StandardResolver
 	{

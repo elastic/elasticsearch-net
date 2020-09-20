@@ -25,11 +25,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
-using Elastic.Transport.Utf8Json.Internal;
-using Elastic.Transport.Utf8Json.Internal.Emit;
-using Elastic.Transport.Utf8Json.Resolvers;
 
-namespace Elastic.Transport.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json
 {
     public sealed class DynamicObjectTypeFallbackFormatter : IJsonFormatter<object>
     {

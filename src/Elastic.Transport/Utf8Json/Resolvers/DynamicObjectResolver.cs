@@ -29,11 +29,8 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Elastic.Transport.Utf8Json.Formatters;
-using Elastic.Transport.Utf8Json.Internal;
-using Elastic.Transport.Utf8Json.Internal.Emit;
 
-namespace Elastic.Transport.Utf8Json.Resolvers
+namespace Elastic.Transport.Utf8Json
 {
 	/// <summary>
 	/// ObjectResolver by dynamic code generation.

@@ -24,9 +24,8 @@
 
 using System;
 using System.Runtime.CompilerServices;
-using Elastic.Transport.Utf8Json.Internal.DoubleConversion;
 
-namespace Elastic.Transport.Utf8Json.Internal
+namespace Elastic.Transport.Utf8Json
 {
     /// <summary>
     /// zero-allocate itoa, dtoa, atoi, atod converters.

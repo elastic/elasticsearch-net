@@ -25,9 +25,8 @@
 using System;
 using System.Globalization;
 using Elastic.SharedExtensions;
-using Elastic.Transport.Utf8Json.Internal;
 
-namespace Elastic.Transport.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json
 {
 	internal sealed class DateTimeFormatter : IJsonFormatter<DateTime>
     {

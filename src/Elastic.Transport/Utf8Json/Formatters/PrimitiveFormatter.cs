@@ -23,9 +23,8 @@
 #endregion
 
 using System;
-using Elastic.Transport.Utf8Json.Internal;
 
-namespace Elastic.Transport.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json
 {
     internal sealed class SByteFormatter : IJsonFormatter<sbyte>, IObjectPropertyNameFormatter<sbyte>
     {

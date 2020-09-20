@@ -5,8 +5,6 @@
 using System;
 using System.Globalization;
 using System.Runtime.CompilerServices;
-using Elastic.Transport.Utf8Json.Formatters;
-using Elastic.Transport.Utf8Json.Internal;
 
 namespace Elastic.Transport.Utf8Json
 {

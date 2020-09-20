@@ -25,8 +25,6 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Elastic.Transport.Utf8Json.Internal;
-using Elastic.Transport.Utf8Json.Resolvers;
 
 namespace Elastic.Transport.Utf8Json
 {

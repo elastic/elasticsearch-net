@@ -22,7 +22,7 @@
 // SOFTWARE.
 #endregion
 
-namespace Elastic.Transport.Utf8Json.Internal
+namespace Elastic.Transport.Utf8Json
 {
     internal static class StringMutator
     {

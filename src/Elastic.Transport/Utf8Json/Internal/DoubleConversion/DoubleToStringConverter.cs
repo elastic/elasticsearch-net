@@ -25,7 +25,7 @@
 using System;
 using System.Globalization;
 
-namespace Elastic.Transport.Utf8Json.Internal.DoubleConversion
+namespace Elastic.Transport.Utf8Json
 {
 	internal struct InternalStringBuilder
     {

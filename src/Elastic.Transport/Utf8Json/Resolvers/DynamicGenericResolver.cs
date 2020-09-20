@@ -29,10 +29,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Elastic.Transport.Utf8Json.Formatters;
-using Elastic.Transport.Utf8Json.Internal;
 
-namespace Elastic.Transport.Utf8Json.Resolvers
+namespace Elastic.Transport.Utf8Json
 {
 	public sealed class DynamicGenericResolver : IJsonFormatterResolver
 	{

@@ -25,9 +25,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Elastic.Transport.Utf8Json.Internal;
 
-namespace Elastic.Transport.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json
 {
 	internal sealed class PrimitiveObjectFormatter : IJsonFormatter<object>
     {

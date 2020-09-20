@@ -8,8 +8,6 @@ using System.Reflection;
 using Elastic.Transport.Serialization;
 using Elastic.Transport.Serialization.Formatters;
 using Elastic.Transport.Utf8Json;
-using Elastic.Transport.Utf8Json.Formatters;
-using Elastic.Transport.Utf8Json.Resolvers;
 
 
 namespace Nest

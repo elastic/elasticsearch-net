@@ -26,7 +26,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Elastic.Transport.Utf8Json.Internal
+namespace Elastic.Transport.Utf8Json
 {
     [StructLayout(LayoutKind.Explicit, Pack = 1)]
     internal struct GuidBits

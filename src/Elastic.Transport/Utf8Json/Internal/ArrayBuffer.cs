@@ -24,7 +24,7 @@
 
 using System;
 
-namespace Elastic.Transport.Utf8Json.Internal
+namespace Elastic.Transport.Utf8Json
 {
 	public struct ArrayBuffer<T>
     {

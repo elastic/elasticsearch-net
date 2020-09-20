@@ -10,7 +10,6 @@ using System.Linq;
 using System.Reflection;
 using Elastic.SharedExtensions;
 using Elastic.Transport.Utf8Json;
-using Elastic.Transport.Utf8Json.Internal;
 
 namespace Nest
 {

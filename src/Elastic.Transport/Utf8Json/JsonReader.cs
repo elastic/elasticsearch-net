@@ -25,8 +25,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Elastic.Transport.Utf8Json.Internal;
-using Elastic.Transport.Utf8Json.Internal.DoubleConversion;
 
 namespace Elastic.Transport.Utf8Json
 {

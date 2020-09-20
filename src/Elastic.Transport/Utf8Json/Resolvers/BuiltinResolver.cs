@@ -29,9 +29,8 @@ using System.Dynamic;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using Elastic.Transport.Utf8Json.Formatters;
 
-namespace Elastic.Transport.Utf8Json.Resolvers
+namespace Elastic.Transport.Utf8Json
 {
 	public sealed class BuiltinResolver : IJsonFormatterResolver
     {

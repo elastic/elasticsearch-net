@@ -24,7 +24,7 @@
 
 using System;
 
-namespace Elastic.Transport.Utf8Json.Internal.DoubleConversion
+namespace Elastic.Transport.Utf8Json
 {
 	internal struct Vector
     {

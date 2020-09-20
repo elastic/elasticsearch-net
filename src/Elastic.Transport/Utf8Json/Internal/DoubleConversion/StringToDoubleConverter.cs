@@ -26,7 +26,7 @@ using System;
 using System.Globalization;
 using System.Text;
 
-namespace Elastic.Transport.Utf8Json.Internal.DoubleConversion
+namespace Elastic.Transport.Utf8Json
 {
 #pragma warning disable 660
 #pragma warning disable 661

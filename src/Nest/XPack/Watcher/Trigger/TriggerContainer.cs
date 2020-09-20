@@ -5,8 +5,6 @@
 using System;
 using System.Runtime.Serialization;
 using Elastic.Transport.Utf8Json;
-using Elastic.Transport.Utf8Json.Resolvers;
-
 
 
 namespace Nest

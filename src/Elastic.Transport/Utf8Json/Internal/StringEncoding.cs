@@ -24,7 +24,7 @@
 
 using System.Text;
 
-namespace Elastic.Transport.Utf8Json.Internal
+namespace Elastic.Transport.Utf8Json
 {
     public static class StringEncoding
     {

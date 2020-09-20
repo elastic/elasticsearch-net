@@ -25,7 +25,7 @@
 using System;
 // ReSharper disable All
 
-namespace Elastic.Transport.Utf8Json.Internal
+namespace Elastic.Transport.Utf8Json
 {
     // Unity compiler can't understand this.
 

@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elastic.Transport.Utf8Json;
-using Elastic.Transport.Utf8Json.Internal;
 
 namespace Nest
 {

@@ -27,7 +27,7 @@ using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 
-namespace Elastic.Transport.Utf8Json.Internal
+namespace Elastic.Transport.Utf8Json
 {
     // for string key property name write optimization.
 

@@ -27,6 +27,21 @@
 
   </ItemGroup>
   <ItemGroup>
+<!--    <InternalsVisibleTo Include="Nest" />-->
+<!--    <InternalsVisibleTo Include="Elasticsearch.Net" />-->
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.CustomDynamicObjectResolver" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicCompositeResolver" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" />
+
+    <InternalsVisibleTo Include="Tests" />
+
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="..\Elastic.SharedExtensions\*.cs">
       <Link>Extensions\*.cs</Link>
     </Compile>
@@ -67,8 +82,5 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Utf8Json/UnsafeMemory.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Observability" />
   </ItemGroup>
 </Project>

@@ -31,9 +31,8 @@ using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Elastic.Transport.Utf8Json.Internal;
 
-namespace Elastic.Transport.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json
 {
 	// MEMO:should write/read base64 directly like corefxlab/System.Binary.Base64
 	// https://github.com/dotnet/corefxlab/tree/master/src/System.Binary.Base64/System/Binary

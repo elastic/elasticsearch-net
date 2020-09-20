@@ -6,9 +6,6 @@ using System;
 using System.Collections.Concurrent;
 using Elastic.Transport.Serialization.Formatters;
 using Elastic.Transport.Utf8Json;
-using Elastic.Transport.Utf8Json.Formatters;
-using Elastic.Transport.Utf8Json.Internal;
-using Elastic.Transport.Utf8Json.Resolvers;
 
 namespace Elastic.Transport.Serialization.Resolvers
 {

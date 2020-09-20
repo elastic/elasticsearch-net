@@ -22,9 +22,7 @@
 // SOFTWARE.
 #endregion
 
-using Elastic.Transport.Utf8Json.Internal;
-
-namespace Elastic.Transport.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json
 {
     // multi dimensional array serialize to [[seq], [seq]]
 

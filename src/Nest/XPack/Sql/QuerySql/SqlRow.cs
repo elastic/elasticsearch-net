@@ -5,8 +5,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Elastic.Transport.Utf8Json;
-using Elastic.Transport.Utf8Json.Formatters;
-
 
 
 namespace Nest

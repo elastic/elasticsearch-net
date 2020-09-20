@@ -25,7 +25,7 @@
 using System;
 using System.Threading;
 
-namespace Elastic.Transport.Utf8Json.Internal
+namespace Elastic.Transport.Utf8Json
 {
     // Safe for multiple-read, single-write.
     internal class ThreadsafeTypeKeyHashTable<TValue>

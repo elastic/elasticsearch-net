@@ -25,7 +25,7 @@
 
 using System;
 
-namespace Elastic.Transport.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json
 {
 	internal sealed class NullableFormatter<T> : IJsonFormatter<T?>
         where T : struct
