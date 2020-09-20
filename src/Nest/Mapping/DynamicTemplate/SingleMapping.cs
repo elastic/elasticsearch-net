@@ -55,6 +55,10 @@ namespace Nest
 			selector?.Invoke(new ShapePropertyDescriptor<T>());
 
 		/// <inheritdoc />
+		public IProperty Point(Func<PointPropertyDescriptor<T>, IPointProperty> selector) =>
+			selector?.Invoke(new PointPropertyDescriptor<T>());
+
+		/// <inheritdoc />
 		public IProperty IntegerRange(Func<IntegerRangePropertyDescriptor<T>, IIntegerRangeProperty> selector) =>
 			selector?.Invoke(new IntegerRangePropertyDescriptor<T>());
 

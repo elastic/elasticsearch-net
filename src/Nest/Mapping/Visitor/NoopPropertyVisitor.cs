@@ -21,6 +21,8 @@ namespace Nest
 
 		public virtual void Visit(IShapeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
+		public virtual void Visit(IPointProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+
 		public virtual void Visit(ICompletionProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
 		public virtual void Visit(IMurmur3HashProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
@@ -165,6 +167,9 @@ namespace Nest
 				case IConstantKeywordProperty constantKeyword:
 					Visit(constantKeyword, propertyInfo, attribute);
 					break;
+				case IPointProperty point:
+					Visit(point, propertyInfo, attribute);
+          break;
 				case ISearchAsYouTypeProperty searchAsYouType:
 					Visit(searchAsYouType, propertyInfo, attribute);
 					break;

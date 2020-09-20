@@ -5,7 +5,6 @@
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
 
-
 namespace Nest
 {
 	/// <summary>
@@ -152,5 +151,8 @@ namespace Nest
 
 		[EnumMember(Value = "wildcard")]
 		Wildcard,
+
+		[EnumMember(Value = "point")]
+		Point,
 	}
 }
