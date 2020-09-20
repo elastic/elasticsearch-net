@@ -18,6 +18,8 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using Tests.Framework;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elastic.Transport.Serialization;
 using Elasticsearch.Net;
 
 

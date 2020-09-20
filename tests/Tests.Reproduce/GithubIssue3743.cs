@@ -4,7 +4,7 @@
 
 using System.Linq;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport.Serialization;
 using FluentAssertions;
 using Newtonsoft.Json;
 using Tests.Core.Serialization;

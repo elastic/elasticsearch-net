@@ -15,8 +15,9 @@ using Elasticsearch.Net.VirtualizedCluster;
 using Elasticsearch.Net.VirtualizedCluster.Audit;
 using FluentAssertions;
 using Tests.Framework;
+using Elastic.Transport;
 using static Elasticsearch.Net.VirtualizedCluster.Rules.TimesHelper;
-using static Elasticsearch.Net.AuditEvent;
+using static Elastic.Transport.Observability.Auditing.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 {
@@ -31,7 +32,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 		{
 			var numberOfNodes = 10;
 			var uris = Enumerable.Range(9200, numberOfNodes).Select(p => new Uri("http://localhost:" + p));
-			var pool = new Elasticsearch.Net.StickySniffingConnectionPool(uris, (n)=>0f);
+			var pool = new Elastic.Transport.StickySniffingConnectionPool(uris, (n)=>0f);
 
 			/**
 			* Here we have setup a sticky connection pool seeded with 10 nodes all weighted the same.

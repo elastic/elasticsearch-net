@@ -6,6 +6,8 @@ using System;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
+using Elastic.Transport.Serialization;
+using Elastic.Transport.Utf8Json;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 

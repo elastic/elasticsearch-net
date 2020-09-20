@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Elastic.Transport;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -57,7 +58,7 @@ namespace Nest
 				var restoreResponse = _elasticClient.Snapshot.Restore(_restoreRequest);
 
 				if (!restoreResponse.IsValid)
-					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed to restore snapshot.", restoreResponse.ApiCall);
+					throw new ClientException(PipelineFailure.BadResponse, "Failed to restore snapshot.", restoreResponse.ApiCall);
 
 				EventHandler<RestoreNextEventArgs> onNext = (sender, args) => observer.OnNext(args.RecoveryStatusResponse);
 				EventHandler<RestoreCompletedEventArgs> onCompleted = (sender, args) => observer.OnCompleted();
@@ -189,7 +190,7 @@ namespace Nest
 				});
 
 				if (!recoveryStatus.IsValid)
-					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed getting recovery status.", recoveryStatus.ApiCall);
+					throw new ClientException(PipelineFailure.BadResponse, "Failed getting recovery status.", recoveryStatus.ApiCall);
 
 				if (recoveryStatus.Indices.All(x => x.Value.Shards.All(s => s.Index.Files.Recovered == s.Index.Files.Total)))
 				{

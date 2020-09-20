@@ -14,6 +14,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 using Tests.Core.Extensions;
 using Tests.Domain;
 using Tests.Framework;

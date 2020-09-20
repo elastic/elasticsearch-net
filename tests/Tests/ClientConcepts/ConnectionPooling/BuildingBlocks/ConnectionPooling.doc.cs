@@ -14,6 +14,7 @@ using Nest;
 using Tests.Configuration;
 using Tests.Framework;
 using Tests.XPack.Security.Privileges;
+using Elastic.Transport;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {

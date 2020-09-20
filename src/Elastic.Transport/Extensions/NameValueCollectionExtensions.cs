@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using Elastic.SharedExtensions;
 
-namespace Elasticsearch.Net.Extensions
+namespace Elastic.Transport.Extensions
 {
 	public static class NameValueCollectionExtensions
 	{
@@ -69,7 +69,7 @@ namespace Elasticsearch.Net.Extensions
 		}
 
 		internal static void UpdateFromDictionary(this NameValueCollection queryString, Dictionary<string, object> queryStringUpdates,
-			ElasticsearchUrlFormatter provider
+			UrlFormatter provider
 		)
 		{
 			if (queryString == null || queryString.Count < 0) return;

@@ -22,7 +22,7 @@
 // SOFTWARE.
 #endregion
 
-namespace Elasticsearch.Net.Utf8Json
+namespace Elastic.Transport.Utf8Json
 {
     // 0 = None, 1 ~ 4 is block token, 5 ~ 9 = value token, 10 ~ 11 = delimiter token
     // you can use range-check if optimization needed.

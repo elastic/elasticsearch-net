@@ -10,6 +10,7 @@ using Tests.Core.Client;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.DocumentationTests;
+using Elastic.Transport.Serialization;
 using static Nest.Indices;
 
 namespace Tests.ClientConcepts.HighLevel.Inference

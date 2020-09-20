@@ -14,9 +14,12 @@ using TheException = System.Net.WebException;
 #endif
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
 using Elasticsearch.Net.VirtualizedCluster.MockResponses;
 using Elasticsearch.Net.VirtualizedCluster.Providers;
 using Elasticsearch.Net.VirtualizedCluster.Rules;
+using HttpMethod = Elastic.Transport.HttpMethod;
 
 namespace Elasticsearch.Net.VirtualizedCluster
 {
@@ -158,7 +161,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			Action<TRule> beforeReturn,
 			Func<TRule, byte[]> successResponse
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 			where TRule : IRule
 		{
 			requestData.MadeItToResponse = true;
@@ -199,7 +202,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		private TResponse Always<TResponse, TRule>(RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn,
 			Func<TRule, byte[]> successResponse, TRule rule
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 			where TRule : IRule
 		{
 			if (rule.Takes.HasValue)
@@ -220,7 +223,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, State state, TRule rule,
 			int times
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 			where TRule : IRule
 		{
 			if (rule.Takes.HasValue)
@@ -239,7 +242,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		}
 
 		private TResponse Fail<TResponse, TRule>(RequestData requestData, TRule rule, RuleOption<Exception, int> returnOverride = null)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 			where TRule : IRule
 		{
 			var state = _calls[requestData.Uri.Port];
@@ -261,7 +264,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		private TResponse Success<TResponse, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse,
 			TRule rule
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 			where TRule : IRule
 		{
 			var state = _calls[requestData.Uri.Port];

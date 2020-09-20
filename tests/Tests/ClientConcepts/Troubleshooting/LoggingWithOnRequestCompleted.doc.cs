@@ -16,6 +16,8 @@ using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Framework;
 using Xunit;
+using Elastic.Transport;
+
 
 namespace Tests.ClientConcepts.Troubleshooting
 {
@@ -62,10 +64,10 @@ namespace Tests.ClientConcepts.Troubleshooting
 					.OnRequestCompleted(r => counter++)
 			);
 
-			Assert.Throws<ElasticsearchClientException>(() => client.RootNodeInfo()); // <3> Assert an exception is thrown and the counter is incremented
+			Assert.Throws<ClientException>(() => client.RootNodeInfo()); // <3> Assert an exception is thrown and the counter is incremented
 			counter.Should().Be(1);
 
-			await Assert.ThrowsAsync<ElasticsearchClientException>(async () => await client.RootNodeInfoAsync());
+			await Assert.ThrowsAsync<ClientException>(async () => await client.RootNodeInfoAsync());
 			counter.Should().Be(2);
 		}
 

@@ -5,8 +5,9 @@
 using System;
 using System.Security;
 using System.Text;
+using Elastic.Transport;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// Credentials for Api Key Authentication
@@ -16,16 +17,16 @@ namespace Elasticsearch.Net
 		//TODO remove this constructor in 8.0
 		public ApiKeyAuthenticationCredentials() { }
 
-		public ApiKeyAuthenticationCredentials(string id, SecureString apiKey) => 
+		public ApiKeyAuthenticationCredentials(string id, SecureString apiKey) =>
 			Base64EncodedApiKey = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{id}:{apiKey.CreateString()}")).CreateSecureString();
 
-		public ApiKeyAuthenticationCredentials(string id, string apiKey) => 
+		public ApiKeyAuthenticationCredentials(string id, string apiKey) =>
 			Base64EncodedApiKey = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{id}:{apiKey}")).CreateSecureString();
 
-		public ApiKeyAuthenticationCredentials(string base64EncodedApiKey) => 
+		public ApiKeyAuthenticationCredentials(string base64EncodedApiKey) =>
 			Base64EncodedApiKey = base64EncodedApiKey.CreateSecureString();
 
-		public ApiKeyAuthenticationCredentials(SecureString base64EncodedApiKey) => 
+		public ApiKeyAuthenticationCredentials(SecureString base64EncodedApiKey) =>
 			Base64EncodedApiKey = base64EncodedApiKey;
 
 		/// <summary>

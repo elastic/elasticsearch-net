@@ -8,6 +8,7 @@ open System
 open System.Linq
 open System.Diagnostics
 open Argu
+open Elastic.Transport
 open Tests.YamlRunner
 open Tests.YamlRunner.Models
 open Elasticsearch.Net

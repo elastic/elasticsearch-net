@@ -9,7 +9,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Framework.EndpointTests.TestState;
-using static Elasticsearch.Net.HttpMethod;
+using Elastic.Transport;
+using static Elastic.Transport.HttpMethod;
 
 namespace Tests.XPack.MachineLearning.UpdateFilter
 {

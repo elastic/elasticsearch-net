@@ -8,7 +8,8 @@ using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
  using Elastic.Elasticsearch.Ephemeral;
  using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+ using Elastic.Transport;
+ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
@@ -56,7 +57,7 @@ namespace Tests.Framework.EndpointTests
 			base.AssertOnAllResponses((r) =>
 			{
 				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-					&& !(r.ApiCall.OriginalException is ElasticsearchClientException))
+					&& !(r.ApiCall.OriginalException is ClientException))
 				{
 					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
 					throw new ResponseAssertionException(e.SourceException, r).Demystify();

@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Transport;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -80,8 +81,8 @@ namespace Nest
 			return true;
 		}
 
-		private static ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
-			new ElasticsearchClientException(PipelineFailure.BadResponse, message, details);
+		private static ClientException Throw(string message, IApiCallDetails details) =>
+			new ClientException(PipelineFailure.BadResponse, message, details);
 
 		private void ThrowOnBadSearchResult(ISearchResponse<T> result, int slice, int page)
 		{

@@ -4,6 +4,7 @@
 
 using System;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -23,7 +24,7 @@ namespace Tests.Reproduce
 		{
 			var client = new ElasticClient(_cluster.CreateConnectionSettings().ThrowExceptions());
 			Action catIndicesRequest = () => client.LowLevel.Cat.Indices<StringResponse>("non-existing-index");
-			catIndicesRequest.Should().Throw<ElasticsearchClientException>();
+			catIndicesRequest.Should().Throw<ClientException>();
 		}
 	}
 }

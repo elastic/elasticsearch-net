@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -11,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Indices.AliasManagement.DeleteAlias
 {
-	
+
 	public class DeleteAliasApiTests
 		: ApiIntegrationTestBase<WritableCluster, DeleteAliasResponse, IDeleteAliasRequest, DeleteAliasDescriptor, DeleteAliasRequest>
 	{

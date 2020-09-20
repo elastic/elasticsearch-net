@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elastic.SharedExtensions;
+using Elastic.Transport.Serialization;
 using Elasticsearch.Net;
 
 namespace Nest

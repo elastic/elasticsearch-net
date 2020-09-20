@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -25,7 +26,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/_template/{CallIsolatedValue}";
-		
+
 		protected override GetIndexTemplateRequest Initializer => new GetIndexTemplateRequest(CallIsolatedValue);
 
 		protected override LazyResponses ClientUsage() => Calls(

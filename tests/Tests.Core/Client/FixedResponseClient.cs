@@ -4,6 +4,8 @@
 
 using System;
 using System.Text;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
 using Elasticsearch.Net;
 using Nest;
 

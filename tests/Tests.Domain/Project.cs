@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Bogus;
+using Elastic.Transport.Serialization;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Configuration;

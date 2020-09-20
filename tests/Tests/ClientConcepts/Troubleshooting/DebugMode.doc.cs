@@ -21,6 +21,7 @@ using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.DocumentationTests;
 using Xunit;
+using Elastic.Transport;
 
 namespace Tests.ClientConcepts.Troubleshooting
 {

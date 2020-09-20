@@ -5,6 +5,7 @@
 using System;
 using System.Threading;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using Elasticsearch.Net.VirtualizedCluster;
 using FluentAssertions;
@@ -109,7 +110,7 @@ namespace Tests.Document.Multiple.BulkAll
 			}
 			ex.Should().NotBeNull();
 
-			var clientException = ex.Should().BeOfType<ElasticsearchClientException>().Subject;
+			var clientException = ex.Should().BeOfType<ClientException>().Subject;
 
 			clientException.Message.Should()
 				.StartWith("BulkAll halted after");

@@ -8,6 +8,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport.Observability.Auditing;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using Elasticsearch.Net.VirtualizedCluster;
 using Elasticsearch.Net.VirtualizedCluster.Audit;
@@ -38,7 +40,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		* but by exiting the pipeline.
 		* --
 		*
-		* By default, the client won't throw on any `ElasticsearchClientException` but instead return an invalid response
+		* By default, the client won't throw on any `ClientException` but instead return an invalid response
 		* that can be detected by checking the `.IsValid` property on the response. You can change this behaviour with
 		* by using `ThrowExceptions()` on <<configuration-options, `ConnectionSettings`>>.
 		*

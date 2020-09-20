@@ -4,8 +4,9 @@
 
 using System;
 using System.Security;
+using Elastic.Transport;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// Credentials for Basic Authentication
@@ -38,6 +39,6 @@ namespace Elasticsearch.Net
 		public string Username { get; set; }
 
 		public void Dispose() => Password?.Dispose();
-		
+
 	}
 }

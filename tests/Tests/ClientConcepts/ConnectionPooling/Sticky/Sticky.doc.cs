@@ -13,8 +13,11 @@ using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
+using Elastic.SharedExtensions;
+using Elastic.Transport.Serialization;
+using Elastic.Transport;
 using static Elasticsearch.Net.VirtualizedCluster.Rules.TimesHelper;
-using static Elasticsearch.Net.AuditEvent;
+using static Elastic.Transport.Observability.Auditing.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 {

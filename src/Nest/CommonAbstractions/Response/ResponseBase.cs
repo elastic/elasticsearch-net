@@ -5,14 +5,15 @@
  using System;
 using System.Runtime.Serialization;
 using System.Text;
-using Elasticsearch.Net;
+ using Elastic.Transport;
+ using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// A response from Elasticsearch
 	/// </summary>
-	public interface IResponse : IElasticsearchResponse
+	public interface IResponse : Elastic.Transport.ITransportResponse
 	{
 		/// <summary>
 		/// A lazily computed, human readable string representation of what happened during a request for both successful and
@@ -29,7 +30,7 @@ namespace Nest
 		/// <see cref="IsValid" /> will be false in that case.
 		/// </para>
 		/// <para>
-		/// You can also configure the client to always throw an <see cref="ElasticsearchClientException" /> using
+		/// You can also configure the client to always throw an <see cref="ClientException" /> using
 		/// <see cref="IConnectionConfigurationValues.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
@@ -39,12 +40,12 @@ namespace Nest
 		/// <summary>
 		/// If the request resulted in an exception on the client side this will hold the exception that was thrown.
 		/// <para>
-		/// This property is a shortcut to <see cref="IElasticsearchResponse.ApiCall" />'s
+		/// This property is a shortcut to <see cref="ITransportResponse.ApiCall" />'s
 		/// <see cref="IApiCallDetails.OriginalException" /> and
 		/// is possibly set when <see cref="IsValid" /> is false depending on the cause of the error
 		/// </para>
 		/// <para>
-		/// You can also configure the client to always throw an <see cref="ElasticsearchClientException" /> using
+		/// You can also configure the client to always throw an <see cref="ClientException" /> using
 		/// <see cref="IConnectionConfigurationValues.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
@@ -57,7 +58,7 @@ namespace Nest
 		/// <see cref="ServerError" /> in NEST.
 		/// <para>Possibly set when <see cref="IsValid" /> is false, depending on the cause of the error</para>
 		/// <para>
-		/// You can also configure the client to always throw an <see cref="ElasticsearchClientException" /> using
+		/// You can also configure the client to always throw an <see cref="ClientException" /> using
 		/// <see cref="IConnectionConfigurationValues.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
@@ -139,13 +140,13 @@ namespace Nest
 		}
 
 		[IgnoreDataMember]
-		IApiCallDetails IElasticsearchResponse.ApiCall
+		IApiCallDetails Elastic.Transport.ITransportResponse.ApiCall
 		{
 			get => _originalApiCall;
 			set => _originalApiCall = value;
 		}
 
-		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason)
+		bool Elastic.Transport.ITransportResponse.TryGetServerErrorReason(out string reason)
 		{
 			reason = ServerError?.Error?.ToString();
 			return !reason.IsNullOrEmpty();

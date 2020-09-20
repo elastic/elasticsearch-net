@@ -29,10 +29,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Utf8Json.Formatters;
-using Elasticsearch.Net.Utf8Json.Internal;
+using Elastic.Transport.Utf8Json.Formatters;
+using Elastic.Transport.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Utf8Json.Resolvers
+namespace Elastic.Transport.Utf8Json.Resolvers
 {
 	public sealed class DynamicGenericResolver : IJsonFormatterResolver
 	{

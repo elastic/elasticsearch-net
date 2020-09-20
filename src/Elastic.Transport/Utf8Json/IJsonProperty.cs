@@ -22,7 +22,7 @@
 // SOFTWARE.
 #endregion
 
-namespace Elasticsearch.Net.Utf8Json
+namespace Elastic.Transport.Utf8Json
 {
 	public interface IJsonProperty
 	{
@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Utf8Json
 
 	public class JsonProperty : IJsonProperty
 	{
-		public JsonProperty(string name) => Name = name;
+		public JsonProperty(string name) => this.Name = name;
 
 		public string Name { get; set; }
 

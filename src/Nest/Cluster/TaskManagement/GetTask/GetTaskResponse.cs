@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System.Runtime.Serialization;
+using Elastic.Transport;
 using Elasticsearch.Net;
 
 namespace Nest

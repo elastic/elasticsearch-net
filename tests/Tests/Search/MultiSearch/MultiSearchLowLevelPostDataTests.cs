@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport.Serialization;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;

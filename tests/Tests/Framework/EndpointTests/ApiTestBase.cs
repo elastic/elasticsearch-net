@@ -12,6 +12,7 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;
 using Tests.Framework.Extensions;
+using Elastic.Transport;
 
 namespace Tests.Framework.EndpointTests
 {

@@ -6,6 +6,8 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;

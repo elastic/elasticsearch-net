@@ -6,6 +6,7 @@ using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
+using Elastic.Transport.Elasticsearch;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
@@ -33,7 +34,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				var ip = testcases[i, 1];
 				var port = testcases[i, 2];
 
-				var match = SniffParser.AddressRegex.Match(address);
+				var match = ElasticsearchSniffParser.AddressRegex.Match(address);
 
 				match.Success.Should().BeTrue();
 
@@ -58,7 +59,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				var ip = testcases[i, 2];
 				var port = testcases[i, 3];
 
-				var match = SniffParser.AddressRegex.Match(address);
+				var match = ElasticsearchSniffParser.AddressRegex.Match(address);
 
 				match.Success.Should().BeTrue();
 

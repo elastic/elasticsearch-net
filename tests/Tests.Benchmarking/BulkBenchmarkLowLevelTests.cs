@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BenchmarkDotNet.Attributes;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Benchmarking.Framework;

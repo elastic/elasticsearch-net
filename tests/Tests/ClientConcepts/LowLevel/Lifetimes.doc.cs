@@ -13,6 +13,7 @@ using FluentAssertions;
 using Nest;
 using System.Runtime.Serialization;
 using Tests.Framework;
+using Elastic.Transport;
 
 namespace Tests.ClientConcepts.LowLevel
 {

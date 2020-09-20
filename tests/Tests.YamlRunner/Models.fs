@@ -4,11 +4,12 @@
 
 module Tests.YamlRunner.Models
 
-open Elasticsearch.Net
 open System
 open System.Collections.Generic
 open System.Collections.Specialized
 open System.Text.RegularExpressions
+open Elastic.Transport
+open Elasticsearch.Net
 open Microsoft.FSharp.Reflection
 
 let private getName a = match FSharpValue.GetUnionFields(a, a.GetType()) with | (case, _) -> case.Name   

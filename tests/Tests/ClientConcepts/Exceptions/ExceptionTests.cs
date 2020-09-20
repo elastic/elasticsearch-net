@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -27,7 +28,7 @@ namespace Tests.ClientConcepts.Exceptions
 			var settings = new ConnectionSettings(TestConnectionSettings.CreateUri(_port))
 				.ThrowExceptions();
 			var client = new ElasticClient(settings);
-			var exception = Assert.Throws<ElasticsearchClientException>(() => client.Indices.GetMapping<Project>(s => s.Index("doesntexist")));
+			var exception = Assert.Throws<ClientException>(() => client.Indices.GetMapping<Project>(s => s.Index("doesntexist")));
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus the inner exception should not be set
 			exception.InnerException.Should().BeNull();
 			exception.Response.Should().NotBeNull();
@@ -39,7 +40,7 @@ namespace Tests.ClientConcepts.Exceptions
 			var settings = new ConnectionSettings(new Uri("http://doesntexist:9200"))
 				.ThrowExceptions();
 			var client = new ElasticClient(settings);
-			var exception = Assert.Throws<ElasticsearchClientException>(() => client.RootNodeInfo());
+			var exception = Assert.Throws<ClientException>(() => client.RootNodeInfo());
 			var inner = exception.InnerException;
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus OriginalException should not be set
 			inner.Should().BeNull();

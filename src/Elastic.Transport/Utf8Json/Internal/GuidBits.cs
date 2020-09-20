@@ -26,7 +26,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
+namespace Elastic.Transport.Utf8Json.Internal
 {
     [StructLayout(LayoutKind.Explicit, Pack = 1)]
     internal struct GuidBits
@@ -313,78 +313,78 @@ namespace Elasticsearch.Net.Utf8Json.Internal
             if (BitConverter.IsLittleEndian)
             {
                 // int(_a)
-                buffer[offset + 6] = byteToHexStringHigh[Byte0];
-                buffer[offset + 7] = byteToHexStringLow[Byte0];
-                buffer[offset + 4] = byteToHexStringHigh[Byte1];
-                buffer[offset + 5] = byteToHexStringLow[Byte1];
-                buffer[offset + 2] = byteToHexStringHigh[Byte2];
-                buffer[offset + 3] = byteToHexStringLow[Byte2];
-                buffer[offset + 0] = byteToHexStringHigh[Byte3];
-                buffer[offset + 1] = byteToHexStringLow[Byte3];
+                buffer[offset + 6] = byteToHexStringHigh[this.Byte0];
+                buffer[offset + 7] = byteToHexStringLow[this.Byte0];
+                buffer[offset + 4] = byteToHexStringHigh[this.Byte1];
+                buffer[offset + 5] = byteToHexStringLow[this.Byte1];
+                buffer[offset + 2] = byteToHexStringHigh[this.Byte2];
+                buffer[offset + 3] = byteToHexStringLow[this.Byte2];
+                buffer[offset + 0] = byteToHexStringHigh[this.Byte3];
+                buffer[offset + 1] = byteToHexStringLow[this.Byte3];
 
                 buffer[offset + 8] = (byte)'-';
 
                 // short(_b)
-                buffer[offset + 11] = byteToHexStringHigh[Byte4];
-                buffer[offset + 12] = byteToHexStringLow[Byte4];
-                buffer[offset + 9] = byteToHexStringHigh[Byte5];
-                buffer[offset + 10] = byteToHexStringLow[Byte5];
+                buffer[offset + 11] = byteToHexStringHigh[this.Byte4];
+                buffer[offset + 12] = byteToHexStringLow[this.Byte4];
+                buffer[offset + 9] = byteToHexStringHigh[this.Byte5];
+                buffer[offset + 10] = byteToHexStringLow[this.Byte5];
 
                 buffer[offset + 13] = (byte)'-';
 
                 // short(_c)
-                buffer[offset + 16] = byteToHexStringHigh[Byte6];
-                buffer[offset + 17] = byteToHexStringLow[Byte6];
-                buffer[offset + 14] = byteToHexStringHigh[Byte7];
-                buffer[offset + 15] = byteToHexStringLow[Byte7];
+                buffer[offset + 16] = byteToHexStringHigh[this.Byte6];
+                buffer[offset + 17] = byteToHexStringLow[this.Byte6];
+                buffer[offset + 14] = byteToHexStringHigh[this.Byte7];
+                buffer[offset + 15] = byteToHexStringLow[this.Byte7];
             }
             else
             {
-                buffer[offset + 0] = byteToHexStringHigh[Byte0];
-                buffer[offset + 1] = byteToHexStringLow[Byte0];
-                buffer[offset + 2] = byteToHexStringHigh[Byte1];
-                buffer[offset + 3] = byteToHexStringLow[Byte1];
-                buffer[offset + 4] = byteToHexStringHigh[Byte2];
-                buffer[offset + 5] = byteToHexStringLow[Byte2];
-                buffer[offset + 6] = byteToHexStringHigh[Byte3];
-                buffer[offset + 7] = byteToHexStringLow[Byte3];
+                buffer[offset + 0] = byteToHexStringHigh[this.Byte0];
+                buffer[offset + 1] = byteToHexStringLow[this.Byte0];
+                buffer[offset + 2] = byteToHexStringHigh[this.Byte1];
+                buffer[offset + 3] = byteToHexStringLow[this.Byte1];
+                buffer[offset + 4] = byteToHexStringHigh[this.Byte2];
+                buffer[offset + 5] = byteToHexStringLow[this.Byte2];
+                buffer[offset + 6] = byteToHexStringHigh[this.Byte3];
+                buffer[offset + 7] = byteToHexStringLow[this.Byte3];
 
                 buffer[offset + 8] = (byte)'-';
 
-                buffer[offset + 9] = byteToHexStringHigh[Byte4];
-                buffer[offset + 10] = byteToHexStringLow[Byte4];
-                buffer[offset + 11] = byteToHexStringHigh[Byte5];
-                buffer[offset + 12] = byteToHexStringLow[Byte5];
+                buffer[offset + 9] = byteToHexStringHigh[this.Byte4];
+                buffer[offset + 10] = byteToHexStringLow[this.Byte4];
+                buffer[offset + 11] = byteToHexStringHigh[this.Byte5];
+                buffer[offset + 12] = byteToHexStringLow[this.Byte5];
 
                 buffer[offset + 13] = (byte)'-';
 
-                buffer[offset + 14] = byteToHexStringHigh[Byte6];
-                buffer[offset + 15] = byteToHexStringLow[Byte6];
-                buffer[offset + 16] = byteToHexStringHigh[Byte7];
-                buffer[offset + 17] = byteToHexStringLow[Byte7];
+                buffer[offset + 14] = byteToHexStringHigh[this.Byte6];
+                buffer[offset + 15] = byteToHexStringLow[this.Byte6];
+                buffer[offset + 16] = byteToHexStringHigh[this.Byte7];
+                buffer[offset + 17] = byteToHexStringLow[this.Byte7];
             }
 
             buffer[offset + 18] = (byte)'-';
 
-            buffer[offset + 19] = byteToHexStringHigh[Byte8];
-            buffer[offset + 20] = byteToHexStringLow[Byte8];
-            buffer[offset + 21] = byteToHexStringHigh[Byte9];
-            buffer[offset + 22] = byteToHexStringLow[Byte9];
+            buffer[offset + 19] = byteToHexStringHigh[this.Byte8];
+            buffer[offset + 20] = byteToHexStringLow[this.Byte8];
+            buffer[offset + 21] = byteToHexStringHigh[this.Byte9];
+            buffer[offset + 22] = byteToHexStringLow[this.Byte9];
 
             buffer[offset + 23] = (byte)'-';
 
-            buffer[offset + 24] = byteToHexStringHigh[Byte10];
-            buffer[offset + 25] = byteToHexStringLow[Byte10];
-            buffer[offset + 26] = byteToHexStringHigh[Byte11];
-            buffer[offset + 27] = byteToHexStringLow[Byte11];
-            buffer[offset + 28] = byteToHexStringHigh[Byte12];
-            buffer[offset + 29] = byteToHexStringLow[Byte12];
-            buffer[offset + 30] = byteToHexStringHigh[Byte13];
-            buffer[offset + 31] = byteToHexStringLow[Byte13];
-            buffer[offset + 32] = byteToHexStringHigh[Byte14];
-            buffer[offset + 33] = byteToHexStringLow[Byte14];
-            buffer[offset + 34] = byteToHexStringHigh[Byte15];
-            buffer[offset + 35] = byteToHexStringLow[Byte15];
+            buffer[offset + 24] = byteToHexStringHigh[this.Byte10];
+            buffer[offset + 25] = byteToHexStringLow[this.Byte10];
+            buffer[offset + 26] = byteToHexStringHigh[this.Byte11];
+            buffer[offset + 27] = byteToHexStringLow[this.Byte11];
+            buffer[offset + 28] = byteToHexStringHigh[this.Byte12];
+            buffer[offset + 29] = byteToHexStringLow[this.Byte12];
+            buffer[offset + 30] = byteToHexStringHigh[this.Byte13];
+            buffer[offset + 31] = byteToHexStringLow[this.Byte13];
+            buffer[offset + 32] = byteToHexStringHigh[this.Byte14];
+            buffer[offset + 33] = byteToHexStringLow[this.Byte14];
+            buffer[offset + 34] = byteToHexStringHigh[this.Byte15];
+            buffer[offset + 35] = byteToHexStringLow[this.Byte15];
         }
     }
 }

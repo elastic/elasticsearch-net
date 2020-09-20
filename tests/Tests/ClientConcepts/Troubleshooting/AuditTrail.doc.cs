@@ -16,6 +16,8 @@ using Tests.Core.Client.Settings;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
+using Elastic.Transport;
+using Elastic.Transport.Observability.Auditing;
 using Xunit;
 
 namespace Tests.ClientConcepts.Troubleshooting

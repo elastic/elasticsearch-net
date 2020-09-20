@@ -5,6 +5,9 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
+using Elastic.Transport.Utf8Json;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 

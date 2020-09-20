@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using Elastic.Transport;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Specification.NodesApi;
 
@@ -21,7 +22,7 @@ namespace Nest
 	public partial class NodesHotThreadsDescriptor
 	{
 		protected override string ContentType => RequestData.MimeTypeTextPlain;
-		
+
 		protected sealed override void RequestDefaults(NodesHotThreadsRequestParameters parameters) =>
 			parameters.CustomResponseBuilder = NodeHotThreadsResponseBuilder.Instance;
 	}

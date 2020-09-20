@@ -5,6 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
 
 namespace Elasticsearch.Net.VirtualizedCluster.MockResponses
 {

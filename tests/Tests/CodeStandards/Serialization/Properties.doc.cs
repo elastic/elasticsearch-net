@@ -8,6 +8,9 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
+using Elastic.SharedExtensions;
+using Elastic.Transport.Serialization;
+using Elastic.Transport;
 
 namespace Tests.CodeStandards.Serialization
 {

@@ -5,6 +5,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -14,7 +15,7 @@ using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Document.Multiple.MultiTermVectors 
+namespace Tests.Document.Multiple.MultiTermVectors
 {
 	public class MultiTermVectorsIdsNotFoundApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, MultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor,

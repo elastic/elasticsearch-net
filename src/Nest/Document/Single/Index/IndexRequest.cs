@@ -3,6 +3,9 @@
 // See the LICENSE file in the project root for more information
 
 using System.IO;
+using Elastic.Transport.Serialization;
+using Elastic.Transport;
+using Elastic.Transport.Utf8Json;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 

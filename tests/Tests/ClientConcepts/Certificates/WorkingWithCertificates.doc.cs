@@ -13,6 +13,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Xunit;
+using Elastic.Transport;
 using Tests.Framework;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;

@@ -14,7 +14,8 @@ using Elasticsearch.Net.VirtualizedCluster.Providers;
 using FluentAssertions;
 using Tests.Framework;
 using static Elasticsearch.Net.VirtualizedCluster.Rules.TimesHelper;
-using static Elasticsearch.Net.AuditEvent;
+using static Elastic.Transport.Observability.Auditing.AuditEvent;
+using Elastic.Transport;
 
 namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 {

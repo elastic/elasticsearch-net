@@ -9,8 +9,10 @@ using System.Net.Security;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public interface IConnectionConfigurationValues : IDisposable
 	{
@@ -228,7 +230,7 @@ namespace Elasticsearch.Net
 		/// </summary>
 		bool ThrowExceptions { get; }
 
-		ElasticsearchUrlFormatter UrlFormatter { get; }
+		UrlFormatter UrlFormatter { get; }
 
 		/// <summary>
 		/// The user agent string to send with requests. Useful for debugging purposes to understand client and framework
@@ -237,7 +239,7 @@ namespace Elasticsearch.Net
 		string UserAgent { get; }
 
 		/// <summary>
-		/// Allow you to override the status code inspection that sets <see cref="ElasticsearchResponseBase.Success"/>
+		/// Allow you to override the status code inspection that sets <see cref="ResponseBase.Success"/>
 		/// <para>
 		/// Defaults to validating the statusCode is greater or equal to 200 and less then 300
 		/// </para>

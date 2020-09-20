@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net.Utf8Json;
+using Elastic.Transport.Serialization;
+using Elastic.Transport.Utf8Json;
 
 namespace Tests.CodeStandards.Serialization
 {

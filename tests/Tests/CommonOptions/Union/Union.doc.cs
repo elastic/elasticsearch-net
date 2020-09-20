@@ -8,6 +8,7 @@ using Nest;
 using System.Runtime.Serialization;
 using Tests.Core.Client;
 using Tests.Framework;
+using Elastic.Transport.Serialization;
 
 namespace Tests.CommonOptions.Union
 {

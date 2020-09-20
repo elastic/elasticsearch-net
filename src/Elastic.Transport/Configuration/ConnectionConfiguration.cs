@@ -9,18 +9,21 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-#if DOTNETCORE
 using System.Net.Http;
-#endif
-using System.Runtime.InteropServices;
 using System.Net.Security;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using Elastic.SharedExtensions;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
+using HttpMethod = Elastic.Transport.HttpMethod;
+#if DOTNETCORE
+#endif
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// Allows you to control how the client behaves and where/how it connects to Elasticsearch
@@ -166,7 +169,7 @@ namespace Elasticsearch.Net
 		private readonly NameValueCollection _headers = new NameValueCollection();
 		private readonly NameValueCollection _queryString = new NameValueCollection();
 		private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
-		private readonly ElasticsearchUrlFormatter _urlFormatter;
+		private readonly UrlFormatter _urlFormatter;
 
 		private BasicAuthenticationCredentials _basicAuthCredentials;
 		private ApiKeyAuthenticationCredentials _apiKeyAuthCredentials;
@@ -223,7 +226,7 @@ namespace Elasticsearch.Net
 			if (_connectionPool.SupportsReseeding)
 				_nodePredicate = DefaultReseedableNodePredicate;
 
-			_urlFormatter = new ElasticsearchUrlFormatter(this);
+			_urlFormatter = new UrlFormatter(this);
 			_statusCodeToResponseSuccess = (m, i) => HttpStatusCodeClassifier(m, i);
 
 			if (connectionPool is CloudConnectionPool cloudPool)
@@ -278,7 +281,7 @@ namespace Elasticsearch.Net
 		bool IConnectionConfigurationValues.SniffsOnConnectionFault => _sniffOnConnectionFault;
 		bool IConnectionConfigurationValues.SniffsOnStartup => _sniffOnStartup;
 		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
-		ElasticsearchUrlFormatter IConnectionConfigurationValues.UrlFormatter => _urlFormatter;
+		UrlFormatter IConnectionConfigurationValues.UrlFormatter => _urlFormatter;
 		string IConnectionConfigurationValues.UserAgent => _userAgent;
 		Func<HttpMethod, int, bool> IConnectionConfigurationValues.StatusCodeToResponseSuccess => _statusCodeToResponseSuccess;
 		bool IConnectionConfigurationValues.TransferEncodingChunked => _transferEncodingChunked;
@@ -482,7 +485,7 @@ namespace Elasticsearch.Net
 		});
 
 		/// <summary>
-		/// Ensures the response bytes are always available on the <see cref="ElasticsearchResponse{T}" />
+		/// Ensures the response bytes are always available on the <see cref="Response{T}" />
 		/// <para>
 		/// IMPORTANT: Depending on the registered serializer,
 		/// this may cause the response to be buffered in memory first, potentially affecting performance.

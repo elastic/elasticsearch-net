@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Elastic.Transport.Serialization;
+using Elastic.Transport.Utf8Json;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 

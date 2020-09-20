@@ -6,9 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elastic.SharedExtensions;
+using Elastic.Transport;
+using Elastic.Transport.Utf8Json;
+using Elastic.Transport.Utf8Json.Formatters;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Formatters;
 
 namespace Nest
 {

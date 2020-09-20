@@ -24,9 +24,9 @@
 
 using System;
 using System.Reflection;
-using Elasticsearch.Net.Utf8Json.Internal;
+using Elastic.Transport.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Utf8Json.Resolvers
+namespace Elastic.Transport.Utf8Json.Resolvers
 {
     /// <summary>
     /// Get formatter from [JsonFormatter] attribute.

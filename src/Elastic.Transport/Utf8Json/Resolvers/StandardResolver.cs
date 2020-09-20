@@ -23,9 +23,9 @@
 #endregion
 
 using System.Linq;
-using Elasticsearch.Net.Utf8Json.Formatters;
+using Elastic.Transport.Utf8Json.Formatters;
 
-namespace Elasticsearch.Net.Utf8Json.Resolvers
+namespace Elastic.Transport.Utf8Json.Resolvers
 {
 	internal static class StandardResolver
 	{

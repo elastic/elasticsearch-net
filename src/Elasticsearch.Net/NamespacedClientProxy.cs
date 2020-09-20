@@ -5,6 +5,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Transport;
 
 namespace Elasticsearch.Net
 {
@@ -15,11 +16,11 @@ namespace Elasticsearch.Net
 		internal NamespacedClientProxy(ElasticLowLevelClient client) => _client = client;
 
 		protected TResponse DoRequest<TResponse>(HttpMethod post, string url, PostData body, IRequestParameters @params)
-			where TResponse : class, IElasticsearchResponse, new() =>
+			where TResponse : class, ITransportResponse, new() =>
 			_client.DoRequest<TResponse>(post, url, body, @params);
 
 		protected Task<TResponse> DoRequestAsync<TResponse>(HttpMethod post, string url, CancellationToken ctx, PostData body, IRequestParameters @params)
-			where TResponse : class, IElasticsearchResponse, new() =>
+			where TResponse : class, ITransportResponse, new() =>
 			_client.DoRequestAsync<TResponse>(post, url, ctx, body, @params);
 
 		protected string Url(FormattableString formattable) => _client.Url(formattable);

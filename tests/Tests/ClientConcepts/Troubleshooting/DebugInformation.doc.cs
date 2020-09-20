@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.Sdk;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Diagnostics;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
@@ -22,6 +21,8 @@ using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.DocumentationTests;
 using Xunit;
+using Elastic.Transport;
+using Elastic.Transport.Observability.Diagnostics;
 
 namespace Tests.ClientConcepts.Troubleshooting
 {

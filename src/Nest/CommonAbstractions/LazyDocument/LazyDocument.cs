@@ -5,6 +5,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
+using Elastic.Transport.Utf8Json;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
@@ -36,7 +39,7 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type</typeparam>
 		Task<T> AsAsync<T>(CancellationToken ct = default);
-		
+
 		/// <summary>
 		/// Creates an instance of <paramref name="objectType" /> from this
 		/// <see cref="ILazyDocument" /> instance

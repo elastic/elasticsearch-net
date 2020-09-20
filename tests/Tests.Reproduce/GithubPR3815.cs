@@ -5,10 +5,11 @@
 using System;
 using System.Text;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
+using ResponseBase = Elastic.Transport.ResponseBase;
 
 namespace Tests.Reproduce
 {
@@ -50,7 +51,7 @@ namespace Tests.Reproduce
 			CheckCustomDeserialiseMethods(client, () => client.Security.GetCertificates());
 		}
 
-		private static void CheckCustomDeserialiseMethods(ElasticClient client, Func<ResponseBase> perform)
+		private static void CheckCustomDeserialiseMethods(ElasticClient client, Func<IResponse> perform)
 		{
 			var response = perform();
 			response.ShouldNotBeValid();

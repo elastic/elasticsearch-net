@@ -9,6 +9,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
+using Elastic.Transport.Utf8Json;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
@@ -26,7 +29,7 @@ namespace Nest
 
 		private string DebugDisplay =>
 			$"Count: {ListOfFields.Count} [" + string.Join(",", ListOfFields.Select((t, i) => $"({i + 1}: {t?.DebugDisplay ?? "NULL"})")) + "]";
-		
+
 		public override string ToString() => DebugDisplay;
 
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

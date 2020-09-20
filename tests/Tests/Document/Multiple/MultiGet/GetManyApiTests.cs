@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -189,7 +190,7 @@ namespace Tests.Document.Multiple.MultiGet
 
 			var client = new ElasticClient(new TestConnectionSettings(port: 9500));
 			Action response = () => client.GetMany<Developer>(_ids.Select(i => i * 100));
-			response.Should().Throw<ElasticsearchClientException>();
+			response.Should().Throw<ClientException>();
 		}
 	}
 }

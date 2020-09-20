@@ -89,4 +89,7 @@
       <LastGenOutput>Utf8Json/UnsafeMemory.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Observability" />
+  </ItemGroup>
 </Project>

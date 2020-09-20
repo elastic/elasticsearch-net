@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
+using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using System.Runtime.Serialization;

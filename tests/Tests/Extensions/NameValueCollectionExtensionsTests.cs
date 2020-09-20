@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 using FluentAssertions;
 using Xunit;
 

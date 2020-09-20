@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Bogus;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Configuration;
@@ -143,7 +144,7 @@ namespace Tests.Framework.EndpointTests.TestState
 
 				//this is to make sure any unexpected exceptions on the response are rethrown and shown during testing
 				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-					&& !(r.ApiCall.OriginalException is ElasticsearchClientException))
+					&& !(r.ApiCall.OriginalException is ClientException))
 				{
 					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
 					throw new ResponseAssertionException(e.SourceException, r);

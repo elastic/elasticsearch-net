@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System.IO;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

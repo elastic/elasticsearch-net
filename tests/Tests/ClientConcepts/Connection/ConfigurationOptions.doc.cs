@@ -6,6 +6,7 @@ using System;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Domain;
+using Elastic.Transport;
 
 namespace Tests.ClientConcepts.Connection
 {

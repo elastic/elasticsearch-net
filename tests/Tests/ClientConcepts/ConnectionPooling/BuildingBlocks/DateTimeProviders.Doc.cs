@@ -8,6 +8,7 @@ using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
+using Elastic.Transport;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {

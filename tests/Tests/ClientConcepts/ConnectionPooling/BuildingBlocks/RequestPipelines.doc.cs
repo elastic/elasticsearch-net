@@ -20,6 +20,7 @@ using Tests.Core.Client.Settings;
 using Tests.Framework;
 using Xunit;
 using Newtonsoft.Json;
+using Elastic.Transport;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {

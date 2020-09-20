@@ -4,7 +4,8 @@
 
 using System;
  using Elastic.Elasticsearch.Ephemeral;
- using Elasticsearch.Net;
+using Elastic.Transport;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;

@@ -24,7 +24,7 @@
 
 using System;
 
-namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
+namespace Elastic.Transport.Utf8Json.Internal.DoubleConversion
 {
     using uint64_t = UInt64;
     using int16_t = Int16;

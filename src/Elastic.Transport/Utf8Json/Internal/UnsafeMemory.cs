@@ -24,7 +24,7 @@
 
 using System.Runtime.CompilerServices;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
+namespace Elastic.Transport.Utf8Json.Internal
 {
     internal static partial class UnsafeMemory32
     {

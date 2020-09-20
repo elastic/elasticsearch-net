@@ -8,6 +8,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
 using Elasticsearch.Net;
 
 #if DOTNETCORE

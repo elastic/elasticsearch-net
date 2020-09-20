@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Elastic.Transport;
 using Elasticsearch.Net.VirtualizedCluster.Extensions;
 
 namespace Elasticsearch.Net.VirtualizedCluster.Audit
@@ -31,12 +32,12 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 		public Action<IConnectionPool> AssertPoolBeforeCall { get; set; }
 		public Action<IConnectionPool> AssertPoolBeforeStartup { get; set; }
 
-		public List<Elasticsearch.Net.Audit> AsyncAuditTrail { get; set; }
-		public List<Elasticsearch.Net.Audit> AuditTrail { get; set; }
+		public List<Elastic.Transport.Observability.Auditing.Audit> AsyncAuditTrail { get; set; }
+		public List<Elastic.Transport.Observability.Auditing.Audit> AuditTrail { get; set; }
 		public Func<VirtualizedCluster> Cluster { get; set; }
 
-		public IElasticsearchResponse Response { get; internal set; }
-		public IElasticsearchResponse ResponseAsync { get; internal set; }
+		public ITransportResponse Response { get; internal set; }
+		public ITransportResponse ResponseAsync { get; internal set; }
 
 		private bool StartedUp { get; }
 
@@ -81,7 +82,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 #pragma warning disable 1998 // Async method lacks 'await' operators and will run synchronously
 		private async Task TraceException<TException>(ClientCall callTrace, Action<TException> assert)
 #pragma warning restore 1998 // Async method lacks 'await' operators and will run synchronously
-			where TException : ElasticsearchClientException
+			where TException : ClientException
 		{
 			_cluster = _cluster ?? Cluster();
 			_cluster.ClientThrows(true);
@@ -104,21 +105,21 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			AssertPoolAfterCall?.Invoke(_clusterAsync.ConnectionPool);
 		}
 
-		public async Task<Auditor> TraceElasticsearchException(ClientCall callTrace, Action<ElasticsearchClientException> assert)
+		public async Task<Auditor> TraceElasticsearchException(ClientCall callTrace, Action<ClientException> assert)
 		{
 			await TraceException(callTrace, assert).ConfigureAwait(false);
 			var audit = new Auditor(_cluster, _clusterAsync);
 			return await audit.TraceElasticsearchExceptionOnResponse(callTrace, assert).ConfigureAwait(false);
 		}
 
-		public async Task<Auditor> TraceUnexpectedElasticsearchException(ClientCall callTrace, Action<UnexpectedElasticsearchClientException> assert)
+		public async Task<Auditor> TraceUnexpectedElasticsearchException(ClientCall callTrace, Action<UnexpectedClientException> assert)
 		{
 			await TraceException(callTrace, assert).ConfigureAwait(false);
 			return new Auditor(_cluster, _clusterAsync);
 		}
 
 #pragma warning disable 1998
-		public async Task<Auditor> TraceElasticsearchExceptionOnResponse(ClientCall callTrace, Action<ElasticsearchClientException> assert)
+		public async Task<Auditor> TraceElasticsearchExceptionOnResponse(ClientCall callTrace, Action<ClientException> assert)
 #pragma warning restore 1998
 		{
 			_cluster = _cluster ?? Cluster();
@@ -130,8 +131,8 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 
 			if (Response.ApiCall.Success) throw new Exception("Expected call to not be valid");
 
-			var exception = Response.ApiCall.OriginalException as ElasticsearchClientException;
-			if (exception == null) throw new Exception("OriginalException on response is not expected ElasticsearchClientException");
+			var exception = Response.ApiCall.OriginalException as ClientException;
+			if (exception == null) throw new Exception("OriginalException on response is not expected ClientException");
 			assert(exception);
 
 			AuditTrail = exception.AuditTrail;
@@ -142,8 +143,8 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			Func<Task> callAsync = async () => { ResponseAsync = await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides).ConfigureAwait(false); };
 			await callAsync().ConfigureAwait(false);
 			if (Response.ApiCall.Success) throw new Exception("Expected call to not be valid");
-			exception = ResponseAsync.ApiCall.OriginalException as ElasticsearchClientException;
-			if (exception == null) throw new Exception("OriginalException on response is not expected ElasticsearchClientException");
+			exception = ResponseAsync.ApiCall.OriginalException as ClientException;
+			if (exception == null) throw new Exception("OriginalException on response is not expected ClientException");
 			assert(exception);
 
 			AsyncAuditTrail = exception.AuditTrail;
@@ -154,7 +155,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 		}
 
 #pragma warning disable 1998
-		public async Task<Auditor> TraceUnexpectedException(ClientCall callTrace, Action<UnexpectedElasticsearchClientException> assert)
+		public async Task<Auditor> TraceUnexpectedException(ClientCall callTrace, Action<UnexpectedClientException> assert)
 #pragma warning restore 1998
 		{
 			_cluster = _cluster ?? Cluster();
@@ -210,7 +211,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			throw new Exception(string.Join(Environment.NewLine, messages));
 		}
 
-		private static string AuditTrailToString(List<Elasticsearch.Net.Audit> auditTrail)
+		private static string AuditTrailToString(List<Elastic.Transport.Observability.Auditing.Audit> auditTrail)
 		{
 			var actualAuditTrail = auditTrail.Aggregate(new StringBuilder(),
 				(sb, a) => sb.AppendLine($"-> {a}"),
@@ -225,7 +226,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			return auditor;
 		}
 
-		private static void AssertTrailOnResponse(ClientCall callTrace, List<Elasticsearch.Net.Audit> auditTrail, bool sync, int nthCall)
+		private static void AssertTrailOnResponse(ClientCall callTrace, List<Elastic.Transport.Observability.Auditing.Audit> auditTrail, bool sync, int nthCall)
 		{
 			var typeOfTrail = (sync ? "synchronous" : "asynchronous") + " audit trail";
 			var nthClientCall = (nthCall + 1).ToOrdinal();
@@ -259,7 +260,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 				throw new Exception($"callTrace has {callTrace.Count} items. Actual auditTrail {actualAuditTrail}");
 		}
 
-		private static TException TryCall<TException>(Action call, Action<TException> assert) where TException : ElasticsearchClientException
+		private static TException TryCall<TException>(Action call, Action<TException> assert) where TException : ClientException
 		{
 			TException exception = null;
 			try
@@ -275,7 +276,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 
 			return exception;
 		}
-		private static async Task<TException> TryCallAsync<TException>(Func<Task> call, Action<TException> assert) where TException : ElasticsearchClientException
+		private static async Task<TException> TryCallAsync<TException>(Func<Task> call, Action<TException> assert) where TException : ClientException
 		{
 			TException exception = null;
 			try

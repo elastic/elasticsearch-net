@@ -26,7 +26,7 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Elasticsearch.Net.Utf8Json.Internal.Emit
+namespace Elastic.Transport.Utf8Json.Internal.Emit
 {
     internal static class ExpressionUtility
     {

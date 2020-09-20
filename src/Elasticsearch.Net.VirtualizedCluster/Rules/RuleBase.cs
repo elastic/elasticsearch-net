@@ -5,6 +5,8 @@
  using System;
  using System.Security.Cryptography;
  using System.Threading;
+ using Elastic.Transport.Serialization;
+ using Elastic.Transport;
 
 namespace Elasticsearch.Net.VirtualizedCluster.Rules
 {

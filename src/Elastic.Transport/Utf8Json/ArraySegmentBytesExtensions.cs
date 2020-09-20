@@ -5,11 +5,10 @@
 using System;
 using System.Globalization;
 using System.Runtime.CompilerServices;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Formatters;
-using Elasticsearch.Net.Utf8Json.Internal;
+using Elastic.Transport.Utf8Json.Formatters;
+using Elastic.Transport.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Extensions
+namespace Elastic.Transport.Utf8Json
 {
 	public static class ArraySegmentBytesExtensions
 	{

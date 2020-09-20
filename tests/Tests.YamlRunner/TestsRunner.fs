@@ -5,6 +5,7 @@
 namespace Tests.YamlRunner
 
 open System.Diagnostics
+open Elastic.Transport
 open ShellProgressBar
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.TestsReader

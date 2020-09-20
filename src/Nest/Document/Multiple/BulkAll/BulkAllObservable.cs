@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Transport;
+using Elastic.Transport.Observability.Auditing;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -42,7 +44,7 @@ namespace Nest
 			_retryPredicate = _partitionedBulkRequest.RetryDocumentPredicate ?? RetryBulkActionPredicate;
 			_droppedDocumentCallBack = _partitionedBulkRequest.DroppedDocumentCallback ?? DroppedDocumentCallbackDefault;
 			_bulkResponseCallback = _partitionedBulkRequest.BulkResponseCallback;
-			
+
 			_maxDegreeOfParallelism =
 				_partitionedBulkRequest.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
 			_compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
@@ -174,8 +176,8 @@ namespace Nest
 
 		private async Task<BulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, BulkResponse response)
 		{
-			var clientException = response.ApiCall.OriginalException as ElasticsearchClientException;
-			var failureReason = clientException?.FailureReason; 
+			var clientException = response.ApiCall.OriginalException as ClientException;
+			var failureReason = clientException?.FailureReason;
 			var reason = failureReason?.GetStringValue() ?? nameof(PipelineFailure.BadRequest);
 			switch (failureReason)
 			{
@@ -217,15 +219,15 @@ namespace Nest
 			return await BulkAsync(retryDocuments, page, backOffRetries).ConfigureAwait(false);
 		}
 
-		private Exception ThrowOnBadBulk(IElasticsearchResponse response, string message)
+		private Exception ThrowOnBadBulk(Elastic.Transport.ITransportResponse response, string message)
 		{
 			_incrementFailed();
 			_partitionedBulkRequest.BackPressure?.Release();
 			return Throw(message, response.ApiCall);
 		}
 
-		private static ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
-			new ElasticsearchClientException(PipelineFailure.BadResponse, message, details);
+		private static ClientException Throw(string message, IApiCallDetails details) =>
+			new ClientException(PipelineFailure.BadResponse, message, details);
 
 
 		private static bool RetryBulkActionPredicate(BulkResponseItemBase bulkResponseItem, T d) => bulkResponseItem.Status == 429;

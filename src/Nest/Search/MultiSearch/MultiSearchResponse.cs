@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using Elastic.Transport;
+using Elastic.Transport.Utf8Json;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
@@ -35,7 +37,7 @@ namespace Nest
 			if (!Responses.TryGetValue(name, out var response))
 				return null;
 
-			if (response is IElasticsearchResponse elasticSearchResponse)
+			if (response is Elastic.Transport.ITransportResponse elasticSearchResponse)
 				elasticSearchResponse.ApiCall = ApiCall;
 
 			return response as ISearchResponse<T>;
@@ -50,7 +52,7 @@ namespace Nest
 				sb.AppendLine($"  search[{i.i}]: {i.item}");
 		}
 
-		private IEnumerable<T> _allResponses<T>() where T : class, IResponse, IElasticsearchResponse
+		private IEnumerable<T> _allResponses<T>() where T : class, IResponse, Elastic.Transport.ITransportResponse
 		{
 			foreach (var r in Responses.Values.OfType<T>())
 			{

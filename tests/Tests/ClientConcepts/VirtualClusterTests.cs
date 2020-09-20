@@ -6,6 +6,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
+using Elastic.Transport.Observability.Auditing;
 using Elasticsearch.Net;
 using Elasticsearch.Net.VirtualizedCluster;
 using Elasticsearch.Net.VirtualizedCluster.Audit;
@@ -24,7 +26,7 @@ namespace Tests.ClientConcepts
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing().EnableDebugMode())
 			);
-			var e = await Assert.ThrowsAsync<UnexpectedElasticsearchClientException>(
+			var e = await Assert.ThrowsAsync<UnexpectedClientException>(
 				async () => await audit.TraceCalls(new ClientCall { }));
 
 			e.Message.Should().Contain("No ClientCalls defined for the current VirtualCluster, so we do not know how to respond");
@@ -49,7 +51,7 @@ namespace Tests.ClientConcepts
 					} },
 				}
 			);
-			var e = await Assert.ThrowsAsync<UnexpectedElasticsearchClientException>(
+			var e = await Assert.ThrowsAsync<UnexpectedClientException>(
 				async () => await audit.TraceCalls(new ClientCall { }));
 
 			e.Message.Should().Contain("No global or port specific ClientCalls rule (9200) matches any longer after 2 calls in to the cluster");

@@ -5,6 +5,7 @@
 using System;
 using Elasticsearch.Net;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using Tests.Domain;

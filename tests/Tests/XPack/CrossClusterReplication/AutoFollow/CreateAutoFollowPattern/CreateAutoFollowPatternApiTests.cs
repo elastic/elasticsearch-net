@@ -4,7 +4,8 @@
 
 using System;
  using System.Collections.Generic;
- using Elasticsearch.Net;
+using Elastic.Transport;
+using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;

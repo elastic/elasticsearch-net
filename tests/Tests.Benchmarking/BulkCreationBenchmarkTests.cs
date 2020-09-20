@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
-using Elasticsearch.Net;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
 using Nest;
 using Tests.Benchmarking.Framework;
 using Tests.Core.Client;

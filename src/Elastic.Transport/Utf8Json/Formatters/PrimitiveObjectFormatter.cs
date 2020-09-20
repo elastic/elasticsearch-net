@@ -25,10 +25,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Utf8Json.Internal;
+using Elastic.Transport.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json.Formatters
 {
 	internal sealed class PrimitiveObjectFormatter : IJsonFormatter<object>
     {
@@ -101,7 +100,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 {
                     if (count++ != 0) writer.WriteValueSeparator();
                     writer.WritePropertyName((string)item.Key);
-                    Serialize(ref writer, item.Value, formatterResolver);
+                    this.Serialize(ref writer, item.Value, formatterResolver);
                 }
                 writer.WriteEndObject();
                 return;
@@ -114,7 +113,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                 foreach (var item in collection)
                 {
                     if (count++ != 0) writer.WriteValueSeparator();
-                    Serialize(ref writer, item, formatterResolver);
+                    this.Serialize(ref writer, item, formatterResolver);
                 }
                 writer.WriteEndArray();
                 return;
@@ -136,7 +135,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                         while (!reader.ReadIsEndObjectWithSkipValueSeparator(ref count))
                         {
                             var key = reader.ReadPropertyName();
-                            var value = Deserialize(ref reader, formatterResolver);
+                            var value = this.Deserialize(ref reader, formatterResolver);
                             dict.Add(key, value);
                         }
                         return dict;
@@ -148,7 +147,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                         var count = 0;
                         while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref count))
                         {
-                            list.Add(Deserialize(ref reader, formatterResolver));
+                            list.Add(this.Deserialize(ref reader, formatterResolver));
                         }
                         return list;
                     }

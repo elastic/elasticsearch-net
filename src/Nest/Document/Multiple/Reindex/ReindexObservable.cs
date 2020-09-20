@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using static Nest.Infer;
 
@@ -182,8 +183,8 @@ namespace Nest
 			return response;
 		}
 
-		private static ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
-			new ElasticsearchClientException(PipelineFailure.BadResponse, message, details);
+		private static ClientException Throw(string message, IApiCallDetails details) =>
+			new ClientException(PipelineFailure.BadResponse, message, details);
 
 		private int CreateIndex(string toIndex, IScrollAllRequest scrollAll)
 		{

@@ -11,6 +11,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.DocumentationTests;
+using Elastic.Transport;
 
 namespace Tests.ClientConcepts.HighLevel.Indexing
 {

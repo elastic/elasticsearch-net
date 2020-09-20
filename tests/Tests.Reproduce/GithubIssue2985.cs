@@ -4,6 +4,7 @@
 
 using System;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -32,7 +33,7 @@ namespace Tests.Reproduce
 					)
 				)
 			);
-			response.OriginalException.Should().NotBeNull().And.BeOfType<ElasticsearchClientException>();
+			response.OriginalException.Should().NotBeNull().And.BeOfType<ClientException>();
 			response.OriginalException.Message.Should()
 				.Contain(
 					"Type: illegal_argument_exception Reason: \"Custom Analyzer [custom] failed to find filter under name [ascii_folding]\""

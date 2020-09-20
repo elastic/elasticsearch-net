@@ -14,6 +14,8 @@ using Nest;
 using Tests.Framework;
 using System.Threading;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
+
 // ReSharper disable SuggestVarOrType_Elsewhere
 // ReSharper disable SuggestVarOrType_BuiltInTypes
 // ReSharper disable SuggestVarOrType_SimpleTypes

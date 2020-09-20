@@ -13,8 +13,9 @@ using Elasticsearch.Net.VirtualizedCluster.Audit;
 using Elasticsearch.Net.VirtualizedCluster.Providers;
 using FluentAssertions;
 using Tests.Framework;
+using Elastic.Transport;
 using static Elasticsearch.Net.VirtualizedCluster.Rules.TimesHelper;
-using static Elasticsearch.Net.AuditEvent;
+using static Elastic.Transport.Observability.Auditing.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 {

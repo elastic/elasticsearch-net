@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Elastic.Elasticsearch.Managed.FileSystem;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Client;

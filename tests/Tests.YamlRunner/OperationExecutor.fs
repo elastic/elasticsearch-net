@@ -12,6 +12,7 @@ open System.IO
 open System.Text
 open System.Text.RegularExpressions
 open System.Text.Unicode
+open Elastic.Transport
 open Microsoft.FSharp.Reflection
 open Tests.YamlRunner.DoMapper
 open Tests.YamlRunner.Models
