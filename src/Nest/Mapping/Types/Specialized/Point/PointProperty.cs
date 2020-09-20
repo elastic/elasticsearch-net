@@ -4,7 +4,8 @@
 
 using System.Diagnostics;
 using System.Runtime.Serialization;
-using Elasticsearch.Net.Utf8Json;
+using Elastic.Transport.Utf8Json;
+
 
 namespace Nest
 {

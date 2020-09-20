@@ -42,9 +42,9 @@
 #endregion
 
 using System;
-using Elasticsearch.Net.Utf8Json.Internal;
+using Elastic.Transport.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json.Formatters
 {
 <# foreach(var t in types) {  #>
     internal sealed class <#= t.Name #>Formatter : IJsonFormatter<<#= GetCSharpType(t) #>>, IObjectPropertyNameFormatter<<#= GetCSharpType(t) #>>

@@ -6,7 +6,7 @@ using System;
 using System.Globalization;
 using System.Runtime.Serialization;
 using Elastic.Transport.Utf8Json;
-using Elasticsearch.Net.Utf8Json;
+
 
 /*
  * Taken from SolrNet https://github.com/mausch/SolrNet/blob/master/SolrNet/Location.cs

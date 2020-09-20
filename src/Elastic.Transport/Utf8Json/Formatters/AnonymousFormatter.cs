@@ -24,7 +24,7 @@
 
 using System;
 
-namespace Elastic.Transport.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json
 {
     internal sealed class AnonymousFormatter<T> : IJsonFormatter<T>
     {

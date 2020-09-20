@@ -27,11 +27,12 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Elastic.SharedExtensions;
-using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Utf8Json.Internal;
-using Elasticsearch.Net.Utf8Json.Internal.DoubleConversion;
+using Elastic.Transport;
+using Elastic.Transport.Serialization;
+using Elastic.Transport.Utf8Json.Internal;
+using Elastic.Transport.Utf8Json.Internal.DoubleConversion;
 
-namespace Elasticsearch.Net.Utf8Json
+namespace Elastic.Transport.Utf8Json
 {
     // JSON RFC: https://www.ietf.org/rfc/rfc4627.txt
 
@@ -252,20 +253,26 @@ namespace Elasticsearch.Net.Utf8Json
         public void WriteByte(byte value) => WriteUInt64(value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[CLSCompliant(false)]
         public void WriteUInt16(ushort value) => WriteUInt64(value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[CLSCompliant(false)]
         public void WriteUInt32(uint value) => WriteUInt64(value);
 
+		[CLSCompliant(false)]
 		public void WriteUInt64(ulong value) => Offset += NumberConverter.WriteUInt64(ref Buffer, Offset, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[CLSCompliant(false)]
         public void WriteSByte(sbyte value) => WriteInt64(value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[CLSCompliant(false)]
         public void WriteInt16(short value) => WriteInt64(value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[CLSCompliant(false)]
         public void WriteInt32(int value) => WriteInt64(value);
 
 		public void WriteInt64(long value) => Offset += NumberConverter.WriteInt64(ref Buffer, Offset, value);

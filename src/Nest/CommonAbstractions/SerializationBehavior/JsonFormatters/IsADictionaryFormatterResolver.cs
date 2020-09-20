@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Elastic.SharedExtensions;
+using Elastic.Transport.Utf8Json;
 
 namespace Nest
 {

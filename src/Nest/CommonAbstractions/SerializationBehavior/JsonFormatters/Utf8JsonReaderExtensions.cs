@@ -4,7 +4,7 @@
 
 using System.Runtime.CompilerServices;
 using Elastic.Transport.Utf8Json;
-using Elasticsearch.Net.Utf8Json;
+
 
 
 namespace Nest

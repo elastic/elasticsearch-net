@@ -6,9 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Elastic.Transport.Utf8Json;
 using Elastic.Transport.Utf8Json.Internal;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Internal;
-
 
 namespace Nest
 {

@@ -26,13 +26,9 @@ using System;
 
 namespace Elastic.Transport.Utf8Json
 {
-<<<<<<< HEAD
+
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Field | AttributeTargets.Property)]
-	internal class JsonFormatterAttribute : Attribute
-=======
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
 	public class JsonFormatterAttribute : Attribute
->>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
     {
         public Type FormatterType { get; }
         public object[] Arguments { get; }
@@ -46,23 +42,9 @@ namespace Elastic.Transport.Utf8Json
         }
     }
 
-<<<<<<< HEAD
     [AttributeUsage(AttributeTargets.Constructor)]
-	internal class SerializationConstructorAttribute : Attribute
-=======
-    [AttributeUsage(AttributeTargets.Constructor, AllowMultiple = false, Inherited = true)]
-	public class SerializationConstructorAttribute : Attribute
->>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
-    {
-    }
+	public class SerializationConstructorAttribute : Attribute { }
 
-<<<<<<< HEAD
     [AttributeUsage(AttributeTargets.Interface)]
-	internal class InterfaceDataContractAttribute : Attribute
-=======
-    [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
-	public class InterfaceDataContractAttribute : Attribute
->>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
-    {
-    }
+	public class InterfaceDataContractAttribute : Attribute { }
 }

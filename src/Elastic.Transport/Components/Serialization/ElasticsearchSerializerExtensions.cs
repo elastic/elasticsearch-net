@@ -5,6 +5,7 @@
 using Elastic.SharedExtensions;
 using Elastic.Transport;
 using Elastic.Transport.Utf8Json;
+using JsonSerializer = Elastic.Transport.Utf8Json.JsonSerializer;
 
 namespace Elastic.Transport.Serialization
 {

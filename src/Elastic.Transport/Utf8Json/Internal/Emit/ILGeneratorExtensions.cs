@@ -27,7 +27,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace Elasticsearch.Net.Utf8Json.Internal.Emit
+namespace Elastic.Transport.Utf8Json.Internal.Emit
 {
     internal struct ArgumentField
     {

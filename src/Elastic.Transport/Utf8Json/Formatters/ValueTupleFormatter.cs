@@ -1,18 +1,18 @@
 ﻿#region Utf8Json License https://github.com/neuecc/Utf8Json/blob/master/LICENSE
 // MIT License
-// 
+//
 // Copyright (c) 2017 Yoshifumi Kawai
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,9 +23,9 @@
 #endregion
 
 using System;
-using Elasticsearch.Net.Utf8Json.Internal;
+using Elastic.Transport.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json.Formatters
 {
     internal sealed class ValueTupleFormatter<T1> : IJsonFormatter<ValueTuple<T1>>
     {
@@ -46,7 +46,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             if (reader.ReadIsNull()) throw new InvalidOperationException("Data is Nil, ValueTuple can not be null.");
 
             T1 item1 = default;
-            
+
             var count = 0;
             reader.ReadIsBeginObjectWithVerify();
             while (!reader.ReadIsEndObjectWithSkipValueSeparator(ref count))
@@ -64,7 +64,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                         break;
                 }
             }
-            
+
             return new ValueTuple<T1>(item1);
         }
     }
@@ -91,7 +91,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
 
             T1 item1 = default;
             T2 item2 = default;
-            
+
             var count = 0;
             reader.ReadIsBeginObjectWithVerify();
             while (!reader.ReadIsEndObjectWithSkipValueSeparator(ref count))
@@ -112,7 +112,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                         break;
                 }
             }
-            
+
             return new ValueTuple<T1, T2>(item1, item2);
         }
     }
@@ -142,7 +142,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             T1 item1 = default;
             T2 item2 = default;
             T3 item3 = default;
-            
+
             var count = 0;
             reader.ReadIsBeginObjectWithVerify();
             while (!reader.ReadIsEndObjectWithSkipValueSeparator(ref count))
@@ -166,7 +166,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                         break;
                 }
             }
-            
+
             return new ValueTuple<T1, T2, T3>(item1, item2, item3);
         }
     }
@@ -199,7 +199,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             T2 item2 = default;
             T3 item3 = default;
             T4 item4 = default;
-            
+
             var count = 0;
             reader.ReadIsBeginObjectWithVerify();
             while (!reader.ReadIsEndObjectWithSkipValueSeparator(ref count))
@@ -226,7 +226,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                         break;
                 }
             }
-            
+
             return new ValueTuple<T1, T2, T3, T4>(item1, item2, item3, item4);
         }
     }
@@ -262,7 +262,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             T3 item3 = default;
             T4 item4 = default;
             T5 item5 = default;
-            
+
             var count = 0;
             reader.ReadIsBeginObjectWithVerify();
             while (!reader.ReadIsEndObjectWithSkipValueSeparator(ref count))
@@ -292,7 +292,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                         break;
                 }
             }
-            
+
             return new ValueTuple<T1, T2, T3, T4, T5>(item1, item2, item3, item4, item5);
         }
     }
@@ -331,7 +331,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             T4 item4 = default;
             T5 item5 = default;
             T6 item6 = default;
-            
+
             var count = 0;
             reader.ReadIsBeginObjectWithVerify();
             while (!reader.ReadIsEndObjectWithSkipValueSeparator(ref count))
@@ -364,7 +364,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                         break;
                 }
             }
-            
+
             return new ValueTuple<T1, T2, T3, T4, T5, T6>(item1, item2, item3, item4, item5, item6);
         }
     }
@@ -406,7 +406,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             T5 item5 = default;
             T6 item6 = default;
             T7 item7 = default;
-            
+
             var count = 0;
             reader.ReadIsBeginObjectWithVerify();
             while (!reader.ReadIsEndObjectWithSkipValueSeparator(ref count))
@@ -442,7 +442,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                         break;
                 }
             }
-            
+
             return new ValueTuple<T1, T2, T3, T4, T5, T6, T7>(item1, item2, item3, item4, item5, item6, item7);
         }
     }
@@ -487,7 +487,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             T6 item6 = default;
             T7 item7 = default;
             TRest item8 = default;
-            
+
             var count = 0;
             reader.ReadIsBeginObjectWithVerify();
             while (!reader.ReadIsEndObjectWithSkipValueSeparator(ref count))
@@ -526,7 +526,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
                         break;
                 }
             }
-            
+
             return new ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>(item1, item2, item3, item4, item5, item6, item7, item8);
         }
     }

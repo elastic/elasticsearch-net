@@ -22,7 +22,7 @@ using System.Text;
 using System.Linq.Expressions;
 using Elastic.Transport.Utf8Json;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Utf8Json;
+
 using Elasticsearch.Net.Specification.EnrichApi;
 
 // ReSharper disable RedundantBaseConstructorCall

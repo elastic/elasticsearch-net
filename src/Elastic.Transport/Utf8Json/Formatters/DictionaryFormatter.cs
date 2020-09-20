@@ -27,8 +27,9 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Elastic.Transport.Utf8Json;
 
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json.Formatters
 {
     // unfortunately, can't use IDictionary<KVP> because supports IReadOnlyDictionary.
 	public abstract class DictionaryFormatterBase<TKey, TValue, TIntermediate, TEnumerator, TDictionary> : IJsonFormatter<TDictionary>

@@ -111,36 +111,18 @@ namespace Elastic.Transport.Utf8Json.Internal
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-<<<<<<< HEAD
         public static byte ReadByte(byte[] bytes, int offset, out int readCount) => checked((byte)ReadUInt64(bytes, offset, out readCount));
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[CLSCompliant(false)]
         public static ushort ReadUInt16(byte[] bytes, int offset, out int readCount) => checked((ushort)ReadUInt64(bytes, offset, out readCount));
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[CLSCompliant(false)]
         public static uint ReadUInt32(byte[] bytes, int offset, out int readCount) => checked((uint)ReadUInt64(bytes, offset, out readCount));
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-=======
-        public static byte ReadByte(byte[] bytes, int offset, out int readCount)
-        {
-            return checked((byte)ReadUInt64(bytes, offset, out readCount));
-        }
 		[CLSCompliant(false)]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ushort ReadUInt16(byte[] bytes, int offset, out int readCount)
-        {
-            return checked((ushort)ReadUInt64(bytes, offset, out readCount));
-        }
-		[CLSCompliant(false)]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint ReadUInt32(byte[] bytes, int offset, out int readCount)
-        {
-            return checked((uint)ReadUInt64(bytes, offset, out readCount));
-        }
-		[CLSCompliant(false)]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
->>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
         public static ulong ReadUInt64(byte[] bytes, int offset, out int readCount)
         {
             var value = 0UL;
@@ -162,7 +144,6 @@ namespace Elastic.Transport.Utf8Json.Internal
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-<<<<<<< HEAD
         public static float ReadSingle(byte[] bytes, int offset, out int readCount) => StringToDoubleConverter.ToSingle(bytes, offset, out readCount);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -172,42 +153,15 @@ namespace Elastic.Transport.Utf8Json.Internal
         public static int WriteByte(ref byte[] buffer, int offset, byte value) => WriteUInt64(ref buffer, offset, (ulong)value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[CLSCompliant(false)]
         public static int WriteUInt16(ref byte[] buffer, int offset, ushort value) => WriteUInt64(ref buffer, offset, (ulong)value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[CLSCompliant(false)]
         public static int WriteUInt32(ref byte[] buffer, int offset, uint value) => WriteUInt64(ref buffer, offset, (ulong)value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-=======
-        public static float ReadSingle(byte[] bytes, int offset, out int readCount)
-        {
-            return StringToDoubleConverter.ToSingle(bytes, offset, out readCount);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double ReadDouble(byte[] bytes, int offset, out int readCount)
-        {
-            return StringToDoubleConverter.ToDouble(bytes, offset, out readCount);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteByte(ref byte[] buffer, int offset, byte value)
-        {
-            return WriteUInt64(ref buffer, offset, (ulong)value);
-        }
 		[CLSCompliant(false)]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteUInt16(ref byte[] buffer, int offset, ushort value)
-        {
-            return WriteUInt64(ref buffer, offset, (ulong)value);
-        }
-		[CLSCompliant(false)]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteUInt32(ref byte[] buffer, int offset, uint value)
-        {
-            return WriteUInt64(ref buffer, offset, (ulong)value);
-        }
-		[CLSCompliant(false)]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
->>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
         public static int WriteUInt64(ref byte[] buffer, int offset, ulong value)
         {
             var startOffset = offset;
@@ -329,34 +283,18 @@ namespace Elastic.Transport.Utf8Json.Internal
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-<<<<<<< HEAD
+		[CLSCompliant(false)]
         public static int WriteSByte(ref byte[] buffer, int offset, sbyte value) => WriteInt64(ref buffer, offset, (long)value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[CLSCompliant(false)]
         public static int WriteInt16(ref byte[] buffer, int offset, short value) => WriteInt64(ref buffer, offset, (long)value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[CLSCompliant(false)]
         public static int WriteInt32(ref byte[] buffer, int offset, int value) => WriteInt64(ref buffer, offset, (long)value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-=======
-		[CLSCompliant(false)]
-        public static int WriteSByte(ref byte[] buffer, int offset, sbyte value)
-        {
-            return WriteInt64(ref buffer, offset, (long)value);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteInt16(ref byte[] buffer, int offset, short value)
-        {
-            return WriteInt64(ref buffer, offset, (long)value);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int WriteInt32(ref byte[] buffer, int offset, int value)
-        {
-            return WriteInt64(ref buffer, offset, (long)value);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
->>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
         public static int WriteInt64(ref byte[] buffer, int offset, long value)
         {
             var startOffset = offset;

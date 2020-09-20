@@ -25,7 +25,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
+namespace Elastic.Transport.Utf8Json.Internal.DoubleConversion
 {
     using uint32_t = UInt32;
 

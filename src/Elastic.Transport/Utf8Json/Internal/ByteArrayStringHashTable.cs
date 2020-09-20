@@ -28,7 +28,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
+namespace Elastic.Transport.Utf8Json.Internal
 {
     // like ArraySegment<byte> hashtable.
     // Add is safe for construction phase only and requires capacity(does not do rehash)

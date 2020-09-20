@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using Elastic.Transport.Utf8Json;
-using Elasticsearch.Net.Utf8Json;
+
 
 namespace Nest
 {

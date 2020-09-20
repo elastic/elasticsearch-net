@@ -22,15 +22,11 @@
 // SOFTWARE.
 #endregion
 
+
 namespace Elastic.Transport.Utf8Json
 {
-<<<<<<< HEAD
-	internal delegate void JsonSerializeAction<in T>(ref JsonWriter writer, T value, IJsonFormatterResolver resolver);
-	internal delegate T JsonDeserializeFunc<out T>(ref JsonReader reader, IJsonFormatterResolver resolver);
-=======
-	public delegate void JsonSerializeAction<T>(ref JsonWriter writer, T value, IJsonFormatterResolver resolver);
-	public delegate T JsonDeserializeFunc<T>(ref JsonReader reader, IJsonFormatterResolver resolver);
->>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
+	public delegate void JsonSerializeAction<in T>(ref JsonWriter writer, T value, IJsonFormatterResolver resolver);
+	public delegate T JsonDeserializeFunc<out T>(ref JsonReader reader, IJsonFormatterResolver resolver);
 
 	public interface IJsonFormatter
     {

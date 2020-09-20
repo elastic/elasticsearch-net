@@ -28,10 +28,10 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Utf8Json.Internal;
-using Elasticsearch.Net.Utf8Json.Internal.Emit;
+using Elastic.Transport.Utf8Json.Internal;
+using Elastic.Transport.Utf8Json.Internal.Emit;
 
-namespace Elasticsearch.Net.Utf8Json
+namespace Elastic.Transport.Utf8Json
 {
     // NonGeneric API
     public static partial class JsonSerializer

@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Elastic.SharedExtensions;
 using Elastic.Transport.Utf8Json;
-using Elasticsearch.Net.Utf8Json;
+
 
 namespace Nest
 {

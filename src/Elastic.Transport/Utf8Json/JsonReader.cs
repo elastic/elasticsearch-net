@@ -25,10 +25,10 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Elasticsearch.Net.Utf8Json.Internal;
-using Elasticsearch.Net.Utf8Json.Internal.DoubleConversion;
+using Elastic.Transport.Utf8Json.Internal;
+using Elastic.Transport.Utf8Json.Internal.DoubleConversion;
 
-namespace Elasticsearch.Net.Utf8Json
+namespace Elastic.Transport.Utf8Json
 {
     // JSON RFC: https://www.ietf.org/rfc/rfc4627.txt
 
@@ -1037,15 +1037,8 @@ namespace Elasticsearch.Net.Utf8Json
             return new ArraySegment<byte>(_bytes, startOffset, _offset - startOffset);
         }
 
-<<<<<<< HEAD
-        public sbyte ReadSByte() => checked((sbyte)ReadInt64());
-=======
 		[CLSCompliant(false)]
-        public sbyte ReadSByte()
-        {
-            return checked((sbyte)ReadInt64());
-        }
->>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
+        public sbyte ReadSByte() => checked((sbyte)ReadInt64());
 
 		public short ReadInt16() => checked((short)ReadInt64());
 
@@ -1065,28 +1058,14 @@ namespace Elasticsearch.Net.Utf8Json
 
         public byte ReadByte() => checked((byte)ReadUInt64());
 
-<<<<<<< HEAD
+		[CLSCompliant(false)]
 		public ushort ReadUInt16() => checked((ushort)ReadUInt64());
 
+		[CLSCompliant(false)]
 		public uint ReadUInt32() => checked((uint)ReadUInt64());
 
+		[CLSCompliant(false)]
 		public ulong ReadUInt64()
-=======
-		[CLSCompliant(false)]
-        public ushort ReadUInt16()
-        {
-            return checked((ushort)ReadUInt64());
-        }
-
-		[CLSCompliant(false)]
-        public uint ReadUInt32()
-        {
-            return checked((uint)ReadUInt64());
-        }
-
-		[CLSCompliant(false)]
-        public ulong ReadUInt64()
->>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
         {
             SkipWhiteSpace();
 

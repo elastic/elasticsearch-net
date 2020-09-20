@@ -13,8 +13,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport.Utf8Json.Internal;
-using Elasticsearch.Net.Utf8Json.Internal;
-
 namespace Nest
 {
 	internal static class Extensions

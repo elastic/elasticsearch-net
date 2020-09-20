@@ -28,9 +28,10 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.Serialization;
-using Elasticsearch.Net.Utf8Json.Internal;
+using Elastic.Transport.Utf8Json;
+using Elastic.Transport.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Elastic.Transport.Utf8Json.Formatters
 {
 	public static class EnumFormatterHelper
 	{

@@ -29,9 +29,9 @@ using System.Dynamic;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Utf8Json.Formatters;
+using Elastic.Transport.Utf8Json.Formatters;
 
-namespace Elasticsearch.Net.Utf8Json.Resolvers
+namespace Elastic.Transport.Utf8Json.Resolvers
 {
 	public sealed class BuiltinResolver : IJsonFormatterResolver
     {
@@ -151,21 +151,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
                 {typeof(Task), TaskUnitFormatter.Default},
             };
 
-<<<<<<< HEAD
-            internal static object GetFormatter(Type t) => FormatterMap.TryGetValue(t, out var formatter) ? formatter : null;
-		}
-=======
-			public static object GetFormatter(Type t)
-            {
-                object formatter;
-                if (formatterMap.TryGetValue(t, out formatter))
-                {
-                    return formatter;
-                }
-
-                return null;
-            }
+            public static object GetFormatter(Type t) => FormatterMap.TryGetValue(t, out var formatter) ? formatter : null;
         }
->>>>>>> everything compiles, utf8 is mostly public in anticipation of move to NEST
     }
 }
