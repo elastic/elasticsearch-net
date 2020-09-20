@@ -2,13 +2,11 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
 using Elastic.Transport.Observability.Auditing;
-using Elasticsearch.Net;
 using Elasticsearch.Net.VirtualizedCluster;
 using Elasticsearch.Net.VirtualizedCluster.Audit;
 using Elasticsearch.Net.VirtualizedCluster.Rules;

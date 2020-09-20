@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using Elastic.Transport;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;

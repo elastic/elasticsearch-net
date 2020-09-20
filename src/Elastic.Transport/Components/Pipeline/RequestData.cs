@@ -8,7 +8,6 @@ using System.Collections.Specialized;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using Elastic.SharedExtensions;
-using Elastic.Transport;
 using Elastic.Transport.Extensions;
 using Elastic.Transport.Observability.Auditing;
 using Elastic.Transport.Serialization;

@@ -25,7 +25,6 @@
 using System;
 using System.Globalization;
 using Elastic.SharedExtensions;
-using Elastic.Transport.Utf8Json;
 using Elastic.Transport.Utf8Json.Internal;
 
 namespace Elastic.Transport.Utf8Json.Formatters

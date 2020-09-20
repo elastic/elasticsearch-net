@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Elastic.SharedExtensions;
-using Elastic.Transport;
 using Elastic.Transport.Serialization;
 
 namespace Elastic.Transport

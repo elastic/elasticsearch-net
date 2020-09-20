@@ -4,7 +4,6 @@
 
 using System.Collections.Generic;
 using System.Globalization;
-using Elastic.Transport;
 using Elastic.Transport.Utf8Json;
 using Elastic.Transport.Utf8Json.Formatters;
 

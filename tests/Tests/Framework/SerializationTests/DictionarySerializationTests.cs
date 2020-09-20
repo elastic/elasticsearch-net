@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport.Serialization;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Serialization;

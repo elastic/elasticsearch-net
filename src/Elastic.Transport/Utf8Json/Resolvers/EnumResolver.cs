@@ -23,7 +23,6 @@
 #endregion
 
 using System;
-using System.Reflection;
 using Elastic.Transport.Utf8Json.Formatters;
 using Elastic.Transport.Utf8Json.Internal;
 

@@ -8,7 +8,6 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading;
-using Elastic.Transport;
 
 namespace Elastic.Transport
 {

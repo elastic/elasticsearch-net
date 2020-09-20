@@ -7,7 +7,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Elastic.Transport.Serialization;
 using Elastic.Transport.Utf8Json;
-using Elasticsearch.Net;
 
 
 namespace Nest

@@ -5,7 +5,6 @@
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Examples.Models;
 using System.ComponentModel;
-using Nest;
 
 namespace Examples.Indices
 {

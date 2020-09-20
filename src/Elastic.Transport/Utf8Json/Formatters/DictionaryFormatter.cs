@@ -27,7 +27,6 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Elastic.Transport.Utf8Json;
 
 namespace Elastic.Transport.Utf8Json.Formatters
 {

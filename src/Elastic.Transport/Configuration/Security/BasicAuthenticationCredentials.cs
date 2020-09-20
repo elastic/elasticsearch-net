@@ -4,7 +4,6 @@
 
 using System;
 using System.Security;
-using Elastic.Transport;
 
 namespace Elastic.Transport
 {

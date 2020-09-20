@@ -5,7 +5,6 @@
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
-using FluentAssertions;
 using Newtonsoft.Json.Linq;
 
 namespace Examples.QueryDsl

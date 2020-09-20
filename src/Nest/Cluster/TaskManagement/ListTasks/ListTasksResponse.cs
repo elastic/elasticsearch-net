@@ -7,7 +7,6 @@ using System.Runtime.Serialization;
 using Elastic.SharedExtensions;
 using Elastic.Transport;
 using Elastic.Transport.Utf8Json;
-using Elasticsearch.Net;
 
 
 namespace Nest

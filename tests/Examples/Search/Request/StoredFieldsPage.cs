@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information
 
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Nest;
 using System.ComponentModel;
 using Newtonsoft.Json.Linq;
 

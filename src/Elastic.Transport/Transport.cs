@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.SharedExtensions;
-using Elastic.Transport;
 using Elasticsearch.Net;
 
 #if !DOTNETCORE

@@ -27,7 +27,6 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Elastic.SharedExtensions;
-using Elastic.Transport;
 using Elastic.Transport.Serialization;
 using Elastic.Transport.Utf8Json.Internal;
 using Elastic.Transport.Utf8Json.Internal.DoubleConversion;

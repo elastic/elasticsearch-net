@@ -9,7 +9,6 @@ using Elastic.SharedExtensions;
 using Elastic.Transport;
 using Elastic.Transport.Utf8Json;
 using Elastic.Transport.Utf8Json.Formatters;
-using Elasticsearch.Net;
 
 
 namespace Nest

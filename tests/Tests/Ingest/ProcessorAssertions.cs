@@ -9,7 +9,6 @@ using System.Reflection;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.Client;
-using Tests.Core.Xunit;
 using Tests.Domain;
 
 namespace Tests.Ingest

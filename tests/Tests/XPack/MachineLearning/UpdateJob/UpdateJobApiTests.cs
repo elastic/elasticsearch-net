@@ -4,7 +4,6 @@
 
 using System;
 using Elastic.Transport;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Domain;

@@ -17,9 +17,8 @@ using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using Elastic.SharedExtensions;
-using Elastic.Transport;
 using Elastic.Transport.Serialization;
-using HttpMethod = Elastic.Transport.HttpMethod;
+
 #if DOTNETCORE
 #endif
 

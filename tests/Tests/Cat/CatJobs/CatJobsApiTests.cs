@@ -4,7 +4,6 @@
 
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Framework.EndpointTests.TestState;

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elastic.SharedExtensions;
-using Elastic.Transport;
 using Elastic.Transport.Observability.Auditing;
 
 namespace Elastic.Transport

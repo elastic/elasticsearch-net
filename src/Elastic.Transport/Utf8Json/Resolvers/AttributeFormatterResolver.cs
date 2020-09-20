@@ -24,7 +24,6 @@
 
 using System;
 using System.Reflection;
-using Elastic.Transport.Utf8Json.Internal;
 
 namespace Elastic.Transport.Utf8Json.Resolvers
 {

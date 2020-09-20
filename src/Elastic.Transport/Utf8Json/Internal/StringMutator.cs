@@ -22,8 +22,6 @@
 // SOFTWARE.
 #endregion
 
-using System;
-
 namespace Elastic.Transport.Utf8Json.Internal
 {
     internal static class StringMutator

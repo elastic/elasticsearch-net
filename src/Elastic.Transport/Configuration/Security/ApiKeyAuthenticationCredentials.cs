@@ -5,7 +5,6 @@
 using System;
 using System.Security;
 using System.Text;
-using Elastic.Transport;
 
 namespace Elastic.Transport
 {

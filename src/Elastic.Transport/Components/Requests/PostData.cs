@@ -8,7 +8,6 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.SharedExtensions;
-using Elastic.Transport;
 using Elastic.Transport.Serialization;
 
 namespace Elastic.Transport

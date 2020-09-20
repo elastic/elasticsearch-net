@@ -3,17 +3,11 @@
 // See the LICENSE file in the project root for more information
 
 using System;
-using System.Threading;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
-using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
-using Tests.Cluster.TaskManagement.GetTask;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Core.ManagedElasticsearch.NodeSeeders;
-using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 

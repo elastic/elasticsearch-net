@@ -6,8 +6,7 @@
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
  using Elastic.Transport;
- using Elasticsearch.Net;
-using Nest;
+ using Nest;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;

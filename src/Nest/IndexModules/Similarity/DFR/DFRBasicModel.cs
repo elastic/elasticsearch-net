@@ -5,7 +5,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using Elastic.Transport.Serialization;
-using Elasticsearch.Net;
 
 
 namespace Nest

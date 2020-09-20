@@ -10,7 +10,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.SharedExtensions;
-using Elastic.Transport;
 using Elastic.Transport.Elasticsearch;
 using Elastic.Transport.Observability.Auditing;
 using Elastic.Transport.Observability.Diagnostics;

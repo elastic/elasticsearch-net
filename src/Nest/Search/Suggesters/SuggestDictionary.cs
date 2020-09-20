@@ -5,7 +5,6 @@
 using System.Collections.Generic;
 using Elastic.SharedExtensions;
 using Elastic.Transport.Utf8Json;
-using Elasticsearch.Net;
 
 
 namespace Nest

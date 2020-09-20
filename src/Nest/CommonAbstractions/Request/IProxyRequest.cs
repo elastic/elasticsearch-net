@@ -4,7 +4,6 @@
 
 using System.IO;
 using Elastic.Transport.Serialization;
-using Elasticsearch.Net;
 
 namespace Nest
 {

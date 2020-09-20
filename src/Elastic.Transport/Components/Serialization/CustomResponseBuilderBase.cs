@@ -5,7 +5,6 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Elastic.Transport;
 
 namespace Elastic.Transport.Serialization
 {

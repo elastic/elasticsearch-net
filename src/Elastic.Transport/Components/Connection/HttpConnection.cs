@@ -18,10 +18,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.SharedExtensions;
-using Elastic.Transport;
 using Elastic.Transport.Observability.Diagnostics;
 using static System.Net.DecompressionMethods;
-using HttpMethod = Elastic.Transport.HttpMethod;
 
 namespace Elastic.Transport
 {

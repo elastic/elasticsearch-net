@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
  using Elastic.SharedExtensions;
- using Elasticsearch.Net;
 
 namespace Nest
 {

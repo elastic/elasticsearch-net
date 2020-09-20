@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Elastic.Transport;
-using Elasticsearch.Net;
 using Newtonsoft.Json.Linq;
 
 namespace Examples

@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
-using Elasticsearch.Net;
 using FluentAssertions;
 
 namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin

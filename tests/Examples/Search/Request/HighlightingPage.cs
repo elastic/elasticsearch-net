@@ -6,7 +6,6 @@ using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
 using Examples.Models;
-using Newtonsoft.Json.Linq;
 
 namespace Examples.Search.Request
 {

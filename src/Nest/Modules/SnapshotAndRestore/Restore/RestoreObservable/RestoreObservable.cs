@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Elastic.Transport;
-using Elasticsearch.Net;
 
 namespace Nest
 {

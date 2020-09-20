@@ -4,7 +4,6 @@
 
 using System;
 using System.Linq;
-using System.Reflection;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;

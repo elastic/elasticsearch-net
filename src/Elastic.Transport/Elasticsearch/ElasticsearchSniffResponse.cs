@@ -8,7 +8,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Elastic.SharedExtensions;
-using Elastic.Transport;
 
 namespace Elastic.Transport.Elasticsearch
 {

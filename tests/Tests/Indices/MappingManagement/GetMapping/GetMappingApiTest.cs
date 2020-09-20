@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elastic.Transport;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Configuration;

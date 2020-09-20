@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
 using Elastic.Transport.Serialization;
-using Elasticsearch.Net;
 
 namespace Nest
 {

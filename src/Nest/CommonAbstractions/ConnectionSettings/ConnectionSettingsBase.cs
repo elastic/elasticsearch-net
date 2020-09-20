@@ -10,7 +10,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Elastic.Transport;
 using Elastic.Transport.Serialization;
-using Elasticsearch.Net;
 
 #if DOTNETCORE
 using System.Runtime.InteropServices;

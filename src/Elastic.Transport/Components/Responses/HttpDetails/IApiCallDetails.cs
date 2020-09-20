@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
-using Elastic.Transport;
 using Elastic.Transport.Observability.Auditing;
 using Elastic.Transport.Observability.Diagnostics;
 

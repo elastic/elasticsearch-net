@@ -7,7 +7,6 @@ using Nest;
 using System.ComponentModel;
 using Elastic.Transport;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Examples.Root

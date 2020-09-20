@@ -4,7 +4,6 @@
 
 using System.Collections.Generic;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Nest;
 using System.ComponentModel;
 
 namespace Examples.Aggregations.Metrics

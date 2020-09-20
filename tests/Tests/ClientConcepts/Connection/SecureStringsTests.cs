@@ -5,7 +5,6 @@
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
-using Elasticsearch.Net;
 using FluentAssertions;
 
 namespace Tests.ClientConcepts.Connection

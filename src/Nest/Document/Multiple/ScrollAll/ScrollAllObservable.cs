@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
-using Elasticsearch.Net;
 
 namespace Nest
 {

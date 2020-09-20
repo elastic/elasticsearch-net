@@ -22,12 +22,9 @@
 // SOFTWARE.
 #endregion
 
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text.RegularExpressions;
 
 namespace Elastic.Transport.Utf8Json.Internal.Emit
 {

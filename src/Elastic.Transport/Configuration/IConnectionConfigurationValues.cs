@@ -9,7 +9,6 @@ using System.Net.Security;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-using Elastic.Transport;
 using Elastic.Transport.Serialization;
 
 namespace Elastic.Transport

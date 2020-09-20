@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information
 
 using Elastic.SharedExtensions;
-using Elastic.Transport;
 using Elastic.Transport.Utf8Json;
 using JsonSerializer = Elastic.Transport.Utf8Json.JsonSerializer;
 

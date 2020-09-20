@@ -8,7 +8,6 @@ using System.IO.Compression;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Elastic.Transport;
 
 namespace Elastic.Transport
 {

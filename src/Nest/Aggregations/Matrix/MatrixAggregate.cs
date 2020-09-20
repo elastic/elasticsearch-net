@@ -4,7 +4,6 @@
 
 using System.Collections.Generic;
 using Elastic.SharedExtensions;
-using Elasticsearch.Net;
 
 namespace Nest
 {

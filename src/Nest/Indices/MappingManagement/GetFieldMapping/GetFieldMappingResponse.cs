@@ -8,8 +8,6 @@ using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using Elastic.SharedExtensions;
 using Elastic.Transport.Utf8Json;
-using Elasticsearch.Net;
-
 using static Nest.Infer;
 
 namespace Nest

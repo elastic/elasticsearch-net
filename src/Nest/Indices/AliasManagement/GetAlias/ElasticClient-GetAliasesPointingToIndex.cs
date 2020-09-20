@@ -5,7 +5,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elastic.SharedExtensions;
-using Elasticsearch.Net;
 using Nest.Specification.IndicesApi;
 
 namespace Nest

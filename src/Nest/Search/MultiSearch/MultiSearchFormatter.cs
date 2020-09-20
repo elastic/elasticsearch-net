@@ -5,7 +5,6 @@
 using Elastic.Transport.Serialization;
 using Elastic.Transport.Utf8Json;
 using Elastic.Transport.Utf8Json.Resolvers;
-using Elasticsearch.Net;
 
 
 namespace Nest

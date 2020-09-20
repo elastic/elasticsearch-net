@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information
 
 using Elastic.Transport;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Specification.NodesApi;
 
 namespace Nest
