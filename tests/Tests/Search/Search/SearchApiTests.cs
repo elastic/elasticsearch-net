@@ -68,7 +68,7 @@ namespace Tests.Search.Search
 				)
 			)
 			.PostFilter(f => f
-				.Term(p => p.State, StateOfBeing.Stable)
+				.Term(p => p.State, "Stable")
 			);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

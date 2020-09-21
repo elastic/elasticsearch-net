@@ -14,9 +14,7 @@
     <IsPackable>true</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net461</TargetFrameworks>
-    
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IncludeUtf8Json>true</IncludeUtf8Json>
     
   </PropertyGroup>
   <ItemGroup>
@@ -25,25 +23,10 @@
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
-<!--    <InternalsVisibleTo Include="Nest" />-->
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.CustomDynamicObjectResolver" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicCompositeResolver" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" />
-    
-<!--    <InternalsVisibleTo Include="Tests" />-->
-
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="ElasticLowLevelClient.*.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>ElasticLowLevelClient.cs</DependentUpon>
     </Compile>
-    <!-- TODO uncomment this when we do not need to use InternalsVisibleTo for UTF8 anymore -->
     <Compile Include="..\Elastic.SharedExtensions\*.cs">
       <Link>Extensions\*.cs</Link>
     </Compile>

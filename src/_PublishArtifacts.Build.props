@@ -20,5 +20,39 @@
       <PackagePath>license.txt</PackagePath>
     </None>
   </ItemGroup>
+  <PropertyGroup  Condition="'$(IncludeUtf8Json)' == 'true'">
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+  </PropertyGroup>
+  <ItemGroup Condition="'$(IncludeUtf8Json)' == 'true'">
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.CustomDynamicObjectResolver" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicCompositeResolver" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
+    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" />
+
+    <Compile Include="..\Elastic.Transport.Utf8Json\*.cs">
+      <Link>Utf8Json\*.cs</Link>
+    </Compile>
+    <Compile Include="..\Elastic.Transport.Utf8Json\Formatters\*.cs">
+      <Link>Utf8Json\Formattters\*.cs</Link>
+    </Compile>
+    <Compile Include="..\Elastic.Transport.Utf8Json\Internal\*.cs">
+      <Link>Utf8Json\Internal\*.cs</Link>
+    </Compile>
+    <Compile Include="..\Elastic.Transport.Utf8Json\Internal\DoubleConversion\*.cs">
+      <Link>Utf8Json\Internal\DoubleConversion\*.cs</Link>
+    </Compile>
+    <Compile Include="..\Elastic.Transport.Utf8Json\Internal\Emit\*.cs">
+      <Link>Utf8Json\Internal\Emit\*.cs</Link>
+    </Compile>
+    <Compile Include="..\Elastic.Transport.Utf8Json\Resolvers\*.cs">
+      <Link>Utf8Json\Resolvers\*.cs</Link>
+    </Compile>
+  </ItemGroup>
 
 </Project>

@@ -14,22 +14,13 @@
     <IsPackable>true</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <IncludeUtf8Json>true</IncludeUtf8Json>
+
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.CustomDynamicObjectResolver" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicCompositeResolver" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" />
-  </ItemGroup>
-  <ItemGroup>
-    <!-- TODO uncomment this when we do not need to use InternalsVisibleTo for UTF8 anymore -->
     <Compile Include="..\Elastic.SharedExtensions\*.cs">
       <Link>Extensions\*.cs</Link>
     </Compile>

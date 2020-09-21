@@ -16,6 +16,7 @@ using System.Threading;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.SharedExtensions;
 using Elastic.Transport;
+using Tests.Core.Extensions;
 using Tests.Domain.Extensions;
 
 // ReSharper disable SuggestVarOrType_Elsewhere

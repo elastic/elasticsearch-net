@@ -12,6 +12,7 @@ using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
 using Tests.Core.Client;
+using Tests.Core.Extensions;
 using Tests.Framework.DocumentationTests;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization

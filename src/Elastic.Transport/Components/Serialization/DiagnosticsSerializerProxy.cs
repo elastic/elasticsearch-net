@@ -63,7 +63,7 @@ namespace Elastic.Transport.Serialization
 			}
 		}
 
-		public bool TryGetJsonFormatter(out IJsonFormatterResolver formatterResolver)
+		bool IInternalSerializer.TryGetJsonFormatter(out IJsonFormatterResolver formatterResolver)
 		{
 			formatterResolver = _formatterResolver;
 			return _wrapsUtf8JsonSerializer;

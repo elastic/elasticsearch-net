@@ -22,7 +22,7 @@ namespace Elastic.Transport.Serialization.Resolvers
 
 		public static ElasticsearchNetFormatterResolver Instance { get; } = new ElasticsearchNetFormatterResolver();
 
-		public IJsonFormatter<T> GetFormatter<T>() =>
+		IJsonFormatter<T> IJsonFormatterResolver.GetFormatter<T>() =>
 			typeof(T) == typeof(object)
 				? (IJsonFormatter<T>)_fallbackFormatter
 				: _innerFormatterResolver.GetFormatter<T>();

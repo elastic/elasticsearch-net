@@ -15,7 +15,7 @@
     <CopyLocalLockFileAssemblies Condition="'$(TargetFramework)'=='netstandard2.0'">true</CopyLocalLockFileAssemblies>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
-  
+
   <Target Name="AssemblyInfos" 
           BeforeTargets="CoreGenerateAssemblyInfo" 
           Inputs="@InternalsVisibleTo" Outputs="%(InternalsVisibleTo.Identity)"

@@ -11,6 +11,7 @@
     <IsPackable>true</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net461</TargetFrameworks>
+    <IncludeUtf8Json>true</IncludeUtf8Json>
 
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -27,60 +28,11 @@
 
   </ItemGroup>
   <ItemGroup>
-<!--    <InternalsVisibleTo Include="Nest" />-->
-<!--    <InternalsVisibleTo Include="Elasticsearch.Net" />-->
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.CustomDynamicObjectResolver" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicCompositeResolver" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
-    <InternalsVisibleTo Include="Elastic.Transport.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" />
-
-    <InternalsVisibleTo Include="Tests" />
-
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="..\Elastic.SharedExtensions\*.cs">
       <Link>Extensions\*.cs</Link>
     </Compile>
     <Compile Update="Utf8Json\Formatters\TupleFormatter.cs">
       <DependentUpon>TupleFormatter.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Utf8Json\Formatters\PrimitiveFormatter.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PrimitiveFormatter.cs</LastGenOutput>
-    </None>
-    <None Update="Utf8Json\Formatters\TupleFormatter.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TupleFormatter.cs</LastGenOutput>
-    </None>
-    <None Update="Utf8Json\Formatters\ValueTupleFormatter.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Utf8Json/ValueTupleFormatter.cs</LastGenOutput>
-    </None>
-    <None Update="Utf8Json\Internal\UnsafeMemory.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Utf8Json/UnsafeMemory.cs</LastGenOutput>
-    </None>
-    <None Update="Utf8Json\Formatters\PrimitiveFormatter.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PrimitiveFormatter.cs</LastGenOutput>
-    </None>
-    <None Update="Utf8Json\Formatters\TupleFormatter.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Utf8Json/TupleFormatter.cs</LastGenOutput>
-    </None>
-    <None Update="Utf8Json\Formatters\ValueTupleFormatter.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Utf8Json/ValueTupleFormatter.cs</LastGenOutput>
-    </None>
-    <None Update="Utf8Json\Internal\UnsafeMemory.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Utf8Json/UnsafeMemory.cs</LastGenOutput>
-    </None>
   </ItemGroup>
 </Project>
