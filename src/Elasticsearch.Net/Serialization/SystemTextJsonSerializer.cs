@@ -27,7 +27,11 @@ namespace Elasticsearch.Net
 			{
 				IgnoreNullValues = true,
 				WriteIndented = formatting == Indented,
-				Converters = { new ExceptionConverter() }
+				Converters =
+				{
+					new ExceptionConverter(),
+					new DictionaryObjectKeyConverterFactory()
+				}
 			};
 
 		private static bool TryReturnDefault<T>(Stream stream, out T deserialize)
