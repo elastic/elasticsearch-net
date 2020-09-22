@@ -14,10 +14,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "ml/explain_data_frame_analytics.yml", Section "Test neither job id nor body"
     
     // funny looking dispatch /_security/privilege/app?name
-    SkipFile "privileges/10_basic.yml", Sections [
-        "Test put and delete privileges"
-        "Test put and get privileges"
-    ]
+    SkipFile "privileges/10_basic.yml", All
     
     // 7.x only
     // We skip the generation of this API till one of the later minors

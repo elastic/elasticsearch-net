@@ -32,9 +32,6 @@ namespace ApiGenerator.Configuration
 			"indices.upgrade.json",
 			"indices.get_upgrade.json",
 
-			// already removed in the client.
-			"indices.exists_type.json"
-
 		};
 
 		private static string[] IgnoredApisHighLevel { get; } =
