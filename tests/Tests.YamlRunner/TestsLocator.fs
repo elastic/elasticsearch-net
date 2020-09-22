@@ -21,9 +21,10 @@ let ListFolders namedSuite revision directory = async {
     let doc = HtmlDocument.Parse(html)
     
     return
-        doc.CssSelect("td.content a.js-navigation-open")
+        doc.CssSelect("div.js-details-container a.js-navigation-open")
         |> List.map (fun a -> a.InnerText())
         |> List.filter (fun f -> match directory with | Some s -> f.StartsWith(s, StringComparison.OrdinalIgnoreCase) | None -> true)
+        |> List.filter(fun f -> f.Replace(" ", "") <> "..")
         |> List.filter (fun f -> not <| f.EndsWith(".asciidoc"))
 }
     
@@ -33,7 +34,7 @@ let ListFolderFiles namedSuite revision folder fileFilter = async {
     let doc = HtmlDocument.Parse(html)
     let yamlFiles =
         let fileUrl file = (file, TestsDownloader.TestRawUrl namedSuite revision folder file)
-        doc.CssSelect("td.content a.js-navigation-open")
+        doc.CssSelect("div.js-details-container a.js-navigation-open")
         |> List.map(fun a -> a.InnerText())
         |> List.filter(fun f -> f.EndsWith(".yml"))
         |> List.filter (fun f -> match fileFilter with | Some s -> f.StartsWith(s, StringComparison.OrdinalIgnoreCase) | None -> true)
