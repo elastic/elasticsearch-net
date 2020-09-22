@@ -311,6 +311,17 @@ namespace Elasticsearch.Net
 		[MapsApi("clear_scroll", "scroll_id, body")]
 		public Task<TResponse> ClearScrollAsync<TResponse>(string scrollId, PostData body, ClearScrollRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_search/scroll/{scrollId:scrollId}"), ctx, body, RequestParams(requestParameters));
+		///<summary>DELETE on /_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
+		///<param name = "body">a point-in-time id to close</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse ClosePointInTime<TResponse>(PostData body, ClosePointInTimeRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, "_pit", body, RequestParams(requestParameters));
+		///<summary>DELETE on /_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
+		///<param name = "body">a point-in-time id to close</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("close_point_in_time", "body")]
+		public Task<TResponse> ClosePointInTimeAsync<TResponse>(PostData body, ClosePointInTimeRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, "_pit", ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_count <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</para></summary>
 		///<param name = "body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -708,6 +719,26 @@ namespace Elasticsearch.Net
 		[MapsApi("mtermvectors", "index, body")]
 		public Task<TResponse> MultiTermVectorsAsync<TResponse>(string index, PostData body, MultiTermVectorsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_mtermvectors"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse OpenPointInTime<TResponse>(OpenPointInTimeRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_pit", null, RequestParams(requestParameters));
+		///<summary>POST on /_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("open_point_in_time", "")]
+		public Task<TResponse> OpenPointInTimeAsync<TResponse>(OpenPointInTimeRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_pit", ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /{index}/_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
+		///<param name = "index">A comma-separated list of index names to open point in time; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse OpenPointInTime<TResponse>(string index, OpenPointInTimeRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_pit"), null, RequestParams(requestParameters));
+		///<summary>POST on /{index}/_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
+		///<param name = "index">A comma-separated list of index names to open point in time; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("open_point_in_time", "index")]
+		public Task<TResponse> OpenPointInTimeAsync<TResponse>(string index, OpenPointInTimeRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_pit"), ctx, null, RequestParams(requestParameters));
 		///<summary>HEAD on / <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Ping<TResponse>(PingRequestParameters requestParameters = null)

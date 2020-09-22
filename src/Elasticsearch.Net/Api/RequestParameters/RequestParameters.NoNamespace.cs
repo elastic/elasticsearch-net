@@ -114,6 +114,13 @@ namespace Elasticsearch.Net
 		public override bool SupportsBody => true;
 	}
 
+	///<summary>Request options for ClosePointInTime <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
+	public class ClosePointInTimeRequestParameters : RequestParameters<ClosePointInTimeRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => true;
+	}
+
 	///<summary>Request options for Count <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</para></summary>
 	public class CountRequestParameters : RequestParameters<CountRequestParameters>
 	{
@@ -1421,6 +1428,47 @@ namespace Elasticsearch.Net
 		{
 			get => Q<VersionType? >("version_type");
 			set => Q("version_type", value);
+		}
+	}
+
+	///<summary>Request options for OpenPointInTime <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
+	public class OpenPointInTimeRequestParameters : RequestParameters<OpenPointInTimeRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
+
+		///<summary>Specific the time to live for the point in time</summary>
+		public string KeepAlive
+		{
+			get => Q<string>("keep_alive");
+			set => Q("keep_alive", value);
+		}
+
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference
+		{
+			get => Q<string>("preference");
+			set => Q("preference", value);
+		}
+
+		///<summary>Specific routing value</summary>
+		public string Routing
+		{
+			get => Q<string>("routing");
+			set => Q("routing", value);
 		}
 	}
 

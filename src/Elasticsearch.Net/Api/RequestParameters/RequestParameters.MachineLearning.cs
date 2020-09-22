@@ -643,14 +643,11 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			set => Q("from", value);
 		}
 
-		///<summary>
-		/// Should the full model definition be included in the results. These definitions can be large. So be cautious when including them. Defaults
-		/// to false.
-		///</summary>
-		public bool? IncludeModelDefinition
+		///<summary>A comma-separate list of fields to optionally include. Valid options are 'definition' and 'total_feature_importance'. Default is none.</summary>
+		public string Include
 		{
-			get => Q<bool? >("include_model_definition");
-			set => Q("include_model_definition", value);
+			get => Q<string>("include");
+			set => Q("include", value);
 		}
 
 		///<summary>specifies a max number of trained models to get</summary>
