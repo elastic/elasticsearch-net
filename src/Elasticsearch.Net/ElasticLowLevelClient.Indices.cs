@@ -323,21 +323,25 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_flush"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_flush/synced <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush-api.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[Obsolete("Deprecated in version 7.6.0: Synced flush is deprecated and will be removed in 8.0. Use flush instead.")]
 		public TResponse SyncedFlushForAll<TResponse>(SyncedFlushRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_flush/synced", null, RequestParams(requestParameters));
 		///<summary>POST on /_flush/synced <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush-api.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[Obsolete("Deprecated in version 7.6.0: Synced flush is deprecated and will be removed in 8.0. Use flush instead.")]
 		[MapsApi("indices.flush_synced", "")]
 		public Task<TResponse> SyncedFlushForAllAsync<TResponse>(SyncedFlushRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_flush/synced", ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_flush/synced <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush-api.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[Obsolete("Deprecated in version 7.6.0: Synced flush is deprecated and will be removed in 8.0. Use flush instead.")]
 		public TResponse SyncedFlush<TResponse>(string index, SyncedFlushRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_flush/synced"), null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_flush/synced <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush-api.html</para></summary>
 		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[Obsolete("Deprecated in version 7.6.0: Synced flush is deprecated and will be removed in 8.0. Use flush instead.")]
 		[MapsApi("indices.flush_synced", "index")]
 		public Task<TResponse> SyncedFlushAsync<TResponse>(string index, SyncedFlushRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_flush/synced"), ctx, null, RequestParams(requestParameters));
