@@ -176,6 +176,8 @@ let SkipList = dict<SkipFile,SkipSection> [
     //TODO has dates without strings which trips up our yaml parser
     SkipFile "runtime_fields/40_date.yml", All
     
+    SkipFile "privileges/10_basic.yml", Section "Test clear privileges cache"
+    
 
 ]
 

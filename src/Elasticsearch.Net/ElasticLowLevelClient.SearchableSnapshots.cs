@@ -43,24 +43,24 @@ namespace Elasticsearch.Net.Specification.SearchableSnapshotsApi
 		{
 		}
 
-		///<summary>POST on /_searchable_snapshots/cache/clear <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-clear-cache.html</para></summary>
+		///<summary>POST on /_searchable_snapshots/cache/clear <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse ClearCache<TResponse>(ClearCacheRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_searchable_snapshots/cache/clear", null, RequestParams(requestParameters));
-		///<summary>POST on /_searchable_snapshots/cache/clear <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-clear-cache.html</para></summary>
+		///<summary>POST on /_searchable_snapshots/cache/clear <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("searchable_snapshots.clear_cache", "")]
 		public Task<TResponse> ClearCacheAsync<TResponse>(ClearCacheRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_searchable_snapshots/cache/clear", ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_searchable_snapshots/cache/clear <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-clear-cache.html</para></summary>
+		///<summary>POST on /{index}/_searchable_snapshots/cache/clear <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse ClearCache<TResponse>(string index, ClearCacheRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_searchable_snapshots/cache/clear"), null, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_searchable_snapshots/cache/clear <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-clear-cache.html</para></summary>
+		///<summary>POST on /{index}/_searchable_snapshots/cache/clear <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
@@ -84,37 +84,37 @@ namespace Elasticsearch.Net.Specification.SearchableSnapshotsApi
 		[MapsApi("searchable_snapshots.mount", "repository, snapshot, body")]
 		public Task<TResponse> MountAsync<TResponse>(string repository, string snapshot, PostData body, MountRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_snapshot/{repository:repository}/{snapshot:snapshot}/_mount"), ctx, body, RequestParams(requestParameters));
-		///<summary>GET on /_snapshot/{repository}/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-repository-stats.html</para></summary>
+		///<summary>GET on /_snapshot/{repository}/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
 		///<param name = "repository">The repository for which to get the stats for</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse RepositoryStats<TResponse>(string repository, RepositoryStatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_snapshot/{repository:repository}/_stats"), null, RequestParams(requestParameters));
-		///<summary>GET on /_snapshot/{repository}/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-repository-stats.html</para></summary>
+		///<summary>GET on /_snapshot/{repository}/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
 		///<param name = "repository">The repository for which to get the stats for</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("searchable_snapshots.repository_stats", "repository")]
 		public Task<TResponse> RepositoryStatsAsync<TResponse>(string repository, RepositoryStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_snapshot/{repository:repository}/_stats"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_searchable_snapshots/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-stats.html</para></summary>
+		///<summary>GET on /_searchable_snapshots/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse Stats<TResponse>(StatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_searchable_snapshots/stats", null, RequestParams(requestParameters));
-		///<summary>GET on /_searchable_snapshots/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-stats.html</para></summary>
+		///<summary>GET on /_searchable_snapshots/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("searchable_snapshots.stats", "")]
 		public Task<TResponse> StatsAsync<TResponse>(StatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_searchable_snapshots/stats", ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /{index}/_searchable_snapshots/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-stats.html</para></summary>
+		///<summary>GET on /{index}/_searchable_snapshots/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse Stats<TResponse>(string index, StatsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"{index:index}/_searchable_snapshots/stats"), null, RequestParams(requestParameters));
-		///<summary>GET on /{index}/_searchable_snapshots/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-stats.html</para></summary>
+		///<summary>GET on /{index}/_searchable_snapshots/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
