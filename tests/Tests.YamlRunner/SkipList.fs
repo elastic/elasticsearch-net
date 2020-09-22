@@ -172,6 +172,10 @@ let SkipList = dict<SkipFile,SkipSection> [
     
     //new API TODO remove when we regenerate
     SkipFile "cluster.voting_config_exclusions/10_basic.yml", All
+    
+    //TODO has dates without strings which trips up our yaml parser
+    SkipFile "runtime_fields/40_date.yml", All
+    
 
 ]
 
