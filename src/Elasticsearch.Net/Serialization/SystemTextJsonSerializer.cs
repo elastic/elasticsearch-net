@@ -1,6 +1,4 @@
 using System;
-using System.Buffers;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text.Json;
 using System.Threading;
@@ -11,8 +9,26 @@ namespace Elasticsearch.Net
 {
 	public class SystemTextJsonSerializer : IElasticsearchSerializer
 	{
-		private readonly JsonSerializerOptions _indented = new JsonSerializerOptions { WriteIndented = true };
-		private readonly JsonSerializerOptions _none = new JsonSerializerOptions { WriteIndented = false };
+		private readonly Lazy<JsonSerializerOptions> _indented;
+		private readonly Lazy<JsonSerializerOptions> _none;
+
+		public SystemTextJsonSerializer()
+		{
+			_indented = new Lazy<JsonSerializerOptions>(() => CreateSerializerOptions(Indented));
+			_none = new Lazy<JsonSerializerOptions>(() => CreateSerializerOptions(None));
+		}
+
+		/// <summary>
+		/// Creates <see cref="JsonSerializerOptions"/> used for serialization.
+		/// Override on a derived serializer to change serialization.
+		/// </summary>
+		protected virtual JsonSerializerOptions CreateSerializerOptions(SerializationFormatting formatting) =>
+			new JsonSerializerOptions
+			{
+				IgnoreNullValues = true,
+				WriteIndented = formatting == Indented,
+				Converters = { new ExceptionConverter() }
+			};
 
 		private static bool TryReturnDefault<T>(Stream stream, out T deserialize)
 		{
@@ -25,7 +41,6 @@ namespace Elasticsearch.Net
 			if (stream is MemoryStream m) return m;
 			var length = stream.CanSeek ? stream.Length : (long?)null;
 			var wrapped = length.HasValue ? new MemoryStream(new byte[length.Value]) : new MemoryStream();
-			//var wrapped = new MemoryStream();
 			stream.CopyTo(wrapped);
 			return wrapped;
 		}
@@ -41,14 +56,14 @@ namespace Elasticsearch.Net
 			return new ReadOnlySpan<byte>(a).Slice(0, a.Length);
 		}
 
-		private JsonSerializerOptions GetFormatting(SerializationFormatting formatting) => formatting == None ? _none : _indented;
+		private JsonSerializerOptions GetFormatting(SerializationFormatting formatting) => formatting == None ? _none.Value : _indented.Value;
 
 		public object Deserialize(Type type, Stream stream)
 		{
 			if (TryReturnDefault(stream, out object deserialize)) return deserialize;
 
 			var buffered = ToReadOnlySpan(stream);
-			return JsonSerializer.Deserialize(buffered, type, _none);
+			return JsonSerializer.Deserialize(buffered, type, _none.Value);
 		}
 
 		public T Deserialize<T>(Stream stream)
@@ -56,7 +71,7 @@ namespace Elasticsearch.Net
 			if (TryReturnDefault(stream, out T deserialize)) return deserialize;
 
 			var buffered = ToReadOnlySpan(stream);
-			return JsonSerializer.Deserialize<T>(buffered, _none);
+			return JsonSerializer.Deserialize<T>(buffered, _none.Value);
 		}
 
 		public void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = None)
@@ -74,25 +89,24 @@ namespace Elasticsearch.Net
 		)
 		{
 			if (data == null)
-				await JsonSerializer.SerializeAsync(stream, null, typeof(object), GetFormatting(formatting)).ConfigureAwait(false);
+				await JsonSerializer.SerializeAsync(stream, null, typeof(object), GetFormatting(formatting), cancellationToken).ConfigureAwait(false);
 			else
 				await JsonSerializer.SerializeAsync(stream, data, data.GetType(), GetFormatting(formatting), cancellationToken).ConfigureAwait(false);
 		}
 
-
-		//TODO ValueTask, breaking change? probably 8.0
+		//TODO return ValueTask, breaking change? probably 8.0
 		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default)
 		{
 			if (TryReturnDefault(stream, out object deserialize)) return Task.FromResult(deserialize);
 
-			return JsonSerializer.DeserializeAsync(stream, type, _none, cancellationToken).AsTask();
+			return JsonSerializer.DeserializeAsync(stream, type, _none.Value, cancellationToken).AsTask();
 		}
 
 		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
 		{
 			if (TryReturnDefault(stream, out T deserialize)) return Task.FromResult(deserialize);
 
-			return JsonSerializer.DeserializeAsync<T>(stream, _none, cancellationToken).AsTask();
+			return JsonSerializer.DeserializeAsync<T>(stream, _none.Value, cancellationToken).AsTask();
 		}
 	}
 }

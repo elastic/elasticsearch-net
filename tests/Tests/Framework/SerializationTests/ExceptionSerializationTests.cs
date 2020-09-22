@@ -28,8 +28,7 @@ namespace Tests.Framework.SerializationTests
 			_elasticsearchNetSerializer = lowlevelClient.Serializer;
 		}
 
-		//TODO Needs exception formatter
-		[U(Skip="Needs Exception formatter")]
+		[U]
 		public void LowLevelExceptionSerializationMatchesJsonNet()
 		{
 			var serialized = _elasticsearchNetSerializer.SerializeToString(_exception);
