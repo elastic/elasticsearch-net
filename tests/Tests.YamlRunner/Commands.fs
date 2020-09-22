@@ -28,7 +28,10 @@ let private subBarOptions =
     )
 
 let LocateTests namedSuite revision directoryFilter fileFilter = async {
-    let! folders = TestsLocator.ListFolders namedSuite revision directoryFilter 
+    let! folders = TestsLocator.ListFolders namedSuite revision directoryFilter
+    if folders.Length = 0 then
+        raise <| Exception("No folders found trying to list the yaml specs")
+        
     let l = folders.Length
     use progress = new ProgressBar(l, sprintf "Listing %i folders" l, barOptions)
     progress.WriteLine <| sprintf "Listing %i folders" l

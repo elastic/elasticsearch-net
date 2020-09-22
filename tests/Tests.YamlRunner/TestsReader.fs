@@ -6,12 +6,15 @@ module Tests.YamlRunner.TestsReader
 
 open System
 open System.Collections.Generic
+open System.Reflection.Metadata
 open System.Text.RegularExpressions
 open System.Linq
 
 open System.Collections.Specialized
 open System.IO
+open SharpYaml.Serialization
 open Tests.YamlRunner.Models
+open Tests.YamlRunner.Skips
 open Tests.YamlRunner.TestsLocator
 
 let private tryPick<'a> (map:YamlMap) key =
@@ -221,20 +224,31 @@ let private toDocument (yamlInfo:YamlFileInfo) (sections:YamlTestSection list) =
         Tests = sections |> List.map (fun s -> match s with | YamlTest s -> Some s | _ -> None) |> List.choose id
     }
 
-type YamlTestFolder = { Folder: string; Files: YamlTestDocument list } 
+type YamlTestFolder = { Folder: string; Files: YamlTestDocument list }
 
-let ReadYamlFile (yamlInfo:YamlFileInfo) = 
+let rawDeseralize (file:YamlFileInfo) (sectionString:string) (serializer: Serializer) =
+    let file =
+        let fi = FileInfo <| file.File
+        let di = fi.Directory
+        sprintf "%s/%s" di.Name fi.Name
+    let r () = (sectionString, serializer.Deserialize<Dictionary<string, Object>> sectionString)
+    match Skips.SkipList.TryGetValue <| SkipFile(file) with
+    | (true, All) -> None
+    | _ -> Some <| r()
 
-    let serializer = SharpYaml.Serialization.Serializer()
+let ReadYamlFile (yamlInfo:YamlFileInfo) =
+    
+    let serializer = Serializer()
     let sections =
         let r e message = raise <| Exception(message, e)
         Regex.Split(yamlInfo.Yaml, @"---\s*?\r?\n")
         |> Seq.filter (fun s -> not <| String.IsNullOrWhiteSpace s)
         |> Seq.map (fun sectionString ->
             try
-                (sectionString, serializer.Deserialize<Dictionary<string, Object>> sectionString)
+                rawDeseralize yamlInfo sectionString serializer
             with | e -> r e <| sprintf "parseError %s: %s %s %s" yamlInfo.File e.Message Environment.NewLine sectionString
         )
+        |> Seq.choose id
         |> Seq.filter (fun (s, _) -> s <> null)
         |> Seq.map (fun (s, document) ->
             try
