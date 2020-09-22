@@ -62,7 +62,6 @@ module Tooling =
         member this.ExecIn workingDirectory arguments = this.ExecInWithTimeout workingDirectory arguments timeout
         member this.Exec arguments = this.ExecWithTimeout arguments timeout
 
-    let ILRepack = BuildTooling(None, "build/scripts/bin/Release/netcoreapp3.0/ILRepack.exe")
     let DotNet = BuildTooling(None, "dotnet")
 
     

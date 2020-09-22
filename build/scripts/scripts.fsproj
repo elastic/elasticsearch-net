@@ -46,14 +46,9 @@
     <PackageReference Include="Fake.IO.Zip" Version="5.15.0" />
     <PackageReference Include="Fake.Tools.Git" Version="5.15.0" />
     
-    <PackageReference Include="ILRepack" Version="2.1.0-beta1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
 
     <PackageReference Include="Octokit" Version="0.32.0" />
     <PackageReference Include="Proc" Version="0.6.1" />
   </ItemGroup>
-  <Target Name="CopyToolPackages" AfterTargets="Build">
-    <Copy SourceFiles="$(PkgILRepack)\tools\ILRepack.exe" DestinationFolder="$(OutDir)" />
-  </Target>
-
 </Project>

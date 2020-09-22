@@ -118,20 +118,11 @@ module Build =
                [mainDll]
                |> Seq.append depAssemblies
                |> Seq.map (fun dll ->
-                   sprintf @"-i ""%s"" -o ""%s"" " dll (renamedDll dll)
+                   sprintf @"-i ""%s"" -o ""%s"" -k ""%s""" dll (renamedDll dll) keyFile
                )
            
             ReposTooling.Rewriter dlls
            
-            let rewrittenDll = renamedDll mainDll 
-            let ilMergeArgs = [
-                "/internalize"; 
-                (sprintf "/lib:%s" (Paths.InplaceBuildOutput project tfm)); 
-                (sprintf "/keyfile:%s" keyFile); 
-                (sprintf "/out:%s" rewrittenDll)
-            ]
-                
-            Tooling.ILRepack.Exec (ilMergeArgs |> List.append [rewrittenDll])
             Shell.rm mainDll
             let mainPdb = sprintf "%s.pdb" (Path.Combine(fullPath, project))
             if File.exists mainPdb then Shell.rm mainPdb
