@@ -28,10 +28,11 @@ namespace Tests.Core.Client
 			int statusCode = 200,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			string contentType = RequestData.MimeType,
-			Exception exception = null
+			Exception exception = null,
+			IElasticsearchSerializer serializer = null
 		)
 		{
-			var serializer = TestClient.Default.RequestResponseSerializer;
+			serializer ??= TestClient.Default.RequestResponseSerializer;
 			byte[] responseBytes;
 			switch (response)
 			{

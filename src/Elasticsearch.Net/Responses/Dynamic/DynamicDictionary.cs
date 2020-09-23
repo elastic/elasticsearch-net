@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net.Utf8Json;
 
@@ -45,7 +46,8 @@ namespace Elasticsearch.Net
 		/// Creates a new instance of Dictionary{String,Object} using the keys and underlying object values of this DynamicDictionary instance's key values.
 		/// </summary>
 		/// <returns></returns>
-		public Dictionary<string, object> ToDictionary() => _backingDictionary.ToDictionary(kv => kv.Key, kv => kv.Value.Value);
+		public Dictionary<string, object> ToDictionary() =>
+			_backingDictionary.ToDictionary(kv => kv.Key, kv => kv.Value.Value is JsonElement e ? kv.Value.ConsumeJsonElement(typeof(object), e) : kv.Value.Value);
 
 		/// <summary>
 		/// Returns an empty dynamic dictionary.

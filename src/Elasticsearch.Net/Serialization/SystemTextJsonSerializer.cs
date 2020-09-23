@@ -13,13 +13,16 @@ namespace Elasticsearch.Net
 {
 	public class SystemTextJsonSerializer : IElasticsearchSerializer
 	{
+		public static readonly SystemTextJsonSerializer Instance = new SystemTextJsonSerializer();
+
 		private readonly Lazy<JsonSerializerOptions> _indented;
 		private readonly Lazy<JsonSerializerOptions> _none;
 
 		public IReadOnlyCollection<JsonConverter> AdditionalConverters { get; }
 		private IList<JsonConverter> BakedInConverters { get; } = new List<JsonConverter>
 		{
-			{ new ExceptionConverter()}
+			{ new ExceptionConverter() },
+			{ new DynamicDictionaryConverter() }
 		};
 
 		public SystemTextJsonSerializer() : this(null) { }

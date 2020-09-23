@@ -15,8 +15,9 @@ namespace Tests.ClientConcepts.ServerError
 	{
 		protected ServerErrorTestsBase()
 		{
+			var lowLevelClientSettings = FixedResponseClient.CreateConnectionSettings(ResponseJson, 500, serializer: new SystemTextJsonSerializer());
+			LowLevelClient = new ElasticLowLevelClient(lowLevelClientSettings);
 			var settings = FixedResponseClient.CreateConnectionSettings(ResponseJson, 500);
-			LowLevelClient = new ElasticLowLevelClient(settings);
 			HighLevelClient = new ElasticClient(settings);
 		}
 

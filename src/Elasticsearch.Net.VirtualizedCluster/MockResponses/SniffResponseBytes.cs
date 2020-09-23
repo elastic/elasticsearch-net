@@ -22,7 +22,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.MockResponses
 			};
 			using (var ms = ConnectionConfiguration.DefaultMemoryStreamFactory.Create())
 			{
-				LowLevelRequestResponseSerializer.Instance.Serialize(response, ms);
+				SystemTextJsonSerializer.Instance.Serialize(response, ms);
 				return ms.ToArray();
 			}
 		}

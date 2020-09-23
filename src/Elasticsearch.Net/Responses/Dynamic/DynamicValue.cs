@@ -10,8 +10,11 @@ using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 using Microsoft.CSharp.RuntimeBinder;
+using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
 
 // ReSharper disable ArrangeConstructorOrDestructorBody
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -95,6 +98,16 @@ namespace Elasticsearch.Net
 					var at = dv[dv.Keys.ElementAt(i)];
 					return at;
 				}
+				if (v is JsonElement e && e.ValueKind == JsonValueKind.Array)
+				{
+					if (e.GetArrayLength() -1 >= i)
+						return SelfOrNew(e[i]);
+				}
+				if (v is JsonElement el && el.ValueKind == JsonValueKind.Object)
+				{
+					return SelfOrNew(el.GetProperty(i.ToString(CultureInfo.InvariantCulture)));
+				}
+
 				return NullValue;
 			}
 		}
@@ -395,8 +408,19 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public IDictionary<string, DynamicValue> ToDictionary()
 		{
-			if (!(_value is IDictionary<string, object> dict)) return null;
-			return DynamicDictionary.Create(dict);
+			if (_value is IDictionary<string, object> dict) return DynamicDictionary.Create(dict);
+			else if (_value is JsonElement e && e.ValueKind == JsonValueKind.Object)
+			{
+				var d = e.EnumerateObject()
+					.Aggregate(new Dictionary<string, object>(), (dict, je) =>
+					{
+						dict.Add(je.Name, je.Value);
+						return dict;
+					});
+				return DynamicDictionary.Create(d);
+			}
+
+			return null;
 		}
 
 
@@ -468,6 +492,15 @@ namespace Elasticsearch.Net
 				result = SelfOrNew(projected);
 				return projected.Length  > 0;
 			}
+			if (Value is JsonElement e)
+			{
+				if (e.TryGetProperty(name, out var r))
+				{
+					result = SelfOrNew(r);
+					return true;
+				}
+
+			}
 
 			result = NullValue;
 			return true;
@@ -527,6 +560,52 @@ namespace Elasticsearch.Net
 			}
 		}
 
+		public object ConsumeJsonElement(Type targetReturnType, JsonElement e)
+		{
+			// ReSharper disable once HeapView.BoxingAllocation
+			object ParseNumber(JsonElement el)
+			{
+				if (el.TryGetInt64(out var l))
+					return l;
+				return el.GetDouble();
+			}
+
+			return targetReturnType switch
+			{
+				_ when targetReturnType == typeof(bool) => e.GetBoolean(),
+				_ when targetReturnType == typeof(byte) => e.GetByte(),
+				_ when targetReturnType == typeof(decimal) => e.GetDecimal(),
+				_ when targetReturnType == typeof(double) => e.GetDouble(),
+				_ when targetReturnType == typeof(Guid) => e.GetGuid(),
+				_ when targetReturnType == typeof(short) => e.GetInt16(),
+				_ when targetReturnType == typeof(int) => e.GetInt32(),
+				_ when targetReturnType == typeof(long) => e.GetInt64(),
+				_ when targetReturnType == typeof(float) => e.GetSingle(),
+				_ when targetReturnType == typeof(string) => e.GetString(),
+				_ when targetReturnType == typeof(DateTime) => e.GetDateTime(),
+				_ when targetReturnType == typeof(DateTimeOffset) => e.GetDateTimeOffset(),
+				_ when targetReturnType == typeof(ushort) => e.GetUInt16(),
+				_ when targetReturnType == typeof(uint) => e.GetUInt32(),
+				_ when targetReturnType == typeof(ulong) => e.GetUInt64(),
+				_ when targetReturnType == typeof(sbyte) => e.GetSByte(),
+				_ when targetReturnType == typeof(object) && e.ValueKind == JsonValueKind.Array =>
+					e.EnumerateArray().Select(je => ConsumeJsonElement(targetReturnType, je)).ToArray(),
+				_ when targetReturnType == typeof(object) && e.ValueKind == JsonValueKind.Object =>
+					e.EnumerateObject().Aggregate(new Dictionary<string, object>(), (dict, je) =>
+					{
+						dict.Add(je.Name, ConsumeJsonElement(targetReturnType, je.Value));
+						return dict;
+					}),
+
+				_ when targetReturnType == typeof(object) && e.ValueKind == JsonValueKind.True => true,
+				_ when targetReturnType == typeof(object) && e.ValueKind == JsonValueKind.False => false,
+				_ when targetReturnType == typeof(object) && e.ValueKind == JsonValueKind.Null => null,
+				_ when targetReturnType == typeof(object) && e.ValueKind == JsonValueKind.String => e.GetString(),
+				_ when targetReturnType == typeof(object) && e.ValueKind == JsonValueKind.Number => ParseNumber(e),
+				_ => null
+			};
+		}
+
 		internal bool TryParse(object defaultValue, Type targetReturnType, object value, out object newObject)
 		{
 			newObject = defaultValue;
@@ -537,6 +616,14 @@ namespace Elasticsearch.Net
 
 			try
 			{
+				if (value is JsonElement e)
+				{
+
+					// ReSharper disable once HeapView.BoxingAllocation
+					newObject = ConsumeJsonElement(targetReturnType, e);
+					return true;
+				}
+
 				var valueType = value.GetType();
 				if (targetReturnType.IsArray && value is DynamicValue v)
 				{
@@ -876,5 +963,6 @@ namespace Elasticsearch.Net
 
 			return double.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
+
 	}
 }
