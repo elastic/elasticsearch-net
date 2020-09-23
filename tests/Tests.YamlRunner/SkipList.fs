@@ -166,12 +166,13 @@ let SkipList = dict<SkipFile,SkipSection> [
     //additional enters in regex
     SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates" ]
     
-    
     //new API TODO remove when we regenerate
     SkipFile "cluster.voting_config_exclusions/10_basic.yml", All
     
     //TODO has dates without strings which trips up our yaml parser
     SkipFile "runtime_fields/40_date.yml", All
+    // decimal / int in object comparison
+    SkipFile "runtime_fields/60_boolean.yml", All
 
 ]
 

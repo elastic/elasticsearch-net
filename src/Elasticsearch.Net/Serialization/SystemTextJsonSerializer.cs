@@ -1,6 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using static Elasticsearch.Net.SerializationFormatting;
@@ -12,8 +16,19 @@ namespace Elasticsearch.Net
 		private readonly Lazy<JsonSerializerOptions> _indented;
 		private readonly Lazy<JsonSerializerOptions> _none;
 
-		public SystemTextJsonSerializer()
+		public IReadOnlyCollection<JsonConverter> AdditionalConverters { get; }
+		private IList<JsonConverter> BakedInConverters { get; } = new List<JsonConverter>
 		{
+			{ new ExceptionConverter()}
+		};
+
+		public SystemTextJsonSerializer() : this(null) { }
+
+		public SystemTextJsonSerializer(IEnumerable<JsonConverter> converters)
+		{
+			AdditionalConverters = converters != null
+				? new ReadOnlyCollection<JsonConverter>(converters.ToList())
+				: EmptyReadOnly<JsonConverter>.Collection;
 			_indented = new Lazy<JsonSerializerOptions>(() => CreateSerializerOptions(Indented));
 			_none = new Lazy<JsonSerializerOptions>(() => CreateSerializerOptions(None));
 		}
@@ -22,17 +37,21 @@ namespace Elasticsearch.Net
 		/// Creates <see cref="JsonSerializerOptions"/> used for serialization.
 		/// Override on a derived serializer to change serialization.
 		/// </summary>
-		protected virtual JsonSerializerOptions CreateSerializerOptions(SerializationFormatting formatting) =>
-			new JsonSerializerOptions
+		protected virtual JsonSerializerOptions CreateSerializerOptions(SerializationFormatting formatting)
+		{
+			var options = new JsonSerializerOptions
 			{
 				IgnoreNullValues = true,
 				WriteIndented = formatting == Indented,
-				Converters =
-				{
-					new ExceptionConverter(),
-					new DictionaryObjectKeyConverterFactory()
-				}
 			};
+			foreach (var converter in BakedInConverters)
+				options.Converters.Add(converter);
+			foreach (var converter in AdditionalConverters)
+				options.Converters.Add(converter);
+
+			return options;
+
+		}
 
 		private static bool TryReturnDefault<T>(Stream stream, out T deserialize)
 		{

@@ -11,6 +11,7 @@ open Argu
 open Tests.YamlRunner
 open Tests.YamlRunner.Models
 open Elasticsearch.Net
+open Tests.YamlRunner.YamlMapConverter
 
 type Arguments =
     | [<First; MainCommand; CliPrefix(CliPrefix.None)>] NamedSuite of TestSuite
@@ -56,7 +57,9 @@ let private createClient endpoint namedSuite =
         | ([username; password], _) -> uri, Some (username, password)
         | (_, XPack) -> uri, Some ("elastic", "changeme")
         | _ -> uri, None
-    let settings = new ConnectionConfiguration(uri)
+    let serializer = SystemTextJsonSerializer([YamlMapConverterFactory()]);
+    let pool = new SingleNodeConnectionPool(uri);
+    let settings = new ConnectionConfiguration(pool, serializer)
     // proxy 
     let proxySettings =
         match (runningMitmProxy, namedSuite) with

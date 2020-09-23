@@ -26,6 +26,7 @@
     <Compile Include="TestsRunner.fs" />
     <Compile Include="TestsExporter.fs" />
     <Compile Include="Commands.fs" />
+    <Compile Include="YamlMapConverter.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
  
