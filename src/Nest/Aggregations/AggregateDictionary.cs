@@ -134,6 +134,8 @@ namespace Nest
 
 		public SingleBucketAggregate Sampler(string key) => TryGet<SingleBucketAggregate>(key);
 
+		public SingleBucketAggregate DiversifiedSampler(string key) => TryGet<SingleBucketAggregate>(key);
+
 		public GeoCentroidAggregate GeoCentroid(string key) => TryGet<GeoCentroidAggregate>(key);
 
 		public SignificantTermsAggregate<TKey> SignificantTerms<TKey>(string key)

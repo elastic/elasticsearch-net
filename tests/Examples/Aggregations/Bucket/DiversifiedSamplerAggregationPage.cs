@@ -10,15 +10,35 @@ namespace Examples.Aggregations.Bucket
 {
 	public class DiversifiedSamplerAggregationPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/diversified-sampler-aggregation.asciidoc:30")]
 		public void Line30()
 		{
 			// tag::3344c3478f1e8bbbef683757638a34f4[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("stackoverflow")
+				.Query(q => q
+					.QueryString(qs => qs
+						.Query("tags:elasticsearch")
+					)
+				)
+				.Aggregations(a => a
+					.DiversifiedSampler("my_unbiased_sample", s => s
+						.ShardSize(200)
+						.Field("author")
+						.Aggregations(agg => agg
+							.SignificantTerms("keywords", k => k
+								.Field("tags")
+								.Exclude(new string[] { "elasticsearch" })
+							)
+						)
+					)
+				)
+				.Size(0)
+			);
 			// end::3344c3478f1e8bbbef683757638a34f4[]
 
-			response0.MatchesExample(@"POST /stackoverflow/_search?size=0
+			searchResponse.MatchesExample(@"POST /stackoverflow/_search?size=0
 			{
 			    ""query"": {
 			        ""query_string"": {
@@ -41,18 +61,46 @@ namespace Examples.Aggregations.Bucket
 			            }
 			        }
 			    }
-			}");
+			}", (e, b) =>
+			{
+				e.Uri.Query = e.Uri.Query.Replace("size=0", string.Empty);
+				b["size"] = 0;
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/diversified-sampler-aggregation.asciidoc:95")]
 		public void Line95()
 		{
 			// tag::07afce825c09de17a3d73a02b17a0a97[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("stackoverflow")
+				.Query(q => q
+					.QueryString(qs => qs
+						.Query("tags:kibana")
+					)
+				)
+				.Aggregations(a => a
+					.DiversifiedSampler("my_unbiased_sample", s => s
+						.ShardSize(200)
+						.MaxDocsPerValue(3)
+						.Script(sc => sc
+							.Source("doc['tags'].hashCode()")
+							.Lang("painless")
+						)
+						.Aggregations(agg => agg
+							.SignificantTerms("keywords", k => k
+								.Field("tags")
+								.Exclude(new string[] { "kibana" })
+							)
+						)
+					)
+				)
+				.Size(0)
+			);
 			// end::07afce825c09de17a3d73a02b17a0a97[]
 
-			response0.MatchesExample(@"POST /stackoverflow/_search?size=0
+			searchResponse.MatchesExample(@"POST /stackoverflow/_search?size=0
 			{
 			    ""query"": {
 			        ""query_string"": {
@@ -79,7 +127,11 @@ namespace Examples.Aggregations.Bucket
 			            }
 			        }
 			    }
-			}");
+			}", (e, b) =>
+			{
+				e.Uri.Query = e.Uri.Query.Replace("size=0", string.Empty);
+				b["size"] = 0;
+			});
 		}
 	}
 }
