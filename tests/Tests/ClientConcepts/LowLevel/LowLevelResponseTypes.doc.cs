@@ -79,6 +79,7 @@ namespace Tests.ClientConcepts.LowLevel
 			*/
 
 			// this still uses Utf8Json as NEST uses it and makes it the default for low level client
+			// However DynamicResponseBuilder asks the System.Text.Json serializer to deserialize DynmicResponse
 			var response = Client.LowLevel.Search<DynamicResponse>(PostData.Empty);
 			AssertOnResponse(response);
 
