@@ -174,11 +174,13 @@ let SkipList = dict<SkipFile,SkipSection> [
     // double / int in object comparison
     SkipFile "runtime_fields/60_boolean.yml", All
     
-    SkipFile "unsigned_long/10_boolean.yml", All
+    SkipFile "unsigned_long/10_basic.yml", All
     SkipFile "unsigned_long/20_null_value.yml", All
     SkipFile "unsigned_long/30_multi_fields.yml", All
     SkipFile "unsigned_long/40_different_numeric.yml", All
     SkipFile "unsigned_long/50_script_values.yml", All
+    
+    SkipFile "ml/inference_processor", Section "Test simulate"
 
 ]
 

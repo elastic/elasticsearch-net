@@ -243,6 +243,7 @@ let ReadYamlFile (yamlInfo:YamlFileInfo) =
         let r e message = raise <| Exception(message, e)
         Regex.Split(yamlInfo.Yaml, @"---\s*?\r?\n")
         |> Seq.filter (fun s -> not <| String.IsNullOrWhiteSpace s)
+        |> Seq.filter (fun s -> not <| s.Trim().StartsWith("#"))
         |> Seq.map (fun sectionString ->
             try
                 rawDeseralize yamlInfo sectionString serializer
