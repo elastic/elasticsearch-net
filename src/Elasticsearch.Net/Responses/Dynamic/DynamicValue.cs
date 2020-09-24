@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Microsoft.CSharp.RuntimeBinder;
+using Elasticsearch.Net.Extensions;
 using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
 
 // ReSharper disable ArrangeConstructorOrDestructorBody
@@ -59,6 +60,7 @@ namespace Elasticsearch.Net
 			{
 				DynamicDictionary v => v,
 				IDictionary<string, object> v => DynamicDictionary.Create(v),
+				JsonElement e => DynamicDictionary.Create(e),
 				_ => null
 			};
 			return dynamicDictionary == null ? default : dynamicDictionary.Get<T>(path);
@@ -492,14 +494,22 @@ namespace Elasticsearch.Net
 				result = SelfOrNew(projected);
 				return projected.Length  > 0;
 			}
-			if (Value is JsonElement e)
+			if (Value is JsonElement e && e.ValueKind == JsonValueKind.Object)
 			{
 				if (e.TryGetProperty(name, out var r))
 				{
 					result = SelfOrNew(r);
 					return true;
 				}
-
+			}
+			if (Value is JsonElement a && a.ValueKind == JsonValueKind.Array)
+			{
+				var projected = a.EnumerateArray()
+					.Select(i => SelfOrNew(i).Dispatch(out var o, name) ? o : null)
+					.Where(i => i != null)
+					.ToArray();
+				result = SelfOrNew(projected);
+				return projected.Length  > 0;
 			}
 
 			result = NullValue;
@@ -560,7 +570,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public object ConsumeJsonElement(Type targetReturnType, JsonElement e)
+		public static object ConsumeJsonElement(Type targetReturnType, JsonElement e)
 		{
 			// ReSharper disable once HeapView.BoxingAllocation
 			object ParseNumber(JsonElement el)
@@ -588,15 +598,10 @@ namespace Elasticsearch.Net
 				_ when targetReturnType == typeof(uint) => e.GetUInt32(),
 				_ when targetReturnType == typeof(ulong) => e.GetUInt64(),
 				_ when targetReturnType == typeof(sbyte) => e.GetSByte(),
+				_ when targetReturnType == typeof(DynamicDictionary) => DynamicDictionary.Create(e),
 				_ when targetReturnType == typeof(object) && e.ValueKind == JsonValueKind.Array =>
 					e.EnumerateArray().Select(je => ConsumeJsonElement(targetReturnType, je)).ToArray(),
-				_ when targetReturnType == typeof(object) && e.ValueKind == JsonValueKind.Object =>
-					e.EnumerateObject().Aggregate(new Dictionary<string, object>(), (dict, je) =>
-					{
-						dict.Add(je.Name, ConsumeJsonElement(targetReturnType, je.Value));
-						return dict;
-					}),
-
+				_ when targetReturnType == typeof(object) && e.ValueKind == JsonValueKind.Object => e.ToDictionary(),
 				_ when targetReturnType == typeof(object) && e.ValueKind == JsonValueKind.True => true,
 				_ when targetReturnType == typeof(object) && e.ValueKind == JsonValueKind.False => false,
 				_ when targetReturnType == typeof(object) && e.ValueKind == JsonValueKind.Null => null,
