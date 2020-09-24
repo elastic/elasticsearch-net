@@ -10,15 +10,34 @@ namespace Examples.Aggregations.Bucket
 {
 	public class SamplerAggregationPage : ExampleBase
 	{
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/sampler-aggregation.asciidoc:19")]
 		public void Line19()
 		{
 			// tag::28035a0e2a874f1b6739badf82a0ecc6[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("stackoverflow")
+				.Query(q => q
+					.QueryString(qs => qs
+						.Query("tags:kibana OR tags:javascript")
+					)
+				)
+				.Aggregations(a => a
+					.Sampler("sample", s => s
+						.ShardSize(200)
+						.Aggregations(sa => sa
+							.SignificantTerms("keywords", k => k
+								.Field("tags")
+								.Exclude(new string[] { "kibana", "javascript" })
+							)
+						)
+					)
+				)
+				.Size(0)
+			);
 			// end::28035a0e2a874f1b6739badf82a0ecc6[]
 
-			response0.MatchesExample(@"POST /stackoverflow/_search?size=0
+			searchResponse.MatchesExample(@"POST /stackoverflow/_search?size=0
 			{
 			    ""query"": {
 			        ""query_string"": {
@@ -40,18 +59,37 @@ namespace Examples.Aggregations.Bucket
 			            }
 			        }
 			    }
-			}");
+			}", (e, b) =>
+			{
+				e.Uri.Query = e.Uri.Query.Replace("size=0", string.Empty);
+				b["size"] = 0;
+			});
 		}
 
-		[U(Skip = "Example not implemented")]
+		[U]
 		[Description("aggregations/bucket/sampler-aggregation.asciidoc:88")]
 		public void Line88()
 		{
 			// tag::279f7af39b62c7d278f9f10b1f107dc0[]
-			var response0 = new SearchResponse<object>();
+			var searchResponse = client.Search<object>(s => s
+				.Index("stackoverflow")
+				.Query(q => q
+					.QueryString(qs => qs
+						.Query("tags:kibana OR tags:javascript")
+					)
+				)
+				.Aggregations(a => a
+					.SignificantTerms("low_quality_keywords", k => k
+						.Field("tags")
+						.Size(3)
+						.Exclude(new string[] { "kibana", "javascript" })
+					)	
+				)
+				.Size(0)
+			);
 			// end::279f7af39b62c7d278f9f10b1f107dc0[]
 
-			response0.MatchesExample(@"POST /stackoverflow/_search?size=0
+			searchResponse.MatchesExample(@"POST /stackoverflow/_search?size=0
 			{
 			    ""query"": {
 			        ""query_string"": {
@@ -67,7 +105,11 @@ namespace Examples.Aggregations.Bucket
 			                }
 			        }
 			    }
-			}");
+			}", (e, b) =>
+			{
+				e.Uri.Query = e.Uri.Query.Replace("size=0", string.Empty);
+				b["size"] = 0;
+			});
 		}
 	}
 }
