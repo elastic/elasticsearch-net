@@ -180,7 +180,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "unsigned_long/40_different_numeric.yml", All
     SkipFile "unsigned_long/50_script_values.yml", All
     
-    SkipFile "ml/inference_processor", Section "Test simulate"
+    SkipFile "ml/inference_processor.yml", Section "Test simulate"
 
 ]
 
