@@ -8,7 +8,6 @@ using Elasticsearch.Net.Utf8Json;
 using Elasticsearch.Net.Utf8Json.Internal;
 using Elasticsearch.Net.Utf8Json.Resolvers;
 
-
 namespace Nest
 {
 	internal class TokenizerFormatter : IJsonFormatter<ITokenizer>
@@ -87,38 +86,50 @@ namespace Nest
 				case "char_group":
 					Serialize<ICharGroupTokenizer>(ref writer, value, formatterResolver);
 					break;
+
 				case "edge_ngram":
 					Serialize<IEdgeNGramTokenizer>(ref writer, value, formatterResolver);
 					break;
+
 				case "ngram":
 					Serialize<INGramTokenizer>(ref writer, value, formatterResolver);
 					break;
+
 				case "path_hierarchy":
 					Serialize<IPathHierarchyTokenizer>(ref writer, value, formatterResolver);
 					break;
+
 				case "pattern":
 					Serialize<IPatternTokenizer>(ref writer, value, formatterResolver);
 					break;
+
 				case "standard":
 					Serialize<IStandardTokenizer>(ref writer, value, formatterResolver);
 					break;
+
 				case "uax_url_email":
 					Serialize<IUaxEmailUrlTokenizer>(ref writer, value, formatterResolver);
 					break;
+
 				case "whitespace":
 					Serialize<IWhitespaceTokenizer>(ref writer, value, formatterResolver);
 					break;
+
 				case "kuromoji_tokenizer":
 					Serialize<IKuromojiTokenizer>(ref writer, value, formatterResolver);
 					break;
+
 				case "icu_tokenizer":
 					Serialize<IIcuTokenizer>(ref writer, value, formatterResolver);
 					break;
+
 				case "nori_tokenizer":
 					Serialize<INoriTokenizer>(ref writer, value, formatterResolver);
 					break;
+
 				default:
-					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ITokenizer>();
+					// serialize user defined tokenizer
+					var formatter = formatterResolver.GetFormatter<object>();
 					formatter.Serialize(ref writer, value, formatterResolver);
 					break;
 			}
