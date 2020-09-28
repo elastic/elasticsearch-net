@@ -10,8 +10,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
 using System.Linq;
+using System.Text.Json;
 using System.Text.RegularExpressions;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json;
 
 // ReSharper disable ArrangeMethodOrOperatorBody
@@ -45,7 +48,8 @@ namespace Elasticsearch.Net
 		/// Creates a new instance of Dictionary{String,Object} using the keys and underlying object values of this DynamicDictionary instance's key values.
 		/// </summary>
 		/// <returns></returns>
-		public Dictionary<string, object> ToDictionary() => _backingDictionary.ToDictionary(kv => kv.Key, kv => kv.Value.Value);
+		public Dictionary<string, object> ToDictionary() =>
+			_backingDictionary.ToDictionary(kv => kv.Key, kv => kv.Value.Value is JsonElement e ? DynamicValue.ConsumeJsonElement(typeof(object), e) : kv.Value.Value);
 
 		/// <summary>
 		/// Returns an empty dynamic dictionary.
@@ -300,6 +304,14 @@ namespace Elasticsearch.Net
 			}
 
 			return instance;
+		}
+		/// <summary>
+		/// Creates a dynamic dictionary from an <see cref="JsonElement" /> instance.
+		/// </summary>
+		public static DynamicDictionary Create(JsonElement e)
+		{
+			var dict = e.ToDictionary();
+			return dict == null ? Empty : Create(dict);
 		}
 
 		/// <summary>

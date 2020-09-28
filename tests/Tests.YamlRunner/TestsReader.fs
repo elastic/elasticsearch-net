@@ -7,6 +7,7 @@ module Tests.YamlRunner.TestsReader
 open System
 open System.Collections.Generic
 open System.Reflection.Metadata
+open System.Text
 open System.Text.RegularExpressions
 open System.Linq
 
@@ -242,6 +243,14 @@ let ReadYamlFile (yamlInfo:YamlFileInfo) =
     let sections =
         let r e message = raise <| Exception(message, e)
         Regex.Split(yamlInfo.Yaml, @"---\s*?\r?\n")
+        // Filter out comments starting with #
+        |> Seq.map (fun s ->
+            s.Split("\n")
+            |> Seq.filter (fun s -> not <| s.Trim().StartsWith("#"))
+            |> Seq.fold (fun (sb:StringBuilder) s -> sb.AppendLine(s)) (StringBuilder())
+            |> fun x -> x.ToString()
+        )
+        // Filter out emtpy sections
         |> Seq.filter (fun s -> not <| String.IsNullOrWhiteSpace s)
         |> Seq.map (fun sectionString ->
             try

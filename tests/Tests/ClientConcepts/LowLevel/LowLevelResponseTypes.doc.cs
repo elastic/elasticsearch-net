@@ -62,9 +62,13 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 			var connection = new InMemoryConnection(Response().Utf8Bytes());
 			this.Client = new ElasticClient(new ConnectionSettings(connection).ApplyDomainSettings());
+
+			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			this.LowLevelClient = new ElasticLowLevelClient(new ConnectionConfiguration(pool, connection, new SystemTextJsonSerializer()));
 		}
 
 		private ElasticClient Client { get;  }
+		private IElasticLowLevelClient LowLevelClient { get;  }
 
 
 		[U] public void DynamicResponse()
@@ -74,13 +78,25 @@ namespace Tests.ClientConcepts.LowLevel
 			*
 			*/
 
+			// this still uses Utf8Json as NEST uses it and makes it the default for low level client
+			// However DynamicResponseBuilder asks the System.Text.Json serializer to deserialize DynmicResponse
 			var response = Client.LowLevel.Search<DynamicResponse>(PostData.Empty);
+			AssertOnResponse(response);
 
-			response.Get<string>("object.first").Should()
+			// this uses System.Text.Json
+			var responseLowLevel = LowLevelClient.Search<DynamicResponse>(PostData.Empty);
+			AssertOnResponse(responseLowLevel);
+		}
+
+		private static void AssertOnResponse(DynamicResponse response)
+		{
+			response.Get<string>("object.first")
+				.Should()
 				.NotBeEmpty()
 				.And.Be("value1");
 
-			response.Get<string>("object._arbitrary_key_").Should()
+			response.Get<string>("object._arbitrary_key_")
+				.Should()
 				.NotBeEmpty()
 				.And.Be("first");
 
@@ -91,33 +107,34 @@ namespace Tests.ClientConcepts.LowLevel
 			response.Get<long?>("number_does_not_exist").Should().Be(null);
 			response.Get<long?>("number").Should().Be(29);
 
-			response.Get<string>("array_of_objects.1.second").Should()
+			response.Get<string>("array_of_objects.1.second")
+				.Should()
 				.NotBeEmpty()
 				.And.Be("value22");
 
-			response.Get<string>("array_of_objects.1.complex\\.nested.x").Should()
+			response.Get<string>("array_of_objects.1.complex\\.nested.x")
+				.Should()
 				.NotBeEmpty()
 				.And.Be("value6");
 
 			/**
 			 * You can project into arrays using the dot notation
 			 */
-			response.Get<string[]>("array_of_objects.first").Should()
+			response.Get<string[]>("array_of_objects.first")
+				.Should()
 				.NotBeEmpty()
 				.And.HaveCount(2)
-				.And.BeEquivalentTo(new [] {"value11", "value21"});
+				.And.BeEquivalentTo(new[] { "value11", "value21" });
 
 			/**
 			 * You can even peek into array of arrays
 			 */
 			var nestedZs = response.Get<int[][]>("array_of_objects.nested.z.id")
 				//.SelectMany(d=>d.Get<int[]>("id"))
-				.Should().NotBeEmpty()
+				.Should()
+				.NotBeEmpty()
 				.And.HaveCount(2)
-				.And.BeEquivalentTo(new [] { new [] {1}, new []{3,2}});
-
-
+				.And.BeEquivalentTo(new[] { new[] { 1 }, new[] { 3, 2 } });
 		}
-
 	}
 }

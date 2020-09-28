@@ -95,7 +95,6 @@ type TestRunner(client:IElasticLowLevelClient, version: string, suite: TestSuite
                         | Succeeded _context -> Some (r, tl)
                         | NotSkipped _context -> Some (r, tl)
                         | Skipped (_context, _reason) ->
-                            subProgressbar.WriteLine <| sprintf "%s: %s " r.Name (r.Context.Operation.Log())
                             Some (r, [])
                         | Failed _context -> Some (r, [])
                     | [] -> None

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.NetworkInformation;
+using System.Text.Json.Serialization;
 using Elasticsearch.Net.Diagnostics;
 
 namespace Elasticsearch.Net
@@ -15,21 +16,29 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public abstract class ElasticsearchResponseBase : IApiCallDetails, IElasticsearchResponse
 	{
+
 		/// <inheritdoc />
+		[JsonIgnore]
 		public IApiCallDetails ApiCall { get; set; }
 
+
 		/// <inheritdoc cref="IApiCallDetails.TcpStats"/>
+		[JsonIgnore]
 		public ReadOnlyDictionary<TcpState, int> TcpStats
 		{
 			get => ApiCall.TcpStats;
 			set => ApiCall.TcpStats = value;
 		}
 
+
 		/// <inheritdoc cref="IApiCallDetails.DebugInformation"/>
+		[JsonIgnore]
 		public string DebugInformation => ApiCall.DebugInformation;
 		/// <inheritdoc cref="IApiCallDetails.HttpMethod"/>
+		[JsonIgnore]
 		public HttpMethod HttpMethod => ApiCall.HttpMethod;
 		/// <inheritdoc cref="IApiCallDetails.AuditTrail"/>
+		[JsonIgnore]
 		public List<Audit> AuditTrail
 		{
 			get => ApiCall.AuditTrail;
@@ -37,6 +46,7 @@ namespace Elasticsearch.Net
 		}
 
 		/// <inheritdoc cref="IApiCallDetails.ThreadPoolStats"/>
+		[JsonIgnore]
 		public ReadOnlyDictionary<string, ThreadPoolStatistics> ThreadPoolStats
 		{
 			get => ApiCall.ThreadPoolStats;
@@ -44,28 +54,38 @@ namespace Elasticsearch.Net
 		}
 
 		/// <inheritdoc cref="IApiCallDetails.DeprecationWarnings"/>
+		[JsonIgnore]
 		public IEnumerable<string> DeprecationWarnings => ApiCall.DeprecationWarnings;
 		/// <inheritdoc cref="IApiCallDetails.SuccessOrKnownError"/>
+		[JsonIgnore]
 		public bool SuccessOrKnownError => ApiCall.SuccessOrKnownError;
 		/// <inheritdoc cref="IApiCallDetails.HttpStatusCode"/>
+		[JsonIgnore]
 		public int? HttpStatusCode => ApiCall.HttpStatusCode;
 
 		/// <inheritdoc cref="IApiCallDetails.Success"/>
+		[JsonIgnore]
 		public bool Success => ApiCall.Success;
 		/// <inheritdoc cref="IApiCallDetails.OriginalException"/>
+		[JsonIgnore]
 		public Exception OriginalException => ApiCall.OriginalException;
 		/// <inheritdoc cref="IApiCallDetails.ResponseMimeType"/>
+		[JsonIgnore]
 		public string ResponseMimeType => ApiCall.ResponseMimeType;
 		/// <inheritdoc cref="IApiCallDetails.Uri"/>
+		[JsonIgnore]
 		public Uri Uri => ApiCall.Uri;
 
 		/// <inheritdoc cref="IApiCallDetails.ConnectionConfiguration"/>
+		[JsonIgnore]
 		public IConnectionConfigurationValues ConnectionConfiguration => ApiCall.ConnectionConfiguration;
 
 		/// <inheritdoc cref="IApiCallDetails.ResponseBodyInBytes"/>
+		[JsonIgnore]
 		public byte[] ResponseBodyInBytes => ApiCall.ResponseBodyInBytes;
 
 		/// <inheritdoc cref="IApiCallDetails.RequestBodyInBytes"/>
+		[JsonIgnore]
 		public byte[] RequestBodyInBytes => ApiCall.RequestBodyInBytes;
 
 		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason) => TryGetServerErrorReason(out reason);

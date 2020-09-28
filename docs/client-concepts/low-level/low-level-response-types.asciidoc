@@ -49,12 +49,19 @@ return @"{
 [source,csharp]
 ----
 var response = Client.LowLevel.Search<DynamicResponse>(PostData.Empty);
+AssertOnResponse(response);
 
-response.Get<string>("object.first").Should()
+// this uses System.Text.Json
+var responseLowLevel = LowLevelClient.Search<DynamicResponse>(PostData.Empty);
+AssertOnResponse(responseLowLevel);
+
+response.Get<string>("object.first")
+    .Should()
     .NotBeEmpty()
     .And.Be("value1");
 
-response.Get<string>("object._arbitrary_key_").Should()
+response.Get<string>("object._arbitrary_key_")
+    .Should()
     .NotBeEmpty()
     .And.Be("first");
 
@@ -65,11 +72,13 @@ response.Get<long?>("number").Should().Be(29);
 response.Get<long?>("number_does_not_exist").Should().Be(null);
 response.Get<long?>("number").Should().Be(29);
 
-response.Get<string>("array_of_objects.1.second").Should()
+response.Get<string>("array_of_objects.1.second")
+    .Should()
     .NotBeEmpty()
     .And.Be("value22");
 
-response.Get<string>("array_of_objects.1.complex\\.nested.x").Should()
+response.Get<string>("array_of_objects.1.complex\\.nested.x")
+    .Should()
     .NotBeEmpty()
     .And.Be("value6");
 ----
@@ -78,10 +87,11 @@ You can project into arrays using the dot notation
 
 [source,csharp]
 ----
-response.Get<string[]>("array_of_objects.first").Should()
+response.Get<string[]>("array_of_objects.first")
+    .Should()
     .NotBeEmpty()
     .And.HaveCount(2)
-    .And.BeEquivalentTo(new [] {"value11", "value21"});
+    .And.BeEquivalentTo(new[] { "value11", "value21" });
 ----
 
 You can even peek into array of arrays
@@ -90,8 +100,9 @@ You can even peek into array of arrays
 ----
 var nestedZs = response.Get<int[][]>("array_of_objects.nested.z.id")
     //.SelectMany(d=>d.Get<int[]>("id"))
-    .Should().NotBeEmpty()
+    .Should()
+    .NotBeEmpty()
     .And.HaveCount(2)
-    .And.BeEquivalentTo(new [] { new [] {1}, new []{3,2}});
+    .And.BeEquivalentTo(new[] { new[] { 1 }, new[] { 3, 2 } });
 ----
 

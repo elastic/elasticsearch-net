@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net.Extensions;
 
@@ -84,7 +85,11 @@ namespace Elasticsearch.Net
 			get
 			{
 				if (settings != null && settings.TryGetValue("http.enabled", out var httpEnabled))
+				{
+					if (httpEnabled is JsonElement e)
+						return e.GetBoolean();
 					return Convert.ToBoolean(httpEnabled);
+				}
 
 				return http != null;
 			}

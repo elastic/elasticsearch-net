@@ -11,6 +11,7 @@ open Argu
 open Tests.YamlRunner
 open Tests.YamlRunner.Models
 open Elasticsearch.Net
+open Tests.YamlRunner.YamlMapConverter
 
 type Arguments =
     | [<First; MainCommand; CliPrefix(CliPrefix.None)>] NamedSuite of TestSuite
@@ -56,7 +57,9 @@ let private createClient endpoint namedSuite =
         | ([username; password], _) -> uri, Some (username, password)
         | (_, XPack) -> uri, Some ("elastic", "changeme")
         | _ -> uri, None
-    let settings = new ConnectionConfiguration(uri)
+    let serializer = SystemTextJsonSerializer([YamlMapConverterFactory()]);
+    let pool = new SingleNodeConnectionPool(uri);
+    let settings = new ConnectionConfiguration(pool, serializer)
     // proxy 
     let proxySettings =
         match (runningMitmProxy, namedSuite) with
@@ -75,7 +78,7 @@ let private createClient endpoint namedSuite =
         | _ -> authSettings
     ElasticLowLevelClient(certSettings)
     
-let validateRevisionParams endpoint _passedRevision namedSuite =    
+let validateRevisionParams endpoint passedRevision namedSuite =    
     let client = createClient endpoint namedSuite
     
     let node = client.Settings.ConnectionPool.Nodes.First()
@@ -95,13 +98,12 @@ let validateRevisionParams endpoint _passedRevision namedSuite =
     if not r.Success then
         failwithf "No running elasticsearch found at %s" endpoint
     
-    let version = r.Get<string>("version.number") 
-    let runningRevision = r.Get<string>("version.build_hash")
+    let revision =
+        match passedRevision with
+        | Some s -> s
+        | None -> r.Get<string>("version.build_hash")
     
-    // TODO validate the endpoint running confirms to expected `passedRevision`
-    // needs to handle tags (7.4.0) and branches (7.x, 7.4, master)
-    // not quite sure whats the rules are
-    let revision = runningRevision
+    let version = r.Get<string>("version.number") 
         
     (client, revision, version)
     

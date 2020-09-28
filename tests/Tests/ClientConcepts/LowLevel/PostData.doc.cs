@@ -116,7 +116,8 @@ namespace Tests.ClientConcepts.LowLevel
 		[U] public async Task WritesCorrectlyUsingBothLowAndHighLevelSettings()
 		{
 			await this.AssertOn(new ConnectionSettings());
-			await this.AssertOn(new ConnectionConfiguration());
+			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			await this.AssertOn(new ConnectionConfiguration(pool, new SystemTextJsonSerializer()));
 		}
 
 		private async Task AssertOn(IConnectionConfigurationValues settings)
@@ -195,6 +196,7 @@ namespace Tests.ClientConcepts.LowLevel
 		private static async Task Post(Func<PostData> postData, byte[] writes, bool writtenBytesIsSet, IConnectionConfigurationValues settings)
 		{
 			PostAssert(postData(), writes, writtenBytesIsSet, settings);
+			await Task.CompletedTask;
 			await PostAssertAsync(postData(), writes, writtenBytesIsSet, settings);
 		}
 
@@ -204,6 +206,11 @@ namespace Tests.ClientConcepts.LowLevel
 			using (var ms = new MemoryStream())
 			{
 				postData.Write(ms, settings);
+				var s1 = Encoding.UTF8.GetString(ms.ToArray());
+				var s2 = Encoding.UTF8.GetString(writes);
+
+				s1.Should().Be(s2);
+
 				var sentBytes = ms.ToArray();
 				sentBytes.Should().Equal(writes);
 				if (storesBytes)
@@ -219,6 +226,10 @@ namespace Tests.ClientConcepts.LowLevel
 			using (var ms = new MemoryStream())
 			{
 				await postData.WriteAsync(ms, settings, default(CancellationToken));
+				var s1 = Encoding.UTF8.GetString(ms.ToArray());
+				var s2 = Encoding.UTF8.GetString(writes);
+				s1.Should().Be(s2);
+
 				var sentBytes = ms.ToArray();
 				sentBytes.Should().Equal(writes);
 				if (storesBytes)

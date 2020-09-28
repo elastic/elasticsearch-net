@@ -57,7 +57,7 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
         }
 
         public ILStreamReader(byte[] ilByteArray)
-            : base(RecyclableMemoryStreamFactory.Default.Create(ilByteArray)) =>
+            : base(ConnectionConfiguration.DefaultMemoryStreamFactory.Create(ilByteArray)) =>
 			_endPosition = ilByteArray.Length;
 
 		public OpCode ReadOpCode()
@@ -71,5 +71,5 @@ namespace Elasticsearch.Net.Utf8Json.Internal.Emit
 		}
 
         public int ReadMetadataToken() => ReadInt32();
-	}
+    }
 }
