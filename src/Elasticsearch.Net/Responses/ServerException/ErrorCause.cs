@@ -24,47 +24,47 @@ namespace Elasticsearch.Net
 		/// Additional properties related to the error cause. Contains properties that
 		/// are not explicitly mapped on <see cref="ErrorCause" />
 		/// </summary>
-		public IReadOnlyDictionary<string, object> AdditionalProperties { get; internal set; } = DefaultDictionary;
+		public IReadOnlyDictionary<string, object> AdditionalProperties { get; set; } = DefaultDictionary;
 
-		public long? BytesLimit { get; internal set; }
+		public long? BytesLimit { get; set; }
 
-		public long? BytesWanted { get; internal set; }
+		public long? BytesWanted { get; set; }
 
-		public ErrorCause CausedBy { get; internal set; }
+		public ErrorCause CausedBy { get; set; }
 
-		public int? Column { get; internal set; }
+		public int? Column { get; set; }
 
-		public IReadOnlyCollection<ShardFailure> FailedShards { get; internal set; } = DefaultFailedShards;
+		public IReadOnlyCollection<ShardFailure> FailedShards { get; set; } = DefaultFailedShards;
 
-		public bool? Grouped { get; internal set; }
+		public bool? Grouped { get; set; }
 
-		public string Index { get; internal set; }
+		public string Index { get; set; }
 
-		public string IndexUUID { get; internal set; }
+		public string IndexUUID { get; set; }
 
-		public string Language { get; internal set; }
+		public string Language { get; set; }
 
-		public string LicensedExpiredFeature { get; internal set; }
+		public string LicensedExpiredFeature { get; set; }
 
-		public int? Line { get; internal set; }
+		public int? Line { get; set; }
 
-		public string Phase { get; internal set; }
+		public string Phase { get; set; }
 
-		public string Reason { get; internal set; }
+		public string Reason { get; set; }
 
-		public IReadOnlyCollection<string> ResourceId { get; internal set; } = DefaultCollection;
+		public IReadOnlyCollection<string> ResourceId { get; set; } = DefaultCollection;
 
-		public string ResourceType { get; internal set; }
+		public string ResourceType { get; set; }
 
-		public string Script { get; internal set; }
+		public string Script { get; set; }
 
-		public IReadOnlyCollection<string> ScriptStack { get; internal set; } = DefaultCollection;
+		public IReadOnlyCollection<string> ScriptStack { get; set; } = DefaultCollection;
 
-		public int? Shard { get; internal set; }
+		public int? Shard { get; set; }
 
-		public string StackTrace { get; internal set; }
+		public string StackTrace { get; set; }
 
-		public string Type { get; internal set; }
+		public string Type { get; set; }
 
 		public override string ToString() => CausedBy == null
 			? $"Type: {Type} Reason: \"{Reason}\""

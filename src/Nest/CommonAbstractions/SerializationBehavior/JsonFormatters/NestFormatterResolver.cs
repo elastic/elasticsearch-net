@@ -41,7 +41,7 @@ namespace Nest
 			private static readonly IJsonFormatterResolver[] Resolvers =
 			{
 				// IL emit a resolver that registers formatters
-				DynamicCompositeResolver.Create(new IJsonFormatter[]
+				DynamicCompositeResolverBase.Create(new IJsonFormatter[]
 				{
 					new QueryContainerCollectionFormatter(),
 					new SimpleQueryStringFlagsFormatter(),

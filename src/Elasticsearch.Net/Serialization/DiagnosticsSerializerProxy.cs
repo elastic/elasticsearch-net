@@ -38,7 +38,7 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// Wraps configured serializer so that we can emit diagnostics per configured serializer.
 	/// </summary>
-	internal class DiagnosticsSerializerProxy : IElasticsearchSerializer
+	public class DiagnosticsSerializerProxy : IElasticsearchSerializer
 	{
 		private readonly IElasticsearchSerializer _serializer;
 		private readonly SerializerRegistrationInformation _state;

@@ -104,7 +104,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			Create(new IJsonFormatter[0], resolvers);
 
 		public static IJsonFormatterResolver Create(IJsonFormatter[] formatters, IJsonFormatterResolver[] resolvers) =>
-			DynamicCompositeResolver.Create(formatters, resolvers);
+			DynamicCompositeResolverBase.Create(formatters, resolvers);
 
 		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
 
@@ -141,18 +141,18 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
         }
     }
 
-	internal abstract class DynamicCompositeResolver : IJsonFormatterResolver
+	internal abstract class DynamicCompositeResolverBase : IJsonFormatterResolver
     {
 		private static readonly string ModuleName =  $"{ResolverConfig.Namespace}.DynamicCompositeResolver";
 
 		private static readonly DynamicAssembly Assembly;
 
-        static DynamicCompositeResolver() => Assembly = new DynamicAssembly(ModuleName);
+        static DynamicCompositeResolverBase() => Assembly = new DynamicAssembly(ModuleName);
 
 		public static IJsonFormatterResolver Create(IJsonFormatter[] formatters, IJsonFormatterResolver[] resolvers)
         {
             var id = Guid.NewGuid().ToString().Replace("-", "");
-            var resolverType = Assembly.DefineType("DynamicCompositeResolver_" + id, TypeAttributes.Class | TypeAttributes.NotPublic | TypeAttributes.Sealed, typeof(DynamicCompositeResolver));
+            var resolverType = Assembly.DefineType("DynamicCompositeResolver_" + id, TypeAttributes.Class | TypeAttributes.NotPublic | TypeAttributes.Sealed, typeof(DynamicCompositeResolverBase));
             var cacheType = Assembly.DefineType("DynamicCompositeResolverCache_" + id, TypeAttributes.Class | TypeAttributes.NotPublic | TypeAttributes.Sealed);
             var genericP = cacheType.DefineGenericParameters("T")[0];
 
@@ -166,7 +166,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
                 var cctor = cacheType.DefineConstructor(MethodAttributes.Static, CallingConventions.Standard, Type.EmptyTypes);
                 var il = cctor.GetILGenerator();
                 il.EmitLdsfld(resolverInstanceField);
-                il.EmitCall(typeof(DynamicCompositeResolver).GetMethod(nameof(GetFormatterLoop)).MakeGenericMethod(genericP));
+                il.EmitCall(typeof(DynamicCompositeResolverBase).GetMethod(nameof(GetFormatterLoop)).MakeGenericMethod(genericP));
                 il.Emit(OpCodes.Stsfld, f);
                 il.Emit(OpCodes.Ret);
             }
@@ -178,7 +178,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
                 il.EmitLdarg(0);
                 il.EmitLdarg(1);
                 il.EmitLdarg(2);
-                il.Emit(OpCodes.Call, typeof(DynamicCompositeResolver).GetConstructors()[0]);
+                il.Emit(OpCodes.Call, typeof(DynamicCompositeResolverBase).GetConstructors()[0]);
                 il.Emit(OpCodes.Ret);
             }
             {
@@ -204,7 +204,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		private readonly IJsonFormatter[] _formatters;
 		private readonly IJsonFormatterResolver[] _resolvers;
 
-        public DynamicCompositeResolver(IJsonFormatter[] formatters, IJsonFormatterResolver[] resolvers)
+        public DynamicCompositeResolverBase(IJsonFormatter[] formatters, IJsonFormatterResolver[] resolvers)
         {
             _formatters = formatters;
             _resolvers = resolvers;

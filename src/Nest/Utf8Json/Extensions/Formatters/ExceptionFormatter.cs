@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Utf8Json;
+using Nest;
 
 namespace Elasticsearch.Net
 {
