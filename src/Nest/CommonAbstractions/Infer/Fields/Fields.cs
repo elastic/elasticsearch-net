@@ -10,7 +10,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Utf8Json;
+using Nest.Utf8Json;
 
 namespace Nest
 {
@@ -26,7 +26,7 @@ namespace Nest
 
 		private string DebugDisplay =>
 			$"Count: {ListOfFields.Count} [" + string.Join(",", ListOfFields.Select((t, i) => $"({i + 1}: {t?.DebugDisplay ?? "NULL"})")) + "]";
-		
+
 		public override string ToString() => DebugDisplay;
 
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

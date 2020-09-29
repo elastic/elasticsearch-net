@@ -12,7 +12,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Utf8Json.Internal;
+using Nest.Utf8Json;
 
 namespace Nest
 {
@@ -89,9 +89,6 @@ namespace Nest
 
 			return null;
 		}
-
-		internal static string Utf8String(this ref ArraySegment<byte> segment) =>
-			StringEncoding.UTF8.GetString(segment.Array, segment.Offset, segment.Count);
 
 		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 

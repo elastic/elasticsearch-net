@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using Elasticsearch.Net.Extensions;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Xunit;
 
@@ -10,7 +10,8 @@ namespace Tests.Extensions
 	{
 		[Theory]
 		[MemberData(nameof(QueryStringTestData))]
-		public void ToQueryString_ReturnsExpectedString(NameValueCollection nvc, string expected) => nvc.ToQueryString().Should().Be(expected);
+		public void ToQueryString_ReturnsExpectedString(NameValueCollection nvc, string expected) =>
+			RequestData.ToQueryString(nvc).Should().Be(expected);
 
 		public static IEnumerable<object[]> QueryStringTestData =>
 			new List<object[]>

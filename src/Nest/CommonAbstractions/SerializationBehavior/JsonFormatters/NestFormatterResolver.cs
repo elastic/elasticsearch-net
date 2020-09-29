@@ -6,9 +6,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Reflection;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Formatters;
-using Elasticsearch.Net.Utf8Json.Resolvers;
+using Nest.Utf8Json;
 
 namespace Nest
 {
@@ -41,7 +39,7 @@ namespace Nest
 			private static readonly IJsonFormatterResolver[] Resolvers =
 			{
 				// IL emit a resolver that registers formatters
-				DynamicCompositeResolver.Create(new IJsonFormatter[]
+				DynamicCompositeResolverBase.Create(new IJsonFormatter[]
 				{
 					new QueryContainerCollectionFormatter(),
 					new SimpleQueryStringFlagsFormatter(),
@@ -52,6 +50,9 @@ namespace Nest
 					new NullableGeoOrientationFormatter(),
 					new ShapeOrientationFormatter(),
 					new NullableShapeOrientationFormatter(),
+					new DynamicDictionaryFormatter(),
+					new ErrorFormatter(),
+					new ErrorCauseFormatter(),
 				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin primitives
 				ElasticsearchNetEnumResolver.Instance, // Specialized Enum handling

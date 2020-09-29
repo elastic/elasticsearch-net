@@ -167,9 +167,11 @@ namespace Elasticsearch.Net
 			if (!nv.HasKeys()) return path;
 
 			//create string for query string collection where key and value are escaped properly.
-			var queryString = nv.ToQueryString();
+			var queryString = ToQueryString(nv);
 			path += queryString;
 			return path;
 		}
+
+		public static string ToQueryString(NameValueCollection collection) => collection.ToQueryString();
 	}
 }

@@ -15,7 +15,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Utf8Json;
 
 // ReSharper disable ArrangeMethodOrOperatorBody
 // ReSharper disable RemoveRedundantBraces
@@ -26,7 +25,6 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// A dictionary that supports dynamic access.
 	/// </summary>
-	[JsonFormatter(typeof(DynamicDictionaryFormatter))]
 	public class DynamicDictionary
 		: DynamicObject,
 			IEquatable<DynamicDictionary>,

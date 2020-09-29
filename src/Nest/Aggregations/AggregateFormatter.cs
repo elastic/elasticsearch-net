@@ -8,10 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Internal;
+using Nest.Utf8Json;
 
 namespace Nest
 {

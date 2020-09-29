@@ -4,10 +4,7 @@
 
 using System;
 using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Internal;
-
-
+using Nest.Utf8Json;
 namespace Nest
 {
 	internal class FuzzyQueryFormatter : FieldNameQueryFormatter<FuzzyQuery, IFuzzyQuery>

@@ -57,7 +57,7 @@ let private createClient endpoint namedSuite =
         | ([username; password], _) -> uri, Some (username, password)
         | (_, XPack) -> uri, Some ("elastic", "changeme")
         | _ -> uri, None
-    let serializer = SystemTextJsonSerializer([YamlMapConverterFactory()]);
+    let serializer = LowLevelRequestResponseSerializer([YamlMapConverterFactory()]);
     let pool = new SingleNodeConnectionPool(uri);
     let settings = new ConnectionConfiguration(pool, serializer)
     // proxy 

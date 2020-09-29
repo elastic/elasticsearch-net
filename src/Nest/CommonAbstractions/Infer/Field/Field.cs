@@ -8,7 +8,7 @@ using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Utf8Json;
+using Nest.Utf8Json;
 
 namespace Nest
 {
@@ -104,7 +104,7 @@ namespace Nest
 
 		public Fields And<T, TValue>(Expression<Func<T, TValue>> field, double? boost = null, string format = null) where T : class =>
 			new Fields(new[] { this, new Field(field, boost, format) });
-		
+
 		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null, string format = null) where T : class =>
 			new Fields(new[] { this, new Field(field, boost, format) });
 

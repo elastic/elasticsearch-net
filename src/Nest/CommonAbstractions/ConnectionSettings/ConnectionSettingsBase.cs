@@ -9,7 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
-
+using Nest.Utf8Json;
 #if DOTNETCORE
 using System.Runtime.InteropServices;
 #endif
@@ -109,8 +109,8 @@ namespace Nest
 			_propertyMappingProvider = propertyMappingProvider ?? serializerAsMappingProvider ?? new PropertyMappingProvider();
 
 			//We wrap these in an internal proxy to facilitate serialization diagnostics
-			_sourceSerializer = new DiagnosticsSerializerProxy(sourceSerializer, "source");
-			UseThisRequestResponseSerializer = new DiagnosticsSerializerProxy(defaultSerializer);
+			_sourceSerializer = new JsonFormatterAwareDiagnosticsSerializerProxy(sourceSerializer, "source");
+			UseThisRequestResponseSerializer = new JsonFormatterAwareDiagnosticsSerializerProxy(defaultSerializer);
 			_defaultFieldNameInferrer = p => p.ToCamelCase();
 			_defaultIndices = new FluentDictionary<Type, string>();
 			_defaultRelationNames = new FluentDictionary<Type, string>();

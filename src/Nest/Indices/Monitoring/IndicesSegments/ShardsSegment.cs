@@ -5,10 +5,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Resolvers;
-
-
+using Nest.Utf8Json;
 namespace Nest
 {
 	[DataContract]

@@ -6,7 +6,7 @@ using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Utf8Json;
+using Nest.Utf8Json;
 
 namespace Nest
 {
@@ -168,15 +168,15 @@ namespace Nest
 			switch (Interval.Value)
 			{
 				case TimeUnit.Microseconds:
-					if (!Factor.HasValue) 
+					if (!Factor.HasValue)
 						throw new InvalidOperationException("Time is in microseconds but factor has no value, this is a bug please report!");
 					return TimeSpan.FromTicks((long)(Factor.Value / MicrosecondsInATick));
 				case TimeUnit.Nanoseconds:
-					if (!Factor.HasValue) 
+					if (!Factor.HasValue)
 						throw new InvalidOperationException("Time is in nanoseconds but factor has no value, this is a bug please report!");
 					return TimeSpan.FromTicks((long)(Factor.Value / NanosecondsInATick));
 				default:
-					if (!Milliseconds.HasValue) 
+					if (!Milliseconds.HasValue)
 						throw new InvalidOperationException("Milliseconds is null so we have nothing to create a TimeSpan from, this is a bug please report!");
 					return TimeSpan.FromMilliseconds(Milliseconds.Value);
 			}
@@ -211,8 +211,8 @@ namespace Nest
 			if (!StaticTimeValue.HasValue && other.StaticTimeValue.HasValue) return false;
 			if (StaticTimeValue.HasValue && other.StaticTimeValue.HasValue)
 				return StaticTimeValue == other.StaticTimeValue;
-			
-			
+
+
 			if (Milliseconds == null && other.Milliseconds == null) return true;
 			if (Milliseconds == null || other.Milliseconds == null) return false;
 			return Math.Abs(Milliseconds.Value - other.Milliseconds.Value) < FLOAT_TOLERANCE;

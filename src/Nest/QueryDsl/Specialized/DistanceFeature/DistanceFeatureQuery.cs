@@ -3,9 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System.Runtime.Serialization;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Internal;
-
+using Nest.Utf8Json;
 namespace Nest
 {
 	/// <summary>

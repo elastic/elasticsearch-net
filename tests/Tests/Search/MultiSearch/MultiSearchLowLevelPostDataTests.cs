@@ -79,6 +79,7 @@ namespace Tests.Search.MultiSearch
 		private static void AssertResponse(DynamicResponse response)
 		{
 			response.Success.Should().BeTrue();
+
 			object o = response.Body;
 			o.Should().NotBeNull();
 
@@ -95,9 +96,6 @@ namespace Tests.Search.MultiSearch
 
 			int totalShards = b.responses[0]._shards.total;
 			totalShards.Should().BeGreaterThan(0);
-//			JArray responses = r.responses;
-//
-//			responses.Count().Should().Be(4);
 		}
 	}
 }

@@ -13,6 +13,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.CSharp.RuntimeBinder;
 using Elasticsearch.Net.Extensions;
 using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
@@ -24,7 +25,7 @@ using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
 
 namespace Elasticsearch.Net
 {
-	public class DynamicValue : DynamicObject, IEquatable<DynamicValue>, IConvertible
+	public class DynamicValue : DynamicObject, IEquatable<DynamicValue>, IConvertible, IReadOnlyCollection<DynamicValue>
 	{
 		private readonly object _value;
 
@@ -67,52 +68,8 @@ namespace Elasticsearch.Net
 		}
 
 		public static DynamicValue NullValue { get; } = new DynamicValue(null);
+
 		public static DynamicValue SelfOrNew(object v) => v is DynamicValue av ? av : new DynamicValue(v);
-
-		public DynamicValue this[int i]
-		{
-			get
-			{
-				if (!HasValue) return NullValue;
-
-				var v = Value;
-
-				if (v is IList l && l.Count - 1 >= i)
-					return SelfOrNew(l[i]);
-				if (v is IList<object> o && o.Count - 1 >= i)
-					return SelfOrNew(o[i]);
-
-				if (v is IDictionary<string, object> d)
-				{
-					if (d.TryGetValue(i.ToString(CultureInfo.InvariantCulture), out v))
-						return SelfOrNew(v);
-
-					if (i >= d.Count) return new DynamicValue(null);
-					var at = d[d.Keys.ElementAt(i)];
-					return SelfOrNew(at);
-				}
-				if (v is IDictionary<string, DynamicValue> dv)
-				{
-					if (dv.TryGetValue(i.ToString(CultureInfo.InvariantCulture), out var dvv))
-						return dvv;
-
-					if (i >= dv.Count) return new DynamicValue(null);
-					var at = dv[dv.Keys.ElementAt(i)];
-					return at;
-				}
-				if (v is JsonElement e && e.ValueKind == JsonValueKind.Array)
-				{
-					if (e.GetArrayLength() -1 >= i)
-						return SelfOrNew(e[i]);
-				}
-				if (v is JsonElement el && el.ValueKind == JsonValueKind.Object)
-				{
-					return SelfOrNew(el.GetProperty(i.ToString(CultureInfo.InvariantCulture)));
-				}
-
-				return NullValue;
-			}
-		}
 
 		/// <summary>
 		/// Gets the inner value
@@ -483,7 +440,7 @@ namespace Elasticsearch.Net
 					.Where(i => i != null)
 					.ToArray();
 				result = SelfOrNew(projected);
-				return projected.Length  > 0;
+				return projected.Length > 0;
 			}
 			if (Value is IList<object> lo)
 			{
@@ -492,7 +449,7 @@ namespace Elasticsearch.Net
 					.Where(i => i != null)
 					.ToArray();
 				result = SelfOrNew(projected);
-				return projected.Length  > 0;
+				return projected.Length > 0;
 			}
 			if (Value is JsonElement e && e.ValueKind == JsonValueKind.Object)
 			{
@@ -509,7 +466,7 @@ namespace Elasticsearch.Net
 					.Where(i => i != null)
 					.ToArray();
 				result = SelfOrNew(projected);
-				return projected.Length  > 0;
+				return projected.Length > 0;
 			}
 
 			result = NullValue;
@@ -560,6 +517,7 @@ namespace Elasticsearch.Net
 		public T TryParse<T>(T defaultValue = default)
 		{
 			if (!HasValue) return defaultValue;
+
 			try
 			{
 				return TryParse(defaultValue, typeof(T), _value, out var o) ? (T)o : defaultValue;
@@ -577,6 +535,7 @@ namespace Elasticsearch.Net
 			{
 				if (el.TryGetInt64(out var l))
 					return l;
+
 				return el.GetDouble();
 			}
 
@@ -680,7 +639,7 @@ namespace Elasticsearch.Net
 					if (converter.IsValid(stringValue))
 					{
 						newObject = converter.ConvertFromInvariantString(stringValue);
-					return true;
+						return true;
 					}
 				}
 				else if (value is DynamicValue dv)
@@ -833,6 +792,18 @@ namespace Elasticsearch.Net
 			}
 
 			var binderType = binder.Type;
+
+			if (binderType == typeof(List<DynamicValue>))
+			{
+				result = ToEnumerable().ToList();
+				return true;
+			}
+			if (binderType == typeof(List<object>))
+			{
+				result = ToEnumerable().Cast<object>().ToList();
+				return true;
+			}
+
 			if (binderType == typeof(string))
 			{
 				result = Convert.ToString(_value);
@@ -889,6 +860,7 @@ namespace Elasticsearch.Net
 		public static implicit operator bool(DynamicValue dynamicValue)
 		{
 			if (!dynamicValue.HasValue) return false;
+			if (dynamicValue._value is JsonElement e) return e.GetBoolean();
 
 			if (dynamicValue._value.GetType().IsValueType) return Convert.ToBoolean(dynamicValue._value);
 
@@ -899,13 +871,15 @@ namespace Elasticsearch.Net
 
 		public static implicit operator string(DynamicValue dynamicValue)
 		{
-			return dynamicValue.HasValue
-				? Convert.ToString(dynamicValue._value)
-				: null;
+			if (!dynamicValue.HasValue) return null;
+			if (dynamicValue._value is JsonElement e) return e.GetString();
+
+			return Convert.ToString(dynamicValue._value);
 		}
 
 		public static implicit operator int(DynamicValue dynamicValue)
 		{
+			if (dynamicValue._value is JsonElement e && e.TryGetInt32(out var v)) return v;
 			if (dynamicValue._value.GetType().IsValueType) return Convert.ToInt32(dynamicValue._value);
 
 			return int.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
@@ -913,6 +887,7 @@ namespace Elasticsearch.Net
 
 		public static implicit operator Guid(DynamicValue dynamicValue)
 		{
+			if (dynamicValue._value is JsonElement e && e.TryGetGuid(out var v)) return v;
 			if (dynamicValue._value is Guid)
 			{
 				return (Guid)dynamicValue._value;
@@ -923,12 +898,23 @@ namespace Elasticsearch.Net
 
 		public static implicit operator DateTime(DynamicValue dynamicValue)
 		{
+			if (dynamicValue._value is JsonElement e && e.TryGetDateTime(out var v)) return v;
 			if (dynamicValue._value is DateTime)
 			{
 				return (DateTime)dynamicValue._value;
 			}
 
 			return DateTime.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
+		}
+
+		public static implicit operator DateTimeOffset(DynamicValue dynamicValue)
+		{
+			if (dynamicValue._value is JsonElement e && e.TryGetDateTimeOffset(out var v)) return v;
+			if (dynamicValue._value is DateTimeOffset)
+			{
+				return (DateTimeOffset)dynamicValue._value;
+			}
+			return DateTimeOffset.Parse(dynamicValue);
 		}
 
 		public static implicit operator TimeSpan(DynamicValue dynamicValue)
@@ -943,6 +929,7 @@ namespace Elasticsearch.Net
 
 		public static implicit operator long(DynamicValue dynamicValue)
 		{
+			if (dynamicValue._value is JsonElement e && e.TryGetInt64(out var v)) return v;
 			if (dynamicValue._value.GetType().IsValueType) return Convert.ToInt64(dynamicValue._value);
 
 			return long.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
@@ -950,6 +937,7 @@ namespace Elasticsearch.Net
 
 		public static implicit operator float(DynamicValue dynamicValue)
 		{
+			if (dynamicValue._value is JsonElement e && e.TryGetSingle(out var v)) return v;
 			if (dynamicValue._value.GetType().IsValueType) return Convert.ToSingle(dynamicValue._value);
 
 			return float.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
@@ -957,6 +945,7 @@ namespace Elasticsearch.Net
 
 		public static implicit operator decimal(DynamicValue dynamicValue)
 		{
+			if (dynamicValue._value is JsonElement e && e.TryGetDecimal(out var v)) return v;
 			if (dynamicValue._value.GetType().IsValueType) return Convert.ToDecimal(dynamicValue._value);
 
 			return decimal.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
@@ -964,10 +953,98 @@ namespace Elasticsearch.Net
 
 		public static implicit operator double(DynamicValue dynamicValue)
 		{
+			if (dynamicValue._value is JsonElement e && e.TryGetDouble(out var v)) return v;
 			if (dynamicValue._value.GetType().IsValueType) return Convert.ToDouble(dynamicValue._value);
 
 			return double.Parse(dynamicValue.ToString(CultureInfo.InvariantCulture));
 		}
+
+		public IEnumerable<DynamicValue> ToEnumerable()
+		{
+			using var e = GetEnumerator();
+			while(e.MoveNext())
+				yield return e.Current;
+		}
+
+		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+		public IEnumerator<DynamicValue> GetEnumerator()
+		{
+			if (Value is ICollection c) return c.OfType<object>().Select(v => SelfOrNew(v)).GetEnumerator();
+			else if (Value is IList l) return l.OfType<object>().Select(v => SelfOrNew(v)).GetEnumerator();
+			else if (Value is IDictionary<string, object> d) return d.Select(kv=> SelfOrNew(kv.Value)).GetEnumerator();
+			else if (Value is IDictionary<string, DynamicValue> dv) return dv.Values.GetEnumerator();
+			else if (Value is JsonElement e && e.ValueKind == JsonValueKind.Array) return e.EnumerateArray().Select(a=> SelfOrNew(a)).GetEnumerator();
+			else if (Value is JsonElement el && el.ValueKind == JsonValueKind.Object)
+				return ToDictionary().Values.Select(v => SelfOrNew(v)).GetEnumerator();
+
+			return Value == null
+				? Enumerable.Empty<DynamicValue>().GetEnumerator()
+				: new List<DynamicValue>() { this }.GetEnumerator();
+		}
+
+		public int Count
+		{
+			get
+			{
+				if (Value is ICollection c) return c.Count;
+				else if (Value is IList l) return l.Count;
+				else if (Value is IDictionary<string, object> d) return d.Count;
+				else if (Value is IDictionary<string, DynamicValue> dv) return dv.Count;
+				else if (Value is JsonElement e && e.ValueKind == JsonValueKind.Array) return e.GetArrayLength();
+				else if (Value is JsonElement el && el.ValueKind == JsonValueKind.Object) return el.EnumerateObject().Count();
+
+				return Value == null ? 0 : 1;
+			}
+		}
+
+		public DynamicValue this[int i]
+		{
+			get
+			{
+				if (!HasValue) return NullValue;
+
+				var v = Value;
+
+				if (v is IList l && l.Count - 1 >= i)
+					return SelfOrNew(l[i]);
+				if (v is IList<object> o && o.Count - 1 >= i)
+					return SelfOrNew(o[i]);
+
+				if (v is IDictionary<string, object> d)
+				{
+					if (d.TryGetValue(i.ToString(CultureInfo.InvariantCulture), out v))
+						return SelfOrNew(v);
+
+					if (i >= d.Count) return new DynamicValue(null);
+					var at = d[d.Keys.ElementAt(i)];
+					return SelfOrNew(at);
+				}
+				if (v is IDictionary<string, DynamicValue> dv)
+				{
+					if (dv.TryGetValue(i.ToString(CultureInfo.InvariantCulture), out var dvv))
+						return dvv;
+
+					if (i >= dv.Count) return new DynamicValue(null);
+					var at = dv[dv.Keys.ElementAt(i)];
+					return at;
+				}
+				if (v is JsonElement e && e.ValueKind == JsonValueKind.Array)
+				{
+					if (e.GetArrayLength() -1 >= i)
+						return SelfOrNew(e[i]);
+				}
+				if (v is JsonElement el && el.ValueKind == JsonValueKind.Object)
+				{
+					return SelfOrNew(el.GetProperty(i.ToString(CultureInfo.InvariantCulture)));
+				}
+
+				return NullValue;
+			}
+		}
+
+
+
 
 	}
 }
