@@ -213,7 +213,7 @@ namespace Elasticsearch.Net
 		{
 			_connectionPool = connectionPool;
 			_connection = connection ?? new HttpConnection();
-			var serializer = requestResponseSerializer ?? new SystemTextJsonSerializer();
+			var serializer = requestResponseSerializer ?? new LowLevelRequestResponseSerializer();
 			UseThisRequestResponseSerializer = new DiagnosticsSerializerProxy(serializer);
 
 			_connectionLimit = ConnectionConfiguration.DefaultConnectionLimit;

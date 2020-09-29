@@ -64,7 +64,7 @@ namespace Tests.ClientConcepts.LowLevel
 			this.Client = new ElasticClient(new ConnectionSettings(connection).ApplyDomainSettings());
 
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			this.LowLevelClient = new ElasticLowLevelClient(new ConnectionConfiguration(pool, connection, new SystemTextJsonSerializer()));
+			this.LowLevelClient = new ElasticLowLevelClient(new ConnectionConfiguration(pool, connection, new LowLevelRequestResponseSerializer()));
 		}
 
 		private ElasticClient Client { get;  }

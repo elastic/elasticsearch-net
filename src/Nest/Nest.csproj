@@ -14,6 +14,11 @@
     <IsPackable>true</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+
+
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
@@ -27,6 +32,11 @@
     <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal" />
     <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
     <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" />
+
+
+    <!-- TODO this is necessary for code standards tests, would be nicer as roslyn analyzers instead -->
+    <InternalsVisibleTo Include="Tests" />
+    <InternalsVisibleTo Include="Tests.Domain" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Requests.*.cs">
@@ -43,5 +53,23 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ElasticClient.cs</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Utf8Json\Internal\UnsafeMemory.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UnsafeMemory.cs</LastGenOutput>
+    </None>
+    <None Update="Utf8Json\Formatters\PrimitiveFormatter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PrimitiveFormatter.cs</LastGenOutput>
+    </None>
+    <None Update="Utf8Json\Formatters\TupleFormatter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TupleFormatter.cs</LastGenOutput>
+    </None>
+    <None Update="Utf8Json\Formatters\ValueTupleFormatter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ValueTupleFormatter.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 </Project>

@@ -52,6 +52,9 @@ namespace Nest
 					new NullableGeoOrientationFormatter(),
 					new ShapeOrientationFormatter(),
 					new NullableShapeOrientationFormatter(),
+					new DynamicDictionaryFormatter(),
+					new ErrorFormatter(),
+					new ErrorCauseFormatter(),
 				}, new IJsonFormatterResolver[0]),
 				BuiltinResolver.Instance, // Builtin primitives
 				ElasticsearchNetEnumResolver.Instance, // Specialized Enum handling
