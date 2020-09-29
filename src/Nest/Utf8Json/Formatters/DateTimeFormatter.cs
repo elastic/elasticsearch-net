@@ -361,7 +361,7 @@ namespace Nest.Utf8Json
     {
 		public void Serialize(ref JsonWriter writer, DateTime value, IJsonFormatterResolver formatterResolver)
         {
-            var ticks = (long)(value.ToUniversalTime() - Elasticsearch.Net.Extensions.DateTimeUtil.UnixEpoch.DateTime).TotalSeconds;
+            var ticks = (long)(value.ToUniversalTime() - DateTimeUtil.UnixEpoch.DateTime).TotalSeconds;
             writer.WriteQuotation();
             writer.WriteInt64(ticks);
             writer.WriteQuotation();
@@ -372,7 +372,7 @@ namespace Nest.Utf8Json
             var str = reader.ReadStringSegmentUnsafe();
 			var ticks = NumberConverter.ReadUInt64(str.Array, str.Offset, out _);
 
-            return Elasticsearch.Net.Extensions.DateTimeUtil.UnixEpoch.DateTime.AddSeconds(ticks);
+            return DateTimeUtil.UnixEpoch.DateTime.AddSeconds(ticks);
         }
     }
 

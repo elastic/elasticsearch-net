@@ -4,13 +4,9 @@
 
 using System;
 using Nest.Utf8Json;
+
 namespace Nest
 {
-	internal static class DateTimeUtil
-	{
-		public static readonly DateTimeOffset UnixEpoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
-	}
-
 	/// <summary>
 	/// Signals that this date time property is used in Machine learning APIs some of which will always return the date as
 	/// epoch.

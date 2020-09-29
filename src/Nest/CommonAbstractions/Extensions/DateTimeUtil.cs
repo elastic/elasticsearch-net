@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Elasticsearch.Net.Extensions
+namespace Nest
 {
 	internal static class DateTimeUtil
 	{

@@ -6,7 +6,8 @@ using System;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using Nest.Utf8Json;
-namespace Elasticsearch.Net.Extensions
+
+namespace Nest
 {
 	internal static class ArraySegmentBytesExtensions
 	{
