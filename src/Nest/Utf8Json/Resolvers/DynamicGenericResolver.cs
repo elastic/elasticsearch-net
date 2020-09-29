@@ -29,10 +29,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Utf8Json.Formatters;
-using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Utf8Json.Resolvers
+namespace Nest.Utf8Json
 {
 	internal sealed class DynamicGenericResolver : IJsonFormatterResolver
 	{
@@ -114,7 +112,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			if (t.IsGenericType)
 			{
 				var genericType = t.GetGenericTypeDefinition();
-				var isNullable = genericType.IsNullable();
+				var isNullable = ReflectionExtensions.IsNullable(genericType);
 				var nullableElementType = isNullable ? t.GenericTypeArguments[0] : null;
 
 				if (genericType == typeof(KeyValuePair<,>))

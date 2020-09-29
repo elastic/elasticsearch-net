@@ -29,11 +29,8 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Elasticsearch.Net.Utf8Json.Formatters;
-using Elasticsearch.Net.Utf8Json.Internal;
-using Elasticsearch.Net.Utf8Json.Internal.Emit;
 
-namespace Elasticsearch.Net.Utf8Json.Resolvers
+namespace Nest.Utf8Json
 {
 	/// <summary>
 	/// ObjectResolver by dynamic code generation.
@@ -196,7 +193,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		{
 			var type = typeof(T);
 
-			if (type.IsNullable())
+			if (ReflectionExtensions.IsNullable(type))
 			{
 				type = type.GenericTypeArguments[0];
 
@@ -223,7 +220,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		{
 			var type = typeof(T);
 
-			if (type.IsNullable())
+			if (ReflectionExtensions.IsNullable(type))
 			{
 				type = type.GenericTypeArguments[0];
 
@@ -677,7 +674,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 					// if(value.X != null)
 					if (excludeNull)
 					{
-						if (item.Type.IsNullable())
+						if (ReflectionExtensions.IsNullable(item.Type))
 						{
 							var local = il.DeclareLocal(item.Type);
 

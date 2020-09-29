@@ -5,9 +5,7 @@
 using System.Globalization;
 using System.IO;
 using System.Text;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Internal;
-
+using Nest.Utf8Json;
 namespace Nest
 {
 	internal class GeoLocationFormatter : IJsonFormatter<GeoLocation>

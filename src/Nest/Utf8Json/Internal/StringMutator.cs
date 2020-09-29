@@ -22,11 +22,8 @@
 // SOFTWARE.
 #endregion
 
-using System;
-
-namespace Elasticsearch.Net.Utf8Json.Internal
-{
-    internal static class StringMutator
+namespace Nest.Utf8Json
+{internal static class StringMutator
     {
         /// <summary>
         /// MyProperty -> MyProperty

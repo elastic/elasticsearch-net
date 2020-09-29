@@ -22,7 +22,7 @@
 // SOFTWARE.
 #endregion
 
-namespace Elasticsearch.Net.Utf8Json
+namespace Nest.Utf8Json
 {
 	internal delegate void JsonSerializeAction<in T>(ref JsonWriter writer, T value, IJsonFormatterResolver resolver);
 	internal delegate T JsonDeserializeFunc<out T>(ref JsonReader reader, IJsonFormatterResolver resolver);

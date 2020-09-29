@@ -22,7 +22,7 @@
 // SOFTWARE.
 #endregion
 
-namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
+namespace Nest.Utf8Json
 {
     // https://github.com/google/double-conversion/blob/master/double-conversion/diy-fp.cc
     // https://github.com/google/double-conversion/blob/master/double-conversion/diy-fp.h

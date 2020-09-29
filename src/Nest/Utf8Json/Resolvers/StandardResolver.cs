@@ -23,9 +23,8 @@
 #endregion
 
 using System.Linq;
-using Elasticsearch.Net.Utf8Json.Formatters;
 
-namespace Elasticsearch.Net.Utf8Json.Resolvers
+namespace Nest.Utf8Json
 {
 	internal static class StandardResolver
 	{

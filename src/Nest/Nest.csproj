@@ -24,14 +24,10 @@
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="Elasticsearch.Net.CustomDynamicObjectResolver" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicCompositeResolver" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" />
+    <InternalsVisibleTo Include="Nest.Utf8Json.CustomDynamicObjectResolver" />
+    <InternalsVisibleTo Include="Nest.Utf8Json.DynamicCompositeResolver" />
+    <InternalsVisibleTo Include="Nest.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />
+    <InternalsVisibleTo Include="Nest.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
 
 
     <!-- TODO this is necessary for code standards tests, would be nicer as roslyn analyzers instead -->
@@ -46,6 +42,18 @@
     <Compile Update="Descriptors.*.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Descriptors.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Utf8Json\Formatters\PrimitiveFormatter.cs">
+      <DependentUpon>PrimitiveFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Utf8Json\Formatters\ValueTupleFormatter.cs">
+      <DependentUpon>ValueTupleFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Utf8Json\Internal\UnsafeMemory.cs">
+      <DependentUpon>UnsafeMemory.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Utf8Json\Formatters\TupleFormatter.cs">
+      <DependentUpon>TupleFormatter.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

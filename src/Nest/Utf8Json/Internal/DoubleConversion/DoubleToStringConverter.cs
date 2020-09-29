@@ -25,7 +25,7 @@
 using System;
 using System.Globalization;
 
-namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
+namespace Nest.Utf8Json
 {
 	internal struct InternalStringBuilder
     {

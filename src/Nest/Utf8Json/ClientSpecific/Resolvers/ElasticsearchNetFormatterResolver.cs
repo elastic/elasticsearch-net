@@ -4,12 +4,8 @@
 
 using System;
 using System.Collections.Concurrent;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Formatters;
-using Elasticsearch.Net.Utf8Json.Internal;
-using Elasticsearch.Net.Utf8Json.Resolvers;
 
-namespace Elasticsearch.Net
+namespace Nest.Utf8Json
 {
 	internal class ElasticsearchNetFormatterResolver : IJsonFormatterResolver
 	{

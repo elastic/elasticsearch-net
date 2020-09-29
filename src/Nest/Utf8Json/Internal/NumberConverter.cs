@@ -24,11 +24,9 @@
 
 using System;
 using System.Runtime.CompilerServices;
-using Elasticsearch.Net.Utf8Json.Internal.DoubleConversion;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
-{
-    /// <summary>
+namespace Nest.Utf8Json
+{/// <summary>
     /// zero-allocate itoa, dtoa, atoi, atod converters.
     /// </summary>
 	internal static class NumberConverter

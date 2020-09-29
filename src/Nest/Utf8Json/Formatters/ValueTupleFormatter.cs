@@ -23,9 +23,8 @@
 #endregion
 
 using System;
-using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Nest.Utf8Json
 {
     internal sealed class ValueTupleFormatter<T1> : IJsonFormatter<ValueTuple<T1>>
     {

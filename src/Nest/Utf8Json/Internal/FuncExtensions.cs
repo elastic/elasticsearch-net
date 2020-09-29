@@ -25,7 +25,7 @@
 using System;
 // ReSharper disable All
 
-namespace Elasticsearch.Net.Utf8Json.Internal
+namespace Nest.Utf8Json
 {
     // Unity compiler can't understand this.
 

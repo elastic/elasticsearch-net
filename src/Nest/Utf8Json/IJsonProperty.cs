@@ -22,7 +22,7 @@
 // SOFTWARE.
 #endregion
 
-namespace Elasticsearch.Net.Utf8Json
+namespace Nest.Utf8Json
 {
 	internal interface IJsonProperty
 	{

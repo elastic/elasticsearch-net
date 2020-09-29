@@ -23,9 +23,8 @@
 #endregion
 
 using System;
-using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Nest.Utf8Json
 {
     // reduce static constructor generate size on generics(especially IL2CPP on Unity)
     internal static class TupleFormatterHelper
@@ -173,7 +172,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
     }
 }
 
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Nest.Utf8Json
 {
 
     internal sealed class TupleFormatter<T1> : IJsonFormatter<Tuple<T1>>

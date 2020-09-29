@@ -25,11 +25,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
+namespace Nest.Utf8Json
 {
-    using uint32_t = UInt32;
-
-    [StructLayout(LayoutKind.Explicit, Pack = 1)]
+	[StructLayout(LayoutKind.Explicit, Pack = 1)]
     internal struct UnionDoubleULong
     {
         [FieldOffset(0)]

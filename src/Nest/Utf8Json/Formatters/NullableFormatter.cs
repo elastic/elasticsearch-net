@@ -25,7 +25,7 @@
 
 using System;
 
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Nest.Utf8Json
 {
 	internal sealed class NullableFormatter<T> : IJsonFormatter<T?>
         where T : struct

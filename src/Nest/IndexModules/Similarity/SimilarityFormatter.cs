@@ -5,10 +5,7 @@
 using System;
 using System.Collections.Generic;
 using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Internal;
-
-
+using Nest.Utf8Json;
 namespace Nest
 {
 	internal class SimilarityFormatter : IJsonFormatter<ISimilarity>

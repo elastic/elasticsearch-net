@@ -4,11 +4,7 @@
 
 using System;
 using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Internal;
-using Elasticsearch.Net.Utf8Json.Resolvers;
-
-
+using Nest.Utf8Json;
 namespace Nest
 {
 	internal class TokenizerFormatter : IJsonFormatter<ITokenizer>

@@ -24,7 +24,7 @@
 
 using System;
 
-namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
+namespace Nest.Utf8Json
 {
 	internal struct Vector
     {

@@ -24,9 +24,9 @@
 
 using System;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
+namespace Nest.Utf8Json
 {
-    internal class ArrayPool<T>
+	internal class ArrayPool<T>
     {
         private readonly int _bufferLength;
         private readonly object _gate;

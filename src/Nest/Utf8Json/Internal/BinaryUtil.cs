@@ -25,9 +25,8 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
-{
-	internal static class BinaryUtil
+namespace Nest.Utf8Json
+{internal static class BinaryUtil
     {
 		private const int ArrayMaxSize = 0x7FFFFFC7; // https://msdn.microsoft.com/en-us/library/system.array
 

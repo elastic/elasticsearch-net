@@ -24,9 +24,8 @@
 
 using System;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
-{
-	internal struct ArrayBuffer<T>
+namespace Nest.Utf8Json
+{internal struct ArrayBuffer<T>
     {
         public T[] Buffer;
         public int Size;

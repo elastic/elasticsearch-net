@@ -24,7 +24,7 @@
 
 using System.Runtime.CompilerServices;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
+namespace Nest.Utf8Json
 {
     internal static partial class UnsafeMemory32
     {

@@ -23,11 +23,8 @@
 #endregion
 
 using System;
-using System.Reflection;
-using Elasticsearch.Net.Utf8Json.Formatters;
-using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Utf8Json.Resolvers
+namespace Nest.Utf8Json
 {
 	internal static class EnumResolver
 	{
@@ -55,7 +52,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			{
 				var type = typeof(T);
 
-				if (type.IsNullable())
+				if (ReflectionExtensions.IsNullable(type))
 				{
 					// build underlying type and use wrapped formatter.
 					type = type.GenericTypeArguments[0];
@@ -94,7 +91,7 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			{
 				var type = typeof(T);
 
-				if (type.IsNullable())
+				if (ReflectionExtensions.IsNullable(type))
 				{
 					// build underlying type and use wrapped formatter.
 					type = type.GenericTypeArguments[0];

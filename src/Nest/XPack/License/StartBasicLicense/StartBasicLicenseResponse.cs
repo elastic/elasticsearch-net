@@ -5,9 +5,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Formatters;
-
+using Nest.Utf8Json;
 namespace Nest
 {
 	public class StartBasicLicenseResponse : AcknowledgedResponseBase

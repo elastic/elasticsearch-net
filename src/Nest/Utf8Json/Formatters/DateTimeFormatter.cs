@@ -24,10 +24,8 @@
 
 using System;
 using System.Globalization;
-using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Nest.Utf8Json
 {
 	internal sealed class DateTimeFormatter : IJsonFormatter<DateTime>
     {
@@ -363,7 +361,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
     {
 		public void Serialize(ref JsonWriter writer, DateTime value, IJsonFormatterResolver formatterResolver)
         {
-            var ticks = (long)(value.ToUniversalTime() - DateTimeUtil.UnixEpoch.DateTime).TotalSeconds;
+            var ticks = (long)(value.ToUniversalTime() - Elasticsearch.Net.Extensions.DateTimeUtil.UnixEpoch.DateTime).TotalSeconds;
             writer.WriteQuotation();
             writer.WriteInt64(ticks);
             writer.WriteQuotation();
@@ -374,7 +372,7 @@ namespace Elasticsearch.Net.Utf8Json.Formatters
             var str = reader.ReadStringSegmentUnsafe();
 			var ticks = NumberConverter.ReadUInt64(str.Array, str.Offset, out _);
 
-            return DateTimeUtil.UnixEpoch.DateTime.AddSeconds(ticks);
+            return Elasticsearch.Net.Extensions.DateTimeUtil.UnixEpoch.DateTime.AddSeconds(ticks);
         }
     }
 

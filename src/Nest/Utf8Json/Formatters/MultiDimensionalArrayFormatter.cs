@@ -22,9 +22,7 @@
 // SOFTWARE.
 #endregion
 
-using Elasticsearch.Net.Utf8Json.Internal;
-
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Nest.Utf8Json
 {
     // multi dimensional array serialize to [[seq], [seq]]
 

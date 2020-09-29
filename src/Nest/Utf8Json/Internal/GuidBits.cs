@@ -26,9 +26,8 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
-{
-    [StructLayout(LayoutKind.Explicit, Pack = 1)]
+namespace Nest.Utf8Json
+{[StructLayout(LayoutKind.Explicit, Pack = 1)]
     internal struct GuidBits
     {
         [FieldOffset(0)]

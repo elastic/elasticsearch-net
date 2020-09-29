@@ -1,4 +1,4 @@
-#region Utf8Json License https://github.com/neuecc/Utf8Json/blob/master/LICENSE
+﻿#region Utf8Json License https://github.com/neuecc/Utf8Json/blob/master/LICENSE
 // MIT License
 // 
 // Copyright (c) 2017 Yoshifumi Kawai
@@ -23,9 +23,8 @@
 #endregion
 
 using System;
-using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Nest.Utf8Json
 {
     internal sealed class SByteFormatter : IJsonFormatter<sbyte>, IObjectPropertyNameFormatter<sbyte>
     {

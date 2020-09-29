@@ -4,10 +4,9 @@
 
 using System.Collections.Generic;
 using System.Globalization;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Formatters;
+using Elasticsearch.Net;
 
-namespace Elasticsearch.Net
+namespace Nest.Utf8Json
 {
 	internal class DynamicDictionaryFormatter : IJsonFormatter<DynamicDictionary>
 	{

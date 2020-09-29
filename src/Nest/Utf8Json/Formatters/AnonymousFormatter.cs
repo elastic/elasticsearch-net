@@ -24,7 +24,7 @@
 
 using System;
 
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Nest.Utf8Json
 {
     internal sealed class AnonymousFormatter<T> : IJsonFormatter<T>
     {

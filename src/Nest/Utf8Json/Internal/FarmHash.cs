@@ -24,9 +24,8 @@
 
 using System.Runtime.CompilerServices;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
-{
-    internal static class FarmHash
+namespace Nest.Utf8Json
+{internal static class FarmHash
     {
         // entry point of 32bit
 

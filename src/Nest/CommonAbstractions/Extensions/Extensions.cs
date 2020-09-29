@@ -12,7 +12,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Utf8Json.Internal;
+using Nest.Utf8Json;
 
 namespace Nest
 {

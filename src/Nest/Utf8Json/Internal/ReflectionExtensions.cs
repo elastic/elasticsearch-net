@@ -28,9 +28,8 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
-{
-    internal static class ReflectionExtensions
+namespace Nest.Utf8Json
+{internal static class ReflectionExtensions
     {
 		private static readonly ThreadsafeTypeKeyHashTable<MethodInfo> ShouldSerializeMethodInfo =
 			new ThreadsafeTypeKeyHashTable<MethodInfo>();

@@ -5,7 +5,7 @@
 using System;
 using System.Globalization;
 using System.Runtime.Serialization;
-using Elasticsearch.Net.Utf8Json;
+using Nest.Utf8Json;
 
 /*
  * Taken from SolrNet https://github.com/mausch/SolrNet/blob/master/SolrNet/Location.cs

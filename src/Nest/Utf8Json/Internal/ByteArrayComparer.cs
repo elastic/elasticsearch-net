@@ -25,9 +25,8 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
-{
-	internal static class ByteArrayComparer
+namespace Nest.Utf8Json
+{internal static class ByteArrayComparer
     {
         private static readonly bool Is32Bit = IntPtr.Size == 4;
 

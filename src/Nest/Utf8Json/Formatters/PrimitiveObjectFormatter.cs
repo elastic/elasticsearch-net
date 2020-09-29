@@ -26,9 +26,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Utf8Json.Internal;
 
-namespace Elasticsearch.Net.Utf8Json.Formatters
+namespace Nest.Utf8Json
 {
 	internal sealed class PrimitiveObjectFormatter : IJsonFormatter<object>
     {

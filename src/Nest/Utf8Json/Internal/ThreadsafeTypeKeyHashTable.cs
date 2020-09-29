@@ -25,9 +25,9 @@
 using System;
 using System.Threading;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
+namespace Nest.Utf8Json
 {
-    // Safe for multiple-read, single-write.
+	// Safe for multiple-read, single-write.
     internal class ThreadsafeTypeKeyHashTable<TValue>
     {
 		private Entry[] _buckets;

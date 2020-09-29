@@ -5,10 +5,8 @@
 using System;
 using System.IO;
 using System.Text;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Internal;
 using Nest;
-
+using Nest.Utf8Json;
 namespace Nest
 {
 	internal enum ShapeFormat

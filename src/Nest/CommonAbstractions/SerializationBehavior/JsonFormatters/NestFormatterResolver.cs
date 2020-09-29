@@ -6,9 +6,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Reflection;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Formatters;
-using Elasticsearch.Net.Utf8Json.Resolvers;
+using Nest.Utf8Json;
 
 namespace Nest
 {

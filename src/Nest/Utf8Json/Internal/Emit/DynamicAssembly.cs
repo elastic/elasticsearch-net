@@ -26,7 +26,7 @@ using System;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace Elasticsearch.Net.Utf8Json.Internal.Emit
+namespace Nest.Utf8Json
 {
 	internal class DynamicAssembly
 	{

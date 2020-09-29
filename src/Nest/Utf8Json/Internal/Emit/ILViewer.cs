@@ -22,14 +22,12 @@
 // SOFTWARE.
 #endregion
 
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text.RegularExpressions;
+using Elasticsearch.Net;
 
-namespace Elasticsearch.Net.Utf8Json.Internal.Emit
+namespace Nest.Utf8Json
 {
     internal class ILStreamReader : BinaryReader
     {

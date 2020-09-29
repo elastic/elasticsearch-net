@@ -28,9 +28,8 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
-{
-    // like ArraySegment<byte> hashtable.
+namespace Nest.Utf8Json
+{// like ArraySegment<byte> hashtable.
     // Add is safe for construction phase only and requires capacity(does not do rehash)
 
     internal class ByteArrayStringHashTable<T> : IEnumerable<KeyValuePair<string, T>>

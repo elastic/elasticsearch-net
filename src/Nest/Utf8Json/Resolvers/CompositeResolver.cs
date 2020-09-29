@@ -26,9 +26,8 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using Elasticsearch.Net.Utf8Json.Internal.Emit;
 
-namespace Elasticsearch.Net.Utf8Json.Resolvers
+namespace Nest.Utf8Json
 {
 	internal static class ResolverConfig
 	{

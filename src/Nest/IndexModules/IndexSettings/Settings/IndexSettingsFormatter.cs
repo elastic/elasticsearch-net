@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Elasticsearch.Net.Utf8Json;
+using Nest.Utf8Json;
 using static Nest.FixedIndexSettings;
 using static Nest.IndexSortSettings;
 using static Nest.UpdatableIndexSettings;

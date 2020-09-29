@@ -7,11 +7,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.Serialization;
-using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Utf8Json;
-using Nest;
 
-namespace Elasticsearch.Net
+namespace Nest.Utf8Json
 {
 	internal class ExceptionFormatterResolver : IJsonFormatterResolver
 	{

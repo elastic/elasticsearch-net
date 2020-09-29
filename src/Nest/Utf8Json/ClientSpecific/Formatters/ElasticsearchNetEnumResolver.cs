@@ -4,11 +4,9 @@
 
 using System;
 using System.Reflection;
-using Elasticsearch.Net.Utf8Json;
-using Elasticsearch.Net.Utf8Json.Formatters;
-using Elasticsearch.Net.Utf8Json.Internal;
+using Elasticsearch.Net;
 
-namespace Elasticsearch.Net
+namespace Nest.Utf8Json
 {
 	internal sealed class ElasticsearchNetEnumResolver : IJsonFormatterResolver
 	{
@@ -26,7 +24,7 @@ namespace Elasticsearch.Net
 			{
 				var type = typeof(T);
 
-				if (type.IsNullable())
+				if (ReflectionExtensions.IsNullable(type))
 				{
 					// build underlying type and use wrapped formatter.
 					type = type.GenericTypeArguments[0];

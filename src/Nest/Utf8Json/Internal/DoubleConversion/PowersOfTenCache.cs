@@ -24,12 +24,9 @@
 
 using System;
 
-namespace Elasticsearch.Net.Utf8Json.Internal.DoubleConversion
+namespace Nest.Utf8Json
 {
-    using uint64_t = UInt64;
-    using int16_t = Int16;
-
-    // https://github.com/google/double-conversion/blob/master/double-conversion/cached-powers.h
+	// https://github.com/google/double-conversion/blob/master/double-conversion/cached-powers.h
     // https://github.com/google/double-conversion/blob/master/double-conversion/cached-powers.cc
 
     internal readonly struct CachedPower

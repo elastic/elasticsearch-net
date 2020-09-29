@@ -25,7 +25,7 @@
 using System;
 using System.Reflection;
 
-namespace Elasticsearch.Net.Utf8Json
+namespace Nest.Utf8Json
 {
 	internal interface IJsonFormatterResolver
     {

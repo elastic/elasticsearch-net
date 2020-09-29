@@ -2,11 +2,11 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net;
 
-namespace Elasticsearch.Net
+namespace Nest.Utf8Json
 {
-	public static class Utf8JsonSerializerExtensions
+	internal static class Utf8JsonSerializerExtensions
 	{
 		internal static void SerializeUsingWriter<T>(this IElasticsearchSerializer serializer, ref JsonWriter writer, T body, IConnectionConfigurationValues settings, SerializationFormatting formatting)
 		{

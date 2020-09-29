@@ -29,11 +29,10 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
-using Elasticsearch.Net.Utf8Json.Internal.Emit;
 
-namespace Elasticsearch.Net.Utf8Json.Internal
+namespace Nest.Utf8Json
 {
-    // Key = long, Value = int for UTF8String Dictionary
+	// Key = long, Value = int for UTF8String Dictionary
 
 	internal class AutomataDictionary : IEnumerable<KeyValuePair<string, int>>
     {
