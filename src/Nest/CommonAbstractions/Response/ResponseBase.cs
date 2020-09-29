@@ -5,7 +5,8 @@
  using System;
 using System.Runtime.Serialization;
 using System.Text;
-using Elasticsearch.Net;
+ using System.Text.Json.Serialization;
+ using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -117,6 +118,7 @@ namespace Nest
 		}
 
 		[DataMember(Name = "error")]
+		[JsonPropertyName("error")]
 		internal Error Error
 		{
 			get => _error;
@@ -128,6 +130,7 @@ namespace Nest
 		}
 
 		[DataMember(Name = "status")]
+		[JsonPropertyName("status")]
 		internal int? StatusCode
 		{
 			get => _statusCode;

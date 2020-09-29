@@ -22,6 +22,8 @@ namespace Elasticsearch.Net
 		private IList<JsonConverter> BakedInConverters { get; } = new List<JsonConverter>
 		{
 			{ new ExceptionConverter() },
+			{ new ErrorCauseConverter() },
+			{ new ErrorConverter() },
 			{ new DynamicDictionaryConverter() }
 		};
 

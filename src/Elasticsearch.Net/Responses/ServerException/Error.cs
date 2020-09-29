@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Elasticsearch.Net
 {
@@ -15,9 +16,11 @@ namespace Elasticsearch.Net
 			new ReadOnlyDictionary<string, string>(new Dictionary<string, string>(0));
 
 		[DataMember(Name = "headers")]
+		[JsonPropertyName("headers")]
 		public IReadOnlyDictionary<string, string> Headers { get; set; } = DefaultHeaders;
 
 		[DataMember(Name = "root_cause")]
+		[JsonPropertyName("root_cause")]
 		public IReadOnlyCollection<ErrorCause> RootCause { get; set; }
 
 		public override string ToString() => CausedBy == null

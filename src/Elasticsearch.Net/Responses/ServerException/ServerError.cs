@@ -5,7 +5,8 @@
  using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
-using System.Threading;
+ using System.Text.Json.Serialization;
+ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
@@ -22,10 +23,12 @@ namespace Elasticsearch.Net
 		}
 
 		[DataMember(Name = "error")]
-		public Error Error { get; internal set; }
+		[JsonPropertyName("error")]
+		public Error Error { get; set; }
 
 		[DataMember(Name = "status")]
-		public int Status { get; internal set; } = -1;
+		[JsonPropertyName("status")]
+		public int Status { get; set; } = -1;
 
 		public static bool TryCreate(Stream stream, out ServerError serverError)
 		{
@@ -36,8 +39,9 @@ namespace Elasticsearch.Net
 			}
 			catch
 			{
-				serverError = null;
-				return false;
+				throw;
+				// serverError = null;
+				// return false;
 			}
 		}
 

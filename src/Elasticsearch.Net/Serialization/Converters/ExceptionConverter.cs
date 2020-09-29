@@ -65,7 +65,7 @@ namespace Elasticsearch.Net
 			return o;
 		}
 
-		private static void WriteStructuredExceptionMethod(Dictionary<string,object> o, string exceptionMethodString)
+		private static void WriteStructuredExceptionMethod(Dictionary<string, object> o, string exceptionMethodString)
 		{
 			if (string.IsNullOrWhiteSpace(exceptionMethodString)) return;
 
