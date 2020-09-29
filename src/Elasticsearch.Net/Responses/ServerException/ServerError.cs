@@ -2,11 +2,11 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
- using System.IO;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
- using System.Text.Json.Serialization;
- using System.Threading;
+using System.Text.Json.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
@@ -14,7 +14,7 @@ namespace Elasticsearch.Net
 	[DataContract]
 	public class ServerError
 	{
-		internal ServerError() {}
+		internal ServerError() { }
 
 		public ServerError(Error error, int? statusCode)
 		{
@@ -39,9 +39,8 @@ namespace Elasticsearch.Net
 			}
 			catch
 			{
-				throw;
-				// serverError = null;
-				// return false;
+				serverError = null;
+				return false;
 			}
 		}
 
