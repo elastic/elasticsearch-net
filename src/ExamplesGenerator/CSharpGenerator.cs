@@ -80,7 +80,7 @@ namespace ExamplesGenerator
 				.Members.OfType<ClassDeclarationSyntax>()
 				.Single();
 
-			var methodDeclarations = classDeclaration.Members.OfType<MethodDeclarationSyntax>();
+			var methodDeclarations = classDeclaration.Members.OfType<MethodDeclarationSyntax>().ToList();
 
 			// clear members from the class, to add only those that exist in the docs
 			var newClassDeclaration = classDeclaration.WithMembers(default);
