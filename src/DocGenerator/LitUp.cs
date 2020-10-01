@@ -75,10 +75,6 @@ namespace DocGenerator
 				seenFailures = true;
 			};
 
-			// Buildalyzer, similar to MsBuildWorkspace with the new csproj file format, does
-			// not pick up source documents in the project directory. Manually add them
-			// AddDocumentsToWorkspace(workspace);
-
 			var projects = workspace.CurrentSolution.Projects
 				.ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
 
@@ -173,31 +169,6 @@ namespace DocGenerator
 					Thread.Sleep(100);
 					x++;
 				}
-			}
-		}
-
-		private static void AddDocumentsToWorkspace(AdhocWorkspace workspace)
-		{
-			// we only need source for the Tests project.
-			var projects = workspace.CurrentSolution.Projects.Where(p => p.Name == "Tests").ToList();
-
-			for (var i = 0; i < projects.Count; i++)
-			{
-				var project = projects[i];
-				var files = (from f in Directory.GetFiles(Path.GetDirectoryName(project.FilePath), "*.cs", SearchOption.AllDirectories)
-					let dir = new DirectoryInfo(f)
-					where dir?.Parent != null && !SkipFolders.Contains(dir.Parent.Name)
-					select new FileInfo(f)).ToList();
-
-				for (var index = 0; index < files.Count; index++)
-				{
-					var file = files[index];
-					var document = project.AddDocument(file.Name, File.ReadAllText(file.FullName), filePath: file.FullName);
-					project = document.Project;
-				}
-
-				if (!workspace.TryApplyChanges(project.Solution))
-					Console.WriteLine($"failed to apply changes to workspace from project {project.Name}");
 			}
 		}
 	}
