@@ -96,7 +96,7 @@ namespace Elasticsearch.Net
 						{
 							Request = requestData,
 							Response = response?.ApiCall,
-							AuditTrail = pipeline?.AuditTrail
+							AuditTrail = pipeline.AuditTrail
 						};
 					}
 					if (response == null || !response.ApiCall.SuccessOrKnownError) continue;

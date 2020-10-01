@@ -149,6 +149,8 @@ namespace Elasticsearch.Net
 
 			_smallPool = new ConcurrentStack<byte[]>();
 			var numLargePools = useExponentialLargeBuffer
+				// ReSharper disable once PossibleLossOfFraction
+				// Not our code assume loss is intentional
 				? (int)Math.Log(maximumBufferSize / largeBufferMultiple, 2) + 1
 				: maximumBufferSize / largeBufferMultiple;
 

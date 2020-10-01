@@ -36,12 +36,19 @@ namespace Elasticsearch.Net.Extensions
 
 		internal static void ThrowIfEmpty<T>(this IEnumerable<T> @object, string parameterName)
 		{
-			@object.ThrowIfNull(parameterName);
-			if (!@object.Any())
+			var enumerated = @object == null ? null : (@object as T[] ?? @object.ToArray());
+			enumerated.ThrowIfNull(parameterName);
+			if (!enumerated!.Any())
 				throw new ArgumentException("Argument can not be an empty collection", parameterName);
 		}
 
 		internal static bool HasAny<T>(this IEnumerable<T> list) => list != null && list.Any();
+
+		internal static bool HasAny<T>(this IEnumerable<T> list, out T[] enumerated)
+		{
+			enumerated = list == null ? null : (list as T[] ?? list.ToArray());
+			return enumerated.HasAny();
+		}
 
 		internal static Exception AsAggregateOrFirst(this IEnumerable<Exception> exceptions)
 		{
@@ -66,7 +73,7 @@ namespace Elasticsearch.Net.Extensions
 		{
 			var ms = timeSpan.TotalMilliseconds;
 			string interval;
-			double factor = 0;
+			double factor;
 
 			if (ms >= MillisecondsInAWeek)
 			{

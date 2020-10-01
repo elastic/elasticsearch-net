@@ -289,7 +289,7 @@ namespace Elasticsearch.Net
 					// If we're being finalized because of a shutdown, don't go any further.
 					// We have no idea what's already been cleaned up. Triggering events may cause
 					// a crash.
-					base.Dispose(disposing);
+					base.Dispose(false);
 					return;
 				}
 #endif
@@ -639,12 +639,9 @@ namespace Elasticsearch.Net
             var blockSize = _memoryManager.BlockSize;
             var end = (long)_position + source.Length;
             // Check for overflow
-            if (end > MaxStreamLength)
-            {
-                throw new IOException("Maximum capacity exceeded");
-            }
+            if (end > MaxStreamLength) throw new IOException("Maximum capacity exceeded");
 
-            EnsureCapacity((int)end);
+			EnsureCapacity((int)end);
 
             if (_largeBuffer == null)
             {
@@ -666,10 +663,8 @@ namespace Elasticsearch.Net
                 }
             }
             else
-            {
-                source.CopyTo(_largeBuffer.AsSpan(_position));
-            }
-            _position = (int)end;
+				source.CopyTo(_largeBuffer.AsSpan(_position));
+			_position = (int)end;
             _length = Math.Max(_position, _length);
         }
 #endif
@@ -850,12 +845,9 @@ namespace Elasticsearch.Net
 #if NETCOREAPP2_1 || NETSTANDARD2_1
         private int InternalRead(Span<byte> buffer, int fromPosition)
         {
-            if (_length - fromPosition <= 0)
-            {
-                return 0;
-            }
+            if (_length - fromPosition <= 0) return 0;
 
-            int amountToCopy;
+			int amountToCopy;
 
             if (_largeBuffer == null)
             {

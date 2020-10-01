@@ -82,30 +82,30 @@ csharp_prefer_braces = false:warning
 csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:error
 
 # ---
-# formatting conventions https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#formatting-conventions
+# formatting conventions https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-formatting-conventions
 
 # Newline settings (Allman yo!)
-csharp_new_line_before_open_brace = all:error
-csharp_new_line_before_else = true:error
-csharp_new_line_before_catch = true:error
-csharp_new_line_before_finally = true:error
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
 csharp_new_line_before_members_in_object_initializers = true
 # just a suggestion do to our JSON tests that use anonymous types to 
 # represent json quite a bit (makes copy paste easier).
-csharp_new_line_before_members_in_anonymous_types = true:suggestion
-csharp_new_line_between_query_expression_clauses = true:error
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_between_query_expression_clauses = true
 
 # Indent
-csharp_indent_case_contents = true:error
-csharp_indent_switch_labels = true:error
-csharp_space_after_cast = false:error
-csharp_space_after_keywords_in_control_flow_statements = true:error
-csharp_space_between_method_declaration_parameter_list_parentheses = false:error
-csharp_space_between_method_call_parameter_list_parentheses = false:error
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+csharp_space_after_cast = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_call_parameter_list_parentheses = false
 
 #Wrap
-csharp_preserve_single_line_statements = false:error
-csharp_preserve_single_line_blocks = true:error
+csharp_preserve_single_line_statements = false
+csharp_preserve_single_line_blocks = true
 
 # Resharper
 resharper_csharp_braces_for_lock=required_for_complex
@@ -118,6 +118,5 @@ resharper_csharp_braces_for_ifelse=required_for_complex
 
 resharper_csharp_accessor_owner_body=expression_body
 
-
 resharper_redundant_case_label_highlighting=do_not_show
-
+resharper_redundant_argument_default_value_highlighting=do_not_show

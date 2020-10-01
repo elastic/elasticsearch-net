@@ -13,6 +13,7 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// Low level client that exposes all of Elasticsearch API endpoints but leaves you in charge of building request and handling the response
 	/// </summary>
+	// ReSharper disable once RedundantExtendsListEntry
 	public partial class ElasticLowLevelClient : IElasticLowLevelClient
 	{
 		/// <summary>Instantiate a new low level Elasticsearch client to http://localhost:9200</summary>

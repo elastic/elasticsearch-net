@@ -5,13 +5,9 @@
 #if DOTNETCORE
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
-using System.Xml;
-using Elasticsearch.Net;
 
 namespace Elasticsearch.Net
 {
@@ -129,6 +125,7 @@ namespace Elasticsearch.Net
 			if (removed)
 				Interlocked.Increment(ref _removedHandlers);
 			Debug.Assert(removed, "Entry not found. We should always be able to remove the entry");
+			// ReSharper disable once RedundantNameQualifier
 			Debug.Assert(object.ReferenceEquals(active, found.Value), "Different entry found. The entry should not have been replaced");
 
 			// At this point the handler is no longer 'active' and will not be handed out to any new clients.
@@ -205,12 +202,10 @@ namespace Elasticsearch.Net
 							// ignored (ignored in HttpClientFactory too)
 						}
 					}
+					// If the entry is still live, put it back in the queue so we can process it
+					// during the next cleanup cycle.
 					else
-					{
-						// If the entry is still live, put it back in the queue so we can process it
-						// during the next cleanup cycle.
 						_expiredHandlers.Enqueue(entry);
-					}
 				}
 			}
 			finally

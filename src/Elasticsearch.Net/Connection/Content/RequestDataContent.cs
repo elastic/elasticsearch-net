@@ -155,10 +155,7 @@ namespace Elasticsearch.Net
 
 			protected override void Dispose(bool disposing)
 			{
-				if (disposing)
-				{
-					_innerStream.Dispose();
-				}
+				if (disposing) _innerStream.Dispose();
 				base.Dispose(disposing);
 			}
 

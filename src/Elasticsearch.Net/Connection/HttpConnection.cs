@@ -4,7 +4,6 @@
 
 #if DOTNETCORE
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -63,7 +62,7 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			var client = GetClient(requestData);
-			HttpResponseMessage responseMessage = null;
+			HttpResponseMessage responseMessage;
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
 			Stream responseStream = null;
@@ -130,7 +129,7 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			var client = GetClient(requestData);
-			HttpResponseMessage responseMessage = null;
+			HttpResponseMessage responseMessage;
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
 			Stream responseStream = null;
@@ -261,7 +260,7 @@ namespace Elasticsearch.Net
 				var header = AuthenticationHeaderValue.Parse(requestData.Headers["Authorization"]);
 				requestMessage.Headers.Authorization = header;
 				return;
-			};
+			}
 
 			// Api Key authentication takes precedence
 			var apiKeySet = SetApiKeyAuthenticationIfNeeded(requestMessage, requestData);
@@ -339,9 +338,7 @@ namespace Elasticsearch.Net
 		private static void SetContent(HttpRequestMessage message, RequestData requestData)
 		{
 			if (requestData.TransferEncodingChunked)
-			{
 				message.Content = new RequestDataContent(requestData);
-			}
 			else
 			{
 				var stream = requestData.MemoryStreamFactory.Create();
@@ -373,9 +370,7 @@ namespace Elasticsearch.Net
 		private static async Task SetContentAsync(HttpRequestMessage message, RequestData requestData, CancellationToken cancellationToken)
 		{
 			if (requestData.TransferEncodingChunked)
-			{
 				message.Content = new RequestDataContent(requestData, cancellationToken);
-			}
 			else
 			{
 				var stream = requestData.MemoryStreamFactory.Create();
@@ -389,7 +384,12 @@ namespace Elasticsearch.Net
 				if (requestData.PostData.DisableDirectStreaming.GetValueOrDefault(false) && !requestData.HttpCompression)
 				{
 					message.Content = new ByteArrayContent(requestData.PostData.WrittenBytes);
-					stream.Dispose();
+#if DOTNETCORE_2_1_OR_HIGHER
+						await stream.DisposeAsync().ConfigureAwait(false);
+
+#else
+						stream.Dispose();
+#endif
 				}
 				else
 				{
