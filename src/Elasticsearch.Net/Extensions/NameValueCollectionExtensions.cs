@@ -62,7 +62,7 @@ namespace Elasticsearch.Net.Extensions
 			}
 			finally
 			{
-				if (rentedFromPool is object)
+				if (rentedFromPool != null)
 					ArrayPool<char>.Shared.Return(rentedFromPool, clearArray: false);
 			}
 		}

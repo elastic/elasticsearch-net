@@ -10,7 +10,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -28,7 +27,6 @@ namespace Elasticsearch.Net
 	public class DynamicDictionary
 		: DynamicObject,
 			IEquatable<DynamicDictionary>,
-			IEnumerable<KeyValuePair<string, DynamicValue>>,
 			IDictionary<string, DynamicValue>
 	{
 		private readonly IDictionary<string, DynamicValue> _backingDictionary = new Dictionary<string, DynamicValue>(StringComparer.OrdinalIgnoreCase);
@@ -94,7 +92,7 @@ namespace Elasticsearch.Net
 					if (queue.Count > 0) d = d[0];
 					else
 					{
-						var v = d?.ToDictionary()?.Keys?.FirstOrDefault();
+						var v = d?.ToDictionary()?.Keys.FirstOrDefault();
 						d = v != null ? new DynamicValue(v) : DynamicValue.NullValue;
 					}
 				}
@@ -126,7 +124,7 @@ namespace Elasticsearch.Net
 			{
 				name = GetNeutralKey(name);
 
-				_backingDictionary[name] = value is DynamicValue ? value : new DynamicValue(value);
+				_backingDictionary[name] = value ?? DynamicValue.NullValue;
 			}
 		}
 
@@ -402,13 +400,6 @@ namespace Elasticsearch.Net
 		/// </summary>
 		/// <returns> A hash code for this <see cref="DynamicDictionary" />, suitable for use in hashing algorithms and data structures like a hash table.</returns>
 		public override int GetHashCode() => _backingDictionary?.GetHashCode() ?? 0;
-
-		private static KeyValuePair<string, dynamic> GetDynamicKeyValuePair(KeyValuePair<string, DynamicValue> item)
-		{
-			var dynamicValueKeyValuePair =
-				new KeyValuePair<string, dynamic>(item.Key, item.Value);
-			return dynamicValueKeyValuePair;
-		}
 
 		private static string GetNeutralKey(string key)
 		{

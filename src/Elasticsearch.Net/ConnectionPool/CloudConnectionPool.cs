@@ -5,7 +5,7 @@
 using System;
 using System.Text;
 
-namespace Elasticsearch.Net 
+namespace Elasticsearch.Net
 {
 	/// <summary>
 	/// An <see cref="IConnectionPool"/> implementation that can be seeded with a cloud id
@@ -64,8 +64,9 @@ namespace Elasticsearch.Net
 			ClusterName = parsedCloudId.Name;
 
 		//TODO implement debugger display for IConnectionPool implementations and display it there and its ToString()
+		// ReSharper disable once UnusedAutoPropertyAccessor.Local
 		private string ClusterName { get; }
-		
+
 		public BasicAuthenticationCredentials BasicCredentials { get; }
 
 		public ApiKeyAuthenticationCredentials ApiKeyCredentials { get; }
@@ -101,11 +102,11 @@ namespace Elasticsearch.Net
 			var parts = decoded.Split(new[] { '$' });
 			if (parts.Length < 2)
 				throw new ArgumentException($"Parameter {nameof(cloudId)} decoded base_64_data contains less then 2 tokens, {exceptionSuffix}", nameof(cloudId));
-			
+
 			var domainName = parts[0].Trim();
 			if (string.IsNullOrWhiteSpace(domainName))
 				throw new ArgumentException($"Parameter {nameof(cloudId)} decoded base_64_data contains no domain name, {exceptionSuffix}", nameof(cloudId));
-			
+
 			var elasticsearchUuid = parts[1].Trim();
 			if (string.IsNullOrWhiteSpace(elasticsearchUuid))
 				throw new ArgumentException($"Parameter {nameof(cloudId)} decoded base_64_data contains no elasticsearch UUID, {exceptionSuffix}", nameof(cloudId));

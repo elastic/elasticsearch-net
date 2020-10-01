@@ -78,7 +78,7 @@ namespace Elasticsearch.Net
 		public void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.None)
 		{
 			using (DiagnosticSource.Diagnose(DiagnosticSources.Serializer.Serialize, _state))
-				_serializer.Serialize<T>(data, stream, formatting);
+				_serializer.Serialize(data, stream, formatting);
 		}
 
 		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.None,
@@ -86,7 +86,7 @@ namespace Elasticsearch.Net
 		)
 		{
 			using (DiagnosticSource.Diagnose(DiagnosticSources.Serializer.Serialize, _state))
-				return _serializer.SerializeAsync<T>(data, stream, formatting, cancellationToken);
+				return _serializer.SerializeAsync(data, stream, formatting, cancellationToken);
 		}
 
 	}

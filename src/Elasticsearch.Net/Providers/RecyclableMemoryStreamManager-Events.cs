@@ -36,9 +36,12 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// Stub for System.Diagnostics.Tracing.EventCounter which is not available on .NET 4.6.1
 	/// </summary>
+	// ReSharper disable once UnusedType.Global
 	internal class EventCounter
 	{
+		// ReSharper disable UnusedParameter.Local
 		public EventCounter(string blocks, RecyclableMemoryStreamManager.Events eventsWriter) { }
+		// ReSharper restore UnusedParameter.Local
 
 		public void WriteMetric(long v) { }
 	}
@@ -46,7 +49,9 @@ namespace Elasticsearch.Net
 #if !NETSTANDARD2_1
 	internal class PollingCounter : IDisposable
 	{
+		// ReSharper disable UnusedParameter.Local
 		public PollingCounter(string largeBuffers, RecyclableMemoryStreamManager.Events eventsWriter, Func<double> func) { }
+		// ReSharper restore UnusedParameter.Local
 
 		public void Dispose() {}
 	}
@@ -63,8 +68,10 @@ namespace Elasticsearch.Net
 
 			public Counters(RecyclableMemoryStreamManager instance)
 			{
+				// ReSharper disable once UnusedParameter.Local
 				PollingCounter Create(string name, Func<double> poll, string description) =>
 					new PollingCounter(name, EventsWriter, poll)
+					// ReSharper disable once RedundantEmptyObjectOrCollectionInitializer
 					{
 #if NETSTANDARD2_1
 						DisplayName = description
@@ -89,17 +96,17 @@ namespace Elasticsearch.Net
 
 			}
 
-			private long _blocks = 0;
+			private long _blocks;
 			internal void ReportBlockCreated() => Interlocked.Increment(ref _blocks);
 
 			internal void ReportBlockDiscarded() => Interlocked.Decrement(ref _blocks);
 
-			private long _largeBuffers = 0;
+			private long _largeBuffers;
 			internal void ReportLargeBufferCreated() => Interlocked.Increment(ref _largeBuffers);
 
 			internal void ReportLargeBufferDiscarded() => Interlocked.Decrement(ref _largeBuffers);
 
-			private long _memoryStreams = 0;
+			private long _memoryStreams;
 			internal void ReportStreamCreated() => Interlocked.Increment(ref _memoryStreams);
 
 			internal void ReportStreamDisposed() => Interlocked.Decrement(ref _memoryStreams);

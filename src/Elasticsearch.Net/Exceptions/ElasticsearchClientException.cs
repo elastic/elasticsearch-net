@@ -51,11 +51,9 @@ namespace Elasticsearch.Net
 							.AppendLine(" on an empty node, likely a node predicate on ConnectionSettings not matching ANY nodes");
 				}
 				else if (Response != null)
-				{
 					sb.Append(Response.HttpMethod.GetStringValue())
 						.Append(" on ")
 						.AppendLine(Response.Uri.ToString());
-				}
 				else
 					sb.AppendLine("a request");
 
@@ -68,11 +66,9 @@ namespace Elasticsearch.Net
 				}
 
 				if (InnerException != null)
-				{
 					sb.Append("# Inner Exception: ")
 						.AppendLine(InnerException.Message)
 						.AppendLine(InnerException.ToString());
-				}
 
 				sb.AppendLine("# Exception:")
 					.AppendLine(ToString());

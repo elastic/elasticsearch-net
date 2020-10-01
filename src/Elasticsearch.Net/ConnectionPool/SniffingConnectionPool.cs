@@ -51,12 +51,12 @@ namespace Elasticsearch.Net
 		/// <inheritdoc />
 		public override void Reseed(IEnumerable<Node> nodes)
 		{
-			if (!nodes.HasAny()) return;
+			if (!nodes.HasAny(out var nodesArray)) return;
 
 			try
 			{
 				_readerWriter.EnterWriteLock();
-				var sortedNodes = SortNodes(nodes)
+				var sortedNodes = SortNodes(nodesArray)
 					.DistinctBy(n => n.Uri)
 					.ToList();
 

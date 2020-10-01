@@ -64,6 +64,10 @@ namespace Elasticsearch.Net
 			}
 		}
 
+		//public static IMemoryStreamFactory Default { get; } = RecyclableMemoryStreamFactory.Default;
+		// ReSharper disable once RedundantNameQualifier
+		public static IMemoryStreamFactory DefaultMemoryStreamFactory { get; } = Elasticsearch.Net.MemoryStreamFactory.Default;
+
 		/// <summary>
 		/// The default ping timeout. Defaults to 2 seconds
 		/// </summary>
@@ -200,10 +204,8 @@ namespace Elasticsearch.Net
 		private bool _sniffOnStartup;
 		private bool _throwExceptions;
 		private bool _transferEncodingChunked;
-		private IMemoryStreamFactory _memoryStreamFactory = DefaultMemoryStreamFactory;
+		private IMemoryStreamFactory _memoryStreamFactory;
 		private bool _enableTcpStats;
-		//public static IMemoryStreamFactory Default { get; } = RecyclableMemoryStreamFactory.Default;
-		public static IMemoryStreamFactory DefaultMemoryStreamFactory { get; } = Elasticsearch.Net.MemoryStreamFactory.Default;
 		private bool _enableThreadPoolStats;
 
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
@@ -219,6 +221,7 @@ namespace Elasticsearch.Net
 			_connectionLimit = ConnectionConfiguration.DefaultConnectionLimit;
 			_requestTimeout = ConnectionConfiguration.DefaultTimeout;
 			_dnsRefreshTimeout = ConnectionConfiguration.DefaultDnsRefreshTimeout;
+			_memoryStreamFactory = ConnectionConfiguration.DefaultMemoryStreamFactory;
 			_sniffOnConnectionFault = true;
 			_sniffOnStartup = true;
 			_sniffLifeSpan = TimeSpan.FromHours(1);

@@ -10,10 +10,8 @@ using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Microsoft.CSharp.RuntimeBinder;
 using Elasticsearch.Net.Extensions;
 using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
@@ -288,7 +286,7 @@ namespace Elasticsearch.Net
 		/// <filterpriority>2</filterpriority>
 		public string ToString(IFormatProvider provider)
 		{
-			return Convert.ToString(_value, provider);
+			return Convert.ToString(_value, provider)!;
 		}
 
 		/// <summary>
@@ -371,10 +369,10 @@ namespace Elasticsearch.Net
 			else if (_value is JsonElement e && e.ValueKind == JsonValueKind.Object)
 			{
 				var d = e.EnumerateObject()
-					.Aggregate(new Dictionary<string, object>(), (dict, je) =>
+					.Aggregate(new Dictionary<string, object>(), (dictionary, je) =>
 					{
-						dict.Add(je.Name, je.Value);
-						return dict;
+						dictionary.Add(je.Name, je.Value);
+						return dictionary;
 					});
 				return DynamicDictionary.Create(d);
 			}
@@ -421,7 +419,7 @@ namespace Elasticsearch.Net
 				result = d.TryGetValue(name, out var r) ? SelfOrNew(r) : NullValue;
 				return true;
 			}
-			if (Value is IDynamicMetaObjectProvider x)
+			if (Value is IDynamicMetaObjectProvider)
 			{
 				var dm = GetDynamicMember(Value, name);
 				result = SelfOrNew(dm);

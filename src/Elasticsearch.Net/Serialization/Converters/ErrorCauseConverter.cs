@@ -16,16 +16,16 @@ namespace Elasticsearch.Net
 	{
 		protected override bool ReadMore(ref Utf8JsonReader reader, JsonSerializerOptions options, string propertyName, Error errorCause)
 		{
-			void Read<T>(ref Utf8JsonReader r, Action<Error, T> set) =>
+			void ReadAssign<T>(ref Utf8JsonReader r, Action<Error, T> set) =>
 				set(errorCause, JsonSerializer.Deserialize<T>(ref r, options));
 			switch (propertyName)
 			{
 				case "headers":
-					Read<Dictionary<string, string>>(ref reader, (e, v) => e.Headers = v);
+					ReadAssign<Dictionary<string, string>>(ref reader, (e, v) => e.Headers = v);
 					return true;
 
 				case "root_cause":
-					Read<IReadOnlyCollection<ErrorCause>>(ref reader, (e, v) => e.RootCause = v);
+					ReadAssign<IReadOnlyCollection<ErrorCause>>(ref reader, (e, v) => e.RootCause = v);
 					return true;
 				default:
 					return false;
@@ -47,7 +47,7 @@ namespace Elasticsearch.Net
 			var additionalProperties = new Dictionary<string, object>();
 			errorCause.AdditionalProperties = additionalProperties;
 
-			void Read<T>(ref Utf8JsonReader r, Action<ErrorCause, T> set) =>
+			void ReadAssign<T>(ref Utf8JsonReader r, Action<ErrorCause, T> set) =>
 				set(errorCause, JsonSerializer.Deserialize<T>(ref r, options));
 			void ReadAny(ref Utf8JsonReader r, string property, Action<ErrorCause, string, object> set) =>
 				set(errorCause, property, JsonSerializer.Deserialize<object>(ref r, options));
@@ -62,53 +62,53 @@ namespace Elasticsearch.Net
 				switch (propertyName)
 				{
 					case "bytes_limit":
-						Read<int?>(ref reader, (e, v) => e.BytesLimit = v);
+						ReadAssign<int?>(ref reader, (e, v) => e.BytesLimit = v);
 						break;
 					case "bytes_wanted":
-						Read<int?>(ref reader, (e, v) => e.BytesWanted = v);
+						ReadAssign<int?>(ref reader, (e, v) => e.BytesWanted = v);
 						break;
 					case "caused_by":
-						Read<ErrorCause>(ref reader, (e, v) => e.CausedBy = v);
+						ReadAssign<ErrorCause>(ref reader, (e, v) => e.CausedBy = v);
 						break;
 					case "col":
-						Read<int?>(ref reader, (e, v) => e.Column = v);
+						ReadAssign<int?>(ref reader, (e, v) => e.Column = v);
 						break;
 					case "failed_shards":
-						Read<IReadOnlyCollection<ShardFailure>>(ref reader, (e, v) => e.FailedShards = v);
+						ReadAssign<IReadOnlyCollection<ShardFailure>>(ref reader, (e, v) => e.FailedShards = v);
 						break;
 					case "grouped":
-						Read<bool?>(ref reader, (e, v) => e.Grouped = v);
+						ReadAssign<bool?>(ref reader, (e, v) => e.Grouped = v);
 						break;
 					case "index":
-						Read<string>(ref reader, (e, v) => e.Index = v);
+						ReadAssign<string>(ref reader, (e, v) => e.Index = v);
 						break;
 					case "index_uuid":
-						Read<string>(ref reader, (e, v) => e.IndexUUID = v);
+						ReadAssign<string>(ref reader, (e, v) => e.IndexUUID = v);
 						break;
 					case "lang":
-						Read<string>(ref reader, (e, v) => e.Language = v);
+						ReadAssign<string>(ref reader, (e, v) => e.Language = v);
 						break;
 
 					case "license.expired.feature":
-						Read<string>(ref reader, (e, v) => e.LicensedExpiredFeature = v);
+						ReadAssign<string>(ref reader, (e, v) => e.LicensedExpiredFeature = v);
 						break;
 					case "line":
-						Read<int?>(ref reader, (e, v) => e.Line = v);
+						ReadAssign<int?>(ref reader, (e, v) => e.Line = v);
 						break;
 					case "phase":
-						Read<string>(ref reader, (e, v) => e.Phase = v);
+						ReadAssign<string>(ref reader, (e, v) => e.Phase = v);
 						break;
 					case "reason":
-						Read<string>(ref reader, (e, v) => e.Reason = v);
+						ReadAssign<string>(ref reader, (e, v) => e.Reason = v);
 						break;
 					case "resource.id":
 						errorCause.ResourceId = ReadSingleOrCollection(ref reader, options);
 						break;
 					case "resource.type":
-						Read<string>(ref reader, (e, v) => e.ResourceType = v);
+						ReadAssign<string>(ref reader, (e, v) => e.ResourceType = v);
 						break;
 					case "script":
-						Read<string>(ref reader, (e, v) => e.Script = v);
+						ReadAssign<string>(ref reader, (e, v) => e.Script = v);
 						break;
 					case "script_stack":
 						errorCause.ScriptStack = ReadSingleOrCollection(ref reader, options);
@@ -117,10 +117,10 @@ namespace Elasticsearch.Net
 						errorCause.Shard = ReadIntFromString(ref reader, options);
 						break;
 					case "stack_trace":
-						Read<string>(ref reader, (e, v) => e.StackTrace = v);
+						ReadAssign<string>(ref reader, (e, v) => e.StackTrace = v);
 						break;
 					case "type":
-						Read<string>(ref reader, (e, v) => e.Type = v);
+						ReadAssign<string>(ref reader, (e, v) => e.Type = v);
 						break;
 					default:
 						if (ReadMore(ref reader, options, propertyName, errorCause)) break;
@@ -210,9 +210,7 @@ namespace Elasticsearch.Net
 			Serialize(writer, options, "type", value.Type);
 
 			foreach (var kv in value.AdditionalProperties)
-			{
 				Serialize(writer, options, kv.Key, kv.Value);
-			}
 			writer.WriteEndObject();
 		}
 	}

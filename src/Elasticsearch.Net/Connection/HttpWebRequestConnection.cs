@@ -118,7 +118,7 @@ namespace Elasticsearch.Net
 					if (data != null)
 					{
 						var apmGetRequestStreamTask =
-							Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, r => request.EndGetRequestStream(r), null);
+							Task.Factory.FromAsync(request.BeginGetRequestStream, r => request.EndGetRequestStream(r), null);
 						unregisterWaitHandle = RegisterApmTaskTimeout(apmGetRequestStreamTask, request, requestData);
 
 						using (var stream = await apmGetRequestStreamTask.ConfigureAwait(false))

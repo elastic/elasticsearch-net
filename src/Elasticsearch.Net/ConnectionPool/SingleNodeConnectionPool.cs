@@ -10,7 +10,6 @@ namespace Elasticsearch.Net
 	/// <summary> A connection pool to a single node or endpoint </summary>
 	public class SingleNodeConnectionPool : IConnectionPool
 	{
-		/// <inheritdoc />
 		public SingleNodeConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null)
 		{
 			var node = new Node(uri);
