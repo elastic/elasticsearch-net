@@ -36,8 +36,8 @@ namespace ApiGenerator
 			if (string.IsNullOrEmpty(downloadBranch))
 				downloadBranch = DownloadBranch;
 
-			var generateCode = Ask("Generate code from the specification files on disk?", true);
-			var lowLevelOnly = generateCode && Ask("Generate low level client only?", false);
+			var generateCode = Ask("Generate code from the specification files on disk?", defaultAnswer: true);
+			var lowLevelOnly = generateCode && Ask("Generate low level client only?", defaultAnswer: false);
 
 			if (redownloadCoreSpecification)
 				RestSpecDownloader.Download(downloadBranch);

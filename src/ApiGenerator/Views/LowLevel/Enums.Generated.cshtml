@@ -36,12 +36,6 @@
 		return name.EndsWith("Metric") || name.EndsWith("Feature");
 	}
 
-	private string CreateEnumKeyValue(string enumName, string value, int index)
-	{
-		var enumValue = GetEnumValue(enumName, value);
-		return string.Format("{3}{{ {0}.{1}, \"{2}\" }},", enumName, enumValue, value, index == 0 ? "\t\t\t\t" : string.Empty);
-	}
-
 	private string GetEnumValue(string enumName, string value)
 	{
 		return enumName == SizeEnum && value == string.Empty 
@@ -110,7 +104,7 @@ namespace Elasticsearch.Net
 			foreach (var option in e.Options.Where(o => o != "_all"))
 			{
 				var value = GetEnumValue(e.Name, option);
-				if (g && d.TryGetValue(option, out var obsolete)) {
+				if (g && d.TryGetValue(option, out var _)) {
 <text>#pragma warning disable 618
 			if ((enumValue & @(e.Name).@(value)) != 0) list.Add("@(option)");
 #pragma warning restore 618
