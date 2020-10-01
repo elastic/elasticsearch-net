@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 #if DOTNETCORE
-using System.Net.Http;
 using TheException = System.Net.Http.HttpRequestException;
 #else
 using TheException = System.Net.WebException;
@@ -112,7 +111,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 				var state = _calls[requestData.Uri.Port];
 				if (IsSniffRequest(requestData))
 				{
-					var sniffed = Interlocked.Increment(ref state.Sniffed);
+					_ = Interlocked.Increment(ref state.Sniffed);
 					return HandleRules<TResponse, ISniffRule>(
 						requestData,
 						nameof(VirtualCluster.Sniff),
@@ -124,7 +123,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 				}
 				if (IsPingRequest(requestData))
 				{
-					var pinged = Interlocked.Increment(ref state.Pinged);
+					_ = Interlocked.Increment(ref state.Pinged);
 					return HandleRules<TResponse, IRule>(
 						requestData,
 						nameof(VirtualCluster.Ping),
@@ -134,7 +133,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 						(r) => null //HEAD request
 					);
 				}
-				var called = Interlocked.Increment(ref state.Called);
+				_ = Interlocked.Increment(ref state.Called);
 				return HandleRules<TResponse, IClientCallRule>(
 					requestData,
 					nameof(VirtualCluster.ClientCalls),
@@ -165,21 +164,19 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			if (rules.Count == 0)
 				throw new Exception($"No {origin} defined for the current VirtualCluster, so we do not know how to respond");
 
-			var state = _calls[requestData.Uri.Port];
 			foreach (var rule in rules.Where(s => s.OnPort.HasValue))
 			{
 				var always = rule.Times.Match(t => true, t => false);
 				var times = rule.Times.Match(t => -1, t => t);
 
-				if (rule.OnPort.Value == requestData.Uri.Port)
-				{
-					if (always)
-						return Always<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, rule);
+				if (rule.OnPort == null || rule.OnPort.Value != requestData.Uri.Port) continue;
 
-					if (rule.Executed > times) continue;
+				if (always)
+					return Always<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, rule);
 
-					return Sometimes<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, state, rule, times);
-				}
+				if (rule.Executed > times) continue;
+
+				return Sometimes<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, rule);
 			}
 			foreach (var rule in rules.Where(s => !s.OnPort.HasValue))
 			{
@@ -190,7 +187,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 
 				if (rule.Executed > times) continue;
 
-				return Sometimes<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, state, rule, times);
+				return Sometimes<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, rule);
 			}
 			var count = _calls.Select(kv => kv.Value.Called).Sum();
 			throw new Exception($@"No global or port specific {origin} rule ({requestData.Uri.Port}) matches any longer after {count} calls in to the cluster");
@@ -217,8 +214,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		}
 
 		private TResponse Sometimes<TResponse, TRule>(
-			RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, State state, TRule rule,
-			int times
+			RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, TRule rule
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 			where TRule : IRule
@@ -243,7 +239,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			where TRule : IRule
 		{
 			var state = _calls[requestData.Uri.Port];
-			var failed = Interlocked.Increment(ref state.Failures);
+			_ = Interlocked.Increment(ref state.Failures);
 			var ret = returnOverride ?? rule.Return;
 			rule.RecordExecuted();
 
@@ -265,7 +261,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			where TRule : IRule
 		{
 			var state = _calls[requestData.Uri.Port];
-			var succeeded = Interlocked.Increment(ref state.Successes);
+			_ = Interlocked.Increment(ref state.Successes);
 			rule.RecordExecuted();
 
 			beforeReturn?.Invoke(rule);

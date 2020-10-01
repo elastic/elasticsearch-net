@@ -4,7 +4,6 @@
 
 using System;
 #if DOTNETCORE
-using System.Net.Http;
 using TheException = System.Net.Http.HttpRequestException;
 #else
 using TheException = System.Net.WebException;

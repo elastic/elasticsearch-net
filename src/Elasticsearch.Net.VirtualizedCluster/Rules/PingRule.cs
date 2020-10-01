@@ -6,7 +6,7 @@ using System;
 
 namespace Elasticsearch.Net.VirtualizedCluster.Rules
 {
-	public class PingRule : RuleBase<PingRule>, IRule
+	public class PingRule : RuleBase<PingRule>
 	{
 		private IRule Self => this;
 
