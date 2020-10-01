@@ -87,7 +87,7 @@ namespace ApiGenerator.Generator
 		private static void PatchOfficialSpec(JObject original, string jsonFile)
 		{
 			var directory = Path.GetDirectoryName(jsonFile);
-			var patchFile = Path.Combine(directory,"..", "_Patches", Path.GetFileNameWithoutExtension(jsonFile)) + ".patch.json";
+			var patchFile = Path.Combine(directory!,"..", "_Patches", Path.GetFileNameWithoutExtension(jsonFile)) + ".patch.json";
 			if (!File.Exists(patchFile)) return;
 
 			var patchedJson = JObject.Parse(File.ReadAllText(patchFile));
@@ -103,9 +103,7 @@ namespace ApiGenerator.Generator
 
 			var methodsOverride = patchedJson.SelectToken("*.methods");
 			if (methodsOverride != null)
-			{
 				original.SelectToken("*.methods").Replace(methodsOverride);
-			}
 
 			var paramsOverride = patchedJson.SelectToken("*.params");
 			var originalParams = original.SelectToken("*.url.params") as JObject;
@@ -179,7 +177,7 @@ namespace ApiGenerator.Generator
 
 			var newUrl = new JObject
 			{
-				["paths"] = new JArray(paths.ToArray()),
+				["paths"] = new JArray(paths.Cast<object>().ToArray()),
 			};
 
 			if (spec.ContainsKey("params"))
@@ -192,10 +190,10 @@ namespace ApiGenerator.Generator
 				newUrl["parts"] = parts;
 
 			if (deprecatedPaths.Any())
-				newUrl["deprecated_paths"] = new JArray(deprecatedPaths.ToArray());
+				newUrl["deprecated_paths"] = new JArray(deprecatedPaths.Cast<object>().ToArray());
 
 			spec["url"] = newUrl;
-			spec["methods"] = new JArray(methods.ToArray());
+			spec["methods"] = new JArray(methods.Cast<object>().ToArray());
 		}
 	}
 }

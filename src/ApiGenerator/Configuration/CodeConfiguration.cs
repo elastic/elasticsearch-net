@@ -142,12 +142,13 @@ namespace ApiGenerator.Configuration
 				if (_apiNameMapping != null) return _apiNameMapping;
 				lock (LowLevelApiNameMapping)
 				{
-					if (_apiNameMapping != null) return _apiNameMapping;
-
-					var mapping = new Dictionary<string,string>(HighLevelApiNameMapping);
-					foreach (var (k, v) in LowLevelApiNameMapping)
-						mapping[k] = v;
-					_apiNameMapping = mapping;
+					if (_apiNameMapping == null)
+					{
+						var mapping = new Dictionary<string, string>(HighLevelApiNameMapping);
+						foreach (var (k, v) in LowLevelApiNameMapping)
+							mapping[k] = v;
+						_apiNameMapping = mapping;
+					}
 					return _apiNameMapping;
 				}
 			}

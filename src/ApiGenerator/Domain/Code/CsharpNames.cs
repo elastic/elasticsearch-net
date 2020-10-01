@@ -38,7 +38,7 @@ namespace ApiGenerator.Domain.Code
 			var namespaceRenames = new Dictionary<string, (string find, string replace, string[] exceptions)>
 			{
 				{ "Watcher", (find: "Watch", replace: "", exceptions: new string[0]) },
-				{ "Indices", (find: "Index", replace: "", exceptions: new string[] { "SimulateIndexTemplate" }) },
+				{ "Indices", (find: "Index", replace: "", exceptions: new [] { "SimulateIndexTemplate" }) },
 				{ "CrossClusterReplication", (find: "Ccr", replace: "", exceptions: new string[0]) },
 				{ "IndexLifecycleManagement", (find: "Ilm", replace: "", exceptions: new string[0]) },
 				{ "SnapshotLifecycleManagement", (find: "Slm", replace: "", exceptions: new string[0]) },

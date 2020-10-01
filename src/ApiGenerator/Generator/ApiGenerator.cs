@@ -22,7 +22,7 @@ namespace ApiGenerator.Generator
 
 		public static async Task Generate(string downloadBranch, bool lowLevelOnly, RestApiSpec spec)
 		{
-			async Task Generate(IList<RazorGeneratorBase> generators, RestApiSpec restApiSpec, bool highLevel)
+			static async Task DoGenerate(ICollection<RazorGeneratorBase> generators, RestApiSpec restApiSpec, bool highLevel)
 			{
 				var pbarOpts = new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray };
 				var message = $"Generating {(highLevel ? "high" : "low")} level code";
@@ -55,17 +55,15 @@ namespace ApiGenerator.Generator
 				new RequestsGenerator(),
 			};
 
-			await Generate(lowLevelGenerators, spec, highLevel: false);
+			await DoGenerate(lowLevelGenerators, spec, highLevel: false);
 			if (!lowLevelOnly)
-				await Generate(highLevelGenerators, spec, highLevel: true);
+				await DoGenerate(highLevelGenerators, spec, highLevel: true);
 
 			// Check if there are any non-Stable endpoints present.
 			foreach (var endpoint in spec.Endpoints)
 			{
 				if (endpoint.Value.Stability != Stability.Stable)
-				{
 					Warnings.Add($"Endpoint {endpoint.Value.Name} is not marked as Stable ({endpoint.Value.Stability})");
-				}
 			}
 
 			if (Warnings.Count == 0) return;
