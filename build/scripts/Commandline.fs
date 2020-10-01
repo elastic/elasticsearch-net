@@ -112,7 +112,7 @@ Execution hints can be provided anywhere on the command line
 
     let notWindows =
         RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || 
-        RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX)
+        RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
         
     let private buildingOnAzurePipeline = Environment.environVarAsBool "TF_BUILD"
         

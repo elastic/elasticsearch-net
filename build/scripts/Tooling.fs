@@ -10,7 +10,7 @@ open ProcNet.Std
 
 module Tooling = 
 
-    type ExecResult = { ExitCode: int; Output: Std.LineOut seq;}
+    type ExecResult = { ExitCode: int; Output: LineOut seq;}
     
     let private defaultTimeout = TimeSpan.FromMinutes(5.)
     

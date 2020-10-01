@@ -6,7 +6,6 @@ namespace Scripts
 
 open System.IO
 
-open Paths
 open Tooling
 open Versioning
 open Fake.Core
@@ -19,7 +18,7 @@ open System.IO.Compression
 
 module Build =
 
-    let Restore() = DotNet.Exec ["restore"; Solution; ] |> ignore
+    let Restore() = DotNet.Exec ["restore"; Paths.Solution; ] |> ignore
         
     let Compile _ version = 
         let props = 
@@ -32,7 +31,7 @@ module Build =
             |> String.concat ";"
             |> sprintf "/property:%s"
             
-        DotNet.Exec ["build"; Solution; "-c"; "Release"; props] |> ignore
+        DotNet.Exec ["build"; Paths.Solution; "-c"; "Release"; props] |> ignore
 
     let Pack version = 
         let props = 
@@ -45,19 +44,19 @@ module Build =
             |> String.concat ";"
             |> sprintf "/p:%s"
             
-        DotNet.Exec ["pack"; Solution; "-c"; "Release"; "-o"; Paths.NugetOutput ; props] |> ignore
+        DotNet.Exec ["pack"; Paths.Solution; "-c"; "Release"; "-o"; Paths.NugetOutput ; props] |> ignore
 
     let Clean isCanary =
         printfn "Cleaning known output folders"
         Shell.cleanDir Paths.BuildOutput
         if isCanary then 
-            DotNet.Exec ["clean"; Solution; "-c"; "Release"; "-v"; "q"] |> ignore 
+            DotNet.Exec ["clean"; Paths.Solution; "-c"; "Release"; "-v"; "q"] |> ignore 
             
     let private keyFile = Paths.Keys "keypair.snk"
     let private tmp = "build/output/_packages/tmp" 
     
     let VersionedPack version =
-        let packages = Versioning.BuiltArtifacts version
+        let packages = BuiltArtifacts version
         let currentMajorVersion = version.Full.Major
         
         let newId nugetId = sprintf "%s.v%i" nugetId currentMajorVersion

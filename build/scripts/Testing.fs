@@ -41,7 +41,7 @@ module Tests =
         let runSettings =
             // force the logger section to be cleared so that azure devops can work its magic.
             // relies heavily on the original console logger
-            let prefix = if Commandline.runningOnAzureDevops then ".ci" else ""
+            let prefix = if runningOnAzureDevops then ".ci" else ""
             sprintf "tests/%s.runsettings" prefix
         
         Directory.CreateDirectory Paths.BuildOutput |> ignore

@@ -5,10 +5,7 @@
 namespace Scripts
 
 open System
-open System.Reflection
-open System.Diagnostics
 open System.IO
-open Commandline
 open Fake.Core
 open Fake.IO
 open Fake.IO.Globbing.Operators
@@ -59,14 +56,14 @@ module Versioning =
                 doc_current = doc_current
                 doc_branch = doc_branch
         }
-        File.WriteAllText("global.json", JsonConvert.SerializeObject(newGlobalJson, Newtonsoft.Json.Formatting.Indented))
+        File.WriteAllText("global.json", JsonConvert.SerializeObject(newGlobalJson, Formatting.Indented))
         printfn "Written (%s) to global.json as the current version will use this version from now on as current in the build" (version.ToString()) 
 
     let GlobalJsonVersion = parse <| globalJson().version
     
     let private getVersion (args:Commandline.PassedArguments) =
         match (args.Target, args.CommandArguments) with
-        | (_, SetVersion v) ->
+        | (_, Commandline.SetVersion v) ->
             match v.Version with
             | v when String.IsNullOrEmpty v -> None
             | v -> Some <| parse v
