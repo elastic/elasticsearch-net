@@ -7,10 +7,7 @@ namespace Scripts
 open System
 open System.IO
 
-open Build
-open Commandline
 open Bullseye
-open Octokit
 open ProcNet
 open Fake.Core
 
@@ -67,7 +64,7 @@ module Main =
         
         target "version" <| fun _ -> printfn "Artifacts Version: %O" artifactsVersion
         
-        target "restore" Restore
+        target "restore" Build.Restore
         
         target "full-build" <| fun _ -> Build.Compile parsed artifactsVersion
 
@@ -91,7 +88,7 @@ module Main =
         
         //RELEASE
         command "release" releaseChain <| fun _ ->
-            let outputPath = match parsed.CommandArguments with | SetVersion c -> c.OutputLocation | _ -> None
+            let outputPath = match parsed.CommandArguments with | Commandline.SetVersion c -> c.OutputLocation | _ -> None
             match outputPath with
             | None -> printfn "Finished Release Build %O, artifacts available at: %s" artifactsVersion Paths.BuildOutput
             | Some path ->
