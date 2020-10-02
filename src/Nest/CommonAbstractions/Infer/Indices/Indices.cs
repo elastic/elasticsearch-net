@@ -120,17 +120,10 @@ namespace Nest
 		{
 			private readonly List<IndexName> _indices = new List<IndexName>();
 
-			internal ManyIndices(IEnumerable<IndexName> indices)
-			{
-				indices.ThrowIfEmpty(nameof(indices));
-				_indices.AddRange(indices);
-			}
+			internal ManyIndices(IEnumerable<IndexName> indices) => _indices.AddRange(indices.NotEmpty(nameof(indices)));
 
-			internal ManyIndices(IEnumerable<string> indices)
-			{
-				indices.ThrowIfEmpty(nameof(indices));
-				_indices.AddRange(indices.Select(s => (IndexName)s));
-			}
+			internal ManyIndices(IEnumerable<string> indices) =>
+				_indices.AddRange(indices.NotEmpty(nameof(indices)).Select(s => (IndexName)s));
 
 			public IReadOnlyList<IndexName> Indices => _indices;
 

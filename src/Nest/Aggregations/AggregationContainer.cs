@@ -267,6 +267,7 @@ namespace Nest
 
 		/// <inheritdoc cref="ITTestAggregation"/>
 		[DataMember(Name = "t_test")]
+		// ReSharper disable once InconsistentNaming
 		ITTestAggregation TTest { get; set; }
 
 		[DataMember(Name = "value_count")]
@@ -753,6 +754,7 @@ namespace Nest
 			_SetInnerAggregation(name, selector, (a, d) => a.TopHits = d);
 
 		/// <inheritdoc cref="ITTestAggregation"/>
+		// ReSharper disable once InconsistentNaming
 		public AggregationContainerDescriptor<T> TTest(string name,
 			Func<TTestAggregationDescriptor<T>, ITTestAggregation> selector
 		) =>

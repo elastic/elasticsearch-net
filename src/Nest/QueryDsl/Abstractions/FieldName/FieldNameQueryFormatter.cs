@@ -2,7 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using Elasticsearch.Net.Extensions;
 using Nest.Utf8Json;
 namespace Nest
 {
@@ -67,9 +66,9 @@ namespace Nest
 								case JsonToken.Number:
 									var segment = reader.ReadNumberSegment();
 									if (segment.IsLong())
-										termQuery.Value = NumberConverter.ReadInt64(segment.Array, segment.Offset, out var count);
+										termQuery.Value = NumberConverter.ReadInt64(segment.Array, segment.Offset, out _);
 									else
-										termQuery.Value = NumberConverter.ReadDouble(segment.Array, segment.Offset, out var count);
+										termQuery.Value = NumberConverter.ReadDouble(segment.Array, segment.Offset, out _);
 									break;
 								case JsonToken.True:
 								case JsonToken.False:

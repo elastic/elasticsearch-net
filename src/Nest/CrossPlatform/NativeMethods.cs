@@ -26,6 +26,7 @@ namespace Nest
 			}
 
 			[StructLayout(LayoutKind.Sequential)]
+			// ReSharper disable once InconsistentNaming
 			internal struct RTL_OSVERSIONINFOEX
 			{
 				internal uint dwOSVersionInfoSize;

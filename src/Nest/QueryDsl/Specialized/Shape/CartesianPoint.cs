@@ -5,7 +5,6 @@
 using System;
 using System.IO;
 using System.Text;
-using Nest;
 using Nest.Utf8Json;
 namespace Nest
 {
@@ -59,7 +58,10 @@ namespace Nest
 		{
 			unchecked
 			{
+				// ReSharper disable NonReadonlyMemberInGetHashCode
+				// By design
 				return (X.GetHashCode() * 397) ^ Y.GetHashCode();
+				// ReSharper restore NonReadonlyMemberInGetHashCode
 			}
 		}
 
@@ -81,7 +83,7 @@ namespace Nest
 			if (values.Length > 2)
 			{
 				s = values[2].Trim();
-				if (!float.TryParse(s, out var _))
+				if (!float.TryParse(s, out _))
 					throw new InvalidOperationException($"failed to parse float for z from {s}");
 			}
 

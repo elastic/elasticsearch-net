@@ -19,12 +19,12 @@ namespace Nest
 		public static Expression<Func<T, object>> AppendSuffix<T>(this Expression<Func<T, object>> expression, string suffix)
 		{
 			var newBody = new SuffixExpressionVisitor(suffix).Visit(expression.Body);
-			return Expression.Lambda<Func<T, object>>(newBody, expression.Parameters[0]);
+			return Expression.Lambda<Func<T, object>>(newBody!, expression.Parameters[0]);
 		}
 		public static Expression<Func<T, TValue>> AppendSuffix<T, TValue>(this Expression<Func<T, TValue>> expression, string suffix)
 		{
 			var newBody = new SuffixExpressionVisitor(suffix).Visit(expression.Body);
-			return Expression.Lambda<Func<T, TValue>>(newBody, expression.Parameters[0]);
+			return Expression.Lambda<Func<T, TValue>>(newBody!, expression.Parameters[0]);
 		}
 
 		internal static object ComparisonValueFromExpression(this Expression expression, out Type type, out bool cachable)
@@ -42,7 +42,7 @@ namespace Nest
 				case MemberExpression memberExpression:
 					type = memberExpression.Member.DeclaringType;
 					break;
-				case MethodCallExpression methodCallExpression:
+				case MethodCallExpression methodCallExpression when methodCallExpression.Method?.DeclaringType is {}:
 					// special case F# method call expressions on FuncConvert
 					// that are used to convert F# quotations representing lambda expressions, to expressions.
 					// https://github.com/dotnet/fsharp/blob/7adaacf150dd79f072efe42d43168c9cd6edbced/src/fsharp/FSharp.Core/Linq.fs#L796
@@ -62,6 +62,8 @@ namespace Nest
 					else
 						throw new Exception($"Unsupported {nameof(MethodCallExpression)}: {expression}");
 					break;
+				case MethodCallExpression _:
+						throw new Exception($"Unsupported {nameof(MethodCallExpression)}: {expression}");
 				default:
 					throw new Exception(
 						$"Expected {nameof(LambdaExpression)}, {nameof(MemberExpression)} or "

@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information
 
 using System;
-using Elasticsearch.Net.Extensions;
 using Nest.Utf8Json;
 namespace Nest
 {

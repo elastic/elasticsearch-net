@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
 using Nest.Utf8Json;
 using static Nest.Infer;
 

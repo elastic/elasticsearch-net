@@ -5,8 +5,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Nest.Utf8Json;
 using static Nest.FixedIndexSettings;
 using static Nest.IndexSortSettings;
@@ -47,102 +45,102 @@ namespace Nest
 
 			IDictionary<string, object> d = value;
 
-			void Set(string knownKey, object newValue)
+			void SetSetting(string knownKey, object newValue)
 			{
 				if (newValue != null) d[knownKey] = newValue;
 			}
 
-			Set(NumberOfReplicas, value.NumberOfReplicas);
-			Set(RefreshInterval, value.RefreshInterval);
-			Set(DefaultPipeline, value.DefaultPipeline);
+			SetSetting(NumberOfReplicas, value.NumberOfReplicas);
+			SetSetting(RefreshInterval, value.RefreshInterval);
+			SetSetting(DefaultPipeline, value.DefaultPipeline);
 #pragma warning disable 618
-			Set(RequiredPipeline, value.RequiredPipeline);
+			SetSetting(RequiredPipeline, value.RequiredPipeline);
 #pragma warning restore 618
-			Set(FinalPipeline, value.FinalPipeline);
-			Set(BlocksReadOnly, value.BlocksReadOnly);
-			Set(BlocksRead, value.BlocksRead);
-			Set(BlocksWrite, value.BlocksWrite);
-			Set(BlocksMetadata, value.BlocksMetadata);
-			Set(BlocksReadOnlyAllowDelete, value.BlocksReadOnlyAllowDelete);
-			Set(Priority, value.Priority);
-			Set(UpdatableIndexSettings.AutoExpandReplicas, value.AutoExpandReplicas);
-			Set(UpdatableIndexSettings.RecoveryInitialShards, value.RecoveryInitialShards);
-			Set(RequestsCacheEnable, value.RequestsCacheEnabled);
-			Set(RoutingAllocationTotalShardsPerNode, value.RoutingAllocationTotalShardsPerNode);
-			Set(UnassignedNodeLeftDelayedTimeout, value.UnassignedNodeLeftDelayedTimeout);
+			SetSetting(FinalPipeline, value.FinalPipeline);
+			SetSetting(BlocksReadOnly, value.BlocksReadOnly);
+			SetSetting(BlocksRead, value.BlocksRead);
+			SetSetting(BlocksWrite, value.BlocksWrite);
+			SetSetting(BlocksMetadata, value.BlocksMetadata);
+			SetSetting(BlocksReadOnlyAllowDelete, value.BlocksReadOnlyAllowDelete);
+			SetSetting(Priority, value.Priority);
+			SetSetting(UpdatableIndexSettings.AutoExpandReplicas, value.AutoExpandReplicas);
+			SetSetting(UpdatableIndexSettings.RecoveryInitialShards, value.RecoveryInitialShards);
+			SetSetting(RequestsCacheEnable, value.RequestsCacheEnabled);
+			SetSetting(RoutingAllocationTotalShardsPerNode, value.RoutingAllocationTotalShardsPerNode);
+			SetSetting(UnassignedNodeLeftDelayedTimeout, value.UnassignedNodeLeftDelayedTimeout);
 
 			var translog = value.Translog;
-			Set(TranslogSyncInterval, translog?.SyncInterval);
-			Set(UpdatableIndexSettings.TranslogDurability, translog?.Durability);
+			SetSetting(TranslogSyncInterval, translog?.SyncInterval);
+			SetSetting(UpdatableIndexSettings.TranslogDurability, translog?.Durability);
 
 			var flush = value.Translog?.Flush;
-			Set(TranslogFlushThresholdSize, flush?.ThresholdSize);
-			Set(TranslogFlushThresholdPeriod, flush?.ThresholdPeriod);
+			SetSetting(TranslogFlushThresholdSize, flush?.ThresholdSize);
+			SetSetting(TranslogFlushThresholdPeriod, flush?.ThresholdPeriod);
 
-			Set(MergePolicyExpungeDeletesAllowed, value.Merge?.Policy?.ExpungeDeletesAllowed);
-			Set(MergePolicyFloorSegment, value.Merge?.Policy?.FloorSegment);
-			Set(MergePolicyMaxMergeAtOnce, value.Merge?.Policy?.MaxMergeAtOnce);
-			Set(MergePolicyMaxMergeAtOnceExplicit, value.Merge?.Policy?.MaxMergeAtOnceExplicit);
-			Set(MergePolicyMaxMergedSegment, value.Merge?.Policy?.MaxMergedSegment);
-			Set(MergePolicySegmentsPerTier, value.Merge?.Policy?.SegmentsPerTier);
-			Set(MergePolicyReclaimDeletesWeight, value.Merge?.Policy?.ReclaimDeletesWeight);
+			SetSetting(MergePolicyExpungeDeletesAllowed, value.Merge?.Policy?.ExpungeDeletesAllowed);
+			SetSetting(MergePolicyFloorSegment, value.Merge?.Policy?.FloorSegment);
+			SetSetting(MergePolicyMaxMergeAtOnce, value.Merge?.Policy?.MaxMergeAtOnce);
+			SetSetting(MergePolicyMaxMergeAtOnceExplicit, value.Merge?.Policy?.MaxMergeAtOnceExplicit);
+			SetSetting(MergePolicyMaxMergedSegment, value.Merge?.Policy?.MaxMergedSegment);
+			SetSetting(MergePolicySegmentsPerTier, value.Merge?.Policy?.SegmentsPerTier);
+			SetSetting(MergePolicyReclaimDeletesWeight, value.Merge?.Policy?.ReclaimDeletesWeight);
 
-			Set(MergeSchedulerMaxThreadCount, value.Merge?.Scheduler?.MaxThreadCount);
-			Set(MergeSchedulerAutoThrottle, value.Merge?.Scheduler?.AutoThrottle);
+			SetSetting(MergeSchedulerMaxThreadCount, value.Merge?.Scheduler?.MaxThreadCount);
+			SetSetting(MergeSchedulerAutoThrottle, value.Merge?.Scheduler?.AutoThrottle);
 
 			var log = value.SlowLog;
 			var search = log?.Search;
 			var indexing = log?.Indexing;
 
-			Set(SlowlogSearchThresholdQueryWarn, search?.Query?.ThresholdWarn);
-			Set(SlowlogSearchThresholdQueryInfo, search?.Query?.ThresholdInfo);
-			Set(SlowlogSearchThresholdQueryDebug, search?.Query?.ThresholdDebug);
-			Set(SlowlogSearchThresholdQueryTrace, search?.Query?.ThresholdTrace);
+			SetSetting(SlowlogSearchThresholdQueryWarn, search?.Query?.ThresholdWarn);
+			SetSetting(SlowlogSearchThresholdQueryInfo, search?.Query?.ThresholdInfo);
+			SetSetting(SlowlogSearchThresholdQueryDebug, search?.Query?.ThresholdDebug);
+			SetSetting(SlowlogSearchThresholdQueryTrace, search?.Query?.ThresholdTrace);
 
-			Set(SlowlogSearchThresholdFetchWarn, search?.Fetch?.ThresholdWarn);
-			Set(SlowlogSearchThresholdFetchInfo, search?.Fetch?.ThresholdInfo);
-			Set(SlowlogSearchThresholdFetchDebug, search?.Fetch?.ThresholdDebug);
-			Set(SlowlogSearchThresholdFetchTrace, search?.Fetch?.ThresholdTrace);
-			Set(SlowlogSearchLevel, search?.LogLevel);
+			SetSetting(SlowlogSearchThresholdFetchWarn, search?.Fetch?.ThresholdWarn);
+			SetSetting(SlowlogSearchThresholdFetchInfo, search?.Fetch?.ThresholdInfo);
+			SetSetting(SlowlogSearchThresholdFetchDebug, search?.Fetch?.ThresholdDebug);
+			SetSetting(SlowlogSearchThresholdFetchTrace, search?.Fetch?.ThresholdTrace);
+			SetSetting(SlowlogSearchLevel, search?.LogLevel);
 
-			Set(SlowlogIndexingThresholdFetchWarn, indexing?.ThresholdWarn);
-			Set(SlowlogIndexingThresholdFetchInfo, indexing?.ThresholdInfo);
-			Set(SlowlogIndexingThresholdFetchDebug, indexing?.ThresholdDebug);
-			Set(SlowlogIndexingThresholdFetchTrace, indexing?.ThresholdTrace);
-			Set(SlowlogIndexingLevel, indexing?.LogLevel);
-			Set(SlowlogIndexingSource, indexing?.Source);
+			SetSetting(SlowlogIndexingThresholdFetchWarn, indexing?.ThresholdWarn);
+			SetSetting(SlowlogIndexingThresholdFetchInfo, indexing?.ThresholdInfo);
+			SetSetting(SlowlogIndexingThresholdFetchDebug, indexing?.ThresholdDebug);
+			SetSetting(SlowlogIndexingThresholdFetchTrace, indexing?.ThresholdTrace);
+			SetSetting(SlowlogIndexingLevel, indexing?.LogLevel);
+			SetSetting(SlowlogIndexingSource, indexing?.Source);
 
-			Set(UpdatableIndexSettings.Analysis, value.Analysis);
-			Set(Similarity, value.Similarity);
+			SetSetting(UpdatableIndexSettings.Analysis, value.Analysis);
+			SetSetting(Similarity, value.Similarity);
 
 			if (value is IIndexSettings indexSettings)
 			{
-				Set(StoreType, indexSettings.FileSystemStorageImplementation);
-				Set(QueriesCacheEnabled, indexSettings.Queries?.Cache?.Enabled);
-				Set(NumberOfShards, indexSettings.NumberOfShards);
-				Set(NumberOfRoutingShards, indexSettings.NumberOfRoutingShards);
-				Set(RoutingPartitionSize, indexSettings.RoutingPartitionSize);
+				SetSetting(StoreType, indexSettings.FileSystemStorageImplementation);
+				SetSetting(QueriesCacheEnabled, indexSettings.Queries?.Cache?.Enabled);
+				SetSetting(NumberOfShards, indexSettings.NumberOfShards);
+				SetSetting(NumberOfRoutingShards, indexSettings.NumberOfRoutingShards);
+				SetSetting(RoutingPartitionSize, indexSettings.RoutingPartitionSize);
 
-				Set(StoreType, indexSettings.FileSystemStorageImplementation);
-				Set(QueriesCacheEnabled, indexSettings.Queries?.Cache?.Enabled);
-				Set(NumberOfShards, indexSettings.NumberOfShards);
-				Set(NumberOfRoutingShards, indexSettings.NumberOfRoutingShards);
-				Set(RoutingPartitionSize, indexSettings.RoutingPartitionSize);
-				Set(Hidden, indexSettings.Hidden);
+				SetSetting(StoreType, indexSettings.FileSystemStorageImplementation);
+				SetSetting(QueriesCacheEnabled, indexSettings.Queries?.Cache?.Enabled);
+				SetSetting(NumberOfShards, indexSettings.NumberOfShards);
+				SetSetting(NumberOfRoutingShards, indexSettings.NumberOfRoutingShards);
+				SetSetting(RoutingPartitionSize, indexSettings.RoutingPartitionSize);
+				SetSetting(Hidden, indexSettings.Hidden);
 				if (indexSettings.SoftDeletes != null)
 				{
 #pragma warning disable 618
-					Set(SoftDeletesEnabled, indexSettings.SoftDeletes.Enabled);
+					SetSetting(SoftDeletesEnabled, indexSettings.SoftDeletes.Enabled);
 #pragma warning restore 618
-					Set(SoftDeletesRetentionOperations, indexSettings.SoftDeletes.Retention?.Operations);
+					SetSetting(SoftDeletesRetentionOperations, indexSettings.SoftDeletes.Retention?.Operations);
 				}
 
 				if (indexSettings?.Sorting != null)
 				{
-					Set(IndexSortSettings.Fields, AsArrayOrSingleItem(indexSettings.Sorting.Fields));
-					Set(Order, AsArrayOrSingleItem(indexSettings.Sorting.Order));
-					Set(Mode, AsArrayOrSingleItem(indexSettings.Sorting.Mode));
-					Set(IndexSortSettings.Missing, AsArrayOrSingleItem(indexSettings.Sorting.Missing));
+					SetSetting(IndexSortSettings.Fields, AsArrayOrSingleItem(indexSettings.Sorting.Fields));
+					SetSetting(Order, AsArrayOrSingleItem(indexSettings.Sorting.Order));
+					SetSetting(Mode, AsArrayOrSingleItem(indexSettings.Sorting.Mode));
+					SetSetting(IndexSortSettings.Missing, AsArrayOrSingleItem(indexSettings.Sorting.Missing));
 				}
 			}
 
@@ -151,13 +149,10 @@ namespace Nest
 
 		private static object AsArrayOrSingleItem<T>(IEnumerable<T> items)
 		{
-			if (items == null || !items.Any())
+			if (!items.HasAny(out var i))
 				return null;
 
-			if (items.Count() == 1)
-				return items.First();
-
-			return items;
+			return i.Length == 1 ? (object)i[0] : items;
 		}
 
 		private static Dictionary<string, object> Flatten(Dictionary<string, object> original, string prefix = "",

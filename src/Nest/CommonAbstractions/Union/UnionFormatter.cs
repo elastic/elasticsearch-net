@@ -26,9 +26,7 @@ namespace Nest
 						return second;
 				}
 				else
-				{
 					return first;
-				}
 			}
 			else if (TryRead(ref segment, formatterResolver, out TSecond second))
 				return second;

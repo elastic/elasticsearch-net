@@ -29,11 +29,9 @@ namespace Nest
 
 		public ShapeOrientation Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
+			// Default
 			if (reader.ReadIsNull())
-			{
-				// Default
 				return ShapeOrientation.CounterClockWise;
-			}
 
 			var enumString = reader.ReadString();
 			switch (enumString.ToUpperInvariant())
@@ -72,10 +70,7 @@ namespace Nest
 
 		public ShapeOrientation? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
-			if (reader.ReadIsNull())
-			{
-				return null;
-			}
+			if (reader.ReadIsNull()) return null;
 
 			var enumString = reader.ReadString();
 

@@ -17,6 +17,7 @@ namespace Nest
 		/// The models stayed below the configured value.
 		/// </summary>
 		[EnumMember(Value = "ok")]
+		// ReSharper disable once InconsistentNaming
 		OK,
 
 		/// <summary>

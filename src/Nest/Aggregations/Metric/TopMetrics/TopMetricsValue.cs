@@ -47,7 +47,7 @@ namespace Nest
 		public TopMetricsValuesDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) =>
 			AddTopMetrics(new TopMetricsValue { Field = field});
 
-		private TopMetricsValuesDescriptor<T> AddTopMetrics(ITopMetricsValue TopMetrics) => TopMetrics == null ? this : Assign(TopMetrics, (a, v) => a.Add(v));
+		private TopMetricsValuesDescriptor<T> AddTopMetrics(ITopMetricsValue topMetrics) => topMetrics == null ? this : Assign(topMetrics, (a, v) => a.Add(v));
 	}
 
 }

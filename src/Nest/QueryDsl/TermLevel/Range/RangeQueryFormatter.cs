@@ -2,7 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using Elasticsearch.Net.Extensions;
 using Nest.Utf8Json;
 namespace Nest
 {
@@ -55,6 +54,8 @@ namespace Nest
 								{
 									case JsonToken.String:
 									case JsonToken.Null:
+										// ReSharper disable once ConditionIsAlwaysTrueOrFalse
+										// Inspection is not correct
 										if (!isDate)
 										{
 											var valueSegment = segmentReader.ReadStringSegmentUnsafe();
@@ -63,6 +64,8 @@ namespace Nest
 										}
 										break;
 									case JsonToken.Number:
+										// ReSharper disable once ConditionIsAlwaysTrueOrFalse
+										// Inspection is not correct
 										if (!isDouble)
 										{
 											var numberSegment = segmentReader.ReadNumberSegment();

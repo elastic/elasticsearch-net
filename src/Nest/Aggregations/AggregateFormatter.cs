@@ -109,8 +109,7 @@ namespace Nest
 			reader.ReadIsBeginObjectWithVerify();
 			IAggregate aggregate = null;
 
-			if (reader.ReadIsEndObject())
-				return aggregate;
+			if (reader.ReadIsEndObject()) return null;
 
 			var propertyName = reader.ReadPropertyNameSegmentRaw();
 			Dictionary<string, object> meta = null;
@@ -166,7 +165,7 @@ namespace Nest
 						aggregate = GetMatrixStatsAggregate(ref reader, formatterResolver, meta);
 						break;
 					case 11:
-						aggregate = GetBoxplotAggregate(ref reader, formatterResolver, meta);
+						aggregate = GetBoxplotAggregate(ref reader, meta);
 						break;
 					case 12:
 						aggregate = GetTopMetricsAggregate(ref reader, formatterResolver, meta);
@@ -232,7 +231,7 @@ namespace Nest
 			return matrixStats;
 		}
 
-		private IAggregate GetBoxplotAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, IReadOnlyDictionary<string, object> meta)
+		private IAggregate GetBoxplotAggregate(ref JsonReader reader, IReadOnlyDictionary<string, object> meta)
 		{
 			var boxplot = new BoxplotAggregate
 			{
@@ -555,10 +554,10 @@ namespace Nest
 			if (reader.GetCurrentJsonToken() == JsonToken.EndObject)
 				return statsMetric;
 
-			return GetExtendedStatsAggregate(ref reader, formatterResolver, statsMetric, meta);
+			return GetExtendedStatsAggregate(ref reader, formatterResolver, statsMetric);
 		}
 
-		private IAggregate GetExtendedStatsAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, StatsAggregate statsMetric, IReadOnlyDictionary<string, object> meta)
+		private IAggregate GetExtendedStatsAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, StatsAggregate statsMetric)
 		{
 			var extendedStatsMetric = new ExtendedStatsAggregate
 			{

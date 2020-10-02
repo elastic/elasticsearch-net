@@ -212,6 +212,7 @@ namespace Nest
 			}
 
 			// TODO 7.0 mutator is not used, should it?
+			// ReSharper disable once UnusedVariable
 			var mutator = formatterResolver.GetConnectionSettings().DefaultFieldNameInferrer;
 			var keyFormatter = formatterResolver.GetFormatterWithVerify<TKey>() as IObjectPropertyNameFormatter<TKey>;
 			var valueFormatter = formatterResolver.GetFormatterWithVerify<TValue>();

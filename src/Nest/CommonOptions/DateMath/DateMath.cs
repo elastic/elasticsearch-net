@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
-using Elasticsearch.Net.Extensions;
 using Nest.Utf8Json;
 
 namespace Nest

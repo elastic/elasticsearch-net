@@ -19,7 +19,6 @@ namespace Nest
 				return;
 
 			var settings = formatterResolver.GetConnectionSettings();
-			var memoryStreamFactory = settings.MemoryStreamFactory;
 			var serializer = settings.RequestResponseSerializer;
 
 			foreach (var operation in value.Operations.Values)

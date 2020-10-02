@@ -12,7 +12,6 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Nest.Utf8Json;
 
 namespace Nest
 {
@@ -112,6 +111,20 @@ namespace Nest
 			if (@object == null) throw new ArgumentNullException(parameterName);
 			if (!@object.Any())
 				throw new ArgumentException("Argument can not be an empty collection", parameterName);
+		}
+
+		// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Global
+		internal static T[] NotEmpty<T>(this IEnumerable<T> @object, string parameterName)
+		{
+			if (!@object.HasAny(out var enumerated))
+				throw new ArgumentException("Argument can not be an empty collection", parameterName);
+			return enumerated;
+		}
+
+		internal static bool HasAny<T>(this IEnumerable<T> list, out T[] enumerated)
+		{
+			enumerated = list == null ? null : (list as T[] ?? list.ToArray());
+			return enumerated.HasAny();
 		}
 
 		internal static List<T> AsInstanceOrToListOrDefault<T>(this IEnumerable<T> list) => list as List<T> ?? list?.ToList() ?? new List<T>();
@@ -220,7 +233,7 @@ namespace Nest
 
 					var task = await Task.WhenAny(tasks).ConfigureAwait(false);
 					if (task.Exception != null
-						&& (task.IsFaulted && task.Exception.Flatten().InnerExceptions.First() is Exception e))
+						&& (task.IsFaulted && task.Exception.Flatten().InnerExceptions.First() is { } e))
 					{
 						ExceptionDispatchInfo.Capture(e).Throw();
 						return;

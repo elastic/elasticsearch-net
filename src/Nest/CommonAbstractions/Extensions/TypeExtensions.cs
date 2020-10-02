@@ -132,9 +132,7 @@ namespace Nest
 						var propertyDeclaringType = property.GetDeclaringType();
 
 						if (!(existingProperty.IsVirtual() && existingProperty.GetDeclaringType().IsAssignableFrom(propertyDeclaringType)))
-						{
 							collectedProperties[property.Name] = property;
-						}
 					}
 				}
 				else

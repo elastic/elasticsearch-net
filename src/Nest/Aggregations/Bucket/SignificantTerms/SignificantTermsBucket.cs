@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	public class SignificantTermsBucket<TKey> : BucketBase, IBucket
+	public class SignificantTermsBucket<TKey> : BucketBase
 	{
 		public SignificantTermsBucket(IReadOnlyDictionary<string, IAggregate> dict) : base(dict) { }
 

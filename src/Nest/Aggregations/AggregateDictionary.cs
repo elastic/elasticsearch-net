@@ -247,6 +247,7 @@ namespace Nest
 
 		public BoxplotAggregate Boxplot(string key) => TryGet<BoxplotAggregate>(key);
 
+		// ReSharper disable once InconsistentNaming
 		public ValueAggregate TTest(string key) => TryGet<ValueAggregate>(key);
 
 		private TAggregate TryGet<TAggregate>(string key) where TAggregate : class, IAggregate =>

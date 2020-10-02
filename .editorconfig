@@ -120,3 +120,5 @@ resharper_csharp_accessor_owner_body=expression_body
 
 resharper_redundant_case_label_highlighting=do_not_show
 resharper_redundant_argument_default_value_highlighting=do_not_show
+# Do not penalize code that explicitly lists generic arguments
+resharper_redundant_type_arguments_of_method_highlighting=do_not_show

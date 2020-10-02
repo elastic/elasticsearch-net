@@ -17,6 +17,7 @@ namespace Nest
 		/// Categorization is performing acceptably well (or not being used at all).
 		/// </summary>
 		[EnumMember(Value = "ok")]
+		// ReSharper disable once InconsistentNaming
 		OK,
 
 		/// <summary>

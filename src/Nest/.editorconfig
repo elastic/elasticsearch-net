@@ -1,3 +1,5 @@
 [*.cs]
 resharper_check_namespace_highlighting=do_not_show
 resharper_inheritdoc_invalid_usage_highlighting=do_not_show
+# nest uses a lot of generated partial code, for clearity we want to duplicate extends definitions
+resharper_redundant_extends_list_entry_highlighting=do_not_show

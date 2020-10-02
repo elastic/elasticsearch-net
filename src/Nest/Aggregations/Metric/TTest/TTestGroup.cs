@@ -37,6 +37,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
+	// ReSharper disable once InconsistentNaming
 	public class TTestPopulation : ITTestPopulation
 	{
 		/// <inheritdoc />
@@ -48,6 +49,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="ITTestPopulation"/>
+	// ReSharper disable once InconsistentNaming
 	public class TTestPopulationDescriptor<T> : DescriptorBase<TTestPopulationDescriptor<T>, ITTestPopulation>, ITTestPopulation where T : class
 	{
 		Field ITTestPopulation.Field { get; set; }

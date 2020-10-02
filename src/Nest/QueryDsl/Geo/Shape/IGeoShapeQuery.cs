@@ -63,7 +63,7 @@ namespace Nest
 			switch (q.Shape)
 			{
 				case ICircleGeoShape circleGeoShape:
-					return circleGeoShape.Coordinates == null || string.IsNullOrEmpty(circleGeoShape?.Radius);
+					return circleGeoShape.Coordinates == null || string.IsNullOrEmpty(circleGeoShape.Radius);
 				case IEnvelopeGeoShape envelopeGeoShape:
 					return envelopeGeoShape.Coordinates == null;
 				case IGeometryCollection geometryCollection:

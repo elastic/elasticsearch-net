@@ -359,9 +359,9 @@ namespace Nest.Utf8Json
 				return;
 			}
 
-			writer.WriteRaw(CollectionFormatterHelper.groupingName[0]);
+			writer.WriteRaw(CollectionFormatterHelper.GroupingName[0]);
 			formatterResolver.GetFormatterWithVerify<TKey>().Serialize(ref writer, value.Key, formatterResolver);
-			writer.WriteRaw(CollectionFormatterHelper.groupingName[1]);
+			writer.WriteRaw(CollectionFormatterHelper.GroupingName[1]);
 			formatterResolver.GetFormatterWithVerify<IEnumerable<TElement>>().Serialize(ref writer, value.AsEnumerable(), formatterResolver);
 
 			writer.WriteEndObject();
@@ -381,7 +381,7 @@ namespace Nest.Utf8Json
 			while (!reader.ReadIsEndObjectWithSkipValueSeparator(ref count))
 			{
 				var keyString = reader.ReadPropertyNameSegmentRaw();
-				CollectionFormatterHelper.groupingAutomata.TryGetValue(keyString, out var key);
+				CollectionFormatterHelper.GroupingAutomata.TryGetValue(keyString, out var key);
 
 				switch (key)
 				{
@@ -730,17 +730,17 @@ namespace Nest.Utf8Json
 
 	internal static class CollectionFormatterHelper
 	{
-		internal static readonly byte[][] groupingName;
-		internal static readonly AutomataDictionary groupingAutomata;
+		internal static readonly byte[][] GroupingName;
+		internal static readonly AutomataDictionary GroupingAutomata;
 
 		static CollectionFormatterHelper()
 		{
-			groupingName = new[]
+			GroupingName = new[]
 			{
 				JsonWriter.GetEncodedPropertyNameWithBeginObject("Key"),
 				JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator("Elements"),
 			};
-			groupingAutomata = new AutomataDictionary
+			GroupingAutomata = new AutomataDictionary
 			{
 				{JsonWriter.GetEncodedPropertyNameWithoutQuotation("Key"), 0 },
 				{JsonWriter.GetEncodedPropertyNameWithoutQuotation("Elements"), 1 },

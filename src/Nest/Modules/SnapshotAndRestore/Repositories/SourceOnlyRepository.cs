@@ -4,7 +4,6 @@
 
 using System;
 using System.Runtime.Serialization;
-using Elasticsearch.Net.Extensions;
 using Nest.Utf8Json;
 namespace Nest
 {
@@ -147,7 +146,7 @@ namespace Nest
 
 				var buffer = innerWriter.GetBuffer();
 				// get all the written bytes between the opening and closing {}
-				for (var i = 1; i < buffer.Count - 1; i++)
+				for (var i = 1; buffer.Array != null && i < buffer.Count - 1; i++)
 					writer.WriteRawUnsafe(buffer.Array[i]);
 
 				writer.WriteEndObject();

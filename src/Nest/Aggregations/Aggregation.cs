@@ -54,7 +54,7 @@ namespace Nest
 	/// <summary>
 	/// Combines aggregations into a single list of aggregations
 	/// </summary>
-	internal class AggregationCombinator : AggregationBase, IAggregation
+	internal class AggregationCombinator : AggregationBase
 	{
 		public AggregationCombinator(string name, AggregationBase left, AggregationBase right) : base(name)
 		{

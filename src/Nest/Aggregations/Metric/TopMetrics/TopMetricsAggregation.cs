@@ -71,8 +71,8 @@ namespace Nest
 				a.Sort = v?.Invoke(new SortDescriptor<T>())?.Value);
 
 		/// <inheritdoc cref="ITopMetricsAggregation.Metrics" />
-		public TopMetricsAggregationDescriptor<T> Metrics(Func<TopMetricsValuesDescriptor<T>, IPromise<IList<ITopMetricsValue>>> TopMetricsValueSelector) =>
-			Assign(TopMetricsValueSelector, (a, v) =>
+		public TopMetricsAggregationDescriptor<T> Metrics(Func<TopMetricsValuesDescriptor<T>, IPromise<IList<ITopMetricsValue>>> topMetricsValueSelector) =>
+			Assign(topMetricsValueSelector, (a, v) =>
 				a.Metrics = v?.Invoke(new TopMetricsValuesDescriptor<T>())?.Value);
 	}
 }
