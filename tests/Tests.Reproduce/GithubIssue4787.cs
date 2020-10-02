@@ -8,7 +8,6 @@ using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Core.Client;
 
 namespace Tests.Reproduce
 {

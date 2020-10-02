@@ -65,10 +65,6 @@ namespace Tests.Reproduce
 				StringNullable = timeSpan;
 			}
 
-			public TimeSpans()
-			{
-			}
-
 			public TimeSpan Default { get; set; }
 
 			public TimeSpan DefaultNullable { get; set; }

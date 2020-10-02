@@ -29,6 +29,7 @@ namespace Tests.Reproduce
 
 		private class Document
 		{
+			// ReSharper disable once UnusedAutoPropertyAccessor.Local
 			public GeoLocation Location { get; set; }
 		}
 	}

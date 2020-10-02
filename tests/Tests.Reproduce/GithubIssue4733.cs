@@ -20,7 +20,7 @@ namespace Tests.Reproduce
 			Func<ISearchResponse<object>> func = () => client.Search<object>(s => s
 				.From(0)
 				.Size(25)
-				.Source(s => s.Excludes(e => e.Field("events")))
+				.Source(ss => ss.Excludes(e => e.Field("events")))
 				.Query(q => q.Pinned(p => p
 						.Organic(o => o.MatchAll())
 						.Ids(new [] { "387c2c78-95b1-42f8-a965-e09a73f7cff6" })

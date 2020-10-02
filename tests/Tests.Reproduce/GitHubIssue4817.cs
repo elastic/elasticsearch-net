@@ -8,7 +8,6 @@ using System.Text;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Core.Client;
 
 namespace Tests.Reproduce
 {

@@ -30,9 +30,7 @@ namespace Tests.Reproduce
 
 			rows.Count.Should().Be(2);
 			foreach (var row in rows)
-			{
 				row.Count.Should().Be(response.Columns.Count);
-			}
 		}
 	}
 }

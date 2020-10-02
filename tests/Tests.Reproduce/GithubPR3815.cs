@@ -12,7 +12,7 @@ using Tests.Core.Extensions;
 
 namespace Tests.Reproduce
 {
-	public class GithubPR3815
+	public class GithubPr3815
 	{
 		[U(Skip = "Needs to be fixed but not on this branch")]
 		public void CanDeserializeNestedError()
@@ -42,15 +42,15 @@ namespace Tests.Reproduce
 			var settings = new ConnectionSettings(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), connection);
 			var client = new ElasticClient(settings);
 
-			CheckCustomDeserialiseMethods(client, () => client.Cat.Help());
-			CheckCustomDeserialiseMethods(client, () => client.Nodes.HotThreads());
-			CheckCustomDeserialiseMethods(client, () => client.MultiGet());
-			CheckCustomDeserialiseMethods(client, () => client.MultiSearch());
-			CheckCustomDeserialiseMethods(client, () => client.Sql.Translate());
-			CheckCustomDeserialiseMethods(client, () => client.Security.GetCertificates());
+			CheckCustomDeserialiseMethods(() => client.Cat.Help());
+			CheckCustomDeserialiseMethods(() => client.Nodes.HotThreads());
+			CheckCustomDeserialiseMethods(() => client.MultiGet());
+			CheckCustomDeserialiseMethods(() => client.MultiSearch());
+			CheckCustomDeserialiseMethods(() => client.Sql.Translate());
+			CheckCustomDeserialiseMethods(() => client.Security.GetCertificates());
 		}
 
-		private static void CheckCustomDeserialiseMethods(ElasticClient client, Func<ResponseBase> perform)
+		private static void CheckCustomDeserialiseMethods(Func<ResponseBase> perform)
 		{
 			var response = perform();
 			response.ShouldNotBeValid();

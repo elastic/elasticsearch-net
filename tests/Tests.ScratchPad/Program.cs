@@ -18,6 +18,7 @@ namespace Tests.ScratchPad
 {
 	public class Program
 	{
+		// ReSharper disable once UnusedType.Local
 		private class ListenerObserver : IObserver<DiagnosticListener>
 		{
 			public void OnCompleted() => Console.WriteLine("Completed");

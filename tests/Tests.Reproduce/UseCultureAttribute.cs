@@ -47,7 +47,7 @@ namespace Tests.Reproduce
 		/// <remarks>
 		/// <para>
 		/// This constructor overload uses <paramref name="culture" /> for both
-		/// <see cref="Culture" /> and <see cref="UICulture" />.
+		/// <see cref="Culture" /> and <see cref="UiCulture" />.
 		/// </para>
 		/// </remarks>
 		public UseCultureAttribute(string culture)
@@ -73,7 +73,7 @@ namespace Tests.Reproduce
 		/// <summary>
 		/// Gets the UI culture.
 		/// </summary>
-		public CultureInfo UICulture => _uiCulture.Value;
+		public CultureInfo UiCulture => _uiCulture.Value;
 
 		/// <summary>
 		/// Stores the current <see cref="Thread.CurrentPrincipal" />
@@ -87,7 +87,7 @@ namespace Tests.Reproduce
 			_originalUiCulture = Thread.CurrentThread.CurrentUICulture;
 
 			Thread.CurrentThread.CurrentCulture = Culture;
-			Thread.CurrentThread.CurrentUICulture = UICulture;
+			Thread.CurrentThread.CurrentUICulture = UiCulture;
 
 			CultureInfo.CurrentCulture.ClearCachedData();
 			CultureInfo.CurrentUICulture.ClearCachedData();

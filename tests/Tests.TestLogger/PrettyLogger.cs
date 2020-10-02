@@ -21,7 +21,7 @@ namespace Tests.Core.VsTest
 	public class PrettyLogger : ITestLogger
 	{
 		private static readonly ConsoleColor DefaultBg = Console.BackgroundColor;
-		private int _writtenPassed = 0;
+		private int _writtenPassed;
 		public const string ExtensionUri = "logger://Microsoft/TestPlatform/PrettyLogger/v1";
 		public const string FriendlyName = "pretty";
 		private readonly List<string> _disableSkipNamespaces = new List<string>();
@@ -62,6 +62,8 @@ namespace Tests.Core.VsTest
 			};
 		}
 
+		// ReSharper disable once UnusedMember.Global
+		// handy to keep around
 		public void TestResultHandler(object sender, TestResultEventArgs e)
 		{
 			var testCase = e.Result.TestCase;
@@ -124,7 +126,7 @@ namespace Tests.Core.VsTest
 			}
 		}
 
-		private static int _slowTests = 0;
+		private static int _slowTests;
 		private static void PrintDuration(TimeSpan duration)
 		{
 			var takingTooLong = duration > TimeSpan.FromSeconds(2);
@@ -136,7 +138,7 @@ namespace Tests.Core.VsTest
 			Console.ResetColor();
 		}
 
-		private static int _prettiedTraces = 0;
+		private static int _prettiedTraces;
 
 		private static void PrintStackTrace(string stackTrace)
 		{
@@ -208,9 +210,7 @@ namespace Tests.Core.VsTest
 			Announce($"SEEN {_failedTests.Count} FAILURE{(_failedTests.Count > 1 ? "S" : "")}");
 
 			for (var expanded = 0; _failedTests.TryDequeue(out var testResult); expanded++)
-			{
 				WriteTestResult(testResult, expanded <= 20);
-			}
 
 
 			Announce(" 🌈 SUMMARY RESULTS 🌈 ");
@@ -300,22 +300,15 @@ namespace Tests.Core.VsTest
 		private static string ToStringFromMilliseconds(double milliseconds, bool @fixed = false)
 		{
 			// less than one millisecond
-			if (milliseconds < 1D)
-			{
-				return "<1 ms";
-			}
+			if (milliseconds < 1D) return "<1 ms";
 
 			// milliseconds
 			if (milliseconds < 1_000D)
-			{
 				return milliseconds.ToString(@fixed ? "F0" : "G3", Provider) + " ms";
-			}
 
 			// seconds
 			if (milliseconds < 60_000D)
-			{
 				return (milliseconds / 1_000D).ToString(@fixed ? "F2" : "G3", Provider) + " s";
-			}
 
 			// minutes and seconds
 			if (milliseconds < 3_600_000D)
