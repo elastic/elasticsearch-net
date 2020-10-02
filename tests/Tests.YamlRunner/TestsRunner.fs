@@ -122,7 +122,7 @@ type TestRunner(client:IElasticLowLevelClient, version: string, suite: TestSuite
                     let fi = file.FileInfo
                     let di = file.FileInfo.Directory
                     sprintf "%s/%s" di.Name fi.Name
-                match Skips.SkipList.TryGetValue <| SkipFile(file) with
+                match SkipList.TryGetValue <| SkipFile(file) with
                 | (true, s) ->
                     let (sectionHeader, _) = suite
                     match s with

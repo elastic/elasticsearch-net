@@ -5,15 +5,12 @@
 module Tests.YamlRunner.OperationExecutor
 
 open System
-open System.Buffers.Text
 open System.Collections.Specialized
 open System.Linq
 open System.IO
 open System.Text
 open System.Text.RegularExpressions
-open System.Text.Unicode
 open Microsoft.FSharp.Reflection
-open Tests.YamlRunner.DoMapper
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.Stashes
 open ShellProgressBar
@@ -78,7 +75,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
         s |> Map.map v |> ignore 
         Succeeded op
 
-    static member Do op d (lookup:YamlMap -> FastApiInvoke) progress = async {
+    static member Do op d (lookup:YamlMap -> DoMapper.FastApiInvoke) progress = async {
         let stashes = op.Stashes
         let (api, data) = d.ApiCall
         try
@@ -139,8 +136,8 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                     | OtherBadResponse, Some s when s < 400 || s >= 600 ->
                         Failed <| Fail.Create op "Catch %A: expected 4xx-5xx received %i" catch s
                     | (CatchRegex regexp), _ -> 
-                        let body = System.Text.Encoding.UTF8.GetString(r.ApiCall.ResponseBodyInBytes)
-                        match System.Text.RegularExpressions.Regex.IsMatch(body, regexp) with
+                        let body = Encoding.UTF8.GetString(r.ApiCall.ResponseBodyInBytes)
+                        match Regex.IsMatch(body, regexp) with
                         | true -> Succeeded op
                         | false -> Failed <| Fail.Create op "Catching error failed: %O on server error" d.Catch 
                     | _ -> Succeeded op
@@ -148,7 +145,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
             //progress.WriteLine <| sprintf "%s %s" (r.ApiCall.HttpMethod.ToString()) (r.Uri.PathAndQuery)
             return result
         with
-        | ParamException e ->
+        | DoMapper.ParamException e ->
             match d.Catch with
             | Some UnknownParameter -> return Succeeded op
             | _ ->
@@ -265,7 +262,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                     let a = actual.ToString(Formatting.None) 
                     let e = expected.ToString(Formatting.None)
                     Failed <| Fail.Create op "No object in actual: %s has proper subset of keys and values from expected: %s" a e
-                | Some o ->
+                | Some _ ->
                     Succeeded op
             | _ -> 
                 Failed <| Fail.Create op "Can not assert contains when actual is not an array: %s" (actual.ToString(Formatting.None))

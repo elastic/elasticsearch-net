@@ -28,7 +28,7 @@ let private subBarOptions =
     )
 
 let LocateTests namedSuite revision directoryFilter fileFilter = async {
-    let! folders = TestsLocator.ListFolders namedSuite revision directoryFilter
+    let! folders = ListFolders namedSuite revision directoryFilter
     if folders.Length = 0 then
         raise <| Exception("No folders found trying to list the yaml specs")
         
@@ -37,14 +37,14 @@ let LocateTests namedSuite revision directoryFilter fileFilter = async {
     progress.WriteLine <| sprintf "Listing %i folders" l
     let folderDownloads =
         folders
-        |> Seq.map(fun folder -> TestsLocator.DownloadTestsInFolder folder fileFilter namedSuite revision progress subBarOptions)
+        |> Seq.map(fun folder -> DownloadTestsInFolder folder fileFilter namedSuite revision progress subBarOptions)
     let! completed = Async.ForEachAsync 4 folderDownloads
     return completed 
 }
 
 let ReadTests (tests:LocateResults list) = 
     
-    let readPaths paths = paths |> List.map TestsReader.ReadYamlFile  
+    let readPaths paths = paths |> List.map ReadYamlFile  
     
     tests |> List.map (fun t -> { Folder= t.Folder; Files = readPaths t.Paths})
     

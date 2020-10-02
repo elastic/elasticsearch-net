@@ -52,6 +52,6 @@ type YamlMapConverterFactory() =
                 && genericArgs.[0] = typedefof<Object> 
                 && genericArgs.[1] = typedefof<Object> 
 
-        override this.CreateConverter(typeToConvert: Type, options: JsonSerializerOptions) : JsonConverter =
-            new YampMapConverter(options) :> JsonConverter;
+        override this.CreateConverter(_: Type, options: JsonSerializerOptions) : JsonConverter =
+            YampMapConverter(options) :> JsonConverter;
 

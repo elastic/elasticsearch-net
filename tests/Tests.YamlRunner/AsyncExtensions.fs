@@ -13,7 +13,7 @@ open System.Runtime.ExceptionServices
 [<AutoOpen>]
 [<Extension>]
 module AsyncExtensions =             
-    type Microsoft.FSharp.Control.Async with   
+    type Async with   
     
     // Wrote this as Async.Parallel eagerly materializes and forcefully executes in order.
     // There is an extension that came in as dependency that extends Async.Parallel with maxDegreeOfParallelism

@@ -6,7 +6,6 @@ module Tests.YamlRunner.TestsReader
 
 open System
 open System.Collections.Generic
-open System.Reflection.Metadata
 open System.Text
 open System.Text.RegularExpressions
 open System.Linq
@@ -233,7 +232,7 @@ let rawDeseralize (file:YamlFileInfo) (sectionString:string) (serializer: Serial
         let di = fi.Directory
         sprintf "%s/%s" di.Name fi.Name
     let r () = (sectionString, serializer.Deserialize<Dictionary<string, Object>> sectionString)
-    match Skips.SkipList.TryGetValue <| SkipFile(file) with
+    match SkipList.TryGetValue <| SkipFile(file) with
     | (true, All) -> None
     | _ -> Some <| r()
 
