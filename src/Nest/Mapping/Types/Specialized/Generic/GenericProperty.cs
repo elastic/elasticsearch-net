@@ -19,9 +19,6 @@ namespace Nest
 		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
-		[DataMember(Name ="boost")]
-		double? Boost { get; set; }
-
 		[DataMember(Name ="fielddata")]
 		IStringFielddata Fielddata { get; set; }
 
@@ -57,7 +54,6 @@ namespace Nest
 		public GenericProperty() : base(FieldType.Object) => TypeOverride = null;
 
 		public string Analyzer { get; set; }
-		public double? Boost { get; set; }
 		public IStringFielddata Fielddata { get; set; }
 		public int? IgnoreAbove { get; set; }
 		public bool? Index { get; set; }
@@ -85,7 +81,6 @@ namespace Nest
 		public GenericPropertyDescriptor() : base(FieldType.Object) => TypeOverride = null;
 
 		string IGenericProperty.Analyzer { get; set; }
-		double? IGenericProperty.Boost { get; set; }
 		IStringFielddata IGenericProperty.Fielddata { get; set; }
 		int? IGenericProperty.IgnoreAbove { get; set; }
 		bool? IGenericProperty.Index { get; set; }
@@ -99,8 +94,6 @@ namespace Nest
 		public GenericPropertyDescriptor<T> Type(string type) => Assign(type, (a, v) => TypeOverride = v);
 
 		public GenericPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
-
-		public GenericPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		public GenericPropertyDescriptor<T> NullValue(string nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);
 

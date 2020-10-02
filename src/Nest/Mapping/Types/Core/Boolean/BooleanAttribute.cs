@@ -8,12 +8,6 @@ namespace Nest
 	{
 		public BooleanAttribute() : base(FieldType.Boolean) { }
 
-		public double Boost
-		{
-			get => Self.Boost.GetValueOrDefault();
-			set => Self.Boost = value;
-		}
-
 		public bool Index
 		{
 			get => Self.Index.GetValueOrDefault();
@@ -26,7 +20,6 @@ namespace Nest
 			set => Self.NullValue = value;
 		}
 
-		double? IBooleanProperty.Boost { get; set; }
 		INumericFielddata IBooleanProperty.Fielddata { get; set; }
 
 		bool? IBooleanProperty.Index { get; set; }

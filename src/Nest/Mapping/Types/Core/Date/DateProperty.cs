@@ -15,12 +15,6 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface IDateProperty : IDocValuesProperty
 	{
-		/// <summary>
-		/// Mapping field-level query time boosting. Accepts a floating point number, defaults to 1.0.
-		/// </summary>
-		[DataMember(Name = "boost")]
-		double? Boost { get; set; }
-
 		[DataMember(Name = "fielddata")]
 		INumericFielddata Fielddata { get; set; }
 
@@ -59,9 +53,6 @@ namespace Nest
 		public DateProperty() : base(FieldType.Date) { }
 
 		/// <inheritdoc />
-		public double? Boost { get; set; }
-
-		/// <inheritdoc />
 		public INumericFielddata Fielddata { get; set; }
 
 		/// <inheritdoc />
@@ -87,7 +78,6 @@ namespace Nest
 	{
 		public DatePropertyDescriptor() : base(FieldType.Date) { }
 
-		double? IDateProperty.Boost { get; set; }
 		INumericFielddata IDateProperty.Fielddata { get; set; }
 		string IDateProperty.Format { get; set; }
 		bool? IDateProperty.IgnoreMalformed { get; set; }
@@ -97,8 +87,6 @@ namespace Nest
 		/// <inheritdoc />
 		public DatePropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 
-		/// <inheritdoc />
-		public DatePropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		/// <inheritdoc />
 		public DatePropertyDescriptor<T> NullValue(DateTime? nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);

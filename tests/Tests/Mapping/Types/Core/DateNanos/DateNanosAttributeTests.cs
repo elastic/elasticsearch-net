@@ -13,7 +13,6 @@ namespace Tests.Mapping.Types.Core.DateNanos
 			DocValues = true,
 			Store = true,
 			Index = false,
-			Boost = 1.2,
 			IgnoreMalformed = true,
 			Format = "yyyy-MM-dd'T'HH:mm[:ss][.S]")]
 		public DateTime Full { get; set; }
@@ -34,7 +33,6 @@ namespace Tests.Mapping.Types.Core.DateNanos
 					doc_values = true,
 					store = true,
 					index = false,
-					boost = 1.2,
 					ignore_malformed = true,
 					format = "yyyy-MM-dd'T'HH:mm[:ss][.S]"
 				},

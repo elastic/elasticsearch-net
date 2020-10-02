@@ -10,12 +10,6 @@ namespace Nest
 	{
 		public DateNanosAttribute() : base(FieldType.DateNanos) { }
 
-		public double Boost
-		{
-			get => Self.Boost.GetValueOrDefault();
-			set => Self.Boost = value;
-		}
-
 		public string Format
 		{
 			get => Self.Format;
@@ -40,7 +34,6 @@ namespace Nest
 			set => Self.NullValue = value;
 		}
 
-		double? IDateNanosProperty.Boost { get; set; }
 		string IDateNanosProperty.Format { get; set; }
 		bool? IDateNanosProperty.IgnoreMalformed { get; set; }
 

@@ -9,7 +9,6 @@ namespace Tests.Mapping.Types.Complex.Flattened
 	public class FlattenedTest
 	{
 		[Flattened(
-			Boost = 2,
 			IgnoreAbove = 256,
 			Index = true,
 			Similarity = "BM25",
@@ -39,7 +38,6 @@ namespace Tests.Mapping.Types.Complex.Flattened
 				full = new
 				{
 					type = "flattened",
-					boost = 2.0,
 					ignore_above = 256,
 					index = true,
 					similarity = "BM25",

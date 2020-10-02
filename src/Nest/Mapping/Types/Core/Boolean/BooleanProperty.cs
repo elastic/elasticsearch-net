@@ -15,9 +15,6 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface IBooleanProperty : IDocValuesProperty
 	{
-		[DataMember(Name = "boost")]
-		double? Boost { get; set; }
-
 		[DataMember(Name = "fielddata")]
 		INumericFielddata Fielddata { get; set; }
 
@@ -33,7 +30,6 @@ namespace Nest
 	{
 		public BooleanProperty() : base(FieldType.Boolean) { }
 
-		public double? Boost { get; set; }
 		public INumericFielddata Fielddata { get; set; }
 
 		public bool? Index { get; set; }
@@ -47,12 +43,9 @@ namespace Nest
 	{
 		public BooleanPropertyDescriptor() : base(FieldType.Boolean) { }
 
-		double? IBooleanProperty.Boost { get; set; }
 		INumericFielddata IBooleanProperty.Fielddata { get; set; }
 		bool? IBooleanProperty.Index { get; set; }
 		bool? IBooleanProperty.NullValue { get; set; }
-
-		public BooleanPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		public BooleanPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 

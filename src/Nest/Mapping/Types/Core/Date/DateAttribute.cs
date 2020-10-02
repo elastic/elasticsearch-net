@@ -10,12 +10,6 @@ namespace Nest
 	{
 		public DateAttribute() : base(FieldType.Date) { }
 
-		public double Boost
-		{
-			get => Self.Boost.GetValueOrDefault();
-			set => Self.Boost = value;
-		}
-
 		public string Format
 		{
 			get => Self.Format;
@@ -40,7 +34,6 @@ namespace Nest
 			set => Self.NullValue = value;
 		}
 
-		double? IDateProperty.Boost { get; set; }
 		INumericFielddata IDateProperty.Fielddata { get; set; }
 		string IDateProperty.Format { get; set; }
 		bool? IDateProperty.IgnoreMalformed { get; set; }

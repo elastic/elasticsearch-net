@@ -14,12 +14,6 @@ namespace Nest
 
 		public NumberAttribute(NumberType type) : base(type.ToFieldType()) { }
 
-		public double Boost
-		{
-			get => Self.Boost.GetValueOrDefault();
-			set => Self.Boost = value;
-		}
-
 		public bool Coerce
 		{
 			get => Self.Coerce.GetValueOrDefault();
@@ -50,7 +44,6 @@ namespace Nest
 			set => Self.ScalingFactor = value;
 		}
 
-		double? INumberProperty.Boost { get; set; }
 		bool? INumberProperty.Coerce { get; set; }
 		INumericFielddata INumberProperty.Fielddata { get; set; }
 		bool? INumberProperty.IgnoreMalformed { get; set; }

@@ -10,7 +10,6 @@ namespace Tests.Mapping.Types.Core.Text
 	{
 		[Text(
 			Analyzer = "myanalyzer",
-			Boost = 1.2,
 			EagerGlobalOrdinals = true,
 			Fielddata = true,
 			Index = true,
@@ -40,7 +39,6 @@ namespace Tests.Mapping.Types.Core.Text
 				{
 					type = "text",
 					analyzer = "myanalyzer",
-					boost = 1.2,
 					eager_global_ordinals = true,
 					fielddata = true,
 					index = true,

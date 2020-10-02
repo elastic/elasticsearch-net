@@ -8,12 +8,6 @@ namespace Nest
 	{
 		protected RangePropertyAttributeBase(RangeType type) : base(type.ToFieldType()) { }
 
-		public double Boost
-		{
-			get => Self.Boost.GetValueOrDefault();
-			set => Self.Boost = value;
-		}
-
 		public bool Coerce
 		{
 			get => Self.Coerce.GetValueOrDefault();
@@ -25,8 +19,6 @@ namespace Nest
 			get => Self.Index.GetValueOrDefault();
 			set => Self.Index = value;
 		}
-
-		double? IRangeProperty.Boost { get; set; }
 
 		bool? IRangeProperty.Coerce { get; set; }
 		bool? IRangeProperty.Index { get; set; }

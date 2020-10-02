@@ -30,7 +30,6 @@ namespace Tests.Mapping.Types.Core.Range.DoubleRange
 							type = "double_range",
 							store = true,
 							index = false,
-							boost = 1.5,
 							coerce = true
 						}
 					}
@@ -46,7 +45,6 @@ namespace Tests.Mapping.Types.Core.Range.DoubleRange
 						.Name(p => p.Doubles)
 						.Store()
 						.Index(false)
-						.Boost(1.5)
 						.Coerce()
 					)
 				)
@@ -65,7 +63,6 @@ namespace Tests.Mapping.Types.Core.Range.DoubleRange
 							{
 								Store = true,
 								Index = false,
-								Boost = 1.5,
 								Coerce = true
 							}
 						}

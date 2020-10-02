@@ -8,7 +8,6 @@ namespace Nest
 	{
 		public KeywordAttribute() : base(FieldType.Keyword) { }
 
-		double? IKeywordProperty.Boost { get; set; }
 		bool? IKeywordProperty.EagerGlobalOrdinals { get; set; }
 		int? IKeywordProperty.IgnoreAbove { get; set; }
 		bool? IKeywordProperty.Index { get; set; }
@@ -18,13 +17,6 @@ namespace Nest
 		string IKeywordProperty.NullValue { get; set; }
 		private IKeywordProperty Self => this;
 		bool? IKeywordProperty.SplitQueriesOnWhitespace { get; set; }
-
-		// ReSharper disable ArrangeThisQualifier
-		public double Boost
-		{
-			get => Self.Boost.GetValueOrDefault();
-			set => Self.Boost = value;
-		}
 
 		public bool EagerGlobalOrdinals
 		{

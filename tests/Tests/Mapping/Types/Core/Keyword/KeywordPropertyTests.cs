@@ -26,7 +26,6 @@ namespace Tests.Mapping.Types.Core.Keyword
 				{
 					type = "keyword",
 					doc_values = false,
-					boost = 1.2,
 					eager_global_ordinals = true,
 					ignore_above = 50,
 					index = false,
@@ -51,7 +50,6 @@ namespace Tests.Mapping.Types.Core.Keyword
 			.Keyword(b => b
 				.Name(p => p.State)
 				.DocValues(false)
-				.Boost(1.2)
 				.EagerGlobalOrdinals()
 				.IgnoreAbove(50)
 				.Index(false)
@@ -75,7 +73,6 @@ namespace Tests.Mapping.Types.Core.Keyword
 				"state", new KeywordProperty
 				{
 					DocValues = false,
-					Boost = 1.2,
 					EagerGlobalOrdinals = true,
 					IgnoreAbove = 50,
 					Index = false,

@@ -101,7 +101,6 @@ namespace Tests.Mapping.Types.Core.Text
 				{
 					type = "text",
 					analyzer = "standard",
-					boost = 1.2,
 					copy_to = new[] { "other_field" },
 					eager_global_ordinals = true,
 					fielddata = true,
@@ -137,7 +136,6 @@ namespace Tests.Mapping.Types.Core.Text
 			.Text(s => s
 				.Name(p => p.Name)
 				.Analyzer("standard")
-				.Boost(1.2)
 				.CopyTo(c => c
 					.Field("other_field")
 				)
@@ -172,7 +170,6 @@ namespace Tests.Mapping.Types.Core.Text
 				"name", new TextProperty
 				{
 					Analyzer = "standard",
-					Boost = 1.2,
 					CopyTo = "other_field",
 					EagerGlobalOrdinals = true,
 					Fielddata = true,
