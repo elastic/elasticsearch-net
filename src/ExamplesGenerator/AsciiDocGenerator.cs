@@ -51,7 +51,7 @@ namespace ExamplesGenerator
 				var originalFile = Regex.Replace(cSharpFile.FullName.Replace("\\", "/"), @"^(.*Examples/)",
 					$"https://github.com/elastic/elasticsearch-net/tree/{branchName}/tests/Examples/");
 
-				if (!exampleFile.Directory.Exists)
+				if (!exampleFile.Directory!.Exists)
 					exampleFile.Directory.Create();
 
 				var source = Formatter.Format(example.Body, Workspace)
