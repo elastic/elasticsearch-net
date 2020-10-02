@@ -79,8 +79,6 @@ ProjectSection(SolutionItems) = preProject
 	Directory.Build.targets = Directory.Build.targets
 EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.TestLogger", "tests\Tests.TestLogger\Tests.TestLogger.csproj", "{06EDA58B-1AFC-409F-9791-EA08CFBF97D3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,7 +113,6 @@ Global
 		{D6997ADC-E933-418E-831C-DE1A78897493} = {29E53C13-34F7-4F0D-8D28-41EF768793E7}
 		{5A9C1B95-9280-433E-8D1B-1F5396126166} = {29E53C13-34F7-4F0D-8D28-41EF768793E7}
 		{432D5575-2347-4D3C-BF8C-3E38410C46CA} = {29E53C13-34F7-4F0D-8D28-41EF768793E7}
-		{06EDA58B-1AFC-409F-9791-EA08CFBF97D3} = {6C4A2627-AF22-4388-9DF7-7A9AEACFD635}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5B393962-7586-49BA-BD99-3B1E35F48E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -194,9 +191,5 @@ Global
 		{3D4B5CC3-43E1-44BD-A0EA-63798563B475}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D4B5CC3-43E1-44BD-A0EA-63798563B475}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D4B5CC3-43E1-44BD-A0EA-63798563B475}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06EDA58B-1AFC-409F-9791-EA08CFBF97D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06EDA58B-1AFC-409F-9791-EA08CFBF97D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06EDA58B-1AFC-409F-9791-EA08CFBF97D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06EDA58B-1AFC-409F-9791-EA08CFBF97D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
