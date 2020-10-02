@@ -17,9 +17,6 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface IKeywordProperty : IDocValuesProperty
 	{
-		[DataMember(Name ="boost")]
-		double? Boost { get; set; }
-
 		[DataMember(Name ="eager_global_ordinals")]
 		bool? EagerGlobalOrdinals { get; set; }
 
@@ -52,7 +49,6 @@ namespace Nest
 	{
 		public KeywordProperty() : base(FieldType.Keyword) { }
 
-		public double? Boost { get; set; }
 		public bool? EagerGlobalOrdinals { get; set; }
 		public int? IgnoreAbove { get; set; }
 		public bool? Index { get; set; }
@@ -73,7 +69,6 @@ namespace Nest
 	{
 		public KeywordPropertyDescriptor() : base(FieldType.Keyword) { }
 
-		double? IKeywordProperty.Boost { get; set; }
 		bool? IKeywordProperty.EagerGlobalOrdinals { get; set; }
 		int? IKeywordProperty.IgnoreAbove { get; set; }
 		bool? IKeywordProperty.Index { get; set; }
@@ -82,8 +77,6 @@ namespace Nest
 		bool? IKeywordProperty.Norms { get; set; }
 		string IKeywordProperty.NullValue { get; set; }
 		bool? IKeywordProperty.SplitQueriesOnWhitespace { get; set; }
-
-		public KeywordPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		public KeywordPropertyDescriptor<T> EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true) =>
 			Assign(eagerGlobalOrdinals, (a, v) => a.EagerGlobalOrdinals = v);

@@ -14,12 +14,6 @@ namespace Nest
 			set => Self.Analyzer = value;
 		}
 
-		public double Boost
-		{
-			get => Self.Boost.GetValueOrDefault();
-			set => Self.Boost = value;
-		}
-
 		public bool Index
 		{
 			get => Self.Index.GetValueOrDefault();
@@ -33,7 +27,6 @@ namespace Nest
 		}
 
 		string ITokenCountProperty.Analyzer { get; set; }
-		double? ITokenCountProperty.Boost { get; set; }
 		bool? ITokenCountProperty.Index { get; set; }
 		double? ITokenCountProperty.NullValue { get; set; }
 		private ITokenCountProperty Self => this;

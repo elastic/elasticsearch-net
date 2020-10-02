@@ -22,9 +22,6 @@ namespace Nest
 		[DataMember(Name = "analyzer")]
 		string Analyzer { get; set; }
 
-		[DataMember(Name = "boost")]
-		double? Boost { get; set; }
-
 		[DataMember(Name = "eager_global_ordinals")]
 		bool? EagerGlobalOrdinals { get; set; }
 
@@ -68,7 +65,6 @@ namespace Nest
 	{
 		public TextProperty() : base(FieldType.Text) { }
 		public string Analyzer { get; set; }
-		public double? Boost { get; set; }
 		public bool? EagerGlobalOrdinals { get; set; }
 		public bool? Fielddata { get; set; }
 		public IFielddataFrequencyFilter FielddataFrequencyFilter { get; set; }
@@ -91,7 +87,6 @@ namespace Nest
 		public TextPropertyDescriptor() : base(FieldType.Text) { }
 
 		string ITextProperty.Analyzer { get; set; }
-		double? ITextProperty.Boost { get; set; }
 		bool? ITextProperty.EagerGlobalOrdinals { get; set; }
 		bool? ITextProperty.Fielddata { get; set; }
 		IFielddataFrequencyFilter ITextProperty.FielddataFrequencyFilter { get; set; }
@@ -104,8 +99,6 @@ namespace Nest
 		string ITextProperty.SearchAnalyzer { get; set; }
 		string ITextProperty.SearchQuoteAnalyzer { get; set; }
 		TermVectorOption? ITextProperty.TermVector { get; set; }
-
-		public TextPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		public TextPropertyDescriptor<T> EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true) =>
 			Assign(eagerGlobalOrdinals, (a, v) => a.EagerGlobalOrdinals = v);

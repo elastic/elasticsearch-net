@@ -18,9 +18,6 @@ namespace Nest
 		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
-		[DataMember(Name ="boost")]
-		double? Boost { get; set; }
-
 		[DataMember(Name ="index")]
 		bool? Index { get; set; }
 
@@ -36,8 +33,6 @@ namespace Nest
 
 		public string Analyzer { get; set; }
 
-		public double? Boost { get; set; }
-
 		public bool? Index { get; set; }
 
 		public double? NullValue { get; set; }
@@ -52,13 +47,10 @@ namespace Nest
 		public TokenCountPropertyDescriptor() : base(FieldType.TokenCount) { }
 
 		string ITokenCountProperty.Analyzer { get; set; }
-		double? ITokenCountProperty.Boost { get; set; }
 		bool? ITokenCountProperty.Index { get; set; }
 		double? ITokenCountProperty.NullValue { get; set; }
 
 		public TokenCountPropertyDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
-
-		public TokenCountPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		public TokenCountPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 

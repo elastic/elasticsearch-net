@@ -21,7 +21,6 @@ namespace Tests.Mapping.Types.Core.Boolean
 				name = new
 				{
 					type = "boolean",
-					boost = 1.3,
 					doc_values = false,
 					store = true,
 					index = false,
@@ -33,7 +32,6 @@ namespace Tests.Mapping.Types.Core.Boolean
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.Boolean(b => b
 				.Name(p => p.Name)
-				.Boost(1.3)
 				.DocValues(false)
 				.Store()
 				.Index(false)
@@ -46,7 +44,6 @@ namespace Tests.Mapping.Types.Core.Boolean
 				"name", new BooleanProperty
 				{
 					DocValues = false,
-					Boost = 1.3,
 					Store = true,
 					Index = false,
 					NullValue = false

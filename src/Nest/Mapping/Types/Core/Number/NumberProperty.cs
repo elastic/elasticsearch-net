@@ -16,9 +16,6 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface INumberProperty : IDocValuesProperty
 	{
-		[DataMember(Name = "boost")]
-		double? Boost { get; set; }
-
 		[DataMember(Name = "coerce")]
 		bool? Coerce { get; set; }
 
@@ -45,7 +42,6 @@ namespace Nest
 
 		public NumberProperty(NumberType type) : base(type.ToFieldType()) { }
 
-		public double? Boost { get; set; }
 		public bool? Coerce { get; set; }
 		public INumericFielddata Fielddata { get; set; }
 		public bool? IgnoreMalformed { get; set; }
@@ -66,7 +62,6 @@ namespace Nest
 
 		protected NumberPropertyDescriptorBase(FieldType type) : base(type) { }
 
-		double? INumberProperty.Boost { get; set; }
 		bool? INumberProperty.Coerce { get; set; }
 		INumericFielddata INumberProperty.Fielddata { get; set; }
 		bool? INumberProperty.IgnoreMalformed { get; set; }
@@ -79,7 +74,6 @@ namespace Nest
 
 		public TDescriptor Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 
-		public TDescriptor Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		public TDescriptor NullValue(double? nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);
 

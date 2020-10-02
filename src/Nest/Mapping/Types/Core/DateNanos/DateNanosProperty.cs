@@ -18,12 +18,6 @@ namespace Nest
 	public interface IDateNanosProperty : IDocValuesProperty
 	{
 		/// <summary>
-		/// Mapping field-level query time boosting. Accepts a floating point number, defaults to 1.0.
-		/// </summary>
-		[DataMember(Name = "boost")]
-		double? Boost { get; set; }
-
-		/// <summary>
 		/// The date format(s) that can be parsed. Defaults to strict_date_optional_time||epoch_millis.
 		/// <see cref="DateFormat" />
 		/// </summary>
@@ -58,9 +52,6 @@ namespace Nest
 		public DateNanosProperty() : base(FieldType.DateNanos) { }
 
 		/// <inheritdoc />
-		public double? Boost { get; set; }
-
-		/// <inheritdoc />
 		public string Format { get; set; }
 
 		/// <inheritdoc />
@@ -83,8 +74,6 @@ namespace Nest
 	{
 		public DateNanosPropertyDescriptor() : base(FieldType.DateNanos) { }
 
-		double? IDateNanosProperty.Boost { get; set; }
-
 		string IDateNanosProperty.Format { get; set; }
 
 		bool? IDateNanosProperty.IgnoreMalformed { get; set; }
@@ -95,9 +84,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IDateNanosProperty.Index"/>
 		public DateNanosPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
-
-		/// <inheritdoc cref="IDateNanosProperty.Boost"/>
-		public DateNanosPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		/// <inheritdoc cref="IDateNanosProperty.NullValue"/>
 		public DateNanosPropertyDescriptor<T> NullValue(DateTime? nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);

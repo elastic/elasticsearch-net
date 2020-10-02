@@ -23,7 +23,6 @@ namespace Tests.Mapping.Types.Specialized.TokenCount
 					type = "token_count",
 					analyzer = "standard",
 					index = false,
-					boost = 1.2,
 					null_value = 0.0
 				}
 			}
@@ -34,7 +33,6 @@ namespace Tests.Mapping.Types.Specialized.TokenCount
 				.Name(p => p.Name)
 				.Analyzer("standard")
 				.Index(false)
-				.Boost(1.2)
 				.NullValue(0.0)
 			);
 
@@ -46,7 +44,6 @@ namespace Tests.Mapping.Types.Specialized.TokenCount
 				{
 					Index = false,
 					Analyzer = "standard",
-					Boost = 1.2,
 					NullValue = 0.0
 				}
 			}

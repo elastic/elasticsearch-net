@@ -14,12 +14,6 @@ namespace Nest
 			set => Self.Analyzer = value;
 		}
 
-		public double Boost
-		{
-			get => Self.Boost.GetValueOrDefault();
-			set => Self.Boost = value;
-		}
-
 		public bool EagerGlobalOrdinals
 		{
 			get => Self.EagerGlobalOrdinals.GetValueOrDefault();
@@ -81,7 +75,6 @@ namespace Nest
 		}
 
 		string ITextProperty.Analyzer { get; set; }
-		double? ITextProperty.Boost { get; set; }
 		bool? ITextProperty.EagerGlobalOrdinals { get; set; }
 		bool? ITextProperty.Fielddata { get; set; }
 		IFielddataFrequencyFilter ITextProperty.FielddataFrequencyFilter { get; set; }

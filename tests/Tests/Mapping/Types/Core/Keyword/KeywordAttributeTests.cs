@@ -12,7 +12,6 @@ namespace Tests.Mapping.Types.Core.Keyword
 		public char Char { get; set; }
 
 		[Keyword(
-			Boost = 1.2,
 			EagerGlobalOrdinals = true,
 			IgnoreAbove = 50,
 			Index = false,
@@ -37,7 +36,6 @@ namespace Tests.Mapping.Types.Core.Keyword
 				full = new
 				{
 					type = "keyword",
-					boost = 1.2,
 					eager_global_ordinals = true,
 					ignore_above = 50,
 					index = false,

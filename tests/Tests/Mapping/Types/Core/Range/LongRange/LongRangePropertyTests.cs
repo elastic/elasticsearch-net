@@ -30,7 +30,6 @@ namespace Tests.Mapping.Types.Core.Range.LongRange
 							type = "long_range",
 							store = true,
 							index = false,
-							boost = 1.5,
 							coerce = true
 						}
 					}
@@ -46,7 +45,6 @@ namespace Tests.Mapping.Types.Core.Range.LongRange
 						.Name(p => p.Longs)
 						.Store()
 						.Index(false)
-						.Boost(1.5)
 						.Coerce()
 					)
 				)
@@ -65,7 +63,6 @@ namespace Tests.Mapping.Types.Core.Range.LongRange
 							{
 								Store = true,
 								Index = false,
-								Boost = 1.5,
 								Coerce = true
 							}
 						}
