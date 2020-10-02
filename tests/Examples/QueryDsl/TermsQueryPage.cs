@@ -43,7 +43,7 @@ namespace Examples.QueryDsl
 		{
 			// tag::9e56d79ad9a02b642c361f0b85dd95d7[]
 			var createIndexResponse = client.Indices.Create("my_index", c => c
-				.Map<object>(p => p
+				.Map<object>(m => m
 					.Properties(p => p
 						.Keyword(k => k
 							.Name("color")

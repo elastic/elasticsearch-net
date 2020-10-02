@@ -1,0 +1,6 @@
+[*.cs]
+# generated code so we do not know the usings ahead of time (without doing a lot of work)
+resharper_redundant_using_directive_highlighting=do_not_show
+
+# class names are generated and might be inconsistent e.g TTest
+resharper_inconsistent_naming_highlighting=do_not_show

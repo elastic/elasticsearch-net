@@ -81,10 +81,10 @@ namespace Examples
 		{
 			if (!(o is JObject obj)) return;
 
-			var m = obj["must"].ToJArray();
-			var mn = obj["must_not"].ToJArray();
-			var f = obj["filter"].ToJArray();
-			var s = obj["should"].ToJArray();
+			_ = obj["must"].ToJArray();
+			_ = obj["must_not"].ToJArray();
+			_ = obj["filter"].ToJArray();
+			_ = obj["should"].ToJArray();
 			mutateBool?.Invoke(obj);
 		}
 

@@ -16,7 +16,7 @@ namespace Examples
 {
 	public class ExamplesXunitRunOptions : NestXunitRunOptions
 	{
-		public ExamplesXunitRunOptions() : base()
+		public ExamplesXunitRunOptions()
 		{
 			Environment.SetEnvironmentVariable($"NEST_RANDOM_TYPED_KEYS", "false");
 

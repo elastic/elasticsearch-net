@@ -394,13 +394,13 @@ namespace Examples.QueryDsl
 				.Query(q =>
 					q.Bool(b =>
 						b.Should(
-							s => s.MultiMatch(c => c
+							sh => sh.MultiMatch(c => c
 								.Query("Will Smith")
 								.Type(TextQueryType.CrossFields)
 								.Fields(new[] { "first", "last" })
 								.MinimumShouldMatch(MinimumShouldMatch.Percentage(50))
 							),
-							s => s.MultiMatch(c => c
+							sh => sh.MultiMatch(c => c
 								.Query("Will Smith")
 								.Type(TextQueryType.CrossFields)
 								.Fields("*.edge")

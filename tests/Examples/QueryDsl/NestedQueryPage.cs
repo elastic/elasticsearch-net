@@ -99,11 +99,11 @@ namespace Examples.QueryDsl
 					.Properties(p => p
 						.Nested<Driver>(n => n
 							.Name(nn => nn.Driver)
-							.Properties(p => p
+							.Properties(props => props
 								.Text(t => t
-									.Name(n => n.LastName)
+									.Name(name => name.LastName)
 								)
-								.Nested<Vehicle>(n => n
+								.Nested<Vehicle>(nested => nested
 									.Name(nn => nn.Vehicle)
 									.Properties(pp => pp
 										.Text(t => t

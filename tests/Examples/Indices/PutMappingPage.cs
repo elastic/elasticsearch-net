@@ -104,7 +104,7 @@ namespace Examples.Indices
 		public void Line155()
 		{
 			// tag::d9474f66970c6955e24b17c7447e7b5f[]
-			var createIndexResponse = client.Indices.Create("my_index", m => m
+			var createIndexResponse = client.Indices.Create("my_index", c => c
 				.Map(m => m
 					.Properties(pp => pp
 						.Object<object>(o => o
@@ -194,7 +194,7 @@ namespace Examples.Indices
 		public void Line245()
 		{
 			// tag::c849c6c8f8659dbb93e1c14356f74e37[]
-			var createIndexResponse = client.Indices.Create("my_index", m => m
+			var createIndexResponse = client.Indices.Create("my_index", c => c
 				.Map(m => m
 					.Properties(pp => pp
 						.Text(t => t.Name("city"))
@@ -253,7 +253,7 @@ namespace Examples.Indices
 		public void Line338()
 		{
 			// tag::1f6fe6833686e38c3711c6f2aa00a078[]
-			var createIndexResponse = client.Indices.Create("my_index", m => m
+			var createIndexResponse = client.Indices.Create("my_index", c => c
 				.Map(m => m
 					.Properties(pp => pp
 						.Keyword(t => t
@@ -310,7 +310,7 @@ namespace Examples.Indices
 		public void Line423()
 		{
 			// tag::bd5918ab903c0889bb1f09c8c2466e43[]
-			var createIndexResponse = client.Indices.Create("users", m => m
+			var createIndexResponse = client.Indices.Create("users", c => c
 				.Map(m => m
 					.Properties(pp => pp
 						.Number(t => t
@@ -360,7 +360,7 @@ namespace Examples.Indices
 		public void Line460()
 		{
 			// tag::734c2e2a1e45b84f1e4e65b51356fcd7[]
-			var createIndexResponse = client.Indices.Create("new_users", m => m
+			var createIndexResponse = client.Indices.Create("new_users", c => c
 				.Map(m => m
 					.Properties(pp => pp
 						.Keyword(t => t
@@ -410,7 +410,7 @@ namespace Examples.Indices
 		public void Line533()
 		{
 			// tag::6bf63f2ec6ba55fcaf1092f48212bf25[]
-			var createIndexResponse = client.Indices.Create("my_index", m => m
+			var createIndexResponse = client.Indices.Create("my_index", c => c
 				.Map(m => m
 					.Properties(pp => pp
 						.Keyword(t => t

@@ -2,9 +2,11 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using System.ComponentModel;
+using System.Linq;
 using Elasticsearch.Net;
 using Examples.Models;
 using Newtonsoft.Json.Linq;
@@ -122,8 +124,8 @@ namespace Examples.Search.Request
 			    ""scroll_id"" : ""DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==""
 			}", (e, b) =>
 			{
-				var scroll_id = b["scroll_id"];
-				b["scroll_id"] = new JArray(scroll_id);
+				var scrollId = b["scroll_id"];
+				b["scroll_id"] = new JArray(scrollId);
 			});
 		}
 
@@ -160,10 +162,10 @@ namespace Examples.Search.Request
 
 			clearScrollResponse.MatchesExample(@"DELETE /_search/scroll/_all", (e, b) =>
 			{
-				var index = e.Uri.Path.IndexOf("_all");
-				var scroll_id = e.Uri.Path.Substring(index);
+				var index = e.Uri.Path.IndexOf("_all", StringComparison.Ordinal);
+				var scrollId = e.Uri.Path.Substring(index);
 				e.Uri.Path = e.Uri.Path.Substring(0, index);
-				b["scroll_id"] = new JArray(scroll_id);
+				b["scroll_id"] = new JArray(scrollId);
 			});
 		}
 
@@ -182,10 +184,10 @@ namespace Examples.Search.Request
 			clearScrollResponse.MatchesExample(@"DELETE /_search/scroll/DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==,DnF1ZXJ5VGhlbkZldGNoBQAAAAAAAAABFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAAAxZrUllkUVlCa1NqNmRMaUhiQlZkMWFBAAAAAAAAAAIWa1JZZFFZQmtTajZkTGlIYkJWZDFhQQAAAAAAAAAFFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAABBZrUllkUVlCa1NqNmRMaUhiQlZkMWFB",
 				(e, b) =>
 				{
-					var index = e.Uri.Path.IndexOf("DX");
-					var scroll_id = e.Uri.Path.Substring(index).Split(",");
+					var index = e.Uri.Path.IndexOf("DX", StringComparison.Ordinal);
+					var scrollId = e.Uri.Path.Substring(index).Split(",");
 					e.Uri.Path = e.Uri.Path.Substring(0, index);
-					b["scroll_id"] = new JArray(scroll_id);
+					b["scroll_id"] = new JArray(scrollId.Cast<object>());
 				});
 		}
 

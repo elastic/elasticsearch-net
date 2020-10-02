@@ -726,7 +726,7 @@ namespace Examples.Search.Request
 			    }
 			}", (e, body) =>
 			{
-				body["sort"][0]["_geo_distance"]["pin.location"] = new JArray(new JObject { { "lat", -70d }, { "lon", 40d } }); ;
+				body["sort"][0]["_geo_distance"]["pin.location"] = new JArray(new JObject { { "lat", -70d }, { "lon", 40d } });
 				body["query"]["term"]["user"].ToLongFormTermQuery();
 			});
 		}
@@ -769,7 +769,7 @@ namespace Examples.Search.Request
 			}", (e, body) =>
 			{
 				body["query"]["term"]["user"].ToLongFormTermQuery();
-				body["sort"][0]["_geo_distance"]["pin.location"] = new JArray(new JObject { { "lon", -70d }, { "lat", 40d } }); ;
+				body["sort"][0]["_geo_distance"]["pin.location"] = new JArray(new JObject { { "lon", -70d }, { "lat", 40d } });
 			});
 		}
 

@@ -62,7 +62,7 @@ namespace Examples.Indices
 		public void Line146()
 		{
 			// tag::1b8caf0a6741126c6d0ad83b56fce290[]
-			var putIndexTemplateResponse = client.Indices.PutTemplate("template_1", t => t
+			var putIndexTemplateResponse = client.Indices.PutTemplate("template_1", p => p
 				.IndexPatterns("te*")
 				.Settings(s => s
 					.NumberOfShards(1)
