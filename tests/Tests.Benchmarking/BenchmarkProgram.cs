@@ -20,10 +20,14 @@ namespace Tests.Benchmarking
 {
 	public static class Program
 	{
+		// TODO add ./build.sh benchark to CI again and validate setting git info no longer errors
+
+		// ReSharper disable UnassignedGetOnlyAutoProperty
 		private static string Commit { get; }
 		private static string CommitMessage { get; }
 		private static string Branch { get; }
 		private static string Repository { get; }
+		// ReSharper restore UnassignedGetOnlyAutoProperty
 
 		static Program()
 		{

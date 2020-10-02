@@ -65,7 +65,7 @@ namespace Tests.Benchmarking
 
 		private static readonly string _header = @"{""index"":{}}";
 		private static readonly string[] StaticListString =
-			Projects.SelectMany(p => new string[] { _header, Client.SourceSerializer.SerializeToString(p) }).ToArray();
+			Projects.SelectMany(p => new[] { _header, Client.SourceSerializer.SerializeToString(p) }).ToArray();
 		private static readonly PostData StaticPostDataListString = PostData.MultiJson(StaticListString);
 
 		[Benchmark(Description = "StaticListOfStrings")]
