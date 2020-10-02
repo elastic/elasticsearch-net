@@ -11,7 +11,7 @@ namespace Tests.Domain.JsonConverters
 {
 	/// <summary>
 	/// DateTime/DateTimeOffset converter that always serializes values with a minimum of three sub second fractions.
-	/// This is to fix a bug in Elastisearch < 7.1.0: https://github.com/elastic/elasticsearch/pull/41871
+	/// This is to fix a bug in Elasticsearch versions before 7.1.0: https://github.com/elastic/elasticsearch/pull/41871
 	/// </summary>
 	public class DateTimeConverter : Newtonsoft.Json.Converters.IsoDateTimeConverter
 	{
@@ -30,9 +30,7 @@ namespace Tests.Domain.JsonConverters
 			{
 				if ((DateTimeStyles & DateTimeStyles.AdjustToUniversal) == DateTimeStyles.AdjustToUniversal
 					|| (DateTimeStyles & DateTimeStyles.AssumeUniversal) == DateTimeStyles.AssumeUniversal)
-				{
 					dateTime = dateTime.ToUniversalTime();
-				}
 
 				builder.Append(dateTime.ToString(format, CultureInfo.InvariantCulture));
 			}
@@ -40,9 +38,7 @@ namespace Tests.Domain.JsonConverters
 			{
 				if ((DateTimeStyles & DateTimeStyles.AdjustToUniversal) == DateTimeStyles.AdjustToUniversal
 					|| (DateTimeStyles & DateTimeStyles.AssumeUniversal) == DateTimeStyles.AssumeUniversal)
-				{
 					dateTimeOffset = dateTimeOffset.ToUniversalTime();
-				}
 
 				builder.Append(dateTimeOffset.ToString(format, CultureInfo.InvariantCulture));
 				dateTime = dateTimeOffset.DateTime;

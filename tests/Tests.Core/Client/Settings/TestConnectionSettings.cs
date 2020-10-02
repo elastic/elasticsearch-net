@@ -68,7 +68,7 @@ namespace Tests.Core.Client.Settings
 		{
 			if (!RunningMitmProxy) return this;
 
-			return Proxy(new Uri("http://127.0.0.1:8080"), (string)null, (string)null);
+			return Proxy(new Uri("http://127.0.0.1:8080"), null, (string)null);
 		}
 
 		private static SourceSerializerFactory CreateSerializerFactory(SourceSerializerFactory provided)

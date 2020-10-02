@@ -40,6 +40,7 @@ namespace Tests.Core.Xunit
 			// DumpFailedCollections(failedCollections);
 		}
 
+		// ReSharper disable once UnusedMember.Local
 		private static void DumpClusterTotals(Dictionary<string, Stopwatch> clusterTotals)
 		{
 			Console.WriteLine("--------");
@@ -48,6 +49,7 @@ namespace Tests.Core.Xunit
 			Console.WriteLine("--------");
 		}
 
+		// ReSharper disable once UnusedMember.Local
 		private static void DumpSeenDeprecations()
 		{
 			if (XunitRunState.SeenDeprecations.Count == 0) return;
@@ -58,6 +60,7 @@ namespace Tests.Core.Xunit
 			Console.WriteLine("--------");
 		}
 
+		// ReSharper disable once UnusedMember.Local
 		private static void DumpFailedCollections(ConcurrentBag<Tuple<string, string>> failedCollections)
 		{
 			if (failedCollections.Count <= 0) return;

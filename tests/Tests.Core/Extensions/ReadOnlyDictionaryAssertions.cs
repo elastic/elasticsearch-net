@@ -298,7 +298,8 @@ namespace Tests.Core.Extensions
 		{
 			if (expected == null) throw new NullReferenceException("Cannot verify key containment against a <null> collection of keys");
 
-			var expectedKeys = expected.ToArray();
+			var enumerable = expected as TKey[] ?? expected.ToArray();
+			var expectedKeys = enumerable.ToArray();
 
 			if (!expectedKeys.Any()) throw new ArgumentException("Cannot verify key containment against an empty sequence");
 
@@ -320,7 +321,7 @@ namespace Tests.Core.Extensions
 					Execute.Assertion
 						.BecauseOf(because, becauseArgs)
 						.FailWith("Expected {context:dictionary} {0} to contain key {1}{reason}.", Subject,
-							expected.Cast<object>().First());
+							enumerable.Cast<object>().First());
 			}
 
 			return new AndConstraint<ReadOnlyDictionaryAssertions<TKey, TValue>>(this);
@@ -381,7 +382,8 @@ namespace Tests.Core.Extensions
 		{
 			if (unexpected == null) throw new NullReferenceException("Cannot verify key containment against a <null> collection of keys");
 
-			var unexpectedKeys = unexpected.ToArray();
+			var enumerable = unexpected as TKey[] ?? unexpected.ToArray();
+			var unexpectedKeys = enumerable.ToArray();
 
 			if (!unexpectedKeys.Any()) throw new ArgumentException("Cannot verify key containment against an empty sequence");
 
@@ -403,7 +405,7 @@ namespace Tests.Core.Extensions
 					Execute.Assertion
 						.BecauseOf(because, becauseArgs)
 						.FailWith("Expected {context:dictionary} {0} to not contain key {1}{reason}.", Subject,
-							unexpected.Cast<object>().First());
+							enumerable.Cast<object>().First());
 			}
 
 			return new AndConstraint<ReadOnlyDictionaryAssertions<TKey, TValue>>(this);
@@ -465,7 +467,8 @@ namespace Tests.Core.Extensions
 		{
 			if (expected == null) throw new NullReferenceException("Cannot verify value containment against a <null> collection of values");
 
-			var expectedValues = expected.ToArray();
+			var enumerable = expected as TValue[] ?? expected.ToArray();
+			var expectedValues = enumerable.ToArray();
 
 			if (!expectedValues.Any()) throw new ArgumentException("Cannot verify value containment with an empty sequence");
 
@@ -486,7 +489,7 @@ namespace Tests.Core.Extensions
 					Execute.Assertion
 						.BecauseOf(because, becauseArgs)
 						.FailWith("Expected {context:dictionary} {0} to contain value {1}{reason}.", Subject,
-							expected.Cast<object>().First());
+							enumerable.Cast<object>().First());
 			}
 
 			return
@@ -563,7 +566,8 @@ namespace Tests.Core.Extensions
 		{
 			if (unexpected == null) throw new NullReferenceException("Cannot verify value containment against a <null> collection of values");
 
-			var unexpectedValues = unexpected.ToArray();
+			var enumerable = unexpected as TValue[] ?? unexpected.ToArray();
+			var unexpectedValues = enumerable.ToArray();
 
 			if (!unexpectedValues.Any()) throw new ArgumentException("Cannot verify value containment with an empty sequence");
 
@@ -572,7 +576,7 @@ namespace Tests.Core.Extensions
 					.BecauseOf(because, becauseArgs)
 					.FailWith("Expected {context:dictionary} to not contain value {0}{reason}, but found {1}.", unexpected, Subject);
 
-			var foundValues = unexpectedValues.Intersect(Subject.Values);
+			var foundValues = unexpectedValues.Intersect(Subject!.Values);
 			if (foundValues.Any())
 			{
 				if (unexpectedValues.Length > 1)
@@ -584,7 +588,7 @@ namespace Tests.Core.Extensions
 					Execute.Assertion
 						.BecauseOf(because, becauseArgs)
 						.FailWith("Expected {context:dictionary} {0} to not contain value {1}{reason}.", Subject,
-							unexpected.Cast<object>().First());
+							enumerable.Cast<object>().First());
 			}
 
 			return new AndConstraint<ReadOnlyDictionaryAssertions<TKey, TValue>>(this);
@@ -649,7 +653,7 @@ namespace Tests.Core.Extensions
 				else
 				{
 					var expectedKeyValuePair = keyValuePairsNotSameOrEqualInSubject.First();
-					var actual = Subject[expectedKeyValuePair.Key];
+					var actual = Subject![expectedKeyValuePair.Key];
 
 					Execute.Assertion
 						.BecauseOf(because, becauseArgs)
@@ -815,7 +819,7 @@ namespace Tests.Core.Extensions
 					.FailWith("Expected {context:dictionary} not to contain value {0} at key {1}{reason}, but dictionary is {2}.", value,
 						key, Subject);
 
-			if (Subject.ContainsKey(key))
+			if (Subject!.ContainsKey(key))
 			{
 				var actual = Subject[key];
 
