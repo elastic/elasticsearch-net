@@ -13,12 +13,13 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Domain\Tests.Domain.csproj" />
-    <ProjectReference Include="$(SolutionRoot)\tests\Tests.TestLogger\Tests.TestLogger.csproj" />
-
+    
     <PackageReference Include="xunit" Version="2.3.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
-    <PackageReference Include="coverlet.collector" Version="1.1.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="Elastic.Elasticsearch.Xunit" Version="0.1.0-canary.0.244" />
+    
+    <PackageReference Include="Nullean.VsTest.Pretty.TestLogger" Version="0.3.0" />
+    <PackageReference Include="coverlet.collector" Version="1.1.0" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     
     <PackageReference Include="DiffPlex" Version="1.4.1" />

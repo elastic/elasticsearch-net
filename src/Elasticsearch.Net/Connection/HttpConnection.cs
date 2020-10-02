@@ -4,6 +4,7 @@
 
 #if DOTNETCORE
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -62,7 +63,7 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			var client = GetClient(requestData);
-			HttpResponseMessage responseMessage;
+			HttpResponseMessage responseMessage = null;
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
 			Stream responseStream = null;
@@ -129,7 +130,7 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			var client = GetClient(requestData);
-			HttpResponseMessage responseMessage;
+			HttpResponseMessage responseMessage = null;
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
 			Stream responseStream = null;
