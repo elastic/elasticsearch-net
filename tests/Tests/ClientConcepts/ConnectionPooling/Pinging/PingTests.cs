@@ -15,9 +15,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 {
 	public class PingTests : IClusterFixture<ReadOnlyCluster>
 	{
-		private readonly ReadOnlyCluster _cluster;
 
-		public PingTests(ReadOnlyCluster cluster) => _cluster = cluster;
+		// ReSharper disable once UnusedParameter.Local
+		public PingTests(ReadOnlyCluster cluster) { }
 
 #if DOTNETCORE
 		[I]

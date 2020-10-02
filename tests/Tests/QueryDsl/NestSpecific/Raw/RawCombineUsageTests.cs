@@ -9,10 +9,12 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.QueryDsl.NestSpecific.Raw
 {
+	// ReSharper disable InvalidXmlDocComment
 	/**
 	 * NEST's <<raw-query-usage, raw query>> can be combined with other queries using a <<compound-queries, compound query>>
 	 * such as a `bool` query.
 	 */
+	// ReSharper restore InvalidXmlDocComment
 	public class RawCombineUsageTests : QueryDslUsageTestsBase
 	{
 		private static readonly string RawTermQuery = @"{""term"": { ""fieldname"":""value"" } }";

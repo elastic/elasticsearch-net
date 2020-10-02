@@ -47,7 +47,7 @@ namespace Tests.Cat.CatTransforms
 		protected override Func<CatTransformsDescriptor, ICatTransformsRequest> Fluent => f => f;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override CatTransformsRequest Initializer { get; } = new CatTransformsRequest { };
+		protected override CatTransformsRequest Initializer { get; } = new CatTransformsRequest();
 
 		protected override string UrlPath => "/_cat/transforms";
 

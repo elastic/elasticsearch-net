@@ -140,7 +140,7 @@ namespace Tests.XPack.Transform
 			.Pivot(p => p
 				.Aggregations(a => a
 					.Average("averageCommits", avg => avg
-						.Field(f => f.NumberOfCommits)
+						.Field(af => af.NumberOfCommits)
 					)
 					.ScriptedMetric("sumIntoMaster", sm => sm
 						.InitScript("state.masterCommits = []")
@@ -151,14 +151,14 @@ namespace Tests.XPack.Transform
 				)
 				.GroupBy(g => g
 					.DateHistogram("weekStartedOn", dh => dh
-						.Field(f => f.StartedOn)
+						.Field(df => df.StartedOn)
 						.CalendarInterval(DateInterval.Week)
 					)
 				)
 			)
 			.Sync(sy => sy
 				.Time(t => t
-					.Field(f => f.LastActivity)
+					.Field(tf => tf.LastActivity)
 				)
 			)
 			.Settings(s => s

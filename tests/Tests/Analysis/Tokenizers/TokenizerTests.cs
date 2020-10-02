@@ -217,8 +217,10 @@ namespace Tests.Analysis.Tokenizers
 		[SkipVersion("<7.9.0", "discard_compound_token introduced in 7.9.0")]
 		public class KuromojiDiscardCompoundTokenTests : TokenizerAssertionBase<KuromojiDiscardCompoundTokenTests>
 		{
+			// ReSharper disable UnusedMember.Local
 			private const string Example = "/箱根山-箱根/成田空港-成田/";
 			private const string Inline = "東京スカイツリー,東京 スカイツリー,トウキョウ スカイツリー,カスタム名詞";
+			// ReSharper restore UnusedMember.Local
 
 			public override FuncTokenizer Fluent => (n, t) => t
 				.Kuromoji(n, e => e

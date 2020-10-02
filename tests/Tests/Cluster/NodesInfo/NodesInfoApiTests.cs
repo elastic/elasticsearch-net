@@ -57,7 +57,7 @@ namespace Tests.Cluster.NodesInfo
 			nodesMetada.Successful.Should().BeGreaterThan(0);
 		}
 
-		protected void Assert(Nest.NodeInfo node)
+		protected void Assert(NodeInfo node)
 		{
 			node.Should().NotBeNull();
 			node.Name.Should().NotBeNullOrWhiteSpace();
@@ -135,7 +135,7 @@ namespace Tests.Cluster.NodesInfo
 			transport.PublishAddress.Should().NotBeNullOrWhiteSpace();
 		}
 
-		protected void Assert(Nest.NodeInfoHttp http)
+		protected void Assert(NodeInfoHttp http)
 		{
 			http.Should().NotBeNull();
 			http.BoundAddress.Should().NotBeEmpty();

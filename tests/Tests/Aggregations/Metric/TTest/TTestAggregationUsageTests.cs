@@ -25,6 +25,7 @@ namespace Tests.Aggregations.Metric.TTest
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-ttest-aggregation.html[T-Test Aggregation].
 	 */
 	[SkipVersion("<7.8.0", "Introduced in 7.8.0")]
+	// ReSharper disable once InconsistentNaming
 	public class TTestAggregationUsageTests : AggregationUsageTestBase
 	{
 		public TTestAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

@@ -14,7 +14,7 @@ using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Document.Multiple.MultiTermVectors 
+namespace Tests.Document.Multiple.MultiTermVectors
 {
 	public class MultiTermVectorsIdsNotFoundApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, MultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor,
@@ -26,18 +26,18 @@ namespace Tests.Document.Multiple.MultiTermVectors
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		private const int _id = int.MaxValue;
+		private const int id = int.MaxValue;
 
 
 		protected override object ExpectJson { get; } = new
 		{
-			ids = new [] { _id }
+			ids = new [] { id }
 		};
 
 
 		protected override Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> Fluent => d => d
 			.Index<Developer>()
-			.Ids(_id)
+			.Ids(id)
 			.FieldStatistics()
 			.Payloads()
 			.TermStatistics()
@@ -46,7 +46,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 		protected override MultiTermVectorsRequest Initializer => new MultiTermVectorsRequest(Infer.Index<Developer>())
 		{
-			Ids = new Id[] {_id},
+			Ids = new Id[] {id},
 			FieldStatistics = true,
 			Payloads = true,
 			TermStatistics = true,
@@ -72,7 +72,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 			response.Documents.Should().HaveCount(1);
 			var doc = response.Documents.First();
 			doc.Found.Should().BeFalse();
-			doc.Id.Should().Be(_id.ToString(CultureInfo.InvariantCulture));
+			doc.Id.Should().Be(id.ToString(CultureInfo.InvariantCulture));
 		}
 
 	}

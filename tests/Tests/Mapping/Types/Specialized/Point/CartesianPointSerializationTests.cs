@@ -62,6 +62,7 @@ namespace Tests.Mapping.Types.Specialized.Point
 
 		private class PointDocument
 		{
+			// ReSharper disable once UnusedAutoPropertyAccessor.Local
 			public CartesianPoint Point { get; set; }
 		}
 	}

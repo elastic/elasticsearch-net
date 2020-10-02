@@ -10,9 +10,11 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Search.Request
 {
+	// ReSharper disable InvalidXmlDocComment
 	/**
 	 * The query element within the search request body allows to define a query using the <<query-dsl,Query DSL>>.
 	 */
+	// ReSharper restore InvalidXmlDocComment
 	public class QueryUsageTests : SearchUsageTestBase
 	{
 		public QueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

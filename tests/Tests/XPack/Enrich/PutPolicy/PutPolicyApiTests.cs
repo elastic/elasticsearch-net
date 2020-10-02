@@ -52,8 +52,8 @@ namespace Tests.XPack.Enrich.PutPolicy
 		protected override Func<PutEnrichPolicyDescriptor<Project>, IPutEnrichPolicyRequest> Fluent => f => f
 			.Match(m => m
 				.Indices(typeof(Project))
-				.MatchField(f => f.Name)
-				.EnrichFields(f => f
+				.MatchField(mf => mf.Name)
+				.EnrichFields(e => e
 					.Field(ff => ff.Description)
 					.Field(ff => ff.Tags)
 				)

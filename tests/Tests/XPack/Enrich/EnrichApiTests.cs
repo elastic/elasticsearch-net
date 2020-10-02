@@ -80,7 +80,7 @@ namespace Tests.XPack.Enrich
 			{
 				StatsStep, u =>
 					u.Calls<EnrichStatsDescriptor, EnrichStatsRequest, IEnrichStatsRequest, EnrichStatsResponse>(
-						v => new EnrichStatsRequest() { },
+						v => new EnrichStatsRequest(),
 						(v, d) => d,
 						(v, c, f) => c.Enrich.Stats(f),
 						(v, c, f) => c.Enrich.StatsAsync(f),

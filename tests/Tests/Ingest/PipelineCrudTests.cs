@@ -39,16 +39,16 @@ namespace Tests.Ingest
 			var pipeline = kv.Value;
 			pipeline.Description.Should().NotBeNull();
 
-			var processors = pipeline.Processors;
+			var processors = pipeline.Processors.ToArray();
 			processors.Should().NotBeNull().And.HaveCount(2);
 
 			var uppercase = processors.FirstOrDefault(p => p.Name == "uppercase") as UppercaseProcessor;
 			uppercase.Should().NotBeNull();
-			uppercase.Field.Should().NotBeNull();
+			uppercase!.Field.Should().NotBeNull();
 
 			var set = processors.FirstOrDefault(p => p.Name == "set") as SetProcessor;
 			set.Should().NotBeNull();
-			set.Field.Should().NotBeNull();
+			set!.Field.Should().NotBeNull();
 			set.Value.Should().NotBeNull();
 		}
 
@@ -148,20 +148,20 @@ namespace Tests.Ingest
 			var pipeline = kv.Value;
 			pipeline.Should().NotBeNull();
 
-			var processors = pipeline.Processors;
+			var processors = pipeline.Processors.ToArray();
 			processors.Should().NotBeNull().And.HaveCount(3);
 
 			var uppercase = processors.FirstOrDefault(p => p.Name == "uppercase") as UppercaseProcessor;
-			uppercase.Should().NotBeNull();
+			uppercase!.Should().NotBeNull();
 			uppercase.Field.Should().NotBeNull();
 
 			var set = processors.FirstOrDefault(p => p.Name == "set") as SetProcessor;
-			set.Should().NotBeNull();
+			set!.Should().NotBeNull();
 			set.Field.Should().NotBeNull();
 			set.Value.Should().NotBeNull();
 
 			var rename = processors.FirstOrDefault(p => p.Name == "rename") as RenameProcessor;
-			rename.Should().NotBeNull();
+			rename!.Should().NotBeNull();
 			rename.Field.Should().NotBeNull();
 			rename.TargetField.Should().NotBeNull();
 		}

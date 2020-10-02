@@ -10,6 +10,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Search.Request
 {
+	// ReSharper disable InvalidXmlDocComment
 	/**
 	 * Allows to return a script evaluation (based on different fields) for each hit.
 	 *
@@ -24,6 +25,7 @@ namespace Tests.Search.Request
 	 * See the Elasticsearch documentation on {ref_current}/search-request-body.html#request-body-search-script-fields[script fields]
 	 * for more detail.
 	 */
+	// ReSharper restore InvalidXmlDocComment
 	public class ScriptFieldsUsageTests : SearchUsageTestBase
 	{
 		public ScriptFieldsUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

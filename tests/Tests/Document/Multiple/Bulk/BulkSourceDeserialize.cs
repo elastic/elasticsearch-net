@@ -67,8 +67,12 @@ namespace Tests.Document.Multiple.Bulk
 
 		private class SimpleObject
 		{
+			// ReSharper disable InconsistentNaming
+			// ReSharper disable UnusedAutoPropertyAccessor.Local
 			public string field1 { get; set; }
 			public string field2 { get; set; }
+			// ReSharper restore InconsistentNaming
+			// ReSharper restore UnusedAutoPropertyAccessor.Local
 		}
 	}
 }

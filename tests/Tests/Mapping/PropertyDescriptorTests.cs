@@ -4,7 +4,6 @@
 
 using System;
 using System.Linq;
-using System.Reflection;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
@@ -13,7 +12,7 @@ namespace Tests.Mapping
 {
 	public class PropertyDescriptorTests
 	{
-		[U] public void IPropertiesDescriptorImplementsAllPropertyMethodsOfPropertiesDescriptor()
+		[U] public void PropertiesDescriptorImplementsAllPropertyMethodsOfPropertiesDescriptor()
 		{
 			var concreteMethodNames =
 				from m in typeof(PropertiesDescriptor<>).GetMethods()
@@ -42,7 +41,7 @@ namespace Tests.Mapping
 			concreteMethodNames.Except(interfaceMethodNames).Should().BeEmpty();
 		}
 
-		[U] public void IPropertiesDescriptorImplementsAPropertyMethodsForAllIPropertyTypes()
+		[U] public void PropertiesDescriptorImplementsAPropertyMethodsForAllIPropertyTypes()
 		{
 			var selectorInterfaces =
 				from m in typeof(PropertiesDescriptor<>).GetMethods()

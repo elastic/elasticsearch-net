@@ -25,6 +25,7 @@ namespace Tests.ClientConcepts.Connection
 			for (var i = 0; i < count; i++)
 				tasks[i].Start();
 
+			// ReSharper disable once CoVariantArrayConversion
 			Task.WaitAll(tasks);
 
 			for (var i = 0; i < count; i++)

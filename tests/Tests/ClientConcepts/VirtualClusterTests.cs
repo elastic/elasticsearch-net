@@ -2,7 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
@@ -25,7 +24,7 @@ namespace Tests.ClientConcepts
 				.Settings(s => s.DisablePing().EnableDebugMode())
 			);
 			var e = await Assert.ThrowsAsync<UnexpectedElasticsearchClientException>(
-				async () => await audit.TraceCalls(new ClientCall { }));
+				async () => await audit.TraceCalls(new ClientCall()));
 
 			e.Message.Should().Contain("No ClientCalls defined for the current VirtualCluster, so we do not know how to respond");
 		}
@@ -50,7 +49,7 @@ namespace Tests.ClientConcepts
 				}
 			);
 			var e = await Assert.ThrowsAsync<UnexpectedElasticsearchClientException>(
-				async () => await audit.TraceCalls(new ClientCall { }));
+				async () => await audit.TraceCalls(new ClientCall()));
 
 			e.Message.Should().Contain("No global or port specific ClientCalls rule (9200) matches any longer after 2 calls in to the cluster");
 		}

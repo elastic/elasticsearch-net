@@ -4,7 +4,6 @@
 
 using System;
 using System.Linq;
-using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;

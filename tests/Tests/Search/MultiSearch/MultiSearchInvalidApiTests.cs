@@ -85,9 +85,10 @@ namespace Tests.Search.MultiSearch
 			AssertInvalidResponse(responses[2]);
 
 			/** GetInvalidResponses returns all the invalid responses as IResponse **/
-			var nvalidResponses = r.GetInvalidResponses();
-			nvalidResponses.Should().NotBeNull().And.HaveCount(2);
-			foreach (var response in nvalidResponses)
+			// TODO make GetResponses return ReadOnlyCollection
+			var invalidResponses = r.GetInvalidResponses().ToArray();
+			invalidResponses.Should().NotBeNull().And.HaveCount(2);
+			foreach (var response in invalidResponses)
 				AssertInvalidResponse(response);
 		});
 

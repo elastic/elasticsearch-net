@@ -284,7 +284,7 @@ namespace Tests.Search.Request
 			option.Fields.Should().ContainKey("state");
 			option.Contexts.Should().NotBeNull().And.NotBeEmpty();
 			option.Contexts.Should().ContainKey("color");
-			var colorContexts = option.Contexts["color"];
+			var colorContexts = option.Contexts["color"].ToArray();
 			colorContexts.Should().NotBeNull().And.HaveCount(1);
 			colorContexts.First().Category.Should().Be(Project.First.Suggest.Contexts.Values.SelectMany(v => v).First());
 		}

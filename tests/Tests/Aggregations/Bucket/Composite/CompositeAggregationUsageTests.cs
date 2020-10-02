@@ -174,10 +174,12 @@ namespace Tests.Aggregations.Bucket.Composite
 				}
 			};
 
+		// ReSharper disable InvalidXmlDocComment
 		/**==== Handling Responses
 		 * Each Composite aggregation bucket key is a `CompositeKey` type, a specialized
 		 * `IReadOnlyDictionary<string, object>` type with methods to convert values to supported types
 		 */
+		// ReSharper restore InvalidXmlDocComment
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
@@ -307,10 +309,12 @@ namespace Tests.Aggregations.Bucket.Composite
 				}
 			};
 
+		// ReSharper disable InvalidXmlDocComment
 		/**==== Handling Responses
 		 * Each Composite aggregation bucket key is an `CompositeKey`, a specialized
 		 * `IReadOnlyDictionary<string, object>` type with methods to convert values to supported types
 		 */
+		// ReSharper restore InvalidXmlDocComment
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();

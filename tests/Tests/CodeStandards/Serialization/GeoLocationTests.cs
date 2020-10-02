@@ -29,6 +29,7 @@ namespace Tests.CodeStandards.Serialization
 
 		private class Doc
 		{
+			// ReSharper disable once UnusedAutoPropertyAccessor.Local
 			public GeoLocation Location { get; set; }
 		}
 	}

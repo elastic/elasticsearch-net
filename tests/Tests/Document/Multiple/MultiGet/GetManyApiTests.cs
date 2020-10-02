@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ using Tests.Domain;
 
 namespace Tests.Document.Multiple.MultiGet
 {
+	// TODO getmany should return a readonly collection
+	[SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
 	public class GetManyApiTests : IClusterFixture<WritableCluster>
 	{
 		private readonly IElasticClient _client;
@@ -166,9 +169,7 @@ namespace Tests.Document.Multiple.MultiGet
 			var sources = await _client.SourceManyAsync<Developer>(new[] { id, id, id });
 			sources.Count().Should().Be(1);
 			foreach (var hit in sources)
-			{
 				hit.Id.Should().Be(id);
-			}
 		}
 
 		[I] public async Task CanHandleNotFoundResponses()

@@ -75,9 +75,7 @@ namespace Tests.Cluster.NodesStats
 			Assert(node.Ingest);
 
 			if (TestClient.Configuration.InRange(">=7.8.0"))
-			{
 				Assert(node.ScriptCache);
-			}
 		}
 
 		protected void Assert(NodeIngestStats nodeIngestStats)

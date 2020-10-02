@@ -27,12 +27,12 @@ namespace Tests.XPack.MachineLearning.EstimateModelMemory
 				.Detectors(d => d.Sum(c => c.FieldName(r => r.Total)))
 			)
 			.OverallCardinality(m =>
-				m.Field(f => f.Response, 50)
-				 .Field(f => f.Accept, 10)
+				m.Field(ff => ff.Response, 50)
+				 .Field(ff => ff.Accept, 10)
 			)
 			.MaxBucketCardinality(m =>
-				m.Field(f => f.Response, 500)
-				 .Field(f => f.Accept, 100)
+				m.Field(ff => ff.Response, 500)
+				 .Field(ff => ff.Accept, 100)
 			);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

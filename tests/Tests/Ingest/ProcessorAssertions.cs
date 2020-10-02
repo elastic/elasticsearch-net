@@ -9,7 +9,6 @@ using System.Reflection;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.Client;
-using Tests.Core.Xunit;
 using Tests.Domain;
 
 namespace Tests.Ingest
@@ -168,7 +167,7 @@ namespace Tests.Ingest
 		{
 			public static string PolicyName = "enrich_processor_policy";
 
-			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Enrich<Project>(f => f
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Enrich<Project>(e => e
 				.PolicyName(PolicyName)
 				.Field(f => f.Name)
 				.TargetField("target_field")

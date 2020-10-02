@@ -48,9 +48,7 @@ namespace Tests.XPack.MachineLearning.GetDatafeedStats
 			datafeedStats.State.Should().Be(DatafeedState.Stopped);
 
 			if (Cluster.ClusterConfiguration.Version >= "7.4.0")
-			{
 				datafeedStats.TimingStats.Should().NotBeNull();
-			}
 		}
 	}
 

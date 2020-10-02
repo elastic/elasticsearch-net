@@ -15,6 +15,7 @@ using static Nest.Infer;
 
 namespace Tests.Search.Request
 {
+	// ReSharper disable InvalidXmlDocComment
 	/** Allows to selectively load specific stored fields for each document represented by a search hit.
 	*
 	* WARNING: The `fields` parameter is about fields that are explicitly marked as stored in the mapping,
@@ -23,6 +24,7 @@ namespace Tests.Search.Request
 	*
 	* See the Elasticsearch documentation on {ref_current}/search-request-body.html#request-body-search-stored-fields[Fields] for more detail.
 	*/
+	// ReSharper restore InvalidXmlDocComment
 	public class FieldsUsageTests : SearchUsageTestBase
 	{
 		public FieldsUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

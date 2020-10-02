@@ -114,6 +114,7 @@ namespace Tests.CodeStandards.Serialization
 		}
 
 		[StringEnum]
+		// ReSharper disable once EnumUnderlyingTypeIsInt
 		public enum AnotherEnum : int
 		{
 			Value1 = 1,

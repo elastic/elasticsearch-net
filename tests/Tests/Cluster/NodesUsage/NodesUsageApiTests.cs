@@ -66,9 +66,8 @@ namespace Tests.Cluster.NodesUsage
 			firstNode.Value.RestActions.Should().NotBeNull();
 
 			if (TestClient.Configuration.InRange(">=7.8.0"))
-			{
 				firstNode.Value.Aggregations.Should().NotBeNull().And.ContainKey("avg");
-			}
+
 		}
 	}
 }
