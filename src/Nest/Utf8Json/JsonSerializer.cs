@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System;
@@ -28,35 +29,35 @@ using System.Threading.Tasks;
 
 namespace Nest.Utf8Json
 {
-    /// <summary>
-    /// High-Level API of Utf8Json.
-    /// </summary>
+	/// <summary>
+	/// High-Level API of Utf8Json.
+	/// </summary>
 	internal static partial class JsonSerializer
-    {
-        private static IJsonFormatterResolver _defaultResolver;
-
-        /// <summary>
-        /// FormatterResolver that used resolver less overloads. If does not set it, used StandardResolver.Default.
-        /// </summary>
-        public static IJsonFormatterResolver DefaultResolver => _defaultResolver ??= StandardResolver.Default;
+	{
+		private static IJsonFormatterResolver _defaultResolver;
 
 		/// <summary>
-        /// Set default resolver of Utf8Json APIs.
-        /// </summary>
-        /// <param name="resolver"></param>
-        public static void SetDefaultResolver(IJsonFormatterResolver resolver) => _defaultResolver = resolver;
+		/// FormatterResolver that used resolver less overloads. If does not set it, used StandardResolver.Default.
+		/// </summary>
+		public static IJsonFormatterResolver DefaultResolver => _defaultResolver ??= StandardResolver.Default;
 
 		/// <summary>
-        /// Serialize to binary with default resolver.
-        /// </summary>
-        public static byte[] Serialize<T>(T obj) => Serialize(obj, _defaultResolver);
+		/// Set default resolver of Utf8Json APIs.
+		/// </summary>
+		/// <param name="resolver"></param>
+		public static void SetDefaultResolver(IJsonFormatterResolver resolver) => _defaultResolver = resolver;
 
 		/// <summary>
-        /// Serialize to binary with specified resolver.
-        /// </summary>
-        public static byte[] Serialize<T>(T value, IJsonFormatterResolver resolver)
-        {
-            if (resolver == null) resolver = DefaultResolver;
+		/// Serialize to binary with default resolver.
+		/// </summary>
+		public static byte[] Serialize<T>(T obj) => Serialize(obj, _defaultResolver);
+
+		/// <summary>
+		/// Serialize to binary with specified resolver.
+		/// </summary>
+		public static byte[] Serialize<T>(T value, IJsonFormatterResolver resolver)
+		{
+			if (resolver == null) resolver = DefaultResolver;
 			var buffer = MemoryPool.Rent();
 			try
 			{
@@ -69,72 +70,72 @@ namespace Nest.Utf8Json
 			{
 				MemoryPool.Return(buffer);
 			}
-        }
+		}
 
-        public static void Serialize<T>(ref JsonWriter writer, T value) => Serialize<T>(ref writer, value, _defaultResolver);
+		public static void Serialize<T>(ref JsonWriter writer, T value) => Serialize<T>(ref writer, value, _defaultResolver);
 
 		public static void Serialize<T>(ref JsonWriter writer, T value, IJsonFormatterResolver resolver)
-        {
-            if (resolver == null) resolver = DefaultResolver;
+		{
+			if (resolver == null) resolver = DefaultResolver;
 
-            var formatter = resolver.GetFormatterWithVerify<T>();
-            formatter.Serialize(ref writer, value, resolver);
-        }
-
-        /// <summary>
-        /// Serialize to stream.
-        /// </summary>
-        public static void Serialize<T>(Stream stream, T value) => Serialize(stream, value, _defaultResolver);
+			var formatter = resolver.GetFormatterWithVerify<T>();
+			formatter.Serialize(ref writer, value, resolver);
+		}
 
 		/// <summary>
-        /// Serialize to stream with specified resolver.
-        /// </summary>
-        public static void Serialize<T>(Stream stream, T value, IJsonFormatterResolver resolver)
-        {
-            if (resolver == null) resolver = DefaultResolver;
-
-            var buffer = SerializeUnsafe(value, resolver);
-            stream.Write(buffer.Array, buffer.Offset, buffer.Count);
-        }
-
-        /// <summary>
-        /// Serialize to stream(write async).
-        /// </summary>
-        public static Task SerializeAsync<T>(Stream stream, T value) => SerializeAsync<T>(stream, value, _defaultResolver);
+		/// Serialize to stream.
+		/// </summary>
+		public static void Serialize<T>(Stream stream, T value) => Serialize(stream, value, _defaultResolver);
 
 		/// <summary>
-        /// Serialize to stream(write async) with specified resolver.
-        /// </summary>
-        public static async Task SerializeAsync<T>(Stream stream, T value, IJsonFormatterResolver resolver)
-        {
-            if (resolver == null) resolver = DefaultResolver;
+		/// Serialize to stream with specified resolver.
+		/// </summary>
+		public static void Serialize<T>(Stream stream, T value, IJsonFormatterResolver resolver)
+		{
+			if (resolver == null) resolver = DefaultResolver;
 
-            var buf = MemoryPool.Rent();
-            try
-            {
-                var writer = new JsonWriter(buf);
-                var formatter = resolver.GetFormatterWithVerify<T>();
-                formatter.Serialize(ref writer, value, resolver);
-                var buffer = writer.GetBuffer();
-                await stream.WriteAsync(buffer.Array, buffer.Offset, buffer.Count).ConfigureAwait(false);
-            }
-            finally
-            {
-                MemoryPool.Return(buf);
-            }
-        }
-
-        /// <summary>
-        /// Serialize to binary. Get the raw memory pool byte[]. The result can not share across thread and can not hold, so use quickly.
-        /// </summary>
-        public static ArraySegment<byte> SerializeUnsafe<T>(T obj) => SerializeUnsafe(obj, _defaultResolver);
+			var buffer = SerializeUnsafe(value, resolver);
+			stream.Write(buffer.Array!, buffer.Offset, buffer.Count);
+		}
 
 		/// <summary>
-        /// Serialize to binary with specified resolver. Get the raw memory pool byte[]. The result can not share across thread and can not hold, so use quickly.
-        /// </summary>
-        public static ArraySegment<byte> SerializeUnsafe<T>(T value, IJsonFormatterResolver resolver)
-        {
-            if (resolver == null) resolver = DefaultResolver;
+		/// Serialize to stream(write async).
+		/// </summary>
+		public static Task SerializeAsync<T>(Stream stream, T value) => SerializeAsync<T>(stream, value, _defaultResolver);
+
+		/// <summary>
+		/// Serialize to stream(write async) with specified resolver.
+		/// </summary>
+		public static async Task SerializeAsync<T>(Stream stream, T value, IJsonFormatterResolver resolver)
+		{
+			if (resolver == null) resolver = DefaultResolver;
+
+			var buf = MemoryPool.Rent();
+			try
+			{
+				var writer = new JsonWriter(buf);
+				var formatter = resolver.GetFormatterWithVerify<T>();
+				formatter.Serialize(ref writer, value, resolver);
+				var buffer = writer.GetBuffer();
+				await stream.WriteAsync(buffer.Array, buffer.Offset, buffer.Count).ConfigureAwait(false);
+			}
+			finally
+			{
+				MemoryPool.Return(buf);
+			}
+		}
+
+		/// <summary>
+		/// Serialize to binary. Get the raw memory pool byte[]. The result can not share across thread and can not hold, so use quickly.
+		/// </summary>
+		public static ArraySegment<byte> SerializeUnsafe<T>(T obj) => SerializeUnsafe(obj, _defaultResolver);
+
+		/// <summary>
+		/// Serialize to binary with specified resolver. Get the raw memory pool byte[]. The result can not share across thread and can not hold, so use quickly.
+		/// </summary>
+		public static ArraySegment<byte> SerializeUnsafe<T>(T value, IJsonFormatterResolver resolver)
+		{
+			if (resolver == null) resolver = DefaultResolver;
 
 			var buffer = MemoryPool.Rent();
 			try
@@ -149,19 +150,19 @@ namespace Nest.Utf8Json
 			{
 				MemoryPool.Return(buffer);
 			}
-        }
-
-        /// <summary>
-        /// Serialize to JsonString.
-        /// </summary>
-        public static string ToJsonString<T>(T value) => ToJsonString(value, _defaultResolver);
+		}
 
 		/// <summary>
-        /// Serialize to JsonString with specified resolver.
-        /// </summary>
-        public static string ToJsonString<T>(T value, IJsonFormatterResolver resolver)
-        {
-            if (resolver == null) resolver = DefaultResolver;
+		/// Serialize to JsonString.
+		/// </summary>
+		public static string ToJsonString<T>(T value) => ToJsonString(value, _defaultResolver);
+
+		/// <summary>
+		/// Serialize to JsonString with specified resolver.
+		/// </summary>
+		public static string ToJsonString<T>(T value, IJsonFormatterResolver resolver)
+		{
+			if (resolver == null) resolver = DefaultResolver;
 
 			var buffer = MemoryPool.Rent();
 			try
@@ -175,9 +176,9 @@ namespace Nest.Utf8Json
 			{
 				MemoryPool.Return(buffer);
 			}
-        }
+		}
 
-        public static T Deserialize<T>(string json) => Deserialize<T>(json, _defaultResolver);
+		public static T Deserialize<T>(string json) => Deserialize<T>(json, _defaultResolver);
 
 		public static T Deserialize<T>(string json, IJsonFormatterResolver resolver) => Deserialize<T>(StringEncoding.UTF8.GetBytes(json), resolver);
 
@@ -188,55 +189,55 @@ namespace Nest.Utf8Json
 		public static T Deserialize<T>(byte[] bytes, int offset) => Deserialize<T>(bytes, offset, _defaultResolver);
 
 		public static T Deserialize<T>(byte[] bytes, int offset, IJsonFormatterResolver resolver)
-        {
+		{
 			if (bytes == null || bytes.Length == 0)
 				return default;
 
-            if (resolver == null)
+			if (resolver == null)
 				resolver = DefaultResolver;
 
-            var reader = new JsonReader(bytes, offset);
-            var formatter = resolver.GetFormatterWithVerify<T>();
-            return formatter.Deserialize(ref reader, resolver);
-        }
+			var reader = new JsonReader(bytes, offset);
+			var formatter = resolver.GetFormatterWithVerify<T>();
+			return formatter.Deserialize(ref reader, resolver);
+		}
 
-        public static T Deserialize<T>(ref JsonReader reader) => Deserialize<T>(ref reader, _defaultResolver);
+		public static T Deserialize<T>(ref JsonReader reader) => Deserialize<T>(ref reader, _defaultResolver);
 
 		public static T Deserialize<T>(ref JsonReader reader, IJsonFormatterResolver resolver)
-        {
-            if (resolver == null) resolver = DefaultResolver;
+		{
+			if (resolver == null) resolver = DefaultResolver;
 
-            var formatter = resolver.GetFormatterWithVerify<T>();
-            return formatter.Deserialize(ref reader, resolver);
-        }
+			var formatter = resolver.GetFormatterWithVerify<T>();
+			return formatter.Deserialize(ref reader, resolver);
+		}
 
-        public static T Deserialize<T>(Stream stream) => Deserialize<T>(stream, _defaultResolver);
+		public static T Deserialize<T>(Stream stream) => Deserialize<T>(stream, _defaultResolver);
 
 		public static T Deserialize<T>(Stream stream, IJsonFormatterResolver resolver)
-        {
+		{
 			if (stream == null || stream.CanSeek && stream.Length == 0)
 				return default;
 
-            if (resolver == null)
+			if (resolver == null)
 				resolver = DefaultResolver;
 
 			if (stream is MemoryStream ms)
-            {
+			{
 				if (ms.TryGetBuffer(out var buf2))
-                {
-                    // when token is number, can not use from pool(can not find end line).
-                    var token = new JsonReader(buf2.Array, buf2.Offset).GetCurrentJsonToken();
-                    if (token == JsonToken.Number)
-                    {
-                        var buf3 = new byte[buf2.Count];
-                        Buffer.BlockCopy(buf2.Array, buf2.Offset, buf3, 0, buf3.Length);
-                        return Deserialize<T>(buf3, 0, resolver);
-                    }
+				{
+					// when token is number, can not use from pool(can not find end line).
+					var token = new JsonReader(buf2.Array, buf2.Offset).GetCurrentJsonToken();
+					if (token == JsonToken.Number)
+					{
+						var buf3 = new byte[buf2.Count];
+						Buffer.BlockCopy(buf2.Array, buf2.Offset, buf3, 0, buf3.Length);
+						return Deserialize<T>(buf3, 0, resolver);
+					}
 
-                    return Deserialize<T>(buf2.Array, buf2.Offset, resolver);
-                }
-            }
-            var buf = MemoryPool.Rent();
+					return Deserialize<T>(buf2.Array, buf2.Offset, resolver);
+				}
+			}
+			var buf = MemoryPool.Rent();
 			var poolBuf = buf;
 			try
 			{
@@ -258,79 +259,79 @@ namespace Nest.Utf8Json
 			{
 				MemoryPool.Return(poolBuf);
 			}
-        }
+		}
 
-        public static Task<T> DeserializeAsync<T>(Stream stream) => DeserializeAsync<T>(stream, _defaultResolver);
+		public static Task<T> DeserializeAsync<T>(Stream stream) => DeserializeAsync<T>(stream, _defaultResolver);
 
 		public static async Task<T> DeserializeAsync<T>(Stream stream, IJsonFormatterResolver resolver)
-        {
+		{
 			if (stream == null || stream.CanSeek && stream.Length == 0)
 				return default;
 
-            if (resolver == null)
+			if (resolver == null)
 				resolver = DefaultResolver;
 
 			if (stream is MemoryStream ms)
-            {
+			{
 				if (ms.TryGetBuffer(out var buf2))
-                {
-                    // when token is number, can not use from pool(can not find end line).
-                    var token = new JsonReader(buf2.Array, buf2.Offset).GetCurrentJsonToken();
-                    if (token == JsonToken.Number)
-                    {
-                        var buf3 = new byte[buf2.Count];
-                        Buffer.BlockCopy(buf2.Array, buf2.Offset, buf3, 0, buf3.Length);
-                        return Deserialize<T>(buf3, 0, resolver);
-                    }
+				{
+					// when token is number, can not use from pool(can not find end line).
+					var token = new JsonReader(buf2.Array, buf2.Offset).GetCurrentJsonToken();
+					if (token == JsonToken.Number)
+					{
+						var buf3 = new byte[buf2.Count];
+						Buffer.BlockCopy(buf2.Array, buf2.Offset, buf3, 0, buf3.Length);
+						return Deserialize<T>(buf3, 0, resolver);
+					}
 
-                    return Deserialize<T>(buf2.Array, buf2.Offset, resolver);
-                }
-            }
+					return Deserialize<T>(buf2.Array, buf2.Offset, resolver);
+				}
+			}
 
-            var buffer = MemoryPool.Rent();
-            var buf = buffer;
-            try
-            {
-                var length = 0;
-                int read;
-                while ((read = await stream.ReadAsync(buf, length, buf.Length - length).ConfigureAwait(false)) > 0)
-                {
-                    length += read;
-                    if (length == buf.Length)
+			var buffer = MemoryPool.Rent();
+			var buf = buffer;
+			try
+			{
+				var length = 0;
+				int read;
+				while ((read = await stream.ReadAsync(buf, length, buf.Length - length).ConfigureAwait(false)) > 0)
+				{
+					length += read;
+					if (length == buf.Length)
 						BinaryUtil.FastResize(ref buf, length * 2);
-                }
+				}
 
 				if (length == 0)
 					return default;
 
-                // when token is number, can not use from pool(can not find end line).
-                var token = new JsonReader(buf).GetCurrentJsonToken();
-                if (token == JsonToken.Number)
-                {
-                    buf = BinaryUtil.FastCloneWithResize(buf, length);
-                }
+				// when token is number, can not use from pool(can not find end line).
+				var token = new JsonReader(buf).GetCurrentJsonToken();
+				if (token == JsonToken.Number)
+				{
+					buf = BinaryUtil.FastCloneWithResize(buf, length);
+				}
 
-                return Deserialize<T>(buf, resolver);
-            }
-            finally
-            {
-                MemoryPool.Return(buffer);
-            }
-        }
+				return Deserialize<T>(buf, resolver);
+			}
+			finally
+			{
+				MemoryPool.Return(buffer);
+			}
+		}
 
 		private static int FillFromStream(Stream input, ref byte[] buffer)
-        {
-            var length = 0;
-            int read;
-            while ((read = input.Read(buffer, length, buffer.Length - length)) > 0)
-            {
-                length += read;
-                if (length == buffer.Length)
+		{
+			var length = 0;
+			int read;
+			while ((read = input.Read(buffer, length, buffer.Length - length)) > 0)
+			{
+				length += read;
+				if (length == buffer.Length)
 					BinaryUtil.FastResize(ref buffer, length * 2);
 			}
 
-            return length;
-        }
+			return length;
+		}
 
 		internal static class MemoryPool
 		{
@@ -338,5 +339,5 @@ namespace Nest.Utf8Json
 
 			public static void Return(byte[] bytes) => System.Buffers.ArrayPool<byte>.Shared.Return(bytes);
 		}
-    }
+	}
 }

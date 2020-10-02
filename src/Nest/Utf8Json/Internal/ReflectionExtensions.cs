@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System;
@@ -29,8 +30,9 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace Nest.Utf8Json
-{internal static class ReflectionExtensions
-    {
+{
+	internal static class ReflectionExtensions
+	{
 		private static readonly ThreadsafeTypeKeyHashTable<MethodInfo> ShouldSerializeMethodInfo =
 			new ThreadsafeTypeKeyHashTable<MethodInfo>();
 
@@ -46,7 +48,8 @@ namespace Nest.Utf8Json
 
 		private static void GetAllPropertiesCore(Type type, Dictionary<string, PropertyInfo> collectedProperties)
 		{
-			foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly))
+			foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static
+				| BindingFlags.DeclaredOnly))
 			{
 				if (collectedProperties.TryGetValue(property.Name, out var existingProperty))
 				{
@@ -76,22 +79,22 @@ namespace Nest.Utf8Json
 		public static IEnumerable<FieldInfo> GetAllFields(this Type type) => GetAllFieldsCore(type, new HashSet<string>());
 
 		private static IEnumerable<FieldInfo> GetAllFieldsCore(Type type, HashSet<string> nameCheck)
-        {
-            foreach (var item in type.GetRuntimeFields())
-            {
-                if (nameCheck.Add(item.Name))
-                {
-                    yield return item;
-                }
-            }
-            if (type.BaseType != null)
-            {
-                foreach (var item in GetAllFieldsCore(type.BaseType, nameCheck))
-                {
-                    yield return item;
-                }
-            }
-        }
+		{
+			foreach (var item in type.GetRuntimeFields())
+			{
+				if (nameCheck.Add(item.Name))
+				{
+					yield return item;
+				}
+			}
+			if (type.BaseType != null)
+			{
+				foreach (var item in GetAllFieldsCore(type.BaseType, nameCheck))
+				{
+					yield return item;
+				}
+			}
+		}
 
 		private static Type GetDeclaringType(this PropertyInfo propertyInfo) =>
 			propertyInfo.GetBaseDefinition()?.DeclaringType ?? propertyInfo.DeclaringType;
@@ -121,6 +124,8 @@ namespace Nest.Utf8Json
 			type.GetCustomAttribute<CompilerGeneratedAttribute>() != null
 			&& type.Name.Contains("AnonymousType")
 			&& (type.Name.StartsWith("<>") || type.Name.StartsWith("VB$"))
+			// ReSharper disable once NonConstantEqualityExpressionHasConstantResult
+			// Assume intentional
 			&& (type.Attributes & TypeAttributes.NotPublic) == TypeAttributes.NotPublic;
 
 		/// <summary>
@@ -162,21 +167,23 @@ namespace Nest.Utf8Json
 		/// Gets the methods for a type matching the given name
 		/// </summary>
 		public static IEnumerable<MethodInfo> GetDeclaredMethods(this Type type, string name)
-	    {
-			var methods = type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+		{
+			var methods = type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public
+				| BindingFlags.NonPublic);
 			for (var index = 0; index < methods.Length; ++index)
 			{
 				var method = methods[index];
 				if (method.Name == name)
 					yield return method;
 			}
-	    }
+		}
 
 		/// <summary>
 		/// Gets all the constructors for a type
 		/// </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ConstructorInfo[] GetDeclaredConstructors(this Type type) =>
-			type.GetConstructors(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+			type.GetConstructors(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public
+				| BindingFlags.NonPublic);
 	}
 }

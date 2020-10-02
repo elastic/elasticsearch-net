@@ -20,26 +20,28 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 namespace Nest.Utf8Json
 {
 	internal delegate void JsonSerializeAction<in T>(ref JsonWriter writer, T value, IJsonFormatterResolver resolver);
+
 	internal delegate T JsonDeserializeFunc<out T>(ref JsonReader reader, IJsonFormatterResolver resolver);
 
-	internal interface IJsonFormatter
-    {
-    }
+	internal interface IJsonFormatter { }
 
 	internal interface IJsonFormatter<T> : IJsonFormatter
-    {
-        void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver);
-        T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver);
-    }
+	{
+		void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver);
+
+		T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver);
+	}
 
 	internal interface IObjectPropertyNameFormatter<T>
-    {
-        void SerializeToPropertyName(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver);
-        T DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver);
-    }
+	{
+		void SerializeToPropertyName(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver);
+
+		T DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver);
+	}
 }

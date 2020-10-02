@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System;
@@ -42,7 +43,11 @@ namespace Nest.Utf8Json
 
 		public void Serialize(ref JsonWriter writer, byte[] value, IJsonFormatterResolver formatterResolver)
 		{
-			if (value == null) { writer.WriteNull(); return; }
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 
 			writer.WriteString(Convert.ToBase64String(value, Base64FormattingOptions.None));
 		}
@@ -62,7 +67,11 @@ namespace Nest.Utf8Json
 
 		public void Serialize(ref JsonWriter writer, ArraySegment<byte> value, IJsonFormatterResolver formatterResolver)
 		{
-			if (value.Array == null) { writer.WriteNull(); return; }
+			if (value.Array == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 
 			writer.WriteString(Convert.ToBase64String(value.Array, value.Offset, value.Count, Base64FormattingOptions.None));
 		}
@@ -85,7 +94,8 @@ namespace Nest.Utf8Json
 
 		public string Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver) => reader.ReadString();
 
-		public void SerializeToPropertyName(ref JsonWriter writer, string value, IJsonFormatterResolver formatterResolver) => writer.WriteString(value);
+		public void SerializeToPropertyName(ref JsonWriter writer, string value, IJsonFormatterResolver formatterResolver) =>
+			writer.WriteString(value);
 
 		public string DeserializeFromPropertyName(ref JsonReader reader, IJsonFormatterResolver formatterResolver) => reader.ReadString();
 	}
@@ -247,9 +257,7 @@ namespace Nest.Utf8Json
 		private readonly bool _serializeAsString;
 
 		public DecimalFormatter()
-			: this(false)
-		{
-		}
+			: this(false) { }
 
 		public DecimalFormatter(bool serializeAsString) => _serializeAsString = serializeAsString;
 
@@ -271,7 +279,8 @@ namespace Nest.Utf8Json
 			{
 				var number = reader.ReadNumberSegment();
 				// ReSharper disable once AssignNullToNotNullAttribute
-				return decimal.Parse(StringEncoding.UTF8.GetString(number.Array, number.Offset, number.Count), NumberStyles.Float, CultureInfo.InvariantCulture);
+				return decimal.Parse(StringEncoding.UTF8.GetString(number.Array, number.Offset, number.Count), NumberStyles.Float,
+					CultureInfo.InvariantCulture);
 			}
 
 			if (token == JsonToken.String)
@@ -327,9 +336,9 @@ namespace Nest.Utf8Json
 	{
 		public void Serialize(ref JsonWriter writer, KeyValuePair<TKey, TValue> value, IJsonFormatterResolver formatterResolver)
 		{
-			writer.WriteRaw(StandardClassLibraryFormatterHelper.keyValuePairName[0]);
+			writer.WriteRaw(StandardClassLibraryFormatterHelper.KeyValuePairName[0]);
 			formatterResolver.GetFormatterWithVerify<TKey>().Serialize(ref writer, value.Key, formatterResolver);
-			writer.WriteRaw(StandardClassLibraryFormatterHelper.keyValuePairName[1]);
+			writer.WriteRaw(StandardClassLibraryFormatterHelper.KeyValuePairName[1]);
 			formatterResolver.GetFormatterWithVerify<TValue>().Serialize(ref writer, value.Value, formatterResolver);
 
 			writer.WriteEndObject();
@@ -349,7 +358,7 @@ namespace Nest.Utf8Json
 			{
 				var keyString = reader.ReadPropertyNameSegmentRaw();
 				int key;
-				StandardClassLibraryFormatterHelper.keyValuePairAutomata.TryGetValue(keyString, out key);
+				StandardClassLibraryFormatterHelper.KeyValuePairAutomata.TryGetValue(keyString, out key);
 
 				switch (key)
 				{
@@ -375,7 +384,11 @@ namespace Nest.Utf8Json
 
 		public void Serialize(ref JsonWriter writer, StringBuilder value, IJsonFormatterResolver formatterResolver)
 		{
-			if (value == null) { writer.WriteNull(); return; }
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 			writer.WriteString(value.ToString());
 		}
 
@@ -392,7 +405,11 @@ namespace Nest.Utf8Json
 
 		public void Serialize(ref JsonWriter writer, BitArray value, IJsonFormatterResolver formatterResolver)
 		{
-			if (value == null) { writer.WriteNull(); return; }
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 
 			writer.WriteBeginArray();
 			for (var i = 0; i < value.Length; i++)
@@ -406,6 +423,7 @@ namespace Nest.Utf8Json
 		public BitArray Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.ReadIsNull()) return null;
+
 			reader.ReadIsBeginArrayWithVerify();
 			var c = 0;
 			var buffer = new ArrayBuffer<bool>(4);
@@ -420,16 +438,15 @@ namespace Nest.Utf8Json
 	{
 		public static readonly TypeFormatter Default = new TypeFormatter();
 
-		private static readonly Regex SubtractFullNameRegex = new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+", RegexOptions.Compiled);
+		private static readonly Regex SubtractFullNameRegex =
+			new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+", RegexOptions.Compiled);
 
 		private readonly bool _serializeAssemblyQualifiedName;
 		private readonly bool _deserializeSubtractAssemblyQualifiedName;
 		private readonly bool _throwOnError;
 
 		public TypeFormatter()
-			: this(true, true, true)
-		{
-		}
+			: this(true, true, true) { }
 
 		public TypeFormatter(bool serializeAssemblyQualifiedName, bool deserializeSubtractAssemblyQualifiedName, bool throwOnError)
 		{
@@ -440,7 +457,11 @@ namespace Nest.Utf8Json
 
 		public void Serialize(ref JsonWriter writer, Type value, IJsonFormatterResolver formatterResolver)
 		{
-			if (value == null) { writer.WriteNull(); return; }
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 			writer.WriteString(_serializeAssemblyQualifiedName ? value.AssemblyQualifiedName : value.FullName);
 		}
 
@@ -528,7 +549,11 @@ namespace Nest.Utf8Json
 	{
 		public void Serialize(ref JsonWriter writer, Lazy<T> value, IJsonFormatterResolver formatterResolver)
 		{
-			if (value == null) { writer.WriteNull(); return; }
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 			formatterResolver.GetFormatterWithVerify<T>().Serialize(ref writer, value.Value, formatterResolver);
 		}
 
@@ -548,7 +573,11 @@ namespace Nest.Utf8Json
 
 		public void Serialize(ref JsonWriter writer, Task value, IJsonFormatterResolver formatterResolver)
 		{
-			if (value == null) { writer.WriteNull(); return; }
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 
 			value.Wait(); // wait!
 			writer.WriteNull();
@@ -566,7 +595,11 @@ namespace Nest.Utf8Json
 	{
 		public void Serialize(ref JsonWriter writer, Task<T> value, IJsonFormatterResolver formatterResolver)
 		{
-			if (value == null) { writer.WriteNull(); return; }
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 
 			// value.Result -> wait...!
 			formatterResolver.GetFormatterWithVerify<T>().Serialize(ref writer, value.Result, formatterResolver);
@@ -581,7 +614,7 @@ namespace Nest.Utf8Json
 		}
 	}
 
-	#if NETSTANDARD2_1
+#if NETSTANDARD2_1
 	internal sealed class ValueTaskFormatter<T> : IJsonFormatter<ValueTask<T>>
 	{
 		public void Serialize(ref JsonWriter writer, ValueTask<T> value, IJsonFormatterResolver formatterResolver) =>
@@ -594,24 +627,23 @@ namespace Nest.Utf8Json
 			return new ValueTask<T>(v);
 		}
 	}
-	#endif
+#endif
 
 	internal static class StandardClassLibraryFormatterHelper
 	{
-		internal static readonly byte[][] keyValuePairName;
-		internal static readonly AutomataDictionary keyValuePairAutomata;
+		internal static readonly byte[][] KeyValuePairName;
+		internal static readonly AutomataDictionary KeyValuePairAutomata;
 
 		static StandardClassLibraryFormatterHelper()
 		{
-			keyValuePairName = new[]
+			KeyValuePairName = new[]
 			{
-				JsonWriter.GetEncodedPropertyNameWithBeginObject("Key"),
-				JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator("Value"),
+				JsonWriter.GetEncodedPropertyNameWithBeginObject("Key"), JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator("Value"),
 			};
-			keyValuePairAutomata = new AutomataDictionary
+			KeyValuePairAutomata = new AutomataDictionary
 			{
-				{JsonWriter.GetEncodedPropertyNameWithoutQuotation("Key"), 0 },
-				{JsonWriter.GetEncodedPropertyNameWithoutQuotation("Value"), 1 },
+				{ JsonWriter.GetEncodedPropertyNameWithoutQuotation("Key"), 0 },
+				{ JsonWriter.GetEncodedPropertyNameWithoutQuotation("Value"), 1 },
 			};
 		}
 	}

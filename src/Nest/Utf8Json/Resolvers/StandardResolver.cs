@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System.Linq;
@@ -37,7 +38,7 @@ namespace Nest.Utf8Json
 		internal static readonly IJsonFormatterResolver[] CompositeResolverBase =
 		{
 			BuiltinResolver.Instance, // Builtin
-			EnumResolver.Default,     // Enum(default => string)
+			EnumResolver.Default, // Enum(default => string)
 			DynamicGenericResolver.Instance, // T[], List<T>, etc...
 			AttributeFormatterResolver.Instance // [JsonFormatter]
 		};
@@ -48,54 +49,49 @@ namespace Nest.Utf8Json
 		// configure
 		public static readonly IJsonFormatterResolver Instance = new DefaultStandardResolver();
 
-		private static readonly IJsonFormatter<object> FallbackFormatter = new DynamicObjectTypeFallbackFormatter(InnerResolver.Instance);
+		private static readonly IJsonFormatter<object> FallbackFormatter = new DynamicObjectTypeFallbackFormatter(InnerResolver.InnerInstance);
 
-		private DefaultStandardResolver()
-		{
-		}
+		private DefaultStandardResolver() { }
 
-		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.Formatter;
 
 		private static class FormatterCache<T>
 		{
-			public static readonly IJsonFormatter<T> formatter;
+			public static readonly IJsonFormatter<T> Formatter;
 
 			static FormatterCache()
 			{
 				if (typeof(T) == typeof(object))
-					formatter = (IJsonFormatter<T>)FallbackFormatter;
+					Formatter = (IJsonFormatter<T>)FallbackFormatter;
 				else
-					formatter = InnerResolver.Instance.GetFormatter<T>();
+					Formatter = InnerResolver.InnerInstance.GetFormatter<T>();
 			}
 		}
 
 		private sealed class InnerResolver : IJsonFormatterResolver
 		{
-			public static readonly IJsonFormatterResolver Instance = new InnerResolver();
+			public static readonly IJsonFormatterResolver InnerInstance = new InnerResolver();
 
 			private static readonly IJsonFormatterResolver[] Resolvers =
 				StandardResolverHelper.CompositeResolverBase.Concat(new[] { DynamicObjectResolver.Default }).ToArray();
 
-			private InnerResolver()
+			private InnerResolver() { }
+
+			public IJsonFormatter<T> GetFormatter<T>() => InnerFormatterCache<T>.Formatter;
+
+			private static class InnerFormatterCache<T>
 			{
-			}
+				public static readonly IJsonFormatter<T> Formatter;
 
-			public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
-
-			private static class FormatterCache<T>
-			{
-				public static readonly IJsonFormatter<T> formatter;
-
-				static FormatterCache()
+				static InnerFormatterCache()
 				{
 					foreach (var item in Resolvers)
 					{
 						var f = item.GetFormatter<T>();
-						if (f != null)
-						{
-							formatter = f;
-							return;
-						}
+						if (f == null) continue;
+
+						Formatter = f;
+						return;
 					}
 				}
 			}

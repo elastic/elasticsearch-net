@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 
@@ -28,58 +29,60 @@ using System;
 namespace Nest.Utf8Json
 {
 	internal sealed class NullableFormatter<T> : IJsonFormatter<T?>
-        where T : struct
-    {
-        public void Serialize(ref JsonWriter writer, T? value, IJsonFormatterResolver formatterResolver)
-        {
-            if (value == null)
+		where T : struct
+	{
+		public void Serialize(ref JsonWriter writer, T? value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
 				writer.WriteNull();
 			else
 				formatterResolver.GetFormatterWithVerify<T>().Serialize(ref writer, value.Value, formatterResolver);
 		}
 
-        public T? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		public T? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (reader.ReadIsNull())
 				return null;
 
 			return formatterResolver.GetFormatterWithVerify<T>().Deserialize(ref reader, formatterResolver);
 		}
-    }
+	}
 
 	internal sealed class StaticNullableFormatter<T> : IJsonFormatter<T?>
-        where T : struct
-    {
+		where T : struct
+	{
 		private readonly IJsonFormatter<T> _underlyingFormatter;
 
-        public StaticNullableFormatter(IJsonFormatter<T> underlyingFormatter) => _underlyingFormatter = underlyingFormatter;
+		public StaticNullableFormatter(IJsonFormatter<T> underlyingFormatter) => _underlyingFormatter = underlyingFormatter;
 
 		public StaticNullableFormatter(Type formatterType, object[] formatterArguments)
-        {
-            try
-            {
-                _underlyingFormatter = (IJsonFormatter<T>)Activator.CreateInstance(formatterType, formatterArguments);
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException("Can not create formatter from JsonFormatterAttribute, check the target formatter is public and has constructor with right argument. FormatterType:" + formatterType.Name, ex);
-            }
-        }
+		{
+			try
+			{
+				_underlyingFormatter = (IJsonFormatter<T>)Activator.CreateInstance(formatterType, formatterArguments);
+			}
+			catch (Exception ex)
+			{
+				throw new InvalidOperationException(
+					"Can not create formatter from JsonFormatterAttribute, check the target formatter is public and has constructor with right argument. FormatterType:"
+					+ formatterType.Name, ex);
+			}
+		}
 
-        public void Serialize(ref JsonWriter writer, T? value, IJsonFormatterResolver formatterResolver)
-        {
-            if (value == null)
+		public void Serialize(ref JsonWriter writer, T? value, IJsonFormatterResolver formatterResolver)
+		{
+			if (value == null)
 				writer.WriteNull();
 			else
 				_underlyingFormatter.Serialize(ref writer, value.Value, formatterResolver);
 		}
 
-        public T? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-        {
-            if (reader.ReadIsNull())
+		public T? Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (reader.ReadIsNull())
 				return null;
 			else
 				return _underlyingFormatter.Deserialize(ref reader, formatterResolver);
 		}
-    }
+	}
 }

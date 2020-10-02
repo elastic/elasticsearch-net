@@ -2,20 +2,20 @@
 <#@ assembly name="System.Core" #>
 <#@ output extension=".cs" #>
 <#
-    var types = new[]
-    {
-        typeof(sbyte),
-        typeof(short),
-        typeof(int),
-        typeof(long),
-        typeof(byte), 
-        typeof(ushort),
-        typeof(uint),
-        typeof(ulong),
-        typeof(float),
-        typeof(double),
-        typeof(bool), 
-    };
+	var types = new[]
+	{
+		typeof(sbyte),
+		typeof(short),
+		typeof(int),
+		typeof(long),
+		typeof(byte),
+		typeof(ushort),
+		typeof(uint),
+		typeof(ulong),
+		typeof(float),
+		typeof(double),
+		typeof(bool),
+	};
 #>
 #region Utf8Json License https://github.com/neuecc/Utf8Json/blob/master/LICENSE
 // MIT License
@@ -45,7 +45,10 @@ using System;
 
 namespace Nest.Utf8Json
 {
-<# foreach(var t in types) {  #>
+<#
+	foreach (var t in types)
+	{
+#>
     internal sealed class <#= t.Name #>Formatter : IJsonFormatter<<#= GetCSharpType(t) #>>, IObjectPropertyNameFormatter<<#= GetCSharpType(t) #>>
     {
         public static readonly <#= t.Name #>Formatter Default = new <#= t.Name #>Formatter();
@@ -106,7 +109,10 @@ namespace Nest.Utf8Json
         }
     }
 
-<# if(t.Name != "Byte") { #>
+<#
+	if (t.Name != "Byte")
+	{
+#>
     internal sealed class <#= t.Name #>ArrayFormatter : IJsonFormatter<<#= GetCSharpType(t) #>[]>
     {
         public static readonly <#= t.Name #>ArrayFormatter Default = new <#= t.Name #>ArrayFormatter();
@@ -151,27 +157,41 @@ namespace Nest.Utf8Json
             return array;
         }
     }
-<# } #>
+<#
+	} #>
 
-<# } #>
+<#
+	} #>
 }
 <#+
 	public static string GetCSharpType(Type type)
 	{
 		switch (type.Name)
 		{
-			case "SByte": return "sbyte";
-			case "Int16": return "short";
-			case "Int32": return "int";
-			case "Int64": return "long";
-			case "Byte": return "byte";
-			case "UInt16": return "ushort";
-			case "UInt32": return "uint";
-			case "UInt64": return "ulong";
-			case "Single": return "float";
-			case "Double": return "double";
-			case "Boolean": return "bool";
-			default: throw new Exception("Unknown type");
+			case "SByte":
+				return "sbyte";
+			case "Int16":
+				return "short";
+			case "Int32":
+				return "int";
+			case "Int64":
+				return "long";
+			case "Byte":
+				return "byte";
+			case "UInt16":
+				return "ushort";
+			case "UInt32":
+				return "uint";
+			case "UInt64":
+				return "ulong";
+			case "Single":
+				return "float";
+			case "Double":
+				return "double";
+			case "Boolean":
+				return "bool";
+			default:
+				throw new Exception("Unknown type");
 		}
-    }
+	}
 #>

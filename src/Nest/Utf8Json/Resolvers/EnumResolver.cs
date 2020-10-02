@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System;
@@ -30,6 +31,7 @@ namespace Nest.Utf8Json
 	{
 		/// <summary>Serialize as Name.</summary>
 		public static readonly IJsonFormatterResolver Default = EnumDefaultResolver.Instance;
+
 		/// <summary>Serialize as Value.</summary>
 		public static readonly IJsonFormatterResolver UnderlyingValue = EnumUnderlyingValueResolver.Instance;
 	}
@@ -38,15 +40,13 @@ namespace Nest.Utf8Json
 	{
 		public static readonly IJsonFormatterResolver Instance = new EnumDefaultResolver();
 
-		private EnumDefaultResolver()
-		{
-		}
+		private EnumDefaultResolver() { }
 
-		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.Formatter;
 
 		private static class FormatterCache<T>
 		{
-			public static readonly IJsonFormatter<T> formatter;
+			public static readonly IJsonFormatter<T> Formatter;
 
 			static FormatterCache()
 			{
@@ -63,12 +63,12 @@ namespace Nest.Utf8Json
 					if (innerFormatter == null)
 						return;
 
-					formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(type), innerFormatter);
+					Formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(type), innerFormatter);
 					return;
 				}
 
 				if (typeof(T).IsEnum)
-					formatter = new EnumFormatter<T>(true);
+					Formatter = new EnumFormatter<T>(true);
 			}
 		}
 	}
@@ -77,15 +77,13 @@ namespace Nest.Utf8Json
 	{
 		public static readonly IJsonFormatterResolver Instance = new EnumUnderlyingValueResolver();
 
-		private EnumUnderlyingValueResolver()
-		{
-		}
+		private EnumUnderlyingValueResolver() { }
 
-		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.Formatter;
 
 		private static class FormatterCache<T>
 		{
-			public static readonly IJsonFormatter<T> formatter;
+			public static readonly IJsonFormatter<T> Formatter;
 
 			static FormatterCache()
 			{
@@ -101,12 +99,12 @@ namespace Nest.Utf8Json
 					if (innerFormatter == null)
 						return;
 
-					formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(type), innerFormatter);
+					Formatter = (IJsonFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(type), innerFormatter);
 					return;
 				}
 
 				if (typeof(T).IsEnum)
-					formatter = new EnumFormatter<T>(false);
+					Formatter = new EnumFormatter<T>(false);
 			}
 		}
 	}

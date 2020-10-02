@@ -20,33 +20,36 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System;
 
 namespace Nest.Utf8Json
 {
-    internal sealed class AnonymousFormatter<T> : IJsonFormatter<T>
-    {
-        private readonly JsonSerializeAction<T> _serialize;
-        private readonly JsonDeserializeFunc<T> _deserialize;
+	internal sealed class AnonymousFormatter<T> : IJsonFormatter<T>
+	{
+		private readonly JsonSerializeAction<T> _serialize;
+		private readonly JsonDeserializeFunc<T> _deserialize;
 
-        public AnonymousFormatter(JsonSerializeAction<T> serialize, JsonDeserializeFunc<T> deserialize)
-        {
-            _serialize = serialize;
-            _deserialize = deserialize;
-        }
+		public AnonymousFormatter(JsonSerializeAction<T> serialize, JsonDeserializeFunc<T> deserialize)
+		{
+			_serialize = serialize;
+			_deserialize = deserialize;
+		}
 
-        public void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
-        {
-            if (_serialize == null) throw new InvalidOperationException(GetType().Name + " does not support Serialize.");
-            _serialize(ref writer, value, formatterResolver);
-        }
+		public void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
+		{
+			if (_serialize == null) throw new InvalidOperationException(GetType().Name + " does not support Serialize.");
 
-        public T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
-        {
-            if (_deserialize == null) throw new InvalidOperationException(GetType().Name + " does not support Deserialize.");
-            return _deserialize(ref reader, formatterResolver);
-        }
-    }
+			_serialize(ref writer, value, formatterResolver);
+		}
+
+		public T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			if (_deserialize == null) throw new InvalidOperationException(GetType().Name + " does not support Deserialize.");
+
+			return _deserialize(ref reader, formatterResolver);
+		}
+	}
 }

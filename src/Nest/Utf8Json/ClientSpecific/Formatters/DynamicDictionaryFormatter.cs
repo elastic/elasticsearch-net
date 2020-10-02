@@ -26,7 +26,7 @@ namespace Nest.Utf8Json
 			writer.WriteBeginObject();
 			var formatter = formatterResolver.GetFormatter<object>();
 			var count = 0;
-			foreach (var kv in (IDictionary<string, DynamicValue>)value)
+			foreach (var kv in value)
 			{
 				if (count > 0)
 					writer.WriteValueSeparator();
@@ -46,7 +46,6 @@ namespace Nest.Utf8Json
 				for (var i = 0; i < array.Length; i++)
 					arrayDict[i.ToString(CultureInfo.InvariantCulture)] = new DynamicValue(array[i]);
 				return DynamicDictionary.Create(arrayDict);
-
 			}
 			var dictionary = DictionaryFormatter.Deserialize(ref reader, formatterResolver);
 			return DynamicDictionary.Create(dictionary);

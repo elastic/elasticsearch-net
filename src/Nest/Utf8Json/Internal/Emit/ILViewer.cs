@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System.IO;
@@ -29,45 +30,46 @@ using Elasticsearch.Net;
 
 namespace Nest.Utf8Json
 {
-    internal class ILStreamReader : BinaryReader
-    {
-        private static readonly OpCode[] OneByteOpCodes = new OpCode[0x100];
-        private static readonly OpCode[] TwoByteOpCodes = new OpCode[0x100];
+	// ReSharper disable once InconsistentNaming
+	internal class ILStreamReader : BinaryReader
+	{
+		private static readonly OpCode[] OneByteOpCodes = new OpCode[0x100];
+		private static readonly OpCode[] TwoByteOpCodes = new OpCode[0x100];
 
-        private readonly int _endPosition;
+		private readonly int _endPosition;
 
-        public int CurrentPosition => (int)BaseStream.Position;
+		public int CurrentPosition => (int)BaseStream.Position;
 
-        public bool EndOfStream => !((int)BaseStream.Position < _endPosition);
+		public bool EndOfStream => !((int)BaseStream.Position < _endPosition);
 
-        static ILStreamReader()
-        {
-            foreach (var fi in typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static))
-            {
-                var opCode = (OpCode)fi.GetValue(null);
-                var value =  unchecked((ushort)opCode.Value);
+		static ILStreamReader()
+		{
+			foreach (var fi in typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static))
+			{
+				var opCode = (OpCode)fi.GetValue(null);
+				var value = unchecked((ushort)opCode.Value);
 
-                if (value < 0x100)
+				if (value < 0x100)
 					OneByteOpCodes[value] = opCode;
 				else if ((value & 0xff00) == 0xfe00)
 					TwoByteOpCodes[value & 0xff] = opCode;
 			}
-        }
+		}
 
-        public ILStreamReader(byte[] ilByteArray)
-            : base(ConnectionConfiguration.DefaultMemoryStreamFactory.Create(ilByteArray)) =>
+		public ILStreamReader(byte[] ilByteArray)
+			: base(ConnectionConfiguration.DefaultMemoryStreamFactory.Create(ilByteArray)) =>
 			_endPosition = ilByteArray.Length;
 
 		public OpCode ReadOpCode()
-        {
-            var code = ReadByte();
-            if (code != 0xFE)
+		{
+			var code = ReadByte();
+			if (code != 0xFE)
 				return OneByteOpCodes[code];
 
 			code = ReadByte();
 			return TwoByteOpCodes[code];
 		}
 
-        public int ReadMetadataToken() => ReadInt32();
-    }
+		public int ReadMetadataToken() => ReadInt32();
+	}
 }

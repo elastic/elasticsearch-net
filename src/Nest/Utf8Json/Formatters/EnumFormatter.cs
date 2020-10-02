@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System;
@@ -38,7 +39,8 @@ namespace Nest.Utf8Json
 			var underlyingType = Enum.GetUnderlyingType(type);
 
 			isBoxed = false;
-			var dynamicMethod = new DynamicMethod("EnumSerializeByUnderlyingValue", null, new[] { typeof(JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) }, type.Module, true);
+			var dynamicMethod = new DynamicMethod("EnumSerializeByUnderlyingValue", null,
+				new[] { typeof(JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) }, type.Module, true);
 			var il = dynamicMethod.GetILGenerator();
 			il.Emit(OpCodes.Ldarg_0); // writer
 			il.Emit(OpCodes.Ldarg_1); // value
@@ -52,7 +54,8 @@ namespace Nest.Utf8Json
 			var underlyingType = Enum.GetUnderlyingType(type);
 
 			isBoxed = false;
-			var dynamicMethod = new DynamicMethod("EnumDeserializeByUnderlyingValue", type, new[] { typeof(JsonReader).MakeByRefType(), typeof(IJsonFormatterResolver) }, type.Module, true);
+			var dynamicMethod = new DynamicMethod("EnumDeserializeByUnderlyingValue", type,
+				new[] { typeof(JsonReader).MakeByRefType(), typeof(IJsonFormatterResolver) }, type.Module, true);
 			var il = dynamicMethod.GetILGenerator();
 			il.Emit(OpCodes.Ldarg_0); // reader
 			il.Emit(OpCodes.Call, typeof(JsonReader).GetRuntimeMethod("Read" + underlyingType.Name, Type.EmptyTypes));
@@ -109,7 +112,8 @@ namespace Nest.Utf8Json
 				if (isBoxed)
 				{
 					var boxSerialize = (JsonSerializeAction<object>)serialize;
-					DefaultSerializeByUnderlyingValue = (ref JsonWriter writer, T value, IJsonFormatterResolver _) => boxSerialize.Invoke(ref writer, value, _);
+					DefaultSerializeByUnderlyingValue = (ref JsonWriter writer, T value, IJsonFormatterResolver _) =>
+						boxSerialize.Invoke(ref writer, value, _);
 				}
 				else
 					DefaultSerializeByUnderlyingValue = (JsonSerializeAction<T>)serialize;
@@ -120,7 +124,8 @@ namespace Nest.Utf8Json
 				if (isBoxed)
 				{
 					var boxDeserialize = (JsonDeserializeFunc<object>)deserialize;
-					DefaultDeserializeByUnderlyingValue = (ref JsonReader reader, IJsonFormatterResolver _) => (T)boxDeserialize.Invoke(ref reader, _);
+					DefaultDeserializeByUnderlyingValue =
+						(ref JsonReader reader, IJsonFormatterResolver _) => (T)boxDeserialize.Invoke(ref reader, _);
 				}
 				else
 					DefaultDeserializeByUnderlyingValue = (JsonDeserializeFunc<T>)deserialize;
@@ -202,6 +207,7 @@ namespace Nest.Utf8Json
 
 			var token = reader.GetCurrentJsonToken();
 			if (token != JsonToken.String) throw new InvalidOperationException("Can't parse JSON to Enum format.");
+
 			reader.AdvanceOffset(1); // skip \""
 			var t = Deserialize(ref reader, formatterResolver); // token is Number
 			reader.SkipWhiteSpace();

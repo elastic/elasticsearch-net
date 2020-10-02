@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System;
@@ -32,35 +33,35 @@ namespace Nest.Utf8Json
 	{
 		private static readonly byte[] PublicKey = Assembly.GetExecutingAssembly().GetName().GetPublicKey();
 
-        private readonly ModuleBuilder _moduleBuilder;
+		private readonly ModuleBuilder _moduleBuilder;
 		private readonly object _gate = new object();
 
 		public DynamicAssembly(string moduleName)
-        {
+		{
 			var assemblyName = new AssemblyName(moduleName);
 			assemblyName.SetPublicKey(PublicKey);
-            var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
-            _moduleBuilder = assemblyBuilder.DefineDynamicModule(moduleName);
-        }
+			var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+			_moduleBuilder = assemblyBuilder.DefineDynamicModule(moduleName);
+		}
 
 		// requires lock on mono environment. see: https://github.com/neuecc/MessagePack-CSharp/issues/161
 
-        public TypeBuilder DefineType(string name, TypeAttributes attr)
-        {
-            lock (_gate)
+		public TypeBuilder DefineType(string name, TypeAttributes attr)
+		{
+			lock (_gate)
 				return _moduleBuilder.DefineType(name, attr);
 		}
 
-        public TypeBuilder DefineType(string name, TypeAttributes attr, Type parent)
-        {
-            lock (_gate)
+		public TypeBuilder DefineType(string name, TypeAttributes attr, Type parent)
+		{
+			lock (_gate)
 				return _moduleBuilder.DefineType(name, attr, parent);
 		}
 
-        public TypeBuilder DefineType(string name, TypeAttributes attr, Type parent, Type[] interfaces)
-        {
-            lock (_gate)
+		public TypeBuilder DefineType(string name, TypeAttributes attr, Type parent, Type[] interfaces)
+		{
+			lock (_gate)
 				return _moduleBuilder.DefineType(name, attr, parent, interfaces);
 		}
-    }
+	}
 }

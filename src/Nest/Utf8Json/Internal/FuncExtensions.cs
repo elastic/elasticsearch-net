@@ -20,19 +20,21 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System;
+
 // ReSharper disable All
 
 namespace Nest.Utf8Json
 {
-    // Unity compiler can't understand this.
+	// Unity compiler can't understand this.
 
-    internal static class FuncExtensions
-    {
-        // hack of avoid closure allocation(() => value).
-        public static Func<T> AsFunc<T>(this T value) => new Func<T>(value.ReturnBox<T>);
+	internal static class FuncExtensions
+	{
+		// hack of avoid closure allocation(() => value).
+		public static Func<T> AsFunc<T>(this T value) => new Func<T>(value.ReturnBox<T>);
 
 		public static Func<T> AsFuncFast<T>(this T value) where T : class => new Func<T>(value.Return<T>);
 
@@ -41,4 +43,3 @@ namespace Nest.Utf8Json
 		static T ReturnBox<T>(this object value) => (T)value;
 	}
 }
-

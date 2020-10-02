@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System;
@@ -36,17 +37,15 @@ namespace Nest.Utf8Json
 	{
 		public static readonly IJsonFormatterResolver Instance = new DynamicGenericResolver();
 
-		private DynamicGenericResolver()
-		{
-		}
+		private DynamicGenericResolver() { }
 
-		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.Formatter;
 
 		private static class FormatterCache<T>
 		{
-			public static readonly IJsonFormatter<T> formatter;
+			public static readonly IJsonFormatter<T> Formatter;
 
-			static FormatterCache() => formatter = (IJsonFormatter<T>)DynamicGenericResolverGetFormatterHelper.GetFormatter(typeof(T));
+			static FormatterCache() => Formatter = (IJsonFormatter<T>)DynamicGenericResolverGetFormatterHelper.GetFormatter(typeof(T));
 		}
 	}
 
@@ -54,34 +53,34 @@ namespace Nest.Utf8Json
 	{
 		private static readonly Dictionary<Type, Type> FormatterMap = new Dictionary<Type, Type>()
 		{
-			{typeof(List<>), typeof(ListFormatter<>)},
-			{typeof(LinkedList<>), typeof(LinkedListFormatter<>)},
-			{typeof(Queue<>), typeof(QueueFormatter<>)},
-			{typeof(Stack<>), typeof(StackFormatter<>)},
-			{typeof(HashSet<>), typeof(HashSetFormatter<>)},
-			{typeof(ReadOnlyCollection<>), typeof(ReadOnlyCollectionFormatter<>)},
-			{typeof(IList<>), typeof(InterfaceListFormatter<>)},
-			{typeof(ICollection<>), typeof(InterfaceCollectionFormatter<>)},
-			{typeof(IEnumerable<>), typeof(InterfaceEnumerableFormatter<>)},
-			{typeof(Dictionary<,>), typeof(DictionaryFormatter<,>)},
-			{typeof(IDictionary<,>), typeof(InterfaceDictionaryFormatter<,>)},
-			{typeof(SortedDictionary<,>), typeof(SortedDictionaryFormatter<,>)},
-			{typeof(SortedList<,>), typeof(SortedListFormatter<,>)},
-			{typeof(ILookup<,>), typeof(InterfaceLookupFormatter<,>)},
-			{typeof(IGrouping<,>), typeof(InterfaceGroupingFormatter<,>)},
-			{typeof(ObservableCollection<>), typeof(ObservableCollectionFormatter<>)},
-			{typeof(ReadOnlyObservableCollection<>),(typeof(ReadOnlyObservableCollectionFormatter<>))},
-			{typeof(IReadOnlyList<>), typeof(InterfaceReadOnlyListFormatter<>)},
-			{typeof(IReadOnlyCollection<>), typeof(InterfaceReadOnlyCollectionFormatter<>)},
-			{typeof(ISet<>), typeof(InterfaceSetFormatter<>)},
-			{typeof(ConcurrentBag<>), typeof(ConcurrentBagFormatter<>)},
-			{typeof(ConcurrentQueue<>), typeof(ConcurrentQueueFormatter<>)},
-			{typeof(ConcurrentStack<>), typeof(ConcurrentStackFormatter<>)},
-			{typeof(ReadOnlyDictionary<,>), typeof(ReadOnlyDictionaryFormatter<,>)},
-			{typeof(IReadOnlyDictionary<,>), typeof(InterfaceReadOnlyDictionaryFormatter<,>)},
-			{typeof(ConcurrentDictionary<,>), typeof(ConcurrentDictionaryFormatter<,>)},
-			{typeof(Lazy<>), typeof(LazyFormatter<>)},
-			{typeof(Task<>), typeof(TaskValueFormatter<>)},
+			{ typeof(List<>), typeof(ListFormatter<>) },
+			{ typeof(LinkedList<>), typeof(LinkedListFormatter<>) },
+			{ typeof(Queue<>), typeof(QueueFormatter<>) },
+			{ typeof(Stack<>), typeof(StackFormatter<>) },
+			{ typeof(HashSet<>), typeof(HashSetFormatter<>) },
+			{ typeof(ReadOnlyCollection<>), typeof(ReadOnlyCollectionFormatter<>) },
+			{ typeof(IList<>), typeof(InterfaceListFormatter<>) },
+			{ typeof(ICollection<>), typeof(InterfaceCollectionFormatter<>) },
+			{ typeof(IEnumerable<>), typeof(InterfaceEnumerableFormatter<>) },
+			{ typeof(Dictionary<,>), typeof(DictionaryFormatter<,>) },
+			{ typeof(IDictionary<,>), typeof(InterfaceDictionaryFormatter<,>) },
+			{ typeof(SortedDictionary<,>), typeof(SortedDictionaryFormatter<,>) },
+			{ typeof(SortedList<,>), typeof(SortedListFormatter<,>) },
+			{ typeof(ILookup<,>), typeof(InterfaceLookupFormatter<,>) },
+			{ typeof(IGrouping<,>), typeof(InterfaceGroupingFormatter<,>) },
+			{ typeof(ObservableCollection<>), typeof(ObservableCollectionFormatter<>) },
+			{ typeof(ReadOnlyObservableCollection<>), (typeof(ReadOnlyObservableCollectionFormatter<>)) },
+			{ typeof(IReadOnlyList<>), typeof(InterfaceReadOnlyListFormatter<>) },
+			{ typeof(IReadOnlyCollection<>), typeof(InterfaceReadOnlyCollectionFormatter<>) },
+			{ typeof(ISet<>), typeof(InterfaceSetFormatter<>) },
+			{ typeof(ConcurrentBag<>), typeof(ConcurrentBagFormatter<>) },
+			{ typeof(ConcurrentQueue<>), typeof(ConcurrentQueueFormatter<>) },
+			{ typeof(ConcurrentStack<>), typeof(ConcurrentStackFormatter<>) },
+			{ typeof(ReadOnlyDictionary<,>), typeof(ReadOnlyDictionaryFormatter<,>) },
+			{ typeof(IReadOnlyDictionary<,>), typeof(InterfaceReadOnlyDictionaryFormatter<,>) },
+			{ typeof(ConcurrentDictionary<,>), typeof(ConcurrentDictionaryFormatter<,>) },
+			{ typeof(Lazy<>), typeof(LazyFormatter<>) },
+			{ typeof(Task<>), typeof(TaskValueFormatter<>) },
 		};
 
 		// Reduce IL2CPP code generate size(don't write long code in <T>)
@@ -118,7 +117,8 @@ namespace Nest.Utf8Json
 				if (genericType == typeof(KeyValuePair<,>))
 					return CreateInstance(typeof(KeyValuePairFormatter<,>), t.GenericTypeArguments);
 
-				if (isNullable && nullableElementType.IsConstructedGenericType && nullableElementType.GetGenericTypeDefinition() == typeof(KeyValuePair<,>))
+				if (isNullable && nullableElementType.IsConstructedGenericType
+					&& nullableElementType.GetGenericTypeDefinition() == typeof(KeyValuePair<,>))
 					return CreateInstance(typeof(NullableFormatter<>), new[] { nullableElementType });
 #if NETSTANDARD2_1
 				// ValueTask
@@ -240,7 +240,7 @@ namespace Nest.Utf8Json
 					}
 
 					var tupleFormatter = CreateInstance(tupleFormatterType, nullableElementType.GenericTypeArguments);
-					return CreateInstance(typeof(StaticNullableFormatter<>), new [] { nullableElementType }, tupleFormatter);
+					return CreateInstance(typeof(StaticNullableFormatter<>), new[] { nullableElementType }, tupleFormatter);
 				}
 #endif
 
@@ -253,7 +253,8 @@ namespace Nest.Utf8Json
 					return CreateInstance(typeof(ArraySegmentFormatter<>), t.GenericTypeArguments);
 				}
 
-				if (isNullable && nullableElementType.IsConstructedGenericType && nullableElementType.GetGenericTypeDefinition() == typeof(ArraySegment<>))
+				if (isNullable && nullableElementType.IsConstructedGenericType
+					&& nullableElementType.GetGenericTypeDefinition() == typeof(ArraySegment<>))
 				{
 					if (nullableElementType == typeof(ArraySegment<byte>))
 						return new StaticNullableFormatter<ArraySegment<byte>>(ByteArraySegmentFormatter.Default);

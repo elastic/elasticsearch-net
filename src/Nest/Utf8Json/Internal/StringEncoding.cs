@@ -20,13 +20,16 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System.Text;
 
 namespace Nest.Utf8Json
-{internal static class StringEncoding
-    {
-        public static readonly Encoding UTF8 = new UTF8Encoding(false);
-    }
+{
+	internal static class StringEncoding
+	{
+		// ReSharper disable once InconsistentNaming
+		public static readonly Encoding UTF8 = new UTF8Encoding(false);
+	}
 }

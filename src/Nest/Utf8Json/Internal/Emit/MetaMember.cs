@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System;
@@ -29,66 +30,66 @@ using System.Reflection.Emit;
 
 namespace Nest.Utf8Json
 {
-    internal class MetaMember
-    {
-        public string Name { get; }
-        public string MemberName { get; }
-        public bool IsProperty => PropertyInfo != null;
-        public bool IsField => FieldInfo != null;
-        public bool IsWritable { get; }
-        public bool IsReadable { get; }
-        public Type Type { get; }
-        public FieldInfo FieldInfo { get; }
-        public PropertyInfo PropertyInfo { get; }
-        public PropertyInfo[] InterfacePropertyInfos { get; }
-        public MethodInfo ShouldSerializeMethodInfo { get; }
-        public MethodInfo ShouldSerializeTypeMethodInfo { get; }
+	internal class MetaMember
+	{
+		public string Name { get; }
+		public string MemberName { get; }
+		public bool IsProperty => PropertyInfo != null;
+		public bool IsField => FieldInfo != null;
+		public bool IsWritable { get; }
+		public bool IsReadable { get; }
+		public Type Type { get; }
+		public FieldInfo FieldInfo { get; }
+		public PropertyInfo PropertyInfo { get; }
+		public PropertyInfo[] InterfacePropertyInfos { get; }
+		public MethodInfo ShouldSerializeMethodInfo { get; }
+		public MethodInfo ShouldSerializeTypeMethodInfo { get; }
 		public object JsonFormatter { get; }
 
-        protected MetaMember(Type type, string name, string memberName, bool isWritable, bool isReadable)
-        {
-            Name = name;
-            MemberName = memberName;
-            Type = type;
-            IsWritable = isWritable;
-            IsReadable = isReadable;
-        }
+		protected MetaMember(Type type, string name, string memberName, bool isWritable, bool isReadable)
+		{
+			Name = name;
+			MemberName = memberName;
+			Type = type;
+			IsWritable = isWritable;
+			IsReadable = isReadable;
+		}
 
-        public MetaMember(FieldInfo info, string name, object jsonFormatter, bool allowPrivate)
-        {
-            Name = name;
-            MemberName = info.Name;
-            FieldInfo = info;
-            Type = info.FieldType;
-            IsReadable = allowPrivate || info.IsPublic;
-            IsWritable = allowPrivate || info.IsPublic && !info.IsInitOnly;
-            ShouldSerializeMethodInfo = GetShouldSerialize(info);
+		public MetaMember(FieldInfo info, string name, object jsonFormatter, bool allowPrivate)
+		{
+			Name = name;
+			MemberName = info.Name;
+			FieldInfo = info;
+			Type = info.FieldType;
+			IsReadable = allowPrivate || info.IsPublic;
+			IsWritable = allowPrivate || info.IsPublic && !info.IsInitOnly;
+			ShouldSerializeMethodInfo = GetShouldSerialize(info);
 			ShouldSerializeTypeMethodInfo = info.FieldType.GetShouldSerializeMethod();
 			JsonFormatter = jsonFormatter;
 		}
 
-        public MetaMember(PropertyInfo info, string name, PropertyInfo[] interfaceInfos, object jsonFormatter, bool allowPrivate)
-        {
-            Name = name;
-            MemberName = info.Name;
-            PropertyInfo = info;
+		public MetaMember(PropertyInfo info, string name, PropertyInfo[] interfaceInfos, object jsonFormatter, bool allowPrivate)
+		{
+			Name = name;
+			MemberName = info.Name;
+			PropertyInfo = info;
 			InterfacePropertyInfos = interfaceInfos;
-            Type = info.PropertyType;
-            IsReadable = info.GetMethod != null && (allowPrivate || info.GetMethod.IsPublic) && !info.GetMethod.IsStatic;
-            IsWritable = info.SetMethod != null && (allowPrivate || info.SetMethod.IsPublic) && !info.SetMethod.IsStatic;
-            ShouldSerializeMethodInfo = GetShouldSerialize(info);
+			Type = info.PropertyType;
+			IsReadable = info.GetMethod != null && (allowPrivate || info.GetMethod.IsPublic) && !info.GetMethod.IsStatic;
+			IsWritable = info.SetMethod != null && (allowPrivate || info.SetMethod.IsPublic) && !info.SetMethod.IsStatic;
+			ShouldSerializeMethodInfo = GetShouldSerialize(info);
 			ShouldSerializeTypeMethodInfo = info.PropertyType.GetShouldSerializeMethod();
 			JsonFormatter = jsonFormatter;
-        }
+		}
 
 		private static MethodInfo GetShouldSerialize(MemberInfo info)
-        {
-            var shouldSerialize = $"ShouldSerialize{info.Name}";
+		{
+			var shouldSerialize = $"ShouldSerialize{info.Name}";
 
-            return info.DeclaringType
-                .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                .FirstOrDefault(x => x.Name == shouldSerialize && x.ReturnType == typeof(bool) && x.GetParameters().Length == 0);
-        }
+			return info.DeclaringType
+				.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+				.FirstOrDefault(x => x.Name == shouldSerialize && x.ReturnType == typeof(bool) && x.GetParameters().Length == 0);
+		}
 
 		public class AttributeDeclaringType<T> where T : Attribute
 		{
@@ -102,11 +103,11 @@ namespace Nest.Utf8Json
 			public Type DeclaringType { get; }
 		}
 
-        public AttributeDeclaringType<T> GetCustomAttribute<T>(bool inherit) where T : Attribute
+		public AttributeDeclaringType<T> GetCustomAttribute<T>(bool inherit) where T : Attribute
 		{
 			if (IsProperty)
-            {
-                var attribute = PropertyInfo.GetCustomAttribute<T>(inherit);
+			{
+				var attribute = PropertyInfo.GetCustomAttribute<T>(inherit);
 				if (attribute != null)
 					return new AttributeDeclaringType<T>(attribute, PropertyInfo.DeclaringType);
 
@@ -131,70 +132,69 @@ namespace Nest.Utf8Json
 			return null;
 		}
 
-        public virtual void EmitLoadValue(ILGenerator il)
-        {
-            if (IsProperty)
+		public virtual void EmitLoadValue(ILGenerator il)
+		{
+			if (IsProperty)
 				il.EmitCall(PropertyInfo.GetMethod);
 			else
 				il.Emit(OpCodes.Ldfld, FieldInfo);
 		}
 
-        public virtual void EmitStoreValue(ILGenerator il)
-        {
-            if (IsProperty)
+		public virtual void EmitStoreValue(ILGenerator il)
+		{
+			if (IsProperty)
 				il.EmitCall(PropertyInfo.SetMethod);
 			else
 				il.Emit(OpCodes.Stfld, FieldInfo);
 		}
-    }
-
-    // used for serialize exception...
-    internal class StringConstantValueMetaMember : MetaMember
-    {
-        private readonly string _constant;
-
-        public StringConstantValueMetaMember(string name, string constant)
-            : base(typeof(string), name, name, false, true) =>
-			_constant = constant;
-
-        public override void EmitLoadValue(ILGenerator il)
-        {
-            il.Emit(OpCodes.Pop); // pop load instance
-            il.Emit(OpCodes.Ldstr, _constant);
-        }
-
-        public override void EmitStoreValue(ILGenerator il) => throw new NotSupportedException();
 	}
 
-    // used for serialize exception...
-    internal class InnerExceptionMetaMember : MetaMember
-    {
+	// used for serialize exception...
+	internal class StringConstantValueMetaMember : MetaMember
+	{
+		private readonly string _constant;
+
+		public StringConstantValueMetaMember(string name, string constant)
+			: base(typeof(string), name, name, false, true) =>
+			_constant = constant;
+
+		public override void EmitLoadValue(ILGenerator il)
+		{
+			il.Emit(OpCodes.Pop); // pop load instance
+			il.Emit(OpCodes.Ldstr, _constant);
+		}
+
+		public override void EmitStoreValue(ILGenerator il) => throw new NotSupportedException();
+	}
+
+	// used for serialize exception...
+	internal class InnerExceptionMetaMember : MetaMember
+	{
 		private static readonly MethodInfo GetInnerException =
 			ExpressionUtility.GetPropertyInfo((Exception ex) => ex.InnerException).GetMethod;
+
 		private static readonly MethodInfo NonGenericSerialize =
 			ExpressionUtility.GetMethodInfo<JsonWriter>(writer => JsonSerializer.NonGeneric.Serialize(ref writer, default, default));
 
 		// set after...
-        internal ArgumentField ArgWriter;
-        internal ArgumentField ArgValue;
-        internal ArgumentField ArgResolver;
+		internal ArgumentField ArgWriter;
+		internal ArgumentField ArgValue;
+		internal ArgumentField ArgResolver;
 
-        public InnerExceptionMetaMember(string name)
-            : base(typeof(Exception), name, name, false, true)
-        {
-        }
+		public InnerExceptionMetaMember(string name)
+			: base(typeof(Exception), name, name, false, true) { }
 
-        public override void EmitLoadValue(ILGenerator il) => il.Emit(OpCodes.Callvirt, GetInnerException);
+		public override void EmitLoadValue(ILGenerator il) => il.Emit(OpCodes.Callvirt, GetInnerException);
 
 		public override void EmitStoreValue(ILGenerator il) => throw new NotSupportedException();
 
 		public void EmitSerializeDirectly(ILGenerator il)
-        {
-            ArgWriter.EmitLoad();
-            ArgValue.EmitLoad();
-            il.Emit(OpCodes.Callvirt, GetInnerException);
-            ArgResolver.EmitLoad();
-            il.EmitCall(NonGenericSerialize);
-        }
-    }
+		{
+			ArgWriter.EmitLoad();
+			ArgValue.EmitLoad();
+			il.Emit(OpCodes.Callvirt, GetInnerException);
+			ArgResolver.EmitLoad();
+			il.EmitCall(NonGenericSerialize);
+		}
+	}
 }

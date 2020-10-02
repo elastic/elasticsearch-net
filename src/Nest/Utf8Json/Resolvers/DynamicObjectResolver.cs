@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System;
@@ -39,12 +40,18 @@ namespace Nest.Utf8Json
 	{
 		/// <summary>AllowPrivate:False, ExcludeNull:False, NameMutate:Original</summary>
 		public static readonly IJsonFormatterResolver Default = DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal.Instance;
-		/// <summary>AllowPrivate:False, ExcludeNull:True,  NameMutate:CamelCase</summary>
-		public static readonly IJsonFormatterResolver ExcludeNullCamelCase = DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase.Instance;
-		/// <summary>AllowPrivate:True,  ExcludeNull:True,  NameMutate:CamelCase</summary>
-		public static readonly IJsonFormatterResolver AllowPrivateExcludeNullCamelCase = DynamicObjectResolverAllowPrivateTrueExcludeNullTrueNameMutateCamelCase.Instance;
 
-		public static IJsonFormatterResolver Create(Func<MemberInfo, JsonProperty> propertyMapper, Lazy<Func<string, string>> mutator, bool excludeNull) =>
+		/// <summary>AllowPrivate:False, ExcludeNull:True,  NameMutate:CamelCase</summary>
+		public static readonly IJsonFormatterResolver ExcludeNullCamelCase =
+			DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase.Instance;
+
+		/// <summary>AllowPrivate:True,  ExcludeNull:True,  NameMutate:CamelCase</summary>
+		public static readonly IJsonFormatterResolver AllowPrivateExcludeNullCamelCase =
+			DynamicObjectResolverAllowPrivateTrueExcludeNullTrueNameMutateCamelCase.Instance;
+
+		public static IJsonFormatterResolver Create(Func<MemberInfo, JsonProperty> propertyMapper, Lazy<Func<string, string>> mutator,
+			bool excludeNull
+		) =>
 			new CustomDynamicObjectResolver(propertyMapper, mutator, excludeNull);
 	}
 
@@ -75,23 +82,25 @@ namespace Nest.Utf8Json
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal();
 		private static readonly Func<string, string> NameMutator = StringMutator.Original;
 		private static readonly bool ExcludeNull = false;
-		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.{nameof(DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal)}";
+
+		private static readonly string ModuleName =
+			$"{ResolverConfig.Namespace}.{nameof(DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal)}";
+
 		private static readonly DynamicAssembly Assembly;
 
 		static DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal() => Assembly = new DynamicAssembly(ModuleName);
 
-		private DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal()
-		{
-		}
+		private DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal() { }
 
-		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.Formatter;
 
 		private static class FormatterCache<T>
 		{
-			public static readonly IJsonFormatter<T> formatter;
+			public static readonly IJsonFormatter<T> Formatter;
 
 			static FormatterCache() =>
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToAssembly<T>(Assembly, Instance, NameMutator, null, ExcludeNull);
+				Formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToAssembly<T>(Assembly, Instance, NameMutator, null,
+					ExcludeNull);
 		}
 	}
 
@@ -101,23 +110,25 @@ namespace Nest.Utf8Json
 		public static readonly IJsonFormatterResolver Instance = new DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase();
 		private static readonly Func<string, string> NameMutator = StringMutator.ToCamelCase;
 		private static readonly bool ExcludeNull = true;
-		private static readonly string ModuleName = $"{ResolverConfig.Namespace}.{nameof(DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase)}";
+
+		private static readonly string ModuleName =
+			$"{ResolverConfig.Namespace}.{nameof(DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase)}";
+
 		private static readonly DynamicAssembly Assembly;
 
 		static DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase() => Assembly = new DynamicAssembly(ModuleName);
 
-		private DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase()
-		{
-		}
+		private DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase() { }
 
-		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.Formatter;
 
 		private static class FormatterCache<T>
 		{
-			public static readonly IJsonFormatter<T> formatter;
+			public static readonly IJsonFormatter<T> Formatter;
 
 			static FormatterCache() =>
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToAssembly<T>(Assembly, Instance, NameMutator, null, ExcludeNull);
+				Formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToAssembly<T>(Assembly, Instance, NameMutator, null,
+					ExcludeNull);
 		}
 	}
 
@@ -132,14 +143,15 @@ namespace Nest.Utf8Json
 		private static readonly Func<string, string> NameMutator = StringMutator.ToCamelCase;
 		private static readonly bool ExcludeNull = true;
 
-		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.formatter;
+		public IJsonFormatter<T> GetFormatter<T>() => FormatterCache<T>.Formatter;
 
 		private static class FormatterCache<T>
 		{
-			public static readonly IJsonFormatter<T> formatter;
+			public static readonly IJsonFormatter<T> Formatter;
 
 			static FormatterCache() =>
-				formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToDynamicMethod<T>(Instance, NameMutator, null, ExcludeNull, true);
+				Formatter = (IJsonFormatter<T>)DynamicObjectTypeBuilder.BuildFormatterToDynamicMethod<T>(Instance, NameMutator, null, ExcludeNull,
+					true);
 		}
 	}
 
@@ -147,7 +159,9 @@ namespace Nest.Utf8Json
 
 	internal static class DynamicObjectTypeBuilder
 	{
-		private static readonly Regex SubtractFullNameRegex = new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+", RegexOptions.Compiled);
+		private static readonly Regex SubtractFullNameRegex =
+			new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+", RegexOptions.Compiled);
+
 		private static int _nameSequence;
 
 		private static readonly HashSet<Type> IgnoreTypes = new HashSet<Type>
@@ -189,7 +203,9 @@ namespace Nest.Utf8Json
 			typeof(string),
 		};
 
-		public static object BuildFormatterToAssembly<T>(DynamicAssembly assembly, IJsonFormatterResolver selfResolver, Func<string, string> mutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull)
+		public static object BuildFormatterToAssembly<T>(DynamicAssembly assembly, IJsonFormatterResolver selfResolver, Func<string, string> mutator,
+			Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull
+		)
 		{
 			var type = typeof(T);
 
@@ -216,7 +232,9 @@ namespace Nest.Utf8Json
 			return (IJsonFormatter<T>)Activator.CreateInstance(formatterTypeInfo.AsType());
 		}
 
-		public static object BuildFormatterToDynamicMethod<T>(IJsonFormatterResolver selfResolver, Func<string,string> mutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull, bool allowPrivate)
+		public static object BuildFormatterToDynamicMethod<T>(IJsonFormatterResolver selfResolver, Func<string, string> mutator,
+			Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull, bool allowPrivate
+		)
 		{
 			var type = typeof(T);
 
@@ -236,15 +254,21 @@ namespace Nest.Utf8Json
 			return BuildAnonymousFormatter(typeof(T), mutator, propertyMapper, excludeNull, allowPrivate, false);
 		}
 
-		private static TypeInfo BuildType(DynamicAssembly assembly, Type type, Func<string, string> mutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull)
+		private static TypeInfo BuildType(DynamicAssembly assembly, Type type, Func<string, string> mutator,
+			Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull
+		)
 		{
+			if (type == null) return null;
 			if (IgnoreTypes.Contains(type)) return null;
 
 			var serializationInfo = new MetaType(type, mutator, propertyMapper, false);
 			var hasShouldSerialize = serializationInfo.Members.Any(x => x.ShouldSerializeMethodInfo != null);
 
 			var formatterType = typeof(IJsonFormatter<>).MakeGenericType(type);
-			var typeBuilder = assembly.DefineType(ResolverConfig.Namespace + "." + SubtractFullNameRegex.Replace(type.FullName, "").Replace(".", "_") + "Formatter" + Interlocked.Increment(ref _nameSequence), TypeAttributes.NotPublic | TypeAttributes.Sealed, null, new[] { formatterType });
+			var typeBuilder =
+				assembly.DefineType(
+					ResolverConfig.Namespace + "." + SubtractFullNameRegex.Replace(type.FullName!, "").Replace(".", "_") + "Formatter"
+					+ Interlocked.Increment(ref _nameSequence), TypeAttributes.NotPublic | TypeAttributes.Sealed, null, new[] { formatterType });
 
 			FieldBuilder stringByteKeysField;
 			Dictionary<MetaMember, FieldInfo> customFormatterLookup;
@@ -255,7 +279,8 @@ namespace Nest.Utf8Json
 				stringByteKeysField = typeBuilder.DefineField("stringByteKeys", typeof(byte[][]), FieldAttributes.Private | FieldAttributes.InitOnly);
 
 				var il = method.GetILGenerator();
-				customFormatterLookup = BuildConstructor(typeBuilder, serializationInfo, method, stringByteKeysField, il, excludeNull, hasShouldSerialize);
+				customFormatterLookup = BuildConstructor(typeBuilder, serializationInfo, stringByteKeysField, il, excludeNull,
+					hasShouldSerialize);
 			}
 
 			{
@@ -299,17 +324,16 @@ namespace Nest.Utf8Json
 			return typeBuilder.CreateTypeInfo();
 		}
 
-		public static object BuildAnonymousFormatter(Type type, Func<string, string> nameMutator, Func<MemberInfo, JsonProperty> propertyMapper, bool excludeNull, bool allowPrivate, bool isException)
+		public static object BuildAnonymousFormatter(Type type, Func<string, string> nameMutator, Func<MemberInfo, JsonProperty> propertyMapper,
+			bool excludeNull, bool allowPrivate, bool isException
+		)
 		{
 			if (IgnoreTypes.Contains(type)) return false;
 
 			MetaType serializationInfo;
 			if (isException)
 			{
-				var ignoreSet = new HashSet<string>(new[]
-				{
-					"TargetSite", "ClassName", "InnerException"
-				}.Select(x => nameMutator(x)));
+				var ignoreSet = new HashSet<string>(new[] { "TargetSite", "ClassName", "InnerException" }.Select(x => nameMutator(x)));
 
 				// special case for exception, modify
 				serializationInfo = new MetaType(type, nameMutator, propertyMapper, false);
@@ -393,7 +417,9 @@ namespace Nest.Utf8Json
 					deserializeCustomFormatters.Add(null);
 			}
 
-			var serialize = new DynamicMethod("Serialize", null, new Type[] { typeof(byte[][]), typeof(object[]), typeof(JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) }, type.Module, true);
+			var serialize = new DynamicMethod("Serialize", null,
+				new Type[] { typeof(byte[][]), typeof(object[]), typeof(JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) },
+				type.Module, true);
 			{
 				var il = serialize.GetILGenerator();
 				BuildSerialize(type, serializationInfo, il, () =>
@@ -412,7 +438,8 @@ namespace Nest.Utf8Json
 				}, excludeNull, hasShouldSerialize, 2);
 			}
 
-			var deserialize = new DynamicMethod("Deserialize", type, new Type[] { typeof(object[]), typeof(JsonReader).MakeByRefType(), typeof(IJsonFormatterResolver) }, type.Module, true);
+			var deserialize = new DynamicMethod("Deserialize", type,
+				new Type[] { typeof(object[]), typeof(JsonReader).MakeByRefType(), typeof(IJsonFormatterResolver) }, type.Module, true);
 			{
 				var il = deserialize.GetILGenerator();
 				BuildDeserialize(type, serializationInfo, il, (index, member) =>
@@ -431,10 +458,13 @@ namespace Nest.Utf8Json
 			object serializeDelegate = serialize.CreateDelegate(typeof(AnonymousJsonSerializeAction<>).MakeGenericType(type));
 			object deserializeDelegate = deserialize.CreateDelegate(typeof(AnonymousJsonDeserializeFunc<>).MakeGenericType(type));
 
-			return Activator.CreateInstance(typeof(DynamicMethodAnonymousFormatter<>).MakeGenericType(type), stringByteKeysField.ToArray(), serializeCustomFormatters.ToArray(), deserializeCustomFormatters.ToArray(), serializeDelegate, deserializeDelegate);
+			return Activator.CreateInstance(typeof(DynamicMethodAnonymousFormatter<>).MakeGenericType(type), stringByteKeysField.ToArray(),
+				serializeCustomFormatters.ToArray(), deserializeCustomFormatters.ToArray(), serializeDelegate, deserializeDelegate);
 		}
 
-		private static Dictionary<MetaMember, FieldInfo> BuildConstructor(TypeBuilder builder, MetaType info, ConstructorInfo method, FieldBuilder stringByteKeysField, ILGenerator il, bool excludeNull, bool hasShouldSerialize)
+		private static Dictionary<MetaMember, FieldInfo> BuildConstructor(TypeBuilder builder, MetaType info,
+			FieldBuilder stringByteKeysField, ILGenerator il, bool excludeNull, bool hasShouldSerialize
+		)
 		{
 			il.EmitLdarg(0);
 			il.Emit(OpCodes.Call, EmitInfo.ObjectCtor);
@@ -571,7 +601,9 @@ namespace Nest.Utf8Json
 			return dict;
 		}
 
-		private static void BuildSerialize(Type type, MetaType info, ILGenerator il, Action emitStringByteKeys, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, bool excludeNull, bool hasShouldSerialize, int firstArgIndex)
+		private static void BuildSerialize(Type type, MetaType info, ILGenerator il, Action emitStringByteKeys,
+			Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, bool excludeNull, bool hasShouldSerialize, int firstArgIndex
+		)
 		{
 			var argWriter = new ArgumentField(il, firstArgIndex);
 			var argValue = new ArgumentField(il, firstArgIndex + 1, type);
@@ -738,17 +770,21 @@ namespace Nest.Utf8Json
 				}
 				else
 				{
-					rawField = (index == 0) ? JsonWriter.GetEncodedPropertyNameWithBeginObject(item.Name) : JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator(item.Name);
+					rawField = (index == 0)
+						? JsonWriter.GetEncodedPropertyNameWithBeginObject(item.Name)
+						: JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator(item.Name);
 				}
 				if (rawField.Length < 32)
 				{
 					if (UnsafeMemory.Is32Bit)
-						il.EmitCall(typeof(UnsafeMemory32).GetRuntimeMethod("WriteRaw" + rawField.Length, new[] { typeof(JsonWriter).MakeByRefType(), typeof(byte[]) }));
+						il.EmitCall(typeof(UnsafeMemory32).GetRuntimeMethod("WriteRaw" + rawField.Length,
+							new[] { typeof(JsonWriter).MakeByRefType(), typeof(byte[]) }));
 					else
-						il.EmitCall(typeof(UnsafeMemory64).GetRuntimeMethod("WriteRaw" + rawField.Length, new[] { typeof(JsonWriter).MakeByRefType(), typeof(byte[]) }));
+						il.EmitCall(typeof(UnsafeMemory64).GetRuntimeMethod("WriteRaw" + rawField.Length,
+							new[] { typeof(JsonWriter).MakeByRefType(), typeof(byte[]) }));
 				}
 				else
-					il.EmitCall(EmitInfo.UnsafeMemory_MemoryCopy);
+					il.EmitCall(EmitInfo.UnsafeMemoryMemoryCopy);
 
 				// EmitValue
 				EmitSerializeValue(item, il, index, tryEmitLoadCustomFormatter, argWriter, argValue, argResolver);
@@ -770,7 +806,9 @@ namespace Nest.Utf8Json
 			il.Emit(OpCodes.Ret);
 		}
 
-		private static void EmitSerializeValue(MetaMember member, ILGenerator il, int index, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, ArgumentField writer, ArgumentField argValue, ArgumentField argResolver)
+		private static void EmitSerializeValue(MetaMember member, ILGenerator il, int index, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter,
+			ArgumentField writer, ArgumentField argValue, ArgumentField argResolver
+		)
 		{
 			var t = member.Type;
 			if (member is InnerExceptionMetaMember innerExceptionMetaMember)
@@ -802,7 +840,9 @@ namespace Nest.Utf8Json
 			}
 		}
 
-		private static void BuildDeserialize(Type type, MetaType info, ILGenerator il, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, bool useGetUninitializedObject, int firstArgIndex)
+		private static void BuildDeserialize(Type type, MetaType info, ILGenerator il, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter,
+			bool useGetUninitializedObject, int firstArgIndex
+		)
 		{
 			if (info.IsClass && info.BestMatchConstructor == null && !(useGetUninitializedObject && info.IsConcreteClass))
 			{
@@ -968,7 +1008,9 @@ namespace Nest.Utf8Json
 			il.Emit(OpCodes.Ret);
 		}
 
-		private static void EmitDeserializeValue(ILGenerator il, DeserializeInfo info, int index, Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, ArgumentField reader, ArgumentField argResolver)
+		private static void EmitDeserializeValue(ILGenerator il, DeserializeInfo info, int index,
+			Func<int, MetaMember, bool> tryEmitLoadCustomFormatter, ArgumentField reader, ArgumentField argResolver
+		)
 		{
 			var member = info.MemberInfo;
 			var t = member.Type;
@@ -1214,81 +1256,134 @@ namespace Nest.Utf8Json
 		{
 			public static readonly ConstructorInfo ObjectCtor = typeof(object).GetDeclaredConstructors().First(x => x.GetParameters().Length == 0);
 
-			public static readonly MethodInfo GetFormatterWithVerify = typeof(JsonFormatterResolverExtensions).GetRuntimeMethod("GetFormatterWithVerify", new[] { typeof(IJsonFormatterResolver) });
-			public static readonly MethodInfo UnsafeMemory_MemoryCopy = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer, byte[] src) => UnsafeMemory.MemoryCopy(ref writer, src));
-			public static readonly ConstructorInfo InvalidOperationExceptionConstructor = typeof(InvalidOperationException).GetDeclaredConstructors().First(x => { var p = x.GetParameters(); return p.Length == 1 && p[0].ParameterType == typeof(string); });
-			public static readonly MethodInfo GetTypeFromHandle = ExpressionUtility.GetMethodInfo(() => Type.GetTypeFromHandle(default(RuntimeTypeHandle)));
+			public static readonly MethodInfo GetFormatterWithVerify =
+				typeof(JsonFormatterResolverExtensions).GetRuntimeMethod("GetFormatterWithVerify", new[] { typeof(IJsonFormatterResolver) });
 
-			public static readonly MethodInfo TypeGetProperty = ExpressionUtility.GetMethodInfo((Type t) => t.GetProperty(default(string), default(BindingFlags)));
-			public static readonly MethodInfo TypeGetField = ExpressionUtility.GetMethodInfo((Type t) => t.GetField(default(string), default(BindingFlags)));
+			public static readonly MethodInfo UnsafeMemoryMemoryCopy =
+				ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer, byte[] src) => UnsafeMemory.MemoryCopy(ref writer, src));
 
-			public static readonly MethodInfo GetCustomAttributeJsonFormatterAttribute = ExpressionUtility.GetMethodInfo(() => CustomAttributeExtensions.GetCustomAttribute<JsonFormatterAttribute>(default(MemberInfo), default(bool)));
+			public static readonly ConstructorInfo InvalidOperationExceptionConstructor = typeof(InvalidOperationException).GetDeclaredConstructors()
+				.First(x =>
+				{
+					var p = x.GetParameters();
+					return p.Length == 1 && p[0].ParameterType == typeof(string);
+				});
 
-			public static readonly MethodInfo ActivatorCreateInstance = ExpressionUtility.GetMethodInfo(() => Activator.CreateInstance(default(Type), default(object[])));
-			public static readonly MethodInfo GetUninitializedObject = ExpressionUtility.GetMethodInfo(() => System.Runtime.Serialization.FormatterServices.GetUninitializedObject(default(Type)));
+			public static readonly MethodInfo GetTypeFromHandle =
+				ExpressionUtility.GetMethodInfo(() => Type.GetTypeFromHandle(default(RuntimeTypeHandle)));
+
+			public static readonly MethodInfo TypeGetProperty =
+				ExpressionUtility.GetMethodInfo((Type t) => t.GetProperty(default(string), default(BindingFlags)));
+
+			public static readonly MethodInfo TypeGetField =
+				ExpressionUtility.GetMethodInfo((Type t) => t.GetField(default(string), default(BindingFlags)));
+
+			public static readonly MethodInfo GetCustomAttributeJsonFormatterAttribute = ExpressionUtility.GetMethodInfo(() =>
+				CustomAttributeExtensions.GetCustomAttribute<JsonFormatterAttribute>(default(MemberInfo), default(bool)));
+
+			public static readonly MethodInfo ActivatorCreateInstance =
+				ExpressionUtility.GetMethodInfo(() => Activator.CreateInstance(default(Type), default(object[])));
+
+			public static readonly MethodInfo GetUninitializedObject =
+				ExpressionUtility.GetMethodInfo(() => System.Runtime.Serialization.FormatterServices.GetUninitializedObject(default(Type)));
 
 			public static readonly MethodInfo GetTypeMethod = ExpressionUtility.GetMethodInfo((object o) => o.GetType());
-			public static readonly MethodInfo TypeGetGenericArguments = ExpressionUtility.GetPropertyInfo((Type t) => t.GenericTypeArguments).GetMethod;
+
+			public static readonly MethodInfo TypeGetGenericArguments =
+				ExpressionUtility.GetPropertyInfo((Type t) => t.GenericTypeArguments).GetMethod;
+
 			public static readonly MethodInfo TypeEquals = ExpressionUtility.GetMethodInfo((Type t) => t.Equals(default(Type)));
 
 			public static readonly MethodInfo MakeGenericType = ExpressionUtility.GetMethodInfo((Type t) => t.MakeGenericType(default(Type[])));
 
-			public static readonly MethodInfo NongenericSerialize = ExpressionUtility.GetMethodInfo<Utf8Json.JsonWriter>(writer => JsonSerializer.NonGeneric.Serialize(default(Type), ref writer, default(object), default(IJsonFormatterResolver)));
+			public static readonly MethodInfo NongenericSerialize = ExpressionUtility.GetMethodInfo<Utf8Json.JsonWriter>(writer =>
+				JsonSerializer.NonGeneric.Serialize(default(Type), ref writer, default(object), default(IJsonFormatterResolver)));
 
 			public static MethodInfo Serialize(Type type) =>
-				typeof(IJsonFormatter<>).MakeGenericType(type).GetRuntimeMethod(nameof(IJsonFormatter<object>.Serialize), new[] { typeof(Utf8Json.JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) });
+				typeof(IJsonFormatter<>).MakeGenericType(type)
+					.GetRuntimeMethod(nameof(IJsonFormatter<object>.Serialize),
+						new[] { typeof(Utf8Json.JsonWriter).MakeByRefType(), type, typeof(IJsonFormatterResolver) });
 
 			public static MethodInfo Deserialize(Type type) =>
-				typeof(IJsonFormatter<>).MakeGenericType(type).GetRuntimeMethod(nameof(IJsonFormatter<object>.Deserialize), new[] { typeof(Utf8Json.JsonReader).MakeByRefType(), typeof(IJsonFormatterResolver) });
+				typeof(IJsonFormatter<>).MakeGenericType(type)
+					.GetRuntimeMethod(nameof(IJsonFormatter<object>.Deserialize),
+						new[] { typeof(Utf8Json.JsonReader).MakeByRefType(), typeof(IJsonFormatterResolver) });
 
 			public static MethodInfo GetNullableHasValue(Type type) =>
 				typeof(Nullable<>).MakeGenericType(type).GetRuntimeProperty(nameof(Nullable<int>.HasValue)).GetMethod;
 
 			internal static class JsonWriter
 			{
-				public static readonly MethodInfo GetEncodedPropertyNameWithBeginObject = ExpressionUtility.GetMethodInfo(() => Utf8Json.JsonWriter.GetEncodedPropertyNameWithBeginObject(default(string)));
+				public static readonly MethodInfo GetEncodedPropertyNameWithBeginObject =
+					ExpressionUtility.GetMethodInfo(() => Utf8Json.JsonWriter.GetEncodedPropertyNameWithBeginObject(default(string)));
 
-				public static readonly MethodInfo GetEncodedPropertyNameWithPrefixValueSeparator = ExpressionUtility.GetMethodInfo(() => Utf8Json.JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator(default(string)));
+				public static readonly MethodInfo GetEncodedPropertyNameWithPrefixValueSeparator =
+					ExpressionUtility.GetMethodInfo(() => Utf8Json.JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator(default(string)));
 
-				public static readonly MethodInfo GetEncodedPropertyNameWithoutQuotation = ExpressionUtility.GetMethodInfo(() => Utf8Json.JsonWriter.GetEncodedPropertyNameWithoutQuotation(default(string)));
+				public static readonly MethodInfo GetEncodedPropertyNameWithoutQuotation =
+					ExpressionUtility.GetMethodInfo(() => Utf8Json.JsonWriter.GetEncodedPropertyNameWithoutQuotation(default(string)));
 
-				public static readonly MethodInfo GetEncodedPropertyName = ExpressionUtility.GetMethodInfo(() => Utf8Json.JsonWriter.GetEncodedPropertyName(default(string)));
+				public static readonly MethodInfo GetEncodedPropertyName =
+					ExpressionUtility.GetMethodInfo(() => Utf8Json.JsonWriter.GetEncodedPropertyName(default(string)));
 
 				public static readonly MethodInfo WriteNull = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteNull());
-				public static readonly MethodInfo WriteRaw = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteRaw(default(byte[])));
-				public static readonly MethodInfo WriteBeginObject = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteBeginObject());
-				public static readonly MethodInfo WriteEndObject = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteEndObject());
-				public static readonly MethodInfo WriteValueSeparator = ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteValueSeparator());
 
-				static JsonWriter()
-				{
-				}
+				public static readonly MethodInfo WriteRaw =
+					ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteRaw(default(byte[])));
+
+				public static readonly MethodInfo WriteBeginObject =
+					ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteBeginObject());
+
+				public static readonly MethodInfo WriteEndObject =
+					ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteEndObject());
+
+				public static readonly MethodInfo WriteValueSeparator =
+					ExpressionUtility.GetMethodInfo((Utf8Json.JsonWriter writer) => writer.WriteValueSeparator());
+
+				static JsonWriter() { }
 			}
 
 			internal static class JsonReader
 			{
 				public static readonly MethodInfo ReadIsNull = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.ReadIsNull());
-				public static readonly MethodInfo ReadIsBeginObjectWithVerify = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.ReadIsBeginObjectWithVerify());
-				public static readonly MethodInfo ReadIsEndObjectWithSkipValueSeparator = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader, int count) => reader.ReadIsEndObjectWithSkipValueSeparator(ref count));
-				public static readonly MethodInfo ReadPropertyNameSegmentUnsafe = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.ReadPropertyNameSegmentRaw());
-				public static readonly MethodInfo ReadNextBlock = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.ReadNextBlock());
-				public static readonly MethodInfo GetBufferUnsafe = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.GetBufferUnsafe());
-				public static readonly MethodInfo GetCurrentOffsetUnsafe = ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.GetCurrentOffsetUnsafe());
 
-				static JsonReader()
-				{
-				}
+				public static readonly MethodInfo ReadIsBeginObjectWithVerify =
+					ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.ReadIsBeginObjectWithVerify());
+
+				public static readonly MethodInfo ReadIsEndObjectWithSkipValueSeparator =
+					ExpressionUtility.GetMethodInfo(
+						(Utf8Json.JsonReader reader, int count) => reader.ReadIsEndObjectWithSkipValueSeparator(ref count));
+
+				public static readonly MethodInfo ReadPropertyNameSegmentUnsafe =
+					ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.ReadPropertyNameSegmentRaw());
+
+				public static readonly MethodInfo ReadNextBlock =
+					ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.ReadNextBlock());
+
+				public static readonly MethodInfo GetBufferUnsafe =
+					ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.GetBufferUnsafe());
+
+				public static readonly MethodInfo GetCurrentOffsetUnsafe =
+					ExpressionUtility.GetMethodInfo((Utf8Json.JsonReader reader) => reader.GetCurrentOffsetUnsafe());
+
+				static JsonReader() { }
 			}
 
 			internal static class JsonFormatterAttr
 			{
-				internal static readonly MethodInfo FormatterType = ExpressionUtility.GetPropertyInfo((JsonFormatterAttribute attr) => attr.FormatterType).GetMethod;
-				internal static readonly MethodInfo Arguments = ExpressionUtility.GetPropertyInfo((JsonFormatterAttribute attr) => attr.Arguments).GetMethod;
+				internal static readonly MethodInfo FormatterType =
+					ExpressionUtility.GetPropertyInfo((JsonFormatterAttribute attr) => attr.FormatterType).GetMethod;
+
+				internal static readonly MethodInfo Arguments =
+					ExpressionUtility.GetPropertyInfo((JsonFormatterAttribute attr) => attr.Arguments).GetMethod;
 			}
 		}
 	}
 
-	internal delegate void AnonymousJsonSerializeAction<T>(byte[][] stringByteKeysField, object[] customFormatters, ref JsonWriter writer, T value, IJsonFormatterResolver resolver);
+	internal delegate void AnonymousJsonSerializeAction<T>(byte[][] stringByteKeysField, object[] customFormatters, ref JsonWriter writer, T value,
+		IJsonFormatterResolver resolver
+	);
+
 	internal delegate T AnonymousJsonDeserializeFunc<T>(object[] customFormatters, ref JsonReader reader, IJsonFormatterResolver resolver);
 
 	internal class DynamicMethodAnonymousFormatter<T> : IJsonFormatter<T>
@@ -1299,7 +1394,9 @@ namespace Nest.Utf8Json
 		private readonly AnonymousJsonSerializeAction<T> _serialize;
 		private readonly AnonymousJsonDeserializeFunc<T> _deserialize;
 
-		public DynamicMethodAnonymousFormatter(byte[][] stringByteKeysField, object[] serializeCustomFormatters, object[] deserializeCustomFormatters, AnonymousJsonSerializeAction<T> serialize, AnonymousJsonDeserializeFunc<T> deserialize)
+		public DynamicMethodAnonymousFormatter(byte[][] stringByteKeysField, object[] serializeCustomFormatters, object[] deserializeCustomFormatters,
+			AnonymousJsonSerializeAction<T> serialize, AnonymousJsonDeserializeFunc<T> deserialize
+		)
 		{
 			_stringByteKeysField = stringByteKeysField;
 			_serializeCustomFormatters = serializeCustomFormatters;
@@ -1311,12 +1408,14 @@ namespace Nest.Utf8Json
 		public void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{
 			if (_serialize == null) throw new InvalidOperationException(GetType().Name + " does not support Serialize.");
+
 			_serialize(_stringByteKeysField, _serializeCustomFormatters, ref writer, value, formatterResolver);
 		}
 
 		public T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			if (_deserialize == null) throw new InvalidOperationException(GetType().Name + " does not support Deserialize.");
+
 			return _deserialize(_deserializeCustomFormatters, ref reader, formatterResolver);
 		}
 	}

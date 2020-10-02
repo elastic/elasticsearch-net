@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System;
@@ -28,65 +29,65 @@ using System.Reflection;
 
 namespace Nest.Utf8Json
 {
-    internal static class ExpressionUtility
-    {
-        // Method
+	internal static class ExpressionUtility
+	{
+		// Method
 
 		private static MethodInfo GetMethodInfoCore(LambdaExpression expression)
-        {
-            if (expression == null)
+		{
+			if (expression == null)
 				throw new ArgumentNullException(nameof(expression));
 
-            return (expression.Body as MethodCallExpression).Method;
-        }
-
-        /// <summary>
-        /// Get MethodInfo from Expression for Static(with result) method.
-        /// </summary>
-        public static MethodInfo GetMethodInfo<T>(Expression<Func<T>> expression) => GetMethodInfoCore(expression);
+			return (expression.Body as MethodCallExpression).Method;
+		}
 
 		/// <summary>
-        /// Get MethodInfo from Expression for Static(void) method.
-        /// </summary>
-        public static MethodInfo GetMethodInfo(Expression<Action> expression) => GetMethodInfoCore(expression);
+		/// Get MethodInfo from Expression for Static(with result) method.
+		/// </summary>
+		public static MethodInfo GetMethodInfo<T>(Expression<Func<T>> expression) => GetMethodInfoCore(expression);
 
 		/// <summary>
-        /// Get MethodInfo from Expression for Instance(with result) method.
-        /// </summary>
-        public static MethodInfo GetMethodInfo<T, TR>(Expression<Func<T, TR>> expression) => GetMethodInfoCore(expression);
+		/// Get MethodInfo from Expression for Static(void) method.
+		/// </summary>
+		public static MethodInfo GetMethodInfo(Expression<Action> expression) => GetMethodInfoCore(expression);
 
 		/// <summary>
-        /// Get MethodInfo from Expression for Instance(void) method.
-        /// </summary>
-        public static MethodInfo GetMethodInfo<T>(Expression<Action<T>> expression) => GetMethodInfoCore(expression);
+		/// Get MethodInfo from Expression for Instance(with result) method.
+		/// </summary>
+		public static MethodInfo GetMethodInfo<T, TR>(Expression<Func<T, TR>> expression) => GetMethodInfoCore(expression);
+
+		/// <summary>
+		/// Get MethodInfo from Expression for Instance(void) method.
+		/// </summary>
+		public static MethodInfo GetMethodInfo<T>(Expression<Action<T>> expression) => GetMethodInfoCore(expression);
 
 		// WithArgument(for ref, out) helper
 
-        /// <summary>
-        /// Get MethodInfo from Expression for Instance(void) method.
-        /// </summary>
-        public static MethodInfo GetMethodInfo<TArg1, TArg2>(Expression<Action<TArg1, TArg2>> expression) => GetMethodInfoCore(expression);
+		/// <summary>
+		/// Get MethodInfo from Expression for Instance(void) method.
+		/// </summary>
+		public static MethodInfo GetMethodInfo<TArg1, TArg2>(Expression<Action<TArg1, TArg2>> expression) => GetMethodInfoCore(expression);
 
 		/// <summary>
-        /// Get MethodInfo from Expression for Instance(with result) method.
-        /// </summary>
-        public static MethodInfo GetMethodInfo<T, TArg1, TR>(Expression<Func<T, TArg1, TR>> expression) => GetMethodInfoCore(expression);
+		/// Get MethodInfo from Expression for Instance(with result) method.
+		/// </summary>
+		public static MethodInfo GetMethodInfo<T, TArg1, TR>(Expression<Func<T, TArg1, TR>> expression) => GetMethodInfoCore(expression);
 
 		// Property
 
 		private static MemberInfo GetMemberInfoCore<T>(Expression<T> source)
-        {
-            if (source == null)
+		{
+			if (source == null)
 				throw new ArgumentNullException("source");
 
-            var memberExpression = source.Body as MemberExpression;
-            return memberExpression.Member;
-        }
+			var memberExpression = source.Body as MemberExpression;
+			return memberExpression.Member;
+		}
 
-        public static PropertyInfo GetPropertyInfo<T, TR>(Expression<Func<T, TR>> expression) => GetMemberInfoCore(expression) as PropertyInfo;
+		public static PropertyInfo GetPropertyInfo<T, TR>(Expression<Func<T, TR>> expression) => GetMemberInfoCore(expression) as PropertyInfo;
 
 		// Field
 
-        public static FieldInfo GetFieldInfo<T, TR>(Expression<Func<T, TR>> expression) => GetMemberInfoCore(expression) as FieldInfo;
+		public static FieldInfo GetFieldInfo<T, TR>(Expression<Func<T, TR>> expression) => GetMemberInfoCore(expression) as FieldInfo;
 	}
 }

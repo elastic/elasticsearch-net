@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System;
@@ -37,7 +38,11 @@ namespace Nest.Utf8Json
 
 		public void Serialize(ref JsonWriter writer, T[] value, IJsonFormatterResolver formatterResolver)
 		{
-			if (value == null) { writer.WriteNull(); return; }
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 
 			writer.WriteBeginArray();
 			var formatter = formatterResolver.GetFormatterWithVerify<T>();
@@ -90,7 +95,11 @@ namespace Nest.Utf8Json
 
 		public void Serialize(ref JsonWriter writer, ArraySegment<T> value, IJsonFormatterResolver formatterResolver)
 		{
-			if (value.Array == null) { writer.WriteNull(); return; }
+			if (value.Array == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 
 			var array = value.Array;
 			var offset = value.Offset;
@@ -145,7 +154,11 @@ namespace Nest.Utf8Json
 	{
 		public void Serialize(ref JsonWriter writer, List<T> value, IJsonFormatterResolver formatterResolver)
 		{
-			if (value == null) { writer.WriteNull(); return; }
+			if (value == null)
+			{
+				writer.WriteNull();
+				return;
+			}
 
 			writer.WriteBeginArray();
 			var formatter = formatterResolver.GetFormatterWithVerify<T>();
@@ -233,11 +246,14 @@ namespace Nest.Utf8Json
 
 		// abstraction for deserialize
 		protected abstract TIntermediate Create();
+
 		protected abstract void Add(ref TIntermediate collection, int index, TElement value);
+
 		protected abstract TCollection Complete(ref TIntermediate intermediateCollection);
 	}
 
-	internal abstract class CollectionFormatterBase<TElement, TIntermediate, TCollection> : CollectionFormatterBase<TElement, TIntermediate, IEnumerator<TElement>, TCollection>
+	internal abstract class CollectionFormatterBase<TElement, TIntermediate, TCollection>
+		: CollectionFormatterBase<TElement, TIntermediate, IEnumerator<TElement>, TCollection>
 		where TCollection : class, IEnumerable<TElement>
 	{
 		protected override IEnumerator<TElement> GetSourceEnumerator(TCollection source) => source.GetEnumerator();
@@ -411,7 +427,8 @@ namespace Nest.Utf8Json
 				return;
 			}
 
-			formatterResolver.GetFormatterWithVerify<IEnumerable<IGrouping<TKey, TElement>>>().Serialize(ref writer, value.AsEnumerable(), formatterResolver);
+			formatterResolver.GetFormatterWithVerify<IEnumerable<IGrouping<TKey, TElement>>>()
+				.Serialize(ref writer, value.AsEnumerable(), formatterResolver);
 		}
 
 		public ILookup<TKey, TElement> Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -660,7 +677,8 @@ namespace Nest.Utf8Json
 		protected override ObservableCollection<T> Create() => new ObservableCollection<T>();
 	}
 
-	internal sealed class ReadOnlyObservableCollectionFormatter<T> : CollectionFormatterBase<T, ObservableCollection<T>, ReadOnlyObservableCollection<T>>
+	internal sealed class ReadOnlyObservableCollectionFormatter<T>
+		: CollectionFormatterBase<T, ObservableCollection<T>, ReadOnlyObservableCollection<T>>
 	{
 		protected override void Add(ref ObservableCollection<T> collection, int index, T value) => collection.Add(value);
 
@@ -737,13 +755,12 @@ namespace Nest.Utf8Json
 		{
 			GroupingName = new[]
 			{
-				JsonWriter.GetEncodedPropertyNameWithBeginObject("Key"),
-				JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator("Elements"),
+				JsonWriter.GetEncodedPropertyNameWithBeginObject("Key"), JsonWriter.GetEncodedPropertyNameWithPrefixValueSeparator("Elements"),
 			};
 			GroupingAutomata = new AutomataDictionary
 			{
-				{JsonWriter.GetEncodedPropertyNameWithoutQuotation("Key"), 0 },
-				{JsonWriter.GetEncodedPropertyNameWithoutQuotation("Elements"), 1 },
+				{ JsonWriter.GetEncodedPropertyNameWithoutQuotation("Key"), 0 },
+				{ JsonWriter.GetEncodedPropertyNameWithoutQuotation("Elements"), 1 },
 			};
 		}
 	}
