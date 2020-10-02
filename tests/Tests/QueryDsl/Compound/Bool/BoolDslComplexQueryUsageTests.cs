@@ -55,7 +55,8 @@ namespace Tests.QueryDsl.Compound.Bool
 						@bool = new
 						{
 							// must be typed to object[] for documentation
-							must = new[]
+							// ReSharper disable once RedundantExplicitArrayCreation
+							must = new object[]
 							{
 								new
 								{

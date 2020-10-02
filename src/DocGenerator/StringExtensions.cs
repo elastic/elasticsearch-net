@@ -301,6 +301,8 @@ namespace DocGenerator
 
 				var assembly = Assembly.Load(ms.ToArray());
 				var type = assembly.GetType("Temporary.Json");
+				if (type == null)
+					throw new Exception("Can not load json from temporary assembly");
 				var obj = Activator.CreateInstance(type);
 
 				var output = type.InvokeMember("Write",
