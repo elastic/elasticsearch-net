@@ -63,7 +63,7 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			var client = GetClient(requestData);
-			HttpResponseMessage responseMessage = null;
+			HttpResponseMessage responseMessage;
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
 			Stream responseStream = null;
@@ -130,7 +130,7 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			var client = GetClient(requestData);
-			HttpResponseMessage responseMessage = null;
+			HttpResponseMessage responseMessage;
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
 			Stream responseStream = null;
