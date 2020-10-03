@@ -1,0 +1,56 @@
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/installation.asciidoc. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[installation]]
+== Installation
+
+This page is about about how to install the `Elasticsearch.Net` and the `NEST`
+clients.
+
+[[es-net]]
+[discrete]
+=== Installing the Elasticsearch.Net client
+
+The low level client, `ElasticLowLevelClient`, is a low level, dependency free 
+client that has no opinions about how you build and represent your requests and 
+responses. 
+
+It can be installed from the Package Manager Console inside Visual Studio by 
+using the following command:
+
+[source,shell]
+----
+Install-Package Elasticsearch.Net
+----
+
+Or by searching for 
+https://www.nuget.org/packages/Elasticsearch.Net[Elasticsearch.Net] in the 
+Package Manager GUI.
+
+[[es-nest]]
+[discrete]
+=== Installing the NEST client
+
+The high level `ElasticClient`, provides a strongly typed query DSL that maps 
+one-to-one with the {es} query DSL.
+
+It can be installed from the Package Manager Console inside Visual Studio by 
+using the following command:
+
+[source,shell]
+----
+Install-Package NEST
+----
+
+Or by searching for https://www.nuget.org/packages/NEST[NEST] in the Package 
+Manager GUI. 
+
+NEST internally uses and still exposes the low level client, 
+`ElasticLowLevelClient`, from <<elasticsearch-net,Elasticsearch.Net>> via the 
+`.LowLevel` property on `ElasticClient`.
+

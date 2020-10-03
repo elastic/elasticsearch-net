@@ -3,7 +3,9 @@
 [[elasticsearch-net-reference]]
 = Elasticsearch.Net and NEST: the .NET clients
 
-include::intro.asciidoc[]
+include::introduction.asciidoc[]
+
+include::installation.asciidoc[]
 
 include::breaking-changes.asciidoc[]
 

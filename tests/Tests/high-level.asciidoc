@@ -3,20 +3,12 @@
 [[nest]]
 = NEST - High level client
 
-[partintro]
---
-The high level client, `ElasticClient`, provides a strongly typed query DSL that maps one-to-one with the Elasticsearch query DSL.
+The high level client, `ElasticClient`, provides a strongly typed query DSL that 
+maps one-to-one with the {es} query DSL. Please refer to <<es-nest>> for 
+installation details.
 
-It can be installed from the Package Manager Console inside Visual Studio using
-
-[source, shell]
-----
-Install-Package NEST
-----
-
-Or by searching for https://www.nuget.org/packages/NEST[NEST] in the Package Manager GUI. 
-
-NEST internally uses and still exposes the low level client, `ElasticLowLevelClient`, from <<elasticsearch-net,Elasticsearch.Net>> via
+NEST internally uses and still exposes the low level client, 
+`ElasticLowLevelClient`, from <<elasticsearch-net,Elasticsearch.Net>> via
 the `.LowLevel` property on `ElasticClient`.
 
 There are a number of conventions that NEST uses for inference of
@@ -39,8 +31,6 @@ And features such as
 
 - <<mapping, Mapping CLR POCO types to JSON documents>>
 - <<covariant-search-results, Covariant Search Results>>
-
---
 
 include::{output-dir}/getting-started.asciidoc[]
 

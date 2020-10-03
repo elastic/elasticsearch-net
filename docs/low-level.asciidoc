@@ -9,21 +9,9 @@ If you wish to submit a PR for any spelling mistakes, typos or grammatical error
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[partintro]
---
-The low level client, `ElasticLowLevelClient`, is a low level, dependency free client that has no 
-opinions about how you build and represent your requests and responses. 
-
-It can be installed from the Package Manager Console inside Visual Studio using
-
-[source,shell]
-----
-Install-Package Elasticsearch.Net
-----
-
-Or by searching for https://www.nuget.org/packages/Elasticsearch.Net[Elasticsearch.Net] in the Package Manager GUI.
-
---
+The low level client, `ElasticLowLevelClient`, is a low level, dependency free 
+client that has no opinions about how you build and represent your requests and 
+responses. Please refer to <<es-net>> for installation details.
 
 include::client-concepts/low-level/getting-started.asciidoc[]
 
