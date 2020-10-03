@@ -1,6 +1,6 @@
 <RunSettings>
 	<RunConfiguration>
-		<CollectSourceInformation>true</CollectSourceInformation>
+		<MaxCpuCount>0</MaxCpuCount>
 	</RunConfiguration>
 	<LoggerRunSettings>
 		<Loggers>
