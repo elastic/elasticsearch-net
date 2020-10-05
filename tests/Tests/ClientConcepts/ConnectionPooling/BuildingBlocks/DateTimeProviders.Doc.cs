@@ -5,7 +5,7 @@
 using System;
 using System.Linq;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using FluentAssertions;
 using Tests.Framework;
 

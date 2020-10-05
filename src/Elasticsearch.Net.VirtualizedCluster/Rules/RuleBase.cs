@@ -4,6 +4,7 @@
 
  using System;
  using System.Threading;
+ using Elastic.Transport;
 
 namespace Elasticsearch.Net.VirtualizedCluster.Rules
 {

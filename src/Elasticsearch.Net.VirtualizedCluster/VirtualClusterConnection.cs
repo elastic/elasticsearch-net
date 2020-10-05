@@ -13,6 +13,7 @@ using TheException = System.Net.WebException;
 #endif
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Transport;
 using Elasticsearch.Net.VirtualizedCluster.MockResponses;
 using Elasticsearch.Net.VirtualizedCluster.Providers;
 using Elasticsearch.Net.VirtualizedCluster.Rules;

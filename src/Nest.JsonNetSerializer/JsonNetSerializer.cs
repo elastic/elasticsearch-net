@@ -4,7 +4,7 @@
 
 using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Newtonsoft.Json;
 
 namespace Nest.JsonNetSerializer

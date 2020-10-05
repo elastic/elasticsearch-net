@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Elasticsearch.Net.Extensions;
 using FluentAssertions;
 using Nest;

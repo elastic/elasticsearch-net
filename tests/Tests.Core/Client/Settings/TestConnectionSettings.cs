@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Nest;
 using Tests.Configuration;
 using Tests.Core.Client.Serializers;

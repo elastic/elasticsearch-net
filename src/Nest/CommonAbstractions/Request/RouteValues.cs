@@ -4,14 +4,11 @@
 
 using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elastic.Transport;
 
 namespace Nest
 {
-	internal class ResolvedRouteValues : Dictionary<string, string>
-	{
-
-	}
+	internal class ResolvedRouteValues : Dictionary<string, string> { }
 
 	public class RouteValues : Dictionary<string, IUrlParameter>
 	{

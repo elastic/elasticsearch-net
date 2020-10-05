@@ -7,6 +7,7 @@ using System.IO;
 using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Xunit;
 using Elastic.Stack.ArtifactsApi.Products;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Extensions;

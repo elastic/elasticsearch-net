@@ -7,6 +7,7 @@ using Elasticsearch.Net;
 using Examples.Models;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
+using Elastic.Transport;
 
 namespace Examples.Search
 {

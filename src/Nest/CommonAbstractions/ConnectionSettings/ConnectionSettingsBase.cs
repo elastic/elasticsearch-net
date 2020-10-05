@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Nest.Utf8Json;
 #if DOTNETCORE
 using System.Runtime.InteropServices;

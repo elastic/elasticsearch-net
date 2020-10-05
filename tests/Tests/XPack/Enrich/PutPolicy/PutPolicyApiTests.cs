@@ -4,12 +4,12 @@
 
 using System;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Nest;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
-using static Elasticsearch.Net.HttpMethod;
+using static Elastic.Transport.HttpMethod;
 using static Nest.Infer;
 
 namespace Tests.XPack.Enrich.PutPolicy

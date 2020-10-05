@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Elasticsearch.Net;
+using Elastic.Transport;
 
 namespace Nest
 {

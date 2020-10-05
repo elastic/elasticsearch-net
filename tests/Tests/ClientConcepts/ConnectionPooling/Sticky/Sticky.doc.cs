@@ -10,11 +10,11 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using FluentAssertions;
 using Tests.Framework;
 using static Elasticsearch.Net.VirtualizedCluster.Rules.TimesHelper;
-using static Elasticsearch.Net.AuditEvent;
+using static Elastic.Transport.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 {

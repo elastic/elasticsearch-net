@@ -5,7 +5,7 @@
 using System;
  using Elastic.Elasticsearch.Ephemeral;
  using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;

@@ -4,7 +4,8 @@
 
 using System;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport;
+using Elastic.Transport.Extensions;
 using Elasticsearch.Net.Extensions;
 using FluentAssertions;
 using Nest;

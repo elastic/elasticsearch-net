@@ -8,9 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using Elastic.Elasticsearch.Xunit.Sdk;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Xunit;
 // ReSharper disable SuggestVarOrType_Elsewhere

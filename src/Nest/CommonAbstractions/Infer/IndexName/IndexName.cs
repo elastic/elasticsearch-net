@@ -4,7 +4,7 @@
 
 using System;
 using System.Diagnostics;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Nest.Utf8Json;
 
 namespace Nest
@@ -125,7 +125,7 @@ namespace Nest
 
 			if ((!Cluster.IsNullOrEmpty() || !other.Cluster.IsNullOrEmpty()) && Cluster != other.Cluster) return false;
 
-			return Type != null && other?.Type != null && Type == other.Type;
+			return Type != null && other.Type != null && Type == other.Type;
 		}
 	}
 }

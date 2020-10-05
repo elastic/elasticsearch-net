@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using Elastic.Transport;
 
 namespace Elasticsearch.Net.VirtualizedCluster.Providers
 {

@@ -19,7 +19,7 @@ namespace Elasticsearch.Net.Extensions
 		{
 			string result = null;
 
-			if (sArray == null) return result;
+			if (sArray == null) return null;
 
 			var hexOrder = new char[sArray.Length * 2];
 

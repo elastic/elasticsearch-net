@@ -5,7 +5,7 @@
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Nest.Utf8Json;
 
 namespace Nest

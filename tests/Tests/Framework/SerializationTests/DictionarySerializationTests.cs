@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Serialization;

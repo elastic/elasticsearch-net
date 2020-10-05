@@ -5,7 +5,7 @@
 using System;
 using System.Text;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 using FluentAssertions;
 using Nest;
 

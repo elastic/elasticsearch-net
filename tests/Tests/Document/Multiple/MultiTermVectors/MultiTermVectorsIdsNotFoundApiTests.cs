@@ -5,7 +5,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;

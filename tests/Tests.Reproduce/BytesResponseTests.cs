@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Core.ManagedElasticsearch.Clusters;

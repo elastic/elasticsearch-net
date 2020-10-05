@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information
 
 using System.Collections.Generic;
-using Elasticsearch.Net;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 namespace Nest
 {

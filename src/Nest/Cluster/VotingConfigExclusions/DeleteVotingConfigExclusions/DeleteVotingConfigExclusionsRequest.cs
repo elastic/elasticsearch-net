@@ -5,7 +5,7 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Elasticsearch.Net.Specification.ClusterApi;
 
 namespace Nest

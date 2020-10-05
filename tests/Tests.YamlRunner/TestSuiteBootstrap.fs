@@ -7,6 +7,7 @@ module Tests.YamlRunner.TestSuiteBootstrap
 open System
 open System.Linq
 
+open Elastic.Transport
 open Elasticsearch.Net
 open Elasticsearch.Net.Specification.CatApi
 open Elasticsearch.Net.Specification.ClusterApi

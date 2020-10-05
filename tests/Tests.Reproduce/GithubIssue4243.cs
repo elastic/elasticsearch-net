@@ -4,6 +4,7 @@
 
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Specification.CatApi;
 using FluentAssertions;

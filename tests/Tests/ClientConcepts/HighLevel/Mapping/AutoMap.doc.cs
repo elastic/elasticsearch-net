@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Nest;
 using Tests.Core.Client;
 using Tests.Framework;

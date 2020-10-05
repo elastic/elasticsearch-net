@@ -4,9 +4,9 @@
 
 using System;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport;
+using Elastic.Transport.Extensions;
 using FluentAssertions;
-using Elasticsearch.Net.Extensions;
 using Nest;
 using Tests.Core.Client;
 

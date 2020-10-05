@@ -10,6 +10,7 @@ open System.Linq
 open System.IO
 open System.Text
 open System.Text.RegularExpressions
+open Elastic.Transport
 open Microsoft.FSharp.Reflection
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.Stashes

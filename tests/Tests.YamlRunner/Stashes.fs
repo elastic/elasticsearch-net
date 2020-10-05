@@ -4,7 +4,7 @@
 
 module Tests.YamlRunner.Stashes
 
-open Elasticsearch.Net
+open Elastic.Transport
 open System
 open System.Collections.Generic
 open Tests.YamlRunner.Models

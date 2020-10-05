@@ -5,7 +5,7 @@
 using System;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Nest;
 using Tests.Benchmarking.Framework;
 
