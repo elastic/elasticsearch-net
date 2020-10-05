@@ -8,12 +8,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using System.Threading;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using Elasticsearch.Net.Extensions;
 using Tests.Domain.Extensions;
 

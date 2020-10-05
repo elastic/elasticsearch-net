@@ -5,7 +5,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Nest.Utf8Json;
 
 namespace Nest

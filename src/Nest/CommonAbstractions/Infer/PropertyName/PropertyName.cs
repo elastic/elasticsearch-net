@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Nest.Utf8Json;
 
 namespace Nest

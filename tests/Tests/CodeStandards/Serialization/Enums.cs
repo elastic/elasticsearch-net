@@ -11,8 +11,8 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport.Extensions;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Extensions;
 using FluentAssertions;
 using Nest;
 

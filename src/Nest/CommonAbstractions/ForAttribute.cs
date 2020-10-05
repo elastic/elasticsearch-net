@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information
 
 using System;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -21,7 +20,7 @@ namespace Nest
 	/// <summary>
 	/// The preferred way to wire in a custom response formatter is for requests to override
 	/// <see cref="RequestBase{TParameters}.RequestDefaults"/> however sometimes a request does not have
-	/// access to enough type information. This attribute will set up the <see cref="RequestParameters{T}.CustomResponseBuilder"/>
+	/// access to enough type information. This attribute will set up the <!--see cref="Elastic.Transport.RequestParameters.CustomResponseBuilder"/-->
 	/// in the generated client methods instead.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Interface)]

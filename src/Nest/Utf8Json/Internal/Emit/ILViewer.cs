@@ -26,7 +26,7 @@
 using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
-using Elasticsearch.Net;
+using Elastic.Transport;
 
 namespace Nest.Utf8Json
 {

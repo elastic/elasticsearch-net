@@ -4,13 +4,13 @@
 
 using System;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
-using static Elasticsearch.Net.HttpMethod;
+using static Elastic.Transport.HttpMethod;
 
 namespace Tests.XPack.License.GetLicense
 {

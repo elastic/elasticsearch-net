@@ -6,7 +6,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;

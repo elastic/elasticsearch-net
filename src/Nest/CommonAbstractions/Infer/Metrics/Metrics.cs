@@ -3,8 +3,9 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using Elastic.Transport;
+using Elastic.Transport.Extensions;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Extensions;
 
 namespace Nest
 {
@@ -24,7 +25,7 @@ namespace Nest
 
 		internal Enum Value { get; }
 
-		public bool Equals(Metrics other) => Value.Equals(other.Value);
+		public bool Equals(Metrics other) => Value.Equals(other?.Value);
 
 		public string GetString(IConnectionConfigurationValues settings) => Value.GetStringValue();
 

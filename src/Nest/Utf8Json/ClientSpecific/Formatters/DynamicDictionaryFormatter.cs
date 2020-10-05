@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 using System.Globalization;
-using Elasticsearch.Net;
+using Elastic.Transport;
 
 namespace Nest.Utf8Json
 {

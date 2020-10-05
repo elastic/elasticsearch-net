@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Elastic.Elasticsearch.Xunit.Sdk;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using Elasticsearch.Net.VirtualizedCluster;
 using Elasticsearch.Net.VirtualizedCluster.Audit;
@@ -20,7 +21,7 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using static Elasticsearch.Net.VirtualizedCluster.Rules.TimesHelper;
-using static Elasticsearch.Net.AuditEvent;
+using static Elastic.Transport.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {

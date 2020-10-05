@@ -6,7 +6,7 @@ using System;
 using System.Text;
 using System.Runtime.Serialization;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Elasticsearch.Net.Extensions;
 using FluentAssertions;
 using Nest;

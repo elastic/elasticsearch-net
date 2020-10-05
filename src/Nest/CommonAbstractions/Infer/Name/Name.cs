@@ -4,7 +4,7 @@
 
 using System;
 using System.Diagnostics;
-using Elasticsearch.Net;
+using Elastic.Transport;
 
 namespace Nest
 {

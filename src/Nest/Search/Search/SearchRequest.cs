@@ -5,7 +5,8 @@
  using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+ using Elastic.Transport;
+ using Elasticsearch.Net;
 using Nest.Utf8Json;
 
 namespace Nest

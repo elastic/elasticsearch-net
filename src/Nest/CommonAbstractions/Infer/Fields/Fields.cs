@@ -9,7 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Nest.Utf8Json;
 
 namespace Nest
@@ -33,7 +33,7 @@ namespace Nest
 
 		public IEnumerator<Field> GetEnumerator() => ListOfFields.GetEnumerator();
 
-		public bool Equals(Fields other) => EqualsAllFields(ListOfFields, other.ListOfFields);
+		public bool Equals(Fields other) => EqualsAllFields(ListOfFields, other?.ListOfFields);
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{

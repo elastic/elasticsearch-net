@@ -4,8 +4,9 @@
 
 using System;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
+using Elastic.Transport.Extensions;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Extensions;
 using FluentAssertions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

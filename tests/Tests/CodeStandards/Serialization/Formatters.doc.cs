@@ -4,12 +4,13 @@
 
 using System;
 using System.Linq;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using System.Collections.Generic;
 using System.Reflection;
+using Elasticsearch.Net;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest.Utf8Json;
 

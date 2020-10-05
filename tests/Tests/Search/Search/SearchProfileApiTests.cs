@@ -4,7 +4,7 @@
 
 using System;
 using System.Linq;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;

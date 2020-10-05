@@ -5,8 +5,8 @@
  using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
-using FluentAssertions;
+ using Elasticsearch.Net;
+ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;

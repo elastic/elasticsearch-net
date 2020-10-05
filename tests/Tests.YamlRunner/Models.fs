@@ -4,6 +4,7 @@
 
 module Tests.YamlRunner.Models
 
+open Elastic.Transport
 open Elasticsearch.Net
 open System
 open System.Collections.Generic

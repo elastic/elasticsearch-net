@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using FluentAssertions;
 
 namespace Tests.Reproduce

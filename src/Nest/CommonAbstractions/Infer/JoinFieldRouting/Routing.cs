@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using Elasticsearch.Net;
+using Elastic.Transport;
 using Nest.Utf8Json;
 
 namespace Nest
@@ -57,6 +57,7 @@ namespace Nest
 
 		public bool Equals(Routing other)
 		{
+			if (other == null) return false;
 			if (Tag == other.Tag)
 			{
 				switch (Tag)

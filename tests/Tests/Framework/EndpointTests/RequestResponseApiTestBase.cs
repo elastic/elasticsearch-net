@@ -2,12 +2,12 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
- using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
- using Elastic.Elasticsearch.Ephemeral;
- using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Elasticsearch.Ephemeral;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Configuration;
 using Tests.Core.Client;
@@ -58,6 +58,7 @@ namespace Tests.Framework.EndpointTests
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 
 		protected string U(string s) => Uri.EscapeDataString(s);
+
 		protected string Q(string s) => Uri.EscapeUriString(s);
 
 		protected T ExtendedValue<T>(string key) where T : class => UniqueValues.ExtendedValue<T>(key);
@@ -110,13 +111,13 @@ namespace Tests.Framework.EndpointTests
 				Api(ClientMethod.FluentAsync, async () => await fluentAsync(client, Fluent)),
 				Api(ClientMethod.InitializerAsync, async () => await requestAsync(client, Initializer)),
 			};
-			foreach (var (v, m) in views.OrderBy((t)=> Gimme.Random.Int()))
+			foreach (var (v, m) in views.OrderBy((t) => Gimme.Random.Int()))
 			{
-                UniqueValues.CurrentView = v;
+				UniqueValues.CurrentView = v;
 
-                IntegrateOnly(OnBeforeCall);
-                dict.Add(v, await m());
-                IntegrateOnly(OnAfterCall);
+				IntegrateOnly(OnBeforeCall);
+				dict.Add(v, await m());
+				IntegrateOnly(OnAfterCall);
 				if (TestOnlyOne) break;
 			}
 

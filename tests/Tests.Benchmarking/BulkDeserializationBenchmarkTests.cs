@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using BenchmarkDotNet.Attributes;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 using Nest;
 using Newtonsoft.Json;
 using Tests.Benchmarking.Framework;

@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport;
+using Elastic.Transport.Extensions;
 
 namespace Nest
 {

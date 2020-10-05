@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;

@@ -12,6 +12,7 @@ open System.Globalization
 open System.Linq
 open System.Linq.Expressions
 open System.Threading.Tasks
+open Elastic.Transport
 open Tests.YamlRunner.Models
 open Elasticsearch.Net
 

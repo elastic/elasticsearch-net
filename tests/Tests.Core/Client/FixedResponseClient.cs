@@ -4,8 +4,8 @@
 
 using System;
 using System.Text;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport;
+using Elastic.Transport.Extensions;
 using Nest;
 
 namespace Tests.Core.Client

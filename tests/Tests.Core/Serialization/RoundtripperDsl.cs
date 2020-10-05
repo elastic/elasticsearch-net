@@ -5,8 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;

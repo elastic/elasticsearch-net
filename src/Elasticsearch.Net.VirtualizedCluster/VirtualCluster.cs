@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Elastic.Transport;
 using Elasticsearch.Net.VirtualizedCluster.Providers;
 using Elasticsearch.Net.VirtualizedCluster.Rules;
 

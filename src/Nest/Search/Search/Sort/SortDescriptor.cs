@@ -5,8 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 
 namespace Nest
 {
