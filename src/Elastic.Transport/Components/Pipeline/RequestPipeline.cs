@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Elastic.Transport.Diagnostics;
 using Elastic.Transport.Diagnostics.Auditing;
 using Elastic.Transport.Extensions;
+using Elastic.Transport.Products;
 using static Elastic.Transport.Diagnostics.Auditing.AuditEvent;
 
 namespace Elastic.Transport
@@ -25,7 +26,10 @@ namespace Elastic.Transport
 		private readonly IConnectionPool _connectionPool;
 		private readonly IDateTimeProvider _dateTimeProvider;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
+		private readonly IProductRegistration _productRegistration;
 		private readonly IConnectionConfigurationValues _settings;
+
+		private RequestConfiguration PingRequestConfiguration { get; }
 
 		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.RequestPipeline.SourceName);
 
@@ -33,7 +37,8 @@ namespace Elastic.Transport
 			IConnectionConfigurationValues configurationValues,
 			IDateTimeProvider dateTimeProvider,
 			IMemoryStreamFactory memoryStreamFactory,
-			IRequestParameters requestParameters
+			IRequestParameters requestParameters,
+			IProductRegistration productRegistration
 		)
 		{
 			_settings = configurationValues;
@@ -41,8 +46,18 @@ namespace Elastic.Transport
 			_connection = _settings.Connection;
 			_dateTimeProvider = dateTimeProvider;
 			_memoryStreamFactory = memoryStreamFactory;
+			_productRegistration = productRegistration;
 
 			RequestConfiguration = requestParameters?.RequestConfiguration;
+			PingRequestConfiguration = new RequestConfiguration
+			{
+				PingTimeout = PingTimeout,
+				RequestTimeout = PingTimeout,
+				BasicAuthenticationCredentials = _settings.BasicAuthenticationCredentials,
+				ApiKeyAuthenticationCredentials = _settings.ApiKeyAuthenticationCredentials,
+				EnableHttpPipelining = RequestConfiguration?.EnableHttpPipelining ?? _settings.HttpPipeliningEnabled,
+				ForceNode = RequestConfiguration?.ForceNode
+			};
 			StartedOn = dateTimeProvider.Now();
 		}
 
@@ -122,16 +137,6 @@ namespace Elastic.Transport
 		private bool RequestDisabledSniff => RequestConfiguration != null && (RequestConfiguration.DisableSniff ?? false);
 
 		private TimeSpan RequestTimeout => RequestConfiguration?.RequestTimeout ?? _settings.RequestTimeout;
-
-		private RequestParameters SniffParameters => new RequestParameters(HttpMethod.GET, supportsBody: false)
-		{
-			QueryString =
-			{
-				{ "timeout", PingTimeout },
-				{ "flat_settings", true },
-
-			}
-		};
 
 		void IDisposable.Dispose() => Dispose();
 
@@ -373,16 +378,17 @@ namespace Elastic.Transport
 
 		public void Ping(Node node)
 		{
+			if (!_productRegistration.SupportsPing) return;
 			if (PingDisabled(node)) return;
 
-			var pingData = CreatePingRequestData(node);
+			var pingData = _productRegistration.CreatePingRequestData(node, PingRequestConfiguration, _settings, _memoryStreamFactory);
 			using (var audit = Audit(PingSuccess, node))
 			using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Ping, pingData))
 			{
 				audit.Path = pingData.PathAndQuery;
 				try
 				{
-					var response = _connection.Request<VoidResponse>(pingData);
+					var response = _productRegistration.Ping(_connection, pingData);
 					d.EndState = response;
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
@@ -401,16 +407,17 @@ namespace Elastic.Transport
 
 		public async Task PingAsync(Node node, CancellationToken cancellationToken)
 		{
+			if (!_productRegistration.SupportsPing) return;
 			if (PingDisabled(node)) return;
 
-			var pingData = CreatePingRequestData(node);
+			var pingData = _productRegistration.CreatePingRequestData(node, PingRequestConfiguration, _settings, _memoryStreamFactory);
 			using (var audit = Audit(PingSuccess, node))
 			using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Ping, pingData))
 			{
 				audit.Path = pingData.PathAndQuery;
 				try
 				{
-					var response = await _connection.RequestAsync<VoidResponse>(pingData, cancellationToken).ConfigureAwait(false);
+					var response = await _productRegistration.PingAsync(_connection, pingData, cancellationToken).ConfigureAwait(false);
 					d.EndState = response;
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
@@ -429,10 +436,12 @@ namespace Elastic.Transport
 
 		public void Sniff()
 		{
+			if (!_productRegistration.SupportsSniff) return;
+
 			var exceptions = new List<Exception>();
 			foreach (var node in SniffNodes)
 			{
-				var requestData = CreateSniffRequestData(node);
+				var requestData = _productRegistration.CreateSniffRequestData(node, PingRequestConfiguration, _settings, _memoryStreamFactory);
 				using (var audit = Audit(SniffSuccess, node))
 				using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Sniff, requestData))
 				using(DiagnosticSource.Diagnose(DiagnosticSources.RequestPipeline.Sniff, requestData))
@@ -440,7 +449,7 @@ namespace Elastic.Transport
 					try
 					{
 						audit.Path = requestData.PathAndQuery;
-						var response = _connection.Request<SniffResponse>(requestData);
+						var (response, nodes) = _productRegistration.Sniff(_connection, _connectionPool.UsingSsl, requestData);
 						d.EndState = response;
 
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
@@ -448,7 +457,6 @@ namespace Elastic.Transport
 						if (!response.Success)
 							throw new PipelineException(requestData.OnFailurePipelineFailure, response.OriginalException) { ApiCall = response };
 
-						var nodes = response.ToNodes(_connectionPool.UsingSsl);
 						_connectionPool.Reseed(nodes);
 						Refresh = true;
 						return;
@@ -467,17 +475,19 @@ namespace Elastic.Transport
 
 		public async Task SniffAsync(CancellationToken cancellationToken)
 		{
+			if (!_productRegistration.SupportsSniff) return;
+
 			var exceptions = new List<Exception>();
 			foreach (var node in SniffNodes)
 			{
-				var requestData = CreateSniffRequestData(node);
+				var requestData = _productRegistration.CreateSniffRequestData(node, PingRequestConfiguration, _settings, _memoryStreamFactory);
 				using (var audit = Audit(SniffSuccess, node))
 				using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Sniff, requestData))
 				{
 					try
 					{
 						audit.Path = requestData.PathAndQuery;
-						var response = await _connection.RequestAsync<SniffResponse>(requestData, cancellationToken).ConfigureAwait(false);
+						var (response, nodes) = await _productRegistration.SniffAsync(_connection, _connectionPool.UsingSsl, requestData, cancellationToken).ConfigureAwait(false);
 						d.EndState = response;
 
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
@@ -485,7 +495,7 @@ namespace Elastic.Transport
 						if (!response.Success)
 							throw new PipelineException(requestData.OnFailurePipelineFailure, response.OriginalException) { ApiCall = response };
 
-						_connectionPool.Reseed(response.ToNodes(_connectionPool.UsingSsl));
+						_connectionPool.Reseed(nodes);
 						Refresh = true;
 						return;
 					}
@@ -556,25 +566,6 @@ namespace Elastic.Transport
 
 		private Auditable Audit(AuditEvent type, Node node = null) => new Auditable(type, AuditTrail, _dateTimeProvider, node);
 
-		private RequestData CreatePingRequestData(Node node)
-		{
-
-			var requestOverrides = new RequestConfiguration
-			{
-				PingTimeout = PingTimeout,
-				RequestTimeout = PingTimeout,
-				BasicAuthenticationCredentials = _settings.BasicAuthenticationCredentials,
-				ApiKeyAuthenticationCredentials = _settings.ApiKeyAuthenticationCredentials,
-				EnableHttpPipelining = RequestConfiguration?.EnableHttpPipelining ?? _settings.HttpPipeliningEnabled,
-				ForceNode = RequestConfiguration?.ForceNode
-			};
-			IRequestParameters requestParameters = new RequestParameters(HttpMethod.HEAD, supportsBody: false);
-			requestParameters.RequestConfiguration = requestOverrides;
-
-			var data = new RequestData(HttpMethod.HEAD, string.Empty, null, _settings, requestParameters, _memoryStreamFactory) { Node = node };
-			return data;
-		}
-
 		private static void ThrowBadAuthPipelineExceptionWhenNeeded(IApiCallDetails details, ITransportResponse response = null)
 		{
 			if (details?.HttpStatusCode == 401)
@@ -589,12 +580,6 @@ namespace Elastic.Transport
 		{
 			using (new Auditable(e, AuditTrail, _dateTimeProvider, n)) { }
 		}
-
-		private RequestData CreateSniffRequestData(Node node) =>
-			new RequestData(HttpMethod.GET, SniffPath, null, _settings, SniffParameters, _memoryStreamFactory)
-			{
-				Node = node
-			};
 
 		protected virtual void Dispose() { }
 	}

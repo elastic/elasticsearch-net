@@ -11,6 +11,7 @@ using System.Threading;
 using Elastic.Elasticsearch.Xunit.Sdk;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
+using Elastic.Transport.Products;
 using Elasticsearch.Net;
 using Elasticsearch.Net.VirtualizedCluster;
 using Elasticsearch.Net.VirtualizedCluster.Audit;
@@ -419,7 +420,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			var uri = TestConnectionSettings.CreateUri(this._cluster.Nodes.First().Port ?? 9200);
 			this._settings = new ConnectionSettings(new SniffingConnectionPool(new[] { uri }));
 			var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new RecyclableMemoryStreamFactory(),
-				new SearchRequestParameters());
+				new SearchRequestParameters(), ElasticsearchProductRegistration.Default);
 			return pipeline;
 		}
 

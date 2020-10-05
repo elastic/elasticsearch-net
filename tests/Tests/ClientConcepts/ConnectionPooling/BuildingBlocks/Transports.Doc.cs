@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Elastic.Transport;
 using Nest;
 using System.Threading;
+using Elastic.Transport.Products;
 using Tests.Domain;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
@@ -30,14 +31,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			*
 			* In the low level client, `ElasticLowLevelClient`, a `Transport` is instantiated like this:
 			*/
-			var lowLevelTransport = new Transport<ConnectionConfiguration>(new ConnectionConfiguration());
+			var lowLevelTransport = new Transport<ConnectionConfiguration>(new ConnectionConfiguration(), ElasticsearchProductRegistration.Default);
 
 			/** and in the high level client, `ElasticClient`, like this */
-			var highlevelTransport = new Transport<ConnectionSettings>(new ConnectionSettings());
+			var highlevelTransport = new Transport<ConnectionSettings>(new ConnectionSettings(), ElasticsearchProductRegistration.Default);
 
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var inMemoryTransport = new Transport<ConnectionSettings>(
-				new ConnectionSettings(connectionPool, new InMemoryConnection()));
+				new ConnectionSettings(connectionPool, new InMemoryConnection()), ElasticsearchProductRegistration.Default);
 
 			/**
 			* The only two methods on `ITransport` are `Request()` and `RequestAsync()`; the default `ITransport` implementation is responsible for introducing

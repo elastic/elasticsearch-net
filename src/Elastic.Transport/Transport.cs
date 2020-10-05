@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport.Extensions;
+using Elastic.Transport.Products;
 
 #if !DOTNETCORE
 using System.Net;
@@ -18,11 +19,14 @@ namespace Elastic.Transport
 	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
 		where TConnectionSettings : class, IConnectionConfigurationValues
 	{
+		private readonly IProductRegistration _productRegistration;
+
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
 		/// </summary>
 		/// <param name="configurationValues">The connection settings to use for this transport</param>
-		public Transport(TConnectionSettings configurationValues) : this(configurationValues, null, null, null) { }
+		public Transport(TConnectionSettings configurationValues, IProductRegistration productRegistration)
+			: this(configurationValues, null, null, null, productRegistration) { }
 
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
@@ -35,9 +39,11 @@ namespace Elastic.Transport
 			TConnectionSettings configurationValues,
 			IRequestPipelineFactory pipelineProvider,
 			IDateTimeProvider dateTimeProvider,
-			IMemoryStreamFactory memoryStreamFactory
+			IMemoryStreamFactory memoryStreamFactory,
+			IProductRegistration productRegistration
 		)
 		{
+			_productRegistration = productRegistration;
 			configurationValues.ThrowIfNull(nameof(configurationValues));
 			configurationValues.ConnectionPool.ThrowIfNull(nameof(configurationValues.ConnectionPool));
 			configurationValues.Connection.ThrowIfNull(nameof(configurationValues.Connection));
@@ -58,7 +64,7 @@ namespace Elastic.Transport
 		public TResponse Request<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new()
 		{
-			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters))
+			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters, _productRegistration))
 			{
 				pipeline.FirstPoolUsage(Settings.BootstrapLock);
 
@@ -72,13 +78,14 @@ namespace Elastic.Transport
 					requestData.Node = node;
 					try
 					{
-						pipeline.SniffOnStaleCluster();
-						Ping(pipeline, node);
+						if (_productRegistration.SupportsSniff) pipeline.SniffOnStaleCluster();
+						if (_productRegistration.SupportsPing) Ping(pipeline, node);
+
 						response = pipeline.CallElasticsearch<TResponse>(requestData);
 						if (!response.ApiCall.SuccessOrKnownError)
 						{
 							pipeline.MarkDead(node);
-							pipeline.SniffOnConnectionFailure();
+							if (_productRegistration.SupportsSniff) pipeline.SniffOnConnectionFailure();
 						}
 					}
 					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
@@ -113,7 +120,7 @@ namespace Elastic.Transport
 		)
 			where TResponse : class, ITransportResponse, new()
 		{
-			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters))
+			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters, _productRegistration))
 			{
 				await pipeline.FirstPoolUsageAsync(Settings.BootstrapLock, cancellationToken).ConfigureAwait(false);
 
@@ -127,13 +134,17 @@ namespace Elastic.Transport
 					requestData.Node = node;
 					try
 					{
-						await pipeline.SniffOnStaleClusterAsync(cancellationToken).ConfigureAwait(false);
-						await PingAsync(pipeline, node, cancellationToken).ConfigureAwait(false);
+						if (_productRegistration.SupportsSniff)
+							await pipeline.SniffOnStaleClusterAsync(cancellationToken).ConfigureAwait(false);
+						if (_productRegistration.SupportsPing)
+							await PingAsync(pipeline, node, cancellationToken).ConfigureAwait(false);
+
 						response = await pipeline.CallElasticsearchAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
 						if (!response.ApiCall.SuccessOrKnownError)
 						{
 							pipeline.MarkDead(node);
-							await pipeline.SniffOnConnectionFailureAsync(cancellationToken).ConfigureAwait(false);
+							if (_productRegistration.SupportsSniff)
+								await pipeline.SniffOnConnectionFailureAsync(cancellationToken).ConfigureAwait(false);
 						}
 					}
 					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
@@ -172,7 +183,7 @@ namespace Elastic.Transport
 		}
 
 		private static void HandlePipelineException<TResponse>(
-			ref TResponse response, PipelineException ex, IRequestPipeline pipeline, Node node, List<PipelineException> seenExceptions
+			ref TResponse response, PipelineException ex, IRequestPipeline pipeline, Node node, ICollection<PipelineException> seenExceptions
 		)
 			where TResponse : class, ITransportResponse, new()
 		{
@@ -229,7 +240,7 @@ namespace Elastic.Transport
 			if (data != null && (clientException != null && data.ThrowExceptions)) throw clientException;
 		}
 
-		private static void Ping(IRequestPipeline pipeline, Node node)
+		private void Ping(IRequestPipeline pipeline, Node node)
 		{
 			try
 			{
@@ -237,12 +248,13 @@ namespace Elastic.Transport
 			}
 			catch (PipelineException e) when (e.Recoverable)
 			{
-				pipeline.SniffOnConnectionFailure();
+				if (_productRegistration.SupportsSniff)
+					pipeline.SniffOnConnectionFailure();
 				throw;
 			}
 		}
 
-		private static async Task PingAsync(IRequestPipeline pipeline, Node node, CancellationToken cancellationToken)
+		private async Task PingAsync(IRequestPipeline pipeline, Node node, CancellationToken cancellationToken)
 		{
 			try
 			{
@@ -250,7 +262,8 @@ namespace Elastic.Transport
 			}
 			catch (PipelineException e) when (e.Recoverable)
 			{
-				await pipeline.SniffOnConnectionFailureAsync(cancellationToken).ConfigureAwait(false);
+				if (_productRegistration.SupportsSniff)
+					await pipeline.SniffOnConnectionFailureAsync(cancellationToken).ConfigureAwait(false);
 				throw;
 			}
 		}

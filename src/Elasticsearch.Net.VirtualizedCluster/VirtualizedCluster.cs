@@ -6,6 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
+using Elastic.Transport.Products;
 using Elasticsearch.Net.VirtualizedCluster.Providers;
 
 namespace Elasticsearch.Net.VirtualizedCluster
@@ -24,7 +25,8 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		{
 			_dateTimeProvider = dateTimeProvider;
 			_settings = settings;
-			_fixedRequestPipeline = new FixedPipelineFactory(settings, _dateTimeProvider);
+			//TODO this assumes Elasticsearch as product
+			_fixedRequestPipeline = new FixedPipelineFactory(settings, _dateTimeProvider, ElasticsearchProductRegistration.Default);
 
 			_syncCall = (c, r) => c.Search<VirtualResponse>(PostData.Serializable(new {}), new SearchRequestParameters
 			{

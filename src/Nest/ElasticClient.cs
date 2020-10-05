@@ -6,6 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
+using Elastic.Transport.Products;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Specification.MachineLearningApi;
 
@@ -97,7 +98,7 @@ namespace Nest
 		public ElasticClient(string cloudId, ApiKeyAuthenticationCredentials credentials) : this(new ConnectionSettings(cloudId, credentials)) { }
 
 		public ElasticClient(IConnectionSettingsValues connectionSettings)
-			: this(new Transport<IConnectionSettingsValues>(connectionSettings ?? new ConnectionSettings())) { }
+			: this(new Transport<IConnectionSettingsValues>(connectionSettings ?? new ConnectionSettings(), ElasticsearchProductRegistration.Default)) { }
 
 		public ElasticClient(ITransport<IConnectionSettingsValues> transport)
 		{
