@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	public interface IElasticsearchSerializer
+	public interface ITransportSerializer
 	{
 		/// <summary> Deserialize <paramref name="stream"/> to an instance of <paramref name="type"/> </summary>
 		object Deserialize(Type type, Stream stream);
@@ -29,7 +29,7 @@ namespace Elasticsearch.Net
 		/// <param name="data">The instance of <typeparamref name="T"/> that we want to serialize</param>
 		/// <param name="stream">The stream to serialize to</param>
 		/// <param name="formatting">
-		/// Formatting hint, note no all implementations of <see cref="IElasticsearchSerializer"/> are able to
+		/// Formatting hint, note no all implementations of <see cref="ITransportSerializer"/> are able to
 		/// satisfy this hint, including the default serializer that is shipped with 7.0.
 		/// </param>
 		void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.None);

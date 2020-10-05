@@ -186,7 +186,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 
 		private class CustomSettingsSerializerBase : TestSourceSerializerBase
 		{
-			public CustomSettingsSerializerBase(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+			public CustomSettingsSerializerBase(ITransportSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
 				: base(builtinSerializer, connectionSettings) { }
 
 			protected override JsonSerializerSettings CreateJsonSerializerSettings() => new JsonSerializerSettings

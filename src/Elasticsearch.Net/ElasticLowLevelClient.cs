@@ -57,7 +57,7 @@ namespace Elasticsearch.Net
 
 		partial void SetupNamespaces();
 
-		public IElasticsearchSerializer Serializer => Transport.Settings.RequestResponseSerializer;
+		public ITransportSerializer Serializer => Transport.Settings.RequestResponseSerializer;
 
 		public IConnectionConfigurationValues Settings => Transport.Settings;
 

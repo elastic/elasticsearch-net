@@ -187,7 +187,7 @@ namespace Elasticsearch.Net
 		NameValueCollection QueryStringParameters { get; }
 
 		/// <summary>The serializer to use to serialize requests and deserialize responses</summary>
-		IElasticsearchSerializer RequestResponseSerializer { get; }
+		ITransportSerializer RequestResponseSerializer { get; }
 
 		/// <summary>
 		/// The timeout in milliseconds for each request to Elasticsearch

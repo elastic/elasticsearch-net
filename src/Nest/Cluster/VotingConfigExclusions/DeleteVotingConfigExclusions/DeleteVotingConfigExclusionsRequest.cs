@@ -30,10 +30,10 @@ namespace Nest
 	/// </summary>
 	internal class DeleteVotingConfigExclusionsResponseBuilder : CustomResponseBuilderBase
 	{
-		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream) =>
+		public override object DeserializeResponse(ITransportSerializer builtInSerializer, IApiCallDetails response, Stream stream) =>
 			new DeleteVotingConfigExclusionsResponse();
 
-		public override Task<object> DeserializeResponseAsync(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream, CancellationToken ctx = default) =>
+		public override Task<object> DeserializeResponseAsync(ITransportSerializer builtInSerializer, IApiCallDetails response, Stream stream, CancellationToken ctx = default) =>
 			Task.FromResult<object>(new DeleteVotingConfigExclusionsResponse());
 	}
 }

@@ -16,7 +16,7 @@ namespace Nest.Utf8Json
 		private readonly bool _wrapsUtf8JsonSerializer;
 		private readonly IJsonFormatterResolver _formatterResolver;
 
-		public JsonFormatterAwareDiagnosticsSerializerProxy(IElasticsearchSerializer serializer, string purpose = "request/response")
+		public JsonFormatterAwareDiagnosticsSerializerProxy(ITransportSerializer serializer, string purpose = "request/response")
 			: base(serializer, purpose)
 		{
 			if (serializer is IInternalSerializer s && s.TryGetJsonFormatter(out var formatterResolver))

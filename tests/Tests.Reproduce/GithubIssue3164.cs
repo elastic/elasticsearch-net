@@ -57,7 +57,7 @@ namespace Tests.Reproduce
 
 		public sealed class CustomSerializer : ConnectionSettingsAwareSerializerBase
 		{
-			public CustomSerializer(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+			public CustomSerializer(ITransportSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
 				: base(builtinSerializer, connectionSettings) { }
 
 			protected override JsonSerializerSettings CreateJsonSerializerSettings() => new JsonSerializerSettings

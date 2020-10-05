@@ -76,7 +76,7 @@ namespace Elasticsearch.Net.Diagnostics
 
 		public class SerializerDiagnosticKeys : IDiagnosticsKeys
 		{
-			public string SourceName { get; } = typeof(IElasticsearchSerializer).FullName;
+			public string SourceName { get; } = typeof(ITransportSerializer).FullName;
 			public string Serialize { get; } = nameof(Serialize);
 			public string Deserialize { get; } = nameof(Deserialize);
 		}

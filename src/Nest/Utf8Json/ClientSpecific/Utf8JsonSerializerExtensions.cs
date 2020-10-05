@@ -9,7 +9,7 @@ namespace Nest.Utf8Json
 {
 	internal static class Utf8JsonSerializerExtensions
 	{
-		internal static void SerializeUsingWriter<T>(this IElasticsearchSerializer serializer, ref JsonWriter writer, T body, IConnectionConfigurationValues settings, SerializationFormatting formatting)
+		internal static void SerializeUsingWriter<T>(this ITransportSerializer serializer, ref JsonWriter writer, T body, IConnectionConfigurationValues settings, SerializationFormatting formatting)
 		{
 			if (serializer is IInternalSerializer s && s.TryGetJsonFormatter(out var formatterResolver))
 			{

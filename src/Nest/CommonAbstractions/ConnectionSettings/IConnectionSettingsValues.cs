@@ -86,6 +86,6 @@ namespace Nest
 		/// <summary>
 		/// The serializer use to serialize CLR types representing documents and other types related to documents.
 		/// </summary>
-		IElasticsearchSerializer SourceSerializer { get; }
+		ITransportSerializer SourceSerializer { get; }
 	}
 }

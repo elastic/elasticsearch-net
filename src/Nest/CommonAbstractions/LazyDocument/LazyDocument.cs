@@ -49,8 +49,8 @@ namespace Nest
 	[JsonFormatter(typeof(LazyDocumentFormatter))]
 	public class LazyDocument : ILazyDocument
 	{
-		private readonly IElasticsearchSerializer _sourceSerializer;
-		private readonly IElasticsearchSerializer _requestResponseSerializer;
+		private readonly ITransportSerializer _sourceSerializer;
+		private readonly ITransportSerializer _requestResponseSerializer;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 
 		internal LazyDocument(byte[] bytes, IJsonFormatterResolver formatterResolver)

@@ -12,7 +12,7 @@ using Nest.Utf8Json;
 namespace Nest
 {
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
-	internal class DefaultHighLevelSerializer : IElasticsearchSerializer, IInternalSerializer
+	internal class DefaultHighLevelSerializer : ITransportSerializer, IInternalSerializer
 	{
 		public DefaultHighLevelSerializer(IJsonFormatterResolver formatterResolver) => FormatterResolver = formatterResolver;
 

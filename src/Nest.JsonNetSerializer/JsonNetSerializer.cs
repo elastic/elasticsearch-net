@@ -12,7 +12,7 @@ namespace Nest.JsonNetSerializer
 	public class JsonNetSerializer : ConnectionSettingsAwareSerializerBase
 	{
 		public JsonNetSerializer(
-			IElasticsearchSerializer builtinSerializer,
+			ITransportSerializer builtinSerializer,
 			IConnectionSettingsValues connectionSettings,
 			Func<JsonSerializerSettings> jsonSerializerSettingsFactory = null,
 			Action<ConnectionSettingsAwareContractResolver> modifyContractResolver = null,
@@ -20,7 +20,7 @@ namespace Nest.JsonNetSerializer
 		)
 			: base(builtinSerializer, connectionSettings, jsonSerializerSettingsFactory, modifyContractResolver, contractJsonConverters) { }
 
-		public static IElasticsearchSerializer Default(IElasticsearchSerializer builtin, IConnectionSettingsValues values)
+		public static ITransportSerializer Default(ITransportSerializer builtin, IConnectionSettingsValues values)
 			=> new JsonNetSerializer(builtin, values);
 	}
 }

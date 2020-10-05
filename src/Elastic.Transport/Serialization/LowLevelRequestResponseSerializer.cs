@@ -11,7 +11,7 @@ using static Elasticsearch.Net.SerializationFormatting;
 
 namespace Elasticsearch.Net
 {
-	public class LowLevelRequestResponseSerializer : IElasticsearchSerializer
+	public class LowLevelRequestResponseSerializer : ITransportSerializer
 	{
 		public static readonly LowLevelRequestResponseSerializer Instance = new LowLevelRequestResponseSerializer();
 

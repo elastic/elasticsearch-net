@@ -30,7 +30,7 @@ namespace Tests.Core.Client
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			string contentType = RequestData.MimeType,
 			Exception exception = null,
-			IElasticsearchSerializer serializer = null
+			ITransportSerializer serializer = null
 		)
 		{
 			serializer ??= TestClient.Default.RequestResponseSerializer;

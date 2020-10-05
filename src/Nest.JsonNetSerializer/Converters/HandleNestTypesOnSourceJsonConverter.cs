@@ -26,10 +26,10 @@ namespace Nest.JsonNetSerializer.Converters
 			typeof(CartesianPoint),
 		};
 
-		private readonly IElasticsearchSerializer _builtInSerializer;
+		private readonly ITransportSerializer _builtInSerializer;
 		private IMemoryStreamFactory _memoryStreamFactory;
 
-		public HandleNestTypesOnSourceJsonConverter(IElasticsearchSerializer builtInSerializer, IMemoryStreamFactory memoryStreamFactory
+		public HandleNestTypesOnSourceJsonConverter(ITransportSerializer builtInSerializer, IMemoryStreamFactory memoryStreamFactory
 		)
 		{
 			_builtInSerializer = builtInSerializer;

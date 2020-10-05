@@ -28,12 +28,12 @@ namespace Nest
 		/// Access the configured <see cref="IConnectionConfigurationValues.RequestResponseSerializer" />
 		/// Out of the box <see cref="SourceSerializer" /> and this point to the same instance
 		/// </summary>
-		IElasticsearchSerializer RequestResponseSerializer { get; }
+		ITransportSerializer RequestResponseSerializer { get; }
 
 		/// <summary>
 		/// Access the configured <see cref="IConnectionSettingsValues.SourceSerializer" />
 		/// Out of the box <see cref="RequestResponseSerializer" /> and this point to the same instance
 		/// </summary>
-		IElasticsearchSerializer SourceSerializer { get; }
+		ITransportSerializer SourceSerializer { get; }
 	}
 }

@@ -21,7 +21,7 @@ namespace Nest
 	{
 		public IAppPrivileges Applications { get; set; }
 
-		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
+		void IProxyRequest.WriteJson(ITransportSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Self.Applications, stream, formatting);
 	}
 
@@ -29,7 +29,7 @@ namespace Nest
 	{
 		IAppPrivileges IPutPrivilegesRequest.Applications { get; set; }
 
-		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
+		void IProxyRequest.WriteJson(ITransportSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Self.Applications, stream, formatting);
 
 		public PutPrivilegesDescriptor Applications(Func<AppPrivilegesDescriptor, IPromise<IAppPrivileges>> selector) =>
