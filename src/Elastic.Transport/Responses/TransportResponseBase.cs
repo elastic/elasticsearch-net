@@ -7,12 +7,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.NetworkInformation;
 using System.Text.Json.Serialization;
-using Elasticsearch.Net.Diagnostics;
+using Elastic.Transport.Diagnostics;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
-	/// A response from Elasticsearch including details about the request/response life cycle. Base class for the built in low level response
+	/// A response from an Elastic product including details about the request/response life cycle. Base class for the built in low level response
 	/// types, <see cref="StringResponse"/>, <see cref="BytesResponse"/>, <see cref="DynamicResponse"/> and <see cref="VoidResponse"/>
 	/// </summary>
 	public abstract class TransportResponseBase<T> : TransportResponseBase

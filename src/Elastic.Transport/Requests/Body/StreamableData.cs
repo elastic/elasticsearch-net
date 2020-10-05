@@ -7,7 +7,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// Represents an instance of <see cref="PostData"/> that can handle <see cref="PostType.StreamHandler"/>.

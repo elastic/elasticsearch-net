@@ -4,7 +4,7 @@
 
 using System.Text;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public class StringResponse : TransportResponseBase<string>
 	{

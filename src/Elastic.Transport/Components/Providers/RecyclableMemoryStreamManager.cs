@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// Manages pools of RecyclableMemoryStream objects.

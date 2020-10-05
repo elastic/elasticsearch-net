@@ -5,7 +5,7 @@
 
 using System.Runtime.InteropServices;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	internal static class NativeMethods
 	{

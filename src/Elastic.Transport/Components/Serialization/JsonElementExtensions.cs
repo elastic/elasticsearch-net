@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 
-namespace Elasticsearch.Net.Extensions
+namespace Elastic.Transport.Extensions
 {
 	internal static class JsonElementExtensions
 	{

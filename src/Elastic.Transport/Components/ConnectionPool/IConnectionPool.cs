@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public interface IConnectionPool : IDisposable
 	{

@@ -10,7 +10,7 @@ using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public interface IConnectionConfigurationValues : IDisposable
 	{

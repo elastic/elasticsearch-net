@@ -4,6 +4,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Transport;
 
 namespace Elasticsearch.Net
 {

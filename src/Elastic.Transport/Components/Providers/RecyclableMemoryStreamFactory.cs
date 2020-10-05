@@ -5,14 +5,14 @@
 using System;
 using System.IO;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// A factory for creating memory streams using a recyclable pool of <see cref="MemoryStream" /> instances
 	/// </summary>
 	public class RecyclableMemoryStreamFactory : IMemoryStreamFactory
 	{
-		private const string TagSource = "Elasticsearch.Net";
+		private const string TagSource = "Elastic.Transport";
 		private readonly RecyclableMemoryStreamManager _manager;
 
 		public static RecyclableMemoryStreamFactory Default { get; } = new RecyclableMemoryStreamFactory();

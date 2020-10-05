@@ -7,9 +7,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Diagnostics;
+using Elastic.Transport.Diagnostics;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public class SerializerRegistrationInformation
 	{

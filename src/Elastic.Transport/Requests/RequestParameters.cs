@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information
 
 using System.Collections.Generic;
-using static Elasticsearch.Net.ElasticsearchUrlFormatter;
+using static Elastic.Transport.ElasticsearchUrlFormatter;
 
 // ReSharper disable once CheckNamespace
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 
 	public class RequestParameters : RequestParameters<RequestParameters>

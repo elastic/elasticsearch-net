@@ -5,7 +5,7 @@
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	[DataContract]
 	public class ShardFailure

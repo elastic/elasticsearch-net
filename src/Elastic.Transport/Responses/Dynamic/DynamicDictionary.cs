@@ -13,13 +13,13 @@ using System.Dynamic;
 using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 
 // ReSharper disable ArrangeMethodOrOperatorBody
 // ReSharper disable RemoveRedundantBraces
 // ReSharper disable ArrangeAccessorOwnerBody
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// A dictionary that supports dynamic access.

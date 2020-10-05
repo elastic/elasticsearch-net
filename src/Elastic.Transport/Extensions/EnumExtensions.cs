@@ -7,7 +7,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Elasticsearch.Net.Extensions
+namespace Elastic.Transport.Extensions
 {
 	public static class EnumExtensions
 	{

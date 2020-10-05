@@ -5,7 +5,7 @@
 using System;
 using System.Text;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// An <see cref="IConnectionPool"/> implementation that can be seeded with a cloud id

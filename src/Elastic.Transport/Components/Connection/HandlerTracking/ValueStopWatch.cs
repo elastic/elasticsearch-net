@@ -6,7 +6,7 @@
 using System;
 using System.Threading;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// A convenience API for interacting with System.Threading.Timer in a way

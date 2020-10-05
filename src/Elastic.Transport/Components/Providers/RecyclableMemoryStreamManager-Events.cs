@@ -30,7 +30,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.Tracing;
 using System.Threading;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 #if !DOTNETCORE
 	/// <summary>

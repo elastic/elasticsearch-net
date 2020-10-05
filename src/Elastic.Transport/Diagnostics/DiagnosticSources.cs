@@ -5,7 +5,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Elasticsearch.Net.Diagnostics
+namespace Elastic.Transport.Diagnostics
 {
 	public static class DiagnosticSources
 	{
@@ -29,7 +29,7 @@ namespace Elasticsearch.Net.Diagnostics
 
 			return new Diagnostic<TState, TStateStop>(operationName, source, state);
 		}
-		
+
 		internal static Diagnostic<TState, TEndState> Diagnose<TState, TEndState>(this DiagnosticSource source, string operationName, TState state, TEndState endState)
 		{
 			if (!source.IsEnabled(operationName)) return Diagnostic<TState, TEndState>.Default;
@@ -38,7 +38,7 @@ namespace Elasticsearch.Net.Diagnostics
 			{
 				EndState = endState
 			};
-			
+
 		}
 
 		/// <summary>

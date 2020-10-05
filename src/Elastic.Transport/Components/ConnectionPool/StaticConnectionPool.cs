@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public class StaticConnectionPool : IConnectionPool
 	{
@@ -42,7 +42,7 @@ namespace Elasticsearch.Net
 		{
 			var nodesProvided = nodes?.ToList() ?? throw new ArgumentNullException(nameof(nodes));
 			nodesProvided.ThrowIfEmpty(nameof(nodes));
-			DateTimeProvider = dateTimeProvider ?? Net.DateTimeProvider.Default;
+			DateTimeProvider = dateTimeProvider ?? Elastic.Transport.DateTimeProvider.Default;
 
 			string scheme = null;
 			foreach (var node in nodesProvided)

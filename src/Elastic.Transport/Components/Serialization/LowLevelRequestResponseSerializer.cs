@@ -7,9 +7,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using static Elasticsearch.Net.SerializationFormatting;
+using static Elastic.Transport.SerializationFormatting;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public class LowLevelRequestResponseSerializer : ITransportSerializer
 	{

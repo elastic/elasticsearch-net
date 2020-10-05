@@ -13,7 +13,7 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Microsoft.CSharp.RuntimeBinder;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
 
 // ReSharper disable ArrangeConstructorOrDestructorBody
@@ -21,7 +21,7 @@ using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
 // ReSharper disable RemoveRedundantBraces
 // ReSharper disable ArrangeMethodOrOperatorBody
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public class DynamicValue : DynamicObject, IEquatable<DynamicValue>, IConvertible, IReadOnlyCollection<DynamicValue>
 	{

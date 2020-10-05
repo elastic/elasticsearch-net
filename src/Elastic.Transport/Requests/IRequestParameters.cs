@@ -5,12 +5,12 @@
 using System.Collections.Generic;
 
 // ReSharper disable once CheckNamespace
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public interface IRequestParameters
 	{
 		HttpMethod DefaultHttpMethod { get; }
-		
+
 		bool SupportsBody { get; }
 
 		/// <summary> Allows you to completely circumvent the serializer to build the final response.</summary>

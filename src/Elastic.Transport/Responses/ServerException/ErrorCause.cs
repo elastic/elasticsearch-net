@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	[DataContract]
 	public class ErrorCause

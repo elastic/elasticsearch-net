@@ -9,7 +9,7 @@
 #if DOTNETCORE
 using System.Net.Http;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// This a marker used to check if the underlying handler should be disposed. HttpClients
