@@ -5,6 +5,7 @@
 using System;
 using System.Text;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Extensions;
 using Nest;
 
 namespace Tests.Core.Client

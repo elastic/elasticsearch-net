@@ -6,6 +6,7 @@ using System.Linq;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
+using Elasticsearch.Net.Extensions;
 using Newtonsoft.Json;
 using Tests.Core.Serialization;
 

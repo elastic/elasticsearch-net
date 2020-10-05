@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Running;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Diagnostics;
 using Nest;
 using Tests.Core.Client;

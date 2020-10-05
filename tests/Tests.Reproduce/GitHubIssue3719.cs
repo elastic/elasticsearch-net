@@ -6,6 +6,7 @@ using System;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
+using Elasticsearch.Net.Extensions;
 using Nest;
 using Tests.Core.Client;
 

@@ -23,7 +23,7 @@ using Elasticsearch.Net.Extensions;
 namespace Elasticsearch.Net
 {
 	/// <summary>
-	/// Allows you to control how <see cref="ElasticLowLevelClient"/> behaves and where/how it connects to Elasticsearch
+	/// Allows you to control how <see cref="ITransport{TConnectionSettings}"/> behaves and where/how it connects to Elastic Stack products
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{

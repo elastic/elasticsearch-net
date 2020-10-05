@@ -20,10 +20,10 @@ namespace Elasticsearch.Net
 
 		public static string DebugInformationBuilder(IApiCallDetails r, StringBuilder sb)
 		{
-			if (r.DeprecationWarnings.HasAny())
+			if (r.DeprecationWarnings.HasAny(out var warnings))
 			{
 				sb.AppendLine($"# Server indicated deprecations:");
-				foreach (var deprecation in r.DeprecationWarnings)
+				foreach (var deprecation in warnings)
 					sb.AppendLine($"- {deprecation}");
 			}
 			sb.AppendLine($"# Audit trail of this API call:");
