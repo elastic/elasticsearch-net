@@ -23,7 +23,7 @@ namespace Tests.Reproduce
 		{
 			var client = new ElasticClient(_cluster.CreateConnectionSettings().ThrowExceptions());
 			Action catIndicesRequest = () => client.LowLevel.Cat.Indices<StringResponse>("non-existing-index");
-			catIndicesRequest.Should().Throw<ElasticsearchClientException>();
+			catIndicesRequest.Should().Throw<TransportException>();
 		}
 	}
 }

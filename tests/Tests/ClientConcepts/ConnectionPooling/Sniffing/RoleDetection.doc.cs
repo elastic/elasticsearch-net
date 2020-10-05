@@ -297,7 +297,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			 * Now when making the client calls, the audit trail indicates that a sniff on startup succeeds, but the subsequent
 			 * API call fails because the node predicate filters out all nodes as targets on which to execute API calls
 			 */
-			await audit.TraceUnexpectedElasticsearchException(new ClientCall
+			await audit.TraceUnexpectedTransportException(new ClientCall
 			{
 				{ SniffOnStartup }, // <1> The audit trail indicates a sniff for the very first time on startup
 				{ SniffSuccess }, // <2> The sniff succeeds because the node predicate is ignored when sniffing

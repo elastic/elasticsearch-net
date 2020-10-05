@@ -35,9 +35,9 @@ namespace Nest
 		public void OnError(Exception error)
 		{
 			// This normalizes task cancellation exceptions for observables
-			// If a task cancellation happens in the client it bubbles out as a UnexpectedElasticsearchClientException
+			// If a task cancellation happens in the client it bubbles out as a UnexpectedTransportException
 			// where as inside our IObservable implementation we .ThrowIfCancellationRequested() directly.
-			if (error is UnexpectedElasticsearchClientException es && es.InnerException != null && es.InnerException is OperationCanceledException c)
+			if (error is UnexpectedTransportException es && es.InnerException != null && es.InnerException is OperationCanceledException c)
 				_onError?.Invoke(c);
 			else _onError?.Invoke(error);
 		}

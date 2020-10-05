@@ -62,10 +62,10 @@ namespace Tests.ClientConcepts.Troubleshooting
 					.OnRequestCompleted(r => counter++)
 			);
 
-			Assert.Throws<ElasticsearchClientException>(() => client.RootNodeInfo()); // <3> Assert an exception is thrown and the counter is incremented
+			Assert.Throws<TransportException>(() => client.RootNodeInfo()); // <3> Assert an exception is thrown and the counter is incremented
 			counter.Should().Be(1);
 
-			await Assert.ThrowsAsync<ElasticsearchClientException>(async () => await client.RootNodeInfoAsync());
+			await Assert.ThrowsAsync<TransportException>(async () => await client.RootNodeInfoAsync());
 			counter.Should().Be(2);
 		}
 

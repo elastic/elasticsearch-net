@@ -190,7 +190,7 @@ namespace Tests.Document.Multiple.MultiGet
 
 			var client = new ElasticClient(new TestConnectionSettings(port: 9500));
 			Action response = () => client.GetMany<Developer>(_ids.Select(i => i * 100));
-			response.Should().Throw<ElasticsearchClientException>();
+			response.Should().Throw<TransportException>();
 		}
 	}
 }

@@ -55,14 +55,14 @@ namespace Elasticsearch.Net
 
 		Task SniffOnConnectionFailureAsync(CancellationToken cancellationToken);
 
-		void BadResponse<TResponse>(ref TResponse response, IApiCallDetails callDetails, RequestData data, ElasticsearchClientException exception)
+		void BadResponse<TResponse>(ref TResponse response, IApiCallDetails callDetails, RequestData data, TransportException exception)
 			where TResponse : class, ITransportResponse, new();
 
 		void ThrowNoNodesAttempted(RequestData requestData, List<PipelineException> seenExceptions);
 
 		void AuditCancellationRequested();
 
-		ElasticsearchClientException CreateClientException<TResponse>(TResponse response, IApiCallDetails callDetails, RequestData data,
+		TransportException CreateClientException<TResponse>(TResponse response, IApiCallDetails callDetails, RequestData data,
 			List<PipelineException> seenExceptions
 		)
 			where TResponse : class, ITransportResponse, new();

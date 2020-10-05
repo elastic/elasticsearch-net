@@ -92,7 +92,7 @@ namespace Elasticsearch.Net
 					}
 					catch (Exception killerException)
 					{
-						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
+						throw new UnexpectedTransportException(killerException, seenExceptions)
 						{
 							Request = requestData,
 							Response = response?.ApiCall,
@@ -150,7 +150,7 @@ namespace Elasticsearch.Net
 						if (killerException is OperationCanceledException && cancellationToken.IsCancellationRequested)
 							pipeline.AuditCancellationRequested();
 
-						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
+						throw new UnexpectedTransportException(killerException, seenExceptions)
 						{
 							Request = requestData,
 							Response = response?.ApiCall,
@@ -194,7 +194,7 @@ namespace Elasticsearch.Net
 			if (response?.ApiCall == null)
 				pipeline.BadResponse(ref response, callDetails, requestData, clientException);
 
-			HandleElasticsearchClientException(requestData, clientException, response);
+			HandleTransportException(requestData, clientException, response);
 			return response;
 		}
 
@@ -207,12 +207,12 @@ namespace Elasticsearch.Net
 
 
 		// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
-		private void HandleElasticsearchClientException(RequestData data, Exception clientException, ITransportResponse response)
+		private void HandleTransportException(RequestData data, Exception clientException, ITransportResponse response)
 		{
 			if (response.ApiCall is ApiCallDetails a)
 			{
 				//if original exception was not explicitly set during the pipeline
-				//set it to the ElasticsearchClientException we created for the bad response
+				//set it to the TransportException we created for the bad response
 				if (clientException != null && a.OriginalException == null)
 					a.OriginalException = clientException;
 				//On .NET Core the IConnection implementation throws exceptions on bad responses

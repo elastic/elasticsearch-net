@@ -137,7 +137,7 @@ namespace Elasticsearch.Net
 		public void AuditCancellationRequested() => Audit(CancellationRequested).Dispose();
 
 		public void BadResponse<TResponse>(ref TResponse response, IApiCallDetails callDetails, RequestData data,
-			ElasticsearchClientException exception
+			TransportException exception
 		)
 			where TResponse : class, ITransportResponse, new()
 		{
@@ -202,7 +202,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public ElasticsearchClientException CreateClientException<TResponse>(
+		public TransportException CreateClientException<TResponse>(
 			TResponse response, IApiCallDetails callDetails, RequestData data, List<PipelineException> pipelineExceptions
 		)
 			where TResponse : class, ITransportResponse, new()
@@ -248,7 +248,7 @@ namespace Elasticsearch.Net
 			if (response != null && response.TryGetServerErrorReason(out var reason))
 				exceptionMessage += $". ServerError: {reason}";
 
-			var clientException = new ElasticsearchClientException(pipelineFailure, exceptionMessage, innerException)
+			var clientException = new TransportException(pipelineFailure, exceptionMessage, innerException)
 			{
 				Request = data,
 				Response = callDetails,
@@ -295,7 +295,7 @@ namespace Elasticsearch.Net
 			if (!FirstPoolUsageNeedsSniffing) return;
 
 			// TODO cancellationToken could throw here and will bubble out as OperationCancelledException
-			// everywhere else it would bubble out wrapped in a `UnexpectedElasticsearchClientException`
+			// everywhere else it would bubble out wrapped in a `UnexpectedTransportException`
 			var success = await semaphore.WaitAsync(_settings.RequestTimeout, cancellationToken).ConfigureAwait(false);
 			if (!success)
 			{
@@ -540,9 +540,9 @@ namespace Elasticsearch.Net
 
 		public void ThrowNoNodesAttempted(RequestData requestData, List<PipelineException> seenExceptions)
 		{
-			var clientException = new ElasticsearchClientException(PipelineFailure.NoNodesAttempted, NoNodesAttemptedMessage, (Exception)null);
+			var clientException = new TransportException(PipelineFailure.NoNodesAttempted, NoNodesAttemptedMessage, (Exception)null);
 			using (Audit(NoNodesAttempted))
-				throw new UnexpectedElasticsearchClientException(clientException, seenExceptions)
+				throw new UnexpectedTransportException(clientException, seenExceptions)
 				{
 					Request = requestData,
 					AuditTrail = AuditTrail

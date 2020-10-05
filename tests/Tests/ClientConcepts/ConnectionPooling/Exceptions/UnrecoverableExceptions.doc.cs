@@ -39,7 +39,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		* but by exiting the pipeline.
 		* --
 		*
-		* By default, the client won't throw on any `ElasticsearchClientException` but instead return an invalid response
+		* By default, the client won't throw on any `TransportException` but instead return an invalid response
 		* that can be detected by checking the `.IsValid` property on the response. You can change this behaviour with
 		* by using `ThrowExceptions()` on <<configuration-options, `ConnectionSettings`>>.
 		*

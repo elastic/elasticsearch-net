@@ -33,7 +33,7 @@ namespace Tests.Document.Multiple.BulkAll
 			var seenPages = 0;
 			var observableBulk = KickOff(index, documents);
 			Action bulkObserver = () => observableBulk.Wait(TimeSpan.FromMinutes(5), b => Interlocked.Increment(ref seenPages));
-			bulkObserver.Should().Throw<ElasticsearchClientException>()
+			bulkObserver.Should().Throw<TransportException>()
 				.And.Message.Should()
 				.StartWith("BulkAll halted after receiving failures that can not");
 
@@ -63,7 +63,7 @@ namespace Tests.Document.Multiple.BulkAll
 			))
 			{
 				handle.WaitOne(TimeSpan.FromSeconds(60));
-				var clientException = ex.Should().NotBeNull().And.BeOfType<ElasticsearchClientException>().Subject;
+				var clientException = ex.Should().NotBeNull().And.BeOfType<TransportException>().Subject;
 				clientException.Message.Should().StartWith("BulkAll halted after receiving failures that can not");
 				seenPages.Should().Be(FailAfterPage);
 			}
@@ -124,7 +124,7 @@ namespace Tests.Document.Multiple.BulkAll
 			{
 				handle.WaitOne(TimeSpan.FromSeconds(60));
 				seenPages.Should().Be(0);
-				var clientException = ex.Should().NotBeNull().And.BeOfType<ElasticsearchClientException>().Subject;
+				var clientException = ex.Should().NotBeNull().And.BeOfType<TransportException>().Subject;
 				clientException.Message.Should().StartWith("BulkAll halted after attempted bulk failed over all the active nodes");
 			}
 		}

@@ -143,7 +143,7 @@ namespace Tests.Framework.EndpointTests.TestState
 
 				//this is to make sure any unexpected exceptions on the response are rethrown and shown during testing
 				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-					&& !(r.ApiCall.OriginalException is ElasticsearchClientException))
+					&& !(r.ApiCall.OriginalException is TransportException))
 				{
 					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
 					throw new ResponseAssertionException(e.SourceException, r);
