@@ -8,6 +8,19 @@ using static Elasticsearch.Net.ElasticsearchUrlFormatter;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net
 {
+
+	public class RequestParameters : RequestParameters<RequestParameters>
+	{
+		public RequestParameters(HttpMethod method, bool supportsBody)
+		{
+			DefaultHttpMethod = method;
+			SupportsBody = supportsBody;
+		}
+
+		public override HttpMethod DefaultHttpMethod { get; }
+		public override bool SupportsBody { get; }
+	}
+
 	/// <summary>
 	/// Used by the raw client to compose querystring parameters in a matter that still exposes some xmldocs
 	/// You can always pass a simple NameValueCollection if you want.

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System.Diagnostics;
+using Elasticsearch.Net.Extensions;
 using static Elasticsearch.Net.AuditEvent;
 
 namespace Elasticsearch.Net
@@ -43,12 +44,12 @@ namespace Elasticsearch.Net
 		{
 			switch(@event)
 			{
-				case SniffFailure: 
+				case SniffFailure:
 				case SniffSuccess:
-				case PingFailure: 
-				case PingSuccess: 
-				case BadResponse: 
-				case HealthyResponse: 
+				case PingFailure:
+				case PingSuccess:
+				case BadResponse:
+				case HealthyResponse:
 					return null;
 				case SniffOnStartup: return nameof(SniffOnStartup);
 				case SniffOnFail: return nameof(SniffOnFail);
@@ -64,8 +65,8 @@ namespace Elasticsearch.Net
 				default: return @event.GetStringValue(); //still cached but uses reflection
 			}
 		}
-		
-		
+
+
 	}
-	
+
 }

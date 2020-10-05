@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Extensions;
 
 namespace Nest
 {
@@ -42,7 +43,7 @@ namespace Nest
 			_retryPredicate = _partitionedBulkRequest.RetryDocumentPredicate ?? RetryBulkActionPredicate;
 			_droppedDocumentCallBack = _partitionedBulkRequest.DroppedDocumentCallback ?? DroppedDocumentCallbackDefault;
 			_bulkResponseCallback = _partitionedBulkRequest.BulkResponseCallback;
-			
+
 			_maxDegreeOfParallelism =
 				_partitionedBulkRequest.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
 			_compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
@@ -175,7 +176,7 @@ namespace Nest
 		private async Task<BulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, BulkResponse response)
 		{
 			var clientException = response.ApiCall.OriginalException as ElasticsearchClientException;
-			var failureReason = clientException?.FailureReason; 
+			var failureReason = clientException?.FailureReason;
 			var reason = failureReason?.GetStringValue() ?? nameof(PipelineFailure.BadRequest);
 			switch (failureReason)
 			{

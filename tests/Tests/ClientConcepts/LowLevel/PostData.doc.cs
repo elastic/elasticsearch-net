@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Extensions;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;

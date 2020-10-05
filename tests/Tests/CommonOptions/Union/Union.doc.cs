@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using Elasticsearch.Net;
+using Elasticsearch.Net.Extensions;
 using FluentAssertions;
 using Nest;
 using System.Runtime.Serialization;

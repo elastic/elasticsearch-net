@@ -4,6 +4,7 @@
 
 using System;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Extensions;
 
 namespace Nest
 {

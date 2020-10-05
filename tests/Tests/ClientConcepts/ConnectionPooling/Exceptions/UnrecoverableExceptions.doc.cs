@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.VirtualizedCluster;
 using Elasticsearch.Net.VirtualizedCluster.Audit;
 using FluentAssertions;

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Extensions;
 using Nest;
 using Tests.Benchmarking.Framework;
 using Tests.Core.Client;
