@@ -7,12 +7,15 @@ using System.Collections.Generic;
 
 namespace Elasticsearch.Net
 {
-	public class UnexpectedElasticsearchClientException : ElasticsearchClientException
+
+	public class UnexpectedTransportException : TransportException
 	{
-		public UnexpectedElasticsearchClientException(Exception killerException, List<PipelineException> seenExceptions)
+		public UnexpectedTransportException(Exception killerException, IReadOnlyCollection<PipelineException> seenExceptions)
 			: base(PipelineFailure.Unexpected, killerException?.Message ?? "An unexpected exception occurred.", killerException) =>
 			SeenExceptions = seenExceptions;
 
-		public List<PipelineException> SeenExceptions { get; set; }
+		public IReadOnlyCollection<PipelineException> SeenExceptions { get; }
 	}
+
+
 }

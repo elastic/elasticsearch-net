@@ -30,7 +30,7 @@ namespace Nest
 		/// <see cref="IsValid" /> will be false in that case.
 		/// </para>
 		/// <para>
-		/// You can also configure the client to always throw an <see cref="ElasticsearchClientException" /> using
+		/// You can also configure the client to always throw an <see cref="TransportException" /> using
 		/// <see cref="IConnectionConfigurationValues.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
@@ -45,7 +45,7 @@ namespace Nest
 		/// is possibly set when <see cref="IsValid" /> is false depending on the cause of the error
 		/// </para>
 		/// <para>
-		/// You can also configure the client to always throw an <see cref="ElasticsearchClientException" /> using
+		/// You can also configure the client to always throw an <see cref="TransportException" /> using
 		/// <see cref="IConnectionConfigurationValues.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
@@ -58,7 +58,7 @@ namespace Nest
 		/// <see cref="ServerError" /> in NEST.
 		/// <para>Possibly set when <see cref="IsValid" /> is false, depending on the cause of the error</para>
 		/// <para>
-		/// You can also configure the client to always throw an <see cref="ElasticsearchClientException" /> using
+		/// You can also configure the client to always throw an <see cref="TransportException" /> using
 		/// <see cref="IConnectionConfigurationValues.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>

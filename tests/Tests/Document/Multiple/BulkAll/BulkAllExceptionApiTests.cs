@@ -109,7 +109,7 @@ namespace Tests.Document.Multiple.BulkAll
 			}
 			ex.Should().NotBeNull();
 
-			var clientException = ex.Should().BeOfType<ElasticsearchClientException>().Subject;
+			var clientException = ex.Should().BeOfType<TransportException>().Subject;
 
 			clientException.Message.Should()
 				.StartWith("BulkAll halted after");

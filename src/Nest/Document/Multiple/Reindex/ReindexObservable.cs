@@ -182,8 +182,8 @@ namespace Nest
 			return response;
 		}
 
-		private static ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
-			new ElasticsearchClientException(PipelineFailure.BadResponse, message, details);
+		private static TransportException Throw(string message, IApiCallDetails details) =>
+			new TransportException(PipelineFailure.BadResponse, message, details);
 
 		private int CreateIndex(string toIndex, IScrollAllRequest scrollAll)
 		{

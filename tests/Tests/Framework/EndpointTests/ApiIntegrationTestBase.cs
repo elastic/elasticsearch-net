@@ -56,7 +56,7 @@ namespace Tests.Framework.EndpointTests
 			base.AssertOnAllResponses((r) =>
 			{
 				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-					&& !(r.ApiCall.OriginalException is ElasticsearchClientException))
+					&& !(r.ApiCall.OriginalException is TransportException))
 				{
 					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
 					throw new ResponseAssertionException(e.SourceException, r).Demystify();

@@ -80,8 +80,8 @@ namespace Nest
 			return true;
 		}
 
-		private static ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
-			new ElasticsearchClientException(PipelineFailure.BadResponse, message, details);
+		private static TransportException Throw(string message, IApiCallDetails details) =>
+			new TransportException(PipelineFailure.BadResponse, message, details);
 
 		private void ThrowOnBadSearchResult(ISearchResponse<T> result, int slice, int page)
 		{

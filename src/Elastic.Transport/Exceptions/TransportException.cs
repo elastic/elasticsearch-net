@@ -11,14 +11,15 @@ using static Elasticsearch.Net.ResponseStatics;
 
 namespace Elasticsearch.Net
 {
-	public class ElasticsearchClientException : Exception
-	{
-		public ElasticsearchClientException(string message) : base(message) => FailureReason = PipelineFailure.Unexpected;
 
-		public ElasticsearchClientException(PipelineFailure failure, string message, Exception innerException)
+	public class TransportException : Exception
+	{
+		public TransportException(string message) : base(message) => FailureReason = PipelineFailure.Unexpected;
+
+		public TransportException(PipelineFailure failure, string message, Exception innerException)
 			: base(message, innerException) => FailureReason = failure;
 
-		public ElasticsearchClientException(PipelineFailure failure, string message, IApiCallDetails apiCall)
+		public TransportException(PipelineFailure failure, string message, IApiCallDetails apiCall)
 			: this(message)
 		{
 			Response = apiCall;

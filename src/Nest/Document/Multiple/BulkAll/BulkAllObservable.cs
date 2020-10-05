@@ -175,7 +175,7 @@ namespace Nest
 
 		private async Task<BulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, BulkResponse response)
 		{
-			var clientException = response.ApiCall.OriginalException as ElasticsearchClientException;
+			var clientException = response.ApiCall.OriginalException as TransportException;
 			var failureReason = clientException?.FailureReason;
 			var reason = failureReason?.GetStringValue() ?? nameof(PipelineFailure.BadRequest);
 			switch (failureReason)
@@ -225,8 +225,8 @@ namespace Nest
 			return Throw(message, response.ApiCall);
 		}
 
-		private static ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
-			new ElasticsearchClientException(PipelineFailure.BadResponse, message, details);
+		private static TransportException Throw(string message, IApiCallDetails details) =>
+			new TransportException(PipelineFailure.BadResponse, message, details);
 
 
 		private static bool RetryBulkActionPredicate(BulkResponseItemBase bulkResponseItem, T d) => bulkResponseItem.Status == 429;

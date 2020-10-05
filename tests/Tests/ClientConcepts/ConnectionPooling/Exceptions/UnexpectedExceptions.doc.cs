@@ -20,7 +20,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		/**=== Unexpected exceptions
 		*
 		* When a client call throws an exception that the `IConnection` cannot handle, the exception will bubble
-		* out of the client as an `UnexpectedElasticsearchClientException`, regardless of whether the client is configured to
+		* out of the client as an `UnexpectedTransportException`, regardless of whether the client is configured to
 		* throw exceptions or not.
 		*
 		* An `IConnection` is in charge of knowing which exceptions it can recover from and those it can't, and the default `IConnection`
@@ -63,7 +63,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 
 		/**
 		* Sometimes, an unexpected exception happens further down in the pipeline. In this scenario, we
-		* wrap them inside an `UnexpectedElasticsearchClientException` so that information about where
+		* wrap them inside an `UnexpectedTransportException` so that information about where
 		* in the pipeline the exception happened is not lost.
 		*
 		* In this next example, a call to 9200 fails with a `WebException`.
