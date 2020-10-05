@@ -13,6 +13,7 @@ using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using System.Runtime.Serialization;
+using Elastic.Transport.Products;
 using Elasticsearch.Net;
 using Elasticsearch.Net.VirtualizedCluster;
 using Elasticsearch.Net.VirtualizedCluster.Providers;
@@ -43,7 +44,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				settings,
 				DateTimeProvider.Default,
 				new RecyclableMemoryStreamFactory(),
-				new SearchRequestParameters());
+				new SearchRequestParameters(),
+				ElasticsearchProductRegistration.Default
+			);
 
 			pipeline.GetType().Should().Implement<IDisposable>();
 
@@ -55,7 +58,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				settings,
 				DateTimeProvider.Default, //<1> An <<date-time-providers,`IDateTimeProvider`>> implementation
 				new RecyclableMemoryStreamFactory(),
-				new SearchRequestParameters());
+				new SearchRequestParameters(),
+				ElasticsearchProductRegistration.Default
+			);
 
 			requestPipeline.Should().BeOfType<RequestPipeline>();
 			requestPipeline.GetType().Should().Implement<IDisposable>();
@@ -68,7 +73,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				settings,
 				requestPipelineFactory,
 				DateTimeProvider.Default,
-				new RecyclableMemoryStreamFactory());
+				new RecyclableMemoryStreamFactory(),
+				ElasticsearchProductRegistration.Default
+			);
 
 			var client = new ElasticClient(transport);
 		}
@@ -80,7 +87,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var pool = setupPool(new[] { TestConnectionSettings.CreateUri(), TestConnectionSettings.CreateUri(9201) });
 			var settings = new ConnectionSettings(pool, connection ?? new InMemoryConnection());
 			settings = settingsSelector?.Invoke(settings) ?? settings;
-			return new FixedPipelineFactory(settings, dateTimeProvider ?? DateTimeProvider.Default).Pipeline;
+			return new FixedPipelineFactory(settings, dateTimeProvider ?? DateTimeProvider.Default, ElasticsearchProductRegistration.Default).Pipeline;
 		}
 
 		/**

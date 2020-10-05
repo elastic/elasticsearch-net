@@ -3,18 +3,19 @@
 // See the LICENSE file in the project root for more information
 
 using Elastic.Transport;
+using Elastic.Transport.Products;
 
 namespace Elasticsearch.Net.VirtualizedCluster
 {
 	public class FixedPipelineFactory : IRequestPipelineFactory
 	{
-		public FixedPipelineFactory(IConnectionConfigurationValues connectionSettings, IDateTimeProvider dateTimeProvider)
+		public FixedPipelineFactory(IConnectionConfigurationValues connectionSettings, IDateTimeProvider dateTimeProvider, IProductRegistration productRegistration)
 		{
 			DateTimeProvider = dateTimeProvider;
 			MemoryStreamFactory = ConnectionConfiguration.DefaultMemoryStreamFactory;
 
 			Settings = connectionSettings;
-			Pipeline = Create(Settings, DateTimeProvider, MemoryStreamFactory, new SearchRequestParameters());
+			Pipeline = Create(Settings, DateTimeProvider, MemoryStreamFactory, new SearchRequestParameters(), productRegistration);
 		}
 
 		public ElasticLowLevelClient Client => new ElasticLowLevelClient(Transport);
@@ -26,11 +27,11 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		private IConnectionConfigurationValues Settings { get; }
 
 		private Transport<IConnectionConfigurationValues> Transport =>
-			new Transport<IConnectionConfigurationValues>(Settings, this, DateTimeProvider, MemoryStreamFactory);
+			new Transport<IConnectionConfigurationValues>(Settings, this, DateTimeProvider, MemoryStreamFactory, ElasticsearchProductRegistration.Default);
 
 		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider,
-			IMemoryStreamFactory memoryStreamFactory, IRequestParameters requestParameters
+			IMemoryStreamFactory memoryStreamFactory, IRequestParameters requestParameters, IProductRegistration productRegistration
 		) =>
-			new RequestPipeline(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters ?? new SearchRequestParameters());
+			new RequestPipeline(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters ?? new SearchRequestParameters(), productRegistration);
 	}
 }
