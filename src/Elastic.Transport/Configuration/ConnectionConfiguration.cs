@@ -487,7 +487,7 @@ namespace Elasticsearch.Net
 		});
 
 		/// <summary>
-		/// Ensures the response bytes are always available on the <see cref="ElasticsearchResponse{T}" />
+		/// Ensures the response bytes are always available on the <see cref="ITransportResponse" />
 		/// <para>
 		/// IMPORTANT: Depending on the registered serializer,
 		/// this may cause the response to be buffered in memory first, potentially affecting performance.

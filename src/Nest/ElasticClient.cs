@@ -23,7 +23,7 @@ namespace Nest
 			Action<IRequestConfiguration> forceConfiguration = null
 		)
 			where TRequest : class, IRequest
-			where TResponse : class, IElasticsearchResponse, new() =>
+			where TResponse : class, ITransportResponse, new() =>
 			_client.DoRequest<TRequest, TResponse>(p, parameters, forceConfiguration);
 
 		internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
@@ -33,7 +33,7 @@ namespace Nest
 			Action<IRequestConfiguration> forceConfiguration = null
 		)
 			where TRequest : class, IRequest
-			where TResponse : class, IElasticsearchResponse, new() =>
+			where TResponse : class, ITransportResponse, new() =>
 			_client.DoRequestAsync<TRequest, TResponse>(p, parameters, ct, forceConfiguration);
 
 		protected CatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(TRequest request)
@@ -78,7 +78,7 @@ namespace Nest
 		public ElasticClient() : this(new ConnectionSettings(new Uri("http://localhost:9200"))) { }
 
 		public ElasticClient(Uri uri) : this(new ConnectionSettings(uri)) { }
-		
+
 		/// <summary>
 		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
 		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
@@ -124,7 +124,7 @@ namespace Nest
 
 		internal TResponse DoRequest<TRequest, TResponse>(TRequest p, IRequestParameters parameters, Action<IRequestConfiguration> forceConfiguration = null)
 			where TRequest : class, IRequest
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
 			if (p.ContentType != null) ForceContentType(p, p.ContentType);
@@ -142,7 +142,7 @@ namespace Nest
 			Action<IRequestConfiguration> forceConfiguration = null
 		)
 			where TRequest : class, IRequest
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
 			if (p.ContentType != null) ForceContentType(p, p.ContentType);
@@ -156,7 +156,7 @@ namespace Nest
 		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
 		{
 			if (forceConfiguration == null) return;
-			
+
 			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 			forceConfiguration(configuration);
 			request.RequestParameters.RequestConfiguration = configuration;

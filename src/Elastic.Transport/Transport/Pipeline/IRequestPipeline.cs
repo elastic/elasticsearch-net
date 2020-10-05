@@ -24,10 +24,10 @@ namespace Elasticsearch.Net
 		DateTime StartedOn { get; }
 
 		TResponse CallElasticsearch<TResponse>(RequestData requestData)
-			where TResponse : class, IElasticsearchResponse, new();
+			where TResponse : class, ITransportResponse, new();
 
 		Task<TResponse> CallElasticsearchAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
-			where TResponse : class, IElasticsearchResponse, new();
+			where TResponse : class, ITransportResponse, new();
 
 		void MarkAlive(Node node);
 
@@ -56,7 +56,7 @@ namespace Elasticsearch.Net
 		Task SniffOnConnectionFailureAsync(CancellationToken cancellationToken);
 
 		void BadResponse<TResponse>(ref TResponse response, IApiCallDetails callDetails, RequestData data, ElasticsearchClientException exception)
-			where TResponse : class, IElasticsearchResponse, new();
+			where TResponse : class, ITransportResponse, new();
 
 		void ThrowNoNodesAttempted(RequestData requestData, List<PipelineException> seenExceptions);
 
@@ -65,6 +65,6 @@ namespace Elasticsearch.Net
 		ElasticsearchClientException CreateClientException<TResponse>(TResponse response, IApiCallDetails callDetails, RequestData data,
 			List<PipelineException> seenExceptions
 		)
-			where TResponse : class, IElasticsearchResponse, new();
+			where TResponse : class, ITransportResponse, new();
 	}
 }

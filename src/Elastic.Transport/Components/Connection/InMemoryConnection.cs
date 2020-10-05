@@ -34,11 +34,11 @@ namespace Elasticsearch.Net
 		}
 
 		public virtual TResponse Request<TResponse>(RequestData requestData)
-			where TResponse : class, IElasticsearchResponse, new() =>
+			where TResponse : class, ITransportResponse, new() =>
 			ReturnConnectionStatus<TResponse>(requestData);
 
 		public virtual Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
-			where TResponse : class, IElasticsearchResponse, new() =>
+			where TResponse : class, ITransportResponse, new() =>
 			ReturnConnectionStatusAsync<TResponse>(requestData, cancellationToken);
 
 		void IDisposable.Dispose() => DisposeManagedResources();
@@ -46,7 +46,7 @@ namespace Elasticsearch.Net
 		protected TResponse ReturnConnectionStatus<TResponse>(RequestData requestData, byte[] responseBody = null, int? statusCode = null,
 			string contentType = null
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			var body = responseBody ?? _responseBody;
 			var data = requestData.PostData;
@@ -71,7 +71,7 @@ namespace Elasticsearch.Net
 		protected async Task<TResponse> ReturnConnectionStatusAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken,
 			byte[] responseBody = null, int? statusCode = null, string contentType = null
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			var body = responseBody ?? _responseBody;
 			var data = requestData.PostData;

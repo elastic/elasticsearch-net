@@ -36,8 +36,8 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 		public List<Elasticsearch.Net.Audit> AuditTrail { get; set; }
 		public Func<VirtualizedCluster> Cluster { get; set; }
 
-		public IElasticsearchResponse Response { get; internal set; }
-		public IElasticsearchResponse ResponseAsync { get; internal set; }
+		public ITransportResponse Response { get; internal set; }
+		public ITransportResponse ResponseAsync { get; internal set; }
 
 		private bool StartedUp { get; }
 

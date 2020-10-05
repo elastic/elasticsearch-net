@@ -12,9 +12,18 @@ using Elasticsearch.Net.Diagnostics;
 namespace Elasticsearch.Net
 {
 	/// <summary>
+	/// A response from Elasticsearch including details about the request/response life cycle. Base class for the built in low level response
+	/// types, <see cref="StringResponse"/>, <see cref="BytesResponse"/>, <see cref="DynamicResponse"/> and <see cref="VoidResponse"/>
+	/// </summary>
+	public abstract class TransportResponseBase<T> : TransportResponseBase
+	{
+		public T Body { get; protected internal set; }
+	}
+
+	/// <summary>
 	/// A response from Elasticsearch including details about the request/response life cycle
 	/// </summary>
-	public abstract class ElasticsearchResponseBase : IApiCallDetails, IElasticsearchResponse
+	public abstract class TransportResponseBase : IApiCallDetails, ITransportResponse
 	{
 
 		/// <inheritdoc />
@@ -29,7 +38,6 @@ namespace Elasticsearch.Net
 			get => ApiCall.TcpStats;
 			set => ApiCall.TcpStats = value;
 		}
-
 
 		/// <inheritdoc cref="IApiCallDetails.DebugInformation"/>
 		[JsonIgnore]
@@ -88,7 +96,7 @@ namespace Elasticsearch.Net
 		[JsonIgnore]
 		public byte[] RequestBodyInBytes => ApiCall.RequestBodyInBytes;
 
-		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason) => TryGetServerErrorReason(out reason);
+		bool ITransportResponse.TryGetServerErrorReason(out string reason) => TryGetServerErrorReason(out reason);
 
 		public virtual bool TryGetServerError(out ServerError serverError)
 		{
@@ -113,12 +121,4 @@ namespace Elasticsearch.Net
 		public override string ToString() => ApiCall.ToString();
 	}
 
-	/// <summary>
-	/// A response from Elasticsearch including details about the request/response life cycle. Base class for the built in low level response
-	/// types, <see cref="StringResponse"/>, <see cref="BytesResponse"/>, <see cref="DynamicResponse"/> and <see cref="VoidResponse"/>
-	/// </summary>
-	public abstract class ElasticsearchResponse<T> : ElasticsearchResponseBase
-	{
-		public T Body { get; protected internal set; }
-	}
 }

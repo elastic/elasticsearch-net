@@ -4,7 +4,7 @@
 	LowLevelClientMethod method = Model;
 }
 @{await IncludeAsync("LowLevel/Client/Methods/MethodDocs.cshtml", method); }
-		TResponse @(method.PerPathMethodName)@(Raw("<TResponse>"))(@Raw(method.Arguments)) where TResponse : class, IElasticsearchResponse, new();
+		TResponse @(method.PerPathMethodName)@(Raw("<TResponse>"))(@Raw(method.Arguments)) where TResponse : class, ITransportResponse, new();
 
 @{await IncludeAsync("LowLevel/Client/Methods/MethodDocs.cshtml", method); }
-		Task@(Raw("<TResponse>")) @(method.PerPathMethodName)Async@(Raw("<TResponse>"))(@Raw(method.Arguments), CancellationToken ctx = default) where TResponse : class, IElasticsearchResponse, new();
+		Task@(Raw("<TResponse>")) @(method.PerPathMethodName)Async@(Raw("<TResponse>"))(@Raw(method.Arguments), CancellationToken ctx = default) where TResponse : class, ITransportResponse, new();

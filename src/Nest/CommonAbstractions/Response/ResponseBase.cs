@@ -13,7 +13,7 @@ namespace Nest
 	/// <summary>
 	/// A response from Elasticsearch
 	/// </summary>
-	public interface IResponse : IElasticsearchResponse
+	public interface IResponse : ITransportResponse
 	{
 		/// <summary>
 		/// A lazily computed, human readable string representation of what happened during a request for both successful and
@@ -40,7 +40,7 @@ namespace Nest
 		/// <summary>
 		/// If the request resulted in an exception on the client side this will hold the exception that was thrown.
 		/// <para>
-		/// This property is a shortcut to <see cref="IElasticsearchResponse.ApiCall" />'s
+		/// This property is a shortcut to <see cref="ITransportResponse.ApiCall" />'s
 		/// <see cref="IApiCallDetails.OriginalException" /> and
 		/// is possibly set when <see cref="IsValid" /> is false depending on the cause of the error
 		/// </para>
@@ -142,13 +142,13 @@ namespace Nest
 		}
 
 		[IgnoreDataMember]
-		IApiCallDetails IElasticsearchResponse.ApiCall
+		IApiCallDetails ITransportResponse.ApiCall
 		{
 			get => _originalApiCall;
 			set => _originalApiCall = value;
 		}
 
-		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason)
+		bool ITransportResponse.TryGetServerErrorReason(out string reason)
 		{
 			reason = ServerError?.Error?.ToString();
 			return !reason.IsNullOrEmpty();

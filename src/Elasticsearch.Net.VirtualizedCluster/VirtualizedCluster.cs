@@ -14,10 +14,10 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		private readonly FixedPipelineFactory _fixedRequestPipeline;
 		private readonly TestableDateTimeProvider _dateTimeProvider;
 		private readonly ConnectionConfiguration _settings;
-		private Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<IElasticsearchResponse>> _asyncCall;
-		private Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, IElasticsearchResponse> _syncCall;
+		private Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<ITransportResponse>> _asyncCall;
+		private Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, ITransportResponse> _syncCall;
 
-		private class VirtualResponse : ElasticsearchResponseBase { }
+		private class VirtualResponse : TransportResponseBase { }
 
 		public VirtualizedCluster(TestableDateTimeProvider dateTimeProvider, ConnectionConfiguration settings)
 		{
@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 					new SearchRequestParameters { RequestConfiguration = r?.Invoke(new RequestConfigurationDescriptor(null)) },
 					CancellationToken.None
 				).ConfigureAwait(false);
-				return (IElasticsearchResponse)res;
+				return (ITransportResponse)res;
 			};
 		}
 
@@ -46,8 +46,8 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		public ElasticLowLevelClient Client => _fixedRequestPipeline?.Client;
 
 		public VirtualizedCluster ClientProxiesTo(
-			Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, IElasticsearchResponse> sync,
-			Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<IElasticsearchResponse>> async
+			Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, ITransportResponse> sync,
+			Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<ITransportResponse>> async
 		)
 		{
 			_syncCall = sync;
@@ -55,10 +55,10 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			return this;
 		}
 
-		public IElasticsearchResponse ClientCall(Func<RequestConfigurationDescriptor, IRequestConfiguration> requestOverrides = null) =>
+		public ITransportResponse ClientCall(Func<RequestConfigurationDescriptor, IRequestConfiguration> requestOverrides = null) =>
 			_syncCall(Client, requestOverrides);
 
-		public async Task<IElasticsearchResponse> ClientCallAsync(Func<RequestConfigurationDescriptor, IRequestConfiguration> requestOverrides = null) =>
+		public async Task<ITransportResponse> ClientCallAsync(Func<RequestConfigurationDescriptor, IRequestConfiguration> requestOverrides = null) =>
 			await _asyncCall(Client, requestOverrides).ConfigureAwait(false);
 
 		public void ChangeTime(Func<DateTime, DateTime> change) => _dateTimeProvider.ChangeTime(change);

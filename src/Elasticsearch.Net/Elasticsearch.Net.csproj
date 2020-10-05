@@ -32,5 +32,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions" />
+    <Folder Include="Responses" />
   </ItemGroup>
 </Project>

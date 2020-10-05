@@ -139,7 +139,7 @@ namespace Elasticsearch.Net
 		public void BadResponse<TResponse>(ref TResponse response, IApiCallDetails callDetails, RequestData data,
 			ElasticsearchClientException exception
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			if (response == null)
 			{
@@ -153,7 +153,7 @@ namespace Elasticsearch.Net
 		}
 
 		public TResponse CallElasticsearch<TResponse>(RequestData requestData)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			using (var audit = Audit(HealthyResponse, requestData.Node))
 			using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.CallElasticsearch, requestData))
@@ -178,7 +178,7 @@ namespace Elasticsearch.Net
 		}
 
 		public async Task<TResponse> CallElasticsearchAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			using (var audit = Audit(HealthyResponse, requestData.Node))
 			using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.CallElasticsearch, requestData))
@@ -205,7 +205,7 @@ namespace Elasticsearch.Net
 		public ElasticsearchClientException CreateClientException<TResponse>(
 			TResponse response, IApiCallDetails callDetails, RequestData data, List<PipelineException> pipelineExceptions
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			if (callDetails?.Success ?? false) return null;
 
@@ -574,7 +574,7 @@ namespace Elasticsearch.Net
 			return data;
 		}
 
-		private static void ThrowBadAuthPipelineExceptionWhenNeeded(IApiCallDetails details, IElasticsearchResponse response = null)
+		private static void ThrowBadAuthPipelineExceptionWhenNeeded(IApiCallDetails details, ITransportResponse response = null)
 		{
 			if (details?.HttpStatusCode == 401)
 				throw new PipelineException(PipelineFailure.BadAuthentication, details.OriginalException)
