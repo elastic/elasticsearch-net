@@ -11,6 +11,7 @@ using Elasticsearch.Net.VirtualizedCluster.Audit;
 using Elasticsearch.Net.VirtualizedCluster.Rules;
 using FluentAssertions;
 using Xunit;
+using static Elastic.Transport.Diagnostics.Auditing.AuditEvent;
 
 namespace Tests.ClientConcepts
 {
@@ -40,7 +41,7 @@ namespace Tests.ClientConcepts
 			audit = await audit.TraceCalls(
 				new ClientCall {
 
-					{ AuditEvent.HealthyResponse, 9200, response =>
+					{ HealthyResponse, 9200, response =>
 					{
 						response.ApiCall.Success.Should().BeTrue();
 						response.ApiCall.HttpStatusCode.Should().Be(200);
@@ -65,7 +66,7 @@ namespace Tests.ClientConcepts
 
 			audit = await audit.TraceCalls(
 				Enumerable.Range(0, 1000)
-					.Select(i => new ClientCall { { AuditEvent.HealthyResponse, 9200}, })
+					.Select(i => new ClientCall { { HealthyResponse, 9200}, })
 					.ToArray()
 			);
 
@@ -85,7 +86,7 @@ namespace Tests.ClientConcepts
 			audit = await audit.TraceCalls(
 				new ClientCall {
 
-					{ AuditEvent.HealthyResponse, 9200, response =>
+					{ HealthyResponse, 9200, response =>
 					{
 						response.ApiCall.Success.Should().BeTrue();
 						response.ApiCall.HttpStatusCode.Should().Be(200);
@@ -94,7 +95,7 @@ namespace Tests.ClientConcepts
 				},
 				new ClientCall {
 
-					{ AuditEvent.BadResponse, 9200, response =>
+					{ BadResponse, 9200, response =>
 					{
 						response.ApiCall.Success.Should().BeFalse();
 						response.ApiCall.HttpStatusCode.Should().Be(500);
@@ -103,7 +104,7 @@ namespace Tests.ClientConcepts
 				},
 				new ClientCall {
 
-					{ AuditEvent.BadResponse, 9200, response =>
+					{ BadResponse, 9200, response =>
 					{
 						response.ApiCall.HttpStatusCode.Should().Be(400);
 						response.ApiCall.DebugInformation.Should().Contain("x\":3");
@@ -111,7 +112,7 @@ namespace Tests.ClientConcepts
 				},
 				new ClientCall {
 
-					{ AuditEvent.BadResponse, 9200, response =>
+					{ BadResponse, 9200, response =>
 					{
 						response.ApiCall.HttpStatusCode.Should().Be(400);
 						response.ApiCall.DebugInformation.Should().Contain("x\":3");
@@ -119,7 +120,7 @@ namespace Tests.ClientConcepts
 				},
 				new ClientCall {
 
-					{ AuditEvent.HealthyResponse, 9200, response =>
+					{ HealthyResponse, 9200, response =>
 					{
 						response.ApiCall.HttpStatusCode.Should().Be(200);
 						response.ApiCall.DebugInformation.Should().Contain("x\":4");

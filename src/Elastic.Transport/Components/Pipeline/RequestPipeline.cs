@@ -10,8 +10,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport.Diagnostics;
+using Elastic.Transport.Diagnostics.Auditing;
 using Elastic.Transport.Extensions;
-using static Elastic.Transport.AuditEvent;
+using static Elastic.Transport.Diagnostics.Auditing.AuditEvent;
 
 namespace Elastic.Transport
 {

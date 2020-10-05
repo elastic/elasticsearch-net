@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Elastic.Transport.Diagnostics.Auditing;
 
 namespace Elastic.Transport
 {

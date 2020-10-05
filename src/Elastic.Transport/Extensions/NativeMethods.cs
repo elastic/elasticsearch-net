@@ -3,9 +3,10 @@
 // See the LICENSE file in the project root for more information.
 // https://raw.githubusercontent.com/dotnet/core-setup/master/src/managed/Microsoft.DotNet.PlatformAbstractions/Native/NativeMethods.Windows.cs
 
+#if NET461
 using System.Runtime.InteropServices;
 
-namespace Elastic.Transport
+namespace Elastic.Transport.Extensions
 {
 	internal static class NativeMethods
 	{
@@ -44,3 +45,4 @@ namespace Elastic.Transport
 		}
 	}
 }
+#endif

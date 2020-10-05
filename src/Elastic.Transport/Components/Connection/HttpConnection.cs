@@ -301,7 +301,7 @@ namespace Elastic.Transport
 					$"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
 			if (!userInfo.IsNullOrEmpty())
 			{
-				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
+				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo!));
 				requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", credentials);
 			}
 		}

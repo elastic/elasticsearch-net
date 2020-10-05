@@ -12,6 +12,7 @@ using Elasticsearch.Net.VirtualizedCluster;
 using Elasticsearch.Net.VirtualizedCluster.Audit;
 using FluentAssertions;
 using Tests.Framework;
+using static Elastic.Transport.Diagnostics.Auditing.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 {
@@ -44,13 +45,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ AuditEvent.HealthyResponse, 9200 }, // <3> The first call to 9200 returns a healthy response
+					{ HealthyResponse, 9200 }, // <3> The first call to 9200 returns a healthy response
 				}
 			);
 
 			audit = await audit.TraceUnexpectedException(
 				new ClientCall {
-					{ AuditEvent.BadResponse, 9201 }, // <4> ...but the second call, to 9201, returns a bad response
+					{ BadResponse, 9201 }, // <4> ...but the second call, to 9201, returns a bad response
 				},
 				(e) =>
 				{
@@ -87,8 +88,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 
 			audit = await audit.TraceUnexpectedException(
 				new ClientCall {
-					{ AuditEvent.BadResponse, 9200 },
-					{ AuditEvent.BadResponse, 9201 }, // <3> Assert that the audit trail for the client call includes the bad response from 9200 and 9201
+					{ BadResponse, 9200 },
+					{ BadResponse, 9201 }, // <3> Assert that the audit trail for the client call includes the bad response from 9200 and 9201
 				},
 				(e) =>
 				{
@@ -119,9 +120,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 
 			audit = await audit.TraceUnexpectedException(
 				new ClientCall {
-					{ AuditEvent.PingFailure, 9200 },
-					{ AuditEvent.PingSuccess, 9201 },
-					{ AuditEvent.BadResponse, 9201 },
+					{ PingFailure, 9200 },
+					{ PingSuccess, 9201 },
+					{ BadResponse, 9201 },
 				},
 				e =>
 				{
@@ -135,7 +136,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 					pipelineException.FailureReason.Should().Be(PipelineFailure.PingFailure);
 					pipelineException.InnerException.Message.Should().Be("ping exception");
 
-					var pingException = e.AuditTrail.First(a => a.Event == AuditEvent.PingFailure).Exception; // <3> An exception can be hard to relate back to a point in time, so the exception is also available on the audit trail
+					var pingException = e.AuditTrail.First(a => a.Event == PingFailure).Exception; // <3> An exception can be hard to relate back to a point in time, so the exception is also available on the audit trail
 					pingException.Should().NotBeNull();
 					pingException.Message.Should().Be("ping exception");
 				}

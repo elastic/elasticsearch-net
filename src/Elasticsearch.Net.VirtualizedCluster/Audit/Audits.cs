@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using Elastic.Transport;
+using Elastic.Transport.Diagnostics.Auditing;
 
 namespace Elasticsearch.Net.VirtualizedCluster.Audit
 {
@@ -12,13 +13,13 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 	{
 		public CallTraceState(AuditEvent e) => Event = e;
 
-		public Action<string, Elastic.Transport.Audit> AssertWithBecause { get; set; }
+		public Action<string, Elastic.Transport.Diagnostics.Auditing.Audit> AssertWithBecause { get; set; }
 
 		public AuditEvent Event { get; private set; }
 
 		public int? Port { get; set; }
 
-		public Action<Elastic.Transport.Audit> SimpleAssert { get; set; }
+		public Action<Elastic.Transport.Diagnostics.Auditing.Audit> SimpleAssert { get; set; }
 	}
 
 	public class ClientCall : List<CallTraceState>
@@ -31,7 +32,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 		public Action<ITransportResponse> AssertResponse { get; private set; }
 		public Func<RequestConfigurationDescriptor, IRequestConfiguration> RequestOverrides { get; }
 
-		public void Add(AuditEvent key, Action<Elastic.Transport.Audit> value) => Add(new CallTraceState(key) { SimpleAssert = value });
+		public void Add(AuditEvent key, Action<Elastic.Transport.Diagnostics.Auditing.Audit> value) => Add(new CallTraceState(key) { SimpleAssert = value });
 
 		public void Add(AuditEvent key, int port) => Add(new CallTraceState(key) { Port = port });
 

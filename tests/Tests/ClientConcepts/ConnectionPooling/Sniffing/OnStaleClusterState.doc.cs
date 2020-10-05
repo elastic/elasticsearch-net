@@ -11,7 +11,7 @@ using Elasticsearch.Net.VirtualizedCluster;
 using Elasticsearch.Net.VirtualizedCluster.Audit;
 using FluentAssertions;
 using Tests.Framework;
-using static Elastic.Transport.AuditEvent;
+using static Elastic.Transport.Diagnostics.Auditing.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {

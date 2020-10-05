@@ -4,9 +4,9 @@
 
 using System.Diagnostics;
 using Elastic.Transport.Extensions;
-using static Elastic.Transport.AuditEvent;
+using static Elastic.Transport.Diagnostics.Auditing.AuditEvent;
 
-namespace Elastic.Transport
+namespace Elastic.Transport.Diagnostics.Auditing
 {
 	public enum AuditEvent
 	{

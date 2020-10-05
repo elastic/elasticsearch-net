@@ -33,8 +33,8 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 		public Action<IConnectionPool> AssertPoolBeforeCall { get; set; }
 		public Action<IConnectionPool> AssertPoolBeforeStartup { get; set; }
 
-		public List<Elastic.Transport.Audit> AsyncAuditTrail { get; set; }
-		public List<Elastic.Transport.Audit> AuditTrail { get; set; }
+		public List<Elastic.Transport.Diagnostics.Auditing.Audit> AsyncAuditTrail { get; set; }
+		public List<Elastic.Transport.Diagnostics.Auditing.Audit> AuditTrail { get; set; }
 		public Func<VirtualizedCluster> Cluster { get; set; }
 
 		public ITransportResponse Response { get; internal set; }
@@ -212,7 +212,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			throw new Exception(string.Join(Environment.NewLine, messages));
 		}
 
-		private static string AuditTrailToString(List<Elastic.Transport.Audit> auditTrail)
+		private static string AuditTrailToString(List<Elastic.Transport.Diagnostics.Auditing.Audit> auditTrail)
 		{
 			var actualAuditTrail = auditTrail.Aggregate(new StringBuilder(),
 				(sb, a) => sb.AppendLine($"-> {a}"),
@@ -227,7 +227,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			return auditor;
 		}
 
-		private static void AssertTrailOnResponse(ClientCall callTrace, List<Elastic.Transport.Audit> auditTrail, bool sync, int nthCall)
+		private static void AssertTrailOnResponse(ClientCall callTrace, List<Elastic.Transport.Diagnostics.Auditing.Audit> auditTrail, bool sync, int nthCall)
 		{
 			var typeOfTrail = (sync ? "synchronous" : "asynchronous") + " audit trail";
 			var nthClientCall = (nthCall + 1).ToOrdinal();

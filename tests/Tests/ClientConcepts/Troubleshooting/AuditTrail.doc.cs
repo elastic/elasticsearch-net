@@ -17,6 +17,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Xunit;
+using static Elastic.Transport.Diagnostics.Auditing.AuditEvent;
 
 namespace Tests.ClientConcepts.Troubleshooting
 {
@@ -81,10 +82,10 @@ namespace Tests.ClientConcepts.Troubleshooting
 			 * But can also be accessed manually:
 			 */
 			response.ApiCall.AuditTrail.Count.Should().Be(4, "{0}", debug);
-			response.ApiCall.AuditTrail[0].Event.Should().Be(AuditEvent.SniffOnStartup, "{0}", debug);
-			response.ApiCall.AuditTrail[1].Event.Should().Be(AuditEvent.SniffSuccess, "{0}", debug);
-			response.ApiCall.AuditTrail[2].Event.Should().Be(AuditEvent.PingSuccess, "{0}", debug);
-			response.ApiCall.AuditTrail[3].Event.Should().Be(AuditEvent.HealthyResponse, "{0}", debug);
+			response.ApiCall.AuditTrail[0].Event.Should().Be(SniffOnStartup, "{0}", debug);
+			response.ApiCall.AuditTrail[1].Event.Should().Be(SniffSuccess, "{0}", debug);
+			response.ApiCall.AuditTrail[2].Event.Should().Be(PingSuccess, "{0}", debug);
+			response.ApiCall.AuditTrail[3].Event.Should().Be(HealthyResponse, "{0}", debug);
 
 			/**
 			 * Each audit has a started and ended `DateTime` on it that will provide

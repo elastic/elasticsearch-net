@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Net.NetworkInformation;
 using System.Text;
 using Elastic.Transport.Diagnostics;
+using Elastic.Transport.Diagnostics.Auditing;
 using Elastic.Transport.Extensions;
 
 namespace Elastic.Transport
