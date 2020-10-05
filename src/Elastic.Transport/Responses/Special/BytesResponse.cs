@@ -4,7 +4,7 @@
 
 namespace Elasticsearch.Net
 {
-	public class BytesResponse : ElasticsearchResponse<byte[]>
+	public class BytesResponse : TransportResponseBase<byte[]>
 	{
 		public BytesResponse() { }
 

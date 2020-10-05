@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Elasticsearch.Net
 {
-	public class StringResponse : ElasticsearchResponse<string>
+	public class StringResponse : TransportResponseBase<string>
 	{
 		public StringResponse() { }
 

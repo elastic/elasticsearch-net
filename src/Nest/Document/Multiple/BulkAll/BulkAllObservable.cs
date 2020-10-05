@@ -218,7 +218,7 @@ namespace Nest
 			return await BulkAsync(retryDocuments, page, backOffRetries).ConfigureAwait(false);
 		}
 
-		private Exception ThrowOnBadBulk(IElasticsearchResponse response, string message)
+		private Exception ThrowOnBadBulk(ITransportResponse response, string message)
 		{
 			_incrementFailed();
 			_partitionedBulkRequest.BackPressure?.Release();

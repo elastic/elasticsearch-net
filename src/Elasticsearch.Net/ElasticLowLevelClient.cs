@@ -66,13 +66,13 @@ namespace Elasticsearch.Net
 		private ElasticsearchUrlFormatter UrlFormatter { get; }
 
 		public TResponse DoRequest<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() =>
+			where TResponse : class, ITransportResponse, new() =>
 			Transport.Request<TResponse>(method, path, data, requestParameters);
 
 		public Task<TResponse> DoRequestAsync<TResponse>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null,
 			IRequestParameters requestParameters = null
 		)
-			where TResponse : class, IElasticsearchResponse, new() =>
+			where TResponse : class, ITransportResponse, new() =>
 			Transport.RequestAsync<TResponse>(method, path, cancellationToken, data, requestParameters);
 
 		protected internal string Url(FormattableString formattable) => formattable.ToString(UrlFormatter);

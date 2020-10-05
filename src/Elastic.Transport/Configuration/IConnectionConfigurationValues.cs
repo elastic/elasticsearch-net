@@ -237,7 +237,7 @@ namespace Elasticsearch.Net
 		string UserAgent { get; }
 
 		/// <summary>
-		/// Allow you to override the status code inspection that sets <see cref="ElasticsearchResponseBase.Success"/>
+		/// Allow you to override the status code inspection that sets <see cref="IApiCallDetails.Success"/>
 		/// <para>
 		/// Defaults to validating the statusCode is greater or equal to 200 and less then 300
 		/// </para>

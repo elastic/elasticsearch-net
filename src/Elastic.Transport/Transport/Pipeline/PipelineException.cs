@@ -22,7 +22,7 @@ namespace Elasticsearch.Net
 			|| FailureReason == PipelineFailure.BadResponse
 			|| FailureReason == PipelineFailure.PingFailure;
 
-		public IElasticsearchResponse Response { get; internal set; }
+		public ITransportResponse Response { get; internal set; }
 
 		private static string GetMessage(PipelineFailure failure)
 		{

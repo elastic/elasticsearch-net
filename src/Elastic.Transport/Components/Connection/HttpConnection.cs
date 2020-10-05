@@ -55,7 +55,7 @@ namespace Elasticsearch.Net
 		public HttpConnection() => HttpClientFactory = new RequestDataHttpClientFactory(r => CreateHttpClientHandler(r));
 
 		public virtual TResponse Request<TResponse>(RequestData requestData)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			var client = GetClient(requestData);
 			HttpResponseMessage responseMessage;
@@ -122,7 +122,7 @@ namespace Elasticsearch.Net
 		}
 
 		public virtual async Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			var client = GetClient(requestData);
 			HttpResponseMessage responseMessage;

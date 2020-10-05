@@ -8,7 +8,7 @@ namespace Elasticsearch.Net
 	/// The minimum interface your custom responses should implement when providing a response type
 	/// to the low level client
 	/// </summary>
-	public interface IElasticsearchResponse
+	public interface ITransportResponse
 	{
 		/// <summary>
 		/// Sets and returns the <see cref="IApiCallDetails" /> diagnostic information

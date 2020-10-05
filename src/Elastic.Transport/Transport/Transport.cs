@@ -56,7 +56,7 @@ namespace Elasticsearch.Net
 		private IRequestPipelineFactory PipelineProvider { get; }
 
 		public TResponse Request<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters))
 			{
@@ -111,7 +111,7 @@ namespace Elasticsearch.Net
 		public async Task<TResponse> RequestAsync<TResponse>(HttpMethod method, string path, CancellationToken cancellationToken,
 			PostData data = null, IRequestParameters requestParameters = null
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters))
 			{
@@ -174,7 +174,7 @@ namespace Elasticsearch.Net
 		private static void HandlePipelineException<TResponse>(
 			ref TResponse response, PipelineException ex, IRequestPipeline pipeline, Node node, List<PipelineException> seenExceptions
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			if (response == null) response = ex.Response as TResponse;
 			pipeline.MarkDead(node);
@@ -183,7 +183,7 @@ namespace Elasticsearch.Net
 
 		private TResponse FinalizeResponse<TResponse>(RequestData requestData, IRequestPipeline pipeline, List<PipelineException> seenExceptions,
 			TResponse response
-		) where TResponse : class, IElasticsearchResponse, new()
+		) where TResponse : class, ITransportResponse, new()
 		{
 			if (requestData.Node == null) //foreach never ran
 				pipeline.ThrowNoNodesAttempted(requestData, seenExceptions);
@@ -199,7 +199,7 @@ namespace Elasticsearch.Net
 		}
 
 		private static IApiCallDetails GetMostRecentCallDetails<TResponse>(TResponse response, IEnumerable<PipelineException> seenExceptions)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			var callDetails = response?.ApiCall ?? seenExceptions.LastOrDefault(e => e.ApiCall != null)?.ApiCall;
 			return callDetails;
@@ -207,7 +207,7 @@ namespace Elasticsearch.Net
 
 
 		// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
-		private void HandleElasticsearchClientException(RequestData data, Exception clientException, IElasticsearchResponse response)
+		private void HandleElasticsearchClientException(RequestData data, Exception clientException, ITransportResponse response)
 		{
 			if (response.ApiCall is ApiCallDetails a)
 			{

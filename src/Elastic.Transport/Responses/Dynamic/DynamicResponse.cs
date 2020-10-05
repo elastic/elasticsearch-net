@@ -4,7 +4,7 @@
 
 namespace Elasticsearch.Net
 {
-	public class DynamicResponse : ElasticsearchResponse<dynamic>
+	public class DynamicResponse : TransportResponseBase<dynamic>
 	{
 		public DynamicResponse() { }
 

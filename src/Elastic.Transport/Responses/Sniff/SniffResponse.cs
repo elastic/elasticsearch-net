@@ -33,7 +33,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	internal class SniffResponse : ElasticsearchResponseBase
+	internal class SniffResponse : TransportResponseBase
 	{
 		// ReSharper disable InconsistentNaming
 		public string cluster_name { get; set; }

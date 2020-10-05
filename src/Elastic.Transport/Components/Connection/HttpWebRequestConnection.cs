@@ -33,7 +33,7 @@ namespace Elasticsearch.Net
 		internal static bool IsMono { get; } = Type.GetType("Mono.Runtime") != null;
 
 		public virtual TResponse Request<TResponse>(RequestData requestData)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
@@ -99,7 +99,7 @@ namespace Elasticsearch.Net
 		public virtual async Task<TResponse> RequestAsync<TResponse>(RequestData requestData,
 			CancellationToken cancellationToken
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			Action unregisterWaitHandle = null;
 			int? statusCode = null;

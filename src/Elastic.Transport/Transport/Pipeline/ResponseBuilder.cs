@@ -27,7 +27,7 @@ namespace Elasticsearch.Net
 			Stream responseStream,
 			string mimeType = RequestData.MimeType
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
 			var details = Initialize(requestData, ex, statusCode, warnings, mimeType);
@@ -46,7 +46,7 @@ namespace Elasticsearch.Net
 			string mimeType = RequestData.MimeType,
 			CancellationToken cancellationToken = default
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
 			var details = Initialize(requestData, ex, statusCode, warnings, mimeType);
@@ -90,7 +90,7 @@ namespace Elasticsearch.Net
 		}
 
 		private static TResponse SetBody<TResponse>(ApiCallDetails details, RequestData requestData, Stream responseStream, string mimeType)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			byte[] bytes = null;
 			var disableDirectStreaming = requestData.PostData?.DisableDirectStreaming ?? requestData.ConnectionSettings.DisableDirectStreaming;
@@ -123,7 +123,7 @@ namespace Elasticsearch.Net
 		private static async Task<TResponse> SetBodyAsync<TResponse>(
 			ApiCallDetails details, RequestData requestData, Stream responseStream, string mimeType, CancellationToken cancellationToken
 		)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			byte[] bytes = null;
 			var disableDirectStreaming = requestData.PostData?.DisableDirectStreaming ?? requestData.ConnectionSettings.DisableDirectStreaming;
@@ -155,7 +155,7 @@ namespace Elasticsearch.Net
 		}
 
 		private static bool SetSpecialTypes<TResponse>(string mimeType, byte[] bytes, IMemoryStreamFactory memoryStreamFactory, out TResponse cs)
-			where TResponse : class, IElasticsearchResponse, new()
+			where TResponse : class, ITransportResponse, new()
 		{
 			cs = null;
 			var responseType = typeof(TResponse);
@@ -187,7 +187,7 @@ namespace Elasticsearch.Net
 		}
 
 		private static bool NeedsToEagerReadStream<TResponse>()
-			where TResponse : class, IElasticsearchResponse, new() =>
+			where TResponse : class, ITransportResponse, new() =>
 			typeof(TResponse) == typeof(StringResponse)
 			|| typeof(TResponse) == typeof(BytesResponse)
 			|| typeof(TResponse) == typeof(DynamicResponse);
