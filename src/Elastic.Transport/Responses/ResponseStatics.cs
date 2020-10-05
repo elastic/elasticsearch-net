@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Elastic.Transport.Diagnostics.Auditing;
 using Elastic.Transport.Extensions;
 
 namespace Elastic.Transport

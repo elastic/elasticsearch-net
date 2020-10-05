@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Elastic.Transport
+namespace Elastic.Transport.Extensions
 {
 	internal static class EmptyReadOnlyExtensions
 	{

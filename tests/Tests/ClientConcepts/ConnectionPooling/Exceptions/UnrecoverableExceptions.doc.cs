@@ -18,6 +18,7 @@ using Nest;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.SerializationTests;
+using static Elastic.Transport.Diagnostics.Auditing.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 {
@@ -97,8 +98,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			*/
 			audit = await audit.TraceElasticsearchException(
 				new ClientCall {
-					{ AuditEvent.PingSuccess, 9200 }, // <1> First call results in a successful ping
-					{ AuditEvent.BadResponse, 9200 }, // <2> Second call results in a bad response
+					{ PingSuccess, 9200 }, // <1> First call results in a successful ping
+					{ BadResponse, 9200 }, // <2> Second call results in a bad response
 				},
 				exception =>
 				{
@@ -130,8 +131,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 
 			audit = await audit.TraceElasticsearchException(
 				new ClientCall {
-					{ AuditEvent.PingSuccess, 9200 },
-					{ AuditEvent.BadResponse, 9201 },
+					{ PingSuccess, 9200 },
+					{ BadResponse, 9201 },
 				},
 				(e) =>
 				{
@@ -160,8 +161,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 
 			audit = await audit.TraceElasticsearchException(
 				new ClientCall {
-					{ AuditEvent.PingSuccess, 9200 },
-					{ AuditEvent.BadResponse, 9200 },
+					{ PingSuccess, 9200 },
+					{ BadResponse, 9200 },
 				},
 				(e) =>
 				{
@@ -192,8 +193,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 
 			audit = await audit.TraceElasticsearchException(
 				new ClientCall {
-					{ AuditEvent.PingSuccess, 9200 },
-					{ AuditEvent.BadResponse, 9200 },
+					{ PingSuccess, 9200 },
+					{ BadResponse, 9200 },
 				},
 				(e) =>
 				{

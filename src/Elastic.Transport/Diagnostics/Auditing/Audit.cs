@@ -5,7 +5,7 @@
 using System;
 using Elastic.Transport.Extensions;
 
-namespace Elastic.Transport
+namespace Elastic.Transport.Diagnostics.Auditing
 {
 	/// <summary>
 	/// An audit of the request made

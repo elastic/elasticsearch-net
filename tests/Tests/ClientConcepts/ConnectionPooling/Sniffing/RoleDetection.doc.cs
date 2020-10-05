@@ -21,7 +21,7 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using static Elasticsearch.Net.VirtualizedCluster.Rules.TimesHelper;
-using static Elastic.Transport.AuditEvent;
+using static Elastic.Transport.Diagnostics.Auditing.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {

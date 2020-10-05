@@ -2,11 +2,12 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
- using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
 using Elasticsearch.Net.VirtualizedCluster;
 using Elasticsearch.Net.VirtualizedCluster.Audit;
+using static Elastic.Transport.Diagnostics.Auditing.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Failover
 {
@@ -30,8 +31,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ AuditEvent.BadResponse, 9200 },
-					{ AuditEvent.HealthyResponse, 9201 },
+					{ BadResponse, 9200 },
+					{ HealthyResponse, 9201 },
 				}
 			);
 		}
@@ -54,8 +55,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ AuditEvent.BadResponse, 9200 },
-					{ AuditEvent.HealthyResponse, 9201 },
+					{ BadResponse, 9200 },
+					{ HealthyResponse, 9201 },
 				}
 			);
 		}
@@ -78,8 +79,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ AuditEvent.BadResponse, 9200 },
-					{ AuditEvent.HealthyResponse, 9201 },
+					{ BadResponse, 9200 },
+					{ HealthyResponse, 9201 },
 				}
 			);
 		}
@@ -102,8 +103,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ AuditEvent.BadResponse, 9200 },
-					{ AuditEvent.HealthyResponse, 9201 },
+					{ BadResponse, 9200 },
+					{ HealthyResponse, 9201 },
 				}
 			);
 		}
@@ -127,7 +128,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ AuditEvent.BadResponse, 9200 },
+					{ BadResponse, 9200 },
 				}
 			);
 		}

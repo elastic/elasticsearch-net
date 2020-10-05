@@ -5,9 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Elastic.Transport.Diagnostics;
 
-namespace Elastic.Transport
+namespace Elastic.Transport.Diagnostics.Auditing
 {
 	internal class Auditable : IDisposable
 	{

@@ -4,6 +4,7 @@
 
 using System;
 using System.Diagnostics;
+using Elastic.Transport.Diagnostics.Auditing;
 
 namespace Elastic.Transport.Diagnostics
 {
