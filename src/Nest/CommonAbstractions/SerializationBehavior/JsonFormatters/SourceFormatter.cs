@@ -19,7 +19,7 @@ namespace Nest
 		/// <summary>
 		/// If SourceSerializer exposes a formatter we can use it directly
 		/// </summary>
-		private static bool AttemptFastPath(IElasticsearchSerializer serializer, out IJsonFormatterResolver formatter)
+		private static bool AttemptFastPath(ITransportSerializer serializer, out IJsonFormatterResolver formatter)
 		{
 			formatter = null;
 			return serializer is IInternalSerializer s && s.TryGetJsonFormatter(out formatter);

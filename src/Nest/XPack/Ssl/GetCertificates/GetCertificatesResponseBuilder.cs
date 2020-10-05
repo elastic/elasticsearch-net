@@ -13,13 +13,13 @@ namespace Nest
 	{
 		public static GetCertificatesResponseBuilder Instance { get; } = new GetCertificatesResponseBuilder();
 
-		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream) =>
+		public override object DeserializeResponse(ITransportSerializer builtInSerializer, IApiCallDetails response, Stream stream) =>
 			response.Success
 				? new GetCertificatesResponse { Certificates = builtInSerializer.Deserialize<ClusterCertificateInformation[]>(stream) }
 				: new GetCertificatesResponse();
 
 		public override async Task<object> DeserializeResponseAsync(
-			IElasticsearchSerializer builtInSerializer,
+			ITransportSerializer builtInSerializer,
 			IApiCallDetails response,
 			Stream stream,
 			CancellationToken ctx = default

@@ -10,7 +10,7 @@ namespace Nest
 {
 	internal static class StatefulSerializerExtensions
 	{
-		public static DefaultHighLevelSerializer CreateStateful<T>(this IElasticsearchSerializer serializer, IJsonFormatter<T> formatter)
+		public static DefaultHighLevelSerializer CreateStateful<T>(this ITransportSerializer serializer, IJsonFormatter<T> formatter)
 		{
 			if (!(serializer is IInternalSerializer s) || !s.TryGetJsonFormatter(out var currentFormatterResolver))
 				throw new Exception($"Can not create a stateful serializer because {serializer.GetType()} does not yield a json formatter");

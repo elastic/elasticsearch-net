@@ -11,8 +11,8 @@ namespace Elasticsearch.Net
 	// TODO: Pass both request/response serializer and source serializer in 8.0
 	public abstract class CustomResponseBuilderBase
 	{
-		public abstract object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream);
+		public abstract object DeserializeResponse(ITransportSerializer builtInSerializer, IApiCallDetails response, Stream stream);
 
-		public abstract Task<object> DeserializeResponseAsync(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream, CancellationToken ctx = default);
+		public abstract Task<object> DeserializeResponseAsync(ITransportSerializer builtInSerializer, IApiCallDetails response, Stream stream, CancellationToken ctx = default);
 	}
 }

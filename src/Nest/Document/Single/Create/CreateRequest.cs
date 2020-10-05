@@ -19,7 +19,7 @@ namespace Nest
 	{
 		public TDocument Document { get; set; }
 
-		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
+		void IProxyRequest.WriteJson(ITransportSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Document, stream, formatting);
 
 		partial void DocumentFromPath(TDocument document) => Document = document;
@@ -29,7 +29,7 @@ namespace Nest
 	{
 		TDocument ICreateRequest<TDocument>.Document { get; set; }
 
-		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
+		void IProxyRequest.WriteJson(ITransportSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Self.Document, stream, formatting);
 
 		partial void DocumentFromPath(TDocument document) => Assign(document, (a, v) => a.Document = v);

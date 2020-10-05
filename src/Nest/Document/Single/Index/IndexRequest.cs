@@ -22,7 +22,7 @@ namespace Nest
 
 		protected override HttpMethod HttpMethod => GetHttpMethod(this);
 
-		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
+		void IProxyRequest.WriteJson(ITransportSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Document, stream, formatting);
 
 		internal static HttpMethod GetHttpMethod(IIndexRequest<TDocument> request) =>
@@ -36,7 +36,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => IndexRequest<TDocument>.GetHttpMethod(this);
 		TDocument IIndexRequest<TDocument>.Document { get; set; }
 
-		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
+		void IProxyRequest.WriteJson(ITransportSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Self.Document, stream, formatting);
 
 		partial void DocumentFromPath(TDocument document) => Assign(document, (a, v) => a.Document = v);

@@ -79,7 +79,7 @@ namespace Tests.Core.Serialization
 
 		public static SerializationTester DefaultWithJsonNetSerializer { get; } = new SerializationTester(TestClient.InMemoryWithJsonNetSerializer);
 
-		protected IElasticsearchSerializer Serializer => Client.ConnectionSettings.RequestResponseSerializer;
+		protected ITransportSerializer Serializer => Client.ConnectionSettings.RequestResponseSerializer;
 
 		public RoundTripResult<T> RoundTrips<T>(T @object, bool preserveNullInExpected = false)
 		{

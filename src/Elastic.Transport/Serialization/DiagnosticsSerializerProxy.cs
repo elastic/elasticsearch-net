@@ -38,13 +38,13 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// Wraps configured serializer so that we can emit diagnostics per configured serializer.
 	/// </summary>
-	public class DiagnosticsSerializerProxy : IElasticsearchSerializer
+	public class DiagnosticsSerializerProxy : ITransportSerializer
 	{
-		private readonly IElasticsearchSerializer _serializer;
+		private readonly ITransportSerializer _serializer;
 		private readonly SerializerRegistrationInformation _state;
 		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.Serializer.SourceName);
 
-		public DiagnosticsSerializerProxy(IElasticsearchSerializer serializer, string purpose = "request/response")
+		public DiagnosticsSerializerProxy(ITransportSerializer serializer, string purpose = "request/response")
 		{
 			_serializer = serializer;
 			_state = new SerializerRegistrationInformation(serializer.GetType(), purpose);

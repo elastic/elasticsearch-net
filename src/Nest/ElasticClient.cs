@@ -116,9 +116,9 @@ namespace Nest
 		public Inferrer Infer => Transport.Settings.Inferrer;
 
 		public IElasticLowLevelClient LowLevel { get; }
-		public IElasticsearchSerializer RequestResponseSerializer => Transport.Settings.RequestResponseSerializer;
+		public ITransportSerializer RequestResponseSerializer => Transport.Settings.RequestResponseSerializer;
 
-		public IElasticsearchSerializer SourceSerializer => Transport.Settings.SourceSerializer;
+		public ITransportSerializer SourceSerializer => Transport.Settings.SourceSerializer;
 
 		private ITransport<IConnectionSettingsValues> Transport { get; }
 

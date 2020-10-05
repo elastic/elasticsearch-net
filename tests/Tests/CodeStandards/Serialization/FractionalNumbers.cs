@@ -13,7 +13,7 @@ namespace Tests.CodeStandards.Serialization
 {
 	public class FractionalNumbers
 	{
-		private readonly IElasticsearchSerializer _serializer;
+		private readonly ITransportSerializer _serializer;
 
 		public FractionalNumbers()
 		{

@@ -28,7 +28,7 @@ namespace Tests.CommonOptions.Union
 	 */
 	public class Union
 	{
-		private IElasticsearchSerializer serializer = TestClient.DefaultInMemoryClient.RequestResponseSerializer;
+		private ITransportSerializer serializer = TestClient.DefaultInMemoryClient.RequestResponseSerializer;
 
 		/**
 		 * ==== Implicit conversion

@@ -4,13 +4,13 @@
 
 namespace Elasticsearch.Net.Extensions
 {
-	public static class ElasticsearchSerializerExtensions
+	public static class TransportSerializerExtensions
 	{
 		/// <summary>
 		/// Extension method that serializes an instance of <typeparamref name="T"/> to a byte array.
 		/// </summary>
 		public static byte[] SerializeToBytes<T>(
-			this IElasticsearchSerializer serializer,
+			this ITransportSerializer serializer,
 			T data,
 			SerializationFormatting formatting = SerializationFormatting.None) =>
 			SerializeToBytes(serializer, data, ConnectionConfiguration.DefaultMemoryStreamFactory, formatting);
@@ -23,7 +23,7 @@ namespace Elasticsearch.Net.Extensions
 		/// that yields memory streams backed by pooled byte arrays.
 		/// </param>
 		public static byte[] SerializeToBytes<T>(
-			this IElasticsearchSerializer serializer,
+			this ITransportSerializer serializer,
 			T data,
 			IMemoryStreamFactory memoryStreamFactory,
 			SerializationFormatting formatting = SerializationFormatting.None
@@ -41,7 +41,7 @@ namespace Elasticsearch.Net.Extensions
 		/// Extension method that serializes an instance of <typeparamref name="T"/> to a string.
 		/// </summary>
 		public static string SerializeToString<T>(
-			this IElasticsearchSerializer serializer,
+			this ITransportSerializer serializer,
 			T data,
 			SerializationFormatting formatting = SerializationFormatting.None) =>
 			SerializeToString(serializer, data, ConnectionConfiguration.DefaultMemoryStreamFactory, formatting);
@@ -54,7 +54,7 @@ namespace Elasticsearch.Net.Extensions
 		/// that yields memory streams backed by pooled byte arrays.
 		/// </param>
 		public static string SerializeToString<T>(
-			this IElasticsearchSerializer serializer,
+			this ITransportSerializer serializer,
 			T data,
 			IMemoryStreamFactory memoryStreamFactory,
 			SerializationFormatting formatting = SerializationFormatting.None

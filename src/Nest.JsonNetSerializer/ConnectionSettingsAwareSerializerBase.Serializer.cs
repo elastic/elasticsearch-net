@@ -13,11 +13,11 @@ namespace Nest.JsonNetSerializer
 {
 	public abstract partial class ConnectionSettingsAwareSerializerBase
 	{
-		protected ConnectionSettingsAwareSerializerBase(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+		protected ConnectionSettingsAwareSerializerBase(ITransportSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
 			: this(builtinSerializer, connectionSettings, null, null, null) { }
 
 		internal ConnectionSettingsAwareSerializerBase(
-			IElasticsearchSerializer builtinSerializer,
+			ITransportSerializer builtinSerializer,
 			IConnectionSettingsValues connectionSettings,
 			Func<JsonSerializerSettings> jsonSerializerSettingsFactory,
 			Action<ConnectionSettingsAwareContractResolver> modifyContractResolver,
@@ -39,7 +39,7 @@ namespace Nest.JsonNetSerializer
 			_collapsedSerializer = CreateSerializer(SerializationFormatting.None);
 		}
 
-		protected IElasticsearchSerializer BuiltinSerializer { get; }
+		protected ITransportSerializer BuiltinSerializer { get; }
 
 		protected IConnectionSettingsValues ConnectionSettings { get; }
 		protected IEnumerable<JsonConverter> ContractJsonConverters { get; }

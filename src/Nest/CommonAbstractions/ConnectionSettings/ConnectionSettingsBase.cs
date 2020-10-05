@@ -28,7 +28,7 @@ namespace Nest
 		/// documents.
 		/// By default, the internal serializer will be used to serializer all types.
 		/// </summary>
-		public delegate IElasticsearchSerializer SourceSerializerFactory(IElasticsearchSerializer builtIn, IConnectionSettingsValues values);
+		public delegate ITransportSerializer SourceSerializerFactory(ITransportSerializer builtIn, IConnectionSettingsValues values);
 
 		/// <summary>
 		/// Creates a new instance of connection settings, if <paramref name="uri"/> is not specified will default to connecting to http://localhost:9200
@@ -87,7 +87,7 @@ namespace Nest
 		private readonly IPropertyMappingProvider _propertyMappingProvider;
 		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
 		private readonly FluentDictionary<Type, string> _routeProperties = new FluentDictionary<Type, string>();
-		private readonly IElasticsearchSerializer _sourceSerializer;
+		private readonly ITransportSerializer _sourceSerializer;
 
 		private bool _defaultDisableAllInference;
 		private Func<string, string> _defaultFieldNameInferrer;
@@ -130,7 +130,7 @@ namespace Nest
 		IPropertyMappingProvider IConnectionSettingsValues.PropertyMappingProvider => _propertyMappingProvider;
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 		FluentDictionary<Type, string> IConnectionSettingsValues.RouteProperties => _routeProperties;
-		IElasticsearchSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
+		ITransportSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
 
 		/// <summary>
 		/// The default index to use for a request when no index has been explicitly specified

@@ -69,7 +69,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 *
 		 * Implementing `IElasticsearchSerializer` is technically enough to inject your own `SourceSerializer`
 		 */
-		public class VanillaSerializer : IElasticsearchSerializer
+		public class VanillaSerializer : ITransportSerializer
 		{
 			public T Deserialize<T>(Stream stream) => throw new NotImplementedException();
 
@@ -175,7 +175,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 */
 		public class MyFirstCustomJsonNetSerializer : ConnectionSettingsAwareSerializerBase
 		{
-			public MyFirstCustomJsonNetSerializer(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+			public MyFirstCustomJsonNetSerializer(ITransportSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
 				: base(builtinSerializer, connectionSettings) { }
 
 			protected override JsonSerializerSettings CreateJsonSerializerSettings() =>
@@ -287,7 +287,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 
 		public class MySecondCustomJsonNetSerializer : ConnectionSettingsAwareSerializerBase
 		{
-			public MySecondCustomJsonNetSerializer(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+			public MySecondCustomJsonNetSerializer(ITransportSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
 				: base(builtinSerializer, connectionSettings) { }
 
 			protected override JsonSerializerSettings CreateJsonSerializerSettings() =>

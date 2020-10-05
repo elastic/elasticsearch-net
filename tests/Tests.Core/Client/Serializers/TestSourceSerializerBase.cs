@@ -14,7 +14,7 @@ namespace Tests.Core.Client.Serializers
 {
 	public class TestSourceSerializerBase : ConnectionSettingsAwareSerializerBase
 	{
-		public TestSourceSerializerBase(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+		public TestSourceSerializerBase(ITransportSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
 			: base(builtinSerializer, connectionSettings) { }
 
 		protected override JsonSerializerSettings CreateJsonSerializerSettings() =>

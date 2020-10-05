@@ -114,7 +114,7 @@ namespace Nest.Utf8Json
 
 		public void WriteRaw(MemoryStream ms) => UnsafeMemory.WriteRaw(ref this, ms);
 
-		public void WriteSerialized<T>(T value, IElasticsearchSerializer serializer, IConnectionConfigurationValues settings,
+		public void WriteSerialized<T>(T value, ITransportSerializer serializer, IConnectionConfigurationValues settings,
 			SerializationFormatting formatting = SerializationFormatting.None
 		)
 		{

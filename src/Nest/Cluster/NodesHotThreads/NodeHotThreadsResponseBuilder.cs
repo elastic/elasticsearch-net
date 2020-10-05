@@ -53,7 +53,7 @@ namespace Nest
 			return new NodesHotThreadsResponse(info.ToList());
 		}
 
-		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
+		public override object DeserializeResponse(ITransportSerializer builtInSerializer, IApiCallDetails response, Stream stream)
 		{
 			if (!response.Success)
 				return new NodesHotThreadsResponse();
@@ -67,7 +67,7 @@ namespace Nest
 		}
 
 		public override async Task<object> DeserializeResponseAsync(
-			IElasticsearchSerializer builtInSerializer,
+			ITransportSerializer builtInSerializer,
 			IApiCallDetails response,
 			Stream stream,
 			CancellationToken ctx = default

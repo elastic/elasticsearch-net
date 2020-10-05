@@ -146,7 +146,7 @@ namespace Elasticsearch.Net
 		/// </summary>
 		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
 		/// <param name="serializer">A serializer implementation used to serialize requests and deserialize responses</param>
-		public ConnectionConfiguration(IConnectionPool connectionPool, IElasticsearchSerializer serializer)
+		public ConnectionConfiguration(IConnectionPool connectionPool, ITransportSerializer serializer)
 			: this(connectionPool, null, serializer) { }
 
 		/// <summary>
@@ -155,7 +155,7 @@ namespace Elasticsearch.Net
 		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
 		/// <param name="connection">An connection implementation that can make API requests</param>
 		/// <param name="serializer">A serializer implementation used to serialize requests and deserialize responses</param>
-		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
+		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, ITransportSerializer serializer)
 			: base(connectionPool, connection, serializer) { }
 
 	}
@@ -211,7 +211,7 @@ namespace Elasticsearch.Net
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
 		private Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
 
-		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer requestResponseSerializer)
+		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, ITransportSerializer requestResponseSerializer)
 		{
 			_connectionPool = connectionPool;
 			_connection = connection ?? new HttpConnection();
@@ -240,7 +240,7 @@ namespace Elasticsearch.Net
 
 		}
 
-		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
+		protected ITransportSerializer UseThisRequestResponseSerializer { get; set; }
 		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
 		ApiKeyAuthenticationCredentials IConnectionConfigurationValues.ApiKeyAuthenticationCredentials => _apiKeyAuthCredentials;
 		SemaphoreSlim IConnectionConfigurationValues.BootstrapLock => _semaphore;
@@ -271,7 +271,7 @@ namespace Elasticsearch.Net
 		SecureString IConnectionConfigurationValues.ProxyPassword => _proxyPassword;
 		string IConnectionConfigurationValues.ProxyUsername => _proxyUsername;
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
-		IElasticsearchSerializer IConnectionConfigurationValues.RequestResponseSerializer => UseThisRequestResponseSerializer;
+		ITransportSerializer IConnectionConfigurationValues.RequestResponseSerializer => UseThisRequestResponseSerializer;
 		TimeSpan IConnectionConfigurationValues.RequestTimeout => _requestTimeout;
 		TimeSpan IConnectionConfigurationValues.DnsRefreshTimeout => _dnsRefreshTimeout;
 

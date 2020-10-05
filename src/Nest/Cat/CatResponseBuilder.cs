@@ -14,7 +14,7 @@ namespace Nest
 	{
 		public static CatResponseBuilder<TCatRecord> Instance { get; } = new CatResponseBuilder<TCatRecord>();
 
-		public override object DeserializeResponse(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream)
+		public override object DeserializeResponse(ITransportSerializer builtInSerializer, IApiCallDetails response, Stream stream)
 		{
 			if (!response.Success || response.HttpStatusCode == 404)
 				return builtInSerializer.Deserialize<CatResponse<TCatRecord>>(stream);
@@ -25,7 +25,7 @@ namespace Nest
 			return catResponse;
 		}
 
-		public override async Task<object> DeserializeResponseAsync(IElasticsearchSerializer builtInSerializer, IApiCallDetails response, Stream stream, CancellationToken ctx = default)
+		public override async Task<object> DeserializeResponseAsync(ITransportSerializer builtInSerializer, IApiCallDetails response, Stream stream, CancellationToken ctx = default)
 		{
 			if (!response.Success || response.HttpStatusCode == 404)
 				return await builtInSerializer.DeserializeAsync<CatResponse<TCatRecord>>(stream, ctx).ConfigureAwait(false);
