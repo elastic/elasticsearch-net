@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public class PipelineException : Exception
 	{

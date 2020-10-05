@@ -6,10 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Elasticsearch.Net.Extensions;
-using static Elasticsearch.Net.ResponseStatics;
+using Elastic.Transport.Extensions;
+using static Elastic.Transport.ResponseStatics;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 
 	public class TransportException : Exception

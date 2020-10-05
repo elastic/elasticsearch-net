@@ -6,7 +6,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// Methods for working with <see cref="SecureString"/>

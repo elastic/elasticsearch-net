@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 // ReSharper disable InconsistentNaming
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public enum HttpMethod
 	{

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.NetworkInformation;
 
-namespace Elasticsearch.Net.Diagnostics
+namespace Elastic.Transport.Diagnostics
 {
 	/// <summary>
 	/// Gets statistics about TCP connections

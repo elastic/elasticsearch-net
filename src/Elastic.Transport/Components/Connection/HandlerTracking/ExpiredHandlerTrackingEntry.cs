@@ -10,7 +10,7 @@
 using System;
 using System.Net.Http;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// Thread-safety: This class is immutable

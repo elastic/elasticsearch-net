@@ -9,11 +9,11 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Diagnostics;
-using Elasticsearch.Net.Extensions;
-using static Elasticsearch.Net.AuditEvent;
+using Elastic.Transport.Diagnostics;
+using Elastic.Transport.Extensions;
+using static Elastic.Transport.AuditEvent;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public class RequestPipeline : IRequestPipeline
 	{

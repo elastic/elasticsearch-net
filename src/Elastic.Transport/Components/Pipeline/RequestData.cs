@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public class RequestData
 	{

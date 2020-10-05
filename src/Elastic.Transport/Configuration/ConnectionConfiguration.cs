@@ -18,9 +18,9 @@ using System.Reflection;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// Allows you to control how <see cref="ITransport{TConnectionSettings}"/> behaves and where/how it connects to Elastic Stack products
@@ -66,7 +66,7 @@ namespace Elasticsearch.Net
 
 		//public static IMemoryStreamFactory Default { get; } = RecyclableMemoryStreamFactory.Default;
 		// ReSharper disable once RedundantNameQualifier
-		public static IMemoryStreamFactory DefaultMemoryStreamFactory { get; } = Elasticsearch.Net.MemoryStreamFactory.Default;
+		public static IMemoryStreamFactory DefaultMemoryStreamFactory { get; } = Elastic.Transport.MemoryStreamFactory.Default;
 
 		/// <summary>
 		/// The default ping timeout. Defaults to 2 seconds

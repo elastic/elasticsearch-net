@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Elasticsearch.Net.Diagnostics
+namespace Elastic.Transport.Diagnostics
 {
 	public abstract class TypedDiagnosticObserverBase<TOnNext> : IObserver<KeyValuePair<string, object>>
 	{

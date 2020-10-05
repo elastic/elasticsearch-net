@@ -4,7 +4,7 @@
 
 using System.IO;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// A factory for creating memory streams using instances of <see cref="MemoryStream" />

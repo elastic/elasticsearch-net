@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Elasticsearch.Net.Extensions
+namespace Elastic.Transport.Extensions
 {
 	internal static class Fluent
 	{

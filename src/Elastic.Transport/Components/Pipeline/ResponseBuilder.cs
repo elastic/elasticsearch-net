@@ -8,9 +8,9 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public static class ResponseBuilder
 	{

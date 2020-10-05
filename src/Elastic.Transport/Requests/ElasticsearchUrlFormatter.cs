@@ -5,9 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// A formatter that can utilize <see cref="IConnectionConfigurationValues" /> to resolve <see cref="IUrlParameter" />'s passed
@@ -28,7 +28,7 @@ namespace Elasticsearch.Net
 			var value = CreateString(arg, _settings);
 			if (value.IsNullOrEmpty() && !format.IsNullOrEmpty())
 				throw new ArgumentException($"The parameter: {format} to the url is null or empty");
-			
+
 			return value.IsNullOrEmpty() ? string.Empty : Uri.EscapeDataString(value);
 		}
 

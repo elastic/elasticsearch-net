@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Elasticsearch.Net.Diagnostics
+namespace Elastic.Transport.Diagnostics
 {
 	/// <summary> Provides a typed listener to the events that <see cref="HttpConnection"/> emits </summary>
 	public class HttpConnectionDiagnosticObserver : TypedDiagnosticObserverBase<RequestData, int?>

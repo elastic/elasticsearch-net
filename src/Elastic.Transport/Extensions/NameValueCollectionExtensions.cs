@@ -9,7 +9,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
-namespace Elasticsearch.Net.Extensions
+namespace Elastic.Transport.Extensions
 {
 	internal static class NameValueCollectionExtensions
 	{

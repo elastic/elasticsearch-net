@@ -6,7 +6,7 @@ using System;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// A collection of handy baked in server certificate validation callbacks

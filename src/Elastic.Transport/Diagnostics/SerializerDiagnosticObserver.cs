@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Elasticsearch.Net.Diagnostics
+namespace Elastic.Transport.Diagnostics
 {
 	/// <summary> Provides a typed listener any time an <see cref="ITransportSerializer"/> does a write or read</summary>
 	public class SerializerDiagnosticObserver : TypedDiagnosticObserverBase<SerializerRegistrationInformation>

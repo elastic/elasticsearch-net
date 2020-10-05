@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Elasticsearch.Net.Diagnostics
+namespace Elastic.Transport.Diagnostics
 {
 	/// <summary> Provides a typed listener to  actions that <see cref="RequestPipeline"/> takes e.g sniff, ping, or making an API call </summary>
 	public class RequestPipelineDiagnosticObserver : TypedDiagnosticObserverBase<RequestData, IApiCallDetails>

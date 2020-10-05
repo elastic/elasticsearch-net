@@ -7,13 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Extensions;
+using Elastic.Transport.Extensions;
 
 #if !DOTNETCORE
 using System.Net;
 #endif
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
 		where TConnectionSettings : class, IConnectionConfigurationValues
@@ -45,7 +45,7 @@ namespace Elasticsearch.Net
 
 			Settings = configurationValues;
 			PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
-			DateTimeProvider = dateTimeProvider ?? Net.DateTimeProvider.Default;
+			DateTimeProvider = dateTimeProvider ?? Elastic.Transport.DateTimeProvider.Default;
 			MemoryStreamFactory = memoryStreamFactory ?? configurationValues.MemoryStreamFactory;
 		}
 

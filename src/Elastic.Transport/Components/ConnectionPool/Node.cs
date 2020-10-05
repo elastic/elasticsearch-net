@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	public class Node : IEquatable<Node>
 	{

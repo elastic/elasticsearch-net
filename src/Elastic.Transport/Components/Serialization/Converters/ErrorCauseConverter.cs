@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	internal class ErrorCauseConverter : ErrorCauseConverter<ErrorCause> { }
 

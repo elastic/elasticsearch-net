@@ -6,7 +6,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	// TODO: Pass both request/response serializer and source serializer in 8.0
 	public abstract class CustomResponseBuilderBase

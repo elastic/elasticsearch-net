@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
-using Elasticsearch.Net.Diagnostics;
+using Elastic.Transport.Diagnostics;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	/// <summary>
 	/// Details about the API call

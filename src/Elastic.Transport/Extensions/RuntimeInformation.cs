@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Elasticsearch.Net
+namespace Elastic.Transport
 {
 	internal static class RuntimeInformation
 	{
