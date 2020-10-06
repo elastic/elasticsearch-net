@@ -30,7 +30,4 @@
       <DependentUpon>Api\RequestParameters\RequestParameters.cs</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Responses" />
-  </ItemGroup>
 </Project>

@@ -1,4 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Elastic.Transport</PackageId>
+    <Title>Elastic.Transport</Title>
+    <PackageTags>elastic;stack;transport;resiliency;</PackageTags>
+    <Description>
+      Client connectivity bits, exposes a potentially cluster aware request pipeline that can be resilient to nodes dropping out of rotation.
+      This package is heavily optimized for the Elastic (elastic.co) product suite and Elastic Cloud (cloud.elastic.co) SAAS offering. 
+    </Description>
+  </PropertyGroup>
 
   <PropertyGroup>
     <IsPackable>true</IsPackable>
@@ -12,9 +21,6 @@
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.5.1" />
     <PackageReference Include="System.Text.Json" Version="4.7.1" />
 
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components" />
   </ItemGroup>
 
 </Project>
