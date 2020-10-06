@@ -52,7 +52,7 @@ include::client-concepts/low-level/lifetimes.asciidoc[]
 
 There are three categories of exceptions that may be thrown:
 
-`ElasticsearchClientException`::
+`TransportException`::
 
 These are known exceptions, either an exception that occurred in the request pipeline
 (such as max retries or timeout reached, bad authentication, etc.) or Elasticsearch itself returned an error (could
@@ -60,10 +60,10 @@ not parse the request, bad query, missing field, etc.). If it is an Elasticsearc
 on the response will contain the the actual error that was returned.  The inner exception will always contain the
 root causing exception.
 
-`UnexpectedElasticsearchClientException`::
+`UnexpectedTransportException`::
 
 These are unknown exceptions, for instance a response from Elasticsearch not
-properly deserialized.  These are sometimes bugs and {github}/issues[should be reported]. This exception also inherits from `ElasticsearchClientException`
+properly deserialized.  These are sometimes bugs and {github}/issues[should be reported]. This exception also inherits from `TransportException`
 so an additional catch block isn't necessary, but can be helpful in distinguishing between the two.
 
 Development time exceptions::

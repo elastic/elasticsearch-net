@@ -59,7 +59,7 @@ Implementing `IElasticsearchSerializer` is technically enough to inject your own
 
 [source,csharp]
 ----
-public class VanillaSerializer : IElasticsearchSerializer
+public class VanillaSerializer : ITransportSerializer
 {
     public T Deserialize<T>(Stream stream) => throw new NotImplementedException();
 
@@ -166,7 +166,7 @@ and override the `CreateJsonSerializerSettings` and `ModifyContractResolver` met
 ----
 public class MyFirstCustomJsonNetSerializer : ConnectionSettingsAwareSerializerBase
 {
-    public MyFirstCustomJsonNetSerializer(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+    public MyFirstCustomJsonNetSerializer(ITransportSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
         : base(builtinSerializer, connectionSettings) { }
 
     protected override JsonSerializerSettings CreateJsonSerializerSettings() =>
@@ -285,7 +285,7 @@ public class MySecondCustomContractResolver : ConnectionSettingsAwareContractRes
 
 public class MySecondCustomJsonNetSerializer : ConnectionSettingsAwareSerializerBase
 {
-    public MySecondCustomJsonNetSerializer(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+    public MySecondCustomJsonNetSerializer(ITransportSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
         : base(builtinSerializer, connectionSettings) { }
 
     protected override JsonSerializerSettings CreateJsonSerializerSettings() =>

@@ -286,7 +286,7 @@ API call fails because the node predicate filters out all nodes as targets on wh
 
 [source,csharp]
 ----
-await audit.TraceUnexpectedElasticsearchException(new ClientCall
+await audit.TraceUnexpectedTransportException(new ClientCall
 {
     { SniffOnStartup }, <1>
     { SniffSuccess }, <2>

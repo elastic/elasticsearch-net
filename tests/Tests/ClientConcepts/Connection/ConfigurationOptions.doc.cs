@@ -26,7 +26,7 @@ namespace Tests.ClientConcepts.Connection
 		 * `ConnectionSettings` derives from `ConnectionConfiguration`, these options are available for both
 		 * the low level and high level client:
 		 *
-		 * :xml-docs: Elasticsearch.Net:ConnectionConfiguration`1
+		 * :xml-docs: Elastic.Transport:ConnectionConfiguration`1
 		 *
 		 * ==== ConnectionConfiguration with ElasticLowLevelClient
 		 *
