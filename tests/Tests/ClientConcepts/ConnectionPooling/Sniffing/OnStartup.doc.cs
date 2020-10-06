@@ -30,7 +30,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			* Here we create a 10 node cluster that uses a <<sniffing-connection-pool,Sniffing connection pool>>, setting
 			* sniff to fail on all nodes _*except*_ 9202
 			*/
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always))
@@ -70,7 +70,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task ASniffOnStartupHappensOnce()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always))
@@ -108,11 +108,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffOnStartUpTakesNewClusterState()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always,
-					VirtualClusterWith.Nodes(8, startFrom: 9204)
+					ElasticsearchVirtualCluster.Nodes(8, startFrom: 9204)
 						.Ping(c=>c.SucceedAlways())
 						.ClientCalls(c=>c.SucceedAlways())
 
@@ -137,7 +137,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffTriesAllNodes()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9209).Succeeds(Always))
@@ -171,7 +171,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffPrefersMasterNodes()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(new[] {
 					new Node(new Uri("http://localhost:9200")) { MasterEligible = false },
 					new Node(new Uri("http://localhost:9201")) { MasterEligible = false },
@@ -198,7 +198,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffPrefersMasterNodesButStillFailsOver()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(new[] {
 					new Node(new Uri("http://localhost:9200")) { MasterEligible = true },
 					new Node(new Uri("http://localhost:9201")) { MasterEligible = true },

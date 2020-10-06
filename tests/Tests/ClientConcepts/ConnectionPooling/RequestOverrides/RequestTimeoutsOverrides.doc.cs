@@ -28,7 +28,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 			* Each call on a node takes 10 seconds. So we can only try this call on 2 nodes
 			* before the max request time out kills the client call.
 			*/
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(10)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -77,7 +77,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 			* Each call on a node takes 10 seconds. So we can only try this call on 2 nodes
 			* before the max request time out kills the client call.
 			*/
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.Ping(p => p.SucceedAlways().Takes(TimeSpan.FromSeconds(20)))
 				.ClientCalls(r => r.SucceedAlways())

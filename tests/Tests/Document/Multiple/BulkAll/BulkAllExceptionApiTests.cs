@@ -66,7 +66,7 @@ namespace Tests.Document.Multiple.BulkAll
 
 		[U] public void Completes()
 		{
-			var cluster = VirtualClusterWith.Nodes(2)
+			var cluster = ElasticsearchVirtualCluster.Nodes(2)
 				.ClientCalls(c => c.FailAlways())
 				.StaticConnectionPool()
 				.AllDefaults();

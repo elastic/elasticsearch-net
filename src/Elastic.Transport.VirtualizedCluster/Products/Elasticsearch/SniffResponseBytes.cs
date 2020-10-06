@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Elastic.Transport.VirtualizedCluster.MockResponses
+namespace Elastic.Transport.VirtualizedCluster.Products.Elasticsearch
 {
 	public static class SniffResponseBytes
 	{
