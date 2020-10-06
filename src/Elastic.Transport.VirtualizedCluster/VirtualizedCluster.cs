@@ -15,7 +15,6 @@ namespace Elastic.Transport.VirtualizedCluster
 		private readonly FixedPipelineFactory _fixedRequestPipeline;
 		private readonly TestableDateTimeProvider _dateTimeProvider;
 		private readonly ConnectionConfiguration _settings;
-		private readonly IMockProductRegistration _productRegistration;
 
 		private Func<ITransport<IConnectionConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<ITransportResponse>> _asyncCall;
 		private Func<ITransport<IConnectionConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, ITransportResponse> _syncCall;
@@ -26,8 +25,7 @@ namespace Elastic.Transport.VirtualizedCluster
 		{
 			_dateTimeProvider = dateTimeProvider;
 			_settings = settings;
-			_productRegistration = productRegistration;
-			_fixedRequestPipeline = new FixedPipelineFactory(settings, _dateTimeProvider, _productRegistration);
+			_fixedRequestPipeline = new FixedPipelineFactory(settings, _dateTimeProvider, productRegistration);
 
 			_syncCall = (t, r) => t.Request<VirtualResponse>(
 				HttpMethod.GET, "/",

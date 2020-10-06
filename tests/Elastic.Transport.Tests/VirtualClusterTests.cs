@@ -4,8 +4,6 @@
 
 using System.Linq;
 using System.Threading.Tasks;
-using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elastic.Transport;
 using Elastic.Transport.VirtualizedCluster;
 using Elastic.Transport.VirtualizedCluster.Audit;
 using Elastic.Transport.VirtualizedCluster.Rules;
@@ -13,11 +11,11 @@ using FluentAssertions;
 using Xunit;
 using static Elastic.Transport.Diagnostics.Auditing.AuditEvent;
 
-namespace Tests.ClientConcepts
+namespace Elastic.Transport.Tests
 {
 	public class VirtualClusterTests
 	{
-		[U] public async Task ThrowsExceptionWithNoRules()
+		[Fact] public async Task ThrowsExceptionWithNoRules()
 		{
 			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(1)
@@ -30,7 +28,7 @@ namespace Tests.ClientConcepts
 			e.Message.Should().Contain("No ClientCalls defined for the current VirtualCluster, so we do not know how to respond");
 		}
 
-		[U] public async Task ThrowsExceptionAfterDepleedingRules()
+		[Fact] public async Task ThrowsExceptionAfterDepleedingRules()
 		{
 			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(1)
@@ -55,7 +53,7 @@ namespace Tests.ClientConcepts
 			e.Message.Should().Contain("No global or port specific ClientCalls rule (9200) matches any longer after 2 calls in to the cluster");
 		}
 
-		[U] public async Task AGlobalRuleStaysValidForever()
+		[Fact] public async Task AGlobalRuleStaysValidForever()
 		{
 			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(1)
@@ -72,7 +70,7 @@ namespace Tests.ClientConcepts
 
 		}
 
-		[U] public async Task RulesAreIgnoredAfterBeingExecuted()
+		[Fact] public async Task RulesAreIgnoredAfterBeingExecuted()
 		{
 			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(1)
