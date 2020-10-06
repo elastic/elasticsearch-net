@@ -6,15 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elastic.Transport;
 using FluentAssertions;
+using Xunit;
 
-namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
+namespace Elastic.Transport.Tests
 {
 	public class VolatileUpdates
 	{
-		protected int NumberOfNodes = 10;
+		private readonly int _numberOfNodes = 10;
 		private readonly Random _random = new Random();
 
 		private readonly List<Node> _update = Enumerable.Range(9200, 10)
@@ -22,9 +21,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			.Select(u => new Node(u))
 			.ToList();
 
-		[U] public void SniffingPoolWithstandsConcurrentReadAndWrites()
+		[Fact] public void SniffingPoolWithstandsConcurrentReadAndWrites()
 		{
-			var uris = Enumerable.Range(9200, NumberOfNodes).Select(p => new Uri("http://localhost:" + p));
+			var uris = Enumerable.Range(9200, _numberOfNodes).Select(p => new Uri("http://localhost:" + p));
 			var sniffingPool = new SniffingConnectionPool(uris, false);
 
 			Action callSniffing = () => AssertCreateView(sniffingPool);
@@ -32,9 +31,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			callSniffing.Should().NotThrow();
 		}
 
-		[U] public void StaticPoolWithstandsConcurrentReadAndWrites()
+		[Fact] public void StaticPoolWithstandsConcurrentReadAndWrites()
 		{
-			var uris = Enumerable.Range(9200, NumberOfNodes).Select(p => new Uri("http://localhost:" + p));
+			var uris = Enumerable.Range(9200, _numberOfNodes).Select(p => new Uri("http://localhost:" + p));
 			var staticPool = new StaticConnectionPool(uris, false);
 
 			Action callStatic = () => AssertCreateView(staticPool);
@@ -42,11 +41,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			callStatic.Should().NotThrow();
 		}
 
-		// hide
 		private void AssertCreateView(IConnectionPool pool)
 		{
-			/**
-			*/
 			var threads = Enumerable.Range(0, 50)
 				.Select(i => CreateReadAndUpdateThread(pool))
 				.ToList();
@@ -55,8 +51,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			foreach (var t in threads) t.Join();
 		}
 
-		//hide
-		public Thread CreateReadAndUpdateThread(IConnectionPool pool) => new Thread(() =>
+		private Thread CreateReadAndUpdateThread(IConnectionPool pool) => new Thread(() =>
 		{
 			for (var i = 0; i < 1000; i++)
 			{
@@ -67,7 +62,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			}
 		});
 
-		//hide
 		private IEnumerable<int> CallGetNext(IConnectionPool pool)
 		{
 			foreach (var n in pool.CreateView()) yield return n.Uri.Port;
