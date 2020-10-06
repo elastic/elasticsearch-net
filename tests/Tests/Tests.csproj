@@ -11,9 +11,6 @@
   <ItemGroup Condition="'$(TestPackageVersion)'!=''">
     <PackageReference Include="Elasticsearch.Net.VirtualizedCluster" Version="$(TestPackageVersion)" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TestPackageVersion)'==''">
-    <ProjectReference Include="$(SolutionRoot)\src\Elasticsearch.Net.VirtualizedCluster\Elasticsearch.Net.VirtualizedCluster.csproj" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj" />
     <PackageReference Include="FSharp.Core" Version="4.7.0" />
@@ -32,6 +29,7 @@
     <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />
     <PackageReference Include="coverlet.collector" Version="1.1.0" />
     <PackageReference Include="Ben.Demystifier" Version="0.1.4" />
+    <ProjectReference Include="..\..\src\Elastic.Transport.VirtualizedCluster\Elastic.Transport.VirtualizedCluster.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Index\Attachment_Test_Document.pdf" />

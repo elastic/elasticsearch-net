@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Elasticsearch.Net.VirtualizedCluster.Rules
+namespace Elastic.Transport.VirtualizedCluster.Rules
 {
 	/// <summary>
 	/// Represents the union of two types, <typeparamref name="TFirst" /> and <typeparamref name="TSecond" />.

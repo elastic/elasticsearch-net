@@ -4,9 +4,8 @@
 
  using System;
  using System.Threading;
- using Elastic.Transport;
 
-namespace Elasticsearch.Net.VirtualizedCluster.Rules
+namespace Elastic.Transport.VirtualizedCluster.Rules
 {
 	public interface IRule
 	{

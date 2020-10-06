@@ -5,9 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elastic.Transport;
 
-namespace Elasticsearch.Net.VirtualizedCluster
+namespace Elastic.Transport.VirtualizedCluster
 {
 	public static class VirtualClusterWith
 	{

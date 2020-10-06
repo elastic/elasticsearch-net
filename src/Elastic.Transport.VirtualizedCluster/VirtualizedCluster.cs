@@ -5,19 +5,19 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elastic.Transport;
 using Elastic.Transport.Products;
-using Elasticsearch.Net.VirtualizedCluster.Providers;
+using Elastic.Transport.VirtualizedCluster.Providers;
 
-namespace Elasticsearch.Net.VirtualizedCluster
+namespace Elastic.Transport.VirtualizedCluster
 {
 	public class VirtualizedCluster
 	{
 		private readonly FixedPipelineFactory _fixedRequestPipeline;
 		private readonly TestableDateTimeProvider _dateTimeProvider;
 		private readonly ConnectionConfiguration _settings;
-		private Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<ITransportResponse>> _asyncCall;
-		private Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, ITransportResponse> _syncCall;
+
+		private Func<ITransport<IConnectionConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<ITransportResponse>> _asyncCall;
+		private Func<ITransport<IConnectionConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, ITransportResponse> _syncCall;
 
 		private class VirtualResponse : TransportResponseBase { }
 
@@ -28,17 +28,23 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			//TODO this assumes Elasticsearch as product
 			_fixedRequestPipeline = new FixedPipelineFactory(settings, _dateTimeProvider, ElasticsearchProductRegistration.Default);
 
-			_syncCall = (c, r) => c.Search<VirtualResponse>(PostData.Serializable(new {}), new SearchRequestParameters
+			_syncCall = (t, r) => t.Request<VirtualResponse>(
+				HttpMethod.GET, "/",
+				PostData.Serializable(new {}), new RequestParameters(HttpMethod.GET, supportsBody: false)
 			{
 					RequestConfiguration = r?.Invoke(new RequestConfigurationDescriptor(null))
 			});
-			_asyncCall = async (c, r) =>
+			_asyncCall = async (t, r) =>
 			{
-				var res = await c.SearchAsync<VirtualResponse>
+				var res = await t.RequestAsync<VirtualResponse>
 				(
+					HttpMethod.GET, "/",
+					CancellationToken.None,
 					PostData.Serializable(new { }),
-					new SearchRequestParameters { RequestConfiguration = r?.Invoke(new RequestConfigurationDescriptor(null)) },
-					CancellationToken.None
+					new RequestParameters(HttpMethod.GET, supportsBody: false)
+					{
+						RequestConfiguration = r?.Invoke(new RequestConfigurationDescriptor(null))
+					}
 				).ConfigureAwait(false);
 				return (ITransportResponse)res;
 			};
@@ -46,11 +52,11 @@ namespace Elasticsearch.Net.VirtualizedCluster
 
 		public VirtualClusterConnection Connection => Client.Settings.Connection as VirtualClusterConnection;
 		public IConnectionPool ConnectionPool => Client.Settings.ConnectionPool;
-		public ElasticLowLevelClient Client => _fixedRequestPipeline?.Client;
+		public ITransport<IConnectionConfigurationValues> Client => _fixedRequestPipeline?.Transport;
 
-		public VirtualizedCluster ClientProxiesTo(
-			Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, ITransportResponse> sync,
-			Func<IElasticLowLevelClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<ITransportResponse>> async
+		public VirtualizedCluster TransportProxiesTo(
+			Func<ITransport<IConnectionConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, ITransportResponse> sync,
+			Func<ITransport<IConnectionConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<ITransportResponse>> async
 		)
 		{
 			_syncCall = sync;

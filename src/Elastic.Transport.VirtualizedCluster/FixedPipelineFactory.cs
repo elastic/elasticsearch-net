@@ -2,10 +2,9 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using Elastic.Transport;
 using Elastic.Transport.Products;
 
-namespace Elasticsearch.Net.VirtualizedCluster
+namespace Elastic.Transport.VirtualizedCluster
 {
 	public class FixedPipelineFactory : IRequestPipelineFactory
 	{
@@ -15,23 +14,21 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			MemoryStreamFactory = ConnectionConfiguration.DefaultMemoryStreamFactory;
 
 			Settings = connectionSettings;
-			Pipeline = Create(Settings, DateTimeProvider, MemoryStreamFactory, new SearchRequestParameters(), productRegistration);
+			Pipeline = Create(Settings, DateTimeProvider, MemoryStreamFactory, new RequestParameters(HttpMethod.GET, supportsBody: false), productRegistration);
+			Transport = new Transport<IConnectionConfigurationValues>(Settings, this, DateTimeProvider, MemoryStreamFactory, ElasticsearchProductRegistration.Default);
 		}
-
-		public ElasticLowLevelClient Client => new ElasticLowLevelClient(Transport);
 
 		public IRequestPipeline Pipeline { get; }
 
 		private IDateTimeProvider DateTimeProvider { get; }
 		private IMemoryStreamFactory MemoryStreamFactory { get; }
 		private IConnectionConfigurationValues Settings { get; }
+		public ITransport<IConnectionConfigurationValues> Transport { get; }
 
-		private Transport<IConnectionConfigurationValues> Transport =>
-			new Transport<IConnectionConfigurationValues>(Settings, this, DateTimeProvider, MemoryStreamFactory, ElasticsearchProductRegistration.Default);
 
 		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider,
 			IMemoryStreamFactory memoryStreamFactory, IRequestParameters requestParameters, IProductRegistration productRegistration
 		) =>
-			new RequestPipeline(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters ?? new SearchRequestParameters(), productRegistration);
+			new RequestPipeline(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters ?? new RequestParameters(HttpMethod.GET, supportsBody: false), productRegistration);
 	}
 }

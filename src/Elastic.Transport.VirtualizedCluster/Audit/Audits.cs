@@ -4,10 +4,9 @@
 
 using System;
 using System.Collections.Generic;
-using Elastic.Transport;
 using Elastic.Transport.Diagnostics.Auditing;
 
-namespace Elasticsearch.Net.VirtualizedCluster.Audit
+namespace Elastic.Transport.VirtualizedCluster.Audit
 {
 	public class CallTraceState
 	{

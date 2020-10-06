@@ -65,7 +65,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGenerator", "src\ApiGene
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocGenerator", "src\DocGenerator\DocGenerator.csproj", "{AB8A08CC-FCA5-49AF-901A-9120DAAA11D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.VirtualizedCluster", "src\Elasticsearch.Net.VirtualizedCluster\Elasticsearch.Net.VirtualizedCluster.csproj", "{CFE97627-8DD3-470B-B7CF-78B62E1D305D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elastic.Transport.VirtualizedCluster", "src\Elastic.Transport.VirtualizedCluster\Elastic.Transport.VirtualizedCluster.csproj", "{CFE97627-8DD3-470B-B7CF-78B62E1D305D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamplesGenerator", "src\ExamplesGenerator\ExamplesGenerator.csproj", "{1B9CCE9F-10CE-410A-BF9B-80935F3710A7}"
 EndProject
