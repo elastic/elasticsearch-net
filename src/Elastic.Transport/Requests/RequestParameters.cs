@@ -11,6 +11,7 @@ namespace Elastic.Transport
 
 	public class RequestParameters : RequestParameters<RequestParameters>
 	{
+		//TODO these properties have nothing to do with request parameters
 		public RequestParameters(HttpMethod method, bool supportsBody)
 		{
 			DefaultHttpMethod = method;

@@ -11,8 +11,8 @@ using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
 using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.VirtualizedCluster;
-using Elasticsearch.Net.VirtualizedCluster.Audit;
+using Elastic.Transport.VirtualizedCluster;
+using Elastic.Transport.VirtualizedCluster.Audit;
 using FluentAssertions;
 using Nest;
 using Tests.Domain;
@@ -185,10 +185,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				.ClientCalls(r => r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response))
 				.StaticConnectionPool()
 				.Settings(s => s.DisableDirectStreaming().SkipDeserializationForStatusCodes(401))
-				.ClientProxiesTo(
-					(c, r) => c.Get<GetResponse<Project>>("default", "1"),
-					async (c, r) => await c.GetAsync<GetResponse<Project>>("default-index", "1") as IResponse
-				)
 			);
 
 			audit = await audit.TraceElasticsearchException(

@@ -7,11 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Elastic.Transport;
 using Elastic.Transport.Extensions;
-using Elasticsearch.Net.VirtualizedCluster.Extensions;
+using Elastic.Transport.VirtualizedCluster.Extensions;
 
-namespace Elasticsearch.Net.VirtualizedCluster.Audit
+namespace Elastic.Transport.VirtualizedCluster.Audit
 {
 	public class Auditor
 	{
@@ -191,8 +190,8 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			callTrace.AssertResponse?.Invoke(Response);
 			callTrace.AssertResponse?.Invoke(ResponseAsync);
 
-			callTrace?.AssertPoolAfterCall?.Invoke(_cluster.ConnectionPool);
-			callTrace?.AssertPoolAfterCall?.Invoke(_clusterAsync.ConnectionPool);
+			callTrace.AssertPoolAfterCall?.Invoke(_cluster.ConnectionPool);
+			callTrace.AssertPoolAfterCall?.Invoke(_clusterAsync.ConnectionPool);
 			return new Auditor(_cluster, _clusterAsync);
 		}
 

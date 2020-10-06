@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Elasticsearch.Net.VirtualizedCluster.Rules
+namespace Elastic.Transport.VirtualizedCluster.Rules
 {
 	public static class TimesHelper
 	{

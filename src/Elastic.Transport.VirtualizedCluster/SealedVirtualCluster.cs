@@ -3,10 +3,9 @@
 // See the LICENSE file in the project root for more information
 
 using System;
-using Elastic.Transport;
-using Elasticsearch.Net.VirtualizedCluster.Providers;
+using Elastic.Transport.VirtualizedCluster.Providers;
 
-namespace Elasticsearch.Net.VirtualizedCluster
+namespace Elastic.Transport.VirtualizedCluster
 {
 	public class SealedVirtualCluster
 	{
