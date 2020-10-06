@@ -54,10 +54,10 @@ var client = FixedResponseClient.Create( <1>
         .OnRequestCompleted(r => counter++)
 );
 
-Assert.Throws<ElasticsearchClientException>(() => client.RootNodeInfo()); <3>
+Assert.Throws<TransportException>(() => client.RootNodeInfo()); <3>
 counter.Should().Be(1);
 
-await Assert.ThrowsAsync<ElasticsearchClientException>(async () => await client.RootNodeInfoAsync());
+await Assert.ThrowsAsync<TransportException>(async () => await client.RootNodeInfoAsync());
 counter.Should().Be(2);
 ----
 <1> Configure a client with a connection that **always returns a HTTP 500 response

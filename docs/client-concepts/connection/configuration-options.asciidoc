@@ -60,7 +60,7 @@ Disables the automatic detection of a proxy
 
 `DisableDirectStreaming`::
 
-Ensures the response bytes are always available on the `ElasticsearchResponse<T>`
+Ensures the response bytes are always available on the `ITransportResponse`
 +
 IMPORTANT: Depending on the registered serializer, this may cause the response to be buffered in memory first, potentially affecting performance.
 
@@ -182,7 +182,7 @@ Whether the request should be sent with chunked Transfer-Encoding. Default is `f
 
 The user agent string to send with requests. Useful for debugging purposes to understand client and framework versions that initiate requests to Elasticsearch
 
-:xml-docs: Elasticsearch.Net:ConnectionConfiguration`1
+:xml-docs: Elastic.Transport:ConnectionConfiguration`1
 
 ==== ConnectionConfiguration with ElasticLowLevelClient
 

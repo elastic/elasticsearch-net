@@ -30,8 +30,8 @@ var audit = new Auditor(() => VirtualClusterWith
 
 audit = await audit.TraceCall(
     new ClientCall {
-        { AuditEvent.BadResponse, 9200 },
-        { AuditEvent.HealthyResponse, 9201 },
+        { BadResponse, 9200 },
+        { HealthyResponse, 9201 },
     }
 );
 ----
@@ -53,8 +53,8 @@ var audit = new Auditor(() => VirtualClusterWith
 
 audit = await audit.TraceCall(
     new ClientCall {
-        { AuditEvent.BadResponse, 9200 },
-        { AuditEvent.HealthyResponse, 9201 },
+        { BadResponse, 9200 },
+        { HealthyResponse, 9201 },
     }
 );
 ----
@@ -76,8 +76,8 @@ var audit = new Auditor(() => VirtualClusterWith
 
 audit = await audit.TraceCall(
     new ClientCall {
-        { AuditEvent.BadResponse, 9200 },
-        { AuditEvent.HealthyResponse, 9201 },
+        { BadResponse, 9200 },
+        { HealthyResponse, 9201 },
     }
 );
 ----
@@ -99,8 +99,8 @@ var audit = new Auditor(() => VirtualClusterWith
 
 audit = await audit.TraceCall(
     new ClientCall {
-        { AuditEvent.BadResponse, 9200 },
-        { AuditEvent.HealthyResponse, 9201 },
+        { BadResponse, 9200 },
+        { HealthyResponse, 9201 },
     }
 );
 ----
@@ -122,7 +122,7 @@ var audit = new Auditor(() => VirtualClusterWith
 
 audit = await audit.TraceCall(
     new ClientCall {
-        { AuditEvent.BadResponse, 9200 },
+        { BadResponse, 9200 },
     }
 );
 ----

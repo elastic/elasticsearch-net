@@ -16,7 +16,7 @@ please modify the original csharp file found at the link and submit the PR with 
 === Unexpected exceptions
 
 When a client call throws an exception that the `IConnection` cannot handle, the exception will bubble
-out of the client as an `UnexpectedElasticsearchClientException`, regardless of whether the client is configured to
+out of the client as an `UnexpectedTransportException`, regardless of whether the client is configured to
 throw exceptions or not.
 
 An `IConnection` is in charge of knowing which exceptions it can recover from and those it can't, and the default `IConnection`
@@ -41,13 +41,13 @@ var audit = new Auditor(() => VirtualClusterWith <1>
 
 audit = await audit.TraceCall(
     new ClientCall {
-        { AuditEvent.HealthyResponse, 9200 }, <3>
+        { HealthyResponse, 9200 }, <3>
     }
 );
 
 audit = await audit.TraceUnexpectedException(
     new ClientCall {
-        { AuditEvent.BadResponse, 9201 }, <4>
+        { BadResponse, 9201 }, <4>
     },
     (e) =>
     {
@@ -63,7 +63,7 @@ audit = await audit.TraceUnexpectedException(
 <4> ...but the second call, to 9201, returns a bad response
 
 Sometimes, an unexpected exception happens further down in the pipeline. In this scenario, we
-wrap them inside an `UnexpectedElasticsearchClientException` so that information about where
+wrap them inside an `UnexpectedTransportException` so that information about where
 in the pipeline the exception happened is not lost.
 
 In this next example, a call to 9200 fails with a `WebException`.
@@ -86,8 +86,8 @@ var audit = new Auditor(() => VirtualClusterWith
 
 audit = await audit.TraceUnexpectedException(
     new ClientCall {
-        { AuditEvent.BadResponse, 9200 },
-        { AuditEvent.BadResponse, 9201 }, <3>
+        { BadResponse, 9200 },
+        { BadResponse, 9201 }, <3>
     },
     (e) =>
     {
@@ -120,9 +120,9 @@ var audit = new Auditor(() => VirtualClusterWith
 
 audit = await audit.TraceUnexpectedException(
     new ClientCall {
-        { AuditEvent.PingFailure, 9200 },
-        { AuditEvent.PingSuccess, 9201 },
-        { AuditEvent.BadResponse, 9201 },
+        { PingFailure, 9200 },
+        { PingSuccess, 9201 },
+        { BadResponse, 9201 },
     },
     e =>
     {
@@ -136,7 +136,7 @@ audit = await audit.TraceUnexpectedException(
         pipelineException.FailureReason.Should().Be(PipelineFailure.PingFailure);
         pipelineException.InnerException.Message.Should().Be("ping exception");
 
-        var pingException = e.AuditTrail.First(a => a.Event == AuditEvent.PingFailure).Exception; <3>
+        var pingException = e.AuditTrail.First(a => a.Event == PingFailure).Exception; <3>
         pingException.Should().NotBeNull();
         pingException.Message.Should().Be("ping exception");
     }

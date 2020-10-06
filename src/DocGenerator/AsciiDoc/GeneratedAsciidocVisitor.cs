@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using AsciiDocNet;
 using DocGenerator.XmlDocs;
+using Elastic.Transport;
 using Elasticsearch.Net;
 using Microsoft.CodeAnalysis;
 using Nest;
@@ -265,6 +266,11 @@ namespace DocGenerator.AsciiDoc
 					xmlDocsFile = Path.GetFullPath(XmlFile("Elasticsearch.Net"));
 					assembly = typeof(ElasticLowLevelClient).Assembly;
 					assemblyNamespace = typeof(ElasticLowLevelClient).Namespace;
+					break;
+				case "elastic.transport":
+					xmlDocsFile = Path.GetFullPath(XmlFile("Elastic.Transport"));
+					assembly = typeof(CloudConnectionPool).Assembly;
+					assemblyNamespace = typeof(CloudConnectionPool).Namespace;
 					break;
 				default:
 					xmlDocsFile = Path.GetFullPath(XmlFile("Nest"));

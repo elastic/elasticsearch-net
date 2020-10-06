@@ -24,7 +24,7 @@ the nodes a sniff returns.
 ----
 var numberOfNodes = 10;
 var uris = Enumerable.Range(9200, numberOfNodes).Select(p => new Uri("http://localhost:" + p));
-var pool = new Elasticsearch.Net.StickySniffingConnectionPool(uris, (n)=>0f);
+var pool = new Elastic.Transport.StickySniffingConnectionPool(uris, (n)=>0f);
 ----
 
 Here we have setup a sticky connection pool seeded with 10 nodes all weighted the same.

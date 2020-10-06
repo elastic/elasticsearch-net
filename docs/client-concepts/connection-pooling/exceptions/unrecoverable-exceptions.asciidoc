@@ -31,7 +31,7 @@ but by exiting the pipeline.
 
 --
 
-By default, the client won't throw on any `ElasticsearchClientException` but instead return an invalid response
+By default, the client won't throw on any `TransportException` but instead return an invalid response
 that can be detected by checking the `.IsValid` property on the response. You can change this behaviour with
 by using `ThrowExceptions()` on <<configuration-options, `ConnectionSettings`>>.
 
@@ -90,8 +90,8 @@ followed by a bad response as a result of the 401 bad authentication response
 ----
 audit = await audit.TraceElasticsearchException(
     new ClientCall {
-        { AuditEvent.PingSuccess, 9200 }, <1>
-        { AuditEvent.BadResponse, 9200 }, <2>
+        { PingSuccess, 9200 }, <1>
+        { BadResponse, 9200 }, <2>
     },
     exception =>
     {
@@ -123,8 +123,8 @@ var audit = new Auditor(() => VirtualClusterWith
 
 audit = await audit.TraceElasticsearchException(
     new ClientCall {
-        { AuditEvent.PingSuccess, 9200 },
-        { AuditEvent.BadResponse, 9201 },
+        { PingSuccess, 9200 },
+        { BadResponse, 9201 },
     },
     (e) =>
     {
@@ -154,8 +154,8 @@ var audit = new Auditor(() => VirtualClusterWith
 
 audit = await audit.TraceElasticsearchException(
     new ClientCall {
-        { AuditEvent.PingSuccess, 9200 },
-        { AuditEvent.BadResponse, 9200 },
+        { PingSuccess, 9200 },
+        { BadResponse, 9200 },
     },
     (e) =>
     {
