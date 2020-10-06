@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using Elastic.Transport.Products;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Transport.VirtualizedCluster.Products.Elasticsearch
 {

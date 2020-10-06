@@ -76,7 +76,7 @@ namespace Nest
 	/// <inheritdoc cref="IConnectionSettingsValues" />
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public abstract class ConnectionSettingsBase<TConnectionSettings> : ConnectionConfiguration<TConnectionSettings>, IConnectionSettingsValues
+	public abstract class ConnectionSettingsBase<TConnectionSettings> : ConnectionConfigurationBase<TConnectionSettings>, IConnectionSettingsValues
 		where TConnectionSettings : ConnectionSettingsBase<TConnectionSettings>, IConnectionSettingsValues
 	{
 		private readonly FluentDictionary<Type, string> _defaultIndices;

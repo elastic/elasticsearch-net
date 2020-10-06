@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using Elastic.Transport.Products;
+using Elastic.Transport.Products.Elasticsearch;
 using Elastic.Transport.VirtualizedCluster.Products;
 
 namespace Elastic.Transport.VirtualizedCluster

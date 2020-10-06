@@ -25,7 +25,7 @@ namespace Elastic.Transport
 	/// <summary>
 	/// Allows you to control how <see cref="ITransport{TConnectionSettings}"/> behaves and where/how it connects to Elastic Stack products
 	/// </summary>
-	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
+	public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionConfiguration>
 	{
 		/// <summary>
 		/// Detects whether we are running on .NET Core with CurlHandler.
@@ -162,8 +162,8 @@ namespace Elastic.Transport
 
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public abstract class ConnectionConfiguration<T> : IConnectionConfigurationValues
-		where T : ConnectionConfiguration<T>
+	public abstract class ConnectionConfigurationBase<T> : IConnectionConfigurationValues
+		where T : ConnectionConfigurationBase<T>
 	{
 		private readonly IConnection _connection;
 		private readonly IConnectionPool _connectionPool;
@@ -211,7 +211,7 @@ namespace Elastic.Transport
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
 		private Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
 
-		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, ITransportSerializer requestResponseSerializer)
+		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection, ITransportSerializer requestResponseSerializer)
 		{
 			_connectionPool = connectionPool;
 			_connection = connection ?? new HttpConnection();
