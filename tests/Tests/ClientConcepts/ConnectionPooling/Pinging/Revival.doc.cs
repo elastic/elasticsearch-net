@@ -29,7 +29,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 		[U]
 		public async Task PingAfterRevival()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(3)
 				.ClientCalls(r => r.SucceedAlways())
 				.ClientCalls(r => r.OnPort(9202).Fails(Once))

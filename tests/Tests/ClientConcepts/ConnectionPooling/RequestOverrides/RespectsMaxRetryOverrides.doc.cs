@@ -25,7 +25,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		[U]
 		public async Task DefaultMaxIsNumberOfNodes()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -51,7 +51,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		[U]
 		public async Task FixedMaximumNumberOfRetries()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -77,7 +77,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		[U]
 		public async Task DoesNotRetryOnSingleNodeConnectionPool()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())

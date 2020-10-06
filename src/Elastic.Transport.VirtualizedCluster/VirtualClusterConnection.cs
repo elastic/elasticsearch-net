@@ -13,7 +13,7 @@ using TheException = System.Net.WebException;
 #endif
 using System.Threading;
 using System.Threading.Tasks;
-using Elastic.Transport.VirtualizedCluster.MockResponses;
+using Elastic.Transport.VirtualizedCluster.Products;
 using Elastic.Transport.VirtualizedCluster.Providers;
 using Elastic.Transport.VirtualizedCluster.Rules;
 
@@ -25,7 +25,7 @@ namespace Elastic.Transport.VirtualizedCluster
 	/// Either instantiate through the static <see cref="Success"/> or <see cref="Error"/> for the simplest use-cases
 	/// </pre>
 	/// <pre>
-	/// Or use <see cref="VirtualClusterWith"/> to chain together a rule engine until
+	/// Or use <see cref="ElasticsearchVirtualCluster"/> to chain together a rule engine until
 	/// <see cref="SealedVirtualCluster.VirtualClusterConnection"/> becomes available
 	/// </pre>
 	/// </summary>
@@ -37,16 +37,18 @@ namespace Elastic.Transport.VirtualizedCluster
 
 		private VirtualCluster _cluster;
 		private readonly TestableDateTimeProvider _dateTimeProvider;
+		private IMockProductRegistration _productRegistration;
 		private IDictionary<int, State> _calls = new Dictionary<int, State>();
 
 		internal VirtualClusterConnection(VirtualCluster cluster, TestableDateTimeProvider dateTimeProvider)
 		{
 			UpdateCluster(cluster);
 			_dateTimeProvider = dateTimeProvider;
+			_productRegistration = cluster.ProductRegistration;
 		}
 
 		public static VirtualClusterConnection Success(byte[] response) =>
-			VirtualClusterWith
+			ElasticsearchVirtualCluster
 				.Nodes(1)
 				.ClientCalls(r => r.SucceedAlways().ReturnByteResponse(response))
 				.StaticConnectionPool()
@@ -54,7 +56,7 @@ namespace Elastic.Transport.VirtualizedCluster
 				.Connection;
 
 		public static VirtualClusterConnection Error() =>
-			VirtualClusterWith
+			ElasticsearchVirtualCluster
 				.Nodes(1)
 				.ClientCalls(r => r.FailAlways(400))
 				.StaticConnectionPool()
@@ -83,7 +85,7 @@ namespace Elastic.Transport.VirtualizedCluster
 			}
 		}
 
-		public void UpdateCluster(VirtualCluster cluster)
+		private void UpdateCluster(VirtualCluster cluster)
 		{
 			if (cluster == null) return;
 
@@ -91,13 +93,14 @@ namespace Elastic.Transport.VirtualizedCluster
 			{
 				_cluster = cluster;
 				_calls = cluster.Nodes.ToDictionary(n => n.Uri.Port, v => new State());
+				_productRegistration = cluster.ProductRegistration;
 			}
 		}
 
-		public bool IsSniffRequest(RequestData requestData) =>
+		private static bool IsSniffRequest(RequestData requestData) =>
 			requestData.PathAndQuery.StartsWith(RequestPipeline.SniffPath, StringComparison.Ordinal);
 
-		public bool IsPingRequest(RequestData requestData) =>
+		private static bool IsPingRequest(RequestData requestData) =>
 			requestData.Method == HttpMethod.HEAD &&
 			(requestData.PathAndQuery == string.Empty || requestData.PathAndQuery.StartsWith("?"));
 
@@ -118,7 +121,7 @@ namespace Elastic.Transport.VirtualizedCluster
 						_cluster.SniffingRules,
 						requestData.RequestTimeout,
 						(r) => UpdateCluster(r.NewClusterState),
-						(r) => SniffResponseBytes.Create(_cluster.Nodes, _cluster.ElasticsearchVersion,_cluster.PublishAddressOverride, _cluster.SniffShouldReturnFqnd)
+						(r) => _productRegistration.CreateSniffResponseBytes(_cluster.Nodes, _cluster.ElasticsearchVersion,_cluster.PublishAddressOverride, _cluster.SniffShouldReturnFqnd)
 					);
 				}
 				if (IsPingRequest(requestData))

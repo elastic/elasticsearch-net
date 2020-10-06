@@ -103,7 +103,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 		public async Task FallsOverDeadNodes()
 		{
 			/** A cluster with 2 nodes where the second node fails on ping */
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(4)
 				.ClientCalls(p => p.Succeeds(Always))
 				.ClientCalls(p => p.OnPort(9201).FailAlways())
@@ -151,7 +151,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 		public async Task PicksADifferentNodeEachTimeAnodeIsDown()
 		{
 			/** A cluster with 2 nodes where the second node fails on ping */
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(4)
 				.ClientCalls(p => p.Fails(Always))
 				.StaticConnectionPool()

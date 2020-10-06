@@ -21,7 +21,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 		[U]
 		public async Task ExceptionFallsOverToNextNode()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9201).SucceedAlways())
@@ -45,7 +45,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 		[U]
 		public async Task Http502FallsOver()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways(502))
 				.ClientCalls(r => r.OnPort(9201).SucceedAlways())
@@ -69,7 +69,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 		[U]
 		public async Task Http503FallsOver()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways(503))
 				.ClientCalls(r => r.OnPort(9201).SucceedAlways())
@@ -93,7 +93,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 		[U]
 		public async Task Http504FallsOver()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways(504))
 				.ClientCalls(r => r.OnPort(9201).SucceedAlways())
@@ -118,7 +118,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 		[U]
 		public async Task HttpTeapotDoesNotFallOver()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways(418))
 				.ClientCalls(r => r.OnPort(9201).SucceedAlways())

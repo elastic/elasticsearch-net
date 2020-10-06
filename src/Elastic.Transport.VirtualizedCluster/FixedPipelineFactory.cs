@@ -3,18 +3,19 @@
 // See the LICENSE file in the project root for more information
 
 using Elastic.Transport.Products;
+using Elastic.Transport.VirtualizedCluster.Products;
 
 namespace Elastic.Transport.VirtualizedCluster
 {
 	public class FixedPipelineFactory : IRequestPipelineFactory
 	{
-		public FixedPipelineFactory(IConnectionConfigurationValues connectionSettings, IDateTimeProvider dateTimeProvider, IProductRegistration productRegistration)
+		public FixedPipelineFactory(IConnectionConfigurationValues connectionSettings, IDateTimeProvider dateTimeProvider, IMockProductRegistration productRegistration)
 		{
 			DateTimeProvider = dateTimeProvider;
 			MemoryStreamFactory = ConnectionConfiguration.DefaultMemoryStreamFactory;
 
 			Settings = connectionSettings;
-			Pipeline = Create(Settings, DateTimeProvider, MemoryStreamFactory, new RequestParameters(HttpMethod.GET, supportsBody: false), productRegistration);
+			Pipeline = Create(Settings, DateTimeProvider, MemoryStreamFactory, new RequestParameters(HttpMethod.GET, supportsBody: false), productRegistration.ProductRegistration);
 			Transport = new Transport<IConnectionConfigurationValues>(Settings, this, DateTimeProvider, MemoryStreamFactory, ElasticsearchProductRegistration.Default);
 		}
 

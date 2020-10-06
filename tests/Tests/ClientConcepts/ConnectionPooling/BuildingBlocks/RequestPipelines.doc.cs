@@ -16,6 +16,7 @@ using System.Runtime.Serialization;
 using Elastic.Transport.Products;
 using Elasticsearch.Net;
 using Elastic.Transport.VirtualizedCluster;
+using Elastic.Transport.VirtualizedCluster.Products.Elasticsearch;
 using Elastic.Transport.VirtualizedCluster.Providers;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
@@ -87,7 +88,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var pool = setupPool(new[] { TestConnectionSettings.CreateUri(), TestConnectionSettings.CreateUri(9201) });
 			var settings = new ConnectionSettings(pool, connection ?? new InMemoryConnection());
 			settings = settingsSelector?.Invoke(settings) ?? settings;
-			return new FixedPipelineFactory(settings, dateTimeProvider ?? DateTimeProvider.Default, ElasticsearchProductRegistration.Default).Pipeline;
+			return new FixedPipelineFactory(settings, dateTimeProvider ?? DateTimeProvider.Default, ElasticsearchMockProductRegistration.Default).Pipeline;
 		}
 
 		/**

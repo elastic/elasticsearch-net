@@ -5,7 +5,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Elastic.Transport.Products;
+using Elastic.Transport.VirtualizedCluster.Products;
 using Elastic.Transport.VirtualizedCluster.Providers;
 
 namespace Elastic.Transport.VirtualizedCluster
@@ -15,18 +15,19 @@ namespace Elastic.Transport.VirtualizedCluster
 		private readonly FixedPipelineFactory _fixedRequestPipeline;
 		private readonly TestableDateTimeProvider _dateTimeProvider;
 		private readonly ConnectionConfiguration _settings;
+		private readonly IMockProductRegistration _productRegistration;
 
 		private Func<ITransport<IConnectionConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<ITransportResponse>> _asyncCall;
 		private Func<ITransport<IConnectionConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, ITransportResponse> _syncCall;
 
 		private class VirtualResponse : TransportResponseBase { }
 
-		public VirtualizedCluster(TestableDateTimeProvider dateTimeProvider, ConnectionConfiguration settings)
+		public VirtualizedCluster(TestableDateTimeProvider dateTimeProvider, ConnectionConfiguration settings, IMockProductRegistration productRegistration)
 		{
 			_dateTimeProvider = dateTimeProvider;
 			_settings = settings;
-			//TODO this assumes Elasticsearch as product
-			_fixedRequestPipeline = new FixedPipelineFactory(settings, _dateTimeProvider, ElasticsearchProductRegistration.Default);
+			_productRegistration = productRegistration;
+			_fixedRequestPipeline = new FixedPipelineFactory(settings, _dateTimeProvider, _productRegistration);
 
 			_syncCall = (t, r) => t.Request<VirtualResponse>(
 				HttpMethod.GET, "/",

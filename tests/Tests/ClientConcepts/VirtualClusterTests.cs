@@ -19,7 +19,7 @@ namespace Tests.ClientConcepts
 	{
 		[U] public async Task ThrowsExceptionWithNoRules()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(1)
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing().EnableDebugMode())
@@ -32,7 +32,7 @@ namespace Tests.ClientConcepts
 
 		[U] public async Task ThrowsExceptionAfterDepleedingRules()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(1)
 				.ClientCalls(r => r.Succeeds(TimesHelper.Once).ReturnResponse(new { x = 1 }))
 				.StaticConnectionPool()
@@ -57,7 +57,7 @@ namespace Tests.ClientConcepts
 
 		[U] public async Task AGlobalRuleStaysValidForever()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(1)
 				.ClientCalls(c=>c.SucceedAlways())
 				.StaticConnectionPool()
@@ -74,7 +74,7 @@ namespace Tests.ClientConcepts
 
 		[U] public async Task RulesAreIgnoredAfterBeingExecuted()
 		{
-			var audit = new Auditor(() => VirtualClusterWith
+			var audit = new Auditor(() => ElasticsearchVirtualCluster
 				.Nodes(1)
 				.ClientCalls(r => r.Succeeds(TimesHelper.Once).ReturnResponse(new { x = 1 }))
 				.ClientCalls(r => r.Fails(TimesHelper.Once, 500).ReturnResponse(new { x = 2 }))

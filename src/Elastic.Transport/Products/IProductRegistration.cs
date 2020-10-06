@@ -17,10 +17,7 @@ namespace Elastic.Transport.Products
 		bool SupportsSniff { get; }
 
 
-		RequestData CreatePingRequestData(Node node, RequestConfiguration requestConfiguration, IConnectionConfigurationValues global,
-			IMemoryStreamFactory memoryStreamFactory
-		);
-
+		RequestData CreatePingRequestData(Node node, RequestConfiguration requestConfiguration, IConnectionConfigurationValues global, IMemoryStreamFactory memoryStreamFactory);
 
 		Task<IApiCallDetails> PingAsync(IConnection connection, RequestData pingData, CancellationToken cancellationToken);
 
