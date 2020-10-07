@@ -53,7 +53,7 @@ var pool = new SniffingConnectionPool(new [] <1>
     new Uri("http://node2:9200"),
     new Uri("http://node3:9200")
 });
-var settings = new ConnectionSettings(pool).NodePredicate(n => n.IngestEnabled); <2>
+var settings = new ConnectionSettings(pool).NodePredicate(n => n.HasFeature(IngestEnabled)); <2>
 var indexingClient = new ElasticClient(settings);
 ----
 <1> list of cluster nodes

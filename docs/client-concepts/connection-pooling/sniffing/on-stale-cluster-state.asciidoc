@@ -23,16 +23,16 @@ to help out with load
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .MasterEligible(9202, 9203, 9204)
     .ClientCalls(r => r.SucceedAlways())
-    .Sniff(s => s.SucceedAlways(VirtualClusterWith
-        .Nodes(100)
+    .Sniff(s => s.SucceedAlways(Virtual.Elasticsearch
+        .Bootstrap(100)
         .MasterEligible(9202, 9203, 9204)
         .ClientCalls(r => r.SucceedAlways())
-        .Sniff(ss => ss.SucceedAlways(VirtualClusterWith
-            .Nodes(10)
+        .Sniff(ss => ss.SucceedAlways(Virtual.Elasticsearch
+            .Bootstrap(10)
             .MasterEligible(9202, 9203, 9204)
             .ClientCalls(r => r.SucceedAlways())
         ))

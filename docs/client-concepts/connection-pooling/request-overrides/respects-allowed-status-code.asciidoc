@@ -17,8 +17,8 @@ please modify the original csharp file found at the link and submit the PR with 
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways(400))
     .StaticConnectionPool()
     .Settings(s => s.DisablePing().MaximumRetries(0))

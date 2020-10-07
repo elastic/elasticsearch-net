@@ -72,8 +72,8 @@ that always succeeds when pinged but fails with a 401 response when making clien
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .Ping(r => r.SucceedAlways()) <1>
     .ClientCalls(r => r.FailAlways(401)) <2>
     .StaticConnectionPool()
@@ -113,8 +113,8 @@ should never be deserialized by calling `SkipDeserializationForStatusCodes()` on
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .Ping(r => r.SucceedAlways())
     .ClientCalls(r => r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response, "application/json")) <1>
     .StaticConnectionPool()
@@ -144,8 +144,8 @@ we no longer need to set `SkipDeserializationForStatusCodes()`
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .Ping(r => r.SucceedAlways())
     .ClientCalls(r => r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response, "text/html"))
     .StaticConnectionPool()

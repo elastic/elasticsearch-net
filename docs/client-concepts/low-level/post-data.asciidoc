@@ -170,7 +170,7 @@ In doing so, the serialized bytes are first written to a private `MemoryStream` 
 
 [source,csharp]
 ----
-settings = new ConnectionConfiguration().DisableDirectStreaming();
+settings = new TransportConfiguration().DisableDirectStreaming();
 
 await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: true, settings: settings);
 

@@ -26,8 +26,8 @@ example, a ten node cluster is defined that always fails on all client calls, ex
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways())
     .ClientCalls(r => r.OnPort(9209).SucceedAlways())
     .StaticConnectionPool()
@@ -65,8 +65,8 @@ IMPORTANT: the actual number of requests is `initial attempt + set number of ret
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways())
     .ClientCalls(r => r.OnPort(9209).SucceedAlways())
     .StaticConnectionPool()
@@ -94,8 +94,8 @@ tried twice (initial call and one retry) _before_ the request timeout.
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(10)))
     .ClientCalls(r => r.OnPort(9209).SucceedAlways())
     .StaticConnectionPool()
@@ -121,8 +121,8 @@ our max retry timeout of 10 seconds wins over the configured request timeout
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
     .ClientCalls(r => r.OnPort(9209).FailAlways())
     .StaticConnectionPool()
@@ -145,8 +145,8 @@ If your retry policy expands beyond the number of available nodes, the client **
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(2)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(2)
     .ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
     .ClientCalls(r => r.OnPort(9209).SucceedAlways())
     .StaticConnectionPool()
@@ -169,8 +169,8 @@ not giving up on the fail fast principle; **It is NOT a mechanism for forcing re
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
     .ClientCalls(r => r.OnPort(9209).SucceedAlways())
     .SingleNodeConnection()

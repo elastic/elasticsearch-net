@@ -90,8 +90,8 @@ A cluster with 2 nodes where the second node fails on ping
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(4)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(4)
     .ClientCalls(p => p.Succeeds(Always))
     .ClientCalls(p => p.OnPort(9200).FailAlways())
     .ClientCalls(p => p.OnPort(9201).FailAlways())
@@ -125,8 +125,8 @@ A cluster with 2 nodes where the second node fails on ping
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(4)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(4)
     .ClientCalls(p => p.Fails(Always))
     .StickyConnectionPool()
     .Settings(p => p.DisablePing())

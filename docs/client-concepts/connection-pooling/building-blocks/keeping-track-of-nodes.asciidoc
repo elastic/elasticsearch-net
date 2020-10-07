@@ -30,8 +30,8 @@ By default master eligible and holds data is presumed to be true *
 
 [source,csharp]
 ----
-node.MasterEligible.Should().BeTrue();
-node.HoldsData.Should().BeTrue();
+node.HasFeature(MasterEligible).Should().BeTrue();
+node.HasFeature(HoldsData).Should().BeTrue();
 ----
 
 Is resurrected is true on first usage, hints to the transport that a ping might be useful 
@@ -110,8 +110,8 @@ Nodes are considered equal if they have the same endpoint, no matter what other 
 
 [source,csharp]
 ----
-var node = new Node(new Uri("http://localhost:9200")) { MasterEligible = false };
-var nodeAsMaster = new Node(new Uri("http://localhost:9200")) { MasterEligible = true };
+var node = new Node(new Uri("http://localhost:9200"));
+var nodeAsMaster = new Node(new Uri("http://localhost:9200"), ElasticsearchNodeFeatures.MasterEligableOnly);
 
 (node == nodeAsMaster).Should().BeTrue();
 (node != nodeAsMaster).Should().BeFalse();
