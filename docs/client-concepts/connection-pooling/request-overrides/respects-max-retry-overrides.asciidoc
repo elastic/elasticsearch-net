@@ -21,8 +21,8 @@ but give up after 20 seconds
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways())
     .ClientCalls(r => r.OnPort(9209).SucceedAlways())
     .StaticConnectionPool()
@@ -44,8 +44,8 @@ Remember that the actual number of requests is initial attempt + set number of r
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways())
     .ClientCalls(r => r.OnPort(9209).SucceedAlways())
     .StaticConnectionPool()
@@ -68,8 +68,8 @@ not giving up on the fail fast principle. It's *NOT* a mechanism for forcing req
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
     .ClientCalls(r => r.OnPort(9209).SucceedAlways())
     .SingleNodeConnection()

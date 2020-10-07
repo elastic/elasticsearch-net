@@ -20,8 +20,8 @@ request configuration. This will ignore the pool and not retry.
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.SucceedAlways())
     .ClientCalls(r => r.OnPort(9208).FailAlways())
     .StaticConnectionPool()

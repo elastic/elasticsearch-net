@@ -31,8 +31,8 @@ using our Virtual cluster test framework
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith <1>
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch <1>
+    .Bootstrap(10)
     .ClientCalls(r => r.SucceedAlways())
     .ClientCalls(r => r.OnPort(9201).FailAlways(new Exception("boom!"))) <2>
     .StaticConnectionPool()
@@ -72,8 +72,8 @@ Finally, we assert that we can still see the audit trail for the whole coordinat
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
 #if DOTNETCORE
     .ClientCalls(r => r.OnPort(9200).FailAlways(new System.Net.Http.HttpRequestException("recover"))) <1>
 #else
@@ -109,8 +109,8 @@ Following this, the client call on 9201 throws a hard exception that we are not 
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .Ping(r => r.OnPort(9200).FailAlways(new Exception("ping exception")))
     .Ping(r => r.OnPort(9201).SucceedAlways())
     .ClientCalls(r => r.OnPort(9201).FailAlways(new Exception("boom!")))

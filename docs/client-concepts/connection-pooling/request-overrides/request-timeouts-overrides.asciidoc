@@ -23,8 +23,8 @@ before the max request time out kills the client call.
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(10)))
     .ClientCalls(r => r.OnPort(9209).SucceedAlways())
     .StaticConnectionPool()
@@ -70,8 +70,8 @@ before the max request time out kills the client call.
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .Ping(p => p.SucceedAlways().Takes(TimeSpan.FromSeconds(20)))
     .ClientCalls(r => r.SucceedAlways())
     .StaticConnectionPool()

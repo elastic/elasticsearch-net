@@ -25,8 +25,8 @@ Let's set up the cluster and configure clients to **always** sniff on startup
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.SucceedAlways())
     .Sniff(c=>c.SucceedAlways())
     .Ping(c=>c.SucceedAlways())
@@ -75,8 +75,8 @@ Now, let's disable pinging on the request
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.SucceedAlways())
     .Sniff(c=>c.SucceedAlways())
     .SniffingConnectionPool()
@@ -99,8 +99,8 @@ Finally, let's demonstrate disabling both sniff and ping on the request
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.SucceedAlways())
     .SniffingConnectionPool()
     .Settings(s => s.SniffOnStartup())

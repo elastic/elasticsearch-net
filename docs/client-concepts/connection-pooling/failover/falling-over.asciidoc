@@ -20,8 +20,8 @@ the call to a node throws an exception or returns a 502, 503 or 504 response
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways())
     .ClientCalls(r => r.OnPort(9201).SucceedAlways())
     .StaticConnectionPool()
@@ -43,8 +43,8 @@ Will be treated as an error that requires retrying
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways(502))
     .ClientCalls(r => r.OnPort(9201).SucceedAlways())
     .StaticConnectionPool()
@@ -66,8 +66,8 @@ Will be treated as an error that requires retrying
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways(503))
     .ClientCalls(r => r.OnPort(9201).SucceedAlways())
     .StaticConnectionPool()
@@ -89,8 +89,8 @@ Will be treated as an error that requires retrying
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways(504))
     .ClientCalls(r => r.OnPort(9201).SucceedAlways())
     .StaticConnectionPool()
@@ -112,8 +112,8 @@ a *404 Not Found* response is a __valid__ status code for an index exists reques
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(10)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(10)
     .ClientCalls(r => r.FailAlways(418))
     .ClientCalls(r => r.OnPort(9201).SucceedAlways())
     .StaticConnectionPool()

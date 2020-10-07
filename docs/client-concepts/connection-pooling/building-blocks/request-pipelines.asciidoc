@@ -27,8 +27,7 @@ var pipeline = new RequestPipeline(
     settings,
     DateTimeProvider.Default,
     new RecyclableMemoryStreamFactory(),
-    new SearchRequestParameters(),
-    ElasticsearchProductRegistration.Default
+    new SearchRequestParameters()
 );
 
 pipeline.GetType().Should().Implement<IDisposable>();
@@ -44,8 +43,7 @@ var requestPipeline = requestPipelineFactory.Create(
     settings,
     DateTimeProvider.Default, <1>
     new RecyclableMemoryStreamFactory(),
-    new SearchRequestParameters(),
-    ElasticsearchProductRegistration.Default
+    new SearchRequestParameters()
 );
 
 requestPipeline.Should().BeOfType<RequestPipeline>();
@@ -62,8 +60,7 @@ var transport = new Transport<IConnectionSettingsValues>(
     settings,
     requestPipelineFactory,
     DateTimeProvider.Default,
-    new RecyclableMemoryStreamFactory(),
-    ElasticsearchProductRegistration.Default
+    new RecyclableMemoryStreamFactory()
 );
 
 var client = new ElasticClient(transport);

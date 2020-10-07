@@ -23,8 +23,8 @@ Take a look at the <<request-timeout, Request timeouts>> for an explanation on w
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(3)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(3)
     .ClientCalls(r => r.SucceedAlways())
     .ClientCalls(r => r.OnPort(9202).Fails(Once))
     .Ping(p => p.SucceedAlways())

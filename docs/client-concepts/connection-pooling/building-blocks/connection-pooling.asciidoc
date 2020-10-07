@@ -237,7 +237,7 @@ var pool = new StickySniffingConnectionPool(uris, node =>
 {
     var weight = 0f;
 
-    if (node.ClientNode)
+    if (!node.HasFeature(HoldsData) && !node.HasFeature(MasterEligible))
         weight += 10;
 
     if (node.Settings.TryGetValue("node.attr.rack_id", out var rackId) && rackId.ToString() == "rack_one")

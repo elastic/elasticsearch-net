@@ -75,16 +75,12 @@ Turns on settings that aid in debugging like DisableDirectStreaming() and Pretty
 `EnableHttpCompression`::
 
 Enables gzip compressed requests and responses.
-+
-IMPORTANT: You need to configure http compression on Elasticsearch to be able to use this
-+
-https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html
 
 `EnableHttpPipelining`::
 
 Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
 +
-NOTE: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.
+NOTE: HTTP pipelining must also be enabled in e.g Elasticsearch for this to work properly.
 
 `EnableTcpKeepAlive`::
 
@@ -99,10 +95,6 @@ A collection of headers that will be sent with every request. Useful in situatio
 `GlobalQueryStringParameters`::
 
 A collection of query string parameters that will be sent with every request. Useful in situations where you always need to pass a parameter e.g. an API key.
-
-`IncludeServerStackTraceOnError`::
-
-Forces all requests to have ?error_trace=true querystring parameter appended, causing Elasticsearch to return stack traces as part of serialized exceptions Defaults to `false`
 
 `MaxDeadTimeout`::
 
@@ -124,7 +116,7 @@ Register a predicate to select which nodes that you want to execute API calls on
 
 `OnRequestCompleted`::
 
-Registers an `Action<T>` that is called when a response is received from Elasticsearch.             This can be useful for implementing custom logging.             Multiple callbacks can be registered by calling this multiple times
+Registers an `Action<T>` that is called when a response is received.             This can be useful for implementing custom logging.             Multiple callbacks can be registered by calling this multiple times
 
 `OnRequestDataCreated`::
 
@@ -136,7 +128,9 @@ Sets the default ping timeout in milliseconds for ping requests, which are used 
 
 `PrettyJson`::
 
-Forces all requests to have ?pretty=true querystring parameter appended, causing Elasticsearch to return formatted JSON. Defaults to `false`
+Provide hints to serializer and products to produce pretty, non minified json.
++
+Note: this is not a guarantee you will always get prettified json
 
 `Proxy`::
 
@@ -144,9 +138,7 @@ If your connection has to go through proxy, use this method to specify the proxy
 
 `RequestTimeout`::
 
-Sets the default timeout in milliseconds for each request to Elasticsearch. Defaults to `60` seconds.
-+
-NOTE: You can set this to a high value here, and specify a timeout on Elasticsearch's side.
+Sets the default timeout in milliseconds for each request. Defaults to `60` seconds.
 
 `ServerCertificateValidationCallback`::
 
@@ -182,7 +174,7 @@ Whether the request should be sent with chunked Transfer-Encoding. Default is `f
 
 The user agent string to send with requests. Useful for debugging purposes to understand client and framework versions that initiate requests to Elasticsearch
 
-:xml-docs: Elastic.Transport:ConnectionConfiguration`1
+:xml-docs: Elastic.Transport:TransportConfigurationBase`1
 
 ==== ConnectionConfiguration with ElasticLowLevelClient
 

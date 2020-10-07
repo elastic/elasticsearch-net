@@ -60,12 +60,12 @@ We set up a cluster with 4 nodes all having a different rack id
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(Nodes(0))
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(Nodes(0))
     .ClientCalls(p => p.OnPort(9202).Succeeds(Twice))
     .ClientCalls(p => p.FailAlways())
-    .Sniff(s=>s.SucceedAlways(VirtualClusterWith
-        .Nodes(Nodes(10))
+    .Sniff(s=>s.SucceedAlways(Virtual.Elasticsearch
+        .Bootstrap(Nodes(10))
         .ClientCalls(p => p.SucceedAlways()))
     )
     .StickySniffingConnectionPool(n=>
@@ -115,11 +115,11 @@ Our sniffing sorted connection pool is set up to favor nodes in rack_2
 
 [source,csharp]
 ----
-var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(4)
+var audit = new Auditor(() => Virtual.Elasticsearch
+    .Bootstrap(4)
     .ClientCalls(p => p.SucceedAlways())
-    .Sniff(s=>s.SucceedAlways(VirtualClusterWith
-        .Nodes(Nodes(0))
+    .Sniff(s=>s.SucceedAlways(Virtual.Elasticsearch
+        .Bootstrap(Nodes(0))
         .ClientCalls(p => p.SucceedAlways()))
     )
     .StickySniffingConnectionPool(n=>
