@@ -66,12 +66,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 				We setup node 9202 to fail after two client calls in which case we sniff and find nodes
 				`9210-9213` in which case we should become sticky on rack_11.
 			 */
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(Nodes(0))
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(Nodes(0))
 				.ClientCalls(p => p.OnPort(9202).Succeeds(Twice))
 				.ClientCalls(p => p.FailAlways())
-				.Sniff(s=>s.SucceedAlways(ElasticsearchVirtualCluster
-					.Nodes(Nodes(10))
+				.Sniff(s=>s.SucceedAlways(Virtual.Elasticsearch
+					.Bootstrap(Nodes(10))
 					.ClientCalls(p => p.SucceedAlways()))
 				)
 				.StickySniffingConnectionPool(n=>
@@ -118,11 +118,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 			/** We seed a cluster with an array of 4 Uri's starting at port 9200.
 			* Our sniffing sorted connection pool is set up to favor nodes in rack_2
 			*/
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(4)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(4)
 				.ClientCalls(p => p.SucceedAlways())
-				.Sniff(s=>s.SucceedAlways(ElasticsearchVirtualCluster
-					.Nodes(Nodes(0))
+				.Sniff(s=>s.SucceedAlways(Virtual.Elasticsearch
+					.Bootstrap(Nodes(0))
 					.ClientCalls(p => p.SucceedAlways()))
 				)
 				.StickySniffingConnectionPool(n=>
@@ -158,8 +158,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task PicksADifferentNodeEachTimeAnodeIsDown()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(4)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(4)
 				.ClientCalls(p => p.Fails(Always))
 				.StickySniffingConnectionPool()
 				.Settings(p => p.DisablePing().SniffOnStartup(false).SniffOnConnectionFault(false))

@@ -6,18 +6,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Elastic.Transport.VirtualizedCluster.Products;
+using Elastic.Transport.VirtualizedCluster.Products.Elasticsearch;
+using Elastic.Transport.VirtualizedCluster.Providers;
+using Elastic.Transport.VirtualizedCluster.Rules;
 #if DOTNETCORE
 using TheException = System.Net.Http.HttpRequestException;
 #else
 using TheException = System.Net.WebException;
 #endif
-using System.Threading;
-using System.Threading.Tasks;
-using Elastic.Transport.VirtualizedCluster.Products;
-using Elastic.Transport.VirtualizedCluster.Providers;
-using Elastic.Transport.VirtualizedCluster.Rules;
 
-namespace Elastic.Transport.VirtualizedCluster
+namespace Elastic.Transport.VirtualizedCluster.Components
 {
 	/// <summary>
 	/// An in memory connection that uses a rule engine to return different responses for sniffs/pings and API calls.
@@ -48,16 +49,16 @@ namespace Elastic.Transport.VirtualizedCluster
 		}
 
 		public static VirtualClusterConnection Success(byte[] response) =>
-			ElasticsearchVirtualCluster
-				.Nodes(1)
+			Virtual.Elasticsearch
+				.Bootstrap(1)
 				.ClientCalls(r => r.SucceedAlways().ReturnByteResponse(response))
 				.StaticConnectionPool()
 				.AllDefaults()
 				.Connection;
 
 		public static VirtualClusterConnection Error() =>
-			ElasticsearchVirtualCluster
-				.Nodes(1)
+			Virtual.Elasticsearch
+				.Bootstrap(1)
 				.ClientCalls(r => r.FailAlways(400))
 				.StaticConnectionPool()
 				.AllDefaults()

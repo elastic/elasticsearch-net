@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Transport.VirtualizedCluster.Products.Elasticsearch
 {
@@ -52,6 +53,8 @@ namespace Elastic.Transport.VirtualizedCluster.Products.Elasticsearch
 			};
 			foreach (var kv in node.Settings) settings[kv.Key] = kv.Value;
 
+			var httpEnabled = node.HasFeature(ElasticsearchNodeFeatures.HttpEnabled);
+
 			var nodeResponse = new
 			{
 				name = name,
@@ -61,7 +64,7 @@ namespace Elastic.Transport.VirtualizedCluster.Products.Elasticsearch
 				version = elasticsearchVersion,
 				build_hash = Guid.NewGuid().ToString("N").Substring(0, 8),
 				roles = new List<string>(),
-				http = node.HttpEnabled
+				http = httpEnabled
 					? new
 					{
 						bound_address = new[]
@@ -74,10 +77,10 @@ namespace Elastic.Transport.VirtualizedCluster.Products.Elasticsearch
 					: null,
 				settings = settings
 			};
-			if (node.MasterEligible) nodeResponse.roles.Add("master");
-			if (node.HoldsData) nodeResponse.roles.Add("data");
-			if (node.IngestEnabled) nodeResponse.roles.Add("ingest");
-			if (!node.HttpEnabled)
+			if (node.HasFeature(ElasticsearchNodeFeatures.MasterEligible)) nodeResponse.roles.Add("master");
+			if (node.HasFeature(ElasticsearchNodeFeatures.HoldsData)) nodeResponse.roles.Add("data");
+			if (node.HasFeature(ElasticsearchNodeFeatures.IngestEnabled)) nodeResponse.roles.Add("ingest");
+			if (!httpEnabled)
 				nodeResponse.settings.Add("http.enabled", false);
 			return nodeResponse;
 		}

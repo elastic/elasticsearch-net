@@ -28,6 +28,7 @@ namespace Elastic.Transport
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 		private readonly IProductRegistration _productRegistration;
 		private readonly IConnectionConfigurationValues _settings;
+		private readonly Func<Node, bool> _nodePredicate;
 
 		private RequestConfiguration PingRequestConfiguration { get; }
 
@@ -47,6 +48,8 @@ namespace Elastic.Transport
 			_dateTimeProvider = dateTimeProvider;
 			_memoryStreamFactory = memoryStreamFactory;
 			_productRegistration = productRegistration;
+
+			_nodePredicate = _settings.NodePredicate ?? _productRegistration.NodePredicate;
 
 			RequestConfiguration = requestParameters?.RequestConfiguration;
 			PingRequestConfiguration = new RequestConfiguration
@@ -96,7 +99,7 @@ namespace Elastic.Transport
 		public IEnumerable<Node> SniffNodes => _connectionPool
 			.CreateView(LazyAuditable)
 			.ToList()
-			.OrderBy(n => n.MasterEligible ? n.Uri.Port : int.MaxValue);
+			.OrderBy(n => _productRegistration.SniffOrder(n));
 
 		public static string SniffPath => "_nodes/http,settings";
 
@@ -360,7 +363,7 @@ namespace Elastic.Transport
 					.CreateView(LazyAuditable)
 					.TakeWhile(node => !DepletedRetries))
 				{
-					if (!_settings.NodePredicate(node)) continue;
+					if (!_nodePredicate(node)) continue;
 
 					yield return node;
 

@@ -23,8 +23,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		[U]
 		public async Task OnlyCallsForcedNode()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(10)
 				.ClientCalls(r => r.SucceedAlways())
 				.ClientCalls(r => r.OnPort(9208).FailAlways())
 				.StaticConnectionPool()

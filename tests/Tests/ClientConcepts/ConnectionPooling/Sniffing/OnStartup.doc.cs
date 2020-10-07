@@ -12,6 +12,7 @@ using Elastic.Transport.VirtualizedCluster.Audit;
 using Tests.Framework;
 using static Elastic.Transport.VirtualizedCluster.Rules.TimesHelper;
 using static Elastic.Transport.Diagnostics.Auditing.AuditEvent;
+using static Elastic.Transport.Products.Elasticsearch.ElasticsearchNodeFeatures;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
@@ -30,8 +31,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			* Here we create a 10 node cluster that uses a <<sniffing-connection-pool,Sniffing connection pool>>, setting
 			* sniff to fail on all nodes _*except*_ 9202
 			*/
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always))
 				.Ping(c=>c.SucceedAlways())
@@ -70,8 +71,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task ASniffOnStartupHappensOnce()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always))
 				.ClientCalls(r => r.SucceedAlways())
@@ -108,11 +109,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffOnStartUpTakesNewClusterState()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always,
-					ElasticsearchVirtualCluster.Nodes(8, startFrom: 9204)
+					Virtual.Elasticsearch.Bootstrap(8, startFrom: 9204)
 						.Ping(c=>c.SucceedAlways())
 						.ClientCalls(c=>c.SucceedAlways())
 
@@ -137,8 +138,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffTriesAllNodes()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9209).Succeeds(Always))
 				.Ping(c=>c.SucceedAlways())
@@ -171,11 +172,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffPrefersMasterNodes()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(new[] {
-					new Node(new Uri("http://localhost:9200")) { MasterEligible = false },
-					new Node(new Uri("http://localhost:9201")) { MasterEligible = false },
-					new Node(new Uri("http://localhost:9202")) { MasterEligible = true },
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(new[] {
+					new Node(new Uri("http://localhost:9200"), NotMasterEligable),
+					new Node(new Uri("http://localhost:9201"), NotMasterEligable),
+					new Node(new Uri("http://localhost:9202")),
 				})
 				.Sniff(s => s.Succeeds(Always))
 				.Ping(s => s.Succeeds(Always))
@@ -198,11 +199,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffPrefersMasterNodesButStillFailsOver()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(new[] {
-					new Node(new Uri("http://localhost:9200")) { MasterEligible = true },
-					new Node(new Uri("http://localhost:9201")) { MasterEligible = true },
-					new Node(new Uri("http://localhost:9202")) { MasterEligible = false },
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(new[] {
+					new Node(new Uri("http://localhost:9200")),
+					new Node(new Uri("http://localhost:9201")),
+					new Node(new Uri("http://localhost:9202"), NotMasterEligable),
 				})
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always))

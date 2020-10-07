@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Elastic.Transport.VirtualizedCluster.Products;
 using Elastic.Transport.VirtualizedCluster.Providers;
 
-namespace Elastic.Transport.VirtualizedCluster
+namespace Elastic.Transport.VirtualizedCluster.Components
 {
 	public class VirtualizedCluster
 	{
@@ -21,7 +21,7 @@ namespace Elastic.Transport.VirtualizedCluster
 
 		private class VirtualResponse : TransportResponseBase { }
 
-		public VirtualizedCluster(TestableDateTimeProvider dateTimeProvider, ConnectionConfiguration settings, IMockProductRegistration productRegistration)
+		internal VirtualizedCluster(TestableDateTimeProvider dateTimeProvider, ConnectionConfiguration settings, IMockProductRegistration productRegistration)
 		{
 			_dateTimeProvider = dateTimeProvider;
 			_settings = settings;

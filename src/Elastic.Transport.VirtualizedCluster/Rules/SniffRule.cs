@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using Elastic.Transport.VirtualizedCluster.Components;
 
 namespace Elastic.Transport.VirtualizedCluster.Rules
 {

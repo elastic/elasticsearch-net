@@ -84,8 +84,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		 */
 		[U] public async Task BadAuthenticationIsUnrecoverable()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(10)
 				.Ping(r => r.SucceedAlways()) // <1> Always succeed on ping
 				.ClientCalls(r => r.FailAlways(401)) // <2> ...but always fail on calls with a 401 Bad Authentication response
 				.StaticConnectionPool()
@@ -121,8 +121,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		 */
 		[U] public async Task BadAuthenticationHtmlResponseIsIgnored()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(10)
 				.Ping(r => r.SucceedAlways())
 				.ClientCalls(r => r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response, "application/json")) // <1> Always return a 401 bad response with a HTML response on client calls
 				.StaticConnectionPool()
@@ -151,8 +151,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		 */
 		[U] public async Task BadAuthenticationHtmlResponseStillExposedWhenUsingDisableDirectStreaming()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(10)
 				.Ping(r => r.SucceedAlways())
 				.ClientCalls(r => r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response, "text/html"))
 				.StaticConnectionPool()
@@ -179,8 +179,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		// hide
 		[U] public async Task BadAuthOnGetClientCallDoesNotThrowSerializationException()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(10)
 				.Ping(r => r.SucceedAlways())
 				.ClientCalls(r => r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response))
 				.StaticConnectionPool()

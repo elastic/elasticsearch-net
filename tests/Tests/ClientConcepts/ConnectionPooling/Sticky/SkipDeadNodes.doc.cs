@@ -93,8 +93,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 		public async Task FallsOverDeadNodes()
 		{
 			/** A cluster with 2 nodes where the second node fails on ping */
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(4)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(4)
 				.ClientCalls(p => p.Succeeds(Always))
 				.ClientCalls(p => p.OnPort(9200).FailAlways())
 				.ClientCalls(p => p.OnPort(9201).FailAlways())
@@ -128,8 +128,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 		public async Task PicksADifferentNodeEachTimeAnodeIsDown()
 		{
 			/** A cluster with 2 nodes where the second node fails on ping */
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(4)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(4)
 				.ClientCalls(p => p.Fails(Always))
 				.StickyConnectionPool()
 				.Settings(p => p.DisablePing())

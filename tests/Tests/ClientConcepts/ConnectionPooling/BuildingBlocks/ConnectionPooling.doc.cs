@@ -14,6 +14,7 @@ using Nest;
 using Tests.Configuration;
 using Tests.Framework;
 using Tests.XPack.Security.Privileges;
+using static Elastic.Transport.Products.Elasticsearch.ElasticsearchNodeFeatures;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
@@ -352,7 +353,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			{
 				var weight = 0f;
 
-				if (node.ClientNode)
+				if (!node.HasFeature(HoldsData) && !node.HasFeature(MasterEligible))
 					weight += 10;
 
 				if (node.Settings.TryGetValue("node.attr.rack_id", out var rackId) && rackId.ToString() == "rack_one")

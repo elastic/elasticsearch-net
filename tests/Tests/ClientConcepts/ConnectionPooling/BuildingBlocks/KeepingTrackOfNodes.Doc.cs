@@ -5,8 +5,10 @@
 using System;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch;
 using FluentAssertions;
 using Tests.Framework;
+using static Elastic.Transport.Products.Elasticsearch.ElasticsearchNodeFeatures;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
@@ -25,8 +27,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			node.Uri.Port.Should().Be(9200);
 
 			/** By default master eligible and holds data is presumed to be true **/
-			node.MasterEligible.Should().BeTrue();
-			node.HoldsData.Should().BeTrue();
+			node.HasFeature(MasterEligible).Should().BeTrue();
+			node.HasFeature(HoldsData).Should().BeTrue();
 
 			/** Is resurrected is true on first usage, hints to the transport that a ping might be useful */
 			node.IsResurrected.Should().BeTrue();
@@ -84,8 +86,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		{
 			/** ==== Node Equality
 			* Nodes are considered equal if they have the same endpoint, no matter what other metadata is associated */
-			var node = new Node(new Uri("http://localhost:9200")) { MasterEligible = false };
-			var nodeAsMaster = new Node(new Uri("http://localhost:9200")) { MasterEligible = true };
+			var node = new Node(new Uri("http://localhost:9200"));
+			var nodeAsMaster = new Node(new Uri("http://localhost:9200"), ElasticsearchNodeFeatures.MasterEligableOnly);
 
 			(node == nodeAsMaster).Should().BeTrue();
 			(node != nodeAsMaster).Should().BeFalse();

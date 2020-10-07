@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using Elastic.Transport.Extensions;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Transport
 {
@@ -52,14 +53,20 @@ namespace Elastic.Transport
 					continue;
 
 				var uri = SniffParser.ParseToUri(httpEndpoint, forceHttp);
-				var node = new Node(uri)
+				var features = new List<string>();
+				if (info.MasterEligible)
+					features.Add(ElasticsearchNodeFeatures.MasterEligible);
+				if (info.HoldsData)
+					features.Add(ElasticsearchNodeFeatures.HoldsData);
+				if (info.IngestEnabled)
+					features.Add(ElasticsearchNodeFeatures.IngestEnabled);
+				if (info.HttpEnabled)
+					features.Add(ElasticsearchNodeFeatures.HttpEnabled);
+
+				var node = new Node(uri, features)
 				{
 					Name = info.name,
 					Id = kv.Key,
-					MasterEligible = info.MasterEligible,
-					HoldsData = info.HoldsData,
-					IngestEnabled = info.IngestEnabled,
-					HttpEnabled = info.HttpEnabled,
 					Settings = new ReadOnlyDictionary<string, object>(info.settings)
 				};
 				yield return node;

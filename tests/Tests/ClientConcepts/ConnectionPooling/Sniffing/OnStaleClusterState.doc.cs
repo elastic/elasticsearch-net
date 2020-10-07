@@ -29,16 +29,16 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task ASniffOnStartupHappens()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(10)
 				.MasterEligible(9202, 9203, 9204)
 				.ClientCalls(r => r.SucceedAlways())
-				.Sniff(s => s.SucceedAlways(ElasticsearchVirtualCluster
-					.Nodes(100)
+				.Sniff(s => s.SucceedAlways(Virtual.Elasticsearch
+					.Bootstrap(100)
 					.MasterEligible(9202, 9203, 9204)
 					.ClientCalls(r => r.SucceedAlways())
-					.Sniff(ss => ss.SucceedAlways(ElasticsearchVirtualCluster
-						.Nodes(10)
+					.Sniff(ss => ss.SucceedAlways(Virtual.Elasticsearch
+						.Bootstrap(10)
 						.MasterEligible(9202, 9203, 9204)
 						.ClientCalls(r => r.SucceedAlways())
 					))
