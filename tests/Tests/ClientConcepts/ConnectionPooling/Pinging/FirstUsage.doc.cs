@@ -30,8 +30,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 		public async Task PingFailsFallsOverToHealthyNodeWithoutPing()
 		{
 			/** Here's an example with a cluster with two nodes where the second node fails on ping */
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(2)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(2)
 				.Ping(p => p.Succeeds(Always))
 				.Ping(p => p.OnPort(9201).FailAlways())
 				.ClientCalls(c=>c.SucceedAlways())
@@ -66,8 +66,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 		public async Task PingFailsFallsOverMultipleTimesToHealthyNode()
 		{
 			/** A cluster with 4 nodes where the second and third pings fail */
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(4)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(4)
 				.Ping(p => p.SucceedAlways())
 				.Ping(p => p.OnPort(9201).FailAlways())
 				.Ping(p => p.OnPort(9202).FailAlways())
@@ -102,8 +102,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task AllNodesArePingedOnlyOnFirstUseProvidedTheyAreHealthy()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(4)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(4)
 				.Ping(p => p.SucceedAlways()) // <1> Pings on nodes always succeed
 				.ClientCalls(c=>c.SucceedAlways())
 				.StaticConnectionPool()

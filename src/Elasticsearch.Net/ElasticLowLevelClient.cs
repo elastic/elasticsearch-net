@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
-using Elastic.Transport.Products;
 using Elastic.Transport.Products.Elasticsearch;
 using Elasticsearch.Net.Extensions;
 

@@ -9,6 +9,7 @@ using Elastic.Transport;
 using Nest;
 using System.Threading;
 using Elastic.Transport.Products;
+using Elastic.Transport.Products.Elasticsearch;
 using Tests.Domain;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks

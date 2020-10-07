@@ -4,16 +4,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
+using Elastic.Transport.Extensions;
 
 namespace Elastic.Transport
 {
 	public class Node : IEquatable<Node>
 	{
-		private static readonly IReadOnlyDictionary<string, object> EmptySettings =
-			new ReadOnlyDictionary<string, object>(new Dictionary<string, object>());
+		private IReadOnlyCollection<string> _features;
 
-		public Node(Uri uri)
+		public Node(Uri uri, IEnumerable<string> features = null)
 		{
 			//this makes sure that Elasticsearch paths stay relative to the path passed in
 			//http://my-saas-provider.com/instance
@@ -21,12 +21,37 @@ namespace Elastic.Transport
 				uri = new Uri(uri.OriginalString + "/");
 			Uri = uri;
 			IsAlive = true;
-			HoldsData = true;
-			MasterEligible = true;
+			if (features is IReadOnlyCollection<string> s)
+				Features = s;
+			else
+				Features = features?.ToList().AsReadOnly() ?? EmptyReadOnly<string>.Collection;
 			IsResurrected = true;
 		}
 
-		public bool ClientNode => !MasterEligible && !HoldsData;
+		private HashSet<string> _featureSet;
+		public IReadOnlyCollection<string> Features
+		{
+			get => _features;
+			set
+			{
+				_features = value;
+				_featureSet = new HashSet<string>(_features);
+			}
+		}
+
+		public IReadOnlyDictionary<string, object> Settings { get; set; } = EmptyReadOnly<string, object>.Dictionary;
+
+		/// <summary>The id of the node, defaults to null when unknown/unspecified</summary>
+		public string Id { get; internal set; }
+
+		/// <summary>The name of the node, defaults to null when unknown/unspecified</summary>
+		public string Name { get; set; }
+
+		public Uri Uri { get; }
+
+
+
+		public bool IsAlive { get; private set; }
 
 		/// <summary> When marked dead this reflects the date that the node has to be taken out of rotation till</summary>
 		public DateTime DeadUntil { get; private set; }
@@ -34,34 +59,29 @@ namespace Elastic.Transport
 		/// <summary> The number of failed attempts trying to use this node, resets when a node is marked alive</summary>
 		public int FailedAttempts { get; private set; }
 
-		/// <summary>Indicates whether this node holds data, defaults to true when unknown/unspecified</summary>
-		public bool HoldsData { get; set; }
-
-		/// <summary>Whether HTTP is enabled on the node or not</summary>
-		public bool HttpEnabled { get; set; } = true;
-
-		/// <summary>The id of the node, defaults to null when unknown/unspecified</summary>
-		public string Id { get; set; }
-
-		/// <summary>Indicates whether this node is allowed to run ingest pipelines, defaults to true when unknown/unspecified</summary>
-		public bool IngestEnabled { get; set; }
-
-		public virtual bool IsAlive { get; private set; }
-
 		/// <summary> When set this signals the transport that a ping before first usage would be wise</summary>
 		public bool IsResurrected { get; set; }
 
-		/// <summary>Indicates whether this node is master eligible, defaults to true when unknown/unspecified</summary>
-		public bool MasterEligible { get; set; }
+		public bool HasFeature(string feature) => _features.Count == 0 || _featureSet.Contains(feature);
 
-		public bool MasterOnlyNode => MasterEligible && !HoldsData;
 
-		/// <summary>The name of the node, defaults to null when unknown/unspecified</summary>
-		public string Name { get; set; }
-
-		public IReadOnlyDictionary<string, object> Settings { get; set; } = EmptySettings;
-
-		public Uri Uri { get; }
+		//
+		//
+		// public bool ClientNode => !MasterEligible && !HoldsData;
+		//
+		// /// <summary>Indicates whether this node holds data, defaults to true when unknown/unspecified</summary>
+		// public bool HoldsData { get; set; }
+		//
+		// /// <summary>Whether HTTP is enabled on the node or not</summary>
+		// public bool HttpEnabled { get; set; } = true;
+		//
+		// /// <summary>Indicates whether this node is allowed to run ingest pipelines, defaults to true when unknown/unspecified</summary>
+		// public bool IngestEnabled { get; set; }
+		//
+		// /// <summary>Indicates whether this node is master eligible, defaults to true when unknown/unspecified</summary>
+		// public bool MasterEligible { get; set; }
+		//
+		// public bool MasterOnlyNode => MasterEligible && !HoldsData;
 
 		//a Node is only unique by its Uri
 		public bool Equals(Node other)
@@ -91,23 +111,20 @@ namespace Elastic.Transport
 		public Uri CreatePath(string path) => new Uri(Uri, path);
 
 		public Node Clone() =>
-			new Node(Uri)
+			new Node(Uri, Features)
 			{
 				IsResurrected = IsResurrected,
 				Id = Id,
 				Name = Name,
-				HoldsData = HoldsData,
-				MasterEligible = MasterEligible,
 				FailedAttempts = FailedAttempts,
 				DeadUntil = DeadUntil,
 				IsAlive = IsAlive,
 				Settings = Settings,
-				IngestEnabled = IngestEnabled,
-				HttpEnabled = HttpEnabled
 			};
 
 
 		public static bool operator ==(Node left, Node right) =>
+			// ReSharper disable once MergeConditionalExpression
 			ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.Equals(right);
 
 		public static bool operator !=(Node left, Node right) => !(left == right);

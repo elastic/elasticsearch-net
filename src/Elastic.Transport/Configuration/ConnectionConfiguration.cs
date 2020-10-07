@@ -188,7 +188,7 @@ namespace Elastic.Transport
 		private TimeSpan? _maxDeadTimeout;
 		private int? _maxRetries;
 		private TimeSpan? _maxRetryTimeout;
-		private Func<Node, bool> _nodePredicate = DefaultNodePredicate;
+		private Func<Node, bool> _nodePredicate;
 		private Action<RequestData> _onRequestDataCreated = DefaultRequestDataCreated;
 		private TimeSpan? _pingTimeout;
 		private bool _prettyJson;
@@ -225,8 +225,6 @@ namespace Elastic.Transport
 			_sniffOnConnectionFault = true;
 			_sniffOnStartup = true;
 			_sniffLifeSpan = TimeSpan.FromHours(1);
-			if (_connectionPool.SupportsReseeding)
-				_nodePredicate = DefaultReseedableNodePredicate;
 
 			_urlFormatter = new ElasticsearchUrlFormatter(this);
 			_statusCodeToResponseSuccess = (m, i) => HttpStatusCodeClassifier(m, i);
@@ -295,15 +293,6 @@ namespace Elastic.Transport
 		private static void DefaultCompletedRequestHandler(IApiCallDetails response) { }
 
 		private static void DefaultRequestDataCreated(RequestData response) { }
-
-		/// <summary>
-		/// The default predicate for <see cref="IConnectionPool" /> implementations that return true for
-		/// <see cref="IConnectionPool.SupportsReseeding" />
-		/// in which case master only nodes are excluded from API calls.
-		/// </summary>
-		private static bool DefaultReseedableNodePredicate(Node node) => !node.MasterOnlyNode;
-
-		private static bool DefaultNodePredicate(Node node) => true;
 
 		protected T Assign<TValue>(TValue value, Action<T, TValue> assigner) => Fluent.Assign((T)this, value, assigner);
 
@@ -555,7 +544,7 @@ namespace Elastic.Transport
 		/// verbatim.
 		/// </summary>
 		/// <param name="predicate">Return true if you want the node to be used for API calls</param>
-		public T NodePredicate(Func<Node, bool> predicate) => Assign(predicate ?? DefaultNodePredicate, (a, v) => a._nodePredicate = v);
+		public T NodePredicate(Func<Node, bool> predicate) => Assign(predicate, (a, v) => a._nodePredicate = v);
 
 		/// <summary>
 		/// Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson()

@@ -17,8 +17,8 @@ namespace Elastic.Transport.Tests
 	{
 		[Fact] public async Task ThrowsExceptionWithNoRules()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(1)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(1)
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing().EnableDebugMode())
 			);
@@ -30,8 +30,8 @@ namespace Elastic.Transport.Tests
 
 		[Fact] public async Task ThrowsExceptionAfterDepleedingRules()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(1)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(1)
 				.ClientCalls(r => r.Succeeds(TimesHelper.Once).ReturnResponse(new { x = 1 }))
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing().EnableDebugMode())
@@ -55,14 +55,14 @@ namespace Elastic.Transport.Tests
 
 		[Fact] public async Task AGlobalRuleStaysValidForever()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(1)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(1)
 				.ClientCalls(c=>c.SucceedAlways())
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing())
 			);
 
-			audit = await audit.TraceCalls(
+			_ = await audit.TraceCalls(
 				Enumerable.Range(0, 1000)
 					.Select(i => new ClientCall { { HealthyResponse, 9200}, })
 					.ToArray()
@@ -72,8 +72,8 @@ namespace Elastic.Transport.Tests
 
 		[Fact] public async Task RulesAreIgnoredAfterBeingExecuted()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(1)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(1)
 				.ClientCalls(r => r.Succeeds(TimesHelper.Once).ReturnResponse(new { x = 1 }))
 				.ClientCalls(r => r.Fails(TimesHelper.Once, 500).ReturnResponse(new { x = 2 }))
 				.ClientCalls(r => r.Fails(TimesHelper.Twice, 400).ReturnResponse(new { x = 3 }))
@@ -81,7 +81,7 @@ namespace Elastic.Transport.Tests
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing().EnableDebugMode())
 			);
-			audit = await audit.TraceCalls(
+			_ = await audit.TraceCalls(
 				new ClientCall {
 
 					{ HealthyResponse, 9200, response =>

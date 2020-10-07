@@ -9,6 +9,7 @@ using Elastic.Transport;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.DocumentationTests;
+using static Elastic.Transport.Products.Elasticsearch.ElasticsearchNodeFeatures;
 
 namespace Tests.ClientConcepts.HighLevel.Indexing
 {
@@ -58,7 +59,7 @@ namespace Tests.ClientConcepts.HighLevel.Indexing
 				new Uri("http://node2:9200"),
 				new Uri("http://node3:9200")
 			});
-			var settings = new ConnectionSettings(pool).NodePredicate(n => n.IngestEnabled); //<2> predicate to select only nodes with ingest capabilities
+			var settings = new ConnectionSettings(pool).NodePredicate(n => n.HasFeature(IngestEnabled)); //<2> predicate to select only nodes with ingest capabilities
 			var indexingClient = new ElasticClient(settings);
 		}
 	}

@@ -35,8 +35,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		*/
 		[U] public async Task UnexpectedExceptionsBubbleOut()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster // <1> set up a cluster with 10 nodes
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch // <1> set up a cluster with 10 nodes
+				.Bootstrap(10)
 				.ClientCalls(r => r.SucceedAlways())
 				.ClientCalls(r => r.OnPort(9201).FailAlways(new Exception("boom!"))) // <2> where node 2 on port 9201 always throws an exception
 				.StaticConnectionPool()
@@ -74,8 +74,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 
 		[U] public async Task WillFailOverKnowConnectionExceptionButNotUnexpected()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(10)
 #if DOTNETCORE
 				.ClientCalls(r => r.OnPort(9200).FailAlways(new System.Net.Http.HttpRequestException("recover"))) // <1> calls on 9200 set up to throw a `HttpRequestException` or a `WebException`
 #else
@@ -109,8 +109,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		*/
 		[U] public async Task PingUnexceptedExceptionDoesFailOver()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(10)
 				.Ping(r => r.OnPort(9200).FailAlways(new Exception("ping exception")))
 				.Ping(r => r.OnPort(9201).SucceedAlways())
 				.ClientCalls(r => r.OnPort(9201).FailAlways(new Exception("boom!")))

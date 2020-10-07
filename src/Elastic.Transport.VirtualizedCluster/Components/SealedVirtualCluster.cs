@@ -6,7 +6,7 @@ using System;
 using Elastic.Transport.VirtualizedCluster.Products;
 using Elastic.Transport.VirtualizedCluster.Providers;
 
-namespace Elastic.Transport.VirtualizedCluster
+namespace Elastic.Transport.VirtualizedCluster.Components
 {
 	public class SealedVirtualCluster
 	{
@@ -15,7 +15,7 @@ namespace Elastic.Transport.VirtualizedCluster
 		private readonly TestableDateTimeProvider _dateTimeProvider;
 		private readonly IMockProductRegistration _productRegistration;
 
-		public SealedVirtualCluster(VirtualCluster cluster, IConnectionPool pool, TestableDateTimeProvider dateTimeProvider, IMockProductRegistration productRegistration)
+		internal SealedVirtualCluster(VirtualCluster cluster, IConnectionPool pool, TestableDateTimeProvider dateTimeProvider, IMockProductRegistration productRegistration)
 		{
 			_connectionPool = pool;
 			_connection = new VirtualClusterConnection(cluster, dateTimeProvider);

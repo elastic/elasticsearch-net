@@ -14,12 +14,12 @@ namespace Elastic.Transport.VirtualizedCluster.Audit
 {
 	public class Auditor
 	{
-		private VirtualizedCluster _cluster;
-		private VirtualizedCluster _clusterAsync;
+		private Components.VirtualizedCluster _cluster;
+		private Components.VirtualizedCluster _clusterAsync;
 
-		public Auditor(Func<VirtualizedCluster> setup) => Cluster = setup;
+		public Auditor(Func<Components.VirtualizedCluster> setup) => Cluster = setup;
 
-		private Auditor(VirtualizedCluster cluster, VirtualizedCluster clusterAsync)
+		private Auditor(Components.VirtualizedCluster cluster, Components.VirtualizedCluster clusterAsync)
 		{
 			_cluster = cluster;
 			_clusterAsync = clusterAsync;
@@ -34,7 +34,7 @@ namespace Elastic.Transport.VirtualizedCluster.Audit
 
 		public List<Elastic.Transport.Diagnostics.Auditing.Audit> AsyncAuditTrail { get; set; }
 		public List<Elastic.Transport.Diagnostics.Auditing.Audit> AuditTrail { get; set; }
-		public Func<VirtualizedCluster> Cluster { get; set; }
+		public Func<Components.VirtualizedCluster> Cluster { get; set; }
 
 		public ITransportResponse Response { get; internal set; }
 		public ITransportResponse ResponseAsync { get; internal set; }

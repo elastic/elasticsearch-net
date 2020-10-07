@@ -21,8 +21,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		[U]
 		public async Task CanOverrideBadResponse()
 		{
-			var audit = new Auditor(() => ElasticsearchVirtualCluster
-				.Nodes(10)
+			var audit = new Auditor(() => Virtual.Elasticsearch
+				.Bootstrap(10)
 				.ClientCalls(r => r.FailAlways(400))
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing().MaximumRetries(0))

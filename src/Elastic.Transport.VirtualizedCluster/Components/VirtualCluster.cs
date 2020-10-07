@@ -4,28 +4,26 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Elastic.Transport.VirtualizedCluster.Products;
 using Elastic.Transport.VirtualizedCluster.Providers;
 using Elastic.Transport.VirtualizedCluster.Rules;
 
-namespace Elastic.Transport.VirtualizedCluster
+namespace Elastic.Transport.VirtualizedCluster.Components
 {
 	public class VirtualCluster
 	{
-		private readonly List<Node> _nodes;
-
-		public VirtualCluster(IEnumerable<Node> nodes, IMockProductRegistration productRegistration)
+		protected VirtualCluster(IEnumerable<Node> nodes, IMockProductRegistration productRegistration)
 		{
 			ProductRegistration = productRegistration;
-			_nodes = nodes.ToList();
+			InternalNodes = nodes.ToList();
 		}
 
 		public List<IClientCallRule> ClientCallRules { get; } = new List<IClientCallRule>();
 		public TestableDateTimeProvider DateTimeProvider { get; } = new TestableDateTimeProvider();
 
-		public IReadOnlyList<Node> Nodes => _nodes;
+		protected List<Node> InternalNodes { get; }
+		public IReadOnlyList<Node> Nodes => InternalNodes;
 		public List<IRule> PingingRules { get; } = new List<IRule>();
 
 		public List<ISniffRule> SniffingRules { get; } = new List<ISniffRule>();
@@ -41,6 +39,7 @@ namespace Elastic.Transport.VirtualizedCluster
 			SniffShouldReturnFqnd = true;
 			return this;
 		}
+
 		public VirtualCluster SniffElasticsearchVersionNumber(string version)
 		{
 			ElasticsearchVersion = version;
@@ -50,34 +49,6 @@ namespace Elastic.Transport.VirtualizedCluster
 		public VirtualCluster PublishAddress(string publishHost)
 		{
 			PublishAddressOverride = publishHost;
-			return this;
-		}
-
-		public VirtualCluster MasterEligible(params int[] ports)
-		{
-			foreach (var node in _nodes.Where(n => !ports.Contains(n.Uri.Port)))
-				node.MasterEligible = false;
-			return this;
-		}
-
-		public VirtualCluster StoresNoData(params int[] ports)
-		{
-			foreach (var node in _nodes.Where(n => ports.Contains(n.Uri.Port)))
-				node.HoldsData = false;
-			return this;
-		}
-
-		public VirtualCluster HasSetting(string key, string value, params int[] ports)
-		{
-			foreach (var node in _nodes.Where(n => ports.Contains(n.Uri.Port)))
-				node.Settings = new ReadOnlyDictionary<string, object>(new Dictionary<string, object> { { key, value } });
-			return this;
-		}
-
-		public VirtualCluster HttpDisabled(params int[] ports)
-		{
-			foreach (var node in _nodes.Where(n => ports.Contains(n.Uri.Port)))
-				node.HttpEnabled = false;
 			return this;
 		}
 
@@ -101,25 +72,25 @@ namespace Elastic.Transport.VirtualizedCluster
 
 		public SealedVirtualCluster SingleNodeConnection(Func<IList<Node>, IEnumerable<Node>> seedNodesSelector = null)
 		{
-			var nodes = seedNodesSelector?.Invoke(_nodes) ?? _nodes;
+			var nodes = seedNodesSelector?.Invoke(InternalNodes) ?? InternalNodes;
 			return new SealedVirtualCluster(this, new SingleNodeConnectionPool(nodes.First().Uri), DateTimeProvider, ProductRegistration);
 		}
 
 		public SealedVirtualCluster StaticConnectionPool(Func<IList<Node>, IEnumerable<Node>> seedNodesSelector = null)
 		{
-			var nodes = seedNodesSelector?.Invoke(_nodes) ?? _nodes;
+			var nodes = seedNodesSelector?.Invoke(InternalNodes) ?? InternalNodes;
 			return new SealedVirtualCluster(this, new StaticConnectionPool(nodes, false, DateTimeProvider), DateTimeProvider, ProductRegistration);
 		}
 
 		public SealedVirtualCluster SniffingConnectionPool(Func<IList<Node>, IEnumerable<Node>> seedNodesSelector = null)
 		{
-			var nodes = seedNodesSelector?.Invoke(_nodes) ?? _nodes;
+			var nodes = seedNodesSelector?.Invoke(InternalNodes) ?? InternalNodes;
 			return new SealedVirtualCluster(this, new SniffingConnectionPool(nodes, false, DateTimeProvider), DateTimeProvider, ProductRegistration);
 		}
 
 		public SealedVirtualCluster StickyConnectionPool(Func<IList<Node>, IEnumerable<Node>> seedNodesSelector = null)
 		{
-			var nodes = seedNodesSelector?.Invoke(_nodes) ?? _nodes;
+			var nodes = seedNodesSelector?.Invoke(InternalNodes) ?? InternalNodes;
 			return new SealedVirtualCluster(this, new StickyConnectionPool(nodes, DateTimeProvider), DateTimeProvider, ProductRegistration);
 		}
 
@@ -127,7 +98,7 @@ namespace Elastic.Transport.VirtualizedCluster
 			Func<IList<Node>, IEnumerable<Node>> seedNodesSelector = null
 		)
 		{
-			var nodes = seedNodesSelector?.Invoke(_nodes) ?? _nodes;
+			var nodes = seedNodesSelector?.Invoke(InternalNodes) ?? InternalNodes;
 			return new SealedVirtualCluster(this, new StickySniffingConnectionPool(nodes, sorter, DateTimeProvider), DateTimeProvider, ProductRegistration);
 		}
 	}
