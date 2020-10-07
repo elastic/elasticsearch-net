@@ -4,7 +4,4 @@
     <!-- CAC001: We dont want to set ConfigureAwait() in tests, assume who evers calling our lib doesn't do this either.-->
     <NoWarn>CAC001</NoWarn>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TestPackageVersion)'!=''">
-    <RestoreSources>$(SolutionRoot)/build/output/_packages;https://api.nuget.org/v3/index.json</RestoreSources>
-  </PropertyGroup>
 </Project>

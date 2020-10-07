@@ -43,4 +43,14 @@
     <PackageReference Condition="'$(OS)' != 'Windows_NT' and $(DefineConstants.Contains(FULLFRAMEWORK))" Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0-preview.2"/>
   </ItemGroup>
 
+  
+  <!--- 
+    On CI we run the tests projects with them directly referencing the nuget packages
+    This adds the ouput path to restore sources. The reason we only do this on CI is because otherwise our development machine's nuget cache 
+    would take on docker'esque proportions!
+    -->
+  <PropertyGroup Condition="'$(TestPackageVersion)'!=''">
+    <RestoreSources>$(SolutionRoot)/build/output/_packages;https://api.nuget.org/v3/index.json</RestoreSources>
+  </PropertyGroup>
+
 </Project>
