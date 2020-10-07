@@ -65,7 +65,7 @@ namespace Elasticsearch.Net
 
 		protected ITransport<IConnectionConfigurationValues> Transport { get; set; }
 
-		private ElasticsearchUrlFormatter UrlFormatter { get; }
+		private UrlFormatter UrlFormatter { get; }
 
 		public TResponse DoRequest<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() =>

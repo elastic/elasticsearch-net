@@ -85,7 +85,7 @@ namespace Elastic.Transport.Diagnostics
 		public class RequestPipelineDiagnosticKeys : IDiagnosticsKeys
 		{
 			public string SourceName { get; } = typeof(RequestPipeline).FullName;
-			public string CallElasticsearch { get; } = nameof(CallElasticsearch);
+			public string CallProductEndpoint { get; } = nameof(CallProductEndpoint);
 			public string Ping { get; } = nameof(Ping);
 			public string Sniff { get; } = nameof(Sniff);
 		}

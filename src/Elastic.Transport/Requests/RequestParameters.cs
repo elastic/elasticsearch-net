@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System.Collections.Generic;
-using static Elastic.Transport.ElasticsearchUrlFormatter;
+using static Elastic.Transport.UrlFormatter;
 
 // ReSharper disable once CheckNamespace
 namespace Elastic.Transport

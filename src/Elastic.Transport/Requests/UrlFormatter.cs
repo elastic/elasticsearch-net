@@ -13,11 +13,11 @@ namespace Elastic.Transport
 	/// A formatter that can utilize <see cref="IConnectionConfigurationValues" /> to resolve <see cref="IUrlParameter" />'s passed
 	/// as format arguments. It also handles known string representations for e.g bool/Enums/IEnumerable<object>.
 	/// </summary>
-	public class ElasticsearchUrlFormatter : IFormatProvider, ICustomFormatter
+	public class UrlFormatter : IFormatProvider, ICustomFormatter
 	{
 		private readonly IConnectionConfigurationValues _settings;
 
-		public ElasticsearchUrlFormatter(IConnectionConfigurationValues settings) => _settings = settings;
+		public UrlFormatter(IConnectionConfigurationValues settings) => _settings = settings;
 
 		public string Format(string format, object arg, IFormatProvider formatProvider)
 		{

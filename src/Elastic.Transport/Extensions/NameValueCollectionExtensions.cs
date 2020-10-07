@@ -67,9 +67,7 @@ namespace Elastic.Transport.Extensions
 			}
 		}
 
-		internal static void UpdateFromDictionary(this NameValueCollection queryString, Dictionary<string, object> queryStringUpdates,
-			ElasticsearchUrlFormatter provider
-		)
+		internal static void UpdateFromDictionary(this NameValueCollection queryString, Dictionary<string, object> queryStringUpdates, UrlFormatter provider)
 		{
 			if (queryString == null || queryString.Count < 0) return;
 			if (queryStringUpdates == null || queryStringUpdates.Count < 0) return;

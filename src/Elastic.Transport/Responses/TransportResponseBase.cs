@@ -22,7 +22,7 @@ namespace Elastic.Transport
 	}
 
 	/// <summary>
-	/// A response from Elasticsearch including details about the request/response life cycle
+	/// A response as returned by <see cref="ITransport{TConnectionSettings}"/> including details about the request/response life cycle
 	/// </summary>
 	public abstract class TransportResponseBase : IApiCallDetails, ITransportResponse
 	{

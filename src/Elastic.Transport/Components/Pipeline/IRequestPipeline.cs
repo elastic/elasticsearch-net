@@ -24,10 +24,10 @@ namespace Elastic.Transport
 
 		DateTime StartedOn { get; }
 
-		TResponse CallElasticsearch<TResponse>(RequestData requestData)
+		TResponse CallProductEndpoint<TResponse>(RequestData requestData)
 			where TResponse : class, ITransportResponse, new();
 
-		Task<TResponse> CallElasticsearchAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
+		Task<TResponse> CallProductEndpointAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 			where TResponse : class, ITransportResponse, new();
 
 		void MarkAlive(Node node);

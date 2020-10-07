@@ -117,7 +117,7 @@ namespace Elastic.Transport
 			}
 		}
 
-		[EventSource(Name = "Elasticsearch-Net-RecyclableMemoryStream", Guid = "{AD44FDAC-D3FC-460A-9EBE-E55A3569A8F6}")]
+		[EventSource(Name = "Elastic-Transport-RecyclableMemoryStream", Guid = "{AD44FDAC-D3FC-460A-9EBE-E55A3569A8F6}")]
 		public sealed class Events : EventSource
 		{
 

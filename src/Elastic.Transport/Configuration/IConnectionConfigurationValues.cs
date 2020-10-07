@@ -39,7 +39,7 @@ namespace Elastic.Transport
 		/// </summary>
 		X509CertificateCollection ClientCertificates { get; }
 
-		/// <summary> The connection implementation to use when talking with Elasticsearch </summary>
+		/// <summary> The connection abstraction behind which all actual IO happens</summary>
 		IConnection Connection { get; }
 
 		/// <summary>
@@ -73,7 +73,7 @@ namespace Elastic.Transport
 
 		/// <summary>
 		/// When set to true will disable (de)serializing directly to the request and response stream and return a byte[]
-		/// copy of the raw request and response on Elasticsearch calls. Defaults to  false
+		/// copy of the raw request and response. Defaults to false
 		/// </summary>
 		bool DisableDirectStreaming { get; }
 
@@ -84,8 +84,7 @@ namespace Elastic.Transport
 		bool DisablePings { get; }
 
 		/// <summary>
-		/// Enable gzip compressed requests and responses, do note that you need to configure Elasticsearch to set this
-		/// <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html</para>
+		/// Enable gzip compressed requests and responses
 		/// </summary>
 		bool EnableHttpCompression { get; }
 
@@ -228,7 +227,7 @@ namespace Elastic.Transport
 		/// </summary>
 		bool ThrowExceptions { get; }
 
-		ElasticsearchUrlFormatter UrlFormatter { get; }
+		UrlFormatter UrlFormatter { get; }
 
 		/// <summary>
 		/// The user agent string to send with requests. Useful for debugging purposes to understand client and framework

@@ -15,8 +15,9 @@ namespace Elastic.Transport
 
 		public Node(Uri uri, IEnumerable<string> features = null)
 		{
-			//this makes sure that Elasticsearch paths stay relative to the path passed in
-			//http://my-saas-provider.com/instance
+			// This make sures that a node can be rooted at a path to. Without the trailing slash Uri's will remove `instance` from
+			// http://my-saas-provider.com/instance
+			// Where this might be the user specific path
 			if (!uri.OriginalString.EndsWith("/", StringComparison.Ordinal))
 				uri = new Uri(uri.OriginalString + "/");
 			Uri = uri;
