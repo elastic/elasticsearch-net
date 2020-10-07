@@ -9,7 +9,7 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'!=''">
-    <PackageReference Include="Elasticsearch.Net.VirtualizedCluster" Version="$(TestPackageVersion)" />
+    <PackageReference Include="Elastic.Transport.VirtualizedCluster" Version="$(TestPackageVersion)" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj" />
