@@ -53,7 +53,7 @@ namespace Elastic.Transport
 
 		public Uri Uri { get; set; }
 
-		public IConnectionConfigurationValues ConnectionConfiguration { get; set; }
+		public ITransportConfigurationValues ConnectionConfiguration { get; set; }
 
 		public override string ToString() =>
 			$"{(Success ? "S" : "Uns")}uccessful ({HttpStatusCode}) low level call on {HttpMethod.GetStringValue()}: {Uri.PathAndQuery}";

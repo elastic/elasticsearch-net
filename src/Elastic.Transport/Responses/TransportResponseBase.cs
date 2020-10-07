@@ -87,7 +87,7 @@ namespace Elastic.Transport
 
 		/// <inheritdoc cref="IApiCallDetails.ConnectionConfiguration"/>
 		[JsonIgnore]
-		public IConnectionConfigurationValues ConnectionConfiguration => ApiCall.ConnectionConfiguration;
+		public ITransportConfigurationValues ConnectionConfiguration => ApiCall.ConnectionConfiguration;
 
 		/// <inheritdoc cref="IApiCallDetails.ResponseBodyInBytes"/>
 		[JsonIgnore]

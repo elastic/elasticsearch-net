@@ -421,8 +421,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		{
 			var uri = TestConnectionSettings.CreateUri(this._cluster.Nodes.First().Port ?? 9200);
 			this._settings = new ConnectionSettings(new SniffingConnectionPool(new[] { uri }));
-			var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new RecyclableMemoryStreamFactory(),
-				new SearchRequestParameters(), ElasticsearchProductRegistration.Default);
+			var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new RecyclableMemoryStreamFactory(), new SearchRequestParameters());
 			return pipeline;
 		}
 

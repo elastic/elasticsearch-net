@@ -8,16 +8,16 @@ namespace Elastic.Transport
 {
 	public interface IRequestPipelineFactory
 	{
-		IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider,
-			IMemoryStreamFactory memoryStreamFactory, IRequestParameters requestParametersm, IProductRegistration productRegistration
+		IRequestPipeline Create(ITransportConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider,
+			IMemoryStreamFactory memoryStreamFactory, IRequestParameters requestParameters
 		);
 	}
 
 	public class RequestPipelineFactory : IRequestPipelineFactory
 	{
-		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider,
-			IMemoryStreamFactory memoryStreamFactory, IRequestParameters requestParameters, IProductRegistration productRegistration
+		public IRequestPipeline Create(ITransportConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider,
+			IMemoryStreamFactory memoryStreamFactory, IRequestParameters requestParameters
 		) =>
-			new RequestPipeline(configurationValues, dateTimeProvider, memoryStreamFactory, requestParameters, productRegistration);
+			new RequestPipeline(configurationValues, dateTimeProvider, memoryStreamFactory, requestParameters);
 	}
 }

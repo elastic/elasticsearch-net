@@ -98,7 +98,7 @@ namespace Nest
 		public ElasticClient(string cloudId, ApiKeyAuthenticationCredentials credentials) : this(new ConnectionSettings(cloudId, credentials)) { }
 
 		public ElasticClient(IConnectionSettingsValues connectionSettings)
-			: this(new Transport<IConnectionSettingsValues>(connectionSettings ?? new ConnectionSettings(), ElasticsearchProductRegistration.Default)) { }
+			: this(new Transport<IConnectionSettingsValues>(connectionSettings ?? new ConnectionSettings())) { }
 
 		public ElasticClient(ITransport<IConnectionSettingsValues> transport)
 		{

@@ -35,7 +35,7 @@ namespace Nest
 
 		public bool Equals(Fields other) => EqualsAllFields(ListOfFields, other?.ListOfFields);
 
-		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
+		string IUrlParameter.GetString(ITransportConfigurationValues settings)
 		{
 			if (!(settings is IConnectionSettingsValues nestSettings))
 				throw new ArgumentNullException(nameof(settings),

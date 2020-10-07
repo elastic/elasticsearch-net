@@ -57,7 +57,7 @@ namespace Nest.Utf8Json
 		}
 
 		public ILStreamReader(byte[] ilByteArray)
-			: base(ConnectionConfiguration.DefaultMemoryStreamFactory.Create(ilByteArray)) =>
+			: base(TransportConfiguration.DefaultMemoryStreamFactory.Create(ilByteArray)) =>
 			_endPosition = ilByteArray.Length;
 
 		public OpCode ReadOpCode()

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Elastic.Transport
 {
 	public interface ITransport<out TConnectionSettings>
-		where TConnectionSettings : IConnectionConfigurationValues
+		where TConnectionSettings : ITransportConfigurationValues
 
 	{
 		TConnectionSettings Settings { get; }

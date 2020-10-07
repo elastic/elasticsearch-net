@@ -9,7 +9,7 @@ namespace Elastic.Transport
 {
 	/// <summary>
 	/// An <see cref="IConnectionPool"/> implementation that can be seeded with a cloud id
-	/// and will signal the right defaults for the client to use for Elastic Cloud to <see cref="IConnectionConfigurationValues"/>.
+	/// and will signal the right defaults for the client to use for Elastic Cloud to <see cref="ITransportConfigurationValues"/>.
 	///
 	/// <para>Read more about Elastic Cloud Id:</para>
 	/// <para>https://www.elastic.co/guide/en/cloud/current/ec-cloud-id.html</para>
@@ -18,7 +18,7 @@ namespace Elastic.Transport
 	{
 		/// <summary>
 		/// An <see cref="IConnectionPool"/> implementation that can be seeded with a cloud id
-		/// and will signal the right defaults for the client to use for Elastic Cloud to <see cref="IConnectionConfigurationValues"/>.
+		/// and will signal the right defaults for the client to use for Elastic Cloud to <see cref="ITransportConfigurationValues"/>.
 		///
 		/// <para>Read more about Elastic Cloud Id here</para>
 		/// <para>https://www.elastic.co/guide/en/cloud/current/ec-cloud-id.html</para>
@@ -40,7 +40,7 @@ namespace Elastic.Transport
 
 		/// <summary>
 		/// An <see cref="IConnectionPool"/> implementation that can be seeded with a cloud id
-		/// and will signal the right defaults for the client to use for Elastic Cloud to <see cref="IConnectionConfigurationValues"/>.
+		/// and will signal the right defaults for the client to use for Elastic Cloud to <see cref="ITransportConfigurationValues"/>.
 		///
 		/// <para>Read more about Elastic Cloud Id here</para>
 		/// <para>https://www.elastic.co/guide/en/cloud/current/ec-cloud-id.html</para>

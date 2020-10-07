@@ -118,10 +118,10 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 			await this.AssertOn(new ConnectionSettings());
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			await this.AssertOn(new ConnectionConfiguration(pool, new LowLevelRequestResponseSerializer()));
+			await this.AssertOn(new TransportConfiguration(pool, new LowLevelRequestResponseSerializer()));
 		}
 
-		private async Task AssertOn(IConnectionConfigurationValues settings)
+		private async Task AssertOn(ITransportConfigurationValues settings)
 		{
 			/**
 			 * Each of the implicitly converted types behaves _slightly_ differently.
@@ -175,7 +175,7 @@ namespace Tests.ClientConcepts.LowLevel
 			* If you want to maintain a copy of the request that went out, you can set `DisableDirectStreaming`  on `ConnectionConfiguration`.
 			* In doing so, the serialized bytes are first written to a private `MemoryStream` so that the client can get hold of the serialized bytes
 			*/
-			settings = new ConnectionConfiguration().DisableDirectStreaming();
+			settings = new TransportConfiguration().DisableDirectStreaming();
 
 			await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: true, settings: settings);
 
@@ -194,7 +194,7 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		//hide
-		private static async Task Post(Func<PostData> postData, byte[] writes, bool writtenBytesIsSet, IConnectionConfigurationValues settings)
+		private static async Task Post(Func<PostData> postData, byte[] writes, bool writtenBytesIsSet, ITransportConfigurationValues settings)
 		{
 			PostAssert(postData(), writes, writtenBytesIsSet, settings);
 			await Task.CompletedTask;
@@ -202,7 +202,7 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		//hide
-		private static void PostAssert(PostData postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
+		private static void PostAssert(PostData postData, byte[] writes, bool storesBytes, ITransportConfigurationValues settings)
 		{
 			using (var ms = new MemoryStream())
 			{
@@ -222,7 +222,7 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		//hide
-		private static async Task PostAssertAsync(PostData postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
+		private static async Task PostAssertAsync(PostData postData, byte[] writes, bool storesBytes, ITransportConfigurationValues settings)
 		{
 			using (var ms = new MemoryStream())
 			{

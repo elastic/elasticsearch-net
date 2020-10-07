@@ -6,6 +6,6 @@ namespace Elastic.Transport
 {
 	public interface IUrlParameter
 	{
-		string GetString(IConnectionConfigurationValues settings);
+		string GetString(ITransportConfigurationValues settings);
 	}
 }

@@ -122,10 +122,10 @@ namespace Elastic.Transport
 		/// </summary>
 		NameValueCollection Headers { get; set; }
 
-		/// <inheritdoc cref="IConnectionConfigurationValues.EnableTcpStats"/>
+		/// <inheritdoc cref="ITransportConfigurationValues.EnableTcpStats"/>
 		bool? EnableTcpStats { get; set; }
 
-		/// <inheritdoc cref="IConnectionConfigurationValues.EnableThreadPoolStats"/>
+		/// <inheritdoc cref="ITransportConfigurationValues.EnableThreadPoolStats"/>
 		bool? EnableThreadPoolStats { get; set; }
 	}
 

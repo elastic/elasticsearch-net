@@ -105,7 +105,7 @@ namespace Tests.ClientConcepts.Connection
 			var node = Client.ConnectionSettings.ConnectionPool.Nodes.First();
 			var connectionSettings = new ConnectionSettings(node.Uri)
 				.RequestTimeout(requestTimeout)
-				.DnsRefreshTimeout(dnsRefreshTimeout ?? ConnectionConfiguration.DefaultDnsRefreshTimeout)
+				.DnsRefreshTimeout(dnsRefreshTimeout ?? TransportConfiguration.DefaultDnsRefreshTimeout)
 				.DisableAutomaticProxyDetection(disableAutomaticProxyDetection)
 				.TransferEncodingChunked(transferEncodingChunked)
 				.EnableHttpCompression(httpCompression);

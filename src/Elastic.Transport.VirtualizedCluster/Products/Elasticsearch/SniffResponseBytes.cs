@@ -21,7 +21,7 @@ namespace Elastic.Transport.VirtualizedCluster.Products.Elasticsearch
 				cluster_name = ClusterName,
 				nodes = SniffResponseNodes(nodes, elasticsearchVersion, publishAddressOverride, randomFqdn)
 			};
-			using (var ms = ConnectionConfiguration.DefaultMemoryStreamFactory.Create())
+			using (var ms = TransportConfiguration.DefaultMemoryStreamFactory.Create())
 			{
 				LowLevelRequestResponseSerializer.Instance.Serialize(response, ms);
 				return ms.ToArray();

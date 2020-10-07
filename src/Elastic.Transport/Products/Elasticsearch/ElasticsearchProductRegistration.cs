@@ -11,33 +11,18 @@ using System.Threading.Tasks;
 
 namespace Elastic.Transport.Products.Elasticsearch
 {
-	public static class ElasticsearchNodeFeatures
-	{
-		/// <summary>Indicates whether this node holds data, defaults to true when unknown/unspecified</summary>
-		public const string HoldsData = "node.data";
-		/// <summary>Whether HTTP is enabled on the node or not</summary>
-		public const string HttpEnabled = "node.http";
-		/// <summary>Indicates whether this node is allowed to run ingest pipelines, defaults to true when unknown/unspecified</summary>
-		public const string IngestEnabled = "node.ingest";
-		/// <summary>Indicates whether this node is master eligible, defaults to true when unknown/unspecified</summary>
-		public const string MasterEligible = "node.master";
-
-		public static readonly IReadOnlyCollection<string> Default = new[] { HoldsData, MasterEligible, IngestEnabled, HttpEnabled }.ToList().AsReadOnly();
-		public static readonly IReadOnlyCollection<string> MasterEligableOnly = new[] { MasterEligible, HttpEnabled }.ToList().AsReadOnly();
-		public static readonly IReadOnlyCollection<string> NotMasterEligable = Default.Except(new[] { MasterEligible }).ToList().AsReadOnly();
-
-	}
-
 	public class ElasticsearchProductRegistration : IProductRegistration
 	{
 		public static IProductRegistration Default { get; } = new ElasticsearchProductRegistration();
+
+		public string Name { get; } = "elasticsearch-net";
 
 		public bool SupportsPing { get; } = true;
 		public bool SupportsSniff { get; } = true;
 
 		public static string SniffPath => "_nodes/http,settings";
 
-		public RequestData CreateSniffRequestData(Node node, IRequestConfiguration requestConfiguration, IConnectionConfigurationValues settings,
+		public RequestData CreateSniffRequestData(Node node, IRequestConfiguration requestConfiguration, ITransportConfigurationValues settings,
 			IMemoryStreamFactory memoryStreamFactory
 		)
 		{
@@ -68,7 +53,7 @@ namespace Elastic.Transport.Products.Elasticsearch
 			// skip master only nodes (holds no data and is master eligable)
 			!(node.HasFeature(ElasticsearchNodeFeatures.MasterEligible) && !node.HasFeature(ElasticsearchNodeFeatures.HoldsData));
 
-		public RequestData CreatePingRequestData(Node node, RequestConfiguration requestConfiguration, IConnectionConfigurationValues global,
+		public RequestData CreatePingRequestData(Node node, RequestConfiguration requestConfiguration, ITransportConfigurationValues global,
 			IMemoryStreamFactory memoryStreamFactory
 		)
 		{

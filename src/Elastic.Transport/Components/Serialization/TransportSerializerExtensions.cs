@@ -13,7 +13,7 @@ namespace Elastic.Transport.Extensions
 			this ITransportSerializer serializer,
 			T data,
 			SerializationFormatting formatting = SerializationFormatting.None) =>
-			SerializeToBytes(serializer, data, ConnectionConfiguration.DefaultMemoryStreamFactory, formatting);
+			SerializeToBytes(serializer, data, TransportConfiguration.DefaultMemoryStreamFactory, formatting);
 
 		/// <summary>
 		/// Extension method that serializes an instance of <typeparamref name="T"/> to a byte array.
@@ -29,7 +29,7 @@ namespace Elastic.Transport.Extensions
 			SerializationFormatting formatting = SerializationFormatting.None
 		)
 		{
-			memoryStreamFactory ??= ConnectionConfiguration.DefaultMemoryStreamFactory;
+			memoryStreamFactory ??= TransportConfiguration.DefaultMemoryStreamFactory;
 			using (var ms = memoryStreamFactory.Create())
 			{
 				serializer.Serialize(data, ms, formatting);
@@ -44,7 +44,7 @@ namespace Elastic.Transport.Extensions
 			this ITransportSerializer serializer,
 			T data,
 			SerializationFormatting formatting = SerializationFormatting.None) =>
-			SerializeToString(serializer, data, ConnectionConfiguration.DefaultMemoryStreamFactory, formatting);
+			SerializeToString(serializer, data, TransportConfiguration.DefaultMemoryStreamFactory, formatting);
 
 		/// <summary>
 		/// Extension method that serializes an instance of <typeparamref name="T"/> to a string.
@@ -60,7 +60,7 @@ namespace Elastic.Transport.Extensions
 			SerializationFormatting formatting = SerializationFormatting.None
 		)
 		{
-			memoryStreamFactory ??= ConnectionConfiguration.DefaultMemoryStreamFactory;
+			memoryStreamFactory ??= TransportConfiguration.DefaultMemoryStreamFactory;
 			using (var ms = memoryStreamFactory.Create())
 			{
 				serializer.Serialize(data, ms, formatting);

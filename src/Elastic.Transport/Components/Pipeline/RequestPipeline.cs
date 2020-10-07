@@ -27,7 +27,7 @@ namespace Elastic.Transport
 		private readonly IDateTimeProvider _dateTimeProvider;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 		private readonly IProductRegistration _productRegistration;
-		private readonly IConnectionConfigurationValues _settings;
+		private readonly ITransportConfigurationValues _settings;
 		private readonly Func<Node, bool> _nodePredicate;
 
 		private RequestConfiguration PingRequestConfiguration { get; }
@@ -35,11 +35,10 @@ namespace Elastic.Transport
 		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.RequestPipeline.SourceName);
 
 		public RequestPipeline(
-			IConnectionConfigurationValues configurationValues,
+			ITransportConfigurationValues configurationValues,
 			IDateTimeProvider dateTimeProvider,
 			IMemoryStreamFactory memoryStreamFactory,
-			IRequestParameters requestParameters,
-			IProductRegistration productRegistration
+			IRequestParameters requestParameters
 		)
 		{
 			_settings = configurationValues;
@@ -47,7 +46,7 @@ namespace Elastic.Transport
 			_connection = _settings.Connection;
 			_dateTimeProvider = dateTimeProvider;
 			_memoryStreamFactory = memoryStreamFactory;
-			_productRegistration = productRegistration;
+			_productRegistration = configurationValues.ProductRegistration;
 
 			_nodePredicate = _settings.NodePredicate ?? _productRegistration.NodePredicate;
 
@@ -133,7 +132,7 @@ namespace Elastic.Transport
 		private TimeSpan PingTimeout =>
 			RequestConfiguration?.PingTimeout
 			?? _settings.PingTimeout
-			?? (_connectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
+			?? (_connectionPool.UsingSsl ? TransportConfiguration.DefaultPingTimeoutOnSSL : TransportConfiguration.DefaultPingTimeout);
 
 		private IRequestConfiguration RequestConfiguration { get; }
 

@@ -230,8 +230,9 @@ namespace Elastic.Transport
 				request.Headers.Add("Content-Encoding", "gzip");
 			}
 
-			if (!string.IsNullOrWhiteSpace(requestData.UserAgent))
-				request.UserAgent = requestData.UserAgent;
+			var userAgent = requestData.UserAgent?.ToString();
+			if (!string.IsNullOrWhiteSpace(userAgent))
+				request.UserAgent = userAgent;
 
 			if (!string.IsNullOrWhiteSpace(requestData.RunAs))
 				request.Headers.Add(RequestData.RunAsSecurityHeader, requestData.RunAs);

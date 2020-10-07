@@ -4,6 +4,7 @@
 
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
+using Elasticsearch.Net;
 
 namespace Nest.Utf8Json
 {

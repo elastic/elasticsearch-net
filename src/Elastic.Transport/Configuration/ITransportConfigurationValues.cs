@@ -9,10 +9,11 @@ using System.Net.Security;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Elastic.Transport.Products;
 
 namespace Elastic.Transport
 {
-	public interface IConnectionConfigurationValues : IDisposable
+	public interface ITransportConfigurationValues : IDisposable
 	{
 		/// <summary>
 		/// Basic access authorization credentials to specify with all requests.
@@ -44,7 +45,7 @@ namespace Elastic.Transport
 
 		/// <summary>
 		/// Limits the number of concurrent connections that can be opened to an endpoint. Defaults to 80 (see
-		/// <see cref="ConnectionConfiguration.DefaultConnectionLimit" />).
+		/// <see cref="TransportConfiguration.DefaultConnectionLimit" />).
 		/// <para>
 		/// For Desktop CLR, this setting applies to the DefaultConnectionLimit property on the  ServicePointManager object when creating
 		/// ServicePoint objects, affecting the default <see cref="IConnection" /> implementation.
@@ -58,6 +59,11 @@ namespace Elastic.Transport
 
 		/// <summary> The connection pool to use when talking with Elasticsearch </summary>
 		IConnectionPool ConnectionPool { get; }
+
+		/// <summary>
+		/// Returns information about the current product making use of the transport.
+		/// </summary>
+		IProductRegistration ProductRegistration { get; }
 
 		/// <summary>
 		/// The time to put dead nodes out of rotation (this will be multiplied by the number of times they've been dead)
@@ -160,12 +166,6 @@ namespace Elastic.Transport
 		TimeSpan? PingTimeout { get; }
 
 		/// <summary>
-		/// Forces all requests to have ?pretty=true, causing Elasticsearch to return formatted json.
-		/// Also forces the client to send out formatted json. Defaults to false
-		/// </summary>
-		bool PrettyJson { get; }
-
-		/// <summary>
 		/// When set will force all connections through this proxy
 		/// </summary>
 		string ProxyAddress { get; }
@@ -233,7 +233,7 @@ namespace Elastic.Transport
 		/// The user agent string to send with requests. Useful for debugging purposes to understand client and framework
 		/// versions that initiate requests to Elasticsearch
 		/// </summary>
-		string UserAgent { get; }
+		UserAgent UserAgent { get; }
 
 		/// <summary>
 		/// Allow you to override the status code inspection that sets <see cref="IApiCallDetails.Success"/>
@@ -272,5 +272,12 @@ namespace Elastic.Transport
 		/// Enable statistics about thread pools to be collected when making a request
 		/// </summary>
 		bool EnableThreadPoolStats { get; }
+
+		/// <summary>
+		/// Provide hints to serializer and products to produce pretty, non minified json.
+		/// <para>Note: this is not a guarantee you will always get prettified json</para>
+		/// </summary>
+		bool PrettyJson { get; }
+
 	}
 }

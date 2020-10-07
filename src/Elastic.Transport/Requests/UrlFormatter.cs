@@ -10,14 +10,14 @@ using Elastic.Transport.Extensions;
 namespace Elastic.Transport
 {
 	/// <summary>
-	/// A formatter that can utilize <see cref="IConnectionConfigurationValues" /> to resolve <see cref="IUrlParameter" />'s passed
+	/// A formatter that can utilize <see cref="ITransportConfigurationValues" /> to resolve <see cref="IUrlParameter" />'s passed
 	/// as format arguments. It also handles known string representations for e.g bool/Enums/IEnumerable<object>.
 	/// </summary>
 	public class UrlFormatter : IFormatProvider, ICustomFormatter
 	{
-		private readonly IConnectionConfigurationValues _settings;
+		private readonly ITransportConfigurationValues _settings;
 
-		public UrlFormatter(IConnectionConfigurationValues settings) => _settings = settings;
+		public UrlFormatter(ITransportConfigurationValues settings) => _settings = settings;
 
 		public string Format(string format, object arg, IFormatProvider formatProvider)
 		{
@@ -36,7 +36,7 @@ namespace Elastic.Transport
 
 		public string CreateString(object value) => CreateString(value, _settings);
 
-		public static string CreateString(object value, IConnectionConfigurationValues settings)
+		public static string CreateString(object value, ITransportConfigurationValues settings)
 		{
 			switch (value)
 			{
@@ -54,7 +54,7 @@ namespace Elastic.Transport
 			}
 		}
 
-		private static string ResolveUrlParameterOrDefault(object value, IConnectionConfigurationValues settings) =>
+		private static string ResolveUrlParameterOrDefault(object value, ITransportConfigurationValues settings) =>
 			value is IUrlParameter urlParam ? urlParam.GetString(settings) : value.ToString();
 	}
 }

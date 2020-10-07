@@ -7,6 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Xunit;
 using Elastic.Transport;
+using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Client.Settings;
 

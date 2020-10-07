@@ -19,7 +19,11 @@ namespace Elastic.Transport
 		public const string OpaqueIdHeader = "X-Opaque-Id";
 		public const string RunAsSecurityHeader = "es-security-runas-user";
 
-		public RequestData(HttpMethod method, string path, PostData data, IConnectionConfigurationValues global, IRequestParameters local,
+		public RequestData(
+			HttpMethod method, string path,
+			PostData data,
+			ITransportConfigurationValues global,
+			IRequestParameters local,
 			IMemoryStreamFactory memoryStreamFactory
 		)
 			: this(method, data, global, local?.RequestConfiguration, memoryStreamFactory)
@@ -29,10 +33,9 @@ namespace Elastic.Transport
 			PathAndQuery = CreatePathWithQueryStrings(path, ConnectionSettings, local);
 		}
 
-		private RequestData(
-			HttpMethod method,
+		private RequestData(HttpMethod method,
 			PostData data,
-			IConnectionConfigurationValues global,
+			ITransportConfigurationValues global,
 			IRequestConfiguration local,
 			IMemoryStreamFactory memoryStreamFactory
 		)
@@ -74,7 +77,7 @@ namespace Elastic.Transport
 			PingTimeout =
 				local?.PingTimeout
 				?? global.PingTimeout
-				?? (global.ConnectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
+				?? (global.ConnectionPool.UsingSsl ? TransportConfiguration.DefaultPingTimeoutOnSSL : TransportConfiguration.DefaultPingTimeout);
 
 			KeepAliveInterval = (int)(global.KeepAliveInterval?.TotalMilliseconds ?? 2000);
 			KeepAliveTime = (int)(global.KeepAliveTime?.TotalMilliseconds ?? 2000);
@@ -104,7 +107,7 @@ namespace Elastic.Transport
 		public BasicAuthenticationCredentials BasicAuthorizationCredentials { get; }
 
 		public X509CertificateCollection ClientCertificates { get; }
-		public IConnectionConfigurationValues ConnectionSettings { get; }
+		public ITransportConfigurationValues ConnectionSettings { get; }
 		public CustomResponseBuilderBase CustomResponseBuilder { get; }
 		public bool DisableAutomaticProxyDetection { get; }
 
@@ -134,7 +137,7 @@ namespace Elastic.Transport
 		public string RunAs { get; }
 		public IReadOnlyCollection<int> SkipDeserializationForStatusCodes { get; }
 		public bool ThrowExceptions { get; }
-		public string UserAgent { get; }
+		public UserAgent UserAgent { get; }
 		public bool TransferEncodingChunked { get; }
 		public bool TcpStats { get; }
 		public bool ThreadPoolStats { get; }
@@ -145,7 +148,7 @@ namespace Elastic.Transport
 		public override string ToString() => $"{Method.GetStringValue()} {_path}";
 
 		// TODO This feels like its in the wrong place
-		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request)
+		private string CreatePathWithQueryStrings(string path, ITransportConfigurationValues global, IRequestParameters request)
 		{
 			path ??= string.Empty;
 			if (path.Contains("?"))

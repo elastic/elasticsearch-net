@@ -63,7 +63,7 @@ namespace Elastic.Transport.VirtualizedCluster.Rules
 			where T : class
 		{
 			byte[] r;
-			using (var ms = ConnectionConfiguration.DefaultMemoryStreamFactory.Create())
+			using (var ms = TransportConfiguration.DefaultMemoryStreamFactory.Create())
 			{
 				LowLevelRequestResponseSerializer.Instance.Serialize(response, ms);
 				r = ms.ToArray();

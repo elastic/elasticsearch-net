@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
-using Elastic.Transport.Products.Elasticsearch;
 using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
@@ -20,12 +19,12 @@ namespace Elasticsearch.Net
 	{
 		/// <summary>Instantiate a new low level Elasticsearch client to http://localhost:9200</summary>
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-		public ElasticLowLevelClient() : this(new Transport<IConnectionConfigurationValues>(new ConnectionConfiguration(), ElasticsearchProductRegistration.Default)) { }
+		public ElasticLowLevelClient() : this(new Transport<IConnectionConfigurationValues>(new ConnectionConfiguration())) { }
 
 		/// <summary>Instantiate a new low level Elasticsearch client using the specified settings</summary>
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ElasticLowLevelClient(IConnectionConfigurationValues settings) : this(
-			new Transport<IConnectionConfigurationValues>(settings ?? new ConnectionConfiguration(), ElasticsearchProductRegistration.Default)) { }
+			new Transport<IConnectionConfigurationValues>(settings ?? new ConnectionConfiguration())) { }
 
 		/// <summary>
 		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,

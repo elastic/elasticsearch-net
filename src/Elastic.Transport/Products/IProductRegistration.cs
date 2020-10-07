@@ -9,19 +9,22 @@ using System.Threading.Tasks;
 
 namespace Elastic.Transport.Products
 {
-	public interface IProductRegistration
+	public interface IProductInformation
 	{
+		string Name { get; }
 		bool SupportsPing { get; }
 		bool SupportsSniff { get; }
+	}
 
-
-		RequestData CreatePingRequestData(Node node, RequestConfiguration requestConfiguration, IConnectionConfigurationValues global, IMemoryStreamFactory memoryStreamFactory);
+	public interface IProductRegistration : IProductInformation
+	{
+		RequestData CreatePingRequestData(Node node, RequestConfiguration requestConfiguration, ITransportConfigurationValues global, IMemoryStreamFactory memoryStreamFactory);
 
 		Task<IApiCallDetails> PingAsync(IConnection connection, RequestData pingData, CancellationToken cancellationToken);
 
 		IApiCallDetails Ping(IConnection connection, RequestData pingData);
 
-		RequestData CreateSniffRequestData(Node node, IRequestConfiguration requestConfiguration, IConnectionConfigurationValues settings,
+		RequestData CreateSniffRequestData(Node node, IRequestConfiguration requestConfiguration, ITransportConfigurationValues settings,
 			IMemoryStreamFactory memoryStreamFactory
 		);
 
