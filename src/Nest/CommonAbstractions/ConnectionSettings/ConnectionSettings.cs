@@ -9,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elastic.Transport;
+using Elasticsearch.Net;
 using Nest.Utf8Json;
 #if DOTNETCORE
 using System.Runtime.InteropServices;
@@ -20,8 +21,7 @@ namespace Nest
 	public class ConnectionSettings : ConnectionSettingsBase<ConnectionSettings>
 	{
 		/// <summary> The default user agent for Nest </summary>
-		public static readonly string DefaultUserAgent =
-			$"elasticsearch-net/{typeof(IConnectionSettingsValues).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} ({RuntimeInformation.OSDescription}; {RuntimeInformation.FrameworkDescription}; Nest)";
+		public static readonly UserAgent DefaultUserAgent = Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(IConnectionSettingsValues));
 
 		/// <summary>
 		/// A delegate used to construct a serializer to serialize CLR types representing documents and other types related to
@@ -305,7 +305,7 @@ namespace Nest
 
 		/// <summary>
 		/// NEST handles 404 in its <see cref="ResponseBase.IsValid"/>, we do not want the low level client throwing exceptions
-		/// when <see cref="IConnectionConfigurationValues.ThrowExceptions"/> is enabled for 404's. The client is in charge of composing paths
+		/// when <see cref="ITransportConfigurationValues.ThrowExceptions"/> is enabled for 404's. The client is in charge of composing paths
 		/// so a 404 never signals a wrong url but a missing entity.
 		/// </summary>
 		protected override bool HttpStatusCodeClassifier(HttpMethod method, int statusCode) =>

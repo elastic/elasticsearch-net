@@ -281,7 +281,7 @@ namespace Elastic.Transport.VirtualizedCluster.Components
 			if (_defaultResponseBytes != null) return _defaultResponseBytes;
 
 			var response = DefaultResponse;
-			using (var ms = ConnectionConfiguration.DefaultMemoryStreamFactory.Create())
+			using (var ms = TransportConfiguration.DefaultMemoryStreamFactory.Create())
 			{
 				LowLevelRequestResponseSerializer.Instance.Serialize(response, ms);
 				_defaultResponseBytes = ms.ToArray();

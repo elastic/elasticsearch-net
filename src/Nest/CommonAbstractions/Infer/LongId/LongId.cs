@@ -17,7 +17,7 @@ namespace Nest
 		public bool Equals(LongId other) => Value == other.Value;
 
 		// ReSharper disable once ImpureMethodCallOnReadonlyValueField
-		public string GetString(IConnectionConfigurationValues settings) => Value.ToString(CultureInfo.InvariantCulture);
+		public string GetString(ITransportConfigurationValues settings) => Value.ToString(CultureInfo.InvariantCulture);
 
 		public static implicit operator LongId(long value) => new LongId(value);
 

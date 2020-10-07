@@ -15,7 +15,7 @@ namespace Tests.Reproduce
 	{
 		[U] public void CanSerializeNullReferenceException()
 		{
-			var settings = new ConnectionConfiguration();
+			var settings = new TransportConfiguration();
 
 			var dic = new Dictionary<string, object>()
 			{

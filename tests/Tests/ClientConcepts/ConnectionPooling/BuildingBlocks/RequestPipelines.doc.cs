@@ -47,8 +47,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				settings,
 				DateTimeProvider.Default,
 				new RecyclableMemoryStreamFactory(),
-				new SearchRequestParameters(),
-				ElasticsearchProductRegistration.Default
+				new SearchRequestParameters()
 			);
 
 			pipeline.GetType().Should().Implement<IDisposable>();
@@ -61,8 +60,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				settings,
 				DateTimeProvider.Default, //<1> An <<date-time-providers,`IDateTimeProvider`>> implementation
 				new RecyclableMemoryStreamFactory(),
-				new SearchRequestParameters(),
-				ElasticsearchProductRegistration.Default
+				new SearchRequestParameters()
 			);
 
 			requestPipeline.Should().BeOfType<RequestPipeline>();
@@ -76,8 +74,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				settings,
 				requestPipelineFactory,
 				DateTimeProvider.Default,
-				new RecyclableMemoryStreamFactory(),
-				ElasticsearchProductRegistration.Default
+				new RecyclableMemoryStreamFactory()
 			);
 
 			var client = new ElasticClient(transport);
@@ -90,7 +87,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var pool = setupPool(new[] { TestConnectionSettings.CreateUri(), TestConnectionSettings.CreateUri(9201) });
 			var settings = new ConnectionSettings(pool, connection ?? new InMemoryConnection());
 			settings = settingsSelector?.Invoke(settings) ?? settings;
-			return new FixedPipelineFactory(settings, dateTimeProvider ?? DateTimeProvider.Default, ElasticsearchMockProductRegistration.Default).Pipeline;
+			return new FixedPipelineFactory(settings, dateTimeProvider ?? DateTimeProvider.Default).Pipeline;
 		}
 
 		/**

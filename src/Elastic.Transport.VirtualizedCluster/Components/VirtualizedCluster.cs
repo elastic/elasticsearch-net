@@ -14,18 +14,18 @@ namespace Elastic.Transport.VirtualizedCluster.Components
 	{
 		private readonly FixedPipelineFactory _fixedRequestPipeline;
 		private readonly TestableDateTimeProvider _dateTimeProvider;
-		private readonly ConnectionConfiguration _settings;
+		private readonly TransportConfiguration _settings;
 
-		private Func<ITransport<IConnectionConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<ITransportResponse>> _asyncCall;
-		private Func<ITransport<IConnectionConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, ITransportResponse> _syncCall;
+		private Func<ITransport<ITransportConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<ITransportResponse>> _asyncCall;
+		private Func<ITransport<ITransportConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, ITransportResponse> _syncCall;
 
 		private class VirtualResponse : TransportResponseBase { }
 
-		internal VirtualizedCluster(TestableDateTimeProvider dateTimeProvider, ConnectionConfiguration settings, IMockProductRegistration productRegistration)
+		internal VirtualizedCluster(TestableDateTimeProvider dateTimeProvider, TransportConfiguration settings)
 		{
 			_dateTimeProvider = dateTimeProvider;
 			_settings = settings;
-			_fixedRequestPipeline = new FixedPipelineFactory(settings, _dateTimeProvider, productRegistration);
+			_fixedRequestPipeline = new FixedPipelineFactory(settings, _dateTimeProvider);
 
 			_syncCall = (t, r) => t.Request<VirtualResponse>(
 				HttpMethod.GET, "/",
@@ -51,11 +51,11 @@ namespace Elastic.Transport.VirtualizedCluster.Components
 
 		public VirtualClusterConnection Connection => Client.Settings.Connection as VirtualClusterConnection;
 		public IConnectionPool ConnectionPool => Client.Settings.ConnectionPool;
-		public ITransport<IConnectionConfigurationValues> Client => _fixedRequestPipeline?.Transport;
+		public ITransport<ITransportConfigurationValues> Client => _fixedRequestPipeline?.Transport;
 
 		public VirtualizedCluster TransportProxiesTo(
-			Func<ITransport<IConnectionConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, ITransportResponse> sync,
-			Func<ITransport<IConnectionConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<ITransportResponse>> async
+			Func<ITransport<ITransportConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, ITransportResponse> sync,
+			Func<ITransport<ITransportConfigurationValues>, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<ITransportResponse>> async
 		)
 		{
 			_syncCall = sync;

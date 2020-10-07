@@ -17,7 +17,7 @@ using System.Net;
 namespace Elastic.Transport
 {
 	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
-		where TConnectionSettings : class, IConnectionConfigurationValues
+		where TConnectionSettings : class, ITransportConfigurationValues
 	{
 		private readonly IProductRegistration _productRegistration;
 
@@ -25,8 +25,8 @@ namespace Elastic.Transport
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
 		/// </summary>
 		/// <param name="configurationValues">The connection settings to use for this transport</param>
-		public Transport(TConnectionSettings configurationValues, IProductRegistration productRegistration)
-			: this(configurationValues, null, null, null, productRegistration) { }
+		public Transport(TConnectionSettings configurationValues)
+			: this(configurationValues, null, null, null) { }
 
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
@@ -39,16 +39,15 @@ namespace Elastic.Transport
 			TConnectionSettings configurationValues,
 			IRequestPipelineFactory pipelineProvider,
 			IDateTimeProvider dateTimeProvider,
-			IMemoryStreamFactory memoryStreamFactory,
-			IProductRegistration productRegistration
+			IMemoryStreamFactory memoryStreamFactory
 		)
 		{
-			_productRegistration = productRegistration;
 			configurationValues.ThrowIfNull(nameof(configurationValues));
 			configurationValues.ConnectionPool.ThrowIfNull(nameof(configurationValues.ConnectionPool));
 			configurationValues.Connection.ThrowIfNull(nameof(configurationValues.Connection));
 			configurationValues.RequestResponseSerializer.ThrowIfNull(nameof(configurationValues.RequestResponseSerializer));
 
+			_productRegistration = configurationValues.ProductRegistration;
 			Settings = configurationValues;
 			PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
 			DateTimeProvider = dateTimeProvider ?? Elastic.Transport.DateTimeProvider.Default;
@@ -64,7 +63,7 @@ namespace Elastic.Transport
 		public TResponse Request<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new()
 		{
-			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters, _productRegistration))
+			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters))
 			{
 				pipeline.FirstPoolUsage(Settings.BootstrapLock);
 
@@ -120,7 +119,7 @@ namespace Elastic.Transport
 		)
 			where TResponse : class, ITransportResponse, new()
 		{
-			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters, _productRegistration))
+			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters))
 			{
 				await pipeline.FirstPoolUsageAsync(Settings.BootstrapLock, cancellationToken).ConfigureAwait(false);
 

@@ -77,7 +77,7 @@ namespace Nest
 				return false;
 		}
 
-		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
+		string IUrlParameter.GetString(ITransportConfigurationValues settings)
 		{
 			var nestSettings = settings as IConnectionSettingsValues;
 			return GetString(nestSettings);

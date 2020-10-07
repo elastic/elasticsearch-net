@@ -41,7 +41,7 @@ namespace Tests.Core.Client.Settings
 		private static int ConnectionLimitDefault =>
 			int.TryParse(Environment.GetEnvironmentVariable("NEST_NUMBER_OF_CONNECTIONS"), out var x)
 				? x
-				: ConnectionConfiguration.DefaultConnectionLimit;
+				: TransportConfiguration.DefaultConnectionLimit;
 
 		private static string LocalHost => "localhost";
 
@@ -81,7 +81,7 @@ namespace Tests.Core.Client.Settings
 
 		private static IConnectionPool CreatePool(Func<ICollection<Uri>, IConnectionPool> createPool = null, int port = 9200)
 		{
-			createPool = createPool ?? (uris => new StaticConnectionPool(uris));
+			createPool ??= (uris => new StaticConnectionPool(uris));
 			var connectionPool = createPool(new[] { CreateUri(port) });
 			return connectionPool;
 		}

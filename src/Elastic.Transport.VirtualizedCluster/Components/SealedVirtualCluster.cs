@@ -23,17 +23,17 @@ namespace Elastic.Transport.VirtualizedCluster.Components
 			_productRegistration = productRegistration;
 		}
 
-		private ConnectionConfiguration CreateSettings() =>
-			new ConnectionConfiguration(_connectionPool, _connection);
+		private TransportConfiguration CreateSettings() =>
+			new TransportConfiguration(_connectionPool, _connection, serializer: null, _productRegistration.ProductRegistration);
 
 		public VirtualizedCluster AllDefaults() =>
-			new VirtualizedCluster(_dateTimeProvider, CreateSettings(), _productRegistration);
+			new VirtualizedCluster(_dateTimeProvider, CreateSettings());
 
-		public VirtualizedCluster Settings(Func<ConnectionConfiguration, ConnectionConfiguration> selector) =>
-			new VirtualizedCluster(_dateTimeProvider, selector(CreateSettings()), _productRegistration);
+		public VirtualizedCluster Settings(Func<TransportConfiguration, TransportConfiguration> selector) =>
+			new VirtualizedCluster(_dateTimeProvider, selector(CreateSettings()));
 
-		public VirtualClusterConnection VirtualClusterConnection(Func<ConnectionConfiguration, ConnectionConfiguration> selector = null) =>
-			new VirtualizedCluster(_dateTimeProvider, selector == null ? CreateSettings() : selector(CreateSettings()), _productRegistration)
+		public VirtualClusterConnection VirtualClusterConnection(Func<TransportConfiguration, TransportConfiguration> selector = null) =>
+			new VirtualizedCluster(_dateTimeProvider, selector == null ? CreateSettings() : selector(CreateSettings()))
 				.Connection;
 	}
 }

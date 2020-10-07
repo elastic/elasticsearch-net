@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using Elastic.Transport;
+using Elasticsearch.Net;
 using Nest.Utf8Json;
 
 namespace Nest

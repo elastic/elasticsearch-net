@@ -11,21 +11,20 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 #if DOTNETCORE
 using System.Net.Http;
-using System.Runtime.InteropServices;
 #endif
 using System.Net.Security;
-using System.Reflection;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using Elastic.Transport.Extensions;
+using Elastic.Transport.Products;
 
 namespace Elastic.Transport
 {
 	/// <summary>
 	/// Allows you to control how <see cref="ITransport{TConnectionSettings}"/> behaves and where/how it connects to Elastic Stack products
 	/// </summary>
-	public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionConfiguration>
+	public class TransportConfiguration : TransportConfigurationBase<TransportConfiguration>
 	{
 		/// <summary>
 		/// Detects whether we are running on .NET Core with CurlHandler.
@@ -100,73 +99,72 @@ namespace Elastic.Transport
 		public static readonly int DefaultConnectionLimit = UsingCurlHandler ? Environment.ProcessorCount : 80;
 
 		/// <summary>
-		/// The default user agent for Elasticsearch.Net
-		/// </summary>
-		public static readonly string DefaultUserAgent = $"elasticsearch-net/{typeof(IConnectionConfigurationValues).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} ({RuntimeInformation.OSDescription}; {RuntimeInformation.FrameworkDescription}; Elasticsearch.Net)";
-
-		/// <summary>
-		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// Creates a new instance of <see cref="TransportConfiguration"/>
 		/// </summary>
 		/// <param name="uri">The root of the Elastic stack product node we want to connect to. Defaults to http://localhost:9200</param>
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-		public ConnectionConfiguration(Uri uri = null)
+		public TransportConfiguration(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
 
 		/// <summary>
 		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
 		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
 		/// </summary>
-		public ConnectionConfiguration(string cloudId, BasicAuthenticationCredentials credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
+		public TransportConfiguration(string cloudId, BasicAuthenticationCredentials credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
 
 		/// <summary>
 		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
 		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
 		/// </summary>
-		public ConnectionConfiguration(string cloudId, ApiKeyAuthenticationCredentials credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
+		public TransportConfiguration(string cloudId, ApiKeyAuthenticationCredentials credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
 
 		/// <summary>
-		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// Creates a new instance of <see cref="TransportConfiguration"/>
 		/// </summary>
 		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
-		public ConnectionConfiguration(IConnectionPool connectionPool)
+		public TransportConfiguration(IConnectionPool connectionPool)
 			// ReSharper disable once IntroduceOptionalParameters.Global
 			: this(connectionPool, null, null) { }
 
 		/// <summary>
-		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// Creates a new instance of <see cref="TransportConfiguration"/>
 		/// </summary>
 		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
 		/// <param name="connection">An connection implementation that can make API requests</param>
-		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection)
+		public TransportConfiguration(IConnectionPool connectionPool, IConnection connection)
 			// ReSharper disable once IntroduceOptionalParameters.Global
 			: this(connectionPool, connection, null) { }
 
 		/// <summary>
-		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// Creates a new instance of <see cref="TransportConfiguration"/>
 		/// </summary>
 		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
 		/// <param name="serializer">A serializer implementation used to serialize requests and deserialize responses</param>
-		public ConnectionConfiguration(IConnectionPool connectionPool, ITransportSerializer serializer)
+		public TransportConfiguration(IConnectionPool connectionPool, ITransportSerializer serializer)
 			: this(connectionPool, null, serializer) { }
 
 		/// <summary>
-		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
+		/// Creates a new instance of <see cref="TransportConfiguration"/>
 		/// </summary>
 		/// <param name="connectionPool">A connection pool implementation that tells the client what nodes are available</param>
 		/// <param name="connection">An connection implementation that can make API requests</param>
 		/// <param name="serializer">A serializer implementation used to serialize requests and deserialize responses</param>
-		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, ITransportSerializer serializer)
-			: base(connectionPool, connection, serializer) { }
+		public TransportConfiguration(IConnectionPool connectionPool, IConnection connection, ITransportSerializer serializer)
+			: this(connectionPool, connection, serializer, null) { }
+
+		public TransportConfiguration(IConnectionPool connectionPool, IConnection connection, ITransportSerializer serializer, IProductRegistration productRegistration)
+			: base(connectionPool, connection, serializer, productRegistration) { }
 
 	}
 
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public abstract class ConnectionConfigurationBase<T> : IConnectionConfigurationValues
-		where T : ConnectionConfigurationBase<T>
+	public abstract class TransportConfigurationBase<T> : ITransportConfigurationValues
+		where T : TransportConfigurationBase<T>
 	{
 		private readonly IConnection _connection;
 		private readonly IConnectionPool _connectionPool;
+		private readonly IProductRegistration _productRegistration;
 		private readonly NameValueCollection _headers = new NameValueCollection();
 		private readonly NameValueCollection _queryString = new NameValueCollection();
 		private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
@@ -191,7 +189,6 @@ namespace Elastic.Transport
 		private Func<Node, bool> _nodePredicate;
 		private Action<RequestData> _onRequestDataCreated = DefaultRequestDataCreated;
 		private TimeSpan? _pingTimeout;
-		private bool _prettyJson;
 		private string _proxyAddress;
 		private SecureString _proxyPassword;
 		private string _proxyUsername;
@@ -207,27 +204,29 @@ namespace Elastic.Transport
 		private IMemoryStreamFactory _memoryStreamFactory;
 		private bool _enableTcpStats;
 		private bool _enableThreadPoolStats;
+		private UserAgent _userAgent;
 
-		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
 		private Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
 
-		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection, ITransportSerializer requestResponseSerializer)
+		protected TransportConfigurationBase(IConnectionPool connectionPool, IConnection connection, ITransportSerializer requestResponseSerializer, IProductRegistration productRegistration)
 		{
 			_connectionPool = connectionPool;
 			_connection = connection ?? new HttpConnection();
+			_productRegistration = productRegistration ?? ProductRegistration.Default;
 			var serializer = requestResponseSerializer ?? new LowLevelRequestResponseSerializer();
 			UseThisRequestResponseSerializer = new DiagnosticsSerializerProxy(serializer);
 
-			_connectionLimit = ConnectionConfiguration.DefaultConnectionLimit;
-			_requestTimeout = ConnectionConfiguration.DefaultTimeout;
-			_dnsRefreshTimeout = ConnectionConfiguration.DefaultDnsRefreshTimeout;
-			_memoryStreamFactory = ConnectionConfiguration.DefaultMemoryStreamFactory;
+			_connectionLimit = TransportConfiguration.DefaultConnectionLimit;
+			_requestTimeout = TransportConfiguration.DefaultTimeout;
+			_dnsRefreshTimeout = TransportConfiguration.DefaultDnsRefreshTimeout;
+			_memoryStreamFactory = TransportConfiguration.DefaultMemoryStreamFactory;
 			_sniffOnConnectionFault = true;
 			_sniffOnStartup = true;
 			_sniffLifeSpan = TimeSpan.FromHours(1);
 
 			_urlFormatter = new UrlFormatter(this);
 			_statusCodeToResponseSuccess = (m, i) => HttpStatusCodeClassifier(m, i);
+			_userAgent = Elastic.Transport.UserAgent.Create(_productRegistration.Name, _productRegistration.GetType());
 
 			if (connectionPool is CloudConnectionPool cloudPool)
 			{
@@ -239,54 +238,54 @@ namespace Elastic.Transport
 		}
 
 		protected ITransportSerializer UseThisRequestResponseSerializer { get; set; }
-		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
-		ApiKeyAuthenticationCredentials IConnectionConfigurationValues.ApiKeyAuthenticationCredentials => _apiKeyAuthCredentials;
-		SemaphoreSlim IConnectionConfigurationValues.BootstrapLock => _semaphore;
-		X509CertificateCollection IConnectionConfigurationValues.ClientCertificates => _clientCertificates;
-		IConnection IConnectionConfigurationValues.Connection => _connection;
-		int IConnectionConfigurationValues.ConnectionLimit => _connectionLimit;
-		IConnectionPool IConnectionConfigurationValues.ConnectionPool => _connectionPool;
-		TimeSpan? IConnectionConfigurationValues.DeadTimeout => _deadTimeout;
-		bool IConnectionConfigurationValues.DisableAutomaticProxyDetection => _disableAutomaticProxyDetection;
-		bool IConnectionConfigurationValues.DisableDirectStreaming => _disableDirectStreaming;
-		bool IConnectionConfigurationValues.DisablePings => _disablePings;
-		bool IConnectionConfigurationValues.EnableHttpCompression => _enableHttpCompression;
-		NameValueCollection IConnectionConfigurationValues.Headers => _headers;
-		bool IConnectionConfigurationValues.HttpPipeliningEnabled => _enableHttpPipelining;
-		TimeSpan? IConnectionConfigurationValues.KeepAliveInterval => _keepAliveInterval;
-		TimeSpan? IConnectionConfigurationValues.KeepAliveTime => _keepAliveTime;
-		TimeSpan? IConnectionConfigurationValues.MaxDeadTimeout => _maxDeadTimeout;
-		int? IConnectionConfigurationValues.MaxRetries => _maxRetries;
-		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout => _maxRetryTimeout;
-		IMemoryStreamFactory IConnectionConfigurationValues.MemoryStreamFactory => _memoryStreamFactory;
+		BasicAuthenticationCredentials ITransportConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
+		ApiKeyAuthenticationCredentials ITransportConfigurationValues.ApiKeyAuthenticationCredentials => _apiKeyAuthCredentials;
+		SemaphoreSlim ITransportConfigurationValues.BootstrapLock => _semaphore;
+		X509CertificateCollection ITransportConfigurationValues.ClientCertificates => _clientCertificates;
+		IConnection ITransportConfigurationValues.Connection => _connection;
+		IProductRegistration ITransportConfigurationValues.ProductRegistration => _productRegistration;
+		int ITransportConfigurationValues.ConnectionLimit => _connectionLimit;
+		IConnectionPool ITransportConfigurationValues.ConnectionPool => _connectionPool;
+		TimeSpan? ITransportConfigurationValues.DeadTimeout => _deadTimeout;
+		bool ITransportConfigurationValues.DisableAutomaticProxyDetection => _disableAutomaticProxyDetection;
+		bool ITransportConfigurationValues.DisableDirectStreaming => _disableDirectStreaming;
+		bool ITransportConfigurationValues.DisablePings => _disablePings;
+		bool ITransportConfigurationValues.EnableHttpCompression => _enableHttpCompression;
+		NameValueCollection ITransportConfigurationValues.Headers => _headers;
+		bool ITransportConfigurationValues.HttpPipeliningEnabled => _enableHttpPipelining;
+		TimeSpan? ITransportConfigurationValues.KeepAliveInterval => _keepAliveInterval;
+		TimeSpan? ITransportConfigurationValues.KeepAliveTime => _keepAliveTime;
+		TimeSpan? ITransportConfigurationValues.MaxDeadTimeout => _maxDeadTimeout;
+		int? ITransportConfigurationValues.MaxRetries => _maxRetries;
+		TimeSpan? ITransportConfigurationValues.MaxRetryTimeout => _maxRetryTimeout;
+		IMemoryStreamFactory ITransportConfigurationValues.MemoryStreamFactory => _memoryStreamFactory;
 
-		Func<Node, bool> IConnectionConfigurationValues.NodePredicate => _nodePredicate;
-		Action<IApiCallDetails> IConnectionConfigurationValues.OnRequestCompleted => _completedRequestHandler;
-		Action<RequestData> IConnectionConfigurationValues.OnRequestDataCreated => _onRequestDataCreated;
-		TimeSpan? IConnectionConfigurationValues.PingTimeout => _pingTimeout;
-		bool IConnectionConfigurationValues.PrettyJson => _prettyJson;
-		string IConnectionConfigurationValues.ProxyAddress => _proxyAddress;
-		SecureString IConnectionConfigurationValues.ProxyPassword => _proxyPassword;
-		string IConnectionConfigurationValues.ProxyUsername => _proxyUsername;
-		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
-		ITransportSerializer IConnectionConfigurationValues.RequestResponseSerializer => UseThisRequestResponseSerializer;
-		TimeSpan IConnectionConfigurationValues.RequestTimeout => _requestTimeout;
-		TimeSpan IConnectionConfigurationValues.DnsRefreshTimeout => _dnsRefreshTimeout;
+		Func<Node, bool> ITransportConfigurationValues.NodePredicate => _nodePredicate;
+		Action<IApiCallDetails> ITransportConfigurationValues.OnRequestCompleted => _completedRequestHandler;
+		Action<RequestData> ITransportConfigurationValues.OnRequestDataCreated => _onRequestDataCreated;
+		TimeSpan? ITransportConfigurationValues.PingTimeout => _pingTimeout;
+		string ITransportConfigurationValues.ProxyAddress => _proxyAddress;
+		SecureString ITransportConfigurationValues.ProxyPassword => _proxyPassword;
+		string ITransportConfigurationValues.ProxyUsername => _proxyUsername;
+		NameValueCollection ITransportConfigurationValues.QueryStringParameters => _queryString;
+		ITransportSerializer ITransportConfigurationValues.RequestResponseSerializer => UseThisRequestResponseSerializer;
+		TimeSpan ITransportConfigurationValues.RequestTimeout => _requestTimeout;
+		TimeSpan ITransportConfigurationValues.DnsRefreshTimeout => _dnsRefreshTimeout;
 
-		Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> IConnectionConfigurationValues.ServerCertificateValidationCallback =>
+		Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> ITransportConfigurationValues.ServerCertificateValidationCallback =>
 			_serverCertificateValidationCallback;
 
-		IReadOnlyCollection<int> IConnectionConfigurationValues.SkipDeserializationForStatusCodes => _skipDeserializationForStatusCodes;
-		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan => _sniffLifeSpan;
-		bool IConnectionConfigurationValues.SniffsOnConnectionFault => _sniffOnConnectionFault;
-		bool IConnectionConfigurationValues.SniffsOnStartup => _sniffOnStartup;
-		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
-		UrlFormatter IConnectionConfigurationValues.UrlFormatter => _urlFormatter;
-		string IConnectionConfigurationValues.UserAgent => _userAgent;
-		Func<HttpMethod, int, bool> IConnectionConfigurationValues.StatusCodeToResponseSuccess => _statusCodeToResponseSuccess;
-		bool IConnectionConfigurationValues.TransferEncodingChunked => _transferEncodingChunked;
-		bool IConnectionConfigurationValues.EnableTcpStats => _enableTcpStats;
-		bool IConnectionConfigurationValues.EnableThreadPoolStats => _enableThreadPoolStats;
+		IReadOnlyCollection<int> ITransportConfigurationValues.SkipDeserializationForStatusCodes => _skipDeserializationForStatusCodes;
+		TimeSpan? ITransportConfigurationValues.SniffInformationLifeSpan => _sniffLifeSpan;
+		bool ITransportConfigurationValues.SniffsOnConnectionFault => _sniffOnConnectionFault;
+		bool ITransportConfigurationValues.SniffsOnStartup => _sniffOnStartup;
+		bool ITransportConfigurationValues.ThrowExceptions => _throwExceptions;
+		UrlFormatter ITransportConfigurationValues.UrlFormatter => _urlFormatter;
+		UserAgent ITransportConfigurationValues.UserAgent => _userAgent;
+		Func<HttpMethod, int, bool> ITransportConfigurationValues.StatusCodeToResponseSuccess => _statusCodeToResponseSuccess;
+		bool ITransportConfigurationValues.TransferEncodingChunked => _transferEncodingChunked;
+		bool ITransportConfigurationValues.EnableTcpStats => _enableTcpStats;
+		bool ITransportConfigurationValues.EnableThreadPoolStats => _enableThreadPoolStats;
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
@@ -444,33 +443,6 @@ namespace Elastic.Transport
 				.Assign(password, (a, v) => a._proxyPassword = v);
 
 		/// <summary>
-		/// Forces all requests to have ?pretty=true querystring parameter appended,
-		/// causing Elasticsearch to return formatted JSON.
-		/// Defaults to <c>false</c>
-		/// </summary>
-		public T PrettyJson(bool b = true) => Assign(b, (a, v) =>
-		{
-			a._prettyJson = v;
-			const string key = "pretty";
-			if (!v && a._queryString[key] != null) a._queryString.Remove(key);
-			else if (v && a._queryString[key] == null)
-				a.GlobalQueryStringParameters(new NameValueCollection { { key, "true" } });
-		});
-
-		/// <summary>
-		/// Forces all requests to have ?error_trace=true querystring parameter appended,
-		/// causing Elasticsearch to return stack traces as part of serialized exceptions
-		/// Defaults to <c>false</c>
-		/// </summary>
-		public T IncludeServerStackTraceOnError(bool b = true) => Assign(b, (a, v) =>
-		{
-			const string key = "error_trace";
-			if (!v && a._queryString[key] != null) a._queryString.Remove(key);
-			else if (v && a._queryString[key] == null)
-				a.GlobalQueryStringParameters(new NameValueCollection { { key, "true" } });
-		});
-
-		/// <summary>
 		/// Ensures the response bytes are always available on the <see cref="ITransportResponse" />
 		/// <para>
 		/// IMPORTANT: Depending on the registered serializer,
@@ -551,14 +523,22 @@ namespace Elastic.Transport
 		/// ConnectionSettings. If no callback is passed, DebugInformation from the response
 		/// will be written to the debug output by default.
 		/// </param>
-		public T EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null) =>
+		public virtual T EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null) =>
 			PrettyJson()
-				.IncludeServerStackTraceOnError()
 				.DisableDirectStreaming()
 				.EnableTcpStats()
 				.EnableThreadPoolStats()
 				.Assign(onRequestCompleted, (a, v) =>
 					_completedRequestHandler += v ?? (d => Debug.WriteLine(d.DebugInformation)));
+
+		private bool _prettyJson;
+		bool ITransportConfigurationValues.PrettyJson => _prettyJson;
+
+		/// <summary>
+		/// Provide hints to serializer and products to produce pretty, non minified json.
+		/// <para>Note: this is not a guarantee you will always get prettified json</para>
+		/// </summary>
+		public virtual T PrettyJson(bool b = true) => Assign(b, (a, v) => a._prettyJson = v);
 
 		/// <summary>
 		/// Register a ServerCertificateValidationCallback, this is called per endpoint until it returns true.
@@ -598,7 +578,7 @@ namespace Elastic.Transport
 		/// The user agent string to send with requests. Useful for debugging purposes to understand client and framework
 		/// versions that initiate requests to Elasticsearch
 		/// </summary>
-		public T UserAgent(string userAgent) => Assign(userAgent, (a, v) => a._userAgent = v);
+		public T UserAgent(UserAgent userAgent) => Assign(userAgent, (a, v) => a._userAgent = v);
 
 		/// <summary>
 		/// Whether the request should be sent with chunked Transfer-Encoding. Default is <c>false</c>
@@ -622,6 +602,14 @@ namespace Elastic.Transport
 			_proxyPassword?.Dispose();
 			_basicAuthCredentials?.Dispose();
 			_apiKeyAuthCredentials?.Dispose();
+		}
+
+		protected T UpdateGlobalQueryString(string key, string value, bool enabled)
+		{
+			if (!enabled && _queryString[key] != null) _queryString.Remove(key);
+			else if (enabled && _queryString[key] == null)
+				return GlobalQueryStringParameters(new NameValueCollection { { key, "true" } });
+			return (T)this;
 		}
 
 		protected virtual bool HttpStatusCodeClassifier(HttpMethod method, int statusCode) =>

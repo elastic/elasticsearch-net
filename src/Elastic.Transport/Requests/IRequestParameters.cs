@@ -41,7 +41,7 @@ namespace Elastic.Transport
 		/// <summary>
 		/// Gets the stringified representation of a query string value as it would be sent to Elasticsearch.
 		/// </summary>
-		string GetResolvedQueryStringValue(string n, IConnectionConfigurationValues s);
+		string GetResolvedQueryStringValue(string n, ITransportConfigurationValues s);
 
 		/// <summary>
 		/// Gets the HTTP Accept Header value from the shortened name. If the shortened name is not recognized,

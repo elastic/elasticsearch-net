@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Elastic.Transport;
+using Elasticsearch.Net;
 
 namespace Nest
 {

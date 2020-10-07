@@ -10,27 +10,27 @@ namespace Elastic.Transport.VirtualizedCluster.Components
 {
 	public class FixedPipelineFactory : IRequestPipelineFactory
 	{
-		public FixedPipelineFactory(IConnectionConfigurationValues connectionSettings, IDateTimeProvider dateTimeProvider, IMockProductRegistration productRegistration)
+		public FixedPipelineFactory(ITransportConfigurationValues connectionSettings, IDateTimeProvider dateTimeProvider)
 		{
 			DateTimeProvider = dateTimeProvider;
-			MemoryStreamFactory = ConnectionConfiguration.DefaultMemoryStreamFactory;
+			MemoryStreamFactory = TransportConfiguration.DefaultMemoryStreamFactory;
 
 			Settings = connectionSettings;
-			Pipeline = Create(Settings, DateTimeProvider, MemoryStreamFactory, new RequestParameters(HttpMethod.GET, supportsBody: false), productRegistration.ProductRegistration);
-			Transport = new Transport<IConnectionConfigurationValues>(Settings, this, DateTimeProvider, MemoryStreamFactory, ElasticsearchProductRegistration.Default);
+			Pipeline = Create(Settings, DateTimeProvider, MemoryStreamFactory, new RequestParameters(HttpMethod.GET, supportsBody: false));
+			Transport = new Transport<ITransportConfigurationValues>(Settings, this, DateTimeProvider, MemoryStreamFactory);
 		}
 
 		public IRequestPipeline Pipeline { get; }
 
 		private IDateTimeProvider DateTimeProvider { get; }
 		private IMemoryStreamFactory MemoryStreamFactory { get; }
-		private IConnectionConfigurationValues Settings { get; }
-		public ITransport<IConnectionConfigurationValues> Transport { get; }
+		private ITransportConfigurationValues Settings { get; }
+		public ITransport<ITransportConfigurationValues> Transport { get; }
 
 
-		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider,
-			IMemoryStreamFactory memoryStreamFactory, IRequestParameters requestParameters, IProductRegistration productRegistration
+		public IRequestPipeline Create(ITransportConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider,
+			IMemoryStreamFactory memoryStreamFactory, IRequestParameters requestParameters
 		) =>
-			new RequestPipeline(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters ?? new RequestParameters(HttpMethod.GET, supportsBody: false), productRegistration);
+			new RequestPipeline(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters ?? new RequestParameters(HttpMethod.GET, supportsBody: false));
 	}
 }

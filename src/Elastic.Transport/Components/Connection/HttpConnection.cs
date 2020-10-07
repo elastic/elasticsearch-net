@@ -43,8 +43,8 @@ namespace Elastic.Transport
 		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.HttpConnection.SourceName);
 
 		private static readonly string MissingConnectionLimitMethodError =
-			$"Your target platform does not support {nameof(ConnectionConfiguration.ConnectionLimit)}"
-			+ $" please set {nameof(ConnectionConfiguration.ConnectionLimit)} to -1 on your connection configuration/settings."
+			$"Your target platform does not support {nameof(TransportConfiguration.ConnectionLimit)}"
+			+ $" please set {nameof(TransportConfiguration.ConnectionLimit)} to -1 on your connection configuration/settings."
 			+ $" this will cause the {nameof(HttpClientHandler.MaxConnectionsPerServer)} not to be set on {nameof(HttpClientHandler)}";
 
 		private RequestDataHttpClientFactory HttpClientFactory { get; }
@@ -319,10 +319,11 @@ namespace Elastic.Transport
 			requestMessage.Headers.ConnectionClose = false;
 			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.Accept));
 
-			if (!string.IsNullOrWhiteSpace(requestData.UserAgent))
+			var userAgent = requestData.UserAgent?.ToString();
+			if (!string.IsNullOrWhiteSpace(userAgent))
 			{
 				requestMessage.Headers.UserAgent.Clear();
-				requestMessage.Headers.UserAgent.TryParseAdd(requestData.UserAgent);
+				requestMessage.Headers.UserAgent.TryParseAdd(userAgent);
 			}
 
 			if (!requestData.RunAs.IsNullOrEmpty())

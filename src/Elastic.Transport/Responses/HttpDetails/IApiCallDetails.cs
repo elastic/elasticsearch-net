@@ -43,7 +43,7 @@ namespace Elastic.Transport
 		/// <summary>
 		/// Reference to the connection configuration that yielded this response
 		/// </summary>
-		IConnectionConfigurationValues ConnectionConfiguration { get; }
+		ITransportConfigurationValues ConnectionConfiguration { get; }
 
 		/// <summary>
 		/// A collection of deprecation warnings returned from the product you are interfacing with.

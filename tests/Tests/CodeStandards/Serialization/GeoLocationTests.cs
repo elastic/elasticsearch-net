@@ -21,7 +21,7 @@ namespace Tests.CodeStandards.Serialization
 			var client = TestClient.DisabledStreaming;
 
 			Doc deserialized;
-			using (var stream = ConnectionConfiguration.DefaultMemoryStreamFactory.Create(Encoding.UTF8.GetBytes(wkt)))
+			using (var stream = TransportConfiguration.DefaultMemoryStreamFactory.Create(Encoding.UTF8.GetBytes(wkt)))
 				deserialized = client.RequestResponseSerializer.Deserialize<Doc>(stream);
 
 			deserialized.Location.Should().Be(new GeoLocation(90, -90));

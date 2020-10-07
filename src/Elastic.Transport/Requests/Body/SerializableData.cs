@@ -21,7 +21,7 @@ namespace Elastic.Transport
 
 		public static implicit operator SerializableData<T>(T serializableData) => new SerializableData<T>(serializableData);
 
-		public override void Write(Stream writableStream, IConnectionConfigurationValues settings)
+		public override void Write(Stream writableStream, ITransportConfigurationValues settings)
 		{
 			MemoryStream buffer = null;
 			var stream = writableStream;
@@ -33,7 +33,7 @@ namespace Elastic.Transport
 			FinishStream(writableStream, buffer, settings);
 		}
 
-		public override async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken)
+		public override async Task WriteAsync(Stream writableStream, ITransportConfigurationValues settings, CancellationToken cancellationToken)
 		{
 			MemoryStream buffer = null;
             var stream = writableStream;

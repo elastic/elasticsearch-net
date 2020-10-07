@@ -14,9 +14,9 @@ namespace Elastic.Transport
 	// ReSharper disable once UnusedTypeParameter
 	public interface IPostData<out T>
 	{
-		void Write(Stream writableStream, IConnectionConfigurationValues settings);
+		void Write(Stream writableStream, ITransportConfigurationValues settings);
 
-		Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken token);
+		Task WriteAsync(Stream writableStream, ITransportConfigurationValues settings, CancellationToken token);
 	}
 
 	public enum PostType
@@ -45,9 +45,9 @@ namespace Elastic.Transport
 
 		public static PostData Empty => new PostData<object>(string.Empty);
 
-		public abstract void Write(Stream writableStream, IConnectionConfigurationValues settings);
+		public abstract void Write(Stream writableStream, ITransportConfigurationValues settings);
 
-		public abstract Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken);
+		public abstract Task WriteAsync(Stream writableStream, ITransportConfigurationValues settings, CancellationToken cancellationToken);
 
 		public static implicit operator PostData(byte[] byteArray) => Bytes(byteArray);
 
@@ -70,7 +70,7 @@ namespace Elastic.Transport
 		public static PostData StreamHandler<T>(T state, Action<T, Stream> syncWriter, Func<T, Stream, CancellationToken, Task> asyncWriter) =>
 			new StreamableData<T>(state, syncWriter, asyncWriter);
 
-		protected void BufferIfNeeded(IConnectionConfigurationValues settings, ref MemoryStream buffer, ref Stream stream)
+		protected void BufferIfNeeded(ITransportConfigurationValues settings, ref MemoryStream buffer, ref Stream stream)
 		{
 			var disableDirectStreaming = DisableDirectStreaming ?? settings.DisableDirectStreaming;
 			if (!disableDirectStreaming) return;
@@ -79,7 +79,7 @@ namespace Elastic.Transport
 			stream = buffer;
 		}
 
-		protected void FinishStream(Stream writableStream, MemoryStream buffer, IConnectionConfigurationValues settings)
+		protected void FinishStream(Stream writableStream, MemoryStream buffer, ITransportConfigurationValues settings)
 		{
 			var disableDirectStreaming = DisableDirectStreaming ?? settings.DisableDirectStreaming;
 			if (buffer == null || !disableDirectStreaming) return;
@@ -95,7 +95,7 @@ namespace Elastic.Transport
 			#else
 			Task
 #endif
-			FinishStreamAsync(Stream writableStream, MemoryStream buffer, IConnectionConfigurationValues settings, CancellationToken ctx)
+			FinishStreamAsync(Stream writableStream, MemoryStream buffer, ITransportConfigurationValues settings, CancellationToken ctx)
 		{
 			var disableDirectStreaming = DisableDirectStreaming ?? settings.DisableDirectStreaming;
 			if (buffer == null || !disableDirectStreaming) return;
@@ -147,7 +147,7 @@ namespace Elastic.Transport
 			Type = PostType.EnumerableOfObject;
 		}
 
-		public override void Write(Stream writableStream, IConnectionConfigurationValues settings)
+		public override void Write(Stream writableStream, ITransportConfigurationValues settings)
 		{
 			MemoryStream buffer = null;
 			var stream = writableStream;
@@ -242,7 +242,7 @@ namespace Elastic.Transport
 
 		}
 
-		public override async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken)
+		public override async Task WriteAsync(Stream writableStream, ITransportConfigurationValues settings, CancellationToken cancellationToken)
 		{
 			MemoryStream buffer = null;
 			var stream = writableStream;
