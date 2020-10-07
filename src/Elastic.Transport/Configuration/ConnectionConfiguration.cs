@@ -92,7 +92,7 @@ namespace Elastic.Transport
 		public static readonly TimeSpan DefaultDnsRefreshTimeout = TimeSpan.FromMinutes(5);
 
 		/// <summary>
-		/// The default connection limit for both Elasticsearch.Net and Nest. Defaults to <c>80</c>
+		/// The default concurrent connection limit for outgoing http requests. Defaults to <c>80</c>
 #if DOTNETCORE
 		/// <para>Except for <see cref="HttpClientHandler"/> implementations based on curl, which defaults to <see cref="Environment.ProcessorCount"/></para>
 #endif
@@ -107,7 +107,7 @@ namespace Elastic.Transport
 		/// <summary>
 		/// Creates a new instance of <see cref="ConnectionConfiguration"/>
 		/// </summary>
-		/// <param name="uri">The root of the Elasticsearch node we want to connect to. Defaults to http://localhost:9200</param>
+		/// <param name="uri">The root of the Elastic stack product node we want to connect to. Defaults to http://localhost:9200</param>
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ConnectionConfiguration(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
@@ -170,7 +170,7 @@ namespace Elastic.Transport
 		private readonly NameValueCollection _headers = new NameValueCollection();
 		private readonly NameValueCollection _queryString = new NameValueCollection();
 		private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
-		private readonly ElasticsearchUrlFormatter _urlFormatter;
+		private readonly UrlFormatter _urlFormatter;
 
 		private BasicAuthenticationCredentials _basicAuthCredentials;
 		private ApiKeyAuthenticationCredentials _apiKeyAuthCredentials;
@@ -226,7 +226,7 @@ namespace Elastic.Transport
 			_sniffOnStartup = true;
 			_sniffLifeSpan = TimeSpan.FromHours(1);
 
-			_urlFormatter = new ElasticsearchUrlFormatter(this);
+			_urlFormatter = new UrlFormatter(this);
 			_statusCodeToResponseSuccess = (m, i) => HttpStatusCodeClassifier(m, i);
 
 			if (connectionPool is CloudConnectionPool cloudPool)
@@ -281,7 +281,7 @@ namespace Elastic.Transport
 		bool IConnectionConfigurationValues.SniffsOnConnectionFault => _sniffOnConnectionFault;
 		bool IConnectionConfigurationValues.SniffsOnStartup => _sniffOnStartup;
 		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
-		ElasticsearchUrlFormatter IConnectionConfigurationValues.UrlFormatter => _urlFormatter;
+		UrlFormatter IConnectionConfigurationValues.UrlFormatter => _urlFormatter;
 		string IConnectionConfigurationValues.UserAgent => _userAgent;
 		Func<HttpMethod, int, bool> IConnectionConfigurationValues.StatusCodeToResponseSuccess => _statusCodeToResponseSuccess;
 		bool IConnectionConfigurationValues.TransferEncodingChunked => _transferEncodingChunked;
@@ -348,11 +348,7 @@ namespace Elastic.Transport
 		/// <param name="sniffLifeSpan">The duration a clusterstate is considered fresh, set to null to disable periodic sniffing</param>
 		public T SniffLifeSpan(TimeSpan? sniffLifeSpan) => Assign(sniffLifeSpan, (a, v) => a._sniffLifeSpan = v);
 
-		/// <summary>
-		/// Enables gzip compressed requests and responses.
-		/// <para>IMPORTANT: You need to configure http compression on Elasticsearch to be able to use this</para>
-		/// <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html</para>
-		/// </summary>
+		/// <summary> Enables gzip compressed requests and responses. </summary>
 		public T EnableHttpCompression(bool enabled = true) => Assign(enabled, (a, v) => a._enableHttpCompression = v);
 
 		/// <summary>
@@ -387,8 +383,7 @@ namespace Elastic.Transport
 		public T GlobalHeaders(NameValueCollection headers) => Assign(headers, (a, v) => a._headers.Add(v));
 
 		/// <summary>
-		/// Sets the default timeout in milliseconds for each request to Elasticsearch. Defaults to <c>60</c> seconds.
-		/// <para>NOTE: You can set this to a high value here, and specify a timeout on Elasticsearch's side.</para>
+		/// Sets the default timeout in milliseconds for each request. Defaults to <c>60</c> seconds.
 		/// </summary>
 		/// <param name="timeout">time out in milliseconds</param>
 		public T RequestTimeout(TimeSpan timeout) => Assign(timeout, (a, v) => a._requestTimeout = v);
@@ -485,7 +480,7 @@ namespace Elastic.Transport
 		public T DisableDirectStreaming(bool b = true) => Assign(b, (a, v) => a._disableDirectStreaming = v);
 
 		/// <summary>
-		/// Registers an <see cref="Action{IApiCallDetails}" /> that is called when a response is received from Elasticsearch.
+		/// Registers an <see cref="Action{IApiCallDetails}" /> that is called when a response is received.
 		/// This can be useful for implementing custom logging.
 		/// Multiple callbacks can be registered by calling this multiple times
 		/// </summary>
@@ -531,7 +526,7 @@ namespace Elastic.Transport
 
 		/// <summary>
 		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
-		/// <para>NOTE: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
+		/// <para>NOTE: HTTP pipelining must also be enabled in e.g Elasticsearch for this to work properly.</para>
 		/// </summary>
 		public T EnableHttpPipelining(bool enabled = true) => Assign(enabled, (a, v) => a._enableHttpPipelining = v);
 

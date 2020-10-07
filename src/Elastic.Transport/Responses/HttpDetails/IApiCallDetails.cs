@@ -46,7 +46,7 @@ namespace Elastic.Transport
 		IConnectionConfigurationValues ConnectionConfiguration { get; }
 
 		/// <summary>
-		/// A collection of deprecation warnings returned from Elasticsearch.
+		/// A collection of deprecation warnings returned from the product you are interfacing with.
 		/// <para>Used to signal that the request uses an API feature that is marked as deprecated</para>
 		/// </summary>
 		IEnumerable<string> DeprecationWarnings { get; }
@@ -56,9 +56,7 @@ namespace Elastic.Transport
 		/// </summary>
 		HttpMethod HttpMethod { get; }
 
-		/// <summary>
-		/// The HTTP status code as returned by Elasticsearch
-		/// </summary>
+		/// <summary> The HTTP status code </summary>
 		int? HttpStatusCode { get; }
 
 		/// <summary>
