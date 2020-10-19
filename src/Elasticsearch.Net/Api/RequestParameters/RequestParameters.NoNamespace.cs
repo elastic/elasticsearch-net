@@ -114,7 +114,7 @@ namespace Elasticsearch.Net
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for ClosePointInTime <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time.html</para></summary>
+	///<summary>Request options for ClosePointInTime <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
 	public class ClosePointInTimeRequestParameters : RequestParameters<ClosePointInTimeRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -1438,7 +1438,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for OpenPointInTime <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time.html</para></summary>
+	///<summary>Request options for OpenPointInTime <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
 	public class OpenPointInTimeRequestParameters : RequestParameters<OpenPointInTimeRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
