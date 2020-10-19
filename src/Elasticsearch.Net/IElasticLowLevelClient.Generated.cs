@@ -215,12 +215,12 @@ namespace Elasticsearch.Net
 		[Obsolete("Deprecated in version 7.0.0: A scroll id can be quite large and should be specified as part of the body")]
 		Task<TResponse> ClearScrollAsync<TResponse>(string scrollId, PostData body, ClearScrollRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>DELETE on /_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time.html</para></summary>
+		///<summary>DELETE on /_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
 		///<param name = "body">a point-in-time id to close</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		TResponse ClosePointInTime<TResponse>(PostData body, ClosePointInTimeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>DELETE on /_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time.html</para></summary>
+		///<summary>DELETE on /_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
 		///<param name = "body">a point-in-time id to close</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> ClosePointInTimeAsync<TResponse>(PostData body, ClosePointInTimeRequestParameters requestParameters = null, CancellationToken ctx = default)
@@ -787,20 +787,20 @@ namespace Elasticsearch.Net
 		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		Task<TResponse> MultiTermVectorsUsingTypeAsync<TResponse>(string index, string type, PostData body, MultiTermVectorsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time.html</para></summary>
+		///<summary>POST on /_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		TResponse OpenPointInTime<TResponse>(OpenPointInTimeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time.html</para></summary>
+		///<summary>POST on /_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> OpenPointInTimeAsync<TResponse>(OpenPointInTimeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /{index}/_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time.html</para></summary>
+		///<summary>POST on /{index}/_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to open point in time; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		TResponse OpenPointInTime<TResponse>(string index, OpenPointInTimeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new();
-		///<summary>POST on /{index}/_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time.html</para></summary>
+		///<summary>POST on /{index}/_pit <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to open point in time; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> OpenPointInTimeAsync<TResponse>(string index, OpenPointInTimeRequestParameters requestParameters = null, CancellationToken ctx = default)
