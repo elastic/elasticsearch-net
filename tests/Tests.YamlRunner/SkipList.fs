@@ -161,7 +161,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates" ]
     
     //Replace stashed value in body that is passed as string json
-    SkipFile "api_key/10_basic.yml", Section "Test invalidate api key"
+    //SkipFile "api_key/10_basic.yml", Section "Test invalidate api key"
     
     //additional enters in regex
     SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates" ]
@@ -174,11 +174,13 @@ let SkipList = dict<SkipFile,SkipSection> [
     // double / int in object comparison
     SkipFile "runtime_fields/60_boolean.yml", All
     
+    // TODO fails to parse ulong dynamically in tests 
     SkipFile "unsigned_long/10_basic.yml", All
     SkipFile "unsigned_long/20_null_value.yml", All
     SkipFile "unsigned_long/30_multi_fields.yml", All
     SkipFile "unsigned_long/40_different_numeric.yml", All
     SkipFile "unsigned_long/50_script_values.yml", All
+    SkipFile "unsigned_long/60_collapse.yml", All
     
     SkipFile "ml/inference_processor.yml", Section "Test simulate"
 

@@ -82,13 +82,6 @@ namespace Elasticsearch.Net.Specification.SearchableSnapshotsApi
 		}
 	}
 
-	///<summary>Request options for RepositoryStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
-	public class RepositoryStatsRequestParameters : RequestParameters<RepositoryStatsRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
-	}
-
 	///<summary>Request options for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
 	public class StatsRequestParameters : RequestParameters<StatsRequestParameters>
 	{

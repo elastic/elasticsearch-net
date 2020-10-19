@@ -349,7 +349,13 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                     Failed <| Fail.Create op "regex can no t be called on the parsed body ('')"
                 | ResponsePath _ -> 
                     let body = value.ToString()
-                    let matched = re.Regex.IsMatch(body)
+                    let reg = 
+                        let s = re.Regex.ToString()
+                        match stashes.ReplaceStaches progress s with
+                        | (false, _) -> re.Regex
+                        | (true, s) -> Regex(s, RegexOptions.IgnorePatternWhitespace)
+                            
+                    let matched = reg.IsMatch(body)
                     match matched with
                     | true -> Succeeded op
                     | false -> Failed <| Fail.Create op "regex did not match body %s" body
