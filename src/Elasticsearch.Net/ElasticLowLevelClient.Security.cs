@@ -319,6 +319,17 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		[MapsApi("security.get_user_privileges", "")]
 		public Task<TResponse> GetUserPrivilegesAsync<TResponse>(GetUserPrivilegesRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_security/user/_privileges", ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /_security/api_key/grant <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html</para></summary>
+		///<param name = "body">The api key request to create an API key</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GrantApiKey<TResponse>(PostData body, GrantApiKeyRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_security/api_key/grant", body, RequestParams(requestParameters));
+		///<summary>POST on /_security/api_key/grant <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html</para></summary>
+		///<param name = "body">The api key request to create an API key</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("security.grant_api_key", "body")]
+		public Task<TResponse> GrantApiKeyAsync<TResponse>(PostData body, GrantApiKeyRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_security/api_key/grant", ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_security/user/_has_privileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</para></summary>
 		///<param name = "body">The privileges to test</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

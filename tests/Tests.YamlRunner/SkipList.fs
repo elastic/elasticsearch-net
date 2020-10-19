@@ -14,10 +14,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "ml/explain_data_frame_analytics.yml", Section "Test neither job id nor body"
     
     // funny looking dispatch /_security/privilege/app?name
-    SkipFile "privileges/10_basic.yml", Sections [
-        "Test put and delete privileges"
-        "Test put and get privileges"
-    ]
+    SkipFile "privileges/10_basic.yml", All
     
     // 7.x only
     // We skip the generation of this API till one of the later minors
@@ -164,7 +161,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates" ]
     
     //Replace stashed value in body that is passed as string json
-    SkipFile "api_key/10_basic.yml", Section "Test invalidate api key"
+    SkipFile "api_key/10_basic.yml", Section "Test get api key"
     
     //additional enters in regex
     SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates" ]
@@ -176,6 +173,15 @@ let SkipList = dict<SkipFile,SkipSection> [
     //TODO has dates without strings which trips up our yaml parser
     SkipFile "runtime_fields/40_date.yml", All
     
+    // TODO fails to parse ulong dynamically in tests 
+    SkipFile "unsigned_long/10_basic.yml", All
+    SkipFile "unsigned_long/20_null_value.yml", All
+    SkipFile "unsigned_long/30_multi_fields.yml", All
+    SkipFile "unsigned_long/40_different_numeric.yml", All
+    SkipFile "unsigned_long/50_script_values.yml", All
+    SkipFile "unsigned_long/60_collapse.yml", All
+    
+    SkipFile "ml/inference_processor.yml", Section "Test simulate"
 
 ]
 
