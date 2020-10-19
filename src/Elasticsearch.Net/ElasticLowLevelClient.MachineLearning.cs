@@ -190,19 +190,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.delete_model_snapshot", "job_id, snapshot_id")]
 		public Task<TResponse> DeleteModelSnapshotAsync<TResponse>(string jobId, string snapshotId, DeleteModelSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ml/anomaly_detectors/{jobId:jobId}/model_snapshots/{snapshotId:snapshotId}"), ctx, null, RequestParams(requestParameters));
-		///<summary>DELETE on /_ml/inference/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-inference.html</para></summary>
+		///<summary>DELETE on /_ml/trained_models/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html</para></summary>
 		///<param name = "modelId">The ID of the trained model to delete</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse DeleteTrainedModel<TResponse>(string modelId, DeleteTrainedModelRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(DELETE, Url($"_ml/inference/{modelId:modelId}"), null, RequestParams(requestParameters));
-		///<summary>DELETE on /_ml/inference/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-inference.html</para></summary>
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(DELETE, Url($"_ml/trained_models/{modelId:modelId}"), null, RequestParams(requestParameters));
+		///<summary>DELETE on /_ml/trained_models/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html</para></summary>
 		///<param name = "modelId">The ID of the trained model to delete</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("ml.delete_trained_model", "model_id")]
 		public Task<TResponse> DeleteTrainedModelAsync<TResponse>(string modelId, DeleteTrainedModelRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ml/inference/{modelId:modelId}"), ctx, null, RequestParams(requestParameters));
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ml/trained_models/{modelId:modelId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/_estimate_model_memory <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</para></summary>
 		///<param name = "body">The analysis config, plus cardinality estimates for fields it references</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -598,54 +598,54 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.get_records", "job_id, body")]
 		public Task<TResponse> GetAnomalyRecordsAsync<TResponse>(string jobId, PostData body, GetAnomalyRecordsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/results/records"), ctx, body, RequestParams(requestParameters));
-		///<summary>GET on /_ml/inference/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-inference.html</para></summary>
+		///<summary>GET on /_ml/trained_models/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html</para></summary>
 		///<param name = "modelId">The ID of the trained models to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetTrainedModels<TResponse>(string modelId, GetTrainedModelsRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_ml/inference/{modelId:modelId}"), null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/inference/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-inference.html</para></summary>
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_ml/trained_models/{modelId:modelId}"), null, RequestParams(requestParameters));
+		///<summary>GET on /_ml/trained_models/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html</para></summary>
 		///<param name = "modelId">The ID of the trained models to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("ml.get_trained_models", "model_id")]
 		public Task<TResponse> GetTrainedModelsAsync<TResponse>(string modelId, GetTrainedModelsRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_ml/inference/{modelId:modelId}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/inference <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-inference.html</para></summary>
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_ml/trained_models/{modelId:modelId}"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_ml/trained_models <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetTrainedModels<TResponse>(GetTrainedModelsRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, "_ml/inference", null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/inference <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-inference.html</para></summary>
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, "_ml/trained_models", null, RequestParams(requestParameters));
+		///<summary>GET on /_ml/trained_models <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("ml.get_trained_models", "")]
 		public Task<TResponse> GetTrainedModelsAsync<TResponse>(GetTrainedModelsRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "_ml/inference", ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/inference/{model_id}/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-inference-stats.html</para></summary>
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "_ml/trained_models", ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_ml/trained_models/{model_id}/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html</para></summary>
 		///<param name = "modelId">The ID of the trained models stats to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetTrainedModelsStats<TResponse>(string modelId, GetTrainedModelsStatsRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_ml/inference/{modelId:modelId}/_stats"), null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/inference/{model_id}/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-inference-stats.html</para></summary>
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_ml/trained_models/{modelId:modelId}/_stats"), null, RequestParams(requestParameters));
+		///<summary>GET on /_ml/trained_models/{model_id}/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html</para></summary>
 		///<param name = "modelId">The ID of the trained models stats to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("ml.get_trained_models_stats", "model_id")]
 		public Task<TResponse> GetTrainedModelsStatsAsync<TResponse>(string modelId, GetTrainedModelsStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_ml/inference/{modelId:modelId}/_stats"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/inference/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-inference-stats.html</para></summary>
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_ml/trained_models/{modelId:modelId}/_stats"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_ml/trained_models/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetTrainedModelsStats<TResponse>(GetTrainedModelsStatsRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, "_ml/inference/_stats", null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/inference/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-inference-stats.html</para></summary>
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, "_ml/trained_models/_stats", null, RequestParams(requestParameters));
+		///<summary>GET on /_ml/trained_models/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("ml.get_trained_models_stats", "")]
 		public Task<TResponse> GetTrainedModelsStatsAsync<TResponse>(GetTrainedModelsStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "_ml/inference/_stats", ctx, null, RequestParams(requestParameters));
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "_ml/trained_models/_stats", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_ml/info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Info<TResponse>(MachineLearningInfoRequestParameters requestParameters = null)
@@ -783,21 +783,21 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.put_job", "job_id, body")]
 		public Task<TResponse> PutJobAsync<TResponse>(string jobId, PostData body, PutJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_ml/anomaly_detectors/{jobId:jobId}"), ctx, body, RequestParams(requestParameters));
-		///<summary>PUT on /_ml/inference/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-inference.html</para></summary>
+		///<summary>PUT on /_ml/trained_models/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html</para></summary>
 		///<param name = "modelId">The ID of the trained models to store</param>
 		///<param name = "body">The trained model configuration</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse PutTrainedModel<TResponse>(string modelId, PostData body, PutTrainedModelRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(PUT, Url($"_ml/inference/{modelId:modelId}"), body, RequestParams(requestParameters));
-		///<summary>PUT on /_ml/inference/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-inference.html</para></summary>
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(PUT, Url($"_ml/trained_models/{modelId:modelId}"), body, RequestParams(requestParameters));
+		///<summary>PUT on /_ml/trained_models/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html</para></summary>
 		///<param name = "modelId">The ID of the trained models to store</param>
 		///<param name = "body">The trained model configuration</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("ml.put_trained_model", "model_id, body")]
 		public Task<TResponse> PutTrainedModelAsync<TResponse>(string modelId, PostData body, PutTrainedModelRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_ml/inference/{modelId:modelId}"), ctx, body, RequestParams(requestParameters));
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_ml/trained_models/{modelId:modelId}"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</para></summary>
 		///<param name = "jobId">The ID of the job to fetch</param>
 		///<param name = "snapshotId">The ID of the snapshot to revert to</param>

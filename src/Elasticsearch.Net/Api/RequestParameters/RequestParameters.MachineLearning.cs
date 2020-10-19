@@ -188,7 +188,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for DeleteTrainedModel <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-inference.html</para></summary>
+	///<summary>Request options for DeleteTrainedModel <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html</para></summary>
 	public class DeleteTrainedModelRequestParameters : RequestParameters<DeleteTrainedModelRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
@@ -418,6 +418,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			set => Q("allow_no_match", value);
 		}
 
+		///<summary>Omits fields that are illegal to set on data frame analytics PUT</summary>
+		public bool? ForExport
+		{
+			get => Q<bool? >("for_export");
+			set => Q("for_export", value);
+		}
+
 		///<summary>skips a number of analytics</summary>
 		public int? From
 		{
@@ -510,6 +517,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			get => Q<bool? >("allow_no_match");
 			set => Q("allow_no_match", value);
 		}
+
+		///<summary>Omits fields that are illegal to set on datafeed PUT</summary>
+		public bool? ForExport
+		{
+			get => Q<bool? >("for_export");
+			set => Q("for_export", value);
+		}
 	}
 
 	///<summary>Request options for GetFilters <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html</para></summary>
@@ -579,6 +593,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			get => Q<bool? >("allow_no_match");
 			set => Q("allow_no_match", value);
 		}
+
+		///<summary>Omits fields that are illegal to set on job PUT</summary>
+		public bool? ForExport
+		{
+			get => Q<bool? >("for_export");
+			set => Q("for_export", value);
+		}
 	}
 
 	///<summary>Request options for GetModelSnapshots <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</para></summary>
@@ -608,7 +629,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for GetTrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-inference.html</para></summary>
+	///<summary>Request options for GetTrainedModels <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html</para></summary>
 	public class GetTrainedModelsRequestParameters : RequestParameters<GetTrainedModelsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -651,6 +672,17 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			set => Q("include", value);
 		}
 
+		///<summary>
+		/// Should the full model definition be included in the results. These definitions can be large. So be cautious when including them. Defaults
+		/// to false.
+		///</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
+		public bool? IncludeModelDefinition
+		{
+			get => Q<bool? >("include_model_definition");
+			set => Q("include_model_definition", value);
+		}
+
 		///<summary>specifies a max number of trained models to get</summary>
 		public int? Size
 		{
@@ -666,7 +698,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for GetTrainedModelsStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-inference-stats.html</para></summary>
+	///<summary>Request options for GetTrainedModelsStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html</para></summary>
 	public class GetTrainedModelsStatsRequestParameters : RequestParameters<GetTrainedModelsStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
@@ -813,7 +845,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for PutTrainedModel <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-inference.html</para></summary>
+	///<summary>Request options for PutTrainedModel <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html</para></summary>
 	public class PutTrainedModelRequestParameters : RequestParameters<PutTrainedModelRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;

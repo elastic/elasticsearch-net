@@ -4,6 +4,7 @@
 
 module Tests.YamlRunner.Stashes
 
+open System.Text.RegularExpressions
 open Elastic.Transport
 open System
 open System.Collections.Generic
@@ -49,6 +50,14 @@ type Stashes() =
         
         let resolved = resolve object :?> YamlMap
         resolved
+    
+    /// Optionally replaces all ${id} references in s, returns whether it actually replaced anything and the string
+    member this.ReplaceStaches (progress:IProgressBar) (s:String) =
+        match s.Contains("$") with
+        | false -> (false, s)
+        | true ->
+            let re = Regex.Replace(s, "\$\{?\w+\}?", fun r -> (this.ResolveToken progress r.Value).ToString())
+            (true, re)
         
     member this.ResolveToken (progress:IProgressBar) (s:String) : Object =
         match s with
@@ -58,7 +67,10 @@ type Stashes() =
                 let s = sprintf "Expected to resolve %s but no such value was stashed at this point" s 
                 progress.WriteLine s 
                 failwith s
-            value 
+            value
+        | s when s.Contains "$" ->
+            let (_, r) = this.ReplaceStaches progress s
+            r :> Object
         | s -> s :> Object
         
         
