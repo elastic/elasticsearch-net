@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.x
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.9
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -28,6 +28,7 @@ var audit = new Auditor(() => VirtualClusterWith
     .Nodes(2)
     .Ping(p => p.Succeeds(Always))
     .Ping(p => p.OnPort(9201).FailAlways())
+    .ClientCalls(c=>c.SucceedAlways())
     .StaticConnectionPool()
     .AllDefaults()
 );
@@ -68,6 +69,7 @@ var audit = new Auditor(() => VirtualClusterWith
     .Ping(p => p.SucceedAlways())
     .Ping(p => p.OnPort(9201).FailAlways())
     .Ping(p => p.OnPort(9202).FailAlways())
+    .ClientCalls(c=>c.SucceedAlways())
     .StaticConnectionPool()
     .AllDefaults()
 );
@@ -104,6 +106,7 @@ All nodes are pinged on first use, provided they are healthy
 var audit = new Auditor(() => VirtualClusterWith
     .Nodes(4)
     .Ping(p => p.SucceedAlways()) <1>
+    .ClientCalls(c=>c.SucceedAlways())
     .StaticConnectionPool()
     .AllDefaults()
 );

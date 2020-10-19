@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.x
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.9
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -62,7 +62,7 @@ We set up a cluster with 4 nodes all having a different rack id
 ----
 var audit = new Auditor(() => VirtualClusterWith
     .Nodes(Nodes(0))
-    .ClientCalls(p => p.OnPort(9202).Succeeds(Twice).ThrowsAfterSucceeds())
+    .ClientCalls(p => p.OnPort(9202).Succeeds(Twice))
     .ClientCalls(p => p.FailAlways())
     .Sniff(s=>s.SucceedAlways(VirtualClusterWith
         .Nodes(Nodes(10))

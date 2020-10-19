@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.x
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.9
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -28,6 +28,8 @@ Let's set up the cluster and configure clients to **always** sniff on startup
 var audit = new Auditor(() => VirtualClusterWith
     .Nodes(10)
     .ClientCalls(r => r.SucceedAlways())
+    .Sniff(c=>c.SucceedAlways())
+    .Ping(c=>c.SucceedAlways())
     .SniffingConnectionPool()
     .Settings(s => s.SniffOnStartup()) <1>
 );
@@ -76,6 +78,7 @@ Now, let's disable pinging on the request
 var audit = new Auditor(() => VirtualClusterWith
     .Nodes(10)
     .ClientCalls(r => r.SucceedAlways())
+    .Sniff(c=>c.SucceedAlways())
     .SniffingConnectionPool()
     .Settings(s => s.SniffOnStartup())
 );

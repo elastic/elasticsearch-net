@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.x
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.9
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -113,11 +113,14 @@ var totalNodesInTheCluster = 20;
 //
 var audit = new Auditor(() => VirtualClusterWith
     .MasterOnlyNodes(masterNodes.Length)
+    .ClientCalls(r => r.SucceedAlways())
     .Sniff(s => s.SucceedAlways()
         .Succeeds(Always, VirtualClusterWith
             .Nodes(totalNodesInTheCluster)
             .StoresNoData(masterNodes)
-            .MasterEligible(masterNodes))
+            .MasterEligible(masterNodes)
+            .ClientCalls(r => r.SucceedAlways())
+        )
     )
     .SniffingConnectionPool()
     .Settings(s=>s.DisablePing())
@@ -193,11 +196,13 @@ var nodesInRackOne = new[] {9204, 9210, 9213};
 
 var audit = new Auditor(() => VirtualClusterWith
     .Nodes(totalNodesInTheCluster)
-    //
+    .ClientCalls(r => r.SucceedAlways())
     .Sniff(s => s.SucceedAlways()
         .Succeeds(Always, VirtualClusterWith
             .Nodes(totalNodesInTheCluster)
-            .HasSetting(setting, value, nodesInRackOne))
+            .HasSetting(setting, value, nodesInRackOne)
+            .ClientCalls(r => r.SucceedAlways())
+        )
     )
     .SniffingConnectionPool()
     .Settings(s=>s
