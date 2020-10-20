@@ -130,6 +130,8 @@ namespace Nest
 
 		void Visit(ISamplerAggregation aggregation);
 
+		void Visit(IDiversifiedSamplerAggregation aggregation);
+
 		void Visit(IGeoCentroidAggregation aggregation);
 
 		void Visit(ICompositeAggregation aggregation);
@@ -212,6 +214,8 @@ namespace Nest
 		public virtual void Visit(IBucketScriptAggregation aggregation) { }
 
 		public virtual void Visit(ISamplerAggregation aggregation) { }
+
+		public virtual void Visit(IDiversifiedSamplerAggregation aggregation) { }
 
 		public virtual void Visit(IBucketSelectorAggregation aggregation) { }
 
