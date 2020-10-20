@@ -135,6 +135,9 @@ namespace Nest
 		[DataMember(Name = "derivative")]
 		IDerivativeAggregation Derivative { get; set; }
 
+		[DataMember(Name = "diversified_sampler")]
+		IDiversifiedSamplerAggregation DiversifiedSampler { get; set; }
+
 		[DataMember(Name = "extended_stats")]
 		IExtendedStatsAggregation ExtendedStats { get; set; }
 
@@ -323,6 +326,8 @@ namespace Nest
 
 		public IDerivativeAggregation Derivative { get; set; }
 
+		public IDiversifiedSamplerAggregation DiversifiedSampler { get; set; }
+
 		public IExtendedStatsAggregation ExtendedStats { get; set; }
 
 		public IExtendedStatsBucketAggregation ExtendedStatsBucket { get; set; }
@@ -483,6 +488,8 @@ namespace Nest
 		IDateRangeAggregation IAggregationContainer.DateRange { get; set; }
 
 		IDerivativeAggregation IAggregationContainer.Derivative { get; set; }
+
+		IDiversifiedSamplerAggregation IAggregationContainer.DiversifiedSampler { get; set; }
 
 		IExtendedStatsAggregation IAggregationContainer.ExtendedStats { get; set; }
 
@@ -857,6 +864,11 @@ namespace Nest
 			Func<SamplerAggregationDescriptor<T>, ISamplerAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Sampler = d);
+
+		public AggregationContainerDescriptor<T> DiversifiedSampler(string name,
+			Func<DiversifiedSamplerAggregationDescriptor<T>, IDiversifiedSamplerAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.DiversifiedSampler = d);
 
 		public AggregationContainerDescriptor<T> GeoCentroid(string name,
 			Func<GeoCentroidAggregationDescriptor<T>, IGeoCentroidAggregation> selector
