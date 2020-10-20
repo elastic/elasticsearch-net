@@ -134,8 +134,8 @@ namespace Tests.XPack.Transform
 			{
 				StartTransformStep, u =>
 					u.Calls<StartTransformDescriptor, StartTransformRequest, IStartTransformRequest, StartTransformResponse>(
-						v => new StartTransformRequest(v),
-						(v, d) => d,
+						v => new StartTransformRequest(v) { Timeout = "2m" },
+						(v, d) => d.Timeout("2m"),
 						(v, c, f) => c.Transform.Start(v, f),
 						(v, c, f) => c.Transform.StartAsync(v, f),
 						(v, c, r) => c.Transform.Start(r),
