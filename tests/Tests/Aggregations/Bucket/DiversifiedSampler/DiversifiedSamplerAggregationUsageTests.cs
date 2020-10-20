@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -10,6 +11,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Bucket.DiversifiedSampler
 {
+	[SkipVersion("<7.9.0", "introduced in 7.9.0")]
 	public class DiversifiedSamplerAggregationUsageTests : AggregationUsageTestBase
 	{
 		public DiversifiedSamplerAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
