@@ -12,12 +12,15 @@ namespace Nest
 	[ReadAs(typeof(SamplerAggregation))]
 	public interface ISamplerAggregation : IBucketAggregation
 	{
+		[Obsolete("This option is not valid for the sampler aggregation and only applies to IDiversifiedSamplerAggregation")]
 		[DataMember(Name ="execution_hint")]
 		SamplerAggregationExecutionHint? ExecutionHint { get; set; }
 
+		[Obsolete("This option is not valid for the sampler aggregation and only applies to IDiversifiedSamplerAggregation")]
 		[DataMember(Name ="max_docs_per_value")]
 		int? MaxDocsPerValue { get; set; }
 
+		[Obsolete("This option is not valid for the sampler aggregation and only applies to IDiversifiedSamplerAggregation")]
 		[DataMember(Name ="script")]
 		IScript Script { get; set; }
 
@@ -48,6 +51,7 @@ namespace Nest
 		IScript ISamplerAggregation.Script { get; set; }
 		int? ISamplerAggregation.ShardSize { get; set; }
 
+#pragma warning disable 618
 		public SamplerAggregationDescriptor<T> ExecutionHint(SamplerAggregationExecutionHint? executionHint) =>
 			Assign(executionHint, (a, v) => a.ExecutionHint = v);
 
@@ -57,6 +61,7 @@ namespace Nest
 
 		public SamplerAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(scriptSelector, (a, v) => a.Script = v?.Invoke(new ScriptDescriptor()));
+#pragma warning restore 618
 
 		public SamplerAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSize = v);
 	}
