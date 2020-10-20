@@ -1,0 +1,74 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/DiversifiedSampler/DiversifiedSamplerAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[diversified-sampler-aggregation-usage]]
+=== Diversified Sampler Aggregation Usage
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.DiversifiedSampler("diversified_sample", sm => sm
+    .ExecutionHint(DiversifiedSamplerAggregationExecutionHint.GlobalOrdinals)
+    .Field(doc => doc.Type)
+    .MaxDocsPerValue(10)
+    .ShardSize(200)
+    .Aggregations(aa => aa
+        .SignificantTerms("significant_names", st => st
+            .Field(p => p.Name)
+        )
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new DiversifiedSamplerAggregation("diversified_sample")
+{
+    ExecutionHint = DiversifiedSamplerAggregationExecutionHint.GlobalOrdinals,
+    Field = new Field("type"),
+    MaxDocsPerValue = 10,
+    ShardSize = 200,
+    Aggregations = new SignificantTermsAggregation("significant_names")
+    {
+        Field = "name"
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "diversified_sample": {
+    "diversified_sampler": {
+      "execution_hint": "global_ordinals",
+      "field": "type",
+      "max_docs_per_value": 10,
+      "shard_size": 200
+    },
+    "aggs": {
+      "significant_names": {
+        "significant_terms": {
+          "field": "name"
+        }
+      }
+    }
+  }
+}
+----
+

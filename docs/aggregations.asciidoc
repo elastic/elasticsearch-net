@@ -140,6 +140,8 @@ In addition to the buckets themselves, the bucket aggregations also compute and 
 
 * <<date-range-aggregation-usage,Date Range Aggregation Usage>>
 
+* <<diversified-sampler-aggregation-usage,Diversified Sampler Aggregation Usage>>
+
 * <<filter-aggregation-usage,Filter Aggregation Usage>>
 
 * <<filters-aggregation-usage,Filters Aggregation Usage>>
@@ -200,6 +202,8 @@ include::aggregations/bucket/composite/composite-aggregation-usage.asciidoc[]
 include::aggregations/bucket/date-histogram/date-histogram-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/date-range/date-range-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/diversified-sampler/diversified-sampler-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/filter/filter-aggregation-usage.asciidoc[]
 
