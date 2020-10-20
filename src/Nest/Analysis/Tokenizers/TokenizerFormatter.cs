@@ -113,7 +113,8 @@ namespace Nest
 					Serialize<INoriTokenizer>(ref writer, value, formatterResolver);
 					break;
 				default:
-					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<ITokenizer>();
+					// serialize user defined tokenizer
+					var formatter = formatterResolver.GetFormatter<object>();
 					formatter.Serialize(ref writer, value, formatterResolver);
 					break;
 			}
