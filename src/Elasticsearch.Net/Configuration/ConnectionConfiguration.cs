@@ -4,9 +4,8 @@
 
 using System;
 using System.ComponentModel;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using Elastic.Transport;
+using Elastic.Transport.Products;
 using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elasticsearch.Net
@@ -54,8 +53,9 @@ namespace Elasticsearch.Net
 	public abstract class ConnectionConfigurationBase<TConnectionConfiguration> : TransportConfigurationBase<TConnectionConfiguration>, IConnectionConfigurationValues
 		where TConnectionConfiguration : ConnectionConfigurationBase<TConnectionConfiguration>, IConnectionConfigurationValues
 	{
-		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection, ITransportSerializer serializer)
-			: base(connectionPool, connection, serializer, ElasticsearchProductRegistration.Default) =>
+		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection, ITransportSerializer serializer,
+			IProductRegistration registration = null)
+			: base(connectionPool, connection, serializer, registration ?? ElasticsearchProductRegistration.Default) =>
 			UserAgent(ConnectionConfiguration.DefaultUserAgent);
 
 		private bool _includeServerStackTraceOnError;

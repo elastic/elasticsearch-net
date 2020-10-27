@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch.Failures;
 
 namespace Nest.Utf8Json
 {

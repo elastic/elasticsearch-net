@@ -112,12 +112,11 @@ namespace Tests.ClientConcepts.Connection
 #if DOTNETCORE
 		public class MyCustomHttpConnection : HttpConnection
 		{
-			protected override HttpRequestMessage CreateRequestMessage(RequestData requestData)
+			protected override void SetAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
+
 			{
-				var message = base.CreateRequestMessage(requestData);
 				var header = string.Empty;
-				message.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
-				return message;
+				requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
 			}
 		}
 #endif
@@ -174,13 +173,12 @@ namespace Tests.ClientConcepts.Connection
 		*/
 		public class KerberosConnection : HttpConnection
 		{
-			protected override HttpRequestMessage CreateRequestMessage(RequestData requestData)
+			protected override void SetAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
 			{
-				var message = base.CreateRequestMessage(requestData);
 				var header = string.Empty;
-				message.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
-				return message;
+				requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
 			}
+
 		}
 		/**
 		 * See <<working-with-certificates, Working with certificates>> for further details.

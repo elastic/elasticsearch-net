@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch.Failures;
 
 namespace Nest
 {
@@ -148,12 +149,6 @@ namespace Nest
 		{
 			get => _originalApiCall;
 			set => _originalApiCall = value;
-		}
-
-		bool ITransportResponse.TryGetServerErrorReason(out string reason)
-		{
-			reason = ServerError?.Error?.ToString();
-			return !reason.IsNullOrEmpty();
 		}
 
 		/// <summary>Subclasses can override this to provide more information on why a call is not valid.</summary>

@@ -4,6 +4,7 @@
 
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch.Sniff;
 using FluentAssertions;
 using Tests.Framework;
 

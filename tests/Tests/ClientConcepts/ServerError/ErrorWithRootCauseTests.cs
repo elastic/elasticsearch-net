@@ -5,6 +5,7 @@
 using System.Linq;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch.Failures;
 using FluentAssertions;
 
 namespace Tests.ClientConcepts.ServerError

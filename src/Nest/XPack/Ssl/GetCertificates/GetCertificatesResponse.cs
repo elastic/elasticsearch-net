@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch.Failures;
 using Nest.Utf8Json;
 namespace Nest
 {

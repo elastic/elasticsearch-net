@@ -118,7 +118,7 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 			await this.AssertOn(new ConnectionSettings());
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			await this.AssertOn(new TransportConfiguration(pool, new LowLevelRequestResponseSerializer()));
+			await this.AssertOn(new TransportConfiguration(pool, serializer: new LowLevelRequestResponseSerializer()));
 		}
 
 		private async Task AssertOn(ITransportConfigurationValues settings)

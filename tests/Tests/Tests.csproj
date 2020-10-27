@@ -11,6 +11,9 @@
     <PackageReference Include="Elastic.Transport.VirtualizedCluster" Version="$(TestPackageVersion)" />
   </ItemGroup>
   <ItemGroup>
+    
+    <ProjectReference Include="..\..\..\elastic-transport-net\src\Elastic.Transport.VirtualizedCluster\Elastic.Transport.VirtualizedCluster.csproj" />
+    
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj" />
     <PackageReference Include="FSharp.Core" Version="4.7.0" />
     <PackageReference Include="Bogus" Version="22.1.2" />
@@ -23,7 +26,6 @@
     <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />
     <PackageReference Include="coverlet.collector" Version="1.1.0" />
     <PackageReference Include="Ben.Demystifier" Version="0.1.4" />
-    <ProjectReference Include="..\..\src\Elastic.Transport.VirtualizedCluster\Elastic.Transport.VirtualizedCluster.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Index\Attachment_Test_Document.pdf" />

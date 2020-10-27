@@ -99,7 +99,7 @@ namespace Nest
 			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory,
 			IPropertyMappingProvider propertyMappingProvider
 		)
-			: base(connectionPool, connection, null)
+			: base(connectionPool, connection, null, NestElasticsearchProductConfiguration.DefaultForNest)
 		{
 			var formatterResolver = new NestFormatterResolver(this);
 			var defaultSerializer = new DefaultHighLevelSerializer(formatterResolver);
@@ -303,13 +303,5 @@ namespace Nest
 			return (TConnectionSettings)this;
 		}
 
-		/// <summary>
-		/// NEST handles 404 in its <see cref="ResponseBase.IsValid"/>, we do not want the low level client throwing exceptions
-		/// when <see cref="ITransportConfigurationValues.ThrowExceptions"/> is enabled for 404's. The client is in charge of composing paths
-		/// so a 404 never signals a wrong url but a missing entity.
-		/// </summary>
-		protected override bool HttpStatusCodeClassifier(HttpMethod method, int statusCode) =>
-			statusCode >= 200 && statusCode < 300
-			|| statusCode == 404;
 	}
 }

@@ -16,7 +16,7 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1;net461</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="$(SolutionRoot)\src\Elastic.Transport\Elastic.Transport.csproj" />
+    <ProjectReference Include="..\..\..\elastic-transport-net\src\Elastic.Transport\Elastic.Transport.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="ElasticLowLevelClient.*.cs">

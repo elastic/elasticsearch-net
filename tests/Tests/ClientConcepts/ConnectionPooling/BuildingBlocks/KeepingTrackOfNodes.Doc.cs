@@ -87,7 +87,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			/** ==== Node Equality
 			* Nodes are considered equal if they have the same endpoint, no matter what other metadata is associated */
 			var node = new Node(new Uri("http://localhost:9200"));
-			var nodeAsMaster = new Node(new Uri("http://localhost:9200"), ElasticsearchNodeFeatures.MasterEligableOnly);
+			var nodeAsMaster = new Node(new Uri("http://localhost:9200"), ElasticsearchNodeFeatures.MasterEligibleOnly);
 
 			(node == nodeAsMaster).Should().BeTrue();
 			(node != nodeAsMaster).Should().BeFalse();
