@@ -7,9 +7,6 @@
     <IsTestProject>True</IsTestProject>
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
-  <ItemGroup Condition="'$(TestPackageVersion)'!=''">
-    <PackageReference Include="Elastic.Transport.VirtualizedCluster" Version="$(TestPackageVersion)" />
-  </ItemGroup>
   <ItemGroup>
     
 <!--    <ProjectReference Include="..\..\..\elastic-transport-net\src\Elastic.Transport.VirtualizedCluster\Elastic.Transport.VirtualizedCluster.csproj" />-->
