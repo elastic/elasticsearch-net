@@ -12,7 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     
-    <ProjectReference Include="..\..\..\elastic-transport-net\src\Elastic.Transport.VirtualizedCluster\Elastic.Transport.VirtualizedCluster.csproj" />
+<!--    <ProjectReference Include="..\..\..\elastic-transport-net\src\Elastic.Transport.VirtualizedCluster\Elastic.Transport.VirtualizedCluster.csproj" />-->
+    <PackageReference Include="Elastic.Transport.VirtualizedCluster" Version="0.1.2" />
     
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj" />
     <PackageReference Include="FSharp.Core" Version="4.7.0" />
