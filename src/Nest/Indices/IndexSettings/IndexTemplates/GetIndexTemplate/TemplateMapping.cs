@@ -27,6 +27,9 @@ namespace Nest
 
 		[DataMember(Name ="version")]
 		int? Version { get; set; }
+
+		[DataMember(Name ="priority")]
+		int? Priority { get; set; }
 	}
 
 	public class TemplateMapping : ITemplateMapping
@@ -41,5 +44,7 @@ namespace Nest
 		public IIndexSettings Settings { get; set; }
 
 		public int? Version { get; set; }
+
+		public int? Priority { get; set; }
 	}
 }

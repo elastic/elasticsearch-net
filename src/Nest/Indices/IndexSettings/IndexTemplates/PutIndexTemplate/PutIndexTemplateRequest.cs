@@ -23,6 +23,8 @@ namespace Nest
 		public IIndexSettings Settings { get; set; }
 
 		public int? Version { get; set; }
+
+		public int? Priority { get; set; }
 	}
 
 	public partial class PutIndexTemplateDescriptor
@@ -38,9 +40,13 @@ namespace Nest
 
 		int? ITemplateMapping.Version { get; set; }
 
+		int? ITemplateMapping.Priority { get; set; }
+
 		public PutIndexTemplateDescriptor Order(int? order) => Assign(order, (a, v) => a.Order = v);
 
 		public PutIndexTemplateDescriptor Version(int? version) => Assign(version, (a, v) => a.Version = v);
+
+		public PutIndexTemplateDescriptor Priority(int? priority) => Assign(priority, (a, p) => a.Priority = p);
 
 		public PutIndexTemplateDescriptor IndexPatterns(params string[] patterns) => Assign(patterns, (a, v) => a.IndexPatterns = v);
 
