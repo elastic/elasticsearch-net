@@ -92,14 +92,18 @@ namespace ApiGenerator
 				.AddRow("[b]Generate code from specification[/]", $"{YesNo(generateCode)}")
 				.AddRow("[b]Include high level client[/]", $"{YesNo(!lowLevelOnly)}");
 
+			Console.WriteLine();
 			AnsiConsole.Render(
 				new Panel(grid)
 					.Header(new PanelHeader(" Elasticsearch .NET client API generator ", HeaderStyle, Justify.Left))
 			);
+			Console.WriteLine();
 
 			if (redownloadCoreSpecification)
 			{
+				Console.WriteLine();
 				AnsiConsole.Render(new Rule("[b white on chartreuse4] Downloading specification [/]").LeftAligned());
+				Console.WriteLine();
 				await RestSpecDownloader.DownloadAsync(downloadBranch, token);
 			}
 

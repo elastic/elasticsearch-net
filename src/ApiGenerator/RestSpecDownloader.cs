@@ -19,7 +19,11 @@ namespace ApiGenerator
 	public class RestSpecDownloader
 	{
 		private readonly string _branch;
-		private static readonly ProgressBarOptions MainProgressBarOptions = new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray };
+		private static readonly ProgressBarOptions MainProgressBarOptions = new ProgressBarOptions
+		{
+			BackgroundColor = ConsoleColor.DarkGray,
+			ProgressCharacter = '─',
+		};
 
 		private static readonly Dictionary<string, string> OnlineSpecifications = new Dictionary<string, string>
 		{
