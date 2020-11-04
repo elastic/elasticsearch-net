@@ -5,22 +5,66 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using ApiGenerator.Configuration;
+using Spectre.Console;
+
+#pragma warning disable 162
 
 namespace ApiGenerator
 {
 	public static class Program
 	{
-		private static readonly string DownloadBranch = "master";
+		private static bool Interactive { get; set; } = false;
 
-		// ReSharper disable once UnusedParameter.Local
-		private static async Task Main(string[] args)
+		public static Style HeaderStyle { get; } = new Style(Color.White, Color.Chartreuse4);
+
+		/// <summary>
+		/// A main function can also take <see cref="CancellationToken"/> which is hooked up to support termination (e.g CTRL+C)
+		/// </summary>
+		/// <param name="interactive"></param>
+		/// <param name="download"></param>
+		/// <param name="branch"></param>
+		/// <param name="includeHighLevel"></param>
+		/// <param name="skipGenerate"></param>
+		/// <param name="token"></param>
+		/// <param name="args"></param>
+		/// <returns></returns>
+		private static async Task<int> Main(bool interactive = false, bool download = false, string branch = "master", bool includeHighLevel = false, bool skipGenerate = false, CancellationToken token = default, string[] args = null)
 		{
-			var redownloadCoreSpecification = Ask("Download online rest specifications?", false);
+			Interactive = interactive;
+			try
+			{
+				await Generate(download, branch, includeHighLevel, skipGenerate, token);
+			}
+			catch (OperationCanceledException)
+			{
+				AnsiConsole.WriteLine();
+				AnsiConsole.Render(new Rule("[b white on orange4_1] Cancelled [/]").LeftAligned());
+				AnsiConsole.WriteLine();
+				return 1;
+			}
+			catch (Exception ex)
+			{
+				AnsiConsole.WriteLine();
+				AnsiConsole.Render(new Rule("[b white on darkred] Exception [/]")
+				{
+					Alignment = Justify.Left,
+				});
+				AnsiConsole.WriteLine();
+				AnsiConsole.WriteException(ex);
+				return 1;
+			}
+			return 0;
+		}
 
-			var downloadBranch = DownloadBranch;
-			if (redownloadCoreSpecification)
+		private static async Task<int> Generate(bool download, string branch, bool includeHighLevel, bool skipGenerate, CancellationToken token = default)
+		{
+			var redownloadCoreSpecification = Ask("Download online rest specifications?", download);
+
+			var downloadBranch = branch;
+			if (Interactive && redownloadCoreSpecification)
 			{
 				Console.Write($"Branch to download specification from (default {downloadBranch}): ");
 				var readBranch = Console.ReadLine()?.Trim();
@@ -34,33 +78,73 @@ namespace ApiGenerator
 			}
 
 			if (string.IsNullOrEmpty(downloadBranch))
-				downloadBranch = DownloadBranch;
+				downloadBranch = branch;
 
-			var generateCode = Ask("Generate code from the specification files on disk?", defaultAnswer: true);
-			var lowLevelOnly = generateCode && Ask("Generate low level client only?", defaultAnswer: false);
+			var generateCode = Ask("Generate code from the specification files on disk?", !skipGenerate);
+			var lowLevelOnly = generateCode && Ask("Generate low level client only?", !includeHighLevel);
+
+			static string YesNo(bool value) => value ? "[bold green]Yes[/]" : "[grey]No[/]";
+			var grid = new Grid()
+				.AddColumn(new GridColumn().PadRight(4))
+				.AddColumn()
+				.AddRow("[b]Download specification[/]", $"{YesNo(download)}")
+				.AddRow("[b]Download branch[/]", $"{downloadBranch}")
+				.AddRow("[b]Generate code from specification[/]", $"{YesNo(generateCode)}")
+				.AddRow("[b]Include high level client[/]", $"{YesNo(!lowLevelOnly)}");
+
+			AnsiConsole.Render(
+				new Panel(grid)
+					.Header(new PanelHeader(" Elasticsearch .NET client API generator ", HeaderStyle, Justify.Left))
+			);
 
 			if (redownloadCoreSpecification)
-				RestSpecDownloader.Download(downloadBranch);
-
-			if (generateCode)
 			{
-				var spec = Generator.ApiGenerator.CreateRestApiSpecModel(downloadBranch, "Core", "XPack");
-				if (!lowLevelOnly)
-				{
-					foreach (var endpoint in spec.Endpoints.Select(e => e.Value.FileName))
-					{
-						if (CodeConfiguration.IsNewHighLevelApi(endpoint)
-							&& Ask($"Generate highlevel code for new api {endpoint}", false))
-							CodeConfiguration.EnableHighLevelCodeGen.Add(endpoint);
-
-					}
-				}
-				await Generator.ApiGenerator.Generate(downloadBranch, lowLevelOnly, spec);
+				AnsiConsole.Render(new Rule("[b white on chartreuse4] Downloading specification [/]").LeftAligned());
+				await RestSpecDownloader.DownloadAsync(downloadBranch, token);
 			}
+
+			if (!generateCode) return 0;
+
+			Console.WriteLine();
+			AnsiConsole.Render(new Rule("[b white on chartreuse4] Loading specification [/]").LeftAligned());
+			Console.WriteLine();
+
+			var spec = Generator.ApiGenerator.CreateRestApiSpecModel(downloadBranch, "Core", "XPack");
+			if (!lowLevelOnly)
+			{
+				foreach (var endpoint in spec.Endpoints.Select(e => e.Value.FileName))
+				{
+					if (CodeConfiguration.IsNewHighLevelApi(endpoint)
+						&& Ask($"Generate highlevel code for new api {endpoint}", false))
+						CodeConfiguration.EnableHighLevelCodeGen.Add(endpoint);
+
+				}
+			}
+
+			Console.WriteLine();
+			AnsiConsole.Render(new Rule("[b white on chartreuse4] Generating code [/]").LeftAligned());
+			Console.WriteLine();
+
+			await Generator.ApiGenerator.Generate(downloadBranch, lowLevelOnly, spec, token);
+
+			var warnings = Generator.ApiGenerator.Warnings;
+			if (warnings.Count > 0)
+			{
+				Console.WriteLine();
+				AnsiConsole.Render(new Rule("[b black on yellow] Specification warnings [/]").LeftAligned());
+				Console.WriteLine();
+
+				foreach (var warning in warnings.Distinct().OrderBy(w => w))
+					AnsiConsole.MarkupLine(" {0} [yellow] {1} [/] ", Emoji.Known.Warning, warning);
+			}
+
+			return 0;
 		}
 
 		private static bool Ask(string question, bool defaultAnswer = true)
 		{
+			if (!Interactive) return defaultAnswer;
+
 			var answer = "invalid";
 			var defaultResponse = defaultAnswer ? "y" : "n";
 

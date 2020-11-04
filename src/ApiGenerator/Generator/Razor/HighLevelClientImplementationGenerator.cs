@@ -4,6 +4,7 @@
 
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using ApiGenerator.Configuration;
 using ApiGenerator.Domain;
@@ -16,7 +17,7 @@ namespace ApiGenerator.Generator.Razor
 	{
 		public override string Title => "NEST client implementation";
 
-		public override async Task Generate(RestApiSpec spec, ProgressBar progressBar)
+		public override async Task Generate(RestApiSpec spec, ProgressBar progressBar, CancellationToken token)
 		{
 			// Delete existing files
 			foreach (var file in Directory.GetFiles(GeneratorLocations.NestFolder, "ElasticClient.*.cs"))
@@ -24,13 +25,13 @@ namespace ApiGenerator.Generator.Razor
 
 			var view = ViewLocations.HighLevel("Client", "Implementation", "ElasticClient.cshtml");
 			var target = GeneratorLocations.HighLevel($"ElasticClient.{CsharpNames.RootNamespace}.cs");
-			await DoRazor(spec, view, target);
+			await DoRazor(spec, view, target, null, token);
 
 			string Target(string id) => GeneratorLocations.HighLevel($"ElasticClient.{id}.cs");
 
 			var namespaced = spec.EndpointsPerNamespaceHighLevel.Where(kv => kv.Key != CsharpNames.RootNamespace).ToList();
 			var dependantView = ViewLocations.HighLevel("Client", "Implementation", "ElasticClient.Namespace.cshtml");
-			await DoRazorDependantFiles(progressBar, namespaced, dependantView, kv => kv.Key, id => Target(id));
+			await DoRazorDependantFiles(progressBar, namespaced, dependantView, kv => kv.Key, id => Target(id), token);
 
 		}
 	}
