@@ -11,7 +11,8 @@ script_path=$(dirname "$(realpath -s "$0")")
 repo=$(realpath "$script_path/../")
 
 # shellcheck disable=SC1090
-cmd=$1
+CMD=$1
+TASK=$1
 VERSION=$2
 STACK_VERSION=$VERSION
 source "$script_path/functions/imports.sh"
@@ -34,6 +35,16 @@ echo -e "\033[1m>>>>> Run [elastic/elasticsearch-net container] >>>>>>>>>>>>>>>>
 
 mkdir -p "$OUTPUT_DIR"
 
+case $CMD in
+    assemble)
+        TASK=release
+        ;;
+    *)
+        echo -e "\nUsage:\n\t $CMD is not supported right now\n"
+        exit 1
+esac
+
+
 docker run \
   --network=${network_name} \
   --env "DOTNET_VERSION" \
@@ -41,4 +52,4 @@ docker run \
   --volume "${OUTPUT_DIR}:/sln/${output_folder}" \
   --rm \
   elastic/elasticsearch-net \
-  ./build.sh release "$VERSION" "$output_folder" "skiptests"
+  ./build.sh $TASK "$VERSION" "$output_folder" "skiptests"
