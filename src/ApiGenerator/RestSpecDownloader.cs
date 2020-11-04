@@ -86,8 +86,6 @@ namespace ApiGenerator
 
 			var dom = CQ.Create(html);
 
-			await WriteToEndpointsFolder(spec.FolderOnDisk, "root.html", html, token);
-
 			var endpoints = dom[".js-navigation-open"]
 				.Select(s => s.InnerText)
 				.Where(s => !string.IsNullOrEmpty(s) && s.EndsWith(".json"))
