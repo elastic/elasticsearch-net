@@ -25,10 +25,11 @@ namespace ApiGenerator
 			ProgressCharacter = '─',
 		};
 
+		private static string CommitsUrl = "https://github.com/elastic/elasticsearch/commits/{branch}";
 		private static readonly Dictionary<string, string> OnlineSpecifications = new Dictionary<string, string>
 		{
-			{ "Core", "https://github.com/elastic/elasticsearch/tree/{version}/rest-api-spec/src/main/resources/rest-api-spec/api" },
-			{ "XPack", "https://github.com/elastic/elasticsearch/tree/{version}/x-pack/plugin/src/test/resources/rest-api-spec/api"}
+			{ "Core", "https://github.com/elastic/elasticsearch/tree/{ref}/rest-api-spec/src/main/resources/rest-api-spec/api" },
+			{ "XPack", "https://github.com/elastic/elasticsearch/tree/{ref}/x-pack/plugin/src/test/resources/rest-api-spec/api"}
 		};
 
 		private static readonly ProgressBarOptions SubProgressBarOptions = new ProgressBarOptions
@@ -43,10 +44,12 @@ namespace ApiGenerator
 
 		private async Task DownloadAsync(CancellationToken token)
 		{
+			var @ref = await ResolveLastRef(_branch, token);
+
 			var specifications =
 				(from kv in OnlineSpecifications
-					let url = kv.Value.Replace("{version}", _branch)
-					select new Specification { FolderOnDisk = kv.Key, Branch = _branch, GithubListingUrl = url }).ToList();
+					let url = kv.Value.Replace("{ref}", @ref)
+					select new Specification { FolderOnDisk = kv.Key, Branch = _branch, Ref = @ref, GithubListingUrl = url }).ToList();
 
 			using (var pbar = new ProgressBar(specifications.Count, "Downloading specifications", MainProgressBarOptions))
 			{
@@ -64,11 +67,27 @@ namespace ApiGenerator
 				}
 			}
 
-			await File.WriteAllTextAsync(GeneratorLocations.LastDownloadedVersionFile, _branch, token);
+			await File.WriteAllTextAsync(GeneratorLocations.LastDownloadedRef, @ref, token);
 
 		}
 
 		public static Task DownloadAsync(string branch, CancellationToken token = default) => new RestSpecDownloader(branch).DownloadAsync(token);
+
+		private static async Task<string> ResolveLastRef(string branch, CancellationToken token)
+		{
+			var response = await Http.GetAsync(CommitsUrl.Replace("{branch}", branch), token);
+			var html = await response.Content.ReadAsStringAsync();
+			var dom = CQ.Create(html);
+
+			var prefix = "/elastic/elasticsearch/commit/";
+			var commit = dom["a.text-mono"]
+				.Select(s => s.GetAttribute("href"))
+				.Where(a => a.StartsWith(prefix))
+				.Select(a => a.Replace(prefix, ""))
+				.FirstOrDefault()
+				?? throw new Exception($"Can not locate the latest commit on branch: {branch}");
+			return commit;
+		}
 
 		private static readonly HttpClient Http = new HttpClient();
 		private static async Task DownloadJsonDefinitions(Specification spec, IProgressBar pbar, CancellationToken token)
@@ -119,6 +138,7 @@ namespace ApiGenerator
 		{
 			// ReSharper disable once UnusedAutoPropertyAccessor.Local
 			public string Branch { get; set; }
+			public string Ref { get; set; }
 			public string FolderOnDisk { get; set; }
 			public string GithubListingUrl { get; set; }
 

@@ -3,6 +3,9 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.CommandLine;
+using System.CommandLine.DragonFruit;
+using System.CommandLine.Invocation;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -23,19 +26,25 @@ namespace ApiGenerator
 		/// <summary>
 		/// A main function can also take <see cref="CancellationToken"/> which is hooked up to support termination (e.g CTRL+C)
 		/// </summary>
-		/// <param name="interactive"></param>
-		/// <param name="download"></param>
-		/// <param name="branch"></param>
-		/// <param name="includeHighLevel"></param>
-		/// <param name="skipGenerate"></param>
+		/// <param name="branch">The stack's branch we are targeting the generation for</param>
+		/// <param name="interactive">Run the generation interactively, this will ignore all flags</param>
+		/// <param name="download">Whether to download the specs or use an already downloaded copy</param>
+		/// <param name="includeHighLevel">Also generate the high level client (NEST)</param>
+		/// <param name="skipGenerate">Only download the specs, skip all code generation</param>
 		/// <param name="token"></param>
-		/// <param name="args"></param>
 		/// <returns></returns>
-		private static async Task<int> Main(bool interactive = false, bool download = false, string branch = "master", bool includeHighLevel = false, bool skipGenerate = false, CancellationToken token = default, string[] args = null)
+		private static async Task<int> Main(
+			string branch, bool interactive = false, bool download = false, bool includeHighLevel = false, bool skipGenerate = false
+			, CancellationToken token = default)
 		{
 			Interactive = interactive;
 			try
 			{
+				if (string.IsNullOrEmpty(branch))
+				{
+
+					throw new ArgumentException("--branch can not be null");
+				}
 				await Generate(download, branch, includeHighLevel, skipGenerate, token);
 			}
 			catch (OperationCanceledException)
@@ -70,15 +79,15 @@ namespace ApiGenerator
 				var readBranch = Console.ReadLine()?.Trim();
 				if (!string.IsNullOrEmpty(readBranch)) downloadBranch = readBranch;
 			}
-			else
+			else if (string.IsNullOrEmpty(branch))
 			{
 				// read last downloaded branch from file.
-				if (File.Exists(GeneratorLocations.LastDownloadedVersionFile))
-					downloadBranch = File.ReadAllText(GeneratorLocations.LastDownloadedVersionFile);
+				if (File.Exists(GeneratorLocations.LastDownloadedRef))
+					downloadBranch = File.ReadAllText(GeneratorLocations.LastDownloadedRef);
 			}
 
 			if (string.IsNullOrEmpty(downloadBranch))
-				downloadBranch = branch;
+				throw new Exception($"--branch was not specified and could also not locate the checked in last reference: {GeneratorLocations.LastDownloadedRef}");
 
 			var generateCode = Ask("Generate code from the specification files on disk?", !skipGenerate);
 			var lowLevelOnly = generateCode && Ask("Generate low level client only?", !includeHighLevel);

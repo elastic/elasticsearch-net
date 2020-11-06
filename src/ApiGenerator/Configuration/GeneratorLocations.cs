@@ -11,7 +11,7 @@ namespace ApiGenerator.Configuration
 	{
 		// @formatter:off — disable formatter after this line
 		public static string EsNetFolder { get; } = $@"{Root}../../src/Elasticsearch.Net/";
-		public static string LastDownloadedVersionFile { get; } = Path.Combine(Root, "last_downloaded_version.txt");
+		public static string LastDownloadedRef { get; } = Path.Combine(Root, "last_downloaded_version.txt");
 
 		public static string NestFolder { get; } = $@"{Root}../../src/Nest/";
 		public static string RestSpecificationFolder { get; } = $@"{Root}RestSpecification/";
