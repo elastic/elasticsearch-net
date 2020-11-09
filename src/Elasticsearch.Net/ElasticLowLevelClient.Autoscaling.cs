@@ -57,17 +57,17 @@ namespace Elasticsearch.Net.Specification.AutoscalingApi
 		[MapsApi("autoscaling.delete_autoscaling_policy", "name")]
 		public Task<TResponse> DeletePolicyAsync<TResponse>(string name, DeleteAutoscalingPolicyRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_autoscaling/policy/{name:name}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_autoscaling/decision <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-get-autoscaling-decision.html</para></summary>
+		///<summary>GET on /_autoscaling/capacity <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-get-autoscaling-capacity.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		public TResponse GetDecision<TResponse>(GetAutoscalingDecisionRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, "_autoscaling/decision", null, RequestParams(requestParameters));
-		///<summary>GET on /_autoscaling/decision <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-get-autoscaling-decision.html</para></summary>
+		public TResponse GetCapacity<TResponse>(GetAutoscalingCapacityRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, "_autoscaling/capacity", null, RequestParams(requestParameters));
+		///<summary>GET on /_autoscaling/capacity <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-get-autoscaling-capacity.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		[MapsApi("autoscaling.get_autoscaling_decision", "")]
-		public Task<TResponse> GetDecisionAsync<TResponse>(GetAutoscalingDecisionRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "_autoscaling/decision", ctx, null, RequestParams(requestParameters));
+		[MapsApi("autoscaling.get_autoscaling_capacity", "")]
+		public Task<TResponse> GetCapacityAsync<TResponse>(GetAutoscalingCapacityRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "_autoscaling/capacity", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_autoscaling/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-get-autoscaling-policy.html</para></summary>
 		///<param name = "name">the name of the autoscaling policy</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

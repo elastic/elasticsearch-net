@@ -66,6 +66,17 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 		[MapsApi("async_search.get", "id")]
 		public Task<TResponse> GetAsync<TResponse>(string id, AsyncSearchGetRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_async_search/{id:id}"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_async_search/status/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
+		///<param name = "id">The async search ID</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse Status<TResponse>(string id, StatusRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_async_search/status/{id:id}"), null, RequestParams(requestParameters));
+		///<summary>GET on /_async_search/status/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
+		///<param name = "id">The async search ID</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("async_search.status", "id")]
+		public Task<TResponse> StatusAsync<TResponse>(string id, StatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_async_search/status/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_async_search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
 		///<param name = "body">The search definition using the Query DSL</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

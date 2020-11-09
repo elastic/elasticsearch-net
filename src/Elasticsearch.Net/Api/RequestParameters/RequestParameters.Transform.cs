@@ -53,6 +53,13 @@ namespace Elasticsearch.Net.Specification.TransformApi
 			set => Q("allow_no_match", value);
 		}
 
+		///<summary>Omits fields that are illegal to set on transform PUT</summary>
+		public bool? ExcludeGenerated
+		{
+			get => Q<bool? >("exclude_generated");
+			set => Q("exclude_generated", value);
+		}
+
 		///<summary>skips a number of transform configs, defaults to 0</summary>
 		public int? From
 		{
