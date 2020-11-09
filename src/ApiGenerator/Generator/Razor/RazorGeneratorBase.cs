@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using ApiGenerator.Configuration;
 using ApiGenerator.Domain;
@@ -24,12 +25,13 @@ namespace ApiGenerator.Generator.Razor
 			.UseMemoryCachingProvider()
 			.Build();
 
-		protected async Task DoRazor<TModel>(TModel model, string viewLocation, string targetLocation, string cacheNameSuffix = null)
+		protected async Task DoRazor<TModel>(TModel model, string viewLocation, string targetLocation, string cacheNameSuffix, CancellationToken token)
 		{
 			try
 			{
 				var name = GetType().Name + cacheNameSuffix;
-				var sourceFileContents = File.ReadAllText(viewLocation);
+				var sourceFileContents = await File.ReadAllTextAsync(viewLocation, token);
+				token.ThrowIfCancellationRequested();
 				var generated = await Engine.CompileRenderStringAsync(name, sourceFileContents,  model);
 				WriteFormattedCsharpFile(targetLocation, generated);
 			}
@@ -42,15 +44,21 @@ namespace ApiGenerator.Generator.Razor
 
 		protected async Task DoRazorDependantFiles<TModel>(
 			ProgressBar pbar, IReadOnlyCollection<TModel> items, string viewLocation,
-			Func<TModel, string> identifier, Func<string, string> target)
+			Func<TModel, string> identifier, Func<string, string> target,
+			CancellationToken token
+			)
 		{
-			using (var c = pbar.Spawn(items.Count, "Generating namespaces", new ProgressBarOptions { ForegroundColor = ConsoleColor.Yellow }))
+			using (var c = pbar.Spawn(items.Count, "Generating namespaces", new ProgressBarOptions
+			{
+				ProgressCharacter = '─',
+				ForegroundColor = ConsoleColor.Yellow
+			}))
 			{
 				foreach (var item in items)
 				{
 					var id = identifier(item);
 					var targetLocation = target(id);
-					await DoRazor(item, viewLocation, targetLocation, id);
+					await DoRazor(item, viewLocation, targetLocation, id, token);
 					c.Tick($"{Title}: {id}");
 				}
 			}
@@ -65,6 +73,6 @@ namespace ApiGenerator.Generator.Razor
 		}
 
 		public abstract string Title { get; }
-		public abstract Task Generate(RestApiSpec spec, ProgressBar progressBar);
+		public abstract Task Generate(RestApiSpec spec, ProgressBar progressBar, CancellationToken token);
 	}
 }

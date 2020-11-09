@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <IsPackable>false</IsPackable>
     
-    <NoWarn>NU1701</NoWarn>
+    <NoWarn>CS1591;NU1701</NoWarn>
     <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
   <ItemGroup>
@@ -15,6 +15,8 @@
     <PackageReference Include="CsQuery.Core" Version="2.0.1" />
     <!-- https://github.com/toddams/RazorLight/issues/172 -->
     <PackageReference Include="RazorLight.Unofficial" Version="2.0.0-beta1.3" />
+    <PackageReference Include="Spectre.Console" Version="0.27.1-preview.0.8" />
+    <PackageReference Include="System.CommandLine.DragonFruit" Version="0.3.0-alpha.20371.2" />
     <!--<PackageReference Include="RazorLight" Version="2.0.0-beta1" />-->
   </ItemGroup>
   <ItemGroup>
