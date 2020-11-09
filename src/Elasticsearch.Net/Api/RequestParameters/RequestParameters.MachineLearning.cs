@@ -419,10 +419,10 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 
 		///<summary>Omits fields that are illegal to set on data frame analytics PUT</summary>
-		public bool? ForExport
+		public bool? ExcludeGenerated
 		{
-			get => Q<bool? >("for_export");
-			set => Q("for_export", value);
+			get => Q<bool? >("exclude_generated");
+			set => Q("exclude_generated", value);
 		}
 
 		///<summary>skips a number of analytics</summary>
@@ -519,10 +519,10 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 
 		///<summary>Omits fields that are illegal to set on datafeed PUT</summary>
-		public bool? ForExport
+		public bool? ExcludeGenerated
 		{
-			get => Q<bool? >("for_export");
-			set => Q("for_export", value);
+			get => Q<bool? >("exclude_generated");
+			set => Q("exclude_generated", value);
 		}
 	}
 
@@ -595,10 +595,10 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 
 		///<summary>Omits fields that are illegal to set on job PUT</summary>
-		public bool? ForExport
+		public bool? ExcludeGenerated
 		{
-			get => Q<bool? >("for_export");
-			set => Q("for_export", value);
+			get => Q<bool? >("exclude_generated");
+			set => Q("exclude_generated", value);
 		}
 	}
 
@@ -652,10 +652,10 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 
 		///<summary>Omits fields that are illegal to set on model PUT</summary>
-		public bool? ForExport
+		public bool? ExcludeGenerated
 		{
-			get => Q<bool? >("for_export");
-			set => Q("for_export", value);
+			get => Q<bool? >("exclude_generated");
+			set => Q("exclude_generated", value);
 		}
 
 		///<summary>skips a number of trained models</summary>

@@ -385,6 +385,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 8.0.0, reason: This parameter does not affect the request. It will be removed in a future release.")]
 		public bool? Local
 		{
 			get => Q<bool? >("local");
@@ -1206,6 +1207,7 @@ namespace Elasticsearch.Net.Specification.CatApi
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 8.0.0, reason: This parameter does not affect the request. It will be removed in a future release.")]
 		public bool? Local
 		{
 			get => Q<bool? >("local");

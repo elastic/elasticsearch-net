@@ -332,6 +332,12 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		public override bool SupportsBody => false;
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
 	}
 
 	///<summary>Request options for DeleteTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
@@ -762,6 +768,12 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
 	}
 
 	///<summary>Request options for GetFieldMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
@@ -963,6 +975,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			get => Q<TimeSpan>("master_timeout");
 			set => Q("master_timeout", value);
 		}
+	}
+
+	///<summary>Request options for MigrateToDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class MigrateToDataStreamRequestParameters : RequestParameters<MigrateToDataStreamRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Open <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
