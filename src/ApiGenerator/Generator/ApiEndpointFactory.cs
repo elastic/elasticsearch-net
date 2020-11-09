@@ -56,7 +56,13 @@ namespace ApiGenerator.Generator
 			{
 				var required = url.Paths.All(p => p.Path.Contains($"{{{part.Name}}}"));
 				if (part.Required != required)
-					ApiGenerator.Warnings.Add($"{jsonFile} has part: {part.Name} listed as {part.Required} but should be {required}");
+				{
+					var message = required
+						? "is [b green] required [/] but appears in spec as [b red] optional [/]"
+						: "is [b green] optional [/] but marked as [b red] required [/]  ";
+					// TODO submit PR to fix these, too noisy for now
+					//ApiGenerator.Warnings.Add($"[grey]{jsonFile}[/] part [b white] {part.Name} [/] {message}");
+				}
 				part.Required = required;
 			}
 		}

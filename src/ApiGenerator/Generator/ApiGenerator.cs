@@ -6,7 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+ using System.Threading;
+ using System.Threading.Tasks;
 using ApiGenerator.Configuration;
 using ApiGenerator.Domain;
 using ApiGenerator.Domain.Specification;
@@ -20,17 +21,17 @@ namespace ApiGenerator.Generator
 	{
 		public static List<string> Warnings { get; private set; } = new List<string>();
 
-		public static async Task Generate(string downloadBranch, bool lowLevelOnly, RestApiSpec spec)
+		public static async Task Generate(string downloadBranch, bool lowLevelOnly, RestApiSpec spec, CancellationToken token)
 		{
-			static async Task DoGenerate(ICollection<RazorGeneratorBase> generators, RestApiSpec restApiSpec, bool highLevel)
+			static async Task DoGenerate(ICollection<RazorGeneratorBase> generators, RestApiSpec restApiSpec, bool highLevel, CancellationToken token)
 			{
-				var pbarOpts = new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray };
+				var pbarOpts = new ProgressBarOptions { ProgressCharacter = '─', BackgroundColor = ConsoleColor.Yellow };
 				var message = $"Generating {(highLevel ? "high" : "low")} level code";
 				using var pbar = new ProgressBar(generators.Count, message, pbarOpts);
 				foreach (var generator in generators)
 				{
 					pbar.Message = "Generating " + generator.Title;
-					await generator.Generate(restApiSpec, pbar);
+					await generator.Generate(restApiSpec, pbar, token);
 					pbar.Tick("Generated " + generator.Title);
 				}
 			}
@@ -55,23 +56,10 @@ namespace ApiGenerator.Generator
 				new RequestsGenerator(),
 			};
 
-			await DoGenerate(lowLevelGenerators, spec, highLevel: false);
+			await DoGenerate(lowLevelGenerators, spec, highLevel: false, token);
 			if (!lowLevelOnly)
-				await DoGenerate(highLevelGenerators, spec, highLevel: true);
+				await DoGenerate(highLevelGenerators, spec, highLevel: true, token);
 
-			// Check if there are any non-Stable endpoints present.
-			foreach (var endpoint in spec.Endpoints)
-			{
-				if (endpoint.Value.Stability != Stability.Stable)
-					Warnings.Add($"Endpoint {endpoint.Value.Name} is not marked as Stable ({endpoint.Value.Stability})");
-			}
-
-			if (Warnings.Count == 0) return;
-
-			Console.ForegroundColor = ConsoleColor.Yellow;
-			foreach (var warning in Warnings.Distinct().OrderBy(w => w))
-				Console.WriteLine(warning);
-			Console.ResetColor();
 		}
 
 		public static RestApiSpec CreateRestApiSpecModel(string downloadBranch, params string[] folders)
@@ -84,7 +72,7 @@ namespace ApiGenerator.Generator
 			var endpoints = new SortedDictionary<string, ApiEndpoint>();
 			var seenFiles = new HashSet<string>();
 			using (var pbar = new ProgressBar(directories.Count, $"Listing {directories.Count} directories",
-				new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray, CollapseWhenFinished = false }))
+				new ProgressBarOptions { ProgressCharacter = '─', BackgroundColor = ConsoleColor.DarkGray, CollapseWhenFinished = false }))
 			{
 				var folderFiles = directories.Select(dir =>
 					Directory.GetFiles(dir)
