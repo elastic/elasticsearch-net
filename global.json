@@ -1,6 +1,8 @@
 {
   "sdk": {
-    "version": "3.0.100"
+    "version": "3.1.100",
+    "rollForward": "latestFeature",
+    "allowPrerelease": false
   },
   "version": "8.0.0-alpha1",
   "doc_current": "master",

@@ -8,6 +8,6 @@ TEST_SUITE:
   - xpack
 
 DOTNET_VERSION:
-    - 3.0.100
+    - 3.1.202
 
 exclude: ~

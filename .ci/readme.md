@@ -30,7 +30,7 @@ $ STACK_VERSION=8.0.0-SNAPSHOT ./.ci/run-tests
 |-------------------------|-------------|-------------|
 | `STACK_VERSION` | `N/A`       | The elasticsearch version to target
 | `TEST_SUITE`            | `oss`       | `oss` or `xpack` sets which test suite to run and which container to run against. |
-| `DOTNET_VERSION`        | `3.0.100`   | The .NET sdk version used to grab the proper container |
+| `DOTNET_VERSION`        | `3.1.202`   | The .NET sdk version used to grab the proper container |
 
 
 If you want to manually spin up elasticsearch for this tests and call the runner afterwards you can use
