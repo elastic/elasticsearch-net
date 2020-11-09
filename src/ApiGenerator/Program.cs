@@ -77,17 +77,12 @@ namespace ApiGenerator
 			{
 				Console.Write($"Branch to download specification from (default {downloadBranch}): ");
 				var readBranch = Console.ReadLine()?.Trim();
-				if (!string.IsNullOrEmpty(readBranch)) downloadBranch = readBranch;
-			}
-			else if (string.IsNullOrEmpty(branch))
-			{
-				// read last downloaded branch from file.
-				if (File.Exists(GeneratorLocations.LastDownloadedRef))
-					downloadBranch = File.ReadAllText(GeneratorLocations.LastDownloadedRef);
+				if (!string.IsNullOrEmpty(readBranch))
+					downloadBranch = readBranch;
 			}
 
 			if (string.IsNullOrEmpty(downloadBranch))
-				throw new Exception($"--branch was not specified and could also not locate the checked in last reference: {GeneratorLocations.LastDownloadedRef}");
+				throw new Exception($"Branch to download from is null or empty");
 
 			var generateCode = Ask("Generate code from the specification files on disk?", !skipGenerate);
 			var lowLevelOnly = generateCode && Ask("Generate low level client only?", !includeHighLevel);
