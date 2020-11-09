@@ -162,7 +162,6 @@ namespace Elasticsearch.Net
 
 			for (var i = 0; i < _largePools.Length; ++i) _largePools[i] = new ConcurrentStack<byte[]>();
 
-			Counter = new Counters(this);
 			EventsWriter.MemoryStreamManagerInitialized(blockSize, largeBufferMultiple, maximumBufferSize);
 		}
 
@@ -480,41 +479,17 @@ namespace Elasticsearch.Net
 				LargePoolFreeSize);
 		}
 
-		internal void ReportBlockCreated()
-		{
-			Counter.ReportBlockCreated();
-			BlockCreated?.Invoke();
-		}
+		internal void ReportBlockCreated() => BlockCreated?.Invoke();
 
-		internal void ReportBlockDiscarded()
-		{
-			Counter.ReportBlockDiscarded();
-			BlockDiscarded?.Invoke();
-		}
+		internal void ReportBlockDiscarded() => BlockDiscarded?.Invoke();
 
-		internal void ReportLargeBufferCreated()
-		{
-			Counter.ReportLargeBufferCreated();
-			LargeBufferCreated?.Invoke();
-		}
+		internal void ReportLargeBufferCreated() => LargeBufferCreated?.Invoke();
 
-		internal void ReportLargeBufferDiscarded(Events.MemoryStreamDiscardReason reason)
-		{
-			Counter.ReportLargeBufferDiscarded();
-			LargeBufferDiscarded?.Invoke(reason);
-		}
+		internal void ReportLargeBufferDiscarded(Events.MemoryStreamDiscardReason reason) => LargeBufferDiscarded?.Invoke(reason);
 
-		internal void ReportStreamCreated()
-		{
-			Counter.ReportStreamCreated();
-			StreamCreated?.Invoke();
-		}
+		internal void ReportStreamCreated() => StreamCreated?.Invoke();
 
-		internal void ReportStreamDisposed()
-		{
-			Counter.ReportStreamDisposed();
-			StreamDisposed?.Invoke();
-		}
+		internal void ReportStreamDisposed() => StreamDisposed?.Invoke();
 
 		internal void ReportStreamFinalized() => StreamFinalized?.Invoke();
 
@@ -537,14 +512,10 @@ namespace Elasticsearch.Net
 		{
 			private readonly RecyclableMemoryStreamManager _instance;
 
-			public ReportingMemoryStream(byte[] bytes, RecyclableMemoryStreamManager instance) : base(bytes)
-			{
-				_instance = instance;
-				_instance.Counter.ReportStreamCreated();
-			}
+			public ReportingMemoryStream(byte[] bytes, RecyclableMemoryStreamManager instance) : base(bytes) => _instance = instance;
 
 			//NOTE DisposeAsync calls Dispose as well
-			protected override void Dispose(bool disposing) => _instance.Counter.ReportStreamDisposed();
+			protected override void Dispose(bool disposing) => base.Dispose();
 		}
 
 		/// <summary>
