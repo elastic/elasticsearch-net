@@ -417,6 +417,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			set => Q("allow_no_match", value);
 		}
 
+		///<summary>Omits fields that are illegal to set on data frame analytics PUT</summary>
+		public bool? ExcludeGenerated
+		{
+			get => Q<bool? >("exclude_generated");
+			set => Q("exclude_generated", value);
+		}
+
 		///<summary>skips a number of analytics</summary>
 		public int? From
 		{
@@ -509,6 +516,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			get => Q<bool? >("allow_no_match");
 			set => Q("allow_no_match", value);
 		}
+
+		///<summary>Omits fields that are illegal to set on datafeed PUT</summary>
+		public bool? ExcludeGenerated
+		{
+			get => Q<bool? >("exclude_generated");
+			set => Q("exclude_generated", value);
+		}
 	}
 
 	///<summary>Request options for GetFilters <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html</para></summary>
@@ -578,6 +592,13 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			get => Q<bool? >("allow_no_match");
 			set => Q("allow_no_match", value);
 		}
+
+		///<summary>Omits fields that are illegal to set on job PUT</summary>
+		public bool? ExcludeGenerated
+		{
+			get => Q<bool? >("exclude_generated");
+			set => Q("exclude_generated", value);
+		}
 	}
 
 	///<summary>Request options for GetModelSnapshots <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</para></summary>
@@ -630,10 +651,10 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 
 		///<summary>Omits fields that are illegal to set on model PUT</summary>
-		public bool? ForExport
+		public bool? ExcludeGenerated
 		{
-			get => Q<bool? >("for_export");
-			set => Q("for_export", value);
+			get => Q<bool? >("exclude_generated");
+			set => Q("exclude_generated", value);
 		}
 
 		///<summary>skips a number of trained models</summary>
