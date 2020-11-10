@@ -18,7 +18,7 @@ jobs:
   steps:
   - task: UseDotNet@2
     inputs:
-       version: '3.0.100'
+       version: '3.1.202'
   - script: ./build.sh documentation
     displayName: 'Generate Documentation'
   - script: |
@@ -30,7 +30,7 @@ jobs:
   steps:
   - task: UseDotNet@2
     inputs:
-        version: '3.0.100'
+        version: '3.1.202'
   - script: ./build.sh test-one
     displayName: 'build and unit test'
   - task: PublishTestResults@2
@@ -62,7 +62,7 @@ jobs:
   steps:
   - task: UseDotNet@2
     inputs:
-      version: '3.0.100'
+      version: '3.1.202'
   - script: build.bat canary
     displayName: 'build and unit test'
   - task: PublishTestResults@2
@@ -84,7 +84,7 @@ jobs:
   steps:
       - task: UseDotNet@2
         inputs:
-            version: '3.0.100'
+            version: '3.1.202'
       - script: 'build.bat integrate-one $(esVersion) "readonly,writable,bool,xpack"'
         displayName: '$(esVersion) windows integration tests'
       - task: PublishTestResults@2
@@ -106,7 +106,7 @@ jobs:
   steps:
       - task: UseDotNet@2
         inputs:
-            version: '3.0.100'
+            version: '3.1.202'
       - script: './build.sh integrate-one $(esVersion) "readonly,writable"'
         displayName: '$(esVersion) linux integration tests'
       - task: PublishTestResults@2
