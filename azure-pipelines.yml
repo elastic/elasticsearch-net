@@ -18,7 +18,7 @@ jobs:
   steps:
   - task: UseDotNet@2
     inputs:
-       version: '3.1.100'
+       version: '3.1.202'
   - script: ./build.sh documentation
     displayName: 'Generate Documentation'
   - script: |
