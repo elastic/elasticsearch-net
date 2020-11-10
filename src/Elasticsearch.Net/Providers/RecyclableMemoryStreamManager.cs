@@ -513,9 +513,6 @@ namespace Elasticsearch.Net
 			private readonly RecyclableMemoryStreamManager _instance;
 
 			public ReportingMemoryStream(byte[] bytes, RecyclableMemoryStreamManager instance) : base(bytes) => _instance = instance;
-
-			//NOTE DisposeAsync calls Dispose as well
-			protected override void Dispose(bool disposing) => base.Dispose();
 		}
 
 		/// <summary>
