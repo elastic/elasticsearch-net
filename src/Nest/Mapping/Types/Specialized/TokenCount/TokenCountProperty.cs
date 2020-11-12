@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
@@ -18,6 +19,7 @@ namespace Nest
 		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
+		[Obsolete("The server always treated this as a noop and has been removed in 7.10")]
 		[DataMember(Name ="boost")]
 		double? Boost { get; set; }
 
@@ -58,6 +60,7 @@ namespace Nest
 
 		public TokenCountPropertyDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 
+		[Obsolete("The server always treated this as a noop and has been removed in 7.10")]
 		public TokenCountPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		public TokenCountPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);

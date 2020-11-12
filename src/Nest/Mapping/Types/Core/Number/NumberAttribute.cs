@@ -16,8 +16,10 @@ namespace Nest
 
 		public double Boost
 		{
+#pragma warning disable 618
 			get => Self.Boost.GetValueOrDefault();
 			set => Self.Boost = value;
+#pragma warning restore 618
 		}
 
 		public bool Coerce

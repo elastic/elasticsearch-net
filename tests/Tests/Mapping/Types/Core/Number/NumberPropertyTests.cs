@@ -25,7 +25,6 @@ namespace Tests.Mapping.Types.Core.Number
 					similarity = "BM25",
 					store = true,
 					index = false,
-					boost = 1.5,
 					null_value = 0.0,
 					ignore_malformed = true,
 					coerce = true
@@ -41,7 +40,6 @@ namespace Tests.Mapping.Types.Core.Number
 				.Similarity("BM25")
 				.Store()
 				.Index(false)
-				.Boost(1.5)
 				.NullValue(0.0)
 				.IgnoreMalformed()
 				.Coerce()
@@ -57,7 +55,6 @@ namespace Tests.Mapping.Types.Core.Number
 					Similarity = "BM25",
 					Store = true,
 					Index = false,
-					Boost = 1.5,
 					NullValue = 0.0,
 					IgnoreMalformed = true,
 					Coerce = true
@@ -82,7 +79,6 @@ namespace Tests.Mapping.Types.Core.Number
 					similarity = "BM25",
 					store = true,
 					index = false,
-					boost = 1.5,
 					null_value = 0.0,
 					ignore_malformed = true,
 					coerce = true
@@ -99,7 +95,6 @@ namespace Tests.Mapping.Types.Core.Number
 				.Similarity("BM25")
 				.Store()
 				.Index(false)
-				.Boost(1.5)
 				.NullValue(0.0)
 				.IgnoreMalformed()
 				.Coerce()
@@ -116,7 +111,6 @@ namespace Tests.Mapping.Types.Core.Number
 					Similarity = "BM25",
 					Store = true,
 					Index = false,
-					Boost = 1.5,
 					NullValue = 0.0,
 					IgnoreMalformed = true,
 					Coerce = true
