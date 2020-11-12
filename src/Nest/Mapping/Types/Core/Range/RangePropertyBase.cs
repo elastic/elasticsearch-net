@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
 
@@ -13,6 +14,7 @@ namespace Nest
 		/// <summary>
 		/// Mapping field-level query time boosting. Accepts a floating point number, defaults to 1.0.
 		/// </summary>
+		[Obsolete("The server always treated this as a noop and has been removed in 7.10")]
 		[DataMember(Name ="boost")]
 		double? Boost { get; set; }
 
@@ -59,6 +61,7 @@ namespace Nest
 		public TDescriptor Coerce(bool? coerce = true) => Assign(coerce, (a, v) => a.Coerce = v);
 
 		/// <inheritdoc cref="IRangeProperty.Boost" />
+		[Obsolete("The server always treated this as a noop and has been removed in 7.10")]
 		public TDescriptor Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		/// <inheritdoc cref="IRangeProperty.Index" />
