@@ -60,62 +60,6 @@ namespace Elastic.Transport
 	internal sealed partial class RecyclableMemoryStreamManager
 	{
 		public static readonly Events EventsWriter = new Events();
-		private Counters Counter { get; }
-
-		public sealed class Counters : IDisposable
-		{
-			private ReadOnlyCollection<PollingCounter> Polls { get;}
-
-			public Counters(RecyclableMemoryStreamManager instance)
-			{
-				// ReSharper disable once UnusedParameter.Local
-				PollingCounter Create(string name, Func<double> poll, string description) =>
-					new PollingCounter(name, EventsWriter, poll)
-					// ReSharper disable once RedundantEmptyObjectOrCollectionInitializer
-					{
-#if NETSTANDARD2_1
-						DisplayName = description
-#endif
-					};
-
-
-				var polls = new List<PollingCounter>()
-				{
-					{ Create("blocks", () => _blocks, "Pooled blocks active")},
-					{ Create("large-buffers", () => _largeBuffers, "Large buffers active")},
-					{ Create("large-buffers-free", () => instance.LargeBuffersFree, "Large buffers free")},
-					{ Create("large-pool-inuse", () => instance.LargePoolInUseSize, "Large pool in use size")},
-					{ Create("small-pool-free", () => instance.SmallBlocksFree, "Small pool free blocks")},
-					{ Create("small-pool-inuse", () => instance.SmallPoolInUseSize, "Small pool in use size")},
-					{ Create("small-pool-free", () => instance.SmallPoolFreeSize, "Small pool free size")},
-					{ Create("small-pool-max", () => instance.MaximumFreeSmallPoolBytes, "Small pool max size")},
-					{ Create("memory-streams", () => _memoryStreams, "Active memory streams")},
-				};
-				Polls = new ReadOnlyCollection<PollingCounter>(polls);
-
-
-			}
-
-			private long _blocks;
-			internal void ReportBlockCreated() => Interlocked.Increment(ref _blocks);
-
-			internal void ReportBlockDiscarded() => Interlocked.Decrement(ref _blocks);
-
-			private long _largeBuffers;
-			internal void ReportLargeBufferCreated() => Interlocked.Increment(ref _largeBuffers);
-
-			internal void ReportLargeBufferDiscarded() => Interlocked.Decrement(ref _largeBuffers);
-
-			private long _memoryStreams;
-			internal void ReportStreamCreated() => Interlocked.Increment(ref _memoryStreams);
-
-			internal void ReportStreamDisposed() => Interlocked.Decrement(ref _memoryStreams);
-
-			public void Dispose()
-			{
-				foreach(var p in Polls) p.Dispose();
-			}
-		}
 
 		[EventSource(Name = "Elastic-Transport-RecyclableMemoryStream", Guid = "{AD44FDAC-D3FC-460A-9EBE-E55A3569A8F6}")]
 		public sealed class Events : EventSource
