@@ -1168,7 +1168,7 @@ namespace Elasticsearch.Net.Utf8Json
 		private readonly WeakReference _underlyingBytes;
 		private readonly int _limit;
         public int Offset { get; }
-        public string ActualChar { get; }
+        public string ActualChar { get; set; }
 
         public JsonParsingException(string message)
             : base(message)
