@@ -17,6 +17,18 @@ namespace Nest
 		[EnumMember(Value = "data")]
 		Data,
 
+		[EnumMember(Value = "data_cold")]
+		DataCold,
+
+		[EnumMember(Value = "data_content")]
+		DataContent,
+
+		[EnumMember(Value = "data_hot")]
+		DataHot,
+
+		[EnumMember(Value = "data_warm")]
+		DataWarm,
+
 		[EnumMember(Value = "client")]
 		Client,
 
