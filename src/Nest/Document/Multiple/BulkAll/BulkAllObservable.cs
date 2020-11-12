@@ -202,7 +202,7 @@ namespace Nest
 
 			void ThrowOnExhaustedRetries()
 			{
-				if (_partitionedBulkRequest.ContinueAfterDroppedDocuments || backOffRetries < _backOffRetries) return;
+				if (backOffRetries < _backOffRetries) return;
 
 				throw ThrowOnBadBulk(response,
 					$"{nameof(BulkAll)} halted after {nameof(PipelineFailure)}.{reason} from _bulk and exhausting retries ({backOffRetries})"
