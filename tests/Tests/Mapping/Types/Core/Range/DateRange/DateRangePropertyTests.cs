@@ -63,7 +63,6 @@ namespace Tests.Mapping.Types.Core.Range.DateRange
 							{
 								Store = true,
 								Index = false,
-								Boost = 1.5,
 								Coerce = true
 							}
 						}
