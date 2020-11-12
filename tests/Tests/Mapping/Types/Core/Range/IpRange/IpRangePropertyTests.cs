@@ -30,7 +30,6 @@ namespace Tests.Mapping.Types.Core.Range.IpRange
 							type = "ip_range",
 							store = true,
 							index = false,
-							boost = 1.5,
 							coerce = true
 						}
 					}
@@ -46,7 +45,6 @@ namespace Tests.Mapping.Types.Core.Range.IpRange
 						.Name(p => p.Ips)
 						.Store()
 						.Index(false)
-						.Boost(1.5)
 						.Coerce()
 					)
 				)
@@ -65,7 +63,6 @@ namespace Tests.Mapping.Types.Core.Range.IpRange
 							{
 								Store = true,
 								Index = false,
-								Boost = 1.5,
 								Coerce = true
 							}
 						}

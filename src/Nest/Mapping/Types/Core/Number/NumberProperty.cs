@@ -16,6 +16,7 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface INumberProperty : IDocValuesProperty
 	{
+		[Obsolete("The server always treated this as a noop and has been removed in 7.10")]
 		[DataMember(Name = "boost")]
 		double? Boost { get; set; }
 
@@ -79,6 +80,7 @@ namespace Nest
 
 		public TDescriptor Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 
+		[Obsolete("The server always treated this as a noop and has been removed in 7.10")]
 		public TDescriptor Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		public TDescriptor NullValue(double? nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);
