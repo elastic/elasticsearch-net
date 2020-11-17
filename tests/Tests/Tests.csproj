@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
 <!--    <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>-->
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
     <DebugSymbols>True</DebugSymbols>
     <IsTestProject>True</IsTestProject>
