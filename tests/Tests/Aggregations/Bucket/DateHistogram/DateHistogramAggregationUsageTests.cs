@@ -46,6 +46,11 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 						min = FixedDate.AddYears(-1),
 						max = FixedDate.AddYears(1)
 					},
+					hard_bounds = new
+					{
+						min = FixedDate.AddYears(-1),
+						max = FixedDate.AddYears(1)
+					},
 					missing = FixedDate
 				},
 				aggs = new
@@ -76,6 +81,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				.MinimumDocumentCount(2)
 				.Format("yyyy-MM-dd'T'HH:mm:ss")
 				.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
+				.HardBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
 				.Order(HistogramOrder.CountAscending)
 				.Missing(FixedDate)
 				.Aggregations(childAggs => childAggs
@@ -96,6 +102,11 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				MinimumDocumentCount = 2,
 				Format = "yyyy-MM-dd'T'HH:mm:ss",
 				ExtendedBounds = new ExtendedBounds<DateMath>
+				{
+					Minimum = FixedDate.AddYears(-1),
+					Maximum = FixedDate.AddYears(1),
+				},
+				HardBounds = new HardBounds<DateMath>
 				{
 					Minimum = FixedDate.AddYears(-1),
 					Maximum = FixedDate.AddYears(1),

@@ -24,6 +24,13 @@ namespace Nest
 		ExtendedBounds<DateMath> ExtendedBounds { get; set; }
 
 		/// <summary>
+		/// The hard_bounds is a counterpart of extended_bounds and can limit the range of buckets in the histogram.
+		/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
+		/// </summary>
+		[DataMember(Name = "hard_bounds")]
+		HardBounds<DateMath> HardBounds { get; set; }
+
+		/// <summary>
 		/// The field to target
 		/// </summary>
 		[DataMember(Name ="field")]
@@ -103,6 +110,8 @@ namespace Nest
 		/// <inheritdoc />
 		public ExtendedBounds<DateMath> ExtendedBounds { get; set; }
 		/// <inheritdoc />
+		public HardBounds<DateMath> HardBounds { get; set; }
+		/// <inheritdoc />
 		public Field Field { get; set; }
 
 		/// <inheritdoc />
@@ -115,7 +124,6 @@ namespace Nest
 					: _format;
 			set => _format = value;
 		}
-
 
 		[Obsolete("Deprecated in version 7.2.0, use CalendarInterval or FixedInterval instead")]
 		public Union<DateInterval, Time> Interval { get; set; }
@@ -147,6 +155,7 @@ namespace Nest
 		private string _format;
 
 		ExtendedBounds<DateMath> IDateHistogramAggregation.ExtendedBounds { get; set; }
+		HardBounds<DateMath> IDateHistogramAggregation.HardBounds { get; set; }
 		Field IDateHistogramAggregation.Field { get; set; }
 
 		//see: https://github.com/elastic/elasticsearch/issues/9725
@@ -227,6 +236,10 @@ namespace Nest
 		/// <inheritdoc cref="IDateHistogramAggregation.ExtendedBounds" />
 		public DateHistogramAggregationDescriptor<T> ExtendedBounds(DateMath min, DateMath max) =>
 			Assign(new ExtendedBounds<DateMath> { Minimum = min, Maximum = max }, (a, v) => a.ExtendedBounds = v);
+
+		/// <inheritdoc cref="IDateHistogramAggregation.HardBounds" />
+		public DateHistogramAggregationDescriptor<T> HardBounds(DateMath min, DateMath max) =>
+			Assign(new HardBounds<DateMath> { Minimum = min, Maximum = max }, (a, v) => a.HardBounds = v);
 
 		/// <inheritdoc cref="IDateHistogramAggregation.Missing" />
 		public DateHistogramAggregationDescriptor<T> Missing(DateTime? missing) => Assign(missing, (a, v) => a.Missing = v);

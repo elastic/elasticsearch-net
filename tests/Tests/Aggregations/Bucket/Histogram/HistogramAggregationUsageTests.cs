@@ -24,6 +24,7 @@ namespace Tests.Aggregations.Bucket.Histogram
 				histogram = new
 				{
 					field = "numberOfCommits",
+					hard_bounds = new { max = 100.0, min = 1.0 },
 					interval = 100.0,
 					min_doc_count = 1,
 					order = new
@@ -31,6 +32,7 @@ namespace Tests.Aggregations.Bucket.Histogram
 						_key = "desc"
 					},
 					offset = 1.1
+
 				}
 			}
 		};
@@ -42,6 +44,7 @@ namespace Tests.Aggregations.Bucket.Histogram
 				.MinimumDocumentCount(1)
 				.Order(HistogramOrder.KeyDescending)
 				.Offset(1.1)
+				.HardBounds(1, 100)
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
@@ -51,7 +54,12 @@ namespace Tests.Aggregations.Bucket.Histogram
 				Interval = 100,
 				MinimumDocumentCount = 1,
 				Order = HistogramOrder.KeyDescending,
-				Offset = 1.1
+				Offset = 1.1,
+				HardBounds = new HardBounds<double>
+				{
+					Minimum = 1,
+					Maximum = 100
+				}
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)

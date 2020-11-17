@@ -16,6 +16,9 @@ namespace Nest
 		[DataMember(Name ="extended_bounds")]
 		ExtendedBounds<double> ExtendedBounds { get; set; }
 
+		[DataMember(Name = "hard_bounds")]
+		HardBounds<double> HardBounds { get; set; }
+
 		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
@@ -45,6 +48,7 @@ namespace Nest
 		public HistogramAggregation(string name) : base(name) { }
 
 		public ExtendedBounds<double> ExtendedBounds { get; set; }
+		public HardBounds<double> HardBounds { get; set; }
 		public Field Field { get; set; }
 		public double? Interval { get; set; }
 		public int? MinimumDocumentCount { get; set; }
@@ -61,6 +65,7 @@ namespace Nest
 		where T : class
 	{
 		ExtendedBounds<double> IHistogramAggregation.ExtendedBounds { get; set; }
+		HardBounds<double> IHistogramAggregation.HardBounds { get; set; }
 		Field IHistogramAggregation.Field { get; set; }
 
 		double? IHistogramAggregation.Interval { get; set; }
@@ -99,6 +104,9 @@ namespace Nest
 
 		public HistogramAggregationDescriptor<T> ExtendedBounds(double min, double max) =>
 			Assign(new ExtendedBounds<double> { Minimum = min, Maximum = max }, (a, v) => a.ExtendedBounds = v);
+
+		public HistogramAggregationDescriptor<T> HardBounds(double min, double max) =>
+			Assign(new HardBounds<double> { Minimum = min, Maximum = max }, (a, v) => a.HardBounds = v);
 
 		public HistogramAggregationDescriptor<T> Offset(double? offset) => Assign(offset, (a, v) => a.Offset = v);
 
