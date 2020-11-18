@@ -27,15 +27,19 @@
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="Nest.Utf8Json.CustomDynamicObjectResolver" />
-    <InternalsVisibleTo Include="Nest.Utf8Json.DynamicCompositeResolver" />
-    <InternalsVisibleTo Include="Nest.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />
-    <InternalsVisibleTo Include="Nest.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
+    <InternalsVisibleTo Include="Nest.Utf8Json.CustomDynamicObjectResolver" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Nest.Utf8Json.DynamicCompositeResolver" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Nest.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Nest.Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" Key="$(ExposedPublicKey)" />
 
+    <InternalsVisibleTo Include="Nest$(MajorVersion).Utf8Json.CustomDynamicObjectResolver" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Nest$(MajorVersion).Utf8Json.DynamicCompositeResolver" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Nest$(MajorVersion).Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Nest$(MajorVersion).Utf8Json.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" Key="$(ExposedPublicKey)" />
 
     <!-- TODO this is necessary for code standards tests, would be nicer as roslyn analyzers instead -->
-    <InternalsVisibleTo Include="Tests" />
-    <InternalsVisibleTo Include="Tests.Domain" />
+    <InternalsVisibleTo Include="Tests" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Tests.Domain" Key="$(ExposedPublicKey)" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Requests.*.cs">

@@ -21,7 +21,7 @@ set -euo pipefail
 output_folder=".ci/output"
 OUTPUT_DIR="$repo/${output_folder}"
 
-DOTNET_VERSION=${DOTNET_VERSION-3.1.202}
+DOTNET_VERSION=${DOTNET_VERSION-5.0.100}
 
 echo -e "\033[34;1mINFO:\033[0m VERSION ${STACK_VERSION}\033[0m"
 echo -e "\033[34;1mINFO:\033[0m OUTPUT_DIR ${OUTPUT_DIR}\033[0m"

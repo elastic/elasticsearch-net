@@ -14,7 +14,7 @@ param(
     $NODE_NAME,
     
     [string]
-    $DOTNET_VERSION = "3.1.202"
+    $DOTNET_VERSION = "5.0.100"
 )
 
 $ESC = [char]27
