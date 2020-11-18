@@ -72,6 +72,9 @@ namespace Tests.Aggregations.Bucket.Histogram
 	[SkipVersion("<7.10.0", "hard_bounds introduced in 7.10.0")]
 	public class HistogramAggregationWithHardBoundsUsageTests : AggregationUsageTestBase
 	{
+		private const double HardBoundsMinimum = 100;
+		private const double HardBoundsMaximum = 300;
+
 		public HistogramAggregationWithHardBoundsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object AggregationJson => new
@@ -81,15 +84,13 @@ namespace Tests.Aggregations.Bucket.Histogram
 				histogram = new
 				{
 					field = "numberOfCommits",
-					hard_bounds = new { max = 100.0, min = 1.0 },
+					hard_bounds = new { min = HardBoundsMinimum, max = HardBoundsMaximum },
 					interval = 100.0,
 					min_doc_count = 1,
 					order = new
 					{
 						_key = "desc"
-					},
-					offset = 1.1
-
+					}
 				}
 			}
 		};
@@ -100,8 +101,7 @@ namespace Tests.Aggregations.Bucket.Histogram
 				.Interval(100)
 				.MinimumDocumentCount(1)
 				.Order(HistogramOrder.KeyDescending)
-				.Offset(1.1)
-				.HardBounds(1, 100)
+				.HardBounds(HardBoundsMinimum, HardBoundsMaximum)
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
@@ -111,11 +111,10 @@ namespace Tests.Aggregations.Bucket.Histogram
 				Interval = 100,
 				MinimumDocumentCount = 1,
 				Order = HistogramOrder.KeyDescending,
-				Offset = 1.1,
 				HardBounds = new HardBounds<double>
 				{
-					Minimum = 1,
-					Maximum = 100
+					Minimum = HardBoundsMinimum,
+					Maximum = HardBoundsMaximum
 				}
 			};
 
@@ -125,6 +124,9 @@ namespace Tests.Aggregations.Bucket.Histogram
 			var commits = response.Aggregations.Histogram("commits");
 			commits.Should().NotBeNull();
 			commits.Buckets.Should().NotBeNull();
+
+			foreach (var bucket in commits.Buckets)
+				bucket.Key.Should().BeGreaterOrEqualTo(HardBoundsMinimum).And.BeLessOrEqualTo(HardBoundsMaximum);
 		}
 	}
 }

@@ -215,66 +215,77 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	[SkipVersion("<7.10.0", "hard_bounds introduced in 7.10.0")]
 	public class DateHistogramAggregationWithHardBoundsUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
-		public DateHistogramAggregationWithHardBoundsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		private readonly DateTime _hardBoundsMinimum;
+		private readonly DateTime _hardBoundsMaximum;
+		
+		public DateHistogramAggregationWithHardBoundsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
+		{
+			// Note: If these tests are run against an existing node, and seeding is not forced, it's possible the
+			// dates used will not appear in the index and result in no buckets being returned. The test will still
+			// pass if this is the case. For best results locally, force a reseed. This is not an issue in CI.
 
-		protected override void OnBeforeCall(IElasticClient client) => base.OnBeforeCall(client);
+			var projects = Project.Projects.OrderBy(p => p.StartedOn).Skip(2).Take(5).ToArray();
+
+			_hardBoundsMinimum = DateTime.SpecifyKind(projects.First().StartedOn.Date, DateTimeKind.Unspecified);
+			_hardBoundsMaximum = DateTime.SpecifyKind(projects.Last().StartedOn.Date, DateTimeKind.Unspecified);
+		}
 
 		protected override object AggregationJson => new
 		{
-			projects_started_per_four_weeks = new
+			projects_started_per_day = new
 			{
 				date_histogram = new
 				{
 					field = "startedOn",
-					fixed_interval = "28d",
-					min_doc_count = 2,
-					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
-					order = new { _count = "asc" },
+					calendar_interval = "day",
+					format = "yyyy-MM-dd'T'HH:mm:ss",
+					min_doc_count = 1,
 					hard_bounds = new
 					{
-						min = FixedDate.AddYears(-1),
-						max = FixedDate.AddYears(1)
+						min = _hardBoundsMinimum,
+						max = _hardBoundsMaximum
 					},
-					missing = FixedDate
+					order = new { _key = "asc" },
 				}
 			}
 		};
 
 #pragma warning disable 618, 612
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
-			.DateHistogram("projects_started_per_four_weeks", date => date
+			.DateHistogram("projects_started_per_day", date => date
 				.Field(p => p.StartedOn)
-				.FixedInterval(new Time(28, TimeUnit.Day))
-				.MinimumDocumentCount(2)
+				.CalendarInterval(DateInterval.Day)
 				.Format("yyyy-MM-dd'T'HH:mm:ss")
-				.HardBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
-				.Order(HistogramOrder.CountAscending)
-				.Missing(FixedDate)
+				.HardBounds(_hardBoundsMinimum, _hardBoundsMaximum)
+				.MinimumDocumentCount(1)
+				.Order(HistogramOrder.KeyAscending)
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
-			new DateHistogramAggregation("projects_started_per_four_weeks")
+			new DateHistogramAggregation("projects_started_per_day")
 			{
 				Field = Field<Project>(p => p.StartedOn),
-				FixedInterval = new Time(28, TimeUnit.Day),
-				MinimumDocumentCount = 2,
+				CalendarInterval = DateInterval.Day,
 				Format = "yyyy-MM-dd'T'HH:mm:ss",
 				HardBounds = new HardBounds<DateMath>
 				{
-					Minimum = FixedDate.AddYears(-1),
-					Maximum = FixedDate.AddYears(1),
+					Minimum = _hardBoundsMinimum,
+					Maximum = _hardBoundsMaximum
 				},
-				Order = HistogramOrder.CountAscending,
-				Missing = FixedDate
+				MinimumDocumentCount = 1,
+				Order = HistogramOrder.KeyAscending
 			};
 #pragma warning restore 618, 612
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var dateHistogram = response.Aggregations.DateHistogram("projects_started_per_four_weeks");
+			var dateHistogram = response.Aggregations.DateHistogram("projects_started_per_day");
 			dateHistogram.Should().NotBeNull();
 			dateHistogram.Buckets.Should().NotBeNull();
+
+			foreach (var date in dateHistogram.Buckets.Select(b => DateTime.Parse(b.KeyAsString)))
+				date.Should().BeOnOrAfter(_hardBoundsMinimum).And.BeOnOrBefore(_hardBoundsMaximum);
 		}
 	}
 }
