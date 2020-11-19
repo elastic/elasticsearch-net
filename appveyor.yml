@@ -1,6 +1,6 @@
 version: 1.0.{build}
 image:
-    - Visual Studio 2017
+    - Visual Studio 2019
 test: off
 environment:
     DOTNET_CLI_TELEMETRY_OPTOUT: true
