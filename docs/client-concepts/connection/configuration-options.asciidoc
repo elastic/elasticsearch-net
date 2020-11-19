@@ -26,14 +26,6 @@ The following is a list of available connection configuration options on `Connec
 `ConnectionSettings` derives from `ConnectionConfiguration`, these options are available for both
 the low level and high level client:
 
-`ApiKeyAuthentication`::
-
-Api Key to send with all requests to Elasticsearch
-
-`BasicAuthentication`::
-
-Basic Authentication credentials to send with all requests to Elasticsearch
-
 `ClientCertificate`::
 
 Use a `X509Certificate` to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`

@@ -23,7 +23,7 @@ the whole coordination of the request is deferred to a new instance in a `using`
 
 [source,csharp]
 ----
-var pipeline = new RequestPipeline(
+var pipeline = new RequestPipeline<IConnectionSettingsValues>(
     settings,
     DateTimeProvider.Default,
     new RecyclableMemoryStreamFactory(),
@@ -38,7 +38,7 @@ to create them
 
 [source,csharp]
 ----
-var requestPipelineFactory = new RequestPipelineFactory();
+var requestPipelineFactory = new RequestPipelineFactory<IConnectionSettingsValues>();
 var requestPipeline = requestPipelineFactory.Create(
     settings,
     DateTimeProvider.Default, <1>
@@ -46,7 +46,7 @@ var requestPipeline = requestPipelineFactory.Create(
     new SearchRequestParameters()
 );
 
-requestPipeline.Should().BeOfType<RequestPipeline>();
+requestPipeline.Should().BeOfType<RequestPipeline<IConnectionSettingsValues>>();
 requestPipeline.GetType().Should().Implement<IDisposable>();
 ----
 <1> An <<date-time-providers,`IDateTimeProvider`>> implementation
