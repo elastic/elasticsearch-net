@@ -21,7 +21,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	 * From a functionality perspective, this histogram supports the same features as the normal histogram.
 	 * The main difference is that the interval can be specified by date/time expressions.
 	 *
-	 * NOTE: When specifying a `format` **and** `extended_bounds` or `missing`, in order for Elasticsearch to be able to parse
+	 * NOTE: When specifying a `format` **and** `extended_bounds`, `hard_bounds` or `missing`, in order for Elasticsearch to be able to parse
 	 * the serialized `DateTime` of `extended_bounds` or `missing` correctly, the `date_optional_time` format is included
 	 * as part of the `format` value.
 	 *
@@ -40,7 +40,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					field = "startedOn",
 					calendar_interval = "month",
 					min_doc_count = 2,
-					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", //<1> Note the inclusion of `date_optional_time` to `format`
+					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", // <1> Note the inclusion of `date_optional_time` to `format`
 					order = new { _count = "asc" },
 					extended_bounds = new
 					{
@@ -238,6 +238,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				{
 					field = "startedOn",
 					calendar_interval = "day",
+					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
 					min_doc_count = 1,
 					hard_bounds = new
 					{
@@ -253,6 +254,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.DateHistogram("projects_started_per_day", date => date
 				.Field(p => p.StartedOn)
+				.Format("yyyy-MM-dd'T'HH:mm:ss")
 				.CalendarInterval(DateInterval.Day)
 				.HardBounds(_hardBoundsMinimum, _hardBoundsMaximum)
 				.MinimumDocumentCount(1)
@@ -263,6 +265,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			new DateHistogramAggregation("projects_started_per_day")
 			{
 				Field = Field<Project>(p => p.StartedOn),
+				Format = "yyyy-MM-dd'T'HH:mm:ss",
 				CalendarInterval = DateInterval.Day,
 				HardBounds = new HardBounds<DateMath>
 				{

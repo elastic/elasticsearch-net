@@ -119,7 +119,7 @@ namespace Nest
 		{
 			get => !string.IsNullOrEmpty(_format) &&
 				!_format.Contains("date_optional_time") &&
-				(ExtendedBounds != null || Missing.HasValue)
+				(ExtendedBounds != null || HardBounds != null || Missing.HasValue)
 					? _format + "||date_optional_time"
 					: _format;
 			set => _format = value;
@@ -163,7 +163,7 @@ namespace Nest
 		{
 			get => !string.IsNullOrEmpty(_format) &&
 				!_format.Contains("date_optional_time") &&
-				(Self.ExtendedBounds != null || Self.Missing.HasValue)
+				(Self.ExtendedBounds != null || Self.HardBounds != null || Self.Missing.HasValue)
 					? _format + "||date_optional_time"
 					: _format;
 			set => _format = value;
