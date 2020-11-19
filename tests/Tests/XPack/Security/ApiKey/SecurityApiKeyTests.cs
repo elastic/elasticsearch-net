@@ -90,7 +90,7 @@ namespace Tests.XPack.Security.ApiKey
 							},
 							RequestConfiguration = new RequestConfiguration
 							{
-								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", "password")
+								AuthenticationHeader = new BasicAuthentication($"user-{v}", "password")
 							}
 						},
 						(v, d) => d
@@ -98,7 +98,7 @@ namespace Tests.XPack.Security.ApiKey
 							.Expiration("1d")
 							.Roles(r => r.Role("role-a", o => o.Cluster("all").Indices(i => i.Index(k => k.Names("index-a").Privileges("read"))))
 								         .Role("role-b", o => o.Cluster("all").Indices(i => i.Index(k => k.Names("index-b").Privileges("read")))))
-							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
+							.RequestConfiguration(r => r.Authentication(new BasicAuthentication($"user-{v}", "password")))
 						,
 						(v, c, f) => c.Security.CreateApiKey(f),
 						(v, c, f) => c.Security.CreateApiKeyAsync(f),
@@ -115,13 +115,13 @@ namespace Tests.XPack.Security.ApiKey
 							Expiration = "1d",
 							RequestConfiguration = new RequestConfiguration
 							{
-								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", "password")
+								AuthenticationHeader = new BasicAuthentication($"user-{v}", "password")
 							}
 						},
 						(v, d) => d
 							.Name(v)
 							.Expiration("1d")
-							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
+							.RequestConfiguration(r => r.Authentication(new BasicAuthentication($"user-{v}", "password")))
 						,
 						(v, c, f) => c.Security.CreateApiKey(f),
 						(v, c, f) => c.Security.CreateApiKeyAsync(f),
@@ -137,11 +137,11 @@ namespace Tests.XPack.Security.ApiKey
 						{
 							RequestConfiguration = new RequestConfiguration
 							{
-								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", "password")
+								AuthenticationHeader = new BasicAuthentication($"user-{v}", "password")
 							}
 						},
 						(v, d) => d
-							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
+							.RequestConfiguration(r => r.Authentication(new BasicAuthentication($"user-{v}", "password")))
 						,
 						(v, c, f) => c.Security.GetApiKey(f),
 						(v, c, f) => c.Security.GetApiKeyAsync(f),
@@ -157,12 +157,12 @@ namespace Tests.XPack.Security.ApiKey
 							Name = v,
 							RequestConfiguration = new RequestConfiguration
 							{
-								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", "password")
+								AuthenticationHeader = new BasicAuthentication($"user-{v}", "password")
 							}
 						},
 						(v, d) => d
 							.Name(v)
-							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
+							.RequestConfiguration(r => r.Authentication(new BasicAuthentication($"user-{v}", "password")))
 						,
 						(v, c, f) => c.Security.GetApiKey(f),
 						(v, c, f) => c.Security.GetApiKeyAsync(f),
@@ -178,12 +178,12 @@ namespace Tests.XPack.Security.ApiKey
 							Name = v,
 							RequestConfiguration = new RequestConfiguration
 							{
-								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}","password")
+								AuthenticationHeader = new BasicAuthentication($"user-{v}","password")
 							}
 						},
 						(v, d) => d
 							.Name(v)
-							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
+							.RequestConfiguration(r => r.Authentication(new BasicAuthentication($"user-{v}", "password")))
 						,
 						(v, c, f) => c.Security.InvalidateApiKey(f),
 						(v, c, f) => c.Security.InvalidateApiKeyAsync(f),

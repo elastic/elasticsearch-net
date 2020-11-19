@@ -69,7 +69,7 @@ let private createClient endpoint namedSuite =
     // auth
     let authSettings =
         match userInfo with
-        | Some(username, password) -> proxySettings.BasicAuthentication(username, password)
+        | Some(username, password) -> proxySettings.Authentication(new BasicAuthentication(username, password))
         | _ -> proxySettings
     // certs
     let certSettings =
@@ -84,9 +84,10 @@ let validateRevisionParams endpoint passedRevision namedSuite =
     
     let node = client.Settings.ConnectionPool.Nodes.First()
     let auth =     
-        match client.Settings.BasicAuthenticationCredentials with 
-        | null -> ""
-        | s -> sprintf "%s:%s" s.Username (s.Password.CreateString())
+        match client.Settings.AuthenticationHeader with 
+        | (:? BasicAuthentication as s) -> sprintf "basic auth: %s" s.Header
+        | (:? ApiKey as s) -> sprintf "api key: %s" s.Header
+        | _ -> ""
         
     printfn "Running elasticsearch %O %s" (node.Uri) auth
     

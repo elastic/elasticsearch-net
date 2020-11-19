@@ -42,7 +42,7 @@ namespace Tests.XPack.Security.ApiKey
 				if (response == null)
 					return d => d;
 
-				return d => d.RequestConfiguration(r => r.ApiKeyAuthentication(response.Id, response.ApiKey));
+				return d => d.RequestConfiguration(r => r.Authentication(new BasicAuthentication(response.Id, response.ApiKey)));
 			}
 		}
 
@@ -64,7 +64,7 @@ namespace Tests.XPack.Security.ApiKey
 				{
 					RequestConfiguration = new RequestConfiguration
 					{
-						ApiKeyAuthenticationCredentials = new ApiKeyAuthenticationCredentials(response.Id, response.ApiKey)
+						AuthenticationHeader = new BasicAuthentication(response.Id, response.ApiKey)
 					}
 				};
 			}

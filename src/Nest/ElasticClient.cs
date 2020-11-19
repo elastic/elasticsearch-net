@@ -87,15 +87,7 @@ namespace Nest
 		/// <para></para>If you want more control use the <see cref="ElasticClient(IConnectionSettingsValues)"/> constructor and pass an instance of
 		/// <see cref="ConnectionSettings" /> that takes <paramref name="cloudId"/> in its constructor as well
 		/// </summary>
-		public ElasticClient(string cloudId, BasicAuthenticationCredentials credentials) : this(new ConnectionSettings(cloudId, credentials)) { }
-
-		/// <summary>
-		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
-		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
-		/// <para></para>If you want more control use the <see cref="ElasticClient(IConnectionSettingsValues)"/> constructor and pass an instance of
-		/// <see cref="ConnectionSettings" /> that takes <paramref name="cloudId"/> in its constructor as well
-		/// </summary>
-		public ElasticClient(string cloudId, ApiKeyAuthenticationCredentials credentials) : this(new ConnectionSettings(cloudId, credentials)) { }
+		public ElasticClient(string cloudId, IAuthenticationHeader credentials) : this(new ConnectionSettings(cloudId, credentials)) { }
 
 		public ElasticClient(IConnectionSettingsValues connectionSettings)
 			: this(new Transport<IConnectionSettingsValues>(connectionSettings ?? new ConnectionSettings())) { }

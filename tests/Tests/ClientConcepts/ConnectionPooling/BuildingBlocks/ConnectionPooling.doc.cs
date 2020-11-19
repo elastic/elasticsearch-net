@@ -122,7 +122,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			/**
 			 * A cloud connection pool can be created using credentials and a `cloudId`
 			 */
-			var credentials = new BasicAuthenticationCredentials("username", "password"); // <1> a username and password that can access Elasticsearch service on Elastic Cloud
+			var credentials = new BasicAuthentication("username", "password"); // <1> a username and password that can access Elasticsearch service on Elastic Cloud
 			var pool = new CloudConnectionPool(cloudId, credentials); // <2> `cloudId` is a value that can be retrieved from the Elastic Cloud web console
 			var client = new ElasticClient(new ConnectionSettings(pool));
 
@@ -162,8 +162,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				client = new ElasticClient(new ConnectionSettings(pool));
 				client.ConnectionSettings.ConnectionPool.Should().BeOfType<CloudConnectionPool>();
 				client.ConnectionSettings.EnableHttpCompression.Should().BeTrue();
-				client.ConnectionSettings.BasicAuthenticationCredentials.Should().NotBeNull();
-				client.ConnectionSettings.BasicAuthenticationCredentials.Username.Should().Be("username");
+				var c = client.ConnectionSettings.AuthenticationHeader.Should().NotBeNull().And.BeOfType<BasicAuthentication>();
+				c.Subject.Header.Should().NotBeNullOrEmpty();
 			}
 
 			//hide

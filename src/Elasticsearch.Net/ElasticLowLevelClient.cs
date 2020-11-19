@@ -32,15 +32,7 @@ namespace Elasticsearch.Net
 		/// <para></para>If you want more control use the <see cref="ElasticLowLevelClient(IConnectionConfigurationValues)"/> constructor and pass an instance of
 		/// <see cref="ConnectionConfiguration" /> that takes <paramref name="cloudId"/> in its constructor as well
 		/// </summary>
-		public ElasticLowLevelClient(string cloudId, BasicAuthenticationCredentials credentials) : this(new ConnectionConfiguration(cloudId, credentials)) { }
-
-		/// <summary>
-		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
-		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
-		/// <para></para>If you want more control use the <see cref="ElasticLowLevelClient(IConnectionConfigurationValues)"/> constructor and pass an instance of
-		/// <see cref="ConnectionConfiguration" /> that takes <paramref name="cloudId"/> in its constructor as well
-		/// </summary>
-		public ElasticLowLevelClient(string cloudId, ApiKeyAuthenticationCredentials credentials) : this(new ConnectionConfiguration(cloudId, credentials)) { }
+		public ElasticLowLevelClient(string cloudId, IAuthenticationHeader credentials) : this(new ConnectionConfiguration(cloudId, credentials)) { }
 
 		/// <summary>
 		/// Instantiate a new low level Elasticsearch client explicitly specifying a custom transport setup

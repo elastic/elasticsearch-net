@@ -55,7 +55,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			// hide
 			var client = new ElasticClient(new AlwaysInMemoryConnectionSettings()
 				.DefaultIndex("index")
-				.BasicAuthentication("user1", "pass2")
+				.Authentication(new BasicAuthentication("user1", "pass2"))
 			);
 
 			var response = client.Search<Project>(s => s
@@ -72,7 +72,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			// hide
 			var client = new ElasticClient(new AlwaysInMemoryConnectionSettings()
 				.DefaultIndex("index")
-				.ApiKeyAuthentication("id1", "api_key1")
+				.Authentication(new Base64ApiKey("id1", "api_key1"))
 			);
 
 			var response = client.Search<Project>(s => s

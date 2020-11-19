@@ -97,7 +97,7 @@ namespace Tests.XPack.Security.Privileges
 					{
 						RequestConfiguration = new RequestConfiguration
 						{
-							BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-ap-{v}", $"pass-{v}")
+							AuthenticationHeader = new BasicAuthentication($"user-ap-{v}", $"pass-{v}")
 						},
 						Application = new[]
 						{
@@ -110,7 +110,7 @@ namespace Tests.XPack.Security.Privileges
 						}
 					},
 					(v, d) => d
-						.RequestConfiguration(r=>r.BasicAuthentication($"user-ap-{v}", $"pass-{v}"))
+						.RequestConfiguration(r=>r.Authentication(new BasicAuthentication($"user-ap-{v}", $"pass-{v}")))
 						.Applications(apps => apps
 							.Application(a => a
 								.Name($"app-{v}")
@@ -131,10 +131,10 @@ namespace Tests.XPack.Security.Privileges
 					{
 						RequestConfiguration = new RequestConfiguration
 						{
-							BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-ap-{v}", $"pass-{v}")
+							AuthenticationHeader = new BasicAuthentication($"user-ap-{v}", $"pass-{v}")
 						}
 					},
-					(v, d) => d.RequestConfiguration(r=>r.BasicAuthentication($"user-ap-{v}", $"pass-{v}")),
+					(v, d) => d.RequestConfiguration(r=>r.Authentication(new BasicAuthentication($"user-ap-{v}", $"pass-{v}"))),
 					(v, c, f) => c.Security.GetUserPrivileges(f),
 					(v, c, f) => c.Security.GetUserPrivilegesAsync(f),
 					(v, c, r) => c.Security.GetUserPrivileges(r),

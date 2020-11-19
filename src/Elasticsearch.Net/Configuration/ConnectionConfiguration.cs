@@ -28,13 +28,7 @@ namespace Elasticsearch.Net
 		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
 		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
 		/// </summary>
-		public ConnectionConfiguration(string cloudId, BasicAuthenticationCredentials credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
-
-		/// <summary>
-		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
-		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
-		/// </summary>
-		public ConnectionConfiguration(string cloudId, ApiKeyAuthenticationCredentials credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
+		public ConnectionConfiguration(string cloudId, IAuthenticationHeader credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
 
 		public ConnectionConfiguration(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
 

@@ -29,20 +29,19 @@ namespace Tests.Core.Extensions
 		)
 			where TConfig : EphemeralClusterConfiguration
 		{
-			modifySettings = modifySettings ?? (s => s);
+			modifySettings ??= s => s;
 			return cluster.GetOrAddClient(c =>
 			{
 				var settings = modifySettings(cluster.CreateConnectionSettings());
 
 				var current = (IConnectionConfigurationValues)settings;
-				var notAlreadyAuthenticated = current.BasicAuthenticationCredentials == null
-					&& current.ApiKeyAuthenticationCredentials == null
+				var notAlreadyAuthenticated = current.AuthenticationHeader == null
 					&& current.ClientCertificates == null;
 
 				var noCertValidation = current.ServerCertificateValidationCallback == null;
 
 				if (cluster.ClusterConfiguration.EnableSecurity && notAlreadyAuthenticated)
-					settings = settings.BasicAuthentication(ClusterAuthentication.Admin.Username, ClusterAuthentication.Admin.Password);
+					settings = settings.Authentication(new BasicAuthentication(ClusterAuthentication.Admin.Username, ClusterAuthentication.Admin.Password));
 				if (cluster.ClusterConfiguration.EnableSsl && noCertValidation)
 				{
 					//todo use CA callback instead of allowall
