@@ -226,8 +226,8 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 
 			var projects = Project.Projects.OrderBy(p => p.StartedOn).Skip(2).Take(5).ToArray();
 			
-			_hardBoundsMinimum = DateTime.SpecifyKind(projects.Min(p => p.StartedOn.Date), DateTimeKind.Unspecified);
-			_hardBoundsMaximum = DateTime.SpecifyKind(projects.Max(p => p.StartedOn.Date), DateTimeKind.Unspecified);
+			_hardBoundsMinimum = projects.Min(p => p.StartedOn.Date);
+			_hardBoundsMaximum = projects.Max(p => p.StartedOn.Date);
 		}
 
 		protected override object AggregationJson => new
@@ -238,7 +238,6 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				{
 					field = "startedOn",
 					calendar_interval = "day",
-					format = "yyyy-MM-dd'T'HH:mm:ss",
 					min_doc_count = 1,
 					hard_bounds = new
 					{
@@ -255,7 +254,6 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			.DateHistogram("projects_started_per_day", date => date
 				.Field(p => p.StartedOn)
 				.CalendarInterval(DateInterval.Day)
-				.Format("yyyy-MM-dd'T'HH:mm:ss")
 				.HardBounds(_hardBoundsMinimum, _hardBoundsMaximum)
 				.MinimumDocumentCount(1)
 				.Order(HistogramOrder.KeyAscending)
@@ -266,7 +264,6 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			{
 				Field = Field<Project>(p => p.StartedOn),
 				CalendarInterval = DateInterval.Day,
-				Format = "yyyy-MM-dd'T'HH:mm:ss",
 				HardBounds = new HardBounds<DateMath>
 				{
 					Minimum = _hardBoundsMinimum,
