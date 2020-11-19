@@ -225,9 +225,9 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			// pass if this is the case. For best results locally, force a reseed. This is not an issue in CI.
 
 			var projects = Project.Projects.OrderBy(p => p.StartedOn).Skip(2).Take(5).ToArray();
-
-			_hardBoundsMinimum = DateTime.SpecifyKind(projects.First().StartedOn.Date, DateTimeKind.Unspecified);
-			_hardBoundsMaximum = DateTime.SpecifyKind(projects.Last().StartedOn.Date, DateTimeKind.Unspecified);
+			
+			_hardBoundsMinimum = DateTime.SpecifyKind(projects.Min(p => p.StartedOn.Date), DateTimeKind.Unspecified);
+			_hardBoundsMaximum = DateTime.SpecifyKind(projects.Max(p => p.StartedOn.Date), DateTimeKind.Unspecified);
 		}
 
 		protected override object AggregationJson => new
