@@ -14,7 +14,7 @@ namespace DocGenerator.Documentation.Blocks
 	public class CSharpBlock : CodeBlock
 	{
 		private static readonly Regex Callout = new Regex(@"//[ \t]*(?<callout>\<\d+\>)[ \t]*(?<text>\S.*)", RegexOptions.Compiled);
-		private static readonly Regex CalloutReplacer = new Regex(@"//[ \t]*\<(\d+)\>.*", RegexOptions.Compiled);
+		private static readonly Regex CalloutReplacer = new Regex(@"//[ \t]*\<(\d+)\>[^\r\n]*", RegexOptions.Compiled);
 
 		public CSharpBlock(SyntaxNode node, int depth, string memberName = null)
 			: base(node.WithoutLeadingTrivia().ToFullStringWithoutPragmaWarningDirectiveTrivia(),

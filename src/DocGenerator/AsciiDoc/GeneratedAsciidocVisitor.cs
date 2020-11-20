@@ -198,7 +198,7 @@ namespace DocGenerator.AsciiDoc
 
 			// Replace tabs with spaces and remove C# comment escaping from callouts
 			// (elastic docs generation does not like this callout format)
-			source.Text = Regex.Replace(source.Text.Replace("\t", "    "), @"//[ \t]*\<(\d+)\>.*", "<$1>");
+			source.Text = Regex.Replace(source.Text.Replace("\t", "    "), @"//[ \t]*\<(\d+)\>[^\r\n]*", "<$1>");
 
 			base.VisitSource(source);
 		}
