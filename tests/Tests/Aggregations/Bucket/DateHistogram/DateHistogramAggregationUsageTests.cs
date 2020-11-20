@@ -21,7 +21,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	 * From a functionality perspective, this histogram supports the same features as the normal histogram.
 	 * The main difference is that the interval can be specified by date/time expressions.
 	 *
-	 * NOTE: When specifying a `format` **and** `extended_bounds` or `missing`, in order for Elasticsearch to be able to parse
+	 * NOTE: When specifying a `format` **and** `extended_bounds`, `hard_bounds` or `missing`, in order for Elasticsearch to be able to parse
 	 * the serialized `DateTime` of `extended_bounds` or `missing` correctly, the `date_optional_time` format is included
 	 * as part of the `format` value.
 	 *
@@ -41,7 +41,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					field = "startedOn",
 					calendar_interval = "month",
 					min_doc_count = 2,
-					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", //<1> Note the inclusion of `date_optional_time` to `format`
+					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", // <1> Note the inclusion of `date_optional_time` to `format`
 					order = new { _count = "asc" },
 					extended_bounds = new
 					{
@@ -206,6 +206,84 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				item.Date.Should().NotBe(default(DateTime));
 				item.DocCount.Should().BeGreaterThan(0);
 			}
+		}
+	}
+
+	// hide
+	[SkipVersion("<7.10.0", "hard_bounds introduced in 7.10.0")]
+	public class DateHistogramAggregationWithHardBoundsUsageTests : ProjectsOnlyAggregationUsageTestBase
+	{
+		private readonly DateTime _hardBoundsMinimum;
+		private readonly DateTime _hardBoundsMaximum;
+		
+		public DateHistogramAggregationWithHardBoundsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
+		{
+			// Note: If these tests are run against an existing node, and seeding is not forced, it's possible the
+			// dates used will not appear in the index and result in no buckets being returned. The test will still
+			// pass if this is the case. For best results locally, force a reseed. This is not an issue in CI.
+
+			var projects = Project.Projects.OrderBy(p => p.StartedOn).Skip(2).Take(5).ToArray();
+			
+			_hardBoundsMinimum = projects.Min(p => p.StartedOn.Date);
+			_hardBoundsMaximum = projects.Max(p => p.StartedOn.Date);
+		}
+
+		protected override object AggregationJson => new
+		{
+			projects_started_per_day = new
+			{
+				date_histogram = new
+				{
+					field = "startedOn",
+					calendar_interval = "day",
+					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
+					min_doc_count = 1,
+					hard_bounds = new
+					{
+						min = _hardBoundsMinimum,
+						max = _hardBoundsMaximum
+					},
+					order = new { _key = "asc" },
+				}
+			}
+		};
+
+#pragma warning disable 618, 612
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.DateHistogram("projects_started_per_day", date => date
+				.Field(p => p.StartedOn)
+				.Format("yyyy-MM-dd'T'HH:mm:ss")
+				.CalendarInterval(DateInterval.Day)
+				.HardBounds(_hardBoundsMinimum, _hardBoundsMaximum)
+				.MinimumDocumentCount(1)
+				.Order(HistogramOrder.KeyAscending)
+			);
+
+		protected override AggregationDictionary InitializerAggs =>
+			new DateHistogramAggregation("projects_started_per_day")
+			{
+				Field = Field<Project>(p => p.StartedOn),
+				Format = "yyyy-MM-dd'T'HH:mm:ss",
+				CalendarInterval = DateInterval.Day,
+				HardBounds = new HardBounds<DateMath>
+				{
+					Minimum = _hardBoundsMinimum,
+					Maximum = _hardBoundsMaximum
+				},
+				MinimumDocumentCount = 1,
+				Order = HistogramOrder.KeyAscending
+			};
+#pragma warning restore 618, 612
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.ShouldBeValid();
+			var dateHistogram = response.Aggregations.DateHistogram("projects_started_per_day");
+			dateHistogram.Should().NotBeNull();
+			dateHistogram.Buckets.Should().NotBeNull();
+
+			foreach (var date in dateHistogram.Buckets.Select(b => DateTime.Parse(b.KeyAsString)))
+				date.Should().BeOnOrAfter(_hardBoundsMinimum).And.BeOnOrBefore(_hardBoundsMaximum);
 		}
 	}
 }
