@@ -13,7 +13,7 @@ namespace Elasticsearch.Net
 	[DataContract]
 	public class ServerError
 	{
-		internal ServerError() {}
+		public ServerError() { }
 
 		public ServerError(Error error, int? statusCode)
 		{
