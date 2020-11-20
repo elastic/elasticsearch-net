@@ -8,7 +8,7 @@ param (
     $TEST_SUITE = "oss",
 
     [string]
-    $DOTNET_VERSION = "3.0.100"
+    $DOTNET_VERSION = "5.0.100"
 )
 
 $ESC = [char]27

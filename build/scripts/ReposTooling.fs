@@ -15,7 +15,7 @@ module ReposTooling =
         let clusterName = Option.defaultValue "" <| match args.CommandArguments with | Cluster c -> Some c.Name | _ -> None
         let clusterVersion = Option.defaultValue "" <|match args.CommandArguments with | Cluster c -> c.Version | _ -> None
         
-        let testsProjectDirectory = Path.Combine(Path.GetFullPath(Paths.Output("Tests.ClusterLauncher")), "netcoreapp3.0")
+        let testsProjectDirectory = Path.Combine(Path.GetFullPath(Paths.Output("Tests.ClusterLauncher")), "net5.0")
         let tempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         
         printfn "%s" testsProjectDirectory

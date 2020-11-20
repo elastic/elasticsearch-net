@@ -19,14 +19,14 @@
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="Elasticsearch.Net.CustomDynamicObjectResolver" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicCompositeResolver" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" />
-    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.CustomDynamicObjectResolver" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicCompositeResolver" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateOriginal" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateCamelCase" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullFalseNameMutateSnakeCase" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateOriginal" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateCamelCase" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Elasticsearch.Net.DynamicObjectResolverAllowPrivateFalseExcludeNullTrueNameMutateSnakeCase" Key="$(ExposedPublicKey)" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Requests.*.cs">
