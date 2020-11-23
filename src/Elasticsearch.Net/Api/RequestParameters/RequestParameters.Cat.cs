@@ -384,14 +384,6 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set => Q("include_unloaded_segments", value);
 		}
 
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 8.0.0, reason: This parameter does not affect the request. It will be removed in a future release.")]
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
-		}
-
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -1204,14 +1196,6 @@ namespace Elasticsearch.Net.Specification.CatApi
 		{
 			get => Q<bool? >("help");
 			set => Q("help", value);
-		}
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 8.0.0, reason: This parameter does not affect the request. It will be removed in a future release.")]
-		public bool? Local
-		{
-			get => Q<bool? >("local");
-			set => Q("local", value);
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>

@@ -947,6 +947,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.update_model_snapshot", "job_id, snapshot_id, body")]
 		public Task<TResponse> UpdateModelSnapshotAsync<TResponse>(string jobId, string snapshotId, PostData body, UpdateModelSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/model_snapshots/{snapshotId:snapshotId}/_update"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_upgrade <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-upgrade-job-model-snapshot.html</para></summary>
+		///<param name = "jobId">The ID of the job</param>
+		///<param name = "snapshotId">The ID of the snapshot</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse UpgradeJobSnapshot<TResponse>(string jobId, string snapshotId, UpgradeJobSnapshotRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/model_snapshots/{snapshotId:snapshotId}/_upgrade"), null, RequestParams(requestParameters));
+		///<summary>POST on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_upgrade <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-upgrade-job-model-snapshot.html</para></summary>
+		///<param name = "jobId">The ID of the job</param>
+		///<param name = "snapshotId">The ID of the snapshot</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ml.upgrade_job_snapshot", "job_id, snapshot_id")]
+		public Task<TResponse> UpgradeJobSnapshotAsync<TResponse>(string jobId, string snapshotId, UpgradeJobSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/model_snapshots/{snapshotId:snapshotId}/_upgrade"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/_validate <para>https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</para></summary>
 		///<param name = "body">The job config</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
