@@ -71,16 +71,22 @@ namespace ApiGenerator.Domain.Specification
 
 				// now, check for and prefer deprecated URLs
 
-				foreach (var path in _pathsWithDeprecation.Where(p => p.Deprecation is null).ToArray())
+				var finalPathsWithDeprecations = new List<UrlPath>(_pathsWithDeprecation.Count);
+
+				foreach (var path in _pathsWithDeprecation)
 				{
-					var dpMatch = DeprecatedPaths.SingleOrDefault(p => p.Path.Equals(path.Path, StringComparison.OrdinalIgnoreCase));
-					
-					if (dpMatch is object)
+					if (path.Deprecation is null &&
+						DeprecatedPaths.SingleOrDefault(p => p.Path.Equals(path.Path, StringComparison.OrdinalIgnoreCase)) is { } match)
 					{
-						_pathsWithDeprecation.Remove(path);
-						_pathsWithDeprecation.Add(new UrlPath(dpMatch, OriginalParts, Paths));
+						finalPathsWithDeprecations.Add(new UrlPath(match, OriginalParts, Paths));
+					}
+					else
+					{
+						finalPathsWithDeprecations.Add(path);
 					}
 				}
+
+				_pathsWithDeprecation = finalPathsWithDeprecations;
 
 				return _pathsWithDeprecation;
 			}
