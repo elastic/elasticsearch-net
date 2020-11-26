@@ -15,5 +15,9 @@ namespace Nest
 		public double Q2 { get; set; }
 
 		public double Q3 { get; set; }
+
+		public double Lower { get; set; }
+
+		public double Upper { get; set; }
 	}
 }
