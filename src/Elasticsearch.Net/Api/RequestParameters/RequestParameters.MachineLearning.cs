@@ -1011,6 +1011,26 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		public override bool SupportsBody => true;
 	}
 
+	///<summary>Request options for UpgradeJobSnapshot <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-upgrade-job-model-snapshot.html</para></summary>
+	public class UpgradeJobSnapshotRequestParameters : RequestParameters<UpgradeJobSnapshotRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
+		///<summary>How long should the API wait for the job to be opened and the old snapshot to be loaded.</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
+
+		///<summary>Should the request wait until the task is complete before responding to the caller. Default is false.</summary>
+		public bool? WaitForCompletion
+		{
+			get => Q<bool? >("wait_for_completion");
+			set => Q("wait_for_completion", value);
+		}
+	}
+
 	///<summary>Request options for ValidateJob <para>https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html</para></summary>
 	public class ValidateJobRequestParameters : RequestParameters<ValidateJobRequestParameters>
 	{
