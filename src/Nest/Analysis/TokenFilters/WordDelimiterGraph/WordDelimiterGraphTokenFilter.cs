@@ -57,6 +57,13 @@ namespace Nest
 		bool? GenerateWordParts { get; set; }
 
 		/// <summary>
+		/// If true, the filter skips tokens with a keyword attribute of true. Defaults to false.
+		/// </summary>
+		[DataMember(Name = "ignore_keywords")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
+		bool? IgnoreKeywords { get; set; }
+
+		/// <summary>
 		/// If true includes original words in subwords: "500-42" ⇒ "500-42" "500" "42". Defaults to false.
 		/// </summary>
 		[DataMember(Name ="preserve_original")]
@@ -134,6 +141,9 @@ namespace Nest
 		public bool? GenerateWordParts { get; set; }
 
 		/// <inheritdoc />
+		public bool? IgnoreKeywords { get; set; }
+
+		/// <inheritdoc />
 		public bool? PreserveOriginal { get; set; }
 
 		/// <inheritdoc />
@@ -169,8 +179,8 @@ namespace Nest
 		bool? IWordDelimiterGraphTokenFilter.CatenateWords { get; set; }
 		bool? IWordDelimiterGraphTokenFilter.GenerateNumberParts { get; set; }
 		bool? IWordDelimiterGraphTokenFilter.GenerateWordParts { get; set; }
+		bool? IWordDelimiterGraphTokenFilter.IgnoreKeywords { get; set; }
 		bool? IWordDelimiterGraphTokenFilter.PreserveOriginal { get; set; }
-
 		IEnumerable<string> IWordDelimiterGraphTokenFilter.ProtectedWords { get; set; }
 		string IWordDelimiterGraphTokenFilter.ProtectedWordsPath { get; set; }
 		bool? IWordDelimiterGraphTokenFilter.SplitOnCaseChange { get; set; }
@@ -186,6 +196,14 @@ namespace Nest
 		/// <inheritdoc />
 		public WordDelimiterGraphTokenFilterDescriptor GenerateNumberParts(bool? generateNumberParts = true) =>
 			Assign(generateNumberParts, (a, v) => a.GenerateNumberParts = v);
+
+		/// <summary>
+		/// <para>Configure whether the filter will skip tokens with a keyword attribute of true.</para>
+		/// <para>(Optional) When not configured, this defaults to false in Elasticsearch.</para>
+		/// </summary>
+		/// <param name="ignoreKeywords">If true, the filter skips tokens with a keyword attribute of true.</param>
+		public WordDelimiterGraphTokenFilterDescriptor IgnoreKeywords(bool? ignoreKeywords = true) =>
+			Assign(ignoreKeywords, (a, v) => a.IgnoreKeywords = v);
 
 		/// <inheritdoc />
 		public WordDelimiterGraphTokenFilterDescriptor CatenateWords(bool? catenateWords = true) => Assign(catenateWords, (a, v) => a.CatenateWords = v);
