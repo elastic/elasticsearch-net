@@ -341,7 +341,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetRole;
 		///<summary>/_security/role/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
-		public GetRoleDescriptor(Name name): base(r => r.Optional("name", name))
+		public GetRoleDescriptor(Names name): base(r => r.Optional("name", name))
 		{
 		}
 
@@ -351,9 +351,9 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
-		///<summary>Role name</summary>
-		public GetRoleDescriptor Name(Name name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
+		Names IGetRoleRequest.Name => Self.RouteValues.Get<Names>("name");
+		///<summary>A comma-separated list of role names</summary>
+		public GetRoleDescriptor Name(Names name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
 	// Request parameters
 	}
 
@@ -363,7 +363,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetRoleMapping;
 		///<summary>/_security/role_mapping/{name}</summary>
 		///<param name = "name">Optional, accepts null</param>
-		public GetRoleMappingDescriptor(Name name): base(r => r.Optional("name", name))
+		public GetRoleMappingDescriptor(Names name): base(r => r.Optional("name", name))
 		{
 		}
 
@@ -373,9 +373,9 @@ namespace Nest
 		}
 
 		// values part of the url path
-		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
-		///<summary>Role-Mapping name</summary>
-		public GetRoleMappingDescriptor Name(Name name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
+		Names IGetRoleMappingRequest.Name => Self.RouteValues.Get<Names>("name");
+		///<summary>A comma-separated list of role-mapping names</summary>
+		public GetRoleMappingDescriptor Name(Names name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
 	// Request parameters
 	}
 
