@@ -71,6 +71,10 @@ namespace Nest
 		public string PercolateTotal => _percolateTotal ?? _pto ?? _percolate_total;
 		public string Pid => _p ?? _pid;
 		public string Port => _po ?? _port;
+		public string QueryCacheMemorySize => _queryCacheMemory ?? _qcm ?? _query_cache_memory_size;
+		public string QueryCacheEvictions => _queryCacheEvictions ?? _qce ?? _query_cache_evictions;
+		public string QueryCacheHitCount => _queryCacheHitCount ?? _qchc ?? _query_cache_hit_count;
+		public string QueryCacheMissCount => _queryCacheMissCount ?? _qcmc ?? _query_cache_miss_count;
 		public string RamCurrent => _ramCurrent ?? _rc ?? _ram_current;
 		public string RamMax => _ramMax ?? _rm ?? _ram_max;
 		public string RamPercent => _ramPercent ?? _rp ?? _ram_percent;
@@ -505,6 +509,42 @@ namespace Nest
 
 		[DataMember(Name ="pto")]
 		internal string _pto { get; set; }
+
+		[DataMember(Name = "query_cache.memory_size")]
+		internal string _query_cache_memory_size { get; set; }
+		
+		[DataMember(Name = "qcm")]
+		internal string _qcm { get; set; }
+
+		[DataMember(Name = "queryCacheMemory")]
+		internal string _queryCacheMemory { get; set; }
+
+		[DataMember(Name = "query_cache.evictions")]
+		internal string _query_cache_evictions { get; set; }
+
+		[DataMember(Name = "qce")]
+		internal string _qce { get; set; }
+
+		[DataMember(Name = "queryCacheEvictions")]
+		internal string _queryCacheEvictions { get; set; }
+
+		[DataMember(Name = "query_cache.hit_count")]
+		internal string _query_cache_hit_count { get; set; }
+
+		[DataMember(Name = "qchc")]
+		internal string _qchc { get; set; }
+
+		[DataMember(Name = "queryCacheHitCount")]
+		internal string _queryCacheHitCount { get; set; }
+
+		[DataMember(Name = "query_cache.miss_count")]
+		internal string _query_cache_miss_count { get; set; }
+
+		[DataMember(Name = "qcmc")]
+		internal string _qcmc { get; set; }
+
+		[DataMember(Name = "queryCacheMissCount")]
+		internal string _queryCacheMissCount { get; set; }
 
 		[DataMember(Name ="r")]
 		internal string _r { get; set; }
