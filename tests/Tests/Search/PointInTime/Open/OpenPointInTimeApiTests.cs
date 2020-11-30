@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -12,6 +13,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Search.PointInTime.Open
 {
+	[SkipVersion("<7.10.0", "Api introduced in 7.10.0")]
 	public class OpenPointInTimeApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, OpenPointInTimeResponse, IOpenPointInTimeRequest, OpenPointInTimeDescriptor, OpenPointInTimeRequest>
 	{
