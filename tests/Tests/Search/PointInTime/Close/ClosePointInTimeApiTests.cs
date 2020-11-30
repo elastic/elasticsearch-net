@@ -13,6 +13,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Search.PointInTime.Close
 {
+	[SkipVersion("<7.10.0", "Api introduced in 7.10.0")]
 	public class ClosePointInTimeApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, ClosePointInTimeResponse, IClosePointInTimeRequest, ClosePointInTimeDescriptor, ClosePointInTimeRequest>
 	{
