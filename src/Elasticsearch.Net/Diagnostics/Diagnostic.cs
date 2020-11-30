@@ -45,8 +45,7 @@ namespace Elasticsearch.Net.Diagnostics
 			}
 		}
 
-
 		//_source can be null if Default instance
-		public void Dispose() => _source?.StopActivity(SetEndTime(DateTime.UtcNow), EndState);
+		protected override void Dispose(bool disposing) => _source?.StopActivity(SetEndTime(DateTime.UtcNow), EndState);
 	}
 }
