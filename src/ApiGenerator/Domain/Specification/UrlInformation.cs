@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
@@ -50,7 +51,7 @@ namespace ApiGenerator.Domain.Specification
 				// PUT /{index}/_mapping/{type}
 				// PUT /{index}/{type}/_mappings
 				//
-				//The following routine dedups these occasions and prefers either the cononical path
+				//The following routine dedups these occasions and prefers either the canonical path
 				//or the first duplicate deprecated path
 
 				var canonicalPartNameLookup = paths.Select(path => new HashSet<string>(path.Parts.Select(p => p.Name))).ToList();
@@ -64,10 +65,29 @@ namespace ApiGenerator.Domain.Specification
 					.Where(grouped => !canonicalPartNameLookup.Any(set => set.SetEquals(grouped.Key)))
 					.Select(grouped => grouped.First().deprecatedPath);
 
-
 				_pathsWithDeprecation = paths
 					.Concat(withoutDeprecatedAliases.Select(p => new UrlPath(p, OriginalParts, Paths)))
 					.ToList();
+
+				// now, check for and prefer deprecated URLs
+
+				var finalPathsWithDeprecations = new List<UrlPath>(_pathsWithDeprecation.Count);
+
+				foreach (var path in _pathsWithDeprecation)
+				{
+					if (path.Deprecation is null &&
+						DeprecatedPaths.SingleOrDefault(p => p.Path.Equals(path.Path, StringComparison.OrdinalIgnoreCase)) is { } match)
+					{
+						finalPathsWithDeprecations.Add(new UrlPath(match, OriginalParts, Paths));
+					}
+					else
+					{
+						finalPathsWithDeprecations.Add(path);
+					}
+				}
+
+				_pathsWithDeprecation = finalPathsWithDeprecations;
+
 				return _pathsWithDeprecation;
 			}
 		}

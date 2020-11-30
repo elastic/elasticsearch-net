@@ -3,10 +3,6 @@
 // See the LICENSE file in the project root for more information
 
 using System;
-using System.CommandLine;
-using System.CommandLine.DragonFruit;
-using System.CommandLine.Invocation;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,8 +16,6 @@ namespace ApiGenerator
 	public static class Program
 	{
 		private static bool Interactive { get; set; } = false;
-
-		public static Style HeaderStyle { get; } = new Style(Color.White, Color.Chartreuse4);
 
 		/// <summary>
 		/// A main function can also take <see cref="CancellationToken"/> which is hooked up to support termination (e.g CTRL+C)
@@ -99,7 +93,7 @@ namespace ApiGenerator
 			Console.WriteLine();
 			AnsiConsole.Render(
 				new Panel(grid)
-					.Header(new PanelHeader(" Elasticsearch .NET client API generator ", HeaderStyle, Justify.Left))
+					.Header(new PanelHeader("[b white on chartreuse4] Elasticsearch .NET client API generator [/]", Justify.Left))
 			);
 			Console.WriteLine();
 
