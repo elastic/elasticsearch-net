@@ -185,6 +185,30 @@ namespace Nest
 		/// </summary>
 		Task<ClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken ct = default);
 		/// <summary>
+		/// <c>DELETE</c> request to the <c>close_point_in_time</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
+		/// </summary>
+		ClosePointInTimeResponse ClosePointInTime(Func<ClosePointInTimeDescriptor, IClosePointInTimeRequest> selector = null);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>close_point_in_time</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
+		/// </summary>
+		Task<ClosePointInTimeResponse> ClosePointInTimeAsync(Func<ClosePointInTimeDescriptor, IClosePointInTimeRequest> selector = null, CancellationToken ct = default);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>close_point_in_time</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
+		/// </summary>
+		ClosePointInTimeResponse ClosePointInTime(IClosePointInTimeRequest request);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>close_point_in_time</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
+		/// </summary>
+		Task<ClosePointInTimeResponse> ClosePointInTimeAsync(IClosePointInTimeRequest request, CancellationToken ct = default);
+		/// <summary>
 		/// <c>POST</c> request to the <c>count</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</a>

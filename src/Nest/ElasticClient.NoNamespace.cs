@@ -288,6 +288,30 @@ namespace Nest
 		/// </summary>
 		public Task<ClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken ct = default) => DoRequestAsync<IClearScrollRequest, ClearScrollResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>DELETE</c> request to the <c>close_point_in_time</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
+		/// </summary>
+		public ClosePointInTimeResponse ClosePointInTime(Func<ClosePointInTimeDescriptor, IClosePointInTimeRequest> selector = null) => ClosePointInTime(selector.InvokeOrDefault(new ClosePointInTimeDescriptor()));
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>close_point_in_time</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
+		/// </summary>
+		public Task<ClosePointInTimeResponse> ClosePointInTimeAsync(Func<ClosePointInTimeDescriptor, IClosePointInTimeRequest> selector = null, CancellationToken ct = default) => ClosePointInTimeAsync(selector.InvokeOrDefault(new ClosePointInTimeDescriptor()), ct);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>close_point_in_time</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
+		/// </summary>
+		public ClosePointInTimeResponse ClosePointInTime(IClosePointInTimeRequest request) => DoRequest<IClosePointInTimeRequest, ClosePointInTimeResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>close_point_in_time</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
+		/// </summary>
+		public Task<ClosePointInTimeResponse> ClosePointInTimeAsync(IClosePointInTimeRequest request, CancellationToken ct = default) => DoRequestAsync<IClosePointInTimeRequest, ClosePointInTimeResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>count</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</a>

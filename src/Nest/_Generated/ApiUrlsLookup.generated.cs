@@ -61,6 +61,7 @@ namespace Nest
 		internal static ApiUrls CrossClusterReplicationStats = new ApiUrls(new[]{"_ccr/stats"});
 		internal static ApiUrls CrossClusterReplicationUnfollowIndex = new ApiUrls(new[]{"{index}/_ccr/unfollow"});
 		internal static ApiUrls NoNamespaceClearScroll = new ApiUrls(new[]{"_search/scroll"});
+		internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[]{"_pit"});
 		internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[]{"_cluster/allocation/explain"});
 		internal static ApiUrls ClusterDeleteVotingConfigExclusions = new ApiUrls(new[]{"_cluster/voting_config_exclusions"});
 		internal static ApiUrls ClusterGetSettings = new ApiUrls(new[]{"_cluster/settings"});

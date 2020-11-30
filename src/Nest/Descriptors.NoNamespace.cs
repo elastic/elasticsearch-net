@@ -94,6 +94,14 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>Descriptor for ClosePointInTime <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
+	public partial class ClosePointInTimeDescriptor : RequestDescriptorBase<ClosePointInTimeDescriptor, ClosePointInTimeRequestParameters, IClosePointInTimeRequest>, IClosePointInTimeRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
+	// values part of the url path
+	// Request parameters
+	}
+
 	///<summary>Descriptor for Count <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</para></summary>
 	public partial class CountDescriptor<TDocument> : RequestDescriptorBase<CountDescriptor<TDocument>, CountRequestParameters, ICountRequest<TDocument>>, ICountRequest<TDocument>
 	{

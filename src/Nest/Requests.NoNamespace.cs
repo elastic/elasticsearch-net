@@ -160,6 +160,20 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IClosePointInTimeRequest : IRequest<ClosePointInTimeRequestParameters>
+	{
+	}
+
+	///<summary>Request for ClosePointInTime <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
+	public partial class ClosePointInTimeRequest : PlainRequestBase<ClosePointInTimeRequestParameters>, IClosePointInTimeRequest
+	{
+		protected IClosePointInTimeRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
+	// values part of the url path
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface ICountRequest : IRequest<CountRequestParameters>
 	{
 		[IgnoreDataMember]
