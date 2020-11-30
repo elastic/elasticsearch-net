@@ -401,13 +401,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</a>
 		/// </summary>
-		public GetRoleResponse GetRole(Name name = null, Func<GetRoleDescriptor, IGetRoleRequest> selector = null) => GetRole(selector.InvokeOrDefault(new GetRoleDescriptor().Name(name: name)));
+		public GetRoleResponse GetRole(Names name = null, Func<GetRoleDescriptor, IGetRoleRequest> selector = null) => GetRole(selector.InvokeOrDefault(new GetRoleDescriptor().Name(name: name)));
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_role</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html</a>
 		/// </summary>
-		public Task<GetRoleResponse> GetRoleAsync(Name name = null, Func<GetRoleDescriptor, IGetRoleRequest> selector = null, CancellationToken ct = default) => GetRoleAsync(selector.InvokeOrDefault(new GetRoleDescriptor().Name(name: name)), ct);
+		public Task<GetRoleResponse> GetRoleAsync(Names name = null, Func<GetRoleDescriptor, IGetRoleRequest> selector = null, CancellationToken ct = default) => GetRoleAsync(selector.InvokeOrDefault(new GetRoleDescriptor().Name(name: name)), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_role</c> API, read more about this API online:
 		/// <para></para>
@@ -425,13 +425,13 @@ namespace Nest.Specification.SecurityApi
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</a>
 		/// </summary>
-		public GetRoleMappingResponse GetRoleMapping(Name name = null, Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null) => GetRoleMapping(selector.InvokeOrDefault(new GetRoleMappingDescriptor().Name(name: name)));
+		public GetRoleMappingResponse GetRoleMapping(Names name = null, Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null) => GetRoleMapping(selector.InvokeOrDefault(new GetRoleMappingDescriptor().Name(name: name)));
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_role_mapping</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</a>
 		/// </summary>
-		public Task<GetRoleMappingResponse> GetRoleMappingAsync(Name name = null, Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null, CancellationToken ct = default) => GetRoleMappingAsync(selector.InvokeOrDefault(new GetRoleMappingDescriptor().Name(name: name)), ct);
+		public Task<GetRoleMappingResponse> GetRoleMappingAsync(Names name = null, Func<GetRoleMappingDescriptor, IGetRoleMappingRequest> selector = null, CancellationToken ct = default) => GetRoleMappingAsync(selector.InvokeOrDefault(new GetRoleMappingDescriptor().Name(name: name)), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_role_mapping</c> API, read more about this API online:
 		/// <para></para>
