@@ -77,6 +77,8 @@ namespace Tests.Aggregations.Metric.Boxplot
 			boxplot.Q1.Should().BeGreaterOrEqualTo(0);
 			boxplot.Q2.Should().BeGreaterOrEqualTo(0);
 			boxplot.Q3.Should().BeGreaterOrEqualTo(0);
+			boxplot.Lower.Should().BeGreaterOrEqualTo(0);
+			boxplot.Upper.Should().BeGreaterOrEqualTo(0);
 			boxplot.Meta.Should().NotBeNull().And.HaveCount(1);
 			boxplot.Meta["foo"].Should().Be("bar");
 		}
