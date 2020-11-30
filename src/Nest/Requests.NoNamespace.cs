@@ -2337,6 +2337,79 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IOpenPointInTimeRequest : IRequest<OpenPointInTimeRequestParameters>
+	{
+		[IgnoreDataMember]
+		Indices Index
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for OpenPointInTime <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
+	public partial class OpenPointInTimeRequest : PlainRequestBase<OpenPointInTimeRequestParameters>, IOpenPointInTimeRequest
+	{
+		protected IOpenPointInTimeRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
+		///<summary>/_pit</summary>
+		public OpenPointInTimeRequest(): base()
+		{
+		}
+
+		///<summary>/{index}/_pit</summary>
+		///<param name = "index">Optional, accepts null</param>
+		public OpenPointInTimeRequest(Indices index): base(r => r.Optional("index", index))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices IOpenPointInTimeRequest.Index => Self.RouteValues.Get<Indices>("index");
+		// Request parameters
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
+
+		///<summary>Specific the time to live for the point in time</summary>
+		public string KeepAlive
+		{
+			get => Q<string>("keep_alive");
+			set => Q("keep_alive", value);
+		}
+
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference
+		{
+			get => Q<string>("preference");
+			set => Q("preference", value);
+		}
+
+		///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"
+		////></para>
+		///</summary>
+		public Routing Routing
+		{
+			get => Q<Routing>("routing");
+			set => Q("routing", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface IPingRequest : IRequest<PingRequestParameters>
 	{
 	}

@@ -1093,6 +1093,49 @@ namespace Nest
 		public MultiTermVectorsDescriptor VersionType(VersionType? versiontype) => Qs("version_type", versiontype);
 	}
 
+	///<summary>Descriptor for OpenPointInTime <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</para></summary>
+	public partial class OpenPointInTimeDescriptor : RequestDescriptorBase<OpenPointInTimeDescriptor, OpenPointInTimeRequestParameters, IOpenPointInTimeRequest>, IOpenPointInTimeRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
+		///<summary>/_pit</summary>
+		public OpenPointInTimeDescriptor(): base()
+		{
+		}
+
+		///<summary>/{index}/_pit</summary>
+		///<param name = "index">Optional, accepts null</param>
+		public OpenPointInTimeDescriptor(Indices index): base(r => r.Optional("index", index))
+		{
+		}
+
+		// values part of the url path
+		Indices IOpenPointInTimeRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names to open point in time; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		public OpenPointInTimeDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public OpenPointInTimeDescriptor Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public OpenPointInTimeDescriptor AllIndices() => Index(Indices.All);
+		// Request parameters
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public OpenPointInTimeDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public OpenPointInTimeDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
+		///<summary>Specific the time to live for the point in time</summary>
+		public OpenPointInTimeDescriptor KeepAlive(string keepalive) => Qs("keep_alive", keepalive);
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public OpenPointInTimeDescriptor Preference(string preference) => Qs("preference", preference);
+		///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref = "Nest.JoinField"/> or a routing mapping on for its type exists on <see cref = "Nest.ConnectionSettings"/></para> 
+		///</summary>
+		public OpenPointInTimeDescriptor Routing(Routing routing) => Qs("routing", routing);
+	}
+
 	///<summary>Descriptor for Ping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html</para></summary>
 	public partial class PingDescriptor : RequestDescriptorBase<PingDescriptor, PingRequestParameters, IPingRequest>, IPingRequest
 	{

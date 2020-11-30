@@ -671,6 +671,30 @@ namespace Nest
 		/// </summary>
 		Task<MultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken ct = default);
 		/// <summary>
+		/// <c>POST</c> request to the <c>open_point_in_time</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
+		/// </summary>
+		OpenPointInTimeResponse OpenPointInTime(Indices index = null, Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null);
+		/// <summary>
+		/// <c>POST</c> request to the <c>open_point_in_time</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
+		/// </summary>
+		Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Indices index = null, Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null, CancellationToken ct = default);
+		/// <summary>
+		/// <c>POST</c> request to the <c>open_point_in_time</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
+		/// </summary>
+		OpenPointInTimeResponse OpenPointInTime(IOpenPointInTimeRequest request);
+		/// <summary>
+		/// <c>POST</c> request to the <c>open_point_in_time</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
+		/// </summary>
+		Task<OpenPointInTimeResponse> OpenPointInTimeAsync(IOpenPointInTimeRequest request, CancellationToken ct = default);
+		/// <summary>
 		/// <c>HEAD</c> request to the <c>ping</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html</a>
