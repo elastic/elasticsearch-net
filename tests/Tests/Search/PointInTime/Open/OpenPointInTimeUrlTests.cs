@@ -12,8 +12,7 @@ namespace Tests.Search.PointInTime.Open
 {
 	public class OpenPointInTimeUrlTests
 	{
-		[U]
-		public async Task Urls()
+		[U] public async Task Urls()
 		{
 			await POST("/_pit")
 				.Fluent(c => c.OpenPointInTime())
