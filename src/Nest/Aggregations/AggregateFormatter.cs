@@ -258,6 +258,20 @@ namespace Nest
 			reader.ReadNext(); // "q3"
 			reader.ReadNext(); // :
 			boxplot.Q3 = reader.ReadDouble();
+
+			var token = reader.GetCurrentJsonToken();
+			if (token != JsonToken.EndObject)
+			{
+				reader.ReadNext(); // ,
+				reader.ReadNext(); // "lower"
+				reader.ReadNext(); // :
+				boxplot.Lower = reader.ReadDouble();
+				reader.ReadNext(); // ,
+				reader.ReadNext(); // "upper"
+				reader.ReadNext(); // :
+				boxplot.Upper = reader.ReadDouble();
+			}
+
 			return boxplot;
     }
 
