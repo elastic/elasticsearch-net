@@ -259,6 +259,10 @@ namespace Nest
 			reader.ReadNext(); // :
 			boxplot.Q3 = reader.ReadDouble();
 
+			// ES 7.11.0 adds these two additional properties on the payload
+			// When present on a 7.11 response, we avoid an exception by
+			// handling (and skipping) over the properties. The 7.11 client
+			// will add support for these new properties on BoxplotAggregate.
 			var token = reader.GetCurrentJsonToken();
 			if (token != JsonToken.EndObject)
 			{
