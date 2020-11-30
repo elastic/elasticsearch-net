@@ -41,5 +41,8 @@ namespace Nest
 
 		[DataMember(Name = "lookup_realm")]
 		public RealmInfo LookupRealm { get; internal set; }
+
+		[DataMember(Name = "authentication_type")]
+		public string AuthenticationType { get; internal set; }
 	}
 }
