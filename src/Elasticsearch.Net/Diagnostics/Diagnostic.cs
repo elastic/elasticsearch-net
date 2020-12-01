@@ -18,13 +18,14 @@ namespace Elasticsearch.Net.Diagnostics
 			EndState = state;
 	}
 	
-	internal class Diagnostic<TState, TStateEnd> : Activity, IDisposable
+	internal class Diagnostic<TState, TStateEnd> : Activity
 	{
-		public static Diagnostic<TState, TStateEnd> Default { get; } = new Diagnostic<TState, TStateEnd>();
+		public static Diagnostic<TState, TStateEnd> Default { get; } = new();
 
 		private readonly DiagnosticSource _source;
 		private TStateEnd _endState;
 		private readonly bool _default;
+		private bool _disposed;
 
 		private Diagnostic() : base("__NOOP__") => _default = true;
 
@@ -44,8 +45,20 @@ namespace Elasticsearch.Net.Diagnostics
 				_endState =  value;	
 			}
 		}
+		
+		protected override void Dispose(bool disposing)
+		{
+			if (_disposed) return;
 
-		//_source can be null if Default instance
-		protected override void Dispose(bool disposing) => _source?.StopActivity(SetEndTime(DateTime.UtcNow), EndState);
+			if (disposing)
+			{
+				//_source can be null if Default instance
+				_source?.StopActivity(SetEndTime(DateTime.UtcNow), EndState);
+			}
+
+			_disposed = true;
+
+			base.Dispose(disposing);
+		}
 	}
 }
