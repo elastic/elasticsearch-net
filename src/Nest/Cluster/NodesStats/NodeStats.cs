@@ -80,6 +80,9 @@ namespace Nest
 
 		[DataMember(Name = "transport_address")]
 		public string TransportAddress { get; internal set; }
+
+		[DataMember(Name = "indexing_pressure")]
+		public IndexingPressureStats IndexingPressure { get; internal set; }
 	}
 
 	[DataContract]
@@ -570,5 +573,75 @@ namespace Nest
 
 		[DataMember(Name = "total_opened")]
 		public long TotalOpened { get; internal set; }
+	}
+
+	[DataContract]
+	public class IndexingPressureStats
+	{
+		[DataMember(Name = "memory")]
+		public MemoryStats Memory { get; internal set; }
+
+		[DataContract]
+		public class MemoryStats
+		{
+			[DataMember(Name = "current")]
+			public IndexingLoad Current { get; internal set; }
+
+			[DataMember(Name = "total")]
+			public TotalIndexingLoad Total { get; internal set; }
+
+			[DataMember(Name = "limit_in_bytes")]
+			public long LimitInBytes { get; internal set; }
+
+			[DataMember(Name = "limit")]
+			public string Limit { get; internal set; }
+
+			[DataContract]
+			public class TotalIndexingLoad : IndexingLoad
+			{
+				[DataMember(Name = "coordinating_rejections")]
+				public int CoordinatingRejections { get; internal set; }
+
+				[DataMember(Name = "primary_rejections")]
+				public int PrimaryRejections { get; internal set; }
+
+				[DataMember(Name = "replica_rejections")]
+				public int ReplicaRejections { get; internal set; }
+			}
+
+			[DataContract]
+			public class IndexingLoad
+			{
+				[DataMember(Name = "combined_coordinating_and_primary_in_bytes")]
+				public long CombinedCoordinatingAndPrimaryInBytes { get; internal set; }
+
+				[DataMember(Name = "combined_coordinating_and_primary")]
+				public string CombinedCoordinatingAndPrimary { get; internal set; }
+
+				[DataMember(Name = "coordinating_in_bytes")]
+				public long CoordinatingInBytes { get; internal set; }
+
+				[DataMember(Name = "coordinating")]
+				public string Coordinating { get; internal set; }
+
+				[DataMember(Name = "primary_in_bytes")]
+				public long PrimaryInBytes { get; internal set; }
+
+				[DataMember(Name = "primary")]
+				public string Primary { get; internal set; }
+
+				[DataMember(Name = "replica_in_bytes")]
+				public long ReplicaInBytes { get; internal set; }
+
+				[DataMember(Name = "replica")]
+				public string Replica { get; internal set; }
+
+				[DataMember(Name = "all_in_bytes")]
+				public long AllInBytes { get; internal set; }
+
+				[DataMember(Name = "all")]
+				public string All { get; internal set; }
+			}
+		}
 	}
 }
