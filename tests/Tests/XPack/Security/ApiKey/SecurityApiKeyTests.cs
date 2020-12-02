@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -23,6 +24,8 @@ namespace Tests.XPack.Security.ApiKey
 		private const string GetApiKeyStep = nameof(GetApiKeyStep);
 		private const string GetAllApiKeysStep = nameof(GetAllApiKeysStep);
 		private const string InvalidateApiKeyStep = nameof(InvalidateApiKeyStep);
+		private const string GetAnotherApiKeyStep = nameof(GetAnotherApiKeyStep);
+		private const string ClearApiKeyCacheStep = nameof(ClearApiKeyCacheStep);
 
 		public SecurityApiKeyTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
@@ -186,6 +189,39 @@ namespace Tests.XPack.Security.ApiKey
 						(v, c, r) => c.Security.InvalidateApiKey(r),
 						(v, c, r) => c.Security.InvalidateApiKeyAsync(r)
 					)
+			},
+			{
+				GetAnotherApiKeyStep, u =>
+					u.Calls<GetApiKeyDescriptor, GetApiKeyRequest, IGetApiKeyRequest, GetApiKeyResponse>(
+						v => new GetApiKeyRequest
+						{
+							Name = v,
+							RequestConfiguration = new RequestConfiguration
+							{
+								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", "password")
+							}
+						},
+						(v, d) => d
+							.Name(v)
+							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
+						,
+						(v, c, f) => c.Security.GetApiKey(f),
+						(v, c, f) => c.Security.GetApiKeyAsync(f),
+						(v, c, r) => c.Security.GetApiKey(r),
+						(v, c, r) => c.Security.GetApiKeyAsync(r),
+						(r, values) => values.ExtendedValue("apiKey", r.ApiKeys.FirstOrDefault()?.Id ?? string.Empty)
+					)
+			},
+			{
+				ClearApiKeyCacheStep, u =>
+					u.Calls<ClearApiKeyCacheDescriptor, ClearApiKeyCacheRequest, IClearApiKeyCacheRequest, ClearApiKeyCacheResponse>(
+						v => new ClearApiKeyCacheRequest(u.Usage.CallUniqueValues.ExtendedValue<string>("apiKey") ?? string.Empty),
+						(v, d) => d,
+						(v, c, f) => c.Security.ClearApiKeyCache(u.Usage.CallUniqueValues.ExtendedValue<string>("apiKey") ?? string.Empty, f),
+						(v, c, f) => c.Security.ClearApiKeyCacheAsync(u.Usage.CallUniqueValues.ExtendedValue<string>("apiKey") ?? string.Empty, f),
+						(v, c, r) => c.Security.ClearApiKeyCache(r),
+						(v, c, r) => c.Security.ClearApiKeyCacheAsync(r)
+					)
 			}
 		}) { }
 
@@ -226,6 +262,14 @@ namespace Tests.XPack.Security.ApiKey
 			r.ErrorCount.Should().Be(0);
 			r.PreviouslyInvalidatedApiKeys.Should().BeEmpty();
 			r.InvalidatedApiKeys.Should().HaveCount(2);
+		});
+
+		[I] public async Task SecurityClearApiKeyCacheResponse() => await Assert<ClearApiKeyCacheResponse>(ClearApiKeyCacheStep, r =>
+		{
+			r.IsValid.Should().BeTrue();
+			r.NodeStatistics.Successful.Should().BeGreaterOrEqualTo(1);
+			r.ClusterName.Should().NotBeNullOrEmpty();
+			r.Nodes.Count.Should().BeGreaterOrEqualTo(1);
 		});
 	}
 }
