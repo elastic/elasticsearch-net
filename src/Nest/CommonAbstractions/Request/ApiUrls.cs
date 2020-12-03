@@ -14,6 +14,9 @@ namespace Nest
 	/// </summary>
 	internal class ApiUrls
 	{
+		private static readonly RouteValues EmptyRouteValues = new();
+		private readonly string _errorMessageSuffix;
+
 		/// <summary>
 		/// If the spec only defines a single non parameterizable route this allows us to shortcircuit and avoid hitting
 		/// the cached string builders.
@@ -25,9 +28,7 @@ namespace Nest
 		/// <see cref="UrlLookup.Matches"/> allows us to quickly find the right url to use in the list.
 		/// </summary>
 		public Dictionary<int, List<UrlLookup>> Routes { get; }
-
-		private readonly string _errorMessageSuffix;
-
+		
 		/// <summary> Only intended to be created once per request and stored in a static </summary>
 		internal ApiUrls(string[] routes)
 		{
@@ -56,6 +57,8 @@ namespace Nest
 		{
 			if (_fixedUrl != null) return _fixedUrl;
 
+			if (TryHandleAllIndexSearch(routeValues, settings, out var url)) return url;
+
 			var resolved = routeValues.Resolve(settings);
 
 			if (!Routes.TryGetValue(resolved.Count, out var routes))
@@ -71,6 +74,31 @@ namespace Nest
 					return u.ToUrl(resolved);
 			}
 			throw new Exception($"No route taking {routeValues.Count} parameters{_errorMessageSuffix}");
+		}
+
+		private bool TryHandleAllIndexSearch(RouteValues routeValues, IConnectionSettingsValues settings, out string url)
+		{
+			// We special case search requests against all indices to return the rooted URL (/_search) rather than /_search.
+			// This was introduced to support point in time searches which do not allow indices (even _all) to be specified.
+
+			url = null;
+
+			// If not potentially an all index search, we can exit
+			if (routeValues.Count != 1
+				|| !routeValues.TryGetValue("index", out var value)
+				|| value.GetString(settings) != Indices.All
+				|| !Routes.TryGetValue(0, out var rootRoute)) return false;
+
+			var resolved = EmptyRouteValues.Resolve(settings);
+
+			if (rootRoute.Count != 1) return false;
+
+			var resolvedUrl = rootRoute[0].ToUrl(resolved);
+
+			if (resolvedUrl != "_search") return false;
+
+			url = resolvedUrl;
+			return true;
 		}
 	}
 }
