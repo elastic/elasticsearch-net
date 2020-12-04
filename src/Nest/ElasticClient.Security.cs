@@ -517,6 +517,30 @@ namespace Nest.Specification.SecurityApi
 		/// </summary>
 		public Task<GetUserPrivilegesResponse> GetUserPrivilegesAsync(IGetUserPrivilegesRequest request, CancellationToken ct = default) => DoRequestAsync<IGetUserPrivilegesRequest, GetUserPrivilegesResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>security.grant_api_key</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html</a>
+		/// </summary>
+		public GrantApiKeyResponse GrantApiKey(Func<GrantApiKeyDescriptor, IGrantApiKeyRequest> selector) => GrantApiKey(selector.InvokeOrDefault(new GrantApiKeyDescriptor()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>security.grant_api_key</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html</a>
+		/// </summary>
+		public Task<GrantApiKeyResponse> GrantApiKeyAsync(Func<GrantApiKeyDescriptor, IGrantApiKeyRequest> selector, CancellationToken ct = default) => GrantApiKeyAsync(selector.InvokeOrDefault(new GrantApiKeyDescriptor()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>security.grant_api_key</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html</a>
+		/// </summary>
+		public GrantApiKeyResponse GrantApiKey(IGrantApiKeyRequest request) => DoRequest<IGrantApiKeyRequest, GrantApiKeyResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>security.grant_api_key</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html</a>
+		/// </summary>
+		public Task<GrantApiKeyResponse> GrantApiKeyAsync(IGrantApiKeyRequest request, CancellationToken ct = default) => DoRequestAsync<IGrantApiKeyRequest, GrantApiKeyResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>security.has_privileges</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</a>
