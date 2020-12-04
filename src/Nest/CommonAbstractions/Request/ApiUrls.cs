@@ -78,7 +78,7 @@ namespace Nest
 
 		private bool TryHandleAllIndexSearch(RouteValues routeValues, IConnectionSettingsValues settings, out string url)
 		{
-			// We special case search requests against all indices to return the rooted URL (/_search) rather than /_search.
+			// We special case search requests against all indices to return the rooted URL (/_search) rather than /_all/_search.
 			// This was introduced to support point in time searches which do not allow indices (even _all) to be specified.
 
 			url = null;
