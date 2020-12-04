@@ -67,19 +67,20 @@ namespace Nest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityClearApiKeyCache;
 		///<summary>/_security/api_key/{ids}/_clear_cache</summary>
-		///<param name = "ids">this parameter is required</param>
-		public ClearApiKeyCacheDescriptor(Ids ids): base(r => r.Required("ids", ids))
+		///<param name = "ids">Optional, accepts null</param>
+		public ClearApiKeyCacheDescriptor(Ids ids): base(r => r.Optional("ids", ids))
 		{
 		}
 
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected ClearApiKeyCacheDescriptor(): base()
+		///<summary>/_security/api_key/*/_clear_cache</summary>
+		public ClearApiKeyCacheDescriptor(): base()
 		{
 		}
 
 		// values part of the url path
 		Ids IClearApiKeyCacheRequest.Ids => Self.RouteValues.Get<Ids>("ids");
+		///<summary>A comma-separated list of IDs of API keys to clear from the cache</summary>
+		public ClearApiKeyCacheDescriptor Ids(Ids ids) => Assign(ids, (a, v) => a.RouteValues.Optional("ids", v));
 	// Request parameters
 	}
 

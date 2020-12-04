@@ -102,14 +102,13 @@ namespace Nest
 		protected IClearApiKeyCacheRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityClearApiKeyCache;
 		///<summary>/_security/api_key/{ids}/_clear_cache</summary>
-		///<param name = "ids">this parameter is required</param>
-		public ClearApiKeyCacheRequest(Ids ids): base(r => r.Required("ids", ids))
+		///<param name = "ids">Optional, accepts null</param>
+		public ClearApiKeyCacheRequest(Ids ids): base(r => r.Optional("ids", ids))
 		{
 		}
 
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected ClearApiKeyCacheRequest(): base()
+		///<summary>/_security/api_key/*/_clear_cache</summary>
+		public ClearApiKeyCacheRequest(): base()
 		{
 		}
 

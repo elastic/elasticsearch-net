@@ -26,6 +26,7 @@ namespace Tests.XPack.Security.ApiKey
 		private const string InvalidateApiKeyStep = nameof(InvalidateApiKeyStep);
 		private const string GetAnotherApiKeyStep = nameof(GetAnotherApiKeyStep);
 		private const string ClearApiKeyCacheStep = nameof(ClearApiKeyCacheStep);
+		private const string ClearAllApiKeyCacheStep = nameof(ClearAllApiKeyCacheStep);
 
 		public SecurityApiKeyTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
@@ -217,8 +218,19 @@ namespace Tests.XPack.Security.ApiKey
 					u.Calls<ClearApiKeyCacheDescriptor, ClearApiKeyCacheRequest, IClearApiKeyCacheRequest, ClearApiKeyCacheResponse>(
 						v => new ClearApiKeyCacheRequest(u.Usage.CallUniqueValues.ExtendedValue<string>("apiKey") ?? string.Empty),
 						(v, d) => d,
-						(v, c, f) => c.Security.ClearApiKeyCache(u.Usage.CallUniqueValues.ExtendedValue<string>("apiKey") ?? string.Empty, f),
-						(v, c, f) => c.Security.ClearApiKeyCacheAsync(u.Usage.CallUniqueValues.ExtendedValue<string>("apiKey") ?? string.Empty, f),
+						(v, c, f) => c.Security.ClearApiKeyCache(f => f.Ids(u.Usage.CallUniqueValues.ExtendedValue<string>("apiKey"))),
+						(v, c, f) => c.Security.ClearApiKeyCacheAsync(f => f.Ids(u.Usage.CallUniqueValues.ExtendedValue<string>("apiKey"))),
+						(v, c, r) => c.Security.ClearApiKeyCache(r),
+						(v, c, r) => c.Security.ClearApiKeyCacheAsync(r)
+					)
+			},
+			{
+				ClearAllApiKeyCacheStep, u =>
+					u.Calls<ClearApiKeyCacheDescriptor, ClearApiKeyCacheRequest, IClearApiKeyCacheRequest, ClearApiKeyCacheResponse>(
+						v => new ClearApiKeyCacheRequest(),
+						(v, d) => d,
+						(v, c, f) => c.Security.ClearApiKeyCache(),
+						(v, c, f) => c.Security.ClearApiKeyCacheAsync(),
 						(v, c, r) => c.Security.ClearApiKeyCache(r),
 						(v, c, r) => c.Security.ClearApiKeyCacheAsync(r)
 					)
@@ -265,6 +277,15 @@ namespace Tests.XPack.Security.ApiKey
 		});
 
 		[I] public async Task SecurityClearApiKeyCacheResponse() => await Assert<ClearApiKeyCacheResponse>(ClearApiKeyCacheStep, r =>
+		{
+			r.IsValid.Should().BeTrue();
+			r.NodeStatistics.Successful.Should().BeGreaterOrEqualTo(1);
+			r.ClusterName.Should().NotBeNullOrEmpty();
+			r.Nodes.Count.Should().BeGreaterOrEqualTo(1);
+		});
+
+		[I]
+		public async Task SecurityClearAllApiKeyCacheResponse() => await Assert<ClearApiKeyCacheResponse>(ClearAllApiKeyCacheStep, r =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.NodeStatistics.Successful.Should().BeGreaterOrEqualTo(1);

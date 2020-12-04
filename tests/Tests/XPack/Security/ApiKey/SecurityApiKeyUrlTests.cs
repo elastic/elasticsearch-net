@@ -38,10 +38,19 @@ namespace Tests.XPack.Security.ApiKey
 
 	public class SecurityClearApiKeyCacheUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls() => await UrlTester.POST("/_security/api_key/id1%2Cid2/_clear_cache")
-			.Fluent(c => c.Security.ClearApiKeyCache("id1,id2", p => p))
-			.Request(c => c.Security.ClearApiKeyCache(new ClearApiKeyCacheRequest("id1,id2")))
-			.FluentAsync(c => c.Security.ClearApiKeyCacheAsync("id1,id2", p => p))
-			.RequestAsync(c => c.Security.ClearApiKeyCacheAsync(new ClearApiKeyCacheRequest("id1,id2")));
+		[U] public override async Task Urls()
+		{
+			await UrlTester.POST("/_security/api_key/id1%2Cid2/_clear_cache")
+				.Fluent(c => c.Security.ClearApiKeyCache(f => f.Ids("id1,id2")))
+				.Request(c => c.Security.ClearApiKeyCache(new ClearApiKeyCacheRequest("id1,id2")))
+				.FluentAsync(c => c.Security.ClearApiKeyCacheAsync(f => f.Ids("id1,id2")))
+				.RequestAsync(c => c.Security.ClearApiKeyCacheAsync(new ClearApiKeyCacheRequest("id1,id2")));
+
+			await UrlTester.POST("/_security/api_key/*/_clear_cache")
+				.Fluent(c => c.Security.ClearApiKeyCache())
+				.Request(c => c.Security.ClearApiKeyCache(new ClearApiKeyCacheRequest()))
+				.FluentAsync(c => c.Security.ClearApiKeyCacheAsync())
+				.RequestAsync(c => c.Security.ClearApiKeyCacheAsync(new ClearApiKeyCacheRequest()));
+		}
 	}
 }
