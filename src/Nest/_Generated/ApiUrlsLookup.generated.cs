@@ -255,6 +255,7 @@ namespace Nest
 		internal static ApiUrls SecurityGetUserAccessToken = new ApiUrls(new[]{"_security/oauth2/token"});
 		internal static ApiUrls SecurityGetUser = new ApiUrls(new[]{"_security/user/{username}", "_security/user"});
 		internal static ApiUrls SecurityGetUserPrivileges = new ApiUrls(new[]{"_security/user/_privileges"});
+		internal static ApiUrls SecurityGrantApiKey = new ApiUrls(new[]{"_security/api_key/grant"});
 		internal static ApiUrls SecurityHasPrivileges = new ApiUrls(new[]{"_security/user/_has_privileges", "_security/user/{user}/_has_privileges"});
 		internal static ApiUrls SecurityInvalidateApiKey = new ApiUrls(new[]{"_security/api_key"});
 		internal static ApiUrls SecurityInvalidateUserAccessToken = new ApiUrls(new[]{"_security/oauth2/token"});
