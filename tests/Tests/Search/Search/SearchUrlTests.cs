@@ -48,7 +48,7 @@ namespace Tests.Search.Search
 					.RequestAsync(c => c.SearchAsync<Project>(new SearchRequest<Project>(hardcoded)))
 					.FluentAsync(c => c.SearchAsync<Project>(s => s.Index(hardcoded)));
 
-			await POST("/_search")
+			await POST("/_all/_search")
 					.Fluent(c => c.Search<Project>(s => s.AllIndices()))
 					.Request(c => c.Search<Project>(new SearchRequest<Project>(Nest.Indices.All)))
 					.FluentAsync(c => c.SearchAsync<Project>(s => s.AllIndices()))

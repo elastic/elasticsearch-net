@@ -24,7 +24,7 @@ namespace Tests.CodeStandards
 			var client = new ElasticClient(settings);
 			var searchResponse = client.Search<Project>(s => s.AllIndices());
 
-			searchResponse.ApiCall.Uri.ToString().Should().Be("http://localhost:9200/_search?typed_keys=true");
+			searchResponse.ApiCall.Uri.ToString().Should().Be("http://localhost:9200/_all/_search?typed_keys=true");
 		}
 
 		[U]
@@ -35,7 +35,7 @@ namespace Tests.CodeStandards
 			var client = new ElasticClient(settings);
 			var searchResponse = client.Search<Project>(s => s.AllIndices());
 
-			searchResponse.ApiCall.Uri.ToString().Should().Be("http://localhost:9200/_search?typed_keys=true");
+			searchResponse.ApiCall.Uri.ToString().Should().Be("http://localhost:9200/_all/_search?typed_keys=true");
 		}
 
 		[U]
@@ -46,7 +46,7 @@ namespace Tests.CodeStandards
 			var client = new ElasticClient(settings);
 			var searchResponse = client.Search<Project>(s => s.AllIndices());
 
-			searchResponse.ApiCall.Uri.ToString().Should().Be("http://localhost:9200/elasticsearch/_search?typed_keys=true");
+			searchResponse.ApiCall.Uri.ToString().Should().Be("http://localhost:9200/elasticsearch/_all/_search?typed_keys=true");
 		}
 
 		[U]
@@ -57,7 +57,7 @@ namespace Tests.CodeStandards
 			var client = new ElasticClient(settings);
 			var searchResponse = client.Search<Project>(s => s.AllIndices());
 
-			searchResponse.ApiCall.Uri.ToString().Should().Be("http://localhost:9200/elasticsearch/_search?typed_keys=true");
+			searchResponse.ApiCall.Uri.ToString().Should().Be("http://localhost:9200/elasticsearch/_all/_search?typed_keys=true");
 		}
 	}
 }

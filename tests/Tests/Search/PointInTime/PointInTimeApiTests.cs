@@ -43,7 +43,7 @@ namespace Tests.Search.PointInTime
 			{
 				SearchPointInTimeStep, u =>
 					u.Calls<SearchDescriptor<Project>, SearchRequest<Project>, ISearchRequest<Project>, ISearchResponse<Project>>(
-						v => new SearchRequest<Project>(Nest.Indices.All)
+						v => new SearchRequest<Project>
 						{
 							Size = 1,
 							Query = new QueryContainer(new MatchAllQuery()),
@@ -52,7 +52,6 @@ namespace Tests.Search.PointInTime
 						(v, d) => d
 							.Size(1)
 							.Query(q => q.MatchAll())
-							.AllIndices()
 							.PointInTime(v, p => p.KeepAlive("1m")),
 						(v, c, f) => c.Search(f),
 						(v, c, f) => c.SearchAsync(f),

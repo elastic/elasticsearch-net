@@ -241,6 +241,16 @@ namespace Nest
 		Type ITypedSearchRequest.ClrType => null;
 
 		protected sealed override void RequestDefaults(SearchRequestParameters parameters) => TypedKeys = true;
+
+		protected override string ResolveUrl(RouteValues routeValues, IConnectionSettingsValues settings)
+		{
+			if (Self.PointInTime is object && !string.IsNullOrEmpty(Self.PointInTime.Id) && routeValues.ContainsKey("index"))
+			{
+				routeValues.Remove("index");
+			}
+
+			return base.ResolveUrl(routeValues, settings);
+		}
 	}
 
 	[DataContract]
@@ -455,5 +465,15 @@ namespace Nest
 		/// <inheritdoc cref="ISearchRequest.PointInTime" />
 		public SearchDescriptor<TInferDocument> PointInTime(string pitId, Func<PointInTimeDescriptor, IPointInTime> pit) =>
 			Assign(pit, (a, v) => a.PointInTime = v?.Invoke(new PointInTimeDescriptor(pitId)));
+
+		protected override string ResolveUrl(RouteValues routeValues, IConnectionSettingsValues settings)
+		{
+			if (Self.PointInTime is object && !string.IsNullOrEmpty(Self.PointInTime.Id) && routeValues.ContainsKey("index"))
+			{
+				routeValues.Remove("index");
+			}
+
+			return base.ResolveUrl(routeValues, settings);
+		}
 	}
 }
