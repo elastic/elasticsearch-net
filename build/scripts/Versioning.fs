@@ -20,7 +20,7 @@ module Versioning =
     let parse (v:string) = SemVer.parse(v)
 
     //Versions in form of e.g 6.1.0 is inferred as datetime so we bake the json shape into the provider like this
-    type SdkVersion = { version:string;  }
+    type SdkVersion = { version:string; rollForward:string; allowPrerelease:bool }
     type GlobalJson = { sdk: SdkVersion; version:string; doc_current:string; doc_branch: string; }
         
     let private globalJson () =
