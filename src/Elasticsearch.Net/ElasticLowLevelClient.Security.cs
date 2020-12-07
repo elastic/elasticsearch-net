@@ -87,7 +87,16 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("security.clear_api_key_cache", "ids")]
 		public Task<TResponse> ClearApiKeyCacheAsync<TResponse>(string ids, ClearApiKeyCacheRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_security/api_key/{ids:ids}/_clear_cache"), ctx, null, RequestParams(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_security/api_key/{ids:ids}/_clear_cache"), ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /_security/api_key/*/_clear_cache <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse ClearApiKeyCache<TResponse>(ClearApiKeyCacheRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_security/api_key/*/_clear_cache", null, RequestParams(requestParameters));
+		///<summary>POST on /_security/api_key/*/_clear_cache <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("security.clear_api_key_cache", "")]
+		public Task<TResponse> ClearApiKeyCacheAsync<TResponse>(ClearApiKeyCacheRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_security/api_key/*/_clear_cache", ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_security/privilege/{application}/_clear_cache <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html</para></summary>
 		///<param name = "application">A comma-separated list of application names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

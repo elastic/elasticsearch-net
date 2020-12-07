@@ -69,6 +69,7 @@ namespace ApiGenerator.Domain.Specification
 
 					case "forecast_id":
 					case "action_id":
+					case "ids" when Type == "list":
 						return "Ids";
 
 					case "index":
