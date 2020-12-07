@@ -76,6 +76,9 @@ namespace Tests.Cluster.NodesStats
 
 			if (TestClient.Configuration.InRange(">=7.8.0"))
 				Assert(node.ScriptCache);
+
+			if (TestClient.Configuration.InRange(">=7.9.0"))
+				Assert(node.IndexingPressure);
 		}
 
 		protected void Assert(NodeIngestStats nodeIngestStats)
@@ -275,6 +278,40 @@ namespace Tests.Cluster.NodesStats
 			jvm.Threads.Should().NotBeNull();
 			//jvm.Threads.Count.Should().BeGreaterThan(0);
 			//jvm.Threads.PeakCount.Should().BeGreaterThan(0);
+		}
+
+		protected void Assert(IndexingPressureStats indexingPressureStats)
+		{
+			if (TestClient.Configuration.InRange(">=7.10.0"))
+			{
+				indexingPressureStats.Memory.LimitInBytes.Should().BeGreaterOrEqualTo(0);
+				//indexingPressureStats.Memory.Limit.Should().NotBeNull();
+			}
+
+			indexingPressureStats.Memory.Current.CombinedCoordinatingAndPrimaryInBytes.Should().BeGreaterOrEqualTo(0);
+			//indexingPressureStats.Memory.Current.CombinedCoordinatingAndPrimary.Should().NotBeNull();
+			indexingPressureStats.Memory.Current.CoordinatingInBytes.Should().BeGreaterOrEqualTo(0);
+			//indexingPressureStats.Memory.Current.Coordinating.Should().NotBeNull();
+			indexingPressureStats.Memory.Current.PrimaryInBytes.Should().BeGreaterOrEqualTo(0);
+			//indexingPressureStats.Memory.Current.Primary.Should().NotBeNull();
+			indexingPressureStats.Memory.Current.ReplicaInBytes.Should().BeGreaterOrEqualTo(0);
+			//indexingPressureStats.Memory.Current.Replica.Should().NotBeNull();
+			indexingPressureStats.Memory.Current.AllInBytes.Should().BeGreaterOrEqualTo(0);
+			//indexingPressureStats.Memory.Current.All.Should().NotBeNull();
+
+			indexingPressureStats.Memory.Total.CombinedCoordinatingAndPrimaryInBytes.Should().BeGreaterOrEqualTo(0);
+			//indexingPressureStats.Memory.Total.CombinedCoordinatingAndPrimary.Should().NotBeNull();
+			indexingPressureStats.Memory.Total.CoordinatingInBytes.Should().BeGreaterOrEqualTo(0);
+			//indexingPressureStats.Memory.Total.Coordinating.Should().NotBeNull();
+			indexingPressureStats.Memory.Total.PrimaryInBytes.Should().BeGreaterOrEqualTo(0);
+			//indexingPressureStats.Memory.Total.Primary.Should().NotBeNull();
+			indexingPressureStats.Memory.Total.ReplicaInBytes.Should().BeGreaterOrEqualTo(0);
+			//indexingPressureStats.Memory.Total.Replica.Should().NotBeNull();
+			indexingPressureStats.Memory.Total.AllInBytes.Should().BeGreaterOrEqualTo(0);
+			//indexingPressureStats.Memory.Total.All.Should().NotBeNull();
+			indexingPressureStats.Memory.Total.CoordinatingRejections.Should().BeGreaterOrEqualTo(0);
+			indexingPressureStats.Memory.Total.PrimaryRejections.Should().BeGreaterOrEqualTo(0);
+			indexingPressureStats.Memory.Total.ReplicaRejections.Should().BeGreaterOrEqualTo(0);
 		}
 	}
 }
