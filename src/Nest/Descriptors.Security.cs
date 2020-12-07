@@ -417,6 +417,16 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>Descriptor for GrantApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html</para></summary>
+	public partial class GrantApiKeyDescriptor : RequestDescriptorBase<GrantApiKeyDescriptor, GrantApiKeyRequestParameters, IGrantApiKeyRequest>, IGrantApiKeyRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGrantApiKey;
+		// values part of the url path
+		// Request parameters
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public GrantApiKeyDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+	}
+
 	///<summary>Descriptor for HasPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html</para></summary>
 	public partial class HasPrivilegesDescriptor : RequestDescriptorBase<HasPrivilegesDescriptor, HasPrivilegesRequestParameters, IHasPrivilegesRequest>, IHasPrivilegesRequest
 	{

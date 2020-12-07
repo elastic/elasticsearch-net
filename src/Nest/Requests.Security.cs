@@ -709,6 +709,29 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IGrantApiKeyRequest : IRequest<GrantApiKeyRequestParameters>
+	{
+	}
+
+	///<summary>Request for GrantApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html</para></summary>
+	public partial class GrantApiKeyRequest : PlainRequestBase<GrantApiKeyRequestParameters>, IGrantApiKeyRequest
+	{
+		protected IGrantApiKeyRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGrantApiKey;
+		// values part of the url path
+		// Request parameters
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh
+		{
+			get => Q<Refresh? >("refresh");
+			set => Q("refresh", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface IHasPrivilegesRequest : IRequest<HasPrivilegesRequestParameters>
 	{
 		[IgnoreDataMember]
