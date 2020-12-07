@@ -214,7 +214,8 @@ namespace Tests.XPack.Security.ApiKey
 					)
 			},
 			{
-				ClearApiKeyCacheStep, u =>
+				// API introduced in 7.10.0
+				ClearApiKeyCacheStep, ">=7.10.0", u =>
 					u.Calls<ClearApiKeyCacheDescriptor, ClearApiKeyCacheRequest, IClearApiKeyCacheRequest, ClearApiKeyCacheResponse>(
 						v => new ClearApiKeyCacheRequest(u.Usage.CallUniqueValues.ExtendedValue<string>("apiKey") ?? string.Empty),
 						(v, d) => d,
@@ -225,7 +226,8 @@ namespace Tests.XPack.Security.ApiKey
 					)
 			},
 			{
-				ClearAllApiKeyCacheStep, u =>
+				// API introduced in 7.10.0
+				ClearAllApiKeyCacheStep, ">=7.10.0", u =>
 					u.Calls<ClearApiKeyCacheDescriptor, ClearApiKeyCacheRequest, IClearApiKeyCacheRequest, ClearApiKeyCacheResponse>(
 						v => new ClearApiKeyCacheRequest(),
 						(v, d) => d,
@@ -284,8 +286,7 @@ namespace Tests.XPack.Security.ApiKey
 			r.Nodes.Count.Should().BeGreaterOrEqualTo(1);
 		});
 
-		[I]
-		public async Task SecurityClearAllApiKeyCacheResponse() => await Assert<ClearApiKeyCacheResponse>(ClearAllApiKeyCacheStep, r =>
+		[I] public async Task SecurityClearAllApiKeyCacheResponse() => await Assert<ClearApiKeyCacheResponse>(ClearAllApiKeyCacheStep, r =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.NodeStatistics.Successful.Should().BeGreaterOrEqualTo(1);
