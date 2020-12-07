@@ -110,6 +110,11 @@ namespace Nest
 		/// Gets the total number of documents matching the search query criteria
 		/// </summary>
 		long Total { get; }
+
+		/// <summary>
+		/// When a search is made over a point in time, this will be the ID of the point in time.
+		/// </summary>
+		string PointInTimeId { get; }
 	}
 
 	public class SearchResponse<TDocument> : ResponseBase, ISearchResponse<TDocument> where TDocument : class
@@ -190,5 +195,9 @@ namespace Nest
 		/// <inheritdoc />
 		[IgnoreDataMember]
 		public long Total => HitsMetadata?.Total.Value ?? -1;
+
+		/// <inheritdoc />
+		[DataMember(Name = "pit_id")]
+		public string PointInTimeId { get; internal set; }
 	}
 }
