@@ -14,6 +14,9 @@ namespace Nest
 	/// </summary>
 	internal class ApiUrls
 	{
+		private static readonly RouteValues EmptyRouteValues = new();
+		private readonly string _errorMessageSuffix;
+
 		/// <summary>
 		/// If the spec only defines a single non parameterizable route this allows us to shortcircuit and avoid hitting
 		/// the cached string builders.
@@ -25,9 +28,7 @@ namespace Nest
 		/// <see cref="UrlLookup.Matches"/> allows us to quickly find the right url to use in the list.
 		/// </summary>
 		public Dictionary<int, List<UrlLookup>> Routes { get; }
-
-		private readonly string _errorMessageSuffix;
-
+		
 		/// <summary> Only intended to be created once per request and stored in a static </summary>
 		internal ApiUrls(string[] routes)
 		{
