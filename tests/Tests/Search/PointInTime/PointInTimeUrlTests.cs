@@ -8,8 +8,28 @@ using Nest;
 using Tests.Framework.EndpointTests;
 using static Tests.Framework.EndpointTests.UrlTester;
 
-namespace Tests.Search.PointInTime.Close
+namespace Tests.Search.PointInTime
 {
+	public class OpenPointInTimeUrlTests
+	{
+		[U] public async Task Urls()
+		{
+			await POST("/_pit")
+				.Fluent(c => c.OpenPointInTime())
+				.Request(c => c.OpenPointInTime(new OpenPointInTimeRequest()))
+				.FluentAsync(c => c.OpenPointInTimeAsync())
+				.RequestAsync(c => c.OpenPointInTimeAsync(new OpenPointInTimeRequest()));
+
+			const string index = "devs";
+
+			await POST($"/{index}/_pit")
+				.Fluent(c => c.OpenPointInTime(index))
+				.Request(c => c.OpenPointInTime(new OpenPointInTimeRequest(index)))
+				.FluentAsync(c => c.OpenPointInTimeAsync(index))
+				.RequestAsync(c => c.OpenPointInTimeAsync(new OpenPointInTimeRequest(index)));
+		}
+	}
+
 	public class ClosePointInTimeUrlTests
 	{
 		[U] public async Task Urls() =>
