@@ -62,6 +62,28 @@ namespace Nest
 		public ChangePasswordDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
 
+	///<summary>Descriptor for ClearApiKeyCache <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html</para></summary>
+	public partial class ClearApiKeyCacheDescriptor : RequestDescriptorBase<ClearApiKeyCacheDescriptor, ClearApiKeyCacheRequestParameters, IClearApiKeyCacheRequest>, IClearApiKeyCacheRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityClearApiKeyCache;
+		///<summary>/_security/api_key/{ids}/_clear_cache</summary>
+		///<param name = "ids">Optional, accepts null</param>
+		public ClearApiKeyCacheDescriptor(Ids ids): base(r => r.Optional("ids", ids))
+		{
+		}
+
+		///<summary>/_security/api_key/*/_clear_cache</summary>
+		public ClearApiKeyCacheDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Ids IClearApiKeyCacheRequest.Ids => Self.RouteValues.Get<Ids>("ids");
+		///<summary>A comma-separated list of IDs of API keys to clear from the cache</summary>
+		public ClearApiKeyCacheDescriptor Ids(Ids ids) => Assign(ids, (a, v) => a.RouteValues.Optional("ids", v));
+	// Request parameters
+	}
+
 	///<summary>Descriptor for ClearCachedPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html</para></summary>
 	public partial class ClearCachedPrivilegesDescriptor : RequestDescriptorBase<ClearCachedPrivilegesDescriptor, ClearCachedPrivilegesRequestParameters, IClearCachedPrivilegesRequest>, IClearCachedPrivilegesRequest
 	{

@@ -85,6 +85,30 @@ namespace Nest.Specification.SecurityApi
 		/// </summary>
 		public Task<ChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request, CancellationToken ct = default) => DoRequestAsync<IChangePasswordRequest, ChangePasswordResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>security.clear_api_key_cache</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html</a>
+		/// </summary>
+		public ClearApiKeyCacheResponse ClearApiKeyCache(Func<ClearApiKeyCacheDescriptor, IClearApiKeyCacheRequest> selector = null) => ClearApiKeyCache(selector.InvokeOrDefault(new ClearApiKeyCacheDescriptor()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>security.clear_api_key_cache</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html</a>
+		/// </summary>
+		public Task<ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Func<ClearApiKeyCacheDescriptor, IClearApiKeyCacheRequest> selector = null, CancellationToken ct = default) => ClearApiKeyCacheAsync(selector.InvokeOrDefault(new ClearApiKeyCacheDescriptor()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>security.clear_api_key_cache</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html</a>
+		/// </summary>
+		public ClearApiKeyCacheResponse ClearApiKeyCache(IClearApiKeyCacheRequest request) => DoRequest<IClearApiKeyCacheRequest, ClearApiKeyCacheResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>security.clear_api_key_cache</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html</a>
+		/// </summary>
+		public Task<ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(IClearApiKeyCacheRequest request, CancellationToken ct = default) => DoRequestAsync<IClearApiKeyCacheRequest, ClearApiKeyCacheResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>security.clear_cached_privileges</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html</a>
