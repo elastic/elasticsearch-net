@@ -236,7 +236,7 @@ namespace Tests.Search.Search
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.Hits.Count().Should().BeGreaterThan(0);
+			response.Hits.Count.Should().BeGreaterThan(0);
 			response.Hits.First().Should().NotBeNull();
 			response.Hits.First().Fields.ValueOf<Project, string>(p => p.Name).Should().NotBeNullOrEmpty();
 			response.Hits.First().Fields.ValueOf<Project, int?>(p => p.NumberOfCommits).Should().BeGreaterThan(0);
@@ -603,5 +603,49 @@ namespace Tests.Search.Search
 			response.Clusters.Skipped.Should().Be(1);
 			response.Clusters.Successful.Should().Be(1);
 		}
+	}
+
+	public class SearchWithPointInTimeApiTests
+		: ApiTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	{
+		public SearchWithPointInTimeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		
+		protected override object ExpectJson => new
+		{
+			size = 1,
+			query = new
+			{
+				match_all = new { }
+			},
+			pit = new
+			{
+				id = "a-long-id",
+				keep_alive = "1m"
+			}
+		};
+		
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Size(1)
+			.Query(q => q.MatchAll())
+			.AllIndices()
+			.PointInTime("a-long-id", pit => pit.KeepAlive(new Time(TimeSpan.FromMinutes(1))));
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>(Nest.Indices.All)
+		{
+			Size = 1,
+			Query = new QueryContainer(new MatchAllQuery()),
+			PointInTime = new Nest.PointInTime("a-long-id", "1m")
+		};
+
+		protected override string UrlPath => "/_search";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.Search(f),
+			(c, f) => c.SearchAsync(f),
+			(c, r) => c.Search<Project>(r),
+			(c, r) => c.SearchAsync<Project>(r)
+		);
 	}
 }

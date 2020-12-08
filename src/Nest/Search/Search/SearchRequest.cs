@@ -167,6 +167,9 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "version")]
 		bool? Version { get; set; }
+
+		[DataMember(Name = "pit")]
+		IPointInTime PointInTime { get; set; }
 	}
 
 	[ReadAs(typeof(SearchRequest<>))]
@@ -228,6 +231,8 @@ namespace Nest
 		public bool? TrackTotalHits { get; set; }
 		/// <inheritdoc />
 		public bool? Version { get; set; }
+		/// <inheritdoc />
+		public IPointInTime PointInTime { get; set; }
 
 		protected override HttpMethod HttpMethod =>
 			RequestState.RequestParameters?.ContainsQueryString("source") == true
@@ -237,6 +242,16 @@ namespace Nest
 		Type ITypedSearchRequest.ClrType => null;
 
 		protected sealed override void RequestDefaults(SearchRequestParameters parameters) => TypedKeys = true;
+
+		protected override string ResolveUrl(RouteValues routeValues, IConnectionSettingsValues settings)
+		{
+			if (Self.PointInTime is object && !string.IsNullOrEmpty(Self.PointInTime.Id) && routeValues.ContainsKey("index"))
+			{
+				routeValues.Remove("index");
+			}
+
+			return base.ResolveUrl(routeValues, settings);
+		}
 	}
 
 	[DataContract]
@@ -282,6 +297,7 @@ namespace Nest
 		bool? ISearchRequest.TrackScores { get; set; }
 		bool? ISearchRequest.TrackTotalHits { get; set; }
 		bool? ISearchRequest.Version { get; set; }
+		IPointInTime ISearchRequest.PointInTime { get; set; }
 
 		protected sealed override void RequestDefaults(SearchRequestParameters parameters) => TypedKeys();
 
@@ -439,5 +455,26 @@ namespace Nest
 
 		/// <inheritdoc cref="ISearchRequest.TrackTotalHits" />
 		public SearchDescriptor<TInferDocument> TrackTotalHits(bool? trackTotalHits = true) => Assign(trackTotalHits, (a, v) => a.TrackTotalHits = v);
+
+		/// <inheritdoc cref="ISearchRequest.PointInTime" />
+		public SearchDescriptor<TInferDocument> PointInTime(string pitId)
+		{
+			Self.PointInTime = new PointInTime(pitId);
+			return this;
+		}
+
+		/// <inheritdoc cref="ISearchRequest.PointInTime" />
+		public SearchDescriptor<TInferDocument> PointInTime(string pitId, Func<PointInTimeDescriptor, IPointInTime> pit) =>
+			Assign(pit, (a, v) => a.PointInTime = v?.Invoke(new PointInTimeDescriptor(pitId)));
+
+		protected override string ResolveUrl(RouteValues routeValues, IConnectionSettingsValues settings)
+		{
+			if (Self.PointInTime is object && !string.IsNullOrEmpty(Self.PointInTime.Id) && routeValues.ContainsKey("index"))
+			{
+				routeValues.Remove("index");
+			}
+
+			return base.ResolveUrl(routeValues, settings);
+		}
 	}
 }

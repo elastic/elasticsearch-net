@@ -80,8 +80,9 @@ namespace Nest
 
 		internal abstract ApiUrls ApiUrls { get;  }
 
-		string IRequest.GetUrl(IConnectionSettingsValues settings) => ApiUrls.Resolve(RequestState.RouteValues, settings);
+		string IRequest.GetUrl(IConnectionSettingsValues settings) => ResolveUrl(RequestState.RouteValues, settings);
 
+		protected virtual string ResolveUrl(RouteValues routeValues, IConnectionSettingsValues settings) => ApiUrls.Resolve(routeValues, settings);
 
 		/// <summary>
 		/// Allows a request implementation to set certain request parameter defaults, use sparingly!
