@@ -87,6 +87,38 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IClearApiKeyCacheRequest : IRequest<ClearApiKeyCacheRequestParameters>
+	{
+		[IgnoreDataMember]
+		Ids Ids
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for ClearApiKeyCache <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html</para></summary>
+	public partial class ClearApiKeyCacheRequest : PlainRequestBase<ClearApiKeyCacheRequestParameters>, IClearApiKeyCacheRequest
+	{
+		protected IClearApiKeyCacheRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityClearApiKeyCache;
+		///<summary>/_security/api_key/{ids}/_clear_cache</summary>
+		///<param name = "ids">Optional, accepts null</param>
+		public ClearApiKeyCacheRequest(Ids ids): base(r => r.Optional("ids", ids))
+		{
+		}
+
+		///<summary>/_security/api_key/*/_clear_cache</summary>
+		public ClearApiKeyCacheRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Ids IClearApiKeyCacheRequest.Ids => Self.RouteValues.Get<Ids>("ids");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IClearCachedPrivilegesRequest : IRequest<ClearCachedPrivilegesRequestParameters>
 	{
 		[IgnoreDataMember]
