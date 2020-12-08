@@ -35,4 +35,22 @@ namespace Tests.XPack.Security.ApiKey
 			.FluentAsync(c => c.Security.CreateApiKeyAsync(p => p))
 			.RequestAsync(c => c.Security.CreateApiKeyAsync(new CreateApiKeyRequest()));
 	}
+
+	public class SecurityClearApiKeyCacheUrlTests : UrlTestsBase
+	{
+		[U] public override async Task Urls()
+		{
+			await UrlTester.POST("/_security/api_key/id1%2Cid2/_clear_cache")
+				.Fluent(c => c.Security.ClearApiKeyCache(f => f.Ids("id1,id2")))
+				.Request(c => c.Security.ClearApiKeyCache(new ClearApiKeyCacheRequest("id1,id2")))
+				.FluentAsync(c => c.Security.ClearApiKeyCacheAsync(f => f.Ids("id1,id2")))
+				.RequestAsync(c => c.Security.ClearApiKeyCacheAsync(new ClearApiKeyCacheRequest("id1,id2")));
+
+			await UrlTester.POST("/_security/api_key/*/_clear_cache")
+				.Fluent(c => c.Security.ClearApiKeyCache())
+				.Request(c => c.Security.ClearApiKeyCache(new ClearApiKeyCacheRequest()))
+				.FluentAsync(c => c.Security.ClearApiKeyCacheAsync())
+				.RequestAsync(c => c.Security.ClearApiKeyCacheAsync(new ClearApiKeyCacheRequest()));
+		}
+	}
 }
