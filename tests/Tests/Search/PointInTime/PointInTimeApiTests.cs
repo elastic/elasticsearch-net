@@ -90,7 +90,7 @@ namespace Tests.Search.PointInTime
 			r.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.EqualTo);
 			r.Hits.First().Should().NotBeNull();
 			r.Hits.First().Source.Should().NotBeNull();
-			r.Took.Should().BeGreaterThan(0);
+			r.Took.Should().BeGreaterOrEqualTo(0);
 		});
 
 		[I] public async Task ClosePointInTimeResponse() => await Assert<ClosePointInTimeResponse>(ClosePointInTimeStep, (v, r) =>
