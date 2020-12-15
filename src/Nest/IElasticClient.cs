@@ -26,7 +26,7 @@ namespace Nest
 		IElasticLowLevelClient LowLevel { get; }
 
 		/// <summary>
-		/// Access the configured <see cref="ITransportConfigurationValues.RequestResponseSerializer" />
+		/// Access the configured <see cref="ITransportConfiguration.RequestResponseSerializer" />
 		/// Out of the box <see cref="SourceSerializer" /> and this point to the same instance
 		/// </summary>
 		ITransportSerializer RequestResponseSerializer { get; }

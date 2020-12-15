@@ -28,8 +28,6 @@ namespace Elasticsearch.Net.Specification.GraphApi
 	///<summary>Request options for Explore <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</para></summary>
 	public class GraphExploreRequestParameters : RequestParameters<GraphExploreRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
 		///<summary>Specific routing value</summary>
 		public string Routing
 		{

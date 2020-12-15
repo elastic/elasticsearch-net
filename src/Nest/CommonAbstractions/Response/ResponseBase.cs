@@ -32,7 +32,7 @@ namespace Nest
 		/// </para>
 		/// <para>
 		/// You can also configure the client to always throw an <see cref="TransportException" /> using
-		/// <see cref="ITransportConfigurationValues.ThrowExceptions" /> if the response is not valid
+		/// <see cref="ITransportConfiguration.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
 		[IgnoreDataMember]
@@ -47,7 +47,7 @@ namespace Nest
 		/// </para>
 		/// <para>
 		/// You can also configure the client to always throw an <see cref="TransportException" /> using
-		/// <see cref="ITransportConfigurationValues.ThrowExceptions" /> if the response is not valid
+		/// <see cref="ITransportConfiguration.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
 		[IgnoreDataMember]
@@ -60,7 +60,7 @@ namespace Nest
 		/// <para>Possibly set when <see cref="IsValid" /> is false, depending on the cause of the error</para>
 		/// <para>
 		/// You can also configure the client to always throw an <see cref="TransportException" /> using
-		/// <see cref="ITransportConfigurationValues.ThrowExceptions" /> if the response is not valid
+		/// <see cref="ITransportConfiguration.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
 		[IgnoreDataMember]

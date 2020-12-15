@@ -18,6 +18,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 		public IReadOnlyCollection<QueryParameters> Params { get; set; }
 		public IReadOnlyCollection<Constructor> Constructors { get; set; }
 		public IReadOnlyCollection<Constructor> GenericConstructors { get; set; }
+		public string MethodName { get; set; }
 		public bool HasBody { get; set; }
 
 		private bool GenerateOnlyGenericInterface => CodeConfiguration.GenericOnlyInterfaces.Contains(CsharpNames.RequestInterfaceName);

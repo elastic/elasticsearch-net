@@ -28,8 +28,6 @@ namespace Elasticsearch.Net.Specification.DanglingIndicesApi
 	///<summary>Request options for DeleteDanglingIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html</para></summary>
 	public class DeleteDanglingIndexRequestParameters : RequestParameters<DeleteDanglingIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		public override bool SupportsBody => false;
 		///<summary>Must be set to true in order to delete the dangling index</summary>
 		public bool? AcceptDataLoss
 		{
@@ -55,8 +53,6 @@ namespace Elasticsearch.Net.Specification.DanglingIndicesApi
 	///<summary>Request options for ImportDanglingIndex <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html</para></summary>
 	public class ImportDanglingIndexRequestParameters : RequestParameters<ImportDanglingIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 		///<summary>Must be set to true in order to import the dangling index</summary>
 		public bool? AcceptDataLoss
 		{
@@ -82,7 +78,5 @@ namespace Elasticsearch.Net.Specification.DanglingIndicesApi
 	///<summary>Request options for List <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html</para></summary>
 	public class ListDanglingIndicesRequestParameters : RequestParameters<ListDanglingIndicesRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 	}
 }

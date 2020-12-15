@@ -84,7 +84,7 @@ let validateRevisionParams endpoint passedRevision namedSuite =
     
     let node = client.Settings.ConnectionPool.Nodes.First()
     let auth =     
-        match client.Settings.AuthenticationHeader with 
+        match client.Settings.Authentication with 
         | (:? BasicAuthentication as s) -> sprintf "basic auth: %s" s.Header
         | (:? ApiKey as s) -> sprintf "api key: %s" s.Header
         | _ -> ""

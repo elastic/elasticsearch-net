@@ -19,7 +19,7 @@ namespace Nest
 
 		public string Value { get; }
 
-		public string GetString(ITransportConfigurationValues settings) => Value;
+		public string GetString(ITransportConfiguration settings) => Value;
 
 		/// <summary>
 		/// Disable metadata changes, such as closing the index.

@@ -17,7 +17,7 @@ namespace Nest
 
 	public partial class FieldCapabilitiesRequest
 	{
-		protected override HttpMethod HttpMethod => IndexFilter != null? HttpMethod.POST : HttpMethod.GET;
+		protected override HttpMethod? DynamicHttpMethod => IndexFilter != null? HttpMethod.POST : HttpMethod.GET;
 
 		public QueryContainer IndexFilter { get; set; }
 	}
@@ -26,7 +26,7 @@ namespace Nest
 	{
 		QueryContainer IFieldCapabilitiesRequest.IndexFilter { get; set; }
 
-		protected override HttpMethod HttpMethod => Self.IndexFilter != null? HttpMethod.POST : HttpMethod.GET;
+		protected override HttpMethod? DynamicHttpMethod => Self.IndexFilter != null? HttpMethod.POST : HttpMethod.GET;
 
 		public FieldCapabilitiesDescriptor IndexFilter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> query) where T : class =>
 			Assign(query, (a, v) => a.IndexFilter = v?.Invoke(new QueryContainerDescriptor<T>()));

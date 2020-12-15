@@ -16,9 +16,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
-using Nest.Utf8Json;
 
+using Elastic.Transport;
 using Elasticsearch.Net;
+using Nest.Utf8Json;
 @if (model.Key != CsharpNames.RootNamespace)
 {
 	<text>using Elasticsearch.Net@(ns);

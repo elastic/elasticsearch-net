@@ -67,6 +67,7 @@ namespace ApiGenerator.Domain.Specification
 			Constructors = Constructor.RequestConstructors(CsharpNames, Url, inheritsFromPlainRequestBase: true).ToList(),
 			GenericConstructors = Constructor.RequestConstructors(CsharpNames, Url, inheritsFromPlainRequestBase: false).ToList(),
 			HasBody = Body != null,
+			MethodName = PreferredHttpMethod
 		};
 
 		public DescriptorPartialImplementation DescriptorPartialImplementation => new DescriptorPartialImplementation
@@ -78,6 +79,7 @@ namespace ApiGenerator.Domain.Specification
 			Parts = Url.Parts,
 			Params = Url.Params.Values.Where(p => !p.Skip).ToList(),
 			HasBody = Body != null,
+			MethodName = PreferredHttpMethod
 		};
 
 		public RequestParameterImplementation RequestParameterImplementation => new RequestParameterImplementation

@@ -37,7 +37,7 @@ namespace Nest
 				_ids.OrderBy(id => id).SequenceEqual(other._ids.OrderBy(id => id));
 		}
 
-		string IUrlParameter.GetString(ITransportConfigurationValues settings) =>
+		string IUrlParameter.GetString(ITransportConfiguration settings) =>
 			string.Join(",", _ids ?? Enumerable.Empty<string>());
 
 		public static implicit operator Ids(string value) =>

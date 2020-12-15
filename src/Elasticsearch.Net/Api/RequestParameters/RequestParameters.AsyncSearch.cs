@@ -28,15 +28,11 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 	///<summary>Request options for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
 	public class AsyncSearchDeleteRequestParameters : RequestParameters<AsyncSearchDeleteRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
 	public class AsyncSearchGetRequestParameters : RequestParameters<AsyncSearchGetRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>Specify the time interval in which the results (partial or final) for this search will be available</summary>
 		public TimeSpan KeepAlive
 		{
@@ -62,15 +58,11 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 	///<summary>Request options for Status <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
 	public class StatusRequestParameters : RequestParameters<StatusRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Submit <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
 	public class AsyncSearchSubmitRequestParameters : RequestParameters<AsyncSearchSubmitRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)

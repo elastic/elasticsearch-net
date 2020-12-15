@@ -16,7 +16,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// The default user agent for Elasticsearch.Net
 		/// </summary>
-		public static readonly UserAgent DefaultUserAgent = Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(ITransportConfigurationValues));
+		public static readonly UserAgent DefaultUserAgent = Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(ITransportConfiguration));
 
 		public ConnectionConfiguration(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }

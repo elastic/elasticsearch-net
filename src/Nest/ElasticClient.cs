@@ -124,7 +124,7 @@ namespace Nest
 			if (p.ContentType != null) ForceContentType(p, p.ContentType);
 
 			var url = p.GetUrl(ConnectionSettings);
-			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !parameters.SupportsBody) ? null : PostData.Serializable(p);
+			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !p.SupportsBody) ? null : PostData.Serializable(p);
 
 			return LowLevel.DoRequest<TResponse>(p.HttpMethod, url, b, parameters);
 		}
@@ -142,7 +142,7 @@ namespace Nest
 			if (p.ContentType != null) ForceContentType(p, p.ContentType);
 
 			var url = p.GetUrl(ConnectionSettings);
-			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !parameters.SupportsBody) ? null : PostData.Serializable<TRequest>(p);
+			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !p.SupportsBody) ? null : PostData.Serializable<TRequest>(p);
 
 			return LowLevel.DoRequestAsync<TResponse>(p.HttpMethod, url, ct, b, parameters);
 		}

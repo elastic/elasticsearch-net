@@ -27,7 +27,7 @@ namespace Nest
 	// ReSharper disable once UnusedTypeParameter
 	public partial class ExplainRequest<TDocument> where TDocument : class
 	{
-		protected override HttpMethod HttpMethod =>
+		protected override HttpMethod? DynamicHttpMethod =>
 			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q") == true
 				? HttpMethod.GET
 				: HttpMethod.POST;
@@ -36,7 +36,7 @@ namespace Nest
 
 	public partial class ExplainDescriptor<TDocument> where TDocument : class
 	{
-		protected override HttpMethod HttpMethod =>
+		protected override HttpMethod? DynamicHttpMethod =>
 			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q") == true
 				? HttpMethod.GET
 				: HttpMethod.POST;

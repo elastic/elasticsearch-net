@@ -6,7 +6,7 @@ using Elastic.Transport;
 
 namespace Elasticsearch.Net
 {
-	public interface IConnectionConfigurationValues : ITransportConfigurationValues
+	public interface IConnectionConfigurationValues : ITransportConfiguration
 	{
 		/// <summary>
 		/// Forces all requests to have ?error_trace=true querystring parameter appended,

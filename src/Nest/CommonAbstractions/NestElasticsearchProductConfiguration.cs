@@ -14,7 +14,7 @@ namespace Nest
 
 		/// <summary>
 		/// NEST handles 404 in its <see cref="ResponseBase.IsValid"/>, we do not want the low level client throwing exceptions
-		/// when <see cref="ITransportConfigurationValues.ThrowExceptions"/> is enabled for 404's. The client is in charge of composing paths
+		/// when <see cref="ITransportConfiguration.ThrowExceptions"/> is enabled for 404's. The client is in charge of composing paths
 		/// so a 404 never signals a wrong url but a missing entity.
 		/// </summary>
 		public override bool HttpStatusCodeClassifier(HttpMethod method, int statusCode) =>

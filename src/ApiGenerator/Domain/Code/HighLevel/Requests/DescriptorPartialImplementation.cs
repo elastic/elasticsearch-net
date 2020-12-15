@@ -17,7 +17,8 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 		public IReadOnlyCollection<UrlPath> Paths { get; set; }
 		public IReadOnlyCollection<QueryParameters> Params { get; set; }
 		public bool HasBody { get; set; }
-		
+		public string MethodName { get; set; }
+
 		public IEnumerable<FluentRouteSetter> GetFluentRouteSetters()
 		{
 			var setters = new List<FluentRouteSetter>();

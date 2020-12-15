@@ -34,7 +34,7 @@ namespace Nest
 
 		public override string ToString() => DebugDisplay;
 
-		string IUrlParameter.GetString(ITransportConfigurationValues settings) => Match(
+		string IUrlParameter.GetString(ITransportConfiguration settings) => Match(
 			all => "_all",
 			many =>
 			{

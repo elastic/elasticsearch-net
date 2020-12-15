@@ -35,7 +35,7 @@ namespace Tests.Core.Extensions
 				var settings = modifySettings(cluster.CreateConnectionSettings());
 
 				var current = (IConnectionConfigurationValues)settings;
-				var notAlreadyAuthenticated = current.AuthenticationHeader == null
+				var notAlreadyAuthenticated = current.Authentication == null
 					&& current.ClientCertificates == null;
 
 				var noCertValidation = current.ServerCertificateValidationCallback == null;

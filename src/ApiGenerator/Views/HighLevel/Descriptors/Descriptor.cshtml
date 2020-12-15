@@ -16,6 +16,8 @@
 	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, {2}>, {2}", type,names.ParametersName, concreteInterface)))
 	{ 
 		internal override ApiUrls ApiUrls => @apiLookup;
+		protected override HttpMethod HttpMethod => HttpMethod.@d.MethodName;
+		protected override bool SupportsBody => @(d.HasBody ? "true" : "false");
 @foreach (Constructor c in d.Constructors)
 {
 <text>		@(Raw(CodeGenerator.Constructor(c)))

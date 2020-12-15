@@ -13,7 +13,7 @@ namespace Nest
 
 		public IndexUuid(string value) => Value = value ?? throw new ArgumentNullException(nameof(value));
 
-		public string GetString(ITransportConfigurationValues settings) => Value;
+		public string GetString(ITransportConfiguration settings) => Value;
 
 		public bool Equals(IndexUuid other)
 		{

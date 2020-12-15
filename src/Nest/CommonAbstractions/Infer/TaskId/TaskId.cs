@@ -44,7 +44,7 @@ namespace Nest
 
 		public bool Equals(TaskId other) => EqualsString(other?.FullyQualifiedId);
 
-		public string GetString(ITransportConfigurationValues settings) => FullyQualifiedId;
+		public string GetString(ITransportConfiguration settings) => FullyQualifiedId;
 
 		public override string ToString() => FullyQualifiedId;
 

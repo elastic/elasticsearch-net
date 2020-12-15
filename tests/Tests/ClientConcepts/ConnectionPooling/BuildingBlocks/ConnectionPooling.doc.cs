@@ -162,7 +162,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				client = new ElasticClient(new ConnectionSettings(pool));
 				client.ConnectionSettings.ConnectionPool.Should().BeOfType<CloudConnectionPool>();
 				client.ConnectionSettings.EnableHttpCompression.Should().BeTrue();
-				var c = client.ConnectionSettings.AuthenticationHeader.Should().NotBeNull().And.BeOfType<BasicAuthentication>();
+				var c = client.ConnectionSettings.Authentication.Should().NotBeNull().And.BeOfType<BasicAuthentication>();
 				c.Subject.Header.Should().NotBeNullOrEmpty();
 			}
 

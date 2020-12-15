@@ -194,7 +194,7 @@ namespace Nest
 			return Interval.HasValue ? factor + Interval.Value.GetStringValue() : factor;
 		}
 
-		string IUrlParameter.GetString(ITransportConfigurationValues settings)
+		string IUrlParameter.GetString(ITransportConfiguration settings)
 		{
 			if (this == MinusOne) return "-1";
 			if (this == Zero) return "0";

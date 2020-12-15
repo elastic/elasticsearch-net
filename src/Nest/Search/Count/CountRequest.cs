@@ -23,7 +23,7 @@ namespace Nest
 	{
 		public QueryContainer Query { get; set; }
 
-		protected override HttpMethod HttpMethod =>
+		protected override HttpMethod? DynamicHttpMethod =>
 			Self.RequestParameters.ContainsQueryString("source") || Self.RequestParameters.ContainsQueryString("q") || Self.Query == null
 			|| Self.Query.IsConditionless()
 				? HttpMethod.GET
@@ -35,7 +35,7 @@ namespace Nest
 
 	public partial class CountDescriptor<TDocument> where TDocument : class
 	{
-		protected override HttpMethod HttpMethod =>
+		protected override HttpMethod? DynamicHttpMethod =>
 			Self.RequestParameters.ContainsQueryString("source") || Self.RequestParameters.ContainsQueryString("q") || Self.Query == null
 			|| Self.Query.IsConditionless()
 				? HttpMethod.GET
