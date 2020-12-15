@@ -309,6 +309,8 @@ namespace DocGenerator.AsciiDoc
 					}
 				}
 			}
+			if (!File.Exists(xmlDocsFile))
+				throw new Exception($"Can not find xml docs: '{xmlDocsFile}'");
 
 			var assemblyMembers = DocReader.Read(assembly, xmlDocsFile);
 			var type = assembly.GetType(assemblyNamespace + "." + typeName);
