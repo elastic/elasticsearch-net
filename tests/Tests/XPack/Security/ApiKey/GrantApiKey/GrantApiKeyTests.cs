@@ -6,7 +6,6 @@ using System;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -24,7 +23,7 @@ namespace Tests.XPack.Security.ApiKey.GrantApiKey
 		private const string GrantApiKeyWithExpirationStep = nameof(GrantApiKeyWithExpirationStep);
 		private const string GenerateAccessTokenStep = nameof(GenerateAccessTokenStep);
 		private const string GrantApiKeyUsingAccessTokenStep = nameof(GrantApiKeyUsingAccessTokenStep);
-		
+
 		public GrantApiKeyTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
 			{
@@ -81,7 +80,7 @@ namespace Tests.XPack.Security.ApiKey.GrantApiKey
 							},
 							RequestConfiguration = new RequestConfiguration
 							{
-								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}-admin", "password")
+								AuthenticationHeader = new BasicAuthentication($"user-{v}-admin", "password")
 							}
 						},
 						(v, d) => d
@@ -89,7 +88,7 @@ namespace Tests.XPack.Security.ApiKey.GrantApiKey
 							.Password("password")
 							.ApiKey(k => k.Name($"api-key-{v}"))
 							.GrantType(GrantType.Password)
-							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}-admin", "password")),
+							.RequestConfiguration(r => r.Authentication(new BasicAuthentication($"user-{v}-admin", "password"))),
 						(v, c, f) => c.Security.GrantApiKey(f),
 						(v, c, f) => c.Security.GrantApiKeyAsync(f),
 						(v, c, r) => c.Security.GrantApiKey(r),
@@ -111,7 +110,7 @@ namespace Tests.XPack.Security.ApiKey.GrantApiKey
 							},
 							RequestConfiguration = new RequestConfiguration
 							{
-								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}-admin", "password")
+								AuthenticationHeader = new BasicAuthentication($"user-{v}-admin", "password")
 							}
 						},
 						(v, d) => d
@@ -121,7 +120,7 @@ namespace Tests.XPack.Security.ApiKey.GrantApiKey
 								.Name($"api-key-{v}")
 								.Expiration(new Time(TimeSpan.FromMinutes(1))))
 							.GrantType(GrantType.Password)
-							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}-admin", "password")),
+							.RequestConfiguration(r => r.Authentication(new BasicAuthentication($"user-{v}-admin", "password"))),
 						(v, c, f) => c.Security.GrantApiKey(f),
 						(v, c, f) => c.Security.GrantApiKeyAsync(f),
 						(v, c, r) => c.Security.GrantApiKey(r),
@@ -152,14 +151,14 @@ namespace Tests.XPack.Security.ApiKey.GrantApiKey
 							},
 							RequestConfiguration = new RequestConfiguration
 							{
-								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}-admin", "password")
+								AuthenticationHeader = new BasicAuthentication($"user-{v}-admin", "password")
 							}
 						},
 						(v, d) => d
 							.GrantType(GrantType.AccessToken)
 							.AccessToken(u.Usage.CallUniqueValues.ExtendedValue<string>("accessToken") ?? string.Empty)
 							.ApiKey(k => k.Name($"api-key-{v}"))
-							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}-admin", "password")),
+							.RequestConfiguration(r => r.Authentication(new BasicAuthentication($"user-{v}-admin", "password"))),
 						(_, c, f) => c.Security.GrantApiKey(f),
 						(_, c, f) => c.Security.GrantApiKeyAsync(f),
 						(_, c, r) => c.Security.GrantApiKey(r),

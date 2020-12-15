@@ -199,12 +199,12 @@ namespace Tests.XPack.Security.ApiKey
 							Name = v,
 							RequestConfiguration = new RequestConfiguration
 							{
-								BasicAuthenticationCredentials = new BasicAuthenticationCredentials($"user-{v}", "password")
+								AuthenticationHeader = new BasicAuthentication($"user-{v}", "password")
 							}
 						},
 						(v, d) => d
 							.Name(v)
-							.RequestConfiguration(r => r.BasicAuthentication($"user-{v}", "password"))
+							.RequestConfiguration(r => r.Authentication(new BasicAuthentication($"user-{v}", "password")))
 						,
 						(v, c, f) => c.Security.GetApiKey(f),
 						(v, c, f) => c.Security.GetApiKeyAsync(f),
