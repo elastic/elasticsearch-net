@@ -17,7 +17,7 @@ using static Nest.Infer;
 namespace Tests.XPack.Transform
 {
 	[SkipVersion("<7.9.0", "Geotile grid group by introduced in 7.9.0")]
-	public class TransformApiTests : CoordinatedIntegrationTestBase<WritableCluster>
+	public class TransformApiTests : CoordinatedIntegrationTestBase<IntrusiveOperationCluster>
 	{
 		private const string PutTransformStep = nameof(PutTransformStep);
 		private const string GetTransformStep = nameof(GetTransformStep);
@@ -28,7 +28,7 @@ namespace Tests.XPack.Transform
 		private const string StopTransformStep = nameof(StopTransformStep);
 		private const string DeleteTransformStep = nameof(DeleteTransformStep);
 
-		public TransformApiTests(WritableCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
+		public TransformApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
 			{
 				PutTransformStep, u =>
