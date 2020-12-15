@@ -28,21 +28,49 @@ the low level and high level client:
 
 `Authentication`::
 
+An implementation of `IAuthenticationHeader` describing what http header to use to authenticate with the product.
++
+ `BasicAuthentication` for basic authentication
++
+ `ApiKey` for simple secret token
++
+ `Base64ApiKey` for Elastic Cloud style encoded api keys
+
 `ClientCertificate`::
+
+Use the following certificates to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
 
 `ClientCertificates`::
 
+Use the following certificates to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
+
 `ConnectionLimit`::
+
+Limits the number of concurrent connections that can be opened to an endpoint. Defaults to 80 (see `DefaultConnectionLimit` ).
++
+For Desktop CLR, this setting applies to the DefaultConnectionLimit property on the  ServicePointManager object when creating ServicePoint objects, affecting the default `IConnection` implementation.
++
+For Core CLR, this setting applies to the MaxConnectionsPerServer property on the HttpClientHandler instances used by the HttpClient inside the default `IConnection` implementation
 
 `DeadTimeout`::
 
+The time to put dead nodes out of rotation (this will be multiplied by the number of times they've been dead)
+
 `DisableAutomaticProxyDetection`::
+
+Disabled proxy detection on the webrequest, in some cases this may speed up the first connection your appdomain makes, in other cases it will actually increase the time for the first connection. No silver bullet! use with care!
 
 `DisableDirectStreaming`::
 
+When set to true will disable (de)serializing directly to the request and response stream and return a byte[] copy of the raw request and response. Defaults to false
+
 `DisablePing`::
 
+This signals that we do not want to send initial pings to unknown/previously dead nodes and just send the call straightaway
+
 `DnsRefreshTimeout`::
+
+DnsRefreshTimeout for the connections. Defaults to 5 minutes.
 
 `EnableDebugMode`::
 
@@ -50,7 +78,11 @@ Turns on settings that aid in debugging like DisableDirectStreaming() and Pretty
 
 `EnableHttpCompression`::
 
+Enable gzip compressed requests and responses
+
 `EnableHttpPipelining`::
+
+Whether HTTP pipelining is enabled. The default is `true`
 
 `EnableTcpKeepAlive`::
 
@@ -60,29 +92,53 @@ For Desktop CLR, sets ServicePointManager.SetTcpKeepAlive
 
 `EnableTcpStats`::
 
->
+Enable statistics about TCP connections to be collected when making a request >
 
 `GlobalHeaders`::
 
+Try to send these headers for every request
+
 `GlobalQueryStringParameters`::
+
+Append these query string parameters automatically to every request
 
 `MaxDeadTimeout`::
 
+The maximum amount of time a node is allowed to marked dead
+
 `MaximumRetries`::
+
+When a retryable exception occurs or status code is returned this controls the maximum amount of times we should retry the call to Elasticsearch
 
 `MaxRetryTimeout`::
 
+Limits the total runtime including retries separately from `RequestTimeout` When not specified defaults to `RequestTimeout` which itself defaults to 60 seconds
+
 `MemoryStreamFactory`::
+
+Provides a memory stream factory
 
 `NodePredicate`::
 
+Register a predicate to select which nodes that you want to execute API calls on. Note that sniffing requests omit this predicate and always execute on all nodes. When using an `IConnectionPool` implementation that supports reseeding of nodes, this will default to omitting master only             node from regular API calls.             When using static or single node connection pooling it is assumed the list of node you instantiate the client with should be taken             verbatim.
+
 `OnRequestCompleted`::
+
+Allows you to register a callback every time a an API call is returned
 
 `OnRequestDataCreated`::
 
+An action to run when the `RequestData` for a request has been             created.
+
 `PingTimeout`::
 
+The timeout in milliseconds to use for ping requests, which are issued to determine whether a node is alive
+
 `PrettyJson`::
+
+Provide hints to serializer and products to produce pretty, non minified json.
++
+Note: this is not a guarantee you will always get prettified json
 
 `Proxy`::
 
@@ -90,21 +146,41 @@ If your connection has to go through proxy, use this method to specify the proxy
 
 `RequestTimeout`::
 
+The timeout in milliseconds for each request to Elasticsearch
+
 `ServerCertificateValidationCallback`::
+
+Register a ServerCertificateValidationCallback per request
 
 `SkipDeserializationForStatusCodes`::
 
+Configure the client to skip deserialization of certain status codes e.g: you run Elasticsearch behind a proxy that returns an unexpected json format
+
 `SniffLifeSpan`::
+
+Force a new sniff for the cluster when the cluster state information is older than the specified timespan
 
 `SniffOnConnectionFault`::
 
+Force a new sniff for the cluster state every time a connection dies
+
 `SniffOnStartup`::
+
+Sniff the cluster state immediately on startup
 
 `ThrowExceptions`::
 
+Instead of following a c/go like error checking on response.IsValid do throw an exception (except when `SuccessOrKnownError` is false)             on the client when a call resulted in an exception on either the client or the Elasticsearch server.
++
+Reasons for such exceptions could be search parser errors, index missing exceptions, etc...
+
 `TransferEncodingChunked`::
 
+Whether the request should be sent with chunked Transfer-Encoding.
+
 `UserAgent`::
+
+The user agent string to send with requests. Useful for debugging purposes to understand client and framework versions that initiate requests to Elasticsearch
 
 :xml-docs: Elastic.Transport:TransportConfigurationBase`1
 
