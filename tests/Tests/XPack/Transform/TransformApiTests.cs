@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
@@ -136,8 +137,12 @@ namespace Tests.XPack.Transform
 			{
 				StartTransformStep, u =>
 					u.Calls<StartTransformDescriptor, StartTransformRequest, IStartTransformRequest, StartTransformResponse>(
-						v => new StartTransformRequest(v) { Timeout = "2m" },
-						(v, d) => d.Timeout("2m"),
+						v => new StartTransformRequest(v)
+						{
+							Timeout = "2m",
+							RequestConfiguration = new RequestConfiguration() { RequestTimeout = TimeSpan.FromMinutes(2)}
+						},
+						(v, d) => d.Timeout("2m").RequestConfiguration(r=>r.RequestTimeout(TimeSpan.FromMinutes(2))),
 						(v, c, f) => c.Transform.Start(v, f),
 						(v, c, f) => c.Transform.StartAsync(v, f),
 						(v, c, r) => c.Transform.Start(r),
@@ -255,8 +260,12 @@ namespace Tests.XPack.Transform
 			{
 				StopTransformStep, u =>
 					u.Calls<StopTransformDescriptor, StopTransformRequest, IStopTransformRequest, StopTransformResponse>(
-						v => new StopTransformRequest(v) { Force = true, WaitForCompletion = true, Timeout = "2m"},
-						(v, d) => d.Force().WaitForCompletion().Timeout("2m"),
+						v => new StopTransformRequest(v)
+						{
+							Force = true, WaitForCompletion = true, Timeout = "2m",
+							RequestConfiguration = new RequestConfiguration() { RequestTimeout = TimeSpan.FromMinutes(2)}
+						},
+						(v, d) => d.Force().WaitForCompletion().Timeout("2m").RequestConfiguration(r=>r.RequestTimeout(TimeSpan.FromMinutes(2))),
 						(v, c, f) => c.Transform.Stop(v, f),
 						(v, c, f) => c.Transform.StopAsync(v, f),
 						(v, c, r) => c.Transform.Stop(r),
