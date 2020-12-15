@@ -234,13 +234,15 @@ namespace DocGenerator.AsciiDoc
 
 			var configuration = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)).Parent?.Name;
 
-			string XmlFile(string project)
+			string XmlFile(string xmlName)
 			{
+				//Elastic.Transport xml lives in Elasticsearch.Net
+				var project = xmlName == "Elastic.Transport" ? "Elasticsearch.Net" : xmlName;
 				if (configuration == null)
-					return Path.Combine(Program.InputDirPath, project, "netstandard2.0", $"{project}.xml");
+					return Path.Combine(Program.InputDirPath, project, "netstandard2.0", $"{xmlName}.xml");
 
 				return Path.Combine(Program.InputDirPath, project, "bin", configuration, "netstandard2.0",
-					$"{project}.xml");
+					$"{xmlName}.xml");
 			}
 
 			var value = attributeEntry.Value;
@@ -280,7 +282,7 @@ namespace DocGenerator.AsciiDoc
 			}
 
 			// build xml documentation file on the fly if it doesn't exist
-			if (!File.Exists(xmlDocsFile))
+			if (!File.Exists(xmlDocsFile) && _projects.ContainsKey(assemblyName))
 			{
 				Console.WriteLine($"Can not find {xmlDocsFile} attempting to build");
 				var project = _projects[assemblyName];
