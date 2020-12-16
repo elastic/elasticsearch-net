@@ -7,7 +7,7 @@
     
     <!-- CAC001: We dont need to set ConfigureAwait(false) here -->
     <NoWarn>NU1701,NU1605,CAC001</NoWarn>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="$(SolutionRoot)\src\Nest\Nest.csproj" />
