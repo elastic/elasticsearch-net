@@ -23,6 +23,10 @@ namespace Nest
 		private EventHandler<RestoreNextEventArgs> _nextEventHandlers;
 		private Timer _timer;
 
+		// when created through the factory method, this type is currently thread-safe and we can safely reuse a static
+		// instance across all requests to avoid allocating this every time.
+		private static readonly RequestMetaData _requestMetaData = RequestMetaDataFactory.RestoreHelperRequestMetaData();
+
 		public RestoreObservable(IElasticClient elasticClient, IRestoreRequest restoreRequest)
 		{
 			elasticClient.ThrowIfNull(nameof(elasticClient));
@@ -30,7 +34,7 @@ namespace Nest
 
 			_elasticClient = elasticClient;
 			_restoreRequest = restoreRequest;
-
+			_restoreRequest.RequestParameters.SetRequestMetaData(_requestMetaData);
 			_restoreStatusHumbleObject = new RestoreStatusHumbleObject(elasticClient, restoreRequest);
 			_restoreStatusHumbleObject.Completed += StopTimer;
 			_restoreStatusHumbleObject.Error += StopTimer;
@@ -155,6 +159,10 @@ namespace Nest
 		private readonly string _renameReplacement;
 		private readonly IRestoreRequest _restoreRequest;
 
+		// when created through the factory method, this type is currently thread-safe and we can safely reuse a static
+		// instance across all requests to avoid allocating this every time.
+		private static readonly RequestMetaData _requestMetaData = RequestMetaDataFactory.RestoreHelperRequestMetaData();
+
 		public RestoreStatusHumbleObject(IElasticClient elasticClient, IRestoreRequest restoreRequest)
 		{
 			elasticClient.ThrowIfNull(nameof(elasticClient));
@@ -162,7 +170,6 @@ namespace Nest
 
 			_elasticClient = elasticClient;
 			_restoreRequest = restoreRequest;
-
 			_renamePattern = string.IsNullOrEmpty(_restoreRequest.RenamePattern) ? string.Empty : _restoreRequest.RenamePattern;
 			_renameReplacement = string.IsNullOrEmpty(_restoreRequest.RenameReplacement) ? string.Empty : _restoreRequest.RenameReplacement;
 		}
@@ -183,10 +190,12 @@ namespace Nest
 							))
 						.ToArray();
 
-				var recoveryStatus = _elasticClient.Indices.RecoveryStatus(new RecoveryStatusRequest(indices)
+				var recoveryStatusRequest = new RecoveryStatusRequest(indices)
 				{
 					Detailed = true,
-				});
+				};
+				recoveryStatusRequest.RequestConfiguration.SetRequestMetaData(_requestMetaData);
+				var recoveryStatus = _elasticClient.Indices.RecoveryStatus(recoveryStatusRequest);
 
 				if (!recoveryStatus.IsValid)
 					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed getting recovery status.", recoveryStatus.ApiCall);

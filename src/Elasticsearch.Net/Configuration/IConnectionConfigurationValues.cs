@@ -77,6 +77,8 @@ namespace Elasticsearch.Net
 		/// </summary>
 		bool DisableDirectStreaming { get; }
 
+		bool DisableMetaHeader { get; }
+
 		/// <summary>
 		/// This signals that we do not want to send initial pings to unknown/previously dead nodes
 		/// and just send the call straightaway
@@ -273,5 +275,10 @@ namespace Elasticsearch.Net
 		/// Enable statistics about thread pools to be collected when making a request
 		/// </summary>
 		bool EnableThreadPoolStats { get; }
+
+		/// <summary>
+		/// The configured collection of <see cref="IHeaderProvider"/> instances which will be run to add additional request headers.
+		/// </summary>
+		IReadOnlyCollection<IHeaderProvider> CustomHeaderProviders { get; }
 	}
 }

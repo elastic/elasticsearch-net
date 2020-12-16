@@ -22,6 +22,10 @@ namespace Nest
 		private EventHandler<SnapshotNextEventArgs> _nextEventHandler;
 		private Timer _timer;
 
+		// when created through the factory method, this type is currently thread-safe and we can safely reuse a static
+		// instance across all requests to avoid allocating this every time.
+		private static readonly RequestMetaData _requestMetaData = RequestMetaDataFactory.SnapshotHelperRequestMetaData();
+
 		public SnapshotObservable(IElasticClient elasticClient, ISnapshotRequest snapshotRequest)
 		{
 			elasticClient.ThrowIfNull(nameof(elasticClient));
@@ -29,6 +33,7 @@ namespace Nest
 
 			_elasticClient = elasticClient;
 			_snapshotRequest = snapshotRequest;
+			_snapshotRequest.RequestParameters.SetRequestMetaData(_requestMetaData);
 			_snapshotStatusHumbleObject = new SnapshotStatusHumbleObject(elasticClient, snapshotRequest);
 			_snapshotStatusHumbleObject.Completed += StopTimer;
 			_snapshotStatusHumbleObject.Error += StopTimer;
@@ -152,6 +157,10 @@ namespace Nest
 		private readonly IElasticClient _elasticClient;
 		private readonly ISnapshotRequest _snapshotRequest;
 
+		// when created through the factory method, this type is currently thread-safe and we can safely reuse a static
+		// instance across all requests to avoid allocating this every time.
+		private static readonly RequestMetaData _requestMetaData = RequestMetaDataFactory.SnapshotHelperRequestMetaData();
+
 		public SnapshotStatusHumbleObject(IElasticClient elasticClient, ISnapshotRequest snapshotRequest)
 		{
 			elasticClient.ThrowIfNull(nameof(elasticClient));
@@ -169,9 +178,13 @@ namespace Nest
 		{
 			try
 			{
+				var snapshotRequest = new SnapshotStatusRequest(_snapshotRequest.RepositoryName,
+						_snapshotRequest.Snapshot);
+
+				snapshotRequest.RequestConfiguration.SetRequestMetaData(_requestMetaData);
+
 				var snapshotStatusResponse =
-					_elasticClient.Snapshot.Status(new SnapshotStatusRequest(_snapshotRequest.RepositoryName,
-						_snapshotRequest.Snapshot));
+					_elasticClient.Snapshot.Status(snapshotRequest);
 
 				if (!snapshotStatusResponse.IsValid)
 					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed to get snapshot status.",

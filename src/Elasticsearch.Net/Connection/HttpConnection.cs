@@ -37,7 +37,6 @@ namespace Elasticsearch.Net
 		public bool IsBypassed(Uri host) => host.IsLoopback;
 	}
 
-
 	/// <summary> The default IConnection implementation. Uses <see cref="HttpClient" />.</summary>
 	public class HttpConnection : IConnection
 	{
@@ -139,6 +138,7 @@ namespace Elasticsearch.Net
 			IDisposable receive = DiagnosticSources.SingletonDisposable;
 			ReadOnlyDictionary<TcpState, int> tcpStats = null;
 			ReadOnlyDictionary<string, ThreadPoolStatistics> threadPoolStats = null;
+			requestData.IsAsync = true;
 
 			try
 			{
@@ -248,6 +248,8 @@ namespace Elasticsearch.Net
 
 		protected virtual HttpRequestMessage CreateHttpRequestMessage(RequestData requestData)
 		{
+			requestData.HttpClientIdentifier = ConnectionInfo.UsingCurlHandler ? "c" : "s";
+
 			var request = CreateRequestMessage(requestData);
 			SetAuthenticationIfNeeded(request, requestData);
 			return request;
@@ -332,6 +334,14 @@ namespace Elasticsearch.Net
 
 			if (!requestData.RunAs.IsNullOrEmpty())
 				requestMessage.Headers.Add(RequestData.RunAsSecurityHeader, requestData.RunAs);
+
+			foreach (var customHeaderProvider in requestData.CustomHeaderProviders)
+			{
+				var value = customHeaderProvider.ProduceHeaderValue(requestData);
+
+				if (!string.IsNullOrEmpty(value))
+						requestMessage.Headers.TryAddWithoutValidation(customHeaderProvider.HeaderName, value);
+			}
 
 			return requestMessage;
 		}

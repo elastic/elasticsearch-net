@@ -83,6 +83,7 @@ namespace Elasticsearch.Net
 			ProxyUsername = global.ProxyUsername;
 			ProxyPassword = global.ProxyPassword;
 			DisableAutomaticProxyDetection = global.DisableAutomaticProxyDetection;
+			DisableMetaHeader = global.DisableMetaHeader;
 			BasicAuthorizationCredentials = local?.BasicAuthenticationCredentials ?? global.BasicAuthenticationCredentials;
 			ApiKeyAuthenticationCredentials = local?.ApiKeyAuthenticationCredentials ?? global.ApiKeyAuthenticationCredentials;
 			AllowedStatusCodes = local?.AllowedStatusCodes ?? EmptyReadOnly<int>.Collection;
@@ -91,6 +92,8 @@ namespace Elasticsearch.Net
 			TransferEncodingChunked = local?.TransferEncodingChunked ?? global.TransferEncodingChunked;
 			TcpStats = local?.EnableTcpStats ?? global.EnableTcpStats;
 			ThreadPoolStats = local?.EnableThreadPoolStats ?? global.EnableThreadPoolStats;
+			CustomHeaderProviders = global.CustomHeaderProviders;
+			RequestMetaData = local?.RequestMetaData?.Items ?? EmptyReadOnly<string,string>.Dictionary;
 		}
 
 		private readonly string _path;
@@ -106,6 +109,7 @@ namespace Elasticsearch.Net
 		public IConnectionConfigurationValues ConnectionSettings { get; }
 		public CustomResponseBuilderBase CustomResponseBuilder { get; }
 		public bool DisableAutomaticProxyDetection { get; }
+		public bool DisableMetaHeader { get; }
 
 		public NameValueCollection Headers { get; }
 		public bool HttpCompression { get; }
@@ -140,6 +144,14 @@ namespace Elasticsearch.Net
 
 		public Uri Uri => Node != null ? new Uri(Node.Uri, PathAndQuery) : null;
 		public TimeSpan DnsRefreshTimeout { get; }
+
+		public IReadOnlyCollection<IHeaderProvider> CustomHeaderProviders { get; }
+
+		public IReadOnlyDictionary<string, string> RequestMetaData { get; }
+
+		public bool IsAsync { get; internal set; }
+
+		public string HttpClientIdentifier { get; internal set; }
 
 		public override string ToString() => $"{Method.GetStringValue()} {_path}";
 

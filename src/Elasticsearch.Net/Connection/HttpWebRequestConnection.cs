@@ -111,6 +111,7 @@ namespace Elasticsearch.Net
 
 			try
 			{
+				requestData.IsAsync = true;
 				var data = requestData.PostData;
 				var request = CreateHttpWebRequest(requestData);
 				using (cancellationToken.Register(() => request.Abort()))
@@ -179,6 +180,8 @@ namespace Elasticsearch.Net
 
 		protected virtual HttpWebRequest CreateHttpWebRequest(RequestData requestData)
 		{
+			requestData.HttpClientIdentifier = "w";
+
 			var request = CreateWebRequest(requestData);
 			SetAuthenticationIfNeeded(requestData, request);
 			SetProxyIfNeeded(request, requestData);
@@ -237,6 +240,14 @@ namespace Elasticsearch.Net
 
 			if (requestData.Headers != null && requestData.Headers.HasKeys())
 				request.Headers.Add(requestData.Headers);
+
+			foreach (var customHeaderProvider in requestData.CustomHeaderProviders)
+			{
+				var value = customHeaderProvider.ProduceHeaderValue(requestData);
+
+				if (!string.IsNullOrEmpty(value))
+					request.Headers.Add(customHeaderProvider.HeaderName, customHeaderProvider.ProduceHeaderValue(requestData));
+			}
 
 			var timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
 			request.Timeout = timeout;

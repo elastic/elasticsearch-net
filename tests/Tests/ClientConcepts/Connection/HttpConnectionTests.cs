@@ -15,6 +15,7 @@ using Tests.Core.ManagedElasticsearch;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using HttpMethod = Elasticsearch.Net.HttpMethod;
 using FluentAssertions;
+using System.Text.RegularExpressions;
 
 namespace Tests.ClientConcepts.Connection
 {
@@ -96,7 +97,8 @@ namespace Tests.ClientConcepts.Connection
 			Uri proxyAddress = null,
 			bool disableAutomaticProxyDetection = false,
 			bool httpCompression = false,
-			bool transferEncodingChunked = false
+			bool transferEncodingChunked = false,
+			bool disableMetaHeader = false
 		)
 		{
 			if (requestTimeout == default) requestTimeout = TimeSpan.FromSeconds(10);
@@ -107,7 +109,8 @@ namespace Tests.ClientConcepts.Connection
 				.DnsRefreshTimeout(dnsRefreshTimeout ?? ConnectionConfiguration.DefaultDnsRefreshTimeout)
 				.DisableAutomaticProxyDetection(disableAutomaticProxyDetection)
 				.TransferEncodingChunked(transferEncodingChunked)
-				.EnableHttpCompression(httpCompression);
+				.EnableHttpCompression(httpCompression)
+				.DisableMetaHeader(disableMetaHeader);
 
 			if (proxyAddress != null)
 				connectionSettings.Proxy(proxyAddress, null, (string)null);
@@ -176,6 +179,37 @@ namespace Tests.ClientConcepts.Connection
 			var connection = new TestableHttpConnection(responseMessage =>
 			{
 				responseMessage.RequestMessage.Content.Headers.ContentLength.Should().HaveValue();
+			});
+
+			connection.Request<StringResponse>(requestData);
+			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+		}
+
+		[I]
+		public async Task HttpClientSetsMetaHeaderWhenNotDisabled()
+		{
+			var regex = new Regex(@"^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$");
+
+			var requestData = CreateRequestData();
+			var connection = new TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Headers.TryGetValues("x-elastic-client-meta", out var headerValue).Should().BeTrue();
+				headerValue.Should().HaveCount(1);
+				headerValue.Single().Should().NotBeNullOrEmpty();
+				regex.Match(headerValue.Single()).Success.Should().BeTrue();
+			});
+
+			connection.Request<StringResponse>(requestData);
+			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+		}
+
+		[I]
+		public async Task HttpClientShouldNotSetMetaHeaderWhenDisabled()
+		{
+			var requestData = CreateRequestData(disableMetaHeader: true);
+			var connection = new TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Headers.TryGetValues("x-elastic-client-meta", out var headerValue).Should().BeFalse();
 			});
 
 			connection.Request<StringResponse>(requestData);
