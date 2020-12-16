@@ -20,8 +20,19 @@ namespace Elastic.Transport.Diagnostics
 		/// Gets the active TCP connections
 		/// </summary>
 		/// <returns></returns>
-		public static TcpConnectionInformation[] GetActiveTcpConnections() =>
-			IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
+		public static TcpConnectionInformation[] GetActiveTcpConnections()
+		{
+			try
+			{
+				return IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
+			}
+			catch (NetworkInformationException) // host might not allow this information to be fetched.
+			{
+				// ignored
+			}
+
+			return null;			
+		}
 
 		/// <summary>
 		/// Gets the sum for each state of the active TCP connections
@@ -30,16 +41,7 @@ namespace Elastic.Transport.Diagnostics
 		{
 			var states = new Dictionary<TcpState, int>(StateLength);
 
-			TcpConnectionInformation[] connections = null;
-
-			try
-			{
-				connections = GetActiveTcpConnections();
-			}
-			catch (NetworkInformationException) // host might not allow this information to be fetched.
-			{
-				// ignored
-			}
+			var connections = GetActiveTcpConnections();
 			
 			for (var index = 0; index < connections?.Length; index++)
 			{
