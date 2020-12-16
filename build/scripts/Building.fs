@@ -6,6 +6,7 @@ namespace Scripts
 
 open System.IO
 
+open Scripts.Commandline
 open Tooling
 open Versioning
 open Fake.Core
@@ -46,11 +47,12 @@ module Build =
             
         DotNet.Exec ["pack"; Paths.Solution; "-c"; "Release"; "-o"; Paths.NugetOutput ; props] |> ignore
 
-    let Clean isCanary =
+    let Clean (parsed:PassedArguments) =
+        let outputPath = match parsed.CommandArguments with | SetVersion c -> c.OutputLocation | _ -> None
         printfn "Cleaning known output folders"
+        if (Option.isSome outputPath) then Shell.cleanDir outputPath.Value
         Shell.cleanDir Paths.BuildOutput
-        if isCanary then 
-            DotNet.Exec ["clean"; Paths.Solution; "-c"; "Release"; "-v"; "q"] |> ignore 
+        DotNet.Exec ["clean"; Paths.Solution; "-c"; "Release"; "-v"; "q"] 
             
     let private keyFile = Paths.Keys "keypair.snk"
     let private tmp = "build/output/_packages/tmp" 

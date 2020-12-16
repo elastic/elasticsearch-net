@@ -35,7 +35,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.7.0" />
+    <PackageReference Include="FSharp.Core" Version="5.0.0" />
 
     <PackageReference Include="Bullseye" Version="3.3.0" />
     <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.1.0-canary.0.244" />
