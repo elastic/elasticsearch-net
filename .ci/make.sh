@@ -1,24 +1,23 @@
 #!/usr/bin/env bash
 # parameters are available to this script
 
-
 # common build entry script for all elasticsearch clients
 
-# ./.ci/make.sh bump VERSION
-# ./.ci/make.sh release VERSION
+# ./.ci/make.sh assemble VERSION
 
 script_path=$(dirname "$(realpath -s "$0")")
 repo=$(realpath "$script_path/../")
 
 # shellcheck disable=SC1090
-cmd=$1
+CMD=$1
+TASK=$1
 VERSION=$2
 STACK_VERSION=$VERSION
-source "$script_path/functions/imports.sh"
 set -euo pipefail
 
 output_folder=".ci/output"
 OUTPUT_DIR="$repo/${output_folder}"
+mkdir -p "$OUTPUT_DIR"
 
 DOTNET_VERSION=${DOTNET_VERSION-5.0.100}
 
@@ -32,10 +31,17 @@ docker build --file .ci/DockerFile --tag elastic/elasticsearch-net .
 
 echo -e "\033[1m>>>>> Run [elastic/elasticsearch-net container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
 
-mkdir -p "$OUTPUT_DIR"
+case $CMD in
+    assemble)
+        TASK=release
+        ;;
+    *)
+        echo -e "\nUsage:\n\t $CMD is not supported right now\n"
+        exit 1
+esac
+
 
 docker run \
-  --network=${network_name} \
   --env "DOTNET_VERSION" \
   --name test-runner \
   --volume "${OUTPUT_DIR}:/sln/${output_folder}" \

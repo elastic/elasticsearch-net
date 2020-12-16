@@ -60,8 +60,7 @@ module Main =
         let canaryChain = [ "version"; "release"; "test-nuget-package";]
         
         // the following are expected to be called as targets directly        
-        conditional "clean" parsed.ReleaseBuild  <| fun _ -> Build.Clean isCanary
-        
+        conditional "clean" parsed.ReleaseBuild  <| fun _ -> Build.Clean parsed 
         target "version" <| fun _ -> printfn "Artifacts Version: %O" artifactsVersion
         
         target "restore" Build.Restore
@@ -90,7 +89,8 @@ module Main =
         command "release" releaseChain <| fun _ ->
             let outputPath = match parsed.CommandArguments with | Commandline.SetVersion c -> c.OutputLocation | _ -> None
             match outputPath with
-            | None -> printfn "Finished Release Build %O, artifacts available at: %s" artifactsVersion Paths.BuildOutput
+            | None ->
+                printfn "Finished Release Build %O, artifacts available at: %s" artifactsVersion Paths.BuildOutput
             | Some path ->
                 Fake.IO.Shell.cp_r Paths.BuildOutput path
                 printfn "Finished Release Build %O, output copied to: %s" artifactsVersion path

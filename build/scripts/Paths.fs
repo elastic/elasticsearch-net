@@ -24,7 +24,7 @@ module Paths =
     let Tool tool = sprintf "packages/build/%s" tool
     let CheckedInToolsFolder = "build/tools"
     let KeysFolder = sprintf "%s/keys" BuildFolder
-    let NugetOutput = sprintf "%s/_packages" BuildOutput
+    let NugetOutput = sprintf "%s" BuildOutput
     let SourceFolder = "src"
     
     let Solution = "Elasticsearch.sln"

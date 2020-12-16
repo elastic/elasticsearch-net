@@ -118,7 +118,7 @@ module Versioning =
 
     let BuiltArtifacts (version: AnchoredVersion) = 
         let packages =
-            let allPackages = !! "build/output/_packages/*.nupkg" |> Seq.toList
+            let allPackages = !! "build/output/*.nupkg" |> Seq.toList
             let toProject (package: string) =
                 let id = Path.GetFileName(package) |> String.replace (version.Full.ToString()) "" |> String.replace "..nupkg" ""
                 let assembly = id |> String.replace "NEST" "Nest"
@@ -128,7 +128,7 @@ module Versioning =
         packages
     
     let ValidateArtifacts version =
-        let tmp = "build/output/_packages/tmp"
+        let tmp = "build/output/tmp"
         
         let packages = BuiltArtifacts version
         printf "%O" packages
