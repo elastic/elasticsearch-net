@@ -15,11 +15,14 @@ namespace Elastic.Transport.Diagnostics
 	public static class TcpStats
 	{
 		private static readonly int StateLength = Enum.GetNames(typeof(TcpState)).Length;
+		private static readonly ReadOnlyDictionary<TcpState, int> Empty
+			= new ReadOnlyDictionary<TcpState, int>(new Dictionary<TcpState, int>());
 
 		/// <summary>
 		/// Gets the active TCP connections
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>TcpConnectionInformation[]</returns>
+		/// <remarks>Can return `null` when there is a permissions issue retrieving TCP connections.</remarks>
 		public static TcpConnectionInformation[] GetActiveTcpConnections()
 		{
 			try
@@ -39,11 +42,16 @@ namespace Elastic.Transport.Diagnostics
 		/// </summary>
 		public static ReadOnlyDictionary<TcpState, int> GetStates()
 		{
-			var states = new Dictionary<TcpState, int>(StateLength);
-
 			var connections = GetActiveTcpConnections();
+
+			if (connections == null)
+			{
+				return Empty;
+			}
+
+			var states = new Dictionary<TcpState, int>(StateLength);			
 			
-			for (var index = 0; index < connections?.Length; index++)
+			for (var index = 0; index < connections.Length; index++)
 			{
 				var connection = connections[index];
 				if (states.TryGetValue(connection.State, out var count))
