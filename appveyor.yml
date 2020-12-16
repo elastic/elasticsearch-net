@@ -19,5 +19,5 @@ for:
           only:
               - /^(master|\d+\.x)$/
       artifacts:
-          - path: .\build\output\_packages\*.nupkg
+          - path: .\build\output\*.nupkg
             name: NuGet
