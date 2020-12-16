@@ -55,7 +55,7 @@ module Build =
         DotNet.Exec ["clean"; Paths.Solution; "-c"; "Release"; "-v"; "q"] 
             
     let private keyFile = Paths.Keys "keypair.snk"
-    let private tmp = "build/output/_packages/tmp" 
+    let private tmp = "build/output/tmp" 
     
     let VersionedPack version =
         let packages = BuiltArtifacts version

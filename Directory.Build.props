@@ -50,7 +50,7 @@
     would take on docker'esque proportions!
     -->
   <PropertyGroup Condition="'$(TestPackageVersion)'!=''">
-    <RestoreSources>$(SolutionRoot)/build/output/_packages;https://api.nuget.org/v3/index.json</RestoreSources>
+    <RestoreSources>$(SolutionRoot)/build/output;https://api.nuget.org/v3/index.json</RestoreSources>
   </PropertyGroup>
 
 </Project>
