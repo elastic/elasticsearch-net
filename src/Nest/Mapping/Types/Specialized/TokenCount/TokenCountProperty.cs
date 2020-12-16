@@ -18,6 +18,9 @@ namespace Nest
 		[DataMember(Name ="analyzer")]
 		string Analyzer { get; set; }
 
+		[DataMember(Name ="enable_position_increments")]
+		bool? EnablePositionIncrements { get; set; }
+
 		[DataMember(Name ="index")]
 		bool? Index { get; set; }
 
@@ -33,6 +36,8 @@ namespace Nest
 
 		public string Analyzer { get; set; }
 
+		public bool? EnablePositionIncrements { get; set; }
+
 		public bool? Index { get; set; }
 
 		public double? NullValue { get; set; }
@@ -47,13 +52,14 @@ namespace Nest
 		public TokenCountPropertyDescriptor() : base(FieldType.TokenCount) { }
 
 		string ITokenCountProperty.Analyzer { get; set; }
+		bool? ITokenCountProperty.EnablePositionIncrements { get; set; }
 		bool? ITokenCountProperty.Index { get; set; }
 		double? ITokenCountProperty.NullValue { get; set; }
 
 		public TokenCountPropertyDescriptor<T> Analyzer(string analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
-
+		public TokenCountPropertyDescriptor<T> EnablePositionIncrements(bool? enablePositionIncrements = true) =>
+			Assign(enablePositionIncrements, (a, v) => a.EnablePositionIncrements = v);
 		public TokenCountPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
-
 		public TokenCountPropertyDescriptor<T> NullValue(double? nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);
 	}
 }
