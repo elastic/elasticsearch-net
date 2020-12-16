@@ -97,12 +97,16 @@ module Versioning =
         | ("release", version) ->
             match version with
             | NoChange _ -> failwithf "cannot run release because no explicit version number was passed on the command line"
-            | Update (newVersion, currentVersion) -> 
-                // fail if current is greater than the new version
-                if (currentVersion > newVersion) then
-                    failwithf "Can not release %O as it's lower then current %O" newVersion.Full currentVersion.Full
-                writeVersionIntoGlobalJson newVersion.Full
-                writeVersionIntoAutoLabel (currentVersion.Full.ToString()) (newVersion.Full.ToString())
+            | Update (newVersion, currentVersion) ->
+                match newVersion.Full.PreRelease with
+                | Some v when v.Name.StartsWith("SNAPSHOT", StringComparison.OrdinalIgnoreCase) ->
+                    printfn "Building snapshot, foregoing persisting version information"
+                | _ ->
+                    // fail if current is greater than the new version
+                    if (currentVersion > newVersion) then
+                        failwithf "Can not release %O as it's lower then current %O" newVersion.Full currentVersion.Full
+                    writeVersionIntoGlobalJson newVersion.Full
+                    writeVersionIntoAutoLabel (currentVersion.Full.ToString()) (newVersion.Full.ToString())
         | _ -> ignore()
     
     let ArtifactsVersion buildVersions =
