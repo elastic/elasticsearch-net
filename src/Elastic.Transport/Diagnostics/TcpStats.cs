@@ -29,8 +29,19 @@ namespace Elastic.Transport.Diagnostics
 		public static ReadOnlyDictionary<TcpState, int> GetStates()
 		{
 			var states = new Dictionary<TcpState, int>(StateLength);
-			var connections = GetActiveTcpConnections();
-			for (var index = 0; index < connections.Length; index++)
+
+			TcpConnectionInformation[] connections = null;
+
+			try
+			{
+				connections = GetActiveTcpConnections();
+			}
+			catch (NetworkInformationException) // host might not allow this information to be fetched.
+			{
+				// ignored
+			}
+			
+			for (var index = 0; index < connections?.Length; index++)
 			{
 				var connection = connections[index];
 				if (states.TryGetValue(connection.State, out var count))
