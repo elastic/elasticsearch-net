@@ -2,10 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -13,18 +10,13 @@ namespace DocGenerator.Documentation.Blocks
 {
 	public class CSharpBlock : CodeBlock
 	{
-		private static readonly Regex Callout = new Regex(@"//[ \t]*(?<callout>\<\d+\>)[ \t]*(?<text>\S.*)", RegexOptions.Compiled);
-		private static readonly Regex CalloutReplacer = new Regex(@"//[ \t]*\<(\d+)\>[^\r\n]*", RegexOptions.Compiled);
-
 		public CSharpBlock(SyntaxNode node, int depth, string memberName = null)
 			: base(node.WithoutLeadingTrivia().ToFullStringWithoutPragmaWarningDirectiveTrivia(),
 				node.StartingLine(),
 				node.IsKind(SyntaxKind.ClassDeclaration) ? depth : depth + 2,
 				"csharp",
 				memberName) { }
-
-		private List<string> Callouts { get; } = new List<string>();
-
+		
 		public void AddNode(SyntaxNode node) => Lines.Add(node.WithLeadingEndOfLineTrivia().ToFullStringWithoutPragmaWarningDirectiveTrivia());
 
 		public override string ToAsciiDoc()
@@ -37,36 +29,15 @@ namespace DocGenerator.Documentation.Blocks
 				: $"[source, {Language.ToLowerInvariant()}]");
 
 			builder.AppendLine("----");
-
-			var code = ExtractCallOutsFromCode(Value);
+			
+			var (code, callOuts) = BlockCallOutHelper.ExtractCallOutsFromCode(Value);
 
 			code = code.RemoveNumberOfLeadingTabsOrSpacesAfterNewline(Depth);
 			builder.AppendLine(code);
 
 			builder.AppendLine("----");
-			foreach (var callout in Callouts) builder.AppendLine(callout);
+			foreach (var callOut in callOuts) builder.AppendLine(callOut);
 			return builder.ToString();
-		}
-
-		/// <summary>
-		/// Extracts the callouts from code. The callout comment is defined inline within
-		/// source code to play nicely with C# semantics, but needs to be extracted and placed after the
-		/// source block delimiter to be valid asciidoc.
-		/// </summary>
-		private string ExtractCallOutsFromCode(string value)
-		{
-			var matches = Callout.Matches(value);
-			var callouts = new List<string>();
-
-			foreach (Match match in matches) callouts.Add($"{match.Groups["callout"].Value} {match.Groups["text"].Value.TrimEnd()}");
-
-			if (callouts.Any())
-			{
-				value = CalloutReplacer.Replace(value, "//<$1>");
-				Callouts.AddRange(callouts);
-			}
-
-			return value.Trim();
 		}
 	}
 }
