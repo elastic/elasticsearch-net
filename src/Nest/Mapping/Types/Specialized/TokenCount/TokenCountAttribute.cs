@@ -16,7 +16,7 @@ namespace Nest
 
 		public bool EnablePositionIncrements
 		{
-			get => Self.EnablePositionIncrements.GetValueOrDefault();
+			get => Self.EnablePositionIncrements.GetValueOrDefault(true);
 			set => Self.EnablePositionIncrements = value;
 		}
 
