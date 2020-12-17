@@ -11,6 +11,7 @@ namespace Tests.Mapping.Types.Specialized.TokenCount
 		[TokenCount(
 			Index = false,
 			Analyzer = "standard",
+			EnablePositionIncrements = false,
 			Boost = 1.2,
 			NullValue = 0)]
 		public int Full { get; set; }
@@ -29,6 +30,7 @@ namespace Tests.Mapping.Types.Specialized.TokenCount
 				{
 					type = "token_count",
 					analyzer = "standard",
+					enable_position_increments = false,
 					index = false,
 					boost = 1.2,
 					null_value = 0.0,

@@ -14,6 +14,12 @@ namespace Nest
 			set => Self.Analyzer = value;
 		}
 
+		public bool EnablePositionIncrements
+		{
+			get => Self.EnablePositionIncrements.GetValueOrDefault(true);
+			set => Self.EnablePositionIncrements = value;
+		}
+
 		public double Boost
 		{
 #pragma warning disable 618
@@ -35,6 +41,7 @@ namespace Nest
 		}
 
 		string ITokenCountProperty.Analyzer { get; set; }
+		bool? ITokenCountProperty.EnablePositionIncrements { get; set; }
 		double? ITokenCountProperty.Boost { get; set; }
 		bool? ITokenCountProperty.Index { get; set; }
 		double? ITokenCountProperty.NullValue { get; set; }
