@@ -22,6 +22,12 @@ namespace Nest
 #pragma warning restore 618
 		}
 
+		public bool EnablePositionIncrements
+		{
+			get => Self.EnablePositionIncrements.GetValueOrDefault(true);
+			set => Self.EnablePositionIncrements = value;
+		}
+
 		public bool Index
 		{
 			get => Self.Index.GetValueOrDefault();
@@ -36,6 +42,7 @@ namespace Nest
 
 		string ITokenCountProperty.Analyzer { get; set; }
 		double? ITokenCountProperty.Boost { get; set; }
+		bool? ITokenCountProperty.EnablePositionIncrements { get; set; }
 		bool? ITokenCountProperty.Index { get; set; }
 		double? ITokenCountProperty.NullValue { get; set; }
 		private ITokenCountProperty Self => this;

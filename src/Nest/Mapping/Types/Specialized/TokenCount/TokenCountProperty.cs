@@ -23,6 +23,9 @@ namespace Nest
 		[DataMember(Name ="boost")]
 		double? Boost { get; set; }
 
+		[DataMember(Name ="enable_position_increments")]
+		bool? EnablePositionIncrements { get; set; }
+
 		[DataMember(Name ="index")]
 		bool? Index { get; set; }
 
@@ -35,13 +38,10 @@ namespace Nest
 	public class TokenCountProperty : DocValuesPropertyBase, ITokenCountProperty
 	{
 		public TokenCountProperty() : base(FieldType.TokenCount) { }
-
 		public string Analyzer { get; set; }
-
 		public double? Boost { get; set; }
-
+		public bool? EnablePositionIncrements { get; set; }
 		public bool? Index { get; set; }
-
 		public double? NullValue { get; set; }
 	}
 
@@ -52,9 +52,9 @@ namespace Nest
 		where T : class
 	{
 		public TokenCountPropertyDescriptor() : base(FieldType.TokenCount) { }
-
 		string ITokenCountProperty.Analyzer { get; set; }
 		double? ITokenCountProperty.Boost { get; set; }
+		bool? ITokenCountProperty.EnablePositionIncrements { get; set; }
 		bool? ITokenCountProperty.Index { get; set; }
 		double? ITokenCountProperty.NullValue { get; set; }
 
@@ -63,8 +63,10 @@ namespace Nest
 		[Obsolete("The server always treated this as a noop and has been removed in 7.10")]
 		public TokenCountPropertyDescriptor<T> Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
-		public TokenCountPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
+		public TokenCountPropertyDescriptor<T> EnablePositionIncrements(bool? enablePositionIncrements = true) =>
+			Assign(enablePositionIncrements, (a, v) => a.EnablePositionIncrements = v);
 
+		public TokenCountPropertyDescriptor<T> Index(bool? index = true) => Assign(index, (a, v) => a.Index = v);
 		public TokenCountPropertyDescriptor<T> NullValue(double? nullValue) => Assign(nullValue, (a, v) => a.NullValue = v);
 	}
 }
