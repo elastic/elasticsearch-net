@@ -29,6 +29,8 @@ NEST exposes all of the search request parameters available in Elasticsearch
 
 * <<min-score-usage,Min Score Usage>>
 
+* <<point-in-time-usage,Point In Time Usage>>
+
 * <<post-filter-usage,Post Filter Usage>>
 
 * <<profile-usage,Profile Usage>>
@@ -66,6 +68,8 @@ include::search/request/indices-boost-usage.asciidoc[]
 include::search/request/inner-hits-usage.asciidoc[]
 
 include::search/request/min-score-usage.asciidoc[]
+
+include::search/request/point-in-time-usage.asciidoc[]
 
 include::search/request/post-filter-usage.asciidoc[]
 
