@@ -57,6 +57,10 @@ namespace DocGenerator.Walkers
 
 			if (node.TryGetJsonForSyntaxNode(out var json))
 			{
+				var helper = new JsonCallOutHelper();
+
+				json = helper.ApplyCallOuts(node, json);
+
 				var startingLine = node.StartingLine();
 				Blocks.Add(new JavaScriptBlock(json, startingLine, ClassDepth, memberName));
 			}
