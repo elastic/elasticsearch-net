@@ -118,8 +118,8 @@ namespace Tests.ClientConcepts.HighLevel
 		 * NOTE: All methods available within NEST are exposed as both synchronous and asynchronous versions,
 		 * with the latter using the idiomatic *Async suffix on the method name.
 		 *
-		 * This will index the document to the endpoint `/people/person/1`. NEST is smart enough to infer the
-		 * type from the Person CLR type as well as infer the id for the document by looking for an `Id` property on the POCO. Take a look
+		 * This will index the document to the endpoint `/people/_doc/1`. NEST is smart enough to infer the
+		 * the id for the document by looking for an `Id` property on the POCO. Take a look
 		 * at <<ids-inference,Ids inference>> to see other ways in which NEST can be configured to infer an id for a document. The default index configured
 		 * on `ConnectionSettings` has been used as the index name for the request.
 		 *
@@ -148,17 +148,16 @@ namespace Tests.ClientConcepts.HighLevel
 		}
 
 		/**
-		 * `people` now holds the first ten people whose first name is Martijn. The search endpoint for this query is
+		 * `people` now holds the first ten people whose first name matches Martijn. The search endpoint for this query is
 		 * `/people/_search` and the index (`"people"`) has been determined from
 		 *
 		 * . the default index on `ConnectionSettings`
 		 * . the `Person` generic type parameter on the search.
 		 *
-		 *
 		 * which generates a request to the search endpoint `/people/_search`, using the default index specified on `ConnectionSettings` as the index
 		 * in the search request.
 		 *
-		 * Similarly, a search can be performed for `person` types in all indices with `.AllIndices()`
+		 * Similarly, a search can be performed in all indices with `.AllIndices()`
 		 */
 		public void SearchingAllIndices()
 		{
@@ -176,28 +175,9 @@ namespace Tests.ClientConcepts.HighLevel
 		}
 
 		/**
-		 * which generates a request to the search endpoint `/_search`, taking the `person` type from the generic type parameter on the search
-		 * method.
+		 * which generates a request to the search endpoint `/_search`.
 		 *
-		 * Both `.AllTypes()` and `.AllIndices()` can be provided to perform a search across _all_ types in _all_ indices, generating a request to `/_search`
-		 */
-		public async Task SearchingAllIndicesAndAllTypes()
-		{
-			var searchResponse = await client.SearchAsync<Person>(s => s
-				.AllIndices()
-				.From(0)
-				.Size(10)
-				.Query(q => q
-					 .Match(m => m
-						.Field(f => f.FirstName)
-						.Query("Martijn")
-					 )
-				)
-			);
-		}
-
-		/**
-		 * Single or multiple index and type names can be provided in the request;
+		 * Single or multiple index names can be provided in the request;
 		 * see the documentation on <<indices-paths,Indices paths>> and <<document-paths,Document paths>>, respectively.
 		 *
 		 * All of the search examples so far have used NEST's Fluent API which uses lambda expressions to construct a query with a structure
@@ -234,7 +214,7 @@ namespace Tests.ClientConcepts.HighLevel
 		 * Using the low level client via the `.LowLevel` property means you can get with the best of both worlds:
 		 *
 		 * . Use the high level client
-		 * . Use the low level client where it makes sense, taking advantage of all the strong types within NEST and using the JSON.Net based
+		 * . Use the low level client where it makes sense, taking advantage of all the strong types within NEST, and its
 		 * serializer for deserialization.
 		 *
 		 * Here's an example
@@ -260,7 +240,7 @@ namespace Tests.ClientConcepts.HighLevel
 		}
 		/**
 		 * Here, the query is represented as an anonymous type, but the body of the response is a concrete
-		 * implementation of the same response type returned from NEST.
+		 * implementation of the same response type returned from the high level client, NEST.
 		 * --
 		 */
 
