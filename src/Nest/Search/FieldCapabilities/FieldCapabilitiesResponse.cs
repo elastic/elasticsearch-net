@@ -53,7 +53,6 @@ namespace Nest
 		public FieldCapabilities Integer => BackingDictionary.TryGetValue("integer", out var f) ? f : null;
 		public FieldCapabilities IntegerRange => BackingDictionary.TryGetValue("integer_range", out var f) ? f : null;
 		public FieldCapabilities Ip => BackingDictionary.TryGetValue("ip", out var f) ? f : null;
-
 		public FieldCapabilities Keyword => BackingDictionary.TryGetValue("keyword", out var f) ? f : null;
 		public FieldCapabilities Long => BackingDictionary.TryGetValue("long", out var f) ? f : null;
 		public FieldCapabilities LongRange => BackingDictionary.TryGetValue("long_range", out var f) ? f : null;
@@ -71,6 +70,7 @@ namespace Nest
 		public FieldCapabilities Uid => BackingDictionary.TryGetValue("_uid", out var f) ? f : null;
 		public FieldCapabilities ParentJoin => BackingDictionary.TryGetValue("_parent_join", out var f) ? f : null;
 		public FieldCapabilities Version => BackingDictionary.TryGetValue("_version", out var f) ? f : null;
+		public FieldCapabilities VersionField => BackingDictionary.TryGetValue("version", out var f) ? f : null;
 	}
 
 	public class FieldCapabilities

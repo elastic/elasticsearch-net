@@ -263,8 +263,10 @@ namespace Nest
 			SetProperty(selector);
 
 		/// <inheritdoc cref="IWildcardProperty"/>
-		public PropertiesDescriptor<T> Wildcard(Func<WildcardPropertyDescriptor<T>, IWildcardProperty> selector) =>
-			SetProperty(selector);
+		public PropertiesDescriptor<T> Wildcard(Func<WildcardPropertyDescriptor<T>, IWildcardProperty> selector) => SetProperty(selector);
+
+		/// <inheritdoc cref="IVersionProperty"/>
+		public PropertiesDescriptor<T> Version(Func<VersionPropertyDescriptor<T>, IVersionProperty> selector) => SetProperty(selector);
 
 		/// <summary>
 		/// Map a custom property.

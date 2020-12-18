@@ -273,6 +273,12 @@ namespace Nest
 							_visitor.Visit(t);
 						});
 						break;
+					case FieldType.Version:
+						Visit<IVersionProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+						});
+						break;
 					case FieldType.None:
 						continue;
 				}

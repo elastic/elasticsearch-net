@@ -148,6 +148,10 @@ namespace Nest
 		/// <inheritdoc />
 		public IProperty Wildcard(Func<WildcardPropertyDescriptor<T>, IWildcardProperty> selector) =>
 			selector?.Invoke(new WildcardPropertyDescriptor<T>());
+		
+		/// <inheritdoc />
+		public IProperty Version(Func<VersionPropertyDescriptor<T>, IVersionProperty> selector) =>
+			selector?.Invoke(new VersionPropertyDescriptor<T>());
 
 #pragma warning disable CS3001 // Argument type is not CLS-compliant
 		public IProperty Scalar(Expression<Func<T, int>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector = null) =>
