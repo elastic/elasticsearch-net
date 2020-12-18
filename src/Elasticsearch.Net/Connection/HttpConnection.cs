@@ -248,8 +248,6 @@ namespace Elasticsearch.Net
 
 		protected virtual HttpRequestMessage CreateHttpRequestMessage(RequestData requestData)
 		{
-			requestData.HttpClientIdentifier = ConnectionInfo.UsingCurlHandler ? "c" : "s";
-
 			var request = CreateRequestMessage(requestData);
 			SetAuthenticationIfNeeded(request, requestData);
 			return request;

@@ -180,8 +180,6 @@ namespace Elasticsearch.Net
 
 		protected virtual HttpWebRequest CreateHttpWebRequest(RequestData requestData)
 		{
-			requestData.HttpClientIdentifier = "w";
-
 			var request = CreateWebRequest(requestData);
 			SetAuthenticationIfNeeded(requestData, request);
 			SetProxyIfNeeded(request, requestData);

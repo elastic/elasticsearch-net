@@ -181,7 +181,10 @@ namespace Elasticsearch.Net
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
 		private readonly Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
 
-		private readonly List<IHeaderProvider> _customerHeaderProviders = new List<IHeaderProvider> { new MetaHeaderProvider<IElasticLowLevelClient>() };
+
+		private readonly List<IHeaderProvider> _customerHeaderProviders = new List<IHeaderProvider> { new MetaHeaderProvider() };
+
+		private readonly IMetaDataHeaders _metaDataHeaders;
 
 		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer requestResponseSerializer)
 		{
@@ -209,6 +212,8 @@ namespace Elasticsearch.Net
 				_enableHttpCompression = true;
 			}
 
+			var clientVersionInfo = ClientVersionInfo.Create<IElasticLowLevelClient>();
+			_metaDataHeaders = new MetaDataHeaders(clientVersionInfo);
 		}
 
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
@@ -263,6 +268,8 @@ namespace Elasticsearch.Net
 		bool IConnectionConfigurationValues.EnableThreadPoolStats => _enableThreadPoolStats;
 
 		IReadOnlyCollection<IHeaderProvider> IConnectionConfigurationValues.CustomHeaderProviders => _customerHeaderProviders.ToReadOnlyCollection();
+
+		IMetaDataHeaders IConnectionConfigurationValues.MetaDataHeaders => _metaDataHeaders;
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
@@ -411,11 +418,11 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// DnsRefreshTimeout for the connections. Defaults to 5 minutes.
-		#if DOTNETCORE
+#if DOTNETCORE
 		/// <para>Will create new instances of <see cref="System.Net.Http.HttpClient"/> after this timeout to force DNS updates</para>
-		#else
+#else
 		/// <para>Will set both <see cref="System.Net.ServicePointManager.DnsRefreshTimeout"/> and <see cref="System.Net.ServicePointManager.ConnectionLeaseTimeout "/>
-		#endif
+#endif
 		/// </summary>
 		public T DnsRefreshTimeout(TimeSpan timeout) => Assign(timeout, (a, v) => a._dnsRefreshTimeout = v);
 

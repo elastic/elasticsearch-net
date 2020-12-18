@@ -83,7 +83,6 @@ namespace Elasticsearch.Net
 			ProxyUsername = global.ProxyUsername;
 			ProxyPassword = global.ProxyPassword;
 			DisableAutomaticProxyDetection = global.DisableAutomaticProxyDetection;
-			DisableMetaHeader = global.DisableMetaHeader;
 			BasicAuthorizationCredentials = local?.BasicAuthenticationCredentials ?? global.BasicAuthenticationCredentials;
 			ApiKeyAuthenticationCredentials = local?.ApiKeyAuthenticationCredentials ?? global.ApiKeyAuthenticationCredentials;
 			AllowedStatusCodes = local?.AllowedStatusCodes ?? EmptyReadOnly<int>.Collection;
@@ -109,7 +108,6 @@ namespace Elasticsearch.Net
 		public IConnectionConfigurationValues ConnectionSettings { get; }
 		public CustomResponseBuilderBase CustomResponseBuilder { get; }
 		public bool DisableAutomaticProxyDetection { get; }
-		public bool DisableMetaHeader { get; }
 
 		public NameValueCollection Headers { get; }
 		public bool HttpCompression { get; }
@@ -150,8 +148,6 @@ namespace Elasticsearch.Net
 		public IReadOnlyDictionary<string, string> RequestMetaData { get; }
 
 		public bool IsAsync { get; internal set; }
-
-		public string HttpClientIdentifier { get; internal set; }
 
 		public override string ToString() => $"{Method.GetStringValue()} {_path}";
 

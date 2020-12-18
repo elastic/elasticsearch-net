@@ -280,5 +280,10 @@ namespace Elasticsearch.Net
 		/// The configured collection of <see cref="IHeaderProvider"/> instances which will be run to add additional request headers.
 		/// </summary>
 		IReadOnlyCollection<IHeaderProvider> CustomHeaderProviders { get; }
+
+		/// <summary>
+		/// Precomputed meta data headers.
+		/// </summary>
+		IMetaDataHeaders MetaDataHeaders { get; }
 	}
 }

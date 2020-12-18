@@ -24,15 +24,14 @@
 #endregion
 
 using System;
-using System.Diagnostics;
-using System.Linq;
 #if DOTNETCORE
-using System.IO;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 #else
 using Microsoft.Win32;
+using System.Linq;
 #endif
 
 namespace Elasticsearch.Net
@@ -40,42 +39,13 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// Represents the current .NET Runtime version.
 	/// </summary>
-	internal sealed class RuntimeVersion
+	internal sealed class RuntimeVersionInfo : VersionInfo
 	{
-		internal static readonly RuntimeVersion Default = new RuntimeVersion(new Version(0, 0, 0), false);
+		public static readonly RuntimeVersionInfo Default = new RuntimeVersionInfo { Version = new Version(0, 0, 0), IsPrerelease = false };
 
-		private RuntimeVersion(Version version, bool isPrerelease)
-		{
-			var finalVersion = version;
+		public RuntimeVersionInfo() => StoreVersion(GetRuntimeVersion());
 
-			if (version.Minor == -1 || version.Build == -1)
-			{
-				finalVersion = new Version(version.Major, version.Minor > -1 ? version.Minor : 0, version.Build > -1 ? version.Build : 0);
-			}
-
-			Version = finalVersion;
-			IsPrerelease = isPrerelease;
-		}
-
-		/// <summary>
-		/// Determine the current runtime version.
-		/// </summary>
-		/// <returns>The identified <see cref="RuntimeVersion"/>.</returns>
-		public static RuntimeVersion GetVersion() => GetRuntimeVersion();
-
-		/// <summary>
-		/// The version number of the runtime.
-		/// </summary>
-		public Version Version { get; }
-
-		/// <summary>
-		/// Indicates wheather the runtime is a prerelease version.
-		/// </summary>
-		public bool IsPrerelease { get; }
-
-		public override string ToString() => IsPrerelease ? Version.ToString() + "p" : Version.ToString();
-
-		private static RuntimeVersion GetRuntimeVersion() =>
+		private static string GetRuntimeVersion() =>
 #if !DOTNETCORE
 			GetFullFrameworkRuntime();
 #else
@@ -83,13 +53,17 @@ namespace Elasticsearch.Net
 #endif
 
 #if DOTNETCORE
-		public static RuntimeVersion GetNetCoreVersion()
+		private static string GetNetCoreVersion()
 		{
 			// for .NET 5+ we can use Environment.Version
 			if (Environment.Version.Major >= 5)
 			{
-				var isPrerelease = ContainsPrerelease(RuntimeInformation.FrameworkDescription);
-				return new RuntimeVersion(Environment.Version, isPrerelease);
+				const string dotNet = ".NET ";
+				var index = RuntimeInformation.FrameworkDescription.IndexOf(dotNet, StringComparison.OrdinalIgnoreCase);
+				if (index >= 0)
+				{
+					return RuntimeInformation.FrameworkDescription.Substring(dotNet.Length);
+				}
 			}
 
 			// next, try using file version info
@@ -105,31 +79,32 @@ namespace Elasticsearch.Net
 				return runtimeVersion;
 			}
 
-			// At this point, we can't identify whether this is a prerelease, but a version is better than nothing!
+			//At this point, we can't identify whether this is a prerelease, but a version is better than nothing!
 
 			var frameworkName = Assembly.GetEntryAssembly()?.GetCustomAttribute<TargetFrameworkAttribute>()?.FrameworkName;
 			if (TryGetVersionFromFrameworkName(frameworkName, out runtimeVersion))
 			{
-				Console.WriteLine("NAME: " + runtimeVersion);
+				return runtimeVersion;
 			}
 
-			if (IsRunningInContainer
-				&& (Version.TryParse(Environment.GetEnvironmentVariable("DOTNET_VERSION"), out var version)
-					|| Version.TryParse(Environment.GetEnvironmentVariable("ASPNETCORE_VERSION"), out version)))
+			if (IsRunningInContainer)
 			{
-				return new RuntimeVersion(version, false);
+				var dotNetVersion = Environment.GetEnvironmentVariable("DOTNET_VERSION");
+				var aspNetCoreVersion = Environment.GetEnvironmentVariable("ASPNETCORE_VERSION");
+
+				return dotNetVersion ?? aspNetCoreVersion;
 			}
 
-			return RuntimeVersion.Default;
+			return null;
 		}
 
-		internal static bool TryGetVersionFromAssemblyPath(Assembly assembly, out RuntimeVersion runtimeVersion)
+		private static bool TryGetVersionFromAssemblyPath(Assembly assembly, out string runtimeVersion)
 		{
 			var assemblyPath = assembly.CodeBase.Split(new[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries);
 			var netCoreAppIndex = Array.IndexOf(assemblyPath, "Microsoft.NETCore.App");
-			if (netCoreAppIndex > 0 && netCoreAppIndex < assemblyPath.Length - 2 && TryGetRuntimeVersion(assemblyPath[netCoreAppIndex + 1], out var version))
+			if (netCoreAppIndex > 0 && netCoreAppIndex < assemblyPath.Length - 2)
 			{
-				runtimeVersion = version;
+				runtimeVersion = assemblyPath[netCoreAppIndex + 1];
 				return true;
 			}
 
@@ -138,22 +113,7 @@ namespace Elasticsearch.Net
 		}
 
 		// NOTE: 5.0.1 FrameworkDescription returns .NET 5.0.1-servicing.20575.16, so we special case servicing as NOT prerelease
-		private static bool ContainsPrerelease(string version) => version.Contains("-") && !version.Contains("-servicing");
-
-		private static bool TryGetRuntimeVersion(string productVersion, out RuntimeVersion version)
-		{
-			var isPrerelase = ContainsPrerelease(productVersion);
-			var versionPart = GetParsableVersionPart(productVersion);
-
-			if (Version.TryParse(versionPart, out var parsedVersion))
-			{
-				version = new RuntimeVersion(parsedVersion, isPrerelase);
-				return true;
-			}
-
-			version = null;
-			return false;
-		}
+		protected override bool ContainsPrerelease(string version) => base.ContainsPrerelease(version) && !version.Contains("-servicing");
 
 		// sample input:
 		// 2.0: 4.6.26614.01 @BuiltBy: dlab14-DDVSOWINAGE018 @Commit: a536e7eec55c538c94639cefe295aa672996bf9b, Microsoft .NET Framework
@@ -161,7 +121,7 @@ namespace Elasticsearch.Net
 		// 2.2: 4.6.27817.03 @BuiltBy: dlab14-DDVSOWINAGE101 @Branch: release/2.2 @SrcCode: https://github.com/dotnet/coreclr/tree/ce1d090d33b400a25620c0145046471495067cc7, Microsoft .NET Framework
 		// 3.0: 3.0.0-preview8.19379.2+ac25be694a5385a6a1496db40de932df0689b742, Microsoft .NET Core
 		// 5.0: 5.0.0-alpha1.19413.7+0ecefa44c9d66adb8a997d5778dc6c246ad393a7, Microsoft .NET Core
-		private static bool TryGetVersionFromProductInfo(string productVersion, string productName, out RuntimeVersion version)
+		private static bool TryGetVersionFromProductInfo(string productVersion, string productName, out string version)
 		{
 			if (string.IsNullOrEmpty(productVersion) || string.IsNullOrEmpty(productName))
 			{
@@ -176,22 +136,16 @@ namespace Elasticsearch.Net
 				var releaseVersionIndex = productVersion.IndexOf(releaseVersionPrefix);
 				if (releaseVersionIndex > 0)
 				{
-					var releaseVersion = productVersion.Substring(releaseVersionIndex + releaseVersionPrefix.Length);
-					if (TryGetRuntimeVersion(releaseVersion, out version))
-					{
-						return true;
-					}
+					version = productVersion.Substring(releaseVersionIndex + releaseVersionPrefix.Length);
+					return true;					
 				}
 			}
 
 			// matches .NET Core and also .NET 5+
 			if (productName.IndexOf(".NET", StringComparison.OrdinalIgnoreCase) >= 0)
 			{
-				var releaseVersion = GetParsableVersionPart(productVersion);
-				if (TryGetRuntimeVersion(releaseVersion, out version))
-				{
-					return true;
-				}
+				version = productVersion;
+				return true;
 			}
 
 			version = null;
@@ -201,46 +155,24 @@ namespace Elasticsearch.Net
 		// sample input:
 		// .NETCoreApp,Version=v2.0
 		// .NETCoreApp,Version=v2.1
-		internal static bool TryGetVersionFromFrameworkName(string frameworkName, out RuntimeVersion runtimeVersion)
+		private static bool TryGetVersionFromFrameworkName(string frameworkName, out string runtimeVersion)
 		{
 			const string versionPrefix = ".NETCoreApp,Version=v";
 			if (!string.IsNullOrEmpty(frameworkName) && frameworkName.StartsWith(versionPrefix))
 			{
-				var frameworkVersion = GetParsableVersionPart(frameworkName.Substring(versionPrefix.Length));
-
-				if (TryGetRuntimeVersion(frameworkVersion, out runtimeVersion))
-				{
-					return true;
-				}
+				runtimeVersion = frameworkName.Substring(versionPrefix.Length);
+				return true;
 			}
 
 			runtimeVersion = null;
 			return false;
 		}
 
-		public static bool IsRunningInContainer => string.Equals(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER"), "true");
-
-		// sample input:
-		// for dotnet run: C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.1.12\
-		// for dotnet publish: C:\Users\adsitnik\source\repos\ConsoleApp25\ConsoleApp25\bin\Release\netcoreapp2.0\win-x64\publish\
-		internal static bool TryGetVersionFromRuntimeDirectory(string runtimeDirectory, out string version)
-		{
-			if (!string.IsNullOrEmpty(runtimeDirectory))
-			{
-				version = GetParsableVersionPart(new DirectoryInfo(runtimeDirectory).Name);
-				return true;
-			}
-
-			version = null;
-			return false;
-		}
-
-		private static string GetParsableVersionPart(string fullVersionName) =>
-			new string(fullVersionName.TakeWhile(c => char.IsDigit(c) || c == '.').ToArray());
+		private static bool IsRunningInContainer => string.Equals(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER"), "true");
 #endif
 
 #if !DOTNETCORE
-		private static RuntimeVersion GetFullFrameworkRuntime()
+		private static string GetFullFrameworkRuntime()
 		{
 			const string subkey = @"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\";
 
@@ -250,8 +182,8 @@ namespace Elasticsearch.Net
 				{
 					var version = CheckFor45PlusVersion((int)ndpKey.GetValue("Release"));
 
-					if (!string.IsNullOrEmpty(version) && Version.TryParse(version, out var finalVersion))
-						return new RuntimeVersion(finalVersion, false);
+					if (!string.IsNullOrEmpty(version) )
+						return version;
 				}
 			}
 
@@ -259,12 +191,7 @@ namespace Elasticsearch.Net
 			var servicingVersion = new string(fullName.SkipWhile(c => !char.IsDigit(c)).ToArray());
 			var servicingVersionRelease = MapToReleaseVersion(servicingVersion);
 
-			if (Version.TryParse(servicingVersionRelease, out var runtimeVersion))
-				return new RuntimeVersion(runtimeVersion, false);
-
-			// We should never get here
-			Debug.Assert(false, "Unable to determine runtime version for full framework");
-			return Default;
+			return servicingVersionRelease;
 
 			static string MapToReleaseVersion(string servicingVersion)
 			{
