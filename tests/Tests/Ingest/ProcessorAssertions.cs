@@ -9,6 +9,7 @@ using System.Reflection;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.Client;
+using Tests.Core.Extensions;
 using Tests.Core.Xunit;
 using Tests.Domain;
 
@@ -59,19 +60,41 @@ namespace Tests.Ingest
 
 		public class Append : ProcessorAssertion
 		{
-			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
-				.Append<Project>(a => a
-					.Field(p => p.State)
-					.Value(StateOfBeing.Stable, StateOfBeing.VeryActive)
-				);
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent =>
+				d => d.Append<Project>(a =>
+				{
+					var apd = a.Field(p => p.State).Value(StateOfBeing.Stable, StateOfBeing.VeryActive);
 
-			public override IProcessor Initializer => new AppendProcessor
+					if (TestClient.Configuration.InRange(">=7.11.0"))
+						apd.AllowDuplicates(false);
+
+					return apd;
+				});
+
+			public override IProcessor Initializer
 			{
-				Field = "state",
-				Value = new object[] { StateOfBeing.Stable, StateOfBeing.VeryActive }
-			};
+				get
+				{
+					var ap = new AppendProcessor { Field = "state", Value = new object[] { StateOfBeing.Stable, StateOfBeing.VeryActive } };
 
-			public override object Json => new { field = "state", value = new[] { "Stable", "VeryActive" } };
+					if (TestClient.Configuration.InRange(">=7.11.0"))
+						ap.AllowDuplicates = false;
+
+					return ap;
+				}
+			}
+
+			public override object Json
+			{
+				get
+				{
+					if (TestClient.Configuration.InRange(">=7.11.0"))
+						return new { field = "state", value = new[] { "Stable", "VeryActive" }, allow_duplicates = false };
+
+					return new { field = "state", value = new[] { "Stable", "VeryActive" } };
+				}
+			}
+
 			public override string Key => "append";
 		}
 
