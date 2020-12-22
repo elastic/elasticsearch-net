@@ -491,6 +491,8 @@ namespace Nest
 		public GetDatafeedsDescriptor AllowNoDatafeeds(bool? allownodatafeeds = true) => Qs("allow_no_datafeeds", allownodatafeeds);
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public GetDatafeedsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
+		///<summary>Omits fields that are illegal to set on datafeed PUT</summary>
+		public GetDatafeedsDescriptor ExcludeGenerated(bool? excludegenerated = true) => Qs("exclude_generated", excludegenerated);
 	}
 
 	///<summary>Descriptor for GetFilters <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html</para></summary>
@@ -590,6 +592,8 @@ namespace Nest
 		public GetJobsDescriptor AllowNoJobs(bool? allownojobs = true) => Qs("allow_no_jobs", allownojobs);
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
 		public GetJobsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
+		///<summary>Omits fields that are illegal to set on job PUT</summary>
+		public GetJobsDescriptor ExcludeGenerated(bool? excludegenerated = true) => Qs("exclude_generated", excludegenerated);
 	}
 
 	///<summary>Descriptor for GetModelSnapshots <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</para></summary>

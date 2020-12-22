@@ -841,6 +841,13 @@ namespace Nest
 			get => Q<bool? >("allow_no_match");
 			set => Q("allow_no_match", value);
 		}
+
+		///<summary>Omits fields that are illegal to set on datafeed PUT</summary>
+		public bool? ExcludeGenerated
+		{
+			get => Q<bool? >("exclude_generated");
+			set => Q("exclude_generated", value);
+		}
 	}
 
 	[InterfaceDataContract]
@@ -1010,6 +1017,13 @@ namespace Nest
 		{
 			get => Q<bool? >("allow_no_match");
 			set => Q("allow_no_match", value);
+		}
+
+		///<summary>Omits fields that are illegal to set on job PUT</summary>
+		public bool? ExcludeGenerated
+		{
+			get => Q<bool? >("exclude_generated");
+			set => Q("exclude_generated", value);
 		}
 	}
 

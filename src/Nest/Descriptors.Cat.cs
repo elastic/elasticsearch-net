@@ -262,7 +262,7 @@ namespace Nest
 		public CatIndicesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>If set to true segment stats will include stats for segments that are not currently loaded into memory</summary>
 		public CatIndicesDescriptor IncludeUnloadedSegments(bool? includeunloadedsegments = true) => Qs("include_unloaded_segments", includeunloadedsegments);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.11.0, reason: This parameter does not affect the request. It will be removed in a future release.")]
 		public CatIndicesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatIndicesDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
@@ -677,7 +677,7 @@ namespace Nest
 		public CatShardsDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatShardsDescriptor Help(bool? help = true) => Qs("help", help);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.11.0, reason: This parameter does not affect the request. It will be removed in a future release.")]
 		public CatShardsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatShardsDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
@@ -740,9 +740,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatTasksDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public CatTasksDescriptor NodeId(params string[] nodeid) => Qs("node_id", nodeid);
-		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
-		public CatTasksDescriptor ParentTask(long? parenttask) => Qs("parent_task", parenttask);
+		public CatTasksDescriptor Nodes(params string[] nodes) => Qs("nodes", nodes);
+		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
+		public CatTasksDescriptor ParentTaskId(string parenttaskid) => Qs("parent_task_id", parenttaskid);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatTasksDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
 		///<summary>Verbose mode. Display column headers</summary>

@@ -380,7 +380,9 @@ namespace Nest
 
 		// values part of the url path
 		Names IDeleteDataStreamRequest.Name => Self.RouteValues.Get<Names>("name");
-	// Request parameters
+		// Request parameters
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		public DeleteDataStreamDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 	}
 
 	///<summary>Descriptor for DeleteTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
@@ -818,7 +820,9 @@ namespace Nest
 		Names IGetDataStreamRequest.Name => Self.RouteValues.Get<Names>("name");
 		///<summary>A comma-separated list of data streams to get; use `*` to get all data streams</summary>
 		public GetDataStreamDescriptor Name(Names name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
-	// Request parameters
+		// Request parameters
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		public GetDataStreamDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 	}
 
 	///<summary>Descriptor for GetFieldMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
