@@ -12,6 +12,7 @@ namespace Tests.Mapping.Types.Specialized.TokenCount
 			Index = false,
 			Analyzer = "standard",
 			Boost = 1.2,
+			EnablePositionIncrements = false,
 			NullValue = 0)]
 		public int Full { get; set; }
 
@@ -29,6 +30,7 @@ namespace Tests.Mapping.Types.Specialized.TokenCount
 				{
 					type = "token_count",
 					analyzer = "standard",
+					enable_position_increments = false,
 					index = false,
 					boost = 1.2,
 					null_value = 0.0,
