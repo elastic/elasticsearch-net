@@ -12,7 +12,7 @@ namespace DocGenerator.Documentation.Blocks
 			: base(text, startingLine, depth, "javascript", memberName) { }
 
 		public string Title { get; set; }
-
+		
 		public override string ToAsciiDoc()
 		{
 			var builder = new StringBuilder();
@@ -23,8 +23,13 @@ namespace DocGenerator.Documentation.Blocks
 				? $"[source, {Language.ToLowerInvariant()}, method=\"{MemberName.ToLowerInvariant()}\"]"
 				: $"[source, {Language.ToLowerInvariant()}]");
 			builder.AppendLine("----");
-			builder.AppendLine(Value);
+
+			var (code, callOuts) = BlockCallOutHelper.ExtractCallOutsFromCode(Value);
+
+			builder.AppendLine(code);
+
 			builder.AppendLine("----");
+			foreach (var callOut in callOuts) builder.AppendLine(callOut);
 			return builder.ToString();
 		}
 	}
