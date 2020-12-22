@@ -1,0 +1,58 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Search/Request/PointInTimeUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[point-in-time-usage]]
+== Point In Time Usage
+
+A search request by default executes against the most recent visible data of the target indices, which is called point in time.
+Elasticsearch pit (point in time) is a lightweight view into the state of the data as it existed when initiated. In some cases,
+it's preferred to perform multiple search requests using the same point in time.
+
+IMPORTANT: Point in time search requests should not specify an index path parameter. When including a point in time in a
+search request, it will cause the URL path of the request to become the rooted '/_search' path instead of '/{index}/_search'.
+
+See the Elasticsearch documentation on {ref_current}/point-in-time-api.html[point in time API] for more detail.
+
+[float]
+=== Fluent DSL example
+
+[source,csharp]
+----
+s => s
+.PointInTime("a-point-in-time-id", p => p
+.KeepAlive("1m"))
+----
+
+[float]
+=== Object Initializer syntax example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    PointInTime = new Nest.PointInTime("a-point-in-time-id", "1m")
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "pit": {
+    "id": "a-point-in-time-id",
+    "keep_alive": "1m"
+  }
+}
+----
+
