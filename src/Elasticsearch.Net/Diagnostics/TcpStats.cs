@@ -15,21 +15,42 @@ namespace Elasticsearch.Net.Diagnostics
 	public static class TcpStats
 	{
 		private static readonly int StateLength = Enum.GetNames(typeof(TcpState)).Length;
+		private static readonly ReadOnlyDictionary<TcpState, int> Empty
+			= new ReadOnlyDictionary<TcpState, int>(new Dictionary<TcpState, int>());
 
 		/// <summary>
 		/// Gets the active TCP connections
 		/// </summary>
-		/// <returns></returns>
-		public static TcpConnectionInformation[] GetActiveTcpConnections() =>
-			IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
+		/// <returns>TcpConnectionInformation[]</returns>
+		/// <remarks>Can return `null` when there is a permissions issue retrieving TCP connections.</remarks>
+		public static TcpConnectionInformation[] GetActiveTcpConnections()
+		{
+			try
+			{
+				return IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
+			}
+			catch (NetworkInformationException) // host might not allow this information to be fetched.
+			{
+				// ignored
+			}
+
+			return null;			
+		}
 
 		/// <summary>
 		/// Gets the sum for each state of the active TCP connections
 		/// </summary>
 		public static ReadOnlyDictionary<TcpState, int> GetStates()
 		{
-			var states = new Dictionary<TcpState, int>(StateLength);
 			var connections = GetActiveTcpConnections();
+
+			if (connections == null)
+			{
+				return Empty;
+			}
+
+			var states = new Dictionary<TcpState, int>(StateLength);			
+			
 			for (var index = 0; index < connections.Length; index++)
 			{
 				var connection = connections[index];
