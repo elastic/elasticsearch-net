@@ -180,6 +180,9 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "unsigned_long/40_different_numeric.yml", All
     SkipFile "unsigned_long/50_script_values.yml", All
     SkipFile "unsigned_long/60_collapse.yml", All
+    
+    // Temporary disabling this test while https://github.com/elastic/elasticsearch/pull/66794
+    SkipFile "search.highlight/20_fvh.yml", All
 
 ]
 
