@@ -16,7 +16,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		 * === Document paths
 		 *
 		 * Many APIs in Elasticsearch describe a path to a document. In NEST, besides generating a constructor that takes
-		 * and Index, Type and Id separately, we also generate a constructor that allows you to describe the path
+		 * an Index and Id separately, we also generate a constructor that allows you to describe the path
 		 * to your document more succinctly using a an instance of the `DocumentPath<T>` type.
 		 */
 
@@ -29,7 +29,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("project").WhenSerializing(path.Index);
 			Expect(1).WhenSerializing(path.Id);
 
-			/** You can still override the inferred index and type name*/
+			/** You can still override the inferred index name*/
 			path = new DocumentPath<Project>(1).Index("project1");
 			Expect("project1").WhenSerializing(path.Index);
 
@@ -52,7 +52,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("project").WhenSerializing(path.Index);
 			Expect("hello-world").WhenSerializing(path.Id);
 
-			/** You can still override the inferred index and type name*/
+			/** You can still override the inferred index name*/
 			path = new DocumentPath<Project>(project).Index("project1");
 			Expect("project1").WhenSerializing(path.Index);
 
@@ -72,7 +72,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			/** we can see an example of how `DocumentPath` helps your describe your requests more tersely */
 			var request = new IndexRequest<Project>(2) { Document = project };
-			request = new IndexRequest<Project>(project) { };
+			request = new IndexRequest<Project>(project);
 
 			/** when comparing with the full blown constructor and passing document manually,
 			* `DocumentPath<T>`'s benefits become apparent. Compare the following request that doesn't
@@ -82,9 +82,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			{
 				Document = project
 			};
-			/**
-			 * Much more verbose, wouldn't you agree?
-			 */
 		}
+		/**
+		 * Much more verbose, wouldn't you agree?
+		 */
 	}
 }
