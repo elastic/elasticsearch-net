@@ -196,8 +196,10 @@ namespace Tests.Domain
 	public class ProjectTransform
 	{
 		public double? AverageCommits { get; set; }
+		
+		public long WeekStartedOnMillis { get; set; }
 
-		public long WeekStartedOn { get; set; }
+		public DateTime WeekStartedOnDate { get; set; }
 
 		public long SumIntoMaster { get; set; }
 	}
