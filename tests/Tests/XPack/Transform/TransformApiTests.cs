@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -171,7 +173,7 @@ namespace Tests.XPack.Transform
 									},
 								GroupBy = new Dictionary<string, ISingleGroupSource>
 								{
-									{ "weekStartedOn", new DateHistogramGroupSource()
+									{ TestClient.Configuration.InRange("<7.11.0") ? "weekStartedOnMillis" : "weekStartedOnDate", new DateHistogramGroupSource
 										{
 											Field = Field<Project>(f => f.StartedOn),
 											CalendarInterval = DateInterval.Week
@@ -207,7 +209,7 @@ namespace Tests.XPack.Transform
 									)
 								)
 								.GroupBy(g => g
-									.DateHistogram("weekStartedOn", dh => dh
+									.DateHistogram(TestClient.Configuration.InRange("<7.11.0") ? "weekStartedOnMillis" : "weekStartedOnDate", dh => dh
 										.Field(f => f.StartedOn)
 										.CalendarInterval(DateInterval.Week)
 									)
@@ -317,6 +319,11 @@ namespace Tests.XPack.Transform
 			r.GeneratedDestinationIndex.Mappings.Should().NotBeNull();
 			r.GeneratedDestinationIndex.Settings.Should().NotBeNull();
 			r.GeneratedDestinationIndex.Aliases.Should().NotBeNull();
+
+			if (TestClient.Configuration.InRange("<7.11.0"))
+				r.Preview.First().WeekStartedOnMillis.Should().BeGreaterOrEqualTo(1);
+			else
+				r.Preview.First().WeekStartedOnDate.Should().NotBe(DateTime.MinValue);
 		});
 
 		[I] public async Task UpdateTransformResponse() => await Assert<UpdateTransformResponse>(UpdateTransformStep, (v, r) =>
