@@ -21,6 +21,9 @@ namespace Nest
 
 		[DataMember(Name = "max_page_search_size")]
 		public int? MaxPageSearchSize { get; set; }
+
+		[DataMember(Name = "dates_as_epoch_millis")]
+		public bool? DatesAsEpochMilliseconds { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -31,12 +34,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		public int? MaxPageSearchSize { get; set; }
+
+		/// <inheritdoc />
+		public bool? DatesAsEpochMilliseconds { get; set; }
 	}
 
 	public class TransformSettingsDescriptor : DescriptorBase<TransformSettingsDescriptor, ITransformSettings>, ITransformSettings
 	{
 		float? ITransformSettings.DocsPerSecond { get; set; }
 		int? ITransformSettings.MaxPageSearchSize { get; set; }
+		bool? ITransformSettings.DatesAsEpochMilliseconds { get; set; }
 
 		/// <inheritdoc cref="ITransformSettings.DocsPerSecond"/>
 		public TransformSettingsDescriptor DocsPerSecond(float? docsPerSecond) =>
@@ -45,5 +52,9 @@ namespace Nest
 		/// <inheritdoc cref="ITransformSettings.MaxPageSearchSize"/>
 		public TransformSettingsDescriptor MaxPageSearchSize(int? maxPageSearchSize) =>
 			Assign(maxPageSearchSize, (a, v) => a.MaxPageSearchSize = v);
+
+		/// <inheritdoc cref="ITransformSettings.DatesAsEpochMilliseconds"/>
+		public TransformSettingsDescriptor DatesAsEpochMilliseconds(bool? datesAsEpochMillis = true) =>
+			Assign(datesAsEpochMillis, (a, v) => a.DatesAsEpochMilliseconds = v);
 	}
 }
