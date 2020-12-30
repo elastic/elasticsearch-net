@@ -1414,17 +1414,17 @@ namespace Elasticsearch.Net.Specification.CatApi
 		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
 		/// connecting to, leave empty to get information from all nodes
 		///</summary>
-		public string[] NodeId
+		public string[] Nodes
 		{
-			get => Q<string[]>("node_id");
-			set => Q("node_id", value);
+			get => Q<string[]>("nodes");
+			set => Q("nodes", value);
 		}
 
-		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
-		public long? ParentTask
+		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
+		public string ParentTaskId
 		{
-			get => Q<long? >("parent_task");
-			set => Q("parent_task", value);
+			get => Q<string>("parent_task_id");
+			set => Q("parent_task_id", value);
 		}
 
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
