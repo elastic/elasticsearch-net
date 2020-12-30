@@ -149,6 +149,17 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 		[MapsApi("watcher.put_watch", "id, body")]
 		public Task<TResponse> PutAsync<TResponse>(string id, PostData body, PutWatchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_watcher/watch/{id:id}"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_watcher/_query/watches <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-query-watches.html</para></summary>
+		///<param name = "body">From, size, query, sort and search_after</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse QueryWatches<TResponse>(PostData body, QueryWatchesRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, "_watcher/_query/watches", body, RequestParams(requestParameters));
+		///<summary>POST on /_watcher/_query/watches <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-query-watches.html</para></summary>
+		///<param name = "body">From, size, query, sort and search_after</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("watcher.query_watches", "body")]
+		public Task<TResponse> QueryWatchesAsync<TResponse>(PostData body, QueryWatchesRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, "_watcher/_query/watches", ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_watcher/_start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Start<TResponse>(StartWatcherRequestParameters requestParameters = null)

@@ -561,6 +561,17 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.open", "index")]
 		public Task<TResponse> OpenAsync<TResponse>(string index, OpenIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_open"), ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /_data_stream/_promote/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+		///<param name = "name">The name of the data stream</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PromoteDataStreamForAll<TResponse>(string name, PromoteDataStreamRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_data_stream/_promote/{name:name}"), null, RequestParams(requestParameters));
+		///<summary>POST on /_data_stream/_promote/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+		///<param name = "name">The name of the data stream</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("indices.promote_data_stream", "name")]
+		public Task<TResponse> PromoteDataStreamForAllAsync<TResponse>(string name, PromoteDataStreamRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_data_stream/_promote/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>PUT on /{index}/_alias/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 		///<param name = "index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name = "name">The name of the alias to be created or updated</param>

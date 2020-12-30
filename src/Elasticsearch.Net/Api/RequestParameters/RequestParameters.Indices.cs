@@ -1035,6 +1035,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
+	///<summary>Request options for PromoteDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class PromoteDataStreamRequestParameters : RequestParameters<PromoteDataStreamRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
+	}
+
 	///<summary>Request options for PutAlias <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public class PutAliasRequestParameters : RequestParameters<PutAliasRequestParameters>
 	{
@@ -1525,7 +1532,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
-		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `completion` index metric (supports wildcards)</summary>
 		public string[] CompletionFields
 		{
 			get => Q<string[]>("completion_fields");
@@ -1539,7 +1546,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			set => Q("expand_wildcards", value);
 		}
 
-		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `fielddata` index metric (supports wildcards)</summary>
 		public string[] FielddataFields
 		{
 			get => Q<string[]>("fielddata_fields");
