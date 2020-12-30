@@ -16,7 +16,7 @@ namespace Nest
 		/// The <see cref="DateInterval"/> to use as the rate unit.
 		/// </summary>
 		[DataMember(Name = "unit")]
-		DateInterval Unit { get; set; }
+		DateInterval? Unit { get; set; }
 
 		/// <summary>
 		/// The mode to use in the rate calculation. By default, "sum" mode is used.
@@ -31,14 +31,13 @@ namespace Nest
 
 	public class RateAggregation : MetricAggregationBase, IRateAggregation
 	{
-		internal RateAggregation() { }
 		public RateAggregation(string name) : base(name, null) { }
 		public RateAggregation(string name, Field field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Rate = this;
 
 		/// <inheritdoc cref ="IRateAggregation.Unit"/>
-		public DateInterval Unit { get; set; }
+		public DateInterval? Unit { get; set; }
 
 		/// <inheritdoc cref ="IRateAggregation.Mode"/>
 		public RateMode? Mode { get; set; }
@@ -48,16 +47,16 @@ namespace Nest
 		: MetricAggregationDescriptorBase<RateAggregationDescriptor<T>, IRateAggregation, T>, IRateAggregation
 		where T : class
 	{
-		DateInterval IRateAggregation.Unit { get; set; }
+		DateInterval? IRateAggregation.Unit { get; set; }
 
 		RateMode? IRateAggregation.Mode { get; set; }
-
+		
 		/// <inheritdoc cref ="IRateAggregation.Unit"/>
-		public RateAggregationDescriptor<T> Unit(DateInterval dateInterval) =>
+		public RateAggregationDescriptor<T> Unit(DateInterval? dateInterval) =>
 			Assign(dateInterval, (a, v) => a.Unit = v);
 
 		/// <inheritdoc cref ="IRateAggregation.Mode"/>
-		public RateAggregationDescriptor<T> Mode(RateMode mode) =>
+		public RateAggregationDescriptor<T> Mode(RateMode? mode) =>
 			Assign(mode, (a, v) => a.Mode = v);
 	}
 
@@ -65,13 +64,13 @@ namespace Nest
 	public enum RateMode
 	{
 		/// <summary>
-		/// TODO
+		/// Rate calculates the sum of field values.
 		/// </summary>
 		[EnumMember(Value = "sum")]
 		Sum,
 
 		/// <summary>
-		/// TODO
+		/// Rate uses the number of values in the field.
 		/// </summary>
 		[EnumMember(Value = "value_count")]
 		ValueCount
