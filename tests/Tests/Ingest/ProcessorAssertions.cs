@@ -57,43 +57,32 @@ namespace Tests.Ingest
 			foreach (var a in All) a.Fluent(d);
 			return d;
 		}
-
+		
 		public class Append : ProcessorAssertion
 		{
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent =>
-				d => d.Append<Project>(a =>
-				{
-					var apd = a.Field(p => p.State).Value(StateOfBeing.Stable, StateOfBeing.VeryActive);
+				d => d.Append<Project>(a => a.Field(p => p.State).Value(StateOfBeing.Stable, StateOfBeing.VeryActive));
 
-					if (TestClient.Configuration.InRange(">=7.11.0"))
-						apd.AllowDuplicates(false);
+			public override IProcessor Initializer => new AppendProcessor { Field = "state", Value = new object[] { StateOfBeing.Stable, StateOfBeing.VeryActive }};
 
-					return apd;
-				});
-
-			public override IProcessor Initializer
+			public override object Json => new
 			{
-				get
-				{
-					var ap = new AppendProcessor { Field = "state", Value = new object[] { StateOfBeing.Stable, StateOfBeing.VeryActive } };
+				field = "state",
+				value = new[] { "Stable", "VeryActive" }
+			};
 
-					if (TestClient.Configuration.InRange(">=7.11.0"))
-						ap.AllowDuplicates = false;
+			public override string Key => "append";
+		}
 
-					return ap;
-				}
-			}
+		[SkipVersion("<7.11.0", "Allow duplicates added in 7.11")]
+		public class AppendWithAllowDuplicates : ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent =>
+				d => d.Append<Project>(a => a.Field(p => p.State).Value(StateOfBeing.Stable, StateOfBeing.VeryActive).AllowDuplicates(false));
 
-			public override object Json
-			{
-				get
-				{
-					if (TestClient.Configuration.InRange(">=7.11.0"))
-						return new { field = "state", value = new[] { "Stable", "VeryActive" }, allow_duplicates = false };
+			public override IProcessor Initializer => new AppendProcessor { Field = "state", Value = new object[] { StateOfBeing.Stable, StateOfBeing.VeryActive }, AllowDuplicates = false };
 
-					return new { field = "state", value = new[] { "Stable", "VeryActive" } };
-				}
-			}
+			public override object Json => new { field = "state", value = new[] { "Stable", "VeryActive" }, allow_duplicates = false };
 
 			public override string Key => "append";
 		}

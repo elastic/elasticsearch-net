@@ -56,6 +56,6 @@ namespace Nest
 			else a.Value = v?.Cast<object>();
 		});
 
-		public AppendProcessorDescriptor<T> AllowDuplicates(bool allowDuplicates = true) => Assign(allowDuplicates, (a, v) => a.AllowDuplicates = v);
+		public AppendProcessorDescriptor<T> AllowDuplicates(bool? allowDuplicates = true) => Assign(allowDuplicates, (a, v) => a.AllowDuplicates = v);
 	}
 }
