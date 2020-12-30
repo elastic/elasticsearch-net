@@ -133,6 +133,21 @@ namespace Elasticsearch.Net.Specification.RollupApi
 		[MapsApi("rollup.put_job", "id, body")]
 		public Task<TResponse> CreateJobAsync<TResponse>(string id, PostData body, CreateRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_rollup/job/{id:id}"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /{index}/_rollup/{rollup_index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-api.html</para></summary>
+		///<param name = "index">The index to roll up</param>
+		///<param name = "rollupIndex">The name of the rollup index to create</param>
+		///<param name = "body">The rollup configuration</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse Rollup<TResponse>(string index, string rollupIndex, PostData body, RollupRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_rollup/{rollupIndex:rollupIndex}"), body, RequestParams(requestParameters));
+		///<summary>POST on /{index}/_rollup/{rollup_index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-api.html</para></summary>
+		///<param name = "index">The index to roll up</param>
+		///<param name = "rollupIndex">The name of the rollup index to create</param>
+		///<param name = "body">The rollup configuration</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("rollup.rollup", "index, rollup_index, body")]
+		public Task<TResponse> RollupAsync<TResponse>(string index, string rollupIndex, PostData body, RollupRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_rollup/{rollupIndex:rollupIndex}"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_rollup_search <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html</para></summary>
 		///<param name = "index">The indices or index-pattern(s) (containing rollup or regular data) that should be searched</param>
 		///<param name = "body">The search request body</param>

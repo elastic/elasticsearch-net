@@ -1,0 +1,8 @@
+{
+  "cat.tasks": {
+    "stability" : "experimental",
+    "url": {
+      "path": "/_cat/tasks"
+    }
+  }
+}
