@@ -1078,6 +1078,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
+	///<summary>Request options for MigrateToDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class MigrateToDataStreamRequestParameters : RequestParameters<MigrateToDataStreamRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
+	}
+
 	///<summary>Request options for Open <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public class OpenIndexRequestParameters : RequestParameters<OpenIndexRequestParameters>
 	{
@@ -1127,6 +1134,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			get => Q<string>("wait_for_active_shards");
 			set => Q("wait_for_active_shards", value);
 		}
+	}
+
+	///<summary>Request options for PromoteDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class PromoteDataStreamRequestParameters : RequestParameters<PromoteDataStreamRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for PutAlias <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
