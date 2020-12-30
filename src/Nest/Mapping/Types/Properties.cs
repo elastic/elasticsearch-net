@@ -151,6 +151,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IWildcardProperty"/>
 		TReturnType Wildcard(Func<WildcardPropertyDescriptor<T>, IWildcardProperty> selector);
+
+		/// <inheritdoc cref="IVersionProperty"/>
+		TReturnType Version(Func<VersionPropertyDescriptor<T>, IVersionProperty> selector);
 	}
 
 	public partial class PropertiesDescriptor<T> where T : class
