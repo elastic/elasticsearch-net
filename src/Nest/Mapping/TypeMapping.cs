@@ -97,6 +97,12 @@ namespace Nest
 		IRoutingField RoutingField { get; set; }
 
 		/// <summary>
+		/// Specifies runtime fields for the mapping.
+		/// </summary>
+		[DataMember(Name = "runtime")]
+		IRuntimeFields RuntimeFields { get; set; }
+
+		/// <summary>
 		/// If enabled, indexes the size in bytes of the original _source field.
 		/// Requires mapper-size plugin be installed
 		/// </summary>
@@ -148,6 +154,9 @@ namespace Nest
 		public IRoutingField RoutingField { get; set; }
 
 		/// <inheritdoc />
+		public IRuntimeFields RuntimeFields { get; set; }
+
+		/// <inheritdoc />
 		public ISizeField SizeField { get; set; }
 
 		/// <inheritdoc />
@@ -171,6 +180,7 @@ namespace Nest
 		bool? ITypeMapping.NumericDetection { get; set; }
 		IProperties ITypeMapping.Properties { get; set; }
 		IRoutingField ITypeMapping.RoutingField { get; set; }
+		IRuntimeFields ITypeMapping.RuntimeFields { get; set; }
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
 
@@ -258,6 +268,10 @@ namespace Nest
 		/// <inheritdoc cref="ITypeMapping.RoutingField" />
 		public TypeMappingDescriptor<T> RoutingField(Func<RoutingFieldDescriptor<T>, IRoutingField> routingFieldSelector) =>
 			Assign(routingFieldSelector, (a, v) => a.RoutingField = v?.Invoke(new RoutingFieldDescriptor<T>()));
+
+		/// <inheritdoc cref="ITypeMapping.RuntimeFields" />
+		public TypeMappingDescriptor<T> RuntimeFields(Func<RuntimeFieldsDescriptor, IPromise<IRuntimeFields>> runtimeFieldsSelector) =>
+			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor())?.Value);
 
 		/// <inheritdoc cref="ITypeMapping.FieldNamesField" />
 		public TypeMappingDescriptor<T> FieldNamesField(Func<FieldNamesFieldDescriptor<T>, IFieldNamesField> fieldNamesFieldSelector) =>
