@@ -58,7 +58,7 @@ namespace Nest
 				throw new ArgumentException("minReplicas must be greater than or equal to 0", nameof(minReplicas));
 
 			if (maxReplicas < 0)
-				throw new ArgumentException("maxReplicas must be greater than or equal to 0", nameof(minReplicas));
+				throw new ArgumentException("maxReplicas must be greater than or equal to 0", nameof(maxReplicas));
 
 			if (minReplicas > maxReplicas)
 				throw new ArgumentException("minReplicas must be less than or equal to maxReplicas", nameof(minReplicas));
