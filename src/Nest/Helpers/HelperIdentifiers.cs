@@ -6,10 +6,10 @@ namespace Nest
 {
 	internal static class HelperIdentifiers
 	{
-		public const string SnapshotHelper = "h=sn";
-		public const string ScrollHelper = "h=s";
-		public const string ReindexHelper = "h=r";
-		public const string BulkPushHelper = "h=bp";
-		public const string RestoreHelper = "h=sr";
+		public const string SnapshotHelper = "sn";
+		public const string ScrollHelper = "s";
+		public const string ReindexHelper = "r";
+		public const string BulkPushHelper = "bp";
+		public const string RestoreHelper = "sr";
 	}
 }

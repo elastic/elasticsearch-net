@@ -22,11 +22,7 @@ namespace Nest
 		private EventHandler<RestoreErrorEventArgs> _errorEventHandlers;
 		private EventHandler<RestoreNextEventArgs> _nextEventHandlers;
 		private Timer _timer;
-
-		// when created through the factory method, this type is currently thread-safe and we can safely reuse a static
-		// instance across all requests to avoid allocating this every time.
-		private static readonly RequestMetaData _requestMetaData = RequestMetaDataFactory.RestoreHelperRequestMetaData();
-
+		
 		public RestoreObservable(IElasticClient elasticClient, IRestoreRequest restoreRequest)
 		{
 			elasticClient.ThrowIfNull(nameof(elasticClient));
@@ -34,7 +30,7 @@ namespace Nest
 
 			_elasticClient = elasticClient;
 			_restoreRequest = restoreRequest;
-			_restoreRequest.RequestParameters.SetRequestMetaData(_requestMetaData);
+			_restoreRequest.RequestParameters.SetRequestMetaData(RequestMetaDataFactory.RestoreHelperRequestMetaData());
 			_restoreStatusHumbleObject = new RestoreStatusHumbleObject(elasticClient, restoreRequest);
 			_restoreStatusHumbleObject.Completed += StopTimer;
 			_restoreStatusHumbleObject.Error += StopTimer;
@@ -159,10 +155,6 @@ namespace Nest
 		private readonly string _renameReplacement;
 		private readonly IRestoreRequest _restoreRequest;
 
-		// when created through the factory method, this type is currently thread-safe and we can safely reuse a static
-		// instance across all requests to avoid allocating this every time.
-		private static readonly RequestMetaData _requestMetaData = RequestMetaDataFactory.RestoreHelperRequestMetaData();
-
 		public RestoreStatusHumbleObject(IElasticClient elasticClient, IRestoreRequest restoreRequest)
 		{
 			elasticClient.ThrowIfNull(nameof(elasticClient));
@@ -194,7 +186,7 @@ namespace Nest
 				{
 					Detailed = true,
 				};
-				recoveryStatusRequest.RequestConfiguration.SetRequestMetaData(_requestMetaData);
+				recoveryStatusRequest.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.RestoreHelperRequestMetaData());
 				var recoveryStatus = _elasticClient.Indices.RecoveryStatus(recoveryStatusRequest);
 
 				if (!recoveryStatus.IsValid)

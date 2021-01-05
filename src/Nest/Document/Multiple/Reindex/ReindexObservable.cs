@@ -33,10 +33,6 @@ namespace Nest
 		private Action<long> _incrementSeenDocuments = l => { };
 		private Action _incrementSeenScrollOperations = () => { };
 
-		// when created through the factory method, this type is currently thread-safe and we can safely reuse a static
-		// instance across all requests to avoid allocating this every time.
-		private static readonly RequestMetaData _requestMetaData = RequestMetaDataFactory.ReindexHelperRequestMetaData();
-
 		public ReindexObservable(
 			IElasticClient client,
 			IConnectionSettingsValues connectionSettings,
@@ -231,11 +227,13 @@ namespace Nest
 		/// <returns>Either the number of shards from to source or the target as a slice hint to ScrollAll</returns>
 		private int? CreateIndexIfNeeded(Indices fromIndices, string resolvedTo)
 		{
+			var requestMetaData = RequestMetaDataFactory.ReindexHelperRequestMetaData();
+
 			if (_reindexRequest.OmitIndexCreation)
 				return null;
 
 			var pointsToSingleSourceIndex = fromIndices.Match((a) => false, (m) => m.Indices.Count == 1);
-			var targetExistsAlready = _client.Indices.Exists(resolvedTo, e => e.RequestConfiguration(rc => rc.RequestMetaData(_requestMetaData)));
+			var targetExistsAlready = _client.Indices.Exists(resolvedTo, e => e.RequestConfiguration(rc => rc.RequestMetaData(requestMetaData)));
 			if (targetExistsAlready.Exists)
 				return null;
 
@@ -245,7 +243,7 @@ namespace Nest
 
 			if (pointsToSingleSourceIndex)
 			{
-				var getIndexResponse = _client.Indices.Get(resolvedFrom, i => i.RequestConfiguration(rc => rc.RequestMetaData(_requestMetaData)));
+				var getIndexResponse = _client.Indices.Get(resolvedFrom, i => i.RequestConfiguration(rc => rc.RequestMetaData(requestMetaData)));
 				_compositeCancelToken.ThrowIfCancellationRequested();
 				originalIndexState = getIndexResponse.Indices[resolvedFrom];
 				if (_reindexRequest.OmitIndexCreation)
@@ -257,7 +255,7 @@ namespace Nest
 					? new CreateIndexRequest(resolvedTo, originalIndexState)
 					: new CreateIndexRequest(resolvedTo));
 
-			createIndexRequest.RequestParameters.SetRequestMetaData(_requestMetaData);
+			createIndexRequest.RequestParameters.SetRequestMetaData(requestMetaData);
 
 			var createIndexResponse = _client.Indices.Create(createIndexRequest);
 			_compositeCancelToken.ThrowIfCancellationRequested();

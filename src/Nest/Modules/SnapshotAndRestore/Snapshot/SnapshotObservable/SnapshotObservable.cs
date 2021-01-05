@@ -22,10 +22,6 @@ namespace Nest
 		private EventHandler<SnapshotNextEventArgs> _nextEventHandler;
 		private Timer _timer;
 
-		// when created through the factory method, this type is currently thread-safe and we can safely reuse a static
-		// instance across all requests to avoid allocating this every time.
-		private static readonly RequestMetaData _requestMetaData = RequestMetaDataFactory.SnapshotHelperRequestMetaData();
-
 		public SnapshotObservable(IElasticClient elasticClient, ISnapshotRequest snapshotRequest)
 		{
 			elasticClient.ThrowIfNull(nameof(elasticClient));
@@ -33,7 +29,7 @@ namespace Nest
 
 			_elasticClient = elasticClient;
 			_snapshotRequest = snapshotRequest;
-			_snapshotRequest.RequestParameters.SetRequestMetaData(_requestMetaData);
+			_snapshotRequest.RequestParameters.SetRequestMetaData(RequestMetaDataFactory.SnapshotHelperRequestMetaData());
 			_snapshotStatusHumbleObject = new SnapshotStatusHumbleObject(elasticClient, snapshotRequest);
 			_snapshotStatusHumbleObject.Completed += StopTimer;
 			_snapshotStatusHumbleObject.Error += StopTimer;
@@ -207,19 +203,19 @@ namespace Nest
 		protected virtual void OnNext(SnapshotNextEventArgs nextEventArgs)
 		{
 			var handler = Next;
-			if (handler != null) handler(this, nextEventArgs);
+			handler?.Invoke(this, nextEventArgs);
 		}
 
 		protected virtual void OnCompleted(SnapshotCompletedEventArgs completedEventArgs)
 		{
 			var handler = Completed;
-			if (handler != null) handler(this, completedEventArgs);
+			handler?.Invoke(this, completedEventArgs);
 		}
 
 		protected virtual void OnError(SnapshotErrorEventArgs errorEventArgs)
 		{
 			var handler = Error;
-			if (handler != null) handler(this, errorEventArgs);
+			handler?.Invoke(this, errorEventArgs);
 		}
 	}
 }

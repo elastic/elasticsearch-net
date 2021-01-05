@@ -16,8 +16,7 @@ namespace Elasticsearch.Net
 			if (requestMetaData is null)
 				throw new ArgumentNullException(nameof(requestMetaData));
 
-			if (parameters.RequestConfiguration is null)
-				parameters.RequestConfiguration = new RequestConfiguration();
+			parameters.RequestConfiguration ??= new RequestConfiguration();
 
 			parameters.RequestConfiguration.RequestMetaData = requestMetaData;
 		}

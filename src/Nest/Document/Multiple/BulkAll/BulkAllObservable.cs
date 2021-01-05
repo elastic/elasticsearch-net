@@ -28,10 +28,6 @@ namespace Nest
 		private Action _incrementRetries = () => { };
 		private readonly Action<BulkResponse> _bulkResponseCallback;
 
-		// when created through the factory method, this type is currently thread-safe and we can safely reuse a static
-		// instance across all requests to avoid allocating this every time.
-		private static readonly RequestMetaData _requestMetaData = RequestMetaDataFactory.BulkPushHelperRequestMetaData();
-
 		public BulkAllObservable(
 			IElasticClient client,
 			IBulkAllRequest<T> partitionedBulkRequest,
@@ -112,7 +108,7 @@ namespace Nest
 			var indices = _partitionedBulkRequest.RefreshIndices ?? _partitionedBulkRequest.Index;
 			if (indices == null) return;
 
-			var refresh = _client.Indices.Refresh(indices, r => r.RequestConfiguration(rc => rc.RequestMetaData(_requestMetaData)));
+			var refresh = _client.Indices.Refresh(indices, r => r.RequestConfiguration(rc => rc.RequestMetaData(RequestMetaDataFactory.BulkPushHelperRequestMetaData())));
 			if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
 		}
 
@@ -137,7 +133,7 @@ namespace Nest
 							s.RequestConfiguration(rc => rc.RequestMetaData(helperCallable.ParentMetaData));
 							break;
 						default:
-							s.RequestConfiguration(rc => rc.RequestMetaData(_requestMetaData));
+							s.RequestConfiguration(rc => rc.RequestMetaData(RequestMetaDataFactory.BulkPushHelperRequestMetaData()));
 							break;
 					}
 

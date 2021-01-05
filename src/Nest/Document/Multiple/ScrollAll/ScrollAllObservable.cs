@@ -25,10 +25,6 @@ namespace Nest
 		private readonly SemaphoreSlim _scrollInitiationLock = new SemaphoreSlim(1, 1);
 		private readonly ISearchRequest _searchRequest;
 
-		// when created through the factory method, this type is currently thread-safe and we can safely reuse a static
-		// instance across all requests to avoid allocating this every time.
-		private static readonly RequestMetaData _requestMetaData = RequestMetaDataFactory.ScrollHelperRequestMetaData();
-
 		public ScrollAllObservable(IElasticClient client, IScrollAllRequest scrollAllRequest, CancellationToken cancellationToken = default)
 		{
 			_scrollAllRequest = scrollAllRequest;
@@ -40,7 +36,7 @@ namespace Nest
 					_searchRequest.RequestParameters.SetRequestMetaData(helperCallable.ParentMetaData);
 					break;
 				default:
-					_searchRequest.RequestParameters.SetRequestMetaData(_requestMetaData);
+					_searchRequest.RequestParameters.SetRequestMetaData(RequestMetaDataFactory.ScrollHelperRequestMetaData());
 					break;
 			}
 
@@ -132,7 +128,7 @@ namespace Nest
 						request.RequestConfiguration.SetRequestMetaData(helperCallable.ParentMetaData);
 						break;
 					default:
-						request.RequestConfiguration.SetRequestMetaData(_requestMetaData);
+						request.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.ScrollHelperRequestMetaData());
 						break;
 				}
 

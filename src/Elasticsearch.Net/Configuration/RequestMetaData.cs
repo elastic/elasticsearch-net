@@ -16,8 +16,7 @@ namespace Elasticsearch.Net
 
 		internal bool TryAddMetaData (string key, string value)
 		{
-			if (_metaDataItems is null)
-				_metaDataItems = new Dictionary<string, string>();
+			_metaDataItems ??= new Dictionary<string, string>();
 
 #if NETSTANDARD2_1
 			return _metaDataItems.TryAdd(key, value);
@@ -30,6 +29,6 @@ namespace Elasticsearch.Net
 #endif
 		}		
 
-		public IReadOnlyDictionary<string, string> Items => _metaDataItems is null ? EmptyReadOnly<string, string>.Dictionary : _metaDataItems;
+		public IReadOnlyDictionary<string, string> Items => _metaDataItems ?? EmptyReadOnly<string, string>.Dictionary;
 	}
 }

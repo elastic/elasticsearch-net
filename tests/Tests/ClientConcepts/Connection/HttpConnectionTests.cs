@@ -58,8 +58,7 @@ namespace Tests.ClientConcepts.Connection
 			connection.InUseHandlers.Should().Be(1);
 			connection.RemovedHandlers.Should().Be(1);
 		}
-
-
+		
 		[I] public async Task MultipleInstancesOfHttpClientWhenRequestTimeoutChanges() =>
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(TimeSpan.FromSeconds(30)));
 
@@ -98,7 +97,8 @@ namespace Tests.ClientConcepts.Connection
 			bool disableAutomaticProxyDetection = false,
 			bool httpCompression = false,
 			bool transferEncodingChunked = false,
-			bool disableMetaHeader = false
+			bool disableMetaHeader = false,
+			Action<RequestMetaData> requestMetaData = null
 		)
 		{
 			if (requestTimeout == default) requestTimeout = TimeSpan.FromSeconds(10);
@@ -115,8 +115,17 @@ namespace Tests.ClientConcepts.Connection
 			if (proxyAddress != null)
 				connectionSettings.Proxy(proxyAddress, null, (string)null);
 
+			var requestParameters = new SearchRequestParameters();
+			
+			if (requestMetaData is object)
+			{
+				requestParameters.RequestConfiguration ??= new RequestConfiguration();
+				requestParameters.RequestConfiguration.RequestMetaData ??= new RequestMetaData();
+				requestMetaData(requestParameters.RequestConfiguration.RequestMetaData);
+			}
+
 			var requestData = new RequestData(HttpMethod.POST, "/_search", "{ \"query\": { \"match_all\" : { } } }", connectionSettings,
-				new SearchRequestParameters(),
+				requestParameters,
 				new RecyclableMemoryStreamFactory()) { Node = node };
 
 			return requestData;
@@ -185,8 +194,7 @@ namespace Tests.ClientConcepts.Connection
 			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 		}
 
-		[I]
-		public async Task HttpClientSetsMetaHeaderWhenNotDisabled()
+		[I] public async Task HttpClientSetsMetaHeaderWhenNotDisabled()
 		{
 			var regex = new Regex(@"^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$");
 
@@ -203,8 +211,25 @@ namespace Tests.ClientConcepts.Connection
 			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 		}
 
-		[I]
-		public async Task HttpClientShouldNotSetMetaHeaderWhenDisabled()
+		[I] public async Task HttpClientSetsMetaHeaderWithHelperWhenNotDisabled()
+		{
+			var regex = new Regex(@"^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$");
+
+			var requestData = CreateRequestData(requestMetaData: m => m.TryAddMetaData("helper", "r"));
+			var connection = new TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Headers.TryGetValues("x-elastic-client-meta", out var headerValue).Should().BeTrue();
+				headerValue.Should().HaveCount(1);
+				headerValue.Single().Should().NotBeNullOrEmpty();
+				headerValue.Single().Should().EndWith("h=r");
+				regex.Match(headerValue.Single()).Success.Should().BeTrue();
+			});
+
+			connection.Request<StringResponse>(requestData);
+			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+		}
+
+		[I] public async Task HttpClientShouldNotSetMetaHeaderWhenDisabled()
 		{
 			var requestData = CreateRequestData(disableMetaHeader: true);
 			var connection = new TestableHttpConnection(responseMessage =>

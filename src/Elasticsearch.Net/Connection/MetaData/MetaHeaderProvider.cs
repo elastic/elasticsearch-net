@@ -10,14 +10,16 @@ namespace Elasticsearch.Net
 	public class MetaHeaderProvider
 	{
 		private const string MetaHeaderName = "x-elastic-client-meta";
-
-		private readonly MetaDataHeaders _metaDataHeaders;
+		
+		private readonly MetaDataHeader _asyncMetaDataHeader;
+		private readonly MetaDataHeader _syncMetaDataHeader;
 
 		public MetaHeaderProvider()
 		{
 			var clientVersionInfo = ClientVersionInfo.Create<IElasticLowLevelClient>();
-			_metaDataHeaders = new MetaDataHeaders(clientVersionInfo);
-	}
+			_asyncMetaDataHeader = new MetaDataHeader(clientVersionInfo, "es", true);
+			_syncMetaDataHeader = new MetaDataHeader(clientVersionInfo, "es", false);
+		}
 		
 		public string HeaderName => MetaHeaderName;
 
@@ -29,11 +31,11 @@ namespace Elasticsearch.Net
 					return null;
 
 				var headerValue = requestData.IsAsync
-					? _metaDataHeaders.AsyncMetaDataHeaderPrefix
-					: _metaDataHeaders.SyncMetaDataHeaderPrefix;
+					? _asyncMetaDataHeader.ToString()
+					: _syncMetaDataHeader.ToString();
 
 				if (requestData.RequestMetaData.TryGetValue(RequestMetaData.HelperKey, out var helperSuffix))
-					headerValue = $"{headerValue},{helperSuffix}";
+					headerValue = $"{headerValue},h={helperSuffix}";
 
 				return headerValue;
 			}
