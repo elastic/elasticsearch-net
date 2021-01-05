@@ -57,6 +57,8 @@ namespace Nest
 		IProperties ITypeMapping.Properties { get => Wrapped.Properties; set => Wrapped.Properties = value; }
 		[DataMember(Name = "_routing")]
 		IRoutingField ITypeMapping.RoutingField { get => Wrapped.RoutingField; set => Wrapped.RoutingField = value; }
+		[DataMember(Name = "runtime")]
+		IRuntimeFields ITypeMapping.RuntimeFields { get => Wrapped.RuntimeFields; set => Wrapped.RuntimeFields = value; }
 		[DataMember(Name = "_size")]
 		ISizeField ITypeMapping.SizeField { get => Wrapped.SizeField; set => Wrapped.SizeField = value; }
 		[DataMember(Name = "_source")]
