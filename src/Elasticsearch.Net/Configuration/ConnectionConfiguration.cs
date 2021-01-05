@@ -341,6 +341,10 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T DisableAutomaticProxyDetection(bool disable = true) => Assign(disable, (a, v) => a._disableAutomaticProxyDetection = v);
 
+		/// <summary>
+		/// Disables the meta header which is included on all requests by default. This header contains lightweight information 
+		/// about the client and runtime.
+		/// </summary>
 		public T DisableMetaHeader(bool disable = true) => Assign(disable, (a, v) => a._disableMetaHeader = v);
 
 		/// <summary>
