@@ -167,6 +167,9 @@ namespace Nest
 		[DataMember(Name = "version")]
 		bool? Version { get; set; }
 
+		/// <summary>
+		/// The <see cref="PointInTime"/> to search over.
+		/// </summary>
 		[DataMember(Name = "pit")]
 		IPointInTime PointInTime { get; set; }
 	}
