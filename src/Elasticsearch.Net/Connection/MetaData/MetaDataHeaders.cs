@@ -12,9 +12,9 @@ namespace Elasticsearch.Net
 			SyncMetaDataHeader = new MetaDataHeader(clientVersionInfo, "es", false);
 		}
 
-		public MetaDataHeader AsyncMetaDataHeader { get; private set; }
+		public MetaDataHeader AsyncMetaDataHeader { get; }
 
-		public MetaDataHeader SyncMetaDataHeader { get; private set; }
+		public MetaDataHeader SyncMetaDataHeader { get; }
 
 		public string AsyncMetaDataHeaderPrefix => AsyncMetaDataHeader.ToString();
 

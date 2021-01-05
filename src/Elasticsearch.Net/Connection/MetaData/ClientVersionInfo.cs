@@ -11,7 +11,7 @@ namespace Elasticsearch.Net
 {
 	internal sealed class ClientVersionInfo : VersionInfo
 	{
-		private static readonly Regex versionRegex = new Regex(@"(\d+\.)(\d+\.)(\d)");
+		private static readonly Regex VersionRegex = new Regex(@"(\d+\.)(\d+\.)(\d)");
 
 		public static readonly ClientVersionInfo Empty = new ClientVersionInfo { Version = new Version(0, 0, 0), IsPrerelease = false };
 
@@ -35,7 +35,7 @@ namespace Elasticsearch.Net
 				if (productVersion == EmptyVersion)
 					productVersion = Assembly.GetAssembly(type).GetName().Version.ToString();
 
-				var match = versionRegex.Match(productVersion);
+				var match = VersionRegex.Match(productVersion);
 
 				return match.Success ? match.Value : EmptyVersion;
 			}
