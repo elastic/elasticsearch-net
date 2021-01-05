@@ -221,7 +221,7 @@ namespace Tests.ClientConcepts.Connection
 				responseMessage.RequestMessage.Headers.TryGetValues("x-elastic-client-meta", out var headerValue).Should().BeTrue();
 				headerValue.Should().HaveCount(1);
 				headerValue.Single().Should().NotBeNullOrEmpty();
-				headerValue.Single().Should().EndWith("h=r");
+				headerValue.Single().Should().EndWith(",h=r");
 				regex.Match(headerValue.Single()).Success.Should().BeTrue();
 			});
 
