@@ -122,11 +122,11 @@ namespace Nest
 					bulk.AddOperation(item);
 				}
 			};
-
+			
+			// Mark the parent for the bulk all request as this reindex helper
 			if (bulkAllRequest is IHelperCallable helperCallable)
 			{
-				var parentMetaData = new RequestMetaData(); // todo define once in this type
-				parentMetaData.AddReindexHelper();
+				var parentMetaData = RequestMetaDataFactory.ReindexHelperRequestMetaData();
 				helperCallable.ParentMetaData = parentMetaData;
 			}
 
@@ -169,18 +169,15 @@ namespace Nest
 		{
 			var scrollAll = _reindexRequest.ScrollAll;
 			var scroll = _reindexRequest.ScrollAll?.ScrollTime ?? TimeSpan.FromMinutes(2);
-
-			var parentMetaData = new RequestMetaData();
-			parentMetaData.AddReindexHelper();
-
+			
 			var scrollAllRequest = new ScrollAllRequest(scroll, slices)
 			{
 				RoutingField = scrollAll.RoutingField,
 				MaxDegreeOfParallelism = scrollAll.MaxDegreeOfParallelism ?? slices,
 				Search = scrollAll.Search,
 				BackPressure = backPressure,
-				ParentMetaData = parentMetaData
-			};
+				ParentMetaData = RequestMetaDataFactory.ReindexHelperRequestMetaData()
+		};
 
 			var scrollObservable = _client.ScrollAll<TSource>(scrollAllRequest, _compositeCancelToken);
 			return new GetEnumerator<IScrollAllResponse<TSource>>()

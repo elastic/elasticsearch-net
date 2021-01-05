@@ -9,7 +9,7 @@ namespace Nest
 		public const string SnapshotHelper = "sn";
 		public const string ScrollHelper = "s";
 		public const string ReindexHelper = "r";
-		public const string BulkPushHelper = "bp";
+		public const string BulkHelper = "b";
 		public const string RestoreHelper = "sr";
 	}
 }

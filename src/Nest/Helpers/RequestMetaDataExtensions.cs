@@ -21,7 +21,7 @@ namespace Nest
 
 		internal static void AddReindexHelper(this RequestMetaData metaData) => metaData.AddHelper(HelperIdentifiers.ReindexHelper);
 
-		internal static void AddBulkPushHelper(this RequestMetaData metaData) => metaData.AddHelper(HelperIdentifiers.BulkPushHelper);
+		internal static void AddBulkHelper(this RequestMetaData metaData) => metaData.AddHelper(HelperIdentifiers.BulkHelper);
 
 		internal static void AddRestoreHelper(this RequestMetaData metaData) => metaData.AddHelper(HelperIdentifiers.RestoreHelper);
 	}
@@ -42,10 +42,10 @@ namespace Nest
 			return metaData;
 		}
 
-		internal static RequestMetaData BulkPushHelperRequestMetaData()
+		internal static RequestMetaData BulkHelperRequestMetaData()
 		{
 			var metaData = new RequestMetaData();
-			metaData.AddBulkPushHelper();
+			metaData.AddBulkHelper();
 			return metaData;
 		}
 

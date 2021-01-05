@@ -108,7 +108,20 @@ namespace Nest
 			var indices = _partitionedBulkRequest.RefreshIndices ?? _partitionedBulkRequest.Index;
 			if (indices == null) return;
 
-			var refresh = _client.Indices.Refresh(indices, r => r.RequestConfiguration(rc => rc.RequestMetaData(RequestMetaDataFactory.BulkPushHelperRequestMetaData())));
+			var refresh = _client.Indices.Refresh(indices, r => r.RequestConfiguration(rc =>
+			{
+				switch (_partitionedBulkRequest)
+				{
+					case IHelperCallable helperCallable when helperCallable.ParentMetaData is object:
+						rc.RequestMetaData(helperCallable.ParentMetaData);
+						break;
+					default:
+						rc.RequestMetaData(RequestMetaDataFactory.BulkHelperRequestMetaData());
+						break;
+				}
+
+				return rc;
+			}));
 			if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
 		}
 
@@ -133,7 +146,7 @@ namespace Nest
 							s.RequestConfiguration(rc => rc.RequestMetaData(helperCallable.ParentMetaData));
 							break;
 						default:
-							s.RequestConfiguration(rc => rc.RequestMetaData(RequestMetaDataFactory.BulkPushHelperRequestMetaData()));
+							s.RequestConfiguration(rc => rc.RequestMetaData(RequestMetaDataFactory.BulkHelperRequestMetaData()));
 							break;
 					}
 

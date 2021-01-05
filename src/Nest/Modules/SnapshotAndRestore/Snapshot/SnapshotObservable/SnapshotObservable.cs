@@ -16,7 +16,7 @@ namespace Nest
 		private readonly TimeSpan _interval = TimeSpan.FromSeconds(2);
 		private readonly ISnapshotRequest _snapshotRequest;
 		private readonly SnapshotStatusHumbleObject _snapshotStatusHumbleObject;
-		private EventHandler<SnapshotCompletedEventArgs> _completedEentHandler;
+		private EventHandler<SnapshotCompletedEventArgs> _completedEventHandler;
 		private bool _disposed;
 		private EventHandler<SnapshotErrorEventArgs> _errorEventHandler;
 		private EventHandler<SnapshotNextEventArgs> _nextEventHandler;
@@ -63,7 +63,7 @@ namespace Nest
 				EventHandler<SnapshotErrorEventArgs> onError = (sender, args) => observer.OnError(args.Exception);
 
 				_nextEventHandler = onNext;
-				_completedEentHandler = onCompleted;
+				_completedEventHandler = onCompleted;
 				_errorEventHandler = onError;
 
 				_snapshotStatusHumbleObject.Next += onNext;
@@ -114,7 +114,7 @@ namespace Nest
 			if (_snapshotStatusHumbleObject != null)
 			{
 				_snapshotStatusHumbleObject.Next -= _nextEventHandler;
-				_snapshotStatusHumbleObject.Completed -= _completedEentHandler;
+				_snapshotStatusHumbleObject.Completed -= _completedEventHandler;
 				_snapshotStatusHumbleObject.Error -= _errorEventHandler;
 
 				_snapshotStatusHumbleObject.Completed -= StopTimer;
@@ -152,11 +152,7 @@ namespace Nest
 	{
 		private readonly IElasticClient _elasticClient;
 		private readonly ISnapshotRequest _snapshotRequest;
-
-		// when created through the factory method, this type is currently thread-safe and we can safely reuse a static
-		// instance across all requests to avoid allocating this every time.
-		private static readonly RequestMetaData _requestMetaData = RequestMetaDataFactory.SnapshotHelperRequestMetaData();
-
+		
 		public SnapshotStatusHumbleObject(IElasticClient elasticClient, ISnapshotRequest snapshotRequest)
 		{
 			elasticClient.ThrowIfNull(nameof(elasticClient));
@@ -177,7 +173,7 @@ namespace Nest
 				var snapshotRequest = new SnapshotStatusRequest(_snapshotRequest.RepositoryName,
 						_snapshotRequest.Snapshot);
 
-				snapshotRequest.RequestConfiguration.SetRequestMetaData(_requestMetaData);
+				snapshotRequest.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.SnapshotHelperRequestMetaData());
 
 				var snapshotStatusResponse =
 					_elasticClient.Snapshot.Status(snapshotRequest);
