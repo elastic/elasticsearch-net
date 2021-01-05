@@ -333,12 +333,12 @@ namespace Elasticsearch.Net
 			if (!requestData.RunAs.IsNullOrEmpty())
 				requestMessage.Headers.Add(RequestData.RunAsSecurityHeader, requestData.RunAs);
 
-			foreach (var customHeaderProvider in requestData.CustomHeaderProviders)
+			if (requestData.MetaHeaderProvider is object)
 			{
-				var value = customHeaderProvider.ProduceHeaderValue(requestData);
+				var value = requestData.MetaHeaderProvider.ProduceHeaderValue(requestData);
 
 				if (!string.IsNullOrEmpty(value))
-						requestMessage.Headers.TryAddWithoutValidation(customHeaderProvider.HeaderName, value);
+					requestMessage.Headers.TryAddWithoutValidation(requestData.MetaHeaderProvider.HeaderName, value);
 			}
 
 			return requestMessage;

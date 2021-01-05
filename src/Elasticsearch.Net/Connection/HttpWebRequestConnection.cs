@@ -239,12 +239,12 @@ namespace Elasticsearch.Net
 			if (requestData.Headers != null && requestData.Headers.HasKeys())
 				request.Headers.Add(requestData.Headers);
 
-			foreach (var customHeaderProvider in requestData.CustomHeaderProviders)
+			if (requestData.MetaHeaderProvider is object)
 			{
-				var value = customHeaderProvider.ProduceHeaderValue(requestData);
+				var value = requestData.MetaHeaderProvider.ProduceHeaderValue(requestData);
 
 				if (!string.IsNullOrEmpty(value))
-					request.Headers.Add(customHeaderProvider.HeaderName, customHeaderProvider.ProduceHeaderValue(requestData));
+					request.Headers.Add(requestData.MetaHeaderProvider.HeaderName, requestData.MetaHeaderProvider.ProduceHeaderValue(requestData));
 			}
 
 			var timeout = (int)requestData.RequestTimeout.TotalMilliseconds;

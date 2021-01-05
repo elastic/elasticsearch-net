@@ -124,7 +124,6 @@ namespace Elasticsearch.Net
 		/// <param name="serializer">A serializer implementation used to serialize requests and deserialize responses</param>
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
 			: base(connectionPool, connection, serializer) { }
-
 	}
 
 	[Browsable(false)]
@@ -181,11 +180,6 @@ namespace Elasticsearch.Net
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
 		private readonly Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
 
-
-		private readonly List<IHeaderProvider> _customerHeaderProviders = new List<IHeaderProvider> { new MetaHeaderProvider() };
-
-		private readonly IMetaDataHeaders _metaDataHeaders;
-
 		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer requestResponseSerializer)
 		{
 			_connectionPool = connectionPool;
@@ -211,9 +205,6 @@ namespace Elasticsearch.Net
 				_apiKeyAuthCredentials = cloudPool.ApiKeyCredentials;
 				_enableHttpCompression = true;
 			}
-
-			var clientVersionInfo = ClientVersionInfo.Create<IElasticLowLevelClient>();
-			_metaDataHeaders = new MetaDataHeaders(clientVersionInfo);
 		}
 
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
@@ -266,10 +257,8 @@ namespace Elasticsearch.Net
 		bool IConnectionConfigurationValues.TransferEncodingChunked => _transferEncodingChunked;
 		bool IConnectionConfigurationValues.EnableTcpStats => _enableTcpStats;
 		bool IConnectionConfigurationValues.EnableThreadPoolStats => _enableThreadPoolStats;
-
-		IReadOnlyCollection<IHeaderProvider> IConnectionConfigurationValues.CustomHeaderProviders => _customerHeaderProviders.ToReadOnlyCollection();
-
-		IMetaDataHeaders IConnectionConfigurationValues.MetaDataHeaders => _metaDataHeaders;
+		
+		MetaHeaderProvider IConnectionConfigurationValues.MetaHeaderProvider { get; } = new MetaHeaderProvider();
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 

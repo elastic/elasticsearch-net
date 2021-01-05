@@ -277,13 +277,8 @@ namespace Elasticsearch.Net
 		bool EnableThreadPoolStats { get; }
 
 		/// <summary>
-		/// The configured collection of <see cref="IHeaderProvider"/> instances which will be run to add additional request headers.
+		/// Produces the client meta header for a request.
 		/// </summary>
-		IReadOnlyCollection<IHeaderProvider> CustomHeaderProviders { get; }
-
-		/// <summary>
-		/// Precomputed meta data headers.
-		/// </summary>
-		IMetaDataHeaders MetaDataHeaders { get; }
+		MetaHeaderProvider MetaHeaderProvider { get; }
 	}
 }
