@@ -35,7 +35,7 @@ namespace Tests.Mapping.RuntimeFields
 			{
 				CreateIndexWithMappingStep, u =>
 					u.Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, CreateIndexResponse>(
-						v => new CreateIndexRequest(v)
+						v => new CreateIndexRequest(IndexName(v))
 						{
 							Mappings = new TypeMapping
 							{
@@ -54,13 +54,13 @@ namespace Tests.Mapping.RuntimeFields
 								}
 							}
 						},
-						(v, d) => d.Index(v).Map(mapping => mapping
+						(v, d) => d.Index(IndexName(v)).Map(mapping => mapping
 							.RuntimeFields(rtf => rtf
 								.RuntimeField(RuntimeFieldNameOne, FieldType.Keyword, f1 => f1
 									.Script(ScriptValue))
 								.RuntimeField(RuntimeFieldNameTwo, FieldType.Date, f2 => f2.Format(DateFormat)))),
-						(v, c, f) => c.Indices.Create(v, f),
-						(v, c, f) => c.Indices.CreateAsync(v, f),
+						(v, c, f) => c.Indices.Create(IndexName(v), f),
+						(v, c, f) => c.Indices.CreateAsync(IndexName(v), f),
 						(v, c, r) => c.Indices.Create(r),
 						(v, c, r) => c.Indices.CreateAsync(r)
 					)
@@ -68,8 +68,8 @@ namespace Tests.Mapping.RuntimeFields
 			{
 				GetCreatedIndexMappingStep, u =>
 					u.Calls<GetMappingDescriptor<Project>, GetMappingRequest, IGetMappingRequest, GetMappingResponse>(
-						v => new GetMappingRequest(v),
-						(v, d) => d.Index(v),
+						v => new GetMappingRequest(IndexName(v)),
+						(v, d) => d.Index(IndexName(v)),
 						(v, c, f) => c.Indices.GetMapping(f),
 						(v, c, f) => c.Indices.GetMappingAsync(f),
 						(v, c, r) => c.Indices.GetMapping(r),
@@ -79,10 +79,10 @@ namespace Tests.Mapping.RuntimeFields
 			{
 				DeleteIndexStep, u =>
 					u.Calls<DeleteIndexDescriptor, DeleteIndexRequest, IDeleteIndexRequest, DeleteIndexResponse>(
-						v => new DeleteIndexRequest(v),
+						v => new DeleteIndexRequest(IndexName(v)),
 						(v, d) => d,
-						(v, c, f) => c.Indices.Delete(v, f),
-						(v, c, f) => c.Indices.DeleteAsync(v, f),
+						(v, c, f) => c.Indices.Delete(IndexName(v), f),
+						(v, c, f) => c.Indices.DeleteAsync(IndexName(v), f),
 						(v, c, r) => c.Indices.Delete(r),
 						(v, c, r) => c.Indices.DeleteAsync(r)
 					)
@@ -90,10 +90,10 @@ namespace Tests.Mapping.RuntimeFields
 			{
 				CreateIndexWithoutMappingStep, u =>
 					u.Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, CreateIndexResponse>(
-						v => new CreateIndexRequest(v),
-						(v, d) => d.Index(v),
-						(v, c, f) => c.Indices.Create(v, f),
-						(v, c, f) => c.Indices.CreateAsync(v, f),
+						v => new CreateIndexRequest(IndexName(v)),
+						(v, d) => d,
+						(v, c, f) => c.Indices.Create(IndexName(v), f),
+						(v, c, f) => c.Indices.CreateAsync(IndexName(v), f),
 						(v, c, r) => c.Indices.Create(r),
 						(v, c, r) => c.Indices.CreateAsync(r)
 					)
@@ -101,7 +101,7 @@ namespace Tests.Mapping.RuntimeFields
 			{
 				CreateMappingStep, u =>
 					u.Calls<PutMappingDescriptor<Project>, PutMappingRequest, IPutMappingRequest, PutMappingResponse>(
-						v => new PutMappingRequest(v)
+						v => new PutMappingRequest(IndexName(v))
 						{
 							RuntimeFields = new Nest.RuntimeFields
 							{
@@ -117,7 +117,7 @@ namespace Tests.Mapping.RuntimeFields
 								}}
 							}
 						},
-						(v, d) => d.Index(v)
+						(v, d) => d.Index(IndexName(v))
 							.RuntimeFields(rtf => rtf
 								.RuntimeField(RuntimeFieldNameOne, FieldType.Keyword, f1 => f1
 									.Script(ScriptValue))
@@ -131,8 +131,8 @@ namespace Tests.Mapping.RuntimeFields
 			{
 				GetMappingStep, u =>
 					u.Calls<GetMappingDescriptor<Project>, GetMappingRequest, IGetMappingRequest, GetMappingResponse>(
-						v => new GetMappingRequest(v),
-						(v, d) => d.Index(v),
+						v => new GetMappingRequest(IndexName(v)),
+						(v, d) => d.Index(IndexName(v)),
 						(v, c, f) => c.Indices.GetMapping(f),
 						(v, c, f) => c.Indices.GetMappingAsync(f),
 						(v, c, r) => c.Indices.GetMapping(r),
@@ -141,6 +141,8 @@ namespace Tests.Mapping.RuntimeFields
 			}
 		})
 		{ }
+
+		private static string IndexName(string uniqueId) => $"runtime-{uniqueId}";
 
 		[I] public async Task CreateIndexWithRuntimeFieldsMapping() => await Assert<CreateIndexResponse>(CreateIndexWithMappingStep, (v, r) =>
 		{
