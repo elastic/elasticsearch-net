@@ -33,36 +33,7 @@ namespace Elasticsearch.Net
 		/// As the old curl based handler is known to bleed TCP connections:
 		/// <para>https://github.com/dotnet/runtime/issues/22366</para>
 		/// </summary>
-        private static bool UsingCurlHandler
-		{
-			get
-			{
-#if !DOTNETCORE
-				return false;
-#else
-				var curlHandlerExists = typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.CurlHandler") != null;
-				if (!curlHandlerExists) return false;
-
-				var socketsHandlerExists = typeof(HttpClientHandler).Assembly.GetType("System.Net.Http.SocketsHttpHandler") != null;
-				// running on a .NET core version with CurlHandler, before the existence of SocketsHttpHandler.
-				// Must be using CurlHandler.
-				if (!socketsHandlerExists) return true;
-
-				if (AppContext.TryGetSwitch("System.Net.Http.UseSocketsHttpHandler", out var isEnabled))
-					return !isEnabled;
-
-				var environmentVariable =
-					Environment.GetEnvironmentVariable("DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER");
-
-				// SocketsHandler exists and no environment variable exists to disable it.
-				// Must be using SocketsHandler and not CurlHandler
-				if (environmentVariable == null) return false;
-
-				return environmentVariable.Equals("false", StringComparison.OrdinalIgnoreCase) ||
-					environmentVariable.Equals("0");
-#endif
-			}
-		}
+		private static bool UsingCurlHandler => ConnectionInfo.UsingCurlHandler;
 
 		/// <summary>
 		/// The default ping timeout. Defaults to 2 seconds
@@ -153,7 +124,6 @@ namespace Elasticsearch.Net
 		/// <param name="serializer">A serializer implementation used to serialize requests and deserialize responses</param>
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
 			: base(connectionPool, connection, serializer) { }
-
 	}
 
 	[Browsable(false)]
@@ -176,6 +146,7 @@ namespace Elasticsearch.Net
 		private TimeSpan? _deadTimeout;
 		private bool _disableAutomaticProxyDetection;
 		private bool _disableDirectStreaming;
+		private bool _disableMetaHeader;
 		private bool _disablePings;
 		private bool _enableHttpCompression;
 		private bool _enableHttpPipelining = true;
@@ -207,7 +178,7 @@ namespace Elasticsearch.Net
 		private bool _enableThreadPoolStats;
 
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
-		private Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
+		private readonly Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
 
 		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer requestResponseSerializer)
 		{
@@ -234,7 +205,6 @@ namespace Elasticsearch.Net
 				_apiKeyAuthCredentials = cloudPool.ApiKeyCredentials;
 				_enableHttpCompression = true;
 			}
-
 		}
 
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
@@ -248,6 +218,7 @@ namespace Elasticsearch.Net
 		TimeSpan? IConnectionConfigurationValues.DeadTimeout => _deadTimeout;
 		bool IConnectionConfigurationValues.DisableAutomaticProxyDetection => _disableAutomaticProxyDetection;
 		bool IConnectionConfigurationValues.DisableDirectStreaming => _disableDirectStreaming;
+		bool IConnectionConfigurationValues.DisableMetaHeader => _disableMetaHeader;
 		bool IConnectionConfigurationValues.DisablePings => _disablePings;
 		bool IConnectionConfigurationValues.EnableHttpCompression => _enableHttpCompression;
 		NameValueCollection IConnectionConfigurationValues.Headers => _headers;
@@ -286,6 +257,8 @@ namespace Elasticsearch.Net
 		bool IConnectionConfigurationValues.TransferEncodingChunked => _transferEncodingChunked;
 		bool IConnectionConfigurationValues.EnableTcpStats => _enableTcpStats;
 		bool IConnectionConfigurationValues.EnableThreadPoolStats => _enableThreadPoolStats;
+		
+		MetaHeaderProvider IConnectionConfigurationValues.MetaHeaderProvider { get; } = new MetaHeaderProvider();
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
@@ -369,6 +342,12 @@ namespace Elasticsearch.Net
 		public T DisableAutomaticProxyDetection(bool disable = true) => Assign(disable, (a, v) => a._disableAutomaticProxyDetection = v);
 
 		/// <summary>
+		/// Disables the meta header which is included on all requests by default. This header contains lightweight information 
+		/// about the client and runtime.
+		/// </summary>
+		public T DisableMetaHeader(bool disable = true) => Assign(disable, (a, v) => a._disableMetaHeader = v);
+
+		/// <summary>
 		/// Instead of following a c/go like error checking on response.IsValid do throw an exception (except when <see cref="IApiCallDetails.SuccessOrKnownError"/> is false)
 		/// on the client when a call resulted in an exception on either the client or the Elasticsearch server.
 		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
@@ -432,11 +411,11 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// DnsRefreshTimeout for the connections. Defaults to 5 minutes.
-		#if DOTNETCORE
+#if DOTNETCORE
 		/// <para>Will create new instances of <see cref="System.Net.Http.HttpClient"/> after this timeout to force DNS updates</para>
-		#else
+#else
 		/// <para>Will set both <see cref="System.Net.ServicePointManager.DnsRefreshTimeout"/> and <see cref="System.Net.ServicePointManager.ConnectionLeaseTimeout "/>
-		#endif
+#endif
 		/// </summary>
 		public T DnsRefreshTimeout(TimeSpan timeout) => Assign(timeout, (a, v) => a._dnsRefreshTimeout = v);
 

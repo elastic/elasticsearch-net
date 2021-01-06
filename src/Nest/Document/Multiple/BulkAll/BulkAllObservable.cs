@@ -26,7 +26,7 @@ namespace Nest
 		private readonly Func<BulkResponseItemBase, T, bool> _retryPredicate;
 		private Action _incrementFailed = () => { };
 		private Action _incrementRetries = () => { };
-		private Action<BulkResponse> _bulkResponseCallback;
+		private readonly Action<BulkResponse> _bulkResponseCallback;
 
 		public BulkAllObservable(
 			IElasticClient client,
@@ -35,7 +35,7 @@ namespace Nest
 		)
 		{
 			_client = client;
-			_partitionedBulkRequest = partitionedBulkRequest;
+			_partitionedBulkRequest = partitionedBulkRequest;	
 			_backOffRetries = _partitionedBulkRequest.BackOffRetries.GetValueOrDefault(CoordinatedRequestDefaults.BulkAllBackOffRetriesDefault);
 			_backOffTime = _partitionedBulkRequest?.BackOffTime?.ToTimeSpan() ?? CoordinatedRequestDefaults.BulkAllBackOffTimeDefault;
 			_bulkSize = _partitionedBulkRequest.Size ?? CoordinatedRequestDefaults.BulkAllSizeDefault;
@@ -108,7 +108,20 @@ namespace Nest
 			var indices = _partitionedBulkRequest.RefreshIndices ?? _partitionedBulkRequest.Index;
 			if (indices == null) return;
 
-			var refresh = _client.Indices.Refresh(indices);
+			var refresh = _client.Indices.Refresh(indices, r => r.RequestConfiguration(rc =>
+			{
+				switch (_partitionedBulkRequest)
+				{
+					case IHelperCallable helperCallable when helperCallable.ParentMetaData is object:
+						rc.RequestMetaData(helperCallable.ParentMetaData);
+						break;
+					default:
+						rc.RequestMetaData(RequestMetaDataFactory.BulkHelperRequestMetaData());
+						break;
+				}
+
+				return rc;
+			}));
 			if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
 		}
 
@@ -126,6 +139,16 @@ namespace Nest
 					if (!string.IsNullOrEmpty(request.Pipeline)) s.Pipeline(request.Pipeline);
 					if (request.Routing != null) s.Routing(request.Routing);
 					if (request.WaitForActiveShards.HasValue) s.WaitForActiveShards(request.WaitForActiveShards.ToString());
+
+					switch (_partitionedBulkRequest)
+					{
+						case IHelperCallable helperCallable when helperCallable.ParentMetaData is object:
+							s.RequestConfiguration(rc => rc.RequestMetaData(helperCallable.ParentMetaData));
+							break;
+						default:
+							s.RequestConfiguration(rc => rc.RequestMetaData(RequestMetaDataFactory.BulkHelperRequestMetaData()));
+							break;
+					}
 
 					return s;
 				}, _compositeCancelToken)

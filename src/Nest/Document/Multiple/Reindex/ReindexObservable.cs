@@ -42,6 +42,7 @@ namespace Nest
 		{
 			_connectionSettings = connectionSettings;
 			_reindexRequest = reindexRequest;
+
 			_client = client;
 			_compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 			_compositeCancelToken = _compositeCancelTokenSource.Token;
@@ -95,7 +96,8 @@ namespace Nest
 			//by casting the observable can potentially store more meta data on the user provided observer
 			if (observer is BulkAllObserver moreInfoObserver)
 				observableBulk.Subscribe(moreInfoObserver);
-			else observableBulk.Subscribe(observer);
+			else
+				observableBulk.Subscribe(observer);
 		}
 
 		private BulkAllObservable<IHitMetadata<TTarget>> BulkAll(IEnumerable<IHitMetadata<TTarget>> scrollDocuments,
@@ -120,6 +122,13 @@ namespace Nest
 					bulk.AddOperation(item);
 				}
 			};
+			
+			// Mark the parent for the bulk all request as this reindex helper
+			if (bulkAllRequest is IHelperCallable helperCallable)
+			{
+				var parentMetaData = RequestMetaDataFactory.ReindexHelperRequestMetaData();
+				helperCallable.ParentMetaData = parentMetaData;
+			}
 
 			var observableBulk = _client.BulkAll(bulkAllRequest, _compositeCancelToken);
 			return observableBulk;
@@ -160,14 +169,15 @@ namespace Nest
 		{
 			var scrollAll = _reindexRequest.ScrollAll;
 			var scroll = _reindexRequest.ScrollAll?.ScrollTime ?? TimeSpan.FromMinutes(2);
-
+			
 			var scrollAllRequest = new ScrollAllRequest(scroll, slices)
 			{
 				RoutingField = scrollAll.RoutingField,
 				MaxDegreeOfParallelism = scrollAll.MaxDegreeOfParallelism ?? slices,
 				Search = scrollAll.Search,
-				BackPressure = backPressure
-			};
+				BackPressure = backPressure,
+				ParentMetaData = RequestMetaDataFactory.ReindexHelperRequestMetaData()
+		};
 
 			var scrollObservable = _client.ScrollAll<TSource>(scrollAllRequest, _compositeCancelToken);
 			return new GetEnumerator<IScrollAllResponse<TSource>>()
@@ -214,11 +224,15 @@ namespace Nest
 		/// <returns>Either the number of shards from to source or the target as a slice hint to ScrollAll</returns>
 		private int? CreateIndexIfNeeded(Indices fromIndices, string resolvedTo)
 		{
-			if (_reindexRequest.OmitIndexCreation) return null;
+			var requestMetaData = RequestMetaDataFactory.ReindexHelperRequestMetaData();
+
+			if (_reindexRequest.OmitIndexCreation)
+				return null;
 
 			var pointsToSingleSourceIndex = fromIndices.Match((a) => false, (m) => m.Indices.Count == 1);
-			var targetExistsAlready = _client.Indices.Exists(resolvedTo);
-			if (targetExistsAlready.Exists) return null;
+			var targetExistsAlready = _client.Indices.Exists(resolvedTo, e => e.RequestConfiguration(rc => rc.RequestMetaData(requestMetaData)));
+			if (targetExistsAlready.Exists)
+				return null;
 
 			_compositeCancelToken.ThrowIfCancellationRequested();
 			IndexState originalIndexState = null;
@@ -226,7 +240,7 @@ namespace Nest
 
 			if (pointsToSingleSourceIndex)
 			{
-				var getIndexResponse = _client.Indices.Get(resolvedFrom);
+				var getIndexResponse = _client.Indices.Get(resolvedFrom, i => i.RequestConfiguration(rc => rc.RequestMetaData(requestMetaData)));
 				_compositeCancelToken.ThrowIfCancellationRequested();
 				originalIndexState = getIndexResponse.Indices[resolvedFrom];
 				if (_reindexRequest.OmitIndexCreation)
@@ -237,6 +251,9 @@ namespace Nest
 				(originalIndexState != null
 					? new CreateIndexRequest(resolvedTo, originalIndexState)
 					: new CreateIndexRequest(resolvedTo));
+
+			createIndexRequest.RequestParameters.SetRequestMetaData(requestMetaData);
+
 			var createIndexResponse = _client.Indices.Create(createIndexRequest);
 			_compositeCancelToken.ThrowIfCancellationRequested();
 			if (!createIndexResponse.IsValid)

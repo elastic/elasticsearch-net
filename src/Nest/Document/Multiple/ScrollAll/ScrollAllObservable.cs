@@ -25,14 +25,21 @@ namespace Nest
 		private readonly SemaphoreSlim _scrollInitiationLock = new SemaphoreSlim(1, 1);
 		private readonly ISearchRequest _searchRequest;
 
-		public ScrollAllObservable(
-			IElasticClient client,
-			IScrollAllRequest scrollAllRequest,
-			CancellationToken cancellationToken = default(CancellationToken)
-		)
+		public ScrollAllObservable(IElasticClient client, IScrollAllRequest scrollAllRequest, CancellationToken cancellationToken = default)
 		{
 			_scrollAllRequest = scrollAllRequest;
 			_searchRequest = scrollAllRequest?.Search ?? new SearchRequest<T>();
+			
+			switch (_scrollAllRequest)
+			{
+				case IHelperCallable helperCallable when helperCallable.ParentMetaData is object:
+					_searchRequest.RequestParameters.SetRequestMetaData(helperCallable.ParentMetaData);
+					break;
+				default:
+					_searchRequest.RequestParameters.SetRequestMetaData(RequestMetaDataFactory.ScrollHelperRequestMetaData());
+					break;
+			}
+
 			if (_searchRequest.Sort == null)
 				_searchRequest.Sort = FieldSort.ByDocumentOrder;
 			_searchRequest.RequestParameters.Scroll = _scrollAllRequest.ScrollTime.ToTimeSpan();
@@ -43,7 +50,7 @@ namespace Nest
 		}
 
 		public bool IsDisposed { get; private set; }
-
+		
 		public void Dispose()
 		{
 			IsDisposed = true;
@@ -111,6 +118,20 @@ namespace Nest
 				});
 				page++;
 				var request = new ScrollRequest(searchResult.ScrollId, scroll);
+
+				if (request.RequestConfiguration is null)
+					request.RequestConfiguration = new RequestConfiguration();
+				
+				switch (_scrollAllRequest)
+				{
+					case IHelperCallable helperCallable when helperCallable.ParentMetaData is object:
+						request.RequestConfiguration.SetRequestMetaData(helperCallable.ParentMetaData);
+						break;
+					default:
+						request.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.ScrollHelperRequestMetaData());
+						break;
+				}
+
 				searchResult = await _client.ScrollAsync<T>(request, _compositeCancelToken).ConfigureAwait(false);
 				ThrowOnBadSearchResult(searchResult, slice, page);
 			}
