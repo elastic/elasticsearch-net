@@ -179,8 +179,15 @@ namespace Nest
 	[DataContract]
 	public partial class SearchRequest
 	{
+		// This is currently used to support deserializing the response from SQL Translate,
+		// which forms a response which uses "aggregations", rather than "aggs". Longer term
+		// it would be preferred to address that in Elasticsearch itself.
+		[DataMember(Name = "aggregations")]
+		private AggregationDictionary _aggs;
+
 		/// <inheritdoc />
-		public AggregationDictionary Aggregations { get; set; }
+		// ReSharper disable once ConvertToAutoProperty
+		public AggregationDictionary Aggregations { get => _aggs; set => _aggs = value; }
 		/// <inheritdoc />
 		public IFieldCollapse Collapse { get; set; }
 		/// <inheritdoc />
