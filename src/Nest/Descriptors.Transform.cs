@@ -75,6 +75,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard expression matches no transforms. (This includes `_all` string or when no transforms have been specified)</summary>
 		public GetTransformDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
+		///<summary>Omits fields that are illegal to set on transform PUT</summary>
+		public GetTransformDescriptor ExcludeGenerated(bool? excludegenerated = true) => Qs("exclude_generated", excludegenerated);
 		///<summary>skips a number of transform configs, defaults to 0</summary>
 		public GetTransformDescriptor From(int? from) => Qs("from", from);
 		///<summary>specifies a max number of transforms to get, defaults to 100</summary>

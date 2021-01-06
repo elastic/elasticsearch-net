@@ -641,7 +641,13 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Names IDeleteDataStreamRequest.Name => Self.RouteValues.Get<Names>("name");
-	// Request parameters
+		// Request parameters
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
 	}
 
 	[InterfaceDataContract]
@@ -1450,7 +1456,13 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Names IGetDataStreamRequest.Name => Self.RouteValues.Get<Names>("name");
-	// Request parameters
+		// Request parameters
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
 	}
 
 	[InterfaceDataContract]
