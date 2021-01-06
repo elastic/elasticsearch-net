@@ -57,7 +57,8 @@
 	await IncludeAsync("HighLevel/Descriptors/XmlDocs.cshtml", desc);
 	if(!string.IsNullOrWhiteSpace(param.Obsolete))
 	{
-<text>		[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]
+<text>		
+[Obsolete("Scheduled to be removed in 8.0, @param.Obsolete")]
 </text>
 	}
 <text>
