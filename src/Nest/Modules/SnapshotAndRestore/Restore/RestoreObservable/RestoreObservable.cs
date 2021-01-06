@@ -22,7 +22,7 @@ namespace Nest
 		private EventHandler<RestoreErrorEventArgs> _errorEventHandlers;
 		private EventHandler<RestoreNextEventArgs> _nextEventHandlers;
 		private Timer _timer;
-
+		
 		public RestoreObservable(IElasticClient elasticClient, IRestoreRequest restoreRequest)
 		{
 			elasticClient.ThrowIfNull(nameof(elasticClient));
@@ -30,7 +30,7 @@ namespace Nest
 
 			_elasticClient = elasticClient;
 			_restoreRequest = restoreRequest;
-
+			_restoreRequest.RequestParameters.SetRequestMetaData(RequestMetaDataFactory.RestoreHelperRequestMetaData());
 			_restoreStatusHumbleObject = new RestoreStatusHumbleObject(elasticClient, restoreRequest);
 			_restoreStatusHumbleObject.Completed += StopTimer;
 			_restoreStatusHumbleObject.Error += StopTimer;
@@ -162,7 +162,6 @@ namespace Nest
 
 			_elasticClient = elasticClient;
 			_restoreRequest = restoreRequest;
-
 			_renamePattern = string.IsNullOrEmpty(_restoreRequest.RenamePattern) ? string.Empty : _restoreRequest.RenamePattern;
 			_renameReplacement = string.IsNullOrEmpty(_restoreRequest.RenameReplacement) ? string.Empty : _restoreRequest.RenameReplacement;
 		}
@@ -183,10 +182,13 @@ namespace Nest
 							))
 						.ToArray();
 
-				var recoveryStatus = _elasticClient.Indices.RecoveryStatus(new RecoveryStatusRequest(indices)
+				var recoveryStatusRequest = new RecoveryStatusRequest(indices)
 				{
 					Detailed = true,
-				});
+					RequestConfiguration = new RequestConfiguration()
+				};
+				recoveryStatusRequest.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.RestoreHelperRequestMetaData());
+				var recoveryStatus = _elasticClient.Indices.RecoveryStatus(recoveryStatusRequest);
 
 				if (!recoveryStatus.IsValid)
 					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed getting recovery status.", recoveryStatus.ApiCall);

@@ -4,10 +4,11 @@
 
 using System;
 using System.Linq.Expressions;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IScrollAllRequest
+	public interface IScrollAllRequest 
 	{
 		/// <summary>
 		/// Simple back pressure implementation that makes sure the minimum max concurrency between producer and consumer
@@ -46,7 +47,7 @@ namespace Nest
 		int Slices { get; set; }
 	}
 
-	public class ScrollAllRequest : IScrollAllRequest
+	public class ScrollAllRequest : IScrollAllRequest, IHelperCallable
 	{
 		public ScrollAllRequest(Time scrollTime, int numberOfSlices)
 		{
@@ -67,9 +68,11 @@ namespace Nest
 		/// <inheritdoc />
 		public Field RoutingField { get; set; }
 
+		internal RequestMetaData ParentMetaData { get; set; }
+
 		/// <inheritdoc />
 		public ISearchRequest Search { get; set; }
-
+		RequestMetaData IHelperCallable.ParentMetaData { get => ParentMetaData; set => ParentMetaData = value; }
 		Time IScrollAllRequest.ScrollTime { get; set; }
 		int IScrollAllRequest.Slices { get; set; }
 	}

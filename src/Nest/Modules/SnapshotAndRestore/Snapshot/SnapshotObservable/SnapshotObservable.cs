@@ -16,7 +16,7 @@ namespace Nest
 		private readonly TimeSpan _interval = TimeSpan.FromSeconds(2);
 		private readonly ISnapshotRequest _snapshotRequest;
 		private readonly SnapshotStatusHumbleObject _snapshotStatusHumbleObject;
-		private EventHandler<SnapshotCompletedEventArgs> _completedEentHandler;
+		private EventHandler<SnapshotCompletedEventArgs> _completedEventHandler;
 		private bool _disposed;
 		private EventHandler<SnapshotErrorEventArgs> _errorEventHandler;
 		private EventHandler<SnapshotNextEventArgs> _nextEventHandler;
@@ -29,6 +29,7 @@ namespace Nest
 
 			_elasticClient = elasticClient;
 			_snapshotRequest = snapshotRequest;
+			_snapshotRequest.RequestParameters.SetRequestMetaData(RequestMetaDataFactory.SnapshotHelperRequestMetaData());
 			_snapshotStatusHumbleObject = new SnapshotStatusHumbleObject(elasticClient, snapshotRequest);
 			_snapshotStatusHumbleObject.Completed += StopTimer;
 			_snapshotStatusHumbleObject.Error += StopTimer;
@@ -62,7 +63,7 @@ namespace Nest
 				EventHandler<SnapshotErrorEventArgs> onError = (sender, args) => observer.OnError(args.Exception);
 
 				_nextEventHandler = onNext;
-				_completedEentHandler = onCompleted;
+				_completedEventHandler = onCompleted;
 				_errorEventHandler = onError;
 
 				_snapshotStatusHumbleObject.Next += onNext;
@@ -113,7 +114,7 @@ namespace Nest
 			if (_snapshotStatusHumbleObject != null)
 			{
 				_snapshotStatusHumbleObject.Next -= _nextEventHandler;
-				_snapshotStatusHumbleObject.Completed -= _completedEentHandler;
+				_snapshotStatusHumbleObject.Completed -= _completedEventHandler;
 				_snapshotStatusHumbleObject.Error -= _errorEventHandler;
 
 				_snapshotStatusHumbleObject.Completed -= StopTimer;
@@ -151,7 +152,7 @@ namespace Nest
 	{
 		private readonly IElasticClient _elasticClient;
 		private readonly ISnapshotRequest _snapshotRequest;
-
+		
 		public SnapshotStatusHumbleObject(IElasticClient elasticClient, ISnapshotRequest snapshotRequest)
 		{
 			elasticClient.ThrowIfNull(nameof(elasticClient));
@@ -169,9 +170,15 @@ namespace Nest
 		{
 			try
 			{
+				var snapshotRequest = new SnapshotStatusRequest(_snapshotRequest.RepositoryName, _snapshotRequest.Snapshot)
+				{
+					RequestConfiguration = new RequestConfiguration()
+				};
+			
+				snapshotRequest.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.SnapshotHelperRequestMetaData());
+
 				var snapshotStatusResponse =
-					_elasticClient.Snapshot.Status(new SnapshotStatusRequest(_snapshotRequest.RepositoryName,
-						_snapshotRequest.Snapshot));
+					_elasticClient.Snapshot.Status(snapshotRequest);
 
 				if (!snapshotStatusResponse.IsValid)
 					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed to get snapshot status.",
@@ -194,19 +201,19 @@ namespace Nest
 		protected virtual void OnNext(SnapshotNextEventArgs nextEventArgs)
 		{
 			var handler = Next;
-			if (handler != null) handler(this, nextEventArgs);
+			handler?.Invoke(this, nextEventArgs);
 		}
 
 		protected virtual void OnCompleted(SnapshotCompletedEventArgs completedEventArgs)
 		{
 			var handler = Completed;
-			if (handler != null) handler(this, completedEventArgs);
+			handler?.Invoke(this, completedEventArgs);
 		}
 
 		protected virtual void OnError(SnapshotErrorEventArgs errorEventArgs)
 		{
 			var handler = Error;
-			if (handler != null) handler(this, errorEventArgs);
+			handler?.Invoke(this, errorEventArgs);
 		}
 	}
 }
