@@ -338,4 +338,61 @@ namespace Tests.Indices.MappingManagement.PutMapping
 			(client, r) => client.MapAsync(r)
 		);
 	}
+
+	[SkipVersion("<7.11.0", "Runtime fields introduced in 7.11.0")]
+	public class PutMappingWithRuntimeFieldsTests : ApiTestBase<ReadOnlyCluster, PutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest>
+	{
+		// These test serialisation only. Integration tests take place in RuntimeFieldsTests.cs
+
+		private const string ScriptValue = "emit(doc['@timestamp'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT))";
+
+		public PutMappingWithRuntimeFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+		protected override string UrlPath => $"/{CallIsolatedValue}/_mapping";
+
+		protected override PutMappingRequest Initializer => new(CallIsolatedValue)
+		{
+			RuntimeFields = new RuntimeFields
+			{
+				{ "runtime_date", new RuntimeField { Type = FieldType.Date, Format = "yyyy-MM-dd" } },
+				{ "runtime_scripted", new RuntimeField { Type = FieldType.Keyword, Script = new PainlessScript(ScriptValue) } }
+			}
+		};
+
+		protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => d => d
+			.Index(CallIsolatedValue)
+			.RuntimeFields(rtf => rtf
+				.RuntimeField("runtime_date", FieldType.Date, rf => rf.Format("yyyy-MM-dd"))
+				.RuntimeField("runtime_scripted", FieldType.Keyword, rf=> rf.Script(new PainlessScript(ScriptValue))));
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Indices.PutMapping(f),
+			(client, f) => client.Indices.PutMappingAsync(f),
+			(client, r) => client.Indices.PutMapping(r),
+			(client, r) => client.Indices.PutMappingAsync(r)
+		);
+
+		protected override object ExpectJson => new
+		{
+			runtime = new
+			{
+				runtime_date = new
+				{
+					type = "date",
+					format = "yyyy-MM-dd"
+				},
+				runtime_scripted = new
+				{
+					type = "keyword",
+					script = new
+					{
+						lang = "painless",
+						source = ScriptValue
+					}
+				}
+			}
+		};
+	}
 }
