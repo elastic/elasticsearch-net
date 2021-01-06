@@ -60,7 +60,8 @@ namespace Nest
 		public CatAliasesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAliasesDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Explicit operation timeout for connection to master node</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public CatAliasesDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatAliasesDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
@@ -137,9 +138,11 @@ namespace Nest
 		public CatCountDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatCountDescriptor Help(bool? help = true) => Qs("help", help);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public CatCountDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Explicit operation timeout for connection to master node</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public CatCountDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatCountDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
@@ -177,9 +180,11 @@ namespace Nest
 		public CatFielddataDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatFielddataDescriptor Help(bool? help = true) => Qs("help", help);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public CatFielddataDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Explicit operation timeout for connection to master node</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public CatFielddataDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatFielddataDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
@@ -201,9 +206,11 @@ namespace Nest
 		public CatHealthDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Set to false to disable timestamping</summary>
 		public CatHealthDescriptor IncludeTimestamp(bool? includetimestamp = true) => Qs("ts", includetimestamp);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public CatHealthDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Explicit operation timeout for connection to master node</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public CatHealthDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatHealthDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
@@ -263,6 +270,7 @@ namespace Nest
 		///<summary>If set to true segment stats will include stats for segments that are not currently loaded into memory</summary>
 		public CatIndicesDescriptor IncludeUnloadedSegments(bool? includeunloadedsegments = true) => Qs("include_unloaded_segments", includeunloadedsegments);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.11.0, reason: This parameter does not affect the request. It will be removed in a future release.")]
 		public CatIndicesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatIndicesDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
@@ -352,7 +360,8 @@ namespace Nest
 		///<summary>The ID of the datafeeds stats to fetch</summary>
 		public CatDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(datafeedId, (a, v) => a.RouteValues.Optional("datafeed_id", v));
 		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>		[Obsolete("Scheduled to be removed in 7.0, deprecated")]
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public CatDatafeedsDescriptor AllowNoDatafeeds(bool? allownodatafeeds = true) => Qs("allow_no_datafeeds", allownodatafeeds);
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public CatDatafeedsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
@@ -388,7 +397,8 @@ namespace Nest
 		///<summary>The ID of the jobs stats to fetch</summary>
 		public CatJobsDescriptor JobId(Id jobId) => Assign(jobId, (a, v) => a.RouteValues.Optional("job_id", v));
 		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>		[Obsolete("Scheduled to be removed in 7.0, deprecated")]
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public CatJobsDescriptor AllowNoJobs(bool? allownojobs = true) => Qs("allow_no_jobs", allownojobs);
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
 		public CatJobsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
@@ -484,7 +494,8 @@ namespace Nest
 		public CatNodesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatNodesDescriptor Help(bool? help = true) => Qs("help", help);
-		///<summary>Calculate the selected nodes using the local cluster state rather than the state from master node (default: false)</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.6.0, reason: This parameter does not cause this API to act locally.")]
+		///<summary>Calculate the selected nodes using the local cluster state rather than the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.6.0, reason: This parameter does not cause this API to act locally.")]
 		public CatNodesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatNodesDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
@@ -528,6 +539,8 @@ namespace Nest
 		public CatPluginsDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatPluginsDescriptor Help(bool? help = true) => Qs("help", help);
+		///<summary>Include bootstrap plugins in the response</summary>
+		public CatPluginsDescriptor IncludeBootstrap(bool? includebootstrap = true) => Qs("include_bootstrap", includebootstrap);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPluginsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -575,7 +588,8 @@ namespace Nest
 		public CatRecoveryDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatRecoveryDescriptor Help(bool? help = true) => Qs("help", help);
-		///<summary>Explicit operation timeout for connection to master node</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.5.0, reason: Removed from the server as it was never a valid option")]
 		public CatRecoveryDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatRecoveryDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
@@ -678,6 +692,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatShardsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.11.0, reason: This parameter does not affect the request. It will be removed in a future release.")]
 		public CatShardsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatShardsDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
@@ -740,9 +755,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatTasksDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public CatTasksDescriptor NodeId(params string[] nodeid) => Qs("node_id", nodeid);
-		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
-		public CatTasksDescriptor ParentTask(long? parenttask) => Qs("parent_task", parenttask);
+		public CatTasksDescriptor Nodes(params string[] nodes) => Qs("nodes", nodes);
+		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
+		public CatTasksDescriptor ParentTaskId(string parenttaskid) => Qs("parent_task_id", parenttaskid);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatTasksDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
 		///<summary>Verbose mode. Display column headers</summary>
@@ -815,7 +830,8 @@ namespace Nest
 		public CatThreadPoolDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatThreadPoolDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
-		///<summary>The multiplier in which to display values</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.7.0, reason: Setting this value has no effect and will be removed from the specification.")]
+		///<summary>The multiplier in which to display values</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.7.0, reason: Setting this value has no effect and will be removed from the specification.")]
 		public CatThreadPoolDescriptor Size(Size? size) => Qs("size", size);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatThreadPoolDescriptor SortByColumns(params string[] sortbycolumns) => Qs("s", sortbycolumns);
