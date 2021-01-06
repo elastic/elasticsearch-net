@@ -17,7 +17,6 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot
 {
-	[SkipVersion("<7.10.0", "APIs introduced in 7.10.0")]
 	public class CoordinatedSnapshotTests : CoordinatedIntegrationTestBase<WritableCluster>
 	{
 		private const string SetupStep = nameof(SetupStep);
@@ -59,7 +58,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 						(_, c, r) => c.Snapshot.GetAsync(r))
 			},
 			{
-				CloneStep, u => u
+				CloneStep, ">=7.10.0", u => u
 					.Calls<CloneSnapshotDescriptor, CloneSnapshotRequest, ICloneSnapshotRequest, CloneSnapshotResponse>(
 						v => new CloneSnapshotRequest($"{v}-repository", $"{v}-source", $"{v}-target"){ Indices = $"{v}-index" },
 						(v, d) => d.Index($"{v}-index"),
