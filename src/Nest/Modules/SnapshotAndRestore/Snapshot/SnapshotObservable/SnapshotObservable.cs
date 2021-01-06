@@ -170,9 +170,11 @@ namespace Nest
 		{
 			try
 			{
-				var snapshotRequest = new SnapshotStatusRequest(_snapshotRequest.RepositoryName,
-						_snapshotRequest.Snapshot);
-
+				var snapshotRequest = new SnapshotStatusRequest(_snapshotRequest.RepositoryName, _snapshotRequest.Snapshot)
+				{
+					RequestConfiguration = new RequestConfiguration()
+				};
+			
 				snapshotRequest.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.SnapshotHelperRequestMetaData());
 
 				var snapshotStatusResponse =

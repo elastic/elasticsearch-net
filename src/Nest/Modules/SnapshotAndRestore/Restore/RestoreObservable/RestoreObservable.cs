@@ -185,6 +185,7 @@ namespace Nest
 				var recoveryStatusRequest = new RecoveryStatusRequest(indices)
 				{
 					Detailed = true,
+					RequestConfiguration = new RequestConfiguration()
 				};
 				recoveryStatusRequest.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.RestoreHelperRequestMetaData());
 				var recoveryStatus = _elasticClient.Indices.RecoveryStatus(recoveryStatusRequest);
