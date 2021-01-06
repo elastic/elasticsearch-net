@@ -49,7 +49,8 @@ namespace Nest
 		// values part of the url path
 		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public CloseJobDescriptor AllowNoJobs(bool? allownojobs = true) => Qs("allow_no_jobs", allownojobs);
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
 		public CloseJobDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
@@ -461,7 +462,8 @@ namespace Nest
 		///<summary>The ID of the datafeeds stats to fetch</summary>
 		public GetDatafeedStatsDescriptor DatafeedId(Id datafeedId) => Assign(datafeedId, (a, v) => a.RouteValues.Optional("datafeed_id", v));
 		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public GetDatafeedStatsDescriptor AllowNoDatafeeds(bool? allownodatafeeds = true) => Qs("allow_no_datafeeds", allownodatafeeds);
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public GetDatafeedStatsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
@@ -487,7 +489,8 @@ namespace Nest
 		///<summary>The ID of the datafeeds to fetch</summary>
 		public GetDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(datafeedId, (a, v) => a.RouteValues.Optional("datafeed_id", v));
 		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public GetDatafeedsDescriptor AllowNoDatafeeds(bool? allownodatafeeds = true) => Qs("allow_no_datafeeds", allownodatafeeds);
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public GetDatafeedsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
@@ -562,7 +565,8 @@ namespace Nest
 		///<summary>The ID of the jobs stats to fetch</summary>
 		public GetJobStatsDescriptor JobId(Id jobId) => Assign(jobId, (a, v) => a.RouteValues.Optional("job_id", v));
 		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public GetJobStatsDescriptor AllowNoJobs(bool? allownojobs = true) => Qs("allow_no_jobs", allownojobs);
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
 		public GetJobStatsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
@@ -588,7 +592,8 @@ namespace Nest
 		///<summary>The ID of the jobs to fetch</summary>
 		public GetJobsDescriptor JobId(Id jobId) => Assign(jobId, (a, v) => a.RouteValues.Optional("job_id", v));
 		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public GetJobsDescriptor AllowNoJobs(bool? allownojobs = true) => Qs("allow_no_jobs", allownojobs);
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
 		public GetJobsDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);
@@ -957,7 +962,8 @@ namespace Nest
 		// values part of the url path
 		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 		// Request parameters
-		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
 		public StopDatafeedDescriptor AllowNoDatafeeds(bool? allownodatafeeds = true) => Qs("allow_no_datafeeds", allownodatafeeds);
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public StopDatafeedDescriptor AllowNoMatch(bool? allownomatch = true) => Qs("allow_no_match", allownomatch);

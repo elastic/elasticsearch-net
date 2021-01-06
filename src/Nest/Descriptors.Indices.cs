@@ -906,7 +906,8 @@ namespace Nest
 		public GetMappingDescriptor<TDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 		///<summary>Whether to add the type name to the response (default: false)</summary>
 		public GetMappingDescriptor<TDocument> IncludeTypeName(bool? includetypename = true) => Qs("include_type_name", includetypename);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.8.0, reason: This parameter is a no-op and field mappings are always retrieved locally.")]
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.8.0, reason: This parameter is a no-op and field mappings are always retrieved locally.")]
 		public GetMappingDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 		///<summary>Specify timeout for connection to master</summary>
 		public GetMappingDescriptor<TDocument> MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
@@ -1176,13 +1177,15 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public PutIndexTemplateDescriptor Create(bool? create = true) => Qs("create", create);
-		///<summary>Return settings in flat format (default: false)</summary>		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.7.0, reason: Removed from the server as it was never a valid option")]
+		///<summary>Return settings in flat format (default: false)</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.7.0, reason: Removed from the server as it was never a valid option")]
 		public PutIndexTemplateDescriptor FlatSettings(bool? flatsettings = true) => Qs("flat_settings", flatsettings);
 		///<summary>Whether a type should be returned in the body of the mappings.</summary>
 		public PutIndexTemplateDescriptor IncludeTypeName(bool? includetypename = true) => Qs("include_type_name", includetypename);
 		///<summary>Specify timeout for connection to master</summary>
 		public PutIndexTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
-		///<summary>Explicit operation timeout</summary>		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.7.0, reason: Removed from the server as it was never a valid option")]
+		///<summary>Explicit operation timeout</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.7.0, reason: Removed from the server as it was never a valid option")]
 		public PutIndexTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
