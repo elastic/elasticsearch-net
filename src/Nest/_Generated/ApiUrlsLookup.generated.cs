@@ -20,6 +20,7 @@ namespace Nest
 	{
 		internal static ApiUrls AsyncSearchDelete = new ApiUrls(new[]{"_async_search/{id}"});
 		internal static ApiUrls AsyncSearchGet = new ApiUrls(new[]{"_async_search/{id}"});
+		internal static ApiUrls AsyncSearchStatus = new ApiUrls(new[]{"_async_search/status/{id}"});
 		internal static ApiUrls AsyncSearchSubmit = new ApiUrls(new[]{"_async_search", "{index}/_async_search"});
 		internal static ApiUrls NoNamespaceBulk = new ApiUrls(new[]{"_bulk", "{index}/_bulk"});
 		internal static ApiUrls CatAliases = new ApiUrls(new[]{"_cat/aliases", "_cat/aliases/{name}"});
