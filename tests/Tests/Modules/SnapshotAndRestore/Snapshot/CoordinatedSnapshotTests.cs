@@ -17,7 +17,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot
 {
-	public class CoordinatedSnapshotTests : CoordinatedIntegrationTestBase<WritableCluster>
+	public class CoordinatedSnapshotTests : CoordinatedIntegrationTestBase<IntrusiveOperationCluster>
 	{
 		private const string SetupStep = nameof(SetupStep);
 		private const string CreateSnapshotStep = nameof(CreateSnapshotStep);
@@ -26,7 +26,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 		private const string DeleteSnapshotStep = nameof(DeleteSnapshotStep);
 		private const string DeleteNonExistentSnapshotStep = nameof(DeleteNonExistentSnapshotStep);
 
-		public CoordinatedSnapshotTests(WritableCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
+		public CoordinatedSnapshotTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
 			{
 				SetupStep, u => u
