@@ -92,3 +92,15 @@ new SearchRequest<Project>
 }
 ----
 
+[float]
+=== Handling Responses
+
+[source,csharp]
+----
+foreach (var fields in response.Fields)
+{
+    fields.Value<int>("test1").Should().BeGreaterOrEqualTo(0);
+    fields.Value<double>("test2").Should().BeGreaterOrEqualTo(0);
+}
+----
+
