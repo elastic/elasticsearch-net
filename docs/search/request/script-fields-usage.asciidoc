@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.x
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.11
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -89,6 +89,18 @@ new SearchRequest<Project>
       }
     }
   }
+}
+----
+
+[float]
+=== Handling Responses
+
+[source,csharp]
+----
+foreach (var fields in response.Fields)
+{
+    fields.Value<int>("test1").Should().BeGreaterOrEqualTo(0);
+    fields.Value<double>("test2").Should().BeGreaterOrEqualTo(0);
 }
 ----
 
