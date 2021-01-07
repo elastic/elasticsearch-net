@@ -97,6 +97,7 @@ namespace Nest
 				case FieldType.Histogram: return Deserialize<HistogramProperty>(ref segmentReader, formatterResolver);
 				case FieldType.ConstantKeyword: return Deserialize<ConstantKeywordProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Wildcard: return Deserialize<WildcardProperty>(ref segmentReader, formatterResolver);
+				case FieldType.Version: return Deserialize<VersionProperty>(ref segmentReader, formatterResolver);
 				case FieldType.None:
 					// no "type" field in the property mapping, or FieldType enum could not be parsed from typeString
 					return Deserialize<ObjectProperty>(ref segmentReader, formatterResolver);
@@ -216,6 +217,9 @@ namespace Nest
 					break;
 				case IGenericProperty genericProperty:
 					Serialize(ref writer, genericProperty, formatterResolver);
+					break;
+				case IVersionProperty versionProperty:
+					Serialize(ref writer, versionProperty, formatterResolver);
 					break;
 				default:
 					var formatter = formatterResolver.GetFormatter<object>();
