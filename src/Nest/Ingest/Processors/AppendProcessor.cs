@@ -20,12 +20,17 @@ namespace Nest
 
 		[DataMember(Name ="value")]
 		IEnumerable<object> Value { get; set; }
+
+		[DataMember(Name = "allow_duplicates")]
+		bool? AllowDuplicates { get; set; }
 	}
 
 	public class AppendProcessor : ProcessorBase, IAppendProcessor
 	{
 		public Field Field { get; set; }
 		public IEnumerable<object> Value { get; set; }
+		public bool? AllowDuplicates { get; set; }
+
 		protected override string Name => "append";
 	}
 
@@ -35,6 +40,7 @@ namespace Nest
 		protected override string Name => "append";
 		Field IAppendProcessor.Field { get; set; }
 		IEnumerable<object> IAppendProcessor.Value { get; set; }
+		bool? IAppendProcessor.AllowDuplicates { get; set; }
 
 		public AppendProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
 
@@ -49,5 +55,7 @@ namespace Nest
 				a.Value = (v.First() as IEnumerable)?.Cast<object>();
 			else a.Value = v?.Cast<object>();
 		});
+
+		public AppendProcessorDescriptor<T> AllowDuplicates(bool? allowDuplicates = true) => Assign(allowDuplicates, (a, v) => a.AllowDuplicates = v);
 	}
 }
