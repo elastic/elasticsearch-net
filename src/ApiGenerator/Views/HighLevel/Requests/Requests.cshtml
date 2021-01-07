@@ -6,7 +6,7 @@
 @inherits CodeTemplatePage<KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>>>
 @{
 	KeyValuePair<string, ReadOnlyCollection<ApiEndpoint>> model = Model;
-	string ns = model.Key != CsharpNames.RootNamespace ? "."+CsharpNames.ApiNamespace+"." + model.Key + CsharpNames.ApiNamespaceSuffix : null;
+	string ns = model.Key != CsharpNames.RootNamespace ? "." + CsharpNames.ApiNamespace + "." + model.Key + CsharpNames.ApiNamespaceSuffix : null;
 	var endpoints = model.Value;
 }
 @{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
@@ -18,10 +18,11 @@ using System.Text;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
+using Nest.Utf8Json;
 @if (model.Key != CsharpNames.RootNamespace)
 {
 	<text>using Elasticsearch.Net@(ns);
-</text>
+	</text>
 }
 
 // ReSharper disable RedundantBaseConstructorCall
