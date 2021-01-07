@@ -9,6 +9,8 @@ using System.Reflection;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.Client;
+using Tests.Core.Extensions;
+using Tests.Core.Xunit;
 using Tests.Domain;
 
 namespace Tests.Ingest
@@ -55,22 +57,33 @@ namespace Tests.Ingest
 			foreach (var a in All) a.Fluent(d);
 			return d;
 		}
-
+		
 		public class Append : ProcessorAssertion
 		{
-			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
-				.Append<Project>(a => a
-					.Field(p => p.State)
-					.Value(StateOfBeing.Stable, StateOfBeing.VeryActive)
-				);
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent =>
+				d => d.Append<Project>(a => a.Field(p => p.State).Value(StateOfBeing.Stable, StateOfBeing.VeryActive));
 
-			public override IProcessor Initializer => new AppendProcessor
+			public override IProcessor Initializer => new AppendProcessor { Field = "state", Value = new object[] { StateOfBeing.Stable, StateOfBeing.VeryActive }};
+
+			public override object Json => new
 			{
-				Field = "state",
-				Value = new object[] { StateOfBeing.Stable, StateOfBeing.VeryActive }
+				field = "state",
+				value = new[] { "Stable", "VeryActive" }
 			};
 
-			public override object Json => new { field = "state", value = new[] { "Stable", "VeryActive" } };
+			public override string Key => "append";
+		}
+
+		[SkipVersion("<7.11.0", "Allow duplicates added in 7.11")]
+		public class AppendWithAllowDuplicates : ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent =>
+				d => d.Append<Project>(a => a.Field(p => p.State).Value(StateOfBeing.Stable, StateOfBeing.VeryActive).AllowDuplicates(false));
+
+			public override IProcessor Initializer => new AppendProcessor { Field = "state", Value = new object[] { StateOfBeing.Stable, StateOfBeing.VeryActive }, AllowDuplicates = false };
+
+			public override object Json => new { field = "state", value = new[] { "Stable", "VeryActive" }, allow_duplicates = false };
+
 			public override string Key => "append";
 		}
 
