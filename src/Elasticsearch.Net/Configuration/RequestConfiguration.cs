@@ -126,6 +126,11 @@ namespace Elasticsearch.Net
 
 		/// <inheritdoc cref="IConnectionConfigurationValues.EnableThreadPoolStats"/>
 		bool? EnableThreadPoolStats { get; set; }
+
+		/// <summary>
+		/// Holds additional meta data about the request.
+		/// </summary>
+		RequestMetaData RequestMetaData { get; set; }
 	}
 
 	public class RequestConfiguration : IRequestConfiguration
@@ -172,6 +177,8 @@ namespace Elasticsearch.Net
 		public bool? EnableTcpStats { get; set; }
 		/// <inheritdoc />
 		public bool? EnableThreadPoolStats { get; set; }
+		/// <inheritdoc />
+		public RequestMetaData RequestMetaData { get; set; }
 	}
 
 	public class RequestConfigurationDescriptor : IRequestConfiguration
@@ -223,6 +230,7 @@ namespace Elasticsearch.Net
 		NameValueCollection IRequestConfiguration.Headers { get; set; }
 		bool? IRequestConfiguration.EnableTcpStats { get; set; }
 		bool? IRequestConfiguration.EnableThreadPoolStats { get; set; }
+		RequestMetaData IRequestConfiguration.RequestMetaData { get; set; }
 
 		/// <summary>
 		/// Submit the request on behalf in the context of a different shield user
@@ -404,6 +412,13 @@ namespace Elasticsearch.Net
 		public RequestConfigurationDescriptor EnableThreadPoolStats(bool? enableThreadPoolStats = true)
 		{
 			Self.EnableThreadPoolStats = enableThreadPoolStats;
+			return this;
+		}
+
+		/// <inheritdoc cref="IRequestConfiguration.RequestMetaData" />
+		internal RequestConfigurationDescriptor RequestMetaData(RequestMetaData metaData)
+		{
+			Self.RequestMetaData = metaData;
 			return this;
 		}
 	}

@@ -91,6 +91,8 @@ namespace Elasticsearch.Net
 			TransferEncodingChunked = local?.TransferEncodingChunked ?? global.TransferEncodingChunked;
 			TcpStats = local?.EnableTcpStats ?? global.EnableTcpStats;
 			ThreadPoolStats = local?.EnableThreadPoolStats ?? global.EnableThreadPoolStats;
+			MetaHeaderProvider = global.MetaHeaderProvider;
+			RequestMetaData = local?.RequestMetaData?.Items ?? EmptyReadOnly<string,string>.Dictionary;
 		}
 
 		private readonly string _path;
@@ -140,6 +142,12 @@ namespace Elasticsearch.Net
 
 		public Uri Uri => Node != null ? new Uri(Node.Uri, PathAndQuery) : null;
 		public TimeSpan DnsRefreshTimeout { get; }
+
+		public MetaHeaderProvider MetaHeaderProvider { get; }
+
+		public IReadOnlyDictionary<string, string> RequestMetaData { get; }
+
+		public bool IsAsync { get; internal set; }
 
 		public override string ToString() => $"{Method.GetStringValue()} {_path}";
 
