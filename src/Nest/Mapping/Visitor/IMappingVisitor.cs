@@ -71,6 +71,8 @@ namespace Nest
 		void Visit(IHistogramProperty property);
 
 		void Visit(IConstantKeywordProperty property);
+
+		void Visit(IVersionProperty property);
 	}
 
 	public class NoopMappingVisitor : IMappingVisitor
@@ -140,5 +142,7 @@ namespace Nest
 		public virtual void Visit(IHistogramProperty property) { }
 
 		public virtual void Visit(IConstantKeywordProperty property) { }
+
+		public virtual void Visit(IVersionProperty property) { }
 	}
 }

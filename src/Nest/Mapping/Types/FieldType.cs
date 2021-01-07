@@ -154,5 +154,11 @@ namespace Nest
 
 		[EnumMember(Value = "point")]
 		Point,
+
+		/// <summary>
+		/// Version field type for storing semver compatible version numbers.
+		/// </summary>
+		[EnumMember(Value = "version")]
+		Version
 	}
 }
