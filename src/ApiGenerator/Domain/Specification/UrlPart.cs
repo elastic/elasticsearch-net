@@ -95,6 +95,7 @@ namespace ApiGenerator.Domain.Specification
 					case "application":
 					case "repository":
 					case "snapshot":
+					case "target_snapshot":
 					case "user":
 					case "username":
 					case "realms":
