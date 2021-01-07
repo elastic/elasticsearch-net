@@ -57,6 +57,9 @@ namespace Nest
 		public IRoutingField RoutingField { get; set; }
 
 		/// <inheritdoc />
+		public IRuntimeFields RuntimeFields { get; set; }
+		
+		/// <inheritdoc />
 		public ISizeField SizeField { get; set; }
 
 		/// <inheritdoc />
@@ -82,6 +85,7 @@ namespace Nest
 		bool? ITypeMapping.NumericDetection { get; set; }
 		IProperties ITypeMapping.Properties { get; set; }
 		IRoutingField ITypeMapping.RoutingField { get; set; }
+		IRuntimeFields ITypeMapping.RuntimeFields { get; set; }
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
 
@@ -149,6 +153,10 @@ namespace Nest
 		/// <inheritdoc cref="ITypeMapping.RoutingField" />
 		public PutMappingDescriptor<TDocument> RoutingField(Func<RoutingFieldDescriptor<TDocument>, IRoutingField> routingFieldSelector) =>
 			Assign(routingFieldSelector, (a, v) => a.RoutingField = v?.Invoke(new RoutingFieldDescriptor<TDocument>()));
+
+		/// <inheritdoc cref="ITypeMapping.RuntimeFields" />
+		public PutMappingDescriptor<TDocument> RuntimeFields(Func<RuntimeFieldsDescriptor, IPromise<IRuntimeFields>> runtimeFieldsSelector) =>
+			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor())?.Value);
 
 		/// <inheritdoc cref="ITypeMapping.FieldNamesField" />
 		public PutMappingDescriptor<TDocument> FieldNamesField(Func<FieldNamesFieldDescriptor<TDocument>, IFieldNamesField> fieldNamesFieldSelector) =>
