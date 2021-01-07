@@ -291,14 +291,14 @@ namespace Nest
 		[IgnoreDataMember]
 		IndexMetrics INodesStatsRequest.IndexMetric => Self.RouteValues.Get<IndexMetrics>("index_metric");
 		// Request parameters
-		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `completion` index metric (supports wildcards)</summary>
 		public Fields CompletionFields
 		{
 			get => Q<Fields>("completion_fields");
 			set => Q("completion_fields", value);
 		}
 
-		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `fielddata` index metric (supports wildcards)</summary>
 		public Fields FielddataFields
 		{
 			get => Q<Fields>("fielddata_fields");
