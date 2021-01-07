@@ -81,6 +81,63 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface ICloneSnapshotRequest : IRequest<CloneSnapshotRequestParameters>
+	{
+		[IgnoreDataMember]
+		Name RepositoryName
+		{
+			get;
+		}
+
+		[IgnoreDataMember]
+		Name Snapshot
+		{
+			get;
+		}
+
+		[IgnoreDataMember]
+		Name TargetSnapshot
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Clone <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	public partial class CloneSnapshotRequest : PlainRequestBase<CloneSnapshotRequestParameters>, ICloneSnapshotRequest
+	{
+		protected ICloneSnapshotRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotClone;
+		///<summary>/_snapshot/{repository}/{snapshot}/_clone/{target_snapshot}</summary>
+		///<param name = "repository">this parameter is required</param>
+		///<param name = "snapshot">this parameter is required</param>
+		///<param name = "targetSnapshot">this parameter is required</param>
+		public CloneSnapshotRequest(Name repository, Name snapshot, Name targetSnapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot).Required("target_snapshot", targetSnapshot))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected CloneSnapshotRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name ICloneSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		[IgnoreDataMember]
+		Name ICloneSnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+		[IgnoreDataMember]
+		Name ICloneSnapshotRequest.TargetSnapshot => Self.RouteValues.Get<Name>("target_snapshot");
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface ISnapshotRequest : IRequest<SnapshotRequestParameters>
 	{
 		[IgnoreDataMember]

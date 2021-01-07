@@ -61,6 +61,30 @@ namespace Nest.Specification.SnapshotApi
 		/// </summary>
 		public Task<CleanupRepositoryResponse> CleanupRepositoryAsync(ICleanupRepositoryRequest request, CancellationToken ct = default) => DoRequestAsync<ICleanupRepositoryRequest, CleanupRepositoryResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>PUT</c> request to the <c>snapshot.clone</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
+		/// </summary>
+		public CloneSnapshotResponse Clone(Name repository, Name snapshot, Name targetSnapshot, Func<CloneSnapshotDescriptor, ICloneSnapshotRequest> selector) => Clone(selector.InvokeOrDefault(new CloneSnapshotDescriptor(repository: repository, snapshot: snapshot, targetSnapshot: targetSnapshot)));
+		/// <summary>
+		/// <c>PUT</c> request to the <c>snapshot.clone</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
+		/// </summary>
+		public Task<CloneSnapshotResponse> CloneAsync(Name repository, Name snapshot, Name targetSnapshot, Func<CloneSnapshotDescriptor, ICloneSnapshotRequest> selector, CancellationToken ct = default) => CloneAsync(selector.InvokeOrDefault(new CloneSnapshotDescriptor(repository: repository, snapshot: snapshot, targetSnapshot: targetSnapshot)), ct);
+		/// <summary>
+		/// <c>PUT</c> request to the <c>snapshot.clone</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
+		/// </summary>
+		public CloneSnapshotResponse Clone(ICloneSnapshotRequest request) => DoRequest<ICloneSnapshotRequest, CloneSnapshotResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>PUT</c> request to the <c>snapshot.clone</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
+		/// </summary>
+		public Task<CloneSnapshotResponse> CloneAsync(ICloneSnapshotRequest request, CancellationToken ct = default) => DoRequestAsync<ICloneSnapshotRequest, CloneSnapshotResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>PUT</c> request to the <c>snapshot.create</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>

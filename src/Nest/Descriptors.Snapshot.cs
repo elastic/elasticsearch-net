@@ -58,6 +58,33 @@ namespace Nest
 		public CleanupRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
+	///<summary>Descriptor for Clone <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	public partial class CloneSnapshotDescriptor : RequestDescriptorBase<CloneSnapshotDescriptor, CloneSnapshotRequestParameters, ICloneSnapshotRequest>, ICloneSnapshotRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotClone;
+		///<summary>/_snapshot/{repository}/{snapshot}/_clone/{target_snapshot}</summary>
+		///<param name = "repository">this parameter is required</param>
+		///<param name = "snapshot">this parameter is required</param>
+		///<param name = "targetSnapshot">this parameter is required</param>
+		public CloneSnapshotDescriptor(Name repository, Name snapshot, Name targetSnapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot).Required("target_snapshot", targetSnapshot))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected CloneSnapshotDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name ICloneSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		Name ICloneSnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+		Name ICloneSnapshotRequest.TargetSnapshot => Self.RouteValues.Get<Name>("target_snapshot");
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CloneSnapshotDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+	}
+
 	///<summary>Descriptor for Snapshot <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class SnapshotDescriptor : RequestDescriptorBase<SnapshotDescriptor, SnapshotRequestParameters, ISnapshotRequest>, ISnapshotRequest
 	{
