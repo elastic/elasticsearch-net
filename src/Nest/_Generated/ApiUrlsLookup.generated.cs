@@ -278,6 +278,7 @@ namespace Nest
 		internal static ApiUrls SnapshotLifecycleManagementStart = new ApiUrls(new[]{"_slm/start"});
 		internal static ApiUrls SnapshotLifecycleManagementStop = new ApiUrls(new[]{"_slm/stop"});
 		internal static ApiUrls SnapshotCleanupRepository = new ApiUrls(new[]{"_snapshot/{repository}/_cleanup"});
+		internal static ApiUrls SnapshotClone = new ApiUrls(new[]{"_snapshot/{repository}/{snapshot}/_clone/{target_snapshot}"});
 		internal static ApiUrls SnapshotSnapshot = new ApiUrls(new[]{"_snapshot/{repository}/{snapshot}"});
 		internal static ApiUrls SnapshotCreateRepository = new ApiUrls(new[]{"_snapshot/{repository}"});
 		internal static ApiUrls SnapshotDelete = new ApiUrls(new[]{"_snapshot/{repository}/{snapshot}"});
