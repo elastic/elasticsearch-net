@@ -229,6 +229,8 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		public void Visit(IConstantKeywordProperty property) => Increment("constant_keyword");
 
+		public void Visit(IVersionProperty property) => Increment("version");
+
 		private void Increment(string key)
 		{
 			if (!Counts.ContainsKey(key)) Counts.Add(key, 0);
