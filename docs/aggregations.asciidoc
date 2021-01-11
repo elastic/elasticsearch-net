@@ -56,6 +56,8 @@ The values are typically extracted from the fields of the document (using the fi
 
 * <<percentiles-aggregation-usage,Percentiles Aggregation Usage>>
 
+* <<rate-aggregation-usage,Rate Aggregation Usage>>
+
 * <<scripted-metric-aggregation-usage,Scripted Metric Aggregation Usage>>
 
 * <<stats-aggregation-usage,Stats Aggregation Usage>>
@@ -99,6 +101,8 @@ include::aggregations/metric/min/min-aggregation-usage.asciidoc[]
 include::aggregations/metric/percentile-ranks/percentile-ranks-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/percentiles/percentiles-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/rate/rate-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/scripted-metric/scripted-metric-aggregation-usage.asciidoc[]
 

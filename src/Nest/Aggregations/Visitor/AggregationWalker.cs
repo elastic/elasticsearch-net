@@ -144,6 +144,7 @@ namespace Nest
 				v.Visit(d);
 				Accept(v, d.Aggregations);
 			});
+			AcceptAggregation(aggregation.Rate, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.ReverseNested, visitor, (v, d) =>
 			{
 				v.Visit(d);

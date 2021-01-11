@@ -205,6 +205,8 @@ namespace Nest
 				};
 		}
 
+		public ValueAggregate Rate(string key) => TryGet<ValueAggregate>(key);
+
 		public MultiBucketAggregate<RareTermsBucket<string>> RareTerms(string key) => RareTerms<string>(key);
 
 		public MultiBucketAggregate<RangeBucket> Range(string key) => GetMultiBucketAggregate<RangeBucket>(key);

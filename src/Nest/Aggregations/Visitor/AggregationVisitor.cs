@@ -82,6 +82,8 @@ namespace Nest
 
 		void Visit(IRareTermsAggregation aggregation);
 
+		void Visit(IRateAggregation aggregation);
+
 		void Visit(ITermsAggregation aggregation);
 
 		void Visit(ISignificantTermsAggregation aggregation);
@@ -240,6 +242,8 @@ namespace Nest
 		public virtual void Visit(IRangeAggregation aggregation) { }
 
 		public virtual void Visit(IRareTermsAggregation aggregation) { }
+
+		public virtual void Visit(IRateAggregation aggregation) { }
 
 		public virtual void Visit(INestedAggregation aggregation) { }
 
