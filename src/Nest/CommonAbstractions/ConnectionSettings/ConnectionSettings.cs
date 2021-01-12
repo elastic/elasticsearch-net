@@ -93,7 +93,7 @@ namespace Nest
 			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory,
 			IPropertyMappingProvider propertyMappingProvider
 		)
-			: base(connectionPool, connection, null, NestElasticsearchProductConfiguration.DefaultForNest)
+			: base(connectionPool, connection, null, NestElasticsearchProductRegistration.DefaultForNest)
 		{
 			var formatterResolver = new NestFormatterResolver(this);
 			var defaultSerializer = new DefaultHighLevelSerializer(formatterResolver);

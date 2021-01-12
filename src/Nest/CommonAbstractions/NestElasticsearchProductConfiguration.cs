@@ -3,14 +3,13 @@
 // See the LICENSE file in the project root for more information
 
 using Elastic.Transport;
-using Elastic.Transport.Products;
 using Elastic.Transport.Products.Elasticsearch;
 
 namespace Nest
 {
-	public class NestElasticsearchProductConfiguration : ElasticsearchProductRegistration
+	public class NestElasticsearchProductRegistration : ElasticsearchProductRegistration
 	{
-		public static NestElasticsearchProductConfiguration DefaultForNest { get; } = new NestElasticsearchProductConfiguration();
+		public static NestElasticsearchProductRegistration DefaultForNest { get; } = new NestElasticsearchProductRegistration();
 
 		/// <summary>
 		/// NEST handles 404 in its <see cref="ResponseBase.IsValid"/>, we do not want the low level client throwing exceptions
