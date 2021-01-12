@@ -92,7 +92,7 @@ A cloud connection pool can be created using credentials and a `cloudId`
 
 [source,csharp]
 ----
-var credentials = new BasicAuthenticationCredentials("username", "password"); <1>
+var credentials = new BasicAuthentication("username", "password"); <1>
 var pool = new CloudConnectionPool(cloudId, credentials); <2>
 var client = new ElasticClient(new ConnectionSettings(pool));
 ----

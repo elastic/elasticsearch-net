@@ -118,10 +118,10 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 			await this.AssertOn(new ConnectionSettings());
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			await this.AssertOn(new TransportConfiguration(pool, new LowLevelRequestResponseSerializer()));
+			await this.AssertOn(new TransportConfiguration(pool, serializer: new LowLevelRequestResponseSerializer()));
 		}
 
-		private async Task AssertOn(ITransportConfigurationValues settings)
+		private async Task AssertOn(ITransportConfiguration settings)
 		{
 			/**
 			 * Each of the implicitly converted types behaves _slightly_ differently.
@@ -194,7 +194,7 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		//hide
-		private static async Task Post(Func<PostData> postData, byte[] writes, bool writtenBytesIsSet, ITransportConfigurationValues settings)
+		private static async Task Post(Func<PostData> postData, byte[] writes, bool writtenBytesIsSet, ITransportConfiguration settings)
 		{
 			PostAssert(postData(), writes, writtenBytesIsSet, settings);
 			await Task.CompletedTask;
@@ -202,7 +202,7 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		//hide
-		private static void PostAssert(PostData postData, byte[] writes, bool storesBytes, ITransportConfigurationValues settings)
+		private static void PostAssert(PostData postData, byte[] writes, bool storesBytes, ITransportConfiguration settings)
 		{
 			using (var ms = new MemoryStream())
 			{
@@ -222,7 +222,7 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		//hide
-		private static async Task PostAssertAsync(PostData postData, byte[] writes, bool storesBytes, ITransportConfigurationValues settings)
+		private static async Task PostAssertAsync(PostData postData, byte[] writes, bool storesBytes, ITransportConfiguration settings)
 		{
 			using (var ms = new MemoryStream())
 			{

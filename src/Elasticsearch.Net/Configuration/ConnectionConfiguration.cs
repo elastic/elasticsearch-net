@@ -4,9 +4,8 @@
 
 using System;
 using System.ComponentModel;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using Elastic.Transport;
+using Elastic.Transport.Products;
 using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elasticsearch.Net
@@ -17,7 +16,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// The default user agent for Elasticsearch.Net
 		/// </summary>
-		public static readonly UserAgent DefaultUserAgent = Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(ITransportConfigurationValues));
+		public static readonly UserAgent DefaultUserAgent = Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(ITransportConfiguration));
 
 		public ConnectionConfiguration(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
@@ -29,13 +28,7 @@ namespace Elasticsearch.Net
 		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
 		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
 		/// </summary>
-		public ConnectionConfiguration(string cloudId, BasicAuthenticationCredentials credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
-
-		/// <summary>
-		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
-		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
-		/// </summary>
-		public ConnectionConfiguration(string cloudId, ApiKeyAuthenticationCredentials credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
+		public ConnectionConfiguration(string cloudId, IAuthenticationHeader credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
 
 		public ConnectionConfiguration(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
 
@@ -54,8 +47,9 @@ namespace Elasticsearch.Net
 	public abstract class ConnectionConfigurationBase<TConnectionConfiguration> : TransportConfigurationBase<TConnectionConfiguration>, IConnectionConfigurationValues
 		where TConnectionConfiguration : ConnectionConfigurationBase<TConnectionConfiguration>, IConnectionConfigurationValues
 	{
-		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection, ITransportSerializer serializer)
-			: base(connectionPool, connection, serializer, ElasticsearchProductRegistration.Default) =>
+		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection, ITransportSerializer serializer,
+			IProductRegistration registration = null)
+			: base(connectionPool, connection, serializer, registration ?? ElasticsearchProductRegistration.Default) =>
 			UserAgent(ConnectionConfiguration.DefaultUserAgent);
 
 		private bool _includeServerStackTraceOnError;

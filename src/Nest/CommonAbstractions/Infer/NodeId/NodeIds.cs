@@ -28,7 +28,7 @@ namespace Nest
 
 		public bool Equals(NodeIds other) => EqualsAllIds(Value, other.Value);
 
-		string IUrlParameter.GetString(ITransportConfigurationValues settings) => string.Join(",", Value);
+		string IUrlParameter.GetString(ITransportConfiguration settings) => string.Join(",", Value);
 
 		public static NodeIds Parse(string nodeIds) => nodeIds.IsNullOrEmptyCommaSeparatedList(out var nodes) ? null : new NodeIds(nodes);
 

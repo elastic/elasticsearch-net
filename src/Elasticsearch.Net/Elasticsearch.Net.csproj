@@ -16,7 +16,8 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1;net461</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="$(SolutionRoot)\src\Elastic.Transport\Elastic.Transport.csproj" />
+<!--    <ProjectReference Include="..\..\..\elastic-transport-net\src\Elastic.Transport\Elastic.Transport.csproj" />-->
+    <PackageReference Include="Elastic.Transport" Version="0.2.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="ElasticLowLevelClient.*.cs">
@@ -30,4 +31,14 @@
       <DependentUpon>Api\RequestParameters\RequestParameters.cs</DependentUpon>
     </Compile>
   </ItemGroup>
+
+  <!-- 
+  This ensures the Elastic.Transport.xml makes it to to output directory
+  The documentation generator needs this file since we reference its docs
+   -->
+  <Target Name="_ResolveCopyLocalNuGetPackageXmls" AfterTargets="ResolveReferences">
+    <ItemGroup>
+      <ReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths->'%(RootDir)%(Directory)%(Filename).xml')" Condition="'%(ReferenceCopyLocalPaths.NuGetPackageId)' != '' and Exists('%(RootDir)%(Directory)%(Filename).xml')" />
+    </ItemGroup>
+  </Target>
 </Project>

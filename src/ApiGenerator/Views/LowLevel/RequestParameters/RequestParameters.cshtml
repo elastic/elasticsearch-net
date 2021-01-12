@@ -32,8 +32,6 @@ namespace Elasticsearch.Net@(ns)
 	///<summary>Request options for @names.MethodName@Raw(r.OfficialDocumentationLink.IsNullOrEmpty() ? "" : " <para>" + r.OfficialDocumentationLink + "</para>")</summary>
 	public class @names.ParametersName : RequestParameters<@names.ParametersName> 
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.@r.HttpMethod;
-		public override bool SupportsBody => @(supportsBody ? "true" : "false");
 		@foreach (var param in r.Params)
 		{
 <text>		@Raw(param.InitializerGenerator(r.CsharpNames.Namespace, param.TypeLowLevel, param.ClsName, param.QueryStringKey, param.SetterLowLevel, param.Description))

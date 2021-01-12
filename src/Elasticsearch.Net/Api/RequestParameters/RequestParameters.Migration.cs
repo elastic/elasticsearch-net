@@ -28,7 +28,5 @@ namespace Elasticsearch.Net.Specification.MigrationApi
 	///<summary>Request options for DeprecationInfo <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</para></summary>
 	public class DeprecationInfoRequestParameters : RequestParameters<DeprecationInfoRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 	}
 }

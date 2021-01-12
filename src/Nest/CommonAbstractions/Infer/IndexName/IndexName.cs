@@ -44,7 +44,7 @@ namespace Nest
 
 		bool IEquatable<IndexName>.Equals(IndexName other) => EqualsMarker(other);
 
-		public string GetString(ITransportConfigurationValues settings)
+		public string GetString(ITransportConfiguration settings)
 		{
 			if (!(settings is IConnectionSettingsValues nestSettings))
 				throw new Exception("Tried to pass index name on querystring but it could not be resolved because no nest settings are available");

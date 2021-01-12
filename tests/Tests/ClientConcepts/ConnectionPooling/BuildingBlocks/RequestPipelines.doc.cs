@@ -43,7 +43,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			/** When calling `Request()` or `RequestAsync()` on an `ITransport`,
 			* the whole coordination of the request is deferred to a new instance in a `using` block.
 			*/
-			var pipeline = new RequestPipeline(
+			var pipeline = new RequestPipeline<IConnectionSettingsValues>(
 				settings,
 				DateTimeProvider.Default,
 				new RecyclableMemoryStreamFactory(),
@@ -55,7 +55,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			/** An `ITransport` does not instantiate a `RequestPipeline` directly; it uses a pluggable `IRequestPipelineFactory`
 			* to create them
 			*/
-			var requestPipelineFactory = new RequestPipelineFactory();
+			var requestPipelineFactory = new RequestPipelineFactory<IConnectionSettingsValues>();
 			var requestPipeline = requestPipelineFactory.Create(
 				settings,
 				DateTimeProvider.Default, //<1> An <<date-time-providers,`IDateTimeProvider`>> implementation
@@ -63,7 +63,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				new SearchRequestParameters()
 			);
 
-			requestPipeline.Should().BeOfType<RequestPipeline>();
+			requestPipeline.Should().BeOfType<RequestPipeline<IConnectionSettingsValues>>();
 			requestPipeline.GetType().Should().Implement<IDisposable>();
 
 			/**
@@ -87,7 +87,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var pool = setupPool(new[] { TestConnectionSettings.CreateUri(), TestConnectionSettings.CreateUri(9201) });
 			var settings = new ConnectionSettings(pool, connection ?? new InMemoryConnection());
 			settings = settingsSelector?.Invoke(settings) ?? settings;
-			return new FixedPipelineFactory(settings, dateTimeProvider ?? DateTimeProvider.Default).Pipeline;
+			return new ExposingPipelineFactory<IConnectionSettingsValues>(settings, dateTimeProvider ?? DateTimeProvider.Default).Pipeline;
 		}
 
 		/**

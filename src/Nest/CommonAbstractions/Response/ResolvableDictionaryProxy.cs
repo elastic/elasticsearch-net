@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch.Failures;
 using Elasticsearch.Net;
 using Nest.Utf8Json;
 

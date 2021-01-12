@@ -34,7 +34,7 @@ namespace Nest
 
 		public bool Equals(Metrics other) => Value.Equals(other?.Value);
 
-		public string GetString(ITransportConfigurationValues settings)
+		public string GetString(ITransportConfiguration settings)
 		{
 			if (_indicesStat != null) return _indicesStat.Value.GetStringValue();
 			else if (_nodesStats != null) return _nodesStats.Value.GetStringValue();

@@ -30,7 +30,7 @@ namespace Nest
 
 		public bool Equals(Names other) => EqualsAllIds(Value, other.Value);
 
-		string IUrlParameter.GetString(ITransportConfigurationValues settings) =>
+		string IUrlParameter.GetString(ITransportConfiguration settings) =>
 			string.Join(",", Value.Cast<IUrlParameter>().Select(n => n.GetString(settings)));
 
 		public static Names Parse(string names) => names.IsNullOrEmptyCommaSeparatedList(out var list) ? null : new Names(list);

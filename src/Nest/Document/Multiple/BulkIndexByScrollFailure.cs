@@ -4,6 +4,7 @@
 
 using System.Runtime.Serialization;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch.Failures;
 
 namespace Nest
 {

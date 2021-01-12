@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch.Failures;
 
 namespace Nest
 {
@@ -31,7 +32,7 @@ namespace Nest
 		/// </para>
 		/// <para>
 		/// You can also configure the client to always throw an <see cref="TransportException" /> using
-		/// <see cref="ITransportConfigurationValues.ThrowExceptions" /> if the response is not valid
+		/// <see cref="ITransportConfiguration.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
 		[IgnoreDataMember]
@@ -46,7 +47,7 @@ namespace Nest
 		/// </para>
 		/// <para>
 		/// You can also configure the client to always throw an <see cref="TransportException" /> using
-		/// <see cref="ITransportConfigurationValues.ThrowExceptions" /> if the response is not valid
+		/// <see cref="ITransportConfiguration.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
 		[IgnoreDataMember]
@@ -59,7 +60,7 @@ namespace Nest
 		/// <para>Possibly set when <see cref="IsValid" /> is false, depending on the cause of the error</para>
 		/// <para>
 		/// You can also configure the client to always throw an <see cref="TransportException" /> using
-		/// <see cref="ITransportConfigurationValues.ThrowExceptions" /> if the response is not valid
+		/// <see cref="ITransportConfiguration.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
 		[IgnoreDataMember]
@@ -148,12 +149,6 @@ namespace Nest
 		{
 			get => _originalApiCall;
 			set => _originalApiCall = value;
-		}
-
-		bool ITransportResponse.TryGetServerErrorReason(out string reason)
-		{
-			reason = ServerError?.Error?.ToString();
-			return !reason.IsNullOrEmpty();
 		}
 
 		/// <summary>Subclasses can override this to provide more information on why a call is not valid.</summary>

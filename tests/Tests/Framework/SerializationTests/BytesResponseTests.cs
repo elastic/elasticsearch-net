@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Core.Client;
@@ -55,7 +56,7 @@ namespace Tests.Framework.SerializationTests
 
 			bytesResponse.Body.Should().NotBeNull();
 			bytesResponse.Body.Should().BeEquivalentTo(responseBytes);
-			bytesResponse.TryGetServerError(out var serverError).Should().BeFalse();
+			bytesResponse.TryGetElasticsearchServerError(out var serverError).Should().BeFalse();
 			serverError.Should().BeNull();
 		}
 

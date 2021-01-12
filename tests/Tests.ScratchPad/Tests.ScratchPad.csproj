@@ -7,6 +7,7 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="5.0.0" />
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
   </ItemGroup>
 

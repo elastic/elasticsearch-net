@@ -6,6 +6,7 @@ using System;
 using System.Text;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch.Failures;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;

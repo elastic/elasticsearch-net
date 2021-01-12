@@ -101,24 +101,22 @@ provides some examples
 ----
 public class MyCustomHttpConnection : HttpConnection
 {
-    protected override HttpRequestMessage CreateRequestMessage(RequestData requestData)
+    protected override void SetAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
+
     {
-        var message = base.CreateRequestMessage(requestData);
         var header = string.Empty;
-        message.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
-        return message;
+        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
     }
 }
 
 public class KerberosConnection : HttpConnection
 {
-    protected override HttpRequestMessage CreateRequestMessage(RequestData requestData)
+    protected override void SetAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
     {
-        var message = base.CreateRequestMessage(requestData);
         var header = string.Empty;
-        message.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
-        return message;
+        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Negotiate", header);
     }
+
 }
 ----
 

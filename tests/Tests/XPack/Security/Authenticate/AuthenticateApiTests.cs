@@ -48,14 +48,14 @@ namespace Tests.XPack.Security.Authenticate
 
 		protected override Func<AuthenticateDescriptor, IAuthenticateRequest> Fluent => f => f
 			.RequestConfiguration(c => c
-				.BasicAuthentication(ClusterAuthentication.User.Username, ClusterAuthentication.User.Password)
+				.Authentication(new BasicAuthentication(ClusterAuthentication.User.Username, ClusterAuthentication.User.Password))
 			);
 
 		protected override AuthenticateRequest Initializer => new AuthenticateRequest
 		{
 			RequestConfiguration = new RequestConfiguration
 			{
-				BasicAuthenticationCredentials = new BasicAuthenticationCredentials(
+				AuthenticationHeader = new BasicAuthentication(
 					ClusterAuthentication.User.Username,
 					ClusterAuthentication.User.Password)
 			}

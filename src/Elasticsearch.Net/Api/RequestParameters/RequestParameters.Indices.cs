@@ -28,8 +28,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for AddBlock <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html</para></summary>
 	public class AddIndexBlockRequestParameters : RequestParameters<AddIndexBlockRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -72,8 +70,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Analyze <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</para></summary>
 	public class AnalyzeRequestParameters : RequestParameters<AnalyzeRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
 		///<summary>The name of the index to scope the operation</summary>
 		public string IndexQueryString
 		{
@@ -85,8 +81,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for ClearCache <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</para></summary>
 	public class ClearCacheRequestParameters : RequestParameters<ClearCacheRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -150,8 +144,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Clone <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html</para></summary>
 	public class CloneIndexRequestParameters : RequestParameters<CloneIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => true;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -177,8 +169,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Close <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public class CloseIndexRequestParameters : RequestParameters<CloseIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -228,8 +218,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Create <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</para></summary>
 	public class CreateIndexRequestParameters : RequestParameters<CreateIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => true;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -255,22 +243,16 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for CreateDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
 	public class CreateDataStreamRequestParameters : RequestParameters<CreateDataStreamRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for DataStreamsStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
 	public class DataStreamsStatsRequestParameters : RequestParameters<DataStreamsStatsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</para></summary>
 	public class DeleteIndexRequestParameters : RequestParameters<DeleteIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		public override bool SupportsBody => false;
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public bool? AllowNoIndices
 		{
@@ -310,8 +292,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for DeleteAlias <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public class DeleteAliasRequestParameters : RequestParameters<DeleteAliasRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		public override bool SupportsBody => false;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -330,8 +310,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for DeleteDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
 	public class DeleteDataStreamRequestParameters : RequestParameters<DeleteDataStreamRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		public override bool SupportsBody => false;
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards? ExpandWildcards
 		{
@@ -343,8 +321,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for DeleteTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public class DeleteIndexTemplateV2RequestParameters : RequestParameters<DeleteIndexTemplateV2RequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		public override bool SupportsBody => false;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -363,8 +339,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for DeleteTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public class DeleteIndexTemplateRequestParameters : RequestParameters<DeleteIndexTemplateRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		public override bool SupportsBody => false;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -383,8 +357,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Exists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</para></summary>
 	public class IndexExistsRequestParameters : RequestParameters<IndexExistsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
-		public override bool SupportsBody => false;
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public bool? AllowNoIndices
 		{
@@ -431,8 +403,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for AliasExists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public class AliasExistsRequestParameters : RequestParameters<AliasExistsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -468,8 +438,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for ExistsTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public class ExistsIndexTemplateRequestParameters : RequestParameters<ExistsIndexTemplateRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
-		public override bool SupportsBody => false;
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings
 		{
@@ -495,8 +463,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for TemplateExists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public class IndexTemplateExistsRequestParameters : RequestParameters<IndexTemplateExistsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
-		public override bool SupportsBody => false;
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings
 		{
@@ -522,8 +488,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Flush <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</para></summary>
 	public class FlushRequestParameters : RequestParameters<FlushRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -572,8 +536,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for ForceMerge <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</para></summary>
 	public class ForceMergeRequestParameters : RequestParameters<ForceMergeRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -623,8 +585,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
 	public class FreezeIndexRequestParameters : RequestParameters<FreezeIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -674,8 +634,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</para></summary>
 	public class GetIndexRequestParameters : RequestParameters<GetIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public bool? AllowNoIndices
 		{
@@ -729,8 +687,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for GetAlias <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public class GetAliasRequestParameters : RequestParameters<GetAliasRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -766,8 +722,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for GetDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
 	public class GetDataStreamRequestParameters : RequestParameters<GetDataStreamRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards? ExpandWildcards
 		{
@@ -779,8 +733,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for GetFieldMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para></summary>
 	public class GetFieldMappingRequestParameters : RequestParameters<GetFieldMappingRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -823,8 +775,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for GetTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public class GetIndexTemplateV2RequestParameters : RequestParameters<GetIndexTemplateV2RequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings
 		{
@@ -850,8 +800,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for GetMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 	public class GetMappingRequestParameters : RequestParameters<GetMappingRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -895,8 +843,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for GetSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</para></summary>
 	public class GetIndexSettingsRequestParameters : RequestParameters<GetIndexSettingsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -953,8 +899,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for GetTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public class GetIndexTemplateRequestParameters : RequestParameters<GetIndexTemplateRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings
 		{
@@ -980,15 +924,11 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for MigrateToDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
 	public class MigrateToDataStreamRequestParameters : RequestParameters<MigrateToDataStreamRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Open <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public class OpenIndexRequestParameters : RequestParameters<OpenIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1038,15 +978,11 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for PromoteDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
 	public class PromoteDataStreamRequestParameters : RequestParameters<PromoteDataStreamRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for PutAlias <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public class PutAliasRequestParameters : RequestParameters<PutAliasRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => true;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -1065,8 +1001,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for PutTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public class PutIndexTemplateV2RequestParameters : RequestParameters<PutIndexTemplateV2RequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => true;
 		///<summary>User defined reason for creating/updating the index template</summary>
 		public string Cause
 		{
@@ -1092,8 +1026,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for PutMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
 	public class PutMappingRequestParameters : RequestParameters<PutMappingRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => true;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1143,8 +1075,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for UpdateSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</para></summary>
 	public class UpdateIndexSettingsRequestParameters : RequestParameters<UpdateIndexSettingsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => true;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1201,8 +1131,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for PutTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public class PutIndexTemplateRequestParameters : RequestParameters<PutIndexTemplateRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => true;
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool? Create
 		{
@@ -1221,8 +1149,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for RecoveryStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para></summary>
 	public class RecoveryStatusRequestParameters : RequestParameters<RecoveryStatusRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>Display only those recoveries that are currently on-going</summary>
 		public bool? ActiveOnly
 		{
@@ -1241,8 +1167,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Refresh <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</para></summary>
 	public class RefreshRequestParameters : RequestParameters<RefreshRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1271,8 +1195,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for ReloadSearchAnalyzers <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html</para></summary>
 	public class ReloadSearchAnalyzersRequestParameters : RequestParameters<ReloadSearchAnalyzersRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1301,8 +1223,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Resolve <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html</para></summary>
 	public class ResolveIndexRequestParameters : RequestParameters<ResolveIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards? ExpandWildcards
 		{
@@ -1314,8 +1234,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Rollover <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</para></summary>
 	public class RolloverIndexRequestParameters : RequestParameters<RolloverIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
 		public bool? DryRun
 		{
@@ -1348,8 +1266,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Segments <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</para></summary>
 	public class SegmentsRequestParameters : RequestParameters<SegmentsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1385,8 +1301,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for ShardStores <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</para></summary>
 	public class IndicesShardStoresRequestParameters : RequestParameters<IndicesShardStoresRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1422,8 +1336,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Shrink <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</para></summary>
 	public class ShrinkIndexRequestParameters : RequestParameters<ShrinkIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => true;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -1449,8 +1361,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for SimulateIndexTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public class SimulateIndexTemplateRequestParameters : RequestParameters<SimulateIndexTemplateRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
 		///<summary>User defined reason for dry-run creating the new template for simulation purposes</summary>
 		public string Cause
 		{
@@ -1476,8 +1386,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for SimulateTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public class SimulateTemplateRequestParameters : RequestParameters<SimulateTemplateRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
 		///<summary>User defined reason for dry-run creating the new template for simulation purposes</summary>
 		public string Cause
 		{
@@ -1503,8 +1411,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Split <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
 	public class SplitIndexRequestParameters : RequestParameters<SplitIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => true;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -1530,8 +1436,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
 	public class IndicesStatsRequestParameters : RequestParameters<IndicesStatsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>A comma-separated list of fields for the `completion` index metric (supports wildcards)</summary>
 		public string[] CompletionFields
 		{
@@ -1599,8 +1503,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for Unfreeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html</para></summary>
 	public class UnfreezeIndexRequestParameters : RequestParameters<UnfreezeIndexRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
@@ -1650,8 +1552,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for BulkAlias <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public class BulkAliasRequestParameters : RequestParameters<BulkAliasRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout
 		{
@@ -1670,8 +1570,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	///<summary>Request options for ValidateQuery <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
 	public class ValidateQueryRequestParameters : RequestParameters<ValidateQueryRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
 		public bool? AllShards
 		{

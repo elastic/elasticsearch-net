@@ -48,7 +48,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 		public virtual IElasticClient Client => this.GetOrAddClient(s => Authenticate(ConnectionSettings(s.ApplyDomainSettings())));
 
 		protected virtual ConnectionSettings Authenticate(ConnectionSettings s) => s
-			.BasicAuthentication(ClusterAuthentication.Admin.Username, ClusterAuthentication.Admin.Password);
+			.Authentication(new BasicAuthentication(ClusterAuthentication.Admin.Username, ClusterAuthentication.Admin.Password));
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 			.ServerCertificateValidationCallback(CertificateValidations.AllowAll);

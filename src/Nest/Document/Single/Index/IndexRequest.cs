@@ -20,7 +20,7 @@ namespace Nest
 	{
 		public TDocument Document { get; set; }
 
-		protected override HttpMethod HttpMethod => GetHttpMethod(this);
+		protected override HttpMethod? DynamicHttpMethod => GetHttpMethod(this);
 
 		void IProxyRequest.WriteJson(ITransportSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Document, stream, formatting);
@@ -33,7 +33,7 @@ namespace Nest
 
 	public partial class IndexDescriptor<TDocument> where TDocument : class
 	{
-		protected override HttpMethod HttpMethod => IndexRequest<TDocument>.GetHttpMethod(this);
+		protected override HttpMethod? DynamicHttpMethod => IndexRequest<TDocument>.GetHttpMethod(this);
 		TDocument IIndexRequest<TDocument>.Document { get; set; }
 
 		void IProxyRequest.WriteJson(ITransportSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>

@@ -28,14 +28,6 @@ namespace Tests.ScratchPad
 
 			public void OnNext(DiagnosticListener value)
 			{
-
-				var client = new ElasticClient();
-
-				client.Search<Project>();
-
-				client.LowLevel.Search<SearchResponse<Project>>(PostData.Serializable(new SearchRequest()));
-
-
 				void WriteToConsole<T>(string eventName, T data)
 				{
 					var a = Activity.Current;

@@ -67,7 +67,7 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
             yield client.Watcher.Delete<DynamicResponse>("my_watch")
             
             let deleteNonReserved (setup:_ -> DynamicResponse) (delete:(_ -> DynamicResponse)) = 
-                setup().Dictionary
+                setup().Body
                 |> Seq.map (fun kv ->
                     match kv.Value.Get<bool> "metadata._reserved" with
                     | false -> Some <| delete(kv.Key)

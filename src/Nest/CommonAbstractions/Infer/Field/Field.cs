@@ -91,7 +91,7 @@ namespace Nest
 			? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue)
 			: other != null && _comparisonValue.Equals(other._comparisonValue);
 
-		string IUrlParameter.GetString(ITransportConfigurationValues settings)
+		string IUrlParameter.GetString(ITransportConfiguration settings)
 		{
 			if (!(settings is IConnectionSettingsValues nestSettings))
 				throw new ArgumentNullException(nameof(settings),

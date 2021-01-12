@@ -417,11 +417,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			return AssertSniffResponse();
 		}
 
-		private RequestPipeline CreatePipeline()
+		private RequestPipeline<IConnectionSettingsValues> CreatePipeline()
 		{
 			var uri = TestConnectionSettings.CreateUri(this._cluster.Nodes.First().Port ?? 9200);
 			this._settings = new ConnectionSettings(new SniffingConnectionPool(new[] { uri }));
-			var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new RecyclableMemoryStreamFactory(), new SearchRequestParameters());
+			var pipeline = new RequestPipeline<IConnectionSettingsValues>(this._settings, DateTimeProvider.Default, new RecyclableMemoryStreamFactory(), new SearchRequestParameters());
 			return pipeline;
 		}
 

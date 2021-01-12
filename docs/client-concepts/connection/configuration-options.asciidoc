@@ -26,17 +26,19 @@ The following is a list of available connection configuration options on `Connec
 `ConnectionSettings` derives from `ConnectionConfiguration`, these options are available for both
 the low level and high level client:
 
-`ApiKeyAuthentication`::
+`Authentication`::
 
-Api Key to send with all requests to Elasticsearch
-
-`BasicAuthentication`::
-
-Basic Authentication credentials to send with all requests to Elasticsearch
+An implementation of `IAuthenticationHeader` describing what http header to use to authenticate with the product.
++
+ `BasicAuthentication` for basic authentication
++
+ `ApiKey` for simple secret token
++
+ `Base64ApiKey` for Elastic Cloud style encoded api keys
 
 `ClientCertificate`::
 
-Use a `X509Certificate` to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
+Use the following certificates to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
 
 `ClientCertificates`::
 
@@ -44,7 +46,7 @@ Use the following certificates to authenticate all HTTP requests. You can also s
 
 `ConnectionLimit`::
 
-Limits the number of concurrent connections that can be opened to an endpoint. Defaults to `80` for all IConnection             implementations that are not based on `System.Net.Http.CurlHandler` . For those based on System.Net.Http.CurlHandler, defaults             to `Environment.ProcessorCount` .
+Limits the number of concurrent connections that can be opened to an endpoint. Defaults to 80 (see `DefaultConnectionLimit` ).
 +
 For Desktop CLR, this setting applies to the DefaultConnectionLimit property on the  ServicePointManager object when creating ServicePoint objects, affecting the default `IConnection` implementation.
 +
@@ -52,21 +54,23 @@ For Core CLR, this setting applies to the MaxConnectionsPerServer property on th
 
 `DeadTimeout`::
 
-Sets the default dead timeout factor when a node has been marked dead. Some connection pools may use a flat timeout whilst others take this factor and increase it exponentially
+The time to put dead nodes out of rotation (this will be multiplied by the number of times they've been dead)
 
 `DisableAutomaticProxyDetection`::
 
-Disables the automatic detection of a proxy
+Disabled proxy detection on the webrequest, in some cases this may speed up the first connection your appdomain makes, in other cases it will actually increase the time for the first connection. No silver bullet! use with care!
 
 `DisableDirectStreaming`::
 
-Ensures the response bytes are always available on the `ITransportResponse`
-+
-IMPORTANT: Depending on the registered serializer, this may cause the response to be buffered in memory first, potentially affecting performance.
+When set to true will disable (de)serializing directly to the request and response stream and return a byte[] copy of the raw request and response. Defaults to false
 
 `DisablePing`::
 
-When a node is used for the very first time or when it's used for the first time after it has been marked dead a ping with a very low timeout is send to the node to make sure that when it's still dead it reports it as fast as possible. You can disable these pings globally here if you rather have it fail on the possible slower original request
+This signals that we do not want to send initial pings to unknown/previously dead nodes and just send the call straightaway
+
+`DnsRefreshTimeout`::
+
+DnsRefreshTimeout for the connections. Defaults to 5 minutes.
 
 `EnableDebugMode`::
 
@@ -74,13 +78,11 @@ Turns on settings that aid in debugging like DisableDirectStreaming() and Pretty
 
 `EnableHttpCompression`::
 
-Enables gzip compressed requests and responses.
+Enable gzip compressed requests and responses
 
 `EnableHttpPipelining`::
 
-Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
-+
-NOTE: HTTP pipelining must also be enabled in e.g Elasticsearch for this to work properly.
+Whether HTTP pipelining is enabled. The default is `true`
 
 `EnableTcpKeepAlive`::
 
@@ -88,27 +90,33 @@ Sets the keep-alive option on a TCP connection.
 +
 For Desktop CLR, sets ServicePointManager.SetTcpKeepAlive
 
+`EnableTcpStats`::
+
+Enable statistics about TCP connections to be collected when making a request >
+
 `GlobalHeaders`::
 
-A collection of headers that will be sent with every request. Useful in situations where you always need to pass a header e.g. a custom auth header
+Try to send these headers for every request
 
 `GlobalQueryStringParameters`::
 
-A collection of query string parameters that will be sent with every request. Useful in situations where you always need to pass a parameter e.g. an API key.
+Append these query string parameters automatically to every request
 
 `MaxDeadTimeout`::
 
-Sets the maximum time a node can be marked dead. Different implementations of `IConnectionPool` may choose a different default.
+The maximum amount of time a node is allowed to marked dead
 
 `MaximumRetries`::
 
-The maximum number of retries for a given request
+When a retryable exception occurs or status code is returned this controls the maximum amount of times we should retry the call to Elasticsearch
 
 `MaxRetryTimeout`::
 
-Limits the total runtime, including retries, separately from `RequestTimeout`
-+
-When not specified, defaults to `RequestTimeout` , which itself defaults to `60` seconds
+Limits the total runtime including retries separately from `RequestTimeout` When not specified defaults to `RequestTimeout` which itself defaults to 60 seconds
+
+`MemoryStreamFactory`::
+
+Provides a memory stream factory
 
 `NodePredicate`::
 
@@ -116,15 +124,15 @@ Register a predicate to select which nodes that you want to execute API calls on
 
 `OnRequestCompleted`::
 
-Registers an `Action<T>` that is called when a response is received.             This can be useful for implementing custom logging.             Multiple callbacks can be registered by calling this multiple times
+Allows you to register a callback every time a an API call is returned
 
 `OnRequestDataCreated`::
 
-Registers an `Action<T>` that is called when `RequestData` is created.             Multiple callbacks can be registered by calling this multiple times
+An action to run when the `RequestData` for a request has been             created.
 
 `PingTimeout`::
 
-Sets the default ping timeout in milliseconds for ping requests, which are used to determine whether a node is alive. Pings should fail as fast as possible.
+The timeout in milliseconds to use for ping requests, which are issued to determine whether a node is alive
 
 `PrettyJson`::
 
@@ -138,27 +146,27 @@ If your connection has to go through proxy, use this method to specify the proxy
 
 `RequestTimeout`::
 
-Sets the default timeout in milliseconds for each request. Defaults to `60` seconds.
+The timeout in milliseconds for each request to Elasticsearch
 
 `ServerCertificateValidationCallback`::
 
-Register a ServerCertificateValidationCallback, this is called per endpoint until it returns true. After this callback returns true that endpoint is validated for the lifetime of the ServiceEndpoint for that host.
+Register a ServerCertificateValidationCallback per request
 
 `SkipDeserializationForStatusCodes`::
 
-Configure the client to skip deserialization of certain status codes e.g: you run Elasticsearch behind a proxy that returns a HTML for 401, 500
+Configure the client to skip deserialization of certain status codes e.g: you run Elasticsearch behind a proxy that returns an unexpected json format
 
 `SniffLifeSpan`::
 
-Set the duration after which a cluster state is considered stale and a sniff should be performed again. An `IConnectionPool` has to signal it supports reseeding, otherwise sniffing will never happen.             Defaults to 1 hour.             Set to null to disable completely. Sniffing will only ever happen on ConnectionPools that return true for SupportsReseeding
+Force a new sniff for the cluster when the cluster state information is older than the specified timespan
 
 `SniffOnConnectionFault`::
 
-Enables resniffing of the cluster when a call fails, if the connection pool supports reseeding. Defaults to `true`
+Force a new sniff for the cluster state every time a connection dies
 
 `SniffOnStartup`::
 
-Enables sniffing on first usage of a connection pool if that pool supports reseeding. Defaults to `true`
+Sniff the cluster state immediately on startup
 
 `ThrowExceptions`::
 
@@ -168,7 +176,7 @@ Reasons for such exceptions could be search parser errors, index missing excepti
 
 `TransferEncodingChunked`::
 
-Whether the request should be sent with chunked Transfer-Encoding. Default is `false`
+Whether the request should be sent with chunked Transfer-Encoding.
 
 `UserAgent`::
 

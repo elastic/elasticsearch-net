@@ -18,7 +18,7 @@ namespace Nest
 
 		public bool Equals(IndexMetrics other) => Value.Equals(other.Value);
 
-		public string GetString(ITransportConfigurationValues settings) => _enumValue.GetStringValue();
+		public string GetString(ITransportConfiguration settings) => _enumValue.GetStringValue();
 
 		public static implicit operator IndexMetrics(NodesStatsIndexMetric metric) => new IndexMetrics(metric);
 

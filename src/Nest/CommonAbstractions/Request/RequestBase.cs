@@ -20,6 +20,9 @@ namespace Nest
 		HttpMethod HttpMethod { get; }
 
 		[IgnoreDataMember]
+		bool SupportsBody { get; }
+
+		[IgnoreDataMember]
 		RouteValues RouteValues { get; }
 
 		[IgnoreDataMember]
@@ -57,13 +60,19 @@ namespace Nest
 			RequestDefaults(_parameters);
 		}
 
-		protected virtual HttpMethod HttpMethod => RequestState.RequestParameters.DefaultHttpMethod;
+		protected virtual HttpMethod? DynamicHttpMethod { get; }
+		protected abstract HttpMethod HttpMethod { get; }
+
+		protected abstract bool SupportsBody { get; }
 
 		[IgnoreDataMember]
 		protected IRequest<TParameters> RequestState => this;
 
 		[IgnoreDataMember]
-		HttpMethod IRequest.HttpMethod => HttpMethod;
+		HttpMethod IRequest.HttpMethod => DynamicHttpMethod ?? HttpMethod;
+
+		[IgnoreDataMember]
+		bool IRequest.SupportsBody => SupportsBody;
 
 		[IgnoreDataMember]
 		string IRequest.ContentType => ContentType;

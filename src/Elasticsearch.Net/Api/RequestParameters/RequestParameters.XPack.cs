@@ -28,8 +28,6 @@ namespace Elasticsearch.Net.Specification.XPackApi
 	///<summary>Request options for Info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</para></summary>
 	public class XPackInfoRequestParameters : RequestParameters<XPackInfoRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>If this param is used it must be set to true</summary>
 		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 8.0.0, reason: Supported for backwards compatibility with 7.x")]
 		public bool? AcceptEnterprise
@@ -49,8 +47,6 @@ namespace Elasticsearch.Net.Specification.XPackApi
 	///<summary>Request options for Usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html</para></summary>
 	public class XPackUsageRequestParameters : RequestParameters<XPackUsageRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>Specify timeout for watch write operation</summary>
 		public TimeSpan MasterTimeout
 		{

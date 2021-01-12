@@ -28,36 +28,26 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 	///<summary>Request options for Acknowledge <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</para></summary>
 	public class AcknowledgeWatchRequestParameters : RequestParameters<AcknowledgeWatchRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Activate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</para></summary>
 	public class ActivateWatchRequestParameters : RequestParameters<ActivateWatchRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Deactivate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</para></summary>
 	public class DeactivateWatchRequestParameters : RequestParameters<DeactivateWatchRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</para></summary>
 	public class DeleteWatchRequestParameters : RequestParameters<DeleteWatchRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Execute <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</para></summary>
 	public class ExecuteWatchRequestParameters : RequestParameters<ExecuteWatchRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => true;
 		///<summary>indicates whether the watch should execute in debug mode</summary>
 		public bool? Debug
 		{
@@ -69,15 +59,11 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</para></summary>
 	public class GetWatchRequestParameters : RequestParameters<GetWatchRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Put <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</para></summary>
 	public class PutWatchRequestParameters : RequestParameters<PutWatchRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		public override bool SupportsBody => true;
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public bool? Active
 		{
@@ -110,22 +96,16 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 	///<summary>Request options for QueryWatches <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-query-watches.html</para></summary>
 	public class QueryWatchesRequestParameters : RequestParameters<QueryWatchesRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</para></summary>
 	public class StartWatcherRequestParameters : RequestParameters<StartWatcherRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for Stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</para></summary>
 	public class WatcherStatsRequestParameters : RequestParameters<WatcherStatsRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>Emits stack traces of currently running watches</summary>
 		public bool? EmitStacktraces
 		{
@@ -137,7 +117,5 @@ namespace Elasticsearch.Net.Specification.WatcherApi
 	///<summary>Request options for Stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</para></summary>
 	public class StopWatcherRequestParameters : RequestParameters<StopWatcherRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 	}
 }

@@ -195,7 +195,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
             | _ -> Succeeded op
         | WholeResponse ->
             let r = stashes.Response()
-            match r.HttpMethod, r.ApiCall.Success, r.Dictionary  with
+            match r.HttpMethod, r.ApiCall.Success, r.Body with
             | (HttpMethod.HEAD, true, _) -> Succeeded op
             | (HttpMethod.HEAD, false, _) -> Failed <| Fail.Create op "HEAD request not successful"
             | (_,_, b) when b = null  -> Failed <| Fail.Create op "no body was returned"
@@ -295,7 +295,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                 let actual =
                     match path with 
                     | "$body" ->
-                        let dictOrArray = stashes.Response().Dictionary.Count
+                        let dictOrArray = stashes.Response().Body.Count
                         Some <| Convert.ToDouble(dictOrArray)
                     | _ -> 
                         let a = OperationExecutor.ToJToken <| (stashes.GetResponseValue progress path :> Object)
@@ -332,9 +332,9 @@ type OperationExecutor(client:IElasticLowLevelClient) =
         let doMatch assertOn assertValue = 
             let value =
                 match (assertOn, assertValue) with
-                | (ResponsePath "$body", Value _) -> stashes.Response().Dictionary.ToDictionary() :> Object
+                | (ResponsePath "$body", Value _) -> stashes.Response().Body.ToDictionary() :> Object
                 | (ResponsePath path, _) -> stashes.GetResponseValue progress path :> Object
-                | (WholeResponse, _) -> stashes.Response().Dictionary.ToDictionary() :> Object
+                | (WholeResponse, _) -> stashes.Response().Body.ToDictionary() :> Object
             
             match assertValue with
             | Value o -> OperationExecutor.JTokenDeepEquals op o value
@@ -374,9 +374,9 @@ type OperationExecutor(client:IElasticLowLevelClient) =
         let doMatch assertOn assertValue = 
             let value =
                 match (assertOn, assertValue) with
-                | (ResponsePath "$body", Value _) -> stashes.Response().Dictionary.ToDictionary() :> Object
+                | (ResponsePath "$body", Value _) -> stashes.Response().Body.ToDictionary() :> Object
                 | (ResponsePath path, _) -> stashes.GetResponseValue progress path :> Object
-                | (WholeResponse, _) -> stashes.Response().Dictionary.ToDictionary() :> Object
+                | (WholeResponse, _) -> stashes.Response().Body.ToDictionary() :> Object
             
             match assertValue with
             | Value o -> OperationExecutor.JTokenContainsSubSet op o value

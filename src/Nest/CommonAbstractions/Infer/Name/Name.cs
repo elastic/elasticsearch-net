@@ -23,7 +23,7 @@ namespace Nest
 
 		public bool Equals(Name other) => EqualsString(other?.Value);
 
-		string IUrlParameter.GetString(ITransportConfigurationValues settings) => Value;
+		string IUrlParameter.GetString(ITransportConfiguration settings) => Value;
 
 		public static implicit operator Name(string name) => name.IsNullOrEmpty() ? null : new Name(name);
 

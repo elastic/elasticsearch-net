@@ -244,7 +244,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IPointInTime PointInTime { get; set; }
 
-		protected override HttpMethod HttpMethod =>
+		protected override HttpMethod? DynamicHttpMethod =>
 			RequestState.RequestParameters?.ContainsQueryString("source") == true
 				? HttpMethod.GET
 				: HttpMethod.POST;
@@ -276,7 +276,7 @@ namespace Nest
 	[DataContract]
 	public partial class SearchDescriptor<TInferDocument> where TInferDocument : class
 	{
-		protected override HttpMethod HttpMethod =>
+		protected override HttpMethod? DynamicHttpMethod =>
 			RequestState.RequestParameters?.ContainsQueryString("source") == true
 				? HttpMethod.GET
 				: HttpMethod.POST;

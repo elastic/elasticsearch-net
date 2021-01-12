@@ -55,7 +55,7 @@ namespace Nest
 
 		public bool Equals(PropertyName other) => EqualsMarker(other);
 
-		string IUrlParameter.GetString(ITransportConfigurationValues settings)
+		string IUrlParameter.GetString(ITransportConfiguration settings)
 		{
 			if (!(settings is IConnectionSettingsValues nestSettings))
 				throw new ArgumentNullException(nameof(settings),

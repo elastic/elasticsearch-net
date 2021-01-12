@@ -28,8 +28,6 @@ namespace Elasticsearch.Net.Specification.TasksApi
 	///<summary>Request options for Cancel <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 	public class CancelTasksRequestParameters : RequestParameters<CancelTasksRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
 		public string[] Actions
 		{
@@ -65,8 +63,6 @@ namespace Elasticsearch.Net.Specification.TasksApi
 	///<summary>Request options for GetTask <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 	public class GetTaskRequestParameters : RequestParameters<GetTaskRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout
 		{
@@ -85,8 +81,6 @@ namespace Elasticsearch.Net.Specification.TasksApi
 	///<summary>Request options for List <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
 	public class ListTasksRequestParameters : RequestParameters<ListTasksRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
 		public string[] Actions
 		{

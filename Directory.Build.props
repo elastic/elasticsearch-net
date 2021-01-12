@@ -42,6 +42,7 @@
   <ItemGroup>
     <PackageReference Condition="'$(OS)' != 'Windows_NT' and $(DefineConstants.Contains(FULLFRAMEWORK))" Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0-preview.2"/>
   </ItemGroup>
+  
 
   
   <!--- 

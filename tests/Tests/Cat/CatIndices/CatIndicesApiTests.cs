@@ -44,7 +44,7 @@ namespace Tests.Cat.CatIndices
 
 		protected override Func<CatIndicesDescriptor, ICatIndicesRequest> Fluent => f => f
 			.Index("doesnot-exist-*")
-			.RequestConfiguration(r => r.BasicAuthentication(ClusterAuthentication.User.Username, ClusterAuthentication.User.Password));
+			.RequestConfiguration(r => r.Authentication(new BasicAuthentication(ClusterAuthentication.User.Username, ClusterAuthentication.User.Password)));
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
@@ -52,7 +52,7 @@ namespace Tests.Cat.CatIndices
 		{
 			RequestConfiguration = new RequestConfiguration
 			{
-				BasicAuthenticationCredentials = new BasicAuthenticationCredentials(
+				AuthenticationHeader = new BasicAuthentication(
 					ClusterAuthentication.User.Username,
 					ClusterAuthentication.User.Password)
 			}

@@ -3,6 +3,8 @@
 // See the LICENSE file in the project root for more information
 
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch;
+using Elastic.Transport.Products.Elasticsearch.Failures;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -51,7 +53,7 @@ namespace Tests.ClientConcepts.ServerError
 			var response = LowLevelClient.Search<StringResponse>(PostData.Serializable(new { }));
 			response.Should().NotBeNull();
 			response.Body.Should().NotBeNullOrWhiteSpace();
-			var hasServerError = response.TryGetServerError(out var serverError);
+			var hasServerError = response.TryGetElasticsearchServerError(out var serverError);
 			hasServerError.Should().BeTrue("we're trying to deserialize a server error using the helper but it returned false");
 			serverError.Should().NotBeNull();
 			serverError.Status.Should().Be(response.ApiCall.HttpStatusCode);

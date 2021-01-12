@@ -87,15 +87,7 @@ namespace Nest
 		/// <para></para>If you want more control use the <see cref="ElasticClient(IConnectionSettingsValues)"/> constructor and pass an instance of
 		/// <see cref="ConnectionSettings" /> that takes <paramref name="cloudId"/> in its constructor as well
 		/// </summary>
-		public ElasticClient(string cloudId, BasicAuthenticationCredentials credentials) : this(new ConnectionSettings(cloudId, credentials)) { }
-
-		/// <summary>
-		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
-		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
-		/// <para></para>If you want more control use the <see cref="ElasticClient(IConnectionSettingsValues)"/> constructor and pass an instance of
-		/// <see cref="ConnectionSettings" /> that takes <paramref name="cloudId"/> in its constructor as well
-		/// </summary>
-		public ElasticClient(string cloudId, ApiKeyAuthenticationCredentials credentials) : this(new ConnectionSettings(cloudId, credentials)) { }
+		public ElasticClient(string cloudId, IAuthenticationHeader credentials) : this(new ConnectionSettings(cloudId, credentials)) { }
 
 		public ElasticClient(IConnectionSettingsValues connectionSettings)
 			: this(new Transport<IConnectionSettingsValues>(connectionSettings ?? new ConnectionSettings())) { }
@@ -132,7 +124,7 @@ namespace Nest
 			if (p.ContentType != null) ForceContentType(p, p.ContentType);
 
 			var url = p.GetUrl(ConnectionSettings);
-			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !parameters.SupportsBody) ? null : new SerializableData<TRequest>(p);
+			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !p.SupportsBody) ? null : PostData.Serializable(p);
 
 			return LowLevel.DoRequest<TResponse>(p.HttpMethod, url, b, parameters);
 		}
@@ -150,7 +142,7 @@ namespace Nest
 			if (p.ContentType != null) ForceContentType(p, p.ContentType);
 
 			var url = p.GetUrl(ConnectionSettings);
-			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !parameters.SupportsBody) ? null : new SerializableData<TRequest>(p);
+			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !p.SupportsBody) ? null : PostData.Serializable<TRequest>(p);
 
 			return LowLevel.DoRequestAsync<TResponse>(p.HttpMethod, url, ct, b, parameters);
 		}

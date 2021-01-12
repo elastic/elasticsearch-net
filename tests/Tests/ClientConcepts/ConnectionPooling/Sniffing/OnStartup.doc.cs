@@ -174,8 +174,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		{
 			var audit = new Auditor(() => Virtual.Elasticsearch
 				.Bootstrap(new[] {
-					new Node(new Uri("http://localhost:9200"), NotMasterEligable),
-					new Node(new Uri("http://localhost:9201"), NotMasterEligable),
+					new Node(new Uri("http://localhost:9200"), NotMasterEligible),
+					new Node(new Uri("http://localhost:9201"), NotMasterEligible),
 					new Node(new Uri("http://localhost:9202")),
 				})
 				.Sniff(s => s.Succeeds(Always))
@@ -203,7 +203,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.Bootstrap(new[] {
 					new Node(new Uri("http://localhost:9200")),
 					new Node(new Uri("http://localhost:9201")),
-					new Node(new Uri("http://localhost:9202"), NotMasterEligable),
+					new Node(new Uri("http://localhost:9202"), NotMasterEligible),
 				})
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always))

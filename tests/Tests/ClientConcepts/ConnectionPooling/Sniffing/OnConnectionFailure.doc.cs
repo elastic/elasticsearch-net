@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
 using Elastic.Transport.Diagnostics.Auditing;
+using Elastic.Transport.Products.Elasticsearch;
 using Elastic.Transport.VirtualizedCluster;
 using Elastic.Transport.VirtualizedCluster.Audit;
 using FluentAssertions;
@@ -189,7 +190,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				HostAssert(a, host, expectedPort);
 				var sniffUri = new UriBuilder(a.Node.Uri)
 				{
-					Path = RequestPipeline.SniffPath,
+					Path = ElasticsearchProductRegistration.SniffPath,
 					Query = "flat_settings=true&timeout=2s"
 				}.Uri;
 				sniffUri.PathEquals(a.Path, nameof(SniffUrlAssert));

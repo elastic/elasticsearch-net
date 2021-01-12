@@ -5,6 +5,7 @@
 using System;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch;
 using FluentAssertions;
 using Tests.Core.Client;
 
@@ -24,7 +25,7 @@ namespace Tests.Framework.SerializationTests
 
 			stringResponse.Body.Should().NotBeNull();
 			stringResponse.Body.Should().Be(StubResponse.NginxHtml401Response);
-			stringResponse.TryGetServerError(out var serverError).Should().BeFalse();
+			stringResponse.TryGetElasticsearchServerError(out var serverError).Should().BeFalse();
 			serverError.Should().BeNull();
 		}
 

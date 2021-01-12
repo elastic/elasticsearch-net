@@ -84,7 +84,7 @@ namespace Tests.Search.MultiSearch
 			object o = response.Body;
 			o.Should().NotBeNull();
 
-			var b = response.Body;
+			dynamic b = response.Body;
 			List<object> responses = b.responses;
 			response.Should().NotBeNull("{0}", response.DebugInformation);
 			responses.Count().Should().Be(4, "{0}", response.DebugInformation);

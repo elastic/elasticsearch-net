@@ -31,6 +31,8 @@
 	{
 		protected @(Raw(r.InterfaceName)) Self => this;
 		internal override ApiUrls ApiUrls => @apiLookup;
+		protected override HttpMethod HttpMethod => HttpMethod.@r.MethodName;
+		protected override bool SupportsBody => @(r.HasBody ? "true" : "false");
 @foreach (Constructor c in r.Constructors)
 {
 <text>		@(Raw(CodeGenerator.Constructor(c)))
