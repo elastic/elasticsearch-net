@@ -78,6 +78,17 @@ namespace Tests.CommonOptions.AutoExpandReplicas
 		}
 
 		[U]
+		public void CreateWithFalse()
+		{
+			var autoExpandReplicas = Nest.AutoExpandReplicas.Create("false");
+			autoExpandReplicas.Should().NotBeNull();
+			autoExpandReplicas.Enabled.Should().BeFalse();
+			autoExpandReplicas.MinReplicas.Should().BeNull();
+			autoExpandReplicas.MaxReplicas.Should().BeNull();
+			autoExpandReplicas.ToString().Should().Be("false");
+		}
+
+		[U]
 		public void Disabled()
 		{
 			var autoExpandReplicas = Nest.AutoExpandReplicas.Disabled;
