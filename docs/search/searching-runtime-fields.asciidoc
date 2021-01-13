@@ -1,0 +1,150 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.11
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Search/SearchingRuntimeFields.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[searching-runtime-fields]]
+=== Searching runtime fields
+
+Runtime fields can be returned with search requests by specifying the fields using `.Fields`
+on the search request.
+
+[WARNING]
+--
+This functionality is in beta and is subject to change. The design and code is less mature 
+than official GA features and is being provided as-is with no warranties. Beta features 
+are not subject to the support SLA of official GA features.
+
+--
+
+[source,csharp]
+----
+var searchResponse = _client.Search<Project>(s => s
+    .Query(q => q
+        .MatchAll()
+    )
+    .Fields<ProjectRuntimeFields>(fs => fs
+        .Field(f => f.StartedOnDayOfWeek)
+        .Field(f => f.ThirtyDaysFromStarted, format: DateFormat.basic_date)
+    )
+);
+----
+
+which serializes to the following JSON
+
+[source,javascript]
+----
+{
+  "query": {
+    "match_all": {}
+  },
+  "fields": [
+    "runtime_started_on_day_of_week",
+    {
+      "field": "runtime_thirty_days_after_started",
+      "format": "basic_date"
+    }
+  ]
+}
+----
+
+The previous example used the Fluent API to express the query. NEST also exposes an
+Object Initializer syntax to compose queries
+
+[source,csharp]
+----
+var searchRequest = new SearchRequest<Project>
+{
+    Query = new MatchAllQuery(),
+    Fields = Infer.Field<ProjectRuntimeFields>(p => p.StartedOnDayOfWeek) <1>
+        .And<ProjectRuntimeFields>(p => p.ThirtyDaysFromStarted, format: DateFormat.basic_date) <2>
+};
+
+searchResponse = _client.Search<Project>(searchRequest);
+----
+<1> Here we infer the field name from a property on a POCO class
+<2> For runtime fields which return a date, a format may be specified.
+
+==== Defining runtime fields
+
+You may define runtime fields that exist only as part of a query by specifying `.RuntimeFields` on
+the search request. You may return this field using `.Fields` or use it for an aggregation.
+
+[source,csharp]
+----
+var searchResponse = _client.Search<Project>(s => s
+    .Query(q => q
+        .MatchAll()
+    )
+    .Fields<ProjectRuntimeFields>(fs => fs
+        .Field(f => f.StartedOnDayOfWeek)
+        .Field(f => f.ThirtyDaysFromStarted, format: DateFormat.basic_date)
+        .Field("search_runtime_field")
+    )
+    .RuntimeFields(rtf => rtf.RuntimeField("search_runtime_field", FieldType.Keyword, r => r
+        .Script("if (doc['type'].size() != 0) {emit(doc['type'].value.toUpperCase())}")))
+);
+----
+
+which yields the following query JSON
+
+[source,javascript]
+----
+{
+  "query": {
+    "match_all": {}
+  },
+  "fields": [
+    "runtime_started_on_day_of_week",
+    {
+      "field": "runtime_thirty_days_after_started",
+      "format": "basic_date"
+    },
+    "search_runtime_field"
+  ],
+  "runtime_mappings": {
+    "search_runtime_field": {
+      "script": {
+        "lang": "painless",
+        "source": "if (doc['type'].size() != 0) {emit(doc['type'].value.toUpperCase())}"
+      },
+      "type": "keyword"
+    }
+  }
+}
+----
+
+The previous example used the Fluent API to express the query. Here is the same query using the
+Object Initializer syntax.
+
+[source,csharp]
+----
+var searchRequest = new SearchRequest<Project>
+{
+    Query = new MatchAllQuery(),
+    Fields = Infer.Field<ProjectRuntimeFields>(p => p.StartedOnDayOfWeek)
+        .And<ProjectRuntimeFields>(p => p.ThirtyDaysFromStarted, format: DateFormat.basic_date)
+        .And("search_runtime_field"),
+    RuntimeFields = new RuntimeFields
+    {
+        { "search_runtime_field", new RuntimeField
+            {
+                Type = FieldType.Keyword,
+                Script = new PainlessScript("if (doc['type'].size() != 0) {emit(doc['type'].value.toUpperCase())}")
+            }
+        }
+    }
+};
+
+searchResponse = _client.Search<Project>(searchRequest);
+----
+

@@ -424,5 +424,69 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			// hide
 			Expect(expected).FromRequest(createIndexResponse);
 		}
+
+		/** 
+		* [[mapping-runtime-fields]]
+		* ==== Mapping runtime fields
+		*
+		* A {ref_current}/runtime.html[runtime field] is a field that is evaluated at query time. Runtime fields may 
+		* be defined in the mapping of an index.
+		*
+		* In this example, we'll define a `CompanyRuntimeFields` class with a single property which we may then use in 
+		* the strongly-typed runtime field mapping.
+		*/
+
+		public class CompanyRuntimeFields
+		{
+			public string BirthDayOfWeek { get; set; }
+		}
+
+		[U]
+		public void MappingRuntimeFields()
+		{
+			var createIndexResponse = _client.Indices.Create("myindex", c => c
+				.Map<Company>(m => m
+					.RuntimeFields<CompanyRuntimeFields>(rtf => rtf //<1> Use the `CompanyRuntimeFields` class as the generic argument
+						.RuntimeField(f => f.BirthDayOfWeek, FieldType.Keyword, f => f.Script("emit(doc['@timestamp'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT))"))) //<2> Use the `BirthDayOfWeek` property as the runtime field name
+				)
+			);
+
+			//json
+			var expected = new
+			{
+				mappings = new
+				{
+					runtime = new
+					{
+						birthDayOfWeek = new
+						{
+							type = "keyword",
+							script = new
+							{
+								lang = "painless",
+								source = "emit(doc['@timestamp'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT))"
+							}
+						}
+					}
+				}
+			};
+
+			//hide
+			Expect(expected).FromRequest(createIndexResponse);
+
+			/**
+			 * It's not necessary to define a type for the runtime field mapping. Runtime fields can optionally be defined 
+			 * by providing a `string` name.
+			 */
+			createIndexResponse = _client.Indices.Create("myindex", c => c
+				.Map<Company>(m => m
+					.RuntimeFields(rtf => rtf
+						.RuntimeField("birthDayOfWeek", FieldType.Keyword, f => f.Script("emit(doc['@timestamp'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT))")))
+				)
+			);
+
+			//hide
+			Expect(expected).FromRequest(createIndexResponse);
+		}
 	}
 }
