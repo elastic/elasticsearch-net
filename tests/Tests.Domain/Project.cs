@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Bogus;
 using Elasticsearch.Net;
 using Nest;
@@ -26,6 +27,15 @@ namespace Tests.Domain
 	{
 		public long? Closed { get; set; }
 		public long? Created { get; set; }
+	}
+
+	public class ProjectRuntimeFields
+	{
+		[DataMember(Name = "runtime_started_on_day_of_week")]
+		public string StartedOnDayOfWeek { get; set; }
+
+		[DataMember(Name = "runtime_thirty_days_after_started")]
+		public string ThirtyDaysFromStarted { get; set; }
 	}
 
 	public class Project
@@ -66,7 +76,7 @@ namespace Tests.Domain
 		public StateOfBeing State { get; set; }
 		public CompletionField Suggest { get; set; }
 		public IEnumerable<Tag> Tags { get; set; }
-
+		
 		public string Type => TypeName;
 
 		//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer

@@ -649,4 +649,84 @@ namespace Tests.Search.Search
 			(c, r) => c.SearchAsync<Project>(r)
 		);
 	}
+
+	[SkipVersion("<7.11.0", "Runtime fields added in Elasticsearch 7.11.0")]
+	public class SearchApiRuntimeFieldsTests : SearchApiTests
+	{
+		private const string RuntimeFieldName = "search_runtime_field";
+		private const string RuntimeFieldScript = "if (doc['type'].size() != 0) {emit(doc['type'].value.toUpperCase())}";
+
+		public SearchApiRuntimeFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			size = 5,
+			query = new
+			{
+				match_all = new { }
+			},
+			fields = new object[]
+			{
+				"runtime_started_on_day_of_week",
+				new
+				{
+					field = "runtime_thirty_days_after_started",
+					format = DateFormat.basic_date
+				},
+				"search_runtime_field"
+			},
+			runtime_mappings = new 
+			{
+				search_runtime_field = new
+				{
+					script = new
+					{
+						lang = "painless",
+						source = RuntimeFieldScript
+					},
+					type = "keyword"
+				}
+			}
+		};
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Size(5)
+			.Query(q => q
+				.MatchAll()
+			)
+			.Fields<ProjectRuntimeFields>(fs => fs
+				.Field(f => f.StartedOnDayOfWeek)
+				.Field(f => f.ThirtyDaysFromStarted, format: DateFormat.basic_date)
+				.Field(RuntimeFieldName)
+			)
+			.RuntimeFields(rtf => rtf.RuntimeField(RuntimeFieldName, FieldType.Keyword, r => r.Script(RuntimeFieldScript)));
+
+		protected override SearchRequest<Project> Initializer => new()
+		{
+			Size = 5,
+			Query = new QueryContainer(new MatchAllQuery()),
+			Fields = Infer.Field<ProjectRuntimeFields>(p => p.StartedOnDayOfWeek)
+				.And<ProjectRuntimeFields>(p => p.ThirtyDaysFromStarted, format: DateFormat.basic_date)
+				.And(RuntimeFieldName),
+			RuntimeFields = new RuntimeFields
+			{
+				{ RuntimeFieldName, new RuntimeField
+					{
+						Type = FieldType.Keyword,
+						Script = new PainlessScript(RuntimeFieldScript)
+					}
+				}
+			}
+		};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.Hits.Count.Should().BeGreaterThan(0);
+			response.Hits.First().Should().NotBeNull();
+			response.Hits.First().Type.Should().NotBeNullOrWhiteSpace();
+			response.Hits.First().Fields.ValueOf<ProjectRuntimeFields, string>(p => p.StartedOnDayOfWeek).Should().NotBeNullOrEmpty();
+			response.Hits.First().Fields.ValueOf<ProjectRuntimeFields, string>(p => p.ThirtyDaysFromStarted).Should().NotBeNullOrEmpty();
+			response.Hits.First().Fields[RuntimeFieldName].As<string[]>().FirstOrDefault().Should().NotBeNullOrEmpty();
+		}
+	}
 }

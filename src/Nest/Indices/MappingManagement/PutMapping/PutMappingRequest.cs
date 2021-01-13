@@ -155,9 +155,13 @@ namespace Nest
 			Assign(routingFieldSelector, (a, v) => a.RoutingField = v?.Invoke(new RoutingFieldDescriptor<TDocument>()));
 
 		/// <inheritdoc cref="ITypeMapping.RuntimeFields" />
-		public PutMappingDescriptor<TDocument> RuntimeFields(Func<RuntimeFieldsDescriptor, IPromise<IRuntimeFields>> runtimeFieldsSelector) =>
-			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor())?.Value);
+		public PutMappingDescriptor<TDocument> RuntimeFields(Func<RuntimeFieldsDescriptor<TDocument>, IPromise<IRuntimeFields>> runtimeFieldsSelector) =>
+			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor<TDocument>())?.Value);
 
+		/// <inheritdoc cref="ITypeMapping.RuntimeFields" />
+		public PutMappingDescriptor<TDocument> RuntimeFields<TSource>(Func<RuntimeFieldsDescriptor<TSource>, IPromise<IRuntimeFields>> runtimeFieldsSelector) where TSource : class =>
+			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor<TSource>())?.Value);
+		
 		/// <inheritdoc cref="ITypeMapping.FieldNamesField" />
 		public PutMappingDescriptor<TDocument> FieldNamesField(Func<FieldNamesFieldDescriptor<TDocument>, IFieldNamesField> fieldNamesFieldSelector) =>
 			Assign(fieldNamesFieldSelector, (a, v) => a.FieldNamesField = v.Invoke(new FieldNamesFieldDescriptor<TDocument>()));
