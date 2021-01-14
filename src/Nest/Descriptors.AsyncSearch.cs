@@ -87,6 +87,8 @@ namespace Nest
 	public partial class AsyncSearchStatusDescriptor : RequestDescriptorBase<AsyncSearchStatusDescriptor, AsyncSearchStatusRequestParameters, IAsyncSearchStatusRequest>, IAsyncSearchStatusRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchStatus;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
 		///<summary>/_async_search/status/{id}</summary>
 		///<param name = "id">this parameter is required</param>
 		public AsyncSearchStatusDescriptor(Id id): base(r => r.Required("id", id))

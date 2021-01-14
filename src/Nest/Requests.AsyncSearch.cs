@@ -137,6 +137,8 @@ namespace Nest
 	{
 		protected IAsyncSearchStatusRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchStatus;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
 		///<summary>/_async_search/status/{id}</summary>
 		///<param name = "id">this parameter is required</param>
 		public AsyncSearchStatusRequest(Id id): base(r => r.Required("id", id))
