@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
 using FluentAssertions;
 using Nest;
@@ -14,6 +15,8 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.XPack.Sql.TranslateSql
 {
+	// TODO: Remove skip when https://github.com/elastic/elasticsearch/issues/67163 is fixed
+	[SkipVersion(">1.0.0", "Open issue https://github.com/elastic/elasticsearch/issues/67163")]
 	public class TranslateSqlApiTests
 		: ApiIntegrationTestBase<XPackCluster, TranslateSqlResponse, ITranslateSqlRequest, TranslateSqlDescriptor, TranslateSqlRequest>
 	{
