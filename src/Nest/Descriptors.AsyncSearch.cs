@@ -83,6 +83,27 @@ namespace Nest
 		public AsyncSearchGetDescriptor WaitForCompletionTimeout(Time waitforcompletiontimeout) => Qs("wait_for_completion_timeout", waitforcompletiontimeout);
 	}
 
+	///<summary>Descriptor for Status <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
+	public partial class AsyncSearchStatusDescriptor : RequestDescriptorBase<AsyncSearchStatusDescriptor, AsyncSearchStatusRequestParameters, IAsyncSearchStatusRequest>, IAsyncSearchStatusRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchStatus;
+		///<summary>/_async_search/status/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public AsyncSearchStatusDescriptor(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected AsyncSearchStatusDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Id IAsyncSearchStatusRequest.Id => Self.RouteValues.Get<Id>("id");
+	// Request parameters
+	}
+
 	///<summary>Descriptor for Submit <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
 	public partial class AsyncSearchSubmitDescriptor<TInferDocument> : RequestDescriptorBase<AsyncSearchSubmitDescriptor<TInferDocument>, AsyncSearchSubmitRequestParameters, IAsyncSearchSubmitRequest<TInferDocument>>, IAsyncSearchSubmitRequest<TInferDocument>
 	{
