@@ -21,12 +21,12 @@ namespace Nest
 	[InterfaceDataContract]
 	public interface IAttachmentProcessor : IProcessor
 	{
-		/// <summary> The field to get the base64 encoded field from </summary>
+		/// <summary> The field to get the base64 encoded field from.</summary>
 		[DataMember(Name ="field")]
 		Field Field { get; set; }
 
 
-		/// <summary> If `true` and `field` does not exist, the processor quietly exits without modifying the document </summary>
+		/// <summary> If `true` and `field` does not exist, the processor quietly exits without modifying the document.</summary>
 		[DataMember(Name ="ignore_missing")]
 		bool? IgnoreMissing { get; set; }
 
@@ -37,20 +37,26 @@ namespace Nest
 		[DataMember(Name ="indexed_chars")]
 		long? IndexedCharacters { get; set; }
 
-		/// <summary> Field name from which you can overwrite the number of chars being used for extraction. </summary>
+		/// <summary> Field name from which you can overwrite the number of chars being used for extraction.</summary>
 		[DataMember(Name ="indexed_chars_field")]
 		Field IndexedCharactersField { get; set; }
 
 		/// <summary>
 		/// Properties to select to be stored. Can be content, title, name, author,
-		/// keywords, date, content_type, content_length, language. Defaults to all
+		/// keywords, date, content_type, content_length, language. Defaults to all.
 		/// </summary>
 		[DataMember(Name ="properties")]
 		IEnumerable<string> Properties { get; set; }
 
-		/// <summary> The field that will hold the attachment information </summary>
+		/// <summary> The field that will hold the attachment information.</summary>
 		[DataMember(Name ="target_field")]
 		Field TargetField { get; set; }
+
+		/// <summary> The field containing the name of the resource to decode.
+		/// If specified, the processor passes this resource name to the underlying
+		/// Tika library to enable 'Resource Name Based Detection'.</summary>
+		[DataMember(Name = "resource_name")]
+		Field ResourceName { get; set; }
 	}
 
 	/// <inheritdoc cref="IAttachmentProcessor" />
@@ -75,6 +81,9 @@ namespace Nest
 		/// <inheritdoc cref="IAttachmentProcessor.TargetField" />
 		public Field TargetField { get; set; }
 
+		/// <inheritdoc cref="IAttachmentProcessor.ResourceName" />
+		public Field ResourceName { get; set; }
+
 		protected override string Name => "attachment";
 	}
 
@@ -91,6 +100,7 @@ namespace Nest
 		Field IAttachmentProcessor.IndexedCharactersField { get; set; }
 		IEnumerable<string> IAttachmentProcessor.Properties { get; set; }
 		Field IAttachmentProcessor.TargetField { get; set; }
+		Field IAttachmentProcessor.ResourceName { get; set; }
 
 		/// <inheritdoc cref="IAttachmentProcessor.Field" />
 		public AttachmentProcessorDescriptor<T> Field(Field field) => Assign(field, (a, v) => a.Field = v);
@@ -122,5 +132,11 @@ namespace Nest
 
 		/// <inheritdoc cref="IAttachmentProcessor.Properties" />
 		public AttachmentProcessorDescriptor<T> Properties(params string[] properties) => Assign(properties, (a, v) => a.Properties = v);
+
+		/// <inheritdoc cref="IAttachmentProcessor.ResourceName" />
+		public AttachmentProcessorDescriptor<T> ResourceName(Field field) => Assign(field, (a, v) => a.ResourceName = v);
+
+		/// <inheritdoc cref="IAttachmentProcessor.TargetField" />
+		public AttachmentProcessorDescriptor<T> ResourceName<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a.ResourceName = v);
 	}
 }
