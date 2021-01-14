@@ -56,7 +56,7 @@ namespace Elasticsearch.Net.Specification.AsyncSearchApi
 	}
 
 	///<summary>Request options for Status <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
-	public class StatusRequestParameters : RequestParameters<StatusRequestParameters>
+	public class AsyncSearchStatusRequestParameters : RequestParameters<AsyncSearchStatusRequestParameters>
 	{
 	}
 

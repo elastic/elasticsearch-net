@@ -123,6 +123,41 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IAsyncSearchStatusRequest : IRequest<AsyncSearchStatusRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id Id
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Status <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</para></summary>
+	public partial class AsyncSearchStatusRequest : PlainRequestBase<AsyncSearchStatusRequestParameters>, IAsyncSearchStatusRequest
+	{
+		protected IAsyncSearchStatusRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchStatus;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_async_search/status/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public AsyncSearchStatusRequest(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected AsyncSearchStatusRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IAsyncSearchStatusRequest.Id => Self.RouteValues.Get<Id>("id");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IAsyncSearchSubmitRequest : IRequest<AsyncSearchSubmitRequestParameters>
 	{
 		[IgnoreDataMember]

@@ -4,42 +4,17 @@
 
 using System;
 using System.Runtime.Serialization;
-using Nest.Utf8Json;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	public interface IAsyncSearchResponse<TDocument> : IResponse where TDocument : class
+	public class AsyncSearchStatusResponse : ResponseBase
 	{
-		[DataMember(Name = "id")]
-		string Id { get; }
+		[DataMember(Name = "_shards")]
+		public ShardStatistics Shards { get; internal set; }
 
-		[DataMember(Name = "is_partial")]
-		bool IsPartial { get; }
+		[DataMember(Name = "completion_status")]
+		public int? CompletionStatus { get; internal set; }
 
-		[DataMember(Name = "start_time_in_millis")]
-		long StartTimeInMilliseconds { get; }
-
-		[IgnoreDataMember]
-		DateTimeOffset StartTime { get; }
-
-		[DataMember(Name = "is_running")]
-		bool IsRunning { get; }
-
-		[DataMember(Name = "expiration_time_in_millis")]
-		long ExpirationTimeInMilliseconds { get; }
-
-		[IgnoreDataMember]
-		DateTimeOffset ExpirationTime { get; }
-
-		[DataMember(Name = "response")]
-		AsyncSearch<TDocument> Response { get; }
-	}
-
-	[DataContract]
-	public abstract class AsyncSearchResponseBase<TDocument>
-		: ResponseBase, IAsyncSearchResponse<TDocument> where TDocument: class
-	{
 		[DataMember(Name = "id")]
 		public string Id { get; internal set; }
 
@@ -60,8 +35,5 @@ namespace Nest
 
 		[IgnoreDataMember]
 		public DateTimeOffset ExpirationTime => DateTimeUtil.UnixEpoch.AddMilliseconds(ExpirationTimeInMilliseconds);
-
-		[DataMember(Name = "response")]
-		public AsyncSearch<TDocument> Response { get; internal set; }
 	}
 }
