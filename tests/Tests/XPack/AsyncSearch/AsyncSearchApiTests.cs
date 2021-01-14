@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
@@ -17,6 +16,7 @@ namespace Tests.XPack.AsyncSearch
 	public class AsyncSearchApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluster>
 	{
 		private const string SubmitStep = nameof(SubmitStep);
+		private const string StatusStep = nameof(StatusStep);
 		private const string GetStep = nameof(GetStep);
 		private const string DeleteStep = nameof(DeleteStep);
 
@@ -71,6 +71,17 @@ namespace Tests.XPack.AsyncSearch
 					onResponse: (r, values) => values.ExtendedValue("id", r.Id)
 				)
 			},
+			{StatusStep, ">=7.11.0", u =>
+				u.Calls<AsyncSearchStatusDescriptor, AsyncSearchStatusRequest, IAsyncSearchStatusRequest, AsyncSearchStatusResponse>(
+					v => new AsyncSearchStatusRequest(v),
+					(v, d) => d,
+					(v, c, f) => c.AsyncSearch.Status(v, f),
+					(v, c, f) => c.AsyncSearch.StatusAsync(v, f),
+					(v, c, r) => c.AsyncSearch.Status(r),
+					(v, c, r) => c.AsyncSearch.StatusAsync(r),
+					uniqueValueSelector: values => values.ExtendedValue<string>("id")
+				)
+			},
 			{GetStep, u =>
 				u.Calls<AsyncSearchGetDescriptor, AsyncSearchGetRequest, IAsyncSearchGetRequest, AsyncSearchGetResponse<Project>>(
 					v => new AsyncSearchGetRequest(v),
@@ -95,18 +106,33 @@ namespace Tests.XPack.AsyncSearch
 			},
 		}) { }
 
-		[I] public async Task AsyncSearchSubmitResponse() => await Assert<AsyncSearchSubmitResponse<Project>>(SubmitStep, (v, r) =>
+		[I] public async Task AsyncSearchSubmitResponse() => await Assert<AsyncSearchSubmitResponse<Project>>(SubmitStep, r =>
 		{
 			r.ShouldBeValid();
 			r.Response.Should().NotBeNull();
 			r.Response.Took.Should().BeGreaterOrEqualTo(0);
 		});
+		
+		[I] public async Task AsyncSearchStatusResponse() => await Assert<AsyncSearchStatusResponse>(StatusStep, r =>
+		{
+			r.ShouldBeValid();
+			r.StartTime.Should().BeOnOrBefore(DateTimeOffset.Now);
+			r.ExpirationTime.Should().BeOnOrAfter(DateTimeOffset.Now);
 
-		[I] public async Task AsyncSearchGetResponse() => await Assert<AsyncSearchGetResponse<Project>>(GetStep, (v, r) =>
+			if (r.IsRunning)
+				r.CompletionStatus.HasValue.Should().BeFalse();
+			else
+				r.CompletionStatus?.Should().Be(200);
+
+			r.Shards.Total.Should().BeGreaterOrEqualTo(1);
+		});
+
+		[I] public async Task AsyncSearchGetResponse() => await Assert<AsyncSearchGetResponse<Project>>(GetStep, r =>
 		{
 			r.ShouldBeValid();
 			r.Id.Should().NotBeNullOrEmpty();
 			r.StartTime.Should().BeOnOrBefore(DateTimeOffset.Now);
+			r.ExpirationTime.Should().BeOnOrAfter(DateTimeOffset.Now);
 			r.Response.Should().NotBeNull();
 			r.Response.Took.Should().BeGreaterOrEqualTo(0);
 			r.Response.Hits.Should().HaveCount(10);
@@ -114,7 +140,7 @@ namespace Tests.XPack.AsyncSearch
 			terms.Should().NotBeNull();
 		});
 
-		[I] public async Task AsyncSearchDeleteResponse() => await Assert<AsyncSearchDeleteResponse>(DeleteStep, (v, r) =>
+		[I] public async Task AsyncSearchDeleteResponse() => await Assert<AsyncSearchDeleteResponse>(DeleteStep, r =>
 		{
 			r.ShouldBeValid();
 			r.Acknowledged.Should().BeTrue();

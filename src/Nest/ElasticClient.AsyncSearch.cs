@@ -89,6 +89,30 @@ namespace Nest.Specification.AsyncSearchApi
 		public Task<AsyncSearchGetResponse<TDocument>> GetAsync<TDocument>(IAsyncSearchGetRequest request, CancellationToken ct = default)
 			where TDocument : class => DoRequestAsync<IAsyncSearchGetRequest, AsyncSearchGetResponse<TDocument>>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>GET</c> request to the <c>async_search.status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</a>
+		/// </summary>
+		public AsyncSearchStatusResponse Status(Id id, Func<AsyncSearchStatusDescriptor, IAsyncSearchStatusRequest> selector = null) => Status(selector.InvokeOrDefault(new AsyncSearchStatusDescriptor(id: id)));
+		/// <summary>
+		/// <c>GET</c> request to the <c>async_search.status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</a>
+		/// </summary>
+		public Task<AsyncSearchStatusResponse> StatusAsync(Id id, Func<AsyncSearchStatusDescriptor, IAsyncSearchStatusRequest> selector = null, CancellationToken ct = default) => StatusAsync(selector.InvokeOrDefault(new AsyncSearchStatusDescriptor(id: id)), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>async_search.status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</a>
+		/// </summary>
+		public AsyncSearchStatusResponse Status(IAsyncSearchStatusRequest request) => DoRequest<IAsyncSearchStatusRequest, AsyncSearchStatusResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>async_search.status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</a>
+		/// </summary>
+		public Task<AsyncSearchStatusResponse> StatusAsync(IAsyncSearchStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IAsyncSearchStatusRequest, AsyncSearchStatusResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>async_search.submit</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html</a>
