@@ -44,7 +44,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 	}
 
 	///<summary>Request options for Clone <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
-	public class CloneRequestParameters : RequestParameters<CloneRequestParameters>
+	public class CloneSnapshotRequestParameters : RequestParameters<CloneSnapshotRequestParameters>
 	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout

@@ -61,7 +61,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		///<param name = "targetSnapshot">The name of the cloned snapshot to create</param>
 		///<param name = "body">The snapshot clone definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse Clone<TResponse>(string repository, string snapshot, string targetSnapshot, PostData body, CloneRequestParameters requestParameters = null)
+		public TResponse Clone<TResponse>(string repository, string snapshot, string targetSnapshot, PostData body, CloneSnapshotRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(PUT, Url($"_snapshot/{repository:repository}/{snapshot:snapshot}/_clone/{targetSnapshot:targetSnapshot}"), body, RequestParams(requestParameters));
 		///<summary>PUT on /_snapshot/{repository}/{snapshot}/_clone/{target_snapshot} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
@@ -70,7 +70,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		///<param name = "body">The snapshot clone definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("snapshot.clone", "repository, snapshot, target_snapshot, body")]
-		public Task<TResponse> CloneAsync<TResponse>(string repository, string snapshot, string targetSnapshot, PostData body, CloneRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> CloneAsync<TResponse>(string repository, string snapshot, string targetSnapshot, PostData body, CloneSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_snapshot/{repository:repository}/{snapshot:snapshot}/_clone/{targetSnapshot:targetSnapshot}"), ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_snapshot/{repository}/{snapshot} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
