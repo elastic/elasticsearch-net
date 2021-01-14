@@ -98,6 +98,9 @@ namespace Nest
 			if (value.IsNullOrEmpty())
 				throw new ArgumentException("cannot be null or empty", nameof(value));
 
+			if (value.Equals("false", StringComparison.OrdinalIgnoreCase))
+				return Disabled;
+			
 			var expandReplicaParts = value.Split('-');
 			if (expandReplicaParts.Length != 2)
 				throw new ArgumentException("must contain a 'from' and 'to' value", nameof(value));
