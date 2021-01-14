@@ -21,6 +21,17 @@ namespace Nest
 		}
 
 		[IgnoreDataMember]
+		protected IEnumerable<string> DistinguishedNames
+		{
+			get => BackingDictionary.TryGetValue("dns", out var o) ? (IEnumerable<string>)o : null;
+			set
+			{
+				BackingDictionary.Add("dn", value.FirstOrDefault());
+				BackingDictionary.Add("dns", value);
+			}
+		}
+
+		[IgnoreDataMember]
 		protected IEnumerable<string> Groups
 		{
 			get => BackingDictionary.TryGetValue("groups", out var o) ? (IEnumerable<string>)o : null;
