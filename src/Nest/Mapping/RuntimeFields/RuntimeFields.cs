@@ -4,33 +4,40 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Nest.Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<RuntimeFields, IRuntimeFields, string, IRuntimeField>))]
-	public interface IRuntimeFields : IIsADictionary<string, IRuntimeField> { }
+	[JsonFormatter(typeof(VerbatimDictionaryKeysFormatter<RuntimeFields, IRuntimeFields, Field, IRuntimeField>))]
+	public interface IRuntimeFields : IIsADictionary<Field, IRuntimeField> { }
 
-	public class RuntimeFields : IsADictionaryBase<string, IRuntimeField>, IRuntimeFields
+	public class RuntimeFields : IsADictionaryBase<Field, IRuntimeField>, IRuntimeFields
 	{
 		public RuntimeFields() { }
 
-		public RuntimeFields(IDictionary<string, IRuntimeField> container) : base(container) { }
+		public RuntimeFields(IDictionary<Field, IRuntimeField> container) : base(container) { }
 
-		public RuntimeFields(Dictionary<string, IRuntimeField> container) : base(container) { }
+		public RuntimeFields(Dictionary<Field, IRuntimeField> container) : base(container) { }
 
-		public void Add(string name, IRuntimeField runtimeField) => BackingDictionary.Add(name, runtimeField);
+		public void Add(Field name, IRuntimeField runtimeField) => BackingDictionary.Add(name, runtimeField);
 	}
 
-	public class RuntimeFieldsDescriptor
-		: IsADictionaryDescriptorBase<RuntimeFieldsDescriptor, RuntimeFields, string, IRuntimeField>
+	public class RuntimeFieldsDescriptor<TDocument>
+		: IsADictionaryDescriptorBase<RuntimeFieldsDescriptor<TDocument>, RuntimeFields, Field, IRuntimeField> where TDocument : class
 	{
 		public RuntimeFieldsDescriptor() : base(new RuntimeFields()) { }
 
-		public RuntimeFieldsDescriptor RuntimeField(string name, FieldType type, Func<RuntimeFieldDescriptor, IRuntimeField> selector) =>
+		public RuntimeFieldsDescriptor<TDocument> RuntimeField(string name, FieldType type, Func<RuntimeFieldDescriptor, IRuntimeField> selector) =>
 			Assign(name, selector?.Invoke(new RuntimeFieldDescriptor(type)));
 
-		public RuntimeFieldsDescriptor RuntimeField(string name, FieldType type) =>
+		public RuntimeFieldsDescriptor<TDocument> RuntimeField(Expression<Func<TDocument, Field>> field, FieldType type, Func<RuntimeFieldDescriptor, IRuntimeField> selector) =>
+			Assign(field, selector?.Invoke(new RuntimeFieldDescriptor(type)));
+
+		public RuntimeFieldsDescriptor<TDocument> RuntimeField(string name, FieldType type) =>
 			Assign(name, new RuntimeFieldDescriptor(type));
+
+		public RuntimeFieldsDescriptor<TDocument> RuntimeField(Expression<Func<TDocument, Field>> field, FieldType type) =>
+			Assign(field, new RuntimeFieldDescriptor(type));
 	}
 }
