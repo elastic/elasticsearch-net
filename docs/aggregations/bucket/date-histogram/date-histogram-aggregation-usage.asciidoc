@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.x
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.11
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -86,7 +86,7 @@ new DateHistogramAggregation("projects_started_per_month")
       "field": "startedOn",
       "calendar_interval": "month",
       "min_doc_count": 2,
-      "format": "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
+      "format": "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", <1>
       "order": {
         "_count": "asc"
       },
@@ -113,6 +113,7 @@ new DateHistogramAggregation("projects_started_per_month")
   }
 }
 ----
+<1> Note the inclusion of `date_optional_time` to `format`
 
 ==== Handling responses
 
