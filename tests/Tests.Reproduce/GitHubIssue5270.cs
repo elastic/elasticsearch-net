@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,7 +60,7 @@ namespace Tests.Reproduce
 				.BeAssignableTo<FieldRoleMappingRule>()
 				.Subject.Field.Should()
 				.BeAssignableTo<DistinguishedNameRule>()
-				.Subject["dns"].Should().BeAssignableTo<IEnumerable<string>>()
+				.Subject["dn"].Should().BeAssignableTo<IEnumerable<string>>()
 				.Subject.Count().Should().Be(2);
 	}
 }
