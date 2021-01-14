@@ -222,22 +222,37 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			.Map<Project>(ProjectTypeMappings);
 #pragma warning restore 618
 
-		public static ITypeMapping ProjectTypeMappings(TypeMappingDescriptor<Project> m) => m
-			.RoutingField(r => r.Required())
-			.AutoMap()
-			.Properties(ProjectProperties)
-			.Properties<CommitActivity>(props => props
-				.Object<Developer>(o => o
-					.AutoMap()
-					.Name(p => p.Committer)
-					.Properties(DeveloperProperties)
-					.Dynamic()
-				)
-				.Text(t => t
-					.Name(p => p.ProjectName)
-					.Index(false)
-				)
-			);
+		public static ITypeMapping ProjectTypeMappings(TypeMappingDescriptor<Project> mapping)
+		{
+			mapping
+				.RoutingField(r => r.Required())
+				.AutoMap()
+				.Properties(ProjectProperties)
+				.Properties<CommitActivity>(props => props
+					.Object<Developer>(o => o
+						.AutoMap()
+						.Name(p => p.Committer)
+						.Properties(DeveloperProperties)
+						.Dynamic()
+					)
+					.Text(t => t
+						.Name(p => p.ProjectName)
+						.Index(false)
+					)
+				);
+
+			// runtime fields are a new feature added in 7.11.0
+			if (TestConfiguration.Instance.InRange(">=7.11.0"))
+			{
+				mapping.RuntimeFields<ProjectRuntimeFields>(rf => rf
+					.RuntimeField(r => r.StartedOnDayOfWeek, FieldType.Keyword, rtf => rtf
+						.Script("if (doc['startedOn'].size() != 0) {emit(doc['startedOn'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT))}"))
+					.RuntimeField(r => r.ThirtyDaysFromStarted, FieldType.Date, rtf => rtf
+						.Script("if (doc['startedOn'].size() != 0) {emit(doc['startedOn'].value.plusDays(30).toEpochMilli())}")));
+			}
+
+			return mapping;
+		}
 
 		public static IAnalysis ProjectAnalysisSettings(AnalysisDescriptor analysis)
 		{

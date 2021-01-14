@@ -40,6 +40,13 @@ namespace Nest
 		bool? Explain { get; set; }
 
 		/// <summary>
+		/// BETA: Allows for retrieving a list of document fields in the search response.
+		/// <para>This functionality is in beta and is subject to change. </para>
+		/// </summary>
+		[DataMember(Name = "fields")]
+		Fields Fields { get; set; }
+
+		/// <summary>
 		/// The starting from index of the hits to return. Defaults to 0.
 		/// </summary>
 		[DataMember(Name = "from")]
@@ -173,6 +180,12 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "pit")]
 		IPointInTime PointInTime { get; set; }
+
+		/// <summary>
+		/// Specifies runtime fields which exist only as part of the query.
+		/// </summary>
+		[DataMember(Name = "runtime_mappings")]
+		IRuntimeFields RuntimeFields { get; set; }
 	}
 
 	[ReadAs(typeof(SearchRequest<>))]
@@ -198,6 +211,8 @@ namespace Nest
 		public Fields DocValueFields { get; set; }
 		/// <inheritdoc />
 		public bool? Explain { get; set; }
+		/// <inheritdoc />
+		public Fields Fields { get; set; }
 		/// <inheritdoc />
 		public int? From { get; set; }
 		/// <inheritdoc />
@@ -243,6 +258,8 @@ namespace Nest
 		public bool? Version { get; set; }
 		/// <inheritdoc />
 		public IPointInTime PointInTime { get; set; }
+		/// <inheritdoc />
+		public IRuntimeFields RuntimeFields { get; set; }
 
 		protected override HttpMethod? DynamicHttpMethod =>
 			RequestState.RequestParameters?.ContainsQueryString("source") == true
@@ -286,6 +303,7 @@ namespace Nest
 		IFieldCollapse ISearchRequest.Collapse { get; set; }
 		Fields ISearchRequest.DocValueFields { get; set; }
 		bool? ISearchRequest.Explain { get; set; }
+		Fields ISearchRequest.Fields { get; set; }
 		int? ISearchRequest.From { get; set; }
 		IHighlight ISearchRequest.Highlight { get; set; }
 		IDictionary<IndexName, double> ISearchRequest.IndicesBoost { get; set; }
@@ -308,6 +326,7 @@ namespace Nest
 		bool? ISearchRequest.TrackTotalHits { get; set; }
 		bool? ISearchRequest.Version { get; set; }
 		IPointInTime ISearchRequest.PointInTime { get; set; }
+		IRuntimeFields ISearchRequest.RuntimeFields { get; set; }
 
 		protected sealed override void RequestDefaults(SearchRequestParameters parameters) => TypedKeys();
 
@@ -335,6 +354,17 @@ namespace Nest
 
 		/// <inheritdoc cref="ISearchRequest.Size" />
 		public SearchDescriptor<TInferDocument> Take(int? take) => Size(take);
+
+		/// <inheritdoc cref="ISearchRequest.Fields" />
+		public SearchDescriptor<TInferDocument> Fields(Func<FieldsDescriptor<TInferDocument>, IPromise<Fields>> fields) =>
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<TInferDocument>())?.Value);
+
+		/// <inheritdoc cref="ISearchRequest.Fields" />
+		public SearchDescriptor<TInferDocument> Fields<TSource>(Func<FieldsDescriptor<TSource>, IPromise<Fields>> fields) where TSource : class =>
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<TSource>())?.Value);
+
+		/// <inheritdoc cref="ISearchRequest.Fields" />
+		public SearchDescriptor<TInferDocument> Fields(Fields fields) => Assign(fields, (a, v) => a.DocValueFields = v);
 
 		/// <inheritdoc cref="ISearchRequest.From" />
 		public SearchDescriptor<TInferDocument> From(int? from) => Assign(from, (a, v) => a.From = v);
@@ -476,6 +506,14 @@ namespace Nest
 		/// <inheritdoc cref="ISearchRequest.PointInTime" />
 		public SearchDescriptor<TInferDocument> PointInTime(string pitId, Func<PointInTimeDescriptor, IPointInTime> pit) =>
 			Assign(pit, (a, v) => a.PointInTime = v?.Invoke(new PointInTimeDescriptor(pitId)));
+
+		/// <inheritdoc cref="ISearchRequest.RuntimeFields" />
+		public SearchDescriptor<TInferDocument> RuntimeFields(Func<RuntimeFieldsDescriptor<TInferDocument>, IPromise<IRuntimeFields>> runtimeFieldsSelector) =>
+			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor<TInferDocument>())?.Value);
+
+		/// <inheritdoc cref="ISearchRequest.RuntimeFields" />
+		public SearchDescriptor<TInferDocument> RuntimeFields<TSource>(Func<RuntimeFieldsDescriptor<TSource>, IPromise<IRuntimeFields>> runtimeFieldsSelector) where TSource : class =>
+			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor<TSource>())?.Value);
 
 		protected override string ResolveUrl(RouteValues routeValues, IConnectionSettingsValues settings)
 		{
