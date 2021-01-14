@@ -463,6 +463,39 @@ namespace Tests.Ingest
 			public override string Key => "attachment";
 		}
 
+		[SkipVersion("<7.11.0", "Resource name support was added in 7.11")]
+		public class Attachment_WithResourceName : ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Attachment<Project>(ud => ud
+					.Field(p => p.Description)
+					.IndexedCharacters(100_000)
+					.Properties("title", "author")
+					.IgnoreMissing()
+					.ResourceName(n => n.Name)
+				);
+
+			public override IProcessor Initializer => new AttachmentProcessor
+			{
+				Field = "description",
+				Properties = new[] { "title", "author" },
+				IndexedCharacters = 100_000,
+				IgnoreMissing = true,
+				ResourceName = "name"
+			};
+
+			public override object Json => new
+			{
+				field = "description",
+				ignore_missing = true,
+				properties = new[] { "title", "author" },
+				indexed_chars = 100_000,
+				resource_name = "name"
+			};
+
+			public override string Key => "attachment";
+		}
+
 		[SkipVersion("<7.4.0", "Circle processor added in 7.4.0")]
 		public class Circle : ProcessorAssertion
 		{
