@@ -62,6 +62,8 @@ namespace Nest
 	public partial class CloneSnapshotDescriptor : RequestDescriptorBase<CloneSnapshotDescriptor, CloneSnapshotRequestParameters, ICloneSnapshotRequest>, ICloneSnapshotRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotClone;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => true;
 		///<summary>/_snapshot/{repository}/{snapshot}/_clone/{target_snapshot}</summary>
 		///<param name = "repository">this parameter is required</param>
 		///<param name = "snapshot">this parameter is required</param>
