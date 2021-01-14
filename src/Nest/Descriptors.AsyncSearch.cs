@@ -21,8 +21,8 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using Elastic.Transport;
-using Elasticsearch.Net;
 using Nest.Utf8Json;
+using Elasticsearch.Net;
 using Elasticsearch.Net.Specification.AsyncSearchApi;
 
 // ReSharper disable RedundantBaseConstructorCall

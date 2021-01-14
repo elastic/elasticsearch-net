@@ -43,6 +43,7 @@ namespace Nest
 	}
 
 	///<summary>Request for Cancel <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 	public partial class CancelTasksRequest : PlainRequestBase<CancelTasksRequestParameters>, ICancelTasksRequest
 	{
 		protected ICancelTasksRequest Self => this;
@@ -107,6 +108,7 @@ namespace Nest
 	}
 
 	///<summary>Request for GetTask <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 	public partial class GetTaskRequest : PlainRequestBase<GetTaskRequestParameters>, IGetTaskRequest
 	{
 		protected IGetTaskRequest Self => this;
@@ -150,6 +152,7 @@ namespace Nest
 	}
 
 	///<summary>Request for List <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 	public partial class ListTasksRequest : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
 	{
 		protected IListTasksRequest Self => this;

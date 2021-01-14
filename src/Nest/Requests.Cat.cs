@@ -1254,6 +1254,13 @@ namespace Nest
 			set => Q("help", value);
 		}
 
+		///<summary>Include bootstrap plugins in the response</summary>
+		public bool? IncludeBootstrap
+		{
+			get => Q<bool? >("include_bootstrap");
+			set => Q("include_bootstrap", value);
+		}
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local
 		{
@@ -1701,6 +1708,7 @@ namespace Nest
 	}
 
 	///<summary>Request for Tasks <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</para></summary>
+	///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 	public partial class CatTasksRequest : PlainRequestBase<CatTasksRequestParameters>, ICatTasksRequest
 	{
 		protected ICatTasksRequest Self => this;
@@ -1752,17 +1760,17 @@ namespace Nest
 		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
 		/// connecting to, leave empty to get information from all nodes
 		///</summary>
-		public string[] NodeId
+		public string[] Nodes
 		{
-			get => Q<string[]>("node_id");
-			set => Q("node_id", value);
+			get => Q<string[]>("nodes");
+			set => Q("nodes", value);
 		}
 
-		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
-		public long? ParentTask
+		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
+		public string ParentTaskId
 		{
-			get => Q<long? >("parent_task");
-			set => Q("parent_task", value);
+			get => Q<string>("parent_task_id");
+			set => Q("parent_task_id", value);
 		}
 
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>

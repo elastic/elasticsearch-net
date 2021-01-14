@@ -2643,7 +2643,7 @@ namespace Nest
 		[IgnoreDataMember]
 		Indices IIndicesStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		// Request parameters
-		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `completion` index metric (supports wildcards)</summary>
 		public Fields CompletionFields
 		{
 			get => Q<Fields>("completion_fields");
@@ -2657,7 +2657,7 @@ namespace Nest
 			set => Q("expand_wildcards", value);
 		}
 
-		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `fielddata` index metric (supports wildcards)</summary>
 		public Fields FielddataFields
 		{
 			get => Q<Fields>("fielddata_fields");
