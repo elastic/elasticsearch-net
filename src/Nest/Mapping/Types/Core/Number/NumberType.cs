@@ -34,7 +34,10 @@ namespace Nest
 		Short,
 
 		[EnumMember(Value = "byte")]
-		Byte
+		Byte,
+
+		[EnumMember(Value = "unsigned_long")]
+		UnsignedLong
 	}
 
 	internal static class NumberTypeExtensions
@@ -51,6 +54,7 @@ namespace Nest
 				case NumberType.Long: return FieldType.Long;
 				case NumberType.Short: return FieldType.Short;
 				case NumberType.Byte: return FieldType.Byte;
+				case NumberType.UnsignedLong: return FieldType.UnsignedLong;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(numberType), numberType, null);
 			}
