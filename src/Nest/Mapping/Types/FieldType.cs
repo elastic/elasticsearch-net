@@ -89,6 +89,9 @@ namespace Nest
 		[EnumMember(Value = "long")]
 		Long,
 
+		[EnumMember(Value = "unsigned_long")]
+		UnsignedLong,
+
 		[EnumMember(Value = "short")]
 		Short,
 
