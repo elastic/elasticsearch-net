@@ -68,6 +68,7 @@ namespace Nest
 				case FieldType.Long:
 				case FieldType.ScaledFloat:
 				case FieldType.HalfFloat:
+				case FieldType.UnsignedLong:
 					var numberProperty = Deserialize<NumberProperty>(ref segmentReader, formatterResolver);
 					((IProperty)numberProperty).Type = typeString;
 					return numberProperty;
