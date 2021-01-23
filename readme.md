@@ -1,5 +1,30 @@
 Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasticsearch](https://github.com/elastic/elasticsearch) .NET clients.
 
+## Table of Contents
+
+* [Compatibility Matrix](#compatibility-matrix)
+* [Further Compatibility Clarifications](#further-compatibility-clarifications)
+  * [Low Level Client Compatibility](#low-level-client-compatibility)
+* [Preview builds](#preview-builds)
+* [Upgrading](#upgrading)
+* [NEST](#nest)
+  * [Getting Started](#getting-started)
+  * [Installing](#installing)
+  * [Connecting](#connecting)
+  * [Indexing](#indexing)
+  * [Getting a Document](#getting-a-document)
+  * [Searching For Documents](#searching-for-documents)
+  * [Falling back to Elasticsearch.Net](#falling-back-to-elasticsearchnet)
+* [Elasticsearch.Net](#elasticsearchnet)
+  * [Installing](#installing-1)
+  * [Connecting](#connecting-1)
+  * [Calling an API endpoint](#calling-an-api-endpoint)
+  * [Providing a request body](#providing-a-request-body)
+* [Contributing](#contributing)
+  * [Generating documentation from tests](#generating-documentation-from-tests)
+  * [Many thanks to](#many-thanks-to)
+* [Copyright and License](#copyright-and-license)
+
 ## Compatibility Matrix
 <table>
     <tr>
