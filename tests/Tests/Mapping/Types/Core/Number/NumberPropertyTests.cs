@@ -127,7 +127,6 @@ namespace Tests.Mapping.Types.Core.Number
 				{
 					type = "unsigned_long",
 					doc_values = true,
-					similarity = "BM25",
 					store = true,
 					index = false,
 					ignore_malformed = true
@@ -140,7 +139,6 @@ namespace Tests.Mapping.Types.Core.Number
 				.Name(p => p.NumberOfCommits)
 				.Type(NumberType.UnsignedLong)
 				.DocValues()
-				.Similarity("BM25")
 				.Store()
 				.Index(false)
 				.IgnoreMalformed()
@@ -152,7 +150,6 @@ namespace Tests.Mapping.Types.Core.Number
 				"numberOfCommits", new NumberProperty(NumberType.UnsignedLong)
 				{
 					DocValues = true,
-					Similarity = "BM25",
 					Store = true,
 					Index = false,
 					IgnoreMalformed = true
