@@ -1,0 +1,77 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.11
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Metric/GeoLine/GeoLineAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[geo-line-aggregation-usage]]
+=== Geo Line Aggregation Usage
+
+The geo_line aggregation aggregates all geo_point values within a bucket into a LineString ordered by the chosen sort field. 
+
+Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-geo-line.html[Geo-Line Aggregation].
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.GeoLine("line", d => d
+    .Point(p => p.LocationPoint)
+    .Sort(p => p.StartedOn)
+    .IncludeSort()
+    .Size(25))
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new GeoLineAggregation("line", Field<Project>(f => f.LocationPoint), Field<Project>(f => f.StartedOn))
+{
+    IncludeSort = true,
+    Size = 25
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "line": {
+    "geo_line": {
+      "point": {
+        "field": "locationPoint"
+      },
+      "sort": {
+        "field": "startedOn"
+      },
+      "include_sort": true,
+      "size": 25
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var geoLine = response.Aggregations.GeoLine("line");
+geoLine.Should().NotBeNull();
+geoLine.Type.Should().Be("Feature");
+geoLine.Geometry.Type.Should().Be("linestring");
+geoLine.Geometry.Coordinates.Should().NotBeEmpty();
+geoLine.Properties.Complete.Should().BeFalse();
+geoLine.Properties.SortValues.Should().NotBeEmpty();
+----
+

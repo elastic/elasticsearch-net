@@ -15,7 +15,7 @@ using static Nest.Infer;
 namespace Tests.Aggregations.Metric.GeoLine
 {
 	/**
-	 * TODO
+	 * The geo_line aggregation aggregates all geo_point values within a bucket into a LineString ordered by the chosen sort field. 
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-geo-line.html[Geo-Line Aggregation].
 	*/
