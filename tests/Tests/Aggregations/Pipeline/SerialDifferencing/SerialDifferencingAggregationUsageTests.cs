@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Pipeline.SerialDifferencing
 {
-	public class SerialDifferencingAggregationUsageTests : AggregationUsageTestBase
+	public class SerialDifferencingAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public SerialDifferencingAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

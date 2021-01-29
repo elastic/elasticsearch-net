@@ -25,7 +25,7 @@ namespace Tests.Aggregations.Metric.Boxplot
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-boxplot-aggregation.html[Boxplot Aggregation]
 	 */
 	[SkipVersion("<7.7.0", "introduced in 7.7.0")]
-	public class BoxplotAggregationUsageTests : AggregationUsageTestBase
+	public class BoxplotAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public BoxplotAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

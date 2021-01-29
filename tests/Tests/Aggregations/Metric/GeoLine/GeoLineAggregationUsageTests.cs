@@ -20,7 +20,7 @@ namespace Tests.Aggregations.Metric.GeoLine
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-geo-line.html[Geo-Line Aggregation].
 	*/
 	[SkipVersion("<7.11.0", "Geo-line aggregation introduced in 7.11.0")]
-	public class GeoLineAggregationUsageTests : XPackAggregationUsageTestBase
+	public class GeoLineAggregationUsageTests : AggregationUsageTestBase<XPackCluster>
 	{
 		public GeoLineAggregationUsageTests(XPackCluster i, EndpointUsage usage) : base(i, usage) { }
 

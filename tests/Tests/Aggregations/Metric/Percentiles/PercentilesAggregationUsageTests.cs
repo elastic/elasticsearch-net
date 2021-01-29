@@ -13,7 +13,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Percentiles
 {
-	public class PercentilesAggregationUsageTests : AggregationUsageTestBase
+	public class PercentilesAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public PercentilesAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -75,7 +75,7 @@ namespace Tests.Aggregations.Metric.Percentiles
 	}
 
 	// hide
-	public class PercentilesAggregationNonKeyedValuesUsageTests : AggregationUsageTestBase
+	public class PercentilesAggregationNonKeyedValuesUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public PercentilesAggregationNonKeyedValuesUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

@@ -15,7 +15,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.TopHits
 {
-	public class TopHitsAggregationUsageTests : AggregationUsageTestBase
+	public class TopHitsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public TopHitsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

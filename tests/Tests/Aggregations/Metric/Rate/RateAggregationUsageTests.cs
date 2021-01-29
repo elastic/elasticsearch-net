@@ -21,7 +21,7 @@ namespace Tests.Aggregations.Metric.Rate
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-rate-aggregation.html[Rate Aggregation].
 	*/
 	[SkipVersion("<7.11.0", "Rate aggregation introduced in 7.11.0")]
-	public class RateAggregationUsageTests : AggregationUsageTestBase
+	public class RateAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public RateAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -91,7 +91,7 @@ namespace Tests.Aggregations.Metric.Rate
 
 	// hide
 	[SkipVersion("<7.10.0", "Rate aggregation introduced in 7.10.0")]
-	public class RateAggregationWithoutModeUsageTests : AggregationUsageTestBase
+	public class RateAggregationWithoutModeUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public RateAggregationWithoutModeUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

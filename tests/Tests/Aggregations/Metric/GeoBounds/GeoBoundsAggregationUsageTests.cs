@@ -13,7 +13,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.GeoBounds
 {
-	public class GeoBoundsAggregationUsageTests : AggregationUsageTestBase
+	public class GeoBoundsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public GeoBoundsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

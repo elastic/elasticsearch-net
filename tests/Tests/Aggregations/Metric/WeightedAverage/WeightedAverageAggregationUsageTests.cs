@@ -27,7 +27,7 @@ namespace Tests.Aggregations.Metric.WeightedAverage
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-weight-avg-aggregation.html[Weighted Avg Aggregation]
 	 */
 	[SkipVersion("<6.4.0", "Introduced in Elasticsearch 6.4.0+")]
-	public class WeightedAverageAggregationUsageTests : AggregationUsageTestBase
+	public class WeightedAverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public WeightedAverageAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

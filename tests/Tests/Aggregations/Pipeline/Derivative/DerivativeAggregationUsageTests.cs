@@ -13,7 +13,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Pipeline.Derivative
 {
-	public class DerivativeAggregationUsageTests : AggregationUsageTestBase
+	public class DerivativeAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public DerivativeAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

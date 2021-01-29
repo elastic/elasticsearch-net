@@ -26,7 +26,7 @@ namespace Tests.Aggregations.Pipeline.MovingFunction
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-pipeline-movfn-aggregation.html[Moving Function Aggregation]
 	 */
 	[SkipVersion("<7.4.0", "Shift option introduced in 7.4.0+")]
-	public class MovingFunctionAggregationUsageTests : AggregationUsageTestBase
+	public class MovingFunctionAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public MovingFunctionAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

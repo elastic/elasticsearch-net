@@ -20,7 +20,7 @@ namespace Tests.Aggregations.Bucket.Terms
 	 *
 	 * See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-terms-aggregation.html[terms aggregation] for more detail.
 	 */
-	public class TermsAggregationUsageTests : AggregationUsageTestBase
+	public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public TermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -120,7 +120,7 @@ namespace Tests.Aggregations.Bucket.Terms
 	 * Using terms aggregation with filtering to include values using a regular expression pattern
 	 *
 	 */
-	public class TermsAggregationIncludePatternUsageTests : AggregationUsageTestBase
+	public class TermsAggregationIncludePatternUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public TermsAggregationIncludePatternUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -216,7 +216,7 @@ namespace Tests.Aggregations.Bucket.Terms
 	 * Using terms aggregation with filtering to include only specific values
 	 *
 	 */
-	public class TermsAggregationIncludeExactValuesUsageTests : AggregationUsageTestBase
+	public class TermsAggregationIncludeExactValuesUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public TermsAggregationIncludeExactValuesUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -317,7 +317,7 @@ namespace Tests.Aggregations.Bucket.Terms
 	 * --
 	 */
 	[SkipVersion("<5.2.0", "Partitioning term aggregations responses is a new feature in 5.2.0")]
-	public class PartitionTermsAggregationUsageTests : AggregationUsageTestBase
+	public class PartitionTermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public PartitionTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
