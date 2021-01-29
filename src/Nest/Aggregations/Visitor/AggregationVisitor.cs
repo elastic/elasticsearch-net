@@ -56,6 +56,8 @@ namespace Nest
 
 		void Visit(IGeoHashGridAggregation aggregation);
 
+		void Visit(IGeoLineAggregation aggregation);
+
 		void Visit(IGeoTileGridAggregation aggregation);
 
 		void Visit(IGeoBoundsAggregation aggregation);
@@ -178,6 +180,8 @@ namespace Nest
 		public virtual void Visit(IFiltersAggregation aggregation) { }
 
 		public virtual void Visit(IGeoHashGridAggregation aggregation) { }
+
+		public virtual void Visit(IGeoLineAggregation aggregation) { }
 
 		public virtual void Visit(IGeoTileGridAggregation aggregation) { }
 
