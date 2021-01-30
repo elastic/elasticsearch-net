@@ -15,7 +15,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Matrix.MatrixStats
 {
-	public class MatrixStatsAggregationUsageTests : AggregationUsageTestBase
+	public class MatrixStatsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public MatrixStatsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

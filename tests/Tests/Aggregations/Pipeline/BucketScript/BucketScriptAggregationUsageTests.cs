@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Pipeline.BucketScript
 {
-	public class BucketScriptAggregationUsageTests : AggregationUsageTestBase
+	public class BucketScriptAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public BucketScriptAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

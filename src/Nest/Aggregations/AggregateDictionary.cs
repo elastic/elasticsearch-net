@@ -94,6 +94,8 @@ namespace Nest
 
 		public GeoBoundsAggregate GeoBounds(string key) => TryGet<GeoBoundsAggregate>(key);
 
+		public GeoLineAggregate GeoLine(string key) => TryGet<GeoLineAggregate>(key);
+
 		public PercentilesAggregate Percentiles(string key) => TryGet<PercentilesAggregate>(key);
 
 		public PercentilesAggregate PercentilesBucket(string key) => TryGet<PercentilesAggregate>(key);

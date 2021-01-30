@@ -26,7 +26,7 @@ namespace Tests.Aggregations.Metric.MedianAbsoluteDeviation
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-median-absolute-deviation-aggregation.html[Median Absolute Deviation Aggregation]
 	 */
 	[SkipVersion("<6.6.0", "Introduced in Elasticsearch 6.6.0")]
-	public class MedianAbsoluteDeviationAggregationUsageTests : AggregationUsageTestBase
+	public class MedianAbsoluteDeviationAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public MedianAbsoluteDeviationAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

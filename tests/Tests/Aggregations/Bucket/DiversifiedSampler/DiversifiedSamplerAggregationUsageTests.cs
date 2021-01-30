@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Aggregations.Bucket.DiversifiedSampler
 {
 	[SkipVersion("<7.9.0", "introduced in 7.9.0")]
-	public class DiversifiedSamplerAggregationUsageTests : AggregationUsageTestBase
+	public class DiversifiedSamplerAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public DiversifiedSamplerAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

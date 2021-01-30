@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Pipeline.StatsBucket
 {
-	public class StatsBucketAggregationUsageTests : AggregationUsageTestBase
+	public class StatsBucketAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public StatsBucketAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

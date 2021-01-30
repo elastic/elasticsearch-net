@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Pipeline.CumulativeSum
 {
-	public class CumulativeSumAggregationUsageTests : AggregationUsageTestBase
+	public class CumulativeSumAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public CumulativeSumAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

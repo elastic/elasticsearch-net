@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Pipeline.PercentilesBucket
 {
-	public class PercentilesBucketAggregationUsageTests : AggregationUsageTestBase
+	public class PercentilesBucketAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public PercentilesBucketAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

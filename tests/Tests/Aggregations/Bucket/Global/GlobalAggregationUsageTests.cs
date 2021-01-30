@@ -13,7 +13,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Global
 {
-	public class GlobalAggregationUsageTests : AggregationUsageTestBase
+	public class GlobalAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public GlobalAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
