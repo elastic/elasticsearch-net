@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Bucket.Nested
 {
-	public class NestedAggregationUsageTests : AggregationUsageTestBase
+	public class NestedAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public NestedAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

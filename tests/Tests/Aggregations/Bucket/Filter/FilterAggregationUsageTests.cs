@@ -22,7 +22,7 @@ namespace Tests.Aggregations.Bucket.Filter
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-filter-aggregation.html[Filter Aggregation]
 	*/
-	public class FilterAggregationUsageTests : AggregationUsageTestBase
+	public class FilterAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public static string FirstNameToFind = Project.First.LeadDeveloper.FirstName.ToLowerInvariant();
 
@@ -87,7 +87,7 @@ namespace Tests.Aggregations.Bucket.Filter
 	*/
 	[SkipVersion(">=8.0.0-SNAPSHOT",
 		"https://github.com/elastic/elasticsearch/issues/17518 && 6.0 https://github.com/elastic/elasticsearch/pull/17542#issuecomment-300796197")]
-	public class EmptyFilterAggregationUsageTests : AggregationUsageTestBase
+	public class EmptyFilterAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public EmptyFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -125,7 +125,7 @@ namespace Tests.Aggregations.Bucket.Filter
 
 	//reproduce of https://github.com/elastic/elasticsearch-net/issues/1931
 	// hide
-	public class InlineScriptFilterAggregationUsageTests : AggregationUsageTestBase
+	public class InlineScriptFilterAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		private readonly string _aggName = "script_filter";
 		private readonly string _ctxNumberofCommits = "doc['numberOfCommits'].value > 0";

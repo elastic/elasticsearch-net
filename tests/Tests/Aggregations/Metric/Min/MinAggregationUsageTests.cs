@@ -13,7 +13,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Min
 {
-	public class MinAggregationUsageTests : AggregationUsageTestBase
+	public class MinAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public MinAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

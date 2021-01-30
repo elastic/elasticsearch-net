@@ -56,6 +56,9 @@ namespace Nest
 				case "geo_centroid":
 					ReadAggregate<GeoCentroidAggregate>(ref reader, formatterResolver, name, dictionary);
 					break;
+				case "geo_line":
+					ReadAggregate<GeoLineAggregate>(ref reader, formatterResolver, name, dictionary);
+					break;
 				default:
 					//still fall back to heuristics based parsed in case we do not know the key
 					ParseAggregate(ref reader, formatterResolver, name, dictionary);

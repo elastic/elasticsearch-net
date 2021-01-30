@@ -14,7 +14,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Aggregations.Pipeline.CumulativeCardinality
 {
 	[SkipVersion("<7.4.0", "Introduced in 7.4")]
-	public class CumulativeCardinalityAggregationUsageTests : AggregationUsageTestBase
+	public class CumulativeCardinalityAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public CumulativeCardinalityAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

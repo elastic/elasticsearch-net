@@ -13,7 +13,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Cardinality
 {
-	public class CardinalityAggregationUsageTests : AggregationUsageTestBase
+	public class CardinalityAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public CardinalityAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

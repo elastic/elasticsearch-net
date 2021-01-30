@@ -15,7 +15,7 @@ using static Nest.Infer;
 namespace Tests.Aggregations.Metric.StringStats
 {
 	[SkipVersion("<7.6.0", "Available in 7.6.0 with at least basic license level")]
-	public class StringStatsAggregationUsageTests : AggregationUsageTestBase
+	public class StringStatsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public StringStatsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -53,7 +53,7 @@ namespace Tests.Aggregations.Metric.StringStats
 
 	// hide
 	[SkipVersion("<7.6.0", "Available in 7.6.0 with at least basic license level")]
-	public class StringStatsWithDistributionAggregationUsageTests : AggregationUsageTestBase
+	public class StringStatsWithDistributionAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public StringStatsWithDistributionAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

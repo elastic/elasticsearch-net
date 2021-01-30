@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Pipeline.MinBucket
 {
-	public class MinBucketAggregationUsageTests : AggregationUsageTestBase
+	public class MinBucketAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public MinBucketAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

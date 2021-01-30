@@ -15,7 +15,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.IpRange
 {
-	public class IpRangeAggregationUsageTests : AggregationUsageTestBase
+	public class IpRangeAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public IpRangeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

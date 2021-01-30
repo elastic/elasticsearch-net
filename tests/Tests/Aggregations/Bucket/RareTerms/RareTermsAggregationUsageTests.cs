@@ -25,7 +25,7 @@ namespace Tests.Aggregations.Bucket.RareTerms
 	 * See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-rare-terms-aggregation.html[rare terms aggregation] for more detail.
 	 */
 	[SkipVersion("<7.3.0", "Introduced in 7.3.0")]
-	public class RareTermsAggregationUsageTests : AggregationUsageTestBase
+	public class RareTermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public RareTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

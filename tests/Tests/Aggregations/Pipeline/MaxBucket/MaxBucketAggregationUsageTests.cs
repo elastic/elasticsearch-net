@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Pipeline.MaxBucket
 {
-	public class MaxBucketAggregationUsageTests : AggregationUsageTestBase
+	public class MaxBucketAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public MaxBucketAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

@@ -14,7 +14,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Average
 {
-	public class AverageAggregationUsageTests : AggregationUsageTestBase
+	public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public AverageAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
