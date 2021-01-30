@@ -166,7 +166,7 @@ $volumes = @(
   "--volume", "${volume_name}:/usr/share/elasticsearch/data"
 )
 
-if (-not $env:ELASTICSEARCH_VERSION -contains "oss") {
+if (-not $env:ELASTICSEARCH_VERSION -contains "free") {
   $environment += @(
     "--env", "ELASTIC_PASSWORD=`"$ELASTIC_PASSWORD`"",
     "--env", "xpack.license.self_generated.type=trial",
@@ -190,7 +190,7 @@ if (-not $env:ELASTICSEARCH_VERSION -contains "oss") {
 }
 
 $url="http://$NODE_NAME"
-if (-not $env:ELASTICSEARCH_VERSION -contains "oss") {
+if (-not $env:ELASTICSEARCH_VERSION -contains "free") {
   $url="https://elastic:$ELASTIC_PASSWORD@$NODE_NAME"
 }
 
