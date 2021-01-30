@@ -162,6 +162,9 @@ namespace Nest
 		[DataMember(Name = "geohash_grid")]
 		IGeoHashGridAggregation GeoHash { get; set; }
 
+		[DataMember(Name = "geo_line")]
+		IGeoLineAggregation GeoLine { get; set; }
+
 		[DataMember(Name = "geotile_grid")]
 		IGeoTileGridAggregation GeoTile { get; set; }
 
@@ -355,6 +358,8 @@ namespace Nest
 
 		public IGeoHashGridAggregation GeoHash { get; set; }
 
+		public IGeoLineAggregation GeoLine { get; set; }
+
 		public IGeoTileGridAggregation GeoTile { get; set; }
 
 		public IGlobalAggregation Global { get; set; }
@@ -520,6 +525,8 @@ namespace Nest
 
 		IGeoHashGridAggregation IAggregationContainer.GeoHash { get; set; }
 
+		IGeoLineAggregation IAggregationContainer.GeoLine { get; set; }
+
 		IGeoTileGridAggregation IAggregationContainer.GeoTile { get; set; }
 
 		IGlobalAggregation IAggregationContainer.Global { get; set; }
@@ -661,6 +668,10 @@ namespace Nest
 			Func<GeoHashGridAggregationDescriptor<T>, IGeoHashGridAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.GeoHash = d);
+
+		public AggregationContainerDescriptor<T> GeoLine(string name,
+			Func<GeoLineAggregationDescriptor<T>, IGeoLineAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.GeoLine = d);
 
 		public AggregationContainerDescriptor<T> GeoTile(string name,
 			Func<GeoTileGridAggregationDescriptor<T>, IGeoTileGridAggregation> selector

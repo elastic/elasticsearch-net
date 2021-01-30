@@ -38,6 +38,12 @@ namespace Nest
 			{ Parser.BottomRight, 1 },
 		};
 
+		private static readonly AutomataDictionary GeoLineFields = new AutomataDictionary
+		{
+			{ Parser.Geometry, 0 },
+			{ Parser.Properties, 1 },
+		};
+
 		private static readonly byte[] KeysField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.Keys);
 		private static readonly byte[] MetaField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.Meta);
 		private static readonly byte[] MinLengthField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.MinLength);
@@ -57,6 +63,7 @@ namespace Nest
 			{ Parser.Fields, 10 },
 			{ Parser.Min, 11 },
 			{ Parser.Top, 12 },
+			{ Parser.Type, 13 }
 		};
 
 		private static readonly byte[] SumOtherDocCount = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.SumOtherDocCount);
@@ -174,6 +181,9 @@ namespace Nest
 					case 12:
 						aggregate = GetTopMetricsAggregate(ref reader, formatterResolver, meta);
 						break;
+					case 13:
+						aggregate = GetGeoLineAggregate(ref reader, formatterResolver, meta);
+						break;
 				}
 			}
 			else
@@ -273,7 +283,7 @@ namespace Nest
 			}
 
 			return boxplot;
-    }
+		}
 
 		private IAggregate GetTopMetricsAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, IReadOnlyDictionary<string, object> meta)
 		{
@@ -375,6 +385,45 @@ namespace Nest
 			}
 
 			return geoBoundsMetric;
+		}
+
+		private IAggregate GetGeoLineAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, IReadOnlyDictionary<string, object> meta)
+		{
+			var geoLine = new GeoLineAggregate { Meta = meta };
+
+			if (reader.GetCurrentJsonToken() == JsonToken.Null)
+			{
+				reader.ReadNext();
+				return geoLine;
+			}
+
+			var geometryFormatter = formatterResolver.GetFormatter<LineStringGeoShape>();
+			var propertiesFormatter = formatterResolver.GetFormatter<GeoLineProperties>();
+
+			geoLine.Type = reader.ReadString();
+			reader.ReadNext();
+
+			for (var i = 0; i < 2; i++)
+			{
+				var propertyName = reader.ReadPropertyNameSegmentRaw();
+				if (GeoLineFields.TryGetValue(propertyName, out var value))
+				{
+					switch (value)
+					{
+						case 0:
+							geoLine.Geometry = geometryFormatter.Deserialize(ref reader, formatterResolver);
+							reader.ReadNextBlock();
+							break;
+						case 1:
+							geoLine.Properties = propertiesFormatter.Deserialize(ref reader, formatterResolver);
+							break;
+					}
+				}
+				else
+					reader.ReadNextBlock();
+			}
+
+			return geoLine;
 		}
 
 		private IAggregate GetPercentilesAggregate(ref JsonReader reader, IReadOnlyDictionary<string, object> meta)
@@ -944,17 +993,17 @@ namespace Nest
 					case Parser.Score:
 						return GetSignificantTermsBucket(ref reader, formatterResolver, key, docCount);
 					case Parser.DocCountErrorUpperBound:
-					{
-						docCountErrorUpperBound = reader.ReadNullableLong();
-						token = reader.GetCurrentJsonToken();
-						if (token == JsonToken.ValueSeparator)
 						{
-							reader.ReadNext(); // ,
-							propertyName = reader.ReadPropertyName();
-							subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+							docCountErrorUpperBound = reader.ReadNullableLong();
+							token = reader.GetCurrentJsonToken();
+							if (token == JsonToken.ValueSeparator)
+							{
+								reader.ReadNext(); // ,
+								propertyName = reader.ReadPropertyName();
+								subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+							}
+							break;
 						}
-						break;
-					}
 					default:
 						subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
 						break;
@@ -1052,6 +1101,7 @@ namespace Nest
 			public const string Fields = "fields";
 			public const string From = "from";
 			public const string Top = "top";
+			public const string Type = "type";
 
 			public const string FromAsString = "from_as_string";
 			public const string Hits = "hits";
@@ -1078,6 +1128,9 @@ namespace Nest
 
 			public const string ValueAsString = "value_as_string";
 			public const string Values = "values";
+
+			public const string Geometry = "geometry";
+			public const string Properties = "properties";
 		}
 	}
 }

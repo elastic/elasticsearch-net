@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Bucket.AdjacencyMatrix
 {
-	public class AdjacencyMatrixUsageTests : AggregationUsageTestBase
+	public class AdjacencyMatrixUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public AdjacencyMatrixUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

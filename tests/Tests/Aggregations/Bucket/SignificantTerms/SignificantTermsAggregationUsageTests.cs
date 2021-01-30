@@ -25,7 +25,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	 *
 	 * See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-significantterms-aggregation.html[significant terms aggregation] for more detail.
 	 */
-	public class SignificantTermsAggregationUsageTests : AggregationUsageTestBase
+	public class SignificantTermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public SignificantTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -84,7 +84,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	 *
 	 * Using significant terms aggregation with filtering to include values using a regular expression pattern
 	 */
-	public class SignificantTermsIncludePatternAggregationUsageTests : AggregationUsageTestBase
+	public class SignificantTermsIncludePatternAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public SignificantTermsIncludePatternAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -146,7 +146,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	 *
 	 * Using significant terms aggregation with filtering to exclude specific values
 	 */
-	public class SignificantTermsExcludeExactValuesAggregationUsageTests : AggregationUsageTestBase
+	public class SignificantTermsExcludeExactValuesAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public SignificantTermsExcludeExactValuesAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -208,7 +208,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	 *
 	 * A significant terms aggregation on a numeric field
 	 */
-	public class NumericSignificantTermsAggregationUsageTests : AggregationUsageTestBase
+	public class NumericSignificantTermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public NumericSignificantTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

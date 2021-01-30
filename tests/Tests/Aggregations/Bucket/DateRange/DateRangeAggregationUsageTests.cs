@@ -24,7 +24,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-daterange-aggregation.html[Date Range Aggregation]
 	*/
-	public class DateRangeAggregationUsageTests : AggregationUsageTestBase
+	public class DateRangeAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public DateRangeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

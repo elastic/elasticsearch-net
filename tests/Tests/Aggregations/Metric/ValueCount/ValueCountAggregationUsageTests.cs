@@ -13,7 +13,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.ValueCount
 {
-	public class ValueCountAggregationUsageTests : AggregationUsageTestBase
+	public class ValueCountAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public ValueCountAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

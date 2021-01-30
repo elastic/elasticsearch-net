@@ -33,7 +33,7 @@ namespace Tests.Aggregations.Bucket.SignificantText
 	 *
 	 * See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-significanttext-aggregation.html[significant text aggregation] for more detail.
 	 */
-	public class SignificantTextAggregationUsageTests : AggregationUsageTestBase
+	public class SignificantTextAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		private readonly string _firstTenDescriptions =
 			string.Join(" ", Project.First.Description.Split(' ').Distinct().Take(1024));

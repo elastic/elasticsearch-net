@@ -14,7 +14,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.GeoTileGrid
 {
-	public class GeoTileGridAggregationUsageTests : AggregationUsageTestBase
+	public class GeoTileGridAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public GeoTileGridAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

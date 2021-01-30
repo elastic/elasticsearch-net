@@ -2,8 +2,9 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
- using System;
+using System;
 using System.Threading.Tasks;
+using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
@@ -17,10 +18,11 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations
 {
-	public abstract class AggregationUsageTestBase
-		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public abstract class AggregationUsageTestBase<TCluster>
+		: ApiIntegrationTestBase<TCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		where TCluster : INestTestCluster, IEphemeralCluster<EphemeralClusterConfiguration>, new()
 	{
-		protected AggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected AggregationUsageTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected virtual Nest.Indices AgainstIndex { get; } = Index<Project>();
 
@@ -45,7 +47,7 @@ namespace Tests.Aggregations
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>(AgainstIndex)
+			new(AgainstIndex)
 			{
 				Query = QueryScope,
 				Size = 0,
@@ -55,7 +57,7 @@ namespace Tests.Aggregations
 
 		protected abstract AggregationDictionary InitializerAggs { get; }
 
-		protected virtual QueryContainer QueryScope { get; } = new TermQuery { Field = "type", Value = Project.TypeName};
+		protected virtual QueryContainer QueryScope { get; } = new TermQuery { Field = "type", Value = Project.TypeName };
 
 		protected virtual object QueryScopeJson { get; } = new { term = new { type = new { value = Project.TypeName } } };
 		protected override string UrlPath => $"/project/_search";
@@ -83,7 +85,7 @@ namespace Tests.Aggregations
 		);
 	}
 
-	public abstract class ProjectsOnlyAggregationUsageTestBase : AggregationUsageTestBase
+	public abstract class ProjectsOnlyAggregationUsageTestBase : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		protected ProjectsOnlyAggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

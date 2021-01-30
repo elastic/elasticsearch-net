@@ -14,7 +14,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Histogram
 {
-	public class HistogramAggregationUsageTests : AggregationUsageTestBase
+	public class HistogramAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public HistogramAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -70,7 +70,7 @@ namespace Tests.Aggregations.Bucket.Histogram
 
 	// hide
 	[SkipVersion("<7.10.0", "hard_bounds introduced in 7.10.0")]
-	public class HistogramAggregationWithHardBoundsUsageTests : AggregationUsageTestBase
+	public class HistogramAggregationWithHardBoundsUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		private const double HardBoundsMinimum = 100;
 		private const double HardBoundsMaximum = 300;

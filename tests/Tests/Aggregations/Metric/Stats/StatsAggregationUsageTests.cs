@@ -13,7 +13,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Stats
 {
-	public class StatsAggregationUsageTests : AggregationUsageTestBase
+	public class StatsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public StatsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

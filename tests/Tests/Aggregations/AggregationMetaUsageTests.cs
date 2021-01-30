@@ -16,7 +16,7 @@ namespace Tests.Aggregations
 	*=== Aggregation Metadata
 	* Metadata can be provided per aggregation, and will be returned in the aggregation response
 	*/
-	public class AggregationMetaUsageTests : AggregationUsageTestBase
+	public class AggregationMetaUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public AggregationMetaUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
