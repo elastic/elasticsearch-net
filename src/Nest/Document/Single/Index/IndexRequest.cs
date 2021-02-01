@@ -26,7 +26,7 @@ namespace Nest
 			sourceSerializer.Serialize(Document, stream, formatting);
 
 		internal static HttpMethod GetHttpMethod(IIndexRequest<TDocument> request) =>
-			request.Id?.StringOrLongValue != null || (request.RouteValues.Resolved?.ContainsKey("id") ?? false) ? HttpMethod.PUT : HttpMethod.POST;
+			request.Id?.StringOrLongValue != null || request.RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
 
 		partial void DocumentFromPath(TDocument document) => Document = document;
 	}
