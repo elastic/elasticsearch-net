@@ -4,8 +4,8 @@ param (
     $ELASTICSEARCH_VERSION,
 
     [string]
-    [ValidateSet("oss", "xpack")]
-    $TEST_SUITE = "oss",
+    [ValidateSet("free", "platinum")]
+    $TEST_SUITE = "free",
 
     [string]
     $DOTNET_VERSION = "5.0.100"
@@ -16,8 +16,7 @@ $NODE_NAME = "es1"
 $elasticsearch_image= "elasticsearch"
 $elasticsearch_url = "https://elastic:changeme@${NODE_NAME}:9200"
 
-if ($TEST_SUITE -ne "xpack") {
-  $elasticsearch_image= "elasticsearch-${TEST_SUITE}"
+if ($TEST_SUITE -ne "platinum") {
   $elasticsearch_url = "http://${NODE_NAME}:9200"
 }
 
