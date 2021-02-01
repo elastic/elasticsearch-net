@@ -16,7 +16,7 @@ namespace Tests.Aggregations.Bucket.Children
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-children-aggregation.html[Children Aggregation]
 	 */
-	public class ChildrenAggregationUsageTests : AggregationUsageTestBase
+	public class ChildrenAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public ChildrenAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

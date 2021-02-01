@@ -12,7 +12,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Missing
 {
-	public class MissingAggregationUsageTests : AggregationUsageTestBase
+	public class MissingAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public MissingAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

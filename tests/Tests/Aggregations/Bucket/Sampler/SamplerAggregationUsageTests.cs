@@ -13,7 +13,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Bucket.Sampler
 {
-	public class SamplerAggregationUsageTests : AggregationUsageTestBase
+	public class SamplerAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public SamplerAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

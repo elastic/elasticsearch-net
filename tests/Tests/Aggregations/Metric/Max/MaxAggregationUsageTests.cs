@@ -13,7 +13,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Max
 {
-	public class MaxAggregationUsageTests : AggregationUsageTestBase
+	public class MaxAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public MaxAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

@@ -14,7 +14,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.GeoHashGrid
 {
-	public class GeoHashGridAggregationUsageTests : AggregationUsageTestBase
+	public class GeoHashGridAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public GeoHashGridAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -59,7 +59,7 @@ namespace Tests.Aggregations.Bucket.GeoHashGrid
 
 	[SkipVersion("<7.6.0", "bounds introduced in 7.6.0")]
 	// hide
-	public class GeoHashGridAggregationWithBoundsUsageTests : AggregationUsageTestBase
+	public class GeoHashGridAggregationWithBoundsUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public GeoHashGridAggregationWithBoundsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

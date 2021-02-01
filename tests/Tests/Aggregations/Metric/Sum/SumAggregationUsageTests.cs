@@ -13,7 +13,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.Sum
 {
-	public class SumAggregationUsageTests : AggregationUsageTestBase
+	public class SumAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public SumAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
