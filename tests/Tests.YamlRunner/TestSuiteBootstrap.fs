@@ -6,7 +6,6 @@ module Tests.YamlRunner.TestSuiteBootstrap
 
 open System
 open System.Linq
-
 open Elastic.Transport
 open Elasticsearch.Net
 open Elasticsearch.Net.Specification.CatApi
@@ -43,7 +42,7 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
             |> Seq.toList
                 
     match suite with
-    | Oss ->
+    | Free ->
         let snapshots =
             client.Cat.Snapshots<StringResponse>(CatSnapshotsRequestParameters(Headers=["id,repository"].ToArray()))
                 .Body.Split("\n")
@@ -58,7 +57,7 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         let deleteRepositories = client.Snapshot.DeleteRepository<DynamicResponse>("*")
         firstFailure <| [deleteAll()] @ templates() @ snapshots @ [deleteRepositories]
         
-    | XPack ->
+    | Platinum ->
         firstFailure <| seq {
             //delete all templates
             

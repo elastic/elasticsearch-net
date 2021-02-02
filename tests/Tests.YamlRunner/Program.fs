@@ -43,7 +43,7 @@ let private defaultEndpoint namedSuite =
         match (runningProxy, namedSuite) with
         | (true, _) -> "ipv4.fiddler"
         | _ -> "localhost"
-    let https = match namedSuite with | XPack -> "s" | _ -> ""
+    let https = match namedSuite with | Platinum -> "s" | _ -> ""
     sprintf "http%s://%s:9200" https host;
 
 let private createClient endpoint namedSuite = 
@@ -56,7 +56,7 @@ let private createClient endpoint namedSuite =
         let tokens = e.UserInfo.Split(':') |> Seq.toList
         match (tokens, namedSuite) with 
         | ([username; password], _) -> uri, Some (username, password)
-        | (_, XPack) -> uri, Some ("elastic", "changeme")
+        | (_, Platinum) -> uri, Some ("elastic", "changeme")
         | _ -> uri, None
     let serializer = LowLevelRequestResponseSerializer([YamlMapConverterFactory()]);
     let pool = new SingleNodeConnectionPool(uri);
@@ -74,7 +74,7 @@ let private createClient endpoint namedSuite =
     // certs
     let certSettings =
         match namedSuite with
-        | XPack -> 
+        | Platinum -> 
             authSettings.ServerCertificateValidationCallback(fun _ _ _ _ -> true)
         | _ -> authSettings
     ElasticLowLevelClient(certSettings)
@@ -111,7 +111,7 @@ let validateRevisionParams endpoint passedRevision namedSuite =
     
 let runMain (parsed:ParseResults<Arguments>) = async {
     
-    let namedSuite = parsed.TryGetResult NamedSuite |> Option.defaultValue Oss
+    let namedSuite = parsed.TryGetResult NamedSuite |> Option.defaultValue Free
     let directory = parsed.TryGetResult Folder //|> Option.defaultValue "indices.create" |> Some
     let file = parsed.TryGetResult TestFile //|> Option.defaultValue "10_basic.yml" |> Some
     let section = parsed.TryGetResult TestSection //|> Option.defaultValue "10_basic.yml" |> Some

@@ -426,7 +426,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
                     |> Seq.filter (fun feature -> not (SupportedFeatures |> List.contains feature))
                     |> Seq.toList
                 
-                let noXPackButXPack = features.Contains(NoXPack) && op.Suite = XPack
+                let noXPackButXPack = features.Contains(NoXPack) && op.Suite = Platinum
                 match (unsupportedFeatures, noXPackButXPack) with
                 | ([], false) -> NotSkipped op
                 | ([], true) ->
