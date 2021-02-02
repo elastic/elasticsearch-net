@@ -14,7 +14,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Pipeline.MovingAverage
 {
-	[SkipVersion("5.0.0-alpha1", "https://github.com/elastic/elasticsearch/issues/17516")]
+	[SkipVersion(">=8.0.0", "Removed in 8.0 - Tracking issue to remove https://github.com/elastic/elasticsearch-net/issues/5301")]
 	public class MovingAverageEwmaAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public MovingAverageEwmaAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
