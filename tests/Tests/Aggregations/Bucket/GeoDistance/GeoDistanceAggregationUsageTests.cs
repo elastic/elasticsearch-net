@@ -15,7 +15,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.GeoDistance
 {
-	public class GeoDistanceAggregationUsageTests : AggregationUsageTestBase
+	public class GeoDistanceAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public GeoDistanceAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

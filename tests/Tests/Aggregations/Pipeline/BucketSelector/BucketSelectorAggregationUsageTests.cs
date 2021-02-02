@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Pipeline.BucketSelector
 {
-	public class BucketSelectorAggregationUsageTests : AggregationUsageTestBase
+	public class BucketSelectorAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public BucketSelectorAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

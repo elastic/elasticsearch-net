@@ -19,7 +19,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-geocentroid-aggregation.html[Geo Centroid Aggregation]
 	 */
-	public class GeoCentroidAggregationUsageTests : AggregationUsageTestBase
+	public class GeoCentroidAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public GeoCentroidAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -62,7 +62,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 	 *
 	 * The `geo_centroid` aggregation is more interesting when combined as a sub-aggregation to other bucket aggregations
 	 */
-	public class NestedGeoCentroidAggregationUsageTests : AggregationUsageTestBase
+	public class NestedGeoCentroidAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public NestedGeoCentroidAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -124,7 +124,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 	}
 
 	[NeedsTypedKeys]
-	public class GeoCentroidNoResultsAggregationUsageTests : AggregationUsageTestBase
+	public class GeoCentroidNoResultsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public GeoCentroidNoResultsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

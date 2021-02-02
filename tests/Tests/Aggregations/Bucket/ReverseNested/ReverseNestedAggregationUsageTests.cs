@@ -13,7 +13,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.ReverseNested
 {
-	public class ReverseNestedAggregationUsageTests : AggregationUsageTestBase
+	public class ReverseNestedAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public ReverseNestedAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

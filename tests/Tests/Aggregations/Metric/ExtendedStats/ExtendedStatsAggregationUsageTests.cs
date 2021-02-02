@@ -14,7 +14,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.ExtendedStats
 {
-	public class ExtendedStatsAggregationUsageTests : AggregationUsageTestBase
+	public class ExtendedStatsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public ExtendedStatsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -77,7 +77,7 @@ namespace Tests.Aggregations.Metric.ExtendedStats
 	/// Asserts that stats sum is 0 (and not null) when matching document count is 0
 	/// </summary>
 	// hide
-	public class ExtendedStatsAggregationUsageDocCountZeroTests : AggregationUsageTestBase
+	public class ExtendedStatsAggregationUsageDocCountZeroTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public ExtendedStatsAggregationUsageDocCountZeroTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

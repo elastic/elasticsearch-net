@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations.Pipeline.AverageBucket
 {
-	public class AverageBucketAggregationUsageTests : AggregationUsageTestBase
+	public class AverageBucketAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public AverageBucketAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

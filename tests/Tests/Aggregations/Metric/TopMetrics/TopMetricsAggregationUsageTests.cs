@@ -24,7 +24,7 @@ namespace Tests.Aggregations.Metric.TopMetrics
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-top-metrics.html[Top Metrics Aggregation]
 	 */
 	[SkipVersion("<7.7.0", "Available in 7.7.0")]
-	public class TopMetricsAggregationUsageTests : AggregationUsageTestBase
+	public class TopMetricsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public TopMetricsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

@@ -20,7 +20,7 @@ namespace Tests.Aggregations.Pipeline.Normalize
 	 * NOTE: Valid for Elasticsearch 7.9.0+ with at least basic license level
 	 */
 	[SkipVersion("<7.9.0", "Introduced in 7.9.0")]
-	public class NormalizeAggregationUsageTests : AggregationUsageTestBase
+	public class NormalizeAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public NormalizeAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

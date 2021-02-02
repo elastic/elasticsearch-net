@@ -23,7 +23,7 @@ namespace Tests.Aggregations.Pipeline.MovingPercentiles
 	 * NOTE: Available in Elasticsearch 7.9.0+ with at least basic license level
 	 */
 	[SkipVersion("<7.9.0", "introduced in 7.9.0+")]
-	public class MovingPercentilesAggregationUsageTests : AggregationUsageTestBase
+	public class MovingPercentilesAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public MovingPercentilesAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
