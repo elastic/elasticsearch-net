@@ -13,7 +13,7 @@ open Microsoft.FSharp.Reflection
 
 let private getName a = match FSharpValue.GetUnionFields(a, a.GetType()) with | (case, _) -> case.Name   
 
-type TestSuite = Oss | XPack
+type TestSuite = Free | Platinum
 
 type YamlMap = Dictionary<Object,Object>
 type YamlValue = YamlDictionary of YamlMap | YamlString of string
