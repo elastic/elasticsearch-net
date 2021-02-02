@@ -4,8 +4,8 @@ STACK_VERSION:
   - 7.x-SNAPSHOT
 
 TEST_SUITE:
-  - oss
-  - xpack
+  - free
+  - platinum
 
 DOTNET_VERSION:
     - 5.0.100
