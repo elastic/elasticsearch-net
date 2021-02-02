@@ -8,23 +8,32 @@ using Elastic.Transport;
 
 namespace Nest
 {
-	internal class ResolvedRouteValues : Dictionary<string, string> { }
+	internal class ResolvedRouteValues : Dictionary<string, string>
+	{
+		internal static ResolvedRouteValues Empty = new(0);
+
+		public ResolvedRouteValues(int size) : base(size) { }
+	}
 
 	public class RouteValues : Dictionary<string, IUrlParameter>
 	{
-		// Not too happy with this, only exists because IndexRequest needs a resolved
-		// id to know if it has to send a PUT or POST.
-		internal ResolvedRouteValues Resolved { get; private set; }
+		/// <summary>
+		/// Used specifically by index requests to determine whether to use PUT or POST.
+		/// </summary>
+		internal bool ContainsId { get; private set;}
 
 		internal ResolvedRouteValues Resolve(IConnectionSettingsValues configurationValues)
 		{
-			var resolved = new ResolvedRouteValues();
+			if (Count == 0) return ResolvedRouteValues.Empty;
+			
+			var resolved = new ResolvedRouteValues(Count);
 			foreach (var kv in this)
 			{
 				var value = this[kv.Key].GetString(configurationValues);
-				if (!value.IsNullOrEmpty()) resolved[kv.Key] = value;
+				if (value.IsNullOrEmpty()) continue;
+				resolved[kv.Key] = value;
+				if (IsId(kv.Key)) ContainsId = true;
 			}
-			Resolved = resolved;
 			return resolved;
 		}
 
@@ -33,18 +42,19 @@ namespace Nest
 			switch (routeValue) {
 				case null when !required: {
 					if (!ContainsKey(name)) return this;
-
 					Remove(name);
-					Resolved = null; //invalidate cache
+					if (IsId(name)) ContainsId = false; // invalidate cache
 					return this;
 				}
 				case null: throw new ArgumentNullException(name, $"{name} is required to build a url to this API");
 				default:
 					this[name] = routeValue;
-					Resolved = null; //invalidate cache
+					if (IsId(name)) ContainsId = false; // invalidate cache
 					return this;
 			}
 		}
+
+		private static bool IsId(string key) => key.Equals("id", StringComparison.OrdinalIgnoreCase);
 
 		internal RouteValues Required(string route, IUrlParameter value) => Route(route, value);
 
