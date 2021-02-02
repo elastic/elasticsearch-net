@@ -17,7 +17,7 @@ let private openSourceResourcePath = "rest-api-spec/src/main/resources"
 let private xpackResourcesPath = "x-pack/plugin/src/test/resources"
 
 let private path namedSuite revision =
-    let path = match namedSuite with | Oss -> openSourceResourcePath | XPack -> xpackResourcesPath
+    let path = match namedSuite with | Free -> openSourceResourcePath | Platinum -> xpackResourcesPath
     sprintf "%s/%s/rest-api-spec/test" revision  path
     
 let TestGithubRootUrl namedSuite revision = sprintf "%s/tree/%s" rootListingUrl <| path namedSuite revision
@@ -40,7 +40,7 @@ let private download url = async {
     return yaml
 }
 let CachedOrDownload namedSuite revision folder file url = async {
-    let suite = match namedSuite with | Oss -> "oss" | XPack -> "xpack"
+    let suite = match namedSuite with | Free -> "free" | Platinum -> "platinum"
     let parent = (TemporaryPath revision suite).Force()
     let directory = Path.Combine(parent, folder)
     let file = Path.Combine(directory, file)

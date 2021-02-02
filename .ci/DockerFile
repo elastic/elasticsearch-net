@@ -1,8 +1,7 @@
-ARG DOTNET_VERSION=5.0.100
-FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION} AS elasticsearch-net-build
+ARG DOTNET_VERSION=5.0.102
+FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION}-1 AS elasticsearch-net-build
 
 WORKDIR /sln
-
 
 COPY ./*.sln ./nuget.config ./*.Build.props ./*.Build.targets ./
 
@@ -33,4 +32,3 @@ COPY . .
 
 # making sure enough git info is available inside the container
 RUN git rev-parse HEAD .
-
