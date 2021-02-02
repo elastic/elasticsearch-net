@@ -141,8 +141,8 @@ type TestRunner(client:IElasticLowLevelClient, version: string, suite: TestSuite
     
     member this.GlobalSetup () =
         match suite with
-        | Oss -> ignore()
-        | XPack ->
+        | Free -> ignore()
+        | Platinum ->
             let data = PostData.String @"{""password"":""x-pack-test-password"", ""roles"":[""superuser""]}"
             let r = client.Security.PutUser<DynamicResponse>("x_pack_rest_user", data)
             let userCreated = r.Success 
