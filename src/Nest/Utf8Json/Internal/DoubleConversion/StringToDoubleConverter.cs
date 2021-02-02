@@ -553,35 +553,29 @@ namespace Nest.Utf8Json
 
 			buffer[buffer_pos] = (byte)'\0';
 
-			double? converted;
-			if (read_as_double)
-			{
-				converted = StringToDouble.Strtod(new Vector(buffer, 0, buffer_pos), exponent);
-			}
-			else
-			{
-				converted = StringToDouble.Strtof(new Vector(buffer, 0, buffer_pos), exponent);
-			}
+			var converted = read_as_double
+				? StringToDouble.Strtod(new Vector(buffer, 0, buffer_pos), exponent)
+				: StringToDouble.Strtof(new Vector(buffer, 0, buffer_pos), exponent);
 
-			if (converted == null)
-			{
-				// read-again
-				processed_characters_count = (current - input);
+            if (converted == null)
+            {
+                // read-again
+                processed_characters_count = (current - input);
 
-				var fallbackbuffer = GetFallbackBuffer();
-				BinaryUtil.EnsureCapacity(ref _fallbackBuffer, 0, processed_characters_count);
-				var fallbackI = 0;
-				while (input != current)
-				{
-					fallbackbuffer[fallbackI++] = input.Value;
-					input++;
-				}
-				var laststr = Encoding.UTF8.GetString(fallbackbuffer, 0, fallbackI);
-				return double.Parse(laststr, CultureInfo.InvariantCulture);
-			}
+                var fallbackBuffer = GetFallbackBuffer();
+                BinaryUtil.EnsureCapacity(ref fallbackBuffer, 0, processed_characters_count);
+                var fallbackI = 0;
+                while (input != current)
+                {
+					fallbackBuffer[fallbackI++] = input.Value;
+                    input++;
+                }
+                var laststr = Encoding.UTF8.GetString(fallbackBuffer, 0, fallbackI);
+                return double.Parse(laststr, CultureInfo.InvariantCulture);
+            }
 
-			processed_characters_count = (current - input);
-			return sign ? -converted.Value : converted.Value;
-		}
-	}
+            processed_characters_count = (current - input);
+            return sign ? -converted.Value : converted.Value;
+        }
+    }
 }
