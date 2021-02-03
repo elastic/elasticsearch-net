@@ -99,6 +99,7 @@ namespace Elasticsearch.Net
 			Stream responseStream = null;
 			Exception ex = null;
 			string mimeType = null;
+			requestData.IsAsync = true;
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
@@ -231,6 +232,13 @@ namespace Elasticsearch.Net
 				else
 					data.Write(stream, requestData.ConnectionSettings);
 				stream.Position = 0;
+			}
+
+			if (requestData.MetaHeaderProvider is object) {
+				var value = requestData.MetaHeaderProvider.ProduceHeaderValue(requestData);
+
+				if (!string.IsNullOrEmpty(value))
+					requestMessage.Headers.TryAddWithoutValidation(requestData.MetaHeaderProvider.HeaderName, value);
 			}
 
 			return requestMessage;

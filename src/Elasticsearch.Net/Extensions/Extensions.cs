@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,16 @@ using System.Text;
 
 namespace Elasticsearch.Net
 {
+	internal static class EmptyReadOnly<TElement>
+	{
+		public static readonly IReadOnlyCollection<TElement> Collection = new ReadOnlyCollection<TElement>(new TElement[0]);
+	}
+
+	internal static class EmptyReadOnly<TKey, TValue>
+	{
+		public static readonly IReadOnlyDictionary<TKey, TValue> Dictionary = new ReadOnlyDictionary<TKey, TValue>(new Dictionary<TKey, TValue>(0));
+	}
+
 	internal static class Extensions
 	{
 		private const long MillisecondsInAWeek = MillisecondsInADay * 7;

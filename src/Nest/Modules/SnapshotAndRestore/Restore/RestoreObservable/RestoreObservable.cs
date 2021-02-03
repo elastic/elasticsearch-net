@@ -26,7 +26,11 @@ namespace Nest
 
 			_elasticClient = elasticClient;
 			_restoreRequest = restoreRequest;
+			
+			if (_restoreRequest.RequestParameters.RequestConfiguration is null)
+				_restoreRequest.RequestParameters.RequestConfiguration = new RequestConfiguration();
 
+			_restoreRequest.RequestParameters.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.RestoreHelperRequestMetaData());
 			_restoreStatusHumbleObject = new RestoreStatusHumbleObject(elasticClient, restoreRequest);
 			_restoreStatusHumbleObject.Completed += StopTimer;
 			_restoreStatusHumbleObject.Error += StopTimer;
@@ -179,10 +183,13 @@ namespace Nest
 							))
 						.ToArray();
 
-				var recoveryStatus = _elasticClient.RecoveryStatus(new RecoveryStatusRequest(indices)
-				{
+				var recoveryStatusRequest = new RecoveryStatusRequest(indices)
+				{					
 					Detailed = true,
-				});
+					RequestConfiguration = new RequestConfiguration()
+				};	
+				recoveryStatusRequest.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.RestoreHelperRequestMetaData());
+				var recoveryStatus = _elasticClient.RecoveryStatus(recoveryStatusRequest);
 
 				if (!recoveryStatus.IsValid)
 					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed getting recovery status.", recoveryStatus.ApiCall);

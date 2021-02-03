@@ -62,6 +62,11 @@ namespace Elasticsearch.Net
 		bool DisableDirectStreaming { get; }
 
 		/// <summary>
+		/// When set to true will disable sending the meta header on requests. Defaults to  false
+		/// </summary>
+		bool DisableMetaHeader { get; }
+
+		/// <summary>
 		/// This signals that we do not want to send initial pings to unknown/previously dead nodes
 		/// and just send the call straightaway
 		/// </summary>
@@ -229,5 +234,10 @@ namespace Elasticsearch.Net
 		#endif
 		/// </summary>
 		TimeSpan DnsRefreshTimeout { get; }
+
+		/// <summary>
+		/// Produces the client meta header for a request.
+		/// </summary>
+		MetaHeaderProvider MetaHeaderProvider { get; }
 	}
 }

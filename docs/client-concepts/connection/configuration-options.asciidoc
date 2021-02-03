@@ -64,6 +64,10 @@ Ensures the response bytes are always available on the `ElasticsearchResponse<T>
 +
 IMPORTANT: Depending on the registered serializer, this may cause the response to be buffered in memory first, potentially affecting performance.
 
+`DisableMetaHeader`::
+
+Disables the meta header which is included on all requests by default. This header contains lightweight information  about the client and runtime.
+
 `DisablePing`::
 
 When a node is used for the very first time or when it's used for the first time after it has been marked dead a ping with a very low timeout is send to the node to make sure that when it's still dead it reports it as fast as possible. You can disable these pings globally here if you rather have it fail on the possible slower original request
