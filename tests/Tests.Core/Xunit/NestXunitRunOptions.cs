@@ -7,6 +7,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using Elastic.Elasticsearch.Xunit;
 using Tests.Configuration;
@@ -28,19 +29,15 @@ namespace Tests.Core.Xunit
 			Generators.Initialize();
 		}
 
-		public override void OnBeforeTestsRun()
-		{
-			//TestConfiguration.Instance.DumpConfiguration();
-		}
+		public override void OnBeforeTestsRun() => TestConfiguration.Instance.DumpConfiguration();
 
 		public override void OnTestsFinished(Dictionary<string, Stopwatch> clusterTotals, ConcurrentBag<Tuple<string, string>> failedCollections)
 		{
-			// DumpClusterTotals(clusterTotals);
-			// DumpSeenDeprecations();
-			// DumpFailedCollections(failedCollections);
+			DumpClusterTotals(clusterTotals);
+			DumpSeenDeprecations();
+			DumpFailedCollections(failedCollections);
 		}
 
-		// ReSharper disable once UnusedMember.Local
 		private static void DumpClusterTotals(Dictionary<string, Stopwatch> clusterTotals)
 		{
 			Console.WriteLine("--------");
@@ -49,7 +46,6 @@ namespace Tests.Core.Xunit
 			Console.WriteLine("--------");
 		}
 
-		// ReSharper disable once UnusedMember.Local
 		private static void DumpSeenDeprecations()
 		{
 			if (XunitRunState.SeenDeprecations.Count == 0) return;
@@ -60,10 +56,20 @@ namespace Tests.Core.Xunit
 			Console.WriteLine("--------");
 		}
 
-		// ReSharper disable once UnusedMember.Local
 		private static void DumpFailedCollections(ConcurrentBag<Tuple<string, string>> failedCollections)
 		{
-			if (failedCollections.Count <= 0) return;
+			if (failedCollections.Count <= 0)
+			{
+				var config = TestConfiguration.Instance;
+				var runningIntegrations = config.RunIntegrationTests;
+				Console.ForegroundColor = ConsoleColor.Yellow;
+				Console.WriteLine("---Reproduce: -----");
+				var reproduceLine = ReproduceCommandLine(failedCollections, config, runningIntegrations);
+				Console.WriteLine(reproduceLine);
+				Console.WriteLine("---------------");
+				Console.ResetColor();
+				return;
+			};
 
 			Console.ForegroundColor = ConsoleColor.Red;
 			Console.WriteLine("Failed collections:");
@@ -100,7 +106,7 @@ namespace Tests.Core.Xunit
 			bool runningIntegrations
 		)
 		{
-			var sb = new StringBuilder(".\\build.bat ")
+			var sb = new StringBuilder(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".\\build.bat " : "./build.sh ")
 				.Append("seed:").Append(config.Seed).Append(" ");
 
 			AppendConfig(nameof(RandomConfiguration.SourceSerializer), config.Random.SourceSerializer, sb);
