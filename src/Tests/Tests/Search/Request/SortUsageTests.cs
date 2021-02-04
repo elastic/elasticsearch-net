@@ -14,6 +14,7 @@ namespace Tests.Search.Request
 	 * Allows to add one or more sort on specific fields. Each sort can be reversed as well.
 	 * The sort is defined on a per field level, with special field name for `_score` to sort by score.
 	 */
+	[SkipVersion("<6.1.0", "Nested sort parameter not available prior to 6.1.0")]
 	public class SortUsageTests : SearchUsageTestBase
 	{
 		public SortUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
