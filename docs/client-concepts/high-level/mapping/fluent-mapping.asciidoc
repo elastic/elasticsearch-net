@@ -414,7 +414,7 @@ var createIndexResponse = _client.Indices.Create("myindex", c => c
 }
 ----
 
-It's not necessary to define a type for the runtime field mapping. Runtime fields can optionally be defined
+It's not necessary to define a type for the runtime field mapping. Runtime fields can optionally be defined 
 by providing a `string` name.
 
 [source,csharp]
