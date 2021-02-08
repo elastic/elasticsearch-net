@@ -93,6 +93,11 @@ namespace Elasticsearch.Net
 		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
 		/// </summary>
 		bool ThrowExceptions { get; set; }
+
+		/// <summary>
+		/// Holds additional meta data about the request.
+		/// </summary>
+		RequestMetaData RequestMetaData { get; set; }
 	}
 
 	public class RequestConfiguration : IRequestConfiguration
@@ -113,6 +118,7 @@ namespace Elasticsearch.Net
 		public string OpaqueId { get; set; }
 		public TimeSpan? PingTimeout { get; set; }
 		public TimeSpan? RequestTimeout { get; set; }
+		public RequestMetaData RequestMetaData { get; set; }
 
 		/// <summary>
 		/// Submit the request on behalf in the context of a different user
@@ -162,6 +168,7 @@ namespace Elasticsearch.Net
 		string IRequestConfiguration.RunAs { get; set; }
 		private IRequestConfiguration Self => this;
 		bool IRequestConfiguration.ThrowExceptions { get; set; }
+		RequestMetaData IRequestConfiguration.RequestMetaData { get; set; }
 
 		/// <summary>
 		/// Submit the request on behalf in the context of a different shield user
@@ -284,5 +291,12 @@ namespace Elasticsearch.Net
 		/// <summary> Use the following client certificate to authenticate this request to Elasticsearch </summary>
 		public RequestConfigurationDescriptor ClientCertificate(string certificatePath) =>
 			ClientCertificates(new X509Certificate2Collection { new X509Certificate(certificatePath) });
+
+		/// <inheritdoc cref="IRequestConfiguration.RequestMetaData" />
+		public RequestConfigurationDescriptor RequestMetaData(RequestMetaData metaData)
+		{
+			Self.RequestMetaData = metaData;
+			return this;
+		}
 	}
 }

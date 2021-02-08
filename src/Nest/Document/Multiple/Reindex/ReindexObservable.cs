@@ -123,6 +123,13 @@ namespace Nest
 					bulk.AddOperation(item);
 				}
 			};
+			
+			// Mark the parent for the bulk all request as this reindex helper
+			if (bulkAllRequest is IHelperCallable helperCallable)
+			{
+				var parentMetaData = RequestMetaDataFactory.ReindexHelperRequestMetaData();
+				helperCallable.ParentMetaData = parentMetaData;
+			}
 
 			var observableBulk = _client.BulkAll(bulkAllRequest, _compositeCancelToken);
 			return observableBulk;
@@ -169,7 +176,8 @@ namespace Nest
 				RoutingField = scrollAll.RoutingField,
 				MaxDegreeOfParallelism = scrollAll.MaxDegreeOfParallelism ?? slices,
 				Search = scrollAll.Search,
-				BackPressure = backPressure
+				BackPressure = backPressure,
+				ParentMetaData = RequestMetaDataFactory.ReindexHelperRequestMetaData()
 			};
 
 			var scrollObservable = _client.ScrollAll<TSource>(scrollAllRequest, _compositeCancelToken);
@@ -217,11 +225,14 @@ namespace Nest
 		/// <returns>Either the number of shards from to source or the target as a slice hint to ScrollAll</returns>
 		private int? CreateIndexIfNeeded(Indices fromIndices, string resolvedTo)
 		{
+			var requestMetaData = RequestMetaDataFactory.ReindexHelperRequestMetaData();
+
 			if (_reindexRequest.OmitIndexCreation) return null;
 
 			var pointsToSingleSourceIndex = fromIndices.Match((a) => false, (m) => m.Indices.Count == 1);
-			var targetExistsAlready = _client.IndexExists(resolvedTo);
-			if (targetExistsAlready.Exists) return null;
+			var targetExistsAlready = _client.IndexExists(resolvedTo, e => e.RequestConfiguration(rc => rc.RequestMetaData(requestMetaData)));
+			if (targetExistsAlready.Exists)
+				return null;
 
 			_compositeCancelToken.ThrowIfCancellationRequested();
 			IndexState originalIndexState = null;
@@ -229,7 +240,7 @@ namespace Nest
 
 			if (pointsToSingleSourceIndex)
 			{
-				var getIndexResponse = _client.GetIndex(resolvedFrom);
+				var getIndexResponse = _client.GetIndex(resolvedFrom, i => i.RequestConfiguration(rc => rc.RequestMetaData(requestMetaData)));
 				_compositeCancelToken.ThrowIfCancellationRequested();
 				originalIndexState = getIndexResponse.Indices[resolvedFrom];
 				if (_reindexRequest.OmitIndexCreation)
@@ -240,6 +251,12 @@ namespace Nest
 				(originalIndexState != null
 					? new CreateIndexRequest(resolvedTo, originalIndexState)
 					: new CreateIndexRequest(resolvedTo));
+
+			if (createIndexRequest.RequestParameters.RequestConfiguration == null)
+				createIndexRequest.RequestParameters.RequestConfiguration = new RequestConfiguration();
+
+			createIndexRequest.RequestParameters.RequestConfiguration.SetRequestMetaData(requestMetaData);
+
 			var createIndexResponse = _client.CreateIndex(createIndexRequest);
 			_compositeCancelToken.ThrowIfCancellationRequested();
 			if (!createIndexResponse.IsValid)

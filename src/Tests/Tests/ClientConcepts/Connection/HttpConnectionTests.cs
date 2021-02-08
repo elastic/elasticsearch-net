@@ -1,6 +1,8 @@
 ﻿#if DOTNETCORE
 using System;
+using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
@@ -60,7 +62,9 @@ namespace Tests.ClientConcepts.Connection
 			TimeSpan requestTimeout = default(TimeSpan),
 			Uri proxyAddress = null,
 			bool disableAutomaticProxyDetection = false,
-			bool httpCompression = false
+			bool httpCompression = false,
+			bool disableMetaHeader = false,
+			Action<RequestMetaData> requestMetaData = null
 		)
 		{
 			if (requestTimeout == default(TimeSpan)) requestTimeout = TimeSpan.FromSeconds(10);
@@ -68,12 +72,22 @@ namespace Tests.ClientConcepts.Connection
 			var connectionSettings = new ConnectionSettings(new Uri("http://localhost:9200"))
 				.RequestTimeout(requestTimeout)
 				.DisableAutomaticProxyDetection(disableAutomaticProxyDetection)
-				.EnableHttpCompression(httpCompression);
+				.EnableHttpCompression(httpCompression)
+				.DisableMetaHeader(disableMetaHeader);
 
 			if (proxyAddress != null)
 				connectionSettings.Proxy(proxyAddress, null, null);
 
-			var requestData = new RequestData(HttpMethod.GET, "/", null, connectionSettings, new PingRequestParameters(),
+			var requestParameters = new SearchRequestParameters();
+
+			if (requestMetaData is object)
+			{
+				requestParameters.RequestConfiguration ??= new RequestConfiguration();
+				requestParameters.RequestConfiguration.RequestMetaData ??= new RequestMetaData();
+				requestMetaData(requestParameters.RequestConfiguration.RequestMetaData);
+			}
+
+			var requestData = new RequestData(HttpMethod.GET, "/", null, connectionSettings, requestParameters, 
 				new MemoryStreamFactory())
 			{
 				Node = new Node(new Uri("http://localhost:9200"))
@@ -109,8 +123,64 @@ namespace Tests.ClientConcepts.Connection
 			connection.LastUsedHttpClientHandler.UseProxy.Should().BeTrue();
 		}
 
+		[U] public async Task HttpClientSetsMetaHeaderWhenNotDisabled()
+		{
+			var regex = new Regex(@"^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$");
+
+			var requestData = CreateRequestData();
+			var connection = new TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Headers.TryGetValues("x-elastic-client-meta", out var headerValue).Should().BeTrue();
+				headerValue.Should().HaveCount(1);
+				headerValue.Single().Should().NotBeNullOrEmpty();
+				regex.Match(headerValue.Single()).Success.Should().BeTrue();
+			});
+
+			connection.Request<StringResponse>(requestData);
+			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+		}
+
+		[U] public async Task HttpClientSetsMetaHeaderWithHelperWhenNotDisabled()
+		{
+			var regex = new Regex(@"^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$");
+
+			var requestData = CreateRequestData(requestMetaData: m => m.TryAddMetaData("helper", "r"));
+			var connection = new TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Headers.TryGetValues("x-elastic-client-meta", out var headerValue).Should().BeTrue();
+				headerValue.Should().HaveCount(1);
+				headerValue.Single().Should().NotBeNullOrEmpty();
+				headerValue.Single().Should().EndWith(",h=r");
+				regex.Match(headerValue.Single()).Success.Should().BeTrue();
+			});
+
+			connection.Request<StringResponse>(requestData);
+			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+		}
+
+		[U] public async Task HttpClientShouldNotSetMetaHeaderWhenDisabled()
+		{
+			var requestData = CreateRequestData(disableMetaHeader: true);
+			var connection = new TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Headers.TryGetValues("x-elastic-client-meta", out var headerValue).Should().BeFalse();
+			});
+
+			connection.Request<StringResponse>(requestData);
+			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+		}
+
 		public class TestableHttpConnection : HttpConnection
 		{
+			private readonly Action<HttpResponseMessage> _response;
+			
+			private TestableClientHandler _handler;
+			
+			public TestableHttpConnection(Action<HttpResponseMessage> response) => _response = response;
+
+			public TestableHttpConnection() {
+			}
+
 			public int CallCount { get; private set; }
 			public int ClientCount => Clients.Count;
 
@@ -130,8 +200,21 @@ namespace Tests.ClientConcepts.Connection
 
 			protected override HttpClientHandler CreateHttpClientHandler(RequestData requestData)
 			{
-				LastUsedHttpClientHandler = base.CreateHttpClientHandler(requestData);
-				return LastUsedHttpClientHandler;
+				_handler = new TestableClientHandler(base.CreateHttpClientHandler(requestData), _response);
+				return _handler;
+			}
+		}
+
+		public class TestableClientHandler : HttpClientHandler {
+			private readonly Action<HttpResponseMessage> _responseAction;
+
+			public TestableClientHandler(HttpMessageHandler handler, Action<HttpResponseMessage> responseAction) =>
+				_responseAction = responseAction;
+
+			protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) {
+				var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+				_responseAction?.Invoke(response);
+				return response;
 			}
 		}
 	}

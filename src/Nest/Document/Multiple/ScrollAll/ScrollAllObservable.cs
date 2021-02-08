@@ -29,6 +29,20 @@ namespace Nest
 		{
 			_scrollAllRequest = scrollAllRequest;
 			_searchRequest = scrollAllRequest?.Search ?? new SearchRequest<T>();
+
+			if (_searchRequest.RequestParameters.RequestConfiguration is null)
+				_searchRequest.RequestParameters.RequestConfiguration = new RequestConfiguration();
+			
+			switch (_scrollAllRequest)
+			{
+				case IHelperCallable helperCallable when helperCallable.ParentMetaData is object:
+					_searchRequest.RequestParameters.RequestConfiguration.SetRequestMetaData(helperCallable.ParentMetaData);
+					break;
+				default:
+					_searchRequest.RequestParameters.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.ScrollHelperRequestMetaData());
+					break;
+			}
+
 			if (_searchRequest.Sort == null)
 				_searchRequest.Sort = SortField.ByDocumentOrder;
 			_searchRequest.RequestParameters.Scroll = _scrollAllRequest.ScrollTime.ToTimeSpan();
@@ -107,6 +121,18 @@ namespace Nest
 				});
 				page++;
 				var request = new ScrollRequest(searchResult.ScrollId, scroll);
+				if (request.RequestConfiguration is null)
+					request.RequestConfiguration = new RequestConfiguration();
+
+				switch (_scrollAllRequest)
+				{
+					case IHelperCallable helperCallable when helperCallable.ParentMetaData is object:
+						request.RequestConfiguration.SetRequestMetaData(helperCallable.ParentMetaData);
+						break;
+					default:
+						request.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.ScrollHelperRequestMetaData());
+						break;
+				}
 				searchResult = await _client.ScrollAsync<T>(request, _compositeCancelToken).ConfigureAwait(false);
 				ThrowOnBadSearchResult(searchResult, slice, page);
 			}

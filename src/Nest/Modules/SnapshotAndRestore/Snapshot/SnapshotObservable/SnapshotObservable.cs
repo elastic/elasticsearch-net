@@ -25,6 +25,9 @@ namespace Nest
 
 			_elasticClient = elasticClient;
 			_snapshotRequest = snapshotRequest;
+			if (_snapshotRequest.RequestParameters.RequestConfiguration is null)
+				_snapshotRequest.RequestParameters.RequestConfiguration = new RequestConfiguration();
+			_snapshotRequest.RequestParameters.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.SnapshotHelperRequestMetaData());
 			_snapshotStatusHumbleObject = new SnapshotStatusHumbleObject(elasticClient, snapshotRequest);
 			_snapshotStatusHumbleObject.Completed += StopTimer;
 			_snapshotStatusHumbleObject.Error += StopTimer;
@@ -165,9 +168,15 @@ namespace Nest
 		{
 			try
 			{
+				var snapshotRequest = new SnapshotStatusRequest(_snapshotRequest.RepositoryName, _snapshotRequest.Snapshot)
+				{
+					RequestConfiguration = new RequestConfiguration()
+				};
+
+				snapshotRequest.RequestConfiguration.SetRequestMetaData(RequestMetaDataFactory.SnapshotHelperRequestMetaData());
+
 				var snapshotStatusResponse =
-					_elasticClient.SnapshotStatus(new SnapshotStatusRequest(_snapshotRequest.RepositoryName,
-						_snapshotRequest.Snapshot));
+					_elasticClient.SnapshotStatus(snapshotRequest);
 
 				if (!snapshotStatusResponse.IsValid)
 					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed to get snapshot status.",

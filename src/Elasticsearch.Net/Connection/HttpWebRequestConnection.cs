@@ -82,6 +82,7 @@ namespace Elasticsearch.Net
 			Stream responseStream = null;
 			Exception ex = null;
 			string mimeType = null;
+			requestData.IsAsync = true;
 			try
 			{
 				var data = requestData.PostData;
@@ -194,6 +195,13 @@ namespace Elasticsearch.Net
 
 			if (requestData.Headers != null && requestData.Headers.HasKeys())
 				request.Headers.Add(requestData.Headers);
+
+			if (requestData.MetaHeaderProvider is object) {
+				var value = requestData.MetaHeaderProvider.ProduceHeaderValue(requestData);
+
+				if (!string.IsNullOrEmpty(value))
+					request.Headers.Add(requestData.MetaHeaderProvider.HeaderName, requestData.MetaHeaderProvider.ProduceHeaderValue(requestData));
+			}
 
 			var timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
 			request.Timeout = timeout;

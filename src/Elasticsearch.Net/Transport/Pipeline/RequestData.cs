@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
@@ -69,6 +70,8 @@ namespace Elasticsearch.Net
 			AllowedStatusCodes = local?.AllowedStatusCodes ?? Enumerable.Empty<int>();
 			ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
 			UserAgent = global.UserAgent;
+			MetaHeaderProvider = global.MetaHeaderProvider;
+			RequestMetaData = local?.RequestMetaData?.Items ?? EmptyReadOnly<string, string>.Dictionary;
 		}
 
 		public string Accept { get; }
@@ -110,6 +113,10 @@ namespace Elasticsearch.Net
 
 		public Uri Uri => Node != null ? new Uri(Node.Uri, PathAndQuery) : null;
 		public TimeSpan DnsRefreshTimeout { get; }
+
+		public MetaHeaderProvider MetaHeaderProvider { get; }
+		public IReadOnlyDictionary<string, string> RequestMetaData { get; }
+		public bool IsAsync { get; set; }
 
 		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request)
 		{

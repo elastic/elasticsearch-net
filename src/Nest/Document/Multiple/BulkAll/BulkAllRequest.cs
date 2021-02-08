@@ -111,7 +111,7 @@ namespace Nest
 		Action<IBulkResponse> BulkResponseCallback { get; set; }
 	}
 
-	public class BulkAllRequest<T> : IBulkAllRequest<T>
+	public class BulkAllRequest<T> : IBulkAllRequest<T>, IHelperCallable
 		where T : class
 	{
 		public BulkAllRequest(IEnumerable<T> documents)
@@ -180,9 +180,13 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Action<IBulkResponse> BulkResponseCallback { get; set; }
+
+		internal RequestMetaData ParentMetaData { get; set; }
+
+		RequestMetaData IHelperCallable.ParentMetaData { get => ParentMetaData; set => ParentMetaData = value; }
 	}
 
-	public class BulkAllDescriptor<T> : DescriptorBase<BulkAllDescriptor<T>, IBulkAllRequest<T>>, IBulkAllRequest<T>
+	public class BulkAllDescriptor<T> : DescriptorBase<BulkAllDescriptor<T>, IBulkAllRequest<T>>, IBulkAllRequest<T>, IHelperCallable
 		where T : class
 	{
 		private readonly IEnumerable<T> _documents;
@@ -215,6 +219,7 @@ namespace Nest
 		TypeName IBulkAllRequest<T>.Type { get; set; }
 		int? IBulkAllRequest<T>.WaitForActiveShards { get; set; }
 		Action<IBulkResponse> IBulkAllRequest<T>.BulkResponseCallback { get; set; }
+		RequestMetaData IHelperCallable.ParentMetaData { get; set; }
 
 		/// <inheritdoc cref="IBulkAllRequest{T}.MaxDegreeOfParallelism" />
 		public BulkAllDescriptor<T> MaxDegreeOfParallelism(int? parallelism) =>
