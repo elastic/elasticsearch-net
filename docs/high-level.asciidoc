@@ -211,8 +211,6 @@ include::search/scrolling-documents.asciidoc[]
 
 include::{output-dir}/covariant-hits/covariant-search-results.asciidoc[]
 
-include::search/searching-runtime-fields.asciidoc[]
-
 [[aggregations]]
 == Aggregations
 
