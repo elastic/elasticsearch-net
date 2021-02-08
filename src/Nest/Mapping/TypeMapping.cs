@@ -98,6 +98,7 @@ namespace Nest
 
 		/// <summary>
 		/// Specifies runtime fields for the mapping.
+		/// <para>This functionality is in beta and is subject to change. </para>
 		/// </summary>
 		[DataMember(Name = "runtime")]
 		IRuntimeFields RuntimeFields { get; set; }
@@ -269,6 +270,7 @@ namespace Nest
 		public TypeMappingDescriptor<T> RoutingField(Func<RoutingFieldDescriptor<T>, IRoutingField> routingFieldSelector) =>
 			Assign(routingFieldSelector, (a, v) => a.RoutingField = v?.Invoke(new RoutingFieldDescriptor<T>()));
 
+		/// <inheritdoc cref="ITypeMapping.RuntimeFields" />
 		public TypeMappingDescriptor<T> RuntimeFields(Func<RuntimeFieldsDescriptor<T>, IPromise<IRuntimeFields>> runtimeFieldsSelector) =>
 			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor<T>())?.Value);
 
