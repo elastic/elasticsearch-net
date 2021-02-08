@@ -182,6 +182,7 @@ namespace Nest
 
 		/// <summary>
 		/// Specifies runtime fields which exist only as part of the query.
+		/// <para>This functionality is in beta and is subject to change. </para>
 		/// </summary>
 		[DataMember(Name = "runtime_mappings")]
 		IRuntimeFields RuntimeFields { get; set; }
