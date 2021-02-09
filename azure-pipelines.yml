@@ -18,7 +18,7 @@ jobs:
   steps:
   - task: UseDotNet@2
     inputs:
-       version: '5.0.100'
+       version: '5.0.102'
   - script: ./build.sh documentation
     displayName: 'Generate Documentation'
   - script: |
@@ -30,7 +30,7 @@ jobs:
   steps:
   - task: UseDotNet@2
     inputs:
-        version: '5.0.100'
+        version: '5.0.102'
   - script: ./build.sh test-one
     displayName: 'build and unit test'
   - task: PublishTestResults@2
@@ -62,7 +62,7 @@ jobs:
   steps:
   - task: UseDotNet@2
     inputs:
-      version: '5.0.100'
+      version: '5.0.102'
   - script: build.bat canary
     displayName: 'build and unit test'
   - task: PublishTestResults@2
@@ -96,13 +96,19 @@ jobs:
       es77:
         esVersion: '7.7.0'
       es78:
-        esVersion: '7.8.0-SNAPSHOT'
+        esVersion: '7.8.0'
+      es79:
+        esVersion: '7.9.0'
+      es710:
+        esVersion: '7.10.0'
+      es711:
+        esVersion: '7.11.0-SNAPSHOT'
       latest7:
         esVersion: 'latest-7'
   steps:
       - task: UseDotNet@2
         inputs:
-            version: '5.0.100'
+            version: '5.0.102'
       - script: 'build.bat integrate-one $(esVersion) "readonly,writable,bool,xpack"'
         displayName: '$(esVersion) windows integration tests'
       - task: PublishTestResults@2
@@ -136,13 +142,19 @@ jobs:
         es77:
           esVersion: '7.7.0'
         es78:
-          esVersion: '7.8.0-SNAPSHOT'
+          esVersion: '7.8.0'
+        es79:
+          esVersion: '7.9.0'
+        es710:
+          esVersion: '7.10.0'
+        es711:
+          esVersion: '7.11.0-SNAPSHOT'
         latest7:
           esVersion: 'latest-7'
   steps:
       - task: UseDotNet@2
         inputs:
-            version: '5.0.100'
+            version: '5.0.102'
       - script: './build.sh integrate-one $(esVersion) "readonly,writable"'
         displayName: '$(esVersion) linux integration tests'
       - task: PublishTestResults@2
