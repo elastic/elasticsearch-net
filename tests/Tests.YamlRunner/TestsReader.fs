@@ -150,6 +150,8 @@ let private mapDo section (operation:YamlMap) =
         | None -> None
     
     let warnings = tryPickList<string, string> operation "warnings" id
+    // TODO: we don't support this feature yet but do parse it out so we don't crash our yaml parser
+    let allowedWarnings = tryPickList<string, string> operation "allowed_warnings" id
     let nodeSelector = mapNodeSelector operation
     
     let last = operation.Last()
@@ -161,6 +163,7 @@ let private mapDo section (operation:YamlMap) =
         ApiCall = (lastKey, lastValue)
         Catch = catch
         Warnings = warnings
+        AllowedWarnings = allowedWarnings
         NodeSelector = nodeSelector
         Headers = headers
         AutoFail = match section with | "setup" | "teardown" -> false | _ -> false
