@@ -33,6 +33,7 @@ namespace Tests.ClientConcepts.Connection
 				yield return new Project { Name = $"project-{i}" };
 		}
 
+		[SkipVersion("<8.0.0", "Skipping for flight recorder export generates too much of the same")]
 		[I] public async Task IndexAndSearchABunch()
 		{
 			const int requestsPerIteration = 1000;

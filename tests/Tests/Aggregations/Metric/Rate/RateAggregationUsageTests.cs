@@ -25,6 +25,9 @@ namespace Tests.Aggregations.Metric.Rate
 	{
 		public RateAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			by_date = new
@@ -94,6 +97,9 @@ namespace Tests.Aggregations.Metric.Rate
 	public class RateAggregationWithoutModeUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public RateAggregationWithoutModeUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override object AggregationJson => new
 		{

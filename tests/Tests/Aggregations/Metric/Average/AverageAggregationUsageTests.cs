@@ -18,6 +18,9 @@ namespace Tests.Aggregations.Metric.Average
 	{
 		public AverageAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => base.ClientUsage();
+
 		protected override object AggregationJson => new
 		{
 			average_commits = new

@@ -27,6 +27,9 @@ namespace Tests.Aggregations.Pipeline.MovingPercentiles
 	{
 		public MovingPercentilesAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			projects_started_per_month = new

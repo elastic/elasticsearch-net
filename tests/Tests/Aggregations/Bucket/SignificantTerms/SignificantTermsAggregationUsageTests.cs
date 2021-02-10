@@ -29,6 +29,9 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	{
 		public SignificantTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			significant_names = new
@@ -87,6 +90,9 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	public class SignificantTermsIncludePatternAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public SignificantTermsIncludePatternAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override object AggregationJson => new
 		{
@@ -150,6 +156,9 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	{
 		public SignificantTermsExcludeExactValuesAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			significant_names = new
@@ -211,6 +220,9 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	public class NumericSignificantTermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public NumericSignificantTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override object AggregationJson => new
 		{

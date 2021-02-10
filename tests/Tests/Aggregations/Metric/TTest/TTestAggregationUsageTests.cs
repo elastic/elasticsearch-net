@@ -29,6 +29,9 @@ namespace Tests.Aggregations.Metric.TTest
 	{
 		public TTestAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			commits_visibility = new

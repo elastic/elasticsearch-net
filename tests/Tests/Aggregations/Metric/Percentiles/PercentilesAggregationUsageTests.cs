@@ -17,6 +17,9 @@ namespace Tests.Aggregations.Metric.Percentiles
 	{
 		public PercentilesAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			commits_outlier = new
@@ -78,6 +81,9 @@ namespace Tests.Aggregations.Metric.Percentiles
 	public class PercentilesAggregationNonKeyedValuesUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public PercentilesAggregationNonKeyedValuesUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override object AggregationJson => new
 		{

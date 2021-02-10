@@ -16,6 +16,9 @@ namespace Tests.Aggregations.Bucket.AdjacencyMatrix
 	{
 		public AdjacencyMatrixUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			interactions = new

@@ -83,11 +83,22 @@ namespace Tests.Aggregations
 			(client, r) => client.Search<Project>(r),
 			(client, r) => client.SearchAsync<Project>(r)
 		);
+
+		protected LazyResponses SetupCalls() => Calls(
+			(client, f) => client.Search(f),
+			(client, f) => client.SearchAsync(f),
+			(client, r) => client.Search<Project>(r),
+			(client, r) => client.SearchAsync<Project>(r)
+		);
+
 	}
 
 	public abstract class ProjectsOnlyAggregationUsageTestBase : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		protected ProjectsOnlyAggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override Nest.Indices AgainstIndex => DefaultSeeder.ProjectsAliasFilter;
 		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/_search";

@@ -24,6 +24,9 @@ namespace Tests.Aggregations.Bucket.Terms
 	{
 		public TermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			states = new
@@ -124,6 +127,9 @@ namespace Tests.Aggregations.Bucket.Terms
 	{
 		public TermsAggregationIncludePatternUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			states = new
@@ -219,6 +225,9 @@ namespace Tests.Aggregations.Bucket.Terms
 	public class TermsAggregationIncludeExactValuesUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public TermsAggregationIncludeExactValuesUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override object AggregationJson => new
 		{
@@ -320,6 +329,9 @@ namespace Tests.Aggregations.Bucket.Terms
 	public class PartitionTermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public PartitionTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override object AggregationJson => new
 		{

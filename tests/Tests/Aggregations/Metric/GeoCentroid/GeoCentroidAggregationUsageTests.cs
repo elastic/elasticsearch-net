@@ -23,6 +23,9 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 	{
 		public GeoCentroidAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			centroid = new
@@ -65,6 +68,9 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 	public class NestedGeoCentroidAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public NestedGeoCentroidAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override object AggregationJson => new
 		{
@@ -127,6 +133,9 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 	public class GeoCentroidNoResultsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public GeoCentroidNoResultsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override object AggregationJson => new
 		{

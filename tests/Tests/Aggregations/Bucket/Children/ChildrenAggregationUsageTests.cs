@@ -20,6 +20,9 @@ namespace Tests.Aggregations.Bucket.Children
 	{
 		public ChildrenAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			name_of_child_agg = new

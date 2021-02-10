@@ -196,7 +196,7 @@ namespace Nest
 			{
 				return;
 			}
-			var testCode = frames
+			var framesFilter = frames
 				.Where(f =>
 				{
 					var path = f.GetFileName();
@@ -204,7 +204,10 @@ namespace Nest
 						&& path.Contains("Tests" + Path.DirectorySeparatorChar)
 						&& !path.Contains("Framework");
 				})
-				.FirstOrDefault();
+				.OrderByDescending(f=>f.GetFileName()?.Length ?? 0)
+				.ToArray();
+
+			var testCode = framesFilter.FirstOrDefault();
 
 			if (testCode != null)
 			{

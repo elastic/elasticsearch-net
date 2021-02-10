@@ -19,6 +19,9 @@ namespace Tests.Aggregations.Bucket.IpRange
 	{
 		public IpRangeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			ip_ranges = new

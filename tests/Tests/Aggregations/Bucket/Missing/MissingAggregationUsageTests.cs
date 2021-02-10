@@ -16,6 +16,9 @@ namespace Tests.Aggregations.Bucket.Missing
 	{
 		public MissingAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			projects_without_a_description = new

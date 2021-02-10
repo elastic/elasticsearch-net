@@ -28,6 +28,9 @@ namespace Tests.Aggregations.Bucket.Filter
 
 		public FilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			bethels_projects = new
@@ -91,6 +94,9 @@ namespace Tests.Aggregations.Bucket.Filter
 	{
 		public EmptyFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			empty_filter = new
@@ -131,6 +137,9 @@ namespace Tests.Aggregations.Bucket.Filter
 		private readonly string _ctxNumberofCommits = "doc['numberOfCommits'].value > 0";
 
 		public InlineScriptFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override object AggregationJson => new
 		{

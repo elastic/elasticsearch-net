@@ -18,6 +18,9 @@ namespace Tests.Aggregations.Metric.ExtendedStats
 	{
 		public ExtendedStatsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			commit_stats = new
@@ -80,6 +83,9 @@ namespace Tests.Aggregations.Metric.ExtendedStats
 	public class ExtendedStatsAggregationUsageDocCountZeroTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public ExtendedStatsAggregationUsageDocCountZeroTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		// a query that no docs will match
 		protected override QueryContainer QueryScope => base.QueryScope &&

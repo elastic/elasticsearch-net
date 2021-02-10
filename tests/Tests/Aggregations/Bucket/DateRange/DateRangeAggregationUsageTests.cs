@@ -28,6 +28,9 @@ namespace Tests.Aggregations.Bucket.DateRange
 	{
 		public DateRangeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			projects_date_ranges = new

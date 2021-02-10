@@ -18,6 +18,9 @@ namespace Tests.Aggregations.Bucket.Histogram
 	{
 		public HistogramAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			commits = new
@@ -76,6 +79,9 @@ namespace Tests.Aggregations.Bucket.Histogram
 		private const double HardBoundsMaximum = 300;
 
 		public HistogramAggregationWithHardBoundsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override object AggregationJson => new
 		{

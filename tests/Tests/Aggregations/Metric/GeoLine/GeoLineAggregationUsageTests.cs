@@ -15,7 +15,7 @@ using static Nest.Infer;
 namespace Tests.Aggregations.Metric.GeoLine
 {
 	/**
-	 * The geo_line aggregation aggregates all geo_point values within a bucket into a LineString ordered by the chosen sort field. 
+	 * The geo_line aggregation aggregates all geo_point values within a bucket into a LineString ordered by the chosen sort field.
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-geo-line.html[Geo-Line Aggregation].
 	*/
@@ -23,6 +23,9 @@ namespace Tests.Aggregations.Metric.GeoLine
 	public class GeoLineAggregationUsageTests : AggregationUsageTestBase<XPackCluster>
 	{
 		public GeoLineAggregationUsageTests(XPackCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override object AggregationJson => new
 		{

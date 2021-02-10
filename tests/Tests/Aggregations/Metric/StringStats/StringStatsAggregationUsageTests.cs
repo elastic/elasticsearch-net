@@ -19,6 +19,9 @@ namespace Tests.Aggregations.Metric.StringStats
 	{
 		public StringStatsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			name_stats = new
@@ -56,6 +59,9 @@ namespace Tests.Aggregations.Metric.StringStats
 	public class StringStatsWithDistributionAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public StringStatsWithDistributionAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override object AggregationJson => new
 		{

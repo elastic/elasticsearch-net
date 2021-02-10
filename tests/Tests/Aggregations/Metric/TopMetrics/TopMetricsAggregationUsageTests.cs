@@ -28,6 +28,9 @@ namespace Tests.Aggregations.Metric.TopMetrics
 	{
 		public TopMetricsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			tm = new

@@ -31,6 +31,9 @@ namespace Tests.Aggregations.Metric.WeightedAverage
 	{
 		public WeightedAverageAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			weighted_avg_commits = new

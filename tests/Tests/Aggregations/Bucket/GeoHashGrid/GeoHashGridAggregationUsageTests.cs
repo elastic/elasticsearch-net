@@ -18,6 +18,9 @@ namespace Tests.Aggregations.Bucket.GeoHashGrid
 	{
 		public GeoHashGridAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
+
 		protected override object AggregationJson => new
 		{
 			my_geohash_grid = new
@@ -62,6 +65,9 @@ namespace Tests.Aggregations.Bucket.GeoHashGrid
 	public class GeoHashGridAggregationWithBoundsUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public GeoHashGridAggregationWithBoundsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		// ReSharper disable once RedundantOverriddenMember
+		protected override LazyResponses ClientUsage() => SetupCalls();
 
 		protected override object AggregationJson => new
 		{
