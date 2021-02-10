@@ -28,8 +28,12 @@ module Main =
         let userYaml = Path.Combine(sourceDir, "tests.yaml");
         let e f = File.Exists f;
         match ((e userYaml), (e defaultYaml)) with
-        | (true, _) -> Environment.setEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(userYaml))
-        | (_, true) -> Environment.setEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(defaultYaml))
+        | (true, _) ->
+            Environment.setEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(userYaml))
+            printfn "%s" <| Environment.environVar "NEST_YAML_FILE"
+        | (_, true) ->
+            Environment.setEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(defaultYaml))
+            printfn "%s" <| Environment.environVar "NEST_YAML_FILE"
         | _ -> failwithf "Expected to find a tests.default.yaml or tests.yaml in %s" sourceDir
         
           

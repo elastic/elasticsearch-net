@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 
@@ -26,19 +27,25 @@ namespace Tests.Configuration
 		/// </summary>
 		private static EnvironmentConfiguration LoadCommandLineConfiguration()
 		{
+			Console.WriteLine(">>>> cmd");
 			var yamlFile = Environment.GetEnvironmentVariable("NEST_YAML_FILE");
 			if (string.IsNullOrWhiteSpace(yamlFile))
 				throw new Exception("expected NEST_YAML_FILE to be set when calling build.bat or build.sh");
 			if (!File.Exists(yamlFile))
 				throw new Exception($"expected {yamlFile} to exist on disk NEST_YAML_FILE seems misconfigured");
 
+			Console.WriteLine($">>>> {yamlFile}");
 			//load the test seed from the explicitly passed yaml file when running from FAKE
 			var tempYamlConfiguration = new YamlConfiguration(yamlFile);
-			return new EnvironmentConfiguration(tempYamlConfiguration);
+			Console.WriteLine($"new EnvironmentConfig {yamlFile}");
+			var x = new EnvironmentConfiguration(tempYamlConfiguration);
+			Console.WriteLine($"return EnvironmentConfig {yamlFile}");
+			return x;
 		}
 
 		public static string LocateTestYamlFile()
 		{
+			Console.WriteLine(">>>> yaml");
 			var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
 			var testsConfigurationFolder = FindTestsConfigurationFolder(directory);
 			if (testsConfigurationFolder == null)

@@ -16,7 +16,9 @@ namespace Tests.Configuration
 			TestFilter = Environment.GetEnvironmentVariable("NEST_TEST_FILTER");
 
 			var version = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
+			Console.WriteLine($">>> cmd version {version}");
 			ElasticsearchVersion = string.IsNullOrWhiteSpace(version) ? yamlConfiguration.ElasticsearchVersion : version;
+			Console.WriteLine($">>> version {ElasticsearchVersion}");
 			if (ElasticsearchVersion == null)
 				throw new Exception("Elasticsearch Version could not be determined from env var NEST_INTEGRATION_VERSION nor the test yaml configuration");
 
@@ -26,6 +28,7 @@ namespace Tests.Configuration
 					? yamlConfiguration.Seed
 					: (int?)null;
 			SetExternalSeed(externalSeed, out var randomizer);
+			Console.WriteLine($">>> EnvironmentConfig {ElasticsearchVersion}");
 
 			TestOnlyOne = RandomBoolConfig("TEST_ONLY_ONE", randomizer, false);
 			Random = new RandomConfiguration

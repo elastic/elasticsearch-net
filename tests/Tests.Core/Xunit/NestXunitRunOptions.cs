@@ -18,6 +18,7 @@ namespace Tests.Core.Xunit
 	{
 		public NestXunitRunOptions()
 		{
+			Console.WriteLine("asdasdasdaxxxx");
 			RunIntegrationTests = TestConfiguration.Instance.RunIntegrationTests;
 			RunUnitTests = TestConfiguration.Instance.RunUnitTests;
 			ClusterFilter = TestConfiguration.Instance.ClusterFilter;
@@ -26,11 +27,12 @@ namespace Tests.Core.Xunit
 			IntegrationTestsMayUseAlreadyRunningNode = TestConfiguration.Instance.TestAgainstAlreadyRunningElasticsearch;
 
 			Generators.Initialize();
+			Console.WriteLine("2");
 		}
 
 		public override void OnBeforeTestsRun()
 		{
-			//TestConfiguration.Instance.DumpConfiguration();
+			TestConfiguration.Instance.DumpConfiguration();
 		}
 
 		public override void OnTestsFinished(Dictionary<string, Stopwatch> clusterTotals, ConcurrentBag<Tuple<string, string>> failedCollections)

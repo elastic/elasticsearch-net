@@ -152,6 +152,12 @@ namespace Elasticsearch.Net
 		Action<IApiCallDetails> OnRequestCompleted { get; }
 
 		/// <summary>
+		/// Allows you to register a callback every time a an API call has finished and before its returned to the user.
+		/// Fires at the same time as <see cref="OnRequestCompleted"/> but includes the <see cref="RequestData"/> instance.
+		/// </summary>
+		Action<IApiCallDetails, RequestData> OnBeforeReturn { get; }
+
+		/// <summary>
 		/// An action to run when the <see cref="RequestData" /> for a request has been
 		/// created.
 		/// </summary>

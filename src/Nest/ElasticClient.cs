@@ -3,6 +3,12 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Collections.Specialized;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -126,11 +132,18 @@ namespace Nest
 			where TRequest : class, IRequest
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
-			if (p.ContentType != null) ForceContentType(p, p.ContentType);
-
 			var url = p.GetUrl(ConnectionSettings);
 			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !parameters.SupportsBody) ? null : new SerializableData<TRequest>(p);
+
+			void RequestConfig(IRequestConfiguration r)
+			{
+				ForceApiNameHeader(p, r);
+				forceConfiguration?.Invoke(r);
+			}
+
+			ForceConfiguration(p, RequestConfig);
+			if (p.ContentType != null) ForceContentType(p, p.ContentType);
+
 
 			return LowLevel.DoRequest<TResponse>(p.HttpMethod, url, b, parameters);
 		}
@@ -144,13 +157,64 @@ namespace Nest
 			where TRequest : class, IRequest
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
-			if (p.ContentType != null) ForceContentType(p, p.ContentType);
-
 			var url = p.GetUrl(ConnectionSettings);
 			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !parameters.SupportsBody) ? null : new SerializableData<TRequest>(p);
 
+			void RequestConfig(IRequestConfiguration r)
+			{
+				ForceApiNameHeader(p, r);
+				forceConfiguration?.Invoke(r);
+			}
+
+			ForceConfiguration(p, RequestConfig);
+			if (p.ContentType != null) ForceContentType(p, p.ContentType);
+
+
 			return LowLevel.DoRequestAsync<TResponse>(p.HttpMethod, url, ct, b, parameters);
+		}
+
+		private static void ForceApiNameHeader(IRequest request, IRequestConfiguration configuration)
+		{
+			var apiName = request.GetType()
+				.GetInterfaces()
+				.SelectMany(i => i.GetCustomAttributes())
+				.Select(a => a as MapsApiAttribute)
+				.First(a => a != null);
+
+			configuration.Headers ??= new NameValueCollection();
+			configuration.Headers["x-api-name"] = apiName.Name?.Replace(".json", "");
+			var args =
+				request.RouteValues != null && request.RouteValues.Resolved != null
+				? string.Join(";", request.RouteValues.Resolved.Select(c => $"{c.Key}={c.Value}"))
+				: string.Empty;
+
+			configuration.Headers["x-api-args"] = args;
+
+			var st = new StackTrace(true);
+			var frames = st.GetFrames();
+			if (frames == null)
+			{
+				return;
+			}
+			var testCode = frames
+				.Where(f =>
+				{
+					var path = f.GetFileName();
+					return path != null
+						&& path.Contains("Tests" + Path.DirectorySeparatorChar)
+						&& !path.Contains("Framework");
+				})
+				.FirstOrDefault();
+
+			if (testCode != null)
+			{
+
+				var file = Regex.Replace(testCode.GetFileName(), @"^.*Tests\" + Path.DirectorySeparatorChar, "");
+				var method = testCode.GetMethod();
+				var @class = method.ReflectedType?.DeclaringType?.Name ?? "unknown";
+				configuration.Headers["x-test-name"] = $"{file}${@class}${method.Name}";
+			}
+
 		}
 
 		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)

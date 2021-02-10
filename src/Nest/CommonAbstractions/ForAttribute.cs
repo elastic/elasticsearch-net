@@ -14,8 +14,10 @@ namespace Nest
 	[AttributeUsage(AttributeTargets.Interface)]
 	internal class MapsApiAttribute : Attribute
 	{
+		public string Name { get; }
+
 		// ReSharper disable once UnusedParameter.Local
-		public MapsApiAttribute(string restSpecName) { }
+		public MapsApiAttribute(string restSpecName) => Name = restSpecName;
 	}
 
 	/// <summary>

@@ -17,10 +17,12 @@ namespace Tests.Configuration
 		{
 			if (!File.Exists(configurationFile)) return;
 
+			Console.WriteLine($">>>> >>>> {configurationFile}");
 			_config = File.ReadAllLines(configurationFile)
 				.Where(l => !l.Trim().StartsWith("#") && !string.IsNullOrWhiteSpace(l))
 				.ToDictionary(ConfigName, ConfigValue);
 
+			Console.WriteLine($">>>> 1 {configurationFile}");
 			Mode = GetTestMode(_config["mode"]);
 			var version = _config["elasticsearch_version"];
 			ElasticsearchVersion = version;

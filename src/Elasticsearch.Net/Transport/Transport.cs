@@ -225,6 +225,7 @@ namespace Elasticsearch.Net
 #endif
 			}
 
+			Settings.OnBeforeReturn?.Invoke(response.ApiCall, data);
 			Settings.OnRequestCompleted?.Invoke(response.ApiCall);
 			if (data != null && (clientException != null && data.ThrowExceptions)) throw clientException;
 		}

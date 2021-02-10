@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Elasticsearch.Net;
 using Nest;
@@ -53,6 +54,10 @@ namespace Tests.Core.Client.Settings
 			.EnableDebugMode()
 #endif
 			.ConnectionLimit(ConnectionLimitDefault)
+			.OnBeforeReturn((response, requestData) =>
+			{
+				FlightRecorderExporter.OnBeforeReturn(response, requestData);
+			})
 			.OnRequestCompleted(r =>
 			{
 				if (!r.DeprecationWarnings.Any()) return;

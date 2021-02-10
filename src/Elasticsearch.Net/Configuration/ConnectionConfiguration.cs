@@ -142,6 +142,7 @@ namespace Elasticsearch.Net
 		private ApiKeyAuthenticationCredentials _apiKeyAuthCredentials;
 		private X509CertificateCollection _clientCertificates;
 		private Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
+		private Action<IApiCallDetails, RequestData> _returnRequestHandler = DefaultReturnRequestHandler;
 		private int _connectionLimit;
 		private TimeSpan? _deadTimeout;
 		private bool _disableAutomaticProxyDetection;
@@ -232,6 +233,7 @@ namespace Elasticsearch.Net
 
 		Func<Node, bool> IConnectionConfigurationValues.NodePredicate => _nodePredicate;
 		Action<IApiCallDetails> IConnectionConfigurationValues.OnRequestCompleted => _completedRequestHandler;
+		Action<IApiCallDetails,RequestData> IConnectionConfigurationValues.OnBeforeReturn => _returnRequestHandler;
 		Action<RequestData> IConnectionConfigurationValues.OnRequestDataCreated => _onRequestDataCreated;
 		TimeSpan? IConnectionConfigurationValues.PingTimeout => _pingTimeout;
 		bool IConnectionConfigurationValues.PrettyJson => _prettyJson;
@@ -257,12 +259,14 @@ namespace Elasticsearch.Net
 		bool IConnectionConfigurationValues.TransferEncodingChunked => _transferEncodingChunked;
 		bool IConnectionConfigurationValues.EnableTcpStats => _enableTcpStats;
 		bool IConnectionConfigurationValues.EnableThreadPoolStats => _enableThreadPoolStats;
-		
+
 		MetaHeaderProvider IConnectionConfigurationValues.MetaHeaderProvider { get; } = new MetaHeaderProvider();
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
 		private static void DefaultCompletedRequestHandler(IApiCallDetails response) { }
+
+		private static void DefaultReturnRequestHandler(IApiCallDetails response, RequestData requestData) { }
 
 		private static void DefaultRequestDataCreated(RequestData response) { }
 
@@ -342,7 +346,7 @@ namespace Elasticsearch.Net
 		public T DisableAutomaticProxyDetection(bool disable = true) => Assign(disable, (a, v) => a._disableAutomaticProxyDetection = v);
 
 		/// <summary>
-		/// Disables the meta header which is included on all requests by default. This header contains lightweight information 
+		/// Disables the meta header which is included on all requests by default. This header contains lightweight information
 		/// about the client and runtime.
 		/// </summary>
 		public T DisableMetaHeader(bool disable = true) => Assign(disable, (a, v) => a._disableMetaHeader = v);
@@ -478,6 +482,14 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T OnRequestCompleted(Action<IApiCallDetails> handler) =>
 			Assign(handler, (a, v) => a._completedRequestHandler += v ?? DefaultCompletedRequestHandler);
+
+		/// <summary>
+		/// Registers an <see cref="Action{IApiCallDetails}" /> that is called when a response is received from Elasticsearch.
+		/// This can be useful for implementing custom logging.
+		/// Multiple callbacks can be registered by calling this multiple times
+		/// </summary>
+		public T OnBeforeReturn(Action<IApiCallDetails, RequestData> handler) =>
+			Assign(handler, (a, v) => a._returnRequestHandler += v ?? DefaultReturnRequestHandler);
 
 		/// <summary>
 		/// Registers an <see cref="Action{RequestData}" /> that is called when <see cref="RequestData" /> is created.
