@@ -180,6 +180,9 @@ let SkipList = dict<SkipFile,SkipSection> [
     // Temporary disabling this test while https://github.com/elastic/elasticsearch/pull/66794
     SkipFile "search.highlight/20_fvh.yml", All
 
+    // TODO investigate post 7.11.0
+    SkipFile "nodes.info/10_basic.yml", Section "node_info role test"
+
 ]
 
 
