@@ -117,6 +117,7 @@ namespace Tests.XPack.Watcher.GetWatch
 										.Indices(typeof(Project))
 										.SearchType(SearchType.DfsQueryThenFetch)
 										.IndicesOptions(io => io
+											.AllowNoIndices()
 											.ExpandWildcards(ExpandWildcards.Open)
 											.IgnoreUnavailable()
 										)
