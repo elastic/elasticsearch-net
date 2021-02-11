@@ -158,14 +158,11 @@ let SkipList = dict<SkipFile,SkipSection> [
     //These are ignored because they were flagged on a big PR.
     
     //additional enters in regex
-    SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates" ]
+    SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates"; "No templates" ]
     
     //Replace stashed value in body that is passed as string json
     SkipFile "api_key/10_basic.yml", Section "Test get api key"
-    
-    //additional enters in regex
-    SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates" ]
-    
+        
     //new API TODO remove when we regenerate
     SkipFile "cluster.voting_config_exclusions/10_basic.yml", All
     
@@ -183,6 +180,9 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "unsigned_long/60_collapse.yml", All
     
     SkipFile "ml/inference_processor.yml", Section "Test simulate"
+
+    // TODO investigate post 7.11.0
+    SkipFile "nodes.info/10_basic.yml", Section "node_info role test"
 
 ]
 

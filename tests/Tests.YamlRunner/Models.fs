@@ -122,6 +122,7 @@ type Do = {
     ApiCall: string * YamlMap
     Catch:DoCatch option
     Warnings:option<string list>
+    AllowedWarnings:option<string list>
     NodeSelector:NodeSelector option
     Headers: Headers option
     AutoFail: bool 
