@@ -255,19 +255,6 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.explain_data_frame_analytics", "id, body")]
 		public Task<TResponse> ExplainDataFrameAnalyticsAsync<TResponse>(string id, PostData body, ExplainDataFrameAnalyticsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/data_frame/analytics/{id:id}/_explain"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/find_file_structure <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-find-file-structure.html</para></summary>
-		///<param name = "body">The contents of the file to be analyzed</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		public TResponse FindFileStructure<TResponse>(PostData body, FindFileStructureRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, "_ml/find_file_structure", body, RequestParams(requestParameters));
-		///<summary>POST on /_ml/find_file_structure <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-find-file-structure.html</para></summary>
-		///<param name = "body">The contents of the file to be analyzed</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		[MapsApi("ml.find_file_structure", "body")]
-		public Task<TResponse> FindFileStructureAsync<TResponse>(PostData body, FindFileStructureRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, "_ml/find_file_structure", ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_flush <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</para></summary>
 		///<param name = "jobId">The name of the job to flush</param>
 		///<param name = "body">Flush parameters</param>

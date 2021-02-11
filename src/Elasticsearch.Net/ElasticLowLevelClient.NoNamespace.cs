@@ -37,6 +37,7 @@ using Elasticsearch.Net.Specification.IndexLifecycleManagementApi;
 using Elasticsearch.Net.Specification.IndicesApi;
 using Elasticsearch.Net.Specification.IngestApi;
 using Elasticsearch.Net.Specification.LicenseApi;
+using Elasticsearch.Net.Specification.LogstashApi;
 using Elasticsearch.Net.Specification.MachineLearningApi;
 using Elasticsearch.Net.Specification.MigrationApi;
 using Elasticsearch.Net.Specification.NodesApi;
@@ -47,6 +48,7 @@ using Elasticsearch.Net.Specification.SnapshotApi;
 using Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi;
 using Elasticsearch.Net.Specification.SqlApi;
 using Elasticsearch.Net.Specification.TasksApi;
+using Elasticsearch.Net.Specification.TextStructureApi;
 using Elasticsearch.Net.Specification.TransformApi;
 using Elasticsearch.Net.Specification.WatcherApi;
 using Elasticsearch.Net.Specification.XPackApi;
@@ -139,6 +141,12 @@ namespace Elasticsearch.Net
 			private set;
 		}
 
+		public LowLevelLogstashNamespace Logstash
+		{
+			get;
+			private set;
+		}
+
 		public LowLevelMachineLearningNamespace MachineLearning
 		{
 			get;
@@ -199,6 +207,12 @@ namespace Elasticsearch.Net
 			private set;
 		}
 
+		public LowLevelTextStructureNamespace TextStructure
+		{
+			get;
+			private set;
+		}
+
 		public LowLevelTransformNamespace Transform
 		{
 			get;
@@ -232,6 +246,7 @@ namespace Elasticsearch.Net
 			Indices = new LowLevelIndicesNamespace(this);
 			Ingest = new LowLevelIngestNamespace(this);
 			License = new LowLevelLicenseNamespace(this);
+			Logstash = new LowLevelLogstashNamespace(this);
 			MachineLearning = new LowLevelMachineLearningNamespace(this);
 			Migration = new LowLevelMigrationNamespace(this);
 			Nodes = new LowLevelNodesNamespace(this);
@@ -242,6 +257,7 @@ namespace Elasticsearch.Net
 			SnapshotLifecycleManagement = new LowLevelSnapshotLifecycleManagementNamespace(this);
 			Sql = new LowLevelSqlNamespace(this);
 			Tasks = new LowLevelTasksNamespace(this);
+			TextStructure = new LowLevelTextStructureNamespace(this);
 			Transform = new LowLevelTransformNamespace(this);
 			Watcher = new LowLevelWatcherNamespace(this);
 			XPack = new LowLevelXPackNamespace(this);
