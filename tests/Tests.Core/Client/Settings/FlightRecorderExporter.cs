@@ -78,12 +78,10 @@ namespace Tests.Core.Client.Settings
 		{
 			var error = (statusCode < 300 && statusCode >= 200) || statusCode == 404 ? "false" : "true";
 			var body = BytesToJson(responseBytes);
-			if (!string.IsNullOrEmpty(args) && !string.IsNullOrEmpty(body)) args += ",";
 			var contents = $@"{{
   ""api"": ""{apiName}"",
   ""origin"": [""nest-integration-tests""],
-  ""args"": {{
-{args}
+  ""payload"": {{
     {body}
   }},
   ""error"": {error},
