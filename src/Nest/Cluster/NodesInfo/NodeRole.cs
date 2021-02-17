@@ -20,6 +20,9 @@ namespace Nest
 		[EnumMember(Value = "data_cold")]
 		DataCold,
 
+		[EnumMember(Value = "data_frozen")]
+		DataFrozen,
+
 		[EnumMember(Value = "data_content")]
 		DataContent,
 
