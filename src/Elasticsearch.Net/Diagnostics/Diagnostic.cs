@@ -5,10 +5,10 @@
 using System;
 using System.Diagnostics;
 
-namespace Elasticsearch.Net.Diagnostics 
+namespace Elasticsearch.Net.Diagnostics
 {
 	/// <summary>
-	/// Internal subclass of <see cref="Activity"/> that implements <see cref="IDisposable"/> to
+	/// Diagnostic that creates, starts and stops <see cref="Activity"/> that implements <see cref="IDisposable"/> to
 	/// make it easier to use.
 	/// </summary>
 	internal class Diagnostic<TState> : Diagnostic<TState, TState>
@@ -17,22 +17,23 @@ namespace Elasticsearch.Net.Diagnostics
 			: base(operationName, source, state) =>
 			EndState = state;
 	}
-	
-	internal class Diagnostic<TState, TStateEnd> : Activity
+
+	internal class Diagnostic<TState, TStateEnd> : IDisposable
 	{
 		public static Diagnostic<TState, TStateEnd> Default { get; } = new();
 
 		private readonly DiagnosticSource _source;
-		private TStateEnd _endState;
 		private readonly bool _default;
-		private bool _disposed;
+		private readonly Activity _activity;
+		private TStateEnd _endState;
 
-		private Diagnostic() : base("__NOOP__") => _default = true;
+		private Diagnostic() => _default = true;
 
-		public Diagnostic(string operationName, DiagnosticSource source, TState state) : base(operationName)
+		public Diagnostic(string operationName, DiagnosticSource source, TState state)
 		{
 			_source = source;
-			_source.StartActivity(SetStartTime(DateTime.UtcNow), state);
+			_activity = new Activity(operationName);
+			_source.StartActivity(_activity, state);
 		}
 
 		public TStateEnd EndState
@@ -40,25 +41,16 @@ namespace Elasticsearch.Net.Diagnostics
 			get => _endState;
 			internal set
 			{
-				//do not store state on default instance 
+				//do not store state on default instance
 				if (_default) return;
-				_endState =  value;	
+				_endState =  value;
 			}
 		}
-		
-		protected override void Dispose(bool disposing)
+
+		public void Dispose()
 		{
-			if (_disposed) return;
-
-			if (disposing)
-			{
-				//_source can be null if Default instance
-				_source?.StopActivity(SetEndTime(DateTime.UtcNow), EndState);
-			}
-
-			_disposed = true;
-
-			base.Dispose(disposing);
+			_source?.StopActivity(_activity, EndState);
+			_activity?.Dispose();
 		}
 	}
 }
