@@ -42,6 +42,7 @@ namespace Nest
 			{ "circle", 30 },
 			{ "enrich", 31 },
 			{ "csv", 32 },
+			{ "uri_parts", 33 }
 		};
 
 		public IProcessor Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -160,6 +161,9 @@ namespace Nest
 						break;
 					case 32:
 						processor = Deserialize<CsvProcessor>(ref reader, formatterResolver);
+						break;
+					case 33:
+						processor = Deserialize<UriPartsProcessor>(ref reader, formatterResolver);
 						break;
 				}
 			}
@@ -280,6 +284,9 @@ namespace Nest
 					break;
 				case "circle":
 					Serialize<ICircleProcessor>(ref writer, value, formatterResolver);
+					break;
+				case "uri_parts":
+					Serialize<IUriPartsProcessor>(ref writer, value, formatterResolver);
 					break;
 				default:
 					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IProcessor>();
