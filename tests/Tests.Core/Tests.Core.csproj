@@ -16,7 +16,7 @@
     
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-    <PackageReference Include="Elastic.Elasticsearch.Xunit" Version="0.1.0-canary.0.244" />
+    <PackageReference Include="Elastic.Elasticsearch.Xunit" Version="0.2.5" />
     
     <PackageReference Include="Nullean.VsTest.Pretty.TestLogger" Version="0.3.0" />
     <PackageReference Include="coverlet.collector" Version="1.1.0" />
