@@ -70,8 +70,7 @@ namespace Elasticsearch.Net
 					success = requestData.ConnectionSettings
 						.StatusCodeToResponseSuccess(requestData.Method, statusCode.Value);
 			}
-			//mimeType can include charset information on .NET full framework
-			if (!string.IsNullOrEmpty(mimeType) && !mimeType.StartsWith(requestData.Accept))
+			if (!ValidResponseContentType(requestData.Accept, mimeType))
 				success = false;
 
 			var details = new ApiCallDetails
@@ -87,6 +86,28 @@ namespace Elasticsearch.Net
 				ConnectionConfiguration = requestData.ConnectionSettings
 			};
 			return details;
+		}
+
+		private static bool ValidResponseContentType(string acceptMimeType, string responseMimeType)
+		{
+			if (string.IsNullOrEmpty(acceptMimeType)) return false;
+
+			// we a startswith check because the response can return charset information
+			// e.g: application/json; charset=UTF-8
+			if (acceptMimeType == RequestData.MimeTypeOld)
+				return responseMimeType.StartsWith(RequestData.MimeTypeOld);
+
+			//vendored check
+			if (acceptMimeType == RequestData.MimeType)
+				// we check both vendored and nonvendored since on 7.x the response does not return a
+				// vendored Content-Type header on the response
+				return
+					responseMimeType == RequestData.MimeType
+					|| responseMimeType == RequestData.MimeTypeOld
+					|| responseMimeType.StartsWith(RequestData.MimeTypeOld)
+					|| responseMimeType.StartsWith(RequestData.MimeType);
+
+			return responseMimeType.StartsWith(acceptMimeType);
 		}
 
 		private static TResponse SetBody<TResponse>(ApiCallDetails details, RequestData requestData, Stream responseStream, string mimeType)
@@ -114,7 +135,7 @@ namespace Elasticsearch.Net
 				if (requestData.CustomResponseBuilder != null)
 					return requestData.CustomResponseBuilder.DeserializeResponse(serializer, details, responseStream) as TResponse;
 
-				return mimeType == null || !mimeType.StartsWith(requestData.Accept, StringComparison.Ordinal)
+				return !ValidResponseContentType(requestData.Accept, mimeType)
 					? null
 					: serializer.Deserialize<TResponse>(responseStream);
 			}
@@ -146,7 +167,7 @@ namespace Elasticsearch.Net
 				if (requestData.CustomResponseBuilder != null)
 					return await requestData.CustomResponseBuilder.DeserializeResponseAsync(serializer, details, responseStream, cancellationToken).ConfigureAwait(false) as TResponse;
 
-				return mimeType == null || !mimeType.StartsWith(requestData.Accept, StringComparison.Ordinal)
+				return !ValidResponseContentType(requestData.Accept, mimeType)
 					? null
 					: await serializer
 						.DeserializeAsync<TResponse>(responseStream, cancellationToken)

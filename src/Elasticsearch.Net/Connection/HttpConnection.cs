@@ -322,7 +322,9 @@ namespace Elasticsearch.Net
 
 			requestMessage.Headers.Connection.Clear();
 			requestMessage.Headers.ConnectionClose = false;
-			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.Accept));
+			requestMessage.Headers.TryAddWithoutValidation("Accept", requestData.Accept);
+
+			//requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.Accept));
 
 			if (!string.IsNullOrWhiteSpace(requestData.UserAgent))
 			{
@@ -372,7 +374,7 @@ namespace Elasticsearch.Net
 				if (requestData.HttpCompression)
 					message.Content.Headers.ContentEncoding.Add("gzip");
 
-				message.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
+				message.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(requestData.RequestMimeType);
 			}
 		}
 
@@ -409,7 +411,7 @@ namespace Elasticsearch.Net
 				if (requestData.HttpCompression)
 					message.Content.Headers.ContentEncoding.Add("gzip");
 
-				message.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
+				message.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(requestData.RequestMimeType);
 			}
 		}
 
