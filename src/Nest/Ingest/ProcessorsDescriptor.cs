@@ -177,9 +177,5 @@ namespace Nest
 		/// <inheritdoc cref="IPipelineProcessor" />
 		public ProcessorsDescriptor Circle<T>(Func<CircleProcessorDescriptor<T>, ICircleProcessor> selector) where T : class  =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new CircleProcessorDescriptor<T>())));
-
-		/// <inheritdoc cref="IUriPartsProcessor"/>
-		public ProcessorsDescriptor UriParts<T>(Func<UriPartsProcessorDescriptor<T>, IUriPartsProcessor> selector) where T : class =>
-			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new UriPartsProcessorDescriptor<T>())));
 	}
 }

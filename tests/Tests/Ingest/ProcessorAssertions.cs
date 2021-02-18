@@ -702,19 +702,5 @@ namespace Tests.Ingest
 
 			public override string Key => "pipeline";
 		}
-
-		[SkipVersion("<7.11.0", "Uses URI parts which was introduced in 7.11.0")]
-		public class UriParts : ProcessorAssertion
-		{
-			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
-				.UriParts<Project>(ud => ud
-				.Field(p => p.Description)
-				.KeepOriginal()
-				.RemoveIfSuccessful());
-
-			public override IProcessor Initializer => new UriPartsProcessor { Field = "description", KeepOriginal = true, RemoveIfSuccessful = true };
-			public override object Json => new { field = "description", keep_original = true, remove_if_successful = true };
-			public override string Key => "uri_parts";
-		}
 	}
 }
