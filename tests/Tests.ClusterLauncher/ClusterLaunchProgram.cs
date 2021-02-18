@@ -38,8 +38,8 @@ namespace Tests.ClusterLauncher
 			if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NEST_YAML_FILE")))
 			{
 				// build always sets previous argument, assume we are running from the IDE or dotnet run
-                var yamlFile = TestConfiguration.LocateTestYamlFile();
-                Environment.SetEnvironmentVariable("NEST_YAML_FILE", yamlFile, EnvironmentVariableTarget.Process);
+				var yamlFile = TestConfiguration.LocateTestYamlFile();
+				Environment.SetEnvironmentVariable("NEST_YAML_FILE", yamlFile, EnvironmentVariableTarget.Process);
 			}
 
 			// if version is passed this will take precedence over the version in the yaml file
@@ -61,12 +61,19 @@ namespace Tests.ClusterLauncher
 			AppDomain.CurrentDomain.ProcessExit += (s, ev) => Instance?.Dispose();
 			Console.CancelKeyPress += (s, ev) => Instance?.Dispose();
 
-			if (!TryStartClientTestClusterBaseImplementation(cluster) && !TryStartXPackClusterImplementation(cluster))
+			try
 			{
+				if (TryStartClientTestClusterBaseImplementation(cluster) || TryStartXPackClusterImplementation(cluster)) return 0;
+
 				Console.Error.WriteLine($"Could not create an instance of '{cluster.FullName}");
 				return 1;
 			}
-			return 0;
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				Instance?.Dispose();
+				throw;
+			}
 		}
 
 		private static bool TryStartXPackClusterImplementation(Type cluster)
@@ -91,7 +98,7 @@ namespace Tests.ClusterLauncher
 		private static bool Run(ICluster<EphemeralClusterConfiguration> instance)
 		{
 			TestConfiguration.Instance.DumpConfiguration();
-			instance.Start();
+			using var start = instance.Start();
 			if (!instance.Started)
 			{
 				Console.Error.WriteLine($"Failed to start cluster: '{instance.GetType().FullName}");
@@ -118,7 +125,7 @@ namespace Tests.ClusterLauncher
 
 			return types
 				.Where(t => t.Implements(typeof(IEphemeralCluster)))
-				.Where(t=> !t.IsAbstract)
+				.Where(t => !t.IsAbstract)
 				.ToArray();
 		}
 	}
