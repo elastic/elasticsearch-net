@@ -42,6 +42,9 @@ namespace Nest
 
 		[DataMember(Name = "ingest")]
 		public ClusterIngestStats Ingest { get; internal set; }
+
+		[DataMember(Name = "architectures")]
+		public IReadOnlyCollection<ArchitectureStats> Architectures { get; internal set; }
 	}
 
 	public class NodePackagingType
@@ -254,5 +257,15 @@ namespace Nest
 
 		[DataMember(Name ="time_in_millis")]
 		public long TimeInMilliseconds { get; set; }
+	}
+
+	[DataContract]
+	public class ArchitectureStats
+	{
+		[DataMember(Name = "arch")]
+		public string Architecture { get; set; }
+
+		[DataMember(Name = "count")]
+		public int Count { get; set; }
 	}
 }
