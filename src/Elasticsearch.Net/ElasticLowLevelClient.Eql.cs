@@ -66,6 +66,17 @@ namespace Elasticsearch.Net.Specification.EqlApi
 		[MapsApi("eql.get", "id")]
 		public Task<TResponse> GetAsync<TResponse>(string id, GetRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_eql/search/{id:id}"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_eql/search/status/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+		///<param name = "id">The async search ID</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetStatus<TResponse>(string id, GetStatusRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_eql/search/status/{id:id}"), null, RequestParams(requestParameters));
+		///<summary>GET on /_eql/search/status/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+		///<param name = "id">The async search ID</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("eql.get_status", "id")]
+		public Task<TResponse> GetStatusAsync<TResponse>(string id, GetStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_eql/search/status/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_eql/search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
 		///<param name = "index">The name of the index to scope the operation</param>
 		///<param name = "body">Eql request body. Use the `query` to limit the query scope.</param>
