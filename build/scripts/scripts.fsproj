@@ -38,7 +38,7 @@
     <PackageReference Include="FSharp.Core" Version="5.0.0" />
 
     <PackageReference Include="Bullseye" Version="3.3.0" />
-    <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.2.5" />
+    <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.2.6" />
     
     <PackageReference Include="Fake.Core.Environment" Version="5.15.0" />
     <PackageReference Include="Fake.Core.SemVer" Version="5.15.0" />
