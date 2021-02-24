@@ -3,6 +3,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.2.5" />
+    <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.2.6" />
   </ItemGroup>
 </Project>
