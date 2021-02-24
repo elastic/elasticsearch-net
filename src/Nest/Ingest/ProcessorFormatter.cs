@@ -47,7 +47,8 @@ namespace Nest
 			{ "enrich", 31 },
 			{ "csv", 32 },
 			{ "uri_parts", 33 },
-			{ "fingerprint", 34 }
+			{ "fingerprint", 34 },
+			{ "community_id", 35 }
 		};
 
 		public IProcessor Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -172,6 +173,9 @@ namespace Nest
 						break;
 					case 34:
 						processor = Deserialize<FingerprintProcessor>(ref reader, formatterResolver);
+						break;
+					case 35:
+						processor = Deserialize<NetworkCommunityIdProcessor>(ref reader, formatterResolver);
 						break;
 				}
 			}
@@ -298,6 +302,9 @@ namespace Nest
 					break;
 				case "fingerprint":
 					Serialize<IFingerprintProcessor>(ref writer, value, formatterResolver);
+					break;
+				case "community_id":
+					Serialize<INetworkCommunityIdProcessor>(ref writer, value, formatterResolver);
 					break;
 				default:
 					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IProcessor>();
