@@ -73,6 +73,14 @@ namespace Tests.Cluster.ClusterStats
 			nodes.OperatingSystem.AvailableProcessors.Should().BeGreaterThan(0);
 			nodes.OperatingSystem.AllocatedProcessors.Should().BeGreaterThan(0);
 
+			if (Cluster.ClusterConfiguration.Version.InRange(">=7.12.0"))
+			{
+				nodes.OperatingSystem.Architectures.Should().NotBeNull();
+				nodes.OperatingSystem.Architectures.Count.Should().BeGreaterThan(0);
+				nodes.OperatingSystem.Architectures.First().Architecture.Should().NotBeNullOrEmpty();
+				nodes.OperatingSystem.Architectures.First().Count.Should().BeGreaterThan(0);
+			}
+
 			nodes.OperatingSystem.Names.Should().NotBeEmpty();
 
 			if (Cluster.ClusterConfiguration.Version >= "6.8.0")
@@ -100,14 +108,6 @@ namespace Tests.Cluster.ClusterStats
 
 			if (Cluster.ClusterConfiguration.Version >= "7.6.0")
 				nodes.Ingest.Should().NotBeNull();
-			
-			if (Cluster.ClusterConfiguration.Version >= "7.12.0")
-			{
-				nodes.Architectures.Should().NotBeNull();
-				nodes.Architectures.Count.Should().BeGreaterThan(0);
-				nodes.Architectures.First().Architecture.Should().NotBeNullOrEmpty();
-				nodes.Architectures.First().Count.Should().BeGreaterThan(0);
-			}
 		}
 
 		protected void Assert(ClusterIndicesStats indices)
