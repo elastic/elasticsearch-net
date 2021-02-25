@@ -57,7 +57,7 @@ module Tests =
         let commandWithAdditionalOptions =
             wantsCoverage |> List.append wantsTrx |> List.append command
             
-        Tooling.DotNet.ExecInWithTimeout "." commandWithAdditionalOptions (TimeSpan.FromMinutes 60.)
+        Tooling.DotNet.ExecInWithTimeout "." commandWithAdditionalOptions (TimeSpan.FromMinutes 30.)
 
     let RunReleaseUnitTests version args =
         //xUnit always does its own build, this env var is picked up by Tests.csproj

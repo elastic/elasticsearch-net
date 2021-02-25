@@ -38,6 +38,8 @@ module Tooling =
         let startArgs = ExecArguments(bin, args |> List.toArray)
         if (Option.isSome workinDir) then
             startArgs.WorkingDirectory <- Option.defaultValue "" workinDir
+        let options = args |> String.concat " "
+        printfn "Running command: %s %s" bin options
         let result = Proc.Exec(startArgs, timeout)
         try
             if not result.HasValue || result.Value > 0 then
