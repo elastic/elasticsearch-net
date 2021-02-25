@@ -12,6 +12,7 @@ using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.Xunit;
 using Tests.Domain;
+using static Nest.Infer;
 
 namespace Tests.Ingest
 {
@@ -189,7 +190,7 @@ namespace Tests.Ingest
 			public override IProcessor Initializer => new EnrichProcessor
 			{
 				PolicyName = PolicyName,
-				Field = Infer.Field<Project>(f => f.Name),
+				Field = Field<Project>(f => f.Name),
 				TargetField = "target_field"
 			};
 
@@ -226,7 +227,7 @@ namespace Tests.Ingest
 
 			public override IProcessor Initializer => new ForeachProcessor
 			{
-				Field = Infer.Field<Project>(p => p.Tags),
+				Field = Field<Project>(p => p.Tags),
 				Processor = new UppercaseProcessor
 				{
 					Field = "_value.name"
@@ -360,7 +361,7 @@ namespace Tests.Ingest
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent =>
 				d => d.Set<Project>(s => s.Field(p => p.Name).Value("foo"));
 
-			public override IProcessor Initializer => new SetProcessor { Field = Infer.Field<Project>(p => p.Name), Value = "foo" };
+			public override IProcessor Initializer => new SetProcessor { Field = Field<Project>(p => p.Name), Value = "foo" };
 
 			public override object Json => new { field = "name", value = "foo" };
 			public override string Key => "set";
@@ -731,6 +732,56 @@ namespace Tests.Ingest
 			public override IProcessor Initializer => new FingerprintProcessor { Fields = "labels", Method = "MD5", Salt = "ThisIsASalt!", TargetField = "description", IgnoreMissing = true };
 			public override object Json => new { fields =  new[] { "labels" }, method = "MD5", salt = "ThisIsASalt!", target_field = "description", ignore_missing = true };
 			public override string Key => "fingerprint";
+		}
+
+		[SkipVersion("<7.12.0", "Uses the network community ID processor which was introduced in 7.12.0")]
+		public class NetworkCommunityId : ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.NetworkCommunityId<Project>(ud => ud
+					.DestinationIp(f => f.LeadDeveloper.IpAddress)
+					.DestinationPort("leadDeveloper.portNumber")
+					.IanaNumber(f => f.Name)
+					.IcmpType(f => f.Name)
+					.IcmpCode(f => f.Name)
+					.IgnoreMissing()
+					.Seed(100)
+					.SourceIp(f => f.LeadDeveloper.IpAddress)
+					.SourcePort("leadDeveloper.portNumber")
+					.TargetField(f => f.Description)
+					.Transport(f => f.Name));
+
+			public override IProcessor Initializer => new NetworkCommunityIdProcessor
+			{
+				DestinationIp = Field<Project>(f => f.LeadDeveloper.IpAddress),
+				DestinationPort = "leadDeveloper.portNumber",
+				IanaNumber = "name",
+				IcmpType = "name",
+				IcmpCode = "name",
+				IgnoreMissing = true,
+				Seed = 100,
+				SourceIp = Field<Project>(f => f.LeadDeveloper.IpAddress),
+				SourcePort = "leadDeveloper.portNumber",
+				TargetField = "description",
+				Transport = "name"
+			};
+
+			public override object Json => new
+			{
+				destination_ip = "leadDeveloper.ipAddress",
+				destination_port = "leadDeveloper.portNumber",
+				iana_number = "name",
+				icmp_code = "name",
+				icmp_type = "name",
+				ignore_missing = true,
+				seed = 100,
+				source_ip = "leadDeveloper.ipAddress",
+				source_port = "leadDeveloper.portNumber",
+				target_field = "description",
+				transport = "name"
+			};
+
+			public override string Key => "community_id";
 		}
 	}
 }
