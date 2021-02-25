@@ -55,6 +55,9 @@ namespace Tests.Core.Client.Settings
 			.ConnectionLimit(ConnectionLimitDefault)
 			.OnRequestCompleted(r =>
 			{
+				//r.HttpMethod;
+
+
 				if (!r.DeprecationWarnings.Any()) return;
 
 				var q = r.Uri.Query;
