@@ -171,6 +171,11 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	{
 	}
 
+	///<summary>Request options for DeleteTrainedModelAlias <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html</para></summary>
+	public class DeleteTrainedModelAliasRequestParameters : RequestParameters<DeleteTrainedModelAliasRequestParameters>
+	{
+	}
+
 	///<summary>Request options for EstimateModelMemory <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</para></summary>
 	public class EstimateModelMemoryRequestParameters : RequestParameters<EstimateModelMemoryRequestParameters>
 	{
@@ -654,6 +659,17 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	///<summary>Request options for PutTrainedModel <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html</para></summary>
 	public class PutTrainedModelRequestParameters : RequestParameters<PutTrainedModelRequestParameters>
 	{
+	}
+
+	///<summary>Request options for PutTrainedModelAlias <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models-aliases.html</para></summary>
+	public class PutTrainedModelAliasRequestParameters : RequestParameters<PutTrainedModelAliasRequestParameters>
+	{
+		///<summary>If the model_alias already exists and points to a separate model_id, this parameter must be true. Defaults to false.</summary>
+		public bool? Reassign
+		{
+			get => Q<bool? >("reassign");
+			set => Q("reassign", value);
+		}
 	}
 
 	///<summary>Request options for RevertModelSnapshot <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</para></summary>

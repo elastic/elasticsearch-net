@@ -203,6 +203,21 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.delete_trained_model", "model_id")]
 		public Task<TResponse> DeleteTrainedModelAsync<TResponse>(string modelId, DeleteTrainedModelRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ml/trained_models/{modelId:modelId}"), ctx, null, RequestParams(requestParameters));
+		///<summary>DELETE on /_ml/trained_models/{model_id}/model_aliases/{model_alias} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html</para></summary>
+		///<param name = "modelId">The trained model where the model alias is assigned</param>
+		///<param name = "modelAlias">The trained model alias to delete</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse DeleteTrainedModelAlias<TResponse>(string modelId, string modelAlias, DeleteTrainedModelAliasRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(DELETE, Url($"_ml/trained_models/{modelId:modelId}/model_aliases/{modelAlias:modelAlias}"), null, RequestParams(requestParameters));
+		///<summary>DELETE on /_ml/trained_models/{model_id}/model_aliases/{model_alias} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html</para></summary>
+		///<param name = "modelId">The trained model where the model alias is assigned</param>
+		///<param name = "modelAlias">The trained model alias to delete</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("ml.delete_trained_model_alias", "model_id, model_alias")]
+		public Task<TResponse> DeleteTrainedModelAliasAsync<TResponse>(string modelId, string modelAlias, DeleteTrainedModelAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ml/trained_models/{modelId:modelId}/model_aliases/{modelAlias:modelAlias}"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/_estimate_model_memory <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html</para></summary>
 		///<param name = "body">The analysis config, plus cardinality estimates for fields it references</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -785,6 +800,21 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.put_trained_model", "model_id, body")]
 		public Task<TResponse> PutTrainedModelAsync<TResponse>(string modelId, PostData body, PutTrainedModelRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_ml/trained_models/{modelId:modelId}"), ctx, body, RequestParams(requestParameters));
+		///<summary>PUT on /_ml/trained_models/{model_id}/model_aliases/{model_alias} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models-aliases.html</para></summary>
+		///<param name = "modelId">The trained model where the model alias should be assigned</param>
+		///<param name = "modelAlias">The trained model alias to update</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse PutTrainedModelAlias<TResponse>(string modelId, string modelAlias, PutTrainedModelAliasRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(PUT, Url($"_ml/trained_models/{modelId:modelId}/model_aliases/{modelAlias:modelAlias}"), null, RequestParams(requestParameters));
+		///<summary>PUT on /_ml/trained_models/{model_id}/model_aliases/{model_alias} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models-aliases.html</para></summary>
+		///<param name = "modelId">The trained model where the model alias should be assigned</param>
+		///<param name = "modelAlias">The trained model alias to update</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("ml.put_trained_model_alias", "model_id, model_alias")]
+		public Task<TResponse> PutTrainedModelAliasAsync<TResponse>(string modelId, string modelAlias, PutTrainedModelAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_ml/trained_models/{modelId:modelId}/model_aliases/{modelAlias:modelAlias}"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</para></summary>
 		///<param name = "jobId">The ID of the job to fetch</param>
 		///<param name = "snapshotId">The ID of the snapshot to revert to</param>

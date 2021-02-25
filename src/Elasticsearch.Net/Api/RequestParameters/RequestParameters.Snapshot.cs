@@ -151,6 +151,17 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
+	///<summary>Request options for GetFeatures <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	public class GetFeaturesRequestParameters : RequestParameters<GetFeaturesRequestParameters>
+	{
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public TimeSpan MasterTimeout
+		{
+			get => Q<TimeSpan>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+	}
+
 	///<summary>Request options for GetRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public class GetRepositoryRequestParameters : RequestParameters<GetRepositoryRequestParameters>
 	{
