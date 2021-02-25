@@ -181,5 +181,9 @@ namespace Nest
 		/// <inheritdoc cref="IUriPartsProcessor"/>
 		public ProcessorsDescriptor UriParts<T>(Func<UriPartsProcessorDescriptor<T>, IUriPartsProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new UriPartsProcessorDescriptor<T>())));
+
+		/// <inheritdoc cref="IFingerprintProcessor"/>
+		public ProcessorsDescriptor Fingerprint<T>(Func<FingerprintProcessorDescriptor<T>, IFingerprintProcessor> selector) where T : class =>
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new FingerprintProcessorDescriptor<T>())));
 	}
 }
