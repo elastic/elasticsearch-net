@@ -716,5 +716,21 @@ namespace Tests.Ingest
 			public override object Json => new { field = "description", keep_original = true, remove_if_successful = true };
 			public override string Key => "uri_parts";
 		}
+
+		[SkipVersion("<7.12.0", "Uses fingerprint processor which was introduced in 7.12.0")]
+		public class Fingerprint : ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Fingerprint<Project>(ud => ud
+					.Fields(p => p.Fields(f => f.Labels))
+					.Method("MD5")
+					.Salt("ThisIsASalt!")
+					.TargetField(p => p.Description)
+					.IgnoreMissing());
+
+			public override IProcessor Initializer => new FingerprintProcessor { Fields = "labels", Method = "MD5", Salt = "ThisIsASalt!", TargetField = "description", IgnoreMissing = true };
+			public override object Json => new { fields =  new[] { "labels" }, method = "MD5", salt = "ThisIsASalt!", target_field = "description", ignore_missing = true };
+			public override string Key => "fingerprint";
+		}
 	}
 }
