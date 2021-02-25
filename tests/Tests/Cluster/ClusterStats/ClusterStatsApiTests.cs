@@ -100,6 +100,14 @@ namespace Tests.Cluster.ClusterStats
 
 			if (Cluster.ClusterConfiguration.Version >= "7.6.0")
 				nodes.Ingest.Should().NotBeNull();
+			
+			if (Cluster.ClusterConfiguration.Version >= "7.12.0")
+			{
+				nodes.Architectures.Should().NotBeNull();
+				nodes.Architectures.Count.Should().BeGreaterThan(0);
+				nodes.Architectures.First().Architecture.Should().NotBeNullOrEmpty();
+				nodes.Architectures.First().Count.Should().BeGreaterThan(0);
+			}
 		}
 
 		protected void Assert(ClusterIndicesStats indices)
