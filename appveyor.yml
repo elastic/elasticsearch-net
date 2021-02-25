@@ -6,7 +6,7 @@ environment:
     DOTNET_CLI_TELEMETRY_OPTOUT: true
     DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 install:
-    - cmd: choco install dotnet-5.0-sdk --version 5.0.102
+    - cmd: choco install dotnet-5.0-sdk --version 5.0.103
 build_script:
     - cmd: build.bat canary
 

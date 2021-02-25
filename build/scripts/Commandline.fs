@@ -207,7 +207,7 @@ Execution hints can be provided anywhere on the command line
                 parsed with CommandArguments = Test {
                         TestFilter = None
                         TrxExport = buildingOnAzurePipeline 
-                        CodeCoverage = buildingOnAzurePipeline
+                        CodeCoverage = false
                 }
             }
         
