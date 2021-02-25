@@ -14,23 +14,24 @@ pr:
 jobs:
 - job: StaleDocs
   pool:
-    vmImage: 'ubuntu-16.04'
+    vmImage: 'ubuntu-20.04'
   steps:
   - task: UseDotNet@2
     inputs:
-       version: '5.0.102'
+       version: '5.0.103'
   - script: ./build.sh documentation
     displayName: 'Generate Documentation'
   - script: |
       if [ -n "$(git status --porcelain)" ]; then echo Error: changes found after running documentation; git diff; git status; exit 1; fi
     displayName: 'Ensure no uncommitted docs'
+
 - job: LinuxUnitTests
   pool:
-    vmImage: 'ubuntu-16.04'
+    vmImage: 'ubuntu-20.04'
   steps:
   - task: UseDotNet@2
     inputs:
-        version: '5.0.102'
+        version: '5.0.103'
   - script: ./build.sh test-one
     displayName: 'build and unit test'
   - task: PublishTestResults@2
@@ -58,24 +59,21 @@ jobs:
 
 - job: WindowsCanaryTests
   pool:
-    vmImage: 'vs2017-win2016'
-  steps:
-  - task: UseDotNet@2
-    inputs:
-      version: '5.0.102'
-  - script: build.bat canary
-    displayName: 'build and unit test'
-  - task: PublishTestResults@2
-    condition: succeededOrFailed()
-    inputs:
-      testRunner: VSTest
-      testResultsFiles: 'tests/**/*.trx'
-      testRunTitle: Windows Unit Tests
+    vmImage: 'windows-2019'
+  steps:  
+    - script: build.bat canary
+      displayName: 'build and unit test'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      inputs:
+        testRunner: VSTest
+        testResultsFiles: 'tests/**/*.trx'
+        testRunTitle: Windows Unit Tests
       
 - job: WindowsIntegrationTests
   dependsOn: WindowsCanaryTests
   pool:
-      vmImage: 'vs2017-win2016'
+      vmImage: 'windows-2019'
   strategy:
     maxParallel: 5
     matrix:
@@ -108,22 +106,19 @@ jobs:
       latest7:
         esVersion: 'latest-7'
   steps:
-      - task: UseDotNet@2
-        inputs:
-            version: '5.0.102'
-      - script: 'build.bat integrate-one $(esVersion) "readonly,writable,bool,xpack"'
-        displayName: '$(esVersion) windows integration tests'
-      - task: PublishTestResults@2
-        condition: succeededOrFailed()
-        inputs:
-            testRunner: VSTest
-            testResultsFiles: 'tests/Tests/**/*.trx'
-            testRunTitle: '$(esVersion) Windows Integration Tests'
+    - script: 'build.bat integrate-one $(esVersion) "readonly,writable,bool,xpack"'
+      displayName: '$(esVersion) windows integration tests'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      inputs:
+          testRunner: VSTest
+          testResultsFiles: 'tests/Tests/**/*.trx'
+          testRunTitle: '$(esVersion) Windows Integration Tests'
             
 - job: LinuxIntegrationTests
   dependsOn: LinuxUnitTests
   pool:
-      vmImage: 'ubuntu-16.04'
+      vmImage: 'ubuntu-20.04'
   strategy:
       maxParallel: 5
       matrix:
@@ -156,14 +151,14 @@ jobs:
         latest7:
           esVersion: 'latest-7'
   steps:
-      - task: UseDotNet@2
-        inputs:
-            version: '5.0.102'
-      - script: './build.sh integrate-one $(esVersion) "readonly,writable"'
-        displayName: '$(esVersion) linux integration tests'
-      - task: PublishTestResults@2
-        condition: succeededOrFailed()
-        inputs:
-            testRunner: VSTest
-            testResultsFiles: 'tests/Tests/**/*.trx'
-            testRunTitle: '$(esVersion) Linux Integration Tests'
+    - task: UseDotNet@2
+      inputs:
+          version: '5.0.103'
+    - script: './build.sh integrate-one $(esVersion) "readonly,writable"'
+      displayName: '$(esVersion) linux integration tests'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      inputs:
+          testRunner: VSTest
+          testResultsFiles: 'tests/Tests/**/*.trx'
+          testRunTitle: '$(esVersion) Linux Integration Tests'

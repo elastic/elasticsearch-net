@@ -1,4 +1,4 @@
-ARG DOTNET_VERSION=5.0.102
+ARG DOTNET_VERSION=5.0.103
 FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION}-1 AS elasticsearch-net-build
 
 WORKDIR /sln
