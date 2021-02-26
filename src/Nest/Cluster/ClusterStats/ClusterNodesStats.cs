@@ -42,9 +42,6 @@ namespace Nest
 
 		[DataMember(Name = "ingest")]
 		public ClusterIngestStats Ingest { get; internal set; }
-
-		[DataMember(Name = "architectures")]
-		public IReadOnlyCollection<ArchitectureStats> Architectures { get; internal set; }
 	}
 
 	public class NodePackagingType
@@ -180,6 +177,9 @@ namespace Nest
 
 		[DataMember(Name = "pretty_names")]
 		public IReadOnlyCollection<ClusterOperatingSystemPrettyNane> PrettyNames { get; internal set; }
+
+		[DataMember(Name = "architectures")]
+		public IReadOnlyCollection<ArchitectureStats> Architectures { get; internal set; }
 	}
 
 	[DataContract]
