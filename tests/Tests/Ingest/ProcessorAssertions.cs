@@ -783,5 +783,40 @@ namespace Tests.Ingest
 
 			public override string Key => "community_id";
 		}
+
+		[SkipVersion("<7.12.0", "Uses network direction processor which was introduced in 7.12.0")]
+		public class NetworkDirection : ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.NetworkDirection<Project>(ud => ud
+					.DestinationIp(f => f.LeadDeveloper.IpAddress)
+					.SourceIp(f => f.LeadDeveloper.IpAddress)
+					.InternalNetworks("network-a", "network-b")
+					.TargetField(p => p.Description)
+					.IgnoreMissing());
+
+			public override IProcessor Initializer => new NetworkDirectionProcessor
+			{
+				DestinationIp = Field<Project>(f => f.LeadDeveloper.IpAddress),
+				SourceIp = Field<Project>(f => f.LeadDeveloper.IpAddress),
+				InternalNetworks = new [] { "network-a", "network-b" },
+				TargetField = "description",
+				IgnoreMissing = true
+			};
+			
+			public override object Json => new
+			{
+				destination_ip = "leadDeveloper.ipAddress",
+				internal_networks = new[]
+				{
+					"network-a", "network-b"
+				},
+				source_ip = "leadDeveloper.ipAddress",
+				target_field = "description",
+				ignore_missing = true
+			};
+			
+			public override string Key => "network_direction";
+		}
 	}
 }
