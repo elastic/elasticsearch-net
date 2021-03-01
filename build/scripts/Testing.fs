@@ -42,7 +42,7 @@ module Tests =
             // force the logger section to be cleared so that azure devops can work its magic.
             // relies heavily on the original console logger
             let wants = match args.CommandArguments with | Integration a -> a.TrxExport | Test t -> t.TrxExport | _ -> false
-            let prefix = if wants then "" else ""
+            let prefix = if wants then ".ci" else ""
             sprintf "tests/%s.runsettings" prefix
         
         Directory.CreateDirectory Paths.BuildOutput |> ignore
