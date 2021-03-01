@@ -28,16 +28,11 @@ jobs:
           dotnet-version: '5.0.100'
 
       - run: ./build.sh documentation
-        name: Test
+        name: Build docs
+        
+      - run: |
+          if [ -n "$(git status --porcelain)" ]; then echo Error: changes found after running documentation; git diff; git status; exit 1; fi
+        name: 'Ensure no stale docs'
+        if: github.event_name == 'pull_request' && startswith(github.ref, 'refs/heads') && github.repository == 'elastic/elasticsearch-net'
 
-      - name: Create Pull Request
-        if: github.event_name == 'push' && startswith(github.ref, 'refs/heads') && github.repository == 'elastic/elasticsearch-net' 
-        id: cpr
-        uses: peter-evans/create-pull-request@v3
-      - name: Check outputs
-        if: github.event_name == 'push' && startswith(github.ref, 'refs/heads') && github.repository == 'elastic/elasticsearch-net'
-        run: |
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
-      
 

@@ -11,33 +11,6 @@ pr:
     exclude:
     - "backport-*" 
 
-jobs:
-- job: StaleDocs
-  pool:
-    vmImage: 'ubuntu-20.04'
-  steps:
-  - task: UseDotNet@2
-    inputs:
-       version: '5.0.103'
-  - script: ./build.sh documentation
-    displayName: 'Generate Documentation'
-  - script: |
-      if [ -n "$(git status --porcelain)" ]; then echo Error: changes found after running documentation; git diff; git status; exit 1; fi
-    displayName: 'Ensure no uncommitted docs'
-
-- job: WindowsCanaryTests
-  pool:
-    vmImage: 'windows-2019'
-  steps:  
-    - script: build.bat canary
-      displayName: 'build and unit test'
-    - task: PublishTestResults@2
-      condition: succeededOrFailed()
-      inputs:
-        testRunner: VSTest
-        testResultsFiles: 'tests/**/*.trx'
-        testRunTitle: Windows Unit Tests
-      
 - job: WindowsIntegrationTests
   dependsOn: WindowsCanaryTests
   pool:
