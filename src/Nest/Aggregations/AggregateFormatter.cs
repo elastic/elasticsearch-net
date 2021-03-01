@@ -939,9 +939,7 @@ namespace Nest
 
 			return dateHistogram;
 		}
-
-
-
+		
 		private IBucket GetKeyedBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var token = reader.GetCurrentJsonToken();
@@ -951,6 +949,32 @@ namespace Nest
 			object key;
 			if (token == JsonToken.String)
 				key = reader.ReadString();
+			else if (token == JsonToken.BeginArray) // we're in a multi-terms bucket
+			{
+				var keys = new List<object>();
+				var count = 0;
+				
+				while(reader.ReadIsInArray(ref count))
+				{
+					object keyItem;
+					
+					var keyToken = reader.GetCurrentJsonToken();
+
+					if (keyToken == JsonToken.String)
+						keyItem = reader.ReadString();
+					else
+					{
+						var numberKey = reader.ReadNumberSegment();
+						if (numberKey.IsLong())
+							keyItem = NumberConverter.ReadInt64(numberKey.Array, numberKey.Offset, out _);
+						else
+							keyItem = NumberConverter.ReadDouble(numberKey.Array, numberKey.Offset, out _);
+					}
+
+					keys.Add(keyItem);
+				}
+				key = keys;
+			}
 			else
 			{
 				var numberSegment = reader.ReadNumberSegment();

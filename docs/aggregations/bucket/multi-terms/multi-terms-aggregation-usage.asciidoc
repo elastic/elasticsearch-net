@@ -1,0 +1,131 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.x
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Bucket/MultiTerms/MultiTermsAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[multi-terms-aggregation-usage]]
+=== Multi Terms Aggregation Usage
+
+A multi-bucket value source based aggregation where buckets are dynamically built - one per unique set of values.
+
+See the Elasticsearch documentation on {ref_current}//search-aggregations-bucket-multi-terms-aggregation.html[multi terms aggregation] for more detail.
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.MultiTerms("states", st => st
+    .CollectMode(TermsAggregationCollectMode.BreadthFirst)
+    .Terms(t => t.Field(f => f.Name), t => t.Field(f => f.NumberOfCommits).Missing(0))
+    .MinimumDocumentCount(1)
+    .Size(5)
+    .ShardSize(100)
+    .ShardMinimumDocumentCount(1)
+    .ShowTermDocCountError(true)
+    .Order(o => o
+        .KeyAscending()
+        .CountDescending()
+    )
+    .Meta(m => m
+        .Add("foo", "bar")
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new MultiTermsAggregation("states")
+{
+    CollectMode = TermsAggregationCollectMode.BreadthFirst,
+    Terms = new List<Term>
+    {
+        new() {Field = Field<Project>(f => f.Name) },
+        new() {Field = Field<Project>(f => f.NumberOfCommits), Missing = 0 }
+    },
+    MinimumDocumentCount = 1,
+    Size = 5,
+    ShardSize = 100,
+    ShardMinimumDocumentCount = 1,
+    ShowTermDocCountError = true,
+    Order = new List<TermsOrder>
+    {
+        TermsOrder.KeyAscending,
+        TermsOrder.CountDescending
+    },
+    Meta = new Dictionary<string, object>
+    {
+        { "foo", "bar" }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "states": {
+    "meta": {
+      "foo": "bar"
+    },
+    "multi_terms": {
+      "collect_mode": "breadth_first",
+      "terms": [
+        {
+          "field": "name"
+        },
+        {
+          "field": "numberOfCommits",
+          "missing": 0
+        }
+      ],
+      "min_doc_count": 1,
+      "shard_min_doc_count": 1,
+      "size": 5,
+      "shard_size": 100,
+      "show_term_doc_count_error": true,
+      "order": [
+        {
+          "_key": "asc"
+        },
+        {
+          "_count": "desc"
+        }
+      ]
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var states = response.Aggregations.MultiTerms("states");
+states.Should().NotBeNull();
+states.DocCountErrorUpperBound.Should().HaveValue();
+states.SumOtherDocCount.Should().HaveValue();
+states.Buckets.Should().NotBeNull();
+states.Buckets.Count.Should().BeGreaterThan(0);
+foreach (var item in states.Buckets)
+{
+    item.Key.Should().NotBeNullOrEmpty();
+    item.DocCount.Should().BeGreaterOrEqualTo(1);
+    item.KeyAsString.Should().NotBeNullOrEmpty();
+}
+states.Meta.Should().NotBeNull().And.HaveCount(1);
+states.Meta["foo"].Should().Be("bar");
+----
+
