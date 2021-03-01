@@ -97,8 +97,8 @@ module Main =
 
         conditional "test-nuget-package" (not parsed.SkipTests && Environment.isWindows)  <| fun _ -> 
             // run release unit tests puts packages in the system cache prevent this from happening locally
-            if not Commandline.runningOnCi then ignore ()
-            else Tests.RunReleaseUnitTests artifactsVersion parsed |> ignore
+            // if not Commandline. then ignore ()
+            Tests.RunReleaseUnitTests artifactsVersion parsed |> ignore
             
         //CANARY
         command "canary" canaryChain  <| fun _ ->

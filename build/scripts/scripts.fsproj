@@ -33,6 +33,9 @@
     <Content Include="..\..\.github\auto-label.json">
       <Link>auto-label.json</Link>
     </Content>
+    <Content Include="..\..\.github\workflows\unit-tests.yml">
+      <Link>unit-tests.yml</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FSharp.Core" Version="5.0.0" />
