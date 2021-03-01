@@ -71,4 +71,26 @@ namespace Tests.QueryDsl.Specialized.RankFeature
 				.Field(f => f.Rank)
 			);
 	}
+
+	public class RankFeatureLinearFunctionUsageTests : QueryDslUsageTestsBase
+	{
+		public RankFeatureLinearFunctionUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		protected override QueryContainer QueryInitializer => new RankFeatureQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = Infer.Field<Project>(f => f.Rank),
+			Function = new RankFeatureLinearFunction()
+		};
+
+		protected override object QueryJson =>
+			new { rank_feature = new { _name = "named_query", boost = 1.1, field = "rank", linear = new { } } };
+
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.RankFeature(rf => rf
+				.Name("named_query")
+				.Boost(1.1)
+				.Field(f => f.Rank)
+				.Linear());
+	}
 }
