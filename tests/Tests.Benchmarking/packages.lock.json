@@ -42,11 +42,11 @@
       },
       "NEST.v7": {
         "type": "Direct",
-        "requested": "[7.5.0-ci20191031T180108, )",
-        "resolved": "7.5.0-ci20191031T180108",
-        "contentHash": "pdDmFcRaaTxPtkYtCOAuXpPAM24QMMlx7GH86ugaKU9QQ3J0qQCxCLHe7BfgoJRnHHqsnizGVUUUNgQC5Axfnw==",
+        "requested": "[7.13.0-ci20210301T140449, )",
+        "resolved": "7.13.0-ci20210301T140449",
+        "contentHash": "DK441NHq8VJIF2rR1osbkco9EdfO8IGA8M8oHGjWohsrHCRzBanoxg4LO6vDY4yGZfsRgW/x/fA+zvHFfGi/Fw==",
         "dependencies": {
-          "Elasticsearch.Net.v7": "[7.5.0-ci20191031T180108, 8.0.0)"
+          "Elasticsearch.Net.v7": "7.13.0-ci20210301T140449"
         }
       },
       "BenchmarkDotNet.Annotations": {
@@ -119,13 +119,12 @@
       },
       "Elasticsearch.Net.v7": {
         "type": "Transitive",
-        "resolved": "7.5.0-ci20191031T180108",
-        "contentHash": "WLCheYQACKinfHTboTLYHKEO8k2Hfnb9n3LVf60RP7mm9fjefpL5AunbnMp1VMmMk2sAmjYI/KMjCe1G/2UCIA==",
+        "resolved": "7.13.0-ci20210301T140449",
+        "contentHash": "/bijZdruoRaQLMy/7niRp8RiJpO95uP7Q8Vxwxxb4jjKSIXcRzgrLaMtWlkhCEQQ3nGZIkdxVEWpapv5pWfrXA==",
         "dependencies": {
-          "System.Buffers": "4.5.0",
-          "System.Diagnostics.DiagnosticSource": "4.5.1",
-          "System.Reflection.Emit": "4.3.0",
-          "System.Reflection.Emit.Lightweight": "4.3.0"
+          "Microsoft.CSharp": "4.6.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "5.0.0"
         }
       },
       "FluentAssertions": {
