@@ -23,7 +23,14 @@ namespace Nest
 
 	public class FieldSort : SortBase, IFieldSort
 	{
+		private const string ShardDoc = "_shard_doc";
+		
 		public static readonly IList<ISort> ByDocumentOrder = new ReadOnlyCollection<ISort>(new List<ISort> { new FieldSort { Field = "_doc" } });
+		public static readonly IList<ISort> ByShardDocumentOrder = new ReadOnlyCollection<ISort>(new List<ISort> { new FieldSort { Field = ShardDoc } });
+
+		public static readonly FieldSort ShardDocumentOrderAscending = new() { Field = ShardDoc, Order = SortOrder.Ascending };
+		public static readonly FieldSort ShardDocumentOrderDescending = new() { Field = ShardDoc, Order = SortOrder.Descending };
+
 		public Field Field { get; set; }
 		public bool? IgnoreUnmappedFields { get; set; }
 		public FieldType? UnmappedType { get; set; }

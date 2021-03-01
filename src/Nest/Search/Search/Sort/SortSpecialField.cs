@@ -15,6 +15,9 @@ namespace Nest
 		Score,
 
 		[EnumMember(Value = "_doc")]
-		DocumentIndexOrder
+		DocumentIndexOrder,
+
+		[EnumMember(Value = "_shard_doc")]
+		ShardDocumentOrder
 	}
 }
