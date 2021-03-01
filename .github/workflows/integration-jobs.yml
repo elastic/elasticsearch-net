@@ -54,7 +54,7 @@ jobs:
             ${{ runner.os }}-nuget-
       - uses: actions/cache@v2
         with:
-          path: /tmp/ElasticManaged/elasticsearch-${{ matrix.stack_version }}
+          path: ~/.local/share/ElasticManaged/elasticsearch-${{ matrix.stack_version }}
           key: ${{ runner.os }}-elastic-managed-${{ matrix.stack_version }}
           restore-keys: |
             ${{ runner.os }}-elastic-managed-
