@@ -58,9 +58,9 @@ namespace Elasticsearch.Net.Specification.TextStructureApi
 		}
 
 		///<summary>Optional parameter to specify the high level file format</summary>
-		public Format? Format
+		public TextStructureFindStructureFormat? TextStructureFindStructureFormat
 		{
-			get => Q<Format? >("format");
+			get => Q<TextStructureFindStructureFormat? >("format");
 			set => Q("format", value);
 		}
 
