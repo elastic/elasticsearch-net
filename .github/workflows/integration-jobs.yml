@@ -21,6 +21,7 @@ jobs:
     name: Tests
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         stack_version: [
            '7.0.0',
@@ -48,12 +49,13 @@ jobs:
       - run: "./build.sh integrate ${{ matrix.stack_version }} readonly,writable random:test_only_one --report"
         name: ${{ matrix.stack_version }}
       - name: Results ${{ matrix.stack_version }}
-        if: always()
+        # only report on if the previous run failed, otherwise this ends up being too noisy
+        if: ${{ failure() }}
         uses: mikepenz/action-junit-report@v2
         with:
           report_paths: 'build/output/junit-*.xml'
           github_token: ${{ secrets.GITHUB_TOKEN }}
           fail_on_failure: true
           require_tests: true
-          check_name: ${{ matrix.stack_version }} Results
+          check_name: ${{ matrix.stack_version }}
           
