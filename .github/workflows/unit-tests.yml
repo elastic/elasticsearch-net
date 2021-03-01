@@ -1,13 +1,20 @@
 name: CI
 
-on: [push]
+
+on:
+    pull_request:
+        paths-ignore:
+            - 'README.md'
+            - '.editorconfig'
+    push:
+        paths-ignore:
+            - 'README.md'
+            - '.editorconfig'
 
 jobs:
     build-and-test:
-        name: Build and Test (Python ${{ matrix.python-version }})
+        name: Build and Test 
         runs-on: ubuntu-latest
-
-
         steps:
             - name: Checkout
               uses: actions/checkout@v2
@@ -17,7 +24,7 @@ jobs:
                   dotnet-version: '5.0.100'
                   
             - run: ./build.sh test --report
-              name: Build
+              name: Test
             - name: Publish Test Report
                   uses: mikepenz/action-junit-report@v2
                   with:
