@@ -19,5 +19,8 @@ namespace Nest
 
 		[DataMember(Name ="type")]
 		public string Type { get; set; }
+
+		[DataMember(Name = "authentication")]
+		public AuthenticateResponse Authentication { get; set; }
 	}
 }
