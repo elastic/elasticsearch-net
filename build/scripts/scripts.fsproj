@@ -22,12 +22,12 @@
   <ItemGroup>
     <Content Include="..\..\build.sh"><Link>build.sh</Link></Content>
     <Content Include="..\..\build.bat"><Link>build.bat</Link></Content>
-    <Content Include="..\..\appveyor.yml"><Link>appveyor.yml</Link></Content>
     <Content Include="..\..\azure-pipelines.yml"><Link>azure-pipelines.yml</Link></Content>
     <Content Include="..\..\.github\workflows\auto-label.yml"><Link>auto-label.yml</Link></Content>
     <Content Include="..\..\.github\workflows\backport.yml"><Link>backport.yml</Link></Content>
     <Content Include="..\..\.github\auto-label.json"><Link>auto-label.json</Link></Content>
     <Content Include="..\..\.github\workflows\test-jobs.yml"><Link>test-jobs.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\stale-jobs.yml"><Link>stale-jobs.yml</Link></Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FSharp.Core" Version="5.0.0" />

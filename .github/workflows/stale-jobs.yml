@@ -1,0 +1,43 @@
+name: Stale
+
+
+on:
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - '.editorconfig'
+  push:
+    paths-ignore:
+      - 'README.md'
+      - '.editorconfig'
+    branches:
+      - main
+      - master
+      - '[0-9]+.[0-9]+'
+      - '[0-9]+.x'
+
+jobs:
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.100'
+
+      - run: ./build.sh documentation
+        name: Test
+
+      - name: Create Pull Request
+        if: never()
+        id: cpr
+        uses: peter-evans/create-pull-request@v3
+      - name: Check outputs
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+      
+#        if: github.event_name == 'push' && startswith(github.ref, 'refs/heads') && github.repository == 'elastic/elasticsearch-net' 
+
