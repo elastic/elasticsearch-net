@@ -48,6 +48,7 @@ jobs:
            'latest-7'
         ]
         
+    steps:
       - run: "./build.sh integrate ${{ matrix.stack_version }} readonly,writable random:test_only_one --report"
         name: ${{ matrix.stack_version }}
       - name: Results ${{ matrix.stack_version }}
