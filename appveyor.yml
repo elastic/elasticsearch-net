@@ -8,7 +8,7 @@ environment:
 install:
     - cmd: choco install dotnet-5.0-sdk --version 5.0.103
 build_script:
-    - cmd: build.bat canary
+    - cmd: build.bat canary 
 
 nuget:
     disable_publish_on_pr: true

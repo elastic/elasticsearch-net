@@ -106,7 +106,7 @@ jobs:
       latest7:
         esVersion: 'latest-7'
   steps:
-    - script: 'build.bat integrate-one $(esVersion) "readonly,writable,bool,xpack"'
+    - script: 'build.bat integrate-one $(esVersion) "readonly,writable,bool,xpack" random:test_only_one'
       displayName: '$(esVersion) windows integration tests'
     - task: PublishTestResults@2
       condition: succeededOrFailed()
@@ -154,7 +154,7 @@ jobs:
     - task: UseDotNet@2
       inputs:
           version: '5.0.103'
-    - script: './build.sh integrate-one $(esVersion) "readonly,writable"'
+    - script: './build.sh integrate-one $(esVersion) "readonly,writable" random:test_only_one' 
       displayName: '$(esVersion) linux integration tests'
     - task: PublishTestResults@2
       condition: succeededOrFailed()
