@@ -83,7 +83,7 @@ Execution hints can be provided anywhere on the command line
     type MultiTarget = All | One
 
     type VersionArguments = { Version: string; OutputLocation: string option }
-    type TestArguments = { TrxExport: bool; CodeCoverage: bool; TestFilter: string option; }
+    type TestArguments = { TrxExport: bool; TestFilter: string option; }
     type IntegrationArguments = { TrxExport: bool; TestFilter: string option; ClusterFilter: string option; ElasticsearchVersions: string list; }
 
     type BenchmarkArguments = { Endpoint: string; Username: string option; Password: string option; }
@@ -207,7 +207,6 @@ Execution hints can be provided anywhere on the command line
                 parsed with CommandArguments = Test {
                         TestFilter = None
                         TrxExport = report 
-                        CodeCoverage = false
                 }
             }
         
@@ -216,7 +215,6 @@ Execution hints can be provided anywhere on the command line
                 parsed with CommandArguments = Test {
                         TestFilter = None
                         TrxExport = report 
-                        CodeCoverage = false
                 }
             }
         | ["test"; testFilter] ->
@@ -224,7 +222,6 @@ Execution hints can be provided anywhere on the command line
                 parsed with CommandArguments = Test {
                         TestFilter = Some testFilter
                         TrxExport = report 
-                        CodeCoverage = false
                 }
             }
 

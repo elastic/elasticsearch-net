@@ -54,12 +54,8 @@ module Tests =
             let loggerPathArgs = sprintf "LogFilePath=%s" junitOutput
             let loggerArg = sprintf "--logger:\"junit;%s\"" loggerPathArgs
             match wants with | true -> [loggerArg] | false -> []
-        let wantsCoverage =
-            let wants = match args.CommandArguments with | Test t -> t.CodeCoverage | _ -> false
-            match wants with | true -> ["--collect:\"XPlat Code Coverage\""] | false -> []
            
-        let commandWithAdditionalOptions =
-            wantsCoverage |> List.append wantsTrx |> List.append command
+        let commandWithAdditionalOptions = wantsTrx |> List.append command
             
         Tooling.DotNet.ExecInWithTimeout "." commandWithAdditionalOptions (TimeSpan.FromMinutes 30.)
 

@@ -20,7 +20,6 @@
     <PackageReference Include="JunitXml.TestLogger" Version="2.1.78" />
     
     <PackageReference Include="Nullean.VsTest.Pretty.TestLogger" Version="0.3.0" />
-    <PackageReference Include="coverlet.collector" Version="1.1.0" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     
     <PackageReference Include="DiffPlex" Version="1.4.1" />
