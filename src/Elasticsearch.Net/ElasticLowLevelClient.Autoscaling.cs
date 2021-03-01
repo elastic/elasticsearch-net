@@ -46,37 +46,31 @@ namespace Elasticsearch.Net.Specification.AutoscalingApi
 		///<summary>DELETE on /_autoscaling/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-delete-autoscaling-policy.html</para></summary>
 		///<param name = "name">the name of the autoscaling policy</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse DeletePolicy<TResponse>(string name, DeleteAutoscalingPolicyRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_autoscaling/policy/{name:name}"), null, RequestParams(requestParameters));
 		///<summary>DELETE on /_autoscaling/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-delete-autoscaling-policy.html</para></summary>
 		///<param name = "name">the name of the autoscaling policy</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("autoscaling.delete_autoscaling_policy", "name")]
 		public Task<TResponse> DeletePolicyAsync<TResponse>(string name, DeleteAutoscalingPolicyRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_autoscaling/policy/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_autoscaling/capacity <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-get-autoscaling-capacity.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetCapacity<TResponse>(GetAutoscalingCapacityRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_autoscaling/capacity", null, RequestParams(requestParameters));
 		///<summary>GET on /_autoscaling/capacity <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-get-autoscaling-capacity.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("autoscaling.get_autoscaling_capacity", "")]
 		public Task<TResponse> GetCapacityAsync<TResponse>(GetAutoscalingCapacityRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_autoscaling/capacity", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_autoscaling/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-get-autoscaling-policy.html</para></summary>
 		///<param name = "name">the name of the autoscaling policy</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetPolicy<TResponse>(string name, GetAutoscalingPolicyRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_autoscaling/policy/{name:name}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_autoscaling/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-get-autoscaling-policy.html</para></summary>
 		///<param name = "name">the name of the autoscaling policy</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("autoscaling.get_autoscaling_policy", "name")]
 		public Task<TResponse> GetPolicyAsync<TResponse>(string name, GetAutoscalingPolicyRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_autoscaling/policy/{name:name}"), ctx, null, RequestParams(requestParameters));
@@ -84,14 +78,12 @@ namespace Elasticsearch.Net.Specification.AutoscalingApi
 		///<param name = "name">the name of the autoscaling policy</param>
 		///<param name = "body">the specification of the autoscaling policy</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse PutPolicy<TResponse>(string name, PostData body, PutAutoscalingPolicyRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_autoscaling/policy/{name:name}"), body, RequestParams(requestParameters));
 		///<summary>PUT on /_autoscaling/policy/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-put-autoscaling-policy.html</para></summary>
 		///<param name = "name">the name of the autoscaling policy</param>
 		///<param name = "body">the specification of the autoscaling policy</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("autoscaling.put_autoscaling_policy", "name, body")]
 		public Task<TResponse> PutPolicyAsync<TResponse>(string name, PostData body, PutAutoscalingPolicyRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_autoscaling/policy/{name:name}"), ctx, body, RequestParams(requestParameters));
