@@ -22,7 +22,6 @@
   <ItemGroup>
     <Content Include="..\..\build.sh"><Link>build.sh</Link></Content>
     <Content Include="..\..\build.bat"><Link>build.bat</Link></Content>
-    <Content Include="..\..\azure-pipelines.yml"><Link>azure-pipelines.yml</Link></Content>
     <Content Include="..\..\.github\workflows\auto-label.yml"><Link>auto-label.yml</Link></Content>
     <Content Include="..\..\.github\workflows\backport.yml"><Link>backport.yml</Link></Content>
     <Content Include="..\..\.github\auto-label.json"><Link>auto-label.json</Link></Content>
