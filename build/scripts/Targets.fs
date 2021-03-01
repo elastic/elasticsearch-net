@@ -79,7 +79,7 @@ module Main =
 
         target "nuget-pack" <| fun _ -> Build.Pack artifactsVersion
 
-        conditional "nuget-pack-versioned" (isCanary && Environment.isWindows) <| fun _ -> Build.VersionedPack artifactsVersion
+        conditional "nuget-pack-versioned" (isCanary) <| fun _ -> Build.VersionedPack artifactsVersion
 
         conditional "generate-release-notes" (not isCanary)  <| fun _ -> ReleaseNotes.GenerateNotes buildVersions
         
@@ -95,14 +95,10 @@ module Main =
                 Fake.IO.Shell.cp_r Paths.BuildOutput path
                 printfn "Finished Release Build %O, output copied to: %s" artifactsVersion path
 
-        conditional "test-nuget-package" (not parsed.SkipTests && Environment.isWindows)  <| fun _ -> 
-            // run release unit tests puts packages in the system cache prevent this from happening locally
-            // if not Commandline. then ignore ()
-            Tests.RunReleaseUnitTests artifactsVersion parsed |> ignore
+        conditional "test-nuget-package" (not parsed.SkipTests) <| fun _ -> Tests.RunReleaseUnitTests artifactsVersion parsed 
             
         //CANARY
-        command "canary" canaryChain  <| fun _ ->
-            printfn "Finished Release Build %O" artifactsVersion
+        command "canary" canaryChain  <| fun _ -> printfn "Finished Release Build %O" artifactsVersion
 
         // ADDITIONAL COMMANDS
         
