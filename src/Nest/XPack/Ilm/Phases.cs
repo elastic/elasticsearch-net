@@ -21,6 +21,9 @@ namespace Nest
 
 		[DataMember(Name = "warm")]
 		IPhase Warm { get; set; }
+
+		[DataMember(Name = "frozen")]
+		IPhase Frozen { get; set; }
 	}
 
 	public class Phases : IPhases
@@ -29,6 +32,7 @@ namespace Nest
 		public IPhase Delete { get; set; }
 		public IPhase Hot { get; set; }
 		public IPhase Warm { get; set; }
+		public IPhase Frozen { get; set; }
 	}
 
 	public class PhasesDescriptor : DescriptorBase<PhasesDescriptor, IPhases>, IPhases
@@ -37,6 +41,7 @@ namespace Nest
 		IPhase IPhases.Delete { get; set; }
 		IPhase IPhases.Hot { get; set; }
 		IPhase IPhases.Warm { get; set; }
+		IPhase IPhases.Frozen { get; set; }
 
 		public PhasesDescriptor Warm(Func<PhaseDescriptor, IPhase> selector) =>
 			Assign(selector, (a, v) => a.Warm = v?.InvokeOrDefault(new PhaseDescriptor()));
@@ -49,5 +54,8 @@ namespace Nest
 
 		public PhasesDescriptor Delete(Func<PhaseDescriptor, IPhase> selector) =>
 			Assign(selector, (a, v) => a.Delete = v?.InvokeOrDefault(new PhaseDescriptor()));
+
+		public PhasesDescriptor Frozen(Func<PhaseDescriptor, IPhase> selector) =>
+			Assign(selector, (a, v) => a.Frozen = v?.InvokeOrDefault(new PhaseDescriptor()));
 	}
 }
