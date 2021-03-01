@@ -35,6 +35,15 @@ namespace Nest
 		/// </remarks>
 		[DataMember(Name ="max_size")]
 		string MaxSize { get; set; }
+
+		/// <summary>
+		/// The maximum size of the primary shards in the index e.g. "2gb"
+		/// </summary>
+		/// <remarks>
+		/// Valid in Elasticsearch 7.12.0+
+		/// </remarks>
+		[DataMember(Name = "max_primary_shard_size")]
+		string MaxPrimaryShardSize { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -48,6 +57,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public string MaxSize { get; set; }
+
+		/// <inheritdoc />
+		public string MaxPrimaryShardSize { get; set; }
 	}
 
 	/// <inheritdoc cref="IRolloverConditions" />
@@ -57,6 +69,7 @@ namespace Nest
 		Time IRolloverConditions.MaxAge { get; set; }
 		long? IRolloverConditions.MaxDocs { get; set; }
 		string IRolloverConditions.MaxSize { get; set; }
+		string IRolloverConditions.MaxPrimaryShardSize { get; set; }
 
 		/// <inheritdoc cref="IRolloverConditions.MaxAge" />
 		public RolloverConditionsDescriptor MaxAge(Time maxAge) => Assign(maxAge, (a, v) => a.MaxAge = v);
@@ -66,5 +79,8 @@ namespace Nest
 
 		/// <inheritdoc cref="IRolloverConditions.MaxSize" />
 		public RolloverConditionsDescriptor MaxSize(string maxSize) => Assign(maxSize, (a, v) => a.MaxSize = v);
+
+		/// <inheritdoc cref="IRolloverConditions.MaxPrimaryShardSize" />
+		public RolloverConditionsDescriptor MaxPrimaryShardSize(string maxPrimaryShardSize) => Assign(maxPrimaryShardSize, (a, v) => a.MaxPrimaryShardSize = v);
 	}
 }
