@@ -18,7 +18,7 @@ on:
 
 jobs:
   unit-tests:
-    name: Unit Tests
+    name: Documentation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,13 +31,13 @@ jobs:
         name: Test
 
       - name: Create Pull Request
-        if: never()
+        if: github.event_name == 'push' && startswith(github.ref, 'refs/heads') && github.repository == 'elastic/elasticsearch-net' 
         id: cpr
         uses: peter-evans/create-pull-request@v3
       - name: Check outputs
+        if: github.event_name == 'push' && startswith(github.ref, 'refs/heads') && github.repository == 'elastic/elasticsearch-net'
         run: |
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
           echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
       
-#        if: github.event_name == 'push' && startswith(github.ref, 'refs/heads') && github.repository == 'elastic/elasticsearch-net' 
 
