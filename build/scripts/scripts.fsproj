@@ -28,6 +28,7 @@
     <Content Include="..\..\.github\auto-label.json"><Link>auto-label.json</Link></Content>
     <Content Include="..\..\.github\workflows\test-jobs.yml"><Link>test-jobs.yml</Link></Content>
     <Content Include="..\..\.github\workflows\stale-jobs.yml"><Link>stale-jobs.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\integration-jobs.yml"><Link>integration-jobs.yml</Link></Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FSharp.Core" Version="5.0.0" />
