@@ -46,6 +46,13 @@ jobs:
       - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '5.0.100'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+            
       - run: "./build.sh integrate ${{ matrix.stack_version }} readonly,writable random:test_only_one --report"
         name: ${{ matrix.stack_version }}
       - name: Results ${{ matrix.stack_version }}
