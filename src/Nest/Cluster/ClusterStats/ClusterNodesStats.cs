@@ -177,6 +177,9 @@ namespace Nest
 
 		[DataMember(Name = "pretty_names")]
 		public IReadOnlyCollection<ClusterOperatingSystemPrettyNane> PrettyNames { get; internal set; }
+
+		[DataMember(Name = "architectures")]
+		public IReadOnlyCollection<ArchitectureStats> Architectures { get; internal set; }
 	}
 
 	[DataContract]
@@ -254,5 +257,15 @@ namespace Nest
 
 		[DataMember(Name ="time_in_millis")]
 		public long TimeInMilliseconds { get; set; }
+	}
+
+	[DataContract]
+	public class ArchitectureStats
+	{
+		[DataMember(Name = "arch")]
+		public string Architecture { get; set; }
+
+		[DataMember(Name = "count")]
+		public int Count { get; set; }
 	}
 }
