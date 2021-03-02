@@ -94,8 +94,8 @@ module Main =
                 Fake.IO.Shell.cp_r Paths.BuildOutput path
                 printfn "Finished Release Build %O, output copied to: %s" artifactsVersion path
 
-        conditional "test-nuget-package" (not parsed.SkipTests) <| fun _ -> Tests.RunReleaseUnitTests artifactsVersion parsed isCanary
-            
+        conditional "test-nuget-package" (not parsed.SkipTests) <| fun _ -> Tests.RunReleaseUnitTests artifactsVersion parsed
+        
         //CANARY
         command "canary" canaryChain  <| fun _ -> printfn "Finished Release Build %O" artifactsVersion
 
