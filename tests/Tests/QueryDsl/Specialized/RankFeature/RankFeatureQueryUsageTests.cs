@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -72,6 +73,7 @@ namespace Tests.QueryDsl.Specialized.RankFeature
 			);
 	}
 
+	[SkipVersion("<7.12.0", "Introduced in 7.12.0")]
 	public class RankFeatureLinearFunctionUsageTests : QueryDslUsageTestsBase
 	{
 		public RankFeatureLinearFunctionUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
