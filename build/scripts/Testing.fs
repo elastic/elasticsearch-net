@@ -70,7 +70,8 @@ module Tests =
         //package and not one from cache...y
         Environment.setEnvironVar "TestPackageVersion" (version.Full.ToString())
         Tooling.DotNet.ExecIn "tests/Tests" ["clean";] |> ignore
-        Tooling.DotNet.ExecIn "tests/Tests" ["restore";] |> ignore
+        // needs forced eval because it picks up local nuget packages not part of package.lock.json
+        Tooling.DotNet.ExecIn "tests/Tests" ["restore"; "--force-evaluate"] |> ignore
         dotnetTest "tests/Tests/Tests.csproj" args
 
     let RunUnitTests args =
