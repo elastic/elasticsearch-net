@@ -1,0 +1,74 @@
+name: Integration
+
+
+on:
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - '.editorconfig'
+  push:
+    paths-ignore:
+      - 'README.md'
+      - '.editorconfig'
+    branches:
+      - main
+      - master
+      - '[0-9]+.[0-9]+'
+      - '[0-9]+.x'
+
+jobs:
+  integration-tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        stack_version: [
+           '7.0.0',
+           '7.1.0',
+           '7.2.0',
+           '7.3.0',
+           '7.4.0',
+           '7.5.0',
+           '7.6.0',
+           '7.7.0',
+           '7.8.0',
+           '7.9.0',
+           '7.10.0',
+           '7.11.0',
+           '7.12.0-SNAPSHOT',
+           'latest-7'
+        ]
+        
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.100'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+      - uses: actions/cache@v2
+        with:
+          path: ~/.local/share/ElasticManaged/elasticsearch-${{ matrix.stack_version }}
+          key: ${{ runner.os }}-elastic-managed-${{ matrix.stack_version }}
+          restore-keys: |
+            ${{ runner.os }}-elastic-managed-
+            
+      - run: "./build.sh integrate ${{ matrix.stack_version }} readonly,writable random:test_only_one --report"
+        name: ${{ matrix.stack_version }}
+      - name: Results ${{ matrix.stack_version }}
+        # only report on if the previous run failed, otherwise this ends up being too noisy
+        if: ${{ failure() }}
+        uses: mikepenz/action-junit-report@v2
+        with:
+          report_paths: 'build/output/junit-*.xml'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_failure: true
+          require_tests: true
+          check_name: ${{ matrix.stack_version }}
+          
