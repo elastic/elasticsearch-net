@@ -19,7 +19,13 @@ open System.IO.Compression
 
 module Build =
 
-    let Restore() = DotNet.Exec ["restore"; Paths.Solution; ] |> ignore
+    let Restore isCanary =
+        let args =
+            let a = ["restore"; Paths.Solution; ]
+            match isCanary with
+            | true -> a |> List.append [" --force-evaluate"]
+            | false -> a 
+        DotNet.Exec args |> ignore
         
     let Compile _ version = 
         let props = 

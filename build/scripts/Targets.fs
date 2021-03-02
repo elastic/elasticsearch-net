@@ -63,7 +63,7 @@ module Main =
         conditional "clean" parsed.ReleaseBuild  <| fun _ -> Build.Clean parsed 
         target "version" <| fun _ -> printfn "Artifacts Version: %O" artifactsVersion
         
-        target "restore" Build.Restore
+        target "restore" <| fun _ -> Build.Restore isCanary
         
         target "full-build" <| fun _ -> Build.Compile parsed artifactsVersion
 
