@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
@@ -19,6 +20,7 @@ namespace Tests.Aggregations.Bucket.MultiTerms
 	 *
 	 * See the Elasticsearch documentation on {ref_current}//search-aggregations-bucket-multi-terms-aggregation.html[multi terms aggregation] for more detail.
 	 */
+	[SkipVersion("<7.12.0", "Multi terms aggregation added in 7.12.0")]
 	public class MultiTermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 	{
 		public MultiTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
