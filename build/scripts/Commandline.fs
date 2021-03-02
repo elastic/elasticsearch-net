@@ -82,7 +82,7 @@ Execution hints can be provided anywhere on the command line
     type MultiTarget = All | One
 
     type VersionArguments = { Version: string; OutputLocation: string option }
-    type TestArguments = { TrxExport: bool; CodeCoverage: bool; TestFilter: string option; }
+    type TestArguments = { TrxExport: bool; TestFilter: string option; }
     type IntegrationArguments = { TrxExport: bool; TestFilter: string option; ClusterFilter: string option; ElasticsearchVersions: string list; }
 
     type BenchmarkArguments = { Endpoint: string; Username: string option; Password: string option; }
@@ -114,16 +114,12 @@ Execution hints can be provided anywhere on the command line
         RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || 
         RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
         
-    let private buildingOnAzurePipeline = Environment.environVarAsBool "TF_BUILD"
-        
-    let runningOnAzureDevops = Environment.hasEnvironVar "TF_BUILD" 
-    let runningOnCi = runningOnAzureDevops || Environment.hasEnvironVar "APPVEYOR_BUILD_VERSION"
-    
     let parse (args: string list) =
         
         let filteredArgs = 
             args
             |> List.filter(fun x -> 
+               x <> "--report" && 
                x <> "skiptests" && 
                x <> "gendocs" && 
                x <> "skipdocs" && 
@@ -143,6 +139,7 @@ Execution hints can be provided anywhere on the command line
             | _ -> "build"
         let skipTests = args |> List.exists (fun x -> x = "skiptests") || target = "documentation"
         let skipDocs = args |> List.exists (fun x -> x = "skipdocs")
+        let report = args |> List.exists (fun x -> x = "--report")
 
         let parsed = {
             NonInteractive = args |> List.exists (fun x -> x = "non-interactive")
@@ -206,8 +203,7 @@ Execution hints can be provided anywhere on the command line
             {
                 parsed with CommandArguments = Test {
                         TestFilter = None
-                        TrxExport = buildingOnAzurePipeline 
-                        CodeCoverage = false
+                        TrxExport = report 
                 }
             }
         
@@ -215,16 +211,14 @@ Execution hints can be provided anywhere on the command line
             {
                 parsed with CommandArguments = Test {
                         TestFilter = None
-                        TrxExport = buildingOnAzurePipeline 
-                        CodeCoverage = false
+                        TrxExport = report 
                 }
             }
         | ["test"; testFilter] ->
             {
                 parsed with CommandArguments = Test {
                         TestFilter = Some testFilter
-                        TrxExport = buildingOnAzurePipeline 
-                        CodeCoverage = false
+                        TrxExport = report 
                 }
             }
 
@@ -248,14 +242,14 @@ Execution hints can be provided anywhere on the command line
         | ["integrate"; esVersions] -> 
             {
                 parsed with CommandArguments = Integration {
-                        TrxExport = buildingOnAzurePipeline
+                        TrxExport = report
                         ElasticsearchVersions = split esVersions; ClusterFilter = None; TestFilter = None
                 }
             }
         | ["integrate"; esVersions; clusterFilter] ->
             {
                 parsed with CommandArguments = Integration {
-                        TrxExport = buildingOnAzurePipeline
+                        TrxExport = report
                         ElasticsearchVersions = split esVersions;
                         ClusterFilter = Some clusterFilter;
                         TestFilter = None
@@ -264,7 +258,7 @@ Execution hints can be provided anywhere on the command line
         | ["integrate"; esVersions; clusterFilter; testFilter] ->
             {
                 parsed with CommandArguments = Integration {
-                        TrxExport = buildingOnAzurePipeline
+                        TrxExport = report
                         ElasticsearchVersions = split esVersions;
                         ClusterFilter = Some clusterFilter
                         TestFilter = Some testFilter

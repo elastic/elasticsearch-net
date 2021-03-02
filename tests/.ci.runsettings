@@ -8,14 +8,4 @@
 			<Logger friendlyName="pretty" enabled="False"/>
 		</Loggers>
 	</LoggerRunSettings>
-	<DataCollectionRunSettings>
-		<DataCollectors>
-			<DataCollector friendlyName="XPlat Code Coverage">
-				<Configuration>
-					<Format>cobertura</Format>
-					<UseSourceLink>true</UseSourceLink>
-				</Configuration>
-			</DataCollector>
-		</DataCollectors>
-	</DataCollectionRunSettings>
 </RunSettings>
