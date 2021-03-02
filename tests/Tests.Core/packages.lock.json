@@ -42,6 +42,12 @@
         "resolved": "16.5.0",
         "contentHash": "yHZOhVSPuGqgHi+KhHiAZqNY08avkQraXKvgKgDU8c/ztmGzw7gmukkv49EaTq6T3xmp4XroWk3gAlbJHMxl8w=="
       },
+      "Microsoft.NETFramework.ReferenceAssemblies": {
+        "type": "Direct",
+        "requested": "[1.0.0-preview.2, )",
+        "resolved": "1.0.0-preview.2",
+        "contentHash": "m+pJPEO7HyXvrOna5Sr3s77ewXonjYWJTNL6drh8xACnMNxnlqUDKx9HfGeSE9wmfY0lQwppaeZpFTPGaH7kZg=="
+      },
       "NETStandard.Library": {
         "type": "Direct",
         "requested": "[2.0.3, )",
