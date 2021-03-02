@@ -19,7 +19,7 @@ open System.IO.Compression
 
 module Build =
 
-    let Restore() = DotNet.Exec ["restore"; Paths.Solution; ] |> ignore
+    let Restore () = DotNet.Exec ["restore"; Paths.Solution; ] |> ignore
         
     let Compile _ version = 
         let props = 

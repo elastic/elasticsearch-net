@@ -63,8 +63,7 @@ module Main =
         conditional "clean" parsed.ReleaseBuild  <| fun _ -> Build.Clean parsed 
         target "version" <| fun _ -> printfn "Artifacts Version: %O" artifactsVersion
         
-        target "restore" Build.Restore
-        
+        target "restore" Build.Restore 
         target "full-build" <| fun _ -> Build.Compile parsed artifactsVersion
 
         //TEST
@@ -95,8 +94,8 @@ module Main =
                 Fake.IO.Shell.cp_r Paths.BuildOutput path
                 printfn "Finished Release Build %O, output copied to: %s" artifactsVersion path
 
-        conditional "test-nuget-package" (not parsed.SkipTests) <| fun _ -> Tests.RunReleaseUnitTests artifactsVersion parsed 
-            
+        conditional "test-nuget-package" (not parsed.SkipTests) <| fun _ -> Tests.RunReleaseUnitTests artifactsVersion parsed
+        
         //CANARY
         command "canary" canaryChain  <| fun _ -> printfn "Finished Release Build %O" artifactsVersion
 
