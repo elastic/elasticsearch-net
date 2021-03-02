@@ -1,0 +1,83 @@
+name: Tests
+
+
+on:
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - '.editorconfig'
+  push:
+    paths-ignore:
+      - 'README.md'
+      - '.editorconfig'
+    branches:
+      - main
+      - master
+      - '[0-9]+.[0-9]+'
+      - '[0-9]+.x'
+
+jobs:
+  unit-tests:
+    name: Unit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.100'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - run: ./build.sh test --report
+        name: Test
+      - name: Test Results
+        if: always()
+        uses: mikepenz/action-junit-report@v2
+        with:
+          report_paths: 'build/output/junit-*.xml'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_failure: true
+          require_tests: true
+          check_name: Unit Test Results
+          
+  # Packages nuget packages first and then uses the nuget packages to test
+  # Also builds versioned nuget packages
+  canary-tests:
+    name: Canary
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.100'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - run: ./build.sh canary --report
+        name: Test
+      - name: Test Results
+        if: always()
+        uses: mikepenz/action-junit-report@v2
+        with:
+          report_paths: 'build/output/junit-*.xml'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_failure: true
+          require_tests: true
+          check_name: Canary Test Results
+          
+      # Github packages requires authentication, this is likely going away in the future so for now we publish to feedz.io
+      # Only runs on builds on heads
+      - run: dotnet nuget push 'build/output/*.nupkg' -k ${{secrets.FEEDZ_IO_API_KEY}} -s https://f.feedz.io/elastic/all/nuget/index.json --skip-duplicate --no-symbols true
+        name: publish canary packages to feedz.io
+        if: github.event_name == 'push' && startswith(github.ref, 'refs/heads')
+

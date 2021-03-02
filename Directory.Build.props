@@ -33,6 +33,8 @@
     <OutputPath Condition="'$(OutputPathBaseDir)' != ''">$(OutputPathBaseDir)\$(MSBuildProjectName)\</OutputPath>
     <SolutionRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))</SolutionRoot>
 
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+
     <DefineConstants Condition="'$(TargetFramework)'=='net461' or '$(TargetFramework)'=='net472'">$(DefineConstants);FULLFRAMEWORK</DefineConstants>
     <DefineConstants Condition="$(DefineConstants.Contains(FULLFRAMEWORK)) == False">$(DefineConstants);DOTNETCORE</DefineConstants>
     <DefineConstants Condition="$(DefineConstants.Contains(FULLFRAMEWORK)) == False and '$(TargetFramework)'!='netstandard2.0'">$(DefineConstants);DOTNETCORE_2_1_OR_HIGHER</DefineConstants>
