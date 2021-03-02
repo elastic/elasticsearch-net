@@ -38,9 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{EAE89579-C
 ProjectSection(SolutionItems) = preProject
 	.editorconfig = .editorconfig
 	.gitignore = .gitignore
-	appveyor.yml = appveyor.yml
 	global.json = global.json
-	azure-pipelines.yml = azure-pipelines.yml
 	nuget.config = nuget.config
 	dotnet-tools.json = dotnet-tools.json
 EndProjectSection

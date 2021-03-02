@@ -12,11 +12,11 @@ indent_size = 4
 indent_style = tab
 indent_size = 4
 
-[*.{fs,fsx,yml}]
+[*.{fs,fsx}]
 indent_style = space
 indent_size = 4
 
-[*.{md,markdown,json,js,csproj,fsproj,targets,targets,props}]
+[*.{md,markdown,json,js,csproj,fsproj,targets,targets,props,yml}]
 indent_style = space
 indent_size = 2
 
