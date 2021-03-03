@@ -7,6 +7,8 @@ using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
+using Tests.Core.Extensions;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 using static Elastic.Elasticsearch.Ephemeral.ClusterAuthentication;
@@ -63,6 +65,13 @@ namespace Tests.XPack.Security.User.GetUserAccessToken
 			response.Type.Should().NotBeNullOrEmpty().And.Be("Bearer");
 			response.ExpiresIn.Should().BeGreaterThan(0);
 			response.Scope.Should().Be("full");
+
+			if (TestConfiguration.Instance.InRange(">=7.11.0"))
+			{
+				response.Authentication.Should().NotBeNull();
+				response.Authentication.Username.Should().NotBeNullOrEmpty();
+				response.Authentication.Roles.Count.Should().BeGreaterThan(0);
+			}
 		}
 	}
 
