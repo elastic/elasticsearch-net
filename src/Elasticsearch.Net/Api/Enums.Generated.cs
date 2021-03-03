@@ -412,19 +412,6 @@ namespace Elasticsearch.Net
 	}
 
 	[StringEnum]
-	public enum MachineLearningFindFileStructureFormat
-	{
-		[EnumMember(Value = "ndjson")]
-		Ndjson,
-		[EnumMember(Value = "xml")]
-		Xml,
-		[EnumMember(Value = "delimited")]
-		Delimited,
-		[EnumMember(Value = "semi_structured_text")]
-		SemiStructuredText
-	}
-
-	[StringEnum]
 	public enum ThreadType
 	{
 		[EnumMember(Value = "cpu")]
@@ -444,6 +431,19 @@ namespace Elasticsearch.Net
 		Parents,
 		[EnumMember(Value = "none")]
 		None
+	}
+
+	[StringEnum]
+	public enum TextStructureFindStructureFormat
+	{
+		[EnumMember(Value = "ndjson")]
+		Ndjson,
+		[EnumMember(Value = "xml")]
+		Xml,
+		[EnumMember(Value = "delimited")]
+		Delimited,
+		[EnumMember(Value = "semi_structured_text")]
+		SemiStructuredText
 	}
 
 	public static class KnownEnums
@@ -474,9 +474,9 @@ namespace Elasticsearch.Net
 			EnumStringResolvers.TryAdd(typeof(Conflicts), (e) => GetStringValue((Conflicts)e));
 			EnumStringResolvers.TryAdd(typeof(OpType), (e) => GetStringValue((OpType)e));
 			EnumStringResolvers.TryAdd(typeof(IndicesShardStoresStatus), (e) => GetStringValue((IndicesShardStoresStatus)e));
-			EnumStringResolvers.TryAdd(typeof(MachineLearningFindFileStructureFormat), (e) => GetStringValue((MachineLearningFindFileStructureFormat)e));
 			EnumStringResolvers.TryAdd(typeof(ThreadType), (e) => GetStringValue((ThreadType)e));
 			EnumStringResolvers.TryAdd(typeof(GroupBy), (e) => GetStringValue((GroupBy)e));
+			EnumStringResolvers.TryAdd(typeof(TextStructureFindStructureFormat), (e) => GetStringValue((TextStructureFindStructureFormat)e));
 		}
 
 		private class EnumDictionary : Dictionary<Enum, string>
@@ -947,23 +947,6 @@ namespace Elasticsearch.Net
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'IndicesShardStoresStatus'");
 		}
 
-		public static string GetStringValue(this MachineLearningFindFileStructureFormat enumValue)
-		{
-			switch (enumValue)
-			{
-				case MachineLearningFindFileStructureFormat.Ndjson:
-					return "ndjson";
-				case MachineLearningFindFileStructureFormat.Xml:
-					return "xml";
-				case MachineLearningFindFileStructureFormat.Delimited:
-					return "delimited";
-				case MachineLearningFindFileStructureFormat.SemiStructuredText:
-					return "semi_structured_text";
-			}
-
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'MachineLearningFindFileStructureFormat'");
-		}
-
 		public static string GetStringValue(this ThreadType enumValue)
 		{
 			switch (enumValue)
@@ -992,6 +975,23 @@ namespace Elasticsearch.Net
 			}
 
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'GroupBy'");
+		}
+
+		public static string GetStringValue(this TextStructureFindStructureFormat enumValue)
+		{
+			switch (enumValue)
+			{
+				case TextStructureFindStructureFormat.Ndjson:
+					return "ndjson";
+				case TextStructureFindStructureFormat.Xml:
+					return "xml";
+				case TextStructureFindStructureFormat.Delimited:
+					return "delimited";
+				case TextStructureFindStructureFormat.SemiStructuredText:
+					return "semi_structured_text";
+			}
+
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'TextStructureFindStructureFormat'");
 		}
 
 		public static string GetStringValue(this Enum e)

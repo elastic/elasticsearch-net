@@ -36,6 +36,7 @@ using Elasticsearch.Net.Specification.IndexLifecycleManagementApi;
 using Elasticsearch.Net.Specification.IndicesApi;
 using Elasticsearch.Net.Specification.IngestApi;
 using Elasticsearch.Net.Specification.LicenseApi;
+using Elasticsearch.Net.Specification.LogstashApi;
 using Elasticsearch.Net.Specification.MachineLearningApi;
 using Elasticsearch.Net.Specification.MigrationApi;
 using Elasticsearch.Net.Specification.NodesApi;
@@ -46,6 +47,7 @@ using Elasticsearch.Net.Specification.SnapshotApi;
 using Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi;
 using Elasticsearch.Net.Specification.SqlApi;
 using Elasticsearch.Net.Specification.TasksApi;
+using Elasticsearch.Net.Specification.TextStructureApi;
 using Elasticsearch.Net.Specification.TransformApi;
 using Elasticsearch.Net.Specification.WatcherApi;
 using Elasticsearch.Net.Specification.XPackApi;
@@ -131,6 +133,12 @@ namespace Elasticsearch.Net
 
 		///<summary>License APIs</summary>
 		LowLevelLicenseNamespace License
+		{
+			get;
+		}
+
+		///<summary>Logstash APIs</summary>
+		LowLevelLogstashNamespace Logstash
 		{
 			get;
 		}
@@ -1205,6 +1213,12 @@ namespace Elasticsearch.Net
 
 		///<summary>Tasks APIs</summary>
 		LowLevelTasksNamespace Tasks
+		{
+			get;
+		}
+
+		///<summary>Text Structure APIs</summary>
+		LowLevelTextStructureNamespace TextStructure
 		{
 			get;
 		}
