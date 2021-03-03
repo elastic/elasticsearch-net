@@ -100,13 +100,13 @@ namespace Tests.Search.PointInTime
 			}
 		}) { }
 
-		[I] public async Task OpenPointInTimeResponse() => await Assert<OpenPointInTimeResponse>(OpenPointInTimeStep, (v, r) =>
+		[I] public async Task OpenPointInTimeResponse() => await Assert<OpenPointInTimeResponse>(OpenPointInTimeStep, r =>
 		{
 			r.ShouldBeValid();
 			r.Id.Should().NotBeNullOrEmpty();
 		});
 
-		[I] public async Task SearchPointInTimeResponse() => await Assert<SearchResponse<Project>>(SearchPointInTimeStep, (v, r) =>
+		[I] public async Task SearchPointInTimeResponse() => await Assert<SearchResponse<Project>>(SearchPointInTimeStep, r =>
 		{
 			r.ShouldBeValid();
 			r.PointInTimeId.Should().NotBeNullOrEmpty();
@@ -119,7 +119,7 @@ namespace Tests.Search.PointInTime
 			r.Took.Should().BeGreaterOrEqualTo(0);
 		});
 
-		[I] public async Task SearchPointInTimeWithSortResponse() => await Assert<SearchResponse<Project>>(SearchPointInTimeWithSortStep, (v, r) =>
+		[I] public async Task SearchPointInTimeWithSortResponse() => await Assert<SearchResponse<Project>>(SearchPointInTimeWithSortStep, r =>
 		{
 			r.ShouldBeValid();
 			r.PointInTimeId.Should().NotBeNullOrEmpty();
@@ -127,7 +127,7 @@ namespace Tests.Search.PointInTime
 			r.Hits.Count.Should().BeGreaterThan(0);
 		});
 
-		[I] public async Task ClosePointInTimeResponse() => await Assert<ClosePointInTimeResponse>(ClosePointInTimeStep, (v, r) =>
+		[I] public async Task ClosePointInTimeResponse() => await Assert<ClosePointInTimeResponse>(ClosePointInTimeStep, r =>
 		{
 			r.ShouldBeValid();
 			r.Succeeded.Should().BeTrue();
