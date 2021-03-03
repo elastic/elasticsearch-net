@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <PackageId>NEST</PackageId>
+    <Title>NEST - Elasticsearch .NET high level client</Title>
+    <PackageTags>elasticsearch;elastic;search;lucene;nest</PackageTags>
+    <Description>
+      Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and 
+      responses. Uses and exposes Elasticsearch.Net.
+    </Description>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Elastic.Transport" Version="0.2.3" />
+    <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Requests.*.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Requests.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Descriptors.*.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Descriptors.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ElasticClient.*.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ElasticClient.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>
