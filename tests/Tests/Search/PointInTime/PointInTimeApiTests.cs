@@ -2,7 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
@@ -21,6 +21,7 @@ namespace Tests.Search.PointInTime
 	{
 		private const string OpenPointInTimeStep = nameof(OpenPointInTimeStep);
 		private const string SearchPointInTimeStep = nameof(SearchPointInTimeStep);
+		private const string SearchPointInTimeWithSortStep = nameof(SearchPointInTimeWithSortStep);
 		private const string ClosePointInTimeStep = nameof(ClosePointInTimeStep);
 		
 		public PointInTimeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
@@ -61,6 +62,31 @@ namespace Tests.Search.PointInTime
 					)
 			},
 			{
+				SearchPointInTimeWithSortStep, ">=7.12.0", u =>
+					u.Calls<SearchDescriptor<Project>, SearchRequest<Project>, ISearchRequest<Project>, ISearchResponse<Project>>(
+						v => new SearchRequest<Project>
+						{
+							Size = 1,
+							Query = new QueryContainer(new MatchAllQuery()),
+							PointInTime = new Nest.PointInTime(v, "1m"),
+							Sort =new List<ISort>
+							{
+								FieldSort.ShardDocumentOrderDescending
+							}
+						},
+						(v, d) => d
+							.Size(1)
+							.Query(q => q.MatchAll())
+							.PointInTime(v, p => p.KeepAlive("1m"))
+							.Sort(s => s.Descending(SortSpecialField.ShardDocumentOrder)),
+						(v, c, f) => c.Search(f),
+						(v, c, f) => c.SearchAsync(f),
+						(v, c, r) => c.Search<Project>(r),
+						(v, c, r) => c.SearchAsync<Project>(r),
+						uniqueValueSelector: values => values.ExtendedValue<string>("pitId")
+					)
+			},
+			{
 				ClosePointInTimeStep, u =>
 					u.Calls<ClosePointInTimeDescriptor, ClosePointInTimeRequest, IClosePointInTimeRequest, ClosePointInTimeResponse>(
 						v => new ClosePointInTimeRequest{ Id = v },
@@ -74,13 +100,13 @@ namespace Tests.Search.PointInTime
 			}
 		}) { }
 
-		[I] public async Task OpenPointInTimeResponse() => await Assert<OpenPointInTimeResponse>(OpenPointInTimeStep, (v, r) =>
+		[I] public async Task OpenPointInTimeResponse() => await Assert<OpenPointInTimeResponse>(OpenPointInTimeStep, r =>
 		{
 			r.ShouldBeValid();
 			r.Id.Should().NotBeNullOrEmpty();
 		});
 
-		[I] public async Task SearchPointInTimeResponse() => await Assert<SearchResponse<Project>>(SearchPointInTimeStep, (v, r) =>
+		[I] public async Task SearchPointInTimeResponse() => await Assert<SearchResponse<Project>>(SearchPointInTimeStep, r =>
 		{
 			r.ShouldBeValid();
 			r.PointInTimeId.Should().NotBeNullOrEmpty();
@@ -93,7 +119,15 @@ namespace Tests.Search.PointInTime
 			r.Took.Should().BeGreaterOrEqualTo(0);
 		});
 
-		[I] public async Task ClosePointInTimeResponse() => await Assert<ClosePointInTimeResponse>(ClosePointInTimeStep, (v, r) =>
+		[I] public async Task SearchPointInTimeWithSortResponse() => await Assert<SearchResponse<Project>>(SearchPointInTimeWithSortStep, r =>
+		{
+			r.ShouldBeValid();
+			r.PointInTimeId.Should().NotBeNullOrEmpty();
+			r.Total.Should().BeGreaterThan(0);
+			r.Hits.Count.Should().BeGreaterThan(0);
+		});
+
+		[I] public async Task ClosePointInTimeResponse() => await Assert<ClosePointInTimeResponse>(ClosePointInTimeStep, r =>
 		{
 			r.ShouldBeValid();
 			r.Succeeded.Should().BeTrue();
