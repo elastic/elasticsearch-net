@@ -311,4 +311,165 @@ namespace Tests.XPack.Transform
 				.MaxPageSearchSize(200)
 				.DocsPerSecond(200));
 	}
+
+	[SkipVersion("<7.12.0", "Settings introduced in 7.12.0")]
+	public class TransformApiWithRuntimeFieldsTests
+		: ApiIntegrationTestBase<WritableCluster, PreviewTransformResponse<ProjectTransform>, IPreviewTransformRequest, PreviewTransformDescriptor<Project>, PreviewTransformRequest>
+	{
+		private const string RuntimeFieldName = "search_runtime_field";
+		private const string RuntimeFieldScript = "if (doc['type'].size() != 0) {emit(doc['type'].value.toUpperCase())}";
+
+		public TransformApiWithRuntimeFieldsTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override LazyResponses ClientUsage() => Calls(
+				(client, f) => client.Transform.Preview<Project, ProjectTransform>(f),
+				(client, f) => client.Transform.PreviewAsync<Project, ProjectTransform>(f),
+				(client, r) => client.Transform.Preview<ProjectTransform>(r),
+				(client, r) => client.Transform.PreviewAsync<ProjectTransform>(r));
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override string UrlPath => "_transform/_preview";
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override bool SupportsDeserialization => false;
+
+		protected override object ExpectJson =>
+			new
+			{
+				description = CallIsolatedValue,
+				frequency = "1s",
+				source = new {
+					index = new[] { "project" },
+					query = new { match_all = new { } },
+					runtime_mappings = new
+					{
+						search_runtime_field = new
+						{
+							script = new
+							{
+								lang = "painless",
+								source = RuntimeFieldScript
+							},
+							type = "keyword"
+						}
+					}
+				},
+				dest = new { index = $"transform-{CallIsolatedValue}" },
+				pivot = new
+				{
+					aggregations = new
+					{
+						averageCommits = new
+						{
+							avg = new
+							{
+								field = "numberOfCommits"
+							}
+						},
+						sumIntoMaster = new
+						{
+							scripted_metric = new
+							{
+								combine_script = new
+								{
+									source = "long sum = 0; for (s in state.masterCommits) { sum += s } return sum"
+								},
+								init_script = new
+								{
+									source = "state.masterCommits = []"
+								},
+								map_script = new
+								{
+									source = "state.masterCommits.add(doc['branches.keyword'].contains('master')? 1 : 0)"
+								},
+								reduce_script = new
+								{
+									source = "long sum = 0; for (s in states) { sum += s } return sum"
+								}
+							}
+						}
+					},
+					group_by = new { type = new { terms = new { field = "search_runtime_field" } } }
+				},
+				sync = new
+				{
+					time = new
+					{
+						field = "lastActivity"
+					}
+				}
+			};
+
+		protected override PreviewTransformRequest Initializer => new()
+			{
+				Description = CallIsolatedValue,
+				Frequency = "1s",
+				Source = new TransformSource { Index = Index<Project>(), Query = new MatchAllQuery(),
+					RuntimeFields = new RuntimeFields
+					{
+						{ RuntimeFieldName, new RuntimeField
+							{
+								Type = FieldType.Keyword,
+								Script = new PainlessScript(RuntimeFieldScript)
+							}
+						}
+					}
+				},
+				Destination = new TransformDestination { Index = $"transform-{CallIsolatedValue}" },
+				Pivot = new TransformPivot
+				{
+					Aggregations =
+						new AverageAggregation("averageCommits", Field<Project>(f => f.NumberOfCommits)) &&
+						new ScriptedMetricAggregation("sumIntoMaster")
+						{
+							InitScript = new InlineScript("state.masterCommits = []"),
+							MapScript = new InlineScript("state.masterCommits.add(doc['branches.keyword'].contains('master')? 1 : 0)"),
+							CombineScript = new InlineScript("long sum = 0; for (s in state.masterCommits) { sum += s } return sum"),
+							ReduceScript = new InlineScript("long sum = 0; for (s in states) { sum += s } return sum")
+						},
+					GroupBy = new Dictionary<string, ISingleGroupSource>
+					{
+						{
+							"type",
+							new TermsGroupSource { Field = "search_runtime_field"}
+						}
+					}
+					
+				},
+				Sync = new TransformSyncContainer(new TransformTimeSync { Field = Field<Project>(f => f.LastActivity) })
+			};
+
+		protected override Func<PreviewTransformDescriptor<Project>, IPreviewTransformRequest> Fluent => f => f
+			.Description(CallIsolatedValue)
+			.Frequency(new Time(1, TimeUnit.Second))
+			.Source(s => s
+				.Index<Project>()
+				.Query(q => q.MatchAll())
+				.RuntimeFields(rtf => rtf.RuntimeField(RuntimeFieldName, FieldType.Keyword, r => r.Script(RuntimeFieldScript)))
+			)
+			.Destination(de => de
+				.Index($"transform-{CallIsolatedValue}")
+			)
+			.Pivot(p => p
+				.Aggregations(a => a
+					.Average("averageCommits", avg => avg
+						.Field(fld => fld.NumberOfCommits)
+					)
+					.ScriptedMetric("sumIntoMaster", sm => sm
+						.InitScript("state.masterCommits = []")
+						.MapScript("state.masterCommits.add(doc['branches.keyword'].contains('master')? 1 : 0)")
+						.CombineScript("long sum = 0; for (s in state.masterCommits) { sum += s } return sum")
+						.ReduceScript("long sum = 0; for (s in states) { sum += s } return sum")
+					)
+				)
+				.GroupBy(g => g
+					.Terms("type", t => t.Field("search_runtime_field"))
+				)
+			)
+			.Sync(sy => sy
+				.Time(t => t
+					.Field(fld => fld.LastActivity)
+				)
+			);
+	}
 }

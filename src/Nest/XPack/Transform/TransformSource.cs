@@ -23,6 +23,12 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "query")]
 		QueryContainer Query { get; set; }
+
+		/// <summary>
+		/// Specifies runtime fields which exist only as part of the query.
+		/// </summary>
+		[DataMember(Name = "runtime_mappings")]
+		IRuntimeFields RuntimeFields { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -34,6 +40,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public QueryContainer Query { get; set; }
+
+		/// <inheritdoc />
+		public IRuntimeFields RuntimeFields { get; set; }
 	}
 
 	/// <inheritdoc cref="ITransformSource" />
@@ -41,6 +50,7 @@ namespace Nest
 	{
 		Indices ITransformSource.Index { get; set; }
 		QueryContainer ITransformSource.Query { get; set; }
+		IRuntimeFields ITransformSource.RuntimeFields { get; set; }
 
 		/// <inheritdoc cref="ITransformSource.Index" />
 		public TransformSourceDescriptor<T> Index(Indices indices) => Assign(indices, (a, v) => a.Index = v);
@@ -52,5 +62,12 @@ namespace Nest
 		public TransformSourceDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(selector, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
 
+		/// <inheritdoc cref="ITransformSource.RuntimeFields" />
+		public TransformSourceDescriptor<T> RuntimeFields(Func<RuntimeFieldsDescriptor<T>, IPromise<IRuntimeFields>> runtimeFieldsSelector) =>
+			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor<T>())?.Value);
+
+		/// <inheritdoc cref="ITransformSource.RuntimeFields" />
+		public TransformSourceDescriptor<T> RuntimeFields<TSource>(Func<RuntimeFieldsDescriptor<TSource>, IPromise<IRuntimeFields>> runtimeFieldsSelector) where TSource : class =>
+			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor<TSource>())?.Value);
 	}
 }
