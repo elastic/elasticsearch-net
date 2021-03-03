@@ -54,6 +54,13 @@ namespace Nest
 		/// <inheritdoc cref="IRankFeatureSigmoidFunction"/>
 		public RankFeatureQueryDescriptor<T> Sigmoid(Func<RankFeatureSigmoidFunctionDescriptor, IRankFeatureSigmoidFunction> selector) =>
 			Assign(selector, (a, v) => a.Function = v?.Invoke(new RankFeatureSigmoidFunctionDescriptor()));
+
+		/// <inheritdoc cref="IRankFeatureLinearFunction"/>
+		public RankFeatureQueryDescriptor<T> Linear()
+		{
+			Self.Function = new RankFeatureLinearFunction();
+			return this;
+		}
 	}
 
 	/// <summary>
@@ -162,6 +169,24 @@ namespace Nest
 		public RankFeatureSigmoidFunctionDescriptor Pivot(float pivot) => Assign(pivot, (a, v) => a.Pivot = v);
 	}
 
+	/// <summary>
+	/// Gives a score equal to the indexed value of S, where S is the value of the rank feature field.
+	///
+	/// If a rank feature field is indexed with "positive_score_impact": true, its indexed value is equal to S and rounded to preserve
+	/// only 9 significant bits for the precision.
+	/// 
+	/// If a rank feature field is indexed with "positive_score_impact": false, its indexed value is equal to 1/S and rounded to
+	/// preserve only 9 significant bits for the precision.
+	/// </summary>
+	public interface IRankFeatureLinearFunction : IRankFeatureFunction
+	{
+	}
+
+	/// <inheritdoc cref="IRankFeatureLinearFunction" />
+	public class RankFeatureLinearFunction : IRankFeatureLinearFunction
+	{
+	}
+
 	internal class RankFeatureQueryFormatter : IJsonFormatter<IRankFeatureQuery>
 	{
 		public void Serialize(ref JsonWriter writer, IRankFeatureQuery value, IJsonFormatterResolver formatterResolver)
@@ -206,6 +231,9 @@ namespace Nest
 					case IRankFeatureLogarithmFunction log:
 						SerializeScoreFunction(ref writer, "log", log, formatterResolver);
 						break;
+					case IRankFeatureLinearFunction log:
+						SerializeScoreFunction(ref writer, "linear", log, formatterResolver);
+						break;
 				}
 			}
 
@@ -232,7 +260,8 @@ namespace Nest
 			{ "field", 2 },
 			{ "saturation", 3 },
 			{ "log", 4 },
-			{ "sigmoid", 5 }
+			{ "sigmoid", 5 },
+			{ "linear", 6 }
 		};
 
 		public IRankFeatureQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -265,6 +294,9 @@ namespace Nest
 							break;
 						case 5:
 							query.Function = DeserializeScoreFunction<RankFeatureSigmoidFunction>(ref reader, formatterResolver);
+							break;
+						case 6:
+							query.Function = DeserializeScoreFunction<RankFeatureLinearFunction>(ref reader, formatterResolver);
 							break;
 					}
 				}
