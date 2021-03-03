@@ -2,7 +2,9 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -24,7 +26,7 @@ namespace Nest
 		public Authentication Authentication { get; set; }
 	}
 
-	public class Authentication : ResponseBase
+	public class Authentication
 	{
 		[DataMember(Name = "email")]
 		public string Email { get; internal set; }
@@ -44,12 +46,21 @@ namespace Nest
 		public string Username { get; internal set; }
 
 		[DataMember(Name = "authentication_realm")]
-		public RealmInfo AuthenticationRealm { get; internal set; }
+		public AuthenticationRealmInfo AuthenticationRealm { get; internal set; }
 
 		[DataMember(Name = "lookup_realm")]
-		public RealmInfo LookupRealm { get; internal set; }
+		public AuthenticationRealmInfo LookupRealm { get; internal set; }
 
 		[DataMember(Name = "authentication_type")]
 		public string AuthenticationType { get; internal set; }
+	}
+
+	public class AuthenticationRealmInfo
+	{
+		[DataMember(Name = "name")]
+		public string Name { get; internal set; }
+
+		[DataMember(Name = "type")]
+		public string Type { get; internal set; }
 	}
 }
