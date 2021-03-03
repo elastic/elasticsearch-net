@@ -65,8 +65,8 @@ namespace ApiGenerator.Domain
 		{
 			if (string.IsNullOrWhiteSpace(queryStringKey)) return "UNKNOWN";
 
-			if (queryStringKey == "format" && endpointName == "ml.find_file_structure")
-				return "MachineLearningFindFileStructureFormat";
+			if (queryStringKey == "format" && endpointName == "text_structure.find_structure")
+				return "TextStructureFindStructureFormat";
 
 			var cased = queryStringKey.ToPascalCase();
 			switch (cased)

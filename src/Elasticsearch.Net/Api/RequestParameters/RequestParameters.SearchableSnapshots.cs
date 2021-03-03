@@ -73,6 +73,13 @@ namespace Elasticsearch.Net.Specification.SearchableSnapshotsApi
 			set => Q("master_timeout", value);
 		}
 
+		///<summary>Selects the kind of local storage used to accelerate searches. Experimental, and defaults to `full_copy`</summary>
+		public string Storage
+		{
+			get => Q<string>("storage");
+			set => Q("storage", value);
+		}
+
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion
 		{
@@ -93,5 +100,11 @@ namespace Elasticsearch.Net.Specification.SearchableSnapshotsApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
+		///<summary>Return stats aggregated at cluster, index or shard level</summary>
+		public Level? Level
+		{
+			get => Q<Level? >("level");
+			set => Q("level", value);
+		}
 	}
 }
