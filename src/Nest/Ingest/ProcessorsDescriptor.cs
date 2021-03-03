@@ -189,5 +189,9 @@ namespace Nest
 		/// <inheritdoc cref="INetworkCommunityIdProcessor"/>
 		public ProcessorsDescriptor NetworkCommunityId<T>(Func<NetworkCommunityIdProcessorDescriptor<T>, INetworkCommunityIdProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new NetworkCommunityIdProcessorDescriptor<T>())));
+
+		/// <inheritdoc cref="INetworkDirectionProcessor"/>
+		public ProcessorsDescriptor NetworkDirection<T>(Func<NetworkDirectionProcessorDescriptor<T>, INetworkDirectionProcessor> selector) where T : class =>
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new NetworkDirectionProcessorDescriptor<T>())));
 	}
 }
