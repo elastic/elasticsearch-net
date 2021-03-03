@@ -1,0 +1,15 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+namespace Nest
+{
+	public interface IFuzziness
+	{
+		bool Auto { get; }
+		int? Low { get; }
+		int? High { get; }
+		int? EditDistance { get; }
+		double? Ratio { get; }
+	}
+}
