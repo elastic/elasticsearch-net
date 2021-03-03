@@ -221,6 +221,22 @@ namespace Nest
 
 		public MultiBucketAggregate<DateHistogramBucket> DateHistogram(string key) => GetMultiBucketAggregate<DateHistogramBucket>(key);
 
+		public MultiTermsAggregate<string> MultiTerms(string key) => MultiTerms<string>(key);
+
+		public MultiTermsAggregate<TKey> MultiTerms<TKey>(string key)
+		{
+			var bucket = TryGet<BucketAggregate>(key);
+			return bucket == null
+				? null
+				: new MultiTermsAggregate<TKey>
+				{
+					DocCountErrorUpperBound = bucket.DocCountErrorUpperBound,
+					SumOtherDocCount = bucket.SumOtherDocCount,
+					Buckets = GetMultiTermsBuckets<TKey>(bucket.Items).ToList(),
+					Meta = bucket.Meta
+				};
+		}
+
 		public AutoDateHistogramAggregate AutoDateHistogram(string key)
 		{
 			var bucket = TryGet<BucketAggregate>(key);
@@ -322,6 +338,28 @@ namespace Nest
 					Key = GetKeyFromBucketKey<TKey>(bucket.Key),
 					DocCount = bucket.DocCount.GetValueOrDefault(0)
 				};
+		}
+
+		private static IEnumerable<MultiTermsBucket<TKey>> GetMultiTermsBuckets<TKey>(IEnumerable<IBucket> items)
+		{
+			var buckets = items.Cast<KeyedBucket<object>>();
+
+			foreach (var bucket in buckets)
+			{
+				var aggregates = new MultiTermsBucket<TKey>(bucket.BackingDictionary)
+				{
+					DocCount = bucket.DocCount,
+					DocCountErrorUpperBound = bucket.DocCountErrorUpperBound,
+					KeyAsString = bucket.KeyAsString
+				};
+
+				if (bucket.Key is List<object> allKeys)
+					aggregates.Key = allKeys.Select(GetKeyFromBucketKey<TKey>).ToList();
+				else
+					aggregates.Key = new[] { GetKeyFromBucketKey<TKey>(bucket.Key) };
+
+				yield return aggregates;
+			}
 		}
 
 		private static TKey GetKeyFromBucketKey<TKey>(object key) =>

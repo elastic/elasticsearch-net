@@ -294,6 +294,9 @@ namespace Nest
 		[DataMember(Name = "top_metrics")]
 		ITopMetricsAggregation TopMetrics { get; set; }
 
+		[DataMember(Name = "multi_terms")]
+		IMultiTermsAggregation MultiTerms { get; set; }
+
 		void Accept(IAggregationVisitor visitor);
 	}
 
@@ -442,6 +445,8 @@ namespace Nest
 
 		public ITopMetricsAggregation TopMetrics { get; set; }
 
+		public IMultiTermsAggregation MultiTerms { get; set; }
+
 		public void Accept(IAggregationVisitor visitor)
 		{
 			if (visitor.Scope == AggregationVisitorScope.Unknown) visitor.Scope = AggregationVisitorScope.Aggregation;
@@ -555,6 +560,8 @@ namespace Nest
 
 		IMovingPercentilesAggregation IAggregationContainer.MovingPercentiles { get; set; }
 
+		IMultiTermsAggregation IAggregationContainer.MultiTerms { get; set; }
+		
 		INestedAggregation IAggregationContainer.Nested { get; set; }
 
 		INormalizeAggregation IAggregationContainer.Normalize { get; set; }
@@ -718,6 +725,11 @@ namespace Nest
 			Func<MissingAggregationDescriptor<T>, IMissingAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Missing = d);
+
+		public AggregationContainerDescriptor<T> MultiTerms(string name,
+			Func<MultiTermsAggregationDescriptor<T>, IMultiTermsAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.MultiTerms = d);
 
 		public AggregationContainerDescriptor<T> Nested(string name,
 			Func<NestedAggregationDescriptor<T>, INestedAggregation> selector
