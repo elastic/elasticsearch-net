@@ -10,13 +10,13 @@ namespace Nest
 {
 	public class IdResolver
 	{
-		private static readonly ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+		private static readonly ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new();
 
 		private static readonly MethodInfo MakeDelegateMethodInfo =
 			typeof(IdResolver).GetMethod(nameof(MakeDelegate), BindingFlags.Static | BindingFlags.NonPublic);
 
 		private readonly IConnectionSettingsValues _connectionSettings;
-		private readonly ConcurrentDictionary<Type, Func<object, string>> _localIdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+		private readonly ConcurrentDictionary<Type, Func<object, string>> _localIdDelegates = new();
 
 		public IdResolver(IConnectionSettingsValues connectionSettings) => _connectionSettings = connectionSettings;
 

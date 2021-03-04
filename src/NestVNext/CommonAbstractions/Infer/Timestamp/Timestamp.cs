@@ -19,9 +19,9 @@ namespace Nest
 		// ReSharper disable once ImpureMethodCallOnReadonlyValueField
 		public string GetString(ITransportConfiguration settings) => Value.ToString(CultureInfo.InvariantCulture);
 
-		public static implicit operator Timestamp(DateTimeOffset categoryId) => new Timestamp(categoryId.ToUnixTimeMilliseconds());
+		public static implicit operator Timestamp(DateTimeOffset categoryId) => new(categoryId.ToUnixTimeMilliseconds());
 
-		public static implicit operator Timestamp(long categoryId) => new Timestamp(categoryId);
+		public static implicit operator Timestamp(long categoryId) => new(categoryId);
 
 		public static implicit operator long(Timestamp categoryId) => categoryId.Value;
 

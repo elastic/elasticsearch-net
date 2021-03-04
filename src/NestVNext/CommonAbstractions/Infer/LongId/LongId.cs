@@ -19,7 +19,7 @@ namespace Nest
 		// ReSharper disable once ImpureMethodCallOnReadonlyValueField
 		public string GetString(ITransportConfiguration settings) => Value.ToString(CultureInfo.InvariantCulture);
 
-		public static implicit operator LongId(long value) => new LongId(value);
+		public static implicit operator LongId(long value) => new(value);
 
 		public static implicit operator long(LongId value) => value.Value;
 

@@ -85,12 +85,12 @@ namespace Nest
 
 		public static implicit operator Routing(string[] routing) => routing.IsEmpty() ? null : new Routing(string.Join(",", routing));
 
-		public static implicit operator Routing(long routing) => new Routing(routing);
+		public static implicit operator Routing(long routing) => new(routing);
 
-		public static implicit operator Routing(Guid routing) => new Routing(routing.ToString("D"));
+		public static implicit operator Routing(Guid routing) => new(routing.ToString("D"));
 
 		/// <summary> Use the inferred routing from <paramref name="document" /> </summary>
-		public static Routing From<T>(T document) where T : class => new Routing(document);
+		public static Routing From<T>(T document) where T : class => new(document);
 
 		private string GetString(IConnectionSettingsValues nestSettings)
 		{

@@ -17,10 +17,10 @@ namespace Nest
 
 		internal Indices(ManyIndices indices) : base(indices) { }
 
-		internal Indices(IEnumerable<IndexName> indices) : base(new ManyIndices(indices)) { }
+		internal Indices(IndexName?[] indices) : base(new ManyIndices(indices)) { }
 
 		/// <summary>All indices. Represents _all</summary>
-		public static Indices All { get; } = new Indices(new AllIndicesMarker());
+		public static Indices All { get; } = new(new AllIndicesMarker());
 
 		/// <inheritdoc cref="All" />
 		public static Indices AllIndices { get; } = All;
@@ -46,38 +46,38 @@ namespace Nest
 			}
 		);
 
-		public static IndexName Index(string index) => index;
+		public static IndexName? Index(string index) => index;
 
 		public static IndexName Index(IndexName index) => index;
 
-		public static IndexName Index<T>() => typeof(T);
+		public static IndexName? Index<T>() => typeof(T);
 
-		public static ManyIndices Index(IEnumerable<IndexName> indices) => new ManyIndices(indices);
+		public static ManyIndices Index(IEnumerable<IndexName?> indices) => new ManyIndices(indices);
 
-		public static ManyIndices Index(params IndexName[] indices) => new ManyIndices(indices);
+		public static ManyIndices Index(params IndexName[] indices) => new(indices);
 
-		public static ManyIndices Index(IEnumerable<string> indices) => new ManyIndices(indices);
+		public static ManyIndices Index(IEnumerable<string> indices) => new(indices);
 
-		public static ManyIndices Index(params string[] indices) => new ManyIndices(indices);
+		public static ManyIndices Index(params string[] indices) => new(indices);
 
-		public static Indices Parse(string indicesString)
+		public static Indices? Parse(string indicesString)
 		{
 			if (indicesString.IsNullOrEmptyCommaSeparatedList(out var indices)) return null;
 
-			return indices.Contains("_all") ? All : Index(indices.Select(i => (IndexName)i));
+			return indices.Contains("_all") ? All : Index(indices.Select(i => (IndexName?)i));
 		}
 
-		public static implicit operator Indices(string indicesString) => Parse(indicesString);
+		public static implicit operator Indices?(string indicesString) => Parse(indicesString);
 
-		public static implicit operator Indices(ManyIndices many) => many == null ? null : new Indices(many);
+		public static implicit operator Indices?(ManyIndices? many) => many == null ? null : new Indices(many);
 
-		public static implicit operator Indices(string[] many) => many.IsEmpty() ? null : new ManyIndices(many);
+		public static implicit operator Indices?(string[] many) => many.IsEmpty() ? null : new ManyIndices(many);
 
-		public static implicit operator Indices(IndexName[] many) => many.IsEmpty() ? null : new ManyIndices(many);
+		public static implicit operator Indices?(IndexName[] many) => many.IsEmpty() ? null : new ManyIndices(many);
 
-		public static implicit operator Indices(IndexName index) => index == null ? null : new ManyIndices(new[] { index });
+		public static implicit operator Indices?(IndexName index) => index == null ? null : new ManyIndices(new[] { index });
 
-		public static implicit operator Indices(Type type) => type == null ? null : new ManyIndices(new IndexName[] { type });
+		public static implicit operator Indices?(Type type) => type == null ? null : new ManyIndices(new IndexName?[] { type });
 
 		public static bool operator ==(Indices left, Indices right) => Equals(left, right);
 
@@ -106,7 +106,7 @@ namespace Nest
 
 		public override int GetHashCode() => Match(
 			all => "_all".GetHashCode(),
-			many => string.Concat(many.Indices.OrderBy(i => i.ToString())).GetHashCode()
+			many => string.Concat(many.Indices.OrderBy(i => i?.ToString())).GetHashCode()
 		);
 
 		public class AllIndicesMarker
@@ -116,14 +116,14 @@ namespace Nest
 
 		public class ManyIndices
 		{
-			private readonly List<IndexName> _indices = new List<IndexName>();
+			private readonly List<IndexName?> _indices = new();
 
-			internal ManyIndices(IEnumerable<IndexName> indices) => _indices.AddRange(indices.NotEmpty(nameof(indices)));
+			internal ManyIndices(IndexName?[]? indices) => _indices.AddRange(indices?.NotEmpty(nameof(indices)) ?? Array.Empty<IndexName?>());
 
 			internal ManyIndices(IEnumerable<string> indices) =>
-				_indices.AddRange(indices.NotEmpty(nameof(indices)).Select(s => (IndexName)s));
+				_indices.AddRange(indices.NotEmpty(nameof(indices)).Select(s => (IndexName?)s));
 
-			public IReadOnlyList<IndexName> Indices => _indices;
+			public IReadOnlyList<IndexName?> Indices => _indices;
 
 			public ManyIndices And<T>()
 			{

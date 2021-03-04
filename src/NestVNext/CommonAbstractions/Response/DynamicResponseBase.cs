@@ -28,7 +28,7 @@ namespace Nest
 		/// <returns>T or default</returns>
 		public T Get<T>(string path) => Self.BackingDictionary.Get<T>(path);
 
-		DynamicDictionary IDynamicResponse.BackingDictionary { get; set; } = new DynamicDictionary();
+		DynamicDictionary IDynamicResponse.BackingDictionary { get; set; } = new();
 	}
 
 

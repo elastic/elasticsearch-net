@@ -15,7 +15,7 @@ namespace Nest
 {
 	internal class ToStringExpressionVisitor : ExpressionVisitor
 	{
-		private readonly Stack<string> _stack = new Stack<string>();
+		private readonly Stack<string> _stack = new();
 
 		public bool Cachable { get; private set; } = true;
 

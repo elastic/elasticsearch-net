@@ -72,8 +72,8 @@ namespace Nest
 			}
 		}
 
-		public static implicit operator Union<TFirst, TSecond>(TFirst first) => new Union<TFirst, TSecond>(first);
+		public static implicit operator Union<TFirst, TSecond>(TFirst first) => new(first);
 
-		public static implicit operator Union<TFirst, TSecond>(TSecond second) => new Union<TFirst, TSecond>(second);
+		public static implicit operator Union<TFirst, TSecond>(TSecond second) => new(second);
 	}
 }

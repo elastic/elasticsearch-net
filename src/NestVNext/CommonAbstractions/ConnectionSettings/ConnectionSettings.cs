@@ -70,12 +70,12 @@ namespace Nest
 	{
 		private readonly FluentDictionary<Type, string> _defaultIndices;
 		private readonly FluentDictionary<Type, string> _defaultRelationNames;
-		private readonly HashSet<Type> _disableIdInference = new HashSet<Type>();
-		private readonly FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
+		private readonly HashSet<Type> _disableIdInference = new();
+		private readonly FluentDictionary<Type, string> _idProperties = new();
 		private readonly Inferrer _inferrer;
 		//private readonly IPropertyMappingProvider _propertyMappingProvider;
 		//private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
-		private readonly FluentDictionary<Type, string> _routeProperties = new FluentDictionary<Type, string>();
+		private readonly FluentDictionary<Type, string> _routeProperties = new();
 		//private readonly ITransportSerializer _sourceSerializer;
 
 		private bool _defaultDisableAllInference;

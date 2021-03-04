@@ -64,11 +64,11 @@ namespace Nest
 
 		public static implicit operator Id(string id) => id.IsNullOrEmpty() ? null : new Id(id);
 
-		public static implicit operator Id(long id) => new Id(id);
+		public static implicit operator Id(long id) => new(id);
 
-		public static implicit operator Id(Guid id) => new Id(id.ToString("D"));
+		public static implicit operator Id(Guid id) => new(id.ToString("D"));
 
-		public static Id From<T>(T document) where T : class => new Id(document);
+		public static Id From<T>(T document) where T : class => new(document);
 
 		public override string ToString() => DebugDisplay;
 

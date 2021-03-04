@@ -18,7 +18,7 @@ namespace Nest
 
 		public string Source { get; set; }
 
-		public static implicit operator InlineScript(string script) => new InlineScript(script);
+		public static implicit operator InlineScript(string script) => new(script);
 	}
 
 	public class InlineScriptDescriptor

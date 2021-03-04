@@ -83,11 +83,11 @@ namespace Nest
 		/// <summary>
 		/// A script that has been indexed in Elasticsearch with the specified id
 		/// </summary>
-		public IndexedScriptDescriptor Id(string id) => new IndexedScriptDescriptor(id);
+		public IndexedScriptDescriptor Id(string id) => new(id);
 
 		/// <summary>
 		/// An inline script to execute
 		/// </summary>
-		public InlineScriptDescriptor Source(string script) => new InlineScriptDescriptor(script);
+		public InlineScriptDescriptor Source(string script) => new(script);
 	}
 }

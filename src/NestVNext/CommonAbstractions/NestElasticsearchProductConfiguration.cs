@@ -9,7 +9,7 @@ namespace Nest
 {
 	public class NestElasticsearchProductRegistration : ElasticsearchProductRegistration
 	{
-		public static NestElasticsearchProductRegistration DefaultForNest { get; } = new NestElasticsearchProductRegistration();
+		public static NestElasticsearchProductRegistration DefaultForNest { get; } = new();
 
 		/// <summary>
 		/// NEST handles 404 in its <see cref="ResponseBase.IsValid"/>, we do not want the low level client throwing exceptions

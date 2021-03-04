@@ -17,9 +17,9 @@ namespace Nest
 
 		public static MinimumShouldMatch Percentage(double percentage) => $"{percentage}%";
 
-		public static implicit operator MinimumShouldMatch(string first) => new MinimumShouldMatch(first);
+		public static implicit operator MinimumShouldMatch(string first) => new(first);
 
-		public static implicit operator MinimumShouldMatch(int second) => new MinimumShouldMatch(second);
+		public static implicit operator MinimumShouldMatch(int second) => new(second);
 
 		public static implicit operator MinimumShouldMatch(double second) => Percentage(second);
 	}

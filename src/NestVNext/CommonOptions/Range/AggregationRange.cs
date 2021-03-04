@@ -4,11 +4,8 @@
 
 using System.Runtime.Serialization;
 
-
 namespace Nest
 {
-	
-
 	public interface IAggregationRange
 	{
 		[DataMember(Name ="from")]

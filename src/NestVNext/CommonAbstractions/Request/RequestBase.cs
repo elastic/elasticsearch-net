@@ -83,7 +83,7 @@ namespace Nest
 		IRequestParameters IRequest.RequestParameters => _parameters;
 
 		[IgnoreDataMember]
-		RouteValues IRequest.RouteValues { get; } = new RouteValues();
+		RouteValues IRequest.RouteValues { get; } = new();
 
 		internal abstract ApiUrls ApiUrls { get;  }
 

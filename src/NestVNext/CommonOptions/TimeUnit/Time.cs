@@ -26,7 +26,7 @@ namespace Nest
 		private const double NanosecondsInATick = 100; // 1 tick = 100 nanoseconds
 
 		private static readonly Regex ExpressionRegex =
-			new Regex(@"^
+			new(@"^
 				(?<factor>[+\-]? # open factor capture, allowing optional +- signs
 					(?:(?#numeric)(?:\d+(?:\.\d*)?)|(?:\.\d+)) #a numeric in the forms: (N, N., .N, N.N)
 					(?:(?#exponent)e[+\-]?\d+)? #an optional exponential scientific component, E also matches here (IgnoreCase)
@@ -76,17 +76,17 @@ namespace Nest
 
 		public double? Milliseconds { get; private set; }
 
-		public static Time MinusOne { get; } = new Time(-1, true);
+		public static Time MinusOne { get; } = new(-1, true);
 
-		public static Time Zero { get; } = new Time(0, true);
+		public static Time Zero { get; } = new(0, true);
 
 		private int? StaticTimeValue { get; }
 
-		public static implicit operator Time(TimeSpan span) => new Time(span);
+		public static implicit operator Time(TimeSpan span) => new(span);
 
-		public static implicit operator Time(double milliseconds) => new Time(milliseconds);
+		public static implicit operator Time(double milliseconds) => new(milliseconds);
 
-		public static implicit operator Time(string expression) => new Time(expression);
+		public static implicit operator Time(string expression) => new(expression);
 
 		private void ParseExpression(string timeUnit)
 		{

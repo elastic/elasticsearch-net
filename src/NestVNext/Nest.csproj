@@ -16,6 +16,7 @@
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>annotations</Nullable>
   </PropertyGroup>
   
   <ItemGroup>

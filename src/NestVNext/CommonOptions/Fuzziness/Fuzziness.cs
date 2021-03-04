@@ -20,13 +20,13 @@ namespace Nest
 		/// <para>Equivalent to <see cref="AutoLength"/> with parameters 3 and 6.</para>
 		/// <para><see cref="Auto"/> should generally be the preferred value for <see cref="Fuzziness"/></para>
 		/// </remarks>
-		public static Fuzziness Auto => new Fuzziness { _auto = true };
+		public static Fuzziness Auto => new() { _auto = true };
 		/// <summary>
 		/// Generates an edit distance based on the length of the term.
 		/// </summary>
 		/// <param name="low">Must match exactly for terms with less length</param>
 		/// <param name="high">Two edits allowed for terms with greater length</param>
-		public static Fuzziness AutoLength(int low, int high) => new Fuzziness
+		public static Fuzziness AutoLength(int low, int high) => new()
 		{
 			_auto = true,
 			_low = low,
@@ -43,8 +43,8 @@ namespace Nest
 		/// The maximum allowed Levenshtein Edit Distance (or number of edits)
 		/// </summary>
 		/// <param name="distance">Levenshtein Edit Distance</param>
-		public static Fuzziness EditDistance(int distance) => new Fuzziness { _editDistance = distance };
+		public static Fuzziness EditDistance(int distance) => new() { _editDistance = distance };
 
-		public static Fuzziness Ratio(double ratio) => new Fuzziness { _ratio = ratio };
+		public static Fuzziness Ratio(double ratio) => new() { _ratio = ratio };
 	}
 }

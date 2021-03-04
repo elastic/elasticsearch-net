@@ -17,7 +17,7 @@ namespace Nest
 {
 	internal static class Extensions
 	{
-		private static readonly ConcurrentDictionary<string, object> EnumCache = new ConcurrentDictionary<string, object>();
+		private static readonly ConcurrentDictionary<string, object> EnumCache = new();
 
 		//internal static bool NotWritable(this QueryContainer q) => q == null || !q.IsWritable;
 

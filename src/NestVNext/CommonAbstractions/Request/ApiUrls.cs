@@ -43,7 +43,7 @@ namespace Nest
 					if (Routes.ContainsKey(bracketsCount))
 						Routes[bracketsCount].Add(new UrlLookup(route));
 					else
-						Routes.Add(bracketsCount, new List<UrlLookup> { new UrlLookup(route) });
+						Routes.Add(bracketsCount, new List<UrlLookup> { new(route) });
 				}
 			}
 

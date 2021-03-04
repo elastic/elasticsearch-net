@@ -41,7 +41,7 @@ namespace Nest
 
 		public static RelationName Create<T>() where T : class => GetRelationNameForType(typeof(T));
 
-		private static RelationName GetRelationNameForType(Type type) => new RelationName(type);
+		private static RelationName GetRelationNameForType(Type type) => new(type);
 
 		public static implicit operator RelationName(string typeName) => typeName.IsNullOrEmpty() ? null : new RelationName(typeName);
 
