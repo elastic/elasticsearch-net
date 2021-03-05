@@ -99,3 +99,41 @@ new RankFeatureQuery
 }
 ----
 
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.RankFeature(rf => rf
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(f => f.Rank)
+    .Linear())
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new RankFeatureQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(f => f.Rank),
+    Function = new RankFeatureLinearFunction()
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "rank_feature": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "field": "rank",
+    "linear": {}
+  }
+}
+----
+
