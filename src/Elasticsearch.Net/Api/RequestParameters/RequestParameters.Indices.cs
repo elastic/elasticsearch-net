@@ -216,7 +216,10 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 			set => Q("timeout", value);
 		}
 
-		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
+		///<summary>
+		/// Sets the number of active shards to wait for before the operation returns. Set to `index-setting` to wait according to the index setting
+		/// `index.write.wait_for_active_shards`, or `all` to wait for all shards, or an integer. Defaults to `0`.
+		///</summary>
 		public string WaitForActiveShards
 		{
 			get => Q<string>("wait_for_active_shards");

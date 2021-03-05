@@ -183,6 +183,9 @@ let SkipList = dict<SkipFile,SkipSection> [
     // TODO investigate post 7.11.0
     SkipFile "nodes.info/10_basic.yml", Section "node_info role test"
 
+    // TODO investigate post 7.11.0
+    SkipFile "nodes.info/10_basic.yml", Section "node_info role test"
+
 ]
 
 
