@@ -6,6 +6,7 @@ using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
 
 namespace Nest
 {
