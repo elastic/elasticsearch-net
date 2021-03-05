@@ -6,6 +6,11 @@ using Elastic.Transport;
 namespace Nest
 {
 	// Stubs until we generate these - Allows the code to compile so we can identify real errors.
+
+	public class JobId : IUrlParameter
+	{
+		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	}
 	
 	public class Metrics : IUrlParameter
 	{
