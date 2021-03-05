@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -70,5 +71,28 @@ namespace Tests.QueryDsl.Specialized.RankFeature
 				.Boost(1.1)
 				.Field(f => f.Rank)
 			);
+	}
+
+	[SkipVersion("<7.12.0", "Introduced in 7.12.0")]
+	public class RankFeatureLinearFunctionUsageTests : QueryDslUsageTestsBase
+	{
+		public RankFeatureLinearFunctionUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		protected override QueryContainer QueryInitializer => new RankFeatureQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = Infer.Field<Project>(f => f.Rank),
+			Function = new RankFeatureLinearFunction()
+		};
+
+		protected override object QueryJson =>
+			new { rank_feature = new { _name = "named_query", boost = 1.1, field = "rank", linear = new { } } };
+
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.RankFeature(rf => rf
+				.Name("named_query")
+				.Boost(1.1)
+				.Field(f => f.Rank)
+				.Linear());
 	}
 }
