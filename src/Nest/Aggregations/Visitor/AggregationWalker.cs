@@ -190,6 +190,11 @@ namespace Nest
 			AcceptAggregation(aggregation.Composite, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.MedianAbsoluteDeviation, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.TTest, visitor, (v, d) => v.Visit(d));
+			AcceptAggregation(aggregation.VariableWidthHistogram, visitor, (v, d) =>
+			{
+				v.Visit(d);
+				Accept(v, d.Aggregations);
+			});
 		}
 	}
 }

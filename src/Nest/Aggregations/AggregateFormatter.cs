@@ -25,7 +25,8 @@ namespace Nest
 			{ Parser.From, 1 },
 			{ Parser.To, 2 },
 			{ Parser.KeyAsString, 3 },
-			{ Parser.DocCount, 4 }
+			{ Parser.DocCount, 4 },
+			{ Parser.Min, 5 }
 		};
 
 		private static readonly byte[] BucketsField = JsonWriter.GetEncodedPropertyNameWithoutQuotation(Parser.Buckets);
@@ -218,6 +219,9 @@ namespace Nest
 						break;
 					case 4:
 						item = GetFiltersBucket(ref reader, formatterResolver);
+						break;
+					case 5:
+						item = GetVariableWidthHistogramBucket(ref reader, formatterResolver);
 						break;
 				}
 			}
@@ -939,7 +943,42 @@ namespace Nest
 
 			return dateHistogram;
 		}
-		
+
+		private IBucket GetVariableWidthHistogramBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var min = reader.ReadDouble();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "key"
+			reader.ReadNext(); // :
+			var key = reader.ReadDouble();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "max"
+			reader.ReadNext(); // :
+			var max = reader.ReadDouble();
+			reader.ReadNext(); // ,
+			reader.ReadNext(); // "doc_count"
+			reader.ReadNext(); // :
+			var docCount = reader.ReadInt64();
+
+			Dictionary<string, IAggregate> subAggregates = null;
+			if (reader.GetCurrentJsonToken() == JsonToken.ValueSeparator)
+			{
+				reader.ReadNext(); // ,
+				var propertyName = reader.ReadPropertyName();
+				subAggregates = GetSubAggregates(ref reader, propertyName, formatterResolver);
+			}
+
+			var variableWidthHistogram = new VariableWidthHistogramBucket(subAggregates)
+			{
+				Key = key,
+				Minimum = min,
+				Maximum = max,
+				DocCount = docCount,
+			};
+
+			return variableWidthHistogram;
+		}
+
 		private IBucket GetKeyedBucket(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
 			var token = reader.GetCurrentJsonToken();

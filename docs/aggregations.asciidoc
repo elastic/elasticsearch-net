@@ -188,6 +188,8 @@ In addition to the buckets themselves, the bucket aggregations also compute and 
 
 * <<terms-aggregation-usage,Terms Aggregation Usage>>
 
+* <<variable-width-histogram-usage,Variable Width Histogram Usage>>
+
 [NOTE]
 --
 Bucketing aggregations can have sub-aggregations (bucketing or metric). The sub-aggregations will be computed 
@@ -252,6 +254,8 @@ include::aggregations/bucket/significant-terms/significant-terms-aggregation-usa
 include::aggregations/bucket/significant-text/significant-text-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/terms/terms-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/variable-width-histogram/variable-width-histogram-usage.asciidoc[]
 
 [[pipeline-aggregations]]
 == Pipeline Aggregations
