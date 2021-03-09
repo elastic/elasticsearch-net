@@ -13,32 +13,19 @@
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461;netstandard2.1;netcoreapp3.1;net5.0</TargetFrameworks>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>annotations</Nullable>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Elastic.Transport" Version="0.2.3" />
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit" Version="4.3.0" />
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\elastic-transport-net\src\Elastic.Transport\Elastic.Transport.csproj" />
+  </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Requests.*.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Requests.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Descriptors.*.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Descriptors.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="ElasticClient.*.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ElasticClient.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
 </Project>

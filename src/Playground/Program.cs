@@ -13,11 +13,16 @@ namespace Playground
 
 		    var request = new ClusterHealthRequest("test")
 		    {
-			    WaitForStatus = WaitForStatus.Green,
 			    Level = Level.Cluster
 		    };
 
 		    var response = await client.Cluster.HealthAsync(request);
+
+		    if (response.IsValid)
+		    {
+			    Console.WriteLine(response.ClusterName);
+			    Console.WriteLine(response.ActivePrimaryShards);
+			}
 	    }
     }
 }
