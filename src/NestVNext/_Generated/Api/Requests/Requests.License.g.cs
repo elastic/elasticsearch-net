@@ -18,7 +18,9 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
     public interface IDeleteLicenseRequest : IRequest<DeleteLicenseRequestParameters>
@@ -31,18 +33,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseDelete;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
-    }
-
-    public interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicenseStatusRequestParameters>
-    {
-    }
-
-    public class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
-    {
-        protected IGetBasicLicenseStatusRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseGetBasicStatus;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
+        ///<summary>/_license</summary>
+        public DeleteLicenseRequest(): base()
+        {
+        }
     }
 
     public interface IGetLicenseRequest : IRequest<GetLicenseRequestParameters>
@@ -55,6 +49,30 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseGet;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_license</summary>
+        public GetLicenseRequest(): base()
+        {
+        }
+
+        public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+    }
+
+    public interface IGetBasicLicenseStatusRequest : IRequest<GetBasicLicenseStatusRequestParameters>
+    {
+    }
+
+    public class GetBasicLicenseStatusRequest : PlainRequestBase<GetBasicLicenseStatusRequestParameters>, IGetBasicLicenseStatusRequest
+    {
+        protected IGetBasicLicenseStatusRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseGetBasicStatus;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_license/basic_status</summary>
+        public GetBasicLicenseStatusRequest(): base()
+        {
+        }
     }
 
     public interface IGetTrialLicenseStatusRequest : IRequest<GetTrialLicenseStatusRequestParameters>
@@ -67,6 +85,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.LicenseGetTrialStatus;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_license/trial_status</summary>
+        public GetTrialLicenseStatusRequest(): base()
+        {
+        }
     }
 
     public interface IPostLicenseRequest : IRequest<PostLicenseRequestParameters>
@@ -79,6 +101,12 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.LicensePost;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_license</summary>
+        public PostLicenseRequest(): base()
+        {
+        }
+
+        public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
     }
 
     public interface IStartBasicLicenseRequest : IRequest<StartBasicLicenseRequestParameters>
@@ -91,6 +119,12 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.LicensePostStartBasic;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_license/start_basic</summary>
+        public StartBasicLicenseRequest(): base()
+        {
+        }
+
+        public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
     }
 
     public interface IStartTrialLicenseRequest : IRequest<StartTrialLicenseRequestParameters>
@@ -103,5 +137,13 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.LicensePostStartTrial;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_license/start_trial</summary>
+        public StartTrialLicenseRequest(): base()
+        {
+        }
+
+        public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
+
+        public string? TypeQueryString { get => Q<string?>("type_query_string"); set => Q("type_query_string", value); }
     }
 }

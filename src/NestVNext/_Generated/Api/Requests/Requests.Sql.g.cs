@@ -18,7 +18,9 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
     public interface IClearSqlCursorRequest : IRequest<ClearSqlCursorRequestParameters>
@@ -31,6 +33,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_sql/close</summary>
+        public ClearSqlCursorRequest(): base()
+        {
+        }
     }
 
     public interface IQuerySqlRequest : IRequest<QuerySqlRequestParameters>
@@ -43,6 +49,12 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_sql</summary>
+        public QuerySqlRequest(): base()
+        {
+        }
+
+        public string? Format { get => Q<string?>("format"); set => Q("format", value); }
     }
 
     public interface ITranslateSqlRequest : IRequest<TranslateSqlRequestParameters>
@@ -55,5 +67,9 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlTranslate;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_sql/translate</summary>
+        public TranslateSqlRequest(): base()
+        {
+        }
     }
 }

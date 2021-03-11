@@ -27,72 +27,28 @@ namespace Nest
 {
     public class CatAliasesRequestParameters : RequestParameters<CatAliasesRequestParameters>
     {
-        public ExpandWildcards? ExpandWildcards
-        {
-            get => Q<ExpandWildcards?>("expand_wildcards");
-            set => Q("expand_wildcards", value);
-        }
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
     }
 
     public class CatAllocationRequestParameters : RequestParameters<CatAllocationRequestParameters>
     {
-        public Bytes? Bytes
-        {
-            get => Q<Bytes?>("bytes");
-            set => Q("bytes", value);
-        }
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
     }
 
     public class CatCountRequestParameters : RequestParameters<CatCountRequestParameters>
     {
     }
 
-    public class CatDataFrameAnalyticsRequestParameters : RequestParameters<CatDataFrameAnalyticsRequestParameters>
-    {
-        public bool? AllowNoMatch
-        {
-            get => Q<bool?>("allow_no_match");
-            set => Q("allow_no_match", value);
-        }
-
-        public Bytes? Bytes
-        {
-            get => Q<Bytes?>("bytes");
-            set => Q("bytes", value);
-        }
-    }
-
-    public class CatDatafeedsRequestParameters : RequestParameters<CatDatafeedsRequestParameters>
-    {
-        public bool? AllowNoDatafeeds
-        {
-            get => Q<bool?>("allow_no_datafeeds");
-            set => Q("allow_no_datafeeds", value);
-        }
-    }
-
     public class CatFielddataRequestParameters : RequestParameters<CatFielddataRequestParameters>
     {
-        public Bytes? Bytes
-        {
-            get => Q<Bytes?>("bytes");
-            set => Q("bytes", value);
-        }
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
     }
 
     public class CatHealthRequestParameters : RequestParameters<CatHealthRequestParameters>
     {
-        public bool? IncludeTimestamp
-        {
-            get => Q<bool?>("include_timestamp");
-            set => Q("include_timestamp", value);
-        }
+        public bool? IncludeTimestamp { get => Q<bool?>("include_timestamp"); set => Q("include_timestamp", value); }
 
-        public bool? Ts
-        {
-            get => Q<bool?>("ts");
-            set => Q("ts", value);
-        }
+        public bool? Ts { get => Q<bool?>("ts"); set => Q("ts", value); }
     }
 
     public class CatHelpRequestParameters : RequestParameters<CatHelpRequestParameters>
@@ -101,54 +57,49 @@ namespace Nest
 
     public class CatIndicesRequestParameters : RequestParameters<CatIndicesRequestParameters>
     {
-        public Bytes? Bytes
-        {
-            get => Q<Bytes?>("bytes");
-            set => Q("bytes", value);
-        }
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
 
-        public ExpandWildcards? ExpandWildcards
-        {
-            get => Q<ExpandWildcards?>("expand_wildcards");
-            set => Q("expand_wildcards", value);
-        }
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-        public Health? Health
-        {
-            get => Q<Health?>("health");
-            set => Q("health", value);
-        }
+        public Health? Health { get => Q<Health?>("health"); set => Q("health", value); }
 
-        public bool? IncludeUnloadedSegments
-        {
-            get => Q<bool?>("include_unloaded_segments");
-            set => Q("include_unloaded_segments", value);
-        }
+        public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
 
-        public bool? Pri
-        {
-            get => Q<bool?>("pri");
-            set => Q("pri", value);
-        }
-    }
-
-    public class CatJobsRequestParameters : RequestParameters<CatJobsRequestParameters>
-    {
-        public bool? AllowNoJobs
-        {
-            get => Q<bool?>("allow_no_jobs");
-            set => Q("allow_no_jobs", value);
-        }
-
-        public Bytes? Bytes
-        {
-            get => Q<Bytes?>("bytes");
-            set => Q("bytes", value);
-        }
+        public bool? Pri { get => Q<bool?>("pri"); set => Q("pri", value); }
     }
 
     public class CatMasterRequestParameters : RequestParameters<CatMasterRequestParameters>
     {
+    }
+
+    public class CatDataFrameAnalyticsRequestParameters : RequestParameters<CatDataFrameAnalyticsRequestParameters>
+    {
+        public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
+
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
+    }
+
+    public class CatDatafeedsRequestParameters : RequestParameters<CatDatafeedsRequestParameters>
+    {
+        public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
+    }
+
+    public class CatJobsRequestParameters : RequestParameters<CatJobsRequestParameters>
+    {
+        public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
+
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
+    }
+
+    public class CatTrainedModelsRequestParameters : RequestParameters<CatTrainedModelsRequestParameters>
+    {
+        public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
+
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
+
+        public int? From { get => Q<int?>("from"); set => Q("from", value); }
+
+        public int? Size { get => Q<int?>("size"); set => Q("size", value); }
     }
 
     public class CatNodeAttributesRequestParameters : RequestParameters<CatNodeAttributesRequestParameters>
@@ -157,17 +108,7 @@ namespace Nest
 
     public class CatNodesRequestParameters : RequestParameters<CatNodesRequestParameters>
     {
-        public Bytes? Bytes
-        {
-            get => Q<Bytes?>("bytes");
-            set => Q("bytes", value);
-        }
-
-        public bool? FullId
-        {
-            get => Q<bool?>("full_id");
-            set => Q("full_id", value);
-        }
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
     }
 
     public class CatPendingTasksRequestParameters : RequestParameters<CatPendingTasksRequestParameters>
@@ -180,23 +121,11 @@ namespace Nest
 
     public class CatRecoveryRequestParameters : RequestParameters<CatRecoveryRequestParameters>
     {
-        public bool? ActiveOnly
-        {
-            get => Q<bool?>("active_only");
-            set => Q("active_only", value);
-        }
+        public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
 
-        public Bytes? Bytes
-        {
-            get => Q<Bytes?>("bytes");
-            set => Q("bytes", value);
-        }
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
 
-        public bool? Detailed
-        {
-            get => Q<bool?>("detailed");
-            set => Q("detailed", value);
-        }
+        public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
     }
 
     public class CatRepositoriesRequestParameters : RequestParameters<CatRepositoriesRequestParameters>
@@ -205,44 +134,24 @@ namespace Nest
 
     public class CatSegmentsRequestParameters : RequestParameters<CatSegmentsRequestParameters>
     {
-        public Bytes? Bytes
-        {
-            get => Q<Bytes?>("bytes");
-            set => Q("bytes", value);
-        }
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
     }
 
     public class CatShardsRequestParameters : RequestParameters<CatShardsRequestParameters>
     {
-        public Bytes? Bytes
-        {
-            get => Q<Bytes?>("bytes");
-            set => Q("bytes", value);
-        }
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
     }
 
     public class CatSnapshotsRequestParameters : RequestParameters<CatSnapshotsRequestParameters>
     {
-        public bool? IgnoreUnavailable
-        {
-            get => Q<bool?>("ignore_unavailable");
-            set => Q("ignore_unavailable", value);
-        }
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
     }
 
     public class CatTasksRequestParameters : RequestParameters<CatTasksRequestParameters>
     {
-        public bool? Detailed
-        {
-            get => Q<bool?>("detailed");
-            set => Q("detailed", value);
-        }
+        public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 
-        public long? ParentTask
-        {
-            get => Q<long?>("parent_task");
-            set => Q("parent_task", value);
-        }
+        public long? ParentTask { get => Q<long?>("parent_task"); set => Q("parent_task", value); }
     }
 
     public class CatTemplatesRequestParameters : RequestParameters<CatTemplatesRequestParameters>
@@ -253,51 +162,12 @@ namespace Nest
     {
     }
 
-    public class CatTrainedModelsRequestParameters : RequestParameters<CatTrainedModelsRequestParameters>
-    {
-        public bool? AllowNoMatch
-        {
-            get => Q<bool?>("allow_no_match");
-            set => Q("allow_no_match", value);
-        }
-
-        public Bytes? Bytes
-        {
-            get => Q<Bytes?>("bytes");
-            set => Q("bytes", value);
-        }
-
-        public int? From
-        {
-            get => Q<int?>("from");
-            set => Q("from", value);
-        }
-
-        public int? Size
-        {
-            get => Q<int?>("size");
-            set => Q("size", value);
-        }
-    }
-
     public class CatTransformsRequestParameters : RequestParameters<CatTransformsRequestParameters>
     {
-        public bool? AllowNoMatch
-        {
-            get => Q<bool?>("allow_no_match");
-            set => Q("allow_no_match", value);
-        }
+        public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-        public int? From
-        {
-            get => Q<int?>("from");
-            set => Q("from", value);
-        }
+        public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-        public int? Size
-        {
-            get => Q<int?>("size");
-            set => Q("size", value);
-        }
+        public int? Size { get => Q<int?>("size"); set => Q("size", value); }
     }
 }

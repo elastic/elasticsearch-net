@@ -18,7 +18,9 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
     public interface IGraphExploreRequest : IRequest<GraphExploreRequestParameters>
@@ -31,5 +33,13 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.GraphExplore;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/{index}/_graph/explore</summary>
+        public GraphExploreRequest(Indices index): base(r => r.Required("index", index))
+        {
+        }
+
+        public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 }

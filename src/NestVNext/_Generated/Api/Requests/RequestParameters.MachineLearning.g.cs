@@ -27,23 +27,15 @@ namespace Nest
 {
     public class CloseJobRequestParameters : RequestParameters<CloseJobRequestParameters>
     {
-        public bool? AllowNoJobs
-        {
-            get => Q<bool?>("allow_no_jobs");
-            set => Q("allow_no_jobs", value);
-        }
+        public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 
-        public bool? Force
-        {
-            get => Q<bool?>("force");
-            set => Q("force", value);
-        }
+        public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-        public Time? Timeout
-        {
-            get => Q<Time?>("timeout");
-            set => Q("timeout", value);
-        }
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public class DeleteCalendarRequestParameters : RequestParameters<DeleteCalendarRequestParameters>
+    {
     }
 
     public class DeleteCalendarEventRequestParameters : RequestParameters<DeleteCalendarEventRequestParameters>
@@ -54,17 +46,9 @@ namespace Nest
     {
     }
 
-    public class DeleteCalendarRequestParameters : RequestParameters<DeleteCalendarRequestParameters>
-    {
-    }
-
     public class DeleteDatafeedRequestParameters : RequestParameters<DeleteDatafeedRequestParameters>
     {
-        public bool? Force
-        {
-            get => Q<bool?>("force");
-            set => Q("force", value);
-        }
+        public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
     }
 
     public class DeleteExpiredDataRequestParameters : RequestParameters<DeleteExpiredDataRequestParameters>
@@ -77,32 +61,16 @@ namespace Nest
 
     public class DeleteForecastRequestParameters : RequestParameters<DeleteForecastRequestParameters>
     {
-        public bool? AllowNoForecasts
-        {
-            get => Q<bool?>("allow_no_forecasts");
-            set => Q("allow_no_forecasts", value);
-        }
+        public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
 
-        public Time? Timeout
-        {
-            get => Q<Time?>("timeout");
-            set => Q("timeout", value);
-        }
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public class DeleteJobRequestParameters : RequestParameters<DeleteJobRequestParameters>
     {
-        public bool? Force
-        {
-            get => Q<bool?>("force");
-            set => Q("force", value);
-        }
+        public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-        public bool? WaitForCompletion
-        {
-            get => Q<bool?>("wait_for_completion");
-            set => Q("wait_for_completion", value);
-        }
+        public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
     }
 
     public class DeleteModelSnapshotRequestParameters : RequestParameters<DeleteModelSnapshotRequestParameters>
@@ -115,18 +83,10 @@ namespace Nest
 
     public class FlushJobRequestParameters : RequestParameters<FlushJobRequestParameters>
     {
-        public string? SkipTime
-        {
-            get => Q<string?>("skip_time");
-            set => Q("skip_time", value);
-        }
+        public string? SkipTime { get => Q<string?>("skip_time"); set => Q("skip_time", value); }
     }
 
     public class ForecastJobRequestParameters : RequestParameters<ForecastJobRequestParameters>
-    {
-    }
-
-    public class GetAnomalyRecordsRequestParameters : RequestParameters<GetAnomalyRecordsRequestParameters>
     {
     }
 
@@ -136,23 +96,11 @@ namespace Nest
 
     public class GetCalendarEventsRequestParameters : RequestParameters<GetCalendarEventsRequestParameters>
     {
-        public DateString? End
-        {
-            get => Q<DateString?>("end");
-            set => Q("end", value);
-        }
+        public DateString? End { get => Q<DateString?>("end"); set => Q("end", value); }
 
-        public string? JobId
-        {
-            get => Q<string?>("job_id");
-            set => Q("job_id", value);
-        }
+        public string? JobId { get => Q<string?>("job_id"); set => Q("job_id", value); }
 
-        public string? Start
-        {
-            get => Q<string?>("start");
-            set => Q("start", value);
-        }
+        public string? Start { get => Q<string?>("start"); set => Q("start", value); }
     }
 
     public class GetCalendarsRequestParameters : RequestParameters<GetCalendarsRequestParameters>
@@ -165,35 +113,21 @@ namespace Nest
 
     public class GetDatafeedStatsRequestParameters : RequestParameters<GetDatafeedStatsRequestParameters>
     {
-        public bool? AllowNoDatafeeds
-        {
-            get => Q<bool?>("allow_no_datafeeds");
-            set => Q("allow_no_datafeeds", value);
-        }
+        public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
     }
 
     public class GetDatafeedsRequestParameters : RequestParameters<GetDatafeedsRequestParameters>
     {
-        public bool? AllowNoDatafeeds
-        {
-            get => Q<bool?>("allow_no_datafeeds");
-            set => Q("allow_no_datafeeds", value);
-        }
+        public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
+
+        public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
     }
 
     public class GetFiltersRequestParameters : RequestParameters<GetFiltersRequestParameters>
     {
-        public int? From
-        {
-            get => Q<int?>("from");
-            set => Q("from", value);
-        }
+        public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-        public int? Size
-        {
-            get => Q<int?>("size");
-            set => Q("size", value);
-        }
+        public int? Size { get => Q<int?>("size"); set => Q("size", value); }
     }
 
     public class GetInfluencersRequestParameters : RequestParameters<GetInfluencersRequestParameters>
@@ -202,20 +136,14 @@ namespace Nest
 
     public class GetJobStatsRequestParameters : RequestParameters<GetJobStatsRequestParameters>
     {
-        public bool? AllowNoJobs
-        {
-            get => Q<bool?>("allow_no_jobs");
-            set => Q("allow_no_jobs", value);
-        }
+        public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
     }
 
     public class GetJobsRequestParameters : RequestParameters<GetJobsRequestParameters>
     {
-        public bool? AllowNoJobs
-        {
-            get => Q<bool?>("allow_no_jobs");
-            set => Q("allow_no_jobs", value);
-        }
+        public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
+
+        public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
     }
 
     public class GetModelSnapshotsRequestParameters : RequestParameters<GetModelSnapshotsRequestParameters>
@@ -223,6 +151,10 @@ namespace Nest
     }
 
     public class GetOverallBucketsRequestParameters : RequestParameters<GetOverallBucketsRequestParameters>
+    {
+    }
+
+    public class GetAnomalyRecordsRequestParameters : RequestParameters<GetAnomalyRecordsRequestParameters>
     {
     }
 
@@ -240,24 +172,12 @@ namespace Nest
 
     public class PostJobDataRequestParameters : RequestParameters<PostJobDataRequestParameters>
     {
-        public DateString? ResetEnd
-        {
-            get => Q<DateString?>("reset_end");
-            set => Q("reset_end", value);
-        }
+        public DateString? ResetEnd { get => Q<DateString?>("reset_end"); set => Q("reset_end", value); }
 
-        public DateString? ResetStart
-        {
-            get => Q<DateString?>("reset_start");
-            set => Q("reset_start", value);
-        }
+        public DateString? ResetStart { get => Q<DateString?>("reset_start"); set => Q("reset_start", value); }
     }
 
     public class PreviewDatafeedRequestParameters : RequestParameters<PreviewDatafeedRequestParameters>
-    {
-    }
-
-    public class PutCalendarJobRequestParameters : RequestParameters<PutCalendarJobRequestParameters>
     {
     }
 
@@ -265,31 +185,19 @@ namespace Nest
     {
     }
 
+    public class PutCalendarJobRequestParameters : RequestParameters<PutCalendarJobRequestParameters>
+    {
+    }
+
     public class PutDatafeedRequestParameters : RequestParameters<PutDatafeedRequestParameters>
     {
-        public bool? AllowNoIndices
-        {
-            get => Q<bool?>("allow_no_indices");
-            set => Q("allow_no_indices", value);
-        }
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-        public ExpandWildcards? ExpandWildcards
-        {
-            get => Q<ExpandWildcards?>("expand_wildcards");
-            set => Q("expand_wildcards", value);
-        }
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-        public bool? IgnoreThrottled
-        {
-            get => Q<bool?>("ignore_throttled");
-            set => Q("ignore_throttled", value);
-        }
+        public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-        public bool? IgnoreUnavailable
-        {
-            get => Q<bool?>("ignore_unavailable");
-            set => Q("ignore_unavailable", value);
-        }
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
     }
 
     public class PutFilterRequestParameters : RequestParameters<PutFilterRequestParameters>
@@ -306,17 +214,9 @@ namespace Nest
 
     public class SetUpgradeModeRequestParameters : RequestParameters<SetUpgradeModeRequestParameters>
     {
-        public bool? Enabled
-        {
-            get => Q<bool?>("enabled");
-            set => Q("enabled", value);
-        }
+        public bool? Enabled { get => Q<bool?>("enabled"); set => Q("enabled", value); }
 
-        public Time? Timeout
-        {
-            get => Q<Time?>("timeout");
-            set => Q("timeout", value);
-        }
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public class StartDatafeedRequestParameters : RequestParameters<StartDatafeedRequestParameters>
@@ -325,38 +225,18 @@ namespace Nest
 
     public class StopDatafeedRequestParameters : RequestParameters<StopDatafeedRequestParameters>
     {
-        public bool? AllowNoDatafeeds
-        {
-            get => Q<bool?>("allow_no_datafeeds");
-            set => Q("allow_no_datafeeds", value);
-        }
+        public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
     }
 
     public class UpdateDatafeedRequestParameters : RequestParameters<UpdateDatafeedRequestParameters>
     {
-        public bool? AllowNoIndices
-        {
-            get => Q<bool?>("allow_no_indices");
-            set => Q("allow_no_indices", value);
-        }
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-        public ExpandWildcards? ExpandWildcards
-        {
-            get => Q<ExpandWildcards?>("expand_wildcards");
-            set => Q("expand_wildcards", value);
-        }
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-        public bool? IgnoreThrottled
-        {
-            get => Q<bool?>("ignore_throttled");
-            set => Q("ignore_throttled", value);
-        }
+        public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-        public bool? IgnoreUnavailable
-        {
-            get => Q<bool?>("ignore_unavailable");
-            set => Q("ignore_unavailable", value);
-        }
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
     }
 
     public class UpdateFilterRequestParameters : RequestParameters<UpdateFilterRequestParameters>
@@ -371,11 +251,11 @@ namespace Nest
     {
     }
 
-    public class ValidateDetectorRequestParameters : RequestParameters<ValidateDetectorRequestParameters>
+    public class ValidateJobRequestParameters : RequestParameters<ValidateJobRequestParameters>
     {
     }
 
-    public class ValidateJobRequestParameters : RequestParameters<ValidateJobRequestParameters>
+    public class ValidateDetectorRequestParameters : RequestParameters<ValidateDetectorRequestParameters>
     {
     }
 }

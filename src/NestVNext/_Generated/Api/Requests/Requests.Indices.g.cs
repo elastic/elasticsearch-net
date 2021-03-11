@@ -18,21 +18,11 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
-    public interface IAliasExistsRequest : IRequest<AliasExistsRequestParameters>
-    {
-    }
-
-    public class AliasExistsRequest : PlainRequestBase<AliasExistsRequestParameters>, IAliasExistsRequest
-    {
-        protected IAliasExistsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExistsAlias;
-        protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-        protected override bool SupportsBody => false;
-    }
-
     public interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters>
     {
     }
@@ -43,18 +33,15 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesAnalyze;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
-    }
+        ///<summary>/_analyze</summary>
+        public AnalyzeRequest(): base()
+        {
+        }
 
-    public interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters>
-    {
-    }
-
-    public class BulkAliasRequest : PlainRequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
-    {
-        protected IBulkAliasRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUpdateAliases;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
+        ///<summary>/{index}/_analyze</summary>
+        public AnalyzeRequest(IndexName index): base(r => r.Optional("index", index))
+        {
+        }
     }
 
     public interface IClearCacheRequest : IRequest<ClearCacheRequestParameters>
@@ -67,6 +54,29 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesClearCache;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_cache/clear</summary>
+        public ClearCacheRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_cache/clear</summary>
+        public ClearCacheRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? Fielddata { get => Q<bool?>("fielddata"); set => Q("fielddata", value); }
+
+        public Fields? Fields { get => Q<Fields?>("fields"); set => Q("fields", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? Query { get => Q<bool?>("query"); set => Q("query", value); }
+
+        public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
     }
 
     public interface ICloneIndexRequest : IRequest<CloneIndexRequestParameters>
@@ -79,6 +89,14 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesClone;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/{index}/_clone/{target}</summary>
+        public CloneIndexRequest(IndexName index, Name target): base(r => r.Required("index", index).Required("target", target))
+        {
+        }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters>
@@ -91,6 +109,22 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesClose;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/{index}/_close</summary>
+        public CloseIndexRequest(Indices index): base(r => r.Required("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>
@@ -103,18 +137,18 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesCreate;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
-    }
+        ///<summary>/{index}</summary>
+        public CreateIndexRequest(IndexName index): base(r => r.Required("index", index))
+        {
+        }
 
-    public interface IDeleteAliasRequest : IRequest<DeleteAliasRequestParameters>
-    {
-    }
+        public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 
-    public class DeleteAliasRequest : PlainRequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
-    {
-        protected IDeleteAliasRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteAlias;
-        protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-        protected override bool SupportsBody => false;
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters>
@@ -127,6 +161,40 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDelete;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
+        ///<summary>/{index}</summary>
+        public DeleteIndexRequest(Indices index): base(r => r.Required("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public interface IDeleteAliasRequest : IRequest<DeleteAliasRequestParameters>
+    {
+    }
+
+    public class DeleteAliasRequest : PlainRequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
+    {
+        protected IDeleteAliasRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteAlias;
+        protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+        protected override bool SupportsBody => false;
+        ///<summary>/{index}/_alias/{name}</summary>
+        public DeleteAliasRequest(Indices index, Names name): base(r => r.Required("index", index).Required("name", name))
+        {
+        }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public interface IDeleteIndexTemplateRequest : IRequest<DeleteIndexTemplateRequestParameters>
@@ -139,114 +207,14 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteTemplate;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
-    }
+        ///<summary>/_template/{name}</summary>
+        public DeleteIndexTemplateRequest(Name name): base(r => r.Required("name", name))
+        {
+        }
 
-    public interface IFlushRequest : IRequest<FlushRequestParameters>
-    {
-    }
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
-    public class FlushRequest : PlainRequestBase<FlushRequestParameters>, IFlushRequest
-    {
-        protected IFlushRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFlush;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IForceMergeRequest : IRequest<ForceMergeRequestParameters>
-    {
-    }
-
-    public class ForceMergeRequest : PlainRequestBase<ForceMergeRequestParameters>, IForceMergeRequest
-    {
-        protected IForceMergeRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesForcemerge;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IFreezeIndexRequest : IRequest<FreezeIndexRequestParameters>
-    {
-    }
-
-    public class FreezeIndexRequest : PlainRequestBase<FreezeIndexRequestParameters>, IFreezeIndexRequest
-    {
-        protected IFreezeIndexRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFreeze;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IGetAliasRequest : IRequest<GetAliasRequestParameters>
-    {
-    }
-
-    public class GetAliasRequest : PlainRequestBase<GetAliasRequestParameters>, IGetAliasRequest
-    {
-        protected IGetAliasRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetAlias;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IGetFieldMappingRequest : IRequest<GetFieldMappingRequestParameters>
-    {
-    }
-
-    public class GetFieldMappingRequest : PlainRequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
-    {
-        protected IGetFieldMappingRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetFieldMapping;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
-    {
-    }
-
-    public class GetIndexRequest : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
-    {
-        protected IGetIndexRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGet;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IGetIndexSettingsRequest : IRequest<GetIndexSettingsRequestParameters>
-    {
-    }
-
-    public class GetIndexSettingsRequest : PlainRequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
-    {
-        protected IGetIndexSettingsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetSettings;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IGetIndexTemplateRequest : IRequest<GetIndexTemplateRequestParameters>
-    {
-    }
-
-    public class GetIndexTemplateRequest : PlainRequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
-    {
-        protected IGetIndexTemplateRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetTemplate;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IGetMappingRequest : IRequest<GetMappingRequestParameters>
-    {
-    }
-
-    public class GetMappingRequest : PlainRequestBase<GetMappingRequestParameters>, IGetMappingRequest
-    {
-        protected IGetMappingRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetMapping;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters>
@@ -259,6 +227,51 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExists;
         protected override HttpMethod HttpMethod => HttpMethod.HEAD;
         protected override bool SupportsBody => false;
+        ///<summary>/{index}</summary>
+        public IndexExistsRequest(Indices index): base(r => r.Required("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+    }
+
+    public interface IAliasExistsRequest : IRequest<AliasExistsRequestParameters>
+    {
+    }
+
+    public class AliasExistsRequest : PlainRequestBase<AliasExistsRequestParameters>, IAliasExistsRequest
+    {
+        protected IAliasExistsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExistsAlias;
+        protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+        protected override bool SupportsBody => false;
+        ///<summary>/_alias/{name}</summary>
+        public AliasExistsRequest(Names name): base(r => r.Required("name", name))
+        {
+        }
+
+        ///<summary>/{index}/_alias/{name}</summary>
+        public AliasExistsRequest(Indices index, Names name): base(r => r.Optional("index", index).Required("name", name))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
     }
 
     public interface IIndexTemplateExistsRequest : IRequest<IndexTemplateExistsRequestParameters>
@@ -271,174 +284,16 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExistsTemplate;
         protected override HttpMethod HttpMethod => HttpMethod.HEAD;
         protected override bool SupportsBody => false;
-    }
+        ///<summary>/_template/{name}</summary>
+        public IndexTemplateExistsRequest(Names name): base(r => r.Required("name", name))
+        {
+        }
 
-    public interface IIndicesShardStoresRequest : IRequest<IndicesShardStoresRequestParameters>
-    {
-    }
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-    public class IndicesShardStoresRequest : PlainRequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
-    {
-        protected IIndicesShardStoresRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesShardStores;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-    public interface IIndicesStatsRequest : IRequest<IndicesStatsRequestParameters>
-    {
-    }
-
-    public class IndicesStatsRequest : PlainRequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
-    {
-        protected IIndicesStatsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesStats;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters>
-    {
-    }
-
-    public class OpenIndexRequest : PlainRequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
-    {
-        protected IOpenIndexRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesOpen;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
-    {
-    }
-
-    public class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>, IPutAliasRequest
-    {
-        protected IPutAliasRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutAlias;
-        protected override HttpMethod HttpMethod => HttpMethod.PUT;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters>
-    {
-    }
-
-    public class PutIndexTemplateRequest : PlainRequestBase<PutIndexTemplateRequestParameters>, IPutIndexTemplateRequest
-    {
-        protected IPutIndexTemplateRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutTemplate;
-        protected override HttpMethod HttpMethod => HttpMethod.PUT;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IPutMappingRequest : IRequest<PutMappingRequestParameters>
-    {
-    }
-
-    public class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
-    {
-        protected IPutMappingRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutMapping;
-        protected override HttpMethod HttpMethod => HttpMethod.PUT;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters>
-    {
-    }
-
-    public class RecoveryStatusRequest : PlainRequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
-    {
-        protected IRecoveryStatusRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRecovery;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IRefreshRequest : IRequest<RefreshRequestParameters>
-    {
-    }
-
-    public class RefreshRequest : PlainRequestBase<RefreshRequestParameters>, IRefreshRequest
-    {
-        protected IRefreshRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRefresh;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IReloadSearchAnalyzersRequest : IRequest<ReloadSearchAnalyzersRequestParameters>
-    {
-    }
-
-    public class ReloadSearchAnalyzersRequest : PlainRequestBase<ReloadSearchAnalyzersRequestParameters>, IReloadSearchAnalyzersRequest
-    {
-        protected IReloadSearchAnalyzersRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesReloadSearchAnalyzers;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IRolloverIndexRequest : IRequest<RolloverIndexRequestParameters>
-    {
-    }
-
-    public class RolloverIndexRequest : PlainRequestBase<RolloverIndexRequestParameters>, IRolloverIndexRequest
-    {
-        protected IRolloverIndexRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRollover;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface ISegmentsRequest : IRequest<SegmentsRequestParameters>
-    {
-    }
-
-    public class SegmentsRequest : PlainRequestBase<SegmentsRequestParameters>, ISegmentsRequest
-    {
-        protected ISegmentsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesSegments;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IShrinkIndexRequest : IRequest<ShrinkIndexRequestParameters>
-    {
-    }
-
-    public class ShrinkIndexRequest : PlainRequestBase<ShrinkIndexRequestParameters>, IShrinkIndexRequest
-    {
-        protected IShrinkIndexRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesShrink;
-        protected override HttpMethod HttpMethod => HttpMethod.PUT;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface ISplitIndexRequest : IRequest<SplitIndexRequestParameters>
-    {
-    }
-
-    public class SplitIndexRequest : PlainRequestBase<SplitIndexRequestParameters>, ISplitIndexRequest
-    {
-        protected ISplitIndexRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesSplit;
-        protected override HttpMethod HttpMethod => HttpMethod.PUT;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface ISyncedFlushRequest : IRequest<SyncedFlushRequestParameters>
-    {
-    }
-
-    public class SyncedFlushRequest : PlainRequestBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
-    {
-        protected ISyncedFlushRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFlushSynced;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
     }
 
     public interface ITypeExistsRequest : IRequest<TypeExistsRequestParameters>
@@ -451,18 +306,395 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExistsType;
         protected override HttpMethod HttpMethod => HttpMethod.HEAD;
         protected override bool SupportsBody => false;
+        ///<summary>/{index}/_mapping/{type}</summary>
+        public TypeExistsRequest(Indices index, Types type): base(r => r.Required("index", index).Required("type", type))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
     }
 
-    public interface IUnfreezeIndexRequest : IRequest<UnfreezeIndexRequestParameters>
+    public interface IFlushRequest : IRequest<FlushRequestParameters>
     {
     }
 
-    public class UnfreezeIndexRequest : PlainRequestBase<UnfreezeIndexRequestParameters>, IUnfreezeIndexRequest
+    public class FlushRequest : PlainRequestBase<FlushRequestParameters>, IFlushRequest
     {
-        protected IUnfreezeIndexRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUnfreeze;
+        protected IFlushRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFlush;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_flush</summary>
+        public FlushRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_flush</summary>
+        public FlushRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
+    }
+
+    public interface IForceMergeRequest : IRequest<ForceMergeRequestParameters>
+    {
+    }
+
+    public class ForceMergeRequest : PlainRequestBase<ForceMergeRequestParameters>, IForceMergeRequest
+    {
+        protected IForceMergeRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesForcemerge;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_forcemerge</summary>
+        public ForceMergeRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_forcemerge</summary>
+        public ForceMergeRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
+
+        public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
+    }
+
+    public interface IFreezeIndexRequest : IRequest<FreezeIndexRequestParameters>
+    {
+    }
+
+    public class FreezeIndexRequest : PlainRequestBase<FreezeIndexRequestParameters>, IFreezeIndexRequest
+    {
+        protected IFreezeIndexRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFreeze;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/{index}/_freeze</summary>
+        public FreezeIndexRequest(IndexName index): base(r => r.Required("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
+    {
+    }
+
+    public class GetIndexRequest : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
+    {
+        protected IGetIndexRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGet;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/{index}</summary>
+        public GetIndexRequest(Indices index): base(r => r.Required("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+        public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+    }
+
+    public interface IGetAliasRequest : IRequest<GetAliasRequestParameters>
+    {
+    }
+
+    public class GetAliasRequest : PlainRequestBase<GetAliasRequestParameters>, IGetAliasRequest
+    {
+        protected IGetAliasRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetAlias;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_alias</summary>
+        public GetAliasRequest(): base()
+        {
+        }
+
+        ///<summary>/_alias/{name}</summary>
+        public GetAliasRequest(Names name): base(r => r.Optional("name", name))
+        {
+        }
+
+        ///<summary>/{index}/_alias/{name}</summary>
+        public GetAliasRequest(Indices index, Names name): base(r => r.Optional("index", index).Optional("name", name))
+        {
+        }
+
+        ///<summary>/{index}/_alias</summary>
+        public GetAliasRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+    }
+
+    public interface IGetFieldMappingRequest : IRequest<GetFieldMappingRequestParameters>
+    {
+    }
+
+    public class GetFieldMappingRequest : PlainRequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
+    {
+        protected IGetFieldMappingRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetFieldMapping;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_mapping/field/{fields}</summary>
+        public GetFieldMappingRequest(Fields fields): base(r => r.Required("fields", fields))
+        {
+        }
+
+        ///<summary>/{index}/_mapping/field/{fields}</summary>
+        public GetFieldMappingRequest(Indices index, Fields fields): base(r => r.Optional("index", index).Required("fields", fields))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+        public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+    }
+
+    public interface IGetMappingRequest : IRequest<GetMappingRequestParameters>
+    {
+    }
+
+    public class GetMappingRequest : PlainRequestBase<GetMappingRequestParameters>, IGetMappingRequest
+    {
+        protected IGetMappingRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetMapping;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_mapping</summary>
+        public GetMappingRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_mapping</summary>
+        public GetMappingRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+    }
+
+    public interface IGetIndexSettingsRequest : IRequest<GetIndexSettingsRequestParameters>
+    {
+    }
+
+    public class GetIndexSettingsRequest : PlainRequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
+    {
+        protected IGetIndexSettingsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetSettings;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_settings</summary>
+        public GetIndexSettingsRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_settings</summary>
+        public GetIndexSettingsRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        ///<summary>/{index}/_settings/{name}</summary>
+        public GetIndexSettingsRequest(Indices index, Names name): base(r => r.Optional("index", index).Optional("name", name))
+        {
+        }
+
+        ///<summary>/_settings/{name}</summary>
+        public GetIndexSettingsRequest(Names name): base(r => r.Optional("name", name))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+    }
+
+    public interface IGetIndexTemplateRequest : IRequest<GetIndexTemplateRequestParameters>
+    {
+    }
+
+    public class GetIndexTemplateRequest : PlainRequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
+    {
+        protected IGetIndexTemplateRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetTemplate;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_template</summary>
+        public GetIndexTemplateRequest(): base()
+        {
+        }
+
+        ///<summary>/_template/{name}</summary>
+        public GetIndexTemplateRequest(Names name): base(r => r.Optional("name", name))
+        {
+        }
+
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+    }
+
+    public interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters>
+    {
+    }
+
+    public class OpenIndexRequest : PlainRequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
+    {
+        protected IOpenIndexRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesOpen;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/{index}/_open</summary>
+        public OpenIndexRequest(Indices index): base(r => r.Required("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+    }
+
+    public interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
+    {
+    }
+
+    public class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>, IPutAliasRequest
+    {
+        protected IPutAliasRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutAlias;
+        protected override HttpMethod HttpMethod => HttpMethod.PUT;
+        protected override bool SupportsBody => false;
+        ///<summary>/{index}/_alias/{name}</summary>
+        public PutAliasRequest(Indices index, Name name): base(r => r.Required("index", index).Required("name", name))
+        {
+        }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public interface IPutMappingRequest : IRequest<PutMappingRequestParameters>
+    {
+    }
+
+    public class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
+    {
+        protected IPutMappingRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutMapping;
+        protected override HttpMethod HttpMethod => HttpMethod.PUT;
+        protected override bool SupportsBody => false;
+        ///<summary>/{index}/_mapping</summary>
+        public PutMappingRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSettingsRequestParameters>
@@ -475,5 +707,401 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutSettings;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_settings</summary>
+        public UpdateIndexSettingsRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_settings</summary>
+        public UpdateIndexSettingsRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters>
+    {
+    }
+
+    public class PutIndexTemplateRequest : PlainRequestBase<PutIndexTemplateRequestParameters>, IPutIndexTemplateRequest
+    {
+        protected IPutIndexTemplateRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutTemplate;
+        protected override HttpMethod HttpMethod => HttpMethod.PUT;
+        protected override bool SupportsBody => false;
+        ///<summary>/_template/{name}</summary>
+        public PutIndexTemplateRequest(Name name): base(r => r.Required("name", name))
+        {
+        }
+
+        public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
+
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters>
+    {
+    }
+
+    public class RecoveryStatusRequest : PlainRequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
+    {
+        protected IRecoveryStatusRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRecovery;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_recovery</summary>
+        public RecoveryStatusRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_recovery</summary>
+        public RecoveryStatusRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
+
+        public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
+    }
+
+    public interface IRefreshRequest : IRequest<RefreshRequestParameters>
+    {
+    }
+
+    public class RefreshRequest : PlainRequestBase<RefreshRequestParameters>, IRefreshRequest
+    {
+        protected IRefreshRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRefresh;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_refresh</summary>
+        public RefreshRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_refresh</summary>
+        public RefreshRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+    }
+
+    public interface IReloadSearchAnalyzersRequest : IRequest<ReloadSearchAnalyzersRequestParameters>
+    {
+    }
+
+    public class ReloadSearchAnalyzersRequest : PlainRequestBase<ReloadSearchAnalyzersRequestParameters>, IReloadSearchAnalyzersRequest
+    {
+        protected IReloadSearchAnalyzersRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesReloadSearchAnalyzers;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/{index}/_reload_search_analyzers</summary>
+        public ReloadSearchAnalyzersRequest(Indices index): base(r => r.Required("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+    }
+
+    public interface IRolloverIndexRequest : IRequest<RolloverIndexRequestParameters>
+    {
+    }
+
+    public class RolloverIndexRequest : PlainRequestBase<RolloverIndexRequestParameters>, IRolloverIndexRequest
+    {
+        protected IRolloverIndexRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRollover;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/{alias}/_rollover</summary>
+        public RolloverIndexRequest(Alias alias): base(r => r.Required("alias", alias))
+        {
+        }
+
+        ///<summary>/{alias}/_rollover/{new_index}</summary>
+        public RolloverIndexRequest(Alias alias, IndexName newIndex): base(r => r.Required("alias", alias).Optional("new_index", newIndex))
+        {
+        }
+
+        public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
+
+        public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+    }
+
+    public interface ISegmentsRequest : IRequest<SegmentsRequestParameters>
+    {
+    }
+
+    public class SegmentsRequest : PlainRequestBase<SegmentsRequestParameters>, ISegmentsRequest
+    {
+        protected ISegmentsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesSegments;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_segments</summary>
+        public SegmentsRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_segments</summary>
+        public SegmentsRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
+    }
+
+    public interface IIndicesShardStoresRequest : IRequest<IndicesShardStoresRequestParameters>
+    {
+    }
+
+    public class IndicesShardStoresRequest : PlainRequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
+    {
+        protected IIndicesShardStoresRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesShardStores;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_shard_stores</summary>
+        public IndicesShardStoresRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_shard_stores</summary>
+        public IndicesShardStoresRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+    }
+
+    public interface IShrinkIndexRequest : IRequest<ShrinkIndexRequestParameters>
+    {
+    }
+
+    public class ShrinkIndexRequest : PlainRequestBase<ShrinkIndexRequestParameters>, IShrinkIndexRequest
+    {
+        protected IShrinkIndexRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesShrink;
+        protected override HttpMethod HttpMethod => HttpMethod.PUT;
+        protected override bool SupportsBody => false;
+        ///<summary>/{index}/_shrink/{target}</summary>
+        public ShrinkIndexRequest(IndexName index, IndexName target): base(r => r.Required("index", index).Required("target", target))
+        {
+        }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+    }
+
+    public interface ISplitIndexRequest : IRequest<SplitIndexRequestParameters>
+    {
+    }
+
+    public class SplitIndexRequest : PlainRequestBase<SplitIndexRequestParameters>, ISplitIndexRequest
+    {
+        protected ISplitIndexRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesSplit;
+        protected override HttpMethod HttpMethod => HttpMethod.PUT;
+        protected override bool SupportsBody => false;
+        ///<summary>/{index}/_split/{target}</summary>
+        public SplitIndexRequest(IndexName index, IndexName target): base(r => r.Required("index", index).Required("target", target))
+        {
+        }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+    }
+
+    public interface IIndicesStatsRequest : IRequest<IndicesStatsRequestParameters>
+    {
+    }
+
+    public class IndicesStatsRequest : PlainRequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
+    {
+        protected IIndicesStatsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesStats;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_stats</summary>
+        public IndicesStatsRequest(): base()
+        {
+        }
+
+        ///<summary>/_stats/{metric}</summary>
+        public IndicesStatsRequest(Metrics metric): base(r => r.Optional("metric", metric))
+        {
+        }
+
+        ///<summary>/{index}/_stats</summary>
+        public IndicesStatsRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        ///<summary>/{index}/_stats/{metric}</summary>
+        public IndicesStatsRequest(Indices index, Metrics metric): base(r => r.Optional("index", index).Optional("metric", metric))
+        {
+        }
+
+        public Fields? CompletionFields { get => Q<Fields?>("completion_fields"); set => Q("completion_fields", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public Fields? FielddataFields { get => Q<Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
+
+        public Fields? Fields { get => Q<Fields?>("fields"); set => Q("fields", value); }
+
+        public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
+
+        public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
+
+        public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
+
+        public Level? Level { get => Q<Level?>("level"); set => Q("level", value); }
+
+        public Types? Types { get => Q<Types?>("types"); set => Q("types", value); }
+    }
+
+    public interface IUnfreezeIndexRequest : IRequest<UnfreezeIndexRequestParameters>
+    {
+    }
+
+    public class UnfreezeIndexRequest : PlainRequestBase<UnfreezeIndexRequestParameters>, IUnfreezeIndexRequest
+    {
+        protected IUnfreezeIndexRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUnfreeze;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/{index}/_unfreeze</summary>
+        public UnfreezeIndexRequest(IndexName index): base(r => r.Required("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+    }
+
+    public interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters>
+    {
+    }
+
+    public class BulkAliasRequest : PlainRequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
+    {
+        protected IBulkAliasRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUpdateAliases;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_aliases</summary>
+        public BulkAliasRequest(): base()
+        {
+        }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters>
+    {
+    }
+
+    public class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
+    {
+        protected IValidateQueryRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesValidateQuery;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_validate/query</summary>
+        public ValidateQueryRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_validate/query</summary>
+        public ValidateQueryRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
+
+        public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
+
+        public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+
+        public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+
+        public string? Df { get => Q<string?>("df"); set => Q("df", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+
+        public string? QueryOnQueryString { get => Q<string?>("query_on_query_string"); set => Q("query_on_query_string", value); }
+
+        public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
     }
 }

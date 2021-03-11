@@ -18,7 +18,9 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
     public interface IDeprecationInfoRequest : IRequest<DeprecationInfoRequestParameters>
@@ -31,5 +33,14 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MigrationDeprecations;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_migration/deprecations</summary>
+        public DeprecationInfoRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_migration/deprecations</summary>
+        public DeprecationInfoRequest(IndexName index): base(r => r.Optional("index", index))
+        {
+        }
     }
 }

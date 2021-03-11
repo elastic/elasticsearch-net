@@ -18,7 +18,9 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
     public interface IAcknowledgeWatchRequest : IRequest<AcknowledgeWatchRequestParameters>
@@ -31,6 +33,15 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherAckWatch;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_watcher/watch/{watch_id}/_ack</summary>
+        public AcknowledgeWatchRequest(Name watchId): base(r => r.Required("watch_id", watchId))
+        {
+        }
+
+        ///<summary>/_watcher/watch/{watch_id}/_ack/{action_id}</summary>
+        public AcknowledgeWatchRequest(Name watchId, Names actionId): base(r => r.Required("watch_id", watchId).Optional("action_id", actionId))
+        {
+        }
     }
 
     public interface IActivateWatchRequest : IRequest<ActivateWatchRequestParameters>
@@ -43,6 +54,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherActivateWatch;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_watcher/watch/{watch_id}/_activate</summary>
+        public ActivateWatchRequest(Name watchId): base(r => r.Required("watch_id", watchId))
+        {
+        }
     }
 
     public interface IDeactivateWatchRequest : IRequest<DeactivateWatchRequestParameters>
@@ -55,6 +70,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherDeactivateWatch;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_watcher/watch/{watch_id}/_deactivate</summary>
+        public DeactivateWatchRequest(Name watchId): base(r => r.Required("watch_id", watchId))
+        {
+        }
     }
 
     public interface IDeleteWatchRequest : IRequest<DeleteWatchRequestParameters>
@@ -67,6 +86,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherDeleteWatch;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
+        ///<summary>/_watcher/watch/{id}</summary>
+        public DeleteWatchRequest(Name id): base(r => r.Required("id", id))
+        {
+        }
     }
 
     public interface IExecuteWatchRequest : IRequest<ExecuteWatchRequestParameters>
@@ -79,6 +102,17 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherExecuteWatch;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_watcher/watch/{id}/_execute</summary>
+        public ExecuteWatchRequest(Name id): base(r => r.Optional("id", id))
+        {
+        }
+
+        ///<summary>/_watcher/watch/_execute</summary>
+        public ExecuteWatchRequest(): base()
+        {
+        }
+
+        public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
     }
 
     public interface IGetWatchRequest : IRequest<GetWatchRequestParameters>
@@ -91,6 +125,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherGetWatch;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_watcher/watch/{id}</summary>
+        public GetWatchRequest(Name id): base(r => r.Required("id", id))
+        {
+        }
     }
 
     public interface IPutWatchRequest : IRequest<PutWatchRequestParameters>
@@ -103,6 +141,18 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherPutWatch;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_watcher/watch/{id}</summary>
+        public PutWatchRequest(Name id): base(r => r.Required("id", id))
+        {
+        }
+
+        public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
+
+        public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+
+        public long? IfSequenceNumber { get => Q<long?>("if_sequence_number"); set => Q("if_sequence_number", value); }
+
+        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
     }
 
     public interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters>
@@ -115,18 +165,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherStart;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
-    }
-
-    public interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters>
-    {
-    }
-
-    public class StopWatcherRequest : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
-    {
-        protected IStopWatcherRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherStop;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
+        ///<summary>/_watcher/_start</summary>
+        public StartWatcherRequest(): base()
+        {
+        }
     }
 
     public interface IWatcherStatsRequest : IRequest<WatcherStatsRequestParameters>
@@ -139,5 +181,32 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherStats;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_watcher/stats</summary>
+        public WatcherStatsRequest(): base()
+        {
+        }
+
+        ///<summary>/_watcher/stats/{metric}</summary>
+        public WatcherStatsRequest(Metrics metric): base(r => r.Optional("metric", metric))
+        {
+        }
+
+        public bool? EmitStacktraces { get => Q<bool?>("emit_stacktraces"); set => Q("emit_stacktraces", value); }
+    }
+
+    public interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters>
+    {
+    }
+
+    public class StopWatcherRequest : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
+    {
+        protected IStopWatcherRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherStop;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_watcher/_stop</summary>
+        public StopWatcherRequest(): base()
+        {
+        }
     }
 }

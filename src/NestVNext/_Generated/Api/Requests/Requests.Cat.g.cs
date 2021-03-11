@@ -18,7 +18,9 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
     public interface ICatAliasesRequest : IRequest<CatAliasesRequestParameters>
@@ -31,6 +33,17 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CatAliases;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cat/aliases</summary>
+        public CatAliasesRequest(): base()
+        {
+        }
+
+        ///<summary>/_cat/aliases/{name}</summary>
+        public CatAliasesRequest(Names name): base(r => r.Optional("name", name))
+        {
+        }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
     }
 
     public interface ICatAllocationRequest : IRequest<CatAllocationRequestParameters>
@@ -43,6 +56,17 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CatAllocation;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cat/allocation</summary>
+        public CatAllocationRequest(): base()
+        {
+        }
+
+        ///<summary>/_cat/allocation/{node_id}</summary>
+        public CatAllocationRequest(NodeIds nodeId): base(r => r.Optional("node_id", nodeId))
+        {
+        }
+
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
     }
 
     public interface ICatCountRequest : IRequest<CatCountRequestParameters>
@@ -55,30 +79,15 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CatCount;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
-    }
+        ///<summary>/_cat/count</summary>
+        public CatCountRequest(): base()
+        {
+        }
 
-    public interface ICatDataFrameAnalyticsRequest : IRequest<CatDataFrameAnalyticsRequestParameters>
-    {
-    }
-
-    public class CatDataFrameAnalyticsRequest : PlainRequestBase<CatDataFrameAnalyticsRequestParameters>, ICatDataFrameAnalyticsRequest
-    {
-        protected ICatDataFrameAnalyticsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatMlDataFrameAnalytics;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface ICatDatafeedsRequest : IRequest<CatDatafeedsRequestParameters>
-    {
-    }
-
-    public class CatDatafeedsRequest : PlainRequestBase<CatDatafeedsRequestParameters>, ICatDatafeedsRequest
-    {
-        protected ICatDatafeedsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatMlDatafeeds;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
+        ///<summary>/_cat/count/{index}</summary>
+        public CatCountRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
     }
 
     public interface ICatFielddataRequest : IRequest<CatFielddataRequestParameters>
@@ -91,6 +100,17 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CatFielddata;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cat/fielddata</summary>
+        public CatFielddataRequest(): base()
+        {
+        }
+
+        ///<summary>/_cat/fielddata/{fields}</summary>
+        public CatFielddataRequest(Fields fields): base(r => r.Optional("fields", fields))
+        {
+        }
+
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
     }
 
     public interface ICatHealthRequest : IRequest<CatHealthRequestParameters>
@@ -103,6 +123,14 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CatHealth;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cat/health</summary>
+        public CatHealthRequest(): base()
+        {
+        }
+
+        public bool? IncludeTimestamp { get => Q<bool?>("include_timestamp"); set => Q("include_timestamp", value); }
+
+        public bool? Ts { get => Q<bool?>("ts"); set => Q("ts", value); }
     }
 
     public interface ICatHelpRequest : IRequest<CatHelpRequestParameters>
@@ -115,6 +143,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CatHelp;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cat</summary>
+        public CatHelpRequest(): base()
+        {
+        }
     }
 
     public interface ICatIndicesRequest : IRequest<CatIndicesRequestParameters>
@@ -127,18 +159,25 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CatIndices;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
-    }
+        ///<summary>/_cat/indices</summary>
+        public CatIndicesRequest(): base()
+        {
+        }
 
-    public interface ICatJobsRequest : IRequest<CatJobsRequestParameters>
-    {
-    }
+        ///<summary>/_cat/indices/{index}</summary>
+        public CatIndicesRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
 
-    public class CatJobsRequest : PlainRequestBase<CatJobsRequestParameters>, ICatJobsRequest
-    {
-        protected ICatJobsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatMlJobs;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public Health? Health { get => Q<Health?>("health"); set => Q("health", value); }
+
+        public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
+
+        public bool? Pri { get => Q<bool?>("pri"); set => Q("pri", value); }
     }
 
     public interface ICatMasterRequest : IRequest<CatMasterRequestParameters>
@@ -151,150 +190,83 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CatMaster;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cat/master</summary>
+        public CatMasterRequest(): base()
+        {
+        }
     }
 
-    public interface ICatNodeAttributesRequest : IRequest<CatNodeAttributesRequestParameters>
+    public interface ICatDataFrameAnalyticsRequest : IRequest<CatDataFrameAnalyticsRequestParameters>
     {
     }
 
-    public class CatNodeAttributesRequest : PlainRequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
+    public class CatDataFrameAnalyticsRequest : PlainRequestBase<CatDataFrameAnalyticsRequestParameters>, ICatDataFrameAnalyticsRequest
     {
-        protected ICatNodeAttributesRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatNodeattrs;
+        protected ICatDataFrameAnalyticsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatMlDataFrameAnalytics;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cat/ml/data_frame/analytics</summary>
+        public CatDataFrameAnalyticsRequest(): base()
+        {
+        }
+
+        ///<summary>/_cat/ml/data_frame/analytics/{id}</summary>
+        public CatDataFrameAnalyticsRequest(Id id): base(r => r.Optional("id", id))
+        {
+        }
+
+        public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
+
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
     }
 
-    public interface ICatNodesRequest : IRequest<CatNodesRequestParameters>
+    public interface ICatDatafeedsRequest : IRequest<CatDatafeedsRequestParameters>
     {
     }
 
-    public class CatNodesRequest : PlainRequestBase<CatNodesRequestParameters>, ICatNodesRequest
+    public class CatDatafeedsRequest : PlainRequestBase<CatDatafeedsRequestParameters>, ICatDatafeedsRequest
     {
-        protected ICatNodesRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatNodes;
+        protected ICatDatafeedsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatMlDatafeeds;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cat/ml/datafeeds</summary>
+        public CatDatafeedsRequest(): base()
+        {
+        }
+
+        ///<summary>/_cat/ml/datafeeds/{datafeed_id}</summary>
+        public CatDatafeedsRequest(Id datafeedId): base(r => r.Optional("datafeed_id", datafeedId))
+        {
+        }
+
+        public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
     }
 
-    public interface ICatPendingTasksRequest : IRequest<CatPendingTasksRequestParameters>
+    public interface ICatJobsRequest : IRequest<CatJobsRequestParameters>
     {
     }
 
-    public class CatPendingTasksRequest : PlainRequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
+    public class CatJobsRequest : PlainRequestBase<CatJobsRequestParameters>, ICatJobsRequest
     {
-        protected ICatPendingTasksRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatPendingTasks;
+        protected ICatJobsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatMlJobs;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
-    }
+        ///<summary>/_cat/ml/anomaly_detectors</summary>
+        public CatJobsRequest(): base()
+        {
+        }
 
-    public interface ICatPluginsRequest : IRequest<CatPluginsRequestParameters>
-    {
-    }
+        ///<summary>/_cat/ml/anomaly_detectors/{job_id}</summary>
+        public CatJobsRequest(Id jobId): base(r => r.Optional("job_id", jobId))
+        {
+        }
 
-    public class CatPluginsRequest : PlainRequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
-    {
-        protected ICatPluginsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatPlugins;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
+        public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 
-    public interface ICatRecoveryRequest : IRequest<CatRecoveryRequestParameters>
-    {
-    }
-
-    public class CatRecoveryRequest : PlainRequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest
-    {
-        protected ICatRecoveryRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatRecovery;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface ICatRepositoriesRequest : IRequest<CatRepositoriesRequestParameters>
-    {
-    }
-
-    public class CatRepositoriesRequest : PlainRequestBase<CatRepositoriesRequestParameters>, ICatRepositoriesRequest
-    {
-        protected ICatRepositoriesRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatRepositories;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface ICatSegmentsRequest : IRequest<CatSegmentsRequestParameters>
-    {
-    }
-
-    public class CatSegmentsRequest : PlainRequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest
-    {
-        protected ICatSegmentsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatSegments;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface ICatShardsRequest : IRequest<CatShardsRequestParameters>
-    {
-    }
-
-    public class CatShardsRequest : PlainRequestBase<CatShardsRequestParameters>, ICatShardsRequest
-    {
-        protected ICatShardsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatShards;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface ICatSnapshotsRequest : IRequest<CatSnapshotsRequestParameters>
-    {
-    }
-
-    public class CatSnapshotsRequest : PlainRequestBase<CatSnapshotsRequestParameters>, ICatSnapshotsRequest
-    {
-        protected ICatSnapshotsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatSnapshots;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface ICatTasksRequest : IRequest<CatTasksRequestParameters>
-    {
-    }
-
-    public class CatTasksRequest : PlainRequestBase<CatTasksRequestParameters>, ICatTasksRequest
-    {
-        protected ICatTasksRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatTasks;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface ICatTemplatesRequest : IRequest<CatTemplatesRequestParameters>
-    {
-    }
-
-    public class CatTemplatesRequest : PlainRequestBase<CatTemplatesRequestParameters>, ICatTemplatesRequest
-    {
-        protected ICatTemplatesRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatTemplates;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters>
-    {
-    }
-
-    public class CatThreadPoolRequest : PlainRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
-    {
-        protected ICatThreadPoolRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatThreadPool;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
     }
 
     public interface ICatTrainedModelsRequest : IRequest<CatTrainedModelsRequestParameters>
@@ -307,6 +279,263 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CatMlTrainedModels;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cat/ml/trained_models</summary>
+        public CatTrainedModelsRequest(): base()
+        {
+        }
+
+        ///<summary>/_cat/ml/trained_models/{model_id}</summary>
+        public CatTrainedModelsRequest(Id modelId): base(r => r.Optional("model_id", modelId))
+        {
+        }
+
+        public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
+
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
+
+        public int? From { get => Q<int?>("from"); set => Q("from", value); }
+
+        public int? Size { get => Q<int?>("size"); set => Q("size", value); }
+    }
+
+    public interface ICatNodeAttributesRequest : IRequest<CatNodeAttributesRequestParameters>
+    {
+    }
+
+    public class CatNodeAttributesRequest : PlainRequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
+    {
+        protected ICatNodeAttributesRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatNodeattrs;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cat/nodeattrs</summary>
+        public CatNodeAttributesRequest(): base()
+        {
+        }
+    }
+
+    public interface ICatNodesRequest : IRequest<CatNodesRequestParameters>
+    {
+    }
+
+    public class CatNodesRequest : PlainRequestBase<CatNodesRequestParameters>, ICatNodesRequest
+    {
+        protected ICatNodesRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatNodes;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cat/nodes</summary>
+        public CatNodesRequest(): base()
+        {
+        }
+
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
+    }
+
+    public interface ICatPendingTasksRequest : IRequest<CatPendingTasksRequestParameters>
+    {
+    }
+
+    public class CatPendingTasksRequest : PlainRequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
+    {
+        protected ICatPendingTasksRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatPendingTasks;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cat/pending_tasks</summary>
+        public CatPendingTasksRequest(): base()
+        {
+        }
+    }
+
+    public interface ICatPluginsRequest : IRequest<CatPluginsRequestParameters>
+    {
+    }
+
+    public class CatPluginsRequest : PlainRequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
+    {
+        protected ICatPluginsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatPlugins;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cat/plugins</summary>
+        public CatPluginsRequest(): base()
+        {
+        }
+    }
+
+    public interface ICatRecoveryRequest : IRequest<CatRecoveryRequestParameters>
+    {
+    }
+
+    public class CatRecoveryRequest : PlainRequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest
+    {
+        protected ICatRecoveryRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatRecovery;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cat/recovery</summary>
+        public CatRecoveryRequest(): base()
+        {
+        }
+
+        ///<summary>/_cat/recovery/{index}</summary>
+        public CatRecoveryRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
+
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
+
+        public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
+    }
+
+    public interface ICatRepositoriesRequest : IRequest<CatRepositoriesRequestParameters>
+    {
+    }
+
+    public class CatRepositoriesRequest : PlainRequestBase<CatRepositoriesRequestParameters>, ICatRepositoriesRequest
+    {
+        protected ICatRepositoriesRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatRepositories;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cat/repositories</summary>
+        public CatRepositoriesRequest(): base()
+        {
+        }
+    }
+
+    public interface ICatSegmentsRequest : IRequest<CatSegmentsRequestParameters>
+    {
+    }
+
+    public class CatSegmentsRequest : PlainRequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest
+    {
+        protected ICatSegmentsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatSegments;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cat/segments</summary>
+        public CatSegmentsRequest(): base()
+        {
+        }
+
+        ///<summary>/_cat/segments/{index}</summary>
+        public CatSegmentsRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
+    }
+
+    public interface ICatShardsRequest : IRequest<CatShardsRequestParameters>
+    {
+    }
+
+    public class CatShardsRequest : PlainRequestBase<CatShardsRequestParameters>, ICatShardsRequest
+    {
+        protected ICatShardsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatShards;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cat/shards</summary>
+        public CatShardsRequest(): base()
+        {
+        }
+
+        ///<summary>/_cat/shards/{index}</summary>
+        public CatShardsRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
+    }
+
+    public interface ICatSnapshotsRequest : IRequest<CatSnapshotsRequestParameters>
+    {
+    }
+
+    public class CatSnapshotsRequest : PlainRequestBase<CatSnapshotsRequestParameters>, ICatSnapshotsRequest
+    {
+        protected ICatSnapshotsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatSnapshots;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cat/snapshots</summary>
+        public CatSnapshotsRequest(): base()
+        {
+        }
+
+        ///<summary>/_cat/snapshots/{repository}</summary>
+        public CatSnapshotsRequest(Names repository): base(r => r.Optional("repository", repository))
+        {
+        }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+    }
+
+    public interface ICatTasksRequest : IRequest<CatTasksRequestParameters>
+    {
+    }
+
+    public class CatTasksRequest : PlainRequestBase<CatTasksRequestParameters>, ICatTasksRequest
+    {
+        protected ICatTasksRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatTasks;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cat/tasks</summary>
+        public CatTasksRequest(): base()
+        {
+        }
+
+        public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
+
+        public long? ParentTask { get => Q<long?>("parent_task"); set => Q("parent_task", value); }
+    }
+
+    public interface ICatTemplatesRequest : IRequest<CatTemplatesRequestParameters>
+    {
+    }
+
+    public class CatTemplatesRequest : PlainRequestBase<CatTemplatesRequestParameters>, ICatTemplatesRequest
+    {
+        protected ICatTemplatesRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatTemplates;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cat/templates</summary>
+        public CatTemplatesRequest(): base()
+        {
+        }
+
+        ///<summary>/_cat/templates/{name}</summary>
+        public CatTemplatesRequest(Name name): base(r => r.Optional("name", name))
+        {
+        }
+    }
+
+    public interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters>
+    {
+    }
+
+    public class CatThreadPoolRequest : PlainRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
+    {
+        protected ICatThreadPoolRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CatThreadPool;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cat/thread_pool</summary>
+        public CatThreadPoolRequest(): base()
+        {
+        }
+
+        ///<summary>/_cat/thread_pool/{thread_pool_patterns}</summary>
+        public CatThreadPoolRequest(Names threadPoolPatterns): base(r => r.Optional("thread_pool_patterns", threadPoolPatterns))
+        {
+        }
     }
 
     public interface ICatTransformsRequest : IRequest<CatTransformsRequestParameters>
@@ -319,5 +548,20 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CatTransforms;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cat/transforms</summary>
+        public CatTransformsRequest(): base()
+        {
+        }
+
+        ///<summary>/_cat/transforms/{transform_id}</summary>
+        public CatTransformsRequest(Id transformId): base(r => r.Optional("transform_id", transformId))
+        {
+        }
+
+        public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
+
+        public int? From { get => Q<int?>("from"); set => Q("from", value); }
+
+        public int? Size { get => Q<int?>("size"); set => Q("size", value); }
     }
 }

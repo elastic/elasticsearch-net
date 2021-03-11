@@ -18,18 +18,31 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
-    public class AsyncSearchDeleteResponse : ResponseBase
+    public class AsyncSearchDeleteResponse : AcknowledgedResponseBase
     {
     }
 
-    public class AsyncSearchGetResponse : ResponseBase
+    public class AsyncSearchGetResponse : AsyncSearchDocumentResponseBase
     {
     }
 
-    public class AsyncSearchSubmitResponse : ResponseBase
+    public class AsyncSearchStatusResponse : AsyncSearchResponseBase
+    {
+        [JsonPropertyName("completion_status")]
+        public int CompletionStatus { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public class AsyncSearchSubmitResponse : AsyncSearchDocumentResponseBase
     {
     }
 }

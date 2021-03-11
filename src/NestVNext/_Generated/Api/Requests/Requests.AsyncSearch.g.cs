@@ -18,7 +18,9 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
     public interface IAsyncSearchDeleteRequest : IRequest<AsyncSearchDeleteRequestParameters>
@@ -31,6 +33,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchDelete;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
+        ///<summary>/_async_search/{id}</summary>
+        public AsyncSearchDeleteRequest(Id id): base(r => r.Required("id", id))
+        {
+        }
     }
 
     public interface IAsyncSearchGetRequest : IRequest<AsyncSearchGetRequestParameters>
@@ -43,6 +49,26 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchGet;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_async_search/{id}</summary>
+        public AsyncSearchGetRequest(Id id): base(r => r.Required("id", id))
+        {
+        }
+    }
+
+    public interface IAsyncSearchStatusRequest : IRequest<AsyncSearchStatusRequestParameters>
+    {
+    }
+
+    public class AsyncSearchStatusRequest : PlainRequestBase<AsyncSearchStatusRequestParameters>, IAsyncSearchStatusRequest
+    {
+        protected IAsyncSearchStatusRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchStatus;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_async_search/status/{id}</summary>
+        public AsyncSearchStatusRequest(Id id): base(r => r.Required("id", id))
+        {
+        }
     }
 
     public interface IAsyncSearchSubmitRequest : IRequest<AsyncSearchSubmitRequestParameters>
@@ -55,5 +81,14 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchSubmit;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_async_search</summary>
+        public AsyncSearchSubmitRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_async_search</summary>
+        public AsyncSearchSubmitRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
     }
 }

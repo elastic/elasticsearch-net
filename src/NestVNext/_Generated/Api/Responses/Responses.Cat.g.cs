@@ -18,106 +18,107 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
-    public class CatAliasesResponse : ResponseBase
+    public class CatAliasesResponse : CatResponseBase
     {
     }
 
-    public class CatAllocationResponse : ResponseBase
+    public class CatAllocationResponse : CatResponseBase
     {
     }
 
-    public class CatCountResponse : ResponseBase
+    public class CatCountResponse : CatResponseBase
     {
     }
 
-    public class CatFielddataResponse : ResponseBase
+    public class CatFielddataResponse : CatResponseBase
     {
     }
 
-    public class CatHealthResponse : ResponseBase
+    public class CatHealthResponse : CatResponseBase
     {
     }
 
-    public class CatHelpResponse : ResponseBase
+    public class CatHelpResponse : CatResponseBase
     {
     }
 
-    public class CatIndicesResponse : ResponseBase
+    public class CatIndicesResponse : CatResponseBase
     {
     }
 
-    public class CatMasterResponse : ResponseBase
+    public class CatMasterResponse : CatResponseBase
     {
     }
 
-    public class CatDataFrameAnalyticsResponse : ResponseBase
+    public class CatDataFrameAnalyticsResponse : CatResponseBase
     {
     }
 
-    public class CatDatafeedsResponse : ResponseBase
+    public class CatDatafeedsResponse : CatResponseBase
     {
     }
 
-    public class CatJobsResponse : ResponseBase
+    public class CatJobsResponse : CatResponseBase
     {
     }
 
-    public class CatTrainedModelsResponse : ResponseBase
+    public class CatTrainedModelsResponse : CatResponseBase
     {
     }
 
-    public class CatNodeAttributesResponse : ResponseBase
+    public class CatNodeAttributesResponse : CatResponseBase
     {
     }
 
-    public class CatNodesResponse : ResponseBase
+    public class CatNodesResponse : CatResponseBase
     {
     }
 
-    public class CatPendingTasksResponse : ResponseBase
+    public class CatPendingTasksResponse : CatResponseBase
     {
     }
 
-    public class CatPluginsResponse : ResponseBase
+    public class CatPluginsResponse : CatResponseBase
     {
     }
 
-    public class CatRecoveryResponse : ResponseBase
+    public class CatRecoveryResponse : CatResponseBase
     {
     }
 
-    public class CatRepositoriesResponse : ResponseBase
+    public class CatRepositoriesResponse : CatResponseBase
     {
     }
 
-    public class CatSegmentsResponse : ResponseBase
+    public class CatSegmentsResponse : CatResponseBase
     {
     }
 
-    public class CatShardsResponse : ResponseBase
+    public class CatShardsResponse : CatResponseBase
     {
     }
 
-    public class CatSnapshotsResponse : ResponseBase
+    public class CatSnapshotsResponse : CatResponseBase
     {
     }
 
-    public class CatTasksResponse : ResponseBase
+    public class CatTasksResponse : CatResponseBase
     {
     }
 
-    public class CatTemplatesResponse : ResponseBase
+    public class CatTemplatesResponse : CatResponseBase
     {
     }
 
-    public class CatThreadPoolResponse : ResponseBase
+    public class CatThreadPoolResponse : CatResponseBase
     {
     }
 
-    public class CatTransformsResponse : ResponseBase
+    public class CatTransformsResponse : CatResponseBase
     {
     }
 }

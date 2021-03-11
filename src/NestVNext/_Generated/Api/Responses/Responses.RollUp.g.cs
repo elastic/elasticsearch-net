@@ -18,10 +18,11 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
-    public class DeleteRollupJobResponse : ResponseBase
+    public class DeleteRollupJobResponse : AcknowledgedResponseBase
     {
     }
 
@@ -29,15 +30,15 @@ namespace Nest
     {
     }
 
-    public class GetRollupCapabilitiesResponse : ResponseBase
+    public class GetRollupCapabilitiesResponse : DictionaryResponseBase
     {
     }
 
-    public class GetRollupIndexCapabilitiesResponse : ResponseBase
+    public class GetRollupIndexCapabilitiesResponse : DictionaryResponseBase
     {
     }
 
-    public class CreateRollupJobResponse : ResponseBase
+    public class CreateRollupJobResponse : AcknowledgedResponseBase
     {
     }
 
@@ -47,9 +48,25 @@ namespace Nest
 
     public class StartRollupJobResponse : ResponseBase
     {
+        [JsonPropertyName("started")]
+        public bool Started { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class StopRollupJobResponse : ResponseBase
     {
+        [JsonPropertyName("stopped")]
+        public bool Stopped { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 }

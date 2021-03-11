@@ -69,18 +69,6 @@ namespace Nest
         Unified
     }
 
-    public enum NumericType
-    {
-        [EnumMember(Value = "long")]
-        Long,
-        [EnumMember(Value = "double")]
-        Double,
-        [EnumMember(Value = "date")]
-        Date,
-        [EnumMember(Value = "date_nanos")]
-        DateNanos
-    }
-
     public enum ScoreMode
     {
         [EnumMember(Value = "avg")]
@@ -115,14 +103,6 @@ namespace Nest
         Asc,
         [EnumMember(Value = "desc")]
         Desc,
-        [EnumMember(Value = "_doc")]
-        Doc
-    }
-
-    public enum SortSpecialField
-    {
-        [EnumMember(Value = "_score")]
-        Score,
         [EnumMember(Value = "_doc")]
         Doc
     }

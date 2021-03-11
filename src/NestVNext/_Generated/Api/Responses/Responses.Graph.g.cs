@@ -18,10 +18,28 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
     public class GraphExploreResponse : ResponseBase
     {
+        [JsonPropertyName("timed_out")]
+        public bool TimedOut { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("took")]
+        public long Took { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 }

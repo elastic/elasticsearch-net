@@ -42,19 +42,19 @@ namespace Nest
     public enum DateRounding
     {
         [EnumMember(Value = "s")]
-        s,
+        Second,
         [EnumMember(Value = "m")]
-        m,
+        Minute,
         [EnumMember(Value = "h")]
-        h,
+        Hour,
         [EnumMember(Value = "d")]
-        d,
+        Day,
         [EnumMember(Value = "w")]
-        w,
+        Week,
         [EnumMember(Value = "M")]
-        M,
+        Month,
         [EnumMember(Value = "y")]
-        y
+        Year
     }
 
     public enum ShapeType

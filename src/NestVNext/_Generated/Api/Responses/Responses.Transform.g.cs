@@ -18,38 +18,81 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
-    public class DeleteTransformResponse : ResponseBase
+    public class DeleteTransformResponse : AcknowledgedResponseBase
     {
     }
 
     public class GetTransformResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetTransformStatsResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class PreviewTransformResponse : ResponseBase
     {
     }
 
-    public class PutTransformResponse : ResponseBase
+    public class PutTransformResponse : AcknowledgedResponseBase
     {
     }
 
-    public class StartTransformResponse : ResponseBase
+    public class StartTransformResponse : AcknowledgedResponseBase
     {
     }
 
-    public class StopTransformResponse : ResponseBase
+    public class StopTransformResponse : AcknowledgedResponseBase
     {
     }
 
     public class UpdateTransformResponse : ResponseBase
     {
+        [JsonPropertyName("create_time")]
+        public long CreateTime { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("version")]
+        public string Version { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 }

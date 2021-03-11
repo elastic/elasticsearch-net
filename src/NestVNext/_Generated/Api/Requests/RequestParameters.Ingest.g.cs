@@ -27,26 +27,14 @@ namespace Nest
 {
     public class DeletePipelineRequestParameters : RequestParameters<DeletePipelineRequestParameters>
     {
-        public Time? MasterTimeout
-        {
-            get => Q<Time?>("master_timeout");
-            set => Q("master_timeout", value);
-        }
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
-        public Time? Timeout
-        {
-            get => Q<Time?>("timeout");
-            set => Q("timeout", value);
-        }
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public class GetPipelineRequestParameters : RequestParameters<GetPipelineRequestParameters>
     {
-        public Time? MasterTimeout
-        {
-            get => Q<Time?>("master_timeout");
-            set => Q("master_timeout", value);
-        }
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
     }
 
     public class GrokProcessorPatternsRequestParameters : RequestParameters<GrokProcessorPatternsRequestParameters>
@@ -55,25 +43,13 @@ namespace Nest
 
     public class PutPipelineRequestParameters : RequestParameters<PutPipelineRequestParameters>
     {
-        public Time? MasterTimeout
-        {
-            get => Q<Time?>("master_timeout");
-            set => Q("master_timeout", value);
-        }
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
-        public Time? Timeout
-        {
-            get => Q<Time?>("timeout");
-            set => Q("timeout", value);
-        }
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public class SimulatePipelineRequestParameters : RequestParameters<SimulatePipelineRequestParameters>
     {
-        public bool? Verbose
-        {
-            get => Q<bool?>("verbose");
-            set => Q("verbose", value);
-        }
+        public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
     }
 }

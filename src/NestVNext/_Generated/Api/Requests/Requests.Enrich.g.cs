@@ -18,7 +18,9 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
     public interface IDeleteEnrichPolicyRequest : IRequest<DeleteEnrichPolicyRequestParameters>
@@ -31,18 +33,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.EnrichDeletePolicy;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
-    }
-
-    public interface IEnrichStatsRequest : IRequest<EnrichStatsRequestParameters>
-    {
-    }
-
-    public class EnrichStatsRequest : PlainRequestBase<EnrichStatsRequestParameters>, IEnrichStatsRequest
-    {
-        protected IEnrichStatsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.EnrichStats;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
+        ///<summary>/_enrich/policy/{name}</summary>
+        public DeleteEnrichPolicyRequest(Name name): base(r => r.Required("name", name))
+        {
+        }
     }
 
     public interface IExecuteEnrichPolicyRequest : IRequest<ExecuteEnrichPolicyRequestParameters>
@@ -55,6 +49,12 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.EnrichExecutePolicy;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_enrich/policy/{name}/_execute</summary>
+        public ExecuteEnrichPolicyRequest(Name name): base(r => r.Required("name", name))
+        {
+        }
+
+        public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
     }
 
     public interface IGetEnrichPolicyRequest : IRequest<GetEnrichPolicyRequestParameters>
@@ -67,6 +67,15 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.EnrichGetPolicy;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_enrich/policy/{name}</summary>
+        public GetEnrichPolicyRequest(Names name): base(r => r.Optional("name", name))
+        {
+        }
+
+        ///<summary>/_enrich/policy/</summary>
+        public GetEnrichPolicyRequest(): base()
+        {
+        }
     }
 
     public interface IPutEnrichPolicyRequest : IRequest<PutEnrichPolicyRequestParameters>
@@ -79,5 +88,25 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.EnrichPutPolicy;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_enrich/policy/{name}</summary>
+        public PutEnrichPolicyRequest(Name name): base(r => r.Required("name", name))
+        {
+        }
+    }
+
+    public interface IEnrichStatsRequest : IRequest<EnrichStatsRequestParameters>
+    {
+    }
+
+    public class EnrichStatsRequest : PlainRequestBase<EnrichStatsRequestParameters>, IEnrichStatsRequest
+    {
+        protected IEnrichStatsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.EnrichStats;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_enrich/_stats</summary>
+        public EnrichStatsRequest(): base()
+        {
+        }
     }
 }

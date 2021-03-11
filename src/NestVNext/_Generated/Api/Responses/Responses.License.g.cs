@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
@@ -31,21 +32,88 @@ namespace Nest
 
     public class GetBasicLicenseStatusResponse : ResponseBase
     {
+        [JsonPropertyName("eligible_to_start_basic")]
+        public bool EligibleToStartBasic { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetTrialLicenseStatusResponse : ResponseBase
     {
+        [JsonPropertyName("eligible_to_start_trial")]
+        public bool EligibleToStartTrial { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class PostLicenseResponse : ResponseBase
     {
+        [JsonPropertyName("acknowledged")]
+        public bool Acknowledged { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("license_status")]
+        public LicenseStatus LicenseStatus { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class StartBasicLicenseResponse : ResponseBase
+    public class StartBasicLicenseResponse : AcknowledgedResponseBase
     {
+        [JsonPropertyName("basic_was_started")]
+        public bool BasicWasStarted { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("error_message")]
+        public string ErrorMessage { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class StartTrialLicenseResponse : ResponseBase
+    public class StartTrialLicenseResponse : AcknowledgedResponseBase
     {
+        [JsonPropertyName("error_message")]
+        public string ErrorMessage { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("trial_was_started")]
+        public bool TrialWasStarted { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 }

@@ -29,23 +29,15 @@ namespace Nest
     {
     }
 
-    public class GetBasicLicenseStatusRequestParameters : RequestParameters<GetBasicLicenseStatusRequestParameters>
-    {
-    }
-
     public class GetLicenseRequestParameters : RequestParameters<GetLicenseRequestParameters>
     {
-        public bool? AcceptEnterprise
-        {
-            get => Q<bool?>("accept_enterprise");
-            set => Q("accept_enterprise", value);
-        }
+        public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
 
-        public bool? Local
-        {
-            get => Q<bool?>("local");
-            set => Q("local", value);
-        }
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+    }
+
+    public class GetBasicLicenseStatusRequestParameters : RequestParameters<GetBasicLicenseStatusRequestParameters>
+    {
     }
 
     public class GetTrialLicenseStatusRequestParameters : RequestParameters<GetTrialLicenseStatusRequestParameters>
@@ -54,34 +46,18 @@ namespace Nest
 
     public class PostLicenseRequestParameters : RequestParameters<PostLicenseRequestParameters>
     {
-        public bool? Acknowledge
-        {
-            get => Q<bool?>("acknowledge");
-            set => Q("acknowledge", value);
-        }
+        public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
     }
 
     public class StartBasicLicenseRequestParameters : RequestParameters<StartBasicLicenseRequestParameters>
     {
-        public bool? Acknowledge
-        {
-            get => Q<bool?>("acknowledge");
-            set => Q("acknowledge", value);
-        }
+        public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
     }
 
     public class StartTrialLicenseRequestParameters : RequestParameters<StartTrialLicenseRequestParameters>
     {
-        public bool? Acknowledge
-        {
-            get => Q<bool?>("acknowledge");
-            set => Q("acknowledge", value);
-        }
+        public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 
-        public string? TypeQueryString
-        {
-            get => Q<string?>("type_query_string");
-            set => Q("type_query_string", value);
-        }
+        public string? TypeQueryString { get => Q<string?>("type_query_string"); set => Q("type_query_string", value); }
     }
 }

@@ -18,21 +18,11 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
-    public interface ICreateRollupJobRequest : IRequest<CreateRollupJobRequestParameters>
-    {
-    }
-
-    public class CreateRollupJobRequest : PlainRequestBase<CreateRollupJobRequestParameters>, ICreateRollupJobRequest
-    {
-        protected ICreateRollupJobRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupPutJob;
-        protected override HttpMethod HttpMethod => HttpMethod.PUT;
-        protected override bool SupportsBody => false;
-    }
-
     public interface IDeleteRollupJobRequest : IRequest<DeleteRollupJobRequestParameters>
     {
     }
@@ -43,30 +33,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupDeleteJob;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
-    }
-
-    public interface IGetRollupCapabilitiesRequest : IRequest<GetRollupCapabilitiesRequestParameters>
-    {
-    }
-
-    public class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
-    {
-        protected IGetRollupCapabilitiesRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupGetRollupCaps;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IGetRollupIndexCapabilitiesRequest : IRequest<GetRollupIndexCapabilitiesRequestParameters>
-    {
-    }
-
-    public class GetRollupIndexCapabilitiesRequest : PlainRequestBase<GetRollupIndexCapabilitiesRequestParameters>, IGetRollupIndexCapabilitiesRequest
-    {
-        protected IGetRollupIndexCapabilitiesRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupGetRollupIndexCaps;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
+        ///<summary>/_rollup/job/{id}</summary>
+        public DeleteRollupJobRequest(Id id): base(r => r.Required("id", id))
+        {
+        }
     }
 
     public interface IGetRollupJobRequest : IRequest<GetRollupJobRequestParameters>
@@ -79,6 +49,68 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupGetJobs;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_rollup/job/{id}</summary>
+        public GetRollupJobRequest(Id id): base(r => r.Optional("id", id))
+        {
+        }
+
+        ///<summary>/_rollup/job/</summary>
+        public GetRollupJobRequest(): base()
+        {
+        }
+    }
+
+    public interface IGetRollupCapabilitiesRequest : IRequest<GetRollupCapabilitiesRequestParameters>
+    {
+    }
+
+    public class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
+    {
+        protected IGetRollupCapabilitiesRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupGetRollupCaps;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_rollup/data/{id}</summary>
+        public GetRollupCapabilitiesRequest(Id id): base(r => r.Optional("id", id))
+        {
+        }
+
+        ///<summary>/_rollup/data/</summary>
+        public GetRollupCapabilitiesRequest(): base()
+        {
+        }
+    }
+
+    public interface IGetRollupIndexCapabilitiesRequest : IRequest<GetRollupIndexCapabilitiesRequestParameters>
+    {
+    }
+
+    public class GetRollupIndexCapabilitiesRequest : PlainRequestBase<GetRollupIndexCapabilitiesRequestParameters>, IGetRollupIndexCapabilitiesRequest
+    {
+        protected IGetRollupIndexCapabilitiesRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupGetRollupIndexCaps;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/{index}/_rollup/data</summary>
+        public GetRollupIndexCapabilitiesRequest(Id index): base(r => r.Required("index", index))
+        {
+        }
+    }
+
+    public interface ICreateRollupJobRequest : IRequest<CreateRollupJobRequestParameters>
+    {
+    }
+
+    public class CreateRollupJobRequest : PlainRequestBase<CreateRollupJobRequestParameters>, ICreateRollupJobRequest
+    {
+        protected ICreateRollupJobRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupPutJob;
+        protected override HttpMethod HttpMethod => HttpMethod.PUT;
+        protected override bool SupportsBody => false;
+        ///<summary>/_rollup/job/{id}</summary>
+        public CreateRollupJobRequest(Id id): base(r => r.Required("id", id))
+        {
+        }
     }
 
     public interface IRollupSearchRequest : IRequest<RollupSearchRequestParameters>
@@ -91,6 +123,14 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupRollupSearch;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/{index}/_rollup_search</summary>
+        public RollupSearchRequest(Indices index): base(r => r.Required("index", index))
+        {
+        }
+
+        public bool? TotalHitsAsInteger { get => Q<bool?>("total_hits_as_integer"); set => Q("total_hits_as_integer", value); }
+
+        public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
     }
 
     public interface IStartRollupJobRequest : IRequest<StartRollupJobRequestParameters>
@@ -103,6 +143,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupStartJob;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_rollup/job/{id}/_start</summary>
+        public StartRollupJobRequest(Id id): base(r => r.Required("id", id))
+        {
+        }
     }
 
     public interface IStopRollupJobRequest : IRequest<StopRollupJobRequestParameters>
@@ -115,5 +159,13 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupStopJob;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_rollup/job/{id}/_stop</summary>
+        public StopRollupJobRequest(Id id): base(r => r.Required("id", id))
+        {
+        }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
     }
 }

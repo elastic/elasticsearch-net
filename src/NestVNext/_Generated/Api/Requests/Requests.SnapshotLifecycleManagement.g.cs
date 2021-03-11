@@ -18,7 +18,9 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
     public interface IDeleteSnapshotLifecycleRequest : IRequest<DeleteSnapshotLifecycleRequestParameters>
@@ -31,18 +33,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementDeleteLifecycle;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
-    }
-
-    public interface IExecuteRetentionRequest : IRequest<ExecuteRetentionRequestParameters>
-    {
-    }
-
-    public class ExecuteRetentionRequest : PlainRequestBase<ExecuteRetentionRequestParameters>, IExecuteRetentionRequest
-    {
-        protected IExecuteRetentionRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementExecuteRetention;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
+        ///<summary>/_slm/policy/{policy_id}</summary>
+        public DeleteSnapshotLifecycleRequest(Name policyId): base(r => r.Required("policy_id", policyId))
+        {
+        }
     }
 
     public interface IExecuteSnapshotLifecycleRequest : IRequest<ExecuteSnapshotLifecycleRequestParameters>
@@ -55,18 +49,26 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementExecuteLifecycle;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_slm/policy/{policy_id}/_execute</summary>
+        public ExecuteSnapshotLifecycleRequest(Name policyId): base(r => r.Required("policy_id", policyId))
+        {
+        }
     }
 
-    public interface IGetSnapshotLifecycleManagementStatusRequest : IRequest<GetSnapshotLifecycleManagementStatusRequestParameters>
+    public interface IExecuteRetentionRequest : IRequest<ExecuteRetentionRequestParameters>
     {
     }
 
-    public class GetSnapshotLifecycleManagementStatusRequest : PlainRequestBase<GetSnapshotLifecycleManagementStatusRequestParameters>, IGetSnapshotLifecycleManagementStatusRequest
+    public class ExecuteRetentionRequest : PlainRequestBase<ExecuteRetentionRequestParameters>, IExecuteRetentionRequest
     {
-        protected IGetSnapshotLifecycleManagementStatusRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetStatus;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected IExecuteRetentionRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementExecuteRetention;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_slm/_execute_retention</summary>
+        public ExecuteRetentionRequest(): base()
+        {
+        }
     }
 
     public interface IGetSnapshotLifecycleRequest : IRequest<GetSnapshotLifecycleRequestParameters>
@@ -79,6 +81,15 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetLifecycle;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_slm/policy/{policy_id}</summary>
+        public GetSnapshotLifecycleRequest(Names policyId): base(r => r.Optional("policy_id", policyId))
+        {
+        }
+
+        ///<summary>/_slm/policy</summary>
+        public GetSnapshotLifecycleRequest(): base()
+        {
+        }
     }
 
     public interface IGetSnapshotLifecycleStatsRequest : IRequest<GetSnapshotLifecycleStatsRequestParameters>
@@ -91,6 +102,26 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetStats;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_slm/stats</summary>
+        public GetSnapshotLifecycleStatsRequest(): base()
+        {
+        }
+    }
+
+    public interface IGetSnapshotLifecycleManagementStatusRequest : IRequest<GetSnapshotLifecycleManagementStatusRequestParameters>
+    {
+    }
+
+    public class GetSnapshotLifecycleManagementStatusRequest : PlainRequestBase<GetSnapshotLifecycleManagementStatusRequestParameters>, IGetSnapshotLifecycleManagementStatusRequest
+    {
+        protected IGetSnapshotLifecycleManagementStatusRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementGetStatus;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_slm/status</summary>
+        public GetSnapshotLifecycleManagementStatusRequest(): base()
+        {
+        }
     }
 
     public interface IPutSnapshotLifecycleRequest : IRequest<PutSnapshotLifecycleRequestParameters>
@@ -103,6 +134,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementPutLifecycle;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_slm/policy/{policy_id}</summary>
+        public PutSnapshotLifecycleRequest(Name policyId): base(r => r.Required("policy_id", policyId))
+        {
+        }
     }
 
     public interface IStartSnapshotLifecycleManagementRequest : IRequest<StartSnapshotLifecycleManagementRequestParameters>
@@ -115,6 +150,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStart;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_slm/start</summary>
+        public StartSnapshotLifecycleManagementRequest(): base()
+        {
+        }
     }
 
     public interface IStopSnapshotLifecycleManagementRequest : IRequest<StopSnapshotLifecycleManagementRequestParameters>
@@ -127,5 +166,9 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotLifecycleManagementStop;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_slm/stop</summary>
+        public StopSnapshotLifecycleManagementRequest(): base()
+        {
+        }
     }
 }
