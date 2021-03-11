@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information
 
 using System;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
@@ -13,13 +12,13 @@ namespace Nest
 {
 	public abstract class ResponseBase : IResponse
 	{
-		private Error _error;
-		private IApiCallDetails _originalApiCall;
-		private ServerError _serverError;
+		private Error? _error;
+		private IApiCallDetails? _originalApiCall;
+		private ServerError? _serverError;
 		private int? _statusCode;
 
 		/// <summary> Returns useful information about the request(s) that were part of this API call. </summary>
-		public virtual IApiCallDetails ApiCall => _originalApiCall;
+		public virtual IApiCallDetails? ApiCall => _originalApiCall;
 
 		/// <inheritdoc />
 		public string DebugInformation
@@ -42,31 +41,28 @@ namespace Nest
 			{
 				var statusCode = ApiCall?.HttpStatusCode;
 				if (statusCode == 404) return false;
-
-				return (ApiCall?.Success ?? false) && ServerError == null;
+				return (ApiCall?.Success ?? false) && ServerError is null;
 			}
 		}
-
+		
+		/// <inheritdoc />
+		public Exception? OriginalException => ApiCall?.OriginalException;
 
 		/// <inheritdoc />
-		public Exception OriginalException => ApiCall?.OriginalException;
-
-		/// <inheritdoc />
-		public ServerError ServerError
+		public ServerError? ServerError
 		{
 			get
 			{
-				if (_serverError != null) return _serverError;
-				if (_error == null) return null;
+				if (_serverError is not null) return _serverError;
+				if (_error is null) return null;
 
 				_serverError = new ServerError(_error, _statusCode);
 				return _serverError;
 			}
 		}
-
-		[DataMember(Name = "error")]
+		
 		[JsonPropertyName("error")]
-		internal Error Error
+		internal Error? Error
 		{
 			get => _error;
 			set
@@ -75,8 +71,7 @@ namespace Nest
 				_serverError = null;
 			}
 		}
-
-		[DataMember(Name = "status")]
+		
 		[JsonPropertyName("status")]
 		internal int? StatusCode
 		{
@@ -88,8 +83,8 @@ namespace Nest
 			}
 		}
 
-		[IgnoreDataMember]
-		IApiCallDetails ITransportResponse.ApiCall
+		[JsonIgnore]
+		IApiCallDetails? ITransportResponse.ApiCall
 		{
 			get => _originalApiCall;
 			set => _originalApiCall = value;
@@ -98,6 +93,7 @@ namespace Nest
 		/// <summary>Subclasses can override this to provide more information on why a call is not valid.</summary>
 		protected virtual void DebugIsValid(StringBuilder sb) { }
 
+		/// <inheritdoc />
 		public override string ToString() => $"{(!IsValid ? "Inv" : "V")}alid NEST response built from a {ApiCall?.ToString().ToCamelCase()}";
 	}
 }
