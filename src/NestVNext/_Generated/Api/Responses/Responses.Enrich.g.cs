@@ -18,10 +18,11 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
-    public class DeleteEnrichPolicyResponse : ResponseBase
+    public class DeleteEnrichPolicyResponse : AcknowledgedResponseBase
     {
     }
 
@@ -33,7 +34,7 @@ namespace Nest
     {
     }
 
-    public class PutEnrichPolicyResponse : ResponseBase
+    public class PutEnrichPolicyResponse : AcknowledgedResponseBase
     {
     }
 

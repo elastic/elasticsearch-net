@@ -103,14 +103,6 @@ namespace Nest
         Https
     }
 
-    public enum DataAttachmentFormat
-    {
-        [EnumMember(Value = "json")]
-        Json,
-        [EnumMember(Value = "yaml")]
-        Yaml
-    }
-
     public enum Day
     {
         [EnumMember(Value = "sunday")]

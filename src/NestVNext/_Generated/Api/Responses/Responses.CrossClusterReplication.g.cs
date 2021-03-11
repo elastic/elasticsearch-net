@@ -18,15 +18,42 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
-    public class DeleteAutoFollowPatternResponse : ResponseBase
+    public class DeleteAutoFollowPatternResponse : AcknowledgedResponseBase
     {
     }
 
     public class CreateFollowIndexResponse : ResponseBase
     {
+        [JsonPropertyName("follow_index_created")]
+        public bool FollowIndexCreated { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("follow_index_shards_acked")]
+        public bool FollowIndexShardsAcked { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("index_following_started")]
+        public bool IndexFollowingStarted { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class FollowInfoResponse : ResponseBase
@@ -45,23 +72,23 @@ namespace Nest
     {
     }
 
-    public class PauseAutoFollowPatternResponse : ResponseBase
+    public class PauseAutoFollowPatternResponse : AcknowledgedResponseBase
     {
     }
 
-    public class PauseFollowIndexResponse : ResponseBase
+    public class PauseFollowIndexResponse : AcknowledgedResponseBase
     {
     }
 
-    public class CreateAutoFollowPatternResponse : ResponseBase
+    public class CreateAutoFollowPatternResponse : AcknowledgedResponseBase
     {
     }
 
-    public class ResumeAutoFollowPatternResponse : ResponseBase
+    public class ResumeAutoFollowPatternResponse : AcknowledgedResponseBase
     {
     }
 
-    public class ResumeFollowIndexResponse : ResponseBase
+    public class ResumeFollowIndexResponse : AcknowledgedResponseBase
     {
     }
 
@@ -69,7 +96,7 @@ namespace Nest
     {
     }
 
-    public class UnfollowIndexResponse : ResponseBase
+    public class UnfollowIndexResponse : AcknowledgedResponseBase
     {
     }
 }

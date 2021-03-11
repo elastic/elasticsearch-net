@@ -113,20 +113,6 @@ namespace Nest
         Red
     }
 
-    public enum HttpMethod
-    {
-        [EnumMember(Value = "GET")]
-        Get,
-        [EnumMember(Value = "POST")]
-        Post,
-        [EnumMember(Value = "PUT")]
-        Put,
-        [EnumMember(Value = "DELETE")]
-        Delete,
-        [EnumMember(Value = "HEAD")]
-        Head
-    }
-
     public enum Level
     {
         [EnumMember(Value = "cluster")]
@@ -150,35 +136,7 @@ namespace Nest
         [EnumMember(Value = "and")]
         And,
         [EnumMember(Value = "or")]
-        Or,
-        [EnumMember(Value = "AND")]
-        And,
-        [EnumMember(Value = "OR")]
         Or
-    }
-
-    public enum PipelineFailure
-    {
-        [EnumMember(Value = "BadAuthentication")]
-        Badauthentication,
-        [EnumMember(Value = "BadResponse")]
-        Badresponse,
-        [EnumMember(Value = "PingFailure")]
-        Pingfailure,
-        [EnumMember(Value = "SniffFailure")]
-        Snifffailure,
-        [EnumMember(Value = "CouldNotStartSniffOnStartup")]
-        Couldnotstartsniffonstartup,
-        [EnumMember(Value = "MaxTimeoutReached")]
-        Maxtimeoutreached,
-        [EnumMember(Value = "MaxRetriesReached")]
-        Maxretriesreached,
-        [EnumMember(Value = "Unexpected")]
-        Unexpected,
-        [EnumMember(Value = "BadRequest")]
-        Badrequest,
-        [EnumMember(Value = "NoNodesAttempted")]
-        Nonodesattempted
     }
 
     public enum RefreshOptions
@@ -235,22 +193,6 @@ namespace Nest
         Popular,
         [EnumMember(Value = "always")]
         Always
-    }
-
-    public enum TermVectorOption
-    {
-        [EnumMember(Value = "no")]
-        No,
-        [EnumMember(Value = "yes")]
-        Yes,
-        [EnumMember(Value = "with_offsets")]
-        WithOffsets,
-        [EnumMember(Value = "with_positions")]
-        WithPositions,
-        [EnumMember(Value = "with_positions_offsets")]
-        WithPositionsOffsets,
-        [EnumMember(Value = "with_positions_offsets_payloads")]
-        WithPositionsOffsetsPayloads
     }
 
     public enum ThreadType

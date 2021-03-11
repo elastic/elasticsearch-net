@@ -18,21 +18,11 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
-    public interface ICancelTasksRequest : IRequest<CancelTasksRequestParameters>
-    {
-    }
-
-    public class CancelTasksRequest : PlainRequestBase<CancelTasksRequestParameters>, ICancelTasksRequest
-    {
-        protected ICancelTasksRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.TasksCancel;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
-    }
-
     public interface IClusterAllocationExplainRequest : IRequest<ClusterAllocationExplainRequestParameters>
     {
     }
@@ -43,6 +33,14 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterAllocationExplain;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_cluster/allocation/explain</summary>
+        public ClusterAllocationExplainRequest(): base()
+        {
+        }
+
+        public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
+
+        public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
     }
 
     public interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters>
@@ -55,6 +53,18 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetSettings;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cluster/settings</summary>
+        public ClusterGetSettingsRequest(): base()
+        {
+        }
+
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters>
@@ -67,6 +77,37 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cluster/health</summary>
+        public ClusterHealthRequest(): base()
+        {
+        }
+
+        ///<summary>/_cluster/health/{index}</summary>
+        public ClusterHealthRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public Level? Level { get => Q<Level?>("level"); set => Q("level", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+        public WaitForEvents? WaitForEvents { get => Q<WaitForEvents?>("wait_for_events"); set => Q("wait_for_events", value); }
+
+        public string? WaitForNodes { get => Q<string?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
+
+        public bool? WaitForNoInitializingShards { get => Q<bool?>("wait_for_no_initializing_shards"); set => Q("wait_for_no_initializing_shards", value); }
+
+        public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
+
+        public WaitForStatus? WaitForStatus { get => Q<WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
     }
 
     public interface IClusterPendingTasksRequest : IRequest<ClusterPendingTasksRequestParameters>
@@ -79,6 +120,14 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPendingTasks;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cluster/pending_tasks</summary>
+        public ClusterPendingTasksRequest(): base()
+        {
+        }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
     }
 
     public interface IClusterPutSettingsRequest : IRequest<ClusterPutSettingsRequestParameters>
@@ -91,138 +140,16 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutSettings;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
-    }
+        ///<summary>/_cluster/settings</summary>
+        public ClusterPutSettingsRequest(): base()
+        {
+        }
 
-    public interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters>
-    {
-    }
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-    public class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
-    {
-        protected IClusterRerouteRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterReroute;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
-    }
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
-    public interface IClusterStateRequest : IRequest<ClusterStateRequestParameters>
-    {
-    }
-
-    public class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
-    {
-        protected IClusterStateRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterState;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters>
-    {
-    }
-
-    public class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
-    {
-        protected IClusterStatsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterStats;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IGetTaskRequest : IRequest<GetTaskRequestParameters>
-    {
-    }
-
-    public class GetTaskRequest : PlainRequestBase<GetTaskRequestParameters>, IGetTaskRequest
-    {
-        protected IGetTaskRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.TasksGet;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IListTasksRequest : IRequest<ListTasksRequestParameters>
-    {
-    }
-
-    public class ListTasksRequest : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
-    {
-        protected IListTasksRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.TasksList;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface INodesHotThreadsRequest : IRequest<NodesHotThreadsRequestParameters>
-    {
-    }
-
-    public class NodesHotThreadsRequest : PlainRequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
-    {
-        protected INodesHotThreadsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.NodesHotThreads;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface INodesInfoRequest : IRequest<NodesInfoRequestParameters>
-    {
-    }
-
-    public class NodesInfoRequest : PlainRequestBase<NodesInfoRequestParameters>, INodesInfoRequest
-    {
-        protected INodesInfoRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.NodesInfo;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface INodesStatsRequest : IRequest<NodesStatsRequestParameters>
-    {
-    }
-
-    public class NodesStatsRequest : PlainRequestBase<NodesStatsRequestParameters>, INodesStatsRequest
-    {
-        protected INodesStatsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.NodesStats;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface INodesUsageRequest : IRequest<NodesUsageRequestParameters>
-    {
-    }
-
-    public class NodesUsageRequest : PlainRequestBase<NodesUsageRequestParameters>, INodesUsageRequest
-    {
-        protected INodesUsageRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.NodesUsage;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IPingRequest : IRequest<PingRequestParameters>
-    {
-    }
-
-    public class PingRequest : PlainRequestBase<PingRequestParameters>, IPingRequest
-    {
-        protected IPingRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
-        protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IReloadSecureSettingsRequest : IRequest<ReloadSecureSettingsRequestParameters>
-    {
-    }
-
-    public class ReloadSecureSettingsRequest : PlainRequestBase<ReloadSecureSettingsRequestParameters>, IReloadSecureSettingsRequest
-    {
-        protected IReloadSecureSettingsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.NodesReloadSecureSettings;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public interface IRemoteInfoRequest : IRequest<RemoteInfoRequestParameters>
@@ -235,17 +162,104 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterRemoteInfo;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_remote/info</summary>
+        public RemoteInfoRequest(): base()
+        {
+        }
     }
 
-    public interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters>
+    public interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters>
     {
     }
 
-    public class RootNodeInfoRequest : PlainRequestBase<RootNodeInfoRequestParameters>, IRootNodeInfoRequest
+    public class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
     {
-        protected IRootNodeInfoRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceInfo;
+        protected IClusterRerouteRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterReroute;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cluster/reroute</summary>
+        public ClusterRerouteRequest(): base()
+        {
+        }
+
+        public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
+
+        public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Metrics? Metric { get => Q<Metrics?>("metric"); set => Q("metric", value); }
+
+        public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public interface IClusterStateRequest : IRequest<ClusterStateRequestParameters>
+    {
+    }
+
+    public class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
+    {
+        protected IClusterStateRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterState;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_cluster/state</summary>
+        public ClusterStateRequest(): base()
+        {
+        }
+
+        ///<summary>/_cluster/state/{metric}</summary>
+        public ClusterStateRequest(Metrics metric): base(r => r.Optional("metric", metric))
+        {
+        }
+
+        ///<summary>/_cluster/state/{metric}/{index}</summary>
+        public ClusterStateRequest(Metrics metric, Indices index): base(r => r.Optional("metric", metric).Optional("index", index))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
+
+        public Time? WaitForTimeout { get => Q<Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
+    }
+
+    public interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters>
+    {
+    }
+
+    public class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
+    {
+        protected IClusterStatsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterStats;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cluster/stats</summary>
+        public ClusterStatsRequest(): base()
+        {
+        }
+
+        ///<summary>/_cluster/stats/nodes/{node_id}</summary>
+        public ClusterStatsRequest(NodeIds nodeId): base(r => r.Optional("node_id", nodeId))
+        {
+        }
+
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 }

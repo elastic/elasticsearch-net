@@ -38,28 +38,4 @@ namespace Nest
         [EnumMember(Value = "hard_limit")]
         HardLimit
     }
-
-    public enum TransformState
-    {
-        [EnumMember(Value = "STARTED")]
-        Started,
-        [EnumMember(Value = "INDEXING")]
-        Indexing,
-        [EnumMember(Value = "ABORTING")]
-        Aborting,
-        [EnumMember(Value = "STOPPING")]
-        Stopping,
-        [EnumMember(Value = "STOPPED")]
-        Stopped,
-        [EnumMember(Value = "FAILED")]
-        Failed
-    }
-
-    public enum TransformType
-    {
-        [EnumMember(Value = "batch")]
-        Batch,
-        [EnumMember(Value = "continuous")]
-        Continuous
-    }
 }

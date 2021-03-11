@@ -29,17 +29,9 @@ namespace Nest
     {
     }
 
-    public class EnrichStatsRequestParameters : RequestParameters<EnrichStatsRequestParameters>
-    {
-    }
-
     public class ExecuteEnrichPolicyRequestParameters : RequestParameters<ExecuteEnrichPolicyRequestParameters>
     {
-        public bool? WaitForCompletion
-        {
-            get => Q<bool?>("wait_for_completion");
-            set => Q("wait_for_completion", value);
-        }
+        public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
     }
 
     public class GetEnrichPolicyRequestParameters : RequestParameters<GetEnrichPolicyRequestParameters>
@@ -47,6 +39,10 @@ namespace Nest
     }
 
     public class PutEnrichPolicyRequestParameters : RequestParameters<PutEnrichPolicyRequestParameters>
+    {
+    }
+
+    public class EnrichStatsRequestParameters : RequestParameters<EnrichStatsRequestParameters>
     {
     }
 }

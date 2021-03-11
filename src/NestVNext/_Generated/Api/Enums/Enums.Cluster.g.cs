@@ -75,22 +75,6 @@ namespace Nest
         CoordinatingOnly
     }
 
-    public enum StoreCopy
-    {
-        [EnumMember(Value = "NONE")]
-        None,
-        [EnumMember(Value = "AVAILABLE")]
-        Available,
-        [EnumMember(Value = "CORRUPT")]
-        Corrupt,
-        [EnumMember(Value = "IO_ERROR")]
-        IoError,
-        [EnumMember(Value = "STALE")]
-        Stale,
-        [EnumMember(Value = "UNKNOWN")]
-        Unknown
-    }
-
     public enum UnassignedInformationReason
     {
         [EnumMember(Value = "INDEX_CREATED")]

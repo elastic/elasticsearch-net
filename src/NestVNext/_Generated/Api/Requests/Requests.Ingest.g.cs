@@ -18,7 +18,9 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
     public interface IDeletePipelineRequest : IRequest<DeletePipelineRequestParameters>
@@ -31,6 +33,14 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestDeletePipeline;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
+        ///<summary>/_ingest/pipeline/{id}</summary>
+        public DeletePipelineRequest(Id id): base(r => r.Required("id", id))
+        {
+        }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public interface IGetPipelineRequest : IRequest<GetPipelineRequestParameters>
@@ -43,6 +53,17 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGetPipeline;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_ingest/pipeline</summary>
+        public GetPipelineRequest(): base()
+        {
+        }
+
+        ///<summary>/_ingest/pipeline/{id}</summary>
+        public GetPipelineRequest(Id id): base(r => r.Optional("id", id))
+        {
+        }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
     }
 
     public interface IGrokProcessorPatternsRequest : IRequest<GrokProcessorPatternsRequestParameters>
@@ -55,6 +76,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestProcessorGrok;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_ingest/processor/grok</summary>
+        public GrokProcessorPatternsRequest(): base()
+        {
+        }
     }
 
     public interface IPutPipelineRequest : IRequest<PutPipelineRequestParameters>
@@ -67,6 +92,14 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestPutPipeline;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_ingest/pipeline/{id}</summary>
+        public PutPipelineRequest(Id id): base(r => r.Required("id", id))
+        {
+        }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public interface ISimulatePipelineRequest : IRequest<SimulatePipelineRequestParameters>
@@ -79,5 +112,16 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestSimulate;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ingest/pipeline/_simulate</summary>
+        public SimulatePipelineRequest(): base()
+        {
+        }
+
+        ///<summary>/_ingest/pipeline/{id}/_simulate</summary>
+        public SimulatePipelineRequest(Id id): base(r => r.Optional("id", id))
+        {
+        }
+
+        public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
     }
 }

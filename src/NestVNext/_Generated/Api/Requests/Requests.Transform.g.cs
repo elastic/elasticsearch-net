@@ -18,7 +18,9 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
     public interface IDeleteTransformRequest : IRequest<DeleteTransformRequestParameters>
@@ -31,6 +33,12 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformDeleteTransform;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
+        ///<summary>/_transform/{transform_id}</summary>
+        public DeleteTransformRequest(Name transformId): base(r => r.Required("transform_id", transformId))
+        {
+        }
+
+        public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
     }
 
     public interface IGetTransformRequest : IRequest<GetTransformRequestParameters>
@@ -43,6 +51,21 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformGetTransform;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_transform/{transform_id}</summary>
+        public GetTransformRequest(Name transformId): base(r => r.Optional("transform_id", transformId))
+        {
+        }
+
+        ///<summary>/_transform</summary>
+        public GetTransformRequest(): base()
+        {
+        }
+
+        public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
+
+        public int? From { get => Q<int?>("from"); set => Q("from", value); }
+
+        public int? Size { get => Q<int?>("size"); set => Q("size", value); }
     }
 
     public interface IGetTransformStatsRequest : IRequest<GetTransformStatsRequestParameters>
@@ -55,6 +78,16 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformGetTransformStats;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_transform/{transform_id}/_stats</summary>
+        public GetTransformStatsRequest(Name transformId): base(r => r.Required("transform_id", transformId))
+        {
+        }
+
+        public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
+
+        public long? From { get => Q<long?>("from"); set => Q("from", value); }
+
+        public long? Size { get => Q<long?>("size"); set => Q("size", value); }
     }
 
     public interface IPreviewTransformRequest : IRequest<PreviewTransformRequestParameters>
@@ -67,6 +100,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformPreviewTransform;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_transform/_preview</summary>
+        public PreviewTransformRequest(): base()
+        {
+        }
     }
 
     public interface IPutTransformRequest : IRequest<PutTransformRequestParameters>
@@ -79,6 +116,12 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformPutTransform;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_transform/{transform_id}</summary>
+        public PutTransformRequest(Name transformId): base(r => r.Required("transform_id", transformId))
+        {
+        }
+
+        public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
     }
 
     public interface IStartTransformRequest : IRequest<StartTransformRequestParameters>
@@ -91,6 +134,12 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformStartTransform;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_transform/{transform_id}/_start</summary>
+        public StartTransformRequest(Name transformId): base(r => r.Required("transform_id", transformId))
+        {
+        }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public interface IStopTransformRequest : IRequest<StopTransformRequestParameters>
@@ -103,6 +152,20 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformStopTransform;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_transform/{transform_id}/_stop</summary>
+        public StopTransformRequest(Name transformId): base(r => r.Required("transform_id", transformId))
+        {
+        }
+
+        public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
+
+        public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public bool? WaitForCheckpoint { get => Q<bool?>("wait_for_checkpoint"); set => Q("wait_for_checkpoint", value); }
+
+        public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
     }
 
     public interface IUpdateTransformRequest : IRequest<UpdateTransformRequestParameters>
@@ -115,5 +178,11 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformUpdateTransform;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_transform/{transform_id}/_update</summary>
+        public UpdateTransformRequest(Name transformId): base(r => r.Required("transform_id", transformId))
+        {
+        }
+
+        public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
     }
 }

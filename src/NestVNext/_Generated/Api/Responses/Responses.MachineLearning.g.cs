@@ -18,119 +18,297 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
     public class CloseJobResponse : ResponseBase
     {
+        [JsonPropertyName("closed")]
+        public bool Closed { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class DeleteCalendarResponse : ResponseBase
+    public class DeleteCalendarResponse : AcknowledgedResponseBase
     {
     }
 
-    public class DeleteCalendarEventResponse : ResponseBase
+    public class DeleteCalendarEventResponse : AcknowledgedResponseBase
     {
     }
 
     public class DeleteCalendarJobResponse : ResponseBase
     {
+        [JsonPropertyName("calendar_id")]
+        public string CalendarId { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class DeleteDatafeedResponse : ResponseBase
+    public class DeleteDatafeedResponse : AcknowledgedResponseBase
     {
     }
 
     public class DeleteExpiredDataResponse : ResponseBase
     {
+        [JsonPropertyName("deleted")]
+        public bool Deleted { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class DeleteFilterResponse : ResponseBase
+    public class DeleteFilterResponse : AcknowledgedResponseBase
     {
     }
 
-    public class DeleteForecastResponse : ResponseBase
+    public class DeleteForecastResponse : AcknowledgedResponseBase
     {
     }
 
-    public class DeleteJobResponse : ResponseBase
+    public class DeleteJobResponse : AcknowledgedResponseBase
     {
     }
 
-    public class DeleteModelSnapshotResponse : ResponseBase
+    public class DeleteModelSnapshotResponse : AcknowledgedResponseBase
     {
     }
 
     public class EstimateModelMemoryResponse : ResponseBase
     {
+        [JsonPropertyName("model_memory_estimate")]
+        public string ModelMemoryEstimate { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class FlushJobResponse : ResponseBase
     {
+        [JsonPropertyName("flushed")]
+        public bool Flushed { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class ForecastJobResponse : ResponseBase
+    public class ForecastJobResponse : AcknowledgedResponseBase
     {
+        [JsonPropertyName("forecast_id")]
+        public string ForecastId { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetBucketsResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetCalendarEventsResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public int Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetCalendarsResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetCategoriesResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetDatafeedStatsResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetDatafeedsResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetFiltersResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetInfluencersResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetJobStatsResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetJobsResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetModelSnapshotsResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetOverallBucketsResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class GetAnomalyRecordsResponse : ResponseBase
     {
+        [JsonPropertyName("count")]
+        public long Count { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class MachineLearningInfoResponse : ResponseBase
     {
+        [JsonPropertyName("upgrade_mode")]
+        public bool UpgradeMode { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class OpenJobResponse : ResponseBase
     {
+        [JsonPropertyName("opened")]
+        public bool Opened { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class PostCalendarEventsResponse : ResponseBase
@@ -139,6 +317,140 @@ namespace Nest
 
     public class PostJobDataResponse : ResponseBase
     {
+        [JsonPropertyName("bucket_count")]
+        public long BucketCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("earliest_record_timestamp")]
+        public int EarliestRecordTimestamp { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("empty_bucket_count")]
+        public long EmptyBucketCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("input_bytes")]
+        public long InputBytes { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("input_field_count")]
+        public long InputFieldCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("input_record_count")]
+        public long InputRecordCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("invalid_date_count")]
+        public long InvalidDateCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("job_id")]
+        public string JobId { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("last_data_time")]
+        public int LastDataTime { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("latest_record_timestamp")]
+        public int LatestRecordTimestamp { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("missing_field_count")]
+        public long MissingFieldCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("out_of_order_timestamp_count")]
+        public long OutOfOrderTimestampCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("processed_field_count")]
+        public long ProcessedFieldCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("processed_record_count")]
+        public long ProcessedRecordCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("sparse_bucket_count")]
+        public long SparseBucketCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class PreviewDatafeedResponse : ResponseBase
@@ -147,61 +459,295 @@ namespace Nest
 
     public class PutCalendarResponse : ResponseBase
     {
+        [JsonPropertyName("calendar_id")]
+        public string CalendarId { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class PutCalendarJobResponse : ResponseBase
     {
+        [JsonPropertyName("calendar_id")]
+        public string CalendarId { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class PutDatafeedResponse : ResponseBase
     {
+        [JsonPropertyName("datafeed_id")]
+        public string DatafeedId { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("job_id")]
+        public string JobId { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_empty_searches")]
+        public int MaxEmptySearches { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("scroll_size")]
+        public int ScrollSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class PutFilterResponse : ResponseBase
     {
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("filter_id")]
+        public string FilterId { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class PutJobResponse : ResponseBase
     {
+        [JsonPropertyName("allow_lazy_open")]
+        public bool AllowLazyOpen { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("job_id")]
+        public string JobId { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("job_type")]
+        public string JobType { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("model_snapshot_id")]
+        public string ModelSnapshotId { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("model_snapshot_retention_days")]
+        public long ModelSnapshotRetentionDays { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("renormalization_window_days")]
+        public long RenormalizationWindowDays { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("results_index_name")]
+        public string ResultsIndexName { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("results_retention_days")]
+        public long ResultsRetentionDays { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class RevertModelSnapshotResponse : ResponseBase
     {
     }
 
-    public class SetUpgradeModeResponse : ResponseBase
+    public class SetUpgradeModeResponse : AcknowledgedResponseBase
     {
     }
 
     public class StartDatafeedResponse : ResponseBase
     {
+        [JsonPropertyName("started")]
+        public bool Started { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class StopDatafeedResponse : ResponseBase
     {
+        [JsonPropertyName("stopped")]
+        public bool Stopped { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class UpdateDatafeedResponse : ResponseBase
     {
+        [JsonPropertyName("datafeed_id")]
+        public string DatafeedId { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("job_id")]
+        public string JobId { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_empty_searches")]
+        public int MaxEmptySearches { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("scroll_size")]
+        public int ScrollSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class UpdateFilterResponse : ResponseBase
     {
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("filter_id")]
+        public string FilterId { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class UpdateJobResponse : ResponseBase
     {
     }
 
-    public class UpdateModelSnapshotResponse : ResponseBase
+    public class UpdateModelSnapshotResponse : AcknowledgedResponseBase
     {
     }
 
-    public class ValidateJobResponse : ResponseBase
+    public class ValidateJobResponse : AcknowledgedResponseBase
     {
     }
 
-    public class ValidateDetectorResponse : ResponseBase
+    public class ValidateDetectorResponse : AcknowledgedResponseBase
     {
     }
 }

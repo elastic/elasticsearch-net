@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
@@ -25,23 +26,65 @@ namespace Nest
     {
     }
 
-    public class ClearCacheResponse : ResponseBase
+    public class ClearCacheResponse : ShardsOperationResponseBase
     {
     }
 
-    public class CloneIndexResponse : ResponseBase
+    public class CloneIndexResponse : AcknowledgedResponseBase
     {
+        [JsonPropertyName("index")]
+        public string Index { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("shards_acknowledged")]
+        public bool ShardsAcknowledged { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class CloseIndexResponse : ResponseBase
+    public class CloseIndexResponse : AcknowledgedResponseBase
     {
+        [JsonPropertyName("shards_acknowledged")]
+        public bool ShardsAcknowledged { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class CreateIndexResponse : ResponseBase
+    public class CreateIndexResponse : AcknowledgedResponseBase
     {
+        [JsonPropertyName("index")]
+        public string Index { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("shards_acknowledged")]
+        public bool ShardsAcknowledged { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class DeleteIndexResponse : ResponseBase
+    public class DeleteIndexResponse : IndicesResponseBase
     {
     }
 
@@ -49,7 +92,7 @@ namespace Nest
     {
     }
 
-    public class DeleteIndexTemplateResponse : ResponseBase
+    public class DeleteIndexTemplateResponse : AcknowledgedResponseBase
     {
     }
 
@@ -69,71 +112,87 @@ namespace Nest
     {
     }
 
-    public class FlushResponse : ResponseBase
+    public class FlushResponse : ShardsOperationResponseBase
     {
     }
 
-    public class SyncedFlushResponse : ResponseBase
+    public class SyncedFlushResponse : DictionaryResponseBase
     {
     }
 
-    public class ForceMergeResponse : ResponseBase
+    public class ForceMergeResponse : ShardsOperationResponseBase
     {
     }
 
-    public class FreezeIndexResponse : ResponseBase
+    public class FreezeIndexResponse : AcknowledgedResponseBase
+    {
+        [JsonPropertyName("shards_acknowledged")]
+        public bool ShardsAcknowledged { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public class GetIndexResponse : DictionaryResponseBase
     {
     }
 
-    public class GetIndexResponse : ResponseBase
+    public class GetAliasResponse : DictionaryResponseBase
     {
     }
 
-    public class GetAliasResponse : ResponseBase
+    public class GetFieldMappingResponse : DictionaryResponseBase
     {
     }
 
-    public class GetFieldMappingResponse : ResponseBase
+    public class GetMappingResponse : DictionaryResponseBase
     {
     }
 
-    public class GetMappingResponse : ResponseBase
+    public class GetIndexSettingsResponse : DictionaryResponseBase
     {
     }
 
-    public class GetIndexSettingsResponse : ResponseBase
+    public class GetIndexTemplateResponse : DictionaryResponseBase
     {
     }
 
-    public class GetIndexTemplateResponse : ResponseBase
+    public class OpenIndexResponse : AcknowledgedResponseBase
     {
-    }
-
-    public class OpenIndexResponse : ResponseBase
-    {
+        [JsonPropertyName("shards_acknowledged")]
+        public bool ShardsAcknowledged { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class PutAliasResponse : ResponseBase
     {
     }
 
-    public class PutMappingResponse : ResponseBase
+    public class PutMappingResponse : IndicesResponseBase
     {
     }
 
-    public class UpdateIndexSettingsResponse : ResponseBase
+    public class UpdateIndexSettingsResponse : AcknowledgedResponseBase
     {
     }
 
-    public class PutIndexTemplateResponse : ResponseBase
+    public class PutIndexTemplateResponse : AcknowledgedResponseBase
     {
     }
 
-    public class RecoveryStatusResponse : ResponseBase
+    public class RecoveryStatusResponse : DictionaryResponseBase
     {
     }
 
-    public class RefreshResponse : ResponseBase
+    public class RefreshResponse : ShardsOperationResponseBase
     {
     }
 
@@ -141,8 +200,52 @@ namespace Nest
     {
     }
 
-    public class RolloverIndexResponse : ResponseBase
+    public class RolloverIndexResponse : AcknowledgedResponseBase
     {
+        [JsonPropertyName("dry_run")]
+        public bool DryRun { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("new_index")]
+        public string NewIndex { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("old_index")]
+        public string OldIndex { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("rolled_over")]
+        public bool RolledOver { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("shards_acknowledged")]
+        public bool ShardsAcknowledged { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class SegmentsResponse : ResponseBase
@@ -153,23 +256,59 @@ namespace Nest
     {
     }
 
-    public class ShrinkIndexResponse : ResponseBase
+    public class ShrinkIndexResponse : AcknowledgedResponseBase
     {
+        [JsonPropertyName("shards_acknowledged")]
+        public bool ShardsAcknowledged { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class SplitIndexResponse : ResponseBase
+    public class SplitIndexResponse : AcknowledgedResponseBase
     {
+        [JsonPropertyName("shards_acknowledged")]
+        public bool ShardsAcknowledged { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class IndicesStatsResponse : ResponseBase
     {
     }
 
-    public class UnfreezeIndexResponse : ResponseBase
+    public class UnfreezeIndexResponse : AcknowledgedResponseBase
+    {
+        [JsonPropertyName("shards_acknowledged")]
+        public bool ShardsAcknowledged { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public class BulkAliasResponse : AcknowledgedResponseBase
     {
     }
 
-    public class BulkAliasResponse : ResponseBase
+    public class ValidateQueryResponse : ResponseBase
     {
+        [JsonPropertyName("valid")]
+        public bool Valid { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 }
