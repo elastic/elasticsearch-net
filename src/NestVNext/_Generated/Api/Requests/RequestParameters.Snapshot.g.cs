@@ -22,7 +22,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
 
-#nullable enable
+#nullable restore
 namespace Nest
 {
     public class CleanupRepositoryRequestParameters : RequestParameters<CleanupRepositoryRequestParameters>

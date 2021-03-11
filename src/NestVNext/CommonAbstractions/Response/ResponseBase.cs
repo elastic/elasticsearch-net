@@ -48,13 +48,26 @@ namespace Nest
 		/// <inheritdoc />
 		public Exception? OriginalException => ApiCall?.OriginalException;
 
+		// TODO: We need nullable annotations here ideally as exception is not null when the return value is true.
+		public bool TryGetOriginalException(out Exception? exception)
+		{
+			if (OriginalException is not null)
+			{
+				exception = OriginalException;
+				return true;
+			}
+
+			exception = null;
+			return false;
+		}
+
 		/// <inheritdoc />
 		public ServerError? ServerError
 		{
 			get
 			{
 				if (_serverError is not null) return _serverError;
-				if (_error is null) return null;
+				if (_error is null) return null; // TODO: Would prefer to return a representation of no error, rather than null
 
 				_serverError = new ServerError(_error, _statusCode);
 				return _serverError;
