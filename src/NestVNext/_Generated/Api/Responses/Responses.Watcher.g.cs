@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
@@ -35,6 +36,32 @@ namespace Nest
 
     public class DeleteWatchResponse : ResponseBase
     {
+        [JsonPropertyName("found")]
+        public bool Found { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("_id")]
+        public string Id { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("_version")]
+        public int Version { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class ExecuteWatchResponse : ResponseBase
@@ -43,21 +70,117 @@ namespace Nest
 
     public class GetWatchResponse : ResponseBase
     {
+        [JsonPropertyName("found")]
+        public bool Found { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("_primary_term")]
+        public int PrimaryTerm { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("_seq_no")]
+        public int SeqNo { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("_version")]
+        public int Version { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class PutWatchResponse : ResponseBase
     {
+        [JsonPropertyName("created")]
+        public bool Created { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("_id")]
+        public string Id { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("_primary_term")]
+        public long PrimaryTerm { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("_seq_no")]
+        public long SeqNo { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("_version")]
+        public int Version { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class StartWatcherResponse : ResponseBase
+    public class StartWatcherResponse : AcknowledgedResponseBase
     {
     }
 
     public class WatcherStatsResponse : ResponseBase
     {
+        [JsonPropertyName("cluster_name")]
+        public string ClusterName { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("manually_stopped")]
+        public bool ManuallyStopped { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class StopWatcherResponse : ResponseBase
+    public class StopWatcherResponse : AcknowledgedResponseBase
     {
     }
 }

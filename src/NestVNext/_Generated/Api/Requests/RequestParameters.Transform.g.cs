@@ -27,53 +27,25 @@ namespace Nest
 {
     public class DeleteTransformRequestParameters : RequestParameters<DeleteTransformRequestParameters>
     {
-        public bool? Force
-        {
-            get => Q<bool?>("force");
-            set => Q("force", value);
-        }
+        public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
     }
 
     public class GetTransformRequestParameters : RequestParameters<GetTransformRequestParameters>
     {
-        public bool? AllowNoMatch
-        {
-            get => Q<bool?>("allow_no_match");
-            set => Q("allow_no_match", value);
-        }
+        public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-        public int? From
-        {
-            get => Q<int?>("from");
-            set => Q("from", value);
-        }
+        public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-        public int? Size
-        {
-            get => Q<int?>("size");
-            set => Q("size", value);
-        }
+        public int? Size { get => Q<int?>("size"); set => Q("size", value); }
     }
 
     public class GetTransformStatsRequestParameters : RequestParameters<GetTransformStatsRequestParameters>
     {
-        public bool? AllowNoMatch
-        {
-            get => Q<bool?>("allow_no_match");
-            set => Q("allow_no_match", value);
-        }
+        public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-        public long? From
-        {
-            get => Q<long?>("from");
-            set => Q("from", value);
-        }
+        public long? From { get => Q<long?>("from"); set => Q("from", value); }
 
-        public long? Size
-        {
-            get => Q<long?>("size");
-            set => Q("size", value);
-        }
+        public long? Size { get => Q<long?>("size"); set => Q("size", value); }
     }
 
     public class PreviewTransformRequestParameters : RequestParameters<PreviewTransformRequestParameters>
@@ -82,61 +54,29 @@ namespace Nest
 
     public class PutTransformRequestParameters : RequestParameters<PutTransformRequestParameters>
     {
-        public bool? DeferValidation
-        {
-            get => Q<bool?>("defer_validation");
-            set => Q("defer_validation", value);
-        }
+        public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
     }
 
     public class StartTransformRequestParameters : RequestParameters<StartTransformRequestParameters>
     {
-        public Time? Timeout
-        {
-            get => Q<Time?>("timeout");
-            set => Q("timeout", value);
-        }
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public class StopTransformRequestParameters : RequestParameters<StopTransformRequestParameters>
     {
-        public bool? AllowNoMatch
-        {
-            get => Q<bool?>("allow_no_match");
-            set => Q("allow_no_match", value);
-        }
+        public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-        public bool? Force
-        {
-            get => Q<bool?>("force");
-            set => Q("force", value);
-        }
+        public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-        public Time? Timeout
-        {
-            get => Q<Time?>("timeout");
-            set => Q("timeout", value);
-        }
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public bool? WaitForCheckpoint
-        {
-            get => Q<bool?>("wait_for_checkpoint");
-            set => Q("wait_for_checkpoint", value);
-        }
+        public bool? WaitForCheckpoint { get => Q<bool?>("wait_for_checkpoint"); set => Q("wait_for_checkpoint", value); }
 
-        public bool? WaitForCompletion
-        {
-            get => Q<bool?>("wait_for_completion");
-            set => Q("wait_for_completion", value);
-        }
+        public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
     }
 
     public class UpdateTransformRequestParameters : RequestParameters<UpdateTransformRequestParameters>
     {
-        public bool? DeferValidation
-        {
-            get => Q<bool?>("defer_validation");
-            set => Q("defer_validation", value);
-        }
+        public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
     }
 }

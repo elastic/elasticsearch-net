@@ -27,16 +27,8 @@ namespace Nest
 {
     public class GraphExploreRequestParameters : RequestParameters<GraphExploreRequestParameters>
     {
-        public Routing? Routing
-        {
-            get => Q<Routing?>("routing");
-            set => Q("routing", value);
-        }
+        public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
 
-        public Time? Timeout
-        {
-            get => Q<Time?>("timeout");
-            set => Q("timeout", value);
-        }
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 }

@@ -55,16 +55,6 @@ namespace Nest
         Lte
     }
 
-    public enum CountFunction
-    {
-        [EnumMember(Value = "Count")]
-        Count,
-        [EnumMember(Value = "HighCount")]
-        Highcount,
-        [EnumMember(Value = "LowCount")]
-        Lowcount
-    }
-
     public enum DatafeedState
     {
         [EnumMember(Value = "started")]
@@ -77,16 +67,6 @@ namespace Nest
         Stopping
     }
 
-    public enum DistinctCountFunction
-    {
-        [EnumMember(Value = "DistinctCount")]
-        Distinctcount,
-        [EnumMember(Value = "LowDistinctCount")]
-        Lowdistinctcount,
-        [EnumMember(Value = "HighDistinctCount")]
-        Highdistinctcount
-    }
-
     public enum ExcludeFrequent
     {
         [EnumMember(Value = "all")]
@@ -97,22 +77,6 @@ namespace Nest
         By,
         [EnumMember(Value = "over")]
         Over
-    }
-
-    public enum GeographicFunction
-    {
-        [EnumMember(Value = "LatLong")]
-        Latlong
-    }
-
-    public enum InfoContentFunction
-    {
-        [EnumMember(Value = "InfoContent")]
-        Infocontent,
-        [EnumMember(Value = "HighInfoContent")]
-        Highinfocontent,
-        [EnumMember(Value = "LowInfoContent")]
-        Lowinfocontent
     }
 
     public enum JobState
@@ -139,62 +103,6 @@ namespace Nest
         HardLimit
     }
 
-    public enum MetricFunction
-    {
-        [EnumMember(Value = "Min")]
-        Min,
-        [EnumMember(Value = "Max")]
-        Max,
-        [EnumMember(Value = "Median")]
-        Median,
-        [EnumMember(Value = "HighMedian")]
-        Highmedian,
-        [EnumMember(Value = "LowMedian")]
-        Lowmedian,
-        [EnumMember(Value = "Mean")]
-        Mean,
-        [EnumMember(Value = "HighMean")]
-        Highmean,
-        [EnumMember(Value = "LowMean")]
-        Lowmean,
-        [EnumMember(Value = "Metric")]
-        Metric,
-        [EnumMember(Value = "Varp")]
-        Varp,
-        [EnumMember(Value = "HighVarp")]
-        Highvarp,
-        [EnumMember(Value = "LowVarp")]
-        Lowvarp
-    }
-
-    public enum NonNullSumFunction
-    {
-        [EnumMember(Value = "NonNullSum")]
-        Nonnullsum,
-        [EnumMember(Value = "HighNonNullSum")]
-        Highnonnullsum,
-        [EnumMember(Value = "LowNonNullSum")]
-        Lownonnullsum
-    }
-
-    public enum NonZeroCountFunction
-    {
-        [EnumMember(Value = "NonZeroCount")]
-        Nonzerocount,
-        [EnumMember(Value = "LowNonZeroCount")]
-        Lownonzerocount,
-        [EnumMember(Value = "HighNonZeroCount")]
-        Highnonzerocount
-    }
-
-    public enum RareFunction
-    {
-        [EnumMember(Value = "Rare")]
-        Rare,
-        [EnumMember(Value = "FreqRare")]
-        Freqrare
-    }
-
     public enum RuleAction
     {
         [EnumMember(Value = "skip_result")]
@@ -209,23 +117,5 @@ namespace Nest
         Include,
         [EnumMember(Value = "exclude")]
         Exclude
-    }
-
-    public enum SumFunction
-    {
-        [EnumMember(Value = "Sum")]
-        Sum,
-        [EnumMember(Value = "HighSum")]
-        Highsum,
-        [EnumMember(Value = "LowSum")]
-        Lowsum
-    }
-
-    public enum TimeFunction
-    {
-        [EnumMember(Value = "TimeOfDay")]
-        Timeofday,
-        [EnumMember(Value = "TimeOfWeek")]
-        Timeofweek
     }
 }

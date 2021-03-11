@@ -25,11 +25,11 @@ using Elastic.Transport;
 #nullable enable
 namespace Nest
 {
-    public class CreateRollupJobRequestParameters : RequestParameters<CreateRollupJobRequestParameters>
+    public class DeleteRollupJobRequestParameters : RequestParameters<DeleteRollupJobRequestParameters>
     {
     }
 
-    public class DeleteRollupJobRequestParameters : RequestParameters<DeleteRollupJobRequestParameters>
+    public class GetRollupJobRequestParameters : RequestParameters<GetRollupJobRequestParameters>
     {
     }
 
@@ -41,23 +41,15 @@ namespace Nest
     {
     }
 
-    public class GetRollupJobRequestParameters : RequestParameters<GetRollupJobRequestParameters>
+    public class CreateRollupJobRequestParameters : RequestParameters<CreateRollupJobRequestParameters>
     {
     }
 
     public class RollupSearchRequestParameters : RequestParameters<RollupSearchRequestParameters>
     {
-        public bool? TotalHitsAsInteger
-        {
-            get => Q<bool?>("total_hits_as_integer");
-            set => Q("total_hits_as_integer", value);
-        }
+        public bool? TotalHitsAsInteger { get => Q<bool?>("total_hits_as_integer"); set => Q("total_hits_as_integer", value); }
 
-        public bool? TypedKeys
-        {
-            get => Q<bool?>("typed_keys");
-            set => Q("typed_keys", value);
-        }
+        public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
     }
 
     public class StartRollupJobRequestParameters : RequestParameters<StartRollupJobRequestParameters>
@@ -66,16 +58,8 @@ namespace Nest
 
     public class StopRollupJobRequestParameters : RequestParameters<StopRollupJobRequestParameters>
     {
-        public Time? Timeout
-        {
-            get => Q<Time?>("timeout");
-            set => Q("timeout", value);
-        }
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public bool? WaitForCompletion
-        {
-            get => Q<bool?>("wait_for_completion");
-            set => Q("wait_for_completion", value);
-        }
+        public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
     }
 }

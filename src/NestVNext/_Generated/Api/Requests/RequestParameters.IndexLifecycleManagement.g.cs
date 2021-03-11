@@ -31,24 +31,16 @@ namespace Nest
 
     public class ExplainLifecycleRequestParameters : RequestParameters<ExplainLifecycleRequestParameters>
     {
-        public bool? OnlyErrors
-        {
-            get => Q<bool?>("only_errors");
-            set => Q("only_errors", value);
-        }
+        public bool? OnlyErrors { get => Q<bool?>("only_errors"); set => Q("only_errors", value); }
 
-        public bool? OnlyManaged
-        {
-            get => Q<bool?>("only_managed");
-            set => Q("only_managed", value);
-        }
-    }
-
-    public class GetIlmStatusRequestParameters : RequestParameters<GetIlmStatusRequestParameters>
-    {
+        public bool? OnlyManaged { get => Q<bool?>("only_managed"); set => Q("only_managed", value); }
     }
 
     public class GetLifecycleRequestParameters : RequestParameters<GetLifecycleRequestParameters>
+    {
+    }
+
+    public class GetIlmStatusRequestParameters : RequestParameters<GetIlmStatusRequestParameters>
     {
     }
 

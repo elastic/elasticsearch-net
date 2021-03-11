@@ -21,16 +21,6 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-    public enum CharacterType
-    {
-        [EnumMember(Value = "Whitespace")]
-        Whitespace,
-        [EnumMember(Value = "Alpha")]
-        Alpha,
-        [EnumMember(Value = "Comment")]
-        Comment
-    }
-
     public enum ChildScoreMode
     {
         [EnumMember(Value = "none")]
@@ -109,14 +99,6 @@ namespace Nest
         Indexed
     }
 
-    public enum GeoFormat
-    {
-        [EnumMember(Value = "GeoJson")]
-        Geojson,
-        [EnumMember(Value = "WellKnownText")]
-        Wellknowntext
-    }
-
     public enum GeoValidationMethod
     {
         [EnumMember(Value = "coerce")]
@@ -163,22 +145,6 @@ namespace Nest
         Intersects
     }
 
-    public enum RewriteMultiTerm
-    {
-        [EnumMember(Value = "constant_score")]
-        ConstantScore,
-        [EnumMember(Value = "scoring_boolean")]
-        ScoringBoolean,
-        [EnumMember(Value = "constant_score_boolean")]
-        ConstantScoreBoolean,
-        [EnumMember(Value = "top_terms_N")]
-        TopTermsN,
-        [EnumMember(Value = "top_terms_boost_N")]
-        TopTermsBoostN,
-        [EnumMember(Value = "top_terms_blended_freqs_N")]
-        TopTermsBlendedFreqsN
-    }
-
     public enum SimpleQueryStringFlags
     {
         [EnumMember(Value = "NONE")]
@@ -223,42 +189,6 @@ namespace Nest
         PhrasePrefix,
         [EnumMember(Value = "bool_prefix")]
         BoolPrefix
-    }
-
-    public enum TokenType
-    {
-        [EnumMember(Value = "None")]
-        None,
-        [EnumMember(Value = "Word")]
-        Word,
-        [EnumMember(Value = "LParen")]
-        Lparen,
-        [EnumMember(Value = "RParen")]
-        Rparen,
-        [EnumMember(Value = "Comma")]
-        Comma
-    }
-
-    public enum VisitorScope
-    {
-        [EnumMember(Value = "Unknown")]
-        Unknown,
-        [EnumMember(Value = "Query")]
-        Query,
-        [EnumMember(Value = "Filter")]
-        Filter,
-        [EnumMember(Value = "Must")]
-        Must,
-        [EnumMember(Value = "MustNot")]
-        Mustnot,
-        [EnumMember(Value = "Should")]
-        Should,
-        [EnumMember(Value = "PositiveQuery")]
-        Positivequery,
-        [EnumMember(Value = "NegativeQuery")]
-        Negativequery,
-        [EnumMember(Value = "Span")]
-        Span
     }
 
     public enum ZeroTermsQuery

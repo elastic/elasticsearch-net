@@ -21,16 +21,6 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-    public enum AggregationVisitorScope
-    {
-        [EnumMember(Value = "Unknown")]
-        Unknown,
-        [EnumMember(Value = "Aggregation")]
-        Aggregation,
-        [EnumMember(Value = "Bucket")]
-        Bucket
-    }
-
     public enum DateInterval
     {
         [EnumMember(Value = "second")]

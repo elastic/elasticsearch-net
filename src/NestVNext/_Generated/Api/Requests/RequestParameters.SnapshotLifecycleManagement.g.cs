@@ -29,15 +29,11 @@ namespace Nest
     {
     }
 
-    public class ExecuteRetentionRequestParameters : RequestParameters<ExecuteRetentionRequestParameters>
-    {
-    }
-
     public class ExecuteSnapshotLifecycleRequestParameters : RequestParameters<ExecuteSnapshotLifecycleRequestParameters>
     {
     }
 
-    public class GetSnapshotLifecycleManagementStatusRequestParameters : RequestParameters<GetSnapshotLifecycleManagementStatusRequestParameters>
+    public class ExecuteRetentionRequestParameters : RequestParameters<ExecuteRetentionRequestParameters>
     {
     }
 
@@ -46,6 +42,10 @@ namespace Nest
     }
 
     public class GetSnapshotLifecycleStatsRequestParameters : RequestParameters<GetSnapshotLifecycleStatsRequestParameters>
+    {
+    }
+
+    public class GetSnapshotLifecycleManagementStatusRequestParameters : RequestParameters<GetSnapshotLifecycleManagementStatusRequestParameters>
     {
     }
 

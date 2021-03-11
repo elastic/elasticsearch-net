@@ -18,31 +18,25 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
-    public interface ICcrStatsRequest : IRequest<CcrStatsRequestParameters>
+    public interface IDeleteAutoFollowPatternRequest : IRequest<DeleteAutoFollowPatternRequestParameters>
     {
     }
 
-    public class CcrStatsRequest : PlainRequestBase<CcrStatsRequestParameters>, ICcrStatsRequest
+    public class DeleteAutoFollowPatternRequest : PlainRequestBase<DeleteAutoFollowPatternRequestParameters>, IDeleteAutoFollowPatternRequest
     {
-        protected ICcrStatsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationStats;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected IDeleteAutoFollowPatternRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationDeleteAutoFollowPattern;
+        protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
-    }
-
-    public interface ICreateAutoFollowPatternRequest : IRequest<CreateAutoFollowPatternRequestParameters>
-    {
-    }
-
-    public class CreateAutoFollowPatternRequest : PlainRequestBase<CreateAutoFollowPatternRequestParameters>, ICreateAutoFollowPatternRequest
-    {
-        protected ICreateAutoFollowPatternRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationPutAutoFollowPattern;
-        protected override HttpMethod HttpMethod => HttpMethod.PUT;
-        protected override bool SupportsBody => false;
+        ///<summary>/_ccr/auto_follow/{name}</summary>
+        public DeleteAutoFollowPatternRequest(Name name): base(r => r.Required("name", name))
+        {
+        }
     }
 
     public interface ICreateFollowIndexRequest : IRequest<CreateFollowIndexRequestParameters>
@@ -55,30 +49,12 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationFollow;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
-    }
+        ///<summary>/{index}/_ccr/follow</summary>
+        public CreateFollowIndexRequest(IndexName index): base(r => r.Required("index", index))
+        {
+        }
 
-    public interface IDeleteAutoFollowPatternRequest : IRequest<DeleteAutoFollowPatternRequestParameters>
-    {
-    }
-
-    public class DeleteAutoFollowPatternRequest : PlainRequestBase<DeleteAutoFollowPatternRequestParameters>, IDeleteAutoFollowPatternRequest
-    {
-        protected IDeleteAutoFollowPatternRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationDeleteAutoFollowPattern;
-        protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-        protected override bool SupportsBody => false;
-    }
-
-    public interface IFollowIndexStatsRequest : IRequest<FollowIndexStatsRequestParameters>
-    {
-    }
-
-    public class FollowIndexStatsRequest : PlainRequestBase<FollowIndexStatsRequestParameters>, IFollowIndexStatsRequest
-    {
-        protected IFollowIndexStatsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationFollowStats;
-        protected override HttpMethod HttpMethod => HttpMethod.GET;
-        protected override bool SupportsBody => false;
+        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public interface IFollowInfoRequest : IRequest<FollowInfoRequestParameters>
@@ -91,6 +67,26 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationFollowInfo;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/{index}/_ccr/info</summary>
+        public FollowInfoRequest(Indices index): base(r => r.Required("index", index))
+        {
+        }
+    }
+
+    public interface IFollowIndexStatsRequest : IRequest<FollowIndexStatsRequestParameters>
+    {
+    }
+
+    public class FollowIndexStatsRequest : PlainRequestBase<FollowIndexStatsRequestParameters>, IFollowIndexStatsRequest
+    {
+        protected IFollowIndexStatsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationFollowStats;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/{index}/_ccr/stats</summary>
+        public FollowIndexStatsRequest(Indices index): base(r => r.Required("index", index))
+        {
+        }
     }
 
     public interface IForgetFollowerIndexRequest : IRequest<ForgetFollowerIndexRequestParameters>
@@ -103,6 +99,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationForgetFollower;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/{index}/_ccr/forget_follower</summary>
+        public ForgetFollowerIndexRequest(IndexName index): base(r => r.Required("index", index))
+        {
+        }
     }
 
     public interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPatternRequestParameters>
@@ -115,6 +115,15 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationGetAutoFollowPattern;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_ccr/auto_follow</summary>
+        public GetAutoFollowPatternRequest(): base()
+        {
+        }
+
+        ///<summary>/_ccr/auto_follow/{name}</summary>
+        public GetAutoFollowPatternRequest(Name name): base(r => r.Optional("name", name))
+        {
+        }
     }
 
     public interface IPauseAutoFollowPatternRequest : IRequest<PauseAutoFollowPatternRequestParameters>
@@ -127,6 +136,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationPauseAutoFollowPattern;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ccr/auto_follow/{name}/pause</summary>
+        public PauseAutoFollowPatternRequest(Name name): base(r => r.Required("name", name))
+        {
+        }
     }
 
     public interface IPauseFollowIndexRequest : IRequest<PauseFollowIndexRequestParameters>
@@ -139,6 +152,26 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationPauseFollow;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/{index}/_ccr/pause_follow</summary>
+        public PauseFollowIndexRequest(IndexName index): base(r => r.Required("index", index))
+        {
+        }
+    }
+
+    public interface ICreateAutoFollowPatternRequest : IRequest<CreateAutoFollowPatternRequestParameters>
+    {
+    }
+
+    public class CreateAutoFollowPatternRequest : PlainRequestBase<CreateAutoFollowPatternRequestParameters>, ICreateAutoFollowPatternRequest
+    {
+        protected ICreateAutoFollowPatternRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationPutAutoFollowPattern;
+        protected override HttpMethod HttpMethod => HttpMethod.PUT;
+        protected override bool SupportsBody => false;
+        ///<summary>/_ccr/auto_follow/{name}</summary>
+        public CreateAutoFollowPatternRequest(Name name): base(r => r.Required("name", name))
+        {
+        }
     }
 
     public interface IResumeAutoFollowPatternRequest : IRequest<ResumeAutoFollowPatternRequestParameters>
@@ -151,6 +184,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationResumeAutoFollowPattern;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ccr/auto_follow/{name}/resume</summary>
+        public ResumeAutoFollowPatternRequest(Name name): base(r => r.Required("name", name))
+        {
+        }
     }
 
     public interface IResumeFollowIndexRequest : IRequest<ResumeFollowIndexRequestParameters>
@@ -163,6 +200,26 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationResumeFollow;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/{index}/_ccr/resume_follow</summary>
+        public ResumeFollowIndexRequest(IndexName index): base(r => r.Required("index", index))
+        {
+        }
+    }
+
+    public interface ICcrStatsRequest : IRequest<CcrStatsRequestParameters>
+    {
+    }
+
+    public class CcrStatsRequest : PlainRequestBase<CcrStatsRequestParameters>, ICcrStatsRequest
+    {
+        protected ICcrStatsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationStats;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_ccr/stats</summary>
+        public CcrStatsRequest(): base()
+        {
+        }
     }
 
     public interface IUnfollowIndexRequest : IRequest<UnfollowIndexRequestParameters>
@@ -175,5 +232,9 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationUnfollow;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/{index}/_ccr/unfollow</summary>
+        public UnfollowIndexRequest(IndexName index): base(r => r.Required("index", index))
+        {
+        }
     }
 }

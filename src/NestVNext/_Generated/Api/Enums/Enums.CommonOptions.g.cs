@@ -21,32 +21,6 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
-    public enum DateMathOperation
-    {
-        [EnumMember(Value = "+")]
-        Add,
-        [EnumMember(Value = "-")]
-        Subtract
-    }
-
-    public enum DateMathTimeUnit
-    {
-        [EnumMember(Value = "s")]
-        s,
-        [EnumMember(Value = "m")]
-        m,
-        [EnumMember(Value = "h")]
-        h,
-        [EnumMember(Value = "d")]
-        d,
-        [EnumMember(Value = "w")]
-        w,
-        [EnumMember(Value = "M")]
-        M,
-        [EnumMember(Value = "y")]
-        y
-    }
-
     public enum DistanceUnit
     {
         [EnumMember(Value = "in")]
@@ -97,23 +71,5 @@ namespace Nest
         Disjoint,
         [EnumMember(Value = "within")]
         Within
-    }
-
-    public enum TimeUnit
-    {
-        [EnumMember(Value = "nanos")]
-        Nanos,
-        [EnumMember(Value = "micros")]
-        Micros,
-        [EnumMember(Value = "ms")]
-        Ms,
-        [EnumMember(Value = "s")]
-        s,
-        [EnumMember(Value = "m")]
-        m,
-        [EnumMember(Value = "h")]
-        h,
-        [EnumMember(Value = "d")]
-        d
     }
 }

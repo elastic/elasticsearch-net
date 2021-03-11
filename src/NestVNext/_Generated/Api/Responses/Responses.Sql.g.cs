@@ -18,15 +18,32 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
     public class ClearSqlCursorResponse : ResponseBase
     {
+        [JsonPropertyName("succeeded")]
+        public bool Succeeded { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class QuerySqlResponse : ResponseBase
     {
+        [JsonPropertyName("cursor")]
+        public string Cursor { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class TranslateSqlResponse : ResponseBase

@@ -18,7 +18,9 @@
 //
 // ------------------------------------------------
 using System;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
     public interface ICloseJobRequest : IRequest<CloseJobRequestParameters>
@@ -31,30 +33,16 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningCloseJob;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
-    }
+        ///<summary>/_ml/anomaly_detectors/{job_id}/_close</summary>
+        public CloseJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
 
-    public interface IDeleteCalendarEventRequest : IRequest<DeleteCalendarEventRequestParameters>
-    {
-    }
+        public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 
-    public class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
-    {
-        protected IDeleteCalendarEventRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteCalendarEvent;
-        protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-        protected override bool SupportsBody => false;
-    }
+        public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-    public interface IDeleteCalendarJobRequest : IRequest<DeleteCalendarJobRequestParameters>
-    {
-    }
-
-    public class DeleteCalendarJobRequest : PlainRequestBase<DeleteCalendarJobRequestParameters>, IDeleteCalendarJobRequest
-    {
-        protected IDeleteCalendarJobRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteCalendarJob;
-        protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-        protected override bool SupportsBody => false;
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public interface IDeleteCalendarRequest : IRequest<DeleteCalendarRequestParameters>
@@ -67,6 +55,42 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteCalendar;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/calendars/{calendar_id}</summary>
+        public DeleteCalendarRequest(Id calendarId): base(r => r.Required("calendar_id", calendarId))
+        {
+        }
+    }
+
+    public interface IDeleteCalendarEventRequest : IRequest<DeleteCalendarEventRequestParameters>
+    {
+    }
+
+    public class DeleteCalendarEventRequest : PlainRequestBase<DeleteCalendarEventRequestParameters>, IDeleteCalendarEventRequest
+    {
+        protected IDeleteCalendarEventRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteCalendarEvent;
+        protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+        protected override bool SupportsBody => false;
+        ///<summary>/_ml/calendars/{calendar_id}/events/{event_id}</summary>
+        public DeleteCalendarEventRequest(Id calendarId, Id eventId): base(r => r.Required("calendar_id", calendarId).Required("event_id", eventId))
+        {
+        }
+    }
+
+    public interface IDeleteCalendarJobRequest : IRequest<DeleteCalendarJobRequestParameters>
+    {
+    }
+
+    public class DeleteCalendarJobRequest : PlainRequestBase<DeleteCalendarJobRequestParameters>, IDeleteCalendarJobRequest
+    {
+        protected IDeleteCalendarJobRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteCalendarJob;
+        protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+        protected override bool SupportsBody => false;
+        ///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+        public DeleteCalendarJobRequest(Id calendarId, Id jobId): base(r => r.Required("calendar_id", calendarId).Required("job_id", jobId))
+        {
+        }
     }
 
     public interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequestParameters>
@@ -79,6 +103,12 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteDatafeed;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/datafeeds/{datafeed_id}</summary>
+        public DeleteDatafeedRequest(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
+        {
+        }
+
+        public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
     }
 
     public interface IDeleteExpiredDataRequest : IRequest<DeleteExpiredDataRequestParameters>
@@ -91,6 +121,15 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteExpiredData;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/_delete_expired_data/{job_id}</summary>
+        public DeleteExpiredDataRequest(JobId jobId): base(r => r)
+        {
+        }
+
+        ///<summary>/_ml/_delete_expired_data</summary>
+        public DeleteExpiredDataRequest(): base()
+        {
+        }
     }
 
     public interface IDeleteFilterRequest : IRequest<DeleteFilterRequestParameters>
@@ -103,6 +142,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteFilter;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/filters/{filter_id}</summary>
+        public DeleteFilterRequest(Id filterId): base(r => r.Required("filter_id", filterId))
+        {
+        }
     }
 
     public interface IDeleteForecastRequest : IRequest<DeleteForecastRequestParameters>
@@ -115,6 +158,19 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteForecast;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/_forecast</summary>
+        public DeleteForecastRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
+
+        ///<summary>/_ml/anomaly_detectors/{job_id}/_forecast/{forecast_id}</summary>
+        public DeleteForecastRequest(Id jobId, Id forecastId): base(r => r.Required("job_id", jobId).Optional("forecast_id", forecastId))
+        {
+        }
+
+        public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public interface IDeleteJobRequest : IRequest<DeleteJobRequestParameters>
@@ -127,6 +183,14 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteJob;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}</summary>
+        public DeleteJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
+
+        public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+
+        public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
     }
 
     public interface IDeleteModelSnapshotRequest : IRequest<DeleteModelSnapshotRequestParameters>
@@ -139,6 +203,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningDeleteModelSnapshot;
         protected override HttpMethod HttpMethod => HttpMethod.DELETE;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+        public DeleteModelSnapshotRequest(Id jobId, Id snapshotId): base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
+        {
+        }
     }
 
     public interface IEstimateModelMemoryRequest : IRequest<EstimateModelMemoryRequestParameters>
@@ -151,6 +219,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningEstimateModelMemory;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/_estimate_model_memory</summary>
+        public EstimateModelMemoryRequest(): base()
+        {
+        }
     }
 
     public interface IFlushJobRequest : IRequest<FlushJobRequestParameters>
@@ -163,6 +235,12 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningFlushJob;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/_flush</summary>
+        public FlushJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
+
+        public string? SkipTime { get => Q<string?>("skip_time"); set => Q("skip_time", value); }
     }
 
     public interface IForecastJobRequest : IRequest<ForecastJobRequestParameters>
@@ -175,18 +253,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningForecast;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
-    }
-
-    public interface IGetAnomalyRecordsRequest : IRequest<GetAnomalyRecordsRequestParameters>
-    {
-    }
-
-    public class GetAnomalyRecordsRequest : PlainRequestBase<GetAnomalyRecordsRequestParameters>, IGetAnomalyRecordsRequest
-    {
-        protected IGetAnomalyRecordsRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetRecords;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/_forecast</summary>
+        public ForecastJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
     }
 
     public interface IGetBucketsRequest : IRequest<GetBucketsRequestParameters>
@@ -199,6 +269,15 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetBuckets;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}</summary>
+        public GetBucketsRequest(Id jobId, Id timestamp): base(r => r.Required("job_id", jobId).Optional("timestamp", timestamp))
+        {
+        }
+
+        ///<summary>/_ml/anomaly_detectors/{job_id}/results/buckets</summary>
+        public GetBucketsRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
     }
 
     public interface IGetCalendarEventsRequest : IRequest<GetCalendarEventsRequestParameters>
@@ -211,6 +290,16 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetCalendarEvents;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/calendars/{calendar_id}/events</summary>
+        public GetCalendarEventsRequest(Id calendarId): base(r => r.Required("calendar_id", calendarId))
+        {
+        }
+
+        public DateString? End { get => Q<DateString?>("end"); set => Q("end", value); }
+
+        public string? JobId { get => Q<string?>("job_id"); set => Q("job_id", value); }
+
+        public string? Start { get => Q<string?>("start"); set => Q("start", value); }
     }
 
     public interface IGetCalendarsRequest : IRequest<GetCalendarsRequestParameters>
@@ -223,6 +312,15 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetCalendars;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/calendars</summary>
+        public GetCalendarsRequest(): base()
+        {
+        }
+
+        ///<summary>/_ml/calendars/{calendar_id}</summary>
+        public GetCalendarsRequest(Id calendarId): base(r => r.Optional("calendar_id", calendarId))
+        {
+        }
     }
 
     public interface IGetCategoriesRequest : IRequest<GetCategoriesRequestParameters>
@@ -235,6 +333,15 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetCategories;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
+        public GetCategoriesRequest(Id jobId, CategoryId categoryId): base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
+        {
+        }
+
+        ///<summary>/_ml/anomaly_detectors/{job_id}/results/categories/</summary>
+        public GetCategoriesRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
     }
 
     public interface IGetDatafeedStatsRequest : IRequest<GetDatafeedStatsRequestParameters>
@@ -247,6 +354,17 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetDatafeedStats;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/datafeeds/{datafeed_id}/_stats</summary>
+        public GetDatafeedStatsRequest(Id datafeedId): base(r => r.Optional("datafeed_id", datafeedId))
+        {
+        }
+
+        ///<summary>/_ml/datafeeds/_stats</summary>
+        public GetDatafeedStatsRequest(): base()
+        {
+        }
+
+        public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
     }
 
     public interface IGetDatafeedsRequest : IRequest<GetDatafeedsRequestParameters>
@@ -259,6 +377,19 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetDatafeeds;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/datafeeds/{datafeed_id}</summary>
+        public GetDatafeedsRequest(Id datafeedId): base(r => r.Optional("datafeed_id", datafeedId))
+        {
+        }
+
+        ///<summary>/_ml/datafeeds</summary>
+        public GetDatafeedsRequest(): base()
+        {
+        }
+
+        public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
+
+        public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
     }
 
     public interface IGetFiltersRequest : IRequest<GetFiltersRequestParameters>
@@ -271,6 +402,19 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetFilters;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/filters</summary>
+        public GetFiltersRequest(): base()
+        {
+        }
+
+        ///<summary>/_ml/filters/{filter_id}</summary>
+        public GetFiltersRequest(Id filterId): base(r => r.Optional("filter_id", filterId))
+        {
+        }
+
+        public int? From { get => Q<int?>("from"); set => Q("from", value); }
+
+        public int? Size { get => Q<int?>("size"); set => Q("size", value); }
     }
 
     public interface IGetInfluencersRequest : IRequest<GetInfluencersRequestParameters>
@@ -283,6 +427,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetInfluencers;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/results/influencers</summary>
+        public GetInfluencersRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
     }
 
     public interface IGetJobStatsRequest : IRequest<GetJobStatsRequestParameters>
@@ -295,6 +443,17 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetJobStats;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/_stats</summary>
+        public GetJobStatsRequest(): base()
+        {
+        }
+
+        ///<summary>/_ml/anomaly_detectors/{job_id}/_stats</summary>
+        public GetJobStatsRequest(Id jobId): base(r => r.Optional("job_id", jobId))
+        {
+        }
+
+        public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
     }
 
     public interface IGetJobsRequest : IRequest<GetJobsRequestParameters>
@@ -307,6 +466,19 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetJobs;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}</summary>
+        public GetJobsRequest(Id jobId): base(r => r.Optional("job_id", jobId))
+        {
+        }
+
+        ///<summary>/_ml/anomaly_detectors</summary>
+        public GetJobsRequest(): base()
+        {
+        }
+
+        public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
+
+        public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
     }
 
     public interface IGetModelSnapshotsRequest : IRequest<GetModelSnapshotsRequestParameters>
@@ -319,6 +491,15 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetModelSnapshots;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+        public GetModelSnapshotsRequest(Id jobId, Id snapshotId): base(r => r.Required("job_id", jobId).Optional("snapshot_id", snapshotId))
+        {
+        }
+
+        ///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots</summary>
+        public GetModelSnapshotsRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
     }
 
     public interface IGetOverallBucketsRequest : IRequest<GetOverallBucketsRequestParameters>
@@ -331,6 +512,26 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetOverallBuckets;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
+        public GetOverallBucketsRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
+    }
+
+    public interface IGetAnomalyRecordsRequest : IRequest<GetAnomalyRecordsRequestParameters>
+    {
+    }
+
+    public class GetAnomalyRecordsRequest : PlainRequestBase<GetAnomalyRecordsRequestParameters>, IGetAnomalyRecordsRequest
+    {
+        protected IGetAnomalyRecordsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningGetRecords;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/results/records</summary>
+        public GetAnomalyRecordsRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
     }
 
     public interface IMachineLearningInfoRequest : IRequest<MachineLearningInfoRequestParameters>
@@ -343,6 +544,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningInfo;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/info</summary>
+        public MachineLearningInfoRequest(): base()
+        {
+        }
     }
 
     public interface IOpenJobRequest : IRequest<OpenJobRequestParameters>
@@ -355,6 +560,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningOpenJob;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/_open</summary>
+        public OpenJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
     }
 
     public interface IPostCalendarEventsRequest : IRequest<PostCalendarEventsRequestParameters>
@@ -367,6 +576,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPostCalendarEvents;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/calendars/{calendar_id}/events</summary>
+        public PostCalendarEventsRequest(Id calendarId): base(r => r.Required("calendar_id", calendarId))
+        {
+        }
     }
 
     public interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters>
@@ -379,6 +592,14 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPostData;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/_data</summary>
+        public PostJobDataRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
+
+        public DateString? ResetEnd { get => Q<DateString?>("reset_end"); set => Q("reset_end", value); }
+
+        public DateString? ResetStart { get => Q<DateString?>("reset_start"); set => Q("reset_start", value); }
     }
 
     public interface IPreviewDatafeedRequest : IRequest<PreviewDatafeedRequestParameters>
@@ -391,18 +612,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPreviewDatafeed;
         protected override HttpMethod HttpMethod => HttpMethod.GET;
         protected override bool SupportsBody => false;
-    }
-
-    public interface IPutCalendarJobRequest : IRequest<PutCalendarJobRequestParameters>
-    {
-    }
-
-    public class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
-    {
-        protected IPutCalendarJobRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPutCalendarJob;
-        protected override HttpMethod HttpMethod => HttpMethod.PUT;
-        protected override bool SupportsBody => false;
+        ///<summary>/_ml/datafeeds/{datafeed_id}/_preview</summary>
+        public PreviewDatafeedRequest(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
+        {
+        }
     }
 
     public interface IPutCalendarRequest : IRequest<PutCalendarRequestParameters>
@@ -415,6 +628,26 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPutCalendar;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/calendars/{calendar_id}</summary>
+        public PutCalendarRequest(Id calendarId): base(r => r.Required("calendar_id", calendarId))
+        {
+        }
+    }
+
+    public interface IPutCalendarJobRequest : IRequest<PutCalendarJobRequestParameters>
+    {
+    }
+
+    public class PutCalendarJobRequest : PlainRequestBase<PutCalendarJobRequestParameters>, IPutCalendarJobRequest
+    {
+        protected IPutCalendarJobRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPutCalendarJob;
+        protected override HttpMethod HttpMethod => HttpMethod.PUT;
+        protected override bool SupportsBody => false;
+        ///<summary>/_ml/calendars/{calendar_id}/jobs/{job_id}</summary>
+        public PutCalendarJobRequest(Id calendarId, Id jobId): base(r => r.Required("calendar_id", calendarId).Required("job_id", jobId))
+        {
+        }
     }
 
     public interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters>
@@ -427,6 +660,18 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPutDatafeed;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/datafeeds/{datafeed_id}</summary>
+        public PutDatafeedRequest(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
     }
 
     public interface IPutFilterRequest : IRequest<PutFilterRequestParameters>
@@ -439,6 +684,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPutFilter;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/filters/{filter_id}</summary>
+        public PutFilterRequest(Id filterId): base(r => r.Required("filter_id", filterId))
+        {
+        }
     }
 
     public interface IPutJobRequest : IRequest<PutJobRequestParameters>
@@ -451,6 +700,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPutJob;
         protected override HttpMethod HttpMethod => HttpMethod.PUT;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}</summary>
+        public PutJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
     }
 
     public interface IRevertModelSnapshotRequest : IRequest<RevertModelSnapshotRequestParameters>
@@ -463,6 +716,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningRevertModelSnapshot;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
+        public RevertModelSnapshotRequest(Id jobId, Id snapshotId): base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
+        {
+        }
     }
 
     public interface ISetUpgradeModeRequest : IRequest<SetUpgradeModeRequestParameters>
@@ -475,6 +732,14 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningSetUpgradeMode;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/set_upgrade_mode</summary>
+        public SetUpgradeModeRequest(): base()
+        {
+        }
+
+        public bool? Enabled { get => Q<bool?>("enabled"); set => Q("enabled", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public interface IStartDatafeedRequest : IRequest<StartDatafeedRequestParameters>
@@ -487,6 +752,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningStartDatafeed;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/datafeeds/{datafeed_id}/_start</summary>
+        public StartDatafeedRequest(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
+        {
+        }
     }
 
     public interface IStopDatafeedRequest : IRequest<StopDatafeedRequestParameters>
@@ -499,6 +768,12 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningStopDatafeed;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/datafeeds/{datafeed_id}/_stop</summary>
+        public StopDatafeedRequest(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
+        {
+        }
+
+        public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
     }
 
     public interface IUpdateDatafeedRequest : IRequest<UpdateDatafeedRequestParameters>
@@ -511,6 +786,18 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningUpdateDatafeed;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/datafeeds/{datafeed_id}/_update</summary>
+        public UpdateDatafeedRequest(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
+        {
+        }
+
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
     }
 
     public interface IUpdateFilterRequest : IRequest<UpdateFilterRequestParameters>
@@ -523,6 +810,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningUpdateFilter;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/filters/{filter_id}/_update</summary>
+        public UpdateFilterRequest(Id filterId): base(r => r.Required("filter_id", filterId))
+        {
+        }
     }
 
     public interface IUpdateJobRequest : IRequest<UpdateJobRequestParameters>
@@ -535,6 +826,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningUpdateJob;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/_update</summary>
+        public UpdateJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
+        {
+        }
     }
 
     public interface IUpdateModelSnapshotRequest : IRequest<UpdateModelSnapshotRequestParameters>
@@ -547,18 +842,10 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningUpdateModelSnapshot;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
-    }
-
-    public interface IValidateDetectorRequest : IRequest<ValidateDetectorRequestParameters>
-    {
-    }
-
-    public class ValidateDetectorRequest : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
-    {
-        protected IValidateDetectorRequest Self => this;
-        internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningValidateDetector;
-        protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
+        public UpdateModelSnapshotRequest(Id jobId, Id snapshotId): base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
+        {
+        }
     }
 
     public interface IValidateJobRequest : IRequest<ValidateJobRequestParameters>
@@ -571,5 +858,25 @@ namespace Nest
         internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningValidate;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/_validate</summary>
+        public ValidateJobRequest(): base()
+        {
+        }
+    }
+
+    public interface IValidateDetectorRequest : IRequest<ValidateDetectorRequestParameters>
+    {
+    }
+
+    public class ValidateDetectorRequest : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
+    {
+        protected IValidateDetectorRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningValidateDetector;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_ml/anomaly_detectors/_validate/detector</summary>
+        public ValidateDetectorRequest(): base()
+        {
+        }
     }
 }

@@ -43,11 +43,7 @@ namespace Nest
 
     public class ExecuteWatchRequestParameters : RequestParameters<ExecuteWatchRequestParameters>
     {
-        public bool? Debug
-        {
-            get => Q<bool?>("debug");
-            set => Q("debug", value);
-        }
+        public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
     }
 
     public class GetWatchRequestParameters : RequestParameters<GetWatchRequestParameters>
@@ -56,45 +52,25 @@ namespace Nest
 
     public class PutWatchRequestParameters : RequestParameters<PutWatchRequestParameters>
     {
-        public bool? Active
-        {
-            get => Q<bool?>("active");
-            set => Q("active", value);
-        }
+        public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
 
-        public long? IfPrimaryTerm
-        {
-            get => Q<long?>("if_primary_term");
-            set => Q("if_primary_term", value);
-        }
+        public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
-        public long? IfSequenceNumber
-        {
-            get => Q<long?>("if_sequence_number");
-            set => Q("if_sequence_number", value);
-        }
+        public long? IfSequenceNumber { get => Q<long?>("if_sequence_number"); set => Q("if_sequence_number", value); }
 
-        public long? Version
-        {
-            get => Q<long?>("version");
-            set => Q("version", value);
-        }
+        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
     }
 
     public class StartWatcherRequestParameters : RequestParameters<StartWatcherRequestParameters>
     {
     }
 
-    public class StopWatcherRequestParameters : RequestParameters<StopWatcherRequestParameters>
-    {
-    }
-
     public class WatcherStatsRequestParameters : RequestParameters<WatcherStatsRequestParameters>
     {
-        public bool? EmitStacktraces
-        {
-            get => Q<bool?>("emit_stacktraces");
-            set => Q("emit_stacktraces", value);
-        }
+        public bool? EmitStacktraces { get => Q<bool?>("emit_stacktraces"); set => Q("emit_stacktraces", value); }
+    }
+
+    public class StopWatcherRequestParameters : RequestParameters<StopWatcherRequestParameters>
+    {
     }
 }

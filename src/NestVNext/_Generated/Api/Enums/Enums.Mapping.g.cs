@@ -103,91 +103,11 @@ namespace Nest
         ConstantKeyword
     }
 
-    public enum GeoOrientation
-    {
-        [EnumMember(Value = "ClockWise")]
-        Clockwise,
-        [EnumMember(Value = "CounterClockWise")]
-        Counterclockwise
-    }
-
-    public enum GeoStrategy
-    {
-        [EnumMember(Value = "recursive")]
-        Recursive,
-        [EnumMember(Value = "term")]
-        Term
-    }
-
-    public enum GeoTree
-    {
-        [EnumMember(Value = "geohash")]
-        Geohash,
-        [EnumMember(Value = "quadtree")]
-        Quadtree
-    }
-
-    public enum IndexOptions
-    {
-        [EnumMember(Value = "docs")]
-        Docs,
-        [EnumMember(Value = "freqs")]
-        Freqs,
-        [EnumMember(Value = "positions")]
-        Positions,
-        [EnumMember(Value = "offsets")]
-        Offsets
-    }
-
     public enum MatchType
     {
         [EnumMember(Value = "simple")]
         Simple,
         [EnumMember(Value = "regex")]
         Regex
-    }
-
-    public enum NumberType
-    {
-        [EnumMember(Value = "float")]
-        Float,
-        [EnumMember(Value = "half_float")]
-        HalfFloat,
-        [EnumMember(Value = "scaled_float")]
-        ScaledFloat,
-        [EnumMember(Value = "double")]
-        Double,
-        [EnumMember(Value = "integer")]
-        Integer,
-        [EnumMember(Value = "long")]
-        Long,
-        [EnumMember(Value = "short")]
-        Short,
-        [EnumMember(Value = "byte")]
-        Byte
-    }
-
-    public enum RangeType
-    {
-        [EnumMember(Value = "integer_range")]
-        IntegerRange,
-        [EnumMember(Value = "float_range")]
-        FloatRange,
-        [EnumMember(Value = "long_range")]
-        LongRange,
-        [EnumMember(Value = "double_range")]
-        DoubleRange,
-        [EnumMember(Value = "date_range")]
-        DateRange,
-        [EnumMember(Value = "ip_range")]
-        IpRange
-    }
-
-    public enum ShapeOrientation
-    {
-        [EnumMember(Value = "ClockWise")]
-        Clockwise,
-        [EnumMember(Value = "CounterClockWise")]
-        Counterclockwise
     }
 }

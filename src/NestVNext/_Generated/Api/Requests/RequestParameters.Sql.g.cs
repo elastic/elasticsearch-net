@@ -31,11 +31,7 @@ namespace Nest
 
     public class QuerySqlRequestParameters : RequestParameters<QuerySqlRequestParameters>
     {
-        public string? Format
-        {
-            get => Q<string?>("format");
-            set => Q("format", value);
-        }
+        public string? Format { get => Q<string?>("format"); set => Q("format", value); }
     }
 
     public class TranslateSqlRequestParameters : RequestParameters<TranslateSqlRequestParameters>

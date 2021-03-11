@@ -18,10 +18,11 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
-    public class DeleteLifecycleResponse : ResponseBase
+    public class DeleteLifecycleResponse : AcknowledgedResponseBase
     {
     }
 
@@ -29,35 +30,51 @@ namespace Nest
     {
     }
 
-    public class GetLifecycleResponse : ResponseBase
+    public class GetLifecycleResponse : DictionaryResponseBase
     {
     }
 
     public class GetIlmStatusResponse : ResponseBase
     {
+        [JsonPropertyName("operation_mode")]
+        public LifecycleOperationMode OperationMode { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class MoveToStepResponse : ResponseBase
+    public class MoveToStepResponse : AcknowledgedResponseBase
     {
     }
 
-    public class PutLifecycleResponse : ResponseBase
+    public class PutLifecycleResponse : AcknowledgedResponseBase
     {
     }
 
     public class RemovePolicyResponse : ResponseBase
     {
+        [JsonPropertyName("has_failures")]
+        public bool HasFailures { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
-    public class RetryIlmResponse : ResponseBase
+    public class RetryIlmResponse : AcknowledgedResponseBase
     {
     }
 
-    public class StartIlmResponse : ResponseBase
+    public class StartIlmResponse : AcknowledgedResponseBase
     {
     }
 
-    public class StopIlmResponse : ResponseBase
+    public class StopIlmResponse : AcknowledgedResponseBase
     {
     }
 }

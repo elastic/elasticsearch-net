@@ -18,14 +18,15 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 
 namespace Nest
 {
-    public class DeletePipelineResponse : ResponseBase
+    public class DeletePipelineResponse : AcknowledgedResponseBase
     {
     }
 
-    public class GetPipelineResponse : ResponseBase
+    public class GetPipelineResponse : DictionaryResponseBase
     {
     }
 
@@ -33,7 +34,7 @@ namespace Nest
     {
     }
 
-    public class PutPipelineResponse : ResponseBase
+    public class PutPipelineResponse : AcknowledgedResponseBase
     {
     }
 
