@@ -1,5 +1,5 @@
 using System;
-using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 using Elastic.Transport.Products.Elasticsearch.Failures;
 
@@ -14,7 +14,7 @@ namespace Nest
 		/// A lazily computed, human readable string representation of what happened during a request for both successful and
 		/// failed requests. Useful whilst developing or to log when <see cref="IsValid" /> is false on responses.
 		/// </summary>
-		[IgnoreDataMember]
+		[JsonIgnore]
 		string DebugInformation { get; }
 
 		/// <summary>
@@ -29,7 +29,7 @@ namespace Nest
 		/// <see cref="ITransportConfiguration.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
-		[IgnoreDataMember]
+		[JsonIgnore]
 		bool IsValid { get; }
 
 		/// <summary>
@@ -44,8 +44,8 @@ namespace Nest
 		/// <see cref="ITransportConfiguration.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
-		[IgnoreDataMember]
-		Exception OriginalException { get; }
+		[JsonIgnore]
+		Exception? OriginalException { get; }
 
 		/// <summary>
 		/// If the response results in an error on Elasticsearch's side an <pre>error</pre> element will be returned, this is
@@ -57,7 +57,7 @@ namespace Nest
 		/// <see cref="ITransportConfiguration.ThrowExceptions" /> if the response is not valid
 		/// </para>
 		/// </summary>
-		[IgnoreDataMember]
-		ServerError ServerError { get; }
+		[JsonIgnore]
+		ServerError? ServerError { get; }
 	}
 }
