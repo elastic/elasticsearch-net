@@ -12,7 +12,7 @@ namespace Nest
 	public interface IRequest
 	{
 		[IgnoreDataMember]
-		string ContentType { get; }
+		string? ContentType { get; }
 
 		[IgnoreDataMember]
 		HttpMethod HttpMethod { get; }

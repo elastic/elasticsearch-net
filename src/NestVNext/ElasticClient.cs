@@ -9,50 +9,43 @@ using Elastic.Transport;
 
 namespace Nest
 {
-	public class NamespacedClientProxy
-	{
-		private readonly ElasticClient _client;
-
-		protected NamespacedClientProxy(ElasticClient client) => _client = client;
-
-		internal TResponse DoRequest<TRequest, TResponse>(
-			TRequest p,
-			IRequestParameters parameters,
-			Action<IRequestConfiguration> forceConfiguration = null)
-			where TRequest : class, IRequest
-			where TResponse : class, ITransportResponse, new() =>
-			_client.DoRequest<TRequest, TResponse>(p, parameters, forceConfiguration);
-
-		internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
-			TRequest p,
-			IRequestParameters parameters,
-			CancellationToken ct,
-			Action<IRequestConfiguration> forceConfiguration = null)
-			where TRequest : class, IRequest
-			where TResponse : class, ITransportResponse, new() =>
-			_client.DoRequestAsync<TRequest, TResponse>(p, parameters, ct, forceConfiguration);
-	}
-	
-	/// <summary>
-	/// ElasticClient is NEST's strongly typed client which exposes fully mapped Elasticsearch endpoints
-	/// </summary>
+	/// <inheritdoc />
 	public partial class ElasticClient : IElasticClient
 	{
+		private readonly ITransport<IConnectionSettingsValues> _transport;
+
+		/// <summary>
+		/// Creates a client configured to connect to localhost:9200.
+		/// </summary>
 		public ElasticClient() : this(new ConnectionSettings(new Uri("http://localhost:9200"))) { }
 
+		/// <summary>
+		/// Creates a client configured to connect to a node reachable at the provided <paramref name="uri"/>.
+		/// </summary>
+		/// <param name="uri">The <see cref="Uri"/> to connect to.</param>
 		public ElasticClient(Uri uri) : this(new ConnectionSettings(uri)) { }
 
 		/// <summary>
-		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
-		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
-		/// <para></para>If you want more control use the <see cref="ElasticClient(IConnectionSettingsValues)"/> constructor and pass an instance of
-		/// <see cref="ConnectionSettings" /> that takes <paramref name="cloudId"/> in its constructor as well
+		/// Creates a client configured to communicate with Elastic Cloud using the provided <paramref name="cloudId"/>.
+		/// <para>See the <see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id.</para>
+		/// <para>If you want more control, use the <see cref="ElasticClient(IConnectionSettingsValues)"/> constructor and pass an instance of
+		/// <see cref="ConnectionSettings" /> that takes a <paramref name="cloudId"/> in its constructor as well.</para>
 		/// </summary>
+		/// <param name="cloudId">The Cloud ID of an Elastic Cloud deployment.</param>
+		/// <param name="credentials">The credentials to use for the connection.</param>
 		public ElasticClient(string cloudId, IAuthenticationHeader credentials) : this(new ConnectionSettings(cloudId, credentials)) { }
 
+		/// <summary>
+		/// TODO
+		/// </summary>
+		/// <param name="connectionSettings"></param>
 		public ElasticClient(IConnectionSettingsValues connectionSettings)
-			: this(new Transport<IConnectionSettingsValues>(connectionSettings ?? new ConnectionSettings())) { }
+			: this(new Transport<IConnectionSettingsValues>(connectionSettings)) { }
 
+		/// <summary>
+		/// TODO
+		/// </summary>
+		/// <param name="transport"></param>
 		public ElasticClient(ITransport<IConnectionSettingsValues> transport)
 		{
 			transport.ThrowIfNull(nameof(transport));
@@ -60,59 +53,64 @@ namespace Nest
 			transport.Settings.RequestResponseSerializer.ThrowIfNull(nameof(transport.Settings.RequestResponseSerializer));
 			transport.Settings.Inferrer.ThrowIfNull(nameof(transport.Settings.Inferrer));
 
-			Transport = transport;
+			_transport = transport;
 			
 			SetupNamespaces();
 		}
 
-		partial void SetupNamespaces();
+		private partial void SetupNamespaces();
 
-		public IConnectionSettingsValues ConnectionSettings => Transport.Settings;
-		public Inferrer Infer => Transport.Settings.Inferrer;
-		public ITransportSerializer RequestResponseSerializer => Transport.Settings.RequestResponseSerializer;
-		public ITransportSerializer SourceSerializer => Transport.Settings.SourceSerializer;
-		private ITransport<IConnectionSettingsValues> Transport { get; }
-
-		internal TResponse DoRequest<TRequest, TResponse>(TRequest p, IRequestParameters parameters, Action<IRequestConfiguration> forceConfiguration = null)
+		public IConnectionSettingsValues ConnectionSettings => _transport.Settings;
+		public Inferrer Infer => _transport.Settings.Inferrer;
+		public ITransportSerializer RequestResponseSerializer => _transport.Settings.RequestResponseSerializer;
+		public ITransportSerializer SourceSerializer => _transport.Settings.SourceSerializer;
+		
+		internal TResponse DoRequest<TRequest, TResponse>(
+			TRequest request,
+			IRequestParameters? parameters,
+			Action<IRequestConfiguration>? forceConfiguration = null)
 			where TRequest : class, IRequest
 			where TResponse : class, ITransportResponse, new()
 		{
-			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
-			if (p.ContentType != null) ForceContentType(p, p.ContentType);
-
-			var url = p.GetUrl(ConnectionSettings);
-			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !p.SupportsBody) ? null : PostData.Serializable(p);
-			
-			return Transport.Request<TResponse>(p.HttpMethod, url, b, parameters);
+			var (url, postData) = PrepareRequest(request, forceConfiguration);
+			return _transport.Request<TResponse>(request.HttpMethod, url, postData, parameters);
 		}
 
 		internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
-			TRequest p,
-			IRequestParameters parameters,
-			CancellationToken ct,
-			Action<IRequestConfiguration> forceConfiguration = null
-		)
+			TRequest request,
+			IRequestParameters? parameters,
+			CancellationToken cancellationToken = default,
+			Action<IRequestConfiguration>? forceConfiguration = null)
 			where TRequest : class, IRequest
 			where TResponse : class, ITransportResponse, new()
 		{
-			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
-			if (p.ContentType != null) ForceContentType(p, p.ContentType);
+			var (url, postData) = PrepareRequest(request, forceConfiguration);
+			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, cancellationToken, postData, parameters);
+		}
 
-			var url = p.GetUrl(ConnectionSettings);
-			var b = (p.HttpMethod == HttpMethod.GET || p.HttpMethod == HttpMethod.HEAD || !p.SupportsBody) ? null : PostData.Serializable<TRequest>(p);
+		private (string url, PostData data) PrepareRequest(IRequest request, Action<IRequestConfiguration>? forceConfiguration)
+		{
+			request.ThrowIfNull(nameof(request), "A request is required.");
 
-			return Transport.RequestAsync<TResponse>(p.HttpMethod, url, ct, b, parameters);
+			if (forceConfiguration is not null)
+				ForceConfiguration(request, forceConfiguration);
+			if (request.ContentType is not null)
+				ForceContentType(request, request.ContentType);
+
+			var url = request.GetUrl(ConnectionSettings);
+			var postData = request.HttpMethod == HttpMethod.GET || request.HttpMethod == HttpMethod.HEAD || !request.SupportsBody ? null : PostData.Serializable(request);
+
+			return (url, postData);
 		}
 
 		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
 		{
-			if (forceConfiguration == null) return;
-
 			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 			forceConfiguration(configuration);
 			request.RequestParameters.RequestConfiguration = configuration;
 		}
-		private void ForceContentType<TRequest>(TRequest request, string contentType) where TRequest : class, IRequest
+		
+		private static void ForceContentType<TRequest>(TRequest request, string contentType) where TRequest : class, IRequest
 		{
 			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 			configuration.Accept = contentType;
@@ -125,6 +123,7 @@ namespace Nest
 			requestConfiguration.Accept = RequestData.MimeType;
 			requestConfiguration.ContentType = RequestData.MimeType;
 		}
+		
 		internal static void ForceTextPlain(IRequestConfiguration requestConfiguration)
 		{
 			requestConfiguration.Accept = RequestData.MimeTypeTextPlain;
