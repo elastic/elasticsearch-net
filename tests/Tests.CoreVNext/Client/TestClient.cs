@@ -12,16 +12,17 @@ namespace Tests.Core.Client
 	public static class TestClient
 	{
 		public static readonly TestConfigurationBase Configuration = TestConfiguration.Instance;
-		public static readonly IElasticClient Default = new ElasticClient(new TestConnectionSettings());
-		public static readonly IElasticClient DefaultInMemoryClient = new ElasticClient(new AlwaysInMemoryConnectionSettings());
+		public static readonly IElasticClient Default = new ElasticClient(new TestConnectionSettings().ApplyDomainSettings());
+		public static readonly IElasticClient DefaultInMemoryClient = new ElasticClient(new AlwaysInMemoryConnectionSettings().ApplyDomainSettings());
 		
 		public static IElasticClient FixedInMemoryClient(byte[] response) => new ElasticClient(
 			new AlwaysInMemoryConnectionSettings(response)
+				.ApplyDomainSettings()
 				.DisableDirectStreaming()
 				.EnableHttpCompression(false)
 			);
 
 		public static readonly IElasticClient DisabledStreaming =
-			new ElasticClient(new TestConnectionSettings().DisableDirectStreaming());
+			new ElasticClient(new TestConnectionSettings().ApplyDomainSettings().DisableDirectStreaming());
 	}
 }

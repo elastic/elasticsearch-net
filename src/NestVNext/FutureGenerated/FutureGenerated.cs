@@ -47,4 +47,10 @@ namespace Nest
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}
+
+	//// TODO: Recently removed from spec during validation
+	//public enum TimeUnit
+	//{
+	//	a
+	//}
 }
