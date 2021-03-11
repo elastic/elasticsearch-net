@@ -7,7 +7,7 @@ using Elastic.Transport.Products.Elasticsearch;
 
 namespace Nest
 {
-	public class NestElasticsearchProductRegistration : ElasticsearchProductRegistration
+	internal sealed class NestElasticsearchProductRegistration : ElasticsearchProductRegistration
 	{
 		public static NestElasticsearchProductRegistration DefaultForNest { get; } = new();
 
@@ -16,7 +16,7 @@ namespace Nest
 		/// when <see cref="ITransportConfiguration.ThrowExceptions"/> is enabled for 404's. The client is in charge of composing paths
 		/// so a 404 never signals a wrong url but a missing entity.
 		/// </summary>
-		public override bool HttpStatusCodeClassifier(Elastic.Transport.HttpMethod method, int statusCode) =>
+		public override bool HttpStatusCodeClassifier(HttpMethod method, int statusCode) =>
 			statusCode >= 200 && statusCode < 300
 			|| statusCode == 404;
 		

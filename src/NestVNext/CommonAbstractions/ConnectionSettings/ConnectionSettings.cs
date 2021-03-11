@@ -34,7 +34,7 @@ namespace Nest
 		/// Creates a new instance of connection settings, if <paramref name="uri"/> is not specified will default to connecting to http://localhost:9200
 		/// </summary>
 		/// <param name="uri"></param>
-		public ConnectionSettings(Uri uri = null) : this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
+		public ConnectionSettings(Uri? uri = null) : this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
 
 		/// <summary>
 		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
@@ -76,7 +76,7 @@ namespace Nest
 		//private readonly IPropertyMappingProvider _propertyMappingProvider;
 		//private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
 		private readonly FluentDictionary<Type, string> _routeProperties = new();
-		//private readonly ITransportSerializer _sourceSerializer;
+		private readonly ITransportSerializer _sourceSerializer;
 
 		private bool _defaultDisableAllInference;
 		private Func<string, string> _defaultFieldNameInferrer;
@@ -88,17 +88,19 @@ namespace Nest
 			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory)
 			: base(connectionPool, connection, null, NestElasticsearchProductRegistration.DefaultForNest)
 		{
-			//var formatterResolver = new NestFormatterResolver(this);
-			//var defaultSerializer = new DefaultHighLevelSerializer(formatterResolver);
-			//var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
+			var defaultSerializer = new DefaultHighLevelSerializer();
+			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
 			//var serializerAsMappingProvider = sourceSerializer as IPropertyMappingProvider;
 
 			//_propertyMappingProvider = propertyMappingProvider ?? serializerAsMappingProvider ?? new PropertyMappingProvider();
 
 			//We wrap these in an internal proxy to facilitate serialization diagnostics
 			//_sourceSerializer = new JsonFormatterAwareDiagnosticsSerializerProxy(sourceSerializer, "source");
+			_sourceSerializer = sourceSerializer;
+
 			//UseThisRequestResponseSerializer = new JsonFormatterAwareDiagnosticsSerializerProxy(defaultSerializer);
-			
+			UseThisRequestResponseSerializer = defaultSerializer;
+
 			_defaultFieldNameInferrer = p => p.ToCamelCase();
 			_defaultIndices = new FluentDictionary<Type, string>();
 			_defaultRelationNames = new FluentDictionary<Type, string>();
@@ -119,7 +121,7 @@ namespace Nest
 		//IPropertyMappingProvider IConnectionSettingsValues.PropertyMappingProvider => _propertyMappingProvider;
 		//FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 		FluentDictionary<Type, string> IConnectionSettingsValues.RouteProperties => _routeProperties;
-		//ITransportSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
+		ITransportSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
 
 		/// <summary>
 		/// The default index to use for a request when no index has been explicitly specified

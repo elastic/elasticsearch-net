@@ -4,12 +4,37 @@
 
 using System;
 using System.Globalization;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
 
 namespace Nest
 {
+	public enum TimeUnit
+	{
+		[EnumMember(Value = "nanos")]
+		Nanoseconds,
+
+		[EnumMember(Value = "micros")]
+		Microseconds,
+
+		[EnumMember(Value = "ms")]
+		Millisecond,
+
+		[EnumMember(Value = "s")]
+		Second,
+
+		[EnumMember(Value = "m")]
+		Minute,
+
+		[EnumMember(Value = "h")]
+		Hour,
+
+		[EnumMember(Value = "d")]
+		Day
+	}
+
 	/// <summary>
 	/// Represents a time value
 	/// </summary>
@@ -56,12 +81,12 @@ namespace Nest
 			else Reduce(milliseconds);
 		}
 
-		public Time(double factor, TimeUnit interval)
-		{
-			Factor = factor;
-			Interval = interval;
-			Milliseconds = GetExactMilliseconds(Factor.Value, Interval.Value);
-		}
+		//public Time(double factor, TimeUnit interval)
+		//{
+		//	Factor = factor;
+		//	Interval = interval;
+		//	Milliseconds = GetExactMilliseconds(Factor.Value, Interval.Value);
+		//}
 
 		public Time(string timeUnit)
 		{

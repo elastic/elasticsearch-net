@@ -8,7 +8,7 @@ namespace Playground
     {
 	    private static async Task Main()
 	    {
-		    IElasticClient client = new ElasticClient(new Uri("http://localhost:9600"));
+			IElasticClient client = new ElasticClient(new Uri("http://localhost:9600"));
 
 		    var request = new ClusterHealthRequest("test")
 		    {
@@ -19,9 +19,18 @@ namespace Playground
 
 		    if (response.IsValid)
 		    {
-			    Console.WriteLine(response.ClusterName);
-			    Console.WriteLine(response.ActivePrimaryShards);
+			    Console.WriteLine($"Cluster Name: {response.ClusterName}");
+				Console.WriteLine($"Status: {response.Status:G}");
+				Console.WriteLine($"Active Primaries: {response.ActivePrimaryShards}");
 			}
-	    }
+
+		    // TODO: It might be kinda nice if the client accepts no request here and uses a cached default instance
+		    var searchResponse = await client.SearchAsync(new SearchRequest());
+
+			if (searchResponse.IsValid)
+			{
+				Console.WriteLine($"Took: {searchResponse.Took}");
+			}
+		}
     }
 }
