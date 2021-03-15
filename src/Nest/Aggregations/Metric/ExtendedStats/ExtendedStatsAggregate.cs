@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System.Runtime.Serialization;
+using Nest.Utf8Json;
 
 namespace Nest
 {
@@ -73,9 +74,11 @@ namespace Nest
 		public double? UpperPopulation { get; set; }
 
 		[DataMember(Name = "lower_sampling")]
+		[JsonFormatter(typeof(NullableStringDoubleFormatter))]
 		public double? LowerSampling { get; set; }
 
 		[DataMember(Name = "upper_sampling")]
+		[JsonFormatter(typeof(NullableStringDoubleFormatter))]
 		public double? UpperSampling { get; set; }
 	}
 }
