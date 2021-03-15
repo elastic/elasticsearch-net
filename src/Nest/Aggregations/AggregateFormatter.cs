@@ -639,6 +639,8 @@ namespace Nest
 			extendedStatsMetric.SumOfSquares = reader.ReadNullableDouble();
 			reader.ReadNext(); // ,
 
+			var formatter = new NullableStringDoubleFormatter();
+
 			while (reader.GetCurrentJsonToken() != JsonToken.EndObject)
 			{
 				var propertyName = reader.ReadPropertyNameSegmentRaw();
@@ -660,13 +662,13 @@ namespace Nest
 							extendedStatsMetric.VariancePopulation = reader.ReadNullableDouble();
 							break;
 						case 4:
-							extendedStatsMetric.VarianceSampling = reader.ReadNullableDouble();
+							extendedStatsMetric.VarianceSampling = formatter.Deserialize(ref reader, formatterResolver);
 							break;
 						case 5:
 							extendedStatsMetric.StdDeviationPopulation = reader.ReadNullableDouble();
 							break;
 						case 6:
-							extendedStatsMetric.StdDeviationSampling = reader.ReadNullableDouble();
+							extendedStatsMetric.StdDeviationSampling = formatter.Deserialize(ref reader, formatterResolver);
 							break;
 					}
 				}
