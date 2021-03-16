@@ -40,5 +40,5 @@ jobs:
               make-docker-cache-
             
       - run: "./.ci/make.sh assemble ${{ matrix.stack_version }}"
-        name: ${{ matrix.stack_version }}
+        name: Assembke ${{ matrix.stack_version }}
           
