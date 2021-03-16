@@ -11,6 +11,7 @@ repo=$(realpath "$script_path/../")
 # shellcheck disable=SC1090
 CMD=$1
 TASK=$1
+TASK_ARGS=()
 VERSION=$2
 STACK_VERSION=$VERSION
 set -euo pipefail
@@ -32,8 +33,14 @@ docker build --file .ci/DockerFile --tag elastic/elasticsearch-net .
 echo -e "\033[1m>>>>> Run [elastic/elasticsearch-net container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
 
 case $CMD in
+    clean)
+		echo -e "\033[36;1mRemoving $output_folder\033[0m"
+        TASK=clean
+        rm -rf "$output_folder"
+        ;;
     assemble)
         TASK=release
+        TASK_ARGS=("$VERSION" "$output_folder" "skiptests")
         ;;
     *)
         echo -e "\nUsage:\n\t $CMD is not supported right now\n"
@@ -47,4 +54,4 @@ docker run \
   --volume "${OUTPUT_DIR}:/sln/${output_folder}" \
   --rm \
   elastic/elasticsearch-net \
-  ./build.sh $TASK "$VERSION" "$output_folder" "skiptests"
+  ./build.sh $TASK "${TASK_ARGS[@]}"
