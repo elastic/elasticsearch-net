@@ -27,6 +27,7 @@ namespace Nest
 	{
 		public MultiTermQueryRewrite Rewrite { get; set; }
 		public object Value { get; set; }
+		public bool? CaseInsensitive { get; set; }
 		protected override bool Conditionless => TermQuery.IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Wildcard = this;

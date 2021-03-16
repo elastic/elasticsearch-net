@@ -14,18 +14,29 @@ namespace Nest
 		[DataMember(Name = "value")]
 		[JsonFormatter(typeof(SourceWriteFormatter<object>))]
 		object Value { get; set; }
+
+		[DataMember(Name = "case_insensitive")]
+		bool? CaseInsensitive { get; set; }
 	}
 
 	[DataContract]
 	public class TermQuery : FieldNameQueryBase, ITermQuery
 	{
 		public object Value { get; set; }
+		
+		public bool? CaseInsensitive { get; set; }
 
 		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Term = this;
 
 		internal static bool IsConditionless(ITermQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
+
+		internal static bool IsConditionless(ISpanTermQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
+
+		internal static bool IsConditionless(IWildcardQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
+
+		internal static bool IsConditionless(IPrefixQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
 	}
 
 	public abstract class TermQueryDescriptorBase<TDescriptor, TInterface, T>
@@ -37,10 +48,17 @@ namespace Nest
 	{
 		protected override bool Conditionless => TermQuery.IsConditionless(this);
 		object ITermQuery.Value { get; set; }
+		bool? ITermQuery.CaseInsensitive { get; set; }
 
 		public TDescriptor Value(object value)
 		{
 			Self.Value = value;
+			return (TDescriptor)this;
+		}
+
+		public TDescriptor CaseInsensitive(bool? caseInsensitive = true)
+		{
+			Self.CaseInsensitive = caseInsensitive;
 			return (TDescriptor)this;
 		}
 	}
