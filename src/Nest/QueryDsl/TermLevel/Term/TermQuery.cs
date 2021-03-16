@@ -31,12 +31,6 @@ namespace Nest
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Term = this;
 
 		internal static bool IsConditionless(ITermQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
-
-		internal static bool IsConditionless(ISpanTermQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
-
-		internal static bool IsConditionless(IWildcardQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
-
-		internal static bool IsConditionless(IPrefixQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
 	}
 
 	public abstract class TermQueryDescriptorBase<TDescriptor, TInterface, T>

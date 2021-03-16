@@ -21,15 +21,18 @@ namespace Nest
 	{
 		public object Value { get; set; }
 		
-		protected override bool Conditionless => TermQuery.IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.SpanTerm = this;
+
+		internal static bool IsConditionless(ISpanTermQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
 	}
 
 	public class SpanTermQueryDescriptor<T> : FieldNameQueryDescriptorBase<SpanTermQueryDescriptor<T>, ISpanTermQuery, T>, ISpanTermQuery
 		where T : class
 	{
-		protected override bool Conditionless => TermQuery.IsConditionless(this);
+		protected override bool Conditionless => SpanTermQuery.IsConditionless(this);
+		
 		object ISpanTermQuery.Value { get; set; }
 
 		public SpanTermQueryDescriptor<T> Value(object value) =>
