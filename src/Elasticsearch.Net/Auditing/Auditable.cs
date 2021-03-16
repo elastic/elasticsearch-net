@@ -21,8 +21,7 @@ namespace Elasticsearch.Net
 			_dateTimeProvider = dateTimeProvider;
 			var started = _dateTimeProvider.Now();
 
-			_audit = new Audit(type, started);
-			_audit.Node = node;
+			_audit = new Audit(type, started) { Node = node };
 			auditTrail.Add(_audit);
 			var diagnosticName = type.GetAuditDiagnosticEventName();
 			_activity = diagnosticName != null ? DiagnosticSource.Diagnose(diagnosticName, _audit) : null;
@@ -43,9 +42,11 @@ namespace Elasticsearch.Net
 			set => _audit.Path = value;
 		}
 
+		public void Stop() => _audit.Ended = _dateTimeProvider.Now();
+
 		public void Dispose()
 		{
-			_audit.Ended = _dateTimeProvider.Now();
+			_audit.Ended = _audit.Ended == default ? _dateTimeProvider.Now() : _audit.Ended;
 			_activity?.Dispose();
 		}
 	}
