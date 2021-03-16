@@ -34,7 +34,7 @@ echo -e "\033[1m>>>>> Run [elastic/elasticsearch-net container] >>>>>>>>>>>>>>>>
 
 case $CMD in
     clean)
-		echo -e "\033[36;1mRemoving $output_folder\033[0m"
+        echo -e "\033[36;1mRemoving $output_folder\033[0m"
         TASK=clean
         rm -rf "$output_folder"
         ;;
