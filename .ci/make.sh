@@ -11,6 +11,7 @@ repo=$(realpath "$script_path/../")
 # shellcheck disable=SC1090
 CMD=$1
 TASK=$1
+TASK_ARGS=()
 VERSION=$2
 STACK_VERSION=$VERSION
 set -euo pipefail
@@ -41,6 +42,7 @@ case $CMD in
         ;;
     assemble)
         TASK=release
+        TASK_ARGS=("$VERSION" "$output_folder" "skiptests")
         ;;
     codegen)
         TASK=codegen
