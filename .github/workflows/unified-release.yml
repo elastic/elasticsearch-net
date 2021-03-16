@@ -31,14 +31,7 @@ jobs:
       - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '5.0.100'
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
-        with:
-          key: make-docker-cache-{hash}
-          restore-keys: |
-              make-docker-cache-
             
       - run: "./.ci/make.sh assemble ${{ matrix.stack_version }}"
-        name: Assembke ${{ matrix.stack_version }}
+        name: Assemble ${{ matrix.stack_version }}
           
