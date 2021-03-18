@@ -317,14 +317,6 @@ namespace Nest
 
     public class ClusterPutSettingsResponse : ResponseBase
     {
-        [JsonPropertyName("acknowledged")]
-        public bool Acknowledged { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
     }
 
     public class RemoteInfoResponse : DictionaryResponseBase
@@ -333,14 +325,6 @@ namespace Nest
 
     public class ClusterRerouteResponse : ResponseBase
     {
-        [JsonPropertyName("acknowledged")]
-        public bool Acknowledged { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
     }
 
     public class ClusterStateResponse : ResponseBase

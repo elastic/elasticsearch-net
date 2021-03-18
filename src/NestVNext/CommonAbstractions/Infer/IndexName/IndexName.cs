@@ -66,7 +66,8 @@ namespace Nest
 
 		private static IndexName? Parse(string indexName)
 		{
-			if (string.IsNullOrWhiteSpace(indexName)) return null;
+			if (string.IsNullOrWhiteSpace(indexName))
+				return null;
 
 			var separatorIndex = indexName.IndexOf(ClusterSeparator);
 
@@ -117,11 +118,13 @@ namespace Nest
 
 		private bool EqualsMarker(IndexName other)
 		{
-			if (other == null) return false;
+			if (other == null)
+				return false;
 			if (!Name.IsNullOrEmpty() && !other.Name.IsNullOrEmpty())
 				return EqualsString(PrefixClusterName(other, other.Name));
 
-			if ((!Cluster.IsNullOrEmpty() || !other.Cluster.IsNullOrEmpty()) && Cluster != other.Cluster) return false;
+			if ((!Cluster.IsNullOrEmpty() || !other.Cluster.IsNullOrEmpty()) && Cluster != other.Cluster)
+				return false;
 
 			return Type != null && other.Type != null && Type == other.Type;
 		}

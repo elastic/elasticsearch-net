@@ -29,10 +29,14 @@ namespace Nest
 		{
 			switch (obj)
 			{
-				case int l: return Value == l;
-				case long l: return Value == l;
-				case Timestamp i: return Value == i.Value;
-				default: return false;
+				case int l:
+					return Value == l;
+				case long l:
+					return Value == l;
+				case Timestamp i:
+					return Value == i.Value;
+				default:
+					return false;
 			}
 		}
 

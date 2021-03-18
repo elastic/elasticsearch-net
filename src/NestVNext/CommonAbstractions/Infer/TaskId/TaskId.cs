@@ -65,5 +65,5 @@ namespace Nest
 			}
 		}
 	}
-	
+
 }

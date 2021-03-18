@@ -57,15 +57,6 @@ namespace Nest
 #endif
         }
 
-        [JsonPropertyName("retention_deletion_time_millis")]
-        public long RetentionDeletionTimeMillis { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
         [JsonPropertyName("retention_failed")]
         public long RetentionFailed { get; 
 #if NET5_0

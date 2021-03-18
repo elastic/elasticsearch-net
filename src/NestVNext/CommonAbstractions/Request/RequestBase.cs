@@ -85,7 +85,7 @@ namespace Nest
 		[IgnoreDataMember]
 		RouteValues IRequest.RouteValues { get; } = new();
 
-		internal abstract ApiUrls ApiUrls { get;  }
+		internal abstract ApiUrls ApiUrls { get; }
 
 		string IRequest.GetUrl(IConnectionSettingsValues settings) => ResolveUrl(RequestState.RouteValues, settings);
 

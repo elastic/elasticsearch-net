@@ -40,7 +40,8 @@ namespace Nest
 
 		public string Resolve(Type type, object @object)
 		{
-			if (type == null || @object == null) return null;
+			if (type == null || @object == null)
+				return null;
 			if (_connectionSettings.DefaultDisableIdInference || _connectionSettings.DisableIdInference.Contains(type))
 				return null;
 
@@ -53,7 +54,8 @@ namespace Nest
 				return cachedLookup(@object);
 
 			var idProperty = GetInferredId(type);
-			if (idProperty == null) return null;
+			if (idProperty == null)
+				return null;
 
 			var getMethod = idProperty.GetMethod;
 			var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);

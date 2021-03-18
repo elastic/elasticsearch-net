@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using Elastic.Transport;
 using Elastic.Transport.Products;
 using Elastic.Transport.Products.Elasticsearch;
@@ -158,7 +157,8 @@ namespace Nest
 
 			if (_idProperties.TryGetValue(typeof(TDocument), out var idPropertyFieldName))
 			{
-				if (idPropertyFieldName.Equals(fieldName)) return;
+				if (idPropertyFieldName.Equals(fieldName))
+					return;
 
 				throw new ArgumentException(
 					$"Cannot map '{fieldName}' as the id property for type '{typeof(TDocument).Name}': it already has '{_idProperties[typeof(TDocument)]}' mapped.");
@@ -177,7 +177,8 @@ namespace Nest
 
 			if (_routeProperties.TryGetValue(typeof(TDocument), out var routePropertyFieldName))
 			{
-				if (routePropertyFieldName.Equals(fieldName)) return;
+				if (routePropertyFieldName.Equals(fieldName))
+					return;
 
 				throw new ArgumentException(
 					$"Cannot map '{fieldName}' as the route property for type '{typeof(TDocument).Name}': it already has '{_routeProperties[typeof(TDocument)]}' mapped.");
@@ -249,8 +250,10 @@ namespace Nest
 			if (inferMapping.Properties != null)
 				ApplyPropertyMappings(inferMapping.Properties);
 
-			if (inferMapping.DisableIdInference) _disableIdInference.Add(inferMapping.ClrType);
-			else _disableIdInference.Remove(inferMapping.ClrType);
+			if (inferMapping.DisableIdInference)
+				_disableIdInference.Add(inferMapping.ClrType);
+			else
+				_disableIdInference.Remove(inferMapping.ClrType);
 
 			return (TConnectionSettings)this;
 		}
@@ -280,7 +283,8 @@ namespace Nest
 		/// </summary>
 		public TConnectionSettings DefaultMappingFor(IEnumerable<IClrTypeMapping> typeMappings)
 		{
-			if (typeMappings == null) return (TConnectionSettings)this;
+			if (typeMappings == null)
+				return (TConnectionSettings)this;
 
 			foreach (var inferMapping in typeMappings)
 			{

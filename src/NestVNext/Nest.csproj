@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  
   <PropertyGroup>
     <PackageId>NEST</PackageId>
     <Title>NEST - Elasticsearch .NET high level client</Title>
@@ -9,7 +8,6 @@
       responses. Uses and exposes Elasticsearch.Net.
     </Description>
   </PropertyGroup>
-  
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -18,14 +16,11 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>annotations</Nullable>
   </PropertyGroup>
-  
   <ItemGroup>
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit" Version="4.3.0" />
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
   </ItemGroup>
-  
   <ItemGroup>
     <ProjectReference Include="..\..\..\elastic-transport-net\src\Elastic.Transport\Elastic.Transport.csproj" />
   </ItemGroup>
-
 </Project>

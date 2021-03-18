@@ -28,8 +28,10 @@ namespace Nest
 				var sb = new StringBuilder();
 				sb.Append($"{(!IsValid ? "Inv" : "V")}alid NEST response built from a ");
 				sb.AppendLine(ApiCall?.ToString().ToCamelCase() ?? "null ApiCall which is highly exceptional, please open a bug if you see this");
-				if (!IsValid) DebugIsValid(sb);
-				if (ApiCall != null) ResponseStatics.DebugInformationBuilder(ApiCall, sb);
+				if (!IsValid)
+					DebugIsValid(sb);
+				if (ApiCall != null)
+					ResponseStatics.DebugInformationBuilder(ApiCall, sb);
 				return sb.ToString();
 			}
 		}
@@ -40,11 +42,12 @@ namespace Nest
 			get
 			{
 				var statusCode = ApiCall?.HttpStatusCode;
-				if (statusCode == 404) return false;
+				if (statusCode == 404)
+					return false;
 				return (ApiCall?.Success ?? false) && ServerError is null;
 			}
 		}
-		
+
 		/// <inheritdoc />
 		public Exception? OriginalException => ApiCall?.OriginalException;
 
@@ -66,14 +69,16 @@ namespace Nest
 		{
 			get
 			{
-				if (_serverError is not null) return _serverError;
-				if (_error is null) return null; // TODO: Would prefer to return a representation of no error, rather than null
+				if (_serverError is not null)
+					return _serverError;
+				if (_error is null)
+					return null; // TODO: Would prefer to return a representation of no error, rather than null
 
 				_serverError = new ServerError(_error, _statusCode);
 				return _serverError;
 			}
 		}
-		
+
 		[JsonPropertyName("error")]
 		internal Error? Error
 		{
@@ -84,7 +89,7 @@ namespace Nest
 				_serverError = null;
 			}
 		}
-		
+
 		[JsonPropertyName("status")]
 		internal int? StatusCode
 		{

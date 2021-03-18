@@ -54,7 +54,7 @@ namespace Nest
     {
     }
 
-    public class GetRepositoryResponse : ResponseBase
+    public class GetRepositoryResponse : DictionaryResponseBase
     {
     }
 

@@ -110,21 +110,31 @@ namespace Nest
 		{
 			switch (obj)
 			{
-				case Fields f: return Equals(f);
-				case string s: return Equals(s);
-				case Field fn: return Equals(fn);
-				case Field[] fns: return Equals(fns);
-				case Expression e: return Equals(e);
-				case Expression[] es: return Equals(es);
-				default: return false;
+				case Fields f:
+					return Equals(f);
+				case string s:
+					return Equals(s);
+				case Field fn:
+					return Equals(fn);
+				case Field[] fns:
+					return Equals(fns);
+				case Expression e:
+					return Equals(e);
+				case Expression[] es:
+					return Equals(es);
+				default:
+					return false;
 			}
 		}
 
 		private static bool EqualsAllFields(IReadOnlyList<Field> thisTypes, IReadOnlyList<Field> otherTypes)
 		{
-			if (thisTypes == null && otherTypes == null) return true;
-			if (thisTypes == null || otherTypes == null) return false;
-			if (thisTypes.Count != otherTypes.Count) return false;
+			if (thisTypes == null && otherTypes == null)
+				return true;
+			if (thisTypes == null || otherTypes == null)
+				return false;
+			if (thisTypes.Count != otherTypes.Count)
+				return false;
 
 			return thisTypes.Count == otherTypes.Count && !thisTypes.Except(otherTypes).Any();
 		}

@@ -54,7 +54,7 @@ namespace Nest
 			transport.Settings.Inferrer.ThrowIfNull(nameof(transport.Settings.Inferrer));
 
 			_transport = transport;
-			
+
 			SetupNamespaces();
 		}
 
@@ -64,7 +64,7 @@ namespace Nest
 		public Inferrer Infer => _transport.Settings.Inferrer;
 		public ITransportSerializer RequestResponseSerializer => _transport.Settings.RequestResponseSerializer;
 		public ITransportSerializer SourceSerializer => _transport.Settings.SourceSerializer;
-		
+
 		internal TResponse DoRequest<TRequest, TResponse>(
 			TRequest request,
 			IRequestParameters? parameters,
@@ -109,7 +109,7 @@ namespace Nest
 			forceConfiguration(configuration);
 			request.RequestParameters.RequestConfiguration = configuration;
 		}
-		
+
 		private static void ForceContentType<TRequest>(TRequest request, string contentType) where TRequest : class, IRequest
 		{
 			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
@@ -123,7 +123,7 @@ namespace Nest
 			requestConfiguration.Accept = RequestData.MimeType;
 			requestConfiguration.ContentType = RequestData.MimeType;
 		}
-		
+
 		internal static void ForceTextPlain(IRequestConfiguration requestConfiguration)
 		{
 			requestConfiguration.Accept = RequestData.MimeTypeTextPlain;

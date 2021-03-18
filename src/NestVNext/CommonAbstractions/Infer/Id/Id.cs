@@ -44,7 +44,8 @@ namespace Nest
 		{
 			if (Tag + other.Tag == 1)
 				return StringOrLongValue == other.StringOrLongValue;
-			else if (Tag != other.Tag) return false;
+			else if (Tag != other.Tag)
+				return false;
 
 			switch (Tag)
 			{
@@ -76,11 +77,16 @@ namespace Nest
 		{
 			switch (obj)
 			{
-				case Id r: return Equals(r);
-				case string s: return Equals(s);
-				case int l: return Equals(l);
-				case long l: return Equals(l);
-				case Guid g: return Equals(g);
+				case Id r:
+					return Equals(r);
+				case string s:
+					return Equals(s);
+				case int l:
+					return Equals(l);
+				case long l:
+					return Equals(l);
+				case Guid g:
+					return Equals(g);
 			}
 			return Equals(new Id(obj));
 		}

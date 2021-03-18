@@ -843,12 +843,12 @@ namespace Nest
         protected override HttpMethod HttpMethod => HttpMethod.POST;
         protected override bool SupportsBody => false;
         ///<summary>/{alias}/_rollover</summary>
-        public RolloverIndexRequest(Alias alias): base(r => r.Required("alias", alias))
+        public RolloverIndexRequest(IndexAlias alias): base(r => r.Required("alias", alias))
         {
         }
 
         ///<summary>/{alias}/_rollover/{new_index}</summary>
-        public RolloverIndexRequest(Alias alias, IndexName newIndex): base(r => r.Required("alias", alias).Optional("new_index", newIndex))
+        public RolloverIndexRequest(IndexAlias alias, IndexName newIndex): base(r => r.Required("alias", alias).Optional("new_index", newIndex))
         {
         }
 
@@ -860,7 +860,7 @@ namespace Nest
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+        public int? WaitForActiveShards { get => Q<int?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public interface ISegmentsRequest : IRequest<SegmentsRequestParameters>
