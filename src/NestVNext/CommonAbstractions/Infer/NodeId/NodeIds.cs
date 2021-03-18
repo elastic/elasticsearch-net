@@ -42,9 +42,12 @@ namespace Nest
 
 		private static bool EqualsAllIds(ICollection<string> thisIds, ICollection<string> otherIds)
 		{
-			if (thisIds == null && otherIds == null) return true;
-			if (thisIds == null || otherIds == null) return false;
-			if (thisIds.Count != otherIds.Count) return false;
+			if (thisIds == null && otherIds == null)
+				return true;
+			if (thisIds == null || otherIds == null)
+				return false;
+			if (thisIds.Count != otherIds.Count)
+				return false;
 
 			return thisIds.Count == otherIds.Count && !thisIds.Except(otherIds).Any();
 		}

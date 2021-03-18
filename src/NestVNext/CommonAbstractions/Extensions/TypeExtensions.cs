@@ -57,9 +57,9 @@ namespace Nest
 
 			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 			var constructors = from c in t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-				let p = c.GetParameters()
-				where p.Length == args.Length
-				select c;
+							   let p = c.GetParameters()
+							   where p.Length == args.Length
+							   select c;
 
 			var ctor = constructors.FirstOrDefault();
 			if (ctor == null)

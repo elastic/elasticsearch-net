@@ -29,9 +29,12 @@ namespace Nest
 
 		public bool Equals(Ids other)
 		{
-			if (other == null) return false;
-			if (_ids == null && other._ids == null) return true;
-			if (_ids == null || other._ids == null) return false;
+			if (other == null)
+				return false;
+			if (_ids == null && other._ids == null)
+				return true;
+			if (_ids == null || other._ids == null)
+				return false;
 
 			return _ids.Count == other._ids.Count &&
 				_ids.OrderBy(id => id).SequenceEqual(other._ids.OrderBy(id => id));
@@ -50,7 +53,8 @@ namespace Nest
 
 		public override int GetHashCode()
 		{
-			if (_ids == null) return 0;
+			if (_ids == null)
+				return 0;
 			unchecked
 			{
 				var hc = 0;

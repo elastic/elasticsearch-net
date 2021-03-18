@@ -115,7 +115,8 @@ namespace Nest
 		private static string ParseFieldName(string name, out double? boost)
 		{
 			boost = null;
-			if (name == null) return null;
+			if (name == null)
+				return null;
 
 			var caretIndex = name.IndexOf('^');
 			if (caretIndex == -1)
@@ -147,10 +148,14 @@ namespace Nest
 		{
 			switch (obj)
 			{
-				case string s: return Equals(s);
-				case PropertyInfo p: return Equals(p);
-				case Field f: return Equals(f);
-				default: return false;
+				case string s:
+					return Equals(s);
+				case PropertyInfo p:
+					return Equals(p);
+				case Field f:
+					return Equals(f);
+				default:
+					return false;
 			}
 		}
 

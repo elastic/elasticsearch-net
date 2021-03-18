@@ -56,15 +56,6 @@ namespace Nest
 
     public class PostLicenseResponse : ResponseBase
     {
-        [JsonPropertyName("acknowledged")]
-        public bool Acknowledged { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
         [JsonPropertyName("license_status")]
         public LicenseStatus LicenseStatus { get; 
 #if NET5_0
@@ -109,6 +100,15 @@ namespace Nest
 
         [JsonPropertyName("trial_was_started")]
         public bool TrialWasStarted { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("type")]
+        public LicenseType Type { get; 
 #if NET5_0
             init;
 #else

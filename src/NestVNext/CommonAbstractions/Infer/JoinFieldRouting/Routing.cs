@@ -55,7 +55,8 @@ namespace Nest
 
 		public bool Equals(Routing other)
 		{
-			if (other == null) return false;
+			if (other == null)
+				return false;
 			if (Tag == other.Tag)
 			{
 				switch (Tag)
@@ -64,7 +65,8 @@ namespace Nest
 						var t = DocumentGetter();
 						var o = other.DocumentGetter();
 						return t?.Equals(o) ?? false;
-					case 4: return Document?.Equals(other.Document) ?? false;
+					case 4:
+						return Document?.Equals(other.Document) ?? false;
 					default:
 						return StringEquals(StringOrLongValue, other.StringOrLongValue);
 				}
@@ -112,15 +114,18 @@ namespace Nest
 
 		private static bool StringEquals(string left, string right)
 		{
-			if (left == null && right == null) return true;
+			if (left == null && right == null)
+				return true;
 			else if (left == null || right == null)
 				return false;
 
-			if (!left.Contains(",") || !right.Contains(",")) return left == right;
+			if (!left.Contains(",") || !right.Contains(","))
+				return left == right;
 
 			var l1 = left.Split(Separator, StringSplitOptions.RemoveEmptyEntries).Select(v => v.Trim()).ToList();
 			var l2 = right.Split(Separator, StringSplitOptions.RemoveEmptyEntries).Select(v => v.Trim()).ToList();
-			if (l1.Count != l2.Count) return false;
+			if (l1.Count != l2.Count)
+				return false;
 
 			return l1.Count == l2.Count && !l1.Except(l2).Any();
 		}
@@ -129,11 +134,16 @@ namespace Nest
 		{
 			switch (obj)
 			{
-				case Routing r: return Equals(r);
-				case string s: return Equals(s);
-				case int l: return Equals(l);
-				case long l: return Equals(l);
-				case Guid g: return Equals(g);
+				case Routing r:
+					return Equals(r);
+				case string s:
+					return Equals(s);
+				case int l:
+					return Equals(l);
+				case long l:
+					return Equals(l);
+				case Guid g:
+					return Equals(g);
 			}
 
 			return Equals(new Routing(obj));

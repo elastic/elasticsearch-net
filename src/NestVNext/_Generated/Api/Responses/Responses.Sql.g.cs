@@ -48,5 +48,13 @@ namespace Nest
 
     public class TranslateSqlResponse : ResponseBase
     {
+        [JsonPropertyName("size")]
+        public long Size { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 }

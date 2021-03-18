@@ -22,7 +22,8 @@ namespace Nest
 		public string Resolve(Expression expression, bool toLastToken = false)
 		{
 			Visit(expression);
-			if (toLastToken) return _stack.Last();
+			if (toLastToken)
+				return _stack.Last();
 
 			return _stack
 				.Aggregate(
@@ -36,7 +37,8 @@ namespace Nest
 
 		protected override Expression VisitMember(MemberExpression expression)
 		{
-			if (_stack == null) return base.VisitMember(expression);
+			if (_stack == null)
+				return base.VisitMember(expression);
 
 			var name = Resolve(expression.Member);
 			_stack.Push(name);
@@ -62,7 +64,8 @@ namespace Nest
 					|| typeof(IDictionary<,>).IsAssignableFrom(t)
 					|| t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IDictionary<,>);
 
-				if (!isDict) return base.VisitMethodCall(methodCall);
+				if (!isDict)
+					return base.VisitMethodCall(methodCall);
 
 				VisitConstantOrVariable(methodCall, _stack);
 				Visit(methodCall.Object);
@@ -70,7 +73,8 @@ namespace Nest
 			}
 			else if (IsLinqOperator(methodCall.Method))
 			{
-				for (var i = 1; i < methodCall.Arguments.Count; i++) Visit(methodCall.Arguments[i]);
+				for (var i = 1; i < methodCall.Arguments.Count; i++)
+					Visit(methodCall.Arguments[i]);
 				Visit(methodCall.Arguments[0]);
 				return methodCall;
 			}

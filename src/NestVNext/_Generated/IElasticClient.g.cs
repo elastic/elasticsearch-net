@@ -26,23 +26,13 @@ namespace Nest
     {
         AsyncSearchNamespace AsyncSearch { get; }
 
-        AutoscalingNamespace Autoscaling { get; }
-
         CatNamespace Cat { get; }
 
         CrossClusterReplicationNamespace CrossClusterReplication { get; }
 
         ClusterNamespace Cluster { get; }
 
-        DanglingIndicesNamespace DanglingIndices { get; }
-
-        DataFrameTransformDeprecatedNamespace DataFrameTransformDeprecated { get; }
-
         EnrichNamespace Enrich { get; }
-
-        EqlNamespace Eql { get; }
-
-        FeaturesNamespace Features { get; }
 
         GraphNamespace Graph { get; }
 
@@ -54,19 +44,13 @@ namespace Nest
 
         LicenseNamespace License { get; }
 
-        LogstashNamespace Logstash { get; }
-
         MigrationNamespace Migration { get; }
 
         MachineLearningNamespace MachineLearning { get; }
 
-        MonitoringNamespace Monitoring { get; }
-
         NodesNamespace Nodes { get; }
 
         RollupNamespace Rollup { get; }
-
-        SearchableSnapshotsNamespace SearchableSnapshots { get; }
 
         SecurityNamespace Security { get; }
 

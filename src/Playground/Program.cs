@@ -10,7 +10,7 @@ namespace Playground
 	    {
 			IElasticClient client = new ElasticClient(new Uri("http://localhost:9600"));
 
-		    var request = new ClusterHealthRequest("test")
+		    var request = new ClusterHealthRequest
 		    {
 			    Level = Level.Cluster
 		    };

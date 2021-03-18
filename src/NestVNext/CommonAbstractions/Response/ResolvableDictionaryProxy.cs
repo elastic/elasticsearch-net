@@ -2,11 +2,9 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Elastic.Transport;
-using Elastic.Transport.Products.Elasticsearch.Failures;
 
 namespace Nest
 {
@@ -18,7 +16,8 @@ namespace Nest
 		internal ResolvableDictionaryProxy(IConnectionConfigurationValues connectionSettings, IReadOnlyDictionary<TKey, TValue> backingDictionary)
 		{
 			_connectionSettings = connectionSettings;
-			if (backingDictionary == null) return;
+			if (backingDictionary == null)
+				return;
 
 			Original = backingDictionary;
 

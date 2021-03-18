@@ -56,7 +56,7 @@ dotnet_style_require_accessibility_modifiers = for_non_interface_members:error
 dotnet_style_readonly_field = true:error
 
 # CSharp code style settings:
-[*.cs]
+[*.{cs}]
 # Prefer "var" everywhere
 csharp_style_var_for_built_in_types = true:error
 csharp_style_var_when_type_is_apparent = true:error

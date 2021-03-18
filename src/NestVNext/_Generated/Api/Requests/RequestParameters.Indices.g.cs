@@ -392,7 +392,7 @@ namespace Nest
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+        public int? WaitForActiveShards { get => Q<int?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public class SegmentsRequestParameters : RequestParameters<SegmentsRequestParameters>

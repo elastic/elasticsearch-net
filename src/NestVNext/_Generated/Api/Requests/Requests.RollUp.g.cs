@@ -128,7 +128,7 @@ namespace Nest
         {
         }
 
-        public bool? TotalHitsAsInteger { get => Q<bool?>("total_hits_as_integer"); set => Q("total_hits_as_integer", value); }
+        public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
         public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
     }

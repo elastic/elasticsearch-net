@@ -53,7 +53,8 @@ namespace Nest
 				case 1:
 					second(Item2);
 					break;
-				default: throw new Exception($"Unrecognized tag value: {Tag}");
+				default:
+					throw new Exception($"Unrecognized tag value: {Tag}");
 			}
 		}
 
@@ -66,9 +67,12 @@ namespace Nest
 		{
 			switch (Tag)
 			{
-				case 0: return first(Item1);
-				case 1: return second(Item2);
-				default: throw new Exception($"Unrecognized tag value: {Tag}");
+				case 0:
+					return first(Item1);
+				case 1:
+					return second(Item2);
+				default:
+					throw new Exception($"Unrecognized tag value: {Tag}");
 			}
 		}
 

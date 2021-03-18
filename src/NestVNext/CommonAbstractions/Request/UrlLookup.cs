@@ -58,11 +58,13 @@ namespace Nest
 
 						sb.Append(Uri.EscapeDataString(v));
 					}
-					else throw new Exception($"No value provided for '{_parts[i]}' on url: {_route}");
+					else
+						throw new Exception($"No value provided for '{_parts[i]}' on url: {_route}");
 
 					i++;
 				}
-				else sb.Append(t);
+				else
+					sb.Append(t);
 			}
 			return sb.ToString();
 		}

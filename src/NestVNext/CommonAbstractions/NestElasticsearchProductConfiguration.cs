@@ -19,7 +19,7 @@ namespace Nest
 		public override bool HttpStatusCodeClassifier(HttpMethod method, int statusCode) =>
 			statusCode >= 200 && statusCode < 300
 			|| statusCode == 404;
-		
+
 		/// <summary>
 		/// Makes the low level transport aware of NEST's <see cref="ResponseBase"/>
 		/// So that it can peek in to its exposed error when reporting failures

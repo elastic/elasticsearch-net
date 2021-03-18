@@ -44,7 +44,7 @@
 //	}
 
 //	/// <inheritdoc />
-	
+
 //	public class LazyDocument : ILazyDocument
 //	{
 //		private readonly ITransportSerializer _sourceSerializer;
