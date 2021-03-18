@@ -90,5 +90,13 @@ namespace Nest
         public AsyncSearchSubmitRequest(Indices index): base(r => r.Optional("index", index))
         {
         }
+
+        public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
+
+        public Time? WaitForCompletionTimeout { get => Q<Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
+
+        public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
+
+        public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
     }
 }

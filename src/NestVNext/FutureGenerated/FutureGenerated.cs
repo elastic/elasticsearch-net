@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Elastic.Transport;
 
 namespace Nest
@@ -11,7 +9,7 @@ namespace Nest
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}
-	
+
 	public class Metrics : IUrlParameter
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
@@ -25,15 +23,23 @@ namespace Nest
 	{
 	}
 
+	public class IndexAlias : IUrlParameter
+	{
+		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	}
+
+
 	public class DateString
 	{
 	}
 
-	public class Refresh { }
+	public class NodeId { }
+
+	//public class Refresh { }
 
 	public class WaitForActiveShards { }
 
-	public class Types :  IUrlParameter
+	public class Types : IUrlParameter
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}

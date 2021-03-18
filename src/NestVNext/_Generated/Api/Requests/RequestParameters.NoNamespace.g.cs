@@ -563,35 +563,6 @@ namespace Nest
         public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
     }
 
-    public class SearchTemplateRequestParameters : RequestParameters<SearchTemplateRequestParameters>
-    {
-        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-        public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
-
-        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-        public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
-
-        public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
-
-        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-        public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-        public bool? Profile { get => Q<bool?>("profile"); set => Q("profile", value); }
-
-        public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
-
-        public Time? Scroll { get => Q<Time?>("scroll"); set => Q("scroll", value); }
-
-        public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
-
-        public bool? TotalHitsAsInteger { get => Q<bool?>("total_hits_as_integer"); set => Q("total_hits_as_integer", value); }
-
-        public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-    }
-
     public class TermVectorsRequestParameters : RequestParameters<TermVectorsRequestParameters>
     {
         public Fields? Fields { get => Q<Fields?>("fields"); set => Q("fields", value); }

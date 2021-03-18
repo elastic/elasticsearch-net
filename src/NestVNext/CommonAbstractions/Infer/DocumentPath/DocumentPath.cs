@@ -49,7 +49,8 @@ namespace Nest
 
 		public DocumentPath<T> Index(IndexName index)
 		{
-			if (index == null) return this;
+			if (index == null)
+				return this;
 
 			Self.Index = index;
 			return this;
@@ -69,8 +70,10 @@ namespace Nest
 		{
 			switch (obj)
 			{
-				case DocumentPath<T> d: return Equals(d);
-				default: return false;
+				case DocumentPath<T> d:
+					return Equals(d);
+				default:
+					return false;
 			}
 		}
 

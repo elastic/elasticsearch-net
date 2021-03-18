@@ -27,23 +27,13 @@ namespace Nest
     {
         public AsyncSearchNamespace AsyncSearch { get; private set; }
 
-        public AutoscalingNamespace Autoscaling { get; private set; }
-
         public CatNamespace Cat { get; private set; }
 
         public CrossClusterReplicationNamespace CrossClusterReplication { get; private set; }
 
         public ClusterNamespace Cluster { get; private set; }
 
-        public DanglingIndicesNamespace DanglingIndices { get; private set; }
-
-        public DataFrameTransformDeprecatedNamespace DataFrameTransformDeprecated { get; private set; }
-
         public EnrichNamespace Enrich { get; private set; }
-
-        public EqlNamespace Eql { get; private set; }
-
-        public FeaturesNamespace Features { get; private set; }
 
         public GraphNamespace Graph { get; private set; }
 
@@ -55,19 +45,13 @@ namespace Nest
 
         public LicenseNamespace License { get; private set; }
 
-        public LogstashNamespace Logstash { get; private set; }
-
         public MigrationNamespace Migration { get; private set; }
 
         public MachineLearningNamespace MachineLearning { get; private set; }
 
-        public MonitoringNamespace Monitoring { get; private set; }
-
         public NodesNamespace Nodes { get; private set; }
 
         public RollupNamespace Rollup { get; private set; }
-
-        public SearchableSnapshotsNamespace SearchableSnapshots { get; private set; }
 
         public SecurityNamespace Security { get; private set; }
 
@@ -90,27 +74,19 @@ namespace Nest
         private partial void SetupNamespaces()
         {
             AsyncSearch = new AsyncSearchNamespace(this);
-            Autoscaling = new AutoscalingNamespace(this);
             Cat = new CatNamespace(this);
             CrossClusterReplication = new CrossClusterReplicationNamespace(this);
             Cluster = new ClusterNamespace(this);
-            DanglingIndices = new DanglingIndicesNamespace(this);
-            DataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace(this);
             Enrich = new EnrichNamespace(this);
-            Eql = new EqlNamespace(this);
-            Features = new FeaturesNamespace(this);
             Graph = new GraphNamespace(this);
             IndexLifecycleManagement = new IndexLifecycleManagementNamespace(this);
             Indices = new IndicesNamespace(this);
             Ingest = new IngestNamespace(this);
             License = new LicenseNamespace(this);
-            Logstash = new LogstashNamespace(this);
             Migration = new MigrationNamespace(this);
             MachineLearning = new MachineLearningNamespace(this);
-            Monitoring = new MonitoringNamespace(this);
             Nodes = new NodesNamespace(this);
             Rollup = new RollupNamespace(this);
-            SearchableSnapshots = new SearchableSnapshotsNamespace(this);
             Security = new SecurityNamespace(this);
             SnapshotLifecycleManagement = new SnapshotLifecycleManagementNamespace(this);
             Snapshot = new SnapshotNamespace(this);

@@ -50,7 +50,8 @@ namespace Nest
 		/// <summary>Place the specified builder in the cache if it is not too big.</summary>
 		public static void Release(StringBuilder sb)
 		{
-			if (sb.Capacity <= MaxBuilderSize) _cachedInstance = sb;
+			if (sb.Capacity <= MaxBuilderSize)
+				_cachedInstance = sb;
 		}
 
 		/// <summary>ToString() the stringbuilder, Release it to the cache, and return the resulting string.</summary>

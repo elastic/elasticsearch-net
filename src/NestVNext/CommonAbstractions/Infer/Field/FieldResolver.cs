@@ -2,7 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using System;
 using System.Collections.Concurrent;
 using System.Globalization;
 using System.Linq.Expressions;
@@ -25,15 +24,19 @@ namespace Nest
 		public string Resolve(Field field)
 		{
 			var name = ResolveFieldName(field);
-			if (field.Boost.HasValue) name += $"^{field.Boost.Value.ToString(CultureInfo.InvariantCulture)}";
+			if (field.Boost.HasValue)
+				name += $"^{field.Boost.Value.ToString(CultureInfo.InvariantCulture)}";
 			return name;
 		}
 
 		private string ResolveFieldName(Field field)
 		{
-			if (field.IsConditionless()) return null;
-			if (!field.Name.IsNullOrEmpty()) return field.Name;
-			if (field.Expression != null && !field.CachableExpression) return Resolve(field.Expression, field.Property);
+			if (field.IsConditionless())
+				return null;
+			if (!field.Name.IsNullOrEmpty())
+				return field.Name;
+			if (field.Expression != null && !field.CachableExpression)
+				return Resolve(field.Expression, field.Property);
 
 			if (Fields.TryGetValue(field, out var fieldName))
 				return fieldName;
@@ -45,8 +48,10 @@ namespace Nest
 
 		public string Resolve(PropertyName property)
 		{
-			if (property.IsConditionless()) return null;
-			if (!property.Name.IsNullOrEmpty()) return property.Name;
+			if (property.IsConditionless())
+				return null;
+			if (!property.Name.IsNullOrEmpty())
+				return property.Name;
 
 			if (property.Expression != null && !property.CacheableExpression)
 				return Resolve(property.Expression, property.Property);

@@ -24,7 +24,7 @@ namespace Nest
 		/// indices, property, field names.
 		/// </summary>
 		Inferrer Infer { get; }
-		
+
 		/// <summary>
 		/// Access the configured <see cref="ITransportConfiguration.RequestResponseSerializer" />
 		/// Out of the box <see cref="SourceSerializer" /> and this point to the same instance.

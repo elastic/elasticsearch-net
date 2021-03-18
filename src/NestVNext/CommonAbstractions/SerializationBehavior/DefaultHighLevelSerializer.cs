@@ -17,9 +17,9 @@ namespace Nest
 	{
 		private static readonly JsonSerializerOptions Options = new()
 		{
-			Converters = {new JsonStringEnumConverter()}
+			Converters = { new JsonStringEnumConverter() }
 		};
-		
+
 		public T Deserialize<T>(Stream stream) =>
 			throw new NotImplementedException();
 

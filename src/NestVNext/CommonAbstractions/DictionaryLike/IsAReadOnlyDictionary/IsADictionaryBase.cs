@@ -11,7 +11,8 @@ namespace Nest
 	{
 		protected IsAReadOnlyDictionaryBase(IReadOnlyDictionary<TKey, TValue> backingDictionary)
 		{
-			if (backingDictionary == null) return;
+			if (backingDictionary == null)
+				return;
 
 			var dictionary = new Dictionary<TKey, TValue>(backingDictionary.Count);
 			foreach (var key in backingDictionary.Keys)

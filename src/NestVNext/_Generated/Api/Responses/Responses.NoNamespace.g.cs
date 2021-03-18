@@ -371,8 +371,26 @@ namespace Nest
 #endif
         }
 
+        [JsonPropertyName("deleted")]
+        public long Deleted { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
         [JsonPropertyName("noops")]
         public long Noops { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("requests_per_second")]
+        public long RequestsPerSecond { get; 
 #if NET5_0
             init;
 #else
