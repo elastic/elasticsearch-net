@@ -10,6 +10,9 @@ namespace Nest
 	//only used by GetRoleResponse thus private setters and IReadOnlyCollection
 	public class XPackRole
 	{
+		[DataMember(Name = "applications")]
+		public IReadOnlyCollection<IApplicationPrivileges> Applications { get; private set; } = EmptyReadOnly<IApplicationPrivileges>.Collection;
+
 		[DataMember(Name = "cluster")]
 		public IReadOnlyCollection<string> Cluster { get; private set; } = EmptyReadOnly<string>.Collection;
 
