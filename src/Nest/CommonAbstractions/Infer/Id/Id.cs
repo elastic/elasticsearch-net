@@ -6,11 +6,9 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using Elastic.Transport;
-using Nest.Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(IdFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Id : IEquatable<Id>, IUrlParameter
 	{
@@ -46,7 +44,8 @@ namespace Nest
 		{
 			if (Tag + other.Tag == 1)
 				return StringOrLongValue == other.StringOrLongValue;
-			else if (Tag != other.Tag) return false;
+			else if (Tag != other.Tag)
+				return false;
 
 			switch (Tag)
 			{
@@ -66,11 +65,11 @@ namespace Nest
 
 		public static implicit operator Id(string id) => id.IsNullOrEmpty() ? null : new Id(id);
 
-		public static implicit operator Id(long id) => new Id(id);
+		public static implicit operator Id(long id) => new(id);
 
-		public static implicit operator Id(Guid id) => new Id(id.ToString("D"));
+		public static implicit operator Id(Guid id) => new(id.ToString("D"));
 
-		public static Id From<T>(T document) where T : class => new Id(document);
+		public static Id From<T>(T document) where T : class => new(document);
 
 		public override string ToString() => DebugDisplay;
 
@@ -78,11 +77,16 @@ namespace Nest
 		{
 			switch (obj)
 			{
-				case Id r: return Equals(r);
-				case string s: return Equals(s);
-				case int l: return Equals(l);
-				case long l: return Equals(l);
-				case Guid g: return Equals(g);
+				case Id r:
+					return Equals(r);
+				case string s:
+					return Equals(s);
+				case int l:
+					return Equals(l);
+				case long l:
+					return Equals(l);
+				case Guid g:
+					return Equals(g);
 			}
 			return Equals(new Id(obj));
 		}

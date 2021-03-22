@@ -7,10 +7,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using Elastic.Transport;
-using Elasticsearch.Net;
-using Nest.Utf8Json;
+using Elastic.Transport.Products;
+using Elastic.Transport.Products.Elasticsearch;
 #if DOTNETCORE
 using System.Runtime.InteropServices;
 #endif
@@ -34,7 +33,7 @@ namespace Nest
 		/// Creates a new instance of connection settings, if <paramref name="uri"/> is not specified will default to connecting to http://localhost:9200
 		/// </summary>
 		/// <param name="uri"></param>
-		public ConnectionSettings(Uri uri = null) : this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
+		public ConnectionSettings(Uri? uri = null) : this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
 
 		/// <summary>
 		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
@@ -56,15 +55,10 @@ namespace Nest
 
 		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection) : this(connectionPool, connection, null) { }
 
-		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, SourceSerializerFactory sourceSerializer)
-			: this(connectionPool, connection, sourceSerializer, null) { }
-
 		public ConnectionSettings(
 			IConnectionPool connectionPool,
 			IConnection connection,
-			SourceSerializerFactory sourceSerializer,
-			IPropertyMappingProvider propertyMappingProvider
-		) : base(connectionPool, connection, sourceSerializer, propertyMappingProvider) { }
+			SourceSerializerFactory sourceSerializer) : base(connectionPool, connection, sourceSerializer) { }
 	}
 
 	/// <inheritdoc cref="IConnectionSettingsValues" />
@@ -75,12 +69,12 @@ namespace Nest
 	{
 		private readonly FluentDictionary<Type, string> _defaultIndices;
 		private readonly FluentDictionary<Type, string> _defaultRelationNames;
-		private readonly HashSet<Type> _disableIdInference = new HashSet<Type>();
-		private readonly FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
+		private readonly HashSet<Type> _disableIdInference = new();
+		private readonly FluentDictionary<Type, string> _idProperties = new();
 		private readonly Inferrer _inferrer;
-		private readonly IPropertyMappingProvider _propertyMappingProvider;
-		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
-		private readonly FluentDictionary<Type, string> _routeProperties = new FluentDictionary<Type, string>();
+		//private readonly IPropertyMappingProvider _propertyMappingProvider;
+		//private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
+		private readonly FluentDictionary<Type, string> _routeProperties = new();
 		private readonly ITransportSerializer _sourceSerializer;
 
 		private bool _defaultDisableAllInference;
@@ -90,21 +84,22 @@ namespace Nest
 		protected ConnectionSettingsBase(
 			IConnectionPool connectionPool,
 			IConnection connection,
-			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory,
-			IPropertyMappingProvider propertyMappingProvider
-		)
+			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory)
 			: base(connectionPool, connection, null, NestElasticsearchProductRegistration.DefaultForNest)
 		{
-			var formatterResolver = new NestFormatterResolver(this);
-			var defaultSerializer = new DefaultHighLevelSerializer(formatterResolver);
+			var defaultSerializer = new DefaultHighLevelSerializer();
 			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
-			var serializerAsMappingProvider = sourceSerializer as IPropertyMappingProvider;
+			//var serializerAsMappingProvider = sourceSerializer as IPropertyMappingProvider;
 
-			_propertyMappingProvider = propertyMappingProvider ?? serializerAsMappingProvider ?? new PropertyMappingProvider();
+			//_propertyMappingProvider = propertyMappingProvider ?? serializerAsMappingProvider ?? new PropertyMappingProvider();
 
 			//We wrap these in an internal proxy to facilitate serialization diagnostics
-			_sourceSerializer = new JsonFormatterAwareDiagnosticsSerializerProxy(sourceSerializer, "source");
-			UseThisRequestResponseSerializer = new JsonFormatterAwareDiagnosticsSerializerProxy(defaultSerializer);
+			//_sourceSerializer = new JsonFormatterAwareDiagnosticsSerializerProxy(sourceSerializer, "source");
+			_sourceSerializer = sourceSerializer;
+
+			//UseThisRequestResponseSerializer = new JsonFormatterAwareDiagnosticsSerializerProxy(defaultSerializer);
+			UseThisRequestResponseSerializer = defaultSerializer;
+
 			_defaultFieldNameInferrer = p => p.ToCamelCase();
 			_defaultIndices = new FluentDictionary<Type, string>();
 			_defaultRelationNames = new FluentDictionary<Type, string>();
@@ -114,6 +109,7 @@ namespace Nest
 		}
 
 		bool IConnectionSettingsValues.DefaultDisableIdInference => _defaultDisableAllInference;
+		public ITransportSerializer SourceSerializer { get; }
 		Func<string, string> IConnectionSettingsValues.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
 		string IConnectionSettingsValues.DefaultIndex => _defaultIndex;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultIndices => _defaultIndices;
@@ -121,8 +117,8 @@ namespace Nest
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultRelationNames => _defaultRelationNames;
 		FluentDictionary<Type, string> IConnectionSettingsValues.IdProperties => _idProperties;
 		Inferrer IConnectionSettingsValues.Inferrer => _inferrer;
-		IPropertyMappingProvider IConnectionSettingsValues.PropertyMappingProvider => _propertyMappingProvider;
-		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
+		//IPropertyMappingProvider IConnectionSettingsValues.PropertyMappingProvider => _propertyMappingProvider;
+		//FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 		FluentDictionary<Type, string> IConnectionSettingsValues.RouteProperties => _routeProperties;
 		ITransportSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
 
@@ -161,7 +157,8 @@ namespace Nest
 
 			if (_idProperties.TryGetValue(typeof(TDocument), out var idPropertyFieldName))
 			{
-				if (idPropertyFieldName.Equals(fieldName)) return;
+				if (idPropertyFieldName.Equals(fieldName))
+					return;
 
 				throw new ArgumentException(
 					$"Cannot map '{fieldName}' as the id property for type '{typeof(TDocument).Name}': it already has '{_idProperties[typeof(TDocument)]}' mapped.");
@@ -180,7 +177,8 @@ namespace Nest
 
 			if (_routeProperties.TryGetValue(typeof(TDocument), out var routePropertyFieldName))
 			{
-				if (routePropertyFieldName.Equals(fieldName)) return;
+				if (routePropertyFieldName.Equals(fieldName))
+					return;
 
 				throw new ArgumentException(
 					$"Cannot map '{fieldName}' as the route property for type '{typeof(TDocument).Name}': it already has '{_routeProperties[typeof(TDocument)]}' mapped.");
@@ -204,24 +202,24 @@ namespace Nest
 
 				var memberInfo = memberInfoResolver.Members[0];
 
-				if (_propertyMappings.TryGetValue(memberInfo, out var propertyMapping))
-				{
-					var newName = mapping.NewName;
-					var mappedAs = propertyMapping.Name;
-					var typeName = typeof(TDocument).Name;
-					if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
-						throw new ArgumentException($"Property mapping '{e}' on type is already ignored");
-					if (mappedAs.IsNullOrEmpty())
-						throw new ArgumentException(
-							$"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' it already has an ignore mapping");
-					if (newName.IsNullOrEmpty())
-						throw new ArgumentException(
-							$"Property mapping '{e}' on type {typeName} can not be ignored it already has a mapping to '{mappedAs}'");
+				//if (_propertyMappings.TryGetValue(memberInfo, out var propertyMapping))
+				//{
+				//	var newName = mapping.NewName;
+				//	var mappedAs = propertyMapping.Name;
+				//	var typeName = typeof(TDocument).Name;
+				//	if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
+				//		throw new ArgumentException($"Property mapping '{e}' on type is already ignored");
+				//	if (mappedAs.IsNullOrEmpty())
+				//		throw new ArgumentException(
+				//			$"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' it already has an ignore mapping");
+				//	if (newName.IsNullOrEmpty())
+				//		throw new ArgumentException(
+				//			$"Property mapping '{e}' on type {typeName} can not be ignored it already has a mapping to '{mappedAs}'");
 
-					throw new ArgumentException(
-						$"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' already mapped as '{mappedAs}'");
-				}
-				_propertyMappings[memberInfo] = mapping.ToPropertyMapping();
+				//	throw new ArgumentException(
+				//		$"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' already mapped as '{mappedAs}'");
+				//}
+				//_propertyMappings[memberInfo] = mapping.ToPropertyMapping();
 			}
 		}
 
@@ -252,8 +250,10 @@ namespace Nest
 			if (inferMapping.Properties != null)
 				ApplyPropertyMappings(inferMapping.Properties);
 
-			if (inferMapping.DisableIdInference) _disableIdInference.Add(inferMapping.ClrType);
-			else _disableIdInference.Remove(inferMapping.ClrType);
+			if (inferMapping.DisableIdInference)
+				_disableIdInference.Add(inferMapping.ClrType);
+			else
+				_disableIdInference.Remove(inferMapping.ClrType);
 
 			return (TConnectionSettings)this;
 		}
@@ -283,7 +283,8 @@ namespace Nest
 		/// </summary>
 		public TConnectionSettings DefaultMappingFor(IEnumerable<IClrTypeMapping> typeMappings)
 		{
-			if (typeMappings == null) return (TConnectionSettings)this;
+			if (typeMappings == null)
+				return (TConnectionSettings)this;
 
 			foreach (var inferMapping in typeMappings)
 			{
@@ -297,5 +298,86 @@ namespace Nest
 			return (TConnectionSettings)this;
 		}
 
+	}
+
+	/// <inheritdoc cref="IConnectionConfigurationValues" />
+	public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionConfiguration>
+	{
+		/// <summary>
+		/// The default user agent for Elasticsearch.Net
+		/// </summary>
+		public static readonly UserAgent DefaultUserAgent = Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(ITransportConfiguration));
+
+		public ConnectionConfiguration(Uri uri = null)
+			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
+
+		public ConnectionConfiguration(InMemoryConnection connection)
+			: this(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), connection) { }
+
+		/// <summary>
+		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
+		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
+		/// </summary>
+		public ConnectionConfiguration(string cloudId, IAuthenticationHeader credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
+
+		public ConnectionConfiguration(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
+
+		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection) : this(connectionPool, connection, null) { }
+
+		public ConnectionConfiguration(IConnectionPool connectionPool, ITransportSerializer serializer) : this(connectionPool, null, serializer) { }
+
+		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, ITransportSerializer serializer)
+			: base(connectionPool, connection, serializer) { }
+
+	}
+
+	/// <inheritdoc cref="IConnectionConfigurationValues" />
+	[Browsable(false)]
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public abstract class ConnectionConfigurationBase<TConnectionConfiguration> : TransportConfigurationBase<TConnectionConfiguration>, IConnectionConfigurationValues
+		where TConnectionConfiguration : ConnectionConfigurationBase<TConnectionConfiguration>, IConnectionConfigurationValues
+	{
+		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection, ITransportSerializer serializer,
+			IProductRegistration registration = null)
+			: base(connectionPool, connection, serializer, registration ?? ElasticsearchProductRegistration.Default) =>
+			UserAgent(ConnectionConfiguration.DefaultUserAgent);
+
+		private bool _includeServerStackTraceOnError;
+		bool IConnectionConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;
+
+		public override TConnectionConfiguration EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null) =>
+			base.EnableDebugMode(onRequestCompleted)
+				.PrettyJson()
+				.IncludeServerStackTraceOnError();
+
+		/// <summary>
+		/// Forces all requests to have ?pretty=true querystring parameter appended,
+		/// causing Elasticsearch to return formatted JSON.
+		/// Defaults to <c>false</c>
+		/// </summary>
+		public override TConnectionConfiguration PrettyJson(bool b = true) =>
+			base.PrettyJson(b).UpdateGlobalQueryString("pretty", "true", b);
+
+		/// <summary>
+		/// Forces all requests to have ?error_trace=true querystring parameter appended,
+		/// causing Elasticsearch to return stack traces as part of serialized exceptions
+		/// Defaults to <c>false</c>
+		/// </summary>
+		public TConnectionConfiguration IncludeServerStackTraceOnError(bool b = true) => Assign(b, (a, v) =>
+		{
+			a._includeServerStackTraceOnError = true;
+			const string key = "error_trace";
+			UpdateGlobalQueryString(key, "true", v);
+		});
+	}
+
+	public interface IConnectionConfigurationValues : ITransportConfiguration
+	{
+		/// <summary>
+		/// Forces all requests to have ?error_trace=true querystring parameter appended,
+		/// causing Elasticsearch to return stack traces as part of serialized exceptions
+		/// Defaults to <c>false</c>
+		/// </summary>
+		bool IncludeServerStackTraceOnError { get; }
 	}
 }

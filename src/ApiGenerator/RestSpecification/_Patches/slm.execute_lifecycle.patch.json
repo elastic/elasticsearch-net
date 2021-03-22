@@ -1,7 +1,0 @@
-{
-  "slm.execute_lifecycle": {
-    "methods": [
-      "POST", "PUT"
-    ]
-  }
-}

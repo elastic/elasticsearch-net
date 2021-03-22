@@ -10,13 +10,13 @@ namespace Nest
 {
 	public class IdResolver
 	{
-		private static readonly ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+		private static readonly ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new();
 
 		private static readonly MethodInfo MakeDelegateMethodInfo =
 			typeof(IdResolver).GetMethod(nameof(MakeDelegate), BindingFlags.Static | BindingFlags.NonPublic);
 
 		private readonly IConnectionSettingsValues _connectionSettings;
-		private readonly ConcurrentDictionary<Type, Func<object, string>> _localIdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+		private readonly ConcurrentDictionary<Type, Func<object, string>> _localIdDelegates = new();
 
 		public IdResolver(IConnectionSettingsValues connectionSettings) => _connectionSettings = connectionSettings;
 
@@ -40,7 +40,8 @@ namespace Nest
 
 		public string Resolve(Type type, object @object)
 		{
-			if (type == null || @object == null) return null;
+			if (type == null || @object == null)
+				return null;
 			if (_connectionSettings.DefaultDisableIdInference || _connectionSettings.DisableIdInference.Contains(type))
 				return null;
 
@@ -53,7 +54,8 @@ namespace Nest
 				return cachedLookup(@object);
 
 			var idProperty = GetInferredId(type);
-			if (idProperty == null) return null;
+			if (idProperty == null)
+				return null;
 
 			var getMethod = idProperty.GetMethod;
 			var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
@@ -80,8 +82,8 @@ namespace Nest
 			if (!propertyName.IsNullOrEmpty())
 				return GetPropertyCaseInsensitive(type, propertyName);
 
-			var esTypeAtt = ElasticsearchTypeAttribute.From(type);
-			propertyName = esTypeAtt?.IdProperty.IsNullOrEmpty() ?? true ? "Id" : esTypeAtt.IdProperty;
+			//var esTypeAtt = ElasticsearchTypeAttribute.From(type);
+			//propertyName = esTypeAtt?.IdProperty.IsNullOrEmpty() ?? true ? "Id" : esTypeAtt.IdProperty;
 
 			return GetPropertyCaseInsensitive(type, propertyName);
 		}

@@ -1,6 +1,0 @@
-# scratchpad is suppose to have unused variables/methods/classes
-[*.cs]
-resharper_unused_variable_highlighting=do_not_show
-resharper_unused_member_local_highlighting=do_not_show
-resharper_unused_parameter_local_highlighting=do_not_show
-resharper_redundant_anonymous_type_property_name_highlighting=do_not_show

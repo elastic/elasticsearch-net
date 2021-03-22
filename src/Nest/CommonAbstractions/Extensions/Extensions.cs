@@ -17,11 +17,11 @@ namespace Nest
 {
 	internal static class Extensions
 	{
-		private static readonly ConcurrentDictionary<string, object> EnumCache = new ConcurrentDictionary<string, object>();
+		private static readonly ConcurrentDictionary<string, object> EnumCache = new();
 
-		internal static bool NotWritable(this QueryContainer q) => q == null || !q.IsWritable;
+		//internal static bool NotWritable(this QueryContainer q) => q == null || !q.IsWritable;
 
-		internal static bool NotWritable(this IEnumerable<QueryContainer> qs) => qs == null || qs.All(q => q.NotWritable());
+		//internal static bool NotWritable(this IEnumerable<QueryContainer> qs) => qs == null || qs.All(q => q.NotWritable());
 
 		internal static TReturn InvokeOrDefault<T, TReturn>(this Func<T, TReturn> func, T @default)
 			where T : class, TReturn where TReturn : class =>
@@ -52,7 +52,8 @@ namespace Nest
 
 		internal static T? ToEnum<T>(this string str, StringComparison comparison = StringComparison.OrdinalIgnoreCase) where T : struct
 		{
-			if (str == null) return null;
+			if (str == null)
+				return null;
 
 			var enumType = typeof(T);
 			var key = $"{enumType.Name}.{str}";
@@ -108,7 +109,8 @@ namespace Nest
 		// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Global
 		internal static void ThrowIfEmpty<T>(this IEnumerable<T> @object, string parameterName)
 		{
-			if (@object == null) throw new ArgumentNullException(parameterName);
+			if (@object == null)
+				throw new ArgumentNullException(parameterName);
 			if (!@object.Any())
 				throw new ArgumentException("Argument can not be an empty collection", parameterName);
 		}
@@ -134,7 +136,8 @@ namespace Nest
 		internal static List<T> EagerConcat<T>(this IEnumerable<T> list, IEnumerable<T> other)
 		{
 			var first = list.AsInstanceOrToListOrDefault();
-			if (other == null) return first;
+			if (other == null)
+				return first;
 
 			var second = other.AsInstanceOrToListOrDefault();
 			var newList = new List<T>(first.Count + second.Count);
@@ -145,7 +148,8 @@ namespace Nest
 
 		internal static IEnumerable<T> AddIfNotNull<T>(this IEnumerable<T> list, T other)
 		{
-			if (other == null) return list;
+			if (other == null)
+				return list;
 
 			var l = list.AsInstanceOrToListOrDefault();
 			l.Add(other);
@@ -158,7 +162,8 @@ namespace Nest
 
 		internal static bool IsEmpty<T>(this IEnumerable<T> list)
 		{
-			if (list == null) return true;
+			if (list == null)
+				return true;
 
 			var enumerable = list as T[] ?? list.ToArray();
 			return !enumerable.Any() || enumerable.All(t => t == null);
@@ -166,8 +171,10 @@ namespace Nest
 
 		internal static void ThrowIfNull<T>(this T value, string name, string message = null)
 		{
-			if (value == null && message.IsNullOrEmpty()) throw new ArgumentNullException(name);
-			else if (value == null) throw new ArgumentNullException(name, "Argument can not be null when " + message);
+			if (value == null && message.IsNullOrEmpty())
+				throw new ArgumentNullException(name);
+			else if (value == null)
+				throw new ArgumentNullException(name, "Argument can not be null when " + message);
 		}
 
 		internal static bool IsNullOrEmpty(this string value) => string.IsNullOrWhiteSpace(value);
@@ -175,7 +182,8 @@ namespace Nest
 		internal static bool IsNullOrEmptyCommaSeparatedList(this string value, out string[] split)
 		{
 			split = null;
-			if (string.IsNullOrWhiteSpace(value)) return true;
+			if (string.IsNullOrWhiteSpace(value))
+				return true;
 
 			split = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
 				.Where(t => !t.IsNullOrEmpty())
@@ -192,14 +200,16 @@ namespace Nest
 
 		internal static void AddIfNotNull<T>(this IList<T> list, T item) where T : class
 		{
-			if (item == null) return;
+			if (item == null)
+				return;
 
 			list.Add(item);
 		}
 
 		internal static void AddRangeIfNotNull<T>(this List<T> list, IEnumerable<T> item) where T : class
 		{
-			if (item == null) return;
+			if (item == null)
+				return;
 
 			list.AddRange(item.Where(x => x != null));
 		}
@@ -260,8 +270,10 @@ namespace Nest
 			long page
 		)
 		{
-			if (localRateLimiter != null) await localRateLimiter.WaitAsync().ConfigureAwait(false);
-			if (additionalRateLimiter != null) await additionalRateLimiter.WaitAsync().ConfigureAwait(false);
+			if (localRateLimiter != null)
+				await localRateLimiter.WaitAsync().ConfigureAwait(false);
+			if (additionalRateLimiter != null)
+				await additionalRateLimiter.WaitAsync().ConfigureAwait(false);
 			try
 			{
 				var result = await taskSelector(item, page).ConfigureAwait(false);
@@ -276,8 +288,10 @@ namespace Nest
 
 		internal static bool NullOrEquals<T>(this T o, T other)
 		{
-			if (o == null && other == null) return true;
-			if (o == null || other == null) return false;
+			if (o == null && other == null)
+				return true;
+			if (o == null || other == null)
+				return false;
 
 			return o.Equals(other);
 		}

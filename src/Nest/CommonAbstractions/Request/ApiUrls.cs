@@ -28,34 +28,39 @@ namespace Nest
 		/// <see cref="UrlLookup.Matches"/> allows us to quickly find the right url to use in the list.
 		/// </summary>
 		public Dictionary<int, List<UrlLookup>> Routes { get; }
-		
+
 		/// <summary> Only intended to be created once per request and stored in a static </summary>
 		internal ApiUrls(string[] routes)
 		{
-			if (routes == null || routes.Length == 0) throw new ArgumentException("urls is null or empty", nameof(routes));
-			if (routes.Length == 1 && !routes[0].Contains("{")) _fixedUrl = routes[0];
+			if (routes == null || routes.Length == 0)
+				throw new ArgumentException("urls is null or empty", nameof(routes));
+			if (routes.Length == 1 && !routes[0].Contains("{"))
+				_fixedUrl = routes[0];
 			else
 			{
 				foreach (var route in routes)
 				{
 					var bracketsCount = route.Count(c => c.Equals('{'));
-					if (Routes == null) Routes = new Dictionary<int, List<UrlLookup>>();
+					if (Routes == null)
+						Routes = new Dictionary<int, List<UrlLookup>>();
 					if (Routes.ContainsKey(bracketsCount))
 						Routes[bracketsCount].Add(new UrlLookup(route));
 					else
-						Routes.Add(bracketsCount, new List<UrlLookup> { new UrlLookup(route) });
+						Routes.Add(bracketsCount, new List<UrlLookup> { new(route) });
 				}
 			}
 
 			_errorMessageSuffix = string.Join(",", routes);
 
 			// received multiple urls without brackets we resolve to first
-			if (Routes == null) _fixedUrl = routes[0];
+			if (Routes == null)
+				_fixedUrl = routes[0];
 		}
 
 		public string Resolve(RouteValues routeValues, IConnectionSettingsValues settings)
 		{
-			if (_fixedUrl != null) return _fixedUrl;
+			if (_fixedUrl != null)
+				return _fixedUrl;
 
 			var resolved = routeValues.Resolve(settings);
 

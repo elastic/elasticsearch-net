@@ -8,6 +8,6 @@ namespace Nest
 {
 	internal static class DateTimeUtil
 	{
-		public static readonly DateTimeOffset UnixEpoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
+		public static readonly DateTimeOffset UnixEpoch = new(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
 	}
 }

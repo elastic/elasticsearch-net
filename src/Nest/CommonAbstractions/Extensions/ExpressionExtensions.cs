@@ -32,7 +32,8 @@ namespace Nest
 			type = null;
 			cachable = false;
 
-			if (expression == null) return null;
+			if (expression == null)
+				return null;
 
 			switch (expression)
 			{
@@ -42,7 +43,7 @@ namespace Nest
 				case MemberExpression memberExpression:
 					type = memberExpression.Member.DeclaringType;
 					break;
-				case MethodCallExpression methodCallExpression when methodCallExpression.Method?.DeclaringType is {}:
+				case MethodCallExpression methodCallExpression when methodCallExpression.Method?.DeclaringType is { }:
 					// special case F# method call expressions on FuncConvert
 					// that are used to convert F# quotations representing lambda expressions, to expressions.
 					// https://github.com/dotnet/fsharp/blob/7adaacf150dd79f072efe42d43168c9cd6edbced/src/fsharp/FSharp.Core/Linq.fs#L796
@@ -63,7 +64,7 @@ namespace Nest
 						throw new Exception($"Unsupported {nameof(MethodCallExpression)}: {expression}");
 					break;
 				case MethodCallExpression _:
-						throw new Exception($"Unsupported {nameof(MethodCallExpression)}: {expression}");
+					throw new Exception($"Unsupported {nameof(MethodCallExpression)}: {expression}");
 				default:
 					throw new Exception(
 						$"Expected {nameof(LambdaExpression)}, {nameof(MemberExpression)} or "

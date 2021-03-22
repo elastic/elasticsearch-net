@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information
 
 using System;
-using Nest.Utf8Json;
 
 namespace Nest
 {
@@ -13,7 +12,6 @@ namespace Nest
 	/// </summary>
 	/// <typeparam name="TFirst">The first type</typeparam>
 	/// <typeparam name="TSecond">The second type</typeparam>
-	[JsonFormatter(typeof(UnionFormatter<,>))]
 	public class Union<TFirst, TSecond>
 	{
 		internal readonly int Tag;
@@ -55,7 +53,8 @@ namespace Nest
 				case 1:
 					second(Item2);
 					break;
-				default: throw new Exception($"Unrecognized tag value: {Tag}");
+				default:
+					throw new Exception($"Unrecognized tag value: {Tag}");
 			}
 		}
 
@@ -68,14 +67,17 @@ namespace Nest
 		{
 			switch (Tag)
 			{
-				case 0: return first(Item1);
-				case 1: return second(Item2);
-				default: throw new Exception($"Unrecognized tag value: {Tag}");
+				case 0:
+					return first(Item1);
+				case 1:
+					return second(Item2);
+				default:
+					throw new Exception($"Unrecognized tag value: {Tag}");
 			}
 		}
 
-		public static implicit operator Union<TFirst, TSecond>(TFirst first) => new Union<TFirst, TSecond>(first);
+		public static implicit operator Union<TFirst, TSecond>(TFirst first) => new(first);
 
-		public static implicit operator Union<TFirst, TSecond>(TSecond second) => new Union<TFirst, TSecond>(second);
+		public static implicit operator Union<TFirst, TSecond>(TSecond second) => new(second);
 	}
 }

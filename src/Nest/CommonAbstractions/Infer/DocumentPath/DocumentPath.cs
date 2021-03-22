@@ -33,23 +33,24 @@ namespace Nest
 			return s.Index.NullOrEquals(o.Index) && s.Id.NullOrEquals(o.Id) && (Document?.Equals(other.Document) ?? true);
 		}
 
-		public static DocumentPath<T> Id(Id id) => new DocumentPath<T>(id);
+		public static DocumentPath<T> Id(Id id) => new(id);
 
-		public static DocumentPath<T> Id(T @object) => new DocumentPath<T>(@object);
+		public static DocumentPath<T> Id(T @object) => new(@object);
 
 		public static implicit operator DocumentPath<T>(T @object) => @object == null ? null : new DocumentPath<T>(@object);
 
 		public static implicit operator DocumentPath<T>(Id id) => id == null ? null : new DocumentPath<T>(id);
 
-		public static implicit operator DocumentPath<T>(long id) => new DocumentPath<T>(id);
+		public static implicit operator DocumentPath<T>(long id) => new(id);
 
 		public static implicit operator DocumentPath<T>(string id) => id.IsNullOrEmpty() ? null : new DocumentPath<T>(id);
 
-		public static implicit operator DocumentPath<T>(Guid id) => new DocumentPath<T>(id);
+		public static implicit operator DocumentPath<T>(Guid id) => new(id);
 
 		public DocumentPath<T> Index(IndexName index)
 		{
-			if (index == null) return this;
+			if (index == null)
+				return this;
 
 			Self.Index = index;
 			return this;
@@ -69,8 +70,10 @@ namespace Nest
 		{
 			switch (obj)
 			{
-				case DocumentPath<T> d: return Equals(d);
-				default: return false;
+				case DocumentPath<T> d:
+					return Equals(d);
+				default:
+					return false;
 			}
 		}
 

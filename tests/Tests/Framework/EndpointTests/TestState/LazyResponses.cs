@@ -19,7 +19,7 @@ namespace Tests.Framework.EndpointTests.TestState
 
 		public LazyResponses(string name, Func<Task<Dictionary<ClientMethod, IResponse>>> factory) : base(factory) => Name = name;
 
-		public static LazyResponses Empty { get; } = new LazyResponses("__empty__", () => new Dictionary<ClientMethod, IResponse>());
+		public static LazyResponses Empty { get; } = new("__empty__", () => new Dictionary<ClientMethod, IResponse>());
 
 		public string Name { get; }
 	}

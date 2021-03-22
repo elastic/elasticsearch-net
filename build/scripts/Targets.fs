@@ -10,6 +10,7 @@ open System.IO
 open Bullseye
 open ProcNet
 open Fake.Core
+open Fake.IO.Globbing.Operators
 
 module Main =
 
@@ -60,7 +61,7 @@ module Main =
         let canaryChain = [ "version"; "release"; "test-nuget-package";]
         
         // the following are expected to be called as targets directly        
-        conditional "clean" parsed.ReleaseBuild  <| fun _ -> Build.Clean parsed 
+        conditional "clean" (parsed.ReleaseBuild || parsed.Target = "clean") <| fun _ -> Build.Clean parsed 
         target "version" <| fun _ -> printfn "Artifacts Version: %O" artifactsVersion
         
         target "restore" Build.Restore 
@@ -92,6 +93,10 @@ module Main =
                 printfn "Finished Release Build %O, artifacts available at: %s" artifactsVersion Paths.BuildOutput
             | Some path ->
                 Fake.IO.Shell.cp_r Paths.BuildOutput path
+                let zipName = sprintf "elasticsearch-net-%O.zip" artifactsVersion.Full
+                let outputZip = Path.Combine(path, zipName)
+                let files = !! (sprintf "%s/*.*" path) -- outputZip
+                Fake.IO.Zip.createZip "." outputZip "elastic/elasticsearch-net artifact" 9 true files
                 printfn "Finished Release Build %O, output copied to: %s" artifactsVersion path
 
         conditional "test-nuget-package" (not parsed.SkipTests) <| fun _ -> Tests.RunReleaseUnitTests artifactsVersion parsed

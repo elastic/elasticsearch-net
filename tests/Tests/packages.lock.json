@@ -152,17 +152,6 @@
           "System.Text.Json": "4.6.0"
         }
       },
-      "Elastic.Transport": {
-        "type": "Transitive",
-        "resolved": "0.2.3",
-        "contentHash": "sSxPoisUMJsVO6EpsACBCmfjseZ2ESdFXqnA4Oo3V6+8O1DRjxXDNDrG1n6TQYgrI03FG18+SPSjuMZUvC48LQ==",
-        "dependencies": {
-          "Microsoft.CSharp": "4.7.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.0",
-          "System.Text.Json": "5.0.0"
-        }
-      },
       "FluentAssertions": {
         "type": "Transitive",
         "resolved": "5.10.3",
@@ -1342,25 +1331,19 @@
           "xunit.abstractions": "2.0.1"
         }
       },
-      "elasticsearch.net": {
+      "elastic.transport": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "0.2.3"
+          "Microsoft.CSharp": "4.7.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "5.0.0",
+          "System.Text.Json": "5.0.0"
         }
       },
-      "NEST": {
+      "nest": {
         "type": "Project",
         "dependencies": {
-          "Elasticsearch.Net": "7.0.0",
-          "System.Reflection.Emit": "4.3.0",
-          "System.Reflection.Emit.Lightweight": "4.3.0"
-        }
-      },
-      "NEST.JsonNetSerializer": {
-        "type": "Project",
-        "dependencies": {
-          "NEST": "7.0.0",
-          "Newtonsoft.Json": "12.0.1"
+          "Elastic.Transport": "1.0.0"
         }
       },
       "tests.configuration": {
@@ -1377,7 +1360,6 @@
           "FluentAssertions": "5.10.3",
           "JunitXml.TestLogger": "2.1.78",
           "Microsoft.NET.Test.Sdk": "16.5.0",
-          "NEST.JsonNetSerializer": "7.0.0",
           "Nullean.VsTest.Pretty.TestLogger": "0.3.0",
           "Proc": "0.6.1",
           "Tests.Domain": "7.0.0",
@@ -1390,7 +1372,6 @@
           "Bogus": "22.1.2",
           "Elastic.Elasticsearch.Managed": "0.2.6",
           "NEST": "7.0.0",
-          "Newtonsoft.Json": "12.0.1",
           "Tests.Configuration": "7.0.0"
         }
       }
