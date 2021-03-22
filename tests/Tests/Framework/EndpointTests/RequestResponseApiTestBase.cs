@@ -28,11 +28,9 @@ namespace Tests.Framework.EndpointTests
 	{
 		private readonly EndpointUsage _usage;
 
-		protected RequestResponseApiTestBase(TCluster cluster, EndpointUsage usage) // : base(cluster.Client)
+		protected RequestResponseApiTestBase(TCluster cluster, EndpointUsage usage)  : base(cluster.Client)
 		{
 			_usage = usage ?? throw new ArgumentNullException(nameof(usage));
-
-			if (cluster == null) throw new ArgumentNullException(nameof(cluster));
 
 			Cluster = cluster;
 			Responses = usage.CallOnce(ClientUsage);
