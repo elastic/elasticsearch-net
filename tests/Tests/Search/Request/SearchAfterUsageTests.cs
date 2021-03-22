@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -12,9 +13,9 @@ using static Nest.Infer;
 
 namespace Tests.Search.Request
 {
-	public class SearchAfterUsageTests : SearchUsageTestBase
+	public class SearchAfterParamsUsageTests : SearchUsageTestBase
 	{
-		public SearchAfterUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public SearchAfterParamsUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson =>
 			new
@@ -43,7 +44,7 @@ namespace Tests.Search.Request
 
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+			new()
 			{
 				Sort = new List<ISort>
 				{
@@ -55,6 +56,50 @@ namespace Tests.Search.Request
 					Project.First.NumberOfCommits,
 					Project.First.Name,
 				}
+			};
+	}
+
+	public class SearchAfterUsageTests : SearchUsageTestBase
+	{
+		public SearchAfterUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		private readonly IReadOnlyCollection<object> _previousSort = new List<object>
+		{
+			Project.First.NumberOfCommits,
+			Project.First.Name
+		};
+
+		protected override object ExpectJson =>
+			new
+			{
+				sort = new object[]
+				{
+					new { numberOfCommits = new { order = "desc" } },
+					new { name = new { order = "desc" } }
+				},
+				search_after = new object[]
+				{
+					Project.First.NumberOfCommits,
+					Project.First.Name
+				}
+			};
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Sort(srt => srt
+				.Descending(p => p.NumberOfCommits)
+				.Descending(p => p.Name)
+			)
+			.SearchAfter(_previousSort);
+
+		protected override SearchRequest<Project> Initializer =>
+			new()
+			{
+				Sort = new List<ISort>
+				{
+					new FieldSort { Field = Field<Project>(p => p.NumberOfCommits), Order = SortOrder.Descending },
+					new FieldSort { Field = Field<Project>(p => p.Name), Order = SortOrder.Descending }
+				},
+				SearchAfter = _previousSort.ToList()
 			};
 	}
 }
