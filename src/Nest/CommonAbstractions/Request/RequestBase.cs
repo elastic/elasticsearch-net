@@ -6,15 +6,13 @@ using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using Elastic.Transport;
-using Nest.Utf8Json;
 
 namespace Nest
 {
-	[InterfaceDataContract]
 	public interface IRequest
 	{
 		[IgnoreDataMember]
-		string ContentType { get; }
+		string? ContentType { get; }
 
 		[IgnoreDataMember]
 		HttpMethod HttpMethod { get; }
@@ -85,9 +83,9 @@ namespace Nest
 		IRequestParameters IRequest.RequestParameters => _parameters;
 
 		[IgnoreDataMember]
-		RouteValues IRequest.RouteValues { get; } = new RouteValues();
+		RouteValues IRequest.RouteValues { get; } = new();
 
-		internal abstract ApiUrls ApiUrls { get;  }
+		internal abstract ApiUrls ApiUrls { get; }
 
 		string IRequest.GetUrl(IConnectionSettingsValues settings) => ResolveUrl(RequestState.RouteValues, settings);
 

@@ -18,13 +18,13 @@ namespace Nest
 			typeof(TypeExtensions).GetMethod(nameof(GetActivator), BindingFlags.Static | BindingFlags.NonPublic);
 
 		private static readonly ConcurrentDictionary<string, ObjectActivator<object>> CachedActivators =
-			new ConcurrentDictionary<string, ObjectActivator<object>>();
+			new();
 
 		private static readonly ConcurrentDictionary<string, Type> CachedGenericClosedTypes =
-			new ConcurrentDictionary<string, Type>();
+			new();
 
 		private static readonly ConcurrentDictionary<Type, List<PropertyInfo>> CachedTypePropertyInfos =
-			new ConcurrentDictionary<Type, List<PropertyInfo>>();
+			new();
 
 		internal static object CreateGenericInstance(this Type t, Type closeOver, params object[] args) =>
 			t.CreateGenericInstance(new[] { closeOver }, args);
@@ -57,9 +57,9 @@ namespace Nest
 
 			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 			var constructors = from c in t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-				let p = c.GetParameters()
-				where p.Length == args.Length
-				select c;
+							   let p = c.GetParameters()
+							   where p.Length == args.Length
+							   select c;
 
 			var ctor = constructors.FirstOrDefault();
 			if (ctor == null)

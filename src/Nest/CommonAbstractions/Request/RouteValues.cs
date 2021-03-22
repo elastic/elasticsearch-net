@@ -20,36 +20,45 @@ namespace Nest
 		/// <summary>
 		/// Used specifically by index requests to determine whether to use PUT or POST.
 		/// </summary>
-		internal bool ContainsId { get; private set;}
+		internal bool ContainsId { get; private set; }
 
 		internal ResolvedRouteValues Resolve(IConnectionSettingsValues configurationValues)
 		{
-			if (Count == 0) return ResolvedRouteValues.Empty;
-			
+			if (Count == 0)
+				return ResolvedRouteValues.Empty;
+
 			var resolved = new ResolvedRouteValues(Count);
 			foreach (var kv in this)
 			{
 				var value = this[kv.Key].GetString(configurationValues);
-				if (value.IsNullOrEmpty()) continue;
+				if (value.IsNullOrEmpty())
+					continue;
 				resolved[kv.Key] = value;
-				if (IsId(kv.Key)) ContainsId = true;
+				if (IsId(kv.Key))
+					ContainsId = true;
 			}
 			return resolved;
 		}
 
 		private RouteValues Route(string name, IUrlParameter routeValue, bool required = true)
 		{
-			switch (routeValue) {
-				case null when !required: {
-					if (!ContainsKey(name)) return this;
-					Remove(name);
-					if (IsId(name)) ContainsId = false; // invalidate cache
-					return this;
-				}
-				case null: throw new ArgumentNullException(name, $"{name} is required to build a url to this API");
+			switch (routeValue)
+			{
+				case null when !required:
+					{
+						if (!ContainsKey(name))
+							return this;
+						Remove(name);
+						if (IsId(name))
+							ContainsId = false; // invalidate cache
+						return this;
+					}
+				case null:
+					throw new ArgumentNullException(name, $"{name} is required to build a url to this API");
 				default:
 					this[name] = routeValue;
-					if (IsId(name)) ContainsId = false; // invalidate cache
+					if (IsId(name))
+						ContainsId = false; // invalidate cache
 					return this;
 			}
 		}
@@ -60,9 +69,9 @@ namespace Nest
 
 		internal RouteValues Optional(string route, IUrlParameter value) => Route(route, value, false);
 
-		internal RouteValues Optional(string route, Metrics value) => Route(route, value, false);
+		//internal RouteValues Optional(string route, Metrics value) => Route(route, value, false);
 
-		internal RouteValues Optional(string route, IndexMetrics value) => Route(route, value, false);
+		//internal RouteValues Optional(string route, IndexMetrics value) => Route(route, value, false);
 
 		internal TActual Get<TActual>(string route)
 		{

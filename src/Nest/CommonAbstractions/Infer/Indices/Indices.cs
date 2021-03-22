@@ -7,11 +7,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Elastic.Transport;
-using Nest.Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(IndicesMultiSyntaxFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
 	{
@@ -64,7 +62,8 @@ namespace Nest
 
 		public static Indices Parse(string indicesString)
 		{
-			if (indicesString.IsNullOrEmptyCommaSeparatedList(out var indices)) return null;
+			if (indicesString.IsNullOrEmptyCommaSeparatedList(out var indices))
+				return null;
 
 			return indices.Contains("_all") ? All : Index(indices.Select(i => (IndexName)i));
 		}
@@ -87,7 +86,8 @@ namespace Nest
 
 		public override bool Equals(object obj)
 		{
-			if (!(obj is Indices other)) return false;
+			if (!(obj is Indices other))
+				return false;
 
 			return Match(
 				all => other.Match(a => true, m => false),
@@ -100,8 +100,10 @@ namespace Nest
 
 		private static bool EqualsAllIndices(IReadOnlyList<IndexName> thisIndices, IReadOnlyList<IndexName> otherIndices)
 		{
-			if (thisIndices == null && otherIndices == null) return true;
-			if (thisIndices == null || otherIndices == null) return false;
+			if (thisIndices == null && otherIndices == null)
+				return true;
+			if (thisIndices == null || otherIndices == null)
+				return false;
 
 			return thisIndices.Count == otherIndices.Count && !thisIndices.Except(otherIndices).Any();
 		}

@@ -4,44 +4,44 @@
 
 using System;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
-using Nest.Utf8Json;
 
 namespace Nest
 {
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
-	internal class DefaultHighLevelSerializer : ITransportSerializer, IInternalSerializer
+	internal class DefaultHighLevelSerializer : ITransportSerializer
 	{
-		public DefaultHighLevelSerializer(IJsonFormatterResolver formatterResolver) => FormatterResolver = formatterResolver;
-
-		private IJsonFormatterResolver FormatterResolver { get; }
-
-		bool IInternalSerializer.TryGetJsonFormatter(out IJsonFormatterResolver formatterResolver)
+		private static readonly JsonSerializerOptions Options = new()
 		{
-			formatterResolver = FormatterResolver;
-			return true;
+			Converters = { new JsonStringEnumConverter() }
+		};
+
+		// TODO - This is not production ready - No stream based sync overload
+		public T Deserialize<T>(Stream stream)
+		{
+			if (stream.Length == 0) return default;
+			using var reader = new StreamReader(stream);
+			return JsonSerializer.Deserialize<T>(reader.ReadToEnd());
 		}
 
-		public T Deserialize<T>(Stream stream) =>
-			JsonSerializer.Deserialize<T>(stream, FormatterResolver);
-
 		public object Deserialize(Type type, Stream stream) =>
-			JsonSerializer.NonGeneric.Deserialize(type, stream, FormatterResolver);
+			throw new NotImplementedException();
 
 		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default) =>
-			JsonSerializer.DeserializeAsync<T>(stream, FormatterResolver);
+			stream.Length == 0 ? Task.FromResult(default(T)) : JsonSerializer.DeserializeAsync<T>(stream, Options, cancellationToken).AsTask();
 
 		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default) =>
-			JsonSerializer.NonGeneric.DeserializeAsync(type, stream, FormatterResolver);
+			JsonSerializer.DeserializeAsync(stream, type, Options, cancellationToken).AsTask();
 
 		public virtual void Serialize<T>(T data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.None) =>
-			JsonSerializer.Serialize(writableStream, data, FormatterResolver);
+			throw new NotImplementedException();
 
 		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.None,
 			CancellationToken cancellationToken = default
-		) => JsonSerializer.SerializeAsync(stream, data, FormatterResolver);
-
+		) => throw new NotImplementedException();
 	}
 }

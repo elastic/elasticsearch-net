@@ -5,11 +5,9 @@
 using System;
 using System.Diagnostics;
 using Elastic.Transport;
-using Nest.Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(RelationNameFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class RelationName : IEquatable<RelationName>, IUrlParameter
 	{
@@ -32,7 +30,9 @@ namespace Nest
 				throw new ArgumentNullException(nameof(settings),
 					$"Can not resolve {nameof(RelationName)} if no {nameof(IConnectionSettingsValues)} is provided");
 
-			return nestSettings.Inferrer.RelationName(this);
+			//return nestSettings.Inferrer.RelationName(this);
+
+			return string.Empty;
 		}
 
 		public static RelationName From<T>() => typeof(T);
@@ -41,7 +41,7 @@ namespace Nest
 
 		public static RelationName Create<T>() where T : class => GetRelationNameForType(typeof(T));
 
-		private static RelationName GetRelationNameForType(Type type) => new RelationName(type);
+		private static RelationName GetRelationNameForType(Type type) => new(type);
 
 		public static implicit operator RelationName(string typeName) => typeName.IsNullOrEmpty() ? null : new RelationName(typeName);
 

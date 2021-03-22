@@ -120,17 +120,6 @@
           "System.Text.Json": "4.6.0"
         }
       },
-      "Elastic.Transport": {
-        "type": "Transitive",
-        "resolved": "0.2.3",
-        "contentHash": "sSxPoisUMJsVO6EpsACBCmfjseZ2ESdFXqnA4Oo3V6+8O1DRjxXDNDrG1n6TQYgrI03FG18+SPSjuMZUvC48LQ==",
-        "dependencies": {
-          "Microsoft.CSharp": "4.7.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.0",
-          "System.Text.Json": "5.0.0"
-        }
-      },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
         "resolved": "5.0.0",
@@ -199,11 +188,6 @@
           "System.Runtime.Handles": "4.3.0",
           "System.Runtime.InteropServices": "4.3.0"
         }
-      },
-      "Newtonsoft.Json": {
-        "type": "Transitive",
-        "resolved": "12.0.1",
-        "contentHash": "pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg=="
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl": {
         "type": "Transitive",
@@ -1312,25 +1296,21 @@
           "xunit.extensibility.core": "[2.3.1]"
         }
       },
-      "elasticsearch.net": {
+      "elastic.transport": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "0.2.3"
+          "Microsoft.CSharp": "4.7.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "5.0.0",
+          "System.Text.Json": "5.0.0"
         }
       },
       "nest": {
         "type": "Project",
         "dependencies": {
-          "Elasticsearch.Net": "7.0.0",
+          "Elastic.Transport": "1.0.0",
           "System.Reflection.Emit": "4.3.0",
           "System.Reflection.Emit.Lightweight": "4.3.0"
-        }
-      },
-      "nest.jsonnetserializer": {
-        "type": "Project",
-        "dependencies": {
-          "NEST": "7.0.0",
-          "Newtonsoft.Json": "12.0.1"
         }
       },
       "tests.configuration": {
@@ -1345,7 +1325,6 @@
           "Bogus": "22.1.2",
           "Elastic.Elasticsearch.Managed": "0.2.8",
           "NEST": "7.0.0",
-          "Newtonsoft.Json": "12.0.1",
           "Tests.Configuration": "7.0.0"
         }
       }

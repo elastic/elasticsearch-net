@@ -19,8 +19,8 @@ namespace Tests.Framework.EndpointTests.TestState
 {
 	public class EndpointUsage
 	{
-		private readonly object _lock = new object();
-		private readonly ConcurrentDictionary<string, LazyResponses> _usages = new ConcurrentDictionary<string, LazyResponses>();
+		private readonly object _lock = new();
+		private readonly ConcurrentDictionary<string, LazyResponses> _usages = new();
 
 		public EndpointUsage() : this("nest") { }
 
@@ -77,7 +77,7 @@ namespace Tests.Framework.EndpointTests.TestState
 		public Action<IElasticClient> OnBeforeCall { get; set; }
 
 		// ReSharper disable once StaticMemberInGenericType
-		public static Randomizer Random { get; } = new Randomizer(TestConfiguration.Instance.Seed);
+		public static Randomizer Random { get; } = new(TestConfiguration.Instance.Seed);
 
 		private LazyResponses Responses { get; set; }
 
@@ -134,30 +134,30 @@ namespace Tests.Framework.EndpointTests.TestState
 			OnAfterCall?.Invoke(client);
 		}
 
-		public async Task AssertOnAllResponses(Action<TResponse> assert)
-		{
-			var responses = await Responses;
-			foreach (var kv in responses)
-			{
-				var r = kv.Value as TResponse;
+		//public async Task AssertOnAllResponses(Action<TResponse> assert)
+		//{
+		//	var responses = await Responses;
+		//	foreach (var kv in responses)
+		//	{
+		//		var r = kv.Value as TResponse;
 
-				//this is to make sure any unexpected exceptions on the response are rethrown and shown during testing
-				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-					&& !(r.ApiCall.OriginalException is TransportException))
-				{
-					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
-					throw new ResponseAssertionException(e.SourceException, r);
-				}
+		//		//this is to make sure any unexpected exceptions on the response are rethrown and shown during testing
+		//		if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
+		//			&& !(r.ApiCall.OriginalException is TransportException))
+		//		{
+		//			var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
+		//			throw new ResponseAssertionException(e.SourceException, r);
+		//		}
 
-				try
-				{
-					assert(r);
-				}
-				catch (Exception e)
-				{
-					throw new ResponseAssertionException(e, r);
-				}
-			}
-		}
+		//		try
+		//		{
+		//			assert(r);
+		//		}
+		//		catch (Exception e)
+		//		{
+		//			throw new ResponseAssertionException(e, r);
+		//		}
+		//	}
+		//}
 	}
 }

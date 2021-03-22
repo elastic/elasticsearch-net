@@ -9,7 +9,6 @@ using System.Linq;
 using Elastic.Transport;
 using Nest;
 using Tests.Configuration;
-using Tests.Core.Client.Serializers;
 using Tests.Core.Extensions;
 using Tests.Core.Xunit;
 
@@ -23,17 +22,10 @@ namespace Tests.Core.Client.Settings
 		public TestConnectionSettings(
 			Func<ICollection<Uri>, IConnectionPool> createPool = null,
 			SourceSerializerFactory sourceSerializerFactory = null,
-			IPropertyMappingProvider propertyMappingProvider = null,
 			bool forceInMemory = false,
 			int port = 9200,
 			byte[] response = null
-		)
-			: base(
-				CreatePool(createPool, port),
-				TestConfiguration.Instance.CreateConnection(forceInMemory, response),
-				CreateSerializerFactory(sourceSerializerFactory),
-				propertyMappingProvider
-			) =>
+		) : base(CreatePool(createPool, port), TestConfiguration.Instance.CreateConnection(forceInMemory, response)) =>
 			ApplyTestSettings();
 
 		public static string LocalOrProxyHost => RunningFiddler || RunningMitmProxy ? "ipv4.fiddler" : LocalHost;
@@ -74,13 +66,13 @@ namespace Tests.Core.Client.Settings
 			return Proxy(new Uri("http://127.0.0.1:8080"), null, (string)null);
 		}
 
-		private static SourceSerializerFactory CreateSerializerFactory(SourceSerializerFactory provided)
-		{
-			if (provided != null) return provided;
-			if (!TestConfiguration.Instance.Random.SourceSerializer) return null;
+		//private static SourceSerializerFactory CreateSerializerFactory(SourceSerializerFactory provided)
+		//{
+		//	if (provided != null) return provided;
+		//	if (!TestConfiguration.Instance.Random.SourceSerializer) return null;
 
-			return (builtin, values) => new TestSourceSerializerBase(builtin, values);
-		}
+		//	return (builtin, values) => new TestSourceSerializerBase(builtin, values);
+		//}
 
 		private static IConnectionPool CreatePool(Func<ICollection<Uri>, IConnectionPool> createPool = null, int port = 9200)
 		{

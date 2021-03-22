@@ -19,17 +19,16 @@ using Xunit;
 
 namespace Tests.Framework.EndpointTests
 {
-	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
+	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TInitializer>
 		: ExpectJsonTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
 		where TResponse : class, IResponse
 		where TInterface : class
-		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
 	{
 		private readonly EndpointUsage _usage;
 
-		protected RequestResponseApiTestBase(TCluster cluster, EndpointUsage usage) : base(cluster.Client)
+		protected RequestResponseApiTestBase(TCluster cluster, EndpointUsage usage) // : base(cluster.Client)
 		{
 			_usage = usage ?? throw new ArgumentNullException(nameof(usage));
 
@@ -46,7 +45,6 @@ namespace Tests.Framework.EndpointTests
 		public TCluster Cluster { get; }
 
 		protected virtual string CallIsolatedValue => UniqueValues.Value;
-		protected virtual Func<TDescriptor, TInterface> Fluent { get; } = null;
 		protected virtual TInitializer Initializer { get; } = null;
 		protected bool RanIntegrationSetup => _usage?.CalledSetup ?? false;
 		protected LazyResponses Responses { get; }
@@ -66,9 +64,7 @@ namespace Tests.Framework.EndpointTests
 		protected bool TryGetExtendedValue<T>(string key, out T t) where T : class => UniqueValues.TryGetExtendedValue(key, out t);
 
 		protected void ExtendedValue<T>(string key, T value) where T : class => UniqueValues.ExtendedValue(key, value);
-
-		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
-
+		
 		protected virtual void IntegrationSetup(IElasticClient client, CallUniqueValues values) { }
 
 		protected virtual void IntegrationTeardown(IElasticClient client, CallUniqueValues values) { }
@@ -80,9 +76,6 @@ namespace Tests.Framework.EndpointTests
 		protected abstract LazyResponses ClientUsage();
 
 		protected LazyResponses Calls(
-			Func<IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
-			Func<IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
-			Func<IElasticClient, TInitializer, TResponse> request,
 			Func<IElasticClient, TInitializer, Task<TResponse>> requestAsync
 		) => new LazyResponses(async () =>
 		{
@@ -106,9 +99,6 @@ namespace Tests.Framework.EndpointTests
 			var dict = new Dictionary<ClientMethod, IResponse>();
 			var views = new[]
 			{
-				Api(ClientMethod.Fluent, () => new ValueTask<TResponse>(fluent(client, Fluent))),
-				Api(ClientMethod.Initializer, () => new ValueTask<TResponse>(request(client, Initializer))),
-				Api(ClientMethod.FluentAsync, async () => await fluentAsync(client, Fluent)),
 				Api(ClientMethod.InitializerAsync, async () => await requestAsync(client, Initializer)),
 			};
 			foreach (var (v, m) in views.OrderBy((t) => Gimme.Random.Int()))

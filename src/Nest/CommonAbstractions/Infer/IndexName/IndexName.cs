@@ -5,40 +5,38 @@
 using System;
 using System.Diagnostics;
 using Elastic.Transport;
-using Nest.Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(IndexNameFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{
 		private const char ClusterSeparator = ':';
 
-		private IndexName(string index, string cluster = null)
+		private IndexName(string index, string? cluster = null)
 		{
 			Name = index;
 			Cluster = cluster;
 		}
 
-		private IndexName(Type type, string cluster = null)
+		private IndexName(Type type, string? cluster = null)
 		{
 			Type = type;
 			Cluster = cluster;
 		}
 
-		private IndexName(string index, Type type, string cluster = null)
+		private IndexName(string index, Type type, string? cluster = null)
 		{
 			Name = index;
 			Type = type;
 			Cluster = cluster;
 		}
 
-		public string Cluster { get; }
-		public string Name { get; }
-		public Type Type { get; }
+		public string? Cluster { get; }
+		public string? Name { get; }
+		public Type? Type { get; }
 
-		internal string DebugDisplay => Type == null ? Name : $"{nameof(IndexName)} for typeof: {Type?.Name}";
+		internal string? DebugDisplay => Type == null ? Name : $"{nameof(IndexName)} for typeof: {Type?.Name}";
 
 		private static int TypeHashCode { get; } = typeof(IndexName).GetHashCode();
 
@@ -52,23 +50,24 @@ namespace Nest
 			return nestSettings.Inferrer.IndexName(this);
 		}
 
-		public static IndexName From<T>() => typeof(T);
+		public static IndexName? From<T>() => typeof(T);
 
 		public static IndexName From<T>(string clusterName) => From(typeof(T), clusterName);
 
-		private static IndexName From(Type type, string clusterName) => new IndexName(type, clusterName);
+		private static IndexName From(Type type, string clusterName) => new(type, clusterName);
 
-		internal static IndexName Rebuild(string index, Type type, string clusterName = null) => new IndexName(index, type, clusterName);
+		internal static IndexName Rebuild(string index, Type type, string? clusterName = null) => new(index, type, clusterName);
 
-		public Indices And<T>() => new Indices(new[] { this, typeof(T) });
+		public Indices And<T>() => new(new[] { this, typeof(T) });
 
-		public Indices And<T>(string clusterName) => new Indices(new[] { this, From(typeof(T), clusterName) });
+		public Indices And<T>(string clusterName) => new(new[] { this, From(typeof(T), clusterName) });
 
-		public Indices And(IndexName index) => new Indices(new[] { this, index });
+		public Indices And(IndexName index) => new(new[] { this, index });
 
-		private static IndexName Parse(string indexName)
+		private static IndexName? Parse(string indexName)
 		{
-			if (string.IsNullOrWhiteSpace(indexName)) return null;
+			if (string.IsNullOrWhiteSpace(indexName))
+				return null;
 
 			var separatorIndex = indexName.IndexOf(ClusterSeparator);
 
@@ -82,9 +81,9 @@ namespace Nest
 			return new IndexName(indexName);
 		}
 
-		public static implicit operator IndexName(string indexName) => Parse(indexName);
+		public static implicit operator IndexName?(string indexName) => Parse(indexName);
 
-		public static implicit operator IndexName(Type type) => type == null ? null : new IndexName(type);
+		public static implicit operator IndexName?(Type type) => type == null ? null : new IndexName(type);
 
 		public override bool Equals(object obj) => obj is string s ? EqualsString(s) : obj is IndexName i && EqualsMarker(i);
 
@@ -99,7 +98,7 @@ namespace Nest
 			}
 		}
 
-		public static bool operator ==(IndexName left, IndexName right) => Equals(left, right);
+		public static bool operator ==(IndexName left, IndexName? right) => Equals(left, right);
 
 		public static bool operator !=(IndexName left, IndexName right) => !Equals(left, right);
 
@@ -119,11 +118,13 @@ namespace Nest
 
 		private bool EqualsMarker(IndexName other)
 		{
-			if (other == null) return false;
+			if (other == null)
+				return false;
 			if (!Name.IsNullOrEmpty() && !other.Name.IsNullOrEmpty())
 				return EqualsString(PrefixClusterName(other, other.Name));
 
-			if ((!Cluster.IsNullOrEmpty() || !other.Cluster.IsNullOrEmpty()) && Cluster != other.Cluster) return false;
+			if ((!Cluster.IsNullOrEmpty() || !other.Cluster.IsNullOrEmpty()) && Cluster != other.Cluster)
+				return false;
 
 			return Type != null && other.Type != null && Type == other.Type;
 		}

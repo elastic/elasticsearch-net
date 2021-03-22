@@ -7,9 +7,9 @@ using Elastic.Transport.Products.Elasticsearch;
 
 namespace Nest
 {
-	public class NestElasticsearchProductRegistration : ElasticsearchProductRegistration
+	internal sealed class NestElasticsearchProductRegistration : ElasticsearchProductRegistration
 	{
-		public static NestElasticsearchProductRegistration DefaultForNest { get; } = new NestElasticsearchProductRegistration();
+		public static NestElasticsearchProductRegistration DefaultForNest { get; } = new();
 
 		/// <summary>
 		/// NEST handles 404 in its <see cref="ResponseBase.IsValid"/>, we do not want the low level client throwing exceptions
@@ -19,7 +19,6 @@ namespace Nest
 		public override bool HttpStatusCodeClassifier(HttpMethod method, int statusCode) =>
 			statusCode >= 200 && statusCode < 300
 			|| statusCode == 404;
-
 
 		/// <summary>
 		/// Makes the low level transport aware of NEST's <see cref="ResponseBase"/>
