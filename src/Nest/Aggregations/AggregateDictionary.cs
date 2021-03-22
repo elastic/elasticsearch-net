@@ -222,6 +222,8 @@ namespace Nest
 
 		public MultiBucketAggregate<DateHistogramBucket> DateHistogram(string key) => GetMultiBucketAggregate<DateHistogramBucket>(key);
 
+		public MultiBucketAggregate<VariableWidthHistogramBucket> VariableWidthHistogram(string key) => GetMultiBucketAggregate<VariableWidthHistogramBucket>(key);
+
 		public MultiTermsAggregate<string> MultiTerms(string key) => MultiTerms<string>(key);
 
 		public MultiTermsAggregate<TKey> MultiTerms<TKey>(string key)

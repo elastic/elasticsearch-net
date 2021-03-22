@@ -161,6 +161,8 @@ namespace Nest
 		void Visit(ITTestAggregation aggregation);
 
 		void Visit(IMultiTermsAggregation aggregation);
+
+		void Visit(IVariableWidthHistogramAggregation aggregation);
 	}
 
 	public class AggregationVisitor : IAggregationVisitor
@@ -306,6 +308,8 @@ namespace Nest
 		public virtual void Visit(IAggregation aggregation) { }
 
 		public virtual void Visit(IAggregationContainer aggregationContainer) { }
+
+		public virtual void Visit(IVariableWidthHistogramAggregation aggregationContainer) { }
 
 	}
 }

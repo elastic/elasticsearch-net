@@ -1,0 +1,89 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.x
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/Aggregations/Bucket/VariableWidthHistogram/VariableWidthHistogramUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[variable-width-histogram-usage]]
+=== Variable Width Histogram Usage
+
+A multi-bucket aggregation similar to Histogram. However, the width of each bucket is not specified. Rather, a target number of buckets is provided
+and bucket intervals are dynamically determined based on the document distribution. 
+
+See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-variablewidthhistogram-aggregation.html[multi terms aggregation] for more detail.
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.VariableWidthHistogram("commits", v => v
+    .Field(f => f.NumberOfCommits)
+    .Buckets(2)
+    .InitialBuffer(2)
+    .ShardSize(100)
+    .Meta(m => m
+        .Add("foo", "bar")
+    ))
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new VariableWidthHistogramAggregation("commits")
+{
+    Field = Field<Project>(f => f.NumberOfCommits),
+    Buckets = 2,
+    InitialBuffer = 2,
+    ShardSize = 100,
+    Meta = new Dictionary<string, object>
+    {
+        { "foo", "bar" }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commits": {
+    "meta": {
+      "foo": "bar"
+    },
+    "variable_width_histogram": {
+      "field": "numberOfCommits",
+      "buckets": 2,
+      "initial_buffer": 2,
+      "shard_size": 100
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var counts = response.Aggregations.VariableWidthHistogram("commits");
+counts.Should().NotBeNull();
+counts.Buckets.Should().HaveCountGreaterThan(0);
+var firstBucket = counts.Buckets.First();
+firstBucket.Key.Should().BeGreaterOrEqualTo(0);
+firstBucket.Minimum.Should().BeGreaterOrEqualTo(0);
+firstBucket.Maximum.Should().BeGreaterOrEqualTo(0);
+firstBucket.DocCount.Should().BeGreaterOrEqualTo(1);
+counts.Meta.Should().NotBeNull().And.HaveCount(1);
+counts.Meta["foo"].Should().Be("bar");
+----
+

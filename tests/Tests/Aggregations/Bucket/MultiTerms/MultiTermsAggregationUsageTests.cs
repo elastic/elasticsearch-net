@@ -18,7 +18,7 @@ namespace Tests.Aggregations.Bucket.MultiTerms
 	/**
 	 * A multi-bucket value source based aggregation where buckets are dynamically built - one per unique set of values.
 	 *
-	 * See the Elasticsearch documentation on {ref_current}//search-aggregations-bucket-multi-terms-aggregation.html[multi terms aggregation] for more detail.
+	 * See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-multi-terms-aggregation.html[multi terms aggregation] for more detail.
 	 */
 	[SkipVersion("<7.12.0", "Multi terms aggregation added in 7.12.0")]
 	public class MultiTermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
