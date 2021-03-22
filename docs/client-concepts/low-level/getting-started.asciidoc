@@ -176,7 +176,7 @@ var searchResponse = lowlevelClient.Search<StringResponse>("people", PostData.Se
     {
         match = new
         {
-            firstName = new
+            FirstName = new
             {
                 query = "Martijn"
             }
