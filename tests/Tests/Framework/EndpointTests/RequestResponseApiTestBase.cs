@@ -76,8 +76,9 @@ namespace Tests.Framework.EndpointTests
 		protected abstract LazyResponses ClientUsage();
 
 		protected LazyResponses Calls(
+			Func<IElasticClient, TInitializer, TResponse> request,
 			Func<IElasticClient, TInitializer, Task<TResponse>> requestAsync
-		) => new LazyResponses(async () =>
+		) => new(async () =>
 		{
 			var client = Client;
 
@@ -94,11 +95,12 @@ namespace Tests.Framework.EndpointTests
 				_usage.CalledSetup = true;
 			}
 
-			(ClientMethod, Func<ValueTask<TResponse>>) Api(ClientMethod method, Func<ValueTask<TResponse>> action) => (method, action);
+			static (ClientMethod, Func<ValueTask<TResponse>>) Api(ClientMethod method, Func<ValueTask<TResponse>> action) => (method, action);
 
 			var dict = new Dictionary<ClientMethod, IResponse>();
 			var views = new[]
 			{
+				Api(ClientMethod.Initializer, () => new ValueTask<TResponse>(request(client, Initializer))),
 				Api(ClientMethod.InitializerAsync, async () => await requestAsync(client, Initializer)),
 			};
 			foreach (var (v, m) in views.OrderBy((t) => Gimme.Random.Int()))
@@ -123,12 +125,12 @@ namespace Tests.Framework.EndpointTests
 		protected virtual async Task AssertOnAllResponses(Action<TResponse> assert)
 		{
 			var responses = await Responses;
-			foreach (var kv in responses)
+			foreach (var (key, value) in responses)
 			{
-				var response = kv.Value as TResponse;
+				var response = value as TResponse;
 				try
 				{
-					UniqueValues.CurrentView = kv.Key;
+					UniqueValues.CurrentView = key;
 					assert(response);
 				}
 #pragma warning disable 7095 //enable this if you expect a single overload to act up
@@ -138,7 +140,7 @@ namespace Tests.Framework.EndpointTests
 #pragma warning restore 8360
 #pragma warning disable 0162 //dead code while the previous exception filter is false
 				{
-					throw new Exception($"asserting over the response from: {kv.Key} failed: {ex.Message}", ex);
+					throw new Exception($"asserting over the response from: {key} failed: {ex.Message}", ex);
 				}
 #pragma warning restore 0162
 			}
