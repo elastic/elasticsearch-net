@@ -295,6 +295,9 @@ namespace Nest
 
 		[DataMember(Name = "multi_terms")]
 		IMultiTermsAggregation MultiTerms { get; set; }
+		
+		[DataMember(Name = "variable_width_histogram")]
+		IVariableWidthHistogramAggregation VariableWidthHistogram { get; set; }
 
 		void Accept(IAggregationVisitor visitor);
 	}
@@ -445,6 +448,8 @@ namespace Nest
 		public ITopMetricsAggregation TopMetrics { get; set; }
 
 		public IMultiTermsAggregation MultiTerms { get; set; }
+
+		public IVariableWidthHistogramAggregation VariableWidthHistogram { get; set; }
 
 		public void Accept(IAggregationVisitor visitor)
 		{
@@ -614,6 +619,8 @@ namespace Nest
 		IStringStatsAggregation IAggregationContainer.StringStats { get; set; }
 
 		ITopMetricsAggregation IAggregationContainer.TopMetrics { get; set; }
+
+		IVariableWidthHistogramAggregation IAggregationContainer.VariableWidthHistogram { get; set; }
 
 		public void Accept(IAggregationVisitor visitor)
 		{
@@ -959,6 +966,11 @@ namespace Nest
 			Func<TopMetricsAggregationDescriptor<T>, ITopMetricsAggregation> selector
 		) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.TopMetrics = d);
+
+		public AggregationContainerDescriptor<T> VariableWidthHistogram(string name,
+			Func<VariableWidthHistogramAggregationDescriptor<T>, IVariableWidthHistogramAggregation> selector
+		) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.VariableWidthHistogram = d);
 
 		/// <summary>
 		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside
