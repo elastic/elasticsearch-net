@@ -12,32 +12,32 @@ namespace Nest
 	/// </summary>
 	public class ElasticsearchVersionInfo
 	{
-		[DataMember(Name ="lucene_version")]
+		[DataMember(Name = "lucene_version")]
 		public string LuceneVersion { get; set; }
 
-		[DataMember(Name ="number")]
+		[DataMember(Name = "number")]
 		public string Number { get; set; }
-		
-		[DataMember(Name ="build_flavor")]
+
+		[DataMember(Name = "build_flavor")]
 		public string BuildFlavor { get; set; }
-		
-		[DataMember(Name ="build_type")]
+
+		[DataMember(Name = "build_type")]
 		public string BuildType { get; set; }
-		
-		[DataMember(Name ="build_hash")]
+
+		[DataMember(Name = "build_hash")]
 		public string BuildHash { get; set; }
-		
-		[DataMember(Name ="build_date")]
+
+		[DataMember(Name = "build_date")]
 		public DateTimeOffset BuildDate { get; set; }
-		
-		[DataMember(Name ="build_snapshot")]
+
+		[DataMember(Name = "build_snapshot")]
 		public bool BuildSnapshot { get; set; }
-		
-		[DataMember(Name ="minimum_wire_compatibility_version")]
+
+		[DataMember(Name = "minimum_wire_compatibility_version")]
 		public string MinimumWireCompatibilityVersion { get; set; }
-		
-		[DataMember(Name ="minimum_index_compatibility_version")]
+
+		[DataMember(Name = "minimum_index_compatibility_version")]
 		public string MinimumIndexCompatibilityVersion { get; set; }
 	}
-	
+
 }

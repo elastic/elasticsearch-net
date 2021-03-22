@@ -18,11 +18,10 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Framework.EndpointTests
 {
-	public abstract class ApiIntegrationTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		: ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
+	public abstract class ApiIntegrationTestBase<TCluster, TResponse, TInterface, TInitializer>
+		: ApiTestBase<TCluster, TResponse, TInterface, TInitializer>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
 		where TResponse : class, IResponse
-		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
@@ -35,15 +34,13 @@ namespace Tests.Framework.EndpointTests
 
 		protected virtual void ExpectResponse(TResponse response) { }
 
-		// https://youtrack.jetbrains.com/issue/RIDER-19912
-		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
+		//// https://youtrack.jetbrains.com/issue/RIDER-19912
+		//[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
 
-		[U] protected override Task UsesCorrectHttpMethod() => base.UsesCorrectHttpMethod();
+		//[U] protected override Task UsesCorrectHttpMethod() => base.UsesCorrectHttpMethod();
 
-		[U] protected override void SerializesInitializer() => base.SerializesInitializer();
-
-		[U] protected override void SerializesFluent() => base.SerializesFluent();
-
+		//[U] protected override void SerializesInitializer() => base.SerializesInitializer();
+		
 		[I] public virtual async Task ReturnsExpectedStatusCode() =>
 			await AssertOnAllResponses(r => r.ApiCall.HttpStatusCode.Should().Be(ExpectStatusCode));
 

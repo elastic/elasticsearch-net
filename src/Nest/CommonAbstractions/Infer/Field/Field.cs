@@ -8,11 +8,9 @@ using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elastic.Transport;
-using Nest.Utf8Json;
 
 namespace Nest
 {
-	[JsonFormatter(typeof(FieldFormatter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Field : IEquatable<Field>, IUrlParameter
 	{
@@ -100,24 +98,25 @@ namespace Nest
 			return nestSettings.Inferrer.Field(this);
 		}
 
-		public Fields And(Field field) => new Fields(new[] { this, field });
+		public Fields And(Field field) => new(new[] { this, field });
 
 		public Fields And<T, TValue>(Expression<Func<T, TValue>> field, double? boost = null, string format = null) where T : class =>
-			new Fields(new[] { this, new Field(field, boost, format) });
+			new(new[] { this, new Field(field, boost, format) });
 
 		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null, string format = null) where T : class =>
-			new Fields(new[] { this, new Field(field, boost, format) });
+			new(new[] { this, new Field(field, boost, format) });
 
 		public Fields And(string field, double? boost = null, string format = null) =>
-			new Fields(new[] { this, new Field(field, boost, format) });
+			new(new[] { this, new Field(field, boost, format) });
 
 		public Fields And(PropertyInfo property, double? boost = null, string format = null) =>
-			new Fields(new[] { this, new Field(property, boost, format) });
+			new(new[] { this, new Field(property, boost, format) });
 
 		private static string ParseFieldName(string name, out double? boost)
 		{
 			boost = null;
-			if (name == null) return null;
+			if (name == null)
+				return null;
 
 			var caretIndex = name.IndexOf('^');
 			if (caretIndex == -1)
@@ -149,10 +148,14 @@ namespace Nest
 		{
 			switch (obj)
 			{
-				case string s: return Equals(s);
-				case PropertyInfo p: return Equals(p);
-				case Field f: return Equals(f);
-				default: return false;
+				case string s:
+					return Equals(s);
+				case PropertyInfo p:
+					return Equals(p);
+				case Field f:
+					return Equals(f);
+				default:
+					return false;
 			}
 		}
 

@@ -6,7 +6,6 @@ using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
-using Tests.Domain;
 
 namespace Tests.Core.Extensions
 {
@@ -28,19 +27,19 @@ namespace Tests.Core.Extensions
 			response.ApiCall.Success.Should().BeTrue("{0}", response.DebugInformation);
 
 
-		public static void ShouldAdhereToSourceSerializerWhenSet(this Project project)
-		{
-			var usingSourceSerializer = TestClient.Configuration.Random.SourceSerializer;
-			project.Should().NotBeNull();
-			if (!usingSourceSerializer)
-			{
-				project.SourceOnly.Should().BeNull();
-				return;
-			}
-			project.SourceOnly.Should().NotBeNull();
-			project.SourceOnly.NotWrittenByDefaultSerializer.Should().Be("written");
-			project.SourceOnly.NotReadByDefaultSerializer.Should().Be("read");
-		}
+		//public static void ShouldAdhereToSourceSerializerWhenSet(this Project project)
+		//{
+		//	var usingSourceSerializer = TestClient.Configuration.Random.SourceSerializer;
+		//	project.Should().NotBeNull();
+		//	if (!usingSourceSerializer)
+		//	{
+		//		project.SourceOnly.Should().BeNull();
+		//		return;
+		//	}
+		//	project.SourceOnly.Should().NotBeNull();
+		//	project.SourceOnly.NotWrittenByDefaultSerializer.Should().Be("written");
+		//	project.SourceOnly.NotReadByDefaultSerializer.Should().Be("read");
+		//}
 
 		public static void ShouldBeTrue(this bool b, IUrlParameter p) =>
 			b.Should().BeTrue(p?.GetString(TestClient.DefaultInMemoryClient.ConnectionSettings) ?? "NULL");

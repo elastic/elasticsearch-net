@@ -8,7 +8,7 @@ namespace Tests.Framework.Extensions
 {
 	public static class Promisify
 	{
-		public static PromiseValue<T> Promise<T>(T o) where T : class => new PromiseValue<T>(o);
+		public static PromiseValue<T> Promise<T>(T o) where T : class => new(o);
 
 		public class PromiseValue<T> : IPromise<T> where T : class
 		{

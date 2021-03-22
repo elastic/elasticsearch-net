@@ -4,16 +4,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Elastic.Transport;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	/// <summary>
 	/// Provides the connection settings for NEST's high level <see cref="ElasticClient" />
 	/// </summary>
-	public interface IConnectionSettingsValues : IConnectionConfigurationValues
+	public interface IConnectionSettingsValues : ITransportConfiguration
 	{
 		/// <summary>
 		/// Specifies how field names are inferred from CLR property names.
@@ -54,12 +52,12 @@ namespace Nest
 		/// <summary>
 		/// Provides mappings for CLR types
 		/// </summary>
-		IPropertyMappingProvider PropertyMappingProvider { get; }
+		//IPropertyMappingProvider PropertyMappingProvider { get; }
 
 		/// <summary>
 		/// Provides mappings for CLR type members
 		/// </summary>
-		FluentDictionary<MemberInfo, IPropertyMapping> PropertyMappings { get; }
+		//FluentDictionary<MemberInfo, IPropertyMapping> PropertyMappings { get; }
 
 		/// <summary>
 		/// Specify a property for a CLR type to use to infer the routing for of a document when indexed in Elasticsearch.
