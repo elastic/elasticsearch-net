@@ -14,12 +14,17 @@ namespace Nest
 		[DataMember(Name = "value")]
 		[JsonFormatter(typeof(SourceWriteFormatter<object>))]
 		object Value { get; set; }
+
+		[DataMember(Name = "case_insensitive")]
+		bool? CaseInsensitive { get; set; }
 	}
 
 	[DataContract]
 	public class TermQuery : FieldNameQueryBase, ITermQuery
 	{
 		public object Value { get; set; }
+		
+		public bool? CaseInsensitive { get; set; }
 
 		protected override bool Conditionless => IsConditionless(this);
 
@@ -37,10 +42,17 @@ namespace Nest
 	{
 		protected override bool Conditionless => TermQuery.IsConditionless(this);
 		object ITermQuery.Value { get; set; }
+		bool? ITermQuery.CaseInsensitive { get; set; }
 
 		public TDescriptor Value(object value)
 		{
 			Self.Value = value;
+			return (TDescriptor)this;
+		}
+
+		public TDescriptor CaseInsensitive(bool? caseInsensitive = true)
+		{
+			Self.CaseInsensitive = caseInsensitive;
 			return (TDescriptor)this;
 		}
 	}
