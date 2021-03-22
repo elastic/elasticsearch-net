@@ -1,253 +1,260 @@
-//// Licensed to Elasticsearch B.V under one or more agreements.
-//// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-//// See the LICENSE file in the project root for more information
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
 
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using Elastic.Transport;
-//using Elastic.Transport.Extensions;
-//using FluentAssertions;
-//using Nest;
-//using System.Text.Json;
-//using Tests.Core.Client;
-//using Tests.Core.Extensions;
+using System;
+using System.Text;
+using Elastic.Transport;
+using Elastic.Transport.Extensions;
+using Nest;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Tests.Core.Client;
+using Tests.Core.Extensions;
 
-//namespace Tests.Core.Serialization
-//{
-//	public class SerializationResult
-//	{
-//		public string DiffFromExpected { get; set; }
-//		public string Serialized { get; set; }
-//		public bool Success { get; set; }
+namespace Tests.Core.Serialization
+{
+	public class SerializationResult
+	{
+		public string DiffFromExpected { get; set; }
+		public string Serialized { get; set; }
+		public bool Success { get; set; }
 
-//		private string DiffFromExpectedExcerpt =>
-//			string.IsNullOrEmpty(DiffFromExpected)
-//				? string.Empty
-//				: DiffFromExpected?
-////					.Replace("{", "{{") // escape for string format in FluentAssertion
-////					.Replace("}", "}}")
-//					.Substring(0, DiffFromExpected.Length > 4896 ? 4896 : DiffFromExpected.Length);
+		private string DiffFromExpectedExcerpt =>
+			string.IsNullOrEmpty(DiffFromExpected)
+				? string.Empty
+				: DiffFromExpected?.Substring(0, DiffFromExpected.Length > 4896 ? 4896 : DiffFromExpected.Length);
 
-//		public override string ToString()
-//		{
-//			var message = $"{GetType().Name} success: {Success}";
-//			if (Success) return message;
+		public override string ToString()
+		{
+			var message = $"{GetType().Name} success: {Success}";
+			if (Success)
+				return message;
 
-//			message += Environment.NewLine;
-//			message += DiffFromExpectedExcerpt;
-//			return message;
-//		}
-//	}
+			message += Environment.NewLine;
+			message += DiffFromExpectedExcerpt;
+			return message;
+		}
+	}
 
-//	public class DeserializationResult<T> : SerializationResult
-//	{
-//		public T Result { get; set; }
+	public class DeserializationResult<T> : SerializationResult
+	{
+		public T Result { get; set; }
 
-//		public override string ToString()
-//		{
-//			var s = $"Deserialization has result: {Result != null}";
-//			s += Environment.NewLine;
-//			s += base.ToString();
-//			return s;
-//		}
-//	}
+		public override string ToString()
+		{
+			var s = $"Deserialization has result: {Result != null}";
+			s += Environment.NewLine;
+			s += base.ToString();
+			return s;
+		}
+	}
 
-//	public class RoundTripResult<T> : DeserializationResult<T>
-//	{
-//		public int Iterations { get; set; }
+	public class RoundTripResult<T> : DeserializationResult<T>
+	{
+		public int Iterations { get; set; }
 
-//		public override string ToString()
-//		{
-//			var s = $"RoundTrip: {Iterations.ToOrdinal()} iteration";
-//			s += Environment.NewLine;
-//			s += base.ToString();
-//			return s;
-//		}
-//	}
+		public override string ToString()
+		{
+			var s = $"RoundTrip: {Iterations.ToOrdinal()} iteration";
+			s += Environment.NewLine;
+			s += base.ToString();
+			return s;
+		}
+	}
 
-//	public class SerializationTester
-//	{
-//		public SerializationTester(IElasticClient client) => Client = client;
+	public class SerializationTester
+	{
+		public static SerializationTester Default { get; } = new(TestClient.DefaultInMemoryClient);
 
-//		public IElasticClient Client { get; }
-//		public static SerializationTester Default { get; } = new SerializationTester(TestClient.DefaultInMemoryClient);
+		public SerializationTester(IElasticClient client) => Client = client;
 
-//		//public static SerializationTester DefaultWithJsonNetSerializer { get; } = new SerializationTester(TestClient.InMemoryWithJsonNetSerializer);
+		public IElasticClient Client { get; }
 
-//		protected ITransportSerializer Serializer => Client.ConnectionSettings.RequestResponseSerializer;
+		//public static SerializationTester DefaultWithJsonNetSerializer { get; } = new SerializationTester(TestClient.InMemoryWithJsonNetSerializer);
 
-//		public RoundTripResult<T> RoundTrips<T>(T @object, bool preserveNullInExpected = false)
-//		{
-//			var serialized = SerializeUsingClientDefault(@object);
-//			return RoundTrips(@object, serialized);
-//		}
+		protected ITransportSerializer Serializer => Client.ConnectionSettings.RequestResponseSerializer;
 
-//		public RoundTripResult<T> RoundTrips<T>(T @object, object expectedJson, bool preserveNullInExpected = false)
-//		{
-//			var expectedJsonToken = ExpectedJsonToJtoken(expectedJson, preserveNullInExpected);
+		public RoundTripResult<T> RoundTrips<T>(T @object) //, bool preserveNullInExpected = false)
+		{
+			var serialized = SerializeUsingClientDefault(@object);
+			return RoundTrips(@object, serialized);
+		}
 
-//			var result = new RoundTripResult<T>() { Success = false };
-//			if (expectedJsonToken == null)
-//			{
-//				result.DiffFromExpected = "Expected json was null";
-//				return result;
-//			}
+		public RoundTripResult<T> RoundTrips<T>(T @object, object expectedJson, bool preserveNullInExpected = false)
+		{
+			var expectedJsonToken = ExpectedJsonToJsonDocument(expectedJson, preserveNullInExpected);
 
-//			if (!SerializesAndMatches(@object, expectedJsonToken, result))
-//				return result;
+			var result = new RoundTripResult<T>() { Success = false };
+			if (expectedJsonToken == null)
+			{
+				result.DiffFromExpected = "Expected json was null";
+				return result;
+			}
 
-//			@object = Deserialize<T>(result.Serialized);
-//			result.Iterations += 1;
+			if (!SerializesAndMatches(@object, expectedJsonToken, result))
+				return result;
 
-//			if (!SerializesAndMatches(@object, expectedJsonToken, result))
-//				return result;
+			@object = Deserialize<T>(result.Serialized);
+			result.Iterations += 1;
 
-//			@object = Deserialize<T>(result.Serialized);
+			if (!SerializesAndMatches(@object, expectedJsonToken, result))
+				return result;
 
-//			result.Result = @object;
-//			result.Success = true;
-//			return result;
-//		}
+			@object = Deserialize<T>(result.Serialized);
 
-//		public SerializationResult Serializes<T>(T @object, object expectedJson, bool preserveNullInExpected = false)
-//		{
-//			var expectedJsonToken = ExpectedJsonToJtoken(expectedJson, preserveNullInExpected);
-//			var result = new RoundTripResult<T>() { Success = false };
-//			if (SerializesAndMatches(@object, expectedJsonToken, result))
-//				result.Success = true;
-//			return result;
-//		}
+			result.Result = @object;
+			result.Success = true;
+			return result;
+		}
 
-//		public DeserializationResult<T> Deserializes<T>(object expectedJson, bool preserveNullInExpected = false)
-//		{
-//			var expectedJsonString = ExpectedJsonString(expectedJson, preserveNullInExpected);
-//			var result = new RoundTripResult<T>() { Success = false };
-//			var @object = Deserialize<T>(expectedJsonString);
-//			if (@object != null) result.Success = true;
-//			result.Result = @object;
-//			return result;
-//		}
+		public SerializationResult Serializes<T>(T @object, object expectedJson, bool preserveNullInExpected = false)
+		{
+			var expectedJsonToken = ExpectedJsonToJsonDocument(expectedJson, preserveNullInExpected);
+			var result = new RoundTripResult<T> { Success = false };
 
-//		private JsonElement ExpectedJsonToJtoken(object expectedJson, bool preserveNullInFromJson)
-//		{
-//			switch (expectedJson)
-//			{
-//				case string s: return new JsonElement().GetString(s);
-//				case byte[] utf8: return new JValue(Encoding.UTF8.GetString(utf8));
-//				default:
-//					var expectedJsonString = ExpectedJsonString(expectedJson, preserveNullInFromJson);
-//					return JToken.Parse(expectedJsonString);
-//			}
-//		}
+			if (SerializesAndMatches(@object, expectedJsonToken, result))
+				result.Success = true;
+			return result;
+		}
 
-//		private string ExpectedJsonString(object expectedJson, bool preserveNullInFromJson)
-//		{
-//			switch (expectedJson)
-//			{
-//				case string s: return s;
-//				case byte[] utf8: return Encoding.UTF8.GetString(utf8);
-//				default:
-//					var expectedSerializerSettings = ExpectedJsonSerializerSettings(preserveNullInFromJson);
-//					return JsonConvert.SerializeObject(expectedJson, Formatting.None, expectedSerializerSettings);
-//			}
-//		}
+		public DeserializationResult<T> Deserializes<T>(object expectedJson, bool preserveNullInExpected = false)
+		{
+			var expectedJsonString = ExpectedJsonString(expectedJson, preserveNullInExpected);
+			var result = new RoundTripResult<T>() { Success = false };
+			var @object = Deserialize<T>(expectedJsonString);
+			if (@object != null)
+				result.Success = true;
+			result.Result = @object;
+			return result;
+		}
 
-//		private bool SerializesAndMatches<T>(T @object, JToken expectedJsonToken, RoundTripResult<T> result)
-//		{
-//			result.Serialized = SerializeUsingClientDefault(@object);
-//			return expectedJsonToken.Type == JTokenType.Array
-//				? ArrayMatches((JArray)expectedJsonToken, result)
-//				: TokenMatches(expectedJsonToken, result);
-//		}
+		private static JsonDocument ExpectedJsonToJsonDocument(object expectedJson, bool preserveNullInFromJson)
+		{
+			switch (expectedJson)
+			{
+				case string s:
+					return JsonDocument.Parse(Encoding.UTF8.GetBytes(s));
+				case byte[] utf8:
+					return JsonDocument.Parse(utf8);
+				default:
+					var json = ExpectedJsonString(expectedJson, preserveNullInFromJson); 
+					return JsonDocument.Parse(Encoding.UTF8.GetBytes(json));
+			}
+		}
 
-//		private string SerializeUsingClientDefault<T>(T o)
-//		{
-//			switch (o)
-//			{
-//				case string s: return s;
-//				case byte[] b: return Encoding.UTF8.GetString(b);
-//				default:
-//					return Serializer.SerializeToString(o);
-//			}
-//		}
+		private static string ExpectedJsonString(object expectedJson, bool preserveNullInFromJson)
+		{
+			switch (expectedJson)
+			{
+				case string s:
+					return s;
+				case byte[] utf8:
+					return Encoding.UTF8.GetString(utf8);
+				default:
+					var options = ExpectedJsonSerializerSettings(preserveNullInFromJson);
+					return JsonSerializer.Serialize(expectedJson, options);
+			}
+		}
 
-//		private T Deserialize<T>(string json)
-//		{
-//			using (var ms = Client.ConnectionSettings.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(json)))
-//				return Serializer.Deserialize<T>(ms);
-//		}
+		private bool SerializesAndMatches<T>(T @object, JsonDocument expectedJsonDocument, RoundTripResult<T> result)
+		{
+			result.Serialized = SerializeUsingClientDefault(@object);
 
-//		private static bool ArrayMatches<T>(JArray jArray, RoundTripResult<T> result)
-//		{
-//			var lines = result.Serialized.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-//			var zipped = jArray.Children<JObject>().Zip(lines, (j, s) => new { j, s });
-//			var matches = zipped.Select((z, i) => TokenMatches(z.j, result, z.s, i)).ToList();
-//			matches.Count.Should().Be(lines.Count);
-//			var matchesAll = matches.All(b => b);
-//			if (matchesAll) return true;
+			return true;
 
-//			matches.Should().OnlyContain(b => b, "{0}", result.DiffFromExpected);
-//			return matches.All(b => b);
-//		}
+			//return expectedJsonDocument.Type == JTokenType.Array
+			//	? ArrayMatches((JArray)expectedJsonDocument, result)
+			//	: TokenMatches(expectedJsonDocument, result);
+		}
 
-//		private static bool TokenMatches<T>(JsonElement expectedJson, RoundTripResult<T> result, string itemJson = null, int item = -1)
-//		{
-//			var actualJson = itemJson ?? result.Serialized;
-//			var message = "This is the first time I am serializing";
-//			if (result.Iterations > 0)
-//				message = "This is the second time I am serializing, this usually indicates a problem when deserializing";
-//			if (item > -1) message += $". This is while comparing the {item.ToOrdinal()} item";
+		private string SerializeUsingClientDefault<T>(T @object) =>
+			@object switch
+			{
+				string s => s,
+				byte[] b => Encoding.UTF8.GetString(b),
+				_ => Serializer.SerializeToString(@object)
+			};
 
-//			if (expectedJson.ValueKind == JsonValueKind.String) return MatchString(expectedJson.GetString(), actualJson, result, message);
+		private T Deserialize<T>(string json)
+		{
+			using var ms = Client.ConnectionSettings.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(json));
+			return Serializer.Deserialize<T>(ms); // TODO: Can we make this async
+		}
 
-//			return MatchJson(expectedJson, actualJson, result, message);
-//		}
+		//private static bool ArrayMatches<T>(JArray jArray, RoundTripResult<T> result)
+		//{
+		//	var lines = result.Serialized.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+		//	var zipped = jArray.Children<JObject>().Zip(lines, (j, s) => new { j, s });
+		//	var matches = zipped.Select((z, i) => TokenMatches(z.j, result, z.s, i)).ToList();
+		//	matches.Count.Should().Be(lines.Count);
+		//	var matchesAll = matches.All(b => b);
+		//	if (matchesAll)
+		//		return true;
 
-//		private static bool MatchString<T>(string expected, string actual, RoundTripResult<T> result, string message)
-//		{
-//			//Serialize() returns quoted strings always.
-//			var diff = expected.CreateCharacterDifference(actual, message);
-//			if (string.IsNullOrWhiteSpace(diff)) return true;
+		//	matches.Should().OnlyContain(b => b, "{0}", result.DiffFromExpected);
+		//	return matches.All(b => b);
+		//}
 
-//			result.DiffFromExpected = diff;
-//			return false;
-//		}
+		//private static bool TokenMatches<T>(JsonElement expectedJson, RoundTripResult<T> result, string itemJson = null, int item = -1)
+		//{
+		//	var actualJson = itemJson ?? result.Serialized;
+		//	var message = "This is the first time I am serializing";
+		//	if (result.Iterations > 0)
+		//		message = "This is the second time I am serializing, this usually indicates a problem when deserializing";
+		//	if (item > -1)
+		//		message += $". This is while comparing the {item.ToOrdinal()} item";
 
-//		private static bool MatchJson<T>(JToken expectedJson, string actualJson, RoundTripResult<T> result, string message)
-//		{
-//			JToken actualJsonToken = null;
-//			try
-//			{
-//				actualJsonToken = JToken.Parse(actualJson);
-//			}
-//			catch (Exception e)
-//			{
-//				throw new Exception($"Invalid json: {actualJson}", e);
-//			}
-//			var matches = JToken.DeepEquals(expectedJson, actualJsonToken);
-//			if (matches) return true;
+		//	if (expectedJson.ValueKind == JsonValueKind.String)
+		//		return MatchString(expectedJson.GetString(), actualJson, result, message);
 
-//			(actualJsonToken as JObject)?.DeepSort();
-//			(expectedJson as JObject)?.DeepSort();
+		//	return MatchJson(expectedJson, actualJson, result, message);
+		//}
 
-//			var sortedExpected = expectedJson.ToString();
-//			var sortedActual = actualJsonToken.ToString();
-//			var diff = sortedExpected.Diff(sortedActual, message);
-//			if (string.IsNullOrWhiteSpace(diff)) return true;
+		//private static bool MatchString<T>(string expected, string actual, RoundTripResult<T> result, string message)
+		//{
+		//	//Serialize() returns quoted strings always.
+		//	var diff = expected.CreateCharacterDifference(actual, message);
+		//	if (string.IsNullOrWhiteSpace(diff))
+		//		return true;
 
-//			result.DiffFromExpected = diff;
-//			return false;
-//		}
+		//	result.DiffFromExpected = diff;
+		//	return false;
+		//}
 
-//		private JsonSerializerSettings ExpectedJsonSerializerSettings(bool preserveNullInExpected = false) =>
-//			new JsonSerializerSettings
-//			{
-//				ContractResolver = new DefaultContractResolver { NamingStrategy = new DefaultNamingStrategy() },
-//				NullValueHandling = preserveNullInExpected ? NullValueHandling.Include : NullValueHandling.Ignore,
-//				//copied here because anonymyzing geocoordinates is too tedious
-//				Converters = new List<JsonConverter> { new TestGeoCoordinateJsonConverter() }
-//			};
-//	}
-//}
+		//private static bool MatchJson<T>(JToken expectedJson, string actualJson, RoundTripResult<T> result, string message)
+		//{
+		//	JToken actualJsonToken = null;
+		//	try
+		//	{
+		//		actualJsonToken = JToken.Parse(actualJson);
+		//	}
+		//	catch (Exception e)
+		//	{
+		//		throw new Exception($"Invalid json: {actualJson}", e);
+		//	}
+		//	var matches = JToken.DeepEquals(expectedJson, actualJsonToken);
+		//	if (matches)
+		//		return true;
+
+		//	(actualJsonToken as JObject)?.DeepSort();
+		//	(expectedJson as JObject)?.DeepSort();
+
+		//	var sortedExpected = expectedJson.ToString();
+		//	var sortedActual = actualJsonToken.ToString();
+		//	var diff = sortedExpected.Diff(sortedActual, message);
+		//	if (string.IsNullOrWhiteSpace(diff))
+		//		return true;
+
+		//	result.DiffFromExpected = diff;
+		//	return false;
+		//}
+
+		private static JsonSerializerOptions ExpectedJsonSerializerSettings(bool preserveNullInExpected = false) =>
+			new()
+			{
+				IgnoreNullValues = !preserveNullInExpected,
+				Converters = { new JsonStringEnumConverter() }
+			};
+	}
+}

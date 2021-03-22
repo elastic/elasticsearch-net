@@ -33,7 +33,7 @@ namespace Tests.Framework.EndpointTests
 		protected override TInitializer Initializer => Activator.CreateInstance<TInitializer>();
 
 		protected virtual void ExpectResponse(TResponse response) { }
-		
+
 		[I] public virtual async Task ReturnsExpectedStatusCode() =>
 			await AssertOnAllResponses(r => r.ApiCall.HttpStatusCode.Should().Be(ExpectStatusCode));
 
