@@ -33,13 +33,6 @@ namespace Tests.Framework.EndpointTests
 		protected override TInitializer Initializer => Activator.CreateInstance<TInitializer>();
 
 		protected virtual void ExpectResponse(TResponse response) { }
-
-		//// https://youtrack.jetbrains.com/issue/RIDER-19912
-		//[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
-
-		//[U] protected override Task UsesCorrectHttpMethod() => base.UsesCorrectHttpMethod();
-
-		//[U] protected override void SerializesInitializer() => base.SerializesInitializer();
 		
 		[I] public virtual async Task ReturnsExpectedStatusCode() =>
 			await AssertOnAllResponses(r => r.ApiCall.HttpStatusCode.Should().Be(ExpectStatusCode));
@@ -50,7 +43,7 @@ namespace Tests.Framework.EndpointTests
 		[I] public virtual async Task ReturnsExpectedResponse() => await AssertOnAllResponses(ExpectResponse);
 
 		protected override Task AssertOnAllResponses(Action<TResponse> assert) =>
-			base.AssertOnAllResponses((r) =>
+			base.AssertOnAllResponses(r =>
 			{
 				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
 					&& !(r.ApiCall.OriginalException is TransportException))
