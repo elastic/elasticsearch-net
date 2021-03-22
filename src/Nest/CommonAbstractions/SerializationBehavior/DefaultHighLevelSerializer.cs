@@ -20,12 +20,12 @@ namespace Nest
 			Converters = { new JsonStringEnumConverter() }
 		};
 
-		// TODO - This is not production ready - No stream based sync overload
+		// TODO - This is not ideal as we allocate a large string - No stream based sync overload
 		public T Deserialize<T>(Stream stream)
 		{
 			if (stream.Length == 0) return default;
 			using var reader = new StreamReader(stream);
-			return JsonSerializer.Deserialize<T>(reader.ReadToEnd());
+			return JsonSerializer.Deserialize<T>(reader.ReadToEnd(), Options);
 		}
 
 		public object Deserialize(Type type, Stream stream) =>
