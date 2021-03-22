@@ -104,4 +104,61 @@ namespace Tests.QueryDsl.TermLevel.Term
 				.Value(string.Empty)
 			);
 	}
+
+	//hide
+	[SkipVersion("<7.10.0", "Case insensitive flag added in 7.10.0")]
+	public class TermQueryWithCaseInsensitiveUsageTests : QueryDslUsageTestsBase
+	{
+		public TermQueryWithCaseInsensitiveUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermQuery>(q => q.Term)
+		{
+			q => q.Field = null,
+			q => q.Value = "  ",
+			q => q.Value = null
+		};
+
+		protected override QueryContainer QueryInitializer => new TermQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = "description",
+			Value = "project description",
+			CaseInsensitive = true
+		};
+
+		protected override object QueryJson => new
+		{
+			term = new
+			{
+				description = new
+				{
+					_name = "named_query",
+					boost = 1.1,
+					value = "project description",
+					case_insensitive = true
+				}
+			}
+		};
+
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.Term(c => c
+				.Name("named_query")
+				.Boost(1.1)
+				.Field(p => p.Description)
+				.Value("project description")
+				.CaseInsensitive(true)
+			);
+
+		//hide
+		[U]
+		public void DeserializeShortForm()
+		{
+			using var stream = new MemoryStream(ShortFormQuery);
+			var query = Client.RequestResponseSerializer.Deserialize<ITermQuery>(stream);
+			query.Should().NotBeNull();
+			query.Field.Should().Be(new Field("description"));
+			query.Value.Should().Be("project description");
+		}
+	}
 }
