@@ -453,6 +453,9 @@ namespace Nest
 			Assign(selector, (a, v) => a.Sort = v?.Invoke(new SortDescriptor<TInferDocument>())?.Value);
 
 		/// <inheritdoc cref="ISearchRequest.SearchAfter" />
+		public SearchDescriptor<TInferDocument> SearchAfter(IEnumerable<object> searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfter = v?.ToListOrNullIfEmpty());
+
+		/// <inheritdoc cref="ISearchRequest.SearchAfter" />
 		public SearchDescriptor<TInferDocument> SearchAfter(IList<object> searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfter = v);
 
 		/// <inheritdoc cref="ISearchRequest.SearchAfter" />
