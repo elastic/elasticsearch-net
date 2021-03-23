@@ -18,7 +18,7 @@ namespace Elasticsearch.Net
 
 		public const string MimeTypeTextPlain = "text/plain";
 		private const string MimeTypeOld = "application/json";
-		private static readonly string MimeType = "application/vnd.elasticsearch+json;compatible-with=" + ClientVersionInfo.LowLevelClientVersionInfo.Version.Major;
+		private static readonly string MimeType = "application/vnd.elasticsearch+json; compatible-with=" + ClientVersionInfo.LowLevelClientVersionInfo.Version.Major;
 
 		public static readonly string DefaultJsonMimeType =
 			ClientVersionInfo.LowLevelClientVersionInfo.Version.Major >= 8 ? MimeType : MimeTypeOld;
