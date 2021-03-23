@@ -39,6 +39,7 @@ namespace Tests.Configuration
 				SourceSerializer = RandomBool("source_serializer", randomizer),
 				TypedKeys = RandomBool("typed_keys", randomizer),
 				HttpCompression = RandomBool("http_compression", randomizer),
+				ApiVersioning = ElasticsearchVersion.InRange("<7.12.0") ? false : RandomBool("api_versioning", randomizer),
 			};
 		}
 

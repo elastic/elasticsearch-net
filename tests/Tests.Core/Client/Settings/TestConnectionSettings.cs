@@ -49,6 +49,7 @@ namespace Tests.Core.Client.Settings
 			RerouteToProxyIfNeeded()
 			.EnableDebugMode()
 			.EnableHttpCompression(TestConfiguration.Instance.Random.HttpCompression)
+			.EnableApiVersioningHeader(TestConfiguration.Instance.Random.ApiVersioning)
 #if DEBUG
 			.EnableDebugMode()
 #endif
