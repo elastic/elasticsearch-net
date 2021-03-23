@@ -161,6 +161,7 @@ namespace Elasticsearch.Net
 					var response = _connection.Request<TResponse>(requestData);
 					d.EndState = response.ApiCall;
 					response.ApiCall.AuditTrail = AuditTrail;
+					audit.Stop();
 					ThrowBadAuthPipelineExceptionWhenNeeded(response.ApiCall, response);
 					if (!response.ApiCall.Success) audit.Event = requestData.OnFailureAuditEvent;
 					return response;
@@ -186,6 +187,7 @@ namespace Elasticsearch.Net
 					var response = await _connection.RequestAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
 					d.EndState = response.ApiCall;
 					response.ApiCall.AuditTrail = AuditTrail;
+					audit.Stop();
 					ThrowBadAuthPipelineExceptionWhenNeeded(response.ApiCall, response);
 					if (!response.ApiCall.Success) audit.Event = requestData.OnFailureAuditEvent;
 					return response;
@@ -380,6 +382,7 @@ namespace Elasticsearch.Net
 				{
 					var response = _connection.Request<VoidResponse>(pingData);
 					d.EndState = response;
+					audit.Stop();
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
 					if (!response.Success)
@@ -408,6 +411,7 @@ namespace Elasticsearch.Net
 				{
 					var response = await _connection.RequestAsync<VoidResponse>(pingData, cancellationToken).ConfigureAwait(false);
 					d.EndState = response;
+					audit.Stop();
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
 					if (!response.Success)
@@ -438,7 +442,7 @@ namespace Elasticsearch.Net
 						audit.Path = requestData.PathAndQuery;
 						var response = _connection.Request<SniffResponse>(requestData);
 						d.EndState = response;
-
+						audit.Stop();
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
 						if (!response.Success)
@@ -475,7 +479,7 @@ namespace Elasticsearch.Net
 						audit.Path = requestData.PathAndQuery;
 						var response = await _connection.RequestAsync<SniffResponse>(requestData, cancellationToken).ConfigureAwait(false);
 						d.EndState = response;
-
+						audit.Stop();
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
 						if (!response.Success)
@@ -564,8 +568,8 @@ namespace Elasticsearch.Net
 				EnableHttpPipelining = RequestConfiguration?.EnableHttpPipelining ?? _settings.HttpPipeliningEnabled,
 				ForceNode = RequestConfiguration?.ForceNode
 			};
-			IRequestParameters requestParameters = new RootNodeInfoRequestParameters();
-			requestParameters.RequestConfiguration = requestOverrides;
+
+			IRequestParameters requestParameters = new RootNodeInfoRequestParameters { RequestConfiguration = requestOverrides };
 
 			var data = new RequestData(HttpMethod.HEAD, string.Empty, null, _settings, requestParameters, _memoryStreamFactory) { Node = node };
 			return data;
