@@ -91,6 +91,7 @@ namespace Elasticsearch.Net
 		private static bool ValidResponseContentType(string acceptMimeType, string responseMimeType)
 		{
 			if (string.IsNullOrEmpty(acceptMimeType)) return false;
+			if (string.IsNullOrEmpty(responseMimeType)) return false;
 
 			// we a startswith check because the response can return charset information
 			// e.g: application/json; charset=UTF-8

@@ -27,10 +27,11 @@ namespace Elasticsearch.Net
 
 		public InMemoryConnection(byte[] responseBody, int statusCode = 200, Exception exception = null, string contentType = null)
 		{
+
 			_responseBody = responseBody;
 			_statusCode = statusCode;
 			_exception = exception;
-			_contentType = contentType;
+			_contentType = contentType ?? RequestData.MimeType;
 		}
 
 		public virtual TResponse Request<TResponse>(RequestData requestData)
