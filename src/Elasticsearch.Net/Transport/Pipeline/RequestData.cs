@@ -165,7 +165,7 @@ namespace Elasticsearch.Net
 
 
 		public static bool IsJsonMimeType(string mimeType) =>
-			ValidResponseContentType(MimeType, mimeType) || !ValidResponseContentType(MimeTypeOld, mimeType);
+			ValidResponseContentType(MimeType, mimeType) || ValidResponseContentType(MimeTypeOld, mimeType);
 
 		public static bool ValidResponseContentType(string acceptMimeType, string responseMimeType)
 		{
