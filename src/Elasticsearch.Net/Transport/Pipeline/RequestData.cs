@@ -23,7 +23,6 @@ namespace Elasticsearch.Net
 		public static readonly string DefaultJsonMimeType =
 			ClientVersionInfo.LowLevelClientVersionInfo.Version.Major >= 8 ? MimeType : MimeTypeOld;
 
-
 		public string JsonContentMimeType { get; }
 
 		public RequestData(HttpMethod method, string path, PostData data, IConnectionConfigurationValues global, IRequestParameters local,

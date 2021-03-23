@@ -95,7 +95,7 @@ namespace Elasticsearch.Net
 
 				requestData.MadeItToResponse = true;
 				responseMessage.Headers.TryGetValues("Warning", out warnings);
-				mimeType = responseMessage.Content.Headers.ContentType?.MediaType;
+				mimeType = responseMessage.Content.Headers.ContentType?.ToString();
 
 				if (responseMessage.Content != null)
 				{
@@ -162,7 +162,7 @@ namespace Elasticsearch.Net
 				}
 
 				requestData.MadeItToResponse = true;
-				mimeType = responseMessage.Content.Headers.ContentType?.MediaType;
+				mimeType = responseMessage.Content.Headers.ContentType?.ToString();
 				responseMessage.Headers.TryGetValues("Warning", out warnings);
 
 				if (responseMessage.Content != null)
@@ -323,8 +323,6 @@ namespace Elasticsearch.Net
 			requestMessage.Headers.Connection.Clear();
 			requestMessage.Headers.ConnectionClose = false;
 			requestMessage.Headers.TryAddWithoutValidation("Accept", requestData.Accept);
-
-			//requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.Accept));
 
 			if (!string.IsNullOrWhiteSpace(requestData.UserAgent))
 			{
