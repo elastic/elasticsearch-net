@@ -30,7 +30,7 @@ namespace Elasticsearch.Net
 		public RequestDataContent(RequestData requestData)
 		{
 			_requestData = requestData;
-			Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
+			Headers.ContentType = MediaTypeHeaderValue.Parse(requestData.RequestMimeType);
 			if (requestData.HttpCompression)
 				Headers.ContentEncoding.Add("gzip");
 
@@ -50,7 +50,7 @@ namespace Elasticsearch.Net
 		public RequestDataContent(RequestData requestData, CancellationToken token)
 		{
 			_requestData = requestData;
-			Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
+			Headers.ContentType = MediaTypeHeaderValue.Parse(requestData.RequestMimeType);
 			if (requestData.HttpCompression)
 				Headers.ContentEncoding.Add("gzip");
 

@@ -192,7 +192,7 @@ namespace Elasticsearch.Net
 			else if (responseType == typeof(DynamicResponse))
 			{
 				//if not json store the result under "body"
-				if (mimeType == null || !mimeType.StartsWith(RequestData.MimeType))
+				if (!ValidResponseContentType(RequestData.MimeType, mimeType) || !ValidResponseContentType(RequestData.MimeTypeOld, mimeType))
 				{
 					var dictionary = new DynamicDictionary();
 					dictionary["body"] = new DynamicValue(bytes.Utf8String());
