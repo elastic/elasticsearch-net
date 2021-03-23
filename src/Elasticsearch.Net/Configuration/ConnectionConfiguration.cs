@@ -176,6 +176,7 @@ namespace Elasticsearch.Net
 		//public static IMemoryStreamFactory Default { get; } = RecyclableMemoryStreamFactory.Default;
 		public static IMemoryStreamFactory DefaultMemoryStreamFactory { get; } = Elasticsearch.Net.MemoryStreamFactory.Default;
 		private bool _enableThreadPoolStats;
+		private bool _enableApiVersioningHeader;
 
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
 		private readonly Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
@@ -257,8 +258,9 @@ namespace Elasticsearch.Net
 		bool IConnectionConfigurationValues.TransferEncodingChunked => _transferEncodingChunked;
 		bool IConnectionConfigurationValues.EnableTcpStats => _enableTcpStats;
 		bool IConnectionConfigurationValues.EnableThreadPoolStats => _enableThreadPoolStats;
-		
+
 		MetaHeaderProvider IConnectionConfigurationValues.MetaHeaderProvider { get; } = new MetaHeaderProvider();
+		bool IConnectionConfigurationValues.EnableApiVersioningHeader => _enableApiVersioningHeader;
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
@@ -342,7 +344,7 @@ namespace Elasticsearch.Net
 		public T DisableAutomaticProxyDetection(bool disable = true) => Assign(disable, (a, v) => a._disableAutomaticProxyDetection = v);
 
 		/// <summary>
-		/// Disables the meta header which is included on all requests by default. This header contains lightweight information 
+		/// Disables the meta header which is included on all requests by default. This header contains lightweight information
 		/// about the client and runtime.
 		/// </summary>
 		public T DisableMetaHeader(bool disable = true) => Assign(disable, (a, v) => a._disableMetaHeader = v);
@@ -601,6 +603,9 @@ namespace Elasticsearch.Net
 		/// The memory stream factory to use, defaults to <see cref="RecyclableMemoryStreamFactory.Default"/>
 		/// </summary>
 		public T MemoryStreamFactory(IMemoryStreamFactory memoryStreamFactory) => Assign(memoryStreamFactory, (a, v) => a._memoryStreamFactory = v);
+
+		/// <inheritdoc cref="IConnectionConfigurationValues.EnableApiVersioningHeader"/>
+		public T EnableApiVersioningHeader(bool enable = true) => Assign(enable, (a, v) => a._enableApiVersioningHeader = v);
 
 		public T EnableTcpStats(bool enableTcpStats = true) => Assign(enableTcpStats, (a, v) => a._enableTcpStats = v);
 

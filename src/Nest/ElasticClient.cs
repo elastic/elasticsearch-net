@@ -20,7 +20,7 @@ namespace Nest
 		internal TResponse DoRequest<TRequest, TResponse>(
 			TRequest p,
 			IRequestParameters parameters,
-			Action<IRequestConfiguration> forceConfiguration = null
+			Action<IConnectionConfigurationValues, IRequestConfiguration> forceConfiguration = null
 		)
 			where TRequest : class, IRequest
 			where TResponse : class, IElasticsearchResponse, new() =>
@@ -30,7 +30,7 @@ namespace Nest
 			TRequest p,
 			IRequestParameters parameters,
 			CancellationToken ct,
-			Action<IRequestConfiguration> forceConfiguration = null
+			Action<IConnectionConfigurationValues, IRequestConfiguration> forceConfiguration = null
 		)
 			where TRequest : class, IRequest
 			where TResponse : class, IElasticsearchResponse, new() =>
@@ -44,10 +44,10 @@ namespace Nest
 			if (typeof(TCatRecord) == typeof(CatHelpRecord))
 			{
 				request.RequestParameters.CustomResponseBuilder = CatHelpResponseBuilder.Instance;
-				return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, r => ElasticClient.ForceTextPlain(r));
+				return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, (s, r) => ElasticClient.ForceTextPlain(s, r));
 			}
 			request.RequestParameters.CustomResponseBuilder = CatResponseBuilder<TCatRecord>.Instance;
-			return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, r => ElasticClient.ForceJson(r));
+			return DoRequest<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, (s, r) => ElasticClient.ForceJson(s, r));
 		}
 
 		protected Task<CatResponse<TCatRecord>> DoCatAsync<TRequest, TParams, TCatRecord>(TRequest request, CancellationToken ct)
@@ -58,10 +58,10 @@ namespace Nest
 			if (typeof(TCatRecord) == typeof(CatHelpRecord))
 			{
 				request.RequestParameters.CustomResponseBuilder = CatHelpResponseBuilder.Instance;
-				return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceTextPlain(r));
+				return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, (s, r) => ElasticClient.ForceTextPlain(s, r));
 			}
 			request.RequestParameters.CustomResponseBuilder = CatResponseBuilder<TCatRecord>.Instance;
-			return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, r => ElasticClient.ForceJson(r));
+			return DoRequestAsync<TRequest, CatResponse<TCatRecord>>(request, request.RequestParameters, ct, (s, r) => ElasticClient.ForceJson(s,r));
 		}
 
 		internal IRequestParameters ResponseBuilder(PreviewDatafeedRequestParameters parameters, CustomResponseBuilderBase builder)
@@ -122,11 +122,15 @@ namespace Nest
 
 		private ITransport<IConnectionSettingsValues> Transport { get; }
 
-		internal TResponse DoRequest<TRequest, TResponse>(TRequest p, IRequestParameters parameters, Action<IRequestConfiguration> forceConfiguration = null)
+		internal TResponse DoRequest<TRequest, TResponse>(
+			TRequest p,
+			IRequestParameters parameters,
+			Action<IConnectionConfigurationValues, IRequestConfiguration> forceConfiguration = null
+		)
 			where TRequest : class, IRequest
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
+			if (forceConfiguration != null) ForceConfiguration(p, ConnectionSettings, forceConfiguration);
 			if (p.ContentType != null) ForceContentType(p, p.ContentType);
 
 			var url = p.GetUrl(ConnectionSettings);
@@ -139,12 +143,12 @@ namespace Nest
 			TRequest p,
 			IRequestParameters parameters,
 			CancellationToken ct,
-			Action<IRequestConfiguration> forceConfiguration = null
+			Action<IConnectionConfigurationValues, IRequestConfiguration> forceConfiguration = null
 		)
 			where TRequest : class, IRequest
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			if (forceConfiguration != null) ForceConfiguration(p, forceConfiguration);
+			if (forceConfiguration != null) ForceConfiguration(p, ConnectionSettings, forceConfiguration);
 			if (p.ContentType != null) ForceContentType(p, p.ContentType);
 
 			var url = p.GetUrl(ConnectionSettings);
@@ -153,12 +157,12 @@ namespace Nest
 			return LowLevel.DoRequestAsync<TResponse>(p.HttpMethod, url, ct, b, parameters);
 		}
 
-		private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
+		private static void ForceConfiguration(IRequest request, IConnectionConfigurationValues settings, Action<IConnectionConfigurationValues, IRequestConfiguration> forceConfiguration)
 		{
 			if (forceConfiguration == null) return;
 
 			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
-			forceConfiguration(configuration);
+			forceConfiguration(settings, configuration);
 			request.RequestParameters.RequestConfiguration = configuration;
 		}
 		private void ForceContentType<TRequest>(TRequest request, string contentType) where TRequest : class, IRequest
@@ -169,12 +173,12 @@ namespace Nest
 			request.RequestParameters.RequestConfiguration = configuration;
 		}
 
-		internal static void ForceJson(IRequestConfiguration requestConfiguration)
+		internal static void ForceJson(IConnectionConfigurationValues settings, IRequestConfiguration requestConfiguration)
 		{
-			requestConfiguration.Accept = RequestData.MimeType;
-			requestConfiguration.ContentType = RequestData.MimeType;
+			requestConfiguration.Accept = RequestData.DefaultJsonBasedOnConfigurationSettings(settings);
+			requestConfiguration.ContentType = RequestData.DefaultJsonBasedOnConfigurationSettings(settings);
 		}
-		internal static void ForceTextPlain(IRequestConfiguration requestConfiguration)
+		internal static void ForceTextPlain(IConnectionConfigurationValues settings, IRequestConfiguration requestConfiguration)
 		{
 			requestConfiguration.Accept = RequestData.MimeTypeTextPlain;
 			requestConfiguration.ContentType = RequestData.MimeTypeTextPlain;

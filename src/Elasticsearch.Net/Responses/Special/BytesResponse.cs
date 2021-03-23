@@ -13,7 +13,7 @@ namespace Elasticsearch.Net
 		public override bool TryGetServerError(out ServerError serverError)
 		{
 			serverError = null;
-			if (Body == null || Body.Length == 0 || ResponseMimeType != RequestData.MimeType)
+			if (Body == null || Body.Length == 0 || !RequestData.IsJsonMimeType(ResponseMimeType))
 				return false;
 
 			using(var stream = ConnectionConfiguration.MemoryStreamFactory.Create(Body))

@@ -217,7 +217,7 @@ namespace Tests.XPack.Watcher.PutWatch
 									http = new
 									{
 										inline = true,
-										content_type = RequestData.MimeType,
+										content_type = RequestData.DefaultJsonMimeType,
 										request = new
 										{
 											url = "http://localhost:8080/http_attachment"
@@ -438,7 +438,7 @@ namespace Tests.XPack.Watcher.PutWatch
 					.Attachments(ea => ea
 						.HttpAttachment("http_attachment", ha => ha
 							.Inline()
-							.ContentType(RequestData.MimeType)
+							.ContentType(RequestData.DefaultJsonMimeType)
 							.Request(r => r
 								.Url("http://localhost:8080/http_attachment")
 							)
@@ -631,7 +631,7 @@ namespace Tests.XPack.Watcher.PutWatch
 							"http_attachment", new HttpAttachment
 							{
 								Inline = true,
-								ContentType = RequestData.MimeType,
+								ContentType = RequestData.DefaultJsonMimeType,
 								Request = new HttpInputRequest
 								{
 									Url = "http://localhost:8080/http_attachment"
@@ -717,7 +717,7 @@ namespace Tests.XPack.Watcher.PutWatch
 			response.Id.Should().Be(CallIsolatedValue);
 		}
 	}
-	
+
 	[SkipVersion("<7.10.1", "Support for multiple expand wildcards added in 7.10.1")]
 	public class PutWatchApiWithMultipleExpandWildcardsTests : ApiIntegrationTestBase<WatcherCluster, PutWatchResponse, IPutWatchRequest, PutWatchDescriptor, PutWatchRequest>
 	{
@@ -921,7 +921,7 @@ namespace Tests.XPack.Watcher.PutWatch
 									http = new
 									{
 										inline = true,
-										content_type = RequestData.MimeType,
+										content_type = RequestData.DefaultJsonMimeType,
 										request = new
 										{
 											url = "http://localhost:8080/http_attachment"
@@ -1142,7 +1142,7 @@ namespace Tests.XPack.Watcher.PutWatch
 					.Attachments(ea => ea
 						.HttpAttachment("http_attachment", ha => ha
 							.Inline()
-							.ContentType(RequestData.MimeType)
+							.ContentType(RequestData.DefaultJsonMimeType)
 							.Request(r => r
 								.Url("http://localhost:8080/http_attachment")
 							)
@@ -1335,7 +1335,7 @@ namespace Tests.XPack.Watcher.PutWatch
 							"http_attachment", new HttpAttachment
 							{
 								Inline = true,
-								ContentType = RequestData.MimeType,
+								ContentType = RequestData.DefaultJsonMimeType,
 								Request = new HttpInputRequest
 								{
 									Url = "http://localhost:8080/http_attachment"

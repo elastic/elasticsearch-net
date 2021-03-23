@@ -31,7 +31,6 @@ namespace Tests.Core.Client
 			Exception exception = null
 		)
 		{
-			contentType ??= RequestData.MimeType;
 			var serializer = TestClient.Default.RequestResponseSerializer;
 			byte[] responseBytes;
 			switch (response)
@@ -44,7 +43,7 @@ namespace Tests.Core.Client
 					break;
 				default:
 				{
-					responseBytes = contentType == RequestData.MimeType
+					responseBytes = RequestData.IsJsonMimeType(contentType)
 						? serializer.SerializeToBytes(response, TestClient.Default.ConnectionSettings.MemoryStreamFactory)
 						: Encoding.UTF8.GetBytes(response.ToString());
 					break;

@@ -31,7 +31,7 @@ namespace Elasticsearch.Net
 			_responseBody = responseBody;
 			_statusCode = statusCode;
 			_exception = exception;
-			_contentType = contentType ?? RequestData.MimeType;
+			_contentType = contentType ?? RequestData.DefaultJsonMimeType;
 		}
 
 		public virtual TResponse Request<TResponse>(RequestData requestData)
@@ -66,7 +66,7 @@ namespace Elasticsearch.Net
 
 			var sc = statusCode ?? _statusCode;
 			Stream s = body != null ? requestData.MemoryStreamFactory.Create(body) : requestData.MemoryStreamFactory.Create(EmptyBody);
-			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s, contentType ?? _contentType ?? RequestData.MimeType);
+			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s, contentType ?? _contentType ?? RequestData.DefaultJsonMimeType);
 		}
 
 		protected async Task<TResponse> ReturnConnectionStatusAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken,

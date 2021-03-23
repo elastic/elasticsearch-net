@@ -74,7 +74,7 @@ namespace Elasticsearch.Net
 		{
 			serverError = null;
 			var bytes = ApiCall.ResponseBodyInBytes;
-			if (bytes == null || ResponseMimeType != RequestData.MimeType)
+			if (bytes == null || RequestData.IsJsonMimeType(ResponseMimeType))
 				return false;
 
 			using(var stream = ConnectionConfiguration.MemoryStreamFactory.Create(bytes))

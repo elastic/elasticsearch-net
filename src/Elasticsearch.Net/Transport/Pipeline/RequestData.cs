@@ -16,9 +16,15 @@ namespace Elasticsearch.Net
 		public const string OpaqueIdHeader = "X-Opaque-Id";
 		public const string RunAsSecurityHeader = "es-security-runas-user";
 
-		public const string MimeTypeOld = "application/json";
 		public const string MimeTypeTextPlain = "text/plain";
-		public static readonly string MimeType = "application/vnd.elasticsearch+json;compatible-with=" + ClientVersionInfo.LowLevelClientVersionInfo.Version.Major;
+		private const string MimeTypeOld = "application/json";
+		private static readonly string MimeType = "application/vnd.elasticsearch+json;compatible-with=" + ClientVersionInfo.LowLevelClientVersionInfo.Version.Major;
+
+		public static readonly string DefaultJsonMimeType =
+			ClientVersionInfo.LowLevelClientVersionInfo.Version.Major >= 8 ? MimeType : MimeTypeOld;
+
+
+		public string JsonContentMimeType { get; }
 
 		public RequestData(HttpMethod method, string path, PostData data, IConnectionConfigurationValues global, IRequestParameters local,
 			IMemoryStreamFactory memoryStreamFactory
@@ -43,13 +49,15 @@ namespace Elasticsearch.Net
 			Method = method;
 			PostData = data;
 
+			JsonContentMimeType = DefaultJsonBasedOnConfigurationSettings(ConnectionSettings);
+
 			if (data != null)
 				data.DisableDirectStreaming = local?.DisableDirectStreaming ?? global.DisableDirectStreaming;
 
 			Pipelined = local?.EnableHttpPipelining ?? global.HttpPipeliningEnabled;
 			HttpCompression = global.EnableHttpCompression;
-			RequestMimeType = local?.ContentType ?? MimeType;
-			Accept = local?.Accept ?? MimeType;
+			RequestMimeType = local?.ContentType ?? JsonContentMimeType;
+			Accept = local?.Accept ?? JsonContentMimeType;
 
 			if (global.Headers != null)
 				Headers = new NameValueCollection(global.Headers);
@@ -152,6 +160,37 @@ namespace Elasticsearch.Net
 		public bool IsAsync { get; internal set; }
 
 		public override string ToString() => $"{Method.GetStringValue()} {_path}";
+
+		public static string DefaultJsonBasedOnConfigurationSettings(IConnectionConfigurationValues settings) =>
+			settings.EnableApiVersioningHeader ? MimeType : MimeTypeOld;
+
+
+		public static bool IsJsonMimeType(string mimeType) =>
+			ValidResponseContentType(MimeType, mimeType) || !ValidResponseContentType(MimeTypeOld, mimeType);
+
+		public static bool ValidResponseContentType(string acceptMimeType, string responseMimeType)
+		{
+			if (string.IsNullOrEmpty(acceptMimeType)) return false;
+			if (string.IsNullOrEmpty(responseMimeType)) return false;
+
+			// we a startswith check because the response can return charset information
+			// e.g: application/json; charset=UTF-8
+			if (acceptMimeType == RequestData.MimeTypeOld)
+				return responseMimeType.StartsWith(RequestData.MimeTypeOld);
+
+			//vendored check
+			if (acceptMimeType == RequestData.MimeType)
+				// we check both vendored and nonvendored since on 7.x the response does not return a
+				// vendored Content-Type header on the response
+				return
+					responseMimeType == RequestData.MimeType
+					|| responseMimeType == RequestData.MimeTypeOld
+					|| responseMimeType.StartsWith(RequestData.MimeTypeOld)
+					|| responseMimeType.StartsWith(RequestData.MimeType);
+
+			return responseMimeType.StartsWith(acceptMimeType);
+		}
+
 
 		// TODO This feels like its in the wrong place
 		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request)

@@ -108,8 +108,7 @@ type OperationExecutor(client:IElasticLowLevelClient) =
             
             let responseMimeType = r.ApiCall.ResponseMimeType
             match responseMimeType with
-            | s when s.StartsWith(RequestData.MimeType) -> ignore() //json
-            | s when s.StartsWith(RequestData.MimeTypeOld) -> ignore() //json
+            | s when s.StartsWith(RequestData.DefaultJsonBasedOnConfigurationSettings(r.ConnectionConfiguration)) -> ignore() //json
             // not json set $body to the response body string
             | _ -> op.Stashes.[StashedId.Body] <- r.Get<String>("body")
             
