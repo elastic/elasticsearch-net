@@ -31,6 +31,7 @@ namespace Tests.Core.Client
 			Exception exception = null
 		)
 		{
+			contentType ??= RequestData.DefaultJsonMimeType;
 			var serializer = TestClient.Default.RequestResponseSerializer;
 			byte[] responseBytes;
 			switch (response)
