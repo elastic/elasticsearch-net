@@ -32,10 +32,7 @@ namespace Nest
 						break;
 				}
 			}
-
-			if (analyzerType == null)
-				return null;
-
+			
 			segmentReader = new JsonReader(arraySegment.Array, arraySegment.Offset);
 
 			switch (analyzerType)
