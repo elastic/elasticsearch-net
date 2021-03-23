@@ -73,10 +73,10 @@ namespace Elasticsearch.Net.VirtualizedCluster.Rules
 			return (TRule)this;
 		}
 
-		public TRule ReturnByteResponse(byte[] response, string responseContentType = RequestData.MimeType)
+		public TRule ReturnByteResponse(byte[] response, string responseContentType = null)
 		{
 			Self.ReturnResponse = response;
-			Self.ReturnContentType = responseContentType;
+			Self.ReturnContentType = responseContentType ?? RequestData.MimeType;
 			return (TRule)this;
 		}
 	}

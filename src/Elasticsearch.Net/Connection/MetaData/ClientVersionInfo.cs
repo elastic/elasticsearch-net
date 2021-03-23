@@ -15,6 +15,8 @@ namespace Elasticsearch.Net
 
 		public static readonly ClientVersionInfo Empty = new ClientVersionInfo { Version = new Version(0, 0, 0), IsPrerelease = false };
 
+		public static readonly ClientVersionInfo LowLevelClientVersionInfo = Create<IElasticLowLevelClient>();
+
 		private ClientVersionInfo() { }
 
 		public static ClientVersionInfo Create<T>()

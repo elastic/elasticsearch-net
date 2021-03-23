@@ -15,7 +15,7 @@ namespace Tests.Core.Client
 			object response,
 			int statusCode = 200,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
-			string contentType = RequestData.MimeType,
+			string contentType = null,
 			Exception exception = null
 		)
 		{
@@ -27,10 +27,11 @@ namespace Tests.Core.Client
 			object response,
 			int statusCode = 200,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
-			string contentType = RequestData.MimeType,
+			string contentType = null,
 			Exception exception = null
 		)
 		{
+			contentType ??= RequestData.MimeType;
 			var serializer = TestClient.Default.RequestResponseSerializer;
 			byte[] responseBytes;
 			switch (response)

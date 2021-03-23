@@ -25,7 +25,7 @@ namespace Elasticsearch.Net
 			int? statusCode,
 			IEnumerable<string> warnings,
 			Stream responseStream,
-			string mimeType = RequestData.MimeType
+			string mimeType = null
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
@@ -43,7 +43,7 @@ namespace Elasticsearch.Net
 			int? statusCode,
 			IEnumerable<string> warnings,
 			Stream responseStream,
-			string mimeType = RequestData.MimeType,
+			string mimeType = null,
 			CancellationToken cancellationToken = default
 		)
 			where TResponse : class, IElasticsearchResponse, new()

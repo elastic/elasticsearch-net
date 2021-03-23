@@ -25,7 +25,7 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public InMemoryConnection() => _statusCode = 200;
 
-		public InMemoryConnection(byte[] responseBody, int statusCode = 200, Exception exception = null, string contentType = RequestData.MimeType)
+		public InMemoryConnection(byte[] responseBody, int statusCode = 200, Exception exception = null, string contentType = null)
 		{
 			_responseBody = responseBody;
 			_statusCode = statusCode;
