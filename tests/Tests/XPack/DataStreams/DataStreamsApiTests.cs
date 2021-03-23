@@ -34,6 +34,7 @@ namespace Tests.XPack.DataStreams
 		private const string GetDataStreamStep = nameof(GetDataStreamStep);
 		private const string PutIndexTemplateStep = nameof(PutIndexTemplateStep);
 		private const string DataStreamsStatsStep = nameof(DataStreamsStatsStep);
+		private const string DataStreamRolloverStep = nameof(DataStreamRolloverStep);
 		private const string DeleteDataStreamStep = nameof(DeleteDataStreamStep);
 
 		public DataStreamsApiTests(WritableCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, testOnlyOne: true)
@@ -116,6 +117,16 @@ namespace Tests.XPack.DataStreams
 					(v, c, r) => c.Indices.DataStreamsStatsAsync(r)
 				)
 			},
+			{DataStreamRolloverStep, u =>
+				u.Calls<DataStreamRolloverDescriptor, DataStreamRolloverRequest, IDataStreamRolloverRequest, DataStreamRolloverResponse>(
+					v => new DataStreamRolloverRequest(v),
+					(v, d) => d,
+					(v, c, f) => c.Indices.DataStreamRollover(v, f),
+					(v, c, f) => c.Indices.DataStreamRolloverAsync(v, f),
+					(v, c, r) => c.Indices.DataStreamRollover(r),
+					(v, c, r) => c.Indices.DataStreamRolloverAsync(r)
+				)
+			},
 			{DeleteDataStreamStep, u =>
 				u.Calls<DeleteDataStreamDescriptor, DeleteDataStreamRequest, IDeleteDataStreamRequest, DeleteDataStreamResponse>(
 					v => new DeleteDataStreamRequest(v),
@@ -173,6 +184,12 @@ namespace Tests.XPack.DataStreams
 			dataStream.MaximumTimestamp.Should().Be(new DateTimeOffset(2020, 8, 3, 14, 0, 0, TimeSpan.Zero).ToUnixTimeMilliseconds());
 			dataStream.MaximumTimestampDateTimeOffset.Should().Be(new DateTimeOffset(2020, 8, 3, 14, 0, 0, TimeSpan.Zero));
 			dataStream.StoreSizeBytes.Should().BeGreaterThan(0);
+		});
+
+		[I] public async Task DataStreamRolloverResponse() => await Assert<DataStreamRolloverResponse>(DataStreamRolloverStep, (v, r) =>
+		{
+			r.ShouldBeValid();
+			r.Acknowledged.Should().BeTrue();
 		});
 
 		[I] public async Task DeleteDataStreamResponse() => await Assert<DeleteDataStreamResponse>(DeleteDataStreamStep, (v, r) =>

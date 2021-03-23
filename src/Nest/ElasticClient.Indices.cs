@@ -205,6 +205,30 @@ namespace Nest.Specification.IndicesApi
 		/// </summary>
 		public Task<CreateDataStreamResponse> CreateDataStreamAsync(ICreateDataStreamRequest request, CancellationToken ct = default) => DoRequestAsync<ICreateDataStreamRequest, CreateDataStreamResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>indices.data_stream_rollover</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public DataStreamRolloverResponse DataStreamRollover(Name name, Func<DataStreamRolloverDescriptor, IDataStreamRolloverRequest> selector = null) => DataStreamRollover(selector.InvokeOrDefault(new DataStreamRolloverDescriptor(name: name)));
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.data_stream_rollover</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<DataStreamRolloverResponse> DataStreamRolloverAsync(Name name, Func<DataStreamRolloverDescriptor, IDataStreamRolloverRequest> selector = null, CancellationToken ct = default) => DataStreamRolloverAsync(selector.InvokeOrDefault(new DataStreamRolloverDescriptor(name: name)), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.data_stream_rollover</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public DataStreamRolloverResponse DataStreamRollover(IDataStreamRolloverRequest request) => DoRequest<IDataStreamRolloverRequest, DataStreamRolloverResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.data_stream_rollover</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<DataStreamRolloverResponse> DataStreamRolloverAsync(IDataStreamRolloverRequest request, CancellationToken ct = default) => DoRequestAsync<IDataStreamRolloverRequest, DataStreamRolloverResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>indices.data_streams_stats</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>

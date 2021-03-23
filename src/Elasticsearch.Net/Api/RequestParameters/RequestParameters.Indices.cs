@@ -245,6 +245,11 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	{
 	}
 
+	///<summary>Request options for CreateDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class DataStreamRolloverRequestParameters : RequestParameters<DataStreamRolloverRequestParameters>
+	{
+	}
+
 	///<summary>Request options for DataStreamsStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
 	public class DataStreamsStatsRequestParameters : RequestParameters<DataStreamsStatsRequestParameters>
 	{

@@ -475,6 +475,41 @@ namespace Nest
 		}
 	}
 
+	[InterfaceDataContract]
+	public partial interface IDataStreamRolloverRequest : IRequest<DataStreamRolloverRequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for CreateDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class DataStreamRolloverRequest : PlainRequestBase<DataStreamRolloverRequestParameters>, IDataStreamRolloverRequest
+	{
+		protected IDataStreamRolloverRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDataStreamRollover;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_data_stream/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public DataStreamRolloverRequest(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected DataStreamRolloverRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IDataStreamRolloverRequest.Name => Self.RouteValues.Get<Name>("name");
+	// Request parameters
+	}
+
 	///<summary>Request for DataStreamsStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
 	public partial class DataStreamsStatsRequest : PlainRequestBase<DataStreamsStatsRequestParameters>, IDataStreamsStatsRequest
 	{

@@ -1,0 +1,31 @@
+﻿{
+  "indices.create_data_stream": {
+    "documentation": {
+      "url": "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html",
+      "description": "Rolls over a data stream"
+    },
+    "stability": "stable",
+    "visibility": "public",
+    "headers": {
+      "accept": [ "application/json" ]
+    },
+    "url": {
+      "paths": [
+        {
+          "path": "/{name}/_rollover/",
+          "methods": [
+            "POST"
+          ],
+          "parts": {
+            "name": {
+              "type": "string",
+              "description": "The name of the data stream"
+            }
+          }
+        }
+      ]
+    },
+    "params": {
+    }
+  }
+}

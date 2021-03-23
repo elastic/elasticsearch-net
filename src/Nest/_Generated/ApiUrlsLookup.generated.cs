@@ -114,6 +114,7 @@ namespace Nest
 		internal static ApiUrls IndicesClose = new ApiUrls(new[]{"{index}/_close"});
 		internal static ApiUrls IndicesCreate = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesCreateDataStream = new ApiUrls(new[]{"_data_stream/{name}"});
+		internal static ApiUrls IndicesDataStreamRollover = new ApiUrls(new[]{"{name}/_rollover"});
 		internal static ApiUrls IndicesDataStreamsStats = new ApiUrls(new[]{"_data_stream/_stats", "_data_stream/{name}/_stats"});
 		internal static ApiUrls IndicesDelete = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesDeleteAlias = new ApiUrls(new[]{"{index}/_alias/{name}"});

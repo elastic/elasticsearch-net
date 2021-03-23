@@ -281,6 +281,29 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>Descriptor for CreateDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class DataStreamRolloverDescriptor : RequestDescriptorBase<DataStreamRolloverDescriptor, DataStreamRolloverRequestParameters, IDataStreamRolloverRequest>, IDataStreamRolloverRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDataStreamRollover;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/{name}/_rollover</summary>
+		///<param name = "name">this parameter is required</param>
+		public DataStreamRolloverDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected DataStreamRolloverDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IDataStreamRolloverRequest.Name => Self.RouteValues.Get<Name>("name");
+	// Request parameters
+	}
+
 	///<summary>Descriptor for DataStreamsStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
 	public partial class DataStreamsStatsDescriptor : RequestDescriptorBase<DataStreamsStatsDescriptor, DataStreamsStatsRequestParameters, IDataStreamsStatsRequest>, IDataStreamsStatsRequest
 	{
