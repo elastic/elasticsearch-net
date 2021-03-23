@@ -40,8 +40,8 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 			{
 				CreateSnapshotStep, u => u
 					.Calls<SnapshotDescriptor, SnapshotRequest, ISnapshotRequest, SnapshotResponse>(
-						v => new SnapshotRequest($"{v}-repository", $"{v}-source") { Indices = $"{v}-index", WaitForCompletion = true },
-						(v, d) => d.Index($"{v}-index").WaitForCompletion(true),
+						v => new SnapshotRequest($"{v}-repository", $"{v}-source") { Indices = $"{v}-index", WaitForCompletion = true, IncludeGlobalState = false },
+						(v, d) => d.Index($"{v}-index").WaitForCompletion(true).IncludeGlobalState(false),
 						(v, c, f) => c.Snapshot.Snapshot($"{v}-repository", $"{v}-source", f),
 						(v, c, f) => c.Snapshot.SnapshotAsync($"{v}-repository", $"{v}-source", f),
 						(_, c, r) => c.Snapshot.Snapshot(r),
