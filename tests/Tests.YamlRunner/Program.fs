@@ -23,6 +23,7 @@ type Arguments =
     | [<AltCommandLine("-r")>]Revision of string
     | [<AltCommandLine("-o")>]JUnitOutputFile of string
     | [<AltCommandLine("-p")>]Profile of bool
+    | [<AltCommandLine("-d")>]DownloadSpecs of bool
     with
     interface IArgParserTemplate with
         member s.Usage =
@@ -35,6 +36,7 @@ type Arguments =
             | Endpoint _ -> "The elasticsearch endpoint to run tests against"
             | JUnitOutputFile _ -> "The path and file name to use for the junit xml output, defaults to a random tmp filename"
             | Profile _ -> "Print out process id and wait for confirmation to kick off the tests"
+            | DownloadSpecs _ -> "Only locate and acquire the specification"
 
 let private runningMitmProxy = Process.GetProcessesByName("mitmproxy").Length > 0
 let private runningProxy = runningMitmProxy || Process.GetProcessesByName("fiddler").Length > 0
@@ -117,6 +119,7 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     let section = parsed.TryGetResult TestSection //|> Option.defaultValue "10_basic.yml" |> Some
     let endpoint = parsed.TryGetResult Endpoint |> Option.defaultValue (defaultEndpoint namedSuite)
     let profile = parsed.TryGetResult Profile |> Option.defaultValue false
+    let locateOnly = parsed.TryGetResult DownloadSpecs |> Option.defaultValue false
     let passedRevision = parsed.TryGetResult Revision
     let outputFile =
         parsed.TryGetResult JUnitOutputFile
@@ -126,8 +129,12 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     
     printfn "Found version %s downloading specs from: %s" version revision
     
-    let! locateResults = Commands.LocateTests namedSuite revision directory file 
-    let readResults = Commands.ReadTests locateResults 
+    let! locateResults = Commands.LocateTests version revision  namedSuite directory file
+    if locateOnly then
+        Environment.Exit <| if (locateResults |> List.isEmpty) then 1 else 0
+    
+    let readResults = Commands.ReadTests locateResults
+    
     if profile then
         printf "Waiting for profiler to attach to pid: %O" <| Process.GetCurrentProcess().Id
         Console.ReadKey() |> ignore

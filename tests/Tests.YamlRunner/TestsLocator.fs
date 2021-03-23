@@ -10,6 +10,7 @@ open FSharp.Data
 open Tests.YamlRunner.AsyncExtensions
 open ShellProgressBar
 open Tests.YamlRunner
+open System.IO
 
 
 /// https://api.github.com/repos/elastic/elasticsearch/contents/rest-api-spec/src/main/resources/rest-api-spec/test?ref=master
@@ -17,7 +18,8 @@ open Tests.YamlRunner
 
 let ListFolders namedSuite revision directory = async {
     let url = TestsDownloader.TestGithubRootUrl namedSuite revision
-    let! (_, html) = TestsDownloader.CachedOrDownload namedSuite revision "_root_" "index.html" url 
+    let! file = TestsDownloader.CachedOrDownload revision "_root_" "index.html" url 
+    let html = File.ReadAllText file
     let doc = HtmlDocument.Parse(html)
     
     return
@@ -30,7 +32,8 @@ let ListFolders namedSuite revision directory = async {
     
 let ListFolderFiles namedSuite revision folder fileFilter = async { 
     let url = TestsDownloader.FolderListUrl namedSuite revision folder
-    let! (_, html) =  TestsDownloader.CachedOrDownload namedSuite revision folder "index.html" url 
+    let! file =  TestsDownloader.CachedOrDownload revision folder "index.html" url 
+    let html = File.ReadAllText file
     let doc = HtmlDocument.Parse(html)
     let yamlFiles =
         let fileUrl file = (file, TestsDownloader.TestRawUrl namedSuite revision folder file)
@@ -54,7 +57,8 @@ let private downloadTestsInFolder (yamlFiles:list<string * string>) folder named
     let actions =
         yamlFiles
         |> Seq.map (fun (file, url) -> async {
-            let! (localFile, yaml) =  TestsDownloader.CachedOrDownload namedSuite revision folder file url
+            let! localFile =  TestsDownloader.CachedOrDownload revision folder file url
+            let yaml = File.ReadAllText localFile
             let i = Interlocked.Increment (&seenFiles)
             let message = sprintf "Downloaded [%i/%i] files in %s" i yamlFiles.Length folder
             filesProgress.Tick(message)
