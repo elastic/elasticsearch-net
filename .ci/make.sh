@@ -49,14 +49,12 @@ case $CMD in
         TASK=codegen
         # VERSION is BRANCH here for now
         TASK_ARGS=("$VERSION") 
-		REPO_BINDING="$repo/src:/sln/src"
+		REPO_BINDING="$repo:/sln"
         ;;
     *)
         echo -e "\nUsage:\n\t $CMD is not supported right now\n"
         exit 1
 esac
-
-  #--volume "${OUTPUT_DIR}:/sln/${output_folder}" 
 
 docker run \
   --env "DOTNET_VERSION" \
@@ -65,5 +63,3 @@ docker run \
   --rm \
   elastic/elasticsearch-net \
   /bin/bash -c "./build.sh $TASK ${TASK_ARGS[@]} && chown -R $(id -u):$(id -g) ."
-
-git status
