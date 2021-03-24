@@ -115,8 +115,8 @@ namespace Tests.ClientConcepts.LowLevel
 				LastName = "Laarman"
 			};
 
-			var ndexResponse = lowlevelClient.Index<BytesResponse>("people", "1", PostData.Serializable(person)); //<1> synchronous method that returns an `IndexResponse`
-			byte[] responseBytes = ndexResponse.Body;
+			var indexResponse = lowlevelClient.Index<BytesResponse>("people", "1", PostData.Serializable(person)); //<1> synchronous method that returns an `IndexResponse`
+			byte[] responseBytes = indexResponse.Body;
 
 			var asyncIndexResponse = await lowlevelClient.IndexAsync<StringResponse>("people", "1", PostData.Serializable(person)); //<2> asynchronous method that returns a `Task<IndexResponse>` that can be awaited
 			string responseString = asyncIndexResponse.Body;
