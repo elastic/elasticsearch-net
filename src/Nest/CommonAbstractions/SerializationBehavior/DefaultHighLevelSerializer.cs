@@ -37,11 +37,17 @@ namespace Nest
 		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default) =>
 			JsonSerializer.DeserializeAsync(stream, type, Options, cancellationToken).AsTask();
 
-		public virtual void Serialize<T>(T data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.None) =>
-			throw new NotImplementedException();
+		// TODO - This is not ideal as we allocate a large string - No stream based sync overload
+		public virtual void Serialize<T>(T data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			var json = JsonSerializer.Serialize(data);
+			using var writer = new StreamWriter(writableStream);
+			writer.Write(json);
+		}
 
-		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.None,
+		public Task SerializeAsync<T>(T data, Stream stream,
+			SerializationFormatting formatting = SerializationFormatting.None,
 			CancellationToken cancellationToken = default
-		) => throw new NotImplementedException();
+		) => JsonSerializer.SerializeAsync(stream, data, Options, cancellationToken);
 	}
 }
