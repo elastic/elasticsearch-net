@@ -29,10 +29,10 @@ jobs:
       matrix:
         branch: ${{ fromJson(needs.active-branches.outputs.matrix) }}
     steps:
-    - uses: actions/checkout@v2
-      with:
-        ref: "${{ matrix.branch }}"
-    - run: "echo ${{ matrix.branch }}"
-      name: Code Gen ${{ matrix.branch }}
-    #- run: "./.ci/make.sh codegen ${{ matrix.branch }}"
-    #  name: Code Gen ${{ matrix.stack_version }}
+      - uses: actions/checkout@v2
+        with:
+          ref: "${{ matrix.branch }}"
+      - run: "echo ${{ matrix.branch }}"
+        name: Code Gen ${{ matrix.branch }}
+      # - run: "./.ci/make.sh codegen ${{ matrix.branch }}"
+      #  name: Code Gen ${{ matrix.stack_version }}
