@@ -31,6 +31,9 @@
     <Content Include="..\..\.github\workflows\unified-release.yml">
       <Link>unified-release.yml</Link>
     </Content>
+    <Content Include="..\..\.github\workflows\make-codegen.yml">
+      <Link>make-codegen.yml</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FSharp.Core" Version="5.0.0" />

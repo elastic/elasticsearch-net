@@ -31,6 +31,14 @@ namespace ApiGenerator.Configuration
 
 				var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
 
+				//If we run this tool using dotnet run --project src/ApiGenerator
+				var pathFromSolutionRoot = Path.Combine(directoryInfo.FullName, "src", "ApiGenerator");
+				if (Directory.Exists(pathFromSolutionRoot))
+				{
+					_root = pathFromSolutionRoot + "/";
+					return _root;
+				}
+
 				var dotnetRun =
 					directoryInfo.Name == "ApiGenerator" &&
 					directoryInfo.Parent != null &&
