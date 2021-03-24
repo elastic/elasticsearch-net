@@ -59,6 +59,7 @@ esac
   #--volume "${OUTPUT_DIR}:/sln/${output_folder}" 
 
 docker run \
+  -u "$(id -u):$(id -g)" \
   --env "DOTNET_VERSION" \
   --name test-runner \
   --volume $REPO_BINDING \
