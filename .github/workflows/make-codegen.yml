@@ -2,6 +2,9 @@ name: Code Generation
 on:
   schedule:
     - cron: "0 0/2 * * *"
+  push:
+    branches:
+      - 'feature/master/check-codegen'
 
 
 jobs:
