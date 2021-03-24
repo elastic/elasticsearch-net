@@ -32,6 +32,7 @@ using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
 using Elasticsearch.Net.Specification.DanglingIndicesApi;
 using Elasticsearch.Net.Specification.EnrichApi;
 using Elasticsearch.Net.Specification.EqlApi;
+using Elasticsearch.Net.Specification.FeaturesApi;
 using Elasticsearch.Net.Specification.GraphApi;
 using Elasticsearch.Net.Specification.IndexLifecycleManagementApi;
 using Elasticsearch.Net.Specification.IndicesApi;
@@ -44,6 +45,7 @@ using Elasticsearch.Net.Specification.NodesApi;
 using Elasticsearch.Net.Specification.RollupApi;
 using Elasticsearch.Net.Specification.SearchableSnapshotsApi;
 using Elasticsearch.Net.Specification.SecurityApi;
+using Elasticsearch.Net.Specification.ShutdownApi;
 using Elasticsearch.Net.Specification.SnapshotApi;
 using Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi;
 using Elasticsearch.Net.Specification.SqlApi;
@@ -106,6 +108,12 @@ namespace Elasticsearch.Net
 		}
 
 		public LowLevelEqlNamespace Eql
+		{
+			get;
+			private set;
+		}
+
+		public LowLevelFeaturesNamespace Features
 		{
 			get;
 			private set;
@@ -183,6 +191,12 @@ namespace Elasticsearch.Net
 			private set;
 		}
 
+		public LowLevelShutdownNamespace Shutdown
+		{
+			get;
+			private set;
+		}
+
 		public LowLevelSnapshotNamespace Snapshot
 		{
 			get;
@@ -241,6 +255,7 @@ namespace Elasticsearch.Net
 			DanglingIndices = new LowLevelDanglingIndicesNamespace(this);
 			Enrich = new LowLevelEnrichNamespace(this);
 			Eql = new LowLevelEqlNamespace(this);
+			Features = new LowLevelFeaturesNamespace(this);
 			Graph = new LowLevelGraphNamespace(this);
 			IndexLifecycleManagement = new LowLevelIndexLifecycleManagementNamespace(this);
 			Indices = new LowLevelIndicesNamespace(this);
@@ -253,6 +268,7 @@ namespace Elasticsearch.Net
 			Rollup = new LowLevelRollupNamespace(this);
 			SearchableSnapshots = new LowLevelSearchableSnapshotsNamespace(this);
 			Security = new LowLevelSecurityNamespace(this);
+			Shutdown = new LowLevelShutdownNamespace(this);
 			Snapshot = new LowLevelSnapshotNamespace(this);
 			SnapshotLifecycleManagement = new LowLevelSnapshotLifecycleManagementNamespace(this);
 			Sql = new LowLevelSqlNamespace(this);

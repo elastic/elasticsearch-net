@@ -55,6 +55,15 @@ namespace Elasticsearch.Net.Specification.IngestApi
 		[MapsApi("ingest.delete_pipeline", "id")]
 		public Task<TResponse> DeletePipelineAsync<TResponse>(string id, DeletePipelineRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_ingest/pipeline/{id:id}"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_ingest/geoip/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/geoip-stats-api.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GeoIpStats<TResponse>(GeoIpStatsRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, "_ingest/geoip/stats", null, RequestParams(requestParameters));
+		///<summary>GET on /_ingest/geoip/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/geoip-stats-api.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ingest.geo_ip_stats", "")]
+		public Task<TResponse> GeoIpStatsAsync<TResponse>(GeoIpStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "_ingest/geoip/stats", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_ingest/pipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetPipeline<TResponse>(GetPipelineRequestParameters requestParameters = null)
