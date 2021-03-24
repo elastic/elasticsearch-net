@@ -65,3 +65,5 @@ docker run \
   --rm \
   elastic/elasticsearch-net \
   /bin/bash -c "./build.sh $TASK ${TASK_ARGS[@]} && chown -R $(id -g):$(id -u) ."
+
+git status
