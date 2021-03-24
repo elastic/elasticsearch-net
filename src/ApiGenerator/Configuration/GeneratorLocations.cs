@@ -10,11 +10,11 @@ namespace ApiGenerator.Configuration
 	public static class GeneratorLocations
 	{
 		// @formatter:off — disable formatter after this line
-		public static string EsNetFolder { get; } = $@"{Root}/../../src/Elasticsearch.Net/";
+		public static string EsNetFolder { get; } = $@"{Root}../../src/Elasticsearch.Net/";
 		public static string LastDownloadedRef { get; } = Path.Combine(Root, "last_downloaded_version.txt");
 
-		public static string NestFolder { get; } = $@"{Root}/../../src/Nest/";
-		public static string RestSpecificationFolder { get; } = $@"{Root}/RestSpecification/";
+		public static string NestFolder { get; } = $@"{Root}../../src/Nest/";
+		public static string RestSpecificationFolder { get; } = $@"{Root}RestSpecification/";
 		// @formatter:on — enable formatter after this line
 
 		public static string HighLevel(params string[] paths) => NestFolder + string.Join("/", paths);
@@ -35,7 +35,7 @@ namespace ApiGenerator.Configuration
 				var pathFromSolutionRoot = Path.Combine(directoryInfo.FullName, "src", "ApiGenerator");
 				if (Directory.Exists(pathFromSolutionRoot))
 				{
-					_root = pathFromSolutionRoot;
+					_root = pathFromSolutionRoot + "/";
 					return _root;
 				}
 

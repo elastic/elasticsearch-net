@@ -6,7 +6,7 @@ namespace ApiGenerator.Configuration
 {
 	public static class ViewLocations
 	{
-		public static string Root { get; } = $@"{GeneratorLocations.Root}/Views/";
+		public static string Root { get; } = $@"{GeneratorLocations.Root}Views/";
 		private static string HighLevelRoot { get; } = $@"{Root}/HighLevel/";
 		public static string HighLevel(params string[] paths) => HighLevelRoot + string.Join("/", paths);
 
