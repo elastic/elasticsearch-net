@@ -4,7 +4,7 @@ on:
     - cron: "0 0/2 * * *"
   push:
     branches:
-      - 'feature/master/codegen-make'
+      - 'fix/master/codegen-make'
 
 jobs:
   active-branches:
@@ -28,7 +28,7 @@ jobs:
       fail-fast: false
       matrix:
         # branch: ${{ fromJson(needs.active-branches.outputs.matrix) }}
-        branch: ['feature/master/codegen-make']
+        branch: ['fix/master/codegen-make']
     steps:
       - uses: actions/checkout@v2
         with:
