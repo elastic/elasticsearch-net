@@ -21,6 +21,8 @@ namespace Tests.Cluster.ClusterHealth
 		protected override string UrlPath => "/_cluster/health";
 
 		protected override LazyResponses ClientUsage() => Calls(
+			//(client, f) => client.Cluster.Health(),
+			//(client, f) => client.Cluster.HealthAsync(),
 			(client, r) => client.Cluster.Health(r),
 			(client, r) => client.Cluster.HealthAsync(r)
 		);
