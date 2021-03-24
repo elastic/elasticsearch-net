@@ -22,16 +22,14 @@
   <ItemGroup>
     <Content Include="..\..\build.sh"><Link>build.sh</Link></Content>
     <Content Include="..\..\build.bat"><Link>build.bat</Link></Content>
-    <Content Include="..\..\appveyor.yml"><Link>appveyor.yml</Link></Content>
-    <Content Include="..\..\azure-pipelines.yml"><Link>azure-pipelines.yml</Link></Content>
-    <Content Include="..\..\.github\workflows\auto-label.yml">
-      <Link>auto-label.yml</Link>
-    </Content>
-    <Content Include="..\..\.github\workflows\backport.yml">
-      <Link>backport.yml</Link>
-    </Content>
-    <Content Include="..\..\.github\auto-label.json">
-      <Link>auto-label.json</Link>
+    <Content Include="..\..\.github\workflows\auto-label.yml"><Link>auto-label.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\backport.yml"><Link>backport.yml</Link></Content>
+    <Content Include="..\..\.github\auto-label.json"><Link>auto-label.json</Link></Content>
+    <Content Include="..\..\.github\workflows\test-jobs.yml"><Link>test-jobs.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\stale-jobs.yml"><Link>stale-jobs.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\integration-jobs.yml"><Link>integration-jobs.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\unified-release.yml">
+      <Link>unified-release.yml</Link>
     </Content>
     <Content Include="..\..\.github\workflows\make-codegen.yml">
       <Link>make-codegen.yml</Link>
@@ -41,7 +39,7 @@
     <PackageReference Include="FSharp.Core" Version="5.0.0" />
 
     <PackageReference Include="Bullseye" Version="3.3.0" />
-    <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.2.5" />
+    <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.2.6" />
     
     <PackageReference Include="Fake.Core.Environment" Version="5.15.0" />
     <PackageReference Include="Fake.Core.SemVer" Version="5.15.0" />

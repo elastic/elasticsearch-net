@@ -41,7 +41,8 @@ module Tests =
         let runSettings =
             // force the logger section to be cleared so that azure devops can work its magic.
             // relies heavily on the original console logger
-            let prefix = if runningOnAzureDevops then ".ci" else ""
+            let wants = match args.CommandArguments with | Integration a -> a.TrxExport | Test t -> t.TrxExport | _ -> false
+            let prefix = if wants then ".ci" else ""
             sprintf "tests/%s.runsettings" prefix
         
         Directory.CreateDirectory Paths.BuildOutput |> ignore
@@ -49,15 +50,14 @@ module Tests =
         
         let wantsTrx =
             let wants = match args.CommandArguments with | Integration a -> a.TrxExport | Test t -> t.TrxExport | _ -> false
-            match wants with | true -> ["--logger"; "trx"] | false -> []
-        let wantsCoverage =
-            let wants = match args.CommandArguments with | Test t -> t.CodeCoverage | _ -> false
-            match wants with | true -> ["--collect:\"XPlat Code Coverage\""] | false -> []
+            let junitOutput = Path.GetFullPath <| Path.Combine(Paths.BuildOutput, "junit-{assembly}-{framework}-test-results.xml")
+            let loggerPathArgs = sprintf "LogFilePath=%s" junitOutput
+            let loggerArg = sprintf "--logger:\"junit;%s\"" loggerPathArgs
+            match wants with | true -> [loggerArg] | false -> []
            
-        let commandWithAdditionalOptions =
-            wantsCoverage |> List.append wantsTrx |> List.append command
+        let commandWithAdditionalOptions = wantsTrx |> List.append command
             
-        Tooling.DotNet.ExecInWithTimeout "." commandWithAdditionalOptions (TimeSpan.FromMinutes 60.)
+        Tooling.DotNet.ExecInWithTimeout "." commandWithAdditionalOptions (TimeSpan.FromMinutes 30.)
 
     let RunReleaseUnitTests version args =
         //xUnit always does its own build, this env var is picked up by Tests.csproj
@@ -70,7 +70,8 @@ module Tests =
         //package and not one from cache...y
         Environment.setEnvironVar "TestPackageVersion" (version.Full.ToString())
         Tooling.DotNet.ExecIn "tests/Tests" ["clean";] |> ignore
-        Tooling.DotNet.ExecIn "tests/Tests" ["restore";] |> ignore
+        // needs forced eval because it picks up local nuget packages not part of package.lock.json
+        Tooling.DotNet.ExecIn "tests/Tests" ["restore"; "--force-evaluate"] |> ignore
         dotnetTest "tests/Tests/Tests.csproj" args
 
     let RunUnitTests args =
