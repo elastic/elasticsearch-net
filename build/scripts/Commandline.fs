@@ -197,9 +197,7 @@ Execution hints can be provided anywhere on the command line
         | ["profile"] -> parsed
         | "rest-spec-tests" :: tail -> { parsed with RemainingArguments = tail }
         
-        | ["codegen"; branch]  ->
-            { parsed with CommandArguments = CodeGen { Branch = branch } }
-        | ("codegen" & branch) :: tail ->
+        | "codegen" :: branch :: tail  ->
             { parsed with CommandArguments = CodeGen { Branch = branch }; RemainingArguments = tail }
         
         | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version; OutputLocation = None }; }
