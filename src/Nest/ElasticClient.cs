@@ -54,7 +54,7 @@ namespace Nest
 			transport.Settings.Inferrer.ThrowIfNull(nameof(transport.Settings.Inferrer));
 
 			_transport = transport;
-
+			
 			SetupNamespaces();
 		}
 

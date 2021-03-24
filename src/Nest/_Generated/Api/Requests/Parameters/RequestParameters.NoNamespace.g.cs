@@ -52,6 +52,10 @@ namespace Nest
     {
     }
 
+    public class ClosePointInTimeRequestParameters : RequestParameters<ClosePointInTimeRequestParameters>
+    {
+    }
+
     public class CountRequestParameters : RequestParameters<CountRequestParameters>
     {
         public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -394,6 +398,19 @@ namespace Nest
         public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
     }
 
+    public class MultiSearchTemplateRequestParameters : RequestParameters<MultiSearchTemplateRequestParameters>
+    {
+        public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+
+        public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
+
+        public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
+
+        public bool? TotalHitsAsInteger { get => Q<bool?>("total_hits_as_integer"); set => Q("total_hits_as_integer", value); }
+
+        public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+    }
+
     public class MultiTermVectorsRequestParameters : RequestParameters<MultiTermVectorsRequestParameters>
     {
         public Fields? Fields { get => Q<Fields?>("fields"); set => Q("fields", value); }
@@ -417,6 +434,11 @@ namespace Nest
         public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+    }
+
+    public class OpenPointInTimeRequestParameters : RequestParameters<OpenPointInTimeRequestParameters>
+    {
+        public Time? KeepAlive { get => Q<Time?>("keep_alive"); set => Q("keep_alive", value); }
     }
 
     public class PingRequestParameters : RequestParameters<PingRequestParameters>

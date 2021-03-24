@@ -27,13 +27,21 @@ namespace Nest
     {
         public AsyncSearchNamespace AsyncSearch { get; private set; }
 
+        public AutoscalingNamespace Autoscaling { get; private set; }
+
         public CatNamespace Cat { get; private set; }
 
         public CrossClusterReplicationNamespace CrossClusterReplication { get; private set; }
 
         public ClusterNamespace Cluster { get; private set; }
 
+        public DanglingIndicesNamespace DanglingIndices { get; private set; }
+
         public EnrichNamespace Enrich { get; private set; }
+
+        public EqlNamespace Eql { get; private set; }
+
+        public FeaturesNamespace Features { get; private set; }
 
         public GraphNamespace Graph { get; private set; }
 
@@ -45,9 +53,13 @@ namespace Nest
 
         public LicenseNamespace License { get; private set; }
 
+        public LogstashNamespace Logstash { get; private set; }
+
         public MigrationNamespace Migration { get; private set; }
 
         public MachineLearningNamespace MachineLearning { get; private set; }
+
+        public MonitoringNamespace Monitoring { get; private set; }
 
         public NodesNamespace Nodes { get; private set; }
 
@@ -74,17 +86,23 @@ namespace Nest
         private partial void SetupNamespaces()
         {
             AsyncSearch = new AsyncSearchNamespace(this);
+            Autoscaling = new AutoscalingNamespace(this);
             Cat = new CatNamespace(this);
             CrossClusterReplication = new CrossClusterReplicationNamespace(this);
             Cluster = new ClusterNamespace(this);
+            DanglingIndices = new DanglingIndicesNamespace(this);
             Enrich = new EnrichNamespace(this);
+            Eql = new EqlNamespace(this);
+            Features = new FeaturesNamespace(this);
             Graph = new GraphNamespace(this);
             IndexLifecycleManagement = new IndexLifecycleManagementNamespace(this);
             Indices = new IndicesNamespace(this);
             Ingest = new IngestNamespace(this);
             License = new LicenseNamespace(this);
+            Logstash = new LogstashNamespace(this);
             Migration = new MigrationNamespace(this);
             MachineLearning = new MachineLearningNamespace(this);
+            Monitoring = new MonitoringNamespace(this);
             Nodes = new NodesNamespace(this);
             Rollup = new RollupNamespace(this);
             Security = new SecurityNamespace(this);
@@ -116,6 +134,16 @@ namespace Nest
         public Task<ClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken cancellationToken = default)
         {
             return DoRequestAsync<IClearScrollRequest, ClearScrollResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public ClosePointInTimeResponse ClosePointInTime(IClosePointInTimeRequest request)
+        {
+            return DoRequest<IClosePointInTimeRequest, ClosePointInTimeResponse>(request, request.RequestParameters);
+        }
+
+        public Task<ClosePointInTimeResponse> ClosePointInTimeAsync(IClosePointInTimeRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IClosePointInTimeRequest, ClosePointInTimeResponse>(request, request.RequestParameters, cancellationToken);
         }
 
         public CountResponse Count(ICountRequest request)
@@ -268,6 +296,16 @@ namespace Nest
             return DoRequestAsync<IRootNodeInfoRequest, RootNodeInfoResponse>(request, request.RequestParameters, cancellationToken);
         }
 
+        public MultiGetResponse MultiGet(IMultiGetRequest request)
+        {
+            return DoRequest<IMultiGetRequest, MultiGetResponse>(request, request.RequestParameters);
+        }
+
+        public Task<MultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IMultiGetRequest, MultiGetResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
         public MultiSearchResponse MultiSearch(IMultiSearchRequest request)
         {
             return DoRequest<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters);
@@ -278,6 +316,16 @@ namespace Nest
             return DoRequestAsync<IMultiSearchRequest, MultiSearchResponse>(request, request.RequestParameters, cancellationToken);
         }
 
+        public MultiSearchTemplateResponse MultiSearchTemplate(IMultiSearchTemplateRequest request)
+        {
+            return DoRequest<IMultiSearchTemplateRequest, MultiSearchTemplateResponse>(request, request.RequestParameters);
+        }
+
+        public Task<MultiSearchTemplateResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IMultiSearchTemplateRequest, MultiSearchTemplateResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
         public MultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request)
         {
             return DoRequest<IMultiTermVectorsRequest, MultiTermVectorsResponse>(request, request.RequestParameters);
@@ -286,6 +334,16 @@ namespace Nest
         public Task<MultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken cancellationToken = default)
         {
             return DoRequestAsync<IMultiTermVectorsRequest, MultiTermVectorsResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public OpenPointInTimeResponse OpenPointInTime(IOpenPointInTimeRequest request)
+        {
+            return DoRequest<IOpenPointInTimeRequest, OpenPointInTimeResponse>(request, request.RequestParameters);
+        }
+
+        public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(IOpenPointInTimeRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IOpenPointInTimeRequest, OpenPointInTimeResponse>(request, request.RequestParameters, cancellationToken);
         }
 
         public PingResponse Ping(IPingRequest request)

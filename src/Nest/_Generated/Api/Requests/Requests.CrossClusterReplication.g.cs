@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -55,6 +56,87 @@ namespace Nest
         }
 
         public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+        [JsonPropertyName("max_outstanding_read_requests")]
+        public long MaxOutstandingReadRequests { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_outstanding_write_requests")]
+        public long MaxOutstandingWriteRequests { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_read_request_operation_count")]
+        public long MaxReadRequestOperationCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_read_request_size")]
+        public string MaxReadRequestSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_write_buffer_count")]
+        public long MaxWriteBufferCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_write_buffer_size")]
+        public string MaxWriteBufferSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_write_request_operation_count")]
+        public long MaxWriteRequestOperationCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_write_request_size")]
+        public string MaxWriteRequestSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("remote_cluster")]
+        public string RemoteCluster { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IFollowInfoRequest : IRequest<FollowInfoRequestParameters>
@@ -102,6 +184,33 @@ namespace Nest
         ///<summary>/{index}/_ccr/forget_follower</summary>
         public ForgetFollowerIndexRequest(IndexName index): base(r => r.Required("index", index))
         {
+        }
+
+        [JsonPropertyName("follower_cluster")]
+        public string FollowerCluster { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("follower_index_uuid")]
+        public string FollowerIndexUuid { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("leader_remote_cluster")]
+        public string LeaderRemoteCluster { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 
@@ -172,6 +281,96 @@ namespace Nest
         public CreateAutoFollowPatternRequest(Name name): base(r => r.Required("name", name))
         {
         }
+
+        [JsonPropertyName("follow_index_pattern")]
+        public string FollowIndexPattern { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_outstanding_read_requests")]
+        public long MaxOutstandingReadRequests { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_outstanding_write_requests")]
+        public int MaxOutstandingWriteRequests { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_read_request_operation_count")]
+        public int MaxReadRequestOperationCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_read_request_size")]
+        public string MaxReadRequestSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_write_buffer_count")]
+        public int MaxWriteBufferCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_write_buffer_size")]
+        public string MaxWriteBufferSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_write_request_operation_count")]
+        public int MaxWriteRequestOperationCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_write_request_size")]
+        public string MaxWriteRequestSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("remote_cluster")]
+        public string RemoteCluster { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IResumeAutoFollowPatternRequest : IRequest<ResumeAutoFollowPatternRequestParameters>
@@ -203,6 +402,78 @@ namespace Nest
         ///<summary>/{index}/_ccr/resume_follow</summary>
         public ResumeFollowIndexRequest(IndexName index): base(r => r.Required("index", index))
         {
+        }
+
+        [JsonPropertyName("max_outstanding_read_requests")]
+        public long MaxOutstandingReadRequests { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_outstanding_write_requests")]
+        public long MaxOutstandingWriteRequests { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_read_request_operation_count")]
+        public long MaxReadRequestOperationCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_read_request_size")]
+        public string MaxReadRequestSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_write_buffer_count")]
+        public long MaxWriteBufferCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_write_buffer_size")]
+        public string MaxWriteBufferSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_write_request_operation_count")]
+        public long MaxWriteRequestOperationCount { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_write_request_size")]
+        public string MaxWriteRequestSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 

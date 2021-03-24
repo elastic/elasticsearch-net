@@ -40,6 +40,16 @@ namespace Nest
 			return DoRequestAsync<ICleanupRepositoryRequest, CleanupRepositoryResponse>(request, request.RequestParameters, cancellationToken);
 		}
 
+		public CloneSnapshotResponse CloneSnapshot(ICloneSnapshotRequest request)
+		{
+			return DoRequest<ICloneSnapshotRequest, CloneSnapshotResponse>(request, request.RequestParameters);
+		}
+
+		public Task<CloneSnapshotResponse> CloneSnapshotAsync(ICloneSnapshotRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<ICloneSnapshotRequest, CloneSnapshotResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
 		public SnapshotResponse Snapshot(ISnapshotRequest request)
 		{
 			return DoRequest<ISnapshotRequest, SnapshotResponse>(request, request.RequestParameters);

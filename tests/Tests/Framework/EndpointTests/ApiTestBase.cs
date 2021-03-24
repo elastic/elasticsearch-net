@@ -16,10 +16,11 @@ using Tests.Framework.Extensions;
 
 namespace Tests.Framework.EndpointTests
 {
-	public abstract class ApiTestBase<TCluster, TResponse, TInterface, TInitializer>
-		: RequestResponseApiTestBase<TCluster, TResponse, TInterface, TInitializer>
+	public abstract class ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
+		: RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
 		where TResponse : class, IResponse
+		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{

@@ -124,6 +124,15 @@ namespace Tests.Urls.Security
         }
     }
 
+    public class SecurityGrantApiKeyUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_security/api_key/grant").Request(c => c.Security.GrantApiKey(new GrantApiKeyRequest())).RequestAsync(c => c.Security.GrantApiKeyAsync(new GrantApiKeyRequest()));
+        }
+    }
+
     public class SecurityHasPrivilegesUrlTests : UrlTestsBase
     {
         [U]

@@ -74,6 +74,10 @@ namespace Nest
     {
     }
 
+    public class ClearApiKeyCacheResponse : ResponseBase
+    {
+    }
+
     public class ClearCachedRealmsResponse : ResponseBase
     {
         [JsonPropertyName("cluster_name")]
@@ -259,6 +263,18 @@ namespace Nest
 
     public class GetUserPrivilegesResponse : ResponseBase
     {
+    }
+
+    public class GrantApiKeyResponse : ResponseBase
+    {
+        [JsonPropertyName("api_key")]
+        public string ApiKey { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class HasPrivilegesResponse : ResponseBase

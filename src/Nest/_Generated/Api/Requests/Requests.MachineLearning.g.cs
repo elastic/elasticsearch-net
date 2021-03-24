@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -241,6 +242,15 @@ namespace Nest
         }
 
         public string? SkipTime { get => Q<string?>("skip_time"); set => Q("skip_time", value); }
+
+        [JsonPropertyName("calc_interim")]
+        public bool CalcInterim { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IForecastJobRequest : IRequest<ForecastJobRequestParameters>
@@ -278,6 +288,42 @@ namespace Nest
         public GetBucketsRequest(Id jobId): base(r => r.Required("job_id", jobId))
         {
         }
+
+        [JsonPropertyName("anomaly_score")]
+        public double AnomalyScore { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("desc")]
+        public bool Desc { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("exclude_interim")]
+        public bool ExcludeInterim { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("expand")]
+        public bool Expand { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IGetCalendarEventsRequest : IRequest<GetCalendarEventsRequestParameters>
@@ -300,6 +346,24 @@ namespace Nest
         public string? JobId { get => Q<string?>("job_id"); set => Q("job_id", value); }
 
         public string? Start { get => Q<string?>("start"); set => Q("start", value); }
+
+        [JsonPropertyName("from")]
+        public int From { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("size")]
+        public int Size { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IGetCalendarsRequest : IRequest<GetCalendarsRequestParameters>
@@ -431,6 +495,33 @@ namespace Nest
         public GetInfluencersRequest(Id jobId): base(r => r.Required("job_id", jobId))
         {
         }
+
+        [JsonPropertyName("descending")]
+        public bool Descending { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("exclude_interim")]
+        public bool ExcludeInterim { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("influencer_score")]
+        public double InfluencerScore { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IGetJobStatsRequest : IRequest<GetJobStatsRequestParameters>
@@ -500,6 +591,15 @@ namespace Nest
         public GetModelSnapshotsRequest(Id jobId): base(r => r.Required("job_id", jobId))
         {
         }
+
+        [JsonPropertyName("desc")]
+        public bool Desc { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IGetOverallBucketsRequest : IRequest<GetOverallBucketsRequestParameters>
@@ -516,6 +616,42 @@ namespace Nest
         public GetOverallBucketsRequest(Id jobId): base(r => r.Required("job_id", jobId))
         {
         }
+
+        [JsonPropertyName("allow_no_jobs")]
+        public bool AllowNoJobs { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("exclude_interim")]
+        public bool ExcludeInterim { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("overall_score")]
+        public double OverallScore { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("top_n")]
+        public int TopN { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IGetAnomalyRecordsRequest : IRequest<GetAnomalyRecordsRequestParameters>
@@ -531,6 +667,33 @@ namespace Nest
         ///<summary>/_ml/anomaly_detectors/{job_id}/results/records</summary>
         public GetAnomalyRecordsRequest(Id jobId): base(r => r.Required("job_id", jobId))
         {
+        }
+
+        [JsonPropertyName("desc")]
+        public bool Desc { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("exclude_interim")]
+        public bool ExcludeInterim { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("record_score")]
+        public double RecordScore { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 
@@ -632,6 +795,15 @@ namespace Nest
         public PutCalendarRequest(Id calendarId): base(r => r.Required("calendar_id", calendarId))
         {
         }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IPutCalendarJobRequest : IRequest<PutCalendarJobRequestParameters>
@@ -672,6 +844,24 @@ namespace Nest
         public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
         public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        [JsonPropertyName("max_empty_searches")]
+        public int MaxEmptySearches { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("scroll_size")]
+        public int ScrollSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IPutFilterRequest : IRequest<PutFilterRequestParameters>
@@ -687,6 +877,15 @@ namespace Nest
         ///<summary>/_ml/filters/{filter_id}</summary>
         public PutFilterRequest(Id filterId): base(r => r.Required("filter_id", filterId))
         {
+        }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 
@@ -704,6 +903,33 @@ namespace Nest
         public PutJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
         {
         }
+
+        [JsonPropertyName("allow_lazy_open")]
+        public bool AllowLazyOpen { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("model_snapshot_retention_days")]
+        public long ModelSnapshotRetentionDays { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IRevertModelSnapshotRequest : IRequest<RevertModelSnapshotRequestParameters>
@@ -719,6 +945,15 @@ namespace Nest
         ///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
         public RevertModelSnapshotRequest(Id jobId, Id snapshotId): base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
         {
+        }
+
+        [JsonPropertyName("delete_intervening_results")]
+        public bool DeleteInterveningResults { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 
@@ -774,6 +1009,15 @@ namespace Nest
         }
 
         public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
+
+        [JsonPropertyName("force")]
+        public bool Force { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IUpdateDatafeedRequest : IRequest<UpdateDatafeedRequestParameters>
@@ -798,6 +1042,24 @@ namespace Nest
         public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
         public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        [JsonPropertyName("max_empty_searches")]
+        public int MaxEmptySearches { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("scroll_size")]
+        public int ScrollSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IUpdateFilterRequest : IRequest<UpdateFilterRequestParameters>
@@ -813,6 +1075,15 @@ namespace Nest
         ///<summary>/_ml/filters/{filter_id}/_update</summary>
         public UpdateFilterRequest(Id filterId): base(r => r.Required("filter_id", filterId))
         {
+        }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 
@@ -830,6 +1101,51 @@ namespace Nest
         public UpdateJobRequest(Id jobId): base(r => r.Required("job_id", jobId))
         {
         }
+
+        [JsonPropertyName("allow_lazy_open")]
+        public bool AllowLazyOpen { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("model_snapshot_retention_days")]
+        public long ModelSnapshotRetentionDays { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("renormalization_window_days")]
+        public long RenormalizationWindowDays { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("results_retention_days")]
+        public long ResultsRetentionDays { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IUpdateModelSnapshotRequest : IRequest<UpdateModelSnapshotRequestParameters>
@@ -846,6 +1162,24 @@ namespace Nest
         public UpdateModelSnapshotRequest(Id jobId, Id snapshotId): base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
         {
         }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("retain")]
+        public bool Retain { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IValidateJobRequest : IRequest<ValidateJobRequestParameters>
@@ -861,6 +1195,24 @@ namespace Nest
         ///<summary>/_ml/anomaly_detectors/_validate</summary>
         public ValidateJobRequest(): base()
         {
+        }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("model_snapshot_retention_days")]
+        public long ModelSnapshotRetentionDays { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 

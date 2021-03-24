@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -81,6 +82,22 @@ namespace Nest
         protected override bool SupportsBody => false;
         ///<summary>/_search/scroll</summary>
         public ClearScrollRequest(): base()
+        {
+        }
+    }
+
+    public interface IClosePointInTimeRequest : IRequest<ClosePointInTimeRequestParameters>
+    {
+    }
+
+    public class ClosePointInTimeRequest : PlainRequestBase<ClosePointInTimeRequestParameters>, IClosePointInTimeRequest
+    {
+        protected IClosePointInTimeRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
+        protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+        protected override bool SupportsBody => false;
+        ///<summary>/_pit</summary>
+        public ClosePointInTimeRequest(): base()
         {
         }
     }
@@ -272,6 +289,15 @@ namespace Nest
         public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
         public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+
+        [JsonPropertyName("max_docs")]
+        public long MaxDocs { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IDeleteByQueryRethrottleRequest : IRequest<DeleteByQueryRethrottleRequestParameters>
@@ -672,6 +698,37 @@ namespace Nest
         public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
     }
 
+    public interface IMultiSearchTemplateRequest : IRequest<MultiSearchTemplateRequestParameters>
+    {
+    }
+
+    public class MultiSearchTemplateRequest : PlainRequestBase<MultiSearchTemplateRequestParameters>, IMultiSearchTemplateRequest
+    {
+        protected IMultiSearchTemplateRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearchTemplate;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_msearch/template</summary>
+        public MultiSearchTemplateRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_msearch/template</summary>
+        public MultiSearchTemplateRequest(Indices index): base(r => r.Optional("index", index))
+        {
+        }
+
+        public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+
+        public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
+
+        public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
+
+        public bool? TotalHitsAsInteger { get => Q<bool?>("total_hits_as_integer"); set => Q("total_hits_as_integer", value); }
+
+        public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+    }
+
     public interface IMultiTermVectorsRequest : IRequest<MultiTermVectorsRequestParameters>
     {
     }
@@ -713,6 +770,29 @@ namespace Nest
         public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+    }
+
+    public interface IOpenPointInTimeRequest : IRequest<OpenPointInTimeRequestParameters>
+    {
+    }
+
+    public class OpenPointInTimeRequest : PlainRequestBase<OpenPointInTimeRequestParameters>, IOpenPointInTimeRequest
+    {
+        protected IOpenPointInTimeRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_pit</summary>
+        public OpenPointInTimeRequest(): base()
+        {
+        }
+
+        ///<summary>/{index}/_pit</summary>
+        public OpenPointInTimeRequest(IndexName index): base(r => r.Required("index", index))
+        {
+        }
+
+        public Time? KeepAlive { get => Q<Time?>("keep_alive"); set => Q("keep_alive", value); }
     }
 
     public interface IPingRequest : IRequest<PingRequestParameters>
@@ -786,6 +866,33 @@ namespace Nest
         public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
         public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+        [JsonPropertyName("conflicts")]
+        public Conflicts Conflicts { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_docs")]
+        public long MaxDocs { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("size")]
+        public long Size { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IReindexRethrottleRequest : IRequest<ReindexRethrottleRequestParameters>
@@ -825,6 +932,24 @@ namespace Nest
         public RenderSearchTemplateRequest(Id id): base(r => r)
         {
         }
+
+        [JsonPropertyName("file")]
+        public string File { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("source")]
+        public string Source { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IExecutePainlessScriptRequest : IRequest<ExecutePainlessScriptRequestParameters>
@@ -840,6 +965,15 @@ namespace Nest
         ///<summary>/_scripts/painless/_execute</summary>
         public ExecutePainlessScriptRequest(): base()
         {
+        }
+
+        [JsonPropertyName("context")]
+        public string Context { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 
@@ -958,6 +1092,69 @@ namespace Nest
         public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
         public int? From { get => Q<int?>("from"); set => Q("from", value); }
+
+        [JsonPropertyName("explain")]
+        public bool Explain { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("min_score")]
+        public double MinScore { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("profile")]
+        public bool Profile { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("terminate_after")]
+        public long TerminateAfter { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("timeout")]
+        public string Timeout { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("track_scores")]
+        public bool TrackScores { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("version")]
+        public bool Version { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters>
@@ -1074,6 +1271,33 @@ namespace Nest
         public Fields? SourceExcludes { get => Q<Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
         public Fields? SourceIncludes { get => Q<Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+        [JsonPropertyName("detect_noop")]
+        public bool DetectNoop { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("doc_as_upsert")]
+        public bool DocAsUpsert { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("scripted_upsert")]
+        public bool ScriptedUpsert { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IUpdateByQueryRequest : IRequest<UpdateByQueryRequestParameters>
@@ -1154,5 +1378,14 @@ namespace Nest
         public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
         public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+
+        [JsonPropertyName("max_docs")]
+        public long MaxDocs { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 }

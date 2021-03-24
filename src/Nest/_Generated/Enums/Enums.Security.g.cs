@@ -34,4 +34,12 @@ namespace Nest
 		[EnumMember(Value = "refresh_token")]
 		RefreshToken
 	}
+
+	public enum ApiKeyGrantType
+	{
+		[EnumMember(Value = "access_token")]
+		AccessToken,
+		[EnumMember(Value = "password")]
+		Password
+	}
 }

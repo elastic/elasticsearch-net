@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -111,6 +112,60 @@ namespace Nest
         public CreateRollupJobRequest(Id id): base(r => r.Required("id", id))
         {
         }
+
+        [JsonPropertyName("cron")]
+        public string Cron { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("index_pattern")]
+        public string IndexPattern { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("page_size")]
+        public long PageSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public interface IRollupRequest : IRequest<RollupRequestParameters>
+    {
+    }
+
+    public class RollupRequest : PlainRequestBase<RollupRequestParameters>, IRollupRequest
+    {
+        protected IRollupRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupRollup;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/{index}/_rollup/{rollup_index}</summary>
+        public RollupRequest(Index index, RollupIndex rollupIndex): base(r => r)
+        {
+        }
+
+        public int Stuba { get => Q<int>("stuba"); set => Q("stuba", value); }
+
+        [JsonPropertyName("stub")]
+        public int Stub { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IRollupSearchRequest : IRequest<RollupSearchRequestParameters>
@@ -131,6 +186,15 @@ namespace Nest
         public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
         public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+
+        [JsonPropertyName("size")]
+        public int Size { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IStartRollupJobRequest : IRequest<StartRollupJobRequestParameters>

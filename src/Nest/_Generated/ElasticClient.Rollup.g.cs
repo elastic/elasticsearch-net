@@ -80,6 +80,16 @@ namespace Nest
 			return DoRequestAsync<ICreateRollupJobRequest, CreateRollupJobResponse>(request, request.RequestParameters, cancellationToken);
 		}
 
+		public RollupResponse Rollup(IRollupRequest request)
+		{
+			return DoRequest<IRollupRequest, RollupResponse>(request, request.RequestParameters);
+		}
+
+		public Task<RollupResponse> RollupAsync(IRollupRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IRollupRequest, RollupResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
 		public RollupSearchResponse Search(IRollupSearchRequest request)
 		{
 			return DoRequest<IRollupSearchRequest, RollupSearchResponse>(request, request.RequestParameters);

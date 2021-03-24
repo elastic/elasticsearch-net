@@ -42,6 +42,18 @@ namespace Nest
     {
     }
 
+    public class RollupResponse : ResponseBase
+    {
+        [JsonPropertyName("stub")]
+        public int Stub { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
     public class RollupSearchResponse : ResponseBase
     {
     }
