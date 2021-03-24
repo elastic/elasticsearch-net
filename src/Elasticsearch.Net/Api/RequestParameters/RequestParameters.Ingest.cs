@@ -43,6 +43,11 @@ namespace Elasticsearch.Net.Specification.IngestApi
 		}
 	}
 
+	///<summary>Request options for GeoIpStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/geoip-stats-api.html</para></summary>
+	public class GeoIpStatsRequestParameters : RequestParameters<GeoIpStatsRequestParameters>
+	{
+	}
+
 	///<summary>Request options for GetPipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html</para></summary>
 	public class GetPipelineRequestParameters : RequestParameters<GetPipelineRequestParameters>
 	{
@@ -51,6 +56,13 @@ namespace Elasticsearch.Net.Specification.IngestApi
 		{
 			get => Q<TimeSpan>("master_timeout");
 			set => Q("master_timeout", value);
+		}
+
+		///<summary>Return pipelines without their definitions (default: false)</summary>
+		public bool? Summary
+		{
+			get => Q<bool? >("summary");
+			set => Q("summary", value);
 		}
 	}
 
