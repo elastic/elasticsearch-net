@@ -29,13 +29,13 @@ module ReposTooling =
         
         Shell.deleteDir tempDir
         
-    let GenerateApi () =
-        //TODO allow branch name to be passed for CI
+    let GenerateApi args =
+        let branch = match args.CommandArguments with | CodeGen a -> a.Branch | _ -> raise <| Exception("Branch is required")
         let folder = Path.getDirectory (Paths.ProjFile "ApiGenerator")
         let timeout = TimeSpan.FromMinutes(120.)
-        // Building to make sure XML docs files are there, faster then relying on the ApiGenerator to emit these
-        // from a compilation unit
-        Tooling.DotNet.ExecInWithTimeout folder ["run"; "-c"; " Release"; ] timeout  |> ignore
+        Tooling.DotNet.ExecInWithTimeout folder
+            (["run"; "-c"; " Release"; "--"; "--branch"; branch; "--download"] @ args.RemainingArguments) timeout
+            |> ignore
         
     let RestSpecTests args =
         let folder = Path.getDirectory (Paths.TestProjFile "Tests.YamlRunner")
