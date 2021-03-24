@@ -13,10 +13,7 @@ namespace Tests.Core.Serialization
 
 		protected abstract object ExpectJson { get; }
 		protected virtual bool IncludeNullInExpected => true;
-
-		//TODO Validate all overrides for false whether they truly do not support deserialization
-		protected virtual bool SupportsDeserialization => true;
-
+		protected virtual bool SupportsDeserialization => true; //TODO Validate all overrides for false whether they truly do not support deserialization
 		protected SerializationTester Tester { get; }
 
 		protected void RoundTripsOrSerializes<T>(T @object)
