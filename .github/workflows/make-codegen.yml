@@ -33,7 +33,18 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: "${{ matrix.branch }}"
-      - run: "echo ${{ matrix.branch }}"
-        name: ${{ matrix.branch }}
-      # - run: "./.ci/make.sh codegen ${{ matrix.branch }}"
-      #  name: Code Gen ${{ matrix.stack_version }}
+      - run: "./.ci/make.sh codegen ${{ matrix.branch }}"
+        name: "code-gen ${{ matrix.branch }}"
+      - name: "PR ${{ matrix.branch }}"
+        # fixate to known release. 
+        uses: peter-evans/create-pull-request@5ea31358e901bfaf28ca19849903d802fd0a891b
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: "fix/${{ matrix.branch }}/code-gen"
+          delete-branch: true
+          base: "${{ matrix.branch }}"
+          commit-message: "[codegen] ${{ matrix.branch }} synchronization" 
+          title: '[codegen] ${{ matrix.branch }} synchronization'
+          body: |
+            This synchronizes the client's ${{ matrix.branch }} branch with the server. 
+          labels: "infra,code-gen"
