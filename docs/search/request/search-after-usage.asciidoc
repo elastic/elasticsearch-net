@@ -36,7 +36,7 @@ s => s
 
 [source,csharp]
 ----
-new SearchRequest<Project>
+new()
 {
     Sort = new List<ISort>
     {
@@ -48,6 +48,58 @@ new SearchRequest<Project>
         Project.First.NumberOfCommits,
         Project.First.Name,
     }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "sort": [
+    {
+      "numberOfCommits": {
+        "order": "desc"
+      }
+    },
+    {
+      "name": {
+        "order": "desc"
+      }
+    }
+  ],
+  "search_after": [
+    775,
+    "Lesch Group"
+  ]
+}
+----
+
+[float]
+=== Fluent DSL example
+
+[source,csharp]
+----
+s => s
+.Sort(srt => srt
+    .Descending(p => p.NumberOfCommits)
+    .Descending(p => p.Name)
+)
+.SearchAfter(_previousSort)
+----
+
+[float]
+=== Object Initializer syntax example
+
+[source,csharp]
+----
+new SearchRequest<Project>()
+{
+    Sort = new List<ISort>
+    {
+        new FieldSort { Field = Field<Project>(p => p.NumberOfCommits), Order = SortOrder.Descending },
+        new FieldSort { Field = Field<Project>(p => p.Name), Order = SortOrder.Descending }
+    },
+    SearchAfter = _previousSort.ToList()
 }
 ----
 
