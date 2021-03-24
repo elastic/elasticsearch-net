@@ -56,6 +56,27 @@ namespace Nest
     {
     }
 
+    public class ClosePointInTimeResponse : ResponseBase
+    {
+        [JsonPropertyName("succeeded")]
+        public bool Succeeded { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("num_freed")]
+        public int NumFreed { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
     public class CountResponse : ResponseBase
     {
         [JsonPropertyName("count")]
@@ -335,11 +356,31 @@ namespace Nest
         }
     }
 
+    public class MultiGetResponse : ResponseBase
+    {
+    }
+
     public class MultiSearchResponse : ResponseBase
     {
     }
 
+    public class MultiSearchTemplateResponse : ResponseBase
+    {
+        [JsonPropertyName("took")]
+        public long Took { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
     public class MultiTermVectorsResponse : ResponseBase
+    {
+    }
+
+    public class OpenPointInTimeResponse : ResponseBase
     {
     }
 
@@ -491,15 +532,6 @@ namespace Nest
 
         [JsonPropertyName("num_reduce_phases")]
         public long NumReducePhases { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("pit_id")]
-        public string PitId { get; 
 #if NET5_0
             init;
 #else

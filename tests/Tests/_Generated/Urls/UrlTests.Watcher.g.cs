@@ -34,6 +34,15 @@ namespace Tests.Urls.Watcher
         }
     }
 
+    public class WatcherQueryWatchesUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_watcher/_query/watches").Request(c => c.Watcher.QueryWatches(new QueryWatchesRequest())).RequestAsync(c => c.Watcher.QueryWatchesAsync(new QueryWatchesRequest()));
+        }
+    }
+
     public class WatcherStartUrlTests : UrlTestsBase
     {
         [U]

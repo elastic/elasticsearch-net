@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -41,6 +42,33 @@ namespace Nest
         ///<summary>/{index}/_analyze</summary>
         public AnalyzeRequest(IndexName index): base(r => r.Optional("index", index))
         {
+        }
+
+        [JsonPropertyName("analyzer")]
+        public string Analyzer { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("explain")]
+        public bool Explain { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("normalizer")]
+        public string Normalizer { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 
@@ -667,6 +695,15 @@ namespace Nest
         public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        [JsonPropertyName("is_write_index")]
+        public bool IsWriteIndex { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IPutMappingRequest : IRequest<PutMappingRequestParameters>
@@ -695,6 +732,24 @@ namespace Nest
         public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        [JsonPropertyName("date_detection")]
+        public bool DateDetection { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("numeric_detection")]
+        public bool NumericDetection { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSettingsRequestParameters>
@@ -730,6 +785,15 @@ namespace Nest
         public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        [JsonPropertyName("number_of_replicas")]
+        public int NumberOfReplicas { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters>
@@ -756,6 +820,24 @@ namespace Nest
         public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        [JsonPropertyName("order")]
+        public int Order { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("version")]
+        public int Version { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters>

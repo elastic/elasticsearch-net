@@ -11,7 +11,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Cluster.ClusterHealth
 {
 	public class ClusterHealthApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IClusterHealthRequest, ClusterHealthRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
 	{
 		public ClusterHealthApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -39,7 +39,7 @@ namespace Tests.Cluster.ClusterHealth
 	}
 
 	public class ClusterHealthShardsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IClusterHealthRequest, ClusterHealthRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
 	{
 		public ClusterHealthShardsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

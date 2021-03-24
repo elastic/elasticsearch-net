@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -41,6 +42,137 @@ namespace Nest
         public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
 
         public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
+
+        [JsonPropertyName("primary")]
+        public bool Primary { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("shard")]
+        public int Shard { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public interface IClusterDeleteComponentTemplateRequest : IRequest<ClusterDeleteComponentTemplateRequestParameters>
+    {
+    }
+
+    public class ClusterDeleteComponentTemplateRequest : PlainRequestBase<ClusterDeleteComponentTemplateRequestParameters>, IClusterDeleteComponentTemplateRequest
+    {
+        protected IClusterDeleteComponentTemplateRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteComponentTemplate;
+        protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+        protected override bool SupportsBody => false;
+        ///<summary>/_component_template/{name}</summary>
+        public ClusterDeleteComponentTemplateRequest(Name name): base(r => r)
+        {
+        }
+
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+
+        [JsonPropertyName("stub_c")]
+        public string StubC { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public interface IClusterDeleteVotingConfigExclusionsRequest : IRequest<ClusterDeleteVotingConfigExclusionsRequestParameters>
+    {
+    }
+
+    public class ClusterDeleteVotingConfigExclusionsRequest : PlainRequestBase<ClusterDeleteVotingConfigExclusionsRequestParameters>, IClusterDeleteVotingConfigExclusionsRequest
+    {
+        protected IClusterDeleteVotingConfigExclusionsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteVotingConfigExclusions;
+        protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cluster/voting_config_exclusions</summary>
+        public ClusterDeleteVotingConfigExclusionsRequest(): base()
+        {
+        }
+
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+
+        [JsonPropertyName("stub_c")]
+        public string StubC { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public interface IClusterComponentTemplateExistsRequest : IRequest<ClusterComponentTemplateExistsRequestParameters>
+    {
+    }
+
+    public class ClusterComponentTemplateExistsRequest : PlainRequestBase<ClusterComponentTemplateExistsRequestParameters>, IClusterComponentTemplateExistsRequest
+    {
+        protected IClusterComponentTemplateExistsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterExistsComponentTemplate;
+        protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+        protected override bool SupportsBody => false;
+        ///<summary>/_component_template/{name}</summary>
+        public ClusterComponentTemplateExistsRequest(Name name): base(r => r)
+        {
+        }
+
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+
+        [JsonPropertyName("stub_c")]
+        public string StubC { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public interface IClusterGetComponentTemplateRequest : IRequest<ClusterGetComponentTemplateRequestParameters>
+    {
+    }
+
+    public class ClusterGetComponentTemplateRequest : PlainRequestBase<ClusterGetComponentTemplateRequestParameters>, IClusterGetComponentTemplateRequest
+    {
+        protected IClusterGetComponentTemplateRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetComponentTemplate;
+        protected override HttpMethod HttpMethod => HttpMethod.GET;
+        protected override bool SupportsBody => false;
+        ///<summary>/_component_template</summary>
+        public ClusterGetComponentTemplateRequest(): base()
+        {
+        }
+
+        ///<summary>/_component_template/{name}</summary>
+        public ClusterGetComponentTemplateRequest(Name name): base(r => r)
+        {
+        }
+
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+
+        [JsonPropertyName("stub_c")]
+        public string StubC { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters>
@@ -128,6 +260,60 @@ namespace Nest
         public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
         public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+    }
+
+    public interface IClusterPostVotingConfigExclusionsRequest : IRequest<ClusterPostVotingConfigExclusionsRequestParameters>
+    {
+    }
+
+    public class ClusterPostVotingConfigExclusionsRequest : PlainRequestBase<ClusterPostVotingConfigExclusionsRequestParameters>, IClusterPostVotingConfigExclusionsRequest
+    {
+        protected IClusterPostVotingConfigExclusionsRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPostVotingConfigExclusions;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_cluster/voting_config_exclusions</summary>
+        public ClusterPostVotingConfigExclusionsRequest(): base()
+        {
+        }
+
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+
+        [JsonPropertyName("stub_c")]
+        public string StubC { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public interface IClusterPutComponentTemplateRequest : IRequest<ClusterPutComponentTemplateRequestParameters>
+    {
+    }
+
+    public class ClusterPutComponentTemplateRequest : PlainRequestBase<ClusterPutComponentTemplateRequestParameters>, IClusterPutComponentTemplateRequest
+    {
+        protected IClusterPutComponentTemplateRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutComponentTemplate;
+        protected override HttpMethod HttpMethod => HttpMethod.PUT;
+        protected override bool SupportsBody => false;
+        ///<summary>/_component_template/{name}</summary>
+        public ClusterPutComponentTemplateRequest(Name name): base(r => r)
+        {
+        }
+
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+
+        [JsonPropertyName("stub_c")]
+        public string StubC { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IClusterPutSettingsRequest : IRequest<ClusterPutSettingsRequestParameters>

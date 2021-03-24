@@ -44,6 +44,15 @@ namespace Tests.Urls.NoNamespace
         }
     }
 
+    public class ClosePointInTimeUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.DELETE("/_pit").Request(c => c.ClosePointInTime(new ClosePointInTimeRequest())).RequestAsync(c => c.ClosePointInTimeAsync(new ClosePointInTimeRequest()));
+        }
+    }
+
     public class CountUrlTests : UrlTestsBase
     {
         [U]
@@ -85,6 +94,16 @@ namespace Tests.Urls.NoNamespace
         }
     }
 
+    public class MgetUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_mget").Request(c => c.MultiGet(new MultiGetRequest())).RequestAsync(c => c.MultiGetAsync(new MultiGetRequest()));
+            await UrlTester.POST("/project/_mget").Request(c => c.MultiGet(new MultiGetRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.MultiGetAsync(new MultiGetRequest(Nest.IndexName.From<Project>())));
+        }
+    }
+
     public class MsearchUrlTests : UrlTestsBase
     {
         [U]
@@ -96,6 +115,17 @@ namespace Tests.Urls.NoNamespace
         }
     }
 
+    public class MsearchTemplateUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_msearch/template").Request(c => c.MultiSearchTemplate(new MultiSearchTemplateRequest())).RequestAsync(c => c.MultiSearchTemplateAsync(new MultiSearchTemplateRequest()));
+            await UrlTester.POST("/_all/_msearch/template").Request(c => c.MultiSearchTemplate(new MultiSearchTemplateRequest(Nest.Indices.All))).RequestAsync(c => c.MultiSearchTemplateAsync(new MultiSearchTemplateRequest(Nest.Indices.All)));
+            await UrlTester.POST("/project/_msearch/template").Request(c => c.MultiSearchTemplate(new MultiSearchTemplateRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.MultiSearchTemplateAsync(new MultiSearchTemplateRequest(Nest.IndexName.From<Project>())));
+        }
+    }
+
     public class MtermvectorsUrlTests : UrlTestsBase
     {
         [U]
@@ -103,6 +133,16 @@ namespace Tests.Urls.NoNamespace
         {
             await UrlTester.POST("/_mtermvectors").Request(c => c.MultiTermVectors(new MultiTermVectorsRequest())).RequestAsync(c => c.MultiTermVectorsAsync(new MultiTermVectorsRequest()));
             await UrlTester.POST("/project/_mtermvectors").Request(c => c.MultiTermVectors(new MultiTermVectorsRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.MultiTermVectorsAsync(new MultiTermVectorsRequest(Nest.IndexName.From<Project>())));
+        }
+    }
+
+    public class OpenPointInTimeUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_pit").Request(c => c.OpenPointInTime(new OpenPointInTimeRequest())).RequestAsync(c => c.OpenPointInTimeAsync(new OpenPointInTimeRequest()));
+            await UrlTester.POST("/project/_pit").Request(c => c.OpenPointInTime(new OpenPointInTimeRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.OpenPointInTimeAsync(new OpenPointInTimeRequest(Nest.IndexName.From<Project>())));
         }
     }
 

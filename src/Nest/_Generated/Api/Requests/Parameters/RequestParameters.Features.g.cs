@@ -25,41 +25,8 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
-    public class DeleteRollupJobRequestParameters : RequestParameters<DeleteRollupJobRequestParameters>
+    public class GetFeaturesRequestParameters : RequestParameters<GetFeaturesRequestParameters>
     {
-    }
-
-    public class GetRollupJobRequestParameters : RequestParameters<GetRollupJobRequestParameters>
-    {
-    }
-
-    public class GetRollupCapabilitiesRequestParameters : RequestParameters<GetRollupCapabilitiesRequestParameters>
-    {
-    }
-
-    public class GetRollupIndexCapabilitiesRequestParameters : RequestParameters<GetRollupIndexCapabilitiesRequestParameters>
-    {
-    }
-
-    public class CreateRollupJobRequestParameters : RequestParameters<CreateRollupJobRequestParameters>
-    {
-    }
-
-    public class RollupSearchRequestParameters : RequestParameters<RollupSearchRequestParameters>
-    {
-        public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-
-        public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-    }
-
-    public class StartRollupJobRequestParameters : RequestParameters<StartRollupJobRequestParameters>
-    {
-    }
-
-    public class StopRollupJobRequestParameters : RequestParameters<StopRollupJobRequestParameters>
-    {
-        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
-
-        public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
     }
 }

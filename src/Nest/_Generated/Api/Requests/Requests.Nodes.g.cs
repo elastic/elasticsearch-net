@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -112,6 +113,15 @@ namespace Nest
         }
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        [JsonPropertyName("secure_settings_password")]
+        public string SecureSettingsPassword { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface INodesStatsRequest : IRequest<NodesStatsRequestParameters>

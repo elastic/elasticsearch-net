@@ -5,6 +5,10 @@ namespace Nest
 {
 	// Stubs until we generate these - Allows the code to compile so we can identify real errors.
 
+	public class Index { }
+
+	public class RollupIndex { }
+
 	public class JobId : IUrlParameter
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
