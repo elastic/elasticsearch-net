@@ -28,8 +28,6 @@ echo -e "\033[34;1mINFO:\033[0m DOTNET_VERSION ${DOTNET_VERSION}\033[0m"
  
 echo -e "\033[1m>>>>> Build [elastic/elasticsearch-net container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
 
-  echo --build-arg USER_ID="$(id -u)" \
-  echo --build-arg GROUP_ID="$(id -g)" .
 docker build --file .ci/DockerFile --tag elastic/elasticsearch-net \
   --build-arg USER_ID="$(id -u)" \
   --build-arg GROUP_ID="$(id -g)" .
