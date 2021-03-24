@@ -38,6 +38,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: "fix/${{ matrix.branch }}/code-gen"
           base: "${{ matrix.branch }}"
+          delete-branch: true
           commit-message: "[codegen] ${{ matrix.branch }} synchronization" 
           title: '[codegen] ${{ matrix.branch }} synchronization'
           body: |
