@@ -13,7 +13,6 @@ RUN chown $GROUP_ID:$USER_ID $(pwd)
 COPY ./*.sln ./nuget.config ./*.Build.props ./*.Build.targets ./
 
 COPY ./dotnet-tools.json ./
-RUN dotnet tool restore
 
 # todo standardize on Build.props as Directory.Build.props needs that form
 COPY ./src/*.Build.props  ./src/
@@ -31,19 +30,21 @@ RUN for file in $(find . -name "*.?sproj"); do mkdir -p $(dirname $file)/$(basen
 COPY build/scripts/scripts.fsproj ./build/scripts/
 COPY .ci/Jenkins.csproj ./.ci/
 
-RUN chown -R $GROUP_ID:$USER_ID $(pwd)
+# Install app dependencies
+RUN dotnet restore
+RUN dotnet tool restore
+
 RUN chown -R $GROUP_ID:$USER_ID $(pwd)
 RUN chown -R $GROUP_ID:$USER_ID /tmp/NuGetScratch
-USER user
-
-# Install app dependencies
-RUN dotnet restore 
 
 # copy relevant files (see .dockerignore)
 COPY . .
 
 # making sure enough git info is available inside the container
 RUN git rev-parse HEAD .
+
+# USER user
+
 
 
 
