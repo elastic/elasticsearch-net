@@ -45,11 +45,12 @@ case $CMD in
         exit 1
 esac
 
+  #--volume "${OUTPUT_DIR}:/sln/${output_folder}" 
 
 docker run \
   --env "DOTNET_VERSION" \
   --name test-runner \
-  --volume "${OUTPUT_DIR}:/sln/${output_folder}" \
+  --volume "$repo:/sln" \
   --rm \
   elastic/elasticsearch-net \
   ./build.sh release "$VERSION" "$output_folder" "skiptests"
