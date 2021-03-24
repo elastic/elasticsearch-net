@@ -2,12 +2,6 @@
   "version": 1,
   "dependencies": {
     ".NETStandard,Version=v2.0": {
-      "coverlet.collector": {
-        "type": "Direct",
-        "requested": "[1.1.0, )",
-        "resolved": "1.1.0",
-        "contentHash": "OBxWQ4vNm+kVvKy8NTk6skRNMQCeQLqSqJ0xq19S0GLovHYTnVTcsjYgV54t6LnjjQ6mDADMcFvHMQHLoNQhIg=="
-      },
       "DiffPlex": {
         "type": "Direct",
         "requested": "[1.4.1, )",
@@ -19,11 +13,11 @@
       },
       "Elastic.Elasticsearch.Xunit": {
         "type": "Direct",
-        "requested": "[0.2.5, )",
-        "resolved": "0.2.5",
-        "contentHash": "L9kN0RWp1bzEcPgTK5rXD+/Upa84GiR7C5GMS6iGh0yK4YShs7DCBZul/dkfVfk7qdZAmXD+rsZnR8LLYPiATA==",
+        "requested": "[0.2.6, )",
+        "resolved": "0.2.6",
+        "contentHash": "Py7FVJrqY10FOwj3r9GRo/NUmTkv+BfZqXRDI9Ua3+dcNC09J/7TksRhreAIhEqNTDX4PUf2ASVIRlCUdM5kAA==",
         "dependencies": {
-          "Elastic.Elasticsearch.Ephemeral": "0.2.5",
+          "Elastic.Elasticsearch.Ephemeral": "0.2.6",
           "xunit": "2.3.1"
         }
       },
@@ -36,17 +30,17 @@
           "System.Configuration.ConfigurationManager": "4.4.0"
         }
       },
+      "JunitXml.TestLogger": {
+        "type": "Direct",
+        "requested": "[2.1.78, )",
+        "resolved": "2.1.78",
+        "contentHash": "4y4FSfKWxlked8ilQdqBBSeRMf5jD/Hkvyp744hc54yQcABLt4rR2Q+4hNqAqrSo+mhwAlusj2rpXpN/5TICCA=="
+      },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
         "requested": "[16.5.0, )",
         "resolved": "16.5.0",
         "contentHash": "yHZOhVSPuGqgHi+KhHiAZqNY08avkQraXKvgKgDU8c/ztmGzw7gmukkv49EaTq6T3xmp4XroWk3gAlbJHMxl8w=="
-      },
-      "Microsoft.NETFramework.ReferenceAssemblies": {
-        "type": "Direct",
-        "requested": "[1.0.0-preview.2, )",
-        "resolved": "1.0.0-preview.2",
-        "contentHash": "m+pJPEO7HyXvrOna5Sr3s77ewXonjYWJTNL6drh8xACnMNxnlqUDKx9HfGeSE9wmfY0lQwppaeZpFTPGaH7kZg=="
       },
       "NETStandard.Library": {
         "type": "Direct",
@@ -94,27 +88,27 @@
       },
       "Elastic.Elasticsearch.Ephemeral": {
         "type": "Transitive",
-        "resolved": "0.2.5",
-        "contentHash": "s4/49Vvdu+hIDW/F+dw973GK9MNHPojDByURREvIw/A3pXsk0pJI0l4gnfMD7cdddLmvHAKR/3LB6D0o+JjJrQ==",
+        "resolved": "0.2.6",
+        "contentHash": "N/lO3OK33AIvnvF7In7kZaDFXfZUks8P0VlxILwJjfKNu0bnhQeh5bTBAXoMCXogzdfhWuYYcrBlGVDsRCtXUw==",
         "dependencies": {
-          "Elastic.Elasticsearch.Managed": "0.2.5",
+          "Elastic.Elasticsearch.Managed": "0.2.6",
           "SharpZipLib.NETStandard": "1.0.7"
         }
       },
       "Elastic.Elasticsearch.Managed": {
         "type": "Transitive",
-        "resolved": "0.2.5",
-        "contentHash": "LhsYu04GBS2WydeGpIMDoEbZqCnQCk0BrLTRgorCEp/bpooxdR4A8XYKEIuHFlUK6rtqabMiZRd56/JCWktepw==",
+        "resolved": "0.2.6",
+        "contentHash": "JvAFjwwQ7lsPHA3AfDoKgwxs40gd8NrU9troMpKuqW5Ah9vi30wq6AzSYc6fXJ7g3KL9P2gLRyc8XnMjxJj2iw==",
         "dependencies": {
-          "Elastic.Stack.ArtifactsApi": "0.2.5",
+          "Elastic.Stack.ArtifactsApi": "0.2.6",
           "Proc": "0.6.1",
           "System.Net.Http": "4.3.1"
         }
       },
       "Elastic.Stack.ArtifactsApi": {
         "type": "Transitive",
-        "resolved": "0.2.5",
-        "contentHash": "E3kLvad48eROrhryEbw7uZHVzctrkZk3i3D8d1kDc5WSFzo8AMaFGxv3+PwqKl141fPIKpDl4iF/ybd7bl61xg==",
+        "resolved": "0.2.6",
+        "contentHash": "3ewZWhWQcQLCu/vAifxbKNCr+h1eXTyNcS7FqAJ2wupaZZ0yjsNf+YGHcOFI7P+hEByYW9kIyEFoOTUwa0/oaQ==",
         "dependencies": {
           "SemanticVersioning": "0.8.0",
           "System.Text.Json": "4.6.0"
