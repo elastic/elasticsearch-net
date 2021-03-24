@@ -1,27 +1,38 @@
 name: Code Generation 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 0/2 * * *"
+  push:
+    branches:
+      - 'feature/master/automate-codegen
+
+
 jobs:
-  build:
+  active-branches:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: some-branch
-
-
-jobs:
+      - id: dump-branches
+        run: 
+          curl -s https://artifacts-api.elastic.co/v1/branches  | jq "[ .branches[] | select(. | startswith(\"6\") | not) ]" > branches.json
+      - id: set-matrix
+        run: echo "::set-output name=matrix::$(cat branches.json)"
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      
   codegen:
     name: Assemble
+    needs: active-branches
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        branch: [ 'master', '7.x']
+        branch: ${{ fromJson(needs.active-branches.outputs.matrix) }}
     steps:
     - uses: actions/checkout@v2
       with:
         ref: "${{ matrix.branch }}"
-    - run: "./.ci/make.sh codegen ${{ matrix.branch }}"
-      name: Code Gen ${{ matrix.stack_version }}
+    - run: "echo ${{ matrix.branch }}"
+      name: Code Gen ${{ matrix.branch }}
+    #- run: "./.ci/make.sh codegen ${{ matrix.branch }}"
+    #  name: Code Gen ${{ matrix.stack_version }}
