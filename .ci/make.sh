@@ -42,6 +42,11 @@ case $CMD in
         TASK=release
         TASK_ARGS=("$VERSION" "$output_folder" "skiptests")
         ;;
+    codegen)
+        TASK=codegen
+        # VERSION is BRANCH here for now
+        TASK_ARGS=("$VERSION") 
+        ;;
     *)
         echo -e "\nUsage:\n\t $CMD is not supported right now\n"
         exit 1

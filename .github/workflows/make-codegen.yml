@@ -1,0 +1,47 @@
+name: Code Generation 
+on:
+  schedule:
+    - cron: "0 0/2 * * *"
+
+
+jobs:
+  active-branches:
+    runs-on: ubuntu-latest
+
+    steps:
+      - id: dump-branches
+        run: |
+          curl -s "https://artifacts-api.elastic.co/v1/branches"  | jq "[ .branches[] | select(. | startswith(\"6\") | not) ]" --compact-output
+          curl -s "https://artifacts-api.elastic.co/v1/branches"  | jq "[ .branches[] | select(. | startswith(\"6\") | not) ]" --compact-output > branches.json
+      - id: set-matrix
+        run: echo "::set-output name=matrix::$(cat branches.json)"
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      
+  codegen:
+    name: Sync
+    needs: active-branches
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        branch: ${{ fromJson(needs.active-branches.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: "${{ matrix.branch }}"
+      - run: "./.ci/make.sh codegen ${{ matrix.branch }}"
+        name: "code-gen ${{ matrix.branch }}"
+      - name: "PR ${{ matrix.branch }}"
+        # fixate to known release. 
+        uses: peter-evans/create-pull-request@5ea31358e901bfaf28ca19849903d802fd0a891b
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: "fix/${{ matrix.branch }}/code-gen"
+          delete-branch: true
+          base: "${{ matrix.branch }}"
+          commit-message: "[codegen] ${{ matrix.branch }} synchronization" 
+          title: '[codegen] ${{ matrix.branch }} synchronization'
+          body: |
+            This synchronizes the client's ${{ matrix.branch }} branch with the server. 
+          labels: "infra,code-gen"
