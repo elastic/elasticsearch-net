@@ -36,7 +36,7 @@ s => s
 
 [source,csharp]
 ----
-new()
+new SearchRequest<Project>()
 {
     Sort = new List<ISort>
     {
