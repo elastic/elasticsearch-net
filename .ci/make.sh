@@ -49,7 +49,7 @@ case $CMD in
         TASK=codegen
         # VERSION is BRANCH here for now
         TASK_ARGS=("$VERSION") 
-		REPO_BINDING="$repo:/sln"
+        REPO_BINDING="$repo:/sln"
         ;;
     *)
         echo -e "\nUsage:\n\t $CMD is not supported right now\n"
