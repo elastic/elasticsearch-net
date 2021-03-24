@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: "${{ matrix.branch }}"
-      - run: "./.ci/make.sh codegen ${{ matrix.branch }}"
+      - run: "./.ci/make.sh codegen master"
         name: "code-gen ${{ matrix.branch }}"
       - name: "PR ${{ matrix.branch }}"
         # fixate to known release. 
