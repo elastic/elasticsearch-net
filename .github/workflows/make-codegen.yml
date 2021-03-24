@@ -2,6 +2,9 @@ name: Code Generation
 on:
   schedule:
     - cron: "0 0/2 * * *"
+  push:
+    branches:
+      - 'feature/master/codegen-make'
 
 jobs:
   active-branches:
@@ -24,7 +27,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        branch: ${{ fromJson(needs.active-branches.outputs.matrix) }}
+        # branch: ${{ fromJson(needs.active-branches.outputs.matrix) }}
+        branch: ['feature/master/codegen-make']
     steps:
       - uses: actions/checkout@v2
         with:
