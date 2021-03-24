@@ -13,15 +13,16 @@ jobs:
 
     steps:
       - id: dump-branches
-        run: 
-          curl -s https://artifacts-api.elastic.co/v1/branches  | jq "[ .branches[] | select(. | startswith(\"6\") | not) ]" > branches.json
+        run:
+          curl -s https://artifacts-api.elastic.co/v1/branches  | jq "[ .branches[] | select(. | startswith(\"6\") | not) ]" --compact-output
+          curl -s https://artifacts-api.elastic.co/v1/branches  | jq "[ .branches[] | select(. | startswith(\"6\") | not) ]" --compact-output > branches.json
       - id: set-matrix
         run: echo "::set-output name=matrix::$(cat branches.json)"
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
       
   codegen:
-    name: Assemble
+    name: Sync
     needs: active-branches
     runs-on: ubuntu-latest
     strategy:
@@ -33,6 +34,6 @@ jobs:
         with:
           ref: "${{ matrix.branch }}"
       - run: "echo ${{ matrix.branch }}"
-        name: Code Gen ${{ matrix.branch }}
+        name: ${{ matrix.branch }}
       # - run: "./.ci/make.sh codegen ${{ matrix.branch }}"
       #  name: Code Gen ${{ matrix.stack_version }}
