@@ -722,11 +722,22 @@ namespace Tests.Search.Search
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.Hits.Count.Should().BeGreaterThan(0);
-			response.Hits.First().Should().NotBeNull();
-			response.Hits.First().Type.Should().NotBeNullOrWhiteSpace();
-			response.Hits.First().Fields.ValueOf<ProjectRuntimeFields, string>(p => p.StartedOnDayOfWeek).Should().NotBeNullOrEmpty();
-			response.Hits.First().Fields.ValueOf<ProjectRuntimeFields, string>(p => p.ThirtyDaysFromStarted).Should().NotBeNullOrEmpty();
-			response.Hits.First().Fields[RuntimeFieldName].As<string[]>().FirstOrDefault().Should().NotBeNullOrEmpty();
+
+			foreach (var hit in response.Hits)
+			{
+				hit.Should().NotBeNull();
+
+				if (hit.Source.StartedOn != default)
+				{
+					hit.Fields.ValueOf<ProjectRuntimeFields, string>(p => p.StartedOnDayOfWeek).Should().NotBeNullOrEmpty();
+					hit.Fields.ValueOf<ProjectRuntimeFields, string>(p => p.ThirtyDaysFromStarted).Should().NotBeNullOrEmpty();
+				}
+
+				if (!string.IsNullOrEmpty(hit.Source.Type))
+				{
+					hit.Fields[RuntimeFieldName].As<string[]>().FirstOrDefault().Should().NotBeNullOrEmpty();
+				}
+			}
 		}
 	}
 }
