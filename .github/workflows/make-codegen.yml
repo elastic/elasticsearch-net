@@ -36,7 +36,7 @@ jobs:
         name: "code-gen ${{ matrix.branch }}"
       - name: "PR ${{ matrix.branch }}"
         # fixate to known release. 
-        uses: peter-evans/create-pull-request@5ea31358e901bfaf28ca19849903d802fd0a891b
+        uses: peter-evans/create-pull-request@052fc72b4198ba9fbc81b818c6e1859f747d49a8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: "fix/${{ matrix.branch }}/code-gen"
