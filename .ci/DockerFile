@@ -1,15 +1,15 @@
 ARG DOTNET_VERSION=5.0.103
 FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION} AS elasticsearch-net-build
 
-WORKDIR /sln
-
 ARG USER_ID
 ARG GROUP_ID
 
+RUN echo addgroup --gid $GROUP_ID user
 RUN addgroup --gid $GROUP_ID user
 RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
-USER user
 
+WORKDIR /sln
+RUN chown $GROUP_ID:$USER_ID $(pwd)
 COPY ./*.sln ./nuget.config ./*.Build.props ./*.Build.targets ./
 
 COPY ./dotnet-tools.json ./
@@ -31,6 +31,11 @@ RUN for file in $(find . -name "*.?sproj"); do mkdir -p $(dirname $file)/$(basen
 COPY build/scripts/scripts.fsproj ./build/scripts/
 COPY .ci/Jenkins.csproj ./.ci/
 
+RUN chown -R $GROUP_ID:$USER_ID $(pwd)
+RUN chown -R $GROUP_ID:$USER_ID $(pwd)
+RUN chown -R $GROUP_ID:$USER_ID /tmp/NuGetScratch
+USER user
+
 # Install app dependencies
 RUN dotnet restore 
 
@@ -39,3 +44,6 @@ COPY . .
 
 # making sure enough git info is available inside the container
 RUN git rev-parse HEAD .
+
+
+
