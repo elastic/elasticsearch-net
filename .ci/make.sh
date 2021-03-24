@@ -14,6 +14,7 @@ TASK=$1
 TASK_ARGS=()
 VERSION=$2
 STACK_VERSION=$VERSION
+REPO_BINDING="$repo:/sln"
 set -euo pipefail
 
 output_folder=".ci/output"
@@ -48,6 +49,7 @@ case $CMD in
         TASK=codegen
         # VERSION is BRANCH here for now
         TASK_ARGS=("$VERSION") 
+		REPO_BINDING=${OUTPUT_DIR}:/sln/${output_folder}"
         ;;
     *)
         echo -e "\nUsage:\n\t $CMD is not supported right now\n"
@@ -59,7 +61,7 @@ esac
 docker run \
   --env "DOTNET_VERSION" \
   --name test-runner \
-  --volume "$repo:/sln" \
+  --volume $REPO_BINDING \
   --rm \
   elastic/elasticsearch-net \
   ./build.sh $TASK "${TASK_ARGS[@]}"
