@@ -1,0 +1,27 @@
+name: Code Generation 
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: some-branch
+
+
+jobs:
+  codegen:
+    name: Assemble
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        branch: [ 'master', '7.x']
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: "${{ matrix.branch }}"
+    - run: "./.ci/make.sh codegen ${{ matrix.branch }}"
+      name: Code Gen ${{ matrix.stack_version }}
