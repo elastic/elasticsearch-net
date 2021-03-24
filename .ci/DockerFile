@@ -43,7 +43,7 @@ COPY . .
 # making sure enough git info is available inside the container
 RUN git rev-parse HEAD .
 
-USER user
+# USER user
 
 
 
