@@ -92,7 +92,7 @@ namespace Tests.Search.Request
 			.SearchAfter(_previousSort);
 
 		protected override SearchRequest<Project> Initializer =>
-			new()
+			new SearchRequest<Project>()
 			{
 				Sort = new List<ISort>
 				{
