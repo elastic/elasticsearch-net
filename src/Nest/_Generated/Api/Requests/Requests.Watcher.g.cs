@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -113,6 +114,24 @@ namespace Nest
         }
 
         public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
+
+        [JsonPropertyName("ignore_condition")]
+        public bool IgnoreCondition { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("record_execution")]
+        public bool RecordExecution { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IGetWatchRequest : IRequest<GetWatchRequestParameters>
@@ -153,6 +172,42 @@ namespace Nest
         public long? IfSequenceNumber { get => Q<long?>("if_sequence_number"); set => Q("if_sequence_number", value); }
 
         public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+
+        [JsonPropertyName("throttle_period")]
+        public string ThrottlePeriod { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public interface IQueryWatchesRequest : IRequest<QueryWatchesRequestParameters>
+    {
+    }
+
+    public class QueryWatchesRequest : PlainRequestBase<QueryWatchesRequestParameters>, IQueryWatchesRequest
+    {
+        protected IQueryWatchesRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherQueryWatches;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_watcher/_query/watches</summary>
+        public QueryWatchesRequest(): base()
+        {
+        }
+
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+
+        [JsonPropertyName("stub_c")]
+        public string StubC { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters>

@@ -32,6 +32,26 @@ namespace Nest
         public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
     }
 
+    public class ClusterDeleteComponentTemplateRequestParameters : RequestParameters<ClusterDeleteComponentTemplateRequestParameters>
+    {
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+    }
+
+    public class ClusterDeleteVotingConfigExclusionsRequestParameters : RequestParameters<ClusterDeleteVotingConfigExclusionsRequestParameters>
+    {
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+    }
+
+    public class ClusterComponentTemplateExistsRequestParameters : RequestParameters<ClusterComponentTemplateExistsRequestParameters>
+    {
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+    }
+
+    public class ClusterGetComponentTemplateRequestParameters : RequestParameters<ClusterGetComponentTemplateRequestParameters>
+    {
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+    }
+
     public class ClusterGetSettingsRequestParameters : RequestParameters<ClusterGetSettingsRequestParameters>
     {
         public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
@@ -73,6 +93,16 @@ namespace Nest
         public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
         public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+    }
+
+    public class ClusterPostVotingConfigExclusionsRequestParameters : RequestParameters<ClusterPostVotingConfigExclusionsRequestParameters>
+    {
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+    }
+
+    public class ClusterPutComponentTemplateRequestParameters : RequestParameters<ClusterPutComponentTemplateRequestParameters>
+    {
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
     }
 
     public class ClusterPutSettingsRequestParameters : RequestParameters<ClusterPutSettingsRequestParameters>

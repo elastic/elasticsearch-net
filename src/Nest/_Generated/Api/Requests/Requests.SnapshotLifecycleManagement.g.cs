@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -137,6 +138,24 @@ namespace Nest
         ///<summary>/_slm/policy/{policy_id}</summary>
         public PutSnapshotLifecycleRequest(Name policyId): base(r => r.Required("policy_id", policyId))
         {
+        }
+
+        [JsonPropertyName("name")]
+        public string Name { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("repository")]
+        public string Repository { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 

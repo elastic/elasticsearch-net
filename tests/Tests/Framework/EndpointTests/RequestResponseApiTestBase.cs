@@ -19,11 +19,12 @@ using Xunit;
 
 namespace Tests.Framework.EndpointTests
 {
-	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TInitializer>
+	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: ExpectJsonTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
 		where TResponse : class, IResponse
 		where TInterface : class
+		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
 	{
 		private readonly EndpointUsage _usage;
@@ -43,6 +44,7 @@ namespace Tests.Framework.EndpointTests
 		public TCluster Cluster { get; }
 
 		protected virtual string CallIsolatedValue => UniqueValues.Value;
+		protected virtual Func<TDescriptor, TInterface> Fluent { get; } = null;
 		protected virtual TInitializer Initializer { get; } = null;
 		protected bool RanIntegrationSetup => _usage?.CalledSetup ?? false;
 		protected LazyResponses Responses { get; }

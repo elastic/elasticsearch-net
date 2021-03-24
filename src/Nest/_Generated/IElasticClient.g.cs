@@ -26,13 +26,21 @@ namespace Nest
     {
         AsyncSearchNamespace AsyncSearch { get; }
 
+        AutoscalingNamespace Autoscaling { get; }
+
         CatNamespace Cat { get; }
 
         CrossClusterReplicationNamespace CrossClusterReplication { get; }
 
         ClusterNamespace Cluster { get; }
 
+        DanglingIndicesNamespace DanglingIndices { get; }
+
         EnrichNamespace Enrich { get; }
+
+        EqlNamespace Eql { get; }
+
+        FeaturesNamespace Features { get; }
 
         GraphNamespace Graph { get; }
 
@@ -44,9 +52,13 @@ namespace Nest
 
         LicenseNamespace License { get; }
 
+        LogstashNamespace Logstash { get; }
+
         MigrationNamespace Migration { get; }
 
         MachineLearningNamespace MachineLearning { get; }
+
+        MonitoringNamespace Monitoring { get; }
 
         NodesNamespace Nodes { get; }
 
@@ -74,6 +86,8 @@ namespace Nest
         Task<BulkResponse> BulkAsync(IBulkRequest request, CancellationToken cancellationToken = default);
         ClearScrollResponse ClearScroll(IClearScrollRequest request);
         Task<ClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken cancellationToken = default);
+        ClosePointInTimeResponse ClosePointInTime(IClosePointInTimeRequest request);
+        Task<ClosePointInTimeResponse> ClosePointInTimeAsync(IClosePointInTimeRequest request, CancellationToken cancellationToken = default);
         CountResponse Count(ICountRequest request);
         Task<CountResponse> CountAsync(ICountRequest request, CancellationToken cancellationToken = default);
         CreateResponse Create(ICreateRequest request);
@@ -104,10 +118,16 @@ namespace Nest
         Task<IndexResponse> IndexAsync(IIndexRequest request, CancellationToken cancellationToken = default);
         RootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request);
         Task<RootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken cancellationToken = default);
+        MultiGetResponse MultiGet(IMultiGetRequest request);
+        Task<MultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken cancellationToken = default);
         MultiSearchResponse MultiSearch(IMultiSearchRequest request);
         Task<MultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken cancellationToken = default);
+        MultiSearchTemplateResponse MultiSearchTemplate(IMultiSearchTemplateRequest request);
+        Task<MultiSearchTemplateResponse> MultiSearchTemplateAsync(IMultiSearchTemplateRequest request, CancellationToken cancellationToken = default);
         MultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request);
         Task<MultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken cancellationToken = default);
+        OpenPointInTimeResponse OpenPointInTime(IOpenPointInTimeRequest request);
+        Task<OpenPointInTimeResponse> OpenPointInTimeAsync(IOpenPointInTimeRequest request, CancellationToken cancellationToken = default);
         PingResponse Ping(IPingRequest request);
         Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default);
         PutScriptResponse PutScript(IPutScriptRequest request);

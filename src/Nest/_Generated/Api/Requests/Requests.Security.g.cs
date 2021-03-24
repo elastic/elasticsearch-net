@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -60,6 +61,31 @@ namespace Nest
         }
 
         public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+
+        [JsonPropertyName("password")]
+        public string Password { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public interface IClearApiKeyCacheRequest : IRequest<ClearApiKeyCacheRequestParameters>
+    {
+    }
+
+    public class ClearApiKeyCacheRequest : PlainRequestBase<ClearApiKeyCacheRequestParameters>, IClearApiKeyCacheRequest
+    {
+        protected IClearApiKeyCacheRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityClearApiKeyCache;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_security/api_key/{ids}/_clear_cache</summary>
+        public ClearApiKeyCacheRequest(Ids ids): base(r => r.Optional("ids", ids))
+        {
+        }
     }
 
     public interface IClearCachedRealmsRequest : IRequest<ClearCachedRealmsRequestParameters>
@@ -110,6 +136,15 @@ namespace Nest
         }
 
         public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+
+        [JsonPropertyName("name")]
+        public string Name { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IDeletePrivilegesRequest : IRequest<DeletePrivilegesRequestParameters>
@@ -344,6 +379,60 @@ namespace Nest
         public GetUserAccessTokenRequest(): base()
         {
         }
+
+        [JsonPropertyName("grant_type")]
+        public AccessTokenGrantType GrantType { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("scope")]
+        public string Scope { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("password")]
+        public string Password { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("kerberos_ticket")]
+        public string KerberosTicket { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("refresh_token")]
+        public string RefreshToken { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("username")]
+        public string Username { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IGetUserRequest : IRequest<GetUserRequestParameters>
@@ -383,6 +472,58 @@ namespace Nest
         }
     }
 
+    public interface IGrantApiKeyRequest : IRequest<GrantApiKeyRequestParameters>
+    {
+    }
+
+    public class GrantApiKeyRequest : PlainRequestBase<GrantApiKeyRequestParameters>, IGrantApiKeyRequest
+    {
+        protected IGrantApiKeyRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGrantApiKey;
+        protected override HttpMethod HttpMethod => HttpMethod.POST;
+        protected override bool SupportsBody => false;
+        ///<summary>/_security/api_key/grant</summary>
+        public GrantApiKeyRequest(): base()
+        {
+        }
+
+        [JsonPropertyName("grant_type")]
+        public ApiKeyGrantType GrantType { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("access_token")]
+        public string AccessToken { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("username")]
+        public string Username { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("password")]
+        public string Password { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
     public interface IHasPrivilegesRequest : IRequest<HasPrivilegesRequestParameters>
     {
     }
@@ -418,6 +559,51 @@ namespace Nest
         public InvalidateApiKeyRequest(): base()
         {
         }
+
+        [JsonPropertyName("id")]
+        public string Id { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("name")]
+        public string Name { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("owner")]
+        public bool Owner { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("realm_name")]
+        public string RealmName { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("username")]
+        public string Username { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IInvalidateUserAccessTokenRequest : IRequest<InvalidateUserAccessTokenRequestParameters>
@@ -433,6 +619,42 @@ namespace Nest
         ///<summary>/_security/oauth2/token</summary>
         public InvalidateUserAccessTokenRequest(): base()
         {
+        }
+
+        [JsonPropertyName("token")]
+        public string Token { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("refresh_token")]
+        public string RefreshToken { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("realm_name")]
+        public string RealmName { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("username")]
+        public string Username { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 
@@ -488,6 +710,15 @@ namespace Nest
         }
 
         public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+
+        [JsonPropertyName("enabled")]
+        public bool Enabled { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IPutUserRequest : IRequest<PutUserRequestParameters>
@@ -506,6 +737,33 @@ namespace Nest
         }
 
         public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+
+        [JsonPropertyName("password")]
+        public string Password { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("password_hash")]
+        public string PasswordHash { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("enabled")]
+        public bool Enabled { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IGetCertificatesRequest : IRequest<GetCertificatesRequestParameters>

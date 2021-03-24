@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -104,6 +105,15 @@ namespace Nest
         public PreviewTransformRequest(): base()
         {
         }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IPutTransformRequest : IRequest<PutTransformRequestParameters>
@@ -122,6 +132,15 @@ namespace Nest
         }
 
         public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IStartTransformRequest : IRequest<StartTransformRequestParameters>
@@ -184,5 +203,14 @@ namespace Nest
         }
 
         public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
+
+        [JsonPropertyName("description")]
+        public string Description { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 }

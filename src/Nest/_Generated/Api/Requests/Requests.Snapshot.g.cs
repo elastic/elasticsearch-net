@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -43,6 +44,35 @@ namespace Nest
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
+    public interface ICloneSnapshotRequest : IRequest<CloneSnapshotRequestParameters>
+    {
+    }
+
+    public class CloneSnapshotRequest : PlainRequestBase<CloneSnapshotRequestParameters>, ICloneSnapshotRequest
+    {
+        protected ICloneSnapshotRequest Self => this;
+        internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotClone;
+        protected override HttpMethod HttpMethod => HttpMethod.PUT;
+        protected override bool SupportsBody => false;
+        ///<summary>/_snapshot/{repository}/{snapshot}/_clone/{target_snapshot}</summary>
+        public CloneSnapshotRequest(Name repository, Name snapshot, Name targetSnapshot): base(r => r.Required("repository", repository).Required("snapshot", snapshot).Required("target_snapshot", targetSnapshot))
+        {
+        }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        [JsonPropertyName("indices")]
+        public string Indices { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
     public interface ISnapshotRequest : IRequest<SnapshotRequestParameters>
     {
     }
@@ -61,6 +91,33 @@ namespace Nest
         public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
         public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+
+        [JsonPropertyName("ignore_unavailable")]
+        public bool IgnoreUnavailable { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("include_global_state")]
+        public bool IncludeGlobalState { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("partial")]
+        public bool Partial { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters>
@@ -83,6 +140,15 @@ namespace Nest
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
         public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
+
+        [JsonPropertyName("type")]
+        public string Type { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IDeleteSnapshotRequest : IRequest<DeleteSnapshotRequestParameters>
@@ -188,6 +254,60 @@ namespace Nest
         public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
         public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+
+        [JsonPropertyName("ignore_unavailable")]
+        public bool IgnoreUnavailable { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("include_aliases")]
+        public bool IncludeAliases { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("include_global_state")]
+        public bool IncludeGlobalState { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("partial")]
+        public bool Partial { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("rename_pattern")]
+        public string RenamePattern { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("rename_replacement")]
+        public string RenameReplacement { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface ISnapshotStatusRequest : IRequest<SnapshotStatusRequestParameters>

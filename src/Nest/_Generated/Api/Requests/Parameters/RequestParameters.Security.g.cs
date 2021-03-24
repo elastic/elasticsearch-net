@@ -34,6 +34,10 @@ namespace Nest
         public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
     }
 
+    public class ClearApiKeyCacheRequestParameters : RequestParameters<ClearApiKeyCacheRequestParameters>
+    {
+    }
+
     public class ClearCachedRealmsRequestParameters : RequestParameters<ClearCachedRealmsRequestParameters>
     {
     }
@@ -115,6 +119,10 @@ namespace Nest
     }
 
     public class GetUserPrivilegesRequestParameters : RequestParameters<GetUserPrivilegesRequestParameters>
+    {
+    }
+
+    public class GrantApiKeyRequestParameters : RequestParameters<GrantApiKeyRequestParameters>
     {
     }
 

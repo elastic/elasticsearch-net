@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -52,6 +53,15 @@ namespace Nest
         ///<summary>/_async_search/{id}</summary>
         public AsyncSearchGetRequest(Id id): base(r => r.Required("id", id))
         {
+        }
+
+        [JsonPropertyName("typed_keys")]
+        public bool TypedKeys { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 
@@ -98,5 +108,257 @@ namespace Nest
         public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
 
         public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+
+        [JsonPropertyName("allow_no_indices")]
+        public bool AllowNoIndices { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("allow_partial_search_results")]
+        public bool AllowPartialSearchResults { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("analyzer")]
+        public string Analyzer { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("analyze_wildcard")]
+        public bool AnalyzeWildcard { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("default_operator")]
+        public DefaultOperator DefaultOperator { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("df")]
+        public string Df { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("explain")]
+        public bool Explain { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("from")]
+        public int From { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("ignore_throttled")]
+        public bool IgnoreThrottled { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("ignore_unavailable")]
+        public bool IgnoreUnavailable { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("lenient")]
+        public bool Lenient { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("max_concurrent_shard_requests")]
+        public long MaxConcurrentShardRequests { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("min_score")]
+        public double MinScore { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("preference")]
+        public string Preference { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("profile")]
+        public bool Profile { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("query_on_query_string")]
+        public string QueryOnQueryString { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("request_cache")]
+        public bool RequestCache { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("search_type")]
+        public SearchType SearchType { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("sequence_number_primary_term")]
+        public bool SequenceNumberPrimaryTerm { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("size")]
+        public int Size { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("suggest_mode")]
+        public SuggestMode SuggestMode { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("suggest_size")]
+        public long SuggestSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("suggest_text")]
+        public string SuggestText { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("terminate_after")]
+        public long TerminateAfter { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("timeout")]
+        public string Timeout { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("track_scores")]
+        public bool TrackScores { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("track_total_hits")]
+        public bool TrackTotalHits { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("version")]
+        public bool Version { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 }

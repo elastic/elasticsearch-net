@@ -60,6 +60,16 @@ namespace Nest
 			return DoRequestAsync<IChangePasswordRequest, ChangePasswordResponse>(request, request.RequestParameters, cancellationToken);
 		}
 
+		public ClearApiKeyCacheResponse ClearApiKeyCache(IClearApiKeyCacheRequest request)
+		{
+			return DoRequest<IClearApiKeyCacheRequest, ClearApiKeyCacheResponse>(request, request.RequestParameters);
+		}
+
+		public Task<ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(IClearApiKeyCacheRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IClearApiKeyCacheRequest, ClearApiKeyCacheResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
 		public ClearCachedRealmsResponse ClearCachedRealms(IClearCachedRealmsRequest request)
 		{
 			return DoRequest<IClearCachedRealmsRequest, ClearCachedRealmsResponse>(request, request.RequestParameters);
@@ -228,6 +238,16 @@ namespace Nest
 		public Task<GetUserPrivilegesResponse> GetUserPrivilegesAsync(IGetUserPrivilegesRequest request, CancellationToken cancellationToken = default)
 		{
 			return DoRequestAsync<IGetUserPrivilegesRequest, GetUserPrivilegesResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public GrantApiKeyResponse GrantApiKey(IGrantApiKeyRequest request)
+		{
+			return DoRequest<IGrantApiKeyRequest, GrantApiKeyResponse>(request, request.RequestParameters);
+		}
+
+		public Task<GrantApiKeyResponse> GrantApiKeyAsync(IGrantApiKeyRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IGrantApiKeyRequest, GrantApiKeyResponse>(request, request.RequestParameters, cancellationToken);
 		}
 
 		public HasPrivilegesResponse HasPrivileges(IHasPrivilegesRequest request)

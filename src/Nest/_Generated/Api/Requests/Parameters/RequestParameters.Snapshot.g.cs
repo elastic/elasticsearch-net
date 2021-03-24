@@ -32,6 +32,13 @@ namespace Nest
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
+    public class CloneSnapshotRequestParameters : RequestParameters<CloneSnapshotRequestParameters>
+    {
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
     public class SnapshotRequestParameters : RequestParameters<SnapshotRequestParameters>
     {
         public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }

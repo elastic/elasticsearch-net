@@ -40,6 +40,46 @@ namespace Nest
 			return DoRequestAsync<IClusterAllocationExplainRequest, ClusterAllocationExplainResponse>(request, request.RequestParameters, cancellationToken);
 		}
 
+		public ClusterDeleteComponentTemplateResponse DeleteComponentTemplate(IClusterDeleteComponentTemplateRequest request)
+		{
+			return DoRequest<IClusterDeleteComponentTemplateRequest, ClusterDeleteComponentTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<ClusterDeleteComponentTemplateResponse> DeleteComponentTemplateAsync(IClusterDeleteComponentTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IClusterDeleteComponentTemplateRequest, ClusterDeleteComponentTemplateResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public ClusterDeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(IClusterDeleteVotingConfigExclusionsRequest request)
+		{
+			return DoRequest<IClusterDeleteVotingConfigExclusionsRequest, ClusterDeleteVotingConfigExclusionsResponse>(request, request.RequestParameters);
+		}
+
+		public Task<ClusterDeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(IClusterDeleteVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IClusterDeleteVotingConfigExclusionsRequest, ClusterDeleteVotingConfigExclusionsResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public ClusterComponentTemplateExistsResponse ComponentTemplateExists(IClusterComponentTemplateExistsRequest request)
+		{
+			return DoRequest<IClusterComponentTemplateExistsRequest, ClusterComponentTemplateExistsResponse>(request, request.RequestParameters);
+		}
+
+		public Task<ClusterComponentTemplateExistsResponse> ComponentTemplateExistsAsync(IClusterComponentTemplateExistsRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IClusterComponentTemplateExistsRequest, ClusterComponentTemplateExistsResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public ClusterGetComponentTemplateResponse GetComponentTemplate(IClusterGetComponentTemplateRequest request)
+		{
+			return DoRequest<IClusterGetComponentTemplateRequest, ClusterGetComponentTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<ClusterGetComponentTemplateResponse> GetComponentTemplateAsync(IClusterGetComponentTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IClusterGetComponentTemplateRequest, ClusterGetComponentTemplateResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
 		public ClusterGetSettingsResponse GetSettings(IClusterGetSettingsRequest request)
 		{
 			return DoRequest<IClusterGetSettingsRequest, ClusterGetSettingsResponse>(request, request.RequestParameters);
@@ -68,6 +108,26 @@ namespace Nest
 		public Task<ClusterPendingTasksResponse> PendingTasksAsync(IClusterPendingTasksRequest request, CancellationToken cancellationToken = default)
 		{
 			return DoRequestAsync<IClusterPendingTasksRequest, ClusterPendingTasksResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public ClusterPostVotingConfigExclusionsResponse PostVotingConfigExclusions(IClusterPostVotingConfigExclusionsRequest request)
+		{
+			return DoRequest<IClusterPostVotingConfigExclusionsRequest, ClusterPostVotingConfigExclusionsResponse>(request, request.RequestParameters);
+		}
+
+		public Task<ClusterPostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(IClusterPostVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IClusterPostVotingConfigExclusionsRequest, ClusterPostVotingConfigExclusionsResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public ClusterPutComponentTemplateResponse PutComponentTemplate(IClusterPutComponentTemplateRequest request)
+		{
+			return DoRequest<IClusterPutComponentTemplateRequest, ClusterPutComponentTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync(IClusterPutComponentTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IClusterPutComponentTemplateRequest, ClusterPutComponentTemplateResponse>(request, request.RequestParameters, cancellationToken);
 		}
 
 		public ClusterPutSettingsResponse PutSettings(IClusterPutSettingsRequest request)

@@ -61,6 +61,11 @@ namespace Nest
         public long? Version { get => Q<long?>("version"); set => Q("version", value); }
     }
 
+    public class QueryWatchesRequestParameters : RequestParameters<QueryWatchesRequestParameters>
+    {
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+    }
+
     public class StartWatcherRequestParameters : RequestParameters<StartWatcherRequestParameters>
     {
     }

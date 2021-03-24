@@ -187,6 +187,54 @@ namespace Nest
         }
     }
 
+    public class ClusterDeleteComponentTemplateResponse : ResponseBase
+    {
+        [JsonPropertyName("stub")]
+        public int Stub { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public class ClusterDeleteVotingConfigExclusionsResponse : ResponseBase
+    {
+        [JsonPropertyName("stub")]
+        public int Stub { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public class ClusterComponentTemplateExistsResponse : ResponseBase
+    {
+        [JsonPropertyName("stub")]
+        public int Stub { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public class ClusterGetComponentTemplateResponse : ResponseBase
+    {
+        [JsonPropertyName("stub")]
+        public int Stub { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
     public class ClusterGetSettingsResponse : ResponseBase
     {
     }
@@ -313,6 +361,30 @@ namespace Nest
 
     public class ClusterPendingTasksResponse : ResponseBase
     {
+    }
+
+    public class ClusterPostVotingConfigExclusionsResponse : ResponseBase
+    {
+        [JsonPropertyName("stub")]
+        public int Stub { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public class ClusterPutComponentTemplateResponse : ResponseBase
+    {
+        [JsonPropertyName("stub")]
+        public int Stub { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public class ClusterPutSettingsResponse : ResponseBase

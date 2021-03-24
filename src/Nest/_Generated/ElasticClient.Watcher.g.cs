@@ -100,6 +100,16 @@ namespace Nest
 			return DoRequestAsync<IPutWatchRequest, PutWatchResponse>(request, request.RequestParameters, cancellationToken);
 		}
 
+		public QueryWatchesResponse QueryWatches(IQueryWatchesRequest request)
+		{
+			return DoRequest<IQueryWatchesRequest, QueryWatchesResponse>(request, request.RequestParameters);
+		}
+
+		public Task<QueryWatchesResponse> QueryWatchesAsync(IQueryWatchesRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IQueryWatchesRequest, QueryWatchesResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
 		public StartWatcherResponse StartWatcher(IStartWatcherRequest request)
 		{
 			return DoRequest<IStartWatcherRequest, StartWatcherResponse>(request, request.RequestParameters);

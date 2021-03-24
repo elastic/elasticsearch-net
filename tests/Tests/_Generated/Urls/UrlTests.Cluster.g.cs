@@ -34,6 +34,24 @@ namespace Tests.Urls.Cluster
         }
     }
 
+    public class ClusterDeleteVotingConfigExclusionsUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.DELETE("/_cluster/voting_config_exclusions").Request(c => c.Cluster.DeleteVotingConfigExclusions(new ClusterDeleteVotingConfigExclusionsRequest())).RequestAsync(c => c.Cluster.DeleteVotingConfigExclusionsAsync(new ClusterDeleteVotingConfigExclusionsRequest()));
+        }
+    }
+
+    public class ClusterGetComponentTemplateUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_component_template").Request(c => c.Cluster.GetComponentTemplate(new ClusterGetComponentTemplateRequest())).RequestAsync(c => c.Cluster.GetComponentTemplateAsync(new ClusterGetComponentTemplateRequest()));
+        }
+    }
+
     public class ClusterGetSettingsUrlTests : UrlTestsBase
     {
         [U]
@@ -60,6 +78,15 @@ namespace Tests.Urls.Cluster
         public override async Task Urls()
         {
             await UrlTester.GET("/_cluster/pending_tasks").Request(c => c.Cluster.PendingTasks(new ClusterPendingTasksRequest())).RequestAsync(c => c.Cluster.PendingTasksAsync(new ClusterPendingTasksRequest()));
+        }
+    }
+
+    public class ClusterPostVotingConfigExclusionsUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_cluster/voting_config_exclusions").Request(c => c.Cluster.PostVotingConfigExclusions(new ClusterPostVotingConfigExclusionsRequest())).RequestAsync(c => c.Cluster.PostVotingConfigExclusionsAsync(new ClusterPostVotingConfigExclusionsRequest()));
         }
     }
 

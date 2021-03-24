@@ -26,6 +26,10 @@ namespace Nest
     {
     }
 
+    public class CloneSnapshotResponse : AcknowledgedResponseBase
+    {
+    }
+
     public class SnapshotResponse : ResponseBase
     {
         [JsonPropertyName("accepted")]

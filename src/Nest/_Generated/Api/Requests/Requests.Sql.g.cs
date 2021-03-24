@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #nullable restore
@@ -37,6 +38,15 @@ namespace Nest
         public ClearSqlCursorRequest(): base()
         {
         }
+
+        [JsonPropertyName("cursor")]
+        public string Cursor { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface IQuerySqlRequest : IRequest<QuerySqlRequestParameters>
@@ -55,6 +65,51 @@ namespace Nest
         }
 
         public string? Format { get => Q<string?>("format"); set => Q("format", value); }
+
+        [JsonPropertyName("columnar")]
+        public bool Columnar { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("cursor")]
+        public string Cursor { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("fetch_size")]
+        public int FetchSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("query")]
+        public string Query { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("time_zone")]
+        public string TimeZone { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
     }
 
     public interface ITranslateSqlRequest : IRequest<TranslateSqlRequestParameters>
@@ -70,6 +125,33 @@ namespace Nest
         ///<summary>/_sql/translate</summary>
         public TranslateSqlRequest(): base()
         {
+        }
+
+        [JsonPropertyName("fetch_size")]
+        public int FetchSize { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("query")]
+        public string Query { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("time_zone")]
+        public string TimeZone { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 }
