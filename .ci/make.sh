@@ -56,6 +56,8 @@ case $CMD in
         exit 1
 esac
 
+# -u does not work need to be root inside the container, the chown hack at the end ensures
+# we still own any new files at the end of this run
 docker run \
   --env "DOTNET_VERSION" \
   --name test-runner \

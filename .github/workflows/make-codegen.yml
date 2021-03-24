@@ -2,9 +2,6 @@ name: Code Generation
 on:
   schedule:
     - cron: "0 0/2 * * *"
-  push:
-    branches:
-      - 'fix/master/codegen-make'
 
 jobs:
   active-branches:
@@ -27,13 +24,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # branch: ${{ fromJson(needs.active-branches.outputs.matrix) }}
-        branch: ['fix/master/codegen-make']
+        branch: ${{ fromJson(needs.active-branches.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v2
         with:
           ref: "${{ matrix.branch }}"
-      - run: "./.ci/make.sh codegen master"
+      - run: "./.ci/make.sh codegen ${{ matrix.branch }}"
         name: "code-gen ${{ matrix.branch }}"
       - name: "PR ${{ matrix.branch }}"
         # fixate to known release. 
@@ -41,7 +37,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: "fix/${{ matrix.branch }}/code-gen"
-          base: "master"
+          base: "${{ matrix.branch }}"
+          delete-branch: true
           commit-message: "[codegen] ${{ matrix.branch }} synchronization" 
           title: '[codegen] ${{ matrix.branch }} synchronization'
           body: |
