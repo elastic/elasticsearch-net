@@ -138,15 +138,6 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		[MapsApi("snapshot.get", "repository, snapshot")]
 		public Task<TResponse> GetAsync<TResponse>(string repository, string snapshot, GetSnapshotRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_snapshot/{repository:repository}/{snapshot:snapshot}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_snapshottable_features <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse GetFeatures<TResponse>(GetFeaturesRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_snapshottable_features", null, RequestParams(requestParameters));
-		///<summary>GET on /_snapshottable_features <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("snapshot.get_features", "")]
-		public Task<TResponse> GetFeaturesAsync<TResponse>(GetFeaturesRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_snapshottable_features", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_snapshot <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetRepository<TResponse>(GetRepositoryRequestParameters requestParameters = null)

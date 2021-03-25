@@ -31,6 +31,7 @@ using Elasticsearch.Net.Specification.CrossClusterReplicationApi;
 using Elasticsearch.Net.Specification.DanglingIndicesApi;
 using Elasticsearch.Net.Specification.EnrichApi;
 using Elasticsearch.Net.Specification.EqlApi;
+using Elasticsearch.Net.Specification.FeaturesApi;
 using Elasticsearch.Net.Specification.GraphApi;
 using Elasticsearch.Net.Specification.IndexLifecycleManagementApi;
 using Elasticsearch.Net.Specification.IndicesApi;
@@ -43,6 +44,7 @@ using Elasticsearch.Net.Specification.NodesApi;
 using Elasticsearch.Net.Specification.RollupApi;
 using Elasticsearch.Net.Specification.SearchableSnapshotsApi;
 using Elasticsearch.Net.Specification.SecurityApi;
+using Elasticsearch.Net.Specification.ShutdownApi;
 using Elasticsearch.Net.Specification.SnapshotApi;
 using Elasticsearch.Net.Specification.SnapshotLifecycleManagementApi;
 using Elasticsearch.Net.Specification.SqlApi;
@@ -103,6 +105,12 @@ namespace Elasticsearch.Net
 
 		///<summary>Eql APIs</summary>
 		LowLevelEqlNamespace Eql
+		{
+			get;
+		}
+
+		///<summary>Features APIs</summary>
+		LowLevelFeaturesNamespace Features
 		{
 			get;
 		}
@@ -1189,6 +1197,12 @@ namespace Elasticsearch.Net
 
 		///<summary>Security APIs</summary>
 		LowLevelSecurityNamespace Security
+		{
+			get;
+		}
+
+		///<summary>Shutdown APIs</summary>
+		LowLevelShutdownNamespace Shutdown
 		{
 			get;
 		}
