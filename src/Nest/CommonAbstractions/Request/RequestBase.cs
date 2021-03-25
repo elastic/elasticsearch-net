@@ -4,26 +4,26 @@
 
 using System;
 using System.ComponentModel;
-using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Nest
 {
 	public interface IRequest
 	{
-		[IgnoreDataMember]
+		[JsonIgnore]
 		string? ContentType { get; }
 
-		[IgnoreDataMember]
+		[JsonIgnore]
 		HttpMethod HttpMethod { get; }
 
-		[IgnoreDataMember]
+		[JsonIgnore]
 		bool SupportsBody { get; }
 
-		[IgnoreDataMember]
+		[JsonIgnore]
 		RouteValues RouteValues { get; }
 
-		[IgnoreDataMember]
+		[JsonIgnore]
 		IRequestParameters RequestParameters { get; }
 
 		string GetUrl(IConnectionSettingsValues settings);
@@ -36,7 +36,7 @@ namespace Nest
 		/// Used to describe request parameters that are not part of the body. e.g. query string, connection configuration
 		/// overrides, etc.
 		/// </summary>
-		[IgnoreDataMember]
+		[JsonIgnore]
 		new TParameters RequestParameters { get; }
 	}
 
@@ -59,30 +59,32 @@ namespace Nest
 		}
 
 		protected virtual HttpMethod? DynamicHttpMethod { get; }
+
 		protected abstract HttpMethod HttpMethod { get; }
 
 		protected abstract bool SupportsBody { get; }
 
-		[IgnoreDataMember]
+		[JsonIgnore]
 		protected IRequest<TParameters> RequestState => this;
 
-		[IgnoreDataMember]
+		[JsonIgnore]
 		HttpMethod IRequest.HttpMethod => DynamicHttpMethod ?? HttpMethod;
 
-		[IgnoreDataMember]
+		[JsonIgnore]
 		bool IRequest.SupportsBody => SupportsBody;
 
-		[IgnoreDataMember]
-		string IRequest.ContentType => ContentType;
-		protected virtual string ContentType { get; } = null;
+		[JsonIgnore]
+		string? IRequest.ContentType => ContentType;
+
+		protected virtual string? ContentType { get; } = null;
 
 		private readonly TParameters _parameters;
 
-		[IgnoreDataMember]
+		[JsonIgnore]
 		TParameters IRequest<TParameters>.RequestParameters => _parameters;
 		IRequestParameters IRequest.RequestParameters => _parameters;
 
-		[IgnoreDataMember]
+		[JsonIgnore]
 		RouteValues IRequest.RouteValues { get; } = new();
 
 		internal abstract ApiUrls ApiUrls { get; }
@@ -102,9 +104,7 @@ namespace Nest
 
 		protected void SetAcceptHeader(string format)
 		{
-			if (RequestState.RequestParameters.RequestConfiguration == null)
-				RequestState.RequestParameters.RequestConfiguration = new RequestConfiguration();
-
+			RequestState.RequestParameters.RequestConfiguration ??= new RequestConfiguration();
 			RequestState.RequestParameters.RequestConfiguration.Accept = RequestState.RequestParameters.AcceptHeaderFromFormat(format);
 		}
 	}
@@ -119,6 +119,7 @@ namespace Nest
 		/// <summary>
 		/// Specify settings for this request alone, handy if you need a custom timeout or want to bypass sniffing, retries
 		/// </summary>
+		[JsonIgnore]
 		public IRequestConfiguration RequestConfiguration
 		{
 			get => RequestState.RequestParameters.RequestConfiguration;

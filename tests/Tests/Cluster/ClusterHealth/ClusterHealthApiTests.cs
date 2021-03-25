@@ -18,7 +18,7 @@ namespace Tests.Cluster.ClusterHealth
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override Elastic.Transport.HttpMethod HttpMethod => Elastic.Transport.HttpMethod.GET;
-		protected override string UrlPath => "/_cluster/health";
+		protected override string ExpectedUrlPathAndQuery => "/_cluster/health";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			//(client, f) => client.Cluster.Health(),
@@ -50,7 +50,7 @@ namespace Tests.Cluster.ClusterHealth
 		
 		protected override Elastic.Transport.HttpMethod HttpMethod => Elastic.Transport.HttpMethod.GET;
 		protected override ClusterHealthRequest Initializer => new() { Level = Level.Shards };
-		protected override string UrlPath => "/_cluster/health?level=shards";
+		protected override string ExpectedUrlPathAndQuery => "/_cluster/health?level=shards";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, r) => client.Cluster.Health(r),

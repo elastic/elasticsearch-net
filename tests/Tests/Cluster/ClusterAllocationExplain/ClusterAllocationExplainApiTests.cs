@@ -2,10 +2,12 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using Elastic.Transport;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 
@@ -22,7 +24,7 @@ namespace Tests.Cluster.ClusterAllocationExplain
 		protected override object ExpectJson =>
 			new
 			{
-				//index = "project",
+				index = "project",
 				shard = 0,
 				primary = true
 			};
@@ -40,13 +42,13 @@ namespace Tests.Cluster.ClusterAllocationExplain
 		protected override ClusterAllocationExplainRequest Initializer =>
 			new()
 			{
-				//Index = typeof(Project),
+				Index = typeof(Project),
 				Shard = 0,
 				Primary = true,
 				IncludeYesDecisions = true
 			};
 
-		protected override string UrlPath => "/_cluster/allocation/explain?include_yes_decisions=true";
+		protected override string ExpectedUrlPathAndQuery => "/_cluster/allocation/explain?include_yes_decisions=true";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			//(client, f) => client.Cluster.AllocationExplain(f),
@@ -74,6 +76,49 @@ namespace Tests.Cluster.ClusterAllocationExplain
 
 			response.CanRebalanceToOtherNode.Should().NotBeNull();
 			response.RebalanceExplanation.Should().NotBeNullOrEmpty();
+		}
+	}
+
+	public class ClusterAllocationExplainEmptyApiTests
+		: ApiIntegrationTestBase<UnbalancedCluster, ClusterAllocationExplainResponse, IClusterAllocationExplainRequest,
+			ClusterAllocationExplainDescriptor, ClusterAllocationExplainRequest>
+	{
+		public ClusterAllocationExplainEmptyApiTests(UnbalancedCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> Fluent => s => s;
+
+		protected override ClusterAllocationExplainRequest Initializer => new();
+
+		protected override string ExpectedUrlPathAndQuery => "/_cluster/allocation/explain";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			//(client, f) => client.Cluster.AllocationExplain(f),
+			//(client, f) => client.Cluster.AllocationExplainAsync(f),
+			(client, r) => client.Cluster.AllocationExplain(r),
+			(client, r) => client.Cluster.AllocationExplainAsync(r)
+		);
+
+		protected override void ExpectResponse(ClusterAllocationExplainResponse response)
+		{
+			response.Primary.Should().BeFalse();
+			response.Shard.Should().Be(0);
+			response.Index.Should().NotBeNullOrEmpty();
+			response.CurrentState.Should().NotBeNullOrEmpty();
+			//response.CurrentNode.Should().NotBeNull();
+			//response.CanRebalanceClusterDecisions.Should().NotBeNullOrEmpty();
+
+			//foreach (var decision in response.CanRebalanceClusterDecisions)
+			//{
+			//	decision.Decider.Should().NotBeNullOrEmpty();
+			//	decision.Explanation.Should().NotBeNullOrEmpty();
+			//}
+
+			response.CanAllocate.Should().Be(Decision.No);
+			response.AllocateExplanation.Should().NotBeNullOrEmpty();
 		}
 	}
 }
