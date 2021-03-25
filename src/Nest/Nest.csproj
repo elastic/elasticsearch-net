@@ -23,4 +23,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\elastic-transport-net\src\Elastic.Transport\Elastic.Transport.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Tests" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Tests.Domain" Key="$(ExposedPublicKey)" />
+  </ItemGroup>
 </Project>

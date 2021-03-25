@@ -162,6 +162,11 @@
         "resolved": "2.1.78",
         "contentHash": "4y4FSfKWxlked8ilQdqBBSeRMf5jD/Hkvyp744hc54yQcABLt4rR2Q+4hNqAqrSo+mhwAlusj2rpXpN/5TICCA=="
       },
+      "Microsoft.Bcl.HashCode": {
+        "type": "Transitive",
+        "resolved": "1.1.1",
+        "contentHash": "MalY0Y/uM/LjXtHfX/26l2VtN4LDNZ2OE3aumNOHDLsT4fNYy2hiHXI4CXCqKpNUNm7iJ2brrc4J89UdaL56FA=="
+      },
       "Microsoft.CodeCoverage": {
         "type": "Transitive",
         "resolved": "16.5.0",
@@ -1356,6 +1361,7 @@
           "Elastic.Elasticsearch.Xunit": "0.2.8",
           "FluentAssertions": "5.10.3",
           "JunitXml.TestLogger": "2.1.78",
+          "Microsoft.Bcl.HashCode": "1.1.1",
           "Microsoft.NET.Test.Sdk": "16.5.0",
           "Nullean.VsTest.Pretty.TestLogger": "0.3.0",
           "Proc": "0.6.1",

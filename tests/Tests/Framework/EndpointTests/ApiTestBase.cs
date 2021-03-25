@@ -28,7 +28,7 @@ namespace Tests.Framework.EndpointTests
 
 		protected override object ExpectJson { get; } = null;
 		protected abstract HttpMethod HttpMethod { get; }
-		protected abstract string UrlPath { get; }
+		protected abstract string ExpectedUrlPathAndQuery { get; }
 
 		[U] protected virtual async Task HitsTheCorrectUrl() => await AssertOnAllResponses(r => AssertUrl(r.ApiCall.Uri));
 
@@ -37,6 +37,6 @@ namespace Tests.Framework.EndpointTests
 
 		[U] protected virtual void SerializesInitializer() => RoundTripsOrSerializes<TInterface>(Initializer);
 		
-		private void AssertUrl(Uri u) => u.PathEquals(UrlPath, UniqueValues.CurrentView.GetStringValue());
+		private void AssertUrl(Uri u) => u.PathEquals(ExpectedUrlPathAndQuery, UniqueValues.CurrentView.GetStringValue());
 	}
 }

@@ -88,7 +88,8 @@ namespace Nest
 			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, cancellationToken, postData, parameters);
 		}
 
-		private (string url, PostData data) PrepareRequest(IRequest request, Action<IRequestConfiguration>? forceConfiguration)
+		private (string url, PostData data) PrepareRequest<TRequest>(TRequest request, Action<IRequestConfiguration>? forceConfiguration)
+			where TRequest : class, IRequest
 		{
 			request.ThrowIfNull(nameof(request), "A request is required.");
 

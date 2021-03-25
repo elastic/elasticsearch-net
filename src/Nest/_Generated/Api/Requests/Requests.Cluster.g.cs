@@ -24,7 +24,8 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
-    public interface IClusterAllocationExplainRequest : IRequest<ClusterAllocationExplainRequestParameters>
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IClusterAllocationExplainRequest, ClusterAllocationExplainRequest>))]
+	public interface IClusterAllocationExplainRequest : IRequest<ClusterAllocationExplainRequestParameters>
     {
     }
 
@@ -33,27 +34,39 @@ namespace Nest
         protected IClusterAllocationExplainRequest Self => this;
         internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterAllocationExplain;
         protected override HttpMethod HttpMethod => HttpMethod.POST;
-        protected override bool SupportsBody => false;
+        protected override bool SupportsBody => true;
+
         ///<summary>/_cluster/allocation/explain</summary>
         public ClusterAllocationExplainRequest(): base()
         {
         }
 
-        public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
+        [JsonIgnore]
+		public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
 
-        public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
+		[JsonIgnore]
+		public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 
-        [JsonPropertyName("primary")]
-        public bool Primary { get; 
+		[JsonPropertyName("index")]
+		public IndexName? Index { get;
+#if NET5_0
+			init;
+#else
+			internal set; 
+#endif
+		}
+
+		[JsonPropertyName("primary")]
+        public bool? Primary { get; 
 #if NET5_0
             init;
 #else
             internal set; 
 #endif
         }
-
-        [JsonPropertyName("shard")]
-        public int Shard { get; 
+		
+		[JsonPropertyName("shard")]
+        public int? Shard { get; 
 #if NET5_0
             init;
 #else
