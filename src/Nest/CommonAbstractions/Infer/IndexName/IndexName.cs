@@ -4,10 +4,40 @@
 
 using System;
 using System.Diagnostics;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Nest
 {
+	public class IndexNameConverter : JsonConverter<IndexName> 
+	{
+		public override IndexName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.String)
+			{
+				reader.Read();
+				return null;
+			}
+
+			IndexName? indexName = reader.GetString();
+			return indexName;
+		}
+
+		public override void Write(Utf8JsonWriter writer, IndexName? value, JsonSerializerOptions options)
+		{
+			if (value is null)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			// TODO: Need connection settings and Inferrer!
+			writer.WriteStringValue(value.ToString().ToLower()); // TODO: Temp
+		}
+	}
+
+	[JsonConverter(typeof(IndexNameConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{
