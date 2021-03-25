@@ -37,7 +37,7 @@ let LocateTests version revision directoryFilter fileFilter = async {
         |> Array.map(fun dir ->
             let files =
                 dir.GetFiles()
-                |> Array.filter(fun d -> fileFilter |> Option.isNone || directoryFilter |> Option.exists(fun f -> d.Name = f))
+                |> Array.filter(fun d -> fileFilter |> Option.isNone || fileFilter |> Option.exists(fun f -> d.Name = f))
                 |> Array.filter(fun f -> f.Extension = ".yml")
                 |> Array.toList
             { Folder = dir.Name; Paths = files }
@@ -60,8 +60,6 @@ let RunTests (tests:YamlTestFolder list) client version namedSuite sectionFilter
     runner.GlobalSetup() 
     let a (i, (v:YamlTestFolder)) = async {
         let mainMessage = sprintf "[%i/%i] Folders : %s | " (i+1) f v.Folder
-        printfn "Tests: %i" v.Files.Length
-    
         let! op = runner.RunTestsInFolder mainMessage v sectionFilter
         return v, op |> Seq.toList
     }
