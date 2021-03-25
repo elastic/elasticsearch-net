@@ -41,7 +41,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// The total number of paritions we are interested in
+		/// The total number of partitions we are interested in
 		/// </summary>
 		[DataMember(Name ="num_partitions")]
 		public long? NumberOfPartitions { get; set; }
