@@ -66,3 +66,12 @@ docker run \
  --rm \
  elastic/elasticsearch-net \
  /bin/bash -c "./build.sh $TASK ${TASK_ARGS[*]} && chown -R $(id -u):$(id -g) ."
+ 
+if [[ "$CMD" == "assemble" ]]; then
+	if compgen -G ".ci/output/*" > /dev/null; then
+		echo "Output was produced!"
+	else 
+		echo "Assemble did not produce output to $output_folder"
+		exit 1
+	fi	
+fi

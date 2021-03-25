@@ -34,9 +34,3 @@ jobs:
             
       - run: "./.ci/make.sh assemble ${{ matrix.stack_version }}"
         name: Assemble ${{ matrix.stack_version }}
-
-      - name: Produced output
-        uses: dothq/file-or-directory-exists@3b28438692d2f228bcd001a883d1003d3768a8c9
-        with:
-            input: |
-              .ci/output
