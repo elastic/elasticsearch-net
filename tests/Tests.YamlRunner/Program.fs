@@ -20,16 +20,15 @@ type Arguments =
     | [<AltCommandLine("-t")>]TestFile of string
     | [<AltCommandLine("-s")>]TestSection of string
     | [<AltCommandLine("-e")>]Endpoint of string
-    | [<AltCommandLine("-r")>]Revision of string
     | [<AltCommandLine("-o")>]JUnitOutputFile of string
     | [<AltCommandLine("-p")>]Profile of bool
     | [<AltCommandLine("-d")>]DownloadSpecs of bool
+    | [<AltCommandLine("-v")>]Version of string
     with
     interface IArgParserTemplate with
         member s.Usage =
             match s with
             | NamedSuite _ -> "specify a known yaml test suite. defaults to `opensource`."
-            | Revision _ -> "The git revision to reference (commit/branch/tag). defaults to `master`"
             | Folder _ -> "Only run tests in this folder"
             | TestFile _ -> "Only run tests starting with this filename"
             | TestSection _ -> "Only run test with this name (best used in conjuction with -t)"
@@ -37,6 +36,7 @@ type Arguments =
             | JUnitOutputFile _ -> "The path and file name to use for the junit xml output, defaults to a random tmp filename"
             | Profile _ -> "Print out process id and wait for confirmation to kick off the tests"
             | DownloadSpecs _ -> "Only locate and acquire the specification"
+            | Version _ -> "The version to download the specification for, if not specified will attempt to find version Elasticsearch instance testing against"
 
 let private runningMitmProxy = Process.GetProcessesByName("mitmproxy").Length > 0
 let private runningProxy = runningMitmProxy || Process.GetProcessesByName("fiddler").Length > 0
@@ -81,7 +81,7 @@ let private createClient endpoint namedSuite =
         | _ -> authSettings
     ElasticLowLevelClient(certSettings)
     
-let validateRevisionParams endpoint passedRevision namedSuite =    
+let validateRevisionParams endpoint version namedSuite =    
     let client = createClient endpoint namedSuite
     
     let node = client.Settings.ConnectionPool.Nodes.First()
@@ -102,12 +102,11 @@ let validateRevisionParams endpoint passedRevision namedSuite =
     if not r.Success then
         failwithf "No running elasticsearch found at %s" endpoint
     
-    let revision =
-        match passedRevision with
-        | Some s -> s
-        | None -> r.Get<string>("version.build_hash")
-    
-    let version = r.Get<string>("version.number") 
+    let revision = r.Get<string>("version.build_hash")
+    let version =
+        match version with
+        | Some v -> v |> SemVer.Version
+        | None -> r.Get<string>("version.number") |> SemVer.Version
         
     (client, revision, version)
     
@@ -120,16 +119,15 @@ let runMain (parsed:ParseResults<Arguments>) = async {
     let endpoint = parsed.TryGetResult Endpoint |> Option.defaultValue (defaultEndpoint namedSuite)
     let profile = parsed.TryGetResult Profile |> Option.defaultValue false
     let locateOnly = parsed.TryGetResult DownloadSpecs |> Option.defaultValue false
-    let passedRevision = parsed.TryGetResult Revision
+    let version = parsed.TryGetResult Version
     let outputFile =
         parsed.TryGetResult JUnitOutputFile
         |> Option.defaultValue (System.IO.Path.GetTempFileName())
         
-    let (client, revision, version) = validateRevisionParams endpoint passedRevision namedSuite
+    let (client, revision, version) = validateRevisionParams endpoint version namedSuite
     
-    printfn "Found version %s downloading specs from: %s" version revision
+    let! locateResults = Commands.LocateTests version revision directory file
     
-    let! locateResults = Commands.LocateTests version revision  namedSuite directory file
     if locateOnly then
         Environment.Exit <| if (locateResults |> List.isEmpty) then 1 else 0
     
@@ -139,7 +137,7 @@ let runMain (parsed:ParseResults<Arguments>) = async {
         printf "Waiting for profiler to attach to pid: %O" <| Process.GetCurrentProcess().Id
         Console.ReadKey() |> ignore
         
-    let! runResults = Commands.RunTests readResults client version namedSuite section
+    let! runResults = Commands.RunTests readResults client (version.ToString()) namedSuite section
     let summary = Commands.ExportTests runResults outputFile
     
     Commands.PrettyPrintResults outputFile

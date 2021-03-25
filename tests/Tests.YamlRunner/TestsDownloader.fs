@@ -68,29 +68,40 @@ let CachedOrDownload revision folder file url = async {
     return result
 }
 
-let DownloadBuildInformation version revision = async {
-    let url = sprintf "https://artifacts-api.elastic.co/v1/versions/%s" version
-    let! versionsJson = CachedOrDownload revision "_artifacts-api" "versions.json" url
-    let json = File.ReadAllText versionsJson
+let DownloadBuildInformation (version:SemVer.Version) revision = async {
     
-    let json = JObject.Parse json
-    let packages =
-        json.SelectTokens("$.version.builds..projects.elasticsearch")
-        |> Seq.toList
-        |> List.filter(fun token -> token.SelectToken("$.commit_hash").Value<string>() = revision)
-        |> List.map(fun token -> token.SelectToken("$.packages"))
-        |> List.tryHead
-    
-    let package =
-        match packages with
-        | None -> raise <| Exception(sprintf "Can not locate SNAPSHOT for hash: %s" revision)
-        | Some packages -> packages.SelectToken(sprintf "$.['rest-resources-zip-%s.zip'].url" "8.0.0-SNAPSHOT")
-        
-    let resourcesZipUrl = package.Value<string>()
-    let zipFileName = sprintf "rest-resources-zip-%s-%s.zip" version revision
+    let resourcesZipUrl = 
+        match version.PreRelease with
+        | "SNAPSHOT" ->
+            printfn "Found version %O locating build for revision: %s" version revision
+            let url = sprintf "https://artifacts-api.elastic.co/v1/versions/%O" version
+            
+            let versionsJson = Async.RunSynchronously <| CachedOrDownload revision "_artifacts-api" "versions.json" url
+            let json = File.ReadAllText versionsJson
+            
+            let json = JObject.Parse json
+            let packages =
+                json.SelectTokens("$.version.builds..projects.elasticsearch")
+                |> Seq.toList
+                |> List.filter(fun token -> token.SelectToken("$.commit_hash").Value<string>() = revision)
+                |> List.map(fun token -> token.SelectToken("$.packages"))
+                |> List.tryHead
+            
+            let package =
+                match packages with
+                | None -> raise <| Exception(sprintf "Can not locate SNAPSHOT for hash: %s" revision)
+                | Some packages -> packages.SelectToken(sprintf "$.['rest-resources-zip-%s.zip'].url" "8.0.0-SNAPSHOT")
+                
+            package.Value<string>()
+        | _ ->
+            printfn "Found version %O locating released zip" version
+            sprintf "https://artifacts-api.elastic.co/v1/downloads/elasticsearch/rest-resources-zip-%O.zip" version
+            
+    let zipFileName = sprintf "rest-resources-zip-%O-%s.zip" version revision
     let! downloadedZipFile = CachedOrDownload revision "_artifacts-api" zipFileName resourcesZipUrl
     
-    printf "Downloaded: %s as %s" resourcesZipUrl downloadedZipFile
+    printfn "Downloaded: %s" resourcesZipUrl
+    printfn "Location on disk: %s" downloadedZipFile
     return downloadedZipFile 
 }
 
@@ -98,7 +109,7 @@ let Unzip file version revision =
     let unzipLocation = 
         let parent = (TemporaryPath revision).Force()
         Path.Combine(parent, "_unzipped")
-    if (Directory.Exists unzipLocation) then Directory.Delete unzipLocation
+    if (Directory.Exists unzipLocation) then Directory.Delete (unzipLocation, true)
     if (not <| Directory.Exists unzipLocation) then Directory.CreateDirectory unzipLocation |> ignore
     System.IO.Compression.ZipFile.ExtractToDirectory(file, unzipLocation);
     printf "Unzipped %s to: %s" file unzipLocation
