@@ -58,10 +58,11 @@ esac
 
 # -u does not work need to be root inside the container, the chown hack at the end ensures
 # we still own any new files at the end of this run
+
 docker run \
-  --env "DOTNET_VERSION" \
-  --name test-runner \
-  --volume $REPO_BINDING \
-  --rm \
-  elastic/elasticsearch-net \
-  /bin/bash -c "./build.sh $TASK ${TASK_ARGS[@]} && chown -R $(id -u):$(id -g) ."
+ --env "DOTNET_VERSION" \
+ --name test-runner \
+ --volume $REPO_BINDING \
+ --rm \
+ elastic/elasticsearch-net \
+ /bin/bash -c "./build.sh $TASK ${TASK_ARGS[*]} && chown -R $(id -u):$(id -g) ."
