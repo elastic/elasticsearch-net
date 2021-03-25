@@ -6,9 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elastic.Transport;
+using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
+using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 using static Nest.Infer;
 
@@ -399,5 +402,57 @@ namespace Tests.Search.Request
 					new FieldSort { Field = "startedOn", NumericType = NumericType.Date, Order = SortOrder.Ascending },
 				}
 			};
+	}
+
+	//hide
+	[SkipVersion("<7.12.0", "_shard_doc added in 7.12.0")]
+	public class ShardDocUsageTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	{
+		public ShardDocUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		private string _pit = string.Empty;
+		
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			var response = client.OpenPointInTime(Nest.Indices.Index<Project>(), f => f.KeepAlive("1m"));
+			_pit = response.Id;
+		}
+
+		protected override object ExpectJson =>
+			new
+			{
+				pit = new
+				{
+					id = ""
+				},
+				sort = new object[]
+				{
+					new { _shard_doc = new { order = "asc" } }
+				}
+			};
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override string UrlPath => "/project/_search";
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.PointInTime(_pit)
+			.Sort(ss => ss.Ascending(SortSpecialField.ShardDocumentOrder));
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+
+		protected override SearchRequest<Project> Initializer => new()
+			{
+				PointInTime = new Nest.PointInTime(_pit),
+				Sort = new List<ISort>
+				{
+					FieldSort.ShardDocumentOrderAscending
+				}
+		};
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Search(f),
+			(client, f) => client.SearchAsync(f),
+			(client, r) => client.Search<Project>(r),
+			(client, r) => client.SearchAsync<Project>(r));
 	}
 }
