@@ -34,4 +34,3 @@ jobs:
             
       - run: "./.ci/make.sh assemble ${{ matrix.stack_version }}"
         name: Assemble ${{ matrix.stack_version }}
-          
