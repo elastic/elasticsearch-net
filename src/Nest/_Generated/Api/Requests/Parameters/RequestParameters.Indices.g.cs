@@ -165,15 +165,6 @@ namespace Nest
         public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
     }
 
-    public class SyncedFlushRequestParameters : RequestParameters<SyncedFlushRequestParameters>
-    {
-        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-    }
-
     public class ForceMergeRequestParameters : RequestParameters<ForceMergeRequestParameters>
     {
         public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }

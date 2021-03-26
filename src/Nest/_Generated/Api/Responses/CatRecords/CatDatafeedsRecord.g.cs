@@ -14,8 +14,6 @@
 // Please do not edit these files manually.
 // Run the following in the root of the repository:
 //
-// TODO - RUN INSTRUCTIONS
-//
 // ------------------------------------------------
 
 using System.Text.Json.Serialization;
@@ -90,7 +88,7 @@ namespace Nest
 		public string? AssignmentExplanation => _ae ?? _assignment_explanation;
 		public string? BucketsCount => _buckets_count ?? _bc ?? _bucketsCount;
 		[JsonPropertyName("id")]
-		public string Id
+		public string? Id
 		{
 			get;
 #if NET5_0

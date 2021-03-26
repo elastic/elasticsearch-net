@@ -14,8 +14,6 @@
 // Please do not edit these files manually.
 // Run the following in the root of the repository:
 //
-// TODO - RUN INSTRUCTIONS
-//
 // ------------------------------------------------
 
 using System.Text.Json.Serialization;
@@ -122,7 +120,7 @@ namespace Nest
 		public string? Description => _d ?? _description;
 		public ByteSize? HeapSize => _heap_size ?? _hs ?? _modelHeapSize;
 		[JsonPropertyName("id")]
-		public string Id
+		public string? Id
 		{
 			get;
 #if NET5_0

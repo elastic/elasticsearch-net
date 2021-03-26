@@ -14,8 +14,6 @@
 // Please do not edit these files manually.
 // Run the following in the root of the repository:
 //
-// TODO - RUN INSTRUCTIONS
-//
 // ------------------------------------------------
 
 using System.Text.Json.Serialization;
@@ -88,7 +86,7 @@ namespace Nest
 		public string? Action => _ac ?? _action;
 		public string? Description => _desc ?? _description;
 		[JsonPropertyName("id")]
-		public string Id
+		public string? Id
 		{
 			get;
 #if NET5_0
@@ -105,7 +103,7 @@ namespace Nest
 		public string? Port => _po ?? _port;
 		public string? RunningTime => _time ?? _running_time;
 		[JsonPropertyName("running_time_ns")]
-		public string RunningTimeNs
+		public string? RunningTimeNs
 		{
 			get;
 #if NET5_0

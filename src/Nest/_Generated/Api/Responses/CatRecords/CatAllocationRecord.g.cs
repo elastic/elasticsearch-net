@@ -14,8 +14,6 @@
 // Please do not edit these files manually.
 // Run the following in the root of the repository:
 //
-// TODO - RUN INSTRUCTIONS
-//
 // ------------------------------------------------
 
 using System.Text.Json.Serialization;
@@ -74,7 +72,7 @@ namespace Nest
 		public ByteSize? DiskUsed => _disk_used ?? _du ?? _diskUsed;
 		public string? Host => _h ?? _host;
 		[JsonPropertyName("ip")]
-		public string Ip
+		public string? Ip
 		{
 			get;
 #if NET5_0

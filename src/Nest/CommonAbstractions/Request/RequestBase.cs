@@ -26,6 +26,12 @@ namespace Nest
 		[JsonIgnore]
 		IRequestParameters RequestParameters { get; }
 
+		[JsonIgnore]
+		bool CanBeEmpty { get; }
+
+		[JsonIgnore]
+		bool IsEmpty { get; }
+
 		string GetUrl(IConnectionSettingsValues settings);
 	}
 
@@ -64,6 +70,10 @@ namespace Nest
 
 		protected abstract bool SupportsBody { get; }
 
+		protected virtual bool CanBeEmpty => false;
+
+		protected virtual bool IsEmpty => false;
+
 		[JsonIgnore]
 		protected IRequest<TParameters> RequestState => this;
 
@@ -72,6 +82,12 @@ namespace Nest
 
 		[JsonIgnore]
 		bool IRequest.SupportsBody => SupportsBody;
+
+		[JsonIgnore]
+		bool IRequest.CanBeEmpty => CanBeEmpty;
+
+		[JsonIgnore]
+		bool IRequest.IsEmpty => IsEmpty;
 
 		[JsonIgnore]
 		string? IRequest.ContentType => ContentType;

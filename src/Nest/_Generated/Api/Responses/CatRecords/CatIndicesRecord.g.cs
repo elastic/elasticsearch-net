@@ -14,8 +14,6 @@
 // Please do not edit these files manually.
 // Run the following in the root of the repository:
 //
-// TODO - RUN INSTRUCTIONS
-//
 // ------------------------------------------------
 
 using System.Text.Json.Serialization;
@@ -509,7 +507,7 @@ namespace Nest
 		public string? MergesTotalTime => _merges_total_time ?? _mtt ?? _mergesTotalTime;
 		public string? Pri => _pri ?? _shardsPrimary ?? _p ?? _shards_primary;
 		[JsonPropertyName("pri.bulk.avg_size_in_bytes")]
-		public string PriBulkAvgSizeInBytes
+		public string? PriBulkAvgSizeInBytes
 		{
 			get;
 #if NET5_0
@@ -520,7 +518,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.bulk.avg_time")]
-		public string PriBulkAvgTime
+		public string? PriBulkAvgTime
 		{
 			get;
 #if NET5_0
@@ -531,7 +529,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.bulk.total_operations")]
-		public string PriBulkTotalOperations
+		public string? PriBulkTotalOperations
 		{
 			get;
 #if NET5_0
@@ -542,7 +540,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.bulk.total_size_in_bytes")]
-		public string PriBulkTotalSizeInBytes
+		public string? PriBulkTotalSizeInBytes
 		{
 			get;
 #if NET5_0
@@ -553,7 +551,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.bulk.total_time")]
-		public string PriBulkTotalTime
+		public string? PriBulkTotalTime
 		{
 			get;
 #if NET5_0
@@ -564,7 +562,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.completion.size")]
-		public string PriCompletionSize
+		public string? PriCompletionSize
 		{
 			get;
 #if NET5_0
@@ -575,7 +573,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.fielddata.evictions")]
-		public string PriFielddataEvictions
+		public string? PriFielddataEvictions
 		{
 			get;
 #if NET5_0
@@ -586,7 +584,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.fielddata.memory_size")]
-		public string PriFielddataMemorySize
+		public string? PriFielddataMemorySize
 		{
 			get;
 #if NET5_0
@@ -597,7 +595,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.flush.total")]
-		public string PriFlushTotal
+		public string? PriFlushTotal
 		{
 			get;
 #if NET5_0
@@ -608,7 +606,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.flush.total_time")]
-		public string PriFlushTotalTime
+		public string? PriFlushTotalTime
 		{
 			get;
 #if NET5_0
@@ -619,7 +617,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.get.current")]
-		public string PriGetCurrent
+		public string? PriGetCurrent
 		{
 			get;
 #if NET5_0
@@ -630,7 +628,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.get.exists_time")]
-		public string PriGetExistsTime
+		public string? PriGetExistsTime
 		{
 			get;
 #if NET5_0
@@ -641,7 +639,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.get.exists_total")]
-		public string PriGetExistsTotal
+		public string? PriGetExistsTotal
 		{
 			get;
 #if NET5_0
@@ -652,7 +650,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.get.missing_time")]
-		public string PriGetMissingTime
+		public string? PriGetMissingTime
 		{
 			get;
 #if NET5_0
@@ -663,7 +661,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.get.missing_total")]
-		public string PriGetMissingTotal
+		public string? PriGetMissingTotal
 		{
 			get;
 #if NET5_0
@@ -674,7 +672,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.get.time")]
-		public string PriGetTime
+		public string? PriGetTime
 		{
 			get;
 #if NET5_0
@@ -685,7 +683,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.get.total")]
-		public string PriGetTotal
+		public string? PriGetTotal
 		{
 			get;
 #if NET5_0
@@ -696,7 +694,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.indexing.delete_current")]
-		public string PriIndexingDeleteCurrent
+		public string? PriIndexingDeleteCurrent
 		{
 			get;
 #if NET5_0
@@ -707,7 +705,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.indexing.delete_time")]
-		public string PriIndexingDeleteTime
+		public string? PriIndexingDeleteTime
 		{
 			get;
 #if NET5_0
@@ -718,7 +716,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.indexing.delete_total")]
-		public string PriIndexingDeleteTotal
+		public string? PriIndexingDeleteTotal
 		{
 			get;
 #if NET5_0
@@ -729,7 +727,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.indexing.index_current")]
-		public string PriIndexingIndexCurrent
+		public string? PriIndexingIndexCurrent
 		{
 			get;
 #if NET5_0
@@ -740,7 +738,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.indexing.index_failed")]
-		public string PriIndexingIndexFailed
+		public string? PriIndexingIndexFailed
 		{
 			get;
 #if NET5_0
@@ -751,7 +749,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.indexing.index_time")]
-		public string PriIndexingIndexTime
+		public string? PriIndexingIndexTime
 		{
 			get;
 #if NET5_0
@@ -762,7 +760,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.indexing.index_total")]
-		public string PriIndexingIndexTotal
+		public string? PriIndexingIndexTotal
 		{
 			get;
 #if NET5_0
@@ -773,7 +771,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.memory.total")]
-		public string PriMemoryTotal
+		public string? PriMemoryTotal
 		{
 			get;
 #if NET5_0
@@ -784,7 +782,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.merges.current")]
-		public string PriMergesCurrent
+		public string? PriMergesCurrent
 		{
 			get;
 #if NET5_0
@@ -795,7 +793,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.merges.current_docs")]
-		public string PriMergesCurrentDocs
+		public string? PriMergesCurrentDocs
 		{
 			get;
 #if NET5_0
@@ -806,7 +804,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.merges.current_size")]
-		public string PriMergesCurrentSize
+		public string? PriMergesCurrentSize
 		{
 			get;
 #if NET5_0
@@ -817,7 +815,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.merges.total")]
-		public string PriMergesTotal
+		public string? PriMergesTotal
 		{
 			get;
 #if NET5_0
@@ -828,7 +826,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.merges.total_docs")]
-		public string PriMergesTotalDocs
+		public string? PriMergesTotalDocs
 		{
 			get;
 #if NET5_0
@@ -839,7 +837,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.merges.total_size")]
-		public string PriMergesTotalSize
+		public string? PriMergesTotalSize
 		{
 			get;
 #if NET5_0
@@ -850,7 +848,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.merges.total_time")]
-		public string PriMergesTotalTime
+		public string? PriMergesTotalTime
 		{
 			get;
 #if NET5_0
@@ -861,7 +859,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.query_cache.evictions")]
-		public string PriQueryCacheEvictions
+		public string? PriQueryCacheEvictions
 		{
 			get;
 #if NET5_0
@@ -872,7 +870,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.query_cache.memory_size")]
-		public string PriQueryCacheMemorySize
+		public string? PriQueryCacheMemorySize
 		{
 			get;
 #if NET5_0
@@ -883,7 +881,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.refresh.external_time")]
-		public string PriRefreshExternalTime
+		public string? PriRefreshExternalTime
 		{
 			get;
 #if NET5_0
@@ -894,7 +892,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.refresh.external_total")]
-		public string PriRefreshExternalTotal
+		public string? PriRefreshExternalTotal
 		{
 			get;
 #if NET5_0
@@ -905,7 +903,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.refresh.listeners")]
-		public string PriRefreshListeners
+		public string? PriRefreshListeners
 		{
 			get;
 #if NET5_0
@@ -916,7 +914,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.refresh.time")]
-		public string PriRefreshTime
+		public string? PriRefreshTime
 		{
 			get;
 #if NET5_0
@@ -927,7 +925,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.refresh.total")]
-		public string PriRefreshTotal
+		public string? PriRefreshTotal
 		{
 			get;
 #if NET5_0
@@ -938,7 +936,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.request_cache.evictions")]
-		public string PriRequestCacheEvictions
+		public string? PriRequestCacheEvictions
 		{
 			get;
 #if NET5_0
@@ -949,7 +947,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.request_cache.hit_count")]
-		public string PriRequestCacheHitCount
+		public string? PriRequestCacheHitCount
 		{
 			get;
 #if NET5_0
@@ -960,7 +958,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.request_cache.memory_size")]
-		public string PriRequestCacheMemorySize
+		public string? PriRequestCacheMemorySize
 		{
 			get;
 #if NET5_0
@@ -971,7 +969,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.request_cache.miss_count")]
-		public string PriRequestCacheMissCount
+		public string? PriRequestCacheMissCount
 		{
 			get;
 #if NET5_0
@@ -982,7 +980,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.search.fetch_current")]
-		public string PriSearchFetchCurrent
+		public string? PriSearchFetchCurrent
 		{
 			get;
 #if NET5_0
@@ -993,7 +991,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.search.fetch_time")]
-		public string PriSearchFetchTime
+		public string? PriSearchFetchTime
 		{
 			get;
 #if NET5_0
@@ -1004,7 +1002,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.search.fetch_total")]
-		public string PriSearchFetchTotal
+		public string? PriSearchFetchTotal
 		{
 			get;
 #if NET5_0
@@ -1015,7 +1013,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.search.open_contexts")]
-		public string PriSearchOpenContexts
+		public string? PriSearchOpenContexts
 		{
 			get;
 #if NET5_0
@@ -1026,7 +1024,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.search.query_current")]
-		public string PriSearchQueryCurrent
+		public string? PriSearchQueryCurrent
 		{
 			get;
 #if NET5_0
@@ -1037,7 +1035,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.search.query_time")]
-		public string PriSearchQueryTime
+		public string? PriSearchQueryTime
 		{
 			get;
 #if NET5_0
@@ -1048,7 +1046,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.search.query_total")]
-		public string PriSearchQueryTotal
+		public string? PriSearchQueryTotal
 		{
 			get;
 #if NET5_0
@@ -1059,7 +1057,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.search.scroll_current")]
-		public string PriSearchScrollCurrent
+		public string? PriSearchScrollCurrent
 		{
 			get;
 #if NET5_0
@@ -1070,7 +1068,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.search.scroll_time")]
-		public string PriSearchScrollTime
+		public string? PriSearchScrollTime
 		{
 			get;
 #if NET5_0
@@ -1081,7 +1079,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.search.scroll_total")]
-		public string PriSearchScrollTotal
+		public string? PriSearchScrollTotal
 		{
 			get;
 #if NET5_0
@@ -1092,7 +1090,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.segments.count")]
-		public string PriSegmentsCount
+		public string? PriSegmentsCount
 		{
 			get;
 #if NET5_0
@@ -1103,7 +1101,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.segments.fixed_bitset_memory")]
-		public string PriSegmentsFixedBitsetMemory
+		public string? PriSegmentsFixedBitsetMemory
 		{
 			get;
 #if NET5_0
@@ -1114,7 +1112,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.segments.index_writer_memory")]
-		public string PriSegmentsIndexWriterMemory
+		public string? PriSegmentsIndexWriterMemory
 		{
 			get;
 #if NET5_0
@@ -1125,7 +1123,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.segments.memory")]
-		public string PriSegmentsMemory
+		public string? PriSegmentsMemory
 		{
 			get;
 #if NET5_0
@@ -1136,7 +1134,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.segments.version_map_memory")]
-		public string PriSegmentsVersionMapMemory
+		public string? PriSegmentsVersionMapMemory
 		{
 			get;
 #if NET5_0
@@ -1147,7 +1145,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.store.size")]
-		public string PriStoreSize
+		public string? PriStoreSize
 		{
 			get;
 #if NET5_0
@@ -1158,7 +1156,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.suggest.current")]
-		public string PriSuggestCurrent
+		public string? PriSuggestCurrent
 		{
 			get;
 #if NET5_0
@@ -1169,7 +1167,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.suggest.time")]
-		public string PriSuggestTime
+		public string? PriSuggestTime
 		{
 			get;
 #if NET5_0
@@ -1180,7 +1178,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.suggest.total")]
-		public string PriSuggestTotal
+		public string? PriSuggestTotal
 		{
 			get;
 #if NET5_0
@@ -1191,7 +1189,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.warmer.current")]
-		public string PriWarmerCurrent
+		public string? PriWarmerCurrent
 		{
 			get;
 #if NET5_0
@@ -1202,7 +1200,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.warmer.total")]
-		public string PriWarmerTotal
+		public string? PriWarmerTotal
 		{
 			get;
 #if NET5_0
@@ -1213,7 +1211,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pri.warmer.total_time")]
-		public string PriWarmerTotalTime
+		public string? PriWarmerTotalTime
 		{
 			get;
 #if NET5_0

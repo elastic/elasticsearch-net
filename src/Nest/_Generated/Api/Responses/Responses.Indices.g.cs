@@ -116,10 +116,6 @@ namespace Nest
     {
     }
 
-    public class SyncedFlushResponse : DictionaryResponseBase
-    {
-    }
-
     public class ForceMergeResponse : ShardsOperationResponseBase
     {
     }
