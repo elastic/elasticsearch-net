@@ -694,6 +694,34 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.post_data", "job_id, body")]
 		public Task<TResponse> PostJobDataAsync<TResponse>(string jobId, PostData body, PostJobDataRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_data"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_ml/data_frame/analytics/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html</para></summary>
+		///<param name = "body">The data frame analytics config to preview</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse PreviewDataFrameAnalytics<TResponse>(PostData body, PreviewDataFrameAnalyticsRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, "_ml/data_frame/analytics/_preview", body, RequestParams(requestParameters));
+		///<summary>POST on /_ml/data_frame/analytics/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html</para></summary>
+		///<param name = "body">The data frame analytics config to preview</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("ml.preview_data_frame_analytics", "body")]
+		public Task<TResponse> PreviewDataFrameAnalyticsAsync<TResponse>(PostData body, PreviewDataFrameAnalyticsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, "_ml/data_frame/analytics/_preview", ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_ml/data_frame/analytics/{id}/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html</para></summary>
+		///<param name = "id">The ID of the data frame analytics to preview</param>
+		///<param name = "body">The data frame analytics config to preview</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse PreviewDataFrameAnalytics<TResponse>(string id, PostData body, PreviewDataFrameAnalyticsRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/data_frame/analytics/{id:id}/_preview"), body, RequestParams(requestParameters));
+		///<summary>POST on /_ml/data_frame/analytics/{id}/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html</para></summary>
+		///<param name = "id">The ID of the data frame analytics to preview</param>
+		///<param name = "body">The data frame analytics config to preview</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("ml.preview_data_frame_analytics", "id, body")]
+		public Task<TResponse> PreviewDataFrameAnalyticsAsync<TResponse>(string id, PostData body, PreviewDataFrameAnalyticsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/data_frame/analytics/{id:id}/_preview"), ctx, body, RequestParams(requestParameters));
 		///<summary>GET on /_ml/datafeeds/{datafeed_id}/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
 		///<param name = "datafeedId">The ID of the datafeed to preview</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
