@@ -99,7 +99,7 @@ namespace Nest
 				ForceContentType(request, request.ContentType);
 
 			var url = request.GetUrl(ConnectionSettings);
-			var postData = request.HttpMethod == HttpMethod.GET || request.HttpMethod == HttpMethod.HEAD || !request.SupportsBody ? null : PostData.Serializable(request);
+			var postData = (request.CanBeEmpty && request.IsEmpty) || request.HttpMethod == HttpMethod.GET || request.HttpMethod == HttpMethod.HEAD || !request.SupportsBody ? null : PostData.Serializable(request);
 
 			return (url, postData);
 		}

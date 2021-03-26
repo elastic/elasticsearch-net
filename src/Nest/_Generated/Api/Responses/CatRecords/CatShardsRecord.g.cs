@@ -14,8 +14,6 @@
 // Please do not edit these files manually.
 // Run the following in the root of the repository:
 //
-// TODO - RUN INSTRUCTIONS
-//
 // ------------------------------------------------
 
 using System.Text.Json.Serialization;
@@ -456,7 +454,7 @@ namespace Nest
 		public string? GetTime => _get_time ?? _gti ?? _getTime;
 		public string? GetTotal => _get_total ?? _gto ?? _getTotal;
 		[JsonPropertyName("id")]
-		public string Id
+		public string? Id
 		{
 			get;
 #if NET5_0
@@ -475,7 +473,7 @@ namespace Nest
 		public string? IndexingIndexTime => _indexing_index_time ?? _iiti ?? _indexingIndexTime;
 		public string? IndexingIndexTotal => _indexing_index_total ?? _iito ?? _indexingIndexTotal;
 		[JsonPropertyName("ip")]
-		public string Ip
+		public string? Ip
 		{
 			get;
 #if NET5_0
@@ -503,7 +501,7 @@ namespace Nest
 		public string? RefreshExternalTotal => _refresh_external_total ?? _rto ?? _refreshTotal;
 		public string? RefreshListeners => _refresh_listeners ?? _rli ?? _refreshListeners;
 		[JsonPropertyName("refresh.time")]
-		public string RefreshTime
+		public string? RefreshTime
 		{
 			get;
 #if NET5_0
@@ -514,7 +512,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("refresh.total")]
-		public string RefreshTotal
+		public string? RefreshTotal
 		{
 			get;
 #if NET5_0
@@ -546,7 +544,7 @@ namespace Nest
 		public string? State => _st ?? _state;
 		public string? Store => _sto ?? _store;
 		[JsonPropertyName("sync_id")]
-		public string SyncId
+		public string? SyncId
 		{
 			get;
 #if NET5_0
