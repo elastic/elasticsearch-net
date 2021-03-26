@@ -14,8 +14,6 @@
 // Please do not edit these files manually.
 // Run the following in the root of the repository:
 //
-// TODO - RUN INSTRUCTIONS
-//
 // ------------------------------------------------
 
 using System.Text.Json.Serialization;
@@ -34,7 +32,7 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("ip")]
 		private string? _ip = default;
 		[JsonPropertyName("attr")]
-		public string Attr
+		public string? Attr
 		{
 			get;
 #if NET5_0
@@ -46,7 +44,7 @@ namespace Nest
 
 		public string? Host => _h ?? _host;
 		[JsonPropertyName("id")]
-		public string Id
+		public string? Id
 		{
 			get;
 #if NET5_0
@@ -58,7 +56,7 @@ namespace Nest
 
 		public string? Ip => _i ?? _ip;
 		[JsonPropertyName("node")]
-		public string Node
+		public string? Node
 		{
 			get;
 #if NET5_0
@@ -69,7 +67,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("pid")]
-		public string Pid
+		public string? Pid
 		{
 			get;
 #if NET5_0
@@ -80,7 +78,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("port")]
-		public string Port
+		public string? Port
 		{
 			get;
 #if NET5_0
@@ -91,7 +89,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("value")]
-		public string Value
+		public string? Value
 		{
 			get;
 #if NET5_0

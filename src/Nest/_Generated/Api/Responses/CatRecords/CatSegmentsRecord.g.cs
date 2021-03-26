@@ -14,8 +14,6 @@
 // Please do not edit these files manually.
 // Run the following in the root of the repository:
 //
-// TODO - RUN INSTRUCTIONS
-//
 // ------------------------------------------------
 
 using System.Text.Json.Serialization;
@@ -105,7 +103,7 @@ namespace Nest
 		public string? DocsDeleted => _docs_deleted ?? _dd ?? _docsDeleted;
 		public string? Generation => _generation ?? _g ?? _gen;
 		[JsonPropertyName("id")]
-		public NodeId Id
+		public NodeId? Id
 		{
 			get;
 #if NET5_0
@@ -117,7 +115,7 @@ namespace Nest
 
 		public IndexName? Index => _index ?? _i ?? _idx;
 		[JsonPropertyName("ip")]
-		public string Ip
+		public string? Ip
 		{
 			get;
 #if NET5_0

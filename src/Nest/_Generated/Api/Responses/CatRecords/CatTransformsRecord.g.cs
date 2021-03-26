@@ -14,8 +14,6 @@
 // Please do not edit these files manually.
 // Run the following in the root of the repository:
 //
-// TODO - RUN INSTRUCTIONS
-//
 // ------------------------------------------------
 
 using System.Text.Json.Serialization;
@@ -181,7 +179,7 @@ namespace Nest
 		public string? DocumentsProcessed => _documents_processed ?? _docp ?? _documentsProcessed;
 		public string? Frequency => _f ?? _frequency;
 		[JsonPropertyName("id")]
-		public string Id
+		public string? Id
 		{
 			get;
 #if NET5_0

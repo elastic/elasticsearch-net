@@ -14,8 +14,6 @@
 // Please do not edit these files manually.
 // Run the following in the root of the repository:
 //
-// TODO - RUN INSTRUCTIONS
-//
 // ------------------------------------------------
 
 using System.Text.Json.Serialization;
@@ -111,7 +109,7 @@ namespace Nest
 		public string? DestIndex => _dest_index ?? _di ?? _destIndex;
 		public string? FailureReason => _failure_reason ?? _fr ?? _failureReason;
 		[JsonPropertyName("id")]
-		public string Id
+		public string? Id
 		{
 			get;
 #if NET5_0
