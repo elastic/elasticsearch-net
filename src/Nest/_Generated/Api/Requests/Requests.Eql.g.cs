@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -32,26 +33,12 @@ namespace Nest
 		protected IEqlDeleteRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
 		///<summary>/_eql/search/{id}</summary>
-        public EqlDeleteRequest(Id id) : base(r => r)
+        public EqlDeleteRequest(Id id) : base(r => r.Required("id", id))
 		{
-		}
-
-		[JsonIgnore]
-		public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
-
-		[JsonPropertyName("stub_c")]
-		public string StubC
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
 		}
 	}
 
@@ -65,27 +52,19 @@ namespace Nest
 		protected IEqlGetRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
 		///<summary>/_eql/search/{id}</summary>
-        public EqlGetRequest(Id id) : base(r => r)
+        public EqlGetRequest(Id id) : base(r => r.Required("id", id))
 		{
 		}
 
 		[JsonIgnore]
-		public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+		public Time? KeepAlive { get => Q<Time?>("keep_alive"); set => Q("keep_alive", value); }
 
-		[JsonPropertyName("stub_c")]
-		public string StubC
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
+		[JsonIgnore]
+		public Time? WaitForCompletionTimeout { get => Q<Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IEqlGetStatusRequest, EqlGetStatusRequest>))]
@@ -98,26 +77,12 @@ namespace Nest
 		protected IEqlGetStatusRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
 		///<summary>/_eql/search/status/{id}</summary>
-        public EqlGetStatusRequest(Id id) : base(r => r)
+        public EqlGetStatusRequest(Id id) : base(r => r.Required("id", id))
 		{
-		}
-
-		[JsonIgnore]
-		public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
-
-		[JsonPropertyName("stub_c")]
-		public string StubC
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
 		}
 	}
 
@@ -135,15 +100,41 @@ namespace Nest
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
 		///<summary>/{index}/_eql/search</summary>
-        public EqlSearchRequest(Index index) : base(r => r)
+        public EqlSearchRequest(IndexName index) : base(r => r.Required("index", index))
 		{
 		}
 
 		[JsonIgnore]
-		public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-		[JsonPropertyName("stub_c")]
-		public string StubC
+		[JsonIgnore]
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+		[JsonIgnore]
+		public Time? KeepAlive { get => Q<Time?>("keep_alive"); set => Q("keep_alive", value); }
+
+		[JsonIgnore]
+		public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
+
+		[JsonIgnore]
+		public Time? WaitForCompletionTimeout { get => Q<Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
+
+		[JsonPropertyName("query")]
+		public string Query
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("case_sensitive")]
+		public bool? CaseSensitive
 		{
 			get;
 #if NET5_0

@@ -25,4 +25,12 @@ using Tests.Framework.EndpointTests;
 
 namespace Tests.Urls.Eql
 {
+    public class EqlSearchUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/project/_eql/search").Request(c => c.Eql.Search(new EqlSearchRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.Eql.SearchAsync(new EqlSearchRequest(Nest.IndexName.From<Project>())));
+        }
+    }
 }

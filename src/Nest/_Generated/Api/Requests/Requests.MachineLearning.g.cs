@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -277,7 +278,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => CalcInterim is null;
+		protected override bool IsEmpty => AdvanceTime is null && CalcInterim is null && End is null && Start is null;
 		///<summary>/_ml/anomaly_detectors/{job_id}/_flush</summary>
         public FlushJobRequest(Id jobId) : base(r => r.Required("job_id", jobId))
 		{
@@ -286,8 +287,41 @@ namespace Nest
 		[JsonIgnore]
 		public string? SkipTime { get => Q<string?>("skip_time"); set => Q("skip_time", value); }
 
+		[JsonPropertyName("advance_time")]
+		public DateTimeOffset? AdvanceTime
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("calc_interim")]
 		public bool? CalcInterim
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("end")]
+		public DateTimeOffset? End
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("start")]
+		public DateTimeOffset? Start
 		{
 			get;
 #if NET5_0
@@ -329,7 +363,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => AnomalyScore is null && Desc is null && ExcludeInterim is null && Expand is null;
+		protected override bool IsEmpty => AnomalyScore is null && Desc is null && End is null && ExcludeInterim is null && Expand is null && Start is null;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp}</summary>
         public GetBucketsRequest(Id jobId, Id timestamp) : base(r => r.Required("job_id", jobId).Optional("timestamp", timestamp))
 		{
@@ -362,6 +396,17 @@ namespace Nest
 #endif
 		}
 
+		[JsonPropertyName("end")]
+		public DateTimeOffset? End
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("exclude_interim")]
 		public bool? ExcludeInterim
 		{
@@ -375,6 +420,17 @@ namespace Nest
 
 		[JsonPropertyName("expand")]
 		public bool? Expand
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("start")]
+		public DateTimeOffset? Start
 		{
 			get;
 #if NET5_0
@@ -582,7 +638,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Descending is null && ExcludeInterim is null && InfluencerScore is null;
+		protected override bool IsEmpty => Descending is null && End is null && ExcludeInterim is null && InfluencerScore is null && Start is null;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/influencers</summary>
         public GetInfluencersRequest(Id jobId) : base(r => r.Required("job_id", jobId))
 		{
@@ -590,6 +646,17 @@ namespace Nest
 
 		[JsonPropertyName("descending")]
 		public bool? Descending
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("end")]
+		public DateTimeOffset? End
 		{
 			get;
 #if NET5_0
@@ -612,6 +679,17 @@ namespace Nest
 
 		[JsonPropertyName("influencer_score")]
 		public double? InfluencerScore
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("start")]
+		public DateTimeOffset? Start
 		{
 			get;
 #if NET5_0
@@ -691,7 +769,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Desc is null;
+		protected override bool IsEmpty => Desc is null && End is null && Start is null;
 		///<summary>/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
         public GetModelSnapshotsRequest(Id jobId, Id snapshotId) : base(r => r.Required("job_id", jobId).Optional("snapshot_id", snapshotId))
 		{
@@ -704,6 +782,28 @@ namespace Nest
 
 		[JsonPropertyName("desc")]
 		public bool? Desc
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("end")]
+		public DateTimeOffset? End
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("start")]
+		public DateTimeOffset? Start
 		{
 			get;
 #if NET5_0
@@ -726,7 +826,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => AllowNoJobs is null && ExcludeInterim is null && OverallScore is null && TopN is null;
+		protected override bool IsEmpty => AllowNoJobs is null && End is null && ExcludeInterim is null && OverallScore is null && Start is null && TopN is null;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
         public GetOverallBucketsRequest(Id jobId) : base(r => r.Required("job_id", jobId))
 		{
@@ -734,6 +834,17 @@ namespace Nest
 
 		[JsonPropertyName("allow_no_jobs")]
 		public bool? AllowNoJobs
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("end")]
+		public DateTimeOffset? End
 		{
 			get;
 #if NET5_0
@@ -756,6 +867,17 @@ namespace Nest
 
 		[JsonPropertyName("overall_score")]
 		public double? OverallScore
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("start")]
+		public DateTimeOffset? Start
 		{
 			get;
 #if NET5_0
@@ -789,7 +911,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Desc is null && ExcludeInterim is null && RecordScore is null;
+		protected override bool IsEmpty => Desc is null && End is null && ExcludeInterim is null && RecordScore is null && Start is null;
 		///<summary>/_ml/anomaly_detectors/{job_id}/results/records</summary>
         public GetAnomalyRecordsRequest(Id jobId) : base(r => r.Required("job_id", jobId))
 		{
@@ -797,6 +919,17 @@ namespace Nest
 
 		[JsonPropertyName("desc")]
 		public bool? Desc
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("end")]
+		public DateTimeOffset? End
 		{
 			get;
 #if NET5_0
@@ -819,6 +952,17 @@ namespace Nest
 
 		[JsonPropertyName("record_score")]
 		public double? RecordScore
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("start")]
+		public DateTimeOffset? Start
 		{
 			get;
 #if NET5_0
@@ -1190,12 +1334,34 @@ namespace Nest
 		protected IStartDatafeedRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningStartDatafeed;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
+		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
+		protected override bool IsEmpty => End is null && Start is null;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_start</summary>
         public StartDatafeedRequest(Id datafeedId) : base(r => r.Required("datafeed_id", datafeedId))
 		{
+		}
+
+		[JsonPropertyName("end")]
+		public DateTimeOffset? End
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("start")]
+		public DateTimeOffset? Start
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
 		}
 	}
 

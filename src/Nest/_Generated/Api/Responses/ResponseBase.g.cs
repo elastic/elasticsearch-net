@@ -75,6 +75,45 @@ namespace Nest
     {
     }
 
+    public abstract class EqlSearchResponseBase : ResponseBase
+    {
+        [JsonPropertyName("is_partial")]
+        public bool IsPartial { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("is_running")]
+        public bool IsRunning { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("took")]
+        public int Took { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("timed_out")]
+        public bool TimedOut { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
     public abstract class IndicesResponseBase : AcknowledgedResponseBase
     {
     }

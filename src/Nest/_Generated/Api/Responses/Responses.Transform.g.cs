@@ -77,6 +77,15 @@ namespace Nest
 #endif
         }
 
+        [JsonPropertyName("create_time_date_time")]
+        public DateTimeOffset CreateTimeDateTime { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
         [JsonPropertyName("description")]
         public string Description { get; 
 #if NET5_0

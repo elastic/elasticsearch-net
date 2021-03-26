@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 
 #nullable restore
@@ -26,13 +27,13 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("c")]
 		private string? _c = default;
 		[JsonInclude, JsonPropertyName("create_time")]
-		private DateString? _create_time = default;
+		private DateTimeOffset? _create_time = default;
 		[JsonInclude, JsonPropertyName("created_by")]
 		private string? _created_by = default;
 		[JsonInclude, JsonPropertyName("createdBy")]
 		private string? _createdBy = default;
 		[JsonInclude, JsonPropertyName("ct")]
-		private DateString? _ct = default;
+		private DateTimeOffset? _ct = default;
 		[JsonInclude, JsonPropertyName("d")]
 		private string? _d = default;
 		[JsonInclude, JsonPropertyName("data_frame.analysis")]
@@ -112,7 +113,7 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("version")]
 		private string? _version = default;
 		public string? CreatedBy => _created_by ?? _c ?? _createdBy;
-		public DateString? CreateTime => _ct ?? _create_time;
+		public DateTimeOffset? CreateTime => _ct ?? _create_time;
 		public string? DataFrameAnalysis => _data_frame_analysis ?? _dfa ?? _dataFrameAnalyticsAnalysis;
 		public string? DataFrameCreateTime => _data_frame_create_time ?? _dft ?? _dataFrameAnalyticsTime;
 		public string? DataFrameId => _data_frame_id ?? _dfid ?? _dataFrameAnalytics;

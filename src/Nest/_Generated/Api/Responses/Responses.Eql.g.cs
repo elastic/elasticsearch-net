@@ -22,34 +22,36 @@ using System.Text.Json.Serialization;
 
 namespace Nest
 {
-    public class EqlDeleteResponse : ResponseBase
+    public class EqlDeleteResponse : AcknowledgedResponseBase
     {
-        [JsonPropertyName("stub")]
-        public int Stub { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
     }
 
-    public class EqlGetResponse : ResponseBase
+    public class EqlGetResponse : EqlSearchResponseBase
     {
-        [JsonPropertyName("stub")]
-        public int Stub { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
     }
 
     public class EqlGetStatusResponse : ResponseBase
     {
-        [JsonPropertyName("stub")]
-        public int Stub { get; 
+        [JsonPropertyName("is_partial")]
+        public bool IsPartial { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("is_running")]
+        public bool IsRunning { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("completion_status")]
+        public int CompletionStatus { get; 
 #if NET5_0
             init;
 #else
@@ -58,15 +60,7 @@ namespace Nest
         }
     }
 
-    public class EqlSearchResponse : ResponseBase
+    public class EqlSearchResponse : EqlSearchResponseBase
     {
-        [JsonPropertyName("stub")]
-        public int Stub { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
     }
 }

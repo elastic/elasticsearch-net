@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
