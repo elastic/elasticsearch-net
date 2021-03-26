@@ -900,6 +900,13 @@ namespace Elasticsearch.Net.Specification.CatApi
 			set => Q("help", value);
 		}
 
+		///<summary>If set to true segment stats will include stats for segments that are not currently loaded into memory</summary>
+		public bool? IncludeUnloadedSegments
+		{
+			get => Q<bool? >("include_unloaded_segments");
+			set => Q("include_unloaded_segments", value);
+		}
+
 		///<summary>Calculate the selected nodes using the local cluster state rather than the state from master node (default: false)</summary>
 		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.6.0, reason: This parameter does not cause this API to act locally.")]
 		public bool? Local
