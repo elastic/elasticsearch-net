@@ -175,7 +175,7 @@ namespace Elasticsearch.Net
 			// we a startswith check because the response can return charset information
 			// e.g: application/json; charset=UTF-8
 			if (acceptMimeType == RequestData.MimeTypeOld)
-				return responseMimeType.StartsWith(RequestData.MimeTypeOld);
+				return responseMimeType.StartsWith(RequestData.MimeTypeOld, StringComparison.OrdinalIgnoreCase);
 
 			//vendored check
 			if (acceptMimeType == RequestData.MimeType)
@@ -184,10 +184,10 @@ namespace Elasticsearch.Net
 				return
 					responseMimeType == RequestData.MimeType
 					|| responseMimeType == RequestData.MimeTypeOld
-					|| responseMimeType.StartsWith(RequestData.MimeTypeOld)
-					|| responseMimeType.StartsWith(RequestData.MimeType);
+					|| responseMimeType.StartsWith(RequestData.MimeTypeOld, StringComparison.OrdinalIgnoreCase)
+					|| responseMimeType.StartsWith(RequestData.MimeType, StringComparison.OrdinalIgnoreCase);
 
-			return responseMimeType.StartsWith(acceptMimeType);
+			return responseMimeType.StartsWith(acceptMimeType, StringComparison.OrdinalIgnoreCase);
 		}
 
 
