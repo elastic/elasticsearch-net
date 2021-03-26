@@ -594,6 +594,11 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
+	///<summary>Request options for PreviewDataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html</para></summary>
+	public class PreviewDataFrameAnalyticsRequestParameters : RequestParameters<PreviewDataFrameAnalyticsRequestParameters>
+	{
+	}
+
 	///<summary>Request options for PreviewDatafeed <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
 	public class PreviewDatafeedRequestParameters : RequestParameters<PreviewDatafeedRequestParameters>
 	{
