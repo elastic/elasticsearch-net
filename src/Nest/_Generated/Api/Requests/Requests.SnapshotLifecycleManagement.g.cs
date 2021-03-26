@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -153,10 +154,21 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Name is null && Repository is null;
+		protected override bool IsEmpty => Config is null && Name is null && Repository is null && Retention is null && Schedule is null;
 		///<summary>/_slm/policy/{policy_id}</summary>
         public PutSnapshotLifecycleRequest(Name policyId) : base(r => r.Required("policy_id", policyId))
 		{
+		}
+
+		[JsonPropertyName("config")]
+		public SnapshotLifecycleConfig? Config
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
 		}
 
 		[JsonPropertyName("name")]
@@ -172,6 +184,28 @@ namespace Nest
 
 		[JsonPropertyName("repository")]
 		public string? Repository
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("retention")]
+		public SnapshotRetentionConfiguration? Retention
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("schedule")]
+		public CronExpression? Schedule
 		{
 			get;
 #if NET5_0

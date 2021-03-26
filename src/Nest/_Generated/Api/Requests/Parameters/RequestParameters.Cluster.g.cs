@@ -34,7 +34,9 @@ namespace Nest
 
     public class ClusterDeleteComponentTemplateRequestParameters : RequestParameters<ClusterDeleteComponentTemplateRequestParameters>
     {
-        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public class ClusterDeleteVotingConfigExclusionsRequestParameters : RequestParameters<ClusterDeleteVotingConfigExclusionsRequestParameters>
@@ -49,7 +51,11 @@ namespace Nest
 
     public class ClusterGetComponentTemplateRequestParameters : RequestParameters<ClusterGetComponentTemplateRequestParameters>
     {
-        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
     }
 
     public class ClusterGetSettingsRequestParameters : RequestParameters<ClusterGetSettingsRequestParameters>
@@ -147,7 +153,7 @@ namespace Nest
 
         public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
-        public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
+        public VersionNumber? WaitForMetadataVersion { get => Q<VersionNumber?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
 
         public Time? WaitForTimeout { get => Q<Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
     }

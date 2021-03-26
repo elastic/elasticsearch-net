@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -120,7 +121,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Cron is null && IndexPattern is null && PageSize is null && RollupIndex is null;
+		protected override bool IsEmpty => Cron is null && Groups is null && IndexPattern is null;
 		///<summary>/_rollup/job/{id}</summary>
         public CreateRollupJobRequest(Id id) : base(r => r.Required("id", id))
 		{
@@ -137,30 +138,19 @@ namespace Nest
 #endif
 		}
 
+		[JsonPropertyName("groups")]
+		public RollupGroupings? Groups
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("index_pattern")]
 		public string? IndexPattern
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("page_size")]
-		public long? PageSize
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("rollup_index")]
-		public IndexName? RollupIndex
 		{
 			get;
 #if NET5_0
@@ -216,7 +206,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Size is null;
+		protected override bool IsEmpty => Query is null && Size is null;
 		///<summary>/{index}/_rollup_search</summary>
         public RollupSearchRequest(Indices index) : base(r => r.Required("index", index))
 		{
@@ -227,6 +217,17 @@ namespace Nest
 
 		[JsonIgnore]
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+
+		[JsonPropertyName("query")]
+		public QueryContainer? Query
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonPropertyName("size")]
 		public int? Size

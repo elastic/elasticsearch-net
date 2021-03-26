@@ -17,47 +17,29 @@
 // TODO - RUN INSTRUCTIONS
 //
 // ------------------------------------------------
-using System.Text.Json.Serialization;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Nest;
+using System.Threading.Tasks;
+using Tests.Domain;
+using Tests.Framework.EndpointTests;
 
-namespace Nest
+namespace Tests.Urls.SearchableSnapshots
 {
-    public class IndexedScript : ScriptBase
+    public class SearchableSnapshotsClearCacheUrlTests : UrlTestsBase
     {
-        [JsonPropertyName("id")]
-        public string Id { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_searchable_snapshots/cache/clear").Request(c => c.SearchableSnapshots.ClearCache(new SearchableSnapshotsClearCacheRequest())).RequestAsync(c => c.SearchableSnapshots.ClearCacheAsync(new SearchableSnapshotsClearCacheRequest()));
         }
     }
 
-    public class InlineScript : ScriptBase
+    public class SearchableSnapshotsStatsUrlTests : UrlTestsBase
     {
-        [JsonPropertyName("source")]
-        public string Source { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_searchable_snapshots/stats").Request(c => c.SearchableSnapshots.Stats(new SearchableSnapshotsStatsRequest())).RequestAsync(c => c.SearchableSnapshots.StatsAsync(new SearchableSnapshotsStatsRequest()));
         }
-    }
-
-    public class ScriptBase
-    {
-        [JsonPropertyName("lang")]
-        public string Lang { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-    }
-
-    public class ScriptField
-    {
     }
 }

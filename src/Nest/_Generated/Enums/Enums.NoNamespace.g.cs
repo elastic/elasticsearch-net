@@ -76,7 +76,13 @@ namespace Nest
 	public enum DynamicMapping
 	{
 		[EnumMember(Value = "strict")]
-		Strict
+		Strict,
+		[EnumMember(Value = "runtime")]
+		Runtime,
+		[EnumMember(Value = "true")]
+		True,
+		[EnumMember(Value = "false")]
+		False
 	}
 
 	public enum ExpandWildcardOptions
@@ -193,6 +199,22 @@ namespace Nest
 		Popular,
 		[EnumMember(Value = "always")]
 		Always
+	}
+
+	public enum TermVectorOption
+	{
+		[EnumMember(Value = "no")]
+		No,
+		[EnumMember(Value = "yes")]
+		Yes,
+		[EnumMember(Value = "with_offsets")]
+		WithOffsets,
+		[EnumMember(Value = "with_positions")]
+		WithPositions,
+		[EnumMember(Value = "with_positions_offsets")]
+		WithPositionsOffsets,
+		[EnumMember(Value = "with_positions_offsets_payloads")]
+		WithPositionsOffsetsPayloads
 	}
 
 	public enum ThreadType

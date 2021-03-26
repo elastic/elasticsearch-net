@@ -25,29 +25,6 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
-    public class BulkRequestParameters : RequestParameters<BulkRequestParameters>
-    {
-        public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
-
-        public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-
-        public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
-
-        public bool? Source { get => Q<bool?>("_source"); set => Q("_source", value); }
-
-        public Fields? SourceExcludes { get => Q<Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-
-        public Fields? SourceIncludes { get => Q<Fields?>("_source_includes"); set => Q("_source_includes", value); }
-
-        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
-
-        public string? TypeQueryString { get => Q<string?>("type_query_string"); set => Q("type_query_string", value); }
-
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
-        public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
-    }
-
     public class ClearScrollRequestParameters : RequestParameters<ClearScrollRequestParameters>
     {
     }
@@ -89,23 +66,6 @@ namespace Nest
         public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
     }
 
-    public class CreateRequestParameters : RequestParameters<CreateRequestParameters>
-    {
-        public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
-
-        public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-
-        public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
-
-        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
-
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-
-        public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
-
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-    }
-
     public class DeleteRequestParameters : RequestParameters<DeleteRequestParameters>
     {
         public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
@@ -118,11 +78,11 @@ namespace Nest
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public class DeleteByQueryRequestParameters : RequestParameters<DeleteByQueryRequestParameters>
@@ -159,6 +119,8 @@ namespace Nest
 
         public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
 
+        public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
         public Time? Scroll { get => Q<Time?>("scroll"); set => Q("scroll", value); }
 
         public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
@@ -183,7 +145,7 @@ namespace Nest
 
         public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
 
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
         public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
     }
@@ -218,7 +180,7 @@ namespace Nest
 
         public Fields? StoredFields { get => Q<Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
     }
@@ -239,7 +201,7 @@ namespace Nest
 
         public Fields? SourceIncludes { get => Q<Fields?>("source_includes"); set => Q("source_includes", value); }
 
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
     }
@@ -302,7 +264,7 @@ namespace Nest
 
         public Fields? StoredFields { get => Q<Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
     }
@@ -328,34 +290,9 @@ namespace Nest
 
         public Fields? SourceIncludes { get => Q<Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
-    }
-
-    public class IndexRequestParameters : RequestParameters<IndexRequestParameters>
-    {
-        public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
-
-        public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
-
-        public OpType? OpType { get => Q<OpType?>("op_type"); set => Q("op_type", value); }
-
-        public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
-
-        public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-
-        public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
-
-        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
-
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-
-        public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
-
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
-        public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
     }
 
     public class RootNodeInfoRequestParameters : RequestParameters<RootNodeInfoRequestParameters>
@@ -431,7 +368,7 @@ namespace Nest
 
         public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
 
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
     }
@@ -464,7 +401,7 @@ namespace Nest
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
         public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
@@ -585,58 +522,6 @@ namespace Nest
         public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
     }
 
-    public class TermVectorsRequestParameters : RequestParameters<TermVectorsRequestParameters>
-    {
-        public Fields? Fields { get => Q<Fields?>("fields"); set => Q("fields", value); }
-
-        public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
-
-        public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
-
-        public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
-
-        public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
-
-        public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-        public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-
-        public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
-
-        public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
-
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-
-        public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
-    }
-
-    public class UpdateRequestParameters : RequestParameters<UpdateRequestParameters>
-    {
-        public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
-
-        public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
-
-        public string? Lang { get => Q<string?>("lang"); set => Q("lang", value); }
-
-        public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
-
-        public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
-
-        public long? RetryOnConflict { get => Q<long?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
-
-        public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
-
-        public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
-
-        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
-
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
-        public Fields? SourceExcludes { get => Q<Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-
-        public Fields? SourceIncludes { get => Q<Fields?>("_source_includes"); set => Q("_source_includes", value); }
-    }
-
     public class UpdateByQueryRequestParameters : RequestParameters<UpdateByQueryRequestParameters>
     {
         public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -699,7 +584,7 @@ namespace Nest
 
         public bool? VersionType { get => Q<bool?>("version_type"); set => Q("version_type", value); }
 
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
         public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
     }

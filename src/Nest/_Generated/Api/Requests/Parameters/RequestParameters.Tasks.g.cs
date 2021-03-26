@@ -39,8 +39,6 @@ namespace Nest
 
     public class ListTasksRequestParameters : RequestParameters<ListTasksRequestParameters>
     {
-        public string? Actions { get => Q<string?>("actions"); set => Q("actions", value); }
-
         public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 
         public GroupBy? GroupBy { get => Q<GroupBy?>("group_by"); set => Q("group_by", value); }

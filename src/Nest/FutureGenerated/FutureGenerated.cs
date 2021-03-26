@@ -6,6 +6,10 @@ namespace Nest
 {
 	// Stubs until we generate these - Allows the code to compile so we can identify real errors.
 
+	public class VersionString { }
+
+	public class VersionNumber { }
+
 	public abstract partial class PlainRequestBase<TParameters>
 	{
 		///<summary>Include the stack trace of returned errors.</summary>
@@ -90,17 +94,13 @@ namespace Nest
 
 	//public class Refresh { }
 
-	public class WaitForActiveShards { }
+	//public class WaitForActiveShards { }
 
 	public class Types : IUrlParameter
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}
-
-	public class Alias : IUrlParameter
-	{
-		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	}
+	
 
 	public class CategoryId : IUrlParameter
 	{

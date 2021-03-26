@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 
 #nullable restore
@@ -94,9 +95,9 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("sm")]
 		private ByteSize? _sm = default;
 		[JsonInclude, JsonPropertyName("v")]
-		private string? _v = default;
+		private VersionString? _v = default;
 		[JsonInclude, JsonPropertyName("version")]
-		private string? _version = default;
+		private VersionString? _version = default;
 		public string? Committed => _committed ?? _ic ?? _isCommitted;
 		public string? Compound => _compound ?? _ico ?? _isCompound;
 		public string? DocsCount => _docs_count ?? _dc ?? _docsCount;
@@ -131,6 +132,6 @@ namespace Nest
 		public string? Shard => _shard ?? _s ?? _sh;
 		public ByteSize? Size => _si ?? _size;
 		public ByteSize? SizeMemory => _size_memory ?? _sm ?? _sizeMemory;
-		public string? Version => _v ?? _version;
+		public VersionString? Version => _v ?? _version;
 	}
 }

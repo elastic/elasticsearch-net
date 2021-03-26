@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 
 #nullable restore
@@ -34,19 +35,19 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("epoch")]
 		private EpochMillis? _epoch = default;
 		[JsonInclude, JsonPropertyName("hhmmss")]
-		private DateString? _hhmmss = default;
+		private DateTimeOffset? _hhmmss = default;
 		[JsonInclude, JsonPropertyName("hms")]
-		private DateString? _hms = default;
+		private DateTimeOffset? _hms = default;
 		[JsonInclude, JsonPropertyName("t")]
 		private EpochMillis? _t = default;
 		[JsonInclude, JsonPropertyName("time")]
 		private EpochMillis? _time = default;
 		[JsonInclude, JsonPropertyName("timestamp")]
-		private DateString? _timestamp = default;
+		private DateTimeOffset? _timestamp = default;
 		[JsonInclude, JsonPropertyName("ts")]
-		private DateString? _ts = default;
+		private DateTimeOffset? _ts = default;
 		public string? Count => _count ?? _docsCount ?? _dc ?? _docs_count;
 		public EpochMillis? Epoch => _epoch ?? _t ?? _time;
-		public DateString? Timestamp => _timestamp ?? _hhmmss ?? _ts ?? _hms;
+		public DateTimeOffset? Timestamp => _timestamp ?? _hhmmss ?? _ts ?? _hms;
 	}
 }

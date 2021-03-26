@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -32,9 +33,9 @@ namespace Nest
 		protected IGraphExploreRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.GraphExplore;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
+		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
+		protected override bool IsEmpty => Connections is null && Controls is null && Query is null;
 		///<summary>/{index}/_graph/explore</summary>
         public GraphExploreRequest(Indices index) : base(r => r.Required("index", index))
 		{
@@ -45,5 +46,38 @@ namespace Nest
 
 		[JsonIgnore]
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonPropertyName("connections")]
+		public Hop? Connections
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("controls")]
+		public GraphExploreControls? Controls
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("query")]
+		public QueryContainer? Query
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
 	}
 }

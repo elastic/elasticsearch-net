@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 
 #nullable restore
@@ -162,9 +163,9 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("tt")]
 		private string? _tt = default;
 		[JsonInclude, JsonPropertyName("v")]
-		private string? _v = default;
+		private VersionString? _v = default;
 		[JsonInclude, JsonPropertyName("version")]
-		private string? _version = default;
+		private VersionString? _version = default;
 		public string? ChangesLastDetectionTime => _cldt ?? _changes_last_detection_time;
 		public string? Checkpoint => _c ?? _checkpoint;
 		public string? CheckpointDurationTimeExpAvg => _checkpoint_duration_time_exp_avg ?? _cdtea ?? _checkpointTimeExpAvg;
@@ -179,7 +180,7 @@ namespace Nest
 		public string? DocumentsProcessed => _documents_processed ?? _docp ?? _documentsProcessed;
 		public string? Frequency => _f ?? _frequency;
 		[JsonPropertyName("id")]
-		public string? Id
+		public Id? Id
 		{
 			get;
 #if NET5_0
@@ -207,6 +208,6 @@ namespace Nest
 		public string? State => _s ?? _state;
 		public string? TransformType => _tt ?? _transform_type;
 		public string? TriggerCount => _tc ?? _trigger_count;
-		public string? Version => _v ?? _version;
+		public VersionString? Version => _v ?? _version;
 	}
 }

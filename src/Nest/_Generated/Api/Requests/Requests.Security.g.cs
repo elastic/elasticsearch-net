@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -577,6 +578,17 @@ namespace Nest
 		{
 		}
 
+		[JsonPropertyName("api_key")]
+		public ApiKey ApiKey
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("grant_type")]
 		public ApiKeyGrantType GrantType
 		{
@@ -815,9 +827,9 @@ namespace Nest
 		protected IPutRoleRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutRole;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => false;
+		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
+		protected override bool IsEmpty => TransientMetadata is null;
 		///<summary>/_security/role/{name}</summary>
         public PutRoleRequest(Name name) : base(r => r.Required("name", name))
 		{
@@ -825,6 +837,17 @@ namespace Nest
 
 		[JsonIgnore]
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+
+		[JsonPropertyName("transient_metadata")]
+		public TransientMetadata? TransientMetadata
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IPutRoleMappingRequest, PutRoleMappingRequest>))]
@@ -839,7 +862,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Enabled is null;
+		protected override bool IsEmpty => Enabled is null && Rules is null;
 		///<summary>/_security/role_mapping/{name}</summary>
         public PutRoleMappingRequest(Name name) : base(r => r.Required("name", name))
 		{
@@ -850,6 +873,17 @@ namespace Nest
 
 		[JsonPropertyName("enabled")]
 		public bool? Enabled
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("rules")]
+		public RoleMappingRuleBase? Rules
 		{
 			get;
 #if NET5_0

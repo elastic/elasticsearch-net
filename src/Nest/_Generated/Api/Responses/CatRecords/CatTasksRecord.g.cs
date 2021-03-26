@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 
 #nullable restore
@@ -42,11 +43,11 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("n")]
 		private string? _n = default;
 		[JsonInclude, JsonPropertyName("ni")]
-		private string? _ni = default;
+		private NodeId? _ni = default;
 		[JsonInclude, JsonPropertyName("node")]
 		private string? _node = default;
 		[JsonInclude, JsonPropertyName("node_id")]
-		private string? _node_id = default;
+		private NodeId? _node_id = default;
 		[JsonInclude, JsonPropertyName("parent_task_id")]
 		private string? _parent_task_id = default;
 		[JsonInclude, JsonPropertyName("po")]
@@ -62,9 +63,9 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("start_time")]
 		private string? _start_time = default;
 		[JsonInclude, JsonPropertyName("task_id")]
-		private string? _task_id = default;
+		private Id? _task_id = default;
 		[JsonInclude, JsonPropertyName("ti")]
-		private string? _ti = default;
+		private Id? _ti = default;
 		[JsonInclude, JsonPropertyName("time")]
 		private string? _time = default;
 		[JsonInclude, JsonPropertyName("timestamp")]
@@ -72,13 +73,13 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("ts")]
 		private string? _ts = default;
 		[JsonInclude, JsonPropertyName("ty")]
-		private string? _ty = default;
+		private Name? _ty = default;
 		[JsonInclude, JsonPropertyName("type")]
-		private string? _type = default;
+		private Name? _type = default;
 		[JsonInclude, JsonPropertyName("v")]
-		private string? _v = default;
+		private VersionString? _v = default;
 		[JsonInclude, JsonPropertyName("version")]
-		private string? _version = default;
+		private VersionString? _version = default;
 		[JsonInclude, JsonPropertyName("x")]
 		private string? _x = default;
 		[JsonInclude, JsonPropertyName("x_opaque_id")]
@@ -86,7 +87,7 @@ namespace Nest
 		public string? Action => _ac ?? _action;
 		public string? Description => _desc ?? _description;
 		[JsonPropertyName("id")]
-		public string? Id
+		public Id? Id
 		{
 			get;
 #if NET5_0
@@ -98,7 +99,7 @@ namespace Nest
 
 		public string? Ip => _i ?? _ip;
 		public string? Node => _n ?? _node;
-		public string? NodeId => _ni ?? _node_id;
+		public NodeId? NodeId => _ni ?? _node_id;
 		public string? ParentTaskId => _pti ?? _parent_task_id;
 		public string? Port => _po ?? _port;
 		public string? RunningTime => _time ?? _running_time;
@@ -114,10 +115,10 @@ namespace Nest
 		}
 
 		public string? StartTime => _start ?? _start_time;
-		public string? TaskId => _ti ?? _task_id;
+		public Id? TaskId => _ti ?? _task_id;
 		public string? Timestamp => _timestamp ?? _hhmmss ?? _ts ?? _hms;
-		public string? Type => _ty ?? _type;
-		public string? Version => _v ?? _version;
+		public Name? Type => _ty ?? _type;
+		public VersionString? Version => _v ?? _version;
 		public string? XOpaqueId => _x ?? _x_opaque_id;
 	}
 }

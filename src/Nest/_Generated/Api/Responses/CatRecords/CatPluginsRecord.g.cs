@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 
 #nullable restore
@@ -32,17 +33,17 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("description")]
 		private string? _description = default;
 		[JsonInclude, JsonPropertyName("n")]
-		private string? _n = default;
+		private Name? _n = default;
 		[JsonInclude, JsonPropertyName("name")]
-		private string? _name = default;
+		private Name? _name = default;
 		[JsonInclude, JsonPropertyName("t")]
 		private Name? _t = default;
 		[JsonInclude, JsonPropertyName("type")]
 		private Name? _type = default;
 		[JsonInclude, JsonPropertyName("v")]
-		private string? _v = default;
+		private VersionString? _v = default;
 		[JsonInclude, JsonPropertyName("version")]
-		private string? _version = default;
+		private VersionString? _version = default;
 		public string? Component => _c ?? _component;
 		public string? Description => _d ?? _description;
 		[JsonPropertyName("id")]
@@ -56,8 +57,8 @@ namespace Nest
 #endif
 		}
 
-		public string? Name => _n ?? _name;
+		public Name? Name => _n ?? _name;
 		public Name? Type => _t ?? _type;
-		public string? Version => _v ?? _version;
+		public VersionString? Version => _v ?? _version;
 	}
 }

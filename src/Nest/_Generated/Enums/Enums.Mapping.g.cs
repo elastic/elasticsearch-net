@@ -103,11 +103,85 @@ namespace Nest
 		ConstantKeyword
 	}
 
+	public enum GeoOrientation
+	{
+		[EnumMember(Value = "right")]
+		Right,
+		[EnumMember(Value = "counterclockwise")]
+		Counterclockwise,
+		[EnumMember(Value = "ccw")]
+		Ccw,
+		[EnumMember(Value = "left")]
+		Left,
+		[EnumMember(Value = "clockwise")]
+		Clockwise,
+		[EnumMember(Value = "cw")]
+		Cw
+	}
+
+	public enum GeoStrategy
+	{
+		[EnumMember(Value = "recursive")]
+		Recursive,
+		[EnumMember(Value = "term")]
+		Term
+	}
+
+	public enum IndexOptions
+	{
+		[EnumMember(Value = "docs")]
+		Docs,
+		[EnumMember(Value = "freqs")]
+		Freqs,
+		[EnumMember(Value = "positions")]
+		Positions,
+		[EnumMember(Value = "offsets")]
+		Offsets
+	}
+
 	public enum MatchType
 	{
 		[EnumMember(Value = "simple")]
 		Simple,
 		[EnumMember(Value = "regex")]
 		Regex
+	}
+
+	public enum NumberType
+	{
+		[EnumMember(Value = "float")]
+		Float,
+		[EnumMember(Value = "half_float")]
+		HalfFloat,
+		[EnumMember(Value = "scaled_float")]
+		ScaledFloat,
+		[EnumMember(Value = "double")]
+		Double,
+		[EnumMember(Value = "integer")]
+		Integer,
+		[EnumMember(Value = "long")]
+		Long,
+		[EnumMember(Value = "short")]
+		Short,
+		[EnumMember(Value = "byte")]
+		Byte,
+		[EnumMember(Value = "unsigned_long")]
+		UnsignedLong
+	}
+
+	public enum ShapeOrientation
+	{
+		[EnumMember(Value = "right")]
+		Right,
+		[EnumMember(Value = "counterclockwise")]
+		Counterclockwise,
+		[EnumMember(Value = "ccw")]
+		Ccw,
+		[EnumMember(Value = "left")]
+		Left,
+		[EnumMember(Value = "clockwise")]
+		Clockwise,
+		[EnumMember(Value = "cw")]
+		Cw
 	}
 }

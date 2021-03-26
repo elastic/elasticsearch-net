@@ -40,4 +40,12 @@ namespace Nest
 		[EnumMember(Value = "password")]
 		Password
 	}
+
+	public enum RoleTemplateFormat
+	{
+		[EnumMember(Value = "string")]
+		String,
+		[EnumMember(Value = "json")]
+		Json
+	}
 }
