@@ -13,9 +13,10 @@ let SkipList = dict<SkipFile,SkipSection> [
     // Need to implement cluster settings cleanup
     SkipFile "cluster.put_settings/10_basic.yml", All
     
-    SkipFile "ml/set_upgrade_mode.yml", Section "Attempt to open job when upgrade_mode is enabled"
+    SkipFile "ml/set_upgrade_mode.yml", All
     SkipFile "ml/inference_crud.yml", Section "Test update model alias with model id referring to missing model"
-    
+    SkipFile "ml/start_stop_datafeed.yml", All
+    SkipFile "ml/post_data.yml", All
     
     // These send empty strings for required parameters
     // TODO i THINK this is now supported

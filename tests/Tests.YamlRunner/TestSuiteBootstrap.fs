@@ -216,14 +216,14 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         while (call() > 0 && DateTime.UtcNow < e) do ignore()
     
     firstFailure <| seq {
-        if (suite = Platinum) then
+        if suite = Platinum then
             yield! wipeRollupJobs()
             waitForPendingRollupTasks()
             yield! deleteAllSLMPolicies()
         
         yield! wipeSnapshots()
         
-        if (suite = Platinum) then
+        if suite = Platinum then
             yield wipeDataStreams()
         
         yield wipeAllIndices()
@@ -232,7 +232,7 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         
         yield wipeClusterSettings()
         
-        if (suite = Platinum) then
+        if suite = Platinum then
             yield! deleteAllILMPolicies()
             yield! deleteAllAutoFollowPatterns()
             yield! deleteAllTasks()
@@ -248,8 +248,10 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         
         yield! stopTransforms()
             
-        let data = PostData.String @"{""password"":""x-pack-test-password"", ""roles"":[""superuser""]}"
-        yield client.Security.PutUser<DynamicResponse>("x_pack_rest_user", data)
+            
+        if suite = Platinum then
+            let data = PostData.String @"{""password"":""x-pack-test-password"", ""roles"":[""superuser""]}"
+            yield client.Security.PutUser<DynamicResponse>("x_pack_rest_user", data)
         
         waitForClusterStateUpdatesToFinish()
     }
