@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -168,8 +169,30 @@ namespace Nest
 		[JsonIgnore]
 		public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 
+		[JsonPropertyName("repository")]
+		public SnapshotRepository? Repository
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("type")]
 		public string Type
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("settings")]
+		public SnapshotRepositorySettings Settings
 		{
 			get;
 #if NET5_0
@@ -297,7 +320,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => IgnoreUnavailable is null && IncludeAliases is null && IncludeGlobalState is null && Partial is null && RenamePattern is null && RenameReplacement is null;
+		protected override bool IsEmpty => IgnoreUnavailable is null && IncludeAliases is null && IncludeGlobalState is null && IndexSettings is null && Partial is null && RenamePattern is null && RenameReplacement is null;
 		///<summary>/_snapshot/{repository}/{snapshot}/_restore</summary>
         public RestoreRequest(Name repository, Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
@@ -333,6 +356,17 @@ namespace Nest
 
 		[JsonPropertyName("include_global_state")]
 		public bool? IncludeGlobalState
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_settings")]
+		public UpdateIndexSettingsRequest? IndexSettings
 		{
 			get;
 #if NET5_0

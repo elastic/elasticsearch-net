@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -102,7 +103,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => AllowNoIndices is null && AllowPartialSearchResults is null && Analyzer is null && AnalyzeWildcard is null && DefaultOperator is null && Df is null && Explain is null && From is null && IgnoreThrottled is null && IgnoreUnavailable is null && Lenient is null && MaxConcurrentShardRequests is null && MinScore is null && Preference is null && Profile is null && QueryOnQueryString is null && RequestCache is null && SearchType is null && SequenceNumberPrimaryTerm is null && Size is null && SuggestMode is null && SuggestSize is null && SuggestText is null && TerminateAfter is null && Timeout is null && TrackScores is null && TrackTotalHits is null && Version is null;
+		protected override bool IsEmpty => AllowNoIndices is null && AllowPartialSearchResults is null && Analyzer is null && AnalyzeWildcard is null && Collapse is null && DefaultOperator is null && Df is null && Explain is null && From is null && Highlight is null && IgnoreThrottled is null && IgnoreUnavailable is null && Lenient is null && PostFilter is null && Preference is null && Profile is null && Pit is null && Query is null && QueryOnQueryString is null && RequestCache is null && SearchType is null && SequenceNumberPrimaryTerm is null && Size is null && SuggestMode is null && SuggestText is null && Timeout is null && TrackScores is null && TrackTotalHits is null && Version is null && Fields is null;
 		///<summary>/_async_search</summary>
         public AsyncSearchSubmitRequest() : base()
 		{
@@ -169,6 +170,17 @@ namespace Nest
 #endif
 		}
 
+		[JsonPropertyName("collapse")]
+		public FieldCollapse? Collapse
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("default_operator")]
 		public DefaultOperator? DefaultOperator
 		{
@@ -213,6 +225,17 @@ namespace Nest
 #endif
 		}
 
+		[JsonPropertyName("highlight")]
+		public Highlight? Highlight
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("ignore_throttled")]
 		public bool? IgnoreThrottled
 		{
@@ -246,19 +269,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("max_concurrent_shard_requests")]
-		public long? MaxConcurrentShardRequests
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("min_score")]
-		public double? MinScore
+		[JsonPropertyName("post_filter")]
+		public QueryContainer? PostFilter
 		{
 			get;
 #if NET5_0
@@ -281,6 +293,28 @@ namespace Nest
 
 		[JsonPropertyName("profile")]
 		public bool? Profile
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("pit")]
+		public PointInTimeReference? Pit
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("query")]
+		public QueryContainer? Query
 		{
 			get;
 #if NET5_0
@@ -356,30 +390,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("suggest_size")]
-		public long? SuggestSize
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
 		[JsonPropertyName("suggest_text")]
 		public string? SuggestText
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("terminate_after")]
-		public long? TerminateAfter
 		{
 			get;
 #if NET5_0
@@ -424,6 +436,17 @@ namespace Nest
 
 		[JsonPropertyName("version")]
 		public bool? Version
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fields")]
+		public Array? Fields
 		{
 			get;
 #if NET5_0

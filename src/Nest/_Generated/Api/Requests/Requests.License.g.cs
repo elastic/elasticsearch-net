@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -114,9 +115,9 @@ namespace Nest
 		protected IPostLicenseRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.LicensePost;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => false;
+		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
+		protected override bool IsEmpty => License is null && Licenses is null;
 		///<summary>/_license</summary>
         public PostLicenseRequest() : base()
 		{
@@ -124,6 +125,28 @@ namespace Nest
 
 		[JsonIgnore]
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
+
+		[JsonPropertyName("license")]
+		public License? License
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("licenses")]
+		public Array? Licenses
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IStartBasicLicenseRequest, StartBasicLicenseRequest>))]

@@ -44,24 +44,6 @@ namespace Nest
             internal set; 
 #endif
         }
-
-        [JsonPropertyName("_id")]
-        public string Id { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("_version")]
-        public int Version { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
     }
 
     public class ExecuteWatchResponse : ResponseBase
@@ -96,30 +78,12 @@ namespace Nest
             internal set; 
 #endif
         }
-
-        [JsonPropertyName("_version")]
-        public int Version { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
     }
 
     public class PutWatchResponse : ResponseBase
     {
         [JsonPropertyName("created")]
         public bool Created { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("_id")]
-        public string Id { get; 
 #if NET5_0
             init;
 #else
@@ -138,15 +102,6 @@ namespace Nest
 
         [JsonPropertyName("_seq_no")]
         public long SeqNo { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("_version")]
-        public int Version { get; 
 #if NET5_0
             init;
 #else

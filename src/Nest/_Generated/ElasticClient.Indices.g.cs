@@ -28,6 +28,16 @@ namespace Nest
 		{
 		}
 
+		public IndexAddBlockResponse IndexAddBlock(IIndexAddBlockRequest request)
+		{
+			return DoRequest<IIndexAddBlockRequest, IndexAddBlockResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndexAddBlockResponse> IndexAddBlockAsync(IIndexAddBlockRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndexAddBlockRequest, IndexAddBlockResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
 		public AnalyzeResponse Analyze(IAnalyzeRequest request)
 		{
 			return DoRequest<IAnalyzeRequest, AnalyzeResponse>(request, request.RequestParameters);

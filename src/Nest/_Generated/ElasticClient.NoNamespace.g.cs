@@ -65,6 +65,8 @@ namespace Nest
 
         public RollupNamespace Rollup { get; private set; }
 
+        public SearchableSnapshotsNamespace SearchableSnapshots { get; private set; }
+
         public SecurityNamespace Security { get; private set; }
 
         public SnapshotLifecycleManagementNamespace SnapshotLifecycleManagement { get; private set; }
@@ -74,8 +76,6 @@ namespace Nest
         public SqlNamespace Sql { get; private set; }
 
         public TasksNamespace Tasks { get; private set; }
-
-        public TextStructureNamespace TextStructure { get; private set; }
 
         public TransformNamespace Transform { get; private set; }
 
@@ -105,25 +105,15 @@ namespace Nest
             Monitoring = new MonitoringNamespace(this);
             Nodes = new NodesNamespace(this);
             Rollup = new RollupNamespace(this);
+            SearchableSnapshots = new SearchableSnapshotsNamespace(this);
             Security = new SecurityNamespace(this);
             SnapshotLifecycleManagement = new SnapshotLifecycleManagementNamespace(this);
             Snapshot = new SnapshotNamespace(this);
             Sql = new SqlNamespace(this);
             Tasks = new TasksNamespace(this);
-            TextStructure = new TextStructureNamespace(this);
             Transform = new TransformNamespace(this);
             Watcher = new WatcherNamespace(this);
             XPack = new XPackNamespace(this);
-        }
-
-        public BulkResponse Bulk(IBulkRequest request)
-        {
-            return DoRequest<IBulkRequest, BulkResponse>(request, request.RequestParameters);
-        }
-
-        public Task<BulkResponse> BulkAsync(IBulkRequest request, CancellationToken cancellationToken = default)
-        {
-            return DoRequestAsync<IBulkRequest, BulkResponse>(request, request.RequestParameters, cancellationToken);
         }
 
         public ClearScrollResponse ClearScroll(IClearScrollRequest request)
@@ -154,16 +144,6 @@ namespace Nest
         public Task<CountResponse> CountAsync(ICountRequest request, CancellationToken cancellationToken = default)
         {
             return DoRequestAsync<ICountRequest, CountResponse>(request, request.RequestParameters, cancellationToken);
-        }
-
-        public CreateResponse Create(ICreateRequest request)
-        {
-            return DoRequest<ICreateRequest, CreateResponse>(request, request.RequestParameters);
-        }
-
-        public Task<CreateResponse> CreateAsync(ICreateRequest request, CancellationToken cancellationToken = default)
-        {
-            return DoRequestAsync<ICreateRequest, CreateResponse>(request, request.RequestParameters, cancellationToken);
         }
 
         public DeleteResponse Delete(IDeleteRequest request)
@@ -274,16 +254,6 @@ namespace Nest
         public Task<SourceResponse> SourceAsync(ISourceRequest request, CancellationToken cancellationToken = default)
         {
             return DoRequestAsync<ISourceRequest, SourceResponse>(request, request.RequestParameters, cancellationToken);
-        }
-
-        public IndexResponse Index(IIndexRequest request)
-        {
-            return DoRequest<IIndexRequest, IndexResponse>(request, request.RequestParameters);
-        }
-
-        public Task<IndexResponse> IndexAsync(IIndexRequest request, CancellationToken cancellationToken = default)
-        {
-            return DoRequestAsync<IIndexRequest, IndexResponse>(request, request.RequestParameters, cancellationToken);
         }
 
         public RootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request)
@@ -434,26 +404,6 @@ namespace Nest
         public Task<SearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken cancellationToken = default)
         {
             return DoRequestAsync<ISearchShardsRequest, SearchShardsResponse>(request, request.RequestParameters, cancellationToken);
-        }
-
-        public TermVectorsResponse TermVectors(ITermVectorsRequest request)
-        {
-            return DoRequest<ITermVectorsRequest, TermVectorsResponse>(request, request.RequestParameters);
-        }
-
-        public Task<TermVectorsResponse> TermVectorsAsync(ITermVectorsRequest request, CancellationToken cancellationToken = default)
-        {
-            return DoRequestAsync<ITermVectorsRequest, TermVectorsResponse>(request, request.RequestParameters, cancellationToken);
-        }
-
-        public UpdateResponse Update(IUpdateRequest request)
-        {
-            return DoRequest<IUpdateRequest, UpdateResponse>(request, request.RequestParameters);
-        }
-
-        public Task<UpdateResponse> UpdateAsync(IUpdateRequest request, CancellationToken cancellationToken = default)
-        {
-            return DoRequestAsync<IUpdateRequest, UpdateResponse>(request, request.RequestParameters, cancellationToken);
         }
 
         public UpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request)

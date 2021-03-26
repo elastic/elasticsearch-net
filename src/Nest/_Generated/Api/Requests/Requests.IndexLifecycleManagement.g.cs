@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -119,12 +120,34 @@ namespace Nest
 		protected IMoveToStepRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementMoveToStep;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
+		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
+		protected override bool IsEmpty => CurrentStep is null && NextStep is null;
 		///<summary>/_ilm/move/{index}</summary>
         public MoveToStepRequest(IndexName index) : base(r => r.Required("index", index))
 		{
+		}
+
+		[JsonPropertyName("current_step")]
+		public StepKey? CurrentStep
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("next_step")]
+		public StepKey? NextStep
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
 		}
 	}
 
@@ -138,12 +161,23 @@ namespace Nest
 		protected IPutLifecycleRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementPutLifecycle;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => false;
+		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
+		protected override bool IsEmpty => Policy is null;
 		///<summary>/_ilm/policy/{policy}</summary>
         public PutLifecycleRequest(Name policy) : base(r => r.Optional("policy", policy))
 		{
+		}
+
+		[JsonPropertyName("policy")]
+		public Policy? Policy
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
 		}
 	}
 

@@ -17,37 +17,30 @@
 // TODO - RUN INSTRUCTIONS
 //
 // ------------------------------------------------
-using System.Text.Json.Serialization;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
-    public class AggregationRange
+    public class SearchableSnapshotsClearCacheRequestParameters : RequestParameters<SearchableSnapshotsClearCacheRequestParameters>
     {
-        [JsonPropertyName("from")]
-        public double From { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
+        public int StubB { get => Q<int>("stub_b"); set => Q("stub_b", value); }
+    }
 
-        [JsonPropertyName("key")]
-        public string Key { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
+    public class SearchableSnapshotsMountRequestParameters : RequestParameters<SearchableSnapshotsMountRequestParameters>
+    {
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
-        [JsonPropertyName("to")]
-        public double To { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
+        public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+
+        public string? Storage { get => Q<string?>("storage"); set => Q("storage", value); }
+    }
+
+    public class SearchableSnapshotsStatsRequestParameters : RequestParameters<SearchableSnapshotsStatsRequestParameters>
+    {
+        public int StubB { get => Q<int>("stub_b"); set => Q("stub_b", value); }
     }
 }

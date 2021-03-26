@@ -21,6 +21,13 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
+	public class IndexAddBlockDescriptor : RequestDescriptorBase<IndexAddBlockDescriptor, IndexAddBlockRequestParameters, IIndexAddBlockRequest>, IIndexAddBlockRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesAddBlock;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+	}
+
 	public class AnalyzeDescriptor : RequestDescriptorBase<AnalyzeDescriptor, AnalyzeRequestParameters, IAnalyzeRequest>, IAnalyzeRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesAnalyze;

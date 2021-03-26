@@ -21,6 +21,18 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest
 {
+	public enum IndexBlockOptions
+	{
+		[EnumMember(Value = "metadata")]
+		Metadata,
+		[EnumMember(Value = "read")]
+		Read,
+		[EnumMember(Value = "read_only")]
+		ReadOnly,
+		[EnumMember(Value = "write")]
+		Write
+	}
+
 	public enum ShardRoutingState
 	{
 		[EnumMember(Value = "UNASSIGNED")]

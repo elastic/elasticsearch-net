@@ -94,4 +94,15 @@ namespace Nest
 		{
 		}
 	}
+
+	public class WaitForActiveShards : Union<int, WaitForActiveShardOptions>
+	{
+		public WaitForActiveShards(int item) : base(item)
+		{
+		}
+
+		public WaitForActiveShards(WaitForActiveShardOptions item) : base(item)
+		{
+		}
+	}
 }

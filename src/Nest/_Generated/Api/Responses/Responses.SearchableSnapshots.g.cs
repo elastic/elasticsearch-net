@@ -17,20 +17,36 @@
 // TODO - RUN INSTRUCTIONS
 //
 // ------------------------------------------------
-using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Nest;
-using System.Threading.Tasks;
-using Tests.Domain;
-using Tests.Framework.EndpointTests;
+using System;
+using System.Text.Json.Serialization;
 
-namespace Tests.Urls.TextStructure
+namespace Nest
 {
-    public class TextStructureFindStructureUrlTests : UrlTestsBase
+    public class SearchableSnapshotsClearCacheResponse : ResponseBase
     {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_text_structure/find_structure").Request(c => c.TextStructure.FindStructure(new FindStructureRequest())).RequestAsync(c => c.TextStructure.FindStructureAsync(new FindStructureRequest()));
+        [JsonPropertyName("stub")]
+        public int Stub { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
+    public class SearchableSnapshotsMountResponse : ResponseBase
+    {
+    }
+
+    public class SearchableSnapshotsStatsResponse : ResponseBase
+    {
+        [JsonPropertyName("stub")]
+        public int Stub { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
         }
     }
 }

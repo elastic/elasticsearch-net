@@ -75,6 +75,45 @@ namespace Nest
     {
     }
 
+    public abstract class EqlSearchResponseBase : ResponseBase
+    {
+        [JsonPropertyName("is_partial")]
+        public bool IsPartial { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("is_running")]
+        public bool IsRunning { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("took")]
+        public int Took { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+
+        [JsonPropertyName("timed_out")]
+        public bool TimedOut { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
     public abstract class IndicesResponseBase : AcknowledgedResponseBase
     {
     }
@@ -89,24 +128,6 @@ namespace Nest
 
     public abstract class WriteResponseBase : ResponseBase
     {
-        [JsonPropertyName("_id")]
-        public string Id { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("_index")]
-        public string Index { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
         [JsonPropertyName("_primary_term")]
         public long PrimaryTerm { get; 
 #if NET5_0
@@ -118,24 +139,6 @@ namespace Nest
 
         [JsonPropertyName("_seq_no")]
         public long SeqNo { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("_type")]
-        public string Type { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("_version")]
-        public long Version { get; 
 #if NET5_0
             init;
 #else

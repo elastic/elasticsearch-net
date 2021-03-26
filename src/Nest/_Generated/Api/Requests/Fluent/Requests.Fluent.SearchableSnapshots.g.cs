@@ -21,10 +21,24 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
-	public class FindStructureDescriptor : RequestDescriptorBase<FindStructureDescriptor, FindStructureRequestParameters, IFindStructureRequest>, IFindStructureRequest
+	public class SearchableSnapshotsClearCacheDescriptor : RequestDescriptorBase<SearchableSnapshotsClearCacheDescriptor, SearchableSnapshotsClearCacheRequestParameters, ISearchableSnapshotsClearCacheRequest>, ISearchableSnapshotsClearCacheRequest
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.TextStructureFindStructure;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SearchableSnapshotsClearCache;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+	}
+
+	public class SearchableSnapshotsMountDescriptor : RequestDescriptorBase<SearchableSnapshotsMountDescriptor, SearchableSnapshotsMountRequestParameters, ISearchableSnapshotsMountRequest>, ISearchableSnapshotsMountRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SearchableSnapshotsMount;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+	}
+
+	public class SearchableSnapshotsStatsDescriptor : RequestDescriptorBase<SearchableSnapshotsStatsDescriptor, SearchableSnapshotsStatsRequestParameters, ISearchableSnapshotsStatsRequest>, ISearchableSnapshotsStatsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SearchableSnapshotsStats;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 	}
 }

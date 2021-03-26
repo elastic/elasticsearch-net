@@ -77,8 +77,8 @@ namespace Nest
 #endif
         }
 
-        [JsonPropertyName("description")]
-        public string Description { get; 
+        [JsonPropertyName("create_time_date_time")]
+        public DateTimeOffset CreateTimeDateTime { get; 
 #if NET5_0
             init;
 #else
@@ -86,8 +86,8 @@ namespace Nest
 #endif
         }
 
-        [JsonPropertyName("version")]
-        public string Version { get; 
+        [JsonPropertyName("description")]
+        public string Description { get; 
 #if NET5_0
             init;
 #else

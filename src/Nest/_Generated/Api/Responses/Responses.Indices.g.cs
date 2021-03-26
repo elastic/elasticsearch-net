@@ -22,6 +22,18 @@ using System.Text.Json.Serialization;
 
 namespace Nest
 {
+    public class IndexAddBlockResponse : AcknowledgedResponseBase
+    {
+        [JsonPropertyName("shards_acknowledged")]
+        public bool ShardsAcknowledged { get; 
+#if NET5_0
+            init;
+#else
+            internal set; 
+#endif
+        }
+    }
+
     public class AnalyzeResponse : ResponseBase
     {
     }

@@ -31,7 +31,6 @@ test-results/*
 *.DotSettings.user
 obj/
 [Rr]elease*/
-!docs/release-notes
 _ReSharper*/
 _NCrunch*/
 [Tt]est[Rr]esult*
@@ -91,4 +90,3 @@ project.lock.json
 # temporary location for doc generation
 docs-temp
 *.binlog
-dotnet-tool/*

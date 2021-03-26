@@ -25,6 +25,19 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
+    public class IndexAddBlockRequestParameters : RequestParameters<IndexAddBlockRequestParameters>
+    {
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcardOptions? ExpandWildcards { get => Q<ExpandWildcardOptions?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
     public class AnalyzeRequestParameters : RequestParameters<AnalyzeRequestParameters>
     {
     }
@@ -51,6 +64,8 @@ namespace Nest
         public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public class CloseIndexRequestParameters : RequestParameters<CloseIndexRequestParameters>
@@ -65,7 +80,7 @@ namespace Nest
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public class CreateIndexRequestParameters : RequestParameters<CreateIndexRequestParameters>
@@ -76,7 +91,7 @@ namespace Nest
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public class DeleteIndexRequestParameters : RequestParameters<DeleteIndexRequestParameters>
@@ -191,6 +206,8 @@ namespace Nest
         public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public class GetIndexRequestParameters : RequestParameters<GetIndexRequestParameters>
@@ -293,7 +310,7 @@ namespace Nest
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public class PutAliasRequestParameters : RequestParameters<PutAliasRequestParameters>
@@ -316,6 +333,8 @@ namespace Nest
         public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
     }
 
     public class UpdateIndexSettingsRequestParameters : RequestParameters<UpdateIndexSettingsRequestParameters>
@@ -383,7 +402,7 @@ namespace Nest
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public int? WaitForActiveShards { get => Q<int?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public class SegmentsRequestParameters : RequestParameters<SegmentsRequestParameters>
@@ -412,7 +431,7 @@ namespace Nest
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public class SplitIndexRequestParameters : RequestParameters<SplitIndexRequestParameters>
@@ -421,7 +440,7 @@ namespace Nest
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 
     public class IndicesStatsRequestParameters : RequestParameters<IndicesStatsRequestParameters>

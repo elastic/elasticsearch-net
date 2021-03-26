@@ -27,21 +27,31 @@ namespace Nest
 {
     public class EqlDeleteRequestParameters : RequestParameters<EqlDeleteRequestParameters>
     {
-        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
     }
 
     public class EqlGetRequestParameters : RequestParameters<EqlGetRequestParameters>
     {
-        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+        public Time? KeepAlive { get => Q<Time?>("keep_alive"); set => Q("keep_alive", value); }
+
+        public Time? WaitForCompletionTimeout { get => Q<Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
     }
 
     public class EqlGetStatusRequestParameters : RequestParameters<EqlGetStatusRequestParameters>
     {
-        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
     }
 
     public class EqlSearchRequestParameters : RequestParameters<EqlSearchRequestParameters>
     {
-        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public Time? KeepAlive { get => Q<Time?>("keep_alive"); set => Q("keep_alive", value); }
+
+        public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
+
+        public Time? WaitForCompletionTimeout { get => Q<Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
     }
 }

@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Text.Json.Serialization;
 
 #nullable restore
@@ -36,9 +37,9 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("epoch")]
 		private EpochMillis? _epoch = default;
 		[JsonInclude, JsonPropertyName("hhmmss")]
-		private DateString? _hhmmss = default;
+		private DateTimeOffset? _hhmmss = default;
 		[JsonInclude, JsonPropertyName("hms")]
-		private DateString? _hms = default;
+		private DateTimeOffset? _hms = default;
 		[JsonInclude, JsonPropertyName("i")]
 		private string? _i = default;
 		[JsonInclude, JsonPropertyName("init")]
@@ -108,9 +109,9 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("time")]
 		private EpochMillis? _time = default;
 		[JsonInclude, JsonPropertyName("timestamp")]
-		private DateString? _timestamp = default;
+		private DateTimeOffset? _timestamp = default;
 		[JsonInclude, JsonPropertyName("ts")]
-		private DateString? _ts = default;
+		private DateTimeOffset? _ts = default;
 		[JsonInclude, JsonPropertyName("u")]
 		private string? _u = default;
 		[JsonInclude, JsonPropertyName("unassign")]
@@ -127,7 +128,7 @@ namespace Nest
 		public string? Relo => _relo ?? _shardsRelocating ?? _r ?? _shards_relocating;
 		public string? Shards => _shards ?? _shardsTotal ?? _shards_total ?? _t ?? _sh;
 		public string? Status => _st ?? _status;
-		public DateString? Timestamp => _timestamp ?? _hhmmss ?? _ts ?? _hms;
+		public DateTimeOffset? Timestamp => _timestamp ?? _hhmmss ?? _ts ?? _hms;
 		public string? Unassign => _unassign ?? _shardsUnassigned ?? _u ?? _shards_unassigned;
 	}
 }
