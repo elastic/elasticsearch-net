@@ -9,6 +9,17 @@ type SkipSection = All | Section of string | Sections of string list
 type SkipFile = SkipFile of string 
 
 let SkipList = dict<SkipFile,SkipSection> [
+
+    // Need to implement cluster settings cleanup
+    SkipFile "cluster.put_settings/10_basic.yml", All
+    
+    
+    
+    
+    
+    
+    
+    
     // These send empty strings for required parameters
     // TODO i THINK this is now supported
     SkipFile "ml/explain_data_frame_analytics.yml", Section "Test neither job id nor body"

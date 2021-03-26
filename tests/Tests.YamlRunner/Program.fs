@@ -126,7 +126,7 @@ let runMain (parsed:ParseResults<Arguments>) = async {
         
     let (client, revision, version) = validateRevisionParams endpoint version namedSuite
     
-    let! locateResults = Commands.LocateTests version revision directory file
+    let! locateResults = Commands.LocateTests namedSuite version revision directory file
     
     if locateOnly then
         Environment.Exit <| if (locateResults |> List.isEmpty) then 1 else 0

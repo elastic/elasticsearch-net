@@ -9,6 +9,7 @@ open System.IO
 open ShellProgressBar
 open Tests.YamlRunner.TestsReader
 open Tests.YamlRunner
+open Tests.YamlRunner.Models
 
 let private barOptions = 
     ProgressBarOptions(
@@ -25,15 +26,38 @@ let private subBarOptions =
         ProgressCharacter = '─',
         CollapseWhenFinished = true
     )
+ 
+//temporary measure while the rest-resources-zip flattens the two suites
+let private platinumFolders = [
+    "aggregate-metrics"; "async_search"; "constant_keyword";
+    "deprecation"; "license"; "privileges"; "rollup";
+    "security"; "sql"; "token"; "users"; "voting_only_node";
+    "analytics"; "authenticate"; "data_science"; "graph";
+    "ml"; "role_mapping"
+    // On 7.x there is search under x-pack too but we skip it for now
+    // https://github.com/elastic/elasticsearch/tree/7.x/x-pack/plugin/src/test/resources/rest-api-spec/test/search
+    // Since it involves one test 
+    //"search";
+    "set_security_user"; "ssl"; "transform"; "vectors";
+    "wildcard"; "api_key"; "change_password"; "data_stream";
+    "indices.freeze"; "monitoring"; "roles"; "searchable_snapshots";
+    "snapshot"; "text_structure"; "unsigned_long"; "versionfield";
+    "xpack";
+]
 
-type LocateResults = { Folder: string; Paths: FileInfo list } 
+type LocateResults = { Folder: string; Paths: FileInfo list }
 
-let LocateTests version revision directoryFilter fileFilter = async {
+let LocateTests (namedSuite:TestSuite) version revision directoryFilter fileFilter = async {
     let! resourcesZip = TestsDownloader.DownloadBuildInformation version revision
     let unpackedLocation = TestsDownloader.Unzip resourcesZip version revision
     let folders =
         (DirectoryInfo <| Path.Combine(unpackedLocation, "rest-api-spec", "test")).GetDirectories()
         |> Array.filter(fun d -> directoryFilter|> Option.isNone || directoryFilter |> Option.exists(fun f -> d.Name = f))
+        |> Array.filter(fun d ->
+            match namedSuite with
+            | Platinum -> platinumFolders |> List.contains d.Name
+            | Free -> platinumFolders |> List.contains d.Name |> not
+        )
         |> Array.map(fun dir ->
             let files =
                 dir.GetFiles()
