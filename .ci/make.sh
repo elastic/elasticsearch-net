@@ -136,7 +136,7 @@ docker run \
  --name test-runner \
  --volume $REPO_BINDING \
  --rm \
- elastic/elasticsearch-net \
+ ${product} \
  /bin/bash -c "./build.sh $TASK ${TASK_ARGS[*]} && chown -R $(id -u):$(id -g) ."
  
 # ------------------------------------------------------- #
