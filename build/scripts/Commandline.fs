@@ -102,6 +102,7 @@ Execution hints can be provided anywhere on the command line
     type PassedArguments = {
         NonInteractive: bool;
         SkipTests: bool;
+        SkipReleaseNotes: bool;
         GenDocs: bool;
         Seed: int;
         RandomArguments: string list;
@@ -127,6 +128,7 @@ Execution hints can be provided anywhere on the command line
                x <> "skiptests" && 
                x <> "gendocs" && 
                x <> "skipdocs" && 
+               x <> "skip-release-notes" && 
                x <> "non-interactive" && 
                not (x.StartsWith("seed:")) && 
                not (x.StartsWith("random:")) && 
@@ -150,6 +152,7 @@ Execution hints can be provided anywhere on the command line
         let parsed = {
             NonInteractive = args |> List.exists (fun x -> x = "non-interactive")
             SkipTests = skipTests
+            SkipReleaseNotes = skipTests
             GenDocs = not skipDocs && (args |> List.exists (fun x -> x = "gendocs") || target = "build" || target = "documentation") 
             Seed = 
                 match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
