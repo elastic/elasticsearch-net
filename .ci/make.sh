@@ -68,7 +68,7 @@ case $CMD in
         fi
         echo -e "\033[36;1mTARGET: assemble artefact $VERSION\033[0m"
         TASK=release
-        TASK_ARGS=("$VERSION" "$output_folder" "skiptests")
+        TASK_ARGS=("$VERSION" "$output_folder" "skiptests" "skip-release-notes")
         ;;
     codegen)
         if [ -v $VERSION ]; then

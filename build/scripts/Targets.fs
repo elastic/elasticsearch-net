@@ -81,7 +81,8 @@ module Main =
 
         conditional "nuget-pack-versioned" (isCanary) <| fun _ -> Build.VersionedPack artifactsVersion
 
-        conditional "generate-release-notes" (not isCanary)  <| fun _ -> ReleaseNotes.GenerateNotes buildVersions
+        conditional "generate-release-notes" (not isCanary && not parsed.SkipReleaseNotes) <| fun _ ->
+            ReleaseNotes.GenerateNotes buildVersions
         
         target "validate-artifacts" <| fun _ -> Versioning.ValidateArtifacts artifactsVersion
         
