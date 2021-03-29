@@ -87,7 +87,7 @@ case $CMD in
             exit 1
         fi
         echo -e "\033[36;1mTARGET: generate docs for $VERSION\033[0m"
-        TASK=codegen
+        TASK=documentation
         # VERSION is BRANCH here for now
         TASK_ARGS=("$VERSION" "$codegen_folder")
         ;;
