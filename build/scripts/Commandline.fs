@@ -203,6 +203,7 @@ Execution hints can be provided anywhere on the command line
         | "codegen" :: branch :: tail  ->
             { parsed with CommandArguments = CodeGen { Branch = branch }; RemainingArguments = tail }
         
+        | ["set-version"; version] -> { parsed with CommandArguments = SetVersion { Version = version; OutputLocation = None }; }
         | ["release"; version] -> { parsed with CommandArguments = SetVersion { Version = version; OutputLocation = None }; }
         | ["release"; version; path] ->
             if (not <| System.IO.Directory.Exists path) then failwithf "'%s' is not an existing directory" (Path.getFullName path)
