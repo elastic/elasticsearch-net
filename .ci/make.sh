@@ -106,6 +106,7 @@ case $CMD in
         TASK="set-version"
         # VERSION is BRANCH here for now
         TASK_ARGS=("$VERSION")
+        REPO_BINDING="$repo:/sln"
         ;;
     *)
         echo -e "\nUsage:\n\t $CMD is not supported right now\n"
