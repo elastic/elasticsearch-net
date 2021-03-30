@@ -44,6 +44,7 @@ module Versioning =
         let doc_current =
             match globalJson.doc_current with
             | "master" -> "master"
+            | s when s.EndsWith(".x") -> sprintf "%i.x" version.Major
             | _ -> sprintf "%i.%i" version.Major version.Minor
         let doc_branch =
             match globalJson.doc_current with
