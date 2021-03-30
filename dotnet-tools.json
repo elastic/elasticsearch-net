@@ -19,6 +19,12 @@
       "commands": [
         "nupkg-validator"
       ]
+    },
+    "release-notes": {
+      "version": "0.3.1",
+      "commands": [
+        "release-notes"
+      ]
     }
   }
 }
