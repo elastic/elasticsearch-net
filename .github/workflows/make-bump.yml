@@ -41,5 +41,4 @@ jobs:
 
       - name: Run build script
         run: >
-          dotnet-tool/release-notes apply-labels --version ${{ github.event.inputs.version }} ${{ github.event.organization.name }} ${{ github.event.repository.name }} 
-            --token ${{ secrets.GITHUB_TOKEN }} --backportlabelformat "Backport BRANCH" 
+          dotnet-tool/release-notes apply-labels --version ${{ github.event.inputs.version }} ${{ github.event.organization.login }} ${{ github.event.repository.name }} --token ${{ secrets.GITHUB_TOKEN }} --backportlabelformat "Backport BRANCH" 
