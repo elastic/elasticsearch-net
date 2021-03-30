@@ -1,0 +1,45 @@
+name: Version Bump
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'The branch to perform bump on'
+        required: true
+      version:
+        description: 'The new version number to branch'
+        required: true
+
+jobs:
+  createBranches:
+    name: "Branch ${{ github.event.inputs.version }} Clients"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: "${{ github.event.inputs.branch }}"
+      - run: "./.ci/make.sh bump ${{ github.event.inputs.version }}"
+        name: "Bump ${{ github.event.inputs.version }} on ${{ github.event.inputs.branch }}"
+      - name: "Version bump PR ${{ github.event.inputs.version }}"
+        # fixate to known release. 
+        uses: peter-evans/create-pull-request@052fc72b4198ba9fbc81b818c6e1859f747d49a8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: "feature/${{ github.event.inputs.branch }}/bump-version"
+          base: "${{ github.event.inputs.version }}"
+          delete-branch: true
+          commit-message: "[version] ${{ github.event.inputs.version }} bump"
+          title: '[version] ${{ github.event.inputs.version }} bump'
+          body: |
+            Updates ${{ github.event.inputs.branch }} to version ${{ github.event.inputs.version }}. 
+          labels: "infra,code-gen"
+      # Add version and backport labels automatically
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.100'
+      - name: Install dotnet-script
+        run: dotnet tool install release-notes --tool-path dotnet-tool
+
+      - name: Run build script
+        run: >
+          dotnet-tool/release-notes apply-labels --version ${{ github.event.inputs.version }} ${{ github.event.organization.name }} ${{ github.event.repository.name }} 
+            --token ${{ secrets.GITHUB_TOKEN }} --backportlabelformat "Backport BRANCH" 

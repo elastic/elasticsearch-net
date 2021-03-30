@@ -103,7 +103,7 @@ case $CMD in
             exit 1
         fi
         echo -e "\033[36;1mTARGET: bump to version $VERSION\033[0m"
-        TASK=bump
+        TASK="set-version"
         # VERSION is BRANCH here for now
         TASK_ARGS=("$VERSION")
         ;;
