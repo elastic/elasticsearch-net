@@ -32,3 +32,14 @@ jobs:
           body: |
             Updates ${{ github.event.inputs.branch }} to version ${{ github.event.inputs.version }}. 
           labels: "infra,code-gen"
+      # Add version and backport labels automatically
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.100'
+      - name: Install dotnet-script
+        run: dotnet tool install release-notes --tool-path dotnet-tool
+
+      - name: Run build script
+        run: >
+          dotnet-tool/release-notes apply-labels --version ${{ github.event.inputs.version }} ${{ github.event.organization.name }} ${{ github.event.repository.name }} 
+            --token ${{ secrets.GITHUB_TOKEN }} --backportlabelformat "Backport BRANCH" 
