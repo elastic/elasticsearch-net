@@ -112,6 +112,9 @@ module Main =
         
         command "codegen" [ ] <| fun _ -> ReposTooling.GenerateApi parsed
         
+        target "set-version" <| fun _ -> Versioning.WriteVersion buildVersions
+        
+        
         command "rest-spec-tests" [ ] <| fun _ ->
             ReposTooling.RestSpecTests parsed.RemainingArguments
 
