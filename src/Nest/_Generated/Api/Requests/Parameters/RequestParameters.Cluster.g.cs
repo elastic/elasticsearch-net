@@ -34,7 +34,9 @@ namespace Nest
 
     public class ClusterDeleteComponentTemplateRequestParameters : RequestParameters<ClusterDeleteComponentTemplateRequestParameters>
     {
-        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
     public class ClusterDeleteVotingConfigExclusionsRequestParameters : RequestParameters<ClusterDeleteVotingConfigExclusionsRequestParameters>
@@ -49,7 +51,11 @@ namespace Nest
 
     public class ClusterGetComponentTemplateRequestParameters : RequestParameters<ClusterGetComponentTemplateRequestParameters>
     {
-        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
     }
 
     public class ClusterGetSettingsRequestParameters : RequestParameters<ClusterGetSettingsRequestParameters>

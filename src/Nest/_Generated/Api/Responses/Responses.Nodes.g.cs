@@ -40,14 +40,6 @@ namespace Nest
 
     public class ReloadSecureSettingsResponse : NodesResponseBase
     {
-        [JsonPropertyName("cluster_name")]
-        public string ClusterName { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
     }
 
     public class NodesStatsResponse : NodesResponseBase

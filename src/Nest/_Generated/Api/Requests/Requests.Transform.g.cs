@@ -76,6 +76,9 @@ namespace Nest
 
 		[JsonIgnore]
 		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
+
+		[JsonIgnore]
+		public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IGetTransformStatsRequest, GetTransformStatsRequest>))]
@@ -118,7 +121,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Description is null;
+		protected override bool IsEmpty => Description is null && Dest is null && Pivot is null && Source is null && Sync is null;
 		///<summary>/_transform/_preview</summary>
         public PreviewTransformRequest() : base()
 		{
@@ -126,6 +129,50 @@ namespace Nest
 
 		[JsonPropertyName("description")]
 		public string? Description
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("dest")]
+		public TransformDestination? Dest
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("pivot")]
+		public TransformPivot? Pivot
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source")]
+		public TransformSource? Source
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("sync")]
+		public TransformSyncContainer? Sync
 		{
 			get;
 #if NET5_0
@@ -148,7 +195,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Description is null;
+		protected override bool IsEmpty => Description is null && Dest is null && Pivot is null && Source is null && Sync is null;
 		///<summary>/_transform/{transform_id}</summary>
         public PutTransformRequest(Name transformId) : base(r => r.Required("transform_id", transformId))
 		{
@@ -159,6 +206,50 @@ namespace Nest
 
 		[JsonPropertyName("description")]
 		public string? Description
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("dest")]
+		public TransformDestination? Dest
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("pivot")]
+		public TransformPivot? Pivot
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source")]
+		public TransformSource? Source
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("sync")]
+		public TransformSyncContainer? Sync
 		{
 			get;
 #if NET5_0
@@ -237,7 +328,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Description is null;
+		protected override bool IsEmpty => Description is null && Dest is null && Source is null && Sync is null;
 		///<summary>/_transform/{transform_id}/_update</summary>
         public UpdateTransformRequest(Name transformId) : base(r => r.Required("transform_id", transformId))
 		{
@@ -248,6 +339,39 @@ namespace Nest
 
 		[JsonPropertyName("description")]
 		public string? Description
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("dest")]
+		public TransformDestination? Dest
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source")]
+		public TransformSource? Source
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("sync")]
+		public TransformSyncContainer? Sync
 		{
 			get;
 #if NET5_0

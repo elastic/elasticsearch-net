@@ -25,16 +25,6 @@ using Tests.Framework.EndpointTests;
 
 namespace Tests.Urls.NoNamespace
 {
-    public class BulkUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.PUT("/_bulk").Request(c => c.Bulk(new BulkRequest())).RequestAsync(c => c.BulkAsync(new BulkRequest()));
-            await UrlTester.PUT("/project/_bulk").Request(c => c.Bulk(new BulkRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.BulkAsync(new BulkRequest(Nest.IndexName.From<Project>())));
-        }
-    }
-
     public class ClearScrollUrlTests : UrlTestsBase
     {
         [U]
@@ -142,6 +132,7 @@ namespace Tests.Urls.NoNamespace
         public override async Task Urls()
         {
             await UrlTester.POST("/_pit").Request(c => c.OpenPointInTime(new OpenPointInTimeRequest())).RequestAsync(c => c.OpenPointInTimeAsync(new OpenPointInTimeRequest()));
+            await UrlTester.POST("/_all/_pit").Request(c => c.OpenPointInTime(new OpenPointInTimeRequest(Nest.Indices.All))).RequestAsync(c => c.OpenPointInTimeAsync(new OpenPointInTimeRequest(Nest.Indices.All)));
             await UrlTester.POST("/project/_pit").Request(c => c.OpenPointInTime(new OpenPointInTimeRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.OpenPointInTimeAsync(new OpenPointInTimeRequest(Nest.IndexName.From<Project>())));
         }
     }
@@ -210,15 +201,6 @@ namespace Tests.Urls.NoNamespace
             await UrlTester.POST("/_search_shards").Request(c => c.SearchShards(new SearchShardsRequest())).RequestAsync(c => c.SearchShardsAsync(new SearchShardsRequest()));
             await UrlTester.POST("/_all/_search_shards").Request(c => c.SearchShards(new SearchShardsRequest(Nest.Indices.All))).RequestAsync(c => c.SearchShardsAsync(new SearchShardsRequest(Nest.Indices.All)));
             await UrlTester.POST("/project/_search_shards").Request(c => c.SearchShards(new SearchShardsRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.SearchShardsAsync(new SearchShardsRequest(Nest.IndexName.From<Project>())));
-        }
-    }
-
-    public class TermvectorsUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/project/_termvectors").Request(c => c.TermVectors(new TermVectorsRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.TermVectorsAsync(new TermVectorsRequest(Nest.IndexName.From<Project>())));
         }
     }
 

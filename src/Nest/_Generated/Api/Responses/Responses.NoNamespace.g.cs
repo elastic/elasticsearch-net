@@ -22,36 +22,6 @@ using System.Text.Json.Serialization;
 
 namespace Nest
 {
-    public class BulkResponse : ResponseBase
-    {
-        [JsonPropertyName("errors")]
-        public bool Errors { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("took")]
-        public long Took { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("ingest_took")]
-        public long IngestTook { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-    }
-
     public class ClearScrollResponse : ResponseBase
     {
     }
@@ -87,10 +57,6 @@ namespace Nest
             internal set; 
 #endif
         }
-    }
-
-    public class CreateResponse : WriteResponseBase
-    {
     }
 
     public class DeleteResponse : WriteResponseBase
@@ -310,10 +276,6 @@ namespace Nest
     }
 
     public class SourceResponse : ResponseBase
-    {
-    }
-
-    public class IndexResponse : WriteResponseBase
     {
     }
 
@@ -550,40 +512,6 @@ namespace Nest
     }
 
     public class SearchShardsResponse : ResponseBase
-    {
-    }
-
-    public class TermVectorsResponse : ResponseBase
-    {
-        [JsonPropertyName("found")]
-        public bool Found { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("took")]
-        public long Took { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("_version")]
-        public long Version { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-    }
-
-    public class UpdateResponse : WriteResponseBase
     {
     }
 

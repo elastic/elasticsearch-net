@@ -37,6 +37,8 @@ namespace Nest
         public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
         public int? Size { get => Q<int?>("size"); set => Q("size", value); }
+
+        public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
     }
 
     public class GetTransformStatsRequestParameters : RequestParameters<GetTransformStatsRequestParameters>

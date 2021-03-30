@@ -187,16 +187,8 @@ namespace Nest
         }
     }
 
-    public class ClusterDeleteComponentTemplateResponse : ResponseBase
+    public class ClusterDeleteComponentTemplateResponse : AcknowledgedResponseBase
     {
-        [JsonPropertyName("stub")]
-        public int Stub { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
     }
 
     public class ClusterDeleteVotingConfigExclusionsResponse : ResponseBase
@@ -431,24 +423,6 @@ namespace Nest
 
     public class ClusterStatsResponse : NodesResponseBase
     {
-        [JsonPropertyName("cluster_name")]
-        public string ClusterName { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("cluster_uuid")]
-        public string ClusterUuid { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
         [JsonPropertyName("status")]
         public ClusterStatus Status { get; 
 #if NET5_0

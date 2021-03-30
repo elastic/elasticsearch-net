@@ -143,5 +143,16 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("fields")]
+		public Array? Fields
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
 	}
 }

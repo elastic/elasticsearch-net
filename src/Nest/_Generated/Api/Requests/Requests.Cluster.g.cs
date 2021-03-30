@@ -35,7 +35,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Index is null && Primary is null && Shard is null;
+		protected override bool IsEmpty => Primary is null && Shard is null;
 		///<summary>/_cluster/allocation/explain</summary>
         public ClusterAllocationExplainRequest() : base()
 		{
@@ -46,17 +46,6 @@ namespace Nest
 
 		[JsonIgnore]
 		public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
-
-		[JsonPropertyName("index")]
-		public IndexName? Index
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
 
 		[JsonPropertyName("primary")]
 		public bool? Primary
@@ -91,27 +80,19 @@ namespace Nest
 		protected IClusterDeleteComponentTemplateRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteComponentTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
 		///<summary>/_component_template/{name}</summary>
-        public ClusterDeleteComponentTemplateRequest(Name name) : base(r => r)
+        public ClusterDeleteComponentTemplateRequest(Name name) : base(r => r.Required("name", name))
 		{
 		}
 
 		[JsonIgnore]
-		public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
-		[JsonPropertyName("stub_c")]
-		public string StubC
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
+		[JsonIgnore]
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IClusterDeleteVotingConfigExclusionsRequest, ClusterDeleteVotingConfigExclusionsRequest>))]
@@ -190,32 +171,27 @@ namespace Nest
 		protected IClusterGetComponentTemplateRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetComponentTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
 		///<summary>/_component_template</summary>
         public ClusterGetComponentTemplateRequest() : base()
 		{
 		}
 
 		///<summary>/_component_template/{name}</summary>
-        public ClusterGetComponentTemplateRequest(Name name) : base(r => r)
+        public ClusterGetComponentTemplateRequest(Name name) : base(r => r.Optional("name", name))
 		{
 		}
 
 		[JsonIgnore]
-		public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-		[JsonPropertyName("stub_c")]
-		public string StubC
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
+		[JsonIgnore]
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+		[JsonIgnore]
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IClusterGetSettingsRequest, ClusterGetSettingsRequest>))]

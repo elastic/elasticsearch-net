@@ -24,7 +24,7 @@ namespace Tests.Cluster.ClusterAllocationExplain
 		protected override object ExpectJson =>
 			new
 			{
-				index = "project",
+				//index = "project",
 				shard = 0,
 				primary = true
 			};
@@ -42,7 +42,7 @@ namespace Tests.Cluster.ClusterAllocationExplain
 		protected override ClusterAllocationExplainRequest Initializer =>
 			new()
 			{
-				Index = typeof(Project),
+				//Index = typeof(Project),
 				Shard = 0,
 				Primary = true,
 				IncludeYesDecisions = true

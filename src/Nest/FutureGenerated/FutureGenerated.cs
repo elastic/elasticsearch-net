@@ -90,17 +90,13 @@ namespace Nest
 
 	//public class Refresh { }
 
-	public class WaitForActiveShards { }
+	//public class WaitForActiveShards { }
 
 	public class Types : IUrlParameter
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}
-
-	public class Alias : IUrlParameter
-	{
-		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	}
+	
 
 	public class CategoryId : IUrlParameter
 	{

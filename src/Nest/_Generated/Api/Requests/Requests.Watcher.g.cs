@@ -116,7 +116,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => IgnoreCondition is null && RecordExecution is null;
+		protected override bool IsEmpty => IgnoreCondition is null && RecordExecution is null && SimulatedActions is null && TriggerData is null && Watch is null;
 		///<summary>/_watcher/watch/{id}/_execute</summary>
         public ExecuteWatchRequest(Name id) : base(r => r.Optional("id", id))
 		{
@@ -143,6 +143,39 @@ namespace Nest
 
 		[JsonPropertyName("record_execution")]
 		public bool? RecordExecution
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("simulated_actions")]
+		public SimulatedActions? SimulatedActions
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("trigger_data")]
+		public ScheduleTriggerEvent? TriggerData
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("watch")]
+		public Watch? Watch
 		{
 			get;
 #if NET5_0
@@ -184,7 +217,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => ThrottlePeriod is null;
+		protected override bool IsEmpty => Condition is null && Input is null && ThrottlePeriod is null && Transform is null && Trigger is null;
 		///<summary>/_watcher/watch/{id}</summary>
         public PutWatchRequest(Name id) : base(r => r.Required("id", id))
 		{
@@ -202,8 +235,52 @@ namespace Nest
 		[JsonIgnore]
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
+		[JsonPropertyName("condition")]
+		public ConditionContainer? Condition
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("input")]
+		public InputContainer? Input
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("throttle_period")]
 		public string? ThrottlePeriod
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transform")]
+		public TransformContainer? Transform
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("trigger")]
+		public TriggerContainer? Trigger
 		{
 			get;
 #if NET5_0

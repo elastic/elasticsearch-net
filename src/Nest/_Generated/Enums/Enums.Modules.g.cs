@@ -16,26 +16,24 @@
 //
 // ------------------------------------------------
 
-using System.Threading;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 #nullable restore
 namespace Nest
 {
-	public class TextStructureNamespace : NamespacedClientProxy
+	public enum NumericFielddataFormat
 	{
-		internal TextStructureNamespace(ElasticClient client) : base(client)
-		{
-		}
+		[EnumMember(Value = "array")]
+		Array,
+		[EnumMember(Value = "disabled")]
+		Disabled
+	}
 
-		public FindStructureResponse FindStructure(IFindStructureRequest request)
-		{
-			return DoRequest<IFindStructureRequest, FindStructureResponse>(request, request.RequestParameters);
-		}
-
-		public Task<FindStructureResponse> FindStructureAsync(IFindStructureRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IFindStructureRequest, FindStructureResponse>(request, request.RequestParameters, cancellationToken);
-		}
+	public enum StringFielddataFormat
+	{
+		[EnumMember(Value = "paged_bytes")]
+		PagedBytes,
+		[EnumMember(Value = "disabled")]
+		Disabled
 	}
 }

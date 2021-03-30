@@ -65,7 +65,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Columnar is null && Cursor is null && FetchSize is null && Query is null && TimeZone is null;
+		protected override bool IsEmpty => Columnar is null && Cursor is null && FetchSize is null && Filter is null && Query is null && TimeZone is null;
 		///<summary>/_sql</summary>
         public QuerySqlRequest() : base()
 		{
@@ -98,6 +98,17 @@ namespace Nest
 
 		[JsonPropertyName("fetch_size")]
 		public int? FetchSize
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("filter")]
+		public QueryContainer? Filter
 		{
 			get;
 #if NET5_0
@@ -142,7 +153,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => FetchSize is null && Query is null && TimeZone is null;
+		protected override bool IsEmpty => FetchSize is null && Filter is null && Query is null && TimeZone is null;
 		///<summary>/_sql/translate</summary>
         public TranslateSqlRequest() : base()
 		{
@@ -150,6 +161,17 @@ namespace Nest
 
 		[JsonPropertyName("fetch_size")]
 		public int? FetchSize
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("filter")]
+		public QueryContainer? Filter
 		{
 			get;
 #if NET5_0

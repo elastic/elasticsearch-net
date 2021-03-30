@@ -64,6 +64,8 @@ namespace Nest
 
         RollupNamespace Rollup { get; }
 
+        SearchableSnapshotsNamespace SearchableSnapshots { get; }
+
         SecurityNamespace Security { get; }
 
         SnapshotLifecycleManagementNamespace SnapshotLifecycleManagement { get; }
@@ -74,24 +76,18 @@ namespace Nest
 
         TasksNamespace Tasks { get; }
 
-        TextStructureNamespace TextStructure { get; }
-
         TransformNamespace Transform { get; }
 
         WatcherNamespace Watcher { get; }
 
         XPackNamespace XPack { get; }
 
-        BulkResponse Bulk(IBulkRequest request);
-        Task<BulkResponse> BulkAsync(IBulkRequest request, CancellationToken cancellationToken = default);
         ClearScrollResponse ClearScroll(IClearScrollRequest request);
         Task<ClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken cancellationToken = default);
         ClosePointInTimeResponse ClosePointInTime(IClosePointInTimeRequest request);
         Task<ClosePointInTimeResponse> ClosePointInTimeAsync(IClosePointInTimeRequest request, CancellationToken cancellationToken = default);
         CountResponse Count(ICountRequest request);
         Task<CountResponse> CountAsync(ICountRequest request, CancellationToken cancellationToken = default);
-        CreateResponse Create(ICreateRequest request);
-        Task<CreateResponse> CreateAsync(ICreateRequest request, CancellationToken cancellationToken = default);
         DeleteResponse Delete(IDeleteRequest request);
         Task<DeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default);
         DeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request);
@@ -114,8 +110,6 @@ namespace Nest
         Task<GetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken cancellationToken = default);
         SourceResponse Source(ISourceRequest request);
         Task<SourceResponse> SourceAsync(ISourceRequest request, CancellationToken cancellationToken = default);
-        IndexResponse Index(IIndexRequest request);
-        Task<IndexResponse> IndexAsync(IIndexRequest request, CancellationToken cancellationToken = default);
         RootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request);
         Task<RootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken cancellationToken = default);
         MultiGetResponse MultiGet(IMultiGetRequest request);
@@ -146,10 +140,6 @@ namespace Nest
         Task<SearchResponse> SearchAsync(ISearchRequest request, CancellationToken cancellationToken = default);
         SearchShardsResponse SearchShards(ISearchShardsRequest request);
         Task<SearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken cancellationToken = default);
-        TermVectorsResponse TermVectors(ITermVectorsRequest request);
-        Task<TermVectorsResponse> TermVectorsAsync(ITermVectorsRequest request, CancellationToken cancellationToken = default);
-        UpdateResponse Update(IUpdateRequest request);
-        Task<UpdateResponse> UpdateAsync(IUpdateRequest request, CancellationToken cancellationToken = default);
         UpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request);
         Task<UpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken cancellationToken = default);
     }

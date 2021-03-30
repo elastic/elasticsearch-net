@@ -94,9 +94,6 @@ namespace Nest
 		}
 
 		[JsonIgnore]
-		public string? Actions { get => Q<string?>("actions"); set => Q("actions", value); }
-
-		[JsonIgnore]
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 
 		[JsonIgnore]

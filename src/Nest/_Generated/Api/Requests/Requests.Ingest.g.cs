@@ -106,7 +106,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Description is null && Version is null;
+		protected override bool IsEmpty => Description is null;
 		///<summary>/_ingest/pipeline/{id}</summary>
         public PutPipelineRequest(Id id) : base(r => r.Required("id", id))
 		{
@@ -128,17 +128,6 @@ namespace Nest
 			internal set;
 #endif
 		}
-
-		[JsonPropertyName("version")]
-		public long? Version
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<ISimulatePipelineRequest, SimulatePipelineRequest>))]
@@ -151,9 +140,9 @@ namespace Nest
 		protected ISimulatePipelineRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestSimulate;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
+		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
+		protected override bool IsEmpty => Pipeline is null;
 		///<summary>/_ingest/pipeline/_simulate</summary>
         public SimulatePipelineRequest() : base()
 		{
@@ -166,5 +155,16 @@ namespace Nest
 
 		[JsonIgnore]
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
+
+		[JsonPropertyName("pipeline")]
+		public Pipeline? Pipeline
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
 	}
 }

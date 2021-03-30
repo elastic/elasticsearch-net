@@ -35,7 +35,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Analyzer is null && Explain is null && Normalizer is null;
+		protected override bool IsEmpty => Analyzer is null && CharFilter is null && Explain is null && Filter is null && Normalizer is null;
 		///<summary>/_analyze</summary>
         public AnalyzeRequest() : base()
 		{
@@ -57,8 +57,30 @@ namespace Nest
 #endif
 		}
 
+		[JsonPropertyName("char_filter")]
+		public Array? CharFilter
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("explain")]
 		public bool? Explain
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("filter")]
+		public Array? Filter
 		{
 			get;
 #if NET5_0
@@ -148,6 +170,9 @@ namespace Nest
 
 		[JsonIgnore]
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonIgnore]
+		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<ICloseIndexRequest, CloseIndexRequest>))]
@@ -184,7 +209,7 @@ namespace Nest
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
-		public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<ICreateIndexRequest, CreateIndexRequest>))]
@@ -215,7 +240,7 @@ namespace Nest
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
-		public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IDeleteIndexRequest, DeleteIndexRequest>))]
@@ -547,6 +572,9 @@ namespace Nest
 
 		[JsonIgnore]
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonIgnore]
+		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IGetIndexRequest, GetIndexRequest>))]
@@ -847,7 +875,7 @@ namespace Nest
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
-		public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IPutAliasRequest, PutAliasRequest>))]
@@ -862,7 +890,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => IsWriteIndex is null;
+		protected override bool IsEmpty => Filter is null && IsWriteIndex is null;
 		///<summary>/{index}/_alias/{name}</summary>
         public PutAliasRequest(Indices index, Name name) : base(r => r.Required("index", index).Required("name", name))
 		{
@@ -873,6 +901,17 @@ namespace Nest
 
 		[JsonIgnore]
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonPropertyName("filter")]
+		public QueryContainer? Filter
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonPropertyName("is_write_index")]
 		public bool? IsWriteIndex
@@ -898,7 +937,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => DateDetection is null && NumericDetection is null;
+		protected override bool IsEmpty => AllField is null && DateDetection is null && FieldNamesField is null && IndexField is null && NumericDetection is null && RoutingField is null && SizeField is null && SourceField is null;
 		///<summary>/{index}/_mapping</summary>
         public PutMappingRequest(Indices index) : base(r => r.Optional("index", index))
 		{
@@ -922,6 +961,20 @@ namespace Nest
 		[JsonIgnore]
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
+		[JsonIgnore]
+		public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
+
+		[JsonPropertyName("all_field")]
+		public AllField? AllField
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("date_detection")]
 		public bool? DateDetection
 		{
@@ -933,8 +986,63 @@ namespace Nest
 #endif
 		}
 
+		[JsonPropertyName("field_names_field")]
+		public FieldNamesField? FieldNamesField
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_field")]
+		public IndexField? IndexField
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("numeric_detection")]
 		public bool? NumericDetection
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("routing_field")]
+		public RoutingField? RoutingField
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size_field")]
+		public SizeField? SizeField
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source_field")]
+		public SourceField? SourceField
 		{
 			get;
 #if NET5_0
@@ -1013,7 +1121,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Order is null && Version is null;
+		protected override bool IsEmpty => Mappings is null && Order is null && Version is null;
 		///<summary>/_template/{name}</summary>
         public PutIndexTemplateRequest(Name name) : base(r => r.Required("name", name))
 		{
@@ -1033,6 +1141,17 @@ namespace Nest
 
 		[JsonIgnore]
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonPropertyName("mappings")]
+		public TypeMapping? Mappings
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonPropertyName("order")]
 		public int? Order
@@ -1158,9 +1277,9 @@ namespace Nest
 		protected IRolloverIndexRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRollover;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
+		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
+		protected override bool IsEmpty => Conditions is null;
 		///<summary>/{alias}/_rollover</summary>
         public RolloverIndexRequest(IndexAlias alias) : base(r => r.Required("alias", alias))
 		{
@@ -1184,7 +1303,18 @@ namespace Nest
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
-		public int? WaitForActiveShards { get => Q<int?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+		[JsonPropertyName("conditions")]
+		public RolloverConditions? Conditions
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<ISegmentsRequest, SegmentsRequest>))]
@@ -1281,7 +1411,7 @@ namespace Nest
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
-		public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<ISplitIndexRequest, SplitIndexRequest>))]
@@ -1309,7 +1439,7 @@ namespace Nest
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
-		public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IIndicesStatsRequest, IndicesStatsRequest>))]
@@ -1445,9 +1575,9 @@ namespace Nest
 		protected IValidateQueryRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesValidateQuery;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
+		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
+		protected override bool IsEmpty => Query is null;
 		///<summary>/_validate/query</summary>
         public ValidateQueryRequest() : base()
 		{
@@ -1493,5 +1623,16 @@ namespace Nest
 
 		[JsonIgnore]
 		public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
+
+		[JsonPropertyName("query")]
+		public QueryContainer? Query
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
 	}
 }

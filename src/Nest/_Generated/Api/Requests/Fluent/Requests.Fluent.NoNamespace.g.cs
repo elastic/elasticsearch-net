@@ -21,13 +21,6 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
-	public class BulkDescriptor : RequestDescriptorBase<BulkDescriptor, BulkRequestParameters, IBulkRequest>, IBulkRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => false;
-	}
-
 	public class ClearScrollDescriptor : RequestDescriptorBase<ClearScrollDescriptor, ClearScrollRequestParameters, IClearScrollRequest>, IClearScrollRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClearScroll;
@@ -46,13 +39,6 @@ namespace Nest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-	}
-
-	public class CreateDescriptor : RequestDescriptorBase<CreateDescriptor, CreateRequestParameters, ICreateRequest>, ICreateRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCreate;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
 	}
 
@@ -130,13 +116,6 @@ namespace Nest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetSource;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-	}
-
-	public class IndexDescriptor : RequestDescriptorBase<IndexDescriptor, IndexRequestParameters, IIndexRequest>, IIndexRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceIndex;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
 	}
 
@@ -241,20 +220,6 @@ namespace Nest
 	public class SearchShardsDescriptor : RequestDescriptorBase<SearchShardsDescriptor, SearchShardsRequestParameters, ISearchShardsRequest>, ISearchShardsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchShards;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-	}
-
-	public class TermVectorsDescriptor : RequestDescriptorBase<TermVectorsDescriptor, TermVectorsRequestParameters, ITermVectorsRequest>, ITermVectorsRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermvectors;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-	}
-
-	public class UpdateDescriptor : RequestDescriptorBase<UpdateDescriptor, UpdateRequestParameters, IUpdateRequest>, IUpdateRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdate;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 	}
