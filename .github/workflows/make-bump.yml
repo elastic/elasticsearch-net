@@ -11,7 +11,7 @@ on:
 
 jobs:
   createBranches:
-    name: "Branch ${{ github.event.inputs.version }} Clients"
+    name: "Bump ${{ github.event.inputs.version }} on branch ${{ github.event.inputs.branch }} "
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,7 +25,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: "feature/${{ github.event.inputs.branch }}/bump-version"
-          base: "${{ github.event.inputs.version }}"
+          base: "${{ github.event.inputs.branch }}"
           delete-branch: true
           commit-message: "[version] ${{ github.event.inputs.version }} bump"
           title: '[version] ${{ github.event.inputs.version }} bump'
