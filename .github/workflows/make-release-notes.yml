@@ -67,8 +67,9 @@ jobs:
         run: |
           output=$(dotnet-tool/release-notes "${{ github.event.organization.login }}" "${{ github.event.repository.name }}" current-version --query "${{ matrix.branch }}" --version 0.0.1 --token ${{ secrets.GITHUB_TOKEN }} --releasetagformat VERSION)
           readarray -t lines <<< "$output"
-          echo "::set-output name=current::$(echo $lines[0])"
-          echo "::set-output name=next::$(echo $lines[1])"
+          echo "::set-output name=current::$(echo ${lines[0]})"
+          echo "::set-output name=next::$(echo ${lines[1]})"
+          echo $output
           
       - name: Display versions
         run: |
