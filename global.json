@@ -4,7 +4,7 @@
     "rollForward": "latestFeature",
     "allowPrerelease": false
   },
-  "version": "7.12.0",
+  "version": "7.13.0",
   "doc_current": "7.x",
   "doc_branch": "7.x"
 }
