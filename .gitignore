@@ -88,4 +88,4 @@ project.lock.json
 # temporary location for doc generation
 docs-temp
 *.binlog
-dotnet-tool
+dotnet-tool/*
