@@ -73,6 +73,7 @@ jobs:
       - name: Generate release notes
         run: |
           dotnet-tool/release-notes "${{ github.event.organization.login }}" "${{ github.event.repository.name }}" --version ${{ steps.versions.outputs.next }} --token ${{ secrets.GITHUB_TOKEN }} --format asciidoc --output docs/release-notes
+          git status
       - name: "PR ${{ matrix.branch }}"
         # fixate to known release. 
         uses: peter-evans/create-pull-request@052fc72b4198ba9fbc81b818c6e1859f747d49a8
