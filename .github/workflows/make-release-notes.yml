@@ -72,5 +72,5 @@ jobs:
           
       - name: Display versions
         run: |
-          echo "Current version is ${{ steps.version.outputs.current }} "
-          echo "Next version is ${{ steps.version.outputs.next }} "
+          echo "Current version is ${{ steps.versions.outputs.current }} "
+          echo "Next version is ${{ steps.versions.outputs.next }} "
