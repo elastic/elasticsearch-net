@@ -195,7 +195,7 @@ namespace Nest
 		internal static ApiUrls MachineLearningOpenJob = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_open"});
 		internal static ApiUrls MachineLearningPostCalendarEvents = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/events"});
 		internal static ApiUrls MachineLearningPostJobData = new ApiUrls(new[]{"_ml/anomaly_detectors/{job_id}/_data"});
-		internal static ApiUrls MachineLearningPreviewDatafeed = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_preview"});
+		internal static ApiUrls MachineLearningPreviewDatafeed = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}/_preview", "_ml/datafeeds/_preview"});
 		internal static ApiUrls MachineLearningPutCalendar = new ApiUrls(new[]{"_ml/calendars/{calendar_id}"});
 		internal static ApiUrls MachineLearningPutCalendarJob = new ApiUrls(new[]{"_ml/calendars/{calendar_id}/jobs/{job_id}"});
 		internal static ApiUrls MachineLearningPutDatafeed = new ApiUrls(new[]{"_ml/datafeeds/{datafeed_id}"});
