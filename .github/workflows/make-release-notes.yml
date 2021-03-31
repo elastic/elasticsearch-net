@@ -31,11 +31,11 @@ jobs:
       - id: set-matrix
         name: conditional command
         run: |
-          if [[ "${{ github.event.inputs.branch }}" != "" ]]]; then
+          if [[ "${{ github.event.inputs.branch }}" != "" ]]; then
              echo "::set-output name=matrix::['${{ github.event.inputs.branch }}']"
-          elif [[ "${{ github.event.inputs.branch }}" == "" ]]]; then 
+          elif [[ "${{ github.event.inputs.branch }}" == "" ]]; then 
              echo "::set-output name=matrix::['7.x']"
-          elif [[ -f "branches.json" ]]]; then 
+          elif [[ -f "branches.json" ]]; then 
             echo "::set-output name=matrix::$(cat branches.json)"
           else 
             echo "::set-output name=matrix::[]"
