@@ -681,8 +681,8 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	///<summary>Request options for PreviewDatafeed <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
 	public class PreviewDatafeedRequestParameters : RequestParameters<PreviewDatafeedRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for PutCalendar <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html</para></summary>
