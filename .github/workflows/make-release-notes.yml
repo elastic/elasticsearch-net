@@ -5,13 +5,8 @@ on:
       branch:
         description: 'The branch to generate release notes on'
         required: true
-        
-  push:
-    paths-ignore:
-      - 'README.md'
-      - '.editorconfig'
-    branches:
-      - 'feature/7.x/release-notes-workflow'
+  schedule:
+    - cron: "0 0/12 * * *"
 
 jobs:
 
@@ -33,8 +28,6 @@ jobs:
         run: |
           if [[ "${{ github.event.inputs.branch }}" != "" ]]; then
              echo "::set-output name=matrix::['${{ github.event.inputs.branch }}']"
-          elif [[ "${{ github.event.inputs.branch }}" == "" ]]; then 
-             echo "::set-output name=matrix::['7.x']"
           elif [[ -f "branches.json" ]]; then 
             echo "::set-output name=matrix::$(cat branches.json)"
           else 
