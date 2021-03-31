@@ -1,0 +1,67 @@
+name: Release-Notes
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'The branch to perform bump on'
+        required: true
+        
+  push:
+    paths-ignore:
+      - 'README.md'
+      - '.editorconfig'
+    branches:
+      - 'feature/7.x/release-notes-workflow'
+
+jobs:
+
+  active-branches:
+    runs-on: ubuntu-latest
+    env:
+      TASK_BRANCH: ${{ github.event.inputs.branch }}
+
+    steps:
+      - id: dump-branches
+        name: get branches from artifacts api
+        if: ${{ ! github.event.inputs.branch }}
+        run: |
+          curl -s "https://artifacts-api.elastic.co/v1/branches"  | jq "[ .branches[] | select(. | startswith(\"6\") | not) ]" --compact-output
+          curl -s "https://artifacts-api.elastic.co/v1/branches"  | jq "[ .branches[] | select(. | startswith(\"6\") | not) ]" --compact-output > branches.json
+          
+      - id: set-matrix
+        name: conditional command
+        run: |
+          if [[ "${{ github.event.inputs.branch }}" != "" ]]]; then
+             echo "::set-output name=matrix::['${{ github.event.inputs.branch }}']"
+          elif [[ "${{ github.event.inputs.branch }}" == "" ]]]; then 
+             echo "::set-output name=matrix::['7.x']"
+          elif [[ -f "branches.json" ]]]; then 
+            echo "::set-output name=matrix::$(cat branches.json)"
+          else 
+            echo "::set-output name=matrix::[]"
+          fi
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      
+  release-notes:
+    name: Generate
+    needs: active-branches
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        branch: ${{ fromJson(needs.active-branches.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: "${{ matrix.branch }}"
+          
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.100'
+      - name: Install dotnet-script
+        run: dotnet tool install release-notes --tool-path dotnet-tool
+
+      - name: Find versions for branch
+        run: >
+          dotnet-tool/release-notes "${{ github.event.organization.login }}" "${{ github.event.repository.name }}" current-version --query "${{ matrix.branch }}" --version 0.0.1 --token ${{ secrets.GITHUB_TOKEN }} --releasetagformat VERSION
