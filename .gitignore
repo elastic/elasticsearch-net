@@ -82,6 +82,8 @@ launchSettings.json
 project.lock.json
 .vs
 .vs/*
+.ionide
+.ionide/*
 
 .idea/
 *.sln.iml
