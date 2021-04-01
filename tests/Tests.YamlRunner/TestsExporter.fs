@@ -147,5 +147,3 @@ let PrettyPrintResults (outputFile:string) =
                 printfn "" 
                 
         Console.ResetColor()
-    
-    

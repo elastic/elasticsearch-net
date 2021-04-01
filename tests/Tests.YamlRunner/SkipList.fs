@@ -9,6 +9,15 @@ type SkipSection = All | Section of string | Sections of string list
 type SkipFile = SkipFile of string 
 
 let SkipList = dict<SkipFile,SkipSection> [
+
+    // Need to implement cluster settings cleanup
+    SkipFile "cluster.put_settings/10_basic.yml", All
+    
+    SkipFile "ml/set_upgrade_mode.yml", All
+    SkipFile "ml/inference_crud.yml", Section "Test update model alias with model id referring to missing model"
+    SkipFile "ml/start_stop_datafeed.yml", All
+    SkipFile "ml/post_data.yml", All
+    
     // These send empty strings for required parameters
     // TODO i THINK this is now supported
     SkipFile "ml/explain_data_frame_analytics.yml", Section "Test neither job id nor body"
@@ -19,14 +28,14 @@ let SkipList = dict<SkipFile,SkipSection> [
     // 7.x only
     // We skip the generation of this API till one of the later minors
     SkipFile "indices.upgrade/10_basic.yml", All
-    
-    // We can not handle nested namespace yet `cat.ml.jobs`
-    SkipFile "ml/job_cat_apis.yml", All
-    SkipFile "ml/datafeed_cat_apis.yml", All
+    // Sets a dictionary to null, we need to see if we can backport this from master
+    SkipFile "search.aggregation/240_max_buckets.yml", All
+    SkipFile "search.aggregation/180_percentiles_tdigest_metric.yml", Section "Invalid params test"
+    SkipFile "search.aggregation/190_percentiles_hdr_metric.yml", Section "Invalid params test"
 
     // - Failed: Assert operation NumericAssert Length invalidated_api_keys "Long" Reason: Expected 2.000000 = 3.000000        
     SkipFile "api_key/11_invalidation.yml", Section "Test invalidate api key by realm name"
-    
+
     // Test looks for "testnode.crt", but "ca.crt" is returned first
     SkipFile "ssl/10_basic.yml", Section "Test get SSL certificates"
     
@@ -168,6 +177,8 @@ let SkipList = dict<SkipFile,SkipSection> [
     
     //TODO has dates without strings which trips up our yaml parser
     SkipFile "runtime_fields/40_date.yml", All
+    // double / int in object comparison
+    SkipFile "runtime_fields/60_boolean.yml", All
     
     // TODO fails to parse ulong dynamically in tests 
     SkipFile "unsigned_long/10_basic.yml", All
@@ -177,15 +188,9 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "unsigned_long/50_script_values.yml", All
     SkipFile "unsigned_long/60_collapse.yml", All
     
-    // Temporary disabling this test while https://github.com/elastic/elasticsearch/pull/66794
-    SkipFile "search.highlight/20_fvh.yml", All
-
-    // TODO investigate post 7.11.0
-    SkipFile "nodes.info/10_basic.yml", Section "node_info role test"
+    SkipFile "ml/inference_processor.yml", Section "Test simulate"
 
     // TODO investigate post 7.11.0
     SkipFile "nodes.info/10_basic.yml", Section "node_info role test"
 
 ]
-
-
