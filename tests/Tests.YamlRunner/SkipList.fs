@@ -49,6 +49,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     (SkipFile "ml/jobs_crud.yml", Sections [
         "Test reopen job resets the finished time"
         "Test put job after closing state index"
+        "Test close job with body params"
     ])
     
     SkipFile "rollup/put_job.yml", Section "Test put job with templates"
@@ -113,8 +114,10 @@ let SkipList = dict<SkipFile,SkipSection> [
     ]
     // Possible bad test setup, Cannot open job [start-stop-datafeed-job] because it has already been opened
     // resource_already_exists_exception, task with id {job-start-stop-datafeed-job-foo-2} already exist
-    SkipFile "ml/start_stop_datafeed.yml",
-        Section "Test start datafeed when persistent task allocation disabled"
+    SkipFile "ml/start_stop_datafeed.yml", Sections [
+        "Test start datafeed when persistent task allocation disabled"
+        "Test start given field without mappings"
+    ]
     // Indexing step doesn't appear to work (getting total.hits=0)
     SkipFile "monitoring/bulk/10_basic.yml",
         Section "Bulk indexing of monitoring data on closed indices should throw an export exception"
