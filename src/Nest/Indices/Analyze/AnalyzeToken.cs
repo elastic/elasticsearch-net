@@ -15,7 +15,7 @@ namespace Nest
 		[DataMember(Name ="position")]
 		public long Position { get; internal set; }
 
-		[DataMember(Name ="position_length")]
+		[DataMember(Name ="positionLength")]
 		public long? PositionLength { get; internal set; }
 
 		[DataMember(Name ="start_offset")]
