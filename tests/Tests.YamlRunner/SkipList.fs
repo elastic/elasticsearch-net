@@ -44,13 +44,6 @@ let SkipList = dict<SkipFile,SkipSection> [
     
     // We don't expose the overload with just id, warrants investigation in the code generator
     SkipFile "ml/delete_forecast.yml", Section "Test delete all where no forecast_id is set"
-
-    // Leaves .ml-state index closed after running
-    (SkipFile "ml/jobs_crud.yml", Sections [
-        "Test reopen job resets the finished time"
-        "Test put job after closing state index"
-        "Test close job with body params"
-    ])
     
     SkipFile "rollup/put_job.yml", Section "Test put job with templates"
     
@@ -83,15 +76,19 @@ let SkipList = dict<SkipFile,SkipSection> [
         "Test get transform stats on missing transform"
         "Test get multiple transform stats where one does not have a task"
     ]
-           
-    SkipFile "ml/jobs_crud.yml", Section "Test reopen job resets the finished time"
     // Invalid license makes subsequent tests fail
     SkipFile "license/20_put_license.yml", All
+
+    // Various failures
     // Test tries to match on map from body, but Go keys are not sorted
     SkipFile "ml/jobs_crud.yml", Sections [
+        "Test reopen job resets the finished time"
+        "Test put job after closing state index"
+        "Test close job with body params"
         "Test job with rules"
         "Test put job with model_memory_limit as number"
         "Test put job with model_memory_limit as string and lazy open"
+        "Test reopen job resets the finished time"
     ]
     // Test gets stuck every time
     SkipFile "ml/jobs_get_stats.yml", All
