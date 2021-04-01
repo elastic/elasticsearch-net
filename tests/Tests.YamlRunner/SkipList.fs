@@ -44,12 +44,6 @@ let SkipList = dict<SkipFile,SkipSection> [
     
     // We don't expose the overload with just id, warrants investigation in the code generator
     SkipFile "ml/delete_forecast.yml", Section "Test delete all where no forecast_id is set"
-
-    // Leaves .ml-state index closed after running
-    (SkipFile "ml/jobs_crud.yml", Sections [
-        "Test reopen job resets the finished time"
-        "Test put job after closing state index"
-    ])
     
     SkipFile "rollup/put_job.yml", Section "Test put job with templates"
     
@@ -82,15 +76,19 @@ let SkipList = dict<SkipFile,SkipSection> [
         "Test get transform stats on missing transform"
         "Test get multiple transform stats where one does not have a task"
     ]
-           
-    SkipFile "ml/jobs_crud.yml", Section "Test reopen job resets the finished time"
     // Invalid license makes subsequent tests fail
     SkipFile "license/20_put_license.yml", All
+
+    // Various failures
     // Test tries to match on map from body, but Go keys are not sorted
     SkipFile "ml/jobs_crud.yml", Sections [
+        "Test reopen job resets the finished time"
+        "Test put job after closing state index"
+        "Test close job with body params"
         "Test job with rules"
         "Test put job with model_memory_limit as number"
         "Test put job with model_memory_limit as string and lazy open"
+        "Test reopen job resets the finished time"
     ]
     // Test gets stuck every time
     SkipFile "ml/jobs_get_stats.yml", All
@@ -113,8 +111,10 @@ let SkipList = dict<SkipFile,SkipSection> [
     ]
     // Possible bad test setup, Cannot open job [start-stop-datafeed-job] because it has already been opened
     // resource_already_exists_exception, task with id {job-start-stop-datafeed-job-foo-2} already exist
-    SkipFile "ml/start_stop_datafeed.yml",
-        Section "Test start datafeed when persistent task allocation disabled"
+    SkipFile "ml/start_stop_datafeed.yml", Sections [
+        "Test start datafeed when persistent task allocation disabled"
+        "Test start given field without mappings"
+    ]
     // Indexing step doesn't appear to work (getting total.hits=0)
     SkipFile "monitoring/bulk/10_basic.yml",
         Section "Bulk indexing of monitoring data on closed indices should throw an export exception"
@@ -196,7 +196,7 @@ let SkipList = dict<SkipFile,SkipSection> [
 
     // TODO investigate post 7.11.0
     SkipFile "nodes.info/10_basic.yml", Section "node_info role test"
-
+   
     // TODO investigate
     // Failed: Assert operation Match snapshot.shards.failed Value 0 Reason: expected: 0.0 actual: 1.0
     // {"snapshot":{"snapshot":"snapshot","indices":["docs_shared_cache"],"shards":{"total":1,"failed":1,"successful":0}}}
