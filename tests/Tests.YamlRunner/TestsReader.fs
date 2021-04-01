@@ -15,7 +15,6 @@ open System.IO
 open SharpYaml.Serialization
 open Tests.YamlRunner.Models
 open Tests.YamlRunner.Skips
-open Tests.YamlRunner.TestsLocator
 
 let private tryPick<'a> (map:YamlMap) key =
     let found, value =  map.TryGetValue key
@@ -218,10 +217,10 @@ type YamlTestDocument = {
     Tests: YamlTest list
 }
 
-let private toDocument (yamlInfo:YamlFileInfo) (sections:YamlTestSection list) =
+let private toDocument (yamlInfo:FileInfo) (sections:YamlTestSection list) =
     let setups = (sections |> List.tryPick (fun s -> match s with | Setup s -> Some s | _ -> None)) 
     {
-        FileInfo = FileInfo yamlInfo.File
+        FileInfo = yamlInfo
         Setup = Some <| (TestSuiteBootstrap.DefaultSetup @ (setups |> Option.defaultValue []))
         Teardown = sections |> List.tryPick (fun s -> match s with | Teardown s -> Some s | _ -> None)
         Tests = sections |> List.map (fun s -> match s with | YamlTest s -> Some s | _ -> None) |> List.choose id
@@ -229,22 +228,22 @@ let private toDocument (yamlInfo:YamlFileInfo) (sections:YamlTestSection list) =
 
 type YamlTestFolder = { Folder: string; Files: YamlTestDocument list }
 
-let rawDeseralize (file:YamlFileInfo) (sectionString:string) (serializer: Serializer) =
+let rawDeseralize (file:FileInfo) (sectionString:string) (serializer: Serializer) =
     let file =
-        let fi = FileInfo <| file.File
-        let di = fi.Directory
-        sprintf "%s/%s" di.Name fi.Name
+        let di = file.Directory
+        sprintf "%s/%s" di.Name file.Name
     let r () = (sectionString, serializer.Deserialize<Dictionary<string, Object>> sectionString)
     match SkipList.TryGetValue <| SkipFile(file) with
     | (true, All) -> None
     | _ -> Some <| r()
 
-let ReadYamlFile (yamlInfo:YamlFileInfo) =
+let ReadYamlFile (yamlInfo:FileInfo) =
     
     let serializer = Serializer()
     let sections =
         let r e message = raise <| Exception(message, e)
-        Regex.Split(yamlInfo.Yaml, @"---\s*?\r?\n")
+        let yaml = File.ReadAllText(yamlInfo.FullName)
+        Regex.Split(yaml, @"---\s*?\r?\n")
         // Filter out comments starting with #
         |> Seq.map (fun s ->
             s.Split("\n")
@@ -257,14 +256,14 @@ let ReadYamlFile (yamlInfo:YamlFileInfo) =
         |> Seq.map (fun sectionString ->
             try
                 rawDeseralize yamlInfo sectionString serializer
-            with | e -> r e <| sprintf "parseError %s: %s %s %s" yamlInfo.File e.Message Environment.NewLine sectionString
+            with | e -> r e <| sprintf "parseError %s: %s %s %s" yamlInfo.FullName e.Message Environment.NewLine sectionString
         )
         |> Seq.choose id
         |> Seq.filter (fun (s, _) -> s <> null)
         |> Seq.map (fun (s, document) ->
             try
                 mapDocument document
-            with | e -> r e <| sprintf "mapError %s: %O %O %O" yamlInfo.File (e.Message) Environment.NewLine s
+            with | e -> r e <| sprintf "mapError %s: %O %O %O" yamlInfo.FullName (e.Message) Environment.NewLine s
         )
         |> Seq.toList
         |> toDocument yamlInfo

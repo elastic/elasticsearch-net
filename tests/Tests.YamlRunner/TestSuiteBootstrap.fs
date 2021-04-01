@@ -18,161 +18,242 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
             responses
             |> Seq.filter (fun r -> not r.Success && r.HttpStatusCode <> Nullable.op_Implicit 404)
             |> Seq.tryHead
+    let isXPackName name =
+        match name with
+        | ".watches"
+        | "logstash-index-template"
+        | ".logstash-management"
+        | "security_audit_log"
+        | ".slm-history"
+        | ".async-search"
+        | "saml-service-provider"
+        | "ilm-history"
+        | "logs"
+        | "logs-settings"
+        | "logs-mappings"
+        | "metrics"
+        | "metrics-settings"
+        | "metrics-mappings"
+        | "synthetics"
+        | "synthetics-settings"
+        | "synthetics-mappings"
+        | ".snapshot-blob-cache"
+        | ".deprecation-indexing-template" -> false
+        | ".deprecation-indexing-mappings" -> false
+        | ".deprecation-indexing-settings" -> false
+        | s when s.StartsWith(".monitoring") -> false
+        | s when s.StartsWith(".watch") -> false
+        | s when s.StartsWith(".data-frame") -> false
+        | s when s.StartsWith(".ml-") -> false
+        | s when s.StartsWith(".transform-") -> false
+        | _ -> true
+            
+    let getAndDeleteFilter (setup:_ -> DynamicResponse) (delete:(_ -> DynamicResponse)) filter = 
+        setup().Body
+        |> Seq.map (fun kv ->
+            match filter with
+            | Some filter ->
+                match filter kv.Key kv.Value with
+                | false -> Some <| delete(kv.Key, kv.Value)
+                | _ -> None
+            | None -> Some <| delete(kv.Key, kv.Value)
+        )
+        |> Seq.choose id
+        |> Seq.toList
+        
+    let getAndDelete setup delete = getAndDeleteFilter setup delete None
     
-    let deleteAll () =
+    let wipeRollupJobs () = 
+        let getJobs = client.Rollup.GetJob<DynamicResponse> "_all"
+        let deleteJobs =
+            getJobs.Get<string[]> "jobs.config.id"
+            |> Seq.collect (fun jobId -> [
+                 client.Rollup.StopJob<DynamicResponse>(jobId)
+                 client.Rollup.DeleteJob<DynamicResponse>(jobId)
+            ])
+            |> Seq.toList
+        [getJobs] @ deleteJobs
+        
+    let waitForPendingTasks (filter:string) =
+        let call () =   
+            client.Cat.Tasks<StringResponse>(CatTasksRequestParameters(Detailed=true)).Body.Split("\n")
+            |> Array.filter (fun l -> l.Contains(filter, StringComparison.OrdinalIgnoreCase))
+            |> Array.length
+        let start = DateTime.UtcNow
+        let e = start.AddSeconds(30.)
+        while (call() > 0 && DateTime.UtcNow < e) do ignore()
+        
+        
+    let waitForPendingRollupTasks () = waitForPendingTasks "xpack/rollup/job"
+    
+    let deleteAllSLMPolicies () =
+        getAndDelete
+           (fun _ -> client.SnapshotLifecycleManagement.GetSnapshotLifecycle<DynamicResponse>())
+           (fun (name, _) -> client.SnapshotLifecycleManagement.DeleteSnapshotLifecycle<DynamicResponse> name)
+    
+    let wipeSnapshots () = 
+        getAndDelete
+           (fun _ -> client.Snapshot.GetRepository<DynamicResponse>())
+           (fun (name, value) ->
+                if value.Get<string> "type" = "fs" then 
+                    client.Snapshot.Delete<DynamicResponse> (name, "*") |> ignore
+                client.Snapshot.DeleteRepository<DynamicResponse> name
+           )
+    
+    let wipeDataStreams () = 
+        client.Indices.DeleteDataStreamForAll<DynamicResponse> "*" 
+    
+    let wipeAllIndices () =
         let dp = DeleteIndexRequestParameters()
-        dp.SetQueryString("expand_wildcards", "open,closed,hidden")
-        client.Indices.Delete<DynamicResponse>("*,-.ds-ilm-history-*", dp)
-    let templates () =
-        client.Cat.Templates<StringResponse>("*", CatTemplatesRequestParameters(Headers=["name";"order"].ToArray()))
+        dp.SetQueryString("expand_wildcards", "all")
+        client.Indices.Delete<DynamicResponse>("*,-.ds-.watcher-history-*,-.ds-ilm-history-*", dp)
+        
+    let deleteTemplates () =
+        client.Cat.Templates<StringResponse>("*", CatTemplatesRequestParameters(Headers=["name"].ToArray()))
             .Body.Split("\n")
             |> Seq.map(fun line -> line.Split(" ", StringSplitOptions.RemoveEmptyEntries))
-            |> Seq.filter(fun line -> line.Length = 2)
-            |> Seq.map(fun tokens -> tokens.[0], Int32.Parse(tokens.[1]))
-            //assume templates with order 100 or higher are defaults
-            |> Seq.filter(fun (_, order) -> order < 100)
-            |> Seq.filter(fun (name, _) -> not(String.IsNullOrWhiteSpace(name)) && not(name.StartsWith(".")) && name <> "security-audit-log")
+            |> Seq.filter(fun line -> line.Length = 1)
+            |> Seq.map(fun tokens -> tokens.[0].Trim())
+            |> Seq.filter isXPackName
             //TODO template does not accept comma separated list but is documented as such
-            |> Seq.map(fun (template, _) ->
+            |> Seq.map(fun template ->
                 let result = client.Indices.DeleteTemplateForAll<DynamicResponse>(template)
                 match result.Success with
                 | true -> result
                 | false -> client.Indices.DeleteTemplateV2ForAll<DynamicResponse>(template)
             )
             |> Seq.toList
-                
-    match suite with
-    | Free ->
-        let snapshots =
-            client.Cat.Snapshots<StringResponse>(CatSnapshotsRequestParameters(Headers=["id,repository"].ToArray()))
-                .Body.Split("\n")
-                |> Seq.map(fun line -> line.Split " ")
-                |> Seq.filter(fun tokens -> tokens.Length = 2)
-                |> Seq.map(fun tokens -> (tokens.[0].Trim(), tokens.[1].Trim()))
-                |> Seq.filter(fun (id, repos) -> not(String.IsNullOrWhiteSpace(id)) && not(String.IsNullOrWhiteSpace(repos)))
-                //TODO template does not accept comma separated list but is documented as such
-                |> Seq.map(fun (id, repos) -> client.Snapshot.Delete<DynamicResponse>(repos, id))
-                |> Seq.toList
-                
-        let deleteRepositories = client.Snapshot.DeleteRepository<DynamicResponse>("*")
-        firstFailure <| [deleteAll()] @ templates() @ snapshots @ [deleteRepositories]
+            
+    let deleteComponentTemplates () =
+        let result = client.Cluster.GetComponentTemplate<DynamicResponse>()
+        let names = result.Get<string[]>("component_templates.name")
+        names
+        |> Seq.filter isXPackName
+        |> Seq.map client.Cluster.DeleteComponentTemplate<DynamicResponse>
+        |> Seq.toList
         
-    | Platinum ->
-        firstFailure <| seq {
-            //delete all templates
+    let wipeTemplateForXPack () = deleteTemplates() @ deleteComponentTemplates()
+    
+    let wipeClusterSettings () =
+        let settings = client.Cluster.GetSettings<DynamicResponse>()
+        settings
+    
+    let deleteAllILMPolicies () =
+        let preserved = [
+            "ilm-history-ilm-policy";
+            "slm-history-ilm-policy";
+            "watch-history-ilm-policy"; 
+            "ml-size-based-ilm-policy"; 
+            "logs"; 
+            "metrics"
+        ]
+        getAndDeleteFilter
+           (fun _ -> client.Snapshot.GetRepository<DynamicResponse>())
+           (fun (name, value) ->
+                if value.Get<string> "type" = "fs" then 
+                    client.Snapshot.Delete<DynamicResponse> (name, "*") |> ignore
+                client.Snapshot.DeleteRepository<DynamicResponse> name
+           )
+           (Some (fun name value -> preserved |> List.contains name ))
+           
+    let deleteAllAutoFollowPatterns () = 
+        let result = client.CrossClusterReplication.GetAutoFollowPattern<DynamicResponse>()
+        let names = result.Get<string[]>("patterns.name")
+        names
+        |> Seq.map client.CrossClusterReplication.DeleteAutoFollowPattern<DynamicResponse>
+        |> Seq.toList
+        
+    let deleteAllTasks () = 
+        let getJobs = client.Tasks.List<DynamicResponse> ()
+        let cancelJobs = 
+            getJobs.Get<DynamicDictionary> "nodes"
+            |> Seq.collect(fun kv -> kv.Value.Get<DynamicDictionary> "tasks")
+            |> Seq.map (fun kv ->
+                match kv.Value.Get<bool> "cancellable" with
+                | true -> Some <| client.Tasks.Cancel<DynamicResponse>(kv.Key)
+                | _ -> None
+            )
+            |> Seq.choose id
+            |> Seq.toList
+        
+        [getJobs] @ cancelJobs
+    
+    let stopTransforms () = 
+        let transforms = client.Transform.Get<DynamicResponse> "_all"
+        let stopTransforms =
+            transforms.Get<string[]> "transforms.id"
+            |> Seq.collect (fun id -> [
+                 client.Transform.Stop<DynamicResponse> id
+                 client.Transform.Delete<DynamicResponse> id
+            ])
+            |> Seq.toList
+        [transforms] @ stopTransforms
+        
+    let closeMLJobs () = 
+        let closeJobs = client.MachineLearning.CloseJob<DynamicResponse>("_all", PostData.Empty)
+        let getJobs = client.MachineLearning.GetJobs<DynamicResponse> "_all"
+        let deleteJobs =
+            getJobs.Get<string[]> "jobs.job_id"
+            |> Seq.map (fun jobId -> client.MachineLearning.DeleteJob<DynamicResponse>(jobId))
+            |> Seq.toList
+        [closeJobs; getJobs] @ deleteJobs
+        
+    let deleteMLDatafeeds () =
+        let stopFeeds = client.MachineLearning.StopDatafeed<DynamicResponse>("_all", null)
+        let getFeeds = client.MachineLearning.GetDatafeeds<DynamicResponse> ()
+        let deleteFeeds =
+            getFeeds.Get<string[]> "datafeeds.datafeed_id"
+            |> Seq.map (fun jobId -> client.MachineLearning.DeleteDatafeed<DynamicResponse>(jobId))
+            |> Seq.toList
+        [stopFeeds; getFeeds] @ deleteFeeds
+        
+    let waitForClusterStateUpdatesToFinish () =
+        let call () =   
+            client.Cluster.PendingTasks<DynamicResponse>().Get<string[]>("tasks.source")
+            |> Array.length
+        let start = DateTime.UtcNow
+        let e = start.AddSeconds(30.)
+        while (call() > 0 && DateTime.UtcNow < e) do ignore()
+    
+    firstFailure <| seq {
+        if suite = Platinum then
+            yield! wipeRollupJobs()
+            waitForPendingRollupTasks()
+            yield! deleteAllSLMPolicies()
+        
+        yield! wipeSnapshots()
+        
+        if suite = Platinum then
+            yield wipeDataStreams()
+        
+        yield wipeAllIndices()
+        
+        yield! wipeTemplateForXPack()
+        
+        yield wipeClusterSettings()
+        
+        if suite = Platinum then
+            yield! deleteAllILMPolicies()
+            yield! deleteAllAutoFollowPatterns()
+            yield! deleteAllTasks()
+         
+        // deleting feeds before jobs is important
+        yield! deleteMLDatafeeds()
             
-            yield! templates()
+        yield client.IndexLifecycleManagement.RemovePolicy<DynamicResponse>("_all")
+        
+        yield! closeMLJobs()
             
-            yield client.Watcher.Delete<DynamicResponse>("my_watch")
+        yield! deleteAllTasks()
+        
+        yield! stopTransforms()
             
-            let deleteNonReserved (setup:_ -> DynamicResponse) (delete:(_ -> DynamicResponse)) = 
-                setup().Body
-                |> Seq.map (fun kv ->
-                    match kv.Value.Get<bool> "metadata._reserved" with
-                    | false -> Some <| delete(kv.Key)
-                    | _ -> None
-                )
-                |> Seq.choose id
-                |> Seq.toList
             
-            yield! //roles
-                deleteNonReserved
-                   (fun _ -> client.Security.GetRole<DynamicResponse>())
-                   (fun role -> client.Security.DeleteRole<DynamicResponse> role)
-                   
-            yield! //users
-                deleteNonReserved
-                   (fun _ -> client.Security.GetUser<DynamicResponse>())
-                   (fun user -> client.Security.DeleteUser<DynamicResponse> user)
-            
-            yield! //privileges
-                deleteNonReserved
-                   (fun _ -> client.Security.GetPrivileges<DynamicResponse>())
-                   (fun priv -> client.Security.DeletePrivileges<DynamicResponse>(priv, "_all"))
-                
-            // deleting feeds before jobs is important
-            let mlDataFeeds = 
-                let stopFeeds = client.MachineLearning.StopDatafeed<DynamicResponse>("_all", null)
-                let getFeeds = client.MachineLearning.GetDatafeeds<DynamicResponse> ()
-                let deleteFeeds =
-                    getFeeds.Get<string[]> "datafeeds.datafeed_id"
-                    |> Seq.map (fun jobId -> client.MachineLearning.DeleteDatafeed<DynamicResponse>(jobId))
-                    |> Seq.toList
-                [stopFeeds; getFeeds] @ deleteFeeds
-            yield! mlDataFeeds
-                
-            yield client.IndexLifecycleManagement.RemovePolicy<DynamicResponse>("_all")
-            
-            let mlJobs = 
-                let closeJobs = client.MachineLearning.CloseJob<DynamicResponse>("_all", PostData.Empty)
-                let getJobs = client.MachineLearning.GetJobs<DynamicResponse> "_all"
-                let deleteJobs =
-                    getJobs.Get<string[]> "jobs.job_id"
-                    |> Seq.map (fun jobId -> client.MachineLearning.DeleteJob<DynamicResponse>(jobId))
-                    |> Seq.toList
-                [closeJobs; getJobs] @ deleteJobs
-            yield! mlJobs
-                
-            let rollupJobs = 
-                let getJobs = client.Rollup.GetJob<DynamicResponse> "_all"
-                let deleteJobs =
-                    getJobs.Get<string[]> "jobs.config.id"
-                    |> Seq.collect (fun jobId -> [
-                         client.Rollup.StopJob<DynamicResponse>(jobId)
-                         client.Rollup.DeleteJob<DynamicResponse>(jobId)
-                    ])
-                    |> Seq.toList
-                [getJobs] @ deleteJobs
-            yield! rollupJobs
-                
-            let tasks =
-                let getJobs = client.Tasks.List<DynamicResponse> ()
-                let cancelJobs = 
-                    getJobs.Get<DynamicDictionary> "nodes"
-                    |> Seq.collect(fun kv -> kv.Value.Get<DynamicDictionary> "tasks")
-                    |> Seq.map (fun kv ->
-                        match kv.Value.Get<bool> "cancellable" with
-                        | true -> Some <| client.Tasks.Cancel<DynamicResponse>(kv.Key)
-                        | _ -> None
-                    )
-                    |> Seq.choose id
-                    |> Seq.toList
-                
-                [getJobs] @ cancelJobs
-            yield! tasks
-            
-            let transforms =
-                let transforms = client.Transform.Get<DynamicResponse> "_all"
-                let stopTransforms =
-                    transforms.Get<string[]> "transforms.id"
-                    |> Seq.collect (fun id -> [
-                         client.Transform.Stop<DynamicResponse> id
-                         client.Transform.Delete<DynamicResponse> id
-                    ])
-                    |> Seq.toList
-                [transforms] @ stopTransforms
-            yield! transforms
-                
-            let yellowStatus = Nullable.op_Implicit WaitForStatus.Yellow
-            yield client.Cluster.Health<DynamicResponse>(ClusterHealthRequestParameters(WaitForStatus=yellowStatus))
-            
-            let indices =
-                let dp = DeleteIndexRequestParameters()
-                dp.SetQueryString("expand_wildcards", "open,closed,hidden")
-                client.Indices.Delete<DynamicResponse>("*,-.ds-ilm-history-*", dp)
-            yield indices
-            
+        if suite = Platinum then
             let data = PostData.String @"{""password"":""x-pack-test-password"", ""roles"":[""superuser""]}"
             yield client.Security.PutUser<DynamicResponse>("x_pack_rest_user", data)
-            
-            let refreshAll =
-                let rp = RefreshRequestParameters()
-                rp.SetQueryString("expand_wildcards", "open,closed,hidden")
-                client.Indices.Refresh<DynamicResponse>( "_all", rp)
-                
-            yield refreshAll
-            
-            yield client.Cluster.Health<DynamicResponse>(ClusterHealthRequestParameters(WaitForStatus=yellowStatus))
-        }
+        
+        waitForClusterStateUpdatesToFinish()
+    }
+    
 )]
-
