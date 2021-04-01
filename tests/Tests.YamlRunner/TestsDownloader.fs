@@ -90,8 +90,8 @@ let DownloadBuildInformation (version:SemVer.Version) revision = async {
             let package =
                 match packages with
                 | None -> raise <| Exception(sprintf "Can not locate SNAPSHOT for hash: %s" revision)
-                | Some packages -> packages.SelectToken(sprintf "$.['rest-resources-zip-%s.zip'].url" "8.0.0-SNAPSHOT")
-                
+                | Some packages -> packages.SelectToken(sprintf "$.['rest-resources-zip-%O.zip'].url" version)
+            
             package.Value<string>()
         | _ ->
             printfn "Found version %O locating released zip" version
