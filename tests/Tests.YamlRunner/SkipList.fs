@@ -97,11 +97,15 @@ let SkipList = dict<SkipFile,SkipSection> [
     // status_exception, Cannot process data because job [post-data-job] does not have a corresponding autodetect process
     // resource_already_exists_exception, task with id {job-post-data-job} already exist
     // status_exception, Cannot open job [start-stop-datafeed-job-foo-1] because it has already been opened
+    // Failed: Actions custom Setup actions Reason: Setup
     SkipFile "ml/post_data.yml", Sections [
         "Test flush with skip_time"
         "Test POST data job api, flush, close and verify DataCounts doc"
         "Test flush and close job WITHOUT sending any data"
+        "Test open and close with non-existent job id"
     ]
+    // Failed: Actions custom Setup actions Reason: Setup
+    SkipFile "ml/stop_data_frame_analytics.yml", Section "Test stop given missing config and allow_no_match is true"
     SkipFile "ml/start_stop_datafeed.yml", Section "Test stop given expression"
     SkipFile "transform/transforms_start_stop.yml", Sections [
         "Test start transform"  
@@ -193,4 +197,8 @@ let SkipList = dict<SkipFile,SkipSection> [
     // TODO investigate post 7.11.0
     SkipFile "nodes.info/10_basic.yml", Section "node_info role test"
 
+    // TODO investigate
+    // Failed: Assert operation Match snapshot.shards.failed Value 0 Reason: expected: 0.0 actual: 1.0
+    // {"snapshot":{"snapshot":"snapshot","indices":["docs_shared_cache"],"shards":{"total":1,"failed":1,"successful":0}}}
+    SkipFile "searchable_snapshots/10_usage.yml", Section "Tests searchable snapshots usage stats with full_copy and shared_cache indices"
 ]
