@@ -1,0 +1,7 @@
+{
+  "ml.preview_datafeed": {
+    "methods": [
+      "GET"
+    ]
+  }
+}
