@@ -195,7 +195,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     
     SkipFile "ml/inference_processor.yml", Section "Test simulate"
 
-    // TODO investigate post 7.11.0
+    // TODO: Review again soon once zip includes updated test file from https://github.com/elastic/elasticsearch/pull/71084
     SkipFile "nodes.info/10_basic.yml", Section "node_info role test"
    
     // TODO investigate
