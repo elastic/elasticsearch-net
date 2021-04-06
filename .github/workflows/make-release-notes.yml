@@ -60,7 +60,7 @@ jobs:
 
       - name: Find versions for branch
         id: versions
-        run: |          
+        run: |
           readarray -t lines < <(dotnet-tool/release-notes "${{ github.repository_owner }}" "${{ env.repository_name }}" current-version --query "${{ matrix.branch }}" --version 0.0.1 --token ${{ secrets.GITHUB_TOKEN }} --releasetagformat VERSION)
           echo "::set-output name=current::$(echo ${lines[0]})"
           echo "::set-output name=next::$(echo ${lines[1]})"
