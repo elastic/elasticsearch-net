@@ -103,7 +103,10 @@ let SkipList = dict<SkipFile,SkipSection> [
         "Test open and close with non-existent job id"
     ]
     // Failed: Actions custom Setup actions Reason: Setup
-    SkipFile "ml/stop_data_frame_analytics.yml", Section "Test stop given missing config and allow_no_match is true"
+    SkipFile "ml/stop_data_frame_analytics.yml", Sections [
+        "Test stop given missing config and allow_no_match is true"
+        "Test stop given missing config and allow_no_match is false"
+    ]
     SkipFile "ml/start_stop_datafeed.yml", Section "Test stop given expression"
     SkipFile "transform/transforms_start_stop.yml", Sections [
         "Test start transform"  
