@@ -159,7 +159,8 @@ $environment = @(
   "--env", "bootstrap.memory_lock=true",
   "--env", "node.attr.testattr=test",
   "--env", "path.repo=/tmp",
-  "--env", "repositories.url.allowed_urls=http://snapshot.test*"
+  "--env", "repositories.url.allowed_urls=http://snapshot.test*",
+  "--env", "action.destructive_requires_name=false"
 )
 
 $volumes = @(
