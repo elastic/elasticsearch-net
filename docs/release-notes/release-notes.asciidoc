@@ -1,0 +1,15 @@
+[[release-notes]]
+= Release notes
+
+[partintro]
+--
+Review important information about 8.0.x releases.
+
+* <<release-notes-8.0.0>>
+--
+
+
+
+include::release-notes-8.0.0.asciidoc[]
+
+
