@@ -15,6 +15,9 @@
 # - Refactored into functions and imports
 # - Support NUMBER_OF_NODES
 
+# Version 1.2.0
+# - Added action.destructive_requires_name=false as the default will be true in v8
+
 script_path=$(dirname $(realpath -s $0))
 source $script_path/functions/imports.sh
 set -euo pipefail
@@ -36,6 +39,7 @@ environment=($(cat <<-END
   --env node.attr.testattr=test
   --env path.repo=/tmp
   --env repositories.url.allowed_urls=http://snapshot.test*
+  --env action.destructive_requires_name=false
 END
 ))
 if [[ "$TEST_SUITE" == "platinum" ]]; then
