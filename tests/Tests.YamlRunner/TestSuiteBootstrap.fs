@@ -258,7 +258,6 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         
         yield! stopTransforms()
             
-            
         if suite = Platinum then
             let data = PostData.String @"{""password"":""x-pack-test-password"", ""roles"":[""superuser""]}"
             yield client.Security.PutUser<DynamicResponse>("x_pack_rest_user", data)
