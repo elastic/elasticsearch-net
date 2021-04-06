@@ -56,7 +56,7 @@ jobs:
         run: dotnet tool install release-notes --tool-path dotnet-tool
 
       - name: Set repository name environment variable  
-        run: echo "repository_name=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
+        run: echo "repository_name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
 
       - name: Find versions for branch
         id: versions
