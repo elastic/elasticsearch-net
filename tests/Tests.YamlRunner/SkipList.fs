@@ -140,9 +140,6 @@ let SkipList = dict<SkipFile,SkipSection> [
     ]
     // Cannot connect to Docker IP
     SkipFile "watcher/execute_watch/60_http_input.yml", All
-    // Test tries to match on "tagline", which requires "human=false", which doesn't work in the Go API.
-    // Also test does too much within a single test, so has to be disabled as whole, unfortunately.
-    SkipFile "xpack/15_basic.yml", All
     
     // Snapshot testing requires local filesystem access
     SkipFile "snapshot.create/10_basic.yml", All
