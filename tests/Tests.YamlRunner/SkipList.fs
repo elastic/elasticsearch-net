@@ -24,10 +24,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     
     // funny looking dispatch /_security/privilege/app?name
     SkipFile "privileges/10_basic.yml", All
-    
-    // 7.x only
-    // We skip the generation of this API till one of the later minors
-    SkipFile "indices.upgrade/10_basic.yml", All
+
     // Sets a dictionary to null, we need to see if we can backport this from master
     SkipFile "search.aggregation/240_max_buckets.yml", All
     SkipFile "search.aggregation/180_percentiles_tdigest_metric.yml", Section "Invalid params test"
