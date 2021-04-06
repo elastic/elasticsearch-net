@@ -7,17 +7,18 @@ module Tests.YamlRunner.TestSuiteBootstrap
 open System
 open System.Linq
 open Elastic.Transport
-open Elasticsearch.Net
 open Elasticsearch.Net.Specification.CatApi
 open Elasticsearch.Net.Specification.ClusterApi
 open Elasticsearch.Net.Specification.IndicesApi
 open Tests.YamlRunner.Models
+open System.Collections.Generic
 
 let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
     let firstFailure (responses:DynamicResponse seq) =
             responses
             |> Seq.filter (fun r -> not r.Success && r.HttpStatusCode <> Nullable.op_Implicit 404)
             |> Seq.tryHead
+
     let isXPackName name =
         match name with
         | ".watches"
@@ -135,8 +136,17 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
     let wipeTemplateForXPack () = deleteTemplates() @ deleteComponentTemplates()
     
     let wipeClusterSettings () =
-        let settings = client.Cluster.GetSettings<DynamicResponse>()
-        settings
+        let settings = client.Cluster.GetSettings<DynamicResponse>(ClusterGetSettingsRequestParameters(FlatSettings=true))
+        let payload =
+            [ 
+                "transient", dict [ for v in settings.Get<DynamicDictionary>("transient").Keys -> v, null ];
+                "persistent", dict [ for v in settings.Get<DynamicDictionary>("persistent").Keys -> v, null ];
+            ]
+            |> dict
+        if payload.["transient"].Values.Count > 0 || payload.["transient"].Values.Count > 0 then
+            client.Cluster.PutSettings<DynamicResponse>(PostData.Serializable(payload))
+        else 
+            client.Ping()
     
     let deleteAllILMPolicies () =
         let preserved = [
