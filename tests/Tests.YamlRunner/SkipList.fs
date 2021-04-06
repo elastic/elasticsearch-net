@@ -176,10 +176,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     
     //Replace stashed value in body that is passed as string json
     SkipFile "api_key/10_basic.yml", Section "Test get api key"
-        
-    //new API TODO remove when we regenerate
-    SkipFile "cluster.voting_config_exclusions/10_basic.yml", All
-    
+
     //TODO has dates without strings which trips up our yaml parser
     SkipFile "runtime_fields/40_date.yml", All
     // double / int in object comparison
