@@ -10,9 +10,7 @@ type SkipFile = SkipFile of string
 
 let SkipList = dict<SkipFile,SkipSection> [
 
-    // Need to implement cluster settings cleanup
-    // SkipFile "cluster.put_settings/10_basic.yml", All
-    
+    // TODO: Needs investigation. "Setting upgrade mode to disabled from enabled" runs in isolation but not with the entire test file
     SkipFile "ml/set_upgrade_mode.yml", All
     SkipFile "ml/inference_crud.yml", Section "Test update model alias with model id referring to missing model"
     SkipFile "ml/start_stop_datafeed.yml", All
@@ -29,9 +27,6 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "search.aggregation/240_max_buckets.yml", All
     SkipFile "search.aggregation/180_percentiles_tdigest_metric.yml", Section "Invalid params test"
     SkipFile "search.aggregation/190_percentiles_hdr_metric.yml", Section "Invalid params test"
-
-    // - Failed: Assert operation NumericAssert Length invalidated_api_keys "Long" Reason: Expected 2.000000 = 3.000000        
-    SkipFile "api_key/11_invalidation.yml", Section "Test invalidate api key by realm name"
 
     // Test looks for "testnode.crt", but "ca.crt" is returned first
     SkipFile "ssl/10_basic.yml", Section "Test get SSL certificates"
@@ -171,9 +166,6 @@ let SkipList = dict<SkipFile,SkipSection> [
         
     // Additional entries in regex: Failed cat.templates 10_basic.yml: Assert operation Match $body RegexAssertion
     SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates"; "No templates" ]
-    
-    //Replace stashed value in body that is passed as string json
-    SkipFile "api_key/10_basic.yml", Section "Test get api key"
 
     //TODO has dates without strings which trips up our yaml parser
     SkipFile "runtime_fields/40_date.yml", All
