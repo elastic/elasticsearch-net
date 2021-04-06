@@ -117,6 +117,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "ml/start_stop_datafeed.yml", Sections [
         "Test start datafeed when persistent task allocation disabled"
         "Test start given field without mappings"
+        "Test start datafeed given start is now"
     ]
     // Indexing step doesn't appear to work (getting total.hits=0)
     SkipFile "monitoring/bulk/10_basic.yml",
