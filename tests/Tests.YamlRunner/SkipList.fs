@@ -122,8 +122,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     ]
     // TEMPORARY: Missing 'body: { indices: "test_index" }' payload, TODO: PR
     SkipFile "snapshot/10_basic.yml", Section "Create a source only snapshot and then restore it"
-    // illegal_argument_exception: Provided password hash uses [NOOP] but the configured hashing algorithm is [BCRYPT]
-    SkipFile "users/10_basic.yml", Section "Test put user with password hash"
+
     // Slash in index name is not escaped (BUG)
     SkipFile "security/authz/13_index_datemath.yml", Section "Test indexing documents with datemath, when permitted"
     // Possibly a cluster health color mismatch...
