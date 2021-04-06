@@ -1,0 +1,27 @@
+[[release-notes]]
+= Release notes
+
+[partintro]
+--
+Review important information about 7.11.x releases.
+
+* <<release-notes-7.11.2>>
+--
+
+
+
+include::release-notes-7.11.2.asciidoc[]
+
+
+[float]
+[[release-notes-7.11.1]]
+== Release-Notes 7.11.1
+https://github.com/elastic/elasticsearch-net/releases/tag/7.11.1[Available on github]
+
+
+[float]
+[[release-notes-7.11.0]]
+== Release-Notes 7.11.0
+https://github.com/elastic/elasticsearch-net/releases/tag/7.11.0[Available on github]
+
+
