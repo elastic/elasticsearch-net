@@ -15,11 +15,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "ml/inference_crud.yml", Section "Test update model alias with model id referring to missing model"
     SkipFile "ml/start_stop_datafeed.yml", All
     SkipFile "ml/post_data.yml", All
-    
-    // These send empty strings for required parameters
-    // TODO i THINK this is now supported
-    SkipFile "ml/explain_data_frame_analytics.yml", Section "Test neither job id nor body"
-    
+
     // funny looking dispatch /_security/privilege/app?name
     SkipFile "privileges/10_basic.yml", All
 
