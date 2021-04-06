@@ -146,7 +146,7 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         if payload.["transient"].Values.Count > 0 || payload.["transient"].Values.Count > 0 then
             client.Cluster.PutSettings<DynamicResponse>(PostData.Serializable(payload))
         else 
-            client.Ping()
+            settings
     
     let deleteAllILMPolicies () =
         let preserved = [
