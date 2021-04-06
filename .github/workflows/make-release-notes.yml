@@ -55,17 +55,20 @@ jobs:
       - name: Install dotnet-script
         run: dotnet tool install release-notes --tool-path dotnet-tool
 
+      - name: Set repository name environment variable  
+        run: echo "repository_name=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
+
       - name: Find versions for branch
         id: versions
-        run: |
-          readarray -t lines < <(dotnet-tool/release-notes "${{ github.repository_owner }}" "${{ github.repository }}' | awk -F '/' '{print $1}'" current-version --query "${{ matrix.branch }}" --version 0.0.1 --token ${{ secrets.GITHUB_TOKEN }} --releasetagformat VERSION)
+        run: |          
+          readarray -t lines < <(dotnet-tool/release-notes "${{ github.repository_owner }}" "${{ env.repository_name }}" current-version --query "${{ matrix.branch }}" --version 0.0.1 --token ${{ secrets.GITHUB_TOKEN }} --releasetagformat VERSION)
           echo "::set-output name=current::$(echo ${lines[0]})"
           echo "::set-output name=next::$(echo ${lines[1]})"
           echo ${lines[@]}
           
       - name: Generate release notes
         run: |
-          dotnet-tool/release-notes "${{ github.repository_owner }}" "${{ github.repository }}' | awk -F '/' '{print $1}'" --version ${{ steps.versions.outputs.next }} --token ${{ secrets.GITHUB_TOKEN }} --format asciidoc --output docs/release-notes
+          dotnet-tool/release-notes "${{ github.repository_owner }}" "${{ env.repository_name }}" --version ${{ steps.versions.outputs.next }} --token ${{ secrets.GITHUB_TOKEN }} --format asciidoc --output docs/release-notes
           rm dotnet-tool/release-notes
           git status
       - name: "PR ${{ matrix.branch }}"
