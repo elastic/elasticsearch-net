@@ -168,10 +168,8 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "cluster.reroute/11_explain.yml", Sections [
         "Explain API for non-existent node & shard"
     ]
-    
-    //These are ignored because they were flagged on a big PR.
-    
-    //additional enters in regex
+        
+    // Additional entries in regex: Failed cat.templates 10_basic.yml: Assert operation Match $body RegexAssertion
     SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates"; "No templates" ]
     
     //Replace stashed value in body that is passed as string json
