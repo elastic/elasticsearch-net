@@ -10,31 +10,23 @@ type SkipFile = SkipFile of string
 
 let SkipList = dict<SkipFile,SkipSection> [
 
-    // Need to implement cluster settings cleanup
-    SkipFile "cluster.put_settings/10_basic.yml", All
-    
+    // TODO: Needs investigation. "Setting upgrade mode to disabled from enabled" runs in isolation but not with the entire test file
     SkipFile "ml/set_upgrade_mode.yml", All
     SkipFile "ml/inference_crud.yml", Section "Test update model alias with model id referring to missing model"
+
+    // Possible bad test setup, Cannot open job [start-stop-datafeed-job] because it has already been opened
+    // resource_already_exists_exception, task with id {job-start-stop-datafeed-job-foo-2} already exist
     SkipFile "ml/start_stop_datafeed.yml", All
+
     SkipFile "ml/post_data.yml", All
-    
-    // These send empty strings for required parameters
-    // TODO i THINK this is now supported
-    SkipFile "ml/explain_data_frame_analytics.yml", Section "Test neither job id nor body"
-    
+
     // funny looking dispatch /_security/privilege/app?name
     SkipFile "privileges/10_basic.yml", All
-    
-    // 7.x only
-    // We skip the generation of this API till one of the later minors
-    SkipFile "indices.upgrade/10_basic.yml", All
+
     // Sets a dictionary to null, we need to see if we can backport this from master
     SkipFile "search.aggregation/240_max_buckets.yml", All
     SkipFile "search.aggregation/180_percentiles_tdigest_metric.yml", Section "Invalid params test"
     SkipFile "search.aggregation/190_percentiles_hdr_metric.yml", Section "Invalid params test"
-
-    // - Failed: Assert operation NumericAssert Length invalidated_api_keys "Long" Reason: Expected 2.000000 = 3.000000        
-    SkipFile "api_key/11_invalidation.yml", Section "Test invalidate api key by realm name"
 
     // Test looks for "testnode.crt", but "ca.crt" is returned first
     SkipFile "ssl/10_basic.yml", Section "Test get SSL certificates"
@@ -58,7 +50,6 @@ let SkipList = dict<SkipFile,SkipSection> [
     
     // Missing refreshes in the test
     SkipFile "data_frame/transforms_start_stop.yml", All
-    SkipFile "ml/index_layout.yml", All
     
     // Todo investigate
     SkipFile "transform/transforms_start_stop.yml", Sections [
@@ -70,12 +61,14 @@ let SkipList = dict<SkipFile,SkipSection> [
         "Test get multiple transform stats"
         "Test get multiple transform stats where one does not have a task"
     ]
+
     // More QA tests than API tests
     SkipFile "data_frame/transforms_stats.yml", Sections [
         "Test get multiple transform stats"
         "Test get transform stats on missing transform"
         "Test get multiple transform stats where one does not have a task"
     ]
+
     // Invalid license makes subsequent tests fail
     SkipFile "license/20_put_license.yml", All
 
@@ -107,18 +100,12 @@ let SkipList = dict<SkipFile,SkipSection> [
         "Test stop given missing config and allow_no_match is true"
         "Test stop given missing config and allow_no_match is false"
     ]
-    SkipFile "ml/start_stop_datafeed.yml", Section "Test stop given expression"
+
     SkipFile "transform/transforms_start_stop.yml", Sections [
         "Test start transform"  
         "Verify start transform reuses destination index"
     ]
-    // Possible bad test setup, Cannot open job [start-stop-datafeed-job] because it has already been opened
-    // resource_already_exists_exception, task with id {job-start-stop-datafeed-job-foo-2} already exist
-    SkipFile "ml/start_stop_datafeed.yml", Sections [
-        "Test start datafeed when persistent task allocation disabled"
-        "Test start given field without mappings"
-        "Test start datafeed given start is now"
-    ]
+
     // Indexing step doesn't appear to work (getting total.hits=0)
     SkipFile "monitoring/bulk/10_basic.yml",
         Section "Bulk indexing of monitoring data on closed indices should throw an export exception"
@@ -134,8 +121,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     ]
     // TEMPORARY: Missing 'body: { indices: "test_index" }' payload, TODO: PR
     SkipFile "snapshot/10_basic.yml", Section "Create a source only snapshot and then restore it"
-    // illegal_argument_exception: Provided password hash uses [NOOP] but the configured hashing algorithm is [BCRYPT]
-    SkipFile "users/10_basic.yml", Section "Test put user with password hash"
+
     // Slash in index name is not escaped (BUG)
     SkipFile "security/authz/13_index_datemath.yml", Section "Test indexing documents with datemath, when permitted"
     // Possibly a cluster health color mismatch...
@@ -153,9 +139,6 @@ let SkipList = dict<SkipFile,SkipSection> [
     ]
     // Cannot connect to Docker IP
     SkipFile "watcher/execute_watch/60_http_input.yml", All
-    // Test tries to match on "tagline", which requires "human=false", which doesn't work in the Go API.
-    // Also test does too much within a single test, so has to be disabled as whole, unfortunately.
-    SkipFile "xpack/15_basic.yml", All
     
     // Snapshot testing requires local filesystem access
     SkipFile "snapshot.create/10_basic.yml", All
@@ -165,24 +148,16 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "snapshot.status/10_basic.yml", All
     
     // Datastreams are currently experimental
-    SkipFile "indices.data_stream/10_basic.yml", All
+    //SkipFile "indices.data_stream/10_basic.yml", All
     
     // uses $stashed id in match with object
     SkipFile "cluster.reroute/11_explain.yml", Sections [
         "Explain API for non-existent node & shard"
     ]
-    
-    //These are ignored because they were flagged on a big PR.
-    
-    //additional enters in regex
-    SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates"; "No templates" ]
-    
-    //Replace stashed value in body that is passed as string json
-    SkipFile "api_key/10_basic.yml", Section "Test get api key"
         
-    //new API TODO remove when we regenerate
-    SkipFile "cluster.voting_config_exclusions/10_basic.yml", All
-    
+    // Additional entries in regex: Failed cat.templates 10_basic.yml: Assert operation Match $body RegexAssertion
+    SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates"; "No templates" ]
+
     //TODO has dates without strings which trips up our yaml parser
     SkipFile "runtime_fields/40_date.yml", All
     // double / int in object comparison
@@ -198,7 +173,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     
     SkipFile "ml/inference_processor.yml", Section "Test simulate"
 
-    // TODO investigate post 7.11.0
+    // TODO: Review again soon once zip includes updated test file from https://github.com/elastic/elasticsearch/pull/71084
     SkipFile "nodes.info/10_basic.yml", Section "node_info role test"
    
     // TODO investigate
