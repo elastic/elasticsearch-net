@@ -6,6 +6,25 @@ namespace Nest
 {
 	// Stubs until we generate these - Allows the code to compile so we can identify real errors.
 
+	public class Aggregate { }
+
+	public class SuggestionName
+	{
+	}
+
+
+	public class Property { }
+	public class Uuid { }
+
+	public class SortResults
+	{
+	}
+	
+
+	public class SuggestOption { }
+
+	public class SequenceNumber { }
+
 	public class VersionString { }
 
 	public class VersionNumber { }

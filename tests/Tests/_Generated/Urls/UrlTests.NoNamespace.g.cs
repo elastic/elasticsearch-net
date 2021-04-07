@@ -25,104 +25,12 @@ using Tests.Framework.EndpointTests;
 
 namespace Tests.Urls.NoNamespace
 {
-    public class ClearScrollUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.DELETE("/_search/scroll").Request(c => c.ClearScroll(new ClearScrollRequest())).RequestAsync(c => c.ClearScrollAsync(new ClearScrollRequest()));
-        }
-    }
-
     public class ClosePointInTimeUrlTests : UrlTestsBase
     {
         [U]
         public override async Task Urls()
         {
             await UrlTester.DELETE("/_pit").Request(c => c.ClosePointInTime(new ClosePointInTimeRequest())).RequestAsync(c => c.ClosePointInTimeAsync(new ClosePointInTimeRequest()));
-        }
-    }
-
-    public class CountUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_count").Request(c => c.Count(new CountRequest())).RequestAsync(c => c.CountAsync(new CountRequest()));
-            await UrlTester.POST("/_all/_count").Request(c => c.Count(new CountRequest(Nest.Indices.All))).RequestAsync(c => c.CountAsync(new CountRequest(Nest.Indices.All)));
-            await UrlTester.POST("/project/_count").Request(c => c.Count(new CountRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.CountAsync(new CountRequest(Nest.IndexName.From<Project>())));
-        }
-    }
-
-    public class DeleteByQueryUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_all/_delete_by_query").Request(c => c.DeleteByQuery(new DeleteByQueryRequest(Nest.Indices.All))).RequestAsync(c => c.DeleteByQueryAsync(new DeleteByQueryRequest(Nest.Indices.All)));
-            await UrlTester.POST("/project/_delete_by_query").Request(c => c.DeleteByQuery(new DeleteByQueryRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.DeleteByQueryAsync(new DeleteByQueryRequest(Nest.IndexName.From<Project>())));
-        }
-    }
-
-    public class FieldCapsUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_field_caps").Request(c => c.FieldCapabilities(new FieldCapabilitiesRequest())).RequestAsync(c => c.FieldCapabilitiesAsync(new FieldCapabilitiesRequest()));
-            await UrlTester.POST("/_all/_field_caps").Request(c => c.FieldCapabilities(new FieldCapabilitiesRequest(Nest.Indices.All))).RequestAsync(c => c.FieldCapabilitiesAsync(new FieldCapabilitiesRequest(Nest.Indices.All)));
-            await UrlTester.POST("/project/_field_caps").Request(c => c.FieldCapabilities(new FieldCapabilitiesRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.FieldCapabilitiesAsync(new FieldCapabilitiesRequest(Nest.IndexName.From<Project>())));
-        }
-    }
-
-    public class InfoUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.GET("/").Request(c => c.RootNodeInfo(new RootNodeInfoRequest())).RequestAsync(c => c.RootNodeInfoAsync(new RootNodeInfoRequest()));
-        }
-    }
-
-    public class MgetUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_mget").Request(c => c.MultiGet(new MultiGetRequest())).RequestAsync(c => c.MultiGetAsync(new MultiGetRequest()));
-            await UrlTester.POST("/project/_mget").Request(c => c.MultiGet(new MultiGetRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.MultiGetAsync(new MultiGetRequest(Nest.IndexName.From<Project>())));
-        }
-    }
-
-    public class MsearchUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_msearch").Request(c => c.MultiSearch(new MultiSearchRequest())).RequestAsync(c => c.MultiSearchAsync(new MultiSearchRequest()));
-            await UrlTester.POST("/_all/_msearch").Request(c => c.MultiSearch(new MultiSearchRequest(Nest.Indices.All))).RequestAsync(c => c.MultiSearchAsync(new MultiSearchRequest(Nest.Indices.All)));
-            await UrlTester.POST("/project/_msearch").Request(c => c.MultiSearch(new MultiSearchRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.MultiSearchAsync(new MultiSearchRequest(Nest.IndexName.From<Project>())));
-        }
-    }
-
-    public class MsearchTemplateUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_msearch/template").Request(c => c.MultiSearchTemplate(new MultiSearchTemplateRequest())).RequestAsync(c => c.MultiSearchTemplateAsync(new MultiSearchTemplateRequest()));
-            await UrlTester.POST("/_all/_msearch/template").Request(c => c.MultiSearchTemplate(new MultiSearchTemplateRequest(Nest.Indices.All))).RequestAsync(c => c.MultiSearchTemplateAsync(new MultiSearchTemplateRequest(Nest.Indices.All)));
-            await UrlTester.POST("/project/_msearch/template").Request(c => c.MultiSearchTemplate(new MultiSearchTemplateRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.MultiSearchTemplateAsync(new MultiSearchTemplateRequest(Nest.IndexName.From<Project>())));
-        }
-    }
-
-    public class MtermvectorsUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_mtermvectors").Request(c => c.MultiTermVectors(new MultiTermVectorsRequest())).RequestAsync(c => c.MultiTermVectorsAsync(new MultiTermVectorsRequest()));
-            await UrlTester.POST("/project/_mtermvectors").Request(c => c.MultiTermVectors(new MultiTermVectorsRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.MultiTermVectorsAsync(new MultiTermVectorsRequest(Nest.IndexName.From<Project>())));
         }
     }
 
@@ -143,74 +51,6 @@ namespace Tests.Urls.NoNamespace
         public override async Task Urls()
         {
             await UrlTester.HEAD("/").Request(c => c.Ping(new PingRequest())).RequestAsync(c => c.PingAsync(new PingRequest()));
-        }
-    }
-
-    public class ReindexUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_reindex").Request(c => c.Reindex(new ReindexRequest())).RequestAsync(c => c.ReindexAsync(new ReindexRequest()));
-        }
-    }
-
-    public class RenderSearchTemplateUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_render/template").Request(c => c.RenderSearchTemplate(new RenderSearchTemplateRequest())).RequestAsync(c => c.RenderSearchTemplateAsync(new RenderSearchTemplateRequest()));
-        }
-    }
-
-    public class ScriptsPainlessExecuteUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_scripts/painless/_execute").Request(c => c.ExecutePainlessScript(new ExecutePainlessScriptRequest())).RequestAsync(c => c.ExecutePainlessScriptAsync(new ExecutePainlessScriptRequest()));
-        }
-    }
-
-    public class ScrollUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_search/scroll").Request(c => c.Scroll(new ScrollRequest())).RequestAsync(c => c.ScrollAsync(new ScrollRequest()));
-        }
-    }
-
-    public class SearchUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_search").Request(c => c.Search(new SearchRequest())).RequestAsync(c => c.SearchAsync(new SearchRequest()));
-            await UrlTester.POST("/_all/_search").Request(c => c.Search(new SearchRequest(Nest.Indices.All))).RequestAsync(c => c.SearchAsync(new SearchRequest(Nest.Indices.All)));
-            await UrlTester.POST("/project/_search").Request(c => c.Search(new SearchRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.SearchAsync(new SearchRequest(Nest.IndexName.From<Project>())));
-        }
-    }
-
-    public class SearchShardsUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_search_shards").Request(c => c.SearchShards(new SearchShardsRequest())).RequestAsync(c => c.SearchShardsAsync(new SearchShardsRequest()));
-            await UrlTester.POST("/_all/_search_shards").Request(c => c.SearchShards(new SearchShardsRequest(Nest.Indices.All))).RequestAsync(c => c.SearchShardsAsync(new SearchShardsRequest(Nest.Indices.All)));
-            await UrlTester.POST("/project/_search_shards").Request(c => c.SearchShards(new SearchShardsRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.SearchShardsAsync(new SearchShardsRequest(Nest.IndexName.From<Project>())));
-        }
-    }
-
-    public class UpdateByQueryUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_all/_update_by_query").Request(c => c.UpdateByQuery(new UpdateByQueryRequest(Nest.Indices.All))).RequestAsync(c => c.UpdateByQueryAsync(new UpdateByQueryRequest(Nest.Indices.All)));
-            await UrlTester.POST("/project/_update_by_query").Request(c => c.UpdateByQuery(new UpdateByQueryRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.UpdateByQueryAsync(new UpdateByQueryRequest(Nest.IndexName.From<Project>())));
         }
     }
 }
