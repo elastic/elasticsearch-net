@@ -410,15 +410,6 @@ namespace Nest
             internal set; 
 #endif
         }
-
-        [JsonPropertyName("version")]
-        public int Version { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
     }
 
     public class ClusterStatsResponse : NodesResponseBase

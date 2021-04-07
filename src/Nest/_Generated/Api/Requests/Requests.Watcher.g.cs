@@ -233,7 +233,7 @@ namespace Nest
 		public long? IfSequenceNumber { get => Q<long?>("if_sequence_number"); set => Q("if_sequence_number", value); }
 
 		[JsonIgnore]
-		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+		public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
 
 		[JsonPropertyName("condition")]
 		public ConditionContainer? Condition

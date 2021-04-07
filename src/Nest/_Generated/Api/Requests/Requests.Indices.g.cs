@@ -23,6 +23,40 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IIndexAddBlockRequest, IndexAddBlockRequest>))]
+	public interface IIndexAddBlockRequest : IRequest<IndexAddBlockRequestParameters>
+	{
+	}
+
+	public class IndexAddBlockRequest : PlainRequestBase<IndexAddBlockRequestParameters>, IIndexAddBlockRequest
+	{
+		protected IIndexAddBlockRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesAddBlock;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+		///<summary>/{index}/_block/{block}</summary>
+        public IndexAddBlockRequest(IndexName index, IndexBlockOptions block) : base(r => r.Required("index", index).Required("block", block))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+		[JsonIgnore]
+		public ExpandWildcardOptions? ExpandWildcards { get => Q<ExpandWildcardOptions?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+		[JsonIgnore]
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+	}
+
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IAnalyzeRequest, AnalyzeRequest>))]
 	public interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters>
 	{
@@ -1121,7 +1155,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Mappings is null && Order is null && Version is null;
+		protected override bool IsEmpty => Mappings is null && Order is null;
 		///<summary>/_template/{name}</summary>
         public PutIndexTemplateRequest(Name name) : base(r => r.Required("name", name))
 		{
@@ -1155,17 +1189,6 @@ namespace Nest
 
 		[JsonPropertyName("order")]
 		public int? Order
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("version")]
-		public int? Version
 		{
 			get;
 #if NET5_0

@@ -78,7 +78,7 @@ namespace Nest
 
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 
@@ -180,7 +180,7 @@ namespace Nest
 
         public Fields? StoredFields { get => Q<Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
     }
@@ -201,7 +201,7 @@ namespace Nest
 
         public Fields? SourceIncludes { get => Q<Fields?>("source_includes"); set => Q("source_includes", value); }
 
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
     }
@@ -264,7 +264,7 @@ namespace Nest
 
         public Fields? StoredFields { get => Q<Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
     }
@@ -290,7 +290,7 @@ namespace Nest
 
         public Fields? SourceIncludes { get => Q<Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
     }
@@ -368,7 +368,7 @@ namespace Nest
 
         public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
 
-        public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
 
         public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
     }

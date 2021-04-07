@@ -190,26 +190,8 @@ namespace Nest
 
     public class GetResponse : ResponseBase
     {
-        [JsonPropertyName("_index")]
-        public string Index { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
         [JsonPropertyName("found")]
         public bool Found { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("_id")]
-        public string Id { get; 
 #if NET5_0
             init;
 #else
@@ -237,24 +219,6 @@ namespace Nest
 
         [JsonPropertyName("_seq_no")]
         public long SeqNo { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("_type")]
-        public string Type { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
-
-        [JsonPropertyName("_version")]
-        public long Version { get; 
 #if NET5_0
             init;
 #else

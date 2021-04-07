@@ -40,21 +40,10 @@ namespace Nest
 			return resolved;
 		}
 
-		private RouteValues Route(string name, IUrlParameter routeValue, bool required = true)
+		private RouteValues Route(string name, IUrlParameter routeValue)
 		{
 			switch (routeValue)
 			{
-				case null when !required:
-					{
-						if (!ContainsKey(name))
-							return this;
-						Remove(name);
-						if (IsId(name))
-							ContainsId = false; // invalidate cache
-						return this;
-					}
-				case null:
-					throw new ArgumentNullException(name, $"{name} is required to build a url to this API");
 				default:
 					this[name] = routeValue;
 					if (IsId(name))
@@ -67,7 +56,7 @@ namespace Nest
 
 		internal RouteValues Required(string route, IUrlParameter value) => Route(route, value);
 
-		internal RouteValues Optional(string route, IUrlParameter value) => Route(route, value, false);
+		internal RouteValues Optional(string route, IUrlParameter value) => Route(route, value);
 
 		//internal RouteValues Optional(string route, Metrics value) => Route(route, value, false);
 

@@ -94,14 +94,5 @@ namespace Nest
             internal set; 
 #endif
         }
-
-        [JsonPropertyName("version")]
-        public string Version { get; 
-#if NET5_0
-            init;
-#else
-            internal set; 
-#endif
-        }
     }
 }

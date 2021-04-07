@@ -41,11 +41,11 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("description")]
 		private string? _description = default;
 		[JsonInclude, JsonPropertyName("dest_index")]
-		private string? _dest_index = default;
+		private IndexName? _dest_index = default;
 		[JsonInclude, JsonPropertyName("destIndex")]
-		private string? _destIndex = default;
+		private IndexName? _destIndex = default;
 		[JsonInclude, JsonPropertyName("di")]
-		private string? _di = default;
+		private IndexName? _di = default;
 		[JsonInclude, JsonPropertyName("failure_reason")]
 		private string? _failure_reason = default;
 		[JsonInclude, JsonPropertyName("failureReason")]
@@ -61,27 +61,27 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("na")]
 		private string? _na = default;
 		[JsonInclude, JsonPropertyName("ne")]
-		private string? _ne = default;
+		private Id? _ne = default;
 		[JsonInclude, JsonPropertyName("ni")]
-		private string? _ni = default;
+		private Id? _ni = default;
 		[JsonInclude, JsonPropertyName("nn")]
-		private string? _nn = default;
+		private Name? _nn = default;
 		[JsonInclude, JsonPropertyName("node.address")]
 		private string? _node_address = default;
 		[JsonInclude, JsonPropertyName("node.ephemeral_id")]
-		private string? _node_ephemeral_id = default;
+		private Id? _node_ephemeral_id = default;
 		[JsonInclude, JsonPropertyName("node.id")]
-		private string? _node_id = default;
+		private Id? _node_id = default;
 		[JsonInclude, JsonPropertyName("node.name")]
-		private string? _node_name = default;
+		private Name? _node_name = default;
 		[JsonInclude, JsonPropertyName("nodeAddress")]
 		private string? _nodeAddress = default;
 		[JsonInclude, JsonPropertyName("nodeEphemeralId")]
-		private string? _nodeEphemeralId = default;
+		private Id? _nodeEphemeralId = default;
 		[JsonInclude, JsonPropertyName("nodeId")]
-		private string? _nodeId = default;
+		private Id? _nodeId = default;
 		[JsonInclude, JsonPropertyName("nodeName")]
-		private string? _nodeName = default;
+		private Name? _nodeName = default;
 		[JsonInclude, JsonPropertyName("p")]
 		private string? _p = default;
 		[JsonInclude, JsonPropertyName("progress")]
@@ -89,28 +89,28 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("s")]
 		private string? _s = default;
 		[JsonInclude, JsonPropertyName("si")]
-		private string? _si = default;
+		private IndexName? _si = default;
 		[JsonInclude, JsonPropertyName("source_index")]
-		private string? _source_index = default;
+		private IndexName? _source_index = default;
 		[JsonInclude, JsonPropertyName("sourceIndex")]
-		private string? _sourceIndex = default;
+		private IndexName? _sourceIndex = default;
 		[JsonInclude, JsonPropertyName("state")]
 		private string? _state = default;
 		[JsonInclude, JsonPropertyName("t")]
-		private string? _t = default;
+		private Name? _t = default;
 		[JsonInclude, JsonPropertyName("type")]
-		private string? _type = default;
+		private Name? _type = default;
 		[JsonInclude, JsonPropertyName("v")]
-		private string? _v = default;
+		private VersionString? _v = default;
 		[JsonInclude, JsonPropertyName("version")]
-		private string? _version = default;
+		private VersionString? _version = default;
 		public string? AssignmentExplanation => _assignment_explanation ?? _ae ?? _assignmentExplanation;
 		public string? CreateTime => _create_time ?? _ct ?? _createTime;
 		public string? Description => _d ?? _description;
-		public string? DestIndex => _dest_index ?? _di ?? _destIndex;
+		public IndexName? DestIndex => _dest_index ?? _di ?? _destIndex;
 		public string? FailureReason => _failure_reason ?? _fr ?? _failureReason;
 		[JsonPropertyName("id")]
-		public string? Id
+		public Id? Id
 		{
 			get;
 #if NET5_0
@@ -122,13 +122,13 @@ namespace Nest
 
 		public string? ModelMemoryLimit => _model_memory_limit ?? _mml ?? _modelMemoryLimit;
 		public string? NodeAddress => _node_address ?? _na ?? _nodeAddress;
-		public string? NodeEphemeralId => _node_ephemeral_id ?? _ne ?? _nodeEphemeralId;
-		public string? NodeId => _node_id ?? _ni ?? _nodeId;
-		public string? NodeName => _node_name ?? _nn ?? _nodeName;
+		public Id? NodeEphemeralId => _node_ephemeral_id ?? _ne ?? _nodeEphemeralId;
+		public Id? NodeId => _node_id ?? _ni ?? _nodeId;
+		public Name? NodeName => _node_name ?? _nn ?? _nodeName;
 		public string? Progress => _p ?? _progress;
-		public string? SourceIndex => _source_index ?? _si ?? _sourceIndex;
+		public IndexName? SourceIndex => _source_index ?? _si ?? _sourceIndex;
 		public string? State => _s ?? _state;
-		public string? Type => _t ?? _type;
-		public string? Version => _v ?? _version;
+		public Name? Type => _t ?? _type;
+		public VersionString? Version => _v ?? _version;
 	}
 }

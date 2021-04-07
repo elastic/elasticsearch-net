@@ -25,6 +25,19 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
+    public class IndexAddBlockRequestParameters : RequestParameters<IndexAddBlockRequestParameters>
+    {
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcardOptions? ExpandWildcards { get => Q<ExpandWildcardOptions?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
     public class AnalyzeRequestParameters : RequestParameters<AnalyzeRequestParameters>
     {
     }

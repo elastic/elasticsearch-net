@@ -207,7 +207,7 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("i")]
 		private string? _i = default;
 		[JsonInclude, JsonPropertyName("id")]
-		private string? _id = default;
+		private Id? _id = default;
 		[JsonInclude, JsonPropertyName("idc")]
 		private string? _idc = default;
 		[JsonInclude, JsonPropertyName("idti")]
@@ -307,13 +307,13 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("mtt")]
 		private string? _mtt = default;
 		[JsonInclude, JsonPropertyName("n")]
-		private string? _n = default;
+		private Name? _n = default;
 		[JsonInclude, JsonPropertyName("name")]
-		private string? _name = default;
+		private Name? _name = default;
 		[JsonInclude, JsonPropertyName("node.role")]
 		private string? _node_role = default;
 		[JsonInclude, JsonPropertyName("nodeId")]
-		private string? _nodeId = default;
+		private Id? _nodeId = default;
 		[JsonInclude, JsonPropertyName("nodeRole")]
 		private string? _nodeRole = default;
 		[JsonInclude, JsonPropertyName("p")]
@@ -537,17 +537,17 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("svmm")]
 		private string? _svmm = default;
 		[JsonInclude, JsonPropertyName("t")]
-		private string? _t = default;
+		private Name? _t = default;
 		[JsonInclude, JsonPropertyName("type")]
-		private string? _type = default;
+		private Name? _type = default;
 		[JsonInclude, JsonPropertyName("u")]
 		private string? _u = default;
 		[JsonInclude, JsonPropertyName("uptime")]
 		private string? _uptime = default;
 		[JsonInclude, JsonPropertyName("v")]
-		private string? _v = default;
+		private VersionString? _v = default;
 		[JsonInclude, JsonPropertyName("version")]
-		private string? _version = default;
+		private VersionString? _version = default;
 		public string? Build => _b ?? _build;
 		public string? BulkAvgSizeInBytes => _bulk_avg_size_in_bytes ?? _basi ?? _bulkAvgSizeInBytes;
 		public string? BulkAvgTime => _bulk_avg_time ?? _bati ?? _bulkAvgTime;
@@ -589,7 +589,7 @@ namespace Nest
 		public string? HeapMax => _heap_max ?? _hm ?? _heapMax;
 		public Percentage? HeapPercent => _heap_percent ?? _hp ?? _heapPercent;
 		public string? HttpAddress => _http ?? _http_address;
-		public string? Id => _nodeId ?? _id;
+		public Id? Id => _nodeId ?? _id;
 		public string? IndexingDeleteCurrent => _indexing_delete_current ?? _idc ?? _indexingDeleteCurrent;
 		public string? IndexingDeleteTime => _indexing_delete_time ?? _idti ?? _indexingDeleteTime;
 		public string? IndexingDeleteTotal => _indexing_delete_total ?? _idto ?? _indexingDeleteTotal;
@@ -630,7 +630,7 @@ namespace Nest
 		public string? MergesTotalDocs => _merges_total_docs ?? _mtd ?? _mergesTotalDocs;
 		public string? MergesTotalSize => _merges_total_size ?? _mts ?? _mergesTotalSize;
 		public string? MergesTotalTime => _merges_total_time ?? _mtt ?? _mergesTotalTime;
-		public string? Name => _n ?? _name;
+		public Name? Name => _n ?? _name;
 		public string? NodeRole => _node_role ?? _nodeRole ?? _r ?? _role;
 		public string? Pid => _p ?? _pid;
 		public string? Port => _po ?? _port;
@@ -691,8 +691,8 @@ namespace Nest
 		public string? SuggestCurrent => _suggest_current ?? _suc ?? _suggestCurrent;
 		public string? SuggestTime => _suggest_time ?? _suti ?? _suggestTime;
 		public string? SuggestTotal => _suggest_total ?? _suto ?? _suggestTotal;
-		public string? Type => _t ?? _type;
+		public Name? Type => _t ?? _type;
 		public string? Uptime => _u ?? _uptime;
-		public string? Version => _v ?? _version;
+		public VersionString? Version => _v ?? _version;
 	}
 }

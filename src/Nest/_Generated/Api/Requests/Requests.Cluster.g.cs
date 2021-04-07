@@ -504,7 +504,7 @@ namespace Nest
 		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
+		public VersionNumber? WaitForMetadataVersion { get => Q<VersionNumber?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
 
 		[JsonIgnore]
 		public Time? WaitForTimeout { get => Q<Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }

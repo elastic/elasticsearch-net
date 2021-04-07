@@ -31,9 +31,9 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("index_patterns")]
 		private string? _index_patterns = default;
 		[JsonInclude, JsonPropertyName("n")]
-		private string? _n = default;
+		private Name? _n = default;
 		[JsonInclude, JsonPropertyName("name")]
-		private string? _name = default;
+		private Name? _name = default;
 		[JsonInclude, JsonPropertyName("o")]
 		private string? _o = default;
 		[JsonInclude, JsonPropertyName("order")]
@@ -43,13 +43,13 @@ namespace Nest
 		[JsonInclude, JsonPropertyName("t")]
 		private string? _t = default;
 		[JsonInclude, JsonPropertyName("v")]
-		private string? _v = default;
+		private VersionString? _v = default;
 		[JsonInclude, JsonPropertyName("version")]
-		private string? _version = default;
+		private VersionString? _version = default;
 		public string? ComposedOf => _c ?? _composed_of;
 		public string? IndexPatterns => _t ?? _index_patterns;
-		public string? Name => _n ?? _name;
+		public Name? Name => _n ?? _name;
 		public string? Order => _order ?? _o ?? _p;
-		public string? Version => _v ?? _version;
+		public VersionString? Version => _v ?? _version;
 	}
 }
