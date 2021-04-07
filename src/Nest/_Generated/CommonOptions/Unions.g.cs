@@ -62,6 +62,17 @@ namespace Nest
 		}
 	}
 
+	public class MultiGetId : Union<string, int>
+	{
+		public MultiGetId(string item) : base(item)
+		{
+		}
+
+		public MultiGetId(int item) : base(item)
+		{
+		}
+	}
+
 	public class Percentage : Union<string, float>
 	{
 		public Percentage(string item) : base(item)

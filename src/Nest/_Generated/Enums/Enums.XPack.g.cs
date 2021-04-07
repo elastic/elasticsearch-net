@@ -16,34 +16,18 @@
 //
 // ------------------------------------------------
 
-using System;
-using System.Text.Json.Serialization;
-using Elastic.Transport;
+using System.Runtime.Serialization;
 
 #nullable restore
 namespace Nest
 {
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IDeprecationInfoRequest, DeprecationInfoRequest>))]
-	public interface IDeprecationInfoRequest : IRequest<DeprecationInfoRequestParameters>
+	public enum DataStreamHealthStatus
 	{
-	}
-
-	public class DeprecationInfoRequest : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
-	{
-		protected IDeprecationInfoRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.MigrationDeprecations;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
-		///<summary>/_migration/deprecations</summary>
-        public DeprecationInfoRequest() : base()
-		{
-		}
-
-		///<summary>/{index}/_migration/deprecations</summary>
-        public DeprecationInfoRequest(IndexName index) : base(r => r.Optional("index", index))
-		{
-		}
+		[EnumMember(Value = "green")]
+		Green,
+		[EnumMember(Value = "yellow")]
+		Yellow,
+		[EnumMember(Value = "red")]
+		Red
 	}
 }

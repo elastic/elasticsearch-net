@@ -25,12 +25,12 @@ namespace Playground
 			}
 
 		    // TODO: It might be kinda nice if the client accepts no request here and uses a cached default instance
-		    var searchResponse = await client.SearchAsync(new SearchRequest());
+		    //var searchResponse = await client.SearchAsync(new SearchRequest());
 
-			if (searchResponse.IsValid)
-			{
-				Console.WriteLine($"Took: {searchResponse.Took}");
-			}
+			//if (searchResponse.IsValid)
+			//{
+			//	Console.WriteLine($"Took: {searchResponse.Took}");
+			//}
 		}
     }
 }

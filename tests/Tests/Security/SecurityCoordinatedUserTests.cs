@@ -24,7 +24,7 @@ namespace Tests.Security
 						v => new PutUserRequest($"user-{v}")
 						{
 							Password = "password",
-							//Roles = new[] { "superuser" },
+							Roles = new[] { "superuser" },
 							//FullName = "API key superuser"
 						},
 						//(v, d) => d, // TODO

@@ -25,56 +25,8 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
-    public class DeleteAutoFollowPatternRequestParameters : RequestParameters<DeleteAutoFollowPatternRequestParameters>
-    {
-    }
-
     public class CreateFollowIndexRequestParameters : RequestParameters<CreateFollowIndexRequestParameters>
     {
         public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-    }
-
-    public class FollowInfoRequestParameters : RequestParameters<FollowInfoRequestParameters>
-    {
-    }
-
-    public class FollowIndexStatsRequestParameters : RequestParameters<FollowIndexStatsRequestParameters>
-    {
-    }
-
-    public class ForgetFollowerIndexRequestParameters : RequestParameters<ForgetFollowerIndexRequestParameters>
-    {
-    }
-
-    public class GetAutoFollowPatternRequestParameters : RequestParameters<GetAutoFollowPatternRequestParameters>
-    {
-    }
-
-    public class PauseAutoFollowPatternRequestParameters : RequestParameters<PauseAutoFollowPatternRequestParameters>
-    {
-    }
-
-    public class PauseFollowIndexRequestParameters : RequestParameters<PauseFollowIndexRequestParameters>
-    {
-    }
-
-    public class CreateAutoFollowPatternRequestParameters : RequestParameters<CreateAutoFollowPatternRequestParameters>
-    {
-    }
-
-    public class ResumeAutoFollowPatternRequestParameters : RequestParameters<ResumeAutoFollowPatternRequestParameters>
-    {
-    }
-
-    public class ResumeFollowIndexRequestParameters : RequestParameters<ResumeFollowIndexRequestParameters>
-    {
-    }
-
-    public class CcrStatsRequestParameters : RequestParameters<CcrStatsRequestParameters>
-    {
-    }
-
-    public class UnfollowIndexRequestParameters : RequestParameters<UnfollowIndexRequestParameters>
-    {
     }
 }

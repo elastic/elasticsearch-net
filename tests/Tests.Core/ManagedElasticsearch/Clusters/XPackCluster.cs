@@ -5,6 +5,7 @@ using Elastic.Elasticsearch.Xunit;
 using Elastic.Transport;
 using Nest;
 using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Core.ManagedElasticsearch.Tasks;
 using Tests.Domain.Extensions;
 using static Elastic.Stack.ArtifactsApi.Products.ElasticsearchPlugin;
@@ -29,12 +30,12 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 		{
 			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = WaitForStatus.Green });
 			Client.WaitForSecurityIndices();
-			//SeedNode();
+			SeedNode();
 			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = WaitForStatus.Green });
 			Client.WaitForSecurityIndices();
 		}
 
-		//protected virtual void SeedNode() => new DefaultSeeder(Client).SeedNode();
+		protected virtual void SeedNode() => new DefaultSeeder(Client).SeedNode();
 	}
 
 	public class XPackClusterConfiguration : ClientTestClusterConfiguration

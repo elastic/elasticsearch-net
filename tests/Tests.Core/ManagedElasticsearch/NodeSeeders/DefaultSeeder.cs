@@ -1,168 +1,177 @@
-//// Licensed to Elasticsearch B.V under one or more agreements.
-//// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-//// See the LICENSE file in the project root for more information
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
 
-//using System;
-//using System.Collections.Generic;
-//using System.Threading.Tasks;
-//using Nest;
-//using Tests.Configuration;
-//using Tests.Core.Client;
-//using Tests.Core.Extensions;
-//using Tests.Domain;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Nest;
+using Tests.Configuration;
+using Tests.Core.Client;
+using Tests.Core.Extensions;
+using Tests.Domain;
 
-//namespace Tests.Core.ManagedElasticsearch.NodeSeeders
-//{
-//	public class DefaultSeeder
-//	{
-//		public const string CommitsAliasFilter = "commits-only";
-//		public const string ProjectsAliasFilter = "projects-only";
+namespace Tests.Core.ManagedElasticsearch.NodeSeeders
+{
+	public class DefaultSeeder
+	{
+		public const string CommitsAliasFilter = "commits-only";
+		public const string ProjectsAliasFilter = "projects-only";
 
-//		public const string ProjectsAliasName = "projects-alias";
-//		public const string TestsIndexTemplateName = "nest_tests";
+		public const string ProjectsAliasName = "projects-alias";
+		public const string TestsIndexTemplateName = "nest_tests";
 
-//		public const string RemoteClusterName = "remote-cluster";
+		public const string RemoteClusterName = "remote-cluster";
 
-//		public const string PipelineName = "nest-pipeline";
+		public const string PipelineName = "nest-pipeline";
 
-//		private readonly IIndexSettings _defaultIndexSettings = new IndexSettings()
-//		{
-//			NumberOfShards = 2,
-//			NumberOfReplicas = 0,
-//		};
+		//private readonly IIndexSettings _defaultIndexSettings = new IndexSettings()
+		//{
+		//	NumberOfShards = 2,
+		//	NumberOfReplicas = 0,
+		//};
 
-//		public DefaultSeeder(IElasticClient client, IIndexSettings indexSettings)
-//		{
-//			Client = client;
-//			IndexSettings = indexSettings ?? _defaultIndexSettings;
-//		}
+		//public DefaultSeeder(IElasticClient client, IIndexSettings indexSettings)
+		//{
+		//	Client = client;
+		//	IndexSettings = indexSettings ?? _defaultIndexSettings;
+		//}
 
-//		public DefaultSeeder(IElasticClient client) : this(client, null) { }
+		public DefaultSeeder(IElasticClient client) /*: this(client, null)*/ { }
 
-//		private IElasticClient Client { get; }
+		private IElasticClient Client { get; }
 
-//		private IIndexSettings IndexSettings { get; }
+		//private IIndexSettings IndexSettings { get; }
 
-//		public void SeedNode()
-//		{
-//			var alreadySeeded = false;
-//			if (!TestClient.Configuration.ForceReseed && (alreadySeeded = AlreadySeeded())) return;
+		public void SeedNode()
+		{
+			var alreadySeeded = false;
 
-//			var t = Task.Run(async () => await SeedNodeAsync(alreadySeeded).ConfigureAwait(false));
+			if (!TestClient.Configuration.ForceReseed && (alreadySeeded = AlreadySeeded()))
+				return;
 
-//			t.Wait(TimeSpan.FromSeconds(40));
-//		}
+			// TODO: VERY TEMP UNTIL WE CAN PUT AN INDEX THROUGH THE CLIENT!!
+			var client = new HttpClient();
+			client.PutAsync("http://127.0.0.1:9200/project", new StringContent(string.Empty)).GetAwaiter().GetResult();
 
-//		public void SeedNodeNoData()
-//		{
-//			var alreadySeeded = false;
-//			if (!TestClient.Configuration.ForceReseed && (alreadySeeded = AlreadySeeded())) return;
+			//var t = Task.Run(async () => await SeedNodeAsync(alreadySeeded).ConfigureAwait(false));
 
-//			var t = Task.Run(async () => await SeedNodeNoDataAsync(alreadySeeded).ConfigureAwait(false));
+			//t.Wait(TimeSpan.FromSeconds(40));
+		}
 
-//			t.Wait(TimeSpan.FromSeconds(40));
-//		}
+		public void SeedNodeNoData()
+		{
+			var alreadySeeded = false;
+			if (!TestClient.Configuration.ForceReseed && (alreadySeeded = AlreadySeeded()))
+				return;
 
-//		// Sometimes we run against an manually started Elasticsearch when
-//		// writing tests to cut down on cluster startup times.
-//		// If raw_fields exists assume this cluster is already seeded.
-//		private bool AlreadySeeded() => Client.Indices.TemplateExists(TestsIndexTemplateName).Exists;
+			//var t = Task.Run(async () => await SeedNodeNoDataAsync(alreadySeeded).ConfigureAwait(false));
 
-//		private async Task SeedNodeAsync(bool alreadySeeded)
-//		{
-//			// Ensure a clean slate by deleting everything regardless of whether they may already exist
-//			await DeleteIndicesAndTemplatesAsync(alreadySeeded).ConfigureAwait(false);
-//			await ClusterSettingsAsync().ConfigureAwait(false);
-//			await PutPipeline().ConfigureAwait(false);
-//			// and now recreate everything
-//			await CreateIndicesAndSeedIndexDataAsync().ConfigureAwait(false);
-//		}
+			//t.Wait(TimeSpan.FromSeconds(40));
+		}
 
-//		private async Task SeedNodeNoDataAsync(bool alreadySeeded)
-//		{
-//			// Ensure a clean slate by deleting everything regardless of whether they may already exist
-//			await DeleteIndicesAndTemplatesAsync(alreadySeeded).ConfigureAwait(false);
-//			await ClusterSettingsAsync().ConfigureAwait(false);
-//			// and now recreate everything
-//			await CreateIndicesAsync().ConfigureAwait(false);
-//		}
+		// Sometimes we run against an manually started Elasticsearch when
+		// writing tests to cut down on cluster startup times.
+		// If raw_fields exists assume this cluster is already seeded.
+		private bool AlreadySeeded() => Client.Indices.IndexTemplateExists(new IndexTemplateExistsRequest(TestsIndexTemplateName)).Exists;
 
-//		public async Task ClusterSettingsAsync()
-//		{
-//			if (TestConfiguration.Instance.InRange("<6.1.0")) return;
+		//private async Task SeedNodeAsync(bool alreadySeeded)
+		//{
+		//	// Ensure a clean slate by deleting everything regardless of whether they may already exist
+		//	await DeleteIndicesAndTemplatesAsync(alreadySeeded).ConfigureAwait(false);
+		//	//await ClusterSettingsAsync().ConfigureAwait(false);
+		//	await PutPipeline().ConfigureAwait(false);
+		//	// and now recreate everything
+		//	await CreateIndicesAndSeedIndexDataAsync().ConfigureAwait(false);
+		//}
 
-//			var clusterConfiguration = new Dictionary<string, object>()
-//			{
-//				{ "cluster.routing.use_adaptive_replica_selection", true }
-//			};
+		//private async Task SeedNodeNoDataAsync(bool alreadySeeded)
+		//{
+		//	// Ensure a clean slate by deleting everything regardless of whether they may already exist
+		//	await DeleteIndicesAndTemplatesAsync(alreadySeeded).ConfigureAwait(false);
+		//	//await ClusterSettingsAsync().ConfigureAwait(false);
+		//	// and now recreate everything
+		//	await CreateIndicesAsync().ConfigureAwait(false);
+		//}
 
-//			if (TestConfiguration.Instance.InRange(">=6.5.0"))
-//				clusterConfiguration += new RemoteClusterConfiguration
-//				{
-//					{ RemoteClusterName, "127.0.0.1:9300" }
-//				};
+		//public async Task ClusterSettingsAsync()
+		//{
+		//	if (TestConfiguration.Instance.InRange("<6.1.0"))
+		//		return;
 
-//			var putSettingsResponse = await Client.Cluster.PutSettingsAsync(new ClusterPutSettingsRequest
-//			{
-//				Transient = clusterConfiguration
-//			}).ConfigureAwait(false);
+		//	var clusterConfiguration = new Dictionary<string, object>()
+		//	{
+		//		{ "cluster.routing.use_adaptive_replica_selection", true }
+		//	};
 
-//			putSettingsResponse.ShouldBeValid();
-//		}
+		//	if (TestConfiguration.Instance.InRange(">=6.5.0"))
+		//		clusterConfiguration += new RemoteClusterConfiguration
+		//		{
+		//			{ RemoteClusterName, "127.0.0.1:9300" }
+		//		};
 
-//		public async Task PutPipeline()
-//		{
-//			if (TestConfiguration.Instance.InRange("<6.1.0")) return;
+		//	var putSettingsResponse = await Client.Cluster.PutSettingsAsync(new ClusterPutSettingsRequest
+		//	{
+		//		Transient = clusterConfiguration
+		//	}).ConfigureAwait(false);
 
-//			var putProcessors = await Client.Ingest.PutPipelineAsync(PipelineName, pi => pi
-//				.Description("A pipeline registered by the NEST test framework")
-//				.Processors(pp => pp
-//					.Set<Project>(s => s.Field(p => p.Metadata).Value(new { x = "y" }))
-//				)
-//			).ConfigureAwait(false);
-//			putProcessors.ShouldBeValid();
-//		}
+		//	putSettingsResponse.ShouldBeValid();
+		//}
 
+		//public async Task PutPipeline()
+		//{
+		//	if (TestConfiguration.Instance.InRange("<6.1.0"))
+		//		return;
 
-//		public async Task DeleteIndicesAndTemplatesAsync(bool alreadySeeded)
-//		{
-//			var tasks = new List<Task>
-//			{
-//				Client.Indices.DeleteAsync(typeof(Project)),
-//				Client.Indices.DeleteAsync(typeof(Developer)),
-//				Client.Indices.DeleteAsync(typeof(ProjectPercolation))
-//			};
+		//	var putProcessors = await Client.Ingest.PutPipelineAsync(PipelineName, pi => pi
+		//		.Description("A pipeline registered by the NEST test framework")
+		//		.Processors(pp => pp
+		//			.Set<Project>(s => s.Field(p => p.Metadata).Value(new { x = "y" }))
+		//		)
+		//	).ConfigureAwait(false);
+		//	putProcessors.ShouldBeValid();
+		//}
 
-//			if (alreadySeeded)
-//				tasks.Add(Client.Indices.DeleteTemplateAsync(TestsIndexTemplateName));
+		//public async Task DeleteIndicesAndTemplatesAsync(bool alreadySeeded)
+		//{
+		//	var tasks = new List<Task>
+		//	{
+		//		Client.Indices.DeleteAsync(typeof(Project)),
+		//		Client.Indices.DeleteAsync(typeof(Developer)),
+		//		Client.Indices.DeleteAsync(typeof(ProjectPercolation))
+		//	};
 
-//			await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
-//		}
+		//	if (alreadySeeded)
+		//		tasks.Add(Client.Indices.DeleteTemplateAsync(TestsIndexTemplateName));
 
-//		private async Task CreateIndicesAndSeedIndexDataAsync()
-//		{
-//			await CreateIndicesAsync().ConfigureAwait(false);
-//			await SeedIndexDataAsync().ConfigureAwait(false);
-//		}
+		//	await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
+		//}
 
-//		public async Task CreateIndicesAsync()
-//		{
-//			var indexTemplateResponse = await CreateIndexTemplateAsync().ConfigureAwait(false);
-//			indexTemplateResponse.ShouldBeValid();
+		//private async Task CreateIndicesAndSeedIndexDataAsync()
+		//{
+		//	await CreateIndicesAsync().ConfigureAwait(false);
+		//	await SeedIndexDataAsync().ConfigureAwait(false);
+		//}
 
-//			var tasks = new[]
-//			{
-//				CreateProjectIndexAsync(),
-//				CreateDeveloperIndexAsync(),
-//				CreatePercolatorIndexAsync(),
-//			};
-//			await Task.WhenAll(tasks)
-//				.ContinueWith(t =>
-//				{
-//					foreach (var r in t.Result)
-//						r.ShouldBeValid();
-//				}).ConfigureAwait(false);
-//		}
+		//public async Task CreateIndicesAsync()
+		//{
+		//	var indexTemplateResponse = await CreateIndexTemplateAsync().ConfigureAwait(false);
+		//	indexTemplateResponse.ShouldBeValid();
+
+		//	var tasks = new[]
+		//	{
+		//		CreateProjectIndexAsync(),
+		//		CreateDeveloperIndexAsync(),
+		//		CreatePercolatorIndexAsync(),
+		//	};
+		//	await Task.WhenAll(tasks)
+		//		.ContinueWith(t =>
+		//		{
+		//			foreach (var r in t.Result)
+		//				r.ShouldBeValid();
+		//		}).ConfigureAwait(false);
+		//}
 
 //		private async Task SeedIndexDataAsync()
 //		{
@@ -442,5 +451,5 @@
 
 //		public static PropertiesDescriptor<ProjectPercolation> PercolatedQueryProperties(PropertiesDescriptor<ProjectPercolation> props) =>
 //			ProjectProperties(props.Percolator(pp => pp.Name(n => n.Query)));
-//	}
-//}
+	}
+}
