@@ -29,6 +29,20 @@ namespace Nest
 		Disabled
 	}
 
+	public enum SnapshotShardsStatsStage
+	{
+		[EnumMember(Value = "DONE")]
+		Done,
+		[EnumMember(Value = "FAILURE")]
+		Failure,
+		[EnumMember(Value = "FINALIZE")]
+		Finalize,
+		[EnumMember(Value = "INIT")]
+		Init,
+		[EnumMember(Value = "STARTED")]
+		Started
+	}
+
 	public enum StringFielddataFormat
 	{
 		[EnumMember(Value = "paged_bytes")]

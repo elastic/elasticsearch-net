@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Elastic.Stack.ArtifactsApi.Products;
+using Tests.Core.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {
@@ -35,8 +36,8 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 		protected override void SeedNode()
 		{
-			//var seeder = new DefaultSeeder(Client);
-			//seeder.SeedNode();
+			var seeder = new DefaultSeeder(Client);
+			seeder.SeedNode();
 		}
 	}
 }

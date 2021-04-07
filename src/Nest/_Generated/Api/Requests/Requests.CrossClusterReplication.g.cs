@@ -19,29 +19,11 @@
 using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest
 {
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternRequest>))]
-	public interface IDeleteAutoFollowPatternRequest : IRequest<DeleteAutoFollowPatternRequestParameters>
-	{
-	}
-
-	public class DeleteAutoFollowPatternRequest : PlainRequestBase<DeleteAutoFollowPatternRequestParameters>, IDeleteAutoFollowPatternRequest
-	{
-		protected IDeleteAutoFollowPatternRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationDeleteAutoFollowPattern;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
-		///<summary>/_ccr/auto_follow/{name}</summary>
-        public DeleteAutoFollowPatternRequest(Name name) : base(r => r.Required("name", name))
-		{
-		}
-	}
-
 	[JsonInterfaceConverter(typeof(InterfaceConverter<ICreateFollowIndexRequest, CreateFollowIndexRequest>))]
 	public interface ICreateFollowIndexRequest : IRequest<CreateFollowIndexRequestParameters>
 	{
@@ -54,7 +36,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => MaxReadRequestSize is null && MaxWriteBufferSize is null && MaxWriteRequestSize is null && RemoteCluster is null;
+		protected override bool IsEmpty => LeaderIndex is null && MaxOutstandingReadRequests is null && MaxOutstandingWriteRequests is null && MaxReadRequestOperationCount is null && MaxReadRequestSize is null && MaxRetryDelay is null && MaxWriteBufferCount is null && MaxWriteBufferSize is null && MaxWriteRequestOperationCount is null && MaxWriteRequestSize is null && ReadPollTimeout is null && RemoteCluster is null;
 		///<summary>/{index}/_ccr/follow</summary>
         public CreateFollowIndexRequest(IndexName index) : base(r => r.Required("index", index))
 		{
@@ -63,8 +45,8 @@ namespace Nest
 		[JsonIgnore]
 		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-		[JsonPropertyName("max_read_request_size")]
-		public string? MaxReadRequestSize
+		[JsonPropertyName("leader_index")]
+		public IndexName? LeaderIndex
 		{
 			get;
 #if NET5_0
@@ -74,212 +56,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("max_write_buffer_size")]
-		public string? MaxWriteBufferSize
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("max_write_request_size")]
-		public string? MaxWriteRequestSize
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("remote_cluster")]
-		public string? RemoteCluster
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IFollowInfoRequest, FollowInfoRequest>))]
-	public interface IFollowInfoRequest : IRequest<FollowInfoRequestParameters>
-	{
-	}
-
-	public class FollowInfoRequest : PlainRequestBase<FollowInfoRequestParameters>, IFollowInfoRequest
-	{
-		protected IFollowInfoRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationFollowInfo;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
-		///<summary>/{index}/_ccr/info</summary>
-        public FollowInfoRequest(Indices index) : base(r => r.Required("index", index))
-		{
-		}
-	}
-
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IFollowIndexStatsRequest, FollowIndexStatsRequest>))]
-	public interface IFollowIndexStatsRequest : IRequest<FollowIndexStatsRequestParameters>
-	{
-	}
-
-	public class FollowIndexStatsRequest : PlainRequestBase<FollowIndexStatsRequestParameters>, IFollowIndexStatsRequest
-	{
-		protected IFollowIndexStatsRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationFollowStats;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
-		///<summary>/{index}/_ccr/stats</summary>
-        public FollowIndexStatsRequest(Indices index) : base(r => r.Required("index", index))
-		{
-		}
-	}
-
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IForgetFollowerIndexRequest, ForgetFollowerIndexRequest>))]
-	public interface IForgetFollowerIndexRequest : IRequest<ForgetFollowerIndexRequestParameters>
-	{
-	}
-
-	public class ForgetFollowerIndexRequest : PlainRequestBase<ForgetFollowerIndexRequestParameters>, IForgetFollowerIndexRequest
-	{
-		protected IForgetFollowerIndexRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationForgetFollower;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => FollowerCluster is null && FollowerIndexUuid is null && LeaderRemoteCluster is null;
-		///<summary>/{index}/_ccr/forget_follower</summary>
-        public ForgetFollowerIndexRequest(IndexName index) : base(r => r.Required("index", index))
-		{
-		}
-
-		[JsonPropertyName("follower_cluster")]
-		public string? FollowerCluster
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("follower_index_uuid")]
-		public string? FollowerIndexUuid
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("leader_remote_cluster")]
-		public string? LeaderRemoteCluster
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IGetAutoFollowPatternRequest, GetAutoFollowPatternRequest>))]
-	public interface IGetAutoFollowPatternRequest : IRequest<GetAutoFollowPatternRequestParameters>
-	{
-	}
-
-	public class GetAutoFollowPatternRequest : PlainRequestBase<GetAutoFollowPatternRequestParameters>, IGetAutoFollowPatternRequest
-	{
-		protected IGetAutoFollowPatternRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationGetAutoFollowPattern;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
-		///<summary>/_ccr/auto_follow</summary>
-        public GetAutoFollowPatternRequest() : base()
-		{
-		}
-
-		///<summary>/_ccr/auto_follow/{name}</summary>
-        public GetAutoFollowPatternRequest(Name name) : base(r => r.Optional("name", name))
-		{
-		}
-	}
-
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IPauseAutoFollowPatternRequest, PauseAutoFollowPatternRequest>))]
-	public interface IPauseAutoFollowPatternRequest : IRequest<PauseAutoFollowPatternRequestParameters>
-	{
-	}
-
-	public class PauseAutoFollowPatternRequest : PlainRequestBase<PauseAutoFollowPatternRequestParameters>, IPauseAutoFollowPatternRequest
-	{
-		protected IPauseAutoFollowPatternRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationPauseAutoFollowPattern;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
-		///<summary>/_ccr/auto_follow/{name}/pause</summary>
-        public PauseAutoFollowPatternRequest(Name name) : base(r => r.Required("name", name))
-		{
-		}
-	}
-
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IPauseFollowIndexRequest, PauseFollowIndexRequest>))]
-	public interface IPauseFollowIndexRequest : IRequest<PauseFollowIndexRequestParameters>
-	{
-	}
-
-	public class PauseFollowIndexRequest : PlainRequestBase<PauseFollowIndexRequestParameters>, IPauseFollowIndexRequest
-	{
-		protected IPauseFollowIndexRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationPauseFollow;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
-		///<summary>/{index}/_ccr/pause_follow</summary>
-        public PauseFollowIndexRequest(IndexName index) : base(r => r.Required("index", index))
-		{
-		}
-	}
-
-	[JsonInterfaceConverter(typeof(InterfaceConverter<ICreateAutoFollowPatternRequest, CreateAutoFollowPatternRequest>))]
-	public interface ICreateAutoFollowPatternRequest : IRequest<CreateAutoFollowPatternRequestParameters>
-	{
-	}
-
-	public class CreateAutoFollowPatternRequest : PlainRequestBase<CreateAutoFollowPatternRequestParameters>, ICreateAutoFollowPatternRequest
-	{
-		protected ICreateAutoFollowPatternRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationPutAutoFollowPattern;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => FollowIndexPattern is null && MaxOutstandingWriteRequests is null && MaxReadRequestOperationCount is null && MaxReadRequestSize is null && MaxWriteBufferCount is null && MaxWriteBufferSize is null && MaxWriteRequestOperationCount is null && MaxWriteRequestSize is null && RemoteCluster is null;
-		///<summary>/_ccr/auto_follow/{name}</summary>
-        public CreateAutoFollowPatternRequest(Name name) : base(r => r.Required("name", name))
-		{
-		}
-
-		[JsonPropertyName("follow_index_pattern")]
-		public string? FollowIndexPattern
+		[JsonPropertyName("max_outstanding_read_requests")]
+		public long? MaxOutstandingReadRequests
 		{
 			get;
 #if NET5_0
@@ -290,7 +68,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("max_outstanding_write_requests")]
-		public int? MaxOutstandingWriteRequests
+		public long? MaxOutstandingWriteRequests
 		{
 			get;
 #if NET5_0
@@ -301,7 +79,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("max_read_request_operation_count")]
-		public int? MaxReadRequestOperationCount
+		public long? MaxReadRequestOperationCount
 		{
 			get;
 #if NET5_0
@@ -322,8 +100,19 @@ namespace Nest
 #endif
 		}
 
+		[JsonPropertyName("max_retry_delay")]
+		public Time? MaxRetryDelay
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("max_write_buffer_count")]
-		public int? MaxWriteBufferCount
+		public long? MaxWriteBufferCount
 		{
 			get;
 #if NET5_0
@@ -345,7 +134,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("max_write_request_operation_count")]
-		public int? MaxWriteRequestOperationCount
+		public long? MaxWriteRequestOperationCount
 		{
 			get;
 #if NET5_0
@@ -357,6 +146,17 @@ namespace Nest
 
 		[JsonPropertyName("max_write_request_size")]
 		public string? MaxWriteRequestSize
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("read_poll_timeout")]
+		public Time? ReadPollTimeout
 		{
 			get;
 #if NET5_0
@@ -375,115 +175,6 @@ namespace Nest
 #else
 			internal set;
 #endif
-		}
-	}
-
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IResumeAutoFollowPatternRequest, ResumeAutoFollowPatternRequest>))]
-	public interface IResumeAutoFollowPatternRequest : IRequest<ResumeAutoFollowPatternRequestParameters>
-	{
-	}
-
-	public class ResumeAutoFollowPatternRequest : PlainRequestBase<ResumeAutoFollowPatternRequestParameters>, IResumeAutoFollowPatternRequest
-	{
-		protected IResumeAutoFollowPatternRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationResumeAutoFollowPattern;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
-		///<summary>/_ccr/auto_follow/{name}/resume</summary>
-        public ResumeAutoFollowPatternRequest(Name name) : base(r => r.Required("name", name))
-		{
-		}
-	}
-
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IResumeFollowIndexRequest, ResumeFollowIndexRequest>))]
-	public interface IResumeFollowIndexRequest : IRequest<ResumeFollowIndexRequestParameters>
-	{
-	}
-
-	public class ResumeFollowIndexRequest : PlainRequestBase<ResumeFollowIndexRequestParameters>, IResumeFollowIndexRequest
-	{
-		protected IResumeFollowIndexRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationResumeFollow;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => MaxReadRequestSize is null && MaxWriteBufferSize is null && MaxWriteRequestSize is null;
-		///<summary>/{index}/_ccr/resume_follow</summary>
-        public ResumeFollowIndexRequest(IndexName index) : base(r => r.Required("index", index))
-		{
-		}
-
-		[JsonPropertyName("max_read_request_size")]
-		public string? MaxReadRequestSize
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("max_write_buffer_size")]
-		public string? MaxWriteBufferSize
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("max_write_request_size")]
-		public string? MaxWriteRequestSize
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	[JsonInterfaceConverter(typeof(InterfaceConverter<ICcrStatsRequest, CcrStatsRequest>))]
-	public interface ICcrStatsRequest : IRequest<CcrStatsRequestParameters>
-	{
-	}
-
-	public class CcrStatsRequest : PlainRequestBase<CcrStatsRequestParameters>, ICcrStatsRequest
-	{
-		protected ICcrStatsRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationStats;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
-		///<summary>/_ccr/stats</summary>
-        public CcrStatsRequest() : base()
-		{
-		}
-	}
-
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IUnfollowIndexRequest, UnfollowIndexRequest>))]
-	public interface IUnfollowIndexRequest : IRequest<UnfollowIndexRequestParameters>
-	{
-	}
-
-	public class UnfollowIndexRequest : PlainRequestBase<UnfollowIndexRequestParameters>, IUnfollowIndexRequest
-	{
-		protected IUnfollowIndexRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationUnfollow;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
-		///<summary>/{index}/_ccr/unfollow</summary>
-        public UnfollowIndexRequest(IndexName index) : base(r => r.Required("index", index))
-		{
 		}
 	}
 }

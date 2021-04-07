@@ -25,9 +25,7 @@ namespace Tests.Framework.EndpointTests
 		public CoordinatedUsage(INestTestCluster cluster, EndpointUsage usage, string prefix = null, bool testOnlyOne = false)
 		{
 			_cluster = cluster;
-			Usage = usage;
 			_testOnlyOne = testOnlyOne;
-			Prefix = prefix;
 			_values = new Dictionary<ClientMethod, string>
 			{
 				{ ClientMethod.Fluent, Sanitize(RandomFluent) },
@@ -35,6 +33,9 @@ namespace Tests.Framework.EndpointTests
 				{ ClientMethod.FluentAsync, Sanitize(RandomFluentAsync) },
 				{ ClientMethod.InitializerAsync, Sanitize(RandomInitializerAsync) }
 			};
+
+			Usage = usage;
+			Prefix = prefix;
 		}
 
 		protected IElasticClient Client => _cluster.Client;
