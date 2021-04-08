@@ -32,6 +32,9 @@ namespace ApiGenerator.Configuration
 			"indices.upgrade.json",
 			"indices.get_upgrade.json",
 
+			// This was added in 7.12.0 BC1 but the spec was removed before GA, but the API still existed.
+			// This isn't the preferred API so skipping code gen for it.
+			"ml.find_file_structure.json"
 		};
 
 		private static string[] IgnoredApisHighLevel { get; } =
