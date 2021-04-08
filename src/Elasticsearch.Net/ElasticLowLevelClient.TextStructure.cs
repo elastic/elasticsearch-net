@@ -46,13 +46,11 @@ namespace Elasticsearch.Net.Specification.TextStructureApi
 		///<summary>POST on /_text_structure/find_structure <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/find-structure.html</para></summary>
 		///<param name = "body">The contents of the file to be analyzed</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse FindStructure<TResponse>(PostData body, FindStructureRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_text_structure/find_structure", body, RequestParams(requestParameters));
 		///<summary>POST on /_text_structure/find_structure <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/find-structure.html</para></summary>
 		///<param name = "body">The contents of the file to be analyzed</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("text_structure.find_structure", "body")]
 		public Task<TResponse> FindStructureAsync<TResponse>(PostData body, FindStructureRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_text_structure/find_structure", ctx, body, RequestParams(requestParameters));

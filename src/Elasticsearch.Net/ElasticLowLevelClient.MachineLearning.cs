@@ -721,30 +721,30 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.preview_data_frame_analytics", "id, body")]
 		public Task<TResponse> PreviewDataFrameAnalyticsAsync<TResponse>(string id, PostData body, PreviewDataFrameAnalyticsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/data_frame/analytics/{id:id}/_preview"), ctx, body, RequestParams(requestParameters));
-		///<summary>GET on /_ml/datafeeds/{datafeed_id}/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
+		///<summary>POST on /_ml/datafeeds/{datafeed_id}/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
 		///<param name = "datafeedId">The ID of the datafeed to preview</param>
 		///<param name = "body">The datafeed config and job config with which to execute the preview</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse PreviewDatafeed<TResponse>(string datafeedId, PostData body, PreviewDatafeedRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_preview"), body, RequestParams(requestParameters));
-		///<summary>GET on /_ml/datafeeds/{datafeed_id}/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_preview"), body, RequestParams(requestParameters));
+		///<summary>POST on /_ml/datafeeds/{datafeed_id}/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
 		///<param name = "datafeedId">The ID of the datafeed to preview</param>
 		///<param name = "body">The datafeed config and job config with which to execute the preview</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("ml.preview_datafeed", "datafeed_id, body")]
 		public Task<TResponse> PreviewDatafeedAsync<TResponse>(string datafeedId, PostData body, PreviewDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_preview"), ctx, body, RequestParams(requestParameters));
-		///<summary>GET on /_ml/datafeeds/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_preview"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_ml/datafeeds/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
 		///<param name = "body">The datafeed config and job config with which to execute the preview</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse PreviewDatafeed<TResponse>(PostData body, PreviewDatafeedRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_ml/datafeeds/_preview", body, RequestParams(requestParameters));
-		///<summary>GET on /_ml/datafeeds/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ml/datafeeds/_preview", body, RequestParams(requestParameters));
+		///<summary>POST on /_ml/datafeeds/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</para></summary>
 		///<param name = "body">The datafeed config and job config with which to execute the preview</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("ml.preview_datafeed", "body")]
 		public Task<TResponse> PreviewDatafeedAsync<TResponse>(PostData body, PreviewDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_ml/datafeeds/_preview", ctx, body, RequestParams(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ml/datafeeds/_preview", ctx, body, RequestParams(requestParameters));
 		///<summary>PUT on /_ml/calendars/{calendar_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html</para></summary>
 		///<param name = "calendarId">The ID of the calendar to create</param>
 		///<param name = "body">The calendar details</param>
