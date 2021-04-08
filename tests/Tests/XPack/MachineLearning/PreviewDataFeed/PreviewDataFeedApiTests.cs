@@ -22,7 +22,7 @@ namespace Tests.XPack.MachineLearning.PreviewDataFeed
 		protected override object ExpectJson => null;
 		protected override int ExpectStatusCode => 200;
 		protected override Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> Fluent => f => f;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override PreviewDatafeedRequest Initializer => new PreviewDatafeedRequest(CallIsolatedValue + "-datafeed");
 		protected override bool SupportsDeserialization => false;
 		protected override string UrlPath => $"/_ml/datafeeds/{CallIsolatedValue}-datafeed/_preview";
