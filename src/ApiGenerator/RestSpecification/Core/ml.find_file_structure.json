@@ -1,10 +1,10 @@
 {
-  "text_structure.find_structure":{
+  "ml.find_file_structure":{
     "documentation":{
       "url":"https://www.elastic.co/guide/en/elasticsearch/reference/current/find-structure.html",
       "description":"Finds the structure of a text file. The text file must contain data that is suitable to be ingested into Elasticsearch."
     },
-    "stability":"stable",
+    "stability":"experimental",
     "visibility":"public",
     "headers":{
       "accept": [ "application/json"],
@@ -13,10 +13,14 @@
     "url":{
       "paths":[
         {
-          "path":"/_text_structure/find_structure",
+          "path":"/_ml/find_file_structure",
           "methods":[
             "POST"
-          ]
+          ],
+          "deprecated":{
+            "version":"7.12.0",
+            "description":"This endpoint has changed to _text_structure/find_structure, please use that API instead"
+          }
         }
       ]
     },
