@@ -11,6 +11,7 @@ open Elasticsearch.Net.Specification.CatApi
 open Elasticsearch.Net.Specification.IndicesApi
 open Tests.YamlRunner.Models
 open System.Collections.Generic
+open Elasticsearch.Net.Specification.ClusterApi
 
 let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
     let firstFailure (responses:DynamicResponse seq) =
@@ -135,8 +136,17 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
     let wipeTemplateForXPack () = deleteTemplates() @ deleteComponentTemplates()
     
     let wipeClusterSettings () =
-        let settings = client.Cluster.GetSettings<DynamicResponse>()
-        settings
+        let settings = client.Cluster.GetSettings<DynamicResponse>(ClusterGetSettingsRequestParameters(FlatSettings=true))
+        let payload =
+            [ 
+                "transient", dict [ for v in settings.Get<DynamicDictionary>("transient").Keys -> v, null ];
+                "persistent", dict [ for v in settings.Get<DynamicDictionary>("persistent").Keys -> v, null ];
+            ]
+            |> dict
+        if payload.["transient"].Values.Count > 0 || payload.["transient"].Values.Count > 0 then
+            client.Cluster.PutSettings<DynamicResponse>(PostData.Serializable(payload))
+        else 
+            settings
     
     let deleteAllILMPolicies () =
         let preserved = [
@@ -247,7 +257,6 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         yield! deleteAllTasks()
         
         yield! stopTransforms()
-            
             
         if suite = Platinum then
             let data = PostData.String @"{""password"":""x-pack-test-password"", ""roles"":[""superuser""]}"
