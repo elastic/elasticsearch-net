@@ -11,6 +11,7 @@ open Elasticsearch.Net.Specification.CatApi
 open Elasticsearch.Net.Specification.IndicesApi
 open Tests.YamlRunner.Models
 open System.Collections.Generic
+open Elasticsearch.Net.Specification.ClusterApi
 
 let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
     let firstFailure (responses:DynamicResponse seq) =
