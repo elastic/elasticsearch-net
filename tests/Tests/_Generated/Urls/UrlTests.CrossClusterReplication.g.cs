@@ -33,4 +33,24 @@ namespace Tests.Urls.CrossClusterReplication
             await UrlTester.PUT("/project/_ccr/follow").Request(c => c.CrossClusterReplication.CreateFollowIndex(new CreateFollowIndexRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.CrossClusterReplication.CreateFollowIndexAsync(new CreateFollowIndexRequest(Nest.IndexName.From<Project>())));
         }
     }
+
+    public class CrossClusterReplicationFollowInfoUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_all/_ccr/info").Request(c => c.CrossClusterReplication.FollowInfo(new FollowInfoRequest(Nest.Indices.All))).RequestAsync(c => c.CrossClusterReplication.FollowInfoAsync(new FollowInfoRequest(Nest.Indices.All)));
+            await UrlTester.GET("/project/_ccr/info").Request(c => c.CrossClusterReplication.FollowInfo(new FollowInfoRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.CrossClusterReplication.FollowInfoAsync(new FollowInfoRequest(Nest.IndexName.From<Project>())));
+        }
+    }
+
+    public class CrossClusterReplicationFollowStatsUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_all/_ccr/stats").Request(c => c.CrossClusterReplication.FollowIndexStats(new FollowIndexStatsRequest(Nest.Indices.All))).RequestAsync(c => c.CrossClusterReplication.FollowIndexStatsAsync(new FollowIndexStatsRequest(Nest.Indices.All)));
+            await UrlTester.GET("/project/_ccr/stats").Request(c => c.CrossClusterReplication.FollowIndexStats(new FollowIndexStatsRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.CrossClusterReplication.FollowIndexStatsAsync(new FollowIndexStatsRequest(Nest.IndexName.From<Project>())));
+        }
+    }
 }

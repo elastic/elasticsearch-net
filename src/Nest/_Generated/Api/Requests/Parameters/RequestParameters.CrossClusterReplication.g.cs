@@ -29,4 +29,12 @@ namespace Nest
     {
         public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
+
+    public class FollowInfoRequestParameters : RequestParameters<FollowInfoRequestParameters>
+    {
+    }
+
+    public class FollowIndexStatsRequestParameters : RequestParameters<FollowIndexStatsRequestParameters>
+    {
+    }
 }

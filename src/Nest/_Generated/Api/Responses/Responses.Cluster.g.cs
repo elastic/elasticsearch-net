@@ -289,6 +289,88 @@ namespace Nest
 		}
 	}
 
+	public class ClusterDeleteComponentTemplateResponse : AcknowledgedResponseBase
+	{
+	}
+
+	public class ClusterDeleteVotingConfigExclusionsResponse : ResponseBase
+	{
+		[JsonPropertyName("stub")]
+		public int Stub
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public class ClusterComponentTemplateExistsResponse : ResponseBase
+	{
+		[JsonPropertyName("stub")]
+		public int Stub
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public class ClusterGetComponentTemplateResponse : ResponseBase
+	{
+		[JsonPropertyName("stub")]
+		public int Stub
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public class ClusterGetSettingsResponse : ResponseBase
+	{
+		[JsonPropertyName("persistent")]
+		public IDictionary<string, object> Persistent
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transient")]
+		public IDictionary<string, object> Transient
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("defaults")]
+		public IDictionary<string, object>? Defaults
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public class ClusterHealthResponse : ResponseBase
 	{
 		[JsonPropertyName("active_primary_shards")]
@@ -458,6 +540,215 @@ namespace Nest
 
 		[JsonPropertyName("unassigned_shards")]
 		public int UnassignedShards
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public class ClusterPendingTasksResponse : ResponseBase
+	{
+		[JsonPropertyName("tasks")]
+		public IEnumerable<PendingTask> Tasks
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public class ClusterPostVotingConfigExclusionsResponse : ResponseBase
+	{
+		[JsonPropertyName("stub")]
+		public int Stub
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public class ClusterPutComponentTemplateResponse : ResponseBase
+	{
+		[JsonPropertyName("stub")]
+		public int Stub
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public class ClusterPutSettingsResponse : ResponseBase
+	{
+		[JsonPropertyName("acknowledged")]
+		public bool Acknowledged
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("persistent")]
+		public IDictionary<string, object> Persistent
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transient")]
+		public IDictionary<string, object> Transient
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public class RemoteInfoResponse : DictionaryResponseBase
+	{
+	}
+
+	public class ClusterRerouteResponse : ResponseBase
+	{
+		[JsonPropertyName("acknowledged")]
+		public bool Acknowledged
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("explanations")]
+		public IEnumerable<ClusterRerouteExplanation> Explanations
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("state")]
+		public IEnumerable<string> State
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public class ClusterStateResponse : ResponseBase
+	{
+		[JsonPropertyName("cluster_name")]
+		public string ClusterName
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cluster_uuid")]
+		public Uuid ClusterUuid
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("master_node")]
+		public string? MasterNode
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("state")]
+		public IEnumerable<string>? State
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("state_uuid")]
+		public Uuid? StateUuid
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public VersionNumber? Version
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("blocks")]
+		public ClusterStateBlocks? Blocks
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("metadata")]
+		public ClusterStateMetadata? Metadata
 		{
 			get;
 #if NET5_0

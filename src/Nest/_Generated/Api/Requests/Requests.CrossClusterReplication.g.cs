@@ -177,4 +177,42 @@ namespace Nest
 #endif
 		}
 	}
+
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IFollowInfoRequest, FollowInfoRequest>))]
+	public interface IFollowInfoRequest : IRequest<FollowInfoRequestParameters>
+	{
+	}
+
+	public class FollowInfoRequest : PlainRequestBase<FollowInfoRequestParameters>, IFollowInfoRequest
+	{
+		protected IFollowInfoRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationFollowInfo;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+		///<summary>/{index}/_ccr/info</summary>
+        public FollowInfoRequest(Indices index) : base(r => r.Required("index", index))
+		{
+		}
+	}
+
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IFollowIndexStatsRequest, FollowIndexStatsRequest>))]
+	public interface IFollowIndexStatsRequest : IRequest<FollowIndexStatsRequestParameters>
+	{
+	}
+
+	public class FollowIndexStatsRequest : PlainRequestBase<FollowIndexStatsRequestParameters>, IFollowIndexStatsRequest
+	{
+		protected IFollowIndexStatsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.CrossClusterReplicationFollowStats;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+		///<summary>/{index}/_ccr/stats</summary>
+        public FollowIndexStatsRequest(Indices index) : base(r => r.Required("index", index))
+		{
+		}
+	}
 }

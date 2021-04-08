@@ -29,6 +29,11 @@ namespace Nest
 
 	public class VersionNumber { }
 
+	public class DataStreamName : IUrlParameter
+	{
+		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	}
+
 	public abstract partial class PlainRequestBase<TParameters>
 	{
 		///<summary>Include the stack trace of returned errors.</summary>

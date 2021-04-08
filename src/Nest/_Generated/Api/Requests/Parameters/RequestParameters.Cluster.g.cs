@@ -32,6 +32,43 @@ namespace Nest
         public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
     }
 
+    public class ClusterDeleteComponentTemplateRequestParameters : RequestParameters<ClusterDeleteComponentTemplateRequestParameters>
+    {
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public class ClusterDeleteVotingConfigExclusionsRequestParameters : RequestParameters<ClusterDeleteVotingConfigExclusionsRequestParameters>
+    {
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+    }
+
+    public class ClusterComponentTemplateExistsRequestParameters : RequestParameters<ClusterComponentTemplateExistsRequestParameters>
+    {
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+    }
+
+    public class ClusterGetComponentTemplateRequestParameters : RequestParameters<ClusterGetComponentTemplateRequestParameters>
+    {
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+    }
+
+    public class ClusterGetSettingsRequestParameters : RequestParameters<ClusterGetSettingsRequestParameters>
+    {
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
     public class ClusterHealthRequestParameters : RequestParameters<ClusterHealthRequestParameters>
     {
         public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -55,5 +92,75 @@ namespace Nest
         public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
 
         public WaitForStatus? WaitForStatus { get => Q<WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
+    }
+
+    public class ClusterPendingTasksRequestParameters : RequestParameters<ClusterPendingTasksRequestParameters>
+    {
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+    }
+
+    public class ClusterPostVotingConfigExclusionsRequestParameters : RequestParameters<ClusterPostVotingConfigExclusionsRequestParameters>
+    {
+        public Names? NodeNames { get => Q<Names?>("node_names"); set => Q("node_names", value); }
+
+        public Ids? NodeIds { get => Q<Ids?>("node_ids"); set => Q("node_ids", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
+    }
+
+    public class ClusterPutComponentTemplateRequestParameters : RequestParameters<ClusterPutComponentTemplateRequestParameters>
+    {
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+    }
+
+    public class ClusterPutSettingsRequestParameters : RequestParameters<ClusterPutSettingsRequestParameters>
+    {
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public class RemoteInfoRequestParameters : RequestParameters<RemoteInfoRequestParameters>
+    {
+    }
+
+    public class ClusterRerouteRequestParameters : RequestParameters<ClusterRerouteRequestParameters>
+    {
+        public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
+
+        public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public Metrics? Metric { get => Q<Metrics?>("metric"); set => Q("metric", value); }
+
+        public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
+
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public class ClusterStateRequestParameters : RequestParameters<ClusterStateRequestParameters>
+    {
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        public VersionNumber? WaitForMetadataVersion { get => Q<VersionNumber?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
+
+        public Time? WaitForTimeout { get => Q<Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
     }
 }

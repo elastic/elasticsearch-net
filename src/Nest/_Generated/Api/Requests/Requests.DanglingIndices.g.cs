@@ -16,66 +16,37 @@
 //
 // ------------------------------------------------
 
-using System.Collections.Generic;
+using System;
 using System.Text.Json.Serialization;
+using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest
 {
-	public class CreateFollowIndexResponse : ResponseBase
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IDeleteDanglingIndexRequest, DeleteDanglingIndexRequest>))]
+	public interface IDeleteDanglingIndexRequest : IRequest<DeleteDanglingIndexRequestParameters>
 	{
-		[JsonPropertyName("follow_index_created")]
-		public bool FollowIndexCreated
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("follow_index_shards_acked")]
-		public bool FollowIndexShardsAcked
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("index_following_started")]
-		public bool IndexFollowingStarted
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
 	}
 
-	public class FollowInfoResponse : ResponseBase
+	public class DeleteDanglingIndexRequest : PlainRequestBase<DeleteDanglingIndexRequestParameters>, IDeleteDanglingIndexRequest
 	{
-		[JsonPropertyName("follower_indices")]
-		public IEnumerable<FollowerInfo> FollowerIndices
+		protected IDeleteDanglingIndexRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.DanglingIndicesDeleteDanglingIndex;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+		///<summary>/_dangling/{index_uuid}</summary>
+        public DeleteDanglingIndexRequest(IndexUuid indexUuid) : base(r => r)
 		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
 		}
-	}
 
-	public class FollowIndexStatsResponse : ResponseBase
-	{
-		[JsonPropertyName("indices")]
-		public IEnumerable<FollowIndexStats> Indices
+		[JsonIgnore]
+		public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+
+		[JsonPropertyName("stub_c")]
+		public string StubC
 		{
 			get;
 #if NET5_0

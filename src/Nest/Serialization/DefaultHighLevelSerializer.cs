@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -27,6 +28,64 @@ namespace Nest
 		public override TInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TConcrete>(ref reader, options);
 
 		public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options) => JsonSerializer.Serialize<TConcrete>(writer, value as TConcrete, options);
+	}
+
+	public class UnionConverter<TConcrete> : JsonConverter<TConcrete> where TConcrete : class
+	{
+		public override TConcrete Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var token = reader.TokenType;
+
+			switch (token)
+			{
+				case JsonTokenType.String:
+				{
+					var value = reader.GetString();
+					var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
+					return result;
+				}
+				case JsonTokenType.Number:
+				{
+					var value = reader.GetInt32();
+					var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
+					return result;
+				}
+			}
+
+			throw new SerializationException();
+		}
+
+		public override void Write(Utf8JsonWriter writer, TConcrete value, JsonSerializerOptions options) =>
+			throw new NotImplementedException();
+	}
+
+	public class PercentageConverter : JsonConverter<Percentage>
+	{
+		public override Percentage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var token = reader.TokenType;
+
+			switch (token)
+			{
+				case JsonTokenType.String:
+				{
+					var value = reader.GetString();
+					var result = (Percentage)Activator.CreateInstance(typeof(Percentage), value);
+					return result;
+				}
+				case JsonTokenType.Number:
+				{
+					var value = reader.GetSingle();
+					var result = (Percentage)Activator.CreateInstance(typeof(Percentage), value);
+					return result;
+				}
+			}
+
+			throw new SerializationException();
+		}
+
+		public override void Write(Utf8JsonWriter writer, Percentage value, JsonSerializerOptions options) =>
+			throw new NotImplementedException();
 	}
 
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>

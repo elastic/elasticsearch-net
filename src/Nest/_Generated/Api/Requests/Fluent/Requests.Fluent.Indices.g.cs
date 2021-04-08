@@ -28,10 +28,52 @@ namespace Nest
 		protected override bool SupportsBody => false;
 	}
 
+	public class DeleteAliasDescriptor : RequestDescriptorBase<DeleteAliasDescriptor, DeleteAliasRequestParameters, IDeleteAliasRequest>, IDeleteAliasRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteAlias;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+	}
+
+	public class IndicesDeleteDataStreamDescriptor : RequestDescriptorBase<IndicesDeleteDataStreamDescriptor, IndicesDeleteDataStreamRequestParameters, IIndicesDeleteDataStreamRequest>, IIndicesDeleteDataStreamRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteDataStream;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+	}
+
+	public class DeleteIndexTemplateDescriptor : RequestDescriptorBase<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequestParameters, IDeleteIndexTemplateRequest>, IDeleteIndexTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+	}
+
 	public class IndexTemplateExistsDescriptor : RequestDescriptorBase<IndexTemplateExistsDescriptor, IndexTemplateExistsRequestParameters, IIndexTemplateExistsRequest>, IIndexTemplateExistsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExistsTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
+	}
+
+	public class GetFieldMappingDescriptor : RequestDescriptorBase<GetFieldMappingDescriptor, GetFieldMappingRequestParameters, IGetFieldMappingRequest>, IGetFieldMappingRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetFieldMapping;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+	}
+
+	public class GetMappingDescriptor : RequestDescriptorBase<GetMappingDescriptor, GetMappingRequestParameters, IGetMappingRequest>, IGetMappingRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetMapping;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+	}
+
+	public class PutMappingDescriptor : RequestDescriptorBase<PutMappingDescriptor, PutMappingRequestParameters, IPutMappingRequest>, IPutMappingRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutMapping;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
 	}
 }

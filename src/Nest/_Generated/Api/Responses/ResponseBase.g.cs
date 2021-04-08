@@ -36,6 +36,10 @@ namespace Nest
 		}
 	}
 
+	public abstract class DictionaryResponseBase : ResponseBase
+	{
+	}
+
 	public abstract class IndicesResponseBase : AcknowledgedResponseBase
 	{
 		[JsonPropertyName("_shards")]
