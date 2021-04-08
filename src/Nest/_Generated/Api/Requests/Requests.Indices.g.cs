@@ -58,6 +58,75 @@ namespace Nest
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 	}
 
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IDeleteAliasRequest, DeleteAliasRequest>))]
+	public interface IDeleteAliasRequest : IRequest<DeleteAliasRequestParameters>
+	{
+	}
+
+	public class DeleteAliasRequest : PlainRequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
+	{
+		protected IDeleteAliasRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteAlias;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+		///<summary>/{index}/_alias/{name}</summary>
+        public DeleteAliasRequest(Indices index, Names name) : base(r => r.Required("index", index).Required("name", name))
+		{
+		}
+
+		[JsonIgnore]
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+	}
+
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IIndicesDeleteDataStreamRequest, IndicesDeleteDataStreamRequest>))]
+	public interface IIndicesDeleteDataStreamRequest : IRequest<IndicesDeleteDataStreamRequestParameters>
+	{
+	}
+
+	public class IndicesDeleteDataStreamRequest : PlainRequestBase<IndicesDeleteDataStreamRequestParameters>, IIndicesDeleteDataStreamRequest
+	{
+		protected IIndicesDeleteDataStreamRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteDataStream;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+		///<summary>/_data_stream/{name}</summary>
+        public IndicesDeleteDataStreamRequest(DataStreamName name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IDeleteIndexTemplateRequest, DeleteIndexTemplateRequest>))]
+	public interface IDeleteIndexTemplateRequest : IRequest<DeleteIndexTemplateRequestParameters>
+	{
+	}
+
+	public class DeleteIndexTemplateRequest : PlainRequestBase<DeleteIndexTemplateRequestParameters>, IDeleteIndexTemplateRequest
+	{
+		protected IDeleteIndexTemplateRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+		///<summary>/_template/{name}</summary>
+        public DeleteIndexTemplateRequest(Name name) : base(r => r.Required("name", name))
+		{
+		}
+
+		[JsonIgnore]
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+	}
+
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IIndexTemplateExistsRequest, IndexTemplateExistsRequest>))]
 	public interface IIndexTemplateExistsRequest : IRequest<IndexTemplateExistsRequestParameters>
 	{
@@ -84,5 +153,250 @@ namespace Nest
 
 		[JsonIgnore]
 		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+	}
+
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IGetFieldMappingRequest, GetFieldMappingRequest>))]
+	public interface IGetFieldMappingRequest : IRequest<GetFieldMappingRequestParameters>
+	{
+	}
+
+	public class GetFieldMappingRequest : PlainRequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
+	{
+		protected IGetFieldMappingRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetFieldMapping;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+		///<summary>/_mapping/field/{fields}</summary>
+        public GetFieldMappingRequest(Fields fields) : base(r => r.Required("fields", fields))
+		{
+		}
+
+		///<summary>/{index}/_mapping/field/{fields}</summary>
+        public GetFieldMappingRequest(Indices index, Fields fields) : base(r => r.Optional("index", index).Required("fields", fields))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+		[JsonIgnore]
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+		[JsonIgnore]
+		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+		[JsonIgnore]
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+
+		[JsonIgnore]
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+	}
+
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IGetMappingRequest, GetMappingRequest>))]
+	public interface IGetMappingRequest : IRequest<GetMappingRequestParameters>
+	{
+	}
+
+	public class GetMappingRequest : PlainRequestBase<GetMappingRequestParameters>, IGetMappingRequest
+	{
+		protected IGetMappingRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetMapping;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+		///<summary>/_mapping</summary>
+        public GetMappingRequest() : base()
+		{
+		}
+
+		///<summary>/{index}/_mapping</summary>
+        public GetMappingRequest(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+		[JsonIgnore]
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+		[JsonIgnore]
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+
+		[JsonIgnore]
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+		[JsonIgnore]
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+	}
+
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IPutMappingRequest, PutMappingRequest>))]
+	public interface IPutMappingRequest : IRequest<PutMappingRequestParameters>
+	{
+	}
+
+	public class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
+	{
+		protected IPutMappingRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutMapping;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => AllField is null && DateDetection is null && DynamicDateFormats is null && FieldNamesField is null && IndexField is null && Meta is null && NumericDetection is null && Properties is null && RoutingField is null && SizeField is null && SourceField is null;
+		///<summary>/{index}/_mapping</summary>
+        public PutMappingRequest(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+		[JsonIgnore]
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+		[JsonIgnore]
+		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
+
+		[JsonIgnore]
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonIgnore]
+		public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
+
+		[JsonPropertyName("all_field")]
+		public AllField? AllField
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("date_detection")]
+		public bool? DateDetection
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("dynamic_date_formats")]
+		public IEnumerable<string>? DynamicDateFormats
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("field_names_field")]
+		public FieldNamesField? FieldNamesField
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_field")]
+		public IndexField? IndexField
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("meta")]
+		public IDictionary<string, object>? Meta
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("numeric_detection")]
+		public bool? NumericDetection
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("properties")]
+		public IDictionary<PropertyName, Property>? Properties
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("routing_field")]
+		public RoutingField? RoutingField
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size_field")]
+		public SizeField? SizeField
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source_field")]
+		public SourceField? SourceField
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
 	}
 }

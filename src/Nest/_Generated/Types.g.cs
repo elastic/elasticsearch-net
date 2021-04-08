@@ -24,6 +24,119 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest
 {
+	public partial class AllField
+	{
+		[JsonPropertyName("analyzer")]
+		public string Analyzer
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("enabled")]
+		public bool Enabled
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("omit_norms")]
+		public bool OmitNorms
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("search_analyzer")]
+		public string SearchAnalyzer
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("similarity")]
+		public string Similarity
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("store")]
+		public bool Store
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("store_term_vector_offsets")]
+		public bool StoreTermVectorOffsets
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("store_term_vector_payloads")]
+		public bool StoreTermVectorPayloads
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("store_term_vector_positions")]
+		public bool StoreTermVectorPositions
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("store_term_vectors")]
+		public bool StoreTermVectors
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class AllocationDecision
 	{
 		[JsonPropertyName("decider")]
@@ -176,6 +289,324 @@ namespace Nest
 		}
 	}
 
+	public partial class ClusterRerouteCommand
+	{
+		[JsonPropertyName("cancel")]
+		public ClusterRerouteCommandAction Cancel
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterRerouteCommandAction
+	{
+		[JsonPropertyName("index")]
+		public IndexName Index
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("node")]
+		public string Node
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shard")]
+		public int Shard
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterRerouteDecision
+	{
+		[JsonPropertyName("decider")]
+		public string Decider
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("decision")]
+		public string Decision
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("explanation")]
+		public string Explanation
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterRerouteExplanation
+	{
+		[JsonPropertyName("command")]
+		public string Command
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("decisions")]
+		public IEnumerable<ClusterRerouteDecision> Decisions
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("parameters")]
+		public ClusterRerouteParameters Parameters
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterRerouteParameters
+	{
+		[JsonPropertyName("allow_primary")]
+		public bool AllowPrimary
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("from_node")]
+		public string FromNode
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index")]
+		public string Index
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("node")]
+		public string Node
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shard")]
+		public int Shard
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("to_node")]
+		public string ToNode
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateBlocks
+	{
+	}
+
+	public partial class ClusterStateMetadata
+	{
+		[JsonPropertyName("cluster_coordination")]
+		public ClusterStateMetadataClusterCoordination ClusterCoordination
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cluster_uuid")]
+		public Uuid ClusterUuid
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cluster_uuid_committed")]
+		public bool ClusterUuidCommitted
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index-graveyard")]
+		public ClusterStateMetadataIndexGraveyard IndexGraveyard
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("templates")]
+		public ClusterStateMetadataTemplate Templates
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateMetadataClusterCoordination
+	{
+		[JsonPropertyName("last_accepted_config")]
+		public IEnumerable<string> LastAcceptedConfig
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("last_committed_config")]
+		public IEnumerable<string> LastCommittedConfig
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("term")]
+		public int Term
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("voting_config_exclusions")]
+		public IEnumerable<string> VotingConfigExclusions
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateMetadataIndexGraveyard
+	{
+		[JsonPropertyName("tombstones")]
+		public IEnumerable<string> Tombstones
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateMetadataTemplate
+	{
+	}
+
 	public partial class CurrentNode
 	{
 		[JsonPropertyName("attributes")]
@@ -293,6 +724,588 @@ namespace Nest
 
 		[JsonPropertyName("used_disk_percent")]
 		public double UsedDiskPercent
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FieldNamesField
+	{
+		[JsonPropertyName("enabled")]
+		public bool Enabled
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FollowConfig
+	{
+		[JsonPropertyName("max_outstanding_read_requests")]
+		public int MaxOutstandingReadRequests
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_outstanding_write_requests")]
+		public int MaxOutstandingWriteRequests
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_read_request_operation_count")]
+		public int MaxReadRequestOperationCount
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_read_request_size")]
+		public string MaxReadRequestSize
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_retry_delay")]
+		public Time MaxRetryDelay
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_write_buffer_count")]
+		public int MaxWriteBufferCount
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_write_buffer_size")]
+		public string MaxWriteBufferSize
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_write_request_operation_count")]
+		public int MaxWriteRequestOperationCount
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_write_request_size")]
+		public string MaxWriteRequestSize
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("read_poll_timeout")]
+		public Time ReadPollTimeout
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FollowIndexReadException
+	{
+		[JsonPropertyName("exception")]
+		public ErrorCause Exception
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("from_seq_no")]
+		public SequenceNumber FromSeqNo
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("retries")]
+		public int Retries
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FollowIndexShardStats
+	{
+		[JsonPropertyName("bytes_read")]
+		public long BytesRead
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("failed_read_requests")]
+		public long FailedReadRequests
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("failed_write_requests")]
+		public long FailedWriteRequests
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fatal_exception")]
+		public ErrorCause? FatalException
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("follower_aliases_version")]
+		public VersionNumber FollowerAliasesVersion
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("follower_global_checkpoint")]
+		public long FollowerGlobalCheckpoint
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("follower_index")]
+		public string FollowerIndex
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("follower_mapping_version")]
+		public VersionNumber FollowerMappingVersion
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("follower_max_seq_no")]
+		public SequenceNumber FollowerMaxSeqNo
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("follower_settings_version")]
+		public VersionNumber FollowerSettingsVersion
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("last_requested_seq_no")]
+		public SequenceNumber LastRequestedSeqNo
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("leader_global_checkpoint")]
+		public long LeaderGlobalCheckpoint
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("leader_index")]
+		public string LeaderIndex
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("leader_max_seq_no")]
+		public SequenceNumber LeaderMaxSeqNo
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("operations_read")]
+		public long OperationsRead
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("operations_written")]
+		public long OperationsWritten
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("outstanding_read_requests")]
+		public int OutstandingReadRequests
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("outstanding_write_requests")]
+		public int OutstandingWriteRequests
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("read_exceptions")]
+		public IEnumerable<FollowIndexReadException> ReadExceptions
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("remote_cluster")]
+		public string RemoteCluster
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shard_id")]
+		public int ShardId
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("successful_read_requests")]
+		public long SuccessfulReadRequests
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("successful_write_requests")]
+		public long SuccessfulWriteRequests
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_since_last_read_millis")]
+		public EpochMillis TimeSinceLastReadMillis
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total_read_remote_exec_time_millis")]
+		public EpochMillis TotalReadRemoteExecTimeMillis
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total_read_time_millis")]
+		public EpochMillis TotalReadTimeMillis
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total_write_time_millis")]
+		public EpochMillis TotalWriteTimeMillis
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("write_buffer_operation_count")]
+		public long WriteBufferOperationCount
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("write_buffer_size_in_bytes")]
+		public ByteSize WriteBufferSizeInBytes
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FollowIndexStats
+	{
+		[JsonPropertyName("index")]
+		public IndexName Index
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shards")]
+		public IEnumerable<FollowIndexShardStats> Shards
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FollowerInfo
+	{
+		[JsonPropertyName("follower_index")]
+		public IndexName FollowerIndex
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("leader_index")]
+		public IndexName LeaderIndex
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("parameters")]
+		public FollowConfig? Parameters
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("remote_cluster")]
+		public Name RemoteCluster
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("status")]
+		public FollowerIndexStatus Status
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class IndexField
+	{
+		[JsonPropertyName("enabled")]
+		public bool Enabled
 		{
 			get;
 #if NET5_0
@@ -532,6 +1545,78 @@ namespace Nest
 		}
 	}
 
+	public partial class PendingTask
+	{
+		[JsonPropertyName("insert_order")]
+		public int InsertOrder
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("priority")]
+		public string Priority
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source")]
+		public string Source
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_in_queue")]
+		public string TimeInQueue
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_in_queue_millis")]
+		public int TimeInQueueMillis
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class PutRoleMappingStatus
+	{
+		[JsonPropertyName("created")]
+		public bool Created
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class ReservedSize
 	{
 		[JsonPropertyName("node_id")]
@@ -569,6 +1654,24 @@ namespace Nest
 
 		[JsonPropertyName("total")]
 		public long Total
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RoleMappingRuleBase
+	{
+	}
+
+	public partial class RoutingField
+	{
+		[JsonPropertyName("required")]
+		public bool Required
 		{
 			get;
 #if NET5_0
@@ -754,6 +1857,78 @@ namespace Nest
 
 		[JsonPropertyName("total")]
 		public uint Total
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SizeField
+	{
+		[JsonPropertyName("enabled")]
+		public bool Enabled
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SourceField
+	{
+		[JsonPropertyName("compress")]
+		public bool? Compress
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("compress_threshold")]
+		public string? CompressThreshold
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("enabled")]
+		public bool Enabled
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("excludes")]
+		public IEnumerable<string>? Excludes
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("includes")]
+		public IEnumerable<string>? Includes
 		{
 			get;
 #if NET5_0

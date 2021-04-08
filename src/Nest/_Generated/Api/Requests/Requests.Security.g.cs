@@ -24,6 +24,129 @@ using System.Collections.Generic;
 #nullable restore
 namespace Nest
 {
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IDeleteRoleMappingRequest, DeleteRoleMappingRequest>))]
+	public interface IDeleteRoleMappingRequest : IRequest<DeleteRoleMappingRequestParameters>
+	{
+	}
+
+	public class DeleteRoleMappingRequest : PlainRequestBase<DeleteRoleMappingRequestParameters>, IDeleteRoleMappingRequest
+	{
+		protected IDeleteRoleMappingRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDeleteRoleMapping;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+		///<summary>/_security/role_mapping/{name}</summary>
+        public DeleteRoleMappingRequest(Name name) : base(r => r.Required("name", name))
+		{
+		}
+
+		[JsonIgnore]
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IGetRoleMappingRequest, GetRoleMappingRequest>))]
+	public interface IGetRoleMappingRequest : IRequest<GetRoleMappingRequestParameters>
+	{
+	}
+
+	public class GetRoleMappingRequest : PlainRequestBase<GetRoleMappingRequestParameters>, IGetRoleMappingRequest
+	{
+		protected IGetRoleMappingRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetRoleMapping;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+		///<summary>/_security/role_mapping/{name}</summary>
+        public GetRoleMappingRequest(Name name) : base(r => r.Optional("name", name))
+		{
+		}
+
+		///<summary>/_security/role_mapping</summary>
+        public GetRoleMappingRequest() : base()
+		{
+		}
+	}
+
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IPutRoleMappingRequest, PutRoleMappingRequest>))]
+	public interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequestParameters>
+	{
+	}
+
+	public class PutRoleMappingRequest : PlainRequestBase<PutRoleMappingRequestParameters>, IPutRoleMappingRequest
+	{
+		protected IPutRoleMappingRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutRoleMapping;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => Enabled is null && Metadata is null && Roles is null && Rules is null && RunAs is null;
+		///<summary>/_security/role_mapping/{name}</summary>
+        public PutRoleMappingRequest(Name name) : base(r => r.Required("name", name))
+		{
+		}
+
+		[JsonIgnore]
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+
+		[JsonPropertyName("enabled")]
+		public bool? Enabled
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("metadata")]
+		public IDictionary<string, object>? Metadata
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("roles")]
+		public IEnumerable<string>? Roles
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("rules")]
+		public RoleMappingRuleBase? Rules
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("run_as")]
+		public IEnumerable<string>? RunAs
+		{
+			get;
+#if NET5_0
+            init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IPutUserRequest, PutUserRequest>))]
 	public interface IPutUserRequest : IRequest<PutUserRequestParameters>
 	{

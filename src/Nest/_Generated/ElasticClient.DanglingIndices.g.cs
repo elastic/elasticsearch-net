@@ -16,73 +16,26 @@
 //
 // ------------------------------------------------
 
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Threading;
+using System.Threading.Tasks;
 
 #nullable restore
 namespace Nest
 {
-	public class CreateFollowIndexResponse : ResponseBase
+	public class DanglingIndicesNamespace : NamespacedClientProxy
 	{
-		[JsonPropertyName("follow_index_created")]
-		public bool FollowIndexCreated
+		internal DanglingIndicesNamespace(ElasticClient client) : base(client)
 		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
 		}
 
-		[JsonPropertyName("follow_index_shards_acked")]
-		public bool FollowIndexShardsAcked
+		public DeleteDanglingIndexResponse DeleteDanglingIndex(IDeleteDanglingIndexRequest request)
 		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
+			return DoRequest<IDeleteDanglingIndexRequest, DeleteDanglingIndexResponse>(request, request.RequestParameters);
 		}
 
-		[JsonPropertyName("index_following_started")]
-		public bool IndexFollowingStarted
+		public Task<DeleteDanglingIndexResponse> DeleteDanglingIndexAsync(IDeleteDanglingIndexRequest request, CancellationToken cancellationToken = default)
 		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public class FollowInfoResponse : ResponseBase
-	{
-		[JsonPropertyName("follower_indices")]
-		public IEnumerable<FollowerInfo> FollowerIndices
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public class FollowIndexStatsResponse : ResponseBase
-	{
-		[JsonPropertyName("indices")]
-		public IEnumerable<FollowIndexStats> Indices
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
+			return DoRequestAsync<IDeleteDanglingIndexRequest, DeleteDanglingIndexResponse>(request, request.RequestParameters, cancellationToken);
 		}
 	}
 }

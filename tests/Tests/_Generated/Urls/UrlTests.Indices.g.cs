@@ -34,4 +34,25 @@ namespace Tests.Urls.Indices
             await UrlTester.DELETE("/project").Request(c => c.Indices.DeleteIndex(new DeleteIndexRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.Indices.DeleteIndexAsync(new DeleteIndexRequest(Nest.IndexName.From<Project>())));
         }
     }
+
+    public class IndicesGetMappingUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_mapping").Request(c => c.Indices.GetMapping(new GetMappingRequest())).RequestAsync(c => c.Indices.GetMappingAsync(new GetMappingRequest()));
+            await UrlTester.GET("/_all/_mapping").Request(c => c.Indices.GetMapping(new GetMappingRequest(Nest.Indices.All))).RequestAsync(c => c.Indices.GetMappingAsync(new GetMappingRequest(Nest.Indices.All)));
+            await UrlTester.GET("/project/_mapping").Request(c => c.Indices.GetMapping(new GetMappingRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.Indices.GetMappingAsync(new GetMappingRequest(Nest.IndexName.From<Project>())));
+        }
+    }
+
+    public class IndicesPutMappingUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.PUT("/_all/_mapping").Request(c => c.Indices.PutMapping(new PutMappingRequest(Nest.Indices.All))).RequestAsync(c => c.Indices.PutMappingAsync(new PutMappingRequest(Nest.Indices.All)));
+            await UrlTester.PUT("/project/_mapping").Request(c => c.Indices.PutMapping(new PutMappingRequest(Nest.IndexName.From<Project>()))).RequestAsync(c => c.Indices.PutMappingAsync(new PutMappingRequest(Nest.IndexName.From<Project>())));
+        }
+    }
 }

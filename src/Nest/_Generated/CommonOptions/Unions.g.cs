@@ -18,7 +18,7 @@
 
 namespace Nest
 {
-	public class ByteSize : Union<long, string>
+	public partial class ByteSize : Union<long, string>
 	{
 		public ByteSize(long item) : base(item)
 		{
@@ -29,7 +29,7 @@ namespace Nest
 		}
 	}
 
-	public class EpochMillis : Union<string, long>
+	public partial class EpochMillis : Union<string, long>
 	{
 		public EpochMillis(string item) : base(item)
 		{
@@ -40,7 +40,7 @@ namespace Nest
 		}
 	}
 
-	public class Fuzziness : Union<string, int>
+	public partial class Fuzziness : Union<string, int>
 	{
 		public Fuzziness(string item) : base(item)
 		{
@@ -51,7 +51,7 @@ namespace Nest
 		}
 	}
 
-	public class MinimumShouldMatch : Union<int, string>
+	public partial class MinimumShouldMatch : Union<int, string>
 	{
 		public MinimumShouldMatch(int item) : base(item)
 		{
@@ -62,7 +62,7 @@ namespace Nest
 		}
 	}
 
-	public class MultiGetId : Union<string, int>
+	public partial class MultiGetId : Union<string, int>
 	{
 		public MultiGetId(string item) : base(item)
 		{
@@ -73,7 +73,7 @@ namespace Nest
 		}
 	}
 
-	public class Percentage : Union<string, float>
+	public partial class Percentage : Union<string, float>
 	{
 		public Percentage(string item) : base(item)
 		{
@@ -84,7 +84,7 @@ namespace Nest
 		}
 	}
 
-	public class Refresh : Union<bool, RefreshOptions>
+	public partial class Refresh : Union<bool, RefreshOptions>
 	{
 		public Refresh(bool item) : base(item)
 		{
@@ -95,7 +95,7 @@ namespace Nest
 		}
 	}
 
-	public class Time : Union<string, int>
+	public partial class Time : Union<string, int>
 	{
 		public Time(string item) : base(item)
 		{
@@ -106,7 +106,7 @@ namespace Nest
 		}
 	}
 
-	public class WaitForActiveShards : Union<int, WaitForActiveShardOptions>
+	public partial class WaitForActiveShards : Union<int, WaitForActiveShardOptions>
 	{
 		public WaitForActiveShards(int item) : base(item)
 		{
