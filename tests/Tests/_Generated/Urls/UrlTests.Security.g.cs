@@ -25,4 +25,12 @@ using Tests.Framework.EndpointTests;
 
 namespace Tests.Urls.Security
 {
+    public class SecurityGetRoleMappingUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_security/role_mapping").Request(c => c.Security.GetRoleMapping(new GetRoleMappingRequest())).RequestAsync(c => c.Security.GetRoleMappingAsync(new GetRoleMappingRequest()));
+        }
+    }
 }

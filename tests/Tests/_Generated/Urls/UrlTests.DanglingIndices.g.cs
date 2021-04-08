@@ -17,28 +17,12 @@
 // TODO - RUN INSTRUCTIONS
 //
 // ------------------------------------------------
-using System.Threading;
+using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Nest;
 using System.Threading.Tasks;
+using Tests.Domain;
+using Tests.Framework.EndpointTests;
 
-namespace Nest
+namespace Tests.Urls.DanglingIndices
 {
-    public partial interface IElasticClient
-    {
-        CrossClusterReplicationNamespace CrossClusterReplication { get; }
-
-        ClusterNamespace Cluster { get; }
-
-        DanglingIndicesNamespace DanglingIndices { get; }
-
-        IndicesNamespace Indices { get; }
-
-        SecurityNamespace Security { get; }
-
-        ClosePointInTimeResponse ClosePointInTime(IClosePointInTimeRequest request);
-        Task<ClosePointInTimeResponse> ClosePointInTimeAsync(IClosePointInTimeRequest request, CancellationToken cancellationToken = default);
-        OpenPointInTimeResponse OpenPointInTime(IOpenPointInTimeRequest request);
-        Task<OpenPointInTimeResponse> OpenPointInTimeAsync(IOpenPointInTimeRequest request, CancellationToken cancellationToken = default);
-        PingResponse Ping(IPingRequest request);
-        Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default);
-    }
 }

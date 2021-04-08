@@ -21,31 +21,10 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
-	public class DeleteRoleMappingDescriptor : RequestDescriptorBase<DeleteRoleMappingDescriptor, DeleteRoleMappingRequestParameters, IDeleteRoleMappingRequest>, IDeleteRoleMappingRequest
+	public class DeleteDanglingIndexDescriptor : RequestDescriptorBase<DeleteDanglingIndexDescriptor, DeleteDanglingIndexRequestParameters, IDeleteDanglingIndexRequest>, IDeleteDanglingIndexRequest
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityDeleteRoleMapping;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.DanglingIndicesDeleteDanglingIndex;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => false;
-	}
-
-	public class GetRoleMappingDescriptor : RequestDescriptorBase<GetRoleMappingDescriptor, GetRoleMappingRequestParameters, IGetRoleMappingRequest>, IGetRoleMappingRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetRoleMapping;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-	}
-
-	public class PutRoleMappingDescriptor : RequestDescriptorBase<PutRoleMappingDescriptor, PutRoleMappingRequestParameters, IPutRoleMappingRequest>, IPutRoleMappingRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutRoleMapping;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => false;
-	}
-
-	public class PutUserDescriptor : RequestDescriptorBase<PutUserDescriptor, PutUserRequestParameters, IPutUserRequest>, IPutUserRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityPutUser;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
 	}
 }

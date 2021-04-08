@@ -29,6 +29,8 @@ namespace Nest
 
         public ClusterNamespace Cluster { get; private set; }
 
+        public DanglingIndicesNamespace DanglingIndices { get; private set; }
+
         public IndicesNamespace Indices { get; private set; }
 
         public SecurityNamespace Security { get; private set; }
@@ -37,6 +39,7 @@ namespace Nest
         {
             CrossClusterReplication = new CrossClusterReplicationNamespace(this);
             Cluster = new ClusterNamespace(this);
+            DanglingIndices = new DanglingIndicesNamespace(this);
             Indices = new IndicesNamespace(this);
             Security = new SecurityNamespace(this);
         }

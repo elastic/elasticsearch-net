@@ -17,28 +17,16 @@
 // TODO - RUN INSTRUCTIONS
 //
 // ------------------------------------------------
+using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Transport;
 
+#nullable restore
 namespace Nest
 {
-    public partial interface IElasticClient
+    public class DeleteDanglingIndexRequestParameters : RequestParameters<DeleteDanglingIndexRequestParameters>
     {
-        CrossClusterReplicationNamespace CrossClusterReplication { get; }
-
-        ClusterNamespace Cluster { get; }
-
-        DanglingIndicesNamespace DanglingIndices { get; }
-
-        IndicesNamespace Indices { get; }
-
-        SecurityNamespace Security { get; }
-
-        ClosePointInTimeResponse ClosePointInTime(IClosePointInTimeRequest request);
-        Task<ClosePointInTimeResponse> ClosePointInTimeAsync(IClosePointInTimeRequest request, CancellationToken cancellationToken = default);
-        OpenPointInTimeResponse OpenPointInTime(IOpenPointInTimeRequest request);
-        Task<OpenPointInTimeResponse> OpenPointInTimeAsync(IOpenPointInTimeRequest request, CancellationToken cancellationToken = default);
-        PingResponse Ping(IPingRequest request);
-        Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default);
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
     }
 }

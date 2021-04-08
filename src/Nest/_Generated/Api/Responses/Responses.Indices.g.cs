@@ -25,8 +25,31 @@ namespace Nest
 	{
 	}
 
+	public class DeleteAliasResponse : ResponseBase
+	{
+	}
+
+	public class IndicesDeleteDataStreamResponse : AcknowledgedResponseBase
+	{
+	}
+
+	public class DeleteIndexTemplateResponse : AcknowledgedResponseBase
+	{
+	}
+
 	public class IndexTemplateExistsResponse : ResponseBase
 	{
-		public bool Exists => ApiCall != null && ApiCall.Success && ApiCall.HttpStatusCode == 200;
+	}
+
+	public class GetFieldMappingResponse : DictionaryResponseBase
+	{
+	}
+
+	public class GetMappingResponse : DictionaryResponseBase
+	{
+	}
+
+	public class PutMappingResponse : IndicesResponseBase
+	{
 	}
 }

@@ -37,5 +37,25 @@ namespace Nest
 		{
 			return DoRequestAsync<ICreateFollowIndexRequest, CreateFollowIndexResponse>(request, request.RequestParameters, cancellationToken);
 		}
+
+		public FollowInfoResponse FollowInfo(IFollowInfoRequest request)
+		{
+			return DoRequest<IFollowInfoRequest, FollowInfoResponse>(request, request.RequestParameters);
+		}
+
+		public Task<FollowInfoResponse> FollowInfoAsync(IFollowInfoRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IFollowInfoRequest, FollowInfoResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public FollowIndexStatsResponse FollowIndexStats(IFollowIndexStatsRequest request)
+		{
+			return DoRequest<IFollowIndexStatsRequest, FollowIndexStatsResponse>(request, request.RequestParameters);
+		}
+
+		public Task<FollowIndexStatsResponse> FollowIndexStatsAsync(IFollowIndexStatsRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IFollowIndexStatsRequest, FollowIndexStatsResponse>(request, request.RequestParameters, cancellationToken);
+		}
 	}
 }

@@ -28,6 +28,36 @@ namespace Nest
 		{
 		}
 
+		public DeleteRoleMappingResponse DeleteRoleMapping(IDeleteRoleMappingRequest request)
+		{
+			return DoRequest<IDeleteRoleMappingRequest, DeleteRoleMappingResponse>(request, request.RequestParameters);
+		}
+
+		public Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(IDeleteRoleMappingRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IDeleteRoleMappingRequest, DeleteRoleMappingResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public GetRoleMappingResponse GetRoleMapping(IGetRoleMappingRequest request)
+		{
+			return DoRequest<IGetRoleMappingRequest, GetRoleMappingResponse>(request, request.RequestParameters);
+		}
+
+		public Task<GetRoleMappingResponse> GetRoleMappingAsync(IGetRoleMappingRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IGetRoleMappingRequest, GetRoleMappingResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public PutRoleMappingResponse PutRoleMapping(IPutRoleMappingRequest request)
+		{
+			return DoRequest<IPutRoleMappingRequest, PutRoleMappingResponse>(request, request.RequestParameters);
+		}
+
+		public Task<PutRoleMappingResponse> PutRoleMappingAsync(IPutRoleMappingRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IPutRoleMappingRequest, PutRoleMappingResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
 		public PutUserResponse PutUser(IPutUserRequest request)
 		{
 			return DoRequest<IPutUserRequest, PutUserResponse>(request, request.RequestParameters);

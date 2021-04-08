@@ -25,6 +25,20 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
+    public class DeleteRoleMappingRequestParameters : RequestParameters<DeleteRoleMappingRequestParameters>
+    {
+        public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+    }
+
+    public class GetRoleMappingRequestParameters : RequestParameters<GetRoleMappingRequestParameters>
+    {
+    }
+
+    public class PutRoleMappingRequestParameters : RequestParameters<PutRoleMappingRequestParameters>
+    {
+        public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+    }
+
     public class PutUserRequestParameters : RequestParameters<PutUserRequestParameters>
     {
         public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
