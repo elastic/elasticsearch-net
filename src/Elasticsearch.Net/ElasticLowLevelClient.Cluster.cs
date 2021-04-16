@@ -106,11 +106,11 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		[MapsApi("cluster.get_component_template", "name")]
 		public Task<TResponse> GetComponentTemplateAsync<TResponse>(string name, GetComponentTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_component_template/{name:name}"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_cluster/settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
+		///<summary>GET on /_cluster/settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-get-settings.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetSettings<TResponse>(ClusterGetSettingsRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, "_cluster/settings", null, RequestParams(requestParameters));
-		///<summary>GET on /_cluster/settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
+		///<summary>GET on /_cluster/settings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-get-settings.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("cluster.get_settings", "")]
 		public Task<TResponse> GetSettingsAsync<TResponse>(ClusterGetSettingsRequestParameters requestParameters = null, CancellationToken ctx = default)
