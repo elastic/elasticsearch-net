@@ -280,5 +280,11 @@ namespace Elasticsearch.Net
 		/// Produces the client meta header for a request.
 		/// </summary>
 		MetaHeaderProvider MetaHeaderProvider { get; }
+
+		/// <summary>
+		/// Enables the client to start sending the API versioning header. This allows a `7.x` client to talk to `8.x` Elasticsearch.
+		/// <para> NOTE: You need at least Elasticsearch 7.11 and higher before you can enable this setting on the client</para>
+		/// </summary>
+		bool EnableApiVersioningHeader { get; }
 	}
 }

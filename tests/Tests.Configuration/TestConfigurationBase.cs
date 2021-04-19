@@ -76,5 +76,8 @@ namespace Tests.Configuration
 
 		/// <summary> Randomly enable compression on the http requests</summary>
 		public bool HttpCompression { get; set; }
+
+		/// <summary> Randomly enable compression on the http requests</summary>
+		public bool ApiVersioning { get; set; }
 	}
 }

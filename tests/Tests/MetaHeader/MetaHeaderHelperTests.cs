@@ -44,7 +44,7 @@ namespace Tests.MetaHeader
 				.RefreshOnCompleted()
 				.Index("an-index")
 			);
-			
+
 			var bulkObserver = observableBulk.Wait(TimeSpan.FromMinutes(5), b =>
 			{
 				foreach (var item in b.Items)
@@ -60,7 +60,7 @@ namespace Tests.MetaHeader
 		[U] public void ScrollAllHelperRequestsIncludeExpectedHelperMetaData()
 		{
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			
+
 			var responses = new List<(int, string)>
 			{
 				(200, "{\"_scroll_id\":\"SCROLLID\",\"took\":0,\"timed_out\":false,\"_shards\":{\"total\":1,\"successful\":1,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":{\"value\":0,\"relation\":\"eq\"},\"max_score\":null,\"hits\":[]}}"),
@@ -124,7 +124,7 @@ namespace Tests.MetaHeader
 				a.RequestMetaData.Single(x => x.Key == "helper").Value.Should().Be("sn"), responses);
 			var settings = new ConnectionSettings(pool, connection);
 			var client = new ElasticClient(settings);
-			
+
 			var observableSnapshot = new SnapshotObservable(client, new SnapshotRequest("repository-a", "snapshot-a"));
 			var observer = new SnapshotObserver(connection);
 			using var subscription = observableSnapshot.Subscribe(observer);
@@ -191,7 +191,7 @@ namespace Tests.MetaHeader
 			private readonly Action<RequestData> _perRequestAssertion;
 			private readonly List<(int, string)> _responses;
 			private int _requestCounter = -1;
-			
+
 			public TestableInMemoryConnection(Action<RequestData> assertion, List<(int, string)> responses)
 			{
 				_perRequestAssertion = assertion;
@@ -199,18 +199,18 @@ namespace Tests.MetaHeader
 			}
 
 			public void AssertExpectedCallCount() => _requestCounter.Should().Be(_responses.Count - 1);
-			
+
 			async Task<TResponse> IConnection.RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 			{
 				Interlocked.Increment(ref _requestCounter);
-				
+
 				_perRequestAssertion(requestData);
 
 				await Task.Yield(); // avoids test deadlocks
 
 				int statusCode;
 				string response;
-				
+
 				if (_responses.Count > _requestCounter)
 					(statusCode, response) = _responses[_requestCounter];
 				else
@@ -219,7 +219,7 @@ namespace Tests.MetaHeader
 				var stream = !string.IsNullOrEmpty(response) ? requestData.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(response)) : requestData.MemoryStreamFactory.Create(EmptyBody);
 
 				return await ResponseBuilder
-					.ToResponseAsync<TResponse>(requestData, null, statusCode, null, stream, RequestData.MimeType, cancellationToken)
+					.ToResponseAsync<TResponse>(requestData, null, statusCode, null, stream, RequestData.DefaultJsonMimeType, cancellationToken)
 					.ConfigureAwait(false);
 			}
 
@@ -239,7 +239,7 @@ namespace Tests.MetaHeader
 
 				var stream = !string.IsNullOrEmpty(response) ? requestData.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(response)) : requestData.MemoryStreamFactory.Create(EmptyBody);
 
-				return ResponseBuilder.ToResponse<TResponse>(requestData, null, statusCode, null, stream, RequestData.MimeType);
+				return ResponseBuilder.ToResponse<TResponse>(requestData, null, statusCode, null, stream, RequestData.DefaultJsonMimeType);
 			}
 
 			public void Dispose() { }

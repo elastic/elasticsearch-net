@@ -69,14 +69,14 @@ namespace Elasticsearch.Net.VirtualizedCluster.Rules
 				r = ms.ToArray();
 			}
 			Self.ReturnResponse = r;
-			Self.ReturnContentType = RequestData.MimeType;
+			Self.ReturnContentType = RequestData.DefaultJsonMimeType;
 			return (TRule)this;
 		}
 
-		public TRule ReturnByteResponse(byte[] response, string responseContentType = RequestData.MimeType)
+		public TRule ReturnByteResponse(byte[] response, string responseContentType = null)
 		{
 			Self.ReturnResponse = response;
-			Self.ReturnContentType = responseContentType;
+			Self.ReturnContentType = responseContentType ?? RequestData.DefaultJsonMimeType;
 			return (TRule)this;
 		}
 	}

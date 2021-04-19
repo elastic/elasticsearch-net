@@ -150,7 +150,7 @@ namespace Tests.XPack.Watcher.GetWatch
 							.Attachments(ea => ea
 								.HttpAttachment("http_attachment", ha => ha
 									.Inline()
-									.ContentType(RequestData.MimeType)
+									.ContentType(RequestData.DefaultJsonMimeType)
 									.Request(r => r
 										.Url("http://localhost:8080/http_attachment")
 									)

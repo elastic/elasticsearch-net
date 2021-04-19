@@ -25,7 +25,7 @@ namespace Elasticsearch.Net
 			int? statusCode,
 			IEnumerable<string> warnings,
 			Stream responseStream,
-			string mimeType = RequestData.MimeType
+			string mimeType = null
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
@@ -43,7 +43,7 @@ namespace Elasticsearch.Net
 			int? statusCode,
 			IEnumerable<string> warnings,
 			Stream responseStream,
-			string mimeType = RequestData.MimeType,
+			string mimeType = null,
 			CancellationToken cancellationToken = default
 		)
 			where TResponse : class, IElasticsearchResponse, new()
@@ -70,8 +70,7 @@ namespace Elasticsearch.Net
 					success = requestData.ConnectionSettings
 						.StatusCodeToResponseSuccess(requestData.Method, statusCode.Value);
 			}
-			//mimeType can include charset information on .NET full framework
-			if (!string.IsNullOrEmpty(mimeType) && !mimeType.StartsWith(requestData.Accept))
+			if (!RequestData.ValidResponseContentType(requestData.Accept, mimeType))
 				success = false;
 
 			var details = new ApiCallDetails
@@ -114,7 +113,7 @@ namespace Elasticsearch.Net
 				if (requestData.CustomResponseBuilder != null)
 					return requestData.CustomResponseBuilder.DeserializeResponse(serializer, details, responseStream) as TResponse;
 
-				return mimeType == null || !mimeType.StartsWith(requestData.Accept, StringComparison.Ordinal)
+				return !RequestData.ValidResponseContentType(requestData.Accept, mimeType)
 					? null
 					: serializer.Deserialize<TResponse>(responseStream);
 			}
@@ -146,7 +145,7 @@ namespace Elasticsearch.Net
 				if (requestData.CustomResponseBuilder != null)
 					return await requestData.CustomResponseBuilder.DeserializeResponseAsync(serializer, details, responseStream, cancellationToken).ConfigureAwait(false) as TResponse;
 
-				return mimeType == null || !mimeType.StartsWith(requestData.Accept, StringComparison.Ordinal)
+				return !RequestData.ValidResponseContentType(requestData.Accept, mimeType)
 					? null
 					: await serializer
 						.DeserializeAsync<TResponse>(responseStream, cancellationToken)
@@ -170,7 +169,7 @@ namespace Elasticsearch.Net
 			else if (responseType == typeof(DynamicResponse))
 			{
 				//if not json store the result under "body"
-				if (mimeType == null || !mimeType.StartsWith(RequestData.MimeType))
+				if (!RequestData.IsJsonMimeType(mimeType))
 				{
 					var dictionary = new DynamicDictionary();
 					dictionary["body"] = new DynamicValue(bytes.Utf8String());

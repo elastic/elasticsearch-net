@@ -16,6 +16,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using HttpMethod = Elasticsearch.Net.HttpMethod;
 using FluentAssertions;
 using System.Text.RegularExpressions;
+using Environment = System.Environment;
 
 namespace Tests.ClientConcepts.Connection
 {
@@ -58,7 +59,7 @@ namespace Tests.ClientConcepts.Connection
 			connection.InUseHandlers.Should().Be(1);
 			connection.RemovedHandlers.Should().Be(1);
 		}
-		
+
 		[I] public async Task MultipleInstancesOfHttpClientWhenRequestTimeoutChanges() =>
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(TimeSpan.FromSeconds(30)));
 
@@ -98,6 +99,7 @@ namespace Tests.ClientConcepts.Connection
 			bool httpCompression = false,
 			bool transferEncodingChunked = false,
 			bool disableMetaHeader = false,
+			bool enableApiVersioning = false,
 			Action<RequestMetaData> requestMetaData = null
 		)
 		{
@@ -110,13 +112,14 @@ namespace Tests.ClientConcepts.Connection
 				.DisableAutomaticProxyDetection(disableAutomaticProxyDetection)
 				.TransferEncodingChunked(transferEncodingChunked)
 				.EnableHttpCompression(httpCompression)
+				.EnableApiVersioningHeader(enableApiVersioning)
 				.DisableMetaHeader(disableMetaHeader);
 
 			if (proxyAddress != null)
 				connectionSettings.Proxy(proxyAddress, null, (string)null);
 
 			var requestParameters = new SearchRequestParameters();
-			
+
 			if (requestMetaData is object)
 			{
 				requestParameters.RequestConfiguration ??= new RequestConfiguration();
@@ -241,6 +244,41 @@ namespace Tests.ClientConcepts.Connection
 			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 		}
 
+		[I] public async Task HttpClientSetsApiVersioningHeaderWhenEnabled()
+		{
+			var requestData = CreateRequestData(enableApiVersioning: true);
+			var connection = new TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Content.Headers.ContentType.Should().NotBeNull();
+				var contentType = responseMessage.RequestMessage.Content.Headers.ContentType.ToString();
+				contentType.Should().Contain("compatible-with");
+
+			});
+
+			var r = connection.Request<StringResponse>(requestData);
+			r.ApiCall.ResponseMimeType.Should().StartWith(RequestData.DefaultJsonMimeType);
+			r = await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+			r.ApiCall.ResponseMimeType.Should().StartWith(RequestData.DefaultJsonMimeType);
+		}
+
+		[I] public async Task HttpClientSetsApiVersioningHeaderWhenDisabled()
+		{
+			var requestData = CreateRequestData(enableApiVersioning: false);
+			var connection = new TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Content.Headers.ContentType.Should().NotBeNull();
+				var contentType = responseMessage.RequestMessage.Content.Headers.ContentType.ToString();
+				//application/json in v7 otherwise vendored by default
+				contentType.Should().StartWith(RequestData.DefaultJsonMimeType);
+
+			});
+
+			var r = connection.Request<StringResponse>(requestData);
+			r.ApiCall.ResponseMimeType.Should().StartWith(RequestData.DefaultJsonMimeType);
+			r = await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+			r.ApiCall.ResponseMimeType.Should().StartWith(RequestData.DefaultJsonMimeType);
+		}
+
 		public class TestableHttpConnection : HttpConnection
 		{
 			private readonly Action<HttpResponseMessage> _response;
@@ -292,6 +330,92 @@ namespace Tests.ClientConcepts.Connection
 				_responseAction?.Invoke(response);
 				return response;
 			}
+		}
+	}
+
+	public class HttpConnectionEnvironmentalTests : ClusterTestClassBase<ReadOnlyCluster>, IDisposable
+	{
+		private readonly string _previousEnvironmentVariable;
+
+		public HttpConnectionEnvironmentalTests(ReadOnlyCluster cluster) : base(cluster) =>
+			_previousEnvironmentVariable = Environment.GetEnvironmentVariable(ConnectionConfiguration.ApiVersioningEnvironmentVariableName);
+
+		[I]
+		public async Task HttpClientSetsApiVersioningHeaderWhenEnabledAsTrue()
+		{
+			Environment.SetEnvironmentVariable(ConnectionConfiguration.ApiVersioningEnvironmentVariableName, "true");
+
+			var requestData = CreateRequestData();
+			var connection = new HttpConnectionTests.TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Content.Headers.ContentType.Should().NotBeNull();
+				var contentType = responseMessage.RequestMessage.Content.Headers.ContentType.ToString();
+				contentType.Should().Contain("compatible-with");
+
+			});
+
+			var r = connection.Request<StringResponse>(requestData);
+			r.ApiCall.ResponseMimeType.Should().StartWith(RequestData.DefaultJsonMimeType);
+			r = await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+			r.ApiCall.ResponseMimeType.Should().StartWith(RequestData.DefaultJsonMimeType);
+		}
+
+		[I]
+		public async Task HttpClientSetsApiVersioningHeaderWhenEnabledAsOne()
+		{
+			Environment.SetEnvironmentVariable(ConnectionConfiguration.ApiVersioningEnvironmentVariableName, "1");
+
+			var requestData = CreateRequestData();
+			var connection = new HttpConnectionTests.TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Content.Headers.ContentType.Should().NotBeNull();
+				var contentType = responseMessage.RequestMessage.Content.Headers.ContentType.ToString();
+				contentType.Should().Contain("compatible-with");
+
+			});
+
+			var r = connection.Request<StringResponse>(requestData);
+			r.ApiCall.ResponseMimeType.Should().StartWith(RequestData.DefaultJsonMimeType);
+			r = await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+			r.ApiCall.ResponseMimeType.Should().StartWith(RequestData.DefaultJsonMimeType);
+		}
+
+		[I]
+		public async Task HttpClientSetsApiVersioningHeaderWhenDisabled()
+		{
+			Environment.SetEnvironmentVariable(ConnectionConfiguration.ApiVersioningEnvironmentVariableName, null);
+
+			var requestData = CreateRequestData();
+			var connection = new HttpConnectionTests.TestableHttpConnection(responseMessage =>
+			{
+				responseMessage.RequestMessage.Content.Headers.ContentType.Should().NotBeNull();
+				var contentType = responseMessage.RequestMessage.Content.Headers.ContentType.ToString();
+				//application/json in v7 otherwise vendored by default
+				contentType.Should().StartWith(RequestData.DefaultJsonMimeType);
+
+			});
+
+			var r = connection.Request<StringResponse>(requestData);
+			r.ApiCall.ResponseMimeType.Should().StartWith(RequestData.DefaultJsonMimeType);
+			r = await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
+			r.ApiCall.ResponseMimeType.Should().StartWith(RequestData.DefaultJsonMimeType);
+		}
+
+		public void Dispose() => Environment.SetEnvironmentVariable(ConnectionConfiguration.ApiVersioningEnvironmentVariableName, _previousEnvironmentVariable);
+
+		private RequestData CreateRequestData()
+		{
+			var node = Client.ConnectionSettings.ConnectionPool.Nodes.First();
+			var connectionSettings = new ConnectionSettings(node.Uri);
+
+			var requestParameters = new SearchRequestParameters();
+
+			var requestData = new RequestData(HttpMethod.POST, "/_search", "{ \"query\": { \"match_all\" : { } } }", connectionSettings,
+					requestParameters,
+					new RecyclableMemoryStreamFactory())
+			{ Node = node };
+
+			return requestData;
 		}
 	}
 }

@@ -15,7 +15,7 @@ namespace Tests.Core.Client
 			object response,
 			int statusCode = 200,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
-			string contentType = RequestData.MimeType,
+			string contentType = null,
 			Exception exception = null
 		)
 		{
@@ -27,10 +27,11 @@ namespace Tests.Core.Client
 			object response,
 			int statusCode = 200,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
-			string contentType = RequestData.MimeType,
+			string contentType = null,
 			Exception exception = null
 		)
 		{
+			contentType ??= RequestData.DefaultJsonMimeType;
 			var serializer = TestClient.Default.RequestResponseSerializer;
 			byte[] responseBytes;
 			switch (response)
@@ -43,7 +44,7 @@ namespace Tests.Core.Client
 					break;
 				default:
 				{
-					responseBytes = contentType == RequestData.MimeType
+					responseBytes = RequestData.IsJsonMimeType(contentType)
 						? serializer.SerializeToBytes(response, TestClient.Default.ConnectionSettings.MemoryStreamFactory)
 						: Encoding.UTF8.GetBytes(response.ToString());
 					break;

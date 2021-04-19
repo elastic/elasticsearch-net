@@ -112,6 +112,7 @@ namespace Tests.Core.Xunit
 			AppendConfig(nameof(RandomConfiguration.SourceSerializer), config.Random.SourceSerializer, sb);
 			AppendConfig(nameof(RandomConfiguration.TypedKeys), config.Random.TypedKeys, sb);
 			AppendConfig(nameof(RandomConfiguration.HttpCompression), config.Random.HttpCompression, sb);
+			AppendConfig(nameof(RandomConfiguration.ApiVersioning), config.Random.ApiVersioning, sb);
 
 			if (runningIntegrations)
 				sb.Append("integrate ")

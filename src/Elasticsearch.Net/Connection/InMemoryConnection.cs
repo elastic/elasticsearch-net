@@ -25,12 +25,13 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public InMemoryConnection() => _statusCode = 200;
 
-		public InMemoryConnection(byte[] responseBody, int statusCode = 200, Exception exception = null, string contentType = RequestData.MimeType)
+		public InMemoryConnection(byte[] responseBody, int statusCode = 200, Exception exception = null, string contentType = null)
 		{
+
 			_responseBody = responseBody;
 			_statusCode = statusCode;
 			_exception = exception;
-			_contentType = contentType;
+			_contentType = contentType ?? RequestData.DefaultJsonMimeType;
 		}
 
 		public virtual TResponse Request<TResponse>(RequestData requestData)
@@ -65,7 +66,7 @@ namespace Elasticsearch.Net
 
 			var sc = statusCode ?? _statusCode;
 			Stream s = body != null ? requestData.MemoryStreamFactory.Create(body) : requestData.MemoryStreamFactory.Create(EmptyBody);
-			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s, contentType ?? _contentType ?? RequestData.MimeType);
+			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s, contentType ?? _contentType ?? RequestData.DefaultJsonMimeType);
 		}
 
 		protected async Task<TResponse> ReturnConnectionStatusAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken,

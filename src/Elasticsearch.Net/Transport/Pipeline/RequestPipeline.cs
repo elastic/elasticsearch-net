@@ -142,7 +142,7 @@ namespace Elasticsearch.Net
 			{
 				//make sure we copy over the error body in case we disabled direct streaming.
 				var s = callDetails?.ResponseBodyInBytes == null ? Stream.Null : _memoryStreamFactory.Create(callDetails.ResponseBodyInBytes);
-				var m = callDetails?.ResponseMimeType ?? RequestData.MimeType;
+				var m = callDetails?.ResponseMimeType ?? RequestData.DefaultJsonMimeType;
 				response = ResponseBuilder.ToResponse<TResponse>(data, exception, callDetails?.HttpStatusCode, null, s, m);
 			}
 
