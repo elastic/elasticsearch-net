@@ -32,6 +32,7 @@ using Elasticsearch.Net.Specification.DanglingIndicesApi;
 using Elasticsearch.Net.Specification.EnrichApi;
 using Elasticsearch.Net.Specification.EqlApi;
 using Elasticsearch.Net.Specification.FeaturesApi;
+using Elasticsearch.Net.Specification.FleetApi;
 using Elasticsearch.Net.Specification.GraphApi;
 using Elasticsearch.Net.Specification.IndexLifecycleManagementApi;
 using Elasticsearch.Net.Specification.IndicesApi;
@@ -111,6 +112,12 @@ namespace Elasticsearch.Net
 
 		///<summary>Features APIs</summary>
 		LowLevelFeaturesNamespace Features
+		{
+			get;
+		}
+
+		///<summary>Fleet APIs</summary>
+		LowLevelFleetNamespace Fleet
 		{
 			get;
 		}

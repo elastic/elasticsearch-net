@@ -32,6 +32,7 @@ using Elasticsearch.Net.Specification.DanglingIndicesApi;
 using Elasticsearch.Net.Specification.EnrichApi;
 using Elasticsearch.Net.Specification.EqlApi;
 using Elasticsearch.Net.Specification.FeaturesApi;
+using Elasticsearch.Net.Specification.FleetApi;
 using Elasticsearch.Net.Specification.GraphApi;
 using Elasticsearch.Net.Specification.IndexLifecycleManagementApi;
 using Elasticsearch.Net.Specification.IndicesApi;
@@ -113,6 +114,12 @@ namespace Elasticsearch.Net
 		}
 
 		public LowLevelFeaturesNamespace Features
+		{
+			get;
+			private set;
+		}
+
+		public LowLevelFleetNamespace Fleet
 		{
 			get;
 			private set;
@@ -255,6 +262,7 @@ namespace Elasticsearch.Net
 			Enrich = new LowLevelEnrichNamespace(this);
 			Eql = new LowLevelEqlNamespace(this);
 			Features = new LowLevelFeaturesNamespace(this);
+			Fleet = new LowLevelFleetNamespace(this);
 			Graph = new LowLevelGraphNamespace(this);
 			IndexLifecycleManagement = new LowLevelIndexLifecycleManagementNamespace(this);
 			Indices = new LowLevelIndicesNamespace(this);

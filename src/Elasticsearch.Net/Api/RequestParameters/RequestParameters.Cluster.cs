@@ -117,7 +117,7 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 	}
 
-	///<summary>Request options for GetSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
+	///<summary>Request options for GetSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-get-settings.html</para></summary>
 	public class ClusterGetSettingsRequestParameters : RequestParameters<ClusterGetSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
