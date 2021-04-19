@@ -41,7 +41,7 @@ namespace Elasticsearch.Net
 	/// </summary>
 	internal sealed class RuntimeVersionInfo : VersionInfo
 	{
-		public static readonly RuntimeVersionInfo Default = new RuntimeVersionInfo { Version = new Version(0, 0, 0), IsPrerelease = false };
+		public static readonly RuntimeVersionInfo Default = new() { Version = new Version(0, 0, 0), IsPrerelease = false };
 
 		public RuntimeVersionInfo() => StoreVersion(GetRuntimeVersion());
 
@@ -79,7 +79,7 @@ namespace Elasticsearch.Net
 				return runtimeVersion;
 			}
 
-			//At this point, we can't identify whether this is a prerelease, but a version is better than nothing!
+			//At this point, we can't identify whether this is a pre-release, but a version is better than nothing!
 
 			var frameworkName = Assembly.GetEntryAssembly()?.GetCustomAttribute<TargetFrameworkAttribute>()?.FrameworkName;
 			if (TryGetVersionFromFrameworkName(frameworkName, out runtimeVersion))
@@ -182,7 +182,7 @@ namespace Elasticsearch.Net
 				{
 					var version = CheckFor45PlusVersion((int)ndpKey.GetValue("Release"));
 
-					if (!string.IsNullOrEmpty(version) )
+					if (!string.IsNullOrEmpty(version))
 						return version;
 				}
 			}

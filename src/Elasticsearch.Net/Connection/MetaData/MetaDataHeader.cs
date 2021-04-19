@@ -8,36 +8,38 @@ namespace Elasticsearch.Net
 {
 	internal sealed class MetaDataHeader
 	{
-		private const char _separator = ',';
+		private const char Separator = ',';
 
 		private readonly string _headerValue;
+
+		private static readonly string RuntimeVersionString = new RuntimeVersionInfo().ToString();
 
 		public MetaDataHeader(VersionInfo version, string serviceIdentifier, bool isAsync)
 		{
 			ClientVersion = version.ToString();
-			RuntimeVersion = new RuntimeVersionInfo().ToString();
 			ServiceIdentifier = serviceIdentifier;
+			RuntimeVersion = RuntimeVersionString;
 
 			// This code is expected to be called infrequently so we're not concerns with over optimising this
 
 			_headerValue = new StringBuilder(64)
-				.Append(serviceIdentifier).Append("=").Append(ClientVersion).Append(_separator)
-				.Append("a=").Append(isAsync ? "1" : "0").Append(_separator)
-				.Append("net=").Append(RuntimeVersion).Append(_separator)
-				.Append(_httpClientIdentifier).Append("=").Append(RuntimeVersion)
+				.Append(serviceIdentifier).Append("=").Append(ClientVersion).Append(Separator)
+				.Append("a=").Append(isAsync ? "1" : "0").Append(Separator)
+				.Append("net=").Append(RuntimeVersion).Append(Separator)
+				.Append(HttpClientIdentifier).Append("=").Append(RuntimeVersion)
 				.ToString();
 		}
 
-		private static readonly string _httpClientIdentifier =
+		private static readonly string HttpClientIdentifier =
 #if DOTNETCORE
 			ConnectionInfo.UsingCurlHandler ? "cu" : "so";
 #else
 			"wr";
 #endif
 
-		public string ServiceIdentifier { get; private set; }
-		public string ClientVersion { get; private set; }
-		public string RuntimeVersion { get; private set; }
+		public string ServiceIdentifier { get; }
+		public string ClientVersion { get; }
+		public string RuntimeVersion { get; }
 
 		public override string ToString() => _headerValue;
 	}
