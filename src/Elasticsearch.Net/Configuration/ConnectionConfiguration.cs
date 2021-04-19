@@ -131,6 +131,8 @@ namespace Elasticsearch.Net
 	public abstract class ConnectionConfiguration<T> : IConnectionConfigurationValues
 		where T : ConnectionConfiguration<T>
 	{
+		internal const string ApiVersioningEnvironmentVariableName = "ELASTIC_CLIENT_APIVERSIONING";
+
 		private readonly IConnection _connection;
 		private readonly IConnectionPool _connectionPool;
 		private readonly NameValueCollection _headers = new NameValueCollection();
@@ -206,6 +208,14 @@ namespace Elasticsearch.Net
 				_apiKeyAuthCredentials = cloudPool.ApiKeyCredentials;
 				_enableHttpCompression = true;
 			}
+
+			var apiVersioningEnabled = Environment.GetEnvironmentVariable(ApiVersioningEnvironmentVariableName);
+			_enableApiVersioningHeader = string.IsNullOrEmpty(apiVersioningEnabled) switch
+			{
+				false when bool.TryParse(apiVersioningEnabled, out var isEnabled) => isEnabled,
+				false when int.TryParse(apiVersioningEnabled, out var isEnabledValue) => isEnabledValue == 1,
+				_ => _enableApiVersioningHeader
+			};
 		}
 
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
