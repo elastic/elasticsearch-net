@@ -20,9 +20,9 @@ namespace Elasticsearch.Net
 				fullVersion = EmptyVersion;
 
 			var clientVersion = GetParsableVersionPart(fullVersion);
-
+			
 			if (!Version.TryParse(clientVersion, out var parsedVersion))
-				throw new ArgumentException("Invalid version string", nameof(fullVersion));
+				parsedVersion = new Version(EmptyVersion);
 
 			var finalVersion = parsedVersion;
 
@@ -34,14 +34,16 @@ namespace Elasticsearch.Net
 						: 0);
 
 			Version = finalVersion;
-			IsPrerelease = ContainsPrerelease(fullVersion);
+			IsPrerelease = !IsEmpty(parsedVersion) && ContainsPrerelease(fullVersion);
 		}
+
+		private bool IsEmpty(Version version) => version.Major == 0 && version.Minor == 0 && version.Build == 0;
 
 		protected virtual bool ContainsPrerelease(string version) => version.Contains("-");
 
 		private static string GetParsableVersionPart(string fullVersionName) =>
-			new string(fullVersionName.TakeWhile(c => char.IsDigit(c) || c == '.').ToArray());
+			new(fullVersionName.TakeWhile(c => char.IsDigit(c) || c == '.').ToArray());
 
-		public override string ToString() => IsPrerelease ? Version.ToString() + "p" : Version.ToString();
+		public override string ToString() => IsPrerelease ? $"{Version}p" : Version.ToString();
 	}
 }

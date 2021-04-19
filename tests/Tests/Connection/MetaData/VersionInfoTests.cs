@@ -7,20 +7,34 @@ using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 
-namespace Tests.Core.Connection.MetaData
+namespace Tests.Connection.MetaData
 {
 	public class VersionInfoTests
 	{
 		[U] public void ToString_ReturnsExpectedValue_ForNonPrerelease()
 		{
-			var sut = new TestVersionInfo("1.2.3", false);
+			var sut = new TestableVersionInfo("1.2.3");
 			sut.ToString().Should().Be("1.2.3");
 		}
 
 		[U] public void ToString_ReturnsExpectedValue_ForPrerelease()
 		{
-			var sut = new TestVersionInfo("1.2.3", true);
+			var sut = new TestableVersionInfo("1.2.3-beta-1");
 			sut.ToString().Should().Be("1.2.3p");
+		}
+
+		[U]
+		public void ToString_ReturnsExpectedValue_ForNullVersion()
+		{
+			var sut = new TestableVersionInfo(null);
+			sut.ToString().Should().Be("0.0.0");
+		}
+
+		[U]
+		public void ToString_ReturnsExpectedValue_ForInvalidVersion()
+		{
+			var sut = new TestableVersionInfo("NOT-A-VERSION-NUMBER");
+			sut.ToString().Should().Be("0.0.0");
 		}
 
 		private class TestVersionInfo : VersionInfo
@@ -30,6 +44,11 @@ namespace Tests.Core.Connection.MetaData
 				Version = new Version(version);
 				IsPrerelease = isPrerelease;
 			}
+		}
+
+		private class TestableVersionInfo : VersionInfo
+		{
+			public TestableVersionInfo(string version) => StoreVersion(version);
 		}
 	}
 }
