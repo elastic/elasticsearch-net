@@ -8,7 +8,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 
-namespace Tests.Core.Connection.MetaData
+namespace Tests.Connection.MetaData
 {
 	public class MetaHeaderProviderTests
 	{
