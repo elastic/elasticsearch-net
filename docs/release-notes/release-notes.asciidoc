@@ -1,0 +1,15 @@
+[[release-notes]]
+= Release notes
+
+[partintro]
+--
+Review important information about 7.13.x releases.
+
+* <<release-notes-7.13.0>>
+--
+
+
+
+include::release-notes-7.13.0.asciidoc[]
+
+
