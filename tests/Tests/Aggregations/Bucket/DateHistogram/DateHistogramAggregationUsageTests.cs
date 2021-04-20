@@ -224,8 +224,8 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 
 			var projects = Project.Projects.OrderBy(p => p.StartedOn).Skip(2).Take(5).ToArray();
 			
-			_hardBoundsMinimum = projects.Min(p => p.StartedOn.Date);
-			_hardBoundsMaximum = projects.Max(p => p.StartedOn.Date);
+			_hardBoundsMinimum = projects.Min(p => DateTime.SpecifyKind(p.StartedOn.Date, DateTimeKind.Utc));
+			_hardBoundsMaximum = projects.Max(p => DateTime.SpecifyKind(p.StartedOn.Date, DateTimeKind.Utc));
 		}
 
 		protected override object AggregationJson => new
