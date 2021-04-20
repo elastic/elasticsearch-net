@@ -1,0 +1,9 @@
+
+[float]
+[[uncategorized]]
+=== Uncategorized
+
+- * Correct the JSON name for the position length on tokens https://github.com/elastic/elasticsearch-net/pull/5499[#5499]  (issue: https://github.com/elastic/elasticsearch-net/issues/5498[#5498])
+- * Add fallback when detected runtime version is invalid https://github.com/elastic/elasticsearch-net/pull/5541[#5541] 
+
+
