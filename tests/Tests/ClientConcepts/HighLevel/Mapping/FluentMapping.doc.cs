@@ -463,7 +463,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							type = "keyword",
 							script = new
 							{
-								lang = "painless",
 								source = "emit(doc['@timestamp'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT))"
 							}
 						}
@@ -487,6 +486,46 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			//hide
 			Expect(expected).FromRequest(createIndexResponse);
+
+			/**
+			 * One may also include and use parameters in the script.
+			 */
+			createIndexResponse = _client.Indices.Create("myindex", c => c
+				.Map<Company>(m => m
+					.RuntimeFields(rtf => rtf
+						.RuntimeField("birthDayOfWeek", FieldType.Keyword, f => f
+							.Script(s => s
+								.Source("emit(doc['@timestamp'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT) + params.suffix)")
+								.Params(p => p.Add("suffix", " with a suffix."))
+								)))
+				)
+			);
+
+			//json
+			var finalExpected = new
+			{
+				mappings = new
+				{
+					runtime = new
+					{
+						birthDayOfWeek = new
+						{
+							type = "keyword",
+							script = new
+							{
+								source = "emit(doc['@timestamp'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT) + params.suffix)",
+								@params = new Dictionary<string, string>
+								{
+									{"suffix", " with a suffix." }
+								}
+							}
+						}
+					}
+				}
+			};
+
+			//hide
+			Expect(finalExpected).FromRequest(createIndexResponse);
 		}
 	}
 }

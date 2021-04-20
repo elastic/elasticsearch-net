@@ -681,7 +681,6 @@ namespace Tests.Search.Search
 				{
 					script = new
 					{
-						lang = "painless",
 						source = RuntimeFieldScript
 					},
 					type = "keyword"
@@ -710,10 +709,11 @@ namespace Tests.Search.Search
 				.And(RuntimeFieldName),
 			RuntimeFields = new RuntimeFields
 			{
-				{ RuntimeFieldName, new RuntimeField
+				{
+					RuntimeFieldName, new RuntimeField
 					{
 						Type = FieldType.Keyword,
-						Script = new PainlessScript(RuntimeFieldScript)
+						Script = new InlineScript(RuntimeFieldScript)
 					}
 				}
 			}

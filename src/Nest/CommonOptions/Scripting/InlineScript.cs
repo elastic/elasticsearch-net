@@ -8,6 +8,7 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
+	[ReadAs(typeof(InlineScript))]
 	public interface IInlineScript : IScript
 	{
 		[DataMember(Name ="source")]
