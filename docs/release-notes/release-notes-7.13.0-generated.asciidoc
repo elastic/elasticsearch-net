@@ -1,2 +1,8 @@
 
+[float]
+[[uncategorized]]
+=== Uncategorized
+
+- * Update RuntimeField to use IInlineScript https://github.com/elastic/elasticsearch-net/pull/5546[#5546]  (issue: https://github.com/elastic/elasticsearch-net/issues/5537[#5537])
+
 
