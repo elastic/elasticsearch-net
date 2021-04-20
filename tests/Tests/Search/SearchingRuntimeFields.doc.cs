@@ -129,7 +129,6 @@ namespace Tests.Search
 					{
 						script = new
 						{
-							lang = "painless",
 							source = "if (doc['type'].size() != 0) {emit(doc['type'].value.toUpperCase())}"
 						},
 						type = "keyword"
@@ -155,7 +154,7 @@ namespace Tests.Search
 					{ "search_runtime_field", new RuntimeField
 						{
 							Type = FieldType.Keyword,
-							Script = new PainlessScript("if (doc['type'].size() != 0) {emit(doc['type'].value.toUpperCase())}")
+							Script = new InlineScript("if (doc['type'].size() != 0) {emit(doc['type'].value.toUpperCase())}")
 						}
 					}
 				}
