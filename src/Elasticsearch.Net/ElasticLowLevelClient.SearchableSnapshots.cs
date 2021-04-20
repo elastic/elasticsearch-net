@@ -44,6 +44,30 @@ namespace Elasticsearch.Net.Specification.SearchableSnapshotsApi
 		{
 		}
 
+		///<summary>GET on /_searchable_snapshots/cache/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse CacheStats<TResponse>(CacheStatsRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, "_searchable_snapshots/cache/stats", null, RequestParams(requestParameters));
+		///<summary>GET on /_searchable_snapshots/cache/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("searchable_snapshots.cache_stats", "")]
+		public Task<TResponse> CacheStatsAsync<TResponse>(CacheStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "_searchable_snapshots/cache/stats", ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_searchable_snapshots/{node_id}/cache/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
+		///<param name = "nodeId">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse CacheStats<TResponse>(string nodeId, CacheStatsRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_searchable_snapshots/{nodeId:nodeId}/cache/stats"), null, RequestParams(requestParameters));
+		///<summary>GET on /_searchable_snapshots/{node_id}/cache/stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
+		///<param name = "nodeId">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("searchable_snapshots.cache_stats", "node_id")]
+		public Task<TResponse> CacheStatsAsync<TResponse>(string nodeId, CacheStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_searchable_snapshots/{nodeId:nodeId}/cache/stats"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_searchable_snapshots/cache/clear <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>

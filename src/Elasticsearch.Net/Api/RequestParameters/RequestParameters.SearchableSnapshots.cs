@@ -25,6 +25,11 @@ using Elastic.Transport;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.SearchableSnapshotsApi
 {
+	///<summary>Request options for CacheStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
+	public class CacheStatsRequestParameters : RequestParameters<CacheStatsRequestParameters>
+	{
+	}
+
 	///<summary>Request options for ClearCache <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html</para></summary>
 	public class ClearCacheRequestParameters : RequestParameters<ClearCacheRequestParameters>
 	{
