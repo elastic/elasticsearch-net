@@ -214,8 +214,7 @@ namespace Elasticsearch.Net
 			var resource = callDetails == null
 				? "unknown resource"
 				: $"Status code {statusCode} from: {callDetails.HttpMethod} {callDetails.Uri.PathAndQuery}";
-
-
+			
 			var exceptionMessage = innerException?.Message ?? "Request failed to execute";
 
 			var pipelineFailure = data.OnFailurePipelineFailure;
@@ -242,8 +241,9 @@ namespace Elasticsearch.Net
 					exceptionMessage += ", failed over to all the known alive nodes before failing";
 				}
 			}
+			
+			exceptionMessage += !exceptionMessage.EndsWith(".", StringComparison.Ordinal) ? $". Call: {resource}" : $" Call: {resource}";
 
-			exceptionMessage += $". Call: {resource}";
 			if (response != null && response.TryGetServerErrorReason(out var reason))
 				exceptionMessage += $". ServerError: {reason}";
 
