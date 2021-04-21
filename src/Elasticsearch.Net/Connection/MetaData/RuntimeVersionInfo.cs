@@ -45,12 +45,24 @@ namespace Elasticsearch.Net
 
 		public RuntimeVersionInfo() => StoreVersion(GetRuntimeVersion());
 
-		private static string GetRuntimeVersion() =>
+		private static string GetRuntimeVersion()
+		{
+			try
+			{
 #if !DOTNETCORE
-			GetFullFrameworkRuntime();
+				return GetFullFrameworkRuntime();
 #else
-			GetNetCoreVersion();
+				return GetNetCoreVersion();
 #endif
+			}
+			catch
+			{
+				// Swallow these to avoid crashing, just because we fail to detect the framework.
+				// Mostly affects Xamarin Forms.
+			}
+
+			return null;
+		}
 
 #if DOTNETCORE
 		private static string GetNetCoreVersion()
@@ -65,7 +77,7 @@ namespace Elasticsearch.Net
 					return RuntimeInformation.FrameworkDescription.Substring(dotNet.Length);
 				}
 			}
-
+			
 			// next, try using file version info
 			var systemPrivateCoreLib = FileVersionInfo.GetVersionInfo(typeof(object).Assembly.Location);
 			if (TryGetVersionFromProductInfo(systemPrivateCoreLib.ProductVersion, systemPrivateCoreLib.ProductName, out var runtimeVersion))
