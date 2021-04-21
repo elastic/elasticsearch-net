@@ -66,7 +66,7 @@ IMPORTANT: Depending on the registered serializer, this may cause the response t
 
 `DisableMetaHeader`::
 
-Disables the meta header which is included on all requests by default. This header contains lightweight information  about the client and runtime.
+Disables the meta header which is included on all requests by default. This header contains lightweight information about the client and runtime.
 
 `DisablePing`::
 
@@ -121,6 +121,10 @@ The maximum number of retries for a given request
 Limits the total runtime, including retries, separately from `RequestTimeout`
 +
 When not specified, defaults to `RequestTimeout` , which itself defaults to `60` seconds
+
+`MemoryStreamFactory`::
+
+The memory stream factory to use, defaults to `Default`
 
 `NodePredicate`::
 
