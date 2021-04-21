@@ -33,9 +33,8 @@ namespace ApiGenerator.Domain.Code.LowLevel
 			{
 				string Evaluator(Match m)
 				{
-
 					var arg = m.Groups[^1].Value.ToCamelCase();
-					return $"{{{arg}:{arg}}}";
+					return $"{{{arg.ReservedKeywordReplacer()}:{arg}}}";
 				}
 
 				var url = Path.TrimStart('/');
