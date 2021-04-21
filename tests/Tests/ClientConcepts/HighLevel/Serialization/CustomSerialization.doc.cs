@@ -188,7 +188,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 				resolver.NamingStrategy = new SnakeCaseNamingStrategy();
 		}
 		/**
-		 * Using `MyCustomJsonNetSerializer`, we can serialize using
+		 * Using `MyFirstCustomJsonNetSerializer`, we can serialize using
 		 *
 		 * - a Json.NET `NamingStrategy` that snake cases property names
 		 * - `JsonSerializerSettings` that includes `null` properties
