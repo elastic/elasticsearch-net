@@ -43,7 +43,10 @@ namespace ApiGenerator
 			return pascal[0].ToLower() + pascal.Substring(1);
 		}
 
-		public static string SplitPascalCase(this string s) =>
-			Regex.Replace(s, "([A-Z]+[a-z]*)", " $1").Trim();
+		private static readonly Dictionary<string, string> ReservedNames = new() { { "namespace", "@namespace" } };
+
+		public static string ReservedKeywordReplacer(this string name) => ReservedNames.ContainsKey(name) ? ReservedNames[name] : name;
+		
+		public static string SplitPascalCase(this string s) => Regex.Replace(s, "([A-Z]+[a-z]*)", " $1").Trim();
 	}
 }
