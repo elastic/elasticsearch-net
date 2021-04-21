@@ -81,6 +81,13 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		public override bool SupportsBody => false;
 	}
 
+	///<summary>Request options for ClearCachedServiceTokens <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html</para></summary>
+	public class ClearCachedServiceTokensRequestParameters : RequestParameters<ClearCachedServiceTokensRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
+	}
+
 	///<summary>Request options for CreateApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html</para></summary>
 	public class CreateApiKeyRequestParameters : RequestParameters<CreateApiKeyRequestParameters>
 	{
@@ -88,6 +95,22 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		public override bool SupportsBody => true;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh
+		{
+			get => Q<Refresh? >("refresh");
+			set => Q("refresh", value);
+		}
+	}
+
+	///<summary>Request options for CreateServiceToken <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html</para></summary>
+	public class CreateServiceTokenRequestParameters : RequestParameters<CreateServiceTokenRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override bool SupportsBody => false;
+		///<summary>
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` (the default) then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
 		public Refresh? Refresh
@@ -136,6 +159,22 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		public override bool SupportsBody => false;
 		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh? Refresh
+		{
+			get => Q<Refresh? >("refresh");
+			set => Q("refresh", value);
+		}
+	}
+
+	///<summary>Request options for DeleteServiceToken <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html</para></summary>
+	public class DeleteServiceTokenRequestParameters : RequestParameters<DeleteServiceTokenRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
+		///<summary>
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` (the default) then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
 		public Refresh? Refresh
@@ -257,6 +296,20 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 
 	///<summary>Request options for GetRoleMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html</para></summary>
 	public class GetRoleMappingRequestParameters : RequestParameters<GetRoleMappingRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+	}
+
+	///<summary>Request options for GetServiceAccounts <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html</para></summary>
+	public class GetServiceAccountsRequestParameters : RequestParameters<GetServiceAccountsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+	}
+
+	///<summary>Request options for GetServiceCredentials <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html</para></summary>
+	public class GetServiceCredentialsRequestParameters : RequestParameters<GetServiceCredentialsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
