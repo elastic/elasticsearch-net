@@ -99,9 +99,8 @@ namespace DocGenerator
 				return 2;
 			}
 
-
-
 			CopyBreakingChangesDocs();
+			CopyReleaseNotes();
 			DeleteExistingDocsAndSwap();
 
 			Console.ForegroundColor = ConsoleColor.Green;
@@ -137,6 +136,26 @@ namespace DocGenerator
 			foreach (var dir in outputDir.EnumerateDirectories())
 			{
 				if (!dir.Name.EndsWith("breaking-changes")) continue;
+
+				var newLocation = Path.Combine(tmpDir.FullName, dir.Name);
+				Console.WriteLine($"Moving {dir.Name} to: {tmpDir.FullName}");
+				dir.MoveTo(newLocation);
+			}
+		}
+
+		private static void CopyReleaseNotes()
+		{
+			var outputDir = new DirectoryInfo(Program.OutputDirPath);
+			var tmpDir = new DirectoryInfo(Program.TmpOutputDirPath);
+			if (!outputDir.Exists)
+				throw new Exception($"Docs folder should be present in repos but does not exist at: {Program.OutputDirPath}");
+			if (!tmpDir.Exists)
+				throw new Exception($"Temp docs folder should be present in repos after generation ran but does not exist at: {Program.TmpOutputDirPath}");
+
+			foreach (var dir in outputDir.EnumerateDirectories())
+			{
+				if (!dir.Name.EndsWith("release-notes"))
+					continue;
 
 				var newLocation = Path.Combine(tmpDir.FullName, dir.Name);
 				Console.WriteLine($"Moving {dir.Name} to: {tmpDir.FullName}");
