@@ -139,17 +139,14 @@ namespace ApiGenerator.Domain.Specification
 		}
 
 		public string Name { get; set; }
-		public string NameAsArgument => Name.ToCamelCase();
+		public string NameAsArgument => Name.ToCamelCase().ReservedKeywordReplacer();
 		public IEnumerable<string> Options { get; set; }
 		public bool Required { get; set; }
 		public bool Deprecated { get; set; }
 		public string Type { get; set; }
 
-		private string CleanUpDescription(string value)
-		{
-			if (string.IsNullOrWhiteSpace(value)) return value;
 
-			return value.Replace("use `_all` or empty string", "use the special string `_all` or Indices.All");
-		}
+
+		private static string CleanUpDescription(string value) => string.IsNullOrWhiteSpace(value) ? value : value.Replace("use `_all` or empty string", "use the special string `_all` or Indices.All");
 	}
 }
