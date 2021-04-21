@@ -55,17 +55,16 @@ namespace ApiGenerator.Domain.Specification
 
 		public string TypedSubClassBaseArguments => string.Join(", ", Parts.Select(p => p.NameAsArgument));
 
-		private static string[] ResolvabeFromT = { "index"};
+		private static readonly string[] ResolvableFromT = { "index"};
 
+		public bool HasResolvableArguments => Parts.Any(p => ResolvableFromT.Contains(p.Name));
+		public string AutoResolveConstructorArguments => string.Join(", ", Parts.Where(p  => !ResolvableFromT.Contains(p.Name)).Select(p => $"{p.HighLevelTypeName} {p.NameAsArgument}"));
 
-		public bool HasResolvableArguments => Parts.Any(p => ResolvabeFromT.Contains(p.Name));
-		public string AutoResolveConstructorArguments => string.Join(", ", Parts.Where(p  => !ResolvabeFromT.Contains(p.Name)).Select(p => $"{p.HighLevelTypeName} {p.NameAsArgument}"));
-
-		public string AutoResolveBaseArguments(string generic) => string.Join(", ", Parts.Select(p => !ResolvabeFromT.Contains(p.Name) ? p.Name : $"typeof({generic})"));
+		public string AutoResolveBaseArguments(string generic) => string.Join(", ", Parts.Select(p => !ResolvableFromT.Contains(p.Name) ? p.Name : $"typeof({generic})"));
 
 		public string DocumentPathBaseArgument(string generic) => string.Join(", ",
 			_additionalPartsForConstructor.Select(p => p.Name =="id" ? $"id ?? Nest.Id.From(documentWithId)"
-				: ResolvabeFromT.Contains(p.Name) ? $"{p.Name} ?? typeof({generic})" : p.Name));
+				: ResolvableFromT.Contains(p.Name) ? $"{p.Name} ?? typeof({generic})" : p.Name));
 
 		public string DocumentPathConstructorArgument(string generic) => string.Join(", ",
 			new [] { $"{generic} documentWithId" }.Concat(_additionalPartsForConstructor.Select(p => $"{p.HighLevelTypeName} {p.NameAsArgument} = null")));
@@ -73,7 +72,7 @@ namespace ApiGenerator.Domain.Specification
 		public string GetXmlDocs(string indent, bool skipResolvable = false, bool documentConstructor = false)
 		{
 			var doc = $@"///<summary>{Path}</summary>";
-			var parts = Parts.Where(p => !skipResolvable || !ResolvabeFromT.Contains(p.Name)).ToList();
+			var parts = Parts.Where(p => !skipResolvable || !ResolvableFromT.Contains(p.Name)).ToList();
 			if (!parts.Any()) return doc;
 
 			doc += indent;
