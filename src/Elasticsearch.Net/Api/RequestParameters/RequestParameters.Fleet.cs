@@ -49,5 +49,12 @@ namespace Elasticsearch.Net.Specification.FleetApi
 			get => Q<bool? >("wait_for_advance");
 			set => Q("wait_for_advance", value);
 		}
+
+		///<summary>Whether to wait for the target index to exist and all primary shards be active</summary>
+		public bool? WaitForIndex
+		{
+			get => Q<bool? >("wait_for_index");
+			set => Q("wait_for_index", value);
+		}
 	}
 }
