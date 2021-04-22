@@ -9,8 +9,6 @@ using System.Reflection;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.Client;
-using Tests.Core.Extensions;
-using Tests.Core.Xunit;
 using Tests.Domain;
 using static Nest.Infer;
 
@@ -816,6 +814,40 @@ namespace Tests.Ingest
 				ignore_missing = true
 			};
 			
+			public override string Key => "network_direction";
+		}
+
+		[SkipVersion("<7.13.0", "Uses internal_networks_field added in 7.13.0")]
+		public class NetworkDirectionWithField : ProcessorAssertion
+		{
+			// for testing, we use the developer first name field for the network field
+
+			public override ProcFunc Fluent => d => d
+				.NetworkDirection<Project>(ud => ud
+					.DestinationIp(f => f.LeadDeveloper.IpAddress)
+					.SourceIp(f => f.LeadDeveloper.IpAddress)
+					.InternalNetworksField(f=> f.LeadDeveloper.FirstName)
+					.TargetField(p => p.Description)
+					.IgnoreMissing());
+
+			public override IProcessor Initializer => new NetworkDirectionProcessor
+			{
+				DestinationIp = Field<Project>(f => f.LeadDeveloper.IpAddress),
+				SourceIp = Field<Project>(f => f.LeadDeveloper.IpAddress),
+				InternalNetworksField = Field<Project>(f => f.LeadDeveloper.FirstName),
+				TargetField = "description",
+				IgnoreMissing = true
+			};
+
+			public override object Json => new
+			{
+				destination_ip = "leadDeveloper.ipAddress",
+				internal_networks_field = "leadDeveloper.firstName",
+				source_ip = "leadDeveloper.ipAddress",
+				target_field = "description",
+				ignore_missing = true
+			};
+
 			public override string Key => "network_direction";
 		}
 	}
