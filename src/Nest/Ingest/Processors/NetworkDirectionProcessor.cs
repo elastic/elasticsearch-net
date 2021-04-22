@@ -17,7 +17,10 @@ namespace Nest
 		
 		[DataMember(Name = "internal_networks")]
 		IEnumerable<string> InternalNetworks { get; set; }
-		
+
+		[DataMember(Name = "internal_networks_field")]
+		Field InternalNetworksField { get; set; }
+
 		[DataMember(Name = "source_ip")]
 		Field SourceIp { get; set; }
 		
@@ -36,6 +39,8 @@ namespace Nest
 		/// <inheritdoc />
 		public IEnumerable<string> InternalNetworks { get; set; }
 		/// <inheritdoc />
+		public Field InternalNetworksField { get; set; }
+		/// <inheritdoc />
 		public Field SourceIp { get; set; }
 		/// <inheritdoc />
 		public Field TargetField { get; set; }
@@ -51,6 +56,7 @@ namespace Nest
 		Field INetworkDirectionProcessor.DestinationIp { get; set; }
 		bool? INetworkDirectionProcessor.IgnoreMissing { get; set; }
 		IEnumerable<string> INetworkDirectionProcessor.InternalNetworks { get; set; }
+		Field INetworkDirectionProcessor.InternalNetworksField { get; set; }
 		Field INetworkDirectionProcessor.SourceIp { get; set; }
 		Field INetworkDirectionProcessor.TargetField { get; set; }
 		
@@ -69,6 +75,13 @@ namespace Nest
 
 		/// <inheritdoc cref="INetworkDirectionProcessor.InternalNetworks" />
 		public NetworkDirectionProcessorDescriptor<T> InternalNetworks(params string[] internalNetworks) => Assign(internalNetworks, (a, v) => a.InternalNetworks = v);
+
+		/// <inheritdoc cref="INetworkDirectionProcessor.InternalNetworksField" />
+		public NetworkDirectionProcessorDescriptor<T> InternalNetworksField(Field internalNetworksField) => Assign(internalNetworksField, (a, v) => a.InternalNetworksField = v);
+
+		/// <inheritdoc cref="INetworkDirectionProcessor.InternalNetworksField" />
+		public NetworkDirectionProcessorDescriptor<T> InternalNetworksField<TValue>(Expression<Func<T, TValue>> objectPath) =>
+			Assign(objectPath, (a, v) => a.InternalNetworksField = v);
 
 		/// <inheritdoc cref="INetworkDirectionProcessor.SourceIp" />
 		public NetworkDirectionProcessorDescriptor<T> SourceIp(Field field) => Assign(field, (a, v) => a.SourceIp = v);
