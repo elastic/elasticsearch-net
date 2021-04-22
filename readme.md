@@ -26,64 +26,16 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasti
 * [Copyright and License](#copyright-and-license)
 
 ## Compatibility Matrix
-<table>
-    <tr>
-        <th><b>.NET Clients<b></th>
-        <th><b>Elasticsearch<b></th>
-        <th><b>Supported<b></th>
-        <th><b>Windows/Linux CI</b></th>
-        <th><b>Tests<b></th>
-    </tr>
-    <tr>
-    	<td><code>0.x</code></td>
-    	<td><code>0.x</code></td>
-    	<td>:x:</td>
-    	<td>:heavy_minus_sign:</td>
-    	<td>:heavy_minus_sign:</td>
-    </tr>
-    <tr>
-    	<td><code>1.x</code></td>
-    	<td><code>1.x</code></td>
-    	<td>:x:</td>
-    	<td>:heavy_minus_sign:</td>
-    	<td>:heavy_minus_sign:</td>
-    </tr>
-    <tr>
-    	<td><code>2.x</code></td>
-    	<td><code>2.x</code></td>
-    	<td>:x:</td>
-    	<td>:heavy_minus_sign:</td>
-    	<td>:heavy_minus_sign:</td>
-    </tr>
-    <tr>
-    	<td><code>5.x</code></td>
-    	<td><code>5.x</code></td>
-    	<td>:x:</td>
-      <td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/5.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=5.x&svg=true"></a></td>
-    	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/5.x/tests"><img alt="5.x unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/5.x.svg?style=flat-square"></a></td>
-    </tr>
-    <tr>
-    	<td><code>6.x</code></td>
-    	<td><code>6.x</code></td>
-    	<td>:white_check_mark:</td>
-      <td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/6.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=6.x&svg=true"></a></td>
-    	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/6.x/tests"><img alt="6.x unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/6.x.svg?style=flat-square"></a></td>
-    </tr>
-    <tr>
-    	<td><code>7.x</code></td>
-    	<td><code>7.x</code></td>
-      <td>:white_check_mark:</td>
-      <td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/7.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=7.x&svg=true"></a></td>
-    	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/7.x/tests"><img alt="7.x unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/7.x.svg?style=flat-square"></a></td>
-    </tr>
-    <tr>
-    	<td><code>master</code></td>
-    	<td><code>master</code></td>
-    	<td>:x:</td>
-      <td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/master"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=master&svg=true"></a></td>
-    	<td><a href="https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/master/tests"><img alt="master unit tests" src="https://img.shields.io/appveyor/tests/elastic/elasticsearch-net/master.svg?style=flat-square"></a></td>
-    </tr>
-</table>
+
+| .NET Clients      | Elasticsearch | Supported          | Windows/Linux CI   | Tests              |
+| ----------------- | ------------- | ------------------ | ------------------ | ------------------ |
+| 0.x               | 0.x           | :x:                | :heavy_minus_sign: | :heavy_minus_sign: |
+| 1.x               | 1.x           | :x:                | :heavy_minus_sign: | :heavy_minus_sign: |
+| 2.x               | 2.x           | :x:                | :heavy_minus_sign: | :heavy_minus_sign: |
+| 5.x               | 5.x           | :x:                | :heavy_minus_sign: | :heavy_minus_sign: |
+| 6.x               | 6.x           | :white_check_mark: | [![Build status](https://ci.appveyor.com/api/projects/status/9hiqkga2jjn05ftu/branch/6.x?svg=true)](https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/6.x) | :heavy_minus_sign: |
+| 7.x               | 7.x           | :white_check_mark: | [![Integration](https://github.com/elastic/elasticsearch-net/actions/workflows/integration-jobs.yml/badge.svg?branch=7.x)](https://github.com/elastic/elasticsearch-net/actions/workflows/integration-jobs.yml) | [![Tests](https://github.com/elastic/elasticsearch-net/actions/workflows/test-jobs.yml/badge.svg?branch=7.x)](https://github.com/elastic/elasticsearch-net/actions/workflows/test-jobs.yml) |
+| master            | master        | :x:                | [![Integration](https://github.com/elastic/elasticsearch-net/actions/workflows/integration-jobs.yml/badge.svg)](https://github.com/elastic/elasticsearch-net/actions/workflows/integration-jobs.yml) | [![Tests](https://github.com/elastic/elasticsearch-net/actions/workflows/test-jobs.yml/badge.svg)](https://github.com/elastic/elasticsearch-net/actions/workflows/test-jobs.yml) |
 
 Please refer to the [end-of-life policy](https://www.elastic.co/support/eol) for complete information.
 
@@ -111,7 +63,7 @@ Any incompatibilities between minor versions are documented against the release.
 
 #### I have a `6.0` server, what client should I use?
 
-Always use the latest minor version of the client within that major version, so in this instance, at time of writing, this is version `6.8.0`. The reason being is that `6.8.0` will contain many bug fixes not present in the `6.0.0` version of the client.
+Always use the latest minor version of the client within that major version, so in this instance, at time of writing, this is version `6.8.x`. The reason being is that `6.8.x` will contain many bug fixes not present in the `6.0.0` version of the client.
 
 ### Low Level Client Compatibility
 
