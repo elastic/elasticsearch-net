@@ -65,6 +65,7 @@ namespace Nest
 		public FieldCapabilities Short => BackingDictionary.TryGetValue("short", out var f) ? f : null;
 		public FieldCapabilities Source => BackingDictionary.TryGetValue("_source", out var f) ? f : null;
 		public FieldCapabilities Text => BackingDictionary.TryGetValue("text", out var f) ? f : null;
+		public FieldCapabilities Tier => BackingDictionary.TryGetValue("_tier", out var f) ? f : null;
 		public FieldCapabilities TokenCount => BackingDictionary.TryGetValue("token_count", out var f) ? f : null;
 		public FieldCapabilities Type => BackingDictionary.TryGetValue("_type", out var f) ? f : null;
 		public FieldCapabilities Uid => BackingDictionary.TryGetValue("_uid", out var f) ? f : null;
