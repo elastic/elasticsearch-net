@@ -111,7 +111,8 @@ namespace Tests.Search.Search
 			var startDates = response.Aggregations.Terms("startDates");
 			startDates.Should().NotBeNull();
 
-			foreach (var document in response.Documents) document.ShouldAdhereToSourceSerializerWhenSet();
+			foreach (var document in response.Documents)
+				document.ShouldAdhereToSourceSerializerWhenSet();
 		}
 	}
 
@@ -540,20 +541,20 @@ namespace Tests.Search.Search
 		{
 			response.ShouldBeValid();
 			foreach (var node in response.Nodes)
-			foreach (var task in node.Value.Tasks)
-			{
-				task.Value.Headers.Should().NotBeNull();
-				if (task.Value.Headers.TryGetValue(RequestData.OpaqueIdHeader, out var opaqueIdValue))
-					opaqueIdValue.Should()
-						.Be(CallIsolatedValue,
-							$"OpaqueId header {opaqueIdValue} did not match {CallIsolatedValue}");
-				// TODO: Determine if this is a valid assertion i.e. should all tasks returned have an OpaqueId header?
-//				else
-//				{
-//					Assert.True(false,
-//						$"No OpaqueId header for task {task.Key} and OpaqueId value {this.CallIsolatedValue}");
-//				}
-			}
+				foreach (var task in node.Value.Tasks)
+				{
+					task.Value.Headers.Should().NotBeNull();
+					if (task.Value.Headers.TryGetValue(RequestData.OpaqueIdHeader, out var opaqueIdValue))
+						opaqueIdValue.Should()
+							.Be(CallIsolatedValue,
+								$"OpaqueId header {opaqueIdValue} did not match {CallIsolatedValue}");
+					// TODO: Determine if this is a valid assertion i.e. should all tasks returned have an OpaqueId header?
+					//				else
+					//				{
+					//					Assert.True(false,
+					//						$"No OpaqueId header for task {task.Key} and OpaqueId value {this.CallIsolatedValue}");
+					//				}
+				}
 		}
 	}
 
@@ -610,7 +611,7 @@ namespace Tests.Search.Search
 		: ApiTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		public SearchWithPointInTimeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		
+
 		protected override object ExpectJson => new
 		{
 			size = 1,
@@ -624,7 +625,7 @@ namespace Tests.Search.Search
 				keep_alive = "1m"
 			}
 		};
-		
+
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Size(1)
 			.Query(q => q.MatchAll())
@@ -675,7 +676,7 @@ namespace Tests.Search.Search
 				},
 				"search_runtime_field"
 			},
-			runtime_mappings = new 
+			runtime_mappings = new
 			{
 				search_runtime_field = new
 				{
@@ -739,5 +740,61 @@ namespace Tests.Search.Search
 				}
 			}
 		}
+	}
+
+	[SkipVersion("<7.13.0", "Format for sort values added in Elasticsearch 7.13.0")]
+	public class SearchApiSortFormatTests : SearchApiTests
+	{
+		public SearchApiSortFormatTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			size = 5,
+			query = new
+			{
+				match_all = new { }
+			},
+			sort = new[]
+			{
+				new
+				{
+					startedOn = new
+					{
+						format = "strict_date_optional_time_nanos",
+						mode = "avg",
+						order = "asc"
+					}
+				}
+			}
+		};
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Size(5)
+			.Query(q => q
+				.MatchAll()
+			)
+			.Sort(srt => srt.Field(f => f
+				.Field(fld => fld.StartedOn)
+				.Order(SortOrder.Ascending)
+				.Format("strict_date_optional_time_nanos")
+				.Mode(SortMode.Average)));
+
+		protected override SearchRequest<Project> Initializer => new()
+		{
+			Size = 5,
+			Query = new QueryContainer(new MatchAllQuery()),
+			Sort = new List<ISort>
+			{
+				new FieldSort
+				{
+					Field = Infer.Field<Project>(f => f.StartedOn),
+					Format = "strict_date_optional_time_nanos",
+					Mode = SortMode.Average,
+					Order = SortOrder.Ascending
+				}
+			}
+		};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response) => response.Hits.Count.Should().BeGreaterThan(0);
 	}
 }
