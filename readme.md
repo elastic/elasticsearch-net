@@ -63,7 +63,7 @@ Any incompatibilities between minor versions are documented against the release.
 
 #### I have a `6.0` server, what client should I use?
 
-Always use the latest minor version of the client within that major version, so in this instance, at time of writing, this is version `6.8.0`. The reason being is that `6.8.0` will contain many bug fixes not present in the `6.0.0` version of the client.
+Always use the latest minor version of the client within that major version, so in this instance, at time of writing, this is version `6.8.x`. The reason being is that `6.8.x` will contain many bug fixes not present in the `6.0.0` version of the client.
 
 ### Low Level Client Compatibility
 
