@@ -59,6 +59,8 @@ namespace Tests.ClientConcepts.Troubleshooting
 
 			// hide
 			settings.DefaultIndex(Client.ConnectionSettings.DefaultIndex);
+			// hide
+			settings.PingTimeout(TimeSpan.FromSeconds(5)); // Avoids occasional CI failures
 
 			var client = new ElasticClient(settings);
 
