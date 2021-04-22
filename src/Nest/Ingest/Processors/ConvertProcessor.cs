@@ -110,6 +110,9 @@ namespace Nest
 		[EnumMember(Value = "boolean")]
 		Boolean,
 
+		[EnumMember(Value = "ip")]
+		Ip,
+
 		[EnumMember(Value = "auto")]
 		Auto
 	}
