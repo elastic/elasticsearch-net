@@ -56,7 +56,6 @@ namespace Nest
 			set => Self.OnScriptError = value;
 		}
 
-		double? INumberProperty.Boost { get; set; }
 		bool? INumberProperty.Coerce { get; set; }
 		INumericFielddata INumberProperty.Fielddata { get; set; }
 		bool? INumberProperty.IgnoreMalformed { get; set; }
