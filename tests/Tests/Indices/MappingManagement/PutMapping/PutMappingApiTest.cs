@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Collections.Generic;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
 using Nest;
@@ -344,7 +345,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 	{
 		// These test serialisation only. Integration tests take place in RuntimeFieldsTests.cs
 
-		private const string ScriptValue = "emit(doc['@timestamp'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT))";
+		private const string ScriptValue = "emit(doc['@timestamp'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT) + params.foo";
 
 		public PutMappingWithRuntimeFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -357,7 +358,10 @@ namespace Tests.Indices.MappingManagement.PutMapping
 			RuntimeFields = new RuntimeFields
 			{
 				{ "runtime_date", new RuntimeField { Type = FieldType.Date, Format = "yyyy-MM-dd" } },
-				{ "runtime_scripted", new RuntimeField { Type = FieldType.Keyword, Script = new PainlessScript(ScriptValue) } }
+				{ "runtime_scripted", new RuntimeField { Type = FieldType.Keyword, Script = new InlineScript(ScriptValue) { Lang = "painless", Params = new Dictionary<string, object>
+				{
+					{ "foo", " is a good day." }
+				}}}}
 			}
 		};
 
@@ -365,7 +369,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 			.Index(CallIsolatedValue)
 			.RuntimeFields(rtf => rtf
 				.RuntimeField("runtime_date", FieldType.Date, rf => rf.Format("yyyy-MM-dd"))
-				.RuntimeField("runtime_scripted", FieldType.Keyword, rf=> rf.Script(new PainlessScript(ScriptValue))));
+				.RuntimeField("runtime_scripted", FieldType.Keyword, rf=> rf.Script(s => s.Source(ScriptValue).Lang(ScriptLang.Painless).Params(p => p.Add("foo", " is a good day.")))));
 
 		protected override LazyResponses ClientUsage() => Calls(
 			(client, f) => client.Indices.PutMapping(f),
@@ -388,8 +392,12 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					type = "keyword",
 					script = new
 					{
+						source = ScriptValue,
 						lang = "painless",
-						source = ScriptValue
+						@params = new Dictionary<string, string>
+						{
+							{ "foo", " is a good day." }
+						}
 					}
 				}
 			}

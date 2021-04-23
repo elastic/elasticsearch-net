@@ -44,7 +44,7 @@ namespace Tests.Mapping.RuntimeFields
 									{RuntimeFieldNameOne, new RuntimeField
 									{
 										Type = FieldType.Keyword,
-										Script = new PainlessScript(ScriptValue)
+										Script = new InlineScript(ScriptValue)
 									}},
 									{RuntimeFieldNameTwo, new RuntimeField
 									{
@@ -108,7 +108,7 @@ namespace Tests.Mapping.RuntimeFields
 								{RuntimeFieldNameOne, new RuntimeField
 								{
 									Type = FieldType.Keyword,
-									Script = new PainlessScript(ScriptValue)
+									Script = new InlineScript(ScriptValue)
 								}},
 								{RuntimeFieldNameTwo, new RuntimeField
 								{

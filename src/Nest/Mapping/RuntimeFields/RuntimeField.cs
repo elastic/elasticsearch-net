@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.Runtime.Serialization;
 using Nest.Utf8Json;
 
@@ -22,7 +23,7 @@ namespace Nest
 		/// The script to be evaluated for field calculation at search time.
 		/// </summary>
 		[DataMember(Name = "script")]
-		IStoredScript Script { get; set; }
+		IInlineScript Script { get; set; }
 
 		/// <summary>
 		/// The datatype of the runtime field.
@@ -36,7 +37,7 @@ namespace Nest
 		/// <inheritdoc />
 		public string Format { get; set; }
 		/// <inheritdoc />
-		public IStoredScript Script { get; set; }
+		public IInlineScript Script { get; set; }
 		/// <inheritdoc />
 		public FieldType Type { get; set; }
 	}
@@ -47,13 +48,19 @@ namespace Nest
 		public RuntimeFieldDescriptor(FieldType fieldType) => Self.Type = fieldType;
 
 		string IRuntimeField.Format { get; set; }
-		IStoredScript IRuntimeField.Script { get; set; }
+		IInlineScript IRuntimeField.Script { get; set; }
 		FieldType IRuntimeField.Type { get; set; }
 
+		/// <inheritdoc cref="IRuntimeField.Format" />
 		public RuntimeFieldDescriptor Format(string format) => Assign(format, (a, v) => a.Format = v);
-		
-		public RuntimeFieldDescriptor Script(IStoredScript script) => Assign(script, (a, v) => a.Script = v);
 
-		public RuntimeFieldDescriptor Script(string source) => Assign(source, (a, v) => a.Script = new PainlessScript(source));
+		/// <inheritdoc cref="IRuntimeField.Script" />
+		public RuntimeFieldDescriptor Script(IInlineScript script) => Assign(script, (a, v) => a.Script = v);
+
+		/// <inheritdoc cref="IRuntimeField.Script" />
+		public RuntimeFieldDescriptor Script(string source) => Assign(source, (a, v) => a.Script = new InlineScript(source));
+
+		/// <inheritdoc cref="IRuntimeField.Script" />
+		public RuntimeFieldDescriptor Script(Func<InlineScriptDescriptor, IInlineScript> selector) => Assign(selector, (a, v) => a.Script = v?.Invoke(new InlineScriptDescriptor()));
 	}
 }

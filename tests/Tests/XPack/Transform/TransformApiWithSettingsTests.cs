@@ -347,7 +347,6 @@ namespace Tests.XPack.Transform
 						{
 							script = new
 							{
-								lang = "painless",
 								source = RuntimeFieldScript
 							},
 							type = "keyword"
@@ -410,7 +409,7 @@ namespace Tests.XPack.Transform
 						{ RuntimeFieldName, new RuntimeField
 							{
 								Type = FieldType.Keyword,
-								Script = new PainlessScript(RuntimeFieldScript)
+								Script = new InlineScript(RuntimeFieldScript)
 							}
 						}
 					}
