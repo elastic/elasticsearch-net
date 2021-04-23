@@ -13,9 +13,9 @@ namespace Tests.XPack.MachineLearning.PreviewDataFeed
 	public class PreviewDatafeedUrlTests : UrlTestsBase
 	{
 		[U] public override async Task Urls() => await UrlTester.POST("/_ml/datafeeds/datafeed_id/_preview")
-			.Fluent(c => c.MachineLearning.PreviewDatafeed<Metric>("datafeed_id", p => p))
+			.Fluent(c => c.MachineLearning.PreviewDatafeed<Metric>(p => p.DatafeedId("datafeed_id")))
 			.Request(c => c.MachineLearning.PreviewDatafeed<Metric>(new PreviewDatafeedRequest("datafeed_id")))
-			.FluentAsync(c => c.MachineLearning.PreviewDatafeedAsync<Metric>("datafeed_id", p => p))
+			.FluentAsync(c => c.MachineLearning.PreviewDatafeedAsync<Metric>(p => p.DatafeedId("datafeed_id")))
 			.RequestAsync(c => c.MachineLearning.PreviewDatafeedAsync<Metric>(new PreviewDatafeedRequest("datafeed_id")));
 	}
 }
