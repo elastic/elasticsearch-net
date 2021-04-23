@@ -185,6 +185,9 @@ namespace Nest
 		[DataMember(Name = "pinned")]
 		IPinnedQuery Pinned { get; set; }
 
+		/// <inheritdoc cref="ICombinedFieldsQuery"/>
+		[DataMember(Name = "combined_fields")]
+		ICombinedFieldsQuery CombinedFields { get; set; }
 
 		void Accept(IQueryVisitor visitor);
 	}
