@@ -80,9 +80,9 @@ namespace Tests.QueryDsl.FullText.CombinedFields
 	{
 		public CombinedFieldsWithBoostUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override QueryContainer QueryInitializer => new MultiMatchQuery
+		protected override QueryContainer QueryInitializer => new CombinedFieldsQuery
 		{
-			Fields = Field<Project>(p => p.Description, 2.2).And("myOtherField^0.3"),
+			Fields = Field<Project>(p => p.Description, 2.2).And("myOtherField^1.2"),
 			Query = "hello world",
 		};
 
@@ -94,14 +94,14 @@ namespace Tests.QueryDsl.FullText.CombinedFields
 				fields = new[]
 				{
 					"description^2.2",
-					"myOtherField^0.3"
+					"myOtherField^1.2"
 				}
 			}
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.MultiMatch(c => c
-				.Fields(Field<Project>(p => p.Description, 2.2).And("myOtherField^0.3"))
+			.CombinedFields(c => c
+				.Fields(Field<Project>(p => p.Description, 2.2).And("myOtherField^1.2"))
 				.Query("hello world")
 			);
 	}
