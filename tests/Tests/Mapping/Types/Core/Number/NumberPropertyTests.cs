@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Collections.Generic;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -162,6 +163,57 @@ namespace Tests.Mapping.Types.Core.Number
 					Store = true,
 					Index = false,
 					IgnoreMalformed = true
+				}
+			}
+		};
+	}
+
+	[SkipVersion("<7.13.0", "Script support added in 7.13.0")]
+	public class ScriptedNumberPropertyTests : PropertyTestsBase
+	{
+		public ScriptedNumberPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			properties = new
+			{
+				doublesCommits = new
+				{
+					type = "long",
+					script = new
+					{
+						source = "emit((long)(doc['numberOfCommits'].value * params.multiplier))",
+						@params = new Dictionary<string, int>
+						{
+							{"multiplier", 2 }
+						}
+					},
+					on_script_error = "continue"
+				}
+			}
+		};
+
+		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
+			.Number(n => n
+				.Name("doublesCommits")
+				.Type(NumberType.Long)
+				.Script(s => s.Source("emit((long)(doc['numberOfCommits'].value * params.multiplier))").Params(p => p.Add("multiplier", 2)))
+				.OnScriptError(OnScriptError.Continue)
+			);
+
+		protected override IProperties InitializerProperties => new Properties
+		{
+			{
+				"doublesCommits", new NumberProperty(NumberType.Long)
+				{
+					Script = new InlineScript("emit((long)(doc['numberOfCommits'].value * params.multiplier))")
+					{
+						Params = new Dictionary<string, object>
+						{
+							{ "multiplier", 2 }
+						}
+					},
+					OnScriptError = OnScriptError.Continue
 				}
 			}
 		};
