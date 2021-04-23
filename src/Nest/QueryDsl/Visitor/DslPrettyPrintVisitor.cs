@@ -215,6 +215,8 @@ namespace Nest
 
 		public virtual void Visit(IPinnedQuery query) => Write("pinned");
 
+		public virtual void Visit(ICombinedFieldsQuery query) => Write("combined_fields");
+
 		private void Write(string queryType, Dictionary<string, string> properties)
 		{
 			properties = properties ?? new Dictionary<string, string>();
