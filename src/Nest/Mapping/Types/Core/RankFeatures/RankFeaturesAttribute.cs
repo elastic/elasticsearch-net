@@ -8,5 +8,16 @@ namespace Nest
 	public class RankFeaturesAttribute : ElasticsearchPropertyAttributeBase, IRankFeaturesProperty
 	{
 		public RankFeaturesAttribute() : base(FieldType.RankFeatures) { }
+
+		private IRankFeaturesProperty Self => this;
+
+		/// <inheritdoc cref="IRankFeatureProperty.PositiveScoreImpact"/>
+		public bool PositiveScoreImpact
+		{
+			get => Self.PositiveScoreImpact.GetValueOrDefault(true);
+			set => Self.PositiveScoreImpact = value;
+		}
+
+		bool? IRankFeaturesProperty.PositiveScoreImpact { get; set; }
 	}
 }
