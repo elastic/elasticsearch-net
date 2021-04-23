@@ -850,5 +850,31 @@ namespace Tests.Ingest
 
 			public override string Key => "network_direction";
 		}
+
+		[SkipVersion("<7.13.0", "Register_domain processor added in 7.13.0")]
+		public class RegisteredDomain : ProcessorAssertion
+		{
+			public override ProcFunc Fluent => d => d
+				.RegisteredDomain<Project>(ud => ud
+					.Field(f => f.Name)
+					.TargetField("domain")
+					.IgnoreMissing());
+
+			public override IProcessor Initializer => new RegisteredDomainProcessor
+			{
+				Field = Field<Project>(f => f.Name),
+				TargetField = "domain",
+				IgnoreMissing = true
+			};
+
+			public override object Json => new
+			{
+				field = "name",
+				target_field = "domain",
+				ignore_missing = true
+			};
+
+			public override string Key => "registered_domain";
+		}
 	}
 }
