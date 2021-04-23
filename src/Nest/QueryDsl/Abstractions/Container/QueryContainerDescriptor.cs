@@ -492,5 +492,8 @@ namespace Nest
 
 		public QueryContainer Pinned(Func<PinnedQueryDescriptor<T>, IPinnedQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Pinned = query);
+
+		public QueryContainer CombinedFields(Func<CombinedFieldsQueryDescriptor<T>, ICombinedFieldsQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.CombinedFields = query);
 	}
 }

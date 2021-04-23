@@ -205,5 +205,8 @@ namespace Nest
 		public static QueryContainer Pinned(Func<PinnedQueryDescriptor<T>, IPinnedQuery> selector) =>
 			new QueryContainerDescriptor<T>().Pinned(selector);
 
+		public static QueryContainer CombinedFields(Func<CombinedFieldsQueryDescriptor<T>, ICombinedFieldsQuery> selector) =>
+			new QueryContainerDescriptor<T>().CombinedFields(selector);
+
 	}
 }

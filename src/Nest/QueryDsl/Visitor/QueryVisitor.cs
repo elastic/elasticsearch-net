@@ -151,6 +151,8 @@ namespace Nest
 		void Visit(ITermsSetQuery query);
 
 		void Visit(IPinnedQuery query);
+
+		void Visit(ICombinedFieldsQuery query);
 	}
 
 	public class QueryVisitor : IQueryVisitor
@@ -286,6 +288,8 @@ namespace Nest
 		public virtual void Visit(ITermsSetQuery query) { }
 
 		public virtual void Visit(IPinnedQuery query) { }
+
+		public virtual void Visit(ICombinedFieldsQuery query) { }
 
 		public virtual void Visit(IQueryVisitor visitor) { }
 	}

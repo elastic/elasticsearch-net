@@ -61,6 +61,7 @@ namespace Nest
 			VisitQuery(qd.ParentId, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.TermsSet, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Pinned, visitor, (v, d) => v.Visit(d));
+			VisitQuery(qd.CombinedFields, visitor, (v, d) => v.Visit(d));
 
 			VisitQuery(qd.Bool, visitor, (v, d) =>
 			{
