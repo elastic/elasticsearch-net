@@ -13,6 +13,12 @@ namespace Nest
 	public interface ISort
 	{
 		/// <summary>
+		/// A format to apply to the sort value.
+		/// </summary>
+		[DataMember(Name ="format")]
+		string Format { get; set; }
+
+		/// <summary>
 		/// Specifies how documents which are missing the sort field should
 		/// be treated.
 		/// </summary>
@@ -54,6 +60,9 @@ namespace Nest
 	public abstract class SortBase : ISort
 	{
 		/// <inheritdoc />
+		public string Format { get; set; }
+
+		/// <inheritdoc />
 		public object Missing { get; set; }
 
 		/// <inheritdoc />
@@ -87,6 +96,7 @@ namespace Nest
 		/// </summary>
 		protected abstract Field SortKey { get; }
 
+		string ISort.Format { get; set; }
 		object ISort.Missing { get; set; }
 		SortMode? ISort.Mode { get; set; }
 		NumericType? ISort.NumericType { get; set; }
@@ -103,6 +113,9 @@ namespace Nest
 		/// Sorts by descending sort order
 		/// </summary>
 		public virtual TDescriptor Descending() => Assign(SortOrder.Descending, (a, v) => a.Order = v);
+		
+		/// <inheritdoc cref="ISort.Format" />
+		public virtual TDescriptor Format(string format) => Assign(format, (a, v) => a.Format = v);
 
 		/// <inheritdoc cref="ISort.Order" />
 		public virtual TDescriptor Order(SortOrder? order) => Assign(order, (a, v) => a.Order = v);
