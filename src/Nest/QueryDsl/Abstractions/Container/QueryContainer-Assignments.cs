@@ -64,6 +64,7 @@ namespace Nest
 		private IWildcardQuery _wildcard;
 		private IRankFeatureQuery _rankFeature;
 		private IPinnedQuery _pinned;
+		private ICombinedFieldsQuery _combinedFieldsQuery;
 
 		[IgnoreDataMember]
 		private IQueryContainer Self => this;
@@ -385,6 +386,11 @@ namespace Nest
 			set => _pinned = Set(value);
 		}
 
+		ICombinedFieldsQuery IQueryContainer.CombinedFields
+		{
+			get => _combinedFieldsQuery;
+			set => _combinedFieldsQuery = Set(value);
+		}
 
 		private T Set<T>(T value) where T : IQuery
 		{
