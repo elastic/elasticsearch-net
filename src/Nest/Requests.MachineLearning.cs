@@ -1289,14 +1289,13 @@ namespace Nest
 		protected IPreviewDatafeedRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPreviewDatafeed;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_preview</summary>
-		///<param name = "datafeedId">this parameter is required</param>
-		public PreviewDatafeedRequest(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
+		///<param name = "datafeedId">Optional, accepts null</param>
+		public PreviewDatafeedRequest(Id datafeedId): base(r => r.Optional("datafeed_id", datafeedId))
 		{
 		}
 
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected PreviewDatafeedRequest(): base()
+		///<summary>/_ml/datafeeds/_preview</summary>
+		public PreviewDatafeedRequest(): base()
 		{
 		}
 

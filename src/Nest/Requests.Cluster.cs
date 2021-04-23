@@ -83,7 +83,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
+	///<summary>Request for GetSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-get-settings.html</para></summary>
 	public partial class ClusterGetSettingsRequest : PlainRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
 	{
 		protected IClusterGetSettingsRequest Self => this;
