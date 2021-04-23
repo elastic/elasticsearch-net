@@ -17,20 +17,19 @@ namespace Nest
 			parameters.CustomResponseBuilder = TranslateSqlResponseBuilder.Instance;
 
 		/// <inheritdoc cref="ISqlRequest.FetchSize" />
-		/// >
 		public int? FetchSize { get; set; }
 
 		/// <inheritdoc cref="ISqlRequest.Filter" />
-		/// >
 		public QueryContainer Filter { get; set; }
 
 		/// <inheritdoc cref="ISqlRequest.Query" />
-		/// >
 		public string Query { get; set; }
 
 		/// <inheritdoc cref="ISqlRequest.TimeZone" />
-		/// >
 		public string TimeZone { get; set; }
+
+		/// <inheritdoc cref="ISqlRequest.RuntimeFields" />
+		public IRuntimeFields RuntimeFields { get; set; }
 	}
 
 	public partial class TranslateSqlDescriptor
@@ -42,6 +41,7 @@ namespace Nest
 		QueryContainer ISqlRequest.Filter { get; set; }
 		string ISqlRequest.Query { get; set; }
 		string ISqlRequest.TimeZone { get; set; }
+		IRuntimeFields ISqlRequest.RuntimeFields { get; set; }
 
 		/// <inheritdoc cref="ISqlRequest.Query" />
 		/// >
@@ -59,5 +59,9 @@ namespace Nest
 		/// >
 		public TranslateSqlDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 			where T : class => Assign(querySelector, (a, v) => a.Filter = v?.Invoke(new QueryContainerDescriptor<T>()));
+
+		/// <inheritdoc cref="ISqlRequest.RuntimeFields" />
+		public TranslateSqlDescriptor RuntimeFields<TSource>(Func<RuntimeFieldsDescriptor<TSource>, IPromise<IRuntimeFields>> runtimeFieldsSelector) where TSource : class =>
+			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor<TSource>())?.Value);
 	}
 }
