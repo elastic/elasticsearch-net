@@ -44,13 +44,27 @@ namespace Nest
 			set => Self.ScalingFactor = value;
 		}
 
+		public IInlineScript Script
+		{
+			get => Self.Script;
+			set => Self.Script = value;
+		}
+
+		public OnScriptError OnScriptError
+		{
+			get => Self.OnScriptError.GetValueOrDefault();
+			set => Self.OnScriptError = value;
+		}
+
 		bool? INumberProperty.Coerce { get; set; }
 		INumericFielddata INumberProperty.Fielddata { get; set; }
 		bool? INumberProperty.IgnoreMalformed { get; set; }
-
 		bool? INumberProperty.Index { get; set; }
 		double? INumberProperty.NullValue { get; set; }
 		double? INumberProperty.ScalingFactor { get; set; }
+		IInlineScript INumberProperty.Script { get; set; }
+		OnScriptError? INumberProperty.OnScriptError { get; set; }
+
 		private INumberProperty Self => this;
 	}
 }
