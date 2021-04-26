@@ -136,6 +136,7 @@ namespace Nest
 		internal static ApiUrls IndicesGetTemplate = new ApiUrls(new[]{"_template", "_template/{name}"});
 		internal static ApiUrls IndicesMigrateToDataStream = new ApiUrls(new[]{"_data_stream/_migrate/{name}"});
 		internal static ApiUrls IndicesOpen = new ApiUrls(new[]{"{index}/_open"});
+		internal static ApiUrls IndicesPromoteDataStream = new ApiUrls(new[]{"_data_stream/_promote/{name}"});
 		internal static ApiUrls IndicesPutAlias = new ApiUrls(new[]{"{index}/_alias/{name}"});
 		internal static ApiUrls IndicesPutMapping = new ApiUrls(new[]{"{index}/_mapping"});
 		internal static ApiUrls IndicesUpdateSettings = new ApiUrls(new[]{"_settings", "{index}/_settings"});
