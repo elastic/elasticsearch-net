@@ -98,14 +98,14 @@ namespace Elasticsearch.Net.Specification.EqlApi
 		///<param name = "index">The name of the index to scope the operation</param>
 		///<param name = "body">Eql request body. Use the `query` to limit the query scope.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse Search<TResponse>(string index, PostData body, SearchRequestParameters requestParameters = null)
+		public TResponse Search<TResponse>(string index, PostData body, EqlSearchRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_eql/search"), body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_eql/search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
 		///<param name = "index">The name of the index to scope the operation</param>
 		///<param name = "body">Eql request body. Use the `query` to limit the query scope.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("eql.search", "index, body")]
-		public Task<TResponse> SearchAsync<TResponse>(string index, PostData body, SearchRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> SearchAsync<TResponse>(string index, PostData body, EqlSearchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_eql/search"), ctx, body, RequestParams(requestParameters));
 	}
 }

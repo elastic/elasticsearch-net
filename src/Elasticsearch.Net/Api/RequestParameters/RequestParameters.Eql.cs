@@ -77,7 +77,7 @@ namespace Elasticsearch.Net.Specification.EqlApi
 	}
 
 	///<summary>Request options for Search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public class SearchRequestParameters : RequestParameters<SearchRequestParameters>
+	public class EqlSearchRequestParameters : RequestParameters<EqlSearchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
