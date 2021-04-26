@@ -759,28 +759,28 @@ namespace Nest.Specification.MachineLearningApi
 		/// </summary>
 		public Task<PostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request, CancellationToken ct = default) => DoRequestAsync<IPostJobDataRequest, PostJobDataResponse>(request, request.RequestParameters, ct);
 		/// <summary>
-		/// <c>GET</c> request to the <c>ml.preview_datafeed</c> API, read more about this API online:
+		/// <c>POST</c> request to the <c>ml.preview_datafeed</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
 		/// </summary>
-		public PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(Id datafeedId, Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null)
-			where TDocument : class => PreviewDatafeed<TDocument>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor(datafeedId: datafeedId)));
+		public PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null)
+			where TDocument : class => PreviewDatafeed<TDocument>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor()));
 		/// <summary>
-		/// <c>GET</c> request to the <c>ml.preview_datafeed</c> API, read more about this API online:
+		/// <c>POST</c> request to the <c>ml.preview_datafeed</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
 		/// </summary>
-		public Task<PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(Id datafeedId, Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => PreviewDatafeedAsync<TDocument>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor(datafeedId: datafeedId)), ct);
+		public Task<PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null, CancellationToken ct = default)
+			where TDocument : class => PreviewDatafeedAsync<TDocument>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor()), ct);
 		/// <summary>
-		/// <c>GET</c> request to the <c>ml.preview_datafeed</c> API, read more about this API online:
+		/// <c>POST</c> request to the <c>ml.preview_datafeed</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
 		/// </summary>
 		public PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(IPreviewDatafeedRequest request)
 			where TDocument : class => DoRequest<IPreviewDatafeedRequest, PreviewDatafeedResponse<TDocument>>(request, ResponseBuilder(request.RequestParameters, PreviewDatafeedResponseBuilder<TDocument>.Instance));
 		/// <summary>
-		/// <c>GET</c> request to the <c>ml.preview_datafeed</c> API, read more about this API online:
+		/// <c>POST</c> request to the <c>ml.preview_datafeed</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</a>
 		/// </summary>

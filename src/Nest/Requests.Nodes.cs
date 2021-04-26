@@ -317,6 +317,13 @@ namespace Nest
 			set => Q("include_segment_file_sizes", value);
 		}
 
+		///<summary>If set to true segment stats will include stats for segments that are not currently loaded into memory</summary>
+		public bool? IncludeUnloadedSegments
+		{
+			get => Q<bool? >("include_unloaded_segments");
+			set => Q("include_unloaded_segments", value);
+		}
+
 		///<summary>Return indices stats aggregated at index, node or shard level</summary>
 		public Level? Level
 		{
