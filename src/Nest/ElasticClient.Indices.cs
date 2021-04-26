@@ -756,6 +756,30 @@ namespace Nest.Specification.IndicesApi
 		/// </summary>
 		public Task<OpenIndexResponse> OpenAsync(IOpenIndexRequest request, CancellationToken ct = default) => DoRequestAsync<IOpenIndexRequest, OpenIndexResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>indices.promote_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public PromoteDataStreamResponse PromoteDataStream(Name name, Func<PromoteDataStreamDescriptor, IPromoteDataStreamRequest> selector = null) => PromoteDataStream(selector.InvokeOrDefault(new PromoteDataStreamDescriptor(name: name)));
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.promote_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<PromoteDataStreamResponse> PromoteDataStreamAsync(Name name, Func<PromoteDataStreamDescriptor, IPromoteDataStreamRequest> selector = null, CancellationToken ct = default) => PromoteDataStreamAsync(selector.InvokeOrDefault(new PromoteDataStreamDescriptor(name: name)), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.promote_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public PromoteDataStreamResponse PromoteDataStream(IPromoteDataStreamRequest request) => DoRequest<IPromoteDataStreamRequest, PromoteDataStreamResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.promote_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<PromoteDataStreamResponse> PromoteDataStreamAsync(IPromoteDataStreamRequest request, CancellationToken ct = default) => DoRequestAsync<IPromoteDataStreamRequest, PromoteDataStreamResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>PUT</c> request to the <c>indices.put_alias</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</a>
