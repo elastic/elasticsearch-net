@@ -55,6 +55,9 @@ namespace Nest
 		/// <inheritdoc cref="ISqlRequest.TimeZone" />
 		/// >
 		public string TimeZone { get; set; }
+
+		/// <inheritdoc />
+		public IRuntimeFields RuntimeFields { get; set; }
 	}
 
 	public partial class QuerySqlDescriptor
@@ -65,6 +68,7 @@ namespace Nest
 		QueryContainer ISqlRequest.Filter { get; set; }
 		string ISqlRequest.Query { get; set; }
 		string ISqlRequest.TimeZone { get; set; }
+		IRuntimeFields ISqlRequest.RuntimeFields { get; set; }
 
 		/// <inheritdoc cref="ISqlRequest.Query" />
 		/// >
@@ -90,5 +94,9 @@ namespace Nest
 		/// <inheritdoc cref="IQuerySqlRequest.Columnar" />
 		/// >
 		public QuerySqlDescriptor Columnar(bool? columnar = true) => Assign(columnar, (a, v) => a.Columnar = v);
+
+		/// <inheritdoc cref="ISqlRequest.RuntimeFields" />
+		public QuerySqlDescriptor RuntimeFields(Func<RuntimeFieldsDescriptor, IPromise<IRuntimeFields>> runtimeFieldsSelector) =>
+			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor())?.Value);
 	}
 }

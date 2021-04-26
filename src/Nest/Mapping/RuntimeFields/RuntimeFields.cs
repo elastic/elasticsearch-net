@@ -40,4 +40,16 @@ namespace Nest
 		public RuntimeFieldsDescriptor<TDocument> RuntimeField(Expression<Func<TDocument, Field>> field, FieldType type) =>
 			Assign(field, new RuntimeFieldDescriptor(type));
 	}
+
+	public class RuntimeFieldsDescriptor
+		: IsADictionaryDescriptorBase<RuntimeFieldsDescriptor, RuntimeFields, Field, IRuntimeField>
+	{
+		public RuntimeFieldsDescriptor() : base(new RuntimeFields()) { }
+
+		public RuntimeFieldsDescriptor RuntimeField(string name, FieldType type, Func<RuntimeFieldDescriptor, IRuntimeField> selector) =>
+			Assign(name, selector?.Invoke(new RuntimeFieldDescriptor(type)));
+
+		public RuntimeFieldsDescriptor RuntimeField(string name, FieldType type) =>
+			Assign(name, new RuntimeFieldDescriptor(type));
+	}
 }
