@@ -150,6 +150,7 @@ namespace Nest
 		internal static ApiUrls IndicesGetMapping = new ApiUrls(new[]{"_mapping", "{index}/_mapping"});
 		internal static ApiUrls IndicesGetSettings = new ApiUrls(new[]{"_settings", "{index}/_settings", "{index}/_settings/{name}", "_settings/{name}"});
 		internal static ApiUrls IndicesGetTemplate = new ApiUrls(new[]{"_template", "_template/{name}"});
+		internal static ApiUrls IndicesMigrateToDataStream = new ApiUrls(new[]{"_data_stream/_migrate/{name}"});
 		internal static ApiUrls IndicesOpen = new ApiUrls(new[]{"{index}/_open"});
 		internal static ApiUrls IndicesPutAlias = new ApiUrls(new[]{"{index}/_alias/{name}"});
 		internal static ApiUrls IndicesPutMapping = new ApiUrls(new[]{"{index}/_mapping"});

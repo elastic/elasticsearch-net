@@ -1706,6 +1706,39 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IMigrateToDataStreamRequest : IRequest<MigrateToDataStreamRequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for MigrateToDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class MigrateToDataStreamRequest : PlainRequestBase<MigrateToDataStreamRequestParameters>, IMigrateToDataStreamRequest
+	{
+		protected IMigrateToDataStreamRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesMigrateToDataStream;
+		///<summary>/_data_stream/_migrate/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public MigrateToDataStreamRequest(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected MigrateToDataStreamRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IMigrateToDataStreamRequest.Name => Self.RouteValues.Get<Name>("name");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters>
 	{
 		[IgnoreDataMember]

@@ -660,6 +660,30 @@ namespace Nest.Specification.IndicesApi
 		/// </summary>
 		public Task<GetIndexTemplateResponse> GetTemplateAsync(IGetIndexTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IGetIndexTemplateRequest, GetIndexTemplateResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>indices.migrate_to_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public MigrateToDataStreamResponse MigrateToDataStream(Name name, Func<MigrateToDataStreamDescriptor, IMigrateToDataStreamRequest> selector = null) => MigrateToDataStream(selector.InvokeOrDefault(new MigrateToDataStreamDescriptor(name: name)));
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.migrate_to_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<MigrateToDataStreamResponse> MigrateToDataStreamAsync(Name name, Func<MigrateToDataStreamDescriptor, IMigrateToDataStreamRequest> selector = null, CancellationToken ct = default) => MigrateToDataStreamAsync(selector.InvokeOrDefault(new MigrateToDataStreamDescriptor(name: name)), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.migrate_to_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public MigrateToDataStreamResponse MigrateToDataStream(IMigrateToDataStreamRequest request) => DoRequest<IMigrateToDataStreamRequest, MigrateToDataStreamResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>indices.migrate_to_data_stream</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</a>
+		/// </summary>
+		public Task<MigrateToDataStreamResponse> MigrateToDataStreamAsync(IMigrateToDataStreamRequest request, CancellationToken ct = default) => DoRequestAsync<IMigrateToDataStreamRequest, MigrateToDataStreamResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>indices.open</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</a>
