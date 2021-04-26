@@ -1000,6 +1000,27 @@ namespace Nest
 		public GetIndexTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
+	///<summary>Descriptor for MigrateToDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class MigrateToDataStreamDescriptor : RequestDescriptorBase<MigrateToDataStreamDescriptor, MigrateToDataStreamRequestParameters, IMigrateToDataStreamRequest>, IMigrateToDataStreamRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesMigrateToDataStream;
+		///<summary>/_data_stream/_migrate/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public MigrateToDataStreamDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected MigrateToDataStreamDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IMigrateToDataStreamRequest.Name => Self.RouteValues.Get<Name>("name");
+	// Request parameters
+	}
+
 	///<summary>Descriptor for Open <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public partial class OpenIndexDescriptor : RequestDescriptorBase<OpenIndexDescriptor, OpenIndexRequestParameters, IOpenIndexRequest>, IOpenIndexRequest
 	{
