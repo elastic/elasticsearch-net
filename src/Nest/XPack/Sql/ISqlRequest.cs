@@ -29,5 +29,11 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name ="time_zone")]
 		string TimeZone { get; set; }
+
+		/// <summary>
+		/// Specifies runtime fields which exist only as part of the query.
+		/// </summary>
+		[DataMember(Name = "runtime_mappings")]
+		IRuntimeFields RuntimeFields { get; set; }
 	}
 }
