@@ -209,7 +209,7 @@ namespace Nest
 		public CloseIndexDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Explicit operation timeout</summary>
 		public CloseIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
+		///<summary>Sets the number of active shards to wait for before the operation returns. Set to `index-setting` to wait according to the index setting `index.write.wait_for_active_shards`, or `all` to wait for all shards, or an integer. Defaults to `0`.</summary>
 		public CloseIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 

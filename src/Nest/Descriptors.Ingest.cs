@@ -77,6 +77,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public GetPipelineDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+		///<summary>Return pipelines without their definitions (default: false)</summary>
+		public GetPipelineDescriptor Summary(bool? summary = true) => Qs("summary", summary);
 	}
 
 	///<summary>Descriptor for GrokProcessorPatterns <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get</para></summary>

@@ -494,6 +494,8 @@ namespace Nest
 		public CatNodesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatNodesDescriptor Help(bool? help = true) => Qs("help", help);
+		///<summary>If set to true segment stats will include stats for segments that are not currently loaded into memory</summary>
+		public CatNodesDescriptor IncludeUnloadedSegments(bool? includeunloadedsegments = true) => Qs("include_unloaded_segments", includeunloadedsegments);
 		///<summary>Calculate the selected nodes using the local cluster state rather than the state from master node (default: false)</summary>
 		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.6.0, reason: This parameter does not cause this API to act locally.")]
 		public CatNodesDescriptor Local(bool? local = true) => Qs("local", local);
