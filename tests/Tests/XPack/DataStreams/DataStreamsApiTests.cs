@@ -225,7 +225,7 @@ namespace Tests.XPack.DataStreams
 			r.Acknowledged.Should().BeTrue();
 		});
 
-		[I] public async Task MigrateToDataStreamResponse() => await Assert<MigrateToDataStreamResponse>(MigrateToDataStreamStep, (v, r) =>
+		[I] public async Task MigrateToDataStreamResponse() => await Assert<MigrateToDataStreamResponse>(MigrateToDataStreamStep, r =>
 		{
 			r.ShouldBeValid();
 			r.Acknowledged.Should().BeTrue();
