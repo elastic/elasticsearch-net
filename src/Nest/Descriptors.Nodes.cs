@@ -203,6 +203,8 @@ namespace Nest
 		public NodesStatsDescriptor Groups(bool? groups = true) => Qs("groups", groups);
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public NodesStatsDescriptor IncludeSegmentFileSizes(bool? includesegmentfilesizes = true) => Qs("include_segment_file_sizes", includesegmentfilesizes);
+		///<summary>If set to true segment stats will include stats for segments that are not currently loaded into memory</summary>
+		public NodesStatsDescriptor IncludeUnloadedSegments(bool? includeunloadedsegments = true) => Qs("include_unloaded_segments", includeunloadedsegments);
 		///<summary>Return indices stats aggregated at index, node or shard level</summary>
 		public NodesStatsDescriptor Level(Level? level) => Qs("level", level);
 		///<summary>Explicit operation timeout</summary>

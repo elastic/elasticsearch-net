@@ -756,19 +756,20 @@ namespace Nest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPreviewDatafeed;
 		///<summary>/_ml/datafeeds/{datafeed_id}/_preview</summary>
-		///<param name = "datafeedId">this parameter is required</param>
-		public PreviewDatafeedDescriptor(Id datafeedId): base(r => r.Required("datafeed_id", datafeedId))
+		///<param name = "datafeedId">Optional, accepts null</param>
+		public PreviewDatafeedDescriptor(Id datafeedId): base(r => r.Optional("datafeed_id", datafeedId))
 		{
 		}
 
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected PreviewDatafeedDescriptor(): base()
+		///<summary>/_ml/datafeeds/_preview</summary>
+		public PreviewDatafeedDescriptor(): base()
 		{
 		}
 
 		// values part of the url path
 		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		///<summary>The ID of the datafeed to preview</summary>
+		public PreviewDatafeedDescriptor DatafeedId(Id datafeedId) => Assign(datafeedId, (a, v) => a.RouteValues.Optional("datafeed_id", v));
 	// Request parameters
 	}
 

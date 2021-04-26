@@ -2825,6 +2825,13 @@ namespace Nest
 			set => Q("max_concurrent_shard_requests", value);
 		}
 
+		///<summary>The minimum compatible version that all shards involved in search should have for this request to be successful</summary>
+		public string MinCompatibleShardNode
+		{
+			get => Q<string>("min_compatible_shard_node");
+			set => Q("min_compatible_shard_node", value);
+		}
+
 		///<summary>
 		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can

@@ -383,6 +383,13 @@ namespace Nest
 			set => Q("ignore_unavailable", value);
 		}
 
+		///<summary>Whether to include details of each index in the snapshot, if those details are available. Defaults to false.</summary>
+		public bool? IndexDetails
+		{
+			get => Q<bool? >("index_details");
+			set => Q("index_details", value);
+		}
+
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout
 		{
