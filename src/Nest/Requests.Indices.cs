@@ -1785,6 +1785,39 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IPromoteDataStreamRequest : IRequest<PromoteDataStreamRequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for PromoteDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class PromoteDataStreamRequest : PlainRequestBase<PromoteDataStreamRequestParameters>, IPromoteDataStreamRequest
+	{
+		protected IPromoteDataStreamRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPromoteDataStream;
+		///<summary>/_data_stream/_promote/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public PromoteDataStreamRequest(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected PromoteDataStreamRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IPromoteDataStreamRequest.Name => Self.RouteValues.Get<Name>("name");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
 	{
 		[IgnoreDataMember]
