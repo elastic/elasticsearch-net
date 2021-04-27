@@ -1,8 +1,25 @@
 
 [float]
-[[uncategorized]]
-=== Uncategorized
+[[bug]]
+=== Bug Fixes
 
 - * Update RuntimeField to use IInlineScript https://github.com/elastic/elasticsearch-net/pull/5546[#5546]  (issue: https://github.com/elastic/elasticsearch-net/issues/5537[#5537])
+- * Fix client exception message to avoid double period on .NET Framework https://github.com/elastic/elasticsearch-net/pull/5572[#5572] 
+
+[float]
+[[enhancement]]
+=== New Features
+
+- * Add IP type to convert processor https://github.com/elastic/elasticsearch-net/pull/5588[#5588]  (issue: https://github.com/elastic/elasticsearch-net/issues/5584[#5584])
+- * Support network direction processor additions https://github.com/elastic/elasticsearch-net/pull/5603[#5603]  (issue: https://github.com/elastic/elasticsearch-net/issues/5584[#5584])
+- * Support new queryable "_tier" metadata field https://github.com/elastic/elasticsearch-net/pull/5606[#5606] 
+- * Add positive_score_impact to rank_features property https://github.com/elastic/elasticsearch-net/pull/5607[#5607]  (issue: https://github.com/elastic/elasticsearch-net/issues/5584[#5584])
+- * Allow formatting of sort values https://github.com/elastic/elasticsearch-net/pull/5610[#5610]  (issue: https://github.com/elastic/elasticsearch-net/issues/5584[#5584])
+- * Add registered domain ingest processor https://github.com/elastic/elasticsearch-net/pull/5616[#5616]  (issue: https://github.com/elastic/elasticsearch-net/issues/5584[#5584])
+- * Add support for combined fields query https://github.com/elastic/elasticsearch-net/pull/5619[#5619]  (issue: https://github.com/elastic/elasticsearch-net/issues/5584[#5584])
+- * Support for calculated numeric fields https://github.com/elastic/elasticsearch-net/pull/5622[#5622]  (issue: https://github.com/elastic/elasticsearch-net/issues/5584[#5584])
+- * Support runtime mappings for SQL https://github.com/elastic/elasticsearch-net/pull/5624[#5624] 
+- * Add migrate to data stream API in NEST https://github.com/elastic/elasticsearch-net/pull/5633[#5633] 
+- * Add promote data stream API to NEST https://github.com/elastic/elasticsearch-net/pull/5636[#5636] 
 
 
