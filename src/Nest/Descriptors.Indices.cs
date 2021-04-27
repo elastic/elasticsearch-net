@@ -992,6 +992,10 @@ namespace Nest
 	public partial class MigrateToDataStreamDescriptor : RequestDescriptorBase<MigrateToDataStreamDescriptor, MigrateToDataStreamRequestParameters, IMigrateToDataStreamRequest>, IMigrateToDataStreamRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesMigrateToDataStream;
+		
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		
+		protected override bool SupportsBody => false;
 		///<summary>/_data_stream/_migrate/{name}</summary>
 		///<param name = "name">this parameter is required</param>
 		public MigrateToDataStreamDescriptor(Name name): base(r => r.Required("name", name))
