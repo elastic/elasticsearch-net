@@ -1,0 +1,8 @@
+
+[float]
+[[bug]]
+=== Bug Fixes
+
+- * Catch exceptions when detecting runtime version https://github.com/elastic/elasticsearch-net/pull/5582[#5582]  (issue: https://github.com/elastic/elasticsearch-net/issues/5575[#5575])
+
+
