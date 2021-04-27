@@ -1055,6 +1055,29 @@ namespace Nest
 		public OpenIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
+	///<summary>Descriptor for PromoteDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public partial class PromoteDataStreamDescriptor : RequestDescriptorBase<PromoteDataStreamDescriptor, PromoteDataStreamRequestParameters, IPromoteDataStreamRequest>, IPromoteDataStreamRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPromoteDataStream;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_data_stream/_promote/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public PromoteDataStreamDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected PromoteDataStreamDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IPromoteDataStreamRequest.Name => Self.RouteValues.Get<Name>("name");
+	// Request parameters
+	}
+
 	///<summary>Descriptor for PutAlias <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</para></summary>
 	public partial class PutAliasDescriptor : RequestDescriptorBase<PutAliasDescriptor, PutAliasRequestParameters, IPutAliasRequest>, IPutAliasRequest
 	{
