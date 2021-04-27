@@ -31,6 +31,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using HttpMethod = Elasticsearch.Net.HttpMethod;
 using FluentAssertions;
 using System.Text.RegularExpressions;
+using Tests.Core.Xunit;
 using Environment = System.Environment;
 
 namespace Tests.ClientConcepts.Connection
@@ -348,11 +349,13 @@ namespace Tests.ClientConcepts.Connection
 		}
 	}
 
-	public class HttpConnectionEnvironmentalTests : ClusterTestClassBase<ReadOnlyCluster>, IDisposable
+	// using IntrusiveOperationCluster to avoid affecting other tests with the ENV VAR
+	[SkipVersion("<7.13.0", "Setting only valid in 7.13.0+")]
+	public class HttpConnectionEnvironmentalTests : ClusterTestClassBase<IntrusiveOperationCluster>, IDisposable
 	{
 		private readonly string _previousEnvironmentVariable;
 
-		public HttpConnectionEnvironmentalTests(ReadOnlyCluster cluster) : base(cluster) =>
+		public HttpConnectionEnvironmentalTests(IntrusiveOperationCluster cluster) : base(cluster) =>
 			_previousEnvironmentVariable = Environment.GetEnvironmentVariable(ConnectionConfiguration.ApiVersioningEnvironmentVariableName);
 
 		[I]
@@ -366,7 +369,6 @@ namespace Tests.ClientConcepts.Connection
 				responseMessage.RequestMessage.Content.Headers.ContentType.Should().NotBeNull();
 				var contentType = responseMessage.RequestMessage.Content.Headers.ContentType.ToString();
 				contentType.Should().Contain("compatible-with");
-
 			});
 
 			var r = connection.Request<StringResponse>(requestData);
