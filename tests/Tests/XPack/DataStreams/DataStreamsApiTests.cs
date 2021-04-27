@@ -37,7 +37,7 @@ namespace Tests.XPack.DataStreams
 	[SkipVersion("<7.9.0", "Introduced in 7.9.0")]
 	public class DataStreamsApiTests : CoordinatedIntegrationTestBase<WritableCluster>
 	{
-		private static readonly Metric Document = new Metric
+		private static readonly Metric Document = new()
 		{
 			Timestamp = new DateTime(2020, 8, 3, 14, 0, 0, DateTimeKind.Utc),
 			Accept = 3,
@@ -47,13 +47,16 @@ namespace Tests.XPack.DataStreams
 			Response = 300,
 			Total = 3
 		};
-
+		
 		private const string CreateDataStreamStep = nameof(CreateDataStreamStep);
 		private const string IndexStep = nameof(IndexStep);
 		private const string GetDataStreamStep = nameof(GetDataStreamStep);
 		private const string PutIndexTemplateStep = nameof(PutIndexTemplateStep);
 		private const string DataStreamsStatsStep = nameof(DataStreamsStatsStep);
 		private const string DeleteDataStreamStep = nameof(DeleteDataStreamStep);
+		private const string PrepareIndexStep = nameof(PrepareIndexStep);
+		private const string PrepareAliasStep = nameof(PrepareAliasStep);
+		private const string MigrateToDataStreamStep = nameof(MigrateToDataStreamStep);
 
 		public DataStreamsApiTests(WritableCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, testOnlyOne: true)
 		{
@@ -109,10 +112,10 @@ namespace Tests.XPack.DataStreams
 						Refresh = Refresh.WaitFor
 					},
 					(v, d) => d.Index(v).Refresh(Refresh.WaitFor),
-					(v, c, f) => c.Index<Metric>(Document, f),
-					(v, c, f) => c.IndexAsync<Metric>(Document, f),
-					(v, c, r) => c.Index<Metric>(r),
-					(v, c, r) => c.IndexAsync<Metric>(r)
+					(v, c, f) => c.Index(Document, f),
+					(v, c, f) => c.IndexAsync(Document, f),
+					(v, c, r) => c.Index(r),
+					(v, c, r) => c.IndexAsync(r)
 				)
 			},
 			{GetDataStreamStep, u =>
@@ -143,6 +146,48 @@ namespace Tests.XPack.DataStreams
 					(v, c, f) => c.Indices.DeleteDataStreamAsync(v, f),
 					(v, c, r) => c.Indices.DeleteDataStream(r),
 					(v, c, r) => c.Indices.DeleteDataStreamAsync(r)
+				)
+			},
+			// Used for migrate step
+			{PrepareIndexStep, ">= 7.13.0", u =>
+				u.Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, CreateIndexResponse>(
+					v => new CreateIndexRequest($"my-index{v}-test")
+					{
+						Mappings = new TypeMapping
+						{
+							Properties = new Properties
+							{
+								{ "@timestamp", new DateNanosProperty() }
+							}
+						}
+					},
+					(v, d) => d.Map(m=> m.Properties(p=> p.DateNanos(dn => dn.Name("@timestamp")))),
+					(v, c, f) => c.Indices.Create($"my-index{v}-test", f),
+					(v, c, f) => c.Indices.CreateAsync($"my-index{v}-test", f),
+					(v, c, r) => c.Indices.Create(r),
+					(v, c, r) => c.Indices.CreateAsync(r)
+				)
+			},
+			// Used for migrate step
+			{PrepareAliasStep,">= 7.13.0", u =>
+				u.Calls<PutAliasDescriptor, PutAliasRequest, IPutAliasRequest, PutAliasResponse>(
+					v => new PutAliasRequest($"my-index{v}-test", $"{v}-alias"),
+					(v, d) => d,
+					(v, c, f) => c.Indices.PutAlias($"my-index{v}-test", $"{v}-alias", f),
+					(v, c, f) => c.Indices.PutAliasAsync($"my-index{v}-test", $"{v}-alias", f),
+					(v, c, r) => c.Indices.PutAlias(r),
+					(v, c, r) => c.Indices.PutAliasAsync(r)
+				)
+			},
+			// Migrate to data stream added in 7.13.0
+			{MigrateToDataStreamStep,">= 7.13.0", u =>
+				u.Calls<MigrateToDataStreamDescriptor, MigrateToDataStreamRequest, IMigrateToDataStreamRequest, MigrateToDataStreamResponse>(
+					v => new MigrateToDataStreamRequest($"{v}-alias"),
+					(v, d) => d,
+					(v, c, f) => c.Indices.MigrateToDataStream($"{v}-alias", f),
+					(v, c, f) => c.Indices.MigrateToDataStreamAsync($"{v}-alias", f),
+					(v, c, r) => c.Indices.MigrateToDataStream(r),
+					(v, c, r) => c.Indices.MigrateToDataStreamAsync(r)
 				)
 			},
 		}) { }
@@ -195,6 +240,12 @@ namespace Tests.XPack.DataStreams
 		});
 
 		[I] public async Task DeleteDataStreamResponse() => await Assert<DeleteDataStreamResponse>(DeleteDataStreamStep, (v, r) =>
+		{
+			r.ShouldBeValid();
+			r.Acknowledged.Should().BeTrue();
+		});
+
+		[I] public async Task MigrateToDataStreamResponse() => await Assert<MigrateToDataStreamResponse>(MigrateToDataStreamStep, r =>
 		{
 			r.ShouldBeValid();
 			r.Acknowledged.Should().BeTrue();
