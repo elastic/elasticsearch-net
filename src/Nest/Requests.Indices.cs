@@ -1799,6 +1799,8 @@ namespace Nest
 	{
 		protected IPromoteDataStreamRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPromoteDataStream;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
 		///<summary>/_data_stream/_promote/{name}</summary>
 		///<param name = "name">this parameter is required</param>
 		public PromoteDataStreamRequest(Name name): base(r => r.Required("name", name))
