@@ -11,6 +11,12 @@ namespace Nest
 	public partial interface IEqlSearchRequest
 	{
 		/// <summary>
+		/// Indicates whether the search should be case sensitive.
+		/// </summary>
+		[DataMember(Name = "case_sensitive")]
+		bool? CaseSensitive { get; set; }
+
+		/// <summary>
 		/// The EQL search API uses the event.category field from the ECS by default. To specify a different field,
 		/// set <see cref="EventCategoryField"/>.
 		/// </summary>
@@ -18,7 +24,7 @@ namespace Nest
 		Field EventCategoryField { get; set; }
 
 		/// <summary>
-		/// fetch_size is a hint for how many results to return in each page. SQL might chose to return more or fewer results though.
+		/// Maximum number of events to search at a time for sequence queries.
 		/// </summary>
 		[DataMember(Name = "fetch_size")]
 		int? FetchSize { get; set; }
@@ -35,28 +41,24 @@ namespace Nest
 		[DataMember(Name = "filter")]
 		QueryContainer Filter { get; set; }
 
-		/// <summary>
-		/// By default, the EQL search API stores async searches for five days. After this period, any searches 
-		/// and their results are deleted. Use the <see cref="KeepAlive"/> parameter to change this retention period.
-		/// </summary>
-		[DataMember(Name = "keep_alive")]
-		DateMath KeepAlive { get; set; }
-
-		/// <summary>
-		/// To save a synchronous search, set <see cref="KeepOnCompletion"/> to <value>true</value>.
-		/// </summary>
-		[DataMember(Name = "keep_on_completion")]
-		bool? KeepOnCompletion { get; set; }
-
 		/// <summary> The SQL query you want Elasticsearch to execute </summary>
 		[DataMember(Name = "query")]
 		string Query { get; set; }
+
+		[DataMember(Name = "result_position")]
+		EqlResultPosition? ResultPosition { get; set; }
 
 		/// <summary>
 		/// Specifies runtime fields which exist only as part of the query.
 		/// </summary>
 		[DataMember(Name = "runtime_mappings")]
 		IRuntimeFields RuntimeFields { get; set; }
+
+		/// <summary>
+		/// For basic queries, the maximum number of matching events to return. Defaults to 10.
+		/// </summary>
+		[DataMember(Name = "size")]
+		float? Size { get; set; }
 
 		/// <summary>
 		/// To specify a tiebreaker field, use the <see cref="TiebreakerField"/> parameter. If you use the ECS,
@@ -71,17 +73,12 @@ namespace Nest
 		/// </summary>
 		[DataMember(Name = "timestamp_field")]
 		Field TimestampField { get; set; }
-
-		/// <summary>
-		/// To avoid long waits, run an async EQL search. Set <see cref="WaitForCompletionTimeout"/>
-		/// to a duration you’d like to wait for synchronous results.
-		/// </summary>
-		[DataMember(Name = "wait_for_completion_timeout")]
-		DateMath WaitForCompletionTimeout { get; set; } 
 	}
 
 	public partial class EqlSearchRequest : IEqlSearchRequest
 	{
+		/// <inheritdoc />
+		public bool? CaseSensitive { get; set; }
 		/// <inheritdoc />
 		public Field EventCategoryField { get; set; }
 		/// <inheritdoc />
@@ -91,44 +88,52 @@ namespace Nest
 		/// <inheritdoc />
 		public QueryContainer Filter { get; set; }
 		/// <inheritdoc />
-		public DateMath KeepAlive { get; set; }
-		/// <inheritdoc />
-		public bool? KeepOnCompletion { get; set; }
-		/// <inheritdoc />
 		public string Query { get; set; }
 		/// <inheritdoc />
+		public EqlResultPosition? ResultPosition { get; set; }
+		/// <inheritdoc />
 		public IRuntimeFields RuntimeFields { get; set; }
+		/// <inheritdoc />
+		public float? Size { get; set; }
 		/// <inheritdoc />
 		public Field TiebreakerField { get; set; }
 		/// <inheritdoc />
 		public Field TimestampField { get; set; }
-		/// <inheritdoc />
-		public DateMath WaitForCompletionTimeout { get; set; }
 	}
 
 	public partial class EqlSearchDescriptor : IEqlSearchRequest
 	{
+		/// <inheritdoc cref="IEqlSearchRequest.CaseSensitive"/>
+		bool? IEqlSearchRequest.CaseSensitive { get; set; }
+
 		/// <inheritdoc cref="IEqlSearchRequest.EventCategoryField"/>
 		Field IEqlSearchRequest.EventCategoryField { get; set; }
+
 		/// <inheritdoc cref="IEqlSearchRequest.FetchSize"/>
 		int? IEqlSearchRequest.FetchSize { get; set; }
+
 		/// <inheritdoc cref="IEqlSearchRequest.Fields"/>
 		Fields IEqlSearchRequest.Fields { get; set; }
+
 		/// <inheritdoc cref="IEqlSearchRequest.Filter"/>
 		QueryContainer IEqlSearchRequest.Filter { get; set; }
-		/// <inheritdoc cref="IEqlSearchRequest.KeepAlive"/>
-		DateMath IEqlSearchRequest.KeepAlive { get; set; }
-		/// <inheritdoc cref="IEqlSearchRequest.KeepOnCompletion"/>
-		bool? IEqlSearchRequest.KeepOnCompletion { get; set; }
+
 		/// <inheritdoc cref="IEqlSearchRequest.Query"/>
 		string IEqlSearchRequest.Query { get; set; }
+
+		/// <inheritdoc cref="IEqlSearchRequest.ResultPosition"/>
+		EqlResultPosition? IEqlSearchRequest.ResultPosition { get; set; }
+
 		/// <inheritdoc cref="IEqlSearchRequest.RuntimeFields"/>
 		IRuntimeFields IEqlSearchRequest.RuntimeFields { get; set; }
+
+		/// <inheritdoc cref="IEqlSearchRequest.Size"/>
+		float? IEqlSearchRequest.Size { get; set; }
+
 		/// <inheritdoc cref="IEqlSearchRequest.TiebreakerField"/>
 		Field IEqlSearchRequest.TiebreakerField { get; set; }
+
 		/// <inheritdoc cref="IEqlSearchRequest.TimestampField"/>
 		Field IEqlSearchRequest.TimestampField { get; set; }
-		/// <inheritdoc cref="IEqlSearchRequest.WaitForCompletionTimeout"/>
-		DateMath IEqlSearchRequest.WaitForCompletionTimeout { get; set; }
 	}
 }
