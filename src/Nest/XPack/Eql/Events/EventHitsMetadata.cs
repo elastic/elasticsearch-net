@@ -25,7 +25,7 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest.XPack.Eql.Events
 {
 	[InterfaceDataContract]
-	[ReadAs(typeof(HitsMetadata<>))]
+	[ReadAs(typeof(EventHitsMetadata<>))]
 	public interface IEventHitsMetadata<out TEvent> where TEvent : class
 	{
 		/// <summary>

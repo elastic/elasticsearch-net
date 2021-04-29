@@ -32,16 +32,16 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 	public class TimeSeriesSeeder
 	{
-		public static readonly string IndicesWildCard = "logs-*";
+		public static readonly string IndicesWildCard = "customlogs-*";
 		private readonly IElasticClient _client;
 
 		public TimeSeriesSeeder(IElasticClient client) => _client = client;
 
 		public void SeedNode()
 		{
-			_client.Indices.PutTemplate("logs-template", p => p
+			_client.Indices.PutTemplate("customlogs-template", p => p
 				.Create()
-				.Map<Log>(m => m.AutoMap())
+				.Map<Log>(m => m.AutoMap().Properties(p => p.Date(d => d.Name(n => n.Timestamp))))
 				.IndexPatterns(IndicesWildCard)
 				.Settings(s => s
 					.NumberOfShards(1)
@@ -49,17 +49,17 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 				)
 			);
 
-			var logs = Log.Generator.GenerateLazy(200_000);
+			var logs = Log.Generator.GenerateLazy(100_000);
 			var sw = Stopwatch.StartNew();
 			var dropped = new List<Log>();
 			var bulkAll = _client.BulkAll(new BulkAllRequest<Log>(logs)
 			{
 				Size = 10_000,
-				MaxDegreeOfParallelism = 8,
+				MaxDegreeOfParallelism = 10,
 				RefreshOnCompleted = true,
 				RefreshIndices = IndicesWildCard,
 				DroppedDocumentCallback = (d, l) => dropped.Add(l),
-				BufferToBulk = (b, buffer) => b.IndexMany(buffer, (i, l) => i.Index($"logs-{l.Timestamp:yyyy-MM-dd}"))
+				BufferToBulk = (b, buffer) => b.IndexMany(buffer, (i, l) => i.Index($"customlogs-{l.Timestamp:yyyy-MM-dd}"))
 			});
 			bulkAll.Wait(TimeSpan.FromMinutes(1), delegate { });
 			Console.WriteLine($"Completed in {sw.Elapsed} with {dropped.Count} dropped logs");

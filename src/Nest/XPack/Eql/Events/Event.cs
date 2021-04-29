@@ -59,9 +59,9 @@ namespace Nest
 	public class Event<TEvent> : IEvent<TEvent>
 		where TEvent : class
 	{
-		public FieldValues Fields { get; }
-		public string Id { get; }
-		public string Index { get; }
-		public TEvent Source { get; }
+		public FieldValues Fields { get; internal set; }
+		public string Id { get; internal set; }
+		public string Index { get; internal set; }
+		public TEvent Source { get; internal set; }
 	}
 }

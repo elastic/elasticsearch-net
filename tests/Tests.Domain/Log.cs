@@ -52,6 +52,7 @@ namespace Tests.Domain
 
 		public static readonly string[] Sections = Words.Where(w => w.Length > 3).Take(10).ToArray();
 
+		public static readonly string[] EventCategories = { "info", "error", "warn" };
 
 		public string Body { get; set; }
 
@@ -69,7 +70,8 @@ namespace Tests.Domain
 				.RuleFor(m => m.Section, m => m.PickRandom(Sections))
 				.RuleFor(m => m.Load, m => m.Random.Double(100, 500))
 				.RuleFor(m => m.NetIn, m => m.Random.Double(1000, 10000))
-				.RuleFor(m => m.NetOut, m => m.Random.Double(1000, 10000));
+				.RuleFor(m => m.NetOut, m => m.Random.Double(1000, 10000))
+				.RuleFor(m => m.Event, m => new LogEvent(m.PickRandom(EventCategories)));
 
 		public double Load { get; set; }
 		public double NetIn { get; set; }
@@ -82,6 +84,7 @@ namespace Tests.Domain
 		[Keyword] public string User { get; set; }
 		[Keyword] public string UserAgent { get; set; }
 		public double Voltage { get; set; }
+		public LogEvent Event { get; set; }
 
 		private static string GetMessageText()
 		{
@@ -92,6 +95,13 @@ namespace Tests.Domain
 			for (var i = 0; i < numWords; i++) sb.Append(Words[Random.Next(0, Words.Length)]).Append(" ");
 
 			return sb.ToString().TrimEnd();
+		}
+
+		public class LogEvent
+		{
+			public LogEvent(string category) => Category = category;
+
+			public string Category { get; set; }
 		}
 	}
 }

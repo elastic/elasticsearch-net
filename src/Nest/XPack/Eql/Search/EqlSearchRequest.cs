@@ -2,12 +2,14 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
+using System.Linq.Expressions;
 using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[MapsApi("eql.search.json")]
-	[ReadAs(typeof(QuerySqlRequest))]
+	[ReadAs(typeof(EqlSearchRequest))]
 	public partial interface IEqlSearchRequest
 	{
 		/// <summary>
@@ -135,5 +137,14 @@ namespace Nest
 
 		/// <inheritdoc cref="IEqlSearchRequest.TimestampField"/>
 		Field IEqlSearchRequest.TimestampField { get; set; }
+
+		/// <inheritdoc cref="IEqlSearchRequest.Query" />
+		public EqlSearchDescriptor Query(string query) => Assign(query, (a, v) => a.Query = v);
+
+		/// <inheritdoc cref="INetworkDirectionProcessor.InternalNetworksField" />
+		public EqlSearchDescriptor TimestampField(Field timestampField) => Assign(timestampField, (a, v) => a.TimestampField = v);
+
+		/// <inheritdoc cref="INetworkDirectionProcessor.InternalNetworksField" />
+		//public EqlSearchDescriptor TimestampField<TValue>(Expression<Func<T, TValue>> objectPath) =>
 	}
 }
