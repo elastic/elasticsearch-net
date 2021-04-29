@@ -17,51 +17,37 @@
  * under the License.
  */
 
+using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
-namespace Nest
+namespace Nest.XPack.Eql.Events
 {
-	/// <summary>
-	/// Metadata about a hit matching a query
-	/// </summary>
-	/// <typeparam name="TEvent">The type of the source document</typeparam>
 	[InterfaceDataContract]
-	[ReadAs(typeof(Event<>))]
-	public interface IEvent<out TEvent> where TEvent : class
+	[ReadAs(typeof(Sequence<>))]
+	public interface ISequence<out T> where T : class
 	{
 		/// <summary>
-		/// The individual fields requested for a event.
+		/// Contains events matching the query. Each object represents a matching event.
 		/// </summary>
-		[DataMember(Name = "fields")]
-		FieldValues Fields { get; }
+		IReadOnlyCollection<IEvent<T>> Events { get; }
 
 		/// <summary>
-		/// The id of the hit
+		/// Shared field values used to constrain matches in the sequence. These are defined using the by keyword in the EQL query syntax.
 		/// </summary>
-		[DataMember(Name = "_id")]
-		string Id { get; }
-
-		/// <summary>
-		/// The index in which the hit resides
-		/// </summary>
-		[DataMember(Name = "_index")]
-		string Index { get; }
-		
-		/// <summary>
-		/// The source document for the hit
-		/// </summary>
-		[DataMember(Name = "_source")]
-		[JsonFormatter(typeof(SourceFormatter<>))]
-		TEvent Source { get; }
+		IReadOnlyCollection<object> JoinKeys { get; }
 	}
 
-	public class Event<TEvent> : IEvent<TEvent>
-		where TEvent : class
+	public class Sequence<T> : ISequence<T>
+		where T : class
 	{
-		public FieldValues Fields { get; }
-		public string Id { get; }
-		public string Index { get; }
-		public TEvent Source { get; }
+		/// <inheritdoc />
+		[DataMember(Name = "events")]
+		public IReadOnlyCollection<IEvent<T>> Events { get; internal set; } = EmptyReadOnly<IEvent<T>>.Collection;
+
+		/// <inheritdoc />
+		[DataMember(Name = "join_keys")]
+		public IReadOnlyCollection<object> JoinKeys { get; internal set; } = EmptyReadOnly<object>.Collection;
 	}
 }

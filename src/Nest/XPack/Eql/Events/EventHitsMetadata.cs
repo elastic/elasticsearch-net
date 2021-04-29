@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Licensed to Elasticsearch B.V. under one or more contributor
  * license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright
@@ -22,31 +22,40 @@ using System.Runtime.Serialization;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Utf8Json;
 
-namespace Nest
+namespace Nest.XPack.Eql.Events
 {
 	[InterfaceDataContract]
 	[ReadAs(typeof(HitsMetadata<>))]
-	public interface IHitsMetadata<out T> where T : class
+	public interface IEventHitsMetadata<out TEvent> where TEvent : class
 	{
-		[DataMember(Name = "hits")]
-		IReadOnlyCollection<IHit<T>> Hits { get; }
+		/// <summary>
+		/// Contains events matching the query. Each object represents a matching event.
+		/// </summary>
+		IReadOnlyCollection<IEvent<TEvent>> Events { get; }
 
-		[DataMember(Name = "max_score")]
-		double? MaxScore { get; }
+		/// <summary>
+		/// Contains event sequences matching the query. Each object represents a matching sequence. This parameter is only returned for EQL queries containing a sequence.
+		/// </summary>
+		IReadOnlyCollection<ISequence<TEvent>> Sequences { get; }
 
-		[DataMember(Name = "total")]
+		/// <summary>
+		/// Metadata about the number of matching events or sequences.
+		/// </summary>
 		TotalHits Total { get; }
 	}
-	
-	public class HitsMetadata<T> : IHitsMetadata<T>
-		where T : class
+
+	public class EventHitsMetadata<TEvent> : IEventHitsMetadata<TEvent>
+		where TEvent : class
 	{
-		[DataMember(Name = "hits")]
-		public IReadOnlyCollection<IHit<T>> Hits { get; internal set; } = EmptyReadOnly<IHit<T>>.Collection;
+		/// <inheritdoc />
+		[DataMember(Name = "events")]
+		public IReadOnlyCollection<IEvent<TEvent>> Events { get; internal set; } = EmptyReadOnly<IEvent<TEvent>>.Collection;
 
-		[DataMember(Name = "max_score")]
-		public double? MaxScore { get; internal set; }
+		/// <inheritdoc />
+		[DataMember(Name = "sequences")]
+		public IReadOnlyCollection<ISequence<TEvent>> Sequences { get; internal set; } = EmptyReadOnly<ISequence<TEvent>>.Collection;
 
+		/// <inheritdoc />
 		[DataMember(Name = "total")]
 		public TotalHits Total { get; internal set; }
 	}
