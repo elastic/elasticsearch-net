@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
 
-namespace Nest.XPack.Eql.Events
+namespace Nest
 {
 	public class Sequence<TEvent> where TEvent : class
 	{

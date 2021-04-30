@@ -5,7 +5,6 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Nest.XPack.Eql.Events;
 
 namespace Nest
 {

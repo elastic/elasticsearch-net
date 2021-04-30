@@ -20,42 +20,27 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Utf8Json;
 
-namespace Nest.XPack.Eql.Events
+namespace Nest
 {
-	//[InterfaceDataContract]
-	//[ReadAs(typeof(EventHitsMetadata<>))]
-	//public interface IEventHitsMetadata<out TEvent> where TEvent : class
-	//{
-	//	/// <summary>
-	//	/// Contains events matching the query. Each object represents a matching event.
-	//	/// </summary>
-	//	IReadOnlyCollection<IEvent<TEvent>> Events { get; }
-
-	//	/// <summary>
-	//	/// Contains event sequences matching the query. Each object represents a matching sequence. This parameter is only returned for EQL queries containing a sequence.
-	//	/// </summary>
-	//	IReadOnlyCollection<ISequence<TEvent>> Sequences { get; }
-
-	//	/// <summary>
-	//	/// Metadata about the number of matching events or sequences.
-	//	/// </summary>
-	//	TotalHits Total { get; }
-	//}
-
 	public class EqlHitsMetadata<TEvent> 
 		where TEvent : class
 	{
-		/// <inheritdoc />
+		/// <summary>
+		/// Contains events matching the query. Each object represents a matching event.
+		/// </summary>
 		[DataMember(Name = "events")]
 		public IReadOnlyCollection<Event<TEvent>> Events { get; internal set; } = EmptyReadOnly<Event<TEvent>>.Collection;
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Contains event sequences matching the query. Each object represents a matching sequence. This parameter is only returned for EQL queries containing a sequence.
+		/// </summary>
 		[DataMember(Name = "sequences")]
 		public IReadOnlyCollection<Sequence<TEvent>> Sequences { get; internal set; } = EmptyReadOnly<Sequence<TEvent>>.Collection;
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Metadata about the number of matching events or sequences.
+		/// </summary>
 		[DataMember(Name = "total")]
 		public TotalHits Total { get; internal set; }
 	}
