@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using Elasticsearch.Net.Utf8Json;
 
@@ -111,7 +112,7 @@ namespace Nest
 	}
 
 	[DataContract]
-	public partial class EqlSearchRequest<TInferDocument> : IEqlSearchRequest<TInferDocument>
+	public partial class EqlSearchRequest<TInferDocument>
 	{
 		Type ITypedSearchRequest.ClrType => typeof(TInferDocument);
 	}
@@ -152,14 +153,56 @@ namespace Nest
 
 		/// <inheritdoc cref="IEqlSearchRequest.TimestampField"/>
 		Field IEqlSearchRequest.TimestampField { get; set; }
-		
+
+		/// <inheritdoc cref="IEqlSearchRequest.CaseSensitive" />
+		public EqlSearchDescriptor<TInferDocument> CaseSensitive(bool? caseSensitive = true) => Assign(caseSensitive, (a, v) => a.CaseSensitive = v);
+
+		/// <inheritdoc cref="IEqlSearchRequest.EventCategoryField" />
+		public EqlSearchDescriptor<TInferDocument> EventCategoryField(Field eventCategoryField) => Assign(eventCategoryField, (a, v) => a.EventCategoryField = v);
+
+		/// <inheritdoc cref = "IEqlSearchRequest.EventCategoryField" />
+		public EqlSearchDescriptor<TInferDocument> EventCategoryField<TValue>(Expression<Func<TInferDocument, TValue>> objectPath) =>
+			Assign(objectPath, (a, v) => a.EventCategoryField = v);
+
+		/// <inheritdoc cref="IEqlSearchRequest.FetchSize" />
+		public EqlSearchDescriptor<TInferDocument> FetchSize(int? fetchSize) => Assign(fetchSize, (a, v) => a.FetchSize = v);
+
+		/// <inheritdoc cref="IEqlSearchRequest.Fields" />
+		public EqlSearchDescriptor<TInferDocument> Fields(Func<FieldsDescriptor<TInferDocument>, IPromise<Fields>> fields) =>
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<TInferDocument>())?.Value);
+
+		/// <inheritdoc cref="IEqlSearchRequest.Fields" />
+		public EqlSearchDescriptor<TInferDocument> Fields(Fields fields) => Assign(fields, (a, v) => a.Fields = v);
+
+		/// <inheritdoc cref="IEqlSearchRequest.Filter" />
+		public EqlSearchDescriptor<TInferDocument> PostFilter(Func<QueryContainerDescriptor<TInferDocument>, QueryContainer> filter) =>
+			Assign(filter, (a, v) => a.Filter = v?.Invoke(new QueryContainerDescriptor<TInferDocument>()));
+
 		/// <inheritdoc cref="IEqlSearchRequest.Query" />
 		public EqlSearchDescriptor<TInferDocument> Query(string query) => Assign(query, (a, v) => a.Query = v);
 
-		/// <inheritdoc cref="INetworkDirectionProcessor.InternalNetworksField" />
+		/// <inheritdoc cref="IEqlSearchRequest.ResultPosition" />
+		public EqlSearchDescriptor<TInferDocument> ResultPosition(EqlResultPosition? resultPosition) => Assign(resultPosition, (a, v) => a.ResultPosition = v);
+
+		/// <inheritdoc cref="IEqlSearchRequest.RuntimeFields" />
+		public EqlSearchDescriptor<TInferDocument> RuntimeFields(Func<RuntimeFieldsDescriptor, IPromise<IRuntimeFields>> runtimeFieldsSelector) =>
+			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor())?.Value);
+
+		/// <inheritdoc cref="IEqlSearchRequest.Size" />
+		public EqlSearchDescriptor<TInferDocument> Size(float? size) => Assign(size, (a, v) => a.Size = v);
+
+		/// <inheritdoc cref="IEqlSearchRequest.TiebreakerField" />
+		public EqlSearchDescriptor<TInferDocument> TiebreakerField(Field tiebreakerField) => Assign(tiebreakerField, (a, v) => a.TimestampField = v);
+
+		/// <inheritdoc cref = "IEqlSearchRequest.TiebreakerField" />
+		public EqlSearchDescriptor<TInferDocument> TiebreakerField<TValue>(Expression<Func<TInferDocument, TValue>> objectPath) =>
+			Assign(objectPath, (a, v) => a.TimestampField = v);
+
+		/// <inheritdoc cref="IEqlSearchRequest.TimestampField" />
 		public EqlSearchDescriptor<TInferDocument> TimestampField(Field timestampField) => Assign(timestampField, (a, v) => a.TimestampField = v);
 
-		//// <inheritdoc cref = "INetworkDirectionProcessor.InternalNetworksField" />
-		//public EqlSearchDescriptor<TInferDocument> TimestampField<TValue>(Expression<Func<T, TValue>> objectPath) =>
+		/// <inheritdoc cref = "IEqlSearchRequest.TimestampField" />
+		public EqlSearchDescriptor<TInferDocument> TimestampField<TValue>(Expression<Func<TInferDocument, TValue>> objectPath) =>
+			Assign(objectPath, (a, v) => a.TimestampField = v);
 	}
 }
