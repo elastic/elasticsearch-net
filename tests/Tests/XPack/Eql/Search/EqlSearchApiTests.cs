@@ -32,7 +32,7 @@ namespace Tests.XPack.Eql.Search
 {
 	[SkipVersion("<7.11.0", "EQL went GA in 7.11.0")]
 	public class EqlSearchApiTests
-	: ApiIntegrationTestBase<TimeSeriesCluster, EqlSearchResponse<Log>, IEqlSearchRequest, EqlSearchDescriptor, EqlSearchRequest>
+	: ApiIntegrationTestBase<TimeSeriesCluster, EqlSearchResponse<Log>, IEqlSearchRequest, EqlSearchDescriptor<Log>, EqlSearchRequest>
 	{
 		private static readonly string EqlQuery = $"info where section == \"{Log.Sections.First()}\"";
 
@@ -47,11 +47,11 @@ namespace Tests.XPack.Eql.Search
 
 		protected override int ExpectStatusCode => 200;
 
-		protected override Func<EqlSearchDescriptor, IEqlSearchRequest> Fluent => s => s.Query(EqlQuery).TimestampField(Infer.Field<Log>(f => f.Timestamp));
+		protected override Func<EqlSearchDescriptor<Log>, IEqlSearchRequest> Fluent => s => s.Query(EqlQuery).TimestampField(Infer.Field<Log>(f => f.Timestamp));
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override EqlSearchRequest Initializer => new("customlogs-*") // Infer?
+		protected override EqlSearchRequest Initializer => new EqlSearchRequest<Log>
 		{
 			Query = EqlQuery,
 			TimestampField = Infer.Field<Log>(f => f.Timestamp)
@@ -60,8 +60,8 @@ namespace Tests.XPack.Eql.Search
 		protected override string UrlPath => "/customlogs-*/_eql/search";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(c, f) => c.Eql.Search<Log>("customlogs-*", f),
-			(c, f) => c.Eql.SearchAsync<Log>("customlogs-*", f),
+			(c, f) => c.Eql.Search(f),
+			(c, f) => c.Eql.SearchAsync(f),
 			(c, r) => c.Eql.Search<Log>(r),
 			(c, r) => c.Eql.SearchAsync<Log>(r)
 		);

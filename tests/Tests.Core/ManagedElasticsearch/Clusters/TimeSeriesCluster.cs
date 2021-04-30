@@ -28,6 +28,8 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 	public class TimeSeriesCluster : XPackCluster
 	{
 		protected override void SeedNode() => new TimeSeriesSeeder(Client).SeedNode();
+
+		protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s.DefaultMappingFor<Log>(m => m.IndexName(TimeSeriesSeeder.IndicesWildCard));
 	}
 
 	public class TimeSeriesSeeder
@@ -41,7 +43,9 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 		{
 			_client.Indices.PutTemplate("customlogs-template", p => p
 				.Create()
-				.Map<Log>(m => m.AutoMap().Properties(p => p.Date(d => d.Name(n => n.Timestamp))))
+				.Map<Log>(m => m
+					.AutoMap()
+					.Properties(p => p.Date(d => d.Name(n => n.Timestamp))))
 				.IndexPatterns(IndicesWildCard)
 				.Settings(s => s
 					.NumberOfShards(1)

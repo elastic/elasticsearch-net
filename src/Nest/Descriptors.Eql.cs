@@ -54,7 +54,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearch;
 		///<summary>/{index}/_eql/search</summary>
 		///<param name = "index">this parameter is required</param>
-		public EqlSearchDescriptor(IndexName index): base(r => r.Required("index", index))
+		public EqlSearchDescriptor(Indices index): base(r => r.Required("index", index))
 		{
 		}
 
@@ -64,12 +64,14 @@ namespace Nest
 		}
 
 		// values part of the url path
-		IndexName IEqlSearchRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		///<summary>The name of the index to scope the operation</summary>
-		public EqlSearchDescriptor<TInferDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		Indices IEqlSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		public EqlSearchDescriptor<TInferDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public EqlSearchDescriptor<TInferDocument> Index<TOther>()
-			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public EqlSearchDescriptor<TInferDocument> AllIndices() => Index(Indices.All);
 		// Request parameters
 		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
 		public EqlSearchDescriptor<TInferDocument> KeepAlive(Time keepalive) => Qs("keep_alive", keepalive);

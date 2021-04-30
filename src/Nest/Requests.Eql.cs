@@ -53,7 +53,7 @@ namespace Nest
 	public partial interface IEqlSearchRequest : IRequest<EqlSearchRequestParameters>
 	{
 		[IgnoreDataMember]
-		IndexName Index
+		Indices Index
 		{
 			get;
 		}
@@ -70,7 +70,7 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearch;
 		///<summary>/{index}/_eql/search</summary>
 		///<param name = "index">this parameter is required</param>
-		public EqlSearchRequest(IndexName index): base(r => r.Required("index", index))
+		public EqlSearchRequest(Indices index): base(r => r.Required("index", index))
 		{
 		}
 
@@ -82,7 +82,7 @@ namespace Nest
 
 		// values part of the url path
 		[IgnoreDataMember]
-		IndexName IEqlSearchRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		Indices IEqlSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		// Request parameters
 		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
 		public Time KeepAlive
@@ -114,7 +114,7 @@ namespace Nest
 		protected IEqlSearchRequest<TInferDocument> TypedSelf => this;
 		///<summary>/{index}/_eql/search</summary>
 		///<param name = "index">this parameter is required</param>
-		public EqlSearchRequest(IndexName index): base(index)
+		public EqlSearchRequest(Indices index): base(index)
 		{
 		}
 

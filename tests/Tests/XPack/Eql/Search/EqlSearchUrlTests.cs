@@ -17,7 +17,6 @@
  * under the License.
  */
 
-using System;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Nest;
@@ -29,42 +28,35 @@ namespace Tests.XPack.Eql.Search
 {
 	public class EqlSearchUrlTests
 	{
-		[U] public async Task Urls() =>
-			//var hardcoded = "hardcoded";
-			await POST("/logs/_eql/search")
-				.Fluent(c => c.Eql.Search<Log>("logs"))
-				.Request(c => c.Eql.Search<Log>(new EqlSearchRequest("logs")))
-				.FluentAsync(c => c.Eql.SearchAsync<Log>("logs"))
-				.RequestAsync(c => c.Eql.SearchAsync<Log>(new EqlSearchRequest("logs")));
+		[U] public async Task Urls()
+		{
+			var hardcoded = "hardcoded";
 
-		//await POST("/devs/_search")
-		//		.Fluent(c => c.Eql.Search<Log>(s => s))
-		//		.Request(c => c.Eql.Search<Project>(new EqlSearchRequest<Log>(typeof(Log))))
-		//		.FluentAsync(c => c.Eql.SearchAsync<Log>(s => s))
-		//		.RequestAsync(c => c.Eql.SearchAsync<Project>(new EqlSearchRequest<Log>(typeof(Log))));
-		//await POST("/project/_search")
-		//		.Fluent(c => c.Eql.Search<Project>(s => s))
-		//		.Fluent(c => c.Eql.Search<Project>(s => s))
-		//		.Request(c => c.Eql.Search<Project>(new EqlSearchRequest("project")))
-		//		.Request(c => c.Eql.Search<Project>(new EqlSearchRequest<Project>("project")))
-		//		.FluentAsync(c => c.Eql.SearchAsync<Project>(s => s))
-		//		.RequestAsync(c => c.Eql.SearchAsync<Project>(new EqlSearchRequest<Project>(typeof(Project))))
-		//		.FluentAsync(c => c.Eql.SearchAsync<Project>(s => s));
-		//await POST("/hardcoded/_search")
-		//		.Fluent(c => c.Eql.Search<Project>(s => s.Index(hardcoded)))
-		//		.Fluent(c => c.Eql.Search<Project>(s => s.Index(hardcoded)))
-		//		.Request(c => c.Eql.Search<Project>(new EqlSearchRequest(hardcoded)))
-		//		.Request(c => c.Eql.Search<Project>(new EqlSearchRequest<Project>(hardcoded)))
-		//		.FluentAsync(c => c.Eql.SearchAsync<Project>(s => s.Index(hardcoded)))
-		//		.RequestAsync(c => c.Eql.SearchAsync<Project>(new EqlSearchRequest<Project>(hardcoded)))
-		//		.FluentAsync(c => c.Eql.SearchAsync<Project>(s => s.Index(hardcoded)));
-		//await POST("/_all/_search")
-		//		.Fluent(c => c.Eql.Search<Project>(s => s.AllIndices()))
-		//		.Request(c => c.Eql.Search<Project>(new EqlSearchRequest<Project>(Nest.Indices.All)))
-		//		.FluentAsync(c => c.Eql.SearchAsync<Project>(s => s.AllIndices()))
-		//		.RequestAsync(c => c.Eql.SearchAsync<Project>(new EqlSearchRequest<Project>(Nest.Indices.All)));
-		//await POST("/_search?scroll=1m")
-		//		.Request(c => c.Eql.Search<Project>(new EqlSearchRequest { Scroll = TimeSpan.FromMinutes(1) }))
-		//		.RequestAsync(c => c.Eql.SearchAsync<Project>(new EqlSearchRequest { Scroll = 60000 }));
+			await POST("/customlogs-%2A/_eql/search")
+				.Fluent(c => c.Eql.Search<Log>())
+				.Request(c => c.Eql.Search<Log>(new EqlSearchRequest("customlogs-*")))
+				.FluentAsync(c => c.Eql.SearchAsync<Log>())
+				.RequestAsync(c => c.Eql.SearchAsync<Log>(new EqlSearchRequest("customlogs-*")));
+
+			await POST("/customlogs-%2A/_eql/search")
+					.Fluent(c => c.Eql.Search<Log>(s => s))
+					.Request(c => c.Eql.Search<Log>(new EqlSearchRequest<Log>(typeof(Log))))
+					.FluentAsync(c => c.Eql.SearchAsync<Log>(s => s))
+					.RequestAsync(c => c.Eql.SearchAsync<Log>(new EqlSearchRequest<Log>(typeof(Log))));
+
+			await POST("/hardcoded/_eql/search")
+					.Fluent(c => c.Eql.Search<Log>(s => s.Index(hardcoded)))
+					.Request(c => c.Eql.Search<Log>(new EqlSearchRequest(hardcoded)))
+					.Request(c => c.Eql.Search<Log>(new EqlSearchRequest<Log>(hardcoded)))
+					.FluentAsync(c => c.Eql.SearchAsync<Log>(s => s.Index(hardcoded)))
+					.RequestAsync(c => c.Eql.SearchAsync<Log>(new EqlSearchRequest(hardcoded)))
+					.RequestAsync(c => c.Eql.SearchAsync<Log>(new EqlSearchRequest<Log>(hardcoded)));
+
+			await POST("/_all/_eql/search")
+					.Fluent(c => c.Eql.Search<Log>(s => s.AllIndices()))
+					.Request(c => c.Eql.Search<Log>(new EqlSearchRequest<Project>(Nest.Indices.All)))
+					.FluentAsync(c => c.Eql.SearchAsync<Log>(s => s.AllIndices()))
+					.RequestAsync(c => c.Eql.SearchAsync<Log>(new EqlSearchRequest<Project>(Nest.Indices.All)));
+		}
 	}
 }
