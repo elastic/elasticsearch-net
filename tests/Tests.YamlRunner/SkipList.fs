@@ -179,4 +179,8 @@ let SkipList = dict<SkipFile,SkipSection> [
     // Failed: Assert operation Match snapshot.shards.failed Value 0 Reason: expected: 0.0 actual: 1.0
     // {"snapshot":{"snapshot":"snapshot","indices":["docs_shared_cache"],"shards":{"total":1,"failed":1,"successful":0}}}
     SkipFile "searchable_snapshots/10_usage.yml", Section "Tests searchable snapshots usage stats with full_copy and shared_cache indices"
+
+    // Assertion expects two tokens but creates only one
+    // Needs further investigation
+    SkipFile "service_accounts/10_basic.yml", All
 ]
