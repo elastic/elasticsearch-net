@@ -22,46 +22,31 @@ using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
-	/// <summary>
-	/// Metadata about a hit matching a query
-	/// </summary>
-	/// <typeparam name="TEvent">The type of the source document</typeparam>
-	[InterfaceDataContract]
-	[ReadAs(typeof(Event<>))]
-	public interface IEvent<out TEvent> where TEvent : class
+	public class Event<TEvent> where TEvent : class
 	{
 		/// <summary>
 		/// The individual fields requested for a event.
 		/// </summary>
 		[DataMember(Name = "fields")]
-		FieldValues Fields { get; }
+		public FieldValues Fields { get; internal set; }
 
 		/// <summary>
-		/// The id of the hit
+		/// The id of the event.
 		/// </summary>
 		[DataMember(Name = "_id")]
-		string Id { get; }
+		public string Id { get; internal set; }
 
 		/// <summary>
-		/// The index in which the hit resides
+		/// The index in which the event resides.
 		/// </summary>
 		[DataMember(Name = "_index")]
-		string Index { get; }
-		
+		public string Index { get; internal set; }
+
 		/// <summary>
-		/// The source document for the hit
+		/// The source document for the event.
 		/// </summary>
 		[DataMember(Name = "_source")]
 		[JsonFormatter(typeof(SourceFormatter<>))]
-		TEvent Source { get; }
-	}
-
-	public class Event<TEvent> : IEvent<TEvent>
-		where TEvent : class
-	{
-		public FieldValues Fields { get; internal set; }
-		public string Id { get; internal set; }
-		public string Index { get; internal set; }
 		public TEvent Source { get; internal set; }
 	}
 }

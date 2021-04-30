@@ -9,47 +9,72 @@ using Nest.XPack.Eql.Events;
 
 namespace Nest
 {
+	/// <summary>
+	/// A response to an EQL search request.
+	/// </summary>
+	/// <typeparam name="TDocument">The event type.</typeparam>
 	public class EqlSearchResponse<TDocument> : ResponseBase where TDocument : class
 	{
-		private IReadOnlyCollection<IEvent<TDocument>> _events;
-		private IReadOnlyCollection<ISequence<TDocument>> _sequences;
+		private IReadOnlyCollection<Event<TDocument>> _events;
+		private IReadOnlyCollection<Sequence<TDocument>> _sequences;
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Access the events returned by the search.
+		/// </summary>
 		[IgnoreDataMember]
-		public IReadOnlyCollection<IEvent<TDocument>> Events =>
-			_events ??= EventHitsMetadata?.Events ?? EmptyReadOnly<IEvent<TDocument>>.Collection;
+		public IReadOnlyCollection<Event<TDocument>> Events =>
+			_events ??= EqlHitsMetadata?.Events ?? EmptyReadOnly<Event<TDocument>>.Collection;
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Access the sequences returned by the search.
+		/// </summary>
 		[IgnoreDataMember]
-		public IReadOnlyCollection<ISequence<TDocument>> Sequences =>
-			_sequences ??= EventHitsMetadata?.Sequences ?? EmptyReadOnly<ISequence<TDocument>>.Collection;
+		public IReadOnlyCollection<Sequence<TDocument>> Sequences =>
+			_sequences ??= EqlHitsMetadata?.Sequences ?? EmptyReadOnly<Sequence<TDocument>>.Collection;
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Gets the collection of events that matched the search.
+		/// </summary>
+		/// <value>
+		/// The hits.
+		/// </value>
 		[DataMember(Name = "hits")]
-		public IEventHitsMetadata<TDocument> EventHitsMetadata { get; internal set; }
+		public EqlHitsMetadata<TDocument> EqlHitsMetadata { get; internal set; }
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Identifier for the search.
+		/// </summary>
 		[DataMember(Name = "id")]
 		public Id Id { get; internal set; }
 
-		/// <inheritdoc />
+		/// <summary>
+		/// If true, the response does not contain complete search results.
+		/// </summary>
 		[DataMember(Name = "is_partial")]
 		public bool? IsPartial { get; internal set; }
 
-		/// <inheritdoc />
+		/// <summary>
+		/// If true, the search request is still executing.
+		/// </summary>
 		[DataMember(Name = "is_running")]
 		public bool? IsRunning { get; internal set; }
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Milliseconds it took Elasticsearch to execute the request.
+		/// </summary>
 		[DataMember(Name = "took")]
 		public int Took { get; internal set; }
 
-		/// <inheritdoc />
+		/// <summary>
+		/// If true, the request timed out before completion.
+		/// </summary>
 		[DataMember(Name = "timed_out")]
 		public bool? TimedOut { get; internal set; }
 
-		/// <inheritdoc />
+		/// <summary>
+		/// The total number of hits.
+		/// </summary>
 		[IgnoreDataMember]
-		public long Total => EventHitsMetadata?.Total.Value ?? -1;
+		public long Total => EqlHitsMetadata?.Total.Value ?? -1;
 	}
 }

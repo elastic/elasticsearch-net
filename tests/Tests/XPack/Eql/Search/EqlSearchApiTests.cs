@@ -126,7 +126,8 @@ namespace Tests.XPack.Eql.Search
 			response.Took.Should().BeGreaterOrEqualTo(0);
 			response.TimedOut.Should().BeFalse();
 			response.Events.Count.Should().Be(10); //default
-			response.EventHitsMetadata.Total.Value.Should().Be(10);
+			response.EqlHitsMetadata.Total.Value.Should().Be(10);
+			response.Total.Should().Be(10);
 
 			var firstEvent = response.Events.First();
 			firstEvent.Index.Should().StartWith("customlogs-");
@@ -188,7 +189,8 @@ namespace Tests.XPack.Eql.Search
 			response.Took.Should().BeGreaterOrEqualTo(0);
 			response.TimedOut.Should().BeFalse();
 			response.Sequences.Count.Should().Be(10);
-			response.EventHitsMetadata.Total.Value.Should().Be(10);
+			response.EqlHitsMetadata.Total.Value.Should().Be(10);
+			response.Total.Should().Be(10);
 
 			var sequence = response.Sequences.First();
 			sequence.Events.Count.Should().Be(2);

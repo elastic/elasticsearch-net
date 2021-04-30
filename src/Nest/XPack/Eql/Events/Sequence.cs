@@ -20,33 +20,20 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Utf8Json;
 
 namespace Nest.XPack.Eql.Events
 {
-	[InterfaceDataContract]
-	[ReadAs(typeof(Sequence<>))]
-	public interface ISequence<out T> where T : class
+	public class Sequence<TEvent> where TEvent : class
 	{
 		/// <summary>
 		/// Contains events matching the query. Each object represents a matching event.
 		/// </summary>
-		IReadOnlyCollection<IEvent<T>> Events { get; }
+		[DataMember(Name = "events")]
+		public IReadOnlyCollection<Event<TEvent>> Events { get; internal set; } = EmptyReadOnly<Event<TEvent>>.Collection;
 
 		/// <summary>
 		/// Shared field values used to constrain matches in the sequence. These are defined using the by keyword in the EQL query syntax.
 		/// </summary>
-		IReadOnlyCollection<object> JoinKeys { get; }
-	}
-
-	public class Sequence<T> : ISequence<T>
-		where T : class
-	{
-		/// <inheritdoc />
-		[DataMember(Name = "events")]
-		public IReadOnlyCollection<IEvent<T>> Events { get; internal set; } = EmptyReadOnly<IEvent<T>>.Collection;
-
-		/// <inheritdoc />
 		[DataMember(Name = "join_keys")]
 		public IReadOnlyCollection<object> JoinKeys { get; internal set; } = EmptyReadOnly<object>.Collection;
 	}
