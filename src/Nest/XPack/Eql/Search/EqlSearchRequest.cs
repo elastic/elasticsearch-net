@@ -14,12 +14,6 @@ namespace Nest
 	public partial interface IEqlSearchRequest : ITypedSearchRequest
 	{
 		/// <summary>
-		/// Indicates whether the search should be case sensitive.
-		/// </summary>
-		[DataMember(Name = "case_sensitive")]
-		bool? CaseSensitive { get; set; }
-
-		/// <summary>
 		/// The EQL search API uses the event.category field from the ECS by default. To specify a different field,
 		/// set <see cref="EventCategoryField"/>.
 		/// </summary>
@@ -86,8 +80,6 @@ namespace Nest
 	public partial class EqlSearchRequest
 	{
 		/// <inheritdoc />
-		public bool? CaseSensitive { get; set; }
-		/// <inheritdoc />
 		public Field EventCategoryField { get; set; }
 		/// <inheritdoc />
 		public int? FetchSize { get; set; }
@@ -121,9 +113,6 @@ namespace Nest
 	{
 		Type ITypedSearchRequest.ClrType => typeof(TInferDocument);
 
-		/// <inheritdoc cref="IEqlSearchRequest.CaseSensitive"/>
-		bool? IEqlSearchRequest.CaseSensitive { get; set; }
-
 		/// <inheritdoc cref="IEqlSearchRequest.EventCategoryField"/>
 		Field IEqlSearchRequest.EventCategoryField { get; set; }
 
@@ -154,9 +143,6 @@ namespace Nest
 		/// <inheritdoc cref="IEqlSearchRequest.TimestampField"/>
 		Field IEqlSearchRequest.TimestampField { get; set; }
 
-		/// <inheritdoc cref="IEqlSearchRequest.CaseSensitive" />
-		public EqlSearchDescriptor<TInferDocument> CaseSensitive(bool? caseSensitive = true) => Assign(caseSensitive, (a, v) => a.CaseSensitive = v);
-
 		/// <inheritdoc cref="IEqlSearchRequest.EventCategoryField" />
 		public EqlSearchDescriptor<TInferDocument> EventCategoryField(Field eventCategoryField) => Assign(eventCategoryField, (a, v) => a.EventCategoryField = v);
 
@@ -175,7 +161,7 @@ namespace Nest
 		public EqlSearchDescriptor<TInferDocument> Fields(Fields fields) => Assign(fields, (a, v) => a.Fields = v);
 
 		/// <inheritdoc cref="IEqlSearchRequest.Filter" />
-		public EqlSearchDescriptor<TInferDocument> PostFilter(Func<QueryContainerDescriptor<TInferDocument>, QueryContainer> filter) =>
+		public EqlSearchDescriptor<TInferDocument> Filter(Func<QueryContainerDescriptor<TInferDocument>, QueryContainer> filter) =>
 			Assign(filter, (a, v) => a.Filter = v?.Invoke(new QueryContainerDescriptor<TInferDocument>()));
 
 		/// <inheritdoc cref="IEqlSearchRequest.Query" />
@@ -192,11 +178,11 @@ namespace Nest
 		public EqlSearchDescriptor<TInferDocument> Size(float? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <inheritdoc cref="IEqlSearchRequest.TiebreakerField" />
-		public EqlSearchDescriptor<TInferDocument> TiebreakerField(Field tiebreakerField) => Assign(tiebreakerField, (a, v) => a.TimestampField = v);
+		public EqlSearchDescriptor<TInferDocument> TiebreakerField(Field tiebreakerField) => Assign(tiebreakerField, (a, v) => a.TiebreakerField = v);
 
 		/// <inheritdoc cref = "IEqlSearchRequest.TiebreakerField" />
 		public EqlSearchDescriptor<TInferDocument> TiebreakerField<TValue>(Expression<Func<TInferDocument, TValue>> objectPath) =>
-			Assign(objectPath, (a, v) => a.TimestampField = v);
+			Assign(objectPath, (a, v) => a.TiebreakerField = v);
 
 		/// <inheritdoc cref="IEqlSearchRequest.TimestampField" />
 		public EqlSearchDescriptor<TInferDocument> TimestampField(Field timestampField) => Assign(timestampField, (a, v) => a.TimestampField = v);

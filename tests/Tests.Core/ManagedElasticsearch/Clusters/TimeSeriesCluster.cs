@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Nest;
 using Tests.Domain;
 
@@ -29,7 +30,11 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 	{
 		protected override void SeedNode() => new TimeSeriesSeeder(Client).SeedNode();
 
-		protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s.DefaultMappingFor<Log>(m => m.IndexName(TimeSeriesSeeder.IndicesWildCard));
+		protected override ConnectionSettings ConnectionSettings(ConnectionSettings s)
+		{
+			s.DefaultMappingFor<Log>(m => m.IndexName(TimeSeriesSeeder.IndicesWildCard));
+			return base.ConnectionSettings(s);
+		}
 	}
 
 	public class TimeSeriesSeeder
@@ -70,6 +75,20 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 			var countResult = _client.Count<Log>(s => s.Index(IndicesWildCard));
 			Console.WriteLine($"Stored {countResult.Count} in {IndicesWildCard} indices");
+
+			// These are used for sequence searching in EQL tests
+			var logOne = Log.Generator.GenerateLazy(1).First();
+			var logTwo = Log.Generator.GenerateLazy(1).First();
+
+			logOne.Event.Category = "info";
+			logOne.Timestamp = logTwo.Timestamp.AddMilliseconds(-0.005);
+			logOne.Temperature = -1;
+
+			logTwo.Event.Category = "error";
+			logTwo.User = "admin";
+			
+			_client.IndexDocument(logOne);
+			_client.IndexDocument(logTwo);
 		}
 	}
 }

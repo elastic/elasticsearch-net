@@ -9,64 +9,20 @@ using Nest.XPack.Eql.Events;
 
 namespace Nest
 {
-	///// <summary>
-	///// A response to an EQL search request.
-	///// </summary>
-	///// <typeparam name="TDocument">The event type.</typeparam>
-	//public interface IEqlSearchResponse<out TDocument> : IResponse where TDocument : class
-	//{
-	//	/// <summary>
-	//	/// Gets the collection of events that matched the search.
-	//	/// </summary>
-	//	/// <value>
-	//	/// The hits.
-	//	/// </value>
-	//	IReadOnlyCollection<IEvent<TDocument>> Events { get; }
-
-	//	/// <summary>
-	//	/// Gets the meta data about the event hits that matched the search query criteria.
-	//	/// </summary>
-	//	IEventHitsMetadata<TDocument> EventHitsMetadata { get; }
-
-	//	/// <summary>
-	//	/// Identifier for the search.
-	//	/// </summary>
-	//	Id Id { get; }
-
-	//	/// <summary>
-	//	/// If true, the response does not contain complete search results.
-	//	/// </summary>
-	//	bool? IsPartial { get; }
-
-	//	/// <summary>
-	//	/// If true, the search request is still executing.
-	//	/// </summary>
-	//	bool? IsRunning { get; }
-
-	//	/// <summary>
-	//	/// Milliseconds it took Elasticsearch to execute the request.
-	//	/// </summary>
-	//	int Took { get; }
-
-	//	/// <summary>
-	//	/// If true, the request timed out before completion.
-	//	/// </summary>
-	//	bool? TimedOut { get; }
-
-	//	/// <summary>
-	//	/// Gets the total number of events matching the search.
-	//	/// </summary>
-	//	long Total { get; }
-	//}
-
 	public class EqlSearchResponse<TDocument> : ResponseBase where TDocument : class
 	{
 		private IReadOnlyCollection<IEvent<TDocument>> _events;
+		private IReadOnlyCollection<ISequence<TDocument>> _sequences;
 
 		/// <inheritdoc />
 		[IgnoreDataMember]
 		public IReadOnlyCollection<IEvent<TDocument>> Events =>
 			_events ??= EventHitsMetadata?.Events ?? EmptyReadOnly<IEvent<TDocument>>.Collection;
+
+		/// <inheritdoc />
+		[IgnoreDataMember]
+		public IReadOnlyCollection<ISequence<TDocument>> Sequences =>
+			_sequences ??= EventHitsMetadata?.Sequences ?? EmptyReadOnly<ISequence<TDocument>>.Collection;
 
 		/// <inheritdoc />
 		[DataMember(Name = "hits")]

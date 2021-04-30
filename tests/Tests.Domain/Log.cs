@@ -71,7 +71,7 @@ namespace Tests.Domain
 				.RuleFor(m => m.Load, m => m.Random.Double(100, 500))
 				.RuleFor(m => m.NetIn, m => m.Random.Double(1000, 10000))
 				.RuleFor(m => m.NetOut, m => m.Random.Double(1000, 10000))
-				.RuleFor(m => m.Event, m => new LogEvent(m.PickRandom(EventCategories)));
+				.RuleFor(m => m.Event, m => new LogEvent(m.PickRandom(EventCategories)){ Sequence = m.Random.Int(0, 10)});
 
 		public double Load { get; set; }
 		public double NetIn { get; set; }
@@ -102,6 +102,7 @@ namespace Tests.Domain
 			public LogEvent(string category) => Category = category;
 
 			public string Category { get; set; }
+			public int Sequence { get; set; }
 		}
 	}
 }
