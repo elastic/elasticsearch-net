@@ -3,14 +3,14 @@
 // See the LICENSE file in the project root for more information
 
 using System;
-using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
 	[MapsApi("eql.search.json")]
 	[ReadAs(typeof(EqlSearchRequest))]
-	public partial interface IEqlSearchRequest
+	public partial interface IEqlSearchRequest : ITypedSearchRequest
 	{
 		/// <summary>
 		/// Indicates whether the search should be case sensitive.
@@ -77,7 +77,12 @@ namespace Nest
 		Field TimestampField { get; set; }
 	}
 
-	public partial class EqlSearchRequest : IEqlSearchRequest
+	[ReadAs(typeof(EqlSearchRequest<>))]
+	[InterfaceDataContract]
+	// ReSharper disable once UnusedTypeParameter
+	public partial interface IEqlSearchRequest<TInferDocument> { }
+
+	public partial class EqlSearchRequest
 	{
 		/// <inheritdoc />
 		public bool? CaseSensitive { get; set; }
@@ -101,10 +106,20 @@ namespace Nest
 		public Field TiebreakerField { get; set; }
 		/// <inheritdoc />
 		public Field TimestampField { get; set; }
+
+		Type ITypedSearchRequest.ClrType => null;
 	}
 
-	public partial class EqlSearchDescriptor : IEqlSearchRequest
+	[DataContract]
+	public partial class EqlSearchRequest<TInferDocument> : IEqlSearchRequest<TInferDocument>
 	{
+		Type ITypedSearchRequest.ClrType => typeof(TInferDocument);
+	}
+
+	public partial class EqlSearchDescriptor<TInferDocument> where TInferDocument : class
+	{
+		Type ITypedSearchRequest.ClrType => typeof(TInferDocument);
+
 		/// <inheritdoc cref="IEqlSearchRequest.CaseSensitive"/>
 		bool? IEqlSearchRequest.CaseSensitive { get; set; }
 
@@ -137,14 +152,14 @@ namespace Nest
 
 		/// <inheritdoc cref="IEqlSearchRequest.TimestampField"/>
 		Field IEqlSearchRequest.TimestampField { get; set; }
-
+		
 		/// <inheritdoc cref="IEqlSearchRequest.Query" />
-		public EqlSearchDescriptor Query(string query) => Assign(query, (a, v) => a.Query = v);
+		public EqlSearchDescriptor<TInferDocument> Query(string query) => Assign(query, (a, v) => a.Query = v);
 
 		/// <inheritdoc cref="INetworkDirectionProcessor.InternalNetworksField" />
-		public EqlSearchDescriptor TimestampField(Field timestampField) => Assign(timestampField, (a, v) => a.TimestampField = v);
+		public EqlSearchDescriptor<TInferDocument> TimestampField(Field timestampField) => Assign(timestampField, (a, v) => a.TimestampField = v);
 
-		/// <inheritdoc cref="INetworkDirectionProcessor.InternalNetworksField" />
-		//public EqlSearchDescriptor TimestampField<TValue>(Expression<Func<T, TValue>> objectPath) =>
+		//// <inheritdoc cref = "INetworkDirectionProcessor.InternalNetworksField" />
+		//public EqlSearchDescriptor<TInferDocument> TimestampField<TValue>(Expression<Func<T, TValue>> objectPath) =>
 	}
 }

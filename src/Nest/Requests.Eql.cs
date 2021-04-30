@@ -59,6 +59,10 @@ namespace Nest
 		}
 	}
 
+	public partial interface IEqlSearchRequest<TInferDocument> : IEqlSearchRequest
+	{
+	}
+
 	///<summary>Request for Search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
 	public partial class EqlSearchRequest : PlainRequestBase<EqlSearchRequestParameters>, IEqlSearchRequest
 	{
@@ -102,6 +106,21 @@ namespace Nest
 		{
 			get => Q<Time>("wait_for_completion_timeout");
 			set => Q("wait_for_completion_timeout", value);
+		}
+	}
+
+	public partial class EqlSearchRequest<TInferDocument> : EqlSearchRequest, IEqlSearchRequest<TInferDocument>
+	{
+		protected IEqlSearchRequest<TInferDocument> TypedSelf => this;
+		///<summary>/{index}/_eql/search</summary>
+		///<param name = "index">this parameter is required</param>
+		public EqlSearchRequest(IndexName index): base(index)
+		{
+		}
+
+		///<summary>/{index}/_eql/search</summary>
+		public EqlSearchRequest(): base(typeof(TInferDocument))
+		{
 		}
 	}
 }

@@ -59,15 +59,29 @@ namespace Nest.Specification.EqlApi
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
 		/// </summary>
-		public EqlSearchResponse<TDocument> Search<TDocument>(IndexName index, Func<EqlSearchDescriptor, IEqlSearchRequest> selector = null)
-			where TDocument : class => Search<TDocument>(selector.InvokeOrDefault(new EqlSearchDescriptor(index: index)));
+		public EqlSearchResponse<TDocument> Search<TInferDocument, TDocument>(Func<EqlSearchDescriptor<TInferDocument>, IEqlSearchRequest> selector = null)
+			where TInferDocument : class where TDocument : class => Search<TDocument>(selector.InvokeOrDefault(new EqlSearchDescriptor<TInferDocument>()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>eql.search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
 		/// </summary>
-		public Task<EqlSearchResponse<TDocument>> SearchAsync<TDocument>(IndexName index, Func<EqlSearchDescriptor, IEqlSearchRequest> selector = null, CancellationToken ct = default)
-			where TDocument : class => SearchAsync<TDocument>(selector.InvokeOrDefault(new EqlSearchDescriptor(index: index)), ct);
+		public Task<EqlSearchResponse<TDocument>> SearchAsync<TInferDocument, TDocument>(Func<EqlSearchDescriptor<TInferDocument>, IEqlSearchRequest> selector = null, CancellationToken ct = default)
+			where TInferDocument : class where TDocument : class => SearchAsync<TDocument>(selector.InvokeOrDefault(new EqlSearchDescriptor<TInferDocument>()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>eql.search</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public EqlSearchResponse<TDocument> Search<TDocument>(Func<EqlSearchDescriptor<TDocument>, IEqlSearchRequest> selector = null)
+			where TDocument : class => Search<TDocument>(selector.InvokeOrDefault(new EqlSearchDescriptor<TDocument>()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>eql.search</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public Task<EqlSearchResponse<TDocument>> SearchAsync<TDocument>(Func<EqlSearchDescriptor<TDocument>, IEqlSearchRequest> selector = null, CancellationToken ct = default)
+			where TDocument : class => SearchAsync<TDocument>(selector.InvokeOrDefault(new EqlSearchDescriptor<TDocument>()), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>eql.search</c> API, read more about this API online:
 		/// <para></para>

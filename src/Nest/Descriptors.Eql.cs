@@ -49,7 +49,7 @@ using Elasticsearch.Net.Specification.EqlApi;
 namespace Nest
 {
 	///<summary>Descriptor for Search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public partial class EqlSearchDescriptor : RequestDescriptorBase<EqlSearchDescriptor, EqlSearchRequestParameters, IEqlSearchRequest>, IEqlSearchRequest
+	public partial class EqlSearchDescriptor<TInferDocument> : RequestDescriptorBase<EqlSearchDescriptor<TInferDocument>, EqlSearchRequestParameters, IEqlSearchRequest<TInferDocument>>, IEqlSearchRequest<TInferDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearch;
 		///<summary>/{index}/_eql/search</summary>
@@ -58,25 +58,24 @@ namespace Nest
 		{
 		}
 
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected EqlSearchDescriptor(): base()
+		///<summary>/{index}/_eql/search</summary>
+		public EqlSearchDescriptor(): this(typeof(TInferDocument))
 		{
 		}
 
 		// values part of the url path
 		IndexName IEqlSearchRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		///<summary>The name of the index to scope the operation</summary>
-		public EqlSearchDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		public EqlSearchDescriptor<TInferDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public EqlSearchDescriptor Index<TOther>()
+		public EqlSearchDescriptor<TInferDocument> Index<TOther>()
 			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
 		// Request parameters
 		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
-		public EqlSearchDescriptor KeepAlive(Time keepalive) => Qs("keep_alive", keepalive);
+		public EqlSearchDescriptor<TInferDocument> KeepAlive(Time keepalive) => Qs("keep_alive", keepalive);
 		///<summary>Control whether the response should be stored in the cluster if it completed within the provided [wait_for_completion] time (default: false)</summary>
-		public EqlSearchDescriptor KeepOnCompletion(bool? keeponcompletion = true) => Qs("keep_on_completion", keeponcompletion);
+		public EqlSearchDescriptor<TInferDocument> KeepOnCompletion(bool? keeponcompletion = true) => Qs("keep_on_completion", keeponcompletion);
 		///<summary>Specify the time that the request should block waiting for the final response</summary>
-		public EqlSearchDescriptor WaitForCompletionTimeout(Time waitforcompletiontimeout) => Qs("wait_for_completion_timeout", waitforcompletiontimeout);
+		public EqlSearchDescriptor<TInferDocument> WaitForCompletionTimeout(Time waitforcompletiontimeout) => Qs("wait_for_completion_timeout", waitforcompletiontimeout);
 	}
 }
