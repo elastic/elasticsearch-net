@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 // ███╗   ██╗ ██████╗ ████████╗██╗ ██████╗███████╗
 // ████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝██╔════╝
 // ██╔██╗ ██║██║   ██║   ██║   ██║██║     █████╗  
@@ -1142,6 +1141,13 @@ namespace Nest
 		{
 			get => Q<bool? >("help");
 			set => Q("help", value);
+		}
+
+		///<summary>If set to true segment stats will include stats for segments that are not currently loaded into memory</summary>
+		public bool? IncludeUnloadedSegments
+		{
+			get => Q<bool? >("include_unloaded_segments");
+			set => Q("include_unloaded_segments", value);
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>

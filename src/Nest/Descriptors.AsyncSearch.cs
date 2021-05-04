@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 // ███╗   ██╗ ██████╗ ████████╗██╗ ██████╗███████╗
 // ████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝██╔════╝
 // ██╔██╗ ██║██║   ██║   ██║   ██║██║     █████╗  
@@ -40,8 +39,8 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using Elastic.Transport;
-using Nest.Utf8Json;
 using Elasticsearch.Net;
+using Nest.Utf8Json;
 using Elasticsearch.Net.Specification.AsyncSearchApi;
 
 // ReSharper disable RedundantBaseConstructorCall

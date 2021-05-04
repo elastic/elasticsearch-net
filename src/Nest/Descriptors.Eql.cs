@@ -41,7 +41,7 @@ using System.Linq.Expressions;
 using Elastic.Transport;
 using Elasticsearch.Net;
 using Nest.Utf8Json;
-using Elasticsearch.Net.Specification.MigrationApi;
+using Elasticsearch.Net.Specification.EqlApi;
 
 // ReSharper disable RedundantBaseConstructorCall
 // ReSharper disable UnusedTypeParameter
@@ -49,30 +49,38 @@ using Elasticsearch.Net.Specification.MigrationApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
-	///<summary>Descriptor for DeprecationInfo <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-deprecation.html</para></summary>
-	public partial class DeprecationInfoDescriptor : RequestDescriptorBase<DeprecationInfoDescriptor, DeprecationInfoRequestParameters, IDeprecationInfoRequest>, IDeprecationInfoRequest
+	///<summary>Descriptor for Search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public partial class EqlSearchDescriptor<TInferDocument> : RequestDescriptorBase<EqlSearchDescriptor<TInferDocument>, EqlSearchRequestParameters, IEqlSearchRequest<TInferDocument>>, IEqlSearchRequest<TInferDocument>
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.MigrationDeprecationInfo;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => false;
-		///<summary>/_migration/deprecations</summary>
-		public DeprecationInfoDescriptor(): base()
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearch;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		///<summary>/{index}/_eql/search</summary>
+		///<param name = "index">this parameter is required</param>
+		public EqlSearchDescriptor(Indices index): base(r => r.Required("index", index))
 		{
 		}
 
-		///<summary>/{index}/_migration/deprecations</summary>
-		///<param name = "index">Optional, accepts null</param>
-		public DeprecationInfoDescriptor(IndexName index): base(r => r.Optional("index", index))
+		///<summary>/{index}/_eql/search</summary>
+		public EqlSearchDescriptor(): this(typeof(TInferDocument))
 		{
 		}
 
 		// values part of the url path
-		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		///<summary>Index pattern</summary>
-		public DeprecationInfoDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		Indices IEqlSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		public EqlSearchDescriptor<TInferDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public DeprecationInfoDescriptor Index<TOther>()
-			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (IndexName)v));
-	// Request parameters
+		public EqlSearchDescriptor<TInferDocument> Index<TOther>()
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public EqlSearchDescriptor<TInferDocument> AllIndices() => Index(Indices.All);
+		// Request parameters
+		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
+		public EqlSearchDescriptor<TInferDocument> KeepAlive(Time keepalive) => Qs("keep_alive", keepalive);
+		///<summary>Control whether the response should be stored in the cluster if it completed within the provided [wait_for_completion] time (default: false)</summary>
+		public EqlSearchDescriptor<TInferDocument> KeepOnCompletion(bool? keeponcompletion = true) => Qs("keep_on_completion", keeponcompletion);
+		///<summary>Specify the time that the request should block waiting for the final response</summary>
+		public EqlSearchDescriptor<TInferDocument> WaitForCompletionTimeout(Time waitforcompletiontimeout) => Qs("wait_for_completion_timeout", waitforcompletiontimeout);
 	}
 }

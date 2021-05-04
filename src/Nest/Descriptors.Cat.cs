@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 // ███╗   ██╗ ██████╗ ████████╗██╗ ██████╗███████╗
 // ████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝██╔════╝
 // ██╔██╗ ██║██║   ██║   ██║   ██║██║     █████╗  
@@ -518,6 +517,8 @@ namespace Nest
 		public CatNodesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatNodesDescriptor Help(bool? help = true) => Qs("help", help);
+		///<summary>If set to true segment stats will include stats for segments that are not currently loaded into memory</summary>
+		public CatNodesDescriptor IncludeUnloadedSegments(bool? includeunloadedsegments = true) => Qs("include_unloaded_segments", includeunloadedsegments);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatNodesDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>

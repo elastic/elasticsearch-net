@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 // ███╗   ██╗ ██████╗ ████████╗██╗ ██████╗███████╗
 // ████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝██╔════╝
 // ██╔██╗ ██║██║   ██║   ██║   ██║██║     █████╗  
@@ -58,7 +57,8 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		// values part of the url path
 		// Request parameters
-		///<summary>If this param is used it must be set to true</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 8.0.0, reason: Supported for backwards compatibility with 7.x")]
+		///<summary>If this param is used it must be set to true</summary>		
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 8.0.0, reason: Supported for backwards compatibility with 7.x")]
 		public XPackInfoDescriptor AcceptEnterprise(bool? acceptenterprise = true) => Qs("accept_enterprise", acceptenterprise);
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public XPackInfoDescriptor Categories(params string[] categories) => Qs("categories", categories);

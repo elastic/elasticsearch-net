@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 // ███╗   ██╗ ██████╗ ████████╗██╗ ██████╗███████╗
 // ████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝██╔════╝
 // ██╔██╗ ██║██║   ██║   ██║   ██║██║     █████╗  
@@ -1411,6 +1410,8 @@ namespace Nest
 		public SearchDescriptor<TInferDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
 		public SearchDescriptor<TInferDocument> MaxConcurrentShardRequests(long? maxconcurrentshardrequests) => Qs("max_concurrent_shard_requests", maxconcurrentshardrequests);
+		///<summary>The minimum compatible version that all shards involved in search should have for this request to be successful</summary>
+		public SearchDescriptor<TInferDocument> MinCompatibleShardNode(string mincompatibleshardnode) => Qs("min_compatible_shard_node", mincompatibleshardnode);
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public SearchDescriptor<TInferDocument> PreFilterShardSize(long? prefiltershardsize) => Qs("pre_filter_shard_size", prefiltershardsize);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>

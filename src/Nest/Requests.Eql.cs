@@ -42,7 +42,7 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 using Elasticsearch.Net;
 using Nest.Utf8Json;
-using Elasticsearch.Net.Specification.SqlApi;
+using Elasticsearch.Net.Specification.EqlApi;
 
 // ReSharper disable RedundantBaseConstructorCall
 // ReSharper disable UnusedTypeParameter
@@ -51,56 +51,79 @@ using Elasticsearch.Net.Specification.SqlApi;
 namespace Nest
 {
 	[InterfaceDataContract]
-	public partial interface IClearSqlCursorRequest : IRequest<ClearSqlCursorRequestParameters>
+	public partial interface IEqlSearchRequest : IRequest<EqlSearchRequestParameters>
 	{
-	}
-
-	///<summary>Request for ClearCursor <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html</para></summary>
-	public partial class ClearSqlCursorRequest : PlainRequestBase<ClearSqlCursorRequestParameters>, IClearSqlCursorRequest
-	{
-		protected IClearSqlCursorRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-	// values part of the url path
-	// Request parameters
-	}
-
-	[InterfaceDataContract]
-	public partial interface IQuerySqlRequest : IRequest<QuerySqlRequestParameters>
-	{
-	}
-
-	///<summary>Request for Query <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</para></summary>
-	public partial class QuerySqlRequest : PlainRequestBase<QuerySqlRequestParameters>, IQuerySqlRequest
-	{
-		protected IQuerySqlRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		// values part of the url path
-		// Request parameters
-		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format
+		[IgnoreDataMember]
+		Indices Index
 		{
-			get => Q<string>("format");
-			set => Q("format", value);
+			get;
 		}
 	}
 
-	[InterfaceDataContract]
-	public partial interface ITranslateSqlRequest : IRequest<TranslateSqlRequestParameters>
+	public partial interface IEqlSearchRequest<TInferDocument> : IEqlSearchRequest
 	{
 	}
 
-	///<summary>Request for Translate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html</para></summary>
-	public partial class TranslateSqlRequest : PlainRequestBase<TranslateSqlRequestParameters>, ITranslateSqlRequest
+	///<summary>Request for Search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public partial class EqlSearchRequest : PlainRequestBase<EqlSearchRequestParameters>, IEqlSearchRequest
 	{
-		protected ITranslateSqlRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlTranslate;
+		protected IEqlSearchRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearch;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-	// values part of the url path
-	// Request parameters
+		///<summary>/{index}/_eql/search</summary>
+		///<param name = "index">this parameter is required</param>
+		public EqlSearchRequest(Indices index): base(r => r.Required("index", index))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected EqlSearchRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices IEqlSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		// Request parameters
+		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
+		public Time KeepAlive
+		{
+			get => Q<Time>("keep_alive");
+			set => Q("keep_alive", value);
+		}
+
+		///<summary>
+		/// Control whether the response should be stored in the cluster if it completed within the provided [wait_for_completion] time (default:
+		/// false)
+		///</summary>
+		public bool? KeepOnCompletion
+		{
+			get => Q<bool? >("keep_on_completion");
+			set => Q("keep_on_completion", value);
+		}
+
+		///<summary>Specify the time that the request should block waiting for the final response</summary>
+		public Time WaitForCompletionTimeout
+		{
+			get => Q<Time>("wait_for_completion_timeout");
+			set => Q("wait_for_completion_timeout", value);
+		}
+	}
+
+	public partial class EqlSearchRequest<TInferDocument> : EqlSearchRequest, IEqlSearchRequest<TInferDocument>
+	{
+		protected IEqlSearchRequest<TInferDocument> TypedSelf => this;
+		///<summary>/{index}/_eql/search</summary>
+		///<param name = "index">this parameter is required</param>
+		public EqlSearchRequest(Indices index): base(index)
+		{
+		}
+
+		///<summary>/{index}/_eql/search</summary>
+		public EqlSearchRequest(): base(typeof(TInferDocument))
+		{
+		}
 	}
 }

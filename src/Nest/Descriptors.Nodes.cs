@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 // ███╗   ██╗ ██████╗ ████████╗██╗ ██████╗███████╗
 // ████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝██╔════╝
 // ██╔██╗ ██║██║   ██║   ██║   ██║██║     █████╗  
@@ -212,14 +211,14 @@ namespace Nest
 		///<summary>Limit the information returned for `indices` metric to the specific index metrics. Isn't used if `indices` (or `all`) metric isn't specified.</summary>
 		public NodesStatsDescriptor IndexMetric(IndexMetrics indexMetric) => Assign(indexMetric, (a, v) => a.RouteValues.Optional("index_metric", v));
 		// Request parameters
-		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `completion` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor CompletionFields(Fields completionfields) => Qs("completion_fields", completionfields);
-		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `completion` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields)
 			where T : class => Qs("completion_fields", fields?.Select(e => (Field)e));
-		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `fielddata` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor FielddataFields(Fields fielddatafields) => Qs("fielddata_fields", fielddatafields);
-		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `fielddata` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields)
 			where T : class => Qs("fielddata_fields", fields?.Select(e => (Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
@@ -231,6 +230,8 @@ namespace Nest
 		public NodesStatsDescriptor Groups(bool? groups = true) => Qs("groups", groups);
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public NodesStatsDescriptor IncludeSegmentFileSizes(bool? includesegmentfilesizes = true) => Qs("include_segment_file_sizes", includesegmentfilesizes);
+		///<summary>If set to true segment stats will include stats for segments that are not currently loaded into memory</summary>
+		public NodesStatsDescriptor IncludeUnloadedSegments(bool? includeunloadedsegments = true) => Qs("include_unloaded_segments", includeunloadedsegments);
 		///<summary>Return indices stats aggregated at index, node or shard level</summary>
 		public NodesStatsDescriptor Level(Level? level) => Qs("level", level);
 		///<summary>Explicit operation timeout</summary>
