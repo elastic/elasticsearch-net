@@ -98,10 +98,6 @@ namespace ApiGenerator.Configuration
 			"cluster.get_component_template.json", // 7.8 experimental
 			"cluster.put_component_template.json", // 7.8 experimental
 			"cluster.exists_component_template.json", // 7.8 experimental
-
-			"eql.search.json", // 7.9 beta
-			"eql.get.json", // 7.9 beta
-			"eql.delete.json", // 7.9 beta
 		};
 
 		/// <summary>

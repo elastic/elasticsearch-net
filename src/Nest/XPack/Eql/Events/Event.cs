@@ -17,36 +17,36 @@
  * under the License.
  */
 
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Nest.Utf8Json;
+using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	[ReadAs(typeof(HitsMetadata<>))]
-	public interface IHitsMetadata<out T> where T : class
+	public class Event<TEvent> where TEvent : class
 	{
-		[DataMember(Name = "hits")]
-		IReadOnlyCollection<IHit<T>> Hits { get; }
+		/// <summary>
+		/// The individual fields requested for a event.
+		/// </summary>
+		[DataMember(Name = "fields")]
+		public FieldValues Fields { get; internal set; }
 
-		[DataMember(Name = "max_score")]
-		double? MaxScore { get; }
+		/// <summary>
+		/// The id of the event.
+		/// </summary>
+		[DataMember(Name = "_id")]
+		public string Id { get; internal set; }
 
-		[DataMember(Name = "total")]
-		TotalHits Total { get; }
-	}
-	
-	public class HitsMetadata<T> : IHitsMetadata<T>
-		where T : class
-	{
-		[DataMember(Name = "hits")]
-		public IReadOnlyCollection<IHit<T>> Hits { get; internal set; } = EmptyReadOnly<IHit<T>>.Collection;
+		/// <summary>
+		/// The index in which the event resides.
+		/// </summary>
+		[DataMember(Name = "_index")]
+		public string Index { get; internal set; }
 
-		[DataMember(Name = "max_score")]
-		public double? MaxScore { get; internal set; }
-
-		[DataMember(Name = "total")]
-		public TotalHits Total { get; internal set; }
+		/// <summary>
+		/// The source document for the event.
+		/// </summary>
+		[DataMember(Name = "_source")]
+		[JsonFormatter(typeof(SourceFormatter<>))]
+		public TEvent Source { get; internal set; }
 	}
 }

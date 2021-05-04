@@ -19,34 +19,22 @@
 
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Nest.Utf8Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	[InterfaceDataContract]
-	[ReadAs(typeof(HitsMetadata<>))]
-	public interface IHitsMetadata<out T> where T : class
+	public class Sequence<TEvent> where TEvent : class
 	{
-		[DataMember(Name = "hits")]
-		IReadOnlyCollection<IHit<T>> Hits { get; }
+		/// <summary>
+		/// Contains events matching the query. Each object represents a matching event.
+		/// </summary>
+		[DataMember(Name = "events")]
+		public IReadOnlyCollection<Event<TEvent>> Events { get; internal set; } = EmptyReadOnly<Event<TEvent>>.Collection;
 
-		[DataMember(Name = "max_score")]
-		double? MaxScore { get; }
-
-		[DataMember(Name = "total")]
-		TotalHits Total { get; }
-	}
-	
-	public class HitsMetadata<T> : IHitsMetadata<T>
-		where T : class
-	{
-		[DataMember(Name = "hits")]
-		public IReadOnlyCollection<IHit<T>> Hits { get; internal set; } = EmptyReadOnly<IHit<T>>.Collection;
-
-		[DataMember(Name = "max_score")]
-		public double? MaxScore { get; internal set; }
-
-		[DataMember(Name = "total")]
-		public TotalHits Total { get; internal set; }
+		/// <summary>
+		/// Shared field values used to constrain matches in the sequence. These are defined using the by keyword in the EQL query syntax.
+		/// </summary>
+		[DataMember(Name = "join_keys")]
+		public IReadOnlyCollection<object> JoinKeys { get; internal set; } = EmptyReadOnly<object>.Collection;
 	}
 }
