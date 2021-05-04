@@ -20,10 +20,10 @@
 namespace Nest
 {
 	[MapsApi("eql.get.json")]
-	[ReadAs(typeof(EqlSearchGetRequest))]
-	public partial interface IEqlSearchGetRequest { }
+	[ReadAs(typeof(EqlGetRequest))]
+	public partial interface IEqlGetRequest { }
 
-	public partial class EqlSearchGetRequest { }
+	public partial class EqlGetRequest { }
 
-	public partial class EqlSearchGetDescriptor { }
+	public partial class EqlGetDescriptor { }
 }

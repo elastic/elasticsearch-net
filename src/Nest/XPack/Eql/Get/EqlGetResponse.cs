@@ -22,7 +22,7 @@ namespace Nest
 	/// <summary>
 	/// A response to an EQL get async search request.
 	/// </summary>
-	public class EqlSearchGetResponse<TDocument> : EqlSearchResponse<TDocument> where TDocument : class
+	public class EqlGetResponse<TDocument> : EqlSearchResponse<TDocument> where TDocument : class
 	{
 	}
 }
