@@ -75,13 +75,13 @@ namespace Elasticsearch.Net.Specification.EqlApi
 		///<summary>GET on /_eql/search/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
 		///<param name = "id">The async search ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse Get<TResponse>(string id, GetRequestParameters requestParameters = null)
+		public TResponse Get<TResponse>(string id, EqlGetRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_eql/search/{id:id}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_eql/search/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
 		///<param name = "id">The async search ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("eql.get", "id")]
-		public Task<TResponse> GetAsync<TResponse>(string id, GetRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> GetAsync<TResponse>(string id, EqlGetRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_eql/search/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_eql/search/status/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
 		///<param name = "id">The async search ID</param>
