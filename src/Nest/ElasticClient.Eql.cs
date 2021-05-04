@@ -55,6 +55,34 @@ namespace Nest.Specification.EqlApi
 		}
 
 		/// <summary>
+		/// <c>GET</c> request to the <c>eql.get</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public EqlGetResponse<TDocument> Get<TDocument>(Id id, Func<EqlGetDescriptor, IEqlGetRequest> selector = null)
+			where TDocument : class => Get<TDocument>(selector.InvokeOrDefault(new EqlGetDescriptor(id: id)));
+		/// <summary>
+		/// <c>GET</c> request to the <c>eql.get</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public Task<EqlGetResponse<TDocument>> GetAsync<TDocument>(Id id, Func<EqlGetDescriptor, IEqlGetRequest> selector = null, CancellationToken ct = default)
+			where TDocument : class => GetAsync<TDocument>(selector.InvokeOrDefault(new EqlGetDescriptor(id: id)), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>eql.get</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public EqlGetResponse<TDocument> Get<TDocument>(IEqlGetRequest request)
+			where TDocument : class => DoRequest<IEqlGetRequest, EqlGetResponse<TDocument>>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>eql.get</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public Task<EqlGetResponse<TDocument>> GetAsync<TDocument>(IEqlGetRequest request, CancellationToken ct = default)
+			where TDocument : class => DoRequestAsync<IEqlGetRequest, EqlGetResponse<TDocument>>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>eql.get_status</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>

@@ -106,6 +106,7 @@ namespace Nest
 		internal static ApiUrls EnrichGetPolicy = new ApiUrls(new[]{"_enrich/policy/{name}", "_enrich/policy/"});
 		internal static ApiUrls EnrichPutPolicy = new ApiUrls(new[]{"_enrich/policy/{name}"});
 		internal static ApiUrls EnrichStats = new ApiUrls(new[]{"_enrich/_stats"});
+		internal static ApiUrls EqlGet = new ApiUrls(new[]{"_eql/search/{id}"});
 		internal static ApiUrls EqlSearchStatus = new ApiUrls(new[]{"_eql/search/status/{id}"});
 		internal static ApiUrls EqlSearch = new ApiUrls(new[]{"{index}/_eql/search"});
 		internal static ApiUrls NoNamespaceDocumentExists = new ApiUrls(new[]{"{index}/_doc/{id}"});
