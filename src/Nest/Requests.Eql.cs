@@ -51,6 +51,39 @@ using Elasticsearch.Net.Specification.EqlApi;
 namespace Nest
 {
 	[InterfaceDataContract]
+	public partial interface IEqlDeleteRequest : IRequest<EqlDeleteRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id Id
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public partial class EqlDeleteRequest : PlainRequestBase<EqlDeleteRequestParameters>, IEqlDeleteRequest
+	{
+		protected IEqlDeleteRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+		///<summary>/_eql/search/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public EqlDeleteRequest(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected EqlDeleteRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IEqlDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IEqlGetRequest : IRequest<EqlGetRequestParameters>
 	{
 		[IgnoreDataMember]
