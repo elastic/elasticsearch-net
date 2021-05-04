@@ -50,7 +50,7 @@ using Elasticsearch.Net.Specification.EqlApi;
 namespace Nest
 {
 	[InterfaceDataContract]
-	public partial interface IEqlGetStatusRequest : IRequest<EqlGetStatusRequestParameters>
+	public partial interface IEqlSearchStatusRequest : IRequest<EqlSearchStatusRequestParameters>
 	{
 		[IgnoreDataMember]
 		Id Id
@@ -59,26 +59,26 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public partial class EqlGetStatusRequest : PlainRequestBase<EqlGetStatusRequestParameters>, IEqlGetStatusRequest
+	///<summary>Request for SearchStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public partial class EqlSearchStatusRequest : PlainRequestBase<EqlSearchStatusRequestParameters>, IEqlSearchStatusRequest
 	{
-		protected IEqlGetStatusRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
+		protected IEqlSearchStatusRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearchStatus;
 		///<summary>/_eql/search/status/{id}</summary>
 		///<param name = "id">this parameter is required</param>
-		public EqlGetStatusRequest(Id id): base(r => r.Required("id", id))
+		public EqlSearchStatusRequest(Id id): base(r => r.Required("id", id))
 		{
 		}
 
 		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
 		[SerializationConstructor]
-		protected EqlGetStatusRequest(): base()
+		protected EqlSearchStatusRequest(): base()
 		{
 		}
 
 		// values part of the url path
 		[IgnoreDataMember]
-		Id IEqlGetStatusRequest.Id => Self.RouteValues.Get<Id>("id");
+		Id IEqlSearchStatusRequest.Id => Self.RouteValues.Get<Id>("id");
 	// Request parameters
 	}
 
