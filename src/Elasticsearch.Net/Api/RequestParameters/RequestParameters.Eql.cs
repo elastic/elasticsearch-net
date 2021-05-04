@@ -43,7 +43,7 @@ using System.Linq.Expressions;
 namespace Elasticsearch.Net.Specification.EqlApi
 {
 	///<summary>Request options for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public class DeleteRequestParameters : RequestParameters<DeleteRequestParameters>
+	public class EqlDeleteRequestParameters : RequestParameters<EqlDeleteRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		public override bool SupportsBody => false;
