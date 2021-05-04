@@ -57,7 +57,6 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 			.GeoShape(s => s
 				.Name(p => p.LocationShape)
 				.Orientation(GeoOrientation.ClockWise)
-				.Strategy(GeoStrategy.Recursive)
 				.Coerce()
 			);
 
@@ -67,7 +66,6 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 				"locationShape", new GeoShapeProperty
 				{
 					Orientation = GeoOrientation.ClockWise,
-					Strategy = GeoStrategy.Recursive,
 					Coerce = true
 				}
 			}

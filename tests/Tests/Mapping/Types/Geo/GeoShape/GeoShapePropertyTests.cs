@@ -37,7 +37,6 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 				{
 					type = "geo_shape",
 					orientation = "cw",
-					strategy = "recursive",
 					coerce = true
 				}
 			}
@@ -47,10 +46,8 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 			.GeoShape(s => s
 				.Name(p => p.LocationShape)
 				.Orientation(GeoOrientation.ClockWise)
-				.Strategy(GeoStrategy.Recursive)
 				.Coerce()
 			);
-
 
 		protected override IProperties InitializerProperties => new Properties
 		{
@@ -58,7 +55,6 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 				"locationShape", new GeoShapeProperty
 				{
 					Orientation = GeoOrientation.ClockWise,
-					Strategy = GeoStrategy.Recursive,
 					Coerce = true
 				}
 			}
