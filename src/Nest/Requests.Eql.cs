@@ -38,53 +38,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
+using Elasticsearch.Net;
+using Elasticsearch.Net.Utf8Json;
+using Elasticsearch.Net.Specification.EqlApi;
 
-// ReSharper disable once CheckNamespace
-namespace Elasticsearch.Net.Specification.EqlApi
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable UnusedTypeParameter
+// ReSharper disable PartialMethodWithSinglePart
+// ReSharper disable RedundantNameQualifier
+namespace Nest
 {
-	///<summary>Request options for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public class DeleteRequestParameters : RequestParameters<DeleteRequestParameters>
+	[InterfaceDataContract]
+	public partial interface IEqlSearchRequest : IRequest<EqlSearchRequestParameters>
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		public override bool SupportsBody => false;
-	}
-
-	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public class GetRequestParameters : RequestParameters<GetRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
-		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
-		public TimeSpan KeepAlive
+		[IgnoreDataMember]
+		Indices Index
 		{
-			get => Q<TimeSpan>("keep_alive");
-			set => Q("keep_alive", value);
-		}
-
-		///<summary>Specify the time that the request should block waiting for the final response</summary>
-		public TimeSpan WaitForCompletionTimeout
-		{
-			get => Q<TimeSpan>("wait_for_completion_timeout");
-			set => Q("wait_for_completion_timeout", value);
+			get;
 		}
 	}
 
-	///<summary>Request options for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public class GetStatusRequestParameters : RequestParameters<GetStatusRequestParameters>
+	public partial interface IEqlSearchRequest<TInferDocument> : IEqlSearchRequest
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for Search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public class EqlSearchRequestParameters : RequestParameters<EqlSearchRequestParameters>
+	///<summary>Request for Search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public partial class EqlSearchRequest : PlainRequestBase<EqlSearchRequestParameters>, IEqlSearchRequest
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
-		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
-		public TimeSpan KeepAlive
+		protected IEqlSearchRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearch;
+		///<summary>/{index}/_eql/search</summary>
+		///<param name = "index">this parameter is required</param>
+		public EqlSearchRequest(Indices index): base(r => r.Required("index", index))
 		{
-			get => Q<TimeSpan>("keep_alive");
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected EqlSearchRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Indices IEqlSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		// Request parameters
+		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
+		public Time KeepAlive
+		{
+			get => Q<Time>("keep_alive");
 			set => Q("keep_alive", value);
 		}
 
@@ -99,10 +102,25 @@ namespace Elasticsearch.Net.Specification.EqlApi
 		}
 
 		///<summary>Specify the time that the request should block waiting for the final response</summary>
-		public TimeSpan WaitForCompletionTimeout
+		public Time WaitForCompletionTimeout
 		{
-			get => Q<TimeSpan>("wait_for_completion_timeout");
+			get => Q<Time>("wait_for_completion_timeout");
 			set => Q("wait_for_completion_timeout", value);
+		}
+	}
+
+	public partial class EqlSearchRequest<TInferDocument> : EqlSearchRequest, IEqlSearchRequest<TInferDocument>
+	{
+		protected IEqlSearchRequest<TInferDocument> TypedSelf => this;
+		///<summary>/{index}/_eql/search</summary>
+		///<param name = "index">this parameter is required</param>
+		public EqlSearchRequest(Indices index): base(index)
+		{
+		}
+
+		///<summary>/{index}/_eql/search</summary>
+		public EqlSearchRequest(): base(typeof(TInferDocument))
+		{
 		}
 	}
 }
