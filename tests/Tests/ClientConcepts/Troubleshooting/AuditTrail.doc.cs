@@ -46,10 +46,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 	{
 		private readonly ReadOnlyCluster _cluster;
 
-		public AuditTrail(ReadOnlyCluster cluster)
-		{
-			_cluster = cluster;
-		}
+		public AuditTrail(ReadOnlyCluster cluster) => _cluster = cluster;
 
 		[I] public void AvailableOnResponse()
 		{

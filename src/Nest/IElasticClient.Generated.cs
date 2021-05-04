@@ -45,6 +45,7 @@ using Nest.Specification.ClusterApi;
 using Nest.Specification.CrossClusterReplicationApi;
 using Nest.Specification.DanglingIndicesApi;
 using Nest.Specification.EnrichApi;
+using Nest.Specification.EqlApi;
 using Nest.Specification.GraphApi;
 using Nest.Specification.IndexLifecycleManagementApi;
 using Nest.Specification.IndicesApi;
@@ -102,6 +103,12 @@ namespace Nest
 
 		///<summary>Enrich APIs</summary>
 		EnrichNamespace Enrich
+		{
+			get;
+		}
+
+		///<summary>Eql APIs</summary>
+		EqlNamespace Eql
 		{
 			get;
 		}
