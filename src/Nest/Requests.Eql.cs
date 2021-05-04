@@ -51,6 +51,124 @@ using Elasticsearch.Net.Specification.EqlApi;
 namespace Nest
 {
 	[InterfaceDataContract]
+	public partial interface IEqlDeleteRequest : IRequest<EqlDeleteRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id Id
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public partial class EqlDeleteRequest : PlainRequestBase<EqlDeleteRequestParameters>, IEqlDeleteRequest
+	{
+		protected IEqlDeleteRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		///<summary>/_eql/search/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public EqlDeleteRequest(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected EqlDeleteRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IEqlDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
+	public partial interface IEqlGetRequest : IRequest<EqlGetRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id Id
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public partial class EqlGetRequest : PlainRequestBase<EqlGetRequestParameters>, IEqlGetRequest
+	{
+		protected IEqlGetRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_eql/search/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public EqlGetRequest(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected EqlGetRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IEqlGetRequest.Id => Self.RouteValues.Get<Id>("id");
+		// Request parameters
+		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
+		public Time KeepAlive
+		{
+			get => Q<Time>("keep_alive");
+			set => Q("keep_alive", value);
+		}
+
+		///<summary>Specify the time that the request should block waiting for the final response</summary>
+		public Time WaitForCompletionTimeout
+		{
+			get => Q<Time>("wait_for_completion_timeout");
+			set => Q("wait_for_completion_timeout", value);
+		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface IEqlSearchStatusRequest : IRequest<EqlSearchStatusRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id Id
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for SearchStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public partial class EqlSearchStatusRequest : PlainRequestBase<EqlSearchStatusRequestParameters>, IEqlSearchStatusRequest
+	{
+		protected IEqlSearchStatusRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearchStatus;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_eql/search/status/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public EqlSearchStatusRequest(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected EqlSearchStatusRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IEqlSearchStatusRequest.Id => Self.RouteValues.Get<Id>("id");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IEqlSearchRequest : IRequest<EqlSearchRequestParameters>
 	{
 		[IgnoreDataMember]

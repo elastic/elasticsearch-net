@@ -44,12 +44,12 @@ using Elastic.Transport;
 namespace Elasticsearch.Net.Specification.EqlApi
 {
 	///<summary>Request options for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public class DeleteRequestParameters : RequestParameters<DeleteRequestParameters>
+	public class EqlDeleteRequestParameters : RequestParameters<EqlDeleteRequestParameters>
 	{
 	}
 
 	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public class GetRequestParameters : RequestParameters<GetRequestParameters>
+	public class EqlGetRequestParameters : RequestParameters<EqlGetRequestParameters>
 	{
 		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
 		public TimeSpan KeepAlive
@@ -66,8 +66,8 @@ namespace Elasticsearch.Net.Specification.EqlApi
 		}
 	}
 
-	///<summary>Request options for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public class GetStatusRequestParameters : RequestParameters<GetStatusRequestParameters>
+	///<summary>Request options for SearchStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public class EqlSearchStatusRequestParameters : RequestParameters<EqlSearchStatusRequestParameters>
 	{
 	}
 
