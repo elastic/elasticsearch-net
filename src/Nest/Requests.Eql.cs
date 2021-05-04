@@ -50,6 +50,39 @@ using Elasticsearch.Net.Specification.EqlApi;
 namespace Nest
 {
 	[InterfaceDataContract]
+	public partial interface IEqlSearchStatusRequest : IRequest<EqlSearchStatusRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id Id
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for SearchStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public partial class EqlSearchStatusRequest : PlainRequestBase<EqlSearchStatusRequestParameters>, IEqlSearchStatusRequest
+	{
+		protected IEqlSearchStatusRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearchStatus;
+		///<summary>/_eql/search/status/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public EqlSearchStatusRequest(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected EqlSearchStatusRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IEqlSearchStatusRequest.Id => Self.RouteValues.Get<Id>("id");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IEqlSearchRequest : IRequest<EqlSearchRequestParameters>
 	{
 		[IgnoreDataMember]
