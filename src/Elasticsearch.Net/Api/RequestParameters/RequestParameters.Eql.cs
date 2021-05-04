@@ -66,8 +66,8 @@ namespace Elasticsearch.Net.Specification.EqlApi
 		}
 	}
 
-	///<summary>Request options for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public class GetStatusRequestParameters : RequestParameters<GetStatusRequestParameters>
+	///<summary>Request options for SearchStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public class EqlSearchStatusRequestParameters : RequestParameters<EqlSearchStatusRequestParameters>
 	{
 	}
 
