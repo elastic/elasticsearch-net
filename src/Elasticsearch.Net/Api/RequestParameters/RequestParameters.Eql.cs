@@ -49,7 +49,7 @@ namespace Elasticsearch.Net.Specification.EqlApi
 	}
 
 	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public class GetRequestParameters : RequestParameters<GetRequestParameters>
+	public class EqlGetRequestParameters : RequestParameters<EqlGetRequestParameters>
 	{
 		///<summary>Update the time interval in which the results (partial or final) for this search will be available</summary>
 		public TimeSpan KeepAlive
