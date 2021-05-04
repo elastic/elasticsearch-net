@@ -53,6 +53,8 @@ namespace Nest
 	public partial class EqlDeleteDescriptor : RequestDescriptorBase<EqlDeleteDescriptor, EqlDeleteRequestParameters, IEqlDeleteRequest>, IEqlDeleteRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
 		///<summary>/_eql/search/{id}</summary>
 		///<param name = "id">this parameter is required</param>
 		public EqlDeleteDescriptor(Id id): base(r => r.Required("id", id))
@@ -74,6 +76,8 @@ namespace Nest
 	public partial class EqlGetDescriptor : RequestDescriptorBase<EqlGetDescriptor, EqlGetRequestParameters, IEqlGetRequest>, IEqlGetRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
 		///<summary>/_eql/search/{id}</summary>
 		///<param name = "id">this parameter is required</param>
 		public EqlGetDescriptor(Id id): base(r => r.Required("id", id))
@@ -99,6 +103,8 @@ namespace Nest
 	public partial class EqlSearchStatusDescriptor : RequestDescriptorBase<EqlSearchStatusDescriptor, EqlSearchStatusRequestParameters, IEqlSearchStatusRequest>, IEqlSearchStatusRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearchStatus;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
 		///<summary>/_eql/search/status/{id}</summary>
 		///<param name = "id">this parameter is required</param>
 		public EqlSearchStatusDescriptor(Id id): base(r => r.Required("id", id))

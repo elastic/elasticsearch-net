@@ -65,6 +65,8 @@ namespace Nest
 	{
 		protected IEqlDeleteRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
 		///<summary>/_eql/search/{id}</summary>
 		///<param name = "id">this parameter is required</param>
 		public EqlDeleteRequest(Id id): base(r => r.Required("id", id))
@@ -98,6 +100,8 @@ namespace Nest
 	{
 		protected IEqlGetRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
 		///<summary>/_eql/search/{id}</summary>
 		///<param name = "id">this parameter is required</param>
 		public EqlGetRequest(Id id): base(r => r.Required("id", id))
@@ -144,6 +148,8 @@ namespace Nest
 	{
 		protected IEqlSearchStatusRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearchStatus;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
 		///<summary>/_eql/search/status/{id}</summary>
 		///<param name = "id">this parameter is required</param>
 		public EqlSearchStatusRequest(Id id): base(r => r.Required("id", id))
