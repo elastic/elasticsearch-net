@@ -55,6 +55,30 @@ namespace Nest.Specification.EqlApi
 		}
 
 		/// <summary>
+		/// <c>DELETE</c> request to the <c>eql.delete</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public EqlDeleteResponse Delete(Id id, Func<EqlDeleteDescriptor, IEqlDeleteRequest> selector = null) => Delete(selector.InvokeOrDefault(new EqlDeleteDescriptor(id: id)));
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>eql.delete</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public Task<EqlDeleteResponse> DeleteAsync(Id id, Func<EqlDeleteDescriptor, IEqlDeleteRequest> selector = null, CancellationToken ct = default) => DeleteAsync(selector.InvokeOrDefault(new EqlDeleteDescriptor(id: id)), ct);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>eql.delete</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public EqlDeleteResponse Delete(IEqlDeleteRequest request) => DoRequest<IEqlDeleteRequest, EqlDeleteResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>eql.delete</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public Task<EqlDeleteResponse> DeleteAsync(IEqlDeleteRequest request, CancellationToken ct = default) => DoRequestAsync<IEqlDeleteRequest, EqlDeleteResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>eql.get</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>

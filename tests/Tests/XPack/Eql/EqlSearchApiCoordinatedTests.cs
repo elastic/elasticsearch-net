@@ -17,7 +17,6 @@
  * under the License.
  */
 
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
@@ -38,6 +37,7 @@ namespace Tests.XPack.Eql
 		private const string StatusStep = nameof(StatusStep);
 		private const string GetStep = nameof(GetStep);
 		private const string WaitStep = nameof(WaitStep);
+		private const string DeleteStep = nameof(DeleteStep);
 
 		public EqlSearchApiCoordinatedTests(TimeSeriesCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, testOnlyOne: true)
 		{
@@ -96,6 +96,17 @@ namespace Tests.XPack.Eql
 					(v, c, r) => c.Eql.GetAsync<Log>(r),
 					uniqueValueSelector: values => values.ExtendedValue<string>("id")
 				)
+			},
+			{DeleteStep, u =>
+				u.Calls<EqlDeleteDescriptor, EqlDeleteRequest, IEqlDeleteRequest, EqlDeleteResponse>(
+					v => new EqlDeleteRequest(v),
+					(v, d) => d,
+					(v, c, f) => c.Eql.Delete(v, f),
+					(v, c, f) => c.Eql.DeleteAsync(v, f),
+					(v, c, r) => c.Eql.Delete(r),
+					(v, c, r) => c.Eql.DeleteAsync(r),
+					uniqueValueSelector: values => values.ExtendedValue<string>("id")
+				)
 			}
 		}) { }
 
@@ -133,6 +144,12 @@ namespace Tests.XPack.Eql
 			firstEvent.Index.Should().StartWith("customlogs-");
 			firstEvent.Id.Should().NotBeNullOrEmpty();
 			firstEvent.Source.Event.Category.Should().BeOneOf(Log.EventCategories);
+		});
+
+		[I] public async Task EqlDeleteResponse() => await Assert<EqlDeleteResponse>(DeleteStep, r =>
+		{
+			r.ShouldBeValid();
+			r.Acknowledged.Should().BeTrue();
 		});
 	}
 }

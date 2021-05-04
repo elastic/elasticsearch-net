@@ -48,6 +48,27 @@ using Elasticsearch.Net.Specification.EqlApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
+	///<summary>Descriptor for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public partial class EqlDeleteDescriptor : RequestDescriptorBase<EqlDeleteDescriptor, EqlDeleteRequestParameters, IEqlDeleteRequest>, IEqlDeleteRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+		///<summary>/_eql/search/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public EqlDeleteDescriptor(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected EqlDeleteDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Id IEqlDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
+	// Request parameters
+	}
+
 	///<summary>Descriptor for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
 	public partial class EqlGetDescriptor : RequestDescriptorBase<EqlGetDescriptor, EqlGetRequestParameters, IEqlGetRequest>, IEqlGetRequest
 	{
