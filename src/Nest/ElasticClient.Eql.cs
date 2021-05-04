@@ -55,6 +55,30 @@ namespace Nest.Specification.EqlApi
 		}
 
 		/// <summary>
+		/// <c>GET</c> request to the <c>eql.get_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public EqlGetStatusResponse GetStatus(Id id, Func<EqlGetStatusDescriptor, IEqlGetStatusRequest> selector = null) => GetStatus(selector.InvokeOrDefault(new EqlGetStatusDescriptor(id: id)));
+		/// <summary>
+		/// <c>GET</c> request to the <c>eql.get_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public Task<EqlGetStatusResponse> GetStatusAsync(Id id, Func<EqlGetStatusDescriptor, IEqlGetStatusRequest> selector = null, CancellationToken ct = default) => GetStatusAsync(selector.InvokeOrDefault(new EqlGetStatusDescriptor(id: id)), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>eql.get_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public EqlGetStatusResponse GetStatus(IEqlGetStatusRequest request) => DoRequest<IEqlGetStatusRequest, EqlGetStatusResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>eql.get_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>
+		/// </summary>
+		public Task<EqlGetStatusResponse> GetStatusAsync(IEqlGetStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IEqlGetStatusRequest, EqlGetStatusResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>eql.search</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</a>

@@ -48,6 +48,27 @@ using Elasticsearch.Net.Specification.EqlApi;
 // ReSharper disable RedundantNameQualifier
 namespace Nest
 {
+	///<summary>Descriptor for GetStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
+	public partial class EqlGetStatusDescriptor : RequestDescriptorBase<EqlGetStatusDescriptor, EqlGetStatusRequestParameters, IEqlGetStatusRequest>, IEqlGetStatusRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
+		///<summary>/_eql/search/status/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public EqlGetStatusDescriptor(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected EqlGetStatusDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Id IEqlGetStatusRequest.Id => Self.RouteValues.Get<Id>("id");
+	// Request parameters
+	}
+
 	///<summary>Descriptor for Search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
 	public partial class EqlSearchDescriptor<TInferDocument> : RequestDescriptorBase<EqlSearchDescriptor<TInferDocument>, EqlSearchRequestParameters, IEqlSearchRequest<TInferDocument>>, IEqlSearchRequest<TInferDocument>
 	{

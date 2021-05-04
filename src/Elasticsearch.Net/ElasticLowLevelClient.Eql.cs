@@ -86,13 +86,13 @@ namespace Elasticsearch.Net.Specification.EqlApi
 		///<summary>GET on /_eql/search/status/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
 		///<param name = "id">The async search ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse GetStatus<TResponse>(string id, GetStatusRequestParameters requestParameters = null)
+		public TResponse GetStatus<TResponse>(string id, EqlGetStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_eql/search/status/{id:id}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_eql/search/status/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
 		///<param name = "id">The async search ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("eql.get_status", "id")]
-		public Task<TResponse> GetStatusAsync<TResponse>(string id, GetStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> GetStatusAsync<TResponse>(string id, EqlGetStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_eql/search/status/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_eql/search <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
