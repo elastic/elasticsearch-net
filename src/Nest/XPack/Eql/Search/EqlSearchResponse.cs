@@ -59,31 +59,31 @@ namespace Nest
 		/// Identifier for the search.
 		/// </summary>
 		[DataMember(Name = "id")]
-		public Id Id { get; internal set; }
+		public string Id { get; internal set; }
 
 		/// <summary>
 		/// If true, the response does not contain complete search results.
 		/// </summary>
 		[DataMember(Name = "is_partial")]
-		public bool? IsPartial { get; internal set; }
+		public bool IsPartial { get; internal set; }
 
 		/// <summary>
 		/// If true, the search request is still executing.
 		/// </summary>
 		[DataMember(Name = "is_running")]
-		public bool? IsRunning { get; internal set; }
+		public bool IsRunning { get; internal set; }
 
 		/// <summary>
 		/// Milliseconds it took Elasticsearch to execute the request.
 		/// </summary>
 		[DataMember(Name = "took")]
-		public int Took { get; internal set; }
+		public long Took { get; internal set; }
 
 		/// <summary>
 		/// If true, the request timed out before completion.
 		/// </summary>
 		[DataMember(Name = "timed_out")]
-		public bool? TimedOut { get; internal set; }
+		public bool TimedOut { get; internal set; }
 
 		/// <summary>
 		/// The total number of hits.

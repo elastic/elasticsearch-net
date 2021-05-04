@@ -36,30 +36,30 @@ namespace Nest
 		/// For a running search shows a timestamp when the eql search started, in milliseconds since the Unix epoch.
 		/// </summary>
 		[DataMember(Name = "expiration_time_in_millis")]
-		public int ExpirationTimeInMillis { get; internal set; }
+		public long ExpirationTimeInMillis { get; internal set; }
 
 		/// <summary>
 		/// Identifier for the search.
 		/// </summary>
 		[DataMember(Name = "id")]
-		public Id Id { get; internal set; }
+		public string Id { get; internal set; }
 
 		/// <summary>
 		/// If true, the response does not contain complete search results.
 		/// </summary>
 		[DataMember(Name = "is_partial")]
-		public bool? IsPartial { get; internal set; }
+		public bool IsPartial { get; internal set; }
 
 		/// <summary>
 		/// If true, the search request is still executing. If false, the search is completed.
 		/// </summary>
 		[DataMember(Name = "is_running")]
-		public bool? IsRunning { get; internal set; }
+		public bool IsRunning { get; internal set; }
 
 		/// <summary>
 		/// For a running search shows a timestamp when the eql search started, in milliseconds since the Unix epoch.
 		/// </summary>
 		[DataMember(Name = "start_time_in_millis")]
-		public int StartTimeInMillis { get; internal set; }
+		public long StartTimeInMillis { get; internal set; }
 	}
 }
