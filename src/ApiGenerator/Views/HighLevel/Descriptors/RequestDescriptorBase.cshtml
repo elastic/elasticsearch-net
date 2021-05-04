@@ -1,5 +1,6 @@
 @using ApiGenerator.Domain
 @inherits ApiGenerator.CodeTemplatePage<RestApiSpec>
+@{ await IncludeAsync("GeneratorNotice.cshtml", Model); }
 using System.Collections.Generic;
 
 namespace Nest
