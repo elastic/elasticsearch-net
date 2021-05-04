@@ -32,6 +32,12 @@ for f in $(git ls-files | grep '\.cs$'); do
     fi
 done
 
+for f in $(git ls-files | grep '\.fs$'); do
+    if ! check_license_header $f; then
+        nErrors=$((nErrors+1))
+    fi
+done
+
 if [[ $nErrors -eq 0 ]]; then
     exit 0
 else
