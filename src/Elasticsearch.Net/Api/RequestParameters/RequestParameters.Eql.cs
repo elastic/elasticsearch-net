@@ -50,7 +50,7 @@ namespace Elasticsearch.Net.Specification.EqlApi
 	}
 
 	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html</para></summary>
-	public class GetRequestParameters : RequestParameters<GetRequestParameters>
+	public class EqlGetRequestParameters : RequestParameters<EqlGetRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
