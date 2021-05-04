@@ -36,8 +36,9 @@ namespace Tests.XPack.MachineLearning.PreviewDataFeed
 		protected override bool ExpectIsValid => true;
 		protected override object ExpectJson => null;
 		protected override int ExpectStatusCode => 200;
-		protected override Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> Fluent => f => f;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> Fluent => f => f.DatafeedId(CallIsolatedValue + "-datafeed");
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override PreviewDatafeedRequest Initializer => new PreviewDatafeedRequest(CallIsolatedValue + "-datafeed");
 		protected override bool SupportsDeserialization => false;
 		protected override string UrlPath => $"/_ml/datafeeds/{CallIsolatedValue}-datafeed/_preview";
@@ -52,8 +53,8 @@ namespace Tests.XPack.MachineLearning.PreviewDataFeed
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.MachineLearning.PreviewDatafeed<Metric>(CallIsolatedValue + "-datafeed", f),
-			(client, f) => client.MachineLearning.PreviewDatafeedAsync<Metric>(CallIsolatedValue + "-datafeed", f),
+			(client, f) => client.MachineLearning.PreviewDatafeed<Metric>(f),
+			(client, f) => client.MachineLearning.PreviewDatafeedAsync<Metric>(f),
 			(client, r) => client.MachineLearning.PreviewDatafeed<Metric>(r),
 			(client, r) => client.MachineLearning.PreviewDatafeedAsync<Metric>(r)
 		);
