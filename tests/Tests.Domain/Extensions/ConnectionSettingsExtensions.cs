@@ -51,6 +51,9 @@ namespace Tests.Domain.Extensions
 			)
 			.DefaultMappingFor<Shape>(map => map
 				.IndexName("shapes")
+			)
+			.DefaultMappingFor<Log>(map => map
+				.IndexName("customlogs-*")
 			);
 	}
 }

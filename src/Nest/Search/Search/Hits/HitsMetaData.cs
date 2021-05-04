@@ -36,8 +36,7 @@ namespace Nest
 		[DataMember(Name = "total")]
 		TotalHits Total { get; }
 	}
-
-
+	
 	public class HitsMetadata<T> : IHitsMetadata<T>
 		where T : class
 	{

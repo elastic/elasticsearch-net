@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 // ███╗   ██╗ ██████╗ ████████╗██╗ ██████╗███████╗
 // ████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝██╔════╝
 // ██╔██╗ ██║██║   ██║   ██║   ██║██║     █████╗  
@@ -76,7 +75,7 @@ namespace Nest
 		public DeleteVotingConfigExclusionsDescriptor WaitForRemoval(bool? waitforremoval = true) => Qs("wait_for_removal", waitforremoval);
 	}
 
-	///<summary>Descriptor for GetSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
+	///<summary>Descriptor for GetSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-get-settings.html</para></summary>
 	public partial class ClusterGetSettingsDescriptor : RequestDescriptorBase<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetSettings;

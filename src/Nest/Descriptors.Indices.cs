@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 // ███╗   ██╗ ██████╗ ████████╗██╗ ██████╗███████╗
 // ████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝██╔════╝
 // ██╔██╗ ██║██║   ██║   ██║   ██║██║     █████╗  
@@ -893,7 +892,8 @@ namespace Nest
 		public GetMappingDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetMappingDescriptor<TDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>		[Obsolete("Scheduled to be removed in 7.0, Deprecated as of: 7.8.0, reason: This parameter is a no-op and field mappings are always retrieved locally.")]
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>		
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 7.8.0, reason: This parameter is a no-op and field mappings are always retrieved locally.")]
 		public GetMappingDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 		///<summary>Specify timeout for connection to master</summary>
 		public GetMappingDescriptor<TDocument> MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
@@ -992,9 +992,7 @@ namespace Nest
 	public partial class MigrateToDataStreamDescriptor : RequestDescriptorBase<MigrateToDataStreamDescriptor, MigrateToDataStreamRequestParameters, IMigrateToDataStreamRequest>, IMigrateToDataStreamRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesMigrateToDataStream;
-		
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		
 		protected override bool SupportsBody => false;
 		///<summary>/_data_stream/_migrate/{name}</summary>
 		///<param name = "name">this parameter is required</param>
@@ -1584,16 +1582,16 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public IndicesStatsDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters
-		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `completion` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields(Fields completionfields) => Qs("completion_fields", completionfields);
-		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `completion` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields)
 			where T : class => Qs("completion_fields", fields?.Select(e => (Field)e));
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public IndicesStatsDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
-		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields(Fields fielddatafields) => Qs("fielddata_fields", fielddatafields);
-		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for the `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields)
 			where T : class => Qs("fielddata_fields", fields?.Select(e => (Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>

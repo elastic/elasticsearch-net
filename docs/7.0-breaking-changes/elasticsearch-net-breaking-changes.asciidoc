@@ -5206,13 +5206,13 @@ type:: deleted
 type:: deleted
 
 [discrete]
-==== `Elasticsearch.Net.Utf8Json.Formatters.EnumFormatterHelper`
+==== `Nest.Utf8Json.Formatters.EnumFormatterHelper`
 
 [horizontal]
 type:: added
 
 [discrete]
-==== `Elasticsearch.Net.Utf8Json.JsonParsingException`
+==== `Nest.Utf8Json.JsonParsingException`
 
 [horizontal]
 type:: added
