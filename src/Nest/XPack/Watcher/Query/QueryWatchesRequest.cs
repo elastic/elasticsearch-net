@@ -5,9 +5,23 @@
 namespace Nest
 {
 	[MapsApi("watcher.query_watches.json")]
-	public partial interface IQueryWatchRequest { }
+	[ReadAs(typeof(QueryWatchesRequest))]
+	public partial interface IQueryWatchesRequest
+	{
+		/// <summary>
+		///  Sort values that can be used to start returning results "after" any document in the result list.
+		/// </summary>
+		//[DataMember(Name = "search_after")]
+		//IList<object> SearchAfter { get; set; }
+	}
 
-	public partial class QueryWatchRequest { }
+	/// <inheritdoc cref="IQueryWatchesRequest" />
+	public partial class QueryWatchesRequest
+	{
+		/// <inheritdoc />
+		//public IList<object> SearchAfter { get; set; }
+	}
 
-	public partial class QueryWatchDescriptor { }
+	/// <inheritdoc cref="IQueryWatchesRequest" />
+	public partial class QueryWatchesDescriptor { }
 }
