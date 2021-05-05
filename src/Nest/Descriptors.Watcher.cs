@@ -220,6 +220,8 @@ namespace Nest
 	public partial class QueryWatchesDescriptor : RequestDescriptorBase<QueryWatchesDescriptor, QueryWatchesRequestParameters, IQueryWatchesRequest>, IQueryWatchesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherQueryWatches;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
 	// values part of the url path
 	// Request parameters
 	}
