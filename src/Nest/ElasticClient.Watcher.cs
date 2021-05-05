@@ -208,6 +208,30 @@ namespace Nest.Specification.WatcherApi
 		/// </summary>
 		public Task<PutWatchResponse> PutAsync(IPutWatchRequest request, CancellationToken ct = default) => DoRequestAsync<IPutWatchRequest, PutWatchResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>watcher.query_watches</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-query-watches.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-query-watches.html</a>
+		/// </summary>
+		public QueryWatchesResponse QueryWatches(Func<QueryWatchesDescriptor, IQueryWatchesRequest> selector = null) => QueryWatches(selector.InvokeOrDefault(new QueryWatchesDescriptor()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>watcher.query_watches</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-query-watches.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-query-watches.html</a>
+		/// </summary>
+		public Task<QueryWatchesResponse> QueryWatchesAsync(Func<QueryWatchesDescriptor, IQueryWatchesRequest> selector = null, CancellationToken ct = default) => QueryWatchesAsync(selector.InvokeOrDefault(new QueryWatchesDescriptor()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>watcher.query_watches</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-query-watches.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-query-watches.html</a>
+		/// </summary>
+		public QueryWatchesResponse QueryWatches(IQueryWatchesRequest request) => DoRequest<IQueryWatchesRequest, QueryWatchesResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>watcher.query_watches</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-query-watches.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-query-watches.html</a>
+		/// </summary>
+		public Task<QueryWatchesResponse> QueryWatchesAsync(IQueryWatchesRequest request, CancellationToken ct = default) => DoRequestAsync<IQueryWatchesRequest, QueryWatchesResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>watcher.start</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</a>

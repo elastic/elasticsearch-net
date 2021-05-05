@@ -313,6 +313,20 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IQueryWatchesRequest : IRequest<QueryWatchesRequestParameters>
+	{
+	}
+
+	///<summary>Request for QueryWatches <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-query-watches.html</para></summary>
+	public partial class QueryWatchesRequest : PlainRequestBase<QueryWatchesRequestParameters>, IQueryWatchesRequest
+	{
+		protected IQueryWatchesRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherQueryWatches;
+	// values part of the url path
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters>
 	{
 	}
