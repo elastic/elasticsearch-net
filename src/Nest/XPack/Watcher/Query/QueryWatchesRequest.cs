@@ -75,8 +75,8 @@ namespace Nest
 		public QueryWatchesDescriptor From(int? from) => Assign(from, (a, v) => a.From = v);
 
 		/// <inheritdoc cref="IQueryWatchesRequest.Query" />
-		public QueryWatchesDescriptor Query<T>(Func<QueryContainerDescriptor<T>, QueryContainer> query) where T : class =>
-			Assign(query, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<T>()));
+		public QueryWatchesDescriptor Query(Func<QueryContainerDescriptor<Watch>, QueryContainer> query) =>
+			Assign(query, (a, v) => a.Query = v?.Invoke(new QueryContainerDescriptor<Watch>()));
 
 		/// <inheritdoc cref="IQueryWatchesRequest.SearchAfter" />
 		public QueryWatchesDescriptor SearchAfter(IEnumerable<object> searchAfter) =>
@@ -92,7 +92,7 @@ namespace Nest
 		public QueryWatchesDescriptor Size(int? size) => Assign(size, (a, v) => a.Size = v);
 
 		/// <inheritdoc cref="IQueryWatchesRequest.Sort" />
-		public QueryWatchesDescriptor Sort<T>(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) where T : class =>
-			Assign(selector, (a, v) => a.Sort = v?.Invoke(new SortDescriptor<T>())?.Value);
+		public QueryWatchesDescriptor Sort(Func<SortDescriptor<Watch>, IPromise<IList<ISort>>> selector) =>
+			Assign(selector, (a, v) => a.Sort = v?.Invoke(new SortDescriptor<Watch>())?.Value);
 	}
 }

@@ -13,6 +13,25 @@ namespace Nest
 		public int Count { get; internal set; }
 
 		[DataMember(Name = "watches")]
-		public IReadOnlyCollection<IWatch> Watch { get; internal set; }
+		public IReadOnlyCollection<WatchQueryResult> Watches { get; internal set; }
+	}
+
+	[DataContract]
+	public class WatchQueryResult
+	{
+		[DataMember(Name = "_id")]
+		public string Id { get; set; }
+
+		[DataMember(Name = "_primary_term")]
+		public int PrimaryTerm { get; set; }
+
+		[DataMember(Name = "_seq_no")]
+		public int SequenceNumber { get; set; }
+
+		[DataMember(Name = "status")]
+		public WatchStatus Status { get; set; }
+
+		[DataMember(Name = "watch")]
+		public IWatch Watch { get; set; }
 	}
 }
