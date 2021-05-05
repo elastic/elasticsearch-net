@@ -216,6 +216,14 @@ namespace Nest
 		public PutWatchDescriptor Version(long? version) => Qs("version", version);
 	}
 
+	///<summary>Descriptor for QueryWatches <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-query-watches.html</para></summary>
+	public partial class QueryWatchesDescriptor : RequestDescriptorBase<QueryWatchesDescriptor, QueryWatchesRequestParameters, IQueryWatchesRequest>, IQueryWatchesRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherQueryWatches;
+	// values part of the url path
+	// Request parameters
+	}
+
 	///<summary>Descriptor for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</para></summary>
 	public partial class StartWatcherDescriptor : RequestDescriptorBase<StartWatcherDescriptor, StartWatcherRequestParameters, IStartWatcherRequest>, IStartWatcherRequest
 	{

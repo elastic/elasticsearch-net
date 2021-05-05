@@ -322,6 +322,7 @@ namespace Nest
 		internal static ApiUrls WatcherExecute = new ApiUrls(new[]{"_watcher/watch/{id}/_execute", "_watcher/watch/_execute"});
 		internal static ApiUrls WatcherGet = new ApiUrls(new[]{"_watcher/watch/{id}"});
 		internal static ApiUrls WatcherPut = new ApiUrls(new[]{"_watcher/watch/{id}"});
+		internal static ApiUrls WatcherQueryWatches = new ApiUrls(new[]{"_watcher/_query/watches"});
 		internal static ApiUrls WatcherStart = new ApiUrls(new[]{"_watcher/_start"});
 		internal static ApiUrls WatcherStats = new ApiUrls(new[]{"_watcher/stats", "_watcher/stats/{metric}"});
 		internal static ApiUrls WatcherStop = new ApiUrls(new[]{"_watcher/_stop"});
