@@ -204,6 +204,11 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
+	///<summary>Request options for EnrollNode <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enroll-node.html</para></summary>
+	public class EnrollNodeRequestParameters : RequestParameters<EnrollNodeRequestParameters>
+	{
+	}
+
 	///<summary>Request options for GetApiKey <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</para></summary>
 	public class GetApiKeyRequestParameters : RequestParameters<GetApiKeyRequestParameters>
 	{

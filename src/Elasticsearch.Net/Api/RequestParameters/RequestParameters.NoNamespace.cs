@@ -1972,6 +1972,11 @@ namespace Elasticsearch.Net
 		}
 	}
 
+	///<summary>Request options for Termsenum <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html</para></summary>
+	public class TermsenumRequestParameters : RequestParameters<TermsenumRequestParameters>
+	{
+	}
+
 	///<summary>Request options for TermVectors <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</para></summary>
 	public class TermVectorsRequestParameters : RequestParameters<TermVectorsRequestParameters>
 	{
