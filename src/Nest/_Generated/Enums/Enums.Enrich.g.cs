@@ -27,9 +27,9 @@ namespace Nest
 		Scheduled,
 		[EnumMember(Value = "RUNNING")]
 		Running,
-		[EnumMember(Value = "COMPLETE")]
-		Complete,
 		[EnumMember(Value = "FAILED")]
-		Failed
+		Failed,
+		[EnumMember(Value = "COMPLETE")]
+		Complete
 	}
 }

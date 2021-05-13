@@ -23,28 +23,28 @@ namespace Nest
 {
 	public enum BoundaryScanner
 	{
-		[EnumMember(Value = "chars")]
-		Chars,
+		[EnumMember(Value = "word")]
+		Word,
 		[EnumMember(Value = "sentence")]
 		Sentence,
-		[EnumMember(Value = "word")]
-		Word
+		[EnumMember(Value = "chars")]
+		Chars
 	}
 
 	public enum HighlighterEncoder
 	{
-		[EnumMember(Value = "default")]
-		Default,
 		[EnumMember(Value = "html")]
-		Html
+		Html,
+		[EnumMember(Value = "default")]
+		Default
 	}
 
 	public enum HighlighterFragmenter
 	{
-		[EnumMember(Value = "simple")]
-		Simple,
 		[EnumMember(Value = "span")]
-		Span
+		Span,
+		[EnumMember(Value = "simple")]
+		Simple
 	}
 
 	public enum HighlighterOrder
@@ -61,64 +61,64 @@ namespace Nest
 
 	public enum HighlighterType
 	{
+		[EnumMember(Value = "unified")]
+		Unified,
 		[EnumMember(Value = "plain")]
 		Plain,
 		[EnumMember(Value = "fvh")]
-		Fvh,
-		[EnumMember(Value = "unified")]
-		Unified
+		Fvh
 	}
 
 	public enum ScoreMode
 	{
-		[EnumMember(Value = "avg")]
-		Avg,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "min")]
-		Min,
+		[EnumMember(Value = "total")]
+		Total,
 		[EnumMember(Value = "multiply")]
 		Multiply,
-		[EnumMember(Value = "total")]
-		Total
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
 	}
 
 	public enum SortMode
 	{
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
 		[EnumMember(Value = "sum")]
 		Sum,
-		[EnumMember(Value = "avg")]
-		Avg,
+		[EnumMember(Value = "min")]
+		Min,
 		[EnumMember(Value = "median")]
-		Median
+		Median,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
 	}
 
 	public enum SortOrder
 	{
-		[EnumMember(Value = "asc")]
-		Asc,
 		[EnumMember(Value = "desc")]
 		Desc,
+		[EnumMember(Value = "asc")]
+		Asc,
 		[EnumMember(Value = "_doc")]
-		Doc
+		Document
 	}
 
 	public enum StringDistance
 	{
-		[EnumMember(Value = "internal")]
-		Internal,
-		[EnumMember(Value = "damerau_levenshtein")]
-		DamerauLevenshtein,
+		[EnumMember(Value = "ngram")]
+		Ngram,
 		[EnumMember(Value = "levenshtein")]
 		Levenshtein,
 		[EnumMember(Value = "jaro_winkler")]
 		JaroWinkler,
-		[EnumMember(Value = "ngram")]
-		Ngram
+		[EnumMember(Value = "internal")]
+		Internal,
+		[EnumMember(Value = "damerau_levenshtein")]
+		DamerauLevenshtein
 	}
 
 	public enum SuggestSort
@@ -131,9 +131,9 @@ namespace Nest
 
 	public enum TotalHitsRelation
 	{
-		[EnumMember(Value = "eq")]
-		Eq,
 		[EnumMember(Value = "gte")]
-		Gte
+		Gte,
+		[EnumMember(Value = "eq")]
+		Eq
 	}
 }

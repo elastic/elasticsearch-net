@@ -23,35 +23,35 @@ namespace Nest
 {
 	public enum LicenseStatus
 	{
-		[EnumMember(Value = "active")]
-		Active,
 		[EnumMember(Value = "valid")]
 		Valid,
 		[EnumMember(Value = "invalid")]
 		Invalid,
 		[EnumMember(Value = "expired")]
-		Expired
+		Expired,
+		[EnumMember(Value = "active")]
+		Active
 	}
 
 	public enum LicenseType
 	{
-		[EnumMember(Value = "missing")]
-		Missing,
 		[EnumMember(Value = "trial")]
 		Trial,
-		[EnumMember(Value = "basic")]
-		Basic,
 		[EnumMember(Value = "standard")]
 		Standard,
-		[EnumMember(Value = "dev")]
-		Dev,
 		[EnumMember(Value = "silver")]
 		Silver,
-		[EnumMember(Value = "gold")]
-		Gold,
 		[EnumMember(Value = "platinum")]
 		Platinum,
+		[EnumMember(Value = "missing")]
+		Missing,
+		[EnumMember(Value = "gold")]
+		Gold,
 		[EnumMember(Value = "enterprise")]
-		Enterprise
+		Enterprise,
+		[EnumMember(Value = "dev")]
+		Dev,
+		[EnumMember(Value = "basic")]
+		Basic
 	}
 }

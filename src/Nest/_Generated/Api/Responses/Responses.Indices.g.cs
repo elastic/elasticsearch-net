@@ -16,40 +16,34 @@
 //
 // ------------------------------------------------
 
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Nest
 {
-	public class DeleteIndexResponse : IndicesResponseBase
+	public class IndicesCreateResponse : AcknowledgedResponseBase
 	{
-	}
+		[JsonPropertyName("index")]
+		public IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 
-	public class DeleteAliasResponse : ResponseBase
-	{
-	}
-
-	public class IndicesDeleteDataStreamResponse : AcknowledgedResponseBase
-	{
-	}
-
-	public class DeleteIndexTemplateResponse : AcknowledgedResponseBase
-	{
-	}
-
-	public class IndexTemplateExistsResponse : ResponseBase
-	{
-	}
-
-	public class GetFieldMappingResponse : DictionaryResponseBase
-	{
-	}
-
-	public class GetMappingResponse : DictionaryResponseBase
-	{
-	}
-
-	public class PutMappingResponse : IndicesResponseBase
-	{
+		[JsonPropertyName("shards_acknowledged")]
+		public bool ShardsAcknowledged
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 }

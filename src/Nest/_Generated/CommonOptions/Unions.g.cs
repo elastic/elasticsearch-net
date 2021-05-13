@@ -16,104 +16,146 @@
 //
 // ------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using OneOf;
+
+#nullable restore
 namespace Nest
 {
-	public partial class ByteSize : Union<long, string>
+	public partial class MultiGetId
 	{
-		public ByteSize(long item) : base(item)
-		{
-		}
-
-		public ByteSize(string item) : base(item)
-		{
-		}
 	}
 
-	public partial class EpochMillis : Union<string, long>
+	public partial class Context
 	{
-		public EpochMillis(string item) : base(item)
-		{
-		}
-
-		public EpochMillis(long item) : base(item)
-		{
-		}
 	}
 
-	public partial class Fuzziness : Union<string, int>
+	public partial class Sort
 	{
-		public Fuzziness(string item) : base(item)
-		{
-		}
-
-		public Fuzziness(int item) : base(item)
-		{
-		}
 	}
 
-	public partial class MinimumShouldMatch : Union<int, string>
+	public partial class SortCombinations
 	{
-		public MinimumShouldMatch(int item) : base(item)
-		{
-		}
-
-		public MinimumShouldMatch(string item) : base(item)
-		{
-		}
 	}
 
-	public partial class MultiGetId : Union<string, int>
+	public partial class ByteSize
 	{
-		public MultiGetId(string item) : base(item)
-		{
-		}
-
-		public MultiGetId(int item) : base(item)
-		{
-		}
 	}
 
-	public partial class Percentage : Union<string, float>
+	public partial class EpochMillis
 	{
-		public Percentage(string item) : base(item)
-		{
-		}
-
-		public Percentage(float item) : base(item)
-		{
-		}
 	}
 
-	public partial class Refresh : Union<bool, RefreshOptions>
+	public partial class Fuzziness
 	{
-		public Refresh(bool item) : base(item)
-		{
-		}
-
-		public Refresh(RefreshOptions item) : base(item)
-		{
-		}
 	}
 
-	public partial class Time : Union<string, int>
+	public partial class Indices
 	{
-		public Time(string item) : base(item)
-		{
-		}
-
-		public Time(int item) : base(item)
-		{
-		}
 	}
 
-	public partial class WaitForActiveShards : Union<int, WaitForActiveShardOptions>
+	public partial class MinimumShouldMatch
 	{
-		public WaitForActiveShards(int item) : base(item)
-		{
-		}
+	}
 
-		public WaitForActiveShards(WaitForActiveShardOptions item) : base(item)
-		{
-		}
+	public partial class Percentage
+	{
+	}
+
+	public partial class Refresh
+	{
+	}
+
+	public partial class Script
+	{
+	}
+
+	public partial class Time
+	{
+	}
+
+	public partial class WaitForActiveShards
+	{
+	}
+
+	public partial class Bucket
+	{
+	}
+
+	public partial class MetricAggregate
+	{
+	}
+
+	public partial class Missing
+	{
+	}
+
+	public partial class MovingAverageSettings
+	{
+	}
+
+	public partial class TermsAggregationOrder
+	{
+	}
+
+	public partial class CharFilter
+	{
+	}
+
+	public partial class StopWords
+	{
+	}
+
+	public partial class TokenFilter
+	{
+	}
+
+	public partial class Tokenizer
+	{
+	}
+
+	public partial class CoreProperty
+	{
+	}
+
+	public partial class DocValuesProperty
+	{
+	}
+
+	public partial class RangeProperty
+	{
+	}
+
+	public partial class DecayFunction
+	{
+	}
+
+	public partial class GeoCoordinate
+	{
+	}
+
+	public partial class GeoLocation
+	{
+	}
+
+	public partial class Like
+	{
+	}
+
+	public partial class TextToAnalyze
+	{
+	}
+
+	public partial class DataframeAnalysisAnalyzedFields
+	{
+	}
+
+	public partial class RoleTemplate
+	{
+	}
+
+	public partial class UrlConfig
+	{
 	}
 }

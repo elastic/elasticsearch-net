@@ -21,204 +21,188 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest
 {
-	public enum AcknowledgementState
+	public enum AcknowledgementOptions
 	{
 		[EnumMember(Value = "awaits_successful_execution")]
 		AwaitsSuccessfulExecution,
-		[EnumMember(Value = "ackable")]
-		Ackable,
 		[EnumMember(Value = "acked")]
-		Acked
+		Acked,
+		[EnumMember(Value = "ackable")]
+		Ackable
 	}
 
 	public enum ActionExecutionMode
 	{
+		[EnumMember(Value = "skip")]
+		Skip,
 		[EnumMember(Value = "simulate")]
 		Simulate,
 		[EnumMember(Value = "force_simulate")]
 		ForceSimulate,
-		[EnumMember(Value = "execute")]
-		Execute,
 		[EnumMember(Value = "force_execute")]
 		ForceExecute,
-		[EnumMember(Value = "skip")]
-		Skip
+		[EnumMember(Value = "execute")]
+		Execute
 	}
 
-	public enum ActionExecutionState
+	public enum ActionStatusOptions
 	{
-		[EnumMember(Value = "awaits_execution")]
-		AwaitsExecution,
-		[EnumMember(Value = "checking")]
-		Checking,
-		[EnumMember(Value = "execution_not_needed")]
-		ExecutionNotNeeded,
 		[EnumMember(Value = "throttled")]
 		Throttled,
-		[EnumMember(Value = "executed")]
-		Executed,
-		[EnumMember(Value = "failed")]
-		Failed,
-		[EnumMember(Value = "deleted_while_queued")]
-		DeletedWhileQueued,
-		[EnumMember(Value = "not_executed_already_queued")]
-		NotExecutedAlreadyQueued
+		[EnumMember(Value = "success")]
+		Success,
+		[EnumMember(Value = "simulated")]
+		Simulated,
+		[EnumMember(Value = "failure")]
+		Failure
 	}
 
 	public enum ActionType
 	{
-		[EnumMember(Value = "email")]
-		Email,
 		[EnumMember(Value = "webhook")]
 		Webhook,
-		[EnumMember(Value = "index")]
-		Index,
-		[EnumMember(Value = "logging")]
-		Logging,
 		[EnumMember(Value = "slack")]
 		Slack,
 		[EnumMember(Value = "pagerduty")]
-		Pagerduty
+		Pagerduty,
+		[EnumMember(Value = "logging")]
+		Logging,
+		[EnumMember(Value = "index")]
+		Index,
+		[EnumMember(Value = "email")]
+		Email
 	}
 
 	public enum ConditionType
 	{
-		[EnumMember(Value = "always")]
-		Always,
-		[EnumMember(Value = "never")]
-		Never,
 		[EnumMember(Value = "script")]
 		Script,
+		[EnumMember(Value = "never")]
+		Never,
 		[EnumMember(Value = "compare")]
 		Compare,
 		[EnumMember(Value = "array_compare")]
-		ArrayCompare
+		ArrayCompare,
+		[EnumMember(Value = "always")]
+		Always
 	}
 
 	public enum ConnectionScheme
 	{
-		[EnumMember(Value = "http")]
-		Http,
 		[EnumMember(Value = "https")]
-		Https
+		Https,
+		[EnumMember(Value = "http")]
+		Http
 	}
 
 	public enum Day
 	{
-		[EnumMember(Value = "sunday")]
-		Sunday,
-		[EnumMember(Value = "monday")]
-		Monday,
-		[EnumMember(Value = "tuesday")]
-		Tuesday,
 		[EnumMember(Value = "wednesday")]
 		Wednesday,
+		[EnumMember(Value = "tuesday")]
+		Tuesday,
 		[EnumMember(Value = "thursday")]
 		Thursday,
-		[EnumMember(Value = "friday")]
-		Friday,
+		[EnumMember(Value = "sunday")]
+		Sunday,
 		[EnumMember(Value = "saturday")]
-		Saturday
-	}
-
-	public enum EmailPriority
-	{
-		[EnumMember(Value = "lowest")]
-		Lowest,
-		[EnumMember(Value = "low")]
-		Low,
-		[EnumMember(Value = "normal")]
-		Normal,
-		[EnumMember(Value = "high")]
-		High,
-		[EnumMember(Value = "highest")]
-		Highest
+		Saturday,
+		[EnumMember(Value = "monday")]
+		Monday,
+		[EnumMember(Value = "friday")]
+		Friday
 	}
 
 	public enum ExecutionPhase
 	{
-		[EnumMember(Value = "awaits_execution")]
-		AwaitsExecution,
+		[EnumMember(Value = "watch_transform")]
+		WatchTransform,
 		[EnumMember(Value = "started")]
 		Started,
 		[EnumMember(Value = "input")]
 		Input,
+		[EnumMember(Value = "finished")]
+		Finished,
 		[EnumMember(Value = "condition")]
 		Condition,
+		[EnumMember(Value = "awaits_execution")]
+		AwaitsExecution,
 		[EnumMember(Value = "actions")]
 		Actions,
-		[EnumMember(Value = "watch_transform")]
-		WatchTransform,
 		[EnumMember(Value = "aborted")]
-		Aborted,
-		[EnumMember(Value = "finished")]
-		Finished
+		Aborted
+	}
+
+	public enum ExecutionStatus
+	{
+		[EnumMember(Value = "throttled")]
+		Throttled,
+		[EnumMember(Value = "not_executed_already_queued")]
+		NotExecutedAlreadyQueued,
+		[EnumMember(Value = "failed")]
+		Failed,
+		[EnumMember(Value = "execution_not_needed")]
+		ExecutionNotNeeded,
+		[EnumMember(Value = "executed")]
+		Executed,
+		[EnumMember(Value = "deleted_while_queued")]
+		DeletedWhileQueued,
+		[EnumMember(Value = "checking")]
+		Checking,
+		[EnumMember(Value = "awaits_execution")]
+		AwaitsExecution
 	}
 
 	public enum HttpInputMethod
 	{
+		[EnumMember(Value = "put")]
+		Put,
+		[EnumMember(Value = "post")]
+		Post,
 		[EnumMember(Value = "head")]
 		Head,
 		[EnumMember(Value = "get")]
 		Get,
-		[EnumMember(Value = "post")]
-		Post,
-		[EnumMember(Value = "put")]
-		Put,
 		[EnumMember(Value = "delete")]
 		Delete
 	}
 
 	public enum InputType
 	{
-		[EnumMember(Value = "http")]
-		Http,
+		[EnumMember(Value = "simple")]
+		Simple,
 		[EnumMember(Value = "search")]
 		Search,
-		[EnumMember(Value = "simple")]
-		Simple
-	}
-
-	public enum IntervalUnit
-	{
-		[EnumMember(Value = "s")]
-		s,
-		[EnumMember(Value = "m")]
-		m,
-		[EnumMember(Value = "h")]
-		h,
-		[EnumMember(Value = "d")]
-		d,
-		[EnumMember(Value = "w")]
-		w
+		[EnumMember(Value = "http")]
+		Http
 	}
 
 	public enum Month
 	{
-		[EnumMember(Value = "january")]
-		January,
-		[EnumMember(Value = "february")]
-		February,
-		[EnumMember(Value = "march")]
-		March,
-		[EnumMember(Value = "april")]
-		April,
-		[EnumMember(Value = "may")]
-		May,
-		[EnumMember(Value = "june")]
-		June,
-		[EnumMember(Value = "july")]
-		July,
-		[EnumMember(Value = "august")]
-		August,
 		[EnumMember(Value = "september")]
 		September,
 		[EnumMember(Value = "october")]
 		October,
 		[EnumMember(Value = "november")]
 		November,
+		[EnumMember(Value = "may")]
+		May,
+		[EnumMember(Value = "march")]
+		March,
+		[EnumMember(Value = "june")]
+		June,
+		[EnumMember(Value = "july")]
+		July,
+		[EnumMember(Value = "january")]
+		January,
+		[EnumMember(Value = "february")]
+		February,
 		[EnumMember(Value = "december")]
-		December
+		December,
+		[EnumMember(Value = "august")]
+		August,
+		[EnumMember(Value = "april")]
+		April
 	}
 
 	public enum PagerDutyContextType
@@ -249,35 +233,35 @@ namespace Nest
 
 	public enum ResponseContentType
 	{
-		[EnumMember(Value = "json")]
-		Json,
 		[EnumMember(Value = "yaml")]
 		Yaml,
 		[EnumMember(Value = "text")]
-		Text
+		Text,
+		[EnumMember(Value = "json")]
+		Json
 	}
 
-	public enum Status
+	public enum WatcherMetric
 	{
-		[EnumMember(Value = "success")]
-		Success,
-		[EnumMember(Value = "failure")]
-		Failure,
-		[EnumMember(Value = "simulated")]
-		Simulated,
-		[EnumMember(Value = "throttled")]
-		Throttled
+		[EnumMember(Value = "queued_watches")]
+		QueuedWatches,
+		[EnumMember(Value = "pending_watches")]
+		PendingWatches,
+		[EnumMember(Value = "current_watches")]
+		CurrentWatches,
+		[EnumMember(Value = "_all")]
+		All
 	}
 
 	public enum WatcherState
 	{
+		[EnumMember(Value = "stopping")]
+		Stopping,
 		[EnumMember(Value = "stopped")]
 		Stopped,
 		[EnumMember(Value = "starting")]
 		Starting,
 		[EnumMember(Value = "started")]
-		Started,
-		[EnumMember(Value = "stopping")]
-		Stopping
+		Started
 	}
 }

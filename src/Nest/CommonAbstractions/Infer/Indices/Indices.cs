@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,7 +7,7 @@ using Elastic.Transport;
 namespace Nest
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
-	public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
+	public partial class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
 	{
 		internal Indices(AllIndicesMarker all) : base(all) { }
 
@@ -27,10 +23,9 @@ namespace Nest
 
 		private string DebugDisplay => Match(
 			all => "_all",
-			types => $"Count: {types.Indices.Count} [" + string.Join(",", types.Indices.Select((t, i) => $"({i + 1}: {t.DebugDisplay})")) + "]"
+			types => $"Count: {types.Indices.Count} [" +
+			         string.Join(",", types.Indices.Select((t, i) => $"({i + 1}: {t.DebugDisplay})")) + "]"
 		);
-
-		public override string ToString() => DebugDisplay;
 
 		string IUrlParameter.GetString(ITransportConfiguration settings) => Match(
 			all => "_all",
@@ -45,6 +40,8 @@ namespace Nest
 				return string.Join(",", indices);
 			}
 		);
+
+		public override string ToString() => DebugDisplay;
 
 		public static IndexName Index(string index) => index;
 
@@ -76,9 +73,11 @@ namespace Nest
 
 		public static implicit operator Indices(IndexName[] many) => many.IsEmpty() ? null : new ManyIndices(many);
 
-		public static implicit operator Indices(IndexName index) => index == null ? null : new ManyIndices(new[] { index });
+		public static implicit operator Indices(IndexName index) =>
+			index == null ? null : new ManyIndices(new[] {index});
 
-		public static implicit operator Indices(Type type) => type == null ? null : new ManyIndices(new IndexName[] { type });
+		public static implicit operator Indices(Type type) =>
+			type == null ? null : new ManyIndices(new IndexName[] {type});
 
 		public static bool operator ==(Indices left, Indices right) => Equals(left, right);
 
@@ -98,7 +97,8 @@ namespace Nest
 			);
 		}
 
-		private static bool EqualsAllIndices(IReadOnlyList<IndexName> thisIndices, IReadOnlyList<IndexName> otherIndices)
+		private static bool EqualsAllIndices(IReadOnlyList<IndexName> thisIndices,
+			IReadOnlyList<IndexName> otherIndices)
 		{
 			if (thisIndices == null && otherIndices == null)
 				return true;
@@ -122,7 +122,8 @@ namespace Nest
 		{
 			private readonly List<IndexName> _indices = new List<IndexName>();
 
-			internal ManyIndices(IEnumerable<IndexName> indices) => _indices.AddRange(indices.NotEmpty(nameof(indices)));
+			internal ManyIndices(IEnumerable<IndexName> indices) =>
+				_indices.AddRange(indices.NotEmpty(nameof(indices)));
 
 			internal ManyIndices(IEnumerable<string> indices) =>
 				_indices.AddRange(indices.NotEmpty(nameof(indices)).Select(s => (IndexName)s));

@@ -16,50 +16,12 @@
 //
 // ------------------------------------------------
 
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Nest
 {
-	public class ClosePointInTimeResponse : ResponseBase
-	{
-		[JsonPropertyName("succeeded")]
-		public bool Succeeded
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("num_freed")]
-		public int NumFreed
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public class OpenPointInTimeResponse : ResponseBase
-	{
-		[JsonPropertyName("id")]
-		public Id Id
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-	}
-
 	public class PingResponse : ResponseBase
 	{
 	}

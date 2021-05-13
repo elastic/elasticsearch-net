@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
@@ -25,90 +26,18 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
-    public class DeleteIndexRequestParameters : RequestParameters<DeleteIndexRequestParameters>
+    public class IndicesCreateRequestParameters : RequestParameters<IndicesCreateRequestParameters>
     {
-        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
-
-        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
-    }
-
-    public class DeleteAliasRequestParameters : RequestParameters<DeleteAliasRequestParameters>
-    {
-        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
-
-        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
-    }
-
-    public class IndicesDeleteDataStreamRequestParameters : RequestParameters<IndicesDeleteDataStreamRequestParameters>
-    {
-    }
-
-    public class DeleteIndexTemplateRequestParameters : RequestParameters<DeleteIndexTemplateRequestParameters>
-    {
-        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
-
-        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
-    }
-
-    public class IndexTemplateExistsRequestParameters : RequestParameters<IndexTemplateExistsRequestParameters>
-    {
-        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
-        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
-        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
-    }
-
-    public class GetFieldMappingRequestParameters : RequestParameters<GetFieldMappingRequestParameters>
-    {
-        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-        public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
-
+        [JsonIgnore]
         public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 
-        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-    }
-
-    public class GetMappingRequestParameters : RequestParameters<GetMappingRequestParameters>
-    {
-        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-        public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
-
-        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
-        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
-    }
-
-    public class PutMappingRequestParameters : RequestParameters<PutMappingRequestParameters>
-    {
-        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-        public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
-
+        [JsonIgnore]
         public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
+        [JsonIgnore]
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
-        public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
+        [JsonIgnore]
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
     }
 }

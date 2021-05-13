@@ -21,20 +21,6 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
-	public class ClosePointInTimeDescriptor : RequestDescriptorBase<ClosePointInTimeDescriptor, ClosePointInTimeRequestParameters, IClosePointInTimeRequest>, IClosePointInTimeRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => false;
-	}
-
-	public class OpenPointInTimeDescriptor : RequestDescriptorBase<OpenPointInTimeDescriptor, OpenPointInTimeRequestParameters, IOpenPointInTimeRequest>, IOpenPointInTimeRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-	}
-
 	public class PingDescriptor : RequestDescriptorBase<PingDescriptor, PingRequestParameters, IPingRequest>, IPingRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;

@@ -23,18 +23,18 @@ namespace Nest
 {
 	public enum ModelCategorizationStatus
 	{
-		[EnumMember(Value = "ok")]
-		Ok,
 		[EnumMember(Value = "warn")]
-		Warn
+		Warn,
+		[EnumMember(Value = "ok")]
+		Ok
 	}
 
 	public enum ModelMemoryStatus
 	{
-		[EnumMember(Value = "ok")]
-		Ok,
 		[EnumMember(Value = "soft_limit")]
 		SoftLimit,
+		[EnumMember(Value = "ok")]
+		Ok,
 		[EnumMember(Value = "hard_limit")]
 		HardLimit
 	}
