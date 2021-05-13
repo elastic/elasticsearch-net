@@ -23,9 +23,9 @@ namespace Nest
 {
 	public enum FollowerIndexStatus
 	{
-		[EnumMember(Value = "active")]
-		Active,
 		[EnumMember(Value = "paused")]
-		Paused
+		Paused,
+		[EnumMember(Value = "active")]
+		Active
 	}
 }

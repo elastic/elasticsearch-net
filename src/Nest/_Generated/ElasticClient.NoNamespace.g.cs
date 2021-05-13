@@ -25,43 +25,14 @@ namespace Nest
 {
     public partial class ElasticClient : IElasticClient
     {
-        public CrossClusterReplicationNamespace CrossClusterReplication { get; private set; }
-
         public ClusterNamespace Cluster { get; private set; }
-
-        public DanglingIndicesNamespace DanglingIndices { get; private set; }
 
         public IndicesNamespace Indices { get; private set; }
 
-        public SecurityNamespace Security { get; private set; }
-
         private partial void SetupNamespaces()
         {
-            CrossClusterReplication = new CrossClusterReplicationNamespace(this);
             Cluster = new ClusterNamespace(this);
-            DanglingIndices = new DanglingIndicesNamespace(this);
             Indices = new IndicesNamespace(this);
-            Security = new SecurityNamespace(this);
-        }
-
-        public ClosePointInTimeResponse ClosePointInTime(IClosePointInTimeRequest request)
-        {
-            return DoRequest<IClosePointInTimeRequest, ClosePointInTimeResponse>(request, request.RequestParameters);
-        }
-
-        public Task<ClosePointInTimeResponse> ClosePointInTimeAsync(IClosePointInTimeRequest request, CancellationToken cancellationToken = default)
-        {
-            return DoRequestAsync<IClosePointInTimeRequest, ClosePointInTimeResponse>(request, request.RequestParameters, cancellationToken);
-        }
-
-        public OpenPointInTimeResponse OpenPointInTime(IOpenPointInTimeRequest request)
-        {
-            return DoRequest<IOpenPointInTimeRequest, OpenPointInTimeResponse>(request, request.RequestParameters);
-        }
-
-        public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(IOpenPointInTimeRequest request, CancellationToken cancellationToken = default)
-        {
-            return DoRequestAsync<IOpenPointInTimeRequest, OpenPointInTimeResponse>(request, request.RequestParameters, cancellationToken);
         }
 
         public PingResponse Ping(IPingRequest request)

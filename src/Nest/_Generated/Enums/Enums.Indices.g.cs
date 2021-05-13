@@ -21,37 +21,97 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest
 {
-	public enum IndexBlockOptions
+	public enum DataStreamHealthStatus
 	{
-		[EnumMember(Value = "metadata")]
-		Metadata,
-		[EnumMember(Value = "read")]
-		Read,
+		[EnumMember(Value = "yellow")]
+		Yellow,
+		[EnumMember(Value = "red")]
+		Red,
+		[EnumMember(Value = "green")]
+		Green
+	}
+
+	public enum IndexCheckOnStartup
+	{
+		[EnumMember(Value = "true")]
+		True,
+		[EnumMember(Value = "false")]
+		False,
+		[EnumMember(Value = "checksum")]
+		Checksum
+	}
+
+	public enum IndexRoutingAllocationOptions
+	{
+		[EnumMember(Value = "primaries")]
+		Primaries,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "new_primaries")]
+		NewPrimaries,
+		[EnumMember(Value = "all")]
+		All
+	}
+
+	public enum IndexRoutingRebalanceOptions
+	{
+		[EnumMember(Value = "replicas")]
+		Replicas,
+		[EnumMember(Value = "primaries")]
+		Primaries,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "all")]
+		All
+	}
+
+	public enum IndicesBlockOptions
+	{
+		[EnumMember(Value = "write")]
+		Write,
 		[EnumMember(Value = "read_only")]
 		ReadOnly,
-		[EnumMember(Value = "write")]
-		Write
+		[EnumMember(Value = "read")]
+		Read,
+		[EnumMember(Value = "metadata")]
+		Metadata
+	}
+
+	public enum NumericFielddataFormat
+	{
+		[EnumMember(Value = "disabled")]
+		Disabled,
+		[EnumMember(Value = "array")]
+		Array
 	}
 
 	public enum ShardRoutingState
 	{
 		[EnumMember(Value = "UNASSIGNED")]
 		Unassigned,
-		[EnumMember(Value = "INITIALIZING")]
-		Initializing,
 		[EnumMember(Value = "STARTED")]
 		Started,
 		[EnumMember(Value = "RELOCATING")]
-		Relocating
+		Relocating,
+		[EnumMember(Value = "INITIALIZING")]
+		Initializing
 	}
 
 	public enum ShardStoreAllocation
 	{
-		[EnumMember(Value = "primary")]
-		Primary,
+		[EnumMember(Value = "unused")]
+		Unused,
 		[EnumMember(Value = "replica")]
 		Replica,
-		[EnumMember(Value = "unused")]
-		Unused
+		[EnumMember(Value = "primary")]
+		Primary
+	}
+
+	public enum StringFielddataFormat
+	{
+		[EnumMember(Value = "paged_bytes")]
+		PagedBytes,
+		[EnumMember(Value = "disabled")]
+		Disabled
 	}
 }

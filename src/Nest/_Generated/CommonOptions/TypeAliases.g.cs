@@ -17,43 +17,36 @@
 // ------------------------------------------------
 
 using System;
-using System.Text.Json.Serialization;
-using Elastic.Transport;
 using System.Collections.Generic;
 
 #nullable restore
 namespace Nest
 {
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IDeleteDanglingIndexRequest, DeleteDanglingIndexRequest>))]
-	public interface IDeleteDanglingIndexRequest : IRequest<DeleteDanglingIndexRequestParameters>
+	public partial class HttpHeaders : Dictionary<string, Union<string, IReadOnlyCollection<string>>>
 	{
 	}
 
-	public class DeleteDanglingIndexRequest : PlainRequestBase<DeleteDanglingIndexRequestParameters>, IDeleteDanglingIndexRequest
+	public partial class Metadata : Dictionary<string, object>
 	{
-		protected IDeleteDanglingIndexRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.DanglingIndicesDeleteDanglingIndex;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
-		///<summary>/_dangling/{index_uuid}</summary>
-        public DeleteDanglingIndexRequest(IndexUuid indexUuid) : base(r => r)
-		{
-		}
+	}
 
-		[JsonIgnore]
-		public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+	public partial class RuntimeFields : Dictionary<Field, RuntimeField>
+	{
+	}
 
-		[JsonPropertyName("stub_c")]
-		public string StubC
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
+	public partial class ApplicationsPrivileges : Dictionary<Name, ResourcePrivileges>
+	{
+	}
+
+	public partial class Privileges : Dictionary<string, bool>
+	{
+	}
+
+	public partial class ResourcePrivileges : Dictionary<Name, Privileges>
+	{
+	}
+
+	public partial class Actions : Dictionary<IndexName, ActionStatus>
+	{
 	}
 }

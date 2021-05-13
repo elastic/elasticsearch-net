@@ -29,25 +29,7 @@ namespace Nest
 		{
 			get;
 #if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public abstract class DictionaryResponseBase : ResponseBase
-	{
-	}
-
-	public abstract class IndicesResponseBase : AcknowledgedResponseBase
-	{
-		[JsonPropertyName("_shards")]
-		public ShardStatistics? Shards
-		{
-			get;
-#if NET5_0
-            init;
+			init;
 #else
 			internal set;
 #endif

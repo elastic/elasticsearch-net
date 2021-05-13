@@ -21,18 +21,18 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest
 {
-	public enum ConvertProcessorType
+	public enum ConvertType
 	{
-		[EnumMember(Value = "integer")]
-		Integer,
+		[EnumMember(Value = "string")]
+		String,
 		[EnumMember(Value = "long")]
 		Long,
+		[EnumMember(Value = "integer")]
+		Integer,
 		[EnumMember(Value = "float")]
 		Float,
 		[EnumMember(Value = "double")]
 		Double,
-		[EnumMember(Value = "string")]
-		String,
 		[EnumMember(Value = "boolean")]
 		Boolean,
 		[EnumMember(Value = "auto")]
@@ -41,6 +41,10 @@ namespace Nest
 
 	public enum DateRounding
 	{
+		[EnumMember(Value = "y")]
+		Year,
+		[EnumMember(Value = "w")]
+		Week,
 		[EnumMember(Value = "s")]
 		Second,
 		[EnumMember(Value = "m")]
@@ -48,41 +52,35 @@ namespace Nest
 		[EnumMember(Value = "h")]
 		Hour,
 		[EnumMember(Value = "d")]
-		Day,
-		[EnumMember(Value = "w")]
-		Week,
-		[EnumMember(Value = "M")]
-		Month,
-		[EnumMember(Value = "y")]
-		Year
+		Day
 	}
 
 	public enum ShapeType
 	{
-		[EnumMember(Value = "geo_shape")]
-		GeoShape,
 		[EnumMember(Value = "shape")]
-		Shape
+		Shape,
+		[EnumMember(Value = "geo_shape")]
+		GeoShape
 	}
 
 	public enum UserAgentProperty
 	{
-		[EnumMember(Value = "NAME")]
-		Name,
-		[EnumMember(Value = "MAJOR")]
-		Major,
-		[EnumMember(Value = "MINOR")]
-		Minor,
 		[EnumMember(Value = "PATCH")]
 		Patch,
-		[EnumMember(Value = "OS")]
-		Os,
 		[EnumMember(Value = "OS_NAME")]
 		OsName,
-		[EnumMember(Value = "OS_MAJOR")]
-		OsMajor,
 		[EnumMember(Value = "OS_MINOR")]
 		OsMinor,
+		[EnumMember(Value = "OS_MAJOR")]
+		OsMajor,
+		[EnumMember(Value = "OS")]
+		Os,
+		[EnumMember(Value = "NAME")]
+		Name,
+		[EnumMember(Value = "MINOR")]
+		Minor,
+		[EnumMember(Value = "MAJOR")]
+		Major,
 		[EnumMember(Value = "DEVICE")]
 		Device,
 		[EnumMember(Value = "BUILD")]

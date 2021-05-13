@@ -27,4 +27,7 @@
     <InternalsVisibleTo Include="Tests" Key="$(ExposedPublicKey)" />
     <InternalsVisibleTo Include="Tests.Domain" Key="$(ExposedPublicKey)" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="OneOf\" />
+  </ItemGroup>
 </Project>
