@@ -1,18 +1,15 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Nest.Common;
 
 namespace Nest
 {
 	public static class Infer
 	{
-		public static readonly Indices AllIndices = Nest.Indices.All;
+		public static readonly Indices AllIndices = Common.Indices.All;
 
 		public static IndexName Index(IndexName index) => index;
 
@@ -48,10 +45,11 @@ namespace Nest
 		public static Fields Fields(params PropertyInfo[] properties) => new(properties.Select(f => new Field(f)));
 
 		/// <summary>
-		/// Create a strongly typed string field name representation of the path to a property
-		/// <para>e.g. p => p.Array.First().SubProperty.Field will return 'array.subProperty.field'</para>
+		///     Create a strongly typed string field name representation of the path to a property
+		///     <para>e.g. p => p.Array.First().SubProperty.Field will return 'array.subProperty.field'</para>
 		/// </summary>
-		public static Field Field<T, TValue>(Expression<Func<T, TValue>> path, double? boost = null, string format = null)
+		public static Field Field<T, TValue>(Expression<Func<T, TValue>> path, double? boost = null,
+			string format = null)
 			where T : class => new(path, boost, format);
 
 		/// <inheritdoc cref="Field{T, TValue}" />

@@ -23,38 +23,8 @@ namespace Nest
 {
     internal static class ApiUrlsLookups
     {
-        internal static ApiUrls CrossClusterReplicationFollow = new ApiUrls(new[]{"/{index}/_ccr/follow"});
-        internal static ApiUrls CrossClusterReplicationFollowInfo = new ApiUrls(new[]{"/{index}/_ccr/info"});
-        internal static ApiUrls CrossClusterReplicationFollowStats = new ApiUrls(new[]{"/{index}/_ccr/stats"});
-        internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[]{"/_pit"});
-        internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[]{"/_cluster/allocation/explain"});
-        internal static ApiUrls ClusterDeleteComponentTemplate = new ApiUrls(new[]{"/_component_template/{name}"});
-        internal static ApiUrls ClusterDeleteVotingConfigExclusions = new ApiUrls(new[]{"/_cluster/voting_config_exclusions"});
-        internal static ApiUrls ClusterExistsComponentTemplate = new ApiUrls(new[]{"/_component_template/{name}"});
-        internal static ApiUrls ClusterGetComponentTemplate = new ApiUrls(new[]{"/_component_template", "/_component_template/{name}"});
-        internal static ApiUrls ClusterGetSettings = new ApiUrls(new[]{"/_cluster/settings"});
         internal static ApiUrls ClusterHealth = new ApiUrls(new[]{"/_cluster/health", "/_cluster/health/{index}"});
-        internal static ApiUrls ClusterPendingTasks = new ApiUrls(new[]{"/_cluster/pending_tasks"});
-        internal static ApiUrls ClusterPostVotingConfigExclusions = new ApiUrls(new[]{"/_cluster/voting_config_exclusions"});
-        internal static ApiUrls ClusterPutComponentTemplate = new ApiUrls(new[]{"/_component_template/{name}"});
-        internal static ApiUrls ClusterPutSettings = new ApiUrls(new[]{"/_cluster/settings"});
-        internal static ApiUrls ClusterRemoteInfo = new ApiUrls(new[]{"/_remote/info"});
-        internal static ApiUrls ClusterReroute = new ApiUrls(new[]{"/_cluster/reroute"});
-        internal static ApiUrls ClusterState = new ApiUrls(new[]{"/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}"});
-        internal static ApiUrls DanglingIndicesDeleteDanglingIndex = new ApiUrls(new[]{"/_dangling/{index_uuid}"});
-        internal static ApiUrls IndicesDelete = new ApiUrls(new[]{"/{index}"});
-        internal static ApiUrls IndicesDeleteAlias = new ApiUrls(new[]{"/{index}/_alias/{name}"});
-        internal static ApiUrls IndicesDeleteDataStream = new ApiUrls(new[]{"/_data_stream/{name}"});
-        internal static ApiUrls IndicesDeleteTemplate = new ApiUrls(new[]{"/_template/{name}"});
-        internal static ApiUrls IndicesExistsTemplate = new ApiUrls(new[]{"/_template/{name}"});
-        internal static ApiUrls IndicesGetFieldMapping = new ApiUrls(new[]{"/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}"});
-        internal static ApiUrls IndicesGetMapping = new ApiUrls(new[]{"/_mapping", "/{index}/_mapping"});
-        internal static ApiUrls IndicesPutMapping = new ApiUrls(new[]{"/{index}/_mapping"});
-        internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[]{"/_pit", "/{index}/_pit"});
+        internal static ApiUrls IndicesCreate = new ApiUrls(new[]{"/{index}"});
         internal static ApiUrls NoNamespacePing = new ApiUrls(new[]{"/"});
-        internal static ApiUrls SecurityDeleteRoleMapping = new ApiUrls(new[]{"/_security/role_mapping/{name}"});
-        internal static ApiUrls SecurityGetRoleMapping = new ApiUrls(new[]{"/_security/role_mapping/{name}", "/_security/role_mapping"});
-        internal static ApiUrls SecurityPutRoleMapping = new ApiUrls(new[]{"/_security/role_mapping/{name}"});
-        internal static ApiUrls SecurityPutUser = new ApiUrls(new[]{"/_security/user/{username}"});
     }
 }

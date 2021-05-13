@@ -18,6 +18,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using Nest.Indices;
 
 #nullable restore
 namespace Nest
@@ -28,84 +29,14 @@ namespace Nest
 		{
 		}
 
-		public DeleteIndexResponse DeleteIndex(IDeleteIndexRequest request)
+		public IndicesCreateResponse Create(IIndicesCreateRequest request)
 		{
-			return DoRequest<IDeleteIndexRequest, DeleteIndexResponse>(request, request.RequestParameters);
+			return DoRequest<IIndicesCreateRequest, IndicesCreateResponse>(request, request.RequestParameters);
 		}
 
-		public Task<DeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request, CancellationToken cancellationToken = default)
+		public Task<IndicesCreateResponse> CreateAsync(IIndicesCreateRequest request, CancellationToken cancellationToken = default)
 		{
-			return DoRequestAsync<IDeleteIndexRequest, DeleteIndexResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteAliasResponse DeleteAlias(IDeleteAliasRequest request)
-		{
-			return DoRequest<IDeleteAliasRequest, DeleteAliasResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteAliasRequest, DeleteAliasResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public IndicesDeleteDataStreamResponse DeleteDataStream(IIndicesDeleteDataStreamRequest request)
-		{
-			return DoRequest<IIndicesDeleteDataStreamRequest, IndicesDeleteDataStreamResponse>(request, request.RequestParameters);
-		}
-
-		public Task<IndicesDeleteDataStreamResponse> DeleteDataStreamAsync(IIndicesDeleteDataStreamRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IIndicesDeleteDataStreamRequest, IndicesDeleteDataStreamResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteIndexTemplateResponse DeleteIndexTemplate(IDeleteIndexTemplateRequest request)
-		{
-			return DoRequest<IDeleteIndexTemplateRequest, DeleteIndexTemplateResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteIndexTemplateRequest, DeleteIndexTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public IndexTemplateExistsResponse IndexTemplateExists(IIndexTemplateExistsRequest request)
-		{
-			return DoRequest<IIndexTemplateExistsRequest, IndexTemplateExistsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<IndexTemplateExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IIndexTemplateExistsRequest, IndexTemplateExistsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest request)
-		{
-			return DoRequest<IGetFieldMappingRequest, GetFieldMappingResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetFieldMappingRequest, GetFieldMappingResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetMappingResponse GetMapping(IGetMappingRequest request)
-		{
-			return DoRequest<IGetMappingRequest, GetMappingResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetMappingResponse> GetMappingAsync(IGetMappingRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetMappingRequest, GetMappingResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PutMappingResponse PutMapping(IPutMappingRequest request)
-		{
-			return DoRequest<IPutMappingRequest, PutMappingResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutMappingResponse> PutMappingAsync(IPutMappingRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutMappingRequest, PutMappingResponse>(request, request.RequestParameters, cancellationToken);
+			return DoRequestAsync<IIndicesCreateRequest, IndicesCreateResponse>(request, request.RequestParameters, cancellationToken);
 		}
 	}
 }

@@ -19,59 +19,14 @@
 using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
+using Nest.Common;
 using System.Collections.Generic;
 
 #nullable restore
 namespace Nest
 {
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IClosePointInTimeRequest, ClosePointInTimeRequest>))]
-	public interface IClosePointInTimeRequest : IRequest<ClosePointInTimeRequestParameters>
-	{
-	}
-
-	public class ClosePointInTimeRequest : PlainRequestBase<ClosePointInTimeRequestParameters>, IClosePointInTimeRequest
-	{
-		protected IClosePointInTimeRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
-		///<summary>/_pit</summary>
-        public ClosePointInTimeRequest() : base()
-		{
-		}
-	}
-
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IOpenPointInTimeRequest, OpenPointInTimeRequest>))]
-	public interface IOpenPointInTimeRequest : IRequest<OpenPointInTimeRequestParameters>
-	{
-	}
-
-	public class OpenPointInTimeRequest : PlainRequestBase<OpenPointInTimeRequestParameters>, IOpenPointInTimeRequest
-	{
-		protected IOpenPointInTimeRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
-		///<summary>/_pit</summary>
-        public OpenPointInTimeRequest() : base()
-		{
-		}
-
-		///<summary>/{index}/_pit</summary>
-        public OpenPointInTimeRequest(Indices index) : base(r => r.Required("index", index))
-		{
-		}
-
-		[JsonIgnore]
-		public Time? KeepAlive { get => Q<Time?>("keep_alive"); set => Q("keep_alive", value); }
-	}
-
 	[JsonInterfaceConverter(typeof(InterfaceConverter<IPingRequest, PingRequest>))]
-	public interface IPingRequest : IRequest<PingRequestParameters>
+	public partial interface IPingRequest : IRequest<PingRequestParameters>
 	{
 	}
 

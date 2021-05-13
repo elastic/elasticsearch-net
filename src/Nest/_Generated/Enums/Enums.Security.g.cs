@@ -23,25 +23,25 @@ namespace Nest
 {
 	public enum AccessTokenGrantType
 	{
+		[EnumMember(Value = "refresh_token")]
+		RefreshToken,
 		[EnumMember(Value = "password")]
 		Password,
 		[EnumMember(Value = "client_credentials")]
 		ClientCredentials,
 		[EnumMember(Value = "_kerberos")]
-		Kerberos,
-		[EnumMember(Value = "refresh_token")]
-		RefreshToken
+		Kerberos
 	}
 
 	public enum ApiKeyGrantType
 	{
-		[EnumMember(Value = "access_token")]
-		AccessToken,
 		[EnumMember(Value = "password")]
-		Password
+		Password,
+		[EnumMember(Value = "access_token")]
+		AccessToken
 	}
 
-	public enum RoleTemplateFormat
+	public enum TemplateFormat
 	{
 		[EnumMember(Value = "string")]
 		String,

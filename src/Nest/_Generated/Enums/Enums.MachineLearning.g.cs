@@ -23,82 +23,96 @@ namespace Nest
 {
 	public enum AppliesTo
 	{
-		[EnumMember(Value = "actual")]
-		Actual,
 		[EnumMember(Value = "typical")]
 		Typical,
+		[EnumMember(Value = "time")]
+		Time,
 		[EnumMember(Value = "diff_from_typical")]
 		DiffFromTypical,
-		[EnumMember(Value = "time")]
-		Time
+		[EnumMember(Value = "actual")]
+		Actual
 	}
 
 	public enum ChunkingMode
 	{
-		[EnumMember(Value = "auto")]
-		Auto,
+		[EnumMember(Value = "off")]
+		Off,
 		[EnumMember(Value = "manual")]
 		Manual,
-		[EnumMember(Value = "off")]
-		Off
+		[EnumMember(Value = "auto")]
+		Auto
 	}
 
 	public enum ConditionOperator
 	{
-		[EnumMember(Value = "gt")]
-		Gt,
-		[EnumMember(Value = "gte")]
-		Gte,
+		[EnumMember(Value = "lte")]
+		Lte,
 		[EnumMember(Value = "lt")]
 		Lt,
-		[EnumMember(Value = "lte")]
-		Lte
+		[EnumMember(Value = "gte")]
+		Gte,
+		[EnumMember(Value = "gt")]
+		Gt
 	}
 
 	public enum DatafeedState
 	{
-		[EnumMember(Value = "started")]
-		Started,
+		[EnumMember(Value = "stopping")]
+		Stopping,
 		[EnumMember(Value = "stopped")]
 		Stopped,
 		[EnumMember(Value = "starting")]
 		Starting,
+		[EnumMember(Value = "started")]
+		Started
+	}
+
+	public enum DataFrameState
+	{
 		[EnumMember(Value = "stopping")]
-		Stopping
+		Stopping,
+		[EnumMember(Value = "stopped")]
+		Stopped,
+		[EnumMember(Value = "starting")]
+		Starting,
+		[EnumMember(Value = "started")]
+		Started,
+		[EnumMember(Value = "failed")]
+		Failed
 	}
 
 	public enum ExcludeFrequent
 	{
-		[EnumMember(Value = "all")]
-		All,
+		[EnumMember(Value = "over")]
+		Over,
 		[EnumMember(Value = "none")]
 		None,
 		[EnumMember(Value = "by")]
 		By,
-		[EnumMember(Value = "over")]
-		Over
+		[EnumMember(Value = "all")]
+		All
 	}
 
 	public enum JobState
 	{
-		[EnumMember(Value = "closing")]
-		Closing,
-		[EnumMember(Value = "closed")]
-		Closed,
+		[EnumMember(Value = "opening")]
+		Opening,
 		[EnumMember(Value = "opened")]
 		Opened,
 		[EnumMember(Value = "failed")]
 		Failed,
-		[EnumMember(Value = "opening")]
-		Opening
+		[EnumMember(Value = "closing")]
+		Closing,
+		[EnumMember(Value = "closed")]
+		Closed
 	}
 
 	public enum MemoryStatus
 	{
-		[EnumMember(Value = "ok")]
-		Ok,
 		[EnumMember(Value = "soft_limit")]
 		SoftLimit,
+		[EnumMember(Value = "ok")]
+		Ok,
 		[EnumMember(Value = "hard_limit")]
 		HardLimit
 	}

@@ -1,16 +1,13 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
+using Nest.Common;
 
 namespace Nest
 {
-	public class IndexNameConverter : JsonConverter<IndexName> 
+	public class IndexNameConverter : JsonConverter<IndexName>
 	{
 		public override IndexName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -75,7 +72,8 @@ namespace Nest
 		public string GetString(ITransportConfiguration settings)
 		{
 			if (!(settings is IConnectionSettingsValues nestSettings))
-				throw new Exception("Tried to pass index name on querystring but it could not be resolved because no nest settings are available");
+				throw new Exception(
+					"Tried to pass index name on querystring but it could not be resolved because no nest settings are available");
 
 			return nestSettings.Inferrer.IndexName(this);
 		}
@@ -86,13 +84,14 @@ namespace Nest
 
 		private static IndexName From(Type type, string clusterName) => new(type, clusterName);
 
-		internal static IndexName Rebuild(string index, Type type, string? clusterName = null) => new(index, type, clusterName);
+		internal static IndexName Rebuild(string index, Type type, string? clusterName = null) =>
+			new(index, type, clusterName);
 
-		public Indices And<T>() => new(new[] { this, typeof(T) });
+		public Indices And<T>() => new(new[] {this, typeof(T)});
 
-		public Indices And<T>(string clusterName) => new(new[] { this, From(typeof(T), clusterName) });
+		public Indices And<T>(string clusterName) => new(new[] {this, From(typeof(T), clusterName)});
 
-		public Indices And(IndexName index) => new(new[] { this, index });
+		public Indices And(IndexName index) => new(new[] {this, index});
 
 		private static IndexName? Parse(string indexName)
 		{
@@ -115,7 +114,8 @@ namespace Nest
 
 		public static implicit operator IndexName?(Type type) => type == null ? null : new IndexName(type);
 
-		public override bool Equals(object obj) => obj is string s ? EqualsString(s) : obj is IndexName i && EqualsMarker(i);
+		public override bool Equals(object obj) =>
+			obj is string s ? EqualsString(s) : obj is IndexName i && EqualsMarker(i);
 
 		public override int GetHashCode()
 		{
@@ -142,7 +142,8 @@ namespace Nest
 
 		private string PrefixClusterName(string name) => PrefixClusterName(this, name);
 
-		private static string PrefixClusterName(IndexName index, string name) => index.Cluster.IsNullOrEmpty() ? name : $"{index.Cluster}:{name}";
+		private static string PrefixClusterName(IndexName index, string name) =>
+			index.Cluster.IsNullOrEmpty() ? name : $"{index.Cluster}:{name}";
 
 		private bool EqualsString(string other) => !other.IsNullOrEmpty() && other == PrefixClusterName(Name);
 

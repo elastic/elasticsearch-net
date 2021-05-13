@@ -16,44 +16,22 @@
 //
 // ------------------------------------------------
 
-using System;
-using System.Text.Json.Serialization;
-using Elastic.Transport;
-using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 #nullable restore
 namespace Nest
 {
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IDeleteDanglingIndexRequest, DeleteDanglingIndexRequest>))]
-	public interface IDeleteDanglingIndexRequest : IRequest<DeleteDanglingIndexRequestParameters>
+	public enum SnapshotShardsStatsStage
 	{
-	}
-
-	public class DeleteDanglingIndexRequest : PlainRequestBase<DeleteDanglingIndexRequestParameters>, IDeleteDanglingIndexRequest
-	{
-		protected IDeleteDanglingIndexRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.DanglingIndicesDeleteDanglingIndex;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
-		///<summary>/_dangling/{index_uuid}</summary>
-        public DeleteDanglingIndexRequest(IndexUuid indexUuid) : base(r => r)
-		{
-		}
-
-		[JsonIgnore]
-		public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
-
-		[JsonPropertyName("stub_c")]
-		public string StubC
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
+		[EnumMember(Value = "STARTED")]
+		Started,
+		[EnumMember(Value = "INIT")]
+		Init,
+		[EnumMember(Value = "FINALIZE")]
+		Finalize,
+		[EnumMember(Value = "FAILURE")]
+		Failure,
+		[EnumMember(Value = "DONE")]
+		Done
 	}
 }

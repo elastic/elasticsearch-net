@@ -19,25 +19,17 @@
 // ------------------------------------------------
 using System.Threading;
 using System.Threading.Tasks;
+using Nest.Cluster;
+using Nest.Indices;
 
 namespace Nest
 {
     public partial interface IElasticClient
     {
-        CrossClusterReplicationNamespace CrossClusterReplication { get; }
-
         ClusterNamespace Cluster { get; }
-
-        DanglingIndicesNamespace DanglingIndices { get; }
 
         IndicesNamespace Indices { get; }
 
-        SecurityNamespace Security { get; }
-
-        ClosePointInTimeResponse ClosePointInTime(IClosePointInTimeRequest request);
-        Task<ClosePointInTimeResponse> ClosePointInTimeAsync(IClosePointInTimeRequest request, CancellationToken cancellationToken = default);
-        OpenPointInTimeResponse OpenPointInTime(IOpenPointInTimeRequest request);
-        Task<OpenPointInTimeResponse> OpenPointInTimeAsync(IOpenPointInTimeRequest request, CancellationToken cancellationToken = default);
         PingResponse Ping(IPingRequest request);
         Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default);
     }

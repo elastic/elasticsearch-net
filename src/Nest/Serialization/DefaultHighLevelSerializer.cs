@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.IO;
 using System.Runtime.Serialization;
@@ -23,11 +19,14 @@ namespace Nest
 		}
 	}
 
-	public class InterfaceConverter<TInterface, TConcrete> : JsonConverter<TInterface> where TConcrete : class, TInterface
+	public class InterfaceConverter<TInterface, TConcrete> : JsonConverter<TInterface>
+		where TConcrete : class, TInterface
 	{
-		public override TInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TConcrete>(ref reader, options);
+		public override TInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+			JsonSerializer.Deserialize<TConcrete>(ref reader, options);
 
-		public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options) => JsonSerializer.Serialize<TConcrete>(writer, value as TConcrete, options);
+		public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options) =>
+			JsonSerializer.Serialize<TConcrete>(writer, value as TConcrete, options);
 	}
 
 	public class UnionConverter<TConcrete> : JsonConverter<TConcrete> where TConcrete : class
@@ -93,8 +92,7 @@ namespace Nest
 	{
 		private static readonly JsonSerializerOptions Options = new()
 		{
-			IgnoreNullValues = true,
-			Converters = { new JsonStringEnumConverter() }
+			IgnoreNullValues = true, Converters = {new JsonStringEnumConverter()}
 		};
 
 		private static readonly UTF8Encoding Encoding = new(false);
@@ -110,14 +108,31 @@ namespace Nest
 		public object Deserialize(Type type, Stream stream) =>
 			throw new NotImplementedException();
 
-		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default) =>
-			stream.Length == 0 ? Task.FromResult(default(T)) : JsonSerializer.DeserializeAsync<T>(stream, Options, cancellationToken).AsTask();
+		// TODO - Return ValueTask?
+		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
+		{
+			long length = 0;
+
+			try
+			{
+				length = stream.Length;
+			}
+			catch (NotSupportedException)
+			{
+				// ignored
+			}
+
+			return length > 0
+				? JsonSerializer.DeserializeAsync<T>(stream, Options, cancellationToken).AsTask()
+				: Task.FromResult(default(T));
+		}
 
 		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default) =>
 			JsonSerializer.DeserializeAsync(stream, type, Options, cancellationToken).AsTask();
 
 		// TODO - This is not ideal as we allocate a large string - No stream based sync overload
-		public virtual void Serialize<T>(T data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.None)
+		public virtual void Serialize<T>(T data, Stream writableStream,
+			SerializationFormatting formatting = SerializationFormatting.None)
 		{
 			var json = JsonSerializer.Serialize(data, Options);
 			using var writer = new StreamWriter(writableStream, Encoding, 4096, true);

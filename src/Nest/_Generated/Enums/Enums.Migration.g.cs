@@ -21,14 +21,14 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest
 {
-	public enum DeprecationWarningLevel
+	public enum DeprecationLevel
 	{
+		[EnumMember(Value = "warning")]
+		Warning,
 		[EnumMember(Value = "none")]
 		None,
 		[EnumMember(Value = "info")]
 		Info,
-		[EnumMember(Value = "warning")]
-		Warning,
 		[EnumMember(Value = "critical")]
 		Critical
 	}

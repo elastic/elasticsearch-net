@@ -23,29 +23,29 @@ namespace Nest
 {
 	public enum IndexingJobState
 	{
-		[EnumMember(Value = "started")]
-		Started,
-		[EnumMember(Value = "indexing")]
-		Indexing,
 		[EnumMember(Value = "stopping")]
 		Stopping,
 		[EnumMember(Value = "stopped")]
 		Stopped,
+		[EnumMember(Value = "started")]
+		Started,
+		[EnumMember(Value = "indexing")]
+		Indexing,
 		[EnumMember(Value = "aborting")]
 		Aborting
 	}
 
-	public enum RollupMetric
+	public enum Metric
 	{
+		[EnumMember(Value = "value_count")]
+		ValueCount,
+		[EnumMember(Value = "sum")]
+		Sum,
 		[EnumMember(Value = "min")]
 		Min,
 		[EnumMember(Value = "max")]
 		Max,
-		[EnumMember(Value = "sum")]
-		Sum,
 		[EnumMember(Value = "avg")]
-		Avg,
-		[EnumMember(Value = "value_count")]
-		ValueCount
+		Avg
 	}
 }

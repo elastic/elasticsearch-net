@@ -16,40 +16,13 @@
 //
 // ------------------------------------------------
 
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Nest
 {
-	public class DeleteIndexResponse : IndicesResponseBase
-	{
-	}
-
-	public class DeleteAliasResponse : ResponseBase
-	{
-	}
-
-	public class IndicesDeleteDataStreamResponse : AcknowledgedResponseBase
-	{
-	}
-
-	public class DeleteIndexTemplateResponse : AcknowledgedResponseBase
-	{
-	}
-
-	public class IndexTemplateExistsResponse : ResponseBase
-	{
-	}
-
-	public class GetFieldMappingResponse : DictionaryResponseBase
-	{
-	}
-
-	public class GetMappingResponse : DictionaryResponseBase
-	{
-	}
-
-	public class PutMappingResponse : IndicesResponseBase
+	public class IndicesCreateResponse : AcknowledgedResponseBase
 	{
 	}
 }

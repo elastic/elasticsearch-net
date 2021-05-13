@@ -16,73 +16,16 @@
 //
 // ------------------------------------------------
 
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Runtime.Serialization;
 
 #nullable restore
 namespace Nest
 {
-	public class CreateFollowIndexResponse : ResponseBase
+	public enum ResultPosition
 	{
-		[JsonPropertyName("follow_index_created")]
-		public bool FollowIndexCreated
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("follow_index_shards_acked")]
-		public bool FollowIndexShardsAcked
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("index_following_started")]
-		public bool IndexFollowingStarted
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public class FollowInfoResponse : ResponseBase
-	{
-		[JsonPropertyName("follower_indices")]
-		public IEnumerable<FollowerInfo> FollowerIndices
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public class FollowIndexStatsResponse : ResponseBase
-	{
-		[JsonPropertyName("indices")]
-		public IEnumerable<FollowIndexStats> Indices
-		{
-			get;
-#if NET5_0
-            init;
-#else
-			internal set;
-#endif
-		}
+		[EnumMember(Value = "tail")]
+		Tail,
+		[EnumMember(Value = "head")]
+		Head
 	}
 }

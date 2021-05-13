@@ -25,15 +25,6 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
-    public class ClosePointInTimeRequestParameters : RequestParameters<ClosePointInTimeRequestParameters>
-    {
-    }
-
-    public class OpenPointInTimeRequestParameters : RequestParameters<OpenPointInTimeRequestParameters>
-    {
-        public Time? KeepAlive { get => Q<Time?>("keep_alive"); set => Q("keep_alive", value); }
-    }
-
     public class PingRequestParameters : RequestParameters<PingRequestParameters>
     {
     }

@@ -1,9 +1,7 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
+using Elastic.Transport;
 using FluentAssertions;
 using Nest;
+using Nest.Cluster;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
@@ -11,13 +9,14 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Cluster.ClusterHealth
 {
 	public class ClusterHealthApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IHealthRequest, HealthDescriptor,
+			HealthRequest>
 	{
 		public ClusterHealthApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override Elastic.Transport.HttpMethod HttpMethod => Elastic.Transport.HttpMethod.GET;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string ExpectedUrlPathAndQuery => "/_cluster/health";
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -41,15 +40,16 @@ namespace Tests.Cluster.ClusterHealth
 	}
 
 	public class ClusterHealthShardsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IHealthRequest, HealthDescriptor,
+			HealthRequest>
 	{
 		public ClusterHealthShardsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		
-		protected override Elastic.Transport.HttpMethod HttpMethod => Elastic.Transport.HttpMethod.GET;
-		protected override ClusterHealthRequest Initializer => new() { Level = Level.Shards };
+
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override HealthRequest Initializer => new() {Level = Level.Shards};
 		protected override string ExpectedUrlPathAndQuery => "/_cluster/health?level=shards";
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -61,7 +61,7 @@ namespace Tests.Cluster.ClusterHealth
 		protected override void ExpectResponse(ClusterHealthResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
-			response.Status.Should().NotBe(Nest.Health.Red);
+			response.Status.Should().NotBe(Health.Red);
 			response.TimedOut.Should().BeFalse();
 			response.NumberOfNodes.Should().BeGreaterOrEqualTo(1);
 			response.NumberOfDataNodes.Should().BeGreaterOrEqualTo(1);
