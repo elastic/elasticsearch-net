@@ -27,8 +27,7 @@ namespace Nest
 			var reducedActions = new Dictionary<string, IAction>(actions.Count);
 			foreach (var action in actions)
 			{
-				var combinator = action.Value as ActionCombinator;
-				if (combinator != null)
+				if (action.Value is ActionCombinator combinator)
 				{
 					foreach (var combinatorAction in combinator.Actions)
 					{

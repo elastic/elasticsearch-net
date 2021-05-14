@@ -214,8 +214,7 @@ namespace Nest
 			if (ReferenceEquals(null, obj)) return false;
 			if (ReferenceEquals(this, obj)) return true;
 
-			var value = obj as string;
-			if (value != null)
+			if (obj is string value)
 				return string.Equals(value, _value);
 
 			return obj.GetType() == GetType() && Equals((MultiTermQueryRewrite)obj);

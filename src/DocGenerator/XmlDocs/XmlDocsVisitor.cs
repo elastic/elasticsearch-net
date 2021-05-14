@@ -42,9 +42,7 @@ namespace DocGenerator.XmlDocs
 					_labeledListItem.Add(new Paragraph(content));
 				else
 				{
-					var literal = paragraph.Last() as TextLiteral;
-
-					if (literal != null && literal.Text == ListItemContinuation)
+					if (paragraph.Last() is TextLiteral literal && literal.Text == ListItemContinuation)
 						paragraph.Add(new TextLiteral(content));
 					else
 						paragraph.Add(new TextLiteral(" " + content));
@@ -138,9 +136,7 @@ namespace DocGenerator.XmlDocs
 				if (member.Info.DeclaringType == _type &&
 					member.Info.MemberType.HasFlag(MemberTypes.Method))
 				{
-					var methodInfo = member.Info as MethodInfo;
-
-					if (methodInfo != null && methodInfo.IsPublic)
+					if (member.Info is MethodInfo methodInfo && methodInfo.IsPublic)
 					{
 						if (_labeledListItem != null)
 							LabeledListItems.Add(_labeledListItem);
