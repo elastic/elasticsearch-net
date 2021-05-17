@@ -2047,8 +2047,8 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for Termsenum <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html</para></summary>
-	public class TermsenumRequestParameters : RequestParameters<TermsenumRequestParameters>
+	///<summary>Request options for TermsEnum <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html</para></summary>
+	public class TermsEnumRequestParameters : RequestParameters<TermsEnumRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;

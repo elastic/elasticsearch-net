@@ -1249,15 +1249,15 @@ namespace Elasticsearch.Net
 		///<param name = "body">field name, string which is the prefix expected in matching terms, timeout and size for max number of results</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		public TResponse Termsenum<TResponse>(string index, PostData body, TermsenumRequestParameters requestParameters = null)
+		public TResponse TermsEnum<TResponse>(string index, PostData body, TermsEnumRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_terms_enum"), body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_terms_enum <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "body">field name, string which is the prefix expected in matching terms, timeout and size for max number of results</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		[MapsApi("termsenum", "index, body")]
-		public Task<TResponse> TermsenumAsync<TResponse>(string index, PostData body, TermsenumRequestParameters requestParameters = null, CancellationToken ctx = default)
+		[MapsApi("terms_enum", "index, body")]
+		public Task<TResponse> TermsEnumAsync<TResponse>(string index, PostData body, TermsEnumRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_terms_enum"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_termvectors/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</para></summary>
 		///<param name = "index">The index in which the document resides.</param>
