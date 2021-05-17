@@ -278,6 +278,15 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		[MapsApi("security.enable_user", "username")]
 		public Task<TResponse> EnableUserAsync<TResponse>(string username, EnableUserRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_security/user/{username:username}/_enable"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_security/enroll_node <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enroll-node.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse EnrollNode<TResponse>(EnrollNodeRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, "_security/enroll_node", null, RequestParams(requestParameters));
+		///<summary>GET on /_security/enroll_node <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enroll-node.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("security.enroll_node", "")]
+		public Task<TResponse> EnrollNodeAsync<TResponse>(EnrollNodeRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "_security/enroll_node", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_security/api_key <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetApiKey<TResponse>(GetApiKeyRequestParameters requestParameters = null)
