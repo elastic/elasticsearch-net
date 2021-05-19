@@ -66,7 +66,12 @@ namespace Tests.XPack.Info
 			r.Features.Watcher.Should().NotBeNull();
 			r.License.Should().NotBeNull();
 
+			// Flattened fields were moved from x-pack to core in 7.13.0 (https://github.com/elastic/elasticsearch/pull/68780)
+			if (TestConfiguration.Instance.InRange(">=7.3.0") && TestConfiguration.Instance.InRange("<7.13.0"))
+				r.Features.Flattened.Should().NotBeNull();
+			
 			if (TestConfiguration.Instance.InRange(">=7.3.0"))
+			{
 				r.Features.Vectors.Should().NotBeNull();
 
 			if (TestConfiguration.Instance.InRange(">=7.5.0"))
@@ -102,10 +107,27 @@ namespace Tests.XPack.Info
 			r.Alerting.Execution.Should().NotBeNull();
 			r.Alerting.Watch.Should().NotBeNull();
 
+			// Flattened fields were moved from x-pack to core in 7.13.0 (https://github.com/elastic/elasticsearch/pull/68780)
+			if (TestConfiguration.Instance.InRange(">=7.3.0") && TestConfiguration.Instance.InRange("<7.13.0"))
+				r.Flattened.Should().NotBeNull();
+
+			if (TestConfiguration.Instance.InRange(">=7.6.0") && TestConfiguration.Instance.InRange("<7.13.0"))
+				r.Flattened.FieldCount.Should().HaveValue();
+
 			if (TestConfiguration.Instance.InRange(">=7.3.0"))
 			{
 				r.Vectors.Should().NotBeNull();
 				r.VotingOnly.Should().NotBeNull();
+
+				if (TestConfiguration.Instance.InRange("<7.5.0"))
+#pragma warning disable 618
+					r.DataFrame.Should().NotBeNull();
+#pragma warning restore 618
+			}
+
+			if (TestConfiguration.Instance.InRange(">=7.5.0"))
+			{
+				r.Enrich.Should().NotBeNull();
 			}
 
 			if (TestConfiguration.Instance.InRange(">=7.8.0"))
