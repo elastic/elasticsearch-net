@@ -34,6 +34,7 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         | "logs-mappings"
         | "metrics"
         | "metrics-settings"
+        | "data-streams-mappings"
         | "metrics-mappings"
         | "synthetics"
         | "synthetics-settings"
