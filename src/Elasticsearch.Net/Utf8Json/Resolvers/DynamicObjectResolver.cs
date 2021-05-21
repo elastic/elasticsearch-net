@@ -31,6 +31,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.Serialization;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Elasticsearch.Net.Utf8Json.Formatters;
@@ -1318,7 +1320,34 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 		public void Serialize(ref JsonWriter writer, T value, IJsonFormatterResolver formatterResolver)
 		{
 			if (_serialize == null) throw new InvalidOperationException(GetType().Name + " does not support Serialize.");
-			_serialize(_stringByteKeysField, _serializeCustomFormatters, ref writer, value, formatterResolver);
+
+			try
+			{
+				_serialize(_stringByteKeysField, _serializeCustomFormatters, ref writer, value, formatterResolver);
+			}
+			catch (Exception e)
+			{
+				var type = value.GetType();
+				var properties = type.GetProperties();
+
+				var message = $"Failed to serialize anonymous type: {type}.";
+
+				if (properties.Any())
+				{
+					var sb = new StringBuilder()
+						.AppendLine(message).AppendLine("The type defines the following properties:");
+
+					foreach (var property in properties)
+						sb.AppendLine($"'{property.Name}' of type {property.PropertyType}");
+
+					message = sb.ToString().TrimEnd(Environment.NewLine.ToCharArray());
+				}
+
+				throw new AnonymousTypeSerializationException(message, e)
+				{
+					AnonymousType = type
+				};
+			}
 		}
 
 		public T Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -1326,5 +1355,16 @@ namespace Elasticsearch.Net.Utf8Json.Resolvers
 			if (_deserialize == null) throw new InvalidOperationException(GetType().Name + " does not support Deserialize.");
 			return _deserialize(_deserializeCustomFormatters, ref reader, formatterResolver);
 		}
+	}
+
+	public class AnonymousTypeSerializationException : SerializationException
+	{
+		public AnonymousTypeSerializationException() { }
+
+		public AnonymousTypeSerializationException(string message) : base(message) { }
+
+		public AnonymousTypeSerializationException(string message, Exception innerException) : base(message, innerException) { }
+
+		public Type AnonymousType { get; set; }
 	}
 }
