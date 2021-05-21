@@ -20,12 +20,13 @@ namespace Elasticsearch.Net
 			ServiceIdentifier = serviceIdentifier;
 			RuntimeVersion = RuntimeVersionString;
 
-			// This code is expected to be called infrequently so we're not concerns with over optimising this
+			// This code is expected to be called infrequently so we're not concerned with over optimising this.
 
 			_headerValue = new StringBuilder(64)
 				.Append(serviceIdentifier).Append("=").Append(ClientVersion).Append(Separator)
-				.Append("a=").Append(isAsync ? "1" : "0").Append(Separator)
 				.Append("net=").Append(RuntimeVersion).Append(Separator)
+				.Append("t=").Append(ClientVersion).Append(Separator)
+				.Append("a=").Append(isAsync ? "1" : "0").Append(Separator)
 				.Append(HttpClientIdentifier).Append("=").Append(RuntimeVersion)
 				.ToString();
 		}
