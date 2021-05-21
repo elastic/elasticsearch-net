@@ -12,9 +12,8 @@ namespace Tests.Connection.MetaData
 {
 	public class MetaHeaderProviderTests
 	{
-		private readonly Regex _validHeaderRegex = new Regex(@"^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$");
-		private readonly Regex _validVersionRegex = new Regex(@"^[0-9]{1,2}\.[0-9]{1,2}(?:\.[0-9]{1,3})?p?$");
-		private readonly Regex _validHttpClientPart = new Regex(@"^[a-z]{2,3}=[0-9]{1,2}\.[0-9]{1,2}(?:\.[0-9]{1,3})?p?$");
+		private readonly Regex _validHeaderRegex = new(@"^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$");
+		private readonly Regex _validVersionRegex = new(@"^[0-9]{1,2}\.[0-9]{1,2}(?:\.[0-9]{1,3})?p?$");
 
 		[U] public void HeaderName_ReturnsExpectedValue()
 		{
@@ -54,19 +53,25 @@ namespace Tests.Connection.MetaData
 			_validHeaderRegex.Match(result).Success.Should().BeTrue();
 
 			var parts = result.Split(',');
-			parts.Length.Should().Be(4);
+			parts.Length.Should().Be(5);
 
 			parts[0].Should().StartWith("es=");
 			var clientVersion = parts[0].Substring(3);
 			_validVersionRegex.Match(clientVersion).Success.Should().BeTrue();
 
-			parts[1].Should().Be("a=0");
-
-			parts[2].Should().StartWith("net=");
-			var runtimeVersion = parts[2].Substring(4);
+			parts[1].Should().StartWith("net=");
+			var runtimeVersion = parts[1].Substring(4);
 			_validVersionRegex.Match(runtimeVersion).Success.Should().BeTrue();
 
-			_validHttpClientPart.Match(parts[3]).Success.Should().BeTrue();
+			parts[2].Should().StartWith("t=");
+			clientVersion = parts[2].Substring(2);
+			_validVersionRegex.Match(clientVersion).Success.Should().BeTrue();
+
+			parts[3].Should().Be("a=0");
+
+			parts[4].Should().StartWith("so=");
+			var socketVersion = parts[4].Substring(3);
+			_validVersionRegex.Match(socketVersion).Success.Should().BeTrue();
 		}
 
 		[U] public void HeaderName_ReturnsExpectedValue_ForAsyncRequest_WhenNotDisabled()
@@ -87,19 +92,25 @@ namespace Tests.Connection.MetaData
 			_validHeaderRegex.Match(result).Success.Should().BeTrue();
 
 			var parts = result.Split(',');
-			parts.Length.Should().Be(4);
+			parts.Length.Should().Be(5);
 
 			parts[0].Should().StartWith("es=");
 			var clientVersion = parts[0].Substring(3);
 			_validVersionRegex.Match(clientVersion).Success.Should().BeTrue();
 
-			parts[1].Should().Be("a=1");
-
-			parts[2].Should().StartWith("net=");
+			parts[1].Should().StartWith("net=");
 			var runtimeVersion = parts[2].Substring(4);
 			_validVersionRegex.Match(runtimeVersion).Success.Should().BeTrue();
 
-			_validHttpClientPart.Match(parts[3]).Success.Should().BeTrue();
+			parts[2].Should().StartWith("t=");
+			clientVersion = parts[2].Substring(2);
+			_validVersionRegex.Match(clientVersion).Success.Should().BeTrue();
+
+			parts[3].Should().Be("a=1");
+
+			parts[4].Should().StartWith("so=");
+			var socketVersion = parts[4].Substring(3);
+			_validVersionRegex.Match(socketVersion).Success.Should().BeTrue();
 		}
 	}
 }
