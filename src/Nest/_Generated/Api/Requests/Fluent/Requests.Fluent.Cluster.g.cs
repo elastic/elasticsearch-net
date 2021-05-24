@@ -17,7 +17,6 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
-using Nest.Cluster;
 
 #nullable restore
 namespace Nest

@@ -1,7 +1,6 @@
 using Elastic.Transport;
 using FluentAssertions;
 using Nest;
-using Nest.Cluster;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
@@ -9,8 +8,8 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Cluster.ClusterHealth
 {
 	public class ClusterHealthApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IHealthRequest, HealthDescriptor,
-			HealthRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor,
+			ClusterHealthRequest>
 	{
 		public ClusterHealthApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -40,8 +39,8 @@ namespace Tests.Cluster.ClusterHealth
 	}
 
 	public class ClusterHealthShardsApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IHealthRequest, HealthDescriptor,
-			HealthRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor,
+			ClusterHealthRequest>
 	{
 		public ClusterHealthShardsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -49,7 +48,7 @@ namespace Tests.Cluster.ClusterHealth
 		protected override int ExpectStatusCode => 200;
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override HealthRequest Initializer => new() {Level = Level.Shards};
+		protected override ClusterHealthRequest Initializer => new() {Level = Level.Shards};
 		protected override string ExpectedUrlPathAndQuery => "/_cluster/health?level=shards";
 
 		protected override LazyResponses ClientUsage() => Calls(

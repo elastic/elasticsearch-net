@@ -24,5 +24,26 @@ namespace Nest
 {
 	public class IndicesCreateResponse : AcknowledgedResponseBase
 	{
+		[JsonPropertyName("index")]
+		public IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shards_acknowledged")]
+		public bool ShardsAcknowledged
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 }

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Nest.Common;
 
 namespace Nest
 {
 	public static class Infer
 	{
-		public static readonly Indices AllIndices = Common.Indices.All;
+		public static readonly Indices AllIndices = Nest.Indices.All;
 
 		public static IndexName Index(IndexName index) => index;
 

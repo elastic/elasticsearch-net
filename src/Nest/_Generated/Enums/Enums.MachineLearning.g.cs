@@ -67,7 +67,7 @@ namespace Nest
 		Started
 	}
 
-	public enum DataFrameState
+	public enum DataframeState
 	{
 		[EnumMember(Value = "stopping")]
 		Stopping,
@@ -91,6 +91,14 @@ namespace Nest
 		By,
 		[EnumMember(Value = "all")]
 		All
+	}
+
+	public enum FilterType
+	{
+		[EnumMember(Value = "include")]
+		Include,
+		[EnumMember(Value = "exclude")]
+		Exclude
 	}
 
 	public enum JobState
@@ -123,13 +131,5 @@ namespace Nest
 		SkipResult,
 		[EnumMember(Value = "skip_model_update")]
 		SkipModelUpdate
-	}
-
-	public enum RuleFilterType
-	{
-		[EnumMember(Value = "include")]
-		Include,
-		[EnumMember(Value = "exclude")]
-		Exclude
 	}
 }

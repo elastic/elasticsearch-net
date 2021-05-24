@@ -21,7 +21,7 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest
 {
-	public enum SnapshotShardsStatsStage
+	public enum ShardsStatsStage
 	{
 		[EnumMember(Value = "STARTED")]
 		Started,

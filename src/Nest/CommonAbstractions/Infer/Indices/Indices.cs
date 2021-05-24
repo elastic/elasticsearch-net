@@ -4,10 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using Elastic.Transport;
 
-namespace Nest.Common
+namespace Nest
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
-	public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
+	public partial class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
 	{
 		internal Indices(AllIndicesMarker all) : base(all) { }
 

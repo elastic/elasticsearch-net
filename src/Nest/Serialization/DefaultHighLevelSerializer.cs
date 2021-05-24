@@ -122,9 +122,11 @@ namespace Nest
 				// ignored
 			}
 
-			return length > 0
-				? JsonSerializer.DeserializeAsync<T>(stream, Options, cancellationToken).AsTask()
-				: Task.FromResult(default(T));
+			return JsonSerializer.DeserializeAsync<T>(stream, Options, cancellationToken).AsTask();
+
+			//return length > 0
+			//	? JsonSerializer.DeserializeAsync<T>(stream, Options, cancellationToken).AsTask()
+			//	: Task.FromResult(default(T));
 		}
 
 		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default) =>

@@ -18,7 +18,6 @@
 
 using System.Threading;
 using System.Threading.Tasks;
-using Nest.Indices;
 
 #nullable restore
 namespace Nest

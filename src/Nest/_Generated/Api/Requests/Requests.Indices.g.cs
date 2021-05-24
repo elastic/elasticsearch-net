@@ -19,7 +19,6 @@
 using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
-using Nest.Common;
 using System.Collections.Generic;
 
 #nullable restore
@@ -54,5 +53,38 @@ namespace Nest
 
 		[JsonIgnore]
 		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+		[JsonPropertyName("aliases")]
+		public Dictionary<IndexName, Alias>? Aliases
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("mappings")]
+		public Union<Dictionary<string, TypeMapping>, TypeMapping>? Mappings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("settings")]
+		public Dictionary<string, object>? Settings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 }

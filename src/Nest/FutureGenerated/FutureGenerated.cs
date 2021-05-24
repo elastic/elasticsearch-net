@@ -1,10 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Nest
 {
 	// Stubs until we generate these - Allows the code to compile so we can identify real errors.
+
+	public class DateMath { }
+
+	public class Distance
+	{
+	}
+
+	public class MultiTermQueryRewrite
+	{
+	}
 
 	public class Aggregate
 	{

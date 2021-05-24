@@ -8,7 +8,7 @@ namespace Playground
 	{
 		private static async Task Main()
 		{
-			IElasticClient client = new ElasticClient(new Uri("http://localhost:9600"));
+			IElasticClient client = new ElasticClient(new Uri("http://localhost:9200"));
 
 			await client.PingAsync(new PingRequest());
 

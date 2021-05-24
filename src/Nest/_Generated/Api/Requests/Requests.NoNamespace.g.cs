@@ -19,7 +19,6 @@
 using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
-using Nest.Common;
 using System.Collections.Generic;
 
 #nullable restore

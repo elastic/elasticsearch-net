@@ -16,26 +16,37 @@
 //
 // ------------------------------------------------
 
-using System.Threading;
-using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest
 {
-	public class ClusterNamespace : NamespacedClientProxy
+	public partial class HttpHeaders : Dictionary<string, Union<string, IReadOnlyCollection<string>>>
 	{
-		internal ClusterNamespace(ElasticClient client) : base(client)
-		{
-		}
+	}
 
-		public ClusterHealthResponse Health(IClusterHealthRequest request)
-		{
-			return DoRequest<IClusterHealthRequest, ClusterHealthResponse>(request, request.RequestParameters);
-		}
+	public partial class Metadata : Dictionary<string, object>
+	{
+	}
 
-		public Task<ClusterHealthResponse> HealthAsync(IClusterHealthRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IClusterHealthRequest, ClusterHealthResponse>(request, request.RequestParameters, cancellationToken);
-		}
+	public partial class RuntimeFields : Dictionary<Field, RuntimeField>
+	{
+	}
+
+	public partial class ApplicationsPrivileges : Dictionary<Name, ResourcePrivileges>
+	{
+	}
+
+	public partial class Privileges : Dictionary<string, bool>
+	{
+	}
+
+	public partial class ResourcePrivileges : Dictionary<Name, Privileges>
+	{
+	}
+
+	public partial class Actions : Dictionary<IndexName, ActionStatus>
+	{
 	}
 }
