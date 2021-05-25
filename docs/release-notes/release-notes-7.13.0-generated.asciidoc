@@ -21,5 +21,11 @@
 - * Support runtime mappings for SQL https://github.com/elastic/elasticsearch-net/pull/5624[#5624] 
 - * Add migrate to data stream API in NEST https://github.com/elastic/elasticsearch-net/pull/5633[#5633] 
 - * Add promote data stream API to NEST https://github.com/elastic/elasticsearch-net/pull/5636[#5636] 
+- * Add NEST support for EQL Search API https://github.com/elastic/elasticsearch-net/pull/5658[#5658]  (issue: https://github.com/elastic/elasticsearch-net/issues/5584[#5584])
+- * Add NEST support for EQL search status API https://github.com/elastic/elasticsearch-net/pull/5663[#5663]  (issue: https://github.com/elastic/elasticsearch-net/issues/5584[#5584])
+- * Add NEST support for EQL Get Search API https://github.com/elastic/elasticsearch-net/pull/5665[#5665]  (issue: https://github.com/elastic/elasticsearch-net/issues/5584[#5584])
+- * Add NEST support for EQL delete API https://github.com/elastic/elasticsearch-net/pull/5667[#5667]  (issue: https://github.com/elastic/elasticsearch-net/issues/5584[#5584])
+- * Add NEST support for Query Watcher API https://github.com/elastic/elasticsearch-net/pull/5680[#5680]  (issue: https://github.com/elastic/elasticsearch-net/issues/5584[#5584])
+- * Improve anonymous serialization exception message https://github.com/elastic/elasticsearch-net/pull/5706[#5706]  (issue: https://github.com/elastic/elasticsearch-net/issues/5702[#5702])
 
 
