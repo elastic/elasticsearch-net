@@ -25,12 +25,4 @@ using Tests.Framework.EndpointTests;
 
 namespace Tests.Urls.NoNamespace
 {
-    public class PingUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.HEAD("/").Request(c => c.Ping(new PingRequest())).RequestAsync(c => c.PingAsync(new PingRequest()));
-        }
-    }
 }

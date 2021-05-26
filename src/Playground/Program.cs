@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Nest;
 
@@ -12,16 +13,34 @@ namespace Playground
 
 			await client.PingAsync(new PingRequest());
 
-			var request = new ClusterHealthRequest {Level = Level.Cluster};
+			await client.Cluster.HealthAsync();
 
-			var response = await client.Cluster.HealthAsync(request);
+			var clusterHealthRequest = new ClusterHealthRequest { Level = Level.Cluster };
+			var clusterHealthResponse = await client.Cluster.HealthAsync(clusterHealthRequest);
 
-			if (response.IsValid)
+			if (clusterHealthResponse.IsValid)
 			{
-				Console.WriteLine($"Cluster Name: {response.ClusterName}");
-				Console.WriteLine($"Status: {response.Status:G}");
-				Console.WriteLine($"Active Primaries: {response.ActivePrimaryShards}");
+				Console.WriteLine($"Cluster Name: {clusterHealthResponse.ClusterName}");
+				Console.WriteLine($"Status: {clusterHealthResponse.Status:G}");
+				Console.WriteLine($"Active Primaries: {clusterHealthResponse.ActivePrimaryShards}");
 			}
+
+			var createIndexRequest = new IndicesCreateRequest($"test-{Guid.NewGuid()}");
+			var createIndexResponse = await client.Indices.CreateAsync(createIndexRequest);
+
+			if (createIndexResponse.IsValid)
+				Console.WriteLine($"Shared Acknowledged: {createIndexResponse.ShardsAcknowledged}");
+
+			createIndexRequest = new IndicesCreateRequest($"test-{Guid.NewGuid()}")
+			{
+				Mappings = new TypeMapping
+				{
+					Properties = new Dictionary<PropertyName, Property>
+					{
+						//{"fieldOne", new TextProperty() }
+					}
+				}
+			};
 
 			// TODO: It might be kinda nice if the client accepts no request here and uses a cached default instance
 			//var searchResponse = await client.SearchAsync(new SearchRequest());
@@ -30,6 +49,11 @@ namespace Playground
 			//{
 			//	Console.WriteLine($"Took: {searchResponse.Took}");
 			//}
+
+			var clientConcrete = new ElasticClient(new Uri("http://localhost:9200"));
+
+			await clientConcrete.PingAsync();
+			await clientConcrete.Indices.DeleteAsync("testing");
 		}
 	}
 }

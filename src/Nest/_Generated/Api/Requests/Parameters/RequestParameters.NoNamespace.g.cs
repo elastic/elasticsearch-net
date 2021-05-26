@@ -26,7 +26,39 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
-    public class PingRequestParameters : RequestParameters<PingRequestParameters>
+    public class IndexRequestParameters : RequestParameters<IndexRequestParameters>
     {
+        [JsonIgnore]
+        public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+
+        [JsonIgnore]
+        public SequenceNumber? IfSeqNo { get => Q<SequenceNumber?>("if_seq_no"); set => Q("if_seq_no", value); }
+
+        [JsonIgnore]
+        public OpType? OpType { get => Q<OpType?>("op_type"); set => Q("op_type", value); }
+
+        [JsonIgnore]
+        public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
+
+        [JsonIgnore]
+        public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+
+        [JsonIgnore]
+        public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
+
+        [JsonIgnore]
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        [JsonIgnore]
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
+
+        [JsonIgnore]
+        public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+
+        [JsonIgnore]
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+        [JsonIgnore]
+        public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
     }
 }
