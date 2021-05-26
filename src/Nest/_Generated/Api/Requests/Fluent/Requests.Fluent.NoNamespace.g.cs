@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json;
 using Elastic.Transport;
 
 #nullable restore
@@ -26,6 +27,8 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceIndex;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
+		public void WriteJson(Utf8JsonWriter writer) => throw new System.NotImplementedException();
+
 		///<summary>/{index}/_doc/{id}</summary>
         public IndexDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Optional("id", id))
 		{

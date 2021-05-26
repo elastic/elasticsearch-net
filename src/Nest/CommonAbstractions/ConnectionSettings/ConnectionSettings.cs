@@ -337,7 +337,7 @@ namespace Nest
 	public abstract class ConnectionConfigurationBase<TConnectionConfiguration> : TransportConfigurationBase<TConnectionConfiguration>, IConnectionConfigurationValues
 		where TConnectionConfiguration : ConnectionConfigurationBase<TConnectionConfiguration>, IConnectionConfigurationValues
 	{
-		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection, ITransportSerializer serializer,
+		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection, ITransportSerializer? serializer,
 			IProductRegistration registration = null)
 			: base(connectionPool, connection, serializer, registration ?? ElasticsearchProductRegistration.Default) =>
 			UserAgent(ConnectionConfiguration.DefaultUserAgent);

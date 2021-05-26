@@ -1,5 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
@@ -18,6 +22,53 @@ namespace Nest
 		{
 		}
 	}
+
+	public class ProxyRequestConverterFactory : JsonConverterFactory
+	{
+		public override bool CanConvert(Type typeToConvert) => typeToConvert.IsGenericType && typeToConvert.GetInterfaces().Any(x=> x.UnderlyingSystemType == typeof(IProxyRequest)); // Check proxy request
+
+		public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+		{
+			//Debug.Assert(typeToConvert.IsGenericType &&
+			//			 typeToConvert.GetGenericTypeDefinition() == typeof(IProxyRequest));
+
+			var elementType = typeToConvert.GetGenericArguments()[0];
+
+			var att = typeToConvert.GetCustomAttribute<ConvertAsAttribute>();
+			
+			var converter = (JsonConverter)Activator.CreateInstance(
+				typeof(ProxyRequestConverter<>).MakeGenericType(att.ConvertType.MakeGenericType(elementType)),
+				BindingFlags.Instance | BindingFlags.Public,
+				binder: null,
+				args: null,
+				culture: null)!;
+
+			return converter;
+		}
+	}
+
+	[AttributeUsage(AttributeTargets.Interface)]
+	internal class ConvertAsAttribute : Attribute
+	{
+		public ConvertAsAttribute(Type convertType) => ConvertType = convertType;
+
+		public Type ConvertType { get; }
+	}
+
+	public class ProxyRequestConverter<TRequest> : JsonConverter<TRequest>
+	{
+		public override TRequest? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+
+		public override void Write(Utf8JsonWriter writer, TRequest value, JsonSerializerOptions options)
+		{
+			if (value is IProxyRequest proxyRequest)
+			{
+				proxyRequest.WriteJson(writer);
+			}
+		}
+	}
+
+	//public class TestConverter<TInterface, TConcrete> : JsonConverter<TInterface<>>
 
 	public class InterfaceConverter<TInterface, TConcrete> : JsonConverter<TInterface>
 		where TConcrete : class, TInterface
@@ -38,17 +89,17 @@ namespace Nest
 			switch (token)
 			{
 				case JsonTokenType.String:
-				{
-					var value = reader.GetString();
-					var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
-					return result;
-				}
+					{
+						var value = reader.GetString();
+						var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
+						return result;
+					}
 				case JsonTokenType.Number:
-				{
-					var value = reader.GetInt32();
-					var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
-					return result;
-				}
+					{
+						var value = reader.GetInt32();
+						var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
+						return result;
+					}
 			}
 
 			throw new SerializationException();
@@ -67,17 +118,17 @@ namespace Nest
 			switch (token)
 			{
 				case JsonTokenType.String:
-				{
-					var value = reader.GetString();
-					var result = (Percentage)Activator.CreateInstance(typeof(Percentage), value);
-					return result;
-				}
+					{
+						var value = reader.GetString();
+						var result = (Percentage)Activator.CreateInstance(typeof(Percentage), value);
+						return result;
+					}
 				case JsonTokenType.Number:
-				{
-					var value = reader.GetSingle();
-					var result = (Percentage)Activator.CreateInstance(typeof(Percentage), value);
-					return result;
-				}
+					{
+						var value = reader.GetSingle();
+						var result = (Percentage)Activator.CreateInstance(typeof(Percentage), value);
+						return result;
+					}
 			}
 
 			throw new SerializationException();
@@ -92,7 +143,8 @@ namespace Nest
 	{
 		private static readonly JsonSerializerOptions Options = new()
 		{
-			IgnoreNullValues = true, Converters = {new JsonStringEnumConverter()}
+			IgnoreNullValues = true,
+			Converters = { new JsonStringEnumConverter(), new ProxyRequestConverterFactory() }
 		};
 
 		private static readonly UTF8Encoding Encoding = new(false);
@@ -100,7 +152,8 @@ namespace Nest
 		// TODO - This is not ideal as we allocate a large string - No stream based sync overload - We should use a pooled byte array in the future
 		public T Deserialize<T>(Stream stream)
 		{
-			if (stream.Length == 0) return default;
+			if (stream.Length == 0)
+				return default;
 			using var reader = new StreamReader(stream);
 			return JsonSerializer.Deserialize<T>(reader.ReadToEnd(), Options);
 		}

@@ -20,23 +20,26 @@ using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 using System.Collections.Generic;
+using System.Text.Json;
 
 #nullable restore
 namespace Nest
 {
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IIndexRequest<TDocument>, IndexRequest>))]
-	public partial interface IIndexRequest<TDocument> : IRequest<IndexRequestParameters>
+	[ConvertAs(typeof(IndexRequest<>))]
+	public partial interface IIndexRequest<TDocument> : IRequest<IndexRequestParameters>, IProxyRequest
 	{
 	}
-
+	
 	public class IndexRequest<TDocument> : PlainRequestBase<IndexRequestParameters>, IIndexRequest<TDocument>
 	{
 		protected IIndexRequest<TDocument> Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceIndex;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => false;
+		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+		public void WriteJson(Utf8JsonWriter writer) => JsonSerializer.Serialize(writer, Document);
+
 		///<summary>/{index}/_doc/{id}</summary>
         public IndexRequest(IndexName index, Id id) : base(r => r.Required("index", index).Optional("id", id))
 		{
@@ -46,6 +49,8 @@ namespace Nest
         public IndexRequest(IndexName index) : base(r => r.Required("index", index))
 		{
 		}
+
+		public TDocument Document { get; set; }
 
 		[JsonIgnore]
 		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }

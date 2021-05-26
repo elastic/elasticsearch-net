@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System.IO;
+using System.Text.Json;
 using Elastic.Transport;
 
 namespace Nest
@@ -10,7 +11,7 @@ namespace Nest
 	/// <summary> A request that that does not necessarily (de)serializes itself </summary>
 	public interface IProxyRequest : IRequest
 	{
-		void WriteJson(ITransportSerializer sourceSerializer, Stream s, SerializationFormatting serializationFormatting);
+		void WriteJson(Utf8JsonWriter writer);
 	}
 
 
