@@ -17,6 +17,7 @@
 // TODO - RUN INSTRUCTIONS
 //
 // ------------------------------------------------
+using System;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,24 +26,28 @@ namespace Nest
 {
     public partial class ElasticClient : IElasticClient
     {
-        public ClusterNamespace Cluster { get; private set; }
-
-        public IndicesNamespace Indices { get; private set; }
-
         private partial void SetupNamespaces()
         {
-            Cluster = new ClusterNamespace(this);
-            Indices = new IndicesNamespace(this);
         }
 
-        public PingResponse Ping(IPingRequest request)
+        public IndexResponse Index<TDocument>(IIndexRequest<TDocument> request)
         {
-            return DoRequest<IPingRequest, PingResponse>(request, request.RequestParameters);
+            return DoRequest<IIndexRequest<TDocument>, IndexResponse>(request, request.RequestParameters);
         }
 
-        public Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default)
+        public Task<IndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken cancellationToken = default)
         {
-            return DoRequestAsync<IPingRequest, PingResponse>(request, request.RequestParameters, cancellationToken);
+            return DoRequestAsync<IIndexRequest<TDocument>, IndexResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public IndexResponse Index<TDocument>(TDocument document, IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null)
+        {
+            return Index(selector.InvokeOrDefault(new IndexDescriptor<TDocument>(index)));
+        }
+
+        public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null, CancellationToken cancellationToken = default)
+        {
+            return IndexAsync(selector.InvokeOrDefault(new IndexDescriptor<TDocument>(index)), cancellationToken);
         }
     }
 }

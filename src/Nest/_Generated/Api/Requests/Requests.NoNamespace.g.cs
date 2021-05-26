@@ -24,22 +24,60 @@ using System.Collections.Generic;
 #nullable restore
 namespace Nest
 {
-	[JsonInterfaceConverter(typeof(InterfaceConverter<IPingRequest, PingRequest>))]
-	public partial interface IPingRequest : IRequest<PingRequestParameters>
+	[JsonInterfaceConverter(typeof(InterfaceConverter<IIndexRequest<TDocument>, IndexRequest>))]
+	public partial interface IIndexRequest<TDocument> : IRequest<IndexRequestParameters>
 	{
 	}
 
-	public class PingRequest : PlainRequestBase<PingRequestParameters>, IPingRequest
+	public class IndexRequest<TDocument> : PlainRequestBase<IndexRequestParameters>, IIndexRequest<TDocument>
 	{
-		protected IPingRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected IIndexRequest<TDocument> Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceIndex;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
-		///<summary>/</summary>
-        public PingRequest() : base()
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+		///<summary>/{index}/_doc/{id}</summary>
+        public IndexRequest(IndexName index, Id id) : base(r => r.Required("index", index).Optional("id", id))
 		{
 		}
+
+		///<summary>/{index}/_doc</summary>
+        public IndexRequest(IndexName index) : base(r => r.Required("index", index))
+		{
+		}
+
+		[JsonIgnore]
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+
+		[JsonIgnore]
+		public SequenceNumber? IfSeqNo { get => Q<SequenceNumber?>("if_seq_no"); set => Q("if_seq_no", value); }
+
+		[JsonIgnore]
+		public OpType? OpType { get => Q<OpType?>("op_type"); set => Q("op_type", value); }
+
+		[JsonIgnore]
+		public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
+
+		[JsonIgnore]
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+
+		[JsonIgnore]
+		public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
+
+		[JsonIgnore]
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonIgnore]
+		public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
+
+		[JsonIgnore]
+		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+
+		[JsonIgnore]
+		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+		[JsonIgnore]
+		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 	}
 }

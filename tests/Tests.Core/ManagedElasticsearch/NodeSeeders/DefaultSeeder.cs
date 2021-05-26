@@ -55,9 +55,9 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			var client = new HttpClient();
 			client.PutAsync("http://127.0.0.1:9200/project", new StringContent(string.Empty)).GetAwaiter().GetResult();
 
-			//var t = Task.Run(async () => await SeedNodeAsync(alreadySeeded).ConfigureAwait(false));
+			var t = Task.Run(async () => await SeedNodeAsync(alreadySeeded).ConfigureAwait(false));
 
-			//t.Wait(TimeSpan.FromSeconds(40));
+			t.Wait(TimeSpan.FromSeconds(40));
 		}
 
 		public void SeedNodeNoData()
@@ -76,18 +76,16 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		// If raw_fields exists assume this cluster is already seeded.
 
 		private bool AlreadySeeded() => false; // TODO: Add exists for HEAD responses
-		//private bool AlreadySeeded() => Client.Indices.IndexTemplateExists(new IndexTemplateExistsRequest(TestsIndexTemplateName)).Exists;
+											   //private bool AlreadySeeded() => Client.Indices.IndexTemplateExists(new IndexTemplateExistsRequest(TestsIndexTemplateName)).Exists;
 
-		//private async Task SeedNodeAsync(bool alreadySeeded)
-		//{
-		//	// Ensure a clean slate by deleting everything regardless of whether they may already exist
-		//	await DeleteIndicesAndTemplatesAsync(alreadySeeded).ConfigureAwait(false);
-		//	//await ClusterSettingsAsync().ConfigureAwait(false);
-		//	await PutPipeline().ConfigureAwait(false);
-		//	// and now recreate everything
-		//	await CreateIndicesAndSeedIndexDataAsync().ConfigureAwait(false);
-		//}
-
+		// Ensure a clean slate by deleting everything regardless of whether they may already exist
+		private async Task SeedNodeAsync(bool alreadySeeded) =>
+			
+			await DeleteIndicesAndTemplatesAsync(alreadySeeded).ConfigureAwait(false);
+		//	await ClusterSettingsAsync().ConfigureAwait(false);
+		//await PutPipeline().ConfigureAwait(false);
+		// and now recreate everything
+		//await CreateIndicesAndSeedIndexDataAsync().ConfigureAwait(false);
 		//private async Task SeedNodeNoDataAsync(bool alreadySeeded)
 		//{
 		//	// Ensure a clean slate by deleting everything regardless of whether they may already exist
@@ -135,20 +133,20 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		//	putProcessors.ShouldBeValid();
 		//}
 
-		//public async Task DeleteIndicesAndTemplatesAsync(bool alreadySeeded)
-		//{
-		//	var tasks = new List<Task>
-		//	{
-		//		Client.Indices.DeleteAsync(typeof(Project)),
-		//		Client.Indices.DeleteAsync(typeof(Developer)),
-		//		Client.Indices.DeleteAsync(typeof(ProjectPercolation))
-		//	};
+		public async Task DeleteIndicesAndTemplatesAsync(bool alreadySeeded)
+		{
+			var tasks = new List<Task>
+			{
+				Client.Indices.DeleteAsync(typeof(Project)),
+				//Client.Indices.DeleteAsync(typeof(Developer)),
+				//Client.Indices.DeleteAsync(typeof(ProjectPercolation))
+			};
 
-		//	if (alreadySeeded)
-		//		tasks.Add(Client.Indices.DeleteTemplateAsync(TestsIndexTemplateName));
+			//if (alreadySeeded)
+			//	tasks.Add(Client.Indices.DeleteTemplateAsync(TestsIndexTemplateName));
 
-		//	await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
-		//}
+			await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
+		}
 
 		//private async Task CreateIndicesAndSeedIndexDataAsync()
 		//{
