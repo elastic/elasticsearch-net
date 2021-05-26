@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest
 {
-	public class PingResponse : ResponseBase
+	public class IndexResponse : WriteResponseBase
 	{
 	}
 }

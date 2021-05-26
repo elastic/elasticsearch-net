@@ -21,10 +21,19 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
-	public class PingDescriptor : RequestDescriptorBase<PingDescriptor, PingRequestParameters, IPingRequest>, IPingRequest
+	public partial class IndexDescriptor<TDocument> : RequestDescriptorBase<IndexDescriptor<TDocument>, IndexRequestParameters, IIndexRequest<TDocument>>, IIndexRequest<TDocument>
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceIndex;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
+		///<summary>/{index}/_doc/{id}</summary>
+        public IndexDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Optional("id", id))
+		{
+		}
+
+		///<summary>/{index}/_doc</summary>
+        public IndexDescriptor(IndexName index) : base(r => r.Required("index", index))
+		{
+		}
 	}
 }

@@ -17,6 +17,7 @@
 // TODO - RUN INSTRUCTIONS
 //
 // ------------------------------------------------
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,11 +25,9 @@ namespace Nest
 {
     public partial interface IElasticClient
     {
-        ClusterNamespace Cluster { get; }
-
-        IndicesNamespace Indices { get; }
-
-        PingResponse Ping(IPingRequest request);
-        Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default);
+        IndexResponse Index<TDocument>(IIndexRequest<TDocument> request);
+        Task<IndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken cancellationToken = default);
+        IndexResponse Index<TDocument>(TDocument document, IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null);
+        Task<IndexResponse> IndexAsync<TDocument>(TDocument document, IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null, CancellationToken cancellationToken = default);
     }
 }

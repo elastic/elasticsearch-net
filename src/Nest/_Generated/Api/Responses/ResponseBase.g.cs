@@ -22,10 +22,109 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest
 {
-	public abstract class AcknowledgedResponseBase : ResponseBase
+	public abstract class WriteResponseBase : ResponseBase
 	{
-		[JsonPropertyName("acknowledged")]
-		public bool Acknowledged
+		[JsonPropertyName("_id")]
+		public Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_index")]
+		public IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_primary_term")]
+		public long PrimaryTerm
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("result")]
+		public Result Result
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_seq_no")]
+		public SequenceNumber SeqNo
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_shards")]
+		public ShardStatistics Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_type")]
+		public Name? Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_version")]
+		public VersionNumber Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("forced_refresh")]
+		public bool? ForcedRefresh
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("error")]
+		public ErrorCause? Error
 		{
 			get;
 #if NET5_0

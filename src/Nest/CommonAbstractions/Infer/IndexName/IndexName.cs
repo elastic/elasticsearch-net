@@ -92,10 +92,10 @@ namespace Nest
 
 		public Indices And(IndexName index) => new(new[] {this, index});
 
-		private static IndexName? Parse(string indexName)
+		private static IndexName Parse(string indexName)
 		{
 			if (string.IsNullOrWhiteSpace(indexName))
-				return null;
+				throw new ArgumentException("", nameof(indexName));
 
 			var separatorIndex = indexName.IndexOf(ClusterSeparator);
 
@@ -109,9 +109,9 @@ namespace Nest
 			return new IndexName(indexName);
 		}
 
-		public static implicit operator IndexName?(string indexName) => Parse(indexName);
+		public static implicit operator IndexName(string indexName) => Parse(indexName);
 
-		public static implicit operator IndexName?(Type type) => type == null ? null : new IndexName(type);
+		public static implicit operator IndexName(Type type) => new (type);
 
 		public override bool Equals(object obj) =>
 			obj is string s ? EqualsString(s) : obj is IndexName i && EqualsMarker(i);
