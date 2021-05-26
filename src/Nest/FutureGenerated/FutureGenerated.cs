@@ -39,7 +39,7 @@ namespace Nest
 	}
 
 
-	public class SuggestOption
+	public class SuggestOption<TDocument>
 	{
 	}
 

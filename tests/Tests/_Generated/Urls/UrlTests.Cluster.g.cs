@@ -23,23 +23,14 @@ using System.Threading.Tasks;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
 
-namespace Tests.Urls.NoNamespace
+namespace Tests.Urls.Cluster
 {
-    public class PingUrlTests : UrlTestsBase
+    public class ClusterHealthUrlTests : UrlTestsBase
     {
         [U]
         public override async Task Urls()
         {
-            await UrlTester.HEAD("/").Request(c => c.Ping(new PingRequest())).RequestAsync(c => c.PingAsync(new PingRequest()));
-        }
-    }
-
-    public class SearchUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_search").Request(c => c.Search(new SearchRequest())).RequestAsync(c => c.SearchAsync(new SearchRequest()));
+            await UrlTester.GET("/_cluster/health").Request(c => c.Cluster.Health(new ClusterHealthRequest())).RequestAsync(c => c.Cluster.HealthAsync(new ClusterHealthRequest()));
         }
     }
 }

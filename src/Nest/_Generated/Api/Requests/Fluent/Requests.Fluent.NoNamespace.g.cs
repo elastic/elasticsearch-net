@@ -16,6 +16,8 @@
 //
 // ------------------------------------------------
 
+using System.IO;
+using System.Text.Json;
 using Elastic.Transport;
 
 #nullable restore
@@ -33,6 +35,35 @@ namespace Nest
 
 		///<summary>/{index}/_doc</summary>
         public IndexDescriptor(IndexName index) : base(r => r.Required("index", index))
+		{
+		}
+
+		public void WriteJson(Stream stream, ITransportSerializer sourceSerializer, SerializationFormatting formatting) => throw new System.NotImplementedException();
+	}
+
+	public partial class PingDescriptor : RequestDescriptorBase<PingDescriptor, PingRequestParameters, IPingRequest>, IPingRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
+		///<summary>/</summary>
+        public PingDescriptor() : base()
+		{
+		}
+	}
+
+	public partial class SearchDescriptor : RequestDescriptorBase<SearchDescriptor, SearchRequestParameters, ISearchRequest>, ISearchRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearch;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_search</summary>
+        public SearchDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_search</summary>
+        public SearchDescriptor(Indices index) : base(r => r.Optional("index", index))
 		{
 		}
 	}

@@ -61,4 +61,137 @@ namespace Nest
         [JsonIgnore]
         public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
     }
+
+    public class PingRequestParameters : RequestParameters<PingRequestParameters>
+    {
+    }
+
+    public class SearchRequestParameters : RequestParameters<SearchRequestParameters>
+    {
+        [JsonIgnore]
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        [JsonIgnore]
+        public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
+
+        [JsonIgnore]
+        public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
+
+        [JsonIgnore]
+        public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+
+        [JsonIgnore]
+        public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
+
+        [JsonIgnore]
+        public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+
+        [JsonIgnore]
+        public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+
+        [JsonIgnore]
+        public string? Df { get => Q<string?>("df"); set => Q("df", value); }
+
+        [JsonIgnore]
+        public Fields? DocvalueFields { get => Q<Fields?>("docvalue_fields"); set => Q("docvalue_fields", value); }
+
+        [JsonIgnore]
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        [JsonIgnore]
+        public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
+
+        [JsonIgnore]
+        public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+        [JsonIgnore]
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        [JsonIgnore]
+        public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+
+        [JsonIgnore]
+        public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+
+        [JsonIgnore]
+        public VersionString? MinCompatibleShardNode { get => Q<VersionString?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
+
+        [JsonIgnore]
+        public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+        [JsonIgnore]
+        public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
+
+        [JsonIgnore]
+        public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
+
+        [JsonIgnore]
+        public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
+
+        [JsonIgnore]
+        public Time? Scroll { get => Q<Time?>("scroll"); set => Q("scroll", value); }
+
+        [JsonIgnore]
+        public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
+
+        [JsonIgnore]
+        public string[]? Stats { get => Q<string[]?>("stats"); set => Q("stats", value); }
+
+        [JsonIgnore]
+        public Fields? StoredFields { get => Q<Fields?>("stored_fields"); set => Q("stored_fields", value); }
+
+        [JsonIgnore]
+        public Field? SuggestField { get => Q<Field?>("suggest_field"); set => Q("suggest_field", value); }
+
+        [JsonIgnore]
+        public SuggestMode? SuggestMode { get => Q<SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
+
+        [JsonIgnore]
+        public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
+
+        [JsonIgnore]
+        public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
+
+        [JsonIgnore]
+        public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
+
+        [JsonIgnore]
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        [JsonIgnore]
+        public Union<bool, int>? TrackTotalHits { get => Q<Union<bool, int>?>("track_total_hits"); set => Q("track_total_hits", value); }
+
+        [JsonIgnore]
+        public bool? TrackScores { get => Q<bool?>("track_scores"); set => Q("track_scores", value); }
+
+        [JsonIgnore]
+        public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+
+        [JsonIgnore]
+        public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+
+        [JsonIgnore]
+        public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
+
+        [JsonIgnore]
+        public Union<bool, Fields>? Source { get => Q<Union<bool, Fields>?>("_source"); set => Q("_source", value); }
+
+        [JsonIgnore]
+        public Fields? SourceExcludes { get => Q<Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+        [JsonIgnore]
+        public Fields? SourceIncludes { get => Q<Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+        [JsonIgnore]
+        public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
+
+        [JsonIgnore]
+        public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+        [JsonIgnore]
+        public int? Size { get => Q<int?>("size"); set => Q("size", value); }
+
+        [JsonIgnore]
+        public int? From { get => Q<int?>("from"); set => Q("from", value); }
+    }
 }
