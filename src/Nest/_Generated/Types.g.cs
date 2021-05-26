@@ -133,6 +133,327 @@ namespace Nest
 		}
 	}
 
+	public partial class AggregationBreakdown
+	{
+		[JsonPropertyName("build_aggregation")]
+		public long BuildAggregation
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_aggregation_count")]
+		public long BuildAggregationCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_leaf_collector")]
+		public long BuildLeafCollector
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_leaf_collector_count")]
+		public long BuildLeafCollectorCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("collect")]
+		public long Collect
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("collect_count")]
+		public long CollectCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("initialize")]
+		public long Initialize
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("initialize_count")]
+		public long InitializeCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("post_collection")]
+		public long? PostCollection
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("post_collection_count")]
+		public long? PostCollectionCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("reduce")]
+		public long Reduce
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("reduce_count")]
+		public long ReduceCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class AggregationProfile
+	{
+		[JsonPropertyName("breakdown")]
+		public AggregationBreakdown Breakdown
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<AggregationProfileDebug>? Children
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("debug")]
+		public AggregationProfileDebug? Debug
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("description")]
+		public string Description
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_in_nanos")]
+		public long TimeInNanos
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class AggregationProfileDebug
+	{
+	}
+
+	public partial class Collector
+	{
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<Collector>? Children
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("name")]
+		public string Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("reason")]
+		public string Reason
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_in_nanos")]
+		public long TimeInNanos
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class CompletionSuggester : SuggesterBase
+	{
+		[JsonPropertyName("contexts")]
+		public Dictionary<string, OneOf<string, IReadOnlyCollection<string>, GeoLocation, IReadOnlyCollection<SuggestContextQuery>>>? Contexts { get; set; }
+
+		[JsonPropertyName("fuzzy")]
+		public SuggestFuzziness? Fuzzy { get; set; }
+
+		[JsonPropertyName("prefix")]
+		public string? Prefix { get; set; }
+
+		[JsonPropertyName("regex")]
+		public string? Regex { get; set; }
+
+		[JsonPropertyName("skip_duplicates")]
+		public bool? SkipDuplicates { get; set; }
+	}
+
+	public partial class DirectGenerator
+	{
+		[JsonPropertyName("field")]
+		public Field Field { get; set; }
+
+		[JsonPropertyName("max_edits")]
+		public int? MaxEdits { get; set; }
+
+		[JsonPropertyName("max_inspections")]
+		public float? MaxInspections { get; set; }
+
+		[JsonPropertyName("max_term_freq")]
+		public float? MaxTermFreq { get; set; }
+
+		[JsonPropertyName("min_doc_freq")]
+		public float? MinDocFreq { get; set; }
+
+		[JsonPropertyName("min_word_length")]
+		public int? MinWordLength { get; set; }
+
+		[JsonPropertyName("post_filter")]
+		public string? PostFilter { get; set; }
+
+		[JsonPropertyName("pre_filter")]
+		public string? PreFilter { get; set; }
+
+		[JsonPropertyName("prefix_length")]
+		public int? PrefixLength { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonPropertyName("suggest_mode")]
+		public SuggestMode? SuggestMode { get; set; }
+	}
+
+	public partial class FieldCollapse
+	{
+		[JsonPropertyName("field")]
+		public Field Field { get; set; }
+
+		[JsonPropertyName("inner_hits")]
+		public Union<InnerHits, IReadOnlyCollection<InnerHits>>? InnerHits { get; set; }
+
+		[JsonPropertyName("max_concurrent_group_searches")]
+		public int? MaxConcurrentGroupSearches { get; set; }
+	}
+
 	public partial class GeoDistanceSort
 	{
 		[JsonPropertyName("distance_type")]
@@ -178,6 +499,135 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class Highlight
+	{
+		[JsonPropertyName("boundary_chars")]
+		public string? BoundaryChars { get; set; }
+
+		[JsonPropertyName("boundary_max_scan")]
+		public int? BoundaryMaxScan { get; set; }
+
+		[JsonPropertyName("boundary_scanner")]
+		public BoundaryScanner? BoundaryScanner { get; set; }
+
+		[JsonPropertyName("boundary_scanner_locale")]
+		public string? BoundaryScannerLocale { get; set; }
+
+		[JsonPropertyName("encoder")]
+		public HighlighterEncoder? Encoder { get; set; }
+
+		[JsonPropertyName("fields")]
+		public Dictionary<Field, HighlightField> Fields { get; set; }
+
+		[JsonPropertyName("fragmenter")]
+		public HighlighterFragmenter? Fragmenter { get; set; }
+
+		[JsonPropertyName("fragment_offset")]
+		public int? FragmentOffset { get; set; }
+
+		[JsonPropertyName("fragment_size")]
+		public int? FragmentSize { get; set; }
+
+		[JsonPropertyName("highlight_query")]
+		public QueryContainer? HighlightQuery { get; set; }
+
+		[JsonPropertyName("max_analyzed_offset")]
+		public Union<string, int>? MaxAnalyzedOffset { get; set; }
+
+		[JsonPropertyName("max_fragment_length")]
+		public int? MaxFragmentLength { get; set; }
+
+		[JsonPropertyName("no_match_size")]
+		public int? NoMatchSize { get; set; }
+
+		[JsonPropertyName("number_of_fragments")]
+		public int? NumberOfFragments { get; set; }
+
+		[JsonPropertyName("order")]
+		public HighlighterOrder? Order { get; set; }
+
+		[JsonPropertyName("post_tags")]
+		public IEnumerable<string>? PostTags { get; set; }
+
+		[JsonPropertyName("pre_tags")]
+		public IEnumerable<string>? PreTags { get; set; }
+
+		[JsonPropertyName("require_field_match")]
+		public bool? RequireFieldMatch { get; set; }
+
+		[JsonPropertyName("tags_schema")]
+		public HighlighterTagsSchema? TagsSchema { get; set; }
+
+		[JsonPropertyName("type")]
+		public HighlighterType? Type { get; set; }
+	}
+
+	public partial class HighlightField
+	{
+		[JsonPropertyName("boundary_chars")]
+		public string? BoundaryChars { get; set; }
+
+		[JsonPropertyName("boundary_max_scan")]
+		public int? BoundaryMaxScan { get; set; }
+
+		[JsonPropertyName("boundary_scanner")]
+		public BoundaryScanner? BoundaryScanner { get; set; }
+
+		[JsonPropertyName("boundary_scanner_locale")]
+		public string? BoundaryScannerLocale { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("force_source")]
+		public bool? ForceSource { get; set; }
+
+		[JsonPropertyName("fragmenter")]
+		public HighlighterFragmenter? Fragmenter { get; set; }
+
+		[JsonPropertyName("fragment_offset")]
+		public int? FragmentOffset { get; set; }
+
+		[JsonPropertyName("fragment_size")]
+		public int? FragmentSize { get; set; }
+
+		[JsonPropertyName("highlight_query")]
+		public QueryContainer? HighlightQuery { get; set; }
+
+		[JsonPropertyName("matched_fields")]
+		public Fields? MatchedFields { get; set; }
+
+		[JsonPropertyName("max_fragment_length")]
+		public int? MaxFragmentLength { get; set; }
+
+		[JsonPropertyName("no_match_size")]
+		public int? NoMatchSize { get; set; }
+
+		[JsonPropertyName("number_of_fragments")]
+		public int? NumberOfFragments { get; set; }
+
+		[JsonPropertyName("order")]
+		public HighlighterOrder? Order { get; set; }
+
+		[JsonPropertyName("phrase_limit")]
+		public int? PhraseLimit { get; set; }
+
+		[JsonPropertyName("post_tags")]
+		public IEnumerable<string>? PostTags { get; set; }
+
+		[JsonPropertyName("pre_tags")]
+		public IEnumerable<string>? PreTags { get; set; }
+
+		[JsonPropertyName("require_field_match")]
+		public bool? RequireFieldMatch { get; set; }
+
+		[JsonPropertyName("tags_schema")]
+		public HighlighterTagsSchema? TagsSchema { get; set; }
+
+		[JsonPropertyName("type")]
+		public Union<HighlighterType, string>? Type { get; set; }
 	}
 
 	public partial class Hit<TDocument>
@@ -428,6 +878,51 @@ namespace Nest
 		}
 	}
 
+	public partial class InnerHits
+	{
+		[JsonPropertyName("collapse")]
+		public FieldCollapse? Collapse { get; set; }
+
+		[JsonPropertyName("docvalue_fields")]
+		public Fields? DocvalueFields { get; set; }
+
+		[JsonPropertyName("explain")]
+		public bool? Explain { get; set; }
+
+		[JsonPropertyName("fields")]
+		public Fields? Fields { get; set; }
+
+		[JsonPropertyName("from")]
+		public int? From { get; set; }
+
+		[JsonPropertyName("highlight")]
+		public Highlight? Highlight { get; set; }
+
+		[JsonPropertyName("ignore_unmapped")]
+		public bool? IgnoreUnmapped { get; set; }
+
+		[JsonPropertyName("name")]
+		public Name? Name { get; set; }
+
+		[JsonPropertyName("script_fields")]
+		public Dictionary<string, ScriptField>? ScriptFields { get; set; }
+
+		[JsonPropertyName("seq_no_primary_term")]
+		public bool? SeqNoPrimaryTerm { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonPropertyName("sort")]
+		public Sort? Sort { get; set; }
+
+		[JsonPropertyName("_source")]
+		public Union<bool, SourceFilter>? Source { get; set; }
+
+		[JsonPropertyName("version")]
+		public bool? Version { get; set; }
+	}
+
 	public partial class InnerHitsMetadata
 	{
 		[JsonPropertyName("hits")]
@@ -478,6 +973,24 @@ namespace Nest
 		}
 	}
 
+	public partial class LaplaceSmoothingModel
+	{
+		[JsonPropertyName("alpha")]
+		public double Alpha { get; set; }
+	}
+
+	public partial class LinearInterpolationSmoothingModel
+	{
+		[JsonPropertyName("bigram_lambda")]
+		public double BigramLambda { get; set; }
+
+		[JsonPropertyName("trigram_lambda")]
+		public double TrigramLambda { get; set; }
+
+		[JsonPropertyName("unigram_lambda")]
+		public double UnigramLambda { get; set; }
+	}
+
 	public partial class NestedIdentity
 	{
 		[JsonPropertyName("field")]
@@ -512,6 +1025,384 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class PhraseSuggestCollate
+	{
+		[JsonPropertyName("params")]
+		public Dictionary<string, object>? Params { get; set; }
+
+		[JsonPropertyName("prune")]
+		public bool? Prune { get; set; }
+
+		[JsonPropertyName("query")]
+		public PhraseSuggestCollateQuery Query { get; set; }
+	}
+
+	public partial class PhraseSuggestCollateQuery
+	{
+		[JsonPropertyName("id")]
+		public Id? Id { get; set; }
+
+		[JsonPropertyName("source")]
+		public string? Source { get; set; }
+	}
+
+	public partial class PhraseSuggestHighlight
+	{
+		[JsonPropertyName("post_tag")]
+		public string PostTag { get; set; }
+
+		[JsonPropertyName("pre_tag")]
+		public string PreTag { get; set; }
+	}
+
+	public partial class PhraseSuggester : SuggesterBase
+	{
+		[JsonPropertyName("collate")]
+		public PhraseSuggestCollate? Collate { get; set; }
+
+		[JsonPropertyName("confidence")]
+		public double? Confidence { get; set; }
+
+		[JsonPropertyName("direct_generator")]
+		public IEnumerable<DirectGenerator>? DirectGenerator { get; set; }
+
+		[JsonPropertyName("force_unigrams")]
+		public bool? ForceUnigrams { get; set; }
+
+		[JsonPropertyName("gram_size")]
+		public int? GramSize { get; set; }
+
+		[JsonPropertyName("highlight")]
+		public PhraseSuggestHighlight? Highlight { get; set; }
+
+		[JsonPropertyName("max_errors")]
+		public double? MaxErrors { get; set; }
+
+		[JsonPropertyName("real_word_error_likelihood")]
+		public double? RealWordErrorLikelihood { get; set; }
+
+		[JsonPropertyName("separator")]
+		public string? Separator { get; set; }
+
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonPropertyName("smoothing")]
+		public SmoothingModelContainer? Smoothing { get; set; }
+
+		[JsonPropertyName("text")]
+		public string? Text { get; set; }
+
+		[JsonPropertyName("token_limit")]
+		public int? TokenLimit { get; set; }
+	}
+
+	public partial class PointInTimeReference
+	{
+		[JsonPropertyName("id")]
+		public Id Id { get; set; }
+
+		[JsonPropertyName("keep_alive")]
+		public Time? KeepAlive { get; set; }
+	}
+
+	public partial class Profile
+	{
+		[JsonPropertyName("shards")]
+		public IReadOnlyCollection<ShardProfile> Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class QueryBreakdown
+	{
+		[JsonPropertyName("advance")]
+		public long Advance
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("advance_count")]
+		public long AdvanceCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_scorer")]
+		public long BuildScorer
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_scorer_count")]
+		public long BuildScorerCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("compute_max_score")]
+		public long ComputeMaxScore
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("compute_max_score_count")]
+		public long ComputeMaxScoreCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("create_weight")]
+		public long CreateWeight
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("create_weight_count")]
+		public long CreateWeightCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("match")]
+		public long Match
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("match_count")]
+		public long MatchCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("next_doc")]
+		public long NextDoc
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("next_doc_count")]
+		public long NextDocCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("score")]
+		public long Score
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("score_count")]
+		public long ScoreCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("set_min_competitive_score")]
+		public long SetMinCompetitiveScore
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("set_min_competitive_score_count")]
+		public long SetMinCompetitiveScoreCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shallow_advance")]
+		public long ShallowAdvance
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shallow_advance_count")]
+		public long ShallowAdvanceCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class QueryProfile
+	{
+		[JsonPropertyName("breakdown")]
+		public QueryBreakdown Breakdown
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<QueryProfile>? Children
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("description")]
+		public string Description
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_in_nanos")]
+		public long TimeInNanos
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Rescore
+	{
+		[JsonPropertyName("query")]
+		public RescoreQuery Query { get; set; }
+
+		[JsonPropertyName("window_size")]
+		public int? WindowSize { get; set; }
+	}
+
+	public partial class RescoreQuery
+	{
+		[JsonPropertyName("rescore_query")]
+		public QueryContainer Query { get; set; }
+
+		[JsonPropertyName("query_weight")]
+		public double? QueryWeight { get; set; }
+
+		[JsonPropertyName("rescore_query_weight")]
+		public double? RescoreQueryWeight { get; set; }
+
+		[JsonPropertyName("score_mode")]
+		public ScoreMode? ScoreMode { get; set; }
 	}
 
 	public partial class ScoreSort
@@ -575,6 +1466,90 @@ namespace Nest
 		}
 	}
 
+	public partial class SearchProfile
+	{
+		[JsonPropertyName("collector")]
+		public IReadOnlyCollection<Collector> Collector
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("query")]
+		public IReadOnlyCollection<QueryProfile> Query
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("rewrite_time")]
+		public long RewriteTime
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ShardProfile
+	{
+		[JsonPropertyName("aggregations")]
+		public IReadOnlyCollection<AggregationProfile> Aggregations
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("id")]
+		public string Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("searches")]
+		public IReadOnlyCollection<SearchProfile> Searches
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SmoothingModelContainer
+	{
+		[JsonPropertyName("laplace")]
+		public LaplaceSmoothingModel? Laplace { get; set; }
+
+		[JsonPropertyName("linear_interpolation")]
+		public LinearInterpolationSmoothingModel? LinearInterpolation { get; set; }
+
+		[JsonPropertyName("stupid_backoff")]
+		public StupidBackoffSmoothingModel? StupidBackoff { get; set; }
+	}
+
 	public partial class SortContainer
 	{
 		[JsonPropertyName("_doc")]
@@ -622,6 +1597,182 @@ namespace Nest
 		}
 	}
 
+	public partial class SourceFilter
+	{
+		[JsonPropertyName("exclude")]
+		public Fields? Exclude { get; set; }
+
+		[JsonPropertyName("excludes")]
+		public Fields? Excludes { get; set; }
+
+		[JsonPropertyName("include")]
+		public Fields? Include { get; set; }
+
+		[JsonPropertyName("includes")]
+		public Fields? Includes { get; set; }
+	}
+
+	public partial class StupidBackoffSmoothingModel
+	{
+		[JsonPropertyName("discount")]
+		public double Discount { get; set; }
+	}
+
+	public partial class Suggest<T>
+	{
+		[JsonPropertyName("length")]
+		public int Length
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("offset")]
+		public int Offset
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("options")]
+		public IReadOnlyCollection<SuggestOption<T>> Options
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("text")]
+		public string Text
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SuggestContainer
+	{
+		[JsonPropertyName("completion")]
+		public CompletionSuggester? Completion { get; set; }
+
+		[JsonPropertyName("phrase")]
+		public PhraseSuggester? Phrase { get; set; }
+
+		[JsonPropertyName("prefix")]
+		public string? Prefix { get; set; }
+
+		[JsonPropertyName("regex")]
+		public string? Regex { get; set; }
+
+		[JsonPropertyName("term")]
+		public TermSuggester? Term { get; set; }
+
+		[JsonPropertyName("text")]
+		public string? Text { get; set; }
+	}
+
+	public partial class SuggestContextQuery
+	{
+		[JsonPropertyName("boost")]
+		public double? Boost { get; set; }
+
+		[JsonPropertyName("context")]
+		public Context Context { get; set; }
+
+		[JsonPropertyName("neighbours")]
+		public Union<IReadOnlyCollection<Distance>, IReadOnlyCollection<int>>? Neighbours { get; set; }
+
+		[JsonPropertyName("precision")]
+		public Union<Distance, int>? Precision { get; set; }
+
+		[JsonPropertyName("prefix")]
+		public bool? Prefix { get; set; }
+	}
+
+	public partial class SuggestFuzziness
+	{
+		[JsonPropertyName("fuzziness")]
+		public Fuzziness Fuzziness { get; set; }
+
+		[JsonPropertyName("min_length")]
+		public int MinLength { get; set; }
+
+		[JsonPropertyName("prefix_length")]
+		public int PrefixLength { get; set; }
+
+		[JsonPropertyName("transpositions")]
+		public bool Transpositions { get; set; }
+
+		[JsonPropertyName("unicode_aware")]
+		public bool UnicodeAware { get; set; }
+	}
+
+	public partial class SuggesterBase
+	{
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field Field { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+	}
+
+	public partial class TermSuggester : SuggesterBase
+	{
+		[JsonPropertyName("lowercase_terms")]
+		public bool? LowercaseTerms { get; set; }
+
+		[JsonPropertyName("max_edits")]
+		public int? MaxEdits { get; set; }
+
+		[JsonPropertyName("max_inspections")]
+		public int? MaxInspections { get; set; }
+
+		[JsonPropertyName("max_term_freq")]
+		public float? MaxTermFreq { get; set; }
+
+		[JsonPropertyName("min_doc_freq")]
+		public float? MinDocFreq { get; set; }
+
+		[JsonPropertyName("min_word_length")]
+		public int? MinWordLength { get; set; }
+
+		[JsonPropertyName("prefix_length")]
+		public int? PrefixLength { get; set; }
+
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonPropertyName("sort")]
+		public SuggestSort? Sort { get; set; }
+
+		[JsonPropertyName("string_distance")]
+		public StringDistance? StringDistance { get; set; }
+
+		[JsonPropertyName("suggest_mode")]
+		public SuggestMode? SuggestMode { get; set; }
+
+		[JsonPropertyName("text")]
+		public string? Text { get; set; }
+	}
+
 	public partial class TotalHits
 	{
 		[JsonPropertyName("relation")]
@@ -645,6 +1796,54 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class ClusterStatistics
+	{
+		[JsonPropertyName("skipped")]
+		public int Skipped
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("successful")]
+		public int Successful
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public int Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DateField
+	{
+		[JsonPropertyName("field")]
+		public Field Field { get; set; }
+
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonPropertyName("include_unmapped")]
+		public bool? IncludeUnmapped { get; set; }
 	}
 
 	public partial class ErrorCause
@@ -989,26 +2188,10 @@ namespace Nest
 	public partial class LatLon
 	{
 		[JsonPropertyName("lat")]
-		public double Lat
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Lat { get; set; }
 
 		[JsonPropertyName("lon")]
-		public double Lon
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Lon { get; set; }
 	}
 
 	public partial class ScriptBase
@@ -1034,6 +2217,12 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class ScriptField
+	{
+		[JsonPropertyName("script")]
+		public Script Script { get; set; }
 	}
 
 	public partial class ShardFailure
@@ -1152,6 +2341,24 @@ namespace Nest
 		}
 	}
 
+	public partial class SlicedScroll
+	{
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("id")]
+		public int Id { get; set; }
+
+		[JsonPropertyName("max")]
+		public int Max { get; set; }
+	}
+
+	public partial class AdjacencyMatrixAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("filters")]
+		public Dictionary<string, QueryContainer>? Filters { get; set; }
+	}
+
 	public partial class AggregateBase
 	{
 		[JsonPropertyName("meta")]
@@ -1164,6 +2371,287 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class Aggregation
+	{
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; set; }
+
+		[JsonPropertyName("name")]
+		public string? Name { get; set; }
+	}
+
+	public partial class AggregationContainer
+	{
+		[JsonPropertyName("adjacency_matrix")]
+		public AdjacencyMatrixAggregation? AdjacencyMatrix { get; set; }
+
+		[JsonPropertyName("aggregations")]
+		public Dictionary<string, AggregationContainer>? Aggregations { get; set; }
+
+		[JsonPropertyName("aggs")]
+		public Dictionary<string, AggregationContainer>? Aggs { get; set; }
+
+		[JsonPropertyName("auto_date_histogram")]
+		public AutoDateHistogramAggregation? AutoDateHistogram { get; set; }
+
+		[JsonPropertyName("avg")]
+		public AverageAggregation? Avg { get; set; }
+
+		[JsonPropertyName("avg_bucket")]
+		public AverageBucketAggregation? AvgBucket { get; set; }
+
+		[JsonPropertyName("boxplot")]
+		public BoxplotAggregation? Boxplot { get; set; }
+
+		[JsonPropertyName("bucket_script")]
+		public BucketScriptAggregation? BucketScript { get; set; }
+
+		[JsonPropertyName("bucket_selector")]
+		public BucketSelectorAggregation? BucketSelector { get; set; }
+
+		[JsonPropertyName("bucket_sort")]
+		public BucketSortAggregation? BucketSort { get; set; }
+
+		[JsonPropertyName("cardinality")]
+		public CardinalityAggregation? Cardinality { get; set; }
+
+		[JsonPropertyName("children")]
+		public ChildrenAggregation? Children { get; set; }
+
+		[JsonPropertyName("composite")]
+		public CompositeAggregation? Composite { get; set; }
+
+		[JsonPropertyName("cumulative_cardinality")]
+		public CumulativeCardinalityAggregation? CumulativeCardinality { get; set; }
+
+		[JsonPropertyName("cumulative_sum")]
+		public CumulativeSumAggregation? CumulativeSum { get; set; }
+
+		[JsonPropertyName("date_histogram")]
+		public DateHistogramAggregation? DateHistogram { get; set; }
+
+		[JsonPropertyName("date_range")]
+		public DateRangeAggregation? DateRange { get; set; }
+
+		[JsonPropertyName("derivative")]
+		public DerivativeAggregation? Derivative { get; set; }
+
+		[JsonPropertyName("diversified_sampler")]
+		public DiversifiedSamplerAggregation? DiversifiedSampler { get; set; }
+
+		[JsonPropertyName("extended_stats")]
+		public ExtendedStatsAggregation? ExtendedStats { get; set; }
+
+		[JsonPropertyName("extended_stats_bucket")]
+		public ExtendedStatsBucketAggregation? ExtendedStatsBucket { get; set; }
+
+		[JsonPropertyName("filter")]
+		public QueryContainer? Filter { get; set; }
+
+		[JsonPropertyName("filters")]
+		public FiltersAggregation? Filters { get; set; }
+
+		[JsonPropertyName("geo_bounds")]
+		public GeoBoundsAggregation? GeoBounds { get; set; }
+
+		[JsonPropertyName("geo_centroid")]
+		public GeoCentroidAggregation? GeoCentroid { get; set; }
+
+		[JsonPropertyName("geo_distance")]
+		public GeoDistanceAggregation? GeoDistance { get; set; }
+
+		[JsonPropertyName("geohash_grid")]
+		public GeoHashGridAggregation? GeohashGrid { get; set; }
+
+		[JsonPropertyName("geo_line")]
+		public GeoLineAggregation? GeoLine { get; set; }
+
+		[JsonPropertyName("geotile_grid")]
+		public GeoTileGridAggregation? GeotileGrid { get; set; }
+
+		[JsonPropertyName("global")]
+		public GlobalAggregation? Global { get; set; }
+
+		[JsonPropertyName("histogram")]
+		public HistogramAggregation? Histogram { get; set; }
+
+		[JsonPropertyName("inference")]
+		public InferenceAggregation? Inference { get; set; }
+
+		[JsonPropertyName("ip_range")]
+		public IpRangeAggregation? IpRange { get; set; }
+
+		[JsonPropertyName("line")]
+		public GeoLineAggregation? Line { get; set; }
+
+		[JsonPropertyName("matrix_stats")]
+		public MatrixStatsAggregation? MatrixStats { get; set; }
+
+		[JsonPropertyName("max")]
+		public MaxAggregation? Max { get; set; }
+
+		[JsonPropertyName("max_bucket")]
+		public MaxBucketAggregation? MaxBucket { get; set; }
+
+		[JsonPropertyName("median_absolute_deviation")]
+		public MedianAbsoluteDeviationAggregation? MedianAbsoluteDeviation { get; set; }
+
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; set; }
+
+		[JsonPropertyName("min")]
+		public MinAggregation? Min { get; set; }
+
+		[JsonPropertyName("min_bucket")]
+		public MinBucketAggregation? MinBucket { get; set; }
+
+		[JsonPropertyName("missing")]
+		public MissingAggregation? Missing { get; set; }
+
+		[JsonPropertyName("moving_avg")]
+		public MovingAverageAggregation? MovingAvg { get; set; }
+
+		[JsonPropertyName("moving_fn")]
+		public MovingFunctionAggregation? MovingFn { get; set; }
+
+		[JsonPropertyName("moving_percentiles")]
+		public MovingPercentilesAggregation? MovingPercentiles { get; set; }
+
+		[JsonPropertyName("multi_terms")]
+		public MultiTermsAggregation? MultiTerms { get; set; }
+
+		[JsonPropertyName("nested")]
+		public NestedAggregation? Nested { get; set; }
+
+		[JsonPropertyName("normalize")]
+		public NormalizeAggregation? Normalize { get; set; }
+
+		[JsonPropertyName("parent")]
+		public ParentAggregation? Parent { get; set; }
+
+		[JsonPropertyName("percentile_ranks")]
+		public PercentileRanksAggregation? PercentileRanks { get; set; }
+
+		[JsonPropertyName("percentiles")]
+		public PercentilesAggregation? Percentiles { get; set; }
+
+		[JsonPropertyName("percentiles_bucket")]
+		public PercentilesBucketAggregation? PercentilesBucket { get; set; }
+
+		[JsonPropertyName("range")]
+		public RangeAggregation? Range { get; set; }
+
+		[JsonPropertyName("rare_terms")]
+		public RareTermsAggregation? RareTerms { get; set; }
+
+		[JsonPropertyName("rate")]
+		public RateAggregation? Rate { get; set; }
+
+		[JsonPropertyName("reverse_nested")]
+		public ReverseNestedAggregation? ReverseNested { get; set; }
+
+		[JsonPropertyName("sampler")]
+		public SamplerAggregation? Sampler { get; set; }
+
+		[JsonPropertyName("scripted_metric")]
+		public ScriptedMetricAggregation? ScriptedMetric { get; set; }
+
+		[JsonPropertyName("serial_diff")]
+		public SerialDifferencingAggregation? SerialDiff { get; set; }
+
+		[JsonPropertyName("significant_terms")]
+		public SignificantTermsAggregation? SignificantTerms { get; set; }
+
+		[JsonPropertyName("significant_text")]
+		public SignificantTextAggregation? SignificantText { get; set; }
+
+		[JsonPropertyName("stats")]
+		public StatsAggregation? Stats { get; set; }
+
+		[JsonPropertyName("stats_bucket")]
+		public StatsBucketAggregation? StatsBucket { get; set; }
+
+		[JsonPropertyName("string_stats")]
+		public StringStatsAggregation? StringStats { get; set; }
+
+		[JsonPropertyName("sum")]
+		public SumAggregation? Sum { get; set; }
+
+		[JsonPropertyName("sum_bucket")]
+		public SumBucketAggregation? SumBucket { get; set; }
+
+		[JsonPropertyName("terms")]
+		public TermsAggregation? Terms { get; set; }
+
+		[JsonPropertyName("top_hits")]
+		public TopHitsAggregation? TopHits { get; set; }
+
+		[JsonPropertyName("top_metrics")]
+		public TopMetricsAggregation? TopMetrics { get; set; }
+
+		[JsonPropertyName("t_test")]
+		public TTestAggregation? TTest { get; set; }
+
+		[JsonPropertyName("value_count")]
+		public ValueCountAggregation? ValueCount { get; set; }
+
+		[JsonPropertyName("variable_width_histogram")]
+		public VariableWidthHistogramAggregation? VariableWidthHistogram { get; set; }
+
+		[JsonPropertyName("weighted_avg")]
+		public WeightedAverageAggregation? WeightedAvg { get; set; }
+	}
+
+	public partial class AggregationRange
+	{
+		[JsonPropertyName("from")]
+		public Union<double, string>? From { get; set; }
+
+		[JsonPropertyName("key")]
+		public string? Key { get; set; }
+
+		[JsonPropertyName("to")]
+		public Union<double, string>? To { get; set; }
+	}
+
+	public partial class AutoDateHistogramAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("buckets")]
+		public int? Buckets { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonPropertyName("minimum_interval")]
+		public MinimumInterval? MinimumInterval { get; set; }
+
+		[JsonPropertyName("missing")]
+		public DateTimeOffset? Missing { get; set; }
+
+		[JsonPropertyName("offset")]
+		public string? Offset { get; set; }
+
+		[JsonPropertyName("params")]
+		public Dictionary<string, object>? Params { get; set; }
+
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
+
+		[JsonPropertyName("time_zone")]
+		public string? TimeZone { get; set; }
+	}
+
+	public partial class AverageAggregation : FormatMetricAggregationBase
+	{
+	}
+
+	public partial class AverageBucketAggregation : PipelineAggregationBase
+	{
 	}
 
 	public partial class BoxPlotAggregate : AggregateBase
@@ -1224,12 +2712,238 @@ namespace Nest
 		}
 	}
 
+	public partial class BoxplotAggregation : MetricAggregationBase
+	{
+		[JsonPropertyName("compression")]
+		public double? Compression { get; set; }
+	}
+
+	public partial class BucketAggregationBase : Aggregation
+	{
+		[JsonPropertyName("aggregations")]
+		public Dictionary<string, AggregationContainer>? Aggregations { get; set; }
+	}
+
+	public partial class BucketScriptAggregation : PipelineAggregationBase
+	{
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
+	}
+
+	public partial class BucketSelectorAggregation : PipelineAggregationBase
+	{
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
+	}
+
+	public partial class BucketSortAggregation : Aggregation
+	{
+		[JsonPropertyName("from")]
+		public int? From { get; set; }
+
+		[JsonPropertyName("gap_policy")]
+		public GapPolicy? GapPolicy { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonPropertyName("sort")]
+		public Sort? Sort { get; set; }
+	}
+
+	public partial class BucketsPath
+	{
+	}
+
+	public partial class CardinalityAggregation : MetricAggregationBase
+	{
+		[JsonPropertyName("precision_threshold")]
+		public int? PrecisionThreshold { get; set; }
+
+		[JsonPropertyName("rehash")]
+		public bool? Rehash { get; set; }
+	}
+
+	public partial class ChiSquareHeuristic
+	{
+		[JsonPropertyName("background_is_superset")]
+		public bool BackgroundIsSuperset { get; set; }
+
+		[JsonPropertyName("include_negatives")]
+		public bool IncludeNegatives { get; set; }
+	}
+
+	public partial class ChildrenAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("type")]
+		public RelationName? Type { get; set; }
+	}
+
+	public partial class ClassificationInferenceOptions
+	{
+		[JsonPropertyName("num_top_classes")]
+		public int? NumTopClasses { get; set; }
+
+		[JsonPropertyName("num_top_feature_importance_values")]
+		public int? NumTopFeatureImportanceValues { get; set; }
+
+		[JsonPropertyName("prediction_field_type")]
+		public string? PredictionFieldType { get; set; }
+
+		[JsonPropertyName("results_field")]
+		public string? ResultsField { get; set; }
+
+		[JsonPropertyName("top_classes_results_field")]
+		public string? TopClassesResultsField { get; set; }
+	}
+
+	public partial class CompositeAggregation : BucketAggregationBase
+	{
+		//[JsonPropertyName("after")]
+		//public Dictionary<string, OneOf<string, float,  null >>? After { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonPropertyName("sources")]
+		public IEnumerable<Dictionary<string, CompositeAggregationSource>>? Sources { get; set; }
+	}
+
+	public partial class CompositeAggregationSource
+	{
+		[JsonPropertyName("date_histogram")]
+		public DateHistogramAggregation? DateHistogram { get; set; }
+
+		[JsonPropertyName("geotile_grid")]
+		public GeoTileGridAggregation? GeotileGrid { get; set; }
+
+		[JsonPropertyName("histogram")]
+		public HistogramAggregation? Histogram { get; set; }
+
+		[JsonPropertyName("terms")]
+		public TermsAggregation? Terms { get; set; }
+	}
+
 	public partial class CompositeBucket
 	{
 	}
 
+	public partial class CumulativeCardinalityAggregation : PipelineAggregationBase
+	{
+	}
+
+	public partial class CumulativeSumAggregation : PipelineAggregationBase
+	{
+	}
+
+	public partial class DateHistogramAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("calendar_interval")]
+		public Union<DateInterval, Time>? CalendarInterval { get; set; }
+
+		[JsonPropertyName("extended_bounds")]
+		public ExtendedBounds<Union<DateMath, long>>? ExtendedBounds { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("fixed_interval")]
+		public Union<DateInterval, Time>? FixedInterval { get; set; }
+
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonPropertyName("hard_bounds")]
+		public ExtendedBounds<Union<DateMath, long>>? HardBounds { get; set; }
+
+		[JsonPropertyName("interval")]
+		public Union<DateInterval, Time>? Interval { get; set; }
+
+		[JsonPropertyName("min_doc_count")]
+		public int? MinDocCount { get; set; }
+
+		[JsonPropertyName("missing")]
+		public DateTimeOffset? Missing { get; set; }
+
+		[JsonPropertyName("offset")]
+		public Time? Offset { get; set; }
+
+		[JsonPropertyName("order")]
+		public HistogramOrder? Order { get; set; }
+
+		[JsonPropertyName("params")]
+		public Dictionary<string, object>? Params { get; set; }
+
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
+
+		[JsonPropertyName("time_zone")]
+		public string? TimeZone { get; set; }
+	}
+
 	public partial class DateHistogramBucket
 	{
+	}
+
+	public partial class DateRangeAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonPropertyName("missing")]
+		public Missing? Missing { get; set; }
+
+		[JsonPropertyName("ranges")]
+		public IEnumerable<DateRangeExpression>? Ranges { get; set; }
+
+		[JsonPropertyName("time_zone")]
+		public string? TimeZone { get; set; }
+	}
+
+	public partial class DateRangeExpression
+	{
+		[JsonPropertyName("doc_count")]
+		public long? DocCount { get; set; }
+
+		[JsonPropertyName("from")]
+		public Union<DateMath, float>? From { get; set; }
+
+		[JsonPropertyName("from_as_string")]
+		public string? FromAsString { get; set; }
+
+		[JsonPropertyName("key")]
+		public string? Key { get; set; }
+
+		[JsonPropertyName("to")]
+		public Union<DateMath, float>? To { get; set; }
+
+		[JsonPropertyName("to_as_string")]
+		public string? ToAsString { get; set; }
+	}
+
+	public partial class DerivativeAggregation : PipelineAggregationBase
+	{
+	}
+
+	public partial class DiversifiedSamplerAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("execution_hint")]
+		public SamplerAggregationExecutionHint? ExecutionHint { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("max_docs_per_value")]
+		public int? MaxDocsPerValue { get; set; }
+
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
+
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
 	}
 
 	public partial class EwmaModelSettings
@@ -1244,6 +2958,15 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class ExtendedBounds<T>
+	{
+		[JsonPropertyName("max")]
+		public T Max { get; set; }
+
+		[JsonPropertyName("min")]
+		public T Min { get; set; }
 	}
 
 	public partial class ExtendedStatsAggregate : StatsAggregate
@@ -1337,6 +3060,30 @@ namespace Nest
 		}
 	}
 
+	public partial class ExtendedStatsAggregation : FormatMetricAggregationBase
+	{
+		[JsonPropertyName("sigma")]
+		public double? Sigma { get; set; }
+	}
+
+	public partial class ExtendedStatsBucketAggregation : PipelineAggregationBase
+	{
+		[JsonPropertyName("sigma")]
+		public double? Sigma { get; set; }
+	}
+
+	public partial class FiltersAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("filters")]
+		public Union<Dictionary<string, QueryContainer>, IReadOnlyCollection<QueryContainer>>? Filters { get; set; }
+
+		[JsonPropertyName("other_bucket")]
+		public bool? OtherBucket { get; set; }
+
+		[JsonPropertyName("other_bucket_key")]
+		public string? OtherBucketKey { get; set; }
+	}
+
 	public partial class FiltersBucketItem
 	{
 		[JsonPropertyName("doc_count")]
@@ -1351,29 +3098,25 @@ namespace Nest
 		}
 	}
 
+	public partial class FormatMetricAggregationBase : MetricAggregationBase
+	{
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+	}
+
+	public partial class FormattableMetricAggregation : MetricAggregationBase
+	{
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+	}
+
 	public partial class GeoBounds
 	{
 		[JsonPropertyName("bottom_right")]
-		public LatLon BottomRight
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public LatLon BottomRight { get; set; }
 
 		[JsonPropertyName("top_left")]
-		public LatLon TopLeft
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public LatLon TopLeft { get; set; }
 	}
 
 	public partial class GeoBoundsAggregate : AggregateBase
@@ -1388,6 +3131,12 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class GeoBoundsAggregation : MetricAggregationBase
+	{
+		[JsonPropertyName("wrap_longitude")]
+		public bool? WrapLongitude { get; set; }
 	}
 
 	public partial class GeoCentroidAggregate : AggregateBase
@@ -1413,6 +3162,51 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class GeoCentroidAggregation : MetricAggregationBase
+	{
+		[JsonPropertyName("count")]
+		public long? Count { get; set; }
+
+		[JsonPropertyName("location")]
+		public GeoLocation? Location { get; set; }
+	}
+
+	public partial class GeoDistanceAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("distance_type")]
+		public GeoDistanceType? DistanceType { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("origin")]
+		public Union<GeoLocation, string>? Origin { get; set; }
+
+		[JsonPropertyName("ranges")]
+		public IEnumerable<AggregationRange>? Ranges { get; set; }
+
+		[JsonPropertyName("unit")]
+		public DistanceUnit? Unit { get; set; }
+	}
+
+	public partial class GeoHashGridAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("bounds")]
+		public BoundingBox? Bounds { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		//[JsonPropertyName("precision")]
+		//public GeoHashPrecision? Precision { get; set; }
+
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
 	}
 
 	public partial class GeoLineAggregate : AggregateBase
@@ -1451,6 +3245,30 @@ namespace Nest
 		}
 	}
 
+	public partial class GeoLineAggregation
+	{
+		[JsonPropertyName("include_sort")]
+		public bool? IncludeSort { get; set; }
+
+		[JsonPropertyName("point")]
+		public GeoLinePoint Point { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonPropertyName("sort")]
+		public GeoLineSort Sort { get; set; }
+
+		[JsonPropertyName("sort_order")]
+		public SortOrder? SortOrder { get; set; }
+	}
+
+	public partial class GeoLinePoint
+	{
+		[JsonPropertyName("field")]
+		public Field Field { get; set; }
+	}
+
 	public partial class GeoLineProperties
 	{
 		[JsonPropertyName("complete")]
@@ -1474,6 +3292,46 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class GeoLineSort
+	{
+		[JsonPropertyName("field")]
+		public Field Field { get; set; }
+	}
+
+	public partial class GeoTileGridAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("bounds")]
+		public GeoBounds? Bounds { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		//[JsonPropertyName("precision")]
+		//public GeoTilePrecision? Precision { get; set; }
+
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+	}
+
+	public partial class GlobalAggregation : BucketAggregationBase
+	{
+	}
+
+	public partial class GoogleNormalizedDistanceHeuristic
+	{
+		[JsonPropertyName("background_is_superset")]
+		public bool BackgroundIsSuperset { get; set; }
+	}
+
+	public partial class HdrMethod
+	{
+		[JsonPropertyName("number_of_significant_value_digits")]
+		public int? NumberOfSignificantValueDigits { get; set; }
 	}
 
 	public partial class HdrPercentileItem
@@ -1513,6 +3371,48 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class HistogramAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("extended_bounds")]
+		public ExtendedBounds<double>? ExtendedBounds { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonPropertyName("hard_bounds")]
+		public ExtendedBounds<double>? HardBounds { get; set; }
+
+		[JsonPropertyName("interval")]
+		public double? Interval { get; set; }
+
+		[JsonPropertyName("min_doc_count")]
+		public int? MinDocCount { get; set; }
+
+		[JsonPropertyName("missing")]
+		public double? Missing { get; set; }
+
+		[JsonPropertyName("offset")]
+		public double? Offset { get; set; }
+
+		[JsonPropertyName("order")]
+		public HistogramOrder? Order { get; set; }
+
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
+	}
+
+	public partial class HistogramOrder
+	{
+		[JsonPropertyName("_count")]
+		public SortOrder? Count { get; set; }
+
+		[JsonPropertyName("_key")]
+		public SortOrder? Key { get; set; }
 	}
 
 	public partial class HoltLinearModelSettings
@@ -1609,6 +3509,45 @@ namespace Nest
 		}
 	}
 
+	public partial class InferenceAggregation : PipelineAggregationBase
+	{
+		[JsonPropertyName("inference_config")]
+		public InferenceConfigContainer? InferenceConfig { get; set; }
+
+		[JsonPropertyName("model_id")]
+		public Name ModelId { get; set; }
+	}
+
+	public partial class InferenceConfigContainer
+	{
+		[JsonPropertyName("classification")]
+		public ClassificationInferenceOptions? Classification { get; set; }
+
+		[JsonPropertyName("regression")]
+		public RegressionInferenceOptions? Regression { get; set; }
+	}
+
+	public partial class IpRangeAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("ranges")]
+		public IEnumerable<IpRangeAggregationRange>? Ranges { get; set; }
+	}
+
+	public partial class IpRangeAggregationRange
+	{
+		[JsonPropertyName("from")]
+		public string? From { get; set; }
+
+		[JsonPropertyName("mask")]
+		public string? Mask { get; set; }
+
+		[JsonPropertyName("to")]
+		public string? To { get; set; }
+	}
+
 	public partial class IpRangeBucket
 	{
 	}
@@ -1663,6 +3602,146 @@ namespace Nest
 		}
 	}
 
+	public partial class MatrixAggregation : Aggregation
+	{
+		[JsonPropertyName("fields")]
+		public Fields? Fields { get; set; }
+
+		[JsonPropertyName("missing")]
+		public Dictionary<Field, double>? Missing { get; set; }
+	}
+
+	public partial class MatrixStatsAggregation : MatrixAggregation
+	{
+		[JsonPropertyName("mode")]
+		public MatrixStatsMode? Mode { get; set; }
+	}
+
+	public partial class MaxAggregation : FormatMetricAggregationBase
+	{
+	}
+
+	public partial class MaxBucketAggregation : PipelineAggregationBase
+	{
+	}
+
+	public partial class MedianAbsoluteDeviationAggregation : FormatMetricAggregationBase
+	{
+		[JsonPropertyName("compression")]
+		public double? Compression { get; set; }
+	}
+
+	public partial class MetricAggregationBase
+	{
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("missing")]
+		public Missing? Missing { get; set; }
+
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
+	}
+
+	public partial class MinAggregation : FormatMetricAggregationBase
+	{
+	}
+
+	public partial class MinBucketAggregation : PipelineAggregationBase
+	{
+	}
+
+	public partial class MissingAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("missing")]
+		public Missing? Missing { get; set; }
+	}
+
+	public partial class MovingAverageAggregation : PipelineAggregationBase
+	{
+		[JsonPropertyName("minimize")]
+		public bool? Minimize { get; set; }
+
+		[JsonPropertyName("model")]
+		public MovingAverageModel? Model { get; set; }
+
+		[JsonPropertyName("predict")]
+		public int? Predict { get; set; }
+
+		[JsonPropertyName("settings")]
+		public MovingAverageSettings Settings { get; set; }
+
+		[JsonPropertyName("window")]
+		public int? Window { get; set; }
+	}
+
+	public partial class MovingFunctionAggregation : PipelineAggregationBase
+	{
+		[JsonPropertyName("script")]
+		public string? Script { get; set; }
+
+		[JsonPropertyName("shift")]
+		public int? Shift { get; set; }
+
+		[JsonPropertyName("window")]
+		public int? Window { get; set; }
+	}
+
+	public partial class MovingPercentilesAggregation : PipelineAggregationBase
+	{
+		[JsonPropertyName("shift")]
+		public int? Shift { get; set; }
+
+		[JsonPropertyName("window")]
+		public int? Window { get; set; }
+	}
+
+	public partial class MultiTermLookup
+	{
+		[JsonPropertyName("field")]
+		public Field Field { get; set; }
+	}
+
+	public partial class MultiTermsAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("terms")]
+		public IEnumerable<MultiTermLookup> Terms { get; set; }
+	}
+
+	public partial class MutualInformationHeuristic
+	{
+		[JsonPropertyName("background_is_superset")]
+		public bool BackgroundIsSuperset { get; set; }
+
+		[JsonPropertyName("include_negatives")]
+		public bool IncludeNegatives { get; set; }
+	}
+
+	public partial class NestedAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("path")]
+		public Field? Path { get; set; }
+	}
+
+	public partial class NormalizeAggregation : PipelineAggregationBase
+	{
+		[JsonPropertyName("method")]
+		public NormalizeMethod? Method { get; set; }
+	}
+
+	public partial class ParentAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("type")]
+		public RelationName? Type { get; set; }
+	}
+
+	public partial class PercentageScoreHeuristic
+	{
+	}
+
 	public partial class PercentileItem
 	{
 		[JsonPropertyName("percentile")]
@@ -1688,6 +3767,21 @@ namespace Nest
 		}
 	}
 
+	public partial class PercentileRanksAggregation : FormatMetricAggregationBase
+	{
+		[JsonPropertyName("hdr")]
+		public HdrMethod? Hdr { get; set; }
+
+		[JsonPropertyName("keyed")]
+		public bool? Keyed { get; set; }
+
+		[JsonPropertyName("tdigest")]
+		public TDigest? Tdigest { get; set; }
+
+		[JsonPropertyName("values")]
+		public IEnumerable<double>? Values { get; set; }
+	}
+
 	public partial class PercentilesAggregate : AggregateBase
 	{
 		[JsonPropertyName("items")]
@@ -1702,12 +3796,117 @@ namespace Nest
 		}
 	}
 
+	public partial class PercentilesAggregation : FormatMetricAggregationBase
+	{
+		[JsonPropertyName("hdr")]
+		public HdrMethod? Hdr { get; set; }
+
+		[JsonPropertyName("keyed")]
+		public bool? Keyed { get; set; }
+
+		[JsonPropertyName("percents")]
+		public IEnumerable<double>? Percents { get; set; }
+
+		[JsonPropertyName("tdigest")]
+		public TDigest? Tdigest { get; set; }
+	}
+
+	public partial class PercentilesBucketAggregation : PipelineAggregationBase
+	{
+		[JsonPropertyName("percents")]
+		public IEnumerable<double>? Percents { get; set; }
+	}
+
+	public partial class PipelineAggregationBase : Aggregation
+	{
+		[JsonPropertyName("buckets_path")]
+		public BucketsPath? BucketsPath { get; set; }
+
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonPropertyName("gap_policy")]
+		public GapPolicy? GapPolicy { get; set; }
+	}
+
+	public partial class RangeAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("ranges")]
+		public IEnumerable<AggregationRange>? Ranges { get; set; }
+
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
+	}
+
 	public partial class RangeBucket
 	{
 	}
 
+	public partial class RareTermsAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("exclude")]
+		public Union<string, IReadOnlyCollection<string>>? Exclude { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("include")]
+		public OneOf<string, IReadOnlyCollection<string>, TermsInclude>? Include { get; set; }
+
+		[JsonPropertyName("max_doc_count")]
+		public long? MaxDocCount { get; set; }
+
+		[JsonPropertyName("missing")]
+		public Missing? Missing { get; set; }
+
+		[JsonPropertyName("precision")]
+		public double? Precision { get; set; }
+
+		[JsonPropertyName("value_type")]
+		public string? ValueType { get; set; }
+	}
+
 	public partial class RareTermsBucket<TKey>
 	{
+	}
+
+	public partial class RateAggregation : FormatMetricAggregationBase
+	{
+		[JsonPropertyName("mode")]
+		public RateMode? Mode { get; set; }
+
+		[JsonPropertyName("unit")]
+		public DateInterval? Unit { get; set; }
+	}
+
+	public partial class RegressionInferenceOptions
+	{
+		[JsonPropertyName("num_top_feature_importance_values")]
+		public int? NumTopFeatureImportanceValues { get; set; }
+
+		[JsonPropertyName("results_field")]
+		public Field ResultsField { get; set; }
+	}
+
+	public partial class ReverseNestedAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("path")]
+		public Field? Path { get; set; }
+	}
+
+	public partial class SamplerAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+	}
+
+	public partial class ScriptedHeuristic
+	{
+		[JsonPropertyName("script")]
+		public Script Script { get; set; }
 	}
 
 	public partial class ScriptedMetricAggregate : AggregateBase
@@ -1724,8 +3923,128 @@ namespace Nest
 		}
 	}
 
+	public partial class ScriptedMetricAggregation : MetricAggregationBase
+	{
+		[JsonPropertyName("combine_script")]
+		public Script? CombineScript { get; set; }
+
+		[JsonPropertyName("init_script")]
+		public Script? InitScript { get; set; }
+
+		[JsonPropertyName("map_script")]
+		public Script? MapScript { get; set; }
+
+		[JsonPropertyName("params")]
+		public Dictionary<string, object>? Params { get; set; }
+
+		[JsonPropertyName("reduce_script")]
+		public Script? ReduceScript { get; set; }
+	}
+
+	public partial class SerialDifferencingAggregation : PipelineAggregationBase
+	{
+		[JsonPropertyName("lag")]
+		public int? Lag { get; set; }
+	}
+
+	public partial class SignificantTermsAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("background_filter")]
+		public QueryContainer? BackgroundFilter { get; set; }
+
+		[JsonPropertyName("chi_square")]
+		public ChiSquareHeuristic? ChiSquare { get; set; }
+
+		[JsonPropertyName("exclude")]
+		public Union<string, IReadOnlyCollection<string>>? Exclude { get; set; }
+
+		[JsonPropertyName("execution_hint")]
+		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("gnd")]
+		public GoogleNormalizedDistanceHeuristic? Gnd { get; set; }
+
+		[JsonPropertyName("include")]
+		public Union<string, IReadOnlyCollection<string>>? Include { get; set; }
+
+		[JsonPropertyName("min_doc_count")]
+		public long? MinDocCount { get; set; }
+
+		[JsonPropertyName("mutual_information")]
+		public MutualInformationHeuristic? MutualInformation { get; set; }
+
+		[JsonPropertyName("percentage")]
+		public PercentageScoreHeuristic? Percentage { get; set; }
+
+		[JsonPropertyName("script_heuristic")]
+		public ScriptedHeuristic? ScriptHeuristic { get; set; }
+
+		[JsonPropertyName("shard_min_doc_count")]
+		public long? ShardMinDocCount { get; set; }
+
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+	}
+
 	public partial class SignificantTermsBucket<TKey>
 	{
+	}
+
+	public partial class SignificantTextAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("background_filter")]
+		public QueryContainer? BackgroundFilter { get; set; }
+
+		[JsonPropertyName("chi_square")]
+		public ChiSquareHeuristic? ChiSquare { get; set; }
+
+		[JsonPropertyName("exclude")]
+		public Union<string, IReadOnlyCollection<string>>? Exclude { get; set; }
+
+		[JsonPropertyName("execution_hint")]
+		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("filter_duplicate_text")]
+		public bool? FilterDuplicateText { get; set; }
+
+		[JsonPropertyName("gnd")]
+		public GoogleNormalizedDistanceHeuristic? Gnd { get; set; }
+
+		[JsonPropertyName("include")]
+		public Union<string, IReadOnlyCollection<string>>? Include { get; set; }
+
+		[JsonPropertyName("min_doc_count")]
+		public long? MinDocCount { get; set; }
+
+		[JsonPropertyName("mutual_information")]
+		public MutualInformationHeuristic? MutualInformation { get; set; }
+
+		[JsonPropertyName("percentage")]
+		public PercentageScoreHeuristic? Percentage { get; set; }
+
+		[JsonPropertyName("script_heuristic")]
+		public ScriptedHeuristic? ScriptHeuristic { get; set; }
+
+		[JsonPropertyName("shard_min_doc_count")]
+		public long? ShardMinDocCount { get; set; }
+
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonPropertyName("source_fields")]
+		public Fields? SourceFields { get; set; }
 	}
 
 	public partial class StandardDeviationBounds
@@ -1855,6 +4174,14 @@ namespace Nest
 		}
 	}
 
+	public partial class StatsAggregation : FormatMetricAggregationBase
+	{
+	}
+
+	public partial class StatsBucketAggregation : PipelineAggregationBase
+	{
+	}
+
 	public partial class StringStatsAggregate : AggregateBase
 	{
 		[JsonPropertyName("avg_length")]
@@ -1924,6 +4251,26 @@ namespace Nest
 		}
 	}
 
+	public partial class StringStatsAggregation : MetricAggregationBase
+	{
+		[JsonPropertyName("show_distribution")]
+		public bool? ShowDistribution { get; set; }
+	}
+
+	public partial class SumAggregation : FormatMetricAggregationBase
+	{
+	}
+
+	public partial class SumBucketAggregation : PipelineAggregationBase
+	{
+	}
+
+	public partial class TDigest
+	{
+		[JsonPropertyName("compression")]
+		public int? Compression { get; set; }
+	}
+
 	public partial class TDigestPercentilesAggregate : AggregateBase
 	{
 		[JsonPropertyName("values")]
@@ -1938,6 +4285,84 @@ namespace Nest
 		}
 	}
 
+	public partial class TTestAggregation : Aggregation
+	{
+		[JsonPropertyName("a")]
+		public TestPopulation? a { get; set; }
+
+		[JsonPropertyName("b")]
+		public TestPopulation? b { get; set; }
+
+		[JsonPropertyName("type")]
+		public TTestType? Type { get; set; }
+	}
+
+	public partial class TermsAggregation : BucketAggregationBase
+	{
+		[JsonPropertyName("collect_mode")]
+		public TermsAggregationCollectMode? CollectMode { get; set; }
+
+		[JsonPropertyName("exclude")]
+		public Union<string, IReadOnlyCollection<string>>? Exclude { get; set; }
+
+		[JsonPropertyName("execution_hint")]
+		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("include")]
+		public OneOf<string, IReadOnlyCollection<string>, TermsInclude>? Include { get; set; }
+
+		[JsonPropertyName("min_doc_count")]
+		public int? MinDocCount { get; set; }
+
+		[JsonPropertyName("missing")]
+		public Missing? Missing { get; set; }
+
+		[JsonPropertyName("missing_bucket")]
+		public bool? MissingBucket { get; set; }
+
+		[JsonPropertyName("order")]
+		public TermsAggregationOrder? Order { get; set; }
+
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
+
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonPropertyName("show_term_doc_count_error")]
+		public bool? ShowTermDocCountError { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonPropertyName("value_type")]
+		public string? ValueType { get; set; }
+	}
+
+	public partial class TermsInclude
+	{
+		[JsonPropertyName("num_partitions")]
+		public long NumPartitions { get; set; }
+
+		[JsonPropertyName("partition")]
+		public long Partition { get; set; }
+	}
+
+	public partial class TestPopulation
+	{
+		[JsonPropertyName("field")]
+		public Field Field { get; set; }
+
+		[JsonPropertyName("filter")]
+		public QueryContainer? Filter { get; set; }
+
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
+	}
+
 	public partial class TopHitsAggregate : AggregateBase
 	{
 		[JsonPropertyName("hits")]
@@ -1950,6 +4375,45 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class TopHitsAggregation : MetricAggregationBase
+	{
+		[JsonPropertyName("docvalue_fields")]
+		public Fields? DocvalueFields { get; set; }
+
+		[JsonPropertyName("explain")]
+		public bool? Explain { get; set; }
+
+		[JsonPropertyName("from")]
+		public int? From { get; set; }
+
+		[JsonPropertyName("highlight")]
+		public Highlight? Highlight { get; set; }
+
+		[JsonPropertyName("script_fields")]
+		public Dictionary<string, ScriptField>? ScriptFields { get; set; }
+
+		[JsonPropertyName("seq_no_primary_term")]
+		public bool? SeqNoPrimaryTerm { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonPropertyName("sort")]
+		public Sort? Sort { get; set; }
+
+		[JsonPropertyName("_source")]
+		public OneOf<bool, SourceFilter, Fields>? Source { get; set; }
+
+		[JsonPropertyName("stored_fields")]
+		public Fields? StoredFields { get; set; }
+
+		[JsonPropertyName("track_scores")]
+		public bool? TrackScores { get; set; }
+
+		[JsonPropertyName("version")]
+		public bool? Version { get; set; }
 	}
 
 	public partial class TopMetrics
@@ -1991,6 +4455,24 @@ namespace Nest
 		}
 	}
 
+	public partial class TopMetricsAggregation : MetricAggregationBase
+	{
+		[JsonPropertyName("metrics")]
+		public Union<TopMetricsValue, IReadOnlyCollection<TopMetricsValue>>? Metrics { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonPropertyName("sort")]
+		public Sort? Sort { get; set; }
+	}
+
+	public partial class TopMetricsValue
+	{
+		[JsonPropertyName("field")]
+		public Field Field { get; set; }
+	}
+
 	public partial class ValueAggregate : AggregateBase
 	{
 		[JsonPropertyName("value")]
@@ -2014,6 +4496,52 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class ValueCountAggregation : FormattableMetricAggregation
+	{
+	}
+
+	public partial class VariableWidthHistogramAggregation
+	{
+		[JsonPropertyName("buckets")]
+		public int? Buckets { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("initial_buffer")]
+		public int? InitialBuffer { get; set; }
+
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+	}
+
+	public partial class WeightedAverageAggregation : Aggregation
+	{
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonPropertyName("value")]
+		public WeightedAverageValue? Value { get; set; }
+
+		[JsonPropertyName("value_type")]
+		public ValueType? ValueType { get; set; }
+
+		[JsonPropertyName("weight")]
+		public WeightedAverageValue? Weight { get; set; }
+	}
+
+	public partial class WeightedAverageValue
+	{
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("missing")]
+		public double? Missing { get; set; }
+
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
 	}
 
 	public partial class AsciiFoldingTokenFilter : TokenFilterBase
@@ -3720,6 +6248,39 @@ namespace Nest
 		}
 	}
 
+	public partial class AllField
+	{
+		[JsonPropertyName("analyzer")]
+		public string Analyzer { get; set; }
+
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+
+		[JsonPropertyName("omit_norms")]
+		public bool OmitNorms { get; set; }
+
+		[JsonPropertyName("search_analyzer")]
+		public string SearchAnalyzer { get; set; }
+
+		[JsonPropertyName("similarity")]
+		public string Similarity { get; set; }
+
+		[JsonPropertyName("store")]
+		public bool Store { get; set; }
+
+		[JsonPropertyName("store_term_vector_offsets")]
+		public bool StoreTermVectorOffsets { get; set; }
+
+		[JsonPropertyName("store_term_vector_payloads")]
+		public bool StoreTermVectorPayloads { get; set; }
+
+		[JsonPropertyName("store_term_vector_positions")]
+		public bool StoreTermVectorPositions { get; set; }
+
+		[JsonPropertyName("store_term_vectors")]
+		public bool StoreTermVectors { get; set; }
+	}
+
 	public partial class BinaryProperty : DocValuesPropertyBase
 	{
 	}
@@ -3839,8 +6400,6 @@ namespace Nest
 #endif
 		}
 	}
-
-	public partial class PropertyBase { }
 
 	public partial class CorePropertyBase : PropertyBase
 	{
@@ -4057,6 +6616,36 @@ namespace Nest
 
 	public partial class DoubleRangeProperty : RangePropertyBase
 	{
+	}
+
+	public partial class DynamicTemplate
+	{
+		[JsonPropertyName("mapping")]
+		public PropertyBase? Mapping { get; set; }
+
+		[JsonPropertyName("match")]
+		public string? Match { get; set; }
+
+		[JsonPropertyName("match_mapping_type")]
+		public string? MatchMappingType { get; set; }
+
+		[JsonPropertyName("match_pattern")]
+		public MatchType? MatchPattern { get; set; }
+
+		[JsonPropertyName("path_match")]
+		public string? PathMatch { get; set; }
+
+		[JsonPropertyName("path_unmatch")]
+		public string? PathUnmatch { get; set; }
+
+		[JsonPropertyName("unmatch")]
+		public string? Unmatch { get; set; }
+	}
+
+	public partial class FieldNamesField
+	{
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
 	}
 
 	public partial class FloatRangeProperty : RangePropertyBase
@@ -4290,6 +6879,12 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class IndexField
+	{
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
 	}
 
 	public partial class IntegerRangeProperty : RangePropertyBase
@@ -4612,6 +7207,30 @@ namespace Nest
 		}
 	}
 
+	public partial class PropertyBase
+	{
+		[JsonPropertyName("dynamic")]
+		public Union<bool, DynamicMapping>? Dynamic { get; set; }
+
+		[JsonPropertyName("fields")]
+		public Dictionary<PropertyName, Property>? Fields { get; set; }
+
+		[JsonPropertyName("ignore_above")]
+		public int? IgnoreAbove { get; set; }
+
+		[JsonPropertyName("local_metadata")]
+		public Metadata? LocalMetadata { get; set; }
+
+		[JsonPropertyName("meta")]
+		public Dictionary<string, string>? Meta { get; set; }
+
+		[JsonPropertyName("name")]
+		public PropertyName? Name { get; set; }
+
+		[JsonPropertyName("properties")]
+		public Dictionary<PropertyName, Property>? Properties { get; set; }
+	}
+
 	public partial class RangePropertyBase : DocValuesPropertyBase
 	{
 		[JsonPropertyName("boost")]
@@ -4648,40 +7267,22 @@ namespace Nest
 		}
 	}
 
+	public partial class RoutingField
+	{
+		[JsonPropertyName("required")]
+		public bool Required { get; set; }
+	}
+
 	public partial class RuntimeField
 	{
 		[JsonPropertyName("format")]
-		public string? Format
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Format { get; set; }
 
 		[JsonPropertyName("script")]
-		public Script? Script
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Script? Script { get; set; }
 
 		[JsonPropertyName("type")]
-		public RuntimeFieldType Type
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public RuntimeFieldType Type { get; set; }
 	}
 
 	public partial class SearchAsYouTypeProperty : CorePropertyBase
@@ -4820,6 +7421,30 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class SizeField
+	{
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+	}
+
+	public partial class SourceField
+	{
+		[JsonPropertyName("compress")]
+		public bool? Compress { get; set; }
+
+		[JsonPropertyName("compress_threshold")]
+		public string? CompressThreshold { get; set; }
+
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+
+		[JsonPropertyName("excludes")]
+		public IEnumerable<string>? Excludes { get; set; }
+
+		[JsonPropertyName("includes")]
+		public IEnumerable<string>? Includes { get; set; }
 	}
 
 	public partial class SuggestContext
@@ -5109,6 +7734,51 @@ namespace Nest
 		}
 	}
 
+	public partial class TypeMapping
+	{
+		[JsonPropertyName("all_field")]
+		public AllField? AllField { get; set; }
+
+		[JsonPropertyName("date_detection")]
+		public bool? DateDetection { get; set; }
+
+		[JsonPropertyName("dynamic")]
+		public Union<bool, DynamicMapping>? Dynamic { get; set; }
+
+		[JsonPropertyName("dynamic_date_formats")]
+		public IEnumerable<string>? DynamicDateFormats { get; set; }
+
+		[JsonPropertyName("dynamic_templates")]
+		public Union<Dictionary<string, DynamicTemplate>, IReadOnlyCollection<Dictionary<string, DynamicTemplate>>>? DynamicTemplates { get; set; }
+
+		[JsonPropertyName("_field_names")]
+		public FieldNamesField? FieldNames { get; set; }
+
+		[JsonPropertyName("index_field")]
+		public IndexField? IndexField { get; set; }
+
+		[JsonPropertyName("_meta")]
+		public Metadata? Meta { get; set; }
+
+		[JsonPropertyName("numeric_detection")]
+		public bool? NumericDetection { get; set; }
+
+		[JsonPropertyName("properties")]
+		public Dictionary<PropertyName, Property>? Properties { get; set; }
+
+		[JsonPropertyName("_routing")]
+		public RoutingField? Routing { get; set; }
+
+		[JsonPropertyName("runtime")]
+		public Dictionary<string, RuntimeField>? Runtime { get; set; }
+
+		[JsonPropertyName("_size")]
+		public SizeField? Size { get; set; }
+
+		[JsonPropertyName("_source")]
+		public SourceField? Source { get; set; }
+	}
+
 	public partial class VersionProperty : DocValuesPropertyBase
 	{
 	}
@@ -5117,11 +7787,90 @@ namespace Nest
 	{
 	}
 
+	public partial class BoolQuery : QueryBase
+	{
+		[JsonPropertyName("filter")]
+		public Union<QueryContainer, IReadOnlyCollection<QueryContainer>>? Filter { get; set; }
+
+		[JsonPropertyName("minimum_should_match")]
+		public MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		[JsonPropertyName("must")]
+		public Union<QueryContainer, IReadOnlyCollection<QueryContainer>>? Must { get; set; }
+
+		[JsonPropertyName("must_not")]
+		public Union<QueryContainer, IReadOnlyCollection<QueryContainer>>? MustNot { get; set; }
+
+		[JsonPropertyName("should")]
+		public Union<QueryContainer, IReadOnlyCollection<QueryContainer>>? Should { get; set; }
+	}
+
+	public partial class BoostingQuery : QueryBase
+	{
+		[JsonPropertyName("negative")]
+		public QueryContainer? Negative { get; set; }
+
+		[JsonPropertyName("negative_boost")]
+		public double? NegativeBoost { get; set; }
+
+		[JsonPropertyName("positive")]
+		public QueryContainer? Positive { get; set; }
+	}
+
+	public partial class BoundingBox
+	{
+		[JsonPropertyName("bottom_right")]
+		public GeoLocation? BottomRight { get; set; }
+
+		[JsonPropertyName("top_left")]
+		public GeoLocation? TopLeft { get; set; }
+
+		[JsonPropertyName("wkt")]
+		public string? Wkt { get; set; }
+	}
+
+	public partial class CombinedFieldsQuery
+	{
+		[JsonPropertyName("fields")]
+		public IEnumerable<Field> Fields { get; set; }
+
+		[JsonPropertyName("operator")]
+		public string? Operator { get; set; }
+
+		[JsonPropertyName("query")]
+		public string Query { get; set; }
+	}
+
+	public partial class CommonTermsQuery : QueryBase
+	{
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("cutoff_frequency")]
+		public double? CutoffFrequency { get; set; }
+
+		[JsonPropertyName("high_freq_operator")]
+		public Operator? HighFreqOperator { get; set; }
+
+		[JsonPropertyName("low_freq_operator")]
+		public Operator? LowFreqOperator { get; set; }
+
+		[JsonPropertyName("minimum_should_match")]
+		public MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		[JsonPropertyName("query")]
+		public string? Query { get; set; }
+	}
+
+	public partial class ConstantScoreQuery : QueryBase
+	{
+		[JsonPropertyName("filter")]
+		public QueryContainer? Filter { get; set; }
+	}
+
 	public partial class DateDecayFunction : DecayFunctionBase
 	{
 	}
-
-	public partial class ScoreFunctionBase { }
 
 	public partial class DecayFunctionBase : ScoreFunctionBase
 	{
@@ -5137,8 +7886,404 @@ namespace Nest
 		}
 	}
 
+	public partial class DisMaxQuery : QueryBase
+	{
+		[JsonPropertyName("queries")]
+		public IEnumerable<QueryContainer>? Queries { get; set; }
+
+		[JsonPropertyName("tie_breaker")]
+		public double? TieBreaker { get; set; }
+	}
+
+	public partial class DistanceFeatureQuery : QueryBase
+	{
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("origin")]
+		public OneOf<IReadOnlyCollection<int>, GeoCoordinate, DateMath>? Origin { get; set; }
+
+		[JsonPropertyName("pivot")]
+		public Union<Distance, Time>? Pivot { get; set; }
+	}
+
+	public partial class ExistsQuery : QueryBase
+	{
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+	}
+
+	public partial class FieldLookup
+	{
+		[JsonPropertyName("id")]
+		public Id? Id { get; set; }
+
+		[JsonPropertyName("index")]
+		public IndexName? Index { get; set; }
+
+		[JsonPropertyName("path")]
+		public Field? Path { get; set; }
+
+		[JsonPropertyName("routing")]
+		public Routing? Routing { get; set; }
+	}
+
+	public partial class FieldValueFactorScoreFunction : ScoreFunctionBase
+	{
+		[JsonPropertyName("factor")]
+		public double? Factor { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field Field { get; set; }
+
+		[JsonPropertyName("missing")]
+		public double? Missing { get; set; }
+
+		[JsonPropertyName("modifier")]
+		public FieldValueFactorModifier? Modifier { get; set; }
+	}
+
+	public partial class FunctionScoreContainer
+	{
+		[JsonPropertyName("exp")]
+		public DecayFunction? Exp { get; set; }
+
+		[JsonPropertyName("field_value_factor")]
+		public FieldValueFactorScoreFunction? FieldValueFactor { get; set; }
+
+		[JsonPropertyName("filter")]
+		public QueryContainer? Filter { get; set; }
+
+		[JsonPropertyName("gauss")]
+		public DecayFunction? Gauss { get; set; }
+
+		[JsonPropertyName("linear")]
+		public DecayFunction? Linear { get; set; }
+
+		[JsonPropertyName("random_score")]
+		public RandomScoreFunction? RandomScore { get; set; }
+
+		[JsonPropertyName("script_score")]
+		public ScriptScoreFunction? ScriptScore { get; set; }
+
+		[JsonPropertyName("weight")]
+		public double? Weight { get; set; }
+	}
+
+	public partial class FunctionScoreQuery : QueryBase
+	{
+		[JsonPropertyName("boost_mode")]
+		public FunctionBoostMode? BoostMode { get; set; }
+
+		[JsonPropertyName("functions")]
+		public IEnumerable<FunctionScoreContainer>? Functions { get; set; }
+
+		[JsonPropertyName("max_boost")]
+		public double? MaxBoost { get; set; }
+
+		[JsonPropertyName("min_score")]
+		public double? MinScore { get; set; }
+
+		[JsonPropertyName("query")]
+		public QueryContainer? Query { get; set; }
+
+		[JsonPropertyName("score_mode")]
+		public FunctionScoreMode? ScoreMode { get; set; }
+	}
+
+	public partial class FuzzyQuery : QueryBase
+	{
+		[JsonPropertyName("fuzziness")]
+		public Fuzziness? Fuzziness { get; set; }
+
+		[JsonPropertyName("max_expansions")]
+		public int? MaxExpansions { get; set; }
+
+		[JsonPropertyName("prefix_length")]
+		public int? PrefixLength { get; set; }
+
+		[JsonPropertyName("rewrite")]
+		public MultiTermQueryRewrite? Rewrite { get; set; }
+
+		[JsonPropertyName("transpositions")]
+		public bool? Transpositions { get; set; }
+
+		[JsonPropertyName("value")]
+		public object Value { get; set; }
+	}
+
+	public partial class GeoBoundingBoxQuery : QueryBase
+	{
+		[JsonPropertyName("bottom_right")]
+		public LatLon? BottomRight { get; set; }
+
+		[JsonPropertyName("bounding_box")]
+		public BoundingBox? BoundingBox { get; set; }
+
+		[JsonPropertyName("top_left")]
+		public LatLon? TopLeft { get; set; }
+
+		[JsonPropertyName("type")]
+		public GeoExecution? Type { get; set; }
+
+		[JsonPropertyName("validation_method")]
+		public GeoValidationMethod? ValidationMethod { get; set; }
+	}
+
 	public partial class GeoDecayFunction : DecayFunctionBase
 	{
+	}
+
+	public partial class GeoDistanceQuery : QueryBase
+	{
+		[JsonPropertyName("distance")]
+		public Distance? Distance { get; set; }
+
+		[JsonPropertyName("distance_type")]
+		public GeoDistanceType? DistanceType { get; set; }
+
+		[JsonPropertyName("validation_method")]
+		public GeoValidationMethod? ValidationMethod { get; set; }
+	}
+
+	public partial class GeoPolygonQuery : QueryBase
+	{
+		[JsonPropertyName("points")]
+		public IEnumerable<GeoLocation>? Points { get; set; }
+
+		[JsonPropertyName("validation_method")]
+		public GeoValidationMethod? ValidationMethod { get; set; }
+	}
+
+	public partial class GeoShape
+	{
+		[JsonPropertyName("type")]
+		public string? Type { get; set; }
+	}
+
+	public partial class GeoShapeQuery : QueryBase
+	{
+		[JsonPropertyName("ignore_unmapped")]
+		public bool? IgnoreUnmapped { get; set; }
+
+		[JsonPropertyName("indexed_shape")]
+		public FieldLookup? IndexedShape { get; set; }
+
+		[JsonPropertyName("relation")]
+		public GeoShapeRelation? Relation { get; set; }
+
+		[JsonPropertyName("shape")]
+		public GeoShape? Shape { get; set; }
+	}
+
+	public partial class HasChildQuery : QueryBase
+	{
+		[JsonPropertyName("ignore_unmapped")]
+		public bool? IgnoreUnmapped { get; set; }
+
+		[JsonPropertyName("inner_hits")]
+		public InnerHits? InnerHits { get; set; }
+
+		[JsonPropertyName("max_children")]
+		public int? MaxChildren { get; set; }
+
+		[JsonPropertyName("min_children")]
+		public int? MinChildren { get; set; }
+
+		[JsonPropertyName("query")]
+		public QueryContainer? Query { get; set; }
+
+		[JsonPropertyName("score_mode")]
+		public ChildScoreMode? ScoreMode { get; set; }
+
+		[JsonPropertyName("type")]
+		public RelationName? Type { get; set; }
+	}
+
+	public partial class HasParentQuery : QueryBase
+	{
+		[JsonPropertyName("ignore_unmapped")]
+		public bool? IgnoreUnmapped { get; set; }
+
+		[JsonPropertyName("inner_hits")]
+		public InnerHits? InnerHits { get; set; }
+
+		[JsonPropertyName("parent_type")]
+		public RelationName? ParentType { get; set; }
+
+		[JsonPropertyName("query")]
+		public QueryContainer? Query { get; set; }
+
+		[JsonPropertyName("score")]
+		public bool? Score { get; set; }
+	}
+
+	public partial class IdsQuery : QueryBase
+	{
+		[JsonPropertyName("values")]
+		public Union<IReadOnlyCollection<Id>, IReadOnlyCollection<long>>? Values { get; set; }
+	}
+
+	public partial class IntervalsAllOf
+	{
+		[JsonPropertyName("filter")]
+		public IntervalsFilter? Filter { get; set; }
+
+		[JsonPropertyName("intervals")]
+		public IEnumerable<IntervalsContainer>? Intervals { get; set; }
+
+		[JsonPropertyName("max_gaps")]
+		public int? MaxGaps { get; set; }
+
+		[JsonPropertyName("ordered")]
+		public bool? Ordered { get; set; }
+	}
+
+	public partial class IntervalsAnyOf
+	{
+		[JsonPropertyName("filter")]
+		public IntervalsFilter? Filter { get; set; }
+
+		[JsonPropertyName("intervals")]
+		public IEnumerable<IntervalsContainer>? Intervals { get; set; }
+	}
+
+	public partial class IntervalsContainer
+	{
+		[JsonPropertyName("all_of")]
+		public IntervalsAllOf? AllOf { get; set; }
+
+		[JsonPropertyName("any_of")]
+		public IntervalsAnyOf? AnyOf { get; set; }
+
+		[JsonPropertyName("fuzzy")]
+		public IntervalsFuzzy? Fuzzy { get; set; }
+
+		[JsonPropertyName("match")]
+		public IntervalsMatch? Match { get; set; }
+
+		[JsonPropertyName("prefix")]
+		public IntervalsPrefix? Prefix { get; set; }
+
+		[JsonPropertyName("wildcard")]
+		public IntervalsWildcard? Wildcard { get; set; }
+	}
+
+	public partial class IntervalsFilter
+	{
+		[JsonPropertyName("after")]
+		public IntervalsContainer? After { get; set; }
+
+		[JsonPropertyName("before")]
+		public IntervalsContainer? Before { get; set; }
+
+		[JsonPropertyName("contained_by")]
+		public IntervalsContainer? ContainedBy { get; set; }
+
+		[JsonPropertyName("containing")]
+		public IntervalsContainer? Containing { get; set; }
+
+		[JsonPropertyName("not_contained_by")]
+		public IntervalsContainer? NotContainedBy { get; set; }
+
+		[JsonPropertyName("not_containing")]
+		public IntervalsContainer? NotContaining { get; set; }
+
+		[JsonPropertyName("not_overlapping")]
+		public IntervalsContainer? NotOverlapping { get; set; }
+
+		[JsonPropertyName("overlapping")]
+		public IntervalsContainer? Overlapping { get; set; }
+
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
+	}
+
+	public partial class IntervalsFuzzy
+	{
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("fuzziness")]
+		public Fuzziness? Fuzziness { get; set; }
+
+		[JsonPropertyName("prefix_length")]
+		public int? PrefixLength { get; set; }
+
+		[JsonPropertyName("term")]
+		public string? Term { get; set; }
+
+		[JsonPropertyName("transpositions")]
+		public bool? Transpositions { get; set; }
+
+		[JsonPropertyName("use_field")]
+		public Field? UseField { get; set; }
+	}
+
+	public partial class IntervalsMatch
+	{
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("filter")]
+		public IntervalsFilter? Filter { get; set; }
+
+		[JsonPropertyName("max_gaps")]
+		public int? MaxGaps { get; set; }
+
+		[JsonPropertyName("ordered")]
+		public bool? Ordered { get; set; }
+
+		[JsonPropertyName("query")]
+		public string? Query { get; set; }
+
+		[JsonPropertyName("use_field")]
+		public Field? UseField { get; set; }
+	}
+
+	public partial class IntervalsPrefix
+	{
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("prefix")]
+		public string? Prefix { get; set; }
+
+		[JsonPropertyName("use_field")]
+		public Field? UseField { get; set; }
+	}
+
+	public partial class IntervalsQuery : QueryBase
+	{
+		[JsonPropertyName("all_of")]
+		public IntervalsAllOf? AllOf { get; set; }
+
+		[JsonPropertyName("any_of")]
+		public IntervalsAnyOf? AnyOf { get; set; }
+
+		[JsonPropertyName("fuzzy")]
+		public IntervalsFuzzy? Fuzzy { get; set; }
+
+		[JsonPropertyName("match")]
+		public IntervalsMatch? Match { get; set; }
+
+		[JsonPropertyName("prefix")]
+		public IntervalsPrefix? Prefix { get; set; }
+
+		[JsonPropertyName("wildcard")]
+		public IntervalsWildcard? Wildcard { get; set; }
+	}
+
+	public partial class IntervalsWildcard
+	{
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("pattern")]
+		public string? Pattern { get; set; }
+
+		[JsonPropertyName("use_field")]
+		public Field? UseField { get; set; }
 	}
 
 	public partial class LikeDocument
@@ -5221,8 +8366,877 @@ namespace Nest
 		}
 	}
 
+	public partial class MatchAllQuery : QueryBase
+	{
+		[JsonPropertyName("norm_field")]
+		public string? NormField { get; set; }
+	}
+
+	public partial class MatchBoolPrefixQuery : QueryBase
+	{
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("fuzziness")]
+		public Fuzziness? Fuzziness { get; set; }
+
+		[JsonPropertyName("fuzzy_rewrite")]
+		public MultiTermQueryRewrite? FuzzyRewrite { get; set; }
+
+		[JsonPropertyName("fuzzy_transpositions")]
+		public bool? FuzzyTranspositions { get; set; }
+
+		[JsonPropertyName("max_expansions")]
+		public int? MaxExpansions { get; set; }
+
+		[JsonPropertyName("minimum_should_match")]
+		public MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		[JsonPropertyName("operator")]
+		public Operator? Operator { get; set; }
+
+		[JsonPropertyName("prefix_length")]
+		public int? PrefixLength { get; set; }
+
+		[JsonPropertyName("query")]
+		public string? Query { get; set; }
+	}
+
+	public partial class MatchNoneQuery : QueryBase
+	{
+	}
+
+	public partial class MatchPhrasePrefixQuery : QueryBase
+	{
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("max_expansions")]
+		public int? MaxExpansions { get; set; }
+
+		[JsonPropertyName("query")]
+		public string? Query { get; set; }
+
+		[JsonPropertyName("slop")]
+		public int? Slop { get; set; }
+
+		[JsonPropertyName("zero_terms_query")]
+		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
+	}
+
+	public partial class MatchPhraseQuery : QueryBase
+	{
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("query")]
+		public string? Query { get; set; }
+
+		[JsonPropertyName("slop")]
+		public int? Slop { get; set; }
+	}
+
+	public partial class MatchQuery : QueryBase
+	{
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		[JsonPropertyName("cutoff_frequency")]
+		public double? CutoffFrequency { get; set; }
+
+		[JsonPropertyName("fuzziness")]
+		public Fuzziness? Fuzziness { get; set; }
+
+		[JsonPropertyName("fuzzy_rewrite")]
+		public MultiTermQueryRewrite? FuzzyRewrite { get; set; }
+
+		[JsonPropertyName("fuzzy_transpositions")]
+		public bool? FuzzyTranspositions { get; set; }
+
+		[JsonPropertyName("lenient")]
+		public bool? Lenient { get; set; }
+
+		[JsonPropertyName("max_expansions")]
+		public int? MaxExpansions { get; set; }
+
+		[JsonPropertyName("minimum_should_match")]
+		public MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		[JsonPropertyName("operator")]
+		public Operator? Operator { get; set; }
+
+		[JsonPropertyName("prefix_length")]
+		public int? PrefixLength { get; set; }
+
+		[JsonPropertyName("query")]
+		public OneOf<string, float, bool>? Query { get; set; }
+
+		[JsonPropertyName("zero_terms_query")]
+		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
+	}
+
+	public partial class MoreLikeThisQuery : QueryBase
+	{
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("boost_terms")]
+		public double? BoostTerms { get; set; }
+
+		[JsonPropertyName("fields")]
+		public Fields? Fields { get; set; }
+
+		[JsonPropertyName("include")]
+		public bool? Include { get; set; }
+
+		[JsonPropertyName("like")]
+		public Union<Like, IReadOnlyCollection<Like>>? Like { get; set; }
+
+		[JsonPropertyName("max_doc_freq")]
+		public int? MaxDocFreq { get; set; }
+
+		[JsonPropertyName("max_query_terms")]
+		public int? MaxQueryTerms { get; set; }
+
+		[JsonPropertyName("max_word_length")]
+		public int? MaxWordLength { get; set; }
+
+		[JsonPropertyName("min_doc_freq")]
+		public int? MinDocFreq { get; set; }
+
+		[JsonPropertyName("minimum_should_match")]
+		public MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		[JsonPropertyName("min_term_freq")]
+		public int? MinTermFreq { get; set; }
+
+		[JsonPropertyName("min_word_length")]
+		public int? MinWordLength { get; set; }
+
+		[JsonPropertyName("per_field_analyzer")]
+		public Dictionary<Field, string>? PerFieldAnalyzer { get; set; }
+
+		[JsonPropertyName("routing")]
+		public Routing? Routing { get; set; }
+
+		[JsonPropertyName("stop_words")]
+		public StopWords? StopWords { get; set; }
+
+		[JsonPropertyName("unlike")]
+		public Union<Like, IReadOnlyCollection<Like>>? Unlike { get; set; }
+
+		[JsonPropertyName("version")]
+		public VersionNumber? Version { get; set; }
+
+		[JsonPropertyName("version_type")]
+		public VersionType? VersionType { get; set; }
+	}
+
+	public partial class MultiMatchQuery : QueryBase
+	{
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		[JsonPropertyName("cutoff_frequency")]
+		public double? CutoffFrequency { get; set; }
+
+		[JsonPropertyName("fields")]
+		public Fields? Fields { get; set; }
+
+		[JsonPropertyName("fuzziness")]
+		public Fuzziness? Fuzziness { get; set; }
+
+		[JsonPropertyName("fuzzy_rewrite")]
+		public MultiTermQueryRewrite? FuzzyRewrite { get; set; }
+
+		[JsonPropertyName("fuzzy_transpositions")]
+		public bool? FuzzyTranspositions { get; set; }
+
+		[JsonPropertyName("lenient")]
+		public bool? Lenient { get; set; }
+
+		[JsonPropertyName("max_expansions")]
+		public int? MaxExpansions { get; set; }
+
+		[JsonPropertyName("minimum_should_match")]
+		public MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		[JsonPropertyName("operator")]
+		public Operator? Operator { get; set; }
+
+		[JsonPropertyName("prefix_length")]
+		public int? PrefixLength { get; set; }
+
+		[JsonPropertyName("query")]
+		public string? Query { get; set; }
+
+		[JsonPropertyName("slop")]
+		public int? Slop { get; set; }
+
+		[JsonPropertyName("tie_breaker")]
+		public double? TieBreaker { get; set; }
+
+		[JsonPropertyName("type")]
+		public TextQueryType? Type { get; set; }
+
+		[JsonPropertyName("use_dis_max")]
+		public bool? UseDisMax { get; set; }
+
+		[JsonPropertyName("zero_terms_query")]
+		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
+	}
+
+	public partial class NamedQuery<TQuery>
+	{
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
+
+		[JsonPropertyName("ignore_unmapped")]
+		public bool? IgnoreUnmapped { get; set; }
+
+		[JsonPropertyName("_name")]
+		public string? Name { get; set; }
+	}
+
+	public partial class NestedQuery : QueryBase
+	{
+		[JsonPropertyName("ignore_unmapped")]
+		public bool? IgnoreUnmapped { get; set; }
+
+		[JsonPropertyName("inner_hits")]
+		public InnerHits? InnerHits { get; set; }
+
+		[JsonPropertyName("path")]
+		public Field? Path { get; set; }
+
+		[JsonPropertyName("query")]
+		public QueryContainer? Query { get; set; }
+
+		[JsonPropertyName("score_mode")]
+		public NestedScoreMode? ScoreMode { get; set; }
+	}
+
 	public partial class NumericDecayFunction : DecayFunctionBase
 	{
+	}
+
+	public partial class ParentIdQuery : QueryBase
+	{
+		[JsonPropertyName("id")]
+		public Id? Id { get; set; }
+
+		[JsonPropertyName("ignore_unmapped")]
+		public bool? IgnoreUnmapped { get; set; }
+
+		[JsonPropertyName("type")]
+		public RelationName? Type { get; set; }
+	}
+
+	public partial class PercolateQuery : QueryBase
+	{
+		[JsonPropertyName("document")]
+		public object? Document { get; set; }
+
+		[JsonPropertyName("documents")]
+		public IEnumerable<object>? Documents { get; set; }
+
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("id")]
+		public Id? Id { get; set; }
+
+		[JsonPropertyName("index")]
+		public IndexName? Index { get; set; }
+
+		[JsonPropertyName("preference")]
+		public string? Preference { get; set; }
+
+		[JsonPropertyName("routing")]
+		public Routing? Routing { get; set; }
+
+		[JsonPropertyName("version")]
+		public VersionNumber? Version { get; set; }
+	}
+
+	public partial class PinnedQuery : QueryBase
+	{
+		[JsonPropertyName("ids")]
+		public Union<IReadOnlyCollection<Id>, IReadOnlyCollection<long>>? Ids { get; set; }
+
+		[JsonPropertyName("organic")]
+		public QueryContainer? Organic { get; set; }
+	}
+
+	public partial class PrefixQuery : QueryBase
+	{
+		[JsonPropertyName("rewrite")]
+		public MultiTermQueryRewrite? Rewrite { get; set; }
+
+		[JsonPropertyName("value")]
+		public string Value { get; set; }
+	}
+
+	public partial class QueryContainer
+	{
+		[JsonPropertyName("bool")]
+		public BoolQuery? Bool { get; set; }
+
+		[JsonPropertyName("boosting")]
+		public BoostingQuery? Boosting { get; set; }
+
+		[JsonPropertyName("combined_fields")]
+		public CombinedFieldsQuery? CombinedFields { get; set; }
+
+		[JsonPropertyName("common")]
+		public Dictionary<Field, Union<CommonTermsQuery, string>>? Common { get; set; }
+
+		[JsonPropertyName("constant_score")]
+		public ConstantScoreQuery? ConstantScore { get; set; }
+
+		[JsonPropertyName("dis_max")]
+		public DisMaxQuery? DisMax { get; set; }
+
+		[JsonPropertyName("distance_feature")]
+		public Union<Dictionary<Field, Union<DistanceFeatureQuery, string>>, DistanceFeatureQuery>? DistanceFeature { get; set; }
+
+		[JsonPropertyName("exists")]
+		public ExistsQuery? Exists { get; set; }
+
+		[JsonPropertyName("field_masking_span")]
+		public SpanFieldMaskingQuery? FieldMaskingSpan { get; set; }
+
+		[JsonPropertyName("function_score")]
+		public FunctionScoreQuery? FunctionScore { get; set; }
+
+		[JsonPropertyName("fuzzy")]
+		public Dictionary<Field, Union<FuzzyQuery, string>>? Fuzzy { get; set; }
+
+		[JsonPropertyName("geo_bounding_box")]
+		public NamedQuery<Union<GeoBoundingBoxQuery, string>>? GeoBoundingBox { get; set; }
+
+		[JsonPropertyName("geo_distance")]
+		public GeoDistanceQuery? GeoDistance { get; set; }
+
+		[JsonPropertyName("geo_polygon")]
+		public NamedQuery<Union<GeoPolygonQuery, string>>? GeoPolygon { get; set; }
+
+		[JsonPropertyName("geo_shape")]
+		public NamedQuery<Union<GeoShapeQuery, string>>? GeoShape { get; set; }
+
+		[JsonPropertyName("has_child")]
+		public HasChildQuery? HasChild { get; set; }
+
+		[JsonPropertyName("has_parent")]
+		public HasParentQuery? HasParent { get; set; }
+
+		[JsonPropertyName("ids")]
+		public IdsQuery? Ids { get; set; }
+
+		[JsonPropertyName("intervals")]
+		public NamedQuery<Union<IntervalsQuery, string>>? Intervals { get; set; }
+
+		[JsonPropertyName("match")]
+		public NamedQuery<OneOf<MatchQuery, string, float, bool>>? Match { get; set; }
+
+		[JsonPropertyName("match_all")]
+		public MatchAllQuery? MatchAll { get; set; }
+
+		[JsonPropertyName("match_bool_prefix")]
+		public NamedQuery<Union<MatchBoolPrefixQuery, string>>? MatchBoolPrefix { get; set; }
+
+		[JsonPropertyName("match_none")]
+		public MatchNoneQuery? MatchNone { get; set; }
+
+		[JsonPropertyName("match_phrase")]
+		public NamedQuery<Union<MatchPhraseQuery, string>>? MatchPhrase { get; set; }
+
+		[JsonPropertyName("match_phrase_prefix")]
+		public NamedQuery<Union<MatchPhrasePrefixQuery, string>>? MatchPhrasePrefix { get; set; }
+
+		[JsonPropertyName("more_like_this")]
+		public MoreLikeThisQuery? MoreLikeThis { get; set; }
+
+		[JsonPropertyName("multi_match")]
+		public MultiMatchQuery? MultiMatch { get; set; }
+
+		[JsonPropertyName("nested")]
+		public NestedQuery? Nested { get; set; }
+
+		[JsonPropertyName("parent_id")]
+		public ParentIdQuery? ParentId { get; set; }
+
+		[JsonPropertyName("percolate")]
+		public PercolateQuery? Percolate { get; set; }
+
+		[JsonPropertyName("pinned")]
+		public PinnedQuery? Pinned { get; set; }
+
+		[JsonPropertyName("prefix")]
+		public NamedQuery<Union<PrefixQuery, string>>? Prefix { get; set; }
+
+		[JsonPropertyName("query_string")]
+		public QueryStringQuery? QueryString { get; set; }
+
+		[JsonPropertyName("range")]
+		public NamedQuery<RangeQuery>? Range { get; set; }
+
+		[JsonPropertyName("rank_feature")]
+		public NamedQuery<Union<RankFeatureQuery, string>>? RankFeature { get; set; }
+
+		[JsonPropertyName("regexp")]
+		public NamedQuery<Union<RegexpQuery, string>>? Regexp { get; set; }
+
+		[JsonPropertyName("script")]
+		public ScriptQuery? Script { get; set; }
+
+		[JsonPropertyName("script_score")]
+		public ScriptScoreQuery? ScriptScore { get; set; }
+
+		[JsonPropertyName("shape")]
+		public NamedQuery<Union<ShapeQuery, string>>? Shape { get; set; }
+
+		[JsonPropertyName("simple_query_string")]
+		public SimpleQueryStringQuery? SimpleQueryString { get; set; }
+
+		[JsonPropertyName("span_containing")]
+		public SpanContainingQuery? SpanContaining { get; set; }
+
+		[JsonPropertyName("span_first")]
+		public SpanFirstQuery? SpanFirst { get; set; }
+
+		[JsonPropertyName("span_multi")]
+		public SpanMultiTermQuery? SpanMulti { get; set; }
+
+		[JsonPropertyName("span_near")]
+		public SpanNearQuery? SpanNear { get; set; }
+
+		[JsonPropertyName("span_not")]
+		public SpanNotQuery? SpanNot { get; set; }
+
+		[JsonPropertyName("span_or")]
+		public SpanOrQuery? SpanOr { get; set; }
+
+		[JsonPropertyName("span_term")]
+		public NamedQuery<Union<SpanTermQuery, string>>? SpanTerm { get; set; }
+
+		[JsonPropertyName("span_within")]
+		public SpanWithinQuery? SpanWithin { get; set; }
+
+		[JsonPropertyName("template")]
+		public QueryTemplate? Template { get; set; }
+
+		[JsonPropertyName("term")]
+		public NamedQuery<OneOf<TermQuery, string, float, bool>>? Term { get; set; }
+
+		[JsonPropertyName("terms")]
+		public NamedQuery<OneOf<TermsQuery, IReadOnlyCollection<string>, IReadOnlyCollection<long>>>? Terms { get; set; }
+
+		[JsonPropertyName("terms_set")]
+		public NamedQuery<Union<TermsSetQuery, string>>? TermsSet { get; set; }
+
+		[JsonPropertyName("type")]
+		public TypeQuery? Type { get; set; }
+
+		[JsonPropertyName("wildcard")]
+		public NamedQuery<Union<WildcardQuery, string>>? Wildcard { get; set; }
+	}
+
+	public partial class QueryStringQuery : QueryBase
+	{
+		[JsonPropertyName("allow_leading_wildcard")]
+		public bool? AllowLeadingWildcard { get; set; }
+
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("analyze_wildcard")]
+		public bool? AnalyzeWildcard { get; set; }
+
+		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		[JsonPropertyName("default_field")]
+		public Field? DefaultField { get; set; }
+
+		[JsonPropertyName("default_operator")]
+		public Operator? DefaultOperator { get; set; }
+
+		[JsonPropertyName("enable_position_increments")]
+		public bool? EnablePositionIncrements { get; set; }
+
+		[JsonPropertyName("escape")]
+		public bool? Escape { get; set; }
+
+		[JsonPropertyName("fields")]
+		public Fields? Fields { get; set; }
+
+		[JsonPropertyName("fuzziness")]
+		public Fuzziness? Fuzziness { get; set; }
+
+		[JsonPropertyName("fuzzy_max_expansions")]
+		public int? FuzzyMaxExpansions { get; set; }
+
+		[JsonPropertyName("fuzzy_prefix_length")]
+		public int? FuzzyPrefixLength { get; set; }
+
+		[JsonPropertyName("fuzzy_rewrite")]
+		public MultiTermQueryRewrite? FuzzyRewrite { get; set; }
+
+		[JsonPropertyName("fuzzy_transpositions")]
+		public bool? FuzzyTranspositions { get; set; }
+
+		[JsonPropertyName("lenient")]
+		public bool? Lenient { get; set; }
+
+		[JsonPropertyName("max_determinized_states")]
+		public int? MaxDeterminizedStates { get; set; }
+
+		[JsonPropertyName("minimum_should_match")]
+		public MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		[JsonPropertyName("phrase_slop")]
+		public double? PhraseSlop { get; set; }
+
+		[JsonPropertyName("query")]
+		public string? Query { get; set; }
+
+		[JsonPropertyName("quote_analyzer")]
+		public string? QuoteAnalyzer { get; set; }
+
+		[JsonPropertyName("quote_field_suffix")]
+		public string? QuoteFieldSuffix { get; set; }
+
+		[JsonPropertyName("rewrite")]
+		public MultiTermQueryRewrite? Rewrite { get; set; }
+
+		[JsonPropertyName("tie_breaker")]
+		public double? TieBreaker { get; set; }
+
+		[JsonPropertyName("time_zone")]
+		public string? TimeZone { get; set; }
+
+		[JsonPropertyName("type")]
+		public TextQueryType? Type { get; set; }
+	}
+
+	public partial class QueryTemplate
+	{
+		[JsonPropertyName("source")]
+		public string Source { get; set; }
+	}
+
+	public partial class RandomScoreFunction : ScoreFunctionBase
+	{
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("seed")]
+		public Union<long, string>? Seed { get; set; }
+	}
+
+	public partial class RangeQuery : QueryBase
+	{
+		[JsonPropertyName("from")]
+		public Union<double, DateMath>? From { get; set; }
+
+		[JsonPropertyName("gt")]
+		public Union<double, DateMath>? Gt { get; set; }
+
+		[JsonPropertyName("gte")]
+		public Union<double, DateMath>? Gte { get; set; }
+
+		[JsonPropertyName("lt")]
+		public Union<double, DateMath>? Lt { get; set; }
+
+		[JsonPropertyName("lte")]
+		public Union<double, DateMath>? Lte { get; set; }
+
+		[JsonPropertyName("relation")]
+		public RangeRelation? Relation { get; set; }
+
+		[JsonPropertyName("time_zone")]
+		public string? TimeZone { get; set; }
+
+		[JsonPropertyName("to")]
+		public Union<double, DateMath>? To { get; set; }
+	}
+
+	public partial class RankFeatureFunction
+	{
+	}
+
+	public partial class RankFeatureQuery : QueryBase
+	{
+		[JsonPropertyName("function")]
+		public RankFeatureFunction? Function { get; set; }
+	}
+
+	public partial class RegexpQuery : QueryBase
+	{
+		[JsonPropertyName("flags")]
+		public string? Flags { get; set; }
+
+		[JsonPropertyName("max_determinized_states")]
+		public int? MaxDeterminizedStates { get; set; }
+
+		[JsonPropertyName("value")]
+		public string? Value { get; set; }
+	}
+
+	public partial class ScoreFunctionBase
+	{
+		[JsonPropertyName("filter")]
+		public QueryContainer? Filter { get; set; }
+
+		[JsonPropertyName("weight")]
+		public double? Weight { get; set; }
+	}
+
+	public partial class ScriptQuery : QueryBase
+	{
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
+	}
+
+	public partial class ScriptScoreFunction : ScoreFunctionBase
+	{
+		[JsonPropertyName("script")]
+		public Script Script { get; set; }
+	}
+
+	public partial class ScriptScoreQuery : QueryBase
+	{
+		[JsonPropertyName("query")]
+		public QueryContainer? Query { get; set; }
+
+		[JsonPropertyName("script")]
+		public Script? Script { get; set; }
+	}
+
+	public partial class ShapeQuery : QueryBase
+	{
+		[JsonPropertyName("ignore_unmapped")]
+		public bool? IgnoreUnmapped { get; set; }
+
+		[JsonPropertyName("indexed_shape")]
+		public FieldLookup? IndexedShape { get; set; }
+
+		[JsonPropertyName("relation")]
+		public ShapeRelation? Relation { get; set; }
+
+		[JsonPropertyName("shape")]
+		public GeoShape? Shape { get; set; }
+	}
+
+	public partial class SimpleQueryStringQuery : QueryBase
+	{
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonPropertyName("analyze_wildcard")]
+		public bool? AnalyzeWildcard { get; set; }
+
+		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		[JsonPropertyName("default_operator")]
+		public Operator? DefaultOperator { get; set; }
+
+		[JsonPropertyName("fields")]
+		public Fields? Fields { get; set; }
+
+		[JsonPropertyName("flags")]
+		public Union<SimpleQueryStringFlags, string>? Flags { get; set; }
+
+		[JsonPropertyName("fuzzy_max_expansions")]
+		public int? FuzzyMaxExpansions { get; set; }
+
+		[JsonPropertyName("fuzzy_prefix_length")]
+		public int? FuzzyPrefixLength { get; set; }
+
+		[JsonPropertyName("fuzzy_transpositions")]
+		public bool? FuzzyTranspositions { get; set; }
+
+		[JsonPropertyName("lenient")]
+		public bool? Lenient { get; set; }
+
+		[JsonPropertyName("minimum_should_match")]
+		public MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		[JsonPropertyName("query")]
+		public string? Query { get; set; }
+
+		[JsonPropertyName("quote_field_suffix")]
+		public string? QuoteFieldSuffix { get; set; }
+	}
+
+	public partial class SpanContainingQuery : QueryBase
+	{
+		[JsonPropertyName("big")]
+		public SpanQuery? Big { get; set; }
+
+		[JsonPropertyName("little")]
+		public SpanQuery? Little { get; set; }
+	}
+
+	public partial class SpanFieldMaskingQuery : QueryBase
+	{
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("query")]
+		public SpanQuery? Query { get; set; }
+	}
+
+	public partial class SpanFirstQuery : QueryBase
+	{
+		[JsonPropertyName("end")]
+		public int? End { get; set; }
+
+		[JsonPropertyName("match")]
+		public SpanQuery? Match { get; set; }
+	}
+
+	public partial class SpanGapQuery : QueryBase
+	{
+		[JsonPropertyName("field")]
+		public Field? Field { get; set; }
+
+		[JsonPropertyName("width")]
+		public int? Width { get; set; }
+	}
+
+	public partial class SpanMultiTermQuery : QueryBase
+	{
+		[JsonPropertyName("match")]
+		public QueryContainer? Match { get; set; }
+	}
+
+	public partial class SpanNearQuery : QueryBase
+	{
+		[JsonPropertyName("clauses")]
+		public IEnumerable<SpanQuery>? Clauses { get; set; }
+
+		[JsonPropertyName("in_order")]
+		public bool? InOrder { get; set; }
+
+		[JsonPropertyName("slop")]
+		public int? Slop { get; set; }
+	}
+
+	public partial class SpanNotQuery : QueryBase
+	{
+		[JsonPropertyName("dist")]
+		public int? Dist { get; set; }
+
+		[JsonPropertyName("exclude")]
+		public SpanQuery? Exclude { get; set; }
+
+		[JsonPropertyName("include")]
+		public SpanQuery? Include { get; set; }
+
+		[JsonPropertyName("post")]
+		public int? Post { get; set; }
+
+		[JsonPropertyName("pre")]
+		public int? Pre { get; set; }
+	}
+
+	public partial class SpanOrQuery : QueryBase
+	{
+		[JsonPropertyName("clauses")]
+		public IEnumerable<SpanQuery>? Clauses { get; set; }
+	}
+
+	public partial class SpanQuery : QueryBase
+	{
+		[JsonPropertyName("field_masking_span")]
+		public NamedQuery<Union<SpanFieldMaskingQuery, string>>? FieldMaskingSpan { get; set; }
+
+		[JsonPropertyName("span_containing")]
+		public NamedQuery<Union<SpanContainingQuery, string>>? SpanContaining { get; set; }
+
+		[JsonPropertyName("span_first")]
+		public NamedQuery<Union<SpanFirstQuery, string>>? SpanFirst { get; set; }
+
+		[JsonPropertyName("span_gap")]
+		public NamedQuery<Union<SpanGapQuery, int>>? SpanGap { get; set; }
+
+		[JsonPropertyName("span_multi")]
+		public SpanMultiTermQuery? SpanMulti { get; set; }
+
+		[JsonPropertyName("span_near")]
+		public NamedQuery<Union<SpanNearQuery, string>>? SpanNear { get; set; }
+
+		[JsonPropertyName("span_not")]
+		public NamedQuery<Union<SpanNotQuery, string>>? SpanNot { get; set; }
+
+		[JsonPropertyName("span_or")]
+		public NamedQuery<Union<SpanOrQuery, string>>? SpanOr { get; set; }
+
+		[JsonPropertyName("span_term")]
+		public NamedQuery<Union<SpanTermQuery, string>>? SpanTerm { get; set; }
+
+		[JsonPropertyName("span_within")]
+		public NamedQuery<Union<SpanWithinQuery, string>>? SpanWithin { get; set; }
+	}
+
+	public partial class SpanTermQuery : QueryBase
+	{
+		[JsonPropertyName("value")]
+		public string Value { get; set; }
+	}
+
+	public partial class SpanWithinQuery : QueryBase
+	{
+		[JsonPropertyName("big")]
+		public SpanQuery? Big { get; set; }
+
+		[JsonPropertyName("little")]
+		public SpanQuery? Little { get; set; }
+	}
+
+	public partial class TermQuery : QueryBase
+	{
+		[JsonPropertyName("value")]
+		public OneOf<string, float, bool>? Value { get; set; }
+	}
+
+	public partial class TermsQuery : QueryBase
+	{
+		[JsonPropertyName("id")]
+		public Id? Id { get; set; }
+
+		[JsonPropertyName("index")]
+		public IndexName? Index { get; set; }
+
+		[JsonPropertyName("path")]
+		public string? Path { get; set; }
+
+		[JsonPropertyName("routing")]
+		public Routing? Routing { get; set; }
+
+		[JsonPropertyName("terms")]
+		public IEnumerable<string>? Terms { get; set; }
+	}
+
+	public partial class TermsSetQuery : QueryBase
+	{
+		[JsonPropertyName("minimum_should_match_field")]
+		public Field? MinimumShouldMatchField { get; set; }
+
+		[JsonPropertyName("minimum_should_match_script")]
+		public Script? MinimumShouldMatchScript { get; set; }
+
+		[JsonPropertyName("terms")]
+		public IEnumerable<string>? Terms { get; set; }
 	}
 
 	public partial class ThreeDimensionalPoint
@@ -5284,6 +9298,213 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class TypeQuery : QueryBase
+	{
+		[JsonPropertyName("value")]
+		public string Value { get; set; }
+	}
+
+	public partial class WildcardQuery : QueryBase
+	{
+		[JsonPropertyName("rewrite")]
+		public MultiTermQueryRewrite? Rewrite { get; set; }
+
+		[JsonPropertyName("value")]
+		public string Value { get; set; }
+	}
+
+	public partial class IndexHealthStats
+	{
+		[JsonPropertyName("active_primary_shards")]
+		public int ActivePrimaryShards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("active_shards")]
+		public int ActiveShards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("initializing_shards")]
+		public int InitializingShards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("number_of_replicas")]
+		public int NumberOfReplicas
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("number_of_shards")]
+		public int NumberOfShards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("relocating_shards")]
+		public int RelocatingShards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shards")]
+		public Dictionary<string, ShardHealthStats>? Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("status")]
+		public Health Status
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("unassigned_shards")]
+		public int UnassignedShards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ShardHealthStats
+	{
+		[JsonPropertyName("active_shards")]
+		public int ActiveShards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("initializing_shards")]
+		public int InitializingShards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("primary_active")]
+		public bool PrimaryActive
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("relocating_shards")]
+		public int RelocatingShards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("status")]
+		public Health Status
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("unassigned_shards")]
+		public int UnassignedShards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Alias
+	{
+		[JsonPropertyName("filter")]
+		public QueryContainer? Filter { get; set; }
+
+		[JsonPropertyName("index_routing")]
+		public Routing? IndexRouting { get; set; }
+
+		[JsonPropertyName("is_hidden")]
+		public bool? IsHidden { get; set; }
+
+		[JsonPropertyName("is_write_index")]
+		public bool? IsWriteIndex { get; set; }
+
+		[JsonPropertyName("routing")]
+		public Routing? Routing { get; set; }
+
+		[JsonPropertyName("search_routing")]
+		public Routing? SearchRouting { get; set; }
 	}
 
 	public partial class FielddataFrequencyFilter

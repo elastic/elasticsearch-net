@@ -26,8 +26,14 @@ namespace Nest
 {
     public partial class ElasticClient : IElasticClient
     {
+        public ClusterNamespace Cluster { get; private set; }
+
+        public IndicesNamespace Indices { get; private set; }
+
         private partial void SetupNamespaces()
         {
+            Cluster = new ClusterNamespace(this);
+            Indices = new IndicesNamespace(this);
         }
 
         public IndexResponse Index<TDocument>(IIndexRequest<TDocument> request)
@@ -48,6 +54,46 @@ namespace Nest
         public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null, CancellationToken cancellationToken = default)
         {
             return IndexAsync(selector.InvokeOrDefault(new IndexDescriptor<TDocument>(index)), cancellationToken);
+        }
+
+        public PingResponse Ping(IPingRequest request)
+        {
+            return DoRequest<IPingRequest, PingResponse>(request, request.RequestParameters);
+        }
+
+        public Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IPingRequest, PingResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public PingResponse Ping(Func<PingDescriptor, IPingRequest> selector = null)
+        {
+            return Ping(selector.InvokeOrDefault(new PingDescriptor()));
+        }
+
+        public Task<PingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return PingAsync(selector.InvokeOrDefault(new PingDescriptor()), cancellationToken);
+        }
+
+        public SearchResponse<TDocument> Search<TDocument>(ISearchRequest request)
+        {
+            return DoRequest<ISearchRequest, SearchResponse<TDocument>>(request, request.RequestParameters);
+        }
+
+        public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<ISearchRequest, SearchResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public SearchResponse<TDocument> Search<TDocument>(Func<SearchDescriptor, ISearchRequest> selector = null)
+        {
+            return Search<TDocument>(selector.InvokeOrDefault(new SearchDescriptor()));
+        }
+
+        public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchDescriptor, ISearchRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return SearchAsync<TDocument>(selector.InvokeOrDefault(new SearchDescriptor()), cancellationToken);
         }
     }
 }

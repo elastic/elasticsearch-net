@@ -1,5 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
@@ -10,24 +14,80 @@ using Elastic.Transport;
 
 namespace Nest
 {
+	//[AttributeUsage(AttributeTargets.Interface)]
+	//public class JsonInterfaceConverterAttribute : JsonConverterAttribute
+	//{
+	//	public JsonInterfaceConverterAttribute(Type converterType)
+	//		: base(converterType)
+	//	{
+	//	}
+	//}
+
+	//public class ProxyRequestConverterFactory : JsonConverterFactory
+	//{
+	//	private readonly IConnectionSettingsValues _settings;
+
+	//	public ProxyRequestConverterFactory(IConnectionSettingsValues settings) => _settings = settings;
+		
+	//	public override bool CanConvert(Type typeToConvert) => typeToConvert.IsGenericType
+	//	                                                       && typeToConvert.GetInterfaces().Any(x=> x.UnderlyingSystemType == typeof(IProxyRequest)); // Check proxy request
+
+	//	public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+	//	{
+	//		//Debug.Assert(typeToConvert.IsGenericType &&
+	//		//			 typeToConvert.GetGenericTypeDefinition() == typeof(IProxyRequest));
+
+	//		var elementType = typeToConvert.GetGenericArguments()[0];
+
+	//		var att = typeToConvert.GetCustomAttribute<ConvertAsAttribute>();
+			
+	//		var converter = (JsonConverter)Activator.CreateInstance(
+	//			typeof(ProxyRequestConverter<>).MakeGenericType(att.ConvertType.MakeGenericType(elementType)),
+	//			BindingFlags.Instance | BindingFlags.Public,
+	//			args: new object[] { _settings },
+	//			binder: null,
+	//			culture: null)!;
+
+	//		return converter;
+	//	}
+	//}
+
 	[AttributeUsage(AttributeTargets.Interface)]
-	public class JsonInterfaceConverterAttribute : JsonConverterAttribute
+	internal class ConvertAsAttribute : Attribute
 	{
-		public JsonInterfaceConverterAttribute(Type converterType)
-			: base(converterType)
-		{
-		}
+		public ConvertAsAttribute(Type convertType) => ConvertType = convertType;
+
+		public Type ConvertType { get; }
 	}
 
-	public class InterfaceConverter<TInterface, TConcrete> : JsonConverter<TInterface>
-		where TConcrete : class, TInterface
-	{
-		public override TInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
-			JsonSerializer.Deserialize<TConcrete>(ref reader, options);
+	//public class ProxyRequestConverter<TRequest> : JsonConverter<TRequest>
+	//{
+	//	private readonly IConnectionSettingsValues _settings;
 
-		public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options) =>
-			JsonSerializer.Serialize<TConcrete>(writer, value as TConcrete, options);
-	}
+	//	public ProxyRequestConverter(IConnectionSettingsValues settings) => _settings = settings;
+
+	//	public override TRequest? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+
+	//	public override void Write(Utf8JsonWriter writer, TRequest value, JsonSerializerOptions options)
+	//	{
+	//		if (value is IProxyRequest proxyRequest)
+	//		{
+	//			proxyRequest.WriteJson(writer, _settings.SourceSerializer);
+	//		}
+	//	}
+	//}
+
+	//public class TestConverter<TInterface, TConcrete> : JsonConverter<TInterface<>>
+
+	//public class InterfaceConverter<TInterface, TConcrete> : JsonConverter<TInterface>
+	//	where TConcrete : class, TInterface
+	//{
+	//	public override TInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+	//		JsonSerializer.Deserialize<TConcrete>(ref reader, options);
+
+	//	public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options) =>
+	//		JsonSerializer.Serialize<TConcrete>(writer, value as TConcrete, options);
+	//}
 
 	public class UnionConverter<TConcrete> : JsonConverter<TConcrete> where TConcrete : class
 	{
@@ -38,17 +98,17 @@ namespace Nest
 			switch (token)
 			{
 				case JsonTokenType.String:
-				{
-					var value = reader.GetString();
-					var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
-					return result;
-				}
+					{
+						var value = reader.GetString();
+						var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
+						return result;
+					}
 				case JsonTokenType.Number:
-				{
-					var value = reader.GetInt32();
-					var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
-					return result;
-				}
+					{
+						var value = reader.GetInt32();
+						var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
+						return result;
+					}
 			}
 
 			throw new SerializationException();
@@ -67,17 +127,17 @@ namespace Nest
 			switch (token)
 			{
 				case JsonTokenType.String:
-				{
-					var value = reader.GetString();
-					var result = (Percentage)Activator.CreateInstance(typeof(Percentage), value);
-					return result;
-				}
+					{
+						var value = reader.GetString();
+						var result = (Percentage)Activator.CreateInstance(typeof(Percentage), value);
+						return result;
+					}
 				case JsonTokenType.Number:
-				{
-					var value = reader.GetSingle();
-					var result = (Percentage)Activator.CreateInstance(typeof(Percentage), value);
-					return result;
-				}
+					{
+						var value = reader.GetSingle();
+						var result = (Percentage)Activator.CreateInstance(typeof(Percentage), value);
+						return result;
+					}
 			}
 
 			throw new SerializationException();
@@ -90,17 +150,23 @@ namespace Nest
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
 	internal class DefaultHighLevelSerializer : ITransportSerializer
 	{
-		private static readonly JsonSerializerOptions Options = new()
-		{
-			IgnoreNullValues = true, Converters = {new JsonStringEnumConverter()}
-		};
+		// ctor added so we can pass down settings. TODO: review this design, perhaps have a method AddConverter which can be called instead?
+		public DefaultHighLevelSerializer(IConnectionSettingsValues settings) =>
+			Options = new JsonSerializerOptions
+			{
+				IgnoreNullValues = true,
+				Converters = {new JsonStringEnumConverter()/*, new ProxyRequestConverterFactory(settings)*/}
+			};
+
+		private JsonSerializerOptions Options { get; }
 
 		private static readonly UTF8Encoding Encoding = new(false);
 
 		// TODO - This is not ideal as we allocate a large string - No stream based sync overload - We should use a pooled byte array in the future
 		public T Deserialize<T>(Stream stream)
 		{
-			if (stream.Length == 0) return default;
+			if (stream.Length == 0)
+				return default;
 			using var reader = new StreamReader(stream);
 			return JsonSerializer.Deserialize<T>(reader.ReadToEnd(), Options);
 		}

@@ -5,42 +5,55 @@ using Nest;
 
 namespace Playground
 {
+	public class MyType
+	{
+		public MyType(string name) => Name = name;
+
+		public string Name { get; }
+	}
+
 	internal class Program
 	{
 		private static async Task Main()
 		{
 			IElasticClient client = new ElasticClient(new Uri("http://localhost:9200"));
 
-			await client.PingAsync(new PingRequest());
-
-			await client.Cluster.HealthAsync();
-
-			var clusterHealthRequest = new ClusterHealthRequest { Level = Level.Cluster };
-			var clusterHealthResponse = await client.Cluster.HealthAsync(clusterHealthRequest);
-
-			if (clusterHealthResponse.IsValid)
+			var response = await client.IndexAsync(new IndexRequest<MyType>("test-001", Guid.NewGuid()){ Document = new MyType("Steve Gordon")});
+			if (response.IsValid)
 			{
-				Console.WriteLine($"Cluster Name: {clusterHealthResponse.ClusterName}");
-				Console.WriteLine($"Status: {clusterHealthResponse.Status:G}");
-				Console.WriteLine($"Active Primaries: {clusterHealthResponse.ActivePrimaryShards}");
+
 			}
 
-			var createIndexRequest = new IndicesCreateRequest($"test-{Guid.NewGuid()}");
-			var createIndexResponse = await client.Indices.CreateAsync(createIndexRequest);
+			//await client.PingAsync(new PingRequest());
 
-			if (createIndexResponse.IsValid)
-				Console.WriteLine($"Shared Acknowledged: {createIndexResponse.ShardsAcknowledged}");
+			//await client.Cluster.HealthAsync();
 
-			createIndexRequest = new IndicesCreateRequest($"test-{Guid.NewGuid()}")
-			{
-				Mappings = new TypeMapping
-				{
-					Properties = new Dictionary<PropertyName, Property>
-					{
-						//{"fieldOne", new TextProperty() }
-					}
-				}
-			};
+			//var clusterHealthRequest = new ClusterHealthRequest { Level = Level.Cluster };
+			//var clusterHealthResponse = await client.Cluster.HealthAsync(clusterHealthRequest);
+
+			//if (clusterHealthResponse.IsValid)
+			//{
+			//	Console.WriteLine($"Cluster Name: {clusterHealthResponse.ClusterName}");
+			//	Console.WriteLine($"Status: {clusterHealthResponse.Status:G}");
+			//	Console.WriteLine($"Active Primaries: {clusterHealthResponse.ActivePrimaryShards}");
+			//}
+
+			//var createIndexRequest = new IndicesCreateRequest($"test-{Guid.NewGuid()}");
+			//var createIndexResponse = await client.Indices.CreateAsync(createIndexRequest);
+
+			//if (createIndexResponse.IsValid)
+			//	Console.WriteLine($"Shared Acknowledged: {createIndexResponse.ShardsAcknowledged}");
+
+			//createIndexRequest = new IndicesCreateRequest($"test-{Guid.NewGuid()}")
+			//{
+			//	Mappings = new TypeMapping
+			//	{
+			//		Properties = new Dictionary<PropertyName, Property>
+			//		{
+			//			//{"fieldOne", new TextProperty() }
+			//		}
+			//	}
+			//};
 
 			// TODO: It might be kinda nice if the client accepts no request here and uses a cached default instance
 			//var searchResponse = await client.SearchAsync(new SearchRequest());
@@ -50,10 +63,10 @@ namespace Playground
 			//	Console.WriteLine($"Took: {searchResponse.Took}");
 			//}
 
-			var clientConcrete = new ElasticClient(new Uri("http://localhost:9200"));
+			//var clientConcrete = new ElasticClient(new Uri("http://localhost:9200"));
 
-			await clientConcrete.PingAsync();
-			await clientConcrete.Indices.DeleteAsync("testing");
+			//await clientConcrete.PingAsync();
+			//await clientConcrete.Indices.DeleteAsync("testing");
 		}
 	}
 }

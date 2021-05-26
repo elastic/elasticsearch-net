@@ -84,10 +84,10 @@ namespace Nest
 		protected ConnectionSettingsBase(
 			IConnectionPool connectionPool,
 			IConnection connection,
-			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory)
+			ConnectionSettings.SourceSerializerFactory? sourceSerializerFactory)
 			: base(connectionPool, connection, null, NestElasticsearchProductRegistration.DefaultForNest)
 		{
-			var defaultSerializer = new DefaultHighLevelSerializer();
+			var defaultSerializer = new DefaultHighLevelSerializer(this);
 			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
 			//var serializerAsMappingProvider = sourceSerializer as IPropertyMappingProvider;
 
@@ -337,7 +337,7 @@ namespace Nest
 	public abstract class ConnectionConfigurationBase<TConnectionConfiguration> : TransportConfigurationBase<TConnectionConfiguration>, IConnectionConfigurationValues
 		where TConnectionConfiguration : ConnectionConfigurationBase<TConnectionConfiguration>, IConnectionConfigurationValues
 	{
-		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection, ITransportSerializer serializer,
+		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection, ITransportSerializer? serializer,
 			IProductRegistration registration = null)
 			: base(connectionPool, connection, serializer, registration ?? ElasticsearchProductRegistration.Default) =>
 			UserAgent(ConnectionConfiguration.DefaultUserAgent);

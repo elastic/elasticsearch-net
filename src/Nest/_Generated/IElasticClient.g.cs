@@ -25,9 +25,21 @@ namespace Nest
 {
     public partial interface IElasticClient
     {
+        ClusterNamespace Cluster { get; }
+
+        IndicesNamespace Indices { get; }
+
         IndexResponse Index<TDocument>(IIndexRequest<TDocument> request);
         Task<IndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken cancellationToken = default);
         IndexResponse Index<TDocument>(TDocument document, IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null);
         Task<IndexResponse> IndexAsync<TDocument>(TDocument document, IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null, CancellationToken cancellationToken = default);
+        PingResponse Ping(IPingRequest request);
+        Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default);
+        PingResponse Ping(Func<PingDescriptor, IPingRequest> selector = null);
+        Task<PingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null, CancellationToken cancellationToken = default);
+        SearchResponse<TDocument> Search<TDocument>(ISearchRequest request);
+        Task<SearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken cancellationToken = default);
+        SearchResponse<TDocument> Search<TDocument>(Func<SearchDescriptor, ISearchRequest> selector = null);
+        Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchDescriptor, ISearchRequest> selector = null, CancellationToken cancellationToken = default);
     }
 }
