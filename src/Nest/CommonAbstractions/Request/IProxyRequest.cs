@@ -11,7 +11,7 @@ namespace Nest
 	/// <summary> A request that that does not necessarily (de)serializes itself </summary>
 	public interface IProxyRequest : IRequest
 	{
-		void WriteJson(Utf8JsonWriter writer);
+		void WriteJson(Utf8JsonWriter writer, ITransportSerializer sourceSerializer);
 	}
 
 

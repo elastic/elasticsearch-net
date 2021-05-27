@@ -87,7 +87,7 @@ namespace Nest
 			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory)
 			: base(connectionPool, connection, null, NestElasticsearchProductRegistration.DefaultForNest)
 		{
-			var defaultSerializer = new DefaultHighLevelSerializer();
+			var defaultSerializer = new DefaultHighLevelSerializer(this);
 			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
 			//var serializerAsMappingProvider = sourceSerializer as IPropertyMappingProvider;
 

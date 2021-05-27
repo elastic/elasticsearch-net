@@ -21,45 +21,24 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
-	public partial class IndexDescriptor<TDocument> : RequestDescriptorBase<IndexDescriptor<TDocument>, IndexRequestParameters, IIndexRequest<TDocument>>, IIndexRequest<TDocument>
+	public partial class IndicesCreateDescriptor : RequestDescriptorBase<IndicesCreateDescriptor, IndicesCreateRequestParameters, IIndicesCreateRequest>, IIndicesCreateRequest
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceIndex;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesCreate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
-		///<summary>/{index}/_doc/{id}</summary>
-        public IndexDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Optional("id", id))
-		{
-		}
-
-		///<summary>/{index}/_doc</summary>
-        public IndexDescriptor(IndexName index) : base(r => r.Required("index", index))
+		///<summary>/{index}</summary>
+        public IndicesCreateDescriptor(IndexName index) : base(r => r.Required("index", index))
 		{
 		}
 	}
 
-	public partial class PingDescriptor : RequestDescriptorBase<PingDescriptor, PingRequestParameters, IPingRequest>, IPingRequest
+	public partial class DeleteIndicesDescriptor : RequestDescriptorBase<DeleteIndicesDescriptor, DeleteIndicesRequestParameters, IDeleteIndicesRequest>, IDeleteIndicesRequest
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDelete;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
-		///<summary>/</summary>
-        public PingDescriptor() : base()
-		{
-		}
-	}
-
-	public partial class SearchDescriptor : RequestDescriptorBase<SearchDescriptor, SearchRequestParameters, ISearchRequest>, ISearchRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearch;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		///<summary>/_search</summary>
-        public SearchDescriptor() : base()
-		{
-		}
-
-		///<summary>/{index}/_search</summary>
-        public SearchDescriptor(Indices index) : base(r => r.Optional("index", index))
+		///<summary>/{index}</summary>
+        public DeleteIndicesDescriptor(Indices index) : base(r => r.Required("index", index))
 		{
 		}
 	}

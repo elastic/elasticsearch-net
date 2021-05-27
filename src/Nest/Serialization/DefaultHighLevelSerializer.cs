@@ -25,7 +25,12 @@ namespace Nest
 
 	public class ProxyRequestConverterFactory : JsonConverterFactory
 	{
-		public override bool CanConvert(Type typeToConvert) => typeToConvert.IsGenericType && typeToConvert.GetInterfaces().Any(x=> x.UnderlyingSystemType == typeof(IProxyRequest)); // Check proxy request
+		private readonly IConnectionSettingsValues _settings;
+
+		public ProxyRequestConverterFactory(IConnectionSettingsValues settings) => _settings = settings;
+		
+		public override bool CanConvert(Type typeToConvert) => typeToConvert.IsGenericType
+		                                                       && typeToConvert.GetInterfaces().Any(x=> x.UnderlyingSystemType == typeof(IProxyRequest)); // Check proxy request
 
 		public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -39,8 +44,8 @@ namespace Nest
 			var converter = (JsonConverter)Activator.CreateInstance(
 				typeof(ProxyRequestConverter<>).MakeGenericType(att.ConvertType.MakeGenericType(elementType)),
 				BindingFlags.Instance | BindingFlags.Public,
+				args: new object[] { _settings },
 				binder: null,
-				args: null,
 				culture: null)!;
 
 			return converter;
@@ -57,13 +62,17 @@ namespace Nest
 
 	public class ProxyRequestConverter<TRequest> : JsonConverter<TRequest>
 	{
+		private readonly IConnectionSettingsValues _settings;
+
+		public ProxyRequestConverter(IConnectionSettingsValues settings) => _settings = settings;
+
 		public override TRequest? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
 
 		public override void Write(Utf8JsonWriter writer, TRequest value, JsonSerializerOptions options)
 		{
 			if (value is IProxyRequest proxyRequest)
 			{
-				proxyRequest.WriteJson(writer);
+				proxyRequest.WriteJson(writer, _settings.SourceSerializer);
 			}
 		}
 	}
@@ -141,11 +150,15 @@ namespace Nest
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
 	internal class DefaultHighLevelSerializer : ITransportSerializer
 	{
-		private static readonly JsonSerializerOptions Options = new()
-		{
-			IgnoreNullValues = true,
-			Converters = { new JsonStringEnumConverter(), new ProxyRequestConverterFactory() }
-		};
+		// ctor added so we can pass down settings. TODO: review this design, perhaps have a method AddConverter which can be called instead?
+		public DefaultHighLevelSerializer(IConnectionSettingsValues settings) =>
+			Options = new JsonSerializerOptions
+			{
+				IgnoreNullValues = true,
+				Converters = {new JsonStringEnumConverter(), new ProxyRequestConverterFactory(settings)}
+			};
+
+		private JsonSerializerOptions Options { get; }
 
 		private static readonly UTF8Encoding Encoding = new(false);
 

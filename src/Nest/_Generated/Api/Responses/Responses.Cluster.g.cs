@@ -16,44 +16,16 @@
 //
 // ------------------------------------------------
 
-using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Nest
 {
-	public abstract class AcknowledgedResponseBase : ResponseBase
+	public class ClusterHealthResponse : ResponseBase
 	{
-		[JsonPropertyName("acknowledged")]
-		public bool Acknowledged
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public abstract class IndicesResponseBase : AcknowledgedResponseBase
-	{
-		[JsonPropertyName("_shards")]
-		public ShardStatistics? Shards
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public abstract class WriteResponseBase : ResponseBase
-	{
-		[JsonPropertyName("_id")]
-		public Id Id
+		[JsonPropertyName("active_primary_shards")]
+		public int ActivePrimaryShards
 		{
 			get;
 #if NET5_0
@@ -63,8 +35,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("_index")]
-		public IndexName Index
+		[JsonPropertyName("active_shards")]
+		public int ActiveShards
 		{
 			get;
 #if NET5_0
@@ -74,8 +46,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("_primary_term")]
-		public long PrimaryTerm
+		[JsonPropertyName("active_shards_percent_as_number")]
+		public Percentage ActiveShardsPercentAsNumber
 		{
 			get;
 #if NET5_0
@@ -85,8 +57,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("result")]
-		public Result Result
+		[JsonPropertyName("cluster_name")]
+		public string ClusterName
 		{
 			get;
 #if NET5_0
@@ -96,8 +68,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("_seq_no")]
-		public SequenceNumber SeqNo
+		[JsonPropertyName("delayed_unassigned_shards")]
+		public int DelayedUnassignedShards
 		{
 			get;
 #if NET5_0
@@ -107,8 +79,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("_shards")]
-		public ShardStatistics Shards
+		[JsonPropertyName("indices")]
+		public Dictionary<IndexName, IndexHealthStats>? Indices
 		{
 			get;
 #if NET5_0
@@ -118,8 +90,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("_type")]
-		public Name? Type
+		[JsonPropertyName("initializing_shards")]
+		public int InitializingShards
 		{
 			get;
 #if NET5_0
@@ -129,8 +101,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("_version")]
-		public VersionNumber Version
+		[JsonPropertyName("number_of_data_nodes")]
+		public int NumberOfDataNodes
 		{
 			get;
 #if NET5_0
@@ -140,8 +112,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("forced_refresh")]
-		public bool? ForcedRefresh
+		[JsonPropertyName("number_of_in_flight_fetch")]
+		public int NumberOfInFlightFetch
 		{
 			get;
 #if NET5_0
@@ -151,8 +123,74 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("error")]
-		public ErrorCause? Error
+		[JsonPropertyName("number_of_nodes")]
+		public int NumberOfNodes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("number_of_pending_tasks")]
+		public int NumberOfPendingTasks
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("relocating_shards")]
+		public int RelocatingShards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("status")]
+		public Health Status
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("task_max_waiting_in_queue_millis")]
+		public EpochMillis TaskMaxWaitingInQueueMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("timed_out")]
+		public bool TimedOut
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("unassigned_shards")]
+		public int UnassignedShards
 		{
 			get;
 #if NET5_0
