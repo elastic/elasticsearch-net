@@ -29,7 +29,7 @@ namespace Nest
 	{
 	}
 
-	public class IndicesCreateRequest : PlainRequestBase<IndicesCreateRequestParameters>, IIndicesCreateRequest
+	public partial class IndicesCreateRequest : PlainRequestBase<IndicesCreateRequestParameters>, IIndicesCreateRequest
 	{
 		protected IIndicesCreateRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesCreate;
@@ -93,7 +93,7 @@ namespace Nest
 	{
 	}
 
-	public class DeleteIndicesRequest : PlainRequestBase<DeleteIndicesRequestParameters>, IDeleteIndicesRequest
+	public partial class DeleteIndicesRequest : PlainRequestBase<DeleteIndicesRequestParameters>, IDeleteIndicesRequest
 	{
 		protected IDeleteIndicesRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDelete;

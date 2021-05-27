@@ -16,6 +16,8 @@
 //
 // ------------------------------------------------
 
+using System.IO;
+using System.Text.Json;
 using Elastic.Transport;
 
 #nullable restore
@@ -35,6 +37,8 @@ namespace Nest
         public IndexDescriptor(IndexName index) : base(r => r.Required("index", index))
 		{
 		}
+
+		public void WriteJson(Stream stream, ITransportSerializer sourceSerializer, SerializationFormatting formatting) => throw new System.NotImplementedException();
 	}
 
 	public partial class PingDescriptor : RequestDescriptorBase<PingDescriptor, PingRequestParameters, IPingRequest>, IPingRequest

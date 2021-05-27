@@ -29,12 +29,12 @@ namespace Nest
 	{
 	}
 
-	public class IndexRequest<TDocument> : PlainRequestBase<IndexRequestParameters>, IIndexRequest<TDocument>
+	public partial class IndexRequest<TDocument> : PlainRequestBase<IndexRequestParameters>, IIndexRequest<TDocument>
 	{
 		protected IIndexRequest<TDocument> Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceIndex;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => false;
+		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
 		///<summary>/{index}/_doc/{id}</summary>
@@ -46,6 +46,8 @@ namespace Nest
         public IndexRequest(IndexName index) : base(r => r.Required("index", index))
 		{
 		}
+
+		public TDocument Document { get; set; }
 
 		[JsonIgnore]
 		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
@@ -86,7 +88,7 @@ namespace Nest
 	{
 	}
 
-	public class PingRequest : PlainRequestBase<PingRequestParameters>, IPingRequest
+	public partial class PingRequest : PlainRequestBase<PingRequestParameters>, IPingRequest
 	{
 		protected IPingRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
@@ -105,7 +107,7 @@ namespace Nest
 	{
 	}
 
-	public class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
+	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
 		protected ISearchRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearch;

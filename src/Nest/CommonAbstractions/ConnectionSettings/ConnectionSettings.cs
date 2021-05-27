@@ -84,7 +84,7 @@ namespace Nest
 		protected ConnectionSettingsBase(
 			IConnectionPool connectionPool,
 			IConnection connection,
-			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory)
+			ConnectionSettings.SourceSerializerFactory? sourceSerializerFactory)
 			: base(connectionPool, connection, null, NestElasticsearchProductRegistration.DefaultForNest)
 		{
 			var defaultSerializer = new DefaultHighLevelSerializer(this);

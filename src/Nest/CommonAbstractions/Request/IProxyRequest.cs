@@ -9,9 +9,9 @@ using Elastic.Transport;
 namespace Nest
 {
 	/// <summary> A request that that does not necessarily (de)serializes itself </summary>
-	public interface IProxyRequest : IRequest
+	public interface IProxyRequest
 	{
-		void WriteJson(Utf8JsonWriter writer, ITransportSerializer sourceSerializer);
+		void WriteJson(Stream stream, ITransportSerializer sourceSerializer, SerializationFormatting formatting);
 	}
 
 

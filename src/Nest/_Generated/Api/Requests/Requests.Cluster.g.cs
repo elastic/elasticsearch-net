@@ -29,7 +29,7 @@ namespace Nest
 	{
 	}
 
-	public class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
+	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
 	{
 		protected IClusterHealthRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
