@@ -37,8 +37,8 @@ namespace Nest
         public IndexDescriptor(IndexName index) : base(r => r.Required("index", index))
 		{
 		}
-
-		public void WriteJson(Stream stream, ITransportSerializer sourceSerializer, SerializationFormatting formatting) => throw new System.NotImplementedException();
+		
+		public void WriteJson(Utf8JsonWriter writer, ITransportSerializer sourceSerializer) => throw new System.NotImplementedException();
 	}
 
 	public partial class PingDescriptor : RequestDescriptorBase<PingDescriptor, PingRequestParameters, IPingRequest>, IPingRequest
