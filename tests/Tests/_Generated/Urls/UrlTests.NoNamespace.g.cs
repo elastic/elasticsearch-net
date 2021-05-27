@@ -34,12 +34,12 @@ namespace Tests.Urls.NoNamespace
         }
     }
 
-    public class SearchUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_search").Request(c => c.Search(new SearchRequest())).RequestAsync(c => c.SearchAsync(new SearchRequest()));
-        }
-    }
+    //public class SearchUrlTests : UrlTestsBase
+    //{
+    //    [U]
+    //    public override async Task Urls()
+    //    {
+    //        await UrlTester.POST("/_search").Request(c => c.Search(new SearchRequest())).RequestAsync(c => c.SearchAsync(new SearchRequest()));
+    //    }
+    //}
 }
