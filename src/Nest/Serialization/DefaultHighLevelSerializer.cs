@@ -14,43 +14,31 @@ using Elastic.Transport;
 
 namespace Nest
 {
-	//[AttributeUsage(AttributeTargets.Interface)]
-	//public class JsonInterfaceConverterAttribute : JsonConverterAttribute
-	//{
-	//	public JsonInterfaceConverterAttribute(Type converterType)
-	//		: base(converterType)
-	//	{
-	//	}
-	//}
+	public class ProxyRequestConverterFactory : JsonConverterFactory
+	{
+		private readonly IConnectionSettingsValues _settings;
 
-	//public class ProxyRequestConverterFactory : JsonConverterFactory
-	//{
-	//	private readonly IConnectionSettingsValues _settings;
+		public ProxyRequestConverterFactory(IConnectionSettingsValues settings) => _settings = settings;
 
-	//	public ProxyRequestConverterFactory(IConnectionSettingsValues settings) => _settings = settings;
-		
-	//	public override bool CanConvert(Type typeToConvert) => typeToConvert.IsGenericType
-	//	                                                       && typeToConvert.GetInterfaces().Any(x=> x.UnderlyingSystemType == typeof(IProxyRequest)); // Check proxy request
+		public override bool CanConvert(Type typeToConvert) => typeToConvert.IsGenericType
+															   && typeToConvert.GetInterfaces().Any(x => x.UnderlyingSystemType == typeof(IProxyRequest)); // Check proxy request
 
-	//	public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
-	//	{
-	//		//Debug.Assert(typeToConvert.IsGenericType &&
-	//		//			 typeToConvert.GetGenericTypeDefinition() == typeof(IProxyRequest));
+		public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+		{
+			var elementType = typeToConvert.GetGenericArguments()[0];
 
-	//		var elementType = typeToConvert.GetGenericArguments()[0];
+			var att = typeToConvert.GetCustomAttribute<ConvertAsAttribute>();
 
-	//		var att = typeToConvert.GetCustomAttribute<ConvertAsAttribute>();
-			
-	//		var converter = (JsonConverter)Activator.CreateInstance(
-	//			typeof(ProxyRequestConverter<>).MakeGenericType(att.ConvertType.MakeGenericType(elementType)),
-	//			BindingFlags.Instance | BindingFlags.Public,
-	//			args: new object[] { _settings },
-	//			binder: null,
-	//			culture: null)!;
+			var converter = (JsonConverter)Activator.CreateInstance(
+				typeof(ProxyRequestConverter<>).MakeGenericType(att?.ConvertType.MakeGenericType(elementType) ?? elementType),
+				BindingFlags.Instance | BindingFlags.Public,
+				args: new object[] { _settings },
+				binder: null,
+				culture: null)!;
 
-	//		return converter;
-	//	}
-	//}
+			return converter;
+		}
+	}
 
 	[AttributeUsage(AttributeTargets.Interface)]
 	internal class ConvertAsAttribute : Attribute
@@ -60,35 +48,20 @@ namespace Nest
 		public Type ConvertType { get; }
 	}
 
-	//public class ProxyRequestConverter<TRequest> : JsonConverter<TRequest>
-	//{
-	//	private readonly IConnectionSettingsValues _settings;
+	public class ProxyRequestConverter<TRequest> : JsonConverter<TRequest>
+	{
+		private readonly IConnectionSettingsValues _settings;
 
-	//	public ProxyRequestConverter(IConnectionSettingsValues settings) => _settings = settings;
+		public ProxyRequestConverter(IConnectionSettingsValues settings) => _settings = settings;
 
-	//	public override TRequest? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override TRequest? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
 
-	//	public override void Write(Utf8JsonWriter writer, TRequest value, JsonSerializerOptions options)
-	//	{
-	//		if (value is IProxyRequest proxyRequest)
-	//		{
-	//			proxyRequest.WriteJson(writer, _settings.SourceSerializer);
-	//		}
-	//	}
-	//}
-
-	//public class TestConverter<TInterface, TConcrete> : JsonConverter<TInterface<>>
-
-	//public class InterfaceConverter<TInterface, TConcrete> : JsonConverter<TInterface>
-	//	where TConcrete : class, TInterface
-	//{
-	//	public override TInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
-	//		JsonSerializer.Deserialize<TConcrete>(ref reader, options);
-
-	//	public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options) =>
-	//		JsonSerializer.Serialize<TConcrete>(writer, value as TConcrete, options);
-	//}
-
+		public override void Write(Utf8JsonWriter writer, TRequest value, JsonSerializerOptions options)
+		{
+			if (value is IProxyRequest proxyRequest) proxyRequest.WriteJson(writer, _settings.SourceSerializer);
+		}
+	}
+	
 	public class UnionConverter<TConcrete> : JsonConverter<TConcrete> where TConcrete : class
 	{
 		public override TConcrete Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -150,12 +123,18 @@ namespace Nest
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
 	internal class DefaultHighLevelSerializer : ITransportSerializer
 	{
+		public DefaultHighLevelSerializer(JsonSerializerOptions options = null) => Options = options ?? new JsonSerializerOptions
+		{
+			IgnoreNullValues = true,
+			Converters = { new JsonStringEnumConverter() }
+		};
+
 		// ctor added so we can pass down settings. TODO: review this design, perhaps have a method AddConverter which can be called instead?
 		public DefaultHighLevelSerializer(IConnectionSettingsValues settings) =>
 			Options = new JsonSerializerOptions
 			{
 				IgnoreNullValues = true,
-				Converters = {new JsonStringEnumConverter()/*, new ProxyRequestConverterFactory(settings)*/}
+				Converters = {new JsonStringEnumConverter(), new ProxyRequestConverterFactory(settings)}
 			};
 
 		private JsonSerializerOptions Options { get; }

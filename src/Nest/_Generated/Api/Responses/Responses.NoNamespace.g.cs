@@ -76,16 +76,16 @@ namespace Nest
 #endif
 		}
 
-//		[JsonPropertyName("aggregations")]
-//		public Dictionary<AggregateName, Aggregate>? Aggregations
-//		{
-//			get;
-//#if NET5_0
-//			init;
-//#else
-//			internal set;
-//#endif
-//		}
+		[JsonPropertyName("aggregations")]
+		public Dictionary<AggregateName, Aggregate>? Aggregations
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonPropertyName("_clusters")]
 		public ClusterStatistics? Clusters

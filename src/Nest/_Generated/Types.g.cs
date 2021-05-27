@@ -2799,9 +2799,6 @@ namespace Nest
 
 	public partial class CompositeAggregation : BucketAggregationBase
 	{
-		//[JsonPropertyName("after")]
-		//public Dictionary<string, OneOf<string, float,  null >>? After { get; set; }
-
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 
@@ -3199,8 +3196,8 @@ namespace Nest
 		[JsonPropertyName("field")]
 		public Field? Field { get; set; }
 
-		//[JsonPropertyName("precision")]
-		//public GeoHashPrecision? Precision { get; set; }
+		[JsonPropertyName("precision")]
+		public GeoHashPrecision? Precision { get; set; }
 
 		[JsonPropertyName("shard_size")]
 		public int? ShardSize { get; set; }
@@ -3308,8 +3305,8 @@ namespace Nest
 		[JsonPropertyName("field")]
 		public Field? Field { get; set; }
 
-		//[JsonPropertyName("precision")]
-		//public GeoTilePrecision? Precision { get; set; }
+		[JsonPropertyName("precision")]
+		public GeoTilePrecision? Precision { get; set; }
 
 		[JsonPropertyName("shard_size")]
 		public int? ShardSize { get; set; }

@@ -100,14 +100,15 @@ namespace Nest
 
 			var url = request.GetUrl(ConnectionSettings);
 
-			PostData postData = null;
-			if (request is IProxyRequest proxyRequest)
-			{
-				postData = PostData.ProxySerializable((stream, formatting) =>
-					proxyRequest.WriteJson(stream, ConnectionSettings.SourceSerializer, formatting));
-			}
+			// TODO: Left while we decide if we prefer this
+			//PostData postData = null;
+			//if (request is IProxyRequest proxyRequest)
+			//{
+			//	postData = PostData.ProxySerializable((stream, formatting) =>
+			//		proxyRequest.WriteJson(stream, ConnectionSettings.SourceSerializer, formatting));
+			//}
 
-			postData ??=
+			var postData =
 				(request.CanBeEmpty && request.IsEmpty) || request.HttpMethod == HttpMethod.GET ||
 				request.HttpMethod == HttpMethod.HEAD || !request.SupportsBody
 					? null
