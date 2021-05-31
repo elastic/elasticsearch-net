@@ -440,6 +440,13 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
+	///<summary>Request options for SamlCompleteLogout <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html</para></summary>
+	public class SamlCompleteLogoutRequestParameters : RequestParameters<SamlCompleteLogoutRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+	}
+
 	///<summary>Request options for GetCertificates <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</para></summary>
 	public class GetCertificatesRequestParameters : RequestParameters<GetCertificatesRequestParameters>
 	{
