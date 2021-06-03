@@ -204,7 +204,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for EnrollNode <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enroll-node.html</para></summary>
+	///<summary>Request options for EnrollNode <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-node-enrollment.html</para></summary>
 	public class EnrollNodeRequestParameters : RequestParameters<EnrollNodeRequestParameters>
 	{
 	}
@@ -376,6 +376,11 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 			get => Q<Refresh? >("refresh");
 			set => Q("refresh", value);
 		}
+	}
+
+	///<summary>Request options for SamlCompleteLogout <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html</para></summary>
+	public class SamlCompleteLogoutRequestParameters : RequestParameters<SamlCompleteLogoutRequestParameters>
+	{
 	}
 
 	///<summary>Request options for GetCertificates <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</para></summary>

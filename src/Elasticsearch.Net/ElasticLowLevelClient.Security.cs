@@ -278,11 +278,11 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		[MapsApi("security.enable_user", "username")]
 		public Task<TResponse> EnableUserAsync<TResponse>(string username, EnableUserRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_security/user/{username:username}/_enable"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_security/enroll_node <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enroll-node.html</para></summary>
+		///<summary>GET on /_security/enroll_node <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-node-enrollment.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse EnrollNode<TResponse>(EnrollNodeRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, "_security/enroll_node", null, RequestParams(requestParameters));
-		///<summary>GET on /_security/enroll_node <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enroll-node.html</para></summary>
+		///<summary>GET on /_security/enroll_node <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-node-enrollment.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("security.enroll_node", "")]
 		public Task<TResponse> EnrollNodeAsync<TResponse>(EnrollNodeRequestParameters requestParameters = null, CancellationToken ctx = default)
@@ -579,6 +579,17 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		[MapsApi("security.put_user", "username, body")]
 		public Task<TResponse> PutUserAsync<TResponse>(string username, PostData body, PutUserRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_security/user/{username:username}"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_security/saml/complete_logout <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html</para></summary>
+		///<param name = "body">The logout response to verify</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse SamlCompleteLogout<TResponse>(PostData body, SamlCompleteLogoutRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, "_security/saml/complete_logout", body, RequestParams(requestParameters));
+		///<summary>POST on /_security/saml/complete_logout <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html</para></summary>
+		///<param name = "body">The logout response to verify</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("security.saml_complete_logout", "body")]
+		public Task<TResponse> SamlCompleteLogoutAsync<TResponse>(PostData body, SamlCompleteLogoutRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, "_security/saml/complete_logout", ctx, body, RequestParams(requestParameters));
 		///<summary>GET on /_ssl/certificates <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetCertificates<TResponse>(GetCertificatesRequestParameters requestParameters = null)

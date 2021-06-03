@@ -623,6 +623,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.get_trained_models_stats", "")]
 		public Task<TResponse> GetTrainedModelsStatsAsync<TResponse>(GetTrainedModelsStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "_ml/trained_models/_stats", ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /_ml/trained_models/{model_id}/deployment/_infer <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-infer-trained-model-deployment.html</para></summary>
+		///<param name = "modelId">The ID of the model to perform inference on</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse InferTrainedModelDeployment<TResponse>(string modelId, InferTrainedModelDeploymentRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/trained_models/{modelId:modelId}/deployment/_infer"), null, RequestParams(requestParameters));
+		///<summary>POST on /_ml/trained_models/{model_id}/deployment/_infer <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-infer-trained-model-deployment.html</para></summary>
+		///<param name = "modelId">The ID of the model to perform inference on</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("ml.infer_trained_model_deployment", "model_id")]
+		public Task<TResponse> InferTrainedModelDeploymentAsync<TResponse>(string modelId, InferTrainedModelDeploymentRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/trained_models/{modelId:modelId}/deployment/_infer"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_ml/info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Info<TResponse>(MachineLearningInfoRequestParameters requestParameters = null)
@@ -871,6 +884,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.start_datafeed", "datafeed_id, body")]
 		public Task<TResponse> StartDatafeedAsync<TResponse>(string datafeedId, PostData body, StartDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_start"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_ml/trained_models/{model_id}/deployment/_start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-trained-model-deployment.html</para></summary>
+		///<param name = "modelId">The ID of the model to deploy</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse StartTrainedModelDeployment<TResponse>(string modelId, StartTrainedModelDeploymentRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/trained_models/{modelId:modelId}/deployment/_start"), null, RequestParams(requestParameters));
+		///<summary>POST on /_ml/trained_models/{model_id}/deployment/_start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-trained-model-deployment.html</para></summary>
+		///<param name = "modelId">The ID of the model to deploy</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("ml.start_trained_model_deployment", "model_id")]
+		public Task<TResponse> StartTrainedModelDeploymentAsync<TResponse>(string modelId, StartTrainedModelDeploymentRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/trained_models/{modelId:modelId}/deployment/_start"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ml/data_frame/analytics/{id}/_stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-dfanalytics.html</para></summary>
 		///<param name = "id">The ID of the data frame analytics to stop</param>
 		///<param name = "body">The stop data frame analytics parameters</param>
@@ -897,6 +923,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.stop_datafeed", "datafeed_id, body")]
 		public Task<TResponse> StopDatafeedAsync<TResponse>(string datafeedId, PostData body, StopDatafeedRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_stop"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_ml/trained_models/{model_id}/deployment/_stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-trained-model-deployment.html</para></summary>
+		///<param name = "modelId">The ID of the model to undeploy</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse StopTrainedModelDeployment<TResponse>(string modelId, StopTrainedModelDeploymentRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/trained_models/{modelId:modelId}/deployment/_stop"), null, RequestParams(requestParameters));
+		///<summary>POST on /_ml/trained_models/{model_id}/deployment/_stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-trained-model-deployment.html</para></summary>
+		///<param name = "modelId">The ID of the model to undeploy</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("ml.stop_trained_model_deployment", "model_id")]
+		public Task<TResponse> StopTrainedModelDeploymentAsync<TResponse>(string modelId, StopTrainedModelDeploymentRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/trained_models/{modelId:modelId}/deployment/_stop"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ml/data_frame/analytics/{id}/_update <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html</para></summary>
 		///<param name = "id">The ID of the data frame analytics to update</param>
 		///<param name = "body">The data frame analytics settings to update</param>

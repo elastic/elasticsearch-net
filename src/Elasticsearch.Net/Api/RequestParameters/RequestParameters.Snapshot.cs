@@ -179,6 +179,90 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
+	///<summary>Request options for RepositoryAnalyze <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	public class RepositoryAnalyzeRequestParameters : RequestParameters<RepositoryAnalyzeRequestParameters>
+	{
+		///<summary>Number of blobs to create during the test. Defaults to 100.</summary>
+		public long? BlobCount
+		{
+			get => Q<long? >("blob_count");
+			set => Q("blob_count", value);
+		}
+
+		///<summary>Number of operations to run concurrently during the test. Defaults to 10.</summary>
+		public long? Concurrency
+		{
+			get => Q<long? >("concurrency");
+			set => Q("concurrency", value);
+		}
+
+		///<summary>Whether to return detailed results or a summary. Defaults to 'false' so that only the summary is returned.</summary>
+		public bool? Detailed
+		{
+			get => Q<bool? >("detailed");
+			set => Q("detailed", value);
+		}
+
+		///<summary>
+		/// Number of nodes on which to perform an early read on a blob, i.e. before writing has completed. Early reads are rare actions so the
+		/// 'rare_action_probability' parameter is also relevant. Defaults to 2.
+		///</summary>
+		public long? EarlyReadNodeCount
+		{
+			get => Q<long? >("early_read_node_count");
+			set => Q("early_read_node_count", value);
+		}
+
+		///<summary>Maximum size of a blob to create during the test, e.g '1gb' or '100mb'. Defaults to '10mb'.</summary>
+		public string MaxBlobSize
+		{
+			get => Q<string>("max_blob_size");
+			set => Q("max_blob_size", value);
+		}
+
+		///<summary>Maximum total size of all blobs to create during the test, e.g '1tb' or '100gb'. Defaults to '1gb'.</summary>
+		public string MaxTotalDataSize
+		{
+			get => Q<string>("max_total_data_size");
+			set => Q("max_total_data_size", value);
+		}
+
+		///<summary>Probability of taking a rare action such as an early read or an overwrite. Defaults to 0.02.</summary>
+		public long? RareActionProbability
+		{
+			get => Q<long? >("rare_action_probability");
+			set => Q("rare_action_probability", value);
+		}
+
+		///<summary>Whether to rarely abort writes before they complete. Defaults to 'true'.</summary>
+		public bool? RarelyAbortWrites
+		{
+			get => Q<bool? >("rarely_abort_writes");
+			set => Q("rarely_abort_writes", value);
+		}
+
+		///<summary>Number of nodes on which to read a blob after writing. Defaults to 10.</summary>
+		public long? ReadNodeCount
+		{
+			get => Q<long? >("read_node_count");
+			set => Q("read_node_count", value);
+		}
+
+		///<summary>Seed for the random number generator used to create the test workload. Defaults to a random value.</summary>
+		public long? Seed
+		{
+			get => Q<long? >("seed");
+			set => Q("seed", value);
+		}
+
+		///<summary>Explicit operation timeout. Defaults to '30s'.</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
+	}
+
 	///<summary>Request options for Restore <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public class RestoreRequestParameters : RequestParameters<RestoreRequestParameters>
 	{
