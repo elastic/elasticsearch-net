@@ -564,6 +564,11 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
+	///<summary>Request options for InferTrainedModelDeployment <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-infer-trained-model-deployment.html</para></summary>
+	public class InferTrainedModelDeploymentRequestParameters : RequestParameters<InferTrainedModelDeploymentRequestParameters>
+	{
+	}
+
 	///<summary>Request options for Info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html</para></summary>
 	public class MachineLearningInfoRequestParameters : RequestParameters<MachineLearningInfoRequestParameters>
 	{
@@ -719,6 +724,11 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	{
 	}
 
+	///<summary>Request options for StartTrainedModelDeployment <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-trained-model-deployment.html</para></summary>
+	public class StartTrainedModelDeploymentRequestParameters : RequestParameters<StartTrainedModelDeploymentRequestParameters>
+	{
+	}
+
 	///<summary>Request options for StopDataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-dfanalytics.html</para></summary>
 	public class StopDataFrameAnalyticsRequestParameters : RequestParameters<StopDataFrameAnalyticsRequestParameters>
 	{
@@ -764,6 +774,11 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			get => Q<bool? >("allow_no_match");
 			set => Q("allow_no_match", value);
 		}
+	}
+
+	///<summary>Request options for StopTrainedModelDeployment <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-trained-model-deployment.html</para></summary>
+	public class StopTrainedModelDeploymentRequestParameters : RequestParameters<StopTrainedModelDeploymentRequestParameters>
+	{
 	}
 
 	///<summary>Request options for UpdateDataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html</para></summary>
