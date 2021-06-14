@@ -834,6 +834,17 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.put_trained_model_alias", "model_id, model_alias")]
 		public Task<TResponse> PutTrainedModelAliasAsync<TResponse>(string modelId, string modelAlias, PutTrainedModelAliasRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_ml/trained_models/{modelId:modelId}/model_aliases/{modelAlias:modelAlias}"), ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_reset <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-reset-job.html</para></summary>
+		///<param name = "jobId">The ID of the job to reset</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse ResetJob<TResponse>(string jobId, ResetJobRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_reset"), null, RequestParams(requestParameters));
+		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_reset <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-reset-job.html</para></summary>
+		///<param name = "jobId">The ID of the job to reset</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ml.reset_job", "job_id")]
+		public Task<TResponse> ResetJobAsync<TResponse>(string jobId, ResetJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_reset"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</para></summary>
 		///<param name = "jobId">The ID of the job to fetch</param>
 		///<param name = "snapshotId">The ID of the snapshot to revert to</param>
