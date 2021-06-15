@@ -28,6 +28,7 @@ namespace Elasticsearch.Net
 
 				var sb = new StringBuilder();
 				sb.AppendLine(ToString());
+
 				_debugInformation = ResponseStatics.DebugInformationBuilder(this, sb);
 
 				return _debugInformation;
@@ -35,6 +36,7 @@ namespace Elasticsearch.Net
 		}
 
 		public IEnumerable<string> DeprecationWarnings { get; set; }
+		public string ProductName { get; set; }
 		public HttpMethod HttpMethod { get; set; }
 		public int? HttpStatusCode { get; set; }
 		public Exception OriginalException { get; set; }
@@ -50,6 +52,8 @@ namespace Elasticsearch.Net
 			&& HttpStatusCode != 502;
 
 		public Uri Uri { get; set; }
+		
+		public Action<StringBuilder> BuildDebugInformationPrefix { get; set; }
 
 		public IConnectionConfigurationValues ConnectionConfiguration { get; set; }
 

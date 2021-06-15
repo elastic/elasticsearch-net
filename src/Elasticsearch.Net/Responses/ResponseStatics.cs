@@ -20,6 +20,8 @@ namespace Elasticsearch.Net
 
 		public static string DebugInformationBuilder(IApiCallDetails r, StringBuilder sb)
 		{
+			r.BuildDebugInformationPrefix?.Invoke(sb);
+
 			if (r.DeprecationWarnings.HasAny())
 			{
 				sb.AppendLine($"# Server indicated deprecations:");
@@ -107,8 +109,10 @@ namespace Elasticsearch.Net
 
 			if (!string.IsNullOrEmpty(uri.UserInfo))
 			{
-				var builder = new UriBuilder(uri);
-				builder.Password = "redacted";
+				var builder = new UriBuilder(uri)
+				{
+					Password = "redacted"
+				};
 				uri = builder.Uri;
 			}
 			sb.Append($" Node: {uri}");

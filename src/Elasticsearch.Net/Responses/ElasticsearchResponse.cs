@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.NetworkInformation;
+using System.Text;
 using Elasticsearch.Net.Diagnostics;
 
 namespace Elasticsearch.Net
@@ -45,19 +46,30 @@ namespace Elasticsearch.Net
 
 		/// <inheritdoc cref="IApiCallDetails.DeprecationWarnings"/>
 		public IEnumerable<string> DeprecationWarnings => ApiCall.DeprecationWarnings;
+
+		/// <inheritdoc cref="IApiCallDetails.ProductName"/>
+		public string ProductName => ApiCall.ProductName;
+
 		/// <inheritdoc cref="IApiCallDetails.SuccessOrKnownError"/>
 		public bool SuccessOrKnownError => ApiCall.SuccessOrKnownError;
+
 		/// <inheritdoc cref="IApiCallDetails.HttpStatusCode"/>
 		public int? HttpStatusCode => ApiCall.HttpStatusCode;
 
 		/// <inheritdoc cref="IApiCallDetails.Success"/>
 		public bool Success => ApiCall.Success;
+
 		/// <inheritdoc cref="IApiCallDetails.OriginalException"/>
 		public Exception OriginalException => ApiCall.OriginalException;
+
 		/// <inheritdoc cref="IApiCallDetails.ResponseMimeType"/>
 		public string ResponseMimeType => ApiCall.ResponseMimeType;
+
 		/// <inheritdoc cref="IApiCallDetails.Uri"/>
 		public Uri Uri => ApiCall.Uri;
+
+		/// <inheritdoc cref="IApiCallDetails.BuildDebugInformationPrefix"/>
+		public Action<StringBuilder> BuildDebugInformationPrefix => ApiCall.BuildDebugInformationPrefix;
 
 		/// <inheritdoc cref="IApiCallDetails.ConnectionConfiguration"/>
 		public IConnectionConfigurationValues ConnectionConfiguration => ApiCall.ConnectionConfiguration;
