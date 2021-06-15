@@ -685,6 +685,17 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
+	///<summary>Request options for ResetJob <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-reset-job.html</para></summary>
+	public class ResetJobRequestParameters : RequestParameters<ResetJobRequestParameters>
+	{
+		///<summary>Should this request wait until the operation has completed before returning</summary>
+		public bool? WaitForCompletion
+		{
+			get => Q<bool? >("wait_for_completion");
+			set => Q("wait_for_completion", value);
+		}
+	}
+
 	///<summary>Request options for RevertModelSnapshot <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</para></summary>
 	public class RevertModelSnapshotRequestParameters : RequestParameters<RevertModelSnapshotRequestParameters>
 	{
