@@ -29,6 +29,10 @@ namespace Elasticsearch.Net
 		NoNodesAttempted,
 		CancellationRequested,
 		FailedOverAllNodes,
+
+		ProductCheckOnStartup,
+		ProductCheckSuccess,
+		ProductCheckFailure
 	}
 
 	internal static class AuditEventExtensions
@@ -61,11 +65,11 @@ namespace Elasticsearch.Net
 				case NoNodesAttempted: return nameof(NoNodesAttempted);
 				case CancellationRequested: return nameof(CancellationRequested);
 				case FailedOverAllNodes: return nameof(FailedOverAllNodes);
+				case ProductCheckOnStartup: return nameof(ProductCheckOnStartup);
+				case ProductCheckSuccess: return nameof(ProductCheckSuccess);
+				case ProductCheckFailure: return nameof(ProductCheckFailure);
 				default: return @event.GetStringValue(); //still cached but uses reflection
 			}
 		}
-		
-		
 	}
-	
 }
