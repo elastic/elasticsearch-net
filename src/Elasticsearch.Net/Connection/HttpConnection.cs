@@ -65,6 +65,7 @@ namespace Elasticsearch.Net
 			HttpResponseMessage responseMessage;
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
+			IEnumerable<string> productNames = null;
 			Stream responseStream = null;
 			Exception ex = null;
 			string mimeType = null;
@@ -95,6 +96,7 @@ namespace Elasticsearch.Net
 
 				requestData.MadeItToResponse = true;
 				responseMessage.Headers.TryGetValues("Warning", out warnings);
+				responseMessage.Headers.TryGetValues("X-elastic-product", out productNames);
 				mimeType = responseMessage.Content.Headers.ContentType?.ToString();
 
 				if (responseMessage.Content != null)
@@ -114,7 +116,7 @@ namespace Elasticsearch.Net
 			using(receive)
 			using (responseStream ??= Stream.Null)
 			{
-				var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType);
+				var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType, productNames?.FirstOrDefault());
 
 				// set TCP and threadpool stats on the response here so that in the event the request fails after the point of
 				// gathering stats, they are still exposed on the call details. Ideally these would be set inside ResponseBuilder.ToResponse,
@@ -132,6 +134,7 @@ namespace Elasticsearch.Net
 			HttpResponseMessage responseMessage;
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
+			IEnumerable<string> productNames = null;
 			Stream responseStream = null;
 			Exception ex = null;
 			string mimeType = null;
@@ -164,6 +167,7 @@ namespace Elasticsearch.Net
 				requestData.MadeItToResponse = true;
 				mimeType = responseMessage.Content.Headers.ContentType?.ToString();
 				responseMessage.Headers.TryGetValues("Warning", out warnings);
+				responseMessage.Headers.TryGetValues("X-elastic-product", out productNames);
 
 				if (responseMessage.Content != null)
 				{
@@ -180,13 +184,13 @@ namespace Elasticsearch.Net
 				ex = e;
 			}
 			using (receive)
-			using (responseStream = responseStream ?? Stream.Null)
+			using (responseStream ??= Stream.Null)
 			{
 				var response = await ResponseBuilder.ToResponseAsync<TResponse>
-						(requestData, ex, statusCode, warnings, responseStream, mimeType, cancellationToken)
+						(requestData, ex, statusCode, warnings, responseStream, mimeType, productNames?.FirstOrDefault(), cancellationToken)
 					.ConfigureAwait(false);
 
-				// set TCP and threadpool stats on the response here so that in the event the request fails after the point of
+				// set TCP and thread pool stats on the response here so that in the event the request fails after the point of
 				// gathering stats, they are still exposed on the call details. Ideally these would be set inside ResponseBuilder.ToResponse,
 				// but doing so would be a breaking change in 7.x
 				response.ApiCall.TcpStats = tcpStats;

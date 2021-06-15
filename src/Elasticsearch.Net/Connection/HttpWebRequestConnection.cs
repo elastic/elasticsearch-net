@@ -36,6 +36,7 @@ namespace Elasticsearch.Net
 		{
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
+			IEnumerable<string> productNames = null;
 			Stream responseStream = null;
 			Exception ex = null;
 			string mimeType = null;
@@ -76,6 +77,10 @@ namespace Elasticsearch.Net
 				//response.Headers.HasKeys() can return false even if response.Headers.AllKeys has values.
 				if (httpWebResponse.SupportsHeaders && httpWebResponse.Headers.Count > 0 && httpWebResponse.Headers.AllKeys.Contains("Warning"))
 					warnings = httpWebResponse.Headers.GetValues("Warning");
+
+				//response.Headers.HasKeys() can return false even if response.Headers.AllKeys has values.
+				if (httpWebResponse.SupportsHeaders && httpWebResponse.Headers.Count > 0 && httpWebResponse.Headers.AllKeys.Contains("X-elastic-product"))
+					productNames = httpWebResponse.Headers.GetValues("X-elastic-product");
 			}
 			catch (WebException e)
 			{
@@ -85,7 +90,7 @@ namespace Elasticsearch.Net
 			}
 
 			responseStream ??= Stream.Null;
-			var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType);
+			var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType, productNames.FirstOrDefault());
 
 			// set TCP and threadpool stats on the response here so that in the event the request fails after the point of
 			// gathering stats, they are still exposed on the call details. Ideally these would be set inside ResponseBuilder.ToResponse,
@@ -103,6 +108,7 @@ namespace Elasticsearch.Net
 			Action unregisterWaitHandle = null;
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
+			IEnumerable<string> productNames = null;
 			Stream responseStream = null;
 			Exception ex = null;
 			string mimeType = null;
@@ -151,6 +157,10 @@ namespace Elasticsearch.Net
 					HandleResponse(httpWebResponse, out statusCode, out responseStream, out mimeType);
 					if (httpWebResponse.SupportsHeaders && httpWebResponse.Headers.HasKeys() && httpWebResponse.Headers.AllKeys.Contains("Warning"))
 						warnings = httpWebResponse.Headers.GetValues("Warning");
+
+					//response.Headers.HasKeys() can return false even if response.Headers.AllKeys has values.
+					if (httpWebResponse.SupportsHeaders && httpWebResponse.Headers.Count > 0 && httpWebResponse.Headers.AllKeys.Contains("X-elastic-product"))
+						productNames = httpWebResponse.Headers.GetValues("X-elastic-product");
 				}
 			}
 			catch (WebException e)
@@ -165,10 +175,10 @@ namespace Elasticsearch.Net
 			}
 			responseStream ??= Stream.Null;
 			var response = await ResponseBuilder.ToResponseAsync<TResponse>
-					(requestData, ex, statusCode, warnings, responseStream, mimeType, cancellationToken)
+					(requestData, ex, statusCode, warnings, responseStream, mimeType, productNames.FirstOrDefault(), cancellationToken)
 				.ConfigureAwait(false);
 
-			// set TCP and threadpool stats on the response here so that in the event the request fails after the point of
+			// set TCP and thread pool stats on the response here so that in the event the request fails after the point of
 			// gathering stats, they are still exposed on the call details. Ideally these would be set inside ResponseBuilder.ToResponse,
 			// but doing so would be a breaking change in 7.x
 			response.ApiCall.TcpStats = tcpStats;
