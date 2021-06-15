@@ -3,11 +3,6 @@
 // See the LICENSE file in the project root for more information
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Elastic.Elasticsearch.Xunit.Sdk;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -15,8 +10,6 @@ using Nest;
 using Tests.Core.Client.Settings;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Xunit;
 
 namespace Tests.ClientConcepts.Troubleshooting
 {
@@ -37,7 +30,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 		{
 			/**
 			 * We'll use a Sniffing connection pool here since it sniffs on startup and pings before
-			 * first usage, so we can get an audit trail with a few events out
+			 * first usage, so we can get an audit trail with a few events out.
 			 */
 			var pool = new SniffingConnectionPool(new []{ TestConnectionSettings.CreateUri() });
 			var connectionSettings = new ConnectionSettings(pool)
@@ -48,7 +41,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			var client = new ElasticClient(connectionSettings);
 
 			/**
-			 * After issuing the following request
+			 * After issuing the following request:
 			 */
 			var response = client.Search<Project>(s => s
 				.MatchAll()
@@ -60,10 +53,12 @@ namespace Tests.ClientConcepts.Troubleshooting
 			 * ....
 			 * Valid NEST response built from a successful low level call on POST: /project/doc/_search
 			 * # Audit trail of this API call:
-			 *  - [1] SniffOnStartup: Took: 00:00:00.0360264
-			 *  - [2] SniffSuccess: Node: http://localhost:9200/ Took: 00:00:00.0310228
-			 *  - [3] PingSuccess: Node: http://127.0.0.1:9200/ Took: 00:00:00.0115074
-			 *  - [4] HealthyResponse: Node: http://127.0.0.1:9200/ Took: 00:00:00.1477640
+			 *  - [1] ProductCheckOnStartup: Took: 00:00:00.1014934
+			 *  - [2] ProductCheckSuccess: Node: http://ipv4.fiddler:9200/ Took: 00:00:00.1002862
+			 *  - [3] SniffOnStartup: Took: 00:00:00.0440780
+			 *  - [4] SniffSuccess: Node: http://localhost:9200/ Took: 00:00:00.0257506
+			 *  - [5] PingSuccess: Node: http://127.0.0.1:9200/ Took: 00:00:00.0115074
+			 *  - [6] HealthyResponse: Node: http://127.0.0.1:9200/ Took: 00:00:00.1477640
 			 * # Request:
 			 * <Request stream not captured or already read to completion by serializer. Set DisableDirectStreaming() on ConnectionSettings to force it to be set on the response.>
 			 * # Response:
@@ -77,19 +72,20 @@ namespace Tests.ClientConcepts.Troubleshooting
 			/**
 			 * But can also be accessed manually:
 			 */
-			response.ApiCall.AuditTrail.Count.Should().Be(4, "{0}", debug);
-			response.ApiCall.AuditTrail[0].Event.Should().Be(AuditEvent.SniffOnStartup, "{0}", debug);
-			response.ApiCall.AuditTrail[1].Event.Should().Be(AuditEvent.SniffSuccess, "{0}", debug);
-			response.ApiCall.AuditTrail[2].Event.Should().Be(AuditEvent.PingSuccess, "{0}", debug);
-			response.ApiCall.AuditTrail[3].Event.Should().Be(AuditEvent.HealthyResponse, "{0}", debug);
+			response.ApiCall.AuditTrail.Count.Should().Be(6, "{0}", debug);
+			response.ApiCall.AuditTrail[0].Event.Should().Be(AuditEvent.ProductCheckOnStartup, "{0}", debug);
+			response.ApiCall.AuditTrail[1].Event.Should().Be(AuditEvent.ProductCheckSuccess, "{0}", debug);
+			response.ApiCall.AuditTrail[2].Event.Should().Be(AuditEvent.SniffOnStartup, "{0}", debug);
+			response.ApiCall.AuditTrail[3].Event.Should().Be(AuditEvent.SniffSuccess, "{0}", debug);
+			response.ApiCall.AuditTrail[4].Event.Should().Be(AuditEvent.PingSuccess, "{0}", debug);
+			response.ApiCall.AuditTrail[5].Event.Should().Be(AuditEvent.HealthyResponse, "{0}", debug);
 
 			/**
 			 * Each audit has a started and ended `DateTime` on it that will provide
-			 * some understanding of how long it took
+			 * some understanding of how long it took.
 			 */
 			response.ApiCall.AuditTrail
 				.Should().OnlyContain(a => a.Ended - a.Started >= TimeSpan.Zero);
-
 		}
 	}
 }
