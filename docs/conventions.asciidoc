@@ -99,7 +99,7 @@ include::{building-blocks}/date-time-providers.asciidoc[]
 
 include::{building-blocks}/keeping-track-of-nodes.asciidoc[]
 
-include::{product-checking}/TODO/lifetimes.asciidoc[]
+include::{product-checking}/product-check-at-startup.asciidoc[]
 
 [[sniffing-behaviour]]
 == Sniffing behaviour
