@@ -6,6 +6,16 @@ using System;
 
 namespace Elasticsearch.Net
 {
+	public class InvalidProductException : Exception
+	{
+		public InvalidProductException()
+			: base(@"TODO: This client is designed to work with the official Elasticsearch product...
+
+Why are you seeing this error?
+------------------------------
+TODO") { }
+	}
+
 	public class PipelineException : Exception
 	{
 		public PipelineException(PipelineFailure failure)
@@ -18,9 +28,7 @@ namespace Elasticsearch.Net
 		public PipelineFailure FailureReason { get; }
 
 		public bool Recoverable =>
-			FailureReason == PipelineFailure.BadRequest
-			|| FailureReason == PipelineFailure.BadResponse
-			|| FailureReason == PipelineFailure.PingFailure;
+			FailureReason is PipelineFailure.BadRequest or PipelineFailure.BadResponse or PipelineFailure.PingFailure;
 
 		public IElasticsearchResponse Response { get; internal set; }
 

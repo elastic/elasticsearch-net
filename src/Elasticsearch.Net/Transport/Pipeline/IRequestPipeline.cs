@@ -15,12 +15,10 @@ namespace Elasticsearch.Net
 		bool FirstPoolUsageNeedsSniffing { get; }
 		bool IsTakingTooLong { get; }
 		int MaxRetries { get; }
-
 		int Retried { get; }
 		bool SniffsOnConnectionFailure { get; }
 		bool SniffsOnStaleCluster { get; }
 		bool StaleClusterState { get; }
-
 		DateTime StartedOn { get; }
 
 		TResponse CallElasticsearch<TResponse>(RequestData requestData)
