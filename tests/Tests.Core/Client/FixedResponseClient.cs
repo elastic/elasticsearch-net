@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Net;
 using System.Text;
 using Elasticsearch.Net;
 using Nest;
@@ -16,10 +17,11 @@ namespace Tests.Core.Client
 			int statusCode = 200,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			string contentType = null,
-			Exception exception = null
+			Exception exception = null,
+			bool productCheckSucceeds = true
 		)
 		{
-			var settings = CreateConnectionSettings(response, statusCode, modifySettings, contentType, exception);
+			var settings = CreateConnectionSettings(response, statusCode, modifySettings, contentType, exception, productCheckSucceeds);
 			return new ElasticClient(settings);
 		}
 
@@ -28,7 +30,8 @@ namespace Tests.Core.Client
 			int statusCode = 200,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			string contentType = null,
-			Exception exception = null
+			Exception exception = null,
+			bool productCheckSucceeds = true
 		)
 		{
 			contentType ??= RequestData.DefaultJsonMimeType;
@@ -51,7 +54,12 @@ namespace Tests.Core.Client
 				}
 			}
 
-			var connection = new InMemoryConnection(responseBytes, statusCode, exception, contentType);
+			var productCheckResponse = productCheckSucceeds ? InMemoryConnection.ValidProductCheckResponse() : new InMemoryHttpResponse
+			{
+				StatusCode = 500
+			};
+
+			var connection = new InMemoryConnection(responseBytes, statusCode, exception, contentType, productCheckResponse);
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var defaultSettings = new ConnectionSettings(connectionPool, connection)
 				.DefaultIndex("default-index");

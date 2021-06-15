@@ -183,10 +183,12 @@ namespace Tests.MetaHeader
 		{
 			public string Name { get; set; }
 		}
-
+		
 		protected class TestableInMemoryConnection : IConnection
 		{
 			internal static readonly byte[] EmptyBody = Encoding.UTF8.GetBytes("");
+
+			private readonly InMemoryHttpResponse _productCheckResponse = InMemoryConnection.ValidProductCheckResponse();
 
 			private readonly Action<RequestData> _perRequestAssertion;
 			private readonly List<(int, string)> _responses;
@@ -202,8 +204,25 @@ namespace Tests.MetaHeader
 
 			async Task<TResponse> IConnection.RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 			{
-				Interlocked.Increment(ref _requestCounter);
+				if ("/".Equals(requestData.Uri.AbsolutePath, StringComparison.Ordinal) && requestData.Method == HttpMethod.GET)
+				{
+					// We don't add product checks to the request count
 
+					_productCheckResponse.Headers.TryGetValue("X-elastic-product", out var productNames);
+
+					requestData.MadeItToResponse = true;
+
+					await using var ms = requestData.MemoryStreamFactory.Create(_productCheckResponse.ResponseBytes);
+
+					await Task.Yield(); // avoids test deadlocks
+
+					return ResponseBuilder.ToResponse<TResponse>(
+						requestData, null, _productCheckResponse.StatusCode, null, ms,
+						RequestData.DefaultJsonMimeType, productNames?.FirstOrDefault());
+				}
+
+				Interlocked.Increment(ref _requestCounter);
+				
 				_perRequestAssertion(requestData);
 
 				await Task.Yield(); // avoids test deadlocks
@@ -219,12 +238,27 @@ namespace Tests.MetaHeader
 				var stream = !string.IsNullOrEmpty(response) ? requestData.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(response)) : requestData.MemoryStreamFactory.Create(EmptyBody);
 
 				return await ResponseBuilder
-					.ToResponseAsync<TResponse>(requestData, null, statusCode, null, stream, RequestData.DefaultJsonMimeType, cancellationToken)
+					.ToResponseAsync<TResponse>(requestData, null, statusCode, null, stream, RequestData.DefaultJsonMimeType, "Elasticsearch", cancellationToken)
 					.ConfigureAwait(false);
 			}
 
 			TResponse IConnection.Request<TResponse>(RequestData requestData)
 			{
+				if ("/".Equals(requestData.Uri.AbsolutePath, StringComparison.Ordinal) && requestData.Method == HttpMethod.GET)
+				{
+					// We don't add product checks to the request count
+
+					_productCheckResponse.Headers.TryGetValue("X-elastic-product", out var productNames);
+
+					requestData.MadeItToResponse = true;
+
+					using var ms = requestData.MemoryStreamFactory.Create(_productCheckResponse.ResponseBytes);
+
+					return ResponseBuilder.ToResponse<TResponse>(
+						requestData, null, _productCheckResponse.StatusCode, null, ms,
+						RequestData.DefaultJsonMimeType, productNames?.FirstOrDefault());
+				}
+
 				Interlocked.Increment(ref _requestCounter);
 
 				_perRequestAssertion(requestData);

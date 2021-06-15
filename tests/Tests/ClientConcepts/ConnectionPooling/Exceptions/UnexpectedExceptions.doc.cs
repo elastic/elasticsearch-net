@@ -104,7 +104,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		*
 		* Here, pinging nodes on first use is enabled and the node on port 9200 throws an exception on ping; when this happens,
 		* we still fallover to retry the ping on node on port 9201, where it succeeds.
-		* Following this, the client call on 9201 throws a hard exception that we are not able to recover from
+		* Following this, the client call on 9201 throws a hard exception that we are not able to recover from.
 		*/
 		[U] public async Task PingUnexceptedExceptionDoesFailOver()
 		{

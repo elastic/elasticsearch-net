@@ -59,7 +59,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 				500,
 				connectionSettings => connectionSettings
 					.ThrowExceptions() // <2> Always throw exceptions when a call results in an exception
-					.OnRequestCompleted(r => counter++)
+					.OnRequestCompleted(r => counter++), productCheckSucceeds: false
 			);
 
 			Assert.Throws<ElasticsearchClientException>(() => client.RootNodeInfo()); // <3> Assert an exception is thrown and the counter is incremented

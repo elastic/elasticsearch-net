@@ -15,7 +15,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 		/**[[fail-over]]
 		* === Fail over
 		* When using a connection pool with more than one node, a request will be retried if
-		* the call to a node throws an exception or returns a 502, 503 or 504 response
+		* the call to a node throws an exception or returns a 502, 503 or 504 response.
 		*/
 		[U]
 		public async Task ExceptionFallsOverToNextNode()
@@ -27,7 +27,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing())
 			);
-
+			
 			audit = await audit.TraceCall(
 				new ClientCall {
 					{ AuditEvent.BadResponse, 9200 },
@@ -39,7 +39,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 		/**[[bad-gateway]]
 		*==== 502 Bad Gateway
 		*
-		* Will be treated as an error that requires retrying
+		* Will be treated as an error that requires retrying.
 		*/
 		[U]
 		public async Task Http502FallsOver()
@@ -63,7 +63,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 		/**[[service-unavailable]]
 		*==== 503 Service Unavailable
 		*
-		* Will be treated as an error that requires retrying
+		* Will be treated as an error that requires retrying.
 		*/
 		[U]
 		public async Task Http503FallsOver()
@@ -87,7 +87,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 		/**[[gateway-timeout]]
 		*==== 504 Gateway Timeout
 		*
-		* Will be treated as an error that requires retrying
+		* Will be treated as an error that requires retrying.
 		*/
 		[U]
 		public async Task Http504FallsOver()
@@ -112,7 +112,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Failover
 		* If a call returns a __valid__ HTTP status code other than 502 or 503, the request won't be retried.
 		*
 		* IMPORTANT: Different requests may have different status codes that are deemed __valid__. For example,
-		* a *404 Not Found* response is a __valid__ status code for an index exists request
+		* a *404 Not Found* response is a __valid__ status code for an index exists request.
 		*/
 		[U]
 		public async Task HttpTeapotDoesNotFallOver()

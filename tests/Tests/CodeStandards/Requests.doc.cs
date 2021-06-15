@@ -42,7 +42,7 @@ namespace Tests.CodeStandards
 		public void BaseUriWithRelativePathIsRespected()
 		{
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200/elasticsearch"));
-			var settings = new ConnectionSettings(pool, new InMemoryConnection());
+			var settings = new ConnectionSettings(pool, new InMemoryConnection("elasticsearch"));
 			var client = new ElasticClient(settings);
 			var searchResponse = client.Search<Project>(s => s.AllIndices());
 
@@ -53,7 +53,7 @@ namespace Tests.CodeStandards
 		public void BaseUriWithRelativePathAndTrailingSlashIsRespected()
 		{
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200/elasticsearch/"));
-			var settings = new ConnectionSettings(pool, new InMemoryConnection());
+			var settings = new ConnectionSettings(pool, new InMemoryConnection("elasticsearch/"));
 			var client = new ElasticClient(settings);
 			var searchResponse = client.Search<Project>(s => s.AllIndices());
 
