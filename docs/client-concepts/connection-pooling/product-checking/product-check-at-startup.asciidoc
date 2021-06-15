@@ -1,0 +1,113 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.x
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/7.x/src/Tests/Tests/ClientConcepts/ConnectionPooling/ProductChecking/ProductCheckAtStartup.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[product-check-on-first-usage]]
+=== Product check on first usage
+
+Since 7.14.0, the client performs a required product check during the first call.
+This pre-flight product check allows us to establish the version of Elasticsearch we are communicating with.
+
+The product check requires one additional HTTP request to be sent to the server as part of the request pipeline.
+Once the product check succeeds, no further product check HTTP requests are sent as part of the pipeline.
+
+[source,csharp]
+----
+var audit = new Auditor(() => VirtualClusterWith
+    .Nodes(1)
+    .ClientCalls(r => r.SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing())
+);
+
+audit = await audit.TraceCalls(skipProductCheck: false,
+    new ClientCall() {
+        { ProductCheckOnStartup },
+        { ProductCheckSuccess, 9200 }, <1>
+        { HealthyResponse, 9200 } <2>
+    },
+    new ClientCall() {
+        { HealthyResponse, 9200 } <3>
+    }
+);
+----
+<1> as this is the first call, the product check is executed
+<2> following the product check, the actual request is sent
+<3> subsequent calls no longer perform product check
+
+Here's an example with a single node cluster which fails for some reason during the first product check attempt. 
+
+[source,csharp]
+----
+var audit = new Auditor(() => VirtualClusterWith
+    .Nodes(1, productCheckAlwaysSucceeds: false)
+    .ProductCheck(r => r.Fails(TimesHelper.Once))
+    .ProductCheck(r => r.SucceedAlways())
+    .ClientCalls(r => r.SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing())
+);
+
+audit = await audit.TraceCalls(skipProductCheck: false,
+    new ClientCall() {
+        { ProductCheckOnStartup },
+        { ProductCheckFailure, 9200 }, <1>
+        { HealthyResponse, 9200 } <2>
+    },
+    new ClientCall() {
+        { ProductCheckOnStartup },
+        { ProductCheckSuccess, 9200 }, <3>
+        { HealthyResponse, 9200 }
+    },
+    new ClientCall() {
+        { HealthyResponse, 9200 } <4>
+    }
+);
+----
+<1> as this is the first call, the product check is executed, but fails
+<2> the actual request is still sent and succeeds
+<3> as the previous product check failed, it runs on the second call
+<4> subsequent calls no longer perform product check
+
+Here's an example with a three node cluster which fails for some reason during the first and second product check attempts. 
+
+[source,csharp]
+----
+var audit = new Auditor(() => VirtualClusterWith
+    .Nodes(3, productCheckAlwaysSucceeds: false)
+    .ProductCheck(r => r.FailAlways())
+    .ProductCheck(r => r.OnPort(9202).SucceedAlways())
+    .ClientCalls(r => r.SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing())
+);
+
+audit = await audit.TraceCalls(skipProductCheck: false,
+    new ClientCall() {
+        { ProductCheckOnStartup },
+        { ProductCheckFailure, 9200 }, <1>
+        { ProductCheckFailure, 9201 }, <2>
+        { ProductCheckSuccess, 9202 }, <3>
+        { HealthyResponse, 9200 } <4>
+    },
+    new ClientCall() {
+        { HealthyResponse, 9201 } <5>
+    }
+);
+----
+<1> this is the first call, the product check is executed, but fails on this node
+<2> the next node is also tried and fails
+<3> the third node is tried, successfully responds and the product check succeeds
+<4> the actual request is sent and succeeds
+<5> subsequent calls no longer perform product check
+

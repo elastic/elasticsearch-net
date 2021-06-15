@@ -1,4 +1,4 @@
-﻿:output-dir: client-concepts/connection-pooling
+:output-dir: client-concepts/connection-pooling
 :building-blocks: {output-dir}/building-blocks
 :sniffing: {output-dir}/sniffing
 :pinging: {output-dir}/pinging
@@ -17,6 +17,7 @@ Conventions that apply to both Elasticsearch.Net and NEST
 - <<lifetimes, Component lifetimes>>
 - <<thrown-exceptions, Exceptions>>
 - <<transports-and-pipelines, Transports and pipelines>>
+- <<product-check-at-startup, Pre-flight product checks>>
 - <<sniffing-behaviour, Sniffing behaviour>>
 - <<pinging-behaviour, Pinging behaviour>>
 - <<retries-and-failover, Retries and failover>>
@@ -58,6 +59,8 @@ include::{building-blocks}/transports.asciidoc[]
 include::{building-blocks}/request-pipelines.asciidoc[]
 include::{building-blocks}/date-time-providers.asciidoc[]
 include::{building-blocks}/keeping-track-of-nodes.asciidoc[]
+
+include::{product-checking}/product-checking/product-check-at-startup.asciidoc[]
 
 [[sniffing-behaviour]]
 == Sniffing behaviour
