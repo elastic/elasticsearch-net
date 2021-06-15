@@ -10,20 +10,12 @@ namespace Elasticsearch.Net.VirtualizedCluster
 {
 	public static class VirtualClusterWith
 	{
-		public static VirtualCluster Nodes(int numberOfNodes, int startFrom = 9200) =>
-			new VirtualCluster(
-				Enumerable.Range(startFrom, numberOfNodes).Select(n => new Node(new Uri($"http://localhost:{n}")))
-			);
+		public static VirtualCluster Nodes(int numberOfNodes, int startFrom = 9200, bool productCheckAlwaysSucceeds = true) =>
+			new (Enumerable.Range(startFrom, numberOfNodes).Select(n => new Node(new Uri($"http://localhost:{n}"))), productCheckAlwaysSucceeds);
 
-		public static VirtualCluster MasterOnlyNodes(int numberOfNodes, int startFrom = 9200) =>
-			new VirtualCluster(
-				Enumerable.Range(startFrom, numberOfNodes)
-					.Select(n => new Node(new Uri($"http://localhost:{n}")) { HoldsData = false, MasterEligible = true })
-			);
+		public static VirtualCluster MasterOnlyNodes(int numberOfNodes, int startFrom = 9200, bool productCheckSucceeds = true) =>
+			new (Enumerable.Range(startFrom, numberOfNodes).Select(n => new Node(new Uri($"http://localhost:{n}")) { HoldsData = false, MasterEligible = true }), productCheckSucceeds);
 
-
-		public static VirtualCluster Nodes(IEnumerable<Node> nodes) =>
-			new VirtualCluster(nodes);
-
+		public static VirtualCluster Nodes(IEnumerable<Node> nodes, bool productCheckSucceeds = true) => new (nodes, productCheckSucceeds);
 	}
 }

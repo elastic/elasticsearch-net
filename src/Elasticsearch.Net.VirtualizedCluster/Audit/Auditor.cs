@@ -53,16 +53,17 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 		public async Task<Auditor> TraceStartup(ClientCall callTrace = null)
 		{
 			//synchronous code path
-			_cluster = _cluster ?? Cluster();
+			_cluster ??= Cluster();
 			if (!StartedUp) AssertPoolBeforeStartup?.Invoke(_cluster.ConnectionPool);
 			AssertPoolBeforeCall?.Invoke(_cluster.ConnectionPool);
+			// ReSharper disable once MethodHasAsyncOverload
 			Response = _cluster.ClientCall(callTrace?.RequestOverrides);
 			AuditTrail = Response.ApiCall.AuditTrail;
 			if (!StartedUp) AssertPoolAfterStartup?.Invoke(_cluster.ConnectionPool);
 			AssertPoolAfterCall?.Invoke(_cluster.ConnectionPool);
 
 			//async code path
-			_clusterAsync = _clusterAsync ?? Cluster();
+			_clusterAsync ??= Cluster();
 			if (!StartedUp) AssertPoolBeforeStartup?.Invoke(_clusterAsync.ConnectionPool);
 			AssertPoolBeforeCall?.Invoke(_clusterAsync.ConnectionPool);
 			ResponseAsync = await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides).ConfigureAwait(false);
@@ -71,11 +72,17 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			AssertPoolAfterCall?.Invoke(_clusterAsync.ConnectionPool);
 			return new Auditor(_cluster, _clusterAsync);
 		}
-
+		
 		public async Task<Auditor> TraceCall(ClientCall callTrace, int nthCall = 0)
 		{
 			await TraceStartup(callTrace).ConfigureAwait(false);
-			return AssertAuditTrails(callTrace, nthCall);
+			return AssertAuditTrails(callTrace, nthCall, true);
+		}
+
+		public async Task<Auditor> TraceCall(bool skipProductCheck, ClientCall callTrace, int nthCall = 0)
+		{
+			await TraceStartup(callTrace).ConfigureAwait(false);
+			return AssertAuditTrails(callTrace, nthCall, skipProductCheck);
 		}
 
 #pragma warning disable 1998 // Async method lacks 'await' operators and will run synchronously
@@ -83,7 +90,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 #pragma warning restore 1998 // Async method lacks 'await' operators and will run synchronously
 			where TException : ElasticsearchClientException
 		{
-			_cluster = _cluster ?? Cluster();
+			_cluster ??= Cluster();
 			_cluster.ClientThrows(true);
 			AssertPoolBeforeCall?.Invoke(_cluster.ConnectionPool);
 
@@ -94,7 +101,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			AuditTrail = exception.AuditTrail;
 			AssertPoolAfterCall?.Invoke(_cluster.ConnectionPool);
 
-			_clusterAsync = _clusterAsync ?? Cluster();
+			_clusterAsync ??= Cluster();
 			_clusterAsync.ClientThrows(true);
 			Func<Task> callAsync = async () => ResponseAsync = await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides).ConfigureAwait(false);
 			exception = await TryCallAsync(callAsync, assert).ConfigureAwait(false);
@@ -121,7 +128,7 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 		public async Task<Auditor> TraceElasticsearchExceptionOnResponse(ClientCall callTrace, Action<ElasticsearchClientException> assert)
 #pragma warning restore 1998
 		{
-			_cluster = _cluster ?? Cluster();
+			_cluster ??= Cluster();
 			_cluster.ClientThrows(false);
 			AssertPoolBeforeCall?.Invoke(_cluster.ConnectionPool);
 
@@ -130,14 +137,15 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 
 			if (Response.ApiCall.Success) throw new Exception("Expected call to not be valid");
 
-			var exception = Response.ApiCall.OriginalException as ElasticsearchClientException;
-			if (exception == null) throw new Exception("OriginalException on response is not expected ElasticsearchClientException");
+			if (Response.ApiCall.OriginalException is not ElasticsearchClientException exception)
+				throw new Exception("OriginalException on response is not expected ElasticsearchClientException");
+
 			assert(exception);
 
 			AuditTrail = exception.AuditTrail;
 			AssertPoolAfterCall?.Invoke(_cluster.ConnectionPool);
 
-			_clusterAsync = _clusterAsync ?? Cluster();
+			_clusterAsync ??= Cluster();
 			_clusterAsync.ClientThrows(false);
 			Func<Task> callAsync = async () => { ResponseAsync = await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides).ConfigureAwait(false); };
 			await callAsync().ConfigureAwait(false);
@@ -157,30 +165,38 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 		public async Task<Auditor> TraceUnexpectedException(ClientCall callTrace, Action<UnexpectedElasticsearchClientException> assert)
 #pragma warning restore 1998
 		{
-			_cluster = _cluster ?? Cluster();
+			_cluster ??= Cluster();
 			AssertPoolBeforeCall?.Invoke(_cluster.ConnectionPool);
 
-			Action call = () => Response = _cluster.ClientCall(callTrace?.RequestOverrides);
-			var exception = TryCall(call, assert);
+			
+			var exception = TryCall(Call, assert);
 			assert(exception);
 
 			AuditTrail = exception.AuditTrail;
 			AssertPoolAfterCall?.Invoke(_cluster.ConnectionPool);
 
-			_clusterAsync = _clusterAsync ?? Cluster();
-			Func<Task> callAsync = async () => ResponseAsync = await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides).ConfigureAwait(false);
-			exception = await TryCallAsync(callAsync, assert).ConfigureAwait(false);
+			_clusterAsync ??= Cluster();
+			
+			exception = await TryCallAsync(CallAsync, assert).ConfigureAwait(false);
 			assert(exception);
 
 			AsyncAuditTrail = exception.AuditTrail;
 			AssertPoolAfterCall?.Invoke(_clusterAsync.ConnectionPool);
+
 			return new Auditor(_cluster, _clusterAsync);
+
+			void Call() => Response = _cluster.ClientCall(callTrace?.RequestOverrides);
+			async Task CallAsync() => ResponseAsync = await _clusterAsync.ClientCallAsync(callTrace?.RequestOverrides).ConfigureAwait(false);
 		}
 
-		private Auditor AssertAuditTrails(ClientCall callTrace, int nthCall)
+		private Auditor AssertAuditTrails(ClientCall callTrace, int nthCall, bool skipProductCheck)
 		{
 			var nl = Environment.NewLine;
-			if (AuditTrail.Count != AsyncAuditTrail.Count)
+
+			if (skipProductCheck)
+				AuditTrail.RemoveAll(a => a.Event is AuditEvent.ProductCheckOnStartup or AuditEvent.ProductCheckSuccess or AuditEvent.ProductCheckFailure);
+
+			if (AuditTrail.Count(Predicate) != AsyncAuditTrail.Count(Predicate))
 				throw new Exception($"{nthCall} has a mismatch between sync and async. {nl}async:{AuditTrail}{nl}sync:{AsyncAuditTrail}");
 
 			AssertTrailOnResponse(callTrace, AuditTrail, true, nthCall);
@@ -192,8 +208,13 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			callTrace?.AssertPoolAfterCall?.Invoke(_cluster.ConnectionPool);
 			callTrace?.AssertPoolAfterCall?.Invoke(_clusterAsync.ConnectionPool);
 			return new Auditor(_cluster, _clusterAsync);
-		}
 
+			// These happen one time only so should not be counted when comparing equality of audit trails
+			static bool Predicate(Net.Audit auditEvent) =>
+				auditEvent.Event != AuditEvent.ProductCheckOnStartup &&
+				auditEvent.Event != AuditEvent.ProductCheckFailure &&
+				auditEvent.Event != AuditEvent.ProductCheckSuccess;
+		}
 
 		public void VisualizeCalls(int numberOfCalls)
 		{
@@ -218,14 +239,24 @@ namespace Elasticsearch.Net.VirtualizedCluster.Audit
 			return actualAuditTrail;
 		}
 
+
 		public async Task<Auditor> TraceCalls(params ClientCall[] audits)
 		{
 			var auditor = this;
-			foreach (var a in audits.Select((a, i) => new { a, i })) auditor = await auditor.TraceCall(a.a, a.i).ConfigureAwait(false);
+			foreach (var a in audits.Select((a, i) => new { a, i }))
+				auditor = await auditor.TraceCall(a.a, a.i).ConfigureAwait(false);
 			return auditor;
 		}
 
-		private static void AssertTrailOnResponse(ClientCall callTrace, List<Elasticsearch.Net.Audit> auditTrail, bool sync, int nthCall)
+		public async Task<Auditor> TraceCalls(bool skipProductCheck, params ClientCall[] audits)
+		{
+			var auditor = this;
+			foreach (var a in audits.Select((a, i) => new { a, i }))
+				auditor = await auditor.TraceCall(skipProductCheck, a.a, a.i).ConfigureAwait(false);
+			return auditor;
+		}
+
+		private static void AssertTrailOnResponse(ClientCall callTrace, IReadOnlyCollection<Net.Audit> auditTrail, bool sync, int nthCall)
 		{
 			var typeOfTrail = (sync ? "synchronous" : "asynchronous") + " audit trail";
 			var nthClientCall = (nthCall + 1).ToOrdinal();
