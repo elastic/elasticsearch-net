@@ -30,7 +30,7 @@ namespace Tests.ClientConcepts
 			e.Message.Should().Contain("No ClientCalls defined for the current VirtualCluster, so we do not know how to respond");
 		}
 
-		[U] public async Task ThrowsExceptionAfterDepleedingRules()
+		[U] public async Task ThrowsExceptionAfterDepletingRules()
 		{
 			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(1)
