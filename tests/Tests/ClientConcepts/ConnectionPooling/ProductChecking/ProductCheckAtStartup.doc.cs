@@ -13,9 +13,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.ProductChecking
 {
 	public class ProductCheckAtStartup
 	{
-		/**=== Product check on first usage
+		/**[[product-check-at-startup]]
+		* == Product check at startup
 		*
-		* Since 7.14.0, the client performs a required product check during the first call.
+		* Since v7.14.0, the client performs a required product check before the first call.
 		* This pre-flight product check allows us to establish the version of Elasticsearch we are communicating with.
 		*
 		* The product check requires one additional HTTP request to be sent to the server as part of the request pipeline.
