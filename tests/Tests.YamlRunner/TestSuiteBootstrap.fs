@@ -85,9 +85,8 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         let e = start.AddSeconds(30.)
         while (call() > 0 && DateTime.UtcNow < e) do ignore()
         
-        
     let waitForPendingRollupTasks () = waitForPendingTasks "xpack/rollup/job"
-    
+
     let deleteAllSLMPolicies () =
         getAndDelete
            (fun _ -> client.SnapshotLifecycleManagement.GetSnapshotLifecycle<DynamicResponse>())
@@ -232,12 +231,12 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
             waitForPendingRollupTasks()
             yield! deleteAllSLMPolicies()
         
-        yield! wipeSnapshots()
-        
         if suite = Platinum then
             yield wipeDataStreams()
         
         yield wipeAllIndices()
+
+        yield! wipeSnapshots()
         
         yield! wipeTemplateForXPack()
         
@@ -265,5 +264,4 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         
         waitForClusterStateUpdatesToFinish()
     }
-    
 )]
