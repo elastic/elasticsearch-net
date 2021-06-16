@@ -803,6 +803,7 @@
           "Microsoft.CSharp": "4.6.0",
           "System.Buffers": "4.5.1",
           "System.Diagnostics.DiagnosticSource": "5.0.0",
+          "System.Memory": "4.5.4",
           "System.Reflection.Emit": "4.3.0",
           "System.Reflection.Emit.Lightweight": "4.3.0"
         }
