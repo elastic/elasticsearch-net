@@ -54,14 +54,12 @@ namespace Nest
 
 		public static IEnumerable<RoleMappingRuleBase> AllOrSelf(RoleMappingRuleBase rule)
 		{
-			var all = rule as AllRoleMappingRule;
-			return all != null ? all.AllRules : new[] { rule };
+			return rule is AllRoleMappingRule all ? all.AllRules : new[] { rule };
 		}
 
 		public static IEnumerable<RoleMappingRuleBase> AnyOrSelf(RoleMappingRuleBase rule)
 		{
-			var all = rule as AnyRoleMappingRule;
-			return all != null ? all.AnyRules : new[] { rule };
+			return rule is AnyRoleMappingRule all ? all.AnyRules : new[] { rule };
 		}
 
 		public static implicit operator RoleMappingRuleBase(UsernameRule rule) => new FieldRoleMappingRule(rule);
