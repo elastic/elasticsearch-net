@@ -17,7 +17,9 @@ namespace Elasticsearch.Net
 		public const int BufferSize = 81920;
 
 		private static readonly Type[] SpecialTypes =
-			{ typeof(StringResponse), typeof(BytesResponse), typeof(VoidResponse), typeof(DynamicResponse) };
+		{
+			typeof(StringResponse), typeof(BytesResponse), typeof(VoidResponse), typeof(DynamicResponse)
+		};
 
 		public static TResponse ToResponse<TResponse>(
 			RequestData requestData,
@@ -31,8 +33,17 @@ namespace Elasticsearch.Net
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
 			var details = Initialize(requestData, ex, statusCode, warnings, mimeType);
+
 			//TODO take ex and (responseStream == Stream.Null) into account might not need to flow to SetBody in that case
-			var response = SetBody<TResponse>(details, requestData, responseStream, mimeType) ?? new TResponse();
+
+			TResponse response = null;
+
+			// Only attempt to set the body if the response may have content
+			if (MayHaveBody(statusCode, requestData.Method))
+				response = SetBody<TResponse>(details, requestData, responseStream, mimeType);
+
+			response ??= new TResponse();
+
 			response.ApiCall = details;
 			return response;
 		}
@@ -50,11 +61,24 @@ namespace Elasticsearch.Net
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
 			var details = Initialize(requestData, ex, statusCode, warnings, mimeType);
-			var response = await SetBodyAsync<TResponse>(details, requestData, responseStream, mimeType, cancellationToken).ConfigureAwait(false)
-				?? new TResponse();
+
+			TResponse response = null;
+
+			// Only attempt to set the body if the response may have content
+			if (MayHaveBody(statusCode, requestData.Method))
+				response = await SetBodyAsync<TResponse>(details, requestData, responseStream, mimeType, cancellationToken).ConfigureAwait(false);
+
+			response ??= new TResponse();
+
 			response.ApiCall = details;
 			return response;
 		}
+
+		/// <summary>
+		/// A helper which returns true if the response could potentially have a body.
+		/// </summary>
+		private static bool MayHaveBody(int? statusCode, HttpMethod httpMethod) =>
+			!statusCode.HasValue || (statusCode.Value != 204 && httpMethod != HttpMethod.HEAD);
 
 		private static ApiCallDetails Initialize(
 			RequestData requestData, Exception exception, int? statusCode, IEnumerable<string> warnings, string mimeType
@@ -70,7 +94,10 @@ namespace Elasticsearch.Net
 					success = requestData.ConnectionSettings
 						.StatusCodeToResponseSuccess(requestData.Method, statusCode.Value);
 			}
-			if (!RequestData.ValidResponseContentType(requestData.Accept, mimeType))
+
+			// We don't validate the content-type (MIME type) for HEAD requests or responses that have no content (204 status code).
+			// Elastic Cloud responses to HEAD requests strip the content-type header so we want to avoid validation in that case.
+			if (MayHaveBody(statusCode, requestData.Method) && !RequestData.ValidResponseContentType(requestData.Accept, mimeType))
 				success = false;
 
 			var details = new ApiCallDetails
@@ -143,7 +170,8 @@ namespace Elasticsearch.Net
 
 				var serializer = requestData.ConnectionSettings.RequestResponseSerializer;
 				if (requestData.CustomResponseBuilder != null)
-					return await requestData.CustomResponseBuilder.DeserializeResponseAsync(serializer, details, responseStream, cancellationToken).ConfigureAwait(false) as TResponse;
+					return await requestData.CustomResponseBuilder.DeserializeResponseAsync(serializer, details, responseStream, cancellationToken)
+						.ConfigureAwait(false) as TResponse;
 
 				return !RequestData.ValidResponseContentType(requestData.Accept, mimeType)
 					? null
@@ -171,8 +199,7 @@ namespace Elasticsearch.Net
 				//if not json store the result under "body"
 				if (!RequestData.IsJsonMimeType(mimeType))
 				{
-					var dictionary = new DynamicDictionary();
-					dictionary["body"] = new DynamicValue(bytes.Utf8String());
+					var dictionary = new DynamicDictionary { ["body"] = new(bytes.Utf8String()) };
 					cs = new DynamicResponse(dictionary) as TResponse;
 				}
 				else
