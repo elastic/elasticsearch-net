@@ -21,22 +21,20 @@ namespace Tests.Indices.AliasManagement.DeleteAlias
 
 		protected override Func<DeleteAliasDescriptor, IDeleteAliasRequest> Fluent => null;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override DeleteAliasRequest Initializer => new DeleteAliasRequest(Infer.AllIndices, Names);
+		protected override DeleteAliasRequest Initializer => new(CallIsolatedValue, Names);
 		protected override bool SupportsDeserialization => false;
-		protected override string UrlPath => $"/_all/_alias/{CallIsolatedValue + "-alias"}";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_alias/{CallIsolatedValue + "-alias"}";
 		private Names Names => Infer.Names(CallIsolatedValue + "-alias");
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
-				client.Indices.Create(index, c => c
-					.Aliases(aa => aa.Alias(index + "-alias"))
-				);
+				client.Indices.Create(index, c => c.Aliases(aa => aa.Alias(index + "-alias")));
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Indices.DeleteAlias(Infer.AllIndices, Names),
-			(client, f) => client.Indices.DeleteAliasAsync(Infer.AllIndices, Names),
+			(client, f) => client.Indices.DeleteAlias(CallIsolatedValue, Names),
+			(client, f) => client.Indices.DeleteAliasAsync(CallIsolatedValue, Names),
 			(client, r) => client.Indices.DeleteAlias(r),
 			(client, r) => client.Indices.DeleteAliasAsync(r)
 		);
