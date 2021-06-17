@@ -1,0 +1,8 @@
+
+[float]
+[[uncategorized]]
+=== Uncategorized
+
+- * [Backport 7.x] NameValueCollection.ToQueryString performance optimisation https://github.com/elastic/elasticsearch-net/pull/5731[#5731]  (issue: https://github.com/elastic/elasticsearch-net/issues/4952[#4952])
+
+
