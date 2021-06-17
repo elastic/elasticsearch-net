@@ -5,8 +5,19 @@
 --
 Review important information about 7.13.x releases.
 
-* <<release-notes-7.13.0>>
+* <<release-notes-7.13.2>>
 --
+
+
+
+include::release-notes-7.13.2.asciidoc[]
+
+
+[float]
+[[release-notes-7.13.1]]
+== Release-Notes 7.13.1
+https://github.com/elastic/elasticsearch-net/releases/tag/7.13.1[Available on github]
+
 
 
 
