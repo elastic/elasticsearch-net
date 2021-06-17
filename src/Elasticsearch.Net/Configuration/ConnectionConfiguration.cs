@@ -609,7 +609,7 @@ namespace Elasticsearch.Net
 		public T TransferEncodingChunked(bool transferEncodingChunked = true) => Assign(transferEncodingChunked, (a, v) => a._transferEncodingChunked = v);
 
 		/// <summary>
-		/// The memory stream factory to use, defaults to <see cref="RecyclableMemoryStreamFactory.Default"/>
+		/// The memory stream factory to use, defaults to <see cref="Elasticsearch.Net.MemoryStreamFactory.Default"/>
 		/// </summary>
 		public T MemoryStreamFactory(IMemoryStreamFactory memoryStreamFactory) => Assign(memoryStreamFactory, (a, v) => a._memoryStreamFactory = v);
 

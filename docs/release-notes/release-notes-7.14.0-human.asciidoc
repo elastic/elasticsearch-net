@@ -1,1 +1,11 @@
+=== MemoryStreamFactory Changes
 
+In this release we have changed the value of DefaultMemoryStreamFactory in ConnectionConfiguration such that a new memory stream is used each time. This behavior is more predictable since instances will not be pooled leading to potentially large long-lived allocations. Instead, instances will be created on demand and once release, may be garbage collected. 
+
+In advanced situations you may wish to configure the previous default and use the RecyclableMemoryStream.
+
+[source,csharp]
+----
+var settings = new ConnectionSettings(new Uri("http://localhost:9200"))
+    .MemoryStreamFactory(RecyclableMemoryStreamFactory.Default);
+----
