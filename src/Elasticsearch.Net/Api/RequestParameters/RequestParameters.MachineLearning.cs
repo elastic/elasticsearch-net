@@ -567,6 +567,12 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	///<summary>Request options for InferTrainedModelDeployment <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-infer-trained-model-deployment.html</para></summary>
 	public class InferTrainedModelDeploymentRequestParameters : RequestParameters<InferTrainedModelDeploymentRequestParameters>
 	{
+		///<summary>Controls the time to wait for the inference result</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	///<summary>Request options for Info <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html</para></summary>
@@ -738,6 +744,12 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	///<summary>Request options for StartTrainedModelDeployment <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-trained-model-deployment.html</para></summary>
 	public class StartTrainedModelDeploymentRequestParameters : RequestParameters<StartTrainedModelDeploymentRequestParameters>
 	{
+		///<summary>Controls the time to wait until the model is deployed</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	///<summary>Request options for StopDataFrameAnalytics <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-dfanalytics.html</para></summary>
