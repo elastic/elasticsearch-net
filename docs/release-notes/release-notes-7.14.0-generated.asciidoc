@@ -5,4 +5,10 @@
 
 - * [Backport 7.x] NameValueCollection.ToQueryString performance optimisation https://github.com/elastic/elasticsearch-net/pull/5731[#5731]  (issue: https://github.com/elastic/elasticsearch-net/issues/4952[#4952])
 
+[float]
+[[enhancement]]
+=== New Features
+
+- * Change default IMemoryStreamFactory https://github.com/elastic/elasticsearch-net/pull/5740[#5740] 
+
 
