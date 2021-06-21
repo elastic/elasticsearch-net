@@ -11,25 +11,25 @@ namespace Nest
 	[StringEnum]
 	public enum Day
 	{
-		[EnumMember(Value = "sunday")]
+		[EnumMember(Value = "SUN")]
 		Sunday,
 
-		[EnumMember(Value = "monday")]
+		[EnumMember(Value = "MON")]
 		Monday,
 
-		[EnumMember(Value = "tuesday")]
+		[EnumMember(Value = "TUE")]
 		Tuesday,
 
-		[EnumMember(Value = "wednesday")]
+		[EnumMember(Value = "WED")]
 		Wednesday,
 
-		[EnumMember(Value = "thursday")]
+		[EnumMember(Value = "THU")]
 		Thursday,
 
-		[EnumMember(Value = "friday")]
+		[EnumMember(Value = "FRI")]
 		Friday,
 
-		[EnumMember(Value = "saturday")]
+		[EnumMember(Value = "SAT")]
 		Saturday
 	}
 }

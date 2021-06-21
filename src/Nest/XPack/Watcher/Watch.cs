@@ -10,7 +10,7 @@ using Elasticsearch.Net.Utf8Json;
 namespace Nest
 {
 	[InterfaceDataContract]
-	[ReadAsAttribute(typeof(Watch))]
+	[ReadAs(typeof(Watch))]
 	public interface IWatch
 	{
 		[DataMember(Name ="actions")]
@@ -101,6 +101,5 @@ namespace Nest
 		/// <inheritdoc cref="IWatch.Trigger" />
 		public WatchDescriptor Trigger(Func<TriggerDescriptor, TriggerContainer> selector) =>
 			Assign(selector, (a, v) => a.Trigger = v.InvokeOrDefault(new TriggerDescriptor()));
-
 	}
 }
