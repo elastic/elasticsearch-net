@@ -173,9 +173,8 @@ namespace Elasticsearch.Net
 		private bool _sniffOnStartup;
 		private bool _throwExceptions;
 		private bool _transferEncodingChunked;
-		private IMemoryStreamFactory _memoryStreamFactory = RecyclableMemoryStreamFactory.Default;
+		private IMemoryStreamFactory _memoryStreamFactory = DefaultMemoryStreamFactory;
 		private bool _enableTcpStats;
-		//public static IMemoryStreamFactory Default { get; } = RecyclableMemoryStreamFactory.Default;
 		public static IMemoryStreamFactory DefaultMemoryStreamFactory { get; } = Elasticsearch.Net.MemoryStreamFactory.Default;
 		private bool _enableThreadPoolStats;
 		private bool _enableApiVersioningHeader;
@@ -610,7 +609,7 @@ namespace Elasticsearch.Net
 		public T TransferEncodingChunked(bool transferEncodingChunked = true) => Assign(transferEncodingChunked, (a, v) => a._transferEncodingChunked = v);
 
 		/// <summary>
-		/// The memory stream factory to use, defaults to <see cref="RecyclableMemoryStreamFactory.Default"/>
+		/// The memory stream factory to use, defaults to <see cref="Elasticsearch.Net.MemoryStreamFactory.Default"/>
 		/// </summary>
 		public T MemoryStreamFactory(IMemoryStreamFactory memoryStreamFactory) => Assign(memoryStreamFactory, (a, v) => a._memoryStreamFactory = v);
 
