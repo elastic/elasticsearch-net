@@ -6,8 +6,10 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.Watcher
 {
+	/// <summary>
+	/// Used to isolate watcher tests within their own cluster.
+	/// </summary>
 	public class WatcherCluster : XPackCluster
 	{
-
 	}
 }
