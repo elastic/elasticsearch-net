@@ -6,16 +6,6 @@ using System;
 
 namespace Elasticsearch.Net
 {
-	public class InvalidProductException : Exception
-	{
-		public InvalidProductException()
-			: base(@"TODO: This client is designed to work with the official Elasticsearch product...
-
-Why are you seeing this error?
-------------------------------
-TODO") { }
-	}
-
 	public class PipelineException : Exception
 	{
 		public PipelineException(PipelineFailure failure)

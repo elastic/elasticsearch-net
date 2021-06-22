@@ -24,7 +24,7 @@ namespace Elasticsearch.Net
 		private const string NoNodesAttemptedMessage = "No nodes were attempted, this can happen when a node predicate does not match any nodes";
 
 		public const string UndeterminedProductWarning =
-			"TODO: The client could not determine if the server is running the official Elasticsearch product.";
+			"The client is unable to verify that the server is Elasticsearch due security privileges on the server side.";
 
 		private static readonly Version MinVersion = new(6, 0, 0);
 		private static readonly Version Version7 = new(7, 0, 0);

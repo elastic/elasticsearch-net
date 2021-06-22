@@ -17,10 +17,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.ProductChecking
 		* == Product check at startup
 		*
 		* Since v7.14.0, the client performs a required product check before the first call.
-		* This pre-flight product check allows us to establish the version of Elasticsearch we are communicating with.
+		* This pre-flight product check allows the client to establish the version of Elasticsearch that it is communicating with.
 		*
-		* The product check requires one additional HTTP request to be sent to the server as part of the request pipeline.
-		* Once the product check succeeds, no further product check HTTP requests are sent as part of the pipeline.
+		* The product check requires one additional HTTP request to be sent to the server as part of the request pipeline before
+		* the main API call is sent. In most cases, this will succeed during the very first API call that the client sends.
+		* Once the product check succeeds, no further product check HTTP requests are sent for subsequent API calls.
 		*/
 		[U] public async Task ProductCheckPerformedOnlyOnFirstCallWhenSuccessful()
 		{
@@ -64,7 +65,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.ProductChecking
 				},
 				new ClientCall() {
 					{ ProductCheckOnStartup },
-					{ ProductCheckSuccess, 9200 }, // <3> as the previous product check failed, it runs on the second call
+					{ ProductCheckSuccess, 9200 }, // <3> as the previous product check failed, it runs again on the second call
 					{ HealthyResponse, 9200 }
 				},
 				new ClientCall() {
