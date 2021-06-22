@@ -6,6 +6,12 @@
 - * [Backport 7.x] NameValueCollection.ToQueryString performance optimisation https://github.com/elastic/elasticsearch-net/pull/5731[#5731]  (issue: https://github.com/elastic/elasticsearch-net/issues/4952[#4952])
 
 [float]
+[[bug]]
+=== Bug Fixes
+
+- * Fix weekly schedule deserialisation https://github.com/elastic/elasticsearch-net/pull/5743[#5743]  (issue: https://github.com/elastic/elasticsearch-net/issues/5725[#5725])
+
+[float]
 [[enhancement]]
 === New Features
 
