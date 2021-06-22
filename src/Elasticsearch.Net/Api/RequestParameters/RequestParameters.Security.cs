@@ -288,7 +288,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 	{
 	}
 
-	///<summary>Request options for GetUserPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
+	///<summary>Request options for GetUserPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</para></summary>
 	public class GetUserPrivilegesRequestParameters : RequestParameters<GetUserPrivilegesRequestParameters>
 	{
 	}
