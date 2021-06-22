@@ -194,8 +194,8 @@ namespace Tests.XPack.Watcher.PutWatch
 					{
 						weekly = new[]
 						{
-							new { on = new[] { "monday" }, at = new[] { "noon" } },
-							new { on = new[] { "friday" }, at = new[] { "17:00" } }
+							new { on = new[] { "MON" }, at = new[] { "noon" } },
+							new { on = new[] { "FRI" }, at = new[] { "17:00" } }
 						}
 					}
 				},
@@ -898,8 +898,8 @@ namespace Tests.XPack.Watcher.PutWatch
 					{
 						weekly = new[]
 						{
-							new { on = new[] { "monday" }, at = new[] { "noon" } },
-							new { on = new[] { "friday" }, at = new[] { "17:00" } }
+							new { on = new[] { "MON" }, at = new[] { "noon" } },
+							new { on = new[] { "FRI" }, at = new[] { "17:00" } }
 						}
 					}
 				},
