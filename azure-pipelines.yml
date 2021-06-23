@@ -36,7 +36,7 @@ jobs:
   strategy:
     maxParallel: 5
     matrix:
-      es682:
+      es6816:
         esVersion: '6.8.16'
       es672:
         esVersion: '6.7.2'
@@ -44,7 +44,7 @@ jobs:
         esVersion: '6.6.2'
       es654:
         esVersion: '6.5.4'
-      es642:
+      es643:
         esVersion: '6.4.3'
       es632:
         esVersion: '6.3.2'
@@ -74,7 +74,7 @@ jobs:
   strategy:
     maxParallel: 5
     matrix:
-      es682:
+      es6816:
         esVersion: '6.8.16'
       es672:
         esVersion: '6.7.2'
@@ -82,7 +82,7 @@ jobs:
         esVersion: '6.6.2'
       es654:
         esVersion: '6.5.4'
-      es642:
+      es643:
         esVersion: '6.4.3'
       es632:
         esVersion: '6.3.2'
