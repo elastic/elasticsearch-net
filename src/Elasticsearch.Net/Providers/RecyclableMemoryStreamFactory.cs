@@ -3,10 +3,12 @@
 namespace Elasticsearch.Net
 {
 	/// <summary>
-	/// A factory for creating memory streams using a recyclable pool of <see cref="MemoryStream" /> instances
+	/// A factory for creating memory streams using a recyclable pool of <see cref="MemoryStream" /> instances.
 	/// </summary>
 	public class RecyclableMemoryStreamFactory : IMemoryStreamFactory
 	{
+		public static RecyclableMemoryStreamFactory Default { get; } = new RecyclableMemoryStreamFactory();
+
 		private readonly RecyclableMemoryStreamManager _manager;
 
 		public RecyclableMemoryStreamFactory() =>

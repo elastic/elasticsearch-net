@@ -120,7 +120,7 @@ namespace Elasticsearch.Net
 		/// </summary>
 		TimeSpan? MaxRetryTimeout { get; }
 
-		/// <summary> Provides a memory stream factory</summary>
+		/// <summary> Provides a memory stream factory.</summary>
 		IMemoryStreamFactory MemoryStreamFactory { get; }
 
 		/// <summary>
