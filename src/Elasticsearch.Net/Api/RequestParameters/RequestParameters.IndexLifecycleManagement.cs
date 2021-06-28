@@ -68,6 +68,13 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 		public override bool SupportsBody => false;
 	}
 
+	///<summary>Request options for MigrateToDataTiers <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html</para></summary>
+	public class MigrateToDataTiersRequestParameters : RequestParameters<MigrateToDataTiersRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+	}
+
 	///<summary>Request options for MoveToStep <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</para></summary>
 	public class MoveToStepRequestParameters : RequestParameters<MoveToStepRequestParameters>
 	{

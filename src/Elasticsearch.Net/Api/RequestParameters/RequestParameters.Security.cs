@@ -440,11 +440,46 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
+	///<summary>Request options for SamlAuthenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html</para></summary>
+	public class SamlAuthenticateRequestParameters : RequestParameters<SamlAuthenticateRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+	}
+
 	///<summary>Request options for SamlCompleteLogout <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html</para></summary>
 	public class SamlCompleteLogoutRequestParameters : RequestParameters<SamlCompleteLogoutRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => true;
+	}
+
+	///<summary>Request options for SamlInvalidate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html</para></summary>
+	public class SamlInvalidateRequestParameters : RequestParameters<SamlInvalidateRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+	}
+
+	///<summary>Request options for SamlLogout <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html</para></summary>
+	public class SamlLogoutRequestParameters : RequestParameters<SamlLogoutRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+	}
+
+	///<summary>Request options for SamlPrepareAuthentication <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html</para></summary>
+	public class SamlPrepareAuthenticationRequestParameters : RequestParameters<SamlPrepareAuthenticationRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+	}
+
+	///<summary>Request options for SamlServiceProviderMetadata <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html</para></summary>
+	public class SamlServiceProviderMetadataRequestParameters : RequestParameters<SamlServiceProviderMetadataRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
 	}
 
 	///<summary>Request options for GetCertificates <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</para></summary>
