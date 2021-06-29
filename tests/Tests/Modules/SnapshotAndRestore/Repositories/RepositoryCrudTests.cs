@@ -38,11 +38,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			new CreateRepositoryRequest(name)
 			{
 				Repository = new FileSystemRepository(
-					new FileSystemRepositorySettings(GetRepositoryPath(name))
-					{
-						ChunkSize = "64mb",
-						Compress = true
-					}
+					new FileSystemRepositorySettings(GetRepositoryPath(name)) { ChunkSize = "64mb", Compress = true }
 				)
 			};
 
@@ -83,9 +79,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 		{
 			Repository = new FileSystemRepository(new FileSystemRepositorySettings(GetRepositoryPath(name))
 				{
-					ChunkSize = "64mb",
-					Compress = true,
-					ConcurrentStreams = 5
+					ChunkSize = "64mb", Compress = true, ConcurrentStreams = 5, ReadOnly = true
 				}
 			)
 		};
@@ -96,6 +90,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 					.ChunkSize("64mb")
 					.Compress()
 					.ConcurrentStreams(5)
+					.ReadOnly()
 				)
 			);
 
@@ -123,6 +118,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			repository.Settings.Should().NotBeNull();
 			repository.Settings.ChunkSize.Should().Be("64mb");
 			repository.Settings.Compress.Should().BeTrue();
+			repository.Settings.ReadOnly.Should().BeNull();
 		}
 
 		protected override void ExpectAfterUpdate(GetRepositoryResponse response)
@@ -136,6 +132,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			repository.Settings.ChunkSize.Should().Be("64mb");
 			repository.Settings.Compress.Should().BeTrue();
 			repository.Settings.ConcurrentStreams.Should().Be(5);
+			repository.Settings.ReadOnly.Should().BeTrue();
 		}
 
 		protected override void ExpectDeleteNotFoundResponse(DeleteRepositoryResponse response)
