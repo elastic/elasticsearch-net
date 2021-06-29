@@ -21,12 +21,12 @@ namespace Nest
 		public FileSystemRepository(FileSystemRepositorySettings settings) => Settings = settings;
 
 		public IFileSystemRepositorySettings Settings { get; set; }
-		object IRepositoryWithSettings.DelegateSettings => Settings;
 		public string Type { get; } = "fs";
+		object IRepositoryWithSettings.DelegateSettings => Settings;
 	}
 
 	/// <summary>
-	/// Repository settings for <see cref="IFileSystemRepository"/>
+	/// Repository settings for <see cref="IFileSystemRepository" />
 	/// </summary>
 	public interface IFileSystemRepositorySettings : IRepositorySettings
 	{
@@ -35,63 +35,79 @@ namespace Nest
 		/// The chunk size can be specified in bytes or by using size value notation, i.e. 1g, 10m, 5k.
 		/// Defaults to null (unlimited chunk size).
 		/// </summary>
-		[DataMember(Name ="chunk_size")]
+		[DataMember(Name = "chunk_size")]
 		string ChunkSize { get; set; }
 
 		/// <summary>
 		/// Turns on compression of the snapshot files. Defaults to true.
 		/// </summary>
-		[DataMember(Name ="compress")]
+		[DataMember(Name = "compress")]
 		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
 		bool? Compress { get; set; }
 
 		/// <summary>
 		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
-		[DataMember(Name ="concurrent_streams")]
+		[DataMember(Name = "concurrent_streams")]
 		[JsonFormatter(typeof(NullableStringIntFormatter))]
 		int? ConcurrentStreams { get; set; }
 
 		/// <summary>
 		/// Location of the snapshots. Mandatory.
 		/// </summary>
-		[DataMember(Name ="location")]
+		[DataMember(Name = "location")]
 		string Location { get; set; }
+
+		/// <summary>
+		/// Make the repository readonly. Defaults to false.
+		/// </summary>
+		[DataMember(Name = "readonly")]
+		[JsonFormatter(typeof(NullableStringBooleanFormatter))]
+		bool? ReadOnly { get; set; }
 
 		/// <summary>
 		/// Throttles per node restore rate. Defaults to 20mb per second.
 		/// </summary>
-		[DataMember(Name ="max_restore_bytes_per_second")]
+		[DataMember(Name = "max_restore_bytes_per_second")]
 		string RestoreBytesPerSecondMaximum { get; set; }
 
 		/// <summary>
 		/// Throttles per node snapshot rate. Defaults to 20mb per second.
 		/// </summary>
-		[DataMember(Name ="max_snapshot_bytes_per_second")]
+		[DataMember(Name = "max_snapshot_bytes_per_second")]
 		string SnapshotBytesPerSecondMaximum { get; set; }
 	}
 
-	/// <inheritdoc cref="IFileSystemRepositorySettings"/>
+	/// <inheritdoc cref="IFileSystemRepositorySettings" />
 	public class FileSystemRepositorySettings : IFileSystemRepositorySettings
 	{
 		internal FileSystemRepositorySettings() { }
 
 		public FileSystemRepositorySettings(string location) => Location = location;
 
+		/// <inheritdoc />
 		public string ChunkSize { get; set; }
 
+		/// <inheritdoc />
 		public bool? Compress { get; set; }
 
+		/// <inheritdoc />
 		public int? ConcurrentStreams { get; set; }
 
+		/// <inheritdoc />
 		public string Location { get; set; }
 
+		/// <inheritdoc />
+		public bool? ReadOnly { get; set; }
+
+		/// <inheritdoc />
 		public string RestoreBytesPerSecondMaximum { get; set; }
 
+		/// <inheritdoc />
 		public string SnapshotBytesPerSecondMaximum { get; set; }
 	}
 
-	/// <inheritdoc cref="IFileSystemRepositorySettings"/>
+	/// <inheritdoc cref="IFileSystemRepositorySettings" />
 	public class FileSystemRepositorySettingsDescriptor
 		: DescriptorBase<FileSystemRepositorySettingsDescriptor, IFileSystemRepositorySettings>, IFileSystemRepositorySettings
 	{
@@ -99,40 +115,44 @@ namespace Nest
 		bool? IFileSystemRepositorySettings.Compress { get; set; }
 		int? IFileSystemRepositorySettings.ConcurrentStreams { get; set; }
 		string IFileSystemRepositorySettings.Location { get; set; }
+		bool? IFileSystemRepositorySettings.ReadOnly { get; set; }
 		string IFileSystemRepositorySettings.RestoreBytesPerSecondMaximum { get; set; }
 		string IFileSystemRepositorySettings.SnapshotBytesPerSecondMaximum { get; set; }
 
-		/// <inheritdoc cref="IFileSystemRepositorySettings.Location"/>
+		/// <inheritdoc cref="IFileSystemRepositorySettings.Location" />
 		public FileSystemRepositorySettingsDescriptor Location(string location) => Assign(location, (a, v) => a.Location = v);
 
-		/// <inheritdoc cref="IFileSystemRepositorySettings.Compress"/>
+		/// <inheritdoc cref="IFileSystemRepositorySettings.Compress" />
 		public FileSystemRepositorySettingsDescriptor Compress(bool? compress = true) => Assign(compress, (a, v) => a.Compress = v);
 
-		/// <inheritdoc cref="IFileSystemRepositorySettings.ConcurrentStreams"/>
+		/// <inheritdoc cref="IFileSystemRepositorySettings.ConcurrentStreams" />
 		public FileSystemRepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) =>
 			Assign(concurrentStreams, (a, v) => a.ConcurrentStreams = v);
 
-		/// <inheritdoc cref="IFileSystemRepositorySettings.ChunkSize"/>
+		/// <inheritdoc cref="IFileSystemRepositorySettings.ChunkSize" />
 		public FileSystemRepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(chunkSize, (a, v) => a.ChunkSize = v);
 
-		/// <inheritdoc cref="IFileSystemRepositorySettings.RestoreBytesPerSecondMaximum"/>
+		/// <inheritdoc cref="IFileSystemRepositorySettings.ReadOnly" />
+		public FileSystemRepositorySettingsDescriptor ReadOnly(bool? readOnly = true) => Assign(readOnly, (a, v) => a.ReadOnly = v);
+
+		/// <inheritdoc cref="IFileSystemRepositorySettings.RestoreBytesPerSecondMaximum" />
 		public FileSystemRepositorySettingsDescriptor RestoreBytesPerSecondMaximum(string maximumBytesPerSecond) =>
 			Assign(maximumBytesPerSecond, (a, v) => a.RestoreBytesPerSecondMaximum = v);
 
-		/// <inheritdoc cref="IFileSystemRepositorySettings.SnapshotBytesPerSecondMaximum"/>
+		/// <inheritdoc cref="IFileSystemRepositorySettings.SnapshotBytesPerSecondMaximum" />
 		public FileSystemRepositorySettingsDescriptor SnapshotBytesPerSecondMaximum(string maximumBytesPerSecond) =>
 			Assign(maximumBytesPerSecond, (a, v) => a.SnapshotBytesPerSecondMaximum = v);
 	}
 
-	/// <inheritdoc cref="IFileSystemRepository"/>
+	/// <inheritdoc cref="IFileSystemRepository" />
 	public class FileSystemRepositoryDescriptor
 		: DescriptorBase<FileSystemRepositoryDescriptor, IFileSystemRepository>, IFileSystemRepository
 	{
-		IFileSystemRepositorySettings IRepository<IFileSystemRepositorySettings>.Settings { get; set; }
 		object IRepositoryWithSettings.DelegateSettings => Self.Settings;
+		IFileSystemRepositorySettings IRepository<IFileSystemRepositorySettings>.Settings { get; set; }
 		string ISnapshotRepository.Type { get; } = "fs";
 
-		/// <inheritdoc cref="IFileSystemRepositorySettings"/>
+		/// <inheritdoc cref="IFileSystemRepositorySettings" />
 		public FileSystemRepositoryDescriptor Settings(string location,
 			Func<FileSystemRepositorySettingsDescriptor, IFileSystemRepositorySettings> settingsSelector = null
 		) =>
