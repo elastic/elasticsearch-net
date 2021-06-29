@@ -43,6 +43,7 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         | ".deprecation-indexing-template" -> false
         | ".deprecation-indexing-mappings" -> false
         | ".deprecation-indexing-settings" -> false
+        | s when s.StartsWith(".geoip_databases") -> false
         | s when s.StartsWith(".monitoring") -> false
         | s when s.StartsWith(".watch") -> false
         | s when s.StartsWith(".data-frame") -> false
