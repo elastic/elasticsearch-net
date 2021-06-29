@@ -34,14 +34,14 @@ var searchResponse = client.Search<Project>(s => s.AllIndices());
 searchResponse.ApiCall.Uri.ToString().Should().Be("http://localhost:9200/_all/_search?typed_keys=true");
 
 var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200/elasticsearch"));
-var settings = new ConnectionSettings(pool, new InMemoryConnection());
+var settings = new ConnectionSettings(pool, new InMemoryConnection("elasticsearch"));
 var client = new ElasticClient(settings);
 var searchResponse = client.Search<Project>(s => s.AllIndices());
 
 searchResponse.ApiCall.Uri.ToString().Should().Be("http://localhost:9200/elasticsearch/_all/_search?typed_keys=true");
 
 var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200/elasticsearch/"));
-var settings = new ConnectionSettings(pool, new InMemoryConnection());
+var settings = new ConnectionSettings(pool, new InMemoryConnection("elasticsearch/"));
 var client = new ElasticClient(settings);
 var searchResponse = client.Search<Project>(s => s.AllIndices());
 

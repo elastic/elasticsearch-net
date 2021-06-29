@@ -1,0 +1,33 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+using System;
+
+namespace Elasticsearch.Net.VirtualizedCluster.Rules
+{
+	public class ProductCheckRule : RuleBase<ProductCheckRule>
+	{
+		private IRule Self => this;
+
+		public ProductCheckRule Fails(RuleOption<TimesHelper.AllTimes, int> times, RuleOption<Exception, int> errorState = null)
+		{
+			Self.Times = times;
+			Self.Succeeds = false;
+			Self.Return = errorState;
+			return this;
+		}
+
+		public ProductCheckRule Succeeds(RuleOption<TimesHelper.AllTimes, int> times, int? validResponseCode = 200)
+		{
+			Self.Times = times;
+			Self.Succeeds = true;
+			Self.Return = validResponseCode;
+			return this;
+		}
+
+		public ProductCheckRule SucceedAlways(int? validResponseCode = 200) => Succeeds(TimesHelper.Always, validResponseCode);
+
+		public ProductCheckRule FailAlways(RuleOption<Exception, int> errorState = null) => Fails(TimesHelper.Always, errorState);
+	}
+}

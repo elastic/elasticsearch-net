@@ -35,6 +35,9 @@ namespace Elasticsearch.Net
 		}
 
 		/// <inheritdoc />
+		public ProductCheckStatus ProductCheckStatus { get; set; }
+
+		/// <inheritdoc />
 		public bool SupportsPinging => false;
 
 		/// <inheritdoc />

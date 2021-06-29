@@ -18,9 +18,7 @@ namespace Elasticsearch.Net
 		public PipelineFailure FailureReason { get; }
 
 		public bool Recoverable =>
-			FailureReason == PipelineFailure.BadRequest
-			|| FailureReason == PipelineFailure.BadResponse
-			|| FailureReason == PipelineFailure.PingFailure;
+			FailureReason is PipelineFailure.BadRequest or PipelineFailure.BadResponse or PipelineFailure.PingFailure;
 
 		public IElasticsearchResponse Response { get; internal set; }
 

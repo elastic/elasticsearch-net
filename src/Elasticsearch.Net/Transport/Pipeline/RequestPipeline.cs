@@ -18,16 +18,23 @@ namespace Elasticsearch.Net
 {
 	public class RequestPipeline : IRequestPipeline
 	{
-		private static readonly string NoNodesAttemptedMessage =
-			"No nodes were attempted, this can happen when a node predicate does not match any nodes";
+		private const string ExpectedBuildFlavor = "default";
+		private const string ExpectedProductName = "Elasticsearch";
+		private const string ExpectedTagLine = "You Know, for Search";
+		private const string NoNodesAttemptedMessage = "No nodes were attempted, this can happen when a node predicate does not match any nodes";
+
+		public const string UndeterminedProductWarning =
+			"The client is unable to verify that the server is Elasticsearch due security privileges on the server side.";
+
+		private static readonly Version MinVersion = new(6, 0, 0);
+		private static readonly Version Version7 = new(7, 0, 0);
+		private static readonly Version Version714 = new(7, 14, 0);
 
 		private readonly IConnection _connection;
 		private readonly IConnectionPool _connectionPool;
 		private readonly IDateTimeProvider _dateTimeProvider;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 		private readonly IConnectionConfigurationValues _settings;
-
-		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.RequestPipeline.SourceName);
 
 		public RequestPipeline(
 			IConnectionConfigurationValues configurationValues,
@@ -61,7 +68,7 @@ namespace Elasticsearch.Net
 				var timeout = _settings.MaxRetryTimeout.GetValueOrDefault(RequestTimeout);
 				var now = _dateTimeProvider.Now();
 
-				//we apply a soft margin so that if a request timesout at 59 seconds when the maximum is 60 we also abort.
+				// we apply a soft margin so that if a request times out at 59 seconds when the maximum is 60 we also abort.
 				var margin = timeout.TotalMilliseconds / 100.0 * 98;
 				var marginTimeSpan = TimeSpan.FromMilliseconds(margin);
 				var timespanCall = now - StartedOn;
@@ -97,7 +104,8 @@ namespace Elasticsearch.Net
 		{
 			get
 			{
-				if (!SniffsOnStaleCluster) return false;
+				if (!SniffsOnStaleCluster)
+					return false;
 
 				// ReSharper disable once PossibleInvalidOperationException
 				// already checked by SniffsOnStaleCluster
@@ -110,7 +118,9 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public DateTime StartedOn { get; }
+		public DateTime StartedOn { get; private set; }
+
+		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.RequestPipeline.SourceName);
 
 		private TimeSpan PingTimeout =>
 			RequestConfiguration?.PingTimeout
@@ -123,11 +133,7 @@ namespace Elasticsearch.Net
 
 		private TimeSpan RequestTimeout => RequestConfiguration?.RequestTimeout ?? _settings.RequestTimeout;
 
-		private NodesInfoRequestParameters SniffParameters => new NodesInfoRequestParameters
-		{
-			Timeout = PingTimeout,
-			FlatSettings = true
-		};
+		private NodesInfoRequestParameters SniffParameters => new NodesInfoRequestParameters { Timeout = PingTimeout, FlatSettings = true };
 
 		void IDisposable.Dispose() => Dispose();
 
@@ -152,52 +158,42 @@ namespace Elasticsearch.Net
 		public TResponse CallElasticsearch<TResponse>(RequestData requestData)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			using (var audit = Audit(HealthyResponse, requestData.Node))
-			using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.CallElasticsearch, requestData))
+			using var audit = Audit(HealthyResponse, requestData.Node);
+			using var diagnostic =
+				DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.CallElasticsearch, requestData);
+
+			audit.Path = requestData.PathAndQuery;
+			try
 			{
-				audit.Path = requestData.PathAndQuery;
-				try
-				{
-					var response = _connection.Request<TResponse>(requestData);
-					d.EndState = response.ApiCall;
-					response.ApiCall.AuditTrail = AuditTrail;
-					audit.Stop();
-					ThrowBadAuthPipelineExceptionWhenNeeded(response.ApiCall, response);
-					if (!response.ApiCall.Success) audit.Event = requestData.OnFailureAuditEvent;
-					return response;
-				}
-				catch (Exception e)
-				{
-					audit.Event = requestData.OnFailureAuditEvent;
-					audit.Exception = e;
-					throw;
-				}
+				var response = _connection.Request<TResponse>(requestData);
+				return PostCallElasticsearch(requestData, response, diagnostic, audit);
+			}
+			catch (Exception e)
+			{
+				audit.Event = requestData.OnFailureAuditEvent;
+				audit.Exception = e;
+				throw;
 			}
 		}
 
 		public async Task<TResponse> CallElasticsearchAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			using (var audit = Audit(HealthyResponse, requestData.Node))
-			using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.CallElasticsearch, requestData))
+			using var audit = Audit(HealthyResponse, requestData.Node);
+			using var diagnostic =
+				DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.CallElasticsearch, requestData);
+
+			audit.Path = requestData.PathAndQuery;
+			try
 			{
-				audit.Path = requestData.PathAndQuery;
-				try
-				{
-					var response = await _connection.RequestAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
-					d.EndState = response.ApiCall;
-					response.ApiCall.AuditTrail = AuditTrail;
-					audit.Stop();
-					ThrowBadAuthPipelineExceptionWhenNeeded(response.ApiCall, response);
-					if (!response.ApiCall.Success) audit.Event = requestData.OnFailureAuditEvent;
-					return response;
-				}
-				catch (Exception e)
-				{
-					audit.Event = requestData.OnFailureAuditEvent;
-					audit.Exception = e;
-					throw;
-				}
+				var response = await _connection.RequestAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
+				return PostCallElasticsearch(requestData, response, diagnostic, audit);
+			}
+			catch (Exception e)
+			{
+				audit.Event = requestData.OnFailureAuditEvent;
+				audit.Exception = e;
+				throw;
 			}
 		}
 
@@ -206,7 +202,8 @@ namespace Elasticsearch.Net
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			if (callDetails?.Success ?? false) return null;
+			if (callDetails?.Success ?? false)
+				return null;
 
 			var innerException = pipelineExceptions.HasAny() ? pipelineExceptions.AsAggregateOrFirst() : callDetails?.OriginalException;
 
@@ -214,7 +211,7 @@ namespace Elasticsearch.Net
 			var resource = callDetails == null
 				? "unknown resource"
 				: $"Status code {statusCode} from: {callDetails.HttpMethod} {callDetails.Uri.PathAndQuery}";
-			
+
 			var exceptionMessage = innerException?.Message ?? "Request failed to execute";
 
 			var pipelineFailure = data.OnFailurePipelineFailure;
@@ -241,7 +238,7 @@ namespace Elasticsearch.Net
 					exceptionMessage += ", failed over to all the known alive nodes before failing";
 				}
 			}
-			
+
 			exceptionMessage += !exceptionMessage.EndsWith(".", StringComparison.Ordinal) ? $". Call: {resource}" : $" Call: {resource}";
 
 			if (response != null && response.TryGetServerErrorReason(out var reason))
@@ -249,9 +246,7 @@ namespace Elasticsearch.Net
 
 			var clientException = new ElasticsearchClientException(pipelineFailure, exceptionMessage, innerException)
 			{
-				Request = data,
-				Response = callDetails,
-				AuditTrail = AuditTrail
+				Request = data, Response = callDetails, AuditTrail = AuditTrail
 			};
 
 			return clientException;
@@ -259,24 +254,48 @@ namespace Elasticsearch.Net
 
 		public void FirstPoolUsage(SemaphoreSlim semaphore)
 		{
-			if (!FirstPoolUsageNeedsSniffing) return;
+			// If sniffing has completed and the product check has run, we are done!
+			if (!FirstPoolUsageNeedsSniffing && _connectionPool.ProductCheckStatus != ProductCheckStatus.NotChecked)
+				return;
 
-			if (!semaphore.Wait(_settings.RequestTimeout))
+			if (!semaphore.Wait(_settings.RequestTimeout.Add(_settings.RequestTimeout))) // Double the timeout to allow for product check delays
 			{
 				if (FirstPoolUsageNeedsSniffing)
 					throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, null);
 
-				return;
-			}
-
-			if (!FirstPoolUsageNeedsSniffing)
-			{
-				semaphore.Release();
+				// We don't report a product check failure here to avoid breaking in unusual situations.
+				// Instead, we assume that subsequent requests will fail anyway.
 				return;
 			}
 
 			try
 			{
+				if (_connectionPool.ProductCheckStatus == ProductCheckStatus.NotChecked)
+					using (Audit(ProductCheckOnStartup))
+					{
+						var nodes = _connectionPool.Nodes.ToArray(); // Isolated copy of nodes for the product check
+
+						if (RequestConfiguration?.ForceNode is not null)
+						{
+							var node = new Node(RequestConfiguration.ForceNode);
+							ProductCheck(node);
+						}
+						else
+							// We determine the product from the first node which successfully responds.
+							for (var i = 0;
+								i < nodes.Length && _connectionPool.ProductCheckStatus == ProductCheckStatus.NotChecked && !IsTakingTooLong;
+								i++)
+								ProductCheck(nodes[i]);
+
+						StartedOn = _dateTimeProvider.Now();
+					}
+
+				if (_connectionPool.ProductCheckStatus == ProductCheckStatus.InvalidProduct)
+					throw new InvalidProductException();
+
+				if (!FirstPoolUsageNeedsSniffing)
+					return;
+
 				using (Audit(SniffOnStartup))
 				{
 					Sniff();
@@ -291,31 +310,55 @@ namespace Elasticsearch.Net
 
 		public async Task FirstPoolUsageAsync(SemaphoreSlim semaphore, CancellationToken cancellationToken)
 		{
-			if (!FirstPoolUsageNeedsSniffing) return;
+			// If sniffing has completed and the product check has run, we are done!
+			if (!FirstPoolUsageNeedsSniffing && _connectionPool.ProductCheckStatus != ProductCheckStatus.NotChecked)
+				return;
 
 			// TODO cancellationToken could throw here and will bubble out as OperationCancelledException
 			// everywhere else it would bubble out wrapped in a `UnexpectedElasticsearchClientException`
-			var success = await semaphore.WaitAsync(_settings.RequestTimeout, cancellationToken).ConfigureAwait(false);
+			var success = await semaphore.WaitAsync(_settings.RequestTimeout.Add(_settings.RequestTimeout), cancellationToken).ConfigureAwait(false);
+
 			if (!success)
 			{
 				if (FirstPoolUsageNeedsSniffing)
 					throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, null);
 
+				// We don't report a product check failure here to avoid breaking in unusual situations.
+				// Instead, we assume that subsequent requests will fail anyway.
 				return;
 			}
 
-			if (!FirstPoolUsageNeedsSniffing)
-			{
-				semaphore.Release();
-				return;
-			}
 			try
 			{
-				using (Audit(SniffOnStartup))
-				{
-					await SniffAsync(cancellationToken).ConfigureAwait(false);
-					_connectionPool.SniffedOnStartup = true;
-				}
+				if (_connectionPool.ProductCheckStatus == ProductCheckStatus.NotChecked)
+					using (Audit(ProductCheckOnStartup))
+					{
+						var nodes = _connectionPool.Nodes.ToArray(); // Isolated copy of nodes for the product check
+
+						if (RequestConfiguration?.ForceNode is not null)
+						{
+							var node = new Node(RequestConfiguration.ForceNode);
+							await ProductCheckAsync(node, cancellationToken).ConfigureAwait(false);
+						}
+						else
+							// We determine the product from the first node which successfully responds.
+							for (var i = 0;
+								i < nodes.Length && _connectionPool.ProductCheckStatus == ProductCheckStatus.NotChecked && !IsTakingTooLong;
+								i++)
+								await ProductCheckAsync(nodes[i], cancellationToken).ConfigureAwait(false);
+
+						StartedOn = _dateTimeProvider.Now();
+					}
+
+				if (_connectionPool.ProductCheckStatus == ProductCheckStatus.InvalidProduct)
+					throw new InvalidProductException();
+
+				if (FirstPoolUsageNeedsSniffing)
+					using (Audit(SniffOnStartup))
+					{
+						await SniffAsync(cancellationToken).ConfigureAwait(false);
+						_connectionPool.SniffedOnStartup = true;
+					}
 			}
 			finally
 			{
@@ -342,36 +385,41 @@ namespace Elasticsearch.Net
 			}
 
 			//This for loop allows to break out of the view state machine if we need to
-			//force a refresh (after reseeding connectionpool). We have a hardcoded limit of only
+			//force a refresh (after reseeding connection pool). We have a hardcoded limit of only
 			//allowing 100 of these refreshes per call
 			var refreshed = false;
 			for (var i = 0; i < 100; i++)
 			{
-				if (DepletedRetries) yield break;
+				if (DepletedRetries)
+					yield break;
 
 				foreach (var node in _connectionPool
 					.CreateView(LazyAuditable)
 					.TakeWhile(node => !DepletedRetries))
 				{
-					if (!_settings.NodePredicate(node)) continue;
+					if (!_settings.NodePredicate(node))
+						continue;
 
 					yield return node;
 
-					if (!Refresh) continue;
+					if (!Refresh)
+						continue;
 
 					Refresh = false;
 					refreshed = true;
 					break;
 				}
 				//unless a refresh was requested we will not iterate over more then a single view.
-				//keep in mind refreshes are also still bound to overall maxretry count/timeout.
-				if (!refreshed) break;
+				//keep in mind refreshes are also still bound to overall max retry count/timeout.
+				if (!refreshed)
+					break;
 			}
 		}
 
 		public void Ping(Node node)
 		{
-			if (PingDisabled(node)) return;
+			if (PingDisabled(node))
+				return;
 
 			var pingData = CreatePingRequestData(node);
 			using (var audit = Audit(PingSuccess, node))
@@ -400,7 +448,8 @@ namespace Elasticsearch.Net
 
 		public async Task PingAsync(Node node, CancellationToken cancellationToken)
 		{
-			if (PingDisabled(node)) return;
+			if (PingDisabled(node))
+				return;
 
 			var pingData = CreatePingRequestData(node);
 			using (var audit = Audit(PingSuccess, node))
@@ -435,8 +484,7 @@ namespace Elasticsearch.Net
 				var requestData = CreateSniffRequestData(node);
 				using (var audit = Audit(SniffSuccess, node))
 				using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Sniff, requestData))
-				using(DiagnosticSource.Diagnose(DiagnosticSources.RequestPipeline.Sniff, requestData))
-				{
+				using (DiagnosticSource.Diagnose(DiagnosticSources.RequestPipeline.Sniff, requestData))
 					try
 					{
 						audit.Path = requestData.PathAndQuery;
@@ -459,7 +507,6 @@ namespace Elasticsearch.Net
 						audit.Exception = e;
 						exceptions.Add(e);
 					}
-				}
 			}
 
 			throw new PipelineException(PipelineFailure.SniffFailure, exceptions.AsAggregateOrFirst());
@@ -473,7 +520,6 @@ namespace Elasticsearch.Net
 				var requestData = CreateSniffRequestData(node);
 				using (var audit = Audit(SniffSuccess, node))
 				using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Sniff, requestData))
-				{
 					try
 					{
 						audit.Path = requestData.PathAndQuery;
@@ -495,7 +541,6 @@ namespace Elasticsearch.Net
 						audit.Exception = e;
 						exceptions.Add(e);
 					}
-				}
 			}
 
 			throw new PipelineException(PipelineFailure.SniffFailure, exceptions.AsAggregateOrFirst());
@@ -503,7 +548,8 @@ namespace Elasticsearch.Net
 
 		public void SniffOnConnectionFailure()
 		{
-			if (!SniffsOnConnectionFailure) return;
+			if (!SniffsOnConnectionFailure)
+				return;
 
 			using (Audit(SniffOnFail))
 				Sniff();
@@ -511,7 +557,8 @@ namespace Elasticsearch.Net
 
 		public async Task SniffOnConnectionFailureAsync(CancellationToken cancellationToken)
 		{
-			if (!SniffsOnConnectionFailure) return;
+			if (!SniffsOnConnectionFailure)
+				return;
 
 			using (Audit(SniffOnFail))
 				await SniffAsync(cancellationToken).ConfigureAwait(false);
@@ -519,7 +566,8 @@ namespace Elasticsearch.Net
 
 		public void SniffOnStaleCluster()
 		{
-			if (!StaleClusterState) return;
+			if (!StaleClusterState)
+				return;
 
 			using (Audit(AuditEvent.SniffOnStaleCluster))
 			{
@@ -530,7 +578,8 @@ namespace Elasticsearch.Net
 
 		public async Task SniffOnStaleClusterAsync(CancellationToken cancellationToken)
 		{
-			if (!StaleClusterState) return;
+			if (!StaleClusterState)
+				return;
 
 			using (Audit(AuditEvent.SniffOnStaleCluster))
 			{
@@ -543,11 +592,157 @@ namespace Elasticsearch.Net
 		{
 			var clientException = new ElasticsearchClientException(PipelineFailure.NoNodesAttempted, NoNodesAttemptedMessage, (Exception)null);
 			using (Audit(NoNodesAttempted))
-				throw new UnexpectedElasticsearchClientException(clientException, seenExceptions)
+				throw new UnexpectedElasticsearchClientException(clientException, seenExceptions) { Request = requestData, AuditTrail = AuditTrail };
+		}
+
+		private TResponse PostCallElasticsearch<TResponse>(RequestData requestData, TResponse response,
+			Diagnostic<RequestData, IApiCallDetails> diagnostic, Auditable audit
+		)
+			where TResponse : class, IElasticsearchResponse, new()
+		{
+			// Add additional warning to debug information if the product could not be determined and may not be Elasticsearch
+			if (_connectionPool.ProductCheckStatus == ProductCheckStatus.UndeterminedProduct && response.ApiCall is ApiCallDetails callDetails)
+			{
+				Debug.WriteLine(UndeterminedProductWarning);
+				callDetails.BuildDebugInformationPrefix = sb =>
 				{
-					Request = requestData,
-					AuditTrail = AuditTrail
+					sb.AppendLine("# Warnings:");
+					sb.AppendLine($"- {UndeterminedProductWarning}");
 				};
+			}
+
+			diagnostic.EndState = response.ApiCall;
+			response.ApiCall.AuditTrail = AuditTrail;
+			audit.Stop();
+			ThrowBadAuthPipelineExceptionWhenNeeded(response.ApiCall, response);
+			if (!response.ApiCall.Success)
+				audit.Event = requestData.OnFailureAuditEvent;
+			return response;
+		}
+
+		internal void ProductCheck(Node node)
+		{
+			// We don't throw an exception on failure here since we don't want this new check to break consumers on upgrade.
+
+			var requestData = CreateRootPathRequestData(node);
+			using var audit = Audit(ProductCheckSuccess, node);
+
+			try
+			{
+				audit.Path = requestData.PathAndQuery;
+				var response = _connection.Request<RootResponse>(requestData);
+				var succeeded = ApplyProductCheckRules(response);
+				audit.Stop();
+
+				if (!succeeded)
+					audit.Event = ProductCheckFailure;
+			}
+			catch (Exception e)
+			{
+				audit.Event = ProductCheckFailure;
+				audit.Exception = e;
+			}
+		}
+
+		internal async Task ProductCheckAsync(Node node, CancellationToken cancellationToken)
+		{
+			// We don't throw an exception on failure here since we don't want this new check to break consumers on upgrade.
+
+			var requestData = CreateRootPathRequestData(node);
+			using var audit = Audit(ProductCheckSuccess, node);
+
+			try
+			{
+				audit.Path = requestData.PathAndQuery;
+				var response = await _connection.RequestAsync<RootResponse>(requestData, cancellationToken).ConfigureAwait(false);
+				var succeeded = ApplyProductCheckRules(response);
+				audit.Stop();
+
+				if (!succeeded)
+					audit.Event = ProductCheckFailure;
+			}
+			catch (Exception e)
+			{
+				audit.Event = ProductCheckFailure;
+				audit.Exception = e;
+			}
+		}
+
+		private bool ApplyProductCheckRules(RootResponse response)
+		{
+			var productName = response.ApiCall?.ProductName;
+
+			// Fast path for v7.14+ where the header should have been sent
+			if (response.Success && !string.IsNullOrEmpty(productName))
+			{
+				_connectionPool.ProductCheckStatus = ExpectedProductName.Equals(productName, StringComparison.Ordinal)
+					? ProductCheckStatus.ValidProduct
+					: ProductCheckStatus.InvalidProduct;
+
+				return true;
+			}
+
+			if (response.HttpStatusCode.HasValue && (response.HttpStatusCode.Value == 401 || response.HttpStatusCode.Value == 403))
+			{
+				// The call to the root path requires monitor permissions. If the current use lacks those, we cannot perform product validation.
+				_connectionPool.ProductCheckStatus = ProductCheckStatus.UndeterminedProduct;
+				return true;
+			}
+
+			if (!response.Success) return false;
+
+			// Start by assuming the product is valid
+			_connectionPool.ProductCheckStatus = ProductCheckStatus.ValidProduct;
+
+			// We expect to have a version number from the build version.
+			// If we don't, the product is not Elasticsearch
+			if (string.IsNullOrEmpty(response.Version?.Number))
+				_connectionPool.ProductCheckStatus = ProductCheckStatus.InvalidProduct;
+			else
+			{
+				var versionNumber = response.Version.Number;
+				var indexOfSuffix = versionNumber.IndexOf("-", StringComparison.Ordinal);
+
+				if (indexOfSuffix > 0)
+					versionNumber = versionNumber.Substring(0, indexOfSuffix);
+
+				var version = new Version(versionNumber);
+
+				if (VersionTooLow(version) ||
+					TagLineInvalid(version, response) ||
+					TagLineOrBuildFlavorInvalid(version, response) ||
+					Version714InvalidHeader(version, productName))
+					_connectionPool.ProductCheckStatus = ProductCheckStatus.InvalidProduct;
+			}
+
+			// Elasticsearch should be version 6.0.0 or greater
+			// Note: For best compatibility, the client should not be used with versions prior to 7.0.0, but we do not enforce that here
+			static bool VersionTooLow(Version version)
+			{
+				return version < MinVersion;
+			}
+
+			// Between v6.0.0 and 6.99.99, we expect the tagline to match the expected value
+			static bool TagLineInvalid(Version version, RootResponse response)
+			{
+				return version < Version7 && !ExpectedTagLine.Equals(response.Tagline);
+			}
+
+			// Between v7.0.0 and 7.13.99, we expect the tagline and build flavor to match expected values
+			static bool TagLineOrBuildFlavorInvalid(Version version, RootResponse response)
+			{
+				return version >= Version7 && version < Version714
+					&& (!ExpectedBuildFlavor.Equals(response.Version?.BuildFlavor, StringComparison.Ordinal)
+						|| !ExpectedTagLine.Equals(response.Tagline, StringComparison.Ordinal));
+			}
+
+			// Between v7.0.0 and 7.13.99, we expect the tagline and build flavor to match expected values
+			static bool Version714InvalidHeader(Version version, string productName)
+			{
+				return version >= Version714 && !ExpectedProductName.Equals(productName, StringComparison.Ordinal);
+			}
+
+			return true;
 		}
 
 		private bool PingDisabled(Node node) =>
@@ -558,7 +753,6 @@ namespace Elasticsearch.Net
 
 		private RequestData CreatePingRequestData(Node node)
 		{
-
 			var requestOverrides = new RequestConfiguration
 			{
 				PingTimeout = PingTimeout,
@@ -575,14 +769,25 @@ namespace Elasticsearch.Net
 			return data;
 		}
 
+		private RequestData CreateRootPathRequestData(Node node)
+		{
+			var requestOverrides = new RequestConfiguration
+			{
+				BasicAuthenticationCredentials = _settings.BasicAuthenticationCredentials,
+				ApiKeyAuthenticationCredentials = _settings.ApiKeyAuthenticationCredentials,
+				EnableHttpPipelining = RequestConfiguration?.EnableHttpPipelining ?? _settings.HttpPipeliningEnabled,
+				ForceNode = RequestConfiguration?.ForceNode
+			};
+
+			IRequestParameters requestParameters = new RootNodeInfoRequestParameters { RequestConfiguration = requestOverrides };
+
+			return new RequestData(HttpMethod.GET, string.Empty, null, _settings, requestParameters, _memoryStreamFactory) { Node = node };
+		}
+
 		private static void ThrowBadAuthPipelineExceptionWhenNeeded(IApiCallDetails details, IElasticsearchResponse response = null)
 		{
 			if (details?.HttpStatusCode == 401)
-				throw new PipelineException(PipelineFailure.BadAuthentication, details.OriginalException)
-				{
-					Response = response,
-					ApiCall = details
-				};
+				throw new PipelineException(PipelineFailure.BadAuthentication, details.OriginalException) { Response = response, ApiCall = details };
 		}
 
 		private void LazyAuditable(AuditEvent e, Node n)
@@ -591,10 +796,7 @@ namespace Elasticsearch.Net
 		}
 
 		private RequestData CreateSniffRequestData(Node node) =>
-			new RequestData(HttpMethod.GET, SniffPath, null, _settings, SniffParameters, _memoryStreamFactory)
-			{
-				Node = node
-			};
+			new(HttpMethod.GET, SniffPath, null, _settings, SniffParameters, _memoryStreamFactory) { Node = node };
 
 		protected virtual void Dispose() { }
 	}

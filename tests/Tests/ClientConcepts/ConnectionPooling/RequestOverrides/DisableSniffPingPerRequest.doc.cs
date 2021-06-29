@@ -36,7 +36,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 				.Settings(s => s.SniffOnStartup()) // <1> sniff on startup
 			);
 
-			/** Now We disable sniffing on the request so even though it's our first call,
+			/** Now we disable sniffing on the request so even though it's our first call,
 			 * we do not want to sniff on startup.
 			 *
 			 * Instead, the sniff on startup is deferred to the second call into the cluster that

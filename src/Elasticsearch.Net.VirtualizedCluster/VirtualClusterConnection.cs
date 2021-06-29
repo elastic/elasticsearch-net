@@ -6,16 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-#if DOTNETCORE
-using TheException = System.Net.Http.HttpRequestException;
-#else
-using TheException = System.Net.WebException;
-#endif
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.VirtualizedCluster.MockResponses;
 using Elasticsearch.Net.VirtualizedCluster.Providers;
 using Elasticsearch.Net.VirtualizedCluster.Rules;
+#if DOTNETCORE
+using TheException = System.Net.Http.HttpRequestException;
+#else
+using TheException = System.Net.WebException;
+#endif
 
 namespace Elasticsearch.Net.VirtualizedCluster
 {
@@ -31,7 +31,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 	/// </summary>
 	public class VirtualClusterConnection : InMemoryConnection
 	{
-		private static readonly object Lock = new object();
+		private static readonly object Lock = new();
 
 		private static byte[] _defaultResponseBytes;
 
@@ -101,6 +101,9 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			requestData.Method == HttpMethod.HEAD &&
 			(requestData.PathAndQuery == string.Empty || requestData.PathAndQuery.StartsWith("?"));
 
+		public bool IsProductCheckRequest(RequestData requestData) =>
+			requestData.Uri.AbsolutePath.Equals("/", StringComparison.Ordinal) && requestData.Method == HttpMethod.GET;
+
 		public override TResponse Request<TResponse>(RequestData requestData)
 		{
 			if (!_calls.ContainsKey(requestData.Uri.Port))
@@ -117,8 +120,8 @@ namespace Elasticsearch.Net.VirtualizedCluster
 						nameof(VirtualCluster.Sniff),
 						_cluster.SniffingRules,
 						requestData.RequestTimeout,
-						(r) => UpdateCluster(r.NewClusterState),
-						(r) => SniffResponseBytes.Create(_cluster.Nodes, _cluster.ElasticsearchVersion,_cluster.PublishAddressOverride, _cluster.SniffShouldReturnFqnd)
+						r => UpdateCluster(r.NewClusterState),
+						_ => SniffResponseBytes.Create(_cluster.Nodes, _cluster.ElasticsearchVersion,_cluster.PublishAddressOverride, _cluster.SniffShouldReturnFqnd)
 					);
 				}
 				if (IsPingRequest(requestData))
@@ -129,8 +132,20 @@ namespace Elasticsearch.Net.VirtualizedCluster
 						nameof(VirtualCluster.Ping),
 						_cluster.PingingRules,
 						requestData.PingTimeout,
-						(r) => { },
-						(r) => null //HEAD request
+						_ => { },
+						_ => null //HEAD request
+					);
+				}
+				if (IsProductCheckRequest(requestData))
+				{
+					_ = Interlocked.Increment(ref state.ProductChecked);
+					return HandleRules<TResponse, IRule>(
+						requestData,
+						nameof(VirtualCluster.ProductCheck),
+						_cluster.ProductCheckRules,
+						requestData.RequestTimeout,
+						_ => { },
+						_ => ValidProductCheckResponse().ResponseBytes
 					);
 				}
 				_ = Interlocked.Increment(ref state.Called);
@@ -139,7 +154,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 					nameof(VirtualCluster.ClientCalls),
 					_cluster.ClientCallRules,
 					requestData.RequestTimeout,
-					(r) => { },
+					_ => { },
 					CallResponse
 				);
 			}
@@ -247,14 +262,17 @@ namespace Elasticsearch.Net.VirtualizedCluster
 				throw new TheException();
 
 			return ret.Match(
-				(e) => throw e,
-				(statusCode) => ReturnConnectionStatus<TResponse>(requestData, CallResponse(rule),
+				e => throw e,
+				statusCode => ReturnConnectionStatus<TResponse>(requestData, CallResponse(rule),
 					//make sure we never return a valid status code in Fail responses because of a bad rule.
-					statusCode >= 200 && statusCode < 300 ? 502 : statusCode, rule.ReturnContentType)
+					statusCode is >= 200 and < 300 ? 502 : statusCode, rule.ReturnContentType)
 			);
 		}
 
-		private TResponse Success<TResponse, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse,
+		private TResponse Success<TResponse, TRule>(
+			RequestData requestData,
+			Action<TRule> beforeReturn,
+			Func<TRule, byte[]> successResponse,
 			TRule rule
 		)
 			where TResponse : class, IElasticsearchResponse, new()
@@ -277,11 +295,10 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			if (_defaultResponseBytes != null) return _defaultResponseBytes;
 
 			var response = DefaultResponse;
-			using (var ms = RecyclableMemoryStreamFactory.Default.Create())
-			{
-				LowLevelRequestResponseSerializer.Instance.Serialize(response, ms);
-				_defaultResponseBytes = ms.ToArray();
-			}
+
+			using var ms = RecyclableMemoryStreamFactory.Default.Create();
+			LowLevelRequestResponseSerializer.Instance.Serialize(response, ms);
+			_defaultResponseBytes = ms.ToArray();
 			return _defaultResponseBytes;
 		}
 
@@ -295,6 +312,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			public int Pinged;
 			public int Sniffed;
 			public int Successes;
+			public int ProductChecked;
 		}
 	}
 }

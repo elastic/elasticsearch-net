@@ -76,6 +76,9 @@ namespace Elasticsearch.Net
 		public bool SniffedOnStartup { get; set; }
 
 		/// <inheritdoc />
+		public ProductCheckStatus ProductCheckStatus { get; set; }
+
+		/// <inheritdoc />
 		public virtual bool SupportsPinging => true;
 
 		/// <inheritdoc />

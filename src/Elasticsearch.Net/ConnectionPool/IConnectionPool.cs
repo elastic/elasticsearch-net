@@ -10,21 +10,21 @@ namespace Elasticsearch.Net
 	public interface IConnectionPool : IDisposable
 	{
 		/// <summary>
-		/// The last time that this instance was updated
+		/// The last time that this instance was updated.
 		/// </summary>
 		DateTime LastUpdate { get; }
 
 		/// <summary>
 		/// Returns the default maximum retries for the connection pool implementation.
-		/// Most implementation default to number of nodes, note that this can be overidden
-		/// in the connection settings
+		/// Most implementation default to number of nodes, note that this can be overridden
+		/// in the connection settings.
 		/// </summary>
 		int MaxRetries { get; }
 
 		/// <summary>
 		/// Returns a read only view of all the nodes in the cluster, which might involve creating copies of nodes e.g
 		/// if you are using <see cref="SniffingConnectionPool" />.
-		/// If you do not need an isolated copy of the nodes, please read <see cref="CreateView" /> to completion
+		/// If you do not need an isolated copy of the nodes, please read <see cref="CreateView" /> to completion.
 		/// </summary>
 		IReadOnlyCollection<Node> Nodes { get; }
 
@@ -33,6 +33,12 @@ namespace Elasticsearch.Net
 		/// responsible for setting this in a thread safe fashion.
 		/// </summary>
 		bool SniffedOnStartup { get; set; }
+
+		/// <summary>
+		/// Whether a product check is seen on startup. The implementation is
+		/// responsible for setting this in a thread safe fashion.
+		/// </summary>
+		ProductCheckStatus ProductCheckStatus { get; set; }
 
 		/// <summary>
 		/// Whether pinging is supported

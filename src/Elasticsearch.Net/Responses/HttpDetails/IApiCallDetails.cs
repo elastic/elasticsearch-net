@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
+using System.Text;
 using Elasticsearch.Net.Diagnostics;
 
 namespace Elasticsearch.Net
@@ -49,6 +50,11 @@ namespace Elasticsearch.Net
 		/// <para>Used to signal that the request uses an API feature that is marked as deprecated</para>
 		/// </summary>
 		IEnumerable<string> DeprecationWarnings { get; }
+
+		/// <summary>
+		/// The product name, if present in the 'X-elastic-product' response header.
+		/// </summary>
+		string ProductName { get; }
 
 		/// <summary>
 		/// The HTTP method used by the request
@@ -98,5 +104,10 @@ namespace Elasticsearch.Net
 		/// The url as requested
 		/// </summary>
 		Uri Uri { get; }
+
+		/// <summary>
+		/// A delegate which may render a prefix to the debug information.
+		/// </summary>
+		Action<StringBuilder> BuildDebugInformationPrefix { get; }
 	}
 }

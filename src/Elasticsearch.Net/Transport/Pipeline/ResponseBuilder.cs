@@ -27,12 +27,14 @@ namespace Elasticsearch.Net
 			int? statusCode,
 			IEnumerable<string> warnings,
 			Stream responseStream,
-			string mimeType = null
+			string mimeType = null,
+			string productName = null
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
-			var details = Initialize(requestData, ex, statusCode, warnings, mimeType);
+
+			var details = Initialize(requestData, ex, statusCode, warnings, mimeType, productName);
 
 			//TODO take ex and (responseStream == Stream.Null) into account might not need to flow to SetBody in that case
 
@@ -55,12 +57,16 @@ namespace Elasticsearch.Net
 			IEnumerable<string> warnings,
 			Stream responseStream,
 			string mimeType = null,
+			string productName = null,
 			CancellationToken cancellationToken = default
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
-			var details = Initialize(requestData, ex, statusCode, warnings, mimeType);
+
+			//TODO take ex and (responseStream == Stream.Null) into account might not need to flow to SetBody in that case
+
+			var details = Initialize(requestData, ex, statusCode, warnings, mimeType, productName);
 
 			TResponse response = null;
 
@@ -81,8 +87,12 @@ namespace Elasticsearch.Net
 			!statusCode.HasValue || (statusCode.Value != 204 && httpMethod != HttpMethod.HEAD);
 
 		private static ApiCallDetails Initialize(
-			RequestData requestData, Exception exception, int? statusCode, IEnumerable<string> warnings, string mimeType
-		)
+			RequestData requestData,
+			Exception exception,
+			int? statusCode,
+			IEnumerable<string> warnings,
+			string mimeType,
+			string productName)
 		{
 			var success = false;
 			var allowedStatusCodes = requestData.AllowedStatusCodes;
@@ -110,7 +120,8 @@ namespace Elasticsearch.Net
 				HttpMethod = requestData.Method,
 				DeprecationWarnings = warnings ?? Enumerable.Empty<string>(),
 				ResponseMimeType = mimeType,
-				ConnectionConfiguration = requestData.ConnectionSettings
+				ConnectionConfiguration = requestData.ConnectionSettings,
+				ProductName = productName
 			};
 			return details;
 		}
@@ -199,7 +210,11 @@ namespace Elasticsearch.Net
 				//if not json store the result under "body"
 				if (!RequestData.IsJsonMimeType(mimeType))
 				{
-					var dictionary = new DynamicDictionary { ["body"] = new(bytes.Utf8String()) };
+					var dictionary = new DynamicDictionary
+					{
+						["body"] = new(bytes.Utf8String())
+					};
+
 					cs = new DynamicResponse(dictionary) as TResponse;
 				}
 				else

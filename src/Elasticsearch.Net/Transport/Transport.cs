@@ -58,15 +58,25 @@ namespace Elasticsearch.Net
 		public TResponse Request<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters))
+			using var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters);
+
+			pipeline.FirstPoolUsage(Settings.BootstrapLock);
+
+			var requestData = new RequestData(method, path, data, Settings, requestParameters, MemoryStreamFactory);
+			Settings.OnRequestDataCreated?.Invoke(requestData);
+			TResponse response = null;
+
+			var seenExceptions = new List<PipelineException>();
+			
+			if (pipeline.IsTakingTooLong)
 			{
-				pipeline.FirstPoolUsage(Settings.BootstrapLock);
-
-				var requestData = new RequestData(method, path, data, Settings, requestParameters, MemoryStreamFactory);
-				Settings.OnRequestDataCreated?.Invoke(requestData);
-				TResponse response = null;
-
-				var seenExceptions = new List<PipelineException>();
+				// If the first pool usage has timed out, report this.
+				seenExceptions.Add(new PipelineException(PipelineFailure.MaxTimeoutReached, new TimeoutException(
+					"The configured timeout expired before the Elasticsearch call could be made."
+					+ " The most likely cause is that some nodes took a long time to respond when checking the product version and/or sniffing.")));
+			}
+			else
+			{
 				foreach (var node in pipeline.NextNode())
 				{
 					requestData.Node = node;
@@ -99,13 +109,15 @@ namespace Elasticsearch.Net
 							AuditTrail = pipeline.AuditTrail
 						};
 					}
-					if (response == null || !response.ApiCall.SuccessOrKnownError) continue;
+					if (response == null || !response.ApiCall.SuccessOrKnownError)
+						continue;
 
 					pipeline.MarkAlive(node);
 					break;
 				}
-				return FinalizeResponse(requestData, pipeline, seenExceptions, response);
 			}
+
+			return FinalizeResponse(requestData, pipeline, seenExceptions, response);
 		}
 
 		public async Task<TResponse> RequestAsync<TResponse>(HttpMethod method, string path, CancellationToken cancellationToken,
@@ -113,62 +125,61 @@ namespace Elasticsearch.Net
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters))
+			using var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters);
+
+			await pipeline.FirstPoolUsageAsync(Settings.BootstrapLock, cancellationToken).ConfigureAwait(false);
+
+			var requestData = new RequestData(method, path, data, Settings, requestParameters, MemoryStreamFactory);
+			Settings.OnRequestDataCreated?.Invoke(requestData);
+			TResponse response = null;
+
+			var seenExceptions = new List<PipelineException>();
+			foreach (var node in pipeline.NextNode())
 			{
-				await pipeline.FirstPoolUsageAsync(Settings.BootstrapLock, cancellationToken).ConfigureAwait(false);
-
-				var requestData = new RequestData(method, path, data, Settings, requestParameters, MemoryStreamFactory);
-				Settings.OnRequestDataCreated?.Invoke(requestData);
-				TResponse response = null;
-
-				var seenExceptions = new List<PipelineException>();
-				foreach (var node in pipeline.NextNode())
+				requestData.Node = node;
+				try
 				{
-					requestData.Node = node;
-					try
+					await pipeline.SniffOnStaleClusterAsync(cancellationToken).ConfigureAwait(false);
+					await PingAsync(pipeline, node, cancellationToken).ConfigureAwait(false);
+					response = await pipeline.CallElasticsearchAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
+					if (!response.ApiCall.SuccessOrKnownError)
 					{
-						await pipeline.SniffOnStaleClusterAsync(cancellationToken).ConfigureAwait(false);
-						await PingAsync(pipeline, node, cancellationToken).ConfigureAwait(false);
-						response = await pipeline.CallElasticsearchAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
-						if (!response.ApiCall.SuccessOrKnownError)
-						{
-							pipeline.MarkDead(node);
-							await pipeline.SniffOnConnectionFailureAsync(cancellationToken).ConfigureAwait(false);
-						}
+						pipeline.MarkDead(node);
+						await pipeline.SniffOnConnectionFailureAsync(cancellationToken).ConfigureAwait(false);
 					}
-					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
-					{
-						HandlePipelineException(ref response, pipelineException, pipeline, node, seenExceptions);
-						break;
-					}
-					catch (PipelineException pipelineException)
-					{
-						HandlePipelineException(ref response, pipelineException, pipeline, node, seenExceptions);
-					}
-					catch (Exception killerException)
-					{
-						if (killerException is OperationCanceledException && cancellationToken.IsCancellationRequested)
-							pipeline.AuditCancellationRequested();
-
-						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
-						{
-							Request = requestData,
-							Response = response?.ApiCall,
-							AuditTrail = pipeline.AuditTrail
-						};
-					}
-					if (cancellationToken.IsCancellationRequested)
-					{
-						pipeline.AuditCancellationRequested();
-						break;
-					}
-					if (response == null || !response.ApiCall.SuccessOrKnownError) continue;
-
-					pipeline.MarkAlive(node);
+				}
+				catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
+				{
+					HandlePipelineException(ref response, pipelineException, pipeline, node, seenExceptions);
 					break;
 				}
-				return FinalizeResponse(requestData, pipeline, seenExceptions, response);
+				catch (PipelineException pipelineException)
+				{
+					HandlePipelineException(ref response, pipelineException, pipeline, node, seenExceptions);
+				}
+				catch (Exception killerException)
+				{
+					if (killerException is OperationCanceledException && cancellationToken.IsCancellationRequested)
+						pipeline.AuditCancellationRequested();
+
+					throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
+					{
+						Request = requestData,
+						Response = response?.ApiCall,
+						AuditTrail = pipeline.AuditTrail
+					};
+				}
+				if (cancellationToken.IsCancellationRequested)
+				{
+					pipeline.AuditCancellationRequested();
+					break;
+				}
+				if (response == null || !response.ApiCall.SuccessOrKnownError) continue;
+
+				pipeline.MarkAlive(node);
+				break;
 			}
+			return FinalizeResponse(requestData, pipeline, seenExceptions, response);
 		}
 
 		private static void HandlePipelineException<TResponse>(

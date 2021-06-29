@@ -51,7 +51,7 @@ var client = FixedResponseClient.Create( <1>
     500,
     connectionSettings => connectionSettings
         .ThrowExceptions() <2>
-        .OnRequestCompleted(r => counter++)
+        .OnRequestCompleted(r => counter++), productCheckSucceeds: false
 );
 
 Assert.Throws<ElasticsearchClientException>(() => client.RootNodeInfo()); <3>

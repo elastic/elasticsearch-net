@@ -15,15 +15,23 @@ namespace Elasticsearch.Net.VirtualizedCluster
 	{
 		private readonly List<Node> _nodes;
 
-		public VirtualCluster(IEnumerable<Node> nodes) => _nodes = nodes.ToList();
+		public VirtualCluster(IEnumerable<Node> nodes, bool productCheckSucceeds = true)
+		{
+			_nodes = nodes.ToList();
 
-		public List<IClientCallRule> ClientCallRules { get; } = new List<IClientCallRule>();
-		public TestableDateTimeProvider DateTimeProvider { get; } = new TestableDateTimeProvider();
+			if (productCheckSucceeds)
+				ProductCheckRules.Add(new ProductCheckRule().SucceedAlways());
+		}
+
+		public List<IClientCallRule> ClientCallRules { get; } = new();
+		public TestableDateTimeProvider DateTimeProvider { get; } = new();
 
 		public IReadOnlyList<Node> Nodes => _nodes;
-		public List<IRule> PingingRules { get; } = new List<IRule>();
 
-		public List<ISniffRule> SniffingRules { get; } = new List<ISniffRule>();
+		public List<IRule> PingingRules { get; } = new();
+		public List<ISniffRule> SniffingRules { get; } = new();
+		public List<IRule> ProductCheckRules { get; } = new();
+
 		internal string PublishAddressOverride { get; private set; }
 
 		internal bool SniffShouldReturnFqnd { get; private set; }
@@ -83,6 +91,12 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		public VirtualCluster Sniff(Func<SniffRule, ISniffRule> selector)
 		{
 			SniffingRules.Add(selector(new SniffRule()));
+			return this;
+		}
+		
+		public VirtualCluster ProductCheck(Func<ProductCheckRule, IRule> selector)
+		{
+			ProductCheckRules.Add(selector(new ProductCheckRule()));
 			return this;
 		}
 

@@ -17,14 +17,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		/**[[request-timeout]]
 		* === Request timeouts
 		*
-		* While you can specify Request time out globally you can override this per request too
+		* While you can specify Request time out globally, you can override this per request too.
 		*/
 
 		[U]
 		public async Task RespectsRequestTimeoutOverride()
 		{
-
-			/** we set up a 10 node cluster with a global time out of 20 seconds.
+			/** We set up a 10 node cluster with a global time out of 20 seconds.
 			* Each call on a node takes 10 seconds. So we can only try this call on 2 nodes
 			* before the max request time out kills the client call.
 			*/
@@ -43,7 +42,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 					{ MaxTimeoutReached }
 				},
 				/**
-				* On the second request we specify a request timeout override to 80 seconds
+				* On the second request we specify a request timeout override to 80 seconds.
 				* We should now see more nodes being tried.
 				*/
 				new ClientCall(r => r.RequestTimeout(TimeSpan.FromSeconds(80)))

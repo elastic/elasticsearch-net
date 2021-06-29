@@ -16,7 +16,7 @@ please modify the original csharp file found at the link and submit the PR with 
 === Fail over
 
 When using a connection pool with more than one node, a request will be retried if
-the call to a node throws an exception or returns a 502, 503 or 504 response
+the call to a node throws an exception or returns a 502, 503 or 504 response.
 
 [source,csharp]
 ----
@@ -39,7 +39,7 @@ audit = await audit.TraceCall(
 [[bad-gateway]]
 ==== 502 Bad Gateway
 
-Will be treated as an error that requires retrying
+Will be treated as an error that requires retrying.
 
 [source,csharp]
 ----
@@ -62,7 +62,7 @@ audit = await audit.TraceCall(
 [[service-unavailable]]
 ==== 503 Service Unavailable
 
-Will be treated as an error that requires retrying
+Will be treated as an error that requires retrying.
 
 [source,csharp]
 ----
@@ -85,7 +85,7 @@ audit = await audit.TraceCall(
 [[gateway-timeout]]
 ==== 504 Gateway Timeout
 
-Will be treated as an error that requires retrying
+Will be treated as an error that requires retrying.
 
 [source,csharp]
 ----
@@ -108,7 +108,7 @@ audit = await audit.TraceCall(
 If a call returns a __valid__ HTTP status code other than 502 or 503, the request won't be retried.
 
 IMPORTANT: Different requests may have different status codes that are deemed __valid__. For example,
-a *404 Not Found* response is a __valid__ status code for an index exists request
+a *404 Not Found* response is a __valid__ status code for an index exists request.
 
 [source,csharp]
 ----

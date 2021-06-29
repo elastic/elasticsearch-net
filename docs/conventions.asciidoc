@@ -35,6 +35,8 @@ Conventions that apply to both Elasticsearch.Net and NEST
 
 * <<transports-and-pipelines, Transports and pipelines>>
 
+* <<product-check-at-startup, Pre-flight product check at startup>>
+
 * <<sniffing-behaviour, Sniffing behaviour>>
 
 * <<pinging-behaviour, Pinging behaviour>>
@@ -96,6 +98,8 @@ include::{building-blocks}/request-pipelines.asciidoc[]
 include::{building-blocks}/date-time-providers.asciidoc[]
 
 include::{building-blocks}/keeping-track-of-nodes.asciidoc[]
+
+include::client-concepts/connection-pooling/product-checking/product-check-at-startup.asciidoc[]
 
 [[sniffing-behaviour]]
 == Sniffing behaviour
