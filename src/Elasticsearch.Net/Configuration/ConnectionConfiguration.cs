@@ -129,6 +129,8 @@ namespace Elasticsearch.Net
 	public abstract class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
 		where T : ConnectionConfiguration<T>
 	{
+		public static IMemoryStreamFactory DefaultMemoryStreamFactory { get; } = Elasticsearch.Net.MemoryStreamFactory.Default;
+
 		private readonly IConnection _connection;
 		private readonly IConnectionPool _connectionPool;
 		private readonly NameValueCollection _headers = new NameValueCollection();
@@ -141,9 +143,7 @@ namespace Elasticsearch.Net
 		private Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
 		private int _connectionLimit;
 		private TimeSpan? _deadTimeout;
-
 		private bool _disableAutomaticProxyDetection = false;
-
 		private bool _disableDirectStreaming = false;
 		private bool _disableMetaHeader;
 		private bool _disablePings;
@@ -154,12 +154,12 @@ namespace Elasticsearch.Net
 		private TimeSpan? _maxDeadTimeout;
 		private int? _maxRetries;
 		private TimeSpan? _maxRetryTimeout;
+		private IMemoryStreamFactory _memoryStreamFactory = DefaultMemoryStreamFactory;
 		private Func<Node, bool> _nodePredicate = DefaultNodePredicate;
 		private Action<RequestData> _onRequestDataCreated = DefaultRequestDataCreated;
 		private TimeSpan? _pingTimeout;
 		private bool _prettyJson;
 		private string _proxyAddress;
-
 		private string _proxyPassword;
 		private string _proxyUsername;
 		private TimeSpan _requestTimeout;
@@ -217,8 +217,7 @@ namespace Elasticsearch.Net
 		TimeSpan? IConnectionConfigurationValues.MaxDeadTimeout => _maxDeadTimeout;
 		int? IConnectionConfigurationValues.MaxRetries => _maxRetries;
 		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout => _maxRetryTimeout;
-		IMemoryStreamFactory IConnectionConfigurationValues.MemoryStreamFactory { get; } = new RecyclableMemoryStreamFactory();
-
+		IMemoryStreamFactory IConnectionConfigurationValues.MemoryStreamFactory => _memoryStreamFactory;
 		Func<Node, bool> IConnectionConfigurationValues.NodePredicate => _nodePredicate;
 		Action<IApiCallDetails> IConnectionConfigurationValues.OnRequestCompleted => _completedRequestHandler;
 		Action<RequestData> IConnectionConfigurationValues.OnRequestDataCreated => _onRequestDataCreated;
@@ -584,6 +583,11 @@ namespace Elasticsearch.Net
 		/// versions that initiate requests to Elasticsearch
 		/// </summary>
 		public T UserAgent(string userAgent) => Assign(userAgent, (a, v) => a._userAgent = v);
+
+		/// <summary>
+		/// The memory stream factory to use, defaults to <see cref="MemoryStreamFactory.Default"/>.
+		/// </summary>
+		public T MemoryStreamFactory(IMemoryStreamFactory memoryStreamFactory) => Assign(memoryStreamFactory, (a, v) => a._memoryStreamFactory = v);
 
 		protected virtual void DisposeManagedResources()
 		{
