@@ -1580,4 +1580,118 @@ namespace Tests.XPack.Watcher.PutWatch
 			response.Id.Should().Be(CallIsolatedValue);
 		}
 	}
+
+	public class PutWatchApiWithCronExpression : ApiIntegrationTestBase<WatcherCluster, PutWatchResponse, IPutWatchRequest, PutWatchDescriptor, PutWatchRequest>
+	{
+		public PutWatchApiWithCronExpression(WatcherCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson =>
+			new
+			{
+				trigger = new
+				{
+					schedule = new
+					{
+						cron = "0 0 12 * * ?"
+					}
+				}
+			};
+
+		protected override int ExpectStatusCode => 201;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+		protected override Func<PutWatchDescriptor, IPutWatchRequest> Fluent => p => p
+			.Trigger(t => t
+				.Schedule(s => s
+					.Cron("0 0 12 * * ?")));
+
+		protected override PutWatchRequest Initializer => new(CallIsolatedValue)
+			{
+				Trigger = new ScheduleContainer
+				{
+					Cron = "0 0 12 * * ?"
+				}
+			};
+
+		protected override bool SupportsDeserialization => true;
+
+		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Watcher.Put(CallIsolatedValue, f),
+			(client, f) => client.Watcher.PutAsync(CallIsolatedValue, f),
+			(client, r) => client.Watcher.Put(r),
+			(client, r) => client.Watcher.PutAsync(r)
+		);
+
+		protected override PutWatchDescriptor NewDescriptor() => new PutWatchDescriptor(CallIsolatedValue);
+
+		protected override void ExpectResponse(PutWatchResponse response)
+		{
+			response.Created.Should().BeTrue();
+			response.Version.Should().Be(1);
+			response.Id.Should().Be(CallIsolatedValue);
+		}
+	}
+
+	public class PutWatchApiWithCronExpressions : ApiIntegrationTestBase<WatcherCluster, PutWatchResponse, IPutWatchRequest, PutWatchDescriptor, PutWatchRequest>
+	{
+		public PutWatchApiWithCronExpressions(WatcherCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson =>
+			new
+			{
+				trigger = new
+				{
+					schedule = new
+					{
+						cron = new object[]
+						{
+							"0 0 12 * * ?",
+							"0 0/2 * ? * MON-FRI"
+						}
+					}
+				}
+			};
+
+		protected override int ExpectStatusCode => 201;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+		protected override Func<PutWatchDescriptor, IPutWatchRequest> Fluent => p => p
+			.Trigger(t => t
+				.Schedule(s => s
+					.Cron(new CronExpression[] { "0 0 12 * * ?", "0 0/2 * ? * MON-FRI" })));
+
+		protected override PutWatchRequest Initializer => new(CallIsolatedValue)
+		{
+			Trigger = new ScheduleContainer
+			{
+				CronExpressions = new CronExpressions { "0 0 12 * * ?", "0 0/2 * ? * MON-FRI" }
+			}
+		};
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Watcher.Put(CallIsolatedValue, f),
+			(client, f) => client.Watcher.PutAsync(CallIsolatedValue, f),
+			(client, r) => client.Watcher.Put(r),
+			(client, r) => client.Watcher.PutAsync(r)
+		);
+
+		protected override PutWatchDescriptor NewDescriptor() => new PutWatchDescriptor(CallIsolatedValue);
+
+		protected override void ExpectResponse(PutWatchResponse response)
+		{
+			response.Created.Should().BeTrue();
+			response.Version.Should().Be(1);
+			response.Id.Should().Be(CallIsolatedValue);
+		}
+	}
 }
