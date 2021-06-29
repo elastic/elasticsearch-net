@@ -97,6 +97,17 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 		[MapsApi("ilm.get_status", "")]
 		public Task<TResponse> GetStatusAsync<TResponse>(GetIlmStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_ilm/status", ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /_ilm/migrate_to_data_tiers <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html</para></summary>
+		///<param name = "body">Optionally specify a legacy index template name to delete and optionally specify a node attribute name used for index shard routing (defaults to &quot;data&quot;)</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse MigrateToDataTiers<TResponse>(PostData body, MigrateToDataTiersRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_ilm/migrate_to_data_tiers", body, RequestParams(requestParameters));
+		///<summary>POST on /_ilm/migrate_to_data_tiers <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html</para></summary>
+		///<param name = "body">Optionally specify a legacy index template name to delete and optionally specify a node attribute name used for index shard routing (defaults to &quot;data&quot;)</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ilm.migrate_to_data_tiers", "body")]
+		public Task<TResponse> MigrateToDataTiersAsync<TResponse>(PostData body, MigrateToDataTiersRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_ilm/migrate_to_data_tiers", ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_ilm/move/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</para></summary>
 		///<param name = "index">The name of the index whose lifecycle step is to change</param>
 		///<param name = "body">The new lifecycle step to move to</param>

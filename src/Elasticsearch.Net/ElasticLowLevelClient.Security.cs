@@ -569,6 +569,17 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		[MapsApi("security.put_user", "username, body")]
 		public Task<TResponse> PutUserAsync<TResponse>(string username, PostData body, PutUserRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_security/user/{username:username}"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_security/saml/authenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html</para></summary>
+		///<param name = "body">The SAML response to authenticate</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse SamlAuthenticate<TResponse>(PostData body, SamlAuthenticateRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_security/saml/authenticate", body, RequestParams(requestParameters));
+		///<summary>POST on /_security/saml/authenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html</para></summary>
+		///<param name = "body">The SAML response to authenticate</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("security.saml_authenticate", "body")]
+		public Task<TResponse> SamlAuthenticateAsync<TResponse>(PostData body, SamlAuthenticateRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_security/saml/authenticate", ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_security/saml/complete_logout <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html</para></summary>
 		///<param name = "body">The logout response to verify</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -580,6 +591,50 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		[MapsApi("security.saml_complete_logout", "body")]
 		public Task<TResponse> SamlCompleteLogoutAsync<TResponse>(PostData body, SamlCompleteLogoutRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_security/saml/complete_logout", ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_security/saml/invalidate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html</para></summary>
+		///<param name = "body">The LogoutRequest message</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse SamlInvalidate<TResponse>(PostData body, SamlInvalidateRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_security/saml/invalidate", body, RequestParams(requestParameters));
+		///<summary>POST on /_security/saml/invalidate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html</para></summary>
+		///<param name = "body">The LogoutRequest message</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("security.saml_invalidate", "body")]
+		public Task<TResponse> SamlInvalidateAsync<TResponse>(PostData body, SamlInvalidateRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_security/saml/invalidate", ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_security/saml/logout <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html</para></summary>
+		///<param name = "body">The tokens to invalidate</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse SamlLogout<TResponse>(PostData body, SamlLogoutRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_security/saml/logout", body, RequestParams(requestParameters));
+		///<summary>POST on /_security/saml/logout <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html</para></summary>
+		///<param name = "body">The tokens to invalidate</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("security.saml_logout", "body")]
+		public Task<TResponse> SamlLogoutAsync<TResponse>(PostData body, SamlLogoutRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_security/saml/logout", ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_security/saml/prepare <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html</para></summary>
+		///<param name = "body">The realm for which to create the authentication request, identified by either its name or the ACS URL</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse SamlPrepareAuthentication<TResponse>(PostData body, SamlPrepareAuthenticationRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_security/saml/prepare", body, RequestParams(requestParameters));
+		///<summary>POST on /_security/saml/prepare <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html</para></summary>
+		///<param name = "body">The realm for which to create the authentication request, identified by either its name or the ACS URL</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("security.saml_prepare_authentication", "body")]
+		public Task<TResponse> SamlPrepareAuthenticationAsync<TResponse>(PostData body, SamlPrepareAuthenticationRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_security/saml/prepare", ctx, body, RequestParams(requestParameters));
+		///<summary>GET on /_security/saml/metadata/{realm_name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html</para></summary>
+		///<param name = "realmName">The name of the SAML realm to get the metadata for</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse SamlServiceProviderMetadata<TResponse>(string realmName, SamlServiceProviderMetadataRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_security/saml/metadata/{realmName:realmName}"), null, RequestParams(requestParameters));
+		///<summary>GET on /_security/saml/metadata/{realm_name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html</para></summary>
+		///<param name = "realmName">The name of the SAML realm to get the metadata for</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("security.saml_service_provider_metadata", "realm_name")]
+		public Task<TResponse> SamlServiceProviderMetadataAsync<TResponse>(string realmName, SamlServiceProviderMetadataRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_security/saml/metadata/{realmName:realmName}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_ssl/certificates <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-ssl.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetCertificates<TResponse>(GetCertificatesRequestParameters requestParameters = null)
