@@ -16,5 +16,6 @@
 === New Features
 
 - * Change default IMemoryStreamFactory https://github.com/elastic/elasticsearch-net/pull/5740[#5740] 
+- * Add readonly property to FS repository settings https://github.com/elastic/elasticsearch-net/pull/5755[#5755]  (issue: https://github.com/elastic/elasticsearch-net/issues/5753[#5753])
 
 
