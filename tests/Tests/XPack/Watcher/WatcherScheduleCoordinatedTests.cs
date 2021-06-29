@@ -44,10 +44,10 @@ namespace Tests.XPack.Watcher
 						{
 							Trigger = new ScheduleContainer
 							{
-								Daily = new DailySchedule(new TimeOfDay { Hour = new[] { 12 }, Minute = new[] { 30 } })
+								Daily = new DailySchedule(new TimeOfDay { Hour = new[] { 0, 6, 12, 18 }, Minute = new[] { 30 } })
 							}
 						},
-						(v, d) => d.Trigger(t => t.Schedule(s => s.Daily(ds => ds.At(tod => tod.Hour(12).Minute(30))))),
+						(v, d) => d.Trigger(t => t.Schedule(s => s.Daily(ds => ds.At(tod => tod.Hour(0, 6, 12, 18).Minute(30))))),
 						(v, c, f) => c.Watcher.Put($"daily-{v}", f),
 						(v, c, f) => c.Watcher.PutAsync($"daily-{v}", f),
 						(v, c, r) => c.Watcher.Put(r),
@@ -300,8 +300,8 @@ namespace Tests.XPack.Watcher
 				.BeAssignableTo<ITriggerContainer>()
 				.Subject.Schedule.Daily.At.Match(s => s.Should().BeNull(), tod => timeOfDay = tod);
 
-			timeOfDay.Single().Hour.Single().Should().Be(12);
-			timeOfDay.Single().Minute.Single().Should().Be(30);
+			timeOfDay.Single().Hour.Should().ContainInOrder(0, 6, 12, 18);
+			timeOfDay.Single().Minute.Should().ContainInOrder(30);
 		});
 
 		[I] public async Task GetWeeklyScheduleWatcherResponse() => await Assert<GetWatchResponse>(GetWeeklyScheduleWatcher, (v, r) =>
