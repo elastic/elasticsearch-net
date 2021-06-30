@@ -184,4 +184,8 @@ let SkipList = dict<SkipFile,SkipSection> [
     // Assertion expects two tokens but creates only one
     // Needs further investigation
     SkipFile "service_accounts/10_basic.yml", All
+
+    // TODO investigate
+    // May need to trim the incoming regex string
+    SkipFile "analytics/histogram.yml", Section "Histogram requires values in increasing order"
 ]
