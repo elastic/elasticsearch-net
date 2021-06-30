@@ -161,6 +161,7 @@ $environment = @(
   "--env", "path.repo=/tmp",
   "--env", "repositories.url.allowed_urls=http://snapshot.test*",
   "--env", "action.destructive_requires_name=false"
+  "--env", "ingest.geoip.downloader.enabled=false"
 )
 
 $volumes = @(
