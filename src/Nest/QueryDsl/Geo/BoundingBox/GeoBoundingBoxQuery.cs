@@ -12,15 +12,12 @@ namespace Nest
 	{
 		IBoundingBox BoundingBox { get; set; }
 
-		GeoExecution? Type { get; set; }
-
 		GeoValidationMethod? ValidationMethod { get; set; }
 	}
 
 	public class GeoBoundingBoxQuery : FieldNameQueryBase, IGeoBoundingBoxQuery
 	{
 		public IBoundingBox BoundingBox { get; set; }
-		public GeoExecution? Type { get; set; }
 
 		public GeoValidationMethod? ValidationMethod { get; set; }
 		protected override bool Conditionless => IsConditionless(this);
@@ -37,7 +34,6 @@ namespace Nest
 	{
 		protected override bool Conditionless => GeoBoundingBoxQuery.IsConditionless(this);
 		IBoundingBox IGeoBoundingBoxQuery.BoundingBox { get; set; }
-		GeoExecution? IGeoBoundingBoxQuery.Type { get; set; }
 		GeoValidationMethod? IGeoBoundingBoxQuery.ValidationMethod { get; set; }
 
 		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(double topLeftLat, double topLeftLon, double bottomRightLat, double bottomRightLon) =>
@@ -52,8 +48,6 @@ namespace Nest
 		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(Func<BoundingBoxDescriptor, IBoundingBox> boundingBoxSelector) =>
 			Assign(boundingBoxSelector, (a, v) => a.BoundingBox = v?.Invoke(new BoundingBoxDescriptor()));
 
-		public GeoBoundingBoxQueryDescriptor<T> Type(GeoExecution? type) => Assign(type, (a, v) => a.Type = v);
-
 		public GeoBoundingBoxQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(validation, (a, v) => a.ValidationMethod = v);
 	}
 
@@ -63,8 +57,7 @@ namespace Nest
 		{
 			{ "_name", 0 },
 			{ "boost", 1 },
-			{ "validation_method", 2 },
-			{ "type", 3 }
+			{ "validation_method", 2 }
 		};
 
 		public IGeoBoundingBoxQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -89,10 +82,6 @@ namespace Nest
 							break;
 						case 2:
 							query.ValidationMethod = formatterResolver.GetFormatter<GeoValidationMethod>()
-								.Deserialize(ref reader, formatterResolver);
-							break;
-						case 3:
-							query.Type = formatterResolver.GetFormatter<GeoExecution>()
 								.Deserialize(ref reader, formatterResolver);
 							break;
 					}
@@ -145,17 +134,6 @@ namespace Nest
 				writer.WritePropertyName("validation_method");
 				formatterResolver.GetFormatter<GeoValidationMethod>()
 					.Serialize(ref writer, value.ValidationMethod.Value, formatterResolver);
-				written = true;
-			}
-
-			if (value.Type != null)
-			{
-				if (written)
-					writer.WriteValueSeparator();
-
-				writer.WritePropertyName("type");
-				formatterResolver.GetFormatter<GeoExecution>()
-					.Serialize(ref writer, value.Type.Value, formatterResolver);
 				written = true;
 			}
 
