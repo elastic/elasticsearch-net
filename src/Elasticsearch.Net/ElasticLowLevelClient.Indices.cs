@@ -230,6 +230,19 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.delete_template", "name")]
 		public Task<TResponse> DeleteTemplateForAllAsync<TResponse>(string name, DeleteIndexTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_template/{name:name}"), ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /{index}/_disk_usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-disk-usage.html</para></summary>
+		///<param name = "index">Comma-separated list of indices or data streams to analyze the disk usage</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse DiskUsage<TResponse>(string index, DiskUsageRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_disk_usage"), null, RequestParams(requestParameters));
+		///<summary>POST on /{index}/_disk_usage <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-disk-usage.html</para></summary>
+		///<param name = "index">Comma-separated list of indices or data streams to analyze the disk usage</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("indices.disk_usage", "index")]
+		public Task<TResponse> DiskUsageAsync<TResponse>(string index, DiskUsageRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_disk_usage"), ctx, null, RequestParams(requestParameters));
 		///<summary>HEAD on /{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
