@@ -30,7 +30,6 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 				TopLeft = new GeoLocation(34, -34),
 				BottomRight = new GeoLocation(-34, 34),
 			},
-			Type = GeoExecution.Indexed,
 			ValidationMethod = GeoValidationMethod.Strict
 		};
 
@@ -38,7 +37,6 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 		{
 			geo_bounding_box = new
 			{
-				type = "indexed",
 				validation_method = "strict",
 				_name = "named_query",
 				boost = 1.1,
@@ -68,7 +66,6 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 					.BottomRight(-34, 34)
 				)
 				.ValidationMethod(GeoValidationMethod.Strict)
-				.Type(GeoExecution.Indexed)
 			);
 	}
 
@@ -92,7 +89,6 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 			{
 				WellKnownText = "BBOX (-34, 34, 34, -34)"
 			},
-			Type = GeoExecution.Indexed,
 			ValidationMethod = GeoValidationMethod.Strict
 		};
 
@@ -100,7 +96,6 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 		{
 			geo_bounding_box = new
 			{
-				type = "indexed",
 				validation_method = "strict",
 				_name = "named_query",
 				boost = 1.1,
@@ -120,7 +115,6 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 					.WellKnownText("BBOX (-34, 34, 34, -34)")
 				)
 				.ValidationMethod(GeoValidationMethod.Strict)
-				.Type(GeoExecution.Indexed)
 			);
 	}
 }
