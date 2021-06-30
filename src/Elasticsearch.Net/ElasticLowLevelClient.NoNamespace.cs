@@ -870,24 +870,24 @@ namespace Elasticsearch.Net
 		[MapsApi("reindex_rethrottle", "task_id")]
 		public Task<TResponse> ReindexRethrottleAsync<TResponse>(string taskId, ReindexRethrottleRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_reindex/{taskId:taskId}/_rethrottle"), ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /_render/template <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates</para></summary>
+		///<summary>POST on /_render/template <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html</para></summary>
 		///<param name = "body">The search definition template and its params</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse RenderSearchTemplate<TResponse>(PostData body, RenderSearchTemplateRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, "_render/template", body, RequestParams(requestParameters));
-		///<summary>POST on /_render/template <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates</para></summary>
+		///<summary>POST on /_render/template <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html</para></summary>
 		///<param name = "body">The search definition template and its params</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("render_search_template", "body")]
 		public Task<TResponse> RenderSearchTemplateAsync<TResponse>(PostData body, RenderSearchTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, "_render/template", ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_render/template/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates</para></summary>
+		///<summary>POST on /_render/template/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html</para></summary>
 		///<param name = "id">The id of the stored search template</param>
 		///<param name = "body">The search definition template and its params</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse RenderSearchTemplate<TResponse>(string id, PostData body, RenderSearchTemplateRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_render/template/{id:id}"), body, RequestParams(requestParameters));
-		///<summary>POST on /_render/template/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates</para></summary>
+		///<summary>POST on /_render/template/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html</para></summary>
 		///<param name = "id">The id of the stored search template</param>
 		///<param name = "body">The search definition template and its params</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
