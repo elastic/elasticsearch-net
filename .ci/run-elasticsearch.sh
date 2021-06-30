@@ -36,6 +36,7 @@ environment=($(cat <<-END
   --env node.attr.testattr=test
   --env path.repo=/tmp
   --env repositories.url.allowed_urls=http://snapshot.test*
+  --env ingest.geoip.downloader.enabled=false
 END
 ))
 if [[ "$TEST_SUITE" == "platinum" ]]; then
