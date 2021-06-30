@@ -204,6 +204,11 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
+	///<summary>Request options for EnrollKibana <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enroll-kibana.html</para></summary>
+	public class EnrollKibanaRequestParameters : RequestParameters<EnrollKibanaRequestParameters>
+	{
+	}
+
 	///<summary>Request options for EnrollNode <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-node-enrollment.html</para></summary>
 	public class EnrollNodeRequestParameters : RequestParameters<EnrollNodeRequestParameters>
 	{
@@ -378,8 +383,33 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
+	///<summary>Request options for SamlAuthenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html</para></summary>
+	public class SamlAuthenticateRequestParameters : RequestParameters<SamlAuthenticateRequestParameters>
+	{
+	}
+
 	///<summary>Request options for SamlCompleteLogout <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html</para></summary>
 	public class SamlCompleteLogoutRequestParameters : RequestParameters<SamlCompleteLogoutRequestParameters>
+	{
+	}
+
+	///<summary>Request options for SamlInvalidate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html</para></summary>
+	public class SamlInvalidateRequestParameters : RequestParameters<SamlInvalidateRequestParameters>
+	{
+	}
+
+	///<summary>Request options for SamlLogout <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html</para></summary>
+	public class SamlLogoutRequestParameters : RequestParameters<SamlLogoutRequestParameters>
+	{
+	}
+
+	///<summary>Request options for SamlPrepareAuthentication <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html</para></summary>
+	public class SamlPrepareAuthenticationRequestParameters : RequestParameters<SamlPrepareAuthenticationRequestParameters>
+	{
+	}
+
+	///<summary>Request options for SamlServiceProviderMetadata <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html</para></summary>
+	public class SamlServiceProviderMetadataRequestParameters : RequestParameters<SamlServiceProviderMetadataRequestParameters>
 	{
 	}
 

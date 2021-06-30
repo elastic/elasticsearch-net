@@ -61,6 +61,20 @@ namespace Elasticsearch.Net.Specification.IndexLifecycleManagementApi
 	{
 	}
 
+	///<summary>Request options for MigrateToDataTiers <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html</para></summary>
+	public class MigrateToDataTiersRequestParameters : RequestParameters<MigrateToDataTiersRequestParameters>
+	{
+		///<summary>
+		/// If set to true it will simulate the migration, providing a way to retrieve the ILM policies and indices that need to be migrated. The
+		/// default is false
+		///</summary>
+		public bool? DryRun
+		{
+			get => Q<bool? >("dry_run");
+			set => Q("dry_run", value);
+		}
+	}
+
 	///<summary>Request options for MoveToStep <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</para></summary>
 	public class MoveToStepRequestParameters : RequestParameters<MoveToStepRequestParameters>
 	{
