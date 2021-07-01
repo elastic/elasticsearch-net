@@ -1625,7 +1625,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	///<summary>Request options for RenderSearchTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates</para></summary>
+	///<summary>Request options for RenderSearchTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html</para></summary>
 	public class RenderSearchTemplateRequestParameters : RequestParameters<RenderSearchTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
