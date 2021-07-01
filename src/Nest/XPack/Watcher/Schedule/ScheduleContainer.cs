@@ -185,7 +185,7 @@ namespace Nest
 					return new ScheduleContainer(new CronExpression(expression));
 				}
 				
-				throw new Exception("TODO");
+				throw new Exception("Trigger schedule string value should not be null or empty");
 			}
 
 			if (token == JsonToken.BeginArray)
@@ -208,7 +208,7 @@ namespace Nest
 				return new ScheduleContainer(new CronExpressions(keys));
 			}
 
-			throw new Exception("TODO");
+			throw new Exception("Unexpected JSON in trigger schedule");
 		}
 
 		public void Serialize(ref JsonWriter writer, IScheduleContainer value, IJsonFormatterResolver formatterResolver)
@@ -253,12 +253,10 @@ namespace Nest
 			}
 			else if (value.Interval is not null)
 			{
-				writer.WritePropertyName(Parser.Yearly);
+				writer.WritePropertyName(Parser.Interval);
 				var formatter = formatterResolver.GetFormatter<Interval>();
 				formatter.Serialize(ref writer, value.Interval, formatterResolver);
 			}
-			else
-				throw new Exception("TODO");
 
 			writer.WriteEndObject();
 		}

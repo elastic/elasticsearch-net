@@ -1615,7 +1615,7 @@ namespace Tests.XPack.Watcher.PutWatch
 				}
 			};
 
-		protected override bool SupportsDeserialization => true;
+		protected override bool SupportsDeserialization => false;
 
 		protected override string UrlPath => $"/_watcher/watch/{CallIsolatedValue}";
 
