@@ -5,46 +5,45 @@
 using System.Runtime.Serialization;
 using Elasticsearch.Net;
 
-
 namespace Nest
 {
 	[StringEnum]
 	public enum Month
 	{
-		[EnumMember(Value = "january")]
+		[EnumMember(Value = "JAN")]
 		January,
 
-		[EnumMember(Value = "february")]
+		[EnumMember(Value = "FEB")]
 		February,
 
-		[EnumMember(Value = "march")]
+		[EnumMember(Value = "MAR")]
 		March,
 
-		[EnumMember(Value = "april")]
+		[EnumMember(Value = "APR")]
 		April,
 
-		[EnumMember(Value = "may")]
+		[EnumMember(Value = "MAY")]
 		May,
 
-		[EnumMember(Value = "june")]
+		[EnumMember(Value = "JUN")]
 		June,
 
-		[EnumMember(Value = "july")]
+		[EnumMember(Value = "JUL")]
 		July,
 
-		[EnumMember(Value = "august")]
+		[EnumMember(Value = "AUG")]
 		August,
 
-		[EnumMember(Value = "september")]
+		[EnumMember(Value = "SEP")]
 		September,
 
-		[EnumMember(Value = "october")]
+		[EnumMember(Value = "OCT")]
 		October,
 
-		[EnumMember(Value = "november")]
+		[EnumMember(Value = "NOV")]
 		November,
 
-		[EnumMember(Value = "december")]
+		[EnumMember(Value = "DEC")]
 		December
 	}
 }

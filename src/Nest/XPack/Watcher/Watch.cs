@@ -36,7 +36,6 @@ namespace Nest
 
 		[DataMember(Name = "trigger")]
 		TriggerContainer Trigger { get; set; }
-
 	}
 
 	public class Watch : IWatch
