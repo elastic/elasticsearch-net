@@ -23,6 +23,10 @@ namespace Nest
 			selector?.Invoke(new CompletionPropertyDescriptor<T>());
 
 		/// <inheritdoc />
+		public IProperty ConstantKeyword(Func<ConstantKeywordPropertyDescriptor<T>, IConstantKeywordProperty> selector) =>
+			selector?.Invoke(new ConstantKeywordPropertyDescriptor<T>());
+
+		/// <inheritdoc />
 		public IProperty Date(Func<DatePropertyDescriptor<T>, IDateProperty> selector) =>
 			selector?.Invoke(new DatePropertyDescriptor<T>());
 
@@ -39,6 +43,14 @@ namespace Nest
 			selector?.Invoke(new DoubleRangePropertyDescriptor<T>());
 
 		/// <inheritdoc />
+		public IProperty FieldAlias(Func<FieldAliasPropertyDescriptor<T>, IFieldAliasProperty> selector) =>
+			selector?.Invoke(new FieldAliasPropertyDescriptor<T>());
+
+		/// <inheritdoc />
+		public IProperty Flattened(Func<FlattenedPropertyDescriptor<T>, IFlattenedProperty> selector) =>
+			selector?.Invoke(new FlattenedPropertyDescriptor<T>());
+
+		/// <inheritdoc />
 		public IProperty FloatRange(Func<FloatRangePropertyDescriptor<T>, IFloatRangeProperty> selector) =>
 			selector?.Invoke(new FloatRangePropertyDescriptor<T>());
 
@@ -51,12 +63,8 @@ namespace Nest
 			selector?.Invoke(new GeoShapePropertyDescriptor<T>());
 
 		/// <inheritdoc />
-		public IProperty Shape(Func<ShapePropertyDescriptor<T>, IShapeProperty> selector) =>
-			selector?.Invoke(new ShapePropertyDescriptor<T>());
-
-		/// <inheritdoc />
-		public IProperty Point(Func<PointPropertyDescriptor<T>, IPointProperty> selector) =>
-			selector?.Invoke(new PointPropertyDescriptor<T>());
+		public IProperty Histogram(Func<HistogramPropertyDescriptor<T>, IHistogramProperty> selector) =>
+			selector?.Invoke(new HistogramPropertyDescriptor<T>());
 
 		/// <inheritdoc />
 		public IProperty IntegerRange(Func<IntegerRangePropertyDescriptor<T>, IIntegerRangeProperty> selector) =>
@@ -73,26 +81,6 @@ namespace Nest
 		/// <inheritdoc />
 		public IProperty Join(Func<JoinPropertyDescriptor<T>, IJoinProperty> selector) =>
 			selector?.Invoke(new JoinPropertyDescriptor<T>());
-
-		/// <inheritdoc />
-		public IProperty Histogram(Func<HistogramPropertyDescriptor<T>, IHistogramProperty> selector) =>
-			selector?.Invoke(new HistogramPropertyDescriptor<T>());
-
-    /// <inheritdoc />
-		public IProperty FieldAlias(Func<FieldAliasPropertyDescriptor<T>, IFieldAliasProperty> selector) =>
-			selector?.Invoke(new FieldAliasPropertyDescriptor<T>());
-
-		/// <inheritdoc />
-		public IProperty RankFeature(Func<RankFeaturePropertyDescriptor<T>, IRankFeatureProperty> selector) =>
-			selector?.Invoke(new RankFeaturePropertyDescriptor<T>());
-
-		/// <inheritdoc />
-		public IProperty RankFeatures(Func<RankFeaturesPropertyDescriptor<T>, IRankFeaturesProperty> selector) =>
-			selector?.Invoke(new RankFeaturesPropertyDescriptor<T>());
-
-		/// <inheritdoc />
-		public IProperty Flattened(Func<FlattenedPropertyDescriptor<T>, IFlattenedProperty> selector) =>
-			selector?.Invoke(new FlattenedPropertyDescriptor<T>());
 
 		/// <inheritdoc />
 		public IProperty Keyword(Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector) =>
@@ -126,6 +114,26 @@ namespace Nest
 			selector?.Invoke(new PercolatorPropertyDescriptor<T>());
 
 		/// <inheritdoc />
+		public IProperty Point(Func<PointPropertyDescriptor<T>, IPointProperty> selector) =>
+			selector?.Invoke(new PointPropertyDescriptor<T>());
+
+		/// <inheritdoc />
+		public IProperty RankFeature(Func<RankFeaturePropertyDescriptor<T>, IRankFeatureProperty> selector) =>
+			selector?.Invoke(new RankFeaturePropertyDescriptor<T>());
+
+		/// <inheritdoc />
+		public IProperty RankFeatures(Func<RankFeaturesPropertyDescriptor<T>, IRankFeaturesProperty> selector) =>
+			selector?.Invoke(new RankFeaturesPropertyDescriptor<T>());
+
+		/// <inheritdoc />
+		public IProperty SearchAsYouType(Func<SearchAsYouTypePropertyDescriptor<T>, ISearchAsYouTypeProperty> selector) =>
+			selector?.Invoke(new SearchAsYouTypePropertyDescriptor<T>());
+
+		/// <inheritdoc />
+		public IProperty Shape(Func<ShapePropertyDescriptor<T>, IShapeProperty> selector) =>
+			selector?.Invoke(new ShapePropertyDescriptor<T>());
+
+		/// <inheritdoc />
 		public IProperty Text(Func<TextPropertyDescriptor<T>, ITextProperty> selector) =>
 			selector?.Invoke(new TextPropertyDescriptor<T>());
 
@@ -134,24 +142,20 @@ namespace Nest
 			selector?.Invoke(new TokenCountPropertyDescriptor<T>());
 
 		/// <inheritdoc />
-		public IProperty Generic(Func<GenericPropertyDescriptor<T>, IGenericProperty> selector) =>
-			selector?.Invoke(new GenericPropertyDescriptor<T>());
-
-		/// <inheritdoc />
-		public IProperty SearchAsYouType(Func<SearchAsYouTypePropertyDescriptor<T>, ISearchAsYouTypeProperty> selector) =>
-			selector?.Invoke(new SearchAsYouTypePropertyDescriptor<T>());
-
-		/// <inheritdoc />
-		public IProperty ConstantKeyword(Func<ConstantKeywordPropertyDescriptor<T>, IConstantKeywordProperty> selector) =>
-			selector?.Invoke(new ConstantKeywordPropertyDescriptor<T>());
+		public IProperty Version(Func<VersionPropertyDescriptor<T>, IVersionProperty> selector) =>
+			selector?.Invoke(new VersionPropertyDescriptor<T>());
 
 		/// <inheritdoc />
 		public IProperty Wildcard(Func<WildcardPropertyDescriptor<T>, IWildcardProperty> selector) =>
 			selector?.Invoke(new WildcardPropertyDescriptor<T>());
-		
+
 		/// <inheritdoc />
-		public IProperty Version(Func<VersionPropertyDescriptor<T>, IVersionProperty> selector) =>
-			selector?.Invoke(new VersionPropertyDescriptor<T>());
+		public IProperty Generic(Func<GenericPropertyDescriptor<T>, IGenericProperty> selector) =>
+			selector?.Invoke(new GenericPropertyDescriptor<T>());
+
+		/// <inheritdoc />
+		public IProperty DenseVector(Func<DenseVectorPropertyDescriptor<T>, IDenseVectorProperty> selector) =>
+			selector?.Invoke(new DenseVectorPropertyDescriptor<T>());
 
 #pragma warning disable CS3001 // Argument type is not CLS-compliant
 		public IProperty Scalar(Expression<Func<T, int>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector = null) =>
