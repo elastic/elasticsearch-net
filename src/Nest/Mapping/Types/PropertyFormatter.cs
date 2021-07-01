@@ -4,15 +4,12 @@
 
 using System;
 using Nest.Utf8Json;
+
 namespace Nest
 {
 	internal class PropertyFormatter : IJsonFormatter<IProperty>
 	{
-		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary
-		{
-			{ "type", 0 },
-			{ "properties", 1 }
-		};
+		private static readonly AutomataDictionary AutomataDictionary = new AutomataDictionary { { "type", 0 }, { "properties", 1 } };
 
 		public IProperty Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
@@ -99,6 +96,7 @@ namespace Nest
 				case FieldType.ConstantKeyword: return Deserialize<ConstantKeywordProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Wildcard: return Deserialize<WildcardProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Version: return Deserialize<VersionProperty>(ref segmentReader, formatterResolver);
+				case FieldType.DenseVector: return Deserialize<DenseVectorProperty>(ref segmentReader, formatterResolver);
 				case FieldType.None:
 					// no "type" field in the property mapping, or FieldType enum could not be parsed from typeString
 					return Deserialize<ObjectProperty>(ref segmentReader, formatterResolver);
@@ -221,6 +219,9 @@ namespace Nest
 					break;
 				case IVersionProperty versionProperty:
 					Serialize(ref writer, versionProperty, formatterResolver);
+					break;
+				case IDenseVectorProperty denseVectorProperty:
+					Serialize(ref writer, denseVectorProperty, formatterResolver);
 					break;
 				default:
 					var formatter = formatterResolver.GetFormatter<object>();

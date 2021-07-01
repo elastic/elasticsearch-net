@@ -34,10 +34,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override GetMappingRequest Initializer => new GetMappingRequest(Index<Project>())
-		{
-			IgnoreUnavailable = true
-		};
+		protected override GetMappingRequest Initializer => new GetMappingRequest(Index<Project>()) { IgnoreUnavailable = true };
 
 		protected override string UrlPath => "/project/_mapping?ignore_unavailable=true";
 
@@ -81,7 +78,6 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			/** The `GetMappingFor` extension method can be used to get a type mapping easily and safely */
 			response.GetMappingFor<Project>().Should().NotBeNull();
 			response.GetMappingFor(typeof(Project)).Should().NotBeNull();
-
 		}
 
 		//hide
@@ -101,7 +97,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
 			visitor.CountsShouldContainKeyAndCountBe("text", b ? 18 : 17);
 			visitor.CountsShouldContainKeyAndCountBe("keyword", keywordCount);
-			visitor.CountsShouldContainKeyAndCountBe("object", supportsFlattenedType? 8 : 9);
+			visitor.CountsShouldContainKeyAndCountBe("object", supportsFlattenedType ? 8 : 9);
 			visitor.CountsShouldContainKeyAndCountBe("number", 9);
 			visitor.CountsShouldContainKeyAndCountBe("ip", 2);
 			visitor.CountsShouldContainKeyAndCountBe("geo_point", 3);
@@ -230,6 +226,8 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		public void Visit(IConstantKeywordProperty property) => Increment("constant_keyword");
 
 		public void Visit(IVersionProperty property) => Increment("version");
+
+		public void Visit(IDenseVectorProperty property) => Increment("dense_vector");
 
 		private void Increment(string key)
 		{

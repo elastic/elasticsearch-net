@@ -78,6 +78,8 @@ namespace Nest
 
 		void Visit(IVersionProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);
 
+		void Visit(IDenseVectorProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);
+
 		IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);
 
 		bool SkipProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);

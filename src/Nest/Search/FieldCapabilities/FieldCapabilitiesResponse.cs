@@ -39,6 +39,7 @@ namespace Nest
 		public FieldCapabilities Date => BackingDictionary.TryGetValue("date", out var f) ? f : null;
 		public FieldCapabilities DateNanos => BackingDictionary.TryGetValue("date_nanos", out var f) ? f : null;
 		public FieldCapabilities DateRange => BackingDictionary.TryGetValue("date_range", out var f) ? f : null;
+		public FieldCapabilities DenseVector => BackingDictionary.TryGetValue("dense_vector", out var f) ? f : null;
 		public FieldCapabilities Double => BackingDictionary.TryGetValue("double", out var f) ? f : null;
 		public FieldCapabilities DoubleRange => BackingDictionary.TryGetValue("double_range", out var f) ? f : null;
 		public FieldCapabilities FieldNames => BackingDictionary.TryGetValue("_field_names", out var f) ? f : null;
@@ -46,7 +47,6 @@ namespace Nest
 		public FieldCapabilities FloatRange => BackingDictionary.TryGetValue("float_range", out var f) ? f : null;
 		public FieldCapabilities GeoPoint => BackingDictionary.TryGetValue("geo_point", out var f) ? f : null;
 		public FieldCapabilities GeoShape => BackingDictionary.TryGetValue("geo_shape", out var f) ? f : null;
-		public FieldCapabilities Shape => BackingDictionary.TryGetValue("shape", out var f) ? f : null;
 		public FieldCapabilities HalfFloat => BackingDictionary.TryGetValue("half_float", out var f) ? f : null;
 		public FieldCapabilities Id => BackingDictionary.TryGetValue("_id", out var f) ? f : null;
 		public FieldCapabilities Index => BackingDictionary.TryGetValue("_index", out var f) ? f : null;
@@ -58,10 +58,12 @@ namespace Nest
 		public FieldCapabilities LongRange => BackingDictionary.TryGetValue("long_range", out var f) ? f : null;
 		public FieldCapabilities Murmur3 => BackingDictionary.TryGetValue("murmur3", out var f) ? f : null;
 		public FieldCapabilities Parent => BackingDictionary.TryGetValue("_parent", out var f) ? f : null;
+		public FieldCapabilities ParentJoin => BackingDictionary.TryGetValue("_parent_join", out var f) ? f : null;
 		public FieldCapabilities Percolator => BackingDictionary.TryGetValue("percolator", out var f) ? f : null;
 		public FieldCapabilities Routing => BackingDictionary.TryGetValue("_routing", out var f) ? f : null;
 		public FieldCapabilities ScaledFloat => BackingDictionary.TryGetValue("scaled_float", out var f) ? f : null;
 		public FieldCapabilities SearchAsYouType => BackingDictionary.TryGetValue("search_as_you_type", out var f) ? f : null;
+		public FieldCapabilities Shape => BackingDictionary.TryGetValue("shape", out var f) ? f : null;
 		public FieldCapabilities Short => BackingDictionary.TryGetValue("short", out var f) ? f : null;
 		public FieldCapabilities Source => BackingDictionary.TryGetValue("_source", out var f) ? f : null;
 		public FieldCapabilities Text => BackingDictionary.TryGetValue("text", out var f) ? f : null;
@@ -69,7 +71,6 @@ namespace Nest
 		public FieldCapabilities TokenCount => BackingDictionary.TryGetValue("token_count", out var f) ? f : null;
 		public FieldCapabilities Type => BackingDictionary.TryGetValue("_type", out var f) ? f : null;
 		public FieldCapabilities Uid => BackingDictionary.TryGetValue("_uid", out var f) ? f : null;
-		public FieldCapabilities ParentJoin => BackingDictionary.TryGetValue("_parent_join", out var f) ? f : null;
 		public FieldCapabilities Version => BackingDictionary.TryGetValue("_version", out var f) ? f : null;
 		public FieldCapabilities VersionField => BackingDictionary.TryGetValue("version", out var f) ? f : null;
 	}
@@ -83,6 +84,9 @@ namespace Nest
 		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices Indices { get; internal set; }
 
+		[DataMember(Name = "meta")]
+		public IReadOnlyDictionary<string, string[]> Meta { get; internal set; } = EmptyReadOnly<string, string[]>.Dictionary;
+
 		[DataMember(Name = "non_aggregatable_indices")]
 		[JsonFormatter(typeof(IndicesFormatter))]
 		public Indices NonAggregatableIndices { get; internal set; }
@@ -93,8 +97,5 @@ namespace Nest
 
 		[DataMember(Name = "searchable")]
 		public bool Searchable { get; internal set; }
-
-		[DataMember(Name = "meta")]
-		public IReadOnlyDictionary<string, string[]> Meta { get; internal set; } = EmptyReadOnly<string, string[]>.Dictionary;
 	}
 }
