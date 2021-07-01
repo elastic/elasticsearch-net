@@ -434,7 +434,7 @@ namespace Nest
 	// Request parameters
 	}
 
-	///<summary>Descriptor for GetUserPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
+	///<summary>Descriptor for GetUserPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</para></summary>
 	public partial class GetUserPrivilegesDescriptor : RequestDescriptorBase<GetUserPrivilegesDescriptor, GetUserPrivilegesRequestParameters, IGetUserPrivilegesRequest>, IGetUserPrivilegesRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityGetUserPrivileges;

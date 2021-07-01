@@ -522,25 +522,25 @@ namespace Nest.Specification.SecurityApi
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_user_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</a>
 		/// </summary>
 		public GetUserPrivilegesResponse GetUserPrivileges(Func<GetUserPrivilegesDescriptor, IGetUserPrivilegesRequest> selector = null) => GetUserPrivileges(selector.InvokeOrDefault(new GetUserPrivilegesDescriptor()));
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_user_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</a>
 		/// </summary>
 		public Task<GetUserPrivilegesResponse> GetUserPrivilegesAsync(Func<GetUserPrivilegesDescriptor, IGetUserPrivilegesRequest> selector = null, CancellationToken ct = default) => GetUserPrivilegesAsync(selector.InvokeOrDefault(new GetUserPrivilegesDescriptor()), ct);
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_user_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</a>
 		/// </summary>
 		public GetUserPrivilegesResponse GetUserPrivileges(IGetUserPrivilegesRequest request) => DoRequest<IGetUserPrivilegesRequest, GetUserPrivilegesResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>GET</c> request to the <c>security.get_user_privileges</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</a>
 		/// </summary>
 		public Task<GetUserPrivilegesResponse> GetUserPrivilegesAsync(IGetUserPrivilegesRequest request, CancellationToken ct = default) => DoRequestAsync<IGetUserPrivilegesRequest, GetUserPrivilegesResponse>(request, request.RequestParameters, ct);
 		/// <summary>
