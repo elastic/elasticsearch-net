@@ -10,6 +10,7 @@
 === Bug Fixes
 
 - * Fix weekly schedule deserialisation https://github.com/elastic/elasticsearch-net/pull/5743[#5743]  (issue: https://github.com/elastic/elasticsearch-net/issues/5725[#5725])
+- * Fix discrepancies in Watcher API models which fail (de)serialization https://github.com/elastic/elasticsearch-net/pull/5761[#5761]  (issue: https://github.com/elastic/elasticsearch-net/issues/5725[#5725])
 
 [float]
 [[enhancement]]
