@@ -26,7 +26,8 @@ namespace Nest
 		GeoShape,
 
 		/// <summary>
-		/// An ip mapping type allows to store ipv4 addresses in a numeric form allowing to easily sort, and range query it (using ip values).
+		/// An ip mapping type allows to store ipv4 addresses in a numeric form allowing to easily sort, and range query it (using
+		/// ip values).
 		/// </summary>
 		[EnumMember(Value = "ip")]
 		Ip,
@@ -44,7 +45,8 @@ namespace Nest
 		Text,
 
 		/// <summary>
-		/// A text-like field that is optimized to provide out-of-the-box support for queries that serve an as-you-type completion use case.
+		/// A text-like field that is optimized to provide out-of-the-box support for queries that serve an as-you-type completion
+		/// use case.
 		/// </summary>
 		[EnumMember(Value = "search_as_you_type")]
 		SearchAsYouType,
@@ -162,6 +164,12 @@ namespace Nest
 		/// Version field type for storing semver compatible version numbers.
 		/// </summary>
 		[EnumMember(Value = "version")]
-		Version
+		Version,
+
+		/// <summary>
+		/// A dense_vector field stores dense vectors of float values.
+		/// </summary>
+		[EnumMember(Value = "dense_vector")]
+		DenseVector
 	}
 }

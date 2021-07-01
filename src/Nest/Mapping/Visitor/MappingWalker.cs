@@ -279,6 +279,12 @@ namespace Nest
 							_visitor.Visit(t);
 						});
 						break;
+					case FieldType.DenseVector:
+						Visit<IDenseVectorProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+						});
+						break;
 					case FieldType.None:
 						continue;
 				}
