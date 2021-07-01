@@ -405,7 +405,6 @@ var createIndexResponse = _client.Indices.Create("myindex", c => c
       "birthDayOfWeek": {
         "type": "keyword",
         "script": {
-          "lang": "painless",
           "source": "emit(doc['@timestamp'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT))"
         }
       }
@@ -425,5 +424,40 @@ createIndexResponse = _client.Indices.Create("myindex", c => c
             .RuntimeField("birthDayOfWeek", FieldType.Keyword, f => f.Script("emit(doc['@timestamp'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT))")))
     )
 );
+----
+
+One may also include and use parameters in the script.
+
+[source,csharp]
+----
+createIndexResponse = _client.Indices.Create("myindex", c => c
+    .Map<Company>(m => m
+        .RuntimeFields(rtf => rtf
+            .RuntimeField("birthDayOfWeek", FieldType.Keyword, f => f
+                .Script(s => s
+                    .Source("emit(doc['@timestamp'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT) + params.suffix)")
+                    .Params(p => p.Add("suffix", " with a suffix."))
+                    )))
+    )
+);
+----
+
+[source,javascript]
+----
+{
+  "mappings": {
+    "runtime": {
+      "birthDayOfWeek": {
+        "type": "keyword",
+        "script": {
+          "source": "emit(doc['@timestamp'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT) + params.suffix)",
+          "params": {
+            "suffix": " with a suffix."
+          }
+        }
+      }
+    }
+  }
+}
 ----
 

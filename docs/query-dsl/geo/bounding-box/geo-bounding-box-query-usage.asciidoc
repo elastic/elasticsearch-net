@@ -29,7 +29,6 @@ q
         .BottomRight(-34, 34)
     )
     .ValidationMethod(GeoValidationMethod.Strict)
-    .Type(GeoExecution.Indexed)
 )
 ----
 
@@ -47,7 +46,6 @@ new GeoBoundingBoxQuery
         TopLeft = new GeoLocation(34, -34),
         BottomRight = new GeoLocation(-34, 34),
     },
-    Type = GeoExecution.Indexed,
     ValidationMethod = GeoValidationMethod.Strict
 }
 ----
@@ -57,7 +55,6 @@ new GeoBoundingBoxQuery
 ----
 {
   "geo_bounding_box": {
-    "type": "indexed",
     "validation_method": "strict",
     "_name": "named_query",
     "boost": 1.1,
@@ -88,7 +85,6 @@ q
         .WellKnownText("BBOX (-34, 34, 34, -34)")
     )
     .ValidationMethod(GeoValidationMethod.Strict)
-    .Type(GeoExecution.Indexed)
 )
 ----
 
@@ -105,7 +101,6 @@ new GeoBoundingBoxQuery
     {
         WellKnownText = "BBOX (-34, 34, 34, -34)"
     },
-    Type = GeoExecution.Indexed,
     ValidationMethod = GeoValidationMethod.Strict
 }
 ----
@@ -115,7 +110,6 @@ new GeoBoundingBoxQuery
 ----
 {
   "geo_bounding_box": {
-    "type": "indexed",
     "validation_method": "strict",
     "_name": "named_query",
     "boost": 1.1,

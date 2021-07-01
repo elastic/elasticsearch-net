@@ -45,6 +45,8 @@ NEST exposes all of the full text queries available in Elasticsearch
 
 :anchor-list: query-dsl/full-text
 
+* <<combined-fields-usage,Combined Fields Usage>>
+
 * <<common-terms-usage,Common Terms Usage>>
 
 * <<intervals-usage,Intervals Usage>>
@@ -66,6 +68,8 @@ NEST exposes all of the full text queries available in Elasticsearch
 See the Elasticsearch documentation on {ref_current}/full-text-queries.html[Full text queries] for more details.
 
 :includes-from-dirs: query-dsl/full-text
+
+include::query-dsl/full-text/combined-fields/combined-fields-usage.asciidoc[]
 
 include::query-dsl/full-text/common-terms/common-terms-usage.asciidoc[]
 

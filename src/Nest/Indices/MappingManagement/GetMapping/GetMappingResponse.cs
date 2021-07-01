@@ -24,7 +24,7 @@ namespace Nest
 
 	public class IndexMappings
 	{
-		[Obsolete("Mapping are no longer grouped by type, this indexer is ignored and simply returns Mapppings")]
+		[Obsolete("Mapping are no longer grouped by type, this indexer is ignored and simply returns Mappings")]
 		public TypeMapping this[string type] => Mappings;
 
 		[DataMember(Name = "mappings")]
