@@ -114,7 +114,6 @@ which yields the following query JSON
   "runtime_mappings": {
     "search_runtime_field": {
       "script": {
-        "lang": "painless",
         "source": "if (doc['type'].size() != 0) {emit(doc['type'].value.toUpperCase())}"
       },
       "type": "keyword"
@@ -139,7 +138,7 @@ var searchRequest = new SearchRequest<Project>
         { "search_runtime_field", new RuntimeField
             {
                 Type = FieldType.Keyword,
-                Script = new PainlessScript("if (doc['type'].size() != 0) {emit(doc['type'].value.toUpperCase())}")
+                Script = new InlineScript("if (doc['type'].size() != 0) {emit(doc['type'].value.toUpperCase())}")
             }
         }
     }
