@@ -79,6 +79,8 @@ namespace Nest
 
 		public virtual void Visit(IVersionProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
+		public virtual void Visit(IDenseVectorProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+
 		public virtual IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => null;
 
 		public void Visit(IProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
@@ -182,6 +184,9 @@ namespace Nest
 					Visit(fieldAlias, propertyInfo, attribute);
 					break;
 				case IVersionProperty version:
+					Visit(version, propertyInfo, attribute);
+					break;
+				case IDenseVectorProperty version:
 					Visit(version, propertyInfo, attribute);
 					break;
 			}
