@@ -18,5 +18,6 @@
 
 - * Change default IMemoryStreamFactory https://github.com/elastic/elasticsearch-net/pull/5740[#5740] 
 - * Add readonly property to FS repository settings https://github.com/elastic/elasticsearch-net/pull/5755[#5755]  (issue: https://github.com/elastic/elasticsearch-net/issues/5753[#5753])
+- * Add support for dense vector fields https://github.com/elastic/elasticsearch-net/pull/5780[#5780]  (issue: https://github.com/elastic/elasticsearch-net/issues/3836[#3836])
 
 
