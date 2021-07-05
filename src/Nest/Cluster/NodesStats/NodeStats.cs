@@ -465,6 +465,45 @@ namespace Nest
 		[DataMember(Name = "total")]
 		public TotalFileSystemStats Total { get; internal set; }
 
+		[DataMember(Name = "io_stats")]
+		public IoStatsContainer IoStats {get; internal set; }
+
+		public class IoStatsContainer
+		{
+			[DataMember(Name = "devices")]
+			public IEnumerable<DeviceIoStats> Devices {get; internal set; }
+
+			[DataMember(Name = "total")]
+			public IoStatistics Total {get; internal set; }
+		}
+
+		public class IoStatistics
+		{
+			[DataMember(Name = "operations")]
+			public long Operations {get; internal set; }
+
+			[DataMember(Name = "read_operations")]
+			public long ReadOperations {get; internal set; }
+
+			[DataMember(Name = "write_operations")]
+			public long WriteOperations {get; internal set; }
+			
+			[DataMember(Name = "read_kilobytes")]
+			public long ReadKilobytes {get; internal set; }
+			
+			[DataMember(Name = "write_kilobytes")]
+			public long WriteKilobytes {get; internal set; }
+			
+			[DataMember(Name = "io_time_in_millis")]
+			public long IoTimeInMilliseconds {get; internal set; }
+		}
+
+		public class DeviceIoStats : IoStatistics
+		{
+			[DataMember(Name = "device_name")]
+			public string DeviceName {get; internal set; }
+		}
+
 		public class TotalFileSystemStats
 		{
 			[DataMember(Name = "available")]
