@@ -41,6 +41,8 @@ namespace Elasticsearch.Net
 			// Only attempt to set the body if the response may have content
 			if (MayHaveBody(statusCode, requestData.Method))
 				response = SetBody<TResponse>(details, requestData, responseStream, mimeType);
+			else
+				responseStream.Dispose();
 
 			response ??= new TResponse();
 
@@ -67,6 +69,8 @@ namespace Elasticsearch.Net
 			// Only attempt to set the body if the response may have content
 			if (MayHaveBody(statusCode, requestData.Method))
 				response = await SetBodyAsync<TResponse>(details, requestData, responseStream, mimeType, cancellationToken).ConfigureAwait(false);
+			else
+				responseStream.Dispose();
 
 			response ??= new TResponse();
 
@@ -78,7 +82,7 @@ namespace Elasticsearch.Net
 		/// A helper which returns true if the response could potentially have a body.
 		/// </summary>
 		private static bool MayHaveBody(int? statusCode, HttpMethod httpMethod) =>
-			!statusCode.HasValue || (statusCode.Value != 204 && httpMethod != HttpMethod.HEAD);
+			!statusCode.HasValue || statusCode.Value != 204 && httpMethod != HttpMethod.HEAD;
 
 		private static ApiCallDetails Initialize(
 			RequestData requestData, Exception exception, int? statusCode, IEnumerable<string> warnings, string mimeType
@@ -91,8 +95,10 @@ namespace Elasticsearch.Net
 				if (allowedStatusCodes.Contains(-1) || allowedStatusCodes.Contains(statusCode.Value))
 					success = true;
 				else
+				{
 					success = requestData.ConnectionSettings
 						.StatusCodeToResponseSuccess(requestData.Method, statusCode.Value);
+				}
 			}
 
 			// We don't validate the content-type (MIME type) for HEAD requests or responses that have no content (204 status code).
@@ -170,8 +176,10 @@ namespace Elasticsearch.Net
 
 				var serializer = requestData.ConnectionSettings.RequestResponseSerializer;
 				if (requestData.CustomResponseBuilder != null)
+				{
 					return await requestData.CustomResponseBuilder.DeserializeResponseAsync(serializer, details, responseStream, cancellationToken)
 						.ConfigureAwait(false) as TResponse;
+				}
 
 				return !RequestData.ValidResponseContentType(requestData.Accept, mimeType)
 					? null

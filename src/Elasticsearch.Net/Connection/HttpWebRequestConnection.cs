@@ -19,7 +19,8 @@ using Elasticsearch.Net.Diagnostics;
 namespace Elasticsearch.Net
 {
 #if DOTNETCORE
-	[Obsolete("CoreFX HttpWebRequest uses HttpClient under the covers but does not reuse HttpClient instances, do NOT use on .NET core only used as the default on Full Framework")]
+	[Obsolete(
+		"CoreFX HttpWebRequest uses HttpClient under the covers but does not reuse HttpClient instances, do NOT use on .NET core only used as the default on Full Framework")]
 #endif
 	public class HttpWebRequestConnection : IConnection
 	{
@@ -52,8 +53,10 @@ namespace Elasticsearch.Net
 					using (var stream = request.GetRequestStream())
 					{
 						if (requestData.HttpCompression)
+						{
 							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
 								data.Write(zipStream, requestData.ConnectionSettings);
+						}
 						else
 							data.Write(stream, requestData.ConnectionSettings);
 					}
@@ -68,7 +71,7 @@ namespace Elasticsearch.Net
 
 				//http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.getresponsestream.aspx
 				//Either the stream or the response object needs to be closed but not both although it won't
-				//throw any errors if both are closed atleast one of them has to be Closed.
+				//throw any errors if both are closed at least one of them has to be Closed.
 				//Since we expose the stream we let closing the stream determining when to close the connection
 				var httpWebResponse = (HttpWebResponse)request.GetResponse();
 				HandleResponse(httpWebResponse, out statusCode, out responseStream, out mimeType);
@@ -125,8 +128,10 @@ namespace Elasticsearch.Net
 						using (var stream = await apmGetRequestStreamTask.ConfigureAwait(false))
 						{
 							if (requestData.HttpCompression)
+							{
 								using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
 									await data.WriteAsync(zipStream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
+							}
 							else
 								await data.WriteAsync(stream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
 						}
@@ -165,8 +170,7 @@ namespace Elasticsearch.Net
 			}
 			responseStream ??= Stream.Null;
 			var response = await ResponseBuilder.ToResponseAsync<TResponse>
-					(requestData, ex, statusCode, warnings, responseStream, mimeType, cancellationToken)
-				.ConfigureAwait(false);
+				(requestData, ex, statusCode, warnings, responseStream, mimeType, cancellationToken).ConfigureAwait(false);
 
 			// set TCP and threadpool stats on the response here so that in the event the request fails after the point of
 			// gathering stats, they are still exposed on the call details. Ideally these would be set inside ResponseBuilder.ToResponse,
@@ -205,7 +209,7 @@ namespace Elasticsearch.Net
 #else
 				if (callback != null)
 					throw new Exception("Mono misses ServerCertificateValidationCallback on HttpWebRequest");
-			#endif
+#endif
 		}
 
 		protected virtual HttpWebRequest CreateWebRequest(RequestData requestData)
@@ -311,8 +315,10 @@ namespace Elasticsearch.Net
 			if (!string.IsNullOrEmpty(requestData.Uri.UserInfo))
 				userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
 			else if (requestData.BasicAuthorizationCredentials != null)
+			{
 				userInfo =
 					$"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
+			}
 
 			if (string.IsNullOrWhiteSpace(userInfo))
 				return;
@@ -336,7 +342,6 @@ namespace Elasticsearch.Net
 
 			request.Headers["Authorization"] = $"ApiKey {apiKey}";
 			return true;
-
 		}
 
 		/// <summary>
