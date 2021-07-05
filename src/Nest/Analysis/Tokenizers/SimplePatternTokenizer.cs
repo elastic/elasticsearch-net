@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information
 
 using System.Runtime.Serialization;
-using Elasticsearch.Net.Utf8Json;
 
 namespace Nest
 {
@@ -15,8 +14,7 @@ namespace Nest
 		/// <summary>
 		/// Lucene regular expression, defaults to the empty string.
 		/// </summary>
-		[DataMember(Name ="pattern")]
-		[JsonFormatter(typeof(NullableStringIntFormatter))]
+		[DataMember(Name = "pattern")]
 		string Pattern { get; set; }
 	}
 
@@ -37,7 +35,7 @@ namespace Nest
 
 		string ISimplePatternTokenizer.Pattern { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISimplePatternTokenizer.Pattern" />
 		public SimplePatternTokenizerDescriptor Pattern(string pattern) => Assign(pattern, (a, v) => a.Pattern = v);
 	}
 }
