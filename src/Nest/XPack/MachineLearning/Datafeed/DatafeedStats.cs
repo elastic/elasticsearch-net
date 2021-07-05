@@ -23,6 +23,12 @@ namespace Nest
 
 		[DataMember(Name = "timing_stats")]
 		public DatafeedTimingStats TimingStats { get; internal set; }
+
+		/// <summary>
+		/// The running state for the datafeed. It is only provided if the {dfeed} is started.
+		/// </summary>
+		[DataMember(Name = "running_state")]
+		public RunningState RunningState { get; internal set; }
 	}
 
 	[DataContract]
