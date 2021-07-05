@@ -136,5 +136,9 @@ namespace Nest
 		/// <inheritdoc cref="ISimplePatternTokenizer"/>>
 		public TokenizersDescriptor SimplePattern(string name, Func<SimplePatternTokenizerDescriptor, ISimplePatternTokenizer> selector) =>
 			Assign(name, selector?.Invoke(new SimplePatternTokenizerDescriptor()));
+
+		/// <inheritdoc cref="ISimplePatternSplitTokenizer"/>>
+		public TokenizersDescriptor SimplePatternSplit(string name, Func<SimplePatternSplitTokenizerDescriptor, ISimplePatternSplitTokenizer> selector) =>
+			Assign(name, selector?.Invoke(new SimplePatternSplitTokenizerDescriptor()));
 	}
 }

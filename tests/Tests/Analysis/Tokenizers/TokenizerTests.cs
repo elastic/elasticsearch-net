@@ -343,5 +343,19 @@ namespace Tests.Analysis.Tokenizers
 
 			public override string Name => "simple-pattern";
 		}
+
+		[SkipVersion("<7.7.0", "simple_pattern_split experimental until 7.7.0")]
+		public class SimplePatternSplitTests : TokenizerAssertionBase<SimplePatternTests>
+		{
+			public override FuncTokenizer Fluent => (n, t) => t.SimplePatternSplit(n, e => e
+				.Pattern(@"\W+")
+			);
+
+			public override ITokenizer Initializer => new SimplePatternTokenizer { Pattern = @"\W+" };
+
+			public override object Json => new { pattern = @"\W+", type = "simple_pattern_split" };
+
+			public override string Name => "simple-pattern-split";
+		}
 	}
 }
