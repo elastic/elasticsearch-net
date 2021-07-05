@@ -104,8 +104,11 @@ namespace Nest
 			selector.Invoke(new NoriTokenizerDescriptor());
 
 		/// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters" />
-		/// >
 		public ITokenizer CharGroup(Func<CharGroupTokenizerDescriptor, ICharGroupTokenizer> selector) =>
 			selector?.Invoke(new CharGroupTokenizerDescriptor());
+
+		/// <inheritdoc cref="ISimplePatternTokenizer"/>>
+		public ITokenizer SimplePattern(Func<SimplePatternTokenizerDescriptor, ISimplePatternTokenizer> selector) =>
+			selector?.Invoke(new SimplePatternTokenizerDescriptor());
 	}
 }

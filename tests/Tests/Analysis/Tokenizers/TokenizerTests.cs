@@ -22,18 +22,10 @@ namespace Tests.Analysis.Tokenizers
 
 			public override ITokenizer Initializer => new EdgeNGramTokenizer
 			{
-				MaxGram = 2,
-				MinGram = 1,
-				TokenChars = new[] { TokenChar.Digit, TokenChar.Letter }
+				MaxGram = 2, MinGram = 1, TokenChars = new[] { TokenChar.Digit, TokenChar.Letter }
 			};
 
-			public override object Json => new
-			{
-				min_gram = 1,
-				max_gram = 2,
-				token_chars = new[] { "digit", "letter" },
-				type = "edge_ngram"
-			};
+			public override object Json => new { min_gram = 1, max_gram = 2, token_chars = new[] { "digit", "letter" }, type = "edge_ngram" };
 
 			public override string Name => "endgen";
 		}
@@ -50,10 +42,7 @@ namespace Tests.Analysis.Tokenizers
 
 			public override ITokenizer Initializer => new EdgeNGramTokenizer
 			{
-				MaxGram = 2,
-				MinGram = 1,
-				TokenChars = new[] { TokenChar.Custom },
-				CustomTokenChars = "+-_"
+				MaxGram = 2, MinGram = 1, TokenChars = new[] { TokenChar.Custom }, CustomTokenChars = "+-_"
 			};
 
 			public override object Json => new
@@ -62,7 +51,7 @@ namespace Tests.Analysis.Tokenizers
 				max_gram = 2,
 				token_chars = new[] { "custom" },
 				custom_token_chars = "+-_",
- 				type = "edge_ngram"
+				type = "edge_ngram"
 			};
 
 			public override string Name => "endgen_custom";
@@ -78,18 +67,10 @@ namespace Tests.Analysis.Tokenizers
 
 			public override ITokenizer Initializer => new NGramTokenizer
 			{
-				MaxGram = 2,
-				MinGram = 1,
-				TokenChars = new[] { TokenChar.Digit, TokenChar.Letter }
+				MaxGram = 2, MinGram = 1, TokenChars = new[] { TokenChar.Digit, TokenChar.Letter }
 			};
 
-			public override object Json => new
-			{
-				min_gram = 1,
-				max_gram = 2,
-				token_chars = new[] { "digit", "letter" },
-				type = "ngram"
-			};
+			public override object Json => new { min_gram = 1, max_gram = 2, token_chars = new[] { "digit", "letter" }, type = "ngram" };
 
 			public override string Name => "ng";
 		}
@@ -106,10 +87,7 @@ namespace Tests.Analysis.Tokenizers
 
 			public override ITokenizer Initializer => new NGramTokenizer
 			{
-				MaxGram = 2,
-				MinGram = 1,
-				TokenChars = new[] { TokenChar.Custom },
-				CustomTokenChars = "+-_"
+				MaxGram = 2, MinGram = 1, TokenChars = new[] { TokenChar.Custom }, CustomTokenChars = "+-_"
 			};
 
 			public override object Json => new
@@ -164,16 +142,9 @@ namespace Tests.Analysis.Tokenizers
 				.RuleFiles(RuleFiles)
 			);
 
-			public override ITokenizer Initializer => new IcuTokenizer
-			{
-				RuleFiles = RuleFiles,
-			};
+			public override ITokenizer Initializer => new IcuTokenizer { RuleFiles = RuleFiles, };
 
-			public override object Json => new
-			{
-				rule_files = RuleFiles,
-				type = "icu_tokenizer"
-			};
+			public override object Json => new { rule_files = RuleFiles, type = "icu_tokenizer" };
 
 			public override string Name => "icu";
 		}
@@ -198,7 +169,7 @@ namespace Tests.Analysis.Tokenizers
 				DiscardPunctuation = true,
 				NBestExamples = Example,
 				NBestCost = 1000,
-				UserDictionaryRules = new [] { Inline }
+				UserDictionaryRules = new[] { Inline }
 			};
 
 			public override object Json => new
@@ -208,7 +179,7 @@ namespace Tests.Analysis.Tokenizers
 				nbest_cost = 1000,
 				nbest_examples = Example,
 				type = "kuromoji_tokenizer",
-				user_dictionary_rules = new [] { Inline }
+				user_dictionary_rules = new[] { Inline }
 			};
 
 			public override string Name => "kuro";
@@ -226,18 +197,9 @@ namespace Tests.Analysis.Tokenizers
 					.DiscardCompoundToken()
 				);
 
-			public override ITokenizer Initializer => new KuromojiTokenizer
-			{
-				Mode = KuromojiTokenizationMode.Search,
-				DiscardCompoundToken = true,
-			};
+			public override ITokenizer Initializer => new KuromojiTokenizer { Mode = KuromojiTokenizationMode.Search, DiscardCompoundToken = true, };
 
-			public override object Json => new
-			{
-				discard_compound_token = true,
-				mode = "search",
-				type = "kuromoji_tokenizer",
-			};
+			public override object Json => new { discard_compound_token = true, mode = "search", type = "kuromoji_tokenizer", };
 
 			public override string Name => "kuro_discard_compound_token";
 		}
@@ -250,11 +212,7 @@ namespace Tests.Analysis.Tokenizers
 
 			public override ITokenizer Initializer => new UaxEmailUrlTokenizer { MaxTokenLength = 12 };
 
-			public override object Json => new
-			{
-				max_token_length = 12,
-				type = "uax_url_email"
-			};
+			public override object Json => new { max_token_length = 12, type = "uax_url_email" };
 
 			public override string Name => "uax";
 		}
@@ -267,20 +225,9 @@ namespace Tests.Analysis.Tokenizers
 				.Pattern(@"\W+")
 			);
 
-			public override ITokenizer Initializer => new PatternTokenizer
-			{
-				Flags = "CASE_INSENSITIVE",
-				Group = 1,
-				Pattern = @"\W+"
-			};
+			public override ITokenizer Initializer => new PatternTokenizer { Flags = "CASE_INSENSITIVE", Group = 1, Pattern = @"\W+" };
 
-			public override object Json => new
-			{
-				pattern = @"\W+",
-				flags = "CASE_INSENSITIVE",
-				group = 1,
-				type = "pattern"
-			};
+			public override object Json => new { pattern = @"\W+", flags = "CASE_INSENSITIVE", group = 1, type = "pattern" };
 
 			public override string Name => "pat";
 		}
@@ -310,10 +257,7 @@ namespace Tests.Analysis.Tokenizers
 				.DecompoundMode(NoriDecompoundMode.Mixed)
 			);
 
-			public override ITokenizer Initializer => new NoriTokenizer
-			{
-				DecompoundMode = NoriDecompoundMode.Mixed
-			};
+			public override ITokenizer Initializer => new NoriTokenizer { DecompoundMode = NoriDecompoundMode.Mixed };
 
 			public override object Json => new { type = "nori_tokenizer", decompound_mode = "mixed" };
 			public override string Name => "nori";
@@ -329,16 +273,14 @@ namespace Tests.Analysis.Tokenizers
 
 			public override ITokenizer Initializer => new NoriTokenizer
 			{
-				DecompoundMode = NoriDecompoundMode.Mixed,
-				UserDictionaryRules = new [] { "c++", "C샤프", "세종", "세종시 세종 시" }
+				DecompoundMode = NoriDecompoundMode.Mixed, UserDictionaryRules = new[] { "c++", "C샤프", "세종", "세종시 세종 시" }
 			};
 
 			public override object Json => new
 			{
-				type = "nori_tokenizer",
-				decompound_mode = "mixed",
-				user_dictionary_rules = new [] { "c++", "C샤프", "세종", "세종시 세종 시" }
+				type = "nori_tokenizer", decompound_mode = "mixed", user_dictionary_rules = new[] { "c++", "C샤프", "세종", "세종시 세종 시" }
 			};
+
 			public override string Name => "nori_userdictionary";
 		}
 
@@ -351,16 +293,9 @@ namespace Tests.Analysis.Tokenizers
 				.TokenizeOnCharacters(_chars)
 			);
 
-			public override ITokenizer Initializer => new CharGroupTokenizer
-			{
-				TokenizeOnCharacters = _chars
-			};
+			public override ITokenizer Initializer => new CharGroupTokenizer { TokenizeOnCharacters = _chars };
 
-			public override object Json => new
-			{
-				tokenize_on_chars = _chars,
-				type = "char_group"
-			};
+			public override object Json => new { tokenize_on_chars = _chars, type = "char_group" };
 
 			public override string Name => "char_group";
 		}
@@ -375,18 +310,9 @@ namespace Tests.Analysis.Tokenizers
 				.MaxTokenLength(255)
 			);
 
-			public override ITokenizer Initializer => new CharGroupTokenizer
-			{
-				TokenizeOnCharacters = _chars,
-				MaxTokenLength = 255
-			};
+			public override ITokenizer Initializer => new CharGroupTokenizer { TokenizeOnCharacters = _chars, MaxTokenLength = 255 };
 
-			public override object Json => new
-			{
-				tokenize_on_chars = _chars,
-				type = "char_group",
-				max_token_length = 255
-			};
+			public override object Json => new { tokenize_on_chars = _chars, type = "char_group", max_token_length = 255 };
 
 			public override string Name => "char_group_max_token_length";
 		}
@@ -398,13 +324,24 @@ namespace Tests.Analysis.Tokenizers
 				.DiscardPunctuation()
 			);
 
-			public override ITokenizer Initializer => new NoriTokenizer
-			{
-				DiscardPunctuation = true
-			};
+			public override ITokenizer Initializer => new NoriTokenizer { DiscardPunctuation = true };
 
 			public override object Json => new { type = "nori_tokenizer", discard_punctuation = true };
 			public override string Name => "nori-discard";
+		}
+
+		[SkipVersion("<7.7.0", "simple_pattern experimental until 7.7.0")]
+		public class SimplePatternTests : TokenizerAssertionBase<SimplePatternTests>
+		{
+			public override FuncTokenizer Fluent => (n, t) => t.SimplePattern(n, e => e
+				.Pattern(@"\W+")
+			);
+
+			public override ITokenizer Initializer => new SimplePatternTokenizer { Pattern = @"\W+" };
+
+			public override object Json => new { pattern = @"\W+", type = "simple_pattern" };
+
+			public override string Name => "simple-pattern";
 		}
 	}
 }

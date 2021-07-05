@@ -132,5 +132,9 @@ namespace Nest
 		/// >
 		public TokenizersDescriptor CharGroup(string name, Func<CharGroupTokenizerDescriptor, ICharGroupTokenizer> selector) =>
 			Assign(name, selector?.Invoke(new CharGroupTokenizerDescriptor()));
+
+		/// <inheritdoc cref="ISimplePatternTokenizer"/>>
+		public TokenizersDescriptor SimplePattern(string name, Func<SimplePatternTokenizerDescriptor, ISimplePatternTokenizer> selector) =>
+			Assign(name, selector?.Invoke(new SimplePatternTokenizerDescriptor()));
 	}
 }
