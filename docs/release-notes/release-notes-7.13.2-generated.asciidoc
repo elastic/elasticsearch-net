@@ -1,2 +1,8 @@
 
+[float]
+[[bug]]
+=== Bug Fixes
+
+- * Ensure we dispose of the response stream in all cases https://github.com/elastic/elasticsearch-net/pull/5785[#5785]  (issue: https://github.com/elastic/elasticsearch-net/issues/5775[#5775])
+
 
