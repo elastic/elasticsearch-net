@@ -75,6 +75,8 @@ namespace Nest
 		void Visit(IVersionProperty property);
 
 		void Visit(IDenseVectorProperty property);
+
+		void Visit(IMatchOnlyTextProperty property);
 	}
 
 	public class NoopMappingVisitor : IMappingVisitor
@@ -148,5 +150,7 @@ namespace Nest
 		public virtual void Visit(IVersionProperty property) { }
 
 		public virtual void Visit(IDenseVectorProperty property) { }
+
+		public virtual void Visit(IMatchOnlyTextProperty property) { }
 	}
 }
