@@ -17,6 +17,9 @@ namespace Nest
 		[DataMember(Name ="cancellable")]
 		public bool Cancellable { get; internal set; }
 
+		[DataMember(Name ="cancelled")]
+		public bool? Cancelled { get; internal set; }
+
 		[DataMember(Name ="children")]
 		public IReadOnlyCollection<TaskInfo> Children { get; internal set; } = EmptyReadOnly<TaskInfo>.Collection;
 
