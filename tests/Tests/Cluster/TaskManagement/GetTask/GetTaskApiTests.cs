@@ -53,6 +53,12 @@ namespace Tests.Cluster.TaskManagement.GetTask
 			task.StartTimeInMilliseconds.Should().BeGreaterThan(0);
 			task.RunningTimeInNanoseconds.Should().BeGreaterThan(0);
 			task.Cancellable.Should().BeTrue();
+			
+			if (Cluster.ClusterConfiguration.Version >= "7.14.0")
+			{
+				task.Cancelled.HasValue.Should().BeTrue();
+				task.Cancelled.Should().BeFalse();
+			}
 		}
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
@@ -128,6 +134,12 @@ namespace Tests.Cluster.TaskManagement.GetTask
 			task.StartTimeInMilliseconds.Should().BeGreaterThan(0);
 			task.RunningTimeInNanoseconds.Should().BeGreaterThan(0);
 			task.Cancellable.Should().BeTrue();
+
+			if (Cluster.ClusterConfiguration.Version >= "7.14.0")
+			{
+				task.Cancelled.HasValue.Should().BeTrue();
+				task.Cancelled.Should().BeFalse();
+			}
 
 			var reindexResponse = response.GetResponse<ReindexOnServerResponse>();
 			reindexResponse.Should().NotBeNull();
