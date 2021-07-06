@@ -22,5 +22,8 @@
 - * Support simple_pattern and simple_pattern_split tokenizers https://github.com/elastic/elasticsearch-net/pull/5789[#5789]  (issue: https://github.com/elastic/elasticsearch-net/issues/5716[#5716])
 - * Add running state to data feed stats https://github.com/elastic/elasticsearch-net/pull/5792[#5792]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
 - * Add IO stats to node stats model https://github.com/elastic/elasticsearch-net/pull/5793[#5793]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
+- * Add match_only_text field https://github.com/elastic/elasticsearch-net/pull/5801[#5801]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
+- * Add keep_values gap policy https://github.com/elastic/elasticsearch-net/pull/5802[#5802]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
+- * Add cancelled property to taskinfo https://github.com/elastic/elasticsearch-net/pull/5803[#5803]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
 
 
