@@ -12,9 +12,9 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Mapping.Types.Core.DenseVector
 {
 	[SkipVersion("<7.6.0", "Dense Vector property GA in 7.6.0")]
-	public class DenseVectorTests : PropertyTestsBase
+	public class DenseVectorPropertyTests : PropertyTestsBase
 	{
-		public DenseVectorTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DenseVectorPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson => new { properties = new { name = new { type = "dense_vector", dims = 2 } } };
 
