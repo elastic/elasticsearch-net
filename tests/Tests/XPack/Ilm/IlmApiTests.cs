@@ -7,27 +7,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
+using static Elasticsearch.Net.HttpMethod;
 
 namespace Tests.XPack.Ilm
 {
 	[SkipVersion("<6.7.0", "All APIs exist in Elasticsearch 6.7.0")]
 	public class IlmApiTests : CoordinatedIntegrationTestBase<XPackCluster>
 	{
+		private const string IlmDeleteLifecycleStep = nameof(IlmDeleteLifecycleStep);
+		private const string IlmExplainLifecycleStep = nameof(IlmExplainLifecycleStep);
+		private const string IlmGeAllLifecycleStep = nameof(IlmGeAllLifecycleStep);
+		private const string IlmGetLifecycleStep = nameof(IlmGetLifecycleStep);
 		private const string IlmGetStatusStep = nameof(IlmGetStatusStep);
 		private const string IlmPutLifecycleStep = nameof(IlmPutLifecycleStep);
-		private const string IlmGetLifecycleStep = nameof(IlmGetLifecycleStep);
-		private const string IlmGeAllLifecycleStep = nameof(IlmGeAllLifecycleStep);
-		private const string IlmDeleteLifecycleStep = nameof(IlmDeleteLifecycleStep);
-		private const string PutDocumentStep = nameof(PutDocumentStep);
-		private const string IlmExplainLifecycleStep = nameof(IlmExplainLifecycleStep);
 		private const string IlmRemovePolicyStep = nameof(IlmRemovePolicyStep);
 		private const string IlmStopStep = nameof(IlmStopStep);
+		private const string PutDocumentStep = nameof(PutDocumentStep);
 
 		public IlmApiTests(XPackCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
@@ -42,14 +44,15 @@ namespace Tests.XPack.Ilm
 				)
 			},
 			{
-				IlmExplainLifecycleStep, u => u.Calls<ExplainLifecycleDescriptor, ExplainLifecycleRequest, IExplainLifecycleRequest, ExplainLifecycleResponse>(
-					v => new ExplainLifecycleRequest("project"),
-					(v, d) => d,
-					(v, c, f) => c.IndexLifecycleManagement.ExplainLifecycle("project", f),
-					(v, c, f) => c.IndexLifecycleManagement.ExplainLifecycleAsync("project", f),
-					(v, c, r) => c.IndexLifecycleManagement.ExplainLifecycle(r),
-					(v, c, r) => c.IndexLifecycleManagement.ExplainLifecycleAsync(r)
-				)
+				IlmExplainLifecycleStep, u =>
+					u.Calls<ExplainLifecycleDescriptor, ExplainLifecycleRequest, IExplainLifecycleRequest, ExplainLifecycleResponse>(
+						v => new ExplainLifecycleRequest("project"),
+						(v, d) => d,
+						(v, c, f) => c.IndexLifecycleManagement.ExplainLifecycle("project", f),
+						(v, c, f) => c.IndexLifecycleManagement.ExplainLifecycleAsync("project", f),
+						(v, c, r) => c.IndexLifecycleManagement.ExplainLifecycle(r),
+						(v, c, r) => c.IndexLifecycleManagement.ExplainLifecycleAsync(r)
+					)
 			},
 			{
 				IlmGetStatusStep, u => u.Calls<GetIlmStatusDescriptor, GetIlmStatusRequest, IGetIlmStatusRequest, GetIlmStatusResponse>(
@@ -73,32 +76,15 @@ namespace Tests.XPack.Ilm
 								{
 									Actions = new LifecycleActions
 									{
-										new FreezeLifecycleAction(),
-										new SetPriorityLifecycleAction
-										{
-											Priority = 50
-										}
+										new FreezeLifecycleAction(), new SetPriorityLifecycleAction { Priority = 50 }
 									}
 								},
 								Warm = new Phase
 								{
 									MinimumAge = "10d",
-									Actions = new LifecycleActions
-									{
-										new ForceMergeLifecycleAction
-										{
-											MaximumNumberOfSegments = 1
-										}
-									}
+									Actions = new LifecycleActions { new ForceMergeLifecycleAction { MaximumNumberOfSegments = 1 } }
 								},
-								Delete = new Phase
-								{
-									MinimumAge = "30d",
-									Actions = new LifecycleActions
-									{
-										new DeleteLifecycleAction()
-									}
-								}
+								Delete = new Phase { MinimumAge = "30d", Actions = new LifecycleActions { new DeleteLifecycleAction() } }
 							}
 						}
 					},
@@ -163,14 +149,15 @@ namespace Tests.XPack.Ilm
 				)
 			},
 			{
-				IlmDeleteLifecycleStep, u => u.Calls<DeleteLifecycleDescriptor, DeleteLifecycleRequest, IDeleteLifecycleRequest, DeleteLifecycleResponse>(
-					v => new DeleteLifecycleRequest("policy" + v),
-					(v, d) => d,
-					(v, c, f) => c.IndexLifecycleManagement.DeleteLifecycle("policy" + v, f),
-					(v, c, f) => c.IndexLifecycleManagement.DeleteLifecycleAsync("policy" + v, f),
-					(v, c, r) => c.IndexLifecycleManagement.DeleteLifecycle(r),
-					(v, c, r) => c.IndexLifecycleManagement.DeleteLifecycleAsync(r)
-				)
+				IlmDeleteLifecycleStep, u =>
+					u.Calls<DeleteLifecycleDescriptor, DeleteLifecycleRequest, IDeleteLifecycleRequest, DeleteLifecycleResponse>(
+						v => new DeleteLifecycleRequest("policy" + v),
+						(v, d) => d,
+						(v, c, f) => c.IndexLifecycleManagement.DeleteLifecycle("policy" + v, f),
+						(v, c, f) => c.IndexLifecycleManagement.DeleteLifecycleAsync("policy" + v, f),
+						(v, c, r) => c.IndexLifecycleManagement.DeleteLifecycle(r),
+						(v, c, r) => c.IndexLifecycleManagement.DeleteLifecycleAsync(r)
+					)
 			},
 			{
 				IlmStopStep, u => u.Calls<StopIlmDescriptor, StopIlmRequest, IStopIlmRequest, StopIlmResponse>(
@@ -284,5 +271,69 @@ namespace Tests.XPack.Ilm
 			r.ApiCall.HttpStatusCode.Should().Be(200);
 			r.Acknowledged.Should().BeTrue();
 		});
+	}
+
+	[SkipVersion("<7.14.0", "_meta introduced in 7.14.0")]
+	public class PutIlmLifecyclePolicyApiTests
+		: ApiTestBase<XPackCluster, PutLifecycleResponse, IPutLifecycleRequest, PutLifecycleDescriptor, PutLifecycleRequest>
+	{
+		public PutIlmLifecyclePolicyApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			policy = new
+			{
+				_meta = new { foo = "bar" },
+				phases = new { cold = new { actions = new { freeze = new object(), set_priority = new { priority = 50 } } } }
+			}
+		};
+
+		protected override Func<PutLifecycleDescriptor, IPutLifecycleRequest> Fluent => f => f
+			.Policy(p => p
+				.Phases(a => a
+					.Cold(w => w
+						.Actions(ac => ac
+							.Freeze(fr => fr)
+							.SetPriority(pr => pr.Priority(50))
+						)
+					)
+				)
+				.Meta(m => m
+					.Add("foo", "bar")
+				)
+			);
+
+		protected override HttpMethod HttpMethod => PUT;
+
+		protected override PutLifecycleRequest Initializer => new(CallIsolatedValue)
+		{
+			Policy = new Policy
+			{
+				Phases = new Phases
+				{
+					Cold = new Phase
+					{
+						Actions = new LifecycleActions
+						{
+							new FreezeLifecycleAction(), new SetPriorityLifecycleAction { Priority = 50 }
+						}
+					}
+				},
+				Meta = new Dictionary<string, object> { { "foo", "bar" } }
+			}
+		};
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override string UrlPath => $"/_ilm/policy/{CallIsolatedValue}";
+
+		protected override PutLifecycleDescriptor NewDescriptor() => new(CallIsolatedValue);
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.IndexLifecycleManagement.PutLifecycle(CallIsolatedValue, f),
+			(client, f) => client.IndexLifecycleManagement.PutLifecycleAsync(CallIsolatedValue, f),
+			(client, r) => client.IndexLifecycleManagement.PutLifecycle(r),
+			(client, r) => client.IndexLifecycleManagement.PutLifecycleAsync(r)
+		);
 	}
 }
