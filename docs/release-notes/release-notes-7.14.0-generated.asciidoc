@@ -19,5 +19,8 @@
 - * Change default IMemoryStreamFactory https://github.com/elastic/elasticsearch-net/pull/5740[#5740] 
 - * Add readonly property to FS repository settings https://github.com/elastic/elasticsearch-net/pull/5755[#5755]  (issue: https://github.com/elastic/elasticsearch-net/issues/5753[#5753])
 - * Add support for dense vector fields https://github.com/elastic/elasticsearch-net/pull/5780[#5780]  (issue: https://github.com/elastic/elasticsearch-net/issues/3836[#3836])
+- * Support simple_pattern and simple_pattern_split tokenizers https://github.com/elastic/elasticsearch-net/pull/5789[#5789]  (issue: https://github.com/elastic/elasticsearch-net/issues/5716[#5716])
+- * Add running state to data feed stats https://github.com/elastic/elasticsearch-net/pull/5792[#5792]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
+- * Add IO stats to node stats model https://github.com/elastic/elasticsearch-net/pull/5793[#5793]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
 
 
