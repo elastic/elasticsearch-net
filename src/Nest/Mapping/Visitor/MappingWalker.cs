@@ -285,6 +285,12 @@ namespace Nest
 							_visitor.Visit(t);
 						});
 						break;
+					case FieldType.MatchOnlyText:
+						Visit<IMatchOnlyTextProperty>(field, t =>
+						{
+							_visitor.Visit(t);
+						});
+						break;
 					case FieldType.None:
 						continue;
 				}

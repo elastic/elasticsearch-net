@@ -157,6 +157,10 @@ namespace Nest
 		public IProperty DenseVector(Func<DenseVectorPropertyDescriptor<T>, IDenseVectorProperty> selector) =>
 			selector?.Invoke(new DenseVectorPropertyDescriptor<T>());
 
+		/// <inheritdoc />
+		public IProperty MatchOnlyText(Func<MatchOnlyTextPropertyDescriptor<T>, IMatchOnlyTextProperty> selector) =>
+			selector?.Invoke(new MatchOnlyTextPropertyDescriptor<T>());
+
 #pragma warning disable CS3001 // Argument type is not CLS-compliant
 		public IProperty Scalar(Expression<Func<T, int>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector = null) =>
 			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Integer));

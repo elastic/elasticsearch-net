@@ -80,6 +80,8 @@ namespace Nest
 
 		void Visit(IDenseVectorProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);
 
+		void Visit(IMatchOnlyTextProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);
+
 		IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);
 
 		bool SkipProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute);

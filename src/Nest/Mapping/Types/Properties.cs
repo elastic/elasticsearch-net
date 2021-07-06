@@ -157,6 +157,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IDenseVectorProperty" />
 		TReturnType DenseVector(Func<DenseVectorPropertyDescriptor<T>, IDenseVectorProperty> selector);
+
+		/// <inheritdoc cref="IMatchOnlyTextProperty" />
+		TReturnType MatchOnlyText(Func<MatchOnlyTextPropertyDescriptor<T>, IMatchOnlyTextProperty> selector);
 	}
 
 	public partial class PropertiesDescriptor<T> where T : class
@@ -228,6 +231,9 @@ namespace Nest
 
 		/// <inheritdoc cref="ILongRangeProperty" />
 		public PropertiesDescriptor<T> LongRange(Func<LongRangePropertyDescriptor<T>, ILongRangeProperty> selector) => SetProperty(selector);
+
+		/// <inheritdoc cref="IMatchOnlyTextProperty" />
+		public PropertiesDescriptor<T> MatchOnlyText(Func<MatchOnlyTextPropertyDescriptor<T>, IMatchOnlyTextProperty> selector) => SetProperty(selector);
 
 		/// <inheritdoc cref="IMurmur3HashProperty" />
 		public PropertiesDescriptor<T> Murmur3Hash(Func<Murmur3HashPropertyDescriptor<T>, IMurmur3HashProperty> selector) => SetProperty(selector);
