@@ -229,6 +229,8 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		public void Visit(IDenseVectorProperty property) => Increment("dense_vector");
 
+		public void Visit(IMatchOnlyTextProperty property) => Increment("match_only_text");
+
 		private void Increment(string key)
 		{
 			if (!Counts.ContainsKey(key)) Counts.Add(key, 0);

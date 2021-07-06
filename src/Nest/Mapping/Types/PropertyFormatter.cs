@@ -97,6 +97,7 @@ namespace Nest
 				case FieldType.Wildcard: return Deserialize<WildcardProperty>(ref segmentReader, formatterResolver);
 				case FieldType.Version: return Deserialize<VersionProperty>(ref segmentReader, formatterResolver);
 				case FieldType.DenseVector: return Deserialize<DenseVectorProperty>(ref segmentReader, formatterResolver);
+				case FieldType.MatchOnlyText: return Deserialize<MatchOnlyTextProperty>(ref segmentReader, formatterResolver);
 				case FieldType.None:
 					// no "type" field in the property mapping, or FieldType enum could not be parsed from typeString
 					return Deserialize<ObjectProperty>(ref segmentReader, formatterResolver);
@@ -222,6 +223,9 @@ namespace Nest
 					break;
 				case IDenseVectorProperty denseVectorProperty:
 					Serialize(ref writer, denseVectorProperty, formatterResolver);
+					break;
+				case IMatchOnlyTextProperty matchOnlyTextProperty:
+					Serialize(ref writer, matchOnlyTextProperty, formatterResolver);
 					break;
 				default:
 					var formatter = formatterResolver.GetFormatter<object>();
