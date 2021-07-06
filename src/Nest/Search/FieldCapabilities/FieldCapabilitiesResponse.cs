@@ -56,6 +56,7 @@ namespace Nest
 		public FieldCapabilities Keyword => BackingDictionary.TryGetValue("keyword", out var f) ? f : null;
 		public FieldCapabilities Long => BackingDictionary.TryGetValue("long", out var f) ? f : null;
 		public FieldCapabilities LongRange => BackingDictionary.TryGetValue("long_range", out var f) ? f : null;
+		public FieldCapabilities MatchOnlyText => BackingDictionary.TryGetValue("match_only_text", out var f) ? f : null;
 		public FieldCapabilities Murmur3 => BackingDictionary.TryGetValue("murmur3", out var f) ? f : null;
 		public FieldCapabilities Parent => BackingDictionary.TryGetValue("_parent", out var f) ? f : null;
 		public FieldCapabilities ParentJoin => BackingDictionary.TryGetValue("_parent_join", out var f) ? f : null;

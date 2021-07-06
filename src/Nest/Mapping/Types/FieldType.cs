@@ -170,6 +170,12 @@ namespace Nest
 		/// A dense_vector field stores dense vectors of float values.
 		/// </summary>
 		[EnumMember(Value = "dense_vector")]
-		DenseVector
+		DenseVector,
+
+		/// <summary>
+		/// A variant of text that trades scoring and efficiency of positional queries for space efficiency.
+		/// </summary>
+		[EnumMember(Value = "match_only_text")]
+		MatchOnlyText,
 	}
 }
