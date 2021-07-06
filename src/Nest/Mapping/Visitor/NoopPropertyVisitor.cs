@@ -81,6 +81,8 @@ namespace Nest
 
 		public virtual void Visit(IDenseVectorProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
 
+		public virtual void Visit(IMatchOnlyTextProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) { }
+
 		public virtual IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => null;
 
 		public void Visit(IProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
@@ -186,8 +188,11 @@ namespace Nest
 				case IVersionProperty version:
 					Visit(version, propertyInfo, attribute);
 					break;
-				case IDenseVectorProperty version:
-					Visit(version, propertyInfo, attribute);
+				case IDenseVectorProperty denseVector:
+					Visit(denseVector, propertyInfo, attribute);
+					break;
+				case IMatchOnlyTextProperty matchOnlyText:
+					Visit(matchOnlyText, propertyInfo, attribute);
 					break;
 			}
 		}
