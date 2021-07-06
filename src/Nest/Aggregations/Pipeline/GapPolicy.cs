@@ -14,6 +14,9 @@ namespace Nest
 		Skip,
 
 		[EnumMember(Value = "insert_zeros")]
-		InsertZeros
+		InsertZeros,
+
+		[EnumMember(Value = "keep_values")]
+		KeepValues
 	}
 }
