@@ -136,6 +136,30 @@ namespace Nest.Specification.IndexLifecycleManagementApi
 		/// </summary>
 		public Task<GetIlmStatusResponse> GetStatusAsync(IGetIlmStatusRequest request, CancellationToken ct = default) => DoRequestAsync<IGetIlmStatusRequest, GetIlmStatusResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>ilm.migrate_to_data_tiers</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html</a>
+		/// </summary>
+		public MigrateToDataTiersResponse MigrateToDataTiers(Func<MigrateToDataTiersDescriptor, IMigrateToDataTiersRequest> selector = null) => MigrateToDataTiers(selector.InvokeOrDefault(new MigrateToDataTiersDescriptor()));
+		/// <summary>
+		/// <c>POST</c> request to the <c>ilm.migrate_to_data_tiers</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html</a>
+		/// </summary>
+		public Task<MigrateToDataTiersResponse> MigrateToDataTiersAsync(Func<MigrateToDataTiersDescriptor, IMigrateToDataTiersRequest> selector = null, CancellationToken ct = default) => MigrateToDataTiersAsync(selector.InvokeOrDefault(new MigrateToDataTiersDescriptor()), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ilm.migrate_to_data_tiers</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html</a>
+		/// </summary>
+		public MigrateToDataTiersResponse MigrateToDataTiers(IMigrateToDataTiersRequest request) => DoRequest<IMigrateToDataTiersRequest, MigrateToDataTiersResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>ilm.migrate_to_data_tiers</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html</a>
+		/// </summary>
+		public Task<MigrateToDataTiersResponse> MigrateToDataTiersAsync(IMigrateToDataTiersRequest request, CancellationToken ct = default) => DoRequestAsync<IMigrateToDataTiersRequest, MigrateToDataTiersResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>ilm.move_to_step</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html</a>
