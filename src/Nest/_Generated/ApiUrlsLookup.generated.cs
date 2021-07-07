@@ -107,6 +107,7 @@ namespace Nest
 		internal static ApiUrls IndexLifecycleManagementExplainLifecycle = new ApiUrls(new[]{"{index}/_ilm/explain"});
 		internal static ApiUrls IndexLifecycleManagementGetLifecycle = new ApiUrls(new[]{"_ilm/policy/{policy_id}", "_ilm/policy"});
 		internal static ApiUrls IndexLifecycleManagementGetStatus = new ApiUrls(new[]{"_ilm/status"});
+		internal static ApiUrls IndexLifecycleManagementMigrateToDataTiers = new ApiUrls(new[]{"_ilm/migrate_to_data_tiers"});
 		internal static ApiUrls IndexLifecycleManagementMoveToStep = new ApiUrls(new[]{"_ilm/move/{index}"});
 		internal static ApiUrls IndexLifecycleManagementPutLifecycle = new ApiUrls(new[]{"_ilm/policy/{policy_id}"});
 		internal static ApiUrls IndexLifecycleManagementRemovePolicy = new ApiUrls(new[]{"{index}/_ilm/remove"});
