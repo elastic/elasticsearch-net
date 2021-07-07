@@ -62,7 +62,7 @@ namespace Elasticsearch.Net.Specification.RollupApi
 		public override bool SupportsBody => true;
 	}
 
-	///<summary>Request options for Rollup <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-api.html</para></summary>
+	///<summary>Request options for Rollup <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/xpack-rollup.html</para></summary>
 	public class RollupRequestParameters : RequestParameters<RollupRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
