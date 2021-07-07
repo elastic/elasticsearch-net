@@ -3,7 +3,7 @@
 [[uncategorized]]
 === Uncategorized
 
-- * [Backport 7.x] NameValueCollection.ToQueryString performance optimisation https://github.com/elastic/elasticsearch-net/pull/5731[#5731]  (issue: https://github.com/elastic/elasticsearch-net/issues/4952[#4952])
+- * Mark version property on Analyzer as obsolete https://github.com/elastic/elasticsearch-net/pull/5815[#5815]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
 
 [float]
 [[bug]]
@@ -16,6 +16,7 @@
 [[enhancement]]
 === New Features
 
+- * NameValueCollection.ToQueryString performance optimisation https://github.com/elastic/elasticsearch-net/pull/5731[#5731]  (issue: https://github.com/elastic/elasticsearch-net/issues/4952[#4952])
 - * Change default IMemoryStreamFactory https://github.com/elastic/elasticsearch-net/pull/5740[#5740] 
 - * Add readonly property to FS repository settings https://github.com/elastic/elasticsearch-net/pull/5755[#5755]  (issue: https://github.com/elastic/elasticsearch-net/issues/5753[#5753])
 - * Add support for dense vector fields https://github.com/elastic/elasticsearch-net/pull/5780[#5780]  (issue: https://github.com/elastic/elasticsearch-net/issues/3836[#3836])
@@ -25,5 +26,6 @@
 - * Add match_only_text field https://github.com/elastic/elasticsearch-net/pull/5801[#5801]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
 - * Add keep_values gap policy https://github.com/elastic/elasticsearch-net/pull/5802[#5802]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
 - * Add cancelled property to taskinfo https://github.com/elastic/elasticsearch-net/pull/5803[#5803]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
+- * Support _meta on ILM policy https://github.com/elastic/elasticsearch-net/pull/5812[#5812]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
 
 
