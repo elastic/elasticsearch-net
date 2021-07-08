@@ -27,5 +27,6 @@
 - * Add keep_values gap policy https://github.com/elastic/elasticsearch-net/pull/5802[#5802]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
 - * Add cancelled property to taskinfo https://github.com/elastic/elasticsearch-net/pull/5803[#5803]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
 - * Support _meta on ILM policy https://github.com/elastic/elasticsearch-net/pull/5812[#5812]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
+- * Add support for the migrate to data tiers API https://github.com/elastic/elasticsearch-net/pull/5823[#5823] 
 
 
