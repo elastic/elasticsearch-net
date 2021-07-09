@@ -204,6 +204,8 @@ namespace Nest
 
 		/// <inheritdoc cref="IAutoFollowPattern.LeaderIndexPatterns" />
 		public IEnumerable<string> LeaderIndexPatterns { get; set; }
+		/// <inheritdoc cref="IAutoFollowPattern.LeaderIndexExclusionPatterns" />
+		public IEnumerable<string> LeaderIndexExclusionPatterns { get; set; }
 
 		/// <inheritdoc cref="IAutoFollowPattern.Settings" />
 		public IIndexSettings Settings { get; set; }
