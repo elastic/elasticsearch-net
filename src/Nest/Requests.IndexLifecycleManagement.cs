@@ -178,6 +178,8 @@ namespace Nest
 	{
 		protected IMigrateToDataTiersRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementMigrateToDataTiers;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
 		// values part of the url path
 		// Request parameters
 		///<summary>

@@ -127,6 +127,8 @@ namespace Nest
 	public partial class MigrateToDataTiersDescriptor : RequestDescriptorBase<MigrateToDataTiersDescriptor, MigrateToDataTiersRequestParameters, IMigrateToDataTiersRequest>, IMigrateToDataTiersRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementMigrateToDataTiers;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
 		// values part of the url path
 		// Request parameters
 		///<summary>If set to true it will simulate the migration, providing a way to retrieve the ILM policies and indices that need to be migrated. The default is false</summary>
