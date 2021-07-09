@@ -110,6 +110,13 @@ namespace Nest
 		IEnumerable<string> LeaderIndexPatterns { get; set; }
 
 		/// <summary>
+		/// An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or
+		/// more `leader_index_patterns` and one or more `leader_index_exclusion_patterns` won't be followed.
+		/// </summary>
+		[DataMember(Name = "leader_index_exclusion_patterns")]
+		IEnumerable<string> LeaderIndexExclusionPatterns { get; set; }
+
+		/// <summary>
 		/// Settings to override from the leader index.
 		/// Note that certain settings can not be overrode e.g. index.number_of_shards.
 		/// <para />
