@@ -59,7 +59,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 						(_, c, r) => c.Snapshot.GetRepositoryAsync(r))
 			},
 			{
-				AnalyzeRepositoryStep, u => u
+				AnalyzeRepositoryStep, ">=7.14.0", u => u
 					.Calls<AnalyzeRepositoryDescriptor, AnalyzeRepositoryRequest, IAnalyzeRepositoryRequest, AnalyzeRepositoryResponse>(
 						v => new AnalyzeRepositoryRequest(v) { Detailed = true },
 						(v, d) => d.Detailed(),
