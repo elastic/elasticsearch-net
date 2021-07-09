@@ -169,6 +169,31 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IMigrateToDataTiersRequest : IRequest<MigrateToDataTiersRequestParameters>
+	{
+	}
+
+	///<summary>Request for MigrateToDataTiers <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html</para></summary>
+	public partial class MigrateToDataTiersRequest : PlainRequestBase<MigrateToDataTiersRequestParameters>, IMigrateToDataTiersRequest
+	{
+		protected IMigrateToDataTiersRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementMigrateToDataTiers;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		// values part of the url path
+		// Request parameters
+		///<summary>
+		/// If set to true it will simulate the migration, providing a way to retrieve the ILM policies and indices that need to be migrated. The
+		/// default is false
+		///</summary>
+		public bool? DryRun
+		{
+			get => Q<bool? >("dry_run");
+			set => Q("dry_run", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface IMoveToStepRequest : IRequest<MoveToStepRequestParameters>
 	{
 		[IgnoreDataMember]
