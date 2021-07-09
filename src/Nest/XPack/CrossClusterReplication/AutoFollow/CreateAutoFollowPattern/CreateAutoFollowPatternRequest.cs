@@ -23,6 +23,8 @@ namespace Nest
 		public string RemoteCluster { get; set; }
 		/// <inheritdoc cref="IAutoFollowPattern.LeaderIndexPatterns"/>
 		public IEnumerable<string> LeaderIndexPatterns { get; set; }
+		/// <inheritdoc cref="IAutoFollowPattern.LeaderIndexExclusionPatterns"/>
+		public IEnumerable<string> LeaderIndexExclusionPatterns { get; set; }
 		/// <inheritdoc cref="IAutoFollowPattern.Settings"/>
 		public IIndexSettings Settings { get; set; }
 		/// <inheritdoc cref="IAutoFollowPattern.FollowIndexPattern"/>
@@ -54,6 +56,7 @@ namespace Nest
 	{
 		string IAutoFollowPattern.RemoteCluster { get; set; }
 		IEnumerable<string> IAutoFollowPattern.LeaderIndexPatterns { get; set; }
+		IEnumerable<string> IAutoFollowPattern.LeaderIndexExclusionPatterns { get; set; }
 		string IAutoFollowPattern.FollowIndexPattern { get; set; }
 		IIndexSettings IAutoFollowPattern.Settings { get; set; }
 		int? IAutoFollowPattern.MaxReadRequestOperationCount { get; set; }
@@ -77,6 +80,14 @@ namespace Nest
 		/// <inheritdoc cref="IAutoFollowPattern.LeaderIndexPatterns"/>
 		public CreateAutoFollowPatternDescriptor LeaderIndexPatterns(params string[] leaderIndexPatterns) =>
 			Assign(leaderIndexPatterns, (a, v) => a.LeaderIndexPatterns = v);
+
+		/// <inheritdoc cref="IAutoFollowPattern.LeaderIndexExclusionPatterns"/>
+		public CreateAutoFollowPatternDescriptor LeaderIndexExclusionPatterns(IEnumerable<string> leaderIndexExclusionPatterns) =>
+			Assign(leaderIndexExclusionPatterns, (a, v) => a.LeaderIndexExclusionPatterns = v);
+
+		/// <inheritdoc cref="IAutoFollowPattern.LeaderIndexExclusionPatterns"/>
+		public CreateAutoFollowPatternDescriptor LeaderIndexExclusionPatterns(params string[] leaderIndexExclusionPatterns) =>
+			Assign(leaderIndexExclusionPatterns, (a, v) => a.LeaderIndexExclusionPatterns = v);
 
 		/// <inheritdoc cref="IAutoFollowPattern.FollowIndexPattern"/>
 		public CreateAutoFollowPatternDescriptor FollowIndexPattern(string followIndexPattern) =>
