@@ -201,8 +201,8 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
-	///<summary>Request options for RepositoryAnalyze <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
-	public class RepositoryAnalyzeRequestParameters : RequestParameters<RepositoryAnalyzeRequestParameters>
+	///<summary>Request options for AnalyzeRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	public class AnalyzeRepositoryRequestParameters : RequestParameters<AnalyzeRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		public override bool SupportsBody => false;
