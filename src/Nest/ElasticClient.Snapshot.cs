@@ -232,6 +232,30 @@ namespace Nest.Specification.SnapshotApi
 		/// </summary>
 		public Task<GetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request, CancellationToken ct = default) => DoRequestAsync<IGetRepositoryRequest, GetRepositoryResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>POST</c> request to the <c>snapshot.repository_analyze</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
+		/// </summary>
+		public AnalyzeRepositoryResponse AnalyzeRepository(Name repository, Func<AnalyzeRepositoryDescriptor, IAnalyzeRepositoryRequest> selector = null) => AnalyzeRepository(selector.InvokeOrDefault(new AnalyzeRepositoryDescriptor(repository: repository)));
+		/// <summary>
+		/// <c>POST</c> request to the <c>snapshot.repository_analyze</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
+		/// </summary>
+		public Task<AnalyzeRepositoryResponse> AnalyzeRepositoryAsync(Name repository, Func<AnalyzeRepositoryDescriptor, IAnalyzeRepositoryRequest> selector = null, CancellationToken ct = default) => AnalyzeRepositoryAsync(selector.InvokeOrDefault(new AnalyzeRepositoryDescriptor(repository: repository)), ct);
+		/// <summary>
+		/// <c>POST</c> request to the <c>snapshot.repository_analyze</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
+		/// </summary>
+		public AnalyzeRepositoryResponse AnalyzeRepository(IAnalyzeRepositoryRequest request) => DoRequest<IAnalyzeRepositoryRequest, AnalyzeRepositoryResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>POST</c> request to the <c>snapshot.repository_analyze</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
+		/// </summary>
+		public Task<AnalyzeRepositoryResponse> AnalyzeRepositoryAsync(IAnalyzeRepositoryRequest request, CancellationToken ct = default) => DoRequestAsync<IAnalyzeRepositoryRequest, AnalyzeRepositoryResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>snapshot.restore</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</a>
