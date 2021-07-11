@@ -263,6 +263,49 @@ namespace Nest
 		public GetRepositoryDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
+	///<summary>Descriptor for AnalyzeRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	public partial class AnalyzeRepositoryDescriptor : RequestDescriptorBase<AnalyzeRepositoryDescriptor, AnalyzeRepositoryRequestParameters, IAnalyzeRepositoryRequest>, IAnalyzeRepositoryRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotAnalyzeRepository;
+		///<summary>/_snapshot/{repository}/_analyze</summary>
+		///<param name = "repository">this parameter is required</param>
+		public AnalyzeRepositoryDescriptor(Name repository): base(r => r.Required("repository", repository))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected AnalyzeRepositoryDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IAnalyzeRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		// Request parameters
+		///<summary>Number of blobs to create during the test. Defaults to 100.</summary>
+		public AnalyzeRepositoryDescriptor BlobCount(long? blobcount) => Qs("blob_count", blobcount);
+		///<summary>Number of operations to run concurrently during the test. Defaults to 10.</summary>
+		public AnalyzeRepositoryDescriptor Concurrency(long? concurrency) => Qs("concurrency", concurrency);
+		///<summary>Whether to return detailed results or a summary. Defaults to 'false' so that only the summary is returned.</summary>
+		public AnalyzeRepositoryDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
+		///<summary>Number of nodes on which to perform an early read on a blob, i.e. before writing has completed. Early reads are rare actions so the 'rare_action_probability' parameter is also relevant. Defaults to 2.</summary>
+		public AnalyzeRepositoryDescriptor EarlyReadNodeCount(long? earlyreadnodecount) => Qs("early_read_node_count", earlyreadnodecount);
+		///<summary>Maximum size of a blob to create during the test, e.g '1gb' or '100mb'. Defaults to '10mb'.</summary>
+		public AnalyzeRepositoryDescriptor MaxBlobSize(string maxblobsize) => Qs("max_blob_size", maxblobsize);
+		///<summary>Maximum total size of all blobs to create during the test, e.g '1tb' or '100gb'. Defaults to '1gb'.</summary>
+		public AnalyzeRepositoryDescriptor MaxTotalDataSize(string maxtotaldatasize) => Qs("max_total_data_size", maxtotaldatasize);
+		///<summary>Probability of taking a rare action such as an early read or an overwrite. Defaults to 0.02.</summary>
+		public AnalyzeRepositoryDescriptor RareActionProbability(long? rareactionprobability) => Qs("rare_action_probability", rareactionprobability);
+		///<summary>Whether to rarely abort writes before they complete. Defaults to 'true'.</summary>
+		public AnalyzeRepositoryDescriptor RarelyAbortWrites(bool? rarelyabortwrites = true) => Qs("rarely_abort_writes", rarelyabortwrites);
+		///<summary>Number of nodes on which to read a blob after writing. Defaults to 10.</summary>
+		public AnalyzeRepositoryDescriptor ReadNodeCount(long? readnodecount) => Qs("read_node_count", readnodecount);
+		///<summary>Seed for the random number generator used to create the test workload. Defaults to a random value.</summary>
+		public AnalyzeRepositoryDescriptor Seed(long? seed) => Qs("seed", seed);
+		///<summary>Explicit operation timeout. Defaults to '30s'.</summary>
+		public AnalyzeRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+
 	///<summary>Descriptor for Restore <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 	public partial class RestoreDescriptor : RequestDescriptorBase<RestoreDescriptor, RestoreRequestParameters, IRestoreRequest>, IRestoreRequest
 	{
