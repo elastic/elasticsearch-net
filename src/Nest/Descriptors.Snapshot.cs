@@ -267,6 +267,8 @@ namespace Nest
 	public partial class AnalyzeRepositoryDescriptor : RequestDescriptorBase<AnalyzeRepositoryDescriptor, AnalyzeRepositoryRequestParameters, IAnalyzeRepositoryRequest>, IAnalyzeRepositoryRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotAnalyzeRepository;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
 		///<summary>/_snapshot/{repository}/_analyze</summary>
 		///<param name = "repository">this parameter is required</param>
 		public AnalyzeRepositoryDescriptor(Name repository): base(r => r.Required("repository", repository))

@@ -485,6 +485,8 @@ namespace Nest
 	{
 		protected IAnalyzeRepositoryRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SnapshotAnalyzeRepository;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
 		///<summary>/_snapshot/{repository}/_analyze</summary>
 		///<param name = "repository">this parameter is required</param>
 		public AnalyzeRepositoryRequest(Name repository): base(r => r.Required("repository", repository))
