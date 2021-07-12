@@ -14,10 +14,10 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 	{
 		private static readonly string Indent = $"{Environment.NewLine}\t\t";
 		public string AdditionalCode { get; set; } = string.Empty;
-		public bool Parameterless { get; set; }
 		public string Body { get; set; }
 		public string Description { get; set; }
 		public string Generated { get; set; }
+		public bool Parameterless { get; set; }
 
 		public static IEnumerable<Constructor> DescriptorConstructors(CsharpNames names, UrlInformation url)
 		{
@@ -47,7 +47,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 		{
 			var ctors = new List<Constructor>();
 
-			var paths = url.Paths.ToList();
+			var paths = url.Paths.ToList().Union(url.PathsWithDeprecations);
 
 			if (url.IsPartless) return ctors;
 
@@ -77,7 +77,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 					{
 						Parameterless = string.IsNullOrEmpty(constructorArgs),
 						Generated = generated,
-						Description = path.GetXmlDocs(Indent, skipResolvable: true),
+						Description = path.GetXmlDocs(Indent, true),
 						Body = string.Empty
 					});
 
@@ -89,15 +89,14 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 					{
 						Parameterless = string.IsNullOrEmpty(docPathConstArgs),
 						Generated = $"public {typeName}({docPathConstArgs}) : this({docPathBaseArgs})",
-
 						AdditionalCode = $"partial void DocumentFromPath({generic} document);",
-						Description = docPath.GetXmlDocs(Indent, skipResolvable: true, documentConstructor: true),
+						Description = docPath.GetXmlDocs(Indent, true, true),
 						Body = "=> DocumentFromPath(documentWithId);"
 					});
 				}
 			}
 			var constructors = ctors.GroupBy(c => c.Generated.Split(new[] { ':' }, 2)[0]).Select(g => g.Last()).ToList();
-			if (!constructors.Any(c=>c.Parameterless))
+			if (!constructors.Any(c => c.Parameterless))
 				constructors.Add(new Constructor
 				{
 					Parameterless = true,
