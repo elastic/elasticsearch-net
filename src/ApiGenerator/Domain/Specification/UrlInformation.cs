@@ -27,8 +27,13 @@ namespace ApiGenerator.Domain.Specification
 
 		public IDictionary<string, QueryParameters> Params { get; set; } = new SortedDictionary<string, QueryParameters>();
 
-
-		public IReadOnlyCollection<UrlPart> Parts => Paths.Union(PathsWithDeprecations).SelectMany(p => p.Parts).DistinctBy(p => p.Name).ToList();
+		// Include deprecated paths to ensure these are not removed (a breaking change) during 7.x releases.
+		// For historical reasons, constructors for deprecated paths which specified a type where removed in 7.0 and
+		// therefore we don't include those in generation to avoid them being re-added.
+		public IReadOnlyCollection<UrlPart> Parts => Paths.Union(PathsWithDeprecations.Where(x => x.Parts.All(p => p.Name != "type")))
+			.SelectMany(p => p.Parts)
+			.DistinctBy(p => p.Name)
+			.ToList();
 
 		public IReadOnlyCollection<UrlPath> Paths
 		{

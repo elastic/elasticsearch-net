@@ -47,7 +47,10 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 		{
 			var ctors = new List<Constructor>();
 
-			var paths = url.Paths.ToList().Union(url.PathsWithDeprecations);
+			// Include deprecated paths to ensure these are not removed (a breaking change) during 7.x releases.
+			// For historical reasons, constructors for deprecated paths which specified a type where removed in 7.0 and
+			// therefore we don't include those in generation to avoid them being re-added.
+			var paths = url.Paths.ToList().Union(url.PathsWithDeprecations.Where(x => x.Parts.All(p => p.Name != "type")));
 
 			if (url.IsPartless) return ctors;
 
