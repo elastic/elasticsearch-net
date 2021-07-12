@@ -16,89 +16,26 @@ namespace ApiGenerator.Domain.Specification
 {
 	public class ApiEndpoint
 	{
-		/// <summary> The filename of the spec describing the api endpoint </summary>
-		public string FileName { get; set; }
+		private List<LowLevelClientMethod> _lowLevelClientMethods;
 
-		/// <summary> The original name as declared in the spec </summary>
-		public string Name { get; set; }
-
-		/// <summary> The original namespace as declared in the spec </summary>
-		public string Namespace { get; set; }
-
-		/// <summary> The original method name as declared in the spec </summary>
-		public string MethodName { get; set; }
+		public Body Body { get; set; }
 
 		/// <summary> Computed Csharp identifier names </summary>
 		public CsharpNames CsharpNames { get; set; }
 
-		[JsonConverter(typeof(StringEnumConverter))]
-		[JsonProperty("stability")]
-		public Stability Stability { get; set; }
-
-		[JsonProperty("documentation")]
-		public Documentation OfficialDocumentationLink { get; set; }
-
-		public UrlInformation Url { get; set; }
-
-		public Body Body { get; set; }
-
-		[JsonProperty("methods")]
-		public IReadOnlyCollection<string> HttpMethods { get; set; }
-
-		public IEndpointOverrides Overrides { get; internal set; }
-
-		public RequestInterface RequestInterface => new RequestInterface
-		{
-			CsharpNames = CsharpNames,
-			UrlParts = Url.Parts,
-			PartialParameters =
-				Body == null ? Enumerable.Empty<QueryParameters>().ToList() : Url.Params.Values.Where(p => p.RenderPartial && !p.Skip).ToList(),
-			OfficialDocumentationLink = OfficialDocumentationLink?.Url
-		};
-
-		public RequestPartialImplementation RequestPartialImplementation => new RequestPartialImplementation
-		{
-			CsharpNames = CsharpNames,
-			OfficialDocumentationLink = OfficialDocumentationLink?.Url,
-			Stability = Stability,
-			Paths = Url.Paths,
-			Parts = Url.Parts,
-			Params = Url.Params.Values.Where(p => !p.Skip).ToList(),
-			Constructors = Constructor.RequestConstructors(CsharpNames, Url, inheritsFromPlainRequestBase: true).ToList(),
-			GenericConstructors = Constructor.RequestConstructors(CsharpNames, Url, inheritsFromPlainRequestBase: false).ToList(),
-			HasBody = Body != null,
-		};
-
-		public DescriptorPartialImplementation DescriptorPartialImplementation => new DescriptorPartialImplementation
+		public DescriptorPartialImplementation DescriptorPartialImplementation => new()
 		{
 			CsharpNames = CsharpNames,
 			OfficialDocumentationLink = OfficialDocumentationLink?.Url,
 			Constructors = Constructor.DescriptorConstructors(CsharpNames, Url).ToList(),
-			Paths = Url.Paths,
+			Paths = Url.Paths.Union(Url.PathsWithDeprecations).ToArray(),
 			Parts = Url.Parts,
 			Params = Url.Params.Values.Where(p => !p.Skip).ToList(),
 			HasBody = Body != null,
 		};
 
-		public RequestParameterImplementation RequestParameterImplementation => new RequestParameterImplementation
-		{
-			CsharpNames = CsharpNames,
-			OfficialDocumentationLink = OfficialDocumentationLink?.Url,
-			Params = Url.Params.Values.Where(p => !p.Skip).ToList(),
-			HttpMethod = PreferredHttpMethod
-		};
-
-		public string PreferredHttpMethod
-		{
-			get
-			{
-				var first = HttpMethods.First();
-				if (HttpMethods.Count > 1 && first.ToUpperInvariant() == "GET")
-					return HttpMethods.Last();
-
-				return first;
-			}
-		}
+		/// <summary> The filename of the spec describing the api endpoint </summary>
+		public string FileName { get; set; }
 
 		public string HighLevelMethodXmlDocDescription =>
 			$"<c>{PreferredHttpMethod}</c> request to the <c>{Name}</c> API, read more about this API online:";
@@ -107,30 +44,31 @@ namespace ApiGenerator.Domain.Specification
 		{
 			CsharpNames = CsharpNames,
 			Fluent = new FluentMethod(CsharpNames, Url.Parts,
-				selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET"),
-				link: OfficialDocumentationLink?.Url,
-				summary: HighLevelMethodXmlDocDescription
+				Body == null || !Body.Required || HttpMethods.Contains("GET"),
+				OfficialDocumentationLink?.Url,
+				HighLevelMethodXmlDocDescription
 			),
 			FluentBound = !CsharpNames.DescriptorBindsOverMultipleDocuments
 				? null
 				: new BoundFluentMethod(CsharpNames, Url.Parts,
-					selectorIsOptional: Body == null || !Body.Required || HttpMethods.Contains("GET"),
-					link: OfficialDocumentationLink?.Url,
-					summary: HighLevelMethodXmlDocDescription
+					Body == null || !Body.Required || HttpMethods.Contains("GET"),
+					OfficialDocumentationLink?.Url,
+					HighLevelMethodXmlDocDescription
 				),
 			Initializer = new InitializerMethod(CsharpNames,
-				link: OfficialDocumentationLink?.Url,
-				summary: HighLevelMethodXmlDocDescription
+				OfficialDocumentationLink?.Url,
+				HighLevelMethodXmlDocDescription
 			)
 		};
 
-		private List<LowLevelClientMethod> _lowLevelClientMethods;
+		[JsonProperty("methods")]
+		public IReadOnlyCollection<string> HttpMethods { get; set; }
 
 		public IReadOnlyCollection<LowLevelClientMethod> LowLevelClientMethods
 		{
 			get
 			{
-				if (_lowLevelClientMethods != null && _lowLevelClientMethods.Count > 0) return _lowLevelClientMethods;
+				if (_lowLevelClientMethods is { Count: > 0 }) return _lowLevelClientMethods;
 
 				// enumerate once and cache
 				_lowLevelClientMethods = new List<LowLevelClientMethod>();
@@ -180,5 +118,72 @@ namespace ApiGenerator.Domain.Specification
 				return _lowLevelClientMethods;
 			}
 		}
+
+		/// <summary> The original method name as declared in the spec </summary>
+		public string MethodName { get; set; }
+
+		/// <summary> The original name as declared in the spec </summary>
+		public string Name { get; set; }
+
+		/// <summary> The original namespace as declared in the spec </summary>
+		public string Namespace { get; set; }
+
+		[JsonProperty("documentation")]
+		public Documentation OfficialDocumentationLink { get; set; }
+
+		public IEndpointOverrides Overrides { get; internal set; }
+
+		public string PreferredHttpMethod
+		{
+			get
+			{
+				var first = HttpMethods.First();
+				if (HttpMethods.Count > 1 && first.ToUpperInvariant() == "GET")
+					return HttpMethods.Last();
+
+				return first;
+			}
+		}
+
+		public RequestInterface RequestInterface => new()
+		{
+			CsharpNames = CsharpNames,
+			UrlParts = Url.Parts,
+			PartialParameters =
+				Body == null ? Enumerable.Empty<QueryParameters>().ToList() : Url.Params.Values.Where(p => p.RenderPartial && !p.Skip).ToList(),
+			OfficialDocumentationLink = OfficialDocumentationLink?.Url
+		};
+
+		public RequestParameterImplementation RequestParameterImplementation => new()
+		{
+			CsharpNames = CsharpNames,
+			OfficialDocumentationLink = OfficialDocumentationLink?.Url,
+			Params = Url.Params.Values.Where(p => !p.Skip).ToList(),
+			HttpMethod = PreferredHttpMethod
+		};
+
+		public RequestPartialImplementation RequestPartialImplementation => new()
+		{
+			CsharpNames = CsharpNames,
+			OfficialDocumentationLink = OfficialDocumentationLink?.Url,
+			Stability = Stability,
+			// Paths are used to generate API URL lookups
+			// Include deprecated paths to ensure these are not removed (a breaking change) during 7.x releases.
+			// For historical reasons, constructors for deprecated paths which specified a type where removed in 7.0 and
+			// therefore we don't include those in generation to avoid them being re-added.
+			Paths = Url.Paths.Union(Url.PathsWithDeprecations).Where(x => x.Parts.All(p => p.Name != "type")).ToArray(),
+			Parts = Url.Parts,
+			Params = Url.Params.Values.Where(p => !p.Skip).ToList(),
+			Constructors = Constructor.RequestConstructors(CsharpNames, Url, true).ToList(),
+			GenericConstructors = Constructor.RequestConstructors(CsharpNames, Url, false).ToList(),
+			HasBody = Body != null,
+			MethodName = PreferredHttpMethod
+		};
+
+		[JsonConverter(typeof(StringEnumConverter))]
+		[JsonProperty("stability")]
+		public Stability Stability { get; set; }
+
+		public UrlInformation Url { get; set; }
 	}
 }
