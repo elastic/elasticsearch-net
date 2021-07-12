@@ -89,6 +89,7 @@ namespace ApiGenerator.Domain.Specification
 					case "id":
 						return "Id";
 
+					case "scroll_id":
 					case "policy_id":
 						return Type == "string" ? "Id" : "Ids";
 
