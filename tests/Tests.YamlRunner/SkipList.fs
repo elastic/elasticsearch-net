@@ -188,4 +188,10 @@ let SkipList = dict<SkipFile,SkipSection> [
     // TODO investigate
     // May need to trim the incoming regex string
     SkipFile "analytics/histogram.yml", Section "Histogram requires values in increasing order"
+
+    // TODO Can we handle the set which is essentially an alias?
+    // Options: 
+    // - Add new alias operation to distinguish intent
+    // - Rewrite the test to avoid the use of the aliases
+    SkipFile "indices.stats/50_disk_usage.yml", Section "Disk usage stats"
 ]
