@@ -186,8 +186,8 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		}
 	}
 
-	///<summary>Request options for RepositoryAnalyze <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
-	public class RepositoryAnalyzeRequestParameters : RequestParameters<RepositoryAnalyzeRequestParameters>
+	///<summary>Request options for AnalyzeRepository <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+	public class AnalyzeRepositoryRequestParameters : RequestParameters<AnalyzeRepositoryRequestParameters>
 	{
 		///<summary>Number of blobs to create during the test. Defaults to 100.</summary>
 		public long? BlobCount

@@ -163,13 +163,13 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 		///<summary>POST on /_snapshot/{repository}/_analyze <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse RepositoryAnalyze<TResponse>(string repository, RepositoryAnalyzeRequestParameters requestParameters = null)
+		public TResponse AnalyzeRepository<TResponse>(string repository, AnalyzeRepositoryRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_snapshot/{repository:repository}/_analyze"), null, RequestParams(requestParameters));
-		///<summary>POST on /_snapshot/{repository}/_analyze <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
+		///<summary>POST on /_snapshot/{ITransportResponse}/_analyze <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("snapshot.repository_analyze", "repository")]
-		public Task<TResponse> RepositoryAnalyzeAsync<TResponse>(string repository, RepositoryAnalyzeRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> AnalyzeRepositoryAsync<TResponse>(string repository, AnalyzeRepositoryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_snapshot/{repository:repository}/_analyze"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_snapshot/{repository}/{snapshot}/_restore <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para></summary>
 		///<param name = "repository">A repository name</param>

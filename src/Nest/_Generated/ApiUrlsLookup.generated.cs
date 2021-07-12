@@ -294,6 +294,7 @@ namespace Nest
 		internal static ApiUrls SnapshotDeleteRepository = new ApiUrls(new[]{"_snapshot/{repository}"});
 		internal static ApiUrls SnapshotGet = new ApiUrls(new[]{"_snapshot/{repository}/{snapshot}"});
 		internal static ApiUrls SnapshotGetRepository = new ApiUrls(new[]{"_snapshot", "_snapshot/{repository}"});
+		internal static ApiUrls SnapshotAnalyzeRepository = new ApiUrls(new[]{"_snapshot/{repository}/_analyze"});
 		internal static ApiUrls SnapshotRestore = new ApiUrls(new[]{"_snapshot/{repository}/{snapshot}/_restore"});
 		internal static ApiUrls SnapshotStatus = new ApiUrls(new[]{"_snapshot/_status", "_snapshot/{repository}/_status", "_snapshot/{repository}/{snapshot}/_status"});
 		internal static ApiUrls SnapshotVerifyRepository = new ApiUrls(new[]{"_snapshot/{repository}/_verify"});
