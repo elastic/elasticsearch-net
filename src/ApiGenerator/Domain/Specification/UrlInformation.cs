@@ -39,7 +39,7 @@ namespace ApiGenerator.Domain.Specification
 		{
 			get
 			{
-				if (_paths != null && _paths.Count > 0) return _paths;
+				if (_paths is { Count: > 0 }) return _paths;
 
 				_paths = OriginalPaths.Select(p => new UrlPath(p, OriginalParts)).ToList();
 				return _paths;
@@ -50,7 +50,7 @@ namespace ApiGenerator.Domain.Specification
 		{
 			get
 			{
-				if (_pathsWithDeprecation != null && _pathsWithDeprecation.Count > 0) return _pathsWithDeprecation;
+				if (_pathsWithDeprecation is { Count: > 0 }) return _pathsWithDeprecation;
 
 				var paths = Paths ?? new UrlPath[] { };
 				if (DeprecatedPaths == null || DeprecatedPaths.Count == 0) return Paths;
@@ -82,11 +82,13 @@ namespace ApiGenerator.Domain.Specification
 				var finalPathsWithDeprecations = new List<UrlPath>(_pathsWithDeprecation.Count);
 
 				foreach (var path in _pathsWithDeprecation)
+				{
 					if (path.Deprecation is null &&
 						DeprecatedPaths.SingleOrDefault(p => p.Path.Equals(path.Path, StringComparison.OrdinalIgnoreCase)) is { } match)
 						finalPathsWithDeprecations.Add(new UrlPath(match, OriginalParts, Paths));
 					else
 						finalPathsWithDeprecations.Add(path);
+				}
 
 				_pathsWithDeprecation = finalPathsWithDeprecations;
 
