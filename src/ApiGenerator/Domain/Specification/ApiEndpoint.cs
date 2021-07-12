@@ -176,8 +176,7 @@ namespace ApiGenerator.Domain.Specification
 			Params = Url.Params.Values.Where(p => !p.Skip).ToList(),
 			Constructors = Constructor.RequestConstructors(CsharpNames, Url, true).ToList(),
 			GenericConstructors = Constructor.RequestConstructors(CsharpNames, Url, false).ToList(),
-			HasBody = Body != null,
-			MethodName = PreferredHttpMethod
+			HasBody = Body != null
 		};
 
 		[JsonConverter(typeof(StringEnumConverter))]
