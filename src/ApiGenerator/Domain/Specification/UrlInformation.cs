@@ -9,22 +9,32 @@ using Newtonsoft.Json;
 
 namespace ApiGenerator.Domain.Specification
 {
-
 	// ReSharper disable once ClassNeverInstantiated.Global
 	public class UrlInformation
 	{
-		public IDictionary<string, QueryParameters> Params { get; set; } = new SortedDictionary<string, QueryParameters>();
+		private static readonly string[] DocumentApiParts = { "index", "id" };
 
-		[JsonProperty("paths")]
-		private IReadOnlyCollection<string> OriginalPaths { get; set; }
+		private List<UrlPath> _paths;
+
+		private List<UrlPath> _pathsWithDeprecation;
+
+		public bool IsDocumentApi => IsADocumentRoute(Parts);
+
+		public bool IsPartless => !Parts.Any();
 
 		[JsonProperty("parts")]
 		public IDictionary<string, UrlPart> OriginalParts { get; set; }
 
-		[JsonProperty("deprecated_paths")]
-		private IReadOnlyCollection<DeprecatedPath> DeprecatedPaths { get; set; }
+		public IDictionary<string, QueryParameters> Params { get; set; } = new SortedDictionary<string, QueryParameters>();
 
-		private List<UrlPath> _paths;
+		// Include deprecated paths to ensure these are not removed (a breaking change) during 7.x releases.
+		// For historical reasons, constructors for deprecated paths which specified a type where removed in 7.0 and
+		// therefore we don't include those in generation to avoid them being re-added.
+		public IReadOnlyCollection<UrlPart> Parts => Paths.Union(PathsWithDeprecations.Where(x => x.Parts.All(p => p.Name != "type")))
+			.SelectMany(p => p.Parts)
+			.DistinctBy(p => p.Name)
+			.ToList();
+
 		public IReadOnlyCollection<UrlPath> Paths
 		{
 			get
@@ -36,14 +46,13 @@ namespace ApiGenerator.Domain.Specification
 			}
 		}
 
-		private List<UrlPath> _pathsWithDeprecation;
 		public IReadOnlyCollection<UrlPath> PathsWithDeprecations
 		{
 			get
 			{
 				if (_pathsWithDeprecation != null && _pathsWithDeprecation.Count > 0) return _pathsWithDeprecation;
 
-				var paths = Paths ?? new UrlPath[] {};
+				var paths = Paths ?? new UrlPath[] { };
 				if (DeprecatedPaths == null || DeprecatedPaths.Count == 0) return Paths;
 				if (OriginalParts == null) return Paths;
 
@@ -58,8 +67,7 @@ namespace ApiGenerator.Domain.Specification
 				var withoutDeprecatedAliases = DeprecatedPaths
 					.Select(deprecatedPath => new
 					{
-						deprecatedPath,
-						parts = new HashSet<string>(OriginalParts.Keys.Where(k => deprecatedPath.Path.Contains($"{{{k}}}")))
+						deprecatedPath, parts = new HashSet<string>(OriginalParts.Keys.Where(k => deprecatedPath.Path.Contains($"{{{k}}}")))
 					})
 					.GroupBy(t => t.parts, HashSet<string>.CreateSetComparer())
 					.Where(grouped => !canonicalPartNameLookup.Any(set => set.SetEquals(grouped.Key)))
@@ -74,17 +82,11 @@ namespace ApiGenerator.Domain.Specification
 				var finalPathsWithDeprecations = new List<UrlPath>(_pathsWithDeprecation.Count);
 
 				foreach (var path in _pathsWithDeprecation)
-				{
 					if (path.Deprecation is null &&
 						DeprecatedPaths.SingleOrDefault(p => p.Path.Equals(path.Path, StringComparison.OrdinalIgnoreCase)) is { } match)
-					{
 						finalPathsWithDeprecations.Add(new UrlPath(match, OriginalParts, Paths));
-					}
 					else
-					{
 						finalPathsWithDeprecations.Add(path);
-					}
-				}
 
 				_pathsWithDeprecation = finalPathsWithDeprecations;
 
@@ -92,14 +94,11 @@ namespace ApiGenerator.Domain.Specification
 			}
 		}
 
+		[JsonProperty("deprecated_paths")]
+		private IReadOnlyCollection<DeprecatedPath> DeprecatedPaths { get; set; }
 
-		public IReadOnlyCollection<UrlPart> Parts => Paths.SelectMany(p => p.Parts).DistinctBy(p => p.Name).ToList();
-
-		public bool IsPartless => !Parts.Any();
-
-		private static readonly string[] DocumentApiParts = { "index", "id" };
-
-		public bool IsDocumentApi => IsADocumentRoute(Parts);
+		[JsonProperty("paths")]
+		private IReadOnlyCollection<string> OriginalPaths { get; set; }
 
 		public static bool IsADocumentRoute(IReadOnlyCollection<UrlPart> parts) =>
 			parts.Count() == DocumentApiParts.Length
@@ -115,6 +114,5 @@ namespace ApiGenerator.Domain.Specification
 			path = new UrlPath(mostVerbosePath.Path, OriginalParts, mostVerbosePath.Parts);
 			return true;
 		}
-
 	}
 }
