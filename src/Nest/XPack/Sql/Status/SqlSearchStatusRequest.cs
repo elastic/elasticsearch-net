@@ -4,6 +4,9 @@
 
 namespace Nest
 {
+	/// <summary>
+	/// Returns the current status of an async SQL search or a stored synchronous SQL search.
+	/// </summary>
 	[MapsApi("sql.get_async_status")]
 	[ReadAs(typeof(EqlSearchStatusRequest))]
 	public partial interface ISqlSearchStatusRequest { }
