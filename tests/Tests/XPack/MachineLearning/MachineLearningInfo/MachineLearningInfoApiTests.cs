@@ -56,7 +56,7 @@ namespace Tests.XPack.MachineLearning.MachineLearningInfo
 			{
 				var analyzer = anomalyDetectors.CategorizationAnalyzer;
 				analyzer.Should().NotBeNull();
-				analyzer.Tokenizer.Should().Be("ml_classic");
+				analyzer.Tokenizer.Should().Be(TestClient.Configuration.InRange("<7.14.0") ? "ml_classic" : "ml_standard");
 				analyzer.Filter.Should().NotBeNullOrEmpty();
 			}
 
