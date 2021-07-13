@@ -52,6 +52,41 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface ISqlDeleteRequest : IRequest<SqlDeleteRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id Id
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html</para></summary>
+	public partial class SqlDeleteRequest : PlainRequestBase<SqlDeleteRequestParameters>, ISqlDeleteRequest
+	{
+		protected ISqlDeleteRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlDelete;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		///<summary>/_sql/async/delete/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public SqlDeleteRequest(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected SqlDeleteRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id ISqlDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
+	// Request parameters
+	}
+
+	[InterfaceDataContract]
 	public partial interface ISqlSearchStatusRequest : IRequest<SqlSearchStatusRequestParameters>
 	{
 		[IgnoreDataMember]

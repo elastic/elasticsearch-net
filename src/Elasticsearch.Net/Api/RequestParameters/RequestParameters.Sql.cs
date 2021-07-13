@@ -33,8 +33,8 @@ namespace Elasticsearch.Net.Specification.SqlApi
 	{
 	}
 
-	///<summary>Request options for DeleteAsync <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html</para></summary>
-	public class DeleteAsyncRequestParameters : RequestParameters<DeleteAsyncRequestParameters>
+	///<summary>Request options for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html</para></summary>
+	public class SqlDeleteRequestParameters : RequestParameters<SqlDeleteRequestParameters>
 	{
 	}
 
