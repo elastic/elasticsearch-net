@@ -41,6 +41,27 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>Descriptor for Delete <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html</para></summary>
+	public partial class SqlDeleteDescriptor : RequestDescriptorBase<SqlDeleteDescriptor, SqlDeleteRequestParameters, ISqlDeleteRequest>, ISqlDeleteRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlDelete;
+		///<summary>/_sql/async/delete/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public SqlDeleteDescriptor(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected SqlDeleteDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Id ISqlDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
+	// Request parameters
+	}
+
 	///<summary>Descriptor for SearchStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</para></summary>
 	public partial class SqlSearchStatusDescriptor : RequestDescriptorBase<SqlSearchStatusDescriptor, SqlSearchStatusRequestParameters, ISqlSearchStatusRequest>, ISqlSearchStatusRequest
 	{
