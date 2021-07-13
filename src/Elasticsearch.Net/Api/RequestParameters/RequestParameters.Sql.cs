@@ -38,8 +38,8 @@ namespace Elasticsearch.Net.Specification.SqlApi
 	{
 	}
 
-	///<summary>Request options for GetAsync <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</para></summary>
-	public class GetAsyncRequestParameters : RequestParameters<GetAsyncRequestParameters>
+	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</para></summary>
+	public class SqlGetRequestParameters : RequestParameters<SqlGetRequestParameters>
 	{
 		///<summary>Separator for CSV results</summary>
 		public string Delimiter
