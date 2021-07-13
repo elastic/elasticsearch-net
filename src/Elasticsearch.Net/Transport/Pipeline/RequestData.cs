@@ -14,6 +14,7 @@ namespace Elasticsearch.Net
 	public class RequestData
 	{
 		private Uri _requestUri;
+		private Node _node;
 
 		public const string OpaqueIdHeader = "X-Opaque-Id";
 		public const string RunAsSecurityHeader = "es-security-runas-user";
@@ -129,7 +130,19 @@ namespace Elasticsearch.Net
 
 		public HttpMethod Method { get; }
 
-		public Node Node { get; set; }
+		public Node Node 
+		{
+			get
+			{
+				return _node; 
+			}
+			set
+			{
+				_requestUri = null;
+				_node = value;
+			}
+		}
+
 		public AuditEvent OnFailureAuditEvent => MadeItToResponse ? AuditEvent.BadResponse : AuditEvent.BadRequest;
 		public PipelineFailure OnFailurePipelineFailure => MadeItToResponse ? PipelineFailure.BadResponse : PipelineFailure.BadRequest;
 		public string PathAndQuery { get; }
