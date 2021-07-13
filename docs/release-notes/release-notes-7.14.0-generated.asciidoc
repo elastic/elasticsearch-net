@@ -30,5 +30,8 @@
 - * Add support for the migrate to data tiers API https://github.com/elastic/elasticsearch-net/pull/5823[#5823] 
 - * Support snapshot repository analysis API https://github.com/elastic/elasticsearch-net/pull/5831[#5831] 
 - * Support index pattern exclusion in CCR AutoFollow https://github.com/elastic/elasticsearch-net/pull/5832[#5832]  (issue: https://github.com/elastic/elasticsearch-net/issues/5776[#5776])
+- * Support get async SQL search status API https://github.com/elastic/elasticsearch-net/pull/5856[#5856] 
+- * Support delete async SQL search API https://github.com/elastic/elasticsearch-net/pull/5858[#5858] 
+- * Support get async SQL search API https://github.com/elastic/elasticsearch-net/pull/5861[#5861] 
 
 
