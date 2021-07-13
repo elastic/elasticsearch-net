@@ -64,6 +64,30 @@ namespace Nest.Specification.SqlApi
 		/// </summary>
 		public Task<ClearSqlCursorResponse> ClearCursorAsync(IClearSqlCursorRequest request, CancellationToken ct = default) => DoRequestAsync<IClearSqlCursorRequest, ClearSqlCursorResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>GET</c> request to the <c>sql.get_async_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</a>
+		/// </summary>
+		public SqlSearchStatusResponse SearchStatus(Id id, Func<SqlSearchStatusDescriptor, ISqlSearchStatusRequest> selector = null) => SearchStatus(selector.InvokeOrDefault(new SqlSearchStatusDescriptor(id: id)));
+		/// <summary>
+		/// <c>GET</c> request to the <c>sql.get_async_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</a>
+		/// </summary>
+		public Task<SqlSearchStatusResponse> SearchStatusAsync(Id id, Func<SqlSearchStatusDescriptor, ISqlSearchStatusRequest> selector = null, CancellationToken ct = default) => SearchStatusAsync(selector.InvokeOrDefault(new SqlSearchStatusDescriptor(id: id)), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>sql.get_async_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</a>
+		/// </summary>
+		public SqlSearchStatusResponse SearchStatus(ISqlSearchStatusRequest request) => DoRequest<ISqlSearchStatusRequest, SqlSearchStatusResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>sql.get_async_status</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</a>
+		/// </summary>
+		public Task<SqlSearchStatusResponse> SearchStatusAsync(ISqlSearchStatusRequest request, CancellationToken ct = default) => DoRequestAsync<ISqlSearchStatusRequest, SqlSearchStatusResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>POST</c> request to the <c>sql.query</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</a>
