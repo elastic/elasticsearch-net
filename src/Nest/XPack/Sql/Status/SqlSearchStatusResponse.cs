@@ -15,7 +15,7 @@ namespace Nest
 		/// For a completed search shows the http status code of the completed search.
 		/// </summary>
 		[DataMember(Name = "completion_status")]
-		public int CompletionStatus { get; internal set; }
+		public int? CompletionStatus { get; internal set; }
 
 		/// <summary>
 		/// For a running search shows a timestamp when the eql search started, in milliseconds since the Unix epoch.
