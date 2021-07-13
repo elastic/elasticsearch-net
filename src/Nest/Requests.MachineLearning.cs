@@ -1506,7 +1506,34 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-	// Request parameters
+		// Request parameters
+		///<summary>Ignore if the source indices expressions resolves to no concrete indices (default: true). Only set if datafeed_config is provided.</summary>
+		public bool? AllowNoIndices
+		{
+			get => Q<bool? >("allow_no_indices");
+			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Whether source index expressions should get expanded to open or closed indices (default: open). Only set if datafeed_config is provided.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Ignore indices that are marked as throttled (default: true). Only set if datafeed_config is provided.</summary>
+		public bool? IgnoreThrottled
+		{
+			get => Q<bool? >("ignore_throttled");
+			set => Q("ignore_throttled", value);
+		}
+
+		///<summary>Ignore unavailable indexes (default: false). Only set if datafeed_config is provided.</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
 	}
 
 	[InterfaceDataContract]

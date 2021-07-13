@@ -932,25 +932,25 @@ namespace Nest
 		/// <summary>
 		/// <c>POST</c> request to the <c>render_search_template</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates">https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html</a>
 		/// </summary>
 		public RenderSearchTemplateResponse RenderSearchTemplate(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector = null) => RenderSearchTemplate(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>render_search_template</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates">https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html</a>
 		/// </summary>
 		public Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector = null, CancellationToken ct = default) => RenderSearchTemplateAsync(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>render_search_template</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates">https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html</a>
 		/// </summary>
 		public RenderSearchTemplateResponse RenderSearchTemplate(IRenderSearchTemplateRequest request) => DoRequest<IRenderSearchTemplateRequest, RenderSearchTemplateResponse>(request, request.RequestParameters);
 		/// <summary>
 		/// <c>POST</c> request to the <c>render_search_template</c> API, read more about this API online:
 		/// <para></para>
-		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates">https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates</a>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html</a>
 		/// </summary>
 		public Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request, CancellationToken ct = default) => DoRequestAsync<IRenderSearchTemplateRequest, RenderSearchTemplateResponse>(request, request.RequestParameters, ct);
 		/// <summary>
