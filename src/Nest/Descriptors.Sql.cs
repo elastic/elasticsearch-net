@@ -41,6 +41,27 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>Descriptor for SearchStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</para></summary>
+	public partial class SqlSearchStatusDescriptor : RequestDescriptorBase<SqlSearchStatusDescriptor, SqlSearchStatusRequestParameters, ISqlSearchStatusRequest>, ISqlSearchStatusRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlSearchStatus;
+		///<summary>/_sql/async/status/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public SqlSearchStatusDescriptor(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected SqlSearchStatusDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Id ISqlSearchStatusRequest.Id => Self.RouteValues.Get<Id>("id");
+	// Request parameters
+	}
+
 	///<summary>Descriptor for Query <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</para></summary>
 	public partial class QuerySqlDescriptor : RequestDescriptorBase<QuerySqlDescriptor, QuerySqlRequestParameters, IQuerySqlRequest>, IQuerySqlRequest
 	{

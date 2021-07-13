@@ -75,8 +75,8 @@ namespace Elasticsearch.Net.Specification.SqlApi
 		}
 	}
 
-	///<summary>Request options for GetAsyncStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</para></summary>
-	public class GetAsyncStatusRequestParameters : RequestParameters<GetAsyncStatusRequestParameters>
+	///<summary>Request options for SearchStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</para></summary>
+	public class SqlSearchStatusRequestParameters : RequestParameters<SqlSearchStatusRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
