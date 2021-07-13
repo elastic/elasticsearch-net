@@ -34,6 +34,54 @@ namespace Elasticsearch.Net.Specification.SqlApi
 		public override bool SupportsBody => true;
 	}
 
+	///<summary>Request options for DeleteAsync <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html</para></summary>
+	public class DeleteAsyncRequestParameters : RequestParameters<DeleteAsyncRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		public override bool SupportsBody => false;
+	}
+
+	///<summary>Request options for GetAsync <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</para></summary>
+	public class GetAsyncRequestParameters : RequestParameters<GetAsyncRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+		///<summary>Separator for CSV results</summary>
+		public string Delimiter
+		{
+			get => Q<string>("delimiter");
+			set => Q("delimiter", value);
+		}
+
+		///<summary>Short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set => Q("format", value);
+		}
+
+		///<summary>Retention period for the search and its results</summary>
+		public TimeSpan KeepAlive
+		{
+			get => Q<TimeSpan>("keep_alive");
+			set => Q("keep_alive", value);
+		}
+
+		///<summary>Duration to wait for complete results</summary>
+		public TimeSpan WaitForCompletionTimeout
+		{
+			get => Q<TimeSpan>("wait_for_completion_timeout");
+			set => Q("wait_for_completion_timeout", value);
+		}
+	}
+
+	///<summary>Request options for GetAsyncStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</para></summary>
+	public class GetAsyncStatusRequestParameters : RequestParameters<GetAsyncStatusRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+	}
+
 	///<summary>Request options for Query <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</para></summary>
 	public class QuerySqlRequestParameters : RequestParameters<QuerySqlRequestParameters>
 	{
