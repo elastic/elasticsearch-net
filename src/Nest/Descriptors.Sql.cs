@@ -62,6 +62,35 @@ namespace Nest
 	// Request parameters
 	}
 
+	///<summary>Descriptor for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</para></summary>
+	public partial class SqlGetDescriptor : RequestDescriptorBase<SqlGetDescriptor, SqlGetRequestParameters, ISqlGetRequest>, ISqlGetRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGet;
+		///<summary>/_sql/async/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public SqlGetDescriptor(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected SqlGetDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Id ISqlGetRequest.Id => Self.RouteValues.Get<Id>("id");
+		// Request parameters
+		///<summary>Separator for CSV results</summary>
+		public SqlGetDescriptor Delimiter(string delimiter) => Qs("delimiter", delimiter);
+		///<summary>Short version of the Accept header, e.g. json, yaml</summary>
+		public SqlGetDescriptor Format(string format) => Qs("format", format);
+		///<summary>Retention period for the search and its results</summary>
+		public SqlGetDescriptor KeepAlive(Time keepalive) => Qs("keep_alive", keepalive);
+		///<summary>Duration to wait for complete results</summary>
+		public SqlGetDescriptor WaitForCompletionTimeout(Time waitforcompletiontimeout) => Qs("wait_for_completion_timeout", waitforcompletiontimeout);
+	}
+
 	///<summary>Descriptor for SearchStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</para></summary>
 	public partial class SqlSearchStatusDescriptor : RequestDescriptorBase<SqlSearchStatusDescriptor, SqlSearchStatusRequestParameters, ISqlSearchStatusRequest>, ISqlSearchStatusRequest
 	{

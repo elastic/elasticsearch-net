@@ -302,6 +302,7 @@ namespace Nest
 		internal static ApiUrls SnapshotVerifyRepository = new ApiUrls(new[]{"_snapshot/{repository}/_verify"});
 		internal static ApiUrls SqlClearCursor = new ApiUrls(new[]{"_sql/close"});
 		internal static ApiUrls SqlDelete = new ApiUrls(new[]{"_sql/async/delete/{id}"});
+		internal static ApiUrls SqlGet = new ApiUrls(new[]{"_sql/async/{id}"});
 		internal static ApiUrls SqlSearchStatus = new ApiUrls(new[]{"_sql/async/status/{id}"});
 		internal static ApiUrls SqlQuery = new ApiUrls(new[]{"_sql"});
 		internal static ApiUrls SqlTranslate = new ApiUrls(new[]{"_sql/translate"});

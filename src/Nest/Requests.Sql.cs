@@ -82,6 +82,66 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface ISqlGetRequest : IRequest<SqlGetRequestParameters>
+	{
+		[IgnoreDataMember]
+		Id Id
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</para></summary>
+	public partial class SqlGetRequest : PlainRequestBase<SqlGetRequestParameters>, ISqlGetRequest
+	{
+		protected ISqlGetRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGet;
+		///<summary>/_sql/async/{id}</summary>
+		///<param name = "id">this parameter is required</param>
+		public SqlGetRequest(Id id): base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected SqlGetRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id ISqlGetRequest.Id => Self.RouteValues.Get<Id>("id");
+		// Request parameters
+		///<summary>Separator for CSV results</summary>
+		public string Delimiter
+		{
+			get => Q<string>("delimiter");
+			set => Q("delimiter", value);
+		}
+
+		///<summary>Short version of the Accept header, e.g. json, yaml</summary>
+		public string Format
+		{
+			get => Q<string>("format");
+			set => Q("format", value);
+		}
+
+		///<summary>Retention period for the search and its results</summary>
+		public Time KeepAlive
+		{
+			get => Q<Time>("keep_alive");
+			set => Q("keep_alive", value);
+		}
+
+		///<summary>Duration to wait for complete results</summary>
+		public Time WaitForCompletionTimeout
+		{
+			get => Q<Time>("wait_for_completion_timeout");
+			set => Q("wait_for_completion_timeout", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface ISqlSearchStatusRequest : IRequest<SqlSearchStatusRequestParameters>
 	{
 		[IgnoreDataMember]
