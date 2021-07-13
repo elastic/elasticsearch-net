@@ -961,7 +961,15 @@ namespace Nest
 
 		// values part of the url path
 		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-	// Request parameters
+		// Request parameters
+		///<summary>Ignore if the source indices expressions resolves to no concrete indices (default: true). Only set if datafeed_config is provided.</summary>
+		public PutJobDescriptor<TDocument> AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
+		///<summary>Whether source index expressions should get expanded to open or closed indices (default: open). Only set if datafeed_config is provided.</summary>
+		public PutJobDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
+		///<summary>Ignore indices that are marked as throttled (default: true). Only set if datafeed_config is provided.</summary>
+		public PutJobDescriptor<TDocument> IgnoreThrottled(bool? ignorethrottled = true) => Qs("ignore_throttled", ignorethrottled);
+		///<summary>Ignore unavailable indexes (default: false). Only set if datafeed_config is provided.</summary>
+		public PutJobDescriptor<TDocument> IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 	}
 
 	///<summary>Descriptor for RevertModelSnapshot <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</para></summary>

@@ -25,7 +25,7 @@ namespace Nest
 		internal static ApiUrls AsyncSearchGet = new ApiUrls(new[]{"_async_search/{id}"});
 		internal static ApiUrls AsyncSearchStatus = new ApiUrls(new[]{"_async_search/status/{id}"});
 		internal static ApiUrls AsyncSearchSubmit = new ApiUrls(new[]{"_async_search", "{index}/_async_search"});
-		internal static ApiUrls NoNamespaceBulk = new ApiUrls(new[]{"_bulk", "{index}/_bulk"});
+		internal static ApiUrls NoNamespaceBulk = new ApiUrls(new[]{"_bulk", "{index}/_bulk", "{index}/{type}/_bulk"});
 		internal static ApiUrls CatAliases = new ApiUrls(new[]{"_cat/aliases", "_cat/aliases/{name}"});
 		internal static ApiUrls CatAllocation = new ApiUrls(new[]{"_cat/allocation", "_cat/allocation/{node_id}"});
 		internal static ApiUrls CatCount = new ApiUrls(new[]{"_cat/count", "_cat/count/{index}"});
@@ -64,7 +64,7 @@ namespace Nest
 		internal static ApiUrls CrossClusterReplicationResumeFollowIndex = new ApiUrls(new[]{"{index}/_ccr/resume_follow"});
 		internal static ApiUrls CrossClusterReplicationStats = new ApiUrls(new[]{"_ccr/stats"});
 		internal static ApiUrls CrossClusterReplicationUnfollowIndex = new ApiUrls(new[]{"{index}/_ccr/unfollow"});
-		internal static ApiUrls NoNamespaceClearScroll = new ApiUrls(new[]{"_search/scroll", "_search/scroll/{scroll_id}"});
+		internal static ApiUrls NoNamespaceClearScroll = new ApiUrls(new[]{"_search/scroll"});
 		internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[]{"_pit"});
 		internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[]{"_cluster/allocation/explain"});
 		internal static ApiUrls ClusterDeleteVotingConfigExclusions = new ApiUrls(new[]{"_cluster/voting_config_exclusions"});
@@ -244,7 +244,7 @@ namespace Nest
 		internal static ApiUrls RollupStartJob = new ApiUrls(new[]{"_rollup/job/{id}/_start"});
 		internal static ApiUrls RollupStopJob = new ApiUrls(new[]{"_rollup/job/{id}/_stop"});
 		internal static ApiUrls NoNamespaceExecutePainlessScript = new ApiUrls(new[]{"_scripts/painless/_execute"});
-		internal static ApiUrls NoNamespaceScroll = new ApiUrls(new[]{"_search/scroll", "_search/scroll/{scroll_id}"});
+		internal static ApiUrls NoNamespaceScroll = new ApiUrls(new[]{"_search/scroll"});
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[]{"_search", "{index}/_search"});
 		internal static ApiUrls NoNamespaceSearchShards = new ApiUrls(new[]{"_search_shards", "{index}/_search_shards"});
 		internal static ApiUrls NoNamespaceSearchTemplate = new ApiUrls(new[]{"_search/template", "{index}/_search/template"});

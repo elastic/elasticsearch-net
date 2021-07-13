@@ -401,6 +401,13 @@ namespace Nest
 			set => Q("ignore_unavailable", value);
 		}
 
+		///<summary>Whether to include the repository name in the snapshot info. Defaults to true.</summary>
+		public bool? IncludeRepository
+		{
+			get => Q<bool? >("include_repository");
+			set => Q("include_repository", value);
+		}
+
 		///<summary>Whether to include details of each index in the snapshot, if those details are available. Defaults to false.</summary>
 		public bool? IndexDetails
 		{
