@@ -8,7 +8,9 @@ namespace Nest
 	[ReadAs(typeof(EqlSearchStatusRequest))]
 	public partial interface ISqlSearchStatusRequest { }
 
+	/// <inheritdoc cref="ISqlSearchStatusRequest"/>
 	public partial class SqlSearchStatusRequest { }
 
+	/// <inheritdoc cref="ISqlSearchStatusRequest"/>
 	public partial class SqlSearchStatusDescriptor { }
 }
