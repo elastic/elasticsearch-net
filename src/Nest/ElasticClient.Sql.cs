@@ -64,6 +64,30 @@ namespace Nest.Specification.SqlApi
 		/// </summary>
 		public Task<ClearSqlCursorResponse> ClearCursorAsync(IClearSqlCursorRequest request, CancellationToken ct = default) => DoRequestAsync<IClearSqlCursorRequest, ClearSqlCursorResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>DELETE</c> request to the <c>sql.delete_async</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html</a>
+		/// </summary>
+		public SqlDeleteResponse Delete(Id id, Func<SqlDeleteDescriptor, ISqlDeleteRequest> selector = null) => Delete(selector.InvokeOrDefault(new SqlDeleteDescriptor(id: id)));
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>sql.delete_async</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html</a>
+		/// </summary>
+		public Task<SqlDeleteResponse> DeleteAsync(Id id, Func<SqlDeleteDescriptor, ISqlDeleteRequest> selector = null, CancellationToken ct = default) => DeleteAsync(selector.InvokeOrDefault(new SqlDeleteDescriptor(id: id)), ct);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>sql.delete_async</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html</a>
+		/// </summary>
+		public SqlDeleteResponse Delete(ISqlDeleteRequest request) => DoRequest<ISqlDeleteRequest, SqlDeleteResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>sql.delete_async</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html</a>
+		/// </summary>
+		public Task<SqlDeleteResponse> DeleteAsync(ISqlDeleteRequest request, CancellationToken ct = default) => DoRequestAsync<ISqlDeleteRequest, SqlDeleteResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>sql.get_async_status</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</a>

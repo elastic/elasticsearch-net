@@ -61,13 +61,13 @@ namespace Elasticsearch.Net.Specification.SqlApi
 		///<summary>DELETE on /_sql/async/delete/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html</para></summary>
 		///<param name = "id">The async search ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse DeleteAsync<TResponse>(string id, DeleteAsyncRequestParameters requestParameters = null)
+		public TResponse Delete<TResponse>(string id, SqlDeleteRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(DELETE, Url($"_sql/async/delete/{id:id}"), null, RequestParams(requestParameters));
 		///<summary>DELETE on /_sql/async/delete/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html</para></summary>
 		///<param name = "id">The async search ID</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("sql.delete_async", "id")]
-		public Task<TResponse> DeleteAsyncAsync<TResponse>(string id, DeleteAsyncRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> DeleteAsync<TResponse>(string id, SqlDeleteRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_sql/async/delete/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_sql/async/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</para></summary>
 		///<param name = "id">The async search ID</param>
