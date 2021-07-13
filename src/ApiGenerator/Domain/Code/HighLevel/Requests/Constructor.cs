@@ -47,10 +47,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 		{
 			var ctors = new List<Constructor>();
 
-			// Include deprecated paths to ensure these are not removed (a breaking change) during 7.x releases.
-			// For historical reasons, constructors for deprecated paths which specified a type where removed in 7.0 and
-			// therefore we don't include those in generation to avoid them being re-added.
-			var paths = url.Paths.ToList().Union(url.PathsWithDeprecations.Where(x => x.Parts.All(p => p.Name != "type")));
+			var paths = url.FinalPaths;
 
 			if (url.IsPartless) return ctors;
 
@@ -100,6 +97,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 			}
 			var constructors = ctors.GroupBy(c => c.Generated.Split(new[] { ':' }, 2)[0]).Select(g => g.Last()).ToList();
 			if (!constructors.Any(c => c.Parameterless))
+			{
 				constructors.Add(new Constructor
 				{
 					Parameterless = true,
@@ -107,6 +105,7 @@ namespace ApiGenerator.Domain.Code.HighLevel.Requests
 					Description =
 						$"///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>{Indent}[SerializationConstructor]",
 				});
+			}
 			return constructors;
 		}
 	}
