@@ -41,8 +41,8 @@ namespace Elasticsearch.Net.Specification.SqlApi
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for GetAsync <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</para></summary>
-	public class GetAsyncRequestParameters : RequestParameters<GetAsyncRequestParameters>
+	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</para></summary>
+	public class SqlGetRequestParameters : RequestParameters<SqlGetRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;

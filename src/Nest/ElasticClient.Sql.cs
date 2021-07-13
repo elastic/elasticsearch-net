@@ -88,6 +88,30 @@ namespace Nest.Specification.SqlApi
 		/// </summary>
 		public Task<SqlDeleteResponse> DeleteAsync(ISqlDeleteRequest request, CancellationToken ct = default) => DoRequestAsync<ISqlDeleteRequest, SqlDeleteResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>GET</c> request to the <c>sql.get_async</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</a>
+		/// </summary>
+		public SqlGetResponse Get(Id id, Func<SqlGetDescriptor, ISqlGetRequest> selector = null) => Get(selector.InvokeOrDefault(new SqlGetDescriptor(id: id)));
+		/// <summary>
+		/// <c>GET</c> request to the <c>sql.get_async</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</a>
+		/// </summary>
+		public Task<SqlGetResponse> GetAsync(Id id, Func<SqlGetDescriptor, ISqlGetRequest> selector = null, CancellationToken ct = default) => GetAsync(selector.InvokeOrDefault(new SqlGetDescriptor(id: id)), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>sql.get_async</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</a>
+		/// </summary>
+		public SqlGetResponse Get(ISqlGetRequest request) => DoRequest<ISqlGetRequest, SqlGetResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>sql.get_async</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</a>
+		/// </summary>
+		public Task<SqlGetResponse> GetAsync(ISqlGetRequest request, CancellationToken ct = default) => DoRequestAsync<ISqlGetRequest, SqlGetResponse>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>sql.get_async_status</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</a>
