@@ -227,6 +227,8 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public GetSnapshotDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
+		///<summary>Whether to include the repository name in the snapshot info. Defaults to true.</summary>
+		public GetSnapshotDescriptor IncludeRepository(bool? includerepository = true) => Qs("include_repository", includerepository);
 		///<summary>Whether to include details of each index in the snapshot, if those details are available. Defaults to false.</summary>
 		public GetSnapshotDescriptor IndexDetails(bool? indexdetails = true) => Qs("index_details", indexdetails);
 		///<summary>Explicit operation timeout for connection to master node</summary>

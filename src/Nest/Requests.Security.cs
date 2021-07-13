@@ -775,7 +775,7 @@ namespace Nest
 	{
 	}
 
-	///<summary>Request for GetUserPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html</para></summary>
+	///<summary>Request for GetUserPrivileges <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html</para></summary>
 	public partial class GetUserPrivilegesRequest : PlainRequestBase<GetUserPrivilegesRequestParameters>, IGetUserPrivilegesRequest
 	{
 		protected IGetUserPrivilegesRequest Self => this;

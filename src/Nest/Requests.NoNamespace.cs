@@ -2672,7 +2672,7 @@ namespace Nest
 		}
 	}
 
-	///<summary>Request for RenderSearchTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates</para></summary>
+	///<summary>Request for RenderSearchTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html</para></summary>
 	public partial class RenderSearchTemplateRequest : PlainRequestBase<RenderSearchTemplateRequestParameters>, IRenderSearchTemplateRequest
 	{
 		protected IRenderSearchTemplateRequest Self => this;
