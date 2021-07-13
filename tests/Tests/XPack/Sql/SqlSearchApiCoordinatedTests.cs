@@ -114,10 +114,20 @@ ORDER BY numberOfContributors DESC";
 		{
 			r.ShouldBeValid();
 			r.Id.Should().NotBeNullOrEmpty();
-			r.IsPartial.Should().BeTrue();
-			r.IsRunning.Should().BeTrue();
+
+			if (r.CompletionStatus.HasValue)
+			{
+				r.IsPartial.Should().BeFalse();
+				r.IsRunning.Should().BeFalse();
+			}
+			else
+			{
+				r.IsPartial.Should().BeTrue();
+				r.IsRunning.Should().BeTrue();
+				r.StartTimeInMillis.Should().BeGreaterThan(0);
+			}
+			
 			r.ExpirationTimeInMillis.Should().BeGreaterThan(0);
-			r.StartTimeInMillis.Should().BeGreaterThan(0);
 		});
 
 		[I] public async Task SqlGetResponse() => await Assert<SqlGetResponse>(GetStep, r =>
