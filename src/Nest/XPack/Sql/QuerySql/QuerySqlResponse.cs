@@ -25,13 +25,31 @@ namespace Nest
 		public string Cursor { get; internal set; }
 
 		/// <summary>
-		/// If <see cref="IQuerySqlRequest.Columnar"/> has been set to false, this property will contain the row values
+		/// Identifier for the search.
+		/// </summary>
+		[DataMember(Name = "id")]
+		public string Id { get; internal set; }
+
+		/// <summary>
+		/// If true, the response does not contain complete search results.
+		/// </summary>
+		[DataMember(Name = "is_partial")]
+		public bool IsPartial { get; internal set; }
+
+		/// <summary>
+		/// If true, the search request is still executing.
+		/// </summary>
+		[DataMember(Name = "is_running")]
+		public bool IsRunning { get; internal set; }
+
+		/// <summary>
+		/// If <see cref="IQuerySqlRequest.Columnar" /> has been set to false, this property will contain the row values
 		/// </summary>
 		[DataMember(Name = "rows")]
 		public IReadOnlyCollection<SqlRow> Rows { get; internal set; } = EmptyReadOnly<SqlRow>.Collection;
 
 		/// <summary>
-		/// If <see cref="IQuerySqlRequest.Columnar"/> has been set to true, this property will contain the column values
+		/// If <see cref="IQuerySqlRequest.Columnar" /> has been set to true, this property will contain the column values
 		/// </summary>
 		[DataMember(Name = "values")]
 		public IReadOnlyCollection<SqlRow> Values { get; internal set; } = EmptyReadOnly<SqlRow>.Collection;
