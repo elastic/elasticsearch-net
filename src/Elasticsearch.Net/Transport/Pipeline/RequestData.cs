@@ -13,6 +13,9 @@ namespace Elasticsearch.Net
 {
 	public class RequestData
 	{
+		private Uri _requestUri;
+		private Node _node;
+
 		public const string OpaqueIdHeader = "X-Opaque-Id";
 		public const string RunAsSecurityHeader = "es-security-runas-user";
 
@@ -127,7 +130,19 @@ namespace Elasticsearch.Net
 
 		public HttpMethod Method { get; }
 
-		public Node Node { get; set; }
+		public Node Node 
+		{
+			get
+			{
+				return _node; 
+			}
+			set
+			{
+				_requestUri = null;
+				_node = value;
+			}
+		}
+
 		public AuditEvent OnFailureAuditEvent => MadeItToResponse ? AuditEvent.BadResponse : AuditEvent.BadRequest;
 		public PipelineFailure OnFailurePipelineFailure => MadeItToResponse ? PipelineFailure.BadResponse : PipelineFailure.BadRequest;
 		public string PathAndQuery { get; }
@@ -149,7 +164,20 @@ namespace Elasticsearch.Net
 		public bool TcpStats { get; }
 		public bool ThreadPoolStats { get; }
 
-		public Uri Uri => Node != null ? new Uri(Node.Uri, PathAndQuery) : null;
+		/// <summary>
+		/// The <see cref="Uri" /> for the request.
+		/// </summary>
+		public Uri Uri
+		{
+			get
+			{
+				if (_requestUri is not null) return _requestUri;
+
+				_requestUri = Node is not null ? new Uri(Node.Uri, PathAndQuery) : null;
+				return _requestUri;
+			}
+		}
+		
 		public TimeSpan DnsRefreshTimeout { get; }
 
 		public MetaHeaderProvider MetaHeaderProvider { get; }
