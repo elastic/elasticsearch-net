@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ApiGenerator.Configuration;
 using Newtonsoft.Json;
 
 namespace ApiGenerator.Domain.Specification
@@ -18,6 +19,14 @@ namespace ApiGenerator.Domain.Specification
 
 		private List<UrlPath> _pathsWithDeprecation;
 
+		// Include deprecated paths to ensure these are not removed (a breaking change) during 7.x releases.
+		// For historical reasons, constructors for deprecated paths which specified a type where removed in 7.0 and
+		// therefore we don't include those in generation to avoid them being re-added.
+		public IReadOnlyCollection<UrlPath> FinalPaths =>
+			Paths.Union(PathsWithDeprecations.Where(x => x.Parts.All(p => p.Name != "type")))
+				.Where(x => !GeneralSkipList.SkippedUrls.Contains(x.Path))
+				.ToArray();
+
 		public bool IsDocumentApi => IsADocumentRoute(Parts);
 
 		public bool IsPartless => !Parts.Any();
@@ -27,10 +36,7 @@ namespace ApiGenerator.Domain.Specification
 
 		public IDictionary<string, QueryParameters> Params { get; set; } = new SortedDictionary<string, QueryParameters>();
 
-		// Include deprecated paths to ensure these are not removed (a breaking change) during 7.x releases.
-		// For historical reasons, constructors for deprecated paths which specified a type where removed in 7.0 and
-		// therefore we don't include those in generation to avoid them being re-added.
-		public IReadOnlyCollection<UrlPart> Parts => Paths.Union(PathsWithDeprecations.Where(x => x.Parts.All(p => p.Name != "type")))
+		public IReadOnlyCollection<UrlPart> Parts => FinalPaths
 			.SelectMany(p => p.Parts)
 			.DistinctBy(p => p.Name)
 			.ToList();
