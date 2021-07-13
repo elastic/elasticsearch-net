@@ -28,7 +28,7 @@ namespace ApiGenerator.Domain.Specification
 			CsharpNames = CsharpNames,
 			OfficialDocumentationLink = OfficialDocumentationLink?.Url,
 			Constructors = Constructor.DescriptorConstructors(CsharpNames, Url).ToList(),
-			Paths = Url.Paths.Union(Url.PathsWithDeprecations).ToArray(),
+			Paths = Url.FinalPaths,
 			Parts = Url.Parts,
 			Params = Url.Params.Values.Where(p => !p.Skip).ToList(),
 			HasBody = Body != null,
@@ -40,18 +40,18 @@ namespace ApiGenerator.Domain.Specification
 		public string HighLevelMethodXmlDocDescription =>
 			$"<c>{PreferredHttpMethod}</c> request to the <c>{Name}</c> API, read more about this API online:";
 
-		public HighLevelModel HighLevelModel => new HighLevelModel
+		public HighLevelModel HighLevelModel => new()
 		{
 			CsharpNames = CsharpNames,
 			Fluent = new FluentMethod(CsharpNames, Url.Parts,
-				Body == null || !Body.Required || HttpMethods.Contains("GET"),
+				Body is not { Required: true } || HttpMethods.Contains("GET"),
 				OfficialDocumentationLink?.Url,
 				HighLevelMethodXmlDocDescription
 			),
 			FluentBound = !CsharpNames.DescriptorBindsOverMultipleDocuments
 				? null
 				: new BoundFluentMethod(CsharpNames, Url.Parts,
-					Body == null || !Body.Required || HttpMethods.Contains("GET"),
+					Body is not { Required: true } || HttpMethods.Contains("GET"),
 					OfficialDocumentationLink?.Url,
 					HighLevelMethodXmlDocDescription
 				),
@@ -167,11 +167,7 @@ namespace ApiGenerator.Domain.Specification
 			CsharpNames = CsharpNames,
 			OfficialDocumentationLink = OfficialDocumentationLink?.Url,
 			Stability = Stability,
-			// Paths are used to generate API URL lookups
-			// Include deprecated paths to ensure these are not removed (a breaking change) during 7.x releases.
-			// For historical reasons, constructors for deprecated paths which specified a type where removed in 7.0 and
-			// therefore we don't include those in generation to avoid them being re-added.
-			Paths = Url.Paths.Union(Url.PathsWithDeprecations).Where(x => x.Parts.All(p => p.Name != "type")).ToArray(),
+			Paths = Url.FinalPaths,
 			Parts = Url.Parts,
 			Params = Url.Params.Values.Where(p => !p.Skip).ToList(),
 			Constructors = Constructor.RequestConstructors(CsharpNames, Url, true).ToList(),
