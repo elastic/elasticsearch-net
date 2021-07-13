@@ -12,6 +12,14 @@ namespace Nest
 	public partial interface IQuerySqlRequest : ISqlRequest
 	{
 		/// <summary>
+		/// Return the results in a columnar fashion: one row represents all the values of a certain column from the current page
+		/// of results.
+		/// The following formats can be returned in columnar orientation: json, yaml, cbor and smile.
+		/// </summary>
+		[DataMember(Name = "columnar")]
+		bool? Columnar { get; set; }
+
+		/// <summary>
 		/// Continue to the next page by sending back the cursor field returned in the previous response.
 		/// <para>
 		/// You’ve reached the last page when there is no cursor returned in the results. Like Elasticsearch’s scroll,
@@ -19,56 +27,53 @@ namespace Nest
 		/// Unlike scroll, receiving the last page is enough to guarantee that the Elasticsearch state is cleared.
 		/// </para>
 		/// </summary>
-		[DataMember(Name="cursor")]
+		[DataMember(Name = "cursor")]
 		string Cursor { get; set; }
 
 		/// <summary>
-		/// Return the results in a columnar fashion: one row represents all the values of a certain column from the current page of results.
-		/// The following formats can be returned in columnar orientation: json, yaml, cbor and smile.
+		/// Make the search asynchronous by setting a duration you’d like to wait for synchronous results.
 		/// </summary>
-		[DataMember(Name="columnar")]
-		bool? Columnar { get; set; }
+		[DataMember(Name = "wait_for_completion_timeout")]
+		Time WaitForCompletionTimeout { get; set; }
 	}
 
 	public partial class QuerySqlRequest
 	{
-		/// <inheritdoc cref="IQuerySqlRequest.Cursor" />
-		/// >
-		public string Cursor { get; set; }
-
 		/// <inheritdoc cref="IQuerySqlRequest.Columnar" />
-		/// >
 		public bool? Columnar { get; set; }
 
+		/// <inheritdoc cref="IQuerySqlRequest.Cursor" />
+		public string Cursor { get; set; }
+
 		/// <inheritdoc cref="ISqlRequest.FetchSize" />
-		/// >
 		public int? FetchSize { get; set; }
 
 		/// <inheritdoc cref="ISqlRequest.Filter" />
-		/// >
 		public QueryContainer Filter { get; set; }
 
 		/// <inheritdoc cref="ISqlRequest.Query" />
-		/// >
 		public string Query { get; set; }
 
+		/// <inheritdoc cref="ISqlRequest.RuntimeFields" />
+		public IRuntimeFields RuntimeFields { get; set; }
+
 		/// <inheritdoc cref="ISqlRequest.TimeZone" />
-		/// >
 		public string TimeZone { get; set; }
 
-		/// <inheritdoc />
-		public IRuntimeFields RuntimeFields { get; set; }
+		/// <inheritdoc cref="IQuerySqlRequest.WaitForCompletionTimeout" />
+		public Time WaitForCompletionTimeout { get; set; }
 	}
 
 	public partial class QuerySqlDescriptor
 	{
-		string IQuerySqlRequest.Cursor { get; set; }
 		bool? IQuerySqlRequest.Columnar { get; set; }
+		string IQuerySqlRequest.Cursor { get; set; }
 		int? ISqlRequest.FetchSize { get; set; }
 		QueryContainer ISqlRequest.Filter { get; set; }
 		string ISqlRequest.Query { get; set; }
-		string ISqlRequest.TimeZone { get; set; }
 		IRuntimeFields ISqlRequest.RuntimeFields { get; set; }
+		string ISqlRequest.TimeZone { get; set; }
+		Time IQuerySqlRequest.WaitForCompletionTimeout { get; set; }
 
 		/// <inheritdoc cref="ISqlRequest.Query" />
 		/// >
@@ -98,5 +103,8 @@ namespace Nest
 		/// <inheritdoc cref="ISqlRequest.RuntimeFields" />
 		public QuerySqlDescriptor RuntimeFields(Func<RuntimeFieldsDescriptor, IPromise<IRuntimeFields>> runtimeFieldsSelector) =>
 			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor())?.Value);
+
+		/// <inheritdoc cref="IQuerySqlRequest.WaitForCompletionTimeout" />
+		public QuerySqlDescriptor WaitForCompletionTimeout(Time frequency) => Assign(frequency, (a, v) => a.WaitForCompletionTimeout = v);
 	}
 }
