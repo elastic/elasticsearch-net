@@ -57,6 +57,39 @@ namespace Elasticsearch.Net.Specification.SqlApi
 		[MapsApi("sql.clear_cursor", "body")]
 		public Task<TResponse> ClearCursorAsync<TResponse>(PostData body, ClearSqlCursorRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_sql/close", ctx, body, RequestParams(requestParameters));
+		///<summary>DELETE on /_sql/async/delete/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html</para></summary>
+		///<param name = "id">The async search ID</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse DeleteAsync<TResponse>(string id, DeleteAsyncRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_sql/async/delete/{id:id}"), null, RequestParams(requestParameters));
+		///<summary>DELETE on /_sql/async/delete/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html</para></summary>
+		///<param name = "id">The async search ID</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("sql.delete_async", "id")]
+		public Task<TResponse> DeleteAsyncAsync<TResponse>(string id, DeleteAsyncRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_sql/async/delete/{id:id}"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_sql/async/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</para></summary>
+		///<param name = "id">The async search ID</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetAsync<TResponse>(string id, GetAsyncRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_sql/async/{id:id}"), null, RequestParams(requestParameters));
+		///<summary>GET on /_sql/async/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html</para></summary>
+		///<param name = "id">The async search ID</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("sql.get_async", "id")]
+		public Task<TResponse> GetAsyncAsync<TResponse>(string id, GetAsyncRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_sql/async/{id:id}"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_sql/async/status/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</para></summary>
+		///<param name = "id">The async search ID</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetAsyncStatus<TResponse>(string id, GetAsyncStatusRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_sql/async/status/{id:id}"), null, RequestParams(requestParameters));
+		///<summary>GET on /_sql/async/status/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html</para></summary>
+		///<param name = "id">The async search ID</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("sql.get_async_status", "id")]
+		public Task<TResponse> GetAsyncStatusAsync<TResponse>(string id, GetAsyncStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_sql/async/status/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_sql <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</para></summary>
 		///<param name = "body">Use the `query` element to start a query. Use the `cursor` element to continue a query.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

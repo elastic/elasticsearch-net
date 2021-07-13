@@ -755,6 +755,33 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		public override bool SupportsBody => true;
+		///<summary>Ignore if the source indices expressions resolves to no concrete indices (default: true). Only set if datafeed_config is provided.</summary>
+		public bool? AllowNoIndices
+		{
+			get => Q<bool? >("allow_no_indices");
+			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Whether source index expressions should get expanded to open or closed indices (default: open). Only set if datafeed_config is provided.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>Ignore indices that are marked as throttled (default: true). Only set if datafeed_config is provided.</summary>
+		public bool? IgnoreThrottled
+		{
+			get => Q<bool? >("ignore_throttled");
+			set => Q("ignore_throttled", value);
+		}
+
+		///<summary>Ignore unavailable indexes (default: false). Only set if datafeed_config is provided.</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
 	}
 
 	///<summary>Request options for PutTrainedModel <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html</para></summary>
