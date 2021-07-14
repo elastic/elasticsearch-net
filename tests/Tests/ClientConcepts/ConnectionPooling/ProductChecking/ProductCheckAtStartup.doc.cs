@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net.VirtualizedCluster;
@@ -50,7 +51,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.ProductChecking
 			/** Here's an example with a single node cluster which fails for some reason during the first product check attempt. */
 			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(1, productCheckAlwaysSucceeds: false)
-				.ProductCheck(r => r.Fails(TimesHelper.Once))
+				.ProductCheck(r => r.Fails(TimesHelper.Once, 429))
 				.ProductCheck(r => r.SucceedAlways())
 				.ClientCalls(r => r.SucceedAlways())
 				.StaticConnectionPool()
@@ -60,12 +61,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.ProductChecking
 			audit = await audit.TraceCalls(skipProductCheck: false,
 				new ClientCall() {
 					{ ProductCheckOnStartup },
-					{ ProductCheckFailure, 9200 }, // <1> as this is the first call, the product check is executed, but fails
+					{ ProductCheckFailure, 9200 }, // <1> as this is the first call, the product check is executed, but times out
 					{ HealthyResponse, 9200 } // <2> the actual request is still sent and succeeds
 				},
 				new ClientCall() {
 					{ ProductCheckOnStartup },
-					{ ProductCheckSuccess, 9200 }, // <3> as the previous product check failed, it runs again on the second call
+					{ ProductCheckSuccess, 9200 }, // <3> as the previous product check failed, it runs again on the second call and this time it succeeds
 					{ HealthyResponse, 9200 }
 				},
 				new ClientCall() {
@@ -77,10 +78,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.ProductChecking
 		[U]
 		public async Task ProductCheckAttemptsAllNodes()
 		{
-			/** Here's an example with a three node cluster which fails for some reason during the first and second product check attempts. */
+			/** Here's an example with a three node cluster which fails (due to too many requests) during the first and second product check attempts. */
 			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(3, productCheckAlwaysSucceeds: false)
-				.ProductCheck(r => r.FailAlways())
+				.ProductCheck(r => r.FailAlways(429))
 				.ProductCheck(r => r.OnPort(9202).SucceedAlways())
 				.ClientCalls(r => r.SucceedAlways())
 				.StaticConnectionPool()
