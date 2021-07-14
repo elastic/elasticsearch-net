@@ -744,7 +744,7 @@ namespace Elasticsearch.Net
 						|| !ExpectedTagLine.Equals(response.Tagline, StringComparison.Ordinal));
 			}
 
-			// Between v7.0.0 and 7.13.99, we expect the tagline and build flavor to match expected values
+			// After v7.14.0 we expect the product header to be present and include the expected product name
 			static bool Version714InvalidHeader(Version version, string productName)
 			{
 				return version >= Version714 && !ExpectedProductName.Equals(productName, StringComparison.Ordinal);
