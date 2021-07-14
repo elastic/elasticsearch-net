@@ -301,6 +301,19 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.exists_template", "name")]
 		public Task<TResponse> TemplateExistsForAllAsync<TResponse>(string name, IndexTemplateExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(HEAD, Url($"_template/{name:name}"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /{index}/_field_usage_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-field-usage-stats.html</para></summary>
+		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		public TResponse FieldUsageStats<TResponse>(string index, FieldUsageStatsRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"{index:index}/_field_usage_stats"), null, RequestParams(requestParameters));
+		///<summary>GET on /{index}/_field_usage_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-field-usage-stats.html</para></summary>
+		///<param name = "index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		[MapsApi("indices.field_usage_stats", "index")]
+		public Task<TResponse> FieldUsageStatsAsync<TResponse>(string index, FieldUsageStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_field_usage_stats"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_flush <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse FlushForAll<TResponse>(FlushRequestParameters requestParameters = null)
