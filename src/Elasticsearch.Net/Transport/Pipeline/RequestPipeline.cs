@@ -682,13 +682,19 @@ namespace Elasticsearch.Net
 				return true;
 			}
 
-			if (response.HttpStatusCode.HasValue && (response.HttpStatusCode.Value == 401 || response.HttpStatusCode.Value == 403))
+			// We should always have a status code!
+			var statusCode = response.HttpStatusCode ?? 0;
+
+			// The call to the root path requires monitor permissions. If the current use lacks those, we cannot perform product validation.
+			if (statusCode is 401 or 403)
 			{
-				// The call to the root path requires monitor permissions. If the current use lacks those, we cannot perform product validation.
 				_connectionPool.ProductCheckStatus = ProductCheckStatus.UndeterminedProduct;
 				return true;
 			}
 
+			// Any response besides a 200, 401 or 403 is considered a failure and the check is considered incomplete remaining in the NotChecked state.
+			// This means that the check will run on subsequent requests until we have a valid response to evaluate.
+			// By returning false, the failure to perform the product check will be included in the audit log.
 			if (!response.Success) return false;
 
 			// Start by assuming the product is valid
@@ -714,6 +720,8 @@ namespace Elasticsearch.Net
 					Version714InvalidHeader(version, productName))
 					_connectionPool.ProductCheckStatus = ProductCheckStatus.InvalidProduct;
 			}
+
+			return true;
 
 			// Elasticsearch should be version 6.0.0 or greater
 			// Note: For best compatibility, the client should not be used with versions prior to 7.0.0, but we do not enforce that here
@@ -741,8 +749,6 @@ namespace Elasticsearch.Net
 			{
 				return version >= Version714 && !ExpectedProductName.Equals(productName, StringComparison.Ordinal);
 			}
-
-			return true;
 		}
 
 		private bool PingDisabled(Node node) =>
