@@ -612,6 +612,43 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
+	///<summary>Request options for FieldUsageStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-field-usage-stats.html</para></summary>
+	public class FieldUsageStatsRequestParameters : RequestParameters<FieldUsageStatsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices
+		{
+			get => Q<bool? >("allow_no_indices");
+			set => Q("allow_no_indices", value);
+		}
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards
+		{
+			get => Q<ExpandWildcards? >("expand_wildcards");
+			set => Q("expand_wildcards", value);
+		}
+
+		///<summary>A comma-separated list of fields to include in the stats if only a subset of fields should be returned (supports wildcards)</summary>
+		public string[] Fields
+		{
+			get => Q<string[]>("fields");
+			set => Q("fields", value);
+		}
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable
+		{
+			get => Q<bool? >("ignore_unavailable");
+			set => Q("ignore_unavailable", value);
+		}
+	}
+
 	///<summary>Request options for Flush <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</para></summary>
 	public class FlushRequestParameters : RequestParameters<FlushRequestParameters>
 	{
