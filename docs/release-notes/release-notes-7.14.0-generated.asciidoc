@@ -33,5 +33,7 @@
 - * Support get async SQL search status API https://github.com/elastic/elasticsearch-net/pull/5856[#5856] 
 - * Support delete async SQL search API https://github.com/elastic/elasticsearch-net/pull/5858[#5858] 
 - * Support get async SQL search API https://github.com/elastic/elasticsearch-net/pull/5861[#5861] 
+- * [perf] Reduce allocations on some transport paths https://github.com/elastic/elasticsearch-net/pull/5865[#5865] 
+- * Support async SQL searches https://github.com/elastic/elasticsearch-net/pull/5869[#5869] 
 
 
