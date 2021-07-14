@@ -19,7 +19,7 @@ namespace Elasticsearch.Net
 			: this(uris.Select(uri => new Node(uri)), randomize, dateTimeProvider) { }
 
 		public StaticConnectionPool(IEnumerable<Node> nodes, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
-			: this(nodes, randomize, randomizeSeed: null, dateTimeProvider) { }
+			: this(nodes, randomize, null, dateTimeProvider) { }
 
 		protected StaticConnectionPool(IEnumerable<Node> nodes, bool randomize, int? randomizeSeed = null, IDateTimeProvider dateTimeProvider = null)
 		{
@@ -39,30 +39,6 @@ namespace Elasticsearch.Net
 			Initialize(nodes, dateTimeProvider);
 		}
 
-		private void Initialize(IEnumerable<Node> nodes, IDateTimeProvider dateTimeProvider)
-		{
-			var nodesProvided = nodes?.ToList() ?? throw new ArgumentNullException(nameof(nodes));
-			nodesProvided.ThrowIfEmpty(nameof(nodes));
-			DateTimeProvider = dateTimeProvider ?? Net.DateTimeProvider.Default;
-
-			string scheme = null;
-			foreach (var node in nodesProvided)
-			{
-				if (scheme == null)
-				{
-					scheme = node.Uri.Scheme;
-					UsingSsl = scheme == "https";
-				}
-				else if (scheme != node.Uri.Scheme)
-					throw new ArgumentException("Trying to instantiate a connection pool with mixed URI Schemes");
-			}
-
-			InternalNodes = SortNodes(nodesProvided)
-				.DistinctBy(n => n.Uri)
-				.ToList();
-			LastUpdate = DateTimeProvider.Now();
-		}
-
 		/// <inheritdoc />
 		public DateTime LastUpdate { get; protected set; }
 
@@ -73,10 +49,10 @@ namespace Elasticsearch.Net
 		public virtual IReadOnlyCollection<Node> Nodes => InternalNodes;
 
 		/// <inheritdoc />
-		public bool SniffedOnStartup { get; set; }
+		public ProductCheckStatus ProductCheckStatus { get; set; } = ProductCheckStatus.NotChecked;
 
 		/// <inheritdoc />
-		public ProductCheckStatus ProductCheckStatus { get; set; }
+		public bool SniffedOnStartup { get; set; }
 
 		/// <inheritdoc />
 		public virtual bool SupportsPinging => true;
@@ -132,6 +108,28 @@ namespace Elasticsearch.Net
 
 
 		void IDisposable.Dispose() => DisposeManagedResources();
+
+		private void Initialize(IEnumerable<Node> nodes, IDateTimeProvider dateTimeProvider)
+		{
+			var nodesProvided = nodes?.ToList() ?? throw new ArgumentNullException(nameof(nodes));
+			nodesProvided.ThrowIfEmpty(nameof(nodes));
+			DateTimeProvider = dateTimeProvider ?? Net.DateTimeProvider.Default;
+
+			string scheme = null;
+			foreach (var node in nodesProvided)
+				if (scheme == null)
+				{
+					scheme = node.Uri.Scheme;
+					UsingSsl = scheme == "https";
+				}
+				else if (scheme != node.Uri.Scheme)
+					throw new ArgumentException("Trying to instantiate a connection pool with mixed URI Schemes");
+
+			InternalNodes = SortNodes(nodesProvided)
+				.DistinctBy(n => n.Uri)
+				.ToList();
+			LastUpdate = DateTimeProvider.Now();
+		}
 
 		protected virtual Node RetryInternalNodes(int globalCursor, Action<AuditEvent, Node> audit = null)
 		{

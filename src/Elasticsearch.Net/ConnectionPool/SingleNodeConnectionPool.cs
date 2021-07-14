@@ -28,14 +28,14 @@ namespace Elasticsearch.Net
 		public IReadOnlyCollection<Node> Nodes { get; }
 
 		/// <inheritdoc />
+		public ProductCheckStatus ProductCheckStatus { get; set; } = ProductCheckStatus.NotChecked;
+
+		/// <inheritdoc />
 		public bool SniffedOnStartup
 		{
 			get => true;
 			set { }
 		}
-
-		/// <inheritdoc />
-		public ProductCheckStatus ProductCheckStatus { get; set; }
 
 		/// <inheritdoc />
 		public bool SupportsPinging => false;
