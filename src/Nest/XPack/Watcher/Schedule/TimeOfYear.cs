@@ -12,15 +12,15 @@ namespace Nest
 	[ReadAs(typeof(TimeOfYear))]
 	public interface ITimeOfYear
 	{
-		[DataMember(Name ="at")]
+		[DataMember(Name = "at")]
 		[JsonFormatter(typeof(SingleOrEnumerableFormatter<string>))]
 		IEnumerable<string> At { get; set; }
 
-		[DataMember(Name ="int")]
+		[DataMember(Name = "in")]
 		[JsonFormatter(typeof(SingleOrEnumerableFormatter<Month>))]
 		IEnumerable<Month> In { get; set; }
 
-		[DataMember(Name ="on")]
+		[DataMember(Name = "on")]
 		[JsonFormatter(typeof(SingleOrEnumerableFormatter<int>))]
 		IEnumerable<int> On { get; set; }
 	}

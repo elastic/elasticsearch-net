@@ -13,10 +13,10 @@ namespace Nest
 	[ReadAs(typeof(TimeOfDay))]
 	public interface ITimeOfDay
 	{
-		[DataMember(Name ="hour")]
+		[DataMember(Name = "hour")]
 		IEnumerable<int> Hour { get; set; }
 
-		[DataMember(Name ="minute")]
+		[DataMember(Name = "minute")]
 		IEnumerable<int> Minute { get; set; }
 	}
 
@@ -44,28 +44,41 @@ namespace Nest
 	[ReadAs(typeof(DailySchedule))]
 	public interface IDailySchedule : ISchedule
 	{
-		[DataMember(Name ="at")]
-		Union<IEnumerable<string>, ITimeOfDay> At { get; set; }
+		[DataMember(Name = "at")]
+		Union<IEnumerable<string>, IEnumerable<ITimeOfDay>> At { get; set; }
 	}
 
 	public class DailySchedule : ScheduleBase, IDailySchedule
 	{
-		public Union<IEnumerable<string>, ITimeOfDay> At { get; set; }
+		public DailySchedule() { }
+
+		public DailySchedule(string at) => At = new[] { at };
+
+		public DailySchedule(ITimeOfDay at) => At = new[] { at };
+
+		public Union<IEnumerable<string>, IEnumerable<ITimeOfDay>> At { get; set; }
 
 		internal override void WrapInContainer(IScheduleContainer container) => container.Daily = this;
 	}
 
 	public class DailyScheduleDescriptor : DescriptorBase<DailyScheduleDescriptor, IDailySchedule>, IDailySchedule
 	{
-		Union<IEnumerable<string>, ITimeOfDay> IDailySchedule.At { get; set; }
+		Union<IEnumerable<string>, IEnumerable<ITimeOfDay>> IDailySchedule.At { get; set; }
 
 		public DailyScheduleDescriptor At(Func<TimeOfDayDescriptor, ITimeOfDay> selector) =>
-			Assign(selector, (a, v) => a.At = new Union<IEnumerable<string>, ITimeOfDay>(v?.InvokeOrDefault(new TimeOfDayDescriptor())));
+			Assign(selector,
+				(a, v) => a.At = new Union<IEnumerable<string>, IEnumerable<ITimeOfDay>>(new[] { v?.InvokeOrDefault(new TimeOfDayDescriptor()) }));
+
+		public DailyScheduleDescriptor At(IEnumerable<ITimeOfDay> times) =>
+			Assign(new Union<IEnumerable<string>, IEnumerable<ITimeOfDay>>(times), (a, v) => a.At = v);
+
+		public DailyScheduleDescriptor At(params ITimeOfDay[] times) =>
+			Assign(new Union<IEnumerable<string>, IEnumerable<ITimeOfDay>>(times), (a, v) => a.At = v);
 
 		public DailyScheduleDescriptor At(IEnumerable<string> times) =>
-			Assign(new Union<IEnumerable<string>, ITimeOfDay>(times), (a, v) => a.At = v);
+			Assign(new Union<IEnumerable<string>, IEnumerable<ITimeOfDay>>(times), (a, v) => a.At = v);
 
 		public DailyScheduleDescriptor At(params string[] times) =>
-			Assign(new Union<IEnumerable<string>, ITimeOfDay>(times), (a, v) => a.At = v);
+			Assign(new Union<IEnumerable<string>, IEnumerable<ITimeOfDay>>(times), (a, v) => a.At = v);
 	}
 }
