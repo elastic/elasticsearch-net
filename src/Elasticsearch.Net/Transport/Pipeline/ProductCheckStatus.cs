@@ -12,6 +12,7 @@ namespace Elasticsearch.Net
 		NotChecked,
 		ValidProduct,
 		InvalidProduct,
-		UndeterminedProduct
+		UndeterminedProduct,
+		TransientFailure
 	}
 }
