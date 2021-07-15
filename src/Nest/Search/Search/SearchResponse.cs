@@ -28,7 +28,8 @@ namespace Nest
 		ClusterStatistics Clusters { get; }
 
 		/// <summary>
-		/// Gets the documents inside the hits, by deserializing <see cref="IHitMetadata{T}.Source" /> into <typeparamref name="TDocument" />
+		/// Gets the documents inside the hits, by deserializing <see cref="IHitMetadata{T}.Source" /> into
+		/// <typeparamref name="TDocument" />
 		/// <para>
 		/// NOTE: if you use <see cref="ISearchRequest.StoredFields" /> on the search request,
 		/// <see cref="Documents" /> will be empty and you should use <see cref="Fields" />
@@ -67,6 +68,11 @@ namespace Nest
 		/// Number of times the server performed an incremental reduce phase
 		/// </summary>
 		long NumberOfReducePhases { get; }
+
+		/// <summary>
+		/// When a search is made over a point in time, this will be the ID of the point in time.
+		/// </summary>
+		string PointInTimeId { get; }
 
 		/// <summary>
 		/// Gets the results of profiling the search query. Has a value only when
@@ -110,11 +116,6 @@ namespace Nest
 		/// Gets the total number of documents matching the search query criteria
 		/// </summary>
 		long Total { get; }
-
-		/// <summary>
-		/// When a search is made over a point in time, this will be the ID of the point in time.
-		/// </summary>
-		string PointInTimeId { get; }
 	}
 
 	public class SearchResponse<TDocument> : ResponseBase, ISearchResponse<TDocument> where TDocument : class
@@ -126,7 +127,7 @@ namespace Nest
 		private IReadOnlyCollection<IHit<TDocument>> _hits;
 
 		/// <inheritdoc />
-		[DataMember(Name ="aggregations")]
+		[DataMember(Name = "aggregations")]
 		public AggregateDictionary Aggregations { get; internal set; } = AggregateDictionary.Default;
 
 		/// <inheritdoc />
@@ -153,7 +154,7 @@ namespace Nest
 			_hits ?? (_hits = HitsMetadata?.Hits ?? EmptyReadOnly<IHit<TDocument>>.Collection);
 
 		/// <inheritdoc />
-		[DataMember(Name ="hits")]
+		[DataMember(Name = "hits")]
 		public IHitsMetadata<TDocument> HitsMetadata { get; internal set; }
 
 		/// <inheritdoc />
@@ -161,11 +162,15 @@ namespace Nest
 		public double MaxScore => HitsMetadata?.MaxScore ?? 0;
 
 		/// <inheritdoc />
-		[DataMember(Name ="num_reduce_phases")]
+		[DataMember(Name = "num_reduce_phases")]
 		public long NumberOfReducePhases { get; internal set; }
 
 		/// <inheritdoc />
-		[DataMember(Name ="profile")]
+		[DataMember(Name = "pit_id")]
+		public string PointInTimeId { get; internal set; }
+
+		/// <inheritdoc />
+		[DataMember(Name = "profile")]
 		public Profile Profile { get; internal set; }
 
 		/// <inheritdoc />
@@ -173,31 +178,27 @@ namespace Nest
 		public string ScrollId { get; internal set; }
 
 		/// <inheritdoc />
-		[DataMember(Name ="_shards")]
+		[DataMember(Name = "_shards")]
 		public ShardStatistics Shards { get; internal set; }
 
 		/// <inheritdoc />
-		[DataMember(Name ="suggest")]
+		[DataMember(Name = "suggest")]
 		public ISuggestDictionary<TDocument> Suggest { get; internal set; } = SuggestDictionary<TDocument>.Default;
 
 		/// <inheritdoc />
-		[DataMember(Name ="terminated_early")]
+		[DataMember(Name = "terminated_early")]
 		public bool TerminatedEarly { get; internal set; }
 
 		/// <inheritdoc />
-		[DataMember(Name ="timed_out")]
+		[DataMember(Name = "timed_out")]
 		public bool TimedOut { get; internal set; }
 
 		/// <inheritdoc />
-		[DataMember(Name ="took")]
+		[DataMember(Name = "took")]
 		public long Took { get; internal set; }
 
 		/// <inheritdoc />
 		[IgnoreDataMember]
-		public long Total => HitsMetadata?.Total.Value ?? -1;
-
-		/// <inheritdoc />
-		[DataMember(Name = "pit_id")]
-		public string PointInTimeId { get; internal set; }
+		public long Total => HitsMetadata?.Total?.Value ?? -1;
 	}
 }
