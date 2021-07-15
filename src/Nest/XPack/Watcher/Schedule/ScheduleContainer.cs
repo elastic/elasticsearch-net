@@ -226,6 +226,12 @@ namespace Nest
 				var formatter = formatterResolver.GetFormatter<CronExpression>();
 				formatter.Serialize(ref writer, value.Cron, formatterResolver);
 			}
+			else if (value.Hourly is not null)
+			{
+				writer.WritePropertyName(Parser.Hourly);
+				var formatter = formatterResolver.GetFormatter<IHourlySchedule>();
+				formatter.Serialize(ref writer, value.Hourly, formatterResolver);
+			}
 			else if (value.Daily is not null)
 			{
 				writer.WritePropertyName(Parser.Daily);
