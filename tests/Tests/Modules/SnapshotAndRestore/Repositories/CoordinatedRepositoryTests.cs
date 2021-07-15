@@ -194,12 +194,15 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			var reads = d.Reads.First();
 			reads.NodeIdentity.Id.Should().NotBeNullOrEmpty();
 			reads.NodeIdentity.Name.Should().NotBeNullOrEmpty();
-			reads.FirstByteTime.Should().NotBeNullOrEmpty();
-			reads.FirstByteTimeNanos.Should().BeGreaterThan(0);
-			reads.Elapsed.Should().NotBeNullOrEmpty();
-			reads.ElapsedNanos.Should().BeGreaterThan(0);
-			reads.Throttled.Should().NotBeNullOrEmpty();
-			reads.ThrottledNanos.Should().BeGreaterOrEqualTo(0);
+			if (reads.Found)
+			{
+				reads.FirstByteTime.Should().NotBeNullOrEmpty();
+				reads.FirstByteTimeNanos.Should().BeGreaterThan(0);
+				reads.Elapsed.Should().NotBeNullOrEmpty();
+				reads.ElapsedNanos.Should().BeGreaterThan(0);
+				reads.Throttled.Should().NotBeNullOrEmpty();
+				reads.ThrottledNanos.Should().BeGreaterOrEqualTo(0);
+			}
 		});
 
 		[I]
