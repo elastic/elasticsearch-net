@@ -2,12 +2,11 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using System;
 using System.Text;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Domain;
 
 namespace Tests.Reproduce
@@ -31,10 +30,8 @@ namespace Tests.Reproduce
 
 		[U] public void SearchResponseTotalShouldNotThrowWhenTrackTotalHitsIsFalse()
 		{
-			var pool = new SingleNodeConnectionPool(new Uri($"http://localhost:9200"));
-			var settings = new ConnectionSettings(pool, new InMemoryConnection(ResponseBytes));
-			var client = new ElasticClient(settings);
-
+			var client = TestClient.FixedInMemoryClient(ResponseBytes);
+			
 			var response = client.Search<Project>(s => s.Index("test").MatchAll());
 
 			response.Total.Should().Be(-1);
