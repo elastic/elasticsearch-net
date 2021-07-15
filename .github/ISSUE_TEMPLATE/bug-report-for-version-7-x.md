@@ -11,6 +11,10 @@ assignees: ''
 
 **Elasticsearch version**:
 
+**.NET runtime version**:
+
+**Operating system version**:
+
 **Description of the problem including expected versus actual behavior**:
 A clear and concise description of what the bug is.
 
