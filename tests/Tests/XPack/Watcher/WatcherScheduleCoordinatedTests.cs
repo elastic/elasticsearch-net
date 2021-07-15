@@ -19,24 +19,66 @@ namespace Tests.XPack.Watcher
 		private const string CreateCronExpressionScheduleWatcher = nameof(CreateCronExpressionScheduleWatcher);
 		private const string CreateCronExpressionsScheduleWatcher = nameof(CreateCronExpressionsScheduleWatcher);
 		private const string CreateDailyScheduleWatcher = nameof(CreateDailyScheduleWatcher);
+		private const string CreateHourlyScheduleWatcher = nameof(CreateHourlyScheduleWatcher);
 		private const string CreateMonthlyScheduleWatcher = nameof(CreateMonthlyScheduleWatcher);
 		private const string CreateWeeklyScheduleWatcher = nameof(CreateWeeklyScheduleWatcher);
 		private const string CreateYearlyScheduleWatcher = nameof(CreateYearlyScheduleWatcher);
 		private const string DeleteCronExpressionScheduleWatcher = nameof(DeleteCronExpressionScheduleWatcher);
 		private const string DeleteCronExpressionsScheduleWatcher = nameof(DeleteCronExpressionsScheduleWatcher);
 		private const string DeleteDailyScheduleWatcher = nameof(DeleteDailyScheduleWatcher);
+		private const string DeleteHourlyScheduleWatcher = nameof(DeleteHourlyScheduleWatcher);
 		private const string DeleteMonthlyScheduleWatcher = nameof(DeleteMonthlyScheduleWatcher);
 		private const string DeleteWeeklyScheduleWatcher = nameof(DeleteWeeklyScheduleWatcher);
 		private const string DeleteYearlyScheduleWatcher = nameof(DeleteYearlyScheduleWatcher);
 		private const string GetCronExpressionScheduleWatcher = nameof(GetCronExpressionScheduleWatcher);
 		private const string GetCronExpressionsScheduleWatcher = nameof(GetCronExpressionsScheduleWatcher);
 		private const string GetDailyScheduleWatcher = nameof(GetDailyScheduleWatcher);
+		private const string GetHourlyScheduleWatcher = nameof(GetHourlyScheduleWatcher);
 		private const string GetMonthlyScheduleWatcher = nameof(GetMonthlyScheduleWatcher);
 		private const string GetWeeklyScheduleWatcher = nameof(GetWeeklyScheduleWatcher);
 		private const string GetYearlyScheduleWatcher = nameof(GetYearlyScheduleWatcher);
 
 		public WatcherScheduleCoordinatedTests(WatcherCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
+			{
+				CreateHourlyScheduleWatcher, u =>
+					u.Calls<PutWatchDescriptor, PutWatchRequest, IPutWatchRequest, PutWatchResponse>(
+						v => new PutWatchRequest($"hourly-{v}")
+						{
+							Trigger = new ScheduleContainer
+							{
+								Hourly = new HourlySchedule { Minute = new []{ 0, 30 }}
+							}
+						},
+						(v, d) => d.Trigger(t => t.Schedule(s => s.Hourly(h => h.Minute(0, 30)))),
+						(v, c, f) => c.Watcher.Put($"hourly-{v}", f),
+						(v, c, f) => c.Watcher.PutAsync($"hourly-{v}", f),
+						(v, c, r) => c.Watcher.Put(r),
+						(v, c, r) => c.Watcher.PutAsync(r)
+					)
+			},
+			{
+				GetHourlyScheduleWatcher, u =>
+					u.Calls<GetWatchDescriptor, GetWatchRequest, IGetWatchRequest, GetWatchResponse>(
+						v => new GetWatchRequest($"hourly-{v}"),
+						(v, d) => d,
+						(v, c, f) => c.Watcher.Get($"hourly-{v}", f),
+						(v, c, f) => c.Watcher.GetAsync($"hourly-{v}", f),
+						(v, c, r) => c.Watcher.Get(r),
+						(v, c, r) => c.Watcher.GetAsync(r)
+					)
+			},
+			{
+				DeleteHourlyScheduleWatcher, u =>
+					u.Calls<DeleteWatchDescriptor, DeleteWatchRequest, IDeleteWatchRequest, DeleteWatchResponse>(
+						v => new DeleteWatchRequest($"hourly-{v}"),
+						(v, d) => d,
+						(v, c, f) => c.Watcher.Delete($"hourly-{v}", f),
+						(v, c, f) => c.Watcher.DeleteAsync($"hourly-{v}", f),
+						(v, c, r) => c.Watcher.Delete(r),
+						(v, c, r) => c.Watcher.DeleteAsync(r)
+					)
+			},
 			{
 				CreateDailyScheduleWatcher, u =>
 					u.Calls<PutWatchDescriptor, PutWatchRequest, IPutWatchRequest, PutWatchResponse>(
@@ -288,6 +330,20 @@ namespace Tests.XPack.Watcher
 					)
 			},
 		}) { }
+
+		[I] public async Task GetHourlyScheduleWatcherResponse() => await Assert<GetWatchResponse>(GetHourlyScheduleWatcher, (v, r) =>
+		{
+			r.ShouldBeValid();
+			r.Id.Should().Be($"hourly-{v}");
+			r.Found.Should().BeTrue();
+
+			var container = r.Watch.Trigger.Should()
+				.BeAssignableTo<ITriggerContainer>().Subject;
+			
+			container.Schedule.Hourly.Minute.Should().HaveCount(2);
+			container.Schedule.Hourly.Minute.First().Should().Be(0);
+			container.Schedule.Hourly.Minute.Last().Should().Be(30);
+		});
 
 		[I] public async Task GetDailyScheduleWatcherResponse() => await Assert<GetWatchResponse>(GetDailyScheduleWatcher, (v, r) =>
 		{
