@@ -13,6 +13,7 @@
 - * Fix discrepancies in Watcher API models which fail (de)serialization https://github.com/elastic/elasticsearch-net/pull/5761[#5761]  (issue: https://github.com/elastic/elasticsearch-net/issues/5725[#5725])
 - * Fix hourly watcher scheduler serialisation https://github.com/elastic/elasticsearch-net/pull/5888[#5888]  (issue: https://github.com/elastic/elasticsearch-net/issues/5761[#5761])
 - * Fix null-ref exception when track total hits is disabled https://github.com/elastic/elasticsearch-net/pull/5898[#5898]  (issue: https://github.com/elastic/elasticsearch-net/issues/5892[#5892])
+- * Fix index exists response validity https://github.com/elastic/elasticsearch-net/pull/5902[#5902]  (issue: https://github.com/elastic/elasticsearch-net/issues/5901[#5901])
 
 [float]
 [[enhancement]]
