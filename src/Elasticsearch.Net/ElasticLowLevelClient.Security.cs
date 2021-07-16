@@ -278,11 +278,11 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		[MapsApi("security.enable_user", "username")]
 		public Task<TResponse> EnableUserAsync<TResponse>(string username, EnableUserRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_security/user/{username:username}/_enable"), ctx, null, RequestParams(requestParameters));
-		///<summary>GET on /_security/enroll/kibana <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enroll-kibana.html</para></summary>
+		///<summary>GET on /_security/enroll/kibana <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-kibana-enrollment.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse EnrollKibana<TResponse>(EnrollKibanaRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, "_security/enroll/kibana", null, RequestParams(requestParameters));
-		///<summary>GET on /_security/enroll/kibana <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enroll-kibana.html</para></summary>
+		///<summary>GET on /_security/enroll/kibana <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-kibana-enrollment.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("security.enroll_kibana", "")]
 		public Task<TResponse> EnrollKibanaAsync<TResponse>(EnrollKibanaRequestParameters requestParameters = null, CancellationToken ctx = default)
