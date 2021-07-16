@@ -204,7 +204,7 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
-	///<summary>Request options for EnrollKibana <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enroll-kibana.html</para></summary>
+	///<summary>Request options for EnrollKibana <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-kibana-enrollment.html</para></summary>
 	public class EnrollKibanaRequestParameters : RequestParameters<EnrollKibanaRequestParameters>
 	{
 	}

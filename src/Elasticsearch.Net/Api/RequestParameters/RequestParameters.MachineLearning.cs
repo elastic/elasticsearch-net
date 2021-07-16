@@ -564,7 +564,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for InferTrainedModelDeployment <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-infer-trained-model-deployment.html</para></summary>
+	///<summary>Request options for InferTrainedModelDeployment <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-df-analytics-apis.html</para></summary>
 	public class InferTrainedModelDeploymentRequestParameters : RequestParameters<InferTrainedModelDeploymentRequestParameters>
 	{
 		///<summary>Controls the time to wait for the inference result</summary>
@@ -768,7 +768,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	{
 	}
 
-	///<summary>Request options for StartTrainedModelDeployment <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-trained-model-deployment.html</para></summary>
+	///<summary>Request options for StartTrainedModelDeployment <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-df-analytics-apis.html</para></summary>
 	public class StartTrainedModelDeploymentRequestParameters : RequestParameters<StartTrainedModelDeploymentRequestParameters>
 	{
 		///<summary>Controls the time to wait until the model is deployed</summary>
@@ -826,7 +826,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
-	///<summary>Request options for StopTrainedModelDeployment <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-trained-model-deployment.html</para></summary>
+	///<summary>Request options for StopTrainedModelDeployment <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-df-analytics-apis.html</para></summary>
 	public class StopTrainedModelDeploymentRequestParameters : RequestParameters<StopTrainedModelDeploymentRequestParameters>
 	{
 	}
