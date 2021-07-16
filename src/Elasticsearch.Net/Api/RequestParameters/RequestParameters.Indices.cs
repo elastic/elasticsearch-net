@@ -612,7 +612,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
-	///<summary>Request options for FieldUsageStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-field-usage-stats.html</para></summary>
+	///<summary>Request options for FieldUsageStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/field-usage-stats.html</para></summary>
 	public class FieldUsageStatsRequestParameters : RequestParameters<FieldUsageStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
