@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Nest;
 
 namespace Playground
@@ -14,15 +13,34 @@ namespace Playground
 
 	internal class Program
 	{
-		private static async Task Main()
+		private static void Main()
 		{
 			IElasticClient client = new ElasticClient(new Uri("http://localhost:9200"));
 
-			var response = await client.IndexAsync(new IndexRequest<MyType>("test-001", Guid.NewGuid()){ Document = new MyType("Steve Gordon")});
-			if (response.IsValid)
-			{
+			var indexName = Guid.NewGuid().ToString();
 
-			}
+			var createResponse = client.Indices.Create(new IndicesCreateRequest(indexName)
+			{
+				Mappings = new TypeMapping
+				{
+					DateDetection = false,
+					Properties = new Dictionary<PropertyName, PropertyBase>
+					{
+						{"age", new NumberProperty()},
+						{"name", new TextProperty()},
+						{"email", new KeywordProperty()}
+					},
+					Meta = new Metadata {{"foo", "bar"}}
+				}
+			});
+
+			var deleteResponse = client.Indices.Delete(new DeleteIndicesRequest(indexName));
+
+			//var response = await client.IndexAsync(new IndexRequest<MyType>("test-001", Guid.NewGuid()){ Document = new MyType("Steve Gordon")});
+			//if (response.IsValid)
+			//{
+
+			//}
 
 			//await client.PingAsync(new PingRequest());
 

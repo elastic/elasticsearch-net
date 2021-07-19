@@ -1,16 +1,42 @@
-﻿// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 
 namespace Tests.Serialization
 {
+	public class CreateIndexRequestTests
+	{
+		[U]
+		public void Serialize()
+		{
+			var request = new IndicesCreateRequest("index-name")
+			{
+				Mappings = new TypeMapping
+				{
+					DateDetection = false,
+					Meta = new Metadata {{"foo", "bar"}},
+					Properties = new Dictionary<PropertyName, PropertyBase>
+					{
+						{"age", new NumberProperty()},
+						{"name", new TextProperty()},
+						{"email", new KeywordProperty()}
+					}
+				}
+			};
+
+			var serializer = new DefaultHighLevelSerializer(new ConnectionSettings());
+
+			var ms = new MemoryStream();
+
+			serializer.Serialize(request, ms);
+
+			var jsonString = Encoding.Default.GetString(ms.ToArray());
+		}
+	}
+
 	public class ClusterResponseTests
 	{
 		[U]
