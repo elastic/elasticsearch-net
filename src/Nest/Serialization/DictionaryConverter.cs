@@ -12,9 +12,10 @@ namespace Nest
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			if (!typeToConvert.IsGenericType) return false;
+			if (!typeToConvert.IsGenericType)
+				return false;
 
-			return typeToConvert.GetGenericTypeDefinition() == typeof(Dictionary<,>) &&
+			return (typeToConvert.GetGenericTypeDefinition() == typeof(Dictionary<,>)) &
 			       typeToConvert.GetGenericArguments()[0].GetInterfaces()
 				       .Any(x => x.UnderlyingSystemType == typeof(IDictionaryKey));
 		}
@@ -39,14 +40,14 @@ namespace Nest
 		private class DictionaryConverterInner<TKey, TValue> : JsonConverter<Dictionary<TKey, TValue>>
 		{
 			private readonly Type _keyType;
-			private readonly JsonConverter<TValue>? _valueConverter;
+			private readonly JsonConverter<TValue>? _valueConverter = null;
 			private readonly Type _valueType;
 
 			public DictionaryConverterInner(JsonSerializerOptions options)
 			{
 				// For performance, use the existing converter if available.
-				_valueConverter = (JsonConverter<TValue>)options
-					.GetConverter(typeof(TValue));
+				//_valueConverter = (JsonConverter<TValue>)options
+				//	.GetConverter(typeof(TValue));
 
 				// Cache the key and value types.
 				_keyType = typeof(TKey);
@@ -114,10 +115,16 @@ namespace Nest
 					writer.WritePropertyName
 						(options.PropertyNamingPolicy?.ConvertName(propertyName) ?? propertyName);
 
+					if (item.Value is null)
+					{
+						writer.WriteNullValue();
+						return;
+					}
+
 					if (_valueConverter != null)
 						_valueConverter.Write(writer, item.Value, options);
 					else
-						JsonSerializer.Serialize(writer, item.Value, options);
+						JsonSerializer.Serialize(writer, item.Value, item.Value.GetType(), options);
 				}
 
 				writer.WriteEndObject();

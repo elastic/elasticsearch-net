@@ -18,26 +18,35 @@ namespace Nest
 
 		public ProxyRequestConverterFactory(IConnectionSettingsValues settings) => _settings = settings;
 
-		public override bool CanConvert(Type typeToConvert) => typeToConvert.IsGenericType
-		                                                       && typeToConvert.GetInterfaces().Any(x =>
-			                                                       x.UnderlyingSystemType ==
-			                                                       typeof(IProxyRequest)); // Check proxy request
+		public override bool CanConvert(Type typeToConvert) => typeToConvert.GetCustomAttributes()
+			.Any(a => a.GetType() == typeof(ConvertAsAttribute));
 
 		public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
 		{
-			var elementType = typeToConvert.GetGenericArguments()[0];
-
 			var att = typeToConvert.GetCustomAttribute<ConvertAsAttribute>();
 
-			var converter = (JsonConverter)Activator.CreateInstance(
-				typeof(ProxyRequestConverter<>).MakeGenericType(att?.ConvertType.MakeGenericType(elementType) ??
-				                                                elementType),
-				BindingFlags.Instance | BindingFlags.Public,
-				args: new object[] {_settings},
-				binder: null,
-				culture: null)!;
+			var genericArgs = typeToConvert.GetGenericArguments();
 
-			return converter;
+			if (genericArgs.Any() && genericArgs[0].GetInterfaces()
+				.Any(x => x.UnderlyingSystemType == typeof(IProxyRequest)))
+			{
+				var elementType = typeToConvert.GetGenericArguments()[0];
+
+				return (JsonConverter)Activator.CreateInstance(
+					typeof(ProxyRequestConverter<>).MakeGenericType(att?.ConvertType.MakeGenericType(elementType) ??
+					                                                elementType),
+					BindingFlags.Instance | BindingFlags.Public,
+					args: new object[] {_settings},
+					binder: null,
+					culture: null)!;
+			}
+			else
+				return (JsonConverter)Activator.CreateInstance(
+					typeof(InterfaceConverter<,>).MakeGenericType(typeToConvert, att?.ConvertType),
+					BindingFlags.Instance | BindingFlags.Public,
+					args: null,
+					binder: null,
+					culture: null)!;
 		}
 	}
 
@@ -47,6 +56,16 @@ namespace Nest
 		public ConvertAsAttribute(Type convertType) => ConvertType = convertType;
 
 		public Type ConvertType { get; }
+	}
+
+	public class InterfaceConverter<TInterface, TConcrete> : JsonConverter<TInterface>
+		where TConcrete : class, TInterface
+	{
+		public override TInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+			JsonSerializer.Deserialize<TConcrete>(ref reader, options);
+
+		public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options) =>
+			JsonSerializer.Serialize<TConcrete>(writer, value as TConcrete, options);
 	}
 
 	public class ProxyRequestConverter<TRequest> : JsonConverter<TRequest>
@@ -145,10 +164,10 @@ namespace Nest
 	{
 		private static readonly UTF8Encoding Encoding = new(false);
 
-		public DefaultHighLevelSerializer(JsonSerializerOptions options = null) => Options =
+		public DefaultHighLevelSerializer(JsonSerializerOptions? options = null) => Options =
 			options ?? new JsonSerializerOptions
 			{
-				IgnoreNullValues = true, Converters = {new JsonStringEnumConverter()}
+				IgnoreNullValues = true, Converters = {new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)}
 			};
 
 		// ctor added so we can pass down settings. TODO: review this design, perhaps have a method AddConverter which can be called instead?
@@ -158,7 +177,7 @@ namespace Nest
 				IgnoreNullValues = true,
 				Converters =
 				{
-					new JsonStringEnumConverter(),
+					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
 					new ProxyRequestConverterFactory(settings),
 					new DictionaryConverter()
 				}
@@ -202,7 +221,7 @@ namespace Nest
 		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default) =>
 			JsonSerializer.DeserializeAsync(stream, type, Options, cancellationToken).AsTask();
 
-		// TODO - This is not ideal as we allocate a large string - No stream based sync overload
+		// TODO - This is not ideal as we allocate a large string - No stream based sync overload - View GitHub for better solutions
 		public virtual void Serialize<T>(T data, Stream writableStream,
 			SerializationFormatting formatting = SerializationFormatting.None)
 		{

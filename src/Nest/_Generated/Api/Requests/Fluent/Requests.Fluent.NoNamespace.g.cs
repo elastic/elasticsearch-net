@@ -16,7 +16,6 @@
 //
 // ------------------------------------------------
 
-using System.Text.Json;
 using Elastic.Transport;
 
 #nullable restore
@@ -35,7 +34,7 @@ namespace Nest
 		///<summary>/{index}/_doc</summary>
         public IndexDescriptor(IndexName index) : base(r => r.Required("index", index))
 		{
-		}		
+		}
 	}
 
 	public partial class PingDescriptor : RequestDescriptorBase<PingDescriptor, PingRequestParameters, IPingRequest>, IPingRequest

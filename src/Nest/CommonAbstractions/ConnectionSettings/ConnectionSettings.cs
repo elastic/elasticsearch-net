@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +7,7 @@ using Elastic.Transport;
 using Elastic.Transport.Products;
 using Elastic.Transport.Products.Elasticsearch;
 #if DOTNETCORE
-using System.Runtime.InteropServices;
+
 #endif
 
 namespace Nest
@@ -19,59 +15,81 @@ namespace Nest
 	/// <inheritdoc cref="IConnectionSettingsValues" />
 	public class ConnectionSettings : ConnectionSettingsBase<ConnectionSettings>
 	{
-		/// <summary> The default user agent for Nest </summary>
-		public static readonly UserAgent DefaultUserAgent = Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(IConnectionSettingsValues));
-
 		/// <summary>
-		/// A delegate used to construct a serializer to serialize CLR types representing documents and other types related to
-		/// documents.
-		/// By default, the internal serializer will be used to serializer all types.
+		///     A delegate used to construct a serializer to serialize CLR types representing documents and other types related to
+		///     documents.
+		///     By default, the internal serializer will be used to serializer all types.
 		/// </summary>
-		public delegate ITransportSerializer SourceSerializerFactory(ITransportSerializer builtIn, IConnectionSettingsValues values);
+		public delegate ITransportSerializer SourceSerializerFactory(ITransportSerializer builtIn,
+			IConnectionSettingsValues values);
+
+		/// <summary> The default user agent for Nest </summary>
+		public static readonly UserAgent DefaultUserAgent =
+			Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(IConnectionSettingsValues));
 
 		/// <summary>
-		/// Creates a new instance of connection settings, if <paramref name="uri"/> is not specified will default to connecting to http://localhost:9200
+		///     Creates a new instance of connection settings, if <paramref name="uri" /> is not specified will default to
+		///     connecting to http://localhost:9200
 		/// </summary>
 		/// <param name="uri"></param>
-		public ConnectionSettings(Uri? uri = null) : this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
+		public ConnectionSettings(Uri? uri = null) : this(
+			new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")))
+		{
+		}
 
 		/// <summary>
-		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
-		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
+		///     Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId" />,
+		///     <para><see cref="CloudConnectionPool" /> documentation for more information on how to obtain your Cloud Id</para>
 		/// </summary>
-		public ConnectionSettings(string cloudId, IAuthenticationHeader credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
+		public ConnectionSettings(string cloudId, IAuthenticationHeader credentials) : this(
+			new CloudConnectionPool(cloudId, credentials))
+		{
+		}
 
 		/// <summary>
-		/// Instantiate connection settings using a <see cref="SingleNodeConnectionPool" /> using the provided
-		/// <see cref="InMemoryConnection" /> that never uses any IO.
+		///     Instantiate connection settings using a <see cref="SingleNodeConnectionPool" /> using the provided
+		///     <see cref="InMemoryConnection" /> that never uses any IO.
 		/// </summary>
 		public ConnectionSettings(InMemoryConnection connection)
-			: this(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), connection) { }
+			: this(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), connection)
+		{
+		}
 
 		public ConnectionSettings(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
 
 		public ConnectionSettings(IConnectionPool connectionPool, SourceSerializerFactory sourceSerializer)
-			: this(connectionPool, null, sourceSerializer) { }
+			: this(connectionPool, null, sourceSerializer)
+		{
+		}
 
-		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection) : this(connectionPool, connection, null) { }
+		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection) : this(connectionPool,
+			connection, null)
+		{
+		}
 
 		public ConnectionSettings(
 			IConnectionPool connectionPool,
 			IConnection connection,
-			SourceSerializerFactory sourceSerializer) : base(connectionPool, connection, sourceSerializer) { }
+			SourceSerializerFactory sourceSerializer) : base(connectionPool, connection, sourceSerializer)
+		{
+		}
 	}
 
 	/// <inheritdoc cref="IConnectionSettingsValues" />
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public abstract class ConnectionSettingsBase<TConnectionSettings> : ConnectionConfigurationBase<TConnectionSettings>, IConnectionSettingsValues
+	public abstract class
+		ConnectionSettingsBase<TConnectionSettings> : ConnectionConfigurationBase<TConnectionSettings>,
+			IConnectionSettingsValues
 		where TConnectionSettings : ConnectionSettingsBase<TConnectionSettings>, IConnectionSettingsValues
 	{
 		private readonly FluentDictionary<Type, string> _defaultIndices;
 		private readonly FluentDictionary<Type, string> _defaultRelationNames;
 		private readonly HashSet<Type> _disableIdInference = new();
 		private readonly FluentDictionary<Type, string> _idProperties = new();
+
 		private readonly Inferrer _inferrer;
+
 		//private readonly IPropertyMappingProvider _propertyMappingProvider;
 		//private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
 		private readonly FluentDictionary<Type, string> _routeProperties = new();
@@ -108,45 +126,51 @@ namespace Nest
 			UserAgent(ConnectionSettings.DefaultUserAgent);
 		}
 
-		bool IConnectionSettingsValues.DefaultDisableIdInference => _defaultDisableAllInference;
 		public ITransportSerializer SourceSerializer { get; }
+
+		bool IConnectionSettingsValues.DefaultDisableIdInference => _defaultDisableAllInference;
 		Func<string, string> IConnectionSettingsValues.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
 		string IConnectionSettingsValues.DefaultIndex => _defaultIndex;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultIndices => _defaultIndices;
 		HashSet<Type> IConnectionSettingsValues.DisableIdInference => _disableIdInference;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultRelationNames => _defaultRelationNames;
 		FluentDictionary<Type, string> IConnectionSettingsValues.IdProperties => _idProperties;
+
 		Inferrer IConnectionSettingsValues.Inferrer => _inferrer;
+
 		//IPropertyMappingProvider IConnectionSettingsValues.PropertyMappingProvider => _propertyMappingProvider;
 		//FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 		FluentDictionary<Type, string> IConnectionSettingsValues.RouteProperties => _routeProperties;
 		ITransportSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
 
 		/// <summary>
-		/// The default index to use for a request when no index has been explicitly specified
-		/// and no default indices are specified for the given CLR type specified for the request.
+		///     The default index to use for a request when no index has been explicitly specified
+		///     and no default indices are specified for the given CLR type specified for the request.
 		/// </summary>
-		public TConnectionSettings DefaultIndex(string defaultIndex) => Assign(defaultIndex, (a, v) => a._defaultIndex = v);
+		public TConnectionSettings DefaultIndex(string defaultIndex) =>
+			Assign(defaultIndex, (a, v) => a._defaultIndex = v);
 
 		/// <summary>
-		/// Specifies how field names are inferred from CLR property names.
-		/// <para></para>
-		/// By default, NEST camel cases property names.
+		///     Specifies how field names are inferred from CLR property names.
+		///     <para></para>
+		///     By default, NEST camel cases property names.
 		/// </summary>
 		/// <example>
-		/// CLR property EmailAddress will be inferred as "emailAddress" Elasticsearch document field name
+		///     CLR property EmailAddress will be inferred as "emailAddress" Elasticsearch document field name
 		/// </example>
 		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer) =>
 			Assign(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
 
 		/// <summary>
-		/// Disables automatic Id inference for given CLR types.
-		/// <para></para>
-		/// NEST by default will use the value of a property named Id on a CLR type as the _id to send to Elasticsearch. Adding a type
-		/// will disable this behaviour for that CLR type. If Id inference should be disabled for all CLR types, use
-		/// <see cref="DefaultDisableIdInference"/>
+		///     Disables automatic Id inference for given CLR types.
+		///     <para></para>
+		///     NEST by default will use the value of a property named Id on a CLR type as the _id to send to Elasticsearch. Adding
+		///     a type
+		///     will disable this behaviour for that CLR type. If Id inference should be disabled for all CLR types, use
+		///     <see cref="DefaultDisableIdInference" />
 		/// </summary>
-		public TConnectionSettings DefaultDisableIdInference(bool disable = true) => Assign(disable, (a, v) => a._defaultDisableAllInference = v);
+		public TConnectionSettings DefaultDisableIdInference(bool disable = true) =>
+			Assign(disable, (a, v) => a._defaultDisableAllInference = v);
 
 		private void MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
@@ -167,7 +191,7 @@ namespace Nest
 			_idProperties.Add(typeof(TDocument), fieldName);
 		}
 
-		/// <inheritdoc cref="IConnectionSettingsValues.RouteProperties"/>
+		/// <inheritdoc cref="IConnectionSettingsValues.RouteProperties" />
 		private void MapRoutePropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
 			objectPath.ThrowIfNull(nameof(objectPath));
@@ -224,11 +248,12 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Specify how the mapping is inferred for a given CLR type.
-		/// The mapping can infer the index, id and relation name for a given CLR type, as well as control
-		/// serialization behaviour for CLR properties.
+		///     Specify how the mapping is inferred for a given CLR type.
+		///     The mapping can infer the index, id and relation name for a given CLR type, as well as control
+		///     serialization behaviour for CLR properties.
 		/// </summary>
-		public TConnectionSettings DefaultMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
+		public TConnectionSettings DefaultMappingFor<TDocument>(
+			Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
 			where TDocument : class
 		{
 			var inferMapping = selector(new ClrTypeMappingDescriptor<TDocument>());
@@ -259,10 +284,11 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Specify how the mapping is inferred for a given CLR type.
-		/// The mapping can infer the index and relation name for a given CLR type.
+		///     Specify how the mapping is inferred for a given CLR type.
+		///     The mapping can infer the index and relation name for a given CLR type.
 		/// </summary>
-		public TConnectionSettings DefaultMappingFor(Type documentType, Func<ClrTypeMappingDescriptor, IClrTypeMapping> selector)
+		public TConnectionSettings DefaultMappingFor(Type documentType,
+			Func<ClrTypeMappingDescriptor, IClrTypeMapping> selector)
 		{
 			var inferMapping = selector(new ClrTypeMappingDescriptor(documentType));
 			if (!inferMapping.IndexName.IsNullOrEmpty())
@@ -278,8 +304,8 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Specify how the mapping is inferred for a given CLR type.
-		/// The mapping can infer the index and relation name for a given CLR type.
+		///     Specify how the mapping is inferred for a given CLR type.
+		///     The mapping can infer the index and relation name for a given CLR type.
 		/// </summary>
 		public TConnectionSettings DefaultMappingFor(IEnumerable<IClrTypeMapping> typeMappings)
 		{
@@ -297,52 +323,72 @@ namespace Nest
 
 			return (TConnectionSettings)this;
 		}
-
 	}
 
 	/// <inheritdoc cref="IConnectionConfigurationValues" />
 	public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionConfiguration>
 	{
 		/// <summary>
-		/// The default user agent for Elasticsearch.Net
+		///     The default user agent for Elasticsearch.Net
 		/// </summary>
-		public static readonly UserAgent DefaultUserAgent = Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(ITransportConfiguration));
+		public static readonly UserAgent DefaultUserAgent =
+			Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(ITransportConfiguration));
 
 		public ConnectionConfiguration(Uri uri = null)
-			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
+			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")))
+		{
+		}
 
 		public ConnectionConfiguration(InMemoryConnection connection)
-			: this(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), connection) { }
+			: this(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), connection)
+		{
+		}
 
 		/// <summary>
-		/// Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId"/>,
-		/// <para><see cref="CloudConnectionPool"/> documentation for more information on how to obtain your Cloud Id</para>
+		///     Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId" />,
+		///     <para><see cref="CloudConnectionPool" /> documentation for more information on how to obtain your Cloud Id</para>
 		/// </summary>
-		public ConnectionConfiguration(string cloudId, IAuthenticationHeader credentials) : this(new CloudConnectionPool(cloudId, credentials)) { }
+		public ConnectionConfiguration(string cloudId, IAuthenticationHeader credentials) : this(
+			new CloudConnectionPool(cloudId, credentials))
+		{
+		}
 
 		public ConnectionConfiguration(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
 
-		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection) : this(connectionPool, connection, null) { }
+		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection) : this(connectionPool,
+			connection, null)
+		{
+		}
 
-		public ConnectionConfiguration(IConnectionPool connectionPool, ITransportSerializer serializer) : this(connectionPool, null, serializer) { }
+		public ConnectionConfiguration(IConnectionPool connectionPool, ITransportSerializer serializer) : this(
+			connectionPool, null, serializer)
+		{
+		}
 
-		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, ITransportSerializer serializer)
-			: base(connectionPool, connection, serializer) { }
-
+		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection,
+			ITransportSerializer serializer)
+			: base(connectionPool, connection, serializer)
+		{
+		}
 	}
 
 	/// <inheritdoc cref="IConnectionConfigurationValues" />
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public abstract class ConnectionConfigurationBase<TConnectionConfiguration> : TransportConfigurationBase<TConnectionConfiguration>, IConnectionConfigurationValues
-		where TConnectionConfiguration : ConnectionConfigurationBase<TConnectionConfiguration>, IConnectionConfigurationValues
+	public abstract class
+		ConnectionConfigurationBase<TConnectionConfiguration> : TransportConfigurationBase<TConnectionConfiguration>,
+			IConnectionConfigurationValues
+		where TConnectionConfiguration : ConnectionConfigurationBase<TConnectionConfiguration>,
+		IConnectionConfigurationValues
 	{
-		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection, ITransportSerializer? serializer,
+		private bool _includeServerStackTraceOnError;
+
+		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection,
+			ITransportSerializer? serializer,
 			IProductRegistration registration = null)
 			: base(connectionPool, connection, serializer, registration ?? ElasticsearchProductRegistration.Default) =>
 			UserAgent(ConnectionConfiguration.DefaultUserAgent);
 
-		private bool _includeServerStackTraceOnError;
 		bool IConnectionConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;
 
 		public override TConnectionConfiguration EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null) =>
@@ -351,17 +397,17 @@ namespace Nest
 				.IncludeServerStackTraceOnError();
 
 		/// <summary>
-		/// Forces all requests to have ?pretty=true querystring parameter appended,
-		/// causing Elasticsearch to return formatted JSON.
-		/// Defaults to <c>false</c>
+		///     Forces all requests to have ?pretty=true querystring parameter appended,
+		///     causing Elasticsearch to return formatted JSON.
+		///     Defaults to <c>false</c>
 		/// </summary>
 		public override TConnectionConfiguration PrettyJson(bool b = true) =>
 			base.PrettyJson(b).UpdateGlobalQueryString("pretty", "true", b);
 
 		/// <summary>
-		/// Forces all requests to have ?error_trace=true querystring parameter appended,
-		/// causing Elasticsearch to return stack traces as part of serialized exceptions
-		/// Defaults to <c>false</c>
+		///     Forces all requests to have ?error_trace=true querystring parameter appended,
+		///     causing Elasticsearch to return stack traces as part of serialized exceptions
+		///     Defaults to <c>false</c>
 		/// </summary>
 		public TConnectionConfiguration IncludeServerStackTraceOnError(bool b = true) => Assign(b, (a, v) =>
 		{
@@ -374,9 +420,9 @@ namespace Nest
 	public interface IConnectionConfigurationValues : ITransportConfiguration
 	{
 		/// <summary>
-		/// Forces all requests to have ?error_trace=true querystring parameter appended,
-		/// causing Elasticsearch to return stack traces as part of serialized exceptions
-		/// Defaults to <c>false</c>
+		///     Forces all requests to have ?error_trace=true querystring parameter appended,
+		///     causing Elasticsearch to return stack traces as part of serialized exceptions
+		///     Defaults to <c>false</c>
 		/// </summary>
 		bool IncludeServerStackTraceOnError { get; }
 	}
