@@ -1,17 +1,20 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Nest
 {
+	public interface IDictionaryKey
+	{
+		string Key { get; }
+	}
+
 	[DebuggerDisplay("{DebugDisplay,nq}")]
-	public class PropertyName : IEquatable<PropertyName>, IUrlParameter
+	[JsonConverter(typeof(PropertyNameConverter))]
+	public class PropertyName : IEquatable<PropertyName>, IUrlParameter, IDictionaryKey
 	{
 		private readonly object _comparisonValue;
 		private readonly Type _type;
@@ -46,10 +49,9 @@ namespace Nest
 		internal string DebugDisplay =>
 			$"{Expression?.ToString() ?? PropertyDebug ?? Name}{(_type == null ? "" : " typeof: " + _type.Name)}";
 
-		public override string ToString() => DebugDisplay;
-
 		private string PropertyDebug => Property == null ? null : $"PropertyInfo: {Property.Name}";
 		private static int TypeHashCode { get; } = typeof(PropertyName).GetHashCode();
+		public string Key => Name;
 
 		public bool Equals(PropertyName other) => EqualsMarker(other);
 
@@ -62,11 +64,16 @@ namespace Nest
 			return nestSettings.Inferrer.PropertyName(this);
 		}
 
-		public static implicit operator PropertyName(string name) => name.IsNullOrEmpty() ? null : new PropertyName(name);
+		public override string ToString() => DebugDisplay;
 
-		public static implicit operator PropertyName(Expression expression) => expression == null ? null : new PropertyName(expression);
+		public static implicit operator PropertyName(string name) =>
+			name.IsNullOrEmpty() ? null : new PropertyName(name);
 
-		public static implicit operator PropertyName(PropertyInfo property) => property == null ? null : new PropertyName(property);
+		public static implicit operator PropertyName(Expression expression) =>
+			expression == null ? null : new PropertyName(expression);
+
+		public static implicit operator PropertyName(PropertyInfo property) =>
+			property == null ? null : new PropertyName(property);
 
 		public override int GetHashCode()
 		{

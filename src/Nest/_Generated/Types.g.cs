@@ -7761,7 +7761,7 @@ namespace Nest
 		public bool? NumericDetection { get; set; }
 
 		[JsonPropertyName("properties")]
-		public Dictionary<PropertyName, Property>? Properties { get; set; }
+		public Dictionary<PropertyName, PropertyBase>? Properties { get; set; }
 
 		[JsonPropertyName("_routing")]
 		public RoutingField? Routing { get; set; }
