@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Nest;
@@ -37,6 +37,12 @@ namespace Playground
 					Meta = new Metadata {{"foo", "bar"}}
 				}
 			});
+
+			// TODO - Index document
+
+			// TODO - Retrieve document by ID
+
+			// TODO - Search
 
 			var deleteResponse = await client.Indices.DeleteAsync(new DeleteIndicesRequest(indexName));
 
