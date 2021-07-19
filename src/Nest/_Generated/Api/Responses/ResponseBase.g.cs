@@ -150,16 +150,5 @@ namespace Nest
 			internal set;
 #endif
 		}
-
-//		[JsonPropertyName("error")]
-//		public ErrorCause? Error
-//		{
-//			get;
-//#if NET5_0
-//			init;
-//#else
-//			internal set;
-//#endif
-//		}
 	}
 }

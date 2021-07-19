@@ -33,13 +33,4 @@ namespace Tests.Urls.NoNamespace
             await UrlTester.HEAD("/").Request(c => c.Ping(new PingRequest())).RequestAsync(c => c.PingAsync(new PingRequest()));
         }
     }
-
-    //public class SearchUrlTests : UrlTestsBase
-    //{
-    //    [U]
-    //    public override async Task Urls()
-    //    {
-    //        await UrlTester.POST("/_search").Request(c => c.Search(new SearchRequest())).RequestAsync(c => c.SearchAsync(new SearchRequest()));
-    //    }
-    //}
 }

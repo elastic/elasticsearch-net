@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -7,11 +6,21 @@ namespace Nest
 {
 	// Stubs until we generate these - Allows the code to compile so we can identify real errors.
 
-	public class DateMath { }
+	public class DateMath
+	{
+	}
 
-	public class GeoTilePrecision { }
-	public class GeoHashPrecision { }
-	public class AggregateName { }
+	public class GeoTilePrecision
+	{
+	}
+
+	public class GeoHashPrecision
+	{
+	}
+
+	public class AggregateName
+	{
+	}
 
 	public class Distance
 	{
@@ -201,4 +210,315 @@ namespace Nest
 
 		public override int GetHashCode() => Value.GetHashCode();
 	}
+
+	//	public partial class ErrorCause
+	//	{
+	//		[JsonPropertyName("bytes_limit")]
+	//		public long? BytesLimit
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("bytes_wanted")]
+	//		public long? BytesWanted
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("caused_by")]
+	//		public ErrorCause? CausedBy
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("col")]
+	//		public int? Col
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("column")]
+	//		public int? Column
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("failed_shards")]
+	//		public IReadOnlyCollection<ShardFailure>? FailedShards
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("grouped")]
+	//		public bool? Grouped
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("header")]
+	//		public HttpHeaders? Header
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("index")]
+	//		public IndexName? Index
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("index_uuid")]
+	//		public Uuid? IndexUuid
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("lang")]
+	//		public string? Lang
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("language")]
+	//		public string? Language
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("licensed_expired_feature")]
+	//		public string? LicensedExpiredFeature
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("line")]
+	//		public int? Line
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("max_buckets")]
+	//		public int? MaxBuckets
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("phase")]
+	//		public string? Phase
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("position")]
+	//		public PainlessExecutionPosition? Position
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("processor_type")]
+	//		public string? ProcessorType
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("property_name")]
+	//		public string? PropertyName
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("reason")]
+	//		public string Reason
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("resource_id")]
+	//		public Ids? ResourceId
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("resource_type")]
+	//		public string? ResourceType
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("root_cause")]
+	//		public IReadOnlyCollection<ErrorCause>? RootCause
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("script")]
+	//		public string? Script
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("script_stack")]
+	//		public IReadOnlyCollection<string>? ScriptStack
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("shard")]
+	//		public Union<int, string>? Shard
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("stack_trace")]
+	//		public string? StackTrace
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+
+	//		[JsonPropertyName("type")]
+	//		public string Type
+	//		{
+	//			get;
+	//#if NET5_0
+	//			init;
+	//#else
+	//			internal set;
+	//#endif
+	//		}
+	//	}
 }
