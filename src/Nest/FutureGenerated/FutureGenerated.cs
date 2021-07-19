@@ -9,6 +9,10 @@ namespace Nest
 
 	public class DateMath { }
 
+	public class GeoTilePrecision { }
+	public class GeoHashPrecision { }
+	public class AggregateName { }
+
 	public class Distance
 	{
 	}

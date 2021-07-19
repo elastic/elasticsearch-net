@@ -16,7 +16,9 @@ namespace Nest
 	{
 		// TODO: Old approach using ProxyPostData - Leaving it here while we decide on the preferred mechanism
 		//public void WriteJson(Stream stream, ITransportSerializer sourceSerializer, SerializationFormatting formatting) => sourceSerializer.Serialize(Document, stream, formatting);
-		
+
+		public object Document { get; set; }
+
 		void IProxyRequest.WriteJson(Utf8JsonWriter writer, ITransportSerializer sourceSerializer)
 		{
 			// TODO: Review perf
@@ -28,5 +30,10 @@ namespace Nest
 
 			// Perhaps can be improved in .NET 6/ updated system.text.json - https://github.com/dotnet/runtime/pull/53212
 		}
+	}
+
+	public partial class IndexDescriptor<TDocument>
+	{
+		public void WriteJson(Utf8JsonWriter writer, ITransportSerializer sourceSerializer) => throw new System.NotImplementedException();
 	}
 }

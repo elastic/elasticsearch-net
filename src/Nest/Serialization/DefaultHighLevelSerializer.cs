@@ -123,6 +123,12 @@ namespace Nest
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
 	internal class DefaultHighLevelSerializer : ITransportSerializer
 	{
+		public DefaultHighLevelSerializer(JsonSerializerOptions options = null) => Options = options ?? new JsonSerializerOptions
+		{
+			IgnoreNullValues = true,
+			Converters = { new JsonStringEnumConverter() }
+		};
+
 		// ctor added so we can pass down settings. TODO: review this design, perhaps have a method AddConverter which can be called instead?
 		public DefaultHighLevelSerializer(IConnectionSettingsValues settings) =>
 			Options = new JsonSerializerOptions

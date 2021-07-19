@@ -33,6 +33,14 @@ namespace Nest
 		Actual
 	}
 
+	public enum CategorizationStatus
+	{
+		[EnumMember(Value = "warn")]
+		Warn,
+		[EnumMember(Value = "ok")]
+		Ok
+	}
+
 	public enum ChunkingMode
 	{
 		[EnumMember(Value = "off")]
