@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Nest;
 
 namespace Playground
@@ -13,20 +14,23 @@ namespace Playground
 
 	internal class Program
 	{
-		private static void Main()
+		private static async Task Main()
 		{
 			IElasticClient client = new ElasticClient(new Uri("http://localhost:9200"));
 
 			var indexName = Guid.NewGuid().ToString();
 
-			var createResponse = client.Indices.Create(new IndicesCreateRequest(indexName)
+			var clusterHealthRequest = new ClusterHealthRequest {Level = Level.Cluster};
+			var clusterHealthResponse = await client.Cluster.HealthAsync(clusterHealthRequest);
+
+			var createResponse = await client.Indices.CreateAsync(new IndicesCreateRequest(indexName)
 			{
 				Mappings = new TypeMapping
 				{
 					DateDetection = false,
 					Properties = new Dictionary<PropertyName, PropertyBase>
 					{
-						{"age", new NumberProperty()},
+						{"age", new NumberProperty {Type = NumberType.Integer}},
 						{"name", new TextProperty()},
 						{"email", new KeywordProperty()}
 					},
@@ -34,7 +38,7 @@ namespace Playground
 				}
 			});
 
-			var deleteResponse = client.Indices.Delete(new DeleteIndicesRequest(indexName));
+			var deleteResponse = await client.Indices.DeleteAsync(new DeleteIndicesRequest(indexName));
 
 			//var response = await client.IndexAsync(new IndexRequest<MyType>("test-001", Guid.NewGuid()){ Document = new MyType("Steve Gordon")});
 			//if (response.IsValid)
@@ -46,7 +50,7 @@ namespace Playground
 
 			//await client.Cluster.HealthAsync();
 
-			//var clusterHealthRequest = new ClusterHealthRequest { Level = Level.Cluster };
+
 			//var clusterHealthResponse = await client.Cluster.HealthAsync(clusterHealthRequest);
 
 			//if (clusterHealthResponse.IsValid)
