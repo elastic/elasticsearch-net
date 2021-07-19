@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
@@ -10,7 +11,7 @@ namespace Tests.Serialization
 	public class CreateIndexRequestTests
 	{
 		[U]
-		public void Serialize()
+		public async Task Serialize()
 		{
 			var request = new IndicesCreateRequest("index-name")
 			{
@@ -20,8 +21,8 @@ namespace Tests.Serialization
 					Meta = new Metadata {{"foo", "bar"}},
 					Properties = new Dictionary<PropertyName, PropertyBase>
 					{
-						{"age", new NumberProperty()},
-						{"name", new TextProperty()},
+						{"age", new NumberProperty {Type = NumberType.Integer}},
+						{"name", new TextProperty {IgnoreAbove = 10}},
 						{"email", new KeywordProperty()}
 					}
 				}
@@ -31,8 +32,9 @@ namespace Tests.Serialization
 
 			var ms = new MemoryStream();
 
-			serializer.Serialize(request, ms);
+			await serializer.SerializeAsync(request, ms);
 
+			// Only serialising the base type! Support polymorphic
 			var jsonString = Encoding.Default.GetString(ms.ToArray());
 		}
 	}

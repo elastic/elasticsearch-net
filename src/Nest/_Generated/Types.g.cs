@@ -6280,6 +6280,8 @@ namespace Nest
 
 	public partial class BinaryProperty : DocValuesPropertyBase
 	{
+		[JsonPropertyName("type")]
+		public string Type => "binary";
 	}
 
 	public partial class BooleanProperty : DocValuesPropertyBase
@@ -6327,6 +6329,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "boolean";
 	}
 
 	public partial class CompletionProperty : DocValuesPropertyBase
@@ -6396,6 +6401,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "completion";
 	}
 
 	public partial class CorePropertyBase : PropertyBase
@@ -6501,6 +6509,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "date_nanos";
 	}
 
 	public partial class DateProperty : DocValuesPropertyBase
@@ -6581,6 +6592,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "date";
 	}
 
 	public partial class DateRangeProperty : RangePropertyBase
@@ -6595,6 +6609,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "date_range";
 	}
 
 	public partial class DocValuesPropertyBase : CorePropertyBase
@@ -6613,6 +6630,8 @@ namespace Nest
 
 	public partial class DoubleRangeProperty : RangePropertyBase
 	{
+		[JsonPropertyName("type")]
+		public string Type => "double_range";
 	}
 
 	public partial class DynamicTemplate
@@ -6647,6 +6666,8 @@ namespace Nest
 
 	public partial class FloatRangeProperty : RangePropertyBase
 	{
+		[JsonPropertyName("type")]
+		public string Type => "float_range";
 	}
 
 	public partial class GenericProperty : DocValuesPropertyBase
@@ -6818,6 +6839,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "geo_point";
 	}
 
 	public partial class GeoShapeProperty : DocValuesPropertyBase
@@ -6876,6 +6900,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "geo_shape";
 	}
 
 	public partial class IndexField
@@ -6886,6 +6913,8 @@ namespace Nest
 
 	public partial class IntegerRangeProperty : RangePropertyBase
 	{
+		[JsonPropertyName("type")]
+		public string Type => "integer_range";
 	}
 
 	public partial class IpProperty : DocValuesPropertyBase
@@ -6922,10 +6951,15 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "ip";
 	}
 
 	public partial class IpRangeProperty : RangePropertyBase
 	{
+		[JsonPropertyName("type")]
+		public string Type => "ip_range";
 	}
 
 	public partial class KeywordProperty : DocValuesPropertyBase
@@ -7017,14 +7051,21 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "keyword";
 	}
 
 	public partial class LongRangeProperty : RangePropertyBase
 	{
+		[JsonPropertyName("type")]
+		public string Type => "long_range";
 	}
 
 	public partial class Murmur3HashProperty : DocValuesPropertyBase
 	{
+		[JsonPropertyName("type")]
+		public string Type => "murmur3";
 	}
 
 	public partial class NestedProperty : CorePropertyBase
@@ -7061,6 +7102,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "nested";
 	}
 
 	public partial class NumberProperty : DocValuesPropertyBase
@@ -7166,6 +7210,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "object";
 	}
 
 	public partial class PointProperty : DocValuesPropertyBase
@@ -7202,6 +7249,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "point";
 	}
 
 	public partial class PropertyBase
@@ -7371,6 +7421,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "search_as_you_type";
 	}
 
 	public partial class ShapeProperty : DocValuesPropertyBase
@@ -7418,6 +7471,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "shape";
 	}
 
 	public partial class SizeField
@@ -7671,6 +7727,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "text";
 	}
 
 	public partial class TokenCountProperty : DocValuesPropertyBase
@@ -7729,6 +7788,9 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("type")]
+		public string Type => "token_count";
 	}
 
 	public partial class TypeMapping
@@ -7778,10 +7840,14 @@ namespace Nest
 
 	public partial class VersionProperty : DocValuesPropertyBase
 	{
+		[JsonPropertyName("type")]
+		public string Type => "version";
 	}
 
 	public partial class WildcardProperty : DocValuesPropertyBase
 	{
+		[JsonPropertyName("type")]
+		public string Type => "wildcard";
 	}
 
 	public partial class BoolQuery : QueryBase
