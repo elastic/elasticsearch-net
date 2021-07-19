@@ -41,12 +41,14 @@ namespace Nest
 					culture: null)!;
 			}
 			else
+			{
 				return (JsonConverter)Activator.CreateInstance(
 					typeof(InterfaceConverter<,>).MakeGenericType(typeToConvert, att?.ConvertType),
 					BindingFlags.Instance | BindingFlags.Public,
 					args: null,
 					binder: null,
 					culture: null)!;
+			}
 		}
 	}
 
@@ -179,7 +181,8 @@ namespace Nest
 				{
 					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
 					new ProxyRequestConverterFactory(settings),
-					new DictionaryConverter()
+					new DictionaryConverter(),
+					new UnionConverter()
 				}
 			};
 
