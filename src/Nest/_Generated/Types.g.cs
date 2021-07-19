@@ -7260,7 +7260,7 @@ namespace Nest
 		public Union<bool, DynamicMapping>? Dynamic { get; set; }
 
 		[JsonPropertyName("fields")]
-		public Dictionary<PropertyName, Property>? Fields { get; set; }
+		public Dictionary<PropertyName, PropertyBase>? Fields { get; set; }
 
 		[JsonPropertyName("ignore_above")]
 		public int? IgnoreAbove { get; set; }
@@ -7275,7 +7275,7 @@ namespace Nest
 		public PropertyName? Name { get; set; }
 
 		[JsonPropertyName("properties")]
-		public Dictionary<PropertyName, Property>? Properties { get; set; }
+		public Dictionary<PropertyName, PropertyBase>? Properties { get; set; }
 	}
 
 	public partial class RangePropertyBase : DocValuesPropertyBase
