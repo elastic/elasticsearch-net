@@ -8,6 +8,52 @@ using System.Text.Json.Serialization;
 
 namespace Nest
 {
+	public class UnionConverter : JsonConverterFactory
+	{
+		public override bool CanConvert(Type typeToConvert) => typeToConvert.Name == typeof(Union<,>).Name;
+
+		public override JsonConverter CreateConverter(
+			Type type,
+			JsonSerializerOptions options)
+		{
+			var itemOneType = type.GetGenericArguments()[0];
+			var itemTwoType = type.GetGenericArguments()[1];
+
+			var converter = (JsonConverter)Activator.CreateInstance(
+				typeof(UnionConverterInner<,>).MakeGenericType(itemOneType, itemTwoType),
+				BindingFlags.Instance | BindingFlags.Public,
+				null,
+				null,
+				null);
+
+			return converter;
+		}
+
+		private class UnionConverterInner<TItem1, TItem2> : JsonConverter<Union<TItem1, TItem2>>
+		{
+			public override Union<TItem1, TItem2>? Read(ref Utf8JsonReader reader, Type typeToConvert,
+				JsonSerializerOptions options) => throw new NotImplementedException();
+
+			public override void Write(Utf8JsonWriter writer, Union<TItem1, TItem2> value,
+				JsonSerializerOptions options)
+			{
+				if (value.Item1 is not null)
+				{
+					JsonSerializer.Serialize(writer, value.Item1, value.Item1.GetType(), options);
+					return;
+				}
+
+				if (value.Item2 is not null)
+				{
+					JsonSerializer.Serialize(writer, value.Item2, value.Item2.GetType(), options);
+					return;
+				}
+
+				throw new SerializationException("Invalid union type");
+			}
+		}
+	}
+
 	public class DictionaryConverter : JsonConverterFactory
 	{
 		public override bool CanConvert(Type typeToConvert)
