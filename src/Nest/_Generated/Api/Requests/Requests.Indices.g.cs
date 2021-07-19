@@ -66,7 +66,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("mappings")]
-		public Union<Dictionary<string, TypeMapping>, TypeMapping>? Mappings
+		public TypeMapping? Mappings
 		{
 			get;
 #if NET5_0
