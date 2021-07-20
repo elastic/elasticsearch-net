@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Collections.Generic;
 using Elastic.Transport;
@@ -18,11 +14,11 @@ namespace Nest
 	public class RouteValues : Dictionary<string, IUrlParameter>
 	{
 		/// <summary>
-		/// Used specifically by index requests to determine whether to use PUT or POST.
+		///     Used specifically by index requests to determine whether to use PUT or POST.
 		/// </summary>
 		internal bool ContainsId { get; private set; }
 
-		internal ResolvedRouteValues Resolve(IConnectionSettingsValues configurationValues)
+		internal ResolvedRouteValues Resolve(IElasticsearchClientSettings configuration)
 		{
 			if (Count == 0)
 				return ResolvedRouteValues.Empty;
@@ -30,13 +26,14 @@ namespace Nest
 			var resolved = new ResolvedRouteValues(Count);
 			foreach (var kv in this)
 			{
-				var value = this[kv.Key].GetString(configurationValues);
+				var value = this[kv.Key].GetString(configuration);
 				if (value.IsNullOrEmpty())
 					continue;
 				resolved[kv.Key] = value;
 				if (IsId(kv.Key))
 					ContainsId = true;
 			}
+
 			return resolved;
 		}
 

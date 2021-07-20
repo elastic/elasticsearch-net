@@ -57,7 +57,7 @@ namespace Nest
 
 		string IUrlParameter.GetString(ITransportConfiguration settings)
 		{
-			var nestSettings = (IConnectionSettingsValues)settings;
+			var nestSettings = (IElasticsearchClientSettings)settings;
 			return nestSettings.Inferrer.Id(Document) ?? StringOrLongValue;
 		}
 

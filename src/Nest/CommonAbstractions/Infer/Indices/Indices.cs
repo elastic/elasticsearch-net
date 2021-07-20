@@ -31,9 +31,11 @@ namespace Nest
 			all => "_all",
 			many =>
 			{
-				if (!(settings is IConnectionSettingsValues nestSettings))
+				if (!(settings is IElasticsearchClientSettings nestSettings))
+				{
 					throw new Exception(
 						"Tried to pass index names on querysting but it could not be resolved because no nest settings are available");
+				}
 
 				var infer = nestSettings.Inferrer;
 				var indices = many.Indices.Select(i => infer.IndexName(i)).Distinct();

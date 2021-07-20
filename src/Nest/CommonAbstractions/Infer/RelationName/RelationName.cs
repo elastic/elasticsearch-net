@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Diagnostics;
 using Elastic.Transport;
@@ -26,9 +22,11 @@ namespace Nest
 
 		string IUrlParameter.GetString(ITransportConfiguration settings)
 		{
-			if (!(settings is IConnectionSettingsValues nestSettings))
+			if (!(settings is IElasticsearchClientSettings nestSettings))
+			{
 				throw new ArgumentNullException(nameof(settings),
-					$"Can not resolve {nameof(RelationName)} if no {nameof(IConnectionSettingsValues)} is provided");
+					$"Can not resolve {nameof(RelationName)} if no {nameof(IElasticsearchClientSettings)} is provided");
+			}
 
 			//return nestSettings.Inferrer.RelationName(this);
 
@@ -43,7 +41,8 @@ namespace Nest
 
 		private static RelationName GetRelationNameForType(Type type) => new(type);
 
-		public static implicit operator RelationName(string typeName) => typeName.IsNullOrEmpty() ? null : new RelationName(typeName);
+		public static implicit operator RelationName(string typeName) =>
+			typeName.IsNullOrEmpty() ? null : new RelationName(typeName);
 
 		public static implicit operator RelationName(Type type) => type == null ? null : new RelationName(type);
 
@@ -77,6 +76,5 @@ namespace Nest
 		private bool EqualsString(string other) => !other.IsNullOrEmpty() && other == Name;
 
 		public override string ToString() => DebugDisplay;
-
 	}
 }

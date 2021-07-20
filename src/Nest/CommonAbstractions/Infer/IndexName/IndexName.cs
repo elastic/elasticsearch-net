@@ -70,9 +70,11 @@ namespace Nest
 
 		public string GetString(ITransportConfiguration settings)
 		{
-			if (!(settings is IConnectionSettingsValues nestSettings))
+			if (!(settings is IElasticsearchClientSettings nestSettings))
+			{
 				throw new Exception(
 					"Tried to pass index name on querystring but it could not be resolved because no nest settings are available");
+			}
 
 			return nestSettings.Inferrer.IndexName(this);
 		}
@@ -111,7 +113,7 @@ namespace Nest
 
 		public static implicit operator IndexName(string indexName) => Parse(indexName);
 
-		public static implicit operator IndexName(Type type) => new (type);
+		public static implicit operator IndexName(Type type) => new(type);
 
 		public override bool Equals(object obj) =>
 			obj is string s ? EqualsString(s) : obj is IndexName i && EqualsMarker(i);

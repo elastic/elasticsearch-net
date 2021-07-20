@@ -57,9 +57,11 @@ namespace Nest
 
 		string IUrlParameter.GetString(ITransportConfiguration settings)
 		{
-			if (!(settings is IConnectionSettingsValues nestSettings))
+			if (!(settings is IElasticsearchClientSettings nestSettings))
+			{
 				throw new ArgumentNullException(nameof(settings),
-					$"Can not resolve {nameof(PropertyName)} if no {nameof(IConnectionSettingsValues)} is provided");
+					$"Can not resolve {nameof(PropertyName)} if no {nameof(IElasticsearchClientSettings)} is provided");
+			}
 
 			return nestSettings.Inferrer.PropertyName(this);
 		}

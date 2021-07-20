@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,12 +10,12 @@ using Tests.Core.Xunit;
 
 namespace Tests.Core.Client.Settings
 {
-	public class TestConnectionSettings : ConnectionSettings
+	public class TestElasticsearchClientSettings : ElasticsearchClientSettings
 	{
 		public static readonly bool RunningMitmProxy = Process.GetProcessesByName("mitmproxy").Any();
 		public static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
 
-		public TestConnectionSettings(
+		public TestElasticsearchClientSettings(
 			Func<ICollection<Uri>, IConnectionPool> createPool = null,
 			SourceSerializerFactory sourceSerializerFactory = null,
 			bool forceInMemory = false,
@@ -39,27 +35,27 @@ namespace Tests.Core.Client.Settings
 
 		private void ApplyTestSettings() =>
 			RerouteToProxyIfNeeded()
-			.EnableDebugMode()
-			.EnableHttpCompression(TestConfiguration.Instance.Random.HttpCompression)
+				.EnableDebugMode()
+				.EnableHttpCompression(TestConfiguration.Instance.Random.HttpCompression)
 #if DEBUG
-			.EnableDebugMode()
+				.EnableDebugMode()
 #endif
-			.ConnectionLimit(ConnectionLimitDefault)
-			.OnRequestCompleted(r =>
-			{
-				//r.HttpMethod;
+				.ConnectionLimit(ConnectionLimitDefault)
+				.OnRequestCompleted(r =>
+				{
+					//r.HttpMethod;
 
 
-				if (!r.DeprecationWarnings.Any()) return;
+					if (!r.DeprecationWarnings.Any()) return;
 
-				var q = r.Uri.Query;
-				//hack to prevent the deprecation warnings from the deprecation response test to be reported
-				if (!string.IsNullOrWhiteSpace(q) && q.Contains("routing=ignoredefaultcompletedhandler")) return;
+					var q = r.Uri.Query;
+					//hack to prevent the deprecation warnings from the deprecation response test to be reported
+					if (!string.IsNullOrWhiteSpace(q) && q.Contains("routing=ignoredefaultcompletedhandler")) return;
 
-				foreach (var d in r.DeprecationWarnings) XunitRunState.SeenDeprecations.Add(d);
-			});
+					foreach (var d in r.DeprecationWarnings) XunitRunState.SeenDeprecations.Add(d);
+				});
 
-		private ConnectionSettings RerouteToProxyIfNeeded()
+		private ElasticsearchClientSettings RerouteToProxyIfNeeded()
 		{
 			if (!RunningMitmProxy) return this;
 
@@ -74,10 +70,11 @@ namespace Tests.Core.Client.Settings
 		//	return (builtin, values) => new TestSourceSerializerBase(builtin, values);
 		//}
 
-		private static IConnectionPool CreatePool(Func<ICollection<Uri>, IConnectionPool> createPool = null, int port = 9200)
+		private static IConnectionPool CreatePool(Func<ICollection<Uri>, IConnectionPool> createPool = null,
+			int port = 9200)
 		{
-			createPool ??= (uris => new StaticConnectionPool(uris));
-			var connectionPool = createPool(new[] { CreateUri(port) });
+			createPool ??= uris => new StaticConnectionPool(uris);
+			var connectionPool = createPool(new[] {CreateUri(port)});
 			return connectionPool;
 		}
 
