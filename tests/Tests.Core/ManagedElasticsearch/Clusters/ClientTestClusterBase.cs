@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System.IO;
 using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Ephemeral.Plugins;
@@ -20,19 +16,22 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 	{
 		protected ClientTestClusterBase() : this(new ClientTestClusterConfiguration()) { }
 
-		protected ClientTestClusterBase(params ElasticsearchPlugin[] plugins) : this(new ClientTestClusterConfiguration(plugins)) { }
+		protected ClientTestClusterBase(params ElasticsearchPlugin[] plugins) : this(
+			new ClientTestClusterConfiguration(plugins))
+		{
+		}
 
 		protected ClientTestClusterBase(ClientTestClusterConfiguration configuration) : base(configuration) { }
 
 		public IElasticClient Client => this.GetOrAddClient(s => ConnectionSettings(s.ApplyDomainSettings()));
 
-		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s;
+		protected virtual ElasticsearchClientSettings ConnectionSettings(ElasticsearchClientSettings s) => s;
 
 		protected sealed override void SeedCluster()
 		{
-			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = WaitForStatus.Green });
+			Client.Cluster.Health(new ClusterHealthRequest {WaitForStatus = WaitForStatus.Green});
 			SeedNode();
-			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = WaitForStatus.Green });
+			Client.Cluster.Health(new ClusterHealthRequest {WaitForStatus = WaitForStatus.Green});
 		}
 
 		protected virtual void SeedNode() { }
@@ -40,12 +39,16 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 	public class ClientTestClusterConfiguration : XunitClusterConfiguration
 	{
-		public ClientTestClusterConfiguration(params ElasticsearchPlugin[] plugins) : this(numberOfNodes: 1, plugins: plugins) { }
+		public ClientTestClusterConfiguration(params ElasticsearchPlugin[] plugins) : this(numberOfNodes: 1,
+			plugins: plugins)
+		{
+		}
 
 		public ClientTestClusterConfiguration(ClusterFeatures features = ClusterFeatures.None, int numberOfNodes = 1,
 			params ElasticsearchPlugin[] plugins
 		)
-			: base(TestClient.Configuration.ElasticsearchVersion, features, new ElasticsearchPlugins(plugins), numberOfNodes)
+			: base(TestClient.Configuration.ElasticsearchVersion, features, new ElasticsearchPlugins(plugins),
+				numberOfNodes)
 		{
 			TestConfiguration = TestClient.Configuration;
 			ShowElasticsearchOutputAfterStarted = TestConfiguration.ShowElasticsearchOutputAfterStarted;

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +28,7 @@ namespace Tests.Serialization
 				}
 			};
 
-			var serializer = new DefaultHighLevelSerializer(new ConnectionSettings());
+			var serializer = new DefaultHighLevelSerializer(new ElasticsearchClientSettings());
 
 			var ms = new MemoryStream();
 

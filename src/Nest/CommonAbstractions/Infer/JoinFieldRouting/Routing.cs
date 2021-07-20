@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -13,7 +9,7 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Routing : IEquatable<Routing>, IUrlParameter
 	{
-		private static readonly char[] Separator = { ',' };
+		private static readonly char[] Separator = {','};
 
 		internal Routing(Func<object> documentGetter)
 		{
@@ -49,8 +45,6 @@ namespace Nest
 
 		private string DebugDisplay => StringOrLongValue ?? "Routing from instance typeof: " + Document?.GetType().Name;
 
-		public override string ToString() => DebugDisplay;
-
 		private static int TypeHashCode { get; } = typeof(Routing).GetHashCode();
 
 		public bool Equals(Routing other)
@@ -79,13 +73,17 @@ namespace Nest
 
 		string IUrlParameter.GetString(ITransportConfiguration settings)
 		{
-			var nestSettings = settings as IConnectionSettingsValues;
+			var nestSettings = settings as IElasticsearchClientSettings;
 			return GetString(nestSettings);
 		}
 
-		public static implicit operator Routing(string routing) => routing.IsNullOrEmptyCommaSeparatedList(out _) ? null : new Routing(routing);
+		public override string ToString() => DebugDisplay;
 
-		public static implicit operator Routing(string[] routing) => routing.IsEmpty() ? null : new Routing(string.Join(",", routing));
+		public static implicit operator Routing(string routing) =>
+			routing.IsNullOrEmptyCommaSeparatedList(out _) ? null : new Routing(routing);
+
+		public static implicit operator Routing(string[] routing) =>
+			routing.IsEmpty() ? null : new Routing(string.Join(",", routing));
 
 		public static implicit operator Routing(long routing) => new(routing);
 
@@ -94,7 +92,7 @@ namespace Nest
 		/// <summary> Use the inferred routing from <paramref name="document" /> </summary>
 		public static Routing From<T>(T document) where T : class => new(document);
 
-		private string GetString(IConnectionSettingsValues nestSettings)
+		private string GetString(IElasticsearchClientSettings nestSettings)
 		{
 			string value = null;
 			//if (DocumentGetter != null)

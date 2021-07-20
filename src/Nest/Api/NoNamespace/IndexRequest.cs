@@ -6,15 +6,9 @@ using Elastic.Transport;
 
 namespace Nest
 {
-	public abstract class ExistsResponseBase : ResponseBase
-	{
-		public bool Exists => ApiCall is {Success: true, HttpStatusCode: 200};
-	}
-
 	public partial interface IIndexRequest<TDocument> : IProxyRequest
 	{
 		TDocument Document { get; set; } // TODO - This should be generated based on the spec
-
 		Id? Id { get; }
 	}
 

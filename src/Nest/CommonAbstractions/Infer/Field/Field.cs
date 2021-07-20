@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -46,15 +42,15 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// A boost to apply to the field
+		///     A boost to apply to the field
 		/// </summary>
 		public double? Boost { get; set; }
 
 		/// <summary>
-		/// A format to apply to the field.
+		///     A format to apply to the field.
 		/// </summary>
 		/// <remarks>
-		/// Can be used only for Doc Value Fields Elasticsearch 6.4.0+
+		///     Can be used only for Doc Value Fields Elasticsearch 6.4.0+
 		/// </remarks>
 		public string Format { get; set; }
 
@@ -62,17 +58,17 @@ namespace Nest
 		public bool CachableExpression { get; }
 
 		/// <summary>
-		/// An expression from which the name of the field can be inferred
+		///     An expression from which the name of the field can be inferred
 		/// </summary>
 		public Expression Expression { get; }
 
 		/// <summary>
-		/// The name of the field
+		///     The name of the field
 		/// </summary>
 		public string Name { get; }
 
 		/// <summary>
-		/// A property from which the name of the field can be inferred
+		///     A property from which the name of the field can be inferred
 		/// </summary>
 		public PropertyInfo Property { get; }
 
@@ -80,8 +76,6 @@ namespace Nest
 			$"{Expression?.ToString() ?? PropertyDebug ?? Name}{(Boost.HasValue ? "^" + Boost.Value : string.Empty)}"
 			+ $"{(!string.IsNullOrEmpty(Format) ? " format: " + Format : string.Empty)}"
 			+ $"{(_type == null ? string.Empty : " typeof: " + _type.Name)}";
-
-		public override string ToString() => DebugDisplay;
 
 		private string PropertyDebug => Property == null ? null : $"PropertyInfo: {Property.Name}";
 
@@ -91,26 +85,32 @@ namespace Nest
 
 		string IUrlParameter.GetString(ITransportConfiguration settings)
 		{
-			if (!(settings is IConnectionSettingsValues nestSettings))
+			if (!(settings is IElasticsearchClientSettings nestSettings))
+			{
 				throw new ArgumentNullException(nameof(settings),
-					$"Can not resolve {nameof(Field)} if no {nameof(IConnectionSettingsValues)} is provided");
+					$"Can not resolve {nameof(Field)} if no {nameof(IElasticsearchClientSettings)} is provided");
+			}
 
 			return nestSettings.Inferrer.Field(this);
 		}
 
-		public Fields And(Field field) => new(new[] { this, field });
+		public override string ToString() => DebugDisplay;
 
-		public Fields And<T, TValue>(Expression<Func<T, TValue>> field, double? boost = null, string format = null) where T : class =>
-			new(new[] { this, new Field(field, boost, format) });
+		public Fields And(Field field) => new(new[] {this, field});
 
-		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null, string format = null) where T : class =>
-			new(new[] { this, new Field(field, boost, format) });
+		public Fields And<T, TValue>(Expression<Func<T, TValue>> field, double? boost = null, string format = null)
+			where T : class =>
+			new(new[] {this, new Field(field, boost, format)});
+
+		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null, string format = null)
+			where T : class =>
+			new(new[] {this, new Field(field, boost, format)});
 
 		public Fields And(string field, double? boost = null, string format = null) =>
-			new(new[] { this, new Field(field, boost, format) });
+			new(new[] {this, new Field(field, boost, format)});
 
 		public Fields And(PropertyInfo property, double? boost = null, string format = null) =>
-			new(new[] { this, new Field(property, boost, format) });
+			new(new[] {this, new Field(property, boost, format)});
 
 		private static string ParseFieldName(string name, out double? boost)
 		{
@@ -122,7 +122,7 @@ namespace Nest
 			if (caretIndex == -1)
 				return name;
 
-			var parts = name.Split(new[] { '^' }, 2, StringSplitOptions.RemoveEmptyEntries);
+			var parts = name.Split(new[] {'^'}, 2, StringSplitOptions.RemoveEmptyEntries);
 			name = parts[0];
 			boost = double.Parse(parts[1], CultureInfo.InvariantCulture);
 			return name;
@@ -130,7 +130,8 @@ namespace Nest
 
 		public static implicit operator Field(string name) => name.IsNullOrEmpty() ? null : new Field(name);
 
-		public static implicit operator Field(Expression expression) => expression == null ? null : new Field(expression);
+		public static implicit operator Field(Expression expression) =>
+			expression == null ? null : new Field(expression);
 
 		public static implicit operator Field(PropertyInfo property) => property == null ? null : new Field(property);
 
