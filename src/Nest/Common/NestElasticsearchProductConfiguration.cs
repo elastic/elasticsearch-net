@@ -3,6 +3,7 @@ using Elastic.Transport.Products.Elasticsearch;
 
 namespace Nest
 {
+	// TODO - Rename once we remove the NEST branding!
 	internal sealed class NestElasticsearchProductRegistration : ElasticsearchProductRegistration
 	{
 		public static NestElasticsearchProductRegistration DefaultForNest { get; } = new();
