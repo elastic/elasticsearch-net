@@ -1,12 +1,11 @@
-
 namespace Nest
 {
 	public static class IndicesExtensions
 	{
-		public static string Resolve(this Indices marker, IConnectionSettingsValues connectionSettings)
+		public static string Resolve(this Indices marker, IElasticsearchClientSettings elasticsearchClientSettings)
 		{
-			connectionSettings.ThrowIfNull(nameof(connectionSettings));
-			return connectionSettings.Inferrer.Resolve(marker);
+			elasticsearchClientSettings.ThrowIfNull(nameof(elasticsearchClientSettings));
+			return elasticsearchClientSettings.Inferrer.Resolve(marker);
 		}
 	}
 }

@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,17 +63,16 @@ namespace Tests.Core.Serialization
 
 	public class SerializationTester
 	{
+		public SerializationTester(IElasticClient client) => Client = client;
 		// TODO: This needs a fair bit of cleanup and refactoring. Code is hacked for initial testing using STJ
 
 		public static SerializationTester Default { get; } = new(TestClient.DefaultInMemoryClient);
-
-		public SerializationTester(IElasticClient client) => Client = client;
 
 		public IElasticClient Client { get; }
 
 		//public static SerializationTester DefaultWithJsonNetSerializer { get; } = new SerializationTester(TestClient.InMemoryWithJsonNetSerializer);
 
-		protected ITransportSerializer Serializer => Client.ConnectionSettings.RequestResponseSerializer;
+		protected ITransportSerializer Serializer => Client.ElasticsearchClientSettings.RequestResponseSerializer;
 
 		public RoundTripResult<T> RoundTrips<T>(T @object) //, bool preserveNullInExpected = false)
 		{
@@ -89,7 +84,7 @@ namespace Tests.Core.Serialization
 		{
 			using var expectedJsonToken = ExpectedJsonToJsonDocument(expectedJson, preserveNullInExpected);
 
-			var result = new RoundTripResult<T>() { Success = false };
+			var result = new RoundTripResult<T>() {Success = false};
 			if (expectedJsonToken == null)
 			{
 				result.DiffFromExpected = "Expected json was null";
@@ -115,7 +110,7 @@ namespace Tests.Core.Serialization
 		public SerializationResult Serializes<T>(T @object, object expectedJson, bool preserveNullInExpected = false)
 		{
 			var expectedJsonToken = ExpectedJsonToJsonDocument(expectedJson, preserveNullInExpected);
-			var result = new RoundTripResult<T> { Success = false };
+			var result = new RoundTripResult<T> {Success = false};
 
 			if (SerializesAndMatches(@object, expectedJsonToken, result))
 				result.Success = true;
@@ -125,7 +120,7 @@ namespace Tests.Core.Serialization
 		public DeserializationResult<T> Deserializes<T>(object expectedJson, bool preserveNullInExpected = false)
 		{
 			var expectedJsonString = ExpectedJsonString(expectedJson, preserveNullInExpected);
-			var result = new RoundTripResult<T>() { Success = false };
+			var result = new RoundTripResult<T>() {Success = false};
 			var @object = Deserialize<T>(expectedJsonString);
 			if (@object != null)
 				result.Success = true;
@@ -142,7 +137,7 @@ namespace Tests.Core.Serialization
 				case byte[] utf8:
 					return JsonDocument.Parse(utf8);
 				default:
-					var json = ExpectedJsonString(expectedJson, preserveNullInFromJson); 
+					var json = ExpectedJsonString(expectedJson, preserveNullInFromJson);
 					return JsonDocument.Parse(Encoding.UTF8.GetBytes(json));
 			}
 		}
@@ -183,7 +178,7 @@ namespace Tests.Core.Serialization
 
 		private T Deserialize<T>(string json)
 		{
-			using var ms = Client.ConnectionSettings.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(json));
+			using var ms = Client.ElasticsearchClientSettings.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(json));
 			return Serializer.Deserialize<T>(ms); // TODO: Can we make this async
 		}
 
@@ -201,12 +196,14 @@ namespace Tests.Core.Serialization
 		//	return matches.All(b => b);
 		//}
 
-		private static bool TokenMatches<T>(JsonDocument expectedJson, RoundTripResult<T> result, string itemJson = null, int item = -1)
+		private static bool TokenMatches<T>(JsonDocument expectedJson, RoundTripResult<T> result,
+			string itemJson = null, int item = -1)
 		{
 			var actualJson = itemJson ?? result.Serialized;
 			var message = "This is the first time I am serializing";
 			if (result.Iterations > 0)
-				message = "This is the second time I am serializing, this usually indicates a problem when deserializing";
+				message =
+					"This is the second time I am serializing, this usually indicates a problem when deserializing";
 			if (item > -1)
 				message += $". This is while comparing the {item.ToOrdinal()} item";
 
@@ -216,8 +213,33 @@ namespace Tests.Core.Serialization
 			return MatchJson(expectedJson, actualJson, result, message);
 		}
 
+		private static bool MatchString<T>(string expected, string actual, RoundTripResult<T> result, string message)
+		{
+			//Serialize() returns quoted strings always.
+			var diff = expected.CreateCharacterDifference(actual, message);
+			if (string.IsNullOrWhiteSpace(diff))
+				return true;
+
+			result.DiffFromExpected = diff;
+			return false;
+		}
+
+		private static bool MatchJson<T>(JsonDocument expectedJson, string actualJson, RoundTripResult<T> result,
+			string message)
+		{
+			var comparer = new JsonElementComparer(); // private field
+
+			using var doc2 = JsonDocument.Parse(actualJson);
+
+			return comparer.Equals(expectedJson.RootElement, doc2.RootElement);
+		}
+
+		private static JsonSerializerOptions ExpectedJsonSerializerSettings(bool preserveNullInExpected = false) =>
+			new() {IgnoreNullValues = !preserveNullInExpected, Converters = {new JsonStringEnumConverter()}};
+
 		/// <summary>
-		/// TEMP: Borrowed from https://stackoverflow.com/questions/60580743/what-is-equivalent-in-jtoken-deepequal-in-system-text-json
+		///     TEMP: Borrowed from
+		///     https://stackoverflow.com/questions/60580743/what-is-equivalent-in-jtoken-deepequal-in-system-text-json
 		/// </summary>
 		public class JsonElementComparer : IEqualityComparer<JsonElement>
 		{
@@ -226,7 +248,7 @@ namespace Tests.Core.Serialization
 			public JsonElementComparer(int maxHashDepth) => MaxHashDepth = maxHashDepth;
 
 			private int MaxHashDepth { get; }
-			
+
 			public bool Equals(JsonElement x, JsonElement y)
 			{
 				if (x.ValueKind != y.ValueKind)
@@ -248,35 +270,38 @@ namespace Tests.Core.Serialization
 						return x.GetRawText() == y.GetRawText();
 
 					case JsonValueKind.String:
-						return x.GetString() == y.GetString(); // Do not use GetRawText() here, it does not automatically resolve JSON escape sequences to their corresponding characters.
+						return
+							x.GetString() ==
+							y.GetString(); // Do not use GetRawText() here, it does not automatically resolve JSON escape sequences to their corresponding characters.
 
 					case JsonValueKind.Array:
 						return x.EnumerateArray().SequenceEqual(y.EnumerateArray(), this);
 
 					case JsonValueKind.Object:
+					{
+						// Surprisingly, JsonDocument fully supports duplicate property names.
+						// I.e. it's perfectly happy to parse {"Value":"a", "Value" : "b"} and will store both
+						// key/value pairs inside the document!
+						// A close reading of https://tools.ietf.org/html/rfc8259#section-4 seems to indicate that
+						// such objects are allowed but not recommended, and when they arise, interpretation of 
+						// identically-named properties is order-dependent.  
+						// So stably sorting by name then comparing values seems the way to go.
+						var xPropertiesUnsorted = x.EnumerateObject().ToList();
+						var yPropertiesUnsorted = y.EnumerateObject().ToList();
+						if (xPropertiesUnsorted.Count != yPropertiesUnsorted.Count)
+							return false;
+						var xProperties = xPropertiesUnsorted.OrderBy(p => p.Name, StringComparer.Ordinal);
+						var yProperties = yPropertiesUnsorted.OrderBy(p => p.Name, StringComparer.Ordinal);
+						foreach (var (px, py) in xProperties.Zip(yProperties, (n, c) => (n, c)))
 						{
-							// Surprisingly, JsonDocument fully supports duplicate property names.
-							// I.e. it's perfectly happy to parse {"Value":"a", "Value" : "b"} and will store both
-							// key/value pairs inside the document!
-							// A close reading of https://tools.ietf.org/html/rfc8259#section-4 seems to indicate that
-							// such objects are allowed but not recommended, and when they arise, interpretation of 
-							// identically-named properties is order-dependent.  
-							// So stably sorting by name then comparing values seems the way to go.
-							var xPropertiesUnsorted = x.EnumerateObject().ToList();
-							var yPropertiesUnsorted = y.EnumerateObject().ToList();
-							if (xPropertiesUnsorted.Count != yPropertiesUnsorted.Count)
+							if (px.Name != py.Name)
 								return false;
-							var xProperties = xPropertiesUnsorted.OrderBy(p => p.Name, StringComparer.Ordinal);
-							var yProperties = yPropertiesUnsorted.OrderBy(p => p.Name, StringComparer.Ordinal);
-							foreach (var (px, py) in xProperties.Zip(yProperties, (n, c) => (n, c)))
-							{
-								if (px.Name != py.Name)
-									return false;
-								if (!Equals(px.Value, py.Value))
-									return false;
-							}
-							return true;
+							if (!Equals(px.Value, py.Value))
+								return false;
 						}
+
+						return true;
+					}
 
 					default:
 						throw new JsonException($"Unknown JsonValueKind {x.ValueKind}");
@@ -285,7 +310,8 @@ namespace Tests.Core.Serialization
 
 			public int GetHashCode(JsonElement obj)
 			{
-				var hash = new HashCode(); // New in .Net core: https://docs.microsoft.com/en-us/dotnet/api/system.hashcode
+				var
+					hash = new HashCode(); // New in .Net core: https://docs.microsoft.com/en-us/dotnet/api/system.hashcode
 				ComputeHashCode(obj, ref hash, 0);
 				return hash.ToHashCode();
 			}
@@ -312,10 +338,13 @@ namespace Tests.Core.Serialization
 
 					case JsonValueKind.Array:
 						if (depth != MaxHashDepth)
+						{
 							foreach (var item in obj.EnumerateArray())
 								ComputeHashCode(item, ref hash, depth + 1);
+						}
 						else
 							hash.Add(obj.GetArrayLength());
+
 						break;
 
 					case JsonValueKind.Object:
@@ -325,6 +354,7 @@ namespace Tests.Core.Serialization
 							if (depth != MaxHashDepth)
 								ComputeHashCode(property.Value, ref hash, depth + 1);
 						}
+
 						break;
 
 					default:
@@ -332,32 +362,5 @@ namespace Tests.Core.Serialization
 				}
 			}
 		}
-
-		private static bool MatchString<T>(string expected, string actual, RoundTripResult<T> result, string message)
-		{
-			//Serialize() returns quoted strings always.
-			var diff = expected.CreateCharacterDifference(actual, message);
-			if (string.IsNullOrWhiteSpace(diff))
-				return true;
-
-			result.DiffFromExpected = diff;
-			return false;
-		}
-
-		private static bool MatchJson<T>(JsonDocument expectedJson, string actualJson, RoundTripResult<T> result, string message)
-		{
-			var comparer = new JsonElementComparer(); // private field
-
-			using var doc2 = JsonDocument.Parse(actualJson);
-
-			return comparer.Equals(expectedJson.RootElement, doc2.RootElement);
-		}
-
-		private static JsonSerializerOptions ExpectedJsonSerializerSettings(bool preserveNullInExpected = false) =>
-			new()
-			{
-				IgnoreNullValues = !preserveNullInExpected,
-				Converters = { new JsonStringEnumConverter() }
-			};
 	}
 }

@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +5,8 @@ using System.Linq;
 namespace Nest
 {
 	/// <summary>
-	/// Each Request type holds a static instance of this class which creates cached builders for each
-	/// of the defined urls in the json spec.
+	///     Each Request type holds a static instance of this class which creates cached builders for each
+	///     of the defined urls in the json spec.
 	/// </summary>
 	internal class ApiUrls
 	{
@@ -18,16 +14,10 @@ namespace Nest
 		private readonly string _errorMessageSuffix;
 
 		/// <summary>
-		/// If the spec only defines a single non parameterizable route this allows us to shortcircuit and avoid hitting
-		/// the cached string builders.
+		///     If the spec only defines a single non parameterizable route this allows us to shortcircuit and avoid hitting
+		///     the cached string builders.
 		/// </summary>
 		private readonly string _fixedUrl;
-
-		/// <summary>
-		/// Creates a lookup for number of parts <=> list of routes with that number of parts.
-		/// <see cref="UrlLookup.Matches"/> allows us to quickly find the right url to use in the list.
-		/// </summary>
-		public Dictionary<int, List<UrlLookup>> Routes { get; }
 
 		/// <summary> Only intended to be created once per request and stored in a static </summary>
 		internal ApiUrls(string[] routes)
@@ -46,7 +36,7 @@ namespace Nest
 					if (Routes.ContainsKey(bracketsCount))
 						Routes[bracketsCount].Add(new UrlLookup(route));
 					else
-						Routes.Add(bracketsCount, new List<UrlLookup> { new(route) });
+						Routes.Add(bracketsCount, new List<UrlLookup> {new(route)});
 				}
 			}
 
@@ -57,7 +47,13 @@ namespace Nest
 				_fixedUrl = routes[0];
 		}
 
-		public string Resolve(RouteValues routeValues, IConnectionSettingsValues settings)
+		/// <summary>
+		///     Creates a lookup for number of parts <=> list of routes with that number of parts.
+		///     <see cref="UrlLookup.Matches" /> allows us to quickly find the right url to use in the list.
+		/// </summary>
+		public Dictionary<int, List<UrlLookup>> Routes { get; }
+
+		public string Resolve(RouteValues routeValues, IElasticsearchClientSettings settings)
 		{
 			if (_fixedUrl != null)
 				return _fixedUrl;
@@ -76,6 +72,7 @@ namespace Nest
 				if (u.Matches(resolved))
 					return u.ToUrl(resolved);
 			}
+
 			throw new Exception($"No route taking {routeValues.Count} parameters{_errorMessageSuffix}");
 		}
 	}

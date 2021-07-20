@@ -6,14 +6,15 @@ using System.Linq.Expressions;
 using Elastic.Transport;
 using Elastic.Transport.Products;
 using Elastic.Transport.Products.Elasticsearch;
+
 #if DOTNETCORE
 
 #endif
 
 namespace Nest
 {
-	/// <inheritdoc cref="IConnectionSettingsValues" />
-	public class ConnectionSettings : ConnectionSettingsBase<ConnectionSettings>
+	/// <inheritdoc cref="IElasticsearchClientSettings" />
+	public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<ElasticsearchClientSettings>
 	{
 		/// <summary>
 		///     A delegate used to construct a serializer to serialize CLR types representing documents and other types related to
@@ -21,18 +22,18 @@ namespace Nest
 		///     By default, the internal serializer will be used to serializer all types.
 		/// </summary>
 		public delegate ITransportSerializer SourceSerializerFactory(ITransportSerializer builtIn,
-			IConnectionSettingsValues values);
+			IElasticsearchClientSettings values);
 
 		/// <summary> The default user agent for Nest </summary>
 		public static readonly UserAgent DefaultUserAgent =
-			Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(IConnectionSettingsValues));
+			Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(IElasticsearchClientSettings));
 
 		/// <summary>
 		///     Creates a new instance of connection settings, if <paramref name="uri" /> is not specified will default to
 		///     connecting to http://localhost:9200
 		/// </summary>
 		/// <param name="uri"></param>
-		public ConnectionSettings(Uri? uri = null) : this(
+		public ElasticsearchClientSettings(Uri? uri = null) : this(
 			new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")))
 		{
 		}
@@ -41,7 +42,7 @@ namespace Nest
 		///     Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId" />,
 		///     <para><see cref="CloudConnectionPool" /> documentation for more information on how to obtain your Cloud Id</para>
 		/// </summary>
-		public ConnectionSettings(string cloudId, IAuthenticationHeader credentials) : this(
+		public ElasticsearchClientSettings(string cloudId, IAuthenticationHeader credentials) : this(
 			new CloudConnectionPool(cloudId, credentials))
 		{
 		}
@@ -50,24 +51,25 @@ namespace Nest
 		///     Instantiate connection settings using a <see cref="SingleNodeConnectionPool" /> using the provided
 		///     <see cref="InMemoryConnection" /> that never uses any IO.
 		/// </summary>
-		public ConnectionSettings(InMemoryConnection connection)
+		public ElasticsearchClientSettings(InMemoryConnection connection)
 			: this(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), connection)
 		{
 		}
 
-		public ConnectionSettings(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
+		public ElasticsearchClientSettings(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
 
-		public ConnectionSettings(IConnectionPool connectionPool, SourceSerializerFactory sourceSerializer)
+		public ElasticsearchClientSettings(IConnectionPool connectionPool, SourceSerializerFactory sourceSerializer)
 			: this(connectionPool, null, sourceSerializer)
 		{
 		}
 
-		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection) : this(connectionPool,
+		public ElasticsearchClientSettings(IConnectionPool connectionPool, IConnection connection) : this(
+			connectionPool,
 			connection, null)
 		{
 		}
 
-		public ConnectionSettings(
+		public ElasticsearchClientSettings(
 			IConnectionPool connectionPool,
 			IConnection connection,
 			SourceSerializerFactory sourceSerializer) : base(connectionPool, connection, sourceSerializer)
@@ -75,13 +77,13 @@ namespace Nest
 		}
 	}
 
-	/// <inheritdoc cref="IConnectionSettingsValues" />
+	/// <inheritdoc cref="IElasticsearchClientSettings" />
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public abstract class
-		ConnectionSettingsBase<TConnectionSettings> : ConnectionConfigurationBase<TConnectionSettings>,
-			IConnectionSettingsValues
-		where TConnectionSettings : ConnectionSettingsBase<TConnectionSettings>, IConnectionSettingsValues
+		ElasticsearchClientSettingsBase<TConnectionSettings> : ConnectionConfigurationBase<TConnectionSettings>,
+			IElasticsearchClientSettings
+		where TConnectionSettings : ElasticsearchClientSettingsBase<TConnectionSettings>, IElasticsearchClientSettings
 	{
 		private readonly FluentDictionary<Type, string> _defaultIndices;
 		private readonly FluentDictionary<Type, string> _defaultRelationNames;
@@ -99,10 +101,10 @@ namespace Nest
 		private Func<string, string> _defaultFieldNameInferrer;
 		private string _defaultIndex;
 
-		protected ConnectionSettingsBase(
+		protected ElasticsearchClientSettingsBase(
 			IConnectionPool connectionPool,
 			IConnection connection,
-			ConnectionSettings.SourceSerializerFactory? sourceSerializerFactory)
+			ElasticsearchClientSettings.SourceSerializerFactory? sourceSerializerFactory)
 			: base(connectionPool, connection, null, NestElasticsearchProductRegistration.DefaultForNest)
 		{
 			var defaultSerializer = new DefaultHighLevelSerializer(this);
@@ -123,25 +125,25 @@ namespace Nest
 			_defaultRelationNames = new FluentDictionary<Type, string>();
 			_inferrer = new Inferrer(this);
 
-			UserAgent(ConnectionSettings.DefaultUserAgent);
+			UserAgent(ElasticsearchClientSettings.DefaultUserAgent);
 		}
 
 		public ITransportSerializer SourceSerializer { get; }
 
-		bool IConnectionSettingsValues.DefaultDisableIdInference => _defaultDisableAllInference;
-		Func<string, string> IConnectionSettingsValues.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
-		string IConnectionSettingsValues.DefaultIndex => _defaultIndex;
-		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultIndices => _defaultIndices;
-		HashSet<Type> IConnectionSettingsValues.DisableIdInference => _disableIdInference;
-		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultRelationNames => _defaultRelationNames;
-		FluentDictionary<Type, string> IConnectionSettingsValues.IdProperties => _idProperties;
+		bool IElasticsearchClientSettings.DefaultDisableIdInference => _defaultDisableAllInference;
+		Func<string, string> IElasticsearchClientSettings.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
+		string IElasticsearchClientSettings.DefaultIndex => _defaultIndex;
+		FluentDictionary<Type, string> IElasticsearchClientSettings.DefaultIndices => _defaultIndices;
+		HashSet<Type> IElasticsearchClientSettings.DisableIdInference => _disableIdInference;
+		FluentDictionary<Type, string> IElasticsearchClientSettings.DefaultRelationNames => _defaultRelationNames;
+		FluentDictionary<Type, string> IElasticsearchClientSettings.IdProperties => _idProperties;
 
-		Inferrer IConnectionSettingsValues.Inferrer => _inferrer;
+		Inferrer IElasticsearchClientSettings.Inferrer => _inferrer;
 
 		//IPropertyMappingProvider IConnectionSettingsValues.PropertyMappingProvider => _propertyMappingProvider;
 		//FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
-		FluentDictionary<Type, string> IConnectionSettingsValues.RouteProperties => _routeProperties;
-		ITransportSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
+		FluentDictionary<Type, string> IElasticsearchClientSettings.RouteProperties => _routeProperties;
+		ITransportSerializer IElasticsearchClientSettings.SourceSerializer => _sourceSerializer;
 
 		/// <summary>
 		///     The default index to use for a request when no index has been explicitly specified
@@ -191,7 +193,7 @@ namespace Nest
 			_idProperties.Add(typeof(TDocument), fieldName);
 		}
 
-		/// <inheritdoc cref="IConnectionSettingsValues.RouteProperties" />
+		/// <inheritdoc cref="IElasticsearchClientSettings.RouteProperties" />
 		private void MapRoutePropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
 			objectPath.ThrowIfNull(nameof(objectPath));

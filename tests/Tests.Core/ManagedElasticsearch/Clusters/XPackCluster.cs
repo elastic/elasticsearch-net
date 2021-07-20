@@ -18,20 +18,22 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 		public XPackCluster(XPackClusterConfiguration configuration) : base(configuration) { }
 
-		public virtual IElasticClient Client => this.GetOrAddClient(s => Authenticate(ConnectionSettings(s.ApplyDomainSettings())));
+		public virtual IElasticClient Client =>
+			this.GetOrAddClient(s => Authenticate(ConnectionSettings(s.ApplyDomainSettings())));
 
-		protected virtual ConnectionSettings Authenticate(ConnectionSettings s) => s
-			.Authentication(new BasicAuthentication(ClusterAuthentication.Admin.Username, ClusterAuthentication.Admin.Password));
+		protected virtual ElasticsearchClientSettings Authenticate(ElasticsearchClientSettings s) => s
+			.Authentication(new BasicAuthentication(ClusterAuthentication.Admin.Username,
+				ClusterAuthentication.Admin.Password));
 
-		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
+		protected virtual ElasticsearchClientSettings ConnectionSettings(ElasticsearchClientSettings s) => s
 			.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 
 		protected sealed override void SeedCluster()
 		{
-			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = WaitForStatus.Green });
+			Client.Cluster.Health(new ClusterHealthRequest {WaitForStatus = WaitForStatus.Green});
 			Client.WaitForSecurityIndices();
 			SeedNode();
-			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = WaitForStatus.Green });
+			Client.Cluster.Health(new ClusterHealthRequest {WaitForStatus = WaitForStatus.Green});
 			Client.WaitForSecurityIndices();
 		}
 
@@ -42,9 +44,11 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 	{
 		public XPackClusterConfiguration() : this(ClusterFeatures.SSL | ClusterFeatures.Security) { }
 
-		public XPackClusterConfiguration(ClusterFeatures features) : base(ClusterFeatures.XPack | features, 1, IngestAttachment)
+		public XPackClusterConfiguration(ClusterFeatures features) : base(ClusterFeatures.XPack | features, 1,
+			IngestAttachment)
 		{
-			var isSnapshot = !string.IsNullOrEmpty(Version.PreRelease) && Version.PreRelease.ToLower().Contains("snapshot");
+			var isSnapshot = !string.IsNullOrEmpty(Version.PreRelease) &&
+			                 Version.PreRelease.ToLower().Contains("snapshot");
 			// Get license file path from environment variable
 			var licenseFilePath = Environment.GetEnvironmentVariable("ES_LICENSE_FILE");
 			if (!isSnapshot && !string.IsNullOrEmpty(licenseFilePath) && File.Exists(licenseFilePath))
@@ -52,6 +56,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 				var licenseContents = File.ReadAllText(licenseFilePath);
 				XPackLicenseJson = licenseContents;
 			}
+
 			TrialMode = XPackTrialMode.Trial;
 			AdditionalBeforeNodeStartedTasks.Add(new EnsureWatcherActionConfigurationInElasticsearchYaml());
 			AdditionalBeforeNodeStartedTasks.Add(new EnsureWatcherActionConfigurationSecretsInKeystore());

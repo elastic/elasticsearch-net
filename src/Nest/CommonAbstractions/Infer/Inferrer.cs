@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using Elastic.Transport;
 
@@ -9,16 +5,16 @@ namespace Nest
 {
 	public class Inferrer
 	{
-		private readonly IConnectionSettingsValues _connectionSettings;
+		private readonly IElasticsearchClientSettings _elasticsearchClientSettings;
 
-		public Inferrer(IConnectionSettingsValues connectionSettings)
+		public Inferrer(IElasticsearchClientSettings elasticsearchClientSettings)
 		{
-			connectionSettings.ThrowIfNull(nameof(connectionSettings));
-			_connectionSettings = connectionSettings;
-			IdResolver = new IdResolver(connectionSettings);
-			IndexNameResolver = new IndexNameResolver(connectionSettings);
+			elasticsearchClientSettings.ThrowIfNull(nameof(elasticsearchClientSettings));
+			_elasticsearchClientSettings = elasticsearchClientSettings;
+			IdResolver = new IdResolver(elasticsearchClientSettings);
+			IndexNameResolver = new IndexNameResolver(elasticsearchClientSettings);
 			//RelationNameResolver = new RelationNameResolver(connectionSettings);
-			FieldResolver = new FieldResolver(connectionSettings);
+			FieldResolver = new FieldResolver(elasticsearchClientSettings);
 			//RoutingResolver = new RoutingResolver(connectionSettings, IdResolver);
 
 			//CreateMultiHitDelegates =
@@ -39,11 +35,12 @@ namespace Nest
 
 		private FieldResolver FieldResolver { get; }
 		private IdResolver IdResolver { get; }
+
 		private IndexNameResolver IndexNameResolver { get; }
 		//private RelationNameResolver RelationNameResolver { get; }
 		//private RoutingResolver RoutingResolver { get; }
 
-		public string Resolve(IUrlParameter urlParameter) => urlParameter.GetString(_connectionSettings);
+		public string Resolve(IUrlParameter urlParameter) => urlParameter.GetString(_elasticsearchClientSettings);
 
 		public string Field(Field field) => FieldResolver.Resolve(field);
 

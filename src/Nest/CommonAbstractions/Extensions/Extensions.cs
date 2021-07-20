@@ -1,14 +1,8 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.ExceptionServices;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,70 +21,16 @@ namespace Nest
 			where T : class, TReturn where TReturn : class =>
 			func?.Invoke(@default) ?? @default;
 
-		internal static TReturn InvokeOrDefault<T1, T2, TReturn>(this Func<T1, T2, TReturn> func, T1 @default, T2 param2)
+		internal static TReturn InvokeOrDefault<T1, T2, TReturn>(this Func<T1, T2, TReturn> func, T1 @default,
+			T2 param2)
 			where T1 : class, TReturn where TReturn : class =>
 			func?.Invoke(@default, param2) ?? @default;
 
 		internal static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property) =>
 			items.GroupBy(property).Select(x => x.First());
 
-		internal static string ToEnumValue<T>(this T enumValue) where T : struct
-		{
-			var enumType = typeof(T);
-			var name = Enum.GetName(enumType, enumValue);
-			var enumMemberAttribute = enumType.GetField(name).GetCustomAttribute<EnumMemberAttribute>();
-
-			if (enumMemberAttribute != null)
-				return enumMemberAttribute.Value;
-
-			var alternativeEnumMemberAttribute = enumType.GetField(name).GetCustomAttribute<AlternativeEnumMemberAttribute>();
-
-			return alternativeEnumMemberAttribute != null
-				? alternativeEnumMemberAttribute.Value
-				: enumValue.ToString();
-		}
-
-		internal static T? ToEnum<T>(this string str, StringComparison comparison = StringComparison.OrdinalIgnoreCase) where T : struct
-		{
-			if (str == null)
-				return null;
-
-			var enumType = typeof(T);
-			var key = $"{enumType.Name}.{str}";
-			if (EnumCache.TryGetValue(key, out var value))
-				return (T)value;
-
-			foreach (var name in Enum.GetNames(enumType))
-			{
-				if (name.Equals(str, comparison))
-				{
-					var v = (T)Enum.Parse(enumType, name, true);
-					EnumCache.TryAdd(key, v);
-					return v;
-				}
-
-				var enumFieldInfo = enumType.GetField(name);
-				var enumMemberAttribute = enumFieldInfo.GetCustomAttribute<EnumMemberAttribute>();
-				if (enumMemberAttribute?.Value.Equals(str, comparison) ?? false)
-				{
-					var v = (T)Enum.Parse(enumType, name);
-					EnumCache.TryAdd(key, v);
-					return v;
-				}
-
-				var alternativeEnumMemberAttribute = enumFieldInfo.GetCustomAttribute<AlternativeEnumMemberAttribute>();
-				if (alternativeEnumMemberAttribute?.Value.Equals(str, comparison) ?? false)
-				{
-					var v = (T)Enum.Parse(enumType, name);
-					EnumCache.TryAdd(key, v);
-					return v;
-				}
-			}
-
-			return null;
-		}
-
-		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+		internal static string Utf8String(this byte[] bytes) =>
+			bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 
 		internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
 
@@ -103,7 +43,8 @@ namespace Nest
 		{
 			@object.ThrowIfNull(parameterName, when);
 			if (string.IsNullOrWhiteSpace(@object))
-				throw new ArgumentException("Argument can't be null or empty" + (when.IsNullOrEmpty() ? "" : " when " + when), parameterName);
+				throw new ArgumentException(
+					"Argument can't be null or empty" + (when.IsNullOrEmpty() ? "" : " when " + when), parameterName);
 		}
 
 		// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Global
@@ -125,13 +66,15 @@ namespace Nest
 
 		internal static bool HasAny<T>(this IEnumerable<T> list, out T[] enumerated)
 		{
-			enumerated = list == null ? null : (list as T[] ?? list.ToArray());
+			enumerated = list == null ? null : list as T[] ?? list.ToArray();
 			return enumerated.HasAny();
 		}
 
-		internal static List<T> AsInstanceOrToListOrDefault<T>(this IEnumerable<T> list) => list as List<T> ?? list?.ToList() ?? new List<T>();
+		internal static List<T> AsInstanceOrToListOrDefault<T>(this IEnumerable<T> list) =>
+			list as List<T> ?? list?.ToList() ?? new List<T>();
 
-		internal static List<T> AsInstanceOrToListOrNull<T>(this IEnumerable<T> list) => list as List<T> ?? list?.ToList();
+		internal static List<T> AsInstanceOrToListOrNull<T>(this IEnumerable<T> list) =>
+			list as List<T> ?? list?.ToList();
 
 		internal static List<T> EagerConcat<T>(this IEnumerable<T> list, IEnumerable<T> other)
 		{
@@ -156,7 +99,8 @@ namespace Nest
 			return l;
 		}
 
-		internal static bool HasAny<T>(this IEnumerable<T> list, Func<T, bool> predicate) => list != null && list.Any(predicate);
+		internal static bool HasAny<T>(this IEnumerable<T> list, Func<T, bool> predicate) =>
+			list != null && list.Any(predicate);
 
 		internal static bool HasAny<T>(this IEnumerable<T> list) => list != null && list.Any();
 
@@ -185,7 +129,7 @@ namespace Nest
 			if (string.IsNullOrWhiteSpace(value))
 				return true;
 
-			split = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+			split = value.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
 				.Where(t => !t.IsNullOrEmpty())
 				.Select(t => t.Trim())
 				.ToArray();
@@ -237,17 +181,19 @@ namespace Nest
 				var tasks = new List<Task>(maxDegreeOfParallelism);
 				foreach (var item in lazyList)
 				{
-					tasks.Add(ProcessAsync(item, taskSelector, resultProcessor, semaphore, additionalRateLimiter, page++));
+					tasks.Add(ProcessAsync(item, taskSelector, resultProcessor, semaphore, additionalRateLimiter,
+						page++));
 					if (tasks.Count < maxDegreeOfParallelism)
 						continue;
 
 					var task = await Task.WhenAny(tasks).ConfigureAwait(false);
-					if (task.Exception != null
-						&& (task.IsFaulted && task.Exception.Flatten().InnerExceptions.First() is { } e))
+					if (task.Exception != null && task.IsFaulted && task.Exception.Flatten().InnerExceptions.First() is
+						{ } e)
 					{
 						ExceptionDispatchInfo.Capture(e).Throw();
 						return;
 					}
+
 					tasks.Remove(task);
 				}
 

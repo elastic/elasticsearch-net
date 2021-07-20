@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System.Collections.Concurrent;
 using System.Globalization;
 using System.Linq.Expressions;
@@ -11,11 +7,11 @@ namespace Nest
 {
 	public class FieldResolver
 	{
+		private readonly IElasticsearchClientSettings _settings;
 		protected readonly ConcurrentDictionary<Field, string> Fields = new();
 		protected readonly ConcurrentDictionary<PropertyName, string> Properties = new();
-		private readonly IConnectionSettingsValues _settings;
 
-		public FieldResolver(IConnectionSettingsValues settings)
+		public FieldResolver(IElasticsearchClientSettings settings)
 		{
 			settings.ThrowIfNull(nameof(settings));
 			_settings = settings;

@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Collections.Concurrent;
 using System.Reflection;
@@ -15,10 +11,11 @@ namespace Nest
 		private static readonly MethodInfo MakeDelegateMethodInfo =
 			typeof(IdResolver).GetMethod(nameof(MakeDelegate), BindingFlags.Static | BindingFlags.NonPublic);
 
-		private readonly IConnectionSettingsValues _connectionSettings;
+		private readonly IElasticsearchClientSettings _elasticsearchClientSettings;
 		private readonly ConcurrentDictionary<Type, Func<object, string>> _localIdDelegates = new();
 
-		public IdResolver(IConnectionSettingsValues connectionSettings) => _connectionSettings = connectionSettings;
+		public IdResolver(IElasticsearchClientSettings elasticsearchClientSettings) =>
+			_elasticsearchClientSettings = elasticsearchClientSettings;
 
 		private PropertyInfo GetPropertyCaseInsensitive(Type type, string fieldName)
 			=> type.GetProperty(fieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
@@ -36,16 +33,19 @@ namespace Nest
 		}
 
 		public string Resolve<T>(T @object) where T : class =>
-			_connectionSettings.DefaultDisableIdInference || @object == null ? null : Resolve(@object.GetType(), @object);
+			_elasticsearchClientSettings.DefaultDisableIdInference || @object == null
+				? null
+				: Resolve(@object.GetType(), @object);
 
 		public string Resolve(Type type, object @object)
 		{
 			if (type == null || @object == null)
 				return null;
-			if (_connectionSettings.DefaultDisableIdInference || _connectionSettings.DisableIdInference.Contains(type))
+			if (_elasticsearchClientSettings.DefaultDisableIdInference ||
+			    _elasticsearchClientSettings.DisableIdInference.Contains(type))
 				return null;
 
-			var preferLocal = _connectionSettings.IdProperties.TryGetValue(type, out _);
+			var preferLocal = _elasticsearchClientSettings.IdProperties.TryGetValue(type, out _);
 
 			if (_localIdDelegates.TryGetValue(type, out var cachedLookup))
 				return cachedLookup(@object);
@@ -59,7 +59,7 @@ namespace Nest
 
 			var getMethod = idProperty.GetMethod;
 			var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
-			var func = (Func<object, object>)generic.Invoke(null, new object[] { getMethod });
+			var func = (Func<object, object>)generic.Invoke(null, new object[] {getMethod});
 			cachedLookup = o =>
 			{
 				var v = func(o);
@@ -78,7 +78,7 @@ namespace Nest
 			// if the type specifies through ElasticAttribute what the id prop is
 			// use that no matter what
 
-			_connectionSettings.IdProperties.TryGetValue(type, out var propertyName);
+			_elasticsearchClientSettings.IdProperties.TryGetValue(type, out var propertyName);
 			if (!propertyName.IsNullOrEmpty())
 				return GetPropertyCaseInsensitive(type, propertyName);
 

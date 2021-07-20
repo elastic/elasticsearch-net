@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Threading.Tasks;
 using Elastic.Transport;
@@ -15,45 +11,38 @@ namespace Tests.Framework.EndpointTests
 {
 	public class UrlTester
 	{
-		internal UrlTester(HttpMethod method, string expectedUrl, Func<ConnectionSettings, ConnectionSettings> settings = null)
+		internal UrlTester(HttpMethod method, string expectedUrl,
+			Func<ElasticsearchClientSettings, ElasticsearchClientSettings> settings = null)
 		{
 			ExpectedHttpMethod = method;
 			ExpectedUrl = expectedUrl;
 			Client = settings == null
 				? TestClient.DefaultInMemoryClient
-				: new ElasticClient(settings(new AlwaysInMemoryConnectionSettings()));
+				: new ElasticClient(settings(new AlwaysInMemoryElasticsearchClientSettings()));
 		}
 
 		private HttpMethod ExpectedHttpMethod { get; }
 		private string ExpectedUrl { get; }
 		private IElasticClient Client { get; }
 
-		public static UrlTester ExpectUrl(HttpMethod method, string url, Func<ConnectionSettings, ConnectionSettings> settings = null) =>
+		public static UrlTester ExpectUrl(HttpMethod method, string url,
+			Func<ElasticsearchClientSettings, ElasticsearchClientSettings> settings = null) =>
 			new(method, url, settings);
-
-		// TODO - Rename these
-		// ReSharper disable InconsistentNaming
-		public static UrlTester POST(string url) => new(HttpMethod.POST, url);
-
-		public static UrlTester PUT(string url) => new(HttpMethod.PUT, url);
-
-		public static UrlTester GET(string url) => new(HttpMethod.GET, url);
-
-		public static UrlTester HEAD(string url) => new(HttpMethod.HEAD, url);
-
-		public static UrlTester DELETE(string url) => new(HttpMethod.DELETE, url);
-		// ReSharper restore InconsistentNaming
 
 		public static string EscapeUriString(string s) => Uri.EscapeDataString(s);
 
-		public UrlTester Fluent<TResponse>(Func<IElasticClient, TResponse> call) where TResponse : IResponse => WhenCalling(call, "fluent");
+		public UrlTester Fluent<TResponse>(Func<IElasticClient, TResponse> call) where TResponse : IResponse =>
+			WhenCalling(call, "fluent");
 
-		public UrlTester Request<TResponse>(Func<IElasticClient, TResponse> call) where TResponse : IResponse => WhenCalling(call, "request");
+		public UrlTester Request<TResponse>(Func<IElasticClient, TResponse> call) where TResponse : IResponse =>
+			WhenCalling(call, "request");
 
-		public Task<UrlTester> FluentAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call) where TResponse : IResponse =>
+		public Task<UrlTester> FluentAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call)
+			where TResponse : IResponse =>
 			WhenCallingAsync(call, "fluent async");
 
-		public Task<UrlTester> RequestAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call) where TResponse : IResponse =>
+		public Task<UrlTester> RequestAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call)
+			where TResponse : IResponse =>
 			WhenCallingAsync(call, "request async");
 
 		//public UrlTester LowLevel(Func<IElasticLowLevelClient, IApiCallDetails> call)
@@ -74,7 +63,8 @@ namespace Tests.Framework.EndpointTests
 			return Assert(typeOfCall, callDetails.ApiCall);
 		}
 
-		internal async Task<UrlTester> WhenCallingAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call, string typeOfCall)
+		internal async Task<UrlTester> WhenCallingAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call,
+			string typeOfCall)
 			where TResponse : IResponse
 		{
 			var callDetails = (await call(Client)).ApiCall;
@@ -88,5 +78,18 @@ namespace Tests.Framework.EndpointTests
 			callDetails.HttpMethod.Should().Be(ExpectedHttpMethod, $"{typeOfCall} to {url}");
 			return this;
 		}
+
+		// TODO - Rename these
+		// ReSharper disable InconsistentNaming
+		public static UrlTester POST(string url) => new(HttpMethod.POST, url);
+
+		public static UrlTester PUT(string url) => new(HttpMethod.PUT, url);
+
+		public static UrlTester GET(string url) => new(HttpMethod.GET, url);
+
+		public static UrlTester HEAD(string url) => new(HttpMethod.HEAD, url);
+
+		public static UrlTester DELETE(string url) => new(HttpMethod.DELETE, url);
+		// ReSharper restore InconsistentNaming
 	}
 }
