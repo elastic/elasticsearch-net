@@ -25,4 +25,12 @@ using Tests.Framework.EndpointTests;
 
 namespace Tests.Urls.Indices
 {
+    public class IndicesRefreshUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_refresh").Request(c => c.Indices.Refresh(new IndicesRefreshRequest())).RequestAsync(c => c.Indices.RefreshAsync(new IndicesRefreshRequest()));
+        }
+    }
 }
