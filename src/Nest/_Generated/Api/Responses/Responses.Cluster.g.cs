@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest
 {
-	public class ClusterHealthResponse : ResponseBase
+	public partial class ClusterHealthResponse : ResponseBase
 	{
 		[JsonPropertyName("active_primary_shards")]
 		public int ActivePrimaryShards

@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest
 {
-	public class IndicesCreateResponse : AcknowledgedResponseBase
+	public partial class IndicesCreateResponse : AcknowledgedResponseBase
 	{
 		[JsonPropertyName("index")]
 		public IndexName Index
@@ -47,7 +47,7 @@ namespace Nest
 		}
 	}
 
-	public class DeleteIndicesResponse : IndicesResponseBase
+	public partial class DeleteIndicesResponse : IndicesResponseBase
 	{
 	}
 }

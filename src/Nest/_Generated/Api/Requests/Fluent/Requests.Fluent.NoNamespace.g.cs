@@ -21,6 +21,39 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
+	public partial class DeleteDescriptor : RequestDescriptorBase<DeleteDescriptor, DeleteRequestParameters, IDeleteRequest>, IDeleteRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDelete;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_doc/{id}</summary>
+        public DeleteDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id))
+		{
+		}
+	}
+
+	public partial class ExistsDescriptor : RequestDescriptorBase<ExistsDescriptor, ExistsRequestParameters, IExistsRequest>, IExistsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExists;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_doc/{id}</summary>
+        public ExistsDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id))
+		{
+		}
+	}
+
+	public partial class GetDescriptor : RequestDescriptorBase<GetDescriptor, GetRequestParameters, IGetRequest>, IGetRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGet;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_doc/{id}</summary>
+        public GetDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id))
+		{
+		}
+	}
+
 	public partial class IndexDescriptor<TDocument> : RequestDescriptorBase<IndexDescriptor<TDocument>, IndexRequestParameters, IIndexRequest<TDocument>>, IIndexRequest<TDocument>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceIndex;
