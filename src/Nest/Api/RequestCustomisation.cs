@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.IO;
-using System.Text;
 using System.Text.Json;
 using Elastic.Transport;
-using Elastic.Transport.Extensions;
 
 namespace Nest
 {
@@ -12,12 +9,10 @@ namespace Nest
 	{
 	}
 
-	public partial class IndexRequest<TDocument>
+	public partial class IndexRequest<TDocument> : IProxyRequest
 	{
 		// TODO: Old approach using ProxyPostData - Leaving it here while we decide on the preferred mechanism
 		//public void WriteJson(Stream stream, ITransportSerializer sourceSerializer, SerializationFormatting formatting) => sourceSerializer.Serialize(Document, stream, formatting);
-
-		public object Document { get; set; }
 
 		void IProxyRequest.WriteJson(Utf8JsonWriter writer, ITransportSerializer sourceSerializer)
 		{
@@ -25,7 +20,9 @@ namespace Nest
 			using var ms = new MemoryStream();
 			sourceSerializer.Serialize(Document, ms);
 			ms.Position = 0;
-			using var document = JsonDocument.Parse(ms); // This is not super efficient but a variant on the suggestion at https://github.com/dotnet/runtime/issues/1784#issuecomment-608331125
+			using var
+				document = JsonDocument
+					.Parse(ms); // This is not super efficient but a variant on the suggestion at https://github.com/dotnet/runtime/issues/1784#issuecomment-608331125
 			document.RootElement.WriteTo(writer);
 
 			// Perhaps can be improved in .NET 6/ updated system.text.json - https://github.com/dotnet/runtime/pull/53212
@@ -34,6 +31,9 @@ namespace Nest
 
 	public partial class IndexDescriptor<TDocument>
 	{
-		public void WriteJson(Utf8JsonWriter writer, ITransportSerializer sourceSerializer) => throw new System.NotImplementedException();
+		public void WriteJson(Utf8JsonWriter writer, ITransportSerializer sourceSerializer) =>
+			throw new NotImplementedException();
+
+		TDocument IIndexRequest<TDocument>.Document { get; set; }
 	}
 }
