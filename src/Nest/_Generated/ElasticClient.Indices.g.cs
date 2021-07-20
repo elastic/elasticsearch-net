@@ -68,5 +68,25 @@ namespace Nest
 		{
 			return DeleteAsync(selector.InvokeOrDefault(new DeleteIndicesDescriptor(index)), cancellationToken);
 		}
+
+		public IndicesRefreshResponse Refresh(IIndicesRefreshRequest request)
+		{
+			return DoRequest<IIndicesRefreshRequest, IndicesRefreshResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesRefreshResponse> RefreshAsync(IIndicesRefreshRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesRefreshRequest, IndicesRefreshResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesRefreshResponse Refresh(Func<IndicesRefreshDescriptor, IIndicesRefreshRequest> selector = null)
+		{
+			return Refresh(selector.InvokeOrDefault(new IndicesRefreshDescriptor()));
+		}
+
+		public Task<IndicesRefreshResponse> RefreshAsync(Func<IndicesRefreshDescriptor, IIndicesRefreshRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return RefreshAsync(selector.InvokeOrDefault(new IndicesRefreshDescriptor()), cancellationToken);
+		}
 	}
 }

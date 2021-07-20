@@ -121,4 +121,37 @@ namespace Nest
 		[JsonIgnore]
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 	}
+
+	[ConvertAs(typeof(IndicesRefreshRequest))]
+	public partial interface IIndicesRefreshRequest : IRequest<IndicesRefreshRequestParameters>
+	{
+	}
+
+	public partial class IndicesRefreshRequest : PlainRequestBase<IndicesRefreshRequestParameters>, IIndicesRefreshRequest
+	{
+		protected IIndicesRefreshRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRefresh;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+		///<summary>/_refresh</summary>
+        public IndicesRefreshRequest() : base()
+		{
+		}
+
+		///<summary>/{index}/_refresh</summary>
+        public IndicesRefreshRequest(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+		[JsonIgnore]
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+	}
 }

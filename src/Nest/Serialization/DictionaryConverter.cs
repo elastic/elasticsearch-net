@@ -31,8 +31,9 @@ namespace Nest
 
 		private class UnionConverterInner<TItem1, TItem2> : JsonConverter<Union<TItem1, TItem2>>
 		{
+			// TODO - Implement properly as we need to figure out the possible types and handle accordingly
 			public override Union<TItem1, TItem2>? Read(ref Utf8JsonReader reader, Type typeToConvert,
-				JsonSerializerOptions options) => throw new NotImplementedException();
+				JsonSerializerOptions options) => null;
 
 			public override void Write(Utf8JsonWriter writer, Union<TItem1, TItem2> value,
 				JsonSerializerOptions options)
