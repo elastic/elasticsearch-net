@@ -26,6 +26,102 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
+    public class DeleteRequestParameters : RequestParameters<DeleteRequestParameters>
+    {
+        [JsonIgnore]
+        public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+
+        [JsonIgnore]
+        public SequenceNumber? IfSeqNo { get => Q<SequenceNumber?>("if_seq_no"); set => Q("if_seq_no", value); }
+
+        [JsonIgnore]
+        public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+
+        [JsonIgnore]
+        public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
+
+        [JsonIgnore]
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        [JsonIgnore]
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
+
+        [JsonIgnore]
+        public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+
+        [JsonIgnore]
+        public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+    }
+
+    public class ExistsRequestParameters : RequestParameters<ExistsRequestParameters>
+    {
+        [JsonIgnore]
+        public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+        [JsonIgnore]
+        public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+
+        [JsonIgnore]
+        public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+        [JsonIgnore]
+        public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
+
+        [JsonIgnore]
+        public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+
+        [JsonIgnore]
+        public Fields? SourceExcludes { get => Q<Fields?>("source_excludes"); set => Q("source_excludes", value); }
+
+        [JsonIgnore]
+        public Fields? SourceIncludes { get => Q<Fields?>("source_includes"); set => Q("source_includes", value); }
+
+        [JsonIgnore]
+        public Fields? StoredFields { get => Q<Fields?>("stored_fields"); set => Q("stored_fields", value); }
+
+        [JsonIgnore]
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
+
+        [JsonIgnore]
+        public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+    }
+
+    public class GetRequestParameters : RequestParameters<GetRequestParameters>
+    {
+        [JsonIgnore]
+        public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+        [JsonIgnore]
+        public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+
+        [JsonIgnore]
+        public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+        [JsonIgnore]
+        public Routing? Routing { get => Q<Routing?>("routing"); set => Q("routing", value); }
+
+        [JsonIgnore]
+        public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+
+        [JsonIgnore]
+        public Fields? SourceExcludes { get => Q<Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+        [JsonIgnore]
+        public Fields? SourceIncludes { get => Q<Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+        [JsonIgnore]
+        public Fields? StoredFields { get => Q<Fields?>("stored_fields"); set => Q("stored_fields", value); }
+
+        [JsonIgnore]
+        public VersionNumber? Version { get => Q<VersionNumber?>("version"); set => Q("version", value); }
+
+        [JsonIgnore]
+        public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+
+        [JsonIgnore]
+        public Union<bool, Fields>? Source { get => Q<Union<bool, Fields>?>("_source"); set => Q("_source", value); }
+    }
+
     public class IndexRequestParameters : RequestParameters<IndexRequestParameters>
     {
         [JsonIgnore]

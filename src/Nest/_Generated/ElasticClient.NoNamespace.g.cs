@@ -36,6 +36,66 @@ namespace Nest
             Indices = new IndicesNamespace(this);
         }
 
+        public DeleteResponse Delete(IDeleteRequest request)
+        {
+            return DoRequest<IDeleteRequest, DeleteResponse>(request, request.RequestParameters);
+        }
+
+        public Task<DeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IDeleteRequest, DeleteResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public DeleteResponse Delete(IndexName index, Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null)
+        {
+            return Delete(selector.InvokeOrDefault(new DeleteDescriptor(index, id)));
+        }
+
+        public Task<DeleteResponse> DeleteAsync(IndexName index, Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor(index, id)), cancellationToken);
+        }
+
+        public ExistsResponse Exists(IExistsRequest request)
+        {
+            return DoRequest<IExistsRequest, ExistsResponse>(request, request.RequestParameters);
+        }
+
+        public Task<ExistsResponse> ExistsAsync(IExistsRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IExistsRequest, ExistsResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public ExistsResponse Exists(IndexName index, Id id, Func<ExistsDescriptor, IExistsRequest> selector = null)
+        {
+            return Exists(selector.InvokeOrDefault(new ExistsDescriptor(index, id)));
+        }
+
+        public Task<ExistsResponse> ExistsAsync(IndexName index, Id id, Func<ExistsDescriptor, IExistsRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return ExistsAsync(selector.InvokeOrDefault(new ExistsDescriptor(index, id)), cancellationToken);
+        }
+
+        public GetResponse<TDocument> Get<TDocument>(IGetRequest request)
+        {
+            return DoRequest<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters);
+        }
+
+        public Task<GetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public GetResponse<TDocument> Get<TDocument>(IndexName index, Id id, Func<GetDescriptor, IGetRequest> selector = null)
+        {
+            return Get<TDocument>(selector.InvokeOrDefault(new GetDescriptor(index, id)));
+        }
+
+        public Task<GetResponse<TDocument>> GetAsync<TDocument>(IndexName index, Id id, Func<GetDescriptor, IGetRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return GetAsync<TDocument>(selector.InvokeOrDefault(new GetDescriptor(index, id)), cancellationToken);
+        }
+
         public IndexResponse Index<TDocument>(IIndexRequest<TDocument> request)
         {
             return DoRequest<IIndexRequest<TDocument>, IndexResponse>(request, request.RequestParameters);
