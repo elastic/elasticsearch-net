@@ -1,14 +1,12 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Diagnostics;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Nest
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
+	[JsonConverter(typeof(StringAliasConverter<Name>))]
 	public class Name : IEquatable<Name>, IUrlParameter
 	{
 		public Name(string name) => Value = name?.Trim();
@@ -17,13 +15,13 @@ namespace Nest
 
 		private string DebugDisplay => Value;
 
-		public override string ToString() => DebugDisplay;
-
 		private static int TypeHashCode { get; } = typeof(Name).GetHashCode();
 
 		public bool Equals(Name other) => EqualsString(other?.Value);
 
 		string IUrlParameter.GetString(ITransportConfiguration settings) => Value;
+
+		public override string ToString() => DebugDisplay;
 
 		public static implicit operator Name(string name) => name.IsNullOrEmpty() ? null : new Name(name);
 
