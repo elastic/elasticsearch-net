@@ -27,7 +27,6 @@ namespace Nest
 	[ConvertAs(typeof(IndexRequest<>))]
 	public partial interface IIndexRequest<TDocument> : IRequest<IndexRequestParameters>
 	{
-		TDocument Document { get; set; }
 	}
 
 	public partial class IndexRequest<TDocument> : PlainRequestBase<IndexRequestParameters>, IIndexRequest<TDocument>
@@ -47,9 +46,6 @@ namespace Nest
         public IndexRequest(IndexName index) : base(r => r.Required("index", index))
 		{
 		}
-
-		[JsonIgnore]
-		public TDocument Document { get; set; }
 
 		[JsonIgnore]
 		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }

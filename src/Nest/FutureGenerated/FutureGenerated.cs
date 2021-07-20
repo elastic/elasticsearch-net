@@ -56,16 +56,24 @@ namespace Nest
 	{
 	}
 
+	[JsonConverter(typeof(NumericAliasConverter<SequenceNumber>))]
 	public class SequenceNumber
 	{
+		public SequenceNumber(long value) => Value = value;
+
+		internal long Value { get; }
 	}
 
 	public class VersionString
 	{
 	}
 
+	[JsonConverter(typeof(NumericAliasConverter<VersionNumber>))]
 	public class VersionNumber
 	{
+		public VersionNumber(long value) => Value = value;
+
+		internal long Value { get; }
 	}
 
 	public class DataStreamName : IUrlParameter

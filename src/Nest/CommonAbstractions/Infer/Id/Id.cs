@@ -1,15 +1,13 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Nest
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
+	[JsonConverter(typeof(StringAliasConverter<Id>))]
 	public class Id : IEquatable<Id>, IUrlParameter
 	{
 		public Id(string id)
@@ -88,6 +86,7 @@ namespace Nest
 				case Guid g:
 					return Equals(g);
 			}
+
 			return Equals(new Id(obj));
 		}
 
