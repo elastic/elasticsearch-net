@@ -29,6 +29,18 @@ namespace Nest
 
         IndicesNamespace Indices { get; }
 
+        DeleteResponse Delete(IDeleteRequest request);
+        Task<DeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default);
+        DeleteResponse Delete(IndexName index, Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null);
+        Task<DeleteResponse> DeleteAsync(IndexName index, Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null, CancellationToken cancellationToken = default);
+        ExistsResponse Exists(IExistsRequest request);
+        Task<ExistsResponse> ExistsAsync(IExistsRequest request, CancellationToken cancellationToken = default);
+        ExistsResponse Exists(IndexName index, Id id, Func<ExistsDescriptor, IExistsRequest> selector = null);
+        Task<ExistsResponse> ExistsAsync(IndexName index, Id id, Func<ExistsDescriptor, IExistsRequest> selector = null, CancellationToken cancellationToken = default);
+        GetResponse<TDocument> Get<TDocument>(IGetRequest request);
+        Task<GetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken cancellationToken = default);
+        GetResponse<TDocument> Get<TDocument>(IndexName index, Id id, Func<GetDescriptor, IGetRequest> selector = null);
+        Task<GetResponse<TDocument>> GetAsync<TDocument>(IndexName index, Id id, Func<GetDescriptor, IGetRequest> selector = null, CancellationToken cancellationToken = default);
         IndexResponse Index<TDocument>(IIndexRequest<TDocument> request);
         Task<IndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken cancellationToken = default);
         IndexResponse Index<TDocument>(TDocument document, IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null);

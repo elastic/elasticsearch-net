@@ -22,15 +22,136 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest
 {
-	public class IndexResponse : WriteResponseBase
+	public partial class DeleteResponse : WriteResponseBase
 	{
 	}
 
-	public class PingResponse : ResponseBase
+	public partial class ExistsResponse : ExistsResponseBase
 	{
 	}
 
-	public class SearchResponse<TDocument> : ResponseBase
+	public partial class GetResponse<TDocument> : ResponseBase
+	{
+		[JsonPropertyName("_index")]
+		public IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fields")]
+		public Dictionary<string, object>? Fields
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("found")]
+		public bool Found
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_id")]
+		public Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_primary_term")]
+		public long? PrimaryTerm
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_routing")]
+		public string? Routing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_seq_no")]
+		public SequenceNumber? SeqNo
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_source")]
+		public TDocument? Source
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_type")]
+		public Name? Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_version")]
+		public VersionNumber? Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class IndexResponse : WriteResponseBase
+	{
+	}
+
+	public partial class PingResponse : ResponseBase
+	{
+	}
+
+	public partial class SearchResponse<TDocument> : ResponseBase
 	{
 		[JsonPropertyName("took")]
 		public long Took

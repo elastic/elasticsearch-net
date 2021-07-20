@@ -6,9 +6,14 @@ using Elastic.Transport;
 
 namespace Nest
 {
+	public abstract class ExistsResponseBase : ResponseBase
+	{
+		public bool Exists => ApiCall is {Success: true, HttpStatusCode: 200};
+	}
+
 	public partial interface IIndexRequest<TDocument> : IProxyRequest
 	{
-		TDocument Document { get; set; }
+		TDocument Document { get; set; } // TODO - This should be generated based on the spec
 
 		Id? Id { get; }
 	}
@@ -16,8 +21,6 @@ namespace Nest
 	public partial class IndexRequest<TDocument> : IProxyRequest
 	{
 		protected override HttpMethod? DynamicHttpMethod => GetHttpMethod(this);
-		// TODO: Old approach using ProxyPostData - Leaving it here while we decide on the preferred mechanism
-		//public void WriteJson(Stream stream, ITransportSerializer sourceSerializer, SerializationFormatting formatting) => sourceSerializer.Serialize(Document, stream, formatting);
 
 		[JsonIgnore] public TDocument Document { get; set; }
 
