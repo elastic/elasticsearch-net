@@ -53,6 +53,48 @@ namespace Nest
 		}
 	}
 
+	// TODO: Make this more general for all aliases by checking the token type (number or string etc)
+	public class StringAliasConverter<T> : JsonConverter<T>
+	{
+		public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var value = reader.GetString();
+
+			var instance = (T)Activator.CreateInstance(
+				typeof(T),
+				BindingFlags.Instance | BindingFlags.Public,
+				args: new object[] {value},
+				binder: null,
+				culture: null)!;
+
+			return instance;
+		}
+
+		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options) =>
+			throw new NotImplementedException();
+	}
+
+	// TODO: Merge into StringAliasConverter
+	public class NumericAliasConverter<T> : JsonConverter<T>
+	{
+		public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var value = reader.GetInt64();
+
+			var instance = (T)Activator.CreateInstance(
+				typeof(T),
+				BindingFlags.Instance | BindingFlags.Public,
+				args: new object[] {value},
+				binder: null,
+				culture: null)!;
+
+			return instance;
+		}
+
+		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options) =>
+			throw new NotImplementedException();
+	}
+
 	public class ConvertAsConverterFactory : JsonConverterFactory
 	{
 		private readonly IConnectionSettingsValues _settings;
