@@ -58,4 +58,16 @@ namespace Nest
         [JsonIgnore]
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
+
+    public class IndicesRefreshRequestParameters : RequestParameters<IndicesRefreshRequestParameters>
+    {
+        [JsonIgnore]
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        [JsonIgnore]
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        [JsonIgnore]
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+    }
 }

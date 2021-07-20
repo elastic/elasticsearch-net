@@ -50,4 +50,8 @@ namespace Nest
 	public partial class DeleteIndicesResponse : IndicesResponseBase
 	{
 	}
+
+	public partial class IndicesRefreshResponse : ShardsOperationResponseBase
+	{
+	}
 }

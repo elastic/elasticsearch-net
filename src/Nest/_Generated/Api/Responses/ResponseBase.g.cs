@@ -50,6 +50,20 @@ namespace Nest
 		}
 	}
 
+	public abstract class ShardsOperationResponseBase : ResponseBase
+	{
+		[JsonPropertyName("_shards")]
+		public ShardStatistics Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public abstract class WriteResponseBase : ResponseBase
 	{
 		[JsonPropertyName("_id")]

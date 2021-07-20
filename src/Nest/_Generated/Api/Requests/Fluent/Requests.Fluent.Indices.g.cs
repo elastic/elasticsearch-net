@@ -42,4 +42,20 @@ namespace Nest
 		{
 		}
 	}
+
+	public partial class IndicesRefreshDescriptor : RequestDescriptorBase<IndicesRefreshDescriptor, IndicesRefreshRequestParameters, IIndicesRefreshRequest>, IIndicesRefreshRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRefresh;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_refresh</summary>
+        public IndicesRefreshDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_refresh</summary>
+        public IndicesRefreshDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+	}
 }
