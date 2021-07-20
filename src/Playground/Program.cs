@@ -1,15 +1,18 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Nest;
 
 namespace Playground
 {
-	public class MyType
+	public class Person
 	{
-		public MyType(string name) => Name = name;
+		public Person(string name) => Name = name;
 
 		public string Name { get; }
+
+		public int Age { get; init; }
+
+		public string? Email { get; init; }
 	}
 
 	internal class Program
@@ -20,25 +23,28 @@ namespace Playground
 
 			var indexName = Guid.NewGuid().ToString();
 
-			var clusterHealthRequest = new ClusterHealthRequest {Level = Level.Cluster};
-			var clusterHealthResponse = await client.Cluster.HealthAsync(clusterHealthRequest);
+			//var clusterHealthRequest = new ClusterHealthRequest {Level = Level.Cluster};
+			//var clusterHealthResponse = await client.Cluster.HealthAsync(clusterHealthRequest);
 
-			var createResponse = await client.Indices.CreateAsync(new IndicesCreateRequest(indexName)
-			{
-				Mappings = new TypeMapping
-				{
-					DateDetection = false,
-					Properties = new Dictionary<PropertyName, PropertyBase>
-					{
-						{"age", new NumberProperty {Type = NumberType.Integer}},
-						{"name", new TextProperty()},
-						{"email", new KeywordProperty()}
-					},
-					Meta = new Metadata {{"foo", "bar"}}
-				}
-			});
+			//var createResponse = await client.Indices.CreateAsync(new IndicesCreateRequest(indexName)
+			//{
+			//	Mappings = new TypeMapping
+			//	{
+			//		DateDetection = false,
+			//		Properties = new Dictionary<PropertyName, PropertyBase>
+			//		{
+			//			{"age", new NumberProperty {Type = NumberType.Integer}},
+			//			{"name", new TextProperty()},
+			//			{"email", new KeywordProperty()}
+			//		},
+			//		Meta = new Metadata {{"foo", "bar"}}
+			//	}
+			//});
+
+			var request = new IndexRequest<Person>(indexName) {Document = new Person("Steve")};
 
 			// TODO - Index document
+			var indexResponse = await client.IndexAsync(request);
 
 			// TODO - Retrieve document by ID
 

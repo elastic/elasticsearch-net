@@ -18,8 +18,61 @@ namespace Nest
 
 		public ProxyRequestConverterFactory(IConnectionSettingsValues settings) => _settings = settings;
 
-		public override bool CanConvert(Type typeToConvert) => typeToConvert.GetCustomAttributes()
-			.Any(a => a.GetType() == typeof(ConvertAsAttribute));
+		public override bool CanConvert(Type typeToConvert)
+		{
+			var isGeneric = typeToConvert.IsGenericType;
+			var interfaces = typeToConvert.GetInterfaces();
+
+			var canConvert = false;
+
+			foreach (var item in interfaces)
+			{
+				var type = item.UnderlyingSystemType;
+				if (type == typeof(IProxyRequest))
+					canConvert = true;
+			}
+
+			return canConvert && isGeneric;
+		}
+
+		public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+		{
+			var elementType = typeToConvert.GetGenericArguments()[0];
+
+			var att = typeToConvert.GetCustomAttribute<ConvertAsAttribute>();
+
+			var converter = (JsonConverter)Activator.CreateInstance(
+				typeof(ProxyRequestConverter<>).MakeGenericType(att?.ConvertType.MakeGenericType(elementType) ??
+				                                                elementType),
+				BindingFlags.Instance | BindingFlags.Public,
+				args: new object[] {_settings},
+				binder: null,
+				culture: null)!;
+
+			return converter;
+		}
+	}
+
+	public class ConvertAsConverterFactory : JsonConverterFactory
+	{
+		private readonly IConnectionSettingsValues _settings;
+
+		public ConvertAsConverterFactory(IConnectionSettingsValues settings) => _settings = settings;
+
+		public override bool CanConvert(Type typeToConvert)
+		{
+			var customAttributes = typeToConvert.GetCustomAttributes();
+
+			var canConvert = false;
+
+			foreach (var item in customAttributes)
+			{
+				var type = item.GetType();
+				if (type == typeof(ConvertAsAttribute)) canConvert = true;
+			}
+
+			return canConvert;
+		}
 
 		public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -179,8 +232,9 @@ namespace Nest
 				IgnoreNullValues = true,
 				Converters =
 				{
-					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
 					new ProxyRequestConverterFactory(settings),
+					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
+					new ConvertAsConverterFactory(settings),
 					new DictionaryConverter(),
 					new UnionConverter()
 				}
