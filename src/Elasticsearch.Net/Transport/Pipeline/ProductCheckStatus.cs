@@ -13,6 +13,7 @@ namespace Elasticsearch.Net
 		ValidProduct,
 		InvalidProduct,
 		UndeterminedProduct,
-		TransientFailure
+		TransientFailure,
+		UnsupportedBuildFlavor
 	}
 }

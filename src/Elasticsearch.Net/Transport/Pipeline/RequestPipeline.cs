@@ -23,11 +23,11 @@ namespace Elasticsearch.Net
 		private const string ExpectedTagLine = "You Know, for Search";
 		private const string NoNodesAttemptedMessage = "No nodes were attempted, this can happen when a node predicate does not match any nodes";
 
-		public const string ProductCheckTransientErrorWarning =
+		internal const string ProductCheckTransientErrorWarning =
 			"The client is unable to verify that the server is Elasticsearch due to an unsuccessful product check call. "
 			+ "Some functionality may not be compatible if the server is running an unsupported product.";
 
-		public const string UndeterminedProductWarning =
+		internal const string UndeterminedProductWarning =
 			"The client is unable to verify that the server is Elasticsearch due to security privileges on the server side. "
 			+ "Some functionality may not be compatible if the server is running an unsupported product.";
 
@@ -40,6 +40,10 @@ namespace Elasticsearch.Net
 		private readonly IDateTimeProvider _dateTimeProvider;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 		private readonly IConnectionConfigurationValues _settings;
+
+		// Used for enriching exceptions when the product check fails in a transient manor.
+		// This is thread safe as product check runs behind semaphore and sequentially tries nodes until success, failure or timeout.
+		private IApiCallDetails _lastProductCheckCallDetails;
 
 		public RequestPipeline(
 			IConnectionConfigurationValues configurationValues,
@@ -58,7 +62,7 @@ namespace Elasticsearch.Net
 			StartedOn = dateTimeProvider.Now();
 		}
 
-		public List<Audit> AuditTrail { get; } = new List<Audit>();
+		public List<Audit> AuditTrail { get; } = new();
 
 		public bool DepletedRetries => Retried >= MaxRetries + 1 || IsTakingTooLong;
 
@@ -170,6 +174,7 @@ namespace Elasticsearch.Net
 			audit.Path = requestData.PathAndQuery;
 			try
 			{
+				ThrowIfTransientProductCheckFailure();
 				var response = _connection.Request<TResponse>(requestData);
 				return PostCallElasticsearch(requestData, response, diagnostic, audit);
 			}
@@ -179,6 +184,12 @@ namespace Elasticsearch.Net
 				audit.Exception = e;
 				throw;
 			}
+		}
+
+		private void ThrowIfTransientProductCheckFailure()
+		{
+			if (_connectionPool.ProductCheckStatus == ProductCheckStatus.TransientFailure)
+				throw new PipelineException(PipelineFailure.FailedProductCheck, _lastProductCheckCallDetails?.OriginalException);
 		}
 
 		public async Task<TResponse> CallElasticsearchAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
@@ -191,6 +202,7 @@ namespace Elasticsearch.Net
 			audit.Path = requestData.PathAndQuery;
 			try
 			{
+				ThrowIfTransientProductCheckFailure();
 				var response = await _connection.RequestAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
 				return PostCallElasticsearch(requestData, response, diagnostic, audit);
 			}
@@ -211,6 +223,9 @@ namespace Elasticsearch.Net
 				return null;
 
 			var innerException = pipelineExceptions.HasAny() ? pipelineExceptions.AsAggregateOrFirst() : callDetails?.OriginalException;
+
+			if (_connectionPool.ProductCheckStatus == ProductCheckStatus.TransientFailure)
+				callDetails = _lastProductCheckCallDetails;
 
 			var statusCode = callDetails?.HttpStatusCode != null ? callDetails.HttpStatusCode.Value.ToString() : "unknown";
 			var resource = callDetails == null
@@ -295,9 +310,14 @@ namespace Elasticsearch.Net
 
 						StartedOn = _dateTimeProvider.Now();
 					}
-
-				if (_connectionPool.ProductCheckStatus == ProductCheckStatus.InvalidProduct)
-					throw new InvalidProductException();
+				
+				switch (_connectionPool.ProductCheckStatus)
+				{
+					case ProductCheckStatus.InvalidProduct:
+						throw new InvalidProductException(InvalidProductException.InvalidProductError);
+					case ProductCheckStatus.UnsupportedBuildFlavor:
+						throw new InvalidProductException(InvalidProductException.InvalidBuildFlavorError);
+				}
 
 				if (!FirstPoolUsageNeedsSniffing)
 					return;
@@ -354,11 +374,23 @@ namespace Elasticsearch.Net
 								i++)
 								await ProductCheckAsync(nodes[i], cancellationToken).ConfigureAwait(false);
 
-						StartedOn = _dateTimeProvider.Now();
+						if (_connectionPool.ProductCheckStatus == ProductCheckStatus.ValidProduct)
+							StartedOn = _dateTimeProvider.Now();
+
+						//// When we cannot check the product due to a transient error, we allow the original API call to run with an extremely short timeout.
+						//// This will generally avoid a surprising situation where the subsequent call (once product check is working) may cause an exception due to an
+						//// invalid product.
+						//if (_connectionPool.ProductCheckStatus == ProductCheckStatus.TransientFailure)
+						//	StartedOn = StartedOn.Add(_settings.MaxRetryTimeout.GetValueOrDefault(RequestTimeout).Add(TimeSpan.FromMilliseconds(-1)));
 					}
 
-				if (_connectionPool.ProductCheckStatus == ProductCheckStatus.InvalidProduct)
-					throw new InvalidProductException();
+				switch (_connectionPool.ProductCheckStatus)
+				{
+					case ProductCheckStatus.InvalidProduct:
+						throw new InvalidProductException(InvalidProductException.InvalidProductError);
+					case ProductCheckStatus.UnsupportedBuildFlavor:
+						throw new InvalidProductException(InvalidProductException.InvalidBuildFlavorError);
+				}
 
 				if (FirstPoolUsageNeedsSniffing)
 					using (Audit(SniffOnStartup))
@@ -425,6 +457,8 @@ namespace Elasticsearch.Net
 
 		public void Ping(Node node)
 		{
+			ThrowIfTransientProductCheckFailure();
+
 			if (PingDisabled(node))
 				return;
 
@@ -455,6 +489,8 @@ namespace Elasticsearch.Net
 
 		public async Task PingAsync(Node node, CancellationToken cancellationToken)
 		{
+			ThrowIfTransientProductCheckFailure();
+
 			if (PingDisabled(node))
 				return;
 
@@ -615,22 +651,12 @@ namespace Elasticsearch.Net
 				{
 					// Add additional warning to debug information if the product could not be determined and may not be Elasticsearch
 					case ProductCheckStatus.UndeterminedProduct:
-						Debug.WriteLine(UndeterminedProductWarning);
-						callDetails.BuildDebugInformationPrefix = sb =>
-						{
-							sb.AppendLine("# Warnings:");
-							sb.AppendLine($"- {UndeterminedProductWarning}");
-						};
+						WriteProductCheckWarning(UndeterminedProductWarning);
 						break;
 
 					// Add additional warning to debug information if the product could not be determined due to a transient error.
 					case ProductCheckStatus.TransientFailure:
-						Debug.WriteLine(ProductCheckTransientErrorWarning);
-						callDetails.BuildDebugInformationPrefix = sb =>
-						{
-							sb.AppendLine("# Warnings:");
-							sb.AppendLine($"- {ProductCheckTransientErrorWarning}");
-						};
+						WriteProductCheckWarning(ProductCheckTransientErrorWarning);
 						break;
 				}
 
@@ -641,6 +667,16 @@ namespace Elasticsearch.Net
 			if (!response.ApiCall.Success)
 				audit.Event = requestData.OnFailureAuditEvent;
 			return response;
+
+			void WriteProductCheckWarning(string warning)
+			{
+				Debug.WriteLine(warning);
+				callDetails.BuildDebugInformationPrefix = sb =>
+				{
+					sb.AppendLine("# Warnings:");
+					sb.AppendLine($"- {warning}");
+				};
+			}
 		}
 
 		internal void ProductCheck(Node node)
@@ -654,6 +690,7 @@ namespace Elasticsearch.Net
 			{
 				audit.Path = requestData.PathAndQuery;
 				var response = _connection.Request<RootResponse>(requestData);
+				_lastProductCheckCallDetails = response?.ApiCall;
 				var succeeded = ApplyProductCheckRules(response);
 				audit.Stop();
 
@@ -678,6 +715,7 @@ namespace Elasticsearch.Net
 			{
 				audit.Path = requestData.PathAndQuery;
 				var response = await _connection.RequestAsync<RootResponse>(requestData, cancellationToken).ConfigureAwait(false);
+				_lastProductCheckCallDetails = response?.ApiCall;
 				var succeeded = ApplyProductCheckRules(response);
 				audit.Stop();
 
@@ -743,9 +781,10 @@ namespace Elasticsearch.Net
 
 				if (VersionTooLow(version) ||
 					TagLineInvalid(version, response) ||
-					TagLineOrBuildFlavorInvalid(version, response) ||
 					Version714InvalidHeader(version, productName))
 					_connectionPool.ProductCheckStatus = ProductCheckStatus.InvalidProduct;
+
+				ValidateBuildFlavor(version);
 			}
 
 			return true;
@@ -757,24 +796,26 @@ namespace Elasticsearch.Net
 				return version < MinVersion;
 			}
 
-			// Between v6.0.0 and 6.99.99, we expect the tagline to match the expected value
+			// Between v6.0.0 and 6.99.99, we expect the tag line to match the expected value
 			static bool TagLineInvalid(Version version, RootResponse response)
 			{
-				return version < Version7 && !ExpectedTagLine.Equals(response.Tagline);
+				return version > MinVersion && !ExpectedTagLine.Equals(response.Tagline, StringComparison.Ordinal);
 			}
-
-			// Between v7.0.0 and 7.13.99, we expect the tagline and build flavor to match expected values
-			static bool TagLineOrBuildFlavorInvalid(Version version, RootResponse response)
-			{
-				return version >= Version7 && version < Version714
-					&& (!ExpectedBuildFlavor.Equals(response.Version?.BuildFlavor, StringComparison.Ordinal)
-						|| !ExpectedTagLine.Equals(response.Tagline, StringComparison.Ordinal));
-			}
-
+			
 			// After v7.14.0 we expect the product header to be present and include the expected product name
 			static bool Version714InvalidHeader(Version version, string productName)
 			{
 				return version >= Version714 && !ExpectedProductName.Equals(productName, StringComparison.Ordinal);
+			}
+
+			// After v7.0.0, we expect the build flavor to match expected values.
+			void ValidateBuildFlavor(Version version)
+			{
+				if (version < Version7) // We only check this on releases since 7.0.0
+					return;
+
+				if (!ExpectedBuildFlavor.Equals(response.Version?.BuildFlavor, StringComparison.Ordinal))
+					_connectionPool.ProductCheckStatus = ProductCheckStatus.UnsupportedBuildFlavor;
 			}
 		}
 

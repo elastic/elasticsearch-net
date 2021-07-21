@@ -69,19 +69,24 @@ namespace Tests.ScratchPad
 			);
 
 
-		private static async Task Main(string[] args)
+		private static void Main(string[] args)
 		{
-			Console.Write($"Warmup...");
-			var response = Client.Bulk(b => b.IndexMany(Projects));
-			Console.WriteLine("\rWarmed up kicking off in 2 seconds!");
+			var pool = new StaticConnectionPool(new[] { new Uri("http://localhost:9200"), new Uri("http://localhost:9201") });
+			//var pool = new CloudConnectionPool("7140:dXMtY2VudHJhbDEuZ2NwLmZvdW5kaXQubm8kNzQyZTBjYmEzYmU4NDYxMzhkMWY2YzkwMmRlNzliZDEkODc4YjM3MjA1YTFkNDM0ODllNGZiYWI1OTZmODc0MjQ=", new BasicAuthenticationCredentials("elastic", "BT7ldQjnFkCNOxCi7dcGoR7x"));
+			var client = new ElasticClient(new ConnectionSettings(pool).RequestTimeout(TimeSpan.FromSeconds(60)).DisablePing());
 
-			await Task.Delay(TimeSpan.FromSeconds(2));
-			Console.WriteLine($"Kicking off");
-
-			for (var i = 0; i < 10_000; i++)
+			try
 			{
-				var r = Client.Bulk(b => b.IndexMany(Projects));
-				Console.Write($"\r{i}: {r.IsValid} {r.Items.Count}");
+				ClusterHealthResponse response;
+				for (var i = 0; i < 20; i++)
+				{
+					response = client.Cluster.Health();
+					Console.WriteLine($"{response.IsValid}");
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
 			}
 		}
 
