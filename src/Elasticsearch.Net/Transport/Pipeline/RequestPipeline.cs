@@ -268,6 +268,15 @@ namespace Elasticsearch.Net
 
 		public void FirstPoolUsage(SemaphoreSlim semaphore)
 		{
+			// Fail early if the check has already run and indicates an unsupported product
+			switch (_connectionPool.ProductCheckStatus)
+			{
+				case ProductCheckStatus.InvalidProduct:
+					throw new InvalidProductException(InvalidProductException.InvalidProductError);
+				case ProductCheckStatus.UnsupportedBuildFlavor:
+					throw new InvalidProductException(InvalidProductException.InvalidBuildFlavorError);
+			}
+
 			// If sniffing has completed and the product check has run, we are done!
 			if (!FirstPoolUsageNeedsSniffing && !RequiresProductCheck(_connectionPool.ProductCheckStatus))
 				return;
@@ -309,6 +318,7 @@ namespace Elasticsearch.Net
 						StartedOn = _dateTimeProvider.Now();
 					}
 
+				// Avoid proceeding to sniffing if the product is not valid
 				switch (_connectionPool.ProductCheckStatus)
 				{
 					case ProductCheckStatus.InvalidProduct:
@@ -334,6 +344,15 @@ namespace Elasticsearch.Net
 
 		public async Task FirstPoolUsageAsync(SemaphoreSlim semaphore, CancellationToken cancellationToken)
 		{
+			// Fail early if the check has already run and indicates an unsupported product
+			switch (_connectionPool.ProductCheckStatus)
+			{
+				case ProductCheckStatus.InvalidProduct:
+					throw new InvalidProductException(InvalidProductException.InvalidProductError);
+				case ProductCheckStatus.UnsupportedBuildFlavor:
+					throw new InvalidProductException(InvalidProductException.InvalidBuildFlavorError);
+			}
+
 			// If sniffing has completed and the product check has run, we are done!
 			if (!FirstPoolUsageNeedsSniffing && !RequiresProductCheck(_connectionPool.ProductCheckStatus))
 				return;
@@ -379,6 +398,7 @@ namespace Elasticsearch.Net
 						StartedOn = _dateTimeProvider.Now();
 					}
 
+				// Avoid proceeding to sniffing if the product is not valid
 				switch (_connectionPool.ProductCheckStatus)
 				{
 					case ProductCheckStatus.InvalidProduct:
