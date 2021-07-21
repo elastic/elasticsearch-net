@@ -71,9 +71,9 @@ namespace Tests.ScratchPad
 
 		private static async Task Main(string[] args)
 		{
-			var pool = new StaticConnectionPool(new[] { new Uri("http://localhost:9200"), new Uri("http://localhost:9201") });
+			var pool = new StaticConnectionPool(new[] { new Uri("http://localhost:9200"), new Uri("http://localhost:9201") }){ ProductCheckStatus = ProductCheckStatus.ValidProduct};
 			//var pool = new CloudConnectionPool("7140:dXMtY2VudHJhbDEuZ2NwLmZvdW5kaXQubm8kNzQyZTBjYmEzYmU4NDYxMzhkMWY2YzkwMmRlNzliZDEkODc4YjM3MjA1YTFkNDM0ODllNGZiYWI1OTZmODc0MjQ=", new BasicAuthenticationCredentials("elastic", "BT7ldQjnFkCNOxCi7dcGoR7x"));
-			var client = new ElasticClient(new ConnectionSettings(pool).RequestTimeout(TimeSpan.FromSeconds(60)).DisablePing());
+			var client = new ElasticClient(new ConnectionSettings(pool).RequestTimeout(TimeSpan.FromSeconds(60)));
 
 			try
 			{

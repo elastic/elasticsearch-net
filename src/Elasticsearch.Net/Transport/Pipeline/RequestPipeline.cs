@@ -266,7 +266,9 @@ namespace Elasticsearch.Net
 
 			var clientException = new ElasticsearchClientException(pipelineFailure, exceptionMessage, innerException)
 			{
-				Request = data, Response = callDetails, AuditTrail = AuditTrail
+				Request = data,
+				Response = callDetails,
+				AuditTrail = AuditTrail
 			};
 
 			return clientException;
@@ -293,24 +295,29 @@ namespace Elasticsearch.Net
 				if (RequiresProductCheck(_connectionPool.ProductCheckStatus))
 					using (Audit(ProductCheckOnStartup))
 					{
-						var nodes = _connectionPool.Nodes.ToArray(); // Isolated copy of nodes for the product check
-
 						if (RequestConfiguration?.ForceNode is not null)
 						{
 							var node = new Node(RequestConfiguration.ForceNode);
 							ProductCheck(node);
 						}
 						else
+						{
+							var nodes = _connectionPool.Nodes.ToArray(); // Isolated copy of nodes for the product check
+
 							// We determine the product from the first node which successfully responds.
 							// If a node fails, we retry other available nodes until the request timeout is reached.
 							for (var i = 0;
 								i < nodes.Length && RequiresProductCheck(_connectionPool.ProductCheckStatus) && !IsTakingTooLong;
 								i++)
 								ProductCheck(nodes[i]);
+						}
 
-						StartedOn = _dateTimeProvider.Now();
+						// When the product check succeeds, set the request start time so that we allow the full request timeout
+						// for the actual API call
+						if (_connectionPool.ProductCheckStatus == ProductCheckStatus.ValidProduct)
+							StartedOn = _dateTimeProvider.Now();
 					}
-				
+
 				switch (_connectionPool.ProductCheckStatus)
 				{
 					case ProductCheckStatus.InvalidProduct:
@@ -359,29 +366,27 @@ namespace Elasticsearch.Net
 				if (RequiresProductCheck(_connectionPool.ProductCheckStatus))
 					using (Audit(ProductCheckOnStartup))
 					{
-						var nodes = _connectionPool.Nodes.ToArray(); // Isolated copy of nodes for the product check
-
 						if (RequestConfiguration?.ForceNode is not null)
 						{
 							var node = new Node(RequestConfiguration.ForceNode);
 							await ProductCheckAsync(node, cancellationToken).ConfigureAwait(false);
 						}
 						else
+						{
+							var nodes = _connectionPool.Nodes.ToArray(); // Isolated copy of nodes for the product check
+
 							// We determine the product from the first node which successfully responds.
 							// If a node fails, we retry other available nodes until the request timeout is reached.
 							for (var i = 0;
 								i < nodes.Length && RequiresProductCheck(_connectionPool.ProductCheckStatus) && !IsTakingTooLong;
 								i++)
 								await ProductCheckAsync(nodes[i], cancellationToken).ConfigureAwait(false);
+						}
 
+						// When the product check succeeds, set the request start time so that we allow the full request timeout
+						// for the actual API call
 						if (_connectionPool.ProductCheckStatus == ProductCheckStatus.ValidProduct)
 							StartedOn = _dateTimeProvider.Now();
-
-						//// When we cannot check the product due to a transient error, we allow the original API call to run with an extremely short timeout.
-						//// This will generally avoid a surprising situation where the subsequent call (once product check is working) may cause an exception due to an
-						//// invalid product.
-						//if (_connectionPool.ProductCheckStatus == ProductCheckStatus.TransientFailure)
-						//	StartedOn = StartedOn.Add(_settings.MaxRetryTimeout.GetValueOrDefault(RequestTimeout).Add(TimeSpan.FromMilliseconds(-1)));
 					}
 
 				switch (_connectionPool.ProductCheckStatus)
@@ -457,65 +462,67 @@ namespace Elasticsearch.Net
 
 		public void Ping(Node node)
 		{
+			// We want to failure before pinging in cases where the product check is not successful
 			ThrowIfTransientProductCheckFailure();
 
 			if (PingDisabled(node))
 				return;
 
 			var pingData = CreatePingRequestData(node);
-			using (var audit = Audit(PingSuccess, node))
-			using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Ping, pingData))
+
+			using var audit = Audit(PingSuccess, node);
+			using var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Ping, pingData);
+
+			audit.Path = pingData.PathAndQuery;
+			try
 			{
-				audit.Path = pingData.PathAndQuery;
-				try
-				{
-					var response = _connection.Request<VoidResponse>(pingData);
-					d.EndState = response;
-					audit.Stop();
-					ThrowBadAuthPipelineExceptionWhenNeeded(response);
-					//ping should not silently accept bad but valid http responses
-					if (!response.Success)
-						throw new PipelineException(pingData.OnFailurePipelineFailure, response.OriginalException) { ApiCall = response };
-				}
-				catch (Exception e)
-				{
-					var response = (e as PipelineException)?.ApiCall;
-					audit.Event = PingFailure;
-					audit.Exception = e;
-					throw new PipelineException(PipelineFailure.PingFailure, e) { ApiCall = response };
-				}
+				var response = _connection.Request<VoidResponse>(pingData);
+				d.EndState = response;
+				audit.Stop();
+				ThrowBadAuthPipelineExceptionWhenNeeded(response);
+				//ping should not silently accept bad but valid http responses
+				if (!response.Success)
+					throw new PipelineException(pingData.OnFailurePipelineFailure, response.OriginalException) { ApiCall = response };
+			}
+			catch (Exception e)
+			{
+				var response = (e as PipelineException)?.ApiCall;
+				audit.Event = PingFailure;
+				audit.Exception = e;
+				throw new PipelineException(PipelineFailure.PingFailure, e) { ApiCall = response };
 			}
 		}
 
 		public async Task PingAsync(Node node, CancellationToken cancellationToken)
 		{
+			// We want to failure before pinging in cases where the product check is not successful
 			ThrowIfTransientProductCheckFailure();
 
 			if (PingDisabled(node))
 				return;
 
 			var pingData = CreatePingRequestData(node);
-			using (var audit = Audit(PingSuccess, node))
-			using (var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Ping, pingData))
+
+			using var audit = Audit(PingSuccess, node);
+			using var d = DiagnosticSource.Diagnose<RequestData, IApiCallDetails>(DiagnosticSources.RequestPipeline.Ping, pingData);
+
+			audit.Path = pingData.PathAndQuery;
+			try
 			{
-				audit.Path = pingData.PathAndQuery;
-				try
-				{
-					var response = await _connection.RequestAsync<VoidResponse>(pingData, cancellationToken).ConfigureAwait(false);
-					d.EndState = response;
-					audit.Stop();
-					ThrowBadAuthPipelineExceptionWhenNeeded(response);
-					//ping should not silently accept bad but valid http responses
-					if (!response.Success)
-						throw new PipelineException(pingData.OnFailurePipelineFailure, response.OriginalException) { ApiCall = response };
-				}
-				catch (Exception e)
-				{
-					var response = (e as PipelineException)?.ApiCall;
-					audit.Event = PingFailure;
-					audit.Exception = e;
-					throw new PipelineException(PipelineFailure.PingFailure, e) { ApiCall = response };
-				}
+				var response = await _connection.RequestAsync<VoidResponse>(pingData, cancellationToken).ConfigureAwait(false);
+				d.EndState = response;
+				audit.Stop();
+				ThrowBadAuthPipelineExceptionWhenNeeded(response);
+				//ping should not silently accept bad but valid http responses
+				if (!response.Success)
+					throw new PipelineException(pingData.OnFailurePipelineFailure, response.OriginalException) { ApiCall = response };
+			}
+			catch (Exception e)
+			{
+				var response = (e as PipelineException)?.ApiCall;
+				audit.Event = PingFailure;
+				audit.Exception = e;
+				throw new PipelineException(PipelineFailure.PingFailure, e) { ApiCall = response };
 			}
 		}
 
@@ -801,7 +808,7 @@ namespace Elasticsearch.Net
 			{
 				return version > MinVersion && !ExpectedTagLine.Equals(response.Tagline, StringComparison.Ordinal);
 			}
-			
+
 			// After v7.14.0 we expect the product header to be present and include the expected product name
 			static bool Version714InvalidHeader(Version version, string productName)
 			{
@@ -866,7 +873,8 @@ namespace Elasticsearch.Net
 
 		private void LazyAuditable(AuditEvent e, Node n)
 		{
-			using (new Auditable(e, AuditTrail, _dateTimeProvider, n)) { }
+			using (new Auditable(e, AuditTrail, _dateTimeProvider, n))
+			{ }
 		}
 
 		private RequestData CreateSniffRequestData(Node node) =>
