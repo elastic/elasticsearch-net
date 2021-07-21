@@ -69,7 +69,7 @@ namespace Tests.ScratchPad
 			);
 
 
-		private static void Main(string[] args)
+		private static async Task Main(string[] args)
 		{
 			var pool = new StaticConnectionPool(new[] { new Uri("http://localhost:9200"), new Uri("http://localhost:9201") });
 			//var pool = new CloudConnectionPool("7140:dXMtY2VudHJhbDEuZ2NwLmZvdW5kaXQubm8kNzQyZTBjYmEzYmU4NDYxMzhkMWY2YzkwMmRlNzliZDEkODc4YjM3MjA1YTFkNDM0ODllNGZiYWI1OTZmODc0MjQ=", new BasicAuthenticationCredentials("elastic", "BT7ldQjnFkCNOxCi7dcGoR7x"));
@@ -80,7 +80,7 @@ namespace Tests.ScratchPad
 				ClusterHealthResponse response;
 				for (var i = 0; i < 20; i++)
 				{
-					response = client.Cluster.Health();
+					response = await client.Cluster.HealthAsync();
 					Console.WriteLine($"{response.IsValid}");
 				}
 			}

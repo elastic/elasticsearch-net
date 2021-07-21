@@ -2,7 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using System;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elasticsearch.Net.VirtualizedCluster;
@@ -20,14 +19,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.ProductChecking
 		* Since v7.14.0, the client performs a required product check before the first call.
 		* This pre-flight product check allows the client to establish the version of Elasticsearch that it is communicating with.
 		*
-		* The product check requires one additional HTTP request to be sent to the server as part of the request pipeline before
-		* the main API call is sent. In most cases, this will succeed during the very first API call that the client sends.
+		* The product check generally requires a single additional HTTP request to be sent to the server as part of the request pipeline before
+		* the first API call is sent. In most cases, this will succeed during the first API call that the client sends.
 		* Once the product check succeeds, no further product check HTTP requests are sent for subsequent API calls.
 		*/
 		[U] public async Task ProductCheckPerformedOnlyOnFirstCallWhenSuccessful()
 		{
 			var audit = new Auditor(() => VirtualClusterWith
 				.Nodes(1)
+				.ProductCheck(r => r.SucceedAlways())
 				.ClientCalls(r => r.SucceedAlways())
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing())
@@ -61,13 +61,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.ProductChecking
 			audit = await audit.TraceCalls(skipProductCheck: false,
 				new ClientCall() {
 					{ ProductCheckOnStartup },
-					{ ProductCheckFailure, 9200 }, // <1> as this is the first call, the product check is executed, but times out
-					{ HealthyResponse, 9200 } // <2> the actual request is still sent and succeeds
+					{ ProductCheckFailure, 9200 } // <1> as this is the first call, the product check is executed, but times out
 				},
 				new ClientCall() {
 					{ ProductCheckOnStartup },
-					{ ProductCheckSuccess, 9200 }, // <3> as the previous product check failed, it runs again on the second call and this time it succeeds
-					{ HealthyResponse, 9200 }
+					{ ProductCheckSuccess, 9200 }, // <2> as the previous product check failed, it runs again on the second call and this time it succeeds
+					{ HealthyResponse, 9200 } // <3> this time the main API call is sent and also succeeds
 				},
 				new ClientCall() {
 					{ HealthyResponse, 9200 } // <4> subsequent calls no longer perform product check

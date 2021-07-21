@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
@@ -43,12 +44,38 @@ namespace Tests.Reproduce
 		/// </summary>
 		private class CloudIndexExistsInMemoryConnection : IConnection
 		{
-			public TResponse Request<TResponse>(RequestData requestData) where TResponse : class, IElasticsearchResponse, new() =>
-				ResponseBuilder.ToResponse<TResponse>(requestData, null, 200, null, Stream.Null, null);
+			private readonly byte[] _productCheckResponse = Encoding.UTF8.GetBytes(@"{
+  ""name"" : ""es02"",
+  ""cluster_name"" : ""es-docker-cluster"",
+  ""cluster_uuid"" : ""J60CQtNRStaWl-UUPnHHVw"",
+  ""version"" : {
+    ""number"" : ""7.13.3"",
+    ""build_flavor"" : ""default"",
+    ""build_type"" : ""docker"",
+    ""build_hash"" : ""5d21bea28db1e89ecc1f66311ebdec9dc3aa7d64"",
+    ""build_date"" : ""2021-07-02T12:06:10.804015202Z"",
+    ""build_snapshot"" : false,
+    ""lucene_version"" : ""8.8.2"",
+    ""minimum_wire_compatibility_version"" : ""6.8.0"",
+    ""minimum_index_compatibility_version"" : ""6.0.0-beta1""
+  },
+  ""tagline"" : ""You Know, for Search""
+}");
+
+			public TResponse Request<TResponse>(RequestData requestData) where TResponse : class, IElasticsearchResponse, new() => GetResponse<TResponse>(requestData);
 
 			public Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
-				where TResponse : class, IElasticsearchResponse, new() =>
-				Task.FromResult(ResponseBuilder.ToResponse<TResponse>(requestData, null, 200, null, Stream.Null, null));
+				where TResponse : class, IElasticsearchResponse, new() => Task.FromResult(GetResponse<TResponse>(requestData));
+
+			private TResponse GetResponse<TResponse>(RequestData requestData) where TResponse : class, IElasticsearchResponse, new()
+			{
+				if (requestData.Uri.PathAndQuery != "/")
+					return ResponseBuilder.ToResponse<TResponse>(requestData, null, 200, null, Stream.Null, null);
+
+				// Handles product check
+				var ms = new MemoryStream(_productCheckResponse);
+				return ResponseBuilder.ToResponse<TResponse>(requestData, null, 200, null, ms, "application/json; charset=utf-8", "Elasticsearch");
+			}
 
 			public void Dispose() { }
 		}

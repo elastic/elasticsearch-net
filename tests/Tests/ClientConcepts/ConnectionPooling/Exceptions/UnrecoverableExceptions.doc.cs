@@ -66,6 +66,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 					case PipelineFailure.MaxRetriesReached:
 					case PipelineFailure.Unexpected:
 					case PipelineFailure.NoNodesAttempted:
+					case PipelineFailure.FailedProductCheck:
 						var unrecoverable = new PipelineException(failure);
 						unrecoverable.Recoverable.Should().BeFalse(failure.GetStringValue());
 						break;
