@@ -452,7 +452,7 @@ namespace Elasticsearch.Net
 
 		public void Ping(Node node)
 		{
-			// We want to failure before pinging in cases where the product check is not successful
+			// We want to fail before attempting a ping in cases where the product check is not successful
 			ThrowIfTransientProductCheckFailure();
 
 			if (PingDisabled(node))
@@ -485,7 +485,7 @@ namespace Elasticsearch.Net
 
 		public async Task PingAsync(Node node, CancellationToken cancellationToken)
 		{
-			// We want to failure before pinging in cases where the product check is not successful
+			// We want to fail before attempting a ping in cases where the product check is not successful
 			ThrowIfTransientProductCheckFailure();
 
 			if (PingDisabled(node))
