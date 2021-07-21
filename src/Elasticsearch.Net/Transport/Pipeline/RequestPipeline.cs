@@ -186,12 +186,6 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private void ThrowIfTransientProductCheckFailure()
-		{
-			if (_connectionPool.ProductCheckStatus == ProductCheckStatus.TransientFailure)
-				throw new PipelineException(PipelineFailure.FailedProductCheck, _lastProductCheckCallDetails?.OriginalException);
-		}
-
 		public async Task<TResponse> CallElasticsearchAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
@@ -266,9 +260,7 @@ namespace Elasticsearch.Net
 
 			var clientException = new ElasticsearchClientException(pipelineFailure, exceptionMessage, innerException)
 			{
-				Request = data,
-				Response = callDetails,
-				AuditTrail = AuditTrail
+				Request = data, Response = callDetails, AuditTrail = AuditTrail
 			};
 
 			return clientException;
@@ -312,10 +304,9 @@ namespace Elasticsearch.Net
 								ProductCheck(nodes[i]);
 						}
 
-						// When the product check succeeds, set the request start time so that we allow the full request timeout
-						// for the actual API call
-						if (_connectionPool.ProductCheckStatus == ProductCheckStatus.ValidProduct)
-							StartedOn = _dateTimeProvider.Now();
+						// Set the request start time so that we allow the full request timeout
+						// for the actual API call if it is sent.
+						StartedOn = _dateTimeProvider.Now();
 					}
 
 				switch (_connectionPool.ProductCheckStatus)
@@ -383,10 +374,9 @@ namespace Elasticsearch.Net
 								await ProductCheckAsync(nodes[i], cancellationToken).ConfigureAwait(false);
 						}
 
-						// When the product check succeeds, set the request start time so that we allow the full request timeout
-						// for the actual API call
-						if (_connectionPool.ProductCheckStatus == ProductCheckStatus.ValidProduct)
-							StartedOn = _dateTimeProvider.Now();
+						// Set the request start time so that we allow the full request timeout
+						// for the actual API call if it is sent.
+						StartedOn = _dateTimeProvider.Now();
 					}
 
 				switch (_connectionPool.ProductCheckStatus)
@@ -645,6 +635,12 @@ namespace Elasticsearch.Net
 				throw new UnexpectedElasticsearchClientException(clientException, seenExceptions) { Request = requestData, AuditTrail = AuditTrail };
 		}
 
+		private void ThrowIfTransientProductCheckFailure()
+		{
+			if (_connectionPool.ProductCheckStatus == ProductCheckStatus.TransientFailure)
+				throw new PipelineException(PipelineFailure.FailedProductCheck, _lastProductCheckCallDetails?.OriginalException);
+		}
+
 		private static bool RequiresProductCheck(ProductCheckStatus status) =>
 			status is ProductCheckStatus.NotChecked or ProductCheckStatus.TransientFailure;
 
@@ -873,8 +869,7 @@ namespace Elasticsearch.Net
 
 		private void LazyAuditable(AuditEvent e, Node n)
 		{
-			using (new Auditable(e, AuditTrail, _dateTimeProvider, n))
-			{ }
+			using (new Auditable(e, AuditTrail, _dateTimeProvider, n)) { }
 		}
 
 		private RequestData CreateSniffRequestData(Node node) =>
