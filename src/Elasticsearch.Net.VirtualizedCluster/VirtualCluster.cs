@@ -15,7 +15,9 @@ namespace Elasticsearch.Net.VirtualizedCluster
 	{
 		private readonly List<Node> _nodes;
 
-		public VirtualCluster(IEnumerable<Node> nodes, bool productCheckSucceeds = true)
+		public VirtualCluster(IEnumerable<Node> nodes) : this(nodes, true) { }
+
+		public VirtualCluster(IEnumerable<Node> nodes, bool productCheckSucceeds)
 		{
 			_nodes = nodes.ToList();
 
@@ -29,19 +31,20 @@ namespace Elasticsearch.Net.VirtualizedCluster
 		public IReadOnlyList<Node> Nodes => _nodes;
 
 		public List<IRule> PingingRules { get; } = new();
-		public List<ISniffRule> SniffingRules { get; } = new();
 		public List<IRule> ProductCheckRules { get; } = new();
+		public List<ISniffRule> SniffingRules { get; } = new();
+		internal string ElasticsearchVersion { get; private set; } = "7.0.0";
 
 		internal string PublishAddressOverride { get; private set; }
 
 		internal bool SniffShouldReturnFqnd { get; private set; }
-		internal string ElasticsearchVersion { get; private set; } = "7.0.0";
 
 		public VirtualCluster SniffShouldReturnFqdn()
 		{
 			SniffShouldReturnFqnd = true;
 			return this;
 		}
+
 		public VirtualCluster SniffElasticsearchVersionNumber(string version)
 		{
 			ElasticsearchVersion = version;
@@ -93,7 +96,7 @@ namespace Elasticsearch.Net.VirtualizedCluster
 			SniffingRules.Add(selector(new SniffRule()));
 			return this;
 		}
-		
+
 		public VirtualCluster ProductCheck(Func<ProductCheckRule, IRule> selector)
 		{
 			ProductCheckRules.Add(selector(new ProductCheckRule()));

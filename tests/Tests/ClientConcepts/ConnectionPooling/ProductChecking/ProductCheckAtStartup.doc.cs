@@ -50,7 +50,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.ProductChecking
 		{
 			/** Here's an example with a single node cluster which fails for some reason during the first product check attempt. */
 			var audit = new Auditor(() => VirtualClusterWith
-				.Nodes(1, productCheckAlwaysSucceeds: false)
+				.Nodes(1, productCheckSucceeds: false)
 				.ProductCheck(r => r.Fails(TimesHelper.Once, 429))
 				.ProductCheck(r => r.SucceedAlways())
 				.ClientCalls(r => r.SucceedAlways())
@@ -79,7 +79,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.ProductChecking
 		{
 			/** Here's an example with a three node cluster which fails (due to too many requests) during the first and second product check attempts. */
 			var audit = new Auditor(() => VirtualClusterWith
-				.Nodes(3, productCheckAlwaysSucceeds: false)
+				.Nodes(3, productCheckSucceeds: false)
 				.ProductCheck(r => r.FailAlways(429))
 				.ProductCheck(r => r.OnPort(9202).SucceedAlways())
 				.ClientCalls(r => r.SucceedAlways())

@@ -10,12 +10,19 @@ namespace Elasticsearch.Net.VirtualizedCluster
 {
 	public static class VirtualClusterWith
 	{
-		public static VirtualCluster Nodes(int numberOfNodes, int startFrom = 9200, bool productCheckAlwaysSucceeds = true) =>
-			new (Enumerable.Range(startFrom, numberOfNodes).Select(n => new Node(new Uri($"http://localhost:{n}"))), productCheckAlwaysSucceeds);
+		public static VirtualCluster Nodes(int numberOfNodes, int startFrom = 9200) => Nodes(numberOfNodes, true, startFrom);
 
-		public static VirtualCluster MasterOnlyNodes(int numberOfNodes, int startFrom = 9200, bool productCheckSucceeds = true) =>
-			new (Enumerable.Range(startFrom, numberOfNodes).Select(n => new Node(new Uri($"http://localhost:{n}")) { HoldsData = false, MasterEligible = true }), productCheckSucceeds);
+		public static VirtualCluster Nodes(int numberOfNodes, bool productCheckSucceeds, int startFrom = 9200) =>
+			new(Enumerable.Range(startFrom, numberOfNodes).Select(n => new Node(new Uri($"http://localhost:{n}"))), productCheckSucceeds);
 
-		public static VirtualCluster Nodes(IEnumerable<Node> nodes, bool productCheckSucceeds = true) => new (nodes, productCheckSucceeds);
+		public static VirtualCluster MasterOnlyNodes(int numberOfNodes, int startFrom = 9200) => MasterOnlyNodes(numberOfNodes, true, startFrom);
+
+		public static VirtualCluster MasterOnlyNodes(int numberOfNodes, bool productCheckSucceeds, int startFrom = 9200) =>
+			new(Enumerable.Range(startFrom, numberOfNodes)
+				.Select(n => new Node(new Uri($"http://localhost:{n}")) { HoldsData = false, MasterEligible = true }), productCheckSucceeds);
+
+		public static VirtualCluster Nodes(IEnumerable<Node> nodes) => Nodes(nodes, true);
+
+		public static VirtualCluster Nodes(IEnumerable<Node> nodes, bool productCheckSucceeds) => new(nodes, productCheckSucceeds);
 	}
 }

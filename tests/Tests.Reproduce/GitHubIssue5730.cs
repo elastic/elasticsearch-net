@@ -62,10 +62,13 @@ namespace Tests.Reproduce
   ""tagline"" : ""You Know, for Search""
 }");
 
-			public TResponse Request<TResponse>(RequestData requestData) where TResponse : class, IElasticsearchResponse, new() => GetResponse<TResponse>(requestData);
+			public TResponse Request<TResponse>(RequestData requestData) where TResponse : class, IElasticsearchResponse, new() =>
+				GetResponse<TResponse>(requestData);
 
 			public Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 				where TResponse : class, IElasticsearchResponse, new() => Task.FromResult(GetResponse<TResponse>(requestData));
+
+			public void Dispose() { }
 
 			private TResponse GetResponse<TResponse>(RequestData requestData) where TResponse : class, IElasticsearchResponse, new()
 			{
@@ -74,10 +77,8 @@ namespace Tests.Reproduce
 
 				// Handles product check
 				var ms = new MemoryStream(_productCheckResponse);
-				return ResponseBuilder.ToResponse<TResponse>(requestData, null, 200, null, ms, "application/json; charset=utf-8", "Elasticsearch");
+				return ResponseBuilder.ToResponse<TResponse>(requestData, null, 200, null, ms, "Elasticsearch", "application/json; charset=utf-8");
 			}
-
-			public void Dispose() { }
 		}
 	}
 }

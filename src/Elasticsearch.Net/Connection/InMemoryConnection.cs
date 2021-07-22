@@ -122,8 +122,16 @@ namespace Elasticsearch.Net
 			RequestData requestData,
 			byte[] responseBody = null,
 			int? statusCode = null,
-			string contentType = null,
-			InMemoryHttpResponse productCheckResponse = null
+			string contentType = null
+		) where TResponse : class, IElasticsearchResponse, new() =>
+			ReturnConnectionStatus<TResponse>(requestData, null, responseBody, statusCode, contentType);
+
+		protected TResponse ReturnConnectionStatus<TResponse>(
+			RequestData requestData,
+			InMemoryHttpResponse productCheckResponse,
+			byte[] responseBody = null,
+			int? statusCode = null,
+			string contentType = null
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
@@ -146,19 +154,29 @@ namespace Elasticsearch.Net
 
 			requestData.MadeItToResponse = true;
 
-			var sc = statusCode ?? _statusCode;
+			statusCode ??= _statusCode;
 			Stream s = body != null ? requestData.MemoryStreamFactory.Create(body) : requestData.MemoryStreamFactory.Create(EmptyBody);
-			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s, _productHeader,
+			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, statusCode, null, s, _productHeader,
 				contentType ?? _contentType ?? RequestData.DefaultJsonMimeType);
 		}
 
-		protected async Task<TResponse> ReturnConnectionStatusAsync<TResponse>(
+		protected Task<TResponse> ReturnConnectionStatusAsync<TResponse>(
 			RequestData requestData,
 			CancellationToken cancellationToken,
 			byte[] responseBody = null,
 			int? statusCode = null,
-			string contentType = null,
-			InMemoryHttpResponse productCheckResponse = null
+			string contentType = null
+		)
+			where TResponse : class, IElasticsearchResponse, new() =>
+			ReturnConnectionStatusAsync<TResponse>(requestData, null, cancellationToken, responseBody, statusCode, contentType);
+
+		protected async Task<TResponse> ReturnConnectionStatusAsync<TResponse>(
+			RequestData requestData,
+			InMemoryHttpResponse productCheckResponse,
+			CancellationToken cancellationToken,
+			byte[] responseBody = null,
+			int? statusCode = null,
+			string contentType = null
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
@@ -179,17 +197,18 @@ namespace Elasticsearch.Net
 			}
 			requestData.MadeItToResponse = true;
 
-			var sc = statusCode ?? _statusCode;
+			statusCode ??= _statusCode;
 			Stream s = body != null ? requestData.MemoryStreamFactory.Create(body) : requestData.MemoryStreamFactory.Create(EmptyBody);
 			return await ResponseBuilder
-				.ToResponseAsync<TResponse>(requestData, _exception, sc, null, s, _productHeader, contentType ?? _contentType, cancellationToken)
+				.ToResponseAsync<TResponse>(requestData, _exception, statusCode, null, s, _productHeader, contentType ?? _contentType,
+					cancellationToken)
 				.ConfigureAwait(false);
 		}
 
 		private TResponse ReturnProductCheckResponse<TResponse>(
 			RequestData requestData,
-			int? statusCode = null,
-			InMemoryHttpResponse productCheckResponse = null
+			int? statusCode,
+			InMemoryHttpResponse productCheckResponse
 		) where TResponse : class, IElasticsearchResponse, new()
 		{
 			productCheckResponse ??= _productCheckResponse;
