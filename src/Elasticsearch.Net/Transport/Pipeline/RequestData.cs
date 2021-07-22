@@ -13,20 +13,23 @@ namespace Elasticsearch.Net
 {
 	public class RequestData
 	{
-		private Uri _requestUri;
-		private Node _node;
+		private const string MimeTypeOld = "application/json";
+
+		public const string MimeTypeTextPlain = "text/plain";
 
 		public const string OpaqueIdHeader = "X-Opaque-Id";
 		public const string RunAsSecurityHeader = "es-security-runas-user";
 
-		public const string MimeTypeTextPlain = "text/plain";
-		private const string MimeTypeOld = "application/json";
-		private static readonly string MimeType = "application/vnd.elasticsearch+json; compatible-with=" + ClientVersionInfo.LowLevelClientVersionInfo.Version.Major;
+		private static readonly string MimeType = "application/vnd.elasticsearch+json; compatible-with="
+			+ ClientVersionInfo.LowLevelClientVersionInfo.Version.Major;
 
 		public static readonly string DefaultJsonMimeType =
 			ClientVersionInfo.LowLevelClientVersionInfo.Version.Major >= 8 ? MimeType : MimeTypeOld;
 
-		public string JsonContentMimeType { get; }
+
+		private readonly string _path;
+		private Node _node;
+		private Uri _requestUri;
 
 		public RequestData(HttpMethod method, string path, PostData data, IConnectionConfigurationValues global, IRequestParameters local,
 			IMemoryStreamFactory memoryStreamFactory
@@ -104,10 +107,8 @@ namespace Elasticsearch.Net
 			TcpStats = local?.EnableTcpStats ?? global.EnableTcpStats;
 			ThreadPoolStats = local?.EnableThreadPoolStats ?? global.EnableThreadPoolStats;
 			MetaHeaderProvider = global.MetaHeaderProvider;
-			RequestMetaData = local?.RequestMetaData?.Items ?? EmptyReadOnly<string,string>.Dictionary;
+			RequestMetaData = local?.RequestMetaData?.Items ?? EmptyReadOnly<string, string>.Dictionary;
 		}
-
-		private readonly string _path;
 
 		public string Accept { get; }
 		public IReadOnlyCollection<int> AllowedStatusCodes { get; }
@@ -121,21 +122,26 @@ namespace Elasticsearch.Net
 		public CustomResponseBuilderBase CustomResponseBuilder { get; }
 		public bool DisableAutomaticProxyDetection { get; }
 
+		public TimeSpan DnsRefreshTimeout { get; }
+
 		public NameValueCollection Headers { get; }
 		public bool HttpCompression { get; }
+
+		public bool IsAsync { get; internal set; }
+
+		public string JsonContentMimeType { get; }
 		public int KeepAliveInterval { get; }
 		public int KeepAliveTime { get; }
 		public bool MadeItToResponse { get; set; }
 		public IMemoryStreamFactory MemoryStreamFactory { get; }
 
+		public MetaHeaderProvider MetaHeaderProvider { get; }
+
 		public HttpMethod Method { get; }
 
-		public Node Node 
+		public Node Node
 		{
-			get
-			{
-				return _node; 
-			}
+			get => _node;
 			set
 			{
 				_requestUri = null;
@@ -153,16 +159,18 @@ namespace Elasticsearch.Net
 		public string ProxyAddress { get; }
 		public SecureString ProxyPassword { get; }
 		public string ProxyUsername { get; }
+
+		public IReadOnlyDictionary<string, string> RequestMetaData { get; }
+
 		// TODO: rename to ContentType in 8.0.0
 		public string RequestMimeType { get; }
 		public TimeSpan RequestTimeout { get; }
 		public string RunAs { get; }
 		public IReadOnlyCollection<int> SkipDeserializationForStatusCodes { get; }
-		public bool ThrowExceptions { get; }
-		public string UserAgent { get; }
-		public bool TransferEncodingChunked { get; }
 		public bool TcpStats { get; }
 		public bool ThreadPoolStats { get; }
+		public bool ThrowExceptions { get; }
+		public bool TransferEncodingChunked { get; }
 
 		/// <summary>
 		/// The <see cref="Uri" /> for the request.
@@ -177,14 +185,8 @@ namespace Elasticsearch.Net
 				return _requestUri;
 			}
 		}
-		
-		public TimeSpan DnsRefreshTimeout { get; }
 
-		public MetaHeaderProvider MetaHeaderProvider { get; }
-
-		public IReadOnlyDictionary<string, string> RequestMetaData { get; }
-
-		public bool IsAsync { get; internal set; }
+		public string UserAgent { get; }
 
 		public override string ToString() => $"{Method.GetStringValue()} {_path}";
 
@@ -202,18 +204,18 @@ namespace Elasticsearch.Net
 
 			// we a startswith check because the response can return charset information
 			// e.g: application/json; charset=UTF-8
-			if (acceptMimeType == RequestData.MimeTypeOld)
-				return responseMimeType.StartsWith(RequestData.MimeTypeOld, StringComparison.OrdinalIgnoreCase);
+			if (acceptMimeType == MimeTypeOld)
+				return responseMimeType.StartsWith(MimeTypeOld, StringComparison.OrdinalIgnoreCase);
 
 			//vendored check
-			if (acceptMimeType == RequestData.MimeType)
+			if (acceptMimeType == MimeType)
 				// we check both vendored and nonvendored since on 7.x the response does not return a
 				// vendored Content-Type header on the response
 				return
-					responseMimeType == RequestData.MimeType
-					|| responseMimeType == RequestData.MimeTypeOld
-					|| responseMimeType.StartsWith(RequestData.MimeTypeOld, StringComparison.OrdinalIgnoreCase)
-					|| responseMimeType.StartsWith(RequestData.MimeType, StringComparison.OrdinalIgnoreCase);
+					responseMimeType == MimeType
+					|| responseMimeType == MimeTypeOld
+					|| responseMimeType.StartsWith(MimeTypeOld, StringComparison.OrdinalIgnoreCase)
+					|| responseMimeType.StartsWith(MimeType, StringComparison.OrdinalIgnoreCase);
 
 			return responseMimeType.StartsWith(acceptMimeType, StringComparison.OrdinalIgnoreCase);
 		}

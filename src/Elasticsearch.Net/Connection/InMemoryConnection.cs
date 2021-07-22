@@ -15,23 +15,80 @@ namespace Elasticsearch.Net
 {
 	public class InMemoryHttpResponse
 	{
-		public int StatusCode { get; set; } = 200;
-		public byte[] ResponseBytes { get; set; } = Array.Empty<byte>();
-		public Dictionary<string, List<string>> Headers { get; set; } = new();
 		public string ContentType { get; set; }
+		public Dictionary<string, List<string>> Headers { get; set; } = new();
+		public byte[] ResponseBytes { get; set; } = Array.Empty<byte>();
+		public int StatusCode { get; set; } = 200;
 	}
 
 	public class InMemoryConnection : IConnection
 	{
-		private readonly string _basePath = "/";
 		private const string DefaultProductName = "Elasticsearch";
 		private static readonly byte[] EmptyBody = Encoding.UTF8.GetBytes("");
+		private readonly string _basePath = "/";
 		private readonly string _contentType;
 		private readonly Exception _exception;
-		private readonly byte[] _responseBody;
-		private readonly int _statusCode;
 		private readonly InMemoryHttpResponse _productCheckResponse;
 		private readonly string _productHeader;
+		private readonly byte[] _responseBody;
+		private readonly int _statusCode;
+
+		/// <summary>
+		/// Every request will succeed with this overload, note that it won't actually return mocked responses
+		/// so using this overload might fail if you are using it to test high level bits that need to deserialize the response.
+		/// </summary>
+		public InMemoryConnection()
+		{
+			_statusCode = 200;
+			_productCheckResponse = ValidProductCheckResponse();
+		}
+
+		public InMemoryConnection(string basePath) : this() => _basePath = $"/{basePath.Trim('/')}/";
+
+		public InMemoryConnection(InMemoryHttpResponse productCheckResponse) : this(productCheckResponse, 200, null) { }
+
+		public InMemoryConnection(InMemoryHttpResponse productCheckResponse, int statusCode, string productHeader)
+		{
+			_statusCode = statusCode;
+			_productCheckResponse = productCheckResponse ?? ValidProductCheckResponse();
+			_productHeader = productHeader;
+		}
+
+		public InMemoryConnection(
+			byte[] responseBody,
+			InMemoryHttpResponse productCheckResponse,
+			string productNameFromHeader,
+			int statusCode = 200,
+			Exception exception = null,
+			string contentType = null
+		) : this(productCheckResponse, statusCode, productNameFromHeader)
+		{
+			_responseBody = responseBody;
+			_exception = exception;
+			_contentType = contentType ?? RequestData.DefaultJsonMimeType;
+		}
+
+		public InMemoryConnection(
+			byte[] responseBody,
+			int statusCode = 200,
+			Exception exception = null,
+			string contentType = null
+		) : this(responseBody, null, null, statusCode)
+		{
+			_responseBody = responseBody;
+			_exception = exception;
+			_contentType = contentType ?? RequestData.DefaultJsonMimeType;
+		}
+
+		public virtual TResponse Request<TResponse>(RequestData requestData)
+			where TResponse : class, IElasticsearchResponse, new() =>
+			ReturnConnectionStatus<TResponse>(requestData);
+
+		public virtual Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
+			where TResponse : class, IElasticsearchResponse, new() =>
+			ReturnConnectionStatusAsync<TResponse>(requestData, cancellationToken);
+
+		void IDisposable.Dispose() => DisposeManagedResources();
 
 		public static InMemoryHttpResponse ValidProductCheckResponse(string productName = null)
 		{
@@ -54,58 +111,13 @@ namespace Elasticsearch.Net
 			using var ms = RecyclableMemoryStreamFactory.Default.Create();
 			LowLevelRequestResponseSerializer.Instance.Serialize(responseJson, ms);
 
-			var response = new InMemoryHttpResponse
-			{
-				ResponseBytes = ms.ToArray()
-			};
+			var response = new InMemoryHttpResponse { ResponseBytes = ms.ToArray() };
 
-			response.Headers.Add("X-elastic-product", new List<string>{ productName ?? DefaultProductName });
+			response.Headers.Add("X-elastic-product", new List<string> { productName ?? DefaultProductName });
 
 			return response;
 		}
 
-		/// <summary>
-		/// Every request will succeed with this overload, note that it won't actually return mocked responses
-		/// so using this overload might fail if you are using it to test high level bits that need to deserialize the response.
-		/// </summary>
-		public InMemoryConnection()
-		{
-			_statusCode = 200;
-			_productCheckResponse = ValidProductCheckResponse();
-		}
-
-		public InMemoryConnection(string basePath) : this() => _basePath = $"/{basePath.Trim('/')}/";
-
-		public InMemoryConnection(InMemoryHttpResponse productCheckResponse = null, int statusCode = 200, string productHeader = null)
-		{
-			_statusCode = statusCode;
-			_productCheckResponse = productCheckResponse ?? ValidProductCheckResponse();
-			_productHeader = productHeader;
-		}
-
-		public InMemoryConnection(
-			byte[] responseBody,
-			int statusCode = 200,
-			Exception exception = null,
-			string contentType = null,
-			InMemoryHttpResponse productCheckResponse = null,
-			string productNameFromHeader = null) : this(productCheckResponse, statusCode, productNameFromHeader)
-		{
-			_responseBody = responseBody;
-			_exception = exception;
-			_contentType = contentType ?? RequestData.DefaultJsonMimeType;
-		}
-
-		public virtual TResponse Request<TResponse>(RequestData requestData)
-			where TResponse : class, IElasticsearchResponse, new() =>
-			ReturnConnectionStatus<TResponse>(requestData);
-
-		public virtual Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
-			where TResponse : class, IElasticsearchResponse, new() =>
-			ReturnConnectionStatusAsync<TResponse>(requestData, cancellationToken);
-
-		void IDisposable.Dispose() => DisposeManagedResources();
-		
 		protected TResponse ReturnConnectionStatus<TResponse>(
 			RequestData requestData,
 			byte[] responseBody = null,
@@ -136,7 +148,8 @@ namespace Elasticsearch.Net
 
 			var sc = statusCode ?? _statusCode;
 			Stream s = body != null ? requestData.MemoryStreamFactory.Create(body) : requestData.MemoryStreamFactory.Create(EmptyBody);
-			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s, contentType ?? _contentType ?? RequestData.DefaultJsonMimeType);
+			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s, _productHeader,
+				contentType ?? _contentType ?? RequestData.DefaultJsonMimeType);
 		}
 
 		protected async Task<TResponse> ReturnConnectionStatusAsync<TResponse>(
@@ -169,7 +182,7 @@ namespace Elasticsearch.Net
 			var sc = statusCode ?? _statusCode;
 			Stream s = body != null ? requestData.MemoryStreamFactory.Create(body) : requestData.MemoryStreamFactory.Create(EmptyBody);
 			return await ResponseBuilder
-				.ToResponseAsync<TResponse>(requestData, _exception, sc, null, s, contentType ?? _contentType, _productHeader, cancellationToken)
+				.ToResponseAsync<TResponse>(requestData, _exception, sc, null, s, _productHeader, contentType ?? _contentType, cancellationToken)
 				.ConfigureAwait(false);
 		}
 
@@ -188,7 +201,7 @@ namespace Elasticsearch.Net
 
 			return ResponseBuilder.ToResponse<TResponse>(
 				requestData, _exception, statusCode ?? productCheckResponse.StatusCode, null, ms,
-				RequestData.DefaultJsonMimeType, productNames?.FirstOrDefault());
+				productNames?.FirstOrDefault(), RequestData.DefaultJsonMimeType);
 		}
 
 		protected virtual void DisposeManagedResources() { }
