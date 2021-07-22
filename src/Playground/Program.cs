@@ -95,12 +95,54 @@ namespace Playground
 			if (!searchResponse.IsValid)
 				throw new Exception("Failed to search for any documents");
 
-			// TODO - Union deserialisation not yet implements
+			// TODO - Union deserialisation not yet implemented
 			//long hits = 0;
 			//searchResponse.Hits.Total.Match(a => hits = a.Value, b => hits = b);
 			// Console.WriteLine($"The basic search found {hits} hits");
 
 			Console.WriteLine($"The basic search found {searchResponse.Hits.Hits.Count} hits");
+
+			// Basic terms agg
+
+			// Original
+			//var request = new SearchRequest<Person>
+			//{
+			//	Aggregations = new TermsAggregation("symbols")
+			//	{
+			//		Field = Infer.Field<Person>(f => f.Name),
+			//		Size = 1000
+			//	},
+			//	Size = 0
+			//};
+
+			// Basic terms aggregation
+			var request = new SearchRequest(indexName)
+			{
+				Aggregations =
+					new
+						Dictionary<string,
+							AggregationContainer> // TODO - Can this be improved to align with our existing style?
+						{
+							{
+								"names",
+								new()
+								{
+									Terms = new TermsAggregation
+									{
+										Field = Infer.Field<Person>(f => f.Email!), Size = 100
+									}
+								}
+							}
+						},
+				Size = 0,
+				//Profile = true,
+				RestTotalHitsAsInt = true // required for now until union converter is able to handle objects! TODO
+			};
+
+			searchResponse = await client.SearchAsync<Person>(request);
+
+			if (!searchResponse.IsValid)
+				throw new Exception("Failed to search for any documents (using aggregation)");
 
 			// TODO - Search with aggregation to get average age
 

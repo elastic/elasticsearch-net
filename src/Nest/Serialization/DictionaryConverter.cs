@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text.Json;
@@ -8,53 +7,6 @@ using System.Text.Json.Serialization;
 
 namespace Nest
 {
-	public class UnionConverter : JsonConverterFactory
-	{
-		public override bool CanConvert(Type typeToConvert) => typeToConvert.Name == typeof(Union<,>).Name;
-
-		public override JsonConverter CreateConverter(
-			Type type,
-			JsonSerializerOptions options)
-		{
-			var itemOneType = type.GetGenericArguments()[0];
-			var itemTwoType = type.GetGenericArguments()[1];
-
-			var converter = (JsonConverter)Activator.CreateInstance(
-				typeof(UnionConverterInner<,>).MakeGenericType(itemOneType, itemTwoType),
-				BindingFlags.Instance | BindingFlags.Public,
-				null,
-				null,
-				null);
-
-			return converter;
-		}
-
-		private class UnionConverterInner<TItem1, TItem2> : JsonConverter<Union<TItem1, TItem2>>
-		{
-			// TODO - Implement properly as we need to figure out the possible types and handle accordingly
-			public override Union<TItem1, TItem2>? Read(ref Utf8JsonReader reader, Type typeToConvert,
-				JsonSerializerOptions options) => null;
-
-			public override void Write(Utf8JsonWriter writer, Union<TItem1, TItem2> value,
-				JsonSerializerOptions options)
-			{
-				if (value.Item1 is not null)
-				{
-					JsonSerializer.Serialize(writer, value.Item1, value.Item1.GetType(), options);
-					return;
-				}
-
-				if (value.Item2 is not null)
-				{
-					JsonSerializer.Serialize(writer, value.Item2, value.Item2.GetType(), options);
-					return;
-				}
-
-				throw new SerializationException("Invalid union type");
-			}
-		}
-	}
-
 	public class DictionaryConverter : JsonConverterFactory
 	{
 		public override bool CanConvert(Type typeToConvert)
@@ -62,9 +14,9 @@ namespace Nest
 			if (!typeToConvert.IsGenericType)
 				return false;
 
-			return (typeToConvert.GetGenericTypeDefinition() == typeof(Dictionary<,>)) &
-			       typeToConvert.GetGenericArguments()[0].GetInterfaces()
-				       .Any(x => x.UnderlyingSystemType == typeof(IDictionaryKey));
+			return typeToConvert.GetGenericTypeDefinition() == typeof(Dictionary<,>);
+			// TODO - This works for serialisation but not for deserialisation
+			//& typeToConvert.GetGenericArguments()[0].GetInterfaces().Any(x => x.UnderlyingSystemType == typeof(IDictionaryKey));
 		}
 
 		public override JsonConverter CreateConverter(
@@ -104,46 +56,48 @@ namespace Nest
 			public override Dictionary<TKey, TValue> Read(
 				ref Utf8JsonReader reader,
 				Type typeToConvert,
-				JsonSerializerOptions options) =>
-				//if (reader.TokenType != JsonTokenType.StartObject)
-				//{
-				//	throw new JsonException();
-				//}
-				//var dictionary = new Dictionary<TKey, TValue>();
-				//while (reader.Read())
-				//{
-				//	if (reader.TokenType == JsonTokenType.EndObject)
-				//	{
-				//		return dictionary;
-				//	}
-				//	// Get the key.
-				//	if (reader.TokenType != JsonTokenType.PropertyName)
-				//	{
-				//		throw new JsonException();
-				//	}
-				//	var propertyName = reader.GetString();
-				//	// For performance, parse with ignoreCase:false first.
-				//	if (!Enum.TryParse(propertyName, ignoreCase: false, out TKey key) &&
-				//		!Enum.TryParse(propertyName, ignoreCase: true, out key))
-				//	{
-				//		throw new JsonException(
-				//			$"Unable to convert \"{propertyName}\" to Enum \"{_keyType}\".");
-				//	}
-				//	// Get the value.
-				//	TValue value;
-				//	if (_valueConverter != null)
-				//	{
-				//		reader.Read();
-				//		value = _valueConverter.Read(ref reader, _valueType, options);
-				//	}
-				//	else
-				//	{
-				//		value = JsonSerializer.Deserialize<TValue>(ref reader, options);
-				//	}
-				//	// Add to dictionary.
-				//	dictionary.Add(key, value);
-				//}
-				throw new JsonException();
+				JsonSerializerOptions options)
+			{
+				if (reader.TokenType != JsonTokenType.StartObject) throw new JsonException();
+				var dictionary = new Dictionary<TKey, TValue>();
+				while (reader.Read())
+				{
+					if (reader.TokenType == JsonTokenType.EndObject) return dictionary;
+					// Get the key.
+					if (reader.TokenType != JsonTokenType.PropertyName) throw new JsonException();
+					var propertyName = reader.GetString();
+
+					if (propertyName is null)
+						throw new SerializationException("Oh no!"); // TODO handle this better
+
+					TKey key;
+					if (typeof(TKey) == typeof(string))
+						key = (TKey)Activator.CreateInstance(typeof(string), propertyName.ToCharArray());
+					else
+					{
+						key = (TKey)Activator.CreateInstance(typeof(TKey),
+							BindingFlags.Instance | BindingFlags.Public,
+							null,
+							new object[] {propertyName},
+							null);
+					}
+
+					// Get the value.
+					TValue value;
+					if (_valueConverter != null)
+					{
+						reader.Read();
+						value = _valueConverter.Read(ref reader, _valueType, options);
+					}
+					else
+						value = JsonSerializer.Deserialize<TValue>(ref reader, options);
+
+					// Add to dictionary.
+					dictionary.Add(key, value);
+				}
+
+				return dictionary;
+			}
 
 			public override void Write(
 				Utf8JsonWriter writer,
@@ -157,7 +111,12 @@ namespace Nest
 					if (item.Key is null)
 						throw new SerializationException("Null key");
 
-					var propertyName = ((IDictionaryKey)item.Key).Key;
+					var propertyName = item.Key switch
+					{
+						string stringKey => stringKey,
+						IDictionaryKey key => key.Key,
+						_ => throw new SerializationException("Must implement IDictionaryKey")
+					};
 
 					writer.WritePropertyName
 						(options.PropertyNamingPolicy?.ConvertName(propertyName) ?? propertyName);

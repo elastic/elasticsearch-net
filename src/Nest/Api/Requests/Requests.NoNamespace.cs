@@ -24,7 +24,7 @@ namespace Nest
 		{
 			// TODO: Review perf
 			using var ms = new MemoryStream();
-			sourceSerializer.Serialize(Document, ms);
+			sourceSerializer.Serialize(Document, ms); // TODO - This needs to camelCase
 			ms.Position = 0;
 			using var
 				document = JsonDocument
