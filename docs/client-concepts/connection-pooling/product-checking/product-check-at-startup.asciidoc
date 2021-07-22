@@ -18,14 +18,15 @@ please modify the original csharp file found at the link and submit the PR with 
 Since v7.14.0, the client performs a required product check before the first call.
 This pre-flight product check allows the client to establish the version of Elasticsearch that it is communicating with.
 
-The product check requires one additional HTTP request to be sent to the server as part of the request pipeline before
-the main API call is sent. In most cases, this will succeed during the very first API call that the client sends.
+The product check generally requires a single additional HTTP request to be sent to the server as part of the request pipeline before
+the first API call is sent. In most cases, this will succeed during the first API call that the client sends.
 Once the product check succeeds, no further product check HTTP requests are sent for subsequent API calls.
 
 [source,csharp]
 ----
 var audit = new Auditor(() => VirtualClusterWith
     .Nodes(1)
+    .ProductCheck(r => r.SucceedAlways())
     .ClientCalls(r => r.SucceedAlways())
     .StaticConnectionPool()
     .Settings(s => s.DisablePing())
@@ -52,7 +53,7 @@ Here's an example with a single node cluster which fails for some reason during 
 ----
 var audit = new Auditor(() => VirtualClusterWith
     .Nodes(1, productCheckAlwaysSucceeds: false)
-    .ProductCheck(r => r.Fails(TimesHelper.Once))
+    .ProductCheck(r => r.Fails(TimesHelper.Once, 429))
     .ProductCheck(r => r.SucceedAlways())
     .ClientCalls(r => r.SucceedAlways())
     .StaticConnectionPool()
@@ -62,31 +63,30 @@ var audit = new Auditor(() => VirtualClusterWith
 audit = await audit.TraceCalls(skipProductCheck: false,
     new ClientCall() {
         { ProductCheckOnStartup },
-        { ProductCheckFailure, 9200 }, <1>
-        { HealthyResponse, 9200 } <2>
+        { ProductCheckFailure, 9200 } <1>
     },
     new ClientCall() {
         { ProductCheckOnStartup },
-        { ProductCheckSuccess, 9200 }, <3>
-        { HealthyResponse, 9200 }
+        { ProductCheckSuccess, 9200 }, <2>
+        { HealthyResponse, 9200 } <3>
     },
     new ClientCall() {
         { HealthyResponse, 9200 } <4>
     }
 );
 ----
-<1> as this is the first call, the product check is executed, but fails
-<2> the actual request is still sent and succeeds
-<3> as the previous product check failed, it runs again on the second call
+<1> as this is the first call, the product check is executed, but times out
+<2> as the previous product check failed, it runs again on the second call and this time it succeeds
+<3> this time the main API call is sent and also succeeds
 <4> subsequent calls no longer perform product check
 
-Here's an example with a three node cluster which fails for some reason during the first and second product check attempts. 
+Here's an example with a three node cluster which fails (due to too many requests) during the first and second product check attempts. 
 
 [source,csharp]
 ----
 var audit = new Auditor(() => VirtualClusterWith
     .Nodes(3, productCheckAlwaysSucceeds: false)
-    .ProductCheck(r => r.FailAlways())
+    .ProductCheck(r => r.FailAlways(429))
     .ProductCheck(r => r.OnPort(9202).SucceedAlways())
     .ClientCalls(r => r.SucceedAlways())
     .StaticConnectionPool()

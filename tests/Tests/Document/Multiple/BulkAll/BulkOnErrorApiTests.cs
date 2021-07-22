@@ -125,7 +125,7 @@ namespace Tests.Document.Multiple.BulkAll
 				handle.WaitOne(TimeSpan.FromSeconds(60));
 				seenPages.Should().Be(0);
 				var clientException = ex.Should().NotBeNull().And.BeOfType<ElasticsearchClientException>().Subject;
-				clientException.Message.Should().StartWith("BulkAll halted after attempted bulk failed over all the active nodes");
+				clientException.Message.Should().StartWith("BulkAll halted after failed product check");
 			}
 		}
 

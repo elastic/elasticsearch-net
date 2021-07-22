@@ -49,9 +49,6 @@ namespace Elasticsearch.Net
 		public virtual IReadOnlyCollection<Node> Nodes => InternalNodes;
 
 		/// <inheritdoc />
-		public ProductCheckStatus ProductCheckStatus { get; set; } = ProductCheckStatus.NotChecked;
-
-		/// <inheritdoc />
 		public bool SniffedOnStartup { get; set; }
 
 		/// <inheritdoc />
@@ -79,6 +76,9 @@ namespace Elasticsearch.Net
 		protected List<Node> InternalNodes { get; set; }
 		protected Random Random { get; }
 		protected bool Randomize { get; }
+
+		/// <inheritdoc />
+		ProductCheckStatus IConnectionPool.ProductCheckStatus { get; set; } = ProductCheckStatus.NotChecked;
 
 		/// <summary>
 		/// Creates a view of all the live nodes with changing starting positions that wraps over on each call
