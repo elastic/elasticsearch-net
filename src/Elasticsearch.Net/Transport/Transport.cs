@@ -91,6 +91,12 @@ namespace Elasticsearch.Net
 							pipeline.SniffOnConnectionFailure();
 						}
 					}
+					catch (PipelineException pipelineException) when (pipelineException.FailureReason == PipelineFailure.FailedProductCheck)
+					{
+						// We don't mark nodes dead in this situation
+						HandlePipelineException(ref response, pipelineException, pipeline, node, seenExceptions, false);
+						break;
+					}
 					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
 					{
 						HandlePipelineException(ref response, pipelineException, pipeline, node, seenExceptions);
@@ -148,6 +154,12 @@ namespace Elasticsearch.Net
 						await pipeline.SniffOnConnectionFailureAsync(cancellationToken).ConfigureAwait(false);
 					}
 				}
+				catch (PipelineException pipelineException) when (pipelineException.FailureReason == PipelineFailure.FailedProductCheck)
+				{
+					// We don't mark nodes dead in this situation
+					HandlePipelineException(ref response, pipelineException, pipeline, node, seenExceptions, false);
+					break;
+				}
 				catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
 				{
 					HandlePipelineException(ref response, pipelineException, pipeline, node, seenExceptions);
@@ -183,12 +195,12 @@ namespace Elasticsearch.Net
 		}
 
 		private static void HandlePipelineException<TResponse>(
-			ref TResponse response, PipelineException ex, IRequestPipeline pipeline, Node node, List<PipelineException> seenExceptions
+			ref TResponse response, PipelineException ex, IRequestPipeline pipeline, Node node, List<PipelineException> seenExceptions, bool markDead = true
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			if (response == null) response = ex.Response as TResponse;
-			pipeline.MarkDead(node);
+			response ??= ex.Response as TResponse;
+			if (markDead) pipeline.MarkDead(node);
 			seenExceptions.Add(ex);
 		}
 

@@ -28,9 +28,6 @@ namespace Elasticsearch.Net
 		public IReadOnlyCollection<Node> Nodes { get; }
 
 		/// <inheritdoc />
-		public ProductCheckStatus ProductCheckStatus { get; set; } = ProductCheckStatus.NotChecked;
-
-		/// <inheritdoc />
 		public bool SniffedOnStartup
 		{
 			get => true;
@@ -45,6 +42,9 @@ namespace Elasticsearch.Net
 
 		/// <inheritdoc />
 		public bool UsingSsl { get; }
+
+		/// <inheritdoc />
+		ProductCheckStatus IConnectionPool.ProductCheckStatus { get; set; } = ProductCheckStatus.NotChecked;
 
 		/// <inheritdoc />
 		public IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null) => Nodes;

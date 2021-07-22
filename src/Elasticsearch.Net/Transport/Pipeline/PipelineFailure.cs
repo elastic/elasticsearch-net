@@ -15,6 +15,7 @@ namespace Elasticsearch.Net
 		MaxRetriesReached,
 		Unexpected,
 		BadRequest,
-		NoNodesAttempted
+		NoNodesAttempted,
+		FailedProductCheck
 	}
 }
