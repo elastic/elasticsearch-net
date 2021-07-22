@@ -27,14 +27,24 @@ namespace Elasticsearch.Net
 			int? statusCode,
 			IEnumerable<string> warnings,
 			Stream responseStream,
-			string mimeType = null,
-			string productName = null
+			string mimeType = null
+		) where TResponse : class, IElasticsearchResponse, new() =>
+			ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, null, mimeType);
+
+		public static TResponse ToResponse<TResponse>(
+			RequestData requestData,
+			Exception ex,
+			int? statusCode,
+			IEnumerable<string> warnings,
+			Stream responseStream,
+			string productName,
+			string mimeType
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
 
-			var details = Initialize(requestData, ex, statusCode, warnings, mimeType, productName);
+			var details = Initialize(requestData, ex, statusCode, warnings, productName, mimeType);
 
 			//TODO take ex and (responseStream == Stream.Null) into account might not need to flow to SetBody in that case
 
@@ -52,14 +62,26 @@ namespace Elasticsearch.Net
 			return response;
 		}
 
-		public static async Task<TResponse> ToResponseAsync<TResponse>(
+		public static Task<TResponse> ToResponseAsync<TResponse>(
 			RequestData requestData,
 			Exception ex,
 			int? statusCode,
 			IEnumerable<string> warnings,
 			Stream responseStream,
 			string mimeType = null,
-			string productName = null,
+			CancellationToken cancellationToken = default
+		)
+			where TResponse : class, IElasticsearchResponse, new() => ToResponseAsync<TResponse>(requestData, ex, statusCode, warnings,
+			responseStream, null, mimeType, cancellationToken);
+
+		public static async Task<TResponse> ToResponseAsync<TResponse>(
+			RequestData requestData,
+			Exception ex,
+			int? statusCode,
+			IEnumerable<string> warnings,
+			Stream responseStream,
+			string productName,
+			string mimeType,
 			CancellationToken cancellationToken = default
 		)
 			where TResponse : class, IElasticsearchResponse, new()
@@ -68,7 +90,7 @@ namespace Elasticsearch.Net
 
 			//TODO take ex and (responseStream == Stream.Null) into account might not need to flow to SetBody in that case
 
-			var details = Initialize(requestData, ex, statusCode, warnings, mimeType, productName);
+			var details = Initialize(requestData, ex, statusCode, warnings, productName, mimeType);
 
 			TResponse response = null;
 
@@ -95,8 +117,8 @@ namespace Elasticsearch.Net
 			Exception exception,
 			int? statusCode,
 			IEnumerable<string> warnings,
-			string mimeType,
-			string productName
+			string productName,
+			string mimeType
 		)
 		{
 			var success = false;
@@ -106,10 +128,8 @@ namespace Elasticsearch.Net
 				if (allowedStatusCodes.Contains(-1) || allowedStatusCodes.Contains(statusCode.Value))
 					success = true;
 				else
-				{
 					success = requestData.ConnectionSettings
 						.StatusCodeToResponseSuccess(requestData.Method, statusCode.Value);
-				}
 			}
 
 			// We don't validate the content-type (MIME type) for HEAD requests or responses that have no content (204 status code).
@@ -188,10 +208,8 @@ namespace Elasticsearch.Net
 
 				var serializer = requestData.ConnectionSettings.RequestResponseSerializer;
 				if (requestData.CustomResponseBuilder != null)
-				{
 					return await requestData.CustomResponseBuilder.DeserializeResponseAsync(serializer, details, responseStream, cancellationToken)
 						.ConfigureAwait(false) as TResponse;
-				}
 
 				return !RequestData.ValidResponseContentType(requestData.Accept, mimeType)
 					? null

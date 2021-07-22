@@ -50,18 +50,12 @@ namespace Elasticsearch.Net
 				var data = requestData.PostData;
 
 				if (data != null)
-				{
 					using (var stream = request.GetRequestStream())
-					{
 						if (requestData.HttpCompression)
-						{
 							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
 								data.Write(zipStream, requestData.ConnectionSettings);
-						}
 						else
 							data.Write(stream, requestData.ConnectionSettings);
-					}
-				}
 				requestData.MadeItToResponse = true;
 
 				if (requestData.TcpStats)
@@ -94,8 +88,8 @@ namespace Elasticsearch.Net
 			}
 
 			responseStream ??= Stream.Null;
-			var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType,
-				productNames?.FirstOrDefault());
+			var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream,
+				productNames?.FirstOrDefault(), mimeType);
 
 			// set TCP and threadpool stats on the response here so that in the event the request fails after the point of
 			// gathering stats, they are still exposed on the call details. Ideally these would be set inside ResponseBuilder.ToResponse,
@@ -134,15 +128,11 @@ namespace Elasticsearch.Net
 						unregisterWaitHandle = RegisterApmTaskTimeout(apmGetRequestStreamTask, request, requestData);
 
 						using (var stream = await apmGetRequestStreamTask.ConfigureAwait(false))
-						{
 							if (requestData.HttpCompression)
-							{
 								using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
 									await data.WriteAsync(zipStream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
-							}
 							else
 								await data.WriteAsync(stream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
-						}
 						unregisterWaitHandle?.Invoke();
 					}
 					requestData.MadeItToResponse = true;
@@ -183,7 +173,7 @@ namespace Elasticsearch.Net
 			}
 			responseStream ??= Stream.Null;
 			var response = await ResponseBuilder.ToResponseAsync<TResponse>
-					(requestData, ex, statusCode, warnings, responseStream, mimeType, productNames?.FirstOrDefault(), cancellationToken)
+					(requestData, ex, statusCode, warnings, responseStream, productNames?.FirstOrDefault(), mimeType, cancellationToken)
 				.ConfigureAwait(false);
 
 			// set TCP and thread pool stats on the response here so that in the event the request fails after the point of
@@ -329,10 +319,8 @@ namespace Elasticsearch.Net
 			if (!string.IsNullOrEmpty(requestData.Uri.UserInfo))
 				userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
 			else if (requestData.BasicAuthorizationCredentials != null)
-			{
 				userInfo =
 					$"{requestData.BasicAuthorizationCredentials.Username}:{requestData.BasicAuthorizationCredentials.Password.CreateString()}";
-			}
 
 			if (string.IsNullOrWhiteSpace(userInfo))
 				return;
