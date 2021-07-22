@@ -40,23 +40,22 @@ namespace Elasticsearch.Net
 	/// <summary> The default IConnection implementation. Uses <see cref="HttpClient" />.</summary>
 	public class HttpConnection : IConnection
 	{
-		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.HttpConnection.SourceName);
-
 		private static readonly string MissingConnectionLimitMethodError =
 			$"Your target platform does not support {nameof(ConnectionConfiguration.ConnectionLimit)}"
 			+ $" please set {nameof(ConnectionConfiguration.ConnectionLimit)} to -1 on your connection configuration/settings."
 			+ $" this will cause the {nameof(HttpClientHandler.MaxConnectionsPerServer)} not to be set on {nameof(HttpClientHandler)}";
 
-		private RequestDataHttpClientFactory HttpClientFactory { get; }
-
 		[Obsolete("HttpConnection now uses a HttpClientFactory implementation to manage HttpClient and HttpMessageHandler instances. "
 			+ "This property is no longer used and will be removed in the next major release")]
 		protected readonly ConcurrentDictionary<int, HttpClient> Clients = new ConcurrentDictionary<int, HttpClient>();
 
+		public HttpConnection() => HttpClientFactory = new RequestDataHttpClientFactory(r => CreateHttpClientHandler(r));
+
 		public int InUseHandlers => HttpClientFactory.InUseHandlers;
 		public int RemovedHandlers => HttpClientFactory.RemovedHandlers;
+		private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(DiagnosticSources.HttpConnection.SourceName);
 
-		public HttpConnection() => HttpClientFactory = new RequestDataHttpClientFactory(r => CreateHttpClientHandler(r));
+		private RequestDataHttpClientFactory HttpClientFactory { get; }
 
 		public virtual TResponse Request<TResponse>(RequestData requestData)
 			where TResponse : class, IElasticsearchResponse, new()
@@ -80,7 +79,7 @@ namespace Elasticsearch.Net
 				if (requestData.PostData != null)
 					SetContent(requestMessage, requestData);
 
-				using(requestMessage?.Content ?? (IDisposable)Stream.Null)
+				using (requestMessage?.Content ?? (IDisposable)Stream.Null)
 				using (var d = DiagnosticSource.Diagnose<RequestData, int?>(DiagnosticSources.HttpConnection.SendAndReceiveHeaders, requestData))
 				{
 					if (requestData.TcpStats)
@@ -113,10 +112,11 @@ namespace Elasticsearch.Net
 			{
 				ex = e;
 			}
-			using(receive)
+			using (receive)
 			using (responseStream ??= Stream.Null)
 			{
-				var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType, productNames?.FirstOrDefault());
+				var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream,
+					productNames?.FirstOrDefault(), mimeType);
 
 				// set TCP and threadpool stats on the response here so that in the event the request fails after the point of
 				// gathering stats, they are still exposed on the call details. Ideally these would be set inside ResponseBuilder.ToResponse,
@@ -150,7 +150,7 @@ namespace Elasticsearch.Net
 				if (requestData.PostData != null)
 					await SetContentAsync(requestMessage, requestData, cancellationToken).ConfigureAwait(false);
 
-				using(requestMessage?.Content ?? (IDisposable)Stream.Null)
+				using (requestMessage?.Content ?? (IDisposable)Stream.Null)
 				using (var d = DiagnosticSource.Diagnose<RequestData, int?>(DiagnosticSources.HttpConnection.SendAndReceiveHeaders, requestData))
 				{
 					if (requestData.TcpStats)
@@ -159,7 +159,8 @@ namespace Elasticsearch.Net
 					if (requestData.ThreadPoolStats)
 						threadPoolStats = ThreadPoolStats.GetStats();
 
-					responseMessage = await client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+					responseMessage = await client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+						.ConfigureAwait(false);
 					statusCode = (int)responseMessage.StatusCode;
 					d.EndState = statusCode;
 				}
@@ -187,7 +188,7 @@ namespace Elasticsearch.Net
 			using (responseStream ??= Stream.Null)
 			{
 				var response = await ResponseBuilder.ToResponseAsync<TResponse>
-						(requestData, ex, statusCode, warnings, responseStream, mimeType, productNames?.FirstOrDefault(), cancellationToken)
+						(requestData, ex, statusCode, warnings, responseStream, productNames?.FirstOrDefault(), mimeType, cancellationToken)
 					.ConfigureAwait(false);
 
 				// set TCP and thread pool stats on the response here so that in the event the request fails after the point of
@@ -209,7 +210,6 @@ namespace Elasticsearch.Net
 
 			// same limit as desktop clr
 			if (requestData.ConnectionSettings.ConnectionLimit > 0)
-			{
 				try
 				{
 					handler.MaxConnectionsPerServer = requestData.ConnectionSettings.ConnectionLimit;
@@ -222,7 +222,6 @@ namespace Elasticsearch.Net
 				{
 					throw new Exception(MissingConnectionLimitMethodError, e);
 				}
-			}
 
 			if (!requestData.ProxyAddress.IsNullOrEmpty())
 			{
@@ -291,7 +290,6 @@ namespace Elasticsearch.Net
 
 			requestMessage.Headers.Authorization = new AuthenticationHeaderValue("ApiKey", apiKey);
 			return true;
-
 		}
 
 		// TODO - make private in 8.0 and only expose SetAuthenticationIfNeeded
@@ -401,7 +399,7 @@ namespace Elasticsearch.Net
 						await stream.DisposeAsync().ConfigureAwait(false);
 
 #else
-						stream.Dispose();
+					stream.Dispose();
 #endif
 				}
 				else
