@@ -19,7 +19,7 @@ namespace Elasticsearch.Net
 
 		public bool Recoverable =>
 			FailureReason is PipelineFailure.BadRequest or PipelineFailure.BadResponse or PipelineFailure.PingFailure;
-
+		
 		public IElasticsearchResponse Response { get; internal set; }
 
 		private static string GetMessage(PipelineFailure failure)
@@ -37,6 +37,8 @@ namespace Elasticsearch.Net
 				case PipelineFailure.MaxRetriesReached: return "The call was retried the configured maximum amount of times";
 				case PipelineFailure.NoNodesAttempted:
 					return "No nodes were attempted, this can happen when a node predicate does not match any nodes";
+				case PipelineFailure.FailedProductCheck:
+					return RequestPipeline.ProductCheckTransientErrorWarning;
 				case PipelineFailure.Unexpected:
 				default:
 					return "An unexpected error occurred. Try checking the original exception for more information.";

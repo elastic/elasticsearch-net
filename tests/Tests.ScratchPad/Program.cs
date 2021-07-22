@@ -18,49 +18,10 @@ namespace Tests.ScratchPad
 {
 	public class Program
 	{
-		private class ListenerObserver : IObserver<DiagnosticListener>
-		{
-			public void OnCompleted() => Console.WriteLine("Completed");
-
-			public void OnError(Exception error) => Console.Error.WriteLine(error.Message);
-
-			public void OnNext(DiagnosticListener value)
-			{
-
-				var client = new ElasticClient();
-
-				client.Search<Project>();
-
-				client.LowLevel.Search<SearchResponse<Project>>(PostData.Serializable(new SearchRequest()));
-
-
-				void WriteToConsole<T>(string eventName, T data)
-				{
-					var a = Activity.Current;
-					Console.WriteLine($"{eventName?.PadRight(30)} {a.Id?.PadRight(32)} {a.ParentId?.PadRight(32)} {data?.ToString().PadRight(10)}");
-				}
-				if (value.Name == DiagnosticSources.AuditTrailEvents.SourceName)
-					value.Subscribe(new AuditDiagnosticObserver(v => WriteToConsole(v.Key, v.Value)));
-
-				if (value.Name == DiagnosticSources.RequestPipeline.SourceName)
-					value.Subscribe(new RequestPipelineDiagnosticObserver(
-						v => WriteToConsole(v.Key, v.Value),
-						v => WriteToConsole(v.Key, v.Value))
-					);
-
-				if (value.Name == DiagnosticSources.HttpConnection.SourceName)
-					value.Subscribe(new HttpConnectionDiagnosticObserver(
-						v => WriteToConsole(v.Key, v.Value),
-						v => WriteToConsole(v.Key, v.Value)
-					));
-
-				if (value.Name == DiagnosticSources.Serializer.SourceName)
-					value.Subscribe(new SerializerDiagnosticObserver(v => WriteToConsole(v.Key, v.Value)));
-			}
-		}
-
 		private static readonly IList<Project> Projects = Project.Generator.Clone().Generate(10000);
-		private static readonly byte[] Response = TestClient.DefaultInMemoryClient.ConnectionSettings.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(Projects));
+
+		private static readonly byte[] Response =
+			TestClient.DefaultInMemoryClient.ConnectionSettings.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(Projects));
 
 		private static readonly IElasticClient Client =
 			new ElasticClient(new ConnectionSettings(new InMemoryConnection(Response, 200, null, null))
@@ -85,7 +46,6 @@ namespace Tests.ScratchPad
 			}
 		}
 
-
 		private static object BulkItemResponse(Project project) => new
 		{
 			index = new
@@ -94,12 +54,7 @@ namespace Tests.ScratchPad
 				_type = "_doc",
 				_id = project.Name,
 				_version = 1,
-				_shards = new
-				{
-					total = 2,
-					successful = 1,
-					failed = 0
-				},
+				_shards = new { total = 2, successful = 1, failed = 0 },
 				created = true,
 				status = 201
 			}
@@ -128,6 +83,47 @@ namespace Tests.ScratchPad
 			var runner = new TRun { IsNotBenchmark = true };
 			runner.GlobalSetup();
 			runner.RunCreateOnce();
+		}
+
+		private class ListenerObserver : IObserver<DiagnosticListener>
+		{
+			public void OnCompleted() => Console.WriteLine("Completed");
+
+			public void OnError(Exception error) => Console.Error.WriteLine(error.Message);
+
+			public void OnNext(DiagnosticListener value)
+			{
+				var client = new ElasticClient();
+
+				client.Search<Project>();
+
+				client.LowLevel.Search<SearchResponse<Project>>(PostData.Serializable(new SearchRequest()));
+
+
+				void WriteToConsole<T>(string eventName, T data)
+				{
+					var a = Activity.Current;
+					Console.WriteLine($"{eventName?.PadRight(30)} {a.Id?.PadRight(32)} {a.ParentId?.PadRight(32)} {data?.ToString().PadRight(10)}");
+				}
+
+				if (value.Name == DiagnosticSources.AuditTrailEvents.SourceName)
+					value.Subscribe(new AuditDiagnosticObserver(v => WriteToConsole(v.Key, v.Value)));
+
+				if (value.Name == DiagnosticSources.RequestPipeline.SourceName)
+					value.Subscribe(new RequestPipelineDiagnosticObserver(
+						v => WriteToConsole(v.Key, v.Value),
+						v => WriteToConsole(v.Key, v.Value))
+					);
+
+				if (value.Name == DiagnosticSources.HttpConnection.SourceName)
+					value.Subscribe(new HttpConnectionDiagnosticObserver(
+						v => WriteToConsole(v.Key, v.Value),
+						v => WriteToConsole(v.Key, v.Value)
+					));
+
+				if (value.Name == DiagnosticSources.Serializer.SourceName)
+					value.Subscribe(new SerializerDiagnosticObserver(v => WriteToConsole(v.Key, v.Value)));
+			}
 		}
 	}
 }
