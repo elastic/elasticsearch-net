@@ -7,13 +7,38 @@ using Elastic.Transport;
 
 namespace Nest
 {
-	[DebuggerDisplay("{DebugDisplay,nq}")]
+	// TODO - This is a prototype
+	public struct FieldSettings
+	{
+		public double? Boost { get; set; }
+		public string? Format { get; set; }
+	}
+
+	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public class Field : IEquatable<Field>, IUrlParameter
 	{
 		private readonly object _comparisonValue;
 		private readonly Type _type;
 
-		public Field(string name, double? boost = null, string format = null)
+		// TODO - Future idea
+		public Field(string name, FieldSettings settings)
+		{
+			name.ThrowIfNullOrEmpty(nameof(name));
+
+			// todo  -throw is no settings
+			Name = ParseFieldName(name, out var b);
+			Boost = b ?? settings.Boost;
+			Format = settings.Format;
+			_comparisonValue = Name;
+		}
+
+		public Field(string name) : this(name, null, null) { }
+
+		public Field(string name, double boost) : this(name, boost, null) { }
+
+		public Field(string name, string format) : this(name, null, format) { }
+
+		public Field(string name, double? boost, string? format)
 		{
 			name.ThrowIfNullOrEmpty(nameof(name));
 			Name = ParseFieldName(name, out var b);
@@ -52,9 +77,8 @@ namespace Nest
 		/// <remarks>
 		///     Can be used only for Doc Value Fields Elasticsearch 6.4.0+
 		/// </remarks>
-		public string Format { get; set; }
+		public string? Format { get; set; }
 
-		// TODO: Rename to CacheableExpression in 8.0.0
 		public bool CachableExpression { get; }
 
 		/// <summary>

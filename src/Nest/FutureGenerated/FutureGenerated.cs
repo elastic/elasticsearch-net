@@ -36,8 +36,12 @@ namespace Nest
 	{
 	}
 
+	[JsonConverter(typeof(StringAliasConverter<AggregateName>))]
 	public class AggregateName
 	{
+		public AggregateName(string value) => Value = value;
+
+		internal string Value { get; }
 	}
 
 	public class Distance

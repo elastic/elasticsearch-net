@@ -32,11 +32,13 @@ namespace Nest
 				Converters =
 				{
 					new ProxyRequestConverterFactory(settings),
+					new FieldConverterFactory(settings),
 					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
 					new ConvertAsConverterFactory(settings),
 					new DictionaryConverter(),
 					new UnionConverter()
-				}
+				},
+				PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 			};
 
 		private JsonSerializerOptions Options { get; }
