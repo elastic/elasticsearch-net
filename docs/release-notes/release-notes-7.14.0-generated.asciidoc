@@ -18,6 +18,7 @@
 [[enhancement]]
 === New Features
 
+- * Pre-flight product check https://github.com/elastic/elasticsearch-net/pull/5728[#5728] 
 - * NameValueCollection.ToQueryString performance optimisation https://github.com/elastic/elasticsearch-net/pull/5731[#5731]  (issue: https://github.com/elastic/elasticsearch-net/issues/4952[#4952])
 - * Change default IMemoryStreamFactory https://github.com/elastic/elasticsearch-net/pull/5740[#5740] 
 - * Add readonly property to FS repository settings https://github.com/elastic/elasticsearch-net/pull/5755[#5755]  (issue: https://github.com/elastic/elasticsearch-net/issues/5753[#5753])
