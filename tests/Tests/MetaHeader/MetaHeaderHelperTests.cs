@@ -22,12 +22,7 @@ namespace Tests.MetaHeader
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 
 			// We can avoid specifying response bodies and this still exercises all requests.
-			var responses = new List<(int, string)>
-			{
-				(200, "{}"),
-				(200, "{}"),
-				(200, "{}")
-			};
+			var responses = new List<(int, string)> { (200, "{}"), (200, "{}"), (200, "{}") };
 
 			var connection = new TestableInMemoryConnection(a =>
 				a.RequestMetaData.Single(x => x.Key == "helper").Value.Should().Be("b"), responses);
@@ -63,9 +58,12 @@ namespace Tests.MetaHeader
 
 			var responses = new List<(int, string)>
 			{
-				(200, "{\"_scroll_id\":\"SCROLLID\",\"took\":0,\"timed_out\":false,\"_shards\":{\"total\":1,\"successful\":1,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":{\"value\":0,\"relation\":\"eq\"},\"max_score\":null,\"hits\":[]}}"),
-				(200, "{\"_scroll_id\":\"SCROLLID\",\"took\":0,\"timed_out\":false,\"_shards\":{\"total\":1,\"successful\":1,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":{\"value\":1,\"relation\":\"eq\"},\"max_score\":null,\"hits\":[{\"_index\":\"index-a\",\"_type\":\"_doc\",\"_id\":\"ISXw0HYBAJbnbq7-Utq6\",\"_score\":null,\"_source\":{\"name\": \"name-a\"},\"sort\":[0]}]}}"),
-				(200, "{\"_scroll_id\":\"SCROLLID\",\"took\":1,\"timed_out\":false,\"terminated_early\":false,\"_shards\":{\"total\":1,\"successful\":1,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":{\"value\":1,\"relation\":\"eq\"},\"max_score\":null,\"hits\":[]}}")
+				(200,
+					"{\"_scroll_id\":\"SCROLLID\",\"took\":0,\"timed_out\":false,\"_shards\":{\"total\":1,\"successful\":1,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":{\"value\":0,\"relation\":\"eq\"},\"max_score\":null,\"hits\":[]}}"),
+				(200,
+					"{\"_scroll_id\":\"SCROLLID\",\"took\":0,\"timed_out\":false,\"_shards\":{\"total\":1,\"successful\":1,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":{\"value\":1,\"relation\":\"eq\"},\"max_score\":null,\"hits\":[{\"_index\":\"index-a\",\"_type\":\"_doc\",\"_id\":\"ISXw0HYBAJbnbq7-Utq6\",\"_score\":null,\"_source\":{\"name\": \"name-a\"},\"sort\":[0]}]}}"),
+				(200,
+					"{\"_scroll_id\":\"SCROLLID\",\"took\":1,\"timed_out\":false,\"terminated_early\":false,\"_shards\":{\"total\":1,\"successful\":1,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":{\"value\":1,\"relation\":\"eq\"},\"max_score\":null,\"hits\":[]}}")
 			};
 
 			var connection = new TestableInMemoryConnection(a =>
@@ -88,12 +86,17 @@ namespace Tests.MetaHeader
 			var responses = new List<(int, string)>
 			{
 				(404, "{}"),
-				(200, "{\"index-a\":{\"aliases\":{},\"mappings\":{\"properties\":{\"name\":{\"type\":\"keyword\"}}},\"settings\":{\"index\":{\"routing\":{\"allocation\":{\"include\":{\"_tier_preference\":\"data_content\"}}},\"number_of_shards\":\"1\",\"provided_name\":\"index-a\",\"creation_date\":\"1609823178261\",\"number_of_replicas\":\"1\",\"uuid\":\"2R4H1VfTR5imfmIPkNIIxw\",\"version\":{\"created\":\"7100099\"}}}}}"),
+				(200,
+					"{\"index-a\":{\"aliases\":{},\"mappings\":{\"properties\":{\"name\":{\"type\":\"keyword\"}}},\"settings\":{\"index\":{\"routing\":{\"allocation\":{\"include\":{\"_tier_preference\":\"data_content\"}}},\"number_of_shards\":\"1\",\"provided_name\":\"index-a\",\"creation_date\":\"1609823178261\",\"number_of_replicas\":\"1\",\"uuid\":\"2R4H1VfTR5imfmIPkNIIxw\",\"version\":{\"created\":\"7100099\"}}}}}"),
 				(200, "{\"acknowledged\":true,\"shards_acknowledged\":true,\"index\":\"index-b\"}"),
-				(200, "{\"_scroll_id\":\"SCROLLID\",\"took\":0,\"timed_out\":false,\"_shards\":{\"total\":1,\"successful\":1,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":{\"value\":0,\"relation\":\"eq\"},\"max_score\":null,\"hits\":[]}}"),
-				(200, "{\"_scroll_id\":\"SCROLLID\",\"took\":0,\"timed_out\":false,\"_shards\":{\"total\":1,\"successful\":1,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":{\"value\":1,\"relation\":\"eq\"},\"max_score\":null,\"hits\":[{\"_index\":\"index-a\",\"_type\":\"_doc\",\"_id\":\"ISXw0HYBAJbnbq7-Utq6\",\"_score\":null,\"_source\":{\"name\": \"name-a\"},\"sort\":[0]}]}}"),
-				(200, "{\"_scroll_id\":\"SCROLLID\",\"took\":1,\"timed_out\":false,\"terminated_early\":false,\"_shards\":{\"total\":1,\"successful\":1,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":{\"value\":1,\"relation\":\"eq\"},\"max_score\":null,\"hits\":[]}}"),
-				(200, "{\"took\":4,\"errors\":false,\"items\":[{\"index\":{\"_index\":\"index-b\",\"_type\":\"_doc\",\"_id\":\"ISXw0HYBAJbnbq7-Utq6\",\"_version\":1,\"result\":\"created\",\"_shards\":{\"total\":2,\"successful\":1,\"failed\":0},\"_seq_no\":0,\"_primary_term\":1,\"status\":201}}]}")
+				(200,
+					"{\"_scroll_id\":\"SCROLLID\",\"took\":0,\"timed_out\":false,\"_shards\":{\"total\":1,\"successful\":1,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":{\"value\":0,\"relation\":\"eq\"},\"max_score\":null,\"hits\":[]}}"),
+				(200,
+					"{\"_scroll_id\":\"SCROLLID\",\"took\":0,\"timed_out\":false,\"_shards\":{\"total\":1,\"successful\":1,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":{\"value\":1,\"relation\":\"eq\"},\"max_score\":null,\"hits\":[{\"_index\":\"index-a\",\"_type\":\"_doc\",\"_id\":\"ISXw0HYBAJbnbq7-Utq6\",\"_score\":null,\"_source\":{\"name\": \"name-a\"},\"sort\":[0]}]}}"),
+				(200,
+					"{\"_scroll_id\":\"SCROLLID\",\"took\":1,\"timed_out\":false,\"terminated_early\":false,\"_shards\":{\"total\":1,\"successful\":1,\"skipped\":0,\"failed\":0},\"hits\":{\"total\":{\"value\":1,\"relation\":\"eq\"},\"max_score\":null,\"hits\":[]}}"),
+				(200,
+					"{\"took\":4,\"errors\":false,\"items\":[{\"index\":{\"_index\":\"index-b\",\"_type\":\"_doc\",\"_id\":\"ISXw0HYBAJbnbq7-Utq6\",\"_version\":1,\"result\":\"created\",\"_shards\":{\"total\":2,\"successful\":1,\"failed\":0},\"_seq_no\":0,\"_primary_term\":1,\"status\":201}}]}")
 			};
 
 			var connection = new TestableInMemoryConnection(a =>
@@ -114,11 +117,7 @@ namespace Tests.MetaHeader
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 
 			// We can avoid specifying response bodies and this still exercises all requests.
-			var responses = new List<(int, string)>
-			{
-				(200, "{}"),
-				(200, "{}")
-			};
+			var responses = new List<(int, string)> { (200, "{}"), (200, "{}") };
 
 			var connection = new TestableInMemoryConnection(a =>
 				a.RequestMetaData.Single(x => x.Key == "helper").Value.Should().Be("sn"), responses);
@@ -130,27 +129,12 @@ namespace Tests.MetaHeader
 			using var subscription = observableSnapshot.Subscribe(observer);
 		}
 
-		private class SnapshotObserver : IObserver<SnapshotStatusResponse>
-		{
-			private readonly TestableInMemoryConnection _connection;
-
-			public SnapshotObserver(TestableInMemoryConnection connection) => _connection = connection;
-
-			public void OnCompleted() => _connection.AssertExpectedCallCount();
-			public void OnError(Exception error) => throw new NotImplementedException();
-			public void OnNext(SnapshotStatusResponse value) { }
-		}
-
 		[U] public void RestoreHelperRequestsIncludeExpectedHelperMetaData()
 		{
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 
 			// We can avoid specifying response bodies and this still exercises all requests.
-			var responses = new List<(int, string)>
-			{
-				(200, "{}"),
-				(200, "{}")
-			};
+			var responses = new List<(int, string)> { (200, "{}"), (200, "{}") };
 
 			var connection = new TestableInMemoryConnection(a =>
 				a.RequestMetaData.Single(x => x.Key == "helper").Value.Should().Be("sr"), responses);
@@ -162,6 +146,25 @@ namespace Tests.MetaHeader
 			using var subscription = observableRestore.Subscribe(observer);
 		}
 
+		protected static IEnumerable<SmallObject> CreateLazyStreamOfDocuments(int count)
+		{
+			for (var i = 0; i < count; i++)
+				yield return new SmallObject { Name = i.ToString() };
+		}
+
+		private class SnapshotObserver : IObserver<SnapshotStatusResponse>
+		{
+			private readonly TestableInMemoryConnection _connection;
+
+			public SnapshotObserver(TestableInMemoryConnection connection) => _connection = connection;
+
+			public void OnCompleted() => _connection.AssertExpectedCallCount();
+
+			public void OnError(Exception error) => throw new NotImplementedException();
+
+			public void OnNext(SnapshotStatusResponse value) { }
+		}
+
 		private class RestoreObserver : IObserver<RecoveryStatusResponse>
 		{
 			private readonly TestableInMemoryConnection _connection;
@@ -169,28 +172,24 @@ namespace Tests.MetaHeader
 			public RestoreObserver(TestableInMemoryConnection connection) => _connection = connection;
 
 			public void OnCompleted() => _connection.AssertExpectedCallCount();
-			public void OnError(Exception error) => throw new NotImplementedException();
-			public void OnNext(RecoveryStatusResponse value) { }
-		}
 
-		protected static IEnumerable<SmallObject> CreateLazyStreamOfDocuments(int count)
-		{
-			for (var i = 0; i < count; i++)
-				yield return new SmallObject { Name = i.ToString() };
+			public void OnError(Exception error) => throw new NotImplementedException();
+
+			public void OnNext(RecoveryStatusResponse value) { }
 		}
 
 		protected class SmallObject
 		{
 			public string Name { get; set; }
 		}
-		
+
 		protected class TestableInMemoryConnection : IConnection
 		{
 			internal static readonly byte[] EmptyBody = Encoding.UTF8.GetBytes("");
 
-			private readonly InMemoryHttpResponse _productCheckResponse = InMemoryConnection.ValidProductCheckResponse();
-
 			private readonly Action<RequestData> _perRequestAssertion;
+
+			private readonly InMemoryHttpResponse _productCheckResponse = InMemoryConnection.ValidProductCheckResponse();
 			private readonly List<(int, string)> _responses;
 			private int _requestCounter = -1;
 
@@ -200,7 +199,42 @@ namespace Tests.MetaHeader
 				_responses = responses;
 			}
 
-			public void AssertExpectedCallCount() => _requestCounter.Should().Be(_responses.Count - 1);
+			TResponse IConnection.Request<TResponse>(RequestData requestData)
+			{
+				if ("/".Equals(requestData.Uri.AbsolutePath, StringComparison.Ordinal) && requestData.Method == HttpMethod.GET)
+				{
+					// We don't add product checks to the request count
+
+					_productCheckResponse.Headers.TryGetValue("X-elastic-product", out var productNames);
+
+					requestData.MadeItToResponse = true;
+
+					using var ms = requestData.MemoryStreamFactory.Create(_productCheckResponse.ResponseBytes);
+
+					return ResponseBuilder.ToResponse<TResponse>(
+						requestData, null, _productCheckResponse.StatusCode, null, ms, productNames?.FirstOrDefault(),
+						RequestData.DefaultJsonMimeType);
+				}
+
+				Interlocked.Increment(ref _requestCounter);
+
+				_perRequestAssertion(requestData);
+
+				int statusCode;
+				string response;
+
+				if (_responses.Count > _requestCounter)
+					(statusCode, response) = _responses[_requestCounter];
+				else
+					(statusCode, response) = (200, (string)null);
+
+				var stream = !string.IsNullOrEmpty(response)
+					? requestData.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(response))
+					: requestData.MemoryStreamFactory.Create(EmptyBody);
+
+				return ResponseBuilder.ToResponse<TResponse>(requestData, null, statusCode, null, stream, "Elasticsearch",
+					RequestData.DefaultJsonMimeType);
+			}
 
 			async Task<TResponse> IConnection.RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 			{
@@ -217,12 +251,12 @@ namespace Tests.MetaHeader
 					await Task.Yield(); // avoids test deadlocks
 
 					return ResponseBuilder.ToResponse<TResponse>(
-						requestData, null, _productCheckResponse.StatusCode, null, ms,
-						RequestData.DefaultJsonMimeType, productNames?.FirstOrDefault());
+						requestData, null, _productCheckResponse.StatusCode, null, ms, productNames?.FirstOrDefault(),
+						RequestData.DefaultJsonMimeType);
 				}
 
 				Interlocked.Increment(ref _requestCounter);
-				
+
 				_perRequestAssertion(requestData);
 
 				await Task.Yield(); // avoids test deadlocks
@@ -235,48 +269,19 @@ namespace Tests.MetaHeader
 				else
 					(statusCode, response) = (500, (string)null);
 
-				var stream = !string.IsNullOrEmpty(response) ? requestData.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(response)) : requestData.MemoryStreamFactory.Create(EmptyBody);
+				var stream = !string.IsNullOrEmpty(response)
+					? requestData.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(response))
+					: requestData.MemoryStreamFactory.Create(EmptyBody);
 
 				return await ResponseBuilder
-					.ToResponseAsync<TResponse>(requestData, null, statusCode, null, stream, RequestData.DefaultJsonMimeType, "Elasticsearch", cancellationToken)
+					.ToResponseAsync<TResponse>(requestData, null, statusCode, null, stream, "Elasticsearch", RequestData.DefaultJsonMimeType,
+						cancellationToken)
 					.ConfigureAwait(false);
 			}
 
-			TResponse IConnection.Request<TResponse>(RequestData requestData)
-			{
-				if ("/".Equals(requestData.Uri.AbsolutePath, StringComparison.Ordinal) && requestData.Method == HttpMethod.GET)
-				{
-					// We don't add product checks to the request count
-
-					_productCheckResponse.Headers.TryGetValue("X-elastic-product", out var productNames);
-
-					requestData.MadeItToResponse = true;
-
-					using var ms = requestData.MemoryStreamFactory.Create(_productCheckResponse.ResponseBytes);
-
-					return ResponseBuilder.ToResponse<TResponse>(
-						requestData, null, _productCheckResponse.StatusCode, null, ms,
-						RequestData.DefaultJsonMimeType, productNames?.FirstOrDefault());
-				}
-
-				Interlocked.Increment(ref _requestCounter);
-
-				_perRequestAssertion(requestData);
-
-				int statusCode;
-				string response;
-
-				if (_responses.Count > _requestCounter)
-					(statusCode, response) = _responses[_requestCounter];
-				else
-					(statusCode, response) = (200, (string)null);
-
-				var stream = !string.IsNullOrEmpty(response) ? requestData.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(response)) : requestData.MemoryStreamFactory.Create(EmptyBody);
-
-				return ResponseBuilder.ToResponse<TResponse>(requestData, null, statusCode, null, stream, RequestData.DefaultJsonMimeType);
-			}
-
 			public void Dispose() { }
+
+			public void AssertExpectedCallCount() => _requestCounter.Should().Be(_responses.Count - 1);
 		}
 	}
 }
