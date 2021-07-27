@@ -23,10 +23,34 @@ namespace Nest
 {
     internal static class ApiUrlsLookups
     {
+        internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[]{"/_cluster/allocation/explain"});
+        internal static ApiUrls ClusterDeleteComponentTemplate = new ApiUrls(new[]{"/_component_template/{name}"});
+        internal static ApiUrls ClusterDeleteVotingConfigExclusions = new ApiUrls(new[]{"/_cluster/voting_config_exclusions"});
+        internal static ApiUrls ClusterExistsComponentTemplate = new ApiUrls(new[]{"/_component_template/{name}"});
+        internal static ApiUrls ClusterGetComponentTemplate = new ApiUrls(new[]{"/_component_template", "/_component_template/{name}"});
+        internal static ApiUrls ClusterGetSettings = new ApiUrls(new[]{"/_cluster/settings"});
         internal static ApiUrls ClusterHealth = new ApiUrls(new[]{"/_cluster/health", "/_cluster/health/{index}"});
+        internal static ApiUrls ClusterPendingTasks = new ApiUrls(new[]{"/_cluster/pending_tasks"});
+        internal static ApiUrls ClusterPostVotingConfigExclusions = new ApiUrls(new[]{"/_cluster/voting_config_exclusions"});
+        internal static ApiUrls ClusterPutComponentTemplate = new ApiUrls(new[]{"/_component_template/{name}"});
+        internal static ApiUrls ClusterPutSettings = new ApiUrls(new[]{"/_cluster/settings"});
+        internal static ApiUrls ClusterRemoteInfo = new ApiUrls(new[]{"/_remote/info"});
+        internal static ApiUrls ClusterReroute = new ApiUrls(new[]{"/_cluster/reroute"});
+        internal static ApiUrls ClusterState = new ApiUrls(new[]{"/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}"});
+        internal static ApiUrls ClusterStats = new ApiUrls(new[]{"/_cluster/stats", "/_cluster/stats/nodes/{node_id}"});
         internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[]{"/{index}/_doc/{id}"});
         internal static ApiUrls NoNamespaceExists = new ApiUrls(new[]{"/{index}/_doc/{id}"});
         internal static ApiUrls NoNamespaceGet = new ApiUrls(new[]{"/{index}/_doc/{id}"});
+        internal static ApiUrls IndexLifecycleManagementDeleteLifecycle = new ApiUrls(new[]{"/_ilm/policy/{policy}"});
+        internal static ApiUrls IndexLifecycleManagementExplainLifecycle = new ApiUrls(new[]{"/{index}/_ilm/explain"});
+        internal static ApiUrls IndexLifecycleManagementGetLifecycle = new ApiUrls(new[]{"/_ilm/policy/{policy}", "/_ilm/policy"});
+        internal static ApiUrls IndexLifecycleManagementGetStatus = new ApiUrls(new[]{"/_ilm/status"});
+        internal static ApiUrls IndexLifecycleManagementMoveToStep = new ApiUrls(new[]{"/_ilm/move/{index}"});
+        internal static ApiUrls IndexLifecycleManagementPutLifecycle = new ApiUrls(new[]{"/_ilm/policy/{policy}"});
+        internal static ApiUrls IndexLifecycleManagementRemovePolicy = new ApiUrls(new[]{"/{index}/_ilm/remove"});
+        internal static ApiUrls IndexLifecycleManagementRetry = new ApiUrls(new[]{"/{index}/_ilm/retry"});
+        internal static ApiUrls IndexLifecycleManagementStart = new ApiUrls(new[]{"/_ilm/start"});
+        internal static ApiUrls IndexLifecycleManagementStop = new ApiUrls(new[]{"/_ilm/stop"});
         internal static ApiUrls NoNamespaceIndex = new ApiUrls(new[]{"/{index}/_doc/{id}", "/{index}/_doc"});
         internal static ApiUrls IndicesCreate = new ApiUrls(new[]{"/{index}"});
         internal static ApiUrls IndicesDelete = new ApiUrls(new[]{"/{index}"});

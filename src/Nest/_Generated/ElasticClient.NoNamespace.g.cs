@@ -28,11 +28,14 @@ namespace Nest
     {
         public ClusterNamespace Cluster { get; private set; }
 
+        public IndexLifecycleManagementNamespace IndexLifecycleManagement { get; private set; }
+
         public IndicesNamespace Indices { get; private set; }
 
         private partial void SetupNamespaces()
         {
             Cluster = new ClusterNamespace(this);
+            IndexLifecycleManagement = new IndexLifecycleManagementNamespace(this);
             Indices = new IndicesNamespace(this);
         }
 

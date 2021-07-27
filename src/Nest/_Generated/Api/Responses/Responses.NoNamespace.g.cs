@@ -121,7 +121,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("_type")]
-		public Name? Type
+		public DocType? Type
 		{
 			get;
 #if NET5_0

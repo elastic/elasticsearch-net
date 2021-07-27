@@ -35,6 +35,22 @@ namespace Nest
 		Avg
 	}
 
+	public enum CombinedFieldsOperator
+	{
+		[EnumMember(Value = "or")]
+		Or,
+		[EnumMember(Value = "and")]
+		And
+	}
+
+	public enum CombinedFieldsZeroTerms
+	{
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "all")]
+		All
+	}
+
 	public enum DateInterval
 	{
 		[EnumMember(Value = "year")]

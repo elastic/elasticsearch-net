@@ -1,7 +1,3 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,29 +9,33 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Names : IEquatable<Names>, IUrlParameter
 	{
-		public Names(IEnumerable<string> names) : this(names?.Select(n => (Name)n).ToList()) { }
+		public Names(IEnumerable<string> names) : this(names?.Select(n => new Name(n)).ToList()) { }
 
 		public Names(IEnumerable<Name> names)
 		{
 			Value = names?.ToList();
 			if (!Value.HasAny())
-				throw new ArgumentException($"can not create {nameof(Names)} on an empty enumerable of ", nameof(names));
+			{
+				throw new ArgumentException($"can not create {nameof(Names)} on an empty enumerable of ",
+					nameof(names));
+			}
 		}
 
 		internal IList<Name> Value { get; }
 
 		private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
-		public override string ToString() => DebugDisplay;
-
 		public bool Equals(Names other) => EqualsAllIds(Value, other.Value);
 
 		string IUrlParameter.GetString(ITransportConfiguration settings) =>
 			string.Join(",", Value.Cast<IUrlParameter>().Select(n => n.GetString(settings)));
 
-		public static Names Parse(string names) => names.IsNullOrEmptyCommaSeparatedList(out var list) ? null : new Names(list);
+		public override string ToString() => DebugDisplay;
 
-		public static implicit operator Names(Name name) => name == null ? null : new Names(new[] { name });
+		public static Names Parse(string names) =>
+			names.IsNullOrEmptyCommaSeparatedList(out var list) ? null : new Names(list);
+
+		public static implicit operator Names(Name name) => new(new[] {name});
 
 		public static implicit operator Names(string names) => Parse(names);
 
