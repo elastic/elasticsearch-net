@@ -442,6 +442,18 @@ namespace Nest
 		public SuggestMode? SuggestMode { get; set; }
 	}
 
+	public partial class FieldAndFormat
+	{
+		[JsonPropertyName("field")]
+		public Field Field { get; set; }
+
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonPropertyName("include_unmapped")]
+		public bool? IncludeUnmapped { get; set; }
+	}
+
 	public partial class FieldCollapse
 	{
 		[JsonPropertyName("field")]
@@ -820,7 +832,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("_type")]
-		public Name? Type
+		public DocType? Type
 		{
 			get;
 #if NET5_0
@@ -884,7 +896,7 @@ namespace Nest
 		public FieldCollapse? Collapse { get; set; }
 
 		[JsonPropertyName("docvalue_fields")]
-		public Fields? DocvalueFields { get; set; }
+		public IEnumerable<FieldAndFormat>? DocvalueFields { get; set; }
 
 		[JsonPropertyName("explain")]
 		public bool? Explain { get; set; }
@@ -905,7 +917,7 @@ namespace Nest
 		public Name? Name { get; set; }
 
 		[JsonPropertyName("script_fields")]
-		public Dictionary<string, ScriptField>? ScriptFields { get; set; }
+		public Dictionary<Field, ScriptField>? ScriptFields { get; set; }
 
 		[JsonPropertyName("seq_no_primary_term")]
 		public bool? SeqNoPrimaryTerm { get; set; }
@@ -918,6 +930,12 @@ namespace Nest
 
 		[JsonPropertyName("_source")]
 		public Union<bool, SourceFilter>? Source { get; set; }
+
+		[JsonPropertyName("stored_field")]
+		public Fields? StoredField { get; set; }
+
+		[JsonPropertyName("track_scores")]
+		public bool? TrackScores { get; set; }
 
 		[JsonPropertyName("version")]
 		public bool? Version { get; set; }
@@ -1834,6 +1852,42 @@ namespace Nest
 		}
 	}
 
+	public partial class CompletionStats
+	{
+		[JsonPropertyName("fields")]
+		public Dictionary<Field, FieldSizeUsage>? Fields
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size")]
+		public ByteSize? Size
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size_in_bytes")]
+		public long SizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class DateField
 	{
 		[JsonPropertyName("field")]
@@ -1844,6 +1898,35 @@ namespace Nest
 
 		[JsonPropertyName("include_unmapped")]
 		public bool? IncludeUnmapped { get; set; }
+	}
+
+	public partial class DocStats
+	{
+		[JsonPropertyName("count")]
+		public long Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("deleted")]
+		public long Deleted
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class EmptyObject
+	{
 	}
 
 	public partial class ErrorCause
@@ -2157,6 +2240,103 @@ namespace Nest
 		}
 	}
 
+	public partial class FieldMemoryUsage
+	{
+		[JsonPropertyName("memory_size")]
+		public ByteSize? MemorySize
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("memory_size_in_bytes")]
+		public long MemorySizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FieldSizeUsage
+	{
+		[JsonPropertyName("size")]
+		public ByteSize? Size
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size_in_bytes")]
+		public long SizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FielddataStats
+	{
+		[JsonPropertyName("evictions")]
+		public long? Evictions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fields")]
+		public Dictionary<Field, FieldMemoryUsage>? Fields
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("memory_size")]
+		public ByteSize? MemorySize
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("memory_size_in_bytes")]
+		public long MemorySizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class IndexedScript : ScriptBase
 	{
 		[JsonPropertyName("id")]
@@ -2194,6 +2374,417 @@ namespace Nest
 		public double Lon { get; set; }
 	}
 
+	public partial class NodeAttributes
+	{
+		[JsonPropertyName("attributes")]
+		public Dictionary<string, string> Attributes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ephemeral_id")]
+		public Id EphemeralId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("id")]
+		public Id? Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("name")]
+		public NodeName Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("roles")]
+		public NodeRoles? Roles
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transport_address")]
+		public TransportAddress TransportAddress
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class NodeShard
+	{
+		[JsonPropertyName("allocation_id")]
+		public Dictionary<string, Id>? AllocationId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index")]
+		public IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("node")]
+		public NodeName? Node
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("primary")]
+		public bool Primary
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("recovery_source")]
+		public Dictionary<string, Id>? RecoverySource
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shard")]
+		public int Shard
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("state")]
+		public ShardRoutingState State
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("unassigned_info")]
+		public UnassignedInformation? UnassignedInfo
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class NodeStatistics
+	{
+		[JsonPropertyName("failed")]
+		public int Failed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("failures")]
+		public IReadOnlyCollection<ErrorCause>? Failures
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("successful")]
+		public int Successful
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public int Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class PluginStats
+	{
+		[JsonPropertyName("classname")]
+		public string Classname
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("description")]
+		public string Description
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("elasticsearch_version")]
+		public VersionString ElasticsearchVersion
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("extended_plugins")]
+		public IReadOnlyCollection<string> ExtendedPlugins
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("has_native_controller")]
+		public bool HasNativeController
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("java_version")]
+		public VersionString JavaVersion
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("licensed")]
+		public bool Licensed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("name")]
+		public Name Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public VersionString Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class QueryCacheStats
+	{
+		[JsonPropertyName("cache_count")]
+		public int CacheCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cache_size")]
+		public int CacheSize
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("evictions")]
+		public int Evictions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("hit_count")]
+		public int HitCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("memory_size")]
+		public ByteSize? MemorySize
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("memory_size_in_bytes")]
+		public int MemorySizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("miss_count")]
+		public int MissCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total_count")]
+		public int TotalCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class ScriptBase
 	{
 		[JsonPropertyName("lang")]
@@ -2221,8 +2812,278 @@ namespace Nest
 
 	public partial class ScriptField
 	{
+		[JsonPropertyName("ignore_failure")]
+		public bool? IgnoreFailure { get; set; }
+
 		[JsonPropertyName("script")]
 		public Script Script { get; set; }
+	}
+
+	public partial class SegmentsStats
+	{
+		[JsonPropertyName("count")]
+		public int Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("doc_values_memory")]
+		public ByteSize? DocValuesMemory
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("doc_values_memory_in_bytes")]
+		public int DocValuesMemoryInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("file_sizes")]
+		public Dictionary<string, ShardFileSizeInfo> FileSizes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fixed_bit_set")]
+		public ByteSize? FixedBitSet
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fixed_bit_set_memory_in_bytes")]
+		public int FixedBitSetMemoryInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_writer_max_memory_in_bytes")]
+		public int? IndexWriterMaxMemoryInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_writer_memory")]
+		public ByteSize? IndexWriterMemory
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_writer_memory_in_bytes")]
+		public int IndexWriterMemoryInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_unsafe_auto_id_timestamp")]
+		public int MaxUnsafeAutoIdTimestamp
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("memory")]
+		public ByteSize? Memory
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("memory_in_bytes")]
+		public int MemoryInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("norms_memory")]
+		public ByteSize? NormsMemory
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("norms_memory_in_bytes")]
+		public int NormsMemoryInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("points_memory")]
+		public ByteSize? PointsMemory
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("points_memory_in_bytes")]
+		public int PointsMemoryInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("stored_fields_memory_in_bytes")]
+		public int StoredFieldsMemoryInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("stored_memory")]
+		public ByteSize? StoredMemory
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("terms_memory")]
+		public ByteSize? TermsMemory
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("terms_memory_in_bytes")]
+		public int TermsMemoryInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("term_vectors_memory_in_bytes")]
+		public int TermVectorsMemoryInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("term_vectory_memory")]
+		public ByteSize? TermVectoryMemory
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version_map_memory")]
+		public ByteSize? VersionMapMemory
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version_map_memory_in_bytes")]
+		public int VersionMapMemoryInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class ShardFailure
@@ -2351,6 +3212,75 @@ namespace Nest
 
 		[JsonPropertyName("max")]
 		public int Max { get; set; }
+	}
+
+	public partial class StoreStats
+	{
+		[JsonPropertyName("reserved")]
+		public ByteSize? Reserved
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("reserved_in_bytes")]
+		public int ReservedInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size")]
+		public ByteSize? Size
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size_in_bytes")]
+		public int SizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total_data_set_size")]
+		public ByteSize? TotalDataSetSize
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total_data_set_size_in_bytes")]
+		public int? TotalDataSetSizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class AdjacencyMatrixAggregation : BucketAggregationBase
@@ -2631,7 +3561,7 @@ namespace Nest
 		public MinimumInterval? MinimumInterval { get; set; }
 
 		[JsonPropertyName("missing")]
-		public DateTimeOffset? Missing { get; set; }
+		public DateString? Missing { get; set; }
 
 		[JsonPropertyName("offset")]
 		public string? Offset { get; set; }
@@ -2860,7 +3790,7 @@ namespace Nest
 		public int? MinDocCount { get; set; }
 
 		[JsonPropertyName("missing")]
-		public DateTimeOffset? Missing { get; set; }
+		public DateString? Missing { get; set; }
 
 		[JsonPropertyName("offset")]
 		public Time? Offset { get; set; }
@@ -6489,7 +7419,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("null_value")]
-		public DateTimeOffset? NullValue
+		public DateString? NullValue
 		{
 			get;
 #if NET5_0
@@ -6572,7 +7502,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("null_value")]
-		public DateTimeOffset? NullValue
+		public DateString? NullValue
 		{
 			get;
 #if NET5_0
@@ -7871,37 +8801,64 @@ namespace Nest
 	public partial class BoostingQuery : QueryBase
 	{
 		[JsonPropertyName("negative")]
-		public QueryContainer? Negative { get; set; }
+		public QueryContainer Negative { get; set; }
 
 		[JsonPropertyName("negative_boost")]
-		public double? NegativeBoost { get; set; }
+		public double NegativeBoost { get; set; }
 
 		[JsonPropertyName("positive")]
-		public QueryContainer? Positive { get; set; }
+		public QueryContainer Positive { get; set; }
 	}
 
 	public partial class BoundingBox
 	{
+		[JsonPropertyName("bottom")]
+		public double? Bottom { get; set; }
+
+		[JsonPropertyName("bottom_left")]
+		public GeoLocation? BottomLeft { get; set; }
+
 		[JsonPropertyName("bottom_right")]
 		public GeoLocation? BottomRight { get; set; }
 
+		[JsonPropertyName("left")]
+		public double? Left { get; set; }
+
+		[JsonPropertyName("right")]
+		public double? Right { get; set; }
+
+		[JsonPropertyName("top")]
+		public double? Top { get; set; }
+
 		[JsonPropertyName("top_left")]
 		public GeoLocation? TopLeft { get; set; }
+
+		[JsonPropertyName("top_right")]
+		public GeoLocation? TopRight { get; set; }
 
 		[JsonPropertyName("wkt")]
 		public string? Wkt { get; set; }
 	}
 
-	public partial class CombinedFieldsQuery
+	public partial class CombinedFieldsQuery : QueryBase
 	{
+		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+
 		[JsonPropertyName("fields")]
 		public IEnumerable<Field> Fields { get; set; }
 
+		[JsonPropertyName("mimimum_should_match")]
+		public MinimumShouldMatch? MimimumShouldMatch { get; set; }
+
 		[JsonPropertyName("operator")]
-		public string? Operator { get; set; }
+		public CombinedFieldsOperator? Operator { get; set; }
 
 		[JsonPropertyName("query")]
 		public string Query { get; set; }
+
+		[JsonPropertyName("zero_terms_query")]
+		public CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
 	}
 
 	public partial class CommonTermsQuery : QueryBase
@@ -7922,17 +8879,90 @@ namespace Nest
 		public MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 		[JsonPropertyName("query")]
-		public string? Query { get; set; }
+		public string Query { get; set; }
 	}
 
 	public partial class ConstantScoreQuery : QueryBase
 	{
 		[JsonPropertyName("filter")]
-		public QueryContainer? Filter { get; set; }
+		public QueryContainer Filter { get; set; }
 	}
 
 	public partial class DateDecayFunction : DecayFunctionBase
 	{
+	}
+
+	public partial class DateDistanceFeatureQuery : DistanceFeatureQueryBase
+	{
+	}
+
+	public partial class DateRangeQuery : RangeQueryBase
+	{
+		[JsonPropertyName("format")]
+		public DateFormat? Format
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("gt")]
+		public DateMath? Gt
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("gte")]
+		public DateMath? Gte
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lt")]
+		public DateMath? Lt
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lte")]
+		public DateMath? Lte
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_zone")]
+		public TimeZone? TimeZone
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class DecayFunctionBase : ScoreFunctionBase
@@ -7952,43 +8982,52 @@ namespace Nest
 	public partial class DisMaxQuery : QueryBase
 	{
 		[JsonPropertyName("queries")]
-		public IEnumerable<QueryContainer>? Queries { get; set; }
+		public IEnumerable<QueryContainer> Queries { get; set; }
 
 		[JsonPropertyName("tie_breaker")]
 		public double? TieBreaker { get; set; }
 	}
 
-	public partial class DistanceFeatureQuery : QueryBase
+	public partial class DistanceFeatureQueryBase<TOrigin, TDistance> : QueryBase
 	{
 		[JsonPropertyName("field")]
-		public Field? Field { get; set; }
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonPropertyName("origin")]
-		public OneOf<IReadOnlyCollection<int>, GeoCoordinate, DateMath>? Origin { get; set; }
+		public TOrigin Origin
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonPropertyName("pivot")]
-		public Union<Distance, Time>? Pivot { get; set; }
+		public TDistance Pivot
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class ExistsQuery : QueryBase
 	{
 		[JsonPropertyName("field")]
-		public Field? Field { get; set; }
-	}
-
-	public partial class FieldLookup
-	{
-		[JsonPropertyName("id")]
-		public Id? Id { get; set; }
-
-		[JsonPropertyName("index")]
-		public IndexName? Index { get; set; }
-
-		[JsonPropertyName("path")]
-		public Field? Path { get; set; }
-
-		[JsonPropertyName("routing")]
-		public Routing? Routing { get; set; }
+		public Field Field { get; set; }
 	}
 
 	public partial class FieldValueFactorScoreFunction : ScoreFunctionBase
@@ -8072,20 +9111,11 @@ namespace Nest
 		public bool? Transpositions { get; set; }
 
 		[JsonPropertyName("value")]
-		public object Value { get; set; }
+		public string Value { get; set; }
 	}
 
 	public partial class GeoBoundingBoxQuery : QueryBase
 	{
-		[JsonPropertyName("bottom_right")]
-		public LatLon? BottomRight { get; set; }
-
-		[JsonPropertyName("bounding_box")]
-		public BoundingBox? BoundingBox { get; set; }
-
-		[JsonPropertyName("top_left")]
-		public LatLon? TopLeft { get; set; }
-
 		[JsonPropertyName("type")]
 		public GeoExecution? Type { get; set; }
 
@@ -8094,6 +9124,10 @@ namespace Nest
 	}
 
 	public partial class GeoDecayFunction : DecayFunctionBase
+	{
+	}
+
+	public partial class GeoDistanceFeatureQuery : DistanceFeatureQueryBase
 	{
 	}
 
@@ -8111,32 +9145,14 @@ namespace Nest
 
 	public partial class GeoPolygonQuery : QueryBase
 	{
-		[JsonPropertyName("points")]
-		public IEnumerable<GeoLocation>? Points { get; set; }
-
 		[JsonPropertyName("validation_method")]
 		public GeoValidationMethod? ValidationMethod { get; set; }
-	}
-
-	public partial class GeoShape
-	{
-		[JsonPropertyName("type")]
-		public string? Type { get; set; }
 	}
 
 	public partial class GeoShapeQuery : QueryBase
 	{
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
-
-		[JsonPropertyName("indexed_shape")]
-		public FieldLookup? IndexedShape { get; set; }
-
-		[JsonPropertyName("relation")]
-		public GeoShapeRelation? Relation { get; set; }
-
-		[JsonPropertyName("shape")]
-		public GeoShape? Shape { get; set; }
 	}
 
 	public partial class HasChildQuery : QueryBase
@@ -8154,13 +9170,13 @@ namespace Nest
 		public int? MinChildren { get; set; }
 
 		[JsonPropertyName("query")]
-		public QueryContainer? Query { get; set; }
+		public QueryContainer Query { get; set; }
 
 		[JsonPropertyName("score_mode")]
 		public ChildScoreMode? ScoreMode { get; set; }
 
 		[JsonPropertyName("type")]
-		public RelationName? Type { get; set; }
+		public RelationName Type { get; set; }
 	}
 
 	public partial class HasParentQuery : QueryBase
@@ -8172,10 +9188,10 @@ namespace Nest
 		public InnerHits? InnerHits { get; set; }
 
 		[JsonPropertyName("parent_type")]
-		public RelationName? ParentType { get; set; }
+		public RelationName ParentType { get; set; }
 
 		[JsonPropertyName("query")]
-		public QueryContainer? Query { get; set; }
+		public QueryContainer Query { get; set; }
 
 		[JsonPropertyName("score")]
 		public bool? Score { get; set; }
@@ -8184,7 +9200,7 @@ namespace Nest
 	public partial class IdsQuery : QueryBase
 	{
 		[JsonPropertyName("values")]
-		public Union<IReadOnlyCollection<Id>, IReadOnlyCollection<long>>? Values { get; set; }
+		public Ids? Values { get; set; }
 	}
 
 	public partial class IntervalsAllOf
@@ -8193,7 +9209,7 @@ namespace Nest
 		public IntervalsFilter? Filter { get; set; }
 
 		[JsonPropertyName("intervals")]
-		public IEnumerable<IntervalsContainer>? Intervals { get; set; }
+		public IEnumerable<IntervalsContainer> Intervals { get; set; }
 
 		[JsonPropertyName("max_gaps")]
 		public int? MaxGaps { get; set; }
@@ -8208,7 +9224,7 @@ namespace Nest
 		public IntervalsFilter? Filter { get; set; }
 
 		[JsonPropertyName("intervals")]
-		public IEnumerable<IntervalsContainer>? Intervals { get; set; }
+		public IEnumerable<IntervalsContainer> Intervals { get; set; }
 	}
 
 	public partial class IntervalsContainer
@@ -8274,7 +9290,7 @@ namespace Nest
 		public int? PrefixLength { get; set; }
 
 		[JsonPropertyName("term")]
-		public string? Term { get; set; }
+		public string Term { get; set; }
 
 		[JsonPropertyName("transpositions")]
 		public bool? Transpositions { get; set; }
@@ -8298,7 +9314,7 @@ namespace Nest
 		public bool? Ordered { get; set; }
 
 		[JsonPropertyName("query")]
-		public string? Query { get; set; }
+		public string Query { get; set; }
 
 		[JsonPropertyName("use_field")]
 		public Field? UseField { get; set; }
@@ -8310,7 +9326,7 @@ namespace Nest
 		public string? Analyzer { get; set; }
 
 		[JsonPropertyName("prefix")]
-		public string? Prefix { get; set; }
+		public string Prefix { get; set; }
 
 		[JsonPropertyName("use_field")]
 		public Field? UseField { get; set; }
@@ -8343,7 +9359,7 @@ namespace Nest
 		public string? Analyzer { get; set; }
 
 		[JsonPropertyName("pattern")]
-		public string? Pattern { get; set; }
+		public string Pattern { get; set; }
 
 		[JsonPropertyName("use_field")]
 		public Field? UseField { get; set; }
@@ -8363,7 +9379,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("fields")]
-		public Fields? Fields
+		public IReadOnlyCollection<Field>? Fields
 		{
 			get;
 #if NET5_0
@@ -8374,7 +9390,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("_id")]
-		public Union<Id, int>? Id
+		public Id? Id
 		{
 			get;
 #if NET5_0
@@ -8418,7 +9434,29 @@ namespace Nest
 		}
 
 		[JsonPropertyName("_type")]
-		public Name? Type
+		public DocType? Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public VersionNumber? Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version_type")]
+		public VersionType? VersionType
 		{
 			get;
 #if NET5_0
@@ -8431,8 +9469,6 @@ namespace Nest
 
 	public partial class MatchAllQuery : QueryBase
 	{
-		[JsonPropertyName("norm_field")]
-		public string? NormField { get; set; }
 	}
 
 	public partial class MatchBoolPrefixQuery : QueryBase
@@ -8462,7 +9498,7 @@ namespace Nest
 		public int? PrefixLength { get; set; }
 
 		[JsonPropertyName("query")]
-		public string? Query { get; set; }
+		public string Query { get; set; }
 	}
 
 	public partial class MatchNoneQuery : QueryBase
@@ -8478,7 +9514,7 @@ namespace Nest
 		public int? MaxExpansions { get; set; }
 
 		[JsonPropertyName("query")]
-		public string? Query { get; set; }
+		public string Query { get; set; }
 
 		[JsonPropertyName("slop")]
 		public int? Slop { get; set; }
@@ -8493,10 +9529,13 @@ namespace Nest
 		public string? Analyzer { get; set; }
 
 		[JsonPropertyName("query")]
-		public string? Query { get; set; }
+		public string Query { get; set; }
 
 		[JsonPropertyName("slop")]
 		public int? Slop { get; set; }
+
+		[JsonPropertyName("zero_terms_query")]
+		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
 	public partial class MatchQuery : QueryBase
@@ -8535,7 +9574,7 @@ namespace Nest
 		public int? PrefixLength { get; set; }
 
 		[JsonPropertyName("query")]
-		public OneOf<string, float, bool>? Query { get; set; }
+		public OneOf<string, float, bool> Query { get; set; }
 
 		[JsonPropertyName("zero_terms_query")]
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
@@ -8549,14 +9588,17 @@ namespace Nest
 		[JsonPropertyName("boost_terms")]
 		public double? BoostTerms { get; set; }
 
+		[JsonPropertyName("fail_on_unsupported_field")]
+		public bool? FailOnUnsupportedField { get; set; }
+
 		[JsonPropertyName("fields")]
-		public Fields? Fields { get; set; }
+		public IEnumerable<Field>? Fields { get; set; }
 
 		[JsonPropertyName("include")]
 		public bool? Include { get; set; }
 
 		[JsonPropertyName("like")]
-		public Union<Like, IReadOnlyCollection<Like>>? Like { get; set; }
+		public Union<Like, IReadOnlyCollection<Like>> Like { get; set; }
 
 		[JsonPropertyName("max_doc_freq")]
 		public int? MaxDocFreq { get; set; }
@@ -8637,7 +9679,7 @@ namespace Nest
 		public int? PrefixLength { get; set; }
 
 		[JsonPropertyName("query")]
-		public string? Query { get; set; }
+		public string Query { get; set; }
 
 		[JsonPropertyName("slop")]
 		public int? Slop { get; set; }
@@ -8648,23 +9690,8 @@ namespace Nest
 		[JsonPropertyName("type")]
 		public TextQueryType? Type { get; set; }
 
-		[JsonPropertyName("use_dis_max")]
-		public bool? UseDisMax { get; set; }
-
 		[JsonPropertyName("zero_terms_query")]
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
-	}
-
-	public partial class NamedQuery<TQuery>
-	{
-		[JsonPropertyName("boost")]
-		public float? Boost { get; set; }
-
-		[JsonPropertyName("ignore_unmapped")]
-		public bool? IgnoreUnmapped { get; set; }
-
-		[JsonPropertyName("_name")]
-		public string? Name { get; set; }
 	}
 
 	public partial class NestedQuery : QueryBase
@@ -8676,13 +9703,60 @@ namespace Nest
 		public InnerHits? InnerHits { get; set; }
 
 		[JsonPropertyName("path")]
-		public Field? Path { get; set; }
+		public Field Path { get; set; }
 
 		[JsonPropertyName("query")]
-		public QueryContainer? Query { get; set; }
+		public QueryContainer Query { get; set; }
 
 		[JsonPropertyName("score_mode")]
 		public NestedScoreMode? ScoreMode { get; set; }
+	}
+
+	public partial class NumberRangeQuery : RangeQueryBase
+	{
+		[JsonPropertyName("gt")]
+		public double? Gt
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("gte")]
+		public double? Gte
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lt")]
+		public double? Lt
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lte")]
+		public double? Lte
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class NumericDecayFunction : DecayFunctionBase
@@ -8710,13 +9784,16 @@ namespace Nest
 		public IEnumerable<object>? Documents { get; set; }
 
 		[JsonPropertyName("field")]
-		public Field? Field { get; set; }
+		public Field Field { get; set; }
 
 		[JsonPropertyName("id")]
 		public Id? Id { get; set; }
 
 		[JsonPropertyName("index")]
 		public IndexName? Index { get; set; }
+
+		[JsonPropertyName("name")]
+		public string? Name { get; set; }
 
 		[JsonPropertyName("preference")]
 		public string? Preference { get; set; }
@@ -8731,14 +9808,17 @@ namespace Nest
 	public partial class PinnedQuery : QueryBase
 	{
 		[JsonPropertyName("ids")]
-		public Union<IReadOnlyCollection<Id>, IReadOnlyCollection<long>>? Ids { get; set; }
+		public IEnumerable<Id> Ids { get; set; }
 
 		[JsonPropertyName("organic")]
-		public QueryContainer? Organic { get; set; }
+		public QueryContainer Organic { get; set; }
 	}
 
 	public partial class PrefixQuery : QueryBase
 	{
+		[JsonPropertyName("case_insensitive")]
+		public bool? CaseInsensitive { get; set; }
+
 		[JsonPropertyName("rewrite")]
 		public MultiTermQueryRewrite? Rewrite { get; set; }
 
@@ -8758,7 +9838,7 @@ namespace Nest
 		public CombinedFieldsQuery? CombinedFields { get; set; }
 
 		[JsonPropertyName("common")]
-		public Dictionary<Field, Union<CommonTermsQuery, string>>? Common { get; set; }
+		public Dictionary<Field, CommonTermsQuery>? Common { get; set; }
 
 		[JsonPropertyName("constant_score")]
 		public ConstantScoreQuery? ConstantScore { get; set; }
@@ -8767,7 +9847,7 @@ namespace Nest
 		public DisMaxQuery? DisMax { get; set; }
 
 		[JsonPropertyName("distance_feature")]
-		public Union<Dictionary<Field, Union<DistanceFeatureQuery, string>>, DistanceFeatureQuery>? DistanceFeature { get; set; }
+		public DistanceFeatureQuery? DistanceFeature { get; set; }
 
 		[JsonPropertyName("exists")]
 		public ExistsQuery? Exists { get; set; }
@@ -8779,19 +9859,19 @@ namespace Nest
 		public FunctionScoreQuery? FunctionScore { get; set; }
 
 		[JsonPropertyName("fuzzy")]
-		public Dictionary<Field, Union<FuzzyQuery, string>>? Fuzzy { get; set; }
+		public Dictionary<Field, FuzzyQuery>? Fuzzy { get; set; }
 
 		[JsonPropertyName("geo_bounding_box")]
-		public NamedQuery<Union<GeoBoundingBoxQuery, string>>? GeoBoundingBox { get; set; }
+		public GeoBoundingBoxQuery? GeoBoundingBox { get; set; }
 
 		[JsonPropertyName("geo_distance")]
 		public GeoDistanceQuery? GeoDistance { get; set; }
 
 		[JsonPropertyName("geo_polygon")]
-		public NamedQuery<Union<GeoPolygonQuery, string>>? GeoPolygon { get; set; }
+		public GeoPolygonQuery? GeoPolygon { get; set; }
 
 		[JsonPropertyName("geo_shape")]
-		public NamedQuery<Union<GeoShapeQuery, string>>? GeoShape { get; set; }
+		public GeoShapeQuery? GeoShape { get; set; }
 
 		[JsonPropertyName("has_child")]
 		public HasChildQuery? HasChild { get; set; }
@@ -8803,25 +9883,25 @@ namespace Nest
 		public IdsQuery? Ids { get; set; }
 
 		[JsonPropertyName("intervals")]
-		public NamedQuery<Union<IntervalsQuery, string>>? Intervals { get; set; }
+		public Dictionary<Field, IntervalsQuery>? Intervals { get; set; }
 
 		[JsonPropertyName("match")]
-		public NamedQuery<OneOf<MatchQuery, string, float, bool>>? Match { get; set; }
+		public Dictionary<Field, MatchQuery>? Match { get; set; }
 
 		[JsonPropertyName("match_all")]
 		public MatchAllQuery? MatchAll { get; set; }
 
 		[JsonPropertyName("match_bool_prefix")]
-		public NamedQuery<Union<MatchBoolPrefixQuery, string>>? MatchBoolPrefix { get; set; }
+		public Dictionary<Field, MatchBoolPrefixQuery>? MatchBoolPrefix { get; set; }
 
 		[JsonPropertyName("match_none")]
 		public MatchNoneQuery? MatchNone { get; set; }
 
 		[JsonPropertyName("match_phrase")]
-		public NamedQuery<Union<MatchPhraseQuery, string>>? MatchPhrase { get; set; }
+		public Dictionary<Field, MatchPhraseQuery>? MatchPhrase { get; set; }
 
 		[JsonPropertyName("match_phrase_prefix")]
-		public NamedQuery<Union<MatchPhrasePrefixQuery, string>>? MatchPhrasePrefix { get; set; }
+		public Dictionary<Field, MatchPhrasePrefixQuery>? MatchPhrasePrefix { get; set; }
 
 		[JsonPropertyName("more_like_this")]
 		public MoreLikeThisQuery? MoreLikeThis { get; set; }
@@ -8842,19 +9922,19 @@ namespace Nest
 		public PinnedQuery? Pinned { get; set; }
 
 		[JsonPropertyName("prefix")]
-		public NamedQuery<Union<PrefixQuery, string>>? Prefix { get; set; }
+		public Dictionary<Field, PrefixQuery>? Prefix { get; set; }
 
 		[JsonPropertyName("query_string")]
 		public QueryStringQuery? QueryString { get; set; }
 
 		[JsonPropertyName("range")]
-		public NamedQuery<RangeQuery>? Range { get; set; }
+		public Dictionary<Field, RangeQuery>? Range { get; set; }
 
 		[JsonPropertyName("rank_feature")]
-		public NamedQuery<Union<RankFeatureQuery, string>>? RankFeature { get; set; }
+		public RankFeatureQuery? RankFeature { get; set; }
 
 		[JsonPropertyName("regexp")]
-		public NamedQuery<Union<RegexpQuery, string>>? Regexp { get; set; }
+		public Dictionary<Field, RegexpQuery>? Regexp { get; set; }
 
 		[JsonPropertyName("script")]
 		public ScriptQuery? Script { get; set; }
@@ -8863,7 +9943,7 @@ namespace Nest
 		public ScriptScoreQuery? ScriptScore { get; set; }
 
 		[JsonPropertyName("shape")]
-		public NamedQuery<Union<ShapeQuery, string>>? Shape { get; set; }
+		public ShapeQuery? Shape { get; set; }
 
 		[JsonPropertyName("simple_query_string")]
 		public SimpleQueryStringQuery? SimpleQueryString { get; set; }
@@ -8887,28 +9967,25 @@ namespace Nest
 		public SpanOrQuery? SpanOr { get; set; }
 
 		[JsonPropertyName("span_term")]
-		public NamedQuery<Union<SpanTermQuery, string>>? SpanTerm { get; set; }
+		public Dictionary<Field, SpanTermQuery>? SpanTerm { get; set; }
 
 		[JsonPropertyName("span_within")]
 		public SpanWithinQuery? SpanWithin { get; set; }
 
-		[JsonPropertyName("template")]
-		public QueryTemplate? Template { get; set; }
-
 		[JsonPropertyName("term")]
-		public NamedQuery<OneOf<TermQuery, string, float, bool>>? Term { get; set; }
+		public Dictionary<Field, TermQuery>? Term { get; set; }
 
 		[JsonPropertyName("terms")]
-		public NamedQuery<OneOf<TermsQuery, IReadOnlyCollection<string>, IReadOnlyCollection<long>>>? Terms { get; set; }
+		public TermsQuery? Terms { get; set; }
 
 		[JsonPropertyName("terms_set")]
-		public NamedQuery<Union<TermsSetQuery, string>>? TermsSet { get; set; }
+		public Dictionary<Field, TermsSetQuery>? TermsSet { get; set; }
 
 		[JsonPropertyName("type")]
 		public TypeQuery? Type { get; set; }
 
 		[JsonPropertyName("wildcard")]
-		public NamedQuery<Union<WildcardQuery, string>>? Wildcard { get; set; }
+		public Dictionary<Field, WildcardQuery>? Wildcard { get; set; }
 	}
 
 	public partial class QueryStringQuery : QueryBase
@@ -8938,7 +10015,7 @@ namespace Nest
 		public bool? Escape { get; set; }
 
 		[JsonPropertyName("fields")]
-		public Fields? Fields { get; set; }
+		public IEnumerable<Field>? Fields { get; set; }
 
 		[JsonPropertyName("fuzziness")]
 		public Fuzziness? Fuzziness { get; set; }
@@ -8968,7 +10045,7 @@ namespace Nest
 		public double? PhraseSlop { get; set; }
 
 		[JsonPropertyName("query")]
-		public string? Query { get; set; }
+		public string Query { get; set; }
 
 		[JsonPropertyName("quote_analyzer")]
 		public string? QuoteAnalyzer { get; set; }
@@ -8983,16 +10060,10 @@ namespace Nest
 		public double? TieBreaker { get; set; }
 
 		[JsonPropertyName("time_zone")]
-		public string? TimeZone { get; set; }
+		public TimeZone? TimeZone { get; set; }
 
 		[JsonPropertyName("type")]
 		public TextQueryType? Type { get; set; }
-	}
-
-	public partial class QueryTemplate
-	{
-		[JsonPropertyName("source")]
-		public string Source { get; set; }
 	}
 
 	public partial class RandomScoreFunction : ScoreFunctionBase
@@ -9004,53 +10075,83 @@ namespace Nest
 		public Union<long, string>? Seed { get; set; }
 	}
 
-	public partial class RangeQuery : QueryBase
+	public partial class RangeQueryBase : QueryBase
 	{
-		[JsonPropertyName("from")]
-		public Union<double, DateMath>? From { get; set; }
-
-		[JsonPropertyName("gt")]
-		public Union<double, DateMath>? Gt { get; set; }
-
-		[JsonPropertyName("gte")]
-		public Union<double, DateMath>? Gte { get; set; }
-
-		[JsonPropertyName("lt")]
-		public Union<double, DateMath>? Lt { get; set; }
-
-		[JsonPropertyName("lte")]
-		public Union<double, DateMath>? Lte { get; set; }
-
 		[JsonPropertyName("relation")]
-		public RangeRelation? Relation { get; set; }
-
-		[JsonPropertyName("time_zone")]
-		public string? TimeZone { get; set; }
-
-		[JsonPropertyName("to")]
-		public Union<double, DateMath>? To { get; set; }
+		public RangeRelation? Relation
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class RankFeatureFunction
 	{
 	}
 
+	public partial class RankFeatureFunctionLinear : RankFeatureFunction
+	{
+	}
+
+	public partial class RankFeatureFunctionLogarithm : RankFeatureFunction
+	{
+		[JsonPropertyName("scaling_factor")]
+		public float ScalingFactor { get; set; }
+	}
+
+	public partial class RankFeatureFunctionSaturation : RankFeatureFunction
+	{
+		[JsonPropertyName("pivot")]
+		public float? Pivot { get; set; }
+	}
+
+	public partial class RankFeatureFunctionSigmoid : RankFeatureFunction
+	{
+		[JsonPropertyName("exponent")]
+		public float Exponent { get; set; }
+
+		[JsonPropertyName("pivot")]
+		public float Pivot { get; set; }
+	}
+
 	public partial class RankFeatureQuery : QueryBase
 	{
-		[JsonPropertyName("function")]
-		public RankFeatureFunction? Function { get; set; }
+		[JsonPropertyName("field")]
+		public Field Field { get; set; }
+
+		[JsonPropertyName("linear")]
+		public RankFeatureFunctionLinear? Linear { get; set; }
+
+		[JsonPropertyName("log")]
+		public RankFeatureFunctionLogarithm? Log { get; set; }
+
+		[JsonPropertyName("saturation")]
+		public RankFeatureFunctionSaturation? Saturation { get; set; }
+
+		[JsonPropertyName("sigmoid")]
+		public RankFeatureFunctionSigmoid? Sigmoid { get; set; }
 	}
 
 	public partial class RegexpQuery : QueryBase
 	{
+		[JsonPropertyName("case_insensitive")]
+		public bool? CaseInsensitive { get; set; }
+
 		[JsonPropertyName("flags")]
 		public string? Flags { get; set; }
 
 		[JsonPropertyName("max_determinized_states")]
 		public int? MaxDeterminizedStates { get; set; }
 
+		[JsonPropertyName("rewrite")]
+		public MultiTermQueryRewrite? Rewrite { get; set; }
+
 		[JsonPropertyName("value")]
-		public string? Value { get; set; }
+		public string Value { get; set; }
 	}
 
 	public partial class ScoreFunctionBase
@@ -9065,7 +10166,7 @@ namespace Nest
 	public partial class ScriptQuery : QueryBase
 	{
 		[JsonPropertyName("script")]
-		public Script? Script { get; set; }
+		public Script Script { get; set; }
 	}
 
 	public partial class ScriptScoreFunction : ScoreFunctionBase
@@ -9076,26 +10177,18 @@ namespace Nest
 
 	public partial class ScriptScoreQuery : QueryBase
 	{
+		[JsonPropertyName("min_score")]
+		public float? MinScore { get; set; }
+
 		[JsonPropertyName("query")]
-		public QueryContainer? Query { get; set; }
+		public QueryContainer Query { get; set; }
 
 		[JsonPropertyName("script")]
-		public Script? Script { get; set; }
+		public Script Script { get; set; }
 	}
 
 	public partial class ShapeQuery : QueryBase
 	{
-		[JsonPropertyName("ignore_unmapped")]
-		public bool? IgnoreUnmapped { get; set; }
-
-		[JsonPropertyName("indexed_shape")]
-		public FieldLookup? IndexedShape { get; set; }
-
-		[JsonPropertyName("relation")]
-		public ShapeRelation? Relation { get; set; }
-
-		[JsonPropertyName("shape")]
-		public GeoShape? Shape { get; set; }
 	}
 
 	public partial class SimpleQueryStringQuery : QueryBase
@@ -9113,7 +10206,7 @@ namespace Nest
 		public Operator? DefaultOperator { get; set; }
 
 		[JsonPropertyName("fields")]
-		public Fields? Fields { get; set; }
+		public IEnumerable<Field>? Fields { get; set; }
 
 		[JsonPropertyName("flags")]
 		public Union<SimpleQueryStringFlags, string>? Flags { get; set; }
@@ -9134,7 +10227,7 @@ namespace Nest
 		public MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 		[JsonPropertyName("query")]
-		public string? Query { get; set; }
+		public string Query { get; set; }
 
 		[JsonPropertyName("quote_field_suffix")]
 		public string? QuoteFieldSuffix { get; set; }
@@ -9143,49 +10236,40 @@ namespace Nest
 	public partial class SpanContainingQuery : QueryBase
 	{
 		[JsonPropertyName("big")]
-		public SpanQuery? Big { get; set; }
+		public SpanQuery Big { get; set; }
 
 		[JsonPropertyName("little")]
-		public SpanQuery? Little { get; set; }
+		public SpanQuery Little { get; set; }
 	}
 
 	public partial class SpanFieldMaskingQuery : QueryBase
 	{
 		[JsonPropertyName("field")]
-		public Field? Field { get; set; }
+		public Field Field { get; set; }
 
 		[JsonPropertyName("query")]
-		public SpanQuery? Query { get; set; }
+		public SpanQuery Query { get; set; }
 	}
 
 	public partial class SpanFirstQuery : QueryBase
 	{
 		[JsonPropertyName("end")]
-		public int? End { get; set; }
+		public int End { get; set; }
 
 		[JsonPropertyName("match")]
-		public SpanQuery? Match { get; set; }
-	}
-
-	public partial class SpanGapQuery : QueryBase
-	{
-		[JsonPropertyName("field")]
-		public Field? Field { get; set; }
-
-		[JsonPropertyName("width")]
-		public int? Width { get; set; }
+		public SpanQuery Match { get; set; }
 	}
 
 	public partial class SpanMultiTermQuery : QueryBase
 	{
 		[JsonPropertyName("match")]
-		public QueryContainer? Match { get; set; }
+		public QueryContainer Match { get; set; }
 	}
 
 	public partial class SpanNearQuery : QueryBase
 	{
 		[JsonPropertyName("clauses")]
-		public IEnumerable<SpanQuery>? Clauses { get; set; }
+		public IEnumerable<SpanQuery> Clauses { get; set; }
 
 		[JsonPropertyName("in_order")]
 		public bool? InOrder { get; set; }
@@ -9200,10 +10284,10 @@ namespace Nest
 		public int? Dist { get; set; }
 
 		[JsonPropertyName("exclude")]
-		public SpanQuery? Exclude { get; set; }
+		public SpanQuery Exclude { get; set; }
 
 		[JsonPropertyName("include")]
-		public SpanQuery? Include { get; set; }
+		public SpanQuery Include { get; set; }
 
 		[JsonPropertyName("post")]
 		public int? Post { get; set; }
@@ -9215,40 +10299,40 @@ namespace Nest
 	public partial class SpanOrQuery : QueryBase
 	{
 		[JsonPropertyName("clauses")]
-		public IEnumerable<SpanQuery>? Clauses { get; set; }
+		public IEnumerable<SpanQuery> Clauses { get; set; }
 	}
 
-	public partial class SpanQuery : QueryBase
+	public partial class SpanQuery
 	{
 		[JsonPropertyName("field_masking_span")]
-		public NamedQuery<Union<SpanFieldMaskingQuery, string>>? FieldMaskingSpan { get; set; }
+		public SpanFieldMaskingQuery? FieldMaskingSpan { get; set; }
 
 		[JsonPropertyName("span_containing")]
-		public NamedQuery<Union<SpanContainingQuery, string>>? SpanContaining { get; set; }
+		public SpanContainingQuery? SpanContaining { get; set; }
 
 		[JsonPropertyName("span_first")]
-		public NamedQuery<Union<SpanFirstQuery, string>>? SpanFirst { get; set; }
+		public SpanFirstQuery? SpanFirst { get; set; }
 
 		[JsonPropertyName("span_gap")]
-		public NamedQuery<Union<SpanGapQuery, int>>? SpanGap { get; set; }
+		public Dictionary<Field, int>? SpanGap { get; set; }
 
 		[JsonPropertyName("span_multi")]
 		public SpanMultiTermQuery? SpanMulti { get; set; }
 
 		[JsonPropertyName("span_near")]
-		public NamedQuery<Union<SpanNearQuery, string>>? SpanNear { get; set; }
+		public SpanNearQuery? SpanNear { get; set; }
 
 		[JsonPropertyName("span_not")]
-		public NamedQuery<Union<SpanNotQuery, string>>? SpanNot { get; set; }
+		public SpanNotQuery? SpanNot { get; set; }
 
 		[JsonPropertyName("span_or")]
-		public NamedQuery<Union<SpanOrQuery, string>>? SpanOr { get; set; }
+		public SpanOrQuery? SpanOr { get; set; }
 
 		[JsonPropertyName("span_term")]
-		public NamedQuery<Union<SpanTermQuery, string>>? SpanTerm { get; set; }
+		public Dictionary<Field, SpanTermQuery>? SpanTerm { get; set; }
 
 		[JsonPropertyName("span_within")]
-		public NamedQuery<Union<SpanWithinQuery, string>>? SpanWithin { get; set; }
+		public SpanWithinQuery? SpanWithin { get; set; }
 	}
 
 	public partial class SpanTermQuery : QueryBase
@@ -9260,46 +10344,27 @@ namespace Nest
 	public partial class SpanWithinQuery : QueryBase
 	{
 		[JsonPropertyName("big")]
-		public SpanQuery? Big { get; set; }
+		public SpanQuery Big { get; set; }
 
 		[JsonPropertyName("little")]
-		public SpanQuery? Little { get; set; }
+		public SpanQuery Little { get; set; }
 	}
 
 	public partial class TermQuery : QueryBase
 	{
+		[JsonPropertyName("case_insensitive")]
+		public bool? CaseInsensitive { get; set; }
+
 		[JsonPropertyName("value")]
-		public OneOf<string, float, bool>? Value { get; set; }
+		public OneOf<string, float, bool> Value { get; set; }
 	}
 
 	public partial class TermsQuery : QueryBase
 	{
-		[JsonPropertyName("id")]
-		public Id? Id { get; set; }
-
-		[JsonPropertyName("index")]
-		public IndexName? Index { get; set; }
-
-		[JsonPropertyName("path")]
-		public string? Path { get; set; }
-
-		[JsonPropertyName("routing")]
-		public Routing? Routing { get; set; }
-
-		[JsonPropertyName("terms")]
-		public IEnumerable<string>? Terms { get; set; }
 	}
 
 	public partial class TermsSetQuery : QueryBase
 	{
-		[JsonPropertyName("minimum_should_match_field")]
-		public Field? MinimumShouldMatchField { get; set; }
-
-		[JsonPropertyName("minimum_should_match_script")]
-		public Script? MinimumShouldMatchScript { get; set; }
-
-		[JsonPropertyName("terms")]
-		public IEnumerable<string>? Terms { get; set; }
 	}
 
 	public partial class ThreeDimensionalPoint
@@ -9371,11 +10436,1367 @@ namespace Nest
 
 	public partial class WildcardQuery : QueryBase
 	{
+		[JsonPropertyName("case_insensitive")]
+		public bool? CaseInsensitive { get; set; }
+
 		[JsonPropertyName("rewrite")]
 		public MultiTermQueryRewrite? Rewrite { get; set; }
 
 		[JsonPropertyName("value")]
 		public string Value { get; set; }
+	}
+
+	public partial class ClusterStateBlockIndex
+	{
+		[JsonPropertyName("aliases")]
+		public IReadOnlyCollection<IndexAlias>? Aliases
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("aliases_version")]
+		public VersionNumber? AliasesVersion
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("description")]
+		public string? Description
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("in_sync_allocations")]
+		public Dictionary<string, IReadOnlyCollection<string>>? InSyncAllocations
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("levels")]
+		public IReadOnlyCollection<string>? Levels
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("mappings")]
+		public Dictionary<string, TypeMapping>? Mappings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("mapping_version")]
+		public VersionNumber? MappingVersion
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("primary_terms")]
+		public Dictionary<string, int>? PrimaryTerms
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("retryable")]
+		public bool? Retryable
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("rollover_info")]
+		public Dictionary<string, RolloverConditions>? RolloverInfo
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("routing_num_shards")]
+		public VersionNumber? RoutingNumShards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("settings")]
+		public Dictionary<IndexName, IndexSettings>? Settings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("settings_version")]
+		public VersionNumber? SettingsVersion
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("state")]
+		public string? State
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("system")]
+		public bool? System
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("timestamp_range")]
+		public Dictionary<string, object>? TimestampRange
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public VersionNumber? Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateDeletedSnapshots
+	{
+		[JsonPropertyName("snapshot_deletions")]
+		public IReadOnlyCollection<string> SnapshotDeletions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateIndexLifecycle
+	{
+		[JsonPropertyName("operation_mode")]
+		public LifecycleOperationMode OperationMode
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("policies")]
+		public Dictionary<IndexName, ClusterStateIndexLifecycleSummary> Policies
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateIndexLifecyclePolicy
+	{
+		[JsonPropertyName("phases")]
+		public Phases Phases
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateIndexLifecycleSummary
+	{
+		[JsonPropertyName("headers")]
+		public HttpHeaders Headers
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("modified_date")]
+		public long ModifiedDate
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("modified_date_string")]
+		public DateString ModifiedDateString
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("policy")]
+		public ClusterStateIndexLifecyclePolicy Policy
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public VersionNumber Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateIngest
+	{
+		[JsonPropertyName("pipeline")]
+		public IReadOnlyCollection<ClusterStateIngestPipeline> Pipeline
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateIngestPipeline
+	{
+		[JsonPropertyName("config")]
+		public ClusterStateIngestPipelineConfig Config
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("id")]
+		public Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateIngestPipelineConfig
+	{
+		[JsonPropertyName("description")]
+		public string? Description
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("processors")]
+		public IReadOnlyCollection<ProcessorContainer> Processors
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public VersionNumber? Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateMetadata
+	{
+		[JsonPropertyName("cluster_coordination")]
+		public ClusterStateMetadataClusterCoordination ClusterCoordination
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cluster_uuid")]
+		public Uuid ClusterUuid
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cluster_uuid_committed")]
+		public bool ClusterUuidCommitted
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("component_template")]
+		public Dictionary<string, object>? ComponentTemplate
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index-graveyard")]
+		public ClusterStateMetadataIndexGraveyard IndexGraveyard
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_lifecycle")]
+		public ClusterStateIndexLifecycle? IndexLifecycle
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_template")]
+		public Dictionary<string, object>? IndexTemplate
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("indices")]
+		public Dictionary<IndexName, ClusterStateBlockIndex>? Indices
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ingest")]
+		public ClusterStateIngest? Ingest
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("repositories")]
+		public Dictionary<string, string>? Repositories
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("templates")]
+		public ClusterStateMetadataTemplate Templates
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateMetadataClusterCoordination
+	{
+		[JsonPropertyName("last_accepted_config")]
+		public IReadOnlyCollection<string> LastAcceptedConfig
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("last_committed_config")]
+		public IReadOnlyCollection<string> LastCommittedConfig
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("term")]
+		public int Term
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("voting_config_exclusions")]
+		public IReadOnlyCollection<VotingConfigExclusionsItem> VotingConfigExclusions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateMetadataIndexGraveyard
+	{
+		[JsonPropertyName("tombstones")]
+		public IReadOnlyCollection<Tombstone> Tombstones
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateMetadataTemplate
+	{
+	}
+
+	public partial class ClusterStateRoutingNodes
+	{
+		[JsonPropertyName("nodes")]
+		public Dictionary<string, IReadOnlyCollection<NodeShard>> Nodes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("unassigned")]
+		public IReadOnlyCollection<NodeShard> Unassigned
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateSnapshots
+	{
+		[JsonPropertyName("snapshots")]
+		public IReadOnlyCollection<Status> Snapshots
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ComponentTemplate
+	{
+		[JsonPropertyName("component_template")]
+		public ComponentTemplateNode ComponentTemplate
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("name")]
+		public Name Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ComponentTemplateNode
+	{
+		[JsonPropertyName("_meta")]
+		public Metadata? Meta
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("template")]
+		public ComponentTemplateSummary Template
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public VersionNumber? Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ComponentTemplateSummary
+	{
+		[JsonPropertyName("aliases")]
+		public Dictionary<string, AliasDefinition>? Aliases
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("mappings")]
+		public TypeMapping? Mappings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_meta")]
+		public Metadata? Meta
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("settings")]
+		public Dictionary<IndexName, IndexSettings> Settings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public VersionNumber? Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Tombstone
+	{
+		[JsonPropertyName("delete_date")]
+		public DateString? DeleteDate
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("delete_date_in_millis")]
+		public long DeleteDateInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index")]
+		public TombstoneIndex Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class TombstoneIndex
+	{
+		[JsonPropertyName("index_name")]
+		public Name IndexName
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_uuid")]
+		public Uuid IndexUuid
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class VotingConfigExclusionsItem
+	{
+		[JsonPropertyName("node_id")]
+		public Id NodeId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("node_name")]
+		public Name NodeName
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class AllocationDecision
+	{
+		[JsonPropertyName("decider")]
+		public string Decider
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("decision")]
+		public AllocationExplainDecision Decision
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("explanation")]
+		public string Explanation
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class AllocationStore
+	{
+		[JsonPropertyName("allocation_id")]
+		public string AllocationId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("found")]
+		public bool Found
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("in_sync")]
+		public bool InSync
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("matching_size_in_bytes")]
+		public long MatchingSizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("matching_sync_id")]
+		public bool MatchingSyncId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("store_exception")]
+		public string StoreException
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterInfo
+	{
+		[JsonPropertyName("nodes")]
+		public Dictionary<string, NodeDiskUsage> Nodes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("reserved_sizes")]
+		public IReadOnlyCollection<ReservedSize> ReservedSizes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shard_data_set_sizes")]
+		public Dictionary<string, string>? ShardDataSetSizes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shard_paths")]
+		public Dictionary<string, string> ShardPaths
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shard_sizes")]
+		public Dictionary<string, long> ShardSizes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class CurrentNode
+	{
+		[JsonPropertyName("attributes")]
+		public Dictionary<string, string> Attributes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("id")]
+		public Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("name")]
+		public Name Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transport_address")]
+		public TransportAddress TransportAddress
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("weight_ranking")]
+		public int WeightRanking
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DiskUsage
+	{
+		[JsonPropertyName("free_bytes")]
+		public long FreeBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("free_disk_percent")]
+		public double FreeDiskPercent
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("path")]
+		public string Path
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total_bytes")]
+		public long TotalBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("used_bytes")]
+		public long UsedBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("used_disk_percent")]
+		public double UsedDiskPercent
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class NodeAllocationExplanation
+	{
+		[JsonPropertyName("deciders")]
+		public IReadOnlyCollection<AllocationDecision> Deciders
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("node_attributes")]
+		public Dictionary<string, string> NodeAttributes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("node_decision")]
+		public Decision NodeDecision
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("node_id")]
+		public Id NodeId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("node_name")]
+		public Name NodeName
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("store")]
+		public AllocationStore? Store
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transport_address")]
+		public TransportAddress TransportAddress
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("weight_ranking")]
+		public int WeightRanking
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class NodeDiskUsage
+	{
+		[JsonPropertyName("least_available")]
+		public DiskUsage LeastAvailable
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("most_available")]
+		public DiskUsage MostAvailable
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("node_name")]
+		public Name NodeName
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ReservedSize
+	{
+		[JsonPropertyName("node_id")]
+		public Id NodeId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("path")]
+		public string Path
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shards")]
+		public IReadOnlyCollection<string> Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public long Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class UnassignedInformation
+	{
+		[JsonPropertyName("allocation_status")]
+		public string? AllocationStatus
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("at")]
+		public DateString At
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("delayed")]
+		public bool? Delayed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("details")]
+		public string? Details
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("failed_allocation_attempts")]
+		public int? FailedAllocationAttempts
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("last_allocation_status")]
+		public string? LastAllocationStatus
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("reason")]
+		public UnassignedInformationReason Reason
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class IndexHealthStats
@@ -9549,6 +11970,2235 @@ namespace Nest
 		}
 	}
 
+	public partial class PendingTask
+	{
+		[JsonPropertyName("insert_order")]
+		public int InsertOrder
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("priority")]
+		public string Priority
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source")]
+		public string Source
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_in_queue")]
+		public string TimeInQueue
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_in_queue_millis")]
+		public int TimeInQueueMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Command
+	{
+		[JsonPropertyName("allocate_empty_primary")]
+		public CommandAllocatePrimaryAction? AllocateEmptyPrimary { get; set; }
+
+		[JsonPropertyName("allocate_replica")]
+		public CommandAllocateReplicaAction? AllocateReplica { get; set; }
+
+		[JsonPropertyName("allocate_stale_primary")]
+		public CommandAllocatePrimaryAction? AllocateStalePrimary { get; set; }
+
+		[JsonPropertyName("cancel")]
+		public CommandCancelAction? Cancel { get; set; }
+
+		[JsonPropertyName("move")]
+		public CommandMoveAction? Move { get; set; }
+	}
+
+	public partial class CommandAllocatePrimaryAction
+	{
+		[JsonPropertyName("accept_data_loss")]
+		public bool AcceptDataLoss { get; set; }
+
+		[JsonPropertyName("index")]
+		public IndexName Index { get; set; }
+
+		[JsonPropertyName("node")]
+		public string Node { get; set; }
+
+		[JsonPropertyName("shard")]
+		public int Shard { get; set; }
+	}
+
+	public partial class CommandAllocateReplicaAction
+	{
+		[JsonPropertyName("index")]
+		public IndexName Index { get; set; }
+
+		[JsonPropertyName("node")]
+		public string Node { get; set; }
+
+		[JsonPropertyName("shard")]
+		public int Shard { get; set; }
+	}
+
+	public partial class CommandCancelAction
+	{
+		[JsonPropertyName("allow_primary")]
+		public bool? AllowPrimary { get; set; }
+
+		[JsonPropertyName("index")]
+		public IndexName Index { get; set; }
+
+		[JsonPropertyName("node")]
+		public string Node { get; set; }
+
+		[JsonPropertyName("shard")]
+		public int Shard { get; set; }
+	}
+
+	public partial class CommandMoveAction
+	{
+		[JsonPropertyName("from_node")]
+		public string FromNode { get; set; }
+
+		[JsonPropertyName("index")]
+		public IndexName Index { get; set; }
+
+		[JsonPropertyName("shard")]
+		public int Shard { get; set; }
+
+		[JsonPropertyName("to_node")]
+		public string ToNode { get; set; }
+	}
+
+	public partial class RerouteDecision
+	{
+		[JsonPropertyName("decider")]
+		public string Decider
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("decision")]
+		public string Decision
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("explanation")]
+		public string Explanation
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RerouteExplanation
+	{
+		[JsonPropertyName("command")]
+		public string Command
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("decisions")]
+		public IReadOnlyCollection<RerouteDecision> Decisions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("parameters")]
+		public RerouteParameters Parameters
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RerouteParameters
+	{
+		[JsonPropertyName("allow_primary")]
+		public bool AllowPrimary
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("from_node")]
+		public NodeName? FromNode
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index")]
+		public IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("node")]
+		public NodeName Node
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shard")]
+		public int Shard
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("to_node")]
+		public NodeName? ToNode
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RerouteState
+	{
+		[JsonPropertyName("blocks")]
+		public EmptyObject? Blocks
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cluster_uuid")]
+		public Uuid ClusterUuid
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("master_node")]
+		public string? MasterNode
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("metadata")]
+		public ClusterStateMetadata? Metadata
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("nodes")]
+		public Dictionary<NodeName, NodeAttributes>? Nodes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("routing_nodes")]
+		public ClusterStateRoutingNodes? RoutingNodes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("routing_table")]
+		public Dictionary<string, EmptyObject>? RoutingTable
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("security_tokens")]
+		public Dictionary<string, string>? SecurityTokens
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("snapshot_deletions")]
+		public ClusterStateDeletedSnapshots? SnapshotDeletions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("snapshots")]
+		public ClusterStateSnapshots? Snapshots
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("state_uuid")]
+		public Uuid? StateUuid
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public VersionNumber? Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterStateBlocks
+	{
+		[JsonPropertyName("indices")]
+		public Dictionary<IndexName, Dictionary<string, ClusterStateBlockIndex>>? Indices
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class CharFilterTypes
+	{
+		[JsonPropertyName("analyzer_types")]
+		public IReadOnlyCollection<FieldTypes> AnalyzerTypes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("built_in_analyzers")]
+		public IReadOnlyCollection<FieldTypes> BuiltInAnalyzers
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("built_in_char_filters")]
+		public IReadOnlyCollection<FieldTypes> BuiltInCharFilters
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("built_in_filters")]
+		public IReadOnlyCollection<FieldTypes> BuiltInFilters
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("built_in_tokenizers")]
+		public IReadOnlyCollection<FieldTypes> BuiltInTokenizers
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("char_filter_types")]
+		public IReadOnlyCollection<FieldTypes> CharFilterTypes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("filter_types")]
+		public IReadOnlyCollection<FieldTypes> FilterTypes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("tokenizer_types")]
+		public IReadOnlyCollection<FieldTypes> TokenizerTypes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterFileSystem
+	{
+		[JsonPropertyName("available_in_bytes")]
+		public long AvailableInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("free_in_bytes")]
+		public long FreeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total_in_bytes")]
+		public long TotalInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterIndices
+	{
+		[JsonPropertyName("analysis")]
+		public CharFilterTypes Analysis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("completion")]
+		public CompletionStats Completion
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("count")]
+		public long Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("docs")]
+		public DocStats Docs
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fielddata")]
+		public FielddataStats Fielddata
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("mappings")]
+		public FieldTypesMappings Mappings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("query_cache")]
+		public QueryCacheStats QueryCache
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("segments")]
+		public SegmentsStats Segments
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shards")]
+		public ClusterIndicesShards Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("store")]
+		public StoreStats Store
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("versions")]
+		public IReadOnlyCollection<IndicesVersions>? Versions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterIndicesShards
+	{
+		[JsonPropertyName("index")]
+		public ClusterIndicesShardsIndex? Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("primaries")]
+		public double? Primaries
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("replication")]
+		public double? Replication
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public double? Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterIndicesShardsIndex
+	{
+		[JsonPropertyName("primaries")]
+		public ClusterShardMetrics Primaries
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("replication")]
+		public ClusterShardMetrics Replication
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shards")]
+		public ClusterShardMetrics Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterIngest
+	{
+		[JsonPropertyName("number_of_pipelines")]
+		public int NumberOfPipelines
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("processor_stats")]
+		public Dictionary<string, ClusterProcessor> ProcessorStats
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterJvm
+	{
+		[JsonPropertyName("max_uptime_in_millis")]
+		public long MaxUptimeInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("mem")]
+		public ClusterJvmMemory Mem
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("threads")]
+		public long Threads
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("versions")]
+		public IReadOnlyCollection<ClusterJvmVersion> Versions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterJvmMemory
+	{
+		[JsonPropertyName("heap_max_in_bytes")]
+		public long HeapMaxInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("heap_used_in_bytes")]
+		public long HeapUsedInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterJvmVersion
+	{
+		[JsonPropertyName("bundled_jdk")]
+		public bool BundledJdk
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("count")]
+		public int Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("using_bundled_jdk")]
+		public bool UsingBundledJdk
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public VersionString Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("vm_name")]
+		public string VmName
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("vm_vendor")]
+		public string VmVendor
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("vm_version")]
+		public VersionString VmVersion
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterNetworkTypes
+	{
+		[JsonPropertyName("http_types")]
+		public Dictionary<string, int> HttpTypes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transport_types")]
+		public Dictionary<string, int> TransportTypes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterNodeCount
+	{
+		[JsonPropertyName("coordinating_only")]
+		public int CoordinatingOnly
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("data")]
+		public int Data
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("data_cold")]
+		public int DataCold
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("data_content")]
+		public int DataContent
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("data_frozen")]
+		public int? DataFrozen
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("data_hot")]
+		public int DataHot
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("data_warm")]
+		public int DataWarm
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ingest")]
+		public int Ingest
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("master")]
+		public int Master
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ml")]
+		public int Ml
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("remote_cluster_client")]
+		public int RemoteClusterClient
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public int Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transform")]
+		public int Transform
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("voting_only")]
+		public int VotingOnly
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterNodes
+	{
+		[JsonPropertyName("count")]
+		public ClusterNodeCount Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("discovery_types")]
+		public Dictionary<string, int> DiscoveryTypes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fs")]
+		public ClusterFileSystem Fs
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ingest")]
+		public ClusterIngest Ingest
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("jvm")]
+		public ClusterJvm Jvm
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("network_types")]
+		public ClusterNetworkTypes NetworkTypes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("os")]
+		public ClusterOperatingSystem Os
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("packaging_types")]
+		public IReadOnlyCollection<NodePackagingType> PackagingTypes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("plugins")]
+		public IReadOnlyCollection<PluginStats> Plugins
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("process")]
+		public ClusterProcess Process
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("versions")]
+		public IReadOnlyCollection<VersionString> Versions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterOperatingSystem
+	{
+		[JsonPropertyName("allocated_processors")]
+		public int AllocatedProcessors
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("architectures")]
+		public IReadOnlyCollection<ClusterOperatingSystemArchitecture>? Architectures
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("available_processors")]
+		public int AvailableProcessors
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("mem")]
+		public OperatingSystemMemoryInfo Mem
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("names")]
+		public IReadOnlyCollection<ClusterOperatingSystemName> Names
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("pretty_names")]
+		public IReadOnlyCollection<ClusterOperatingSystemName> PrettyNames
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterOperatingSystemArchitecture
+	{
+		[JsonPropertyName("arch")]
+		public string Arch
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("count")]
+		public int Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterOperatingSystemName
+	{
+		[JsonPropertyName("count")]
+		public int Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("name")]
+		public Name Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterProcess
+	{
+		[JsonPropertyName("cpu")]
+		public ClusterProcessCpu Cpu
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("open_file_descriptors")]
+		public ClusterProcessOpenFileDescriptors OpenFileDescriptors
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterProcessCpu
+	{
+		[JsonPropertyName("percent")]
+		public int Percent
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterProcessOpenFileDescriptors
+	{
+		[JsonPropertyName("avg")]
+		public long Avg
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max")]
+		public long Max
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("min")]
+		public long Min
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterProcessor
+	{
+		[JsonPropertyName("count")]
+		public long Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("current")]
+		public long Current
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("failed")]
+		public long Failed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_in_millis")]
+		public long TimeInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterShardMetrics
+	{
+		[JsonPropertyName("avg")]
+		public double Avg
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max")]
+		public double Max
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("min")]
+		public double Min
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FieldTypes
+	{
+		[JsonPropertyName("count")]
+		public int Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_count")]
+		public int IndexCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("name")]
+		public Name Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("script_count")]
+		public int? ScriptCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FieldTypesMappings
+	{
+		[JsonPropertyName("field_types")]
+		public IReadOnlyCollection<FieldTypes> FieldTypes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("runtime_field_types")]
+		public IReadOnlyCollection<RuntimeFieldTypes>? RuntimeFieldTypes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class IndicesVersions
+	{
+		[JsonPropertyName("index_count")]
+		public int IndexCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("primary_shard_count")]
+		public int PrimaryShardCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total_primary_bytes")]
+		public long TotalPrimaryBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public VersionString Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class NodePackagingType
+	{
+		[JsonPropertyName("count")]
+		public int Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("flavor")]
+		public string Flavor
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class OperatingSystemMemoryInfo
+	{
+		[JsonPropertyName("free_in_bytes")]
+		public long FreeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("free_percent")]
+		public int FreePercent
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total_in_bytes")]
+		public long TotalInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("used_in_bytes")]
+		public long UsedInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("used_percent")]
+		public int UsedPercent
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RuntimeFieldTypes
+	{
+		[JsonPropertyName("chars_max")]
+		public int CharsMax
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("chars_total")]
+		public int CharsTotal
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("count")]
+		public int Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("doc_max")]
+		public int DocMax
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("doc_total")]
+		public int DocTotal
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_count")]
+		public int IndexCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lang")]
+		public IReadOnlyCollection<string> Lang
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lines_max")]
+		public int LinesMax
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lines_total")]
+		public int LinesTotal
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("name")]
+		public Name Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("scriptless_count")]
+		public int ScriptlessCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shadowed_count")]
+		public int ShadowedCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source_max")]
+		public int SourceMax
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source_total")]
+		public int SourceTotal
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Action
+	{
+	}
+
+	public partial class Phase
+	{
+		[JsonPropertyName("actions")]
+		public Union<Dictionary<string, Action>, IReadOnlyCollection<string>> Actions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("min_age")]
+		public Time? MinAge
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Phases
+	{
+		[JsonPropertyName("cold")]
+		public Phase? Cold
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("delete")]
+		public Phase? Delete
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("hot")]
+		public Phase? Hot
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("warm")]
+		public Phase? Warm
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class LifecycleExplain
+	{
+		[JsonPropertyName("action")]
+		public Name Action
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("action_time_millis")]
+		public EpochMillis ActionTimeMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("age")]
+		public Time Age
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("failed_step")]
+		public Name? FailedStep
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("failed_step_retry_count")]
+		public int? FailedStepRetryCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index")]
+		public IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("is_auto_retryable_error")]
+		public bool? IsAutoRetryableError
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lifecycle_date_millis")]
+		public EpochMillis LifecycleDateMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("managed")]
+		public bool Managed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("phase")]
+		public Name Phase
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("phase_execution")]
+		public LifecycleExplainPhaseExecution PhaseExecution
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("phase_time_millis")]
+		public EpochMillis PhaseTimeMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("policy")]
+		public Name Policy
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("step")]
+		public Name Step
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("step_info")]
+		public Dictionary<string, object>? StepInfo
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("step_time_millis")]
+		public EpochMillis StepTimeMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class LifecycleExplainPhaseExecution
+	{
+		[JsonPropertyName("modified_date_in_millis")]
+		public EpochMillis ModifiedDateInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("policy")]
+		public Name Policy
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public VersionNumber Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class LifecycleExplainProject
+	{
+		[JsonPropertyName("project")]
+		public LifecycleExplainProjectSummary Project
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class LifecycleExplainProjectSummary
+	{
+		[JsonPropertyName("index")]
+		public IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("managed")]
+		public bool Managed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class StepKey
+	{
+		[JsonPropertyName("action")]
+		public string Action { get; set; }
+
+		[JsonPropertyName("name")]
+		public string Name { get; set; }
+
+		[JsonPropertyName("phase")]
+		public string Phase { get; set; }
+	}
+
 	public partial class Alias
 	{
 		[JsonPropertyName("filter")]
@@ -9568,6 +14218,24 @@ namespace Nest
 
 		[JsonPropertyName("search_routing")]
 		public Routing? SearchRouting { get; set; }
+	}
+
+	public partial class AliasDefinition
+	{
+		[JsonPropertyName("filter")]
+		public QueryContainer? Filter { get; set; }
+
+		[JsonPropertyName("index_routing")]
+		public string? IndexRouting { get; set; }
+
+		[JsonPropertyName("is_write_index")]
+		public bool? IsWriteIndex { get; set; }
+
+		[JsonPropertyName("routing")]
+		public string? Routing { get; set; }
+
+		[JsonPropertyName("search_routing")]
+		public string? SearchRouting { get; set; }
 	}
 
 	public partial class FielddataFrequencyFilter
@@ -9606,6 +14274,240 @@ namespace Nest
 		}
 	}
 
+	public partial class IndexRouting
+	{
+		[JsonPropertyName("allocation")]
+		public IndexRoutingAllocation? Allocation { get; set; }
+
+		[JsonPropertyName("rebalance")]
+		public IndexRoutingRebalance? Rebalance { get; set; }
+	}
+
+	public partial class IndexRoutingAllocation
+	{
+		[JsonPropertyName("disk")]
+		public IndexRoutingAllocationDisk? Disk { get; set; }
+
+		[JsonPropertyName("enable")]
+		public IndexRoutingAllocationOptions? Enable { get; set; }
+
+		[JsonPropertyName("include")]
+		public IndexRoutingAllocationInclude? Include { get; set; }
+
+		[JsonPropertyName("initial_recovery")]
+		public IndexRoutingAllocationInitialRecovery? InitialRecovery { get; set; }
+	}
+
+	public partial class IndexRoutingAllocationDisk
+	{
+		[JsonPropertyName("threshold_enabled")]
+		public Union<bool, string> ThresholdEnabled { get; set; }
+	}
+
+	public partial class IndexRoutingAllocationInclude
+	{
+		[JsonPropertyName("_id")]
+		public Id? Id { get; set; }
+
+		[JsonPropertyName("_tier_preference")]
+		public string? TierPreference { get; set; }
+	}
+
+	public partial class IndexRoutingAllocationInitialRecovery
+	{
+		[JsonPropertyName("_id")]
+		public Id? Id { get; set; }
+	}
+
+	public partial class IndexRoutingRebalance
+	{
+		[JsonPropertyName("enable")]
+		public IndexRoutingRebalanceOptions Enable { get; set; }
+	}
+
+	public partial class IndexSettingBlocks
+	{
+		[JsonPropertyName("metadata")]
+		public bool? Metadata { get; set; }
+
+		[JsonPropertyName("read")]
+		public bool? Read { get; set; }
+
+		[JsonPropertyName("read_only")]
+		public bool? ReadOnly { get; set; }
+
+		[JsonPropertyName("read_only_allow_delete")]
+		public bool? ReadOnlyAllowDelete { get; set; }
+
+		[JsonPropertyName("write")]
+		public Union<bool, string>? Write { get; set; }
+	}
+
+	public partial class IndexSettings
+	{
+		[JsonPropertyName("analysis")]
+		public IndexSettingsAnalysis? Analysis { get; set; }
+
+		[JsonPropertyName("analyze.max_token_count")]
+		public int? AnalyzeMaxTokenCount { get; set; }
+
+		[JsonPropertyName("auto_expand_replicas")]
+		public string? AutoExpandReplicas { get; set; }
+
+		[JsonPropertyName("blocks")]
+		public IndexSettingBlocks? Blocks { get; set; }
+
+		[JsonPropertyName("check_on_startup")]
+		public IndexCheckOnStartup? CheckOnStartup { get; set; }
+
+		[JsonPropertyName("codec")]
+		public string? Codec { get; set; }
+
+		[JsonPropertyName("creation_date")]
+		public DateString? CreationDate { get; set; }
+
+		[JsonPropertyName("default_pipeline")]
+		public PipelineName? DefaultPipeline { get; set; }
+
+		[JsonPropertyName("final_pipeline")]
+		public PipelineName? FinalPipeline { get; set; }
+
+		[JsonPropertyName("format")]
+		public Union<string, int>? Format { get; set; }
+
+		[JsonPropertyName("gc_deletes")]
+		public Time? GcDeletes { get; set; }
+
+		[JsonPropertyName("hidden")]
+		public Union<bool, string>? Hidden { get; set; }
+
+		[JsonPropertyName("highlight.max_analyzed_offset")]
+		public int? HighlightMaxAnalyzedOffset { get; set; }
+
+		[JsonPropertyName("lifecycle")]
+		public IndexSettingsLifecycle? Lifecycle { get; set; }
+
+		[JsonPropertyName("load_fixed_bitset_filters_eagerly")]
+		public bool? LoadFixedBitsetFiltersEagerly { get; set; }
+
+		[JsonPropertyName("max_docvalue_fields_search")]
+		public int? MaxDocvalueFieldsSearch { get; set; }
+
+		[JsonPropertyName("max_inner_result_window")]
+		public int? MaxInnerResultWindow { get; set; }
+
+		[JsonPropertyName("max_ngram_diff")]
+		public int? MaxNgramDiff { get; set; }
+
+		[JsonPropertyName("max_refresh_listeners")]
+		public int? MaxRefreshListeners { get; set; }
+
+		[JsonPropertyName("max_regex_length")]
+		public int? MaxRegexLength { get; set; }
+
+		[JsonPropertyName("max_rescore_window")]
+		public int? MaxRescoreWindow { get; set; }
+
+		[JsonPropertyName("max_result_window")]
+		public int? MaxResultWindow { get; set; }
+
+		[JsonPropertyName("max_script_fields")]
+		public int? MaxScriptFields { get; set; }
+
+		[JsonPropertyName("max_shingle_diff")]
+		public int? MaxShingleDiff { get; set; }
+
+		[JsonPropertyName("max_slices_per_scroll")]
+		public int? MaxSlicesPerScroll { get; set; }
+
+		[JsonPropertyName("max_terms_count")]
+		public int? MaxTermsCount { get; set; }
+
+		[JsonPropertyName("number_of_replicas")]
+		public Union<int, string>? NumberOfReplicas { get; set; }
+
+		[JsonPropertyName("number_of_routing_shards")]
+		public int? NumberOfRoutingShards { get; set; }
+
+		[JsonPropertyName("number_of_shards")]
+		public Union<int, string>? NumberOfShards { get; set; }
+
+		[JsonPropertyName("priority")]
+		public Union<int, string>? Priority { get; set; }
+
+		[JsonPropertyName("provided_name")]
+		public Name? ProvidedName { get; set; }
+
+		[JsonPropertyName("query_string.lenient")]
+		public Union<bool, string>? QueryStringLenient { get; set; }
+
+		[JsonPropertyName("refresh_interval")]
+		public Time? RefreshInterval { get; set; }
+
+		[JsonPropertyName("routing")]
+		public IndexRouting? Routing { get; set; }
+
+		[JsonPropertyName("routing_partition_size")]
+		public Union<int, string>? RoutingPartitionSize { get; set; }
+
+		[JsonPropertyName("search.idle.after")]
+		public Time? SearchIdleAfter { get; set; }
+
+		[JsonPropertyName("soft_deletes.retention_lease.period")]
+		public Time? SoftDeletesRetentionLeasePeriod { get; set; }
+
+		[JsonPropertyName("top_metrics_max_size")]
+		public int? TopMetricsMaxSize { get; set; }
+
+		[JsonPropertyName("translog.durability")]
+		public string? TranslogDurability { get; set; }
+
+		[JsonPropertyName("uuid")]
+		public Uuid? Uuid { get; set; }
+
+		[JsonPropertyName("verified_before_close")]
+		public Union<bool, string>? VerifiedBeforeClose { get; set; }
+
+		[JsonPropertyName("version")]
+		public IndexVersioning? Version { get; set; }
+	}
+
+	public partial class IndexSettingsAnalysis
+	{
+		[JsonPropertyName("char_filter")]
+		public Dictionary<string, CharFilter>? CharFilter { get; set; }
+	}
+
+	public partial class IndexSettingsLifecycle
+	{
+		[JsonPropertyName("name")]
+		public Name Name { get; set; }
+	}
+
+	public partial class IndexState
+	{
+		[JsonPropertyName("aliases")]
+		public Dictionary<IndexName, Alias>? Aliases { get; set; }
+
+		[JsonPropertyName("mappings")]
+		public TypeMapping? Mappings { get; set; }
+
+		[JsonPropertyName("settings")]
+		public Union<IndexSettings, IndexStatePrefixedSettings> Settings { get; set; }
+	}
+
+	public partial class IndexStatePrefixedSettings
+	{
+		[JsonPropertyName("index")]
+		public IndexSettings Index { get; set; }
+	}
+
+	public partial class IndexVersioning
+	{
+		[JsonPropertyName("created")]
+		public VersionString Created { get; set; }
+	}
+
 	public partial class NumericFielddata
 	{
 		[JsonPropertyName("format")]
@@ -9624,6 +14526,2126 @@ namespace Nest
 	{
 		[JsonPropertyName("format")]
 		public StringFielddataFormat Format
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RolloverConditions
+	{
+		[JsonPropertyName("max_age")]
+		public Time? MaxAge
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_docs")]
+		public long? MaxDocs
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_primary_shard_size")]
+		public ByteSize? MaxPrimaryShardSize
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_size")]
+		public string? MaxSize
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ShardFileSizeInfo
+	{
+		[JsonPropertyName("average_size_in_bytes")]
+		public long? AverageSizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("count")]
+		public long? Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("description")]
+		public string Description
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_size_in_bytes")]
+		public long? MaxSizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("min_size_in_bytes")]
+		public long? MinSizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size_in_bytes")]
+		public long SizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class AppendProcessor : ProcessorBase
+	{
+		[JsonPropertyName("allow_duplicates")]
+		public bool? AllowDuplicates
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("value")]
+		public IReadOnlyCollection<object> Value
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class AttachmentProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("indexed_chars")]
+		public long? IndexedChars
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("indexed_chars_field")]
+		public Field? IndexedCharsField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("properties")]
+		public IReadOnlyCollection<string>? Properties
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("resource_name")]
+		public string? ResourceName
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field? TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class BytesProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field? TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class CircleProcessor : ProcessorBase
+	{
+		[JsonPropertyName("error_distance")]
+		public double ErrorDistance
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shape_type")]
+		public ShapeType ShapeType
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ConvertProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("type")]
+		public ConvertType Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class CsvProcessor : ProcessorBase
+	{
+		[JsonPropertyName("description")]
+		public string? Description
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("empty_value")]
+		public object EmptyValue
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("quote")]
+		public string? Quote
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("separator")]
+		public string? Separator
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_fields")]
+		public Fields TargetFields
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("trim")]
+		public bool Trim
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DateIndexNameProcessor : ProcessorBase
+	{
+		[JsonPropertyName("date_formats")]
+		public IReadOnlyCollection<string> DateFormats
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("date_rounding")]
+		public Union<string, DateRounding> DateRounding
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_name_format")]
+		public string IndexNameFormat
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_name_prefix")]
+		public string IndexNamePrefix
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("locale")]
+		public string Locale
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("timezone")]
+		public string Timezone
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DateProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("formats")]
+		public IReadOnlyCollection<string> Formats
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("locale")]
+		public string? Locale
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field? TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("timezone")]
+		public string? Timezone
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DissectProcessor : ProcessorBase
+	{
+		[JsonPropertyName("append_separator")]
+		public string AppendSeparator
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("pattern")]
+		public string Pattern
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DotExpanderProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("path")]
+		public string? Path
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DropProcessor : ProcessorBase
+	{
+	}
+
+	public partial class EnrichProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_matches")]
+		public int? MaxMatches
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("override")]
+		public bool? Override
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("policy_name")]
+		public string PolicyName
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shape_relation")]
+		public GeoShapeRelation? ShapeRelation
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FailProcessor : ProcessorBase
+	{
+		[JsonPropertyName("message")]
+		public string Message
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ForeachProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("processor")]
+		public ProcessorContainer Processor
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GeoIpProcessor : ProcessorBase
+	{
+		[JsonPropertyName("database_file")]
+		public string DatabaseFile
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("first_only")]
+		public bool FirstOnly
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("properties")]
+		public IReadOnlyCollection<string> Properties
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GrokProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("pattern_definitions")]
+		public Dictionary<string, string> PatternDefinitions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("patterns")]
+		public IReadOnlyCollection<string> Patterns
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("trace_match")]
+		public bool? TraceMatch
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GsubProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("pattern")]
+		public string Pattern
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("replacement")]
+		public string Replacement
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field? TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class InferenceConfig
+	{
+		[JsonPropertyName("regression")]
+		public InferenceConfigRegression? Regression
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class InferenceConfigRegression
+	{
+		[JsonPropertyName("results_field")]
+		public string ResultsField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class InferenceProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field_map")]
+		public Dictionary<Field, object>? FieldMap
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("inference_config")]
+		public InferenceConfig? InferenceConfig
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("model_id")]
+		public Id ModelId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class JoinProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("separator")]
+		public string Separator
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field? TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class JsonProcessor : ProcessorBase
+	{
+		[JsonPropertyName("add_to_root")]
+		public bool AddToRoot
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class KeyValueProcessor : ProcessorBase
+	{
+		[JsonPropertyName("exclude_keys")]
+		public IReadOnlyCollection<string>? ExcludeKeys
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("field_split")]
+		public string FieldSplit
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("include_keys")]
+		public IReadOnlyCollection<string>? IncludeKeys
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("prefix")]
+		public string? Prefix
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("strip_brackets")]
+		public bool? StripBrackets
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field? TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("trim_key")]
+		public string? TrimKey
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("trim_value")]
+		public string? TrimValue
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("value_split")]
+		public string ValueSplit
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class LowercaseProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field? TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class PipelineProcessor : ProcessorBase
+	{
+		[JsonPropertyName("name")]
+		public Name Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ProcessorBase
+	{
+		[JsonPropertyName("if")]
+		public string? If
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_failure")]
+		public bool? IgnoreFailure
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("on_failure")]
+		public IReadOnlyCollection<ProcessorContainer>? OnFailure
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("tag")]
+		public string? Tag
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ProcessorContainer
+	{
+		[JsonPropertyName("append")]
+		public AppendProcessor? Append
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("attachment")]
+		public AttachmentProcessor? Attachment
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("bytes")]
+		public BytesProcessor? Bytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("circle")]
+		public CircleProcessor? Circle
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("convert")]
+		public ConvertProcessor? Convert
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("csv")]
+		public CsvProcessor? Csv
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("date")]
+		public DateProcessor? Date
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("date_index_name")]
+		public DateIndexNameProcessor? DateIndexName
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("dissect")]
+		public DissectProcessor? Dissect
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("dot_expander")]
+		public DotExpanderProcessor? DotExpander
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("drop")]
+		public DropProcessor? Drop
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("enrich")]
+		public EnrichProcessor? Enrich
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fail")]
+		public FailProcessor? Fail
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("foreach")]
+		public ForeachProcessor? Foreach
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("geoip")]
+		public GeoIpProcessor? Geoip
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("grok")]
+		public GrokProcessor? Grok
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("gsub")]
+		public GsubProcessor? Gsub
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("inference")]
+		public InferenceProcessor? Inference
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("join")]
+		public JoinProcessor? Join
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("json")]
+		public JsonProcessor? Json
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("kv")]
+		public KeyValueProcessor? Kv
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lowercase")]
+		public LowercaseProcessor? Lowercase
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("pipeline")]
+		public PipelineProcessor? Pipeline
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("remove")]
+		public RemoveProcessor? Remove
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("rename")]
+		public RenameProcessor? Rename
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("script")]
+		public Script? Script
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("set")]
+		public SetProcessor? Set
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("set_security_user")]
+		public SetSecurityUserProcessor? SetSecurityUser
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("sort")]
+		public SortProcessor? Sort
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("split")]
+		public SplitProcessor? Split
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("trim")]
+		public TrimProcessor? Trim
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("uppercase")]
+		public UppercaseProcessor? Uppercase
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("urldecode")]
+		public UrlDecodeProcessor? Urldecode
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("user_agent")]
+		public UserAgentProcessor? UserAgent
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RemoveProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Fields Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RenameProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SetProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("override")]
+		public bool? Override
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("value")]
+		public object Value
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SetSecurityUserProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("properties")]
+		public IReadOnlyCollection<string>? Properties
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SortProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("order")]
+		public SortOrder Order
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SplitProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("preserve_trailing")]
+		public bool? PreserveTrailing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("separator")]
+		public string Separator
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field? TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class TrimProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field? TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class UppercaseProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field? TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class UrlDecodeProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool? IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field? TargetField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class UserAgentProcessor : ProcessorBase
+	{
+		[JsonPropertyName("field")]
+		public Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("ignore_missing")]
+		public bool IgnoreMissing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("options")]
+		public IReadOnlyCollection<UserAgentProperty> Options
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("regex_file")]
+		public string RegexFile
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("target_field")]
+		public Field TargetField
 		{
 			get;
 #if NET5_0
@@ -9762,6 +16784,371 @@ namespace Nest
 		}
 	}
 
+	public partial class FileCountSnapshotStats
+	{
+		[JsonPropertyName("file_count")]
+		public int FileCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size_in_bytes")]
+		public long SizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ShardsStats
+	{
+		[JsonPropertyName("done")]
+		public long Done
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("failed")]
+		public long Failed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("finalizing")]
+		public long Finalizing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("initializing")]
+		public long Initializing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("started")]
+		public long Started
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public long Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ShardsStatsSummary
+	{
+		[JsonPropertyName("incremental")]
+		public ShardsStatsSummaryItem Incremental
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("start_time_in_millis")]
+		public long StartTimeInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_in_millis")]
+		public long TimeInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public ShardsStatsSummaryItem Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ShardsStatsSummaryItem
+	{
+		[JsonPropertyName("file_count")]
+		public long FileCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size_in_bytes")]
+		public long SizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SnapshotIndexStats
+	{
+		[JsonPropertyName("shards")]
+		public Dictionary<string, SnapshotShardsStatus> Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shards_stats")]
+		public ShardsStats ShardsStats
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("stats")]
+		public SnapshotStats Stats
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SnapshotShardsStatus
+	{
+		[JsonPropertyName("stage")]
+		public ShardsStatsStage Stage
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("stats")]
+		public ShardsStatsSummary Stats
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SnapshotStats
+	{
+		[JsonPropertyName("incremental")]
+		public FileCountSnapshotStats Incremental
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("start_time_in_millis")]
+		public long StartTimeInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_in_millis")]
+		public long TimeInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public FileCountSnapshotStats Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Status
+	{
+		[JsonPropertyName("include_global_state")]
+		public bool IncludeGlobalState
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("indices")]
+		public Dictionary<string, SnapshotIndexStats> Indices
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("repository")]
+		public string Repository
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shards_stats")]
+		public ShardsStats ShardsStats
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("snapshot")]
+		public string Snapshot
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("state")]
+		public string State
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("stats")]
+		public SnapshotStats Stats
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("uuid")]
+		public Uuid Uuid
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class AcknowledgeState
 	{
 		[JsonPropertyName("state")]
@@ -9776,7 +17163,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("timestamp")]
-		public DateTimeOffset Timestamp
+		public DateString Timestamp
 		{
 			get;
 #if NET5_0
@@ -9848,7 +17235,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("timestamp")]
-		public DateTimeOffset Timestamp
+		public DateString Timestamp
 		{
 			get;
 #if NET5_0
@@ -9873,7 +17260,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("timestamp")]
-		public DateTimeOffset Timestamp
+		public DateString Timestamp
 		{
 			get;
 #if NET5_0

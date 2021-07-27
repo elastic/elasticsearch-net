@@ -36,10 +36,28 @@ namespace Nest
 		}
 	}
 
+	public abstract class DictionaryResponseBase : ResponseBase
+	{
+	}
+
 	public abstract class IndicesResponseBase : AcknowledgedResponseBase
 	{
 		[JsonPropertyName("_shards")]
 		public ShardStatistics? Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public abstract class NodesResponseBase : ResponseBase
+	{
+		[JsonPropertyName("_nodes")]
+		public NodeStatistics node_stats
 		{
 			get;
 #if NET5_0
@@ -133,7 +151,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("_type")]
-		public Name? Type
+		public DocType? Type
 		{
 			get;
 #if NET5_0

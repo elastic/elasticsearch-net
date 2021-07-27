@@ -103,10 +103,6 @@ namespace Nest
 	{
 	}
 
-	public partial class StopWords
-	{
-	}
-
 	public partial class TokenFilter
 	{
 	}
@@ -131,6 +127,10 @@ namespace Nest
 	{
 	}
 
+	public partial class DistanceFeatureQuery
+	{
+	}
+
 	public partial class GeoCoordinate
 	{
 	}
@@ -140,6 +140,10 @@ namespace Nest
 	}
 
 	public partial class Like
+	{
+	}
+
+	public partial class RangeQuery
 	{
 	}
 

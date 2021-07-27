@@ -27,6 +27,8 @@ namespace Nest
     {
         ClusterNamespace Cluster { get; }
 
+        IndexLifecycleManagementNamespace IndexLifecycleManagement { get; }
+
         IndicesNamespace Indices { get; }
 
         DeleteResponse Delete(IDeleteRequest request);

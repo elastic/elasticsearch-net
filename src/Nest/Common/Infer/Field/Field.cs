@@ -14,6 +14,7 @@ namespace Nest
 		public string? Format { get; set; }
 	}
 
+	// TODO - Make struct
 	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public class Field : IEquatable<Field>, IUrlParameter
 	{
