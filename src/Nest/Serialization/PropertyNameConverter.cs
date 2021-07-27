@@ -21,22 +21,4 @@ namespace Nest
 			writer.WriteStringValue(value.Name);
 		}
 	}
-
-	public class AggregateNameConverter : JsonConverter<AggregateName>
-	{
-		public override AggregateName?
-			Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
-			throw new NotImplementedException();
-
-		public override void Write(Utf8JsonWriter writer, AggregateName? value, JsonSerializerOptions options)
-		{
-			if (value is null)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			writer.WriteStringValue(value.ToString());
-		}
-	}
 }

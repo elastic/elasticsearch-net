@@ -21,6 +21,77 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
+	public partial class ClusterAllocationExplainDescriptor : RequestDescriptorBase<ClusterAllocationExplainDescriptor, ClusterAllocationExplainRequestParameters, IClusterAllocationExplainRequest>, IClusterAllocationExplainRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterAllocationExplain;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_cluster/allocation/explain</summary>
+        public ClusterAllocationExplainDescriptor() : base()
+		{
+		}
+	}
+
+	public partial class ClusterDeleteComponentTemplateDescriptor : RequestDescriptorBase<ClusterDeleteComponentTemplateDescriptor, ClusterDeleteComponentTemplateRequestParameters, IClusterDeleteComponentTemplateRequest>, IClusterDeleteComponentTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteComponentTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		///<summary>/_component_template/{name}</summary>
+        public ClusterDeleteComponentTemplateDescriptor(Name name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	public partial class ClusterDeleteVotingConfigExclusionsDescriptor : RequestDescriptorBase<ClusterDeleteVotingConfigExclusionsDescriptor, ClusterDeleteVotingConfigExclusionsRequestParameters, IClusterDeleteVotingConfigExclusionsRequest>, IClusterDeleteVotingConfigExclusionsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteVotingConfigExclusions;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		///<summary>/_cluster/voting_config_exclusions</summary>
+        public ClusterDeleteVotingConfigExclusionsDescriptor() : base()
+		{
+		}
+	}
+
+	public partial class ClusterExistsComponentTemplateDescriptor : RequestDescriptorBase<ClusterExistsComponentTemplateDescriptor, ClusterExistsComponentTemplateRequestParameters, IClusterExistsComponentTemplateRequest>, IClusterExistsComponentTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterExistsComponentTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
+		///<summary>/_component_template/{name}</summary>
+        public ClusterExistsComponentTemplateDescriptor(Name name) : base(r => r)
+		{
+		}
+	}
+
+	public partial class ClusterGetComponentTemplateDescriptor : RequestDescriptorBase<ClusterGetComponentTemplateDescriptor, ClusterGetComponentTemplateRequestParameters, IClusterGetComponentTemplateRequest>, IClusterGetComponentTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetComponentTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_component_template</summary>
+        public ClusterGetComponentTemplateDescriptor() : base()
+		{
+		}
+
+		///<summary>/_component_template/{name}</summary>
+        public ClusterGetComponentTemplateDescriptor(Name name) : base(r => r.Optional("name", name))
+		{
+		}
+	}
+
+	public partial class ClusterGetSettingsDescriptor : RequestDescriptorBase<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetSettings;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_cluster/settings</summary>
+        public ClusterGetSettingsDescriptor() : base()
+		{
+		}
+	}
+
 	public partial class ClusterHealthDescriptor : RequestDescriptorBase<ClusterHealthDescriptor, ClusterHealthRequestParameters, IClusterHealthRequest>, IClusterHealthRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
@@ -33,6 +104,109 @@ namespace Nest
 
 		///<summary>/_cluster/health/{index}</summary>
         public ClusterHealthDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+	}
+
+	public partial class ClusterPendingTasksDescriptor : RequestDescriptorBase<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters, IClusterPendingTasksRequest>, IClusterPendingTasksRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPendingTasks;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_cluster/pending_tasks</summary>
+        public ClusterPendingTasksDescriptor() : base()
+		{
+		}
+	}
+
+	public partial class ClusterPutVotingConfigExclusionsDescriptor : RequestDescriptorBase<ClusterPutVotingConfigExclusionsDescriptor, ClusterPutVotingConfigExclusionsRequestParameters, IClusterPutVotingConfigExclusionsRequest>, IClusterPutVotingConfigExclusionsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPostVotingConfigExclusions;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_cluster/voting_config_exclusions</summary>
+        public ClusterPutVotingConfigExclusionsDescriptor() : base()
+		{
+		}
+	}
+
+	public partial class ClusterPutComponentTemplateDescriptor : RequestDescriptorBase<ClusterPutComponentTemplateDescriptor, ClusterPutComponentTemplateRequestParameters, IClusterPutComponentTemplateRequest>, IClusterPutComponentTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutComponentTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		///<summary>/_component_template/{name}</summary>
+        public ClusterPutComponentTemplateDescriptor(Name name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	public partial class ClusterPutSettingsDescriptor : RequestDescriptorBase<ClusterPutSettingsDescriptor, ClusterPutSettingsRequestParameters, IClusterPutSettingsRequest>, IClusterPutSettingsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutSettings;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		///<summary>/_cluster/settings</summary>
+        public ClusterPutSettingsDescriptor() : base()
+		{
+		}
+	}
+
+	public partial class ClusterRemoteInfoDescriptor : RequestDescriptorBase<ClusterRemoteInfoDescriptor, ClusterRemoteInfoRequestParameters, IClusterRemoteInfoRequest>, IClusterRemoteInfoRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterRemoteInfo;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_remote/info</summary>
+        public ClusterRemoteInfoDescriptor() : base()
+		{
+		}
+	}
+
+	public partial class ClusterRerouteDescriptor : RequestDescriptorBase<ClusterRerouteDescriptor, ClusterRerouteRequestParameters, IClusterRerouteRequest>, IClusterRerouteRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterReroute;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_cluster/reroute</summary>
+        public ClusterRerouteDescriptor() : base()
+		{
+		}
+	}
+
+	public partial class ClusterStateDescriptor : RequestDescriptorBase<ClusterStateDescriptor, ClusterStateRequestParameters, IClusterStateRequest>, IClusterStateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterState;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_cluster/state</summary>
+        public ClusterStateDescriptor() : base()
+		{
+		}
+
+		///<summary>/_cluster/state/{metric}</summary>
+        public ClusterStateDescriptor(Metrics metric) : base(r => r.Optional("metric", metric))
+		{
+		}
+
+		///<summary>/_cluster/state/{metric}/{index}</summary>
+        public ClusterStateDescriptor(Metrics metric, Indices index) : base(r => r.Optional("metric", metric).Optional("index", index))
+		{
+		}
+	}
+
+	public partial class ClusterStatsDescriptor : RequestDescriptorBase<ClusterStatsDescriptor, ClusterStatsRequestParameters, IClusterStatsRequest>, IClusterStatsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterStats;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_cluster/stats</summary>
+        public ClusterStatsDescriptor() : base()
+		{
+		}
+
+		///<summary>/_cluster/stats/nodes/{node_id}</summary>
+        public ClusterStatsDescriptor(NodeIds node_id) : base(r => r.Optional("node_id", node_id))
 		{
 		}
 	}

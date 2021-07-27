@@ -24,7 +24,13 @@ namespace Nest
 		public Percentage(float value) { }
 	}
 
-	public class DateMath
+	public class NodeRoles
+	{
+	}
+
+	// TODO - Implement array type aliases
+	// TODO - Consider OneOrMany implementation to only allocate a list when more than one item
+	public class StopWords
 	{
 	}
 
@@ -36,36 +42,13 @@ namespace Nest
 	{
 	}
 
-	[JsonConverter(typeof(StringAliasConverter<AggregateName>))]
-	public class AggregateName
-	{
-		public AggregateName(string value) => Value = value;
-
-		internal string Value { get; }
-	}
-
-	public class Distance
-	{
-	}
-
-	public class MultiTermQueryRewrite
-	{
-	}
 
 	public class Aggregate
 	{
 	}
 
-	public class SuggestionName
-	{
-	}
-
 
 	public class Property
-	{
-	}
-
-	public class Uuid
 	{
 	}
 
@@ -86,9 +69,6 @@ namespace Nest
 		internal long Value { get; }
 	}
 
-	public class VersionString
-	{
-	}
 
 	[JsonConverter(typeof(NumericAliasConverter<VersionNumber>))]
 	public class VersionNumber
@@ -98,7 +78,7 @@ namespace Nest
 		internal long Value { get; }
 	}
 
-	public class DataStreamName : IUrlParameter
+	public partial struct DataStreamName : IUrlParameter
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}
@@ -178,23 +158,15 @@ namespace Nest
 	{
 	}
 
-	public class ScrollId
-	{
-	}
+	//public class ScrollId
+	//{
+	//}
 
-	public class IndexAlias : IUrlParameter
+	public partial struct IndexAlias : IUrlParameter
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}
 
-
-	public class DateString
-	{
-	}
-
-	public class NodeId
-	{
-	}
 
 	//public class Refresh { }
 
@@ -206,40 +178,11 @@ namespace Nest
 	}
 
 
-	public class CategoryId : IUrlParameter
+	public partial struct CategoryId : IUrlParameter
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}
 
-	// TODO: This may serve as a template for generating simple type aliases which represent a string value
-	public class TransportAddress : IComparable<TransportAddress>, IEquatable<TransportAddress>
-	{
-		public TransportAddress(string value) => Value = value ?? throw new ArgumentNullException(nameof(value));
-
-		public string Value { get; }
-
-		public int CompareTo(TransportAddress other) => string.Compare(Value, other.Value, StringComparison.Ordinal);
-
-		public bool Equals(TransportAddress other) => Value.Equals(other.Value);
-
-		public static bool TryParse(string value, out TransportAddress? transportAddress)
-		{
-			transportAddress = null;
-			if (string.IsNullOrWhiteSpace(value))
-				return false;
-
-			transportAddress = new TransportAddress(value.Trim());
-			return true;
-		}
-
-		public static implicit operator string(TransportAddress userName) => userName.Value;
-
-		public override string ToString() => Value;
-
-		public override bool Equals(object obj) => obj is TransportAddress other && Equals(other);
-
-		public override int GetHashCode() => Value.GetHashCode();
-	}
 
 	//	public partial class ErrorCause
 	//	{

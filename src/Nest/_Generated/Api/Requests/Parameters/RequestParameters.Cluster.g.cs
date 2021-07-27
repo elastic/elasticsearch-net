@@ -26,6 +26,61 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
+    public class ClusterAllocationExplainRequestParameters : RequestParameters<ClusterAllocationExplainRequestParameters>
+    {
+        [JsonIgnore]
+        public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
+
+        [JsonIgnore]
+        public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
+    }
+
+    public class ClusterDeleteComponentTemplateRequestParameters : RequestParameters<ClusterDeleteComponentTemplateRequestParameters>
+    {
+        [JsonIgnore]
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        [JsonIgnore]
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public class ClusterDeleteVotingConfigExclusionsRequestParameters : RequestParameters<ClusterDeleteVotingConfigExclusionsRequestParameters>
+    {
+    }
+
+    public class ClusterExistsComponentTemplateRequestParameters : RequestParameters<ClusterExistsComponentTemplateRequestParameters>
+    {
+        [JsonIgnore]
+        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
+    }
+
+    public class ClusterGetComponentTemplateRequestParameters : RequestParameters<ClusterGetComponentTemplateRequestParameters>
+    {
+        [JsonIgnore]
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        [JsonIgnore]
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        [JsonIgnore]
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+    }
+
+    public class ClusterGetSettingsRequestParameters : RequestParameters<ClusterGetSettingsRequestParameters>
+    {
+        [JsonIgnore]
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        [JsonIgnore]
+        public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+        [JsonIgnore]
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        [JsonIgnore]
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
     public class ClusterHealthRequestParameters : RequestParameters<ClusterHealthRequestParameters>
     {
         [JsonIgnore]
@@ -60,5 +115,111 @@ namespace Nest
 
         [JsonIgnore]
         public WaitForStatus? WaitForStatus { get => Q<WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
+    }
+
+    public class ClusterPendingTasksRequestParameters : RequestParameters<ClusterPendingTasksRequestParameters>
+    {
+        [JsonIgnore]
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        [JsonIgnore]
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+    }
+
+    public class ClusterPutVotingConfigExclusionsRequestParameters : RequestParameters<ClusterPutVotingConfigExclusionsRequestParameters>
+    {
+        [JsonIgnore]
+        public Names? NodeNames { get => Q<Names?>("node_names"); set => Q("node_names", value); }
+
+        [JsonIgnore]
+        public Ids? NodeIds { get => Q<Ids?>("node_ids"); set => Q("node_ids", value); }
+
+        [JsonIgnore]
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+
+        [JsonIgnore]
+        public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
+    }
+
+    public class ClusterPutComponentTemplateRequestParameters : RequestParameters<ClusterPutComponentTemplateRequestParameters>
+    {
+        [JsonIgnore]
+        public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
+
+        [JsonIgnore]
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+    }
+
+    public class ClusterPutSettingsRequestParameters : RequestParameters<ClusterPutSettingsRequestParameters>
+    {
+        [JsonIgnore]
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        [JsonIgnore]
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        [JsonIgnore]
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public class ClusterRemoteInfoRequestParameters : RequestParameters<ClusterRemoteInfoRequestParameters>
+    {
+    }
+
+    public class ClusterRerouteRequestParameters : RequestParameters<ClusterRerouteRequestParameters>
+    {
+        [JsonIgnore]
+        public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
+
+        [JsonIgnore]
+        public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
+
+        [JsonIgnore]
+        public Metrics? Metric { get => Q<Metrics?>("metric"); set => Q("metric", value); }
+
+        [JsonIgnore]
+        public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
+
+        [JsonIgnore]
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        [JsonIgnore]
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+    }
+
+    public class ClusterStateRequestParameters : RequestParameters<ClusterStateRequestParameters>
+    {
+        [JsonIgnore]
+        public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+        [JsonIgnore]
+        public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+        [JsonIgnore]
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        [JsonIgnore]
+        public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+        [JsonIgnore]
+        public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+        [JsonIgnore]
+        public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+        [JsonIgnore]
+        public VersionNumber? WaitForMetadataVersion { get => Q<VersionNumber?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
+
+        [JsonIgnore]
+        public Time? WaitForTimeout { get => Q<Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
+    }
+
+    public class ClusterStatsRequestParameters : RequestParameters<ClusterStatsRequestParameters>
+    {
+        [JsonIgnore]
+        public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+        [JsonIgnore]
+        public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 }
