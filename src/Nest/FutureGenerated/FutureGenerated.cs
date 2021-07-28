@@ -24,6 +24,41 @@ namespace Nest
 		public Percentage(float value) { }
 	}
 
+	/// <summary>
+	///     Block type for an index.
+	/// </summary>
+	public readonly struct IndicesBlockOptions : IUrlParameter
+	{
+		// TODO - This is currently generated as an enum by the code generator
+		// ?? Should all enums be generated this way, or just those used in Url parameters
+
+		private IndicesBlockOptions(string value) => Value = value;
+
+		public string Value { get; }
+
+		public string GetString(ITransportConfiguration settings) => Value;
+
+		/// <summary>
+		///     Disable metadata changes, such as closing the index.
+		/// </summary>
+		public static IndicesBlockOptions Metadata { get; } = new("metadata");
+
+		/// <summary>
+		///     Disable read operations.
+		/// </summary>
+		public static IndicesBlockOptions Read { get; } = new("read");
+
+		/// <summary>
+		///     Disable write operations and metadata changes.
+		/// </summary>
+		public static IndicesBlockOptions ReadOnly { get; } = new("read_only");
+
+		/// <summary>
+		///     Disable write operations. However, metadata changes are still allowed.
+		/// </summary>
+		public static IndicesBlockOptions Write { get; } = new("write");
+	}
+
 	public class NodeRoles
 	{
 	}

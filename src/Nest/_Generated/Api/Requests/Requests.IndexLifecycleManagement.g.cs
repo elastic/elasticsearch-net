@@ -37,6 +37,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_ilm/policy/{policy}</summary>
         public IndexLifecycleManagementDeleteLifecycleRequest(Name policy) : base(r => r.Optional("policy", policy))
 		{
@@ -56,6 +57,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}/_ilm/explain</summary>
         public IndexLifecycleManagementExplainLifecycleRequest(IndexName index) : base(r => r.Required("index", index))
 		{
@@ -81,6 +83,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_ilm/policy/{policy}</summary>
         public IndexLifecycleManagementGetLifecycleRequest(Name policy) : base(r => r.Optional("policy", policy))
 		{
@@ -105,6 +108,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_ilm/status</summary>
         public IndexLifecycleManagementGetStatusRequest() : base()
 		{
@@ -124,6 +128,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_ilm/move/{index}</summary>
         public IndexLifecycleManagementMoveToStepRequest(IndexName index) : base(r => r.Required("index", index))
 		{
@@ -165,6 +170,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_ilm/policy/{policy}</summary>
         public IndexLifecycleManagementPutLifecycleRequest(Name policy) : base(r => r.Optional("policy", policy))
 		{
@@ -184,6 +190,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}/_ilm/remove</summary>
         public IndexLifecycleManagementRemovePolicyRequest(IndexName index) : base(r => r.Required("index", index))
 		{
@@ -203,6 +210,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}/_ilm/retry</summary>
         public IndexLifecycleManagementRetryRequest(IndexName index) : base(r => r.Required("index", index))
 		{
@@ -222,6 +230,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_ilm/start</summary>
         public IndexLifecycleManagementStartRequest() : base()
 		{
@@ -252,6 +261,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_ilm/stop</summary>
         public IndexLifecycleManagementStopRequest() : base()
 		{

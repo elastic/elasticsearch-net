@@ -37,6 +37,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => CurrentNode is null && Index is null && Primary is null && Shard is null;
+
 		///<summary>/_cluster/allocation/explain</summary>
         public ClusterAllocationExplainRequest() : base()
 		{
@@ -106,6 +107,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_component_template/{name}</summary>
         public ClusterDeleteComponentTemplateRequest(Name name) : base(r => r.Required("name", name))
 		{
@@ -131,6 +133,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_cluster/voting_config_exclusions</summary>
         public ClusterDeleteVotingConfigExclusionsRequest() : base()
 		{
@@ -138,39 +141,6 @@ namespace Nest
 
 		[JsonPropertyName("stub")]
 		public string Stub
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	[ConvertAs(typeof(ClusterExistsComponentTemplateRequest))]
-	public partial interface IClusterExistsComponentTemplateRequest : IRequest<ClusterExistsComponentTemplateRequestParameters>
-	{
-	}
-
-	public partial class ClusterExistsComponentTemplateRequest : PlainRequestBase<ClusterExistsComponentTemplateRequestParameters>, IClusterExistsComponentTemplateRequest
-	{
-		protected IClusterExistsComponentTemplateRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterExistsComponentTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
-		///<summary>/_component_template/{name}</summary>
-        public ClusterExistsComponentTemplateRequest(Name name) : base(r => r)
-		{
-		}
-
-		[JsonIgnore]
-		public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
-
-		[JsonPropertyName("stub_c")]
-		public string StubC
 		{
 			get;
 #if NET5_0
@@ -194,6 +164,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_component_template</summary>
         public ClusterGetComponentTemplateRequest() : base()
 		{
@@ -227,6 +198,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_cluster/settings</summary>
         public ClusterGetSettingsRequest() : base()
 		{
@@ -258,6 +230,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_cluster/health</summary>
         public ClusterHealthRequest() : base()
 		{
@@ -315,6 +288,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_cluster/pending_tasks</summary>
         public ClusterPendingTasksRequest() : base()
 		{
@@ -340,6 +314,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_cluster/voting_config_exclusions</summary>
         public ClusterPutVotingConfigExclusionsRequest() : base()
 		{
@@ -371,6 +346,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_component_template/{name}</summary>
         public ClusterPutComponentTemplateRequest(Name name) : base(r => r.Required("name", name))
 		{
@@ -462,6 +438,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => Persistent is null && Transient is null;
+
 		///<summary>/_cluster/settings</summary>
         public ClusterPutSettingsRequest() : base()
 		{
@@ -512,6 +489,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_remote/info</summary>
         public ClusterRemoteInfoRequest() : base()
 		{
@@ -542,6 +520,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => Commands is null;
+
 		///<summary>/_cluster/reroute</summary>
         public ClusterRerouteRequest() : base()
 		{
@@ -590,6 +569,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_cluster/state</summary>
         public ClusterStateRequest() : base()
 		{
@@ -643,6 +623,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_cluster/stats</summary>
         public ClusterStatsRequest() : base()
 		{

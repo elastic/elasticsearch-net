@@ -54,17 +54,6 @@ namespace Nest
 		}
 	}
 
-	public partial class ClusterExistsComponentTemplateDescriptor : RequestDescriptorBase<ClusterExistsComponentTemplateDescriptor, ClusterExistsComponentTemplateRequestParameters, IClusterExistsComponentTemplateRequest>, IClusterExistsComponentTemplateRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterExistsComponentTemplate;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-		///<summary>/_component_template/{name}</summary>
-        public ClusterExistsComponentTemplateDescriptor(Name name) : base(r => r)
-		{
-		}
-	}
-
 	public partial class ClusterGetComponentTemplateDescriptor : RequestDescriptorBase<ClusterGetComponentTemplateDescriptor, ClusterGetComponentTemplateRequestParameters, IClusterGetComponentTemplateRequest>, IClusterGetComponentTemplateRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetComponentTemplate;

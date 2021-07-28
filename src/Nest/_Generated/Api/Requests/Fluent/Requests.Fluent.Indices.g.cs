@@ -21,6 +21,71 @@ using Elastic.Transport;
 #nullable restore
 namespace Nest
 {
+	public partial class IndicesAddBlockDescriptor : RequestDescriptorBase<IndicesAddBlockDescriptor, IndicesAddBlockRequestParameters, IIndicesAddBlockRequest>, IIndicesAddBlockRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesAddBlock;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_block/{block}</summary>
+        public IndicesAddBlockDescriptor(IndexName index, IndicesBlockOptions block) : base(r => r.Required("index", index).Required("block", block))
+		{
+		}
+	}
+
+	public partial class IndicesAnalyzeDescriptor : RequestDescriptorBase<IndicesAnalyzeDescriptor, IndicesAnalyzeRequestParameters, IIndicesAnalyzeRequest>, IIndicesAnalyzeRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesAnalyze;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_analyze</summary>
+        public IndicesAnalyzeDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_analyze</summary>
+        public IndicesAnalyzeDescriptor(IndexName index) : base(r => r.Optional("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesClearCacheDescriptor : RequestDescriptorBase<IndicesClearCacheDescriptor, IndicesClearCacheRequestParameters, IIndicesClearCacheRequest>, IIndicesClearCacheRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesClearCache;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_cache/clear</summary>
+        public IndicesClearCacheDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_cache/clear</summary>
+        public IndicesClearCacheDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesCloneDescriptor : RequestDescriptorBase<IndicesCloneDescriptor, IndicesCloneRequestParameters, IIndicesCloneRequest>, IIndicesCloneRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesClone;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_clone/{target}</summary>
+        public IndicesCloneDescriptor(IndexName index, Name target) : base(r => r.Required("index", index).Required("target", target))
+		{
+		}
+	}
+
+	public partial class IndicesCloseDescriptor : RequestDescriptorBase<IndicesCloseDescriptor, IndicesCloseRequestParameters, IIndicesCloseRequest>, IIndicesCloseRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesClose;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_close</summary>
+        public IndicesCloseDescriptor(Indices index) : base(r => r.Required("index", index))
+		{
+		}
+	}
+
 	public partial class IndicesCreateDescriptor : RequestDescriptorBase<IndicesCreateDescriptor, IndicesCreateRequestParameters, IIndicesCreateRequest>, IIndicesCreateRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesCreate;
@@ -28,6 +93,33 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		///<summary>/{index}</summary>
         public IndicesCreateDescriptor(IndexName index) : base(r => r.Required("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesCreateDataStreamDescriptor : RequestDescriptorBase<IndicesCreateDataStreamDescriptor, IndicesCreateDataStreamRequestParameters, IIndicesCreateDataStreamRequest>, IIndicesCreateDataStreamRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesCreateDataStream;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		///<summary>/_data_stream/{name}</summary>
+        public IndicesCreateDataStreamDescriptor(DataStreamName name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesDataStreamsStatsDescriptor : RequestDescriptorBase<IndicesDataStreamsStatsDescriptor, IndicesDataStreamsStatsRequestParameters, IIndicesDataStreamsStatsRequest>, IIndicesDataStreamsStatsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDataStreamsStats;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_data_stream/_stats</summary>
+        public IndicesDataStreamsStatsDescriptor() : base()
+		{
+		}
+
+		///<summary>/_data_stream/{name}/_stats</summary>
+        public IndicesDataStreamsStatsDescriptor(IndexName name) : base(r => r.Optional("name", name))
 		{
 		}
 	}
@@ -43,6 +135,17 @@ namespace Nest
 		}
 	}
 
+	public partial class IndicesDeleteAliasDescriptor : RequestDescriptorBase<IndicesDeleteAliasDescriptor, IndicesDeleteAliasRequestParameters, IIndicesDeleteAliasRequest>, IIndicesDeleteAliasRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteAlias;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_alias/{name}</summary>
+        public IndicesDeleteAliasDescriptor(Indices index, Names name) : base(r => r.Required("index", index).Required("name", name))
+		{
+		}
+	}
+
 	public partial class IndicesDeleteDataStreamDescriptor : RequestDescriptorBase<IndicesDeleteDataStreamDescriptor, IndicesDeleteDataStreamRequestParameters, IIndicesDeleteDataStreamRequest>, IIndicesDeleteDataStreamRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteDataStream;
@@ -50,6 +153,372 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		///<summary>/_data_stream/{name}</summary>
         public IndicesDeleteDataStreamDescriptor(DataStreamName name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesDeleteIndexTemplateDescriptor : RequestDescriptorBase<IndicesDeleteIndexTemplateDescriptor, IndicesDeleteIndexTemplateRequestParameters, IIndicesDeleteIndexTemplateRequest>, IIndicesDeleteIndexTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteIndexTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		///<summary>/_index_template/{name}</summary>
+        public IndicesDeleteIndexTemplateDescriptor(Name name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesDeleteTemplateDescriptor : RequestDescriptorBase<IndicesDeleteTemplateDescriptor, IndicesDeleteTemplateRequestParameters, IIndicesDeleteTemplateRequest>, IIndicesDeleteTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		///<summary>/_template/{name}</summary>
+        public IndicesDeleteTemplateDescriptor(Name name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesExistsDescriptor : RequestDescriptorBase<IndicesExistsDescriptor, IndicesExistsRequestParameters, IIndicesExistsRequest>, IIndicesExistsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExists;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}</summary>
+        public IndicesExistsDescriptor(Indices index) : base(r => r.Required("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesExistsAliasDescriptor : RequestDescriptorBase<IndicesExistsAliasDescriptor, IndicesExistsAliasRequestParameters, IIndicesExistsAliasRequest>, IIndicesExistsAliasRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExistsAlias;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
+		///<summary>/_alias/{name}</summary>
+        public IndicesExistsAliasDescriptor(Names name) : base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>/{index}/_alias/{name}</summary>
+        public IndicesExistsAliasDescriptor(Indices index, Names name) : base(r => r.Optional("index", index).Required("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesExistsIndexTemplateDescriptor : RequestDescriptorBase<IndicesExistsIndexTemplateDescriptor, IndicesExistsIndexTemplateRequestParameters, IIndicesExistsIndexTemplateRequest>, IIndicesExistsIndexTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExistsIndexTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
+		///<summary>/_index_template/{name}</summary>
+        public IndicesExistsIndexTemplateDescriptor(Name name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesExistsTemplateDescriptor : RequestDescriptorBase<IndicesExistsTemplateDescriptor, IndicesExistsTemplateRequestParameters, IIndicesExistsTemplateRequest>, IIndicesExistsTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExistsTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
+		///<summary>/_template/{name}</summary>
+        public IndicesExistsTemplateDescriptor(Names name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesExistsTypeDescriptor : RequestDescriptorBase<IndicesExistsTypeDescriptor, IndicesExistsTypeRequestParameters, IIndicesExistsTypeRequest>, IIndicesExistsTypeRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesExistsType;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_mapping/{type}</summary>
+        public IndicesExistsTypeDescriptor(Indices index, Types type) : base(r => r.Required("index", index).Required("type", type))
+		{
+		}
+	}
+
+	public partial class IndicesFlushDescriptor : RequestDescriptorBase<IndicesFlushDescriptor, IndicesFlushRequestParameters, IIndicesFlushRequest>, IIndicesFlushRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFlush;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_flush</summary>
+        public IndicesFlushDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_flush</summary>
+        public IndicesFlushDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesForcemergeDescriptor : RequestDescriptorBase<IndicesForcemergeDescriptor, IndicesForcemergeRequestParameters, IIndicesForcemergeRequest>, IIndicesForcemergeRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesForcemerge;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_forcemerge</summary>
+        public IndicesForcemergeDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_forcemerge</summary>
+        public IndicesForcemergeDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+	}
+
+	public partial class GetIndicesDescriptor : RequestDescriptorBase<GetIndicesDescriptor, GetIndicesRequestParameters, IGetIndicesRequest>, IGetIndicesRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGet;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}</summary>
+        public GetIndicesDescriptor(Indices index) : base(r => r.Required("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesGetAliasDescriptor : RequestDescriptorBase<IndicesGetAliasDescriptor, IndicesGetAliasRequestParameters, IIndicesGetAliasRequest>, IIndicesGetAliasRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetAlias;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_alias</summary>
+        public IndicesGetAliasDescriptor() : base()
+		{
+		}
+
+		///<summary>/_alias/{name}</summary>
+        public IndicesGetAliasDescriptor(Names name) : base(r => r.Optional("name", name))
+		{
+		}
+
+		///<summary>/{index}/_alias/{name}</summary>
+        public IndicesGetAliasDescriptor(Indices index, Names name) : base(r => r.Optional("index", index).Optional("name", name))
+		{
+		}
+
+		///<summary>/{index}/_alias</summary>
+        public IndicesGetAliasDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesGetDataStreamDescriptor : RequestDescriptorBase<IndicesGetDataStreamDescriptor, IndicesGetDataStreamRequestParameters, IIndicesGetDataStreamRequest>, IIndicesGetDataStreamRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetDataStream;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_data_stream</summary>
+        public IndicesGetDataStreamDescriptor() : base()
+		{
+		}
+
+		///<summary>/_data_stream/{name}</summary>
+        public IndicesGetDataStreamDescriptor(IndexName name) : base(r => r.Optional("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesGetFieldMappingDescriptor : RequestDescriptorBase<IndicesGetFieldMappingDescriptor, IndicesGetFieldMappingRequestParameters, IIndicesGetFieldMappingRequest>, IIndicesGetFieldMappingRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetFieldMapping;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_mapping/field/{fields}</summary>
+        public IndicesGetFieldMappingDescriptor(Fields fields) : base(r => r.Required("fields", fields))
+		{
+		}
+
+		///<summary>/{index}/_mapping/field/{fields}</summary>
+        public IndicesGetFieldMappingDescriptor(Indices index, Fields fields) : base(r => r.Optional("index", index).Required("fields", fields))
+		{
+		}
+	}
+
+	public partial class IndicesGetIndexTemplateDescriptor : RequestDescriptorBase<IndicesGetIndexTemplateDescriptor, IndicesGetIndexTemplateRequestParameters, IIndicesGetIndexTemplateRequest>, IIndicesGetIndexTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetIndexTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_index_template</summary>
+        public IndicesGetIndexTemplateDescriptor() : base()
+		{
+		}
+
+		///<summary>/_index_template/{name}</summary>
+        public IndicesGetIndexTemplateDescriptor(Name name) : base(r => r.Optional("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesGetMappingDescriptor : RequestDescriptorBase<IndicesGetMappingDescriptor, IndicesGetMappingRequestParameters, IIndicesGetMappingRequest>, IIndicesGetMappingRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetMapping;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_mapping</summary>
+        public IndicesGetMappingDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_mapping</summary>
+        public IndicesGetMappingDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesGetSettingsDescriptor : RequestDescriptorBase<IndicesGetSettingsDescriptor, IndicesGetSettingsRequestParameters, IIndicesGetSettingsRequest>, IIndicesGetSettingsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetSettings;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_settings</summary>
+        public IndicesGetSettingsDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_settings</summary>
+        public IndicesGetSettingsDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+
+		///<summary>/{index}/_settings/{name}</summary>
+        public IndicesGetSettingsDescriptor(Indices index, Names name) : base(r => r.Optional("index", index).Optional("name", name))
+		{
+		}
+
+		///<summary>/_settings/{name}</summary>
+        public IndicesGetSettingsDescriptor(Names name) : base(r => r.Optional("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesGetTemplateDescriptor : RequestDescriptorBase<IndicesGetTemplateDescriptor, IndicesGetTemplateRequestParameters, IIndicesGetTemplateRequest>, IIndicesGetTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_template</summary>
+        public IndicesGetTemplateDescriptor() : base()
+		{
+		}
+
+		///<summary>/_template/{name}</summary>
+        public IndicesGetTemplateDescriptor(Names name) : base(r => r.Optional("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesMigrateToDataStreamDescriptor : RequestDescriptorBase<IndicesMigrateToDataStreamDescriptor, IndicesMigrateToDataStreamRequestParameters, IIndicesMigrateToDataStreamRequest>, IIndicesMigrateToDataStreamRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesMigrateToDataStream;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_data_stream/_migrate/{name}</summary>
+        public IndicesMigrateToDataStreamDescriptor(IndexName name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesOpenDescriptor : RequestDescriptorBase<IndicesOpenDescriptor, IndicesOpenRequestParameters, IIndicesOpenRequest>, IIndicesOpenRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesOpen;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_open</summary>
+        public IndicesOpenDescriptor(Indices index) : base(r => r.Required("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesPromoteDataStreamDescriptor : RequestDescriptorBase<IndicesPromoteDataStreamDescriptor, IndicesPromoteDataStreamRequestParameters, IIndicesPromoteDataStreamRequest>, IIndicesPromoteDataStreamRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPromoteDataStream;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_data_stream/_promote/{name}</summary>
+        public IndicesPromoteDataStreamDescriptor(IndexName name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesPutAliasDescriptor : RequestDescriptorBase<IndicesPutAliasDescriptor, IndicesPutAliasRequestParameters, IIndicesPutAliasRequest>, IIndicesPutAliasRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutAlias;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_alias/{name}</summary>
+        public IndicesPutAliasDescriptor(Indices index, Name name) : base(r => r.Required("index", index).Required("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesPutIndexTemplateDescriptor : RequestDescriptorBase<IndicesPutIndexTemplateDescriptor, IndicesPutIndexTemplateRequestParameters, IIndicesPutIndexTemplateRequest>, IIndicesPutIndexTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutIndexTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		///<summary>/_index_template/{name}</summary>
+        public IndicesPutIndexTemplateDescriptor(Name name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesPutMappingDescriptor : RequestDescriptorBase<IndicesPutMappingDescriptor, IndicesPutMappingRequestParameters, IIndicesPutMappingRequest>, IIndicesPutMappingRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutMapping;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_mapping</summary>
+        public IndicesPutMappingDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesPutSettingsDescriptor : RequestDescriptorBase<IndicesPutSettingsDescriptor, IndicesPutSettingsRequestParameters, IIndicesPutSettingsRequest>, IIndicesPutSettingsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutSettings;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		///<summary>/_settings</summary>
+        public IndicesPutSettingsDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_settings</summary>
+        public IndicesPutSettingsDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesPutTemplateDescriptor : RequestDescriptorBase<IndicesPutTemplateDescriptor, IndicesPutTemplateRequestParameters, IIndicesPutTemplateRequest>, IIndicesPutTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		///<summary>/_template/{name}</summary>
+        public IndicesPutTemplateDescriptor(Name name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesRecoveryDescriptor : RequestDescriptorBase<IndicesRecoveryDescriptor, IndicesRecoveryRequestParameters, IIndicesRecoveryRequest>, IIndicesRecoveryRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRecovery;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_recovery</summary>
+        public IndicesRecoveryDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_recovery</summary>
+        public IndicesRecoveryDescriptor(Indices index) : base(r => r.Optional("index", index))
 		{
 		}
 	}
@@ -66,6 +535,178 @@ namespace Nest
 
 		///<summary>/{index}/_refresh</summary>
         public IndicesRefreshDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesReloadSearchAnalyzersDescriptor : RequestDescriptorBase<IndicesReloadSearchAnalyzersDescriptor, IndicesReloadSearchAnalyzersRequestParameters, IIndicesReloadSearchAnalyzersRequest>, IIndicesReloadSearchAnalyzersRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesReloadSearchAnalyzers;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_reload_search_analyzers</summary>
+        public IndicesReloadSearchAnalyzersDescriptor(Indices index) : base(r => r.Required("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesResolveIndexDescriptor : RequestDescriptorBase<IndicesResolveIndexDescriptor, IndicesResolveIndexRequestParameters, IIndicesResolveIndexRequest>, IIndicesResolveIndexRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesResolveIndex;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_resolve/index/{name}</summary>
+        public IndicesResolveIndexDescriptor(Names name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesRolloverDescriptor : RequestDescriptorBase<IndicesRolloverDescriptor, IndicesRolloverRequestParameters, IIndicesRolloverRequest>, IIndicesRolloverRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRollover;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/{alias}/_rollover</summary>
+        public IndicesRolloverDescriptor(IndexAlias alias) : base(r => r.Required("alias", alias))
+		{
+		}
+
+		///<summary>/{alias}/_rollover/{new_index}</summary>
+        public IndicesRolloverDescriptor(IndexAlias alias, IndexName new_index) : base(r => r.Required("alias", alias).Optional("new_index", new_index))
+		{
+		}
+	}
+
+	public partial class IndicesSegmentsDescriptor : RequestDescriptorBase<IndicesSegmentsDescriptor, IndicesSegmentsRequestParameters, IIndicesSegmentsRequest>, IIndicesSegmentsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesSegments;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_segments</summary>
+        public IndicesSegmentsDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_segments</summary>
+        public IndicesSegmentsDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesShardStoresDescriptor : RequestDescriptorBase<IndicesShardStoresDescriptor, IndicesShardStoresRequestParameters, IIndicesShardStoresRequest>, IIndicesShardStoresRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesShardStores;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_shard_stores</summary>
+        public IndicesShardStoresDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_shard_stores</summary>
+        public IndicesShardStoresDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+	}
+
+	public partial class IndicesShrinkDescriptor : RequestDescriptorBase<IndicesShrinkDescriptor, IndicesShrinkRequestParameters, IIndicesShrinkRequest>, IIndicesShrinkRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesShrink;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_shrink/{target}</summary>
+        public IndicesShrinkDescriptor(IndexName index, IndexName target) : base(r => r.Required("index", index).Required("target", target))
+		{
+		}
+	}
+
+	public partial class IndicesSimulateIndexTemplateDescriptor : RequestDescriptorBase<IndicesSimulateIndexTemplateDescriptor, IndicesSimulateIndexTemplateRequestParameters, IIndicesSimulateIndexTemplateRequest>, IIndicesSimulateIndexTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesSimulateIndexTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_index_template/_simulate_index/{name}</summary>
+        public IndicesSimulateIndexTemplateDescriptor(Name name) : base(r => r.Optional("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesSimulateTemplateDescriptor : RequestDescriptorBase<IndicesSimulateTemplateDescriptor, IndicesSimulateTemplateRequestParameters, IIndicesSimulateTemplateRequest>, IIndicesSimulateTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesSimulateTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_index_template/_simulate</summary>
+        public IndicesSimulateTemplateDescriptor() : base()
+		{
+		}
+
+		///<summary>/_index_template/_simulate/{name}</summary>
+        public IndicesSimulateTemplateDescriptor(Name name) : base(r => r.Optional("name", name))
+		{
+		}
+	}
+
+	public partial class IndicesSplitDescriptor : RequestDescriptorBase<IndicesSplitDescriptor, IndicesSplitRequestParameters, IIndicesSplitRequest>, IIndicesSplitRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesSplit;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_split/{target}</summary>
+        public IndicesSplitDescriptor(IndexName index, IndexName target) : base(r => r.Required("index", index).Required("target", target))
+		{
+		}
+	}
+
+	public partial class IndicesStatsDescriptor : RequestDescriptorBase<IndicesStatsDescriptor, IndicesStatsRequestParameters, IIndicesStatsRequest>, IIndicesStatsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesStats;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_stats</summary>
+        public IndicesStatsDescriptor() : base()
+		{
+		}
+
+		///<summary>/_stats/{metric}</summary>
+        public IndicesStatsDescriptor(Metrics metric) : base(r => r.Optional("metric", metric))
+		{
+		}
+
+		///<summary>/{index}/_stats</summary>
+        public IndicesStatsDescriptor(Indices index) : base(r => r.Optional("index", index))
+		{
+		}
+
+		///<summary>/{index}/_stats/{metric}</summary>
+        public IndicesStatsDescriptor(Indices index, Metrics metric) : base(r => r.Optional("index", index).Optional("metric", metric))
+		{
+		}
+	}
+
+	public partial class IndicesUpdateAliasesDescriptor : RequestDescriptorBase<IndicesUpdateAliasesDescriptor, IndicesUpdateAliasesRequestParameters, IIndicesUpdateAliasesRequest>, IIndicesUpdateAliasesRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesUpdateAliases;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_aliases</summary>
+        public IndicesUpdateAliasesDescriptor() : base()
+		{
+		}
+	}
+
+	public partial class IndicesValidateQueryDescriptor : RequestDescriptorBase<IndicesValidateQueryDescriptor, IndicesValidateQueryRequestParameters, IIndicesValidateQueryRequest>, IIndicesValidateQueryRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesValidateQuery;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_validate/query</summary>
+        public IndicesValidateQueryDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_validate/query</summary>
+        public IndicesValidateQueryDescriptor(Indices index) : base(r => r.Optional("index", index))
 		{
 		}
 	}

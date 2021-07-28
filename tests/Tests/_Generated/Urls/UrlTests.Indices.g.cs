@@ -25,12 +25,183 @@ using Tests.Framework.EndpointTests;
 
 namespace Tests.Urls.Indices
 {
+    public class IndicesAnalyzeUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_analyze").Request(c => c.Indices.Analyze(new IndicesAnalyzeRequest())).RequestAsync(c => c.Indices.AnalyzeAsync(new IndicesAnalyzeRequest()));
+        }
+    }
+
+    public class IndicesClearCacheUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_cache/clear").Request(c => c.Indices.ClearCache(new IndicesClearCacheRequest())).RequestAsync(c => c.Indices.ClearCacheAsync(new IndicesClearCacheRequest()));
+        }
+    }
+
+    public class IndicesDataStreamsStatsUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_data_stream/_stats").Request(c => c.Indices.DataStreamsStats(new IndicesDataStreamsStatsRequest())).RequestAsync(c => c.Indices.DataStreamsStatsAsync(new IndicesDataStreamsStatsRequest()));
+        }
+    }
+
+    public class IndicesFlushUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_flush").Request(c => c.Indices.Flush(new IndicesFlushRequest())).RequestAsync(c => c.Indices.FlushAsync(new IndicesFlushRequest()));
+        }
+    }
+
+    public class IndicesForcemergeUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_forcemerge").Request(c => c.Indices.Forcemerge(new IndicesForcemergeRequest())).RequestAsync(c => c.Indices.ForcemergeAsync(new IndicesForcemergeRequest()));
+        }
+    }
+
+    public class IndicesGetAliasUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_alias").Request(c => c.Indices.GetAlias(new IndicesGetAliasRequest())).RequestAsync(c => c.Indices.GetAliasAsync(new IndicesGetAliasRequest()));
+        }
+    }
+
+    public class IndicesGetDataStreamUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_data_stream").Request(c => c.Indices.GetDataStream(new IndicesGetDataStreamRequest())).RequestAsync(c => c.Indices.GetDataStreamAsync(new IndicesGetDataStreamRequest()));
+        }
+    }
+
+    public class IndicesGetIndexTemplateUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_index_template").Request(c => c.Indices.GetIndexTemplate(new IndicesGetIndexTemplateRequest())).RequestAsync(c => c.Indices.GetIndexTemplateAsync(new IndicesGetIndexTemplateRequest()));
+        }
+    }
+
+    public class IndicesGetMappingUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_mapping").Request(c => c.Indices.GetMapping(new IndicesGetMappingRequest())).RequestAsync(c => c.Indices.GetMappingAsync(new IndicesGetMappingRequest()));
+        }
+    }
+
+    public class IndicesGetSettingsUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_settings").Request(c => c.Indices.GetSettings(new IndicesGetSettingsRequest())).RequestAsync(c => c.Indices.GetSettingsAsync(new IndicesGetSettingsRequest()));
+        }
+    }
+
+    public class IndicesGetTemplateUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_template").Request(c => c.Indices.GetTemplate(new IndicesGetTemplateRequest())).RequestAsync(c => c.Indices.GetTemplateAsync(new IndicesGetTemplateRequest()));
+        }
+    }
+
+    public class IndicesPutSettingsUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.PUT("/_settings").Request(c => c.Indices.PutSettings(new IndicesPutSettingsRequest())).RequestAsync(c => c.Indices.PutSettingsAsync(new IndicesPutSettingsRequest()));
+        }
+    }
+
+    public class IndicesRecoveryUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_recovery").Request(c => c.Indices.Recovery(new IndicesRecoveryRequest())).RequestAsync(c => c.Indices.RecoveryAsync(new IndicesRecoveryRequest()));
+        }
+    }
+
     public class IndicesRefreshUrlTests : UrlTestsBase
     {
         [U]
         public override async Task Urls()
         {
             await UrlTester.POST("/_refresh").Request(c => c.Indices.Refresh(new IndicesRefreshRequest())).RequestAsync(c => c.Indices.RefreshAsync(new IndicesRefreshRequest()));
+        }
+    }
+
+    public class IndicesSegmentsUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_segments").Request(c => c.Indices.Segments(new IndicesSegmentsRequest())).RequestAsync(c => c.Indices.SegmentsAsync(new IndicesSegmentsRequest()));
+        }
+    }
+
+    public class IndicesShardStoresUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_shard_stores").Request(c => c.Indices.ShardStores(new IndicesShardStoresRequest())).RequestAsync(c => c.Indices.ShardStoresAsync(new IndicesShardStoresRequest()));
+        }
+    }
+
+    public class IndicesSimulateTemplateUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_index_template/_simulate").Request(c => c.Indices.SimulateTemplate(new IndicesSimulateTemplateRequest())).RequestAsync(c => c.Indices.SimulateTemplateAsync(new IndicesSimulateTemplateRequest()));
+        }
+    }
+
+    public class IndicesStatsUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.GET("/_stats").Request(c => c.Indices.Stats(new IndicesStatsRequest())).RequestAsync(c => c.Indices.StatsAsync(new IndicesStatsRequest()));
+        }
+    }
+
+    public class IndicesUpdateAliasesUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_aliases").Request(c => c.Indices.UpdateAliases(new IndicesUpdateAliasesRequest())).RequestAsync(c => c.Indices.UpdateAliasesAsync(new IndicesUpdateAliasesRequest()));
+        }
+    }
+
+    public class IndicesValidateQueryUrlTests : UrlTestsBase
+    {
+        [U]
+        public override async Task Urls()
+        {
+            await UrlTester.POST("/_validate/query").Request(c => c.Indices.ValidateQuery(new IndicesValidateQueryRequest())).RequestAsync(c => c.Indices.ValidateQueryAsync(new IndicesValidateQueryRequest()));
         }
     }
 }
