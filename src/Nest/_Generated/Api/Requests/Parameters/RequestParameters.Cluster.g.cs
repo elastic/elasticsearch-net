@@ -18,6 +18,7 @@
 //
 // ------------------------------------------------
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -46,12 +47,6 @@ namespace Nest
 
     public class ClusterDeleteVotingConfigExclusionsRequestParameters : RequestParameters<ClusterDeleteVotingConfigExclusionsRequestParameters>
     {
-    }
-
-    public class ClusterExistsComponentTemplateRequestParameters : RequestParameters<ClusterExistsComponentTemplateRequestParameters>
-    {
-        [JsonIgnore]
-        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
     }
 
     public class ClusterGetComponentTemplateRequestParameters : RequestParameters<ClusterGetComponentTemplateRequestParameters>

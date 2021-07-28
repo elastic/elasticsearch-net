@@ -65,18 +65,6 @@ namespace Nest
 		All
 	}
 
-	public enum IndicesBlockOptions
-	{
-		[EnumMember(Value = "write")]
-		Write,
-		[EnumMember(Value = "read_only")]
-		ReadOnly,
-		[EnumMember(Value = "read")]
-		Read,
-		[EnumMember(Value = "metadata")]
-		Metadata
-	}
-
 	public enum NumericFielddataFormat
 	{
 		[EnumMember(Value = "disabled")]

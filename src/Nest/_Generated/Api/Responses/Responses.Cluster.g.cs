@@ -307,20 +307,6 @@ namespace Nest
 		}
 	}
 
-	public partial class ClusterExistsComponentTemplateResponse : ResponseBase
-	{
-		[JsonPropertyName("stub")]
-		public int Stub
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
 	public partial class ClusterGetComponentTemplateResponse : ResponseBase
 	{
 		[JsonPropertyName("component_templates")]
@@ -337,6 +323,17 @@ namespace Nest
 
 	public partial class ClusterGetSettingsResponse : ResponseBase
 	{
+		[JsonPropertyName("defaults")]
+		public Dictionary<string, object>? Defaults
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("persistent")]
 		public Dictionary<string, object> Persistent
 		{
@@ -350,17 +347,6 @@ namespace Nest
 
 		[JsonPropertyName("transient")]
 		public Dictionary<string, object> Transient
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("defaults")]
-		public Dictionary<string, object>? Defaults
 		{
 			get;
 #if NET5_0
@@ -649,6 +635,17 @@ namespace Nest
 
 	public partial class ClusterStateResponse : ResponseBase
 	{
+		[JsonPropertyName("blocks")]
+		public ClusterStateBlocks? Blocks
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("cluster_name")]
 		public Name ClusterName
 		{
@@ -682,6 +679,72 @@ namespace Nest
 #endif
 		}
 
+		[JsonPropertyName("metadata")]
+		public ClusterStateMetadata? Metadata
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("nodes")]
+		public Dictionary<NodeName, NodeAttributes>? Nodes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("routing_nodes")]
+		public ClusterStateRoutingNodes? RoutingNodes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("routing_table")]
+		public Dictionary<string, EmptyObject>? RoutingTable
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("snapshot_deletions")]
+		public ClusterStateDeletedSnapshots? SnapshotDeletions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("snapshots")]
+		public ClusterStateSnapshots? Snapshots
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("state")]
 		public IReadOnlyCollection<string>? State
 		{
@@ -706,83 +769,6 @@ namespace Nest
 
 		[JsonPropertyName("version")]
 		public VersionNumber? Version
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("blocks")]
-		public ClusterStateBlocks? Blocks
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("metadata")]
-		public ClusterStateMetadata? Metadata
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("nodes")]
-		public Dictionary<NodeName, NodeAttributes>? Nodes
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("routing_table")]
-		public Dictionary<string, EmptyObject>? RoutingTable
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("routing_nodes")]
-		public ClusterStateRoutingNodes? RoutingNodes
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("snapshots")]
-		public ClusterStateSnapshots? Snapshots
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("snapshot_deletions")]
-		public ClusterStateDeletedSnapshots? SnapshotDeletions
 		{
 			get;
 #if NET5_0

@@ -39,6 +39,86 @@ namespace Nest
             Indices = new IndicesNamespace(this);
         }
 
+        public ClearScrollResponse ClearScroll(IClearScrollRequest request)
+        {
+            return DoRequest<IClearScrollRequest, ClearScrollResponse>(request, request.RequestParameters);
+        }
+
+        public Task<ClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IClearScrollRequest, ClearScrollResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public ClearScrollResponse ClearScroll(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null)
+        {
+            return ClearScroll(selector.InvokeOrDefault(new ClearScrollDescriptor()));
+        }
+
+        public Task<ClearScrollResponse> ClearScrollAsync(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return ClearScrollAsync(selector.InvokeOrDefault(new ClearScrollDescriptor()), cancellationToken);
+        }
+
+        public ClosePointInTimeResponse ClosePointInTime(IClosePointInTimeRequest request)
+        {
+            return DoRequest<IClosePointInTimeRequest, ClosePointInTimeResponse>(request, request.RequestParameters);
+        }
+
+        public Task<ClosePointInTimeResponse> ClosePointInTimeAsync(IClosePointInTimeRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IClosePointInTimeRequest, ClosePointInTimeResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public ClosePointInTimeResponse ClosePointInTime(Func<ClosePointInTimeDescriptor, IClosePointInTimeRequest> selector = null)
+        {
+            return ClosePointInTime(selector.InvokeOrDefault(new ClosePointInTimeDescriptor()));
+        }
+
+        public Task<ClosePointInTimeResponse> ClosePointInTimeAsync(Func<ClosePointInTimeDescriptor, IClosePointInTimeRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return ClosePointInTimeAsync(selector.InvokeOrDefault(new ClosePointInTimeDescriptor()), cancellationToken);
+        }
+
+        public CountResponse Count(ICountRequest request)
+        {
+            return DoRequest<ICountRequest, CountResponse>(request, request.RequestParameters);
+        }
+
+        public Task<CountResponse> CountAsync(ICountRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<ICountRequest, CountResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public CountResponse Count(Func<CountDescriptor, ICountRequest> selector = null)
+        {
+            return Count(selector.InvokeOrDefault(new CountDescriptor()));
+        }
+
+        public Task<CountResponse> CountAsync(Func<CountDescriptor, ICountRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return CountAsync(selector.InvokeOrDefault(new CountDescriptor()), cancellationToken);
+        }
+
+        public CreateResponse Create<TDocument>(ICreateRequest<TDocument> request)
+        {
+            return DoRequest<ICreateRequest<TDocument>, CreateResponse>(request, request.RequestParameters);
+        }
+
+        public Task<CreateResponse> CreateAsync<TDocument>(ICreateRequest<TDocument> request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<ICreateRequest<TDocument>, CreateResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public CreateResponse Create<TDocument>(TDocument document, IndexName index, Id id, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector = null)
+        {
+            return Create(selector.InvokeOrDefault(new CreateDescriptor<TDocument>(index, id)));
+        }
+
+        public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, IndexName index, Id id, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector = null, CancellationToken cancellationToken = default)
+        {
+            return CreateAsync(selector.InvokeOrDefault(new CreateDescriptor<TDocument>(index, id)), cancellationToken);
+        }
+
         public DeleteResponse Delete(IDeleteRequest request)
         {
             return DoRequest<IDeleteRequest, DeleteResponse>(request, request.RequestParameters);
@@ -57,6 +137,26 @@ namespace Nest
         public Task<DeleteResponse> DeleteAsync(IndexName index, Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null, CancellationToken cancellationToken = default)
         {
             return DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor(index, id)), cancellationToken);
+        }
+
+        public DeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request)
+        {
+            return DoRequest<IDeleteByQueryRequest, DeleteByQueryResponse>(request, request.RequestParameters);
+        }
+
+        public Task<DeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IDeleteByQueryRequest, DeleteByQueryResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public DeleteByQueryResponse DeleteByQuery(Indices index, Func<DeleteByQueryDescriptor, IDeleteByQueryRequest> selector = null)
+        {
+            return DeleteByQuery(selector.InvokeOrDefault(new DeleteByQueryDescriptor(index)));
+        }
+
+        public Task<DeleteByQueryResponse> DeleteByQueryAsync(Indices index, Func<DeleteByQueryDescriptor, IDeleteByQueryRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return DeleteByQueryAsync(selector.InvokeOrDefault(new DeleteByQueryDescriptor(index)), cancellationToken);
         }
 
         public ExistsResponse Exists(IExistsRequest request)
@@ -79,6 +179,66 @@ namespace Nest
             return ExistsAsync(selector.InvokeOrDefault(new ExistsDescriptor(index, id)), cancellationToken);
         }
 
+        public ExistsSourceResponse ExistsSource(IExistsSourceRequest request)
+        {
+            return DoRequest<IExistsSourceRequest, ExistsSourceResponse>(request, request.RequestParameters);
+        }
+
+        public Task<ExistsSourceResponse> ExistsSourceAsync(IExistsSourceRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IExistsSourceRequest, ExistsSourceResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public ExistsSourceResponse ExistsSource(IndexName index, Id id, Func<ExistsSourceDescriptor, IExistsSourceRequest> selector = null)
+        {
+            return ExistsSource(selector.InvokeOrDefault(new ExistsSourceDescriptor(index, id)));
+        }
+
+        public Task<ExistsSourceResponse> ExistsSourceAsync(IndexName index, Id id, Func<ExistsSourceDescriptor, IExistsSourceRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return ExistsSourceAsync(selector.InvokeOrDefault(new ExistsSourceDescriptor(index, id)), cancellationToken);
+        }
+
+        public ExplainResponse<TDocument> Explain<TDocument>(IExplainRequest request)
+        {
+            return DoRequest<IExplainRequest, ExplainResponse<TDocument>>(request, request.RequestParameters);
+        }
+
+        public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IExplainRequest, ExplainResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public ExplainResponse<TDocument> Explain<TDocument>(IndexName index, Id id, Func<ExplainDescriptor, IExplainRequest> selector = null)
+        {
+            return Explain<TDocument>(selector.InvokeOrDefault(new ExplainDescriptor(index, id)));
+        }
+
+        public Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(IndexName index, Id id, Func<ExplainDescriptor, IExplainRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return ExplainAsync<TDocument>(selector.InvokeOrDefault(new ExplainDescriptor(index, id)), cancellationToken);
+        }
+
+        public FieldCapsResponse FieldCaps(IFieldCapsRequest request)
+        {
+            return DoRequest<IFieldCapsRequest, FieldCapsResponse>(request, request.RequestParameters);
+        }
+
+        public Task<FieldCapsResponse> FieldCapsAsync(IFieldCapsRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IFieldCapsRequest, FieldCapsResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public FieldCapsResponse FieldCaps(Func<FieldCapsDescriptor, IFieldCapsRequest> selector = null)
+        {
+            return FieldCaps(selector.InvokeOrDefault(new FieldCapsDescriptor()));
+        }
+
+        public Task<FieldCapsResponse> FieldCapsAsync(Func<FieldCapsDescriptor, IFieldCapsRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return FieldCapsAsync(selector.InvokeOrDefault(new FieldCapsDescriptor()), cancellationToken);
+        }
+
         public GetResponse<TDocument> Get<TDocument>(IGetRequest request)
         {
             return DoRequest<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters);
@@ -97,6 +257,76 @@ namespace Nest
         public Task<GetResponse<TDocument>> GetAsync<TDocument>(IndexName index, Id id, Func<GetDescriptor, IGetRequest> selector = null, CancellationToken cancellationToken = default)
         {
             return GetAsync<TDocument>(selector.InvokeOrDefault(new GetDescriptor(index, id)), cancellationToken);
+        }
+
+        public GetScriptResponse GetScript(IGetScriptRequest request)
+        {
+            return DoRequest<IGetScriptRequest, GetScriptResponse>(request, request.RequestParameters);
+        }
+
+        public Task<GetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IGetScriptRequest, GetScriptResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public GetScriptResponse GetScript(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null)
+        {
+            return GetScript(selector.InvokeOrDefault(new GetScriptDescriptor(id)));
+        }
+
+        public Task<GetScriptResponse> GetScriptAsync(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return GetScriptAsync(selector.InvokeOrDefault(new GetScriptDescriptor(id)), cancellationToken);
+        }
+
+        public GetScriptContextResponse GetScriptContext(IGetScriptContextRequest request)
+        {
+            return DoRequest<IGetScriptContextRequest, GetScriptContextResponse>(request, request.RequestParameters);
+        }
+
+        public Task<GetScriptContextResponse> GetScriptContextAsync(IGetScriptContextRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IGetScriptContextRequest, GetScriptContextResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public GetScriptContextResponse GetScriptContext(Func<GetScriptContextDescriptor, IGetScriptContextRequest> selector = null)
+        {
+            return GetScriptContext(selector.InvokeOrDefault(new GetScriptContextDescriptor()));
+        }
+
+        public Task<GetScriptContextResponse> GetScriptContextAsync(Func<GetScriptContextDescriptor, IGetScriptContextRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return GetScriptContextAsync(selector.InvokeOrDefault(new GetScriptContextDescriptor()), cancellationToken);
+        }
+
+        public GetScriptLanguagesResponse GetScriptLanguages(IGetScriptLanguagesRequest request)
+        {
+            return DoRequest<IGetScriptLanguagesRequest, GetScriptLanguagesResponse>(request, request.RequestParameters);
+        }
+
+        public Task<GetScriptLanguagesResponse> GetScriptLanguagesAsync(IGetScriptLanguagesRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IGetScriptLanguagesRequest, GetScriptLanguagesResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public GetScriptLanguagesResponse GetScriptLanguages(Func<GetScriptLanguagesDescriptor, IGetScriptLanguagesRequest> selector = null)
+        {
+            return GetScriptLanguages(selector.InvokeOrDefault(new GetScriptLanguagesDescriptor()));
+        }
+
+        public Task<GetScriptLanguagesResponse> GetScriptLanguagesAsync(Func<GetScriptLanguagesDescriptor, IGetScriptLanguagesRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return GetScriptLanguagesAsync(selector.InvokeOrDefault(new GetScriptLanguagesDescriptor()), cancellationToken);
+        }
+
+        public GetSourceResponse<TDocument> GetSource<TDocument>(IGetSourceRequest request)
+        {
+            return DoRequest<IGetSourceRequest, GetSourceResponse<TDocument>>(request, request.RequestParameters);
+        }
+
+        public Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(IGetSourceRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IGetSourceRequest, GetSourceResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
         }
 
         public IndexResponse Index<TDocument>(IIndexRequest<TDocument> request)
@@ -119,6 +349,56 @@ namespace Nest
             return IndexAsync(selector.InvokeOrDefault(new IndexDescriptor<TDocument>(index)), cancellationToken);
         }
 
+        public InfoResponse Info(IInfoRequest request)
+        {
+            return DoRequest<IInfoRequest, InfoResponse>(request, request.RequestParameters);
+        }
+
+        public Task<InfoResponse> InfoAsync(IInfoRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IInfoRequest, InfoResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public InfoResponse Info(Func<InfoDescriptor, IInfoRequest> selector = null)
+        {
+            return Info(selector.InvokeOrDefault(new InfoDescriptor()));
+        }
+
+        public Task<InfoResponse> InfoAsync(Func<InfoDescriptor, IInfoRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return InfoAsync(selector.InvokeOrDefault(new InfoDescriptor()), cancellationToken);
+        }
+
+        public OpenPointInTimeResponse OpenPointInTime(IOpenPointInTimeRequest request)
+        {
+            return DoRequest<IOpenPointInTimeRequest, OpenPointInTimeResponse>(request, request.RequestParameters);
+        }
+
+        public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(IOpenPointInTimeRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IOpenPointInTimeRequest, OpenPointInTimeResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public OpenPointInTimeResponse OpenPointInTime(Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null)
+        {
+            return OpenPointInTime(selector.InvokeOrDefault(new OpenPointInTimeDescriptor()));
+        }
+
+        public OpenPointInTimeResponse OpenPointInTime(Indices index, Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null)
+        {
+            return OpenPointInTime(selector.InvokeOrDefault(new OpenPointInTimeDescriptor(index)));
+        }
+
+        public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return OpenPointInTimeAsync(selector.InvokeOrDefault(new OpenPointInTimeDescriptor()), cancellationToken);
+        }
+
+        public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Indices index, Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return OpenPointInTimeAsync(selector.InvokeOrDefault(new OpenPointInTimeDescriptor(index)), cancellationToken);
+        }
+
         public PingResponse Ping(IPingRequest request)
         {
             return DoRequest<IPingRequest, PingResponse>(request, request.RequestParameters);
@@ -139,6 +419,66 @@ namespace Nest
             return PingAsync(selector.InvokeOrDefault(new PingDescriptor()), cancellationToken);
         }
 
+        public PutScriptResponse PutScript(IPutScriptRequest request)
+        {
+            return DoRequest<IPutScriptRequest, PutScriptResponse>(request, request.RequestParameters);
+        }
+
+        public Task<PutScriptResponse> PutScriptAsync(IPutScriptRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IPutScriptRequest, PutScriptResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public PutScriptResponse PutScript(Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector = null)
+        {
+            return PutScript(selector.InvokeOrDefault(new PutScriptDescriptor(id)));
+        }
+
+        public Task<PutScriptResponse> PutScriptAsync(Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return PutScriptAsync(selector.InvokeOrDefault(new PutScriptDescriptor(id)), cancellationToken);
+        }
+
+        public ReindexResponse Reindex(IReindexRequest request)
+        {
+            return DoRequest<IReindexRequest, ReindexResponse>(request, request.RequestParameters);
+        }
+
+        public Task<ReindexResponse> ReindexAsync(IReindexRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IReindexRequest, ReindexResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public ReindexResponse Reindex(Func<ReindexDescriptor, IReindexRequest> selector = null)
+        {
+            return Reindex(selector.InvokeOrDefault(new ReindexDescriptor()));
+        }
+
+        public Task<ReindexResponse> ReindexAsync(Func<ReindexDescriptor, IReindexRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return ReindexAsync(selector.InvokeOrDefault(new ReindexDescriptor()), cancellationToken);
+        }
+
+        public ScrollResponse<TDocument> Scroll<TDocument>(IScrollRequest request)
+        {
+            return DoRequest<IScrollRequest, ScrollResponse<TDocument>>(request, request.RequestParameters);
+        }
+
+        public Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(IScrollRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<IScrollRequest, ScrollResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public ScrollResponse<TDocument> Scroll<TDocument>(Func<ScrollDescriptor, IScrollRequest> selector = null)
+        {
+            return Scroll<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor()));
+        }
+
+        public Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(Func<ScrollDescriptor, IScrollRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return ScrollAsync<TDocument>(selector.InvokeOrDefault(new ScrollDescriptor()), cancellationToken);
+        }
+
         public SearchResponse<TDocument> Search<TDocument>(ISearchRequest request)
         {
             return DoRequest<ISearchRequest, SearchResponse<TDocument>>(request, request.RequestParameters);
@@ -157,6 +497,26 @@ namespace Nest
         public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchDescriptor, ISearchRequest> selector = null, CancellationToken cancellationToken = default)
         {
             return SearchAsync<TDocument>(selector.InvokeOrDefault(new SearchDescriptor()), cancellationToken);
+        }
+
+        public SearchShardsResponse SearchShards(ISearchShardsRequest request)
+        {
+            return DoRequest<ISearchShardsRequest, SearchShardsResponse>(request, request.RequestParameters);
+        }
+
+        public Task<SearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken cancellationToken = default)
+        {
+            return DoRequestAsync<ISearchShardsRequest, SearchShardsResponse>(request, request.RequestParameters, cancellationToken);
+        }
+
+        public SearchShardsResponse SearchShards(Func<SearchShardsDescriptor, ISearchShardsRequest> selector = null)
+        {
+            return SearchShards(selector.InvokeOrDefault(new SearchShardsDescriptor()));
+        }
+
+        public Task<SearchShardsResponse> SearchShardsAsync(Func<SearchShardsDescriptor, ISearchShardsRequest> selector = null, CancellationToken cancellationToken = default)
+        {
+            return SearchShardsAsync(selector.InvokeOrDefault(new SearchShardsDescriptor()), cancellationToken);
         }
     }
 }
