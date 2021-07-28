@@ -572,31 +572,6 @@ namespace Nest
 		}
 	}
 
-	[JsonConverter(typeof(StringAliasConverter<TimeSpan>))]
-	public readonly partial struct TimeSpan : IComparable<TimeSpan>, IEquatable<TimeSpan>
-	{
-		public TimeSpan(string timeSpan) => Value = timeSpan;
-		public string Value { get; }
-
-		public override int GetHashCode() => Value.GetHashCode();
-		public override string ToString() => Value;
-		public override bool Equals(object obj) => ReferenceEquals(null, obj) ? false : obj is TimeSpan other && Equals(other);
-		public bool Equals(TimeSpan other) => this.Value.Equals(other.Value);
-		public int CompareTo(TimeSpan other) => Value.CompareTo(other.Value);
-		public static bool operator ==(TimeSpan a, TimeSpan b) => a.CompareTo(b) == 0;
-		public static bool operator !=(TimeSpan a, TimeSpan b) => !(a == b);
-		public static implicit operator string(TimeSpan timeSpan) => timeSpan.Value;
-		public static implicit operator TimeSpan(string timeSpan) => new(timeSpan);
-		public static bool TryParse(string value, out TimeSpan timeSpan)
-		{
-			timeSpan = default;
-			if (string.IsNullOrWhiteSpace(value))
-				return false;
-			timeSpan = new TimeSpan(value.Trim());
-			return true;
-		}
-	}
-
 	[JsonConverter(typeof(StringAliasConverter<TimeZone>))]
 	public readonly partial struct TimeZone : IComparable<TimeZone>, IEquatable<TimeZone>
 	{

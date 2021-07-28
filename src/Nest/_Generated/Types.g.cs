@@ -8780,7 +8780,7 @@ namespace Nest
 		public string Type => "wildcard";
 	}
 
-	public partial class BoolQuery : QueryBase
+	public partial class BoolQuery
 	{
 		[JsonPropertyName("filter")]
 		public Union<QueryContainer, IReadOnlyCollection<QueryContainer>>? Filter { get; set; }
@@ -8798,7 +8798,7 @@ namespace Nest
 		public Union<QueryContainer, IReadOnlyCollection<QueryContainer>>? Should { get; set; }
 	}
 
-	public partial class BoostingQuery : QueryBase
+	public partial class BoostingQuery
 	{
 		[JsonPropertyName("negative")]
 		public QueryContainer Negative { get; set; }
@@ -8840,7 +8840,7 @@ namespace Nest
 		public string? Wkt { get; set; }
 	}
 
-	public partial class CombinedFieldsQuery : QueryBase
+	public partial class CombinedFieldsQuery
 	{
 		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
 		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
@@ -8861,7 +8861,7 @@ namespace Nest
 		public CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
 	}
 
-	public partial class CommonTermsQuery : QueryBase
+	public partial class CommonTermsQuery
 	{
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
@@ -8882,7 +8882,7 @@ namespace Nest
 		public string Query { get; set; }
 	}
 
-	public partial class ConstantScoreQuery : QueryBase
+	public partial class ConstantScoreQuery
 	{
 		[JsonPropertyName("filter")]
 		public QueryContainer Filter { get; set; }
@@ -8892,7 +8892,7 @@ namespace Nest
 	{
 	}
 
-	public partial class DateDistanceFeatureQuery : DistanceFeatureQueryBase
+	public partial class DateDistanceFeatureQuery<TOrigin, TDistance> : DistanceFeatureQueryBase<TOrigin, TDistance>
 	{
 	}
 
@@ -8979,7 +8979,7 @@ namespace Nest
 		}
 	}
 
-	public partial class DisMaxQuery : QueryBase
+	public partial class DisMaxQuery
 	{
 		[JsonPropertyName("queries")]
 		public IEnumerable<QueryContainer> Queries { get; set; }
@@ -8988,7 +8988,7 @@ namespace Nest
 		public double? TieBreaker { get; set; }
 	}
 
-	public partial class DistanceFeatureQueryBase<TOrigin, TDistance> : QueryBase
+	public partial class DistanceFeatureQueryBase<TOrigin, TDistance>
 	{
 		[JsonPropertyName("field")]
 		public Field Field
@@ -9024,7 +9024,7 @@ namespace Nest
 		}
 	}
 
-	public partial class ExistsQuery : QueryBase
+	public partial class ExistsQuery
 	{
 		[JsonPropertyName("field")]
 		public Field Field { get; set; }
@@ -9072,7 +9072,7 @@ namespace Nest
 		public double? Weight { get; set; }
 	}
 
-	public partial class FunctionScoreQuery : QueryBase
+	public partial class FunctionScoreQuery
 	{
 		[JsonPropertyName("boost_mode")]
 		public FunctionBoostMode? BoostMode { get; set; }
@@ -9093,7 +9093,7 @@ namespace Nest
 		public FunctionScoreMode? ScoreMode { get; set; }
 	}
 
-	public partial class FuzzyQuery : QueryBase
+	public partial class FuzzyQuery
 	{
 		[JsonPropertyName("fuzziness")]
 		public Fuzziness? Fuzziness { get; set; }
@@ -9114,7 +9114,7 @@ namespace Nest
 		public string Value { get; set; }
 	}
 
-	public partial class GeoBoundingBoxQuery : QueryBase
+	public partial class GeoBoundingBoxQuery
 	{
 		[JsonPropertyName("type")]
 		public GeoExecution? Type { get; set; }
@@ -9127,11 +9127,11 @@ namespace Nest
 	{
 	}
 
-	public partial class GeoDistanceFeatureQuery : DistanceFeatureQueryBase
+	public partial class GeoDistanceFeatureQuery<TOrigin, TDistance> : DistanceFeatureQueryBase<TOrigin, TDistance>
 	{
 	}
 
-	public partial class GeoDistanceQuery : QueryBase
+	public partial class GeoDistanceQuery
 	{
 		[JsonPropertyName("distance")]
 		public Distance? Distance { get; set; }
@@ -9143,19 +9143,19 @@ namespace Nest
 		public GeoValidationMethod? ValidationMethod { get; set; }
 	}
 
-	public partial class GeoPolygonQuery : QueryBase
+	public partial class GeoPolygonQuery
 	{
 		[JsonPropertyName("validation_method")]
 		public GeoValidationMethod? ValidationMethod { get; set; }
 	}
 
-	public partial class GeoShapeQuery : QueryBase
+	public partial class GeoShapeQuery
 	{
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 	}
 
-	public partial class HasChildQuery : QueryBase
+	public partial class HasChildQuery
 	{
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
@@ -9179,7 +9179,7 @@ namespace Nest
 		public RelationName Type { get; set; }
 	}
 
-	public partial class HasParentQuery : QueryBase
+	public partial class HasParentQuery
 	{
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
@@ -9197,7 +9197,7 @@ namespace Nest
 		public bool? Score { get; set; }
 	}
 
-	public partial class IdsQuery : QueryBase
+	public partial class IdsQuery
 	{
 		[JsonPropertyName("values")]
 		public Ids? Values { get; set; }
@@ -9332,7 +9332,7 @@ namespace Nest
 		public Field? UseField { get; set; }
 	}
 
-	public partial class IntervalsQuery : QueryBase
+	public partial class IntervalsQuery
 	{
 		[JsonPropertyName("all_of")]
 		public IntervalsAllOf? AllOf { get; set; }
@@ -9467,11 +9467,11 @@ namespace Nest
 		}
 	}
 
-	public partial class MatchAllQuery : QueryBase
+	public partial class MatchAllQuery
 	{
 	}
 
-	public partial class MatchBoolPrefixQuery : QueryBase
+	public partial class MatchBoolPrefixQuery
 	{
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
@@ -9501,11 +9501,11 @@ namespace Nest
 		public string Query { get; set; }
 	}
 
-	public partial class MatchNoneQuery : QueryBase
+	public partial class MatchNoneQuery
 	{
 	}
 
-	public partial class MatchPhrasePrefixQuery : QueryBase
+	public partial class MatchPhrasePrefixQuery
 	{
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
@@ -9523,7 +9523,7 @@ namespace Nest
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
-	public partial class MatchPhraseQuery : QueryBase
+	public partial class MatchPhraseQuery
 	{
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
@@ -9538,7 +9538,7 @@ namespace Nest
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
-	public partial class MatchQuery : QueryBase
+	public partial class MatchQuery
 	{
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
@@ -9580,7 +9580,7 @@ namespace Nest
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
-	public partial class MoreLikeThisQuery : QueryBase
+	public partial class MoreLikeThisQuery
 	{
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
@@ -9640,7 +9640,7 @@ namespace Nest
 		public VersionType? VersionType { get; set; }
 	}
 
-	public partial class MultiMatchQuery : QueryBase
+	public partial class MultiMatchQuery
 	{
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
@@ -9694,7 +9694,7 @@ namespace Nest
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
-	public partial class NestedQuery : QueryBase
+	public partial class NestedQuery
 	{
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
@@ -9763,7 +9763,7 @@ namespace Nest
 	{
 	}
 
-	public partial class ParentIdQuery : QueryBase
+	public partial class ParentIdQuery
 	{
 		[JsonPropertyName("id")]
 		public Id? Id { get; set; }
@@ -9775,7 +9775,7 @@ namespace Nest
 		public RelationName? Type { get; set; }
 	}
 
-	public partial class PercolateQuery : QueryBase
+	public partial class PercolateQuery
 	{
 		[JsonPropertyName("document")]
 		public object? Document { get; set; }
@@ -9805,7 +9805,7 @@ namespace Nest
 		public VersionNumber? Version { get; set; }
 	}
 
-	public partial class PinnedQuery : QueryBase
+	public partial class PinnedQuery
 	{
 		[JsonPropertyName("ids")]
 		public IEnumerable<Id> Ids { get; set; }
@@ -9814,7 +9814,7 @@ namespace Nest
 		public QueryContainer Organic { get; set; }
 	}
 
-	public partial class PrefixQuery : QueryBase
+	public partial class PrefixQuery
 	{
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }
@@ -9988,7 +9988,7 @@ namespace Nest
 		public Dictionary<Field, WildcardQuery>? Wildcard { get; set; }
 	}
 
-	public partial class QueryStringQuery : QueryBase
+	public partial class QueryStringQuery
 	{
 		[JsonPropertyName("allow_leading_wildcard")]
 		public bool? AllowLeadingWildcard { get; set; }
@@ -10075,7 +10075,7 @@ namespace Nest
 		public Union<long, string>? Seed { get; set; }
 	}
 
-	public partial class RangeQueryBase : QueryBase
+	public partial class RangeQueryBase
 	{
 		[JsonPropertyName("relation")]
 		public RangeRelation? Relation
@@ -10118,7 +10118,7 @@ namespace Nest
 		public float Pivot { get; set; }
 	}
 
-	public partial class RankFeatureQuery : QueryBase
+	public partial class RankFeatureQuery
 	{
 		[JsonPropertyName("field")]
 		public Field Field { get; set; }
@@ -10136,7 +10136,7 @@ namespace Nest
 		public RankFeatureFunctionSigmoid? Sigmoid { get; set; }
 	}
 
-	public partial class RegexpQuery : QueryBase
+	public partial class RegexpQuery
 	{
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }
@@ -10163,7 +10163,7 @@ namespace Nest
 		public double? Weight { get; set; }
 	}
 
-	public partial class ScriptQuery : QueryBase
+	public partial class ScriptQuery
 	{
 		[JsonPropertyName("script")]
 		public Script Script { get; set; }
@@ -10175,7 +10175,7 @@ namespace Nest
 		public Script Script { get; set; }
 	}
 
-	public partial class ScriptScoreQuery : QueryBase
+	public partial class ScriptScoreQuery
 	{
 		[JsonPropertyName("min_score")]
 		public float? MinScore { get; set; }
@@ -10187,11 +10187,11 @@ namespace Nest
 		public Script Script { get; set; }
 	}
 
-	public partial class ShapeQuery : QueryBase
+	public partial class ShapeQuery
 	{
 	}
 
-	public partial class SimpleQueryStringQuery : QueryBase
+	public partial class SimpleQueryStringQuery
 	{
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
@@ -10233,7 +10233,7 @@ namespace Nest
 		public string? QuoteFieldSuffix { get; set; }
 	}
 
-	public partial class SpanContainingQuery : QueryBase
+	public partial class SpanContainingQuery
 	{
 		[JsonPropertyName("big")]
 		public SpanQuery Big { get; set; }
@@ -10242,7 +10242,7 @@ namespace Nest
 		public SpanQuery Little { get; set; }
 	}
 
-	public partial class SpanFieldMaskingQuery : QueryBase
+	public partial class SpanFieldMaskingQuery
 	{
 		[JsonPropertyName("field")]
 		public Field Field { get; set; }
@@ -10251,7 +10251,7 @@ namespace Nest
 		public SpanQuery Query { get; set; }
 	}
 
-	public partial class SpanFirstQuery : QueryBase
+	public partial class SpanFirstQuery
 	{
 		[JsonPropertyName("end")]
 		public int End { get; set; }
@@ -10260,13 +10260,13 @@ namespace Nest
 		public SpanQuery Match { get; set; }
 	}
 
-	public partial class SpanMultiTermQuery : QueryBase
+	public partial class SpanMultiTermQuery
 	{
 		[JsonPropertyName("match")]
 		public QueryContainer Match { get; set; }
 	}
 
-	public partial class SpanNearQuery : QueryBase
+	public partial class SpanNearQuery
 	{
 		[JsonPropertyName("clauses")]
 		public IEnumerable<SpanQuery> Clauses { get; set; }
@@ -10278,7 +10278,7 @@ namespace Nest
 		public int? Slop { get; set; }
 	}
 
-	public partial class SpanNotQuery : QueryBase
+	public partial class SpanNotQuery
 	{
 		[JsonPropertyName("dist")]
 		public int? Dist { get; set; }
@@ -10296,7 +10296,7 @@ namespace Nest
 		public int? Pre { get; set; }
 	}
 
-	public partial class SpanOrQuery : QueryBase
+	public partial class SpanOrQuery
 	{
 		[JsonPropertyName("clauses")]
 		public IEnumerable<SpanQuery> Clauses { get; set; }
@@ -10335,13 +10335,13 @@ namespace Nest
 		public SpanWithinQuery? SpanWithin { get; set; }
 	}
 
-	public partial class SpanTermQuery : QueryBase
+	public partial class SpanTermQuery
 	{
 		[JsonPropertyName("value")]
 		public string Value { get; set; }
 	}
 
-	public partial class SpanWithinQuery : QueryBase
+	public partial class SpanWithinQuery
 	{
 		[JsonPropertyName("big")]
 		public SpanQuery Big { get; set; }
@@ -10350,7 +10350,7 @@ namespace Nest
 		public SpanQuery Little { get; set; }
 	}
 
-	public partial class TermQuery : QueryBase
+	public partial class TermQuery
 	{
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }
@@ -10359,11 +10359,11 @@ namespace Nest
 		public OneOf<string, float, bool> Value { get; set; }
 	}
 
-	public partial class TermsQuery : QueryBase
+	public partial class TermsQuery
 	{
 	}
 
-	public partial class TermsSetQuery : QueryBase
+	public partial class TermsSetQuery
 	{
 	}
 
@@ -10428,13 +10428,13 @@ namespace Nest
 		}
 	}
 
-	public partial class TypeQuery : QueryBase
+	public partial class TypeQuery
 	{
 		[JsonPropertyName("value")]
 		public string Value { get; set; }
 	}
 
-	public partial class WildcardQuery : QueryBase
+	public partial class WildcardQuery
 	{
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }
@@ -11052,113 +11052,8 @@ namespace Nest
 
 	public partial class ComponentTemplate
 	{
-		[JsonPropertyName("component_template")]
-		public ComponentTemplateNode ComponentTemplate
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
 		[JsonPropertyName("name")]
 		public Name Name
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class ComponentTemplateNode
-	{
-		[JsonPropertyName("_meta")]
-		public Metadata? Meta
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("template")]
-		public ComponentTemplateSummary Template
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("version")]
-		public VersionNumber? Version
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class ComponentTemplateSummary
-	{
-		[JsonPropertyName("aliases")]
-		public Dictionary<string, AliasDefinition>? Aliases
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("mappings")]
-		public TypeMapping? Mappings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("_meta")]
-		public Metadata? Meta
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("settings")]
-		public Dictionary<IndexName, IndexSettings> Settings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("version")]
-		public VersionNumber? Version
 		{
 			get;
 #if NET5_0
@@ -12441,17 +12336,6 @@ namespace Nest
 
 		[JsonPropertyName("built_in_tokenizers")]
 		public IReadOnlyCollection<FieldTypes> BuiltInTokenizers
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("char_filter_types")]
-		public IReadOnlyCollection<FieldTypes> CharFilterTypes
 		{
 			get;
 #if NET5_0
