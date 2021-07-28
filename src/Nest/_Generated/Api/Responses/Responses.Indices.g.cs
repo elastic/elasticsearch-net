@@ -51,6 +51,10 @@ namespace Nest
 	{
 	}
 
+	public partial class IndicesDeleteDataStreamResponse : AcknowledgedResponseBase
+	{
+	}
+
 	public partial class IndicesRefreshResponse : ShardsOperationResponseBase
 	{
 	}

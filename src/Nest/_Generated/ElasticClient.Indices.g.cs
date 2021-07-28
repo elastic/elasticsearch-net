@@ -69,6 +69,26 @@ namespace Nest
 			return DeleteAsync(selector.InvokeOrDefault(new DeleteIndicesDescriptor(index)), cancellationToken);
 		}
 
+		public IndicesDeleteDataStreamResponse DeleteDataStream(IIndicesDeleteDataStreamRequest request)
+		{
+			return DoRequest<IIndicesDeleteDataStreamRequest, IndicesDeleteDataStreamResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesDeleteDataStreamResponse> DeleteDataStreamAsync(IIndicesDeleteDataStreamRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesDeleteDataStreamRequest, IndicesDeleteDataStreamResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesDeleteDataStreamResponse DeleteDataStream(DataStreamName name, Func<IndicesDeleteDataStreamDescriptor, IIndicesDeleteDataStreamRequest> selector = null)
+		{
+			return DeleteDataStream(selector.InvokeOrDefault(new IndicesDeleteDataStreamDescriptor(name)));
+		}
+
+		public Task<IndicesDeleteDataStreamResponse> DeleteDataStreamAsync(DataStreamName name, Func<IndicesDeleteDataStreamDescriptor, IIndicesDeleteDataStreamRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return DeleteDataStreamAsync(selector.InvokeOrDefault(new IndicesDeleteDataStreamDescriptor(name)), cancellationToken);
+		}
+
 		public IndicesRefreshResponse Refresh(IIndicesRefreshRequest request)
 		{
 			return DoRequest<IIndicesRefreshRequest, IndicesRefreshResponse>(request, request.RequestParameters);
