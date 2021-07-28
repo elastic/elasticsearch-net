@@ -43,6 +43,17 @@ namespace Nest
 		}
 	}
 
+	public partial class IndicesDeleteDataStreamDescriptor : RequestDescriptorBase<IndicesDeleteDataStreamDescriptor, IndicesDeleteDataStreamRequestParameters, IIndicesDeleteDataStreamRequest>, IIndicesDeleteDataStreamRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteDataStream;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		///<summary>/_data_stream/{name}</summary>
+        public IndicesDeleteDataStreamDescriptor(DataStreamName name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
 	public partial class IndicesRefreshDescriptor : RequestDescriptorBase<IndicesRefreshDescriptor, IndicesRefreshRequestParameters, IIndicesRefreshRequest>, IIndicesRefreshRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesRefresh;

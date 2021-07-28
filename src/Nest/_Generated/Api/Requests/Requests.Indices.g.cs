@@ -122,6 +122,25 @@ namespace Nest
 		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 	}
 
+	[ConvertAs(typeof(IndicesDeleteDataStreamRequest))]
+	public partial interface IIndicesDeleteDataStreamRequest : IRequest<IndicesDeleteDataStreamRequestParameters>
+	{
+	}
+
+	public partial class IndicesDeleteDataStreamRequest : PlainRequestBase<IndicesDeleteDataStreamRequestParameters>, IIndicesDeleteDataStreamRequest
+	{
+		protected IIndicesDeleteDataStreamRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteDataStream;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+		///<summary>/_data_stream/{name}</summary>
+        public IndicesDeleteDataStreamRequest(DataStreamName name) : base(r => r.Required("name", name))
+		{
+		}
+	}
+
 	[ConvertAs(typeof(IndicesRefreshRequest))]
 	public partial interface IIndicesRefreshRequest : IRequest<IndicesRefreshRequestParameters>
 	{

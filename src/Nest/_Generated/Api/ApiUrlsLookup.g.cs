@@ -54,6 +54,7 @@ namespace Nest
         internal static ApiUrls NoNamespaceIndex = new ApiUrls(new[]{"/{index}/_doc/{id}", "/{index}/_doc"});
         internal static ApiUrls IndicesCreate = new ApiUrls(new[]{"/{index}"});
         internal static ApiUrls IndicesDelete = new ApiUrls(new[]{"/{index}"});
+        internal static ApiUrls IndicesDeleteDataStream = new ApiUrls(new[]{"/_data_stream/{name}"});
         internal static ApiUrls IndicesRefresh = new ApiUrls(new[]{"/_refresh", "/{index}/_refresh"});
         internal static ApiUrls NoNamespacePing = new ApiUrls(new[]{"/"});
         internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[]{"/_search", "/{index}/_search"});

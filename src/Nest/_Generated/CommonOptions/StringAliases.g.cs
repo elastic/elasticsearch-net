@@ -18,6 +18,7 @@
 
 using System;
 using System.Text.Json.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest
@@ -73,7 +74,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<DataStreamName>))]
-	public readonly partial struct DataStreamName : IComparable<DataStreamName>, IEquatable<DataStreamName>
+	public readonly partial struct DataStreamName : IComparable<DataStreamName>, IEquatable<DataStreamName>, IUrlParameter
 	{
 		public DataStreamName(string dataStreamName) => Value = dataStreamName;
 		public string Value { get; }
@@ -95,6 +96,8 @@ namespace Nest
 			dataStreamName = new DataStreamName(value.Trim());
 			return true;
 		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<DateFormat>))]
@@ -348,7 +351,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Name>))]
-	public readonly partial struct Name : IComparable<Name>, IEquatable<Name>
+	public readonly partial struct Name : IComparable<Name>, IEquatable<Name>, IUrlParameter
 	{
 		public Name(string name) => Value = name;
 		public string Value { get; }
@@ -370,6 +373,8 @@ namespace Nest
 			name = new Name(value.Trim());
 			return true;
 		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Namespace>))]

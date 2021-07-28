@@ -59,6 +59,10 @@ namespace Nest
         public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
     }
 
+    public class IndicesDeleteDataStreamRequestParameters : RequestParameters<IndicesDeleteDataStreamRequestParameters>
+    {
+    }
+
     public class IndicesRefreshRequestParameters : RequestParameters<IndicesRefreshRequestParameters>
     {
         [JsonIgnore]
