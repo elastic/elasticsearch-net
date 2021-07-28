@@ -78,7 +78,7 @@ namespace Nest
 		internal long Value { get; }
 	}
 
-	public partial struct DataStreamName : IUrlParameter
+	public readonly partial struct DataStreamName : IUrlParameter
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}
@@ -158,31 +158,25 @@ namespace Nest
 	{
 	}
 
-	//public class ScrollId
-	//{
-	//}
-
-	public partial struct IndexAlias : IUrlParameter
+	public readonly partial struct IndexAlias : IUrlParameter
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}
-
-
-	//public class Refresh { }
-
-	//public class WaitForActiveShards { }
 
 	public class Types : IUrlParameter
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}
 
-
-	public partial struct CategoryId : IUrlParameter
+	public readonly partial struct CategoryId : IUrlParameter
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}
 
+	public readonly partial struct Name : IUrlParameter
+	{
+		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	}
 
 	//	public partial class ErrorCause
 	//	{
