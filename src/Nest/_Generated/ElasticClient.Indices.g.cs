@@ -29,6 +29,106 @@ namespace Nest
 		{
 		}
 
+		public IndicesAddBlockResponse AddBlock(IIndicesAddBlockRequest request)
+		{
+			return DoRequest<IIndicesAddBlockRequest, IndicesAddBlockResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesAddBlockResponse> AddBlockAsync(IIndicesAddBlockRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesAddBlockRequest, IndicesAddBlockResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesAddBlockResponse AddBlock(IndexName index, IndicesBlockOptions block, Func<IndicesAddBlockDescriptor, IIndicesAddBlockRequest> selector = null)
+		{
+			return AddBlock(selector.InvokeOrDefault(new IndicesAddBlockDescriptor(index, block)));
+		}
+
+		public Task<IndicesAddBlockResponse> AddBlockAsync(IndexName index, IndicesBlockOptions block, Func<IndicesAddBlockDescriptor, IIndicesAddBlockRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return AddBlockAsync(selector.InvokeOrDefault(new IndicesAddBlockDescriptor(index, block)), cancellationToken);
+		}
+
+		public IndicesAnalyzeResponse Analyze(IIndicesAnalyzeRequest request)
+		{
+			return DoRequest<IIndicesAnalyzeRequest, IndicesAnalyzeResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesAnalyzeResponse> AnalyzeAsync(IIndicesAnalyzeRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesAnalyzeRequest, IndicesAnalyzeResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesAnalyzeResponse Analyze(Func<IndicesAnalyzeDescriptor, IIndicesAnalyzeRequest> selector = null)
+		{
+			return Analyze(selector.InvokeOrDefault(new IndicesAnalyzeDescriptor()));
+		}
+
+		public Task<IndicesAnalyzeResponse> AnalyzeAsync(Func<IndicesAnalyzeDescriptor, IIndicesAnalyzeRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return AnalyzeAsync(selector.InvokeOrDefault(new IndicesAnalyzeDescriptor()), cancellationToken);
+		}
+
+		public IndicesClearCacheResponse ClearCache(IIndicesClearCacheRequest request)
+		{
+			return DoRequest<IIndicesClearCacheRequest, IndicesClearCacheResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesClearCacheResponse> ClearCacheAsync(IIndicesClearCacheRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesClearCacheRequest, IndicesClearCacheResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesClearCacheResponse ClearCache(Func<IndicesClearCacheDescriptor, IIndicesClearCacheRequest> selector = null)
+		{
+			return ClearCache(selector.InvokeOrDefault(new IndicesClearCacheDescriptor()));
+		}
+
+		public Task<IndicesClearCacheResponse> ClearCacheAsync(Func<IndicesClearCacheDescriptor, IIndicesClearCacheRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return ClearCacheAsync(selector.InvokeOrDefault(new IndicesClearCacheDescriptor()), cancellationToken);
+		}
+
+		public IndicesCloneResponse Clone(IIndicesCloneRequest request)
+		{
+			return DoRequest<IIndicesCloneRequest, IndicesCloneResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesCloneResponse> CloneAsync(IIndicesCloneRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesCloneRequest, IndicesCloneResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesCloneResponse Clone(IndexName index, Name target, Func<IndicesCloneDescriptor, IIndicesCloneRequest> selector = null)
+		{
+			return Clone(selector.InvokeOrDefault(new IndicesCloneDescriptor(index, target)));
+		}
+
+		public Task<IndicesCloneResponse> CloneAsync(IndexName index, Name target, Func<IndicesCloneDescriptor, IIndicesCloneRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return CloneAsync(selector.InvokeOrDefault(new IndicesCloneDescriptor(index, target)), cancellationToken);
+		}
+
+		public IndicesCloseResponse Close(IIndicesCloseRequest request)
+		{
+			return DoRequest<IIndicesCloseRequest, IndicesCloseResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesCloseResponse> CloseAsync(IIndicesCloseRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesCloseRequest, IndicesCloseResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesCloseResponse Close(Indices index, Func<IndicesCloseDescriptor, IIndicesCloseRequest> selector = null)
+		{
+			return Close(selector.InvokeOrDefault(new IndicesCloseDescriptor(index)));
+		}
+
+		public Task<IndicesCloseResponse> CloseAsync(Indices index, Func<IndicesCloseDescriptor, IIndicesCloseRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return CloseAsync(selector.InvokeOrDefault(new IndicesCloseDescriptor(index)), cancellationToken);
+		}
+
 		public IndicesCreateResponse Create(IIndicesCreateRequest request)
 		{
 			return DoRequest<IIndicesCreateRequest, IndicesCreateResponse>(request, request.RequestParameters);
@@ -47,6 +147,46 @@ namespace Nest
 		public Task<IndicesCreateResponse> CreateAsync(IndexName index, Func<IndicesCreateDescriptor, IIndicesCreateRequest> selector = null, CancellationToken cancellationToken = default)
 		{
 			return CreateAsync(selector.InvokeOrDefault(new IndicesCreateDescriptor(index)), cancellationToken);
+		}
+
+		public IndicesCreateDataStreamResponse CreateDataStream(IIndicesCreateDataStreamRequest request)
+		{
+			return DoRequest<IIndicesCreateDataStreamRequest, IndicesCreateDataStreamResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesCreateDataStreamResponse> CreateDataStreamAsync(IIndicesCreateDataStreamRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesCreateDataStreamRequest, IndicesCreateDataStreamResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesCreateDataStreamResponse CreateDataStream(DataStreamName name, Func<IndicesCreateDataStreamDescriptor, IIndicesCreateDataStreamRequest> selector = null)
+		{
+			return CreateDataStream(selector.InvokeOrDefault(new IndicesCreateDataStreamDescriptor(name)));
+		}
+
+		public Task<IndicesCreateDataStreamResponse> CreateDataStreamAsync(DataStreamName name, Func<IndicesCreateDataStreamDescriptor, IIndicesCreateDataStreamRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return CreateDataStreamAsync(selector.InvokeOrDefault(new IndicesCreateDataStreamDescriptor(name)), cancellationToken);
+		}
+
+		public IndicesDataStreamsStatsResponse DataStreamsStats(IIndicesDataStreamsStatsRequest request)
+		{
+			return DoRequest<IIndicesDataStreamsStatsRequest, IndicesDataStreamsStatsResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesDataStreamsStatsResponse> DataStreamsStatsAsync(IIndicesDataStreamsStatsRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesDataStreamsStatsRequest, IndicesDataStreamsStatsResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesDataStreamsStatsResponse DataStreamsStats(Func<IndicesDataStreamsStatsDescriptor, IIndicesDataStreamsStatsRequest> selector = null)
+		{
+			return DataStreamsStats(selector.InvokeOrDefault(new IndicesDataStreamsStatsDescriptor()));
+		}
+
+		public Task<IndicesDataStreamsStatsResponse> DataStreamsStatsAsync(Func<IndicesDataStreamsStatsDescriptor, IIndicesDataStreamsStatsRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return DataStreamsStatsAsync(selector.InvokeOrDefault(new IndicesDataStreamsStatsDescriptor()), cancellationToken);
 		}
 
 		public DeleteIndicesResponse Delete(IDeleteIndicesRequest request)
@@ -69,6 +209,26 @@ namespace Nest
 			return DeleteAsync(selector.InvokeOrDefault(new DeleteIndicesDescriptor(index)), cancellationToken);
 		}
 
+		public IndicesDeleteAliasResponse DeleteAlias(IIndicesDeleteAliasRequest request)
+		{
+			return DoRequest<IIndicesDeleteAliasRequest, IndicesDeleteAliasResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesDeleteAliasResponse> DeleteAliasAsync(IIndicesDeleteAliasRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesDeleteAliasRequest, IndicesDeleteAliasResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesDeleteAliasResponse DeleteAlias(Indices index, Names name, Func<IndicesDeleteAliasDescriptor, IIndicesDeleteAliasRequest> selector = null)
+		{
+			return DeleteAlias(selector.InvokeOrDefault(new IndicesDeleteAliasDescriptor(index, name)));
+		}
+
+		public Task<IndicesDeleteAliasResponse> DeleteAliasAsync(Indices index, Names name, Func<IndicesDeleteAliasDescriptor, IIndicesDeleteAliasRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return DeleteAliasAsync(selector.InvokeOrDefault(new IndicesDeleteAliasDescriptor(index, name)), cancellationToken);
+		}
+
 		public IndicesDeleteDataStreamResponse DeleteDataStream(IIndicesDeleteDataStreamRequest request)
 		{
 			return DoRequest<IIndicesDeleteDataStreamRequest, IndicesDeleteDataStreamResponse>(request, request.RequestParameters);
@@ -89,6 +249,516 @@ namespace Nest
 			return DeleteDataStreamAsync(selector.InvokeOrDefault(new IndicesDeleteDataStreamDescriptor(name)), cancellationToken);
 		}
 
+		public IndicesDeleteIndexTemplateResponse DeleteIndexTemplate(IIndicesDeleteIndexTemplateRequest request)
+		{
+			return DoRequest<IIndicesDeleteIndexTemplateRequest, IndicesDeleteIndexTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IIndicesDeleteIndexTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesDeleteIndexTemplateRequest, IndicesDeleteIndexTemplateResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesDeleteIndexTemplateResponse DeleteIndexTemplate(Name name, Func<IndicesDeleteIndexTemplateDescriptor, IIndicesDeleteIndexTemplateRequest> selector = null)
+		{
+			return DeleteIndexTemplate(selector.InvokeOrDefault(new IndicesDeleteIndexTemplateDescriptor(name)));
+		}
+
+		public Task<IndicesDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Name name, Func<IndicesDeleteIndexTemplateDescriptor, IIndicesDeleteIndexTemplateRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return DeleteIndexTemplateAsync(selector.InvokeOrDefault(new IndicesDeleteIndexTemplateDescriptor(name)), cancellationToken);
+		}
+
+		public IndicesDeleteTemplateResponse DeleteTemplate(IIndicesDeleteTemplateRequest request)
+		{
+			return DoRequest<IIndicesDeleteTemplateRequest, IndicesDeleteTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesDeleteTemplateResponse> DeleteTemplateAsync(IIndicesDeleteTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesDeleteTemplateRequest, IndicesDeleteTemplateResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesDeleteTemplateResponse DeleteTemplate(Name name, Func<IndicesDeleteTemplateDescriptor, IIndicesDeleteTemplateRequest> selector = null)
+		{
+			return DeleteTemplate(selector.InvokeOrDefault(new IndicesDeleteTemplateDescriptor(name)));
+		}
+
+		public Task<IndicesDeleteTemplateResponse> DeleteTemplateAsync(Name name, Func<IndicesDeleteTemplateDescriptor, IIndicesDeleteTemplateRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return DeleteTemplateAsync(selector.InvokeOrDefault(new IndicesDeleteTemplateDescriptor(name)), cancellationToken);
+		}
+
+		public IndicesExistsResponse Exists(IIndicesExistsRequest request)
+		{
+			return DoRequest<IIndicesExistsRequest, IndicesExistsResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesExistsResponse> ExistsAsync(IIndicesExistsRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesExistsRequest, IndicesExistsResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesExistsResponse Exists(Indices index, Func<IndicesExistsDescriptor, IIndicesExistsRequest> selector = null)
+		{
+			return Exists(selector.InvokeOrDefault(new IndicesExistsDescriptor(index)));
+		}
+
+		public Task<IndicesExistsResponse> ExistsAsync(Indices index, Func<IndicesExistsDescriptor, IIndicesExistsRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return ExistsAsync(selector.InvokeOrDefault(new IndicesExistsDescriptor(index)), cancellationToken);
+		}
+
+		public IndicesExistsAliasResponse ExistsAlias(IIndicesExistsAliasRequest request)
+		{
+			return DoRequest<IIndicesExistsAliasRequest, IndicesExistsAliasResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesExistsAliasResponse> ExistsAliasAsync(IIndicesExistsAliasRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesExistsAliasRequest, IndicesExistsAliasResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesExistsAliasResponse ExistsAlias(Names name, Func<IndicesExistsAliasDescriptor, IIndicesExistsAliasRequest> selector = null)
+		{
+			return ExistsAlias(selector.InvokeOrDefault(new IndicesExistsAliasDescriptor(name)));
+		}
+
+		public Task<IndicesExistsAliasResponse> ExistsAliasAsync(Names name, Func<IndicesExistsAliasDescriptor, IIndicesExistsAliasRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return ExistsAliasAsync(selector.InvokeOrDefault(new IndicesExistsAliasDescriptor(name)), cancellationToken);
+		}
+
+		public IndicesExistsIndexTemplateResponse ExistsIndexTemplate(IIndicesExistsIndexTemplateRequest request)
+		{
+			return DoRequest<IIndicesExistsIndexTemplateRequest, IndicesExistsIndexTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesExistsIndexTemplateResponse> ExistsIndexTemplateAsync(IIndicesExistsIndexTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesExistsIndexTemplateRequest, IndicesExistsIndexTemplateResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesExistsIndexTemplateResponse ExistsIndexTemplate(Name name, Func<IndicesExistsIndexTemplateDescriptor, IIndicesExistsIndexTemplateRequest> selector = null)
+		{
+			return ExistsIndexTemplate(selector.InvokeOrDefault(new IndicesExistsIndexTemplateDescriptor(name)));
+		}
+
+		public Task<IndicesExistsIndexTemplateResponse> ExistsIndexTemplateAsync(Name name, Func<IndicesExistsIndexTemplateDescriptor, IIndicesExistsIndexTemplateRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return ExistsIndexTemplateAsync(selector.InvokeOrDefault(new IndicesExistsIndexTemplateDescriptor(name)), cancellationToken);
+		}
+
+		public IndicesExistsTemplateResponse ExistsTemplate(IIndicesExistsTemplateRequest request)
+		{
+			return DoRequest<IIndicesExistsTemplateRequest, IndicesExistsTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesExistsTemplateResponse> ExistsTemplateAsync(IIndicesExistsTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesExistsTemplateRequest, IndicesExistsTemplateResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesExistsTemplateResponse ExistsTemplate(Names name, Func<IndicesExistsTemplateDescriptor, IIndicesExistsTemplateRequest> selector = null)
+		{
+			return ExistsTemplate(selector.InvokeOrDefault(new IndicesExistsTemplateDescriptor(name)));
+		}
+
+		public Task<IndicesExistsTemplateResponse> ExistsTemplateAsync(Names name, Func<IndicesExistsTemplateDescriptor, IIndicesExistsTemplateRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return ExistsTemplateAsync(selector.InvokeOrDefault(new IndicesExistsTemplateDescriptor(name)), cancellationToken);
+		}
+
+		public IndicesExistsTypeResponse ExistsType(IIndicesExistsTypeRequest request)
+		{
+			return DoRequest<IIndicesExistsTypeRequest, IndicesExistsTypeResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesExistsTypeResponse> ExistsTypeAsync(IIndicesExistsTypeRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesExistsTypeRequest, IndicesExistsTypeResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesExistsTypeResponse ExistsType(Indices index, Types type, Func<IndicesExistsTypeDescriptor, IIndicesExistsTypeRequest> selector = null)
+		{
+			return ExistsType(selector.InvokeOrDefault(new IndicesExistsTypeDescriptor(index, type)));
+		}
+
+		public Task<IndicesExistsTypeResponse> ExistsTypeAsync(Indices index, Types type, Func<IndicesExistsTypeDescriptor, IIndicesExistsTypeRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return ExistsTypeAsync(selector.InvokeOrDefault(new IndicesExistsTypeDescriptor(index, type)), cancellationToken);
+		}
+
+		public IndicesFlushResponse Flush(IIndicesFlushRequest request)
+		{
+			return DoRequest<IIndicesFlushRequest, IndicesFlushResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesFlushResponse> FlushAsync(IIndicesFlushRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesFlushRequest, IndicesFlushResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesFlushResponse Flush(Func<IndicesFlushDescriptor, IIndicesFlushRequest> selector = null)
+		{
+			return Flush(selector.InvokeOrDefault(new IndicesFlushDescriptor()));
+		}
+
+		public Task<IndicesFlushResponse> FlushAsync(Func<IndicesFlushDescriptor, IIndicesFlushRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return FlushAsync(selector.InvokeOrDefault(new IndicesFlushDescriptor()), cancellationToken);
+		}
+
+		public IndicesForcemergeResponse Forcemerge(IIndicesForcemergeRequest request)
+		{
+			return DoRequest<IIndicesForcemergeRequest, IndicesForcemergeResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesForcemergeResponse> ForcemergeAsync(IIndicesForcemergeRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesForcemergeRequest, IndicesForcemergeResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesForcemergeResponse Forcemerge(Func<IndicesForcemergeDescriptor, IIndicesForcemergeRequest> selector = null)
+		{
+			return Forcemerge(selector.InvokeOrDefault(new IndicesForcemergeDescriptor()));
+		}
+
+		public Task<IndicesForcemergeResponse> ForcemergeAsync(Func<IndicesForcemergeDescriptor, IIndicesForcemergeRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return ForcemergeAsync(selector.InvokeOrDefault(new IndicesForcemergeDescriptor()), cancellationToken);
+		}
+
+		public GetIndicesResponse Get(IGetIndicesRequest request)
+		{
+			return DoRequest<IGetIndicesRequest, GetIndicesResponse>(request, request.RequestParameters);
+		}
+
+		public Task<GetIndicesResponse> GetAsync(IGetIndicesRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IGetIndicesRequest, GetIndicesResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public GetIndicesResponse Get(Indices index, Func<GetIndicesDescriptor, IGetIndicesRequest> selector = null)
+		{
+			return Get(selector.InvokeOrDefault(new GetIndicesDescriptor(index)));
+		}
+
+		public Task<GetIndicesResponse> GetAsync(Indices index, Func<GetIndicesDescriptor, IGetIndicesRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return GetAsync(selector.InvokeOrDefault(new GetIndicesDescriptor(index)), cancellationToken);
+		}
+
+		public IndicesGetAliasResponse GetAlias(IIndicesGetAliasRequest request)
+		{
+			return DoRequest<IIndicesGetAliasRequest, IndicesGetAliasResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesGetAliasResponse> GetAliasAsync(IIndicesGetAliasRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesGetAliasRequest, IndicesGetAliasResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesGetAliasResponse GetAlias(Func<IndicesGetAliasDescriptor, IIndicesGetAliasRequest> selector = null)
+		{
+			return GetAlias(selector.InvokeOrDefault(new IndicesGetAliasDescriptor()));
+		}
+
+		public Task<IndicesGetAliasResponse> GetAliasAsync(Func<IndicesGetAliasDescriptor, IIndicesGetAliasRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return GetAliasAsync(selector.InvokeOrDefault(new IndicesGetAliasDescriptor()), cancellationToken);
+		}
+
+		public IndicesGetDataStreamResponse GetDataStream(IIndicesGetDataStreamRequest request)
+		{
+			return DoRequest<IIndicesGetDataStreamRequest, IndicesGetDataStreamResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesGetDataStreamResponse> GetDataStreamAsync(IIndicesGetDataStreamRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesGetDataStreamRequest, IndicesGetDataStreamResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesGetDataStreamResponse GetDataStream(Func<IndicesGetDataStreamDescriptor, IIndicesGetDataStreamRequest> selector = null)
+		{
+			return GetDataStream(selector.InvokeOrDefault(new IndicesGetDataStreamDescriptor()));
+		}
+
+		public Task<IndicesGetDataStreamResponse> GetDataStreamAsync(Func<IndicesGetDataStreamDescriptor, IIndicesGetDataStreamRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return GetDataStreamAsync(selector.InvokeOrDefault(new IndicesGetDataStreamDescriptor()), cancellationToken);
+		}
+
+		public IndicesGetFieldMappingResponse GetFieldMapping(IIndicesGetFieldMappingRequest request)
+		{
+			return DoRequest<IIndicesGetFieldMappingRequest, IndicesGetFieldMappingResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesGetFieldMappingResponse> GetFieldMappingAsync(IIndicesGetFieldMappingRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesGetFieldMappingRequest, IndicesGetFieldMappingResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesGetFieldMappingResponse GetFieldMapping(Fields fields, Func<IndicesGetFieldMappingDescriptor, IIndicesGetFieldMappingRequest> selector = null)
+		{
+			return GetFieldMapping(selector.InvokeOrDefault(new IndicesGetFieldMappingDescriptor(fields)));
+		}
+
+		public Task<IndicesGetFieldMappingResponse> GetFieldMappingAsync(Fields fields, Func<IndicesGetFieldMappingDescriptor, IIndicesGetFieldMappingRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return GetFieldMappingAsync(selector.InvokeOrDefault(new IndicesGetFieldMappingDescriptor(fields)), cancellationToken);
+		}
+
+		public IndicesGetIndexTemplateResponse GetIndexTemplate(IIndicesGetIndexTemplateRequest request)
+		{
+			return DoRequest<IIndicesGetIndexTemplateRequest, IndicesGetIndexTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesGetIndexTemplateResponse> GetIndexTemplateAsync(IIndicesGetIndexTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesGetIndexTemplateRequest, IndicesGetIndexTemplateResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesGetIndexTemplateResponse GetIndexTemplate(Func<IndicesGetIndexTemplateDescriptor, IIndicesGetIndexTemplateRequest> selector = null)
+		{
+			return GetIndexTemplate(selector.InvokeOrDefault(new IndicesGetIndexTemplateDescriptor()));
+		}
+
+		public Task<IndicesGetIndexTemplateResponse> GetIndexTemplateAsync(Func<IndicesGetIndexTemplateDescriptor, IIndicesGetIndexTemplateRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return GetIndexTemplateAsync(selector.InvokeOrDefault(new IndicesGetIndexTemplateDescriptor()), cancellationToken);
+		}
+
+		public IndicesGetMappingResponse GetMapping(IIndicesGetMappingRequest request)
+		{
+			return DoRequest<IIndicesGetMappingRequest, IndicesGetMappingResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesGetMappingResponse> GetMappingAsync(IIndicesGetMappingRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesGetMappingRequest, IndicesGetMappingResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesGetMappingResponse GetMapping(Func<IndicesGetMappingDescriptor, IIndicesGetMappingRequest> selector = null)
+		{
+			return GetMapping(selector.InvokeOrDefault(new IndicesGetMappingDescriptor()));
+		}
+
+		public Task<IndicesGetMappingResponse> GetMappingAsync(Func<IndicesGetMappingDescriptor, IIndicesGetMappingRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return GetMappingAsync(selector.InvokeOrDefault(new IndicesGetMappingDescriptor()), cancellationToken);
+		}
+
+		public IndicesGetSettingsResponse GetSettings(IIndicesGetSettingsRequest request)
+		{
+			return DoRequest<IIndicesGetSettingsRequest, IndicesGetSettingsResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesGetSettingsResponse> GetSettingsAsync(IIndicesGetSettingsRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesGetSettingsRequest, IndicesGetSettingsResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesGetSettingsResponse GetSettings(Func<IndicesGetSettingsDescriptor, IIndicesGetSettingsRequest> selector = null)
+		{
+			return GetSettings(selector.InvokeOrDefault(new IndicesGetSettingsDescriptor()));
+		}
+
+		public Task<IndicesGetSettingsResponse> GetSettingsAsync(Func<IndicesGetSettingsDescriptor, IIndicesGetSettingsRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return GetSettingsAsync(selector.InvokeOrDefault(new IndicesGetSettingsDescriptor()), cancellationToken);
+		}
+
+		public IndicesGetTemplateResponse GetTemplate(IIndicesGetTemplateRequest request)
+		{
+			return DoRequest<IIndicesGetTemplateRequest, IndicesGetTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesGetTemplateResponse> GetTemplateAsync(IIndicesGetTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesGetTemplateRequest, IndicesGetTemplateResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesGetTemplateResponse GetTemplate(Func<IndicesGetTemplateDescriptor, IIndicesGetTemplateRequest> selector = null)
+		{
+			return GetTemplate(selector.InvokeOrDefault(new IndicesGetTemplateDescriptor()));
+		}
+
+		public Task<IndicesGetTemplateResponse> GetTemplateAsync(Func<IndicesGetTemplateDescriptor, IIndicesGetTemplateRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return GetTemplateAsync(selector.InvokeOrDefault(new IndicesGetTemplateDescriptor()), cancellationToken);
+		}
+
+		public IndicesMigrateToDataStreamResponse MigrateToDataStream(IIndicesMigrateToDataStreamRequest request)
+		{
+			return DoRequest<IIndicesMigrateToDataStreamRequest, IndicesMigrateToDataStreamResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesMigrateToDataStreamResponse> MigrateToDataStreamAsync(IIndicesMigrateToDataStreamRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesMigrateToDataStreamRequest, IndicesMigrateToDataStreamResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesMigrateToDataStreamResponse MigrateToDataStream(IndexName name, Func<IndicesMigrateToDataStreamDescriptor, IIndicesMigrateToDataStreamRequest> selector = null)
+		{
+			return MigrateToDataStream(selector.InvokeOrDefault(new IndicesMigrateToDataStreamDescriptor(name)));
+		}
+
+		public Task<IndicesMigrateToDataStreamResponse> MigrateToDataStreamAsync(IndexName name, Func<IndicesMigrateToDataStreamDescriptor, IIndicesMigrateToDataStreamRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return MigrateToDataStreamAsync(selector.InvokeOrDefault(new IndicesMigrateToDataStreamDescriptor(name)), cancellationToken);
+		}
+
+		public IndicesOpenResponse Open(IIndicesOpenRequest request)
+		{
+			return DoRequest<IIndicesOpenRequest, IndicesOpenResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesOpenResponse> OpenAsync(IIndicesOpenRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesOpenRequest, IndicesOpenResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesOpenResponse Open(Indices index, Func<IndicesOpenDescriptor, IIndicesOpenRequest> selector = null)
+		{
+			return Open(selector.InvokeOrDefault(new IndicesOpenDescriptor(index)));
+		}
+
+		public Task<IndicesOpenResponse> OpenAsync(Indices index, Func<IndicesOpenDescriptor, IIndicesOpenRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return OpenAsync(selector.InvokeOrDefault(new IndicesOpenDescriptor(index)), cancellationToken);
+		}
+
+		public IndicesPromoteDataStreamResponse PromoteDataStream(IIndicesPromoteDataStreamRequest request)
+		{
+			return DoRequest<IIndicesPromoteDataStreamRequest, IndicesPromoteDataStreamResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesPromoteDataStreamResponse> PromoteDataStreamAsync(IIndicesPromoteDataStreamRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesPromoteDataStreamRequest, IndicesPromoteDataStreamResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesPromoteDataStreamResponse PromoteDataStream(IndexName name, Func<IndicesPromoteDataStreamDescriptor, IIndicesPromoteDataStreamRequest> selector = null)
+		{
+			return PromoteDataStream(selector.InvokeOrDefault(new IndicesPromoteDataStreamDescriptor(name)));
+		}
+
+		public Task<IndicesPromoteDataStreamResponse> PromoteDataStreamAsync(IndexName name, Func<IndicesPromoteDataStreamDescriptor, IIndicesPromoteDataStreamRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return PromoteDataStreamAsync(selector.InvokeOrDefault(new IndicesPromoteDataStreamDescriptor(name)), cancellationToken);
+		}
+
+		public IndicesPutAliasResponse PutAlias(IIndicesPutAliasRequest request)
+		{
+			return DoRequest<IIndicesPutAliasRequest, IndicesPutAliasResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesPutAliasResponse> PutAliasAsync(IIndicesPutAliasRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesPutAliasRequest, IndicesPutAliasResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesPutAliasResponse PutAlias(Indices index, Name name, Func<IndicesPutAliasDescriptor, IIndicesPutAliasRequest> selector = null)
+		{
+			return PutAlias(selector.InvokeOrDefault(new IndicesPutAliasDescriptor(index, name)));
+		}
+
+		public Task<IndicesPutAliasResponse> PutAliasAsync(Indices index, Name name, Func<IndicesPutAliasDescriptor, IIndicesPutAliasRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return PutAliasAsync(selector.InvokeOrDefault(new IndicesPutAliasDescriptor(index, name)), cancellationToken);
+		}
+
+		public IndicesPutIndexTemplateResponse PutIndexTemplate(IIndicesPutIndexTemplateRequest request)
+		{
+			return DoRequest<IIndicesPutIndexTemplateRequest, IndicesPutIndexTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesPutIndexTemplateResponse> PutIndexTemplateAsync(IIndicesPutIndexTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesPutIndexTemplateRequest, IndicesPutIndexTemplateResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesPutIndexTemplateResponse PutIndexTemplate(Name name, Func<IndicesPutIndexTemplateDescriptor, IIndicesPutIndexTemplateRequest> selector = null)
+		{
+			return PutIndexTemplate(selector.InvokeOrDefault(new IndicesPutIndexTemplateDescriptor(name)));
+		}
+
+		public Task<IndicesPutIndexTemplateResponse> PutIndexTemplateAsync(Name name, Func<IndicesPutIndexTemplateDescriptor, IIndicesPutIndexTemplateRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return PutIndexTemplateAsync(selector.InvokeOrDefault(new IndicesPutIndexTemplateDescriptor(name)), cancellationToken);
+		}
+
+		public IndicesPutMappingResponse PutMapping(IIndicesPutMappingRequest request)
+		{
+			return DoRequest<IIndicesPutMappingRequest, IndicesPutMappingResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesPutMappingResponse> PutMappingAsync(IIndicesPutMappingRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesPutMappingRequest, IndicesPutMappingResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesPutSettingsResponse PutSettings(IIndicesPutSettingsRequest request)
+		{
+			return DoRequest<IIndicesPutSettingsRequest, IndicesPutSettingsResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesPutSettingsResponse> PutSettingsAsync(IIndicesPutSettingsRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesPutSettingsRequest, IndicesPutSettingsResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesPutSettingsResponse PutSettings(Func<IndicesPutSettingsDescriptor, IIndicesPutSettingsRequest> selector = null)
+		{
+			return PutSettings(selector.InvokeOrDefault(new IndicesPutSettingsDescriptor()));
+		}
+
+		public Task<IndicesPutSettingsResponse> PutSettingsAsync(Func<IndicesPutSettingsDescriptor, IIndicesPutSettingsRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return PutSettingsAsync(selector.InvokeOrDefault(new IndicesPutSettingsDescriptor()), cancellationToken);
+		}
+
+		public IndicesPutTemplateResponse PutTemplate(IIndicesPutTemplateRequest request)
+		{
+			return DoRequest<IIndicesPutTemplateRequest, IndicesPutTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesPutTemplateResponse> PutTemplateAsync(IIndicesPutTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesPutTemplateRequest, IndicesPutTemplateResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesPutTemplateResponse PutTemplate(Name name, Func<IndicesPutTemplateDescriptor, IIndicesPutTemplateRequest> selector = null)
+		{
+			return PutTemplate(selector.InvokeOrDefault(new IndicesPutTemplateDescriptor(name)));
+		}
+
+		public Task<IndicesPutTemplateResponse> PutTemplateAsync(Name name, Func<IndicesPutTemplateDescriptor, IIndicesPutTemplateRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return PutTemplateAsync(selector.InvokeOrDefault(new IndicesPutTemplateDescriptor(name)), cancellationToken);
+		}
+
+		public IndicesRecoveryResponse Recovery(IIndicesRecoveryRequest request)
+		{
+			return DoRequest<IIndicesRecoveryRequest, IndicesRecoveryResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesRecoveryResponse> RecoveryAsync(IIndicesRecoveryRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesRecoveryRequest, IndicesRecoveryResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesRecoveryResponse Recovery(Func<IndicesRecoveryDescriptor, IIndicesRecoveryRequest> selector = null)
+		{
+			return Recovery(selector.InvokeOrDefault(new IndicesRecoveryDescriptor()));
+		}
+
+		public Task<IndicesRecoveryResponse> RecoveryAsync(Func<IndicesRecoveryDescriptor, IIndicesRecoveryRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return RecoveryAsync(selector.InvokeOrDefault(new IndicesRecoveryDescriptor()), cancellationToken);
+		}
+
 		public IndicesRefreshResponse Refresh(IIndicesRefreshRequest request)
 		{
 			return DoRequest<IIndicesRefreshRequest, IndicesRefreshResponse>(request, request.RequestParameters);
@@ -107,6 +777,236 @@ namespace Nest
 		public Task<IndicesRefreshResponse> RefreshAsync(Func<IndicesRefreshDescriptor, IIndicesRefreshRequest> selector = null, CancellationToken cancellationToken = default)
 		{
 			return RefreshAsync(selector.InvokeOrDefault(new IndicesRefreshDescriptor()), cancellationToken);
+		}
+
+		public IndicesReloadSearchAnalyzersResponse ReloadSearchAnalyzers(IIndicesReloadSearchAnalyzersRequest request)
+		{
+			return DoRequest<IIndicesReloadSearchAnalyzersRequest, IndicesReloadSearchAnalyzersResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(IIndicesReloadSearchAnalyzersRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesReloadSearchAnalyzersRequest, IndicesReloadSearchAnalyzersResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesReloadSearchAnalyzersResponse ReloadSearchAnalyzers(Indices index, Func<IndicesReloadSearchAnalyzersDescriptor, IIndicesReloadSearchAnalyzersRequest> selector = null)
+		{
+			return ReloadSearchAnalyzers(selector.InvokeOrDefault(new IndicesReloadSearchAnalyzersDescriptor(index)));
+		}
+
+		public Task<IndicesReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(Indices index, Func<IndicesReloadSearchAnalyzersDescriptor, IIndicesReloadSearchAnalyzersRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return ReloadSearchAnalyzersAsync(selector.InvokeOrDefault(new IndicesReloadSearchAnalyzersDescriptor(index)), cancellationToken);
+		}
+
+		public IndicesResolveIndexResponse ResolveIndex(IIndicesResolveIndexRequest request)
+		{
+			return DoRequest<IIndicesResolveIndexRequest, IndicesResolveIndexResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesResolveIndexResponse> ResolveIndexAsync(IIndicesResolveIndexRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesResolveIndexRequest, IndicesResolveIndexResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesResolveIndexResponse ResolveIndex(Names name, Func<IndicesResolveIndexDescriptor, IIndicesResolveIndexRequest> selector = null)
+		{
+			return ResolveIndex(selector.InvokeOrDefault(new IndicesResolveIndexDescriptor(name)));
+		}
+
+		public Task<IndicesResolveIndexResponse> ResolveIndexAsync(Names name, Func<IndicesResolveIndexDescriptor, IIndicesResolveIndexRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return ResolveIndexAsync(selector.InvokeOrDefault(new IndicesResolveIndexDescriptor(name)), cancellationToken);
+		}
+
+		public IndicesRolloverResponse Rollover(IIndicesRolloverRequest request)
+		{
+			return DoRequest<IIndicesRolloverRequest, IndicesRolloverResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesRolloverResponse> RolloverAsync(IIndicesRolloverRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesRolloverRequest, IndicesRolloverResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesRolloverResponse Rollover(IndexAlias alias, Func<IndicesRolloverDescriptor, IIndicesRolloverRequest> selector = null)
+		{
+			return Rollover(selector.InvokeOrDefault(new IndicesRolloverDescriptor(alias)));
+		}
+
+		public Task<IndicesRolloverResponse> RolloverAsync(IndexAlias alias, Func<IndicesRolloverDescriptor, IIndicesRolloverRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return RolloverAsync(selector.InvokeOrDefault(new IndicesRolloverDescriptor(alias)), cancellationToken);
+		}
+
+		public IndicesSegmentsResponse Segments(IIndicesSegmentsRequest request)
+		{
+			return DoRequest<IIndicesSegmentsRequest, IndicesSegmentsResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesSegmentsResponse> SegmentsAsync(IIndicesSegmentsRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesSegmentsRequest, IndicesSegmentsResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesSegmentsResponse Segments(Func<IndicesSegmentsDescriptor, IIndicesSegmentsRequest> selector = null)
+		{
+			return Segments(selector.InvokeOrDefault(new IndicesSegmentsDescriptor()));
+		}
+
+		public Task<IndicesSegmentsResponse> SegmentsAsync(Func<IndicesSegmentsDescriptor, IIndicesSegmentsRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return SegmentsAsync(selector.InvokeOrDefault(new IndicesSegmentsDescriptor()), cancellationToken);
+		}
+
+		public IndicesShardStoresResponse ShardStores(IIndicesShardStoresRequest request)
+		{
+			return DoRequest<IIndicesShardStoresRequest, IndicesShardStoresResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesShardStoresResponse> ShardStoresAsync(IIndicesShardStoresRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesShardStoresRequest, IndicesShardStoresResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesShardStoresResponse ShardStores(Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null)
+		{
+			return ShardStores(selector.InvokeOrDefault(new IndicesShardStoresDescriptor()));
+		}
+
+		public Task<IndicesShardStoresResponse> ShardStoresAsync(Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return ShardStoresAsync(selector.InvokeOrDefault(new IndicesShardStoresDescriptor()), cancellationToken);
+		}
+
+		public IndicesShrinkResponse Shrink(IIndicesShrinkRequest request)
+		{
+			return DoRequest<IIndicesShrinkRequest, IndicesShrinkResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesShrinkResponse> ShrinkAsync(IIndicesShrinkRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesShrinkRequest, IndicesShrinkResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesShrinkResponse Shrink(IndexName index, IndexName target, Func<IndicesShrinkDescriptor, IIndicesShrinkRequest> selector = null)
+		{
+			return Shrink(selector.InvokeOrDefault(new IndicesShrinkDescriptor(index, target)));
+		}
+
+		public Task<IndicesShrinkResponse> ShrinkAsync(IndexName index, IndexName target, Func<IndicesShrinkDescriptor, IIndicesShrinkRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return ShrinkAsync(selector.InvokeOrDefault(new IndicesShrinkDescriptor(index, target)), cancellationToken);
+		}
+
+		public IndicesSimulateIndexTemplateResponse SimulateIndexTemplate(IIndicesSimulateIndexTemplateRequest request)
+		{
+			return DoRequest<IIndicesSimulateIndexTemplateRequest, IndicesSimulateIndexTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesSimulateIndexTemplateResponse> SimulateIndexTemplateAsync(IIndicesSimulateIndexTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesSimulateIndexTemplateRequest, IndicesSimulateIndexTemplateResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesSimulateTemplateResponse SimulateTemplate(IIndicesSimulateTemplateRequest request)
+		{
+			return DoRequest<IIndicesSimulateTemplateRequest, IndicesSimulateTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesSimulateTemplateResponse> SimulateTemplateAsync(IIndicesSimulateTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesSimulateTemplateRequest, IndicesSimulateTemplateResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesSimulateTemplateResponse SimulateTemplate(Func<IndicesSimulateTemplateDescriptor, IIndicesSimulateTemplateRequest> selector = null)
+		{
+			return SimulateTemplate(selector.InvokeOrDefault(new IndicesSimulateTemplateDescriptor()));
+		}
+
+		public Task<IndicesSimulateTemplateResponse> SimulateTemplateAsync(Func<IndicesSimulateTemplateDescriptor, IIndicesSimulateTemplateRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return SimulateTemplateAsync(selector.InvokeOrDefault(new IndicesSimulateTemplateDescriptor()), cancellationToken);
+		}
+
+		public IndicesSplitResponse Split(IIndicesSplitRequest request)
+		{
+			return DoRequest<IIndicesSplitRequest, IndicesSplitResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesSplitResponse> SplitAsync(IIndicesSplitRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesSplitRequest, IndicesSplitResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesSplitResponse Split(IndexName index, IndexName target, Func<IndicesSplitDescriptor, IIndicesSplitRequest> selector = null)
+		{
+			return Split(selector.InvokeOrDefault(new IndicesSplitDescriptor(index, target)));
+		}
+
+		public Task<IndicesSplitResponse> SplitAsync(IndexName index, IndexName target, Func<IndicesSplitDescriptor, IIndicesSplitRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return SplitAsync(selector.InvokeOrDefault(new IndicesSplitDescriptor(index, target)), cancellationToken);
+		}
+
+		public IndicesStatsResponse Stats(IIndicesStatsRequest request)
+		{
+			return DoRequest<IIndicesStatsRequest, IndicesStatsResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesStatsResponse> StatsAsync(IIndicesStatsRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesStatsRequest, IndicesStatsResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesStatsResponse Stats(Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null)
+		{
+			return Stats(selector.InvokeOrDefault(new IndicesStatsDescriptor()));
+		}
+
+		public Task<IndicesStatsResponse> StatsAsync(Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return StatsAsync(selector.InvokeOrDefault(new IndicesStatsDescriptor()), cancellationToken);
+		}
+
+		public IndicesUpdateAliasesResponse UpdateAliases(IIndicesUpdateAliasesRequest request)
+		{
+			return DoRequest<IIndicesUpdateAliasesRequest, IndicesUpdateAliasesResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesUpdateAliasesResponse> UpdateAliasesAsync(IIndicesUpdateAliasesRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesUpdateAliasesRequest, IndicesUpdateAliasesResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesUpdateAliasesResponse UpdateAliases(Func<IndicesUpdateAliasesDescriptor, IIndicesUpdateAliasesRequest> selector = null)
+		{
+			return UpdateAliases(selector.InvokeOrDefault(new IndicesUpdateAliasesDescriptor()));
+		}
+
+		public Task<IndicesUpdateAliasesResponse> UpdateAliasesAsync(Func<IndicesUpdateAliasesDescriptor, IIndicesUpdateAliasesRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return UpdateAliasesAsync(selector.InvokeOrDefault(new IndicesUpdateAliasesDescriptor()), cancellationToken);
+		}
+
+		public IndicesValidateQueryResponse ValidateQuery(IIndicesValidateQueryRequest request)
+		{
+			return DoRequest<IIndicesValidateQueryRequest, IndicesValidateQueryResponse>(request, request.RequestParameters);
+		}
+
+		public Task<IndicesValidateQueryResponse> ValidateQueryAsync(IIndicesValidateQueryRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IIndicesValidateQueryRequest, IndicesValidateQueryResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public IndicesValidateQueryResponse ValidateQuery(Func<IndicesValidateQueryDescriptor, IIndicesValidateQueryRequest> selector = null)
+		{
+			return ValidateQuery(selector.InvokeOrDefault(new IndicesValidateQueryDescriptor()));
+		}
+
+		public Task<IndicesValidateQueryResponse> ValidateQueryAsync(Func<IndicesValidateQueryDescriptor, IIndicesValidateQueryRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return ValidateQueryAsync(selector.InvokeOrDefault(new IndicesValidateQueryDescriptor()), cancellationToken);
 		}
 	}
 }

@@ -251,7 +251,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<IndexAlias>))]
-	public readonly partial struct IndexAlias : IComparable<IndexAlias>, IEquatable<IndexAlias>
+	public readonly partial struct IndexAlias : IComparable<IndexAlias>, IEquatable<IndexAlias>, IUrlParameter
 	{
 		public IndexAlias(string indexAlias) => Value = indexAlias;
 		public string Value { get; }
@@ -273,6 +273,8 @@ namespace Nest
 			indexAlias = new IndexAlias(value.Trim());
 			return true;
 		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<IndexPattern>))]
