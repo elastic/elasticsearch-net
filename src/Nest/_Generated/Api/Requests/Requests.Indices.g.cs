@@ -37,6 +37,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}/_block/{block}</summary>
         public IndicesAddBlockRequest(IndexName index, IndicesBlockOptions block) : base(r => r.Required("index", index).Required("block", block))
 		{
@@ -71,6 +72,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => Analyzer is null && Attributes is null && Explain is null && Field is null && Filter is null && Normalizer is null && Text is null;
+
 		///<summary>/_analyze</summary>
         public IndicesAnalyzeRequest() : base()
 		{
@@ -172,6 +174,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_cache/clear</summary>
         public IndicesClearCacheRequest() : base()
 		{
@@ -217,6 +220,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}/_clone/{target}</summary>
         public IndicesCloneRequest(IndexName index, Name target) : base(r => r.Required("index", index).Required("target", target))
 		{
@@ -267,6 +271,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}/_close</summary>
         public IndicesCloseRequest(Indices index) : base(r => r.Required("index", index))
 		{
@@ -304,6 +309,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}</summary>
         public IndicesCreateRequest(IndexName index) : base(r => r.Required("index", index))
 		{
@@ -368,6 +374,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_data_stream/{name}</summary>
         public IndicesCreateDataStreamRequest(DataStreamName name) : base(r => r.Required("name", name))
 		{
@@ -387,6 +394,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_data_stream/_stats</summary>
         public IndicesDataStreamsStatsRequest() : base()
 		{
@@ -414,6 +422,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}</summary>
         public DeleteIndicesRequest(Indices index) : base(r => r.Required("index", index))
 		{
@@ -448,6 +457,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}/_alias/{name}</summary>
         public IndicesDeleteAliasRequest(Indices index, Names name) : base(r => r.Required("index", index).Required("name", name))
 		{
@@ -473,6 +483,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_data_stream/{name}</summary>
         public IndicesDeleteDataStreamRequest(DataStreamName name) : base(r => r.Required("name", name))
 		{
@@ -492,6 +503,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_index_template/{name}</summary>
         public IndicesDeleteIndexTemplateRequest(Name name) : base(r => r.Required("name", name))
 		{
@@ -511,6 +523,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_template/{name}</summary>
         public IndicesDeleteTemplateRequest(Name name) : base(r => r.Required("name", name))
 		{
@@ -536,6 +549,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}</summary>
         public IndicesExistsRequest(Indices index) : base(r => r.Required("index", index))
 		{
@@ -573,6 +587,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_alias/{name}</summary>
         public IndicesExistsAliasRequest(Names name) : base(r => r.Required("name", name))
 		{
@@ -609,6 +624,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_index_template/{name}</summary>
         public IndicesExistsIndexTemplateRequest(Name name) : base(r => r.Required("name", name))
 		{
@@ -631,6 +647,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_template/{name}</summary>
         public IndicesExistsTemplateRequest(Names name) : base(r => r.Required("name", name))
 		{
@@ -659,6 +676,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}/_mapping/{type}</summary>
         public IndicesExistsTypeRequest(Indices index, Types type) : base(r => r.Required("index", index).Required("type", type))
 		{
@@ -690,6 +708,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_flush</summary>
         public IndicesFlushRequest() : base()
 		{
@@ -729,6 +748,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_forcemerge</summary>
         public IndicesForcemergeRequest() : base()
 		{
@@ -771,6 +791,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}</summary>
         public GetIndicesRequest(Indices index) : base(r => r.Required("index", index))
 		{
@@ -814,6 +835,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_alias</summary>
         public IndicesGetAliasRequest() : base()
 		{
@@ -860,6 +882,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_data_stream</summary>
         public IndicesGetDataStreamRequest() : base()
 		{
@@ -887,6 +910,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_mapping/field/{fields}</summary>
         public IndicesGetFieldMappingRequest(Fields fields) : base(r => r.Required("fields", fields))
 		{
@@ -929,6 +953,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => FlatSettings is null && IncludeTypeName is null && MasterTimeout is null;
+
 		///<summary>/_index_template</summary>
         public IndicesGetIndexTemplateRequest() : base()
 		{
@@ -989,6 +1014,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_mapping</summary>
         public IndicesGetMappingRequest() : base()
 		{
@@ -1031,6 +1057,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_settings</summary>
         public IndicesGetSettingsRequest() : base()
 		{
@@ -1086,6 +1113,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_template</summary>
         public IndicesGetTemplateRequest() : base()
 		{
@@ -1122,6 +1150,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_data_stream/_migrate/{name}</summary>
         public IndicesMigrateToDataStreamRequest(IndexName name) : base(r => r.Required("name", name))
 		{
@@ -1141,6 +1170,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}/_open</summary>
         public IndicesOpenRequest(Indices index) : base(r => r.Required("index", index))
 		{
@@ -1178,6 +1208,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_data_stream/_promote/{name}</summary>
         public IndicesPromoteDataStreamRequest(IndexName name) : base(r => r.Required("name", name))
 		{
@@ -1197,6 +1228,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}/_alias/{name}</summary>
         public IndicesPutAliasRequest(Indices index, Name name) : base(r => r.Required("index", index).Required("name", name))
 		{
@@ -1277,6 +1309,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_index_template/{name}</summary>
         public IndicesPutIndexTemplateRequest(Name name) : base(r => r.Required("name", name))
 		{
@@ -1362,6 +1395,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => AllField is null && DateDetection is null && Dynamic is null && DynamicDateFormats is null && DynamicTemplates is null && FieldNamesField is null && IndexField is null && Meta is null && NumericDetection is null && Properties is null && RoutingField is null && SizeField is null && SourceField is null && Runtime is null;
+
 		///<summary>/{index}/_mapping</summary>
         public IndicesPutMappingRequest(Indices index) : base(r => r.Optional("index", index))
 		{
@@ -1556,6 +1590,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_settings</summary>
         public IndicesPutSettingsRequest() : base()
 		{
@@ -1601,6 +1636,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_template/{name}</summary>
         public IndicesPutTemplateRequest(Name name) : base(r => r.Required("name", name))
 		{
@@ -1690,6 +1726,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_recovery</summary>
         public IndicesRecoveryRequest() : base()
 		{
@@ -1720,6 +1757,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_refresh</summary>
         public IndicesRefreshRequest() : base()
 		{
@@ -1753,6 +1791,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}/_reload_search_analyzers</summary>
         public IndicesReloadSearchAnalyzersRequest(Indices index) : base(r => r.Required("index", index))
 		{
@@ -1781,6 +1820,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/_resolve/index/{name}</summary>
         public IndicesResolveIndexRequest(Names name) : base(r => r.Required("name", name))
 		{
@@ -1803,6 +1843,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{alias}/_rollover</summary>
         public IndicesRolloverRequest(IndexAlias alias) : base(r => r.Required("alias", alias))
 		{
@@ -1886,6 +1927,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_segments</summary>
         public IndicesSegmentsRequest() : base()
 		{
@@ -1922,6 +1964,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_shard_stores</summary>
         public IndicesShardStoresRequest() : base()
 		{
@@ -1955,6 +1998,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}/_shrink/{target}</summary>
         public IndicesShrinkRequest(IndexName index, IndexName target) : base(r => r.Required("index", index).Required("target", target))
 		{
@@ -2005,6 +2049,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => ComposedOf is null && Overlapping is null && Template is null;
+
 		///<summary>/_index_template/_simulate_index/{name}</summary>
         public IndicesSimulateIndexTemplateRequest(Name name) : base(r => r.Optional("name", name))
 		{
@@ -2057,6 +2102,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_index_template/_simulate</summary>
         public IndicesSimulateTemplateRequest() : base()
 		{
@@ -2087,6 +2133,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
+
 		///<summary>/{index}/_split/{target}</summary>
         public IndicesSplitRequest(IndexName index, IndexName target) : base(r => r.Required("index", index).Required("target", target))
 		{
@@ -2137,6 +2184,7 @@ namespace Nest
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_stats</summary>
         public IndicesStatsRequest() : base()
 		{
@@ -2201,6 +2249,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
+
 		///<summary>/_aliases</summary>
         public IndicesUpdateAliasesRequest() : base()
 		{
@@ -2226,6 +2275,7 @@ namespace Nest
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => Query is null;
+
 		///<summary>/_validate/query</summary>
         public IndicesValidateQueryRequest() : base()
 		{

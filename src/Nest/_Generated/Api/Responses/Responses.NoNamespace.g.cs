@@ -22,12 +22,346 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest
 {
+	public partial class ClearScrollResponse : ResponseBase
+	{
+		[JsonPropertyName("succeeded")]
+		public bool Succeeded
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("num_freed")]
+		public int NumFreed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClosePointInTimeResponse : ResponseBase
+	{
+		[JsonPropertyName("succeeded")]
+		public bool Succeeded
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("num_freed")]
+		public int NumFreed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class CountResponse : ResponseBase
+	{
+		[JsonPropertyName("count")]
+		public long Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_shards")]
+		public ShardStatistics Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class CreateResponse : WriteResponseBase
+	{
+	}
+
 	public partial class DeleteResponse : WriteResponseBase
 	{
 	}
 
+	public partial class DeleteByQueryResponse : ResponseBase
+	{
+		[JsonPropertyName("batches")]
+		public long? Batches
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("deleted")]
+		public long? Deleted
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("failures")]
+		public IReadOnlyCollection<BulkIndexByScrollFailure>? Failures
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("noops")]
+		public long? Noops
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("requests_per_second")]
+		public float? RequestsPerSecond
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("retries")]
+		public Retries? Retries
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("slice_id")]
+		public int? SliceId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("task")]
+		public TaskId? Task
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("throttled_millis")]
+		public long? ThrottledMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("throttled_until_millis")]
+		public long? ThrottledUntilMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("timed_out")]
+		public bool? TimedOut
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("took")]
+		public long? Took
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public long? Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version_conflicts")]
+		public long? VersionConflicts
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class ExistsResponse : ExistsResponseBase
 	{
+	}
+
+	public partial class ExistsSourceResponse : ResponseBase
+	{
+	}
+
+	public partial class ExplainResponse<TDocument> : ResponseBase
+	{
+		[JsonPropertyName("_index")]
+		public IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_type")]
+		public DocType? Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_id")]
+		public Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("matched")]
+		public bool Matched
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("explanation")]
+		public ExplanationDetail? Explanation
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("get")]
+		public InlineGet<TDocument>? Get
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FieldCapsResponse : ResponseBase
+	{
+		[JsonPropertyName("indices")]
+		public Indices Indices
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fields")]
+		public Dictionary<Field, Dictionary<string, FieldCapability>> Fields
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class GetResponse<TDocument> : ResponseBase
@@ -143,11 +477,349 @@ namespace Nest
 		}
 	}
 
+	public partial class GetScriptResponse : ResponseBase
+	{
+		[JsonPropertyName("_id")]
+		public Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("found")]
+		public bool Found
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("script")]
+		public StoredScript? Script
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GetScriptContextResponse : ResponseBase
+	{
+		[JsonPropertyName("contexts")]
+		public IReadOnlyCollection<Context> Contexts
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GetScriptLanguagesResponse : ResponseBase
+	{
+		[JsonPropertyName("language_contexts")]
+		public IReadOnlyCollection<LanguageContext> LanguageContexts
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("types_allowed")]
+		public IReadOnlyCollection<string> TypesAllowed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GetSourceResponse<TDocument> : ResponseBase
+	{
+	}
+
 	public partial class IndexResponse : WriteResponseBase
 	{
 	}
 
+	public partial class InfoResponse : ResponseBase
+	{
+		[JsonPropertyName("cluster_name")]
+		public Name ClusterName
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cluster_uuid")]
+		public Uuid ClusterUuid
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("name")]
+		public Name Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("tagline")]
+		public string Tagline
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public ElasticsearchVersionInfo Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class OpenPointInTimeResponse : ResponseBase
+	{
+		[JsonPropertyName("id")]
+		public Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class PingResponse : ResponseBase
+	{
+	}
+
+	public partial class PutScriptResponse : AcknowledgedResponseBase
+	{
+	}
+
+	public partial class ReindexResponse : ResponseBase
+	{
+		[JsonPropertyName("batches")]
+		public long? Batches
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("created")]
+		public long? Created
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("deleted")]
+		public long? Deleted
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("failures")]
+		public IReadOnlyCollection<BulkIndexByScrollFailure>? Failures
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("noops")]
+		public long? Noops
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("retries")]
+		public Retries? Retries
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("requests_per_second")]
+		public long? RequestsPerSecond
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("slice_id")]
+		public int? SliceId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("task")]
+		public TaskId? Task
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("throttled_millis")]
+		public EpochMillis? ThrottledMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("throttled_until_millis")]
+		public EpochMillis? ThrottledUntilMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("timed_out")]
+		public bool? TimedOut
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("took")]
+		public Time? Took
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public long? Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("updated")]
+		public long? Updated
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version_conflicts")]
+		public long? VersionConflicts
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ScrollResponse<TDocument> : SearchResponse<TDocument>
 	{
 	}
 
@@ -309,6 +981,42 @@ namespace Nest
 
 		[JsonPropertyName("terminated_early")]
 		public bool? TerminatedEarly
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SearchShardsResponse : ResponseBase
+	{
+		[JsonPropertyName("nodes")]
+		public Dictionary<string, NodeAttributes> Nodes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shards")]
+		public IReadOnlyCollection<IReadOnlyCollection<NodeShard>> Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("indices")]
+		public Dictionary<IndexName, ShardStoreIndex> Indices
 		{
 			get;
 #if NET5_0

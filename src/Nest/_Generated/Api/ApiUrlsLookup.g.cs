@@ -23,6 +23,8 @@ namespace Nest
 {
     internal static class ApiUrlsLookups
     {
+        internal static ApiUrls NoNamespaceClearScroll = new ApiUrls(new[]{"/_search/scroll"});
+        internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[]{"/_pit"});
         internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[]{"/_cluster/allocation/explain"});
         internal static ApiUrls ClusterDeleteComponentTemplate = new ApiUrls(new[]{"/_component_template/{name}"});
         internal static ApiUrls ClusterDeleteVotingConfigExclusions = new ApiUrls(new[]{"/_cluster/voting_config_exclusions"});
@@ -38,9 +40,19 @@ namespace Nest
         internal static ApiUrls ClusterReroute = new ApiUrls(new[]{"/_cluster/reroute"});
         internal static ApiUrls ClusterState = new ApiUrls(new[]{"/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}"});
         internal static ApiUrls ClusterStats = new ApiUrls(new[]{"/_cluster/stats", "/_cluster/stats/nodes/{node_id}"});
+        internal static ApiUrls NoNamespaceCount = new ApiUrls(new[]{"/_count", "/{index}/_count"});
+        internal static ApiUrls NoNamespaceCreate = new ApiUrls(new[]{"/{index}/_create/{id}"});
         internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[]{"/{index}/_doc/{id}"});
+        internal static ApiUrls NoNamespaceDeleteByQuery = new ApiUrls(new[]{"/{index}/_delete_by_query"});
         internal static ApiUrls NoNamespaceExists = new ApiUrls(new[]{"/{index}/_doc/{id}"});
+        internal static ApiUrls NoNamespaceExistsSource = new ApiUrls(new[]{"/{index}/_source/{id}"});
+        internal static ApiUrls NoNamespaceExplain = new ApiUrls(new[]{"/{index}/_explain/{id}"});
+        internal static ApiUrls NoNamespaceFieldCaps = new ApiUrls(new[]{"/_field_caps", "/{index}/_field_caps"});
         internal static ApiUrls NoNamespaceGet = new ApiUrls(new[]{"/{index}/_doc/{id}"});
+        internal static ApiUrls NoNamespaceGetScript = new ApiUrls(new[]{"/_scripts/{id}"});
+        internal static ApiUrls NoNamespaceGetScriptContext = new ApiUrls(new[]{"/_script_context"});
+        internal static ApiUrls NoNamespaceGetScriptLanguages = new ApiUrls(new[]{"/_script_language"});
+        internal static ApiUrls NoNamespaceGetSource = new ApiUrls(new[]{"/{index}/_source/{id}"});
         internal static ApiUrls IndexLifecycleManagementDeleteLifecycle = new ApiUrls(new[]{"/_ilm/policy/{policy}"});
         internal static ApiUrls IndexLifecycleManagementExplainLifecycle = new ApiUrls(new[]{"/{index}/_ilm/explain"});
         internal static ApiUrls IndexLifecycleManagementGetLifecycle = new ApiUrls(new[]{"/_ilm/policy/{policy}", "/_ilm/policy"});
@@ -102,7 +114,13 @@ namespace Nest
         internal static ApiUrls IndicesStats = new ApiUrls(new[]{"/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}"});
         internal static ApiUrls IndicesUpdateAliases = new ApiUrls(new[]{"/_aliases"});
         internal static ApiUrls IndicesValidateQuery = new ApiUrls(new[]{"/_validate/query", "/{index}/_validate/query"});
+        internal static ApiUrls NoNamespaceInfo = new ApiUrls(new[]{"/"});
+        internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[]{"/_pit", "/{index}/_pit"});
         internal static ApiUrls NoNamespacePing = new ApiUrls(new[]{"/"});
+        internal static ApiUrls NoNamespacePutScript = new ApiUrls(new[]{"/_scripts/{id}", "/_scripts/{id}/{context}"});
+        internal static ApiUrls NoNamespaceReindex = new ApiUrls(new[]{"/_reindex"});
+        internal static ApiUrls NoNamespaceScroll = new ApiUrls(new[]{"/_search/scroll"});
         internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[]{"/_search", "/{index}/_search"});
+        internal static ApiUrls NoNamespaceSearchShards = new ApiUrls(new[]{"/_search_shards", "/{index}/_search_shards"});
     }
 }

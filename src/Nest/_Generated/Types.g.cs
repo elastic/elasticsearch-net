@@ -97,6 +97,302 @@ namespace Nest
 		}
 	}
 
+	public partial class FieldCapabilitiesBodyIndexFilter
+	{
+		[JsonPropertyName("match_none")]
+		public EmptyObject? MatchNone { get; set; }
+
+		[JsonPropertyName("range")]
+		public FieldCapabilitiesBodyIndexFilterRange? Range { get; set; }
+
+		[JsonPropertyName("term")]
+		public FieldCapabilitiesBodyIndexFilterTerm? Term { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilterRange
+	{
+		[JsonPropertyName("timestamp")]
+		public FieldCapabilitiesBodyIndexFilterRangeTimestamp Timestamp { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilterRangeTimestamp
+	{
+		[JsonPropertyName("gt")]
+		public int? Gt { get; set; }
+
+		[JsonPropertyName("gte")]
+		public int? Gte { get; set; }
+
+		[JsonPropertyName("lt")]
+		public int? Lt { get; set; }
+
+		[JsonPropertyName("lte")]
+		public int? Lte { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilterTerm
+	{
+		[JsonPropertyName("versionControl")]
+		public FieldCapabilitiesBodyIndexFilterTermVersionControl Versioncontrol { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilterTermVersionControl
+	{
+		[JsonPropertyName("value")]
+		public string Value { get; set; }
+	}
+
+	public partial class FieldCapability
+	{
+		[JsonPropertyName("aggregatable")]
+		public bool Aggregatable
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("indices")]
+		public Indices? Indices
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("meta")]
+		public Dictionary<string, IReadOnlyCollection<string>>? Meta
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("non_aggregatable_indices")]
+		public Indices? NonAggregatableIndices
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("non_searchable_indices")]
+		public Indices? NonSearchableIndices
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("searchable")]
+		public bool Searchable
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Context
+	{
+		[JsonPropertyName("methods")]
+		public IReadOnlyCollection<ContextMethod> Methods
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("name")]
+		public Name Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ContextMethod
+	{
+		[JsonPropertyName("name")]
+		public Name Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("params")]
+		public IReadOnlyCollection<ContextMethodParam> Params
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("return_type")]
+		public string ReturnType
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ContextMethodParam
+	{
+		[JsonPropertyName("name")]
+		public Name Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class LanguageContext
+	{
+		[JsonPropertyName("contexts")]
+		public IReadOnlyCollection<string> Contexts
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("language")]
+		public ScriptLanguage Language
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Destination
+	{
+		[JsonPropertyName("index")]
+		public IndexName Index { get; set; }
+
+		[JsonPropertyName("op_type")]
+		public OpType? OpType { get; set; }
+
+		[JsonPropertyName("pipeline")]
+		public string? Pipeline { get; set; }
+
+		[JsonPropertyName("routing")]
+		public Routing? Routing { get; set; }
+
+		[JsonPropertyName("version_type")]
+		public VersionType? VersionType { get; set; }
+	}
+
+	public partial class RemoteSource
+	{
+		[JsonPropertyName("connect_timeout")]
+		public Time ConnectTimeout { get; set; }
+
+		[JsonPropertyName("host")]
+		public Host Host { get; set; }
+
+		[JsonPropertyName("password")]
+		public Password Password { get; set; }
+
+		[JsonPropertyName("socket_timeout")]
+		public Time SocketTimeout { get; set; }
+
+		[JsonPropertyName("username")]
+		public Username Username { get; set; }
+	}
+
+	public partial class Source
+	{
+		[JsonPropertyName("index")]
+		public Indices Index { get; set; }
+
+		[JsonPropertyName("query")]
+		public QueryContainer? Query { get; set; }
+
+		[JsonPropertyName("remote")]
+		public RemoteSource? Remote { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonPropertyName("slice")]
+		public SlicedScroll? Slice { get; set; }
+
+		[JsonPropertyName("sort")]
+		public Sort? Sort { get; set; }
+
+		[JsonPropertyName("_source")]
+		public Fields? Source { get; set; }
+	}
+
 	public partial class PainlessExecutionPosition
 	{
 		[JsonPropertyName("end")]
@@ -1816,6 +2112,89 @@ namespace Nest
 		}
 	}
 
+	public partial class ShardStoreIndex
+	{
+		[JsonPropertyName("aliases")]
+		public IReadOnlyCollection<Name>? Aliases
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("filter")]
+		public QueryContainer? Filter
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class BulkIndexByScrollFailure
+	{
+		[JsonPropertyName("cause")]
+		public MainError Cause
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("id")]
+		public Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index")]
+		public IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("status")]
+		public int Status
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class BulkStats
 	{
 		[JsonPropertyName("avg_size")]
@@ -2017,6 +2396,108 @@ namespace Nest
 
 		[JsonPropertyName("deleted")]
 		public long Deleted
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ElasticsearchVersionInfo
+	{
+		[JsonPropertyName("build_date")]
+		public DateString BuildDate
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_flavor")]
+		public string BuildFlavor
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_hash")]
+		public string BuildHash
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_snapshot")]
+		public bool BuildSnapshot
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_type")]
+		public string BuildType
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lucene_version")]
+		public VersionString LuceneVersion
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("minimum_index_compatibility_version")]
+		public VersionString MinimumIndexCompatibilityVersion
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("minimum_wire_compatibility_version")]
+		public VersionString MinimumWireCompatibilityVersion
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("number")]
+		public string Number
 		{
 			get;
 #if NET5_0
@@ -2770,6 +3251,75 @@ namespace Nest
 		}
 	}
 
+	public partial class InlineGet<TDocument>
+	{
+		[JsonPropertyName("fields")]
+		public Dictionary<string, object>? Fields
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("found")]
+		public bool Found
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_primary_term")]
+		public long PrimaryTerm
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_routing")]
+		public Routing? Routing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_seq_no")]
+		public SequenceNumber SeqNo
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_source")]
+		public TDocument Source
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class InlineScript : ScriptBase
 	{
 		[JsonPropertyName("source")]
@@ -2791,6 +3341,20 @@ namespace Nest
 
 		[JsonPropertyName("lon")]
 		public double Lon { get; set; }
+	}
+
+	public partial class MainError : ErrorCause
+	{
+		[JsonPropertyName("headers")]
+		public Dictionary<string, string>? Headers
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class MergesStats
@@ -3557,6 +4121,31 @@ namespace Nest
 		}
 	}
 
+	public partial class Retries
+	{
+		[JsonPropertyName("bulk")]
+		public long Bulk
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("search")]
+		public long Search
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class ScriptBase
 	{
 		[JsonPropertyName("lang")]
@@ -4210,6 +4799,15 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class StoredScript
+	{
+		[JsonPropertyName("lang")]
+		public ScriptLanguage? Lang { get; set; }
+
+		[JsonPropertyName("source")]
+		public string Source { get; set; }
 	}
 
 	public partial class TranslogStats
