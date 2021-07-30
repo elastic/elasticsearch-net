@@ -49,12 +49,6 @@ namespace Nest
     {
     }
 
-    public class ClusterExistsComponentTemplateRequestParameters : RequestParameters<ClusterExistsComponentTemplateRequestParameters>
-    {
-        [JsonIgnore]
-        public string StubB { get => Q<string>("stub_b"); set => Q("stub_b", value); }
-    }
-
     public class ClusterGetComponentTemplateRequestParameters : RequestParameters<ClusterGetComponentTemplateRequestParameters>
     {
         [JsonIgnore]

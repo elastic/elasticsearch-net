@@ -53,7 +53,7 @@ namespace Nest
 		{
 		}
 	}
-	
+
 	public partial class ClusterGetComponentTemplateDescriptor : RequestDescriptorBase<ClusterGetComponentTemplateDescriptor, ClusterGetComponentTemplateRequestParameters, IClusterGetComponentTemplateRequest>, IClusterGetComponentTemplateRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetComponentTemplate;

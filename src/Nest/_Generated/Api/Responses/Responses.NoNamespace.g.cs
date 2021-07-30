@@ -24,8 +24,8 @@ namespace Nest
 {
 	public partial class ClearScrollResponse : ResponseBase
 	{
-		[JsonPropertyName("succeeded")]
-		public bool Succeeded
+		[JsonPropertyName("num_freed")]
+		public int NumFreed
 		{
 			get;
 #if NET5_0
@@ -35,8 +35,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("num_freed")]
-		public int NumFreed
+		[JsonPropertyName("succeeded")]
+		public bool Succeeded
 		{
 			get;
 #if NET5_0
@@ -49,8 +49,8 @@ namespace Nest
 
 	public partial class ClosePointInTimeResponse : ResponseBase
 	{
-		[JsonPropertyName("succeeded")]
-		public bool Succeeded
+		[JsonPropertyName("num_freed")]
+		public int NumFreed
 		{
 			get;
 #if NET5_0
@@ -60,8 +60,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("num_freed")]
-		public int NumFreed
+		[JsonPropertyName("succeeded")]
+		public bool Succeeded
 		{
 			get;
 #if NET5_0
@@ -272,50 +272,6 @@ namespace Nest
 
 	public partial class ExplainResponse<TDocument> : ResponseBase
 	{
-		[JsonPropertyName("_index")]
-		public IndexName Index
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("_type")]
-		public DocType? Type
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("_id")]
-		public Id Id
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("matched")]
-		public bool Matched
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
 		[JsonPropertyName("explanation")]
 		public ExplanationDetail? Explanation
 		{
@@ -337,12 +293,9 @@ namespace Nest
 			internal set;
 #endif
 		}
-	}
 
-	public partial class FieldCapsResponse : ResponseBase
-	{
-		[JsonPropertyName("indices")]
-		public Indices Indices
+		[JsonPropertyName("_id")]
+		public Id Id
 		{
 			get;
 #if NET5_0
@@ -352,8 +305,55 @@ namespace Nest
 #endif
 		}
 
+		[JsonPropertyName("_index")]
+		public IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("matched")]
+		public bool Matched
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_type")]
+		public DocType? Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FieldCapsResponse : ResponseBase
+	{
 		[JsonPropertyName("fields")]
 		public Dictionary<Field, Dictionary<string, FieldCapability>> Fields
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("indices")]
+		public Indices Indices
 		{
 			get;
 #if NET5_0
@@ -366,17 +366,6 @@ namespace Nest
 
 	public partial class GetResponse<TDocument> : ResponseBase
 	{
-		[JsonPropertyName("_index")]
-		public IndexName Index
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
 		[JsonPropertyName("fields")]
 		public Dictionary<string, object>? Fields
 		{
@@ -401,6 +390,17 @@ namespace Nest
 
 		[JsonPropertyName("_id")]
 		public Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_index")]
+		public IndexName Index
 		{
 			get;
 #if NET5_0
@@ -479,8 +479,8 @@ namespace Nest
 
 	public partial class GetScriptResponse : ResponseBase
 	{
-		[JsonPropertyName("_id")]
-		public Id Id
+		[JsonPropertyName("found")]
+		public bool Found
 		{
 			get;
 #if NET5_0
@@ -490,8 +490,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("found")]
-		public bool Found
+		[JsonPropertyName("_id")]
+		public Id Id
 		{
 			get;
 #if NET5_0
@@ -697,8 +697,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("retries")]
-		public Retries? Retries
+		[JsonPropertyName("requests_per_second")]
+		public long? RequestsPerSecond
 		{
 			get;
 #if NET5_0
@@ -708,8 +708,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("requests_per_second")]
-		public long? RequestsPerSecond
+		[JsonPropertyName("retries")]
+		public Retries? Retries
 		{
 			get;
 #if NET5_0
@@ -819,56 +819,8 @@ namespace Nest
 		}
 	}
 
-	public partial class ScrollResponse<TDocument> : SearchResponse<TDocument>
+	public partial class ScrollResponse<TDocument> : ResponseBase
 	{
-	}
-
-	public partial class SearchResponse<TDocument> : ResponseBase
-	{
-		[JsonPropertyName("took")]
-		public long Took
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("timed_out")]
-		public bool TimedOut
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("_shards")]
-		public ShardStatistics Shards
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("hits")]
-		public HitsMetadata<TDocument> Hits
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
 		[JsonPropertyName("aggregations")]
 		public Dictionary<AggregateName, Aggregate>? Aggregations
 		{
@@ -913,6 +865,17 @@ namespace Nest
 #endif
 		}
 
+		[JsonPropertyName("hits")]
+		public HitsMetadata<TDocument> Hits
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("max_score")]
 		public double? MaxScore
 		{
@@ -935,17 +898,6 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("profile")]
-		public Profile? Profile
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
 		[JsonPropertyName("pit_id")]
 		public Id? PitId
 		{
@@ -957,8 +909,19 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("_scroll_id")]
-		public ScrollId? ScrollId
+		[JsonPropertyName("profile")]
+		public Profile? Profile
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_shards")]
+		public ShardStatistics Shards
 		{
 			get;
 #if NET5_0
@@ -989,10 +952,211 @@ namespace Nest
 			internal set;
 #endif
 		}
+
+		[JsonPropertyName("timed_out")]
+		public bool TimedOut
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("took")]
+		public long Took
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SearchResponse<TDocument> : ResponseBase
+	{
+		[JsonPropertyName("aggregations")]
+		public Dictionary<AggregateName, Aggregate>? Aggregations
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_clusters")]
+		public ClusterStatistics? Clusters
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("documents")]
+		public IReadOnlyCollection<TDocument>? Documents
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fields")]
+		public Dictionary<string, object>? Fields
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("hits")]
+		public HitsMetadata<TDocument> Hits
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_score")]
+		public double? MaxScore
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("num_reduce_phases")]
+		public long? NumReducePhases
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("pit_id")]
+		public Id? PitId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("profile")]
+		public Profile? Profile
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_scroll_id")]
+		public ScrollId? ScrollId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_shards")]
+		public ShardStatistics Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("suggest")]
+		public Dictionary<SuggestionName, IReadOnlyCollection<Suggest<TDocument>>>? Suggest
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("terminated_early")]
+		public bool? TerminatedEarly
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("timed_out")]
+		public bool TimedOut
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("took")]
+		public long Took
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class SearchShardsResponse : ResponseBase
 	{
+		[JsonPropertyName("indices")]
+		public Dictionary<IndexName, ShardStoreIndex> Indices
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, NodeAttributes> Nodes
 		{
@@ -1006,17 +1170,6 @@ namespace Nest
 
 		[JsonPropertyName("shards")]
 		public IReadOnlyCollection<IReadOnlyCollection<NodeShard>> Shards
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("indices")]
-		public Dictionary<IndexName, ShardStoreIndex> Indices
 		{
 			get;
 #if NET5_0

@@ -89,16 +89,6 @@ namespace Nest
 			return DeleteVotingConfigExclusionsAsync(selector.InvokeOrDefault(new ClusterDeleteVotingConfigExclusionsDescriptor()), cancellationToken);
 		}
 
-		public ClusterExistsComponentTemplateResponse ExistsComponentTemplate(IClusterExistsComponentTemplateRequest request)
-		{
-			return DoRequest<IClusterExistsComponentTemplateRequest, ClusterExistsComponentTemplateResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ClusterExistsComponentTemplateResponse> ExistsComponentTemplateAsync(IClusterExistsComponentTemplateRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IClusterExistsComponentTemplateRequest, ClusterExistsComponentTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
 		public ClusterGetComponentTemplateResponse GetComponentTemplate(IClusterGetComponentTemplateRequest request)
 		{
 			return DoRequest<IClusterGetComponentTemplateRequest, ClusterGetComponentTemplateResponse>(request, request.RequestParameters);

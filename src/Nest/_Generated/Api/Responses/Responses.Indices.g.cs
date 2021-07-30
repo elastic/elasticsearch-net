@@ -24,8 +24,8 @@ namespace Nest
 {
 	public partial class IndicesAddBlockResponse : AcknowledgedResponseBase
 	{
-		[JsonPropertyName("shards_acknowledged")]
-		public bool ShardsAcknowledged
+		[JsonPropertyName("indices")]
+		public IReadOnlyCollection<IndicesBlockStatus> Indices
 		{
 			get;
 #if NET5_0
@@ -35,8 +35,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("indices")]
-		public IReadOnlyCollection<IndicesBlockStatus> Indices
+		[JsonPropertyName("shards_acknowledged")]
+		public bool ShardsAcknowledged
 		{
 			get;
 #if NET5_0
@@ -157,17 +157,6 @@ namespace Nest
 
 	public partial class IndicesDataStreamsStatsResponse : ResponseBase
 	{
-		[JsonPropertyName("_shards")]
-		public ShardStatistics Shards
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
 		[JsonPropertyName("backing_indices")]
 		public int BackingIndices
 		{
@@ -190,8 +179,19 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("total_store_sizes")]
-		public ByteSize? TotalStoreSizes
+		[JsonPropertyName("data_streams")]
+		public IReadOnlyCollection<DataStreamsStatsItem> DataStreams
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_shards")]
+		public ShardStatistics Shards
 		{
 			get;
 #if NET5_0
@@ -212,8 +212,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("data_streams")]
-		public IReadOnlyCollection<DataStreamsStatsItem> DataStreams
+		[JsonPropertyName("total_store_sizes")]
+		public ByteSize? TotalStoreSizes
 		{
 			get;
 #if NET5_0
@@ -411,17 +411,6 @@ namespace Nest
 
 	public partial class IndicesResolveIndexResponse : ResponseBase
 	{
-		[JsonPropertyName("indices")]
-		public IReadOnlyCollection<ResolveIndexItem> Indices
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
 		[JsonPropertyName("aliases")]
 		public IReadOnlyCollection<ResolveIndexAliasItem> Aliases
 		{
@@ -435,6 +424,17 @@ namespace Nest
 
 		[JsonPropertyName("data_streams")]
 		public IReadOnlyCollection<ResolveIndexDataStreamsItem> DataStreams
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("indices")]
+		public IReadOnlyCollection<ResolveIndexItem> Indices
 		{
 			get;
 #if NET5_0
@@ -555,8 +555,8 @@ namespace Nest
 
 	public partial class IndicesShrinkResponse : AcknowledgedResponseBase
 	{
-		[JsonPropertyName("shards_acknowledged")]
-		public bool ShardsAcknowledged
+		[JsonPropertyName("index")]
+		public IndexName Index
 		{
 			get;
 #if NET5_0
@@ -566,8 +566,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("index")]
-		public IndexName Index
+		[JsonPropertyName("shards_acknowledged")]
+		public bool ShardsAcknowledged
 		{
 			get;
 #if NET5_0
@@ -598,8 +598,8 @@ namespace Nest
 
 	public partial class IndicesSplitResponse : AcknowledgedResponseBase
 	{
-		[JsonPropertyName("shards_acknowledged")]
-		public bool ShardsAcknowledged
+		[JsonPropertyName("index")]
+		public IndexName Index
 		{
 			get;
 #if NET5_0
@@ -609,8 +609,8 @@ namespace Nest
 #endif
 		}
 
-		[JsonPropertyName("index")]
-		public IndexName Index
+		[JsonPropertyName("shards_acknowledged")]
+		public bool ShardsAcknowledged
 		{
 			get;
 #if NET5_0
@@ -623,6 +623,17 @@ namespace Nest
 
 	public partial class IndicesStatsResponse : ResponseBase
 	{
+		[JsonPropertyName("_all")]
+		public IndicesStats All
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("indices")]
 		public Dictionary<string, IndicesStats>? Indices
 		{
@@ -636,17 +647,6 @@ namespace Nest
 
 		[JsonPropertyName("_shards")]
 		public ShardStatistics Shards
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("_all")]
-		public IndicesStats All
 		{
 			get;
 #if NET5_0
