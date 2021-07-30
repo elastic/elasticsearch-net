@@ -388,9 +388,6 @@ namespace Nest
 
 		[JsonPropertyName("sort")]
 		public Sort? Sort { get; set; }
-
-		[JsonPropertyName("_source")]
-		public Fields? Source { get; set; }
 	}
 
 	public partial class PainlessExecutionPosition

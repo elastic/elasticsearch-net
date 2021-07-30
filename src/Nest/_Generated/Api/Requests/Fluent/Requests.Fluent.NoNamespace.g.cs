@@ -191,7 +191,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		///<summary>/{index}/_source/{id}</summary>
-        public GetSourceDescriptor(Index index, Id id) : base(r => r)
+        public GetSourceDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id))
 		{
 		}
 	}
