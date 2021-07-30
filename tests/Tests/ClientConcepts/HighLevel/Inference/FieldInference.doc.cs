@@ -149,7 +149,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var fieldExpression = Field<Project>(p => p.Name);
 
 			/** this can be even shortened even further using a static import.
-			* Now that is much terser then our first example using the constructor!
+			* Now that is much terser than our first example using the constructor!
 			*/
 			fieldExpression = Field<Project>(p => p.Name);
 
