@@ -1007,6 +1007,28 @@ namespace Elasticsearch.Net
 		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
 		Task<TResponse> SearchUsingTypeAsync<TResponse>(string index, string type, PostData body, SearchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/_mvt/{field}/{zoom}/{x}/{y} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html</para></summary>
+		///<param name = "index">Comma-separated list of data streams, indices, or aliases to search</param>
+		///<param name = "field">Field containing geospatial data to return</param>
+		///<param name = "zoom">Zoom level for the vector tile to search</param>
+		///<param name = "X">X coordinate for the vector tile to search</param>
+		///<param name = "Y">Y coordinate for the vector tile to search</param>
+		///<param name = "body">Search request body.</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		TResponse SearchMvt<TResponse>(string index, string field, integer zoom, integer X, integer Y, PostData body, SearchMvtRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/_mvt/{field}/{zoom}/{x}/{y} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html</para></summary>
+		///<param name = "index">Comma-separated list of data streams, indices, or aliases to search</param>
+		///<param name = "field">Field containing geospatial data to return</param>
+		///<param name = "zoom">Zoom level for the vector tile to search</param>
+		///<param name = "X">X coordinate for the vector tile to search</param>
+		///<param name = "Y">Y coordinate for the vector tile to search</param>
+		///<param name = "body">Search request body.</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
+		Task<TResponse> SearchMvtAsync<TResponse>(string index, string field, integer zoom, integer X, integer Y, PostData body, SearchMvtRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_search_shards <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		TResponse SearchShards<TResponse>(SearchShardsRequestParameters requestParameters = null)
