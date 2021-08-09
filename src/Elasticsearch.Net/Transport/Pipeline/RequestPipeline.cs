@@ -272,9 +272,9 @@ namespace Elasticsearch.Net
 			switch (_connectionPool.ProductCheckStatus)
 			{
 				case ProductCheckStatus.InvalidProduct:
-					throw new InvalidProductException(InvalidProductException.InvalidProductError);
+					throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
 				case ProductCheckStatus.UnsupportedBuildFlavor:
-					throw new InvalidProductException(InvalidProductException.InvalidBuildFlavorError);
+					throw new UnsupportedProductException(UnsupportedProductException.InvalidBuildFlavorError);
 			}
 
 			// If sniffing has completed and the product check has run, we are done!
@@ -322,9 +322,9 @@ namespace Elasticsearch.Net
 				switch (_connectionPool.ProductCheckStatus)
 				{
 					case ProductCheckStatus.InvalidProduct:
-						throw new InvalidProductException(InvalidProductException.InvalidProductError);
+						throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
 					case ProductCheckStatus.UnsupportedBuildFlavor:
-						throw new InvalidProductException(InvalidProductException.InvalidBuildFlavorError);
+						throw new UnsupportedProductException(UnsupportedProductException.InvalidBuildFlavorError);
 				}
 
 				if (!FirstPoolUsageNeedsSniffing)
@@ -348,9 +348,9 @@ namespace Elasticsearch.Net
 			switch (_connectionPool.ProductCheckStatus)
 			{
 				case ProductCheckStatus.InvalidProduct:
-					throw new InvalidProductException(InvalidProductException.InvalidProductError);
+					throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
 				case ProductCheckStatus.UnsupportedBuildFlavor:
-					throw new InvalidProductException(InvalidProductException.InvalidBuildFlavorError);
+					throw new UnsupportedProductException(UnsupportedProductException.InvalidBuildFlavorError);
 			}
 
 			// If sniffing has completed and the product check has run, we are done!
@@ -402,9 +402,9 @@ namespace Elasticsearch.Net
 				switch (_connectionPool.ProductCheckStatus)
 				{
 					case ProductCheckStatus.InvalidProduct:
-						throw new InvalidProductException(InvalidProductException.InvalidProductError);
+						throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
 					case ProductCheckStatus.UnsupportedBuildFlavor:
-						throw new InvalidProductException(InvalidProductException.InvalidBuildFlavorError);
+						throw new UnsupportedProductException(UnsupportedProductException.InvalidBuildFlavorError);
 				}
 
 				if (FirstPoolUsageNeedsSniffing)
