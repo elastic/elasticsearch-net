@@ -52,7 +52,7 @@ Here's an example with a single node cluster which fails for some reason during 
 [source,csharp]
 ----
 var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(1, productCheckAlwaysSucceeds: false)
+    .Nodes(1, productCheckSucceeds: false)
     .ProductCheck(r => r.Fails(TimesHelper.Once, 429))
     .ProductCheck(r => r.SucceedAlways())
     .ClientCalls(r => r.SucceedAlways())
@@ -85,7 +85,7 @@ Here's an example with a three node cluster which fails (due to too many request
 [source,csharp]
 ----
 var audit = new Auditor(() => VirtualClusterWith
-    .Nodes(3, productCheckAlwaysSucceeds: false)
+    .Nodes(3, productCheckSucceeds: false)
     .ProductCheck(r => r.FailAlways(429))
     .ProductCheck(r => r.OnPort(9202).SucceedAlways())
     .ClientCalls(r => r.SucceedAlways())
