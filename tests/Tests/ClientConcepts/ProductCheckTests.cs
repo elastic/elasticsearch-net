@@ -25,7 +25,7 @@ namespace Tests.ClientConcepts
 
 			client.Invoking(y => y.Cluster.Health())
 				.Should()
-				.Throw<InvalidProductException>();
+				.Throw<UnsupportedProductException>();
 		}
 
 		[U] public void InvalidProductNameHeaderCausesException()
@@ -40,7 +40,7 @@ namespace Tests.ClientConcepts
 
 			client.Invoking(y => y.Cluster.Health())
 				.Should()
-				.Throw<InvalidProductException>();
+				.Throw<UnsupportedProductException>();
 		}
 
 		[U] public void UnauthorizedStatusCodeFromRootPathDoesNotThrowException_WithExpectedDataOnApiCall()
@@ -87,7 +87,7 @@ namespace Tests.ClientConcepts
 
 			client.Invoking(y => y.Cluster.Health())
 				.Should()
-				.Throw<InvalidProductException>();
+				.Throw<UnsupportedProductException>();
 		}
 
 		[U] public void MissingTaglineOnVersionSixThrowsException()
@@ -102,7 +102,7 @@ namespace Tests.ClientConcepts
 
 			client.Invoking(y => y.Cluster.Health())
 				.Should()
-				.Throw<InvalidProductException>();
+				.Throw<UnsupportedProductException>();
 		}
 
 		[U] public void InvalidTaglineOnVersionSixThrowsException()
@@ -117,7 +117,7 @@ namespace Tests.ClientConcepts
 
 			client.Invoking(y => y.Cluster.Health())
 				.Should()
-				.Throw<InvalidProductException>();
+				.Throw<UnsupportedProductException>();
 		}
 
 		[U] public void ExpectedTaglineOnVersionSixDoesNotThrowException_WithExpectedDataOnApiCall()
@@ -148,7 +148,7 @@ namespace Tests.ClientConcepts
 
 			client.Invoking(y => y.Cluster.Health())
 				.Should()
-				.Throw<InvalidProductException>();
+				.Throw<UnsupportedProductException>();
 		}
 
 		[U] public void InvalidBuildFlavorMissingOnVersionSevenThrowsException()
@@ -163,7 +163,7 @@ namespace Tests.ClientConcepts
 
 			client.Invoking(y => y.Cluster.Health())
 				.Should()
-				.Throw<InvalidProductException>();
+				.Throw<UnsupportedProductException>();
 		}
 
 		[U] public void ExpectedBuildFlavorOnVersionSixDoesNotThrowException_WithExpectedDataOnApiCall()
