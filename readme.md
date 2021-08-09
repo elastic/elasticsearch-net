@@ -27,6 +27,10 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasti
 
 ## Compatibility Matrix
 
+Language clients are forward compatible; meaning that clients support communicating with greater minor versions of Elasticsearch.
+
+Elastic language clients are also backwards compatible with lesser supported minor Elasticsearch versions.
+
 | .NET Clients      | Elasticsearch | Supported          | Windows/Linux CI   | Tests              |
 | ----------------- | ------------- | ------------------ | ------------------ | ------------------ |
 | 0.x               | 0.x           | :x:                | :heavy_minus_sign: | :heavy_minus_sign: |
@@ -61,9 +65,11 @@ When we release a client we will run the unit and integration tests against the 
 
 Any incompatibilities between minor versions are documented against the release.
 
-#### I have a `6.0` server, what client should I use?
+#### I have a `7.0` server, what client should I use?
 
-Always use the latest minor version of the client within that major version, so in this instance, at time of writing, this is version `6.8.x`. The reason being is that `6.8.x` will contain many bug fixes not present in the `6.0.0` version of the client.
+Always use the latest minor version of the client within that major version, so in this instance, at time of writing, this is version `7.14.0`. The reason being is that `7.14.x` will contain many bug fixes not present in the `7.0.0` version of the client.
+
+Client methods which call endpoints added to Elasticsearch since `7.0.0` will fail due to those endpoints not existing on the server.
 
 ### Low Level Client Compatibility
 
@@ -83,8 +89,8 @@ If you use this `experimental` or `beta` functionality, by taking a dependency o
 
 ## Preview builds
 
-All branches push new nuget packages on successful CI builds to https://ci.appveyor.com/nuget/elasticsearch-net
-          
+All branches push new NuGet packages on successful CI builds to https://ci.appveyor.com/nuget/elasticsearch-net
+
 ### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/index.html) 
 
 ## Upgrading
@@ -351,6 +357,6 @@ A small HTTP server will be spun up locally on port 8000 through which you can v
 
 ## Copyright and License
 
-This software is Copyright (c) 2014-2019 by Elasticsearch BV.
+This software is Copyright (c) 2014-2021 by Elasticsearch BV.
 
 This is free software, licensed under: [The Apache License Version 2.0](https://github.com/elastic/elasticsearch-net/blob/master/license.txt).
