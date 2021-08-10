@@ -1896,6 +1896,50 @@ namespace Elasticsearch.Net
 		}
 	}
 
+	///<summary>Request options for SearchMvt <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html</para></summary>
+	public class SearchMvtRequestParameters : RequestParameters<SearchMvtRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+		///<summary>
+		/// If false, the meta layer's feature is the bounding box of the tile. If true, the meta layer's feature is a bounding box resulting from a
+		/// `geo_bounds` aggregation.
+		///</summary>
+		public bool? ExactBounds
+		{
+			get => Q<bool? >("exact_bounds");
+			set => Q("exact_bounds", value);
+		}
+
+		///<summary>Size, in pixels, of a side of the vector tile.</summary>
+		public long? Extent
+		{
+			get => Q<long? >("extent");
+			set => Q("extent", value);
+		}
+
+		///<summary>Additional zoom levels available through the aggs layer. Accepts 0-8.</summary>
+		public long? GridPrecision
+		{
+			get => Q<long? >("grid_precision");
+			set => Q("grid_precision", value);
+		}
+
+		///<summary>Determines the geometry type for features in the aggs layer.</summary>
+		public GridType? GridType
+		{
+			get => Q<GridType? >("grid_type");
+			set => Q("grid_type", value);
+		}
+
+		///<summary>Maximum number of features to return in the hits layer. Accepts 0-10000.</summary>
+		public long? Size
+		{
+			get => Q<long? >("size");
+			set => Q("size", value);
+		}
+	}
+
 	///<summary>Request options for SearchShards <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para></summary>
 	public class SearchShardsRequestParameters : RequestParameters<SearchShardsRequestParameters>
 	{

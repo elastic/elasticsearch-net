@@ -47,12 +47,12 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 		}
 
 		///<summary>POST on /_cluster/allocation/explain <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</para></summary>
-		///<param name = "body">The index, shard, and primary flag to explain. Empty means &#x27;explain the first unassigned shard&#x27;</param>
+		///<param name = "body">The index, shard, and primary flag to explain. Empty means &#x27;explain a randomly-chosen unassigned shard&#x27;</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse AllocationExplain<TResponse>(PostData body, ClusterAllocationExplainRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_cluster/allocation/explain", body, RequestParams(requestParameters));
 		///<summary>POST on /_cluster/allocation/explain <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</para></summary>
-		///<param name = "body">The index, shard, and primary flag to explain. Empty means &#x27;explain the first unassigned shard&#x27;</param>
+		///<param name = "body">The index, shard, and primary flag to explain. Empty means &#x27;explain a randomly-chosen unassigned shard&#x27;</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("cluster.allocation_explain", "body")]
 		public Task<TResponse> AllocationExplainAsync<TResponse>(PostData body, ClusterAllocationExplainRequestParameters requestParameters = null, CancellationToken ctx = default)
