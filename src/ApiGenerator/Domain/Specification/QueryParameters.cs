@@ -17,6 +17,8 @@ namespace ApiGenerator.Domain.Specification
 		{
 			"fields", "_source_includes", "_source_excludes",
 		};
+		
+		private string _obsolete;
 
 		private string _type;
 
