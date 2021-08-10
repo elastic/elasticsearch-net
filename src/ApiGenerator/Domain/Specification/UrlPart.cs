@@ -6,14 +6,13 @@ using System.Collections.Generic;
 
 namespace ApiGenerator.Domain.Specification
 {
-
 	//TODO once https://github.com/elastic/elasticsearch/pull/42346 lands
 	// Rename this type to Deprecation and remove Path duplication
 	public class DeprecatedPath
 	{
-		public string Version { get; set; }
-		public string Path { get; set; }
 		public string Description { get; set; }
+		public string Path { get; set; }
+		public string Version { get; set; }
 	}
 
 
@@ -23,25 +22,13 @@ namespace ApiGenerator.Domain.Specification
 
 		public string Argument => $"{LowLevelTypeName} {NameAsArgument}";
 
-		public string LowLevelTypeName
+		public string ClrTypeNameOverride { get; set; }
+		public bool Deprecated { get; set; }
+
+		public string Description
 		{
-			get
-			{
-				//TODO treat list with fixed options as Flags Enum
-				switch (Type)
-				{
-					case "int": //does not occur on part
-					case "number": //does not occur on part
-					case "string":
-						return Type;
-					case "list":
-						return "string";
-					case "enum":
-						return Name.ToPascalCase();
-					default:
-						return Type;
-				}
-			}
+			get => _description;
+			set => _description = CleanUpDescription(value);
 		}
 
 		public string HighLevelTypeName
@@ -119,14 +106,6 @@ namespace ApiGenerator.Domain.Specification
 			}
 		}
 
-		public string ClrTypeNameOverride { get; set; }
-
-		public string Description
-		{
-			get => _description;
-			set => _description = CleanUpDescription(value);
-		}
-
 		public string InterfaceName
 		{
 			get
@@ -139,15 +118,38 @@ namespace ApiGenerator.Domain.Specification
 			}
 		}
 
+		public string LowLevelTypeName
+		{
+			get
+			{
+				//TODO treat list with fixed options as Flags Enum
+				switch (Type)
+				{
+					case "int": //does not occur on part
+					case "number": //does not occur on part
+					case "string":
+						return Type;
+					case "integer":
+						return "int";
+					case "list":
+						return "string";
+					case "enum":
+						return Name.ToPascalCase();
+					default:
+						return Type;
+				}
+			}
+		}
+
 		public string Name { get; set; }
 		public string NameAsArgument => Name.ToCamelCase().ReservedKeywordReplacer();
 		public IEnumerable<string> Options { get; set; }
 		public bool Required { get; set; }
-		public bool Deprecated { get; set; }
 		public string Type { get; set; }
 
 
-
-		private static string CleanUpDescription(string value) => string.IsNullOrWhiteSpace(value) ? value : value.Replace("use `_all` or empty string", "use the special string `_all` or Indices.All");
+		private static string CleanUpDescription(string value) => string.IsNullOrWhiteSpace(value)
+			? value
+			: value.Replace("use `_all` or empty string", "use the special string `_all` or Indices.All");
 	}
 }
