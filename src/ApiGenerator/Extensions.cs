@@ -14,9 +14,12 @@ namespace ApiGenerator
 	public static class Extensions
 	{
 		/// <summary>
-		/// Removes _ . but not an underscore at the start of the string, unless the string is _all or removeLeadingUnderscore == true.
+		/// Removes _ . but not an underscore at the start of the string, unless the string is _all or removeLeadingUnderscore ==
+		/// true.
 		/// </summary>
 		private static readonly Regex RemovePunctuationExceptFirstUnderScore = new Regex(@"(?!^_(?!All$))[_\.]");
+
+		private static readonly Dictionary<string, string> ReservedNames = new() { { "namespace", "@namespace" } };
 
 		public static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property) =>
 			items.GroupBy(property).Select(x => x.First());
@@ -38,15 +41,17 @@ namespace ApiGenerator
 			if (string.IsNullOrEmpty(s)) return s;
 
 			var pascal = s.ToPascalCase(true);
-			if (pascal.Length <= 1) return pascal;
 
-			return pascal[0].ToLower() + pascal.Substring(1);
+			return pascal.Length switch
+			{
+				< 1 => pascal,
+				1 => new string(new[] { pascal[0].ToLower() }),
+				_ => pascal[0].ToLower() + pascal[1..]
+			};
 		}
 
-		private static readonly Dictionary<string, string> ReservedNames = new() { { "namespace", "@namespace" } };
-
 		public static string ReservedKeywordReplacer(this string name) => ReservedNames.ContainsKey(name) ? ReservedNames[name] : name;
-		
+
 		public static string SplitPascalCase(this string s) => Regex.Replace(s, "([A-Z]+[a-z]*)", " $1").Trim();
 	}
 }
