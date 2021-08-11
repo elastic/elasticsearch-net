@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Linq;
 using Elastic.Transport;
 
-namespace Nest
+namespace Nest.Core
 {
-	[DebuggerDisplay("{DebugDisplay,nq}")]
+	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public class Routing : IEquatable<Routing>, IUrlParameter
 	{
 		private static readonly char[] Separator = {','};
