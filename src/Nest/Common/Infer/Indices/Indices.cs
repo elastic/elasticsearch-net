@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Elastic.Transport;
+using Nest.Core;
 
 namespace Nest
 {
-	[DebuggerDisplay("{DebugDisplay,nq}")]
+	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public partial class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
 	{
 		internal Indices(AllIndicesMarker all) : base(all) { }
@@ -31,10 +32,10 @@ namespace Nest
 			all => "_all",
 			many =>
 			{
-				if (!(settings is IElasticsearchClientSettings nestSettings))
+				if (settings is not IElasticsearchClientSettings nestSettings)
 				{
 					throw new Exception(
-						"Tried to pass index names on querysting but it could not be resolved because no nest settings are available");
+						"Tried to pass index names on query sting but it could not be resolved because no nest settings are available");
 				}
 
 				var infer = nestSettings.Inferrer;

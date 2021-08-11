@@ -1,16 +1,8 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Nest;
-using Tests.Configuration;
 using Tests.Core.Client;
-using Tests.Core.Extensions;
-using Tests.Domain;
 
 namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 {
@@ -76,11 +68,10 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		// If raw_fields exists assume this cluster is already seeded.
 
 		private bool AlreadySeeded() => false; // TODO: Add exists for HEAD responses
-											   //private bool AlreadySeeded() => Client.Indices.IndexTemplateExists(new IndexTemplateExistsRequest(TestsIndexTemplateName)).Exists;
+		//private bool AlreadySeeded() => Client.Indices.IndexTemplateExists(new IndexTemplateExistsRequest(TestsIndexTemplateName)).Exists;
 
 		// Ensure a clean slate by deleting everything regardless of whether they may already exist
 		private async Task SeedNodeAsync(bool alreadySeeded) =>
-			
 			await DeleteIndicesAndTemplatesAsync(alreadySeeded).ConfigureAwait(false);
 		//	await ClusterSettingsAsync().ConfigureAwait(false);
 		//await PutPipeline().ConfigureAwait(false);
@@ -133,20 +124,17 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		//	putProcessors.ShouldBeValid();
 		//}
 
-		public async Task DeleteIndicesAndTemplatesAsync(bool alreadySeeded)
-		{
-			var tasks = new List<Task>
-			{
-				Client.Indices.DeleteAsync(typeof(Project)),
-				//Client.Indices.DeleteAsync(typeof(Developer)),
-				//Client.Indices.DeleteAsync(typeof(ProjectPercolation))
-			};
-
-			//if (alreadySeeded)
-			//	tasks.Add(Client.Indices.DeleteTemplateAsync(TestsIndexTemplateName));
-
-			await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
-		}
+		public Task DeleteIndicesAndTemplatesAsync(bool alreadySeeded) =>
+			//var tasks = new List<Task>
+			//{
+			//	Client.Indices.DeleteAsync(typeof(Project)),
+			//	//Client.Indices.DeleteAsync(typeof(Developer)),
+			//	//Client.Indices.DeleteAsync(typeof(ProjectPercolation))
+			//};
+			////if (alreadySeeded)
+			////	tasks.Add(Client.Indices.DeleteTemplateAsync(TestsIndexTemplateName));
+			//await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
+			Task.CompletedTask;
 
 		//private async Task CreateIndicesAndSeedIndexDataAsync()
 		//{

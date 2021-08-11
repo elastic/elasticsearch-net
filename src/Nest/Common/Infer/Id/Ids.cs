@@ -1,14 +1,10 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Elastic.Transport;
 
-namespace Nest
+namespace Nest.Core
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Ids : IUrlParameter, IEquatable<Ids>
@@ -25,8 +21,6 @@ namespace Nest
 
 		private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
-		public override string ToString() => DebugDisplay;
-
 		public bool Equals(Ids other)
 		{
 			if (other == null)
@@ -37,11 +31,13 @@ namespace Nest
 				return false;
 
 			return _ids.Count == other._ids.Count &&
-				_ids.OrderBy(id => id).SequenceEqual(other._ids.OrderBy(id => id));
+			       _ids.OrderBy(id => id).SequenceEqual(other._ids.OrderBy(id => id));
 		}
 
 		string IUrlParameter.GetString(ITransportConfiguration settings) =>
 			string.Join(",", _ids ?? Enumerable.Empty<string>());
+
+		public override string ToString() => DebugDisplay;
 
 		public static implicit operator Ids(string value) =>
 			value.IsNullOrEmptyCommaSeparatedList(out var arr) ? null : new Ids(arr);

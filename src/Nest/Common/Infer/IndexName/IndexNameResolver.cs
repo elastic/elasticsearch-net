@@ -1,4 +1,5 @@
 using System;
+using Nest.Core;
 
 namespace Nest
 {
@@ -23,11 +24,12 @@ namespace Nest
 			return PrefixClusterName(i, i.Name);
 		}
 
-		public string Resolve(Type type)
+		public string Resolve(Type? type)
 		{
 			var indexName = _elasticsearchClientSettings.DefaultIndex;
 			var defaultIndices = _elasticsearchClientSettings.DefaultIndices;
-			if (defaultIndices != null && type != null)
+
+			if (type != null)
 			{
 				if (defaultIndices.TryGetValue(type, out var value) && !string.IsNullOrEmpty(value))
 					indexName = value;
