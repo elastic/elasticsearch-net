@@ -17,13 +17,16 @@ namespace ApiGenerator.Domain.Specification
 		{
 			"fields", "_source_includes", "_source_excludes",
 		};
+		
+		private string _obsolete;
 
-
-		public bool Skip { get; set; }
+		private string _type;
 
 		public string ClsArgumentName => ClsName.ToCamelCase();
 
 		public string ClsName { get; set; }
+
+		public QueryParameterDeprecation Deprecated { get; set; }
 
 		public string Description { get; set; }
 
@@ -61,8 +64,6 @@ namespace ApiGenerator.Domain.Specification
 			}
 		}
 
-		public bool IsArray => Type == "list" && TypeHighLevel.EndsWith("[]");
-
 		public string DescriptorArgumentType => IsArray ? "params " + TypeHighLevel : TypeHighLevel;
 
 		public string DescriptorEnumerableArgumentType =>
@@ -71,6 +72,8 @@ namespace ApiGenerator.Domain.Specification
 				: throw new InvalidOperationException("Only array arguments have IEnumerable overload");
 
 		public Func<string, string, string, string, string> FluentGenerator { get; set; }
+
+		public bool IsArray => Type == "list" && TypeHighLevel.EndsWith("[]");
 		public bool IsFieldParam => TypeHighLevel == "Field";
 
 		public bool IsFieldsParam => TypeHighLevel == "Fields";
@@ -80,6 +83,7 @@ namespace ApiGenerator.Domain.Specification
 			get
 			{
 				if (!string.IsNullOrEmpty(_obsolete)) return _obsolete;
+
 				if (Deprecated != null)
 				{
 					if (!string.IsNullOrEmpty(Deprecated.Version) && !string.IsNullOrEmpty(Deprecated.Description))
@@ -97,8 +101,6 @@ namespace ApiGenerator.Domain.Specification
 			set => _obsolete = value;
 		}
 
-		public QueryParameterDeprecation Deprecated { get; set; }
-
 		public IEnumerable<string> Options { get; set; }
 		public string QueryStringKey { get; set; }
 
@@ -107,8 +109,7 @@ namespace ApiGenerator.Domain.Specification
 
 		public string SetterLowLevel => "value";
 
-		private string _type;
-		private string _obsolete;
+		public bool Skip { get; set; }
 
 		public string Type
 		{
@@ -152,7 +153,9 @@ namespace ApiGenerator.Domain.Specification
 				{
 					case "boolean": return "bool?";
 					case "list": return "string[]";
-					case "int": return "int?";
+					case "int":
+					case "integer":
+						return "int?";
 					case "date": return "DateTimeOffset?";
 					case "enum": return $"{ClsName}?";
 					case "number":
@@ -178,9 +181,8 @@ namespace ApiGenerator.Domain.Specification
 
 	public class QueryParameterDeprecation
 	{
-		public string Version { get; set; }
-
 		public string Description { get; set; }
+		public string Version { get; set; }
 	}
 
 	internal class QueryParameterDeprecationConverter : JsonConverter

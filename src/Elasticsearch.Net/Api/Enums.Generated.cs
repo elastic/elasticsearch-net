@@ -406,6 +406,15 @@ namespace Elasticsearch.Net
 	}
 
 	[StringEnum]
+	public enum GridType
+	{
+		[EnumMember(Value = "grid")]
+		Grid,
+		[EnumMember(Value = "point")]
+		Point
+	}
+
+	[StringEnum]
 	public enum GroupBy
 	{
 		[EnumMember(Value = "nodes")]
@@ -457,6 +466,7 @@ namespace Elasticsearch.Net
 			EnumStringResolvers.TryAdd(typeof(OpType), (e) => GetStringValue((OpType)e));
 			EnumStringResolvers.TryAdd(typeof(IndicesShardStoresStatus), (e) => GetStringValue((IndicesShardStoresStatus)e));
 			EnumStringResolvers.TryAdd(typeof(ThreadType), (e) => GetStringValue((ThreadType)e));
+			EnumStringResolvers.TryAdd(typeof(GridType), (e) => GetStringValue((GridType)e));
 			EnumStringResolvers.TryAdd(typeof(GroupBy), (e) => GetStringValue((GroupBy)e));
 			EnumStringResolvers.TryAdd(typeof(Format), (e) => GetStringValue((Format)e));
 		}
@@ -904,6 +914,19 @@ namespace Elasticsearch.Net
 			}
 
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'ThreadType'");
+		}
+
+		public static string GetStringValue(this GridType enumValue)
+		{
+			switch (enumValue)
+			{
+				case GridType.Grid:
+					return "grid";
+				case GridType.Point:
+					return "point";
+			}
+
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'GridType'");
 		}
 
 		public static string GetStringValue(this GroupBy enumValue)

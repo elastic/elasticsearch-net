@@ -47,12 +47,12 @@ namespace Elasticsearch.Net.Specification.SqlApi
 		{
 		}
 
-		///<summary>POST on /_sql/close <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html</para></summary>
+		///<summary>POST on /_sql/close <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-sql-cursor-api.html</para></summary>
 		///<param name = "body">Specify the cursor value in the `cursor` element to clean the cursor.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse ClearCursor<TResponse>(PostData body, ClearSqlCursorRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, "_sql/close", body, RequestParams(requestParameters));
-		///<summary>POST on /_sql/close <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html</para></summary>
+		///<summary>POST on /_sql/close <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-sql-cursor-api.html</para></summary>
 		///<param name = "body">Specify the cursor value in the `cursor` element to clean the cursor.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("sql.clear_cursor", "body")]
@@ -91,23 +91,23 @@ namespace Elasticsearch.Net.Specification.SqlApi
 		[MapsApi("sql.get_async_status", "id")]
 		public Task<TResponse> SearchStatusAsync<TResponse>(string id, SqlSearchStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_sql/async/status/{id:id}"), ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /_sql <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</para></summary>
+		///<summary>POST on /_sql <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html</para></summary>
 		///<param name = "body">Use the `query` element to start a query. Use the `cursor` element to continue a query.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Query<TResponse>(PostData body, QuerySqlRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, "_sql", body, RequestParams(requestParameters));
-		///<summary>POST on /_sql <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</para></summary>
+		///<summary>POST on /_sql <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html</para></summary>
 		///<param name = "body">Use the `query` element to start a query. Use the `cursor` element to continue a query.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("sql.query", "body")]
 		public Task<TResponse> QueryAsync<TResponse>(PostData body, QuerySqlRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, "_sql", ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /_sql/translate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html</para></summary>
+		///<summary>POST on /_sql/translate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate-api.html</para></summary>
 		///<param name = "body">Specify the query in the `query` element.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Translate<TResponse>(PostData body, TranslateSqlRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, "_sql/translate", body, RequestParams(requestParameters));
-		///<summary>POST on /_sql/translate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html</para></summary>
+		///<summary>POST on /_sql/translate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate-api.html</para></summary>
 		///<param name = "body">Specify the query in the `query` element.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("sql.translate", "body")]

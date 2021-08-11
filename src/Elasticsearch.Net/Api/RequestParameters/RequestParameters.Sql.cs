@@ -28,7 +28,7 @@ using Elastic.Transport;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.SqlApi
 {
-	///<summary>Request options for ClearCursor <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-pagination.html</para></summary>
+	///<summary>Request options for ClearCursor <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-sql-cursor-api.html</para></summary>
 	public class ClearSqlCursorRequestParameters : RequestParameters<ClearSqlCursorRequestParameters>
 	{
 	}
@@ -75,7 +75,7 @@ namespace Elasticsearch.Net.Specification.SqlApi
 	{
 	}
 
-	///<summary>Request options for Query <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html</para></summary>
+	///<summary>Request options for Query <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html</para></summary>
 	public class QuerySqlRequestParameters : RequestParameters<QuerySqlRequestParameters>
 	{
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -86,7 +86,7 @@ namespace Elasticsearch.Net.Specification.SqlApi
 		}
 	}
 
-	///<summary>Request options for Translate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html</para></summary>
+	///<summary>Request options for Translate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate-api.html</para></summary>
 	public class TranslateSqlRequestParameters : RequestParameters<TranslateSqlRequestParameters>
 	{
 	}
