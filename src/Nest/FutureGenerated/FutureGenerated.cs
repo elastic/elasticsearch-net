@@ -1,110 +1,13 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
+using Nest.Types.Mapping;
+using Nest.Types.Watcher;
 
 namespace Nest
 {
-	// Stubs until we generate these - Allows the code to compile so we can identify real errors.
-
-	// TODO: Implement properly
-	[JsonConverter(typeof(UnionConverter<EpochMillis>))]
-	public partial class EpochMillis
-	{
-		public EpochMillis(string value) { }
-
-		public EpochMillis(int value) { }
-	}
-
-	// TODO: Implement properly
-	[JsonConverter(typeof(PercentageConverter))]
-	public partial class Percentage
-	{
-		public Percentage(string value) { }
-
-		public Percentage(float value) { }
-	}
-
-	/// <summary>
-	///     Block type for an index.
-	/// </summary>
-	public readonly struct IndicesBlockOptions : IUrlParameter
-	{
-		// TODO - This is currently generated as an enum by the code generator
-		// ?? Should all enums be generated this way, or just those used in Url parameters
-
-		private IndicesBlockOptions(string value) => Value = value;
-
-		public string Value { get; }
-
-		public string GetString(ITransportConfiguration settings) => Value;
-
-		/// <summary>
-		///     Disable metadata changes, such as closing the index.
-		/// </summary>
-		public static IndicesBlockOptions Metadata { get; } = new("metadata");
-
-		/// <summary>
-		///     Disable read operations.
-		/// </summary>
-		public static IndicesBlockOptions Read { get; } = new("read");
-
-		/// <summary>
-		///     Disable write operations and metadata changes.
-		/// </summary>
-		public static IndicesBlockOptions ReadOnly { get; } = new("read_only");
-
-		/// <summary>
-		///     Disable write operations. However, metadata changes are still allowed.
-		/// </summary>
-		public static IndicesBlockOptions Write { get; } = new("write");
-	}
-
-	public class NodeRoles
-	{
-	}
-
-	// TODO - Implement array type aliases
-	// TODO - Consider OneOrMany implementation to only allocate a list when more than one item
-	public class StopWords
-	{
-	}
-
-
-	public class Aggregate
-	{
-	}
-
-
-	public class Property
-	{
-	}
-
-	public class SortResults
-	{
-	}
-
-
-	public class SuggestOption<TDocument>
-	{
-	}
-
-	[JsonConverter(typeof(NumericAliasConverter<SequenceNumber>))]
-	public class SequenceNumber
-	{
-		public SequenceNumber(long value) => Value = value;
-
-		internal long Value { get; }
-	}
-
-
-	[JsonConverter(typeof(NumericAliasConverter<VersionNumber>))]
-	public class VersionNumber
-	{
-		public VersionNumber(long value) => Value = value;
-
-		internal long Value { get; }
-	}
-
 	public abstract partial class PlainRequestBase<TParameters>
 	{
 		///<summary>Include the stack trace of returned errors.</summary>
@@ -157,6 +60,150 @@ namespace Nest
 			set => Q("source", value);
 		}
 	}
+}
+
+namespace Nest.Types.Analysis
+{
+	// TODO - Implement array type aliases
+	// TODO - Consider OneOrMany implementation to only allocate a list when more than one item
+	public class StopWords
+	{
+	}
+}
+
+namespace Nest.Types.Core
+{
+	// Stubs until we generate these - Allows the code to compile so we can identify real errors.
+
+	public partial class HttpHeaders : Dictionary<string, Union<string, IReadOnlyCollection<string>>>
+	{
+	}
+
+	public partial class Metadata : Dictionary<string, object>
+	{
+	}
+
+	public partial class RuntimeFields : Dictionary<Field, RuntimeField>
+	{
+	}
+
+	public partial class ApplicationsPrivileges : Dictionary<Name, ResourcePrivileges>
+	{
+	}
+
+	public partial class Privileges : Dictionary<string, bool>
+	{
+	}
+
+	public partial class ResourcePrivileges : Dictionary<Name, Privileges>
+	{
+	}
+
+	public partial class Actions : Dictionary<IndexName, ActionStatus>
+	{
+	}
+
+	// TODO: Implement properly
+	[JsonConverter(typeof(UnionConverter<EpochMillis>))]
+	public partial class EpochMillis
+	{
+		public EpochMillis(string value) { }
+
+		public EpochMillis(int value) { }
+	}
+
+	// TODO: Implement properly
+	[JsonConverter(typeof(PercentageConverter))]
+	public partial class Percentage
+	{
+		public Percentage(string value) { }
+
+		public Percentage(float value) { }
+	}
+
+	// TODO - Handle array alias types
+	// TODO - Consider a OneOrMany type to optimise
+	public partial class IndexPatterns : ReadOnlyCollection<IndexPattern>
+	{
+		public IndexPatterns(IList<IndexPattern> list) : base(list)
+		{
+		}
+	}
+
+	/// <summary>
+	///     Block type for an index.
+	/// </summary>
+	public readonly struct IndicesBlockOptions : IUrlParameter
+	{
+		// TODO - This is currently generated as an enum by the code generator
+		// ?? Should all enums be generated this way, or just those used in Url parameters
+
+		private IndicesBlockOptions(string value) => Value = value;
+
+		public string Value { get; }
+
+		public string GetString(ITransportConfiguration settings) => Value;
+
+		/// <summary>
+		///     Disable metadata changes, such as closing the index.
+		/// </summary>
+		public static IndicesBlockOptions Metadata { get; } = new("metadata");
+
+		/// <summary>
+		///     Disable read operations.
+		/// </summary>
+		public static IndicesBlockOptions Read { get; } = new("read");
+
+		/// <summary>
+		///     Disable write operations and metadata changes.
+		/// </summary>
+		public static IndicesBlockOptions ReadOnly { get; } = new("read_only");
+
+		/// <summary>
+		///     Disable write operations. However, metadata changes are still allowed.
+		/// </summary>
+		public static IndicesBlockOptions Write { get; } = new("write");
+	}
+
+	public class NodeRoles
+	{
+	}
+
+
+	public class Aggregate
+	{
+	}
+
+
+	public class Property
+	{
+	}
+
+	public class SortResults
+	{
+	}
+
+
+	public class SuggestOption<TDocument>
+	{
+	}
+
+	[JsonConverter(typeof(NumericAliasConverter<SequenceNumber>))]
+	public class SequenceNumber
+	{
+		public SequenceNumber(long value) => Value = value;
+
+		internal long Value { get; }
+	}
+
+
+	[JsonConverter(typeof(NumericAliasConverter<VersionNumber>))]
+	public class VersionNumber
+	{
+		public VersionNumber(long value) => Value = value;
+
+		internal long Value { get; }
+	}
 
 	public class Metrics : IUrlParameter
 	{
@@ -167,8 +214,8 @@ namespace Nest
 	{
 	}
 
-	public class Types : IUrlParameter
-	{
-		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	}
+	//public class Types : IUrlParameter
+	//{
+	//	public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	//}
 }

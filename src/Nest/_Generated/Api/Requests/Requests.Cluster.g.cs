@@ -16,10 +16,13 @@
 //
 // ------------------------------------------------
 
-using System;
-using System.Text.Json.Serialization;
 using Elastic.Transport;
+using Nest.Types.Cluster;
+using Nest.Types.Core;
+using Nest.Types.Indices;
+using Nest.Types.Mapping;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Nest
@@ -61,7 +64,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("index")]
-		public IndexName? Index
+		public Types.Core.IndexName? Index
 		{
 			get;
 #if NET5_0
@@ -109,7 +112,7 @@ namespace Nest
 		protected override bool IsEmpty => false;
 
 		///<summary>/_component_template/{name}</summary>
-        public ClusterDeleteComponentTemplateRequest(Name name) : base(r => r.Required("name", name))
+        public ClusterDeleteComponentTemplateRequest(Types.Core.Name name) : base(r => r.Required("name", name))
 		{
 		}
 
@@ -171,7 +174,7 @@ namespace Nest
 		}
 
 		///<summary>/_component_template/{name}</summary>
-        public ClusterGetComponentTemplateRequest(Name name) : base(r => r.Optional("name", name))
+        public ClusterGetComponentTemplateRequest(Types.Core.Name name) : base(r => r.Optional("name", name))
 		{
 		}
 
@@ -237,7 +240,7 @@ namespace Nest
 		}
 
 		///<summary>/_cluster/health/{index}</summary>
-        public ClusterHealthRequest(Indices index) : base(r => r.Optional("index", index))
+        public ClusterHealthRequest(Types.Core.Indices index) : base(r => r.Optional("index", index))
 		{
 		}
 
@@ -348,7 +351,7 @@ namespace Nest
 		protected override bool IsEmpty => false;
 
 		///<summary>/_component_template/{name}</summary>
-        public ClusterPutComponentTemplateRequest(Name name) : base(r => r.Required("name", name))
+        public ClusterPutComponentTemplateRequest(Types.Core.Name name) : base(r => r.Required("name", name))
 		{
 		}
 
@@ -359,7 +362,7 @@ namespace Nest
 		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonPropertyName("template")]
-		public IndexState Template
+		public Types.Indices.IndexState Template
 		{
 			get;
 #if NET5_0
@@ -381,7 +384,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("mappings")]
-		public TypeMapping? Mappings
+		public Types.Mapping.TypeMapping? Mappings
 		{
 			get;
 #if NET5_0
@@ -392,7 +395,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("settings")]
-		public IndexSettings? Settings
+		public Types.Indices.IndexSettings? Settings
 		{
 			get;
 #if NET5_0
@@ -403,7 +406,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("version")]
-		public VersionNumber? Version
+		public Types.Core.VersionNumber? Version
 		{
 			get;
 #if NET5_0
@@ -414,7 +417,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("_meta")]
-		public Metadata? Meta
+		public Types.Core.Metadata? Meta
 		{
 			get;
 #if NET5_0
@@ -576,12 +579,12 @@ namespace Nest
 		}
 
 		///<summary>/_cluster/state/{metric}</summary>
-        public ClusterStateRequest(Metrics metric) : base(r => r.Optional("metric", metric))
+        public ClusterStateRequest(Types.Core.Metrics metric) : base(r => r.Optional("metric", metric))
 		{
 		}
 
 		///<summary>/_cluster/state/{metric}/{index}</summary>
-        public ClusterStateRequest(Metrics metric, Indices index) : base(r => r.Optional("metric", metric).Optional("index", index))
+        public ClusterStateRequest(Types.Core.Metrics metric, Types.Core.Indices index) : base(r => r.Optional("metric", metric).Optional("index", index))
 		{
 		}
 
@@ -630,7 +633,7 @@ namespace Nest
 		}
 
 		///<summary>/_cluster/stats/nodes/{node_id}</summary>
-        public ClusterStatsRequest(NodeIds node_id) : base(r => r.Optional("node_id", node_id))
+        public ClusterStatsRequest(Types.Core.NodeIds node_id) : base(r => r.Optional("node_id", node_id))
 		{
 		}
 

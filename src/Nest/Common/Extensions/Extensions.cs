@@ -6,6 +6,7 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Nest.Types.Core;
 
 namespace Nest
 {
@@ -43,8 +44,10 @@ namespace Nest
 		{
 			@object.ThrowIfNull(parameterName, when);
 			if (string.IsNullOrWhiteSpace(@object))
+			{
 				throw new ArgumentException(
 					"Argument can't be null or empty" + (when.IsNullOrEmpty() ? "" : " when " + when), parameterName);
+			}
 		}
 
 		// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Global

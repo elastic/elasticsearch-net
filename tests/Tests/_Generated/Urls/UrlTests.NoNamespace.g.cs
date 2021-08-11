@@ -25,102 +25,12 @@ using Tests.Framework.EndpointTests;
 
 namespace Tests.Urls.NoNamespace
 {
-    public class ClearScrollUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.DELETE("/_search/scroll").Request(c => c.ClearScroll(new ClearScrollRequest())).RequestAsync(c => c.ClearScrollAsync(new ClearScrollRequest()));
-        }
-    }
-
-    public class ClosePointInTimeUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.DELETE("/_pit").Request(c => c.ClosePointInTime(new ClosePointInTimeRequest())).RequestAsync(c => c.ClosePointInTimeAsync(new ClosePointInTimeRequest()));
-        }
-    }
-
-    public class CountUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_count").Request(c => c.Count(new CountRequest())).RequestAsync(c => c.CountAsync(new CountRequest()));
-        }
-    }
-
-    public class FieldCapsUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_field_caps").Request(c => c.FieldCaps(new FieldCapsRequest())).RequestAsync(c => c.FieldCapsAsync(new FieldCapsRequest()));
-        }
-    }
-
-    public class GetScriptContextUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.GET("/_script_context").Request(c => c.GetScriptContext(new GetScriptContextRequest())).RequestAsync(c => c.GetScriptContextAsync(new GetScriptContextRequest()));
-        }
-    }
-
-    public class GetScriptLanguagesUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.GET("/_script_language").Request(c => c.GetScriptLanguages(new GetScriptLanguagesRequest())).RequestAsync(c => c.GetScriptLanguagesAsync(new GetScriptLanguagesRequest()));
-        }
-    }
-
-    public class InfoUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.GET("/").Request(c => c.Info(new InfoRequest())).RequestAsync(c => c.InfoAsync(new InfoRequest()));
-        }
-    }
-
-    public class OpenPointInTimeUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_pit").Request(c => c.OpenPointInTime(new OpenPointInTimeRequest())).RequestAsync(c => c.OpenPointInTimeAsync(new OpenPointInTimeRequest()));
-        }
-    }
-
     public class PingUrlTests : UrlTestsBase
     {
         [U]
         public override async Task Urls()
         {
             await UrlTester.HEAD("/").Request(c => c.Ping(new PingRequest())).RequestAsync(c => c.PingAsync(new PingRequest()));
-        }
-    }
-
-    public class ReindexUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_reindex").Request(c => c.Reindex(new ReindexRequest())).RequestAsync(c => c.ReindexAsync(new ReindexRequest()));
-        }
-    }
-
-    public class SearchShardsUrlTests : UrlTestsBase
-    {
-        [U]
-        public override async Task Urls()
-        {
-            await UrlTester.POST("/_search_shards").Request(c => c.SearchShards(new SearchShardsRequest())).RequestAsync(c => c.SearchShardsAsync(new SearchShardsRequest()));
         }
     }
 }

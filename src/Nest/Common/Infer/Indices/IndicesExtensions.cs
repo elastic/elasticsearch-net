@@ -1,3 +1,5 @@
+using Nest.Types.Core;
+
 namespace Nest
 {
 	public static class IndicesExtensions

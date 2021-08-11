@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using Elastic.Transport;
 
-namespace Nest
+namespace Nest.Types.Core
 {
-	[DebuggerDisplay("{DebugDisplay,nq}")]
+	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public class Names : IEquatable<Names>, IUrlParameter
 	{
 		public Names(IEnumerable<string> names) : this(names?.Select(n => new Name(n)).ToList()) { }

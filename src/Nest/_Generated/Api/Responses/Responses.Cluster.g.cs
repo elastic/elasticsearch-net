@@ -16,6 +16,8 @@
 //
 // ------------------------------------------------
 
+using Nest.Types.Cluster;
+using Nest.Types.Core;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -58,7 +60,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("can_allocate")]
-		public Decision? CanAllocate
+		public Types.Cluster.Decision? CanAllocate
 		{
 			get;
 #if NET5_0
@@ -69,7 +71,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("can_move_to_other_node")]
-		public Decision? CanMoveToOtherNode
+		public Types.Cluster.Decision? CanMoveToOtherNode
 		{
 			get;
 #if NET5_0
@@ -80,7 +82,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("can_rebalance_cluster")]
-		public Decision? CanRebalanceCluster
+		public Types.Cluster.Decision? CanRebalanceCluster
 		{
 			get;
 #if NET5_0
@@ -102,7 +104,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("can_rebalance_to_other_node")]
-		public Decision? CanRebalanceToOtherNode
+		public Types.Cluster.Decision? CanRebalanceToOtherNode
 		{
 			get;
 #if NET5_0
@@ -124,7 +126,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("can_remain_on_current_node")]
-		public Decision? CanRemainOnCurrentNode
+		public Types.Cluster.Decision? CanRemainOnCurrentNode
 		{
 			get;
 #if NET5_0
@@ -135,7 +137,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("cluster_info")]
-		public ClusterInfo? ClusterInfo
+		public Types.Cluster.ClusterInfo? ClusterInfo
 		{
 			get;
 #if NET5_0
@@ -168,7 +170,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("current_node")]
-		public CurrentNode? CurrentNode
+		public Types.Cluster.CurrentNode? CurrentNode
 		{
 			get;
 #if NET5_0
@@ -190,7 +192,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("index")]
-		public IndexName Index
+		public Types.Core.IndexName Index
 		{
 			get;
 #if NET5_0
@@ -278,7 +280,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("unassigned_info")]
-		public UnassignedInformation? UnassignedInfo
+		public Types.Cluster.UnassignedInformation? UnassignedInfo
 		{
 			get;
 #if NET5_0
@@ -382,7 +384,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("active_shards_percent_as_number")]
-		public Percentage ActiveShardsPercentAsNumber
+		public Types.Core.Percentage ActiveShardsPercentAsNumber
 		{
 			get;
 #if NET5_0
@@ -492,7 +494,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("status")]
-		public Health Status
+		public Types.Core.Health Status
 		{
 			get;
 #if NET5_0
@@ -503,7 +505,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("task_max_waiting_in_queue_millis")]
-		public EpochMillis TaskMaxWaitingInQueueMillis
+		public Types.Core.EpochMillis TaskMaxWaitingInQueueMillis
 		{
 			get;
 #if NET5_0
@@ -604,7 +606,7 @@ namespace Nest
 		}
 	}
 
-	public partial class ClusterRemoteInfoResponse : DictionaryResponseBase
+	public partial class ClusterRemoteInfoResponse : DictionaryResponseBase<string, ClusterRemoteInfo>
 	{
 	}
 
@@ -622,7 +624,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("state")]
-		public RerouteState State
+		public Types.Cluster.RerouteState State
 		{
 			get;
 #if NET5_0
@@ -636,7 +638,7 @@ namespace Nest
 	public partial class ClusterStateResponse : ResponseBase
 	{
 		[JsonPropertyName("blocks")]
-		public ClusterStateBlocks? Blocks
+		public Types.Cluster.ClusterStateBlocks? Blocks
 		{
 			get;
 #if NET5_0
@@ -647,7 +649,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("cluster_name")]
-		public Name ClusterName
+		public Types.Core.Name ClusterName
 		{
 			get;
 #if NET5_0
@@ -658,7 +660,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("cluster_uuid")]
-		public Uuid ClusterUuid
+		public Types.Core.Uuid ClusterUuid
 		{
 			get;
 #if NET5_0
@@ -680,7 +682,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("metadata")]
-		public ClusterStateMetadata? Metadata
+		public Types.Cluster.ClusterStateMetadata? Metadata
 		{
 			get;
 #if NET5_0
@@ -702,7 +704,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("routing_nodes")]
-		public ClusterStateRoutingNodes? RoutingNodes
+		public Types.Cluster.ClusterStateRoutingNodes? RoutingNodes
 		{
 			get;
 #if NET5_0
@@ -724,7 +726,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("snapshot_deletions")]
-		public ClusterStateDeletedSnapshots? SnapshotDeletions
+		public Types.Cluster.ClusterStateDeletedSnapshots? SnapshotDeletions
 		{
 			get;
 #if NET5_0
@@ -735,7 +737,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("snapshots")]
-		public ClusterStateSnapshots? Snapshots
+		public Types.Cluster.ClusterStateSnapshots? Snapshots
 		{
 			get;
 #if NET5_0
@@ -757,7 +759,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("state_uuid")]
-		public Uuid? StateUuid
+		public Types.Core.Uuid? StateUuid
 		{
 			get;
 #if NET5_0
@@ -768,7 +770,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("version")]
-		public VersionNumber? Version
+		public Types.Core.VersionNumber? Version
 		{
 			get;
 #if NET5_0
@@ -782,7 +784,7 @@ namespace Nest
 	public partial class ClusterStatsResponse : NodesResponseBase
 	{
 		[JsonPropertyName("cluster_name")]
-		public Name ClusterName
+		public Types.Core.Name ClusterName
 		{
 			get;
 #if NET5_0
@@ -793,7 +795,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("cluster_uuid")]
-		public Uuid ClusterUuid
+		public Types.Core.Uuid ClusterUuid
 		{
 			get;
 #if NET5_0
@@ -804,7 +806,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("indices")]
-		public ClusterIndices Indices
+		public Types.Cluster.ClusterIndices Indices
 		{
 			get;
 #if NET5_0
@@ -815,7 +817,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("nodes")]
-		public ClusterNodes Nodes
+		public Types.Cluster.ClusterNodes Nodes
 		{
 			get;
 #if NET5_0
@@ -826,7 +828,7 @@ namespace Nest
 		}
 
 		[JsonPropertyName("status")]
-		public ClusterStatus Status
+		public Types.Cluster.ClusterStatus Status
 		{
 			get;
 #if NET5_0

@@ -17,6 +17,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using Nest.Types.Core;
 
 #nullable restore
 namespace Nest
@@ -38,7 +39,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		///<summary>/_component_template/{name}</summary>
-        public ClusterDeleteComponentTemplateDescriptor(Name name) : base(r => r.Required("name", name))
+        public ClusterDeleteComponentTemplateDescriptor(Types.Core.Name name) : base(r => r.Required("name", name))
 		{
 		}
 	}
@@ -65,7 +66,7 @@ namespace Nest
 		}
 
 		///<summary>/_component_template/{name}</summary>
-        public ClusterGetComponentTemplateDescriptor(Name name) : base(r => r.Optional("name", name))
+        public ClusterGetComponentTemplateDescriptor(Types.Core.Name name) : base(r => r.Optional("name", name))
 		{
 		}
 	}
@@ -92,7 +93,7 @@ namespace Nest
 		}
 
 		///<summary>/_cluster/health/{index}</summary>
-        public ClusterHealthDescriptor(Indices index) : base(r => r.Optional("index", index))
+        public ClusterHealthDescriptor(Types.Core.Indices index) : base(r => r.Optional("index", index))
 		{
 		}
 	}
@@ -125,7 +126,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
 		///<summary>/_component_template/{name}</summary>
-        public ClusterPutComponentTemplateDescriptor(Name name) : base(r => r.Required("name", name))
+        public ClusterPutComponentTemplateDescriptor(Types.Core.Name name) : base(r => r.Required("name", name))
 		{
 		}
 	}
@@ -174,12 +175,12 @@ namespace Nest
 		}
 
 		///<summary>/_cluster/state/{metric}</summary>
-        public ClusterStateDescriptor(Metrics metric) : base(r => r.Optional("metric", metric))
+        public ClusterStateDescriptor(Types.Core.Metrics metric) : base(r => r.Optional("metric", metric))
 		{
 		}
 
 		///<summary>/_cluster/state/{metric}/{index}</summary>
-        public ClusterStateDescriptor(Metrics metric, Indices index) : base(r => r.Optional("metric", metric).Optional("index", index))
+        public ClusterStateDescriptor(Types.Core.Metrics metric, Types.Core.Indices index) : base(r => r.Optional("metric", metric).Optional("index", index))
 		{
 		}
 	}
@@ -195,7 +196,7 @@ namespace Nest
 		}
 
 		///<summary>/_cluster/stats/nodes/{node_id}</summary>
-        public ClusterStatsDescriptor(NodeIds node_id) : base(r => r.Optional("node_id", node_id))
+        public ClusterStatsDescriptor(Types.Core.NodeIds node_id) : base(r => r.Optional("node_id", node_id))
 		{
 		}
 	}

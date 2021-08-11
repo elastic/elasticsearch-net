@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
-namespace Nest
+namespace Nest.Types.Core
 {
 	public class IndexNameConverter : JsonConverter<IndexName>
 	{

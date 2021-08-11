@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------
 
+using Nest.Types.Core;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -59,12 +60,12 @@ namespace Nest
 			return DoRequestAsync<IClusterDeleteComponentTemplateRequest, ClusterDeleteComponentTemplateResponse>(request, request.RequestParameters, cancellationToken);
 		}
 
-		public ClusterDeleteComponentTemplateResponse DeleteComponentTemplate(Name name, Func<ClusterDeleteComponentTemplateDescriptor, IClusterDeleteComponentTemplateRequest> selector = null)
+		public ClusterDeleteComponentTemplateResponse DeleteComponentTemplate(Types.Core.Name name, Func<ClusterDeleteComponentTemplateDescriptor, IClusterDeleteComponentTemplateRequest> selector = null)
 		{
 			return DeleteComponentTemplate(selector.InvokeOrDefault(new ClusterDeleteComponentTemplateDescriptor(name)));
 		}
 
-		public Task<ClusterDeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Name name, Func<ClusterDeleteComponentTemplateDescriptor, IClusterDeleteComponentTemplateRequest> selector = null, CancellationToken cancellationToken = default)
+		public Task<ClusterDeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Types.Core.Name name, Func<ClusterDeleteComponentTemplateDescriptor, IClusterDeleteComponentTemplateRequest> selector = null, CancellationToken cancellationToken = default)
 		{
 			return DeleteComponentTemplateAsync(selector.InvokeOrDefault(new ClusterDeleteComponentTemplateDescriptor(name)), cancellationToken);
 		}
@@ -199,12 +200,12 @@ namespace Nest
 			return DoRequestAsync<IClusterPutComponentTemplateRequest, ClusterPutComponentTemplateResponse>(request, request.RequestParameters, cancellationToken);
 		}
 
-		public ClusterPutComponentTemplateResponse PutComponentTemplate(Name name, Func<ClusterPutComponentTemplateDescriptor, IClusterPutComponentTemplateRequest> selector = null)
+		public ClusterPutComponentTemplateResponse PutComponentTemplate(Types.Core.Name name, Func<ClusterPutComponentTemplateDescriptor, IClusterPutComponentTemplateRequest> selector = null)
 		{
 			return PutComponentTemplate(selector.InvokeOrDefault(new ClusterPutComponentTemplateDescriptor(name)));
 		}
 
-		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync(Name name, Func<ClusterPutComponentTemplateDescriptor, IClusterPutComponentTemplateRequest> selector = null, CancellationToken cancellationToken = default)
+		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync(Types.Core.Name name, Func<ClusterPutComponentTemplateDescriptor, IClusterPutComponentTemplateRequest> selector = null, CancellationToken cancellationToken = default)
 		{
 			return PutComponentTemplateAsync(selector.InvokeOrDefault(new ClusterPutComponentTemplateDescriptor(name)), cancellationToken);
 		}

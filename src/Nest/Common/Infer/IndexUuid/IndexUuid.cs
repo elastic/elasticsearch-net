@@ -1,19 +1,12 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using Elastic.Transport;
 
-namespace Nest
+namespace Nest.Types.Core
 {
 	public class IndexUuid : IUrlParameter, IEquatable<IndexUuid>
 	{
-		public string Value { get; }
-
 		public IndexUuid(string value) => Value = value ?? throw new ArgumentNullException(nameof(value));
-
-		public string GetString(ITransportConfiguration settings) => Value;
+		public string Value { get; }
 
 		public bool Equals(IndexUuid other)
 		{
@@ -24,6 +17,8 @@ namespace Nest
 
 			return Value == other.Value;
 		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 
 		public override bool Equals(object obj)
 		{
@@ -37,12 +32,13 @@ namespace Nest
 			return Equals((IndexUuid)obj);
 		}
 
-		public override int GetHashCode() => (Value != null ? Value.GetHashCode() : 0);
+		public override int GetHashCode() => Value != null ? Value.GetHashCode() : 0;
 
 		public static bool operator ==(IndexUuid left, IndexUuid right) => Equals(left, right);
 
 		public static bool operator !=(IndexUuid left, IndexUuid right) => !Equals(left, right);
 
-		public static implicit operator IndexUuid(string value) => string.IsNullOrEmpty(value) ? null : new IndexUuid(value);
+		public static implicit operator IndexUuid(string value) =>
+			string.IsNullOrEmpty(value) ? null : new IndexUuid(value);
 	}
 }

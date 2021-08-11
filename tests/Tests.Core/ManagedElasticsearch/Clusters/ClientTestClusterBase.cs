@@ -4,6 +4,7 @@ using Elastic.Elasticsearch.Ephemeral.Plugins;
 using Elastic.Elasticsearch.Xunit;
 using Elastic.Stack.ArtifactsApi.Products;
 using Nest;
+using Nest.Types.Core;
 using Tests.Configuration;
 using Tests.Core.Client;
 using Tests.Core.Extensions;

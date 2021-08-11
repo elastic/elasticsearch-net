@@ -5,14 +5,14 @@ using System.Reflection;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
-namespace Nest
+namespace Nest.Types.Core
 {
 	public interface IDictionaryKey
 	{
 		string Key { get; }
 	}
 
-	[DebuggerDisplay("{DebugDisplay,nq}")]
+	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	[JsonConverter(typeof(PropertyNameConverter))]
 	public class PropertyName : IEquatable<PropertyName>, IUrlParameter, IDictionaryKey
 	{
@@ -43,7 +43,7 @@ namespace Nest
 		public bool CacheableExpression { get; }
 		public Expression Expression { get; }
 
-		public string Name { get; }
+		public string? Name { get; }
 		public PropertyInfo Property { get; }
 
 		internal string DebugDisplay =>

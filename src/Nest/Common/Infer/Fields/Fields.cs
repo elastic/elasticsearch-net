@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Elastic.Transport;
 
-namespace Nest
+namespace Nest.Types.Core
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Fields>

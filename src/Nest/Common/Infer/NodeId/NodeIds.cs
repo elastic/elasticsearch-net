@@ -1,36 +1,34 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Elastic.Transport;
 
-namespace Nest
+namespace Nest.Types.Core
 {
-	[DebuggerDisplay("{DebugDisplay,nq}")]
+	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public class NodeIds : IEquatable<NodeIds>, IUrlParameter
 	{
 		public NodeIds(IEnumerable<string> nodeIds)
 		{
 			Value = nodeIds?.ToList();
 			if (!Value.HasAny())
-				throw new ArgumentException($"can not create {nameof(NodeIds)} on an empty enumerable of ", nameof(nodeIds));
+				throw new ArgumentException($"can not create {nameof(NodeIds)} on an empty enumerable of ",
+					nameof(nodeIds));
 		}
 
 		internal IList<string> Value { get; }
 
 		private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
-		public override string ToString() => DebugDisplay;
-
 		public bool Equals(NodeIds other) => EqualsAllIds(Value, other.Value);
 
 		string IUrlParameter.GetString(ITransportConfiguration settings) => string.Join(",", Value);
 
-		public static NodeIds Parse(string nodeIds) => nodeIds.IsNullOrEmptyCommaSeparatedList(out var nodes) ? null : new NodeIds(nodes);
+		public override string ToString() => DebugDisplay;
+
+		public static NodeIds Parse(string nodeIds) =>
+			nodeIds.IsNullOrEmptyCommaSeparatedList(out var nodes) ? null : new NodeIds(nodes);
 
 		public static implicit operator NodeIds(string nodes) => Parse(nodes);
 

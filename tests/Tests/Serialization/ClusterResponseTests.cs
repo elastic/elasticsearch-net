@@ -1,43 +1,40 @@
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 
 namespace Tests.Serialization
 {
-	public class CreateIndexRequestTests
-	{
-		[U]
-		public async Task Serialize()
-		{
-			var request = new IndicesCreateRequest("index-name")
-			{
-				Mappings = new TypeMapping
-				{
-					DateDetection = false,
-					Meta = new Metadata {{"foo", "bar"}},
-					Properties = new Dictionary<PropertyName, PropertyBase>
-					{
-						{"age", new NumberProperty {Type = NumberType.Integer}},
-						{"name", new TextProperty {IgnoreAbove = 10}},
-						{"email", new KeywordProperty()}
-					}
-				}
-			};
+	//public class CreateIndexRequestTests
+	//{
+	//	[U]
+	//	public async Task Serialize()
+	//	{
+	//		var request = new IndicesCreateRequest("index-name")
+	//		{
+	//			Mappings = new TypeMapping
+	//			{
+	//				DateDetection = false,
+	//				Meta = new Metadata {{"foo", "bar"}},
+	//				Properties = new Dictionary<PropertyName, PropertyBase>
+	//				{
+	//					{"age", new NumberProperty {Type = NumberType.Integer}},
+	//					{"name", new TextProperty {IgnoreAbove = 10}},
+	//					{"email", new KeywordProperty()}
+	//				}
+	//			}
+	//		};
 
-			var serializer = new DefaultHighLevelSerializer(new ElasticsearchClientSettings());
+	//		var serializer = new DefaultHighLevelSerializer(new ElasticsearchClientSettings());
 
-			var ms = new MemoryStream();
+	//		var ms = new MemoryStream();
 
-			await serializer.SerializeAsync(request, ms);
+	//		await serializer.SerializeAsync(request, ms);
 
-			// Only serialising the base type! Support polymorphic
-			var jsonString = Encoding.Default.GetString(ms.ToArray());
-		}
-	}
+	//		// Only serialising the base type! Support polymorphic
+	//		var jsonString = Encoding.Default.GetString(ms.ToArray());
+	//	}
+	//}
 
 	public class ClusterResponseTests
 	{

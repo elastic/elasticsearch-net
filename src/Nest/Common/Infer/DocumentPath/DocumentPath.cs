@@ -1,8 +1,5 @@
-// Licensed to Elasticsearch B.V under one or more agreements.
-// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
-
 using System;
+using Nest.Types.Core;
 
 namespace Nest
 {
@@ -14,7 +11,7 @@ namespace Nest
 
 	public class DocumentPath<T> : IEquatable<DocumentPath<T>>, IDocumentPath where T : class
 	{
-		public DocumentPath(T document) : this(Nest.Id.From(document)) => Document = document;
+		public DocumentPath(T document) : this(Types.Core.Id.From(document)) => Document = document;
 
 		public DocumentPath(Id id)
 		{
@@ -30,20 +27,23 @@ namespace Nest
 		public bool Equals(DocumentPath<T> other)
 		{
 			IDocumentPath o = other, s = Self;
-			return s.Index.NullOrEquals(o.Index) && s.Id.NullOrEquals(o.Id) && (Document?.Equals(other.Document) ?? true);
+			return s.Index.NullOrEquals(o.Index) && s.Id.NullOrEquals(o.Id) &&
+			       (Document?.Equals(other.Document) ?? true);
 		}
 
 		public static DocumentPath<T> Id(Id id) => new(id);
 
 		public static DocumentPath<T> Id(T @object) => new(@object);
 
-		public static implicit operator DocumentPath<T>(T @object) => @object == null ? null : new DocumentPath<T>(@object);
+		public static implicit operator DocumentPath<T>(T @object) =>
+			@object == null ? null : new DocumentPath<T>(@object);
 
 		public static implicit operator DocumentPath<T>(Id id) => id == null ? null : new DocumentPath<T>(id);
 
 		public static implicit operator DocumentPath<T>(long id) => new(id);
 
-		public static implicit operator DocumentPath<T>(string id) => id.IsNullOrEmpty() ? null : new DocumentPath<T>(id);
+		public static implicit operator DocumentPath<T>(string id) =>
+			id.IsNullOrEmpty() ? null : new DocumentPath<T>(id);
 
 		public static implicit operator DocumentPath<T>(Guid id) => new(id);
 
