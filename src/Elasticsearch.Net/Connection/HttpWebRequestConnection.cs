@@ -73,12 +73,12 @@ namespace Elasticsearch.Net
 
 				//response.Headers.HasKeys() can return false even if response.Headers.AllKeys has values.
 				if (httpWebResponse.SupportsHeaders && httpWebResponse.Headers.Count > 0 
-					&& httpWebResponse.Headers.AllKeys.Contains("Warning", StringComparer.InvariantCultureIgnoreCase))
+					&& httpWebResponse.Headers.AllKeys.Contains("Warning", StringComparer.OrdinalIgnoreCase))
 					warnings = httpWebResponse.Headers.GetValues("Warning");
 
 				//response.Headers.HasKeys() can return false even if response.Headers.AllKeys has values.
 				if (httpWebResponse.SupportsHeaders && httpWebResponse.Headers.Count > 0
-					&& httpWebResponse.Headers.AllKeys.Contains("X-elastic-product", StringComparer.InvariantCultureIgnoreCase))
+					&& httpWebResponse.Headers.AllKeys.Contains("X-elastic-product", StringComparer.OrdinalIgnoreCase))
 					productNames = httpWebResponse.Headers.GetValues("X-elastic-product");
 			}
 			catch (WebException e)
@@ -154,12 +154,12 @@ namespace Elasticsearch.Net
 					var httpWebResponse = (HttpWebResponse)await apmGetResponseTask.ConfigureAwait(false);
 					HandleResponse(httpWebResponse, out statusCode, out responseStream, out mimeType);
 					if (httpWebResponse.SupportsHeaders && httpWebResponse.Headers.HasKeys() 
-						&& httpWebResponse.Headers.AllKeys.Contains("Warning", StringComparer.InvariantCultureIgnoreCase))
+						&& httpWebResponse.Headers.AllKeys.Contains("Warning", StringComparer.OrdinalIgnoreCase))
 						warnings = httpWebResponse.Headers.GetValues("Warning");
 
 					//response.Headers.HasKeys() can return false even if response.Headers.AllKeys has values.
 					if (httpWebResponse.SupportsHeaders && httpWebResponse.Headers.Count > 0
-						&& httpWebResponse.Headers.AllKeys.Contains("X-elastic-product", StringComparer.InvariantCultureIgnoreCase))
+						&& httpWebResponse.Headers.AllKeys.Contains("X-elastic-product", StringComparer.OrdinalIgnoreCase))
 						productNames = httpWebResponse.Headers.GetValues("X-elastic-product");
 				}
 			}
