@@ -1,6 +1,6 @@
 using System;
 using Elastic.Transport;
-using Nest.Types.Core;
+using Nest.Core;
 
 namespace Nest
 {

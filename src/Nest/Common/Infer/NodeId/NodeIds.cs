@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Elastic.Transport;
 
-namespace Nest.Types.Core
+namespace Nest.Core
 {
 	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public class NodeIds : IEquatable<NodeIds>, IUrlParameter

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Elastic.Transport;
+using Nest.Core;
 
-namespace Nest.Types.Core
+namespace Nest
 {
 	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public partial class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
@@ -34,7 +35,7 @@ namespace Nest.Types.Core
 				if (settings is not IElasticsearchClientSettings nestSettings)
 				{
 					throw new Exception(
-						"Tried to pass index names on querysting but it could not be resolved because no nest settings are available");
+						"Tried to pass index names on query sting but it could not be resolved because no nest settings are available");
 				}
 
 				var infer = nestSettings.Inferrer;

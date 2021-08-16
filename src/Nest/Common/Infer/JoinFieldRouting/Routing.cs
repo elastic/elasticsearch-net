@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Elastic.Transport;
 
-namespace Nest.Types.Core
+namespace Nest.Core
 {
 	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public class Routing : IEquatable<Routing>, IUrlParameter

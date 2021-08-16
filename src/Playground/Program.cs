@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Nest;
-using Nest.Types.Core;
+using Nest.Core;
 
 namespace Playground
 {

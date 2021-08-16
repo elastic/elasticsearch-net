@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
-using Nest.Types.Mapping;
-using Nest.Types.Watcher;
 
 namespace Nest
 {
@@ -62,7 +60,7 @@ namespace Nest
 	}
 }
 
-namespace Nest.Types.Analysis
+namespace Nest.Analysis
 {
 	// TODO - Implement array type aliases
 	// TODO - Consider OneOrMany implementation to only allocate a list when more than one item
@@ -71,7 +69,7 @@ namespace Nest.Types.Analysis
 	}
 }
 
-namespace Nest.Types.Core
+namespace Nest.Core
 {
 	// Stubs until we generate these - Allows the code to compile so we can identify real errors.
 
@@ -83,9 +81,9 @@ namespace Nest.Types.Core
 	{
 	}
 
-	public partial class RuntimeFields : Dictionary<Field, RuntimeField>
-	{
-	}
+	//public partial class RuntimeFields : Dictionary<Field, RuntimeField>
+	//{
+	//}
 
 	public partial class ApplicationsPrivileges : Dictionary<Name, ResourcePrivileges>
 	{
@@ -99,9 +97,9 @@ namespace Nest.Types.Core
 	{
 	}
 
-	public partial class Actions : Dictionary<IndexName, ActionStatus>
-	{
-	}
+	//public partial class Actions : Dictionary<IndexName, ActionStatus>
+	//{
+	//}
 
 	// TODO: Implement properly
 	[JsonConverter(typeof(UnionConverter<EpochMillis>))]

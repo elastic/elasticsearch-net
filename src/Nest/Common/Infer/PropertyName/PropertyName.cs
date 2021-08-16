@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
-namespace Nest.Types.Core
+namespace Nest.Core
 {
 	public interface IDictionaryKey
 	{

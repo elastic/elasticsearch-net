@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Nest.Types.Core;
+using Nest.Core;
 
 namespace Nest
 {

@@ -1,7 +1,7 @@
 using System;
 using Elastic.Transport;
 
-namespace Nest.Types.Core
+namespace Nest.Core
 {
 	public class IndexUuid : IUrlParameter, IEquatable<IndexUuid>
 	{

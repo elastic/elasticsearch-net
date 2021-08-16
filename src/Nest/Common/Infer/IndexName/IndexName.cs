@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
-namespace Nest.Types.Core
+namespace Nest.Core
 {
 	public class IndexNameConverter : JsonConverter<IndexName>
 	{
@@ -34,7 +34,7 @@ namespace Nest.Types.Core
 	}
 
 	[JsonConverter(typeof(IndexNameConverter))]
-	[DebuggerDisplay("{DebugDisplay,nq}")]
+	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{
 		private const char ClusterSeparator = ':';
@@ -88,11 +88,11 @@ namespace Nest.Types.Core
 		internal static IndexName Rebuild(string index, Type type, string? clusterName = null) =>
 			new(index, type, clusterName);
 
-		public Indices And<T>() => new(new[] {this, typeof(T)});
+		public Nest.Indices And<T>() => new(new[] {this, typeof(T)});
 
-		public Indices And<T>(string clusterName) => new(new[] {this, From(typeof(T), clusterName)});
+		public Nest.Indices And<T>(string clusterName) => new(new[] {this, From(typeof(T), clusterName)});
 
-		public Indices And(IndexName index) => new(new[] {this, index});
+		public Nest.Indices And(IndexName index) => new(new[] {this, index});
 
 		private static IndexName Parse(string indexName)
 		{

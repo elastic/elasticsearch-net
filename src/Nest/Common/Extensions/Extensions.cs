@@ -6,7 +6,7 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Nest.Types.Core;
+using Nest.Core;
 
 namespace Nest
 {

@@ -1,5 +1,5 @@
 using System;
-using Nest.Types.Core;
+using Nest.Core;
 
 namespace Nest
 {
