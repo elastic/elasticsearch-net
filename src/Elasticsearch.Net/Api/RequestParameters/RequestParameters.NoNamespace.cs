@@ -1912,16 +1912,16 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>Size, in pixels, of a side of the vector tile.</summary>
-		public long? Extent
+		public int? Extent
 		{
-			get => Q<long? >("extent");
+			get => Q<int? >("extent");
 			set => Q("extent", value);
 		}
 
 		///<summary>Additional zoom levels available through the aggs layer. Accepts 0-8.</summary>
-		public long? GridPrecision
+		public int? GridPrecision
 		{
-			get => Q<long? >("grid_precision");
+			get => Q<int? >("grid_precision");
 			set => Q("grid_precision", value);
 		}
 
@@ -1933,9 +1933,9 @@ namespace Elasticsearch.Net
 		}
 
 		///<summary>Maximum number of features to return in the hits layer. Accepts 0-10000.</summary>
-		public long? Size
+		public int? Size
 		{
-			get => Q<long? >("size");
+			get => Q<int? >("size");
 			set => Q("size", value);
 		}
 	}
