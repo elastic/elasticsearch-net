@@ -7,10 +7,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Elastic.Transport;
 
-namespace Nest.Core
+namespace Nest
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
-	public class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Fields>
+	public partial class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Fields>
 	{
 		internal readonly List<Field> ListOfFields;
 

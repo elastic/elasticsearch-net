@@ -69,7 +69,7 @@ namespace Nest.Analysis
 	}
 }
 
-namespace Nest.Core
+namespace Nest
 {
 	// Stubs until we generate these - Allows the code to compile so we can identify real errors.
 
@@ -177,10 +177,12 @@ namespace Nest.Core
 	{
 	}
 
-	public class SortResults
+	namespace Global.Search
 	{
+		public class SortResults
+		{
+		}
 	}
-
 
 	public class SuggestOption<TDocument>
 	{
@@ -203,13 +205,9 @@ namespace Nest.Core
 		internal long Value { get; }
 	}
 
-	public class Metrics : IUrlParameter
+	public partial class Metrics : IUrlParameter
 	{
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	}
-
-	public class ExpandWildcards
-	{
 	}
 
 	//public class Types : IUrlParameter

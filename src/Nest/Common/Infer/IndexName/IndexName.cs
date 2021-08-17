@@ -4,9 +4,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
-namespace Nest.Core
+namespace Nest
 {
-	public class IndexNameConverter : JsonConverter<IndexName>
+	public class IndexNameConverter : JsonConverter<IndexName?>
 	{
 		public override IndexName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
