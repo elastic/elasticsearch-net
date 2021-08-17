@@ -1,0 +1,8 @@
+[float]
+[[release-notes-7.14.2]]
+== Release-Notes 7.14.2
+
+include::release-notes-7.14.2-human.asciidoc[]
+include::release-notes-7.14.2-generated.asciidoc[]
+
+
