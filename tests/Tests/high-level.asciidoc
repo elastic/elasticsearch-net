@@ -44,11 +44,13 @@ configuration options and components to change this behaviour
 - <<connection-pooling, Connection pools>>
 - <<modifying-default-connection, Modifying the default connection>>
 - <<working-with-certificates, Working with certificates>>
+- <<function-as-a-service-environments, Using the Client in a Function-as-a-Service Environment>>
 
 include::client-concepts/connection/configuration-options.asciidoc[]
 include::client-concepts/connection-pooling/building-blocks/connection-pooling.asciidoc[]
 include::client-concepts/connection/modifying-default-connection.asciidoc[]
 include::client-concepts/certificates/working-with-certificates.asciidoc[]
+include::client-concepts/connection/function-as-a-service-environments.asciidoc[]
 
 [[serialization]]
 == Serialization
