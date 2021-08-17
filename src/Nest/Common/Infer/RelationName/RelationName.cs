@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using Elastic.Transport;
 
-namespace Nest.Core
+namespace Nest
 {
 	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public class RelationName : IEquatable<RelationName>, IUrlParameter

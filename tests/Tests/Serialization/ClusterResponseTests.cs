@@ -2,6 +2,7 @@ using System.IO;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Nest.Cluster.Health;
 
 namespace Tests.Serialization
 {

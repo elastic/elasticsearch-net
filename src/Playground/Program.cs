@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Nest;
+using Nest.Cluster.Health;
 using Nest.Core;
 
 namespace Playground
@@ -15,7 +16,7 @@ namespace Playground
 
 			// Get cluster health
 			var clusterHealthRequest = new ClusterHealthRequest {Level = Level.Cluster};
-			var clusterHealthResponse = await client.Cluster.HealthAsync(clusterHealthRequest);
+			var clusterHealthResponse = await client.Cluster.ClusterHealthAsync(clusterHealthRequest);
 
 			if (!clusterHealthResponse.IsValid)
 				throw new Exception("Failed to get cluster health");

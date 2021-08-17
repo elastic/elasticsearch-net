@@ -9,7 +9,7 @@ namespace Nest
 {
 	public static class Infer
 	{
-		public static readonly Indices AllIndices = Types.Core.Indices.All;
+		public static readonly Indices AllIndices = Nest.Indices.All;
 
 		public static IndexName Index(IndexName index) => index;
 
@@ -29,13 +29,13 @@ namespace Nest
 
 		public static RelationName Relation<T>() => typeof(T);
 
-		public static Routing Route<T>(T instance) where T : class => Routing.From(instance);
+		//public static Routing Route<T>(T instance) where T : class => Routing.From(instance);
 
-		public static Names Names(params string[] names) => string.Join(",", names);
+		//public static Names Names(params string[] names) => string.Join(",", names);
 
-		public static Names Names(IEnumerable<string> names) => string.Join(",", names);
+		//public static Names Names(IEnumerable<string> names) => string.Join(",", names);
 
-		public static Id Id<T>(T document) where T : class => Types.Core.Id.From(document);
+		public static Id Id<T>(T document) where T : class => Nest.Id.From(document);
 
 		public static Fields Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			new(fields.Select(f => new Field(f)));

@@ -10,7 +10,7 @@ using Elastic.Transport;
 namespace Nest
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
-	public class TaskId : IUrlParameter, IEquatable<TaskId>
+	public partial class TaskId : IUrlParameter, IEquatable<TaskId>
 	{
 		/// <summary>
 		/// A task id exists in the form [node_id]:[task_id]
