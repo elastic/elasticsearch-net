@@ -1,0 +1,172 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
+namespace Tests.ClientConcepts.Connection
+{
+	public class FunctionAsAServiceEnvironments
+	{
+		/**[[function-as-a-service-environments]]
+		 * === Using the Client in a Function-as-a-Service Environment
+		 *
+		 * This section illustrates the best practices for leveraging the {es} client in a Function-as-a-Service (FaaS) environment.
+		 * The most influential optimization is to initialize the client outside of the function, the global scope.
+		 * This practice does not only improve performance but also enables background functionality as – for example –
+		 * https://www.elastic.co/blog/elasticsearch-sniffing-best-practices-what-when-why-how[sniffing].
+		 * The following examples provide a skeleton for the best practices.
+		 *
+		 * ==== Azure Functions
+		 * Dependency injection in Azure Functions is built on the .NET Core Dependency Injection features. Azure recommends the 
+		 * use of the singleton lifetime for connections and clients (such as the ElasticsearchClient). The singleton service lifetime 
+		 * matches the host lifetime and is reused across function executions on that instance.
+		 *
+		 * Your project will require the latest applicable version of the following packages:
+		 * * Microsoft.NET.Sdk.Functions
+		 * * Microsoft.Azure.Functions.Extensions
+		 * * Microsoft.Extensions.DependencyInjection
+		 * * NEST
+		 *
+		 * [source,csharp]
+		 * ----
+		 * using System;
+		 * using System.Threading.Tasks;
+		 * using Elasticsearch.Net;
+		 * using ElasticsearchExampleAzure;
+		 * using Microsoft.AspNetCore.Http;
+		 * using Microsoft.AspNetCore.Mvc;
+		 * using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+		 * using Microsoft.Azure.WebJobs;
+		 * using Microsoft.Azure.WebJobs.Extensions.Http;
+		 * using Microsoft.Extensions.DependencyInjection;
+		 * using Microsoft.Extensions.Logging;
+		 * using Nest;
+
+		 * [assembly: FunctionsStartup(typeof(Startup))]
+
+		 * namespace ElasticsearchExampleAzure
+		 * {
+		 *     // Use the startup method to configure services into the DI container.
+		 *     public class Startup : FunctionsStartup
+		 *     {
+		 *         public override void Configure(IFunctionsHostBuilder builder)
+		 *         {
+		 *             // Registering the ElasticClient as a singleton instance ensures we use the same underlying node pool for requests and
+		 *             // avoid first call overhead per invocation.
+		 *             builder.Services.AddSingleton(s => new ElasticClient(Environment.GetEnvironmentVariable("ELASTIC_CLOUD_ID"),
+		 *                 new ApiKeyAuthenticationCredentials(Environment.GetEnvironmentVariable("ELASTIC_API_KEY"))));
+		 *         }
+		 *     }
+		 * 
+		 *     public class MyHttpTrigger
+		 *     {
+		 *         // Store the client in a private field for use from the function
+		 *         private readonly ElasticClient _client;
+		 * 
+		 *         // Add a constructor accepting the client which is provided by the DI container.
+		 *         public MyHttpTrigger(ElasticClient client)
+		 *         {
+		 *             _client = client;
+		 *         }
+		 * 
+		 *         [FunctionName("Function1")]
+		 *         public async Task<IActionResult> Run(
+		 *             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]
+		 *             HttpRequest req, ILogger log)
+		 *         {
+		 *             var response = await _client.PingAsync();
+		 *             return new OkObjectResult(response.DebugInformation);
+		 *         }
+		 *     }
+		 * }
+		 * ----
+		 * 
+		 * ==== GCP Cloud Functions
+		 * To ensure reuse of the client and avoid a first request penalty per invocation, define it as a static field in the Function class. Once 
+		 * instantiated, it retains its value between invocations in the same execution environment. There is no guarantee that the state of a Cloud Function 
+		 * will be preserved for future invocations. However, Cloud Functions often recycles the execution environment of a previous invocation. If you 
+		 * declare a variable in global scope, its value can be reused in subsequent invocations without having to be recomputed.
+		 *
+		 * Your project will require the latest applicable version of the following packages:
+		 * * Google.Cloud.Functions.Hosting
+		 * * NEST
+		 *
+		 * [source,csharp]
+		 * ----
+		 * using Elasticsearch.Net;
+		 * using Google.Cloud.Functions.Framework;
+		 * using Microsoft.AspNetCore.Http;
+		 * using Nest;
+		 * using System;
+		 * using System.Threading.Tasks;
+		 * 
+		 * namespace ElasticsearchExampleGCP
+		 * {
+		 *     public class Function : IHttpFunction
+		 *     {
+		 *         // Define a static client instance which is reused within the execution environment
+		 *         // Environment variables need to be configured to provide the cloud ID and API key we're going to use
+		 *         public static ElasticClient Client = new ElasticClient(Environment.GetEnvironmentVariable("ELASTIC_CLOUD_ID"),
+		 *             new ApiKeyAuthenticationCredentials(Environment.GetEnvironmentVariable("ELASTIC_API_KEY")));
+		 * 
+		 *         /// <summary>
+		 *         /// Logic for your function goes here.
+		 *         /// </summary>
+		 *         /// <param name="context">The HTTP context, containing the request and the response.</param>
+		 *         /// <returns>A task representing the asynchronous operation.</returns>
+		 *         public async Task HandleAsync(HttpContext context)
+		 *         {
+		 *             var response = await Client.PingAsync();
+		 *             await context.Response.WriteAsync(response.DebugInformation);
+		 *         }
+		 *     }
+		 * }
+		 * ----
+		 * 
+		 * ==== AWS Lambda
+		 * To ensure reuse of the client and avoid a first request penalty per invocation, define it as a static field in the Function class. Once 
+		 * instantiated, it retains its value between invocations in the same execution environment.
+		 *
+		 * Your project will require the latest applicable version of the following packages:
+		 * * Amazon.Lambda.Core
+		 * * Amazon.Lambda.Serialization.SystemTextJson
+		 * * NEST
+		 *
+		 * [source,csharp]
+		 * ----
+		 * using System;
+		 * using Amazon.Lambda.Core;
+		 * using Amazon.Lambda.Serialization.SystemTextJson;
+		 * using Elasticsearch.Net;
+		 * using Nest;
+		 * 
+		 * // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
+		 * [assembly: LambdaSerializer(typeof(DefaultLambdaJsonSerializer))]
+		 * 
+		 * namespace ElasticsearchExampleLambda
+		 * {
+		 *     public class Function
+		 *     {
+		 *         // Define a static client instance which is reused within the execution environment
+		 *         // Environment variables need to be configured to provide the cloud ID and API key we're going to use
+		 *         public static ElasticClient Client = new ElasticClient(Environment.GetEnvironmentVariable("ELASTIC_CLOUD_ID"),
+		 *             new ApiKeyAuthenticationCredentials(Environment.GetEnvironmentVariable("ELASTIC_API_KEY")));
+		 * 
+		 *         public void FunctionHandler(ILambdaContext context)
+		 *         {
+		 *             var response = Client.Ping();
+		 *             context.Logger.LogLine(response.DebugInformation);
+		 *         }
+		 *     }
+		 * }
+		 * ----
+		 * 
+		 * Resources used to assess these recommendations:
+		 * 
+		 * * https://cloud.google.com/functions/docs/bestpractices/tips#use_global_variables_to_reuse_objects_in_future_invocations[GCP Cloud Functions: Tips & Tricks]
+		 * * https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html[Best practices for working with AWS Lambda functions]
+		 * * https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-python?tabs=azurecli-linux%2Capplication-level#global-variables[Azure Functions Python developer guide]
+		 * * https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection[Use dependency injection in .NET Azure Functions]
+		 * * https://docs.aws.amazon.com/lambda/latest/operatorguide/global-scope.html[AWS Lambda: Comparing the effect of global scope]
+		 */
+	}
+}
