@@ -83,6 +83,15 @@ namespace Tests.ClientConcepts.HighLevel
 		}
 
 		/**[float]
+		 * === Using the Client in a Function-as-a-Service Environment
+		 *
+		 * When using the client in FaaS environments, we recommend you follow the platform recommended approach to store the client
+		 * in a global variable such that it is reused for requests where possible. See <<function-as-a-service-environments, using the Client in a Function-as-a-Service Environment>>
+		 * for more information.
+		 * 
+		 */
+
+		/**[float]
 		 * === Indexing
 		 *
 		 * Once a client had been configured to connect to Elasticsearch, we need to get some data into the cluster
