@@ -440,6 +440,13 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		}
 	}
 
+	///<summary>Request options for QueryApiKeys <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html</para></summary>
+	public class QueryApiKeysRequestParameters : RequestParameters<QueryApiKeysRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+	}
+
 	///<summary>Request options for SamlAuthenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html</para></summary>
 	public class SamlAuthenticateRequestParameters : RequestParameters<SamlAuthenticateRequestParameters>
 	{
