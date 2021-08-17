@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Elastic.Transport;
 
-namespace Nest.Core
+namespace Nest
 {
 	// TODO - This is a prototype
 	public struct FieldSettings

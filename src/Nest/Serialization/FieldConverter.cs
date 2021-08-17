@@ -17,13 +17,13 @@ namespace Nest
 			new FieldConverter(_settings);
 	}
 
-	public class FieldConverter : JsonConverter<Field>
+	public class FieldConverter : JsonConverter<Field?>
 	{
 		private readonly IElasticsearchClientSettings _settings;
 
 		public FieldConverter(IElasticsearchClientSettings settings) => _settings = settings;
 
-		public override Field Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+		public override Field? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
 			throw new NotImplementedException();
 
 		public override void Write(Utf8JsonWriter writer, Field? value, JsonSerializerOptions options)

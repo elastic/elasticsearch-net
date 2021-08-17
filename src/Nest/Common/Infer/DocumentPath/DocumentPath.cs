@@ -11,7 +11,7 @@ namespace Nest
 
 	public class DocumentPath<T> : IEquatable<DocumentPath<T>>, IDocumentPath where T : class
 	{
-		public DocumentPath(T document) : this(Types.Core.Id.From(document)) => Document = document;
+		public DocumentPath(T document) : this(Nest.Id.From(document)) => Document = document;
 
 		public DocumentPath(Id id)
 		{

@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
-namespace Nest.Core
+namespace Nest
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	[JsonConverter(typeof(StringAliasConverter<Id>))]

@@ -5,7 +5,7 @@ using Nest.Core;
 
 namespace Nest
 {
-	public class PropertyNameConverter : JsonConverter<PropertyName>
+	public class PropertyNameConverter : JsonConverter<PropertyName?>
 	{
 		public override PropertyName?
 			Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
@@ -19,7 +19,7 @@ namespace Nest
 				return;
 			}
 
-			writer.WriteStringValue(value.Name);
+			writer.WriteStringValue(value.ToString());
 		}
 	}
 }
