@@ -17,18 +17,19 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Nest.Global.Ping
+namespace Nest
 {
-	public partial class PingDescriptor : RequestDescriptorBase<PingDescriptor, PingRequestParameters, IPingRequest>, IPingRequest
+	public partial class HttpHeaders : Dictionary<string, Union<string, IReadOnlyCollection<string>>>
 	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-		///<summary>/</summary>
-        public PingDescriptor() : base()
-		{
-		}
+	}
+
+	public partial class Metadata : Dictionary<string, object>
+	{
 	}
 }

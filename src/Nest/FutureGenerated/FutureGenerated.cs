@@ -6,6 +6,34 @@ using Elastic.Transport;
 
 namespace Nest
 {
+	public partial class Names : IUrlParameter
+	{
+		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	}
+
+	public partial class Types : IUrlParameter
+	{
+		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	}
+
+	public readonly partial struct DataStreamName : IUrlParameter
+	{
+		public string GetString(ITransportConfiguration settings) => Value;
+	}
+
+	namespace IndexManagement.AddBlock
+	{
+		public partial struct IndicesBlockOptions : IUrlParameter
+		{
+			public string GetString(ITransportConfiguration settings) => Value;
+		}
+	}	
+
+	public readonly partial struct IndexAlias : IUrlParameter
+	{
+		public string GetString(ITransportConfiguration settings) => Value;
+	}
+
 	public abstract partial class PlainRequestBase<TParameters>
 	{
 		///<summary>Include the stack trace of returned errors.</summary>
@@ -131,37 +159,37 @@ namespace Nest
 	/// <summary>
 	///     Block type for an index.
 	/// </summary>
-	public readonly struct IndicesBlockOptions : IUrlParameter
-	{
-		// TODO - This is currently generated as an enum by the code generator
-		// ?? Should all enums be generated this way, or just those used in Url parameters
+	//public readonly struct IndicesBlockOptions : IUrlParameter
+	//{
+	//	 TODO - This is currently generated as an enum by the code generator
+	//	 ?? Should all enums be generated this way, or just those used in Url parameters
 
-		private IndicesBlockOptions(string value) => Value = value;
+	//	private IndicesBlockOptions(string value) => Value = value;
 
-		public string Value { get; }
+	//	public string Value { get; }
 
-		public string GetString(ITransportConfiguration settings) => Value;
+	//	public string GetString(ITransportConfiguration settings) => Value;
 
-		/// <summary>
-		///     Disable metadata changes, such as closing the index.
-		/// </summary>
-		public static IndicesBlockOptions Metadata { get; } = new("metadata");
+	//	/ <summary>
+	//	/     Disable metadata changes, such as closing the index.
+	//	/ </summary>
+	//	public static IndicesBlockOptions Metadata { get; } = new("metadata");
 
-		/// <summary>
-		///     Disable read operations.
-		/// </summary>
-		public static IndicesBlockOptions Read { get; } = new("read");
+	//	/ <summary>
+	//	/     Disable read operations.
+	//	/ </summary>
+	//	public static IndicesBlockOptions Read { get; } = new("read");
 
-		/// <summary>
-		///     Disable write operations and metadata changes.
-		/// </summary>
-		public static IndicesBlockOptions ReadOnly { get; } = new("read_only");
+	//	/ <summary>
+	//	/     Disable write operations and metadata changes.
+	//	/ </summary>
+	//	public static IndicesBlockOptions ReadOnly { get; } = new("read_only");
 
-		/// <summary>
-		///     Disable write operations. However, metadata changes are still allowed.
-		/// </summary>
-		public static IndicesBlockOptions Write { get; } = new("write");
-	}
+	//	/ <summary>
+	//	/     Disable write operations. However, metadata changes are still allowed.
+	//	/ </summary>
+	//	public static IndicesBlockOptions Write { get; } = new("write");
+	//}
 
 	public class NodeRoles
 	{
@@ -173,6 +201,11 @@ namespace Nest
 	}
 
 
+	public readonly partial struct Name : IUrlParameter
+	{
+		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	}
+
 	public class Property
 	{
 	}
@@ -182,10 +215,6 @@ namespace Nest
 		public class SortResults
 		{
 		}
-	}
-
-	public class SuggestOption<TDocument>
-	{
 	}
 
 	[JsonConverter(typeof(NumericAliasConverter<SequenceNumber>))]

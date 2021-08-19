@@ -1,8 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Nest;
-using Nest.Cluster.Health;
-using Nest.Core;
+using Nest.Cluster;
 
 namespace Playground
 {
@@ -15,13 +14,13 @@ namespace Playground
 			var indexName = Guid.NewGuid().ToString();
 
 			// Get cluster health
-			var clusterHealthRequest = new ClusterHealthRequest {Level = Level.Cluster};
-			var clusterHealthResponse = await client.Cluster.ClusterHealthAsync(clusterHealthRequest);
+			var clusterHealthRequest = new HealthRequest {Level = Level.Cluster};
+			var clusterHealthResponse = await client.Cluster.HealthAsync(clusterHealthRequest);
 
 			if (!clusterHealthResponse.IsValid)
 				throw new Exception("Failed to get cluster health");
-			if (clusterHealthResponse.Status == Health.Red)
-				throw new Exception("Cluster is unhealthy");
+			//if (clusterHealthResponse.Status == Health.Red)
+			//	throw new Exception("Cluster is unhealthy");
 
 			//// Create an index
 			//var createResponse = await client.Indices.CreateAsync(new IndicesCreateRequest(indexName)

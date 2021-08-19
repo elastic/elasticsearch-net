@@ -21,15 +21,14 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.IndexManagement.Stats
 {
-	public enum ShardRoutingState
+	public readonly partial struct ShardRoutingState
 	{
-		[EnumMember(Value = "UNASSIGNED")]
-		Unassigned,
-		[EnumMember(Value = "STARTED")]
-		Started,
-		[EnumMember(Value = "RELOCATING")]
-		Relocating,
-		[EnumMember(Value = "INITIALIZING")]
-		Initializing
+		public ShardRoutingState(string value) => Value = value;
+		public string Value { get; }
+
+		public static ShardRoutingState Unassigned { get; } = new ShardRoutingState("UNASSIGNED");
+		public static ShardRoutingState Started { get; } = new ShardRoutingState("STARTED");
+		public static ShardRoutingState Relocating { get; } = new ShardRoutingState("RELOCATING");
+		public static ShardRoutingState Initializing { get; } = new ShardRoutingState("INITIALIZING");
 	}
 }

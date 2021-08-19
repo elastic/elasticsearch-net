@@ -21,11 +21,12 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Eql.Search
 {
-	public enum ResultPosition
+	public readonly partial struct ResultPosition
 	{
-		[EnumMember(Value = "tail")]
-		Tail,
-		[EnumMember(Value = "head")]
-		Head
+		public ResultPosition(string value) => Value = value;
+		public string Value { get; }
+
+		public static ResultPosition Tail { get; } = new ResultPosition("tail");
+		public static ResultPosition Head { get; } = new ResultPosition("head");
 	}
 }

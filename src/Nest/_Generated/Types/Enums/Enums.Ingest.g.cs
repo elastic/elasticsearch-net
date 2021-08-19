@@ -21,69 +21,56 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Ingest
 {
-	public enum ConvertType
+	public readonly partial struct ConvertType
 	{
-		[EnumMember(Value = "string")]
-		String,
-		[EnumMember(Value = "long")]
-		Long,
-		[EnumMember(Value = "integer")]
-		Integer,
-		[EnumMember(Value = "float")]
-		Float,
-		[EnumMember(Value = "double")]
-		Double,
-		[EnumMember(Value = "boolean")]
-		Boolean,
-		[EnumMember(Value = "auto")]
-		Auto
+		public ConvertType(string value) => Value = value;
+		public string Value { get; }
+
+		public static ConvertType String { get; } = new ConvertType("string");
+		public static ConvertType Long { get; } = new ConvertType("long");
+		public static ConvertType Integer { get; } = new ConvertType("integer");
+		public static ConvertType Float { get; } = new ConvertType("float");
+		public static ConvertType Double { get; } = new ConvertType("double");
+		public static ConvertType Boolean { get; } = new ConvertType("boolean");
+		public static ConvertType Auto { get; } = new ConvertType("auto");
 	}
 
-	public enum DateRounding
+	public readonly partial struct DateRounding
 	{
-		[EnumMember(Value = "y")]
-		Year,
-		[EnumMember(Value = "w")]
-		Week,
-		[EnumMember(Value = "s")]
-		Second,
-		[EnumMember(Value = "m")]
-		Minute,
-		[EnumMember(Value = "h")]
-		Hour,
-		[EnumMember(Value = "d")]
-		Day
+		public DateRounding(string value) => Value = value;
+		public string Value { get; }
+
+		public static DateRounding Year { get; } = new DateRounding("y");
+		public static DateRounding Week { get; } = new DateRounding("w");
+		public static DateRounding Second { get; } = new DateRounding("s");
+		public static DateRounding Minute { get; } = new DateRounding("m");
+		public static DateRounding Hour { get; } = new DateRounding("h");
+		public static DateRounding Day { get; } = new DateRounding("d");
 	}
 
-	public enum ShapeType
+	public readonly partial struct ShapeType
 	{
-		[EnumMember(Value = "shape")]
-		Shape,
-		[EnumMember(Value = "geo_shape")]
-		GeoShape
+		public ShapeType(string value) => Value = value;
+		public string Value { get; }
+
+		public static ShapeType Shape { get; } = new ShapeType("shape");
+		public static ShapeType GeoShape { get; } = new ShapeType("geo_shape");
 	}
 
-	public enum UserAgentProperty
+	public readonly partial struct UserAgentProperty
 	{
-		[EnumMember(Value = "PATCH")]
-		Patch,
-		[EnumMember(Value = "OS_NAME")]
-		OsName,
-		[EnumMember(Value = "OS_MINOR")]
-		OsMinor,
-		[EnumMember(Value = "OS_MAJOR")]
-		OsMajor,
-		[EnumMember(Value = "OS")]
-		Os,
-		[EnumMember(Value = "NAME")]
-		Name,
-		[EnumMember(Value = "MINOR")]
-		Minor,
-		[EnumMember(Value = "MAJOR")]
-		Major,
-		[EnumMember(Value = "DEVICE")]
-		Device,
-		[EnumMember(Value = "BUILD")]
-		Build
+		public UserAgentProperty(string value) => Value = value;
+		public string Value { get; }
+
+		public static UserAgentProperty Patch { get; } = new UserAgentProperty("PATCH");
+		public static UserAgentProperty OsName { get; } = new UserAgentProperty("OS_NAME");
+		public static UserAgentProperty OsMinor { get; } = new UserAgentProperty("OS_MINOR");
+		public static UserAgentProperty OsMajor { get; } = new UserAgentProperty("OS_MAJOR");
+		public static UserAgentProperty Os { get; } = new UserAgentProperty("OS");
+		public static UserAgentProperty Name { get; } = new UserAgentProperty("NAME");
+		public static UserAgentProperty Minor { get; } = new UserAgentProperty("MINOR");
+		public static UserAgentProperty Major { get; } = new UserAgentProperty("MAJOR");
+		public static UserAgentProperty Device { get; } = new UserAgentProperty("DEVICE");
+		public static UserAgentProperty Build { get; } = new UserAgentProperty("BUILD");
 	}
 }

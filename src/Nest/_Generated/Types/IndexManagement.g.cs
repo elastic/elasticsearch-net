@@ -25,6 +25,45 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest.IndexManagement
 {
+	public partial class Alias
+	{
+		[JsonPropertyName("filter")]
+		public Nest.QueryDsl.QueryContainer? Filter { get; set; }
+
+		[JsonPropertyName("index_routing")]
+		public Nest.Routing? IndexRouting { get; set; }
+
+		[JsonPropertyName("is_hidden")]
+		public bool? IsHidden { get; set; }
+
+		[JsonPropertyName("is_write_index")]
+		public bool? IsWriteIndex { get; set; }
+
+		[JsonPropertyName("routing")]
+		public Nest.Routing? Routing { get; set; }
+
+		[JsonPropertyName("search_routing")]
+		public Nest.Routing? SearchRouting { get; set; }
+	}
+
+	public partial class AliasDefinition
+	{
+		[JsonPropertyName("filter")]
+		public Nest.QueryDsl.QueryContainer? Filter { get; set; }
+
+		[JsonPropertyName("index_routing")]
+		public string? IndexRouting { get; set; }
+
+		[JsonPropertyName("is_write_index")]
+		public bool? IsWriteIndex { get; set; }
+
+		[JsonPropertyName("routing")]
+		public string? Routing { get; set; }
+
+		[JsonPropertyName("search_routing")]
+		public string? SearchRouting { get; set; }
+	}
+
 	public partial class FielddataFrequencyFilter
 	{
 		[JsonPropertyName("max")]
@@ -61,6 +100,240 @@ namespace Nest.IndexManagement
 		}
 	}
 
+	public partial class IndexRouting
+	{
+		[JsonPropertyName("allocation")]
+		public Nest.IndexManagement.IndexRoutingAllocation? Allocation { get; set; }
+
+		[JsonPropertyName("rebalance")]
+		public Nest.IndexManagement.IndexRoutingRebalance? Rebalance { get; set; }
+	}
+
+	public partial class IndexRoutingAllocation
+	{
+		[JsonPropertyName("disk")]
+		public Nest.IndexManagement.IndexRoutingAllocationDisk? Disk { get; set; }
+
+		[JsonPropertyName("enable")]
+		public Nest.IndexManagement.IndexRoutingAllocationOptions? Enable { get; set; }
+
+		[JsonPropertyName("include")]
+		public Nest.IndexManagement.IndexRoutingAllocationInclude? Include { get; set; }
+
+		[JsonPropertyName("initial_recovery")]
+		public Nest.IndexManagement.IndexRoutingAllocationInitialRecovery? InitialRecovery { get; set; }
+	}
+
+	public partial class IndexRoutingAllocationDisk
+	{
+		[JsonPropertyName("threshold_enabled")]
+		public Union<bool, string> ThresholdEnabled { get; set; }
+	}
+
+	public partial class IndexRoutingAllocationInclude
+	{
+		[JsonPropertyName("_id")]
+		public Nest.Id? Id { get; set; }
+
+		[JsonPropertyName("_tier_preference")]
+		public string? TierPreference { get; set; }
+	}
+
+	public partial class IndexRoutingAllocationInitialRecovery
+	{
+		[JsonPropertyName("_id")]
+		public Nest.Id? Id { get; set; }
+	}
+
+	public partial class IndexRoutingRebalance
+	{
+		[JsonPropertyName("enable")]
+		public Nest.IndexManagement.IndexRoutingRebalanceOptions Enable { get; set; }
+	}
+
+	public partial class IndexSettingBlocks
+	{
+		[JsonPropertyName("metadata")]
+		public bool? Metadata { get; set; }
+
+		[JsonPropertyName("read")]
+		public bool? Read { get; set; }
+
+		[JsonPropertyName("read_only")]
+		public bool? ReadOnly { get; set; }
+
+		[JsonPropertyName("read_only_allow_delete")]
+		public bool? ReadOnlyAllowDelete { get; set; }
+
+		[JsonPropertyName("write")]
+		public Union<bool, string>? Write { get; set; }
+	}
+
+	public partial class IndexSettings
+	{
+		[JsonPropertyName("analysis")]
+		public Nest.IndexManagement.IndexSettingsAnalysis? Analysis { get; set; }
+
+		[JsonPropertyName("analyze.max_token_count")]
+		public int? AnalyzeMaxTokenCount { get; set; }
+
+		[JsonPropertyName("auto_expand_replicas")]
+		public string? AutoExpandReplicas { get; set; }
+
+		[JsonPropertyName("blocks")]
+		public Nest.IndexManagement.IndexSettingBlocks? Blocks { get; set; }
+
+		[JsonPropertyName("check_on_startup")]
+		public Nest.IndexManagement.IndexCheckOnStartup? CheckOnStartup { get; set; }
+
+		[JsonPropertyName("codec")]
+		public string? Codec { get; set; }
+
+		[JsonPropertyName("creation_date")]
+		public Nest.DateString? CreationDate { get; set; }
+
+		[JsonPropertyName("default_pipeline")]
+		public Nest.PipelineName? DefaultPipeline { get; set; }
+
+		[JsonPropertyName("final_pipeline")]
+		public Nest.PipelineName? FinalPipeline { get; set; }
+
+		[JsonPropertyName("format")]
+		public Union<string, int>? Format { get; set; }
+
+		[JsonPropertyName("gc_deletes")]
+		public Nest.Time? GcDeletes { get; set; }
+
+		[JsonPropertyName("hidden")]
+		public Union<bool, string>? Hidden { get; set; }
+
+		[JsonPropertyName("highlight.max_analyzed_offset")]
+		public int? HighlightMaxAnalyzedOffset { get; set; }
+
+		[JsonPropertyName("lifecycle")]
+		public Nest.IndexManagement.IndexSettingsLifecycle? Lifecycle { get; set; }
+
+		[JsonPropertyName("load_fixed_bitset_filters_eagerly")]
+		public bool? LoadFixedBitsetFiltersEagerly { get; set; }
+
+		[JsonPropertyName("max_docvalue_fields_search")]
+		public int? MaxDocvalueFieldsSearch { get; set; }
+
+		[JsonPropertyName("max_inner_result_window")]
+		public int? MaxInnerResultWindow { get; set; }
+
+		[JsonPropertyName("max_ngram_diff")]
+		public int? MaxNgramDiff { get; set; }
+
+		[JsonPropertyName("max_refresh_listeners")]
+		public int? MaxRefreshListeners { get; set; }
+
+		[JsonPropertyName("max_regex_length")]
+		public int? MaxRegexLength { get; set; }
+
+		[JsonPropertyName("max_rescore_window")]
+		public int? MaxRescoreWindow { get; set; }
+
+		[JsonPropertyName("max_result_window")]
+		public int? MaxResultWindow { get; set; }
+
+		[JsonPropertyName("max_script_fields")]
+		public int? MaxScriptFields { get; set; }
+
+		[JsonPropertyName("max_shingle_diff")]
+		public int? MaxShingleDiff { get; set; }
+
+		[JsonPropertyName("max_slices_per_scroll")]
+		public int? MaxSlicesPerScroll { get; set; }
+
+		[JsonPropertyName("max_terms_count")]
+		public int? MaxTermsCount { get; set; }
+
+		[JsonPropertyName("number_of_replicas")]
+		public Union<int, string>? NumberOfReplicas { get; set; }
+
+		[JsonPropertyName("number_of_routing_shards")]
+		public int? NumberOfRoutingShards { get; set; }
+
+		[JsonPropertyName("number_of_shards")]
+		public Union<int, string>? NumberOfShards { get; set; }
+
+		[JsonPropertyName("priority")]
+		public Union<int, string>? Priority { get; set; }
+
+		[JsonPropertyName("provided_name")]
+		public Nest.Name? ProvidedName { get; set; }
+
+		[JsonPropertyName("query_string.lenient")]
+		public Union<bool, string>? QueryStringLenient { get; set; }
+
+		[JsonPropertyName("refresh_interval")]
+		public Nest.Time? RefreshInterval { get; set; }
+
+		[JsonPropertyName("routing")]
+		public Nest.IndexManagement.IndexRouting? Routing { get; set; }
+
+		[JsonPropertyName("routing_partition_size")]
+		public Union<int, string>? RoutingPartitionSize { get; set; }
+
+		[JsonPropertyName("search.idle.after")]
+		public Nest.Time? SearchIdleAfter { get; set; }
+
+		[JsonPropertyName("soft_deletes.retention_lease.period")]
+		public Nest.Time? SoftDeletesRetentionLeasePeriod { get; set; }
+
+		[JsonPropertyName("top_metrics_max_size")]
+		public int? TopMetricsMaxSize { get; set; }
+
+		[JsonPropertyName("translog.durability")]
+		public string? TranslogDurability { get; set; }
+
+		[JsonPropertyName("uuid")]
+		public Nest.Uuid? Uuid { get; set; }
+
+		[JsonPropertyName("verified_before_close")]
+		public Union<bool, string>? VerifiedBeforeClose { get; set; }
+
+		[JsonPropertyName("version")]
+		public Nest.IndexManagement.IndexVersioning? Version { get; set; }
+	}
+
+	public partial class IndexSettingsAnalysis
+	{
+		[JsonPropertyName("char_filter")]
+		public Dictionary<string, Nest.Analysis.CharFilter>? CharFilter { get; set; }
+	}
+
+	public partial class IndexSettingsLifecycle
+	{
+		[JsonPropertyName("name")]
+		public Nest.Name Name { get; set; }
+	}
+
+	public partial class IndexState
+	{
+		[JsonPropertyName("aliases")]
+		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases { get; set; }
+
+		[JsonPropertyName("mappings")]
+		public Nest.Mapping.TypeMapping? Mappings { get; set; }
+
+		[JsonPropertyName("settings")]
+		public Union<Nest.IndexManagement.IndexSettings, Nest.IndexManagement.IndexStatePrefixedSettings> Settings { get; set; }
+	}
+
+	public partial class IndexStatePrefixedSettings
+	{
+		[JsonPropertyName("index")]
+		public Nest.IndexManagement.IndexSettings Index { get; set; }
+	}
+
+	public partial class IndexVersioning
+	{
+		[JsonPropertyName("created")]
+		public Nest.VersionString Created { get; set; }
+	}
+
 	public partial class NumericFielddata
 	{
 		[JsonPropertyName("format")]
@@ -75,6 +348,15 @@ namespace Nest.IndexManagement
 		}
 	}
 
+	public partial class OverlappingIndexTemplate
+	{
+		[JsonPropertyName("index_patterns")]
+		public IEnumerable<Nest.IndexName>? IndexPatterns { get; set; }
+
+		[JsonPropertyName("name")]
+		public Nest.Name Name { get; set; }
+	}
+
 	public partial class StringFielddata
 	{
 		[JsonPropertyName("format")]
@@ -87,5 +369,26 @@ namespace Nest.IndexManagement
 			internal set;
 #endif
 		}
+	}
+
+	public partial class TemplateMapping
+	{
+		[JsonPropertyName("aliases")]
+		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias> Aliases { get; set; }
+
+		[JsonPropertyName("index_patterns")]
+		public IEnumerable<Nest.Name> IndexPatterns { get; set; }
+
+		[JsonPropertyName("mappings")]
+		public Nest.Mapping.TypeMapping Mappings { get; set; }
+
+		[JsonPropertyName("order")]
+		public int Order { get; set; }
+
+		[JsonPropertyName("settings")]
+		public Dictionary<string, object> Settings { get; set; }
+
+		[JsonPropertyName("version")]
+		public Nest.VersionNumber? Version { get; set; }
 	}
 }

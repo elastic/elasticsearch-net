@@ -21,15 +21,14 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Migration.Deprecations
 {
-	public enum DeprecationLevel
+	public readonly partial struct DeprecationLevel
 	{
-		[EnumMember(Value = "warning")]
-		Warning,
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "info")]
-		Info,
-		[EnumMember(Value = "critical")]
-		Critical
+		public DeprecationLevel(string value) => Value = value;
+		public string Value { get; }
+
+		public static DeprecationLevel Warning { get; } = new DeprecationLevel("warning");
+		public static DeprecationLevel None { get; } = new DeprecationLevel("none");
+		public static DeprecationLevel Info { get; } = new DeprecationLevel("info");
+		public static DeprecationLevel Critical { get; } = new DeprecationLevel("critical");
 	}
 }

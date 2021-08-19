@@ -21,17 +21,15 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Rollup.GetJobs
 {
-	public enum IndexingJobState
+	public readonly partial struct IndexingJobState
 	{
-		[EnumMember(Value = "stopping")]
-		Stopping,
-		[EnumMember(Value = "stopped")]
-		Stopped,
-		[EnumMember(Value = "started")]
-		Started,
-		[EnumMember(Value = "indexing")]
-		Indexing,
-		[EnumMember(Value = "aborting")]
-		Aborting
+		public IndexingJobState(string value) => Value = value;
+		public string Value { get; }
+
+		public static IndexingJobState Stopping { get; } = new IndexingJobState("stopping");
+		public static IndexingJobState Stopped { get; } = new IndexingJobState("stopped");
+		public static IndexingJobState Started { get; } = new IndexingJobState("started");
+		public static IndexingJobState Indexing { get; } = new IndexingJobState("indexing");
+		public static IndexingJobState Aborting { get; } = new IndexingJobState("aborting");
 	}
 }

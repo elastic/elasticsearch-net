@@ -17,19 +17,213 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Nest.Cluster.Health
+namespace Nest.Cluster
 {
-	[ConvertAs(typeof(ClusterHealthRequest))]
-	public partial interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters>
+	[ConvertAs(typeof(AllocationExplainRequest))]
+	public partial interface IAllocationExplainRequest : IRequest<AllocationExplainRequestParameters>
 	{
 	}
 
-	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
+	public partial class AllocationExplainRequest : PlainRequestBase<AllocationExplainRequestParameters>, IAllocationExplainRequest
 	{
-		protected IClusterHealthRequest Self => this;
+		protected IAllocationExplainRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterAllocationExplain;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => CurrentNode is null && Index is null && Primary is null && Shard is null;
+
+		///<summary>/_cluster/allocation/explain</summary>
+        public AllocationExplainRequest() : base()
+		{
+		}
+
+		[JsonIgnore]
+		public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
+
+		[JsonIgnore]
+		public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
+
+		[JsonPropertyName("current_node")]
+		public string? CurrentNode
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index")]
+		public Nest.IndexName? Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("primary")]
+		public bool? Primary
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shard")]
+		public int? Shard
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(DeleteComponentTemplateRequest))]
+	public partial interface IDeleteComponentTemplateRequest : IRequest<DeleteComponentTemplateRequestParameters>
+	{
+	}
+
+	public partial class DeleteComponentTemplateRequest : PlainRequestBase<DeleteComponentTemplateRequestParameters>, IDeleteComponentTemplateRequest
+	{
+		protected IDeleteComponentTemplateRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteComponentTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/_component_template/{name}</summary>
+        public DeleteComponentTemplateRequest(Nest.Name name) : base(r => r.Required("name", name))
+		{
+		}
+
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+	}
+
+	[ConvertAs(typeof(DeleteVotingConfigExclusionsRequest))]
+	public partial interface IDeleteVotingConfigExclusionsRequest : IRequest<DeleteVotingConfigExclusionsRequestParameters>
+	{
+	}
+
+	public partial class DeleteVotingConfigExclusionsRequest : PlainRequestBase<DeleteVotingConfigExclusionsRequestParameters>, IDeleteVotingConfigExclusionsRequest
+	{
+		protected IDeleteVotingConfigExclusionsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteVotingConfigExclusions;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/_cluster/voting_config_exclusions</summary>
+        public DeleteVotingConfigExclusionsRequest() : base()
+		{
+		}
+
+		[JsonPropertyName("stub")]
+		public string Stub
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(GetComponentTemplateRequest))]
+	public partial interface IGetComponentTemplateRequest : IRequest<GetComponentTemplateRequestParameters>
+	{
+	}
+
+	public partial class GetComponentTemplateRequest : PlainRequestBase<GetComponentTemplateRequestParameters>, IGetComponentTemplateRequest
+	{
+		protected IGetComponentTemplateRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetComponentTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+
+		///<summary>/_component_template</summary>
+        public GetComponentTemplateRequest() : base()
+		{
+		}
+
+		///<summary>/_component_template/{name}</summary>
+        public GetComponentTemplateRequest(Nest.Name? name) : base(r => r.Optional("name", name))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+		[JsonIgnore]
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+	}
+
+	[ConvertAs(typeof(GetSettingsRequest))]
+	public partial interface IGetSettingsRequest : IRequest<GetSettingsRequestParameters>
+	{
+	}
+
+	public partial class GetSettingsRequest : PlainRequestBase<GetSettingsRequestParameters>, IGetSettingsRequest
+	{
+		protected IGetSettingsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetSettings;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+
+		///<summary>/_cluster/settings</summary>
+        public GetSettingsRequest() : base()
+		{
+		}
+
+		[JsonIgnore]
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+		[JsonIgnore]
+		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+	}
+
+	[ConvertAs(typeof(HealthRequest))]
+	public partial interface IHealthRequest : IRequest<HealthRequestParameters>
+	{
+	}
+
+	public partial class HealthRequest : PlainRequestBase<HealthRequestParameters>, IHealthRequest
+	{
+		protected IHealthRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
@@ -37,12 +231,12 @@ namespace Nest.Cluster.Health
 		protected override bool IsEmpty => true;
 
 		///<summary>/_cluster/health</summary>
-        public ClusterHealthRequest() : base()
+        public HealthRequest() : base()
 		{
 		}
 
 		///<summary>/_cluster/health/{index}</summary>
-        public ClusterHealthRequest(Nest.Indices? index) : base(r => r.Optional("index", index))
+        public HealthRequest(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
 
@@ -78,5 +272,371 @@ namespace Nest.Cluster.Health
 
 		[JsonIgnore]
 		public Nest.WaitForStatus? WaitForStatus { get => Q<Nest.WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
+	}
+
+	[ConvertAs(typeof(PendingTasksRequest))]
+	public partial interface IPendingTasksRequest : IRequest<PendingTasksRequestParameters>
+	{
+	}
+
+	public partial class PendingTasksRequest : PlainRequestBase<PendingTasksRequestParameters>, IPendingTasksRequest
+	{
+		protected IPendingTasksRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPendingTasks;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+
+		///<summary>/_cluster/pending_tasks</summary>
+        public PendingTasksRequest() : base()
+		{
+		}
+
+		[JsonIgnore]
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+	}
+
+	[ConvertAs(typeof(PostVotingConfigExclusionsRequest))]
+	public partial interface IPostVotingConfigExclusionsRequest : IRequest<PostVotingConfigExclusionsRequestParameters>
+	{
+	}
+
+	public partial class PostVotingConfigExclusionsRequest : PlainRequestBase<PostVotingConfigExclusionsRequestParameters>, IPostVotingConfigExclusionsRequest
+	{
+		protected IPostVotingConfigExclusionsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPostVotingConfigExclusions;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+
+		///<summary>/_cluster/voting_config_exclusions</summary>
+        public PostVotingConfigExclusionsRequest() : base()
+		{
+		}
+
+		[JsonIgnore]
+		public Nest.Names? NodeNames { get => Q<Nest.Names?>("node_names"); set => Q("node_names", value); }
+
+		[JsonIgnore]
+		public Nest.Ids? NodeIds { get => Q<Nest.Ids?>("node_ids"); set => Q("node_ids", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonIgnore]
+		public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
+	}
+
+	[ConvertAs(typeof(PutComponentTemplateRequest))]
+	public partial interface IPutComponentTemplateRequest : IRequest<PutComponentTemplateRequestParameters>
+	{
+	}
+
+	public partial class PutComponentTemplateRequest : PlainRequestBase<PutComponentTemplateRequestParameters>, IPutComponentTemplateRequest
+	{
+		protected IPutComponentTemplateRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutComponentTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/_component_template/{name}</summary>
+        public PutComponentTemplateRequest(Nest.Name name) : base(r => r.Required("name", name))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
+
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonPropertyName("template")]
+		public Nest.IndexManagement.IndexState Template
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("aliases")]
+		public Dictionary<string, Nest.IndexManagement.AliasDefinition>? Aliases
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("mappings")]
+		public Nest.Mapping.TypeMapping? Mappings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("settings")]
+		public Nest.IndexManagement.IndexSettings? Settings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public Nest.VersionNumber? Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_meta")]
+		public Nest.Metadata? Meta
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(PutSettingsRequest))]
+	public partial interface IPutSettingsRequest : IRequest<PutSettingsRequestParameters>
+	{
+	}
+
+	public partial class PutSettingsRequest : PlainRequestBase<PutSettingsRequestParameters>, IPutSettingsRequest
+	{
+		protected IPutSettingsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutSettings;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => Persistent is null && Transient is null;
+
+		///<summary>/_cluster/settings</summary>
+        public PutSettingsRequest() : base()
+		{
+		}
+
+		[JsonIgnore]
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonPropertyName("persistent")]
+		public Dictionary<string, object>? Persistent
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transient")]
+		public Dictionary<string, object>? Transient
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(RemoteInfoRequest))]
+	public partial interface IRemoteInfoRequest : IRequest<RemoteInfoRequestParameters>
+	{
+	}
+
+	public partial class RemoteInfoRequest : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
+	{
+		protected IRemoteInfoRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterRemoteInfo;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/_remote/info</summary>
+        public RemoteInfoRequest() : base()
+		{
+		}
+
+		[JsonPropertyName("stub")]
+		public string Stub
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(RerouteRequest))]
+	public partial interface IRerouteRequest : IRequest<RerouteRequestParameters>
+	{
+	}
+
+	public partial class RerouteRequest : PlainRequestBase<RerouteRequestParameters>, IRerouteRequest
+	{
+		protected IRerouteRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterReroute;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => Commands is null;
+
+		///<summary>/_cluster/reroute</summary>
+        public RerouteRequest() : base()
+		{
+		}
+
+		[JsonIgnore]
+		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
+
+		[JsonIgnore]
+		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
+
+		[JsonIgnore]
+		public Nest.Metrics? Metric { get => Q<Nest.Metrics?>("metric"); set => Q("metric", value); }
+
+		[JsonIgnore]
+		public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
+
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonPropertyName("commands")]
+		public IReadOnlyCollection<Nest.Cluster.Reroute.Command>? Commands
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(StateRequest))]
+	public partial interface IStateRequest : IRequest<StateRequestParameters>
+	{
+	}
+
+	public partial class StateRequest : PlainRequestBase<StateRequestParameters>, IStateRequest
+	{
+		protected IStateRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterState;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+
+		///<summary>/_cluster/state</summary>
+        public StateRequest() : base()
+		{
+		}
+
+		///<summary>/_cluster/state/{metric}</summary>
+        public StateRequest(Nest.Metrics? metric) : base(r => r.Optional("metric", metric))
+		{
+		}
+
+		///<summary>/_cluster/state/{metric}/{index}</summary>
+        public StateRequest(Nest.Metrics? metric, Nest.Indices? index) : base(r => r.Optional("metric", metric).Optional("index", index))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+		[JsonIgnore]
+		public Nest.ExpandWildcards? ExpandWildcards { get => Q<Nest.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+		[JsonIgnore]
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+		[JsonIgnore]
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Nest.VersionNumber? WaitForMetadataVersion { get => Q<Nest.VersionNumber?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
+
+		[JsonIgnore]
+		public Nest.Time? WaitForTimeout { get => Q<Nest.Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
+	}
+
+	[ConvertAs(typeof(StatsRequest))]
+	public partial interface IStatsRequest : IRequest<StatsRequestParameters>
+	{
+	}
+
+	public partial class StatsRequest : PlainRequestBase<StatsRequestParameters>, IStatsRequest
+	{
+		protected IStatsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterStats;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+
+		///<summary>/_cluster/stats</summary>
+        public StatsRequest() : base()
+		{
+		}
+
+		///<summary>/_cluster/stats/nodes/{node_id}</summary>
+        public StatsRequest(Nest.NodeIds? node_id) : base(r => r.Optional("node_id", node_id))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 	}
 }

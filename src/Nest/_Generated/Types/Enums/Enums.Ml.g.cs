@@ -21,133 +21,128 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Ml
 {
-	public enum AppliesTo
+	public readonly partial struct AppliesTo
 	{
-		[EnumMember(Value = "typical")]
-		Typical,
-		[EnumMember(Value = "time")]
-		Time,
-		[EnumMember(Value = "diff_from_typical")]
-		DiffFromTypical,
-		[EnumMember(Value = "actual")]
-		Actual
+		public AppliesTo(string value) => Value = value;
+		public string Value { get; }
+
+		public static AppliesTo Typical { get; } = new AppliesTo("typical");
+		public static AppliesTo Time { get; } = new AppliesTo("time");
+		public static AppliesTo DiffFromTypical { get; } = new AppliesTo("diff_from_typical");
+		public static AppliesTo Actual { get; } = new AppliesTo("actual");
 	}
 
-	public enum CategorizationStatus
+	public readonly partial struct CategorizationStatus
 	{
-		[EnumMember(Value = "warn")]
-		Warn,
-		[EnumMember(Value = "ok")]
-		Ok
+		public CategorizationStatus(string value) => Value = value;
+		public string Value { get; }
+
+		public static CategorizationStatus Warn { get; } = new CategorizationStatus("warn");
+		public static CategorizationStatus Ok { get; } = new CategorizationStatus("ok");
 	}
 
-	public enum ChunkingMode
+	public readonly partial struct ChunkingMode
 	{
-		[EnumMember(Value = "off")]
-		Off,
-		[EnumMember(Value = "manual")]
-		Manual,
-		[EnumMember(Value = "auto")]
-		Auto
+		public ChunkingMode(string value) => Value = value;
+		public string Value { get; }
+
+		public static ChunkingMode Off { get; } = new ChunkingMode("off");
+		public static ChunkingMode Manual { get; } = new ChunkingMode("manual");
+		public static ChunkingMode Auto { get; } = new ChunkingMode("auto");
 	}
 
-	public enum ConditionOperator
+	public readonly partial struct ConditionOperator
 	{
-		[EnumMember(Value = "lte")]
-		Lte,
-		[EnumMember(Value = "lt")]
-		Lt,
-		[EnumMember(Value = "gte")]
-		Gte,
-		[EnumMember(Value = "gt")]
-		Gt
+		public ConditionOperator(string value) => Value = value;
+		public string Value { get; }
+
+		public static ConditionOperator Lte { get; } = new ConditionOperator("lte");
+		public static ConditionOperator Lt { get; } = new ConditionOperator("lt");
+		public static ConditionOperator Gte { get; } = new ConditionOperator("gte");
+		public static ConditionOperator Gt { get; } = new ConditionOperator("gt");
 	}
 
-	public enum DatafeedState
+	public readonly partial struct DatafeedState
 	{
-		[EnumMember(Value = "stopping")]
-		Stopping,
-		[EnumMember(Value = "stopped")]
-		Stopped,
-		[EnumMember(Value = "starting")]
-		Starting,
-		[EnumMember(Value = "started")]
-		Started
+		public DatafeedState(string value) => Value = value;
+		public string Value { get; }
+
+		public static DatafeedState Stopping { get; } = new DatafeedState("stopping");
+		public static DatafeedState Stopped { get; } = new DatafeedState("stopped");
+		public static DatafeedState Starting { get; } = new DatafeedState("starting");
+		public static DatafeedState Started { get; } = new DatafeedState("started");
 	}
 
-	public enum DataframeState
+	public readonly partial struct DataframeState
 	{
-		[EnumMember(Value = "stopping")]
-		Stopping,
-		[EnumMember(Value = "stopped")]
-		Stopped,
-		[EnumMember(Value = "starting")]
-		Starting,
-		[EnumMember(Value = "started")]
-		Started,
-		[EnumMember(Value = "failed")]
-		Failed
+		public DataframeState(string value) => Value = value;
+		public string Value { get; }
+
+		public static DataframeState Stopping { get; } = new DataframeState("stopping");
+		public static DataframeState Stopped { get; } = new DataframeState("stopped");
+		public static DataframeState Starting { get; } = new DataframeState("starting");
+		public static DataframeState Started { get; } = new DataframeState("started");
+		public static DataframeState Failed { get; } = new DataframeState("failed");
 	}
 
-	public enum ExcludeFrequent
+	public readonly partial struct ExcludeFrequent
 	{
-		[EnumMember(Value = "over")]
-		Over,
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "by")]
-		By,
-		[EnumMember(Value = "all")]
-		All
+		public ExcludeFrequent(string value) => Value = value;
+		public string Value { get; }
+
+		public static ExcludeFrequent Over { get; } = new ExcludeFrequent("over");
+		public static ExcludeFrequent None { get; } = new ExcludeFrequent("none");
+		public static ExcludeFrequent By { get; } = new ExcludeFrequent("by");
+		public static ExcludeFrequent All { get; } = new ExcludeFrequent("all");
 	}
 
-	public enum FilterType
+	public readonly partial struct FilterType
 	{
-		[EnumMember(Value = "include")]
-		Include,
-		[EnumMember(Value = "exclude")]
-		Exclude
+		public FilterType(string value) => Value = value;
+		public string Value { get; }
+
+		public static FilterType Include { get; } = new FilterType("include");
+		public static FilterType Exclude { get; } = new FilterType("exclude");
 	}
 
-	public enum JobBlockedReason
+	public readonly partial struct JobBlockedReason
 	{
-		[EnumMember(Value = "revert")]
-		Revert,
-		[EnumMember(Value = "reset")]
-		Reset,
-		[EnumMember(Value = "delete")]
-		Delete
+		public JobBlockedReason(string value) => Value = value;
+		public string Value { get; }
+
+		public static JobBlockedReason Revert { get; } = new JobBlockedReason("revert");
+		public static JobBlockedReason Reset { get; } = new JobBlockedReason("reset");
+		public static JobBlockedReason Delete { get; } = new JobBlockedReason("delete");
 	}
 
-	public enum JobState
+	public readonly partial struct JobState
 	{
-		[EnumMember(Value = "opening")]
-		Opening,
-		[EnumMember(Value = "opened")]
-		Opened,
-		[EnumMember(Value = "failed")]
-		Failed,
-		[EnumMember(Value = "closing")]
-		Closing,
-		[EnumMember(Value = "closed")]
-		Closed
+		public JobState(string value) => Value = value;
+		public string Value { get; }
+
+		public static JobState Opening { get; } = new JobState("opening");
+		public static JobState Opened { get; } = new JobState("opened");
+		public static JobState Failed { get; } = new JobState("failed");
+		public static JobState Closing { get; } = new JobState("closing");
+		public static JobState Closed { get; } = new JobState("closed");
 	}
 
-	public enum MemoryStatus
+	public readonly partial struct MemoryStatus
 	{
-		[EnumMember(Value = "soft_limit")]
-		SoftLimit,
-		[EnumMember(Value = "ok")]
-		Ok,
-		[EnumMember(Value = "hard_limit")]
-		HardLimit
+		public MemoryStatus(string value) => Value = value;
+		public string Value { get; }
+
+		public static MemoryStatus SoftLimit { get; } = new MemoryStatus("soft_limit");
+		public static MemoryStatus Ok { get; } = new MemoryStatus("ok");
+		public static MemoryStatus HardLimit { get; } = new MemoryStatus("hard_limit");
 	}
 
-	public enum RuleAction
+	public readonly partial struct RuleAction
 	{
-		[EnumMember(Value = "skip_result")]
-		SkipResult,
-		[EnumMember(Value = "skip_model_update")]
-		SkipModelUpdate
+		public RuleAction(string value) => Value = value;
+		public string Value { get; }
+
+		public static RuleAction SkipResult { get; } = new RuleAction("skip_result");
+		public static RuleAction SkipModelUpdate { get; } = new RuleAction("skip_model_update");
 	}
 }

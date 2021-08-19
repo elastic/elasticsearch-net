@@ -21,27 +21,25 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Watcher.Stats
 {
-	public enum WatcherMetric
+	public readonly partial struct WatcherMetric
 	{
-		[EnumMember(Value = "queued_watches")]
-		QueuedWatches,
-		[EnumMember(Value = "pending_watches")]
-		PendingWatches,
-		[EnumMember(Value = "current_watches")]
-		CurrentWatches,
-		[EnumMember(Value = "_all")]
-		All
+		public WatcherMetric(string value) => Value = value;
+		public string Value { get; }
+
+		public static WatcherMetric QueuedWatches { get; } = new WatcherMetric("queued_watches");
+		public static WatcherMetric PendingWatches { get; } = new WatcherMetric("pending_watches");
+		public static WatcherMetric CurrentWatches { get; } = new WatcherMetric("current_watches");
+		public static WatcherMetric All { get; } = new WatcherMetric("_all");
 	}
 
-	public enum WatcherState
+	public readonly partial struct WatcherState
 	{
-		[EnumMember(Value = "stopping")]
-		Stopping,
-		[EnumMember(Value = "stopped")]
-		Stopped,
-		[EnumMember(Value = "starting")]
-		Starting,
-		[EnumMember(Value = "started")]
-		Started
+		public WatcherState(string value) => Value = value;
+		public string Value { get; }
+
+		public static WatcherState Stopping { get; } = new WatcherState("stopping");
+		public static WatcherState Stopped { get; } = new WatcherState("stopped");
+		public static WatcherState Starting { get; } = new WatcherState("starting");
+		public static WatcherState Started { get; } = new WatcherState("started");
 	}
 }

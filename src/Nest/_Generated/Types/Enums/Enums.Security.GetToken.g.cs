@@ -21,15 +21,14 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Security.GetToken
 {
-	public enum AccessTokenGrantType
+	public readonly partial struct AccessTokenGrantType
 	{
-		[EnumMember(Value = "refresh_token")]
-		RefreshToken,
-		[EnumMember(Value = "password")]
-		Password,
-		[EnumMember(Value = "client_credentials")]
-		ClientCredentials,
-		[EnumMember(Value = "_kerberos")]
-		Kerberos
+		public AccessTokenGrantType(string value) => Value = value;
+		public string Value { get; }
+
+		public static AccessTokenGrantType RefreshToken { get; } = new AccessTokenGrantType("refresh_token");
+		public static AccessTokenGrantType Password { get; } = new AccessTokenGrantType("password");
+		public static AccessTokenGrantType ClientCredentials { get; } = new AccessTokenGrantType("client_credentials");
+		public static AccessTokenGrantType Kerberos { get; } = new AccessTokenGrantType("_kerberos");
 	}
 }
