@@ -1490,17 +1490,6 @@ namespace Nest
 		{
 		}
 
-		[JsonPropertyName("field")]
-		public Nest.Field Field
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
 		[JsonPropertyName("size")]
 		public int? Size
 		{
