@@ -643,6 +643,100 @@ namespace Nest.Cluster
 		}
 	}
 
+	public partial class ComponentTemplateNode
+	{
+		[JsonPropertyName("_meta")]
+		public Nest.Metadata? Meta
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("template")]
+		public Nest.Cluster.ComponentTemplateSummary Template
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public Nest.VersionNumber? Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ComponentTemplateSummary
+	{
+		[JsonPropertyName("aliases")]
+		public Dictionary<string, Nest.IndexManagement.AliasDefinition>? Aliases
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("mappings")]
+		public Nest.Mapping.TypeMapping? Mappings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_meta")]
+		public Nest.Metadata? Meta
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("settings")]
+		public Dictionary<Nest.IndexName, Nest.IndexManagement.IndexSettings> Settings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public Nest.VersionNumber? Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class Tombstone
 	{
 		[JsonPropertyName("delete_date")]

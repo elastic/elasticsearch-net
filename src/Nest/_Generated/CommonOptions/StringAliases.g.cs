@@ -460,7 +460,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Namespace>))]
-	public readonly partial struct Namespace : IComparable<Namespace>, IEquatable<Namespace>
+	public readonly partial struct Namespace : IComparable<Namespace>, IEquatable<Namespace>, IUrlParameter
 	{
 		public Namespace(string ns) => Value = ns;
 		public string Value { get; }
@@ -482,6 +482,8 @@ namespace Nest
 			ns = new Namespace(value.Trim());
 			return true;
 		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<NodeId>))]
@@ -712,7 +714,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Service>))]
-	public readonly partial struct Service : IComparable<Service>, IEquatable<Service>
+	public readonly partial struct Service : IComparable<Service>, IEquatable<Service>, IUrlParameter
 	{
 		public Service(string service) => Value = service;
 		public string Value { get; }
@@ -734,6 +736,8 @@ namespace Nest
 			service = new Service(value.Trim());
 			return true;
 		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<SuggestionName>))]
@@ -837,7 +841,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Username>))]
-	public readonly partial struct Username : IComparable<Username>, IEquatable<Username>
+	public readonly partial struct Username : IComparable<Username>, IEquatable<Username>, IUrlParameter
 	{
 		public Username(string username) => Value = username;
 		public string Value { get; }
@@ -859,6 +863,8 @@ namespace Nest
 			username = new Username(value.Trim());
 			return true;
 		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Uuid>))]

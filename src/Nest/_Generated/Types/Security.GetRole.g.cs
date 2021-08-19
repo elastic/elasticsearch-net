@@ -89,6 +89,86 @@ namespace Nest.Security.GetRole
 		}
 	}
 
+	public partial class Role
+	{
+		[JsonPropertyName("applications")]
+		public IReadOnlyCollection<Nest.Security.ApplicationPrivileges> Applications
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cluster")]
+		public IReadOnlyCollection<string> Cluster
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("indices")]
+		public IReadOnlyCollection<Nest.Security.IndicesPrivileges> Indices
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("metadata")]
+		public Nest.Metadata Metadata
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("role_templates")]
+		public IReadOnlyCollection<Nest.Security.GetRole.RoleTemplate>? RoleTemplates
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("run_as")]
+		public IReadOnlyCollection<string> RunAs
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transient_metadata")]
+		public Nest.Security.GetRole.TransientMetadata TransientMetadata
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class StoredRoleTemplate
 	{
 		[JsonPropertyName("format")]
@@ -126,5 +206,11 @@ namespace Nest.Security.GetRole
 			internal set;
 #endif
 		}
+	}
+
+	public partial class TransientMetadata
+	{
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
 	}
 }

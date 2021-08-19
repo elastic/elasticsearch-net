@@ -1165,6 +1165,9 @@ namespace Nest
 		[JsonIgnore]
 		public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
+		[JsonIgnore]
+		public Union<string, IEnumerable<string>>? Sort { get => Q<Union<string, IEnumerable<string>>?>("sort"); set => Q("sort", value); }
+
 		[JsonPropertyName("aggs")]
 		public Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggs
 		{

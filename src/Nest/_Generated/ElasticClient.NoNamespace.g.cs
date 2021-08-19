@@ -29,6 +29,14 @@ using Nest.License;
 using Nest.Migration;
 using Nest.Nodes;
 using Nest.SearchableSnapshots;
+using Nest.Security;
+using Nest.Shutdown;
+using Nest.Snapshot;
+using Nest.SnapshotLifecycleManagement;
+using Nest.Sql;
+using Nest.TextStructure;
+using Nest.Watcher;
+using Nest.Xpack;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -64,6 +72,22 @@ namespace Nest
 
 		public SearchableSnapshotsNamespace SearchableSnapshots { get; private set; }
 
+		public SecurityNamespace Security { get; private set; }
+
+		public ShutdownNamespace Shutdown { get; private set; }
+
+		public SnapshotLifecycleManagementNamespace SnapshotLifecycleManagement { get; private set; }
+
+		public SnapshotNamespace Snapshot { get; private set; }
+
+		public SqlNamespace Sql { get; private set; }
+
+		public TextStructureNamespace TextStructure { get; private set; }
+
+		public WatcherNamespace Watcher { get; private set; }
+
+		public XpackNamespace Xpack { get; private set; }
+
 		private partial void SetupNamespaces()
 		{
 			AsyncSearch = new AsyncSearchNamespace(this);
@@ -79,6 +103,14 @@ namespace Nest
 			Migration = new MigrationNamespace(this);
 			Nodes = new NodesNamespace(this);
 			SearchableSnapshots = new SearchableSnapshotsNamespace(this);
+			Security = new SecurityNamespace(this);
+			Shutdown = new ShutdownNamespace(this);
+			SnapshotLifecycleManagement = new SnapshotLifecycleManagementNamespace(this);
+			Snapshot = new SnapshotNamespace(this);
+			Sql = new SqlNamespace(this);
+			TextStructure = new TextStructureNamespace(this);
+			Watcher = new WatcherNamespace(this);
+			Xpack = new XpackNamespace(this);
 		}
 
 		public ClearScrollResponse ClearScroll(IClearScrollRequest request)

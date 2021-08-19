@@ -416,6 +416,42 @@ namespace Nest.Ingest
 		public Nest.VersionNumber? Version { get; set; }
 	}
 
+	public partial class PipelineConfig
+	{
+		[JsonPropertyName("description")]
+		public string? Description
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("processors")]
+		public IReadOnlyCollection<Nest.Ingest.ProcessorContainer> Processors
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public Nest.VersionNumber? Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class PipelineProcessor
 	{
 		[JsonPropertyName("name")]

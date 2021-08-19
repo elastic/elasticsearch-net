@@ -185,6 +185,12 @@ namespace Nest
 		}
 	}
 
+	public partial class ChainTransform
+	{
+		[JsonPropertyName("transforms")]
+		public IEnumerable<Nest.TransformContainer> Transforms { get; set; }
+	}
+
 	public partial class ClusterStatistics
 	{
 		[JsonPropertyName("skipped")]
@@ -2043,6 +2049,15 @@ namespace Nest
 		public Nest.Script Script { get; set; }
 	}
 
+	public partial class ScriptTransform
+	{
+		[JsonPropertyName("lang")]
+		public string Lang { get; set; }
+
+		[JsonPropertyName("params")]
+		public Dictionary<string, object> Params { get; set; }
+	}
+
 	public partial class SearchStats
 	{
 		[JsonPropertyName("fetch_current")]
@@ -2198,6 +2213,15 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class SearchTransform
+	{
+		[JsonPropertyName("request")]
+		public Nest.Watcher.SearchInputRequestDefinition Request { get; set; }
+
+		[JsonPropertyName("timeout")]
+		public Nest.Time Timeout { get; set; }
 	}
 
 	public partial class SegmentsStats
@@ -2671,6 +2695,18 @@ namespace Nest
 
 		[JsonPropertyName("source")]
 		public string Source { get; set; }
+	}
+
+	public partial class TransformContainer
+	{
+		[JsonPropertyName("chain")]
+		public Nest.ChainTransform? Chain { get; set; }
+
+		[JsonPropertyName("script")]
+		public Nest.ScriptTransform? Script { get; set; }
+
+		[JsonPropertyName("search")]
+		public Nest.SearchTransform? Search { get; set; }
 	}
 
 	public partial class TranslogStats

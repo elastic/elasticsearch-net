@@ -68,14 +68,6 @@ namespace Nest
 	}
 }
 
-namespace Nest.Analysis
-{
-	// TODO - Implement array type aliases
-	// TODO - Consider OneOrMany implementation to only allocate a list when more than one item
-	public class StopWords
-	{
-	}
-}
 
 namespace Nest
 {
@@ -127,14 +119,7 @@ namespace Nest
 		public Percentage(float value) { }
 	}
 
-	// TODO - Handle array alias types
-	// TODO - Consider a OneOrMany type to optimise
-	public partial class IndexPatterns : ReadOnlyCollection<IndexPattern>
-	{
-		public IndexPatterns(IList<IndexPattern> list) : base(list)
-		{
-		}
-	}
+
 
 	/// <summary>
 	///     Block type for an index.
@@ -171,9 +156,6 @@ namespace Nest
 	//	public static IndicesBlockOptions Write { get; } = new("write");
 	//}
 
-	public class NodeRoles
-	{
-	}
 
 
 	public class Aggregate
