@@ -50,6 +50,132 @@ namespace Nest.Snapshot
 		}
 	}
 
+	public partial class IndexDetails
+	{
+		[JsonPropertyName("max_segments_per_shard")]
+		public long MaxSegmentsPerShard
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shard_count")]
+		public int ShardCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size")]
+		public Nest.ByteSize? Size
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size_in_bytes")]
+		public long SizeInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class InfoFeatureState
+	{
+		[JsonPropertyName("feature_name")]
+		public string FeatureName
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("indices")]
+		public Nest.Indices Indices
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Repository
+	{
+		[JsonPropertyName("settings")]
+		public Nest.Snapshot.RepositorySettings Settings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("uuid")]
+		public Nest.Uuid? Uuid
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RepositorySettings
+	{
+		[JsonPropertyName("chunk_size")]
+		public string? ChunkSize { get; set; }
+
+		[JsonPropertyName("compress")]
+		public Union<string, bool>? Compress { get; set; }
+
+		[JsonPropertyName("concurrent_streams")]
+		public Union<string, int>? ConcurrentStreams { get; set; }
+
+		[JsonPropertyName("location")]
+		public string Location { get; set; }
+
+		[JsonPropertyName("read_only")]
+		public Union<string, bool>? ReadOnly { get; set; }
+	}
+
 	public partial class ShardsStats
 	{
 		[JsonPropertyName("done")]
@@ -217,6 +343,287 @@ namespace Nest.Snapshot
 
 		[JsonPropertyName("stats")]
 		public Nest.Snapshot.SnapshotStats Stats
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SnapshotInfo
+	{
+		[JsonPropertyName("data_streams")]
+		public IReadOnlyCollection<string> DataStreams
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("duration")]
+		public Nest.Time? Duration
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("duration_in_millis")]
+		public Nest.EpochMillis? DurationInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("end_time")]
+		public Nest.Time? EndTime
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("end_time_in_millis")]
+		public Nest.EpochMillis? EndTimeInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("failures")]
+		public IReadOnlyCollection<Nest.Snapshot.SnapshotShardFailure>? Failures
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("feature_states")]
+		public IReadOnlyCollection<Nest.Snapshot.InfoFeatureState>? FeatureStates
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("include_global_state")]
+		public bool? IncludeGlobalState
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_details")]
+		public Dictionary<Nest.IndexName, Nest.Snapshot.IndexDetails>? IndexDetails
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("indices")]
+		public IReadOnlyCollection<Nest.IndexName> Indices
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("metadata")]
+		public Nest.Metadata? Metadata
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("reason")]
+		public string? Reason
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shards")]
+		public Nest.ShardStatistics? Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("snapshot")]
+		public Nest.Name Snapshot
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("start_time")]
+		public Nest.Time? StartTime
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("start_time_in_millis")]
+		public Nest.EpochMillis? StartTimeInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("state")]
+		public string? State
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("uuid")]
+		public Nest.Uuid Uuid
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public Nest.VersionString? Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version_id")]
+		public Nest.VersionNumber? VersionId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SnapshotShardFailure
+	{
+		[JsonPropertyName("index")]
+		public Nest.IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("node_id")]
+		public Nest.Id NodeId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("reason")]
+		public string Reason
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shard_id")]
+		public Nest.Id ShardId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("status")]
+		public string Status
 		{
 			get;
 #if NET5_0
