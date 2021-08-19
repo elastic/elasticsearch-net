@@ -31,7 +31,7 @@ namespace Nest
 				IgnoreNullValues = true,
 				Converters =
 				{
-					new ProxyRequestConverterFactory(settings),
+					new CustomJsonWriterConverterFactory(settings),
 					new FieldConverterFactory(settings),
 					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
 					new ConvertAsConverterFactory(settings),

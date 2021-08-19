@@ -50,7 +50,7 @@ namespace Nest.Xpack.Usage
 		}
 	}
 
-	public partial class KibanaUrlConfig
+	public partial class KibanaUrlConfig : Xpack.Usage.BaseUrlConfig
 	{
 		[JsonPropertyName("time_range")]
 		public string? TimeRange

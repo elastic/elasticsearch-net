@@ -20,6 +20,24 @@ namespace Nest
 {
 	internal static class ApiUrlsLookups
 	{
+		internal static ApiUrls AsyncSearchDelete = new ApiUrls(new[] { "/_async_search/{id}" });
+		internal static ApiUrls AsyncSearchGet = new ApiUrls(new[] { "/_async_search/{id}" });
+		internal static ApiUrls AsyncSearchStatus = new ApiUrls(new[] { "/_async_search/status/{id}" });
+		internal static ApiUrls AsyncSearchSubmit = new ApiUrls(new[] { "/_async_search", "/{index}/_async_search" });
+		internal static ApiUrls CrossClusterReplicationDeleteAutoFollowPattern = new ApiUrls(new[] { "/_ccr/auto_follow/{name}" });
+		internal static ApiUrls CrossClusterReplicationFollow = new ApiUrls(new[] { "/{index}/_ccr/follow" });
+		internal static ApiUrls CrossClusterReplicationFollowInfo = new ApiUrls(new[] { "/{index}/_ccr/info" });
+		internal static ApiUrls CrossClusterReplicationFollowStats = new ApiUrls(new[] { "/{index}/_ccr/stats" });
+		internal static ApiUrls CrossClusterReplicationForgetFollower = new ApiUrls(new[] { "/{index}/_ccr/forget_follower" });
+		internal static ApiUrls CrossClusterReplicationGetAutoFollowPattern = new ApiUrls(new[] { "/_ccr/auto_follow", "/_ccr/auto_follow/{name}" });
+		internal static ApiUrls CrossClusterReplicationPauseAutoFollowPattern = new ApiUrls(new[] { "/_ccr/auto_follow/{name}/pause" });
+		internal static ApiUrls CrossClusterReplicationPauseFollow = new ApiUrls(new[] { "/{index}/_ccr/pause_follow" });
+		internal static ApiUrls CrossClusterReplicationPutAutoFollowPattern = new ApiUrls(new[] { "/_ccr/auto_follow/{name}" });
+		internal static ApiUrls CrossClusterReplicationResumeAutoFollowPattern = new ApiUrls(new[] { "/_ccr/auto_follow/{name}/resume" });
+		internal static ApiUrls CrossClusterReplicationResumeFollow = new ApiUrls(new[] { "/{index}/_ccr/resume_follow" });
+		internal static ApiUrls CrossClusterReplicationStats = new ApiUrls(new[] { "/_ccr/stats" });
+		internal static ApiUrls CrossClusterReplicationUnfollow = new ApiUrls(new[] { "/{index}/_ccr/unfollow" });
+		internal static ApiUrls NoNamespaceClearScroll = new ApiUrls(new[] { "/_search/scroll" });
 		internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[] { "/_pit" });
 		internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[] { "/_cluster/allocation/explain" });
 		internal static ApiUrls ClusterDeleteComponentTemplate = new ApiUrls(new[] { "/_component_template/{name}" });
@@ -35,8 +53,38 @@ namespace Nest
 		internal static ApiUrls ClusterReroute = new ApiUrls(new[] { "/_cluster/reroute" });
 		internal static ApiUrls ClusterState = new ApiUrls(new[] { "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}" });
 		internal static ApiUrls ClusterStats = new ApiUrls(new[] { "/_cluster/stats", "/_cluster/stats/nodes/{node_id}" });
+		internal static ApiUrls NoNamespaceCount = new ApiUrls(new[] { "/_count", "/{index}/_count" });
+		internal static ApiUrls NoNamespaceCreate = new ApiUrls(new[] { "/{index}/_create/{id}" });
 		internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[] { "/{index}/_doc/{id}" });
+		internal static ApiUrls NoNamespaceDeleteByQuery = new ApiUrls(new[] { "/{index}/_delete_by_query" });
+		internal static ApiUrls EnrichDeletePolicy = new ApiUrls(new[] { "/_enrich/policy/{name}" });
+		internal static ApiUrls EnrichExecutePolicy = new ApiUrls(new[] { "/_enrich/policy/{name}/_execute" });
+		internal static ApiUrls EnrichGetPolicy = new ApiUrls(new[] { "/_enrich/policy/{name}", "/_enrich/policy/" });
+		internal static ApiUrls EnrichPutPolicy = new ApiUrls(new[] { "/_enrich/policy/{name}" });
+		internal static ApiUrls EnrichStats = new ApiUrls(new[] { "/_enrich/_stats" });
+		internal static ApiUrls EqlDelete = new ApiUrls(new[] { "/_eql/search/{id}" });
+		internal static ApiUrls EqlGet = new ApiUrls(new[] { "/_eql/search/{id}" });
+		internal static ApiUrls EqlGetStatus = new ApiUrls(new[] { "/_eql/search/status/{id}" });
+		internal static ApiUrls EqlSearch = new ApiUrls(new[] { "/{index}/_eql/search" });
 		internal static ApiUrls NoNamespaceExists = new ApiUrls(new[] { "/{index}/_doc/{id}" });
+		internal static ApiUrls NoNamespaceExistsSource = new ApiUrls(new[] { "/{index}/_source/{id}" });
+		internal static ApiUrls NoNamespaceExplain = new ApiUrls(new[] { "/{index}/_explain/{id}" });
+		internal static ApiUrls NoNamespaceFieldCaps = new ApiUrls(new[] { "/_field_caps", "/{index}/_field_caps" });
+		internal static ApiUrls NoNamespaceGet = new ApiUrls(new[] { "/{index}/_doc/{id}" });
+		internal static ApiUrls NoNamespaceGetScript = new ApiUrls(new[] { "/_scripts/{id}" });
+		internal static ApiUrls NoNamespaceGetScriptContext = new ApiUrls(new[] { "/_script_context" });
+		internal static ApiUrls NoNamespaceGetScriptLanguages = new ApiUrls(new[] { "/_script_language" });
+		internal static ApiUrls GraphExplore = new ApiUrls(new[] { "/{index}/_graph/explore" });
+		internal static ApiUrls IndexLifecycleManagementDeleteLifecycle = new ApiUrls(new[] { "/_ilm/policy/{policy}" });
+		internal static ApiUrls IndexLifecycleManagementExplainLifecycle = new ApiUrls(new[] { "/{index}/_ilm/explain" });
+		internal static ApiUrls IndexLifecycleManagementGetLifecycle = new ApiUrls(new[] { "/_ilm/policy/{policy}", "/_ilm/policy" });
+		internal static ApiUrls IndexLifecycleManagementGetStatus = new ApiUrls(new[] { "/_ilm/status" });
+		internal static ApiUrls IndexLifecycleManagementMoveToStep = new ApiUrls(new[] { "/_ilm/move/{index}" });
+		internal static ApiUrls IndexLifecycleManagementPutLifecycle = new ApiUrls(new[] { "/_ilm/policy/{policy}" });
+		internal static ApiUrls IndexLifecycleManagementRemovePolicy = new ApiUrls(new[] { "/{index}/_ilm/remove" });
+		internal static ApiUrls IndexLifecycleManagementRetry = new ApiUrls(new[] { "/{index}/_ilm/retry" });
+		internal static ApiUrls IndexLifecycleManagementStart = new ApiUrls(new[] { "/_ilm/start" });
+		internal static ApiUrls IndexLifecycleManagementStop = new ApiUrls(new[] { "/_ilm/stop" });
 		internal static ApiUrls NoNamespaceIndex = new ApiUrls(new[] { "/{index}/_doc/{id}", "/{index}/_doc" });
 		internal static ApiUrls IndexManagementAddBlock = new ApiUrls(new[] { "/{index}/_block/{block}" });
 		internal static ApiUrls IndexManagementAnalyze = new ApiUrls(new[] { "/_analyze", "/{index}/_analyze" });
@@ -88,8 +136,17 @@ namespace Nest
 		internal static ApiUrls IndexManagementStats = new ApiUrls(new[] { "/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}" });
 		internal static ApiUrls IndexManagementUpdateAliases = new ApiUrls(new[] { "/_aliases" });
 		internal static ApiUrls IndexManagementValidateQuery = new ApiUrls(new[] { "/_validate/query", "/{index}/_validate/query" });
+		internal static ApiUrls NoNamespaceInfo = new ApiUrls(new[] { "/" });
 		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/_pit", "/{index}/_pit" });
 		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
+		internal static ApiUrls NoNamespacePutScript = new ApiUrls(new[] { "/_scripts/{id}", "/_scripts/{id}/{context}" });
+		internal static ApiUrls NoNamespaceReindex = new ApiUrls(new[] { "/_reindex" });
+		internal static ApiUrls NoNamespaceReindexRethrottle = new ApiUrls(new[] { "/_reindex/{task_id}/_rethrottle" });
+		internal static ApiUrls NoNamespaceScroll = new ApiUrls(new[] { "/_search/scroll" });
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
+		internal static ApiUrls NoNamespaceSearchShards = new ApiUrls(new[] { "/_search_shards", "/{index}/_search_shards" });
+		internal static ApiUrls NoNamespaceSearchTemplate = new ApiUrls(new[] { "/_search/template", "/{index}/_search/template" });
+		internal static ApiUrls NoNamespaceTermsEnum = new ApiUrls(new[] { "/{index}/_terms_enum" });
+		internal static ApiUrls NoNamespaceTermvectors = new ApiUrls(new[] { "/{index}/_termvectors/{id}", "/{index}/_termvectors" });
 	}
 }

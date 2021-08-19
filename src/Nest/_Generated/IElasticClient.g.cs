@@ -16,7 +16,13 @@
 //
 // ------------------------------------------------
 
+using Nest.AsyncSearch;
 using Nest.Cluster;
+using Nest.CrossClusterReplication;
+using Nest.Enrich;
+using Nest.Eql;
+using Nest.Graph;
+using Nest.IndexLifecycleManagement;
 using Nest.IndexManagement;
 using System;
 using System.Threading;
@@ -27,26 +33,86 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
+		AsyncSearchNamespace AsyncSearch { get; }
+
+		CrossClusterReplicationNamespace CrossClusterReplication { get; }
+
 		ClusterNamespace Cluster { get; }
+
+		EnrichNamespace Enrich { get; }
+
+		EqlNamespace Eql { get; }
+
+		GraphNamespace Graph { get; }
+
+		IndexLifecycleManagementNamespace IndexLifecycleManagement { get; }
 
 		IndexManagementNamespace IndexManagement { get; }
 
+		ClearScrollResponse ClearScroll(IClearScrollRequest request);
+		Task<ClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken cancellationToken = default);
+		ClearScrollResponse ClearScroll(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null);
+		Task<ClearScrollResponse> ClearScrollAsync(Func<ClearScrollDescriptor, IClearScrollRequest> selector = null, CancellationToken cancellationToken = default);
 		ClosePointInTimeResponse ClosePointInTime(IClosePointInTimeRequest request);
 		Task<ClosePointInTimeResponse> ClosePointInTimeAsync(IClosePointInTimeRequest request, CancellationToken cancellationToken = default);
 		ClosePointInTimeResponse ClosePointInTime(Func<ClosePointInTimeDescriptor, IClosePointInTimeRequest> selector = null);
 		Task<ClosePointInTimeResponse> ClosePointInTimeAsync(Func<ClosePointInTimeDescriptor, IClosePointInTimeRequest> selector = null, CancellationToken cancellationToken = default);
+		CountResponse Count(ICountRequest request);
+		Task<CountResponse> CountAsync(ICountRequest request, CancellationToken cancellationToken = default);
+		CountResponse Count(Func<CountDescriptor, ICountRequest> selector = null);
+		Task<CountResponse> CountAsync(Func<CountDescriptor, ICountRequest> selector = null, CancellationToken cancellationToken = default);
+		CreateResponse Create<TDocument>(ICreateRequest<TDocument> request);
+		Task<CreateResponse> CreateAsync<TDocument>(ICreateRequest<TDocument> request, CancellationToken cancellationToken = default);
+		CreateResponse Create<TDocument>(TDocument document, Nest.IndexName index, Nest.Id id, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector = null);
+		Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Nest.IndexName index, Nest.Id id, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector = null, CancellationToken cancellationToken = default);
 		DeleteResponse Delete(IDeleteRequest request);
 		Task<DeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default);
 		DeleteResponse Delete(Nest.IndexName index, Nest.Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null);
 		Task<DeleteResponse> DeleteAsync(Nest.IndexName index, Nest.Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null, CancellationToken cancellationToken = default);
+		DeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request);
+		Task<DeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken cancellationToken = default);
+		DeleteByQueryResponse DeleteByQuery(Nest.Indices index, Func<DeleteByQueryDescriptor, IDeleteByQueryRequest> selector = null);
+		Task<DeleteByQueryResponse> DeleteByQueryAsync(Nest.Indices index, Func<DeleteByQueryDescriptor, IDeleteByQueryRequest> selector = null, CancellationToken cancellationToken = default);
 		ExistsResponse Exists(IExistsRequest request);
 		Task<ExistsResponse> ExistsAsync(IExistsRequest request, CancellationToken cancellationToken = default);
 		ExistsResponse Exists(Nest.IndexName index, Nest.Id id, Func<ExistsDescriptor, IExistsRequest> selector = null);
 		Task<ExistsResponse> ExistsAsync(Nest.IndexName index, Nest.Id id, Func<ExistsDescriptor, IExistsRequest> selector = null, CancellationToken cancellationToken = default);
+		ExistsSourceResponse ExistsSource(IExistsSourceRequest request);
+		Task<ExistsSourceResponse> ExistsSourceAsync(IExistsSourceRequest request, CancellationToken cancellationToken = default);
+		ExistsSourceResponse ExistsSource(Nest.IndexName index, Nest.Id id, Func<ExistsSourceDescriptor, IExistsSourceRequest> selector = null);
+		Task<ExistsSourceResponse> ExistsSourceAsync(Nest.IndexName index, Nest.Id id, Func<ExistsSourceDescriptor, IExistsSourceRequest> selector = null, CancellationToken cancellationToken = default);
+		ExplainResponse<TDocument> Explain<TDocument>(IExplainRequest request);
+		Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest request, CancellationToken cancellationToken = default);
+		ExplainResponse<TDocument> Explain<TDocument>(Nest.IndexName index, Nest.Id id, Func<ExplainDescriptor, IExplainRequest> selector = null);
+		Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Nest.IndexName index, Nest.Id id, Func<ExplainDescriptor, IExplainRequest> selector = null, CancellationToken cancellationToken = default);
+		FieldCapsResponse FieldCaps(IFieldCapsRequest request);
+		Task<FieldCapsResponse> FieldCapsAsync(IFieldCapsRequest request, CancellationToken cancellationToken = default);
+		FieldCapsResponse FieldCaps(Func<FieldCapsDescriptor, IFieldCapsRequest> selector = null);
+		Task<FieldCapsResponse> FieldCapsAsync(Func<FieldCapsDescriptor, IFieldCapsRequest> selector = null, CancellationToken cancellationToken = default);
+		GetResponse<TDocument> Get<TDocument>(IGetRequest request);
+		Task<GetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken cancellationToken = default);
+		GetResponse<TDocument> Get<TDocument>(Nest.IndexName index, Nest.Id id, Func<GetDescriptor, IGetRequest> selector = null);
+		Task<GetResponse<TDocument>> GetAsync<TDocument>(Nest.IndexName index, Nest.Id id, Func<GetDescriptor, IGetRequest> selector = null, CancellationToken cancellationToken = default);
+		GetScriptResponse GetScript(IGetScriptRequest request);
+		Task<GetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken cancellationToken = default);
+		GetScriptResponse GetScript(Nest.Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null);
+		Task<GetScriptResponse> GetScriptAsync(Nest.Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null, CancellationToken cancellationToken = default);
+		GetScriptContextResponse GetScriptContext(IGetScriptContextRequest request);
+		Task<GetScriptContextResponse> GetScriptContextAsync(IGetScriptContextRequest request, CancellationToken cancellationToken = default);
+		GetScriptContextResponse GetScriptContext(Func<GetScriptContextDescriptor, IGetScriptContextRequest> selector = null);
+		Task<GetScriptContextResponse> GetScriptContextAsync(Func<GetScriptContextDescriptor, IGetScriptContextRequest> selector = null, CancellationToken cancellationToken = default);
+		GetScriptLanguagesResponse GetScriptLanguages(IGetScriptLanguagesRequest request);
+		Task<GetScriptLanguagesResponse> GetScriptLanguagesAsync(IGetScriptLanguagesRequest request, CancellationToken cancellationToken = default);
+		GetScriptLanguagesResponse GetScriptLanguages(Func<GetScriptLanguagesDescriptor, IGetScriptLanguagesRequest> selector = null);
+		Task<GetScriptLanguagesResponse> GetScriptLanguagesAsync(Func<GetScriptLanguagesDescriptor, IGetScriptLanguagesRequest> selector = null, CancellationToken cancellationToken = default);
 		IndexResponse Index<TDocument>(IIndexRequest<TDocument> request);
 		Task<IndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken cancellationToken = default);
 		IndexResponse Index<TDocument>(TDocument document, Nest.IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null);
 		Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Nest.IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null, CancellationToken cancellationToken = default);
+		InfoResponse Info(IInfoRequest request);
+		Task<InfoResponse> InfoAsync(IInfoRequest request, CancellationToken cancellationToken = default);
+		InfoResponse Info(Func<InfoDescriptor, IInfoRequest> selector = null);
+		Task<InfoResponse> InfoAsync(Func<InfoDescriptor, IInfoRequest> selector = null, CancellationToken cancellationToken = default);
 		OpenPointInTimeResponse OpenPointInTime(IOpenPointInTimeRequest request);
 		Task<OpenPointInTimeResponse> OpenPointInTimeAsync(IOpenPointInTimeRequest request, CancellationToken cancellationToken = default);
 		OpenPointInTimeResponse OpenPointInTime(Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null);
@@ -57,9 +123,41 @@ namespace Nest
 		Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default);
 		PingResponse Ping(Func<PingDescriptor, IPingRequest> selector = null);
 		Task<PingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null, CancellationToken cancellationToken = default);
+		PutScriptResponse PutScript(IPutScriptRequest request);
+		Task<PutScriptResponse> PutScriptAsync(IPutScriptRequest request, CancellationToken cancellationToken = default);
+		PutScriptResponse PutScript(Nest.Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector = null);
+		Task<PutScriptResponse> PutScriptAsync(Nest.Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector = null, CancellationToken cancellationToken = default);
+		ReindexResponse Reindex(IReindexRequest request);
+		Task<ReindexResponse> ReindexAsync(IReindexRequest request, CancellationToken cancellationToken = default);
+		ReindexResponse Reindex(Func<ReindexDescriptor, IReindexRequest> selector = null);
+		Task<ReindexResponse> ReindexAsync(Func<ReindexDescriptor, IReindexRequest> selector = null, CancellationToken cancellationToken = default);
+		ReindexRethrottleResponse ReindexRethrottle(IReindexRethrottleRequest request);
+		Task<ReindexRethrottleResponse> ReindexRethrottleAsync(IReindexRethrottleRequest request, CancellationToken cancellationToken = default);
+		ReindexRethrottleResponse ReindexRethrottle(Nest.Id task_id, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null);
+		Task<ReindexRethrottleResponse> ReindexRethrottleAsync(Nest.Id task_id, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null, CancellationToken cancellationToken = default);
+		ScrollResponse<TDocument> Scroll<TDocument>(IScrollRequest request);
+		Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(IScrollRequest request, CancellationToken cancellationToken = default);
+		ScrollResponse<TDocument> Scroll<TDocument>(Func<ScrollDescriptor, IScrollRequest> selector = null);
+		Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(Func<ScrollDescriptor, IScrollRequest> selector = null, CancellationToken cancellationToken = default);
 		SearchResponse<TDocument> Search<TDocument>(ISearchRequest request);
 		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken cancellationToken = default);
 		SearchResponse<TDocument> Search<TDocument>(Func<SearchDescriptor, ISearchRequest> selector = null);
 		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchDescriptor, ISearchRequest> selector = null, CancellationToken cancellationToken = default);
+		SearchShardsResponse SearchShards(ISearchShardsRequest request);
+		Task<SearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken cancellationToken = default);
+		SearchShardsResponse SearchShards(Func<SearchShardsDescriptor, ISearchShardsRequest> selector = null);
+		Task<SearchShardsResponse> SearchShardsAsync(Func<SearchShardsDescriptor, ISearchShardsRequest> selector = null, CancellationToken cancellationToken = default);
+		SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(ISearchTemplateRequest request);
+		Task<SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(ISearchTemplateRequest request, CancellationToken cancellationToken = default);
+		SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(Func<SearchTemplateDescriptor, ISearchTemplateRequest> selector = null);
+		Task<SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(Func<SearchTemplateDescriptor, ISearchTemplateRequest> selector = null, CancellationToken cancellationToken = default);
+		TermsEnumResponse TermsEnum(ITermsEnumRequest request);
+		Task<TermsEnumResponse> TermsEnumAsync(ITermsEnumRequest request, CancellationToken cancellationToken = default);
+		TermsEnumResponse TermsEnum(Nest.IndexName index, Func<TermsEnumDescriptor, ITermsEnumRequest> selector = null);
+		Task<TermsEnumResponse> TermsEnumAsync(Nest.IndexName index, Func<TermsEnumDescriptor, ITermsEnumRequest> selector = null, CancellationToken cancellationToken = default);
+		TermvectorsResponse Termvectors<TDocument>(ITermvectorsRequest<TDocument> request);
+		Task<TermvectorsResponse> TermvectorsAsync<TDocument>(ITermvectorsRequest<TDocument> request, CancellationToken cancellationToken = default);
+		TermvectorsResponse Termvectors<TDocument>(TDocument document, Nest.IndexName index, Func<TermvectorsDescriptor<TDocument>, ITermvectorsRequest<TDocument>> selector = null);
+		Task<TermvectorsResponse> TermvectorsAsync<TDocument>(TDocument document, Nest.IndexName index, Func<TermvectorsDescriptor<TDocument>, ITermvectorsRequest<TDocument>> selector = null, CancellationToken cancellationToken = default);
 	}
 }

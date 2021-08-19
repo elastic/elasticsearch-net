@@ -34,12 +34,12 @@ namespace Nest
 			var genericArgs = typeToConvert.GetGenericArguments();
 
 			if (genericArgs.Any() && genericArgs[0].GetInterfaces()
-				.Any(x => x.UnderlyingSystemType == typeof(IProxyRequest)))
+				.Any(x => x.UnderlyingSystemType == typeof(ICustomJsonWriter)))
 			{
 				var elementType = typeToConvert.GetGenericArguments()[0];
 
 				return (JsonConverter)Activator.CreateInstance(
-					typeof(ProxyRequestConverter<>).MakeGenericType(att?.ConvertType.MakeGenericType(elementType) ??
+					typeof(CustomJsonWriterConverter<>).MakeGenericType(att?.ConvertType.MakeGenericType(elementType) ??
 					                                                elementType),
 					BindingFlags.Instance | BindingFlags.Public,
 					args: new object[] {_settings},
