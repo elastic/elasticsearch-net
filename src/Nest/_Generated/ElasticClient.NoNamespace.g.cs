@@ -185,12 +185,12 @@ namespace Nest
 
 		public CreateResponse Create<TDocument>(TDocument document, Nest.IndexName index, Nest.Id id, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector = null)
 		{
-			return Create(selector.InvokeOrDefault(new CreateDescriptor<TDocument>(index, id)));
+			return Create<TDocument>(selector.InvokeOrDefault(new CreateDescriptor<TDocument>(index, id)));
 		}
 
 		public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Nest.IndexName index, Nest.Id id, Func<CreateDescriptor<TDocument>, ICreateRequest<TDocument>> selector = null, CancellationToken cancellationToken = default)
 		{
-			return CreateAsync(selector.InvokeOrDefault(new CreateDescriptor<TDocument>(index, id)), cancellationToken);
+			return CreateAsync<TDocument>(selector.InvokeOrDefault(new CreateDescriptor<TDocument>(index, id)), cancellationToken);
 		}
 
 		public DeleteResponse Delete(IDeleteRequest request)
@@ -405,12 +405,12 @@ namespace Nest
 
 		public IndexResponse Index<TDocument>(TDocument document, Nest.IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null)
 		{
-			return Index(selector.InvokeOrDefault(new IndexDescriptor<TDocument>(index)));
+			return Index<TDocument>(selector.InvokeOrDefault(new IndexDescriptor<TDocument>(index)));
 		}
 
 		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Nest.IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null, CancellationToken cancellationToken = default)
 		{
-			return IndexAsync(selector.InvokeOrDefault(new IndexDescriptor<TDocument>(index)), cancellationToken);
+			return IndexAsync<TDocument>(selector.InvokeOrDefault(new IndexDescriptor<TDocument>(index)), cancellationToken);
 		}
 
 		public InfoResponse Info(IInfoRequest request)
@@ -543,6 +543,26 @@ namespace Nest
 			return ReindexRethrottleAsync(selector.InvokeOrDefault(new ReindexRethrottleDescriptor(task_id)), cancellationToken);
 		}
 
+		public RenderSearchTemplateResponse RenderSearchTemplate(IRenderSearchTemplateRequest request)
+		{
+			return DoRequest<IRenderSearchTemplateRequest, RenderSearchTemplateResponse>(request, request.RequestParameters);
+		}
+
+		public Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IRenderSearchTemplateRequest, RenderSearchTemplateResponse>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public RenderSearchTemplateResponse RenderSearchTemplate(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector = null)
+		{
+			return RenderSearchTemplate(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()));
+		}
+
+		public Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector = null, CancellationToken cancellationToken = default)
+		{
+			return RenderSearchTemplateAsync(selector.InvokeOrDefault(new RenderSearchTemplateDescriptor()), cancellationToken);
+		}
+
 		public ScrollResponse<TDocument> Scroll<TDocument>(IScrollRequest request)
 		{
 			return DoRequest<IScrollRequest, ScrollResponse<TDocument>>(request, request.RequestParameters);
@@ -655,12 +675,32 @@ namespace Nest
 
 		public TermvectorsResponse Termvectors<TDocument>(TDocument document, Nest.IndexName index, Func<TermvectorsDescriptor<TDocument>, ITermvectorsRequest<TDocument>> selector = null)
 		{
-			return Termvectors(selector.InvokeOrDefault(new TermvectorsDescriptor<TDocument>(index)));
+			return Termvectors<TDocument>(selector.InvokeOrDefault(new TermvectorsDescriptor<TDocument>(index)));
 		}
 
 		public Task<TermvectorsResponse> TermvectorsAsync<TDocument>(TDocument document, Nest.IndexName index, Func<TermvectorsDescriptor<TDocument>, ITermvectorsRequest<TDocument>> selector = null, CancellationToken cancellationToken = default)
 		{
-			return TermvectorsAsync(selector.InvokeOrDefault(new TermvectorsDescriptor<TDocument>(index)), cancellationToken);
+			return TermvectorsAsync<TDocument>(selector.InvokeOrDefault(new TermvectorsDescriptor<TDocument>(index)), cancellationToken);
+		}
+
+		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
+		{
+			return DoRequest<IUpdateRequest<TDocument,TPartialDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters);
+		}
+
+		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request, CancellationToken cancellationToken = default)
+		{
+			return DoRequestAsync<IUpdateRequest<TDocument,TPartialDocument>, UpdateResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
+		}
+
+		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Nest.IndexName index, Nest.Id id, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument,TPartialDocument>> selector = null)
+		{
+			return Update<TDocument, TPartialDocument>(selector.InvokeOrDefault(new UpdateDescriptor<TDocument, TPartialDocument>(index, id)));
+		}
+
+		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Nest.IndexName index, Nest.Id id, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument,TPartialDocument>> selector = null, CancellationToken cancellationToken = default)
+		{
+			return UpdateAsync<TDocument, TPartialDocument>(selector.InvokeOrDefault(new UpdateDescriptor<TDocument, TPartialDocument>(index, id)), cancellationToken);
 		}
 	}
 }

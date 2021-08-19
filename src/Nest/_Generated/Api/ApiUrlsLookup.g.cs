@@ -161,6 +161,7 @@ namespace Nest
 		internal static ApiUrls NoNamespacePutScript = new ApiUrls(new[] { "/_scripts/{id}", "/_scripts/{id}/{context}" });
 		internal static ApiUrls NoNamespaceReindex = new ApiUrls(new[] { "/_reindex" });
 		internal static ApiUrls NoNamespaceReindexRethrottle = new ApiUrls(new[] { "/_reindex/{task_id}/_rethrottle" });
+		internal static ApiUrls NoNamespaceRenderSearchTemplate = new ApiUrls(new[] { "/_render/template", "/_render/template/{id}" });
 		internal static ApiUrls NoNamespaceScroll = new ApiUrls(new[] { "/_search/scroll" });
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
 		internal static ApiUrls NoNamespaceSearchShards = new ApiUrls(new[] { "/_search_shards", "/{index}/_search_shards" });
@@ -231,6 +232,7 @@ namespace Nest
 		internal static ApiUrls NoNamespaceTermsEnum = new ApiUrls(new[] { "/{index}/_terms_enum" });
 		internal static ApiUrls NoNamespaceTermvectors = new ApiUrls(new[] { "/{index}/_termvectors/{id}", "/{index}/_termvectors" });
 		internal static ApiUrls TextStructureFindStructure = new ApiUrls(new[] { "/_text_structure/find_structure" });
+		internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "/{index}/_update/{id}" });
 		internal static ApiUrls WatcherAckWatch = new ApiUrls(new[] { "/_watcher/watch/{watch_id}/_ack", "/_watcher/watch/{watch_id}/_ack/{action_id}" });
 		internal static ApiUrls WatcherActivateWatch = new ApiUrls(new[] { "/_watcher/watch/{watch_id}/_activate" });
 		internal static ApiUrls WatcherDeactivateWatch = new ApiUrls(new[] { "/_watcher/watch/{watch_id}/_deactivate" });
