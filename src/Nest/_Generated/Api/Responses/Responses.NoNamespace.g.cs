@@ -830,6 +830,20 @@ namespace Nest
 		}
 	}
 
+	public partial class RenderSearchTemplateResponse : ResponseBase
+	{
+		[JsonPropertyName("template_output")]
+		public Dictionary<string, object> TemplateOutput
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class ScrollResponse<TDocument> : ResponseBase
 	{
 	}
@@ -1191,6 +1205,20 @@ namespace Nest
 
 		[JsonPropertyName("_version")]
 		public Nest.VersionNumber Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class UpdateResponse<TDocument> : WriteResponseBase
+	{
+		[JsonPropertyName("get")]
+		public Nest.InlineGet<TDocument>? Get
 		{
 			get;
 #if NET5_0

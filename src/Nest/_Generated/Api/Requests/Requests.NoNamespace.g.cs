@@ -983,6 +983,59 @@ namespace Nest
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
 
+	[ConvertAs(typeof(RenderSearchTemplateRequest))]
+	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters>
+	{
+	}
+
+	public partial class RenderSearchTemplateRequest : PlainRequestBase<RenderSearchTemplateRequestParameters>, IRenderSearchTemplateRequest
+	{
+		protected IRenderSearchTemplateRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceRenderSearchTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => File is null && Params is null && Source is null;
+
+		///<summary>/_render/template</summary>
+        public RenderSearchTemplateRequest() : base()
+		{
+		}
+
+		[JsonPropertyName("file")]
+		public string? File
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("params")]
+		public Dictionary<string, object>? Params
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source")]
+		public string? Source
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	[ConvertAs(typeof(ScrollRequest))]
 	public partial interface IScrollRequest : IRequest<ScrollRequestParameters>
 	{
@@ -1641,6 +1694,120 @@ namespace Nest
 
 		[JsonPropertyName("per_field_analyzer")]
 		public Dictionary<Nest.Field, string>? PerFieldAnalyzer
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(UpdateRequest<,>))]
+	public partial interface IUpdateRequest<TDocument,TPartialDocument> : IRequest<UpdateRequestParameters>
+	{
+	}
+
+	public partial class UpdateRequest<TDocument, TPartialDocument> : PlainRequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument, TPartialDocument>
+	{
+		protected IUpdateRequest<TDocument,TPartialDocument> Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdate;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/{index}/_update/{id}</summary>
+        public UpdateRequest(Nest.IndexName index, Nest.Id id) : base(r => r.Required("index", index).Required("id", id))
+		{
+		}
+
+		[JsonIgnore]
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+
+		[JsonIgnore]
+		public Nest.SequenceNumber? IfSeqNo { get => Q<Nest.SequenceNumber?>("if_seq_no"); set => Q("if_seq_no", value); }
+
+		[JsonIgnore]
+		public string? Lang { get => Q<string?>("lang"); set => Q("lang", value); }
+
+		[JsonIgnore]
+		public Nest.Refresh? Refresh { get => Q<Nest.Refresh?>("refresh"); set => Q("refresh", value); }
+
+		[JsonIgnore]
+		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+		[JsonIgnore]
+		public long? RetryOnConflict { get => Q<long?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
+
+		[JsonIgnore]
+		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
+
+		[JsonIgnore]
+		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonIgnore]
+		public Nest.WaitForActiveShards? WaitForActiveShards { get => Q<Nest.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+		[JsonIgnore]
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+		[JsonPropertyName("detect_noop")]
+		public bool? DetectNoop
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("doc")]
+		public TPartialDocument? Doc
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("doc_as_upsert")]
+		public bool? DocAsUpsert
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("scripted_upsert")]
+		public bool? ScriptedUpsert
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("upsert")]
+		public TDocument? Upsert
 		{
 			get;
 #if NET5_0

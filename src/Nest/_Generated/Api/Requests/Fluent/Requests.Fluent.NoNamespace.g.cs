@@ -277,6 +277,17 @@ namespace Nest
 		}
 	}
 
+	public partial class RenderSearchTemplateDescriptor : RequestDescriptorBase<RenderSearchTemplateDescriptor, RenderSearchTemplateRequestParameters, IRenderSearchTemplateRequest>, IRenderSearchTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceRenderSearchTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_render/template</summary>
+        public RenderSearchTemplateDescriptor() : base()
+		{
+		}
+	}
+
 	public partial class ScrollDescriptor : RequestDescriptorBase<ScrollDescriptor, ScrollRequestParameters, IScrollRequest>, IScrollRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceScroll;
@@ -359,6 +370,17 @@ namespace Nest
 
 		///<summary>/{index}/_termvectors</summary>
         public TermvectorsDescriptor(Nest.IndexName index) : base(r => r.Required("index", index))
+		{
+		}
+	}
+
+	public partial class UpdateDescriptor<TDocument, TPartialDocument> : RequestDescriptorBase<UpdateDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters, IUpdateRequest<TDocument,TPartialDocument>>, IUpdateRequest<TDocument,TPartialDocument>
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdate;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_update/{id}</summary>
+        public UpdateDescriptor(Nest.IndexName index, Nest.Id id) : base(r => r.Required("index", index).Required("id", id))
 		{
 		}
 	}
