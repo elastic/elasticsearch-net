@@ -5,11 +5,11 @@ using System.Text.Json.Serialization;
 
 namespace Nest
 {
-	public class ProxyRequestConverterFactory : JsonConverterFactory
+	public class CustomJsonWriterConverterFactory : JsonConverterFactory
 	{
 		private readonly IElasticsearchClientSettings _settings;
 
-		public ProxyRequestConverterFactory(IElasticsearchClientSettings settings) => _settings = settings;
+		public CustomJsonWriterConverterFactory(IElasticsearchClientSettings settings) => _settings = settings;
 
 		public override bool CanConvert(Type typeToConvert)
 		{
@@ -21,7 +21,7 @@ namespace Nest
 			foreach (var item in interfaces)
 			{
 				var type = item.UnderlyingSystemType;
-				if (type == typeof(IProxyRequest))
+				if (type == typeof(ICustomJsonWriter))
 					canConvert = true;
 			}
 
@@ -35,8 +35,7 @@ namespace Nest
 			var att = typeToConvert.GetCustomAttribute<ConvertAsAttribute>();
 
 			var converter = (JsonConverter)Activator.CreateInstance(
-				typeof(ProxyRequestConverter<>).MakeGenericType(att?.ConvertType.MakeGenericType(elementType) ??
-				                                                elementType),
+				typeof(CustomJsonWriterConverter<>).MakeGenericType(att?.ConvertType.MakeGenericType(elementType) ?? elementType),
 				BindingFlags.Instance | BindingFlags.Public,
 				args: new object[] {_settings},
 				binder: null,

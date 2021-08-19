@@ -23,6 +23,26 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest
 {
+	[ConvertAs(typeof(ClearScrollRequest))]
+	public partial interface IClearScrollRequest : IRequest<ClearScrollRequestParameters>
+	{
+	}
+
+	public partial class ClearScrollRequest : PlainRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
+	{
+		protected IClearScrollRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClearScroll;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+
+		///<summary>/_search/scroll</summary>
+        public ClearScrollRequest() : base()
+		{
+		}
+	}
+
 	[ConvertAs(typeof(ClosePointInTimeRequest))]
 	public partial interface IClosePointInTimeRequest : IRequest<ClosePointInTimeRequestParameters>
 	{
@@ -41,9 +61,79 @@ namespace Nest
         public ClosePointInTimeRequest() : base()
 		{
 		}
+	}
 
-		[JsonPropertyName("id")]
-		public Nest.Id Id
+	[ConvertAs(typeof(CountRequest))]
+	public partial interface ICountRequest : IRequest<CountRequestParameters>
+	{
+	}
+
+	public partial class CountRequest : PlainRequestBase<CountRequestParameters>, ICountRequest
+	{
+		protected ICountRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => Query is null;
+
+		///<summary>/_count</summary>
+        public CountRequest() : base()
+		{
+		}
+
+		///<summary>/{index}/_count</summary>
+        public CountRequest(Nest.Indices? index) : base(r => r.Optional("index", index))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+		[JsonIgnore]
+		public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
+
+		[JsonIgnore]
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+
+		[JsonIgnore]
+		public Nest.DefaultOperator? DefaultOperator { get => Q<Nest.DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+
+		[JsonIgnore]
+		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
+
+		[JsonIgnore]
+		public Nest.ExpandWildcards? ExpandWildcards { get => Q<Nest.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+		[JsonIgnore]
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+
+		[JsonIgnore]
+		public double? MinScore { get => Q<double?>("min_score"); set => Q("min_score", value); }
+
+		[JsonIgnore]
+		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+		[JsonIgnore]
+		public string? QueryOnQueryString { get => Q<string?>("query_on_query_string"); set => Q("query_on_query_string", value); }
+
+		[JsonIgnore]
+		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
+
+		[JsonIgnore]
+		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
+
+		[JsonIgnore]
+		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+		[JsonPropertyName("query")]
+		public Nest.QueryDsl.QueryContainer? Query
 		{
 			get;
 #if NET5_0
@@ -52,6 +142,47 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	[ConvertAs(typeof(CreateRequest<>))]
+	public partial interface ICreateRequest<TDocument> : IRequest<CreateRequestParameters>
+	{
+	}
+
+	public partial class CreateRequest<TDocument> : PlainRequestBase<CreateRequestParameters>, ICreateRequest<TDocument>
+	{
+		protected ICreateRequest<TDocument> Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCreate;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/{index}/_create/{id}</summary>
+        public CreateRequest(Nest.IndexName index, Nest.Id id) : base(r => r.Required("index", index).Required("id", id))
+		{
+		}
+
+		[JsonIgnore]
+		public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
+
+		[JsonIgnore]
+		public Nest.Refresh? Refresh { get => Q<Nest.Refresh?>("refresh"); set => Q("refresh", value); }
+
+		[JsonIgnore]
+		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonIgnore]
+		public Nest.VersionNumber? Version { get => Q<Nest.VersionNumber?>("version"); set => Q("version", value); }
+
+		[JsonIgnore]
+		public Nest.VersionType? VersionType { get => Q<Nest.VersionType?>("version_type"); set => Q("version_type", value); }
+
+		[JsonIgnore]
+		public Nest.WaitForActiveShards? WaitForActiveShards { get => Q<Nest.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
 	[ConvertAs(typeof(DeleteRequest))]
@@ -96,6 +227,147 @@ namespace Nest
 
 		[JsonIgnore]
 		public Nest.WaitForActiveShards? WaitForActiveShards { get => Q<Nest.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+	}
+
+	[ConvertAs(typeof(DeleteByQueryRequest))]
+	public partial interface IDeleteByQueryRequest : IRequest<DeleteByQueryRequestParameters>
+	{
+	}
+
+	public partial class DeleteByQueryRequest : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
+	{
+		protected IDeleteByQueryRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQuery;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/{index}/_delete_by_query</summary>
+        public DeleteByQueryRequest(Nest.Indices index) : base(r => r.Required("index", index))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+		[JsonIgnore]
+		public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
+
+		[JsonIgnore]
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+
+		[JsonIgnore]
+		public Nest.Conflicts? Conflicts { get => Q<Nest.Conflicts?>("conflicts"); set => Q("conflicts", value); }
+
+		[JsonIgnore]
+		public Nest.DefaultOperator? DefaultOperator { get => Q<Nest.DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+
+		[JsonIgnore]
+		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
+
+		[JsonIgnore]
+		public Nest.ExpandWildcards? ExpandWildcards { get => Q<Nest.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+		[JsonIgnore]
+		public long? From { get => Q<long?>("from"); set => Q("from", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+		[JsonIgnore]
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+
+		[JsonIgnore]
+		public long? MaxDocs { get => Q<long?>("max_docs"); set => Q("max_docs", value); }
+
+		[JsonIgnore]
+		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+		[JsonIgnore]
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+		[JsonIgnore]
+		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
+
+		[JsonIgnore]
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+
+		[JsonIgnore]
+		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
+
+		[JsonIgnore]
+		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Scroll { get => Q<Nest.Time?>("scroll"); set => Q("scroll", value); }
+
+		[JsonIgnore]
+		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
+
+		[JsonIgnore]
+		public Nest.Time? SearchTimeout { get => Q<Nest.Time?>("search_timeout"); set => Q("search_timeout", value); }
+
+		[JsonIgnore]
+		public Nest.SearchType? SearchType { get => Q<Nest.SearchType?>("search_type"); set => Q("search_type", value); }
+
+		[JsonIgnore]
+		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
+
+		[JsonIgnore]
+		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
+
+		[JsonIgnore]
+		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
+
+		[JsonIgnore]
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+		[JsonIgnore]
+		public IEnumerable<string>? Stats { get => Q<IEnumerable<string>?>("stats"); set => Q("stats", value); }
+
+		[JsonIgnore]
+		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonIgnore]
+		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
+
+		[JsonIgnore]
+		public Nest.WaitForActiveShards? WaitForActiveShards { get => Q<Nest.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+		[JsonIgnore]
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+
+		[JsonPropertyName("query")]
+		public Nest.QueryDsl.QueryContainer? Query
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("slice")]
+		public Nest.SlicedScroll? Slice
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	[ConvertAs(typeof(ExistsRequest))]
@@ -146,6 +418,290 @@ namespace Nest
 
 		[JsonIgnore]
 		public Nest.VersionType? VersionType { get => Q<Nest.VersionType?>("version_type"); set => Q("version_type", value); }
+	}
+
+	[ConvertAs(typeof(ExistsSourceRequest))]
+	public partial interface IExistsSourceRequest : IRequest<ExistsSourceRequestParameters>
+	{
+	}
+
+	public partial class ExistsSourceRequest : PlainRequestBase<ExistsSourceRequestParameters>, IExistsSourceRequest
+	{
+		protected IExistsSourceRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExistsSource;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/{index}/_source/{id}</summary>
+        public ExistsSourceRequest(Nest.IndexName index, Nest.Id id) : base(r => r.Required("index", index).Required("id", id))
+		{
+		}
+
+		[JsonIgnore]
+		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+		[JsonIgnore]
+		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+
+		[JsonIgnore]
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+		[JsonIgnore]
+		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
+
+		[JsonIgnore]
+		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("source_excludes"); set => Q("source_excludes", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("source_includes"); set => Q("source_includes", value); }
+
+		[JsonIgnore]
+		public Nest.VersionNumber? Version { get => Q<Nest.VersionNumber?>("version"); set => Q("version", value); }
+
+		[JsonIgnore]
+		public Nest.VersionType? VersionType { get => Q<Nest.VersionType?>("version_type"); set => Q("version_type", value); }
+	}
+
+	[ConvertAs(typeof(ExplainRequest))]
+	public partial interface IExplainRequest : IRequest<ExplainRequestParameters>
+	{
+	}
+
+	public partial class ExplainRequest : PlainRequestBase<ExplainRequestParameters>, IExplainRequest
+	{
+		protected IExplainRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExplain;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/{index}/_explain/{id}</summary>
+        public ExplainRequest(Nest.IndexName index, Nest.Id id) : base(r => r.Required("index", index).Required("id", id))
+		{
+		}
+
+		[JsonIgnore]
+		public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
+
+		[JsonIgnore]
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+
+		[JsonIgnore]
+		public Nest.DefaultOperator? DefaultOperator { get => Q<Nest.DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+
+		[JsonIgnore]
+		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
+
+		[JsonIgnore]
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+
+		[JsonIgnore]
+		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+		[JsonIgnore]
+		public string? QueryOnQueryString { get => Q<string?>("query_on_query_string"); set => Q("query_on_query_string", value); }
+
+		[JsonIgnore]
+		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
+
+		[JsonIgnore]
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? StoredFields { get => Q<Nest.Fields?>("stored_fields"); set => Q("stored_fields", value); }
+
+		[JsonIgnore]
+		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+		[JsonPropertyName("query")]
+		public Nest.QueryDsl.QueryContainer? Query
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(FieldCapsRequest))]
+	public partial interface IFieldCapsRequest : IRequest<FieldCapsRequestParameters>
+	{
+	}
+
+	public partial class FieldCapsRequest : PlainRequestBase<FieldCapsRequestParameters>, IFieldCapsRequest
+	{
+		protected IFieldCapsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceFieldCaps;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => IndexFilter is null;
+
+		///<summary>/_field_caps</summary>
+        public FieldCapsRequest() : base()
+		{
+		}
+
+		///<summary>/{index}/_field_caps</summary>
+        public FieldCapsRequest(Nest.Indices? index) : base(r => r.Optional("index", index))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+		[JsonIgnore]
+		public Nest.ExpandWildcards? ExpandWildcards { get => Q<Nest.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? Fields { get => Q<Nest.Fields?>("fields"); set => Q("fields", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+		[JsonIgnore]
+		public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
+
+		[JsonPropertyName("index_filter")]
+		public Nest.Global.FieldCaps.FieldCapabilitiesBodyIndexFilter? IndexFilter
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(GetRequest))]
+	public partial interface IGetRequest : IRequest<GetRequestParameters>
+	{
+	}
+
+	public partial class GetRequest : PlainRequestBase<GetRequestParameters>, IGetRequest
+	{
+		protected IGetRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGet;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/{index}/_doc/{id}</summary>
+        public GetRequest(Nest.IndexName index, Nest.Id id) : base(r => r.Required("index", index).Required("id", id))
+		{
+		}
+
+		[JsonIgnore]
+		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+		[JsonIgnore]
+		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+
+		[JsonIgnore]
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+		[JsonIgnore]
+		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
+
+		[JsonIgnore]
+		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? StoredFields { get => Q<Nest.Fields?>("stored_fields"); set => Q("stored_fields", value); }
+
+		[JsonIgnore]
+		public Nest.VersionNumber? Version { get => Q<Nest.VersionNumber?>("version"); set => Q("version", value); }
+
+		[JsonIgnore]
+		public Nest.VersionType? VersionType { get => Q<Nest.VersionType?>("version_type"); set => Q("version_type", value); }
+
+		[JsonIgnore]
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
+	}
+
+	[ConvertAs(typeof(GetScriptRequest))]
+	public partial interface IGetScriptRequest : IRequest<GetScriptRequestParameters>
+	{
+	}
+
+	public partial class GetScriptRequest : PlainRequestBase<GetScriptRequestParameters>, IGetScriptRequest
+	{
+		protected IGetScriptRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/_scripts/{id}</summary>
+        public GetScriptRequest(Nest.Id id) : base(r => r.Required("id", id))
+		{
+		}
+
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+	}
+
+	[ConvertAs(typeof(GetScriptContextRequest))]
+	public partial interface IGetScriptContextRequest : IRequest<GetScriptContextRequestParameters>
+	{
+	}
+
+	public partial class GetScriptContextRequest : PlainRequestBase<GetScriptContextRequestParameters>, IGetScriptContextRequest
+	{
+		protected IGetScriptContextRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptContext;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+
+		///<summary>/_script_context</summary>
+        public GetScriptContextRequest() : base()
+		{
+		}
+	}
+
+	[ConvertAs(typeof(GetScriptLanguagesRequest))]
+	public partial interface IGetScriptLanguagesRequest : IRequest<GetScriptLanguagesRequestParameters>
+	{
+	}
+
+	public partial class GetScriptLanguagesRequest : PlainRequestBase<GetScriptLanguagesRequestParameters>, IGetScriptLanguagesRequest
+	{
+		protected IGetScriptLanguagesRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptLanguages;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+
+		///<summary>/_script_language</summary>
+        public GetScriptLanguagesRequest() : base()
+		{
+		}
 	}
 
 	[ConvertAs(typeof(IndexRequest<>))]
@@ -206,6 +762,26 @@ namespace Nest
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 	}
 
+	[ConvertAs(typeof(InfoRequest))]
+	public partial interface IInfoRequest : IRequest<InfoRequestParameters>
+	{
+	}
+
+	public partial class InfoRequest : PlainRequestBase<InfoRequestParameters>, IInfoRequest
+	{
+		protected IInfoRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceInfo;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+
+		///<summary>/</summary>
+        public InfoRequest() : base()
+		{
+		}
+	}
+
 	[ConvertAs(typeof(OpenPointInTimeRequest))]
 	public partial interface IOpenPointInTimeRequest : IRequest<OpenPointInTimeRequestParameters>
 	{
@@ -252,6 +828,191 @@ namespace Nest
         public PingRequest() : base()
 		{
 		}
+	}
+
+	[ConvertAs(typeof(PutScriptRequest))]
+	public partial interface IPutScriptRequest : IRequest<PutScriptRequestParameters>
+	{
+	}
+
+	public partial class PutScriptRequest : PlainRequestBase<PutScriptRequestParameters>, IPutScriptRequest
+	{
+		protected IPutScriptRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePutScript;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/_scripts/{id}</summary>
+        public PutScriptRequest(Nest.Id id) : base(r => r.Required("id", id))
+		{
+		}
+
+		///<summary>/_scripts/{id}/{context}</summary>
+        public PutScriptRequest(Nest.Id id, Nest.Name? context) : base(r => r.Required("id", id).Optional("context", context))
+		{
+		}
+
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+	}
+
+	[ConvertAs(typeof(ReindexRequest))]
+	public partial interface IReindexRequest : IRequest<ReindexRequestParameters>
+	{
+	}
+
+	public partial class ReindexRequest : PlainRequestBase<ReindexRequestParameters>, IReindexRequest
+	{
+		protected IReindexRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => Conflicts is null && Dest is null && MaxDocs is null && Size is null && Source is null;
+
+		///<summary>/_reindex</summary>
+        public ReindexRequest() : base()
+		{
+		}
+
+		[JsonIgnore]
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+		[JsonIgnore]
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Scroll { get => Q<Nest.Time?>("scroll"); set => Q("scroll", value); }
+
+		[JsonIgnore]
+		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonIgnore]
+		public Nest.WaitForActiveShards? WaitForActiveShards { get => Q<Nest.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+		[JsonIgnore]
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+
+		[JsonIgnore]
+		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+		[JsonPropertyName("conflicts")]
+		public Nest.Conflicts? Conflicts
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("dest")]
+		public Nest.Global.Reindex.Destination? Dest
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_docs")]
+		public long? MaxDocs
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size")]
+		public long? Size
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source")]
+		public Nest.Global.Reindex.Source? Source
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(ReindexRethrottleRequest))]
+	public partial interface IReindexRethrottleRequest : IRequest<ReindexRethrottleRequestParameters>
+	{
+	}
+
+	public partial class ReindexRethrottleRequest : PlainRequestBase<ReindexRethrottleRequestParameters>, IReindexRethrottleRequest
+	{
+		protected IReindexRethrottleRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindexRethrottle;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/_reindex/{task_id}/_rethrottle</summary>
+        public ReindexRethrottleRequest(Nest.Id task_id) : base(r => r.Required("task_id", task_id))
+		{
+		}
+
+		[JsonIgnore]
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+	}
+
+	[ConvertAs(typeof(ScrollRequest))]
+	public partial interface IScrollRequest : IRequest<ScrollRequestParameters>
+	{
+	}
+
+	public partial class ScrollRequest : PlainRequestBase<ScrollRequestParameters>, IScrollRequest
+	{
+		protected IScrollRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceScroll;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+
+		///<summary>/_search/scroll</summary>
+        public ScrollRequest() : base()
+		{
+		}
+
+		[JsonIgnore]
+		public Nest.Time? Scroll { get => Q<Nest.Time?>("scroll"); set => Q("scroll", value); }
+
+		[JsonIgnore]
+		public Nest.ScrollId? ScrollId { get => Q<Nest.ScrollId?>("scroll_id"); set => Q("scroll_id", value); }
+
+		[JsonIgnore]
+		public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+
+		[JsonIgnore]
+		public bool? TotalHitsAsInteger { get => Q<bool?>("total_hits_as_integer"); set => Q("total_hits_as_integer", value); }
 	}
 
 	[ConvertAs(typeof(SearchRequest))]
@@ -571,6 +1332,323 @@ namespace Nest
 
 		[JsonPropertyName("runtime_mappings")]
 		public Nest.Mapping.RuntimeFields? RuntimeMappings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(SearchShardsRequest))]
+	public partial interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters>
+	{
+	}
+
+	public partial class SearchShardsRequest : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
+	{
+		protected ISearchShardsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchShards;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+
+		///<summary>/_search_shards</summary>
+        public SearchShardsRequest() : base()
+		{
+		}
+
+		///<summary>/{index}/_search_shards</summary>
+        public SearchShardsRequest(Nest.Indices? index) : base(r => r.Optional("index", index))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+		[JsonIgnore]
+		public Nest.ExpandWildcards? ExpandWildcards { get => Q<Nest.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+		[JsonIgnore]
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+		[JsonIgnore]
+		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+		[JsonIgnore]
+		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
+	}
+
+	[ConvertAs(typeof(SearchTemplateRequest))]
+	public partial interface ISearchTemplateRequest : IRequest<SearchTemplateRequestParameters>
+	{
+	}
+
+	public partial class SearchTemplateRequest : PlainRequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
+	{
+		protected ISearchTemplateRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => Params is null && Source is null;
+
+		///<summary>/_search/template</summary>
+        public SearchTemplateRequest() : base()
+		{
+		}
+
+		///<summary>/{index}/_search/template</summary>
+        public SearchTemplateRequest(Nest.Indices? index) : base(r => r.Optional("index", index))
+		{
+		}
+
+		[JsonIgnore]
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+		[JsonIgnore]
+		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+
+		[JsonIgnore]
+		public Nest.ExpandWildcards? ExpandWildcards { get => Q<Nest.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+		[JsonIgnore]
+		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+		[JsonIgnore]
+		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+		[JsonIgnore]
+		public bool? Profile { get => Q<bool?>("profile"); set => Q("profile", value); }
+
+		[JsonIgnore]
+		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Scroll { get => Q<Nest.Time?>("scroll"); set => Q("scroll", value); }
+
+		[JsonIgnore]
+		public Nest.SearchType? SearchType { get => Q<Nest.SearchType?>("search_type"); set => Q("search_type", value); }
+
+		[JsonIgnore]
+		public bool? TotalHitsAsInteger { get => Q<bool?>("total_hits_as_integer"); set => Q("total_hits_as_integer", value); }
+
+		[JsonIgnore]
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+
+		[JsonPropertyName("params")]
+		public Dictionary<string, object>? Params
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source")]
+		public string? Source
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(TermsEnumRequest))]
+	public partial interface ITermsEnumRequest : IRequest<TermsEnumRequestParameters>
+	{
+	}
+
+	public partial class TermsEnumRequest : PlainRequestBase<TermsEnumRequestParameters>, ITermsEnumRequest
+	{
+		protected ITermsEnumRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/{index}/_terms_enum</summary>
+        public TermsEnumRequest(Nest.IndexName index) : base(r => r.Required("index", index))
+		{
+		}
+
+		[JsonPropertyName("field")]
+		public Nest.Field Field
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size")]
+		public int? Size
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("timeout")]
+		public Nest.Time? Timeout
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("case_insensitive")]
+		public bool? CaseInsensitive
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_filter")]
+		public Nest.QueryDsl.QueryContainer? IndexFilter
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("string")]
+		public string? String
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("search_after")]
+		public string? SearchAfter
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(TermvectorsRequest<>))]
+	public partial interface ITermvectorsRequest<TDocument> : IRequest<TermvectorsRequestParameters>
+	{
+	}
+
+	public partial class TermvectorsRequest<TDocument> : PlainRequestBase<TermvectorsRequestParameters>, ITermvectorsRequest<TDocument>
+	{
+		protected ITermvectorsRequest<TDocument> Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermvectors;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/{index}/_termvectors/{id}</summary>
+        public TermvectorsRequest(Nest.IndexName index, Nest.Id? id) : base(r => r.Required("index", index).Optional("id", id))
+		{
+		}
+
+		///<summary>/{index}/_termvectors</summary>
+        public TermvectorsRequest(Nest.IndexName index) : base(r => r.Required("index", index))
+		{
+		}
+
+		[JsonIgnore]
+		public Nest.Fields? Fields { get => Q<Nest.Fields?>("fields"); set => Q("fields", value); }
+
+		[JsonIgnore]
+		public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
+
+		[JsonIgnore]
+		public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
+
+		[JsonIgnore]
+		public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
+
+		[JsonIgnore]
+		public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
+
+		[JsonIgnore]
+		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+		[JsonIgnore]
+		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+
+		[JsonIgnore]
+		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
+
+		[JsonIgnore]
+		public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
+
+		[JsonIgnore]
+		public Nest.VersionNumber? Version { get => Q<Nest.VersionNumber?>("version"); set => Q("version", value); }
+
+		[JsonIgnore]
+		public Nest.VersionType? VersionType { get => Q<Nest.VersionType?>("version_type"); set => Q("version_type", value); }
+
+		[JsonPropertyName("doc")]
+		public TDocument? Doc
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("filter")]
+		public Nest.Global.Termvectors.Filter? Filter
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("per_field_analyzer")]
+		public Dictionary<Nest.Field, string>? PerFieldAnalyzer
 		{
 			get;
 #if NET5_0

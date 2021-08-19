@@ -9,19 +9,17 @@ using Elastic.Transport;
 
 namespace Nest
 {
-	/// <summary> A request that that does not necessarily (de)serializes itself </summary>
-	public interface IProxyRequest
+	public interface ICustomJsonWriter
 	{
 		// TODO: Temp
 		//void WriteJson(Stream stream, ITransportSerializer sourceSerializer, SerializationFormatting formatting);
 		
-		// TODO: SerializationFormatting
 		void WriteJson(Utf8JsonWriter writer, ITransportSerializer sourceSerializer);
 	}
 
 
-	/// <summary>
-	/// Describes a request that serializes the document passed to <see cref="DocumentPath{T}"/> when calling the fluent API.
-	/// </summary>
-	public interface IDocumentRequest { }
+	///// <summary>
+	///// Describes a request that serializes the document passed to <see cref="DocumentPath{T}"/> when calling the fluent API.
+	///// </summary>
+	//public interface IDocumentRequest { }
 }

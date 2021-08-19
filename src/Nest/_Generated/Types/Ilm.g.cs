@@ -100,4 +100,29 @@ namespace Nest.Ilm
 #endif
 		}
 	}
+
+	public partial class Policy
+	{
+		[JsonPropertyName("name")]
+		public Nest.Name? Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("phases")]
+		public Nest.Ilm.Phases Phases
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
 }

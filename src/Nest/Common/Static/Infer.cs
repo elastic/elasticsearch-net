@@ -35,7 +35,7 @@ namespace Nest
 
 		//public static Names Names(IEnumerable<string> names) => string.Join(",", names);
 
-		public static Id Id<T>(T document) where T : class => Nest.Id.From(document);
+		//public static Id Id<T>(T document) where T : class => Nest.Id.From(document);
 
 		public static Fields Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			new(fields.Select(f => new Field(f)));

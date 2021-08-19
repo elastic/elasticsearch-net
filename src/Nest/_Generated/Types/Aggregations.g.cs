@@ -265,7 +265,7 @@ namespace Nest.Aggregations
 		public Union<double, string>? To { get; set; }
 	}
 
-	public partial class AutoDateHistogramAggregate
+	public partial class AutoDateHistogramAggregate<TBucket> : Aggregations.MultiBucketAggregate<TBucket>
 	{
 		[JsonPropertyName("interval")]
 		public Nest.DateMathTime Interval
@@ -558,7 +558,7 @@ namespace Nest.Aggregations
 	{
 	}
 
-	public partial class CompositeBucketAggregate
+	public partial class CompositeBucketAggregate<TBucket> : Aggregations.MultiBucketAggregate<TBucket>
 	{
 		[JsonPropertyName("after_key")]
 		public Dictionary<string, object> AfterKey
@@ -719,7 +719,7 @@ namespace Nest.Aggregations
 		public T Min { get; set; }
 	}
 
-	public partial class ExtendedStatsAggregate
+	public partial class ExtendedStatsAggregate : Aggregations.StatsAggregate
 	{
 		[JsonPropertyName("std_deviation")]
 		public double? StdDeviation
@@ -1346,7 +1346,7 @@ namespace Nest.Aggregations
 		}
 	}
 
-	public partial class KeyedValueAggregate
+	public partial class KeyedValueAggregate : Aggregations.ValueAggregate
 	{
 		[JsonPropertyName("keys")]
 		public IReadOnlyCollection<string> Keys
@@ -1797,7 +1797,7 @@ namespace Nest.Aggregations
 		public int? Lag { get; set; }
 	}
 
-	public partial class SignificantTermsAggregate<TKey>
+	public partial class SignificantTermsAggregate<TKey, TBucket> : Aggregations.MultiBucketAggregate<TBucket>
 	{
 		[JsonPropertyName("bg_count")]
 		public long BgCount
@@ -2186,7 +2186,7 @@ namespace Nest.Aggregations
 		public Nest.Aggregations.TTestType? Type { get; set; }
 	}
 
-	public partial class TermsAggregate<TKey>
+	public partial class TermsAggregate<TKey, TBucket> : Aggregations.MultiBucketAggregate<TBucket>
 	{
 		[JsonPropertyName("doc_count_error_upper_bound")]
 		public long DocCountErrorUpperBound
