@@ -24,6 +24,11 @@ using Nest.Eql;
 using Nest.Graph;
 using Nest.IndexLifecycleManagement;
 using Nest.IndexManagement;
+using Nest.Ingest;
+using Nest.License;
+using Nest.Migration;
+using Nest.Nodes;
+using Nest.SearchableSnapshots;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -48,6 +53,16 @@ namespace Nest
 		IndexLifecycleManagementNamespace IndexLifecycleManagement { get; }
 
 		IndexManagementNamespace IndexManagement { get; }
+
+		IngestNamespace Ingest { get; }
+
+		LicenseNamespace License { get; }
+
+		MigrationNamespace Migration { get; }
+
+		NodesNamespace Nodes { get; }
+
+		SearchableSnapshotsNamespace SearchableSnapshots { get; }
 
 		ClearScrollResponse ClearScroll(IClearScrollRequest request);
 		Task<ClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken cancellationToken = default);

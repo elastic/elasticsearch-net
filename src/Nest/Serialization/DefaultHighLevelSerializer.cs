@@ -32,7 +32,7 @@ namespace Nest
 				Converters =
 				{
 					new CustomJsonWriterConverterFactory(settings),
-					new FieldConverterFactory(settings),
+					//new FieldConverterFactory(settings),
 					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
 					new ConvertAsConverterFactory(settings),
 					new DictionaryConverter(),

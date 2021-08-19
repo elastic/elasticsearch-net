@@ -137,6 +137,25 @@ namespace Nest
 		internal static ApiUrls IndexManagementUpdateAliases = new ApiUrls(new[] { "/_aliases" });
 		internal static ApiUrls IndexManagementValidateQuery = new ApiUrls(new[] { "/_validate/query", "/{index}/_validate/query" });
 		internal static ApiUrls NoNamespaceInfo = new ApiUrls(new[] { "/" });
+		internal static ApiUrls IngestDeletePipeline = new ApiUrls(new[] { "/_ingest/pipeline/{id}" });
+		internal static ApiUrls IngestGeoIpStats = new ApiUrls(new[] { "/_ingest/geoip/stats" });
+		internal static ApiUrls IngestGetPipeline = new ApiUrls(new[] { "/_ingest/pipeline", "/_ingest/pipeline/{id}" });
+		internal static ApiUrls IngestProcessorGrok = new ApiUrls(new[] { "/_ingest/processor/grok" });
+		internal static ApiUrls IngestPutPipeline = new ApiUrls(new[] { "/_ingest/pipeline/{id}" });
+		internal static ApiUrls IngestSimulate = new ApiUrls(new[] { "/_ingest/pipeline/_simulate", "/_ingest/pipeline/{id}/_simulate" });
+		internal static ApiUrls LicenseDelete = new ApiUrls(new[] { "/_license" });
+		internal static ApiUrls LicenseGet = new ApiUrls(new[] { "/_license" });
+		internal static ApiUrls LicenseGetBasicStatus = new ApiUrls(new[] { "/_license/basic_status" });
+		internal static ApiUrls LicenseGetTrialStatus = new ApiUrls(new[] { "/_license/trial_status" });
+		internal static ApiUrls LicensePost = new ApiUrls(new[] { "/_license" });
+		internal static ApiUrls LicensePostStartBasic = new ApiUrls(new[] { "/_license/start_basic" });
+		internal static ApiUrls LicensePostStartTrial = new ApiUrls(new[] { "/_license/start_trial" });
+		internal static ApiUrls MigrationDeprecations = new ApiUrls(new[] { "/_migration/deprecations", "/{index}/_migration/deprecations" });
+		internal static ApiUrls NodesHotThreads = new ApiUrls(new[] { "/_nodes/hot_threads", "/_nodes/{node_id}/hot_threads" });
+		internal static ApiUrls NodesInfo = new ApiUrls(new[] { "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}" });
+		internal static ApiUrls NodesReloadSecureSettings = new ApiUrls(new[] { "/_nodes/reload_secure_settings", "/_nodes/{node_id}/reload_secure_settings" });
+		internal static ApiUrls NodesStats = new ApiUrls(new[] { "/_nodes/stats", "/_nodes/{node_id}/stats", "/_nodes/stats/{metric}", "/_nodes/{node_id}/stats/{metric}", "/_nodes/stats/{metric}/{index_metric}", "/_nodes/{node_id}/stats/{metric}/{index_metric}" });
+		internal static ApiUrls NodesUsage = new ApiUrls(new[] { "/_nodes/usage", "/_nodes/{node_id}/usage", "/_nodes/usage/{metric}", "/_nodes/{node_id}/usage/{metric}" });
 		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/_pit", "/{index}/_pit" });
 		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
 		internal static ApiUrls NoNamespacePutScript = new ApiUrls(new[] { "/_scripts/{id}", "/_scripts/{id}/{context}" });
@@ -146,6 +165,8 @@ namespace Nest
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
 		internal static ApiUrls NoNamespaceSearchShards = new ApiUrls(new[] { "/_search_shards", "/{index}/_search_shards" });
 		internal static ApiUrls NoNamespaceSearchTemplate = new ApiUrls(new[] { "/_search/template", "/{index}/_search/template" });
+		internal static ApiUrls SearchableSnapshotsClearCache = new ApiUrls(new[] { "/_searchable_snapshots/cache/clear", "/{index}/_searchable_snapshots/cache/clear" });
+		internal static ApiUrls SearchableSnapshotsMount = new ApiUrls(new[] { "/_snapshot/{repository}/{snapshot}/_mount" });
 		internal static ApiUrls NoNamespaceTermsEnum = new ApiUrls(new[] { "/{index}/_terms_enum" });
 		internal static ApiUrls NoNamespaceTermvectors = new ApiUrls(new[] { "/{index}/_termvectors/{id}", "/{index}/_termvectors" });
 	}
