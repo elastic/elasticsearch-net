@@ -16,17 +16,26 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch.Failures;
+using OneOf;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using System.Threading;
-using System.Threading.Tasks;
 
 #nullable restore
-namespace Nest.Global.Ping
+namespace Nest.IndexManagement.GetFieldMapping
 {
-	public class PingRequestParameters : RequestParameters<PingRequestParameters>
+	public partial class TypeFieldMappings
 	{
+		[JsonPropertyName("mappings")]
+		public Dictionary<Nest.Field, Nest.Mapping.FieldMapping> Mappings
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 }

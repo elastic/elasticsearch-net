@@ -17,7 +17,7 @@
 // ------------------------------------------------
 
 using Nest.Cluster;
-using Nest.Global.Ping;
+using Nest.IndexManagement;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,9 +29,37 @@ namespace Nest
 	{
 		ClusterNamespace Cluster { get; }
 
+		IndexManagementNamespace IndexManagement { get; }
+
+		ClosePointInTimeResponse ClosePointInTime(IClosePointInTimeRequest request);
+		Task<ClosePointInTimeResponse> ClosePointInTimeAsync(IClosePointInTimeRequest request, CancellationToken cancellationToken = default);
+		ClosePointInTimeResponse ClosePointInTime(Func<ClosePointInTimeDescriptor, IClosePointInTimeRequest> selector = null);
+		Task<ClosePointInTimeResponse> ClosePointInTimeAsync(Func<ClosePointInTimeDescriptor, IClosePointInTimeRequest> selector = null, CancellationToken cancellationToken = default);
+		DeleteResponse Delete(IDeleteRequest request);
+		Task<DeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default);
+		DeleteResponse Delete(Nest.IndexName index, Nest.Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null);
+		Task<DeleteResponse> DeleteAsync(Nest.IndexName index, Nest.Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null, CancellationToken cancellationToken = default);
+		ExistsResponse Exists(IExistsRequest request);
+		Task<ExistsResponse> ExistsAsync(IExistsRequest request, CancellationToken cancellationToken = default);
+		ExistsResponse Exists(Nest.IndexName index, Nest.Id id, Func<ExistsDescriptor, IExistsRequest> selector = null);
+		Task<ExistsResponse> ExistsAsync(Nest.IndexName index, Nest.Id id, Func<ExistsDescriptor, IExistsRequest> selector = null, CancellationToken cancellationToken = default);
+		IndexResponse Index<TDocument>(IIndexRequest<TDocument> request);
+		Task<IndexResponse> IndexAsync<TDocument>(IIndexRequest<TDocument> request, CancellationToken cancellationToken = default);
+		IndexResponse Index<TDocument>(TDocument document, Nest.IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null);
+		Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Nest.IndexName index, Func<IndexDescriptor<TDocument>, IIndexRequest<TDocument>> selector = null, CancellationToken cancellationToken = default);
+		OpenPointInTimeResponse OpenPointInTime(IOpenPointInTimeRequest request);
+		Task<OpenPointInTimeResponse> OpenPointInTimeAsync(IOpenPointInTimeRequest request, CancellationToken cancellationToken = default);
+		OpenPointInTimeResponse OpenPointInTime(Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null);
+		OpenPointInTimeResponse OpenPointInTime(Nest.Indices index, Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null);
+		Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null, CancellationToken cancellationToken = default);
+		Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Nest.Indices index, Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null, CancellationToken cancellationToken = default);
 		PingResponse Ping(IPingRequest request);
 		Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default);
 		PingResponse Ping(Func<PingDescriptor, IPingRequest> selector = null);
 		Task<PingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null, CancellationToken cancellationToken = default);
+		SearchResponse<TDocument> Search<TDocument>(ISearchRequest request);
+		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken cancellationToken = default);
+		SearchResponse<TDocument> Search<TDocument>(Func<SearchDescriptor, ISearchRequest> selector = null);
+		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchDescriptor, ISearchRequest> selector = null, CancellationToken cancellationToken = default);
 	}
 }

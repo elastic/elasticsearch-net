@@ -21,13 +21,13 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Cluster
 {
-	public enum ClusterStatus
+	public readonly partial struct ClusterStatus
 	{
-		[EnumMember(Value = "yellow")]
-		Yellow,
-		[EnumMember(Value = "red")]
-		Red,
-		[EnumMember(Value = "green")]
-		Green
+		public ClusterStatus(string value) => Value = value;
+		public string Value { get; }
+
+		public static ClusterStatus Yellow { get; } = new ClusterStatus("yellow");
+		public static ClusterStatus Red { get; } = new ClusterStatus("red");
+		public static ClusterStatus Green { get; } = new ClusterStatus("green");
 	}
 }

@@ -21,11 +21,12 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Ccr.FollowInfo
 {
-	public enum FollowerIndexStatus
+	public readonly partial struct FollowerIndexStatus
 	{
-		[EnumMember(Value = "paused")]
-		Paused,
-		[EnumMember(Value = "active")]
-		Active
+		public FollowerIndexStatus(string value) => Value = value;
+		public string Value { get; }
+
+		public static FollowerIndexStatus Paused { get; } = new FollowerIndexStatus("paused");
+		public static FollowerIndexStatus Active { get; } = new FollowerIndexStatus("active");
 	}
 }

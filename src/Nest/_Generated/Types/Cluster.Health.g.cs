@@ -94,7 +94,7 @@ namespace Nest.Cluster.Health
 		}
 
 		[JsonPropertyName("shards")]
-		public Dictionary<string, Nest.Cluster.Health.ShardHealthStats> Shards
+		public Dictionary<string, Nest.Cluster.Health.ShardHealthStats>? Shards
 		{
 			get;
 #if NET5_0

@@ -4,6 +4,7 @@ using Elastic.Elasticsearch.Ephemeral.Plugins;
 using Elastic.Elasticsearch.Xunit;
 using Elastic.Stack.ArtifactsApi.Products;
 using Nest;
+using Nest.Cluster;
 using Nest.Cluster.Health;
 using Nest.Core;
 using Tests.Configuration;
@@ -31,9 +32,9 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 		protected sealed override void SeedCluster()
 		{
-			Client.Cluster.ClusterHealth(new ClusterHealthRequest {WaitForStatus = WaitForStatus.Green});
+			Client.Cluster.Health(new HealthRequest {WaitForStatus = WaitForStatus.Green});
 			SeedNode();
-			Client.Cluster.ClusterHealth(new ClusterHealthRequest {WaitForStatus = WaitForStatus.Green});
+			Client.Cluster.Health(new HealthRequest {WaitForStatus = WaitForStatus.Green});
 		}
 
 		protected virtual void SeedNode() { }

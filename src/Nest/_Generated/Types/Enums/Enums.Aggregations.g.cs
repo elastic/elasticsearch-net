@@ -21,171 +21,152 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Aggregations
 {
-	public enum DateInterval
+	public readonly partial struct DateInterval
 	{
-		[EnumMember(Value = "year")]
-		Year,
-		[EnumMember(Value = "week")]
-		Week,
-		[EnumMember(Value = "second")]
-		Second,
-		[EnumMember(Value = "quarter")]
-		Quarter,
-		[EnumMember(Value = "month")]
-		Month,
-		[EnumMember(Value = "minute")]
-		Minute,
-		[EnumMember(Value = "hour")]
-		Hour,
-		[EnumMember(Value = "day")]
-		Day
+		public DateInterval(string value) => Value = value;
+		public string Value { get; }
+
+		public static DateInterval Year { get; } = new DateInterval("year");
+		public static DateInterval Week { get; } = new DateInterval("week");
+		public static DateInterval Second { get; } = new DateInterval("second");
+		public static DateInterval Quarter { get; } = new DateInterval("quarter");
+		public static DateInterval Month { get; } = new DateInterval("month");
+		public static DateInterval Minute { get; } = new DateInterval("minute");
+		public static DateInterval Hour { get; } = new DateInterval("hour");
+		public static DateInterval Day { get; } = new DateInterval("day");
 	}
 
-	public enum GapPolicy
+	public readonly partial struct GapPolicy
 	{
-		[EnumMember(Value = "skip")]
-		Skip,
-		[EnumMember(Value = "insert_zeros")]
-		InsertZeros
+		public GapPolicy(string value) => Value = value;
+		public string Value { get; }
+
+		public static GapPolicy Skip { get; } = new GapPolicy("skip");
+		public static GapPolicy InsertZeros { get; } = new GapPolicy("insert_zeros");
 	}
 
-	public enum HoltWintersType
+	public readonly partial struct HoltWintersType
 	{
-		[EnumMember(Value = "mult")]
-		Multiplicative,
-		[EnumMember(Value = "add")]
-		Additive
+		public HoltWintersType(string value) => Value = value;
+		public string Value { get; }
+
+		public static HoltWintersType Multiplicative { get; } = new HoltWintersType("mult");
+		public static HoltWintersType Additive { get; } = new HoltWintersType("add");
 	}
 
-	public enum MatrixStatsMode
+	public readonly partial struct MatrixStatsMode
 	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "median")]
-		Median,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
+		public MatrixStatsMode(string value) => Value = value;
+		public string Value { get; }
+
+		public static MatrixStatsMode Sum { get; } = new MatrixStatsMode("sum");
+		public static MatrixStatsMode Min { get; } = new MatrixStatsMode("min");
+		public static MatrixStatsMode Median { get; } = new MatrixStatsMode("median");
+		public static MatrixStatsMode Max { get; } = new MatrixStatsMode("max");
+		public static MatrixStatsMode Avg { get; } = new MatrixStatsMode("avg");
 	}
 
-	public enum MinimumInterval
+	public readonly partial struct MinimumInterval
 	{
-		[EnumMember(Value = "year")]
-		Year,
-		[EnumMember(Value = "second")]
-		Second,
-		[EnumMember(Value = "month")]
-		Month,
-		[EnumMember(Value = "minute")]
-		Minute,
-		[EnumMember(Value = "hour")]
-		Hour,
-		[EnumMember(Value = "day")]
-		Day
+		public MinimumInterval(string value) => Value = value;
+		public string Value { get; }
+
+		public static MinimumInterval Year { get; } = new MinimumInterval("year");
+		public static MinimumInterval Second { get; } = new MinimumInterval("second");
+		public static MinimumInterval Month { get; } = new MinimumInterval("month");
+		public static MinimumInterval Minute { get; } = new MinimumInterval("minute");
+		public static MinimumInterval Hour { get; } = new MinimumInterval("hour");
+		public static MinimumInterval Day { get; } = new MinimumInterval("day");
 	}
 
-	public enum MovingAverageModel
+	public readonly partial struct MovingAverageModel
 	{
-		[EnumMember(Value = "simple")]
-		Simple,
-		[EnumMember(Value = "linear")]
-		Linear,
-		[EnumMember(Value = "holt_winters")]
-		HoltWinters,
-		[EnumMember(Value = "holt")]
-		Holt,
-		[EnumMember(Value = "ewma")]
-		Ewma
+		public MovingAverageModel(string value) => Value = value;
+		public string Value { get; }
+
+		public static MovingAverageModel Simple { get; } = new MovingAverageModel("simple");
+		public static MovingAverageModel Linear { get; } = new MovingAverageModel("linear");
+		public static MovingAverageModel HoltWinters { get; } = new MovingAverageModel("holt_winters");
+		public static MovingAverageModel Holt { get; } = new MovingAverageModel("holt");
+		public static MovingAverageModel Ewma { get; } = new MovingAverageModel("ewma");
 	}
 
-	public enum NormalizeMethod
+	public readonly partial struct NormalizeMethod
 	{
-		[EnumMember(Value = "zscore")]
-		Zscore,
-		[EnumMember(Value = "softmax")]
-		Softmax,
-		[EnumMember(Value = "rescale_0_100")]
-		Rescale0100,
-		[EnumMember(Value = "rescale_0_1")]
-		Rescale01,
-		[EnumMember(Value = "percent_of_sum")]
-		PercentOfSum,
-		[EnumMember(Value = "mean")]
-		Mean
+		public NormalizeMethod(string value) => Value = value;
+		public string Value { get; }
+
+		public static NormalizeMethod Zscore { get; } = new NormalizeMethod("zscore");
+		public static NormalizeMethod Softmax { get; } = new NormalizeMethod("softmax");
+		public static NormalizeMethod Rescale0100 { get; } = new NormalizeMethod("rescale_0_100");
+		public static NormalizeMethod Rescale01 { get; } = new NormalizeMethod("rescale_0_1");
+		public static NormalizeMethod PercentOfSum { get; } = new NormalizeMethod("percent_of_sum");
+		public static NormalizeMethod Mean { get; } = new NormalizeMethod("mean");
 	}
 
-	public enum RateMode
+	public readonly partial struct RateMode
 	{
-		[EnumMember(Value = "value_count")]
-		ValueCount,
-		[EnumMember(Value = "sum")]
-		Sum
+		public RateMode(string value) => Value = value;
+		public string Value { get; }
+
+		public static RateMode ValueCount { get; } = new RateMode("value_count");
+		public static RateMode Sum { get; } = new RateMode("sum");
 	}
 
-	public enum SamplerAggregationExecutionHint
+	public readonly partial struct SamplerAggregationExecutionHint
 	{
-		[EnumMember(Value = "map")]
-		Map,
-		[EnumMember(Value = "global_ordinals")]
-		GlobalOrdinals,
-		[EnumMember(Value = "bytes_hash")]
-		BytesHash
+		public SamplerAggregationExecutionHint(string value) => Value = value;
+		public string Value { get; }
+
+		public static SamplerAggregationExecutionHint Map { get; } = new SamplerAggregationExecutionHint("map");
+		public static SamplerAggregationExecutionHint GlobalOrdinals { get; } = new SamplerAggregationExecutionHint("global_ordinals");
+		public static SamplerAggregationExecutionHint BytesHash { get; } = new SamplerAggregationExecutionHint("bytes_hash");
 	}
 
-	public enum TermsAggregationCollectMode
+	public readonly partial struct TermsAggregationCollectMode
 	{
-		[EnumMember(Value = "depth_first")]
-		DepthFirst,
-		[EnumMember(Value = "breadth_first")]
-		BreadthFirst
+		public TermsAggregationCollectMode(string value) => Value = value;
+		public string Value { get; }
+
+		public static TermsAggregationCollectMode DepthFirst { get; } = new TermsAggregationCollectMode("depth_first");
+		public static TermsAggregationCollectMode BreadthFirst { get; } = new TermsAggregationCollectMode("breadth_first");
 	}
 
-	public enum TermsAggregationExecutionHint
+	public readonly partial struct TermsAggregationExecutionHint
 	{
-		[EnumMember(Value = "map")]
-		Map,
-		[EnumMember(Value = "global_ordinals_low_cardinality")]
-		GlobalOrdinalsLowCardinality,
-		[EnumMember(Value = "global_ordinals_hash")]
-		GlobalOrdinalsHash,
-		[EnumMember(Value = "global_ordinals")]
-		GlobalOrdinals
+		public TermsAggregationExecutionHint(string value) => Value = value;
+		public string Value { get; }
+
+		public static TermsAggregationExecutionHint Map { get; } = new TermsAggregationExecutionHint("map");
+		public static TermsAggregationExecutionHint GlobalOrdinalsLowCardinality { get; } = new TermsAggregationExecutionHint("global_ordinals_low_cardinality");
+		public static TermsAggregationExecutionHint GlobalOrdinalsHash { get; } = new TermsAggregationExecutionHint("global_ordinals_hash");
+		public static TermsAggregationExecutionHint GlobalOrdinals { get; } = new TermsAggregationExecutionHint("global_ordinals");
 	}
 
-	public enum TTestType
+	public readonly partial struct TTestType
 	{
-		[EnumMember(Value = "paired")]
-		Paired,
-		[EnumMember(Value = "homoscedastic")]
-		Homoscedastic,
-		[EnumMember(Value = "heteroscedastic")]
-		Heteroscedastic
+		public TTestType(string value) => Value = value;
+		public string Value { get; }
+
+		public static TTestType Paired { get; } = new TTestType("paired");
+		public static TTestType Homoscedastic { get; } = new TTestType("homoscedastic");
+		public static TTestType Heteroscedastic { get; } = new TTestType("heteroscedastic");
 	}
 
-	public enum ValueType
+	public readonly partial struct ValueType
 	{
-		[EnumMember(Value = "string")]
-		String,
-		[EnumMember(Value = "numeric")]
-		Numeric,
-		[EnumMember(Value = "number")]
-		Number,
-		[EnumMember(Value = "long")]
-		Long,
-		[EnumMember(Value = "ip")]
-		Ip,
-		[EnumMember(Value = "geo_point")]
-		GeoPoint,
-		[EnumMember(Value = "double")]
-		Double,
-		[EnumMember(Value = "date_nanos")]
-		DateNanos,
-		[EnumMember(Value = "date")]
-		Date,
-		[EnumMember(Value = "boolean")]
-		Boolean
+		public ValueType(string value) => Value = value;
+		public string Value { get; }
+
+		public static ValueType String { get; } = new ValueType("string");
+		public static ValueType Numeric { get; } = new ValueType("numeric");
+		public static ValueType Number { get; } = new ValueType("number");
+		public static ValueType Long { get; } = new ValueType("long");
+		public static ValueType Ip { get; } = new ValueType("ip");
+		public static ValueType GeoPoint { get; } = new ValueType("geo_point");
+		public static ValueType Double { get; } = new ValueType("double");
+		public static ValueType DateNanos { get; } = new ValueType("date_nanos");
+		public static ValueType Date { get; } = new ValueType("date");
+		public static ValueType Boolean { get; } = new ValueType("boolean");
 	}
 }

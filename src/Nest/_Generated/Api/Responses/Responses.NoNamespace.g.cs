@@ -20,9 +20,228 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Nest.Global.Ping
+namespace Nest
 {
+	public partial class ClosePointInTimeResponse : ResponseBase
+	{
+		[JsonPropertyName("num_freed")]
+		public int NumFreed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("succeeded")]
+		public bool Succeeded
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DeleteResponse : WriteResponseBase
+	{
+	}
+
+	public partial class ExistsResponse : ExistsResponseBase
+	{
+	}
+
+	public partial class IndexResponse : WriteResponseBase
+	{
+	}
+
+	public partial class OpenPointInTimeResponse : ResponseBase
+	{
+		[JsonPropertyName("id")]
+		public Nest.Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class PingResponse : ResponseBase
 	{
+	}
+
+	public partial class SearchResponse<TDocument> : ResponseBase
+	{
+		[JsonPropertyName("aggregations")]
+		public Dictionary<Nest.AggregateName, Nest.Aggregations.Aggregate>? Aggregations
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_clusters")]
+		public Nest.ClusterStatistics? Clusters
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("documents")]
+		public IReadOnlyCollection<TDocument>? Documents
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fields")]
+		public Dictionary<string, object>? Fields
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("hits")]
+		public Nest.Global.Search.HitsMetadata<TDocument> Hits
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_score")]
+		public double? MaxScore
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("num_reduce_phases")]
+		public long? NumReducePhases
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("pit_id")]
+		public Nest.Id? PitId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("profile")]
+		public Nest.Global.Search.Profile? Profile
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_scroll_id")]
+		public Nest.ScrollId? ScrollId
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_shards")]
+		public Nest.ShardStatistics Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("suggest")]
+		public Dictionary<Nest.SuggestionName, IReadOnlyCollection<Nest.Global.Search.Suggest<TDocument>>>? Suggest
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("terminated_early")]
+		public bool? TerminatedEarly
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("timed_out")]
+		public bool TimedOut
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("took")]
+		public long Took
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 }

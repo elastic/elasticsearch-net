@@ -21,17 +21,15 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Rollup
 {
-	public enum Metric
+	public readonly partial struct Metric
 	{
-		[EnumMember(Value = "value_count")]
-		ValueCount,
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
+		public Metric(string value) => Value = value;
+		public string Value { get; }
+
+		public static Metric ValueCount { get; } = new Metric("value_count");
+		public static Metric Sum { get; } = new Metric("sum");
+		public static Metric Min { get; } = new Metric("min");
+		public static Metric Max { get; } = new Metric("max");
+		public static Metric Avg { get; } = new Metric("avg");
 	}
 }

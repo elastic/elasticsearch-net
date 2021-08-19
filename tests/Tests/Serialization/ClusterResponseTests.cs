@@ -2,6 +2,7 @@ using System.IO;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Nest.Cluster;
 using Nest.Cluster.Health;
 
 namespace Tests.Serialization
@@ -106,7 +107,7 @@ namespace Tests.Serialization
 
 			var serializer = new DefaultHighLevelSerializer();
 
-			var response = serializer.Deserialize<ClusterHealthResponse>(ms);
+			var response = serializer.Deserialize<HealthResponse>(ms);
 
 			response.ClusterName.Should().Be("test-cluster");
 			response.Indices.Should().HaveCount(2);
