@@ -75,7 +75,7 @@ namespace Nest.Global.Explain
 		}
 
 		[JsonPropertyName("details")]
-		public IReadOnlyCollection<Nest.Global.Explain.ExplanationDetail> Details
+		public IReadOnlyCollection<Nest.Global.Explain.ExplanationDetail>? Details
 		{
 			get;
 #if NET5_0

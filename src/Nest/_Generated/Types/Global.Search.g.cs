@@ -25,6 +25,261 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest.Global.Search
 {
+	public partial class AggregationBreakdown
+	{
+		[JsonPropertyName("build_aggregation")]
+		public long BuildAggregation
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_aggregation_count")]
+		public long BuildAggregationCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_leaf_collector")]
+		public long BuildLeafCollector
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_leaf_collector_count")]
+		public long BuildLeafCollectorCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("collect")]
+		public long Collect
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("collect_count")]
+		public long CollectCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("initialize")]
+		public long Initialize
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("initialize_count")]
+		public long InitializeCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("post_collection")]
+		public long? PostCollection
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("post_collection_count")]
+		public long? PostCollectionCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("reduce")]
+		public long Reduce
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("reduce_count")]
+		public long ReduceCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class AggregationProfile
+	{
+		[JsonPropertyName("breakdown")]
+		public Nest.Global.Search.AggregationBreakdown Breakdown
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<Nest.Global.Search.AggregationProfileDebug>? Children
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("debug")]
+		public Nest.Global.Search.AggregationProfileDebug? Debug
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("description")]
+		public string Description
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_in_nanos")]
+		public long TimeInNanos
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class AggregationProfileDebug
+	{
+	}
+
+	public partial class Collector
+	{
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<Nest.Global.Search.Collector>? Children
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("name")]
+		public string Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("reason")]
+		public string Reason
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_in_nanos")]
+		public long TimeInNanos
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class CompletionSuggestOption<TDocument>
 	{
 		[JsonPropertyName("collate_match")]
@@ -39,7 +294,7 @@ namespace Nest.Global.Search
 		}
 
 		[JsonPropertyName("contexts")]
-		public Dictionary<string, IReadOnlyCollection<Context>>? Contexts
+		public Dictionary<string, IReadOnlyCollection<Nest.Global.Search.Context>>? Contexts
 		{
 			get;
 #if NET5_0
@@ -50,7 +305,7 @@ namespace Nest.Global.Search
 		}
 
 		[JsonPropertyName("fields")]
-		public Dictionary<string, object> Fields
+		public Dictionary<string, object>? Fields
 		{
 			get;
 #if NET5_0
@@ -138,6 +393,84 @@ namespace Nest.Global.Search
 		}
 	}
 
+	public partial class CompletionSuggester
+	{
+		[JsonPropertyName("contexts")]
+		public Dictionary<string, OneOf<string, IReadOnlyCollection<string>, QueryDsl.GeoLocation, IReadOnlyCollection<Global.Search.SuggestContextQuery>>>? Contexts { get; set; }
+
+		[JsonPropertyName("fuzzy")]
+		public Nest.Global.Search.SuggestFuzziness? Fuzzy { get; set; }
+
+		[JsonPropertyName("prefix")]
+		public string? Prefix { get; set; }
+
+		[JsonPropertyName("regex")]
+		public string? Regex { get; set; }
+
+		[JsonPropertyName("skip_duplicates")]
+		public bool? SkipDuplicates { get; set; }
+	}
+
+	public partial class DirectGenerator
+	{
+		[JsonPropertyName("field")]
+		public Nest.Field Field { get; set; }
+
+		[JsonPropertyName("max_edits")]
+		public int? MaxEdits { get; set; }
+
+		[JsonPropertyName("max_inspections")]
+		public float? MaxInspections { get; set; }
+
+		[JsonPropertyName("max_term_freq")]
+		public float? MaxTermFreq { get; set; }
+
+		[JsonPropertyName("min_doc_freq")]
+		public float? MinDocFreq { get; set; }
+
+		[JsonPropertyName("min_word_length")]
+		public int? MinWordLength { get; set; }
+
+		[JsonPropertyName("post_filter")]
+		public string? PostFilter { get; set; }
+
+		[JsonPropertyName("pre_filter")]
+		public string? PreFilter { get; set; }
+
+		[JsonPropertyName("prefix_length")]
+		public int? PrefixLength { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonPropertyName("suggest_mode")]
+		public Nest.SuggestMode? SuggestMode { get; set; }
+	}
+
+	public partial class FieldAndFormat
+	{
+		[JsonPropertyName("field")]
+		public Nest.Field Field { get; set; }
+
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonPropertyName("include_unmapped")]
+		public bool? IncludeUnmapped { get; set; }
+	}
+
+	public partial class FieldCollapse
+	{
+		[JsonPropertyName("field")]
+		public Nest.Field Field { get; set; }
+
+		[JsonPropertyName("inner_hits")]
+		public Union<Nest.Global.Search.InnerHits, IEnumerable<Nest.Global.Search.InnerHits>>? InnerHits { get; set; }
+
+		[JsonPropertyName("max_concurrent_group_searches")]
+		public int? MaxConcurrentGroupSearches { get; set; }
+	}
+
 	public partial class GeoDistanceSort
 	{
 		[JsonPropertyName("distance_type")]
@@ -185,6 +518,135 @@ namespace Nest.Global.Search
 		}
 	}
 
+	public partial class Highlight
+	{
+		[JsonPropertyName("boundary_chars")]
+		public string? BoundaryChars { get; set; }
+
+		[JsonPropertyName("boundary_max_scan")]
+		public int? BoundaryMaxScan { get; set; }
+
+		[JsonPropertyName("boundary_scanner")]
+		public Nest.Global.Search.BoundaryScanner? BoundaryScanner { get; set; }
+
+		[JsonPropertyName("boundary_scanner_locale")]
+		public string? BoundaryScannerLocale { get; set; }
+
+		[JsonPropertyName("encoder")]
+		public Nest.Global.Search.HighlighterEncoder? Encoder { get; set; }
+
+		[JsonPropertyName("fields")]
+		public Dictionary<Nest.Field, Nest.Global.Search.HighlightField> Fields { get; set; }
+
+		[JsonPropertyName("fragmenter")]
+		public Nest.Global.Search.HighlighterFragmenter? Fragmenter { get; set; }
+
+		[JsonPropertyName("fragment_offset")]
+		public int? FragmentOffset { get; set; }
+
+		[JsonPropertyName("fragment_size")]
+		public int? FragmentSize { get; set; }
+
+		[JsonPropertyName("highlight_query")]
+		public Nest.QueryDsl.QueryContainer? HighlightQuery { get; set; }
+
+		[JsonPropertyName("max_analyzed_offset")]
+		public Union<string, int>? MaxAnalyzedOffset { get; set; }
+
+		[JsonPropertyName("max_fragment_length")]
+		public int? MaxFragmentLength { get; set; }
+
+		[JsonPropertyName("no_match_size")]
+		public int? NoMatchSize { get; set; }
+
+		[JsonPropertyName("number_of_fragments")]
+		public int? NumberOfFragments { get; set; }
+
+		[JsonPropertyName("order")]
+		public Nest.Global.Search.HighlighterOrder? Order { get; set; }
+
+		[JsonPropertyName("post_tags")]
+		public IEnumerable<string>? PostTags { get; set; }
+
+		[JsonPropertyName("pre_tags")]
+		public IEnumerable<string>? PreTags { get; set; }
+
+		[JsonPropertyName("require_field_match")]
+		public bool? RequireFieldMatch { get; set; }
+
+		[JsonPropertyName("tags_schema")]
+		public Nest.Global.Search.HighlighterTagsSchema? TagsSchema { get; set; }
+
+		[JsonPropertyName("type")]
+		public Nest.Global.Search.HighlighterType? Type { get; set; }
+	}
+
+	public partial class HighlightField
+	{
+		[JsonPropertyName("boundary_chars")]
+		public string? BoundaryChars { get; set; }
+
+		[JsonPropertyName("boundary_max_scan")]
+		public int? BoundaryMaxScan { get; set; }
+
+		[JsonPropertyName("boundary_scanner")]
+		public Nest.Global.Search.BoundaryScanner? BoundaryScanner { get; set; }
+
+		[JsonPropertyName("boundary_scanner_locale")]
+		public string? BoundaryScannerLocale { get; set; }
+
+		[JsonPropertyName("field")]
+		public Nest.Field? Field { get; set; }
+
+		[JsonPropertyName("force_source")]
+		public bool? ForceSource { get; set; }
+
+		[JsonPropertyName("fragmenter")]
+		public Nest.Global.Search.HighlighterFragmenter? Fragmenter { get; set; }
+
+		[JsonPropertyName("fragment_offset")]
+		public int? FragmentOffset { get; set; }
+
+		[JsonPropertyName("fragment_size")]
+		public int? FragmentSize { get; set; }
+
+		[JsonPropertyName("highlight_query")]
+		public Nest.QueryDsl.QueryContainer? HighlightQuery { get; set; }
+
+		[JsonPropertyName("matched_fields")]
+		public Nest.Fields? MatchedFields { get; set; }
+
+		[JsonPropertyName("max_fragment_length")]
+		public int? MaxFragmentLength { get; set; }
+
+		[JsonPropertyName("no_match_size")]
+		public int? NoMatchSize { get; set; }
+
+		[JsonPropertyName("number_of_fragments")]
+		public int? NumberOfFragments { get; set; }
+
+		[JsonPropertyName("order")]
+		public Nest.Global.Search.HighlighterOrder? Order { get; set; }
+
+		[JsonPropertyName("phrase_limit")]
+		public int? PhraseLimit { get; set; }
+
+		[JsonPropertyName("post_tags")]
+		public IEnumerable<string>? PostTags { get; set; }
+
+		[JsonPropertyName("pre_tags")]
+		public IEnumerable<string>? PreTags { get; set; }
+
+		[JsonPropertyName("require_field_match")]
+		public bool? RequireFieldMatch { get; set; }
+
+		[JsonPropertyName("tags_schema")]
+		public Nest.Global.Search.HighlighterTagsSchema? TagsSchema { get; set; }
+
+		[JsonPropertyName("type")]
+		public Union<Nest.Global.Search.HighlighterType, string>? Type { get; set; }
+	}
+
 	public partial class Hit<TDocument>
 	{
 		[JsonPropertyName("_explanation")]
@@ -199,7 +661,7 @@ namespace Nest.Global.Search
 		}
 
 		[JsonPropertyName("fields")]
-		public Dictionary<string, object> Fields
+		public Dictionary<string, object>? Fields
 		{
 			get;
 #if NET5_0
@@ -232,7 +694,7 @@ namespace Nest.Global.Search
 		}
 
 		[JsonPropertyName("_ignored")]
-		public IReadOnlyCollection<string> Ignored
+		public IReadOnlyCollection<string>? Ignored
 		{
 			get;
 #if NET5_0
@@ -254,7 +716,7 @@ namespace Nest.Global.Search
 		}
 
 		[JsonPropertyName("inner_hits")]
-		public Dictionary<string, Nest.Global.Search.InnerHitsResult> InnerHits
+		public Dictionary<string, Nest.Global.Search.InnerHitsResult>? InnerHits
 		{
 			get;
 #if NET5_0
@@ -265,7 +727,7 @@ namespace Nest.Global.Search
 		}
 
 		[JsonPropertyName("matched_queries")]
-		public IReadOnlyCollection<string> MatchedQueries
+		public IReadOnlyCollection<string>? MatchedQueries
 		{
 			get;
 #if NET5_0
@@ -422,7 +884,7 @@ namespace Nest.Global.Search
 		}
 
 		[JsonPropertyName("total")]
-		public Union<TotalHits, long> Total
+		public Union<Nest.Global.Search.TotalHits, long> Total
 		{
 			get;
 #if NET5_0
@@ -431,6 +893,57 @@ namespace Nest.Global.Search
 			internal set;
 #endif
 		}
+	}
+
+	public partial class InnerHits
+	{
+		[JsonPropertyName("collapse")]
+		public Nest.Global.Search.FieldCollapse? Collapse { get; set; }
+
+		[JsonPropertyName("docvalue_fields")]
+		public IEnumerable<Nest.Global.Search.FieldAndFormat>? DocvalueFields { get; set; }
+
+		[JsonPropertyName("explain")]
+		public bool? Explain { get; set; }
+
+		[JsonPropertyName("fields")]
+		public Nest.Fields? Fields { get; set; }
+
+		[JsonPropertyName("from")]
+		public int? From { get; set; }
+
+		[JsonPropertyName("highlight")]
+		public Nest.Global.Search.Highlight? Highlight { get; set; }
+
+		[JsonPropertyName("ignore_unmapped")]
+		public bool? IgnoreUnmapped { get; set; }
+
+		[JsonPropertyName("name")]
+		public Nest.Name? Name { get; set; }
+
+		[JsonPropertyName("script_fields")]
+		public Dictionary<Nest.Field, Nest.ScriptField>? ScriptFields { get; set; }
+
+		[JsonPropertyName("seq_no_primary_term")]
+		public bool? SeqNoPrimaryTerm { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonPropertyName("sort")]
+		public Nest.Global.Search.Sort? Sort { get; set; }
+
+		[JsonPropertyName("_source")]
+		public Union<bool, Nest.Global.Search.SourceFilter>? Source { get; set; }
+
+		[JsonPropertyName("stored_field")]
+		public Nest.Fields? StoredField { get; set; }
+
+		[JsonPropertyName("track_scores")]
+		public bool? TrackScores { get; set; }
+
+		[JsonPropertyName("version")]
+		public bool? Version { get; set; }
 	}
 
 	public partial class InnerHitsMetadata
@@ -458,7 +971,7 @@ namespace Nest.Global.Search
 		}
 
 		[JsonPropertyName("total")]
-		public Union<TotalHits, long> Total
+		public Union<Nest.Global.Search.TotalHits, long> Total
 		{
 			get;
 #if NET5_0
@@ -481,6 +994,24 @@ namespace Nest.Global.Search
 			internal set;
 #endif
 		}
+	}
+
+	public partial class LaplaceSmoothingModel
+	{
+		[JsonPropertyName("alpha")]
+		public double Alpha { get; set; }
+	}
+
+	public partial class LinearInterpolationSmoothingModel
+	{
+		[JsonPropertyName("bigram_lambda")]
+		public double BigramLambda { get; set; }
+
+		[JsonPropertyName("trigram_lambda")]
+		public double TrigramLambda { get; set; }
+
+		[JsonPropertyName("unigram_lambda")]
+		public double UnigramLambda { get; set; }
 	}
 
 	public partial class NestedIdentity
@@ -519,6 +1050,36 @@ namespace Nest.Global.Search
 		}
 	}
 
+	public partial class PhraseSuggestCollate
+	{
+		[JsonPropertyName("params")]
+		public Dictionary<string, object>? Params { get; set; }
+
+		[JsonPropertyName("prune")]
+		public bool? Prune { get; set; }
+
+		[JsonPropertyName("query")]
+		public Nest.Global.Search.PhraseSuggestCollateQuery Query { get; set; }
+	}
+
+	public partial class PhraseSuggestCollateQuery
+	{
+		[JsonPropertyName("id")]
+		public Nest.Id? Id { get; set; }
+
+		[JsonPropertyName("source")]
+		public string? Source { get; set; }
+	}
+
+	public partial class PhraseSuggestHighlight
+	{
+		[JsonPropertyName("post_tag")]
+		public string PostTag { get; set; }
+
+		[JsonPropertyName("pre_tag")]
+		public string PreTag { get; set; }
+	}
+
 	public partial class PhraseSuggestOption
 	{
 		[JsonPropertyName("highlighted")]
@@ -553,6 +1114,354 @@ namespace Nest.Global.Search
 			internal set;
 #endif
 		}
+	}
+
+	public partial class PhraseSuggester
+	{
+		[JsonPropertyName("collate")]
+		public Nest.Global.Search.PhraseSuggestCollate? Collate { get; set; }
+
+		[JsonPropertyName("confidence")]
+		public double? Confidence { get; set; }
+
+		[JsonPropertyName("direct_generator")]
+		public IEnumerable<Nest.Global.Search.DirectGenerator>? DirectGenerator { get; set; }
+
+		[JsonPropertyName("force_unigrams")]
+		public bool? ForceUnigrams { get; set; }
+
+		[JsonPropertyName("gram_size")]
+		public int? GramSize { get; set; }
+
+		[JsonPropertyName("highlight")]
+		public Nest.Global.Search.PhraseSuggestHighlight? Highlight { get; set; }
+
+		[JsonPropertyName("max_errors")]
+		public double? MaxErrors { get; set; }
+
+		[JsonPropertyName("real_word_error_likelihood")]
+		public double? RealWordErrorLikelihood { get; set; }
+
+		[JsonPropertyName("separator")]
+		public string? Separator { get; set; }
+
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonPropertyName("smoothing")]
+		public Nest.Global.Search.SmoothingModelContainer? Smoothing { get; set; }
+
+		[JsonPropertyName("text")]
+		public string? Text { get; set; }
+
+		[JsonPropertyName("token_limit")]
+		public int? TokenLimit { get; set; }
+	}
+
+	public partial class PointInTimeReference
+	{
+		[JsonPropertyName("id")]
+		public Nest.Id Id { get; set; }
+
+		[JsonPropertyName("keep_alive")]
+		public Nest.Time? KeepAlive { get; set; }
+	}
+
+	public partial class Profile
+	{
+		[JsonPropertyName("shards")]
+		public IReadOnlyCollection<Nest.Global.Search.ShardProfile> Shards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class QueryBreakdown
+	{
+		[JsonPropertyName("advance")]
+		public long Advance
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("advance_count")]
+		public long AdvanceCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_scorer")]
+		public long BuildScorer
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_scorer_count")]
+		public long BuildScorerCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("compute_max_score")]
+		public long ComputeMaxScore
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("compute_max_score_count")]
+		public long ComputeMaxScoreCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("create_weight")]
+		public long CreateWeight
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("create_weight_count")]
+		public long CreateWeightCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("match")]
+		public long Match
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("match_count")]
+		public long MatchCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("next_doc")]
+		public long NextDoc
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("next_doc_count")]
+		public long NextDocCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("score")]
+		public long Score
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("score_count")]
+		public long ScoreCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("set_min_competitive_score")]
+		public long SetMinCompetitiveScore
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("set_min_competitive_score_count")]
+		public long SetMinCompetitiveScoreCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shallow_advance")]
+		public long ShallowAdvance
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shallow_advance_count")]
+		public long ShallowAdvanceCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class QueryProfile
+	{
+		[JsonPropertyName("breakdown")]
+		public Nest.Global.Search.QueryBreakdown Breakdown
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<Nest.Global.Search.QueryProfile>? Children
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("description")]
+		public string Description
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_in_nanos")]
+		public long TimeInNanos
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Rescore
+	{
+		[JsonPropertyName("query")]
+		public Nest.Global.Search.RescoreQuery Query { get; set; }
+
+		[JsonPropertyName("window_size")]
+		public int? WindowSize { get; set; }
+	}
+
+	public partial class RescoreQuery
+	{
+		[JsonPropertyName("rescore_query")]
+		public Nest.QueryDsl.QueryContainer Query { get; set; }
+
+		[JsonPropertyName("query_weight")]
+		public double? QueryWeight { get; set; }
+
+		[JsonPropertyName("rescore_query_weight")]
+		public double? RescoreQueryWeight { get; set; }
+
+		[JsonPropertyName("score_mode")]
+		public Nest.Global.Search.ScoreMode? ScoreMode { get; set; }
 	}
 
 	public partial class ScoreSort
@@ -616,6 +1525,90 @@ namespace Nest.Global.Search
 		}
 	}
 
+	public partial class SearchProfile
+	{
+		[JsonPropertyName("collector")]
+		public IReadOnlyCollection<Nest.Global.Search.Collector> Collector
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("query")]
+		public IReadOnlyCollection<Nest.Global.Search.QueryProfile> Query
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("rewrite_time")]
+		public long RewriteTime
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ShardProfile
+	{
+		[JsonPropertyName("aggregations")]
+		public IReadOnlyCollection<Nest.Global.Search.AggregationProfile> Aggregations
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("id")]
+		public string Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("searches")]
+		public IReadOnlyCollection<Nest.Global.Search.SearchProfile> Searches
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SmoothingModelContainer
+	{
+		[JsonPropertyName("laplace")]
+		public Nest.Global.Search.LaplaceSmoothingModel? Laplace { get; set; }
+
+		[JsonPropertyName("linear_interpolation")]
+		public Nest.Global.Search.LinearInterpolationSmoothingModel? LinearInterpolation { get; set; }
+
+		[JsonPropertyName("stupid_backoff")]
+		public Nest.Global.Search.StupidBackoffSmoothingModel? StupidBackoff { get; set; }
+	}
+
 	public partial class SortContainer
 	{
 		[JsonPropertyName("_doc")]
@@ -663,6 +1656,131 @@ namespace Nest.Global.Search
 		}
 	}
 
+	public partial class SourceFilter
+	{
+		[JsonPropertyName("exclude")]
+		public Nest.Fields? Exclude { get; set; }
+
+		[JsonPropertyName("excludes")]
+		public Nest.Fields? Excludes { get; set; }
+
+		[JsonPropertyName("include")]
+		public Nest.Fields? Include { get; set; }
+
+		[JsonPropertyName("includes")]
+		public Nest.Fields? Includes { get; set; }
+	}
+
+	public partial class StupidBackoffSmoothingModel
+	{
+		[JsonPropertyName("discount")]
+		public double Discount { get; set; }
+	}
+
+	public partial class Suggest<T>
+	{
+		[JsonPropertyName("length")]
+		public int Length
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("offset")]
+		public int Offset
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("options")]
+		public IReadOnlyCollection<Nest.Global.Search.SuggestOption<T>> Options
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("text")]
+		public string Text
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SuggestContainer
+	{
+		[JsonPropertyName("completion")]
+		public Nest.Global.Search.CompletionSuggester? Completion { get; set; }
+
+		[JsonPropertyName("phrase")]
+		public Nest.Global.Search.PhraseSuggester? Phrase { get; set; }
+
+		[JsonPropertyName("prefix")]
+		public string? Prefix { get; set; }
+
+		[JsonPropertyName("regex")]
+		public string? Regex { get; set; }
+
+		[JsonPropertyName("term")]
+		public Nest.Global.Search.TermSuggester? Term { get; set; }
+
+		[JsonPropertyName("text")]
+		public string? Text { get; set; }
+	}
+
+	public partial class SuggestContextQuery
+	{
+		[JsonPropertyName("boost")]
+		public double? Boost { get; set; }
+
+		[JsonPropertyName("context")]
+		public Nest.Global.Search.Context Context { get; set; }
+
+		[JsonPropertyName("neighbours")]
+		public Union<IEnumerable<Nest.Distance>, IEnumerable<int>>? Neighbours { get; set; }
+
+		[JsonPropertyName("precision")]
+		public Union<Nest.Distance, int>? Precision { get; set; }
+
+		[JsonPropertyName("prefix")]
+		public bool? Prefix { get; set; }
+	}
+
+	public partial class SuggestFuzziness
+	{
+		[JsonPropertyName("fuzziness")]
+		public Nest.Fuzziness Fuzziness { get; set; }
+
+		[JsonPropertyName("min_length")]
+		public int MinLength { get; set; }
+
+		[JsonPropertyName("prefix_length")]
+		public int PrefixLength { get; set; }
+
+		[JsonPropertyName("transpositions")]
+		public bool Transpositions { get; set; }
+
+		[JsonPropertyName("unicode_aware")]
+		public bool UnicodeAware { get; set; }
+	}
+
 	public partial class TermSuggestOption
 	{
 		[JsonPropertyName("freq")]
@@ -697,6 +1815,45 @@ namespace Nest.Global.Search
 			internal set;
 #endif
 		}
+	}
+
+	public partial class TermSuggester
+	{
+		[JsonPropertyName("lowercase_terms")]
+		public bool? LowercaseTerms { get; set; }
+
+		[JsonPropertyName("max_edits")]
+		public int? MaxEdits { get; set; }
+
+		[JsonPropertyName("max_inspections")]
+		public int? MaxInspections { get; set; }
+
+		[JsonPropertyName("max_term_freq")]
+		public float? MaxTermFreq { get; set; }
+
+		[JsonPropertyName("min_doc_freq")]
+		public float? MinDocFreq { get; set; }
+
+		[JsonPropertyName("min_word_length")]
+		public int? MinWordLength { get; set; }
+
+		[JsonPropertyName("prefix_length")]
+		public int? PrefixLength { get; set; }
+
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonPropertyName("sort")]
+		public Nest.Global.Search.SuggestSort? Sort { get; set; }
+
+		[JsonPropertyName("string_distance")]
+		public Nest.Global.Search.StringDistance? StringDistance { get; set; }
+
+		[JsonPropertyName("suggest_mode")]
+		public Nest.SuggestMode? SuggestMode { get; set; }
+
+		[JsonPropertyName("text")]
+		public string? Text { get; set; }
 	}
 
 	public partial class TotalHits

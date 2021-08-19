@@ -21,205 +21,179 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.QueryDsl
 {
-	public enum ChildScoreMode
+	public readonly partial struct ChildScoreMode
 	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
+		public ChildScoreMode(string value) => Value = value;
+		public string Value { get; }
+
+		public static ChildScoreMode Sum { get; } = new ChildScoreMode("sum");
+		public static ChildScoreMode None { get; } = new ChildScoreMode("none");
+		public static ChildScoreMode Min { get; } = new ChildScoreMode("min");
+		public static ChildScoreMode Max { get; } = new ChildScoreMode("max");
+		public static ChildScoreMode Avg { get; } = new ChildScoreMode("avg");
 	}
 
-	public enum CombinedFieldsOperator
+	public readonly partial struct CombinedFieldsOperator
 	{
-		[EnumMember(Value = "or")]
-		Or,
-		[EnumMember(Value = "and")]
-		And
+		public CombinedFieldsOperator(string value) => Value = value;
+		public string Value { get; }
+
+		public static CombinedFieldsOperator Or { get; } = new CombinedFieldsOperator("or");
+		public static CombinedFieldsOperator And { get; } = new CombinedFieldsOperator("and");
 	}
 
-	public enum CombinedFieldsZeroTerms
+	public readonly partial struct CombinedFieldsZeroTerms
 	{
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "all")]
-		All
+		public CombinedFieldsZeroTerms(string value) => Value = value;
+		public string Value { get; }
+
+		public static CombinedFieldsZeroTerms None { get; } = new CombinedFieldsZeroTerms("none");
+		public static CombinedFieldsZeroTerms All { get; } = new CombinedFieldsZeroTerms("all");
 	}
 
-	public enum FieldValueFactorModifier
+	public readonly partial struct FieldValueFactorModifier
 	{
-		[EnumMember(Value = "square")]
-		Square,
-		[EnumMember(Value = "sqrt")]
-		Sqrt,
-		[EnumMember(Value = "reciprocal")]
-		Reciprocal,
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "log2p")]
-		Log2p,
-		[EnumMember(Value = "log1p")]
-		Log1p,
-		[EnumMember(Value = "log")]
-		Log,
-		[EnumMember(Value = "ln2p")]
-		Ln2p,
-		[EnumMember(Value = "ln1p")]
-		Ln1p,
-		[EnumMember(Value = "ln")]
-		Ln
+		public FieldValueFactorModifier(string value) => Value = value;
+		public string Value { get; }
+
+		public static FieldValueFactorModifier Square { get; } = new FieldValueFactorModifier("square");
+		public static FieldValueFactorModifier Sqrt { get; } = new FieldValueFactorModifier("sqrt");
+		public static FieldValueFactorModifier Reciprocal { get; } = new FieldValueFactorModifier("reciprocal");
+		public static FieldValueFactorModifier None { get; } = new FieldValueFactorModifier("none");
+		public static FieldValueFactorModifier Log2p { get; } = new FieldValueFactorModifier("log2p");
+		public static FieldValueFactorModifier Log1p { get; } = new FieldValueFactorModifier("log1p");
+		public static FieldValueFactorModifier Log { get; } = new FieldValueFactorModifier("log");
+		public static FieldValueFactorModifier Ln2p { get; } = new FieldValueFactorModifier("ln2p");
+		public static FieldValueFactorModifier Ln1p { get; } = new FieldValueFactorModifier("ln1p");
+		public static FieldValueFactorModifier Ln { get; } = new FieldValueFactorModifier("ln");
 	}
 
-	public enum FunctionBoostMode
+	public readonly partial struct FunctionBoostMode
 	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "replace")]
-		Replace,
-		[EnumMember(Value = "multiply")]
-		Multiply,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
+		public FunctionBoostMode(string value) => Value = value;
+		public string Value { get; }
+
+		public static FunctionBoostMode Sum { get; } = new FunctionBoostMode("sum");
+		public static FunctionBoostMode Replace { get; } = new FunctionBoostMode("replace");
+		public static FunctionBoostMode Multiply { get; } = new FunctionBoostMode("multiply");
+		public static FunctionBoostMode Min { get; } = new FunctionBoostMode("min");
+		public static FunctionBoostMode Max { get; } = new FunctionBoostMode("max");
+		public static FunctionBoostMode Avg { get; } = new FunctionBoostMode("avg");
 	}
 
-	public enum FunctionScoreMode
+	public readonly partial struct FunctionScoreMode
 	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "multiply")]
-		Multiply,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "first")]
-		First,
-		[EnumMember(Value = "avg")]
-		Avg
+		public FunctionScoreMode(string value) => Value = value;
+		public string Value { get; }
+
+		public static FunctionScoreMode Sum { get; } = new FunctionScoreMode("sum");
+		public static FunctionScoreMode Multiply { get; } = new FunctionScoreMode("multiply");
+		public static FunctionScoreMode Min { get; } = new FunctionScoreMode("min");
+		public static FunctionScoreMode Max { get; } = new FunctionScoreMode("max");
+		public static FunctionScoreMode First { get; } = new FunctionScoreMode("first");
+		public static FunctionScoreMode Avg { get; } = new FunctionScoreMode("avg");
 	}
 
-	public enum GeoExecution
+	public readonly partial struct GeoExecution
 	{
-		[EnumMember(Value = "memory")]
-		Memory,
-		[EnumMember(Value = "indexed")]
-		Indexed
+		public GeoExecution(string value) => Value = value;
+		public string Value { get; }
+
+		public static GeoExecution Memory { get; } = new GeoExecution("memory");
+		public static GeoExecution Indexed { get; } = new GeoExecution("indexed");
 	}
 
-	public enum GeoValidationMethod
+	public readonly partial struct GeoValidationMethod
 	{
-		[EnumMember(Value = "strict")]
-		Strict,
-		[EnumMember(Value = "ignore_malformed")]
-		IgnoreMalformed,
-		[EnumMember(Value = "coerce")]
-		Coerce
+		public GeoValidationMethod(string value) => Value = value;
+		public string Value { get; }
+
+		public static GeoValidationMethod Strict { get; } = new GeoValidationMethod("strict");
+		public static GeoValidationMethod IgnoreMalformed { get; } = new GeoValidationMethod("ignore_malformed");
+		public static GeoValidationMethod Coerce { get; } = new GeoValidationMethod("coerce");
 	}
 
-	public enum MultiValueMode
+	public readonly partial struct MultiValueMode
 	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
+		public MultiValueMode(string value) => Value = value;
+		public string Value { get; }
+
+		public static MultiValueMode Sum { get; } = new MultiValueMode("sum");
+		public static MultiValueMode Min { get; } = new MultiValueMode("min");
+		public static MultiValueMode Max { get; } = new MultiValueMode("max");
+		public static MultiValueMode Avg { get; } = new MultiValueMode("avg");
 	}
 
-	public enum NestedScoreMode
+	public readonly partial struct NestedScoreMode
 	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
+		public NestedScoreMode(string value) => Value = value;
+		public string Value { get; }
+
+		public static NestedScoreMode Sum { get; } = new NestedScoreMode("sum");
+		public static NestedScoreMode None { get; } = new NestedScoreMode("none");
+		public static NestedScoreMode Min { get; } = new NestedScoreMode("min");
+		public static NestedScoreMode Max { get; } = new NestedScoreMode("max");
+		public static NestedScoreMode Avg { get; } = new NestedScoreMode("avg");
 	}
 
-	public enum Operator
+	public readonly partial struct Operator
 	{
-		[EnumMember(Value = "or")]
-		Or,
-		[EnumMember(Value = "and")]
-		And
+		public Operator(string value) => Value = value;
+		public string Value { get; }
+
+		public static Operator Or { get; } = new Operator("or");
+		public static Operator And { get; } = new Operator("and");
 	}
 
-	public enum RangeRelation
+	public readonly partial struct RangeRelation
 	{
-		[EnumMember(Value = "within")]
-		Within,
-		[EnumMember(Value = "intersects")]
-		Intersects,
-		[EnumMember(Value = "contains")]
-		Contains
+		public RangeRelation(string value) => Value = value;
+		public string Value { get; }
+
+		public static RangeRelation Within { get; } = new RangeRelation("within");
+		public static RangeRelation Intersects { get; } = new RangeRelation("intersects");
+		public static RangeRelation Contains { get; } = new RangeRelation("contains");
 	}
 
-	public enum SimpleQueryStringFlags
+	public readonly partial struct SimpleQueryStringFlags
 	{
-		[EnumMember(Value = "WHITESPACE")]
-		Whitespace,
-		[EnumMember(Value = "SLOP")]
-		Slop,
-		[EnumMember(Value = "PREFIX")]
-		Prefix,
-		[EnumMember(Value = "PRECEDENCE")]
-		Precedence,
-		[EnumMember(Value = "PHRASE")]
-		Phrase,
-		[EnumMember(Value = "OR")]
-		Or,
-		[EnumMember(Value = "NOT")]
-		Not,
-		[EnumMember(Value = "NONE")]
-		None,
-		[EnumMember(Value = "NEAR")]
-		Near,
-		[EnumMember(Value = "FUZZY")]
-		Fuzzy,
-		[EnumMember(Value = "ESCAPE")]
-		Escape,
-		[EnumMember(Value = "AND")]
-		And,
-		[EnumMember(Value = "ALL")]
-		All
+		public SimpleQueryStringFlags(string value) => Value = value;
+		public string Value { get; }
+
+		public static SimpleQueryStringFlags Whitespace { get; } = new SimpleQueryStringFlags("WHITESPACE");
+		public static SimpleQueryStringFlags Slop { get; } = new SimpleQueryStringFlags("SLOP");
+		public static SimpleQueryStringFlags Prefix { get; } = new SimpleQueryStringFlags("PREFIX");
+		public static SimpleQueryStringFlags Precedence { get; } = new SimpleQueryStringFlags("PRECEDENCE");
+		public static SimpleQueryStringFlags Phrase { get; } = new SimpleQueryStringFlags("PHRASE");
+		public static SimpleQueryStringFlags Or { get; } = new SimpleQueryStringFlags("OR");
+		public static SimpleQueryStringFlags Not { get; } = new SimpleQueryStringFlags("NOT");
+		public static SimpleQueryStringFlags None { get; } = new SimpleQueryStringFlags("NONE");
+		public static SimpleQueryStringFlags Near { get; } = new SimpleQueryStringFlags("NEAR");
+		public static SimpleQueryStringFlags Fuzzy { get; } = new SimpleQueryStringFlags("FUZZY");
+		public static SimpleQueryStringFlags Escape { get; } = new SimpleQueryStringFlags("ESCAPE");
+		public static SimpleQueryStringFlags And { get; } = new SimpleQueryStringFlags("AND");
+		public static SimpleQueryStringFlags All { get; } = new SimpleQueryStringFlags("ALL");
 	}
 
-	public enum TextQueryType
+	public readonly partial struct TextQueryType
 	{
-		[EnumMember(Value = "phrase_prefix")]
-		PhrasePrefix,
-		[EnumMember(Value = "phrase")]
-		Phrase,
-		[EnumMember(Value = "most_fields")]
-		MostFields,
-		[EnumMember(Value = "cross_fields")]
-		CrossFields,
-		[EnumMember(Value = "bool_prefix")]
-		BoolPrefix,
-		[EnumMember(Value = "best_fields")]
-		BestFields
+		public TextQueryType(string value) => Value = value;
+		public string Value { get; }
+
+		public static TextQueryType PhrasePrefix { get; } = new TextQueryType("phrase_prefix");
+		public static TextQueryType Phrase { get; } = new TextQueryType("phrase");
+		public static TextQueryType MostFields { get; } = new TextQueryType("most_fields");
+		public static TextQueryType CrossFields { get; } = new TextQueryType("cross_fields");
+		public static TextQueryType BoolPrefix { get; } = new TextQueryType("bool_prefix");
+		public static TextQueryType BestFields { get; } = new TextQueryType("best_fields");
 	}
 
-	public enum ZeroTermsQuery
+	public readonly partial struct ZeroTermsQuery
 	{
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "all")]
-		All
+		public ZeroTermsQuery(string value) => Value = value;
+		public string Value { get; }
+
+		public static ZeroTermsQuery None { get; } = new ZeroTermsQuery("none");
+		public static ZeroTermsQuery All { get; } = new ZeroTermsQuery("all");
 	}
 }

@@ -21,11 +21,12 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Security.GrantApiKey
 {
-	public enum ApiKeyGrantType
+	public readonly partial struct ApiKeyGrantType
 	{
-		[EnumMember(Value = "password")]
-		Password,
-		[EnumMember(Value = "access_token")]
-		AccessToken
+		public ApiKeyGrantType(string value) => Value = value;
+		public string Value { get; }
+
+		public static ApiKeyGrantType Password { get; } = new ApiKeyGrantType("password");
+		public static ApiKeyGrantType AccessToken { get; } = new ApiKeyGrantType("access_token");
 	}
 }

@@ -21,15 +21,14 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.IndexManagement.AddBlock
 {
-	public enum IndicesBlockOptions
+	public readonly partial struct IndicesBlockOptions
 	{
-		[EnumMember(Value = "write")]
-		Write,
-		[EnumMember(Value = "read_only")]
-		ReadOnly,
-		[EnumMember(Value = "read")]
-		Read,
-		[EnumMember(Value = "metadata")]
-		Metadata
+		public IndicesBlockOptions(string value) => Value = value;
+		public string Value { get; }
+
+		public static IndicesBlockOptions Write { get; } = new IndicesBlockOptions("write");
+		public static IndicesBlockOptions ReadOnly { get; } = new IndicesBlockOptions("read_only");
+		public static IndicesBlockOptions Read { get; } = new IndicesBlockOptions("read");
+		public static IndicesBlockOptions Metadata { get; } = new IndicesBlockOptions("metadata");
 	}
 }

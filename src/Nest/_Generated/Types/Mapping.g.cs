@@ -25,6 +25,39 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest.Mapping
 {
+	public partial class AllField
+	{
+		[JsonPropertyName("analyzer")]
+		public string Analyzer { get; set; }
+
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+
+		[JsonPropertyName("omit_norms")]
+		public bool OmitNorms { get; set; }
+
+		[JsonPropertyName("search_analyzer")]
+		public string SearchAnalyzer { get; set; }
+
+		[JsonPropertyName("similarity")]
+		public string Similarity { get; set; }
+
+		[JsonPropertyName("store")]
+		public bool Store { get; set; }
+
+		[JsonPropertyName("store_term_vector_offsets")]
+		public bool StoreTermVectorOffsets { get; set; }
+
+		[JsonPropertyName("store_term_vector_payloads")]
+		public bool StoreTermVectorPayloads { get; set; }
+
+		[JsonPropertyName("store_term_vector_positions")]
+		public bool StoreTermVectorPositions { get; set; }
+
+		[JsonPropertyName("store_term_vectors")]
+		public bool StoreTermVectors { get; set; }
+	}
+
 	public partial class BinaryProperty
 	{
 		[JsonPropertyName("type")]
@@ -95,7 +128,7 @@ namespace Nest.Mapping
 		}
 
 		[JsonPropertyName("contexts")]
-		public IReadOnlyCollection<Nest.Mapping.SuggestContext> Contexts
+		public IReadOnlyCollection<Nest.Mapping.SuggestContext>? Contexts
 		{
 			get;
 #if NET5_0
@@ -158,7 +191,7 @@ namespace Nest.Mapping
 		[JsonPropertyName("type")]
 		public string Type => "constant_keyword";
 		[JsonPropertyName("value")]
-		public object Value
+		public object? Value
 		{
 			get;
 #if NET5_0
@@ -347,6 +380,30 @@ namespace Nest.Mapping
 		public string Type => "double_range";
 	}
 
+	public partial class DynamicTemplate
+	{
+		[JsonPropertyName("mapping")]
+		public Nest.Mapping.PropertyBase? Mapping { get; set; }
+
+		[JsonPropertyName("match")]
+		public string? Match { get; set; }
+
+		[JsonPropertyName("match_mapping_type")]
+		public string? MatchMappingType { get; set; }
+
+		[JsonPropertyName("match_pattern")]
+		public Nest.Mapping.MatchType? MatchPattern { get; set; }
+
+		[JsonPropertyName("path_match")]
+		public string? PathMatch { get; set; }
+
+		[JsonPropertyName("path_unmatch")]
+		public string? PathUnmatch { get; set; }
+
+		[JsonPropertyName("unmatch")]
+		public string? Unmatch { get; set; }
+	}
+
 	public partial class FieldAliasProperty
 	{
 		[JsonPropertyName("path")]
@@ -362,6 +419,16 @@ namespace Nest.Mapping
 
 		[JsonPropertyName("type")]
 		public string Type => "alias";
+	}
+
+	public partial class FieldMapping
+	{
+	}
+
+	public partial class FieldNamesField
+	{
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
 	}
 
 	public partial class FlattenedProperty
@@ -727,6 +794,12 @@ namespace Nest.Mapping
 		public string Type => "histogram";
 	}
 
+	public partial class IndexField
+	{
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+	}
+
 	public partial class IntegerRangeProperty
 	{
 		[JsonPropertyName("type")]
@@ -781,7 +854,7 @@ namespace Nest.Mapping
 	public partial class JoinProperty
 	{
 		[JsonPropertyName("relations")]
-		public Dictionary<RelationName, Union<RelationName, IReadOnlyCollection<RelationName>>>? Relations
+		public Dictionary<Nest.RelationName, Union<Nest.RelationName, IReadOnlyCollection<Nest.RelationName>>>? Relations
 		{
 			get;
 #if NET5_0
@@ -1093,6 +1166,30 @@ namespace Nest.Mapping
 		public string Type => "point";
 	}
 
+	public partial class PropertyBase
+	{
+		[JsonPropertyName("dynamic")]
+		public Union<bool, Nest.Mapping.DynamicMapping>? Dynamic { get; set; }
+
+		[JsonPropertyName("fields")]
+		public Dictionary<Nest.PropertyName, Nest.Mapping.Property>? Fields { get; set; }
+
+		[JsonPropertyName("ignore_above")]
+		public int? IgnoreAbove { get; set; }
+
+		[JsonPropertyName("local_metadata")]
+		public Nest.Metadata? LocalMetadata { get; set; }
+
+		[JsonPropertyName("meta")]
+		public Dictionary<string, string>? Meta { get; set; }
+
+		[JsonPropertyName("name")]
+		public Nest.PropertyName? Name { get; set; }
+
+		[JsonPropertyName("properties")]
+		public Dictionary<Nest.PropertyName, Nest.Mapping.Property>? Properties { get; set; }
+	}
+
 	public partial class RankFeatureProperty
 	{
 		[JsonPropertyName("positive_score_impact")]
@@ -1116,40 +1213,22 @@ namespace Nest.Mapping
 		public string Type => "rank_features";
 	}
 
+	public partial class RoutingField
+	{
+		[JsonPropertyName("required")]
+		public bool Required { get; set; }
+	}
+
 	public partial class RuntimeField
 	{
 		[JsonPropertyName("format")]
-		public string? Format
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Format { get; set; }
 
 		[JsonPropertyName("script")]
-		public Nest.Script? Script
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Script? Script { get; set; }
 
 		[JsonPropertyName("type")]
-		public Nest.Mapping.RuntimeFieldType Type
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Mapping.RuntimeFieldType Type { get; set; }
 	}
 
 	public partial class SearchAsYouTypeProperty
@@ -1294,6 +1373,30 @@ namespace Nest.Mapping
 
 		[JsonPropertyName("type")]
 		public string Type => "shape";
+	}
+
+	public partial class SizeField
+	{
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+	}
+
+	public partial class SourceField
+	{
+		[JsonPropertyName("compress")]
+		public bool? Compress { get; set; }
+
+		[JsonPropertyName("compress_threshold")]
+		public string? CompressThreshold { get; set; }
+
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+
+		[JsonPropertyName("excludes")]
+		public IEnumerable<string>? Excludes { get; set; }
+
+		[JsonPropertyName("includes")]
+		public IEnumerable<string>? Includes { get; set; }
 	}
 
 	public partial class SuggestContext
@@ -1587,6 +1690,51 @@ namespace Nest.Mapping
 
 		[JsonPropertyName("type")]
 		public string Type => "token_count";
+	}
+
+	public partial class TypeMapping
+	{
+		[JsonPropertyName("all_field")]
+		public Nest.Mapping.AllField? AllField { get; set; }
+
+		[JsonPropertyName("date_detection")]
+		public bool? DateDetection { get; set; }
+
+		[JsonPropertyName("dynamic")]
+		public Union<bool, Nest.Mapping.DynamicMapping>? Dynamic { get; set; }
+
+		[JsonPropertyName("dynamic_date_formats")]
+		public IEnumerable<string>? DynamicDateFormats { get; set; }
+
+		[JsonPropertyName("dynamic_templates")]
+		public Union<Dictionary<string, Nest.Mapping.DynamicTemplate>, IEnumerable<Dictionary<string, Nest.Mapping.DynamicTemplate>>>? DynamicTemplates { get; set; }
+
+		[JsonPropertyName("_field_names")]
+		public Nest.Mapping.FieldNamesField? FieldNames { get; set; }
+
+		[JsonPropertyName("index_field")]
+		public Nest.Mapping.IndexField? IndexField { get; set; }
+
+		[JsonPropertyName("_meta")]
+		public Nest.Metadata? Meta { get; set; }
+
+		[JsonPropertyName("numeric_detection")]
+		public bool? NumericDetection { get; set; }
+
+		[JsonPropertyName("properties")]
+		public Dictionary<Nest.PropertyName, Nest.Mapping.Property>? Properties { get; set; }
+
+		[JsonPropertyName("_routing")]
+		public Nest.Mapping.RoutingField? Routing { get; set; }
+
+		[JsonPropertyName("runtime")]
+		public Dictionary<string, Nest.Mapping.RuntimeField>? Runtime { get; set; }
+
+		[JsonPropertyName("_size")]
+		public Nest.Mapping.SizeField? Size { get; set; }
+
+		[JsonPropertyName("_source")]
+		public Nest.Mapping.SourceField? Source { get; set; }
 	}
 
 	public partial class VersionProperty

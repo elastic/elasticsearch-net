@@ -35,7 +35,7 @@ namespace Nest.Global.Search
 	{
 	}
 
-	public partial class SuggestOption
+	public partial class SuggestOption<TDocument>
 	{
 	}
 }

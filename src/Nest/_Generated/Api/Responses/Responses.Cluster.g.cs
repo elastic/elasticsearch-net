@@ -20,9 +20,344 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Nest.Cluster.Health
+namespace Nest.Cluster
 {
-	public partial class ClusterHealthResponse : ResponseBase
+	public partial class AllocationExplainResponse : ResponseBase
+	{
+		[JsonPropertyName("allocate_explanation")]
+		public string? AllocateExplanation
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("allocation_delay")]
+		public string? AllocationDelay
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("allocation_delay_in_millis")]
+		public long? AllocationDelayInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("can_allocate")]
+		public Nest.Cluster.AllocationExplain.Decision? CanAllocate
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("can_move_to_other_node")]
+		public Nest.Cluster.AllocationExplain.Decision? CanMoveToOtherNode
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("can_rebalance_cluster")]
+		public Nest.Cluster.AllocationExplain.Decision? CanRebalanceCluster
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("can_rebalance_cluster_decisions")]
+		public IReadOnlyCollection<Nest.Cluster.AllocationExplain.AllocationDecision>? CanRebalanceClusterDecisions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("can_rebalance_to_other_node")]
+		public Nest.Cluster.AllocationExplain.Decision? CanRebalanceToOtherNode
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("can_remain_decisions")]
+		public IReadOnlyCollection<Nest.Cluster.AllocationExplain.AllocationDecision>? CanRemainDecisions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("can_remain_on_current_node")]
+		public Nest.Cluster.AllocationExplain.Decision? CanRemainOnCurrentNode
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cluster_info")]
+		public Nest.Cluster.AllocationExplain.ClusterInfo? ClusterInfo
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("configured_delay")]
+		public string? ConfiguredDelay
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("configured_delay_in_millis")]
+		public long? ConfiguredDelayInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("current_node")]
+		public Nest.Cluster.AllocationExplain.CurrentNode? CurrentNode
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("current_state")]
+		public string CurrentState
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index")]
+		public Nest.IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("move_explanation")]
+		public string? MoveExplanation
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("node_allocation_decisions")]
+		public IReadOnlyCollection<Nest.Cluster.AllocationExplain.NodeAllocationExplanation>? NodeAllocationDecisions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("primary")]
+		public bool Primary
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("rebalance_explanation")]
+		public string? RebalanceExplanation
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("remaining_delay")]
+		public string? RemainingDelay
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("remaining_delay_in_millis")]
+		public long? RemainingDelayInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shard")]
+		public int Shard
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("unassigned_info")]
+		public Nest.Cluster.AllocationExplain.UnassignedInformation? UnassignedInfo
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DeleteComponentTemplateResponse : AcknowledgedResponseBase
+	{
+	}
+
+	public partial class DeleteVotingConfigExclusionsResponse : ResponseBase
+	{
+		[JsonPropertyName("stub")]
+		public int Stub
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GetComponentTemplateResponse : ResponseBase
+	{
+		[JsonPropertyName("component_templates")]
+		public IReadOnlyCollection<Nest.Cluster.ComponentTemplate> ComponentTemplates
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GetSettingsResponse : ResponseBase
+	{
+		[JsonPropertyName("defaults")]
+		public Dictionary<string, object>? Defaults
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("persistent")]
+		public Dictionary<string, object> Persistent
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transient")]
+		public Dictionary<string, object> Transient
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class HealthResponse : ResponseBase
 	{
 		[JsonPropertyName("active_primary_shards")]
 		public int ActivePrimaryShards
@@ -80,7 +415,7 @@ namespace Nest.Cluster.Health
 		}
 
 		[JsonPropertyName("indices")]
-		public Dictionary<Nest.IndexName, Nest.Cluster.Health.IndexHealthStats> Indices
+		public Dictionary<Nest.IndexName, Nest.Cluster.Health.IndexHealthStats>? Indices
 		{
 			get;
 #if NET5_0
@@ -191,6 +526,318 @@ namespace Nest.Cluster.Health
 
 		[JsonPropertyName("unassigned_shards")]
 		public int UnassignedShards
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class PendingTasksResponse : ResponseBase
+	{
+		[JsonPropertyName("tasks")]
+		public IReadOnlyCollection<Nest.Cluster.PendingTasks.PendingTask> Tasks
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class PostVotingConfigExclusionsResponse : ResponseBase
+	{
+		[JsonPropertyName("stub")]
+		public int Stub
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class PutComponentTemplateResponse : AcknowledgedResponseBase
+	{
+	}
+
+	public partial class PutSettingsResponse : ResponseBase
+	{
+		[JsonPropertyName("acknowledged")]
+		public bool Acknowledged
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("persistent")]
+		public Dictionary<string, object> Persistent
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transient")]
+		public Dictionary<string, object> Transient
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RemoteInfoResponse : DictionaryResponseBase<string, Nest.Cluster.RemoteInfo.ClusterRemoteInfo>
+	{
+	}
+
+	public partial class RerouteResponse : AcknowledgedResponseBase
+	{
+		[JsonPropertyName("explanations")]
+		public IReadOnlyCollection<Nest.Cluster.Reroute.RerouteExplanation>? Explanations
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("state")]
+		public Nest.Cluster.Reroute.RerouteState State
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class StateResponse : ResponseBase
+	{
+		[JsonPropertyName("blocks")]
+		public Nest.Cluster.State.ClusterStateBlocks? Blocks
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cluster_name")]
+		public Nest.Name ClusterName
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cluster_uuid")]
+		public Nest.Uuid ClusterUuid
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("master_node")]
+		public string? MasterNode
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("metadata")]
+		public Nest.Cluster.ClusterStateMetadata? Metadata
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("nodes")]
+		public Dictionary<Nest.NodeName, Nest.NodeAttributes>? Nodes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("routing_nodes")]
+		public Nest.Cluster.ClusterStateRoutingNodes? RoutingNodes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("routing_table")]
+		public Dictionary<string, Nest.EmptyObject>? RoutingTable
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("snapshot_deletions")]
+		public Nest.Cluster.ClusterStateDeletedSnapshots? SnapshotDeletions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("snapshots")]
+		public Nest.Cluster.ClusterStateSnapshots? Snapshots
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("state")]
+		public IReadOnlyCollection<string>? State
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("state_uuid")]
+		public Nest.Uuid? StateUuid
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public Nest.VersionNumber? Version
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class StatsResponse : NodesResponseBase
+	{
+		[JsonPropertyName("cluster_name")]
+		public Nest.Name ClusterName
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cluster_uuid")]
+		public Nest.Uuid ClusterUuid
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("indices")]
+		public Nest.Cluster.Stats.ClusterIndices Indices
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("nodes")]
+		public Nest.Cluster.Stats.ClusterNodes Nodes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("status")]
+		public Nest.Cluster.ClusterStatus Status
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("timestamp")]
+		public long Timestamp
 		{
 			get;
 #if NET5_0

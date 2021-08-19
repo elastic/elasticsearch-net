@@ -21,13 +21,13 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.IndexManagement.ShardStores
 {
-	public enum ShardStoreAllocation
+	public readonly partial struct ShardStoreAllocation
 	{
-		[EnumMember(Value = "unused")]
-		Unused,
-		[EnumMember(Value = "replica")]
-		Replica,
-		[EnumMember(Value = "primary")]
-		Primary
+		public ShardStoreAllocation(string value) => Value = value;
+		public string Value { get; }
+
+		public static ShardStoreAllocation Unused { get; } = new ShardStoreAllocation("unused");
+		public static ShardStoreAllocation Replica { get; } = new ShardStoreAllocation("replica");
+		public static ShardStoreAllocation Primary { get; } = new ShardStoreAllocation("primary");
 	}
 }

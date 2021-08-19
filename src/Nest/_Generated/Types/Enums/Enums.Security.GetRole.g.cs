@@ -21,11 +21,12 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Security.GetRole
 {
-	public enum TemplateFormat
+	public readonly partial struct TemplateFormat
 	{
-		[EnumMember(Value = "string")]
-		String,
-		[EnumMember(Value = "json")]
-		Json
+		public TemplateFormat(string value) => Value = value;
+		public string Value { get; }
+
+		public static TemplateFormat String { get; } = new TemplateFormat("string");
+		public static TemplateFormat Json { get; } = new TemplateFormat("json");
 	}
 }

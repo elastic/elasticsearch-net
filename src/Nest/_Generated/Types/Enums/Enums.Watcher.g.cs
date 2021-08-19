@@ -21,223 +21,193 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Watcher
 {
-	public enum AcknowledgementOptions
+	public readonly partial struct AcknowledgementOptions
 	{
-		[EnumMember(Value = "awaits_successful_execution")]
-		AwaitsSuccessfulExecution,
-		[EnumMember(Value = "acked")]
-		Acked,
-		[EnumMember(Value = "ackable")]
-		Ackable
+		public AcknowledgementOptions(string value) => Value = value;
+		public string Value { get; }
+
+		public static AcknowledgementOptions AwaitsSuccessfulExecution { get; } = new AcknowledgementOptions("awaits_successful_execution");
+		public static AcknowledgementOptions Acked { get; } = new AcknowledgementOptions("acked");
+		public static AcknowledgementOptions Ackable { get; } = new AcknowledgementOptions("ackable");
 	}
 
-	public enum ActionExecutionMode
+	public readonly partial struct ActionExecutionMode
 	{
-		[EnumMember(Value = "skip")]
-		Skip,
-		[EnumMember(Value = "simulate")]
-		Simulate,
-		[EnumMember(Value = "force_simulate")]
-		ForceSimulate,
-		[EnumMember(Value = "force_execute")]
-		ForceExecute,
-		[EnumMember(Value = "execute")]
-		Execute
+		public ActionExecutionMode(string value) => Value = value;
+		public string Value { get; }
+
+		public static ActionExecutionMode Skip { get; } = new ActionExecutionMode("skip");
+		public static ActionExecutionMode Simulate { get; } = new ActionExecutionMode("simulate");
+		public static ActionExecutionMode ForceSimulate { get; } = new ActionExecutionMode("force_simulate");
+		public static ActionExecutionMode ForceExecute { get; } = new ActionExecutionMode("force_execute");
+		public static ActionExecutionMode Execute { get; } = new ActionExecutionMode("execute");
 	}
 
-	public enum ActionStatusOptions
+	public readonly partial struct ActionStatusOptions
 	{
-		[EnumMember(Value = "throttled")]
-		Throttled,
-		[EnumMember(Value = "success")]
-		Success,
-		[EnumMember(Value = "simulated")]
-		Simulated,
-		[EnumMember(Value = "failure")]
-		Failure
+		public ActionStatusOptions(string value) => Value = value;
+		public string Value { get; }
+
+		public static ActionStatusOptions Throttled { get; } = new ActionStatusOptions("throttled");
+		public static ActionStatusOptions Success { get; } = new ActionStatusOptions("success");
+		public static ActionStatusOptions Simulated { get; } = new ActionStatusOptions("simulated");
+		public static ActionStatusOptions Failure { get; } = new ActionStatusOptions("failure");
 	}
 
-	public enum ActionType
+	public readonly partial struct ActionType
 	{
-		[EnumMember(Value = "webhook")]
-		Webhook,
-		[EnumMember(Value = "slack")]
-		Slack,
-		[EnumMember(Value = "pagerduty")]
-		Pagerduty,
-		[EnumMember(Value = "logging")]
-		Logging,
-		[EnumMember(Value = "index")]
-		Index,
-		[EnumMember(Value = "email")]
-		Email
+		public ActionType(string value) => Value = value;
+		public string Value { get; }
+
+		public static ActionType Webhook { get; } = new ActionType("webhook");
+		public static ActionType Slack { get; } = new ActionType("slack");
+		public static ActionType Pagerduty { get; } = new ActionType("pagerduty");
+		public static ActionType Logging { get; } = new ActionType("logging");
+		public static ActionType Index { get; } = new ActionType("index");
+		public static ActionType Email { get; } = new ActionType("email");
 	}
 
-	public enum ConditionType
+	public readonly partial struct ConditionType
 	{
-		[EnumMember(Value = "script")]
-		Script,
-		[EnumMember(Value = "never")]
-		Never,
-		[EnumMember(Value = "compare")]
-		Compare,
-		[EnumMember(Value = "array_compare")]
-		ArrayCompare,
-		[EnumMember(Value = "always")]
-		Always
+		public ConditionType(string value) => Value = value;
+		public string Value { get; }
+
+		public static ConditionType Script { get; } = new ConditionType("script");
+		public static ConditionType Never { get; } = new ConditionType("never");
+		public static ConditionType Compare { get; } = new ConditionType("compare");
+		public static ConditionType ArrayCompare { get; } = new ConditionType("array_compare");
+		public static ConditionType Always { get; } = new ConditionType("always");
 	}
 
-	public enum ConnectionScheme
+	public readonly partial struct ConnectionScheme
 	{
-		[EnumMember(Value = "https")]
-		Https,
-		[EnumMember(Value = "http")]
-		Http
+		public ConnectionScheme(string value) => Value = value;
+		public string Value { get; }
+
+		public static ConnectionScheme Https { get; } = new ConnectionScheme("https");
+		public static ConnectionScheme Http { get; } = new ConnectionScheme("http");
 	}
 
-	public enum Day
+	public readonly partial struct Day
 	{
-		[EnumMember(Value = "wednesday")]
-		Wednesday,
-		[EnumMember(Value = "tuesday")]
-		Tuesday,
-		[EnumMember(Value = "thursday")]
-		Thursday,
-		[EnumMember(Value = "sunday")]
-		Sunday,
-		[EnumMember(Value = "saturday")]
-		Saturday,
-		[EnumMember(Value = "monday")]
-		Monday,
-		[EnumMember(Value = "friday")]
-		Friday
+		public Day(string value) => Value = value;
+		public string Value { get; }
+
+		public static Day Wednesday { get; } = new Day("wednesday");
+		public static Day Tuesday { get; } = new Day("tuesday");
+		public static Day Thursday { get; } = new Day("thursday");
+		public static Day Sunday { get; } = new Day("sunday");
+		public static Day Saturday { get; } = new Day("saturday");
+		public static Day Monday { get; } = new Day("monday");
+		public static Day Friday { get; } = new Day("friday");
 	}
 
-	public enum ExecutionPhase
+	public readonly partial struct ExecutionPhase
 	{
-		[EnumMember(Value = "watch_transform")]
-		WatchTransform,
-		[EnumMember(Value = "started")]
-		Started,
-		[EnumMember(Value = "input")]
-		Input,
-		[EnumMember(Value = "finished")]
-		Finished,
-		[EnumMember(Value = "condition")]
-		Condition,
-		[EnumMember(Value = "awaits_execution")]
-		AwaitsExecution,
-		[EnumMember(Value = "actions")]
-		Actions,
-		[EnumMember(Value = "aborted")]
-		Aborted
+		public ExecutionPhase(string value) => Value = value;
+		public string Value { get; }
+
+		public static ExecutionPhase WatchTransform { get; } = new ExecutionPhase("watch_transform");
+		public static ExecutionPhase Started { get; } = new ExecutionPhase("started");
+		public static ExecutionPhase Input { get; } = new ExecutionPhase("input");
+		public static ExecutionPhase Finished { get; } = new ExecutionPhase("finished");
+		public static ExecutionPhase Condition { get; } = new ExecutionPhase("condition");
+		public static ExecutionPhase AwaitsExecution { get; } = new ExecutionPhase("awaits_execution");
+		public static ExecutionPhase Actions { get; } = new ExecutionPhase("actions");
+		public static ExecutionPhase Aborted { get; } = new ExecutionPhase("aborted");
 	}
 
-	public enum ExecutionStatus
+	public readonly partial struct ExecutionStatus
 	{
-		[EnumMember(Value = "throttled")]
-		Throttled,
-		[EnumMember(Value = "not_executed_already_queued")]
-		NotExecutedAlreadyQueued,
-		[EnumMember(Value = "failed")]
-		Failed,
-		[EnumMember(Value = "execution_not_needed")]
-		ExecutionNotNeeded,
-		[EnumMember(Value = "executed")]
-		Executed,
-		[EnumMember(Value = "deleted_while_queued")]
-		DeletedWhileQueued,
-		[EnumMember(Value = "checking")]
-		Checking,
-		[EnumMember(Value = "awaits_execution")]
-		AwaitsExecution
+		public ExecutionStatus(string value) => Value = value;
+		public string Value { get; }
+
+		public static ExecutionStatus Throttled { get; } = new ExecutionStatus("throttled");
+		public static ExecutionStatus NotExecutedAlreadyQueued { get; } = new ExecutionStatus("not_executed_already_queued");
+		public static ExecutionStatus Failed { get; } = new ExecutionStatus("failed");
+		public static ExecutionStatus ExecutionNotNeeded { get; } = new ExecutionStatus("execution_not_needed");
+		public static ExecutionStatus Executed { get; } = new ExecutionStatus("executed");
+		public static ExecutionStatus DeletedWhileQueued { get; } = new ExecutionStatus("deleted_while_queued");
+		public static ExecutionStatus Checking { get; } = new ExecutionStatus("checking");
+		public static ExecutionStatus AwaitsExecution { get; } = new ExecutionStatus("awaits_execution");
 	}
 
-	public enum HttpInputMethod
+	public readonly partial struct HttpInputMethod
 	{
-		[EnumMember(Value = "put")]
-		Put,
-		[EnumMember(Value = "post")]
-		Post,
-		[EnumMember(Value = "head")]
-		Head,
-		[EnumMember(Value = "get")]
-		Get,
-		[EnumMember(Value = "delete")]
-		Delete
+		public HttpInputMethod(string value) => Value = value;
+		public string Value { get; }
+
+		public static HttpInputMethod Put { get; } = new HttpInputMethod("put");
+		public static HttpInputMethod Post { get; } = new HttpInputMethod("post");
+		public static HttpInputMethod Head { get; } = new HttpInputMethod("head");
+		public static HttpInputMethod Get { get; } = new HttpInputMethod("get");
+		public static HttpInputMethod Delete { get; } = new HttpInputMethod("delete");
 	}
 
-	public enum InputType
+	public readonly partial struct InputType
 	{
-		[EnumMember(Value = "simple")]
-		Simple,
-		[EnumMember(Value = "search")]
-		Search,
-		[EnumMember(Value = "http")]
-		Http
+		public InputType(string value) => Value = value;
+		public string Value { get; }
+
+		public static InputType Simple { get; } = new InputType("simple");
+		public static InputType Search { get; } = new InputType("search");
+		public static InputType Http { get; } = new InputType("http");
 	}
 
-	public enum Month
+	public readonly partial struct Month
 	{
-		[EnumMember(Value = "september")]
-		September,
-		[EnumMember(Value = "october")]
-		October,
-		[EnumMember(Value = "november")]
-		November,
-		[EnumMember(Value = "may")]
-		May,
-		[EnumMember(Value = "march")]
-		March,
-		[EnumMember(Value = "june")]
-		June,
-		[EnumMember(Value = "july")]
-		July,
-		[EnumMember(Value = "january")]
-		January,
-		[EnumMember(Value = "february")]
-		February,
-		[EnumMember(Value = "december")]
-		December,
-		[EnumMember(Value = "august")]
-		August,
-		[EnumMember(Value = "april")]
-		April
+		public Month(string value) => Value = value;
+		public string Value { get; }
+
+		public static Month September { get; } = new Month("september");
+		public static Month October { get; } = new Month("october");
+		public static Month November { get; } = new Month("november");
+		public static Month May { get; } = new Month("may");
+		public static Month March { get; } = new Month("march");
+		public static Month June { get; } = new Month("june");
+		public static Month July { get; } = new Month("july");
+		public static Month January { get; } = new Month("january");
+		public static Month February { get; } = new Month("february");
+		public static Month December { get; } = new Month("december");
+		public static Month August { get; } = new Month("august");
+		public static Month April { get; } = new Month("april");
 	}
 
-	public enum PagerDutyContextType
+	public readonly partial struct PagerDutyContextType
 	{
-		[EnumMember(Value = "link")]
-		Link,
-		[EnumMember(Value = "image")]
-		Image
+		public PagerDutyContextType(string value) => Value = value;
+		public string Value { get; }
+
+		public static PagerDutyContextType Link { get; } = new PagerDutyContextType("link");
+		public static PagerDutyContextType Image { get; } = new PagerDutyContextType("image");
 	}
 
-	public enum PagerDutyEventType
+	public readonly partial struct PagerDutyEventType
 	{
-		[EnumMember(Value = "trigger")]
-		Trigger,
-		[EnumMember(Value = "resolve")]
-		Resolve,
-		[EnumMember(Value = "acknowledge")]
-		Acknowledge
+		public PagerDutyEventType(string value) => Value = value;
+		public string Value { get; }
+
+		public static PagerDutyEventType Trigger { get; } = new PagerDutyEventType("trigger");
+		public static PagerDutyEventType Resolve { get; } = new PagerDutyEventType("resolve");
+		public static PagerDutyEventType Acknowledge { get; } = new PagerDutyEventType("acknowledge");
 	}
 
-	public enum Quantifier
+	public readonly partial struct Quantifier
 	{
-		[EnumMember(Value = "some")]
-		Some,
-		[EnumMember(Value = "all")]
-		All
+		public Quantifier(string value) => Value = value;
+		public string Value { get; }
+
+		public static Quantifier Some { get; } = new Quantifier("some");
+		public static Quantifier All { get; } = new Quantifier("all");
 	}
 
-	public enum ResponseContentType
+	public readonly partial struct ResponseContentType
 	{
-		[EnumMember(Value = "yaml")]
-		Yaml,
-		[EnumMember(Value = "text")]
-		Text,
-		[EnumMember(Value = "json")]
-		Json
+		public ResponseContentType(string value) => Value = value;
+		public string Value { get; }
+
+		public static ResponseContentType Yaml { get; } = new ResponseContentType("yaml");
+		public static ResponseContentType Text { get; } = new ResponseContentType("text");
+		public static ResponseContentType Json { get; } = new ResponseContentType("json");
 	}
 }

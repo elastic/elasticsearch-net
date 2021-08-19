@@ -21,15 +21,14 @@ using System.Runtime.Serialization;
 #nullable restore
 namespace Nest.Enrich.ExecutePolicy
 {
-	public enum EnrichPolicyPhase
+	public readonly partial struct EnrichPolicyPhase
 	{
-		[EnumMember(Value = "SCHEDULED")]
-		Scheduled,
-		[EnumMember(Value = "RUNNING")]
-		Running,
-		[EnumMember(Value = "FAILED")]
-		Failed,
-		[EnumMember(Value = "COMPLETE")]
-		Complete
+		public EnrichPolicyPhase(string value) => Value = value;
+		public string Value { get; }
+
+		public static EnrichPolicyPhase Scheduled { get; } = new EnrichPolicyPhase("SCHEDULED");
+		public static EnrichPolicyPhase Running { get; } = new EnrichPolicyPhase("RUNNING");
+		public static EnrichPolicyPhase Failed { get; } = new EnrichPolicyPhase("FAILED");
+		public static EnrichPolicyPhase Complete { get; } = new EnrichPolicyPhase("COMPLETE");
 	}
 }
