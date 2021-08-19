@@ -174,6 +174,10 @@ namespace Nest
 		Task<ReindexRethrottleResponse> ReindexRethrottleAsync(IReindexRethrottleRequest request, CancellationToken cancellationToken = default);
 		ReindexRethrottleResponse ReindexRethrottle(Nest.Id task_id, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null);
 		Task<ReindexRethrottleResponse> ReindexRethrottleAsync(Nest.Id task_id, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null, CancellationToken cancellationToken = default);
+		RenderSearchTemplateResponse RenderSearchTemplate(IRenderSearchTemplateRequest request);
+		Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request, CancellationToken cancellationToken = default);
+		RenderSearchTemplateResponse RenderSearchTemplate(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector = null);
+		Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector = null, CancellationToken cancellationToken = default);
 		ScrollResponse<TDocument> Scroll<TDocument>(IScrollRequest request);
 		Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(IScrollRequest request, CancellationToken cancellationToken = default);
 		ScrollResponse<TDocument> Scroll<TDocument>(Func<ScrollDescriptor, IScrollRequest> selector = null);
@@ -198,5 +202,9 @@ namespace Nest
 		Task<TermvectorsResponse> TermvectorsAsync<TDocument>(ITermvectorsRequest<TDocument> request, CancellationToken cancellationToken = default);
 		TermvectorsResponse Termvectors<TDocument>(TDocument document, Nest.IndexName index, Func<TermvectorsDescriptor<TDocument>, ITermvectorsRequest<TDocument>> selector = null);
 		Task<TermvectorsResponse> TermvectorsAsync<TDocument>(TDocument document, Nest.IndexName index, Func<TermvectorsDescriptor<TDocument>, ITermvectorsRequest<TDocument>> selector = null, CancellationToken cancellationToken = default);
+		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request);
+		Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request, CancellationToken cancellationToken = default);
+		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Nest.IndexName index, Nest.Id id, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument,TPartialDocument>> selector = null);
+		Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Nest.IndexName index, Nest.Id id, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument,TPartialDocument>> selector = null, CancellationToken cancellationToken = default);
 	}
 }

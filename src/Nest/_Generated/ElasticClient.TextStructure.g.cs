@@ -41,12 +41,12 @@ namespace Nest.TextStructure
 
 		public FindStructureResponse FindStructure<TJsonDocument>(TJsonDocument jsonDocument, Func<FindStructureDescriptor<TJsonDocument>, IFindStructureRequest<TJsonDocument>> selector = null)
 		{
-			return FindStructure(selector.InvokeOrDefault(new FindStructureDescriptor<TJsonDocument>()));
+			return FindStructure<TJsonDocument>(selector.InvokeOrDefault(new FindStructureDescriptor<TJsonDocument>()));
 		}
 
 		public Task<FindStructureResponse> FindStructureAsync<TJsonDocument>(TJsonDocument jsonDocument, Func<FindStructureDescriptor<TJsonDocument>, IFindStructureRequest<TJsonDocument>> selector = null, CancellationToken cancellationToken = default)
 		{
-			return FindStructureAsync(selector.InvokeOrDefault(new FindStructureDescriptor<TJsonDocument>()), cancellationToken);
+			return FindStructureAsync<TJsonDocument>(selector.InvokeOrDefault(new FindStructureDescriptor<TJsonDocument>()), cancellationToken);
 		}
 	}
 }

@@ -500,6 +500,10 @@ namespace Nest
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
 
+	public class RenderSearchTemplateRequestParameters : RequestParameters<RenderSearchTemplateRequestParameters>
+	{
+	}
+
 	public class ScrollRequestParameters : RequestParameters<ScrollRequestParameters>
 	{
 		[JsonIgnore]
@@ -748,5 +752,47 @@ namespace Nest
 
 		[JsonIgnore]
 		public Nest.VersionType? VersionType { get => Q<Nest.VersionType?>("version_type"); set => Q("version_type", value); }
+	}
+
+	public class UpdateRequestParameters : RequestParameters<UpdateRequestParameters>
+	{
+		[JsonIgnore]
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+
+		[JsonIgnore]
+		public Nest.SequenceNumber? IfSeqNo { get => Q<Nest.SequenceNumber?>("if_seq_no"); set => Q("if_seq_no", value); }
+
+		[JsonIgnore]
+		public string? Lang { get => Q<string?>("lang"); set => Q("lang", value); }
+
+		[JsonIgnore]
+		public Nest.Refresh? Refresh { get => Q<Nest.Refresh?>("refresh"); set => Q("refresh", value); }
+
+		[JsonIgnore]
+		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+		[JsonIgnore]
+		public long? RetryOnConflict { get => Q<long?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
+
+		[JsonIgnore]
+		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
+
+		[JsonIgnore]
+		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonIgnore]
+		public Nest.WaitForActiveShards? WaitForActiveShards { get => Q<Nest.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+		[JsonIgnore]
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+		[JsonIgnore]
+		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 	}
 }
