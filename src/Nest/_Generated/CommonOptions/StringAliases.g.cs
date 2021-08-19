@@ -249,6 +249,31 @@ namespace Nest
 		}
 	}
 
+	[JsonConverter(typeof(StringAliasConverter<Id>))]
+	public readonly partial struct Id : IComparable<Id>, IEquatable<Id>
+	{
+		public Id(string id) => Value = id;
+		public string Value { get; }
+
+		public override int GetHashCode() => Value.GetHashCode();
+		public override string ToString() => Value;
+		public override bool Equals(object obj) => ReferenceEquals(null, obj) ? false : obj is Id other && Equals(other);
+		public bool Equals(Id other) => this.Value.Equals(other.Value);
+		public int CompareTo(Id other) => Value.CompareTo(other.Value);
+		public static bool operator ==(Id a, Id b) => a.CompareTo(b) == 0;
+		public static bool operator !=(Id a, Id b) => !(a == b);
+		public static implicit operator string(Id id) => id.Value;
+		public static implicit operator Id(string id) => new(id);
+		public static bool TryParse(string value, out Id id)
+		{
+			id = default;
+			if (string.IsNullOrWhiteSpace(value))
+				return false;
+			id = new Id(value.Trim());
+			return true;
+		}
+	}
+
 	[JsonConverter(typeof(StringAliasConverter<IndexAlias>))]
 	public readonly partial struct IndexAlias : IComparable<IndexAlias>, IEquatable<IndexAlias>
 	{

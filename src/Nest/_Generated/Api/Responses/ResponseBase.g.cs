@@ -36,8 +36,149 @@ namespace Nest
 		}
 	}
 
+	public abstract class AsyncSearchDocumentResponseBase<TDocument> : AsyncSearchResponseBase
+	{
+		[JsonPropertyName("response")]
+		public Nest.AsyncSearch.AsyncSearch<TDocument> Response
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public abstract class AsyncSearchResponseBase : ResponseBase
+	{
+		[JsonPropertyName("id")]
+		public Nest.Id? Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("is_partial")]
+		public bool IsPartial
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("is_running")]
+		public bool IsRunning
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("expiration_time_in_millis")]
+		public Nest.EpochMillis ExpirationTimeInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("start_time_in_millis")]
+		public Nest.EpochMillis StartTimeInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public abstract class DictionaryResponseBase<TKey, TValue> : ResponseBase
 	{
+	}
+
+	public abstract class EqlSearchResponseBase<TEvent> : ResponseBase
+	{
+		[JsonPropertyName("id")]
+		public Nest.Id? Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("is_partial")]
+		public bool? IsPartial
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("is_running")]
+		public bool? IsRunning
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("took")]
+		public int? Took
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("timed_out")]
+		public bool? TimedOut
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("hits")]
+		public Nest.Eql.EqlHits<TEvent> Hits
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public abstract class IndicesResponseBase : AcknowledgedResponseBase

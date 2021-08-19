@@ -25,6 +25,64 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest
 {
+	public partial class BulkIndexByScrollFailure
+	{
+		[JsonPropertyName("cause")]
+		public Nest.MainError Cause
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("id")]
+		public Nest.Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index")]
+		public Nest.IndexName Index
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("status")]
+		public int Status
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class BulkStats
 	{
 		[JsonPropertyName("avg_size")]
@@ -226,6 +284,108 @@ namespace Nest
 
 		[JsonPropertyName("deleted")]
 		public long Deleted
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ElasticsearchVersionInfo
+	{
+		[JsonPropertyName("build_date")]
+		public Nest.DateString BuildDate
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_flavor")]
+		public string BuildFlavor
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_hash")]
+		public string BuildHash
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_snapshot")]
+		public bool BuildSnapshot
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("build_type")]
+		public string BuildType
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lucene_version")]
+		public Nest.VersionString LuceneVersion
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("minimum_index_compatibility_version")]
+		public Nest.VersionString MinimumIndexCompatibilityVersion
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("minimum_wire_compatibility_version")]
+		public Nest.VersionString MinimumWireCompatibilityVersion
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("number")]
+		public string Number
 		{
 			get;
 #if NET5_0
@@ -979,6 +1139,75 @@ namespace Nest
 		}
 	}
 
+	public partial class InlineGet<TDocument>
+	{
+		[JsonPropertyName("fields")]
+		public Dictionary<string, object>? Fields
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("found")]
+		public bool Found
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_primary_term")]
+		public long PrimaryTerm
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_routing")]
+		public Nest.Routing? Routing
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_seq_no")]
+		public Nest.SequenceNumber SeqNo
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_source")]
+		public TDocument Source
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class InlineScript
 	{
 		[JsonPropertyName("source")]
@@ -1000,6 +1229,20 @@ namespace Nest
 
 		[JsonPropertyName("lon")]
 		public double Lon { get; set; }
+	}
+
+	public partial class MainError : ErrorCause
+	{
+		[JsonPropertyName("headers")]
+		public Dictionary<string, string>? Headers
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class MergesStats
@@ -1766,6 +2009,31 @@ namespace Nest
 		}
 	}
 
+	public partial class Retries
+	{
+		[JsonPropertyName("bulk")]
+		public long Bulk
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("search")]
+		public long Search
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class ScriptField
 	{
 		[JsonPropertyName("ignore_failure")]
@@ -2394,6 +2662,15 @@ namespace Nest
 			internal set;
 #endif
 		}
+	}
+
+	public partial class StoredScript
+	{
+		[JsonPropertyName("lang")]
+		public Union<Nest.ScriptLanguage, string>? Lang { get; set; }
+
+		[JsonPropertyName("source")]
+		public string Source { get; set; }
 	}
 
 	public partial class TranslogStats

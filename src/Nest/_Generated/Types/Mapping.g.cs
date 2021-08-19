@@ -186,7 +186,7 @@ namespace Nest.Mapping
 		public string Type => "completion";
 	}
 
-	public partial class ConstantKeywordProperty
+	public partial class ConstantKeywordProperty : Mapping.PropertyBase
 	{
 		[JsonPropertyName("type")]
 		public string Type => "constant_keyword";
@@ -404,7 +404,7 @@ namespace Nest.Mapping
 		public string? Unmatch { get; set; }
 	}
 
-	public partial class FieldAliasProperty
+	public partial class FieldAliasProperty : Mapping.PropertyBase
 	{
 		[JsonPropertyName("path")]
 		public Nest.Field? Path
@@ -431,7 +431,7 @@ namespace Nest.Mapping
 		public bool Enabled { get; set; }
 	}
 
-	public partial class FlattenedProperty
+	public partial class FlattenedProperty : Mapping.PropertyBase
 	{
 		[JsonPropertyName("boost")]
 		public double? Boost
@@ -777,7 +777,7 @@ namespace Nest.Mapping
 		public string Type => "geo_shape";
 	}
 
-	public partial class HistogramProperty
+	public partial class HistogramProperty : Mapping.PropertyBase
 	{
 		[JsonPropertyName("ignore_malformed")]
 		public bool? IgnoreMalformed
@@ -851,7 +851,7 @@ namespace Nest.Mapping
 		public string Type => "ip_range";
 	}
 
-	public partial class JoinProperty
+	public partial class JoinProperty : Mapping.PropertyBase
 	{
 		[JsonPropertyName("relations")]
 		public Dictionary<Nest.RelationName, Union<Nest.RelationName, IReadOnlyCollection<Nest.RelationName>>>? Relations
@@ -1121,7 +1121,7 @@ namespace Nest.Mapping
 		public string Type => "object";
 	}
 
-	public partial class PercolatorProperty
+	public partial class PercolatorProperty : Mapping.PropertyBase
 	{
 		[JsonPropertyName("type")]
 		public string Type => "percolator";
@@ -1190,7 +1190,7 @@ namespace Nest.Mapping
 		public Dictionary<Nest.PropertyName, Nest.Mapping.Property>? Properties { get; set; }
 	}
 
-	public partial class RankFeatureProperty
+	public partial class RankFeatureProperty : Mapping.PropertyBase
 	{
 		[JsonPropertyName("positive_score_impact")]
 		public bool? PositiveScoreImpact
@@ -1207,7 +1207,7 @@ namespace Nest.Mapping
 		public string Type => "rank_feature";
 	}
 
-	public partial class RankFeaturesProperty
+	public partial class RankFeaturesProperty : Mapping.PropertyBase
 	{
 		[JsonPropertyName("type")]
 		public string Type => "rank_features";
