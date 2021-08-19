@@ -70,7 +70,7 @@ namespace Nest.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Analyzer is null && Attributes is null && Explain is null && Field is null && Filter is null && Normalizer is null && Text is null;
+		protected override bool IsEmpty => Analyzer is null && Attributes is null && Explain is null && Filter is null && Normalizer is null && Text is null;
 
 		///<summary>/_analyze</summary>
         public AnalyzeRequest() : base()
@@ -106,17 +106,6 @@ namespace Nest.IndexManagement
 
 		[JsonPropertyName("explain")]
 		public bool? Explain
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("field")]
-		public Nest.Field? Field
 		{
 			get;
 #if NET5_0

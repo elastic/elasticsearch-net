@@ -75,7 +75,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<DataStreamName>))]
-	public readonly partial struct DataStreamName : IComparable<DataStreamName>, IEquatable<DataStreamName>
+	public readonly partial struct DataStreamName : IComparable<DataStreamName>, IEquatable<DataStreamName>, IUrlParameter
 	{
 		public DataStreamName(string dataStreamName) => Value = dataStreamName;
 		public string Value { get; }
@@ -97,6 +97,8 @@ namespace Nest
 			dataStreamName = new DataStreamName(value.Trim());
 			return true;
 		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<DateFormat>))]
@@ -224,6 +226,31 @@ namespace Nest
 		}
 	}
 
+	[JsonConverter(typeof(StringAliasConverter<Field>))]
+	public readonly partial struct Field : IComparable<Field>, IEquatable<Field>
+	{
+		public Field(string field) => Value = field;
+		public string Value { get; }
+
+		public override int GetHashCode() => Value.GetHashCode();
+		public override string ToString() => Value;
+		public override bool Equals(object obj) => ReferenceEquals(null, obj) ? false : obj is Field other && Equals(other);
+		public bool Equals(Field other) => this.Value.Equals(other.Value);
+		public int CompareTo(Field other) => Value.CompareTo(other.Value);
+		public static bool operator ==(Field a, Field b) => a.CompareTo(b) == 0;
+		public static bool operator !=(Field a, Field b) => !(a == b);
+		public static implicit operator string(Field field) => field.Value;
+		public static implicit operator Field(string field) => new(field);
+		public static bool TryParse(string value, out Field field)
+		{
+			field = default;
+			if (string.IsNullOrWhiteSpace(value))
+				return false;
+			field = new Field(value.Trim());
+			return true;
+		}
+	}
+
 	[JsonConverter(typeof(StringAliasConverter<Host>))]
 	public readonly partial struct Host : IComparable<Host>, IEquatable<Host>
 	{
@@ -250,7 +277,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Id>))]
-	public readonly partial struct Id : IComparable<Id>, IEquatable<Id>
+	public readonly partial struct Id : IComparable<Id>, IEquatable<Id>, IUrlParameter
 	{
 		public Id(string id) => Value = id;
 		public string Value { get; }
@@ -272,10 +299,12 @@ namespace Nest
 			id = new Id(value.Trim());
 			return true;
 		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<IndexAlias>))]
-	public readonly partial struct IndexAlias : IComparable<IndexAlias>, IEquatable<IndexAlias>
+	public readonly partial struct IndexAlias : IComparable<IndexAlias>, IEquatable<IndexAlias>, IUrlParameter
 	{
 		public IndexAlias(string indexAlias) => Value = indexAlias;
 		public string Value { get; }
@@ -297,6 +326,35 @@ namespace Nest
 			indexAlias = new IndexAlias(value.Trim());
 			return true;
 		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
+	}
+
+	[JsonConverter(typeof(StringAliasConverter<IndexName>))]
+	public readonly partial struct IndexName : IComparable<IndexName>, IEquatable<IndexName>, IUrlParameter
+	{
+		public IndexName(string indexName) => Value = indexName;
+		public string Value { get; }
+
+		public override int GetHashCode() => Value.GetHashCode();
+		public override string ToString() => Value;
+		public override bool Equals(object obj) => ReferenceEquals(null, obj) ? false : obj is IndexName other && Equals(other);
+		public bool Equals(IndexName other) => this.Value.Equals(other.Value);
+		public int CompareTo(IndexName other) => Value.CompareTo(other.Value);
+		public static bool operator ==(IndexName a, IndexName b) => a.CompareTo(b) == 0;
+		public static bool operator !=(IndexName a, IndexName b) => !(a == b);
+		public static implicit operator string(IndexName indexName) => indexName.Value;
+		public static implicit operator IndexName(string indexName) => new(indexName);
+		public static bool TryParse(string value, out IndexName indexName)
+		{
+			indexName = default;
+			if (string.IsNullOrWhiteSpace(value))
+				return false;
+			indexName = new IndexName(value.Trim());
+			return true;
+		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<IndexPattern>))]
@@ -375,7 +433,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Name>))]
-	public readonly partial struct Name : IComparable<Name>, IEquatable<Name>
+	public readonly partial struct Name : IComparable<Name>, IEquatable<Name>, IUrlParameter
 	{
 		public Name(string name) => Value = name;
 		public string Value { get; }
@@ -397,6 +455,8 @@ namespace Nest
 			name = new Name(value.Trim());
 			return true;
 		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Namespace>))]
@@ -447,6 +507,33 @@ namespace Nest
 			nodeId = new NodeId(value.Trim());
 			return true;
 		}
+	}
+
+	[JsonConverter(typeof(StringAliasConverter<NodeIds>))]
+	public readonly partial struct NodeIds : IComparable<NodeIds>, IEquatable<NodeIds>, IUrlParameter
+	{
+		public NodeIds(string nodeIds) => Value = nodeIds;
+		public string Value { get; }
+
+		public override int GetHashCode() => Value.GetHashCode();
+		public override string ToString() => Value;
+		public override bool Equals(object obj) => ReferenceEquals(null, obj) ? false : obj is NodeIds other && Equals(other);
+		public bool Equals(NodeIds other) => this.Value.Equals(other.Value);
+		public int CompareTo(NodeIds other) => Value.CompareTo(other.Value);
+		public static bool operator ==(NodeIds a, NodeIds b) => a.CompareTo(b) == 0;
+		public static bool operator !=(NodeIds a, NodeIds b) => !(a == b);
+		public static implicit operator string(NodeIds nodeIds) => nodeIds.Value;
+		public static implicit operator NodeIds(string nodeIds) => new(nodeIds);
+		public static bool TryParse(string value, out NodeIds nodeIds)
+		{
+			nodeIds = default;
+			if (string.IsNullOrWhiteSpace(value))
+				return false;
+			nodeIds = new NodeIds(value.Trim());
+			return true;
+		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<NodeName>))]
@@ -520,6 +607,56 @@ namespace Nest
 			if (string.IsNullOrWhiteSpace(value))
 				return false;
 			pipelineName = new PipelineName(value.Trim());
+			return true;
+		}
+	}
+
+	[JsonConverter(typeof(StringAliasConverter<PropertyName>))]
+	public readonly partial struct PropertyName : IComparable<PropertyName>, IEquatable<PropertyName>
+	{
+		public PropertyName(string propertyName) => Value = propertyName;
+		public string Value { get; }
+
+		public override int GetHashCode() => Value.GetHashCode();
+		public override string ToString() => Value;
+		public override bool Equals(object obj) => ReferenceEquals(null, obj) ? false : obj is PropertyName other && Equals(other);
+		public bool Equals(PropertyName other) => this.Value.Equals(other.Value);
+		public int CompareTo(PropertyName other) => Value.CompareTo(other.Value);
+		public static bool operator ==(PropertyName a, PropertyName b) => a.CompareTo(b) == 0;
+		public static bool operator !=(PropertyName a, PropertyName b) => !(a == b);
+		public static implicit operator string(PropertyName propertyName) => propertyName.Value;
+		public static implicit operator PropertyName(string propertyName) => new(propertyName);
+		public static bool TryParse(string value, out PropertyName propertyName)
+		{
+			propertyName = default;
+			if (string.IsNullOrWhiteSpace(value))
+				return false;
+			propertyName = new PropertyName(value.Trim());
+			return true;
+		}
+	}
+
+	[JsonConverter(typeof(StringAliasConverter<RelationName>))]
+	public readonly partial struct RelationName : IComparable<RelationName>, IEquatable<RelationName>
+	{
+		public RelationName(string relationName) => Value = relationName;
+		public string Value { get; }
+
+		public override int GetHashCode() => Value.GetHashCode();
+		public override string ToString() => Value;
+		public override bool Equals(object obj) => ReferenceEquals(null, obj) ? false : obj is RelationName other && Equals(other);
+		public bool Equals(RelationName other) => this.Value.Equals(other.Value);
+		public int CompareTo(RelationName other) => Value.CompareTo(other.Value);
+		public static bool operator ==(RelationName a, RelationName b) => a.CompareTo(b) == 0;
+		public static bool operator !=(RelationName a, RelationName b) => !(a == b);
+		public static implicit operator string(RelationName relationName) => relationName.Value;
+		public static implicit operator RelationName(string relationName) => new(relationName);
+		public static bool TryParse(string value, out RelationName relationName)
+		{
+			relationName = default;
+			if (string.IsNullOrWhiteSpace(value))
+				return false;
+			relationName = new RelationName(value.Trim());
 			return true;
 		}
 	}

@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using OneOf;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest
@@ -35,8 +36,9 @@ namespace Nest
 	{
 	}
 
-	public partial class Fields
+	public partial class Fields : IUrlParameter
 	{
+		public string GetString(ITransportConfiguration settings) =>  string . Empty ;
 	}
 
 	public partial class Fuzziness
@@ -47,20 +49,23 @@ namespace Nest
 	{
 	}
 
-	public partial class Indices
+	public partial class Indices : IUrlParameter
 	{
+		public string GetString(ITransportConfiguration settings) =>  string . Empty ;
 	}
 
-	public partial class Metrics
+	public partial class Metrics : IUrlParameter
 	{
+		public string GetString(ITransportConfiguration settings) =>  string . Empty ;
 	}
 
 	public partial class MinimumShouldMatch
 	{
 	}
 
-	public partial class Names
+	public partial class Names : IUrlParameter
 	{
+		public string GetString(ITransportConfiguration settings) =>  string . Empty ;
 	}
 
 	public partial class Percentage
@@ -83,8 +88,9 @@ namespace Nest
 	{
 	}
 
-	public partial class Types
+	public partial class Types : IUrlParameter
 	{
+		public string GetString(ITransportConfiguration settings) =>  string . Empty ;
 	}
 
 	public partial class WaitForActiveShards

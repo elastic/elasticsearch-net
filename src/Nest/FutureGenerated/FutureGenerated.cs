@@ -6,21 +6,6 @@ using Elastic.Transport;
 
 namespace Nest
 {
-	public partial class Names : IUrlParameter
-	{
-		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	}
-
-	public partial class Types : IUrlParameter
-	{
-		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	}
-
-	public readonly partial struct DataStreamName : IUrlParameter
-	{
-		public string GetString(ITransportConfiguration settings) => Value;
-	}
-
 	namespace IndexManagement.AddBlock
 	{
 		public partial struct IndicesBlockOptions : IUrlParameter
@@ -28,11 +13,6 @@ namespace Nest
 			public string GetString(ITransportConfiguration settings) => Value;
 		}
 	}	
-
-	public readonly partial struct IndexAlias : IUrlParameter
-	{
-		public string GetString(ITransportConfiguration settings) => Value;
-	}
 
 	public abstract partial class PlainRequestBase<TParameters>
 	{
@@ -200,12 +180,6 @@ namespace Nest
 	{
 	}
 
-
-	public readonly partial struct Name : IUrlParameter
-	{
-		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	}
-
 	public class Property
 	{
 	}
@@ -234,12 +208,7 @@ namespace Nest
 		internal long Value { get; }
 	}
 
-	public partial class Metrics : IUrlParameter
-	{
-		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	}
-
-	//public class Types : IUrlParameter
+		//public class Types : IUrlParameter
 	//{
 	//	public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	//}
