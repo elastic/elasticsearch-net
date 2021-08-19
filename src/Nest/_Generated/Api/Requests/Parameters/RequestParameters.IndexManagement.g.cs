@@ -607,6 +607,9 @@ namespace Nest.IndexManagement
 
 		[JsonIgnore]
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+		[JsonIgnore]
+		public Union<string, IEnumerable<string>>? Status { get => Q<Union<string, IEnumerable<string>>?>("status"); set => Q("status", value); }
 	}
 
 	public class ShrinkRequestParameters : RequestParameters<ShrinkRequestParameters>

@@ -45,8 +45,9 @@ namespace Nest
 	{
 	}
 
-	public partial class Ids
+	public partial class Ids : IUrlParameter
 	{
+		public string GetString(ITransportConfiguration settings) =>  string . Empty ;
 	}
 
 	public partial class Indices : IUrlParameter

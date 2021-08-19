@@ -29,6 +29,14 @@ using Nest.License;
 using Nest.Migration;
 using Nest.Nodes;
 using Nest.SearchableSnapshots;
+using Nest.Security;
+using Nest.Shutdown;
+using Nest.Snapshot;
+using Nest.SnapshotLifecycleManagement;
+using Nest.Sql;
+using Nest.TextStructure;
+using Nest.Watcher;
+using Nest.Xpack;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -63,6 +71,22 @@ namespace Nest
 		NodesNamespace Nodes { get; }
 
 		SearchableSnapshotsNamespace SearchableSnapshots { get; }
+
+		SecurityNamespace Security { get; }
+
+		ShutdownNamespace Shutdown { get; }
+
+		SnapshotLifecycleManagementNamespace SnapshotLifecycleManagement { get; }
+
+		SnapshotNamespace Snapshot { get; }
+
+		SqlNamespace Sql { get; }
+
+		TextStructureNamespace TextStructure { get; }
+
+		WatcherNamespace Watcher { get; }
+
+		XpackNamespace Xpack { get; }
 
 		ClearScrollResponse ClearScroll(IClearScrollRequest request);
 		Task<ClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken cancellationToken = default);
