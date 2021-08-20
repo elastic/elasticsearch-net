@@ -1,21 +1,44 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Nest;
 using Nest.Cluster;
 
 namespace Playground
 {
+	public class BigThing
+	{
+		public List<Thing>? Things { get; set; }
+	}
+
+	public class Thing
+	{
+		public string? Name { get; set; }
+	}
+
 	internal class Program
 	{
 		private static async Task Main()
 		{
-			IElasticClient client = new ElasticClient(new Uri("http://localhost:9200"));
+			var s = new ElasticsearchClientSettings()
+				  .EnableHttpCompression();
+
+			IElasticClient client = new ElasticClient(s);
 
 			var indexName = Guid.NewGuid().ToString();
 
+			// TODO - When using {Level = new Level()}, the URL generation should ignore defaults
 			// Get cluster health
 			var clusterHealthRequest = new HealthRequest {Level = Level.Cluster};
 			var clusterHealthResponse = await client.Cluster.HealthAsync(clusterHealthRequest);
+
+			var allocExplainRequest = new AllocationExplainRequest { Primary = true };
+			var allocExplainResponse = await client.Cluster.AllocationExplainAsync(allocExplainRequest);
+
+			var things = Enumerable.Range(0, 100).Select(a => new Thing { Name = "Steve J Gordon" });
+
+			var response = await client.IndexAsync(new IndexRequest<BigThing>("test") { Document = new BigThing { Things = things.ToList() } });
 
 			if (!clusterHealthResponse.IsValid)
 				throw new Exception("Failed to get cluster health");

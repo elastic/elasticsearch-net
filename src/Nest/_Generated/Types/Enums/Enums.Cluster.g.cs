@@ -15,18 +15,20 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.Cluster
 {
-	public readonly partial struct ClusterStatus
+	public enum ClusterStatus
 	{
-		public ClusterStatus(string value) => Value = value;
-		public string Value { get; }
-
-		public static ClusterStatus Yellow { get; } = new ClusterStatus("yellow");
-		public static ClusterStatus Red { get; } = new ClusterStatus("red");
-		public static ClusterStatus Green { get; } = new ClusterStatus("green");
+		[EnumMember(Value = "yellow")]
+		Yellow,
+		[EnumMember(Value = "red")]
+		Red,
+		[EnumMember(Value = "green")]
+		Green
 	}
 }

@@ -15,56 +15,76 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.Cluster.AllocationExplain
 {
-	public readonly partial struct AllocationExplainDecision
+	public enum AllocationExplainDecision
 	{
-		public AllocationExplainDecision(string value) => Value = value;
-		public string Value { get; }
-
-		public static AllocationExplainDecision Yes { get; } = new AllocationExplainDecision("YES");
-		public static AllocationExplainDecision Throttle { get; } = new AllocationExplainDecision("THROTTLE");
-		public static AllocationExplainDecision No { get; } = new AllocationExplainDecision("NO");
-		public static AllocationExplainDecision Always { get; } = new AllocationExplainDecision("ALWAYS");
+		[EnumMember(Value = "YES")]
+		Yes,
+		[EnumMember(Value = "THROTTLE")]
+		Throttle,
+		[EnumMember(Value = "NO")]
+		No,
+		[EnumMember(Value = "ALWAYS")]
+		Always
 	}
 
-	public readonly partial struct Decision
+	public enum Decision
 	{
-		public Decision(string value) => Value = value;
-		public string Value { get; }
-
-		public static Decision Yes { get; } = new Decision("yes");
-		public static Decision WorseBalance { get; } = new Decision("worse_balance");
-		public static Decision Throttled { get; } = new Decision("throttled");
-		public static Decision NoValidShardCopy { get; } = new Decision("no_valid_shard_copy");
-		public static Decision NoAttempt { get; } = new Decision("no_attempt");
-		public static Decision No { get; } = new Decision("no");
-		public static Decision AwaitingInfo { get; } = new Decision("awaiting_info");
-		public static Decision AllocationDelayed { get; } = new Decision("allocation_delayed");
+		[EnumMember(Value = "yes")]
+		Yes,
+		[EnumMember(Value = "worse_balance")]
+		WorseBalance,
+		[EnumMember(Value = "throttled")]
+		Throttled,
+		[EnumMember(Value = "no_valid_shard_copy")]
+		NoValidShardCopy,
+		[EnumMember(Value = "no_attempt")]
+		NoAttempt,
+		[EnumMember(Value = "no")]
+		No,
+		[EnumMember(Value = "awaiting_info")]
+		AwaitingInfo,
+		[EnumMember(Value = "allocation_delayed")]
+		AllocationDelayed
 	}
 
-	public readonly partial struct UnassignedInformationReason
+	public enum UnassignedInformationReason
 	{
-		public UnassignedInformationReason(string value) => Value = value;
-		public string Value { get; }
-
-		public static UnassignedInformationReason RerouteCancelled { get; } = new UnassignedInformationReason("REROUTE_CANCELLED");
-		public static UnassignedInformationReason ReplicaAdded { get; } = new UnassignedInformationReason("REPLICA_ADDED");
-		public static UnassignedInformationReason Reinitialized { get; } = new UnassignedInformationReason("REINITIALIZED");
-		public static UnassignedInformationReason ReallocatedReplica { get; } = new UnassignedInformationReason("REALLOCATED_REPLICA");
-		public static UnassignedInformationReason PrimaryFailed { get; } = new UnassignedInformationReason("PRIMARY_FAILED");
-		public static UnassignedInformationReason NodeLeft { get; } = new UnassignedInformationReason("NODE_LEFT");
-		public static UnassignedInformationReason NewIndexRestored { get; } = new UnassignedInformationReason("NEW_INDEX_RESTORED");
-		public static UnassignedInformationReason ManualAllocation { get; } = new UnassignedInformationReason("MANUAL_ALLOCATION");
-		public static UnassignedInformationReason IndexReopened { get; } = new UnassignedInformationReason("INDEX_REOPENED");
-		public static UnassignedInformationReason IndexCreated { get; } = new UnassignedInformationReason("INDEX_CREATED");
-		public static UnassignedInformationReason ForcedEmptyPrimary { get; } = new UnassignedInformationReason("FORCED_EMPTY_PRIMARY");
-		public static UnassignedInformationReason ExistingIndexRestored { get; } = new UnassignedInformationReason("EXISTING_INDEX_RESTORED");
-		public static UnassignedInformationReason DanglingIndexImported { get; } = new UnassignedInformationReason("DANGLING_INDEX_IMPORTED");
-		public static UnassignedInformationReason ClusterRecovered { get; } = new UnassignedInformationReason("CLUSTER_RECOVERED");
-		public static UnassignedInformationReason AllocationFailed { get; } = new UnassignedInformationReason("ALLOCATION_FAILED");
+		[EnumMember(Value = "REROUTE_CANCELLED")]
+		RerouteCancelled,
+		[EnumMember(Value = "REPLICA_ADDED")]
+		ReplicaAdded,
+		[EnumMember(Value = "REINITIALIZED")]
+		Reinitialized,
+		[EnumMember(Value = "REALLOCATED_REPLICA")]
+		ReallocatedReplica,
+		[EnumMember(Value = "PRIMARY_FAILED")]
+		PrimaryFailed,
+		[EnumMember(Value = "NODE_LEFT")]
+		NodeLeft,
+		[EnumMember(Value = "NEW_INDEX_RESTORED")]
+		NewIndexRestored,
+		[EnumMember(Value = "MANUAL_ALLOCATION")]
+		ManualAllocation,
+		[EnumMember(Value = "INDEX_REOPENED")]
+		IndexReopened,
+		[EnumMember(Value = "INDEX_CREATED")]
+		IndexCreated,
+		[EnumMember(Value = "FORCED_EMPTY_PRIMARY")]
+		ForcedEmptyPrimary,
+		[EnumMember(Value = "EXISTING_INDEX_RESTORED")]
+		ExistingIndexRestored,
+		[EnumMember(Value = "DANGLING_INDEX_IMPORTED")]
+		DanglingIndexImported,
+		[EnumMember(Value = "CLUSTER_RECOVERED")]
+		ClusterRecovered,
+		[EnumMember(Value = "ALLOCATION_FAILED")]
+		AllocationFailed
 	}
 }

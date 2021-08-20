@@ -15,17 +15,18 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.Security.GrantApiKey
 {
-	public readonly partial struct ApiKeyGrantType
+	public enum ApiKeyGrantType
 	{
-		public ApiKeyGrantType(string value) => Value = value;
-		public string Value { get; }
-
-		public static ApiKeyGrantType Password { get; } = new ApiKeyGrantType("password");
-		public static ApiKeyGrantType AccessToken { get; } = new ApiKeyGrantType("access_token");
+		[EnumMember(Value = "password")]
+		Password,
+		[EnumMember(Value = "access_token")]
+		AccessToken
 	}
 }

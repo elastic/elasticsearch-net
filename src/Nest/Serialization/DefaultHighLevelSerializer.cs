@@ -28,7 +28,7 @@ namespace Nest
 		public DefaultHighLevelSerializer(IElasticsearchClientSettings settings) =>
 			Options = new JsonSerializerOptions
 			{
-				IgnoreNullValues = true,
+				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
 				Converters =
 				{
 					new CustomJsonWriterConverterFactory(settings),

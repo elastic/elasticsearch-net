@@ -227,17 +227,6 @@ namespace Nest.IndexManagement
 		}
 	}
 
-	public partial class ExistsTypeDescriptor : RequestDescriptorBase<ExistsTypeDescriptor, ExistsTypeRequestParameters, IExistsTypeRequest>, IExistsTypeRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsType;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-		///<summary>/{index}/_mapping/{type}</summary>
-        public ExistsTypeDescriptor(Nest.Indices index, Nest.Types type) : base(r => r.Required("index", index).Required("type", type))
-		{
-		}
-	}
-
 	public partial class FlushDescriptor : RequestDescriptorBase<FlushDescriptor, FlushRequestParameters, IFlushRequest>, IFlushRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementFlush;

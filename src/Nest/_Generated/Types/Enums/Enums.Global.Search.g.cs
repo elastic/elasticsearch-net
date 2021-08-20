@@ -15,126 +15,126 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.Global.Search
 {
-	public readonly partial struct BoundaryScanner
+	public enum BoundaryScanner
 	{
-		public BoundaryScanner(string value) => Value = value;
-		public string Value { get; }
-
-		public static BoundaryScanner Word { get; } = new BoundaryScanner("word");
-		public static BoundaryScanner Sentence { get; } = new BoundaryScanner("sentence");
-		public static BoundaryScanner Chars { get; } = new BoundaryScanner("chars");
+		[EnumMember(Value = "word")]
+		Word,
+		[EnumMember(Value = "sentence")]
+		Sentence,
+		[EnumMember(Value = "chars")]
+		Chars
 	}
 
-	public readonly partial struct HighlighterEncoder
+	public enum HighlighterEncoder
 	{
-		public HighlighterEncoder(string value) => Value = value;
-		public string Value { get; }
-
-		public static HighlighterEncoder Html { get; } = new HighlighterEncoder("html");
-		public static HighlighterEncoder Default { get; } = new HighlighterEncoder("default");
+		[EnumMember(Value = "html")]
+		Html,
+		[EnumMember(Value = "default")]
+		Default
 	}
 
-	public readonly partial struct HighlighterFragmenter
+	public enum HighlighterFragmenter
 	{
-		public HighlighterFragmenter(string value) => Value = value;
-		public string Value { get; }
-
-		public static HighlighterFragmenter Span { get; } = new HighlighterFragmenter("span");
-		public static HighlighterFragmenter Simple { get; } = new HighlighterFragmenter("simple");
+		[EnumMember(Value = "span")]
+		Span,
+		[EnumMember(Value = "simple")]
+		Simple
 	}
 
-	public readonly partial struct HighlighterOrder
+	public enum HighlighterOrder
 	{
-		public HighlighterOrder(string value) => Value = value;
-		public string Value { get; }
-
-		public static HighlighterOrder Score { get; } = new HighlighterOrder("score");
+		[EnumMember(Value = "score")]
+		Score
 	}
 
-	public readonly partial struct HighlighterTagsSchema
+	public enum HighlighterTagsSchema
 	{
-		public HighlighterTagsSchema(string value) => Value = value;
-		public string Value { get; }
-
-		public static HighlighterTagsSchema Styled { get; } = new HighlighterTagsSchema("styled");
+		[EnumMember(Value = "styled")]
+		Styled
 	}
 
-	public readonly partial struct HighlighterType
+	public enum HighlighterType
 	{
-		public HighlighterType(string value) => Value = value;
-		public string Value { get; }
-
-		public static HighlighterType Unified { get; } = new HighlighterType("unified");
-		public static HighlighterType Plain { get; } = new HighlighterType("plain");
-		public static HighlighterType Fvh { get; } = new HighlighterType("fvh");
+		[EnumMember(Value = "unified")]
+		Unified,
+		[EnumMember(Value = "plain")]
+		Plain,
+		[EnumMember(Value = "fvh")]
+		Fvh
 	}
 
-	public readonly partial struct ScoreMode
+	public enum ScoreMode
 	{
-		public ScoreMode(string value) => Value = value;
-		public string Value { get; }
-
-		public static ScoreMode Total { get; } = new ScoreMode("total");
-		public static ScoreMode Multiply { get; } = new ScoreMode("multiply");
-		public static ScoreMode Min { get; } = new ScoreMode("min");
-		public static ScoreMode Max { get; } = new ScoreMode("max");
-		public static ScoreMode Avg { get; } = new ScoreMode("avg");
+		[EnumMember(Value = "total")]
+		Total,
+		[EnumMember(Value = "multiply")]
+		Multiply,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
 	}
 
-	public readonly partial struct SortMode
+	public enum SortMode
 	{
-		public SortMode(string value) => Value = value;
-		public string Value { get; }
-
-		public static SortMode Sum { get; } = new SortMode("sum");
-		public static SortMode Min { get; } = new SortMode("min");
-		public static SortMode Median { get; } = new SortMode("median");
-		public static SortMode Max { get; } = new SortMode("max");
-		public static SortMode Avg { get; } = new SortMode("avg");
+		[EnumMember(Value = "sum")]
+		Sum,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "median")]
+		Median,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
 	}
 
-	public readonly partial struct SortOrder
+	public enum SortOrder
 	{
-		public SortOrder(string value) => Value = value;
-		public string Value { get; }
-
-		public static SortOrder Desc { get; } = new SortOrder("desc");
-		public static SortOrder Asc { get; } = new SortOrder("asc");
-		public static SortOrder Document { get; } = new SortOrder("_doc");
+		[EnumMember(Value = "desc")]
+		Desc,
+		[EnumMember(Value = "asc")]
+		Asc,
+		[EnumMember(Value = "_doc")]
+		Document
 	}
 
-	public readonly partial struct StringDistance
+	public enum StringDistance
 	{
-		public StringDistance(string value) => Value = value;
-		public string Value { get; }
-
-		public static StringDistance Ngram { get; } = new StringDistance("ngram");
-		public static StringDistance Levenshtein { get; } = new StringDistance("levenshtein");
-		public static StringDistance JaroWinkler { get; } = new StringDistance("jaro_winkler");
-		public static StringDistance Internal { get; } = new StringDistance("internal");
-		public static StringDistance DamerauLevenshtein { get; } = new StringDistance("damerau_levenshtein");
+		[EnumMember(Value = "ngram")]
+		Ngram,
+		[EnumMember(Value = "levenshtein")]
+		Levenshtein,
+		[EnumMember(Value = "jaro_winkler")]
+		JaroWinkler,
+		[EnumMember(Value = "internal")]
+		Internal,
+		[EnumMember(Value = "damerau_levenshtein")]
+		DamerauLevenshtein
 	}
 
-	public readonly partial struct SuggestSort
+	public enum SuggestSort
 	{
-		public SuggestSort(string value) => Value = value;
-		public string Value { get; }
-
-		public static SuggestSort Score { get; } = new SuggestSort("score");
-		public static SuggestSort Frequency { get; } = new SuggestSort("frequency");
+		[EnumMember(Value = "score")]
+		Score,
+		[EnumMember(Value = "frequency")]
+		Frequency
 	}
 
-	public readonly partial struct TotalHitsRelation
+	public enum TotalHitsRelation
 	{
-		public TotalHitsRelation(string value) => Value = value;
-		public string Value { get; }
-
-		public static TotalHitsRelation Gte { get; } = new TotalHitsRelation("gte");
-		public static TotalHitsRelation Eq { get; } = new TotalHitsRelation("eq");
+		[EnumMember(Value = "gte")]
+		Gte,
+		[EnumMember(Value = "eq")]
+		Eq
 	}
 }

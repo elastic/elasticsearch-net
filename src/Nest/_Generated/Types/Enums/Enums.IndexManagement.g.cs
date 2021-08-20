@@ -15,68 +15,70 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.IndexManagement
 {
-	public readonly partial struct DataStreamHealthStatus
+	public enum DataStreamHealthStatus
 	{
-		public DataStreamHealthStatus(string value) => Value = value;
-		public string Value { get; }
-
-		public static DataStreamHealthStatus Yellow { get; } = new DataStreamHealthStatus("yellow");
-		public static DataStreamHealthStatus Red { get; } = new DataStreamHealthStatus("red");
-		public static DataStreamHealthStatus Green { get; } = new DataStreamHealthStatus("green");
+		[EnumMember(Value = "yellow")]
+		Yellow,
+		[EnumMember(Value = "red")]
+		Red,
+		[EnumMember(Value = "green")]
+		Green
 	}
 
-	public readonly partial struct IndexCheckOnStartup
+	public enum IndexCheckOnStartup
 	{
-		public IndexCheckOnStartup(string value) => Value = value;
-		public string Value { get; }
-
-		public static IndexCheckOnStartup True { get; } = new IndexCheckOnStartup("true");
-		public static IndexCheckOnStartup False { get; } = new IndexCheckOnStartup("false");
-		public static IndexCheckOnStartup Checksum { get; } = new IndexCheckOnStartup("checksum");
+		[EnumMember(Value = "true")]
+		True,
+		[EnumMember(Value = "false")]
+		False,
+		[EnumMember(Value = "checksum")]
+		Checksum
 	}
 
-	public readonly partial struct IndexRoutingAllocationOptions
+	public enum IndexRoutingAllocationOptions
 	{
-		public IndexRoutingAllocationOptions(string value) => Value = value;
-		public string Value { get; }
-
-		public static IndexRoutingAllocationOptions Primaries { get; } = new IndexRoutingAllocationOptions("primaries");
-		public static IndexRoutingAllocationOptions None { get; } = new IndexRoutingAllocationOptions("none");
-		public static IndexRoutingAllocationOptions NewPrimaries { get; } = new IndexRoutingAllocationOptions("new_primaries");
-		public static IndexRoutingAllocationOptions All { get; } = new IndexRoutingAllocationOptions("all");
+		[EnumMember(Value = "primaries")]
+		Primaries,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "new_primaries")]
+		NewPrimaries,
+		[EnumMember(Value = "all")]
+		All
 	}
 
-	public readonly partial struct IndexRoutingRebalanceOptions
+	public enum IndexRoutingRebalanceOptions
 	{
-		public IndexRoutingRebalanceOptions(string value) => Value = value;
-		public string Value { get; }
-
-		public static IndexRoutingRebalanceOptions Replicas { get; } = new IndexRoutingRebalanceOptions("replicas");
-		public static IndexRoutingRebalanceOptions Primaries { get; } = new IndexRoutingRebalanceOptions("primaries");
-		public static IndexRoutingRebalanceOptions None { get; } = new IndexRoutingRebalanceOptions("none");
-		public static IndexRoutingRebalanceOptions All { get; } = new IndexRoutingRebalanceOptions("all");
+		[EnumMember(Value = "replicas")]
+		Replicas,
+		[EnumMember(Value = "primaries")]
+		Primaries,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "all")]
+		All
 	}
 
-	public readonly partial struct NumericFielddataFormat
+	public enum NumericFielddataFormat
 	{
-		public NumericFielddataFormat(string value) => Value = value;
-		public string Value { get; }
-
-		public static NumericFielddataFormat Disabled { get; } = new NumericFielddataFormat("disabled");
-		public static NumericFielddataFormat Array { get; } = new NumericFielddataFormat("array");
+		[EnumMember(Value = "disabled")]
+		Disabled,
+		[EnumMember(Value = "array")]
+		Array
 	}
 
-	public readonly partial struct StringFielddataFormat
+	public enum StringFielddataFormat
 	{
-		public StringFielddataFormat(string value) => Value = value;
-		public string Value { get; }
-
-		public static StringFielddataFormat PagedBytes { get; } = new StringFielddataFormat("paged_bytes");
-		public static StringFielddataFormat Disabled { get; } = new StringFielddataFormat("disabled");
+		[EnumMember(Value = "paged_bytes")]
+		PagedBytes,
+		[EnumMember(Value = "disabled")]
+		Disabled
 	}
 }

@@ -15,17 +15,18 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.Eql.Search
 {
-	public readonly partial struct ResultPosition
+	public enum ResultPosition
 	{
-		public ResultPosition(string value) => Value = value;
-		public string Value { get; }
-
-		public static ResultPosition Tail { get; } = new ResultPosition("tail");
-		public static ResultPosition Head { get; } = new ResultPosition("head");
+		[EnumMember(Value = "tail")]
+		Tail,
+		[EnumMember(Value = "head")]
+		Head
 	}
 }
