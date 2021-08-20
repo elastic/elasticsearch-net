@@ -15,35 +15,44 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.License
 {
-	public readonly partial struct LicenseStatus
+	public enum LicenseStatus
 	{
-		public LicenseStatus(string value) => Value = value;
-		public string Value { get; }
-
-		public static LicenseStatus Valid { get; } = new LicenseStatus("valid");
-		public static LicenseStatus Invalid { get; } = new LicenseStatus("invalid");
-		public static LicenseStatus Expired { get; } = new LicenseStatus("expired");
-		public static LicenseStatus Active { get; } = new LicenseStatus("active");
+		[EnumMember(Value = "valid")]
+		Valid,
+		[EnumMember(Value = "invalid")]
+		Invalid,
+		[EnumMember(Value = "expired")]
+		Expired,
+		[EnumMember(Value = "active")]
+		Active
 	}
 
-	public readonly partial struct LicenseType
+	public enum LicenseType
 	{
-		public LicenseType(string value) => Value = value;
-		public string Value { get; }
-
-		public static LicenseType Trial { get; } = new LicenseType("trial");
-		public static LicenseType Standard { get; } = new LicenseType("standard");
-		public static LicenseType Silver { get; } = new LicenseType("silver");
-		public static LicenseType Platinum { get; } = new LicenseType("platinum");
-		public static LicenseType Missing { get; } = new LicenseType("missing");
-		public static LicenseType Gold { get; } = new LicenseType("gold");
-		public static LicenseType Enterprise { get; } = new LicenseType("enterprise");
-		public static LicenseType Dev { get; } = new LicenseType("dev");
-		public static LicenseType Basic { get; } = new LicenseType("basic");
+		[EnumMember(Value = "trial")]
+		Trial,
+		[EnumMember(Value = "standard")]
+		Standard,
+		[EnumMember(Value = "silver")]
+		Silver,
+		[EnumMember(Value = "platinum")]
+		Platinum,
+		[EnumMember(Value = "missing")]
+		Missing,
+		[EnumMember(Value = "gold")]
+		Gold,
+		[EnumMember(Value = "enterprise")]
+		Enterprise,
+		[EnumMember(Value = "dev")]
+		Dev,
+		[EnumMember(Value = "basic")]
+		Basic
 	}
 }

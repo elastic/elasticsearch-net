@@ -15,97 +15,118 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.Analysis
 {
-	public readonly partial struct DelimitedPayloadEncoding
+	public enum DelimitedPayloadEncoding
 	{
-		public DelimitedPayloadEncoding(string value) => Value = value;
-		public string Value { get; }
-
-		public static DelimitedPayloadEncoding Integer { get; } = new DelimitedPayloadEncoding("int");
-		public static DelimitedPayloadEncoding Identity { get; } = new DelimitedPayloadEncoding("identity");
-		public static DelimitedPayloadEncoding Float { get; } = new DelimitedPayloadEncoding("float");
+		[EnumMember(Value = "int")]
+		Integer,
+		[EnumMember(Value = "identity")]
+		Identity,
+		[EnumMember(Value = "float")]
+		Float
 	}
 
-	public readonly partial struct EdgeNGramSide
+	public enum EdgeNGramSide
 	{
-		public EdgeNGramSide(string value) => Value = value;
-		public string Value { get; }
-
-		public static EdgeNGramSide Front { get; } = new EdgeNGramSide("front");
-		public static EdgeNGramSide Back { get; } = new EdgeNGramSide("back");
+		[EnumMember(Value = "front")]
+		Front,
+		[EnumMember(Value = "back")]
+		Back
 	}
 
-	public readonly partial struct KeepTypesMode
+	public enum KeepTypesMode
 	{
-		public KeepTypesMode(string value) => Value = value;
-		public string Value { get; }
-
-		public static KeepTypesMode Include { get; } = new KeepTypesMode("include");
-		public static KeepTypesMode Exclude { get; } = new KeepTypesMode("exclude");
+		[EnumMember(Value = "include")]
+		Include,
+		[EnumMember(Value = "exclude")]
+		Exclude
 	}
 
-	public readonly partial struct NoriDecompoundMode
+	public enum NoriDecompoundMode
 	{
-		public NoriDecompoundMode(string value) => Value = value;
-		public string Value { get; }
-
-		public static NoriDecompoundMode None { get; } = new NoriDecompoundMode("none");
-		public static NoriDecompoundMode Mixed { get; } = new NoriDecompoundMode("mixed");
-		public static NoriDecompoundMode Discard { get; } = new NoriDecompoundMode("discard");
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "mixed")]
+		Mixed,
+		[EnumMember(Value = "discard")]
+		Discard
 	}
 
-	public readonly partial struct SnowballLanguage
+	public enum SnowballLanguage
 	{
-		public SnowballLanguage(string value) => Value = value;
-		public string Value { get; }
-
-		public static SnowballLanguage Turkish { get; } = new SnowballLanguage("Turkish");
-		public static SnowballLanguage Swedish { get; } = new SnowballLanguage("Swedish");
-		public static SnowballLanguage Spanish { get; } = new SnowballLanguage("Spanish");
-		public static SnowballLanguage Russian { get; } = new SnowballLanguage("Russian");
-		public static SnowballLanguage Romanian { get; } = new SnowballLanguage("Romanian");
-		public static SnowballLanguage Portuguese { get; } = new SnowballLanguage("Portuguese");
-		public static SnowballLanguage Porter { get; } = new SnowballLanguage("Porter");
-		public static SnowballLanguage Norwegian { get; } = new SnowballLanguage("Norwegian");
-		public static SnowballLanguage Lovins { get; } = new SnowballLanguage("Lovins");
-		public static SnowballLanguage Kp { get; } = new SnowballLanguage("Kp");
-		public static SnowballLanguage Italian { get; } = new SnowballLanguage("Italian");
-		public static SnowballLanguage Hungarian { get; } = new SnowballLanguage("Hungarian");
-		public static SnowballLanguage German2 { get; } = new SnowballLanguage("German2");
-		public static SnowballLanguage German { get; } = new SnowballLanguage("German");
-		public static SnowballLanguage French { get; } = new SnowballLanguage("French");
-		public static SnowballLanguage Finnish { get; } = new SnowballLanguage("Finnish");
-		public static SnowballLanguage English { get; } = new SnowballLanguage("English");
-		public static SnowballLanguage Dutch { get; } = new SnowballLanguage("Dutch");
-		public static SnowballLanguage Danish { get; } = new SnowballLanguage("Danish");
-		public static SnowballLanguage Catalan { get; } = new SnowballLanguage("Catalan");
-		public static SnowballLanguage Basque { get; } = new SnowballLanguage("Basque");
-		public static SnowballLanguage Armenian { get; } = new SnowballLanguage("Armenian");
+		[EnumMember(Value = "Turkish")]
+		Turkish,
+		[EnumMember(Value = "Swedish")]
+		Swedish,
+		[EnumMember(Value = "Spanish")]
+		Spanish,
+		[EnumMember(Value = "Russian")]
+		Russian,
+		[EnumMember(Value = "Romanian")]
+		Romanian,
+		[EnumMember(Value = "Portuguese")]
+		Portuguese,
+		[EnumMember(Value = "Porter")]
+		Porter,
+		[EnumMember(Value = "Norwegian")]
+		Norwegian,
+		[EnumMember(Value = "Lovins")]
+		Lovins,
+		[EnumMember(Value = "Kp")]
+		Kp,
+		[EnumMember(Value = "Italian")]
+		Italian,
+		[EnumMember(Value = "Hungarian")]
+		Hungarian,
+		[EnumMember(Value = "German2")]
+		German2,
+		[EnumMember(Value = "German")]
+		German,
+		[EnumMember(Value = "French")]
+		French,
+		[EnumMember(Value = "Finnish")]
+		Finnish,
+		[EnumMember(Value = "English")]
+		English,
+		[EnumMember(Value = "Dutch")]
+		Dutch,
+		[EnumMember(Value = "Danish")]
+		Danish,
+		[EnumMember(Value = "Catalan")]
+		Catalan,
+		[EnumMember(Value = "Basque")]
+		Basque,
+		[EnumMember(Value = "Armenian")]
+		Armenian
 	}
 
-	public readonly partial struct SynonymFormat
+	public enum SynonymFormat
 	{
-		public SynonymFormat(string value) => Value = value;
-		public string Value { get; }
-
-		public static SynonymFormat Wordnet { get; } = new SynonymFormat("wordnet");
-		public static SynonymFormat Solr { get; } = new SynonymFormat("solr");
+		[EnumMember(Value = "wordnet")]
+		Wordnet,
+		[EnumMember(Value = "solr")]
+		Solr
 	}
 
-	public readonly partial struct TokenChar
+	public enum TokenChar
 	{
-		public TokenChar(string value) => Value = value;
-		public string Value { get; }
-
-		public static TokenChar Whitespace { get; } = new TokenChar("whitespace");
-		public static TokenChar Symbol { get; } = new TokenChar("symbol");
-		public static TokenChar Punctuation { get; } = new TokenChar("punctuation");
-		public static TokenChar Letter { get; } = new TokenChar("letter");
-		public static TokenChar Digit { get; } = new TokenChar("digit");
-		public static TokenChar Custom { get; } = new TokenChar("custom");
+		[EnumMember(Value = "whitespace")]
+		Whitespace,
+		[EnumMember(Value = "symbol")]
+		Symbol,
+		[EnumMember(Value = "punctuation")]
+		Punctuation,
+		[EnumMember(Value = "letter")]
+		Letter,
+		[EnumMember(Value = "digit")]
+		Digit,
+		[EnumMember(Value = "custom")]
+		Custom
 	}
 }

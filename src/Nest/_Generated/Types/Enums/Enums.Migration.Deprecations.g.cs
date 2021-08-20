@@ -15,19 +15,22 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.Migration.Deprecations
 {
-	public readonly partial struct DeprecationLevel
+	public enum DeprecationLevel
 	{
-		public DeprecationLevel(string value) => Value = value;
-		public string Value { get; }
-
-		public static DeprecationLevel Warning { get; } = new DeprecationLevel("warning");
-		public static DeprecationLevel None { get; } = new DeprecationLevel("none");
-		public static DeprecationLevel Info { get; } = new DeprecationLevel("info");
-		public static DeprecationLevel Critical { get; } = new DeprecationLevel("critical");
+		[EnumMember(Value = "warning")]
+		Warning,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "info")]
+		Info,
+		[EnumMember(Value = "critical")]
+		Critical
 	}
 }

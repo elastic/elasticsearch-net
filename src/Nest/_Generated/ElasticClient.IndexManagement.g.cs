@@ -368,26 +368,6 @@ namespace Nest.IndexManagement
 			return ExistsTemplateAsync(selector.InvokeOrDefault(new ExistsTemplateDescriptor(name)), cancellationToken);
 		}
 
-		public ExistsTypeResponse ExistsType(IExistsTypeRequest request)
-		{
-			return DoRequest<IExistsTypeRequest, ExistsTypeResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ExistsTypeResponse> ExistsTypeAsync(IExistsTypeRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IExistsTypeRequest, ExistsTypeResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ExistsTypeResponse ExistsType(Nest.Indices index, Nest.Types type, Func<ExistsTypeDescriptor, IExistsTypeRequest> selector = null)
-		{
-			return ExistsType(selector.InvokeOrDefault(new ExistsTypeDescriptor(index, type)));
-		}
-
-		public Task<ExistsTypeResponse> ExistsTypeAsync(Nest.Indices index, Nest.Types type, Func<ExistsTypeDescriptor, IExistsTypeRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ExistsTypeAsync(selector.InvokeOrDefault(new ExistsTypeDescriptor(index, type)), cancellationToken);
-		}
-
 		public FlushResponse Flush(IFlushRequest request)
 		{
 			return DoRequest<IFlushRequest, FlushResponse>(request, request.RequestParameters);

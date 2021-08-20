@@ -15,19 +15,22 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.Enrich.ExecutePolicy
 {
-	public readonly partial struct EnrichPolicyPhase
+	public enum EnrichPolicyPhase
 	{
-		public EnrichPolicyPhase(string value) => Value = value;
-		public string Value { get; }
-
-		public static EnrichPolicyPhase Scheduled { get; } = new EnrichPolicyPhase("SCHEDULED");
-		public static EnrichPolicyPhase Running { get; } = new EnrichPolicyPhase("RUNNING");
-		public static EnrichPolicyPhase Failed { get; } = new EnrichPolicyPhase("FAILED");
-		public static EnrichPolicyPhase Complete { get; } = new EnrichPolicyPhase("COMPLETE");
+		[EnumMember(Value = "SCHEDULED")]
+		Scheduled,
+		[EnumMember(Value = "RUNNING")]
+		Running,
+		[EnumMember(Value = "FAILED")]
+		Failed,
+		[EnumMember(Value = "COMPLETE")]
+		Complete
 	}
 }

@@ -817,7 +817,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<DocType>))]
-	public readonly partial struct DocType : IComparable<DocType>, IEquatable<DocType>, IUrlParameter
+	public readonly partial struct DocType : IComparable<DocType>, IEquatable<DocType>
 	{
 		public DocType(string docType) => Value = docType;
 		public string Value { get; }
@@ -839,8 +839,6 @@ namespace Nest
 			docType = new DocType(value.Trim());
 			return true;
 		}
-
-		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Username>))]

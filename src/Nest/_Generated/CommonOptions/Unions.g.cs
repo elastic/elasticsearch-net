@@ -89,11 +89,6 @@ namespace Nest
 	{
 	}
 
-	public partial class Types : IUrlParameter
-	{
-		public string GetString(ITransportConfiguration settings) =>  string . Empty ;
-	}
-
 	public partial class WaitForActiveShards
 	{
 	}

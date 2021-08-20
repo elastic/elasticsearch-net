@@ -650,38 +650,6 @@ namespace Nest.IndexManagement
 		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	[ConvertAs(typeof(ExistsTypeRequest))]
-	public partial interface IExistsTypeRequest : IRequest<ExistsTypeRequestParameters>
-	{
-	}
-
-	public partial class ExistsTypeRequest : PlainRequestBase<ExistsTypeRequestParameters>, IExistsTypeRequest
-	{
-		protected IExistsTypeRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsType;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
-
-		///<summary>/{index}/_mapping/{type}</summary>
-        public ExistsTypeRequest(Nest.Indices index, Nest.Types type) : base(r => r.Required("index", index).Required("type", type))
-		{
-		}
-
-		[JsonIgnore]
-		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-		[JsonIgnore]
-		public Nest.ExpandWildcards? ExpandWildcards { get => Q<Nest.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-		[JsonIgnore]
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-		[JsonIgnore]
-		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-	}
-
 	[ConvertAs(typeof(FlushRequest))]
 	public partial interface IFlushRequest : IRequest<FlushRequestParameters>
 	{
@@ -2210,9 +2178,6 @@ namespace Nest.IndexManagement
 
 		[JsonIgnore]
 		public Nest.Level? Level { get => Q<Nest.Level?>("level"); set => Q("level", value); }
-
-		[JsonIgnore]
-		public Nest.Types? Types { get => Q<Nest.Types?>("types"); set => Q("types", value); }
 	}
 
 	[ConvertAs(typeof(UpdateAliasesRequest))]

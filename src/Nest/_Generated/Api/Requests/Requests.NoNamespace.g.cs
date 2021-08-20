@@ -46,11 +46,6 @@ namespace Nest
 		{
 		}
 
-		///<summary>/{index}/{type}/_bulk</summary>
-        public BulkRequest(Nest.IndexName? index, Nest.DocType? type) : base(r => r.Optional("index", index).Optional("type", type))
-		{
-		}
-
 		[JsonIgnore]
 		public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
