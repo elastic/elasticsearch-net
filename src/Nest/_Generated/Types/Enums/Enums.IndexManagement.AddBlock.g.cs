@@ -15,19 +15,24 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.IndexManagement.AddBlock
 {
-	public readonly partial struct IndicesBlockOptions
+	[JsonConverter(typeof(EnumStructConverter<IndicesBlockOptions>))]
+	public partial class IndicesBlockOptions : IUrlParameter
 	{
-		public IndicesBlockOptions(string value) => Value = value;
+		internal IndicesBlockOptions(string value) => Value = value;
 		public string Value { get; }
 
 		public static IndicesBlockOptions Write { get; } = new IndicesBlockOptions("write");
 		public static IndicesBlockOptions ReadOnly { get; } = new IndicesBlockOptions("read_only");
 		public static IndicesBlockOptions Read { get; } = new IndicesBlockOptions("read");
 		public static IndicesBlockOptions Metadata { get; } = new IndicesBlockOptions("metadata");
+		public override string ToString() => Value ?? string.Empty;
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 }

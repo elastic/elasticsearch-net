@@ -15,17 +15,18 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.Ccr.FollowInfo
 {
-	public readonly partial struct FollowerIndexStatus
+	public enum FollowerIndexStatus
 	{
-		public FollowerIndexStatus(string value) => Value = value;
-		public string Value { get; }
-
-		public static FollowerIndexStatus Paused { get; } = new FollowerIndexStatus("paused");
-		public static FollowerIndexStatus Active { get; } = new FollowerIndexStatus("active");
+		[EnumMember(Value = "paused")]
+		Paused,
+		[EnumMember(Value = "active")]
+		Active
 	}
 }

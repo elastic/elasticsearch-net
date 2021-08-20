@@ -15,19 +15,22 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.Security.GetToken
 {
-	public readonly partial struct AccessTokenGrantType
+	public enum AccessTokenGrantType
 	{
-		public AccessTokenGrantType(string value) => Value = value;
-		public string Value { get; }
-
-		public static AccessTokenGrantType RefreshToken { get; } = new AccessTokenGrantType("refresh_token");
-		public static AccessTokenGrantType Password { get; } = new AccessTokenGrantType("password");
-		public static AccessTokenGrantType ClientCredentials { get; } = new AccessTokenGrantType("client_credentials");
-		public static AccessTokenGrantType Kerberos { get; } = new AccessTokenGrantType("_kerberos");
+		[EnumMember(Value = "refresh_token")]
+		RefreshToken,
+		[EnumMember(Value = "password")]
+		Password,
+		[EnumMember(Value = "client_credentials")]
+		ClientCredentials,
+		[EnumMember(Value = "_kerberos")]
+		Kerberos
 	}
 }

@@ -15,20 +15,24 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.Snapshot
 {
-	public readonly partial struct ShardsStatsStage
+	public enum ShardsStatsStage
 	{
-		public ShardsStatsStage(string value) => Value = value;
-		public string Value { get; }
-
-		public static ShardsStatsStage Started { get; } = new ShardsStatsStage("STARTED");
-		public static ShardsStatsStage Init { get; } = new ShardsStatsStage("INIT");
-		public static ShardsStatsStage Finalize { get; } = new ShardsStatsStage("FINALIZE");
-		public static ShardsStatsStage Failure { get; } = new ShardsStatsStage("FAILURE");
-		public static ShardsStatsStage Done { get; } = new ShardsStatsStage("DONE");
+		[EnumMember(Value = "STARTED")]
+		Started,
+		[EnumMember(Value = "INIT")]
+		Init,
+		[EnumMember(Value = "FINALIZE")]
+		Finalize,
+		[EnumMember(Value = "FAILURE")]
+		Failure,
+		[EnumMember(Value = "DONE")]
+		Done
 	}
 }

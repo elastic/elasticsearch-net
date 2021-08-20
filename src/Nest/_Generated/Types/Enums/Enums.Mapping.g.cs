@@ -15,163 +15,220 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.Mapping
 {
-	public readonly partial struct DynamicMapping
+	public enum DynamicMapping
 	{
-		public DynamicMapping(string value) => Value = value;
-		public string Value { get; }
-
-		public static DynamicMapping True { get; } = new DynamicMapping("true");
-		public static DynamicMapping Strict { get; } = new DynamicMapping("strict");
-		public static DynamicMapping Runtime { get; } = new DynamicMapping("runtime");
-		public static DynamicMapping False { get; } = new DynamicMapping("false");
+		[EnumMember(Value = "true")]
+		True,
+		[EnumMember(Value = "strict")]
+		Strict,
+		[EnumMember(Value = "runtime")]
+		Runtime,
+		[EnumMember(Value = "false")]
+		False
 	}
 
-	public readonly partial struct FieldType
+	public enum FieldType
 	{
-		public FieldType(string value) => Value = value;
-		public string Value { get; }
-
-		public static FieldType TokenCount { get; } = new FieldType("token_count");
-		public static FieldType Text { get; } = new FieldType("text");
-		public static FieldType Short { get; } = new FieldType("short");
-		public static FieldType Shape { get; } = new FieldType("shape");
-		public static FieldType SearchAsYouType { get; } = new FieldType("search_as_you_type");
-		public static FieldType ScaledFloat { get; } = new FieldType("scaled_float");
-		public static FieldType RankFeatures { get; } = new FieldType("rank_features");
-		public static FieldType RankFeature { get; } = new FieldType("rank_feature");
-		public static FieldType Percolator { get; } = new FieldType("percolator");
-		public static FieldType Object { get; } = new FieldType("object");
-		public static FieldType None { get; } = new FieldType("none");
-		public static FieldType Nested { get; } = new FieldType("nested");
-		public static FieldType Murmur3 { get; } = new FieldType("murmur3");
-		public static FieldType LongRange { get; } = new FieldType("long_range");
-		public static FieldType Long { get; } = new FieldType("long");
-		public static FieldType Keyword { get; } = new FieldType("keyword");
-		public static FieldType Join { get; } = new FieldType("join");
-		public static FieldType IpRange { get; } = new FieldType("ip_range");
-		public static FieldType Ip { get; } = new FieldType("ip");
-		public static FieldType IntegerRange { get; } = new FieldType("integer_range");
-		public static FieldType Integer { get; } = new FieldType("integer");
-		public static FieldType Histogram { get; } = new FieldType("histogram");
-		public static FieldType HalfFloat { get; } = new FieldType("half_float");
-		public static FieldType GeoShape { get; } = new FieldType("geo_shape");
-		public static FieldType GeoPoint { get; } = new FieldType("geo_point");
-		public static FieldType FloatRange { get; } = new FieldType("float_range");
-		public static FieldType Float { get; } = new FieldType("float");
-		public static FieldType Flattened { get; } = new FieldType("flattened");
-		public static FieldType DoubleRange { get; } = new FieldType("double_range");
-		public static FieldType Double { get; } = new FieldType("double");
-		public static FieldType DateRange { get; } = new FieldType("date_range");
-		public static FieldType DateNanos { get; } = new FieldType("date_nanos");
-		public static FieldType Date { get; } = new FieldType("date");
-		public static FieldType ConstantKeyword { get; } = new FieldType("constant_keyword");
-		public static FieldType Completion { get; } = new FieldType("completion");
-		public static FieldType Byte { get; } = new FieldType("byte");
-		public static FieldType Boolean { get; } = new FieldType("boolean");
-		public static FieldType Binary { get; } = new FieldType("binary");
-		public static FieldType Alias { get; } = new FieldType("alias");
+		[EnumMember(Value = "token_count")]
+		TokenCount,
+		[EnumMember(Value = "text")]
+		Text,
+		[EnumMember(Value = "short")]
+		Short,
+		[EnumMember(Value = "shape")]
+		Shape,
+		[EnumMember(Value = "search_as_you_type")]
+		SearchAsYouType,
+		[EnumMember(Value = "scaled_float")]
+		ScaledFloat,
+		[EnumMember(Value = "rank_features")]
+		RankFeatures,
+		[EnumMember(Value = "rank_feature")]
+		RankFeature,
+		[EnumMember(Value = "percolator")]
+		Percolator,
+		[EnumMember(Value = "object")]
+		Object,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "nested")]
+		Nested,
+		[EnumMember(Value = "murmur3")]
+		Murmur3,
+		[EnumMember(Value = "long_range")]
+		LongRange,
+		[EnumMember(Value = "long")]
+		Long,
+		[EnumMember(Value = "keyword")]
+		Keyword,
+		[EnumMember(Value = "join")]
+		Join,
+		[EnumMember(Value = "ip_range")]
+		IpRange,
+		[EnumMember(Value = "ip")]
+		Ip,
+		[EnumMember(Value = "integer_range")]
+		IntegerRange,
+		[EnumMember(Value = "integer")]
+		Integer,
+		[EnumMember(Value = "histogram")]
+		Histogram,
+		[EnumMember(Value = "half_float")]
+		HalfFloat,
+		[EnumMember(Value = "geo_shape")]
+		GeoShape,
+		[EnumMember(Value = "geo_point")]
+		GeoPoint,
+		[EnumMember(Value = "float_range")]
+		FloatRange,
+		[EnumMember(Value = "float")]
+		Float,
+		[EnumMember(Value = "flattened")]
+		Flattened,
+		[EnumMember(Value = "double_range")]
+		DoubleRange,
+		[EnumMember(Value = "double")]
+		Double,
+		[EnumMember(Value = "date_range")]
+		DateRange,
+		[EnumMember(Value = "date_nanos")]
+		DateNanos,
+		[EnumMember(Value = "date")]
+		Date,
+		[EnumMember(Value = "constant_keyword")]
+		ConstantKeyword,
+		[EnumMember(Value = "completion")]
+		Completion,
+		[EnumMember(Value = "byte")]
+		Byte,
+		[EnumMember(Value = "boolean")]
+		Boolean,
+		[EnumMember(Value = "binary")]
+		Binary,
+		[EnumMember(Value = "alias")]
+		Alias
 	}
 
-	public readonly partial struct GeoOrientation
+	public enum GeoOrientation
 	{
-		public GeoOrientation(string value) => Value = value;
-		public string Value { get; }
-
-		public static GeoOrientation Right { get; } = new GeoOrientation("right");
-		public static GeoOrientation Left { get; } = new GeoOrientation("left");
-		public static GeoOrientation Cw { get; } = new GeoOrientation("cw");
-		public static GeoOrientation Counterclockwise { get; } = new GeoOrientation("counterclockwise");
-		public static GeoOrientation Clockwise { get; } = new GeoOrientation("clockwise");
-		public static GeoOrientation Ccw { get; } = new GeoOrientation("ccw");
+		[EnumMember(Value = "right")]
+		Right,
+		[EnumMember(Value = "left")]
+		Left,
+		[EnumMember(Value = "cw")]
+		Cw,
+		[EnumMember(Value = "counterclockwise")]
+		Counterclockwise,
+		[EnumMember(Value = "clockwise")]
+		Clockwise,
+		[EnumMember(Value = "ccw")]
+		Ccw
 	}
 
-	public readonly partial struct GeoStrategy
+	public enum GeoStrategy
 	{
-		public GeoStrategy(string value) => Value = value;
-		public string Value { get; }
-
-		public static GeoStrategy Term { get; } = new GeoStrategy("term");
-		public static GeoStrategy Recursive { get; } = new GeoStrategy("recursive");
+		[EnumMember(Value = "term")]
+		Term,
+		[EnumMember(Value = "recursive")]
+		Recursive
 	}
 
-	public readonly partial struct IndexOptions
+	public enum IndexOptions
 	{
-		public IndexOptions(string value) => Value = value;
-		public string Value { get; }
-
-		public static IndexOptions Positions { get; } = new IndexOptions("positions");
-		public static IndexOptions Offsets { get; } = new IndexOptions("offsets");
-		public static IndexOptions Freqs { get; } = new IndexOptions("freqs");
-		public static IndexOptions Docs { get; } = new IndexOptions("docs");
+		[EnumMember(Value = "positions")]
+		Positions,
+		[EnumMember(Value = "offsets")]
+		Offsets,
+		[EnumMember(Value = "freqs")]
+		Freqs,
+		[EnumMember(Value = "docs")]
+		Docs
 	}
 
-	public readonly partial struct MatchType
+	public enum MatchType
 	{
-		public MatchType(string value) => Value = value;
-		public string Value { get; }
-
-		public static MatchType Simple { get; } = new MatchType("simple");
-		public static MatchType Regex { get; } = new MatchType("regex");
+		[EnumMember(Value = "simple")]
+		Simple,
+		[EnumMember(Value = "regex")]
+		Regex
 	}
 
-	public readonly partial struct NumberType
+	public enum NumberType
 	{
-		public NumberType(string value) => Value = value;
-		public string Value { get; }
-
-		public static NumberType UnsignedLong { get; } = new NumberType("unsigned_long");
-		public static NumberType Short { get; } = new NumberType("short");
-		public static NumberType ScaledFloat { get; } = new NumberType("scaled_float");
-		public static NumberType Long { get; } = new NumberType("long");
-		public static NumberType Integer { get; } = new NumberType("integer");
-		public static NumberType HalfFloat { get; } = new NumberType("half_float");
-		public static NumberType Float { get; } = new NumberType("float");
-		public static NumberType Double { get; } = new NumberType("double");
-		public static NumberType Byte { get; } = new NumberType("byte");
+		[EnumMember(Value = "unsigned_long")]
+		UnsignedLong,
+		[EnumMember(Value = "short")]
+		Short,
+		[EnumMember(Value = "scaled_float")]
+		ScaledFloat,
+		[EnumMember(Value = "long")]
+		Long,
+		[EnumMember(Value = "integer")]
+		Integer,
+		[EnumMember(Value = "half_float")]
+		HalfFloat,
+		[EnumMember(Value = "float")]
+		Float,
+		[EnumMember(Value = "double")]
+		Double,
+		[EnumMember(Value = "byte")]
+		Byte
 	}
 
-	public readonly partial struct RuntimeFieldType
+	public enum RuntimeFieldType
 	{
-		public RuntimeFieldType(string value) => Value = value;
-		public string Value { get; }
-
-		public static RuntimeFieldType Long { get; } = new RuntimeFieldType("long");
-		public static RuntimeFieldType Keyword { get; } = new RuntimeFieldType("keyword");
-		public static RuntimeFieldType Ip { get; } = new RuntimeFieldType("ip");
-		public static RuntimeFieldType GeoPoint { get; } = new RuntimeFieldType("geo_point");
-		public static RuntimeFieldType Double { get; } = new RuntimeFieldType("double");
-		public static RuntimeFieldType Date { get; } = new RuntimeFieldType("date");
-		public static RuntimeFieldType Boolean { get; } = new RuntimeFieldType("boolean");
+		[EnumMember(Value = "long")]
+		Long,
+		[EnumMember(Value = "keyword")]
+		Keyword,
+		[EnumMember(Value = "ip")]
+		Ip,
+		[EnumMember(Value = "geo_point")]
+		GeoPoint,
+		[EnumMember(Value = "double")]
+		Double,
+		[EnumMember(Value = "date")]
+		Date,
+		[EnumMember(Value = "boolean")]
+		Boolean
 	}
 
-	public readonly partial struct ShapeOrientation
+	public enum ShapeOrientation
 	{
-		public ShapeOrientation(string value) => Value = value;
-		public string Value { get; }
-
-		public static ShapeOrientation Right { get; } = new ShapeOrientation("right");
-		public static ShapeOrientation Left { get; } = new ShapeOrientation("left");
-		public static ShapeOrientation Cw { get; } = new ShapeOrientation("cw");
-		public static ShapeOrientation Counterclockwise { get; } = new ShapeOrientation("counterclockwise");
-		public static ShapeOrientation Clockwise { get; } = new ShapeOrientation("clockwise");
-		public static ShapeOrientation Ccw { get; } = new ShapeOrientation("ccw");
+		[EnumMember(Value = "right")]
+		Right,
+		[EnumMember(Value = "left")]
+		Left,
+		[EnumMember(Value = "cw")]
+		Cw,
+		[EnumMember(Value = "counterclockwise")]
+		Counterclockwise,
+		[EnumMember(Value = "clockwise")]
+		Clockwise,
+		[EnumMember(Value = "ccw")]
+		Ccw
 	}
 
-	public readonly partial struct TermVectorOption
+	public enum TermVectorOption
 	{
-		public TermVectorOption(string value) => Value = value;
-		public string Value { get; }
-
-		public static TermVectorOption Yes { get; } = new TermVectorOption("yes");
-		public static TermVectorOption WithPositionsOffsetsPayloads { get; } = new TermVectorOption("with_positions_offsets_payloads");
-		public static TermVectorOption WithPositionsOffsets { get; } = new TermVectorOption("with_positions_offsets");
-		public static TermVectorOption WithPositions { get; } = new TermVectorOption("with_positions");
-		public static TermVectorOption WithOffsets { get; } = new TermVectorOption("with_offsets");
-		public static TermVectorOption No { get; } = new TermVectorOption("no");
+		[EnumMember(Value = "yes")]
+		Yes,
+		[EnumMember(Value = "with_positions_offsets_payloads")]
+		WithPositionsOffsetsPayloads,
+		[EnumMember(Value = "with_positions_offsets")]
+		WithPositionsOffsets,
+		[EnumMember(Value = "with_positions")]
+		WithPositions,
+		[EnumMember(Value = "with_offsets")]
+		WithOffsets,
+		[EnumMember(Value = "no")]
+		No
 	}
 }

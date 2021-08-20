@@ -34,11 +34,6 @@ namespace Nest
         public BulkDescriptor(Nest.IndexName? index) : base(r => r.Optional("index", index))
 		{
 		}
-
-		///<summary>/{index}/{type}/_bulk</summary>
-        public BulkDescriptor(Nest.IndexName? index, Nest.DocType? type) : base(r => r.Optional("index", index).Optional("type", type))
-		{
-		}
 	}
 
 	public partial class ClearScrollDescriptor : RequestDescriptorBase<ClearScrollDescriptor, ClearScrollRequestParameters, IClearScrollRequest>, IClearScrollRequest

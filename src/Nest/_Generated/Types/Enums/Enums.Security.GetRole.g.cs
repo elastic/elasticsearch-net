@@ -15,17 +15,18 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest.Security.GetRole
 {
-	public readonly partial struct TemplateFormat
+	public enum TemplateFormat
 	{
-		public TemplateFormat(string value) => Value = value;
-		public string Value { get; }
-
-		public static TemplateFormat String { get; } = new TemplateFormat("string");
-		public static TemplateFormat Json { get; } = new TemplateFormat("json");
+		[EnumMember(Value = "string")]
+		String,
+		[EnumMember(Value = "json")]
+		Json
 	}
 }

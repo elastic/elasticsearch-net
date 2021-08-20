@@ -260,10 +260,6 @@ namespace Nest.IndexManagement
 	{
 	}
 
-	public partial class ExistsTypeResponse : ResponseBase
-	{
-	}
-
 	public partial class FlushResponse : ShardsOperationResponseBase
 	{
 	}

@@ -6,14 +6,6 @@ using Elastic.Transport;
 
 namespace Nest
 {
-	namespace IndexManagement.AddBlock
-	{
-		public partial struct IndicesBlockOptions : IUrlParameter
-		{
-			public string GetString(ITransportConfiguration settings) => Value;
-		}
-	}	
-
 	public abstract partial class PlainRequestBase<TParameters>
 	{
 		///<summary>Include the stack trace of returned errors.</summary>

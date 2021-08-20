@@ -15,288 +15,320 @@
 //
 // ------------------------------------------------
 
+using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
 namespace Nest
 {
-	public readonly partial struct Bytes
+	public enum Bytes
 	{
-		public Bytes(string value) => Value = value;
-		public string Value { get; }
-
-		public static Bytes Tb { get; } = new Bytes("tb");
-		public static Bytes t { get; } = new Bytes("t");
-		public static Bytes Pb { get; } = new Bytes("pb");
-		public static Bytes p { get; } = new Bytes("p");
-		public static Bytes Mb { get; } = new Bytes("mb");
-		public static Bytes m { get; } = new Bytes("m");
-		public static Bytes Kb { get; } = new Bytes("kb");
-		public static Bytes k { get; } = new Bytes("k");
-		public static Bytes Gb { get; } = new Bytes("gb");
-		public static Bytes g { get; } = new Bytes("g");
-		public static Bytes b { get; } = new Bytes("b");
+		[EnumMember(Value = "tb")]
+		Tb,
+		[EnumMember(Value = "t")]
+		t,
+		[EnumMember(Value = "pb")]
+		Pb,
+		[EnumMember(Value = "p")]
+		p,
+		[EnumMember(Value = "mb")]
+		Mb,
+		[EnumMember(Value = "m")]
+		m,
+		[EnumMember(Value = "kb")]
+		Kb,
+		[EnumMember(Value = "k")]
+		k,
+		[EnumMember(Value = "gb")]
+		Gb,
+		[EnumMember(Value = "g")]
+		g,
+		[EnumMember(Value = "b")]
+		b
 	}
 
-	public readonly partial struct Conflicts
+	public enum Conflicts
 	{
-		public Conflicts(string value) => Value = value;
-		public string Value { get; }
-
-		public static Conflicts Proceed { get; } = new Conflicts("proceed");
-		public static Conflicts Abort { get; } = new Conflicts("abort");
+		[EnumMember(Value = "proceed")]
+		Proceed,
+		[EnumMember(Value = "abort")]
+		Abort
 	}
 
-	public readonly partial struct DefaultOperator
+	public enum DefaultOperator
 	{
-		public DefaultOperator(string value) => Value = value;
-		public string Value { get; }
-
-		public static DefaultOperator Or { get; } = new DefaultOperator("OR");
-		public static DefaultOperator And { get; } = new DefaultOperator("AND");
+		[EnumMember(Value = "OR")]
+		Or,
+		[EnumMember(Value = "AND")]
+		And
 	}
 
-	public readonly partial struct DistanceUnit
+	public enum DistanceUnit
 	{
-		public DistanceUnit(string value) => Value = value;
-		public string Value { get; }
-
-		public static DistanceUnit Yd { get; } = new DistanceUnit("yd");
-		public static DistanceUnit Nmi { get; } = new DistanceUnit("nmi");
-		public static DistanceUnit Mm { get; } = new DistanceUnit("mm");
-		public static DistanceUnit Mi { get; } = new DistanceUnit("mi");
-		public static DistanceUnit m { get; } = new DistanceUnit("m");
-		public static DistanceUnit Km { get; } = new DistanceUnit("km");
-		public static DistanceUnit In { get; } = new DistanceUnit("in");
-		public static DistanceUnit Ft { get; } = new DistanceUnit("ft");
-		public static DistanceUnit Cm { get; } = new DistanceUnit("cm");
+		[EnumMember(Value = "yd")]
+		Yd,
+		[EnumMember(Value = "nmi")]
+		Nmi,
+		[EnumMember(Value = "mm")]
+		Mm,
+		[EnumMember(Value = "mi")]
+		Mi,
+		[EnumMember(Value = "m")]
+		m,
+		[EnumMember(Value = "km")]
+		Km,
+		[EnumMember(Value = "in")]
+		In,
+		[EnumMember(Value = "ft")]
+		Ft,
+		[EnumMember(Value = "cm")]
+		Cm
 	}
 
-	public readonly partial struct ExpandWildcardOptions
+	public enum ExpandWildcardOptions
 	{
-		public ExpandWildcardOptions(string value) => Value = value;
-		public string Value { get; }
-
-		public static ExpandWildcardOptions Open { get; } = new ExpandWildcardOptions("open");
-		public static ExpandWildcardOptions None { get; } = new ExpandWildcardOptions("none");
-		public static ExpandWildcardOptions Hidden { get; } = new ExpandWildcardOptions("hidden");
-		public static ExpandWildcardOptions Closed { get; } = new ExpandWildcardOptions("closed");
-		public static ExpandWildcardOptions All { get; } = new ExpandWildcardOptions("all");
+		[EnumMember(Value = "open")]
+		Open,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "hidden")]
+		Hidden,
+		[EnumMember(Value = "closed")]
+		Closed,
+		[EnumMember(Value = "all")]
+		All
 	}
 
-	public readonly partial struct GeoDistanceType
+	public enum GeoDistanceType
 	{
-		public GeoDistanceType(string value) => Value = value;
-		public string Value { get; }
-
-		public static GeoDistanceType Plane { get; } = new GeoDistanceType("plane");
-		public static GeoDistanceType Arc { get; } = new GeoDistanceType("arc");
+		[EnumMember(Value = "plane")]
+		Plane,
+		[EnumMember(Value = "arc")]
+		Arc
 	}
 
-	public readonly partial struct GeoShapeRelation
+	public enum GeoShapeRelation
 	{
-		public GeoShapeRelation(string value) => Value = value;
-		public string Value { get; }
-
-		public static GeoShapeRelation Within { get; } = new GeoShapeRelation("within");
-		public static GeoShapeRelation Intersects { get; } = new GeoShapeRelation("intersects");
-		public static GeoShapeRelation Disjoint { get; } = new GeoShapeRelation("disjoint");
-		public static GeoShapeRelation Contains { get; } = new GeoShapeRelation("contains");
+		[EnumMember(Value = "within")]
+		Within,
+		[EnumMember(Value = "intersects")]
+		Intersects,
+		[EnumMember(Value = "disjoint")]
+		Disjoint,
+		[EnumMember(Value = "contains")]
+		Contains
 	}
 
-	public readonly partial struct GroupBy
+	public enum GroupBy
 	{
-		public GroupBy(string value) => Value = value;
-		public string Value { get; }
-
-		public static GroupBy Parents { get; } = new GroupBy("parents");
-		public static GroupBy None { get; } = new GroupBy("none");
-		public static GroupBy Nodes { get; } = new GroupBy("nodes");
+		[EnumMember(Value = "parents")]
+		Parents,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "nodes")]
+		Nodes
 	}
 
-	public readonly partial struct Health
+	public enum Health
 	{
-		public Health(string value) => Value = value;
-		public string Value { get; }
-
-		public static Health Yellow { get; } = new Health("yellow");
-		public static Health Red { get; } = new Health("red");
-		public static Health Green { get; } = new Health("green");
+		[EnumMember(Value = "yellow")]
+		Yellow,
+		[EnumMember(Value = "red")]
+		Red,
+		[EnumMember(Value = "green")]
+		Green
 	}
 
-	public readonly partial struct Level
+	public enum Level
 	{
-		public Level(string value) => Value = value;
-		public string Value { get; }
-
-		public static Level Shards { get; } = new Level("shards");
-		public static Level Indices { get; } = new Level("indices");
-		public static Level Cluster { get; } = new Level("cluster");
+		[EnumMember(Value = "shards")]
+		Shards,
+		[EnumMember(Value = "indices")]
+		Indices,
+		[EnumMember(Value = "cluster")]
+		Cluster
 	}
 
-	public readonly partial struct LifecycleOperationMode
+	public enum LifecycleOperationMode
 	{
-		public LifecycleOperationMode(string value) => Value = value;
-		public string Value { get; }
-
-		public static LifecycleOperationMode Stopping { get; } = new LifecycleOperationMode("STOPPING");
-		public static LifecycleOperationMode Stopped { get; } = new LifecycleOperationMode("STOPPED");
-		public static LifecycleOperationMode Running { get; } = new LifecycleOperationMode("RUNNING");
+		[EnumMember(Value = "STOPPING")]
+		Stopping,
+		[EnumMember(Value = "STOPPED")]
+		Stopped,
+		[EnumMember(Value = "RUNNING")]
+		Running
 	}
 
-	public readonly partial struct NodeRole
+	public enum NodeRole
 	{
-		public NodeRole(string value) => Value = value;
-		public string Value { get; }
-
-		public static NodeRole VotingOnly { get; } = new NodeRole("voting_only");
-		public static NodeRole Transform { get; } = new NodeRole("transform");
-		public static NodeRole RemoteClusterClient { get; } = new NodeRole("remote_cluster_client");
-		public static NodeRole Ml { get; } = new NodeRole("ml");
-		public static NodeRole Master { get; } = new NodeRole("master");
-		public static NodeRole Ingest { get; } = new NodeRole("ingest");
-		public static NodeRole DataWarm { get; } = new NodeRole("data_warm");
-		public static NodeRole DataHot { get; } = new NodeRole("data_hot");
-		public static NodeRole DataFrozen { get; } = new NodeRole("data_frozen");
-		public static NodeRole DataContent { get; } = new NodeRole("data_content");
-		public static NodeRole DataCold { get; } = new NodeRole("data_cold");
-		public static NodeRole Data { get; } = new NodeRole("data");
-		public static NodeRole CoordinatingOnly { get; } = new NodeRole("coordinating_only");
-		public static NodeRole Client { get; } = new NodeRole("client");
+		[EnumMember(Value = "voting_only")]
+		VotingOnly,
+		[EnumMember(Value = "transform")]
+		Transform,
+		[EnumMember(Value = "remote_cluster_client")]
+		RemoteClusterClient,
+		[EnumMember(Value = "ml")]
+		Ml,
+		[EnumMember(Value = "master")]
+		Master,
+		[EnumMember(Value = "ingest")]
+		Ingest,
+		[EnumMember(Value = "data_warm")]
+		DataWarm,
+		[EnumMember(Value = "data_hot")]
+		DataHot,
+		[EnumMember(Value = "data_frozen")]
+		DataFrozen,
+		[EnumMember(Value = "data_content")]
+		DataContent,
+		[EnumMember(Value = "data_cold")]
+		DataCold,
+		[EnumMember(Value = "data")]
+		Data,
+		[EnumMember(Value = "coordinating_only")]
+		CoordinatingOnly,
+		[EnumMember(Value = "client")]
+		Client
 	}
 
-	public readonly partial struct OpType
+	public enum OpType
 	{
-		public OpType(string value) => Value = value;
-		public string Value { get; }
-
-		public static OpType Index { get; } = new OpType("index");
-		public static OpType Create { get; } = new OpType("create");
+		[EnumMember(Value = "index")]
+		Index,
+		[EnumMember(Value = "create")]
+		Create
 	}
 
-	public readonly partial struct RefreshOptions
+	public enum RefreshOptions
 	{
-		public RefreshOptions(string value) => Value = value;
-		public string Value { get; }
-
-		public static RefreshOptions WaitFor { get; } = new RefreshOptions("wait_for");
+		[EnumMember(Value = "wait_for")]
+		WaitFor
 	}
 
-	public readonly partial struct Result
+	public enum Result
 	{
-		public Result(string value) => Value = value;
-		public string Value { get; }
-
-		public static Result Updated { get; } = new Result("updated");
-		public static Result NotFound { get; } = new Result("not_found");
-		public static Result Noop { get; } = new Result("noop");
-		public static Result Deleted { get; } = new Result("deleted");
-		public static Result Created { get; } = new Result("created");
-		public static Result Error { get; } = new Result("Error");
+		[EnumMember(Value = "updated")]
+		Updated,
+		[EnumMember(Value = "not_found")]
+		NotFound,
+		[EnumMember(Value = "noop")]
+		Noop,
+		[EnumMember(Value = "deleted")]
+		Deleted,
+		[EnumMember(Value = "created")]
+		Created,
+		[EnumMember(Value = "Error")]
+		Error
 	}
 
-	public readonly partial struct ScriptLanguage
+	public enum ScriptLanguage
 	{
-		public ScriptLanguage(string value) => Value = value;
-		public string Value { get; }
-
-		public static ScriptLanguage Painless { get; } = new ScriptLanguage("painless");
-		public static ScriptLanguage Mustache { get; } = new ScriptLanguage("mustache");
-		public static ScriptLanguage Java { get; } = new ScriptLanguage("java");
-		public static ScriptLanguage Expression { get; } = new ScriptLanguage("expression");
+		[EnumMember(Value = "painless")]
+		Painless,
+		[EnumMember(Value = "mustache")]
+		Mustache,
+		[EnumMember(Value = "java")]
+		Java,
+		[EnumMember(Value = "expression")]
+		Expression
 	}
 
-	public readonly partial struct SearchType
+	public enum SearchType
 	{
-		public SearchType(string value) => Value = value;
-		public string Value { get; }
-
-		public static SearchType QueryThenFetch { get; } = new SearchType("query_then_fetch");
-		public static SearchType DfsQueryThenFetch { get; } = new SearchType("dfs_query_then_fetch");
+		[EnumMember(Value = "query_then_fetch")]
+		QueryThenFetch,
+		[EnumMember(Value = "dfs_query_then_fetch")]
+		DfsQueryThenFetch
 	}
 
-	public readonly partial struct ShapeRelation
+	public enum ShapeRelation
 	{
-		public ShapeRelation(string value) => Value = value;
-		public string Value { get; }
-
-		public static ShapeRelation Within { get; } = new ShapeRelation("within");
-		public static ShapeRelation Intersects { get; } = new ShapeRelation("intersects");
-		public static ShapeRelation Disjoint { get; } = new ShapeRelation("disjoint");
+		[EnumMember(Value = "within")]
+		Within,
+		[EnumMember(Value = "intersects")]
+		Intersects,
+		[EnumMember(Value = "disjoint")]
+		Disjoint
 	}
 
-	public readonly partial struct Size
+	public enum Size
 	{
-		public Size(string value) => Value = value;
-		public string Value { get; }
-
-		public static Size t { get; } = new Size("t");
-		public static Size p { get; } = new Size("p");
-		public static Size m { get; } = new Size("m");
-		public static Size k { get; } = new Size("k");
-		public static Size g { get; } = new Size("g");
-		public static Size Raw { get; } = new Size("Raw");
+		[EnumMember(Value = "t")]
+		t,
+		[EnumMember(Value = "p")]
+		p,
+		[EnumMember(Value = "m")]
+		m,
+		[EnumMember(Value = "k")]
+		k,
+		[EnumMember(Value = "g")]
+		g,
+		[EnumMember(Value = "Raw")]
+		Raw
 	}
 
-	public readonly partial struct SuggestMode
+	public enum SuggestMode
 	{
-		public SuggestMode(string value) => Value = value;
-		public string Value { get; }
-
-		public static SuggestMode Popular { get; } = new SuggestMode("popular");
-		public static SuggestMode Missing { get; } = new SuggestMode("missing");
-		public static SuggestMode Always { get; } = new SuggestMode("always");
+		[EnumMember(Value = "popular")]
+		Popular,
+		[EnumMember(Value = "missing")]
+		Missing,
+		[EnumMember(Value = "always")]
+		Always
 	}
 
-	public readonly partial struct ThreadType
+	public enum ThreadType
 	{
-		public ThreadType(string value) => Value = value;
-		public string Value { get; }
-
-		public static ThreadType Wait { get; } = new ThreadType("wait");
-		public static ThreadType Cpu { get; } = new ThreadType("cpu");
-		public static ThreadType Block { get; } = new ThreadType("block");
+		[EnumMember(Value = "wait")]
+		Wait,
+		[EnumMember(Value = "cpu")]
+		Cpu,
+		[EnumMember(Value = "block")]
+		Block
 	}
 
-	public readonly partial struct VersionType
+	public enum VersionType
 	{
-		public VersionType(string value) => Value = value;
-		public string Value { get; }
-
-		public static VersionType Internal { get; } = new VersionType("internal");
-		public static VersionType Force { get; } = new VersionType("force");
-		public static VersionType ExternalGte { get; } = new VersionType("external_gte");
-		public static VersionType External { get; } = new VersionType("external");
+		[EnumMember(Value = "internal")]
+		Internal,
+		[EnumMember(Value = "force")]
+		Force,
+		[EnumMember(Value = "external_gte")]
+		ExternalGte,
+		[EnumMember(Value = "external")]
+		External
 	}
 
-	public readonly partial struct WaitForActiveShardOptions
+	public enum WaitForActiveShardOptions
 	{
-		public WaitForActiveShardOptions(string value) => Value = value;
-		public string Value { get; }
-
-		public static WaitForActiveShardOptions All { get; } = new WaitForActiveShardOptions("all");
+		[EnumMember(Value = "all")]
+		All
 	}
 
-	public readonly partial struct WaitForEvents
+	public enum WaitForEvents
 	{
-		public WaitForEvents(string value) => Value = value;
-		public string Value { get; }
-
-		public static WaitForEvents Urgent { get; } = new WaitForEvents("urgent");
-		public static WaitForEvents Normal { get; } = new WaitForEvents("normal");
-		public static WaitForEvents Low { get; } = new WaitForEvents("low");
-		public static WaitForEvents Languid { get; } = new WaitForEvents("languid");
-		public static WaitForEvents Immediate { get; } = new WaitForEvents("immediate");
-		public static WaitForEvents High { get; } = new WaitForEvents("high");
+		[EnumMember(Value = "urgent")]
+		Urgent,
+		[EnumMember(Value = "normal")]
+		Normal,
+		[EnumMember(Value = "low")]
+		Low,
+		[EnumMember(Value = "languid")]
+		Languid,
+		[EnumMember(Value = "immediate")]
+		Immediate,
+		[EnumMember(Value = "high")]
+		High
 	}
 
-	public readonly partial struct WaitForStatus
+	public enum WaitForStatus
 	{
-		public WaitForStatus(string value) => Value = value;
-		public string Value { get; }
-
-		public static WaitForStatus Yellow { get; } = new WaitForStatus("yellow");
-		public static WaitForStatus Red { get; } = new WaitForStatus("red");
-		public static WaitForStatus Green { get; } = new WaitForStatus("green");
+		[EnumMember(Value = "yellow")]
+		Yellow,
+		[EnumMember(Value = "red")]
+		Red,
+		[EnumMember(Value = "green")]
+		Green
 	}
 }
