@@ -93,6 +93,9 @@ namespace Nest.Enrich
 	[ConvertAs(typeof(PutPolicyRequest))]
 	public partial interface IPutPolicyRequest : IRequest<PutPolicyRequestParameters>
 	{
+		Nest.Enrich.Policy? GeoMatch { get; set; }
+
+		Nest.Enrich.Policy? Match { get; set; }
 	}
 
 	public partial class PutPolicyRequest : PlainRequestBase<PutPolicyRequestParameters>, IPutPolicyRequest
@@ -110,26 +113,10 @@ namespace Nest.Enrich
 		}
 
 		[JsonPropertyName("geo_match")]
-		public Nest.Enrich.Policy? GeoMatch
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Enrich.Policy? GeoMatch { get; set; }
 
 		[JsonPropertyName("match")]
-		public Nest.Enrich.Policy? Match
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Enrich.Policy? Match { get; set; }
 	}
 
 	[ConvertAs(typeof(StatsRequest))]

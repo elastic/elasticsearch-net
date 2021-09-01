@@ -33,11 +33,11 @@ namespace Nest.Ilm
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementDeleteLifecycle;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
 
 		///<summary>/_ilm/policy/{policy}</summary>
-        public DeleteLifecycleRequest(Nest.Name? policy) : base(r => r.Optional("policy", policy))
+        public DeleteLifecycleRequest(Nest.Name policy) : base(r => r.Required("policy", policy))
 		{
 		}
 	}
@@ -116,6 +116,9 @@ namespace Nest.Ilm
 	[ConvertAs(typeof(MoveToStepRequest))]
 	public partial interface IMoveToStepRequest : IRequest<MoveToStepRequestParameters>
 	{
+		Nest.Ilm.MoveToStep.StepKey? CurrentStep { get; set; }
+
+		Nest.Ilm.MoveToStep.StepKey? NextStep { get; set; }
 	}
 
 	public partial class MoveToStepRequest : PlainRequestBase<MoveToStepRequestParameters>, IMoveToStepRequest
@@ -133,26 +136,10 @@ namespace Nest.Ilm
 		}
 
 		[JsonPropertyName("current_step")]
-		public Nest.Ilm.MoveToStep.StepKey? CurrentStep
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ilm.MoveToStep.StepKey? CurrentStep { get; set; }
 
 		[JsonPropertyName("next_step")]
-		public Nest.Ilm.MoveToStep.StepKey? NextStep
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ilm.MoveToStep.StepKey? NextStep { get; set; }
 	}
 
 	[ConvertAs(typeof(PutLifecycleRequest))]
@@ -166,11 +153,11 @@ namespace Nest.Ilm
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementPutLifecycle;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
 
 		///<summary>/_ilm/policy/{policy}</summary>
-        public PutLifecycleRequest(Nest.Name? policy) : base(r => r.Optional("policy", policy))
+        public PutLifecycleRequest(Nest.Name policy) : base(r => r.Required("policy", policy))
 		{
 		}
 	}
@@ -225,25 +212,20 @@ namespace Nest.Ilm
 		protected IStartRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementStart;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
 
 		///<summary>/_ilm/start</summary>
         public StartRequest() : base()
 		{
 		}
 
-		[JsonPropertyName("stub")]
-		public bool Stub
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	[ConvertAs(typeof(StopRequest))]
@@ -256,24 +238,19 @@ namespace Nest.Ilm
 		protected IStopRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexLifecycleManagementStop;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
 
 		///<summary>/_ilm/stop</summary>
         public StopRequest() : base()
 		{
 		}
 
-		[JsonPropertyName("stub")]
-		public bool Stub
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 	}
 }

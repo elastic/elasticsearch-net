@@ -35,12 +35,6 @@ namespace Nest.SearchableSnapshots
 
 		[JsonIgnore]
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-		[JsonIgnore]
-		public bool? Pretty { get => Q<bool?>("pretty"); set => Q("pretty", value); }
-
-		[JsonIgnore]
-		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
 	}
 
 	public class MountRequestParameters : RequestParameters<MountRequestParameters>
@@ -53,5 +47,11 @@ namespace Nest.SearchableSnapshots
 
 		[JsonIgnore]
 		public string? Storage { get => Q<string?>("storage"); set => Q("storage", value); }
+	}
+
+	public class StatsRequestParameters : RequestParameters<StatsRequestParameters>
+	{
+		[JsonIgnore]
+		public Nest.SearchableSnapshots.StatsLevel? Level { get => Q<Nest.SearchableSnapshots.StatsLevel?>("level"); set => Q("level", value); }
 	}
 }

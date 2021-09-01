@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Sql
@@ -29,6 +30,10 @@ namespace Nest.Sql
         public ClearCursorDescriptor() : base()
 		{
 		}
+
+		string IClearCursorRequest.Cursor { get; set; }
+
+		public ClearCursorDescriptor Cursor(string cursor) => Assign(cursor, (a, v) => a.Cursor = v);
 	}
 
 	public partial class QueryDescriptor : RequestDescriptorBase<QueryDescriptor, QueryRequestParameters, IQueryRequest>, IQueryRequest
@@ -40,6 +45,35 @@ namespace Nest.Sql
         public QueryDescriptor() : base()
 		{
 		}
+
+		bool? IQueryRequest.Columnar { get; set; }
+
+		string? IQueryRequest.Cursor { get; set; }
+
+		int? IQueryRequest.FetchSize { get; set; }
+
+		Nest.QueryDsl.QueryContainer? IQueryRequest.Filter { get; set; }
+
+		string? IQueryRequest.Query { get; set; }
+
+		Nest.Time? IQueryRequest.RequestTimeout { get; set; }
+
+		Nest.Time? IQueryRequest.PageTimeout { get; set; }
+
+		string? IQueryRequest.TimeZone { get; set; }
+
+		bool? IQueryRequest.FieldMultiValueLeniency { get; set; }
+
+		public QueryDescriptor Format(string? format) => Qs("format", format);
+		public QueryDescriptor Columnar(bool? columnar = true) => Assign(columnar, (a, v) => a.Columnar = v);
+		public QueryDescriptor Cursor(string? cursor) => Assign(cursor, (a, v) => a.Cursor = v);
+		public QueryDescriptor FetchSize(int? fetchSize) => Assign(fetchSize, (a, v) => a.FetchSize = v);
+		public QueryDescriptor Filter(Nest.QueryDsl.QueryContainer? filter) => Assign(filter, (a, v) => a.Filter = v);
+		public QueryDescriptor Query(string? query) => Assign(query, (a, v) => a.Query = v);
+		public QueryDescriptor RequestTimeout(Nest.Time? requestTimeout) => Assign(requestTimeout, (a, v) => a.RequestTimeout = v);
+		public QueryDescriptor PageTimeout(Nest.Time? pageTimeout) => Assign(pageTimeout, (a, v) => a.PageTimeout = v);
+		public QueryDescriptor TimeZone(string? timeZone) => Assign(timeZone, (a, v) => a.TimeZone = v);
+		public QueryDescriptor FieldMultiValueLeniency(bool? fieldMultiValueLeniency = true) => Assign(fieldMultiValueLeniency, (a, v) => a.FieldMultiValueLeniency = v);
 	}
 
 	public partial class TranslateDescriptor : RequestDescriptorBase<TranslateDescriptor, TranslateRequestParameters, ITranslateRequest>, ITranslateRequest
@@ -51,5 +85,18 @@ namespace Nest.Sql
         public TranslateDescriptor() : base()
 		{
 		}
+
+		int? ITranslateRequest.FetchSize { get; set; }
+
+		Nest.QueryDsl.QueryContainer? ITranslateRequest.Filter { get; set; }
+
+		string ITranslateRequest.Query { get; set; }
+
+		string? ITranslateRequest.TimeZone { get; set; }
+
+		public TranslateDescriptor FetchSize(int? fetchSize) => Assign(fetchSize, (a, v) => a.FetchSize = v);
+		public TranslateDescriptor Filter(Nest.QueryDsl.QueryContainer? filter) => Assign(filter, (a, v) => a.Filter = v);
+		public TranslateDescriptor Query(string query) => Assign(query, (a, v) => a.Query = v);
+		public TranslateDescriptor TimeZone(string? timeZone) => Assign(timeZone, (a, v) => a.TimeZone = v);
 	}
 }

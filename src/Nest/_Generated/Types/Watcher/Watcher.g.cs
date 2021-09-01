@@ -80,6 +80,9 @@ namespace Nest.Watcher
 
 		[JsonPropertyName("transform")]
 		public Nest.TransformContainer? Transform { get; set; }
+
+		[JsonPropertyName("webhook")]
+		public Nest.Watcher.ActionWebhook? Webhook { get; set; }
 	}
 
 	public partial class ActionStatus
@@ -127,6 +130,15 @@ namespace Nest.Watcher
 			internal set;
 #endif
 		}
+	}
+
+	public partial class ActionWebhook
+	{
+		[JsonPropertyName("host")]
+		public Nest.Host Host { get; set; }
+
+		[JsonPropertyName("port")]
+		public int Port { get; set; }
 	}
 
 	public partial class ActivationState
@@ -726,6 +738,9 @@ namespace Nest.Watcher
 	{
 		[JsonPropertyName("doc_id")]
 		public Nest.Id? DocId { get; set; }
+
+		[JsonPropertyName("refresh")]
+		public Nest.Refresh? Refresh { get; set; }
 	}
 
 	public partial class IndexResult
@@ -814,16 +829,16 @@ namespace Nest.Watcher
 	public partial class IndicesOptions
 	{
 		[JsonPropertyName("allow_no_indices")]
-		public bool AllowNoIndices { get; set; }
+		public bool? AllowNoIndices { get; set; }
 
 		[JsonPropertyName("expand_wildcards")]
-		public Nest.ExpandWildcards ExpandWildcards { get; set; }
+		public Nest.ExpandWildcards? ExpandWildcards { get; set; }
 
 		[JsonPropertyName("ignore_throttled")]
 		public bool? IgnoreThrottled { get; set; }
 
 		[JsonPropertyName("ignore_unavailable")]
-		public bool IgnoreUnavailable { get; set; }
+		public bool? IgnoreUnavailable { get; set; }
 	}
 
 	public partial class InputContainer
@@ -843,8 +858,11 @@ namespace Nest.Watcher
 
 	public partial class Logging
 	{
+		[JsonPropertyName("category")]
+		public string? Category { get; set; }
+
 		[JsonPropertyName("level")]
-		public string Level { get; set; }
+		public string? Level { get; set; }
 
 		[JsonPropertyName("text")]
 		public string Text { get; set; }
@@ -1046,6 +1064,64 @@ namespace Nest.Watcher
 	{
 		[JsonPropertyName("sent_event")]
 		public Nest.Watcher.PagerDutyActionEventResult SentEvent
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class QueryWatch
+	{
+		[JsonPropertyName("_id")]
+		public Nest.Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_primary_term")]
+		public int? PrimaryTerm
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_seq_no")]
+		public Nest.SequenceNumber? SeqNo
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("status")]
+		public Nest.Watcher.WatchStatus? Status
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("watch")]
+		public Nest.Watcher.Watch? Watch
 		{
 			get;
 #if NET5_0

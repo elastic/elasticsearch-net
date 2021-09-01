@@ -28,84 +28,17 @@ namespace Nest.Eql
 		{
 		}
 
-		public DeleteResponse Delete(IDeleteRequest request)
-		{
-			return DoRequest<IDeleteRequest, DeleteResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteRequest, DeleteResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteResponse Delete(Nest.Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null)
-		{
-			return Delete(selector.InvokeOrDefault(new DeleteDescriptor(id)));
-		}
-
-		public Task<DeleteResponse> DeleteAsync(Nest.Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor(id)), cancellationToken);
-		}
-
-		public GetResponse<TEvent> Get<TEvent>(IGetRequest request)
-		{
-			return DoRequest<IGetRequest, GetResponse<TEvent>>(request, request.RequestParameters);
-		}
-
-		public Task<GetResponse<TEvent>> GetAsync<TEvent>(IGetRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetRequest, GetResponse<TEvent>>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetResponse<TEvent> Get<TEvent>(Nest.Id id, Func<GetDescriptor, IGetRequest> selector = null)
-		{
-			return Get<TEvent>(selector.InvokeOrDefault(new GetDescriptor(id)));
-		}
-
-		public Task<GetResponse<TEvent>> GetAsync<TEvent>(Nest.Id id, Func<GetDescriptor, IGetRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetAsync<TEvent>(selector.InvokeOrDefault(new GetDescriptor(id)), cancellationToken);
-		}
-
-		public GetStatusResponse GetStatus(IGetStatusRequest request)
-		{
-			return DoRequest<IGetStatusRequest, GetStatusResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetStatusResponse> GetStatusAsync(IGetStatusRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetStatusRequest, GetStatusResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetStatusResponse GetStatus(Nest.Id id, Func<GetStatusDescriptor, IGetStatusRequest> selector = null)
-		{
-			return GetStatus(selector.InvokeOrDefault(new GetStatusDescriptor(id)));
-		}
-
-		public Task<GetStatusResponse> GetStatusAsync(Nest.Id id, Func<GetStatusDescriptor, IGetStatusRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetStatusAsync(selector.InvokeOrDefault(new GetStatusDescriptor(id)), cancellationToken);
-		}
-
-		public SearchResponse<TEvent> Search<TEvent>(ISearchRequest request)
-		{
-			return DoRequest<ISearchRequest, SearchResponse<TEvent>>(request, request.RequestParameters);
-		}
-
-		public Task<SearchResponse<TEvent>> SearchAsync<TEvent>(ISearchRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<ISearchRequest, SearchResponse<TEvent>>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public SearchResponse<TEvent> Search<TEvent>(Nest.IndexName index, Func<SearchDescriptor, ISearchRequest> selector = null)
-		{
-			return Search<TEvent>(selector.InvokeOrDefault(new SearchDescriptor(index)));
-		}
-
-		public Task<SearchResponse<TEvent>> SearchAsync<TEvent>(Nest.IndexName index, Func<SearchDescriptor, ISearchRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return SearchAsync<TEvent>(selector.InvokeOrDefault(new SearchDescriptor(index)), cancellationToken);
-		}
+		public DeleteResponse Delete(IDeleteRequest request) => DoRequest<IDeleteRequest, DeleteResponse>(request, request.RequestParameters);
+		public Task<DeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteRequest, DeleteResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteResponse Delete(Nest.Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null) => Delete(selector.InvokeOrDefault(new DeleteDescriptor(id)));
+		public Task<DeleteResponse> DeleteAsync(Nest.Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null, CancellationToken cancellationToken = default) => DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor(id)), cancellationToken);
+		public GetResponse<TEvent> Get<TEvent>(IGetRequest request) => DoRequest<IGetRequest, GetResponse<TEvent>>(request, request.RequestParameters);
+		public Task<GetResponse<TEvent>> GetAsync<TEvent>(IGetRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetRequest, GetResponse<TEvent>>(request, request.RequestParameters, cancellationToken);
+		public GetResponse<TEvent> Get<TEvent>(Nest.Id id, Func<GetDescriptor, IGetRequest> selector = null) => Get<TEvent>(selector.InvokeOrDefault(new GetDescriptor(id)));
+		public Task<GetResponse<TEvent>> GetAsync<TEvent>(Nest.Id id, Func<GetDescriptor, IGetRequest> selector = null, CancellationToken cancellationToken = default) => GetAsync<TEvent>(selector.InvokeOrDefault(new GetDescriptor(id)), cancellationToken);
+		public GetStatusResponse GetStatus(IGetStatusRequest request) => DoRequest<IGetStatusRequest, GetStatusResponse>(request, request.RequestParameters);
+		public Task<GetStatusResponse> GetStatusAsync(IGetStatusRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetStatusRequest, GetStatusResponse>(request, request.RequestParameters, cancellationToken);
+		public GetStatusResponse GetStatus(Nest.Id id, Func<GetStatusDescriptor, IGetStatusRequest> selector = null) => GetStatus(selector.InvokeOrDefault(new GetStatusDescriptor(id)));
+		public Task<GetStatusResponse> GetStatusAsync(Nest.Id id, Func<GetStatusDescriptor, IGetStatusRequest> selector = null, CancellationToken cancellationToken = default) => GetStatusAsync(selector.InvokeOrDefault(new GetStatusDescriptor(id)), cancellationToken);
 	}
 }

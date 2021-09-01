@@ -28,44 +28,19 @@ namespace Nest.Shutdown
 		{
 		}
 
-		public DeleteNodeResponse DeleteNode(IDeleteNodeRequest request)
-		{
-			return DoRequest<IDeleteNodeRequest, DeleteNodeResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteNodeResponse> DeleteNodeAsync(IDeleteNodeRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteNodeRequest, DeleteNodeResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetNodeResponse GetNode(IGetNodeRequest request)
-		{
-			return DoRequest<IGetNodeRequest, GetNodeResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetNodeResponse> GetNodeAsync(IGetNodeRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetNodeRequest, GetNodeResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetNodeResponse GetNode(Func<GetNodeDescriptor, IGetNodeRequest> selector = null)
-		{
-			return GetNode(selector.InvokeOrDefault(new GetNodeDescriptor()));
-		}
-
-		public Task<GetNodeResponse> GetNodeAsync(Func<GetNodeDescriptor, IGetNodeRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetNodeAsync(selector.InvokeOrDefault(new GetNodeDescriptor()), cancellationToken);
-		}
-
-		public PutNodeResponse PutNode(IPutNodeRequest request)
-		{
-			return DoRequest<IPutNodeRequest, PutNodeResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutNodeResponse> PutNodeAsync(IPutNodeRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutNodeRequest, PutNodeResponse>(request, request.RequestParameters, cancellationToken);
-		}
+		public DeleteNodeResponse DeleteNode(IDeleteNodeRequest request) => DoRequest<IDeleteNodeRequest, DeleteNodeResponse>(request, request.RequestParameters);
+		public Task<DeleteNodeResponse> DeleteNodeAsync(IDeleteNodeRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteNodeRequest, DeleteNodeResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteNodeResponse DeleteNode(Nest.NodeId node_id, Func<DeleteNodeDescriptor, IDeleteNodeRequest> selector = null) => DeleteNode(selector.InvokeOrDefault(new DeleteNodeDescriptor(node_id)));
+		public Task<DeleteNodeResponse> DeleteNodeAsync(Nest.NodeId node_id, Func<DeleteNodeDescriptor, IDeleteNodeRequest> selector = null, CancellationToken cancellationToken = default) => DeleteNodeAsync(selector.InvokeOrDefault(new DeleteNodeDescriptor(node_id)), cancellationToken);
+		public GetNodeResponse GetNode(IGetNodeRequest request) => DoRequest<IGetNodeRequest, GetNodeResponse>(request, request.RequestParameters);
+		public Task<GetNodeResponse> GetNodeAsync(IGetNodeRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetNodeRequest, GetNodeResponse>(request, request.RequestParameters, cancellationToken);
+		public GetNodeResponse GetNode(Func<GetNodeDescriptor, IGetNodeRequest> selector = null) => GetNode(selector.InvokeOrDefault(new GetNodeDescriptor()));
+		//public GetNodeResponse GetNode(IEnumerable<Nest.NodeId> node_id, Func<GetNodeDescriptor, IGetNodeRequest> selector = null) => GetNode(selector.InvokeOrDefault(new GetNodeDescriptor(node_id)));
+		public Task<GetNodeResponse> GetNodeAsync(Func<GetNodeDescriptor, IGetNodeRequest> selector = null, CancellationToken cancellationToken = default) => GetNodeAsync(selector.InvokeOrDefault(new GetNodeDescriptor()), cancellationToken);
+		//public Task<GetNodeResponse> GetNodeAsync(IEnumerable<Nest.NodeId> node_id, Func<GetNodeDescriptor, IGetNodeRequest> selector = null, CancellationToken cancellationToken = default) => GetNodeAsync(selector.InvokeOrDefault(new GetNodeDescriptor(node_id)), cancellationToken);
+		public PutNodeResponse PutNode(IPutNodeRequest request) => DoRequest<IPutNodeRequest, PutNodeResponse>(request, request.RequestParameters);
+		public Task<PutNodeResponse> PutNodeAsync(IPutNodeRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPutNodeRequest, PutNodeResponse>(request, request.RequestParameters, cancellationToken);
+		public PutNodeResponse PutNode(Nest.NodeId node_id, Func<PutNodeDescriptor, IPutNodeRequest> selector = null) => PutNode(selector.InvokeOrDefault(new PutNodeDescriptor(node_id)));
+		public Task<PutNodeResponse> PutNodeAsync(Nest.NodeId node_id, Func<PutNodeDescriptor, IPutNodeRequest> selector = null, CancellationToken cancellationToken = default) => PutNodeAsync(selector.InvokeOrDefault(new PutNodeDescriptor(node_id)), cancellationToken);
 	}
 }

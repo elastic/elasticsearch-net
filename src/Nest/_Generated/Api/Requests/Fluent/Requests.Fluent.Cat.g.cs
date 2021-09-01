@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Cat
@@ -34,6 +35,8 @@ namespace Nest.Cat
         public AliasesDescriptor(Nest.Names? name) : base(r => r.Optional("name", name))
 		{
 		}
+
+		public AliasesDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	}
 
 	public partial class AllocationDescriptor : RequestDescriptorBase<AllocationDescriptor, AllocationRequestParameters, IAllocationRequest>, IAllocationRequest
@@ -50,6 +53,8 @@ namespace Nest.Cat
         public AllocationDescriptor(Nest.NodeIds? node_id) : base(r => r.Optional("node_id", node_id))
 		{
 		}
+
+		public AllocationDescriptor Bytes(Nest.Bytes? bytes) => Qs("bytes", bytes);
 	}
 
 	public partial class CountDescriptor : RequestDescriptorBase<CountDescriptor, CountRequestParameters, ICountRequest>, ICountRequest
@@ -82,6 +87,8 @@ namespace Nest.Cat
         public FielddataDescriptor(Nest.Fields? fields) : base(r => r.Optional("fields", fields))
 		{
 		}
+
+		public FielddataDescriptor Bytes(Nest.Bytes? bytes) => Qs("bytes", bytes);
 	}
 
 	public partial class HealthDescriptor : RequestDescriptorBase<HealthDescriptor, HealthRequestParameters, IHealthRequest>, IHealthRequest
@@ -93,6 +100,9 @@ namespace Nest.Cat
         public HealthDescriptor() : base()
 		{
 		}
+
+		public HealthDescriptor IncludeTimestamp(bool? includeTimestamp = true) => Qs("include_timestamp", includeTimestamp);
+		public HealthDescriptor Ts(bool? ts = true) => Qs("ts", ts);
 	}
 
 	public partial class HelpDescriptor : RequestDescriptorBase<HelpDescriptor, HelpRequestParameters, IHelpRequest>, IHelpRequest
@@ -120,6 +130,12 @@ namespace Nest.Cat
         public IndicesDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public IndicesDescriptor Bytes(Nest.Bytes? bytes) => Qs("bytes", bytes);
+		public IndicesDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public IndicesDescriptor Health(Nest.Health? health) => Qs("health", health);
+		public IndicesDescriptor IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
+		public IndicesDescriptor Pri(bool? pri = true) => Qs("pri", pri);
 	}
 
 	public partial class MasterDescriptor : RequestDescriptorBase<MasterDescriptor, MasterRequestParameters, IMasterRequest>, IMasterRequest
@@ -147,6 +163,9 @@ namespace Nest.Cat
         public MlDataFrameAnalyticsDescriptor(Nest.Id? id) : base(r => r.Optional("id", id))
 		{
 		}
+
+		public MlDataFrameAnalyticsDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
+		public MlDataFrameAnalyticsDescriptor Bytes(Nest.Bytes? bytes) => Qs("bytes", bytes);
 	}
 
 	public partial class MlDatafeedsDescriptor : RequestDescriptorBase<MlDatafeedsDescriptor, MlDatafeedsRequestParameters, IMlDatafeedsRequest>, IMlDatafeedsRequest
@@ -163,6 +182,8 @@ namespace Nest.Cat
         public MlDatafeedsDescriptor(Nest.Id? datafeed_id) : base(r => r.Optional("datafeed_id", datafeed_id))
 		{
 		}
+
+		public MlDatafeedsDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
 	}
 
 	public partial class MlJobsDescriptor : RequestDescriptorBase<MlJobsDescriptor, MlJobsRequestParameters, IMlJobsRequest>, IMlJobsRequest
@@ -179,6 +200,9 @@ namespace Nest.Cat
         public MlJobsDescriptor(Nest.Id? job_id) : base(r => r.Optional("job_id", job_id))
 		{
 		}
+
+		public MlJobsDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
+		public MlJobsDescriptor Bytes(Nest.Bytes? bytes) => Qs("bytes", bytes);
 	}
 
 	public partial class MlTrainedModelsDescriptor : RequestDescriptorBase<MlTrainedModelsDescriptor, MlTrainedModelsRequestParameters, IMlTrainedModelsRequest>, IMlTrainedModelsRequest
@@ -195,6 +219,11 @@ namespace Nest.Cat
         public MlTrainedModelsDescriptor(Nest.Id? model_id) : base(r => r.Optional("model_id", model_id))
 		{
 		}
+
+		public MlTrainedModelsDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
+		public MlTrainedModelsDescriptor Bytes(Nest.Bytes? bytes) => Qs("bytes", bytes);
+		public MlTrainedModelsDescriptor From(int? from) => Qs("from", from);
+		public MlTrainedModelsDescriptor Size(int? size) => Qs("size", size);
 	}
 
 	public partial class NodeattrsDescriptor : RequestDescriptorBase<NodeattrsDescriptor, NodeattrsRequestParameters, INodeattrsRequest>, INodeattrsRequest
@@ -217,6 +246,9 @@ namespace Nest.Cat
         public NodesDescriptor() : base()
 		{
 		}
+
+		public NodesDescriptor Bytes(Nest.Bytes? bytes) => Qs("bytes", bytes);
+		public NodesDescriptor FullId(Union<bool, string>? fullId) => Qs("full_id", fullId);
 	}
 
 	public partial class PendingTasksDescriptor : RequestDescriptorBase<PendingTasksDescriptor, PendingTasksRequestParameters, IPendingTasksRequest>, IPendingTasksRequest
@@ -255,6 +287,10 @@ namespace Nest.Cat
         public RecoveryDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public RecoveryDescriptor ActiveOnly(bool? activeOnly = true) => Qs("active_only", activeOnly);
+		public RecoveryDescriptor Bytes(Nest.Bytes? bytes) => Qs("bytes", bytes);
+		public RecoveryDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 	}
 
 	public partial class RepositoriesDescriptor : RequestDescriptorBase<RepositoriesDescriptor, RepositoriesRequestParameters, IRepositoriesRequest>, IRepositoriesRequest
@@ -282,6 +318,8 @@ namespace Nest.Cat
         public SegmentsDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public SegmentsDescriptor Bytes(Nest.Bytes? bytes) => Qs("bytes", bytes);
 	}
 
 	public partial class ShardsDescriptor : RequestDescriptorBase<ShardsDescriptor, ShardsRequestParameters, IShardsRequest>, IShardsRequest
@@ -298,6 +336,8 @@ namespace Nest.Cat
         public ShardsDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public ShardsDescriptor Bytes(Nest.Bytes? bytes) => Qs("bytes", bytes);
 	}
 
 	public partial class SnapshotsDescriptor : RequestDescriptorBase<SnapshotsDescriptor, SnapshotsRequestParameters, ISnapshotsRequest>, ISnapshotsRequest
@@ -314,6 +354,8 @@ namespace Nest.Cat
         public SnapshotsDescriptor(Nest.Names? repository) : base(r => r.Optional("repository", repository))
 		{
 		}
+
+		public SnapshotsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	}
 
 	public partial class TasksDescriptor : RequestDescriptorBase<TasksDescriptor, TasksRequestParameters, ITasksRequest>, ITasksRequest
@@ -325,6 +367,11 @@ namespace Nest.Cat
         public TasksDescriptor() : base()
 		{
 		}
+
+		public TasksDescriptor Actions(IEnumerable<string>? actions) => Qs("actions", actions);
+		public TasksDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
+		public TasksDescriptor NodeId(IEnumerable<string>? nodeId) => Qs("node_id", nodeId);
+		public TasksDescriptor ParentTask(long? parentTask) => Qs("parent_task", parentTask);
 	}
 
 	public partial class TemplatesDescriptor : RequestDescriptorBase<TemplatesDescriptor, TemplatesRequestParameters, ITemplatesRequest>, ITemplatesRequest
@@ -357,6 +404,8 @@ namespace Nest.Cat
         public ThreadPoolDescriptor(Nest.Names? thread_pool_patterns) : base(r => r.Optional("thread_pool_patterns", thread_pool_patterns))
 		{
 		}
+
+		public ThreadPoolDescriptor Size(Union<Nest.Size, bool>? size) => Qs("size", size);
 	}
 
 	public partial class TransformsDescriptor : RequestDescriptorBase<TransformsDescriptor, TransformsRequestParameters, ITransformsRequest>, ITransformsRequest
@@ -373,5 +422,9 @@ namespace Nest.Cat
         public TransformsDescriptor(Nest.Id? transform_id) : base(r => r.Optional("transform_id", transform_id))
 		{
 		}
+
+		public TransformsDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
+		public TransformsDescriptor From(int? from) => Qs("from", from);
+		public TransformsDescriptor Size(int? size) => Qs("size", size);
 	}
 }

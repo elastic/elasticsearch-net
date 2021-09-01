@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Ilm
@@ -26,7 +27,7 @@ namespace Nest.Ilm
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		///<summary>/_ilm/policy/{policy}</summary>
-        public DeleteLifecycleDescriptor(Nest.Name? policy) : base(r => r.Optional("policy", policy))
+        public DeleteLifecycleDescriptor(Nest.Name policy) : base(r => r.Required("policy", policy))
 		{
 		}
 	}
@@ -40,6 +41,9 @@ namespace Nest.Ilm
         public ExplainLifecycleDescriptor(Nest.IndexName index) : base(r => r.Required("index", index))
 		{
 		}
+
+		public ExplainLifecycleDescriptor OnlyErrors(bool? onlyErrors = true) => Qs("only_errors", onlyErrors);
+		public ExplainLifecycleDescriptor OnlyManaged(bool? onlyManaged = true) => Qs("only_managed", onlyManaged);
 	}
 
 	public partial class GetLifecycleDescriptor : RequestDescriptorBase<GetLifecycleDescriptor, GetLifecycleRequestParameters, IGetLifecycleRequest>, IGetLifecycleRequest
@@ -78,6 +82,13 @@ namespace Nest.Ilm
         public MoveToStepDescriptor(Nest.IndexName index) : base(r => r.Required("index", index))
 		{
 		}
+
+		Nest.Ilm.MoveToStep.StepKey? IMoveToStepRequest.CurrentStep { get; set; }
+
+		Nest.Ilm.MoveToStep.StepKey? IMoveToStepRequest.NextStep { get; set; }
+
+		public MoveToStepDescriptor CurrentStep(Nest.Ilm.MoveToStep.StepKey? currentStep) => Assign(currentStep, (a, v) => a.CurrentStep = v);
+		public MoveToStepDescriptor NextStep(Nest.Ilm.MoveToStep.StepKey? nextStep) => Assign(nextStep, (a, v) => a.NextStep = v);
 	}
 
 	public partial class PutLifecycleDescriptor : RequestDescriptorBase<PutLifecycleDescriptor, PutLifecycleRequestParameters, IPutLifecycleRequest>, IPutLifecycleRequest
@@ -86,7 +97,7 @@ namespace Nest.Ilm
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
 		///<summary>/_ilm/policy/{policy}</summary>
-        public PutLifecycleDescriptor(Nest.Name? policy) : base(r => r.Optional("policy", policy))
+        public PutLifecycleDescriptor(Nest.Name policy) : base(r => r.Required("policy", policy))
 		{
 		}
 	}
@@ -122,6 +133,9 @@ namespace Nest.Ilm
         public StartDescriptor() : base()
 		{
 		}
+
+		public StartDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public StartDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class StopDescriptor : RequestDescriptorBase<StopDescriptor, StopRequestParameters, IStopRequest>, IStopRequest
@@ -133,5 +147,8 @@ namespace Nest.Ilm
         public StopDescriptor() : base()
 		{
 		}
+
+		public StopDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public StopDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 }

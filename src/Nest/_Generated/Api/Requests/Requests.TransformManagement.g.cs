@@ -114,6 +114,23 @@ namespace Nest.TransformManagement
 	[ConvertAs(typeof(PreviewTransformRequest))]
 	public partial interface IPreviewTransformRequest : IRequest<PreviewTransformRequestParameters>
 	{
+		Nest.Global.Reindex.Destination? Dest { get; set; }
+
+		string? Description { get; set; }
+
+		Nest.Time? Frequency { get; set; }
+
+		Nest.TransformManagement.Pivot? Pivot { get; set; }
+
+		Nest.Global.Reindex.Source? Source { get; set; }
+
+		Nest.TransformManagement.Settings? Settings { get; set; }
+
+		Nest.TransformManagement.SyncContainer? Sync { get; set; }
+
+		Nest.TransformManagement.RetentionPolicyContainer? RetentionPolicy { get; set; }
+
+		Nest.TransformManagement.Latest? Latest { get; set; }
 	}
 
 	public partial class PreviewTransformRequest : PlainRequestBase<PreviewTransformRequestParameters>, IPreviewTransformRequest
@@ -131,103 +148,31 @@ namespace Nest.TransformManagement
 		}
 
 		[JsonPropertyName("dest")]
-		public Nest.Global.Reindex.Destination? Dest
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.Reindex.Destination? Dest { get; set; }
 
 		[JsonPropertyName("description")]
-		public string? Description
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Description { get; set; }
 
 		[JsonPropertyName("frequency")]
-		public Nest.Time? Frequency
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? Frequency { get; set; }
 
 		[JsonPropertyName("pivot")]
-		public Nest.TransformManagement.Pivot? Pivot
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.TransformManagement.Pivot? Pivot { get; set; }
 
 		[JsonPropertyName("source")]
-		public Nest.Global.Reindex.Source? Source
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.Reindex.Source? Source { get; set; }
 
 		[JsonPropertyName("settings")]
-		public Nest.TransformManagement.Settings? Settings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.TransformManagement.Settings? Settings { get; set; }
 
 		[JsonPropertyName("sync")]
-		public Nest.TransformManagement.SyncContainer? Sync
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.TransformManagement.SyncContainer? Sync { get; set; }
 
 		[JsonPropertyName("retention_policy")]
-		public Nest.TransformManagement.RetentionPolicyContainer? RetentionPolicy
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.TransformManagement.RetentionPolicyContainer? RetentionPolicy { get; set; }
 
 		[JsonPropertyName("latest")]
-		public Nest.TransformManagement.Latest? Latest
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.TransformManagement.Latest? Latest { get; set; }
 	}
 
 	[ConvertAs(typeof(PutTransformRequest))]

@@ -263,6 +263,31 @@ namespace Nest.Watcher
 		}
 	}
 
+	public partial class QueryWatchesResponse : ResponseBase
+	{
+		[JsonPropertyName("count")]
+		public int Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("watches")]
+		public IReadOnlyCollection<Nest.Watcher.QueryWatch> Watches
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class StartResponse : AcknowledgedResponseBase
 	{
 	}

@@ -115,6 +115,17 @@ namespace Nest.Rollup
 	[ConvertAs(typeof(PutJobRequest))]
 	public partial interface IPutJobRequest : IRequest<PutJobRequestParameters>
 	{
+		string? Cron { get; set; }
+
+		Nest.Rollup.Groupings? Groups { get; set; }
+
+		string? IndexPattern { get; set; }
+
+		IEnumerable<Nest.Rollup.FieldMetric>? Metrics { get; set; }
+
+		long? PageSize { get; set; }
+
+		Nest.IndexName? RollupIndex { get; set; }
 	}
 
 	public partial class PutJobRequest : PlainRequestBase<PutJobRequestParameters>, IPutJobRequest
@@ -132,48 +143,22 @@ namespace Nest.Rollup
 		}
 
 		[JsonPropertyName("cron")]
-		public string? Cron
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Cron { get; set; }
 
 		[JsonPropertyName("groups")]
-		public Nest.Rollup.Groupings? Groups
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Rollup.Groupings? Groups { get; set; }
+
+		[JsonPropertyName("index_pattern")]
+		public string? IndexPattern { get; set; }
+
+		[JsonPropertyName("metrics")]
+		public IEnumerable<Nest.Rollup.FieldMetric>? Metrics { get; set; }
 
 		[JsonPropertyName("page_size")]
-		public long? PageSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? PageSize { get; set; }
 
 		[JsonPropertyName("rollup_index")]
-		public Nest.IndexName? RollupIndex
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexName? RollupIndex { get; set; }
 	}
 
 	[ConvertAs(typeof(RollupRequest))]
@@ -186,27 +171,24 @@ namespace Nest.Rollup
 		protected IRollupRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupRollup;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
+		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
-		[JsonIgnore]
-		public int Stuba { get => Q<int>("stuba"); set => Q("stuba", value); }
 
-		[JsonPropertyName("stub")]
-		public int Stub
+		///<summary>/{index}/_rollup/{rollup_index}</summary>
+        public RollupRequest(Nest.IndexName index, Nest.IndexName rollup_index) : base(r => r.Required("index", index).Required("rollup_index", rollup_index))
 		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
 		}
 	}
 
 	[ConvertAs(typeof(RollupSearchRequest))]
 	public partial interface IRollupSearchRequest : IRequest<RollupSearchRequestParameters>
 	{
+		Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggs { get; set; }
+
+		Nest.QueryDsl.QueryContainer? Query { get; set; }
+
+		int? Size { get; set; }
 	}
 
 	public partial class RollupSearchRequest : PlainRequestBase<RollupSearchRequestParameters>, IRollupSearchRequest
@@ -230,37 +212,13 @@ namespace Nest.Rollup
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 		[JsonPropertyName("aggs")]
-		public Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggs
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggs { get; set; }
 
 		[JsonPropertyName("query")]
-		public Nest.QueryDsl.QueryContainer? Query
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Query { get; set; }
 
 		[JsonPropertyName("size")]
-		public int? Size
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? Size { get; set; }
 	}
 
 	[ConvertAs(typeof(StartJobRequest))]

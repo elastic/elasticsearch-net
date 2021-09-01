@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Shutdown
@@ -25,6 +26,10 @@ namespace Nest.Shutdown
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ShutdownDeleteNode;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
+		///<summary>/_nodes/{node_id}/shutdown</summary>
+        public DeleteNodeDescriptor(Nest.NodeId node_id) : base(r => r.Required("node_id", node_id))
+		{
+		}
 	}
 
 	public partial class GetNodeDescriptor : RequestDescriptorBase<GetNodeDescriptor, GetNodeRequestParameters, IGetNodeRequest>, IGetNodeRequest
@@ -36,6 +41,11 @@ namespace Nest.Shutdown
         public GetNodeDescriptor() : base()
 		{
 		}
+
+		///<summary>/_nodes/{node_id}/shutdown</summary>
+  //      public GetNodeDescriptor(IEnumerable<Nest.NodeId> node_id) : base(r => r.Required("node_id", node_id))
+		//{
+		//}
 	}
 
 	public partial class PutNodeDescriptor : RequestDescriptorBase<PutNodeDescriptor, PutNodeRequestParameters, IPutNodeRequest>, IPutNodeRequest
@@ -43,5 +53,9 @@ namespace Nest.Shutdown
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ShutdownPutNode;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
+		///<summary>/_nodes/{node_id}/shutdown</summary>
+        public PutNodeDescriptor(Nest.NodeId node_id) : base(r => r.Required("node_id", node_id))
+		{
+		}
 	}
 }

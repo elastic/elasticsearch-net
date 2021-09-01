@@ -15,21 +15,24 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport.Products.Elasticsearch.Failures;
-using OneOf;
-using System;
+using Elastic.Transport;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Nest.Eql.Search
+namespace Nest.Monitoring
 {
-	public partial class SearchFieldFormatted
+	public partial class BulkDescriptor<TSource> : RequestDescriptorBase<BulkDescriptor<TSource>, BulkRequestParameters, IBulkRequest<TSource>>, IBulkRequest<TSource>
 	{
-		[JsonPropertyName("field")]
-		public Nest.Field Field { get; set; }
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.MonitoringBulk;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override bool SupportsBody => false;
+		///<summary>/_monitoring/bulk</summary>
+        public BulkDescriptor() : base()
+		{
+		}
 
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
+		public BulkDescriptor<TSource> SystemId(string systemId) => Qs("system_id", systemId);
+		public BulkDescriptor<TSource> SystemApiVersion(string systemApiVersion) => Qs("system_api_version", systemApiVersion);
+		public BulkDescriptor<TSource> Interval(Nest.Time interval) => Qs("interval", interval);
 	}
 }

@@ -60,6 +60,23 @@ namespace Nest.IndexManagement
 	[ConvertAs(typeof(AnalyzeRequest))]
 	public partial interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters>
 	{
+		string? Analyzer { get; set; }
+
+		IEnumerable<string>? Attributes { get; set; }
+
+		IEnumerable<Union<string, Nest.Analysis.CharFilter>>? CharFilter { get; set; }
+
+		bool? Explain { get; set; }
+
+		Nest.Field? Field { get; set; }
+
+		IEnumerable<Union<string, Nest.Analysis.TokenFilter>>? Filter { get; set; }
+
+		string? Normalizer { get; set; }
+
+		Nest.IndexManagement.Analyze.TextToAnalyze? Text { get; set; }
+
+		Union<string, Nest.Analysis.Tokenizer>? Tokenizer { get; set; }
 	}
 
 	public partial class AnalyzeRequest : PlainRequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
@@ -82,70 +99,31 @@ namespace Nest.IndexManagement
 		}
 
 		[JsonPropertyName("analyzer")]
-		public string? Analyzer
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Analyzer { get; set; }
 
 		[JsonPropertyName("attributes")]
-		public IReadOnlyCollection<string>? Attributes
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? Attributes { get; set; }
+
+		[JsonPropertyName("char_filter")]
+		public IEnumerable<Union<string, Nest.Analysis.CharFilter>>? CharFilter { get; set; }
 
 		[JsonPropertyName("explain")]
-		public bool? Explain
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Explain { get; set; }
+
+		[JsonPropertyName("field")]
+		public Nest.Field? Field { get; set; }
 
 		[JsonPropertyName("filter")]
-		public IReadOnlyCollection<Union<string, Nest.Analysis.TokenFilter>>? Filter
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Union<string, Nest.Analysis.TokenFilter>>? Filter { get; set; }
 
 		[JsonPropertyName("normalizer")]
-		public string? Normalizer
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Normalizer { get; set; }
 
 		[JsonPropertyName("text")]
-		public Nest.IndexManagement.Analyze.TextToAnalyze? Text
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexManagement.Analyze.TextToAnalyze? Text { get; set; }
+
+		[JsonPropertyName("tokenizer")]
+		public Union<string, Nest.Analysis.Tokenizer>? Tokenizer { get; set; }
 	}
 
 	[ConvertAs(typeof(ClearCacheRequest))]
@@ -197,6 +175,9 @@ namespace Nest.IndexManagement
 	[ConvertAs(typeof(CloneRequest))]
 	public partial interface ICloneRequest : IRequest<CloneRequestParameters>
 	{
+		Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases { get; set; }
+
+		Dictionary<string, object>? Settings { get; set; }
 	}
 
 	public partial class CloneRequest : PlainRequestBase<CloneRequestParameters>, ICloneRequest
@@ -223,26 +204,10 @@ namespace Nest.IndexManagement
 		public Nest.WaitForActiveShards? WaitForActiveShards { get => Q<Nest.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 		[JsonPropertyName("aliases")]
-		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases { get; set; }
 
 		[JsonPropertyName("settings")]
-		public Dictionary<string, object>? Settings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Settings { get; set; }
 	}
 
 	[ConvertAs(typeof(CloseRequest))]
@@ -286,6 +251,11 @@ namespace Nest.IndexManagement
 	[ConvertAs(typeof(CreateRequest))]
 	public partial interface ICreateRequest : IRequest<CreateRequestParameters>
 	{
+		Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases { get; set; }
+
+		Union<Dictionary<string, Nest.Mapping.TypeMapping>, Nest.Mapping.TypeMapping>? Mappings { get; set; }
+
+		Dictionary<string, object>? Settings { get; set; }
 	}
 
 	public partial class CreateRequest : PlainRequestBase<CreateRequestParameters>, ICreateRequest
@@ -315,37 +285,13 @@ namespace Nest.IndexManagement
 		public Nest.WaitForActiveShards? WaitForActiveShards { get => Q<Nest.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 		[JsonPropertyName("aliases")]
-		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases { get; set; }
 
 		[JsonPropertyName("mappings")]
-		public Union<Dictionary<string, Nest.Mapping.TypeMapping>, Nest.Mapping.TypeMapping>? Mappings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Union<Dictionary<string, Nest.Mapping.TypeMapping>, Nest.Mapping.TypeMapping>? Mappings { get; set; }
 
 		[JsonPropertyName("settings")]
-		public Dictionary<string, object>? Settings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Settings { get; set; }
 	}
 
 	[ConvertAs(typeof(CreateDataStreamRequest))]
@@ -898,6 +844,11 @@ namespace Nest.IndexManagement
 	[ConvertAs(typeof(GetIndexTemplateRequest))]
 	public partial interface IGetIndexTemplateRequest : IRequest<GetIndexTemplateRequestParameters>
 	{
+		bool? FlatSettings { get; set; }
+
+		bool? IncludeTypeName { get; set; }
+
+		Nest.Time? MasterTimeout { get; set; }
 	}
 
 	public partial class GetIndexTemplateRequest : PlainRequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
@@ -923,37 +874,13 @@ namespace Nest.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 		[JsonPropertyName("flat_settings")]
-		public bool? FlatSettings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? FlatSettings { get; set; }
 
 		[JsonPropertyName("include_type_name")]
-		public bool? IncludeTypeName
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? IncludeTypeName { get; set; }
 
 		[JsonPropertyName("master_timeout")]
-		public Nest.Time? MasterTimeout
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? MasterTimeout { get; set; }
 	}
 
 	[ConvertAs(typeof(GetMappingRequest))]
@@ -1173,6 +1100,15 @@ namespace Nest.IndexManagement
 	[ConvertAs(typeof(PutAliasRequest))]
 	public partial interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
 	{
+		Nest.QueryDsl.QueryContainer? Filter { get; set; }
+
+		Nest.Routing? IndexRouting { get; set; }
+
+		bool? IsWriteIndex { get; set; }
+
+		Nest.Routing? Routing { get; set; }
+
+		Nest.Routing? SearchRouting { get; set; }
 	}
 
 	public partial class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>, IPutAliasRequest
@@ -1196,53 +1132,37 @@ namespace Nest.IndexManagement
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonPropertyName("filter")]
-		public Nest.QueryDsl.QueryContainer? Filter
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Filter { get; set; }
 
 		[JsonPropertyName("index_routing")]
-		public Nest.Routing? IndexRouting
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Routing? IndexRouting { get; set; }
 
 		[JsonPropertyName("is_write_index")]
-		public bool? IsWriteIndex
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? IsWriteIndex { get; set; }
+
+		[JsonPropertyName("routing")]
+		public Nest.Routing? Routing { get; set; }
 
 		[JsonPropertyName("search_routing")]
-		public Nest.Routing? SearchRouting
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Routing? SearchRouting { get; set; }
 	}
 
 	[ConvertAs(typeof(PutIndexTemplateRequest))]
 	public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters>
 	{
+		Nest.Indices? IndexPatterns { get; set; }
+
+		IEnumerable<Nest.Name>? ComposedOf { get; set; }
+
+		Nest.IndexManagement.PutIndexTemplate.IndexTemplateMapping? Template { get; set; }
+
+		Nest.EmptyObject? DataStream { get; set; }
+
+		int? Priority { get; set; }
+
+		Nest.VersionNumber? Version { get; set; }
+
+		Nest.Metadata? Meta { get; set; }
 	}
 
 	public partial class PutIndexTemplateRequest : PlainRequestBase<PutIndexTemplateRequestParameters>, IPutIndexTemplateRequest
@@ -1259,76 +1179,58 @@ namespace Nest.IndexManagement
 		{
 		}
 
+		[JsonPropertyName("index_patterns")]
+		public Nest.Indices? IndexPatterns { get; set; }
+
 		[JsonPropertyName("composed_of")]
-		public IReadOnlyCollection<Nest.Name>? ComposedOf
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Name>? ComposedOf { get; set; }
 
 		[JsonPropertyName("template")]
-		public Nest.IndexManagement.PutIndexTemplate.IndexTemplateMapping? Template
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexManagement.PutIndexTemplate.IndexTemplateMapping? Template { get; set; }
 
 		[JsonPropertyName("data_stream")]
-		public Nest.EmptyObject? DataStream
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.EmptyObject? DataStream { get; set; }
 
 		[JsonPropertyName("priority")]
-		public int? Priority
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? Priority { get; set; }
 
 		[JsonPropertyName("version")]
-		public Nest.VersionNumber? Version
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.VersionNumber? Version { get; set; }
 
 		[JsonPropertyName("_meta")]
-		public Nest.Metadata? Meta
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Metadata? Meta { get; set; }
 	}
 
 	[ConvertAs(typeof(PutMappingRequest))]
 	public partial interface IPutMappingRequest : IRequest<PutMappingRequestParameters>
 	{
+		Nest.Mapping.AllField? AllField { get; set; }
+
+		bool? DateDetection { get; set; }
+
+		Union<bool, Nest.Mapping.DynamicMapping>? Dynamic { get; set; }
+
+		IEnumerable<string>? DynamicDateFormats { get; set; }
+
+		Union<Dictionary<string, Nest.Mapping.DynamicTemplate>, IEnumerable<Dictionary<string, Nest.Mapping.DynamicTemplate>>>? DynamicTemplates { get; set; }
+
+		Nest.Mapping.FieldNamesField? FieldNamesField { get; set; }
+
+		Nest.Mapping.IndexField? IndexField { get; set; }
+
+		Dictionary<string, object>? Meta { get; set; }
+
+		bool? NumericDetection { get; set; }
+
+		Dictionary<Nest.PropertyName, Nest.Mapping.Property>? Properties { get; set; }
+
+		Nest.Mapping.RoutingField? RoutingField { get; set; }
+
+		Nest.Mapping.SizeField? SizeField { get; set; }
+
+		Nest.Mapping.SourceField? SourceField { get; set; }
+
+		Nest.Mapping.RuntimeFields? Runtime { get; set; }
 	}
 
 	public partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
@@ -1337,11 +1239,11 @@ namespace Nest.IndexManagement
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => AllField is null && DateDetection is null && Dynamic is null && DynamicDateFormats is null && DynamicTemplates is null && FieldNamesField is null && IndexField is null && Meta is null && NumericDetection is null && Properties is null && RoutingField is null && SizeField is null && SourceField is null && Runtime is null;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
 
 		///<summary>/{index}/_mapping</summary>
-        public PutMappingRequest(Nest.Indices? index) : base(r => r.Optional("index", index))
+        public PutMappingRequest(Nest.Indices index) : base(r => r.Required("index", index))
 		{
 		}
 
@@ -1367,158 +1269,46 @@ namespace Nest.IndexManagement
 		public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 
 		[JsonPropertyName("all_field")]
-		public Nest.Mapping.AllField? AllField
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Mapping.AllField? AllField { get; set; }
 
 		[JsonPropertyName("date_detection")]
-		public bool? DateDetection
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? DateDetection { get; set; }
 
 		[JsonPropertyName("dynamic")]
-		public Union<bool, Nest.Mapping.DynamicMapping>? Dynamic
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Union<bool, Nest.Mapping.DynamicMapping>? Dynamic { get; set; }
 
 		[JsonPropertyName("dynamic_date_formats")]
-		public IReadOnlyCollection<string>? DynamicDateFormats
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? DynamicDateFormats { get; set; }
 
 		[JsonPropertyName("dynamic_templates")]
-		public Union<Dictionary<string, Nest.Mapping.DynamicTemplate>, IReadOnlyCollection<Dictionary<string, Nest.Mapping.DynamicTemplate>>>? DynamicTemplates
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Union<Dictionary<string, Nest.Mapping.DynamicTemplate>, IEnumerable<Dictionary<string, Nest.Mapping.DynamicTemplate>>>? DynamicTemplates { get; set; }
 
 		[JsonPropertyName("field_names_field")]
-		public Nest.Mapping.FieldNamesField? FieldNamesField
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Mapping.FieldNamesField? FieldNamesField { get; set; }
 
 		[JsonPropertyName("index_field")]
-		public Nest.Mapping.IndexField? IndexField
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Mapping.IndexField? IndexField { get; set; }
 
 		[JsonPropertyName("meta")]
-		public Dictionary<string, object>? Meta
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Meta { get; set; }
 
 		[JsonPropertyName("numeric_detection")]
-		public bool? NumericDetection
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? NumericDetection { get; set; }
 
 		[JsonPropertyName("properties")]
-		public Dictionary<Nest.PropertyName, Nest.Mapping.Property>? Properties
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<Nest.PropertyName, Nest.Mapping.Property>? Properties { get; set; }
 
 		[JsonPropertyName("routing_field")]
-		public Nest.Mapping.RoutingField? RoutingField
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Mapping.RoutingField? RoutingField { get; set; }
 
 		[JsonPropertyName("size_field")]
-		public Nest.Mapping.SizeField? SizeField
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Mapping.SizeField? SizeField { get; set; }
 
 		[JsonPropertyName("source_field")]
-		public Nest.Mapping.SourceField? SourceField
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Mapping.SourceField? SourceField { get; set; }
 
 		[JsonPropertyName("runtime")]
-		public Nest.Mapping.RuntimeFields? Runtime
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Mapping.RuntimeFields? Runtime { get; set; }
 	}
 
 	[ConvertAs(typeof(PutSettingsRequest))]
@@ -1570,6 +1360,17 @@ namespace Nest.IndexManagement
 	[ConvertAs(typeof(PutTemplateRequest))]
 	public partial interface IPutTemplateRequest : IRequest<PutTemplateRequestParameters>
 	{
+		Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases { get; set; }
+
+		Union<string, IEnumerable<string>>? IndexPatterns { get; set; }
+
+		Nest.Mapping.TypeMapping? Mappings { get; set; }
+
+		int? Order { get; set; }
+
+		Dictionary<string, object>? Settings { get; set; }
+
+		Nest.VersionNumber? Version { get; set; }
 	}
 
 	public partial class PutTemplateRequest : PlainRequestBase<PutTemplateRequestParameters>, IPutTemplateRequest
@@ -1602,59 +1403,22 @@ namespace Nest.IndexManagement
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonPropertyName("aliases")]
-		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases { get; set; }
+
+		[JsonPropertyName("index_patterns")]
+		public Union<string, IEnumerable<string>>? IndexPatterns { get; set; }
 
 		[JsonPropertyName("mappings")]
-		public Nest.Mapping.TypeMapping? Mappings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Mapping.TypeMapping? Mappings { get; set; }
 
 		[JsonPropertyName("order")]
-		public int? Order
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? Order { get; set; }
 
 		[JsonPropertyName("settings")]
-		public Dictionary<string, object>? Settings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Settings { get; set; }
 
 		[JsonPropertyName("version")]
-		public Nest.VersionNumber? Version
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.VersionNumber? Version { get; set; }
 	}
 
 	[ConvertAs(typeof(RecoveryRequest))]
@@ -1777,6 +1541,13 @@ namespace Nest.IndexManagement
 	[ConvertAs(typeof(RolloverRequest))]
 	public partial interface IRolloverRequest : IRequest<RolloverRequestParameters>
 	{
+		Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases { get; set; }
+
+		Nest.IndexManagement.Rollover.RolloverConditions? Conditions { get; set; }
+
+		Union<Dictionary<string, Nest.Mapping.TypeMapping>, Nest.Mapping.TypeMapping>? Mappings { get; set; }
+
+		Dictionary<string, object>? Settings { get; set; }
 	}
 
 	public partial class RolloverRequest : PlainRequestBase<RolloverRequestParameters>, IRolloverRequest
@@ -1814,48 +1585,16 @@ namespace Nest.IndexManagement
 		public Nest.WaitForActiveShards? WaitForActiveShards { get => Q<Nest.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 		[JsonPropertyName("aliases")]
-		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases { get; set; }
 
 		[JsonPropertyName("conditions")]
-		public Nest.IndexManagement.Rollover.RolloverConditions? Conditions
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexManagement.Rollover.RolloverConditions? Conditions { get; set; }
 
 		[JsonPropertyName("mappings")]
-		public Union<Dictionary<string, Nest.Mapping.TypeMapping>, Nest.Mapping.TypeMapping>? Mappings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Union<Dictionary<string, Nest.Mapping.TypeMapping>, Nest.Mapping.TypeMapping>? Mappings { get; set; }
 
 		[JsonPropertyName("settings")]
-		public Dictionary<string, object>? Settings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Settings { get; set; }
 	}
 
 	[ConvertAs(typeof(SegmentsRequest))]
@@ -1935,6 +1674,9 @@ namespace Nest.IndexManagement
 	[ConvertAs(typeof(ShrinkRequest))]
 	public partial interface IShrinkRequest : IRequest<ShrinkRequestParameters>
 	{
+		Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases { get; set; }
+
+		Dictionary<string, object>? Settings { get; set; }
 	}
 
 	public partial class ShrinkRequest : PlainRequestBase<ShrinkRequestParameters>, IShrinkRequest
@@ -1961,31 +1703,22 @@ namespace Nest.IndexManagement
 		public Nest.WaitForActiveShards? WaitForActiveShards { get => Q<Nest.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 		[JsonPropertyName("aliases")]
-		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases { get; set; }
 
 		[JsonPropertyName("settings")]
-		public Dictionary<string, object>? Settings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Settings { get; set; }
 	}
 
 	[ConvertAs(typeof(SimulateIndexTemplateRequest))]
 	public partial interface ISimulateIndexTemplateRequest : IRequest<SimulateIndexTemplateRequestParameters>
 	{
+		IEnumerable<Nest.IndexName>? IndexPatterns { get; set; }
+
+		IEnumerable<Nest.Name>? ComposedOf { get; set; }
+
+		IEnumerable<Nest.IndexManagement.OverlappingIndexTemplate>? Overlapping { get; set; }
+
+		Nest.IndexManagement.TemplateMapping? Template { get; set; }
 	}
 
 	public partial class SimulateIndexTemplateRequest : PlainRequestBase<SimulateIndexTemplateRequestParameters>, ISimulateIndexTemplateRequest
@@ -2002,38 +1735,17 @@ namespace Nest.IndexManagement
 		{
 		}
 
+		[JsonPropertyName("index_patterns")]
+		public IEnumerable<Nest.IndexName>? IndexPatterns { get; set; }
+
 		[JsonPropertyName("composed_of")]
-		public IReadOnlyCollection<Nest.Name>? ComposedOf
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Name>? ComposedOf { get; set; }
 
 		[JsonPropertyName("overlapping")]
-		public IReadOnlyCollection<Nest.IndexManagement.OverlappingIndexTemplate>? Overlapping
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.IndexManagement.OverlappingIndexTemplate>? Overlapping { get; set; }
 
 		[JsonPropertyName("template")]
-		public Nest.IndexManagement.TemplateMapping? Template
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexManagement.TemplateMapping? Template { get; set; }
 	}
 
 	[ConvertAs(typeof(SimulateTemplateRequest))]
@@ -2070,6 +1782,9 @@ namespace Nest.IndexManagement
 	[ConvertAs(typeof(SplitRequest))]
 	public partial interface ISplitRequest : IRequest<SplitRequestParameters>
 	{
+		Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases { get; set; }
+
+		Dictionary<string, object>? Settings { get; set; }
 	}
 
 	public partial class SplitRequest : PlainRequestBase<SplitRequestParameters>, ISplitRequest
@@ -2096,26 +1811,10 @@ namespace Nest.IndexManagement
 		public Nest.WaitForActiveShards? WaitForActiveShards { get => Q<Nest.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 		[JsonPropertyName("aliases")]
-		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? Aliases { get; set; }
 
 		[JsonPropertyName("settings")]
-		public Dictionary<string, object>? Settings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Settings { get; set; }
 	}
 
 	[ConvertAs(typeof(StatsRequest))]
@@ -2183,6 +1882,7 @@ namespace Nest.IndexManagement
 	[ConvertAs(typeof(UpdateAliasesRequest))]
 	public partial interface IUpdateAliasesRequest : IRequest<UpdateAliasesRequestParameters>
 	{
+		IEnumerable<Nest.IndexManagement.UpdateAliases.IndicesUpdateAliasBulk>? Actions { get; set; }
 	}
 
 	public partial class UpdateAliasesRequest : PlainRequestBase<UpdateAliasesRequestParameters>, IUpdateAliasesRequest
@@ -2204,11 +1904,15 @@ namespace Nest.IndexManagement
 
 		[JsonIgnore]
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonPropertyName("actions")]
+		public IEnumerable<Nest.IndexManagement.UpdateAliases.IndicesUpdateAliasBulk>? Actions { get; set; }
 	}
 
 	[ConvertAs(typeof(ValidateQueryRequest))]
 	public partial interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters>
 	{
+		Nest.QueryDsl.QueryContainer? Query { get; set; }
 	}
 
 	public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
@@ -2267,17 +1971,9 @@ namespace Nest.IndexManagement
 		public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
 
 		[JsonIgnore]
-		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+		public string? LuceneQueryString { get => Q<string?>("q"); set => Q("q", value); }
 
 		[JsonPropertyName("query")]
-		public Nest.QueryDsl.QueryContainer? Query
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Query { get; set; }
 	}
 }

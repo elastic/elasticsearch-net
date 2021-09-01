@@ -28,44 +28,17 @@ namespace Nest.SearchableSnapshots
 		{
 		}
 
-		public ClearCacheResponse ClearCache(IClearCacheRequest request)
-		{
-			return DoRequest<IClearCacheRequest, ClearCacheResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IClearCacheRequest, ClearCacheResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ClearCacheResponse ClearCache(Func<ClearCacheDescriptor, IClearCacheRequest> selector = null)
-		{
-			return ClearCache(selector.InvokeOrDefault(new ClearCacheDescriptor()));
-		}
-
-		public Task<ClearCacheResponse> ClearCacheAsync(Func<ClearCacheDescriptor, IClearCacheRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ClearCacheAsync(selector.InvokeOrDefault(new ClearCacheDescriptor()), cancellationToken);
-		}
-
-		public MountResponse Mount(IMountRequest request)
-		{
-			return DoRequest<IMountRequest, MountResponse>(request, request.RequestParameters);
-		}
-
-		public Task<MountResponse> MountAsync(IMountRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IMountRequest, MountResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public MountResponse Mount(Nest.Name repository, Nest.Name snapshot, Func<MountDescriptor, IMountRequest> selector = null)
-		{
-			return Mount(selector.InvokeOrDefault(new MountDescriptor(repository, snapshot)));
-		}
-
-		public Task<MountResponse> MountAsync(Nest.Name repository, Nest.Name snapshot, Func<MountDescriptor, IMountRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return MountAsync(selector.InvokeOrDefault(new MountDescriptor(repository, snapshot)), cancellationToken);
-		}
+		public ClearCacheResponse ClearCache(IClearCacheRequest request) => DoRequest<IClearCacheRequest, ClearCacheResponse>(request, request.RequestParameters);
+		public Task<ClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClearCacheRequest, ClearCacheResponse>(request, request.RequestParameters, cancellationToken);
+		public ClearCacheResponse ClearCache(Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) => ClearCache(selector.InvokeOrDefault(new ClearCacheDescriptor()));
+		public Task<ClearCacheResponse> ClearCacheAsync(Func<ClearCacheDescriptor, IClearCacheRequest> selector = null, CancellationToken cancellationToken = default) => ClearCacheAsync(selector.InvokeOrDefault(new ClearCacheDescriptor()), cancellationToken);
+		public MountResponse Mount(IMountRequest request) => DoRequest<IMountRequest, MountResponse>(request, request.RequestParameters);
+		public Task<MountResponse> MountAsync(IMountRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IMountRequest, MountResponse>(request, request.RequestParameters, cancellationToken);
+		public MountResponse Mount(Nest.Name repository, Nest.Name snapshot, Func<MountDescriptor, IMountRequest> selector = null) => Mount(selector.InvokeOrDefault(new MountDescriptor(repository, snapshot)));
+		public Task<MountResponse> MountAsync(Nest.Name repository, Nest.Name snapshot, Func<MountDescriptor, IMountRequest> selector = null, CancellationToken cancellationToken = default) => MountAsync(selector.InvokeOrDefault(new MountDescriptor(repository, snapshot)), cancellationToken);
+		public StatsResponse Stats(IStatsRequest request) => DoRequest<IStatsRequest, StatsResponse>(request, request.RequestParameters);
+		public Task<StatsResponse> StatsAsync(IStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IStatsRequest, StatsResponse>(request, request.RequestParameters, cancellationToken);
+		public StatsResponse Stats(Func<StatsDescriptor, IStatsRequest> selector = null) => Stats(selector.InvokeOrDefault(new StatsDescriptor()));
+		public Task<StatsResponse> StatsAsync(Func<StatsDescriptor, IStatsRequest> selector = null, CancellationToken cancellationToken = default) => StatsAsync(selector.InvokeOrDefault(new StatsDescriptor()), cancellationToken);
 	}
 }

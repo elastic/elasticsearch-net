@@ -32,18 +32,13 @@ namespace Nest.Shutdown
 		protected IDeleteNodeRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ShutdownDeleteNode;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => true;
+		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
-		[JsonPropertyName("stub")]
-		public string Stub
+
+		///<summary>/_nodes/{node_id}/shutdown</summary>
+        public DeleteNodeRequest(Nest.NodeId node_id) : base(r => r.Required("node_id", node_id))
 		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
 		}
 	}
 
@@ -57,7 +52,7 @@ namespace Nest.Shutdown
 		protected IGetNodeRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ShutdownGetNode;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => true;
+		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
 
@@ -66,16 +61,10 @@ namespace Nest.Shutdown
 		{
 		}
 
-		[JsonPropertyName("stub")]
-		public string Stub
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		///<summary>/_nodes/{node_id}/shutdown</summary>
+  //      public GetNodeRequest(IEnumerable<Nest.NodeId> node_id) : base(r => r.Required("node_id", node_id))
+		//{
+		//}
 	}
 
 	[ConvertAs(typeof(PutNodeRequest))]
@@ -88,18 +77,13 @@ namespace Nest.Shutdown
 		protected IPutNodeRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ShutdownPutNode;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override bool SupportsBody => true;
+		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
-		[JsonPropertyName("stub")]
-		public string Stub
+
+		///<summary>/_nodes/{node_id}/shutdown</summary>
+        public PutNodeRequest(Nest.NodeId node_id) : base(r => r.Required("node_id", node_id))
 		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
 		}
 	}
 }

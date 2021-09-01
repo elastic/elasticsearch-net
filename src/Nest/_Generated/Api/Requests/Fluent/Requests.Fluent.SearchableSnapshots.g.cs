@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.SearchableSnapshots
@@ -34,6 +35,10 @@ namespace Nest.SearchableSnapshots
         public ClearCacheDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public ClearCacheDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ClearCacheDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public ClearCacheDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	}
 
 	public partial class MountDescriptor : RequestDescriptorBase<MountDescriptor, MountRequestParameters, IMountRequest>, IMountRequest
@@ -45,5 +50,39 @@ namespace Nest.SearchableSnapshots
         public MountDescriptor(Nest.Name repository, Nest.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
 		}
+
+		Nest.IndexName IMountRequest.Index { get; set; }
+
+		Nest.IndexName? IMountRequest.RenamedIndex { get; set; }
+
+		Dictionary<string, object>? IMountRequest.IndexSettings { get; set; }
+
+		IEnumerable<string>? IMountRequest.IgnoreIndexSettings { get; set; }
+
+		public MountDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public MountDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+		public MountDescriptor Storage(string? storage) => Qs("storage", storage);
+		public MountDescriptor Index(Nest.IndexName index) => Assign(index, (a, v) => a.Index = v);
+		public MountDescriptor RenamedIndex(Nest.IndexName? renamedIndex) => Assign(renamedIndex, (a, v) => a.RenamedIndex = v);
+		public MountDescriptor IndexSettings(Dictionary<string, object>? indexSettings) => Assign(indexSettings, (a, v) => a.IndexSettings = v);
+		public MountDescriptor IgnoreIndexSettings(IEnumerable<string>? ignoreIndexSettings) => Assign(ignoreIndexSettings, (a, v) => a.IgnoreIndexSettings = v);
+	}
+
+	public partial class StatsDescriptor : RequestDescriptorBase<StatsDescriptor, StatsRequestParameters, IStatsRequest>, IStatsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SearchableSnapshotsStats;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		///<summary>/_searchable_snapshots/stats</summary>
+        public StatsDescriptor() : base()
+		{
+		}
+
+		///<summary>/{index}/_searchable_snapshots/stats</summary>
+        public StatsDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
+		{
+		}
+
+		public StatsDescriptor Level(Nest.SearchableSnapshots.StatsLevel? level) => Qs("level", level);
 	}
 }

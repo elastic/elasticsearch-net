@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.License
@@ -40,6 +41,9 @@ namespace Nest.License
         public GetDescriptor() : base()
 		{
 		}
+
+		public GetDescriptor AcceptEnterprise(bool? acceptEnterprise = true) => Qs("accept_enterprise", acceptEnterprise);
+		public GetDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
 	public partial class GetBasicStatusDescriptor : RequestDescriptorBase<GetBasicStatusDescriptor, GetBasicStatusRequestParameters, IGetBasicStatusRequest>, IGetBasicStatusRequest
@@ -73,6 +77,14 @@ namespace Nest.License
         public PostDescriptor() : base()
 		{
 		}
+
+		Nest.License.License? IPostRequest.License { get; set; }
+
+		IEnumerable<Nest.License.License>? IPostRequest.Licenses { get; set; }
+
+		public PostDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
+		public PostDescriptor License(Nest.License.License? license) => Assign(license, (a, v) => a.License = v);
+		public PostDescriptor Licenses(IEnumerable<Nest.License.License>? licenses) => Assign(licenses, (a, v) => a.Licenses = v);
 	}
 
 	public partial class PostStartBasicDescriptor : RequestDescriptorBase<PostStartBasicDescriptor, PostStartBasicRequestParameters, IPostStartBasicRequest>, IPostStartBasicRequest
@@ -84,6 +96,8 @@ namespace Nest.License
         public PostStartBasicDescriptor() : base()
 		{
 		}
+
+		public PostStartBasicDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
 	}
 
 	public partial class PostStartTrialDescriptor : RequestDescriptorBase<PostStartTrialDescriptor, PostStartTrialRequestParameters, IPostStartTrialRequest>, IPostStartTrialRequest
@@ -95,5 +109,8 @@ namespace Nest.License
         public PostStartTrialDescriptor() : base()
 		{
 		}
+
+		public PostStartTrialDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
+		public PostStartTrialDescriptor TypeQueryString(string? typeQueryString) => Qs("type_query_string", typeQueryString);
 	}
 }

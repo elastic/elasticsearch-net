@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Ccr
@@ -40,6 +41,44 @@ namespace Nest.Ccr
         public FollowDescriptor(Nest.IndexName index) : base(r => r.Required("index", index))
 		{
 		}
+
+		Nest.IndexName? IFollowRequest.LeaderIndex { get; set; }
+
+		long? IFollowRequest.MaxOutstandingReadRequests { get; set; }
+
+		long? IFollowRequest.MaxOutstandingWriteRequests { get; set; }
+
+		long? IFollowRequest.MaxReadRequestOperationCount { get; set; }
+
+		string? IFollowRequest.MaxReadRequestSize { get; set; }
+
+		Nest.Time? IFollowRequest.MaxRetryDelay { get; set; }
+
+		long? IFollowRequest.MaxWriteBufferCount { get; set; }
+
+		string? IFollowRequest.MaxWriteBufferSize { get; set; }
+
+		long? IFollowRequest.MaxWriteRequestOperationCount { get; set; }
+
+		string? IFollowRequest.MaxWriteRequestSize { get; set; }
+
+		Nest.Time? IFollowRequest.ReadPollTimeout { get; set; }
+
+		string? IFollowRequest.RemoteCluster { get; set; }
+
+		public FollowDescriptor WaitForActiveShards(Nest.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public FollowDescriptor LeaderIndex(Nest.IndexName? leaderIndex) => Assign(leaderIndex, (a, v) => a.LeaderIndex = v);
+		public FollowDescriptor MaxOutstandingReadRequests(long? maxOutstandingReadRequests) => Assign(maxOutstandingReadRequests, (a, v) => a.MaxOutstandingReadRequests = v);
+		public FollowDescriptor MaxOutstandingWriteRequests(long? maxOutstandingWriteRequests) => Assign(maxOutstandingWriteRequests, (a, v) => a.MaxOutstandingWriteRequests = v);
+		public FollowDescriptor MaxReadRequestOperationCount(long? maxReadRequestOperationCount) => Assign(maxReadRequestOperationCount, (a, v) => a.MaxReadRequestOperationCount = v);
+		public FollowDescriptor MaxReadRequestSize(string? maxReadRequestSize) => Assign(maxReadRequestSize, (a, v) => a.MaxReadRequestSize = v);
+		public FollowDescriptor MaxRetryDelay(Nest.Time? maxRetryDelay) => Assign(maxRetryDelay, (a, v) => a.MaxRetryDelay = v);
+		public FollowDescriptor MaxWriteBufferCount(long? maxWriteBufferCount) => Assign(maxWriteBufferCount, (a, v) => a.MaxWriteBufferCount = v);
+		public FollowDescriptor MaxWriteBufferSize(string? maxWriteBufferSize) => Assign(maxWriteBufferSize, (a, v) => a.MaxWriteBufferSize = v);
+		public FollowDescriptor MaxWriteRequestOperationCount(long? maxWriteRequestOperationCount) => Assign(maxWriteRequestOperationCount, (a, v) => a.MaxWriteRequestOperationCount = v);
+		public FollowDescriptor MaxWriteRequestSize(string? maxWriteRequestSize) => Assign(maxWriteRequestSize, (a, v) => a.MaxWriteRequestSize = v);
+		public FollowDescriptor ReadPollTimeout(Nest.Time? readPollTimeout) => Assign(readPollTimeout, (a, v) => a.ReadPollTimeout = v);
+		public FollowDescriptor RemoteCluster(string? remoteCluster) => Assign(remoteCluster, (a, v) => a.RemoteCluster = v);
 	}
 
 	public partial class FollowInfoDescriptor : RequestDescriptorBase<FollowInfoDescriptor, FollowInfoRequestParameters, IFollowInfoRequest>, IFollowInfoRequest
@@ -73,6 +112,19 @@ namespace Nest.Ccr
         public ForgetFollowerDescriptor(Nest.IndexName index) : base(r => r.Required("index", index))
 		{
 		}
+
+		string? IForgetFollowerRequest.FollowerCluster { get; set; }
+
+		Nest.IndexName? IForgetFollowerRequest.FollowerIndex { get; set; }
+
+		Nest.Uuid? IForgetFollowerRequest.FollowerIndexUuid { get; set; }
+
+		string? IForgetFollowerRequest.LeaderRemoteCluster { get; set; }
+
+		public ForgetFollowerDescriptor FollowerCluster(string? followerCluster) => Assign(followerCluster, (a, v) => a.FollowerCluster = v);
+		public ForgetFollowerDescriptor FollowerIndex(Nest.IndexName? followerIndex) => Assign(followerIndex, (a, v) => a.FollowerIndex = v);
+		public ForgetFollowerDescriptor FollowerIndexUuid(Nest.Uuid? followerIndexUuid) => Assign(followerIndexUuid, (a, v) => a.FollowerIndexUuid = v);
+		public ForgetFollowerDescriptor LeaderRemoteCluster(string? leaderRemoteCluster) => Assign(leaderRemoteCluster, (a, v) => a.LeaderRemoteCluster = v);
 	}
 
 	public partial class GetAutoFollowPatternDescriptor : RequestDescriptorBase<GetAutoFollowPatternDescriptor, GetAutoFollowPatternRequestParameters, IGetAutoFollowPatternRequest>, IGetAutoFollowPatternRequest
@@ -122,6 +174,49 @@ namespace Nest.Ccr
         public PutAutoFollowPatternDescriptor(Nest.Name name) : base(r => r.Required("name", name))
 		{
 		}
+
+		string IPutAutoFollowPatternRequest.RemoteCluster { get; set; }
+
+		Nest.IndexPattern? IPutAutoFollowPatternRequest.FollowIndexPattern { get; set; }
+
+		Nest.IndexPatterns? IPutAutoFollowPatternRequest.LeaderIndexPatterns { get; set; }
+
+		int? IPutAutoFollowPatternRequest.MaxOutstandingReadRequests { get; set; }
+
+		Dictionary<string, object>? IPutAutoFollowPatternRequest.Settings { get; set; }
+
+		int? IPutAutoFollowPatternRequest.MaxOutstandingWriteRequests { get; set; }
+
+		Nest.Time? IPutAutoFollowPatternRequest.ReadPollTimeout { get; set; }
+
+		int? IPutAutoFollowPatternRequest.MaxReadRequestOperationCount { get; set; }
+
+		Nest.ByteSize? IPutAutoFollowPatternRequest.MaxReadRequestSize { get; set; }
+
+		Nest.Time? IPutAutoFollowPatternRequest.MaxRetryDelay { get; set; }
+
+		int? IPutAutoFollowPatternRequest.MaxWriteBufferCount { get; set; }
+
+		Nest.ByteSize? IPutAutoFollowPatternRequest.MaxWriteBufferSize { get; set; }
+
+		int? IPutAutoFollowPatternRequest.MaxWriteRequestOperationCount { get; set; }
+
+		Nest.ByteSize? IPutAutoFollowPatternRequest.MaxWriteRequestSize { get; set; }
+
+		public PutAutoFollowPatternDescriptor RemoteCluster(string remoteCluster) => Assign(remoteCluster, (a, v) => a.RemoteCluster = v);
+		public PutAutoFollowPatternDescriptor FollowIndexPattern(Nest.IndexPattern? followIndexPattern) => Assign(followIndexPattern, (a, v) => a.FollowIndexPattern = v);
+		public PutAutoFollowPatternDescriptor LeaderIndexPatterns(Nest.IndexPatterns? leaderIndexPatterns) => Assign(leaderIndexPatterns, (a, v) => a.LeaderIndexPatterns = v);
+		public PutAutoFollowPatternDescriptor MaxOutstandingReadRequests(int? maxOutstandingReadRequests) => Assign(maxOutstandingReadRequests, (a, v) => a.MaxOutstandingReadRequests = v);
+		public PutAutoFollowPatternDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
+		public PutAutoFollowPatternDescriptor MaxOutstandingWriteRequests(int? maxOutstandingWriteRequests) => Assign(maxOutstandingWriteRequests, (a, v) => a.MaxOutstandingWriteRequests = v);
+		public PutAutoFollowPatternDescriptor ReadPollTimeout(Nest.Time? readPollTimeout) => Assign(readPollTimeout, (a, v) => a.ReadPollTimeout = v);
+		public PutAutoFollowPatternDescriptor MaxReadRequestOperationCount(int? maxReadRequestOperationCount) => Assign(maxReadRequestOperationCount, (a, v) => a.MaxReadRequestOperationCount = v);
+		public PutAutoFollowPatternDescriptor MaxReadRequestSize(Nest.ByteSize? maxReadRequestSize) => Assign(maxReadRequestSize, (a, v) => a.MaxReadRequestSize = v);
+		public PutAutoFollowPatternDescriptor MaxRetryDelay(Nest.Time? maxRetryDelay) => Assign(maxRetryDelay, (a, v) => a.MaxRetryDelay = v);
+		public PutAutoFollowPatternDescriptor MaxWriteBufferCount(int? maxWriteBufferCount) => Assign(maxWriteBufferCount, (a, v) => a.MaxWriteBufferCount = v);
+		public PutAutoFollowPatternDescriptor MaxWriteBufferSize(Nest.ByteSize? maxWriteBufferSize) => Assign(maxWriteBufferSize, (a, v) => a.MaxWriteBufferSize = v);
+		public PutAutoFollowPatternDescriptor MaxWriteRequestOperationCount(int? maxWriteRequestOperationCount) => Assign(maxWriteRequestOperationCount, (a, v) => a.MaxWriteRequestOperationCount = v);
+		public PutAutoFollowPatternDescriptor MaxWriteRequestSize(Nest.ByteSize? maxWriteRequestSize) => Assign(maxWriteRequestSize, (a, v) => a.MaxWriteRequestSize = v);
 	}
 
 	public partial class ResumeAutoFollowPatternDescriptor : RequestDescriptorBase<ResumeAutoFollowPatternDescriptor, ResumeAutoFollowPatternRequestParameters, IResumeAutoFollowPatternRequest>, IResumeAutoFollowPatternRequest
@@ -144,6 +239,37 @@ namespace Nest.Ccr
         public ResumeFollowDescriptor(Nest.IndexName index) : base(r => r.Required("index", index))
 		{
 		}
+
+		long? IResumeFollowRequest.MaxOutstandingReadRequests { get; set; }
+
+		long? IResumeFollowRequest.MaxOutstandingWriteRequests { get; set; }
+
+		long? IResumeFollowRequest.MaxReadRequestOperationCount { get; set; }
+
+		string? IResumeFollowRequest.MaxReadRequestSize { get; set; }
+
+		Nest.Time? IResumeFollowRequest.MaxRetryDelay { get; set; }
+
+		long? IResumeFollowRequest.MaxWriteBufferCount { get; set; }
+
+		string? IResumeFollowRequest.MaxWriteBufferSize { get; set; }
+
+		long? IResumeFollowRequest.MaxWriteRequestOperationCount { get; set; }
+
+		string? IResumeFollowRequest.MaxWriteRequestSize { get; set; }
+
+		Nest.Time? IResumeFollowRequest.ReadPollTimeout { get; set; }
+
+		public ResumeFollowDescriptor MaxOutstandingReadRequests(long? maxOutstandingReadRequests) => Assign(maxOutstandingReadRequests, (a, v) => a.MaxOutstandingReadRequests = v);
+		public ResumeFollowDescriptor MaxOutstandingWriteRequests(long? maxOutstandingWriteRequests) => Assign(maxOutstandingWriteRequests, (a, v) => a.MaxOutstandingWriteRequests = v);
+		public ResumeFollowDescriptor MaxReadRequestOperationCount(long? maxReadRequestOperationCount) => Assign(maxReadRequestOperationCount, (a, v) => a.MaxReadRequestOperationCount = v);
+		public ResumeFollowDescriptor MaxReadRequestSize(string? maxReadRequestSize) => Assign(maxReadRequestSize, (a, v) => a.MaxReadRequestSize = v);
+		public ResumeFollowDescriptor MaxRetryDelay(Nest.Time? maxRetryDelay) => Assign(maxRetryDelay, (a, v) => a.MaxRetryDelay = v);
+		public ResumeFollowDescriptor MaxWriteBufferCount(long? maxWriteBufferCount) => Assign(maxWriteBufferCount, (a, v) => a.MaxWriteBufferCount = v);
+		public ResumeFollowDescriptor MaxWriteBufferSize(string? maxWriteBufferSize) => Assign(maxWriteBufferSize, (a, v) => a.MaxWriteBufferSize = v);
+		public ResumeFollowDescriptor MaxWriteRequestOperationCount(long? maxWriteRequestOperationCount) => Assign(maxWriteRequestOperationCount, (a, v) => a.MaxWriteRequestOperationCount = v);
+		public ResumeFollowDescriptor MaxWriteRequestSize(string? maxWriteRequestSize) => Assign(maxWriteRequestSize, (a, v) => a.MaxWriteRequestSize = v);
+		public ResumeFollowDescriptor ReadPollTimeout(Nest.Time? readPollTimeout) => Assign(readPollTimeout, (a, v) => a.ReadPollTimeout = v);
 	}
 
 	public partial class StatsDescriptor : RequestDescriptorBase<StatsDescriptor, StatsRequestParameters, IStatsRequest>, IStatsRequest

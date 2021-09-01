@@ -100,6 +100,7 @@ namespace Nest
 	[ConvertAs(typeof(ClosePointInTimeRequest))]
 	public partial interface IClosePointInTimeRequest : IRequest<ClosePointInTimeRequestParameters>
 	{
+		Nest.Id Id { get; set; }
 	}
 
 	public partial class ClosePointInTimeRequest : PlainRequestBase<ClosePointInTimeRequestParameters>, IClosePointInTimeRequest
@@ -115,11 +116,15 @@ namespace Nest
         public ClosePointInTimeRequest() : base()
 		{
 		}
+
+		[JsonPropertyName("id")]
+		public Nest.Id Id { get; set; }
 	}
 
 	[ConvertAs(typeof(CountRequest))]
 	public partial interface ICountRequest : IRequest<CountRequestParameters>
 	{
+		Nest.QueryDsl.QueryContainer? Query { get; set; }
 	}
 
 	public partial class CountRequest : PlainRequestBase<CountRequestParameters>, ICountRequest
@@ -184,18 +189,10 @@ namespace Nest
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
 		[JsonIgnore]
-		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+		public string? LuceneQueryString { get => Q<string?>("q"); set => Q("q", value); }
 
 		[JsonPropertyName("query")]
-		public Nest.QueryDsl.QueryContainer? Query
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Query { get; set; }
 	}
 
 	[ConvertAs(typeof(CreateRequest<>))]
@@ -286,6 +283,9 @@ namespace Nest
 	[ConvertAs(typeof(DeleteByQueryRequest))]
 	public partial interface IDeleteByQueryRequest : IRequest<DeleteByQueryRequestParameters>
 	{
+		Nest.QueryDsl.QueryContainer? Query { get; set; }
+
+		Nest.SlicedScroll? Slice { get; set; }
 	}
 
 	public partial class DeleteByQueryRequest : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
@@ -351,7 +351,7 @@ namespace Nest
 		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+		public string? LuceneQueryString { get => Q<string?>("q"); set => Q("q", value); }
 
 		[JsonIgnore]
 		public Nest.Time? Scroll { get => Q<Nest.Time?>("scroll"); set => Q("scroll", value); }
@@ -402,26 +402,10 @@ namespace Nest
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
 		[JsonPropertyName("query")]
-		public Nest.QueryDsl.QueryContainer? Query
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Query { get; set; }
 
 		[JsonPropertyName("slice")]
-		public Nest.SlicedScroll? Slice
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.SlicedScroll? Slice { get; set; }
 	}
 
 	[ConvertAs(typeof(DeleteByQueryRethrottleRequest))]
@@ -505,13 +489,13 @@ namespace Nest
 		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
-		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("source_excludes"); set => Q("source_excludes", value); }
+		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 		[JsonIgnore]
-		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("source_includes"); set => Q("source_includes", value); }
+		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 		[JsonIgnore]
 		public Nest.Fields? StoredFields { get => Q<Nest.Fields?>("stored_fields"); set => Q("stored_fields", value); }
@@ -555,13 +539,13 @@ namespace Nest
 		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
-		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("source_excludes"); set => Q("source_excludes", value); }
+		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 		[JsonIgnore]
-		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("source_includes"); set => Q("source_includes", value); }
+		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 		[JsonIgnore]
 		public Nest.VersionNumber? Version { get => Q<Nest.VersionNumber?>("version"); set => Q("version", value); }
@@ -573,6 +557,7 @@ namespace Nest
 	[ConvertAs(typeof(ExplainRequest))]
 	public partial interface IExplainRequest : IRequest<ExplainRequestParameters>
 	{
+		Nest.QueryDsl.QueryContainer? Query { get; set; }
 	}
 
 	public partial class ExplainRequest : PlainRequestBase<ExplainRequestParameters>, IExplainRequest
@@ -626,23 +611,16 @@ namespace Nest
 		public Nest.Fields? StoredFields { get => Q<Nest.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
 		[JsonIgnore]
-		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+		public string? LuceneQueryString { get => Q<string?>("q"); set => Q("q", value); }
 
 		[JsonPropertyName("query")]
-		public Nest.QueryDsl.QueryContainer? Query
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Query { get; set; }
 	}
 
 	[ConvertAs(typeof(FieldCapsRequest))]
 	public partial interface IFieldCapsRequest : IRequest<FieldCapsRequestParameters>
 	{
+		Nest.Global.FieldCaps.FieldCapabilitiesBodyIndexFilter? IndexFilter { get; set; }
 	}
 
 	public partial class FieldCapsRequest : PlainRequestBase<FieldCapsRequestParameters>, IFieldCapsRequest
@@ -680,15 +658,7 @@ namespace Nest
 		public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
 
 		[JsonPropertyName("index_filter")]
-		public Nest.Global.FieldCaps.FieldCapabilitiesBodyIndexFilter? IndexFilter
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.FieldCaps.FieldCapabilitiesBodyIndexFilter? IndexFilter { get; set; }
 	}
 
 	[ConvertAs(typeof(GetRequest))]
@@ -723,7 +693,7 @@ namespace Nest
 		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -739,9 +709,6 @@ namespace Nest
 
 		[JsonIgnore]
 		public Nest.VersionType? VersionType { get => Q<Nest.VersionType?>("version_type"); set => Q("version_type", value); }
-
-		[JsonIgnore]
-		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
 	}
 
 	[ConvertAs(typeof(GetScriptRequest))]
@@ -839,7 +806,7 @@ namespace Nest
 		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -855,9 +822,6 @@ namespace Nest
 
 		[JsonIgnore]
 		public Nest.VersionType? VersionType { get => Q<Nest.VersionType?>("version_type"); set => Q("version_type", value); }
-
-		[JsonIgnore]
-		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
 	}
 
 	[ConvertAs(typeof(IndexRequest<>))]
@@ -941,6 +905,9 @@ namespace Nest
 	[ConvertAs(typeof(MgetRequest))]
 	public partial interface IMgetRequest : IRequest<MgetRequestParameters>
 	{
+		IEnumerable<Nest.Global.Mget.Operation>? Docs { get; set; }
+
+		IEnumerable<Nest.Global.Mget.MultiGetId>? Ids { get; set; }
 	}
 
 	public partial class MgetRequest : PlainRequestBase<MgetRequestParameters>, IMgetRequest
@@ -987,15 +954,10 @@ namespace Nest
 		public Nest.Fields? StoredFields { get => Q<Nest.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
 		[JsonPropertyName("docs")]
-		public IReadOnlyCollection<Nest.Global.Mget.Operation>? Docs
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Global.Mget.Operation>? Docs { get; set; }
+
+		[JsonPropertyName("ids")]
+		public IEnumerable<Nest.Global.Mget.MultiGetId>? Ids { get; set; }
 	}
 
 	[ConvertAs(typeof(MsearchRequest))]
@@ -1099,6 +1061,9 @@ namespace Nest
 	[ConvertAs(typeof(MtermvectorsRequest))]
 	public partial interface IMtermvectorsRequest : IRequest<MtermvectorsRequestParameters>
 	{
+		IEnumerable<Nest.Global.Mtermvectors.Operation>? Docs { get; set; }
+
+		IEnumerable<Nest.Id>? Ids { get; set; }
 	}
 
 	public partial class MtermvectorsRequest : PlainRequestBase<MtermvectorsRequestParameters>, IMtermvectorsRequest
@@ -1154,15 +1119,10 @@ namespace Nest
 		public Nest.VersionType? VersionType { get => Q<Nest.VersionType?>("version_type"); set => Q("version_type", value); }
 
 		[JsonPropertyName("docs")]
-		public IReadOnlyCollection<Nest.Global.Mtermvectors.Operation>? Docs
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Global.Mtermvectors.Operation>? Docs { get; set; }
+
+		[JsonPropertyName("ids")]
+		public IEnumerable<Nest.Id>? Ids { get; set; }
 	}
 
 	[ConvertAs(typeof(OpenPointInTimeRequest))]
@@ -1216,6 +1176,7 @@ namespace Nest
 	[ConvertAs(typeof(PutScriptRequest))]
 	public partial interface IPutScriptRequest : IRequest<PutScriptRequestParameters>
 	{
+		Nest.StoredScript? Script { get; set; }
 	}
 
 	public partial class PutScriptRequest : PlainRequestBase<PutScriptRequestParameters>, IPutScriptRequest
@@ -1242,11 +1203,17 @@ namespace Nest
 
 		[JsonIgnore]
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonPropertyName("script")]
+		public Nest.StoredScript? Script { get; set; }
 	}
 
 	[ConvertAs(typeof(RankEvalRequest))]
 	public partial interface IRankEvalRequest : IRequest<RankEvalRequestParameters>
 	{
+		IEnumerable<Nest.Global.RankEval.RankEvalRequestItem> Requests { get; set; }
+
+		Nest.Global.RankEval.RankEvalMetric? Metric { get; set; }
 	}
 
 	public partial class RankEvalRequest : PlainRequestBase<RankEvalRequestParameters>, IRankEvalRequest
@@ -1281,31 +1248,26 @@ namespace Nest
 		public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 
 		[JsonPropertyName("requests")]
-		public IReadOnlyCollection<Nest.Global.RankEval.RankEvalRequestItem> Requests
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Global.RankEval.RankEvalRequestItem> Requests { get; set; }
 
 		[JsonPropertyName("metric")]
-		public Nest.Global.RankEval.RankEvalMetric? Metric
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.RankEval.RankEvalMetric? Metric { get; set; }
 	}
 
 	[ConvertAs(typeof(ReindexRequest))]
 	public partial interface IReindexRequest : IRequest<ReindexRequestParameters>
 	{
+		Nest.Conflicts? Conflicts { get; set; }
+
+		Nest.Global.Reindex.Destination? Dest { get; set; }
+
+		long? MaxDocs { get; set; }
+
+		Nest.Script? Script { get; set; }
+
+		long? Size { get; set; }
+
+		Nest.Global.Reindex.Source? Source { get; set; }
 	}
 
 	public partial class ReindexRequest : PlainRequestBase<ReindexRequestParameters>, IReindexRequest
@@ -1347,59 +1309,22 @@ namespace Nest
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
 		[JsonPropertyName("conflicts")]
-		public Nest.Conflicts? Conflicts
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Conflicts? Conflicts { get; set; }
 
 		[JsonPropertyName("dest")]
-		public Nest.Global.Reindex.Destination? Dest
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.Reindex.Destination? Dest { get; set; }
 
 		[JsonPropertyName("max_docs")]
-		public long? MaxDocs
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? MaxDocs { get; set; }
+
+		[JsonPropertyName("script")]
+		public Nest.Script? Script { get; set; }
 
 		[JsonPropertyName("size")]
-		public long? Size
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? Size { get; set; }
 
 		[JsonPropertyName("source")]
-		public Nest.Global.Reindex.Source? Source
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.Reindex.Source? Source { get; set; }
 	}
 
 	[ConvertAs(typeof(ReindexRethrottleRequest))]
@@ -1428,6 +1353,11 @@ namespace Nest
 	[ConvertAs(typeof(RenderSearchTemplateRequest))]
 	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters>
 	{
+		string? File { get; set; }
+
+		Dictionary<string, object>? Params { get; set; }
+
+		string? Source { get; set; }
 	}
 
 	public partial class RenderSearchTemplateRequest : PlainRequestBase<RenderSearchTemplateRequestParameters>, IRenderSearchTemplateRequest
@@ -1444,43 +1374,29 @@ namespace Nest
 		{
 		}
 
-		[JsonPropertyName("file")]
-		public string? File
+		///<summary>/_render/template/{id}</summary>
+        public RenderSearchTemplateRequest(Nest.Id? id) : base(r => r.Optional("id", id))
 		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
 		}
+
+		[JsonPropertyName("file")]
+		public string? File { get; set; }
 
 		[JsonPropertyName("params")]
-		public Dictionary<string, object>? Params
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Params { get; set; }
 
 		[JsonPropertyName("source")]
-		public string? Source
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Source { get; set; }
 	}
 
 	[ConvertAs(typeof(ScriptsPainlessExecuteRequest))]
 	public partial interface IScriptsPainlessExecuteRequest : IRequest<ScriptsPainlessExecuteRequestParameters>
 	{
+		string? Context { get; set; }
+
+		Nest.Global.ScriptsPainlessExecute.PainlessContextSetup? ContextSetup { get; set; }
+
+		Nest.InlineScript? Script { get; set; }
 	}
 
 	public partial class ScriptsPainlessExecuteRequest : PlainRequestBase<ScriptsPainlessExecuteRequestParameters>, IScriptsPainlessExecuteRequest
@@ -1497,16 +1413,14 @@ namespace Nest
 		{
 		}
 
+		[JsonPropertyName("context")]
+		public string? Context { get; set; }
+
 		[JsonPropertyName("context_setup")]
-		public Nest.Global.ScriptsPainlessExecute.PainlessContextSetup? ContextSetup
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.ScriptsPainlessExecute.PainlessContextSetup? ContextSetup { get; set; }
+
+		[JsonPropertyName("script")]
+		public Nest.InlineScript? Script { get; set; }
 	}
 
 	[ConvertAs(typeof(ScrollRequest))]
@@ -1544,6 +1458,39 @@ namespace Nest
 	[ConvertAs(typeof(SearchRequest))]
 	public partial interface ISearchRequest : IRequest<SearchRequestParameters>
 	{
+		Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggs { get; set; }
+
+		Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggregations { get; set; }
+
+		Nest.Global.Search.FieldCollapse? Collapse { get; set; }
+
+		Nest.Global.Search.Highlight? Highlight { get; set; }
+
+		IEnumerable<Dictionary<Nest.IndexName, double>>? IndicesBoost { get; set; }
+
+		double? MinScore { get; set; }
+
+		Nest.QueryDsl.QueryContainer? PostFilter { get; set; }
+
+		bool? Profile { get; set; }
+
+		Nest.QueryDsl.QueryContainer? Query { get; set; }
+
+		Union<Nest.Global.Search.Rescore, IEnumerable<Nest.Global.Search.Rescore>>? Rescore { get; set; }
+
+		Dictionary<string, Nest.ScriptField>? ScriptFields { get; set; }
+
+		Nest.Global.Search.SortResults? SearchAfter { get; set; }
+
+		Nest.SlicedScroll? Slice { get; set; }
+
+		IEnumerable<Union<Nest.Field, Nest.DateField>>? Fields { get; set; }
+
+		Union<Nest.Global.Search.SuggestContainer, Dictionary<string, Nest.Global.Search.SuggestContainer>>? Suggest { get; set; }
+
+		Nest.Global.Search.PointInTimeReference? Pit { get; set; }
+
+		Nest.Mapping.RuntimeFields? RuntimeMappings { get; set; }
 	}
 
 	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
@@ -1683,7 +1630,7 @@ namespace Nest
 		public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
 
 		[JsonIgnore]
-		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+		public string? LuceneQueryString { get => Q<string?>("q"); set => Q("q", value); }
 
 		[JsonIgnore]
 		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
@@ -1695,180 +1642,55 @@ namespace Nest
 		public Union<string, IEnumerable<string>>? Sort { get => Q<Union<string, IEnumerable<string>>?>("sort"); set => Q("sort", value); }
 
 		[JsonPropertyName("aggs")]
-		public Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggs
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggs { get; set; }
 
 		[JsonPropertyName("aggregations")]
-		public Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggregations
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggregations { get; set; }
 
 		[JsonPropertyName("collapse")]
-		public Nest.Global.Search.FieldCollapse? Collapse
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.Search.FieldCollapse? Collapse { get; set; }
 
 		[JsonPropertyName("highlight")]
-		public Nest.Global.Search.Highlight? Highlight
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.Search.Highlight? Highlight { get; set; }
 
 		[JsonPropertyName("indices_boost")]
-		public IReadOnlyCollection<Dictionary<Nest.IndexName, double>>? IndicesBoost
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Dictionary<Nest.IndexName, double>>? IndicesBoost { get; set; }
 
 		[JsonPropertyName("min_score")]
-		public double? MinScore
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? MinScore { get; set; }
 
 		[JsonPropertyName("post_filter")]
-		public Nest.QueryDsl.QueryContainer? PostFilter
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? PostFilter { get; set; }
 
 		[JsonPropertyName("profile")]
-		public bool? Profile
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Profile { get; set; }
 
 		[JsonPropertyName("query")]
-		public Nest.QueryDsl.QueryContainer? Query
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Query { get; set; }
 
 		[JsonPropertyName("rescore")]
-		public Union<Nest.Global.Search.Rescore, IReadOnlyCollection<Nest.Global.Search.Rescore>>? Rescore
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Union<Nest.Global.Search.Rescore, IEnumerable<Nest.Global.Search.Rescore>>? Rescore { get; set; }
 
 		[JsonPropertyName("script_fields")]
-		public Dictionary<string, Nest.ScriptField>? ScriptFields
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, Nest.ScriptField>? ScriptFields { get; set; }
 
 		[JsonPropertyName("search_after")]
-		public Nest.Global.Search.SortResults? SearchAfter
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.Search.SortResults? SearchAfter { get; set; }
 
 		[JsonPropertyName("slice")]
-		public Nest.SlicedScroll? Slice
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.SlicedScroll? Slice { get; set; }
+
+		[JsonPropertyName("fields")]
+		public IEnumerable<Union<Nest.Field, Nest.DateField>>? Fields { get; set; }
 
 		[JsonPropertyName("suggest")]
-		public Union<Nest.Global.Search.SuggestContainer, Dictionary<string, Nest.Global.Search.SuggestContainer>>? Suggest
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Union<Nest.Global.Search.SuggestContainer, Dictionary<string, Nest.Global.Search.SuggestContainer>>? Suggest { get; set; }
 
 		[JsonPropertyName("pit")]
-		public Nest.Global.Search.PointInTimeReference? Pit
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.Search.PointInTimeReference? Pit { get; set; }
 
 		[JsonPropertyName("runtime_mappings")]
-		public Nest.Mapping.RuntimeFields? RuntimeMappings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Mapping.RuntimeFields? RuntimeMappings { get; set; }
 	}
 
 	[ConvertAs(typeof(SearchShardsRequest))]
@@ -1917,6 +1739,11 @@ namespace Nest
 	[ConvertAs(typeof(SearchTemplateRequest))]
 	public partial interface ISearchTemplateRequest : IRequest<SearchTemplateRequestParameters>
 	{
+		Nest.Id? Id { get; set; }
+
+		Dictionary<string, object>? Params { get; set; }
+
+		string? Source { get; set; }
 	}
 
 	public partial class SearchTemplateRequest : PlainRequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
@@ -1977,32 +1804,32 @@ namespace Nest
 		[JsonIgnore]
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
+		[JsonPropertyName("id")]
+		public Nest.Id? Id { get; set; }
+
 		[JsonPropertyName("params")]
-		public Dictionary<string, object>? Params
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Params { get; set; }
 
 		[JsonPropertyName("source")]
-		public string? Source
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Source { get; set; }
 	}
 
 	[ConvertAs(typeof(TermsEnumRequest))]
 	public partial interface ITermsEnumRequest : IRequest<TermsEnumRequestParameters>
 	{
+		Nest.Field Field { get; set; }
+
+		int? Size { get; set; }
+
+		Nest.Time? Timeout { get; set; }
+
+		bool? CaseInsensitive { get; set; }
+
+		Nest.QueryDsl.QueryContainer? IndexFilter { get; set; }
+
+		string? String { get; set; }
+
+		string? SearchAfter { get; set; }
 	}
 
 	public partial class TermsEnumRequest : PlainRequestBase<TermsEnumRequestParameters>, ITermsEnumRequest
@@ -2019,76 +1846,36 @@ namespace Nest
 		{
 		}
 
+		[JsonPropertyName("field")]
+		public Nest.Field Field { get; set; }
+
 		[JsonPropertyName("size")]
-		public int? Size
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? Size { get; set; }
 
 		[JsonPropertyName("timeout")]
-		public Nest.Time? Timeout
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? Timeout { get; set; }
 
 		[JsonPropertyName("case_insensitive")]
-		public bool? CaseInsensitive
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? CaseInsensitive { get; set; }
 
 		[JsonPropertyName("index_filter")]
-		public Nest.QueryDsl.QueryContainer? IndexFilter
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? IndexFilter { get; set; }
 
 		[JsonPropertyName("string")]
-		public string? String
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? String { get; set; }
 
 		[JsonPropertyName("search_after")]
-		public string? SearchAfter
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? SearchAfter { get; set; }
 	}
 
 	[ConvertAs(typeof(TermvectorsRequest<>))]
 	public partial interface ITermvectorsRequest<TDocument> : IRequest<TermvectorsRequestParameters>
 	{
+		TDocument? Doc { get; set; }
+
+		Nest.Global.Termvectors.Filter? Filter { get; set; }
+
+		Dictionary<Nest.Field, string>? PerFieldAnalyzer { get; set; }
 	}
 
 	public partial class TermvectorsRequest<TDocument> : PlainRequestBase<TermvectorsRequestParameters>, ITermvectorsRequest<TDocument>
@@ -2144,42 +1931,29 @@ namespace Nest
 		public Nest.VersionType? VersionType { get => Q<Nest.VersionType?>("version_type"); set => Q("version_type", value); }
 
 		[JsonPropertyName("doc")]
-		public TDocument? Doc
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public TDocument? Doc { get; set; }
 
 		[JsonPropertyName("filter")]
-		public Nest.Global.Termvectors.Filter? Filter
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.Termvectors.Filter? Filter { get; set; }
 
 		[JsonPropertyName("per_field_analyzer")]
-		public Dictionary<Nest.Field, string>? PerFieldAnalyzer
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<Nest.Field, string>? PerFieldAnalyzer { get; set; }
 	}
 
 	[ConvertAs(typeof(UpdateRequest<,>))]
 	public partial interface IUpdateRequest<TDocument,TPartialDocument> : IRequest<UpdateRequestParameters>
 	{
+		bool? DetectNoop { get; set; }
+
+		TPartialDocument? Doc { get; set; }
+
+		bool? DocAsUpsert { get; set; }
+
+		Nest.Script? Script { get; set; }
+
+		bool? ScriptedUpsert { get; set; }
+
+		TDocument? Upsert { get; set; }
 	}
 
 	public partial class UpdateRequest<TDocument, TPartialDocument> : PlainRequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument, TPartialDocument>
@@ -2218,9 +1992,6 @@ namespace Nest
 		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
-
-		[JsonIgnore]
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
@@ -2236,64 +2007,34 @@ namespace Nest
 		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 		[JsonPropertyName("detect_noop")]
-		public bool? DetectNoop
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? DetectNoop { get; set; }
 
 		[JsonPropertyName("doc")]
-		public TPartialDocument? Doc
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public TPartialDocument? Doc { get; set; }
 
 		[JsonPropertyName("doc_as_upsert")]
-		public bool? DocAsUpsert
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? DocAsUpsert { get; set; }
+
+		[JsonPropertyName("script")]
+		public Nest.Script? Script { get; set; }
 
 		[JsonPropertyName("scripted_upsert")]
-		public bool? ScriptedUpsert
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? ScriptedUpsert { get; set; }
 
 		[JsonPropertyName("upsert")]
-		public TDocument? Upsert
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public TDocument? Upsert { get; set; }
 	}
 
 	[ConvertAs(typeof(UpdateByQueryRequest))]
 	public partial interface IUpdateByQueryRequest : IRequest<UpdateByQueryRequestParameters>
 	{
+		long? MaxDocs { get; set; }
+
+		Nest.QueryDsl.QueryContainer? Query { get; set; }
+
+		Nest.Script? Script { get; set; }
+
+		Nest.SlicedScroll? Slice { get; set; }
 	}
 
 	public partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
@@ -2383,13 +2124,13 @@ namespace Nest
 		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
 
 		[JsonIgnore]
-		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
-		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("source_excludes"); set => Q("source_excludes", value); }
+		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 		[JsonIgnore]
-		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("source_includes"); set => Q("source_includes", value); }
+		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 		[JsonIgnore]
 		public IEnumerable<string>? Stats { get => Q<IEnumerable<string>?>("stats"); set => Q("stats", value); }
@@ -2413,37 +2154,16 @@ namespace Nest
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
 		[JsonPropertyName("max_docs")]
-		public long? MaxDocs
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? MaxDocs { get; set; }
 
 		[JsonPropertyName("query")]
-		public Nest.QueryDsl.QueryContainer? Query
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Query { get; set; }
+
+		[JsonPropertyName("script")]
+		public Nest.Script? Script { get; set; }
 
 		[JsonPropertyName("slice")]
-		public Nest.SlicedScroll? Slice
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.SlicedScroll? Slice { get; set; }
 	}
 
 	[ConvertAs(typeof(UpdateByQueryRethrottleRequest))]

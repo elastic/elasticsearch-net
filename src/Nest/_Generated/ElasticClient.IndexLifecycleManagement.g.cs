@@ -29,184 +29,45 @@ namespace Nest.IndexLifecycleManagement
 		{
 		}
 
-		public DeleteLifecycleResponse DeleteLifecycle(IDeleteLifecycleRequest request)
-		{
-			return DoRequest<IDeleteLifecycleRequest, DeleteLifecycleResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteLifecycleResponse> DeleteLifecycleAsync(IDeleteLifecycleRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteLifecycleRequest, DeleteLifecycleResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ExplainLifecycleResponse ExplainLifecycle(IExplainLifecycleRequest request)
-		{
-			return DoRequest<IExplainLifecycleRequest, ExplainLifecycleResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ExplainLifecycleResponse> ExplainLifecycleAsync(IExplainLifecycleRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IExplainLifecycleRequest, ExplainLifecycleResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ExplainLifecycleResponse ExplainLifecycle(Nest.IndexName index, Func<ExplainLifecycleDescriptor, IExplainLifecycleRequest> selector = null)
-		{
-			return ExplainLifecycle(selector.InvokeOrDefault(new ExplainLifecycleDescriptor(index)));
-		}
-
-		public Task<ExplainLifecycleResponse> ExplainLifecycleAsync(Nest.IndexName index, Func<ExplainLifecycleDescriptor, IExplainLifecycleRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ExplainLifecycleAsync(selector.InvokeOrDefault(new ExplainLifecycleDescriptor(index)), cancellationToken);
-		}
-
-		public GetLifecycleResponse GetLifecycle(IGetLifecycleRequest request)
-		{
-			return DoRequest<IGetLifecycleRequest, GetLifecycleResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetLifecycleResponse> GetLifecycleAsync(IGetLifecycleRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetLifecycleRequest, GetLifecycleResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetLifecycleResponse GetLifecycle(Func<GetLifecycleDescriptor, IGetLifecycleRequest> selector = null)
-		{
-			return GetLifecycle(selector.InvokeOrDefault(new GetLifecycleDescriptor()));
-		}
-
-		public Task<GetLifecycleResponse> GetLifecycleAsync(Func<GetLifecycleDescriptor, IGetLifecycleRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetLifecycleAsync(selector.InvokeOrDefault(new GetLifecycleDescriptor()), cancellationToken);
-		}
-
-		public GetStatusResponse GetStatus(IGetStatusRequest request)
-		{
-			return DoRequest<IGetStatusRequest, GetStatusResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetStatusResponse> GetStatusAsync(IGetStatusRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetStatusRequest, GetStatusResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetStatusResponse GetStatus(Func<GetStatusDescriptor, IGetStatusRequest> selector = null)
-		{
-			return GetStatus(selector.InvokeOrDefault(new GetStatusDescriptor()));
-		}
-
-		public Task<GetStatusResponse> GetStatusAsync(Func<GetStatusDescriptor, IGetStatusRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetStatusAsync(selector.InvokeOrDefault(new GetStatusDescriptor()), cancellationToken);
-		}
-
-		public MoveToStepResponse MoveToStep(IMoveToStepRequest request)
-		{
-			return DoRequest<IMoveToStepRequest, MoveToStepResponse>(request, request.RequestParameters);
-		}
-
-		public Task<MoveToStepResponse> MoveToStepAsync(IMoveToStepRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IMoveToStepRequest, MoveToStepResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public MoveToStepResponse MoveToStep(Nest.IndexName index, Func<MoveToStepDescriptor, IMoveToStepRequest> selector = null)
-		{
-			return MoveToStep(selector.InvokeOrDefault(new MoveToStepDescriptor(index)));
-		}
-
-		public Task<MoveToStepResponse> MoveToStepAsync(Nest.IndexName index, Func<MoveToStepDescriptor, IMoveToStepRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return MoveToStepAsync(selector.InvokeOrDefault(new MoveToStepDescriptor(index)), cancellationToken);
-		}
-
-		public PutLifecycleResponse PutLifecycle(IPutLifecycleRequest request)
-		{
-			return DoRequest<IPutLifecycleRequest, PutLifecycleResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutLifecycleResponse> PutLifecycleAsync(IPutLifecycleRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutLifecycleRequest, PutLifecycleResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public RemovePolicyResponse RemovePolicy(IRemovePolicyRequest request)
-		{
-			return DoRequest<IRemovePolicyRequest, RemovePolicyResponse>(request, request.RequestParameters);
-		}
-
-		public Task<RemovePolicyResponse> RemovePolicyAsync(IRemovePolicyRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IRemovePolicyRequest, RemovePolicyResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public RemovePolicyResponse RemovePolicy(Nest.IndexName index, Func<RemovePolicyDescriptor, IRemovePolicyRequest> selector = null)
-		{
-			return RemovePolicy(selector.InvokeOrDefault(new RemovePolicyDescriptor(index)));
-		}
-
-		public Task<RemovePolicyResponse> RemovePolicyAsync(Nest.IndexName index, Func<RemovePolicyDescriptor, IRemovePolicyRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return RemovePolicyAsync(selector.InvokeOrDefault(new RemovePolicyDescriptor(index)), cancellationToken);
-		}
-
-		public RetryResponse Retry(IRetryRequest request)
-		{
-			return DoRequest<IRetryRequest, RetryResponse>(request, request.RequestParameters);
-		}
-
-		public Task<RetryResponse> RetryAsync(IRetryRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IRetryRequest, RetryResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public RetryResponse Retry(Nest.IndexName index, Func<RetryDescriptor, IRetryRequest> selector = null)
-		{
-			return Retry(selector.InvokeOrDefault(new RetryDescriptor(index)));
-		}
-
-		public Task<RetryResponse> RetryAsync(Nest.IndexName index, Func<RetryDescriptor, IRetryRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return RetryAsync(selector.InvokeOrDefault(new RetryDescriptor(index)), cancellationToken);
-		}
-
-		public StartResponse Start(IStartRequest request)
-		{
-			return DoRequest<IStartRequest, StartResponse>(request, request.RequestParameters);
-		}
-
-		public Task<StartResponse> StartAsync(IStartRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IStartRequest, StartResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public StartResponse Start(Func<StartDescriptor, IStartRequest> selector = null)
-		{
-			return Start(selector.InvokeOrDefault(new StartDescriptor()));
-		}
-
-		public Task<StartResponse> StartAsync(Func<StartDescriptor, IStartRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return StartAsync(selector.InvokeOrDefault(new StartDescriptor()), cancellationToken);
-		}
-
-		public StopResponse Stop(IStopRequest request)
-		{
-			return DoRequest<IStopRequest, StopResponse>(request, request.RequestParameters);
-		}
-
-		public Task<StopResponse> StopAsync(IStopRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IStopRequest, StopResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public StopResponse Stop(Func<StopDescriptor, IStopRequest> selector = null)
-		{
-			return Stop(selector.InvokeOrDefault(new StopDescriptor()));
-		}
-
-		public Task<StopResponse> StopAsync(Func<StopDescriptor, IStopRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return StopAsync(selector.InvokeOrDefault(new StopDescriptor()), cancellationToken);
-		}
+		public DeleteLifecycleResponse DeleteLifecycle(IDeleteLifecycleRequest request) => DoRequest<IDeleteLifecycleRequest, DeleteLifecycleResponse>(request, request.RequestParameters);
+		public Task<DeleteLifecycleResponse> DeleteLifecycleAsync(IDeleteLifecycleRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteLifecycleRequest, DeleteLifecycleResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteLifecycleResponse DeleteLifecycle(Nest.Name policy, Func<DeleteLifecycleDescriptor, IDeleteLifecycleRequest> selector = null) => DeleteLifecycle(selector.InvokeOrDefault(new DeleteLifecycleDescriptor(policy)));
+		public Task<DeleteLifecycleResponse> DeleteLifecycleAsync(Nest.Name policy, Func<DeleteLifecycleDescriptor, IDeleteLifecycleRequest> selector = null, CancellationToken cancellationToken = default) => DeleteLifecycleAsync(selector.InvokeOrDefault(new DeleteLifecycleDescriptor(policy)), cancellationToken);
+		public ExplainLifecycleResponse ExplainLifecycle(IExplainLifecycleRequest request) => DoRequest<IExplainLifecycleRequest, ExplainLifecycleResponse>(request, request.RequestParameters);
+		public Task<ExplainLifecycleResponse> ExplainLifecycleAsync(IExplainLifecycleRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IExplainLifecycleRequest, ExplainLifecycleResponse>(request, request.RequestParameters, cancellationToken);
+		public ExplainLifecycleResponse ExplainLifecycle(Nest.IndexName index, Func<ExplainLifecycleDescriptor, IExplainLifecycleRequest> selector = null) => ExplainLifecycle(selector.InvokeOrDefault(new ExplainLifecycleDescriptor(index)));
+		public Task<ExplainLifecycleResponse> ExplainLifecycleAsync(Nest.IndexName index, Func<ExplainLifecycleDescriptor, IExplainLifecycleRequest> selector = null, CancellationToken cancellationToken = default) => ExplainLifecycleAsync(selector.InvokeOrDefault(new ExplainLifecycleDescriptor(index)), cancellationToken);
+		public GetLifecycleResponse GetLifecycle(IGetLifecycleRequest request) => DoRequest<IGetLifecycleRequest, GetLifecycleResponse>(request, request.RequestParameters);
+		public Task<GetLifecycleResponse> GetLifecycleAsync(IGetLifecycleRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetLifecycleRequest, GetLifecycleResponse>(request, request.RequestParameters, cancellationToken);
+		public GetLifecycleResponse GetLifecycle(Func<GetLifecycleDescriptor, IGetLifecycleRequest> selector = null) => GetLifecycle(selector.InvokeOrDefault(new GetLifecycleDescriptor()));
+		public Task<GetLifecycleResponse> GetLifecycleAsync(Func<GetLifecycleDescriptor, IGetLifecycleRequest> selector = null, CancellationToken cancellationToken = default) => GetLifecycleAsync(selector.InvokeOrDefault(new GetLifecycleDescriptor()), cancellationToken);
+		public GetStatusResponse GetStatus(IGetStatusRequest request) => DoRequest<IGetStatusRequest, GetStatusResponse>(request, request.RequestParameters);
+		public Task<GetStatusResponse> GetStatusAsync(IGetStatusRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetStatusRequest, GetStatusResponse>(request, request.RequestParameters, cancellationToken);
+		public GetStatusResponse GetStatus(Func<GetStatusDescriptor, IGetStatusRequest> selector = null) => GetStatus(selector.InvokeOrDefault(new GetStatusDescriptor()));
+		public Task<GetStatusResponse> GetStatusAsync(Func<GetStatusDescriptor, IGetStatusRequest> selector = null, CancellationToken cancellationToken = default) => GetStatusAsync(selector.InvokeOrDefault(new GetStatusDescriptor()), cancellationToken);
+		public MoveToStepResponse MoveToStep(IMoveToStepRequest request) => DoRequest<IMoveToStepRequest, MoveToStepResponse>(request, request.RequestParameters);
+		public Task<MoveToStepResponse> MoveToStepAsync(IMoveToStepRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IMoveToStepRequest, MoveToStepResponse>(request, request.RequestParameters, cancellationToken);
+		public MoveToStepResponse MoveToStep(Nest.IndexName index, Func<MoveToStepDescriptor, IMoveToStepRequest> selector = null) => MoveToStep(selector.InvokeOrDefault(new MoveToStepDescriptor(index)));
+		public Task<MoveToStepResponse> MoveToStepAsync(Nest.IndexName index, Func<MoveToStepDescriptor, IMoveToStepRequest> selector = null, CancellationToken cancellationToken = default) => MoveToStepAsync(selector.InvokeOrDefault(new MoveToStepDescriptor(index)), cancellationToken);
+		public PutLifecycleResponse PutLifecycle(IPutLifecycleRequest request) => DoRequest<IPutLifecycleRequest, PutLifecycleResponse>(request, request.RequestParameters);
+		public Task<PutLifecycleResponse> PutLifecycleAsync(IPutLifecycleRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPutLifecycleRequest, PutLifecycleResponse>(request, request.RequestParameters, cancellationToken);
+		public PutLifecycleResponse PutLifecycle(Nest.Name policy, Func<PutLifecycleDescriptor, IPutLifecycleRequest> selector = null) => PutLifecycle(selector.InvokeOrDefault(new PutLifecycleDescriptor(policy)));
+		public Task<PutLifecycleResponse> PutLifecycleAsync(Nest.Name policy, Func<PutLifecycleDescriptor, IPutLifecycleRequest> selector = null, CancellationToken cancellationToken = default) => PutLifecycleAsync(selector.InvokeOrDefault(new PutLifecycleDescriptor(policy)), cancellationToken);
+		public RemovePolicyResponse RemovePolicy(IRemovePolicyRequest request) => DoRequest<IRemovePolicyRequest, RemovePolicyResponse>(request, request.RequestParameters);
+		public Task<RemovePolicyResponse> RemovePolicyAsync(IRemovePolicyRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IRemovePolicyRequest, RemovePolicyResponse>(request, request.RequestParameters, cancellationToken);
+		public RemovePolicyResponse RemovePolicy(Nest.IndexName index, Func<RemovePolicyDescriptor, IRemovePolicyRequest> selector = null) => RemovePolicy(selector.InvokeOrDefault(new RemovePolicyDescriptor(index)));
+		public Task<RemovePolicyResponse> RemovePolicyAsync(Nest.IndexName index, Func<RemovePolicyDescriptor, IRemovePolicyRequest> selector = null, CancellationToken cancellationToken = default) => RemovePolicyAsync(selector.InvokeOrDefault(new RemovePolicyDescriptor(index)), cancellationToken);
+		public RetryResponse Retry(IRetryRequest request) => DoRequest<IRetryRequest, RetryResponse>(request, request.RequestParameters);
+		public Task<RetryResponse> RetryAsync(IRetryRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IRetryRequest, RetryResponse>(request, request.RequestParameters, cancellationToken);
+		public RetryResponse Retry(Nest.IndexName index, Func<RetryDescriptor, IRetryRequest> selector = null) => Retry(selector.InvokeOrDefault(new RetryDescriptor(index)));
+		public Task<RetryResponse> RetryAsync(Nest.IndexName index, Func<RetryDescriptor, IRetryRequest> selector = null, CancellationToken cancellationToken = default) => RetryAsync(selector.InvokeOrDefault(new RetryDescriptor(index)), cancellationToken);
+		public StartResponse Start(IStartRequest request) => DoRequest<IStartRequest, StartResponse>(request, request.RequestParameters);
+		public Task<StartResponse> StartAsync(IStartRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IStartRequest, StartResponse>(request, request.RequestParameters, cancellationToken);
+		public StartResponse Start(Func<StartDescriptor, IStartRequest> selector = null) => Start(selector.InvokeOrDefault(new StartDescriptor()));
+		public Task<StartResponse> StartAsync(Func<StartDescriptor, IStartRequest> selector = null, CancellationToken cancellationToken = default) => StartAsync(selector.InvokeOrDefault(new StartDescriptor()), cancellationToken);
+		public StopResponse Stop(IStopRequest request) => DoRequest<IStopRequest, StopResponse>(request, request.RequestParameters);
+		public Task<StopResponse> StopAsync(IStopRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IStopRequest, StopResponse>(request, request.RequestParameters, cancellationToken);
+		public StopResponse Stop(Func<StopDescriptor, IStopRequest> selector = null) => Stop(selector.InvokeOrDefault(new StopDescriptor()));
+		public Task<StopResponse> StopAsync(Func<StopDescriptor, IStopRequest> selector = null, CancellationToken cancellationToken = default) => StopAsync(selector.InvokeOrDefault(new StopDescriptor()), cancellationToken);
 	}
 }

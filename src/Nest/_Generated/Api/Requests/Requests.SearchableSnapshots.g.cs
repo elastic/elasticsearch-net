@@ -59,6 +59,13 @@ namespace Nest.SearchableSnapshots
 	[ConvertAs(typeof(MountRequest))]
 	public partial interface IMountRequest : IRequest<MountRequestParameters>
 	{
+		Nest.IndexName Index { get; set; }
+
+		Nest.IndexName? RenamedIndex { get; set; }
+
+		Dictionary<string, object>? IndexSettings { get; set; }
+
+		IEnumerable<string>? IgnoreIndexSettings { get; set; }
 	}
 
 	public partial class MountRequest : PlainRequestBase<MountRequestParameters>, IMountRequest
@@ -85,47 +92,43 @@ namespace Nest.SearchableSnapshots
 		public string? Storage { get => Q<string?>("storage"); set => Q("storage", value); }
 
 		[JsonPropertyName("index")]
-		public Nest.IndexName Index
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexName Index { get; set; }
 
 		[JsonPropertyName("renamed_index")]
-		public Nest.IndexName? RenamedIndex
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexName? RenamedIndex { get; set; }
 
 		[JsonPropertyName("index_settings")]
-		public Dictionary<string, object>? IndexSettings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? IndexSettings { get; set; }
 
 		[JsonPropertyName("ignore_index_settings")]
-		public IReadOnlyCollection<string>? IgnoreIndexSettings
+		public IEnumerable<string>? IgnoreIndexSettings { get; set; }
+	}
+
+	[ConvertAs(typeof(StatsRequest))]
+	public partial interface IStatsRequest : IRequest<StatsRequestParameters>
+	{
+	}
+
+	public partial class StatsRequest : PlainRequestBase<StatsRequestParameters>, IStatsRequest
+	{
+		protected IStatsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.SearchableSnapshotsStats;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
+
+		///<summary>/_searchable_snapshots/stats</summary>
+        public StatsRequest() : base()
 		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
 		}
+
+		///<summary>/{index}/_searchable_snapshots/stats</summary>
+        public StatsRequest(Nest.Indices? index) : base(r => r.Optional("index", index))
+		{
+		}
+
+		[JsonIgnore]
+		public Nest.SearchableSnapshots.StatsLevel? Level { get => Q<Nest.SearchableSnapshots.StatsLevel?>("level"); set => Q("level", value); }
 	}
 }

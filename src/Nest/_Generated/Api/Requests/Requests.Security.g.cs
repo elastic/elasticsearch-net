@@ -45,6 +45,7 @@ namespace Nest.Ssl
 	[ConvertAs(typeof(ChangePasswordRequest))]
 	public partial interface IChangePasswordRequest : IRequest<ChangePasswordRequestParameters>
 	{
+		Nest.Password? Password { get; set; }
 	}
 
 	public partial class ChangePasswordRequest : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
@@ -68,6 +69,9 @@ namespace Nest.Ssl
 
 		[JsonIgnore]
 		public Nest.Refresh? Refresh { get => Q<Nest.Refresh?>("refresh"); set => Q("refresh", value); }
+
+		[JsonPropertyName("password")]
+		public Nest.Password? Password { get; set; }
 	}
 
 	[ConvertAs(typeof(ClearApiKeyCacheRequest))]
@@ -81,11 +85,11 @@ namespace Nest.Ssl
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.SecurityClearApiKeyCache;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
-		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => true;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
 
 		///<summary>/_security/api_key/{ids}/_clear_cache</summary>
-        public ClearApiKeyCacheRequest(Nest.Ids? ids) : base(r => r.Optional("ids", ids))
+        public ClearApiKeyCacheRequest(Nest.Ids ids) : base(r => r.Required("ids", ids))
 		{
 		}
 	}
@@ -176,6 +180,13 @@ namespace Nest.Ssl
 	[ConvertAs(typeof(CreateApiKeyRequest))]
 	public partial interface ICreateApiKeyRequest : IRequest<CreateApiKeyRequestParameters>
 	{
+		Nest.Time? Expiration { get; set; }
+
+		Nest.Name? Name { get; set; }
+
+		Dictionary<string, Nest.Security.CreateApiKey.RoleDescriptor>? RoleDescriptors { get; set; }
+
+		Nest.Metadata? Metadata { get; set; }
 	}
 
 	public partial class CreateApiKeyRequest : PlainRequestBase<CreateApiKeyRequestParameters>, ICreateApiKeyRequest
@@ -196,26 +207,16 @@ namespace Nest.Ssl
 		public Nest.Refresh? Refresh { get => Q<Nest.Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonPropertyName("expiration")]
-		public Nest.Time? Expiration
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? Expiration { get; set; }
+
+		[JsonPropertyName("name")]
+		public Nest.Name? Name { get; set; }
 
 		[JsonPropertyName("role_descriptors")]
-		public Dictionary<string, Nest.Security.CreateApiKey.RoleDescriptor>? RoleDescriptors
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, Nest.Security.CreateApiKey.RoleDescriptor>? RoleDescriptors { get; set; }
+
+		[JsonPropertyName("metadata")]
+		public Nest.Metadata? Metadata { get; set; }
 	}
 
 	[ConvertAs(typeof(CreateServiceTokenRequest))]
@@ -584,7 +585,7 @@ namespace Nest.Ssl
 		protected override bool IsEmpty => false;
 
 		///<summary>/_security/service/{namespace}/{service}/credential</summary>
-        public GetServiceCredentialsRequest(Nest.Namespace ns, Nest.Service service) : base(r => r.Required("ns", ns).Required("service", service))
+        public GetServiceCredentialsRequest(Nest.Namespace ns, Nest.Name service) : base(r => r.Required("ns", ns).Required("service", service))
 		{
 		}
 	}
@@ -592,6 +593,17 @@ namespace Nest.Ssl
 	[ConvertAs(typeof(GetTokenRequest))]
 	public partial interface IGetTokenRequest : IRequest<GetTokenRequestParameters>
 	{
+		Nest.Security.GetToken.AccessTokenGrantType? GrantType { get; set; }
+
+		string? Scope { get; set; }
+
+		Nest.Password? Password { get; set; }
+
+		string? KerberosTicket { get; set; }
+
+		string? RefreshToken { get; set; }
+
+		Nest.Username? Username { get; set; }
 	}
 
 	public partial class GetTokenRequest : PlainRequestBase<GetTokenRequestParameters>, IGetTokenRequest
@@ -609,48 +621,22 @@ namespace Nest.Ssl
 		}
 
 		[JsonPropertyName("grant_type")]
-		public Nest.Security.GetToken.AccessTokenGrantType? GrantType
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Security.GetToken.AccessTokenGrantType? GrantType { get; set; }
 
 		[JsonPropertyName("scope")]
-		public string? Scope
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Scope { get; set; }
+
+		[JsonPropertyName("password")]
+		public Nest.Password? Password { get; set; }
 
 		[JsonPropertyName("kerberos_ticket")]
-		public string? KerberosTicket
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? KerberosTicket { get; set; }
 
 		[JsonPropertyName("refresh_token")]
-		public string? RefreshToken
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? RefreshToken { get; set; }
+
+		[JsonPropertyName("username")]
+		public Nest.Username? Username { get; set; }
 	}
 
 	[ConvertAs(typeof(GetUserRequest))]
@@ -702,6 +688,15 @@ namespace Nest.Ssl
 	[ConvertAs(typeof(GrantApiKeyRequest))]
 	public partial interface IGrantApiKeyRequest : IRequest<GrantApiKeyRequestParameters>
 	{
+		Nest.Security.GrantApiKey.ApiKey ApiKey { get; set; }
+
+		Nest.Security.GrantApiKey.ApiKeyGrantType GrantType { get; set; }
+
+		string? AccessToken { get; set; }
+
+		Nest.Username? Username { get; set; }
+
+		Nest.Password? Password { get; set; }
 	}
 
 	public partial class GrantApiKeyRequest : PlainRequestBase<GrantApiKeyRequestParameters>, IGrantApiKeyRequest
@@ -719,42 +714,29 @@ namespace Nest.Ssl
 		}
 
 		[JsonPropertyName("api_key")]
-		public Nest.Security.GrantApiKey.ApiKey ApiKey
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Security.GrantApiKey.ApiKey ApiKey { get; set; }
 
 		[JsonPropertyName("grant_type")]
-		public Nest.Security.GrantApiKey.ApiKeyGrantType GrantType
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Security.GrantApiKey.ApiKeyGrantType GrantType { get; set; }
 
 		[JsonPropertyName("access_token")]
-		public string? AccessToken
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? AccessToken { get; set; }
+
+		[JsonPropertyName("username")]
+		public Nest.Username? Username { get; set; }
+
+		[JsonPropertyName("password")]
+		public Nest.Password? Password { get; set; }
 	}
 
 	[ConvertAs(typeof(HasPrivilegesRequest))]
 	public partial interface IHasPrivilegesRequest : IRequest<HasPrivilegesRequestParameters>
 	{
+		IEnumerable<Nest.Security.HasPrivileges.ApplicationPrivilegesCheck>? Application { get; set; }
+
+		IEnumerable<string>? Cluster { get; set; }
+
+		IEnumerable<Nest.Security.HasPrivileges.IndexPrivilegesCheck>? Index { get; set; }
 	}
 
 	public partial class HasPrivilegesRequest : PlainRequestBase<HasPrivilegesRequestParameters>, IHasPrivilegesRequest
@@ -777,42 +759,29 @@ namespace Nest.Ssl
 		}
 
 		[JsonPropertyName("application")]
-		public IReadOnlyCollection<Nest.Security.HasPrivileges.ApplicationPrivilegesCheck>? Application
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Security.HasPrivileges.ApplicationPrivilegesCheck>? Application { get; set; }
 
 		[JsonPropertyName("cluster")]
-		public IReadOnlyCollection<string>? Cluster
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? Cluster { get; set; }
 
 		[JsonPropertyName("index")]
-		public IReadOnlyCollection<Nest.Security.HasPrivileges.IndexPrivilegesCheck>? Index
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Security.HasPrivileges.IndexPrivilegesCheck>? Index { get; set; }
 	}
 
 	[ConvertAs(typeof(InvalidateApiKeyRequest))]
 	public partial interface IInvalidateApiKeyRequest : IRequest<InvalidateApiKeyRequestParameters>
 	{
+		Nest.Id? Id { get; set; }
+
+		IEnumerable<Nest.Id>? Ids { get; set; }
+
+		Nest.Name? Name { get; set; }
+
+		bool? Owner { get; set; }
+
+		string? RealmName { get; set; }
+
+		Nest.Username? Username { get; set; }
 	}
 
 	public partial class InvalidateApiKeyRequest : PlainRequestBase<InvalidateApiKeyRequestParameters>, IInvalidateApiKeyRequest
@@ -829,32 +798,35 @@ namespace Nest.Ssl
 		{
 		}
 
+		[JsonPropertyName("id")]
+		public Nest.Id? Id { get; set; }
+
+		[JsonPropertyName("ids")]
+		public IEnumerable<Nest.Id>? Ids { get; set; }
+
+		[JsonPropertyName("name")]
+		public Nest.Name? Name { get; set; }
+
 		[JsonPropertyName("owner")]
-		public bool? Owner
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Owner { get; set; }
 
 		[JsonPropertyName("realm_name")]
-		public string? RealmName
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? RealmName { get; set; }
+
+		[JsonPropertyName("username")]
+		public Nest.Username? Username { get; set; }
 	}
 
 	[ConvertAs(typeof(InvalidateTokenRequest))]
 	public partial interface IInvalidateTokenRequest : IRequest<InvalidateTokenRequestParameters>
 	{
+		string? Token { get; set; }
+
+		string? RefreshToken { get; set; }
+
+		Nest.Name? RealmName { get; set; }
+
+		Nest.Username? Username { get; set; }
 	}
 
 	public partial class InvalidateTokenRequest : PlainRequestBase<InvalidateTokenRequestParameters>, IInvalidateTokenRequest
@@ -872,37 +844,16 @@ namespace Nest.Ssl
 		}
 
 		[JsonPropertyName("token")]
-		public string? Token
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Token { get; set; }
 
 		[JsonPropertyName("refresh_token")]
-		public string? RefreshToken
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? RefreshToken { get; set; }
 
 		[JsonPropertyName("realm_name")]
-		public Nest.Name? RealmName
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Name? RealmName { get; set; }
+
+		[JsonPropertyName("username")]
+		public Nest.Username? Username { get; set; }
 	}
 
 	[ConvertAs(typeof(PutPrivilegesRequest))]
@@ -931,6 +882,19 @@ namespace Nest.Ssl
 	[ConvertAs(typeof(PutRoleRequest))]
 	public partial interface IPutRoleRequest : IRequest<PutRoleRequestParameters>
 	{
+		IEnumerable<Nest.Security.ApplicationPrivileges>? Applications { get; set; }
+
+		IEnumerable<string>? Cluster { get; set; }
+
+		Dictionary<string, object>? Global { get; set; }
+
+		IEnumerable<Nest.Security.IndicesPrivileges>? Indices { get; set; }
+
+		Nest.Metadata? Metadata { get; set; }
+
+		IEnumerable<string>? RunAs { get; set; }
+
+		Nest.Security.GetRole.TransientMetadata? TransientMetadata { get; set; }
 	}
 
 	public partial class PutRoleRequest : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
@@ -951,64 +915,39 @@ namespace Nest.Ssl
 		public Nest.Refresh? Refresh { get => Q<Nest.Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonPropertyName("applications")]
-		public IReadOnlyCollection<Nest.Security.ApplicationPrivileges>? Applications
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Security.ApplicationPrivileges>? Applications { get; set; }
 
 		[JsonPropertyName("cluster")]
-		public IReadOnlyCollection<string>? Cluster
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? Cluster { get; set; }
 
 		[JsonPropertyName("global")]
-		public Dictionary<string, object>? Global
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Global { get; set; }
+
+		[JsonPropertyName("indices")]
+		public IEnumerable<Nest.Security.IndicesPrivileges>? Indices { get; set; }
+
+		[JsonPropertyName("metadata")]
+		public Nest.Metadata? Metadata { get; set; }
 
 		[JsonPropertyName("run_as")]
-		public IReadOnlyCollection<string>? RunAs
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? RunAs { get; set; }
 
 		[JsonPropertyName("transient_metadata")]
-		public Nest.Security.GetRole.TransientMetadata? TransientMetadata
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Security.GetRole.TransientMetadata? TransientMetadata { get; set; }
 	}
 
 	[ConvertAs(typeof(PutRoleMappingRequest))]
 	public partial interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequestParameters>
 	{
+		bool? Enabled { get; set; }
+
+		Nest.Metadata? Metadata { get; set; }
+
+		IEnumerable<string>? Roles { get; set; }
+
+		Nest.Security.RoleMappingRuleBase? Rules { get; set; }
+
+		IEnumerable<string>? RunAs { get; set; }
 	}
 
 	public partial class PutRoleMappingRequest : PlainRequestBase<PutRoleMappingRequestParameters>, IPutRoleMappingRequest
@@ -1029,53 +968,33 @@ namespace Nest.Ssl
 		public Nest.Refresh? Refresh { get => Q<Nest.Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonPropertyName("enabled")]
-		public bool? Enabled
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Enabled { get; set; }
+
+		[JsonPropertyName("metadata")]
+		public Nest.Metadata? Metadata { get; set; }
 
 		[JsonPropertyName("roles")]
-		public IReadOnlyCollection<string>? Roles
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? Roles { get; set; }
 
 		[JsonPropertyName("rules")]
-		public Nest.Security.RoleMappingRuleBase? Rules
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Security.RoleMappingRuleBase? Rules { get; set; }
 
 		[JsonPropertyName("run_as")]
-		public IReadOnlyCollection<string>? RunAs
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? RunAs { get; set; }
 	}
 
 	[ConvertAs(typeof(PutUserRequest))]
 	public partial interface IPutUserRequest : IRequest<PutUserRequestParameters>
 	{
+		Nest.Metadata? Metadata { get; set; }
+
+		Nest.Password? Password { get; set; }
+
+		string? PasswordHash { get; set; }
+
+		IEnumerable<string>? Roles { get; set; }
+
+		bool? Enabled { get; set; }
 	}
 
 	public partial class PutUserRequest : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
@@ -1095,38 +1014,20 @@ namespace Nest.Ssl
 		[JsonIgnore]
 		public Nest.Refresh? Refresh { get => Q<Nest.Refresh?>("refresh"); set => Q("refresh", value); }
 
+		[JsonPropertyName("metadata")]
+		public Nest.Metadata? Metadata { get; set; }
+
+		[JsonPropertyName("password")]
+		public Nest.Password? Password { get; set; }
+
 		[JsonPropertyName("password_hash")]
-		public string? PasswordHash
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? PasswordHash { get; set; }
 
 		[JsonPropertyName("roles")]
-		public IReadOnlyCollection<string>? Roles
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? Roles { get; set; }
 
 		[JsonPropertyName("enabled")]
-		public bool? Enabled
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Enabled { get; set; }
 	}
 
 	[ConvertAs(typeof(CertificatesRequest))]

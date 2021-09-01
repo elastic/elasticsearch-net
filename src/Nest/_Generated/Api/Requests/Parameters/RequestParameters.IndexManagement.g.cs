@@ -711,6 +711,6 @@ namespace Nest.IndexManagement
 		public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
 
 		[JsonIgnore]
-		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+		public string? LuceneQueryString { get => Q<string?>("q"); set => Q("q", value); }
 	}
 }

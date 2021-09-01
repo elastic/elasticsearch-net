@@ -25,6 +25,7 @@ namespace Nest.Sql
 	[ConvertAs(typeof(ClearCursorRequest))]
 	public partial interface IClearCursorRequest : IRequest<ClearCursorRequestParameters>
 	{
+		string Cursor { get; set; }
 	}
 
 	public partial class ClearCursorRequest : PlainRequestBase<ClearCursorRequestParameters>, IClearCursorRequest
@@ -42,20 +43,29 @@ namespace Nest.Sql
 		}
 
 		[JsonPropertyName("cursor")]
-		public string Cursor
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string Cursor { get; set; }
 	}
 
 	[ConvertAs(typeof(QueryRequest))]
 	public partial interface IQueryRequest : IRequest<QueryRequestParameters>
 	{
+		bool? Columnar { get; set; }
+
+		string? Cursor { get; set; }
+
+		int? FetchSize { get; set; }
+
+		Nest.QueryDsl.QueryContainer? Filter { get; set; }
+
+		string? Query { get; set; }
+
+		Nest.Time? RequestTimeout { get; set; }
+
+		Nest.Time? PageTimeout { get; set; }
+
+		string? TimeZone { get; set; }
+
+		bool? FieldMultiValueLeniency { get; set; }
 	}
 
 	public partial class QueryRequest : PlainRequestBase<QueryRequestParameters>, IQueryRequest
@@ -76,97 +86,43 @@ namespace Nest.Sql
 		public string? Format { get => Q<string?>("format"); set => Q("format", value); }
 
 		[JsonPropertyName("columnar")]
-		public bool? Columnar
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Columnar { get; set; }
 
 		[JsonPropertyName("cursor")]
-		public string? Cursor
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Cursor { get; set; }
 
 		[JsonPropertyName("fetch_size")]
-		public int? FetchSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? FetchSize { get; set; }
 
 		[JsonPropertyName("filter")]
-		public Nest.QueryDsl.QueryContainer? Filter
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Filter { get; set; }
 
 		[JsonPropertyName("query")]
-		public string? Query
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Query { get; set; }
 
 		[JsonPropertyName("request_timeout")]
-		public Nest.Time? RequestTimeout
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? RequestTimeout { get; set; }
 
 		[JsonPropertyName("page_timeout")]
-		public Nest.Time? PageTimeout
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? PageTimeout { get; set; }
+
+		[JsonPropertyName("time_zone")]
+		public string? TimeZone { get; set; }
 
 		[JsonPropertyName("field_multi_value_leniency")]
-		public bool? FieldMultiValueLeniency
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? FieldMultiValueLeniency { get; set; }
 	}
 
 	[ConvertAs(typeof(TranslateRequest))]
 	public partial interface ITranslateRequest : IRequest<TranslateRequestParameters>
 	{
+		int? FetchSize { get; set; }
+
+		Nest.QueryDsl.QueryContainer? Filter { get; set; }
+
+		string Query { get; set; }
+
+		string? TimeZone { get; set; }
 	}
 
 	public partial class TranslateRequest : PlainRequestBase<TranslateRequestParameters>, ITranslateRequest
@@ -184,36 +140,15 @@ namespace Nest.Sql
 		}
 
 		[JsonPropertyName("fetch_size")]
-		public int? FetchSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? FetchSize { get; set; }
 
 		[JsonPropertyName("filter")]
-		public Nest.QueryDsl.QueryContainer? Filter
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Filter { get; set; }
 
 		[JsonPropertyName("query")]
-		public string Query
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string Query { get; set; }
+
+		[JsonPropertyName("time_zone")]
+		public string? TimeZone { get; set; }
 	}
 }

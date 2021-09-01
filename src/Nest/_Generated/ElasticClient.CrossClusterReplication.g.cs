@@ -29,264 +29,57 @@ namespace Nest.CrossClusterReplication
 		{
 		}
 
-		public DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(IDeleteAutoFollowPatternRequest request)
-		{
-			return DoRequest<IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(IDeleteAutoFollowPatternRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Nest.Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null)
-		{
-			return DeleteAutoFollowPattern(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name)));
-		}
-
-		public Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Nest.Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteAutoFollowPatternAsync(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name)), cancellationToken);
-		}
-
-		public FollowResponse Follow(IFollowRequest request)
-		{
-			return DoRequest<IFollowRequest, FollowResponse>(request, request.RequestParameters);
-		}
-
-		public Task<FollowResponse> FollowAsync(IFollowRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IFollowRequest, FollowResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public FollowResponse Follow(Nest.IndexName index, Func<FollowDescriptor, IFollowRequest> selector = null)
-		{
-			return Follow(selector.InvokeOrDefault(new FollowDescriptor(index)));
-		}
-
-		public Task<FollowResponse> FollowAsync(Nest.IndexName index, Func<FollowDescriptor, IFollowRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return FollowAsync(selector.InvokeOrDefault(new FollowDescriptor(index)), cancellationToken);
-		}
-
-		public FollowInfoResponse FollowInfo(IFollowInfoRequest request)
-		{
-			return DoRequest<IFollowInfoRequest, FollowInfoResponse>(request, request.RequestParameters);
-		}
-
-		public Task<FollowInfoResponse> FollowInfoAsync(IFollowInfoRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IFollowInfoRequest, FollowInfoResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public FollowInfoResponse FollowInfo(Nest.Indices index, Func<FollowInfoDescriptor, IFollowInfoRequest> selector = null)
-		{
-			return FollowInfo(selector.InvokeOrDefault(new FollowInfoDescriptor(index)));
-		}
-
-		public Task<FollowInfoResponse> FollowInfoAsync(Nest.Indices index, Func<FollowInfoDescriptor, IFollowInfoRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return FollowInfoAsync(selector.InvokeOrDefault(new FollowInfoDescriptor(index)), cancellationToken);
-		}
-
-		public FollowStatsResponse FollowStats(IFollowStatsRequest request)
-		{
-			return DoRequest<IFollowStatsRequest, FollowStatsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<FollowStatsResponse> FollowStatsAsync(IFollowStatsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IFollowStatsRequest, FollowStatsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public FollowStatsResponse FollowStats(Nest.Indices index, Func<FollowStatsDescriptor, IFollowStatsRequest> selector = null)
-		{
-			return FollowStats(selector.InvokeOrDefault(new FollowStatsDescriptor(index)));
-		}
-
-		public Task<FollowStatsResponse> FollowStatsAsync(Nest.Indices index, Func<FollowStatsDescriptor, IFollowStatsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return FollowStatsAsync(selector.InvokeOrDefault(new FollowStatsDescriptor(index)), cancellationToken);
-		}
-
-		public ForgetFollowerResponse ForgetFollower(IForgetFollowerRequest request)
-		{
-			return DoRequest<IForgetFollowerRequest, ForgetFollowerResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ForgetFollowerResponse> ForgetFollowerAsync(IForgetFollowerRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IForgetFollowerRequest, ForgetFollowerResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ForgetFollowerResponse ForgetFollower(Nest.IndexName index, Func<ForgetFollowerDescriptor, IForgetFollowerRequest> selector = null)
-		{
-			return ForgetFollower(selector.InvokeOrDefault(new ForgetFollowerDescriptor(index)));
-		}
-
-		public Task<ForgetFollowerResponse> ForgetFollowerAsync(Nest.IndexName index, Func<ForgetFollowerDescriptor, IForgetFollowerRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ForgetFollowerAsync(selector.InvokeOrDefault(new ForgetFollowerDescriptor(index)), cancellationToken);
-		}
-
-		public GetAutoFollowPatternResponse GetAutoFollowPattern(IGetAutoFollowPatternRequest request)
-		{
-			return DoRequest<IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(IGetAutoFollowPatternRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetAutoFollowPatternResponse GetAutoFollowPattern(Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null)
-		{
-			return GetAutoFollowPattern(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor()));
-		}
-
-		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetAutoFollowPatternAsync(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor()), cancellationToken);
-		}
-
-		public PauseAutoFollowPatternResponse PauseAutoFollowPattern(IPauseAutoFollowPatternRequest request)
-		{
-			return DoRequest<IPauseAutoFollowPatternRequest, PauseAutoFollowPatternResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(IPauseAutoFollowPatternRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPauseAutoFollowPatternRequest, PauseAutoFollowPatternResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PauseAutoFollowPatternResponse PauseAutoFollowPattern(Nest.Name name, Func<PauseAutoFollowPatternDescriptor, IPauseAutoFollowPatternRequest> selector = null)
-		{
-			return PauseAutoFollowPattern(selector.InvokeOrDefault(new PauseAutoFollowPatternDescriptor(name)));
-		}
-
-		public Task<PauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(Nest.Name name, Func<PauseAutoFollowPatternDescriptor, IPauseAutoFollowPatternRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PauseAutoFollowPatternAsync(selector.InvokeOrDefault(new PauseAutoFollowPatternDescriptor(name)), cancellationToken);
-		}
-
-		public PauseFollowResponse PauseFollow(IPauseFollowRequest request)
-		{
-			return DoRequest<IPauseFollowRequest, PauseFollowResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PauseFollowResponse> PauseFollowAsync(IPauseFollowRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPauseFollowRequest, PauseFollowResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PauseFollowResponse PauseFollow(Nest.IndexName index, Func<PauseFollowDescriptor, IPauseFollowRequest> selector = null)
-		{
-			return PauseFollow(selector.InvokeOrDefault(new PauseFollowDescriptor(index)));
-		}
-
-		public Task<PauseFollowResponse> PauseFollowAsync(Nest.IndexName index, Func<PauseFollowDescriptor, IPauseFollowRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PauseFollowAsync(selector.InvokeOrDefault(new PauseFollowDescriptor(index)), cancellationToken);
-		}
-
-		public PutAutoFollowPatternResponse PutAutoFollowPattern(IPutAutoFollowPatternRequest request)
-		{
-			return DoRequest<IPutAutoFollowPatternRequest, PutAutoFollowPatternResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutAutoFollowPatternResponse> PutAutoFollowPatternAsync(IPutAutoFollowPatternRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutAutoFollowPatternRequest, PutAutoFollowPatternResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PutAutoFollowPatternResponse PutAutoFollowPattern(Nest.Name name, Func<PutAutoFollowPatternDescriptor, IPutAutoFollowPatternRequest> selector = null)
-		{
-			return PutAutoFollowPattern(selector.InvokeOrDefault(new PutAutoFollowPatternDescriptor(name)));
-		}
-
-		public Task<PutAutoFollowPatternResponse> PutAutoFollowPatternAsync(Nest.Name name, Func<PutAutoFollowPatternDescriptor, IPutAutoFollowPatternRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PutAutoFollowPatternAsync(selector.InvokeOrDefault(new PutAutoFollowPatternDescriptor(name)), cancellationToken);
-		}
-
-		public ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(IResumeAutoFollowPatternRequest request)
-		{
-			return DoRequest<IResumeAutoFollowPatternRequest, ResumeAutoFollowPatternResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(IResumeAutoFollowPatternRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IResumeAutoFollowPatternRequest, ResumeAutoFollowPatternResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(Nest.Name name, Func<ResumeAutoFollowPatternDescriptor, IResumeAutoFollowPatternRequest> selector = null)
-		{
-			return ResumeAutoFollowPattern(selector.InvokeOrDefault(new ResumeAutoFollowPatternDescriptor(name)));
-		}
-
-		public Task<ResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(Nest.Name name, Func<ResumeAutoFollowPatternDescriptor, IResumeAutoFollowPatternRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ResumeAutoFollowPatternAsync(selector.InvokeOrDefault(new ResumeAutoFollowPatternDescriptor(name)), cancellationToken);
-		}
-
-		public ResumeFollowResponse ResumeFollow(IResumeFollowRequest request)
-		{
-			return DoRequest<IResumeFollowRequest, ResumeFollowResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ResumeFollowResponse> ResumeFollowAsync(IResumeFollowRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IResumeFollowRequest, ResumeFollowResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ResumeFollowResponse ResumeFollow(Nest.IndexName index, Func<ResumeFollowDescriptor, IResumeFollowRequest> selector = null)
-		{
-			return ResumeFollow(selector.InvokeOrDefault(new ResumeFollowDescriptor(index)));
-		}
-
-		public Task<ResumeFollowResponse> ResumeFollowAsync(Nest.IndexName index, Func<ResumeFollowDescriptor, IResumeFollowRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ResumeFollowAsync(selector.InvokeOrDefault(new ResumeFollowDescriptor(index)), cancellationToken);
-		}
-
-		public StatsResponse Stats(IStatsRequest request)
-		{
-			return DoRequest<IStatsRequest, StatsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<StatsResponse> StatsAsync(IStatsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IStatsRequest, StatsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public StatsResponse Stats(Func<StatsDescriptor, IStatsRequest> selector = null)
-		{
-			return Stats(selector.InvokeOrDefault(new StatsDescriptor()));
-		}
-
-		public Task<StatsResponse> StatsAsync(Func<StatsDescriptor, IStatsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return StatsAsync(selector.InvokeOrDefault(new StatsDescriptor()), cancellationToken);
-		}
-
-		public UnfollowResponse Unfollow(IUnfollowRequest request)
-		{
-			return DoRequest<IUnfollowRequest, UnfollowResponse>(request, request.RequestParameters);
-		}
-
-		public Task<UnfollowResponse> UnfollowAsync(IUnfollowRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IUnfollowRequest, UnfollowResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public UnfollowResponse Unfollow(Nest.IndexName index, Func<UnfollowDescriptor, IUnfollowRequest> selector = null)
-		{
-			return Unfollow(selector.InvokeOrDefault(new UnfollowDescriptor(index)));
-		}
-
-		public Task<UnfollowResponse> UnfollowAsync(Nest.IndexName index, Func<UnfollowDescriptor, IUnfollowRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return UnfollowAsync(selector.InvokeOrDefault(new UnfollowDescriptor(index)), cancellationToken);
-		}
+		public DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(IDeleteAutoFollowPatternRequest request) => DoRequest<IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternResponse>(request, request.RequestParameters);
+		public Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(IDeleteAutoFollowPatternRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteAutoFollowPatternRequest, DeleteAutoFollowPatternResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Nest.Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null) => DeleteAutoFollowPattern(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name)));
+		public Task<DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Nest.Name name, Func<DeleteAutoFollowPatternDescriptor, IDeleteAutoFollowPatternRequest> selector = null, CancellationToken cancellationToken = default) => DeleteAutoFollowPatternAsync(selector.InvokeOrDefault(new DeleteAutoFollowPatternDescriptor(name)), cancellationToken);
+		public FollowResponse Follow(IFollowRequest request) => DoRequest<IFollowRequest, FollowResponse>(request, request.RequestParameters);
+		public Task<FollowResponse> FollowAsync(IFollowRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IFollowRequest, FollowResponse>(request, request.RequestParameters, cancellationToken);
+		public FollowResponse Follow(Nest.IndexName index, Func<FollowDescriptor, IFollowRequest> selector = null) => Follow(selector.InvokeOrDefault(new FollowDescriptor(index)));
+		public Task<FollowResponse> FollowAsync(Nest.IndexName index, Func<FollowDescriptor, IFollowRequest> selector = null, CancellationToken cancellationToken = default) => FollowAsync(selector.InvokeOrDefault(new FollowDescriptor(index)), cancellationToken);
+		public FollowInfoResponse FollowInfo(IFollowInfoRequest request) => DoRequest<IFollowInfoRequest, FollowInfoResponse>(request, request.RequestParameters);
+		public Task<FollowInfoResponse> FollowInfoAsync(IFollowInfoRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IFollowInfoRequest, FollowInfoResponse>(request, request.RequestParameters, cancellationToken);
+		public FollowInfoResponse FollowInfo(Nest.Indices index, Func<FollowInfoDescriptor, IFollowInfoRequest> selector = null) => FollowInfo(selector.InvokeOrDefault(new FollowInfoDescriptor(index)));
+		public Task<FollowInfoResponse> FollowInfoAsync(Nest.Indices index, Func<FollowInfoDescriptor, IFollowInfoRequest> selector = null, CancellationToken cancellationToken = default) => FollowInfoAsync(selector.InvokeOrDefault(new FollowInfoDescriptor(index)), cancellationToken);
+		public FollowStatsResponse FollowStats(IFollowStatsRequest request) => DoRequest<IFollowStatsRequest, FollowStatsResponse>(request, request.RequestParameters);
+		public Task<FollowStatsResponse> FollowStatsAsync(IFollowStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IFollowStatsRequest, FollowStatsResponse>(request, request.RequestParameters, cancellationToken);
+		public FollowStatsResponse FollowStats(Nest.Indices index, Func<FollowStatsDescriptor, IFollowStatsRequest> selector = null) => FollowStats(selector.InvokeOrDefault(new FollowStatsDescriptor(index)));
+		public Task<FollowStatsResponse> FollowStatsAsync(Nest.Indices index, Func<FollowStatsDescriptor, IFollowStatsRequest> selector = null, CancellationToken cancellationToken = default) => FollowStatsAsync(selector.InvokeOrDefault(new FollowStatsDescriptor(index)), cancellationToken);
+		public ForgetFollowerResponse ForgetFollower(IForgetFollowerRequest request) => DoRequest<IForgetFollowerRequest, ForgetFollowerResponse>(request, request.RequestParameters);
+		public Task<ForgetFollowerResponse> ForgetFollowerAsync(IForgetFollowerRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IForgetFollowerRequest, ForgetFollowerResponse>(request, request.RequestParameters, cancellationToken);
+		public ForgetFollowerResponse ForgetFollower(Nest.IndexName index, Func<ForgetFollowerDescriptor, IForgetFollowerRequest> selector = null) => ForgetFollower(selector.InvokeOrDefault(new ForgetFollowerDescriptor(index)));
+		public Task<ForgetFollowerResponse> ForgetFollowerAsync(Nest.IndexName index, Func<ForgetFollowerDescriptor, IForgetFollowerRequest> selector = null, CancellationToken cancellationToken = default) => ForgetFollowerAsync(selector.InvokeOrDefault(new ForgetFollowerDescriptor(index)), cancellationToken);
+		public GetAutoFollowPatternResponse GetAutoFollowPattern(IGetAutoFollowPatternRequest request) => DoRequest<IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse>(request, request.RequestParameters);
+		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(IGetAutoFollowPatternRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetAutoFollowPatternRequest, GetAutoFollowPatternResponse>(request, request.RequestParameters, cancellationToken);
+		public GetAutoFollowPatternResponse GetAutoFollowPattern(Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null) => GetAutoFollowPattern(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor()));
+		public Task<GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Func<GetAutoFollowPatternDescriptor, IGetAutoFollowPatternRequest> selector = null, CancellationToken cancellationToken = default) => GetAutoFollowPatternAsync(selector.InvokeOrDefault(new GetAutoFollowPatternDescriptor()), cancellationToken);
+		public PauseAutoFollowPatternResponse PauseAutoFollowPattern(IPauseAutoFollowPatternRequest request) => DoRequest<IPauseAutoFollowPatternRequest, PauseAutoFollowPatternResponse>(request, request.RequestParameters);
+		public Task<PauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(IPauseAutoFollowPatternRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPauseAutoFollowPatternRequest, PauseAutoFollowPatternResponse>(request, request.RequestParameters, cancellationToken);
+		public PauseAutoFollowPatternResponse PauseAutoFollowPattern(Nest.Name name, Func<PauseAutoFollowPatternDescriptor, IPauseAutoFollowPatternRequest> selector = null) => PauseAutoFollowPattern(selector.InvokeOrDefault(new PauseAutoFollowPatternDescriptor(name)));
+		public Task<PauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(Nest.Name name, Func<PauseAutoFollowPatternDescriptor, IPauseAutoFollowPatternRequest> selector = null, CancellationToken cancellationToken = default) => PauseAutoFollowPatternAsync(selector.InvokeOrDefault(new PauseAutoFollowPatternDescriptor(name)), cancellationToken);
+		public PauseFollowResponse PauseFollow(IPauseFollowRequest request) => DoRequest<IPauseFollowRequest, PauseFollowResponse>(request, request.RequestParameters);
+		public Task<PauseFollowResponse> PauseFollowAsync(IPauseFollowRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPauseFollowRequest, PauseFollowResponse>(request, request.RequestParameters, cancellationToken);
+		public PauseFollowResponse PauseFollow(Nest.IndexName index, Func<PauseFollowDescriptor, IPauseFollowRequest> selector = null) => PauseFollow(selector.InvokeOrDefault(new PauseFollowDescriptor(index)));
+		public Task<PauseFollowResponse> PauseFollowAsync(Nest.IndexName index, Func<PauseFollowDescriptor, IPauseFollowRequest> selector = null, CancellationToken cancellationToken = default) => PauseFollowAsync(selector.InvokeOrDefault(new PauseFollowDescriptor(index)), cancellationToken);
+		public PutAutoFollowPatternResponse PutAutoFollowPattern(IPutAutoFollowPatternRequest request) => DoRequest<IPutAutoFollowPatternRequest, PutAutoFollowPatternResponse>(request, request.RequestParameters);
+		public Task<PutAutoFollowPatternResponse> PutAutoFollowPatternAsync(IPutAutoFollowPatternRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPutAutoFollowPatternRequest, PutAutoFollowPatternResponse>(request, request.RequestParameters, cancellationToken);
+		public PutAutoFollowPatternResponse PutAutoFollowPattern(Nest.Name name, Func<PutAutoFollowPatternDescriptor, IPutAutoFollowPatternRequest> selector = null) => PutAutoFollowPattern(selector.InvokeOrDefault(new PutAutoFollowPatternDescriptor(name)));
+		public Task<PutAutoFollowPatternResponse> PutAutoFollowPatternAsync(Nest.Name name, Func<PutAutoFollowPatternDescriptor, IPutAutoFollowPatternRequest> selector = null, CancellationToken cancellationToken = default) => PutAutoFollowPatternAsync(selector.InvokeOrDefault(new PutAutoFollowPatternDescriptor(name)), cancellationToken);
+		public ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(IResumeAutoFollowPatternRequest request) => DoRequest<IResumeAutoFollowPatternRequest, ResumeAutoFollowPatternResponse>(request, request.RequestParameters);
+		public Task<ResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(IResumeAutoFollowPatternRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IResumeAutoFollowPatternRequest, ResumeAutoFollowPatternResponse>(request, request.RequestParameters, cancellationToken);
+		public ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(Nest.Name name, Func<ResumeAutoFollowPatternDescriptor, IResumeAutoFollowPatternRequest> selector = null) => ResumeAutoFollowPattern(selector.InvokeOrDefault(new ResumeAutoFollowPatternDescriptor(name)));
+		public Task<ResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(Nest.Name name, Func<ResumeAutoFollowPatternDescriptor, IResumeAutoFollowPatternRequest> selector = null, CancellationToken cancellationToken = default) => ResumeAutoFollowPatternAsync(selector.InvokeOrDefault(new ResumeAutoFollowPatternDescriptor(name)), cancellationToken);
+		public ResumeFollowResponse ResumeFollow(IResumeFollowRequest request) => DoRequest<IResumeFollowRequest, ResumeFollowResponse>(request, request.RequestParameters);
+		public Task<ResumeFollowResponse> ResumeFollowAsync(IResumeFollowRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IResumeFollowRequest, ResumeFollowResponse>(request, request.RequestParameters, cancellationToken);
+		public ResumeFollowResponse ResumeFollow(Nest.IndexName index, Func<ResumeFollowDescriptor, IResumeFollowRequest> selector = null) => ResumeFollow(selector.InvokeOrDefault(new ResumeFollowDescriptor(index)));
+		public Task<ResumeFollowResponse> ResumeFollowAsync(Nest.IndexName index, Func<ResumeFollowDescriptor, IResumeFollowRequest> selector = null, CancellationToken cancellationToken = default) => ResumeFollowAsync(selector.InvokeOrDefault(new ResumeFollowDescriptor(index)), cancellationToken);
+		public StatsResponse Stats(IStatsRequest request) => DoRequest<IStatsRequest, StatsResponse>(request, request.RequestParameters);
+		public Task<StatsResponse> StatsAsync(IStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IStatsRequest, StatsResponse>(request, request.RequestParameters, cancellationToken);
+		public StatsResponse Stats(Func<StatsDescriptor, IStatsRequest> selector = null) => Stats(selector.InvokeOrDefault(new StatsDescriptor()));
+		public Task<StatsResponse> StatsAsync(Func<StatsDescriptor, IStatsRequest> selector = null, CancellationToken cancellationToken = default) => StatsAsync(selector.InvokeOrDefault(new StatsDescriptor()), cancellationToken);
+		public UnfollowResponse Unfollow(IUnfollowRequest request) => DoRequest<IUnfollowRequest, UnfollowResponse>(request, request.RequestParameters);
+		public Task<UnfollowResponse> UnfollowAsync(IUnfollowRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IUnfollowRequest, UnfollowResponse>(request, request.RequestParameters, cancellationToken);
+		public UnfollowResponse Unfollow(Nest.IndexName index, Func<UnfollowDescriptor, IUnfollowRequest> selector = null) => Unfollow(selector.InvokeOrDefault(new UnfollowDescriptor(index)));
+		public Task<UnfollowResponse> UnfollowAsync(Nest.IndexName index, Func<UnfollowDescriptor, IUnfollowRequest> selector = null, CancellationToken cancellationToken = default) => UnfollowAsync(selector.InvokeOrDefault(new UnfollowDescriptor(index)), cancellationToken);
 	}
 }

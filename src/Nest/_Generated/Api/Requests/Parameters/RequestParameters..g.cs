@@ -111,7 +111,7 @@ namespace Nest
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
 		[JsonIgnore]
-		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+		public string? LuceneQueryString { get => Q<string?>("q"); set => Q("q", value); }
 	}
 
 	public class CreateRequestParameters : RequestParameters<CreateRequestParameters>
@@ -216,7 +216,7 @@ namespace Nest
 		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+		public string? LuceneQueryString { get => Q<string?>("q"); set => Q("q", value); }
 
 		[JsonIgnore]
 		public Nest.Time? Scroll { get => Q<Nest.Time?>("scroll"); set => Q("scroll", value); }
@@ -297,13 +297,13 @@ namespace Nest
 		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
-		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("source_excludes"); set => Q("source_excludes", value); }
+		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 		[JsonIgnore]
-		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("source_includes"); set => Q("source_includes", value); }
+		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 		[JsonIgnore]
 		public Nest.Fields? StoredFields { get => Q<Nest.Fields?>("stored_fields"); set => Q("stored_fields", value); }
@@ -330,13 +330,13 @@ namespace Nest
 		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
-		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("source_excludes"); set => Q("source_excludes", value); }
+		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 		[JsonIgnore]
-		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("source_includes"); set => Q("source_includes", value); }
+		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 		[JsonIgnore]
 		public Nest.VersionNumber? Version { get => Q<Nest.VersionNumber?>("version"); set => Q("version", value); }
@@ -384,7 +384,7 @@ namespace Nest
 		public Nest.Fields? StoredFields { get => Q<Nest.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
 		[JsonIgnore]
-		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+		public string? LuceneQueryString { get => Q<string?>("q"); set => Q("q", value); }
 	}
 
 	public class FieldCapsRequestParameters : RequestParameters<FieldCapsRequestParameters>
@@ -420,7 +420,7 @@ namespace Nest
 		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -436,9 +436,6 @@ namespace Nest
 
 		[JsonIgnore]
 		public Nest.VersionType? VersionType { get => Q<Nest.VersionType?>("version_type"); set => Q("version_type", value); }
-
-		[JsonIgnore]
-		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
 	}
 
 	public class GetScriptRequestParameters : RequestParameters<GetScriptRequestParameters>
@@ -826,7 +823,7 @@ namespace Nest
 		public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
 
 		[JsonIgnore]
-		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+		public string? LuceneQueryString { get => Q<string?>("q"); set => Q("q", value); }
 
 		[JsonIgnore]
 		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
@@ -965,9 +962,6 @@ namespace Nest
 		public Nest.Routing? Routing { get => Q<Nest.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
-
-		[JsonIgnore]
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
@@ -1058,13 +1052,13 @@ namespace Nest
 		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
 
 		[JsonIgnore]
-		public bool? SourceEnabled { get => Q<bool?>("source_enabled"); set => Q("source_enabled", value); }
+		public Union<bool, Nest.Fields>? Source { get => Q<Union<bool, Nest.Fields>?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
-		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("source_excludes"); set => Q("source_excludes", value); }
+		public Nest.Fields? SourceExcludes { get => Q<Nest.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 		[JsonIgnore]
-		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("source_includes"); set => Q("source_includes", value); }
+		public Nest.Fields? SourceIncludes { get => Q<Nest.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 		[JsonIgnore]
 		public IEnumerable<string>? Stats { get => Q<IEnumerable<string>?>("stats"); set => Q("stats", value); }
