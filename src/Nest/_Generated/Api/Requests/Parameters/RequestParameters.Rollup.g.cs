@@ -47,8 +47,6 @@ namespace Nest.Rollup
 
 	public class RollupRequestParameters : RequestParameters<RollupRequestParameters>
 	{
-		[JsonIgnore]
-		public int Stuba { get => Q<int>("stuba"); set => Q("stuba", value); }
 	}
 
 	public class RollupSearchRequestParameters : RequestParameters<RollupSearchRequestParameters>

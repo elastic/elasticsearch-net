@@ -92,9 +92,6 @@ namespace Nest.Snapshot
 
 		[JsonIgnore]
 		public bool? IndexDetails { get => Q<bool?>("index_details"); set => Q("index_details", value); }
-
-		[JsonIgnore]
-		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
 	}
 
 	public class GetRepositoryRequestParameters : RequestParameters<GetRepositoryRequestParameters>

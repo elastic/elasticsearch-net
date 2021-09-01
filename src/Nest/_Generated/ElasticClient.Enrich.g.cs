@@ -28,104 +28,25 @@ namespace Nest.Enrich
 		{
 		}
 
-		public DeletePolicyResponse DeletePolicy(IDeletePolicyRequest request)
-		{
-			return DoRequest<IDeletePolicyRequest, DeletePolicyResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeletePolicyResponse> DeletePolicyAsync(IDeletePolicyRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeletePolicyRequest, DeletePolicyResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeletePolicyResponse DeletePolicy(Nest.Name name, Func<DeletePolicyDescriptor, IDeletePolicyRequest> selector = null)
-		{
-			return DeletePolicy(selector.InvokeOrDefault(new DeletePolicyDescriptor(name)));
-		}
-
-		public Task<DeletePolicyResponse> DeletePolicyAsync(Nest.Name name, Func<DeletePolicyDescriptor, IDeletePolicyRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeletePolicyAsync(selector.InvokeOrDefault(new DeletePolicyDescriptor(name)), cancellationToken);
-		}
-
-		public ExecutePolicyResponse ExecutePolicy(IExecutePolicyRequest request)
-		{
-			return DoRequest<IExecutePolicyRequest, ExecutePolicyResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ExecutePolicyResponse> ExecutePolicyAsync(IExecutePolicyRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IExecutePolicyRequest, ExecutePolicyResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ExecutePolicyResponse ExecutePolicy(Nest.Name name, Func<ExecutePolicyDescriptor, IExecutePolicyRequest> selector = null)
-		{
-			return ExecutePolicy(selector.InvokeOrDefault(new ExecutePolicyDescriptor(name)));
-		}
-
-		public Task<ExecutePolicyResponse> ExecutePolicyAsync(Nest.Name name, Func<ExecutePolicyDescriptor, IExecutePolicyRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ExecutePolicyAsync(selector.InvokeOrDefault(new ExecutePolicyDescriptor(name)), cancellationToken);
-		}
-
-		public GetPolicyResponse GetPolicy(IGetPolicyRequest request)
-		{
-			return DoRequest<IGetPolicyRequest, GetPolicyResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetPolicyResponse> GetPolicyAsync(IGetPolicyRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetPolicyRequest, GetPolicyResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetPolicyResponse GetPolicy(Func<GetPolicyDescriptor, IGetPolicyRequest> selector = null)
-		{
-			return GetPolicy(selector.InvokeOrDefault(new GetPolicyDescriptor()));
-		}
-
-		public Task<GetPolicyResponse> GetPolicyAsync(Func<GetPolicyDescriptor, IGetPolicyRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetPolicyAsync(selector.InvokeOrDefault(new GetPolicyDescriptor()), cancellationToken);
-		}
-
-		public PutPolicyResponse PutPolicy(IPutPolicyRequest request)
-		{
-			return DoRequest<IPutPolicyRequest, PutPolicyResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutPolicyResponse> PutPolicyAsync(IPutPolicyRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutPolicyRequest, PutPolicyResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PutPolicyResponse PutPolicy(Nest.Name name, Func<PutPolicyDescriptor, IPutPolicyRequest> selector = null)
-		{
-			return PutPolicy(selector.InvokeOrDefault(new PutPolicyDescriptor(name)));
-		}
-
-		public Task<PutPolicyResponse> PutPolicyAsync(Nest.Name name, Func<PutPolicyDescriptor, IPutPolicyRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PutPolicyAsync(selector.InvokeOrDefault(new PutPolicyDescriptor(name)), cancellationToken);
-		}
-
-		public StatsResponse Stats(IStatsRequest request)
-		{
-			return DoRequest<IStatsRequest, StatsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<StatsResponse> StatsAsync(IStatsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IStatsRequest, StatsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public StatsResponse Stats(Func<StatsDescriptor, IStatsRequest> selector = null)
-		{
-			return Stats(selector.InvokeOrDefault(new StatsDescriptor()));
-		}
-
-		public Task<StatsResponse> StatsAsync(Func<StatsDescriptor, IStatsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return StatsAsync(selector.InvokeOrDefault(new StatsDescriptor()), cancellationToken);
-		}
+		public DeletePolicyResponse DeletePolicy(IDeletePolicyRequest request) => DoRequest<IDeletePolicyRequest, DeletePolicyResponse>(request, request.RequestParameters);
+		public Task<DeletePolicyResponse> DeletePolicyAsync(IDeletePolicyRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeletePolicyRequest, DeletePolicyResponse>(request, request.RequestParameters, cancellationToken);
+		public DeletePolicyResponse DeletePolicy(Nest.Name name, Func<DeletePolicyDescriptor, IDeletePolicyRequest> selector = null) => DeletePolicy(selector.InvokeOrDefault(new DeletePolicyDescriptor(name)));
+		public Task<DeletePolicyResponse> DeletePolicyAsync(Nest.Name name, Func<DeletePolicyDescriptor, IDeletePolicyRequest> selector = null, CancellationToken cancellationToken = default) => DeletePolicyAsync(selector.InvokeOrDefault(new DeletePolicyDescriptor(name)), cancellationToken);
+		public ExecutePolicyResponse ExecutePolicy(IExecutePolicyRequest request) => DoRequest<IExecutePolicyRequest, ExecutePolicyResponse>(request, request.RequestParameters);
+		public Task<ExecutePolicyResponse> ExecutePolicyAsync(IExecutePolicyRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IExecutePolicyRequest, ExecutePolicyResponse>(request, request.RequestParameters, cancellationToken);
+		public ExecutePolicyResponse ExecutePolicy(Nest.Name name, Func<ExecutePolicyDescriptor, IExecutePolicyRequest> selector = null) => ExecutePolicy(selector.InvokeOrDefault(new ExecutePolicyDescriptor(name)));
+		public Task<ExecutePolicyResponse> ExecutePolicyAsync(Nest.Name name, Func<ExecutePolicyDescriptor, IExecutePolicyRequest> selector = null, CancellationToken cancellationToken = default) => ExecutePolicyAsync(selector.InvokeOrDefault(new ExecutePolicyDescriptor(name)), cancellationToken);
+		public GetPolicyResponse GetPolicy(IGetPolicyRequest request) => DoRequest<IGetPolicyRequest, GetPolicyResponse>(request, request.RequestParameters);
+		public Task<GetPolicyResponse> GetPolicyAsync(IGetPolicyRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetPolicyRequest, GetPolicyResponse>(request, request.RequestParameters, cancellationToken);
+		public GetPolicyResponse GetPolicy(Func<GetPolicyDescriptor, IGetPolicyRequest> selector = null) => GetPolicy(selector.InvokeOrDefault(new GetPolicyDescriptor()));
+		public Task<GetPolicyResponse> GetPolicyAsync(Func<GetPolicyDescriptor, IGetPolicyRequest> selector = null, CancellationToken cancellationToken = default) => GetPolicyAsync(selector.InvokeOrDefault(new GetPolicyDescriptor()), cancellationToken);
+		public PutPolicyResponse PutPolicy(IPutPolicyRequest request) => DoRequest<IPutPolicyRequest, PutPolicyResponse>(request, request.RequestParameters);
+		public Task<PutPolicyResponse> PutPolicyAsync(IPutPolicyRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPutPolicyRequest, PutPolicyResponse>(request, request.RequestParameters, cancellationToken);
+		public PutPolicyResponse PutPolicy(Nest.Name name, Func<PutPolicyDescriptor, IPutPolicyRequest> selector = null) => PutPolicy(selector.InvokeOrDefault(new PutPolicyDescriptor(name)));
+		public Task<PutPolicyResponse> PutPolicyAsync(Nest.Name name, Func<PutPolicyDescriptor, IPutPolicyRequest> selector = null, CancellationToken cancellationToken = default) => PutPolicyAsync(selector.InvokeOrDefault(new PutPolicyDescriptor(name)), cancellationToken);
+		public StatsResponse Stats(IStatsRequest request) => DoRequest<IStatsRequest, StatsResponse>(request, request.RequestParameters);
+		public Task<StatsResponse> StatsAsync(IStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IStatsRequest, StatsResponse>(request, request.RequestParameters, cancellationToken);
+		public StatsResponse Stats(Func<StatsDescriptor, IStatsRequest> selector = null) => Stats(selector.InvokeOrDefault(new StatsDescriptor()));
+		public Task<StatsResponse> StatsAsync(Func<StatsDescriptor, IStatsRequest> selector = null, CancellationToken cancellationToken = default) => StatsAsync(selector.InvokeOrDefault(new StatsDescriptor()), cancellationToken);
 	}
 }

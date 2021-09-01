@@ -488,7 +488,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<NodeId>))]
-	public readonly partial struct NodeId : IComparable<NodeId>, IEquatable<NodeId>
+	public readonly partial struct NodeId : IComparable<NodeId>, IEquatable<NodeId>, IUrlParameter
 	{
 		public NodeId(string nodeId) => Value = nodeId;
 		public string Value { get; }
@@ -510,6 +510,8 @@ namespace Nest
 			nodeId = new NodeId(value.Trim());
 			return true;
 		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<NodeIds>))]

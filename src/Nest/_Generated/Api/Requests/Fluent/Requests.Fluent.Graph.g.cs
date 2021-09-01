@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Graph
@@ -29,5 +30,20 @@ namespace Nest.Graph
         public ExploreDescriptor(Nest.Indices index) : base(r => r.Required("index", index))
 		{
 		}
+
+		Nest.Graph.Hop? IExploreRequest.Connections { get; set; }
+
+		Nest.Graph.ExploreControls? IExploreRequest.Controls { get; set; }
+
+		Nest.QueryDsl.QueryContainer? IExploreRequest.Query { get; set; }
+
+		IEnumerable<Nest.Graph.VertexDefinition>? IExploreRequest.Vertices { get; set; }
+
+		public ExploreDescriptor Routing(Nest.Routing? routing) => Qs("routing", routing);
+		public ExploreDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public ExploreDescriptor Connections(Nest.Graph.Hop? connections) => Assign(connections, (a, v) => a.Connections = v);
+		public ExploreDescriptor Controls(Nest.Graph.ExploreControls? controls) => Assign(controls, (a, v) => a.Controls = v);
+		public ExploreDescriptor Query(Nest.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public ExploreDescriptor Vertices(IEnumerable<Nest.Graph.VertexDefinition>? vertices) => Assign(vertices, (a, v) => a.Vertices = v);
 	}
 }

@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Enrich
@@ -40,6 +41,8 @@ namespace Nest.Enrich
         public ExecutePolicyDescriptor(Nest.Name name) : base(r => r.Required("name", name))
 		{
 		}
+
+		public ExecutePolicyDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 
 	public partial class GetPolicyDescriptor : RequestDescriptorBase<GetPolicyDescriptor, GetPolicyRequestParameters, IGetPolicyRequest>, IGetPolicyRequest
@@ -67,6 +70,13 @@ namespace Nest.Enrich
         public PutPolicyDescriptor(Nest.Name name) : base(r => r.Required("name", name))
 		{
 		}
+
+		Nest.Enrich.Policy? IPutPolicyRequest.GeoMatch { get; set; }
+
+		Nest.Enrich.Policy? IPutPolicyRequest.Match { get; set; }
+
+		public PutPolicyDescriptor GeoMatch(Nest.Enrich.Policy? geoMatch) => Assign(geoMatch, (a, v) => a.GeoMatch = v);
+		public PutPolicyDescriptor Match(Nest.Enrich.Policy? match) => Assign(match, (a, v) => a.Match = v);
 	}
 
 	public partial class StatsDescriptor : RequestDescriptorBase<StatsDescriptor, StatsRequestParameters, IStatsRequest>, IStatsRequest

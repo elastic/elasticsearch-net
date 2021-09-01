@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Rollup
@@ -83,6 +84,25 @@ namespace Nest.Rollup
         public PutJobDescriptor(Nest.Id id) : base(r => r.Required("id", id))
 		{
 		}
+
+		string? IPutJobRequest.Cron { get; set; }
+
+		Nest.Rollup.Groupings? IPutJobRequest.Groups { get; set; }
+
+		string? IPutJobRequest.IndexPattern { get; set; }
+
+		IEnumerable<Nest.Rollup.FieldMetric>? IPutJobRequest.Metrics { get; set; }
+
+		long? IPutJobRequest.PageSize { get; set; }
+
+		Nest.IndexName? IPutJobRequest.RollupIndex { get; set; }
+
+		public PutJobDescriptor Cron(string? cron) => Assign(cron, (a, v) => a.Cron = v);
+		public PutJobDescriptor Groups(Nest.Rollup.Groupings? groups) => Assign(groups, (a, v) => a.Groups = v);
+		public PutJobDescriptor IndexPattern(string? indexPattern) => Assign(indexPattern, (a, v) => a.IndexPattern = v);
+		public PutJobDescriptor Metrics(IEnumerable<Nest.Rollup.FieldMetric>? metrics) => Assign(metrics, (a, v) => a.Metrics = v);
+		public PutJobDescriptor PageSize(long? pageSize) => Assign(pageSize, (a, v) => a.PageSize = v);
+		public PutJobDescriptor RollupIndex(Nest.IndexName? rollupIndex) => Assign(rollupIndex, (a, v) => a.RollupIndex = v);
 	}
 
 	public partial class RollupDescriptor : RequestDescriptorBase<RollupDescriptor, RollupRequestParameters, IRollupRequest>, IRollupRequest
@@ -90,6 +110,10 @@ namespace Nest.Rollup
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.RollupRollup;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
+		///<summary>/{index}/_rollup/{rollup_index}</summary>
+        public RollupDescriptor(Nest.IndexName index, Nest.IndexName rollup_index) : base(r => r.Required("index", index).Required("rollup_index", rollup_index))
+		{
+		}
 	}
 
 	public partial class RollupSearchDescriptor : RequestDescriptorBase<RollupSearchDescriptor, RollupSearchRequestParameters, IRollupSearchRequest>, IRollupSearchRequest
@@ -101,6 +125,18 @@ namespace Nest.Rollup
         public RollupSearchDescriptor(Nest.Indices index) : base(r => r.Required("index", index))
 		{
 		}
+
+		Dictionary<string, Nest.Aggregations.AggregationContainer>? IRollupSearchRequest.Aggs { get; set; }
+
+		Nest.QueryDsl.QueryContainer? IRollupSearchRequest.Query { get; set; }
+
+		int? IRollupSearchRequest.Size { get; set; }
+
+		public RollupSearchDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
+		public RollupSearchDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+		public RollupSearchDescriptor Aggs(Dictionary<string, Nest.Aggregations.AggregationContainer>? aggs) => Assign(aggs, (a, v) => a.Aggs = v);
+		public RollupSearchDescriptor Query(Nest.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public RollupSearchDescriptor Size(int? size) => Assign(size, (a, v) => a.Size = v);
 	}
 
 	public partial class StartJobDescriptor : RequestDescriptorBase<StartJobDescriptor, StartJobRequestParameters, IStartJobRequest>, IStartJobRequest
@@ -123,5 +159,8 @@ namespace Nest.Rollup
         public StopJobDescriptor(Nest.Id id) : base(r => r.Required("id", id))
 		{
 		}
+
+		public StopJobDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public StopJobDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 }

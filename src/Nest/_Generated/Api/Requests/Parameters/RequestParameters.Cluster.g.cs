@@ -45,6 +45,17 @@ namespace Nest.Cluster
 
 	public class DeleteVotingConfigExclusionsRequestParameters : RequestParameters<DeleteVotingConfigExclusionsRequestParameters>
 	{
+		[JsonIgnore]
+		public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
+	}
+
+	public class ExistsComponentTemplateRequestParameters : RequestParameters<ExistsComponentTemplateRequestParameters>
+	{
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
 	public class GetComponentTemplateRequestParameters : RequestParameters<GetComponentTemplateRequestParameters>
@@ -129,9 +140,6 @@ namespace Nest.Cluster
 
 		[JsonIgnore]
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
-
-		[JsonIgnore]
-		public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
 	}
 
 	public class PutComponentTemplateRequestParameters : RequestParameters<PutComponentTemplateRequestParameters>

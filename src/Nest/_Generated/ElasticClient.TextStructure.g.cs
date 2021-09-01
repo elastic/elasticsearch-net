@@ -28,24 +28,9 @@ namespace Nest.TextStructure
 		{
 		}
 
-		public FindStructureResponse FindStructure<TJsonDocument>(IFindStructureRequest<TJsonDocument> request)
-		{
-			return DoRequest<IFindStructureRequest<TJsonDocument>, FindStructureResponse>(request, request.RequestParameters);
-		}
-
-		public Task<FindStructureResponse> FindStructureAsync<TJsonDocument>(IFindStructureRequest<TJsonDocument> request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IFindStructureRequest<TJsonDocument>, FindStructureResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public FindStructureResponse FindStructure<TJsonDocument>(Func<FindStructureDescriptor<TJsonDocument>, IFindStructureRequest<TJsonDocument>> selector = null)
-		{
-			return FindStructure<TJsonDocument>(selector.InvokeOrDefault(new FindStructureDescriptor<TJsonDocument>()));
-		}
-
-		public Task<FindStructureResponse> FindStructureAsync<TJsonDocument>(Func<FindStructureDescriptor<TJsonDocument>, IFindStructureRequest<TJsonDocument>> selector = null, CancellationToken cancellationToken = default)
-		{
-			return FindStructureAsync<TJsonDocument>(selector.InvokeOrDefault(new FindStructureDescriptor<TJsonDocument>()), cancellationToken);
-		}
+		public FindStructureResponse FindStructure<TJsonDocument>(IFindStructureRequest<TJsonDocument> request) => DoRequest<IFindStructureRequest<TJsonDocument>, FindStructureResponse>(request, request.RequestParameters);
+		public Task<FindStructureResponse> FindStructureAsync<TJsonDocument>(IFindStructureRequest<TJsonDocument> request, CancellationToken cancellationToken = default) => DoRequestAsync<IFindStructureRequest<TJsonDocument>, FindStructureResponse>(request, request.RequestParameters, cancellationToken);
+		public FindStructureResponse FindStructure<TJsonDocument>(Func<FindStructureDescriptor<TJsonDocument>, IFindStructureRequest<TJsonDocument>> selector = null) => FindStructure<TJsonDocument>(selector.InvokeOrDefault(new FindStructureDescriptor<TJsonDocument>()));
+		public Task<FindStructureResponse> FindStructureAsync<TJsonDocument>(Func<FindStructureDescriptor<TJsonDocument>, IFindStructureRequest<TJsonDocument>> selector = null, CancellationToken cancellationToken = default) => FindStructureAsync<TJsonDocument>(selector.InvokeOrDefault(new FindStructureDescriptor<TJsonDocument>()), cancellationToken);
 	}
 }

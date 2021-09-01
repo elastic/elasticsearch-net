@@ -28,24 +28,9 @@ namespace Nest.Graph
 		{
 		}
 
-		public ExploreResponse Explore(IExploreRequest request)
-		{
-			return DoRequest<IExploreRequest, ExploreResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ExploreResponse> ExploreAsync(IExploreRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IExploreRequest, ExploreResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ExploreResponse Explore(Nest.Indices index, Func<ExploreDescriptor, IExploreRequest> selector = null)
-		{
-			return Explore(selector.InvokeOrDefault(new ExploreDescriptor(index)));
-		}
-
-		public Task<ExploreResponse> ExploreAsync(Nest.Indices index, Func<ExploreDescriptor, IExploreRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ExploreAsync(selector.InvokeOrDefault(new ExploreDescriptor(index)), cancellationToken);
-		}
+		public ExploreResponse Explore(IExploreRequest request) => DoRequest<IExploreRequest, ExploreResponse>(request, request.RequestParameters);
+		public Task<ExploreResponse> ExploreAsync(IExploreRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IExploreRequest, ExploreResponse>(request, request.RequestParameters, cancellationToken);
+		public ExploreResponse Explore(Nest.Indices index, Func<ExploreDescriptor, IExploreRequest> selector = null) => Explore(selector.InvokeOrDefault(new ExploreDescriptor(index)));
+		public Task<ExploreResponse> ExploreAsync(Nest.Indices index, Func<ExploreDescriptor, IExploreRequest> selector = null, CancellationToken cancellationToken = default) => ExploreAsync(selector.InvokeOrDefault(new ExploreDescriptor(index)), cancellationToken);
 	}
 }

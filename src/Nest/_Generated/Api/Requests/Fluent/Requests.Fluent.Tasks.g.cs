@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Tasks
@@ -34,6 +35,11 @@ namespace Nest.Tasks
         public CancelDescriptor(Nest.TaskId? task_id) : base(r => r.Optional("task_id", task_id))
 		{
 		}
+
+		public CancelDescriptor Actions(Union<string, IEnumerable<string>>? actions) => Qs("actions", actions);
+		public CancelDescriptor Nodes(IEnumerable<string>? nodes) => Qs("nodes", nodes);
+		public CancelDescriptor ParentTaskId(string? parentTaskId) => Qs("parent_task_id", parentTaskId);
+		public CancelDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 
 	public partial class GetDescriptor : RequestDescriptorBase<GetDescriptor, GetRequestParameters, IGetRequest>, IGetRequest
@@ -45,6 +51,9 @@ namespace Nest.Tasks
         public GetDescriptor(Nest.Id task_id) : base(r => r.Required("task_id", task_id))
 		{
 		}
+
+		public GetDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public GetDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 
 	public partial class ListDescriptor : RequestDescriptorBase<ListDescriptor, ListRequestParameters, IListRequest>, IListRequest
@@ -56,5 +65,13 @@ namespace Nest.Tasks
         public ListDescriptor() : base()
 		{
 		}
+
+		public ListDescriptor Actions(Union<string, IEnumerable<string>>? actions) => Qs("actions", actions);
+		public ListDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
+		public ListDescriptor GroupBy(Nest.GroupBy? groupBy) => Qs("group_by", groupBy);
+		public ListDescriptor Nodes(IEnumerable<string>? nodes) => Qs("nodes", nodes);
+		public ListDescriptor ParentTaskId(Nest.Id? parentTaskId) => Qs("parent_task_id", parentTaskId);
+		public ListDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public ListDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 }

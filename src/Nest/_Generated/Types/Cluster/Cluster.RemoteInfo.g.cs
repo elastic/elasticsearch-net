@@ -24,7 +24,89 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest.Cluster.RemoteInfo
 {
-	public partial class ClusterRemoteInfo
+	public partial class ClusterRemoteProxyInfo
+	{
+		[JsonPropertyName("connected")]
+		public bool Connected
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("initial_connect_timeout")]
+		public Nest.Time InitialConnectTimeout
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_proxy_socket_connections")]
+		public int MaxProxySocketConnections
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("mode")]
+		public string Mode => "proxy";
+		[JsonPropertyName("num_proxy_sockets_connected")]
+		public int NumProxySocketsConnected
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("proxy_address")]
+		public string ProxyAddress
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("server_name")]
+		public string ServerName
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("skip_unavailable")]
+		public bool SkipUnavailable
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterRemoteSniffInfo
 	{
 		[JsonPropertyName("connected")]
 		public bool Connected
@@ -59,6 +141,8 @@ namespace Nest.Cluster.RemoteInfo
 #endif
 		}
 
+		[JsonPropertyName("mode")]
+		public string Mode => "sniff";
 		[JsonPropertyName("num_nodes_connected")]
 		public long NumNodesConnected
 		{

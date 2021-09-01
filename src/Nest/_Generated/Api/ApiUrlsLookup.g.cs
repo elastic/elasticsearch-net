@@ -23,6 +23,10 @@ namespace Nest
 		internal static ApiUrls AsyncSearchGet = new ApiUrls(new[] { "/_async_search/{id}" });
 		internal static ApiUrls AsyncSearchStatus = new ApiUrls(new[] { "/_async_search/status/{id}" });
 		internal static ApiUrls AsyncSearchSubmit = new ApiUrls(new[] { "/_async_search", "/{index}/_async_search" });
+		internal static ApiUrls AutoscalingDeleteAutoscalingPolicy = new ApiUrls(new[] { "/_autoscaling/policy/{name}" });
+		internal static ApiUrls AutoscalingGetAutoscalingCapacity = new ApiUrls(new[] { "/_autoscaling/capacity" });
+		internal static ApiUrls AutoscalingGetAutoscalingPolicy = new ApiUrls(new[] { "/_autoscaling/policy/{name}" });
+		internal static ApiUrls AutoscalingPutAutoscalingPolicy = new ApiUrls(new[] { "/_autoscaling/policy/{name}" });
 		internal static ApiUrls NoNamespaceBulk = new ApiUrls(new[] { "/_bulk", "/{index}/_bulk" });
 		internal static ApiUrls CatAliases = new ApiUrls(new[] { "/_cat/aliases", "/_cat/aliases/{name}" });
 		internal static ApiUrls CatAllocation = new ApiUrls(new[] { "/_cat/allocation", "/_cat/allocation/{node_id}" });
@@ -67,6 +71,7 @@ namespace Nest
 		internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[] { "/_cluster/allocation/explain" });
 		internal static ApiUrls ClusterDeleteComponentTemplate = new ApiUrls(new[] { "/_component_template/{name}" });
 		internal static ApiUrls ClusterDeleteVotingConfigExclusions = new ApiUrls(new[] { "/_cluster/voting_config_exclusions" });
+		internal static ApiUrls ClusterExistsComponentTemplate = new ApiUrls(new[] { "/_component_template/{name}" });
 		internal static ApiUrls ClusterGetComponentTemplate = new ApiUrls(new[] { "/_component_template", "/_component_template/{name}" });
 		internal static ApiUrls ClusterGetSettings = new ApiUrls(new[] { "/_cluster/settings" });
 		internal static ApiUrls ClusterHealth = new ApiUrls(new[] { "/_cluster/health", "/_cluster/health/{index}" });
@@ -80,6 +85,9 @@ namespace Nest
 		internal static ApiUrls ClusterStats = new ApiUrls(new[] { "/_cluster/stats", "/_cluster/stats/nodes/{node_id}" });
 		internal static ApiUrls NoNamespaceCount = new ApiUrls(new[] { "/_count", "/{index}/_count" });
 		internal static ApiUrls NoNamespaceCreate = new ApiUrls(new[] { "/{index}/_create/{id}" });
+		internal static ApiUrls DanglingIndicesDeleteDanglingIndex = new ApiUrls(new[] { "/_dangling/{index_uuid}" });
+		internal static ApiUrls DanglingIndicesImportDanglingIndex = new ApiUrls(new[] { "/_dangling/{index_uuid}" });
+		internal static ApiUrls DanglingIndicesListDanglingIndices = new ApiUrls(new[] { "/_dangling" });
 		internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls NoNamespaceDeleteByQuery = new ApiUrls(new[] { "/{index}/_delete_by_query" });
 		internal static ApiUrls NoNamespaceDeleteByQueryRethrottle = new ApiUrls(new[] { "/_delete_by_query/{task_id}/_rethrottle" });
@@ -92,10 +100,11 @@ namespace Nest
 		internal static ApiUrls EqlDelete = new ApiUrls(new[] { "/_eql/search/{id}" });
 		internal static ApiUrls EqlGet = new ApiUrls(new[] { "/_eql/search/{id}" });
 		internal static ApiUrls EqlGetStatus = new ApiUrls(new[] { "/_eql/search/status/{id}" });
-		internal static ApiUrls EqlSearch = new ApiUrls(new[] { "/{index}/_eql/search" });
 		internal static ApiUrls NoNamespaceExists = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls NoNamespaceExistsSource = new ApiUrls(new[] { "/{index}/_source/{id}" });
 		internal static ApiUrls NoNamespaceExplain = new ApiUrls(new[] { "/{index}/_explain/{id}" });
+		internal static ApiUrls FeaturesGetFeatures = new ApiUrls(new[] { "/_features" });
+		internal static ApiUrls FeaturesResetFeatures = new ApiUrls(new[] { "/_features/_reset" });
 		internal static ApiUrls NoNamespaceFieldCaps = new ApiUrls(new[] { "/_field_caps", "/{index}/_field_caps" });
 		internal static ApiUrls NoNamespaceGet = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls NoNamespaceGetScript = new ApiUrls(new[] { "/_scripts/{id}" });
@@ -177,6 +186,9 @@ namespace Nest
 		internal static ApiUrls LicensePost = new ApiUrls(new[] { "/_license" });
 		internal static ApiUrls LicensePostStartBasic = new ApiUrls(new[] { "/_license/start_basic" });
 		internal static ApiUrls LicensePostStartTrial = new ApiUrls(new[] { "/_license/start_trial" });
+		internal static ApiUrls LogstashDeletePipeline = new ApiUrls(new[] { "/_logstash/pipeline/{id}" });
+		internal static ApiUrls LogstashGetPipeline = new ApiUrls(new[] { "/_logstash/pipeline/{id}" });
+		internal static ApiUrls LogstashPutPipeline = new ApiUrls(new[] { "/_logstash/pipeline/{id}" });
 		internal static ApiUrls NoNamespaceMget = new ApiUrls(new[] { "/_mget", "/{index}/_mget" });
 		internal static ApiUrls MigrationDeprecations = new ApiUrls(new[] { "/_migration/deprecations", "/{index}/_migration/deprecations" });
 		internal static ApiUrls MachineLearningCloseJob = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/_close" });
@@ -241,6 +253,7 @@ namespace Nest
 		internal static ApiUrls MachineLearningUpgradeJobSnapshot = new ApiUrls(new[] { "/_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_upgrade" });
 		internal static ApiUrls MachineLearningValidate = new ApiUrls(new[] { "/_ml/anomaly_detectors/_validate" });
 		internal static ApiUrls MachineLearningValidateDetector = new ApiUrls(new[] { "/_ml/anomaly_detectors/_validate/detector" });
+		internal static ApiUrls MonitoringBulk = new ApiUrls(new[] { "/_monitoring/bulk" });
 		internal static ApiUrls NoNamespaceMsearch = new ApiUrls(new[] { "/_msearch", "/{index}/_msearch" });
 		internal static ApiUrls NoNamespaceMsearchTemplate = new ApiUrls(new[] { "/_msearch/template", "/{index}/_msearch/template" });
 		internal static ApiUrls NoNamespaceMtermvectors = new ApiUrls(new[] { "/_mtermvectors", "/{index}/_mtermvectors" });
@@ -272,6 +285,7 @@ namespace Nest
 		internal static ApiUrls NoNamespaceSearchTemplate = new ApiUrls(new[] { "/_search/template", "/{index}/_search/template" });
 		internal static ApiUrls SearchableSnapshotsClearCache = new ApiUrls(new[] { "/_searchable_snapshots/cache/clear", "/{index}/_searchable_snapshots/cache/clear" });
 		internal static ApiUrls SearchableSnapshotsMount = new ApiUrls(new[] { "/_snapshot/{repository}/{snapshot}/_mount" });
+		internal static ApiUrls SearchableSnapshotsStats = new ApiUrls(new[] { "/_searchable_snapshots/stats", "/{index}/_searchable_snapshots/stats" });
 		internal static ApiUrls SecurityAuthenticate = new ApiUrls(new[] { "/_security/_authenticate" });
 		internal static ApiUrls SecurityChangePassword = new ApiUrls(new[] { "/_security/user/{username}/_password", "/_security/user/_password" });
 		internal static ApiUrls SecurityClearApiKeyCache = new ApiUrls(new[] { "/_security/api_key/{ids}/_clear_cache" });
@@ -357,6 +371,7 @@ namespace Nest
 		internal static ApiUrls WatcherExecuteWatch = new ApiUrls(new[] { "/_watcher/watch/{id}/_execute", "/_watcher/watch/_execute" });
 		internal static ApiUrls WatcherGetWatch = new ApiUrls(new[] { "/_watcher/watch/{id}" });
 		internal static ApiUrls WatcherPutWatch = new ApiUrls(new[] { "/_watcher/watch/{id}" });
+		internal static ApiUrls WatcherQueryWatches = new ApiUrls(new[] { "/_watcher/_query/watches" });
 		internal static ApiUrls WatcherStart = new ApiUrls(new[] { "/_watcher/_start" });
 		internal static ApiUrls WatcherStats = new ApiUrls(new[] { "/_watcher/stats", "/_watcher/stats/{metric}" });
 		internal static ApiUrls WatcherStop = new ApiUrls(new[] { "/_watcher/_stop" });

@@ -49,7 +49,7 @@ namespace Nest.Security.GetServiceAccounts
 		}
 
 		[JsonPropertyName("global")]
-		public IReadOnlyCollection<Nest.Security.GlobalPrivileges>? Global
+		public Union<IReadOnlyCollection<Nest.Security.GlobalPrivilege>, Nest.Security.GlobalPrivilege>? Global
 		{
 			get;
 #if NET5_0

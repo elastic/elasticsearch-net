@@ -64,9 +64,19 @@ namespace Nest.Ilm
 
 	public class StartRequestParameters : RequestParameters<StartRequestParameters>
 	{
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public class StopRequestParameters : RequestParameters<StopRequestParameters>
 	{
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 	}
 }

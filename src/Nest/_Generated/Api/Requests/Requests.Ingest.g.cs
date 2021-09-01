@@ -122,6 +122,15 @@ namespace Nest.Ingest
 	[ConvertAs(typeof(PutPipelineRequest))]
 	public partial interface IPutPipelineRequest : IRequest<PutPipelineRequestParameters>
 	{
+		Nest.Metadata? Meta { get; set; }
+
+		string? Description { get; set; }
+
+		IEnumerable<Nest.Ingest.ProcessorContainer>? OnFailure { get; set; }
+
+		IEnumerable<Nest.Ingest.ProcessorContainer>? Processors { get; set; }
+
+		Nest.VersionNumber? Version { get; set; }
 	}
 
 	public partial class PutPipelineRequest : PlainRequestBase<PutPipelineRequestParameters>, IPutPipelineRequest
@@ -145,64 +154,27 @@ namespace Nest.Ingest
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonPropertyName("_meta")]
-		public Nest.Metadata? Meta
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Metadata? Meta { get; set; }
 
 		[JsonPropertyName("description")]
-		public string? Description
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Description { get; set; }
 
 		[JsonPropertyName("on_failure")]
-		public IReadOnlyCollection<Nest.Ingest.ProcessorContainer>? OnFailure
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Ingest.ProcessorContainer>? OnFailure { get; set; }
 
 		[JsonPropertyName("processors")]
-		public IReadOnlyCollection<Nest.Ingest.ProcessorContainer>? Processors
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Ingest.ProcessorContainer>? Processors { get; set; }
 
 		[JsonPropertyName("version")]
-		public Nest.VersionNumber? Version
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.VersionNumber? Version { get; set; }
 	}
 
 	[ConvertAs(typeof(SimulateRequest))]
 	public partial interface ISimulateRequest : IRequest<SimulateRequestParameters>
 	{
+		IEnumerable<Nest.Ingest.Simulate.Document>? Docs { get; set; }
+
+		Nest.Ingest.Pipeline? Pipeline { get; set; }
 	}
 
 	public partial class SimulateRequest : PlainRequestBase<SimulateRequestParameters>, ISimulateRequest
@@ -228,25 +200,9 @@ namespace Nest.Ingest
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 
 		[JsonPropertyName("docs")]
-		public IReadOnlyCollection<Nest.Ingest.Simulate.Document>? Docs
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Ingest.Simulate.Document>? Docs { get; set; }
 
 		[JsonPropertyName("pipeline")]
-		public Nest.Ingest.Pipeline? Pipeline
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ingest.Pipeline? Pipeline { get; set; }
 	}
 }

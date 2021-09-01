@@ -84,6 +84,28 @@ namespace Nest.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonPropertyName("recovered_from_snapshot")]
+		public Nest.ByteSize? RecoveredFromSnapshot
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("recovered_from_snapshot_in_bytes")]
+		public Nest.ByteSize? RecoveredFromSnapshotInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("recovered_in_bytes")]
 		public Nest.ByteSize RecoveredInBytes
 		{

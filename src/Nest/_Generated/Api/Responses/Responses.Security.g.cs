@@ -527,19 +527,8 @@ namespace Nest.Ssl
 #endif
 		}
 
-		[JsonPropertyName("file_tokens")]
-		public Dictionary<string, Nest.EmptyObject> FileTokens
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("node_name")]
-		public Nest.NodeName NodeName
+		[JsonPropertyName("nodes_credentials")]
+		public Nest.Security.GetServiceCredentials.NodesCredentials NodesCredentials
 		{
 			get;
 #if NET5_0
@@ -561,7 +550,7 @@ namespace Nest.Ssl
 		}
 
 		[JsonPropertyName("tokens")]
-		public Dictionary<string, Nest.EmptyObject> Tokens
+		public Dictionary<string, Nest.Metadata> Tokens
 		{
 			get;
 #if NET5_0
@@ -681,7 +670,7 @@ namespace Nest.Ssl
 		}
 
 		[JsonPropertyName("global")]
-		public IReadOnlyCollection<Nest.Security.GlobalPrivileges> Global
+		public IReadOnlyCollection<Nest.Security.GlobalPrivilege> Global
 		{
 			get;
 #if NET5_0

@@ -112,6 +112,7 @@ namespace Nest.Nodes
 	[ConvertAs(typeof(ReloadSecureSettingsRequest))]
 	public partial interface IReloadSecureSettingsRequest : IRequest<ReloadSecureSettingsRequestParameters>
 	{
+		Nest.Password? SecureSettingsPassword { get; set; }
 	}
 
 	public partial class ReloadSecureSettingsRequest : PlainRequestBase<ReloadSecureSettingsRequestParameters>, IReloadSecureSettingsRequest
@@ -137,15 +138,7 @@ namespace Nest.Nodes
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonPropertyName("secure_settings_password")]
-		public Nest.Password? SecureSettingsPassword
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Password? SecureSettingsPassword { get; set; }
 	}
 
 	[ConvertAs(typeof(StatsRequest))]

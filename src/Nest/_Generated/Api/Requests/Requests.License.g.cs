@@ -111,6 +111,9 @@ namespace Nest.License
 	[ConvertAs(typeof(PostRequest))]
 	public partial interface IPostRequest : IRequest<PostRequestParameters>
 	{
+		Nest.License.License? License { get; set; }
+
+		IEnumerable<Nest.License.License>? Licenses { get; set; }
 	}
 
 	public partial class PostRequest : PlainRequestBase<PostRequestParameters>, IPostRequest
@@ -131,26 +134,10 @@ namespace Nest.License
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 
 		[JsonPropertyName("license")]
-		public Nest.License.License? License
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.License.License? License { get; set; }
 
 		[JsonPropertyName("licenses")]
-		public IReadOnlyCollection<Nest.License.License>? Licenses
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.License.License>? Licenses { get; set; }
 	}
 
 	[ConvertAs(typeof(PostStartBasicRequest))]

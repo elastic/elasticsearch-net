@@ -28,64 +28,17 @@ namespace Nest.Sql
 		{
 		}
 
-		public ClearCursorResponse ClearCursor(IClearCursorRequest request)
-		{
-			return DoRequest<IClearCursorRequest, ClearCursorResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ClearCursorResponse> ClearCursorAsync(IClearCursorRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IClearCursorRequest, ClearCursorResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ClearCursorResponse ClearCursor(Func<ClearCursorDescriptor, IClearCursorRequest> selector = null)
-		{
-			return ClearCursor(selector.InvokeOrDefault(new ClearCursorDescriptor()));
-		}
-
-		public Task<ClearCursorResponse> ClearCursorAsync(Func<ClearCursorDescriptor, IClearCursorRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ClearCursorAsync(selector.InvokeOrDefault(new ClearCursorDescriptor()), cancellationToken);
-		}
-
-		public QueryResponse Query(IQueryRequest request)
-		{
-			return DoRequest<IQueryRequest, QueryResponse>(request, request.RequestParameters);
-		}
-
-		public Task<QueryResponse> QueryAsync(IQueryRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IQueryRequest, QueryResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public QueryResponse Query(Func<QueryDescriptor, IQueryRequest> selector = null)
-		{
-			return Query(selector.InvokeOrDefault(new QueryDescriptor()));
-		}
-
-		public Task<QueryResponse> QueryAsync(Func<QueryDescriptor, IQueryRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return QueryAsync(selector.InvokeOrDefault(new QueryDescriptor()), cancellationToken);
-		}
-
-		public TranslateResponse Translate(ITranslateRequest request)
-		{
-			return DoRequest<ITranslateRequest, TranslateResponse>(request, request.RequestParameters);
-		}
-
-		public Task<TranslateResponse> TranslateAsync(ITranslateRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<ITranslateRequest, TranslateResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public TranslateResponse Translate(Func<TranslateDescriptor, ITranslateRequest> selector = null)
-		{
-			return Translate(selector.InvokeOrDefault(new TranslateDescriptor()));
-		}
-
-		public Task<TranslateResponse> TranslateAsync(Func<TranslateDescriptor, ITranslateRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return TranslateAsync(selector.InvokeOrDefault(new TranslateDescriptor()), cancellationToken);
-		}
+		public ClearCursorResponse ClearCursor(IClearCursorRequest request) => DoRequest<IClearCursorRequest, ClearCursorResponse>(request, request.RequestParameters);
+		public Task<ClearCursorResponse> ClearCursorAsync(IClearCursorRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClearCursorRequest, ClearCursorResponse>(request, request.RequestParameters, cancellationToken);
+		public ClearCursorResponse ClearCursor(Func<ClearCursorDescriptor, IClearCursorRequest> selector = null) => ClearCursor(selector.InvokeOrDefault(new ClearCursorDescriptor()));
+		public Task<ClearCursorResponse> ClearCursorAsync(Func<ClearCursorDescriptor, IClearCursorRequest> selector = null, CancellationToken cancellationToken = default) => ClearCursorAsync(selector.InvokeOrDefault(new ClearCursorDescriptor()), cancellationToken);
+		public QueryResponse Query(IQueryRequest request) => DoRequest<IQueryRequest, QueryResponse>(request, request.RequestParameters);
+		public Task<QueryResponse> QueryAsync(IQueryRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IQueryRequest, QueryResponse>(request, request.RequestParameters, cancellationToken);
+		public QueryResponse Query(Func<QueryDescriptor, IQueryRequest> selector = null) => Query(selector.InvokeOrDefault(new QueryDescriptor()));
+		public Task<QueryResponse> QueryAsync(Func<QueryDescriptor, IQueryRequest> selector = null, CancellationToken cancellationToken = default) => QueryAsync(selector.InvokeOrDefault(new QueryDescriptor()), cancellationToken);
+		public TranslateResponse Translate(ITranslateRequest request) => DoRequest<ITranslateRequest, TranslateResponse>(request, request.RequestParameters);
+		public Task<TranslateResponse> TranslateAsync(ITranslateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ITranslateRequest, TranslateResponse>(request, request.RequestParameters, cancellationToken);
+		public TranslateResponse Translate(Func<TranslateDescriptor, ITranslateRequest> selector = null) => Translate(selector.InvokeOrDefault(new TranslateDescriptor()));
+		public Task<TranslateResponse> TranslateAsync(Func<TranslateDescriptor, ITranslateRequest> selector = null, CancellationToken cancellationToken = default) => TranslateAsync(selector.InvokeOrDefault(new TranslateDescriptor()), cancellationToken);
 	}
 }

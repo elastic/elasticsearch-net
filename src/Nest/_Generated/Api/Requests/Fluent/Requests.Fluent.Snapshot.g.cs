@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Snapshot
@@ -29,6 +30,9 @@ namespace Nest.Snapshot
         public CleanupRepositoryDescriptor(Nest.Name repository) : base(r => r.Required("repository", repository))
 		{
 		}
+
+		public CleanupRepositoryDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CleanupRepositoryDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class CloneDescriptor : RequestDescriptorBase<CloneDescriptor, CloneRequestParameters, ICloneRequest>, ICloneRequest
@@ -40,6 +44,12 @@ namespace Nest.Snapshot
         public CloneDescriptor(Nest.Name repository, Nest.Name snapshot, Nest.Name target_snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot).Required("target_snapshot", target_snapshot))
 		{
 		}
+
+		string ICloneRequest.Indices { get; set; }
+
+		public CloneDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CloneDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public CloneDescriptor Indices(string indices) => Assign(indices, (a, v) => a.Indices = v);
 	}
 
 	public partial class CreateDescriptor : RequestDescriptorBase<CreateDescriptor, CreateRequestParameters, ICreateRequest>, ICreateRequest
@@ -51,6 +61,27 @@ namespace Nest.Snapshot
         public CreateDescriptor(Nest.Name repository, Nest.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
 		}
+
+		bool? ICreateRequest.IgnoreUnavailable { get; set; }
+
+		bool? ICreateRequest.IncludeGlobalState { get; set; }
+
+		Nest.Indices? ICreateRequest.Indices { get; set; }
+
+		IEnumerable<string>? ICreateRequest.FeatureStates { get; set; }
+
+		Nest.Metadata? ICreateRequest.Metadata { get; set; }
+
+		bool? ICreateRequest.Partial { get; set; }
+
+		public CreateDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CreateDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+		public CreateDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Assign(ignoreUnavailable, (a, v) => a.IgnoreUnavailable = v);
+		public CreateDescriptor IncludeGlobalState(bool? includeGlobalState = true) => Assign(includeGlobalState, (a, v) => a.IncludeGlobalState = v);
+		public CreateDescriptor Indices(Nest.Indices? indices) => Assign(indices, (a, v) => a.Indices = v);
+		public CreateDescriptor FeatureStates(IEnumerable<string>? featureStates) => Assign(featureStates, (a, v) => a.FeatureStates = v);
+		public CreateDescriptor Metadata(Nest.Metadata? metadata) => Assign(metadata, (a, v) => a.Metadata = v);
+		public CreateDescriptor Partial(bool? partial = true) => Assign(partial, (a, v) => a.Partial = v);
 	}
 
 	public partial class CreateRepositoryDescriptor : RequestDescriptorBase<CreateRepositoryDescriptor, CreateRepositoryRequestParameters, ICreateRepositoryRequest>, ICreateRepositoryRequest
@@ -62,6 +93,16 @@ namespace Nest.Snapshot
         public CreateRepositoryDescriptor(Nest.Name repository) : base(r => r.Required("repository", repository))
 		{
 		}
+
+		string ICreateRepositoryRequest.Type { get; set; }
+
+		Nest.Snapshot.RepositorySettings ICreateRepositoryRequest.Settings { get; set; }
+
+		public CreateRepositoryDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CreateRepositoryDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public CreateRepositoryDescriptor Verify(bool? verify = true) => Qs("verify", verify);
+		public CreateRepositoryDescriptor Type(string type) => Assign(type, (a, v) => a.Type = v);
+		public CreateRepositoryDescriptor Settings(Nest.Snapshot.RepositorySettings settings) => Assign(settings, (a, v) => a.Settings = v);
 	}
 
 	public partial class DeleteDescriptor : RequestDescriptorBase<DeleteDescriptor, DeleteRequestParameters, IDeleteRequest>, IDeleteRequest
@@ -73,6 +114,8 @@ namespace Nest.Snapshot
         public DeleteDescriptor(Nest.Name repository, Nest.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
 		}
+
+		public DeleteDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
 	public partial class DeleteRepositoryDescriptor : RequestDescriptorBase<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters, IDeleteRepositoryRequest>, IDeleteRepositoryRequest
@@ -84,6 +127,9 @@ namespace Nest.Snapshot
         public DeleteRepositoryDescriptor(Nest.Names repository) : base(r => r.Required("repository", repository))
 		{
 		}
+
+		public DeleteRepositoryDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public DeleteRepositoryDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class GetDescriptor : RequestDescriptorBase<GetDescriptor, GetRequestParameters, IGetRequest>, IGetRequest
@@ -95,6 +141,11 @@ namespace Nest.Snapshot
         public GetDescriptor(Nest.Name repository, Nest.Names snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
 		}
+
+		public GetDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public GetDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public GetDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
+		public GetDescriptor IndexDetails(bool? indexDetails = true) => Qs("index_details", indexDetails);
 	}
 
 	public partial class GetRepositoryDescriptor : RequestDescriptorBase<GetRepositoryDescriptor, GetRepositoryRequestParameters, IGetRepositoryRequest>, IGetRepositoryRequest
@@ -111,6 +162,9 @@ namespace Nest.Snapshot
         public GetRepositoryDescriptor(Nest.Names? repository) : base(r => r.Optional("repository", repository))
 		{
 		}
+
+		public GetRepositoryDescriptor Local(bool? local = true) => Qs("local", local);
+		public GetRepositoryDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
 	public partial class RestoreDescriptor : RequestDescriptorBase<RestoreDescriptor, RestoreRequestParameters, IRestoreRequest>, IRestoreRequest
@@ -122,6 +176,36 @@ namespace Nest.Snapshot
         public RestoreDescriptor(Nest.Name repository, Nest.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 		{
 		}
+
+		IEnumerable<string>? IRestoreRequest.IgnoreIndexSettings { get; set; }
+
+		bool? IRestoreRequest.IgnoreUnavailable { get; set; }
+
+		bool? IRestoreRequest.IncludeAliases { get; set; }
+
+		bool? IRestoreRequest.IncludeGlobalState { get; set; }
+
+		Nest.IndexManagement.PutSettingsRequest? IRestoreRequest.IndexSettings { get; set; }
+
+		Nest.Indices? IRestoreRequest.Indices { get; set; }
+
+		bool? IRestoreRequest.Partial { get; set; }
+
+		string? IRestoreRequest.RenamePattern { get; set; }
+
+		string? IRestoreRequest.RenameReplacement { get; set; }
+
+		public RestoreDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public RestoreDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+		public RestoreDescriptor IgnoreIndexSettings(IEnumerable<string>? ignoreIndexSettings) => Assign(ignoreIndexSettings, (a, v) => a.IgnoreIndexSettings = v);
+		public RestoreDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Assign(ignoreUnavailable, (a, v) => a.IgnoreUnavailable = v);
+		public RestoreDescriptor IncludeAliases(bool? includeAliases = true) => Assign(includeAliases, (a, v) => a.IncludeAliases = v);
+		public RestoreDescriptor IncludeGlobalState(bool? includeGlobalState = true) => Assign(includeGlobalState, (a, v) => a.IncludeGlobalState = v);
+		public RestoreDescriptor IndexSettings(Nest.IndexManagement.PutSettingsRequest? indexSettings) => Assign(indexSettings, (a, v) => a.IndexSettings = v);
+		public RestoreDescriptor Indices(Nest.Indices? indices) => Assign(indices, (a, v) => a.Indices = v);
+		public RestoreDescriptor Partial(bool? partial = true) => Assign(partial, (a, v) => a.Partial = v);
+		public RestoreDescriptor RenamePattern(string? renamePattern) => Assign(renamePattern, (a, v) => a.RenamePattern = v);
+		public RestoreDescriptor RenameReplacement(string? renameReplacement) => Assign(renameReplacement, (a, v) => a.RenameReplacement = v);
 	}
 
 	public partial class StatusDescriptor : RequestDescriptorBase<StatusDescriptor, StatusRequestParameters, IStatusRequest>, IStatusRequest
@@ -143,6 +227,9 @@ namespace Nest.Snapshot
         public StatusDescriptor(Nest.Name? repository, Nest.Names? snapshot) : base(r => r.Optional("repository", repository).Optional("snapshot", snapshot))
 		{
 		}
+
+		public StatusDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public StatusDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
 	public partial class VerifyRepositoryDescriptor : RequestDescriptorBase<VerifyRepositoryDescriptor, VerifyRepositoryRequestParameters, IVerifyRepositoryRequest>, IVerifyRepositoryRequest
@@ -154,5 +241,8 @@ namespace Nest.Snapshot
         public VerifyRepositoryDescriptor(Nest.Name repository) : base(r => r.Required("repository", repository))
 		{
 		}
+
+		public VerifyRepositoryDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public VerifyRepositoryDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 }

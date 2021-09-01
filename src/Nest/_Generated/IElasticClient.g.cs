@@ -16,18 +16,23 @@
 // ------------------------------------------------
 
 using Nest.AsyncSearch;
+using Nest.Autoscaling;
 using Nest.Cat;
 using Nest.Cluster;
 using Nest.CrossClusterReplication;
+using Nest.DanglingIndices;
 using Nest.Enrich;
 using Nest.Eql;
+using Nest.Features;
 using Nest.Graph;
 using Nest.IndexLifecycleManagement;
 using Nest.IndexManagement;
 using Nest.Ingest;
 using Nest.License;
+using Nest.Logstash;
 using Nest.MachineLearning;
 using Nest.Migration;
+using Nest.Monitoring;
 using Nest.Nodes;
 using Nest.Rollup;
 using Nest.SearchableSnapshots;
@@ -52,15 +57,21 @@ namespace Nest
 	{
 		AsyncSearchNamespace AsyncSearch { get; }
 
+		AutoscalingNamespace Autoscaling { get; }
+
 		CatNamespace Cat { get; }
 
 		CrossClusterReplicationNamespace CrossClusterReplication { get; }
 
 		ClusterNamespace Cluster { get; }
 
+		DanglingIndicesNamespace DanglingIndices { get; }
+
 		EnrichNamespace Enrich { get; }
 
 		EqlNamespace Eql { get; }
+
+		FeaturesNamespace Features { get; }
 
 		GraphNamespace Graph { get; }
 
@@ -72,9 +83,13 @@ namespace Nest
 
 		LicenseNamespace License { get; }
 
+		LogstashNamespace Logstash { get; }
+
 		MigrationNamespace Migration { get; }
 
 		MachineLearningNamespace MachineLearning { get; }
+
+		MonitoringNamespace Monitoring { get; }
 
 		NodesNamespace Nodes { get; }
 

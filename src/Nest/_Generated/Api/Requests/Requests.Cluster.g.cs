@@ -25,6 +25,13 @@ namespace Nest.Cluster
 	[ConvertAs(typeof(AllocationExplainRequest))]
 	public partial interface IAllocationExplainRequest : IRequest<AllocationExplainRequestParameters>
 	{
+		string? CurrentNode { get; set; }
+
+		Nest.IndexName? Index { get; set; }
+
+		bool? Primary { get; set; }
+
+		int? Shard { get; set; }
 	}
 
 	public partial class AllocationExplainRequest : PlainRequestBase<AllocationExplainRequestParameters>, IAllocationExplainRequest
@@ -48,48 +55,16 @@ namespace Nest.Cluster
 		public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 
 		[JsonPropertyName("current_node")]
-		public string? CurrentNode
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? CurrentNode { get; set; }
 
 		[JsonPropertyName("index")]
-		public Nest.IndexName? Index
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexName? Index { get; set; }
 
 		[JsonPropertyName("primary")]
-		public bool? Primary
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Primary { get; set; }
 
 		[JsonPropertyName("shard")]
-		public int? Shard
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? Shard { get; set; }
 	}
 
 	[ConvertAs(typeof(DeleteComponentTemplateRequest))]
@@ -128,25 +103,43 @@ namespace Nest.Cluster
 		protected IDeleteVotingConfigExclusionsRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteVotingConfigExclusions;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
 
 		///<summary>/_cluster/voting_config_exclusions</summary>
         public DeleteVotingConfigExclusionsRequest() : base()
 		{
 		}
 
-		[JsonPropertyName("stub")]
-		public string Stub
+		[JsonIgnore]
+		public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
+	}
+
+	[ConvertAs(typeof(ExistsComponentTemplateRequest))]
+	public partial interface IExistsComponentTemplateRequest : IRequest<ExistsComponentTemplateRequestParameters>
+	{
+	}
+
+	public partial class ExistsComponentTemplateRequest : PlainRequestBase<ExistsComponentTemplateRequestParameters>, IExistsComponentTemplateRequest
+	{
+		protected IExistsComponentTemplateRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterExistsComponentTemplate;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => false;
+		protected override bool IsEmpty => false;
+
+		///<summary>/_component_template/{name}</summary>
+        public ExistsComponentTemplateRequest(Nest.Names name) : base(r => r.Required("name", name))
 		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
 		}
+
+		[JsonIgnore]
+		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
 	[ConvertAs(typeof(GetComponentTemplateRequest))]
@@ -326,14 +319,22 @@ namespace Nest.Cluster
 
 		[JsonIgnore]
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
-
-		[JsonIgnore]
-		public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
 	}
 
 	[ConvertAs(typeof(PutComponentTemplateRequest))]
 	public partial interface IPutComponentTemplateRequest : IRequest<PutComponentTemplateRequestParameters>
 	{
+		Nest.IndexManagement.IndexState Template { get; set; }
+
+		Dictionary<string, Nest.IndexManagement.AliasDefinition>? Aliases { get; set; }
+
+		Nest.Mapping.TypeMapping? Mappings { get; set; }
+
+		Nest.IndexManagement.IndexSettings? Settings { get; set; }
+
+		Nest.VersionNumber? Version { get; set; }
+
+		Nest.Metadata? Meta { get; set; }
 	}
 
 	public partial class PutComponentTemplateRequest : PlainRequestBase<PutComponentTemplateRequestParameters>, IPutComponentTemplateRequest
@@ -357,75 +358,30 @@ namespace Nest.Cluster
 		public Nest.Time? MasterTimeout { get => Q<Nest.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonPropertyName("template")]
-		public Nest.IndexManagement.IndexState Template
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexManagement.IndexState Template { get; set; }
 
 		[JsonPropertyName("aliases")]
-		public Dictionary<string, Nest.IndexManagement.AliasDefinition>? Aliases
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, Nest.IndexManagement.AliasDefinition>? Aliases { get; set; }
 
 		[JsonPropertyName("mappings")]
-		public Nest.Mapping.TypeMapping? Mappings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Mapping.TypeMapping? Mappings { get; set; }
 
 		[JsonPropertyName("settings")]
-		public Nest.IndexManagement.IndexSettings? Settings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexManagement.IndexSettings? Settings { get; set; }
 
 		[JsonPropertyName("version")]
-		public Nest.VersionNumber? Version
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.VersionNumber? Version { get; set; }
 
 		[JsonPropertyName("_meta")]
-		public Nest.Metadata? Meta
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Metadata? Meta { get; set; }
 	}
 
 	[ConvertAs(typeof(PutSettingsRequest))]
 	public partial interface IPutSettingsRequest : IRequest<PutSettingsRequestParameters>
 	{
+		Dictionary<string, object>? Persistent { get; set; }
+
+		Dictionary<string, object>? Transient { get; set; }
 	}
 
 	public partial class PutSettingsRequest : PlainRequestBase<PutSettingsRequestParameters>, IPutSettingsRequest
@@ -452,26 +408,10 @@ namespace Nest.Cluster
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonPropertyName("persistent")]
-		public Dictionary<string, object>? Persistent
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Persistent { get; set; }
 
 		[JsonPropertyName("transient")]
-		public Dictionary<string, object>? Transient
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Transient { get; set; }
 	}
 
 	[ConvertAs(typeof(RemoteInfoRequest))]
@@ -484,30 +424,20 @@ namespace Nest.Cluster
 		protected IRemoteInfoRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterRemoteInfo;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
+		protected override bool SupportsBody => false;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => true;
 
 		///<summary>/_remote/info</summary>
         public RemoteInfoRequest() : base()
 		{
-		}
-
-		[JsonPropertyName("stub")]
-		public string Stub
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
 		}
 	}
 
 	[ConvertAs(typeof(RerouteRequest))]
 	public partial interface IRerouteRequest : IRequest<RerouteRequestParameters>
 	{
+		IEnumerable<Nest.Cluster.Reroute.Command>? Commands { get; set; }
 	}
 
 	public partial class RerouteRequest : PlainRequestBase<RerouteRequestParameters>, IRerouteRequest
@@ -543,15 +473,7 @@ namespace Nest.Cluster
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonPropertyName("commands")]
-		public IReadOnlyCollection<Nest.Cluster.Reroute.Command>? Commands
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Cluster.Reroute.Command>? Commands { get; set; }
 	}
 
 	[ConvertAs(typeof(StateRequest))]

@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Nodes
@@ -34,6 +35,13 @@ namespace Nest.Nodes
         public HotThreadsDescriptor(Nest.NodeIds? node_id) : base(r => r.Optional("node_id", node_id))
 		{
 		}
+
+		public HotThreadsDescriptor IgnoreIdleThreads(bool? ignoreIdleThreads = true) => Qs("ignore_idle_threads", ignoreIdleThreads);
+		public HotThreadsDescriptor Interval(Nest.Time? interval) => Qs("interval", interval);
+		public HotThreadsDescriptor Snapshots(long? snapshots) => Qs("snapshots", snapshots);
+		public HotThreadsDescriptor Threads(long? threads) => Qs("threads", threads);
+		public HotThreadsDescriptor ThreadType(Nest.ThreadType? threadType) => Qs("thread_type", threadType);
+		public HotThreadsDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class InfoDescriptor : RequestDescriptorBase<InfoDescriptor, InfoRequestParameters, IInfoRequest>, IInfoRequest
@@ -60,6 +68,10 @@ namespace Nest.Nodes
         public InfoDescriptor(Nest.NodeIds? node_id, Nest.Metrics? metric) : base(r => r.Optional("node_id", node_id).Optional("metric", metric))
 		{
 		}
+
+		public InfoDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		public InfoDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public InfoDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class ReloadSecureSettingsDescriptor : RequestDescriptorBase<ReloadSecureSettingsDescriptor, ReloadSecureSettingsRequestParameters, IReloadSecureSettingsRequest>, IReloadSecureSettingsRequest
@@ -76,6 +88,11 @@ namespace Nest.Nodes
         public ReloadSecureSettingsDescriptor(Nest.NodeIds? node_id) : base(r => r.Optional("node_id", node_id))
 		{
 		}
+
+		Nest.Password? IReloadSecureSettingsRequest.SecureSettingsPassword { get; set; }
+
+		public ReloadSecureSettingsDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public ReloadSecureSettingsDescriptor SecureSettingsPassword(Nest.Password? secureSettingsPassword) => Assign(secureSettingsPassword, (a, v) => a.SecureSettingsPassword = v);
 	}
 
 	public partial class StatsDescriptor : RequestDescriptorBase<StatsDescriptor, StatsRequestParameters, IStatsRequest>, IStatsRequest
@@ -112,6 +129,17 @@ namespace Nest.Nodes
         public StatsDescriptor(Nest.NodeIds? node_id, Nest.Metrics? metric, Nest.Metrics? index_metric) : base(r => r.Optional("node_id", node_id).Optional("metric", metric).Optional("index_metric", index_metric))
 		{
 		}
+
+		public StatsDescriptor CompletionFields(Nest.Fields? completionFields) => Qs("completion_fields", completionFields);
+		public StatsDescriptor FielddataFields(Nest.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
+		public StatsDescriptor Fields(Nest.Fields? fields) => Qs("fields", fields);
+		public StatsDescriptor Groups(bool? groups = true) => Qs("groups", groups);
+		public StatsDescriptor IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
+		public StatsDescriptor Level(Nest.Level? level) => Qs("level", level);
+		public StatsDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public StatsDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public StatsDescriptor Types(IEnumerable<string>? types) => Qs("types", types);
+		public StatsDescriptor IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
 	}
 
 	public partial class UsageDescriptor : RequestDescriptorBase<UsageDescriptor, UsageRequestParameters, IUsageRequest>, IUsageRequest
@@ -138,5 +166,7 @@ namespace Nest.Nodes
         public UsageDescriptor(Nest.NodeIds? node_id, Nest.Metrics? metric) : base(r => r.Optional("node_id", node_id).Optional("metric", metric))
 		{
 		}
+
+		public UsageDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 }
