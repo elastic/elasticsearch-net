@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Eql
@@ -40,6 +41,9 @@ namespace Nest.Eql
         public GetDescriptor(Nest.Id id) : base(r => r.Required("id", id))
 		{
 		}
+
+		public GetDescriptor KeepAlive(Nest.Time? keepAlive) => Qs("keep_alive", keepAlive);
+		public GetDescriptor WaitForCompletionTimeout(Nest.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
 	}
 
 	public partial class GetStatusDescriptor : RequestDescriptorBase<GetStatusDescriptor, GetStatusRequestParameters, IGetStatusRequest>, IGetStatusRequest
@@ -49,17 +53,6 @@ namespace Nest.Eql
 		protected override bool SupportsBody => false;
 		///<summary>/_eql/search/status/{id}</summary>
         public GetStatusDescriptor(Nest.Id id) : base(r => r.Required("id", id))
-		{
-		}
-	}
-
-	public partial class SearchDescriptor : RequestDescriptorBase<SearchDescriptor, SearchRequestParameters, ISearchRequest>, ISearchRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearch;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		///<summary>/{index}/_eql/search</summary>
-        public SearchDescriptor(Nest.IndexName index) : base(r => r.Required("index", index))
 		{
 		}
 	}

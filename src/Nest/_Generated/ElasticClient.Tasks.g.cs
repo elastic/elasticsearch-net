@@ -28,64 +28,17 @@ namespace Nest.Tasks
 		{
 		}
 
-		public CancelResponse Cancel(ICancelRequest request)
-		{
-			return DoRequest<ICancelRequest, CancelResponse>(request, request.RequestParameters);
-		}
-
-		public Task<CancelResponse> CancelAsync(ICancelRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<ICancelRequest, CancelResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public CancelResponse Cancel(Func<CancelDescriptor, ICancelRequest> selector = null)
-		{
-			return Cancel(selector.InvokeOrDefault(new CancelDescriptor()));
-		}
-
-		public Task<CancelResponse> CancelAsync(Func<CancelDescriptor, ICancelRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return CancelAsync(selector.InvokeOrDefault(new CancelDescriptor()), cancellationToken);
-		}
-
-		public GetResponse Get(IGetRequest request)
-		{
-			return DoRequest<IGetRequest, GetResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetResponse> GetAsync(IGetRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetRequest, GetResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetResponse Get(Nest.Id task_id, Func<GetDescriptor, IGetRequest> selector = null)
-		{
-			return Get(selector.InvokeOrDefault(new GetDescriptor(task_id)));
-		}
-
-		public Task<GetResponse> GetAsync(Nest.Id task_id, Func<GetDescriptor, IGetRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetAsync(selector.InvokeOrDefault(new GetDescriptor(task_id)), cancellationToken);
-		}
-
-		public ListResponse List(IListRequest request)
-		{
-			return DoRequest<IListRequest, ListResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ListResponse> ListAsync(IListRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IListRequest, ListResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ListResponse List(Func<ListDescriptor, IListRequest> selector = null)
-		{
-			return List(selector.InvokeOrDefault(new ListDescriptor()));
-		}
-
-		public Task<ListResponse> ListAsync(Func<ListDescriptor, IListRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ListAsync(selector.InvokeOrDefault(new ListDescriptor()), cancellationToken);
-		}
+		public CancelResponse Cancel(ICancelRequest request) => DoRequest<ICancelRequest, CancelResponse>(request, request.RequestParameters);
+		public Task<CancelResponse> CancelAsync(ICancelRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ICancelRequest, CancelResponse>(request, request.RequestParameters, cancellationToken);
+		public CancelResponse Cancel(Func<CancelDescriptor, ICancelRequest> selector = null) => Cancel(selector.InvokeOrDefault(new CancelDescriptor()));
+		public Task<CancelResponse> CancelAsync(Func<CancelDescriptor, ICancelRequest> selector = null, CancellationToken cancellationToken = default) => CancelAsync(selector.InvokeOrDefault(new CancelDescriptor()), cancellationToken);
+		public GetResponse Get(IGetRequest request) => DoRequest<IGetRequest, GetResponse>(request, request.RequestParameters);
+		public Task<GetResponse> GetAsync(IGetRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetRequest, GetResponse>(request, request.RequestParameters, cancellationToken);
+		public GetResponse Get(Nest.Id task_id, Func<GetDescriptor, IGetRequest> selector = null) => Get(selector.InvokeOrDefault(new GetDescriptor(task_id)));
+		public Task<GetResponse> GetAsync(Nest.Id task_id, Func<GetDescriptor, IGetRequest> selector = null, CancellationToken cancellationToken = default) => GetAsync(selector.InvokeOrDefault(new GetDescriptor(task_id)), cancellationToken);
+		public ListResponse List(IListRequest request) => DoRequest<IListRequest, ListResponse>(request, request.RequestParameters);
+		public Task<ListResponse> ListAsync(IListRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IListRequest, ListResponse>(request, request.RequestParameters, cancellationToken);
+		public ListResponse List(Func<ListDescriptor, IListRequest> selector = null) => List(selector.InvokeOrDefault(new ListDescriptor()));
+		public Task<ListResponse> ListAsync(Func<ListDescriptor, IListRequest> selector = null, CancellationToken cancellationToken = default) => ListAsync(selector.InvokeOrDefault(new ListDescriptor()), cancellationToken);
 	}
 }

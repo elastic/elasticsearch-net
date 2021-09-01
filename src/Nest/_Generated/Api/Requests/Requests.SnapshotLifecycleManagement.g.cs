@@ -150,6 +150,15 @@ namespace Nest.Slm
 	[ConvertAs(typeof(PutLifecycleRequest))]
 	public partial interface IPutLifecycleRequest : IRequest<PutLifecycleRequestParameters>
 	{
+		Nest.Slm.Configuration? Config { get; set; }
+
+		Nest.Name? Name { get; set; }
+
+		string? Repository { get; set; }
+
+		Nest.Slm.Retention? Retention { get; set; }
+
+		Nest.Watcher.CronExpression? Schedule { get; set; }
 	}
 
 	public partial class PutLifecycleRequest : PlainRequestBase<PutLifecycleRequestParameters>, IPutLifecycleRequest
@@ -167,48 +176,19 @@ namespace Nest.Slm
 		}
 
 		[JsonPropertyName("config")]
-		public Nest.Slm.Configuration? Config
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Slm.Configuration? Config { get; set; }
+
+		[JsonPropertyName("name")]
+		public Nest.Name? Name { get; set; }
 
 		[JsonPropertyName("repository")]
-		public string? Repository
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Repository { get; set; }
 
 		[JsonPropertyName("retention")]
-		public Nest.Slm.Retention? Retention
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Slm.Retention? Retention { get; set; }
 
 		[JsonPropertyName("schedule")]
-		public Nest.Watcher.CronExpression? Schedule
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Watcher.CronExpression? Schedule { get; set; }
 	}
 
 	[ConvertAs(typeof(StartRequest))]

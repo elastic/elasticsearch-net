@@ -66,6 +66,10 @@ namespace Nest.Watcher
 		public Nest.VersionNumber? Version { get => Q<Nest.VersionNumber?>("version"); set => Q("version", value); }
 	}
 
+	public class QueryWatchesRequestParameters : RequestParameters<QueryWatchesRequestParameters>
+	{
+	}
+
 	public class StartRequestParameters : RequestParameters<StartRequestParameters>
 	{
 	}

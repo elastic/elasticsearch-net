@@ -41,25 +41,4 @@ namespace Nest.Eql
 	public class GetStatusRequestParameters : RequestParameters<GetStatusRequestParameters>
 	{
 	}
-
-	public class SearchRequestParameters : RequestParameters<SearchRequestParameters>
-	{
-		[JsonIgnore]
-		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
-		[JsonIgnore]
-		public Nest.ExpandWildcards? ExpandWildcards { get => Q<Nest.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-		[JsonIgnore]
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-		[JsonIgnore]
-		public Nest.Time? KeepAlive { get => Q<Nest.Time?>("keep_alive"); set => Q("keep_alive", value); }
-
-		[JsonIgnore]
-		public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
-
-		[JsonIgnore]
-		public Nest.Time? WaitForCompletionTimeout { get => Q<Nest.Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
-	}
 }

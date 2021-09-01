@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Xpack
@@ -29,6 +30,8 @@ namespace Nest.Xpack
         public InfoDescriptor() : base()
 		{
 		}
+
+		public InfoDescriptor Categories(IEnumerable<string>? categories) => Qs("categories", categories);
 	}
 
 	public partial class UsageDescriptor : RequestDescriptorBase<UsageDescriptor, UsageRequestParameters, IUsageRequest>, IUsageRequest
@@ -40,5 +43,7 @@ namespace Nest.Xpack
         public UsageDescriptor() : base()
 		{
 		}
+
+		public UsageDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 }

@@ -51,6 +51,7 @@ namespace Nest.Snapshot
 	[ConvertAs(typeof(CloneRequest))]
 	public partial interface ICloneRequest : IRequest<CloneRequestParameters>
 	{
+		string Indices { get; set; }
 	}
 
 	public partial class CloneRequest : PlainRequestBase<CloneRequestParameters>, ICloneRequest
@@ -72,11 +73,25 @@ namespace Nest.Snapshot
 
 		[JsonIgnore]
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonPropertyName("indices")]
+		public string Indices { get; set; }
 	}
 
 	[ConvertAs(typeof(CreateRequest))]
 	public partial interface ICreateRequest : IRequest<CreateRequestParameters>
 	{
+		bool? IgnoreUnavailable { get; set; }
+
+		bool? IncludeGlobalState { get; set; }
+
+		Nest.Indices? Indices { get; set; }
+
+		IEnumerable<string>? FeatureStates { get; set; }
+
+		Nest.Metadata? Metadata { get; set; }
+
+		bool? Partial { get; set; }
 	}
 
 	public partial class CreateRequest : PlainRequestBase<CreateRequestParameters>, ICreateRequest
@@ -100,53 +115,30 @@ namespace Nest.Snapshot
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
 		[JsonPropertyName("ignore_unavailable")]
-		public bool? IgnoreUnavailable
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? IgnoreUnavailable { get; set; }
 
 		[JsonPropertyName("include_global_state")]
-		public bool? IncludeGlobalState
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? IncludeGlobalState { get; set; }
+
+		[JsonPropertyName("indices")]
+		public Nest.Indices? Indices { get; set; }
 
 		[JsonPropertyName("feature_states")]
-		public IReadOnlyCollection<string>? FeatureStates
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? FeatureStates { get; set; }
+
+		[JsonPropertyName("metadata")]
+		public Nest.Metadata? Metadata { get; set; }
 
 		[JsonPropertyName("partial")]
-		public bool? Partial
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Partial { get; set; }
 	}
 
 	[ConvertAs(typeof(CreateRepositoryRequest))]
 	public partial interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters>
 	{
+		string Type { get; set; }
+
+		Nest.Snapshot.RepositorySettings Settings { get; set; }
 	}
 
 	public partial class CreateRepositoryRequest : PlainRequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
@@ -172,16 +164,11 @@ namespace Nest.Snapshot
 		[JsonIgnore]
 		public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 
+		[JsonPropertyName("type")]
+		public string Type { get; set; }
+
 		[JsonPropertyName("settings")]
-		public Nest.Snapshot.RepositorySettings Settings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Snapshot.RepositorySettings Settings { get; set; }
 	}
 
 	[ConvertAs(typeof(DeleteRequest))]
@@ -299,6 +286,23 @@ namespace Nest.Snapshot
 	[ConvertAs(typeof(RestoreRequest))]
 	public partial interface IRestoreRequest : IRequest<RestoreRequestParameters>
 	{
+		IEnumerable<string>? IgnoreIndexSettings { get; set; }
+
+		bool? IgnoreUnavailable { get; set; }
+
+		bool? IncludeAliases { get; set; }
+
+		bool? IncludeGlobalState { get; set; }
+
+		Nest.IndexManagement.PutSettingsRequest? IndexSettings { get; set; }
+
+		Nest.Indices? Indices { get; set; }
+
+		bool? Partial { get; set; }
+
+		string? RenamePattern { get; set; }
+
+		string? RenameReplacement { get; set; }
 	}
 
 	public partial class RestoreRequest : PlainRequestBase<RestoreRequestParameters>, IRestoreRequest
@@ -322,92 +326,31 @@ namespace Nest.Snapshot
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
 		[JsonPropertyName("ignore_index_settings")]
-		public IReadOnlyCollection<string>? IgnoreIndexSettings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? IgnoreIndexSettings { get; set; }
 
 		[JsonPropertyName("ignore_unavailable")]
-		public bool? IgnoreUnavailable
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? IgnoreUnavailable { get; set; }
 
 		[JsonPropertyName("include_aliases")]
-		public bool? IncludeAliases
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? IncludeAliases { get; set; }
 
 		[JsonPropertyName("include_global_state")]
-		public bool? IncludeGlobalState
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? IncludeGlobalState { get; set; }
 
 		[JsonPropertyName("index_settings")]
-		public Nest.IndexManagement.PutSettingsRequest? IndexSettings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexManagement.PutSettingsRequest? IndexSettings { get; set; }
+
+		[JsonPropertyName("indices")]
+		public Nest.Indices? Indices { get; set; }
 
 		[JsonPropertyName("partial")]
-		public bool? Partial
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Partial { get; set; }
 
 		[JsonPropertyName("rename_pattern")]
-		public string? RenamePattern
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? RenamePattern { get; set; }
 
 		[JsonPropertyName("rename_replacement")]
-		public string? RenameReplacement
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? RenameReplacement { get; set; }
 	}
 
 	[ConvertAs(typeof(StatusRequest))]

@@ -22,24 +22,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Nest.Shutdown
 {
-	public partial class DeleteNodeResponse : ResponseBase
+	public partial class DeleteNodeResponse : AcknowledgedResponseBase
 	{
-		[JsonPropertyName("stub")]
-		public bool Stub
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
 	}
 
 	public partial class GetNodeResponse : ResponseBase
 	{
-		[JsonPropertyName("stub")]
-		public bool Stub
+		[JsonPropertyName("nodes")]
+		public IReadOnlyCollection<Nest.Shutdown.GetNode.NodeShutdownStatus> Nodes
 		{
 			get;
 #if NET5_0
@@ -50,17 +40,7 @@ namespace Nest.Shutdown
 		}
 	}
 
-	public partial class PutNodeResponse : ResponseBase
+	public partial class PutNodeResponse : AcknowledgedResponseBase
 	{
-		[JsonPropertyName("stub")]
-		public bool Stub
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
 	}
 }

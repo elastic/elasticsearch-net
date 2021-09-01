@@ -28,124 +28,29 @@ namespace Nest.Ingest
 		{
 		}
 
-		public DeletePipelineResponse DeletePipeline(IDeletePipelineRequest request)
-		{
-			return DoRequest<IDeletePipelineRequest, DeletePipelineResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeletePipelineRequest, DeletePipelineResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeletePipelineResponse DeletePipeline(Nest.Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null)
-		{
-			return DeletePipeline(selector.InvokeOrDefault(new DeletePipelineDescriptor(id)));
-		}
-
-		public Task<DeletePipelineResponse> DeletePipelineAsync(Nest.Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeletePipelineAsync(selector.InvokeOrDefault(new DeletePipelineDescriptor(id)), cancellationToken);
-		}
-
-		public GeoIpStatsResponse GeoIpStats(IGeoIpStatsRequest request)
-		{
-			return DoRequest<IGeoIpStatsRequest, GeoIpStatsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GeoIpStatsResponse> GeoIpStatsAsync(IGeoIpStatsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGeoIpStatsRequest, GeoIpStatsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GeoIpStatsResponse GeoIpStats(Func<GeoIpStatsDescriptor, IGeoIpStatsRequest> selector = null)
-		{
-			return GeoIpStats(selector.InvokeOrDefault(new GeoIpStatsDescriptor()));
-		}
-
-		public Task<GeoIpStatsResponse> GeoIpStatsAsync(Func<GeoIpStatsDescriptor, IGeoIpStatsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GeoIpStatsAsync(selector.InvokeOrDefault(new GeoIpStatsDescriptor()), cancellationToken);
-		}
-
-		public GetPipelineResponse GetPipeline(IGetPipelineRequest request)
-		{
-			return DoRequest<IGetPipelineRequest, GetPipelineResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetPipelineResponse> GetPipelineAsync(IGetPipelineRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetPipelineRequest, GetPipelineResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetPipelineResponse GetPipeline(Func<GetPipelineDescriptor, IGetPipelineRequest> selector = null)
-		{
-			return GetPipeline(selector.InvokeOrDefault(new GetPipelineDescriptor()));
-		}
-
-		public Task<GetPipelineResponse> GetPipelineAsync(Func<GetPipelineDescriptor, IGetPipelineRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetPipelineAsync(selector.InvokeOrDefault(new GetPipelineDescriptor()), cancellationToken);
-		}
-
-		public ProcessorGrokResponse ProcessorGrok(IProcessorGrokRequest request)
-		{
-			return DoRequest<IProcessorGrokRequest, ProcessorGrokResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ProcessorGrokResponse> ProcessorGrokAsync(IProcessorGrokRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IProcessorGrokRequest, ProcessorGrokResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ProcessorGrokResponse ProcessorGrok(Func<ProcessorGrokDescriptor, IProcessorGrokRequest> selector = null)
-		{
-			return ProcessorGrok(selector.InvokeOrDefault(new ProcessorGrokDescriptor()));
-		}
-
-		public Task<ProcessorGrokResponse> ProcessorGrokAsync(Func<ProcessorGrokDescriptor, IProcessorGrokRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ProcessorGrokAsync(selector.InvokeOrDefault(new ProcessorGrokDescriptor()), cancellationToken);
-		}
-
-		public PutPipelineResponse PutPipeline(IPutPipelineRequest request)
-		{
-			return DoRequest<IPutPipelineRequest, PutPipelineResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutPipelineResponse> PutPipelineAsync(IPutPipelineRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutPipelineRequest, PutPipelineResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PutPipelineResponse PutPipeline(Nest.Id id, Func<PutPipelineDescriptor, IPutPipelineRequest> selector = null)
-		{
-			return PutPipeline(selector.InvokeOrDefault(new PutPipelineDescriptor(id)));
-		}
-
-		public Task<PutPipelineResponse> PutPipelineAsync(Nest.Id id, Func<PutPipelineDescriptor, IPutPipelineRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PutPipelineAsync(selector.InvokeOrDefault(new PutPipelineDescriptor(id)), cancellationToken);
-		}
-
-		public SimulateResponse Simulate(ISimulateRequest request)
-		{
-			return DoRequest<ISimulateRequest, SimulateResponse>(request, request.RequestParameters);
-		}
-
-		public Task<SimulateResponse> SimulateAsync(ISimulateRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<ISimulateRequest, SimulateResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public SimulateResponse Simulate(Func<SimulateDescriptor, ISimulateRequest> selector = null)
-		{
-			return Simulate(selector.InvokeOrDefault(new SimulateDescriptor()));
-		}
-
-		public Task<SimulateResponse> SimulateAsync(Func<SimulateDescriptor, ISimulateRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return SimulateAsync(selector.InvokeOrDefault(new SimulateDescriptor()), cancellationToken);
-		}
+		public DeletePipelineResponse DeletePipeline(IDeletePipelineRequest request) => DoRequest<IDeletePipelineRequest, DeletePipelineResponse>(request, request.RequestParameters);
+		public Task<DeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeletePipelineRequest, DeletePipelineResponse>(request, request.RequestParameters, cancellationToken);
+		public DeletePipelineResponse DeletePipeline(Nest.Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null) => DeletePipeline(selector.InvokeOrDefault(new DeletePipelineDescriptor(id)));
+		public Task<DeletePipelineResponse> DeletePipelineAsync(Nest.Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null, CancellationToken cancellationToken = default) => DeletePipelineAsync(selector.InvokeOrDefault(new DeletePipelineDescriptor(id)), cancellationToken);
+		public GeoIpStatsResponse GeoIpStats(IGeoIpStatsRequest request) => DoRequest<IGeoIpStatsRequest, GeoIpStatsResponse>(request, request.RequestParameters);
+		public Task<GeoIpStatsResponse> GeoIpStatsAsync(IGeoIpStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGeoIpStatsRequest, GeoIpStatsResponse>(request, request.RequestParameters, cancellationToken);
+		public GeoIpStatsResponse GeoIpStats(Func<GeoIpStatsDescriptor, IGeoIpStatsRequest> selector = null) => GeoIpStats(selector.InvokeOrDefault(new GeoIpStatsDescriptor()));
+		public Task<GeoIpStatsResponse> GeoIpStatsAsync(Func<GeoIpStatsDescriptor, IGeoIpStatsRequest> selector = null, CancellationToken cancellationToken = default) => GeoIpStatsAsync(selector.InvokeOrDefault(new GeoIpStatsDescriptor()), cancellationToken);
+		public GetPipelineResponse GetPipeline(IGetPipelineRequest request) => DoRequest<IGetPipelineRequest, GetPipelineResponse>(request, request.RequestParameters);
+		public Task<GetPipelineResponse> GetPipelineAsync(IGetPipelineRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetPipelineRequest, GetPipelineResponse>(request, request.RequestParameters, cancellationToken);
+		public GetPipelineResponse GetPipeline(Func<GetPipelineDescriptor, IGetPipelineRequest> selector = null) => GetPipeline(selector.InvokeOrDefault(new GetPipelineDescriptor()));
+		public Task<GetPipelineResponse> GetPipelineAsync(Func<GetPipelineDescriptor, IGetPipelineRequest> selector = null, CancellationToken cancellationToken = default) => GetPipelineAsync(selector.InvokeOrDefault(new GetPipelineDescriptor()), cancellationToken);
+		public ProcessorGrokResponse ProcessorGrok(IProcessorGrokRequest request) => DoRequest<IProcessorGrokRequest, ProcessorGrokResponse>(request, request.RequestParameters);
+		public Task<ProcessorGrokResponse> ProcessorGrokAsync(IProcessorGrokRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IProcessorGrokRequest, ProcessorGrokResponse>(request, request.RequestParameters, cancellationToken);
+		public ProcessorGrokResponse ProcessorGrok(Func<ProcessorGrokDescriptor, IProcessorGrokRequest> selector = null) => ProcessorGrok(selector.InvokeOrDefault(new ProcessorGrokDescriptor()));
+		public Task<ProcessorGrokResponse> ProcessorGrokAsync(Func<ProcessorGrokDescriptor, IProcessorGrokRequest> selector = null, CancellationToken cancellationToken = default) => ProcessorGrokAsync(selector.InvokeOrDefault(new ProcessorGrokDescriptor()), cancellationToken);
+		public PutPipelineResponse PutPipeline(IPutPipelineRequest request) => DoRequest<IPutPipelineRequest, PutPipelineResponse>(request, request.RequestParameters);
+		public Task<PutPipelineResponse> PutPipelineAsync(IPutPipelineRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPutPipelineRequest, PutPipelineResponse>(request, request.RequestParameters, cancellationToken);
+		public PutPipelineResponse PutPipeline(Nest.Id id, Func<PutPipelineDescriptor, IPutPipelineRequest> selector = null) => PutPipeline(selector.InvokeOrDefault(new PutPipelineDescriptor(id)));
+		public Task<PutPipelineResponse> PutPipelineAsync(Nest.Id id, Func<PutPipelineDescriptor, IPutPipelineRequest> selector = null, CancellationToken cancellationToken = default) => PutPipelineAsync(selector.InvokeOrDefault(new PutPipelineDescriptor(id)), cancellationToken);
+		public SimulateResponse Simulate(ISimulateRequest request) => DoRequest<ISimulateRequest, SimulateResponse>(request, request.RequestParameters);
+		public Task<SimulateResponse> SimulateAsync(ISimulateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ISimulateRequest, SimulateResponse>(request, request.RequestParameters, cancellationToken);
+		public SimulateResponse Simulate(Func<SimulateDescriptor, ISimulateRequest> selector = null) => Simulate(selector.InvokeOrDefault(new SimulateDescriptor()));
+		public Task<SimulateResponse> SimulateAsync(Func<SimulateDescriptor, ISimulateRequest> selector = null, CancellationToken cancellationToken = default) => SimulateAsync(selector.InvokeOrDefault(new SimulateDescriptor()), cancellationToken);
 	}
 }

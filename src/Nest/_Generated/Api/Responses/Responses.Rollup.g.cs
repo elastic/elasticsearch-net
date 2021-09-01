@@ -64,16 +64,6 @@ namespace Nest.Rollup
 
 	public partial class RollupResponse : ResponseBase
 	{
-		[JsonPropertyName("stub")]
-		public int Stub
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
 	}
 
 	public partial class RollupSearchResponse<TDocument> : ResponseBase

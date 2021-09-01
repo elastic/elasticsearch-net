@@ -28,84 +28,21 @@ namespace Nest.AsyncSearch
 		{
 		}
 
-		public DeleteResponse Delete(IDeleteRequest request)
-		{
-			return DoRequest<IDeleteRequest, DeleteResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteRequest, DeleteResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteResponse Delete(Nest.Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null)
-		{
-			return Delete(selector.InvokeOrDefault(new DeleteDescriptor(id)));
-		}
-
-		public Task<DeleteResponse> DeleteAsync(Nest.Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor(id)), cancellationToken);
-		}
-
-		public GetResponse<TDocument> Get<TDocument>(IGetRequest request)
-		{
-			return DoRequest<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters);
-		}
-
-		public Task<GetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetResponse<TDocument> Get<TDocument>(Nest.Id id, Func<GetDescriptor, IGetRequest> selector = null)
-		{
-			return Get<TDocument>(selector.InvokeOrDefault(new GetDescriptor(id)));
-		}
-
-		public Task<GetResponse<TDocument>> GetAsync<TDocument>(Nest.Id id, Func<GetDescriptor, IGetRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetAsync<TDocument>(selector.InvokeOrDefault(new GetDescriptor(id)), cancellationToken);
-		}
-
-		public StatusResponse<TDocument> Status<TDocument>(IStatusRequest request)
-		{
-			return DoRequest<IStatusRequest, StatusResponse<TDocument>>(request, request.RequestParameters);
-		}
-
-		public Task<StatusResponse<TDocument>> StatusAsync<TDocument>(IStatusRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IStatusRequest, StatusResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public StatusResponse<TDocument> Status<TDocument>(Nest.Id id, Func<StatusDescriptor, IStatusRequest> selector = null)
-		{
-			return Status<TDocument>(selector.InvokeOrDefault(new StatusDescriptor(id)));
-		}
-
-		public Task<StatusResponse<TDocument>> StatusAsync<TDocument>(Nest.Id id, Func<StatusDescriptor, IStatusRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return StatusAsync<TDocument>(selector.InvokeOrDefault(new StatusDescriptor(id)), cancellationToken);
-		}
-
-		public SubmitResponse<TDocument> Submit<TDocument>(ISubmitRequest request)
-		{
-			return DoRequest<ISubmitRequest, SubmitResponse<TDocument>>(request, request.RequestParameters);
-		}
-
-		public Task<SubmitResponse<TDocument>> SubmitAsync<TDocument>(ISubmitRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<ISubmitRequest, SubmitResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public SubmitResponse<TDocument> Submit<TDocument>(Func<SubmitDescriptor, ISubmitRequest> selector = null)
-		{
-			return Submit<TDocument>(selector.InvokeOrDefault(new SubmitDescriptor()));
-		}
-
-		public Task<SubmitResponse<TDocument>> SubmitAsync<TDocument>(Func<SubmitDescriptor, ISubmitRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return SubmitAsync<TDocument>(selector.InvokeOrDefault(new SubmitDescriptor()), cancellationToken);
-		}
+		public DeleteResponse Delete(IDeleteRequest request) => DoRequest<IDeleteRequest, DeleteResponse>(request, request.RequestParameters);
+		public Task<DeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteRequest, DeleteResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteResponse Delete(Nest.Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null) => Delete(selector.InvokeOrDefault(new DeleteDescriptor(id)));
+		public Task<DeleteResponse> DeleteAsync(Nest.Id id, Func<DeleteDescriptor, IDeleteRequest> selector = null, CancellationToken cancellationToken = default) => DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor(id)), cancellationToken);
+		public GetResponse<TDocument> Get<TDocument>(IGetRequest request) => DoRequest<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters);
+		public Task<GetResponse<TDocument>> GetAsync<TDocument>(IGetRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetRequest, GetResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
+		public GetResponse<TDocument> Get<TDocument>(Nest.Id id, Func<GetDescriptor, IGetRequest> selector = null) => Get<TDocument>(selector.InvokeOrDefault(new GetDescriptor(id)));
+		public Task<GetResponse<TDocument>> GetAsync<TDocument>(Nest.Id id, Func<GetDescriptor, IGetRequest> selector = null, CancellationToken cancellationToken = default) => GetAsync<TDocument>(selector.InvokeOrDefault(new GetDescriptor(id)), cancellationToken);
+		public StatusResponse<TDocument> Status<TDocument>(IStatusRequest request) => DoRequest<IStatusRequest, StatusResponse<TDocument>>(request, request.RequestParameters);
+		public Task<StatusResponse<TDocument>> StatusAsync<TDocument>(IStatusRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IStatusRequest, StatusResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
+		public StatusResponse<TDocument> Status<TDocument>(Nest.Id id, Func<StatusDescriptor, IStatusRequest> selector = null) => Status<TDocument>(selector.InvokeOrDefault(new StatusDescriptor(id)));
+		public Task<StatusResponse<TDocument>> StatusAsync<TDocument>(Nest.Id id, Func<StatusDescriptor, IStatusRequest> selector = null, CancellationToken cancellationToken = default) => StatusAsync<TDocument>(selector.InvokeOrDefault(new StatusDescriptor(id)), cancellationToken);
+		public SubmitResponse<TDocument> Submit<TDocument>(ISubmitRequest request) => DoRequest<ISubmitRequest, SubmitResponse<TDocument>>(request, request.RequestParameters);
+		public Task<SubmitResponse<TDocument>> SubmitAsync<TDocument>(ISubmitRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ISubmitRequest, SubmitResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
+		public SubmitResponse<TDocument> Submit<TDocument>(Func<SubmitDescriptor, ISubmitRequest> selector = null) => Submit<TDocument>(selector.InvokeOrDefault(new SubmitDescriptor()));
+		public Task<SubmitResponse<TDocument>> SubmitAsync<TDocument>(Func<SubmitDescriptor, ISubmitRequest> selector = null, CancellationToken cancellationToken = default) => SubmitAsync<TDocument>(selector.InvokeOrDefault(new SubmitDescriptor()), cancellationToken);
 	}
 }

@@ -25,6 +25,13 @@ namespace Nest.Graph
 	[ConvertAs(typeof(ExploreRequest))]
 	public partial interface IExploreRequest : IRequest<ExploreRequestParameters>
 	{
+		Nest.Graph.Hop? Connections { get; set; }
+
+		Nest.Graph.ExploreControls? Controls { get; set; }
+
+		Nest.QueryDsl.QueryContainer? Query { get; set; }
+
+		IEnumerable<Nest.Graph.VertexDefinition>? Vertices { get; set; }
 	}
 
 	public partial class ExploreRequest : PlainRequestBase<ExploreRequestParameters>, IExploreRequest
@@ -48,47 +55,15 @@ namespace Nest.Graph
 		public Nest.Time? Timeout { get => Q<Nest.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonPropertyName("connections")]
-		public Nest.Graph.Hop? Connections
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Graph.Hop? Connections { get; set; }
 
 		[JsonPropertyName("controls")]
-		public Nest.Graph.ExploreControls? Controls
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Graph.ExploreControls? Controls { get; set; }
 
 		[JsonPropertyName("query")]
-		public Nest.QueryDsl.QueryContainer? Query
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Query { get; set; }
 
 		[JsonPropertyName("vertices")]
-		public IReadOnlyCollection<Nest.Graph.VertexDefinition>? Vertices
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Graph.VertexDefinition>? Vertices { get; set; }
 	}
 }

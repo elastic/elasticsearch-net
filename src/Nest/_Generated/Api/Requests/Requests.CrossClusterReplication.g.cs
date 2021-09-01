@@ -45,6 +45,29 @@ namespace Nest.Ccr
 	[ConvertAs(typeof(FollowRequest))]
 	public partial interface IFollowRequest : IRequest<FollowRequestParameters>
 	{
+		Nest.IndexName? LeaderIndex { get; set; }
+
+		long? MaxOutstandingReadRequests { get; set; }
+
+		long? MaxOutstandingWriteRequests { get; set; }
+
+		long? MaxReadRequestOperationCount { get; set; }
+
+		string? MaxReadRequestSize { get; set; }
+
+		Nest.Time? MaxRetryDelay { get; set; }
+
+		long? MaxWriteBufferCount { get; set; }
+
+		string? MaxWriteBufferSize { get; set; }
+
+		long? MaxWriteRequestOperationCount { get; set; }
+
+		string? MaxWriteRequestSize { get; set; }
+
+		Nest.Time? ReadPollTimeout { get; set; }
+
+		string? RemoteCluster { get; set; }
 	}
 
 	public partial class FollowRequest : PlainRequestBase<FollowRequestParameters>, IFollowRequest
@@ -65,136 +88,40 @@ namespace Nest.Ccr
 		public Nest.WaitForActiveShards? WaitForActiveShards { get => Q<Nest.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 		[JsonPropertyName("leader_index")]
-		public Nest.IndexName? LeaderIndex
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexName? LeaderIndex { get; set; }
 
 		[JsonPropertyName("max_outstanding_read_requests")]
-		public long? MaxOutstandingReadRequests
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? MaxOutstandingReadRequests { get; set; }
 
 		[JsonPropertyName("max_outstanding_write_requests")]
-		public long? MaxOutstandingWriteRequests
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? MaxOutstandingWriteRequests { get; set; }
 
 		[JsonPropertyName("max_read_request_operation_count")]
-		public long? MaxReadRequestOperationCount
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? MaxReadRequestOperationCount { get; set; }
 
 		[JsonPropertyName("max_read_request_size")]
-		public string? MaxReadRequestSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? MaxReadRequestSize { get; set; }
 
 		[JsonPropertyName("max_retry_delay")]
-		public Nest.Time? MaxRetryDelay
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? MaxRetryDelay { get; set; }
 
 		[JsonPropertyName("max_write_buffer_count")]
-		public long? MaxWriteBufferCount
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? MaxWriteBufferCount { get; set; }
 
 		[JsonPropertyName("max_write_buffer_size")]
-		public string? MaxWriteBufferSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? MaxWriteBufferSize { get; set; }
 
 		[JsonPropertyName("max_write_request_operation_count")]
-		public long? MaxWriteRequestOperationCount
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? MaxWriteRequestOperationCount { get; set; }
 
 		[JsonPropertyName("max_write_request_size")]
-		public string? MaxWriteRequestSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? MaxWriteRequestSize { get; set; }
 
 		[JsonPropertyName("read_poll_timeout")]
-		public Nest.Time? ReadPollTimeout
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? ReadPollTimeout { get; set; }
 
 		[JsonPropertyName("remote_cluster")]
-		public string? RemoteCluster
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? RemoteCluster { get; set; }
 	}
 
 	[ConvertAs(typeof(FollowInfoRequest))]
@@ -240,6 +167,13 @@ namespace Nest.Ccr
 	[ConvertAs(typeof(ForgetFollowerRequest))]
 	public partial interface IForgetFollowerRequest : IRequest<ForgetFollowerRequestParameters>
 	{
+		string? FollowerCluster { get; set; }
+
+		Nest.IndexName? FollowerIndex { get; set; }
+
+		Nest.Uuid? FollowerIndexUuid { get; set; }
+
+		string? LeaderRemoteCluster { get; set; }
 	}
 
 	public partial class ForgetFollowerRequest : PlainRequestBase<ForgetFollowerRequestParameters>, IForgetFollowerRequest
@@ -257,48 +191,16 @@ namespace Nest.Ccr
 		}
 
 		[JsonPropertyName("follower_cluster")]
-		public string? FollowerCluster
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? FollowerCluster { get; set; }
 
 		[JsonPropertyName("follower_index")]
-		public Nest.IndexName? FollowerIndex
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexName? FollowerIndex { get; set; }
 
 		[JsonPropertyName("follower_index_uuid")]
-		public Nest.Uuid? FollowerIndexUuid
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Uuid? FollowerIndexUuid { get; set; }
 
 		[JsonPropertyName("leader_remote_cluster")]
-		public string? LeaderRemoteCluster
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? LeaderRemoteCluster { get; set; }
 	}
 
 	[ConvertAs(typeof(GetAutoFollowPatternRequest))]
@@ -369,6 +271,33 @@ namespace Nest.Ccr
 	[ConvertAs(typeof(PutAutoFollowPatternRequest))]
 	public partial interface IPutAutoFollowPatternRequest : IRequest<PutAutoFollowPatternRequestParameters>
 	{
+		string RemoteCluster { get; set; }
+
+		Nest.IndexPattern? FollowIndexPattern { get; set; }
+
+		Nest.IndexPatterns? LeaderIndexPatterns { get; set; }
+
+		int? MaxOutstandingReadRequests { get; set; }
+
+		Dictionary<string, object>? Settings { get; set; }
+
+		int? MaxOutstandingWriteRequests { get; set; }
+
+		Nest.Time? ReadPollTimeout { get; set; }
+
+		int? MaxReadRequestOperationCount { get; set; }
+
+		Nest.ByteSize? MaxReadRequestSize { get; set; }
+
+		Nest.Time? MaxRetryDelay { get; set; }
+
+		int? MaxWriteBufferCount { get; set; }
+
+		Nest.ByteSize? MaxWriteBufferSize { get; set; }
+
+		int? MaxWriteRequestOperationCount { get; set; }
+
+		Nest.ByteSize? MaxWriteRequestSize { get; set; }
 	}
 
 	public partial class PutAutoFollowPatternRequest : PlainRequestBase<PutAutoFollowPatternRequestParameters>, IPutAutoFollowPatternRequest
@@ -386,158 +315,46 @@ namespace Nest.Ccr
 		}
 
 		[JsonPropertyName("remote_cluster")]
-		public string RemoteCluster
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string RemoteCluster { get; set; }
 
 		[JsonPropertyName("follow_index_pattern")]
-		public Nest.IndexPattern? FollowIndexPattern
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexPattern? FollowIndexPattern { get; set; }
 
 		[JsonPropertyName("leader_index_patterns")]
-		public Nest.IndexPatterns? LeaderIndexPatterns
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexPatterns? LeaderIndexPatterns { get; set; }
 
 		[JsonPropertyName("max_outstanding_read_requests")]
-		public int? MaxOutstandingReadRequests
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? MaxOutstandingReadRequests { get; set; }
 
 		[JsonPropertyName("settings")]
-		public Dictionary<string, object>? Settings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Settings { get; set; }
 
 		[JsonPropertyName("max_outstanding_write_requests")]
-		public int? MaxOutstandingWriteRequests
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? MaxOutstandingWriteRequests { get; set; }
 
 		[JsonPropertyName("read_poll_timeout")]
-		public Nest.Time? ReadPollTimeout
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? ReadPollTimeout { get; set; }
 
 		[JsonPropertyName("max_read_request_operation_count")]
-		public int? MaxReadRequestOperationCount
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? MaxReadRequestOperationCount { get; set; }
 
 		[JsonPropertyName("max_read_request_size")]
-		public Nest.ByteSize? MaxReadRequestSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.ByteSize? MaxReadRequestSize { get; set; }
 
 		[JsonPropertyName("max_retry_delay")]
-		public Nest.Time? MaxRetryDelay
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? MaxRetryDelay { get; set; }
 
 		[JsonPropertyName("max_write_buffer_count")]
-		public int? MaxWriteBufferCount
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? MaxWriteBufferCount { get; set; }
 
 		[JsonPropertyName("max_write_buffer_size")]
-		public Nest.ByteSize? MaxWriteBufferSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.ByteSize? MaxWriteBufferSize { get; set; }
 
 		[JsonPropertyName("max_write_request_operation_count")]
-		public int? MaxWriteRequestOperationCount
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? MaxWriteRequestOperationCount { get; set; }
 
 		[JsonPropertyName("max_write_request_size")]
-		public Nest.ByteSize? MaxWriteRequestSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.ByteSize? MaxWriteRequestSize { get; set; }
 	}
 
 	[ConvertAs(typeof(ResumeAutoFollowPatternRequest))]
@@ -563,6 +380,25 @@ namespace Nest.Ccr
 	[ConvertAs(typeof(ResumeFollowRequest))]
 	public partial interface IResumeFollowRequest : IRequest<ResumeFollowRequestParameters>
 	{
+		long? MaxOutstandingReadRequests { get; set; }
+
+		long? MaxOutstandingWriteRequests { get; set; }
+
+		long? MaxReadRequestOperationCount { get; set; }
+
+		string? MaxReadRequestSize { get; set; }
+
+		Nest.Time? MaxRetryDelay { get; set; }
+
+		long? MaxWriteBufferCount { get; set; }
+
+		string? MaxWriteBufferSize { get; set; }
+
+		long? MaxWriteRequestOperationCount { get; set; }
+
+		string? MaxWriteRequestSize { get; set; }
+
+		Nest.Time? ReadPollTimeout { get; set; }
 	}
 
 	public partial class ResumeFollowRequest : PlainRequestBase<ResumeFollowRequestParameters>, IResumeFollowRequest
@@ -580,114 +416,34 @@ namespace Nest.Ccr
 		}
 
 		[JsonPropertyName("max_outstanding_read_requests")]
-		public long? MaxOutstandingReadRequests
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? MaxOutstandingReadRequests { get; set; }
 
 		[JsonPropertyName("max_outstanding_write_requests")]
-		public long? MaxOutstandingWriteRequests
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? MaxOutstandingWriteRequests { get; set; }
 
 		[JsonPropertyName("max_read_request_operation_count")]
-		public long? MaxReadRequestOperationCount
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? MaxReadRequestOperationCount { get; set; }
 
 		[JsonPropertyName("max_read_request_size")]
-		public string? MaxReadRequestSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? MaxReadRequestSize { get; set; }
 
 		[JsonPropertyName("max_retry_delay")]
-		public Nest.Time? MaxRetryDelay
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? MaxRetryDelay { get; set; }
 
 		[JsonPropertyName("max_write_buffer_count")]
-		public long? MaxWriteBufferCount
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? MaxWriteBufferCount { get; set; }
 
 		[JsonPropertyName("max_write_buffer_size")]
-		public string? MaxWriteBufferSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? MaxWriteBufferSize { get; set; }
 
 		[JsonPropertyName("max_write_request_operation_count")]
-		public long? MaxWriteRequestOperationCount
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? MaxWriteRequestOperationCount { get; set; }
 
 		[JsonPropertyName("max_write_request_size")]
-		public string? MaxWriteRequestSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? MaxWriteRequestSize { get; set; }
 
 		[JsonPropertyName("read_poll_timeout")]
-		public Nest.Time? ReadPollTimeout
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? ReadPollTimeout { get; set; }
 	}
 
 	[ConvertAs(typeof(StatsRequest))]

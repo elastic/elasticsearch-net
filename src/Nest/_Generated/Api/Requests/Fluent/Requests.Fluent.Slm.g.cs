@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Slm
@@ -100,6 +101,22 @@ namespace Nest.Slm
         public PutLifecycleDescriptor(Nest.Name policy_id) : base(r => r.Required("policy_id", policy_id))
 		{
 		}
+
+		Nest.Slm.Configuration? IPutLifecycleRequest.Config { get; set; }
+
+		Nest.Name? IPutLifecycleRequest.Name { get; set; }
+
+		string? IPutLifecycleRequest.Repository { get; set; }
+
+		Nest.Slm.Retention? IPutLifecycleRequest.Retention { get; set; }
+
+		Nest.Watcher.CronExpression? IPutLifecycleRequest.Schedule { get; set; }
+
+		public PutLifecycleDescriptor Config(Nest.Slm.Configuration? config) => Assign(config, (a, v) => a.Config = v);
+		public PutLifecycleDescriptor Name(Nest.Name? name) => Assign(name, (a, v) => a.Name = v);
+		public PutLifecycleDescriptor Repository(string? repository) => Assign(repository, (a, v) => a.Repository = v);
+		public PutLifecycleDescriptor Retention(Nest.Slm.Retention? retention) => Assign(retention, (a, v) => a.Retention = v);
+		public PutLifecycleDescriptor Schedule(Nest.Watcher.CronExpression? schedule) => Assign(schedule, (a, v) => a.Schedule = v);
 	}
 
 	public partial class StartDescriptor : RequestDescriptorBase<StartDescriptor, StartRequestParameters, IStartRequest>, IStartRequest

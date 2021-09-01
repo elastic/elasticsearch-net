@@ -94,6 +94,103 @@ namespace Nest.AsyncSearch
 	[ConvertAs(typeof(SubmitRequest))]
 	public partial interface ISubmitRequest : IRequest<SubmitRequestParameters>
 	{
+		Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggs { get; set; }
+
+		bool? AllowNoIndices { get; set; }
+
+		bool? AllowPartialSearchResults { get; set; }
+
+		string? Analyzer { get; set; }
+
+		bool? AnalyzeWildcard { get; set; }
+
+		Nest.Global.Search.FieldCollapse? Collapse { get; set; }
+
+		Nest.DefaultOperator? DefaultOperator { get; set; }
+
+		string? Df { get; set; }
+
+		Nest.Fields? DocvalueFields { get; set; }
+
+		Nest.ExpandWildcards? ExpandWildcards { get; set; }
+
+		bool? Explain { get; set; }
+
+		int? From { get; set; }
+
+		Nest.Global.Search.Highlight? Highlight { get; set; }
+
+		bool? IgnoreThrottled { get; set; }
+
+		bool? IgnoreUnavailable { get; set; }
+
+		IEnumerable<Dictionary<Nest.IndexName, double>>? IndicesBoost { get; set; }
+
+		Nest.Time? KeepAlive { get; set; }
+
+		bool? Lenient { get; set; }
+
+		long? MaxConcurrentShardRequests { get; set; }
+
+		double? MinScore { get; set; }
+
+		Nest.QueryDsl.QueryContainer? PostFilter { get; set; }
+
+		string? Preference { get; set; }
+
+		bool? Profile { get; set; }
+
+		Nest.Global.Search.PointInTimeReference? Pit { get; set; }
+
+		Nest.QueryDsl.QueryContainer? Query { get; set; }
+
+		string? QueryOnQueryString { get; set; }
+
+		bool? RequestCache { get; set; }
+
+		IEnumerable<Nest.Global.Search.Rescore>? Rescore { get; set; }
+
+		Nest.Routing? Routing { get; set; }
+
+		Dictionary<string, Nest.ScriptField>? ScriptFields { get; set; }
+
+		Nest.Global.Search.SortResults? SearchAfter { get; set; }
+
+		Nest.SearchType? SearchType { get; set; }
+
+		bool? SequenceNumberPrimaryTerm { get; set; }
+
+		int? Size { get; set; }
+
+		Nest.Global.Search.Sort? Sort { get; set; }
+
+		Union<bool, Nest.Global.Search.SourceFilter>? Source { get; set; }
+
+		IEnumerable<string>? Stats { get; set; }
+
+		Nest.Fields? StoredFields { get; set; }
+
+		Dictionary<string, Nest.Global.Search.SuggestContainer>? Suggest { get; set; }
+
+		Nest.Field? SuggestField { get; set; }
+
+		Nest.SuggestMode? SuggestMode { get; set; }
+
+		long? SuggestSize { get; set; }
+
+		string? SuggestText { get; set; }
+
+		long? TerminateAfter { get; set; }
+
+		string? Timeout { get; set; }
+
+		bool? TrackScores { get; set; }
+
+		bool? TrackTotalHits { get; set; }
+
+		bool? Version { get; set; }
+
+		IEnumerable<Union<Nest.Field, Nest.DateField>>? Fields { get; set; }
 	}
 
 	public partial class SubmitRequest : PlainRequestBase<SubmitRequestParameters>, ISubmitRequest
@@ -128,498 +225,150 @@ namespace Nest.AsyncSearch
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 		[JsonPropertyName("aggs")]
-		public Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggs
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggs { get; set; }
 
 		[JsonPropertyName("allow_no_indices")]
-		public bool? AllowNoIndices
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? AllowNoIndices { get; set; }
 
 		[JsonPropertyName("allow_partial_search_results")]
-		public bool? AllowPartialSearchResults
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? AllowPartialSearchResults { get; set; }
 
 		[JsonPropertyName("analyzer")]
-		public string? Analyzer
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Analyzer { get; set; }
 
 		[JsonPropertyName("analyze_wildcard")]
-		public bool? AnalyzeWildcard
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? AnalyzeWildcard { get; set; }
 
 		[JsonPropertyName("collapse")]
-		public Nest.Global.Search.FieldCollapse? Collapse
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.Search.FieldCollapse? Collapse { get; set; }
 
 		[JsonPropertyName("default_operator")]
-		public Nest.DefaultOperator? DefaultOperator
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.DefaultOperator? DefaultOperator { get; set; }
 
 		[JsonPropertyName("df")]
-		public string? Df
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Df { get; set; }
 
 		[JsonPropertyName("docvalue_fields")]
-		public Nest.Fields? DocvalueFields
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Fields? DocvalueFields { get; set; }
+
+		[JsonPropertyName("expand_wildcards")]
+		public Nest.ExpandWildcards? ExpandWildcards { get; set; }
 
 		[JsonPropertyName("explain")]
-		public bool? Explain
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Explain { get; set; }
 
 		[JsonPropertyName("from")]
-		public int? From
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? From { get; set; }
 
 		[JsonPropertyName("highlight")]
-		public Nest.Global.Search.Highlight? Highlight
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.Search.Highlight? Highlight { get; set; }
 
 		[JsonPropertyName("ignore_throttled")]
-		public bool? IgnoreThrottled
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? IgnoreThrottled { get; set; }
 
 		[JsonPropertyName("ignore_unavailable")]
-		public bool? IgnoreUnavailable
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? IgnoreUnavailable { get; set; }
 
 		[JsonPropertyName("indices_boost")]
-		public IReadOnlyCollection<Dictionary<Nest.IndexName, double>>? IndicesBoost
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Dictionary<Nest.IndexName, double>>? IndicesBoost { get; set; }
 
 		[JsonPropertyName("keep_alive")]
-		public Nest.Time? KeepAlive
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? KeepAlive { get; set; }
 
 		[JsonPropertyName("lenient")]
-		public bool? Lenient
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Lenient { get; set; }
 
 		[JsonPropertyName("max_concurrent_shard_requests")]
-		public long? MaxConcurrentShardRequests
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? MaxConcurrentShardRequests { get; set; }
 
 		[JsonPropertyName("min_score")]
-		public double? MinScore
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? MinScore { get; set; }
 
 		[JsonPropertyName("post_filter")]
-		public Nest.QueryDsl.QueryContainer? PostFilter
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? PostFilter { get; set; }
 
 		[JsonPropertyName("preference")]
-		public string? Preference
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Preference { get; set; }
 
 		[JsonPropertyName("profile")]
-		public bool? Profile
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Profile { get; set; }
 
 		[JsonPropertyName("pit")]
-		public Nest.Global.Search.PointInTimeReference? Pit
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.Search.PointInTimeReference? Pit { get; set; }
 
 		[JsonPropertyName("query")]
-		public Nest.QueryDsl.QueryContainer? Query
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Query { get; set; }
 
 		[JsonPropertyName("query_on_query_string")]
-		public string? QueryOnQueryString
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? QueryOnQueryString { get; set; }
 
 		[JsonPropertyName("request_cache")]
-		public bool? RequestCache
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? RequestCache { get; set; }
 
 		[JsonPropertyName("rescore")]
-		public IReadOnlyCollection<Nest.Global.Search.Rescore>? Rescore
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Global.Search.Rescore>? Rescore { get; set; }
+
+		[JsonPropertyName("routing")]
+		public Nest.Routing? Routing { get; set; }
 
 		[JsonPropertyName("script_fields")]
-		public Dictionary<string, Nest.ScriptField>? ScriptFields
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, Nest.ScriptField>? ScriptFields { get; set; }
 
 		[JsonPropertyName("search_after")]
-		public Nest.Global.Search.SortResults? SearchAfter
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Global.Search.SortResults? SearchAfter { get; set; }
 
 		[JsonPropertyName("search_type")]
-		public Nest.SearchType? SearchType
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.SearchType? SearchType { get; set; }
 
 		[JsonPropertyName("sequence_number_primary_term")]
-		public bool? SequenceNumberPrimaryTerm
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? SequenceNumberPrimaryTerm { get; set; }
 
 		[JsonPropertyName("size")]
-		public int? Size
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? Size { get; set; }
+
+		[JsonPropertyName("sort")]
+		public Nest.Global.Search.Sort? Sort { get; set; }
 
 		[JsonPropertyName("_source")]
-		public Union<bool, Nest.Global.Search.SourceFilter>? Source
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Union<bool, Nest.Global.Search.SourceFilter>? Source { get; set; }
 
 		[JsonPropertyName("stats")]
-		public IReadOnlyCollection<string>? Stats
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? Stats { get; set; }
 
 		[JsonPropertyName("stored_fields")]
-		public Nest.Fields? StoredFields
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Fields? StoredFields { get; set; }
 
 		[JsonPropertyName("suggest")]
-		public Dictionary<string, Nest.Global.Search.SuggestContainer>? Suggest
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, Nest.Global.Search.SuggestContainer>? Suggest { get; set; }
 
 		[JsonPropertyName("suggest_field")]
-		public Nest.Field? SuggestField
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Field? SuggestField { get; set; }
 
 		[JsonPropertyName("suggest_mode")]
-		public Nest.SuggestMode? SuggestMode
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.SuggestMode? SuggestMode { get; set; }
 
 		[JsonPropertyName("suggest_size")]
-		public long? SuggestSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? SuggestSize { get; set; }
 
 		[JsonPropertyName("suggest_text")]
-		public string? SuggestText
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? SuggestText { get; set; }
 
 		[JsonPropertyName("terminate_after")]
-		public long? TerminateAfter
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? TerminateAfter { get; set; }
 
 		[JsonPropertyName("timeout")]
-		public string? Timeout
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Timeout { get; set; }
 
 		[JsonPropertyName("track_scores")]
-		public bool? TrackScores
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? TrackScores { get; set; }
 
 		[JsonPropertyName("track_total_hits")]
-		public bool? TrackTotalHits
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? TrackTotalHits { get; set; }
 
 		[JsonPropertyName("version")]
-		public bool? Version
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Version { get; set; }
+
+		[JsonPropertyName("fields")]
+		public IEnumerable<Union<Nest.Field, Nest.DateField>>? Fields { get; set; }
 	}
 }

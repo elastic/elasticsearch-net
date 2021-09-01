@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Ingest
@@ -29,6 +30,9 @@ namespace Nest.Ingest
         public DeletePipelineDescriptor(Nest.Id id) : base(r => r.Required("id", id))
 		{
 		}
+
+		public DeletePipelineDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public DeletePipelineDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class GeoIpStatsDescriptor : RequestDescriptorBase<GeoIpStatsDescriptor, GeoIpStatsRequestParameters, IGeoIpStatsRequest>, IGeoIpStatsRequest
@@ -56,6 +60,9 @@ namespace Nest.Ingest
         public GetPipelineDescriptor(Nest.Id? id) : base(r => r.Optional("id", id))
 		{
 		}
+
+		public GetPipelineDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public GetPipelineDescriptor Summary(bool? summary = true) => Qs("summary", summary);
 	}
 
 	public partial class ProcessorGrokDescriptor : RequestDescriptorBase<ProcessorGrokDescriptor, ProcessorGrokRequestParameters, IProcessorGrokRequest>, IProcessorGrokRequest
@@ -78,6 +85,24 @@ namespace Nest.Ingest
         public PutPipelineDescriptor(Nest.Id id) : base(r => r.Required("id", id))
 		{
 		}
+
+		Nest.Metadata? IPutPipelineRequest.Meta { get; set; }
+
+		string? IPutPipelineRequest.Description { get; set; }
+
+		IEnumerable<Nest.Ingest.ProcessorContainer>? IPutPipelineRequest.OnFailure { get; set; }
+
+		IEnumerable<Nest.Ingest.ProcessorContainer>? IPutPipelineRequest.Processors { get; set; }
+
+		Nest.VersionNumber? IPutPipelineRequest.Version { get; set; }
+
+		public PutPipelineDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public PutPipelineDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public PutPipelineDescriptor Meta(Nest.Metadata? meta) => Assign(meta, (a, v) => a.Meta = v);
+		public PutPipelineDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
+		public PutPipelineDescriptor OnFailure(IEnumerable<Nest.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailure = v);
+		public PutPipelineDescriptor Processors(IEnumerable<Nest.Ingest.ProcessorContainer>? processors) => Assign(processors, (a, v) => a.Processors = v);
+		public PutPipelineDescriptor Version(Nest.VersionNumber? version) => Assign(version, (a, v) => a.Version = v);
 	}
 
 	public partial class SimulateDescriptor : RequestDescriptorBase<SimulateDescriptor, SimulateRequestParameters, ISimulateRequest>, ISimulateRequest
@@ -94,5 +119,13 @@ namespace Nest.Ingest
         public SimulateDescriptor(Nest.Id? id) : base(r => r.Optional("id", id))
 		{
 		}
+
+		IEnumerable<Nest.Ingest.Simulate.Document>? ISimulateRequest.Docs { get; set; }
+
+		Nest.Ingest.Pipeline? ISimulateRequest.Pipeline { get; set; }
+
+		public SimulateDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
+		public SimulateDescriptor Docs(IEnumerable<Nest.Ingest.Simulate.Document>? docs) => Assign(docs, (a, v) => a.Docs = v);
+		public SimulateDescriptor Pipeline(Nest.Ingest.Pipeline? pipeline) => Assign(pipeline, (a, v) => a.Pipeline = v);
 	}
 }

@@ -110,6 +110,19 @@ namespace Nest.Watcher
 	[ConvertAs(typeof(ExecuteWatchRequest))]
 	public partial interface IExecuteWatchRequest : IRequest<ExecuteWatchRequestParameters>
 	{
+		Dictionary<string, Nest.Watcher.ActionExecutionMode>? ActionModes { get; set; }
+
+		Dictionary<string, object>? AlternativeInput { get; set; }
+
+		bool? IgnoreCondition { get; set; }
+
+		bool? RecordExecution { get; set; }
+
+		Nest.Watcher.SimulatedActions? SimulatedActions { get; set; }
+
+		Nest.Watcher.ScheduleTriggerEvent? TriggerData { get; set; }
+
+		Nest.Watcher.Watch? Watch { get; set; }
 	}
 
 	public partial class ExecuteWatchRequest : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
@@ -135,81 +148,25 @@ namespace Nest.Watcher
 		public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
 
 		[JsonPropertyName("action_modes")]
-		public Dictionary<string, Nest.Watcher.ActionExecutionMode>? ActionModes
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, Nest.Watcher.ActionExecutionMode>? ActionModes { get; set; }
 
 		[JsonPropertyName("alternative_input")]
-		public Dictionary<string, object>? AlternativeInput
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? AlternativeInput { get; set; }
 
 		[JsonPropertyName("ignore_condition")]
-		public bool? IgnoreCondition
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? IgnoreCondition { get; set; }
 
 		[JsonPropertyName("record_execution")]
-		public bool? RecordExecution
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? RecordExecution { get; set; }
 
 		[JsonPropertyName("simulated_actions")]
-		public Nest.Watcher.SimulatedActions? SimulatedActions
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Watcher.SimulatedActions? SimulatedActions { get; set; }
 
 		[JsonPropertyName("trigger_data")]
-		public Nest.Watcher.ScheduleTriggerEvent? TriggerData
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Watcher.ScheduleTriggerEvent? TriggerData { get; set; }
 
 		[JsonPropertyName("watch")]
-		public Nest.Watcher.Watch? Watch
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Watcher.Watch? Watch { get; set; }
 	}
 
 	[ConvertAs(typeof(GetWatchRequest))]
@@ -235,6 +192,19 @@ namespace Nest.Watcher
 	[ConvertAs(typeof(PutWatchRequest))]
 	public partial interface IPutWatchRequest : IRequest<PutWatchRequestParameters>
 	{
+		Dictionary<string, Nest.Watcher.Action>? Actions { get; set; }
+
+		Nest.Watcher.ConditionContainer? Condition { get; set; }
+
+		Nest.Watcher.InputContainer? Input { get; set; }
+
+		Nest.Metadata? Metadata { get; set; }
+
+		string? ThrottlePeriod { get; set; }
+
+		Nest.TransformContainer? Transform { get; set; }
+
+		Nest.Watcher.TriggerContainer? Trigger { get; set; }
 	}
 
 	public partial class PutWatchRequest : PlainRequestBase<PutWatchRequestParameters>, IPutWatchRequest
@@ -263,60 +233,70 @@ namespace Nest.Watcher
 		[JsonIgnore]
 		public Nest.VersionNumber? Version { get => Q<Nest.VersionNumber?>("version"); set => Q("version", value); }
 
+		[JsonPropertyName("actions")]
+		public Dictionary<string, Nest.Watcher.Action>? Actions { get; set; }
+
 		[JsonPropertyName("condition")]
-		public Nest.Watcher.ConditionContainer? Condition
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Watcher.ConditionContainer? Condition { get; set; }
 
 		[JsonPropertyName("input")]
-		public Nest.Watcher.InputContainer? Input
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Watcher.InputContainer? Input { get; set; }
+
+		[JsonPropertyName("metadata")]
+		public Nest.Metadata? Metadata { get; set; }
 
 		[JsonPropertyName("throttle_period")]
-		public string? ThrottlePeriod
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? ThrottlePeriod { get; set; }
 
 		[JsonPropertyName("transform")]
-		public Nest.TransformContainer? Transform
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.TransformContainer? Transform { get; set; }
 
 		[JsonPropertyName("trigger")]
-		public Nest.Watcher.TriggerContainer? Trigger
+		public Nest.Watcher.TriggerContainer? Trigger { get; set; }
+	}
+
+	[ConvertAs(typeof(QueryWatchesRequest))]
+	public partial interface IQueryWatchesRequest : IRequest<QueryWatchesRequestParameters>
+	{
+		int? From { get; set; }
+
+		int? Size { get; set; }
+
+		Nest.QueryDsl.QueryContainer? Query { get; set; }
+
+		Nest.Global.Search.Sort? Sort { get; set; }
+
+		Nest.Global.Search.SortResults? SearchAfter { get; set; }
+	}
+
+	public partial class QueryWatchesRequest : PlainRequestBase<QueryWatchesRequestParameters>, IQueryWatchesRequest
+	{
+		protected IQueryWatchesRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherQueryWatches;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		protected override bool CanBeEmpty => true;
+		protected override bool IsEmpty => From is null && Size is null && Query is null && SearchAfter is null;
+
+		///<summary>/_watcher/_query/watches</summary>
+        public QueryWatchesRequest() : base()
 		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
 		}
+
+		[JsonPropertyName("from")]
+		public int? From { get; set; }
+
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonPropertyName("query")]
+		public Nest.QueryDsl.QueryContainer? Query { get; set; }
+
+		[JsonPropertyName("sort")]
+		public Nest.Global.Search.Sort? Sort { get; set; }
+
+		[JsonPropertyName("search_after")]
+		public Nest.Global.Search.SortResults? SearchAfter { get; set; }
 	}
 
 	[ConvertAs(typeof(StartRequest))]

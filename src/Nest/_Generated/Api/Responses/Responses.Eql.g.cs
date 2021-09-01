@@ -98,8 +98,4 @@ namespace Nest.Eql
 #endif
 		}
 	}
-
-	public partial class SearchResponse<TEvent> : EqlSearchResponseBase<TEvent>
-	{
-	}
 }

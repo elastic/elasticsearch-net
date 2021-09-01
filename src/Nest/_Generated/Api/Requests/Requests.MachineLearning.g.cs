@@ -331,6 +331,11 @@ namespace Nest.Ml
 	[ConvertAs(typeof(EstimateModelMemoryRequest))]
 	public partial interface IEstimateModelMemoryRequest : IRequest<EstimateModelMemoryRequestParameters>
 	{
+		Nest.Ml.AnalysisConfig? AnalysisConfig { get; set; }
+
+		Dictionary<Nest.Field, long>? MaxBucketCardinality { get; set; }
+
+		Dictionary<Nest.Field, long>? OverallCardinality { get; set; }
 	}
 
 	public partial class EstimateModelMemoryRequest : PlainRequestBase<EstimateModelMemoryRequestParameters>, IEstimateModelMemoryRequest
@@ -348,42 +353,23 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("analysis_config")]
-		public Nest.Ml.AnalysisConfig? AnalysisConfig
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.AnalysisConfig? AnalysisConfig { get; set; }
 
 		[JsonPropertyName("max_bucket_cardinality")]
-		public Dictionary<Nest.Field, long>? MaxBucketCardinality
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<Nest.Field, long>? MaxBucketCardinality { get; set; }
 
 		[JsonPropertyName("overall_cardinality")]
-		public Dictionary<Nest.Field, long>? OverallCardinality
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<Nest.Field, long>? OverallCardinality { get; set; }
 	}
 
 	[ConvertAs(typeof(EvaluateDataFrameRequest))]
 	public partial interface IEvaluateDataFrameRequest : IRequest<EvaluateDataFrameRequestParameters>
 	{
+		Nest.Ml.DataframeEvaluationContainer Evaluation { get; set; }
+
+		Nest.IndexName Index { get; set; }
+
+		Nest.QueryDsl.QueryContainer? Query { get; set; }
 	}
 
 	public partial class EvaluateDataFrameRequest : PlainRequestBase<EvaluateDataFrameRequestParameters>, IEvaluateDataFrameRequest
@@ -401,42 +387,33 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("evaluation")]
-		public Nest.Ml.DataframeEvaluationContainer Evaluation
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DataframeEvaluationContainer Evaluation { get; set; }
 
 		[JsonPropertyName("index")]
-		public Nest.IndexName Index
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexName Index { get; set; }
 
 		[JsonPropertyName("query")]
-		public Nest.QueryDsl.QueryContainer? Query
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Query { get; set; }
 	}
 
 	[ConvertAs(typeof(ExplainDataFrameAnalyticsRequest))]
 	public partial interface IExplainDataFrameAnalyticsRequest : IRequest<ExplainDataFrameAnalyticsRequestParameters>
 	{
+		Nest.Ml.DataframeAnalyticsSource? Source { get; set; }
+
+		Nest.Ml.DataframeAnalyticsDestination? Dest { get; set; }
+
+		Nest.Ml.DataframeAnalysisContainer Analysis { get; set; }
+
+		string? Description { get; set; }
+
+		string? ModelMemoryLimit { get; set; }
+
+		int? MaxNumThreads { get; set; }
+
+		Nest.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
+
+		bool? AllowLazyStart { get; set; }
 	}
 
 	public partial class ExplainDataFrameAnalyticsRequest : PlainRequestBase<ExplainDataFrameAnalyticsRequestParameters>, IExplainDataFrameAnalyticsRequest
@@ -459,97 +436,40 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("source")]
-		public Nest.Ml.DataframeAnalyticsSource? Source
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DataframeAnalyticsSource? Source { get; set; }
 
 		[JsonPropertyName("dest")]
-		public Nest.Ml.DataframeAnalyticsDestination? Dest
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DataframeAnalyticsDestination? Dest { get; set; }
 
 		[JsonPropertyName("analysis")]
-		public Nest.Ml.DataframeAnalysisContainer Analysis
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DataframeAnalysisContainer Analysis { get; set; }
 
 		[JsonPropertyName("description")]
-		public string? Description
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Description { get; set; }
 
 		[JsonPropertyName("model_memory_limit")]
-		public string? ModelMemoryLimit
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? ModelMemoryLimit { get; set; }
 
 		[JsonPropertyName("max_num_threads")]
-		public int? MaxNumThreads
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? MaxNumThreads { get; set; }
 
 		[JsonPropertyName("analyzed_fields")]
-		public Nest.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
 
 		[JsonPropertyName("allow_lazy_start")]
-		public bool? AllowLazyStart
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? AllowLazyStart { get; set; }
 	}
 
 	[ConvertAs(typeof(FlushJobRequest))]
 	public partial interface IFlushJobRequest : IRequest<FlushJobRequestParameters>
 	{
+		Nest.DateString? AdvanceTime { get; set; }
+
+		bool? CalcInterim { get; set; }
+
+		Nest.DateString? End { get; set; }
+
+		Nest.DateString? Start { get; set; }
 	}
 
 	public partial class FlushJobRequest : PlainRequestBase<FlushJobRequestParameters>, IFlushJobRequest
@@ -570,53 +490,24 @@ namespace Nest.Ml
 		public string? SkipTime { get => Q<string?>("skip_time"); set => Q("skip_time", value); }
 
 		[JsonPropertyName("advance_time")]
-		public Nest.DateString? AdvanceTime
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.DateString? AdvanceTime { get; set; }
 
 		[JsonPropertyName("calc_interim")]
-		public bool? CalcInterim
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? CalcInterim { get; set; }
 
 		[JsonPropertyName("end")]
-		public Nest.DateString? End
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.DateString? End { get; set; }
 
 		[JsonPropertyName("start")]
-		public Nest.DateString? Start
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.DateString? Start { get; set; }
 	}
 
 	[ConvertAs(typeof(ForecastRequest))]
 	public partial interface IForecastRequest : IRequest<ForecastRequestParameters>
 	{
+		Nest.Time? Duration { get; set; }
+
+		Nest.Time? ExpiresIn { get; set; }
 	}
 
 	public partial class ForecastRequest : PlainRequestBase<ForecastRequestParameters>, IForecastRequest
@@ -634,31 +525,20 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("duration")]
-		public Nest.Time? Duration
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? Duration { get; set; }
 
 		[JsonPropertyName("expires_in")]
-		public Nest.Time? ExpiresIn
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? ExpiresIn { get; set; }
 	}
 
 	[ConvertAs(typeof(GetBucketsRequest))]
 	public partial interface IGetBucketsRequest : IRequest<GetBucketsRequestParameters>
 	{
+		double? AnomalyScore { get; set; }
+
+		bool? Expand { get; set; }
+
+		Nest.Ml.Page? Page { get; set; }
 	}
 
 	public partial class GetBucketsRequest : PlainRequestBase<GetBucketsRequestParameters>, IGetBucketsRequest
@@ -702,37 +582,13 @@ namespace Nest.Ml
 		public Nest.DateString? End { get => Q<Nest.DateString?>("end"); set => Q("end", value); }
 
 		[JsonPropertyName("anomaly_score")]
-		public double? AnomalyScore
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? AnomalyScore { get; set; }
 
 		[JsonPropertyName("expand")]
-		public bool? Expand
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Expand { get; set; }
 
 		[JsonPropertyName("page")]
-		public Nest.Ml.Page? Page
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.Page? Page { get; set; }
 	}
 
 	[ConvertAs(typeof(GetCalendarEventsRequest))]
@@ -773,6 +629,7 @@ namespace Nest.Ml
 	[ConvertAs(typeof(GetCalendarsRequest))]
 	public partial interface IGetCalendarsRequest : IRequest<GetCalendarsRequestParameters>
 	{
+		Nest.Ml.Page? Page { get; set; }
 	}
 
 	public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
@@ -801,20 +658,13 @@ namespace Nest.Ml
 		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 		[JsonPropertyName("page")]
-		public Nest.Ml.Page? Page
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.Page? Page { get; set; }
 	}
 
 	[ConvertAs(typeof(GetCategoriesRequest))]
 	public partial interface IGetCategoriesRequest : IRequest<GetCategoriesRequestParameters>
 	{
+		Nest.Ml.Page? Page { get; set; }
 	}
 
 	public partial class GetCategoriesRequest : PlainRequestBase<GetCategoriesRequestParameters>, IGetCategoriesRequest
@@ -846,15 +696,7 @@ namespace Nest.Ml
 		public string? PartitionFieldValue { get => Q<string?>("partition_field_value"); set => Q("partition_field_value", value); }
 
 		[JsonPropertyName("page")]
-		public Nest.Ml.Page? Page
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.Page? Page { get; set; }
 	}
 
 	[ConvertAs(typeof(GetDataFrameAnalyticsRequest))]
@@ -1024,6 +866,7 @@ namespace Nest.Ml
 	[ConvertAs(typeof(GetInfluencersRequest))]
 	public partial interface IGetInfluencersRequest : IRequest<GetInfluencersRequestParameters>
 	{
+		Nest.Ml.Page? Page { get; set; }
 	}
 
 	public partial class GetInfluencersRequest : PlainRequestBase<GetInfluencersRequestParameters>, IGetInfluencersRequest
@@ -1065,15 +908,7 @@ namespace Nest.Ml
 		public Nest.DateString? Start { get => Q<Nest.DateString?>("start"); set => Q("start", value); }
 
 		[JsonPropertyName("page")]
-		public Nest.Ml.Page? Page
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.Page? Page { get; set; }
 	}
 
 	[ConvertAs(typeof(GetJobStatsRequest))]
@@ -1184,6 +1019,7 @@ namespace Nest.Ml
 	[ConvertAs(typeof(GetOverallBucketsRequest))]
 	public partial interface IGetOverallBucketsRequest : IRequest<GetOverallBucketsRequestParameters>
 	{
+		bool? AllowNoJobs { get; set; }
 	}
 
 	public partial class GetOverallBucketsRequest : PlainRequestBase<GetOverallBucketsRequestParameters>, IGetOverallBucketsRequest
@@ -1222,20 +1058,19 @@ namespace Nest.Ml
 		public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 		[JsonPropertyName("allow_no_jobs")]
-		public bool? AllowNoJobs
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? AllowNoJobs { get; set; }
 	}
 
 	[ConvertAs(typeof(GetRecordsRequest))]
 	public partial interface IGetRecordsRequest : IRequest<GetRecordsRequestParameters>
 	{
+		bool? Desc { get; set; }
+
+		Nest.Ml.Page? Page { get; set; }
+
+		double? RecordScore { get; set; }
+
+		Nest.Field? Sort { get; set; }
 	}
 
 	public partial class GetRecordsRequest : PlainRequestBase<GetRecordsRequestParameters>, IGetRecordsRequest
@@ -1268,37 +1103,16 @@ namespace Nest.Ml
 		public Nest.DateString? End { get => Q<Nest.DateString?>("end"); set => Q("end", value); }
 
 		[JsonPropertyName("desc")]
-		public bool? Desc
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Desc { get; set; }
 
 		[JsonPropertyName("page")]
-		public Nest.Ml.Page? Page
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.Page? Page { get; set; }
 
 		[JsonPropertyName("record_score")]
-		public double? RecordScore
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? RecordScore { get; set; }
+
+		[JsonPropertyName("sort")]
+		public Nest.Field? Sort { get; set; }
 	}
 
 	[ConvertAs(typeof(GetTrainedModelsRequest))]
@@ -1404,6 +1218,7 @@ namespace Nest.Ml
 	[ConvertAs(typeof(OpenJobRequest))]
 	public partial interface IOpenJobRequest : IRequest<OpenJobRequestParameters>
 	{
+		Nest.Time? Timeout { get; set; }
 	}
 
 	public partial class OpenJobRequest : PlainRequestBase<OpenJobRequestParameters>, IOpenJobRequest
@@ -1421,20 +1236,13 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("timeout")]
-		public Nest.Time? Timeout
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? Timeout { get; set; }
 	}
 
 	[ConvertAs(typeof(PostCalendarEventsRequest))]
 	public partial interface IPostCalendarEventsRequest : IRequest<PostCalendarEventsRequestParameters>
 	{
+		IEnumerable<Nest.Ml.CalendarEvent> Events { get; set; }
 	}
 
 	public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
@@ -1447,25 +1255,18 @@ namespace Nest.Ml
 		protected override bool IsEmpty => false;
 
 		///<summary>/_ml/calendars/{calendar_id}/events</summary>
-        public PostCalendarEventsRequest(Nest.Id? calendar_id) : base(r => r.Optional("calendar_id", calendar_id))
+        public PostCalendarEventsRequest(Nest.Id calendar_id) : base(r => r.Required("calendar_id", calendar_id))
 		{
 		}
 
 		[JsonPropertyName("events")]
-		public IReadOnlyCollection<Nest.Ml.CalendarEvent> Events
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Ml.CalendarEvent> Events { get; set; }
 	}
 
 	[ConvertAs(typeof(PostDataRequest))]
 	public partial interface IPostDataRequest : IRequest<PostDataRequestParameters>
 	{
+		IEnumerable<object>? Data { get; set; }
 	}
 
 	public partial class PostDataRequest : PlainRequestBase<PostDataRequestParameters>, IPostDataRequest
@@ -1489,20 +1290,13 @@ namespace Nest.Ml
 		public Nest.DateString? ResetStart { get => Q<Nest.DateString?>("reset_start"); set => Q("reset_start", value); }
 
 		[JsonPropertyName("data")]
-		public IReadOnlyCollection<object>? Data
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<object>? Data { get; set; }
 	}
 
 	[ConvertAs(typeof(PreviewDataFrameAnalyticsRequest))]
 	public partial interface IPreviewDataFrameAnalyticsRequest : IRequest<PreviewDataFrameAnalyticsRequestParameters>
 	{
+		Nest.Ml.PreviewDataFrameAnalytics.DataframePreviewConfig? Config { get; set; }
 	}
 
 	public partial class PreviewDataFrameAnalyticsRequest : PlainRequestBase<PreviewDataFrameAnalyticsRequestParameters>, IPreviewDataFrameAnalyticsRequest
@@ -1525,20 +1319,15 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("config")]
-		public Nest.Ml.PreviewDataFrameAnalytics.DataframePreviewConfig? Config
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.PreviewDataFrameAnalytics.DataframePreviewConfig? Config { get; set; }
 	}
 
 	[ConvertAs(typeof(PreviewDatafeedRequest))]
 	public partial interface IPreviewDatafeedRequest : IRequest<PreviewDatafeedRequestParameters>
 	{
+		Nest.Ml.JobConfig? JobConfig { get; set; }
+
+		Nest.Ml.DatafeedConfig? DatafeedConfig { get; set; }
 	}
 
 	public partial class PreviewDatafeedRequest : PlainRequestBase<PreviewDatafeedRequestParameters>, IPreviewDatafeedRequest
@@ -1561,31 +1350,16 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("job_config")]
-		public Nest.Ml.JobConfig? JobConfig
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.JobConfig? JobConfig { get; set; }
 
 		[JsonPropertyName("datafeed_config")]
-		public Nest.Ml.DatafeedConfig? DatafeedConfig
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DatafeedConfig? DatafeedConfig { get; set; }
 	}
 
 	[ConvertAs(typeof(PutCalendarRequest))]
 	public partial interface IPutCalendarRequest : IRequest<PutCalendarRequestParameters>
 	{
+		string? Description { get; set; }
 	}
 
 	public partial class PutCalendarRequest : PlainRequestBase<PutCalendarRequestParameters>, IPutCalendarRequest
@@ -1603,15 +1377,7 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("description")]
-		public string? Description
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Description { get; set; }
 	}
 
 	[ConvertAs(typeof(PutCalendarJobRequest))]
@@ -1637,6 +1403,21 @@ namespace Nest.Ml
 	[ConvertAs(typeof(PutDataFrameAnalyticsRequest))]
 	public partial interface IPutDataFrameAnalyticsRequest : IRequest<PutDataFrameAnalyticsRequestParameters>
 	{
+		bool? AllowLazyStart { get; set; }
+
+		Nest.Ml.DataframeAnalysisContainer Analysis { get; set; }
+
+		Nest.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
+
+		string? Description { get; set; }
+
+		Nest.Ml.DataframeAnalyticsDestination Dest { get; set; }
+
+		int? MaxNumThreads { get; set; }
+
+		string? ModelMemoryLimit { get; set; }
+
+		Nest.Ml.DataframeAnalyticsSource Source { get; set; }
 	}
 
 	public partial class PutDataFrameAnalyticsRequest : PlainRequestBase<PutDataFrameAnalyticsRequestParameters>, IPutDataFrameAnalyticsRequest
@@ -1654,97 +1435,60 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("allow_lazy_start")]
-		public bool? AllowLazyStart
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? AllowLazyStart { get; set; }
 
 		[JsonPropertyName("analysis")]
-		public Nest.Ml.DataframeAnalysisContainer Analysis
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DataframeAnalysisContainer Analysis { get; set; }
 
 		[JsonPropertyName("analyzed_fields")]
-		public Nest.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
 
 		[JsonPropertyName("description")]
-		public string? Description
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Description { get; set; }
 
 		[JsonPropertyName("dest")]
-		public Nest.Ml.DataframeAnalyticsDestination Dest
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DataframeAnalyticsDestination Dest { get; set; }
 
 		[JsonPropertyName("max_num_threads")]
-		public int? MaxNumThreads
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? MaxNumThreads { get; set; }
 
 		[JsonPropertyName("model_memory_limit")]
-		public string? ModelMemoryLimit
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? ModelMemoryLimit { get; set; }
 
 		[JsonPropertyName("source")]
-		public Nest.Ml.DataframeAnalyticsSource Source
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DataframeAnalyticsSource Source { get; set; }
 	}
 
 	[ConvertAs(typeof(PutDatafeedRequest))]
 	public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters>
 	{
+		Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggregations { get; set; }
+
+		Nest.Ml.ChunkingConfig? ChunkingConfig { get; set; }
+
+		Nest.Ml.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
+
+		Nest.Time? Frequency { get; set; }
+
+		IEnumerable<string>? Indices { get; set; }
+
+		IEnumerable<string>? Indexes { get; set; }
+
+		Nest.Ml.DatafeedIndicesOptions? IndicesOptions { get; set; }
+
+		Nest.Id? JobId { get; set; }
+
+		int? MaxEmptySearches { get; set; }
+
+		Nest.QueryDsl.QueryContainer? Query { get; set; }
+
+		Nest.Time? QueryDelay { get; set; }
+
+		Nest.Mapping.RuntimeFields? RuntimeMappings { get; set; }
+
+		Dictionary<string, Nest.ScriptField>? ScriptFields { get; set; }
+
+		int? ScrollSize { get; set; }
 	}
 
 	public partial class PutDatafeedRequest : PlainRequestBase<PutDatafeedRequestParameters>, IPutDatafeedRequest
@@ -1774,152 +1518,54 @@ namespace Nest.Ml
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 		[JsonPropertyName("aggregations")]
-		public Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggregations
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, Nest.Aggregations.AggregationContainer>? Aggregations { get; set; }
 
 		[JsonPropertyName("chunking_config")]
-		public Nest.Ml.ChunkingConfig? ChunkingConfig
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.ChunkingConfig? ChunkingConfig { get; set; }
 
 		[JsonPropertyName("delayed_data_check_config")]
-		public Nest.Ml.DelayedDataCheckConfig? DelayedDataCheckConfig
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 
 		[JsonPropertyName("frequency")]
-		public Nest.Time? Frequency
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? Frequency { get; set; }
+
+		[JsonPropertyName("indices")]
+		public IEnumerable<string>? Indices { get; set; }
 
 		[JsonPropertyName("indexes")]
-		public IReadOnlyCollection<string>? Indexes
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? Indexes { get; set; }
 
 		[JsonPropertyName("indices_options")]
-		public Nest.Ml.DatafeedIndicesOptions? IndicesOptions
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DatafeedIndicesOptions? IndicesOptions { get; set; }
 
 		[JsonPropertyName("job_id")]
-		public Nest.Id? JobId
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Id? JobId { get; set; }
 
 		[JsonPropertyName("max_empty_searches")]
-		public int? MaxEmptySearches
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? MaxEmptySearches { get; set; }
 
 		[JsonPropertyName("query")]
-		public Nest.QueryDsl.QueryContainer? Query
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.QueryDsl.QueryContainer? Query { get; set; }
 
 		[JsonPropertyName("query_delay")]
-		public Nest.Time? QueryDelay
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? QueryDelay { get; set; }
 
 		[JsonPropertyName("runtime_mappings")]
-		public Nest.Mapping.RuntimeFields? RuntimeMappings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Mapping.RuntimeFields? RuntimeMappings { get; set; }
 
 		[JsonPropertyName("script_fields")]
-		public Dictionary<string, Nest.ScriptField>? ScriptFields
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, Nest.ScriptField>? ScriptFields { get; set; }
 
 		[JsonPropertyName("scroll_size")]
-		public int? ScrollSize
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? ScrollSize { get; set; }
 	}
 
 	[ConvertAs(typeof(PutFilterRequest))]
 	public partial interface IPutFilterRequest : IRequest<PutFilterRequestParameters>
 	{
+		string? Description { get; set; }
+
+		IEnumerable<string>? Items { get; set; }
 	}
 
 	public partial class PutFilterRequest : PlainRequestBase<PutFilterRequestParameters>, IPutFilterRequest
@@ -1937,31 +1583,44 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("description")]
-		public string? Description
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Description { get; set; }
 
 		[JsonPropertyName("items")]
-		public IReadOnlyCollection<string>? Items
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? Items { get; set; }
 	}
 
 	[ConvertAs(typeof(PutJobRequest))]
 	public partial interface IPutJobRequest : IRequest<PutJobRequestParameters>
 	{
+		bool? AllowLazyOpen { get; set; }
+
+		Nest.Ml.AnalysisConfig AnalysisConfig { get; set; }
+
+		Nest.Ml.AnalysisLimits? AnalysisLimits { get; set; }
+
+		Nest.Time BackgroundPersistInterval { get; set; }
+
+		Nest.Ml.CustomSettings? CustomSettings { get; set; }
+
+		long? DailyModelSnapshotRetentionAfterDays { get; set; }
+
+		Nest.Ml.DataDescription DataDescription { get; set; }
+
+		Nest.Ml.DatafeedConfig? DatafeedConfig { get; set; }
+
+		string? Description { get; set; }
+
+		IEnumerable<string>? Groups { get; set; }
+
+		Nest.Ml.ModelPlotConfig? ModelPlotConfig { get; set; }
+
+		long? ModelSnapshotRetentionDays { get; set; }
+
+		long? RenormalizationWindowDays { get; set; }
+
+		Nest.IndexName? ResultsIndexName { get; set; }
+
+		long? ResultsRetentionDays { get; set; }
 	}
 
 	public partial class PutJobRequest : PlainRequestBase<PutJobRequestParameters>, IPutJobRequest
@@ -1979,169 +1638,49 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("allow_lazy_open")]
-		public bool? AllowLazyOpen
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? AllowLazyOpen { get; set; }
 
 		[JsonPropertyName("analysis_config")]
-		public Nest.Ml.AnalysisConfig AnalysisConfig
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.AnalysisConfig AnalysisConfig { get; set; }
 
 		[JsonPropertyName("analysis_limits")]
-		public Nest.Ml.AnalysisLimits? AnalysisLimits
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.AnalysisLimits? AnalysisLimits { get; set; }
 
 		[JsonPropertyName("background_persist_interval")]
-		public Nest.Time BackgroundPersistInterval
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time BackgroundPersistInterval { get; set; }
 
 		[JsonPropertyName("custom_settings")]
-		public Nest.Ml.CustomSettings? CustomSettings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.CustomSettings? CustomSettings { get; set; }
 
 		[JsonPropertyName("daily_model_snapshot_retention_after_days")]
-		public long? DailyModelSnapshotRetentionAfterDays
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
 		[JsonPropertyName("data_description")]
-		public Nest.Ml.DataDescription DataDescription
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DataDescription DataDescription { get; set; }
 
 		[JsonPropertyName("datafeed_config")]
-		public Nest.Ml.DatafeedConfig? DatafeedConfig
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DatafeedConfig? DatafeedConfig { get; set; }
 
 		[JsonPropertyName("description")]
-		public string? Description
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Description { get; set; }
 
 		[JsonPropertyName("groups")]
-		public IReadOnlyCollection<string>? Groups
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? Groups { get; set; }
 
 		[JsonPropertyName("model_plot_config")]
-		public Nest.Ml.ModelPlotConfig? ModelPlotConfig
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.ModelPlotConfig? ModelPlotConfig { get; set; }
 
 		[JsonPropertyName("model_snapshot_retention_days")]
-		public long? ModelSnapshotRetentionDays
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? ModelSnapshotRetentionDays { get; set; }
 
 		[JsonPropertyName("renormalization_window_days")]
-		public long? RenormalizationWindowDays
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? RenormalizationWindowDays { get; set; }
 
 		[JsonPropertyName("results_index_name")]
-		public Nest.IndexName? ResultsIndexName
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexName? ResultsIndexName { get; set; }
 
 		[JsonPropertyName("results_retention_days")]
-		public long? ResultsRetentionDays
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? ResultsRetentionDays { get; set; }
 	}
 
 	[ConvertAs(typeof(PutTrainedModelRequest))]
@@ -2187,6 +1726,7 @@ namespace Nest.Ml
 	[ConvertAs(typeof(RevertModelSnapshotRequest))]
 	public partial interface IRevertModelSnapshotRequest : IRequest<RevertModelSnapshotRequestParameters>
 	{
+		bool? DeleteInterveningResults { get; set; }
 	}
 
 	public partial class RevertModelSnapshotRequest : PlainRequestBase<RevertModelSnapshotRequestParameters>, IRevertModelSnapshotRequest
@@ -2204,15 +1744,7 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("delete_intervening_results")]
-		public bool? DeleteInterveningResults
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? DeleteInterveningResults { get; set; }
 	}
 
 	[ConvertAs(typeof(SetUpgradeModeRequest))]
@@ -2267,6 +1799,9 @@ namespace Nest.Ml
 	[ConvertAs(typeof(StartDatafeedRequest))]
 	public partial interface IStartDatafeedRequest : IRequest<StartDatafeedRequestParameters>
 	{
+		Nest.Time? End { get; set; }
+
+		Nest.Time? Timeout { get; set; }
 	}
 
 	public partial class StartDatafeedRequest : PlainRequestBase<StartDatafeedRequestParameters>, IStartDatafeedRequest
@@ -2287,26 +1822,10 @@ namespace Nest.Ml
 		public Nest.Time? Start { get => Q<Nest.Time?>("start"); set => Q("start", value); }
 
 		[JsonPropertyName("end")]
-		public Nest.Time? End
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? End { get; set; }
 
 		[JsonPropertyName("timeout")]
-		public Nest.Time? Timeout
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? Timeout { get; set; }
 	}
 
 	[ConvertAs(typeof(StopDataFrameAnalyticsRequest))]
@@ -2341,6 +1860,7 @@ namespace Nest.Ml
 	[ConvertAs(typeof(StopDatafeedRequest))]
 	public partial interface IStopDatafeedRequest : IRequest<StopDatafeedRequestParameters>
 	{
+		Nest.Time? Timeout { get; set; }
 	}
 
 	public partial class StopDatafeedRequest : PlainRequestBase<StopDatafeedRequestParameters>, IStopDatafeedRequest
@@ -2364,20 +1884,19 @@ namespace Nest.Ml
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
 		[JsonPropertyName("timeout")]
-		public Nest.Time? Timeout
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? Timeout { get; set; }
 	}
 
 	[ConvertAs(typeof(UpdateDataFrameAnalyticsRequest))]
 	public partial interface IUpdateDataFrameAnalyticsRequest : IRequest<UpdateDataFrameAnalyticsRequestParameters>
 	{
+		string? Description { get; set; }
+
+		string? ModelMemoryLimit { get; set; }
+
+		int? MaxNumThreads { get; set; }
+
+		bool? AllowLazyStart { get; set; }
 	}
 
 	public partial class UpdateDataFrameAnalyticsRequest : PlainRequestBase<UpdateDataFrameAnalyticsRequestParameters>, IUpdateDataFrameAnalyticsRequest
@@ -2395,53 +1914,26 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("description")]
-		public string? Description
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Description { get; set; }
 
 		[JsonPropertyName("model_memory_limit")]
-		public string? ModelMemoryLimit
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? ModelMemoryLimit { get; set; }
 
 		[JsonPropertyName("max_num_threads")]
-		public int? MaxNumThreads
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? MaxNumThreads { get; set; }
 
 		[JsonPropertyName("allow_lazy_start")]
-		public bool? AllowLazyStart
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? AllowLazyStart { get; set; }
 	}
 
 	[ConvertAs(typeof(UpdateFilterRequest))]
 	public partial interface IUpdateFilterRequest : IRequest<UpdateFilterRequestParameters>
 	{
+		IEnumerable<string>? AddItems { get; set; }
+
+		string? Description { get; set; }
+
+		IEnumerable<string>? RemoveItems { get; set; }
 	}
 
 	public partial class UpdateFilterRequest : PlainRequestBase<UpdateFilterRequestParameters>, IUpdateFilterRequest
@@ -2459,42 +1951,45 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("add_items")]
-		public IReadOnlyCollection<string>? AddItems
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? AddItems { get; set; }
 
 		[JsonPropertyName("description")]
-		public string? Description
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Description { get; set; }
 
 		[JsonPropertyName("remove_items")]
-		public IReadOnlyCollection<string>? RemoveItems
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? RemoveItems { get; set; }
 	}
 
 	[ConvertAs(typeof(UpdateJobRequest))]
 	public partial interface IUpdateJobRequest : IRequest<UpdateJobRequestParameters>
 	{
+		bool? AllowLazyOpen { get; set; }
+
+		Nest.Ml.AnalysisMemoryLimit? AnalysisLimits { get; set; }
+
+		Nest.Time? BackgroundPersistInterval { get; set; }
+
+		Dictionary<string, object>? CustomSettings { get; set; }
+
+		IEnumerable<string>? CategorizationFilters { get; set; }
+
+		string? Description { get; set; }
+
+		Nest.Ml.ModelPlotConfig? ModelPlotConfig { get; set; }
+
+		long? DailyModelSnapshotRetentionAfterDays { get; set; }
+
+		long? ModelSnapshotRetentionDays { get; set; }
+
+		long? RenormalizationWindowDays { get; set; }
+
+		long? ResultsRetentionDays { get; set; }
+
+		IEnumerable<string>? Groups { get; set; }
+
+		IEnumerable<Nest.Ml.Detector>? Detectors { get; set; }
+
+		Nest.Ml.PerPartitionCategorization? PerPartitionCategorization { get; set; }
 	}
 
 	public partial class UpdateJobRequest : PlainRequestBase<UpdateJobRequestParameters>, IUpdateJobRequest
@@ -2512,163 +2007,54 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("allow_lazy_open")]
-		public bool? AllowLazyOpen
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? AllowLazyOpen { get; set; }
 
 		[JsonPropertyName("analysis_limits")]
-		public Nest.Ml.AnalysisMemoryLimit? AnalysisLimits
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.AnalysisMemoryLimit? AnalysisLimits { get; set; }
 
 		[JsonPropertyName("background_persist_interval")]
-		public Nest.Time? BackgroundPersistInterval
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Time? BackgroundPersistInterval { get; set; }
 
 		[JsonPropertyName("custom_settings")]
-		public Dictionary<string, object>? CustomSettings
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? CustomSettings { get; set; }
 
 		[JsonPropertyName("categorization_filters")]
-		public IReadOnlyCollection<string>? CategorizationFilters
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? CategorizationFilters { get; set; }
 
 		[JsonPropertyName("description")]
-		public string? Description
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Description { get; set; }
 
 		[JsonPropertyName("model_plot_config")]
-		public Nest.Ml.ModelPlotConfig? ModelPlotConfig
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.ModelPlotConfig? ModelPlotConfig { get; set; }
 
 		[JsonPropertyName("daily_model_snapshot_retention_after_days")]
-		public long? DailyModelSnapshotRetentionAfterDays
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
 		[JsonPropertyName("model_snapshot_retention_days")]
-		public long? ModelSnapshotRetentionDays
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? ModelSnapshotRetentionDays { get; set; }
 
 		[JsonPropertyName("renormalization_window_days")]
-		public long? RenormalizationWindowDays
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? RenormalizationWindowDays { get; set; }
 
 		[JsonPropertyName("results_retention_days")]
-		public long? ResultsRetentionDays
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? ResultsRetentionDays { get; set; }
 
 		[JsonPropertyName("groups")]
-		public IReadOnlyCollection<string>? Groups
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<string>? Groups { get; set; }
 
 		[JsonPropertyName("detectors")]
-		public IReadOnlyCollection<Nest.Ml.Detector>? Detectors
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IEnumerable<Nest.Ml.Detector>? Detectors { get; set; }
 
 		[JsonPropertyName("per_partition_categorization")]
-		public Nest.Ml.PerPartitionCategorization? PerPartitionCategorization
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.PerPartitionCategorization? PerPartitionCategorization { get; set; }
 	}
 
 	[ConvertAs(typeof(UpdateModelSnapshotRequest))]
 	public partial interface IUpdateModelSnapshotRequest : IRequest<UpdateModelSnapshotRequestParameters>
 	{
+		string? Description { get; set; }
+
+		bool? Retain { get; set; }
 	}
 
 	public partial class UpdateModelSnapshotRequest : PlainRequestBase<UpdateModelSnapshotRequestParameters>, IUpdateModelSnapshotRequest
@@ -2686,26 +2072,10 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("description")]
-		public string? Description
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Description { get; set; }
 
 		[JsonPropertyName("retain")]
-		public bool? Retain
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Retain { get; set; }
 	}
 
 	[ConvertAs(typeof(UpgradeJobSnapshotRequest))]
@@ -2737,6 +2107,21 @@ namespace Nest.Ml
 	[ConvertAs(typeof(ValidateRequest))]
 	public partial interface IValidateRequest : IRequest<ValidateRequestParameters>
 	{
+		Nest.Id? JobId { get; set; }
+
+		Nest.Ml.AnalysisConfig? AnalysisConfig { get; set; }
+
+		Nest.Ml.AnalysisLimits? AnalysisLimits { get; set; }
+
+		Nest.Ml.DataDescription? DataDescription { get; set; }
+
+		string? Description { get; set; }
+
+		Nest.Ml.ModelPlotConfig? ModelPlot { get; set; }
+
+		long? ModelSnapshotRetentionDays { get; set; }
+
+		Nest.IndexName? ResultsIndexName { get; set; }
 	}
 
 	public partial class ValidateRequest : PlainRequestBase<ValidateRequestParameters>, IValidateRequest
@@ -2754,92 +2139,28 @@ namespace Nest.Ml
 		}
 
 		[JsonPropertyName("job_id")]
-		public Nest.Id? JobId
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Id? JobId { get; set; }
 
 		[JsonPropertyName("analysis_config")]
-		public Nest.Ml.AnalysisConfig? AnalysisConfig
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.AnalysisConfig? AnalysisConfig { get; set; }
 
 		[JsonPropertyName("analysis_limits")]
-		public Nest.Ml.AnalysisLimits? AnalysisLimits
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.AnalysisLimits? AnalysisLimits { get; set; }
 
 		[JsonPropertyName("data_description")]
-		public Nest.Ml.DataDescription? DataDescription
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.DataDescription? DataDescription { get; set; }
 
 		[JsonPropertyName("description")]
-		public string? Description
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? Description { get; set; }
 
 		[JsonPropertyName("model_plot")]
-		public Nest.Ml.ModelPlotConfig? ModelPlot
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.Ml.ModelPlotConfig? ModelPlot { get; set; }
 
 		[JsonPropertyName("model_snapshot_retention_days")]
-		public long? ModelSnapshotRetentionDays
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public long? ModelSnapshotRetentionDays { get; set; }
 
 		[JsonPropertyName("results_index_name")]
-		public Nest.IndexName? ResultsIndexName
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Nest.IndexName? ResultsIndexName { get; set; }
 	}
 
 	[ConvertAs(typeof(ValidateDetectorRequest))]

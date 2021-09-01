@@ -222,6 +222,17 @@ namespace Nest.Cluster
 #endif
 		}
 
+		[JsonPropertyName("note")]
+		public string? Note
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("primary")]
 		public bool Primary
 		{
@@ -295,16 +306,10 @@ namespace Nest.Cluster
 
 	public partial class DeleteVotingConfigExclusionsResponse : ResponseBase
 	{
-		[JsonPropertyName("stub")]
-		public int Stub
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
+	}
+
+	public partial class ExistsComponentTemplateResponse : ResponseBase
+	{
 	}
 
 	public partial class GetComponentTemplateResponse : ResponseBase
@@ -552,16 +557,6 @@ namespace Nest.Cluster
 
 	public partial class PostVotingConfigExclusionsResponse : ResponseBase
 	{
-		[JsonPropertyName("stub")]
-		public int Stub
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
 	}
 
 	public partial class PutComponentTemplateResponse : AcknowledgedResponseBase

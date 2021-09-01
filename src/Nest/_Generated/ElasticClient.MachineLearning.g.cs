@@ -29,1224 +29,251 @@ namespace Nest.MachineLearning
 		{
 		}
 
-		public CloseJobResponse CloseJob(ICloseJobRequest request)
-		{
-			return DoRequest<ICloseJobRequest, CloseJobResponse>(request, request.RequestParameters);
-		}
-
-		public Task<CloseJobResponse> CloseJobAsync(ICloseJobRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<ICloseJobRequest, CloseJobResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public CloseJobResponse CloseJob(Nest.Id job_id, Func<CloseJobDescriptor, ICloseJobRequest> selector = null)
-		{
-			return CloseJob(selector.InvokeOrDefault(new CloseJobDescriptor(job_id)));
-		}
-
-		public Task<CloseJobResponse> CloseJobAsync(Nest.Id job_id, Func<CloseJobDescriptor, ICloseJobRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return CloseJobAsync(selector.InvokeOrDefault(new CloseJobDescriptor(job_id)), cancellationToken);
-		}
-
-		public DeleteCalendarResponse DeleteCalendar(IDeleteCalendarRequest request)
-		{
-			return DoRequest<IDeleteCalendarRequest, DeleteCalendarResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteCalendarResponse> DeleteCalendarAsync(IDeleteCalendarRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteCalendarRequest, DeleteCalendarResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteCalendarResponse DeleteCalendar(Nest.Id calendar_id, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null)
-		{
-			return DeleteCalendar(selector.InvokeOrDefault(new DeleteCalendarDescriptor(calendar_id)));
-		}
-
-		public Task<DeleteCalendarResponse> DeleteCalendarAsync(Nest.Id calendar_id, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteCalendarAsync(selector.InvokeOrDefault(new DeleteCalendarDescriptor(calendar_id)), cancellationToken);
-		}
-
-		public DeleteCalendarEventResponse DeleteCalendarEvent(IDeleteCalendarEventRequest request)
-		{
-			return DoRequest<IDeleteCalendarEventRequest, DeleteCalendarEventResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(IDeleteCalendarEventRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteCalendarEventRequest, DeleteCalendarEventResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteCalendarEventResponse DeleteCalendarEvent(Nest.Id calendar_id, Nest.Id event_id, Func<DeleteCalendarEventDescriptor, IDeleteCalendarEventRequest> selector = null)
-		{
-			return DeleteCalendarEvent(selector.InvokeOrDefault(new DeleteCalendarEventDescriptor(calendar_id, event_id)));
-		}
-
-		public Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(Nest.Id calendar_id, Nest.Id event_id, Func<DeleteCalendarEventDescriptor, IDeleteCalendarEventRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteCalendarEventAsync(selector.InvokeOrDefault(new DeleteCalendarEventDescriptor(calendar_id, event_id)), cancellationToken);
-		}
-
-		public DeleteCalendarJobResponse DeleteCalendarJob(IDeleteCalendarJobRequest request)
-		{
-			return DoRequest<IDeleteCalendarJobRequest, DeleteCalendarJobResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(IDeleteCalendarJobRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteCalendarJobRequest, DeleteCalendarJobResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteCalendarJobResponse DeleteCalendarJob(Nest.Id calendar_id, Nest.Id job_id, Func<DeleteCalendarJobDescriptor, IDeleteCalendarJobRequest> selector = null)
-		{
-			return DeleteCalendarJob(selector.InvokeOrDefault(new DeleteCalendarJobDescriptor(calendar_id, job_id)));
-		}
-
-		public Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(Nest.Id calendar_id, Nest.Id job_id, Func<DeleteCalendarJobDescriptor, IDeleteCalendarJobRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteCalendarJobAsync(selector.InvokeOrDefault(new DeleteCalendarJobDescriptor(calendar_id, job_id)), cancellationToken);
-		}
-
-		public DeleteDatafeedResponse DeleteDatafeed(IDeleteDatafeedRequest request)
-		{
-			return DoRequest<IDeleteDatafeedRequest, DeleteDatafeedResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteDatafeedResponse> DeleteDatafeedAsync(IDeleteDatafeedRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteDatafeedRequest, DeleteDatafeedResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteDatafeedResponse DeleteDatafeed(Nest.Id datafeed_id, Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null)
-		{
-			return DeleteDatafeed(selector.InvokeOrDefault(new DeleteDatafeedDescriptor(datafeed_id)));
-		}
-
-		public Task<DeleteDatafeedResponse> DeleteDatafeedAsync(Nest.Id datafeed_id, Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteDatafeedAsync(selector.InvokeOrDefault(new DeleteDatafeedDescriptor(datafeed_id)), cancellationToken);
-		}
-
-		public DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics(IDeleteDataFrameAnalyticsRequest request)
-		{
-			return DoRequest<IDeleteDataFrameAnalyticsRequest, DeleteDataFrameAnalyticsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(IDeleteDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteDataFrameAnalyticsRequest, DeleteDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics(Nest.Id id, Func<DeleteDataFrameAnalyticsDescriptor, IDeleteDataFrameAnalyticsRequest> selector = null)
-		{
-			return DeleteDataFrameAnalytics(selector.InvokeOrDefault(new DeleteDataFrameAnalyticsDescriptor(id)));
-		}
-
-		public Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(Nest.Id id, Func<DeleteDataFrameAnalyticsDescriptor, IDeleteDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteDataFrameAnalyticsAsync(selector.InvokeOrDefault(new DeleteDataFrameAnalyticsDescriptor(id)), cancellationToken);
-		}
-
-		public DeleteExpiredDataResponse DeleteExpiredData(IDeleteExpiredDataRequest request)
-		{
-			return DoRequest<IDeleteExpiredDataRequest, DeleteExpiredDataResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(IDeleteExpiredDataRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteExpiredDataRequest, DeleteExpiredDataResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteExpiredDataResponse DeleteExpiredData(Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> selector = null)
-		{
-			return DeleteExpiredData(selector.InvokeOrDefault(new DeleteExpiredDataDescriptor()));
-		}
-
-		public Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteExpiredDataAsync(selector.InvokeOrDefault(new DeleteExpiredDataDescriptor()), cancellationToken);
-		}
-
-		public DeleteFilterResponse DeleteFilter(IDeleteFilterRequest request)
-		{
-			return DoRequest<IDeleteFilterRequest, DeleteFilterResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteFilterResponse> DeleteFilterAsync(IDeleteFilterRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteFilterRequest, DeleteFilterResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteFilterResponse DeleteFilter(Nest.Id filter_id, Func<DeleteFilterDescriptor, IDeleteFilterRequest> selector = null)
-		{
-			return DeleteFilter(selector.InvokeOrDefault(new DeleteFilterDescriptor(filter_id)));
-		}
-
-		public Task<DeleteFilterResponse> DeleteFilterAsync(Nest.Id filter_id, Func<DeleteFilterDescriptor, IDeleteFilterRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteFilterAsync(selector.InvokeOrDefault(new DeleteFilterDescriptor(filter_id)), cancellationToken);
-		}
-
-		public DeleteForecastResponse DeleteForecast(IDeleteForecastRequest request)
-		{
-			return DoRequest<IDeleteForecastRequest, DeleteForecastResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteForecastResponse> DeleteForecastAsync(IDeleteForecastRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteForecastRequest, DeleteForecastResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteForecastResponse DeleteForecast(Nest.Id job_id, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null)
-		{
-			return DeleteForecast(selector.InvokeOrDefault(new DeleteForecastDescriptor(job_id)));
-		}
-
-		public Task<DeleteForecastResponse> DeleteForecastAsync(Nest.Id job_id, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteForecastAsync(selector.InvokeOrDefault(new DeleteForecastDescriptor(job_id)), cancellationToken);
-		}
-
-		public DeleteJobResponse DeleteJob(IDeleteJobRequest request)
-		{
-			return DoRequest<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteJobResponse> DeleteJobAsync(IDeleteJobRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteJobResponse DeleteJob(Nest.Id job_id, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null)
-		{
-			return DeleteJob(selector.InvokeOrDefault(new DeleteJobDescriptor(job_id)));
-		}
-
-		public Task<DeleteJobResponse> DeleteJobAsync(Nest.Id job_id, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteJobAsync(selector.InvokeOrDefault(new DeleteJobDescriptor(job_id)), cancellationToken);
-		}
-
-		public DeleteModelSnapshotResponse DeleteModelSnapshot(IDeleteModelSnapshotRequest request)
-		{
-			return DoRequest<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(IDeleteModelSnapshotRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteModelSnapshotResponse DeleteModelSnapshot(Nest.Id job_id, Nest.Id snapshot_id, Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> selector = null)
-		{
-			return DeleteModelSnapshot(selector.InvokeOrDefault(new DeleteModelSnapshotDescriptor(job_id, snapshot_id)));
-		}
-
-		public Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(Nest.Id job_id, Nest.Id snapshot_id, Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteModelSnapshotAsync(selector.InvokeOrDefault(new DeleteModelSnapshotDescriptor(job_id, snapshot_id)), cancellationToken);
-		}
-
-		public DeleteTrainedModelResponse DeleteTrainedModel(IDeleteTrainedModelRequest request)
-		{
-			return DoRequest<IDeleteTrainedModelRequest, DeleteTrainedModelResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteTrainedModelResponse> DeleteTrainedModelAsync(IDeleteTrainedModelRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteTrainedModelRequest, DeleteTrainedModelResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteTrainedModelResponse DeleteTrainedModel(Nest.Id model_id, Func<DeleteTrainedModelDescriptor, IDeleteTrainedModelRequest> selector = null)
-		{
-			return DeleteTrainedModel(selector.InvokeOrDefault(new DeleteTrainedModelDescriptor(model_id)));
-		}
-
-		public Task<DeleteTrainedModelResponse> DeleteTrainedModelAsync(Nest.Id model_id, Func<DeleteTrainedModelDescriptor, IDeleteTrainedModelRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteTrainedModelAsync(selector.InvokeOrDefault(new DeleteTrainedModelDescriptor(model_id)), cancellationToken);
-		}
-
-		public DeleteTrainedModelAliasResponse DeleteTrainedModelAlias(IDeleteTrainedModelAliasRequest request)
-		{
-			return DoRequest<IDeleteTrainedModelAliasRequest, DeleteTrainedModelAliasResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteTrainedModelAliasResponse> DeleteTrainedModelAliasAsync(IDeleteTrainedModelAliasRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteTrainedModelAliasRequest, DeleteTrainedModelAliasResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteTrainedModelAliasResponse DeleteTrainedModelAlias(Nest.Id model_id, Nest.Name model_alias, Func<DeleteTrainedModelAliasDescriptor, IDeleteTrainedModelAliasRequest> selector = null)
-		{
-			return DeleteTrainedModelAlias(selector.InvokeOrDefault(new DeleteTrainedModelAliasDescriptor(model_id, model_alias)));
-		}
-
-		public Task<DeleteTrainedModelAliasResponse> DeleteTrainedModelAliasAsync(Nest.Id model_id, Nest.Name model_alias, Func<DeleteTrainedModelAliasDescriptor, IDeleteTrainedModelAliasRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteTrainedModelAliasAsync(selector.InvokeOrDefault(new DeleteTrainedModelAliasDescriptor(model_id, model_alias)), cancellationToken);
-		}
-
-		public EstimateModelMemoryResponse EstimateModelMemory(IEstimateModelMemoryRequest request)
-		{
-			return DoRequest<IEstimateModelMemoryRequest, EstimateModelMemoryResponse>(request, request.RequestParameters);
-		}
-
-		public Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync(IEstimateModelMemoryRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IEstimateModelMemoryRequest, EstimateModelMemoryResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public EstimateModelMemoryResponse EstimateModelMemory(Func<EstimateModelMemoryDescriptor, IEstimateModelMemoryRequest> selector = null)
-		{
-			return EstimateModelMemory(selector.InvokeOrDefault(new EstimateModelMemoryDescriptor()));
-		}
-
-		public Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync(Func<EstimateModelMemoryDescriptor, IEstimateModelMemoryRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return EstimateModelMemoryAsync(selector.InvokeOrDefault(new EstimateModelMemoryDescriptor()), cancellationToken);
-		}
-
-		public EvaluateDataFrameResponse EvaluateDataFrame(IEvaluateDataFrameRequest request)
-		{
-			return DoRequest<IEvaluateDataFrameRequest, EvaluateDataFrameResponse>(request, request.RequestParameters);
-		}
-
-		public Task<EvaluateDataFrameResponse> EvaluateDataFrameAsync(IEvaluateDataFrameRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IEvaluateDataFrameRequest, EvaluateDataFrameResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public EvaluateDataFrameResponse EvaluateDataFrame(Func<EvaluateDataFrameDescriptor, IEvaluateDataFrameRequest> selector = null)
-		{
-			return EvaluateDataFrame(selector.InvokeOrDefault(new EvaluateDataFrameDescriptor()));
-		}
-
-		public Task<EvaluateDataFrameResponse> EvaluateDataFrameAsync(Func<EvaluateDataFrameDescriptor, IEvaluateDataFrameRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return EvaluateDataFrameAsync(selector.InvokeOrDefault(new EvaluateDataFrameDescriptor()), cancellationToken);
-		}
-
-		public ExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics(IExplainDataFrameAnalyticsRequest request)
-		{
-			return DoRequest<IExplainDataFrameAnalyticsRequest, ExplainDataFrameAnalyticsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(IExplainDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IExplainDataFrameAnalyticsRequest, ExplainDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics(Func<ExplainDataFrameAnalyticsDescriptor, IExplainDataFrameAnalyticsRequest> selector = null)
-		{
-			return ExplainDataFrameAnalytics(selector.InvokeOrDefault(new ExplainDataFrameAnalyticsDescriptor()));
-		}
-
-		public Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(Func<ExplainDataFrameAnalyticsDescriptor, IExplainDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ExplainDataFrameAnalyticsAsync(selector.InvokeOrDefault(new ExplainDataFrameAnalyticsDescriptor()), cancellationToken);
-		}
-
-		public FlushJobResponse FlushJob(IFlushJobRequest request)
-		{
-			return DoRequest<IFlushJobRequest, FlushJobResponse>(request, request.RequestParameters);
-		}
-
-		public Task<FlushJobResponse> FlushJobAsync(IFlushJobRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IFlushJobRequest, FlushJobResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public FlushJobResponse FlushJob(Nest.Id job_id, Func<FlushJobDescriptor, IFlushJobRequest> selector = null)
-		{
-			return FlushJob(selector.InvokeOrDefault(new FlushJobDescriptor(job_id)));
-		}
-
-		public Task<FlushJobResponse> FlushJobAsync(Nest.Id job_id, Func<FlushJobDescriptor, IFlushJobRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return FlushJobAsync(selector.InvokeOrDefault(new FlushJobDescriptor(job_id)), cancellationToken);
-		}
-
-		public ForecastResponse Forecast(IForecastRequest request)
-		{
-			return DoRequest<IForecastRequest, ForecastResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ForecastResponse> ForecastAsync(IForecastRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IForecastRequest, ForecastResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ForecastResponse Forecast(Nest.Id job_id, Func<ForecastDescriptor, IForecastRequest> selector = null)
-		{
-			return Forecast(selector.InvokeOrDefault(new ForecastDescriptor(job_id)));
-		}
-
-		public Task<ForecastResponse> ForecastAsync(Nest.Id job_id, Func<ForecastDescriptor, IForecastRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ForecastAsync(selector.InvokeOrDefault(new ForecastDescriptor(job_id)), cancellationToken);
-		}
-
-		public GetBucketsResponse GetBuckets(IGetBucketsRequest request)
-		{
-			return DoRequest<IGetBucketsRequest, GetBucketsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetBucketsResponse> GetBucketsAsync(IGetBucketsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetBucketsRequest, GetBucketsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetBucketsResponse GetBuckets(Nest.Id job_id, Func<GetBucketsDescriptor, IGetBucketsRequest> selector = null)
-		{
-			return GetBuckets(selector.InvokeOrDefault(new GetBucketsDescriptor(job_id)));
-		}
-
-		public Task<GetBucketsResponse> GetBucketsAsync(Nest.Id job_id, Func<GetBucketsDescriptor, IGetBucketsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetBucketsAsync(selector.InvokeOrDefault(new GetBucketsDescriptor(job_id)), cancellationToken);
-		}
-
-		public GetCalendarEventsResponse GetCalendarEvents(IGetCalendarEventsRequest request)
-		{
-			return DoRequest<IGetCalendarEventsRequest, GetCalendarEventsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetCalendarEventsResponse> GetCalendarEventsAsync(IGetCalendarEventsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetCalendarEventsRequest, GetCalendarEventsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetCalendarEventsResponse GetCalendarEvents(Nest.Id calendar_id, Func<GetCalendarEventsDescriptor, IGetCalendarEventsRequest> selector = null)
-		{
-			return GetCalendarEvents(selector.InvokeOrDefault(new GetCalendarEventsDescriptor(calendar_id)));
-		}
-
-		public Task<GetCalendarEventsResponse> GetCalendarEventsAsync(Nest.Id calendar_id, Func<GetCalendarEventsDescriptor, IGetCalendarEventsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetCalendarEventsAsync(selector.InvokeOrDefault(new GetCalendarEventsDescriptor(calendar_id)), cancellationToken);
-		}
-
-		public GetCalendarsResponse GetCalendars(IGetCalendarsRequest request)
-		{
-			return DoRequest<IGetCalendarsRequest, GetCalendarsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetCalendarsResponse> GetCalendarsAsync(IGetCalendarsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetCalendarsRequest, GetCalendarsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetCalendarsResponse GetCalendars(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null)
-		{
-			return GetCalendars(selector.InvokeOrDefault(new GetCalendarsDescriptor()));
-		}
-
-		public Task<GetCalendarsResponse> GetCalendarsAsync(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetCalendarsAsync(selector.InvokeOrDefault(new GetCalendarsDescriptor()), cancellationToken);
-		}
-
-		public GetCategoriesResponse GetCategories(IGetCategoriesRequest request)
-		{
-			return DoRequest<IGetCategoriesRequest, GetCategoriesResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetCategoriesRequest, GetCategoriesResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetCategoriesResponse GetCategories(Nest.Id job_id, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null)
-		{
-			return GetCategories(selector.InvokeOrDefault(new GetCategoriesDescriptor(job_id)));
-		}
-
-		public Task<GetCategoriesResponse> GetCategoriesAsync(Nest.Id job_id, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetCategoriesAsync(selector.InvokeOrDefault(new GetCategoriesDescriptor(job_id)), cancellationToken);
-		}
-
-		public GetDatafeedsResponse GetDatafeeds(IGetDatafeedsRequest request)
-		{
-			return DoRequest<IGetDatafeedsRequest, GetDatafeedsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetDatafeedsResponse> GetDatafeedsAsync(IGetDatafeedsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetDatafeedsRequest, GetDatafeedsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetDatafeedsResponse GetDatafeeds(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null)
-		{
-			return GetDatafeeds(selector.InvokeOrDefault(new GetDatafeedsDescriptor()));
-		}
-
-		public Task<GetDatafeedsResponse> GetDatafeedsAsync(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetDatafeedsAsync(selector.InvokeOrDefault(new GetDatafeedsDescriptor()), cancellationToken);
-		}
-
-		public GetDatafeedStatsResponse GetDatafeedStats(IGetDatafeedStatsRequest request)
-		{
-			return DoRequest<IGetDatafeedStatsRequest, GetDatafeedStatsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetDatafeedStatsResponse> GetDatafeedStatsAsync(IGetDatafeedStatsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetDatafeedStatsRequest, GetDatafeedStatsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetDatafeedStatsResponse GetDatafeedStats(Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> selector = null)
-		{
-			return GetDatafeedStats(selector.InvokeOrDefault(new GetDatafeedStatsDescriptor()));
-		}
-
-		public Task<GetDatafeedStatsResponse> GetDatafeedStatsAsync(Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetDatafeedStatsAsync(selector.InvokeOrDefault(new GetDatafeedStatsDescriptor()), cancellationToken);
-		}
-
-		public GetDataFrameAnalyticsResponse GetDataFrameAnalytics(IGetDataFrameAnalyticsRequest request)
-		{
-			return DoRequest<IGetDataFrameAnalyticsRequest, GetDataFrameAnalyticsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync(IGetDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetDataFrameAnalyticsRequest, GetDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetDataFrameAnalyticsResponse GetDataFrameAnalytics(Func<GetDataFrameAnalyticsDescriptor, IGetDataFrameAnalyticsRequest> selector = null)
-		{
-			return GetDataFrameAnalytics(selector.InvokeOrDefault(new GetDataFrameAnalyticsDescriptor()));
-		}
-
-		public Task<GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync(Func<GetDataFrameAnalyticsDescriptor, IGetDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetDataFrameAnalyticsAsync(selector.InvokeOrDefault(new GetDataFrameAnalyticsDescriptor()), cancellationToken);
-		}
-
-		public GetDataFrameAnalyticsStatsResponse GetDataFrameAnalyticsStats(IGetDataFrameAnalyticsStatsRequest request)
-		{
-			return DoRequest<IGetDataFrameAnalyticsStatsRequest, GetDataFrameAnalyticsStatsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync(IGetDataFrameAnalyticsStatsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetDataFrameAnalyticsStatsRequest, GetDataFrameAnalyticsStatsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetDataFrameAnalyticsStatsResponse GetDataFrameAnalyticsStats(Func<GetDataFrameAnalyticsStatsDescriptor, IGetDataFrameAnalyticsStatsRequest> selector = null)
-		{
-			return GetDataFrameAnalyticsStats(selector.InvokeOrDefault(new GetDataFrameAnalyticsStatsDescriptor()));
-		}
-
-		public Task<GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync(Func<GetDataFrameAnalyticsStatsDescriptor, IGetDataFrameAnalyticsStatsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetDataFrameAnalyticsStatsAsync(selector.InvokeOrDefault(new GetDataFrameAnalyticsStatsDescriptor()), cancellationToken);
-		}
-
-		public GetFiltersResponse GetFilters(IGetFiltersRequest request)
-		{
-			return DoRequest<IGetFiltersRequest, GetFiltersResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetFiltersResponse> GetFiltersAsync(IGetFiltersRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetFiltersRequest, GetFiltersResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetFiltersResponse GetFilters(Func<GetFiltersDescriptor, IGetFiltersRequest> selector = null)
-		{
-			return GetFilters(selector.InvokeOrDefault(new GetFiltersDescriptor()));
-		}
-
-		public Task<GetFiltersResponse> GetFiltersAsync(Func<GetFiltersDescriptor, IGetFiltersRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetFiltersAsync(selector.InvokeOrDefault(new GetFiltersDescriptor()), cancellationToken);
-		}
-
-		public GetInfluencersResponse GetInfluencers(IGetInfluencersRequest request)
-		{
-			return DoRequest<IGetInfluencersRequest, GetInfluencersResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetInfluencersResponse> GetInfluencersAsync(IGetInfluencersRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetInfluencersRequest, GetInfluencersResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetInfluencersResponse GetInfluencers(Nest.Id job_id, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null)
-		{
-			return GetInfluencers(selector.InvokeOrDefault(new GetInfluencersDescriptor(job_id)));
-		}
-
-		public Task<GetInfluencersResponse> GetInfluencersAsync(Nest.Id job_id, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetInfluencersAsync(selector.InvokeOrDefault(new GetInfluencersDescriptor(job_id)), cancellationToken);
-		}
-
-		public GetJobsResponse GetJobs(IGetJobsRequest request)
-		{
-			return DoRequest<IGetJobsRequest, GetJobsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetJobsResponse> GetJobsAsync(IGetJobsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetJobsRequest, GetJobsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetJobsResponse GetJobs(Func<GetJobsDescriptor, IGetJobsRequest> selector = null)
-		{
-			return GetJobs(selector.InvokeOrDefault(new GetJobsDescriptor()));
-		}
-
-		public Task<GetJobsResponse> GetJobsAsync(Func<GetJobsDescriptor, IGetJobsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetJobsAsync(selector.InvokeOrDefault(new GetJobsDescriptor()), cancellationToken);
-		}
-
-		public GetJobStatsResponse GetJobStats(IGetJobStatsRequest request)
-		{
-			return DoRequest<IGetJobStatsRequest, GetJobStatsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetJobStatsResponse> GetJobStatsAsync(IGetJobStatsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetJobStatsRequest, GetJobStatsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetJobStatsResponse GetJobStats(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null)
-		{
-			return GetJobStats(selector.InvokeOrDefault(new GetJobStatsDescriptor()));
-		}
-
-		public Task<GetJobStatsResponse> GetJobStatsAsync(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetJobStatsAsync(selector.InvokeOrDefault(new GetJobStatsDescriptor()), cancellationToken);
-		}
-
-		public GetModelSnapshotsResponse GetModelSnapshots(IGetModelSnapshotsRequest request)
-		{
-			return DoRequest<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(IGetModelSnapshotsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetModelSnapshotsResponse GetModelSnapshots(Nest.Id job_id, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null)
-		{
-			return GetModelSnapshots(selector.InvokeOrDefault(new GetModelSnapshotsDescriptor(job_id)));
-		}
-
-		public Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(Nest.Id job_id, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetModelSnapshotsAsync(selector.InvokeOrDefault(new GetModelSnapshotsDescriptor(job_id)), cancellationToken);
-		}
-
-		public GetOverallBucketsResponse GetOverallBuckets(IGetOverallBucketsRequest request)
-		{
-			return DoRequest<IGetOverallBucketsRequest, GetOverallBucketsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetOverallBucketsRequest, GetOverallBucketsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetOverallBucketsResponse GetOverallBuckets(Nest.Id job_id, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null)
-		{
-			return GetOverallBuckets(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(job_id)));
-		}
-
-		public Task<GetOverallBucketsResponse> GetOverallBucketsAsync(Nest.Id job_id, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetOverallBucketsAsync(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(job_id)), cancellationToken);
-		}
-
-		public GetRecordsResponse GetRecords(IGetRecordsRequest request)
-		{
-			return DoRequest<IGetRecordsRequest, GetRecordsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetRecordsResponse> GetRecordsAsync(IGetRecordsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetRecordsRequest, GetRecordsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetRecordsResponse GetRecords(Nest.Id job_id, Func<GetRecordsDescriptor, IGetRecordsRequest> selector = null)
-		{
-			return GetRecords(selector.InvokeOrDefault(new GetRecordsDescriptor(job_id)));
-		}
-
-		public Task<GetRecordsResponse> GetRecordsAsync(Nest.Id job_id, Func<GetRecordsDescriptor, IGetRecordsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetRecordsAsync(selector.InvokeOrDefault(new GetRecordsDescriptor(job_id)), cancellationToken);
-		}
-
-		public GetTrainedModelsResponse GetTrainedModels(IGetTrainedModelsRequest request)
-		{
-			return DoRequest<IGetTrainedModelsRequest, GetTrainedModelsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetTrainedModelsResponse> GetTrainedModelsAsync(IGetTrainedModelsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetTrainedModelsRequest, GetTrainedModelsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetTrainedModelsResponse GetTrainedModels(Func<GetTrainedModelsDescriptor, IGetTrainedModelsRequest> selector = null)
-		{
-			return GetTrainedModels(selector.InvokeOrDefault(new GetTrainedModelsDescriptor()));
-		}
-
-		public Task<GetTrainedModelsResponse> GetTrainedModelsAsync(Func<GetTrainedModelsDescriptor, IGetTrainedModelsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetTrainedModelsAsync(selector.InvokeOrDefault(new GetTrainedModelsDescriptor()), cancellationToken);
-		}
-
-		public GetTrainedModelsStatsResponse GetTrainedModelsStats(IGetTrainedModelsStatsRequest request)
-		{
-			return DoRequest<IGetTrainedModelsStatsRequest, GetTrainedModelsStatsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetTrainedModelsStatsResponse> GetTrainedModelsStatsAsync(IGetTrainedModelsStatsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetTrainedModelsStatsRequest, GetTrainedModelsStatsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetTrainedModelsStatsResponse GetTrainedModelsStats(Func<GetTrainedModelsStatsDescriptor, IGetTrainedModelsStatsRequest> selector = null)
-		{
-			return GetTrainedModelsStats(selector.InvokeOrDefault(new GetTrainedModelsStatsDescriptor()));
-		}
-
-		public Task<GetTrainedModelsStatsResponse> GetTrainedModelsStatsAsync(Func<GetTrainedModelsStatsDescriptor, IGetTrainedModelsStatsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetTrainedModelsStatsAsync(selector.InvokeOrDefault(new GetTrainedModelsStatsDescriptor()), cancellationToken);
-		}
-
-		public InfoResponse Info(IInfoRequest request)
-		{
-			return DoRequest<IInfoRequest, InfoResponse>(request, request.RequestParameters);
-		}
-
-		public Task<InfoResponse> InfoAsync(IInfoRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IInfoRequest, InfoResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public InfoResponse Info(Func<InfoDescriptor, IInfoRequest> selector = null)
-		{
-			return Info(selector.InvokeOrDefault(new InfoDescriptor()));
-		}
-
-		public Task<InfoResponse> InfoAsync(Func<InfoDescriptor, IInfoRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return InfoAsync(selector.InvokeOrDefault(new InfoDescriptor()), cancellationToken);
-		}
-
-		public OpenJobResponse OpenJob(IOpenJobRequest request)
-		{
-			return DoRequest<IOpenJobRequest, OpenJobResponse>(request, request.RequestParameters);
-		}
-
-		public Task<OpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IOpenJobRequest, OpenJobResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public OpenJobResponse OpenJob(Nest.Id job_id, Func<OpenJobDescriptor, IOpenJobRequest> selector = null)
-		{
-			return OpenJob(selector.InvokeOrDefault(new OpenJobDescriptor(job_id)));
-		}
-
-		public Task<OpenJobResponse> OpenJobAsync(Nest.Id job_id, Func<OpenJobDescriptor, IOpenJobRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return OpenJobAsync(selector.InvokeOrDefault(new OpenJobDescriptor(job_id)), cancellationToken);
-		}
-
-		public PostCalendarEventsResponse PostCalendarEvents(IPostCalendarEventsRequest request)
-		{
-			return DoRequest<IPostCalendarEventsRequest, PostCalendarEventsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PostCalendarEventsResponse> PostCalendarEventsAsync(IPostCalendarEventsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPostCalendarEventsRequest, PostCalendarEventsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PostDataResponse PostData(IPostDataRequest request)
-		{
-			return DoRequest<IPostDataRequest, PostDataResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PostDataResponse> PostDataAsync(IPostDataRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPostDataRequest, PostDataResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PostDataResponse PostData(Nest.Id job_id, Func<PostDataDescriptor, IPostDataRequest> selector = null)
-		{
-			return PostData(selector.InvokeOrDefault(new PostDataDescriptor(job_id)));
-		}
-
-		public Task<PostDataResponse> PostDataAsync(Nest.Id job_id, Func<PostDataDescriptor, IPostDataRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PostDataAsync(selector.InvokeOrDefault(new PostDataDescriptor(job_id)), cancellationToken);
-		}
-
-		public PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(IPreviewDatafeedRequest request)
-		{
-			return DoRequest<IPreviewDatafeedRequest, PreviewDatafeedResponse<TDocument>>(request, request.RequestParameters);
-		}
-
-		public Task<PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(IPreviewDatafeedRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPreviewDatafeedRequest, PreviewDatafeedResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null)
-		{
-			return PreviewDatafeed<TDocument>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor()));
-		}
-
-		public Task<PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PreviewDatafeedAsync<TDocument>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor()), cancellationToken);
-		}
-
-		public PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics(IPreviewDataFrameAnalyticsRequest request)
-		{
-			return DoRequest<IPreviewDataFrameAnalyticsRequest, PreviewDataFrameAnalyticsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync(IPreviewDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPreviewDataFrameAnalyticsRequest, PreviewDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics(Func<PreviewDataFrameAnalyticsDescriptor, IPreviewDataFrameAnalyticsRequest> selector = null)
-		{
-			return PreviewDataFrameAnalytics(selector.InvokeOrDefault(new PreviewDataFrameAnalyticsDescriptor()));
-		}
-
-		public Task<PreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync(Func<PreviewDataFrameAnalyticsDescriptor, IPreviewDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PreviewDataFrameAnalyticsAsync(selector.InvokeOrDefault(new PreviewDataFrameAnalyticsDescriptor()), cancellationToken);
-		}
-
-		public PutCalendarResponse PutCalendar(IPutCalendarRequest request)
-		{
-			return DoRequest<IPutCalendarRequest, PutCalendarResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutCalendarResponse> PutCalendarAsync(IPutCalendarRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutCalendarRequest, PutCalendarResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PutCalendarResponse PutCalendar(Nest.Id calendar_id, Func<PutCalendarDescriptor, IPutCalendarRequest> selector = null)
-		{
-			return PutCalendar(selector.InvokeOrDefault(new PutCalendarDescriptor(calendar_id)));
-		}
-
-		public Task<PutCalendarResponse> PutCalendarAsync(Nest.Id calendar_id, Func<PutCalendarDescriptor, IPutCalendarRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PutCalendarAsync(selector.InvokeOrDefault(new PutCalendarDescriptor(calendar_id)), cancellationToken);
-		}
-
-		public PutCalendarJobResponse PutCalendarJob(IPutCalendarJobRequest request)
-		{
-			return DoRequest<IPutCalendarJobRequest, PutCalendarJobResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutCalendarJobResponse> PutCalendarJobAsync(IPutCalendarJobRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutCalendarJobRequest, PutCalendarJobResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PutCalendarJobResponse PutCalendarJob(Nest.Id calendar_id, Nest.Id job_id, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null)
-		{
-			return PutCalendarJob(selector.InvokeOrDefault(new PutCalendarJobDescriptor(calendar_id, job_id)));
-		}
-
-		public Task<PutCalendarJobResponse> PutCalendarJobAsync(Nest.Id calendar_id, Nest.Id job_id, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PutCalendarJobAsync(selector.InvokeOrDefault(new PutCalendarJobDescriptor(calendar_id, job_id)), cancellationToken);
-		}
-
-		public PutDatafeedResponse PutDatafeed(IPutDatafeedRequest request)
-		{
-			return DoRequest<IPutDatafeedRequest, PutDatafeedResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutDatafeedRequest, PutDatafeedResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PutDatafeedResponse PutDatafeed(Nest.Id datafeed_id, Func<PutDatafeedDescriptor, IPutDatafeedRequest> selector = null)
-		{
-			return PutDatafeed(selector.InvokeOrDefault(new PutDatafeedDescriptor(datafeed_id)));
-		}
-
-		public Task<PutDatafeedResponse> PutDatafeedAsync(Nest.Id datafeed_id, Func<PutDatafeedDescriptor, IPutDatafeedRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PutDatafeedAsync(selector.InvokeOrDefault(new PutDatafeedDescriptor(datafeed_id)), cancellationToken);
-		}
-
-		public PutDataFrameAnalyticsResponse PutDataFrameAnalytics(IPutDataFrameAnalyticsRequest request)
-		{
-			return DoRequest<IPutDataFrameAnalyticsRequest, PutDataFrameAnalyticsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync(IPutDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutDataFrameAnalyticsRequest, PutDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PutDataFrameAnalyticsResponse PutDataFrameAnalytics(Nest.Id id, Func<PutDataFrameAnalyticsDescriptor, IPutDataFrameAnalyticsRequest> selector = null)
-		{
-			return PutDataFrameAnalytics(selector.InvokeOrDefault(new PutDataFrameAnalyticsDescriptor(id)));
-		}
-
-		public Task<PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync(Nest.Id id, Func<PutDataFrameAnalyticsDescriptor, IPutDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PutDataFrameAnalyticsAsync(selector.InvokeOrDefault(new PutDataFrameAnalyticsDescriptor(id)), cancellationToken);
-		}
-
-		public PutFilterResponse PutFilter(IPutFilterRequest request)
-		{
-			return DoRequest<IPutFilterRequest, PutFilterResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutFilterResponse> PutFilterAsync(IPutFilterRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutFilterRequest, PutFilterResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PutFilterResponse PutFilter(Nest.Id filter_id, Func<PutFilterDescriptor, IPutFilterRequest> selector = null)
-		{
-			return PutFilter(selector.InvokeOrDefault(new PutFilterDescriptor(filter_id)));
-		}
-
-		public Task<PutFilterResponse> PutFilterAsync(Nest.Id filter_id, Func<PutFilterDescriptor, IPutFilterRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PutFilterAsync(selector.InvokeOrDefault(new PutFilterDescriptor(filter_id)), cancellationToken);
-		}
-
-		public PutJobResponse PutJob(IPutJobRequest request)
-		{
-			return DoRequest<IPutJobRequest, PutJobResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutJobResponse> PutJobAsync(IPutJobRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutJobRequest, PutJobResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PutJobResponse PutJob(Nest.Id job_id, Func<PutJobDescriptor, IPutJobRequest> selector = null)
-		{
-			return PutJob(selector.InvokeOrDefault(new PutJobDescriptor(job_id)));
-		}
-
-		public Task<PutJobResponse> PutJobAsync(Nest.Id job_id, Func<PutJobDescriptor, IPutJobRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PutJobAsync(selector.InvokeOrDefault(new PutJobDescriptor(job_id)), cancellationToken);
-		}
-
-		public PutTrainedModelResponse PutTrainedModel(IPutTrainedModelRequest request)
-		{
-			return DoRequest<IPutTrainedModelRequest, PutTrainedModelResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutTrainedModelResponse> PutTrainedModelAsync(IPutTrainedModelRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutTrainedModelRequest, PutTrainedModelResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ResetJobResponse ResetJob(IResetJobRequest request)
-		{
-			return DoRequest<IResetJobRequest, ResetJobResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ResetJobResponse> ResetJobAsync(IResetJobRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IResetJobRequest, ResetJobResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ResetJobResponse ResetJob(Nest.Id job_id, Func<ResetJobDescriptor, IResetJobRequest> selector = null)
-		{
-			return ResetJob(selector.InvokeOrDefault(new ResetJobDescriptor(job_id)));
-		}
-
-		public Task<ResetJobResponse> ResetJobAsync(Nest.Id job_id, Func<ResetJobDescriptor, IResetJobRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ResetJobAsync(selector.InvokeOrDefault(new ResetJobDescriptor(job_id)), cancellationToken);
-		}
-
-		public RevertModelSnapshotResponse RevertModelSnapshot(IRevertModelSnapshotRequest request)
-		{
-			return DoRequest<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters);
-		}
-
-		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public RevertModelSnapshotResponse RevertModelSnapshot(Nest.Id job_id, Nest.Id snapshot_id, Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null)
-		{
-			return RevertModelSnapshot(selector.InvokeOrDefault(new RevertModelSnapshotDescriptor(job_id, snapshot_id)));
-		}
-
-		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(Nest.Id job_id, Nest.Id snapshot_id, Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return RevertModelSnapshotAsync(selector.InvokeOrDefault(new RevertModelSnapshotDescriptor(job_id, snapshot_id)), cancellationToken);
-		}
-
-		public SetUpgradeModeResponse SetUpgradeMode(ISetUpgradeModeRequest request)
-		{
-			return DoRequest<ISetUpgradeModeRequest, SetUpgradeModeResponse>(request, request.RequestParameters);
-		}
-
-		public Task<SetUpgradeModeResponse> SetUpgradeModeAsync(ISetUpgradeModeRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<ISetUpgradeModeRequest, SetUpgradeModeResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public SetUpgradeModeResponse SetUpgradeMode(Func<SetUpgradeModeDescriptor, ISetUpgradeModeRequest> selector = null)
-		{
-			return SetUpgradeMode(selector.InvokeOrDefault(new SetUpgradeModeDescriptor()));
-		}
-
-		public Task<SetUpgradeModeResponse> SetUpgradeModeAsync(Func<SetUpgradeModeDescriptor, ISetUpgradeModeRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return SetUpgradeModeAsync(selector.InvokeOrDefault(new SetUpgradeModeDescriptor()), cancellationToken);
-		}
-
-		public StartDatafeedResponse StartDatafeed(IStartDatafeedRequest request)
-		{
-			return DoRequest<IStartDatafeedRequest, StartDatafeedResponse>(request, request.RequestParameters);
-		}
-
-		public Task<StartDatafeedResponse> StartDatafeedAsync(IStartDatafeedRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IStartDatafeedRequest, StartDatafeedResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public StartDatafeedResponse StartDatafeed(Nest.Id datafeed_id, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null)
-		{
-			return StartDatafeed(selector.InvokeOrDefault(new StartDatafeedDescriptor(datafeed_id)));
-		}
-
-		public Task<StartDatafeedResponse> StartDatafeedAsync(Nest.Id datafeed_id, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return StartDatafeedAsync(selector.InvokeOrDefault(new StartDatafeedDescriptor(datafeed_id)), cancellationToken);
-		}
-
-		public StartDataFrameAnalyticsResponse StartDataFrameAnalytics(IStartDataFrameAnalyticsRequest request)
-		{
-			return DoRequest<IStartDataFrameAnalyticsRequest, StartDataFrameAnalyticsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<StartDataFrameAnalyticsResponse> StartDataFrameAnalyticsAsync(IStartDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IStartDataFrameAnalyticsRequest, StartDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public StartDataFrameAnalyticsResponse StartDataFrameAnalytics(Nest.Id id, Func<StartDataFrameAnalyticsDescriptor, IStartDataFrameAnalyticsRequest> selector = null)
-		{
-			return StartDataFrameAnalytics(selector.InvokeOrDefault(new StartDataFrameAnalyticsDescriptor(id)));
-		}
-
-		public Task<StartDataFrameAnalyticsResponse> StartDataFrameAnalyticsAsync(Nest.Id id, Func<StartDataFrameAnalyticsDescriptor, IStartDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return StartDataFrameAnalyticsAsync(selector.InvokeOrDefault(new StartDataFrameAnalyticsDescriptor(id)), cancellationToken);
-		}
-
-		public StopDatafeedResponse StopDatafeed(IStopDatafeedRequest request)
-		{
-			return DoRequest<IStopDatafeedRequest, StopDatafeedResponse>(request, request.RequestParameters);
-		}
-
-		public Task<StopDatafeedResponse> StopDatafeedAsync(IStopDatafeedRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IStopDatafeedRequest, StopDatafeedResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public StopDatafeedResponse StopDatafeed(Nest.Id datafeed_id, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null)
-		{
-			return StopDatafeed(selector.InvokeOrDefault(new StopDatafeedDescriptor(datafeed_id)));
-		}
-
-		public Task<StopDatafeedResponse> StopDatafeedAsync(Nest.Id datafeed_id, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return StopDatafeedAsync(selector.InvokeOrDefault(new StopDatafeedDescriptor(datafeed_id)), cancellationToken);
-		}
-
-		public StopDataFrameAnalyticsResponse StopDataFrameAnalytics(IStopDataFrameAnalyticsRequest request)
-		{
-			return DoRequest<IStopDataFrameAnalyticsRequest, StopDataFrameAnalyticsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<StopDataFrameAnalyticsResponse> StopDataFrameAnalyticsAsync(IStopDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IStopDataFrameAnalyticsRequest, StopDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public StopDataFrameAnalyticsResponse StopDataFrameAnalytics(Nest.Id id, Func<StopDataFrameAnalyticsDescriptor, IStopDataFrameAnalyticsRequest> selector = null)
-		{
-			return StopDataFrameAnalytics(selector.InvokeOrDefault(new StopDataFrameAnalyticsDescriptor(id)));
-		}
-
-		public Task<StopDataFrameAnalyticsResponse> StopDataFrameAnalyticsAsync(Nest.Id id, Func<StopDataFrameAnalyticsDescriptor, IStopDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return StopDataFrameAnalyticsAsync(selector.InvokeOrDefault(new StopDataFrameAnalyticsDescriptor(id)), cancellationToken);
-		}
-
-		public UpdateDataFrameAnalyticsResponse UpdateDataFrameAnalytics(IUpdateDataFrameAnalyticsRequest request)
-		{
-			return DoRequest<IUpdateDataFrameAnalyticsRequest, UpdateDataFrameAnalyticsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync(IUpdateDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IUpdateDataFrameAnalyticsRequest, UpdateDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public UpdateDataFrameAnalyticsResponse UpdateDataFrameAnalytics(Nest.Id id, Func<UpdateDataFrameAnalyticsDescriptor, IUpdateDataFrameAnalyticsRequest> selector = null)
-		{
-			return UpdateDataFrameAnalytics(selector.InvokeOrDefault(new UpdateDataFrameAnalyticsDescriptor(id)));
-		}
-
-		public Task<UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync(Nest.Id id, Func<UpdateDataFrameAnalyticsDescriptor, IUpdateDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return UpdateDataFrameAnalyticsAsync(selector.InvokeOrDefault(new UpdateDataFrameAnalyticsDescriptor(id)), cancellationToken);
-		}
-
-		public UpdateFilterResponse UpdateFilter(IUpdateFilterRequest request)
-		{
-			return DoRequest<IUpdateFilterRequest, UpdateFilterResponse>(request, request.RequestParameters);
-		}
-
-		public Task<UpdateFilterResponse> UpdateFilterAsync(IUpdateFilterRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IUpdateFilterRequest, UpdateFilterResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public UpdateFilterResponse UpdateFilter(Nest.Id filter_id, Func<UpdateFilterDescriptor, IUpdateFilterRequest> selector = null)
-		{
-			return UpdateFilter(selector.InvokeOrDefault(new UpdateFilterDescriptor(filter_id)));
-		}
-
-		public Task<UpdateFilterResponse> UpdateFilterAsync(Nest.Id filter_id, Func<UpdateFilterDescriptor, IUpdateFilterRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return UpdateFilterAsync(selector.InvokeOrDefault(new UpdateFilterDescriptor(filter_id)), cancellationToken);
-		}
-
-		public UpdateJobResponse UpdateJob(IUpdateJobRequest request)
-		{
-			return DoRequest<IUpdateJobRequest, UpdateJobResponse>(request, request.RequestParameters);
-		}
-
-		public Task<UpdateJobResponse> UpdateJobAsync(IUpdateJobRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IUpdateJobRequest, UpdateJobResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public UpdateJobResponse UpdateJob(Nest.Id job_id, Func<UpdateJobDescriptor, IUpdateJobRequest> selector = null)
-		{
-			return UpdateJob(selector.InvokeOrDefault(new UpdateJobDescriptor(job_id)));
-		}
-
-		public Task<UpdateJobResponse> UpdateJobAsync(Nest.Id job_id, Func<UpdateJobDescriptor, IUpdateJobRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return UpdateJobAsync(selector.InvokeOrDefault(new UpdateJobDescriptor(job_id)), cancellationToken);
-		}
-
-		public UpdateModelSnapshotResponse UpdateModelSnapshot(IUpdateModelSnapshotRequest request)
-		{
-			return DoRequest<IUpdateModelSnapshotRequest, UpdateModelSnapshotResponse>(request, request.RequestParameters);
-		}
-
-		public Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(IUpdateModelSnapshotRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IUpdateModelSnapshotRequest, UpdateModelSnapshotResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public UpdateModelSnapshotResponse UpdateModelSnapshot(Nest.Id job_id, Nest.Id snapshot_id, Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector = null)
-		{
-			return UpdateModelSnapshot(selector.InvokeOrDefault(new UpdateModelSnapshotDescriptor(job_id, snapshot_id)));
-		}
-
-		public Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(Nest.Id job_id, Nest.Id snapshot_id, Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return UpdateModelSnapshotAsync(selector.InvokeOrDefault(new UpdateModelSnapshotDescriptor(job_id, snapshot_id)), cancellationToken);
-		}
-
-		public UpgradeJobSnapshotResponse UpgradeJobSnapshot(IUpgradeJobSnapshotRequest request)
-		{
-			return DoRequest<IUpgradeJobSnapshotRequest, UpgradeJobSnapshotResponse>(request, request.RequestParameters);
-		}
-
-		public Task<UpgradeJobSnapshotResponse> UpgradeJobSnapshotAsync(IUpgradeJobSnapshotRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IUpgradeJobSnapshotRequest, UpgradeJobSnapshotResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public UpgradeJobSnapshotResponse UpgradeJobSnapshot(Nest.Id job_id, Nest.Id snapshot_id, Func<UpgradeJobSnapshotDescriptor, IUpgradeJobSnapshotRequest> selector = null)
-		{
-			return UpgradeJobSnapshot(selector.InvokeOrDefault(new UpgradeJobSnapshotDescriptor(job_id, snapshot_id)));
-		}
-
-		public Task<UpgradeJobSnapshotResponse> UpgradeJobSnapshotAsync(Nest.Id job_id, Nest.Id snapshot_id, Func<UpgradeJobSnapshotDescriptor, IUpgradeJobSnapshotRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return UpgradeJobSnapshotAsync(selector.InvokeOrDefault(new UpgradeJobSnapshotDescriptor(job_id, snapshot_id)), cancellationToken);
-		}
-
-		public ValidateResponse Validate(IValidateRequest request)
-		{
-			return DoRequest<IValidateRequest, ValidateResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ValidateResponse> ValidateAsync(IValidateRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IValidateRequest, ValidateResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ValidateResponse Validate(Func<ValidateDescriptor, IValidateRequest> selector = null)
-		{
-			return Validate(selector.InvokeOrDefault(new ValidateDescriptor()));
-		}
-
-		public Task<ValidateResponse> ValidateAsync(Func<ValidateDescriptor, IValidateRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ValidateAsync(selector.InvokeOrDefault(new ValidateDescriptor()), cancellationToken);
-		}
-
-		public ValidateDetectorResponse ValidateDetector(IValidateDetectorRequest request)
-		{
-			return DoRequest<IValidateDetectorRequest, ValidateDetectorResponse>(request, request.RequestParameters);
-		}
-
-		public Task<ValidateDetectorResponse> ValidateDetectorAsync(IValidateDetectorRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IValidateDetectorRequest, ValidateDetectorResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public ValidateDetectorResponse ValidateDetector(Func<ValidateDetectorDescriptor, IValidateDetectorRequest> selector = null)
-		{
-			return ValidateDetector(selector.InvokeOrDefault(new ValidateDetectorDescriptor()));
-		}
-
-		public Task<ValidateDetectorResponse> ValidateDetectorAsync(Func<ValidateDetectorDescriptor, IValidateDetectorRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return ValidateDetectorAsync(selector.InvokeOrDefault(new ValidateDetectorDescriptor()), cancellationToken);
-		}
+		public CloseJobResponse CloseJob(ICloseJobRequest request) => DoRequest<ICloseJobRequest, CloseJobResponse>(request, request.RequestParameters);
+		public Task<CloseJobResponse> CloseJobAsync(ICloseJobRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ICloseJobRequest, CloseJobResponse>(request, request.RequestParameters, cancellationToken);
+		public CloseJobResponse CloseJob(Nest.Id job_id, Func<CloseJobDescriptor, ICloseJobRequest> selector = null) => CloseJob(selector.InvokeOrDefault(new CloseJobDescriptor(job_id)));
+		public Task<CloseJobResponse> CloseJobAsync(Nest.Id job_id, Func<CloseJobDescriptor, ICloseJobRequest> selector = null, CancellationToken cancellationToken = default) => CloseJobAsync(selector.InvokeOrDefault(new CloseJobDescriptor(job_id)), cancellationToken);
+		public DeleteCalendarResponse DeleteCalendar(IDeleteCalendarRequest request) => DoRequest<IDeleteCalendarRequest, DeleteCalendarResponse>(request, request.RequestParameters);
+		public Task<DeleteCalendarResponse> DeleteCalendarAsync(IDeleteCalendarRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteCalendarRequest, DeleteCalendarResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteCalendarResponse DeleteCalendar(Nest.Id calendar_id, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null) => DeleteCalendar(selector.InvokeOrDefault(new DeleteCalendarDescriptor(calendar_id)));
+		public Task<DeleteCalendarResponse> DeleteCalendarAsync(Nest.Id calendar_id, Func<DeleteCalendarDescriptor, IDeleteCalendarRequest> selector = null, CancellationToken cancellationToken = default) => DeleteCalendarAsync(selector.InvokeOrDefault(new DeleteCalendarDescriptor(calendar_id)), cancellationToken);
+		public DeleteCalendarEventResponse DeleteCalendarEvent(IDeleteCalendarEventRequest request) => DoRequest<IDeleteCalendarEventRequest, DeleteCalendarEventResponse>(request, request.RequestParameters);
+		public Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(IDeleteCalendarEventRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteCalendarEventRequest, DeleteCalendarEventResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteCalendarEventResponse DeleteCalendarEvent(Nest.Id calendar_id, Nest.Id event_id, Func<DeleteCalendarEventDescriptor, IDeleteCalendarEventRequest> selector = null) => DeleteCalendarEvent(selector.InvokeOrDefault(new DeleteCalendarEventDescriptor(calendar_id, event_id)));
+		public Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(Nest.Id calendar_id, Nest.Id event_id, Func<DeleteCalendarEventDescriptor, IDeleteCalendarEventRequest> selector = null, CancellationToken cancellationToken = default) => DeleteCalendarEventAsync(selector.InvokeOrDefault(new DeleteCalendarEventDescriptor(calendar_id, event_id)), cancellationToken);
+		public DeleteCalendarJobResponse DeleteCalendarJob(IDeleteCalendarJobRequest request) => DoRequest<IDeleteCalendarJobRequest, DeleteCalendarJobResponse>(request, request.RequestParameters);
+		public Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(IDeleteCalendarJobRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteCalendarJobRequest, DeleteCalendarJobResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteCalendarJobResponse DeleteCalendarJob(Nest.Id calendar_id, Nest.Id job_id, Func<DeleteCalendarJobDescriptor, IDeleteCalendarJobRequest> selector = null) => DeleteCalendarJob(selector.InvokeOrDefault(new DeleteCalendarJobDescriptor(calendar_id, job_id)));
+		public Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(Nest.Id calendar_id, Nest.Id job_id, Func<DeleteCalendarJobDescriptor, IDeleteCalendarJobRequest> selector = null, CancellationToken cancellationToken = default) => DeleteCalendarJobAsync(selector.InvokeOrDefault(new DeleteCalendarJobDescriptor(calendar_id, job_id)), cancellationToken);
+		public DeleteDatafeedResponse DeleteDatafeed(IDeleteDatafeedRequest request) => DoRequest<IDeleteDatafeedRequest, DeleteDatafeedResponse>(request, request.RequestParameters);
+		public Task<DeleteDatafeedResponse> DeleteDatafeedAsync(IDeleteDatafeedRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteDatafeedRequest, DeleteDatafeedResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteDatafeedResponse DeleteDatafeed(Nest.Id datafeed_id, Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null) => DeleteDatafeed(selector.InvokeOrDefault(new DeleteDatafeedDescriptor(datafeed_id)));
+		public Task<DeleteDatafeedResponse> DeleteDatafeedAsync(Nest.Id datafeed_id, Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null, CancellationToken cancellationToken = default) => DeleteDatafeedAsync(selector.InvokeOrDefault(new DeleteDatafeedDescriptor(datafeed_id)), cancellationToken);
+		public DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics(IDeleteDataFrameAnalyticsRequest request) => DoRequest<IDeleteDataFrameAnalyticsRequest, DeleteDataFrameAnalyticsResponse>(request, request.RequestParameters);
+		public Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(IDeleteDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteDataFrameAnalyticsRequest, DeleteDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics(Nest.Id id, Func<DeleteDataFrameAnalyticsDescriptor, IDeleteDataFrameAnalyticsRequest> selector = null) => DeleteDataFrameAnalytics(selector.InvokeOrDefault(new DeleteDataFrameAnalyticsDescriptor(id)));
+		public Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(Nest.Id id, Func<DeleteDataFrameAnalyticsDescriptor, IDeleteDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default) => DeleteDataFrameAnalyticsAsync(selector.InvokeOrDefault(new DeleteDataFrameAnalyticsDescriptor(id)), cancellationToken);
+		public DeleteExpiredDataResponse DeleteExpiredData(IDeleteExpiredDataRequest request) => DoRequest<IDeleteExpiredDataRequest, DeleteExpiredDataResponse>(request, request.RequestParameters);
+		public Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(IDeleteExpiredDataRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteExpiredDataRequest, DeleteExpiredDataResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteExpiredDataResponse DeleteExpiredData(Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> selector = null) => DeleteExpiredData(selector.InvokeOrDefault(new DeleteExpiredDataDescriptor()));
+		public Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> selector = null, CancellationToken cancellationToken = default) => DeleteExpiredDataAsync(selector.InvokeOrDefault(new DeleteExpiredDataDescriptor()), cancellationToken);
+		public DeleteFilterResponse DeleteFilter(IDeleteFilterRequest request) => DoRequest<IDeleteFilterRequest, DeleteFilterResponse>(request, request.RequestParameters);
+		public Task<DeleteFilterResponse> DeleteFilterAsync(IDeleteFilterRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteFilterRequest, DeleteFilterResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteFilterResponse DeleteFilter(Nest.Id filter_id, Func<DeleteFilterDescriptor, IDeleteFilterRequest> selector = null) => DeleteFilter(selector.InvokeOrDefault(new DeleteFilterDescriptor(filter_id)));
+		public Task<DeleteFilterResponse> DeleteFilterAsync(Nest.Id filter_id, Func<DeleteFilterDescriptor, IDeleteFilterRequest> selector = null, CancellationToken cancellationToken = default) => DeleteFilterAsync(selector.InvokeOrDefault(new DeleteFilterDescriptor(filter_id)), cancellationToken);
+		public DeleteForecastResponse DeleteForecast(IDeleteForecastRequest request) => DoRequest<IDeleteForecastRequest, DeleteForecastResponse>(request, request.RequestParameters);
+		public Task<DeleteForecastResponse> DeleteForecastAsync(IDeleteForecastRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteForecastRequest, DeleteForecastResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteForecastResponse DeleteForecast(Nest.Id job_id, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null) => DeleteForecast(selector.InvokeOrDefault(new DeleteForecastDescriptor(job_id)));
+		public Task<DeleteForecastResponse> DeleteForecastAsync(Nest.Id job_id, Func<DeleteForecastDescriptor, IDeleteForecastRequest> selector = null, CancellationToken cancellationToken = default) => DeleteForecastAsync(selector.InvokeOrDefault(new DeleteForecastDescriptor(job_id)), cancellationToken);
+		public DeleteJobResponse DeleteJob(IDeleteJobRequest request) => DoRequest<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters);
+		public Task<DeleteJobResponse> DeleteJobAsync(IDeleteJobRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteJobResponse DeleteJob(Nest.Id job_id, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null) => DeleteJob(selector.InvokeOrDefault(new DeleteJobDescriptor(job_id)));
+		public Task<DeleteJobResponse> DeleteJobAsync(Nest.Id job_id, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null, CancellationToken cancellationToken = default) => DeleteJobAsync(selector.InvokeOrDefault(new DeleteJobDescriptor(job_id)), cancellationToken);
+		public DeleteModelSnapshotResponse DeleteModelSnapshot(IDeleteModelSnapshotRequest request) => DoRequest<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse>(request, request.RequestParameters);
+		public Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(IDeleteModelSnapshotRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteModelSnapshotRequest, DeleteModelSnapshotResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteModelSnapshotResponse DeleteModelSnapshot(Nest.Id job_id, Nest.Id snapshot_id, Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> selector = null) => DeleteModelSnapshot(selector.InvokeOrDefault(new DeleteModelSnapshotDescriptor(job_id, snapshot_id)));
+		public Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(Nest.Id job_id, Nest.Id snapshot_id, Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> selector = null, CancellationToken cancellationToken = default) => DeleteModelSnapshotAsync(selector.InvokeOrDefault(new DeleteModelSnapshotDescriptor(job_id, snapshot_id)), cancellationToken);
+		public DeleteTrainedModelResponse DeleteTrainedModel(IDeleteTrainedModelRequest request) => DoRequest<IDeleteTrainedModelRequest, DeleteTrainedModelResponse>(request, request.RequestParameters);
+		public Task<DeleteTrainedModelResponse> DeleteTrainedModelAsync(IDeleteTrainedModelRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteTrainedModelRequest, DeleteTrainedModelResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteTrainedModelResponse DeleteTrainedModel(Nest.Id model_id, Func<DeleteTrainedModelDescriptor, IDeleteTrainedModelRequest> selector = null) => DeleteTrainedModel(selector.InvokeOrDefault(new DeleteTrainedModelDescriptor(model_id)));
+		public Task<DeleteTrainedModelResponse> DeleteTrainedModelAsync(Nest.Id model_id, Func<DeleteTrainedModelDescriptor, IDeleteTrainedModelRequest> selector = null, CancellationToken cancellationToken = default) => DeleteTrainedModelAsync(selector.InvokeOrDefault(new DeleteTrainedModelDescriptor(model_id)), cancellationToken);
+		public DeleteTrainedModelAliasResponse DeleteTrainedModelAlias(IDeleteTrainedModelAliasRequest request) => DoRequest<IDeleteTrainedModelAliasRequest, DeleteTrainedModelAliasResponse>(request, request.RequestParameters);
+		public Task<DeleteTrainedModelAliasResponse> DeleteTrainedModelAliasAsync(IDeleteTrainedModelAliasRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteTrainedModelAliasRequest, DeleteTrainedModelAliasResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteTrainedModelAliasResponse DeleteTrainedModelAlias(Nest.Id model_id, Nest.Name model_alias, Func<DeleteTrainedModelAliasDescriptor, IDeleteTrainedModelAliasRequest> selector = null) => DeleteTrainedModelAlias(selector.InvokeOrDefault(new DeleteTrainedModelAliasDescriptor(model_id, model_alias)));
+		public Task<DeleteTrainedModelAliasResponse> DeleteTrainedModelAliasAsync(Nest.Id model_id, Nest.Name model_alias, Func<DeleteTrainedModelAliasDescriptor, IDeleteTrainedModelAliasRequest> selector = null, CancellationToken cancellationToken = default) => DeleteTrainedModelAliasAsync(selector.InvokeOrDefault(new DeleteTrainedModelAliasDescriptor(model_id, model_alias)), cancellationToken);
+		public EstimateModelMemoryResponse EstimateModelMemory(IEstimateModelMemoryRequest request) => DoRequest<IEstimateModelMemoryRequest, EstimateModelMemoryResponse>(request, request.RequestParameters);
+		public Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync(IEstimateModelMemoryRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IEstimateModelMemoryRequest, EstimateModelMemoryResponse>(request, request.RequestParameters, cancellationToken);
+		public EstimateModelMemoryResponse EstimateModelMemory(Func<EstimateModelMemoryDescriptor, IEstimateModelMemoryRequest> selector = null) => EstimateModelMemory(selector.InvokeOrDefault(new EstimateModelMemoryDescriptor()));
+		public Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync(Func<EstimateModelMemoryDescriptor, IEstimateModelMemoryRequest> selector = null, CancellationToken cancellationToken = default) => EstimateModelMemoryAsync(selector.InvokeOrDefault(new EstimateModelMemoryDescriptor()), cancellationToken);
+		public EvaluateDataFrameResponse EvaluateDataFrame(IEvaluateDataFrameRequest request) => DoRequest<IEvaluateDataFrameRequest, EvaluateDataFrameResponse>(request, request.RequestParameters);
+		public Task<EvaluateDataFrameResponse> EvaluateDataFrameAsync(IEvaluateDataFrameRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IEvaluateDataFrameRequest, EvaluateDataFrameResponse>(request, request.RequestParameters, cancellationToken);
+		public EvaluateDataFrameResponse EvaluateDataFrame(Func<EvaluateDataFrameDescriptor, IEvaluateDataFrameRequest> selector = null) => EvaluateDataFrame(selector.InvokeOrDefault(new EvaluateDataFrameDescriptor()));
+		public Task<EvaluateDataFrameResponse> EvaluateDataFrameAsync(Func<EvaluateDataFrameDescriptor, IEvaluateDataFrameRequest> selector = null, CancellationToken cancellationToken = default) => EvaluateDataFrameAsync(selector.InvokeOrDefault(new EvaluateDataFrameDescriptor()), cancellationToken);
+		public ExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics(IExplainDataFrameAnalyticsRequest request) => DoRequest<IExplainDataFrameAnalyticsRequest, ExplainDataFrameAnalyticsResponse>(request, request.RequestParameters);
+		public Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(IExplainDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IExplainDataFrameAnalyticsRequest, ExplainDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
+		public ExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics(Func<ExplainDataFrameAnalyticsDescriptor, IExplainDataFrameAnalyticsRequest> selector = null) => ExplainDataFrameAnalytics(selector.InvokeOrDefault(new ExplainDataFrameAnalyticsDescriptor()));
+		public Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(Func<ExplainDataFrameAnalyticsDescriptor, IExplainDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default) => ExplainDataFrameAnalyticsAsync(selector.InvokeOrDefault(new ExplainDataFrameAnalyticsDescriptor()), cancellationToken);
+		public FlushJobResponse FlushJob(IFlushJobRequest request) => DoRequest<IFlushJobRequest, FlushJobResponse>(request, request.RequestParameters);
+		public Task<FlushJobResponse> FlushJobAsync(IFlushJobRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IFlushJobRequest, FlushJobResponse>(request, request.RequestParameters, cancellationToken);
+		public FlushJobResponse FlushJob(Nest.Id job_id, Func<FlushJobDescriptor, IFlushJobRequest> selector = null) => FlushJob(selector.InvokeOrDefault(new FlushJobDescriptor(job_id)));
+		public Task<FlushJobResponse> FlushJobAsync(Nest.Id job_id, Func<FlushJobDescriptor, IFlushJobRequest> selector = null, CancellationToken cancellationToken = default) => FlushJobAsync(selector.InvokeOrDefault(new FlushJobDescriptor(job_id)), cancellationToken);
+		public ForecastResponse Forecast(IForecastRequest request) => DoRequest<IForecastRequest, ForecastResponse>(request, request.RequestParameters);
+		public Task<ForecastResponse> ForecastAsync(IForecastRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IForecastRequest, ForecastResponse>(request, request.RequestParameters, cancellationToken);
+		public ForecastResponse Forecast(Nest.Id job_id, Func<ForecastDescriptor, IForecastRequest> selector = null) => Forecast(selector.InvokeOrDefault(new ForecastDescriptor(job_id)));
+		public Task<ForecastResponse> ForecastAsync(Nest.Id job_id, Func<ForecastDescriptor, IForecastRequest> selector = null, CancellationToken cancellationToken = default) => ForecastAsync(selector.InvokeOrDefault(new ForecastDescriptor(job_id)), cancellationToken);
+		public GetBucketsResponse GetBuckets(IGetBucketsRequest request) => DoRequest<IGetBucketsRequest, GetBucketsResponse>(request, request.RequestParameters);
+		public Task<GetBucketsResponse> GetBucketsAsync(IGetBucketsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetBucketsRequest, GetBucketsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetBucketsResponse GetBuckets(Nest.Id job_id, Func<GetBucketsDescriptor, IGetBucketsRequest> selector = null) => GetBuckets(selector.InvokeOrDefault(new GetBucketsDescriptor(job_id)));
+		public Task<GetBucketsResponse> GetBucketsAsync(Nest.Id job_id, Func<GetBucketsDescriptor, IGetBucketsRequest> selector = null, CancellationToken cancellationToken = default) => GetBucketsAsync(selector.InvokeOrDefault(new GetBucketsDescriptor(job_id)), cancellationToken);
+		public GetCalendarEventsResponse GetCalendarEvents(IGetCalendarEventsRequest request) => DoRequest<IGetCalendarEventsRequest, GetCalendarEventsResponse>(request, request.RequestParameters);
+		public Task<GetCalendarEventsResponse> GetCalendarEventsAsync(IGetCalendarEventsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetCalendarEventsRequest, GetCalendarEventsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetCalendarEventsResponse GetCalendarEvents(Nest.Id calendar_id, Func<GetCalendarEventsDescriptor, IGetCalendarEventsRequest> selector = null) => GetCalendarEvents(selector.InvokeOrDefault(new GetCalendarEventsDescriptor(calendar_id)));
+		public Task<GetCalendarEventsResponse> GetCalendarEventsAsync(Nest.Id calendar_id, Func<GetCalendarEventsDescriptor, IGetCalendarEventsRequest> selector = null, CancellationToken cancellationToken = default) => GetCalendarEventsAsync(selector.InvokeOrDefault(new GetCalendarEventsDescriptor(calendar_id)), cancellationToken);
+		public GetCalendarsResponse GetCalendars(IGetCalendarsRequest request) => DoRequest<IGetCalendarsRequest, GetCalendarsResponse>(request, request.RequestParameters);
+		public Task<GetCalendarsResponse> GetCalendarsAsync(IGetCalendarsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetCalendarsRequest, GetCalendarsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetCalendarsResponse GetCalendars(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null) => GetCalendars(selector.InvokeOrDefault(new GetCalendarsDescriptor()));
+		public Task<GetCalendarsResponse> GetCalendarsAsync(Func<GetCalendarsDescriptor, IGetCalendarsRequest> selector = null, CancellationToken cancellationToken = default) => GetCalendarsAsync(selector.InvokeOrDefault(new GetCalendarsDescriptor()), cancellationToken);
+		public GetCategoriesResponse GetCategories(IGetCategoriesRequest request) => DoRequest<IGetCategoriesRequest, GetCategoriesResponse>(request, request.RequestParameters);
+		public Task<GetCategoriesResponse> GetCategoriesAsync(IGetCategoriesRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetCategoriesRequest, GetCategoriesResponse>(request, request.RequestParameters, cancellationToken);
+		public GetCategoriesResponse GetCategories(Nest.Id job_id, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null) => GetCategories(selector.InvokeOrDefault(new GetCategoriesDescriptor(job_id)));
+		public Task<GetCategoriesResponse> GetCategoriesAsync(Nest.Id job_id, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null, CancellationToken cancellationToken = default) => GetCategoriesAsync(selector.InvokeOrDefault(new GetCategoriesDescriptor(job_id)), cancellationToken);
+		public GetDatafeedsResponse GetDatafeeds(IGetDatafeedsRequest request) => DoRequest<IGetDatafeedsRequest, GetDatafeedsResponse>(request, request.RequestParameters);
+		public Task<GetDatafeedsResponse> GetDatafeedsAsync(IGetDatafeedsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetDatafeedsRequest, GetDatafeedsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetDatafeedsResponse GetDatafeeds(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null) => GetDatafeeds(selector.InvokeOrDefault(new GetDatafeedsDescriptor()));
+		public Task<GetDatafeedsResponse> GetDatafeedsAsync(Func<GetDatafeedsDescriptor, IGetDatafeedsRequest> selector = null, CancellationToken cancellationToken = default) => GetDatafeedsAsync(selector.InvokeOrDefault(new GetDatafeedsDescriptor()), cancellationToken);
+		public GetDatafeedStatsResponse GetDatafeedStats(IGetDatafeedStatsRequest request) => DoRequest<IGetDatafeedStatsRequest, GetDatafeedStatsResponse>(request, request.RequestParameters);
+		public Task<GetDatafeedStatsResponse> GetDatafeedStatsAsync(IGetDatafeedStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetDatafeedStatsRequest, GetDatafeedStatsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetDatafeedStatsResponse GetDatafeedStats(Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> selector = null) => GetDatafeedStats(selector.InvokeOrDefault(new GetDatafeedStatsDescriptor()));
+		public Task<GetDatafeedStatsResponse> GetDatafeedStatsAsync(Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> selector = null, CancellationToken cancellationToken = default) => GetDatafeedStatsAsync(selector.InvokeOrDefault(new GetDatafeedStatsDescriptor()), cancellationToken);
+		public GetDataFrameAnalyticsResponse GetDataFrameAnalytics(IGetDataFrameAnalyticsRequest request) => DoRequest<IGetDataFrameAnalyticsRequest, GetDataFrameAnalyticsResponse>(request, request.RequestParameters);
+		public Task<GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync(IGetDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetDataFrameAnalyticsRequest, GetDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetDataFrameAnalyticsResponse GetDataFrameAnalytics(Func<GetDataFrameAnalyticsDescriptor, IGetDataFrameAnalyticsRequest> selector = null) => GetDataFrameAnalytics(selector.InvokeOrDefault(new GetDataFrameAnalyticsDescriptor()));
+		public Task<GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync(Func<GetDataFrameAnalyticsDescriptor, IGetDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default) => GetDataFrameAnalyticsAsync(selector.InvokeOrDefault(new GetDataFrameAnalyticsDescriptor()), cancellationToken);
+		public GetDataFrameAnalyticsStatsResponse GetDataFrameAnalyticsStats(IGetDataFrameAnalyticsStatsRequest request) => DoRequest<IGetDataFrameAnalyticsStatsRequest, GetDataFrameAnalyticsStatsResponse>(request, request.RequestParameters);
+		public Task<GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync(IGetDataFrameAnalyticsStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetDataFrameAnalyticsStatsRequest, GetDataFrameAnalyticsStatsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetDataFrameAnalyticsStatsResponse GetDataFrameAnalyticsStats(Func<GetDataFrameAnalyticsStatsDescriptor, IGetDataFrameAnalyticsStatsRequest> selector = null) => GetDataFrameAnalyticsStats(selector.InvokeOrDefault(new GetDataFrameAnalyticsStatsDescriptor()));
+		public Task<GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync(Func<GetDataFrameAnalyticsStatsDescriptor, IGetDataFrameAnalyticsStatsRequest> selector = null, CancellationToken cancellationToken = default) => GetDataFrameAnalyticsStatsAsync(selector.InvokeOrDefault(new GetDataFrameAnalyticsStatsDescriptor()), cancellationToken);
+		public GetFiltersResponse GetFilters(IGetFiltersRequest request) => DoRequest<IGetFiltersRequest, GetFiltersResponse>(request, request.RequestParameters);
+		public Task<GetFiltersResponse> GetFiltersAsync(IGetFiltersRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetFiltersRequest, GetFiltersResponse>(request, request.RequestParameters, cancellationToken);
+		public GetFiltersResponse GetFilters(Func<GetFiltersDescriptor, IGetFiltersRequest> selector = null) => GetFilters(selector.InvokeOrDefault(new GetFiltersDescriptor()));
+		public Task<GetFiltersResponse> GetFiltersAsync(Func<GetFiltersDescriptor, IGetFiltersRequest> selector = null, CancellationToken cancellationToken = default) => GetFiltersAsync(selector.InvokeOrDefault(new GetFiltersDescriptor()), cancellationToken);
+		public GetInfluencersResponse GetInfluencers(IGetInfluencersRequest request) => DoRequest<IGetInfluencersRequest, GetInfluencersResponse>(request, request.RequestParameters);
+		public Task<GetInfluencersResponse> GetInfluencersAsync(IGetInfluencersRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetInfluencersRequest, GetInfluencersResponse>(request, request.RequestParameters, cancellationToken);
+		public GetInfluencersResponse GetInfluencers(Nest.Id job_id, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null) => GetInfluencers(selector.InvokeOrDefault(new GetInfluencersDescriptor(job_id)));
+		public Task<GetInfluencersResponse> GetInfluencersAsync(Nest.Id job_id, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null, CancellationToken cancellationToken = default) => GetInfluencersAsync(selector.InvokeOrDefault(new GetInfluencersDescriptor(job_id)), cancellationToken);
+		public GetJobsResponse GetJobs(IGetJobsRequest request) => DoRequest<IGetJobsRequest, GetJobsResponse>(request, request.RequestParameters);
+		public Task<GetJobsResponse> GetJobsAsync(IGetJobsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetJobsRequest, GetJobsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetJobsResponse GetJobs(Func<GetJobsDescriptor, IGetJobsRequest> selector = null) => GetJobs(selector.InvokeOrDefault(new GetJobsDescriptor()));
+		public Task<GetJobsResponse> GetJobsAsync(Func<GetJobsDescriptor, IGetJobsRequest> selector = null, CancellationToken cancellationToken = default) => GetJobsAsync(selector.InvokeOrDefault(new GetJobsDescriptor()), cancellationToken);
+		public GetJobStatsResponse GetJobStats(IGetJobStatsRequest request) => DoRequest<IGetJobStatsRequest, GetJobStatsResponse>(request, request.RequestParameters);
+		public Task<GetJobStatsResponse> GetJobStatsAsync(IGetJobStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetJobStatsRequest, GetJobStatsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetJobStatsResponse GetJobStats(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null) => GetJobStats(selector.InvokeOrDefault(new GetJobStatsDescriptor()));
+		public Task<GetJobStatsResponse> GetJobStatsAsync(Func<GetJobStatsDescriptor, IGetJobStatsRequest> selector = null, CancellationToken cancellationToken = default) => GetJobStatsAsync(selector.InvokeOrDefault(new GetJobStatsDescriptor()), cancellationToken);
+		public GetModelSnapshotsResponse GetModelSnapshots(IGetModelSnapshotsRequest request) => DoRequest<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>(request, request.RequestParameters);
+		public Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(IGetModelSnapshotsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetModelSnapshotsRequest, GetModelSnapshotsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetModelSnapshotsResponse GetModelSnapshots(Nest.Id job_id, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null) => GetModelSnapshots(selector.InvokeOrDefault(new GetModelSnapshotsDescriptor(job_id)));
+		public Task<GetModelSnapshotsResponse> GetModelSnapshotsAsync(Nest.Id job_id, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null, CancellationToken cancellationToken = default) => GetModelSnapshotsAsync(selector.InvokeOrDefault(new GetModelSnapshotsDescriptor(job_id)), cancellationToken);
+		public GetOverallBucketsResponse GetOverallBuckets(IGetOverallBucketsRequest request) => DoRequest<IGetOverallBucketsRequest, GetOverallBucketsResponse>(request, request.RequestParameters);
+		public Task<GetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetOverallBucketsRequest, GetOverallBucketsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetOverallBucketsResponse GetOverallBuckets(Nest.Id job_id, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null) => GetOverallBuckets(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(job_id)));
+		public Task<GetOverallBucketsResponse> GetOverallBucketsAsync(Nest.Id job_id, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null, CancellationToken cancellationToken = default) => GetOverallBucketsAsync(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(job_id)), cancellationToken);
+		public GetRecordsResponse GetRecords(IGetRecordsRequest request) => DoRequest<IGetRecordsRequest, GetRecordsResponse>(request, request.RequestParameters);
+		public Task<GetRecordsResponse> GetRecordsAsync(IGetRecordsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetRecordsRequest, GetRecordsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetRecordsResponse GetRecords(Nest.Id job_id, Func<GetRecordsDescriptor, IGetRecordsRequest> selector = null) => GetRecords(selector.InvokeOrDefault(new GetRecordsDescriptor(job_id)));
+		public Task<GetRecordsResponse> GetRecordsAsync(Nest.Id job_id, Func<GetRecordsDescriptor, IGetRecordsRequest> selector = null, CancellationToken cancellationToken = default) => GetRecordsAsync(selector.InvokeOrDefault(new GetRecordsDescriptor(job_id)), cancellationToken);
+		public GetTrainedModelsResponse GetTrainedModels(IGetTrainedModelsRequest request) => DoRequest<IGetTrainedModelsRequest, GetTrainedModelsResponse>(request, request.RequestParameters);
+		public Task<GetTrainedModelsResponse> GetTrainedModelsAsync(IGetTrainedModelsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetTrainedModelsRequest, GetTrainedModelsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetTrainedModelsResponse GetTrainedModels(Func<GetTrainedModelsDescriptor, IGetTrainedModelsRequest> selector = null) => GetTrainedModels(selector.InvokeOrDefault(new GetTrainedModelsDescriptor()));
+		public Task<GetTrainedModelsResponse> GetTrainedModelsAsync(Func<GetTrainedModelsDescriptor, IGetTrainedModelsRequest> selector = null, CancellationToken cancellationToken = default) => GetTrainedModelsAsync(selector.InvokeOrDefault(new GetTrainedModelsDescriptor()), cancellationToken);
+		public GetTrainedModelsStatsResponse GetTrainedModelsStats(IGetTrainedModelsStatsRequest request) => DoRequest<IGetTrainedModelsStatsRequest, GetTrainedModelsStatsResponse>(request, request.RequestParameters);
+		public Task<GetTrainedModelsStatsResponse> GetTrainedModelsStatsAsync(IGetTrainedModelsStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetTrainedModelsStatsRequest, GetTrainedModelsStatsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetTrainedModelsStatsResponse GetTrainedModelsStats(Func<GetTrainedModelsStatsDescriptor, IGetTrainedModelsStatsRequest> selector = null) => GetTrainedModelsStats(selector.InvokeOrDefault(new GetTrainedModelsStatsDescriptor()));
+		public Task<GetTrainedModelsStatsResponse> GetTrainedModelsStatsAsync(Func<GetTrainedModelsStatsDescriptor, IGetTrainedModelsStatsRequest> selector = null, CancellationToken cancellationToken = default) => GetTrainedModelsStatsAsync(selector.InvokeOrDefault(new GetTrainedModelsStatsDescriptor()), cancellationToken);
+		public InfoResponse Info(IInfoRequest request) => DoRequest<IInfoRequest, InfoResponse>(request, request.RequestParameters);
+		public Task<InfoResponse> InfoAsync(IInfoRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IInfoRequest, InfoResponse>(request, request.RequestParameters, cancellationToken);
+		public InfoResponse Info(Func<InfoDescriptor, IInfoRequest> selector = null) => Info(selector.InvokeOrDefault(new InfoDescriptor()));
+		public Task<InfoResponse> InfoAsync(Func<InfoDescriptor, IInfoRequest> selector = null, CancellationToken cancellationToken = default) => InfoAsync(selector.InvokeOrDefault(new InfoDescriptor()), cancellationToken);
+		public OpenJobResponse OpenJob(IOpenJobRequest request) => DoRequest<IOpenJobRequest, OpenJobResponse>(request, request.RequestParameters);
+		public Task<OpenJobResponse> OpenJobAsync(IOpenJobRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IOpenJobRequest, OpenJobResponse>(request, request.RequestParameters, cancellationToken);
+		public OpenJobResponse OpenJob(Nest.Id job_id, Func<OpenJobDescriptor, IOpenJobRequest> selector = null) => OpenJob(selector.InvokeOrDefault(new OpenJobDescriptor(job_id)));
+		public Task<OpenJobResponse> OpenJobAsync(Nest.Id job_id, Func<OpenJobDescriptor, IOpenJobRequest> selector = null, CancellationToken cancellationToken = default) => OpenJobAsync(selector.InvokeOrDefault(new OpenJobDescriptor(job_id)), cancellationToken);
+		public PostCalendarEventsResponse PostCalendarEvents(IPostCalendarEventsRequest request) => DoRequest<IPostCalendarEventsRequest, PostCalendarEventsResponse>(request, request.RequestParameters);
+		public Task<PostCalendarEventsResponse> PostCalendarEventsAsync(IPostCalendarEventsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPostCalendarEventsRequest, PostCalendarEventsResponse>(request, request.RequestParameters, cancellationToken);
+		public PostCalendarEventsResponse PostCalendarEvents(Nest.Id calendar_id, Func<PostCalendarEventsDescriptor, IPostCalendarEventsRequest> selector = null) => PostCalendarEvents(selector.InvokeOrDefault(new PostCalendarEventsDescriptor(calendar_id)));
+		public Task<PostCalendarEventsResponse> PostCalendarEventsAsync(Nest.Id calendar_id, Func<PostCalendarEventsDescriptor, IPostCalendarEventsRequest> selector = null, CancellationToken cancellationToken = default) => PostCalendarEventsAsync(selector.InvokeOrDefault(new PostCalendarEventsDescriptor(calendar_id)), cancellationToken);
+		public PostDataResponse PostData(IPostDataRequest request) => DoRequest<IPostDataRequest, PostDataResponse>(request, request.RequestParameters);
+		public Task<PostDataResponse> PostDataAsync(IPostDataRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPostDataRequest, PostDataResponse>(request, request.RequestParameters, cancellationToken);
+		public PostDataResponse PostData(Nest.Id job_id, Func<PostDataDescriptor, IPostDataRequest> selector = null) => PostData(selector.InvokeOrDefault(new PostDataDescriptor(job_id)));
+		public Task<PostDataResponse> PostDataAsync(Nest.Id job_id, Func<PostDataDescriptor, IPostDataRequest> selector = null, CancellationToken cancellationToken = default) => PostDataAsync(selector.InvokeOrDefault(new PostDataDescriptor(job_id)), cancellationToken);
+		public PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(IPreviewDatafeedRequest request) => DoRequest<IPreviewDatafeedRequest, PreviewDatafeedResponse<TDocument>>(request, request.RequestParameters);
+		public Task<PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(IPreviewDatafeedRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPreviewDatafeedRequest, PreviewDatafeedResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
+		public PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null) => PreviewDatafeed<TDocument>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor()));
+		public Task<PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null, CancellationToken cancellationToken = default) => PreviewDatafeedAsync<TDocument>(selector.InvokeOrDefault(new PreviewDatafeedDescriptor()), cancellationToken);
+		public PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics(IPreviewDataFrameAnalyticsRequest request) => DoRequest<IPreviewDataFrameAnalyticsRequest, PreviewDataFrameAnalyticsResponse>(request, request.RequestParameters);
+		public Task<PreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync(IPreviewDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPreviewDataFrameAnalyticsRequest, PreviewDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
+		public PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics(Func<PreviewDataFrameAnalyticsDescriptor, IPreviewDataFrameAnalyticsRequest> selector = null) => PreviewDataFrameAnalytics(selector.InvokeOrDefault(new PreviewDataFrameAnalyticsDescriptor()));
+		public Task<PreviewDataFrameAnalyticsResponse> PreviewDataFrameAnalyticsAsync(Func<PreviewDataFrameAnalyticsDescriptor, IPreviewDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default) => PreviewDataFrameAnalyticsAsync(selector.InvokeOrDefault(new PreviewDataFrameAnalyticsDescriptor()), cancellationToken);
+		public PutCalendarResponse PutCalendar(IPutCalendarRequest request) => DoRequest<IPutCalendarRequest, PutCalendarResponse>(request, request.RequestParameters);
+		public Task<PutCalendarResponse> PutCalendarAsync(IPutCalendarRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPutCalendarRequest, PutCalendarResponse>(request, request.RequestParameters, cancellationToken);
+		public PutCalendarResponse PutCalendar(Nest.Id calendar_id, Func<PutCalendarDescriptor, IPutCalendarRequest> selector = null) => PutCalendar(selector.InvokeOrDefault(new PutCalendarDescriptor(calendar_id)));
+		public Task<PutCalendarResponse> PutCalendarAsync(Nest.Id calendar_id, Func<PutCalendarDescriptor, IPutCalendarRequest> selector = null, CancellationToken cancellationToken = default) => PutCalendarAsync(selector.InvokeOrDefault(new PutCalendarDescriptor(calendar_id)), cancellationToken);
+		public PutCalendarJobResponse PutCalendarJob(IPutCalendarJobRequest request) => DoRequest<IPutCalendarJobRequest, PutCalendarJobResponse>(request, request.RequestParameters);
+		public Task<PutCalendarJobResponse> PutCalendarJobAsync(IPutCalendarJobRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPutCalendarJobRequest, PutCalendarJobResponse>(request, request.RequestParameters, cancellationToken);
+		public PutCalendarJobResponse PutCalendarJob(Nest.Id calendar_id, Nest.Id job_id, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null) => PutCalendarJob(selector.InvokeOrDefault(new PutCalendarJobDescriptor(calendar_id, job_id)));
+		public Task<PutCalendarJobResponse> PutCalendarJobAsync(Nest.Id calendar_id, Nest.Id job_id, Func<PutCalendarJobDescriptor, IPutCalendarJobRequest> selector = null, CancellationToken cancellationToken = default) => PutCalendarJobAsync(selector.InvokeOrDefault(new PutCalendarJobDescriptor(calendar_id, job_id)), cancellationToken);
+		public PutDatafeedResponse PutDatafeed(IPutDatafeedRequest request) => DoRequest<IPutDatafeedRequest, PutDatafeedResponse>(request, request.RequestParameters);
+		public Task<PutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPutDatafeedRequest, PutDatafeedResponse>(request, request.RequestParameters, cancellationToken);
+		public PutDatafeedResponse PutDatafeed(Nest.Id datafeed_id, Func<PutDatafeedDescriptor, IPutDatafeedRequest> selector = null) => PutDatafeed(selector.InvokeOrDefault(new PutDatafeedDescriptor(datafeed_id)));
+		public Task<PutDatafeedResponse> PutDatafeedAsync(Nest.Id datafeed_id, Func<PutDatafeedDescriptor, IPutDatafeedRequest> selector = null, CancellationToken cancellationToken = default) => PutDatafeedAsync(selector.InvokeOrDefault(new PutDatafeedDescriptor(datafeed_id)), cancellationToken);
+		public PutDataFrameAnalyticsResponse PutDataFrameAnalytics(IPutDataFrameAnalyticsRequest request) => DoRequest<IPutDataFrameAnalyticsRequest, PutDataFrameAnalyticsResponse>(request, request.RequestParameters);
+		public Task<PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync(IPutDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPutDataFrameAnalyticsRequest, PutDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
+		public PutDataFrameAnalyticsResponse PutDataFrameAnalytics(Nest.Id id, Func<PutDataFrameAnalyticsDescriptor, IPutDataFrameAnalyticsRequest> selector = null) => PutDataFrameAnalytics(selector.InvokeOrDefault(new PutDataFrameAnalyticsDescriptor(id)));
+		public Task<PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync(Nest.Id id, Func<PutDataFrameAnalyticsDescriptor, IPutDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default) => PutDataFrameAnalyticsAsync(selector.InvokeOrDefault(new PutDataFrameAnalyticsDescriptor(id)), cancellationToken);
+		public PutFilterResponse PutFilter(IPutFilterRequest request) => DoRequest<IPutFilterRequest, PutFilterResponse>(request, request.RequestParameters);
+		public Task<PutFilterResponse> PutFilterAsync(IPutFilterRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPutFilterRequest, PutFilterResponse>(request, request.RequestParameters, cancellationToken);
+		public PutFilterResponse PutFilter(Nest.Id filter_id, Func<PutFilterDescriptor, IPutFilterRequest> selector = null) => PutFilter(selector.InvokeOrDefault(new PutFilterDescriptor(filter_id)));
+		public Task<PutFilterResponse> PutFilterAsync(Nest.Id filter_id, Func<PutFilterDescriptor, IPutFilterRequest> selector = null, CancellationToken cancellationToken = default) => PutFilterAsync(selector.InvokeOrDefault(new PutFilterDescriptor(filter_id)), cancellationToken);
+		public PutJobResponse PutJob(IPutJobRequest request) => DoRequest<IPutJobRequest, PutJobResponse>(request, request.RequestParameters);
+		public Task<PutJobResponse> PutJobAsync(IPutJobRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPutJobRequest, PutJobResponse>(request, request.RequestParameters, cancellationToken);
+		public PutJobResponse PutJob(Nest.Id job_id, Func<PutJobDescriptor, IPutJobRequest> selector = null) => PutJob(selector.InvokeOrDefault(new PutJobDescriptor(job_id)));
+		public Task<PutJobResponse> PutJobAsync(Nest.Id job_id, Func<PutJobDescriptor, IPutJobRequest> selector = null, CancellationToken cancellationToken = default) => PutJobAsync(selector.InvokeOrDefault(new PutJobDescriptor(job_id)), cancellationToken);
+		public PutTrainedModelResponse PutTrainedModel(IPutTrainedModelRequest request) => DoRequest<IPutTrainedModelRequest, PutTrainedModelResponse>(request, request.RequestParameters);
+		public Task<PutTrainedModelResponse> PutTrainedModelAsync(IPutTrainedModelRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPutTrainedModelRequest, PutTrainedModelResponse>(request, request.RequestParameters, cancellationToken);
+		public ResetJobResponse ResetJob(IResetJobRequest request) => DoRequest<IResetJobRequest, ResetJobResponse>(request, request.RequestParameters);
+		public Task<ResetJobResponse> ResetJobAsync(IResetJobRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IResetJobRequest, ResetJobResponse>(request, request.RequestParameters, cancellationToken);
+		public ResetJobResponse ResetJob(Nest.Id job_id, Func<ResetJobDescriptor, IResetJobRequest> selector = null) => ResetJob(selector.InvokeOrDefault(new ResetJobDescriptor(job_id)));
+		public Task<ResetJobResponse> ResetJobAsync(Nest.Id job_id, Func<ResetJobDescriptor, IResetJobRequest> selector = null, CancellationToken cancellationToken = default) => ResetJobAsync(selector.InvokeOrDefault(new ResetJobDescriptor(job_id)), cancellationToken);
+		public RevertModelSnapshotResponse RevertModelSnapshot(IRevertModelSnapshotRequest request) => DoRequest<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters);
+		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(IRevertModelSnapshotRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IRevertModelSnapshotRequest, RevertModelSnapshotResponse>(request, request.RequestParameters, cancellationToken);
+		public RevertModelSnapshotResponse RevertModelSnapshot(Nest.Id job_id, Nest.Id snapshot_id, Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null) => RevertModelSnapshot(selector.InvokeOrDefault(new RevertModelSnapshotDescriptor(job_id, snapshot_id)));
+		public Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(Nest.Id job_id, Nest.Id snapshot_id, Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null, CancellationToken cancellationToken = default) => RevertModelSnapshotAsync(selector.InvokeOrDefault(new RevertModelSnapshotDescriptor(job_id, snapshot_id)), cancellationToken);
+		public SetUpgradeModeResponse SetUpgradeMode(ISetUpgradeModeRequest request) => DoRequest<ISetUpgradeModeRequest, SetUpgradeModeResponse>(request, request.RequestParameters);
+		public Task<SetUpgradeModeResponse> SetUpgradeModeAsync(ISetUpgradeModeRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ISetUpgradeModeRequest, SetUpgradeModeResponse>(request, request.RequestParameters, cancellationToken);
+		public SetUpgradeModeResponse SetUpgradeMode(Func<SetUpgradeModeDescriptor, ISetUpgradeModeRequest> selector = null) => SetUpgradeMode(selector.InvokeOrDefault(new SetUpgradeModeDescriptor()));
+		public Task<SetUpgradeModeResponse> SetUpgradeModeAsync(Func<SetUpgradeModeDescriptor, ISetUpgradeModeRequest> selector = null, CancellationToken cancellationToken = default) => SetUpgradeModeAsync(selector.InvokeOrDefault(new SetUpgradeModeDescriptor()), cancellationToken);
+		public StartDatafeedResponse StartDatafeed(IStartDatafeedRequest request) => DoRequest<IStartDatafeedRequest, StartDatafeedResponse>(request, request.RequestParameters);
+		public Task<StartDatafeedResponse> StartDatafeedAsync(IStartDatafeedRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IStartDatafeedRequest, StartDatafeedResponse>(request, request.RequestParameters, cancellationToken);
+		public StartDatafeedResponse StartDatafeed(Nest.Id datafeed_id, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null) => StartDatafeed(selector.InvokeOrDefault(new StartDatafeedDescriptor(datafeed_id)));
+		public Task<StartDatafeedResponse> StartDatafeedAsync(Nest.Id datafeed_id, Func<StartDatafeedDescriptor, IStartDatafeedRequest> selector = null, CancellationToken cancellationToken = default) => StartDatafeedAsync(selector.InvokeOrDefault(new StartDatafeedDescriptor(datafeed_id)), cancellationToken);
+		public StartDataFrameAnalyticsResponse StartDataFrameAnalytics(IStartDataFrameAnalyticsRequest request) => DoRequest<IStartDataFrameAnalyticsRequest, StartDataFrameAnalyticsResponse>(request, request.RequestParameters);
+		public Task<StartDataFrameAnalyticsResponse> StartDataFrameAnalyticsAsync(IStartDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IStartDataFrameAnalyticsRequest, StartDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
+		public StartDataFrameAnalyticsResponse StartDataFrameAnalytics(Nest.Id id, Func<StartDataFrameAnalyticsDescriptor, IStartDataFrameAnalyticsRequest> selector = null) => StartDataFrameAnalytics(selector.InvokeOrDefault(new StartDataFrameAnalyticsDescriptor(id)));
+		public Task<StartDataFrameAnalyticsResponse> StartDataFrameAnalyticsAsync(Nest.Id id, Func<StartDataFrameAnalyticsDescriptor, IStartDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default) => StartDataFrameAnalyticsAsync(selector.InvokeOrDefault(new StartDataFrameAnalyticsDescriptor(id)), cancellationToken);
+		public StopDatafeedResponse StopDatafeed(IStopDatafeedRequest request) => DoRequest<IStopDatafeedRequest, StopDatafeedResponse>(request, request.RequestParameters);
+		public Task<StopDatafeedResponse> StopDatafeedAsync(IStopDatafeedRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IStopDatafeedRequest, StopDatafeedResponse>(request, request.RequestParameters, cancellationToken);
+		public StopDatafeedResponse StopDatafeed(Nest.Id datafeed_id, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null) => StopDatafeed(selector.InvokeOrDefault(new StopDatafeedDescriptor(datafeed_id)));
+		public Task<StopDatafeedResponse> StopDatafeedAsync(Nest.Id datafeed_id, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null, CancellationToken cancellationToken = default) => StopDatafeedAsync(selector.InvokeOrDefault(new StopDatafeedDescriptor(datafeed_id)), cancellationToken);
+		public StopDataFrameAnalyticsResponse StopDataFrameAnalytics(IStopDataFrameAnalyticsRequest request) => DoRequest<IStopDataFrameAnalyticsRequest, StopDataFrameAnalyticsResponse>(request, request.RequestParameters);
+		public Task<StopDataFrameAnalyticsResponse> StopDataFrameAnalyticsAsync(IStopDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IStopDataFrameAnalyticsRequest, StopDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
+		public StopDataFrameAnalyticsResponse StopDataFrameAnalytics(Nest.Id id, Func<StopDataFrameAnalyticsDescriptor, IStopDataFrameAnalyticsRequest> selector = null) => StopDataFrameAnalytics(selector.InvokeOrDefault(new StopDataFrameAnalyticsDescriptor(id)));
+		public Task<StopDataFrameAnalyticsResponse> StopDataFrameAnalyticsAsync(Nest.Id id, Func<StopDataFrameAnalyticsDescriptor, IStopDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default) => StopDataFrameAnalyticsAsync(selector.InvokeOrDefault(new StopDataFrameAnalyticsDescriptor(id)), cancellationToken);
+		public UpdateDataFrameAnalyticsResponse UpdateDataFrameAnalytics(IUpdateDataFrameAnalyticsRequest request) => DoRequest<IUpdateDataFrameAnalyticsRequest, UpdateDataFrameAnalyticsResponse>(request, request.RequestParameters);
+		public Task<UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync(IUpdateDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IUpdateDataFrameAnalyticsRequest, UpdateDataFrameAnalyticsResponse>(request, request.RequestParameters, cancellationToken);
+		public UpdateDataFrameAnalyticsResponse UpdateDataFrameAnalytics(Nest.Id id, Func<UpdateDataFrameAnalyticsDescriptor, IUpdateDataFrameAnalyticsRequest> selector = null) => UpdateDataFrameAnalytics(selector.InvokeOrDefault(new UpdateDataFrameAnalyticsDescriptor(id)));
+		public Task<UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync(Nest.Id id, Func<UpdateDataFrameAnalyticsDescriptor, IUpdateDataFrameAnalyticsRequest> selector = null, CancellationToken cancellationToken = default) => UpdateDataFrameAnalyticsAsync(selector.InvokeOrDefault(new UpdateDataFrameAnalyticsDescriptor(id)), cancellationToken);
+		public UpdateFilterResponse UpdateFilter(IUpdateFilterRequest request) => DoRequest<IUpdateFilterRequest, UpdateFilterResponse>(request, request.RequestParameters);
+		public Task<UpdateFilterResponse> UpdateFilterAsync(IUpdateFilterRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IUpdateFilterRequest, UpdateFilterResponse>(request, request.RequestParameters, cancellationToken);
+		public UpdateFilterResponse UpdateFilter(Nest.Id filter_id, Func<UpdateFilterDescriptor, IUpdateFilterRequest> selector = null) => UpdateFilter(selector.InvokeOrDefault(new UpdateFilterDescriptor(filter_id)));
+		public Task<UpdateFilterResponse> UpdateFilterAsync(Nest.Id filter_id, Func<UpdateFilterDescriptor, IUpdateFilterRequest> selector = null, CancellationToken cancellationToken = default) => UpdateFilterAsync(selector.InvokeOrDefault(new UpdateFilterDescriptor(filter_id)), cancellationToken);
+		public UpdateJobResponse UpdateJob(IUpdateJobRequest request) => DoRequest<IUpdateJobRequest, UpdateJobResponse>(request, request.RequestParameters);
+		public Task<UpdateJobResponse> UpdateJobAsync(IUpdateJobRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IUpdateJobRequest, UpdateJobResponse>(request, request.RequestParameters, cancellationToken);
+		public UpdateJobResponse UpdateJob(Nest.Id job_id, Func<UpdateJobDescriptor, IUpdateJobRequest> selector = null) => UpdateJob(selector.InvokeOrDefault(new UpdateJobDescriptor(job_id)));
+		public Task<UpdateJobResponse> UpdateJobAsync(Nest.Id job_id, Func<UpdateJobDescriptor, IUpdateJobRequest> selector = null, CancellationToken cancellationToken = default) => UpdateJobAsync(selector.InvokeOrDefault(new UpdateJobDescriptor(job_id)), cancellationToken);
+		public UpdateModelSnapshotResponse UpdateModelSnapshot(IUpdateModelSnapshotRequest request) => DoRequest<IUpdateModelSnapshotRequest, UpdateModelSnapshotResponse>(request, request.RequestParameters);
+		public Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(IUpdateModelSnapshotRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IUpdateModelSnapshotRequest, UpdateModelSnapshotResponse>(request, request.RequestParameters, cancellationToken);
+		public UpdateModelSnapshotResponse UpdateModelSnapshot(Nest.Id job_id, Nest.Id snapshot_id, Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector = null) => UpdateModelSnapshot(selector.InvokeOrDefault(new UpdateModelSnapshotDescriptor(job_id, snapshot_id)));
+		public Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(Nest.Id job_id, Nest.Id snapshot_id, Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector = null, CancellationToken cancellationToken = default) => UpdateModelSnapshotAsync(selector.InvokeOrDefault(new UpdateModelSnapshotDescriptor(job_id, snapshot_id)), cancellationToken);
+		public UpgradeJobSnapshotResponse UpgradeJobSnapshot(IUpgradeJobSnapshotRequest request) => DoRequest<IUpgradeJobSnapshotRequest, UpgradeJobSnapshotResponse>(request, request.RequestParameters);
+		public Task<UpgradeJobSnapshotResponse> UpgradeJobSnapshotAsync(IUpgradeJobSnapshotRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IUpgradeJobSnapshotRequest, UpgradeJobSnapshotResponse>(request, request.RequestParameters, cancellationToken);
+		public UpgradeJobSnapshotResponse UpgradeJobSnapshot(Nest.Id job_id, Nest.Id snapshot_id, Func<UpgradeJobSnapshotDescriptor, IUpgradeJobSnapshotRequest> selector = null) => UpgradeJobSnapshot(selector.InvokeOrDefault(new UpgradeJobSnapshotDescriptor(job_id, snapshot_id)));
+		public Task<UpgradeJobSnapshotResponse> UpgradeJobSnapshotAsync(Nest.Id job_id, Nest.Id snapshot_id, Func<UpgradeJobSnapshotDescriptor, IUpgradeJobSnapshotRequest> selector = null, CancellationToken cancellationToken = default) => UpgradeJobSnapshotAsync(selector.InvokeOrDefault(new UpgradeJobSnapshotDescriptor(job_id, snapshot_id)), cancellationToken);
+		public ValidateResponse Validate(IValidateRequest request) => DoRequest<IValidateRequest, ValidateResponse>(request, request.RequestParameters);
+		public Task<ValidateResponse> ValidateAsync(IValidateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IValidateRequest, ValidateResponse>(request, request.RequestParameters, cancellationToken);
+		public ValidateResponse Validate(Func<ValidateDescriptor, IValidateRequest> selector = null) => Validate(selector.InvokeOrDefault(new ValidateDescriptor()));
+		public Task<ValidateResponse> ValidateAsync(Func<ValidateDescriptor, IValidateRequest> selector = null, CancellationToken cancellationToken = default) => ValidateAsync(selector.InvokeOrDefault(new ValidateDescriptor()), cancellationToken);
+		public ValidateDetectorResponse ValidateDetector(IValidateDetectorRequest request) => DoRequest<IValidateDetectorRequest, ValidateDetectorResponse>(request, request.RequestParameters);
+		public Task<ValidateDetectorResponse> ValidateDetectorAsync(IValidateDetectorRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IValidateDetectorRequest, ValidateDetectorResponse>(request, request.RequestParameters, cancellationToken);
+		public ValidateDetectorResponse ValidateDetector(Func<ValidateDetectorDescriptor, IValidateDetectorRequest> selector = null) => ValidateDetector(selector.InvokeOrDefault(new ValidateDetectorDescriptor()));
+		public Task<ValidateDetectorResponse> ValidateDetectorAsync(Func<ValidateDetectorDescriptor, IValidateDetectorRequest> selector = null, CancellationToken cancellationToken = default) => ValidateDetectorAsync(selector.InvokeOrDefault(new ValidateDetectorDescriptor()), cancellationToken);
 	}
 }

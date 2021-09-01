@@ -28,24 +28,9 @@ namespace Nest.Migration
 		{
 		}
 
-		public DeprecationsResponse Deprecations(IDeprecationsRequest request)
-		{
-			return DoRequest<IDeprecationsRequest, DeprecationsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeprecationsResponse> DeprecationsAsync(IDeprecationsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeprecationsRequest, DeprecationsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeprecationsResponse Deprecations(Func<DeprecationsDescriptor, IDeprecationsRequest> selector = null)
-		{
-			return Deprecations(selector.InvokeOrDefault(new DeprecationsDescriptor()));
-		}
-
-		public Task<DeprecationsResponse> DeprecationsAsync(Func<DeprecationsDescriptor, IDeprecationsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeprecationsAsync(selector.InvokeOrDefault(new DeprecationsDescriptor()), cancellationToken);
-		}
+		public DeprecationsResponse Deprecations(IDeprecationsRequest request) => DoRequest<IDeprecationsRequest, DeprecationsResponse>(request, request.RequestParameters);
+		public Task<DeprecationsResponse> DeprecationsAsync(IDeprecationsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeprecationsRequest, DeprecationsResponse>(request, request.RequestParameters, cancellationToken);
+		public DeprecationsResponse Deprecations(Func<DeprecationsDescriptor, IDeprecationsRequest> selector = null) => Deprecations(selector.InvokeOrDefault(new DeprecationsDescriptor()));
+		public Task<DeprecationsResponse> DeprecationsAsync(Func<DeprecationsDescriptor, IDeprecationsRequest> selector = null, CancellationToken cancellationToken = default) => DeprecationsAsync(selector.InvokeOrDefault(new DeprecationsDescriptor()), cancellationToken);
 	}
 }

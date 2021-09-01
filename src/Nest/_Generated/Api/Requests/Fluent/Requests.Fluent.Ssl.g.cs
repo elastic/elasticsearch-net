@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Ssl
@@ -45,6 +46,11 @@ namespace Nest.Ssl
         public ChangePasswordDescriptor() : base()
 		{
 		}
+
+		Nest.Password? IChangePasswordRequest.Password { get; set; }
+
+		public ChangePasswordDescriptor Refresh(Nest.Refresh? refresh) => Qs("refresh", refresh);
+		public ChangePasswordDescriptor Password(Nest.Password? password) => Assign(password, (a, v) => a.Password = v);
 	}
 
 	public partial class ClearApiKeyCacheDescriptor : RequestDescriptorBase<ClearApiKeyCacheDescriptor, ClearApiKeyCacheRequestParameters, IClearApiKeyCacheRequest>, IClearApiKeyCacheRequest
@@ -53,7 +59,7 @@ namespace Nest.Ssl
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		///<summary>/_security/api_key/{ids}/_clear_cache</summary>
-        public ClearApiKeyCacheDescriptor(Nest.Ids? ids) : base(r => r.Optional("ids", ids))
+        public ClearApiKeyCacheDescriptor(Nest.Ids ids) : base(r => r.Required("ids", ids))
 		{
 		}
 	}
@@ -78,6 +84,8 @@ namespace Nest.Ssl
         public ClearCachedRealmsDescriptor(Nest.Names realms) : base(r => r.Required("realms", realms))
 		{
 		}
+
+		public ClearCachedRealmsDescriptor Usernames(IEnumerable<string>? usernames) => Qs("usernames", usernames);
 	}
 
 	public partial class ClearCachedRolesDescriptor : RequestDescriptorBase<ClearCachedRolesDescriptor, ClearCachedRolesRequestParameters, IClearCachedRolesRequest>, IClearCachedRolesRequest
@@ -111,6 +119,20 @@ namespace Nest.Ssl
         public CreateApiKeyDescriptor() : base()
 		{
 		}
+
+		Nest.Time? ICreateApiKeyRequest.Expiration { get; set; }
+
+		Nest.Name? ICreateApiKeyRequest.Name { get; set; }
+
+		Dictionary<string, Nest.Security.CreateApiKey.RoleDescriptor>? ICreateApiKeyRequest.RoleDescriptors { get; set; }
+
+		Nest.Metadata? ICreateApiKeyRequest.Metadata { get; set; }
+
+		public CreateApiKeyDescriptor Refresh(Nest.Refresh? refresh) => Qs("refresh", refresh);
+		public CreateApiKeyDescriptor Expiration(Nest.Time? expiration) => Assign(expiration, (a, v) => a.Expiration = v);
+		public CreateApiKeyDescriptor Name(Nest.Name? name) => Assign(name, (a, v) => a.Name = v);
+		public CreateApiKeyDescriptor RoleDescriptors(Dictionary<string, Nest.Security.CreateApiKey.RoleDescriptor>? roleDescriptors) => Assign(roleDescriptors, (a, v) => a.RoleDescriptors = v);
+		public CreateApiKeyDescriptor Metadata(Nest.Metadata? metadata) => Assign(metadata, (a, v) => a.Metadata = v);
 	}
 
 	public partial class CreateServiceTokenDescriptor : RequestDescriptorBase<CreateServiceTokenDescriptor, CreateServiceTokenRequestParameters, ICreateServiceTokenRequest>, ICreateServiceTokenRequest
@@ -138,6 +160,8 @@ namespace Nest.Ssl
         public DeletePrivilegesDescriptor(Nest.Name application, Nest.Name name) : base(r => r.Required("application", application).Required("name", name))
 		{
 		}
+
+		public DeletePrivilegesDescriptor Refresh(Nest.Refresh? refresh) => Qs("refresh", refresh);
 	}
 
 	public partial class DeleteRoleDescriptor : RequestDescriptorBase<DeleteRoleDescriptor, DeleteRoleRequestParameters, IDeleteRoleRequest>, IDeleteRoleRequest
@@ -149,6 +173,8 @@ namespace Nest.Ssl
         public DeleteRoleDescriptor(Nest.Name name) : base(r => r.Required("name", name))
 		{
 		}
+
+		public DeleteRoleDescriptor Refresh(Nest.Refresh? refresh) => Qs("refresh", refresh);
 	}
 
 	public partial class DeleteRoleMappingDescriptor : RequestDescriptorBase<DeleteRoleMappingDescriptor, DeleteRoleMappingRequestParameters, IDeleteRoleMappingRequest>, IDeleteRoleMappingRequest
@@ -160,6 +186,8 @@ namespace Nest.Ssl
         public DeleteRoleMappingDescriptor(Nest.Name name) : base(r => r.Required("name", name))
 		{
 		}
+
+		public DeleteRoleMappingDescriptor Refresh(Nest.Refresh? refresh) => Qs("refresh", refresh);
 	}
 
 	public partial class DeleteServiceTokenDescriptor : RequestDescriptorBase<DeleteServiceTokenDescriptor, DeleteServiceTokenRequestParameters, IDeleteServiceTokenRequest>, IDeleteServiceTokenRequest
@@ -171,6 +199,8 @@ namespace Nest.Ssl
         public DeleteServiceTokenDescriptor(Nest.Namespace ns, Nest.Service service, Nest.Name name) : base(r => r.Required("ns", ns).Required("service", service).Required("name", name))
 		{
 		}
+
+		public DeleteServiceTokenDescriptor Refresh(Nest.Refresh? refresh) => Qs("refresh", refresh);
 	}
 
 	public partial class DeleteUserDescriptor : RequestDescriptorBase<DeleteUserDescriptor, DeleteUserRequestParameters, IDeleteUserRequest>, IDeleteUserRequest
@@ -182,6 +212,8 @@ namespace Nest.Ssl
         public DeleteUserDescriptor(Nest.Username username) : base(r => r.Required("username", username))
 		{
 		}
+
+		public DeleteUserDescriptor Refresh(Nest.Refresh? refresh) => Qs("refresh", refresh);
 	}
 
 	public partial class DisableUserDescriptor : RequestDescriptorBase<DisableUserDescriptor, DisableUserRequestParameters, IDisableUserRequest>, IDisableUserRequest
@@ -193,6 +225,8 @@ namespace Nest.Ssl
         public DisableUserDescriptor(Nest.Username username) : base(r => r.Required("username", username))
 		{
 		}
+
+		public DisableUserDescriptor Refresh(Nest.Refresh? refresh) => Qs("refresh", refresh);
 	}
 
 	public partial class EnableUserDescriptor : RequestDescriptorBase<EnableUserDescriptor, EnableUserRequestParameters, IEnableUserRequest>, IEnableUserRequest
@@ -204,6 +238,8 @@ namespace Nest.Ssl
         public EnableUserDescriptor(Nest.Username username) : base(r => r.Required("username", username))
 		{
 		}
+
+		public EnableUserDescriptor Refresh(Nest.Refresh? refresh) => Qs("refresh", refresh);
 	}
 
 	public partial class GetApiKeyDescriptor : RequestDescriptorBase<GetApiKeyDescriptor, GetApiKeyRequestParameters, IGetApiKeyRequest>, IGetApiKeyRequest
@@ -215,6 +251,12 @@ namespace Nest.Ssl
         public GetApiKeyDescriptor() : base()
 		{
 		}
+
+		public GetApiKeyDescriptor Id(Nest.Id? id) => Qs("id", id);
+		public GetApiKeyDescriptor Name(Nest.Name? name) => Qs("name", name);
+		public GetApiKeyDescriptor Owner(bool? owner = true) => Qs("owner", owner);
+		public GetApiKeyDescriptor RealmName(Nest.Name? realmName) => Qs("realm_name", realmName);
+		public GetApiKeyDescriptor Username(Nest.Username? username) => Qs("username", username);
 	}
 
 	public partial class GetBuiltinPrivilegesDescriptor : RequestDescriptorBase<GetBuiltinPrivilegesDescriptor, GetBuiltinPrivilegesRequestParameters, IGetBuiltinPrivilegesRequest>, IGetBuiltinPrivilegesRequest
@@ -308,7 +350,7 @@ namespace Nest.Ssl
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		///<summary>/_security/service/{namespace}/{service}/credential</summary>
-        public GetServiceCredentialsDescriptor(Nest.Namespace ns, Nest.Service service) : base(r => r.Required("ns", ns).Required("service", service))
+        public GetServiceCredentialsDescriptor(Nest.Namespace ns, Nest.Name service) : base(r => r.Required("ns", ns).Required("service", service))
 		{
 		}
 	}
@@ -322,6 +364,25 @@ namespace Nest.Ssl
         public GetTokenDescriptor() : base()
 		{
 		}
+
+		Nest.Security.GetToken.AccessTokenGrantType? IGetTokenRequest.GrantType { get; set; }
+
+		string? IGetTokenRequest.Scope { get; set; }
+
+		Nest.Password? IGetTokenRequest.Password { get; set; }
+
+		string? IGetTokenRequest.KerberosTicket { get; set; }
+
+		string? IGetTokenRequest.RefreshToken { get; set; }
+
+		Nest.Username? IGetTokenRequest.Username { get; set; }
+
+		public GetTokenDescriptor GrantType(Nest.Security.GetToken.AccessTokenGrantType? grantType) => Assign(grantType, (a, v) => a.GrantType = v);
+		public GetTokenDescriptor Scope(string? scope) => Assign(scope, (a, v) => a.Scope = v);
+		public GetTokenDescriptor Password(Nest.Password? password) => Assign(password, (a, v) => a.Password = v);
+		public GetTokenDescriptor KerberosTicket(string? kerberosTicket) => Assign(kerberosTicket, (a, v) => a.KerberosTicket = v);
+		public GetTokenDescriptor RefreshToken(string? refreshToken) => Assign(refreshToken, (a, v) => a.RefreshToken = v);
+		public GetTokenDescriptor Username(Nest.Username? username) => Assign(username, (a, v) => a.Username = v);
 	}
 
 	public partial class GetUserDescriptor : RequestDescriptorBase<GetUserDescriptor, GetUserRequestParameters, IGetUserRequest>, IGetUserRequest
@@ -344,6 +405,9 @@ namespace Nest.Ssl
         public GetUserPrivilegesDescriptor() : base()
 		{
 		}
+
+		public GetUserPrivilegesDescriptor Application(Nest.Name? application) => Qs("application", application);
+		public GetUserPrivilegesDescriptor Priviledge(Nest.Name? priviledge) => Qs("priviledge", priviledge);
 	}
 
 	public partial class GrantApiKeyDescriptor : RequestDescriptorBase<GrantApiKeyDescriptor, GrantApiKeyRequestParameters, IGrantApiKeyRequest>, IGrantApiKeyRequest
@@ -355,6 +419,22 @@ namespace Nest.Ssl
         public GrantApiKeyDescriptor() : base()
 		{
 		}
+
+		Nest.Security.GrantApiKey.ApiKey IGrantApiKeyRequest.ApiKey { get; set; }
+
+		Nest.Security.GrantApiKey.ApiKeyGrantType IGrantApiKeyRequest.GrantType { get; set; }
+
+		string? IGrantApiKeyRequest.AccessToken { get; set; }
+
+		Nest.Username? IGrantApiKeyRequest.Username { get; set; }
+
+		Nest.Password? IGrantApiKeyRequest.Password { get; set; }
+
+		public GrantApiKeyDescriptor ApiKey(Nest.Security.GrantApiKey.ApiKey apiKey) => Assign(apiKey, (a, v) => a.ApiKey = v);
+		public GrantApiKeyDescriptor GrantType(Nest.Security.GrantApiKey.ApiKeyGrantType grantType) => Assign(grantType, (a, v) => a.GrantType = v);
+		public GrantApiKeyDescriptor AccessToken(string? accessToken) => Assign(accessToken, (a, v) => a.AccessToken = v);
+		public GrantApiKeyDescriptor Username(Nest.Username? username) => Assign(username, (a, v) => a.Username = v);
+		public GrantApiKeyDescriptor Password(Nest.Password? password) => Assign(password, (a, v) => a.Password = v);
 	}
 
 	public partial class HasPrivilegesDescriptor : RequestDescriptorBase<HasPrivilegesDescriptor, HasPrivilegesRequestParameters, IHasPrivilegesRequest>, IHasPrivilegesRequest
@@ -371,6 +451,16 @@ namespace Nest.Ssl
         public HasPrivilegesDescriptor(Nest.Name? user) : base(r => r.Optional("user", user))
 		{
 		}
+
+		IEnumerable<Nest.Security.HasPrivileges.ApplicationPrivilegesCheck>? IHasPrivilegesRequest.Application { get; set; }
+
+		IEnumerable<string>? IHasPrivilegesRequest.Cluster { get; set; }
+
+		IEnumerable<Nest.Security.HasPrivileges.IndexPrivilegesCheck>? IHasPrivilegesRequest.Index { get; set; }
+
+		public HasPrivilegesDescriptor Application(IEnumerable<Nest.Security.HasPrivileges.ApplicationPrivilegesCheck>? application) => Assign(application, (a, v) => a.Application = v);
+		public HasPrivilegesDescriptor Cluster(IEnumerable<string>? cluster) => Assign(cluster, (a, v) => a.Cluster = v);
+		public HasPrivilegesDescriptor Index(IEnumerable<Nest.Security.HasPrivileges.IndexPrivilegesCheck>? index) => Assign(index, (a, v) => a.Index = v);
 	}
 
 	public partial class InvalidateApiKeyDescriptor : RequestDescriptorBase<InvalidateApiKeyDescriptor, InvalidateApiKeyRequestParameters, IInvalidateApiKeyRequest>, IInvalidateApiKeyRequest
@@ -382,6 +472,25 @@ namespace Nest.Ssl
         public InvalidateApiKeyDescriptor() : base()
 		{
 		}
+
+		Nest.Id? IInvalidateApiKeyRequest.Id { get; set; }
+
+		IEnumerable<Nest.Id>? IInvalidateApiKeyRequest.Ids { get; set; }
+
+		Nest.Name? IInvalidateApiKeyRequest.Name { get; set; }
+
+		bool? IInvalidateApiKeyRequest.Owner { get; set; }
+
+		string? IInvalidateApiKeyRequest.RealmName { get; set; }
+
+		Nest.Username? IInvalidateApiKeyRequest.Username { get; set; }
+
+		public InvalidateApiKeyDescriptor Id(Nest.Id? id) => Assign(id, (a, v) => a.Id = v);
+		public InvalidateApiKeyDescriptor Ids(IEnumerable<Nest.Id>? ids) => Assign(ids, (a, v) => a.Ids = v);
+		public InvalidateApiKeyDescriptor Name(Nest.Name? name) => Assign(name, (a, v) => a.Name = v);
+		public InvalidateApiKeyDescriptor Owner(bool? owner = true) => Assign(owner, (a, v) => a.Owner = v);
+		public InvalidateApiKeyDescriptor RealmName(string? realmName) => Assign(realmName, (a, v) => a.RealmName = v);
+		public InvalidateApiKeyDescriptor Username(Nest.Username? username) => Assign(username, (a, v) => a.Username = v);
 	}
 
 	public partial class InvalidateTokenDescriptor : RequestDescriptorBase<InvalidateTokenDescriptor, InvalidateTokenRequestParameters, IInvalidateTokenRequest>, IInvalidateTokenRequest
@@ -393,6 +502,19 @@ namespace Nest.Ssl
         public InvalidateTokenDescriptor() : base()
 		{
 		}
+
+		string? IInvalidateTokenRequest.Token { get; set; }
+
+		string? IInvalidateTokenRequest.RefreshToken { get; set; }
+
+		Nest.Name? IInvalidateTokenRequest.RealmName { get; set; }
+
+		Nest.Username? IInvalidateTokenRequest.Username { get; set; }
+
+		public InvalidateTokenDescriptor Token(string? token) => Assign(token, (a, v) => a.Token = v);
+		public InvalidateTokenDescriptor RefreshToken(string? refreshToken) => Assign(refreshToken, (a, v) => a.RefreshToken = v);
+		public InvalidateTokenDescriptor RealmName(Nest.Name? realmName) => Assign(realmName, (a, v) => a.RealmName = v);
+		public InvalidateTokenDescriptor Username(Nest.Username? username) => Assign(username, (a, v) => a.Username = v);
 	}
 
 	public partial class PutPrivilegesDescriptor : RequestDescriptorBase<PutPrivilegesDescriptor, PutPrivilegesRequestParameters, IPutPrivilegesRequest>, IPutPrivilegesRequest
@@ -404,6 +526,8 @@ namespace Nest.Ssl
         public PutPrivilegesDescriptor() : base()
 		{
 		}
+
+		public PutPrivilegesDescriptor Refresh(Nest.Refresh? refresh) => Qs("refresh", refresh);
 	}
 
 	public partial class PutRoleDescriptor : RequestDescriptorBase<PutRoleDescriptor, PutRoleRequestParameters, IPutRoleRequest>, IPutRoleRequest
@@ -415,6 +539,29 @@ namespace Nest.Ssl
         public PutRoleDescriptor(Nest.Name name) : base(r => r.Required("name", name))
 		{
 		}
+
+		IEnumerable<Nest.Security.ApplicationPrivileges>? IPutRoleRequest.Applications { get; set; }
+
+		IEnumerable<string>? IPutRoleRequest.Cluster { get; set; }
+
+		Dictionary<string, object>? IPutRoleRequest.Global { get; set; }
+
+		IEnumerable<Nest.Security.IndicesPrivileges>? IPutRoleRequest.Indices { get; set; }
+
+		Nest.Metadata? IPutRoleRequest.Metadata { get; set; }
+
+		IEnumerable<string>? IPutRoleRequest.RunAs { get; set; }
+
+		Nest.Security.GetRole.TransientMetadata? IPutRoleRequest.TransientMetadata { get; set; }
+
+		public PutRoleDescriptor Refresh(Nest.Refresh? refresh) => Qs("refresh", refresh);
+		public PutRoleDescriptor Applications(IEnumerable<Nest.Security.ApplicationPrivileges>? applications) => Assign(applications, (a, v) => a.Applications = v);
+		public PutRoleDescriptor Cluster(IEnumerable<string>? cluster) => Assign(cluster, (a, v) => a.Cluster = v);
+		public PutRoleDescriptor Global(Dictionary<string, object>? global) => Assign(global, (a, v) => a.Global = v);
+		public PutRoleDescriptor Indices(IEnumerable<Nest.Security.IndicesPrivileges>? indices) => Assign(indices, (a, v) => a.Indices = v);
+		public PutRoleDescriptor Metadata(Nest.Metadata? metadata) => Assign(metadata, (a, v) => a.Metadata = v);
+		public PutRoleDescriptor RunAs(IEnumerable<string>? runAs) => Assign(runAs, (a, v) => a.RunAs = v);
+		public PutRoleDescriptor TransientMetadata(Nest.Security.GetRole.TransientMetadata? transientMetadata) => Assign(transientMetadata, (a, v) => a.TransientMetadata = v);
 	}
 
 	public partial class PutRoleMappingDescriptor : RequestDescriptorBase<PutRoleMappingDescriptor, PutRoleMappingRequestParameters, IPutRoleMappingRequest>, IPutRoleMappingRequest
@@ -426,6 +573,23 @@ namespace Nest.Ssl
         public PutRoleMappingDescriptor(Nest.Name name) : base(r => r.Required("name", name))
 		{
 		}
+
+		bool? IPutRoleMappingRequest.Enabled { get; set; }
+
+		Nest.Metadata? IPutRoleMappingRequest.Metadata { get; set; }
+
+		IEnumerable<string>? IPutRoleMappingRequest.Roles { get; set; }
+
+		Nest.Security.RoleMappingRuleBase? IPutRoleMappingRequest.Rules { get; set; }
+
+		IEnumerable<string>? IPutRoleMappingRequest.RunAs { get; set; }
+
+		public PutRoleMappingDescriptor Refresh(Nest.Refresh? refresh) => Qs("refresh", refresh);
+		public PutRoleMappingDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a.Enabled = v);
+		public PutRoleMappingDescriptor Metadata(Nest.Metadata? metadata) => Assign(metadata, (a, v) => a.Metadata = v);
+		public PutRoleMappingDescriptor Roles(IEnumerable<string>? roles) => Assign(roles, (a, v) => a.Roles = v);
+		public PutRoleMappingDescriptor Rules(Nest.Security.RoleMappingRuleBase? rules) => Assign(rules, (a, v) => a.Rules = v);
+		public PutRoleMappingDescriptor RunAs(IEnumerable<string>? runAs) => Assign(runAs, (a, v) => a.RunAs = v);
 	}
 
 	public partial class PutUserDescriptor : RequestDescriptorBase<PutUserDescriptor, PutUserRequestParameters, IPutUserRequest>, IPutUserRequest
@@ -437,6 +601,23 @@ namespace Nest.Ssl
         public PutUserDescriptor(Nest.Username username) : base(r => r.Required("username", username))
 		{
 		}
+
+		Nest.Metadata? IPutUserRequest.Metadata { get; set; }
+
+		Nest.Password? IPutUserRequest.Password { get; set; }
+
+		string? IPutUserRequest.PasswordHash { get; set; }
+
+		IEnumerable<string>? IPutUserRequest.Roles { get; set; }
+
+		bool? IPutUserRequest.Enabled { get; set; }
+
+		public PutUserDescriptor Refresh(Nest.Refresh? refresh) => Qs("refresh", refresh);
+		public PutUserDescriptor Metadata(Nest.Metadata? metadata) => Assign(metadata, (a, v) => a.Metadata = v);
+		public PutUserDescriptor Password(Nest.Password? password) => Assign(password, (a, v) => a.Password = v);
+		public PutUserDescriptor PasswordHash(string? passwordHash) => Assign(passwordHash, (a, v) => a.PasswordHash = v);
+		public PutUserDescriptor Roles(IEnumerable<string>? roles) => Assign(roles, (a, v) => a.Roles = v);
+		public PutUserDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a.Enabled = v);
 	}
 
 	public partial class CertificatesDescriptor : RequestDescriptorBase<CertificatesDescriptor, CertificatesRequestParameters, ICertificatesRequest>, ICertificatesRequest

@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Ml
@@ -29,6 +30,10 @@ namespace Nest.Ml
         public CloseJobDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		public CloseJobDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
+		public CloseJobDescriptor Force(bool? force = true) => Qs("force", force);
+		public CloseJobDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class DeleteCalendarDescriptor : RequestDescriptorBase<DeleteCalendarDescriptor, DeleteCalendarRequestParameters, IDeleteCalendarRequest>, IDeleteCalendarRequest
@@ -73,6 +78,9 @@ namespace Nest.Ml
         public DeleteDataFrameAnalyticsDescriptor(Nest.Id id) : base(r => r.Required("id", id))
 		{
 		}
+
+		public DeleteDataFrameAnalyticsDescriptor Force(bool? force = true) => Qs("force", force);
+		public DeleteDataFrameAnalyticsDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class DeleteDatafeedDescriptor : RequestDescriptorBase<DeleteDatafeedDescriptor, DeleteDatafeedRequestParameters, IDeleteDatafeedRequest>, IDeleteDatafeedRequest
@@ -84,6 +92,8 @@ namespace Nest.Ml
         public DeleteDatafeedDescriptor(Nest.Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id))
 		{
 		}
+
+		public DeleteDatafeedDescriptor Force(bool? force = true) => Qs("force", force);
 	}
 
 	public partial class DeleteExpiredDataDescriptor : RequestDescriptorBase<DeleteExpiredDataDescriptor, DeleteExpiredDataRequestParameters, IDeleteExpiredDataRequest>, IDeleteExpiredDataRequest
@@ -100,6 +110,9 @@ namespace Nest.Ml
         public DeleteExpiredDataDescriptor() : base()
 		{
 		}
+
+		public DeleteExpiredDataDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+		public DeleteExpiredDataDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class DeleteFilterDescriptor : RequestDescriptorBase<DeleteFilterDescriptor, DeleteFilterRequestParameters, IDeleteFilterRequest>, IDeleteFilterRequest
@@ -127,6 +140,9 @@ namespace Nest.Ml
         public DeleteForecastDescriptor(Nest.Id job_id, Nest.Id? forecast_id) : base(r => r.Required("job_id", job_id).Optional("forecast_id", forecast_id))
 		{
 		}
+
+		public DeleteForecastDescriptor AllowNoForecasts(bool? allowNoForecasts = true) => Qs("allow_no_forecasts", allowNoForecasts);
+		public DeleteForecastDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class DeleteJobDescriptor : RequestDescriptorBase<DeleteJobDescriptor, DeleteJobRequestParameters, IDeleteJobRequest>, IDeleteJobRequest
@@ -138,6 +154,9 @@ namespace Nest.Ml
         public DeleteJobDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		public DeleteJobDescriptor Force(bool? force = true) => Qs("force", force);
+		public DeleteJobDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 
 	public partial class DeleteModelSnapshotDescriptor : RequestDescriptorBase<DeleteModelSnapshotDescriptor, DeleteModelSnapshotRequestParameters, IDeleteModelSnapshotRequest>, IDeleteModelSnapshotRequest
@@ -182,6 +201,16 @@ namespace Nest.Ml
         public EstimateModelMemoryDescriptor() : base()
 		{
 		}
+
+		Nest.Ml.AnalysisConfig? IEstimateModelMemoryRequest.AnalysisConfig { get; set; }
+
+		Dictionary<Nest.Field, long>? IEstimateModelMemoryRequest.MaxBucketCardinality { get; set; }
+
+		Dictionary<Nest.Field, long>? IEstimateModelMemoryRequest.OverallCardinality { get; set; }
+
+		public EstimateModelMemoryDescriptor AnalysisConfig(Nest.Ml.AnalysisConfig? analysisConfig) => Assign(analysisConfig, (a, v) => a.AnalysisConfig = v);
+		public EstimateModelMemoryDescriptor MaxBucketCardinality(Dictionary<Nest.Field, long>? maxBucketCardinality) => Assign(maxBucketCardinality, (a, v) => a.MaxBucketCardinality = v);
+		public EstimateModelMemoryDescriptor OverallCardinality(Dictionary<Nest.Field, long>? overallCardinality) => Assign(overallCardinality, (a, v) => a.OverallCardinality = v);
 	}
 
 	public partial class EvaluateDataFrameDescriptor : RequestDescriptorBase<EvaluateDataFrameDescriptor, EvaluateDataFrameRequestParameters, IEvaluateDataFrameRequest>, IEvaluateDataFrameRequest
@@ -193,6 +222,16 @@ namespace Nest.Ml
         public EvaluateDataFrameDescriptor() : base()
 		{
 		}
+
+		Nest.Ml.DataframeEvaluationContainer IEvaluateDataFrameRequest.Evaluation { get; set; }
+
+		Nest.IndexName IEvaluateDataFrameRequest.Index { get; set; }
+
+		Nest.QueryDsl.QueryContainer? IEvaluateDataFrameRequest.Query { get; set; }
+
+		public EvaluateDataFrameDescriptor Evaluation(Nest.Ml.DataframeEvaluationContainer evaluation) => Assign(evaluation, (a, v) => a.Evaluation = v);
+		public EvaluateDataFrameDescriptor Index(Nest.IndexName index) => Assign(index, (a, v) => a.Index = v);
+		public EvaluateDataFrameDescriptor Query(Nest.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 	}
 
 	public partial class ExplainDataFrameAnalyticsDescriptor : RequestDescriptorBase<ExplainDataFrameAnalyticsDescriptor, ExplainDataFrameAnalyticsRequestParameters, IExplainDataFrameAnalyticsRequest>, IExplainDataFrameAnalyticsRequest
@@ -209,6 +248,31 @@ namespace Nest.Ml
         public ExplainDataFrameAnalyticsDescriptor(Nest.Id? id) : base(r => r.Optional("id", id))
 		{
 		}
+
+		Nest.Ml.DataframeAnalyticsSource? IExplainDataFrameAnalyticsRequest.Source { get; set; }
+
+		Nest.Ml.DataframeAnalyticsDestination? IExplainDataFrameAnalyticsRequest.Dest { get; set; }
+
+		Nest.Ml.DataframeAnalysisContainer IExplainDataFrameAnalyticsRequest.Analysis { get; set; }
+
+		string? IExplainDataFrameAnalyticsRequest.Description { get; set; }
+
+		string? IExplainDataFrameAnalyticsRequest.ModelMemoryLimit { get; set; }
+
+		int? IExplainDataFrameAnalyticsRequest.MaxNumThreads { get; set; }
+
+		Nest.Ml.DataframeAnalysisAnalyzedFields? IExplainDataFrameAnalyticsRequest.AnalyzedFields { get; set; }
+
+		bool? IExplainDataFrameAnalyticsRequest.AllowLazyStart { get; set; }
+
+		public ExplainDataFrameAnalyticsDescriptor Source(Nest.Ml.DataframeAnalyticsSource? source) => Assign(source, (a, v) => a.Source = v);
+		public ExplainDataFrameAnalyticsDescriptor Dest(Nest.Ml.DataframeAnalyticsDestination? dest) => Assign(dest, (a, v) => a.Dest = v);
+		public ExplainDataFrameAnalyticsDescriptor Analysis(Nest.Ml.DataframeAnalysisContainer analysis) => Assign(analysis, (a, v) => a.Analysis = v);
+		public ExplainDataFrameAnalyticsDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
+		public ExplainDataFrameAnalyticsDescriptor ModelMemoryLimit(string? modelMemoryLimit) => Assign(modelMemoryLimit, (a, v) => a.ModelMemoryLimit = v);
+		public ExplainDataFrameAnalyticsDescriptor MaxNumThreads(int? maxNumThreads) => Assign(maxNumThreads, (a, v) => a.MaxNumThreads = v);
+		public ExplainDataFrameAnalyticsDescriptor AnalyzedFields(Nest.Ml.DataframeAnalysisAnalyzedFields? analyzedFields) => Assign(analyzedFields, (a, v) => a.AnalyzedFields = v);
+		public ExplainDataFrameAnalyticsDescriptor AllowLazyStart(bool? allowLazyStart = true) => Assign(allowLazyStart, (a, v) => a.AllowLazyStart = v);
 	}
 
 	public partial class FlushJobDescriptor : RequestDescriptorBase<FlushJobDescriptor, FlushJobRequestParameters, IFlushJobRequest>, IFlushJobRequest
@@ -220,6 +284,20 @@ namespace Nest.Ml
         public FlushJobDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		Nest.DateString? IFlushJobRequest.AdvanceTime { get; set; }
+
+		bool? IFlushJobRequest.CalcInterim { get; set; }
+
+		Nest.DateString? IFlushJobRequest.End { get; set; }
+
+		Nest.DateString? IFlushJobRequest.Start { get; set; }
+
+		public FlushJobDescriptor SkipTime(string? skipTime) => Qs("skip_time", skipTime);
+		public FlushJobDescriptor AdvanceTime(Nest.DateString? advanceTime) => Assign(advanceTime, (a, v) => a.AdvanceTime = v);
+		public FlushJobDescriptor CalcInterim(bool? calcInterim = true) => Assign(calcInterim, (a, v) => a.CalcInterim = v);
+		public FlushJobDescriptor End(Nest.DateString? end) => Assign(end, (a, v) => a.End = v);
+		public FlushJobDescriptor Start(Nest.DateString? start) => Assign(start, (a, v) => a.Start = v);
 	}
 
 	public partial class ForecastDescriptor : RequestDescriptorBase<ForecastDescriptor, ForecastRequestParameters, IForecastRequest>, IForecastRequest
@@ -231,6 +309,13 @@ namespace Nest.Ml
         public ForecastDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		Nest.Time? IForecastRequest.Duration { get; set; }
+
+		Nest.Time? IForecastRequest.ExpiresIn { get; set; }
+
+		public ForecastDescriptor Duration(Nest.Time? duration) => Assign(duration, (a, v) => a.Duration = v);
+		public ForecastDescriptor ExpiresIn(Nest.Time? expiresIn) => Assign(expiresIn, (a, v) => a.ExpiresIn = v);
 	}
 
 	public partial class GetBucketsDescriptor : RequestDescriptorBase<GetBucketsDescriptor, GetBucketsRequestParameters, IGetBucketsRequest>, IGetBucketsRequest
@@ -247,6 +332,23 @@ namespace Nest.Ml
         public GetBucketsDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		double? IGetBucketsRequest.AnomalyScore { get; set; }
+
+		bool? IGetBucketsRequest.Expand { get; set; }
+
+		Nest.Ml.Page? IGetBucketsRequest.Page { get; set; }
+
+		public GetBucketsDescriptor From(int? from) => Qs("from", from);
+		public GetBucketsDescriptor Size(int? size) => Qs("size", size);
+		public GetBucketsDescriptor ExcludeInterim(bool? excludeInterim = true) => Qs("exclude_interim", excludeInterim);
+		public GetBucketsDescriptor Sort(Nest.Field? sort) => Qs("sort", sort);
+		public GetBucketsDescriptor Desc(bool? desc = true) => Qs("desc", desc);
+		public GetBucketsDescriptor Start(Nest.DateString? start) => Qs("start", start);
+		public GetBucketsDescriptor End(Nest.DateString? end) => Qs("end", end);
+		public GetBucketsDescriptor AnomalyScore(double? anomalyScore) => Assign(anomalyScore, (a, v) => a.AnomalyScore = v);
+		public GetBucketsDescriptor Expand(bool? expand = true) => Assign(expand, (a, v) => a.Expand = v);
+		public GetBucketsDescriptor Page(Nest.Ml.Page? page) => Assign(page, (a, v) => a.Page = v);
 	}
 
 	public partial class GetCalendarEventsDescriptor : RequestDescriptorBase<GetCalendarEventsDescriptor, GetCalendarEventsRequestParameters, IGetCalendarEventsRequest>, IGetCalendarEventsRequest
@@ -258,6 +360,12 @@ namespace Nest.Ml
         public GetCalendarEventsDescriptor(Nest.Id calendar_id) : base(r => r.Required("calendar_id", calendar_id))
 		{
 		}
+
+		public GetCalendarEventsDescriptor JobId(Nest.Id? jobId) => Qs("job_id", jobId);
+		public GetCalendarEventsDescriptor End(Nest.DateString? end) => Qs("end", end);
+		public GetCalendarEventsDescriptor From(int? from) => Qs("from", from);
+		public GetCalendarEventsDescriptor Start(string? start) => Qs("start", start);
+		public GetCalendarEventsDescriptor Size(int? size) => Qs("size", size);
 	}
 
 	public partial class GetCalendarsDescriptor : RequestDescriptorBase<GetCalendarsDescriptor, GetCalendarsRequestParameters, IGetCalendarsRequest>, IGetCalendarsRequest
@@ -274,6 +382,12 @@ namespace Nest.Ml
         public GetCalendarsDescriptor(Nest.Id? calendar_id) : base(r => r.Optional("calendar_id", calendar_id))
 		{
 		}
+
+		Nest.Ml.Page? IGetCalendarsRequest.Page { get; set; }
+
+		public GetCalendarsDescriptor From(int? from) => Qs("from", from);
+		public GetCalendarsDescriptor Size(int? size) => Qs("size", size);
+		public GetCalendarsDescriptor Page(Nest.Ml.Page? page) => Assign(page, (a, v) => a.Page = v);
 	}
 
 	public partial class GetCategoriesDescriptor : RequestDescriptorBase<GetCategoriesDescriptor, GetCategoriesRequestParameters, IGetCategoriesRequest>, IGetCategoriesRequest
@@ -290,6 +404,13 @@ namespace Nest.Ml
         public GetCategoriesDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		Nest.Ml.Page? IGetCategoriesRequest.Page { get; set; }
+
+		public GetCategoriesDescriptor From(int? from) => Qs("from", from);
+		public GetCategoriesDescriptor Size(int? size) => Qs("size", size);
+		public GetCategoriesDescriptor PartitionFieldValue(string? partitionFieldValue) => Qs("partition_field_value", partitionFieldValue);
+		public GetCategoriesDescriptor Page(Nest.Ml.Page? page) => Assign(page, (a, v) => a.Page = v);
 	}
 
 	public partial class GetDataFrameAnalyticsDescriptor : RequestDescriptorBase<GetDataFrameAnalyticsDescriptor, GetDataFrameAnalyticsRequestParameters, IGetDataFrameAnalyticsRequest>, IGetDataFrameAnalyticsRequest
@@ -306,6 +427,11 @@ namespace Nest.Ml
         public GetDataFrameAnalyticsDescriptor() : base()
 		{
 		}
+
+		public GetDataFrameAnalyticsDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
+		public GetDataFrameAnalyticsDescriptor From(int? from) => Qs("from", from);
+		public GetDataFrameAnalyticsDescriptor Size(int? size) => Qs("size", size);
+		public GetDataFrameAnalyticsDescriptor ExcludeGenerated(bool? excludeGenerated = true) => Qs("exclude_generated", excludeGenerated);
 	}
 
 	public partial class GetDataFrameAnalyticsStatsDescriptor : RequestDescriptorBase<GetDataFrameAnalyticsStatsDescriptor, GetDataFrameAnalyticsStatsRequestParameters, IGetDataFrameAnalyticsStatsRequest>, IGetDataFrameAnalyticsStatsRequest
@@ -322,6 +448,11 @@ namespace Nest.Ml
         public GetDataFrameAnalyticsStatsDescriptor(Nest.Id? id) : base(r => r.Optional("id", id))
 		{
 		}
+
+		public GetDataFrameAnalyticsStatsDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
+		public GetDataFrameAnalyticsStatsDescriptor From(int? from) => Qs("from", from);
+		public GetDataFrameAnalyticsStatsDescriptor Size(int? size) => Qs("size", size);
+		public GetDataFrameAnalyticsStatsDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 	}
 
 	public partial class GetDatafeedStatsDescriptor : RequestDescriptorBase<GetDatafeedStatsDescriptor, GetDatafeedStatsRequestParameters, IGetDatafeedStatsRequest>, IGetDatafeedStatsRequest
@@ -338,6 +469,8 @@ namespace Nest.Ml
         public GetDatafeedStatsDescriptor() : base()
 		{
 		}
+
+		public GetDatafeedStatsDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
 	}
 
 	public partial class GetDatafeedsDescriptor : RequestDescriptorBase<GetDatafeedsDescriptor, GetDatafeedsRequestParameters, IGetDatafeedsRequest>, IGetDatafeedsRequest
@@ -354,6 +487,9 @@ namespace Nest.Ml
         public GetDatafeedsDescriptor() : base()
 		{
 		}
+
+		public GetDatafeedsDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
+		public GetDatafeedsDescriptor ExcludeGenerated(bool? excludeGenerated = true) => Qs("exclude_generated", excludeGenerated);
 	}
 
 	public partial class GetFiltersDescriptor : RequestDescriptorBase<GetFiltersDescriptor, GetFiltersRequestParameters, IGetFiltersRequest>, IGetFiltersRequest
@@ -370,6 +506,9 @@ namespace Nest.Ml
         public GetFiltersDescriptor(Nest.Id? filter_id) : base(r => r.Optional("filter_id", filter_id))
 		{
 		}
+
+		public GetFiltersDescriptor From(int? from) => Qs("from", from);
+		public GetFiltersDescriptor Size(int? size) => Qs("size", size);
 	}
 
 	public partial class GetInfluencersDescriptor : RequestDescriptorBase<GetInfluencersDescriptor, GetInfluencersRequestParameters, IGetInfluencersRequest>, IGetInfluencersRequest
@@ -381,6 +520,18 @@ namespace Nest.Ml
         public GetInfluencersDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		Nest.Ml.Page? IGetInfluencersRequest.Page { get; set; }
+
+		public GetInfluencersDescriptor Desc(bool? desc = true) => Qs("desc", desc);
+		public GetInfluencersDescriptor End(Nest.DateString? end) => Qs("end", end);
+		public GetInfluencersDescriptor ExcludeInterim(bool? excludeInterim = true) => Qs("exclude_interim", excludeInterim);
+		public GetInfluencersDescriptor InfluencerScore(double? influencerScore) => Qs("influencer_score", influencerScore);
+		public GetInfluencersDescriptor From(int? from) => Qs("from", from);
+		public GetInfluencersDescriptor Size(int? size) => Qs("size", size);
+		public GetInfluencersDescriptor Sort(Nest.Field? sort) => Qs("sort", sort);
+		public GetInfluencersDescriptor Start(Nest.DateString? start) => Qs("start", start);
+		public GetInfluencersDescriptor Page(Nest.Ml.Page? page) => Assign(page, (a, v) => a.Page = v);
 	}
 
 	public partial class GetJobStatsDescriptor : RequestDescriptorBase<GetJobStatsDescriptor, GetJobStatsRequestParameters, IGetJobStatsRequest>, IGetJobStatsRequest
@@ -397,6 +548,8 @@ namespace Nest.Ml
         public GetJobStatsDescriptor(Nest.Id? job_id) : base(r => r.Optional("job_id", job_id))
 		{
 		}
+
+		public GetJobStatsDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
 	}
 
 	public partial class GetJobsDescriptor : RequestDescriptorBase<GetJobsDescriptor, GetJobsRequestParameters, IGetJobsRequest>, IGetJobsRequest
@@ -413,6 +566,10 @@ namespace Nest.Ml
         public GetJobsDescriptor() : base()
 		{
 		}
+
+		public GetJobsDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
+		public GetJobsDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
+		public GetJobsDescriptor ExcludeGenerated(bool? excludeGenerated = true) => Qs("exclude_generated", excludeGenerated);
 	}
 
 	public partial class GetModelSnapshotsDescriptor : RequestDescriptorBase<GetModelSnapshotsDescriptor, GetModelSnapshotsRequestParameters, IGetModelSnapshotsRequest>, IGetModelSnapshotsRequest
@@ -429,6 +586,13 @@ namespace Nest.Ml
         public GetModelSnapshotsDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		public GetModelSnapshotsDescriptor Desc(bool? desc = true) => Qs("desc", desc);
+		public GetModelSnapshotsDescriptor End(Nest.Time? end) => Qs("end", end);
+		public GetModelSnapshotsDescriptor From(int? from) => Qs("from", from);
+		public GetModelSnapshotsDescriptor Size(int? size) => Qs("size", size);
+		public GetModelSnapshotsDescriptor Sort(Nest.Field? sort) => Qs("sort", sort);
+		public GetModelSnapshotsDescriptor Start(Nest.Time? start) => Qs("start", start);
 	}
 
 	public partial class GetOverallBucketsDescriptor : RequestDescriptorBase<GetOverallBucketsDescriptor, GetOverallBucketsRequestParameters, IGetOverallBucketsRequest>, IGetOverallBucketsRequest
@@ -440,6 +604,17 @@ namespace Nest.Ml
         public GetOverallBucketsDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		bool? IGetOverallBucketsRequest.AllowNoJobs { get; set; }
+
+		public GetOverallBucketsDescriptor BucketSpan(Nest.Time? bucketSpan) => Qs("bucket_span", bucketSpan);
+		public GetOverallBucketsDescriptor OverallScore(Union<double, string>? overallScore) => Qs("overall_score", overallScore);
+		public GetOverallBucketsDescriptor TopN(int? topN) => Qs("top_n", topN);
+		public GetOverallBucketsDescriptor End(Nest.Time? end) => Qs("end", end);
+		public GetOverallBucketsDescriptor Start(Nest.Time? start) => Qs("start", start);
+		public GetOverallBucketsDescriptor ExcludeInterim(bool? excludeInterim = true) => Qs("exclude_interim", excludeInterim);
+		public GetOverallBucketsDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
+		public GetOverallBucketsDescriptor AllowNoJobs(bool? allowNoJobs = true) => Assign(allowNoJobs, (a, v) => a.AllowNoJobs = v);
 	}
 
 	public partial class GetRecordsDescriptor : RequestDescriptorBase<GetRecordsDescriptor, GetRecordsRequestParameters, IGetRecordsRequest>, IGetRecordsRequest
@@ -451,6 +626,24 @@ namespace Nest.Ml
         public GetRecordsDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		bool? IGetRecordsRequest.Desc { get; set; }
+
+		Nest.Ml.Page? IGetRecordsRequest.Page { get; set; }
+
+		double? IGetRecordsRequest.RecordScore { get; set; }
+
+		Nest.Field? IGetRecordsRequest.Sort { get; set; }
+
+		public GetRecordsDescriptor ExcludeInterim(bool? excludeInterim = true) => Qs("exclude_interim", excludeInterim);
+		public GetRecordsDescriptor From(int? from) => Qs("from", from);
+		public GetRecordsDescriptor Size(int? size) => Qs("size", size);
+		public GetRecordsDescriptor Start(Nest.DateString? start) => Qs("start", start);
+		public GetRecordsDescriptor End(Nest.DateString? end) => Qs("end", end);
+		public GetRecordsDescriptor Desc(bool? desc = true) => Assign(desc, (a, v) => a.Desc = v);
+		public GetRecordsDescriptor Page(Nest.Ml.Page? page) => Assign(page, (a, v) => a.Page = v);
+		public GetRecordsDescriptor RecordScore(double? recordScore) => Assign(recordScore, (a, v) => a.RecordScore = v);
+		public GetRecordsDescriptor Sort(Nest.Field? sort) => Assign(sort, (a, v) => a.Sort = v);
 	}
 
 	public partial class GetTrainedModelsDescriptor : RequestDescriptorBase<GetTrainedModelsDescriptor, GetTrainedModelsRequestParameters, IGetTrainedModelsRequest>, IGetTrainedModelsRequest
@@ -467,6 +660,14 @@ namespace Nest.Ml
         public GetTrainedModelsDescriptor() : base()
 		{
 		}
+
+		public GetTrainedModelsDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
+		public GetTrainedModelsDescriptor DecompressDefinition(bool? decompressDefinition = true) => Qs("decompress_definition", decompressDefinition);
+		public GetTrainedModelsDescriptor ExcludeGenerated(bool? excludeGenerated = true) => Qs("exclude_generated", excludeGenerated);
+		public GetTrainedModelsDescriptor From(int? from) => Qs("from", from);
+		public GetTrainedModelsDescriptor Include(string? include) => Qs("include", include);
+		public GetTrainedModelsDescriptor Size(int? size) => Qs("size", size);
+		public GetTrainedModelsDescriptor Tags(string? tags) => Qs("tags", tags);
 	}
 
 	public partial class GetTrainedModelsStatsDescriptor : RequestDescriptorBase<GetTrainedModelsStatsDescriptor, GetTrainedModelsStatsRequestParameters, IGetTrainedModelsStatsRequest>, IGetTrainedModelsStatsRequest
@@ -483,6 +684,10 @@ namespace Nest.Ml
         public GetTrainedModelsStatsDescriptor() : base()
 		{
 		}
+
+		public GetTrainedModelsStatsDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
+		public GetTrainedModelsStatsDescriptor From(int? from) => Qs("from", from);
+		public GetTrainedModelsStatsDescriptor Size(int? size) => Qs("size", size);
 	}
 
 	public partial class InfoDescriptor : RequestDescriptorBase<InfoDescriptor, InfoRequestParameters, IInfoRequest>, IInfoRequest
@@ -505,6 +710,10 @@ namespace Nest.Ml
         public OpenJobDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		Nest.Time? IOpenJobRequest.Timeout { get; set; }
+
+		public OpenJobDescriptor Timeout(Nest.Time? timeout) => Assign(timeout, (a, v) => a.Timeout = v);
 	}
 
 	public partial class PostCalendarEventsDescriptor : RequestDescriptorBase<PostCalendarEventsDescriptor, PostCalendarEventsRequestParameters, IPostCalendarEventsRequest>, IPostCalendarEventsRequest
@@ -513,9 +722,13 @@ namespace Nest.Ml
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		///<summary>/_ml/calendars/{calendar_id}/events</summary>
-        public PostCalendarEventsDescriptor(Nest.Id? calendar_id) : base(r => r.Optional("calendar_id", calendar_id))
+        public PostCalendarEventsDescriptor(Nest.Id calendar_id) : base(r => r.Required("calendar_id", calendar_id))
 		{
 		}
+
+		IEnumerable<Nest.Ml.CalendarEvent> IPostCalendarEventsRequest.Events { get; set; }
+
+		public PostCalendarEventsDescriptor Events(IEnumerable<Nest.Ml.CalendarEvent> events) => Assign(events, (a, v) => a.Events = v);
 	}
 
 	public partial class PostDataDescriptor : RequestDescriptorBase<PostDataDescriptor, PostDataRequestParameters, IPostDataRequest>, IPostDataRequest
@@ -527,6 +740,12 @@ namespace Nest.Ml
         public PostDataDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		IEnumerable<object>? IPostDataRequest.Data { get; set; }
+
+		public PostDataDescriptor ResetEnd(Nest.DateString? resetEnd) => Qs("reset_end", resetEnd);
+		public PostDataDescriptor ResetStart(Nest.DateString? resetStart) => Qs("reset_start", resetStart);
+		public PostDataDescriptor Data(IEnumerable<object>? data) => Assign(data, (a, v) => a.Data = v);
 	}
 
 	public partial class PreviewDataFrameAnalyticsDescriptor : RequestDescriptorBase<PreviewDataFrameAnalyticsDescriptor, PreviewDataFrameAnalyticsRequestParameters, IPreviewDataFrameAnalyticsRequest>, IPreviewDataFrameAnalyticsRequest
@@ -543,6 +762,10 @@ namespace Nest.Ml
         public PreviewDataFrameAnalyticsDescriptor(Nest.Id? id) : base(r => r.Optional("id", id))
 		{
 		}
+
+		Nest.Ml.PreviewDataFrameAnalytics.DataframePreviewConfig? IPreviewDataFrameAnalyticsRequest.Config { get; set; }
+
+		public PreviewDataFrameAnalyticsDescriptor Config(Nest.Ml.PreviewDataFrameAnalytics.DataframePreviewConfig? config) => Assign(config, (a, v) => a.Config = v);
 	}
 
 	public partial class PreviewDatafeedDescriptor : RequestDescriptorBase<PreviewDatafeedDescriptor, PreviewDatafeedRequestParameters, IPreviewDatafeedRequest>, IPreviewDatafeedRequest
@@ -559,6 +782,13 @@ namespace Nest.Ml
         public PreviewDatafeedDescriptor() : base()
 		{
 		}
+
+		Nest.Ml.JobConfig? IPreviewDatafeedRequest.JobConfig { get; set; }
+
+		Nest.Ml.DatafeedConfig? IPreviewDatafeedRequest.DatafeedConfig { get; set; }
+
+		public PreviewDatafeedDescriptor JobConfig(Nest.Ml.JobConfig? jobConfig) => Assign(jobConfig, (a, v) => a.JobConfig = v);
+		public PreviewDatafeedDescriptor DatafeedConfig(Nest.Ml.DatafeedConfig? datafeedConfig) => Assign(datafeedConfig, (a, v) => a.DatafeedConfig = v);
 	}
 
 	public partial class PutCalendarDescriptor : RequestDescriptorBase<PutCalendarDescriptor, PutCalendarRequestParameters, IPutCalendarRequest>, IPutCalendarRequest
@@ -570,6 +800,10 @@ namespace Nest.Ml
         public PutCalendarDescriptor(Nest.Id calendar_id) : base(r => r.Required("calendar_id", calendar_id))
 		{
 		}
+
+		string? IPutCalendarRequest.Description { get; set; }
+
+		public PutCalendarDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
 	}
 
 	public partial class PutCalendarJobDescriptor : RequestDescriptorBase<PutCalendarJobDescriptor, PutCalendarJobRequestParameters, IPutCalendarJobRequest>, IPutCalendarJobRequest
@@ -592,6 +826,31 @@ namespace Nest.Ml
         public PutDataFrameAnalyticsDescriptor(Nest.Id id) : base(r => r.Required("id", id))
 		{
 		}
+
+		bool? IPutDataFrameAnalyticsRequest.AllowLazyStart { get; set; }
+
+		Nest.Ml.DataframeAnalysisContainer IPutDataFrameAnalyticsRequest.Analysis { get; set; }
+
+		Nest.Ml.DataframeAnalysisAnalyzedFields? IPutDataFrameAnalyticsRequest.AnalyzedFields { get; set; }
+
+		string? IPutDataFrameAnalyticsRequest.Description { get; set; }
+
+		Nest.Ml.DataframeAnalyticsDestination IPutDataFrameAnalyticsRequest.Dest { get; set; }
+
+		int? IPutDataFrameAnalyticsRequest.MaxNumThreads { get; set; }
+
+		string? IPutDataFrameAnalyticsRequest.ModelMemoryLimit { get; set; }
+
+		Nest.Ml.DataframeAnalyticsSource IPutDataFrameAnalyticsRequest.Source { get; set; }
+
+		public PutDataFrameAnalyticsDescriptor AllowLazyStart(bool? allowLazyStart = true) => Assign(allowLazyStart, (a, v) => a.AllowLazyStart = v);
+		public PutDataFrameAnalyticsDescriptor Analysis(Nest.Ml.DataframeAnalysisContainer analysis) => Assign(analysis, (a, v) => a.Analysis = v);
+		public PutDataFrameAnalyticsDescriptor AnalyzedFields(Nest.Ml.DataframeAnalysisAnalyzedFields? analyzedFields) => Assign(analyzedFields, (a, v) => a.AnalyzedFields = v);
+		public PutDataFrameAnalyticsDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
+		public PutDataFrameAnalyticsDescriptor Dest(Nest.Ml.DataframeAnalyticsDestination dest) => Assign(dest, (a, v) => a.Dest = v);
+		public PutDataFrameAnalyticsDescriptor MaxNumThreads(int? maxNumThreads) => Assign(maxNumThreads, (a, v) => a.MaxNumThreads = v);
+		public PutDataFrameAnalyticsDescriptor ModelMemoryLimit(string? modelMemoryLimit) => Assign(modelMemoryLimit, (a, v) => a.ModelMemoryLimit = v);
+		public PutDataFrameAnalyticsDescriptor Source(Nest.Ml.DataframeAnalyticsSource source) => Assign(source, (a, v) => a.Source = v);
 	}
 
 	public partial class PutDatafeedDescriptor : RequestDescriptorBase<PutDatafeedDescriptor, PutDatafeedRequestParameters, IPutDatafeedRequest>, IPutDatafeedRequest
@@ -603,6 +862,53 @@ namespace Nest.Ml
         public PutDatafeedDescriptor(Nest.Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id))
 		{
 		}
+
+		Dictionary<string, Nest.Aggregations.AggregationContainer>? IPutDatafeedRequest.Aggregations { get; set; }
+
+		Nest.Ml.ChunkingConfig? IPutDatafeedRequest.ChunkingConfig { get; set; }
+
+		Nest.Ml.DelayedDataCheckConfig? IPutDatafeedRequest.DelayedDataCheckConfig { get; set; }
+
+		Nest.Time? IPutDatafeedRequest.Frequency { get; set; }
+
+		IEnumerable<string>? IPutDatafeedRequest.Indices { get; set; }
+
+		IEnumerable<string>? IPutDatafeedRequest.Indexes { get; set; }
+
+		Nest.Ml.DatafeedIndicesOptions? IPutDatafeedRequest.IndicesOptions { get; set; }
+
+		Nest.Id? IPutDatafeedRequest.JobId { get; set; }
+
+		int? IPutDatafeedRequest.MaxEmptySearches { get; set; }
+
+		Nest.QueryDsl.QueryContainer? IPutDatafeedRequest.Query { get; set; }
+
+		Nest.Time? IPutDatafeedRequest.QueryDelay { get; set; }
+
+		Nest.Mapping.RuntimeFields? IPutDatafeedRequest.RuntimeMappings { get; set; }
+
+		Dictionary<string, Nest.ScriptField>? IPutDatafeedRequest.ScriptFields { get; set; }
+
+		int? IPutDatafeedRequest.ScrollSize { get; set; }
+
+		public PutDatafeedDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public PutDatafeedDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public PutDatafeedDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
+		public PutDatafeedDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public PutDatafeedDescriptor Aggregations(Dictionary<string, Nest.Aggregations.AggregationContainer>? aggregations) => Assign(aggregations, (a, v) => a.Aggregations = v);
+		public PutDatafeedDescriptor ChunkingConfig(Nest.Ml.ChunkingConfig? chunkingConfig) => Assign(chunkingConfig, (a, v) => a.ChunkingConfig = v);
+		public PutDatafeedDescriptor DelayedDataCheckConfig(Nest.Ml.DelayedDataCheckConfig? delayedDataCheckConfig) => Assign(delayedDataCheckConfig, (a, v) => a.DelayedDataCheckConfig = v);
+		public PutDatafeedDescriptor Frequency(Nest.Time? frequency) => Assign(frequency, (a, v) => a.Frequency = v);
+		public PutDatafeedDescriptor Indices(IEnumerable<string>? indices) => Assign(indices, (a, v) => a.Indices = v);
+		public PutDatafeedDescriptor Indexes(IEnumerable<string>? indexes) => Assign(indexes, (a, v) => a.Indexes = v);
+		public PutDatafeedDescriptor IndicesOptions(Nest.Ml.DatafeedIndicesOptions? indicesOptions) => Assign(indicesOptions, (a, v) => a.IndicesOptions = v);
+		public PutDatafeedDescriptor JobId(Nest.Id? jobId) => Assign(jobId, (a, v) => a.JobId = v);
+		public PutDatafeedDescriptor MaxEmptySearches(int? maxEmptySearches) => Assign(maxEmptySearches, (a, v) => a.MaxEmptySearches = v);
+		public PutDatafeedDescriptor Query(Nest.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public PutDatafeedDescriptor QueryDelay(Nest.Time? queryDelay) => Assign(queryDelay, (a, v) => a.QueryDelay = v);
+		public PutDatafeedDescriptor RuntimeMappings(Nest.Mapping.RuntimeFields? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappings = v);
+		public PutDatafeedDescriptor ScriptFields(Dictionary<string, Nest.ScriptField>? scriptFields) => Assign(scriptFields, (a, v) => a.ScriptFields = v);
+		public PutDatafeedDescriptor ScrollSize(int? scrollSize) => Assign(scrollSize, (a, v) => a.ScrollSize = v);
 	}
 
 	public partial class PutFilterDescriptor : RequestDescriptorBase<PutFilterDescriptor, PutFilterRequestParameters, IPutFilterRequest>, IPutFilterRequest
@@ -614,6 +920,13 @@ namespace Nest.Ml
         public PutFilterDescriptor(Nest.Id filter_id) : base(r => r.Required("filter_id", filter_id))
 		{
 		}
+
+		string? IPutFilterRequest.Description { get; set; }
+
+		IEnumerable<string>? IPutFilterRequest.Items { get; set; }
+
+		public PutFilterDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
+		public PutFilterDescriptor Items(IEnumerable<string>? items) => Assign(items, (a, v) => a.Items = v);
 	}
 
 	public partial class PutJobDescriptor : RequestDescriptorBase<PutJobDescriptor, PutJobRequestParameters, IPutJobRequest>, IPutJobRequest
@@ -625,6 +938,52 @@ namespace Nest.Ml
         public PutJobDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		bool? IPutJobRequest.AllowLazyOpen { get; set; }
+
+		Nest.Ml.AnalysisConfig IPutJobRequest.AnalysisConfig { get; set; }
+
+		Nest.Ml.AnalysisLimits? IPutJobRequest.AnalysisLimits { get; set; }
+
+		Nest.Time IPutJobRequest.BackgroundPersistInterval { get; set; }
+
+		Nest.Ml.CustomSettings? IPutJobRequest.CustomSettings { get; set; }
+
+		long? IPutJobRequest.DailyModelSnapshotRetentionAfterDays { get; set; }
+
+		Nest.Ml.DataDescription IPutJobRequest.DataDescription { get; set; }
+
+		Nest.Ml.DatafeedConfig? IPutJobRequest.DatafeedConfig { get; set; }
+
+		string? IPutJobRequest.Description { get; set; }
+
+		IEnumerable<string>? IPutJobRequest.Groups { get; set; }
+
+		Nest.Ml.ModelPlotConfig? IPutJobRequest.ModelPlotConfig { get; set; }
+
+		long? IPutJobRequest.ModelSnapshotRetentionDays { get; set; }
+
+		long? IPutJobRequest.RenormalizationWindowDays { get; set; }
+
+		Nest.IndexName? IPutJobRequest.ResultsIndexName { get; set; }
+
+		long? IPutJobRequest.ResultsRetentionDays { get; set; }
+
+		public PutJobDescriptor AllowLazyOpen(bool? allowLazyOpen = true) => Assign(allowLazyOpen, (a, v) => a.AllowLazyOpen = v);
+		public PutJobDescriptor AnalysisConfig(Nest.Ml.AnalysisConfig analysisConfig) => Assign(analysisConfig, (a, v) => a.AnalysisConfig = v);
+		public PutJobDescriptor AnalysisLimits(Nest.Ml.AnalysisLimits? analysisLimits) => Assign(analysisLimits, (a, v) => a.AnalysisLimits = v);
+		public PutJobDescriptor BackgroundPersistInterval(Nest.Time backgroundPersistInterval) => Assign(backgroundPersistInterval, (a, v) => a.BackgroundPersistInterval = v);
+		public PutJobDescriptor CustomSettings(Nest.Ml.CustomSettings? customSettings) => Assign(customSettings, (a, v) => a.CustomSettings = v);
+		public PutJobDescriptor DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays) => Assign(dailyModelSnapshotRetentionAfterDays, (a, v) => a.DailyModelSnapshotRetentionAfterDays = v);
+		public PutJobDescriptor DataDescription(Nest.Ml.DataDescription dataDescription) => Assign(dataDescription, (a, v) => a.DataDescription = v);
+		public PutJobDescriptor DatafeedConfig(Nest.Ml.DatafeedConfig? datafeedConfig) => Assign(datafeedConfig, (a, v) => a.DatafeedConfig = v);
+		public PutJobDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
+		public PutJobDescriptor Groups(IEnumerable<string>? groups) => Assign(groups, (a, v) => a.Groups = v);
+		public PutJobDescriptor ModelPlotConfig(Nest.Ml.ModelPlotConfig? modelPlotConfig) => Assign(modelPlotConfig, (a, v) => a.ModelPlotConfig = v);
+		public PutJobDescriptor ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) => Assign(modelSnapshotRetentionDays, (a, v) => a.ModelSnapshotRetentionDays = v);
+		public PutJobDescriptor RenormalizationWindowDays(long? renormalizationWindowDays) => Assign(renormalizationWindowDays, (a, v) => a.RenormalizationWindowDays = v);
+		public PutJobDescriptor ResultsIndexName(Nest.IndexName? resultsIndexName) => Assign(resultsIndexName, (a, v) => a.ResultsIndexName = v);
+		public PutJobDescriptor ResultsRetentionDays(long? resultsRetentionDays) => Assign(resultsRetentionDays, (a, v) => a.ResultsRetentionDays = v);
 	}
 
 	public partial class PutTrainedModelDescriptor : RequestDescriptorBase<PutTrainedModelDescriptor, PutTrainedModelRequestParameters, IPutTrainedModelRequest>, IPutTrainedModelRequest
@@ -632,6 +991,7 @@ namespace Nest.Ml
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPutTrainedModel;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
+		public PutTrainedModelDescriptor Stub(string? stub) => Qs("stub", stub);
 	}
 
 	public partial class ResetJobDescriptor : RequestDescriptorBase<ResetJobDescriptor, ResetJobRequestParameters, IResetJobRequest>, IResetJobRequest
@@ -643,6 +1003,8 @@ namespace Nest.Ml
         public ResetJobDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		public ResetJobDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
 
 	public partial class RevertModelSnapshotDescriptor : RequestDescriptorBase<RevertModelSnapshotDescriptor, RevertModelSnapshotRequestParameters, IRevertModelSnapshotRequest>, IRevertModelSnapshotRequest
@@ -654,6 +1016,10 @@ namespace Nest.Ml
         public RevertModelSnapshotDescriptor(Nest.Id job_id, Nest.Id snapshot_id) : base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
 		{
 		}
+
+		bool? IRevertModelSnapshotRequest.DeleteInterveningResults { get; set; }
+
+		public RevertModelSnapshotDescriptor DeleteInterveningResults(bool? deleteInterveningResults = true) => Assign(deleteInterveningResults, (a, v) => a.DeleteInterveningResults = v);
 	}
 
 	public partial class SetUpgradeModeDescriptor : RequestDescriptorBase<SetUpgradeModeDescriptor, SetUpgradeModeRequestParameters, ISetUpgradeModeRequest>, ISetUpgradeModeRequest
@@ -665,6 +1031,9 @@ namespace Nest.Ml
         public SetUpgradeModeDescriptor() : base()
 		{
 		}
+
+		public SetUpgradeModeDescriptor Enabled(bool? enabled = true) => Qs("enabled", enabled);
+		public SetUpgradeModeDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class StartDataFrameAnalyticsDescriptor : RequestDescriptorBase<StartDataFrameAnalyticsDescriptor, StartDataFrameAnalyticsRequestParameters, IStartDataFrameAnalyticsRequest>, IStartDataFrameAnalyticsRequest
@@ -676,6 +1045,8 @@ namespace Nest.Ml
         public StartDataFrameAnalyticsDescriptor(Nest.Id id) : base(r => r.Required("id", id))
 		{
 		}
+
+		public StartDataFrameAnalyticsDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class StartDatafeedDescriptor : RequestDescriptorBase<StartDatafeedDescriptor, StartDatafeedRequestParameters, IStartDatafeedRequest>, IStartDatafeedRequest
@@ -687,6 +1058,14 @@ namespace Nest.Ml
         public StartDatafeedDescriptor(Nest.Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id))
 		{
 		}
+
+		Nest.Time? IStartDatafeedRequest.End { get; set; }
+
+		Nest.Time? IStartDatafeedRequest.Timeout { get; set; }
+
+		public StartDatafeedDescriptor Start(Nest.Time? start) => Qs("start", start);
+		public StartDatafeedDescriptor End(Nest.Time? end) => Assign(end, (a, v) => a.End = v);
+		public StartDatafeedDescriptor Timeout(Nest.Time? timeout) => Assign(timeout, (a, v) => a.Timeout = v);
 	}
 
 	public partial class StopDataFrameAnalyticsDescriptor : RequestDescriptorBase<StopDataFrameAnalyticsDescriptor, StopDataFrameAnalyticsRequestParameters, IStopDataFrameAnalyticsRequest>, IStopDataFrameAnalyticsRequest
@@ -698,6 +1077,10 @@ namespace Nest.Ml
         public StopDataFrameAnalyticsDescriptor(Nest.Id id) : base(r => r.Required("id", id))
 		{
 		}
+
+		public StopDataFrameAnalyticsDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
+		public StopDataFrameAnalyticsDescriptor Force(bool? force = true) => Qs("force", force);
+		public StopDataFrameAnalyticsDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class StopDatafeedDescriptor : RequestDescriptorBase<StopDatafeedDescriptor, StopDatafeedRequestParameters, IStopDatafeedRequest>, IStopDatafeedRequest
@@ -709,6 +1092,12 @@ namespace Nest.Ml
         public StopDatafeedDescriptor(Nest.Id datafeed_id) : base(r => r.Required("datafeed_id", datafeed_id))
 		{
 		}
+
+		Nest.Time? IStopDatafeedRequest.Timeout { get; set; }
+
+		public StopDatafeedDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
+		public StopDatafeedDescriptor Force(bool? force = true) => Qs("force", force);
+		public StopDatafeedDescriptor Timeout(Nest.Time? timeout) => Assign(timeout, (a, v) => a.Timeout = v);
 	}
 
 	public partial class UpdateDataFrameAnalyticsDescriptor : RequestDescriptorBase<UpdateDataFrameAnalyticsDescriptor, UpdateDataFrameAnalyticsRequestParameters, IUpdateDataFrameAnalyticsRequest>, IUpdateDataFrameAnalyticsRequest
@@ -720,6 +1109,19 @@ namespace Nest.Ml
         public UpdateDataFrameAnalyticsDescriptor(Nest.Id id) : base(r => r.Required("id", id))
 		{
 		}
+
+		string? IUpdateDataFrameAnalyticsRequest.Description { get; set; }
+
+		string? IUpdateDataFrameAnalyticsRequest.ModelMemoryLimit { get; set; }
+
+		int? IUpdateDataFrameAnalyticsRequest.MaxNumThreads { get; set; }
+
+		bool? IUpdateDataFrameAnalyticsRequest.AllowLazyStart { get; set; }
+
+		public UpdateDataFrameAnalyticsDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
+		public UpdateDataFrameAnalyticsDescriptor ModelMemoryLimit(string? modelMemoryLimit) => Assign(modelMemoryLimit, (a, v) => a.ModelMemoryLimit = v);
+		public UpdateDataFrameAnalyticsDescriptor MaxNumThreads(int? maxNumThreads) => Assign(maxNumThreads, (a, v) => a.MaxNumThreads = v);
+		public UpdateDataFrameAnalyticsDescriptor AllowLazyStart(bool? allowLazyStart = true) => Assign(allowLazyStart, (a, v) => a.AllowLazyStart = v);
 	}
 
 	public partial class UpdateFilterDescriptor : RequestDescriptorBase<UpdateFilterDescriptor, UpdateFilterRequestParameters, IUpdateFilterRequest>, IUpdateFilterRequest
@@ -731,6 +1133,16 @@ namespace Nest.Ml
         public UpdateFilterDescriptor(Nest.Id filter_id) : base(r => r.Required("filter_id", filter_id))
 		{
 		}
+
+		IEnumerable<string>? IUpdateFilterRequest.AddItems { get; set; }
+
+		string? IUpdateFilterRequest.Description { get; set; }
+
+		IEnumerable<string>? IUpdateFilterRequest.RemoveItems { get; set; }
+
+		public UpdateFilterDescriptor AddItems(IEnumerable<string>? addItems) => Assign(addItems, (a, v) => a.AddItems = v);
+		public UpdateFilterDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
+		public UpdateFilterDescriptor RemoveItems(IEnumerable<string>? removeItems) => Assign(removeItems, (a, v) => a.RemoveItems = v);
 	}
 
 	public partial class UpdateJobDescriptor : RequestDescriptorBase<UpdateJobDescriptor, UpdateJobRequestParameters, IUpdateJobRequest>, IUpdateJobRequest
@@ -742,6 +1154,49 @@ namespace Nest.Ml
         public UpdateJobDescriptor(Nest.Id job_id) : base(r => r.Required("job_id", job_id))
 		{
 		}
+
+		bool? IUpdateJobRequest.AllowLazyOpen { get; set; }
+
+		Nest.Ml.AnalysisMemoryLimit? IUpdateJobRequest.AnalysisLimits { get; set; }
+
+		Nest.Time? IUpdateJobRequest.BackgroundPersistInterval { get; set; }
+
+		Dictionary<string, object>? IUpdateJobRequest.CustomSettings { get; set; }
+
+		IEnumerable<string>? IUpdateJobRequest.CategorizationFilters { get; set; }
+
+		string? IUpdateJobRequest.Description { get; set; }
+
+		Nest.Ml.ModelPlotConfig? IUpdateJobRequest.ModelPlotConfig { get; set; }
+
+		long? IUpdateJobRequest.DailyModelSnapshotRetentionAfterDays { get; set; }
+
+		long? IUpdateJobRequest.ModelSnapshotRetentionDays { get; set; }
+
+		long? IUpdateJobRequest.RenormalizationWindowDays { get; set; }
+
+		long? IUpdateJobRequest.ResultsRetentionDays { get; set; }
+
+		IEnumerable<string>? IUpdateJobRequest.Groups { get; set; }
+
+		IEnumerable<Nest.Ml.Detector>? IUpdateJobRequest.Detectors { get; set; }
+
+		Nest.Ml.PerPartitionCategorization? IUpdateJobRequest.PerPartitionCategorization { get; set; }
+
+		public UpdateJobDescriptor AllowLazyOpen(bool? allowLazyOpen = true) => Assign(allowLazyOpen, (a, v) => a.AllowLazyOpen = v);
+		public UpdateJobDescriptor AnalysisLimits(Nest.Ml.AnalysisMemoryLimit? analysisLimits) => Assign(analysisLimits, (a, v) => a.AnalysisLimits = v);
+		public UpdateJobDescriptor BackgroundPersistInterval(Nest.Time? backgroundPersistInterval) => Assign(backgroundPersistInterval, (a, v) => a.BackgroundPersistInterval = v);
+		public UpdateJobDescriptor CustomSettings(Dictionary<string, object>? customSettings) => Assign(customSettings, (a, v) => a.CustomSettings = v);
+		public UpdateJobDescriptor CategorizationFilters(IEnumerable<string>? categorizationFilters) => Assign(categorizationFilters, (a, v) => a.CategorizationFilters = v);
+		public UpdateJobDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
+		public UpdateJobDescriptor ModelPlotConfig(Nest.Ml.ModelPlotConfig? modelPlotConfig) => Assign(modelPlotConfig, (a, v) => a.ModelPlotConfig = v);
+		public UpdateJobDescriptor DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays) => Assign(dailyModelSnapshotRetentionAfterDays, (a, v) => a.DailyModelSnapshotRetentionAfterDays = v);
+		public UpdateJobDescriptor ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) => Assign(modelSnapshotRetentionDays, (a, v) => a.ModelSnapshotRetentionDays = v);
+		public UpdateJobDescriptor RenormalizationWindowDays(long? renormalizationWindowDays) => Assign(renormalizationWindowDays, (a, v) => a.RenormalizationWindowDays = v);
+		public UpdateJobDescriptor ResultsRetentionDays(long? resultsRetentionDays) => Assign(resultsRetentionDays, (a, v) => a.ResultsRetentionDays = v);
+		public UpdateJobDescriptor Groups(IEnumerable<string>? groups) => Assign(groups, (a, v) => a.Groups = v);
+		public UpdateJobDescriptor Detectors(IEnumerable<Nest.Ml.Detector>? detectors) => Assign(detectors, (a, v) => a.Detectors = v);
+		public UpdateJobDescriptor PerPartitionCategorization(Nest.Ml.PerPartitionCategorization? perPartitionCategorization) => Assign(perPartitionCategorization, (a, v) => a.PerPartitionCategorization = v);
 	}
 
 	public partial class UpdateModelSnapshotDescriptor : RequestDescriptorBase<UpdateModelSnapshotDescriptor, UpdateModelSnapshotRequestParameters, IUpdateModelSnapshotRequest>, IUpdateModelSnapshotRequest
@@ -753,6 +1208,13 @@ namespace Nest.Ml
         public UpdateModelSnapshotDescriptor(Nest.Id job_id, Nest.Id snapshot_id) : base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
 		{
 		}
+
+		string? IUpdateModelSnapshotRequest.Description { get; set; }
+
+		bool? IUpdateModelSnapshotRequest.Retain { get; set; }
+
+		public UpdateModelSnapshotDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
+		public UpdateModelSnapshotDescriptor Retain(bool? retain = true) => Assign(retain, (a, v) => a.Retain = v);
 	}
 
 	public partial class UpgradeJobSnapshotDescriptor : RequestDescriptorBase<UpgradeJobSnapshotDescriptor, UpgradeJobSnapshotRequestParameters, IUpgradeJobSnapshotRequest>, IUpgradeJobSnapshotRequest
@@ -764,6 +1226,9 @@ namespace Nest.Ml
         public UpgradeJobSnapshotDescriptor(Nest.Id job_id, Nest.Id snapshot_id) : base(r => r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
 		{
 		}
+
+		public UpgradeJobSnapshotDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+		public UpgradeJobSnapshotDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class ValidateDescriptor : RequestDescriptorBase<ValidateDescriptor, ValidateRequestParameters, IValidateRequest>, IValidateRequest
@@ -775,6 +1240,31 @@ namespace Nest.Ml
         public ValidateDescriptor() : base()
 		{
 		}
+
+		Nest.Id? IValidateRequest.JobId { get; set; }
+
+		Nest.Ml.AnalysisConfig? IValidateRequest.AnalysisConfig { get; set; }
+
+		Nest.Ml.AnalysisLimits? IValidateRequest.AnalysisLimits { get; set; }
+
+		Nest.Ml.DataDescription? IValidateRequest.DataDescription { get; set; }
+
+		string? IValidateRequest.Description { get; set; }
+
+		Nest.Ml.ModelPlotConfig? IValidateRequest.ModelPlot { get; set; }
+
+		long? IValidateRequest.ModelSnapshotRetentionDays { get; set; }
+
+		Nest.IndexName? IValidateRequest.ResultsIndexName { get; set; }
+
+		public ValidateDescriptor JobId(Nest.Id? jobId) => Assign(jobId, (a, v) => a.JobId = v);
+		public ValidateDescriptor AnalysisConfig(Nest.Ml.AnalysisConfig? analysisConfig) => Assign(analysisConfig, (a, v) => a.AnalysisConfig = v);
+		public ValidateDescriptor AnalysisLimits(Nest.Ml.AnalysisLimits? analysisLimits) => Assign(analysisLimits, (a, v) => a.AnalysisLimits = v);
+		public ValidateDescriptor DataDescription(Nest.Ml.DataDescription? dataDescription) => Assign(dataDescription, (a, v) => a.DataDescription = v);
+		public ValidateDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
+		public ValidateDescriptor ModelPlot(Nest.Ml.ModelPlotConfig? modelPlot) => Assign(modelPlot, (a, v) => a.ModelPlot = v);
+		public ValidateDescriptor ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) => Assign(modelSnapshotRetentionDays, (a, v) => a.ModelSnapshotRetentionDays = v);
+		public ValidateDescriptor ResultsIndexName(Nest.IndexName? resultsIndexName) => Assign(resultsIndexName, (a, v) => a.ResultsIndexName = v);
 	}
 
 	public partial class ValidateDetectorDescriptor : RequestDescriptorBase<ValidateDetectorDescriptor, ValidateDetectorRequestParameters, IValidateDetectorRequest>, IValidateDetectorRequest

@@ -49,4 +49,29 @@ namespace Nest.SearchableSnapshots
 #endif
 		}
 	}
+
+	public partial class StatsResponse : ResponseBase
+	{
+		[JsonPropertyName("stats")]
+		public object Stats
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public object Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
 }

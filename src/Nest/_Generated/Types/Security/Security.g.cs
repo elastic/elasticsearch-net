@@ -87,7 +87,7 @@ namespace Nest.Security
 		public Nest.Fields Grant { get; set; }
 	}
 
-	public partial class GlobalPrivileges
+	public partial class GlobalPrivilege
 	{
 		[JsonPropertyName("application")]
 		public Nest.Security.ApplicationGlobalUserPrivileges Application

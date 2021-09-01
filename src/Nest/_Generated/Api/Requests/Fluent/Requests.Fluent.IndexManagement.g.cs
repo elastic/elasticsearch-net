@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.IndexManagement
@@ -29,6 +30,12 @@ namespace Nest.IndexManagement
         public AddBlockDescriptor(Nest.IndexName index, Nest.IndexManagement.AddBlock.IndicesBlockOptions block) : base(r => r.Required("index", index).Required("block", block))
 		{
 		}
+
+		public AddBlockDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public AddBlockDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public AddBlockDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public AddBlockDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public AddBlockDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class AnalyzeDescriptor : RequestDescriptorBase<AnalyzeDescriptor, AnalyzeRequestParameters, IAnalyzeRequest>, IAnalyzeRequest
@@ -45,6 +52,34 @@ namespace Nest.IndexManagement
         public AnalyzeDescriptor(Nest.IndexName? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		string? IAnalyzeRequest.Analyzer { get; set; }
+
+		IEnumerable<string>? IAnalyzeRequest.Attributes { get; set; }
+
+		IEnumerable<Union<string, Nest.Analysis.CharFilter>>? IAnalyzeRequest.CharFilter { get; set; }
+
+		bool? IAnalyzeRequest.Explain { get; set; }
+
+		Nest.Field? IAnalyzeRequest.Field { get; set; }
+
+		IEnumerable<Union<string, Nest.Analysis.TokenFilter>>? IAnalyzeRequest.Filter { get; set; }
+
+		string? IAnalyzeRequest.Normalizer { get; set; }
+
+		Nest.IndexManagement.Analyze.TextToAnalyze? IAnalyzeRequest.Text { get; set; }
+
+		Union<string, Nest.Analysis.Tokenizer>? IAnalyzeRequest.Tokenizer { get; set; }
+
+		public AnalyzeDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
+		public AnalyzeDescriptor Attributes(IEnumerable<string>? attributes) => Assign(attributes, (a, v) => a.Attributes = v);
+		public AnalyzeDescriptor CharFilter(IEnumerable<Union<string, Nest.Analysis.CharFilter>>? charFilter) => Assign(charFilter, (a, v) => a.CharFilter = v);
+		public AnalyzeDescriptor Explain(bool? explain = true) => Assign(explain, (a, v) => a.Explain = v);
+		public AnalyzeDescriptor Field(Nest.Field? field) => Assign(field, (a, v) => a.Field = v);
+		public AnalyzeDescriptor Filter(IEnumerable<Union<string, Nest.Analysis.TokenFilter>>? filter) => Assign(filter, (a, v) => a.Filter = v);
+		public AnalyzeDescriptor Normalizer(string? normalizer) => Assign(normalizer, (a, v) => a.Normalizer = v);
+		public AnalyzeDescriptor Text(Nest.IndexManagement.Analyze.TextToAnalyze? text) => Assign(text, (a, v) => a.Text = v);
+		public AnalyzeDescriptor Tokenizer(Union<string, Nest.Analysis.Tokenizer>? tokenizer) => Assign(tokenizer, (a, v) => a.Tokenizer = v);
 	}
 
 	public partial class ClearCacheDescriptor : RequestDescriptorBase<ClearCacheDescriptor, ClearCacheRequestParameters, IClearCacheRequest>, IClearCacheRequest
@@ -61,6 +96,14 @@ namespace Nest.IndexManagement
         public ClearCacheDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public ClearCacheDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public ClearCacheDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ClearCacheDescriptor Fielddata(bool? fielddata = true) => Qs("fielddata", fielddata);
+		public ClearCacheDescriptor Fields(Nest.Fields? fields) => Qs("fields", fields);
+		public ClearCacheDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public ClearCacheDescriptor Query(bool? query = true) => Qs("query", query);
+		public ClearCacheDescriptor Request(bool? request = true) => Qs("request", request);
 	}
 
 	public partial class CloneDescriptor : RequestDescriptorBase<CloneDescriptor, CloneRequestParameters, ICloneRequest>, ICloneRequest
@@ -72,6 +115,16 @@ namespace Nest.IndexManagement
         public CloneDescriptor(Nest.IndexName index, Nest.Name target) : base(r => r.Required("index", index).Required("target", target))
 		{
 		}
+
+		Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? ICloneRequest.Aliases { get; set; }
+
+		Dictionary<string, object>? ICloneRequest.Settings { get; set; }
+
+		public CloneDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CloneDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public CloneDescriptor WaitForActiveShards(Nest.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public CloneDescriptor Aliases(Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public CloneDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 	}
 
 	public partial class CloseDescriptor : RequestDescriptorBase<CloseDescriptor, CloseRequestParameters, ICloseRequest>, ICloseRequest
@@ -83,6 +136,13 @@ namespace Nest.IndexManagement
         public CloseDescriptor(Nest.Indices index) : base(r => r.Required("index", index))
 		{
 		}
+
+		public CloseDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public CloseDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public CloseDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public CloseDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CloseDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public CloseDescriptor WaitForActiveShards(Nest.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
 	public partial class CreateDescriptor : RequestDescriptorBase<CreateDescriptor, CreateRequestParameters, ICreateRequest>, ICreateRequest
@@ -94,6 +154,20 @@ namespace Nest.IndexManagement
         public CreateDescriptor(Nest.IndexName index) : base(r => r.Required("index", index))
 		{
 		}
+
+		Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? ICreateRequest.Aliases { get; set; }
+
+		Union<Dictionary<string, Nest.Mapping.TypeMapping>, Nest.Mapping.TypeMapping>? ICreateRequest.Mappings { get; set; }
+
+		Dictionary<string, object>? ICreateRequest.Settings { get; set; }
+
+		public CreateDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
+		public CreateDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CreateDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public CreateDescriptor WaitForActiveShards(Nest.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public CreateDescriptor Aliases(Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public CreateDescriptor Mappings(Union<Dictionary<string, Nest.Mapping.TypeMapping>, Nest.Mapping.TypeMapping>? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
+		public CreateDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 	}
 
 	public partial class CreateDataStreamDescriptor : RequestDescriptorBase<CreateDataStreamDescriptor, CreateDataStreamRequestParameters, ICreateDataStreamRequest>, ICreateDataStreamRequest
@@ -121,6 +195,8 @@ namespace Nest.IndexManagement
         public DataStreamsStatsDescriptor(Nest.IndexName? name) : base(r => r.Optional("name", name))
 		{
 		}
+
+		public DataStreamsStatsDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	}
 
 	public partial class DeleteDescriptor : RequestDescriptorBase<DeleteDescriptor, DeleteRequestParameters, IDeleteRequest>, IDeleteRequest
@@ -132,6 +208,12 @@ namespace Nest.IndexManagement
         public DeleteDescriptor(Nest.Indices index) : base(r => r.Required("index", index))
 		{
 		}
+
+		public DeleteDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public DeleteDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public DeleteDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public DeleteDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public DeleteDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class DeleteAliasDescriptor : RequestDescriptorBase<DeleteAliasDescriptor, DeleteAliasRequestParameters, IDeleteAliasRequest>, IDeleteAliasRequest
@@ -143,6 +225,9 @@ namespace Nest.IndexManagement
         public DeleteAliasDescriptor(Nest.Indices index, Nest.Names name) : base(r => r.Required("index", index).Required("name", name))
 		{
 		}
+
+		public DeleteAliasDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public DeleteAliasDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class DeleteDataStreamDescriptor : RequestDescriptorBase<DeleteDataStreamDescriptor, DeleteDataStreamRequestParameters, IDeleteDataStreamRequest>, IDeleteDataStreamRequest
@@ -176,6 +261,9 @@ namespace Nest.IndexManagement
         public DeleteTemplateDescriptor(Nest.Name name) : base(r => r.Required("name", name))
 		{
 		}
+
+		public DeleteTemplateDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public DeleteTemplateDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class ExistsDescriptor : RequestDescriptorBase<ExistsDescriptor, ExistsRequestParameters, IExistsRequest>, IExistsRequest
@@ -187,6 +275,13 @@ namespace Nest.IndexManagement
         public ExistsDescriptor(Nest.Indices index) : base(r => r.Required("index", index))
 		{
 		}
+
+		public ExistsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public ExistsDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ExistsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		public ExistsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public ExistsDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
+		public ExistsDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
 	public partial class ExistsAliasDescriptor : RequestDescriptorBase<ExistsAliasDescriptor, ExistsAliasRequestParameters, IExistsAliasRequest>, IExistsAliasRequest
@@ -203,6 +298,11 @@ namespace Nest.IndexManagement
         public ExistsAliasDescriptor(Nest.Indices? index, Nest.Names name) : base(r => r.Optional("index", index).Required("name", name))
 		{
 		}
+
+		public ExistsAliasDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public ExistsAliasDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ExistsAliasDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public ExistsAliasDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
 	public partial class ExistsIndexTemplateDescriptor : RequestDescriptorBase<ExistsIndexTemplateDescriptor, ExistsIndexTemplateRequestParameters, IExistsIndexTemplateRequest>, IExistsIndexTemplateRequest
@@ -214,6 +314,8 @@ namespace Nest.IndexManagement
         public ExistsIndexTemplateDescriptor(Nest.Name name) : base(r => r.Required("name", name))
 		{
 		}
+
+		public ExistsIndexTemplateDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
 	public partial class ExistsTemplateDescriptor : RequestDescriptorBase<ExistsTemplateDescriptor, ExistsTemplateRequestParameters, IExistsTemplateRequest>, IExistsTemplateRequest
@@ -225,6 +327,10 @@ namespace Nest.IndexManagement
         public ExistsTemplateDescriptor(Nest.Names name) : base(r => r.Required("name", name))
 		{
 		}
+
+		public ExistsTemplateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		public ExistsTemplateDescriptor Local(bool? local = true) => Qs("local", local);
+		public ExistsTemplateDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
 	public partial class FlushDescriptor : RequestDescriptorBase<FlushDescriptor, FlushRequestParameters, IFlushRequest>, IFlushRequest
@@ -241,6 +347,12 @@ namespace Nest.IndexManagement
         public FlushDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public FlushDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public FlushDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public FlushDescriptor Force(bool? force = true) => Qs("force", force);
+		public FlushDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public FlushDescriptor WaitIfOngoing(bool? waitIfOngoing = true) => Qs("wait_if_ongoing", waitIfOngoing);
 	}
 
 	public partial class ForcemergeDescriptor : RequestDescriptorBase<ForcemergeDescriptor, ForcemergeRequestParameters, IForcemergeRequest>, IForcemergeRequest
@@ -257,6 +369,13 @@ namespace Nest.IndexManagement
         public ForcemergeDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public ForcemergeDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public ForcemergeDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ForcemergeDescriptor Flush(bool? flush = true) => Qs("flush", flush);
+		public ForcemergeDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public ForcemergeDescriptor MaxNumSegments(long? maxNumSegments) => Qs("max_num_segments", maxNumSegments);
+		public ForcemergeDescriptor OnlyExpungeDeletes(bool? onlyExpungeDeletes = true) => Qs("only_expunge_deletes", onlyExpungeDeletes);
 	}
 
 	public partial class GetDescriptor : RequestDescriptorBase<GetDescriptor, GetRequestParameters, IGetRequest>, IGetRequest
@@ -268,6 +387,15 @@ namespace Nest.IndexManagement
         public GetDescriptor(Nest.Indices index) : base(r => r.Required("index", index))
 		{
 		}
+
+		public GetDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public GetDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		public GetDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public GetDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
+		public GetDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
+		public GetDescriptor Local(bool? local = true) => Qs("local", local);
+		public GetDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
 	public partial class GetAliasDescriptor : RequestDescriptorBase<GetAliasDescriptor, GetAliasRequestParameters, IGetAliasRequest>, IGetAliasRequest
@@ -294,6 +422,11 @@ namespace Nest.IndexManagement
         public GetAliasDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public GetAliasDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public GetAliasDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetAliasDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public GetAliasDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
 	public partial class GetDataStreamDescriptor : RequestDescriptorBase<GetDataStreamDescriptor, GetDataStreamRequestParameters, IGetDataStreamRequest>, IGetDataStreamRequest
@@ -310,6 +443,8 @@ namespace Nest.IndexManagement
         public GetDataStreamDescriptor(Nest.IndexName? name) : base(r => r.Optional("name", name))
 		{
 		}
+
+		public GetDataStreamDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	}
 
 	public partial class GetFieldMappingDescriptor : RequestDescriptorBase<GetFieldMappingDescriptor, GetFieldMappingRequestParameters, IGetFieldMappingRequest>, IGetFieldMappingRequest
@@ -326,6 +461,13 @@ namespace Nest.IndexManagement
         public GetFieldMappingDescriptor(Nest.Indices? index, Nest.Fields fields) : base(r => r.Optional("index", index).Required("fields", fields))
 		{
 		}
+
+		public GetFieldMappingDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public GetFieldMappingDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetFieldMappingDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public GetFieldMappingDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
+		public GetFieldMappingDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
+		public GetFieldMappingDescriptor Local(bool? local = true) => Qs("local", local);
 	}
 
 	public partial class GetIndexTemplateDescriptor : RequestDescriptorBase<GetIndexTemplateDescriptor, GetIndexTemplateRequestParameters, IGetIndexTemplateRequest>, IGetIndexTemplateRequest
@@ -342,6 +484,17 @@ namespace Nest.IndexManagement
         public GetIndexTemplateDescriptor(Nest.Name? name) : base(r => r.Optional("name", name))
 		{
 		}
+
+		bool? IGetIndexTemplateRequest.FlatSettings { get; set; }
+
+		bool? IGetIndexTemplateRequest.IncludeTypeName { get; set; }
+
+		Nest.Time? IGetIndexTemplateRequest.MasterTimeout { get; set; }
+
+		public GetIndexTemplateDescriptor Local(bool? local = true) => Qs("local", local);
+		public GetIndexTemplateDescriptor FlatSettings(bool? flatSettings = true) => Assign(flatSettings, (a, v) => a.FlatSettings = v);
+		public GetIndexTemplateDescriptor IncludeTypeName(bool? includeTypeName = true) => Assign(includeTypeName, (a, v) => a.IncludeTypeName = v);
+		public GetIndexTemplateDescriptor MasterTimeout(Nest.Time? masterTimeout) => Assign(masterTimeout, (a, v) => a.MasterTimeout = v);
 	}
 
 	public partial class GetMappingDescriptor : RequestDescriptorBase<GetMappingDescriptor, GetMappingRequestParameters, IGetMappingRequest>, IGetMappingRequest
@@ -358,6 +511,13 @@ namespace Nest.IndexManagement
         public GetMappingDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public GetMappingDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public GetMappingDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetMappingDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public GetMappingDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
+		public GetMappingDescriptor Local(bool? local = true) => Qs("local", local);
+		public GetMappingDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
 	public partial class GetSettingsDescriptor : RequestDescriptorBase<GetSettingsDescriptor, GetSettingsRequestParameters, IGetSettingsRequest>, IGetSettingsRequest
@@ -384,6 +544,14 @@ namespace Nest.IndexManagement
         public GetSettingsDescriptor(Nest.Names? name) : base(r => r.Optional("name", name))
 		{
 		}
+
+		public GetSettingsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public GetSettingsDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		public GetSettingsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public GetSettingsDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
+		public GetSettingsDescriptor Local(bool? local = true) => Qs("local", local);
+		public GetSettingsDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
 	public partial class GetTemplateDescriptor : RequestDescriptorBase<GetTemplateDescriptor, GetTemplateRequestParameters, IGetTemplateRequest>, IGetTemplateRequest
@@ -400,6 +568,11 @@ namespace Nest.IndexManagement
         public GetTemplateDescriptor(Nest.Names? name) : base(r => r.Optional("name", name))
 		{
 		}
+
+		public GetTemplateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		public GetTemplateDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
+		public GetTemplateDescriptor Local(bool? local = true) => Qs("local", local);
+		public GetTemplateDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
 	public partial class MigrateToDataStreamDescriptor : RequestDescriptorBase<MigrateToDataStreamDescriptor, MigrateToDataStreamRequestParameters, IMigrateToDataStreamRequest>, IMigrateToDataStreamRequest
@@ -422,6 +595,13 @@ namespace Nest.IndexManagement
         public OpenDescriptor(Nest.Indices index) : base(r => r.Required("index", index))
 		{
 		}
+
+		public OpenDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public OpenDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public OpenDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public OpenDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public OpenDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public OpenDescriptor WaitForActiveShards(Nest.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
 	public partial class PromoteDataStreamDescriptor : RequestDescriptorBase<PromoteDataStreamDescriptor, PromoteDataStreamRequestParameters, IPromoteDataStreamRequest>, IPromoteDataStreamRequest
@@ -444,6 +624,24 @@ namespace Nest.IndexManagement
         public PutAliasDescriptor(Nest.Indices index, Nest.Name name) : base(r => r.Required("index", index).Required("name", name))
 		{
 		}
+
+		Nest.QueryDsl.QueryContainer? IPutAliasRequest.Filter { get; set; }
+
+		Nest.Routing? IPutAliasRequest.IndexRouting { get; set; }
+
+		bool? IPutAliasRequest.IsWriteIndex { get; set; }
+
+		Nest.Routing? IPutAliasRequest.Routing { get; set; }
+
+		Nest.Routing? IPutAliasRequest.SearchRouting { get; set; }
+
+		public PutAliasDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public PutAliasDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public PutAliasDescriptor Filter(Nest.QueryDsl.QueryContainer? filter) => Assign(filter, (a, v) => a.Filter = v);
+		public PutAliasDescriptor IndexRouting(Nest.Routing? indexRouting) => Assign(indexRouting, (a, v) => a.IndexRouting = v);
+		public PutAliasDescriptor IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndex = v);
+		public PutAliasDescriptor Routing(Nest.Routing? routing) => Assign(routing, (a, v) => a.Routing = v);
+		public PutAliasDescriptor SearchRouting(Nest.Routing? searchRouting) => Assign(searchRouting, (a, v) => a.SearchRouting = v);
 	}
 
 	public partial class PutIndexTemplateDescriptor : RequestDescriptorBase<PutIndexTemplateDescriptor, PutIndexTemplateRequestParameters, IPutIndexTemplateRequest>, IPutIndexTemplateRequest
@@ -455,6 +653,28 @@ namespace Nest.IndexManagement
         public PutIndexTemplateDescriptor(Nest.Name name) : base(r => r.Required("name", name))
 		{
 		}
+
+		Nest.Indices? IPutIndexTemplateRequest.IndexPatterns { get; set; }
+
+		IEnumerable<Nest.Name>? IPutIndexTemplateRequest.ComposedOf { get; set; }
+
+		Nest.IndexManagement.PutIndexTemplate.IndexTemplateMapping? IPutIndexTemplateRequest.Template { get; set; }
+
+		Nest.EmptyObject? IPutIndexTemplateRequest.DataStream { get; set; }
+
+		int? IPutIndexTemplateRequest.Priority { get; set; }
+
+		Nest.VersionNumber? IPutIndexTemplateRequest.Version { get; set; }
+
+		Nest.Metadata? IPutIndexTemplateRequest.Meta { get; set; }
+
+		public PutIndexTemplateDescriptor IndexPatterns(Nest.Indices? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatterns = v);
+		public PutIndexTemplateDescriptor ComposedOf(IEnumerable<Nest.Name>? composedOf) => Assign(composedOf, (a, v) => a.ComposedOf = v);
+		public PutIndexTemplateDescriptor Template(Nest.IndexManagement.PutIndexTemplate.IndexTemplateMapping? template) => Assign(template, (a, v) => a.Template = v);
+		public PutIndexTemplateDescriptor DataStream(Nest.EmptyObject? dataStream) => Assign(dataStream, (a, v) => a.DataStream = v);
+		public PutIndexTemplateDescriptor Priority(int? priority) => Assign(priority, (a, v) => a.Priority = v);
+		public PutIndexTemplateDescriptor Version(Nest.VersionNumber? version) => Assign(version, (a, v) => a.Version = v);
+		public PutIndexTemplateDescriptor Meta(Nest.Metadata? meta) => Assign(meta, (a, v) => a.Meta = v);
 	}
 
 	public partial class PutMappingDescriptor : RequestDescriptorBase<PutMappingDescriptor, PutMappingRequestParameters, IPutMappingRequest>, IPutMappingRequest
@@ -463,9 +683,59 @@ namespace Nest.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
 		///<summary>/{index}/_mapping</summary>
-        public PutMappingDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
+        public PutMappingDescriptor(Nest.Indices index) : base(r => r.Required("index", index))
 		{
 		}
+
+		Nest.Mapping.AllField? IPutMappingRequest.AllField { get; set; }
+
+		bool? IPutMappingRequest.DateDetection { get; set; }
+
+		Union<bool, Nest.Mapping.DynamicMapping>? IPutMappingRequest.Dynamic { get; set; }
+
+		IEnumerable<string>? IPutMappingRequest.DynamicDateFormats { get; set; }
+
+		Union<Dictionary<string, Nest.Mapping.DynamicTemplate>, IEnumerable<Dictionary<string, Nest.Mapping.DynamicTemplate>>>? IPutMappingRequest.DynamicTemplates { get; set; }
+
+		Nest.Mapping.FieldNamesField? IPutMappingRequest.FieldNamesField { get; set; }
+
+		Nest.Mapping.IndexField? IPutMappingRequest.IndexField { get; set; }
+
+		Dictionary<string, object>? IPutMappingRequest.Meta { get; set; }
+
+		bool? IPutMappingRequest.NumericDetection { get; set; }
+
+		Dictionary<Nest.PropertyName, Nest.Mapping.Property>? IPutMappingRequest.Properties { get; set; }
+
+		Nest.Mapping.RoutingField? IPutMappingRequest.RoutingField { get; set; }
+
+		Nest.Mapping.SizeField? IPutMappingRequest.SizeField { get; set; }
+
+		Nest.Mapping.SourceField? IPutMappingRequest.SourceField { get; set; }
+
+		Nest.Mapping.RuntimeFields? IPutMappingRequest.Runtime { get; set; }
+
+		public PutMappingDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public PutMappingDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public PutMappingDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public PutMappingDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
+		public PutMappingDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public PutMappingDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public PutMappingDescriptor WriteIndexOnly(bool? writeIndexOnly = true) => Qs("write_index_only", writeIndexOnly);
+		public PutMappingDescriptor AllField(Nest.Mapping.AllField? allField) => Assign(allField, (a, v) => a.AllField = v);
+		public PutMappingDescriptor DateDetection(bool? dateDetection = true) => Assign(dateDetection, (a, v) => a.DateDetection = v);
+		public PutMappingDescriptor Dynamic(Union<bool, Nest.Mapping.DynamicMapping>? dynamic) => Assign(dynamic, (a, v) => a.Dynamic = v);
+		public PutMappingDescriptor DynamicDateFormats(IEnumerable<string>? dynamicDateFormats) => Assign(dynamicDateFormats, (a, v) => a.DynamicDateFormats = v);
+		public PutMappingDescriptor DynamicTemplates(Union<Dictionary<string, Nest.Mapping.DynamicTemplate>, IEnumerable<Dictionary<string, Nest.Mapping.DynamicTemplate>>>? dynamicTemplates) => Assign(dynamicTemplates, (a, v) => a.DynamicTemplates = v);
+		public PutMappingDescriptor FieldNamesField(Nest.Mapping.FieldNamesField? fieldNamesField) => Assign(fieldNamesField, (a, v) => a.FieldNamesField = v);
+		public PutMappingDescriptor IndexField(Nest.Mapping.IndexField? indexField) => Assign(indexField, (a, v) => a.IndexField = v);
+		public PutMappingDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a.Meta = v);
+		public PutMappingDescriptor NumericDetection(bool? numericDetection = true) => Assign(numericDetection, (a, v) => a.NumericDetection = v);
+		public PutMappingDescriptor Properties(Dictionary<Nest.PropertyName, Nest.Mapping.Property>? properties) => Assign(properties, (a, v) => a.Properties = v);
+		public PutMappingDescriptor RoutingField(Nest.Mapping.RoutingField? routingField) => Assign(routingField, (a, v) => a.RoutingField = v);
+		public PutMappingDescriptor SizeField(Nest.Mapping.SizeField? sizeField) => Assign(sizeField, (a, v) => a.SizeField = v);
+		public PutMappingDescriptor SourceField(Nest.Mapping.SourceField? sourceField) => Assign(sourceField, (a, v) => a.SourceField = v);
+		public PutMappingDescriptor Runtime(Nest.Mapping.RuntimeFields? runtime) => Assign(runtime, (a, v) => a.Runtime = v);
 	}
 
 	public partial class PutSettingsDescriptor : RequestDescriptorBase<PutSettingsDescriptor, PutSettingsRequestParameters, IPutSettingsRequest>, IPutSettingsRequest
@@ -482,6 +752,14 @@ namespace Nest.IndexManagement
         public PutSettingsDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public PutSettingsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public PutSettingsDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public PutSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		public PutSettingsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public PutSettingsDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public PutSettingsDescriptor PreserveExisting(bool? preserveExisting = true) => Qs("preserve_existing", preserveExisting);
+		public PutSettingsDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	public partial class PutTemplateDescriptor : RequestDescriptorBase<PutTemplateDescriptor, PutTemplateRequestParameters, IPutTemplateRequest>, IPutTemplateRequest
@@ -493,6 +771,30 @@ namespace Nest.IndexManagement
         public PutTemplateDescriptor(Nest.Name name) : base(r => r.Required("name", name))
 		{
 		}
+
+		Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? IPutTemplateRequest.Aliases { get; set; }
+
+		Union<string, IEnumerable<string>>? IPutTemplateRequest.IndexPatterns { get; set; }
+
+		Nest.Mapping.TypeMapping? IPutTemplateRequest.Mappings { get; set; }
+
+		int? IPutTemplateRequest.Order { get; set; }
+
+		Dictionary<string, object>? IPutTemplateRequest.Settings { get; set; }
+
+		Nest.VersionNumber? IPutTemplateRequest.Version { get; set; }
+
+		public PutTemplateDescriptor Create(bool? create = true) => Qs("create", create);
+		public PutTemplateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		public PutTemplateDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
+		public PutTemplateDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public PutTemplateDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public PutTemplateDescriptor Aliases(Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public PutTemplateDescriptor IndexPatterns(Union<string, IEnumerable<string>>? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatterns = v);
+		public PutTemplateDescriptor Mappings(Nest.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
+		public PutTemplateDescriptor Order(int? order) => Assign(order, (a, v) => a.Order = v);
+		public PutTemplateDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
+		public PutTemplateDescriptor Version(Nest.VersionNumber? version) => Assign(version, (a, v) => a.Version = v);
 	}
 
 	public partial class RecoveryDescriptor : RequestDescriptorBase<RecoveryDescriptor, RecoveryRequestParameters, IRecoveryRequest>, IRecoveryRequest
@@ -509,6 +811,9 @@ namespace Nest.IndexManagement
         public RecoveryDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public RecoveryDescriptor ActiveOnly(bool? activeOnly = true) => Qs("active_only", activeOnly);
+		public RecoveryDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 	}
 
 	public partial class RefreshDescriptor : RequestDescriptorBase<RefreshDescriptor, RefreshRequestParameters, IRefreshRequest>, IRefreshRequest
@@ -525,6 +830,10 @@ namespace Nest.IndexManagement
         public RefreshDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public RefreshDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public RefreshDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public RefreshDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	}
 
 	public partial class ReloadSearchAnalyzersDescriptor : RequestDescriptorBase<ReloadSearchAnalyzersDescriptor, ReloadSearchAnalyzersRequestParameters, IReloadSearchAnalyzersRequest>, IReloadSearchAnalyzersRequest
@@ -536,6 +845,10 @@ namespace Nest.IndexManagement
         public ReloadSearchAnalyzersDescriptor(Nest.Indices index) : base(r => r.Required("index", index))
 		{
 		}
+
+		public ReloadSearchAnalyzersDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public ReloadSearchAnalyzersDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ReloadSearchAnalyzersDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	}
 
 	public partial class ResolveIndexDescriptor : RequestDescriptorBase<ResolveIndexDescriptor, ResolveIndexRequestParameters, IResolveIndexRequest>, IResolveIndexRequest
@@ -547,6 +860,8 @@ namespace Nest.IndexManagement
         public ResolveIndexDescriptor(Nest.Names name) : base(r => r.Required("name", name))
 		{
 		}
+
+		public ResolveIndexDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	}
 
 	public partial class RolloverDescriptor : RequestDescriptorBase<RolloverDescriptor, RolloverRequestParameters, IRolloverRequest>, IRolloverRequest
@@ -563,6 +878,24 @@ namespace Nest.IndexManagement
         public RolloverDescriptor(Nest.IndexAlias alias, Nest.IndexName? new_index) : base(r => r.Required("alias", alias).Optional("new_index", new_index))
 		{
 		}
+
+		Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? IRolloverRequest.Aliases { get; set; }
+
+		Nest.IndexManagement.Rollover.RolloverConditions? IRolloverRequest.Conditions { get; set; }
+
+		Union<Dictionary<string, Nest.Mapping.TypeMapping>, Nest.Mapping.TypeMapping>? IRolloverRequest.Mappings { get; set; }
+
+		Dictionary<string, object>? IRolloverRequest.Settings { get; set; }
+
+		public RolloverDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
+		public RolloverDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
+		public RolloverDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public RolloverDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public RolloverDescriptor WaitForActiveShards(Nest.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public RolloverDescriptor Aliases(Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public RolloverDescriptor Conditions(Nest.IndexManagement.Rollover.RolloverConditions? conditions) => Assign(conditions, (a, v) => a.Conditions = v);
+		public RolloverDescriptor Mappings(Union<Dictionary<string, Nest.Mapping.TypeMapping>, Nest.Mapping.TypeMapping>? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
+		public RolloverDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 	}
 
 	public partial class SegmentsDescriptor : RequestDescriptorBase<SegmentsDescriptor, SegmentsRequestParameters, ISegmentsRequest>, ISegmentsRequest
@@ -579,6 +912,11 @@ namespace Nest.IndexManagement
         public SegmentsDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public SegmentsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public SegmentsDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public SegmentsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public SegmentsDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 	}
 
 	public partial class ShardStoresDescriptor : RequestDescriptorBase<ShardStoresDescriptor, ShardStoresRequestParameters, IShardStoresRequest>, IShardStoresRequest
@@ -595,6 +933,11 @@ namespace Nest.IndexManagement
         public ShardStoresDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		public ShardStoresDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public ShardStoresDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ShardStoresDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public ShardStoresDescriptor Status(Union<string, IEnumerable<string>>? status) => Qs("status", status);
 	}
 
 	public partial class ShrinkDescriptor : RequestDescriptorBase<ShrinkDescriptor, ShrinkRequestParameters, IShrinkRequest>, IShrinkRequest
@@ -606,6 +949,16 @@ namespace Nest.IndexManagement
         public ShrinkDescriptor(Nest.IndexName index, Nest.IndexName target) : base(r => r.Required("index", index).Required("target", target))
 		{
 		}
+
+		Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? IShrinkRequest.Aliases { get; set; }
+
+		Dictionary<string, object>? IShrinkRequest.Settings { get; set; }
+
+		public ShrinkDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ShrinkDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public ShrinkDescriptor WaitForActiveShards(Nest.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public ShrinkDescriptor Aliases(Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public ShrinkDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 	}
 
 	public partial class SimulateIndexTemplateDescriptor : RequestDescriptorBase<SimulateIndexTemplateDescriptor, SimulateIndexTemplateRequestParameters, ISimulateIndexTemplateRequest>, ISimulateIndexTemplateRequest
@@ -617,6 +970,19 @@ namespace Nest.IndexManagement
         public SimulateIndexTemplateDescriptor(Nest.Name? name) : base(r => r.Optional("name", name))
 		{
 		}
+
+		IEnumerable<Nest.IndexName>? ISimulateIndexTemplateRequest.IndexPatterns { get; set; }
+
+		IEnumerable<Nest.Name>? ISimulateIndexTemplateRequest.ComposedOf { get; set; }
+
+		IEnumerable<Nest.IndexManagement.OverlappingIndexTemplate>? ISimulateIndexTemplateRequest.Overlapping { get; set; }
+
+		Nest.IndexManagement.TemplateMapping? ISimulateIndexTemplateRequest.Template { get; set; }
+
+		public SimulateIndexTemplateDescriptor IndexPatterns(IEnumerable<Nest.IndexName>? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatterns = v);
+		public SimulateIndexTemplateDescriptor ComposedOf(IEnumerable<Nest.Name>? composedOf) => Assign(composedOf, (a, v) => a.ComposedOf = v);
+		public SimulateIndexTemplateDescriptor Overlapping(IEnumerable<Nest.IndexManagement.OverlappingIndexTemplate>? overlapping) => Assign(overlapping, (a, v) => a.Overlapping = v);
+		public SimulateIndexTemplateDescriptor Template(Nest.IndexManagement.TemplateMapping? template) => Assign(template, (a, v) => a.Template = v);
 	}
 
 	public partial class SimulateTemplateDescriptor : RequestDescriptorBase<SimulateTemplateDescriptor, SimulateTemplateRequestParameters, ISimulateTemplateRequest>, ISimulateTemplateRequest
@@ -633,6 +999,9 @@ namespace Nest.IndexManagement
         public SimulateTemplateDescriptor(Nest.Name? name) : base(r => r.Optional("name", name))
 		{
 		}
+
+		public SimulateTemplateDescriptor Create(bool? create = true) => Qs("create", create);
+		public SimulateTemplateDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
 	public partial class SplitDescriptor : RequestDescriptorBase<SplitDescriptor, SplitRequestParameters, ISplitRequest>, ISplitRequest
@@ -644,6 +1013,16 @@ namespace Nest.IndexManagement
         public SplitDescriptor(Nest.IndexName index, Nest.IndexName target) : base(r => r.Required("index", index).Required("target", target))
 		{
 		}
+
+		Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? ISplitRequest.Aliases { get; set; }
+
+		Dictionary<string, object>? ISplitRequest.Settings { get; set; }
+
+		public SplitDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public SplitDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public SplitDescriptor WaitForActiveShards(Nest.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public SplitDescriptor Aliases(Dictionary<Nest.IndexName, Nest.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public SplitDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 	}
 
 	public partial class StatsDescriptor : RequestDescriptorBase<StatsDescriptor, StatsRequestParameters, IStatsRequest>, IStatsRequest
@@ -670,6 +1049,16 @@ namespace Nest.IndexManagement
         public StatsDescriptor(Nest.Indices? index, Nest.Metrics? metric) : base(r => r.Optional("index", index).Optional("metric", metric))
 		{
 		}
+
+		public StatsDescriptor CompletionFields(Nest.Fields? completionFields) => Qs("completion_fields", completionFields);
+		public StatsDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public StatsDescriptor FielddataFields(Nest.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
+		public StatsDescriptor Fields(Nest.Fields? fields) => Qs("fields", fields);
+		public StatsDescriptor ForbidClosedIndices(bool? forbidClosedIndices = true) => Qs("forbid_closed_indices", forbidClosedIndices);
+		public StatsDescriptor Groups(Union<string, IEnumerable<string>>? groups) => Qs("groups", groups);
+		public StatsDescriptor IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
+		public StatsDescriptor IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
+		public StatsDescriptor Level(Nest.Level? level) => Qs("level", level);
 	}
 
 	public partial class UpdateAliasesDescriptor : RequestDescriptorBase<UpdateAliasesDescriptor, UpdateAliasesRequestParameters, IUpdateAliasesRequest>, IUpdateAliasesRequest
@@ -681,6 +1070,12 @@ namespace Nest.IndexManagement
         public UpdateAliasesDescriptor() : base()
 		{
 		}
+
+		IEnumerable<Nest.IndexManagement.UpdateAliases.IndicesUpdateAliasBulk>? IUpdateAliasesRequest.Actions { get; set; }
+
+		public UpdateAliasesDescriptor MasterTimeout(Nest.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public UpdateAliasesDescriptor Timeout(Nest.Time? timeout) => Qs("timeout", timeout);
+		public UpdateAliasesDescriptor Actions(IEnumerable<Nest.IndexManagement.UpdateAliases.IndicesUpdateAliasBulk>? actions) => Assign(actions, (a, v) => a.Actions = v);
 	}
 
 	public partial class ValidateQueryDescriptor : RequestDescriptorBase<ValidateQueryDescriptor, ValidateQueryRequestParameters, IValidateQueryRequest>, IValidateQueryRequest
@@ -697,5 +1092,22 @@ namespace Nest.IndexManagement
         public ValidateQueryDescriptor(Nest.Indices? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		Nest.QueryDsl.QueryContainer? IValidateQueryRequest.Query { get; set; }
+
+		public ValidateQueryDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public ValidateQueryDescriptor AllShards(bool? allShards = true) => Qs("all_shards", allShards);
+		public ValidateQueryDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+		public ValidateQueryDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
+		public ValidateQueryDescriptor DefaultOperator(Nest.DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public ValidateQueryDescriptor Df(string? df) => Qs("df", df);
+		public ValidateQueryDescriptor ExpandWildcards(Nest.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ValidateQueryDescriptor Explain(bool? explain = true) => Qs("explain", explain);
+		public ValidateQueryDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public ValidateQueryDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
+		public ValidateQueryDescriptor QueryOnQueryString(string? queryOnQueryString) => Qs("query_on_query_string", queryOnQueryString);
+		public ValidateQueryDescriptor Rewrite(bool? rewrite = true) => Qs("rewrite", rewrite);
+		public ValidateQueryDescriptor LuceneQueryString(string? luceneQueryString) => Qs("q", luceneQueryString);
+		public ValidateQueryDescriptor Query(Nest.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 	}
 }

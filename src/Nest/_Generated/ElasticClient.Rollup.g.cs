@@ -28,174 +28,41 @@ namespace Nest.Rollup
 		{
 		}
 
-		public DeleteJobResponse DeleteJob(IDeleteJobRequest request)
-		{
-			return DoRequest<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters);
-		}
-
-		public Task<DeleteJobResponse> DeleteJobAsync(IDeleteJobRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public DeleteJobResponse DeleteJob(Nest.Id id, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null)
-		{
-			return DeleteJob(selector.InvokeOrDefault(new DeleteJobDescriptor(id)));
-		}
-
-		public Task<DeleteJobResponse> DeleteJobAsync(Nest.Id id, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return DeleteJobAsync(selector.InvokeOrDefault(new DeleteJobDescriptor(id)), cancellationToken);
-		}
-
-		public GetJobsResponse GetJobs(IGetJobsRequest request)
-		{
-			return DoRequest<IGetJobsRequest, GetJobsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetJobsResponse> GetJobsAsync(IGetJobsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetJobsRequest, GetJobsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetJobsResponse GetJobs(Func<GetJobsDescriptor, IGetJobsRequest> selector = null)
-		{
-			return GetJobs(selector.InvokeOrDefault(new GetJobsDescriptor()));
-		}
-
-		public Task<GetJobsResponse> GetJobsAsync(Func<GetJobsDescriptor, IGetJobsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetJobsAsync(selector.InvokeOrDefault(new GetJobsDescriptor()), cancellationToken);
-		}
-
-		public GetRollupCapsResponse GetCaps(IGetRollupCapsRequest request)
-		{
-			return DoRequest<IGetRollupCapsRequest, GetRollupCapsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetRollupCapsResponse> GetCapsAsync(IGetRollupCapsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetRollupCapsRequest, GetRollupCapsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetRollupCapsResponse GetCaps(Func<GetRollupCapsDescriptor, IGetRollupCapsRequest> selector = null)
-		{
-			return GetCaps(selector.InvokeOrDefault(new GetRollupCapsDescriptor()));
-		}
-
-		public Task<GetRollupCapsResponse> GetCapsAsync(Func<GetRollupCapsDescriptor, IGetRollupCapsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetCapsAsync(selector.InvokeOrDefault(new GetRollupCapsDescriptor()), cancellationToken);
-		}
-
-		public GetRollupIndexCapsResponse GetIndexCaps(IGetRollupIndexCapsRequest request)
-		{
-			return DoRequest<IGetRollupIndexCapsRequest, GetRollupIndexCapsResponse>(request, request.RequestParameters);
-		}
-
-		public Task<GetRollupIndexCapsResponse> GetIndexCapsAsync(IGetRollupIndexCapsRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IGetRollupIndexCapsRequest, GetRollupIndexCapsResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public GetRollupIndexCapsResponse GetIndexCaps(Nest.Id index, Func<GetRollupIndexCapsDescriptor, IGetRollupIndexCapsRequest> selector = null)
-		{
-			return GetIndexCaps(selector.InvokeOrDefault(new GetRollupIndexCapsDescriptor(index)));
-		}
-
-		public Task<GetRollupIndexCapsResponse> GetIndexCapsAsync(Nest.Id index, Func<GetRollupIndexCapsDescriptor, IGetRollupIndexCapsRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return GetIndexCapsAsync(selector.InvokeOrDefault(new GetRollupIndexCapsDescriptor(index)), cancellationToken);
-		}
-
-		public PutJobResponse PutJob(IPutJobRequest request)
-		{
-			return DoRequest<IPutJobRequest, PutJobResponse>(request, request.RequestParameters);
-		}
-
-		public Task<PutJobResponse> PutJobAsync(IPutJobRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IPutJobRequest, PutJobResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public PutJobResponse PutJob(Nest.Id id, Func<PutJobDescriptor, IPutJobRequest> selector = null)
-		{
-			return PutJob(selector.InvokeOrDefault(new PutJobDescriptor(id)));
-		}
-
-		public Task<PutJobResponse> PutJobAsync(Nest.Id id, Func<PutJobDescriptor, IPutJobRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return PutJobAsync(selector.InvokeOrDefault(new PutJobDescriptor(id)), cancellationToken);
-		}
-
-		public RollupResponse Rollup(IRollupRequest request)
-		{
-			return DoRequest<IRollupRequest, RollupResponse>(request, request.RequestParameters);
-		}
-
-		public Task<RollupResponse> RollupAsync(IRollupRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IRollupRequest, RollupResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public RollupSearchResponse<TDocument> Search<TDocument>(IRollupSearchRequest request)
-		{
-			return DoRequest<IRollupSearchRequest, RollupSearchResponse<TDocument>>(request, request.RequestParameters);
-		}
-
-		public Task<RollupSearchResponse<TDocument>> SearchAsync<TDocument>(IRollupSearchRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IRollupSearchRequest, RollupSearchResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public RollupSearchResponse<TDocument> Search<TDocument>(Nest.Indices index, Func<RollupSearchDescriptor, IRollupSearchRequest> selector = null)
-		{
-			return Search<TDocument>(selector.InvokeOrDefault(new RollupSearchDescriptor(index)));
-		}
-
-		public Task<RollupSearchResponse<TDocument>> SearchAsync<TDocument>(Nest.Indices index, Func<RollupSearchDescriptor, IRollupSearchRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return SearchAsync<TDocument>(selector.InvokeOrDefault(new RollupSearchDescriptor(index)), cancellationToken);
-		}
-
-		public StartJobResponse StartJob(IStartJobRequest request)
-		{
-			return DoRequest<IStartJobRequest, StartJobResponse>(request, request.RequestParameters);
-		}
-
-		public Task<StartJobResponse> StartJobAsync(IStartJobRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IStartJobRequest, StartJobResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public StartJobResponse StartJob(Nest.Id id, Func<StartJobDescriptor, IStartJobRequest> selector = null)
-		{
-			return StartJob(selector.InvokeOrDefault(new StartJobDescriptor(id)));
-		}
-
-		public Task<StartJobResponse> StartJobAsync(Nest.Id id, Func<StartJobDescriptor, IStartJobRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return StartJobAsync(selector.InvokeOrDefault(new StartJobDescriptor(id)), cancellationToken);
-		}
-
-		public StopJobResponse StopJob(IStopJobRequest request)
-		{
-			return DoRequest<IStopJobRequest, StopJobResponse>(request, request.RequestParameters);
-		}
-
-		public Task<StopJobResponse> StopJobAsync(IStopJobRequest request, CancellationToken cancellationToken = default)
-		{
-			return DoRequestAsync<IStopJobRequest, StopJobResponse>(request, request.RequestParameters, cancellationToken);
-		}
-
-		public StopJobResponse StopJob(Nest.Id id, Func<StopJobDescriptor, IStopJobRequest> selector = null)
-		{
-			return StopJob(selector.InvokeOrDefault(new StopJobDescriptor(id)));
-		}
-
-		public Task<StopJobResponse> StopJobAsync(Nest.Id id, Func<StopJobDescriptor, IStopJobRequest> selector = null, CancellationToken cancellationToken = default)
-		{
-			return StopJobAsync(selector.InvokeOrDefault(new StopJobDescriptor(id)), cancellationToken);
-		}
+		public DeleteJobResponse DeleteJob(IDeleteJobRequest request) => DoRequest<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters);
+		public Task<DeleteJobResponse> DeleteJobAsync(IDeleteJobRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteJobRequest, DeleteJobResponse>(request, request.RequestParameters, cancellationToken);
+		public DeleteJobResponse DeleteJob(Nest.Id id, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null) => DeleteJob(selector.InvokeOrDefault(new DeleteJobDescriptor(id)));
+		public Task<DeleteJobResponse> DeleteJobAsync(Nest.Id id, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null, CancellationToken cancellationToken = default) => DeleteJobAsync(selector.InvokeOrDefault(new DeleteJobDescriptor(id)), cancellationToken);
+		public GetJobsResponse GetJobs(IGetJobsRequest request) => DoRequest<IGetJobsRequest, GetJobsResponse>(request, request.RequestParameters);
+		public Task<GetJobsResponse> GetJobsAsync(IGetJobsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetJobsRequest, GetJobsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetJobsResponse GetJobs(Func<GetJobsDescriptor, IGetJobsRequest> selector = null) => GetJobs(selector.InvokeOrDefault(new GetJobsDescriptor()));
+		public Task<GetJobsResponse> GetJobsAsync(Func<GetJobsDescriptor, IGetJobsRequest> selector = null, CancellationToken cancellationToken = default) => GetJobsAsync(selector.InvokeOrDefault(new GetJobsDescriptor()), cancellationToken);
+		public GetRollupCapsResponse GetCaps(IGetRollupCapsRequest request) => DoRequest<IGetRollupCapsRequest, GetRollupCapsResponse>(request, request.RequestParameters);
+		public Task<GetRollupCapsResponse> GetCapsAsync(IGetRollupCapsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetRollupCapsRequest, GetRollupCapsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetRollupCapsResponse GetCaps(Func<GetRollupCapsDescriptor, IGetRollupCapsRequest> selector = null) => GetCaps(selector.InvokeOrDefault(new GetRollupCapsDescriptor()));
+		public Task<GetRollupCapsResponse> GetCapsAsync(Func<GetRollupCapsDescriptor, IGetRollupCapsRequest> selector = null, CancellationToken cancellationToken = default) => GetCapsAsync(selector.InvokeOrDefault(new GetRollupCapsDescriptor()), cancellationToken);
+		public GetRollupIndexCapsResponse GetIndexCaps(IGetRollupIndexCapsRequest request) => DoRequest<IGetRollupIndexCapsRequest, GetRollupIndexCapsResponse>(request, request.RequestParameters);
+		public Task<GetRollupIndexCapsResponse> GetIndexCapsAsync(IGetRollupIndexCapsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetRollupIndexCapsRequest, GetRollupIndexCapsResponse>(request, request.RequestParameters, cancellationToken);
+		public GetRollupIndexCapsResponse GetIndexCaps(Nest.Id index, Func<GetRollupIndexCapsDescriptor, IGetRollupIndexCapsRequest> selector = null) => GetIndexCaps(selector.InvokeOrDefault(new GetRollupIndexCapsDescriptor(index)));
+		public Task<GetRollupIndexCapsResponse> GetIndexCapsAsync(Nest.Id index, Func<GetRollupIndexCapsDescriptor, IGetRollupIndexCapsRequest> selector = null, CancellationToken cancellationToken = default) => GetIndexCapsAsync(selector.InvokeOrDefault(new GetRollupIndexCapsDescriptor(index)), cancellationToken);
+		public PutJobResponse PutJob(IPutJobRequest request) => DoRequest<IPutJobRequest, PutJobResponse>(request, request.RequestParameters);
+		public Task<PutJobResponse> PutJobAsync(IPutJobRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPutJobRequest, PutJobResponse>(request, request.RequestParameters, cancellationToken);
+		public PutJobResponse PutJob(Nest.Id id, Func<PutJobDescriptor, IPutJobRequest> selector = null) => PutJob(selector.InvokeOrDefault(new PutJobDescriptor(id)));
+		public Task<PutJobResponse> PutJobAsync(Nest.Id id, Func<PutJobDescriptor, IPutJobRequest> selector = null, CancellationToken cancellationToken = default) => PutJobAsync(selector.InvokeOrDefault(new PutJobDescriptor(id)), cancellationToken);
+		public RollupResponse Rollup(IRollupRequest request) => DoRequest<IRollupRequest, RollupResponse>(request, request.RequestParameters);
+		public Task<RollupResponse> RollupAsync(IRollupRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IRollupRequest, RollupResponse>(request, request.RequestParameters, cancellationToken);
+		public RollupResponse Rollup(Nest.IndexName index, Nest.IndexName rollup_index, Func<RollupDescriptor, IRollupRequest> selector = null) => Rollup(selector.InvokeOrDefault(new RollupDescriptor(index, rollup_index)));
+		public Task<RollupResponse> RollupAsync(Nest.IndexName index, Nest.IndexName rollup_index, Func<RollupDescriptor, IRollupRequest> selector = null, CancellationToken cancellationToken = default) => RollupAsync(selector.InvokeOrDefault(new RollupDescriptor(index, rollup_index)), cancellationToken);
+		public RollupSearchResponse<TDocument> Search<TDocument>(IRollupSearchRequest request) => DoRequest<IRollupSearchRequest, RollupSearchResponse<TDocument>>(request, request.RequestParameters);
+		public Task<RollupSearchResponse<TDocument>> SearchAsync<TDocument>(IRollupSearchRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IRollupSearchRequest, RollupSearchResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
+		public RollupSearchResponse<TDocument> Search<TDocument>(Nest.Indices index, Func<RollupSearchDescriptor, IRollupSearchRequest> selector = null) => Search<TDocument>(selector.InvokeOrDefault(new RollupSearchDescriptor(index)));
+		public Task<RollupSearchResponse<TDocument>> SearchAsync<TDocument>(Nest.Indices index, Func<RollupSearchDescriptor, IRollupSearchRequest> selector = null, CancellationToken cancellationToken = default) => SearchAsync<TDocument>(selector.InvokeOrDefault(new RollupSearchDescriptor(index)), cancellationToken);
+		public StartJobResponse StartJob(IStartJobRequest request) => DoRequest<IStartJobRequest, StartJobResponse>(request, request.RequestParameters);
+		public Task<StartJobResponse> StartJobAsync(IStartJobRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IStartJobRequest, StartJobResponse>(request, request.RequestParameters, cancellationToken);
+		public StartJobResponse StartJob(Nest.Id id, Func<StartJobDescriptor, IStartJobRequest> selector = null) => StartJob(selector.InvokeOrDefault(new StartJobDescriptor(id)));
+		public Task<StartJobResponse> StartJobAsync(Nest.Id id, Func<StartJobDescriptor, IStartJobRequest> selector = null, CancellationToken cancellationToken = default) => StartJobAsync(selector.InvokeOrDefault(new StartJobDescriptor(id)), cancellationToken);
+		public StopJobResponse StopJob(IStopJobRequest request) => DoRequest<IStopJobRequest, StopJobResponse>(request, request.RequestParameters);
+		public Task<StopJobResponse> StopJobAsync(IStopJobRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IStopJobRequest, StopJobResponse>(request, request.RequestParameters, cancellationToken);
+		public StopJobResponse StopJob(Nest.Id id, Func<StopJobDescriptor, IStopJobRequest> selector = null) => StopJob(selector.InvokeOrDefault(new StopJobDescriptor(id)));
+		public Task<StopJobResponse> StopJobAsync(Nest.Id id, Func<StopJobDescriptor, IStopJobRequest> selector = null, CancellationToken cancellationToken = default) => StopJobAsync(selector.InvokeOrDefault(new StopJobDescriptor(id)), cancellationToken);
 	}
 }

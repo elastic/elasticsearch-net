@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Transport;
+using System.Collections.Generic;
 
 #nullable restore
 namespace Nest.Watcher
@@ -83,6 +84,29 @@ namespace Nest.Watcher
         public ExecuteWatchDescriptor() : base()
 		{
 		}
+
+		Dictionary<string, Nest.Watcher.ActionExecutionMode>? IExecuteWatchRequest.ActionModes { get; set; }
+
+		Dictionary<string, object>? IExecuteWatchRequest.AlternativeInput { get; set; }
+
+		bool? IExecuteWatchRequest.IgnoreCondition { get; set; }
+
+		bool? IExecuteWatchRequest.RecordExecution { get; set; }
+
+		Nest.Watcher.SimulatedActions? IExecuteWatchRequest.SimulatedActions { get; set; }
+
+		Nest.Watcher.ScheduleTriggerEvent? IExecuteWatchRequest.TriggerData { get; set; }
+
+		Nest.Watcher.Watch? IExecuteWatchRequest.Watch { get; set; }
+
+		public ExecuteWatchDescriptor Debug(bool? debug = true) => Qs("debug", debug);
+		public ExecuteWatchDescriptor ActionModes(Dictionary<string, Nest.Watcher.ActionExecutionMode>? actionModes) => Assign(actionModes, (a, v) => a.ActionModes = v);
+		public ExecuteWatchDescriptor AlternativeInput(Dictionary<string, object>? alternativeInput) => Assign(alternativeInput, (a, v) => a.AlternativeInput = v);
+		public ExecuteWatchDescriptor IgnoreCondition(bool? ignoreCondition = true) => Assign(ignoreCondition, (a, v) => a.IgnoreCondition = v);
+		public ExecuteWatchDescriptor RecordExecution(bool? recordExecution = true) => Assign(recordExecution, (a, v) => a.RecordExecution = v);
+		public ExecuteWatchDescriptor SimulatedActions(Nest.Watcher.SimulatedActions? simulatedActions) => Assign(simulatedActions, (a, v) => a.SimulatedActions = v);
+		public ExecuteWatchDescriptor TriggerData(Nest.Watcher.ScheduleTriggerEvent? triggerData) => Assign(triggerData, (a, v) => a.TriggerData = v);
+		public ExecuteWatchDescriptor Watch(Nest.Watcher.Watch? watch) => Assign(watch, (a, v) => a.Watch = v);
 	}
 
 	public partial class GetWatchDescriptor : RequestDescriptorBase<GetWatchDescriptor, GetWatchRequestParameters, IGetWatchRequest>, IGetWatchRequest
@@ -105,6 +129,59 @@ namespace Nest.Watcher
         public PutWatchDescriptor(Nest.Id id) : base(r => r.Required("id", id))
 		{
 		}
+
+		Dictionary<string, Nest.Watcher.Action>? IPutWatchRequest.Actions { get; set; }
+
+		Nest.Watcher.ConditionContainer? IPutWatchRequest.Condition { get; set; }
+
+		Nest.Watcher.InputContainer? IPutWatchRequest.Input { get; set; }
+
+		Nest.Metadata? IPutWatchRequest.Metadata { get; set; }
+
+		string? IPutWatchRequest.ThrottlePeriod { get; set; }
+
+		Nest.TransformContainer? IPutWatchRequest.Transform { get; set; }
+
+		Nest.Watcher.TriggerContainer? IPutWatchRequest.Trigger { get; set; }
+
+		public PutWatchDescriptor Active(bool? active = true) => Qs("active", active);
+		public PutWatchDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
+		public PutWatchDescriptor IfSequenceNumber(long? ifSequenceNumber) => Qs("if_sequence_number", ifSequenceNumber);
+		public PutWatchDescriptor Version(Nest.VersionNumber? version) => Qs("version", version);
+		public PutWatchDescriptor Actions(Dictionary<string, Nest.Watcher.Action>? actions) => Assign(actions, (a, v) => a.Actions = v);
+		public PutWatchDescriptor Condition(Nest.Watcher.ConditionContainer? condition) => Assign(condition, (a, v) => a.Condition = v);
+		public PutWatchDescriptor Input(Nest.Watcher.InputContainer? input) => Assign(input, (a, v) => a.Input = v);
+		public PutWatchDescriptor Metadata(Nest.Metadata? metadata) => Assign(metadata, (a, v) => a.Metadata = v);
+		public PutWatchDescriptor ThrottlePeriod(string? throttlePeriod) => Assign(throttlePeriod, (a, v) => a.ThrottlePeriod = v);
+		public PutWatchDescriptor Transform(Nest.TransformContainer? transform) => Assign(transform, (a, v) => a.Transform = v);
+		public PutWatchDescriptor Trigger(Nest.Watcher.TriggerContainer? trigger) => Assign(trigger, (a, v) => a.Trigger = v);
+	}
+
+	public partial class QueryWatchesDescriptor : RequestDescriptorBase<QueryWatchesDescriptor, QueryWatchesRequestParameters, IQueryWatchesRequest>, IQueryWatchesRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.WatcherQueryWatches;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/_watcher/_query/watches</summary>
+        public QueryWatchesDescriptor() : base()
+		{
+		}
+
+		int? IQueryWatchesRequest.From { get; set; }
+
+		int? IQueryWatchesRequest.Size { get; set; }
+
+		Nest.QueryDsl.QueryContainer? IQueryWatchesRequest.Query { get; set; }
+
+		Nest.Global.Search.Sort? IQueryWatchesRequest.Sort { get; set; }
+
+		Nest.Global.Search.SortResults? IQueryWatchesRequest.SearchAfter { get; set; }
+
+		public QueryWatchesDescriptor From(int? from) => Assign(from, (a, v) => a.From = v);
+		public QueryWatchesDescriptor Size(int? size) => Assign(size, (a, v) => a.Size = v);
+		public QueryWatchesDescriptor Query(Nest.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public QueryWatchesDescriptor Sort(Nest.Global.Search.Sort? sort) => Assign(sort, (a, v) => a.Sort = v);
+		public QueryWatchesDescriptor SearchAfter(Nest.Global.Search.SortResults? searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfter = v);
 	}
 
 	public partial class StartDescriptor : RequestDescriptorBase<StartDescriptor, StartRequestParameters, IStartRequest>, IStartRequest
@@ -127,6 +204,8 @@ namespace Nest.Watcher
         public StatsDescriptor() : base()
 		{
 		}
+
+		public StatsDescriptor EmitStacktraces(bool? emitStacktraces = true) => Qs("emit_stacktraces", emitStacktraces);
 	}
 
 	public partial class StopDescriptor : RequestDescriptorBase<StopDescriptor, StopRequestParameters, IStopRequest>, IStopRequest
