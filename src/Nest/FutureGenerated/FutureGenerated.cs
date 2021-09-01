@@ -14,7 +14,12 @@ namespace Nest
 	// This is an incomplete stub implementation
 	public partial class Indices
 	{
+		public static readonly Indices All = new("_all");
+
+		// TODO: Would a HashSet make more sense to avoid repeated values?
 		private readonly List<IndexName> _indices = new();
+
+		internal Indices(IndexName index) => _indices.Add(index);
 
 		internal Indices(IEnumerable<IndexName> indices)
 		{

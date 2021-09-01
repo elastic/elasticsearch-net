@@ -107,6 +107,9 @@ namespace Playground
 			var searchResponse =
 				await client.SearchAsync<Person>(new SearchRequest(indexName) { RestTotalHitsAsInt = true });
 
+			var searchResponseTwo =
+				await client.SearchAsync<Person>(new SearchRequest(Indices.All) { RestTotalHitsAsInt = true });
+
 			if (!searchResponse.IsValid)
 				throw new Exception("Failed to search for any documents");
 
