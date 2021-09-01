@@ -21,8 +21,17 @@ namespace Nest
 			return instance;
 		}
 
-		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options) =>
-			throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+		{
+			if (value is null)
+			{
+				writer.WriteNullValue();
+			}
+			else
+			{
+				writer.WriteStringValue(value.ToString());
+			}
+		}
 	}
 
 

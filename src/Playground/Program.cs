@@ -3,183 +3,176 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Nest;
+using Nest.Aggregations;
 using Nest.Cluster;
+using Nest.IndexManagement;
+using Nest.Mapping;
 
 namespace Playground
 {
-	public class BigThing
-	{
-		public List<Thing>? Things { get; set; }
-	}
-
-	public class Thing
-	{
-		public string? Name { get; set; }
-	}
-
 	internal class Program
 	{
 		private static async Task Main()
 		{
-			var s = new ElasticsearchClientSettings()
-				  .EnableHttpCompression();
+			var s = new ElasticsearchClientSettings();
 
 			IElasticClient client = new ElasticClient(s);
 
 			var indexName = Guid.NewGuid().ToString();
 
-			// TODO - When using {Level = new Level()}, the URL generation should ignore defaults
 			// Get cluster health
 			var clusterHealthRequest = new HealthRequest {Level = Level.Cluster};
 			var clusterHealthResponse = await client.Cluster.HealthAsync(clusterHealthRequest);
+			var clusterHealthResponseTwo = await client.Cluster.HealthAsync(d => d.Level(Level.Cluster));
 
 			var allocExplainRequest = new AllocationExplainRequest { Primary = true };
 			var allocExplainResponse = await client.Cluster.AllocationExplainAsync(allocExplainRequest);
 
-			var things = Enumerable.Range(0, 100).Select(a => new Thing { Name = "Steve J Gordon" });
-
-			var response = await client.IndexAsync(new IndexRequest<BigThing>("test") { Document = new BigThing { Things = things.ToList() } });
+			var personDoc = new Person("Steve Gordon") { Age = 36, Email = "sgordon@example.com" };
+			var indexResponseOne = await client.IndexAsync(new IndexRequest<Person>("people") { Document = personDoc });
+			var indexResponseTwo = await client.IndexAsync(personDoc, "people");
 
 			if (!clusterHealthResponse.IsValid)
 				throw new Exception("Failed to get cluster health");
-			//if (clusterHealthResponse.Status == Health.Red)
-			//	throw new Exception("Cluster is unhealthy");
+			if (clusterHealthResponse.Status == Health.Red)
+				throw new Exception("Cluster is unhealthy");
 
-			//// Create an index
-			//var createResponse = await client.Indices.CreateAsync(new IndicesCreateRequest(indexName)
-			//{
-			//	Mappings = new TypeMapping
-			//	{
-			//		DateDetection = false,
-			//		Properties = new Dictionary<PropertyName, PropertyBase>
-			//		{
-			//			{"age", new NumberProperty {Type = NumberType.Integer}},
-			//			{"name", new TextProperty()},
-			//			{"email", new KeywordProperty()}
-			//		},
-			//		Meta = new Metadata {{"foo", "bar"}}
-			//	}
-			//});
+			// Create an index
+			var createResponse = await client.IndexManagement.CreateAsync(new CreateRequest(indexName)
+			{
+				Mappings = new TypeMapping
+				{
+					DateDetection = false,
+					Properties = new Dictionary<PropertyName, PropertyBase>
+					{
+						{"age", new NumberProperty {Type = NumberType.Integer}},
+						{"name", new TextProperty()},
+						{"email", new KeywordProperty()}
+					},
+					Meta = new Metadata { { "foo", "bar" } }
+				}
+			});
 
-			//if (!createResponse.IsValid)
-			//	throw new Exception($"Failed to create index {indexName}");
-			//if (!createResponse.Acknowledged)
-			//	throw new Exception("The create index request has not been acknowledged");
+			if (!createResponse.IsValid)
+				throw new Exception($"Failed to create index {indexName}");
+			if (!createResponse.Acknowledged)
+				throw new Exception("The create index request has not been acknowledged");
 
-			//// TODO - Check index exists
+			// TODO - Check index exists
 
-			//// Index a document
-			//var indexResponse =
-			//	await client.IndexAsync(new IndexRequest<Person>(indexName, 1)
-			//	{
-			//		Document = new Person("Steve") {Age = 36, Email = "test@example.com"}
-			//	});
+			// Index a document
+			var indexResponse =
+				await client.IndexAsync(new IndexRequest<Person>(indexName, new Nest.Id("1"))
+				{
+					Document = new Person("Steve") { Age = 36, Email = "test@example.com" }
+				});
 
-			//if (!indexResponse.IsValid)
-			//	throw new Exception("Failed to index the document");
+			if (!indexResponse.IsValid)
+				throw new Exception("Failed to index the document");
 
-			//Console.WriteLine($"Indexed document with ID {indexResponse.Id}");
+			Console.WriteLine($"Indexed document with ID {indexResponse.Id}");
 
-			//// Index a document without explicit ID
-			//var indexResponse2 =
-			//	await client.IndexAsync(new IndexRequest<Person>(indexName)
-			//	{
-			//		Document = new Person("Joe") {Age = 40, Email = "test2@example.com"}
-			//	});
+			// Index a document without explicit ID
+			var indexResponse2 =
+				await client.IndexAsync(new IndexRequest<Person>(indexName)
+				{
+					Document = new Person("Joe") { Age = 40, Email = "test2@example.com" }
+				});
 
-			//if (!indexResponse2.IsValid)
-			//	throw new Exception("Failed to index the document");
+			if (!indexResponse2.IsValid)
+				throw new Exception("Failed to index the document");
 
-			//Console.WriteLine($"Indexed document with ID {indexResponse2.Id}");
+			Console.WriteLine($"Indexed document with ID {indexResponse2.Id}");
 
-			//// Check the document exists
-			//var documentExistsResponse = await client.ExistsAsync(indexName, indexResponse.Id);
+			// Check the document exists
+			var documentExistsResponse = await client.ExistsAsync(indexName, indexResponse.Id);
 
-			//if (!documentExistsResponse.IsValid)
-			//	throw new Exception("Failed to check if the document exists");
-			//if (!documentExistsResponse.Exists)
-			//	throw new Exception($"Document with ID {indexResponse.Id} does not exist");
+			if (!documentExistsResponse.IsValid)
+				throw new Exception("Failed to check if the document exists");
+			if (!documentExistsResponse.Exists)
+				throw new Exception($"Document with ID {indexResponse.Id} does not exist");
 
-			//// Get the document by its ID
-			//var getDocumentResponse = await client.GetAsync<Person>(indexName, indexResponse.Id);
+			// Get the document by its ID
+			var getDocumentResponse = await client.GetAsync<Person>(indexName, indexResponse.Id);
 
-			//if (!getDocumentResponse.IsValid)
-			//	throw new Exception($"Failed to get a document with ID {indexResponse.Id}");
+			if (!getDocumentResponse.IsValid)
+				throw new Exception($"Failed to get a document with ID {indexResponse.Id}");
 
-			//var refreshResponse = await client.Indices.RefreshAsync(new IndicesRefreshRequest(indexName));
+			//var refreshResponse = await client.IndexManagement.RefreshAsync(new RefreshRequest(indexName));
 
 			//if (!refreshResponse.IsValid)
 			//	throw new Exception($"Failed to refresh index {indexName}");
 
-			//// Basic search
-			//var searchResponse =
-			//	await client.SearchAsync<Person>(new SearchRequest(indexName) {RestTotalHitsAsInt = true});
+			// Basic search
+			var searchResponse =
+				await client.SearchAsync<Person>(new SearchRequest(indexName) { RestTotalHitsAsInt = true });
 
-			//if (!searchResponse.IsValid)
-			//	throw new Exception("Failed to search for any documents");
+			if (!searchResponse.IsValid)
+				throw new Exception("Failed to search for any documents");
 
-			//// TODO - Union deserialisation not yet implemented
-			////long hits = 0;
-			////searchResponse.Hits.Total.Match(a => hits = a.Value, b => hits = b);
-			//// Console.WriteLine($"The basic search found {hits} hits");
+			// TODO - Union deserialisation not yet implemented
+			//long hits = 0;
+			//searchResponse.Hits.Total.Match(a => hits = a.Value, b => hits = b);
+			// Console.WriteLine($"The basic search found {hits} hits");
 
-			//Console.WriteLine($"The basic search found {searchResponse.Hits.Hits.Count} hits");
+			Console.WriteLine($"The basic search found {searchResponse.Hits.Hits.Count} hits");
 
-			//// Basic terms agg
+			// Basic terms agg
 
-			//// Original
-			////var request = new SearchRequest<Person>
-			////{
-			////	Aggregations = new TermsAggregation("symbols")
-			////	{
-			////		Field = Infer.Field<Person>(f => f.Name),
-			////		Size = 1000
-			////	},
-			////	Size = 0
-			////};
-
-			//// Basic terms aggregation
-			//var request = new SearchRequest(indexName)
+			// Original
+			//var request = new SearchRequest<Person>
 			//{
-			//	Aggregations =
-			//		new
-			//			Dictionary<string,
-			//				AggregationContainer> // TODO - Can this be improved to align with our existing style?
-			//			{
-			//				{
-			//					"names",
-			//					new()
-			//					{
-			//						Terms = new TermsAggregation
-			//						{
-			//							Field = Infer.Field<Person>(f => f.Email!), Size = 100
-			//						}
-			//					}
-			//				}
-			//			},
-			//	Size = 0,
-			//	//Profile = true,
-			//	RestTotalHitsAsInt = true // required for now until union converter is able to handle objects! TODO
+			//	Aggregations = new TermsAggregation("symbols")
+			//	{
+			//		Field = Infer.Field<Person>(f => f.Name),
+			//		Size = 1000
+			//	},
+			//	Size = 0
 			//};
 
-			//searchResponse = await client.SearchAsync<Person>(request);
+			// Basic terms aggregation
+			var request = new SearchRequest(indexName)
+			{
+				Aggregations =
+					new
+						Dictionary<string,	AggregationContainer> // TODO - Can this be improved to align with our existing style?
+						{
+							{
+								"names",
+								new()
+								{
+									Terms = new TermsAggregation
+									{
+										//Field = Infer.Field<Person>(f => f.Email!),
+										Field = "email",
+										Size = 100
+									}
+								}
+							}
+						},
+				Size = 0,
+				//Profile = true,
+				RestTotalHitsAsInt = true // required for now until union converter is able to handle objects! TODO
+			};
 
-			//if (!searchResponse.IsValid)
-			//	throw new Exception("Failed to search for any documents (using aggregation)");
+			searchResponse = await client.SearchAsync<Person>(request);
 
-			//// TODO - Search with aggregation to get average age
+			if (!searchResponse.IsValid)
+				throw new Exception("Failed to search for any documents (using aggregation)");
 
-			//// Delete document
-			//var deleteDocumentResponse = await client.DeleteAsync(indexName, indexResponse.Id);
+			// TODO - Search with aggregation to get average age
 
-			//if (!deleteDocumentResponse.IsValid || deleteDocumentResponse.Result != Result.Deleted)
-			//	throw new Exception($"Failed to delete document with ID {indexResponse.Id}");
+			// Delete document
+			var deleteDocumentResponse = await client.DeleteAsync(indexName, indexResponse.Id);
 
-			//// Delete index
-			//var deleteIndexResponse = await client.Indices.DeleteAsync(new DeleteIndicesRequest(indexName));
+			if (!deleteDocumentResponse.IsValid || deleteDocumentResponse.Result != Result.Deleted)
+				throw new Exception($"Failed to delete document with ID {indexResponse.Id}");
 
-			//if (!deleteIndexResponse.IsValid)
-			//	throw new Exception($"Failed to delete index {indexName}");
+			// Delete index
+			var deleteIndexResponse = await client.IndexManagement.DeleteAsync(new Nest.IndexManagement.DeleteRequest(indexName));
+
+			if (!deleteIndexResponse.IsValid)
+				throw new Exception($"Failed to delete index {indexName}");
 		}
 	}
 }

@@ -56,7 +56,7 @@ namespace Nest
 
 	public partial class Metrics : IUrlParameter
 	{
-		public string GetString(ITransportConfiguration settings) =>  string . Empty ;
+		public string GetString(ITransportConfiguration settings) =>  string.Empty;
 	}
 
 	public partial class MinimumShouldMatch

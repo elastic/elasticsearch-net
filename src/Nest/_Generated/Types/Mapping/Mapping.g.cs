@@ -867,7 +867,7 @@ namespace Nest.Mapping
 		public string Type => "join";
 	}
 
-	public partial class KeywordProperty
+	public partial class KeywordProperty : PropertyBase
 	{
 		[JsonPropertyName("boost")]
 		public double? Boost
@@ -1012,7 +1012,7 @@ namespace Nest.Mapping
 		public string Type => "nested";
 	}
 
-	public partial class NumberProperty
+	public partial class NumberProperty : PropertyBase
 	{
 		[JsonPropertyName("boost")]
 		public double? Boost
@@ -1470,7 +1470,7 @@ namespace Nest.Mapping
 		}
 	}
 
-	public partial class TextProperty
+	public partial class TextProperty : PropertyBase
 	{
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer
@@ -1721,7 +1721,7 @@ namespace Nest.Mapping
 		public bool? NumericDetection { get; set; }
 
 		[JsonPropertyName("properties")]
-		public Dictionary<Nest.PropertyName, Nest.Mapping.Property>? Properties { get; set; }
+		public Dictionary<Nest.PropertyName, Nest.Mapping.PropertyBase>? Properties { get; set; }
 
 		[JsonPropertyName("_routing")]
 		public Nest.Mapping.RoutingField? Routing { get; set; }
