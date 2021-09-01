@@ -1,11 +1,49 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Nest
 {
+	public readonly partial struct PropertyName : IDictionaryKey
+	{
+		public string Key => Value;
+	}
+
+	// This is an incomplete stub implementation
+	public partial class Indices
+	{
+		private readonly List<IndexName> _indices = new();
+
+		internal Indices(IEnumerable<IndexName> indices)
+		{
+			indices.ThrowIfEmpty(nameof(indices));
+			_indices.AddRange(indices);
+		}
+
+		internal Indices(IEnumerable<string> indices)
+		{
+			indices.ThrowIfEmpty(nameof(indices));
+			_indices.AddRange(indices.Select(s => (IndexName)s));
+		}
+
+		public static Indices Parse(string names) => names.IsNullOrEmptyCommaSeparatedList(out var list) ? null : new Indices(list);
+
+		public static implicit operator Indices(string names) => Parse(names);
+
+		string IUrlParameter.GetString(ITransportConfiguration settings)
+		{
+			if (settings is not IElasticsearchClientSettings nestSettings)
+				throw new Exception(
+					"Tried to pass index names on query sting but it could not be resolved because no nest settings are available.");
+
+			var indices = _indices.Select(i => i.GetString(settings)).Distinct();
+
+			return string.Join(",", indices);
+		}
+	}
+
 	public abstract partial class PlainRequestBase<TParameters>
 	{
 		///<summary>Include the stack trace of returned errors.</summary>
