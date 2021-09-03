@@ -314,7 +314,7 @@ namespace Nest
 		internal static ApiUrls TransformDelete = new ApiUrls(new[]{"_transform/{transform_id}"});
 		internal static ApiUrls TransformGet = new ApiUrls(new[]{"_transform/{transform_id}", "_transform"});
 		internal static ApiUrls TransformGetStats = new ApiUrls(new[]{"_transform/{transform_id}/_stats"});
-		internal static ApiUrls TransformPreview = new ApiUrls(new[]{"_transform/_preview"});
+		internal static ApiUrls TransformPreview = new ApiUrls(new[]{"_transform/{transform_id}/_preview", "_transform/_preview"});
 		internal static ApiUrls TransformPut = new ApiUrls(new[]{"_transform/{transform_id}"});
 		internal static ApiUrls TransformStart = new ApiUrls(new[]{"_transform/{transform_id}/_start"});
 		internal static ApiUrls TransformStop = new ApiUrls(new[]{"_transform/{transform_id}/_stop"});

@@ -789,6 +789,12 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		public override bool SupportsBody => true;
+		///<summary>If set to `true` and a `compressed_definition` is provided, the request defers definition decompression and skips relevant validations.</summary>
+		public bool? DeferDefinitionDecompression
+		{
+			get => Q<bool? >("defer_definition_decompression");
+			set => Q("defer_definition_decompression", value);
+		}
 	}
 
 	///<summary>Request options for PutTrainedModelAlias <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models-aliases.html</para></summary>
