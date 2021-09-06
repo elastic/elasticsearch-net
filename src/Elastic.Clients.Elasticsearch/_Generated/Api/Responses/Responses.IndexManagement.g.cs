@@ -126,6 +126,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 	}
 
+	public partial class CreateDataStreamResponse : AcknowledgedResponseBase
+	{
+	}
+
 	public partial class CreateResponse : AcknowledgedResponseBase
 	{
 		[JsonPropertyName("index")]
@@ -149,10 +153,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			internal set;
 #endif
 		}
-	}
-
-	public partial class CreateDataStreamResponse : AcknowledgedResponseBase
-	{
 	}
 
 	public partial class DataStreamsStatsResponse : ResponseBase
@@ -224,10 +224,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 	}
 
-	public partial class DeleteResponse : IndicesResponseBase
-	{
-	}
-
 	public partial class DeleteAliasResponse : AcknowledgedResponseBase
 	{
 	}
@@ -240,11 +236,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 	}
 
-	public partial class DeleteTemplateResponse : AcknowledgedResponseBase
+	public partial class DeleteResponse : IndicesResponseBase
 	{
 	}
 
-	public partial class ExistsResponse : ExistsResponseBase
+	public partial class DeleteTemplateResponse : AcknowledgedResponseBase
 	{
 	}
 
@@ -253,6 +249,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	public partial class ExistsIndexTemplateResponse : ResponseBase
+	{
+	}
+
+	public partial class ExistsResponse : ExistsResponseBase
 	{
 	}
 
@@ -265,10 +265,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	public partial class ForcemergeResponse : ShardsOperationResponseBase
-	{
-	}
-
-	public partial class GetResponse : DictionaryResponseBase<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexState>
 	{
 	}
 
@@ -309,6 +305,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	public partial class GetMappingResponse : DictionaryResponseBase<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.GetMapping.IndexMappingRecord>
+	{
+	}
+
+	public partial class GetResponse : DictionaryResponseBase<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexState>
 	{
 	}
 

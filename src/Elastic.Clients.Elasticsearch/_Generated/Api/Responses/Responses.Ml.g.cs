@@ -36,10 +36,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class DeleteCalendarResponse : AcknowledgedResponseBase
-	{
-	}
-
 	public partial class DeleteCalendarEventResponse : AcknowledgedResponseBase
 	{
 	}
@@ -80,11 +76,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class DeleteDataFrameAnalyticsResponse : AcknowledgedResponseBase
+	public partial class DeleteCalendarResponse : AcknowledgedResponseBase
 	{
 	}
 
 	public partial class DeleteDatafeedResponse : AcknowledgedResponseBase
+	{
+	}
+
+	public partial class DeleteDataFrameAnalyticsResponse : AcknowledgedResponseBase
 	{
 	}
 
@@ -118,11 +118,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 	}
 
-	public partial class DeleteTrainedModelResponse : AcknowledgedResponseBase
+	public partial class DeleteTrainedModelAliasResponse : AcknowledgedResponseBase
 	{
 	}
 
-	public partial class DeleteTrainedModelAliasResponse : AcknowledgedResponseBase
+	public partial class DeleteTrainedModelResponse : AcknowledgedResponseBase
 	{
 	}
 
@@ -340,6 +340,56 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
+	public partial class GetDatafeedsResponse : ResponseBase
+	{
+		[JsonPropertyName("count")]
+		public long Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("datafeeds")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Datafeed> Datafeeds
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GetDatafeedStatsResponse : ResponseBase
+	{
+		[JsonPropertyName("count")]
+		public long Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("datafeeds")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.DatafeedStats> Datafeeds
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class GetDataFrameAnalyticsResponse : ResponseBase
 	{
 		[JsonPropertyName("count")]
@@ -380,56 +430,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonPropertyName("data_frame_analytics")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.DataframeAnalytics> DataFrameAnalytics
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class GetDatafeedStatsResponse : ResponseBase
-	{
-		[JsonPropertyName("count")]
-		public long Count
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("datafeeds")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.DatafeedStats> Datafeeds
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class GetDatafeedsResponse : ResponseBase
-	{
-		[JsonPropertyName("count")]
-		public long Count
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("datafeeds")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Datafeed> Datafeeds
 		{
 			get;
 #if NET5_0
@@ -490,31 +490,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class GetJobStatsResponse : ResponseBase
-	{
-		[JsonPropertyName("count")]
-		public long Count
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("jobs")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.JobStats> Jobs
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
 	public partial class GetJobsResponse : ResponseBase
 	{
 		[JsonPropertyName("count")]
@@ -530,6 +505,31 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonPropertyName("jobs")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Job> Jobs
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GetJobStatsResponse : ResponseBase
+	{
+		[JsonPropertyName("count")]
+		public long Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("jobs")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.JobStats> Jobs
 		{
 			get;
 #if NET5_0
@@ -908,20 +908,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class PreviewDataFrameAnalyticsResponse : ResponseBase
-	{
-		[JsonPropertyName("feature_values")]
-		public IReadOnlyCollection<Dictionary<Elastic.Clients.Elasticsearch.Field, string>> FeatureValues
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
 	public partial class PreviewDatafeedResponse<TDocument> : ResponseBase
 	{
 		[JsonPropertyName("data")]
@@ -936,32 +922,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class PutCalendarResponse : ResponseBase
+	public partial class PreviewDataFrameAnalyticsResponse : ResponseBase
 	{
-		[JsonPropertyName("calendar_id")]
-		public Elastic.Clients.Elasticsearch.Id CalendarId
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("description")]
-		public string Description
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("job_ids")]
-		public Elastic.Clients.Elasticsearch.Ids JobIds
+		[JsonPropertyName("feature_values")]
+		public IReadOnlyCollection<Dictionary<Elastic.Clients.Elasticsearch.Field, string>> FeatureValues
 		{
 			get;
 #if NET5_0
@@ -1008,43 +972,10 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class PutDataFrameAnalyticsResponse : ResponseBase
+	public partial class PutCalendarResponse : ResponseBase
 	{
-		[JsonPropertyName("allow_lazy_start")]
-		public bool AllowLazyStart
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("analysis")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer Analysis
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("analyzed_fields")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("create_time")]
-		public long CreateTime
+		[JsonPropertyName("calendar_id")]
+		public Elastic.Clients.Elasticsearch.Id CalendarId
 		{
 			get;
 #if NET5_0
@@ -1055,7 +986,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 
 		[JsonPropertyName("description")]
-		public string? Description
+		public string Description
 		{
 			get;
 #if NET5_0
@@ -1065,63 +996,8 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
-		[JsonPropertyName("dest")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("id")]
-		public Elastic.Clients.Elasticsearch.Id Id
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("max_num_threads")]
-		public int MaxNumThreads
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("model_memory_limit")]
-		public string ModelMemoryLimit
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("version")]
-		public Elastic.Clients.Elasticsearch.VersionString Version
+		[JsonPropertyName("job_ids")]
+		public Elastic.Clients.Elasticsearch.Ids JobIds
 		{
 			get;
 #if NET5_0
@@ -1279,6 +1155,130 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonPropertyName("scroll_size")]
 		public int ScrollSize
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class PutDataFrameAnalyticsResponse : ResponseBase
+	{
+		[JsonPropertyName("allow_lazy_start")]
+		public bool AllowLazyStart
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("analysis")]
+		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer Analysis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("analyzed_fields")]
+		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("create_time")]
+		public long CreateTime
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("description")]
+		public string? Description
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("dest")]
+		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("id")]
+		public Elastic.Clients.Elasticsearch.Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("max_num_threads")]
+		public int MaxNumThreads
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("model_memory_limit")]
+		public string ModelMemoryLimit
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source")]
+		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("version")]
+		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
 #if NET5_0
@@ -1548,11 +1548,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class PutTrainedModelResponse : ResponseBase
+	public partial class PutTrainedModelAliasResponse : AcknowledgedResponseBase
 	{
 	}
 
-	public partial class PutTrainedModelAliasResponse : AcknowledgedResponseBase
+	public partial class PutTrainedModelResponse : ResponseBase
 	{
 	}
 
@@ -1576,20 +1576,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class SetUpgradeModeResponse : AcknowledgedResponseBase
 	{
-	}
-
-	public partial class StartDataFrameAnalyticsResponse : AcknowledgedResponseBase
-	{
-		[JsonPropertyName("node")]
-		public Elastic.Clients.Elasticsearch.NodeId Node
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
 	}
 
 	public partial class StartDatafeedResponse : ResponseBase
@@ -1617,7 +1603,21 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class StopDataFrameAnalyticsResponse : ResponseBase
+	public partial class StartDataFrameAnalyticsResponse : AcknowledgedResponseBase
+	{
+		[JsonPropertyName("node")]
+		public Elastic.Clients.Elasticsearch.NodeId Node
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class StopDatafeedResponse : ResponseBase
 	{
 		[JsonPropertyName("stopped")]
 		public bool Stopped
@@ -1631,7 +1631,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class StopDatafeedResponse : ResponseBase
+	public partial class StopDataFrameAnalyticsResponse : ResponseBase
 	{
 		[JsonPropertyName("stopped")]
 		public bool Stopped
@@ -2078,11 +2078,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class ValidateResponse : AcknowledgedResponseBase
+	public partial class ValidateDetectorResponse : AcknowledgedResponseBase
 	{
 	}
 
-	public partial class ValidateDetectorResponse : AcknowledgedResponseBase
+	public partial class ValidateResponse : AcknowledgedResponseBase
 	{
 	}
 }

@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		}
 	}
 
-	public partial class InfoResponse : NodesResponseBase
+	public partial class InfoResponse : Nodes.NodesResponseBase
 	{
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		}
 	}
 
-	public partial class ReloadSecureSettingsResponse : NodesResponseBase
+	public partial class ReloadSecureSettingsResponse : Nodes.NodesResponseBase
 	{
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		}
 	}
 
-	public partial class StatsResponse : NodesResponseBase
+	public partial class StatsResponse : Nodes.NodesResponseBase
 	{
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
@@ -111,7 +111,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		}
 	}
 
-	public partial class UsageResponse : NodesResponseBase
+	public partial class UsageResponse : Nodes.NodesResponseBase
 	{
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName

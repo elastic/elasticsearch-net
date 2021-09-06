@@ -142,6 +142,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => Dest is null && Description is null && Frequency is null && Pivot is null && Source is null && Settings is null && Sync is null && RetentionPolicy is null && Latest is null;
 
+		///<summary>/_transform/{transform_id}/_preview</summary>
+        public PreviewTransformRequest(Elastic.Clients.Elasticsearch.Id? transform_id) : base(r => r.Optional("transform_id", transform_id))
+		{
+		}
+
 		///<summary>/_transform/_preview</summary>
         public PreviewTransformRequest() : base()
 		{
@@ -368,12 +373,6 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
-
-		///<summary>/_transform/{transform_id}/_update</summary>
-        public UpdateTransformRequest(Elastic.Clients.Elasticsearch.Id transform_id) : base(r => r.Required("transform_id", transform_id))
-		{
-		}
-
 		[JsonIgnore]
 		public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
 	}

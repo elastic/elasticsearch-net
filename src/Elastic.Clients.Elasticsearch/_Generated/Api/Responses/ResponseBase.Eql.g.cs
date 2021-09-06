@@ -16,15 +16,77 @@
 // ------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using OneOf;
-using Elastic.Transport;
+using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
+namespace Elastic.Clients.Elasticsearch.Eql
 {
-	public partial class TextToAnalyze
+	public abstract class EqlSearchResponseBase<TEvent> : ResponseBase
 	{
-		private readonly List<string> _stringList = new();
+		[JsonPropertyName("id")]
+		public Elastic.Clients.Elasticsearch.Id? Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("is_partial")]
+		public bool? IsPartial
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("is_running")]
+		public bool? IsRunning
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("took")]
+		public int? Took
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("timed_out")]
+		public bool? TimedOut
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("hits")]
+		public Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> Hits
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 }

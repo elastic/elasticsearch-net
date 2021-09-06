@@ -54,11 +54,11 @@ namespace Elastic.Clients.Elasticsearch.Cat
 	{
 	}
 
-	public partial class MlDataFrameAnalyticsResponse : ResponseBase
+	public partial class MlDatafeedsResponse : ResponseBase
 	{
 	}
 
-	public partial class MlDatafeedsResponse : ResponseBase
+	public partial class MlDataFrameAnalyticsResponse : ResponseBase
 	{
 	}
 

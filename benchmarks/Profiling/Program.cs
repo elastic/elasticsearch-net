@@ -1,8 +1,8 @@
 using JetBrains.Profiler.Api;
-using Nest;
-using Nest.IndexManagement;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.IndexManagement;
 
-var req1 = new DeleteRequest("test");
+var req1 = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteRequest("test");
 
 //var list = new List<IndexName>();
 //IEnumerable<IndexName> items = new IndexName[] { "a", "b" };

@@ -26,6 +26,20 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 	{
 	}
 
+	public partial class FollowInfoResponse : ResponseBase
+	{
+		[JsonPropertyName("follower_indices")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.FollowInfo.FollowerIndex> FollowerIndices
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class FollowResponse : ResponseBase
 	{
 		[JsonPropertyName("follow_index_created")]
@@ -52,20 +66,6 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		[JsonPropertyName("index_following_started")]
 		public bool IndexFollowingStarted
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class FollowInfoResponse : ResponseBase
-	{
-		[JsonPropertyName("follower_indices")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.FollowInfo.FollowerIndex> FollowerIndices
 		{
 			get;
 #if NET5_0

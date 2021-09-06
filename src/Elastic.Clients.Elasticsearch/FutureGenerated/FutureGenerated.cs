@@ -16,23 +16,21 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		public static readonly Indices All = new("_all");
 
-		private readonly List<IndexName> _indices = new();
-
-		internal Indices(IndexName index) => _indices.Add(index);
+		internal Indices(IndexName index) => _indexNameList.Add(index);
 
 		public Indices(IEnumerable<IndexName> indices)
 		{
 			indices.ThrowIfEmpty(nameof(indices));
-			_indices.AddRange(indices);
+			_indexNameList.AddRange(indices);
 		}
 
 		public Indices(IEnumerable<string> indices)
 		{
 			indices.ThrowIfEmpty(nameof(indices));
-			_indices.AddRange(indices.Select(s => (IndexName)s));
+			_indexNameList.AddRange(indices.Select(s => (IndexName)s));
 		}
 
-		public IReadOnlyCollection<IndexName> Values => _indices.ToArray();
+		public IReadOnlyCollection<IndexName> Values => _indexNameList.ToArray();
 
 		public static Indices Parse(string names) => names.IsNullOrEmptyCommaSeparatedList(out var list) ? null : new Indices(list);
 
@@ -46,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch
 				throw new Exception(
 					"Tried to pass index names on query sting but it could not be resolved because no Elastic.Clients.Elasticsearch settings are available.");
 
-			var indices = _indices.Select(i => i.GetString(settings)).Distinct();
+			var indices = _indexNameList.Select(i => i.GetString(settings)).Distinct();
 
 			return string.Join(",", indices);
 		}

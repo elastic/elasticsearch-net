@@ -75,6 +75,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformManagementPreviewTransform;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
+		///<summary>/_transform/{transform_id}/_preview</summary>
+        public PreviewTransformDescriptor(Elastic.Clients.Elasticsearch.Id? transform_id) : base(r => r.Optional("transform_id", transform_id))
+		{
+		}
+
 		///<summary>/_transform/_preview</summary>
         public PreviewTransformDescriptor() : base()
 		{
@@ -157,9 +162,5 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformManagementUpdateTransform;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
-		///<summary>/_transform/{transform_id}/_update</summary>
-        public UpdateTransformDescriptor(Elastic.Clients.Elasticsearch.Id transform_id) : base(r => r.Required("transform_id", transform_id))
-		{
-		}
 	}
 }

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class DataStreamNames : IUrlParameter
 	{
-		private readonly List<DataStreamName> _dataStreamNameList;
+		private readonly List<DataStreamName> _dataStreamNameList = new();
 	}
 
 	public partial class EpochMillis
@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class Fields : IUrlParameter
 	{
-		private readonly List<Field> _fieldList;
+		private readonly List<Field> _fieldList = new();
 	}
 
 	public partial class Fuzziness
@@ -51,17 +51,17 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class Ids : IUrlParameter
 	{
-		private readonly List<Id> _idList;
+		private readonly List<Id> _idList = new();
 	}
 
 	public partial class Indices : IUrlParameter
 	{
-		private readonly List<IndexName> _indexNameList;
+		private readonly List<IndexName> _indexNameList = new();
 	}
 
 	public partial class Metrics : IUrlParameter
 	{
-		private readonly List<string> _stringList;
+		private readonly List<string> _stringList = new();
 	}
 
 	public partial class MinimumShouldMatch
@@ -70,12 +70,12 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class Names : IUrlParameter
 	{
-		private readonly List<Name> _nameList;
+		private readonly List<Name> _nameList = new();
 	}
 
 	public partial class NodeIds : IUrlParameter
 	{
-		private readonly List<NodeId> _nodeIdList;
+		private readonly List<NodeId> _nodeIdList = new();
 	}
 
 	public partial class Percentage
@@ -95,9 +95,9 @@ namespace Elastic.Clients.Elasticsearch
 		public string GetString(ITransportConfiguration settings) =>  string . Empty ;
 	}
 
-	public partial class Time
-	{
-	}
+	//public partial class Time
+	//{
+	//}
 
 	public partial class WaitForActiveShards
 	{

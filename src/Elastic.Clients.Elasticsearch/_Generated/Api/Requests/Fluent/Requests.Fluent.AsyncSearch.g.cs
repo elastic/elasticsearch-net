@@ -171,6 +171,8 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.DateField>>? ISubmitRequest.Fields { get; set; }
 
+		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? ISubmitRequest.RuntimeMappings { get; set; }
+
 		public SubmitDescriptor BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
 		public SubmitDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
 		public SubmitDescriptor KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
@@ -224,5 +226,6 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public SubmitDescriptor TrackTotalHits(bool? trackTotalHits = true) => Assign(trackTotalHits, (a, v) => a.TrackTotalHits = v);
 		public SubmitDescriptor Version(bool? version = true) => Assign(version, (a, v) => a.Version = v);
 		public SubmitDescriptor Fields(IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.DateField>>? fields) => Assign(fields, (a, v) => a.Fields = v);
+		public SubmitDescriptor RuntimeMappings(Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappings = v);
 	}
 }

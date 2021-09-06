@@ -71,9 +71,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonPropertyName("fielddata")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata { get; set; }
 
-		[JsonPropertyName("index")]
-		public bool? Index { get; set; }
-
 		[JsonPropertyName("null_value")]
 		public bool? NullValue { get; set; }
 
@@ -136,9 +133,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonPropertyName("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
 
-		[JsonPropertyName("index")]
-		public bool? Index { get; set; }
-
 		[JsonPropertyName("null_value")]
 		public Elastic.Clients.Elasticsearch.DateString? NullValue { get; set; }
 
@@ -162,9 +156,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonPropertyName("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
-
-		[JsonPropertyName("index")]
-		public bool? Index { get; set; }
 
 		[JsonPropertyName("null_value")]
 		public Elastic.Clients.Elasticsearch.DateString? NullValue { get; set; }
@@ -290,9 +281,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonPropertyName("ignore_malformed")]
 		public bool IgnoreMalformed { get; set; }
 
-		[JsonPropertyName("index")]
-		public bool Index { get; set; }
-
 		[JsonPropertyName("index_options")]
 		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions IndexOptions { get; set; }
 
@@ -377,9 +365,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
 
-		[JsonPropertyName("index")]
-		public bool? Index { get; set; }
-
 		[JsonPropertyName("null_value")]
 		public string? NullValue { get; set; }
 
@@ -409,9 +394,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonPropertyName("eager_global_ordinals")]
 		public bool? EagerGlobalOrdinals { get; set; }
-
-		[JsonPropertyName("index")]
-		public bool? Index { get; set; }
 
 		[JsonPropertyName("index_options")]
 		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
@@ -472,9 +454,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonPropertyName("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
-
-		[JsonPropertyName("index")]
-		public bool? Index { get; set; }
 
 		[JsonPropertyName("null_value")]
 		public double? NullValue { get; set; }
@@ -550,9 +529,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonPropertyName("coerce")]
 		public bool? Coerce { get; set; }
-
-		[JsonPropertyName("index")]
-		public bool? Index { get; set; }
 	}
 
 	public partial class RankFeatureProperty : Mapping.PropertyBase
@@ -592,9 +568,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
-
-		[JsonPropertyName("index")]
-		public bool? Index { get; set; }
 
 		[JsonPropertyName("index_options")]
 		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
@@ -749,9 +722,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonPropertyName("fielddata_frequency_filter")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? FielddataFrequencyFilter { get; set; }
 
-		[JsonPropertyName("index")]
-		public bool? Index { get; set; }
-
 		[JsonPropertyName("index_options")]
 		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
@@ -790,9 +760,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonPropertyName("enable_position_increments")]
 		public bool? EnablePositionIncrements { get; set; }
-
-		[JsonPropertyName("index")]
-		public bool? Index { get; set; }
 
 		[JsonPropertyName("null_value")]
 		public double? NullValue { get; set; }

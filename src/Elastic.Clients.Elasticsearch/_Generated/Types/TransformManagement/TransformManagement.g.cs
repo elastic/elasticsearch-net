@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
 
 		[JsonPropertyName("group_by")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByContainer> GroupBy { get; set; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByContainer>? GroupBy { get; set; }
 
 		[JsonPropertyName("max_page_search_size")]
 		public int? MaxPageSearchSize { get; set; }

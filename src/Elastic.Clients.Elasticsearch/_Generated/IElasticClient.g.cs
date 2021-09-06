@@ -255,10 +255,6 @@ namespace Elastic.Clients.Elasticsearch
 		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken cancellationToken = default);
 		SearchResponse<TDocument> Search<TDocument>(Func<SearchDescriptor, ISearchRequest> selector = null);
 		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchDescriptor, ISearchRequest> selector = null, CancellationToken cancellationToken = default);
-		SearchMvtResponse SearchMvt(ISearchMvtRequest request);
-		Task<SearchMvtResponse> SearchMvtAsync(ISearchMvtRequest request, CancellationToken cancellationToken = default);
-		SearchMvtResponse SearchMvt(Elastic.Clients.Elasticsearch.Indices index, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, Func<SearchMvtDescriptor, ISearchMvtRequest> selector = null);
-		Task<SearchMvtResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.Indices index, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, Func<SearchMvtDescriptor, ISearchMvtRequest> selector = null, CancellationToken cancellationToken = default);
 		SearchShardsResponse SearchShards(ISearchShardsRequest request);
 		Task<SearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken cancellationToken = default);
 		SearchShardsResponse SearchShards(Func<SearchShardsDescriptor, ISearchShardsRequest> selector = null);

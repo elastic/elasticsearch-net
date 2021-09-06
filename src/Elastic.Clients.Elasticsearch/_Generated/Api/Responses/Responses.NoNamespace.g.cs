@@ -148,10 +148,6 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	public partial class DeleteResponse : WriteResponseBase
-	{
-	}
-
 	public partial class DeleteByQueryResponse : ResponseBase
 	{
 		[JsonPropertyName("batches")]
@@ -309,7 +305,11 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class DeleteByQueryRethrottleResponse : ListResponse
+	public partial class DeleteByQueryRethrottleResponse : Tasks.ListResponse
+	{
+	}
+
+	public partial class DeleteResponse : WriteResponseBase
 	{
 	}
 
@@ -532,42 +532,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class GetScriptResponse : ResponseBase
-	{
-		[JsonPropertyName("found")]
-		public bool Found
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("_id")]
-		public Elastic.Clients.Elasticsearch.Id Id
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.StoredScript? Script
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
 	public partial class GetScriptContextResponse : ResponseBase
 	{
 		[JsonPropertyName("contexts")]
@@ -597,6 +561,42 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonPropertyName("types_allowed")]
 		public IReadOnlyCollection<string> TypesAllowed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GetScriptResponse : ResponseBase
+	{
+		[JsonPropertyName("found")]
+		public bool Found
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("_id")]
+		public Elastic.Clients.Elasticsearch.Id Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.StoredScript? Script
 		{
 			get;
 #if NET5_0
@@ -1202,10 +1202,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class SearchMvtResponse : ResponseBase
-	{
-	}
-
 	public partial class SearchShardsResponse : ResponseBase
 	{
 		[JsonPropertyName("indices")]
@@ -1405,20 +1401,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class UpdateResponse<TDocument> : WriteResponseBase
-	{
-		[JsonPropertyName("get")]
-		public Elastic.Clients.Elasticsearch.InlineGet<TDocument>? Get
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
 	public partial class UpdateByQueryResponse : ResponseBase
 	{
 		[JsonPropertyName("batches")]
@@ -1580,6 +1562,20 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Global.UpdateByQueryRethrottle.UpdateByQueryRethrottleNode> Nodes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class UpdateResponse<TDocument> : WriteResponseBase
+	{
+		[JsonPropertyName("get")]
+		public Elastic.Clients.Elasticsearch.InlineGet<TDocument>? Get
 		{
 			get;
 #if NET5_0
