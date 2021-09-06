@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Nest\Nest.csproj" />
+    <ProjectReference Include="..\..\src\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj" />
   </ItemGroup>
 
 </Project>

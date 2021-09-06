@@ -28,6 +28,12 @@
         "resolved": "5.0.0",
         "contentHash": "+luxMQNZ2WqeffBU7Ml6njIvxc8169NW2oU+ygNudXQGZiarjE7DOtN7bILiQjTZjkmwwRZGTtLzmdrSI/Ustw=="
       },
+      "Elastic.Clients.Elasticsearch": {
+        "type": "Project",
+        "dependencies": {
+          "Elastic.Transport": "1.0.0"
+        }
+      },
       "elastic.transport": {
         "type": "Project",
         "dependencies": {
@@ -35,12 +41,6 @@
           "System.Buffers": "4.5.1",
           "System.Diagnostics.DiagnosticSource": "5.0.0",
           "System.Text.Json": "5.0.0"
-        }
-      },
-      "nest": {
-        "type": "Project",
-        "dependencies": {
-          "Elastic.Transport": "1.0.0"
         }
       }
     }
