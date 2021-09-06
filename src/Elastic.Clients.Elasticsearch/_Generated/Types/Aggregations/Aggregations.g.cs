@@ -2013,6 +2013,75 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
+	public partial class StandardDeviationBounds
+	{
+		[JsonPropertyName("lower")]
+		public double? Lower
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lower_population")]
+		public double? LowerPopulation
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lower_sampling")]
+		public double? LowerSampling
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("upper")]
+		public double? Upper
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("upper_population")]
+		public double? UpperPopulation
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("upper_sampling")]
+		public double? UpperSampling
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class StatsAggregate : Aggregations.AggregateBase
 	{
 		[JsonPropertyName("avg")]

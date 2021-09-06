@@ -38,6 +38,122 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 		}
 	}
 
+	public partial class AnalyticsStatistics
+	{
+		[JsonPropertyName("boxplot_usage")]
+		public long BoxplotUsage
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cumulative_cardinality_usage")]
+		public long CumulativeCardinalityUsage
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("moving_percentiles_usage")]
+		public long MovingPercentilesUsage
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("multi_terms_usage")]
+		public long? MultiTermsUsage
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("normalize_usage")]
+		public long NormalizeUsage
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("rate_usage")]
+		public long RateUsage
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("string_stats_usage")]
+		public long StringStatsUsage
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("top_metrics_usage")]
+		public long TopMetricsUsage
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("t_test_usage")]
+		public long TTestUsage
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Audit : Xpack.Usage.FeatureToggle
+	{
+		[JsonPropertyName("outputs")]
+		public IReadOnlyCollection<string>? Outputs
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class Base
 	{
 		[JsonPropertyName("available")]
@@ -113,10 +229,148 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 		}
 	}
 
+	public partial class Counter
+	{
+		[JsonPropertyName("active")]
+		public long Active
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public long Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class DataStreams : Xpack.Usage.Base
 	{
 		[JsonPropertyName("indices_count")]
 		public long IndicesCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DataTierPhaseStatistics
+	{
+		[JsonPropertyName("doc_count")]
+		public long DocCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_count")]
+		public long IndexCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("node_count")]
+		public long NodeCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("primary_shard_count")]
+		public long PrimaryShardCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("primary_shard_size_avg_bytes")]
+		public long PrimaryShardSizeAvgBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("primary_shard_size_mad_bytes")]
+		public long PrimaryShardSizeMadBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("primary_shard_size_median_bytes")]
+		public long PrimaryShardSizeMedianBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("primary_size_bytes")]
+		public long PrimarySizeBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total_shard_count")]
+		public long TotalShardCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total_size_bytes")]
+		public long TotalSizeBytes
 		{
 			get;
 #if NET5_0
@@ -185,6 +439,20 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 		}
 	}
 
+	public partial class Datafeed
+	{
+		[JsonPropertyName("count")]
+		public long Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class Eql : Xpack.Usage.Base
 	{
 		[JsonPropertyName("features")]
@@ -200,6 +468,310 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 		[JsonPropertyName("queries")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Xpack.Usage.Query> Queries
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class EqlFeatures
+	{
+		[JsonPropertyName("event")]
+		public uint Event
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("join")]
+		public uint Join
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("joins")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.EqlFeaturesJoin Joins
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("keys")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.EqlFeaturesKeys Keys
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("pipes")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.EqlFeaturesPipes Pipes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("sequence")]
+		public uint Sequence
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("sequences")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.EqlFeaturesSequences Sequences
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class EqlFeaturesJoin
+	{
+		[JsonPropertyName("join_queries_five_or_more")]
+		public uint JoinQueriesFiveOrMore
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("join_queries_four")]
+		public uint JoinQueriesFour
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("join_queries_three")]
+		public uint JoinQueriesThree
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("join_queries_two")]
+		public uint JoinQueriesTwo
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("join_until")]
+		public uint JoinUntil
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class EqlFeaturesKeys
+	{
+		[JsonPropertyName("join_keys_five_or_more")]
+		public uint JoinKeysFiveOrMore
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("join_keys_four")]
+		public uint JoinKeysFour
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("join_keys_one")]
+		public uint JoinKeysOne
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("join_keys_three")]
+		public uint JoinKeysThree
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("join_keys_two")]
+		public uint JoinKeysTwo
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class EqlFeaturesPipes
+	{
+		[JsonPropertyName("pipe_head")]
+		public uint PipeHead
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("pipe_tail")]
+		public uint PipeTail
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class EqlFeaturesSequences
+	{
+		[JsonPropertyName("sequence_maxspan")]
+		public uint SequenceMaxspan
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("sequence_queries_five_or_more")]
+		public uint SequenceQueriesFiveOrMore
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("sequence_queries_four")]
+		public uint SequenceQueriesFour
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("sequence_queries_three")]
+		public uint SequenceQueriesThree
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("sequence_queries_two")]
+		public uint SequenceQueriesTwo
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("sequence_until")]
+		public uint SequenceUntil
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FeatureToggle
+	{
+		[JsonPropertyName("enabled")]
+		public bool Enabled
 		{
 			get;
 #if NET5_0
@@ -288,6 +860,31 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 		}
 	}
 
+	public partial class IpFilter
+	{
+		[JsonPropertyName("http")]
+		public bool Http
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transport")]
+		public bool Transport
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class KibanaUrlConfig : Xpack.Usage.BaseUrlConfig
 	{
 		[JsonPropertyName("time_range")]
@@ -360,6 +957,297 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 		}
 	}
 
+	public partial class MlCounter
+	{
+		[JsonPropertyName("count")]
+		public long Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class MlDataFrameAnalyticsJobs
+	{
+		[JsonPropertyName("_all")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlDataFrameAnalyticsJobsCount All
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("analysis_counts")]
+		public Elastic.Clients.Elasticsearch.EmptyObject? AnalysisCounts
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("memory_usage")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlDataFrameAnalyticsJobsMemory? MemoryUsage
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class MlDataFrameAnalyticsJobsCount
+	{
+		[JsonPropertyName("count")]
+		public long Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class MlDataFrameAnalyticsJobsMemory
+	{
+		[JsonPropertyName("peak_usage_bytes")]
+		public Elastic.Clients.Elasticsearch.Ml.JobStatistics PeakUsageBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class MlInference
+	{
+		[JsonPropertyName("ingest_processors")]
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Xpack.Usage.MlInferenceIngestProcessor> IngestProcessors
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("trained_models")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlInferenceTrainedModels TrainedModels
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class MlInferenceIngestProcessor
+	{
+		[JsonPropertyName("num_docs_processed")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlInferenceIngestProcessorCount NumDocsProcessed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("num_failures")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlInferenceIngestProcessorCount NumFailures
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("pipelines")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlCounter Pipelines
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("time_ms")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlInferenceIngestProcessorCount TimeMs
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class MlInferenceIngestProcessorCount
+	{
+		[JsonPropertyName("max")]
+		public long Max
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("min")]
+		public long Min
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("sum")]
+		public long Sum
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class MlInferenceTrainedModels
+	{
+		[JsonPropertyName("_all")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlCounter All
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("count")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlInferenceTrainedModelsCount? Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("estimated_heap_memory_usage_bytes")]
+		public Elastic.Clients.Elasticsearch.Ml.JobStatistics? EstimatedHeapMemoryUsageBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("estimated_operations")]
+		public Elastic.Clients.Elasticsearch.Ml.JobStatistics? EstimatedOperations
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class MlInferenceTrainedModelsCount
+	{
+		[JsonPropertyName("classification")]
+		public long Classification
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("other")]
+		public long Other
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("prepackaged")]
+		public long Prepackaged
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("regression")]
+		public long Regression
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public long Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class Monitoring : Xpack.Usage.Base
 	{
 		[JsonPropertyName("collection_enabled")]
@@ -375,6 +1263,53 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 		[JsonPropertyName("enabled_exporters")]
 		public Dictionary<string, long> EnabledExporters
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Query
+	{
+		[JsonPropertyName("count")]
+		public int? Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("failed")]
+		public int? Failed
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("paging")]
+		public int? Paging
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total")]
+		public int? Total
 		{
 			get;
 #if NET5_0
@@ -476,10 +1411,206 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 		}
 	}
 
+	public partial class RealmCache
+	{
+		[JsonPropertyName("size")]
+		public long Size
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RoleMapping
+	{
+		[JsonPropertyName("enabled")]
+		public int Enabled
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size")]
+		public int Size
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class RuntimeFieldTypes : Xpack.Usage.Base
 	{
 		[JsonPropertyName("field_types")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.Usage.RuntimeFieldsType> FieldTypes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RuntimeFieldsType
+	{
+		[JsonPropertyName("chars_max")]
+		public long CharsMax
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("chars_total")]
+		public long CharsTotal
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("count")]
+		public long Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("doc_max")]
+		public long DocMax
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("doc_total")]
+		public long DocTotal
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("index_count")]
+		public long IndexCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lang")]
+		public IReadOnlyCollection<string> Lang
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lines_max")]
+		public long LinesMax
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("lines_total")]
+		public long LinesTotal
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("name")]
+		public Elastic.Clients.Elasticsearch.Field Name
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("scriptless_count")]
+		public long ScriptlessCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("shadowed_count")]
+		public long ShadowedCount
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source_max")]
+		public long SourceMax
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("source_total")]
+		public long SourceTotal
 		{
 			get;
 #if NET5_0
@@ -661,6 +1792,164 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 		}
 	}
 
+	public partial class SecurityRoles
+	{
+		[JsonPropertyName("dls")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.SecurityRolesDls Dls
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("file")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.SecurityRolesFile File
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("native")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.SecurityRolesNative Native
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SecurityRolesDls
+	{
+		[JsonPropertyName("bit_set_cache")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.SecurityRolesDlsBitSetCache BitSetCache
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SecurityRolesDlsBitSetCache
+	{
+		[JsonPropertyName("count")]
+		public int Count
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("memory")]
+		public Elastic.Clients.Elasticsearch.ByteSize? Memory
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("memory_in_bytes")]
+		public ulong MemoryInBytes
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SecurityRolesFile
+	{
+		[JsonPropertyName("dls")]
+		public bool Dls
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fls")]
+		public bool Fls
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size")]
+		public long Size
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SecurityRolesNative
+	{
+		[JsonPropertyName("dls")]
+		public bool Dls
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("fls")]
+		public bool Fls
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("size")]
+		public long Size
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class Slm : Xpack.Usage.Base
 	{
 		[JsonPropertyName("policy_count")]
@@ -701,6 +1990,31 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 		[JsonPropertyName("queries")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Xpack.Usage.Query> Queries
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class Ssl
+	{
+		[JsonPropertyName("http")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.FeatureToggle Http
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("transport")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.FeatureToggle Transport
 		{
 			get;
 #if NET5_0
@@ -773,6 +2087,142 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 		[JsonPropertyName("watch")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.WatcherWatch Watch
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class WatcherActionTotals
+	{
+		[JsonPropertyName("total")]
+		public long Total
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("total_time_in_ms")]
+		public long TotalTimeInMs
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class WatcherActions
+	{
+		[JsonPropertyName("actions")]
+		public Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.Xpack.Usage.WatcherActionTotals> Actions
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class WatcherWatch
+	{
+		[JsonPropertyName("action")]
+		public Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.Xpack.Usage.Counter>? Action
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("condition")]
+		public Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.Xpack.Usage.Counter>? Condition
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("input")]
+		public Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.Xpack.Usage.Counter> Input
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("trigger")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.WatcherWatchTrigger Trigger
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class WatcherWatchTrigger
+	{
+		[JsonPropertyName("_all")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.Counter All
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("schedule")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.WatcherWatchTriggerSchedule? Schedule
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class WatcherWatchTriggerSchedule : Xpack.Usage.Counter
+	{
+		[JsonPropertyName("_all")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.Counter All
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("cron")]
+		public Elastic.Clients.Elasticsearch.Xpack.Usage.Counter Cron
 		{
 			get;
 #if NET5_0
