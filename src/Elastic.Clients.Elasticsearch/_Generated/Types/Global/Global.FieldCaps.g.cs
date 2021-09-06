@@ -104,6 +104,17 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 #endif
 		}
 
+		[JsonPropertyName("metadata_field")]
+		public bool? MetadataField
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("non_aggregatable_indices")]
 		public Elastic.Clients.Elasticsearch.Indices? NonAggregatableIndices
 		{

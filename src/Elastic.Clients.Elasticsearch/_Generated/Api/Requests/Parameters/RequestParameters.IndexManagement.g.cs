@@ -509,6 +509,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+
+		[JsonIgnore]
+		public int? Order { get => Q<int?>("order"); set => Q("order", value); }
 	}
 
 	public class RecoveryRequestParameters : RequestParameters<RecoveryRequestParameters>

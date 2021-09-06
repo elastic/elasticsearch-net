@@ -731,7 +731,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public PostCalendarEventsDescriptor Events(IEnumerable<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> events) => Assign(events, (a, v) => a.Events = v);
 	}
 
-	public partial class PostDataDescriptor : RequestDescriptorBase<PostDataDescriptor, PostDataRequestParameters, IPostDataRequest>, IPostDataRequest
+	public partial class PostDataDescriptor<TData> : RequestDescriptorBase<PostDataDescriptor<TData>, PostDataRequestParameters, IPostDataRequest<TData>>, IPostDataRequest<TData>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPostData;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -741,11 +741,8 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		IEnumerable<object>? IPostDataRequest.Data { get; set; }
-
-		public PostDataDescriptor ResetEnd(Elastic.Clients.Elasticsearch.DateString? resetEnd) => Qs("reset_end", resetEnd);
-		public PostDataDescriptor ResetStart(Elastic.Clients.Elasticsearch.DateString? resetStart) => Qs("reset_start", resetStart);
-		public PostDataDescriptor Data(IEnumerable<object>? data) => Assign(data, (a, v) => a.Data = v);
+		public PostDataDescriptor<TData> ResetEnd(Elastic.Clients.Elasticsearch.DateString? resetEnd) => Qs("reset_end", resetEnd);
+		public PostDataDescriptor<TData> ResetStart(Elastic.Clients.Elasticsearch.DateString? resetStart) => Qs("reset_start", resetStart);
 	}
 
 	public partial class PreviewDataFrameAnalyticsDescriptor : RequestDescriptorBase<PreviewDataFrameAnalyticsDescriptor, PreviewDataFrameAnalyticsRequestParameters, IPreviewDataFrameAnalyticsRequest>, IPreviewDataFrameAnalyticsRequest

@@ -1,14 +1,21 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
+	public partial class Fields
+	{
+		// This is temporary
+		public Fields(IEnumerable<Field> fields) => _fieldList.AddRange(fields);
+
+		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	}
+
 	//[DebuggerDisplay("{DebugDisplay,nq}")]
 	//public partial class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Fields>
 	//{

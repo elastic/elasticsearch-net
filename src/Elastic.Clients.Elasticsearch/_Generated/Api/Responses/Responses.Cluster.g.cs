@@ -774,7 +774,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		}
 	}
 
-	public partial class StatsResponse : NodesResponseBase
+	public partial class StatsResponse : Nodes.NodesResponseBase
 	{
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName

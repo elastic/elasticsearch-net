@@ -40,6 +40,10 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 	{
 	}
 
+	public partial class CreateRepositoryResponse : AcknowledgedResponseBase
+	{
+	}
+
 	public partial class CreateResponse : ResponseBase
 	{
 		[JsonPropertyName("accepted")]
@@ -65,7 +69,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		}
 	}
 
-	public partial class CreateRepositoryResponse : AcknowledgedResponseBase
+	public partial class DeleteRepositoryResponse : AcknowledgedResponseBase
 	{
 	}
 
@@ -73,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 	{
 	}
 
-	public partial class DeleteRepositoryResponse : AcknowledgedResponseBase
+	public partial class GetRepositoryResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.Snapshot.Repository>
 	{
 	}
 
@@ -122,10 +126,6 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 			internal set;
 #endif
 		}
-	}
-
-	public partial class GetRepositoryResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.Snapshot.Repository>
-	{
 	}
 
 	public partial class RestoreResponse : ResponseBase

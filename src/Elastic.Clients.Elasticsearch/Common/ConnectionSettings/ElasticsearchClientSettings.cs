@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch
 			IConnectionPool connectionPool,
 			IConnection connection,
 			ElasticsearchClientSettings.SourceSerializerFactory? sourceSerializerFactory)
-			: base(connectionPool, connection, null, Elastic.Clients.ElasticsearchElasticsearchProductRegistration.DefaultForElastic.Clients.Elasticsearch)
+			: base(connectionPool, connection, null, ElasticsearchClientProductRegistration.DefaultForElasticClientsElasticsearch)
 		{
 			var defaultSerializer = new DefaultHighLevelSerializer(this);
 			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;

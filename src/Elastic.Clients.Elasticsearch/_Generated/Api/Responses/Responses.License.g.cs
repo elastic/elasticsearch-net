@@ -26,10 +26,10 @@ namespace Elastic.Clients.Elasticsearch.License
 	{
 	}
 
-	public partial class GetResponse : ResponseBase
+	public partial class GetBasicStatusResponse : ResponseBase
 	{
-		[JsonPropertyName("license")]
-		public Elastic.Clients.Elasticsearch.License.Get.LicenseInformation License
+		[JsonPropertyName("eligible_to_start_basic")]
+		public bool EligibleToStartBasic
 		{
 			get;
 #if NET5_0
@@ -40,10 +40,10 @@ namespace Elastic.Clients.Elasticsearch.License
 		}
 	}
 
-	public partial class GetBasicStatusResponse : ResponseBase
+	public partial class GetResponse : ResponseBase
 	{
-		[JsonPropertyName("eligible_to_start_basic")]
-		public bool EligibleToStartBasic
+		[JsonPropertyName("license")]
+		public Elastic.Clients.Elasticsearch.License.Get.LicenseInformation License
 		{
 			get;
 #if NET5_0

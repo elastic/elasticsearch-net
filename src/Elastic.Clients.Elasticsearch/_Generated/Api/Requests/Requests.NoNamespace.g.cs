@@ -787,12 +787,6 @@ namespace Elastic.Clients.Elasticsearch
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => true;
 		protected override bool IsEmpty => true;
-
-		///<summary>/{index}/_source/{id}</summary>
-        public GetSourceRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
-		{
-		}
-
 		[JsonIgnore]
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
@@ -1689,65 +1683,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonPropertyName("runtime_mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
-	}
-
-	[ConvertAs(typeof(SearchMvtRequest))]
-	public partial interface ISearchMvtRequest : IRequest<SearchMvtRequestParameters>
-	{
-		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggs { get; set; }
-
-		Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
-
-		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
-
-		Elastic.Clients.Elasticsearch.Global.Search.Sort? Sort { get; set; }
-	}
-
-	public partial class SearchMvtRequest : PlainRequestBase<SearchMvtRequestParameters>, ISearchMvtRequest
-	{
-		protected ISearchMvtRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchMvt;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => true;
-		protected override bool CanBeEmpty => false;
-		protected override bool IsEmpty => false;
-
-		///<summary>/{index}/_mvt/{field}/{zoom}/{x}/{y}</summary>
-        public SearchMvtRequest(Elastic.Clients.Elasticsearch.Indices index, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y) : base(r => r.Required("index", index).Required("field", field).Required("zoom", zoom).Required("x", x).Required("y", y))
-		{
-		}
-
-		[JsonIgnore]
-		public bool? ExactBounds { get => Q<bool?>("exact_bounds"); set => Q("exact_bounds", value); }
-
-		[JsonIgnore]
-		public int? Extent { get => Q<int?>("extent"); set => Q("extent", value); }
-
-		[JsonIgnore]
-		public int? GridPrecision { get => Q<int?>("grid_precision"); set => Q("grid_precision", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Global.SearchMvt.GridType? GridType { get => Q<Elastic.Clients.Elasticsearch.Global.SearchMvt.GridType?>("grid_type"); set => Q("grid_type", value); }
-
-		[JsonIgnore]
-		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
-
-		[JsonPropertyName("aggs")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggs { get; set; }
-
-		[JsonPropertyName("fields")]
-		public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
-
-		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
-
-		[JsonPropertyName("runtime_mappings")]
-		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
-
-		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Global.Search.Sort? Sort { get; set; }
 	}
 
 	[ConvertAs(typeof(SearchShardsRequest))]
