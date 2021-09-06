@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
+    <PackageReference Include="JetBrains.Profiler.Api" Version="1.1.8" />
   </ItemGroup>
 
   <ItemGroup>
