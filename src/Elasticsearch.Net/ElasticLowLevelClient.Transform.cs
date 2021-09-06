@@ -88,6 +88,19 @@ namespace Elasticsearch.Net.Specification.TransformApi
 		[MapsApi("transform.get_transform_stats", "transform_id")]
 		public Task<TResponse> GetStatsAsync<TResponse>(string transformId, GetTransformStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_transform/{transformId:transformId}/_stats"), ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /_transform/{transform_id}/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html</para></summary>
+		///<param name = "transformId">The id of the transform to preview.</param>
+		///<param name = "body">The definition for the transform to preview</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse Preview<TResponse>(string transformId, PostData body, PreviewTransformRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"_transform/{transformId:transformId}/_preview"), body, RequestParams(requestParameters));
+		///<summary>POST on /_transform/{transform_id}/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html</para></summary>
+		///<param name = "transformId">The id of the transform to preview.</param>
+		///<param name = "body">The definition for the transform to preview</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("transform.preview_transform", "transform_id, body")]
+		public Task<TResponse> PreviewAsync<TResponse>(string transformId, PostData body, PreviewTransformRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_transform/{transformId:transformId}/_preview"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_transform/_preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html</para></summary>
 		///<param name = "body">The definition for the transform to preview</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
