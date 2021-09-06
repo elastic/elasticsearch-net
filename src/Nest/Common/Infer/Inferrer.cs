@@ -13,7 +13,7 @@ namespace Nest
 			elasticsearchClientSettings.ThrowIfNull(nameof(elasticsearchClientSettings));
 			_elasticsearchClientSettings = elasticsearchClientSettings;
 			//IdResolver = new IdResolver(elasticsearchClientSettings);
-			//IndexNameResolver = new IndexNameResolver(elasticsearchClientSettings);
+			IndexNameResolver = new IndexNameResolver(elasticsearchClientSettings);
 			//RelationNameResolver = new RelationNameResolver(connectionSettings);
 			//FieldResolver = new FieldResolver(elasticsearchClientSettings);
 			//RoutingResolver = new RoutingResolver(connectionSettings, IdResolver);
@@ -37,7 +37,7 @@ namespace Nest
 		//private FieldResolver FieldResolver { get; }
 		//private IdResolver IdResolver { get; }
 
-		//private IndexNameResolver IndexNameResolver { get; }
+		private IndexNameResolver IndexNameResolver { get; }
 		//private RelationNameResolver RelationNameResolver { get; }
 		//private RoutingResolver RoutingResolver { get; }
 
@@ -49,7 +49,7 @@ namespace Nest
 
 		//public string IndexName<T>() where T : class => IndexNameResolver.Resolve<T>();
 
-		//public string IndexName(IndexName index) => IndexNameResolver.Resolve(index);
+		public string IndexName(IndexName index) => IndexNameResolver.Resolve(index);
 
 		//public string Id<T>(T instance) where T : class => IdResolver.Resolve(instance);
 
@@ -62,5 +62,53 @@ namespace Nest
 		//public string Routing<T>(T document) => RoutingResolver.Resolve(document);
 
 		//public string Routing(Type type, object instance) => RoutingResolver.Resolve(type, instance);
+	}
+
+	public class IndexNameResolver
+	{
+		private readonly IElasticsearchClientSettings _connectionSettings;
+
+		public IndexNameResolver(IElasticsearchClientSettings connectionSettings)
+		{
+			connectionSettings.ThrowIfNull(nameof(connectionSettings));
+			_connectionSettings = connectionSettings;
+		}
+
+		public string Resolve<T>() where T : class => Resolve(typeof(T));
+
+		public string Resolve(IndexName i)
+		{
+			if (string.IsNullOrEmpty(i?.Name))
+				return PrefixClusterName(i, Resolve(i?.Type));
+
+			ValidateIndexName(i.Name);
+			return PrefixClusterName(i, i.Name);
+		}
+
+		public string Resolve(Type type)
+		{
+			var indexName = _connectionSettings.DefaultIndex;
+			var defaultIndices = _connectionSettings.DefaultIndices;
+			if (defaultIndices != null && type != null)
+			{
+				if (defaultIndices.TryGetValue(type, out var value) && !string.IsNullOrEmpty(value))
+					indexName = value;
+			}
+			ValidateIndexName(indexName);
+			return indexName;
+		}
+
+		private static string PrefixClusterName(IndexName i, string name) => i.Cluster.IsNullOrEmpty() ? name : $"{i.Cluster}:{name}";
+
+		// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
+		private static void ValidateIndexName(string indexName)
+		{
+			if (string.IsNullOrWhiteSpace(indexName))
+				throw new ArgumentException(
+					"Index name is null for the given type and no default index is set. "
+					+ "Map an index name using ConnectionSettings.DefaultMappingFor<TDocument>() "
+					+ "or set a default index using ConnectionSettings.DefaultIndex()."
+				);
+		}
 	}
 }

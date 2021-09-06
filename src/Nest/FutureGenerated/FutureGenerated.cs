@@ -11,29 +11,32 @@ namespace Nest
 		public string Key => Value;
 	}
 
-	// This is an incomplete stub implementation
-	public partial class Indices
+	// This is an incomplete stub implementation and should really be a struct
+	public partial class Indices : IUrlParameter
 	{
 		public static readonly Indices All = new("_all");
 
-		// TODO: Would a HashSet make more sense to avoid repeated values?
 		private readonly List<IndexName> _indices = new();
 
 		internal Indices(IndexName index) => _indices.Add(index);
 
-		internal Indices(IEnumerable<IndexName> indices)
+		public Indices(IEnumerable<IndexName> indices)
 		{
 			indices.ThrowIfEmpty(nameof(indices));
 			_indices.AddRange(indices);
 		}
 
-		internal Indices(IEnumerable<string> indices)
+		public Indices(IEnumerable<string> indices)
 		{
 			indices.ThrowIfEmpty(nameof(indices));
 			_indices.AddRange(indices.Select(s => (IndexName)s));
 		}
 
+		public IReadOnlyCollection<IndexName> Values => _indices.ToArray();
+
 		public static Indices Parse(string names) => names.IsNullOrEmptyCommaSeparatedList(out var list) ? null : new Indices(list);
+
+		public static Indices Single(string index) => new Indices((IndexName)index);
 
 		public static implicit operator Indices(string names) => Parse(names);
 
@@ -48,6 +51,43 @@ namespace Nest
 			return string.Join(",", indices);
 		}
 	}
+
+	//public partial struct IndicesList : IUrlParameter
+	//{
+	//	//public static readonly IndicesList All = new("_all");
+
+	//	private readonly List<IndexName> _indices = new();
+
+	//	internal IndicesList(IndexName index) => _indices.Add(index);
+
+	//	public IndicesList(IEnumerable<IndexName> indices)
+	//	{
+	//		indices.ThrowIfEmpty(nameof(indices));
+
+	//		// De-duplicating during creation avoids cost when accessing the values.
+	//		foreach (var index in indices)
+	//			if (!_indices.Contains(index))
+	//				_indices.Add(index);
+	//	}
+
+	//	public IndicesList(string[] indices)
+	//	{
+	//		indices.ThrowIfEmpty(nameof(indices));
+
+	//		foreach (var index in indices)
+	//			if (!_indices.Contains(index))
+	//				_indices.Add(index);
+	//	}
+
+	//	public IReadOnlyCollection<IndexName> Values => _indices;
+
+	//	public static IndicesList Parse(string names) => names.IsNullOrEmptyCommaSeparatedList(out var list) ? null : new IndicesList(list);
+
+	//	public static implicit operator IndicesList(string names) => Parse(names);
+	//}
+
+	//public partial struct IndicesList { string IUrlParameter.GetString(ITransportConfiguration settings) => ""; }
+
 
 	public abstract partial class PlainRequestBase<TParameters>
 	{
@@ -225,7 +265,7 @@ namespace Nest
 		internal long Value { get; }
 	}
 
-		//public class Types : IUrlParameter
+	//public class Types : IUrlParameter
 	//{
 	//	public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	//}
