@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Nest;
-using Nest.Aggregations;
-using Nest.Cluster;
-using Nest.IndexManagement;
-using Nest.Mapping;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Aggregations;
+using Elastic.Clients.Elasticsearch.Cluster;
+using Elastic.Clients.Elasticsearch.IndexManagement;
+using Elastic.Clients.Elasticsearch.Mapping;
 
 namespace Playground
 {
@@ -62,7 +62,7 @@ namespace Playground
 
 			// Index a document
 			var indexResponse =
-				await client.IndexAsync(new IndexRequest<Person>(indexName, new Nest.Id("1"))
+				await client.IndexAsync(new IndexRequest<Person>(indexName, new Id("1"))
 				{
 					Document = new Person("Steve") { Age = 36, Email = "test@example.com" }
 				});
@@ -172,7 +172,7 @@ namespace Playground
 				throw new Exception($"Failed to delete document with ID {indexResponse.Id}");
 
 			// Delete index
-			var deleteIndexResponse = await client.IndexManagement.DeleteAsync(new Nest.IndexManagement.DeleteRequest(indexName));
+			var deleteIndexResponse = await client.IndexManagement.DeleteAsync(new Elastic.Clients.Elasticsearch.IndexManagement.DeleteRequest(indexName));
 
 			if (!deleteIndexResponse.IsValid)
 				throw new Exception($"Failed to delete index {indexName}");

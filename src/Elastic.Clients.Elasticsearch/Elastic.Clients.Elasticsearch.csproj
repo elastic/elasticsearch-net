@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Elastic.Clients.Elasticsearch</PackageId>
+    <Title>Elastic.Clients.Elasticsearch - Elasticsearch .NET high level client</Title>
+    <PackageTags>elasticsearch;elastic;search;lucene;nest</PackageTags>
+    <Description>
+      Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and 
+      responses. Uses and exposes Elasticsearch.Net.
+    </Description>
+  </PropertyGroup>
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TargetFrameworks>netstandard2.0;net461;netstandard2.1;netcoreapp3.1;net5.0</TargetFrameworks>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>annotations</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\elastic-transport-net\src\Elastic.Transport\Elastic.Transport.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Tests" Key="$(ExposedPublicKey)" />
+    <InternalsVisibleTo Include="Tests.Domain" Key="$(ExposedPublicKey)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="OneOf\" />
+  </ItemGroup>
+</Project>
