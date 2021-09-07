@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 
 namespace Tests.Core.Client
 {

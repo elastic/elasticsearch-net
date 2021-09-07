@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		public bool Succeeded
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Query.Column>? Columns
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		public string? Cursor
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Query.Row> Rows
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		public IReadOnlyCollection<Dictionary<Elastic.Clients.Elasticsearch.Field, string>> Fields
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		public long Size
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -100,7 +100,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		public Elastic.Clients.Elasticsearch.Global.Search.Sort Sort
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -111,7 +111,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		public OneOf<bool, Fields, Global.Search.SourceFilter> Source
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

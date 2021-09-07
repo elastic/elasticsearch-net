@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public Elastic.Clients.Elasticsearch.ErrorCause? Error
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public bool? ForcedRefresh
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public Elastic.Clients.Elasticsearch.InlineGet<Dictionary<string, object>>? Get
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public string Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public long? PrimaryTerm
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public string? Result
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public Elastic.Clients.Elasticsearch.SequenceNumber? SeqNo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public int Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public string? Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -152,7 +152,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -166,7 +166,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public Elastic.Clients.Elasticsearch.Global.Bulk.CreateResponseItem? Create
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -177,7 +177,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public Elastic.Clients.Elasticsearch.Global.Bulk.DeleteResponseItem? Delete
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -188,7 +188,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public Elastic.Clients.Elasticsearch.Global.Bulk.IndexResponseItem? Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -199,7 +199,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		public Elastic.Clients.Elasticsearch.Global.Bulk.UpdateResponseItem? Update
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

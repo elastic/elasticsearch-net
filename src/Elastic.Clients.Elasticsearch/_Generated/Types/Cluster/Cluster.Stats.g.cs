@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> AnalyzerTypes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> BuiltInAnalyzers
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> BuiltInCharFilters
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> BuiltInFilters
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> BuiltInTokenizers
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> FilterTypes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> TokenizerTypes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long AvailableInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long FreeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -132,7 +132,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long TotalInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.CharFilterTypes Analysis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.CompletionStats Completion
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.DocStats Docs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -190,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.FielddataStats Fielddata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypesMappings Mappings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -212,7 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.QueryCacheStats QueryCache
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -223,7 +223,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.SegmentsStats Segments
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -234,7 +234,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterIndicesShards Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -245,7 +245,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.StoreStats Store
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -256,7 +256,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.IndicesVersions>? Versions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -270,7 +270,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterIndicesShardsIndex? Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -281,7 +281,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public double? Primaries
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -292,7 +292,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public double? Replication
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -303,7 +303,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public double? Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -317,7 +317,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterShardMetrics Primaries
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -328,7 +328,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterShardMetrics Replication
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -339,7 +339,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterShardMetrics Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -353,7 +353,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int NumberOfPipelines
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -364,7 +364,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterProcessor> ProcessorStats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -378,7 +378,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long MaxUptimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -389,7 +389,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterJvmMemory Mem
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -400,7 +400,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long Threads
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -411,7 +411,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterJvmVersion> Versions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -425,7 +425,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long HeapMaxInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -436,7 +436,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long HeapUsedInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -450,7 +450,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public bool BundledJdk
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -461,7 +461,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -472,7 +472,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public bool UsingBundledJdk
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -483,7 +483,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -494,7 +494,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public string VmName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -505,7 +505,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public string VmVendor
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -516,7 +516,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.VersionString VmVersion
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -530,7 +530,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Dictionary<string, int> HttpTypes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -541,7 +541,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Dictionary<string, int> TransportTypes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -555,7 +555,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int CoordinatingOnly
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -566,7 +566,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Data
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -577,7 +577,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int DataCold
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -588,7 +588,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int DataContent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -599,7 +599,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int? DataFrozen
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -610,7 +610,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int DataHot
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -621,7 +621,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int DataWarm
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -632,7 +632,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Ingest
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -643,7 +643,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Master
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -654,7 +654,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Ml
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -665,7 +665,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int RemoteClusterClient
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -676,7 +676,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -687,7 +687,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Transform
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -698,7 +698,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int VotingOnly
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -712,7 +712,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterNodeCount Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -723,7 +723,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Dictionary<string, int> DiscoveryTypes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -734,7 +734,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterFileSystem Fs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -745,7 +745,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterIngest Ingest
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -756,7 +756,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterJvm Jvm
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -767,7 +767,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterNetworkTypes NetworkTypes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -778,7 +778,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterOperatingSystem Os
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -789,7 +789,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.NodePackagingType> PackagingTypes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -800,7 +800,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats> Plugins
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -811,7 +811,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterProcess Process
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -822,7 +822,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.VersionString> Versions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -836,7 +836,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int AllocatedProcessors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -847,7 +847,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterOperatingSystemArchitecture>? Architectures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -858,7 +858,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int AvailableProcessors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -869,7 +869,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.OperatingSystemMemoryInfo Mem
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -880,7 +880,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterOperatingSystemName> Names
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -891,7 +891,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterOperatingSystemName> PrettyNames
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -905,7 +905,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public string Arch
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -916,7 +916,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -930,7 +930,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -941,7 +941,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -955,7 +955,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterProcessCpu Cpu
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -966,7 +966,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterProcessOpenFileDescriptors OpenFileDescriptors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -980,7 +980,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Percent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -994,7 +994,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long Avg
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1005,7 +1005,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long Max
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1016,7 +1016,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long Min
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1030,7 +1030,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1041,7 +1041,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long Current
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1052,7 +1052,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long Failed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1063,7 +1063,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long TimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1077,7 +1077,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public double Avg
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1088,7 +1088,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public double Max
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1099,7 +1099,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public double Min
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1113,7 +1113,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1124,7 +1124,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int IndexCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1135,7 +1135,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1146,7 +1146,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int? ScriptCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1160,7 +1160,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> FieldTypes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1171,7 +1171,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.RuntimeFieldTypes>? RuntimeFieldTypes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1185,7 +1185,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int IndexCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1196,7 +1196,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int PrimaryShardCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1207,7 +1207,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long TotalPrimaryBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1218,7 +1218,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1232,7 +1232,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1243,7 +1243,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public string Flavor
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1254,7 +1254,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1268,7 +1268,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long FreeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1279,7 +1279,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int FreePercent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1290,7 +1290,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long TotalInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1301,7 +1301,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public long UsedInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1312,7 +1312,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int UsedPercent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1326,7 +1326,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int CharsMax
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1337,7 +1337,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int CharsTotal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1348,7 +1348,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1359,7 +1359,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int DocMax
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1370,7 +1370,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int DocTotal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1381,7 +1381,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int IndexCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1392,7 +1392,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public IReadOnlyCollection<string> Lang
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1403,7 +1403,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int LinesMax
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1414,7 +1414,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int LinesTotal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1425,7 +1425,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1436,7 +1436,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int ScriptlessCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1447,7 +1447,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int ShadowedCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1458,7 +1458,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int SourceMax
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1469,7 +1469,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int SourceTotal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

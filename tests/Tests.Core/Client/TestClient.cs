@@ -1,4 +1,4 @@
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Configuration;
 using Tests.Core.Client.Settings;
 using Tests.Domain.Extensions;

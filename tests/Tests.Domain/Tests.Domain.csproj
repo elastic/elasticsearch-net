@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(SolutionRoot)\src\Nest\Nest.csproj" />
+    <ProjectReference Include="$(SolutionRoot)\src\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj" />
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Configuration\Tests.Configuration.csproj" />
   </ItemGroup>
 

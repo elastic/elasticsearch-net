@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool Closed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id CalendarId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string? Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -68,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ids JobIds
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool Deleted
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -132,7 +132,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string ModelMemoryEstimate
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeClassificationSummary? Classification
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeOutlierDetectionSummary? OutlierDetection
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeRegressionSummary? Regression
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -182,7 +182,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsFieldSelection> FieldSelection
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -193,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsMemoryEstimation MemoryEstimation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -207,7 +207,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool Flushed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -218,7 +218,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? LastFinalizedBucketEnd
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -232,7 +232,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id ForecastId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -246,7 +246,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.BucketSummary> Buckets
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -257,7 +257,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -271,7 +271,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -282,7 +282,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> Events
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -296,7 +296,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.GetCalendars.Calendar> Calendars
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -307,7 +307,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -321,7 +321,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Category> Categories
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -332,7 +332,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -346,7 +346,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -357,7 +357,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Datafeed> Datafeeds
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -371,7 +371,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -382,7 +382,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.DatafeedStats> Datafeeds
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -396,7 +396,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -407,7 +407,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSummary> DataFrameAnalytics
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -421,7 +421,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -432,7 +432,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.DataframeAnalytics> DataFrameAnalytics
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -446,7 +446,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -457,7 +457,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Filter> Filters
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -471,7 +471,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -482,7 +482,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.BucketInfluencer> Influencers
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -496,7 +496,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -507,7 +507,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Job> Jobs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -521,7 +521,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -532,7 +532,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.JobStats> Jobs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -546,7 +546,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -557,7 +557,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.ModelSnapshot> ModelSnapshots
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -571,7 +571,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -582,7 +582,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.OverallBucket> OverallBuckets
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -596,7 +596,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -607,7 +607,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Anomaly> Records
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -621,7 +621,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -632,7 +632,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.TrainedModelConfig> TrainedModelConfigs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -646,7 +646,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -657,7 +657,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.TrainedModelStats> TrainedModelStats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -671,7 +671,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.Info.Defaults Defaults
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -682,7 +682,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.Info.Limits Limits
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -693,7 +693,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.Info.NativeCode NativeCode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -704,7 +704,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool UpgradeMode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -718,7 +718,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool Opened
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -732,7 +732,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> Events
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -746,7 +746,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long BucketCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -757,7 +757,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int EarliestRecordTimestamp
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -768,7 +768,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long EmptyBucketCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -779,7 +779,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long InputBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -790,7 +790,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long InputFieldCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -801,7 +801,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long InputRecordCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -812,7 +812,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long InvalidDateCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -823,7 +823,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -834,7 +834,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int LastDataTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -845,7 +845,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int LatestRecordTimestamp
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -856,7 +856,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long MissingFieldCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -867,7 +867,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long OutOfOrderTimestampCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -878,7 +878,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long ProcessedFieldCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -889,7 +889,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long ProcessedRecordCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -900,7 +900,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long SparseBucketCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -914,7 +914,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<TDocument> Data
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -928,7 +928,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<Dictionary<Elastic.Clients.Elasticsearch.Field, string>> FeatureValues
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -942,7 +942,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id CalendarId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -953,7 +953,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string? Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -964,7 +964,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ids JobIds
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -978,7 +978,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id CalendarId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -989,7 +989,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1000,7 +1000,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ids JobIds
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1014,7 +1014,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer> Aggregations
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1025,7 +1025,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.ChunkingConfig ChunkingConfig
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1036,7 +1036,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id DatafeedId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1047,7 +1047,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig? DelayedDataCheckConfig
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1058,7 +1058,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Time Frequency
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1069,7 +1069,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<string> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1080,7 +1080,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DatafeedIndicesOptions? IndicesOptions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1091,7 +1091,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1102,7 +1102,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int MaxEmptySearches
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1113,7 +1113,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1124,7 +1124,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Time QueryDelay
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1135,7 +1135,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1146,7 +1146,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1157,7 +1157,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int ScrollSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1171,7 +1171,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool AllowLazyStart
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1182,7 +1182,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer Analysis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1193,7 +1193,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1204,7 +1204,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long CreateTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1215,7 +1215,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string? Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1226,7 +1226,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1237,7 +1237,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1248,7 +1248,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int MaxNumThreads
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1259,7 +1259,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string ModelMemoryLimit
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1270,7 +1270,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1281,7 +1281,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1295,7 +1295,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1306,7 +1306,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id FilterId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1317,7 +1317,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<string> Items
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1331,7 +1331,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool AllowLazyOpen
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1342,7 +1342,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig AnalysisConfig
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1353,7 +1353,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits AnalysisLimits
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1364,7 +1364,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Time? BackgroundPersistInterval
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1375,7 +1375,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.DateString CreateTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1386,7 +1386,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.CustomSettings? CustomSettings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1397,7 +1397,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long DailyModelSnapshotRetentionAfterDays
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1408,7 +1408,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DataDescription DataDescription
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1419,7 +1419,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.Datafeed? DatafeedConfig
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1430,7 +1430,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string? Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1441,7 +1441,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<string>? Groups
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1452,7 +1452,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1463,7 +1463,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string JobType
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1474,7 +1474,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string JobVersion
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1485,7 +1485,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1496,7 +1496,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id? ModelSnapshotId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1507,7 +1507,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long ModelSnapshotRetentionDays
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1518,7 +1518,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long? RenormalizationWindowDays
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1529,7 +1529,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string ResultsIndexName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1540,7 +1540,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long? ResultsRetentionDays
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1566,7 +1566,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.ModelSnapshot Model
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1584,7 +1584,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.NodeIds Node
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1595,7 +1595,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool Started
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1609,7 +1609,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.NodeId Node
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1623,7 +1623,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool Stopped
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1637,7 +1637,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool Stopped
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1651,7 +1651,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool AllowLazyStart
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1662,7 +1662,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer Analysis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1673,7 +1673,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1684,7 +1684,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long CreateTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1695,7 +1695,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string? Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1706,7 +1706,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1717,7 +1717,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1728,7 +1728,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int MaxNumThreads
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1739,7 +1739,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string ModelMemoryLimit
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1750,7 +1750,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1761,7 +1761,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1775,7 +1775,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1786,7 +1786,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id FilterId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1797,7 +1797,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<string> Items
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1811,7 +1811,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool AllowLazyOpen
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1822,7 +1822,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig AnalysisConfig
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1833,7 +1833,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits AnalysisLimits
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1844,7 +1844,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Time? BackgroundPersistInterval
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1855,7 +1855,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.EpochMillis CreateTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1866,7 +1866,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, string>? CustomSettings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1877,7 +1877,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long DailyModelSnapshotRetentionAfterDays
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1888,7 +1888,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.DataDescription DataDescription
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1899,7 +1899,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.Datafeed? DatafeedConfig
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1910,7 +1910,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string? Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1921,7 +1921,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.EpochMillis? FinishedTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1932,7 +1932,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IReadOnlyCollection<string>? Groups
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1943,7 +1943,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1954,7 +1954,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string JobType
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1965,7 +1965,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.VersionString JobVersion
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1976,7 +1976,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1987,7 +1987,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Id? ModelSnapshotId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1998,7 +1998,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long ModelSnapshotRetentionDays
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2009,7 +2009,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long? RenormalizationWindowDays
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2020,7 +2020,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.IndexName ResultsIndexName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2031,7 +2031,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public long? ResultsRetentionDays
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2045,7 +2045,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Ml.ModelSnapshot Model
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2059,7 +2059,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool Completed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2070,7 +2070,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.NodeId Node
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

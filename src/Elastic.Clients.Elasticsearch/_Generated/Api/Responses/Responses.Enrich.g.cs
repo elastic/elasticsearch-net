@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicy.ExecuteEnrichPolicyStatus Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public Elastic.Clients.Elasticsearch.TaskId? TaskId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.Summary> Policies
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.Stats.CoordinatorStats> CoordinatorStats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.Stats.ExecutingPolicy> ExecutingPolicies
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Configuration;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -21,7 +21,7 @@ namespace Tests.Framework.EndpointTests
 {
 	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: ExpectJsonTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
-		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
 		where TResponse : class, IResponse
 		where TInterface : class
 		where TDescriptor : class, TInterface
@@ -76,9 +76,8 @@ namespace Tests.Framework.EndpointTests
 		protected abstract LazyResponses ClientUsage();
 
 		protected LazyResponses Calls(
-			// TODO: Re-enable when ready
-			//Func<IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
-			//Func<IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
+			Func<IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
+			Func<IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
 			Func<IElasticClient, TInitializer, TResponse> request,
 			Func<IElasticClient, TInitializer, Task<TResponse>> requestAsync
 		) => new(async () =>

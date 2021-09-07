@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.ShardStats> Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.ErrorCause Exception
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.SequenceNumber FromSeqNo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public int Retries
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -91,7 +91,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public long BytesRead
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public long FailedReadRequests
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public long FailedWriteRequests
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.ErrorCause? FatalException
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -135,7 +135,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.VersionNumber FollowerAliasesVersion
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public long FollowerGlobalCheckpoint
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public string FollowerIndex
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.VersionNumber FollowerMappingVersion
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.SequenceNumber FollowerMaxSeqNo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -190,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.VersionNumber FollowerSettingsVersion
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.SequenceNumber LastRequestedSeqNo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -212,7 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public long LeaderGlobalCheckpoint
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -223,7 +223,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public string LeaderIndex
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -234,7 +234,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.SequenceNumber LeaderMaxSeqNo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -245,7 +245,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public long OperationsRead
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -256,7 +256,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public long OperationsWritten
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -267,7 +267,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public int OutstandingReadRequests
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -278,7 +278,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public int OutstandingWriteRequests
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -289,7 +289,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.ReadException> ReadExceptions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -300,7 +300,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public string RemoteCluster
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -311,7 +311,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public int ShardId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -322,7 +322,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public long SuccessfulReadRequests
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -333,7 +333,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public long SuccessfulWriteRequests
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -344,7 +344,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.EpochMillis TimeSinceLastReadMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -355,7 +355,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalReadRemoteExecTimeMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -366,7 +366,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalReadTimeMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -377,7 +377,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalWriteTimeMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -388,7 +388,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public long WriteBufferOperationCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -399,7 +399,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.ByteSize WriteBufferSizeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

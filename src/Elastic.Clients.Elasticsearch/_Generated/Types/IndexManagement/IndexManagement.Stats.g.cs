@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.BulkStats? Bulk
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.CompletionStats? Completion
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.DocStats? Docs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.FielddataStats? Fielddata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.FlushStats? Flush
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.GetStats? Get
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.IndexingStats? Indexing
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.MergesStats? Merges
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.QueryCacheStats? QueryCache
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.RecoveryStats? Recovery
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -140,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.RefreshStats? Refresh
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.RequestCacheStats? RequestCache
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -162,7 +162,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.SearchStats? Search
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -173,7 +173,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.SegmentsStats? Segments
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -184,7 +184,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.StoreStats? Store
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -195,7 +195,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.TranslogStats? Translog
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -206,7 +206,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.WarmerStats? Warmer
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -220,7 +220,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndexStats Primaries
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -231,7 +231,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardStats>>? Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -242,7 +242,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndexStats Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -253,7 +253,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.Uuid? Uuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -267,7 +267,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public int Generation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -278,7 +278,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -289,7 +289,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long NumDocs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -300,7 +300,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Dictionary<string, string> UserData
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -314,7 +314,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long? AverageSizeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -325,7 +325,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long? Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -336,7 +336,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public string Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -347,7 +347,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long? MaxSizeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -358,7 +358,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long? MinSizeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -369,7 +369,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long SizeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -383,7 +383,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -394,7 +394,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.SequenceNumber RetainingSeqNo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -405,7 +405,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public string Source
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -416,7 +416,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long Timestamp
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -430,7 +430,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public string DataPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -441,7 +441,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public bool IsCustomDataPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -452,7 +452,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public string StatePath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -466,7 +466,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long CacheCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -477,7 +477,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long CacheSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -488,7 +488,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long Evictions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -499,7 +499,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long HitCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -510,7 +510,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long MemorySizeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -521,7 +521,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long MissCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -532,7 +532,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long TotalCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -546,7 +546,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardLease> Leases
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -557,7 +557,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long PrimaryTerm
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -568,7 +568,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -582,7 +582,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public string Node
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -593,7 +593,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public bool Primary
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -604,7 +604,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public string? RelocatingNode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -615,7 +615,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardRoutingState State
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -629,7 +629,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long GlobalCheckpoint
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -640,7 +640,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public long LocalCheckpoint
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -651,7 +651,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.SequenceNumber MaxSeqNo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -665,7 +665,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.BulkStats? Bulk
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -676,7 +676,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardCommit Commit
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -687,7 +687,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.CompletionStats Completion
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -698,7 +698,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.DocStats Docs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -709,7 +709,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.FielddataStats Fielddata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -720,7 +720,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.FlushStats Flush
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -731,7 +731,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.GetStats Get
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -742,7 +742,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.IndexingStats Indexing
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -753,7 +753,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.MergesStats Merges
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -764,7 +764,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardQueryCache QueryCache
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -775,7 +775,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.RecoveryStats Recovery
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -786,7 +786,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.RefreshStats Refresh
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -797,7 +797,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.RequestCacheStats RequestCache
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -808,7 +808,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardRetentionLeases RetentionLeases
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -819,7 +819,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardRouting Routing
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -830,7 +830,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.SearchStats Search
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -841,7 +841,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.SegmentsStats Segments
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -852,7 +852,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardSequenceNumber SeqNo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -863,7 +863,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardPath ShardPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -874,7 +874,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.StoreStats Store
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -885,7 +885,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.TranslogStats Translog
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -896,7 +896,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.WarmerStats Warmer
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.Name Action
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.EpochMillis ActionTimeMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.Time Age
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.Name? FailedStep
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public int? FailedStepRetryCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public bool? IsAutoRetryableError
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.EpochMillis LifecycleDateMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public bool Managed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.Name Phase
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -140,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplainPhaseExecution PhaseExecution
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.EpochMillis PhaseTimeMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -162,7 +162,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.Name Policy
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -173,7 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.Name Step
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -184,7 +184,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Dictionary<string, object>? StepInfo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -195,7 +195,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.EpochMillis StepTimeMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -209,7 +209,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.EpochMillis ModifiedDateInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -220,7 +220,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.Name Policy
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -231,7 +231,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -245,7 +245,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplainProjectSummary Project
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -259,7 +259,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -270,7 +270,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		public bool Managed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

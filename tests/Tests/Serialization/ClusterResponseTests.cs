@@ -1,9 +1,8 @@
 using System.IO;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using FluentAssertions;
-using Nest;
-using Nest.Cluster;
-using Nest.Cluster.Health;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Cluster;
 
 namespace Tests.Serialization
 {

@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Elastic.Transport;
 using FluentAssertions;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Framework.Extensions;

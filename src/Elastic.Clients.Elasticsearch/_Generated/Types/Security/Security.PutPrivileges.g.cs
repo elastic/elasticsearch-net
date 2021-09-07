@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Security.PutPrivileges
 		public string? Application
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Security.PutPrivileges
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Security.PutPrivileges
 		public Elastic.Clients.Elasticsearch.Name? Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceCredentials
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.GetServiceCredentials.NodesCredentialsFileToken> FileTokens
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceCredentials
 		public Elastic.Clients.Elasticsearch.NodeStatistics Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceCredentials
 		public IReadOnlyCollection<string> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

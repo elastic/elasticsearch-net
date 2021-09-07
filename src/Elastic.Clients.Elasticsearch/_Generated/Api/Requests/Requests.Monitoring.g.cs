@@ -48,6 +48,6 @@ namespace Elastic.Clients.Elasticsearch.Monitoring
 		public string SystemApiVersion { get => Q<string>("system_api_version"); set => Q("system_api_version", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time Interval { get => Q<Elastic.Clients.Elasticsearch.Time>("interval"); set => Q("interval", value); }
+		public Elastic.Clients.Elasticsearch.TimeSpanTempReplacement Interval { get => Q<Elastic.Clients.Elasticsearch.TimeSpanTempReplacement>("interval"); set => Q("interval", value); }
 	}
 }

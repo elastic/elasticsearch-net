@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 		public bool Aggregatable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 		public Elastic.Clients.Elasticsearch.Indices? Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 		public Dictionary<string, IReadOnlyCollection<string>>? Meta
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 		public bool? MetadataField
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 		public Elastic.Clients.Elasticsearch.Indices? NonAggregatableIndices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 		public Elastic.Clients.Elasticsearch.Indices? NonSearchableIndices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 		public bool Searchable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -152,7 +152,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

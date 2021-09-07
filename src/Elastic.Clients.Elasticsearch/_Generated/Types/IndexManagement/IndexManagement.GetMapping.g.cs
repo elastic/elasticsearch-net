@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetMapping
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Item
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetMapping
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 

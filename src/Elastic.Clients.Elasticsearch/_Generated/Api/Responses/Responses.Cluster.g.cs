@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public string? AllocateExplanation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public string? AllocationDelay
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public long? AllocationDelayInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanAllocate
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanMoveToOtherNode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanRebalanceCluster
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationDecision>? CanRebalanceClusterDecisions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanRebalanceToOtherNode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationDecision>? CanRemainDecisions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -127,7 +127,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanRemainOnCurrentNode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.ClusterInfo? ClusterInfo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -149,7 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public string? ConfiguredDelay
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public long? ConfiguredDelayInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -171,7 +171,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.CurrentNode? CurrentNode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -182,7 +182,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public string CurrentState
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -193,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -204,7 +204,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public string? MoveExplanation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.NodeAllocationExplanation>? NodeAllocationDecisions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -226,7 +226,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public string? Note
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -237,7 +237,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool Primary
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -248,7 +248,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public string? RebalanceExplanation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -259,7 +259,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public string? RemainingDelay
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -270,7 +270,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public long? RemainingDelayInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -281,7 +281,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int Shard
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -292,7 +292,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.UnassignedInformation? UnassignedInfo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -318,7 +318,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate> ComponentTemplates
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -332,7 +332,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Dictionary<string, object>? Defaults
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -343,7 +343,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Dictionary<string, object> Persistent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -354,7 +354,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Dictionary<string, object> Transient
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -368,7 +368,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int ActivePrimaryShards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -379,7 +379,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int ActiveShards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -390,7 +390,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Percentage ActiveShardsPercentAsNumber
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -401,7 +401,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public string ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -412,7 +412,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int DelayedUnassignedShards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -423,7 +423,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.Health.IndexHealthStats>? Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -434,7 +434,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int InitializingShards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -445,7 +445,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int NumberOfDataNodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -456,7 +456,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int NumberOfInFlightFetch
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -467,7 +467,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int NumberOfNodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -478,7 +478,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int NumberOfPendingTasks
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -489,7 +489,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int RelocatingShards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -500,7 +500,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Health Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -511,7 +511,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.EpochMillis TaskMaxWaitingInQueueMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -522,7 +522,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool TimedOut
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -533,7 +533,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int UnassignedShards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -547,7 +547,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.PendingTasks.PendingTask> Tasks
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -569,7 +569,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool Acknowledged
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -580,7 +580,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Dictionary<string, object> Persistent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -591,7 +591,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Dictionary<string, object> Transient
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -609,7 +609,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Reroute.RerouteExplanation>? Explanations
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -620,7 +620,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.Reroute.RerouteState State
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -634,7 +634,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.State.ClusterStateBlocks? Blocks
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -645,7 +645,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -656,7 +656,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Uuid ClusterUuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -667,7 +667,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public string? MasterNode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -678,7 +678,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateMetadata? Metadata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -689,7 +689,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Dictionary<Elastic.Clients.Elasticsearch.NodeName, Elastic.Clients.Elasticsearch.NodeAttributes>? Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -700,7 +700,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateRoutingNodes? RoutingNodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -711,7 +711,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Dictionary<string, Elastic.Clients.Elasticsearch.EmptyObject>? RoutingTable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -722,7 +722,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateDeletedSnapshots? SnapshotDeletions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -733,7 +733,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateSnapshots? Snapshots
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -744,7 +744,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public IReadOnlyCollection<string>? State
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -755,7 +755,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Uuid? StateUuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -766,7 +766,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -780,7 +780,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -791,7 +791,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Uuid ClusterUuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -802,7 +802,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterIndices Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -813,7 +813,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterNodes Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -824,7 +824,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStatus Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -835,7 +835,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public long Timestamp
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

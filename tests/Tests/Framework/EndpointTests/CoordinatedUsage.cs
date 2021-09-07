@@ -6,8 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Nest;
-using Nest.Global;
+using Elastic.Clients.Elasticsearch;
 using Tests.Configuration;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -19,11 +18,11 @@ namespace Tests.Framework.EndpointTests
 	{
 		public static readonly IResponse VoidResponse = new PingResponse();
 
-		private readonly INestTestCluster _cluster;
+		private readonly ITestCluster _cluster;
 
 		private readonly bool _testOnlyOne;
 
-		public CoordinatedUsage(INestTestCluster cluster, EndpointUsage usage, string prefix = null, bool testOnlyOne = false)
+		public CoordinatedUsage(ITestCluster cluster, EndpointUsage usage, string prefix = null, bool testOnlyOne = false)
 		{
 			_cluster = cluster;
 			_testOnlyOne = testOnlyOne;

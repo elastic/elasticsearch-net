@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public Elastic.Clients.Elasticsearch.Rollup.GetJobs.RollupJobConfiguration Config
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public Elastic.Clients.Elasticsearch.Rollup.GetJobs.RollupJobStats Stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public Elastic.Clients.Elasticsearch.Rollup.GetJobs.RollupJobStatus Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public string Cron
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public Elastic.Clients.Elasticsearch.Rollup.Groupings Groups
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public string IndexPattern
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric> Metrics
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public long PageSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -132,7 +132,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public Elastic.Clients.Elasticsearch.IndexName RollupIndex
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public Elastic.Clients.Elasticsearch.Time Timeout
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public long DocumentsProcessed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public long IndexFailures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public long IndexTimeInMs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -190,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public long IndexTotal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public long PagesProcessed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -212,7 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public long ProcessingTimeInMs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -223,7 +223,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public long ProcessingTotal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -234,7 +234,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public long RollupsIndexed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -245,7 +245,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public long SearchFailures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -256,7 +256,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public long SearchTimeInMs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -267,7 +267,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public long SearchTotal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -278,7 +278,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public long TriggerCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -292,7 +292,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public Dictionary<string, object>? CurrentPosition
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -303,7 +303,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public Elastic.Clients.Elasticsearch.Rollup.GetJobs.IndexingJobState JobState
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -314,7 +314,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 		public bool? UpgradedDocId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

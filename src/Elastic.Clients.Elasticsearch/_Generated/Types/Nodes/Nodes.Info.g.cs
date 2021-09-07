@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoAggregation>? Aggregations
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Dictionary<string, string> Attributes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string BuildFlavor
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string BuildHash
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string BuildType
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Host Host
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoHttp? Http
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngest? Ingest
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Ip Ip
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeJvmInfo? Jvm
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -140,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats>? Modules
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -162,7 +162,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoNetwork? Network
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -173,7 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeOperatingSystemInfo? Os
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -184,7 +184,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats>? Plugins
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -195,7 +195,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeProcessInfo? Process
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -206,7 +206,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.NodeRoles Roles
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -217,7 +217,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettings? Settings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -228,7 +228,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Info.NodeThreadPoolInfo>? ThreadPool
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -239,7 +239,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public long? TotalIndexingBuffer
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -250,7 +250,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.ByteSize? TotalIndexingBufferInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -261,7 +261,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoTransport? Transport
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -272,7 +272,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.TransportAddress TransportAddress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -283,7 +283,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -297,7 +297,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string DestructiveRequiresName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -311,7 +311,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public IReadOnlyCollection<string> Types
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -325,7 +325,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string MemoryLock
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -339,7 +339,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -353,7 +353,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string SeedHosts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -367,7 +367,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public IReadOnlyCollection<string> BoundAddress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -378,7 +378,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.ByteSize? MaxContentLength
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -389,7 +389,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public long MaxContentLengthInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -400,7 +400,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string PublishAddress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -414,7 +414,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestProcessor> Processors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -428,7 +428,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -442,7 +442,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.ByteSize? DirectMax
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -453,7 +453,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public long DirectMaxInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -464,7 +464,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.ByteSize? HeapInit
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -475,7 +475,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public long HeapInitInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -486,7 +486,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.ByteSize? HeapMax
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -497,7 +497,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public long HeapMaxInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -508,7 +508,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.ByteSize? NonHeapInit
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -519,7 +519,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public long NonHeapInitInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -530,7 +530,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.ByteSize? NonHeapMax
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -541,7 +541,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public long NonHeapMaxInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -555,7 +555,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -566,7 +566,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public long TotalInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -580,7 +580,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoNetworkInterface PrimaryInterface
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -591,7 +591,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int RefreshInterval
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -605,7 +605,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Address
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -616,7 +616,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string MacAddress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -627,7 +627,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -641,7 +641,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string CacheSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -652,7 +652,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int CacheSizeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -663,7 +663,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int CoresPerSocket
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -674,7 +674,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int Mhz
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -685,7 +685,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Model
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -696,7 +696,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int TotalCores
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -707,7 +707,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int TotalSockets
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -718,7 +718,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Vendor
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -732,7 +732,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public IReadOnlyCollection<string>? Data
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -743,7 +743,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Home
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -754,7 +754,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Logs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -765,7 +765,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public IReadOnlyCollection<string> Repo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -779,7 +779,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoRepositoriesUrl Url
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -793,7 +793,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string AllowedUrls
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -807,7 +807,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string AllowedTypes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -818,7 +818,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string DisableMaxCompilationsRate
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -832,7 +832,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSearchRemote Remote
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -846,7 +846,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Connect
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -860,7 +860,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoAction? Action
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -871,7 +871,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoBootstrap? Bootstrap
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -882,7 +882,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoClient Client
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -893,7 +893,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsCluster Cluster
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -904,7 +904,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoDiscover? Discovery
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -915,7 +915,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsHttp Http
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -926,7 +926,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsNetwork? Network
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -937,7 +937,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsNode Node
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -948,7 +948,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoPath Path
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -959,7 +959,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoRepositories? Repositories
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -970,7 +970,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoScript? Script
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -981,7 +981,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSearch? Search
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -992,7 +992,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsTransport Transport
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1003,7 +1003,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpack? Xpack
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1017,7 +1017,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsClusterElection Election
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1028,7 +1028,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string? InitialMasterNodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1039,7 +1039,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1050,7 +1050,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? Routing
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1064,7 +1064,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Name Strategy
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1078,7 +1078,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Union<bool, string>? Compression
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1089,7 +1089,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Union<int, string>? Port
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1100,7 +1100,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Union<string, Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsHttpType> Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1111,7 +1111,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string? TypeDefault
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1125,7 +1125,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Default
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1139,7 +1139,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Host Host
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1153,7 +1153,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Dictionary<string, object> Attr
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1164,7 +1164,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string? MaxLocalStorageNodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1175,7 +1175,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1189,7 +1189,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsTransportFeatures? Features
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1200,7 +1200,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Union<string, Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsTransportType> Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1211,7 +1211,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string? TypeDefault
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1225,7 +1225,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string XPack
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1239,7 +1239,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Default
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1253,7 +1253,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public IReadOnlyCollection<string> BoundAddress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1264,7 +1264,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Dictionary<string, string> Profiles
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1275,7 +1275,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string PublishAddress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1289,7 +1289,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackLicense? License
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1300,7 +1300,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Dictionary<string, object>? Notification
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1311,7 +1311,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurity Security
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1325,7 +1325,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackLicenseType SelfGenerated
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1339,7 +1339,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1353,7 +1353,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurityAuthc? Authc
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1364,7 +1364,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Enabled
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1375,7 +1375,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecuritySsl Http
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1386,7 +1386,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecuritySsl Transport
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1400,7 +1400,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurityAuthcRealms Realms
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1411,7 +1411,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurityAuthcToken Token
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1425,7 +1425,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurityAuthcRealmsStatus>? File
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1436,7 +1436,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurityAuthcRealmsStatus>? Native
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1447,7 +1447,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpackSecurityAuthcRealmsStatus>? Pki
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1461,7 +1461,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string? Enabled
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1472,7 +1472,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Order
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1486,7 +1486,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Enabled
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1500,7 +1500,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Dictionary<string, string> Ssl
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1514,7 +1514,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public bool BundledJdk
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1525,7 +1525,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public IReadOnlyCollection<string> GcCollectors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1536,7 +1536,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public IReadOnlyCollection<string> InputArguments
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1547,7 +1547,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoJvmMemory Mem
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1558,7 +1558,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public IReadOnlyCollection<string> MemoryPools
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1569,7 +1569,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int Pid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1580,7 +1580,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public long StartTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1591,7 +1591,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public bool UsingBundledJdk
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1602,7 +1602,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Union<bool, string>? UsingCompressedOrdinaryObjectPointers
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1613,7 +1613,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1624,7 +1624,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Name VmName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1635,7 +1635,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string VmVendor
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1646,7 +1646,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.VersionString VmVersion
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1660,7 +1660,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int? AllocatedProcessors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1671,7 +1671,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Arch
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1682,7 +1682,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int AvailableProcessors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1693,7 +1693,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoOSCPU? Cpu
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1704,7 +1704,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoMemory? Mem
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1715,7 +1715,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1726,7 +1726,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Name PrettyName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1737,7 +1737,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int RefreshIntervalInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1748,7 +1748,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoMemory? Swap
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1759,7 +1759,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1773,7 +1773,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public long Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1784,7 +1784,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public bool Mlockall
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1795,7 +1795,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public long RefreshIntervalInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1809,7 +1809,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int? Core
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1820,7 +1820,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string? KeepAlive
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1831,7 +1831,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int? Max
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1842,7 +1842,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int QueueSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1853,7 +1853,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public int? Size
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1864,7 +1864,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

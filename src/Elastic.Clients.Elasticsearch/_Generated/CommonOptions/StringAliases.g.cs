@@ -714,27 +714,27 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	[JsonConverter(typeof(StringAliasConverter<Time>))]
-	public readonly partial struct Time : IComparable<Time>, IEquatable<Time>
+	[JsonConverter(typeof(StringAliasConverter<TimeSpanTempReplacement>))]
+	public readonly partial struct TimeSpanTempReplacement : IComparable<TimeSpanTempReplacement>, IEquatable<TimeSpanTempReplacement>
 	{
-		public Time(string time) => Value = time;
+		public TimeSpanTempReplacement(string timeSpanTempReplacement) => Value = timeSpanTempReplacement;
 		public string Value { get; }
 
 		public override int GetHashCode() => Value.GetHashCode();
 		public override string ToString() => Value;
-		public override bool Equals(object obj) => ReferenceEquals(null, obj) ? false : obj is Time other && Equals(other);
-		public bool Equals(Time other) => this.Value.Equals(other.Value);
-		public int CompareTo(Time other) => Value.CompareTo(other.Value);
-		public static bool operator ==(Time a, Time b) => a.CompareTo(b) == 0;
-		public static bool operator !=(Time a, Time b) => !(a == b);
-		public static implicit operator string(Time time) => time.Value;
-		public static implicit operator Time(string time) => new(time);
-		public static bool TryParse(string value, out Time time)
+		public override bool Equals(object obj) => ReferenceEquals(null, obj) ? false : obj is TimeSpanTempReplacement other && Equals(other);
+		public bool Equals(TimeSpanTempReplacement other) => this.Value.Equals(other.Value);
+		public int CompareTo(TimeSpanTempReplacement other) => Value.CompareTo(other.Value);
+		public static bool operator ==(TimeSpanTempReplacement a, TimeSpanTempReplacement b) => a.CompareTo(b) == 0;
+		public static bool operator !=(TimeSpanTempReplacement a, TimeSpanTempReplacement b) => !(a == b);
+		public static implicit operator string(TimeSpanTempReplacement timeSpanTempReplacement) => timeSpanTempReplacement.Value;
+		public static implicit operator TimeSpanTempReplacement(string timeSpanTempReplacement) => new(timeSpanTempReplacement);
+		public static bool TryParse(string value, out TimeSpanTempReplacement timeSpanTempReplacement)
 		{
-			time = default;
+			timeSpanTempReplacement = default;
 			if (string.IsNullOrWhiteSpace(value))
 				return false;
-			time = new Time(value.Trim());
+			timeSpanTempReplacement = new TimeSpanTempReplacement(value.Trim());
 			return true;
 		}
 	}

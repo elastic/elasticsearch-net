@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Migration
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Migration.Deprecations.Deprecation> ClusterSettings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Migration
 		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Migration.Deprecations.Deprecation>> IndexSettings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Migration
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Migration.Deprecations.Deprecation> MlSettings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Migration
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Migration.Deprecations.Deprecation> NodeSettings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

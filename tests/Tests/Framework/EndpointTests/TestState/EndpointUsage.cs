@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bogus;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Configuration;
 using Tests.Core.Client;
 

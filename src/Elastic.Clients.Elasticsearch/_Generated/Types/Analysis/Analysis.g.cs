@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool PreserveOriginal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.VersionString? Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -69,7 +69,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> TokenizeOnChars
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> CommonWords
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string CommonWordsPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool IgnoreCase
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool QueryMode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string HyphenationPatternsPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MaxSubwordSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -152,7 +152,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MinSubwordSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -163,7 +163,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MinWordSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -174,7 +174,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool OnlyLongestMatch
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -185,7 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> WordList
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -196,7 +196,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string WordListPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -210,7 +210,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> Filter
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -221,7 +221,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Script Script
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -235,7 +235,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Delimiter
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -246,7 +246,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding Encoding
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -260,7 +260,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MaxGram
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -271,7 +271,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MinGram
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -282,7 +282,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide Side
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -296,7 +296,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string CustomTokenChars
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -307,7 +307,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MaxGram
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -318,7 +318,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MinGram
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -329,7 +329,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -343,7 +343,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> Articles
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -354,7 +354,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool ArticlesCase
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -368,7 +368,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MaxOutputSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -379,7 +379,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Separator
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -397,7 +397,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool Dedup
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -408,7 +408,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Dictionary
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -419,7 +419,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Locale
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -430,7 +430,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool LongestOnly
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -452,7 +452,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode Mode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -463,7 +463,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> Types
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -477,7 +477,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> KeepWords
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -488,7 +488,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool KeepWordsCase
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -499,7 +499,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string KeepWordsPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -513,7 +513,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool IgnoreCase
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -524,7 +524,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> Keywords
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -535,7 +535,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string KeywordsPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -546,7 +546,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string KeywordsPattern
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -560,7 +560,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int BufferSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -574,7 +574,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int Max
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -585,7 +585,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int Min
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -603,7 +603,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool ConsumeAllTokens
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -614,7 +614,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MaxTokenCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -628,7 +628,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Language
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -646,7 +646,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> Mappings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -657,7 +657,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string MappingsPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -671,7 +671,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> Filters
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -682,7 +682,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool PreserveOriginal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -696,7 +696,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MaxGram
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -707,7 +707,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MinGram
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -721,7 +721,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string CustomTokenChars
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -732,7 +732,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MaxGram
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -743,7 +743,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MinGram
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -754,7 +754,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -768,7 +768,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> Stoptags
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -782,7 +782,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode DecompoundMode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -793,7 +793,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool DiscardPunctuation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -804,7 +804,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string UserDictionary
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -815,7 +815,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> UserDictionaryRules
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -829,7 +829,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int BufferSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -840,7 +840,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Delimiter
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -851,7 +851,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Replacement
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -862,7 +862,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool Reverse
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -873,7 +873,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int Skip
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -887,7 +887,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> Patterns
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -898,7 +898,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool PreserveOriginal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -912,7 +912,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Flags
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -923,7 +923,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Pattern
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -934,7 +934,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Replacement
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -952,7 +952,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Script Script
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -974,7 +974,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string FillerToken
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -985,7 +985,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MaxShingleSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -996,7 +996,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MinShingleSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1007,7 +1007,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool OutputUnigrams
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1018,7 +1018,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool OutputUnigramsIfNoShingles
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1029,7 +1029,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string TokenSeparator
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1043,7 +1043,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1057,7 +1057,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MaxTokenLength
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1071,7 +1071,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> Rules
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1082,7 +1082,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string RulesPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1096,7 +1096,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Language
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1110,7 +1110,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool? IgnoreCase
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1121,7 +1121,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool? RemoveTrailing
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1132,7 +1132,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords Stopwords
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1143,7 +1143,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? StopwordsPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1157,7 +1157,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool Expand
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1168,7 +1168,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.SynonymFormat Format
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1179,7 +1179,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool Lenient
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1190,7 +1190,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> Synonyms
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1201,7 +1201,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string SynonymsPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1212,7 +1212,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Tokenizer
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1223,7 +1223,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool Updateable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1237,7 +1237,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool Expand
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1248,7 +1248,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.SynonymFormat Format
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1259,7 +1259,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool Lenient
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1270,7 +1270,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> Synonyms
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1281,7 +1281,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string SynonymsPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1292,7 +1292,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Tokenizer
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1303,7 +1303,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool Updateable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1317,7 +1317,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1328,7 +1328,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.VersionString? Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1342,7 +1342,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1353,7 +1353,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.VersionString? Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1371,7 +1371,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int Length
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1385,7 +1385,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MaxTokenLength
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1399,7 +1399,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool OnlyOnSamePosition
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1417,7 +1417,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MaxTokenLength
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1431,7 +1431,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool AdjustOffsets
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1442,7 +1442,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool CatenateAll
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1453,7 +1453,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool CatenateNumbers
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1464,7 +1464,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool CatenateWords
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1475,7 +1475,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool GenerateNumberParts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1486,7 +1486,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool GenerateWordParts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1497,7 +1497,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool PreserveOriginal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1508,7 +1508,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> ProtectedWords
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1519,7 +1519,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string ProtectedWordsPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1530,7 +1530,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool SplitOnCaseChange
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1541,7 +1541,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool SplitOnNumerics
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1552,7 +1552,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool StemEnglishPossessive
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1563,7 +1563,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> TypeTable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1574,7 +1574,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string TypeTablePath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1588,7 +1588,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool CatenateAll
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1599,7 +1599,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool CatenateNumbers
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1610,7 +1610,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool CatenateWords
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1621,7 +1621,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool GenerateNumberParts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1632,7 +1632,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool GenerateWordParts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1643,7 +1643,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool PreserveOriginal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1654,7 +1654,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> ProtectedWords
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1665,7 +1665,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string ProtectedWordsPath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1676,7 +1676,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool SplitOnCaseChange
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1687,7 +1687,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool SplitOnNumerics
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1698,7 +1698,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool StemEnglishPossessive
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1709,7 +1709,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> TypeTable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1720,7 +1720,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string TypeTablePath
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

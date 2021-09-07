@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long Checkpoint
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats.TransformProgress? CheckpointProgress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public Elastic.Clients.Elasticsearch.DateString? Timestamp
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public Elastic.Clients.Elasticsearch.EpochMillis TimestampMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public Elastic.Clients.Elasticsearch.DateString? TimeUpperBound
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public Elastic.Clients.Elasticsearch.EpochMillis? TimeUpperBoundMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long ChangesLastDetectedAt
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public Elastic.Clients.Elasticsearch.DateString? ChangesLastDetectedAtDateTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats.CheckpointStats Last
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -132,7 +132,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats.CheckpointStats? Next
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long? OperationsBehind
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long DocumentsIndexed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long DocumentsProcessed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public double ExponentialAvgCheckpointDurationMs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -190,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public double ExponentialAvgDocumentsIndexed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public double ExponentialAvgDocumentsProcessed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -212,7 +212,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long IndexFailures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -223,7 +223,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long IndexTimeInMs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -234,7 +234,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long IndexTotal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -245,7 +245,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long PagesProcessed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -256,7 +256,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long ProcessingTimeInMs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -267,7 +267,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long ProcessingTotal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -278,7 +278,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long SearchFailures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -289,7 +289,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long SearchTimeInMs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -300,7 +300,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long SearchTotal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -311,7 +311,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long TriggerCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -325,7 +325,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long DocsIndexed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -336,7 +336,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long DocsProcessed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -347,7 +347,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long DocsRemaining
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -358,7 +358,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public double PercentComplete
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -369,7 +369,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public long TotalDocs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -383,7 +383,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats.Checkpointing Checkpointing
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -394,7 +394,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -405,7 +405,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public Elastic.Clients.Elasticsearch.NodeAttributes? Node
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -416,7 +416,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public string? Reason
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -427,7 +427,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public string State
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -438,7 +438,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 		public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats.TransformIndexerStats Stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

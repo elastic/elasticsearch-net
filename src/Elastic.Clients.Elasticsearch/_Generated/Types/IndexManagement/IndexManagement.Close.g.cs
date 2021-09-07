@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Close
 		public bool Closed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Close
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Close.CloseShardResult>? Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Close
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure> Failures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

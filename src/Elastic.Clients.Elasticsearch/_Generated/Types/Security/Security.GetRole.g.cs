@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public Elastic.Clients.Elasticsearch.Security.GetRole.TemplateFormat? Format
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public Elastic.Clients.Elasticsearch.Security.GetRole.InlineRoleTemplateSource Template
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public string Source
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -69,7 +69,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public Elastic.Clients.Elasticsearch.Security.GetRole.TemplateFormat? Format
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -80,7 +80,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public string Template
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> Applications
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public IReadOnlyCollection<string> Cluster
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -127,7 +127,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public Elastic.Clients.Elasticsearch.Metadata Metadata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GetRole.RoleTemplate>? RoleTemplates
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -149,7 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public IReadOnlyCollection<string> RunAs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public Elastic.Clients.Elasticsearch.Security.GetRole.TransientMetadata TransientMetadata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -174,7 +174,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public Elastic.Clients.Elasticsearch.Security.GetRole.TemplateFormat? Format
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -185,7 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public Elastic.Clients.Elasticsearch.Security.GetRole.StoredRoleTemplateId Template
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -199,7 +199,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		public string Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

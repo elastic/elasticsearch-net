@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public bool Connected
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public Elastic.Clients.Elasticsearch.Time InitialConnectTimeout
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public int MaxProxySocketConnections
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public int NumProxySocketsConnected
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public string ProxyAddress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -87,7 +87,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public string ServerName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -98,7 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public bool SkipUnavailable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -112,7 +112,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public bool Connected
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public Elastic.Clients.Elasticsearch.Time InitialConnectTimeout
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -134,7 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public int MaxConnectionsPerCluster
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public long NumNodesConnected
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -158,7 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public IReadOnlyCollection<string> Seeds
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -169,7 +169,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public bool SkipUnavailable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

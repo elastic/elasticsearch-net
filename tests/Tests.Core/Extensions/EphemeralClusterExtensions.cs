@@ -3,7 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Xunit;
 using Elastic.Transport;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Core.Client.Settings;
 
 namespace Tests.Core.Extensions

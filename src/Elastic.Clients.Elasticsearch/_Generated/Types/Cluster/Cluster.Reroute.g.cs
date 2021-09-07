@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public string Decider
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public string Decision
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -127,7 +127,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public string Explanation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public string Command
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -152,7 +152,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Reroute.RerouteDecision> Decisions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -163,7 +163,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.Cluster.Reroute.RerouteParameters Parameters
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -177,7 +177,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public bool AllowPrimary
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -188,7 +188,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.NodeName? FromNode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -199,7 +199,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -210,7 +210,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.NodeName Node
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -221,7 +221,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public int Shard
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -232,7 +232,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.NodeName? ToNode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -246,7 +246,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.EmptyObject? Blocks
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -257,7 +257,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.Uuid ClusterUuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -268,7 +268,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public string? MasterNode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -279,7 +279,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateMetadata? Metadata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -290,7 +290,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Dictionary<Elastic.Clients.Elasticsearch.NodeName, Elastic.Clients.Elasticsearch.NodeAttributes>? Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -301,7 +301,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateRoutingNodes? RoutingNodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -312,7 +312,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Dictionary<string, Elastic.Clients.Elasticsearch.EmptyObject>? RoutingTable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -323,7 +323,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Dictionary<string, string>? SecurityTokens
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -334,7 +334,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateDeletedSnapshots? SnapshotDeletions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -345,7 +345,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateSnapshots? Snapshots
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -356,7 +356,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.Uuid? StateUuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -367,7 +367,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

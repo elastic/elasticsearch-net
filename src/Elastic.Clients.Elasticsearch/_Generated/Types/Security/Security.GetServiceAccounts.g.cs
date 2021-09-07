@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 		public IReadOnlyCollection<string> Cluster
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 		public Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>, Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? Global
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 		public IReadOnlyCollection<string>? RunAs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 		public Dictionary<string, object>? TransientMetadata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 		public Elastic.Clients.Elasticsearch.Security.GetServiceAccounts.RoleDescriptor RoleDescriptor
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
